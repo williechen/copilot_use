@@ -11,7 +11,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let pool = PgPoolOptions::new().max_connections(5).connect(&url).await?;
     sqlx::migrate!("./migrations").run(&pool).await?;
     let app = build_app(AnalyticsState { pool, api_token: Arc::from(token) });
-    let listener = tokio::net::TcpListener::bind("127.0.0.1:3100").await?;
+    let address = std::env::var("ANALYTICS_LISTEN")
+        .unwrap_or_else(|_| "127.0.0.1:3100".into());
+    let listener = tokio::net::TcpListener::bind(&address).await?;
     axum::serve(listener, app).with_graceful_shutdown(async { let _ = tokio::signal::ctrl_c().await; }).await?;
     Ok(())
 }
