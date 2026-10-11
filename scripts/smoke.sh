@@ -16,28 +16,23 @@ ROOM_ID="smoke-$(date +%s)-$RANDOM"
 curl -fsS -X POST "${CHAT_URL}/api/v1/rooms" \
   -H "Authorization: Bearer ${CHAT_API_TOKEN}" -H "Content-Type: application/json" \
   -d "{\"id\":\"${ROOM_ID}\",\"name\":\"smoke-room\"}" >/dev/null
-curl -fsS -X POST "${CHAT_URL}/api/v1/messages" \
+MESSAGE_ID=$(curl -fsS -X POST "${CHAT_URL}/api/v1/messages" \
   -H "Authorization: Bearer ${CHAT_API_TOKEN}" -H "Content-Type: application/json" \
-  -d "{\"room_id\":\"${ROOM_ID}\",\"content\":\"smoke message\"}" >/dev/null
+  -d "{\"room_id\":\"${ROOM_ID}\",\"content\":\"smoke message\"}" | python3 -c 'import json,sys; print(json.load(sys.stdin)["id"])')
 curl -fsS "${CHAT_URL}/api/v1/messages?room_id=${ROOM_ID}" \
   -H "Authorization: Bearer ${CHAT_API_TOKEN}" | python3 -c '
 import json,sys
 values=json.load(sys.stdin)
 assert any(x["content"]=="smoke message" for x in values)
 '
-# Poll until dispatcher has delivered the durable event to Analytics.
+# 本次訊息的唯一 ID 必須抵達；不能由舊的 summary 計數代替。
 for _ in $(seq 1 30); do
-  if curl -fsS "${ANALYTICS_URL}/api/v1/events/summary" \
-      -H "Authorization: Bearer ${ANALYTICS_API_TOKEN}" |
-     python3 -c '
-import json,sys
-rows=json.load(sys.stdin)
-assert any(x["source_app"]=="web_chat" and x["event_type"]=="message.persisted" and x["total"]>0 for x in rows)
-' 2>/dev/null; then
-    echo "PASS: Chat persisted message -> transactional outbox -> Analytics ingest/aggregation"
+  if curl -fsS "${ANALYTICS_URL}/api/v1/events/web_chat/${MESSAGE_ID}" \
+      -H "Authorization: Bearer ${ANALYTICS_API_TOKEN}" >/dev/null 2>&1; then
+    echo "PASS: this Chat message -> transactional outbox -> Analytics ingest"
     exit 0
   fi
   sleep 2
 done
-echo "FAIL: durable Chat/Analytics event not observed" >&2
+echo "FAIL: this durable Chat event not observed" >&2
 exit 1

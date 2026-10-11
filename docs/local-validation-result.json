@@ -1,0 +1,33 @@
+{
+  "status": "passed",
+  "checks": [
+    "fmt, strict clippy, workspace unit/PostgreSQL tests, binaries",
+    "empty-database migrations and two independently running services",
+    "Chat database role cannot CONNECT to Analytics database",
+    "unauthorized Chat write rejected",
+    "unauthorized Analytics read rejected",
+    "unconfigured AI returns 503 without mock output",
+    "room created",
+    "message persisted",
+    "this exact Chat message traversed Outbox to Analytics",
+    "repeated event counted once",
+    "sensitive/unknown payload field rejected",
+    "Chat credential cannot impersonate Pet",
+    "read credential cannot ingest",
+    "invalid schema rejected",
+    "real WebSocket two-client and room-isolation E2E",
+    "history survives service restart",
+    "idempotency survives service restart",
+    "Analytics outage causes durable retry and later delivery",
+    "Analytics backup restored with exact matching event rows",
+    "database outage makes Chat unready",
+    "database outage makes Analytics unready",
+    "dispatcher recovers after PostgreSQL interruption",
+    "real OpenAI Responses stream reaches completion",
+    "completed real AI stream matches persisted message",
+    "real AI answer emits durable Analytics event"
+  ],
+  "scope": "implemented reliability slice only; P9 incomplete",
+  "live_openai": true,
+  "openai_model": "gpt-5.6-luna"
+}

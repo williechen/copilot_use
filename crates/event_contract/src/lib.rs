@@ -32,9 +32,11 @@ impl ProductEvent {
 
     pub fn is_valid(&self) -> bool {
         self.schema_version == 1
-            && matches!(self.source_app.as_str(), "web_chat" | "desktop_pet")
-            && !self.event_type.trim().is_empty()
-            && self.event_type.len() <= 128
+            && !self.event_id.is_nil()
+            && matches!(
+                (self.source_app.as_str(), self.event_type.as_str()),
+                ("web_chat", "message.persisted") | ("desktop_pet", "file.cleanup.succeeded")
+            )
     }
 }
 
@@ -56,6 +58,18 @@ mod tests {
         let mut event = ProductEvent::chat_message_persisted(Uuid::new_v4());
         assert!(event.is_valid());
         event.source_app = "unknown".into();
+        assert!(!event.is_valid());
+    }
+    #[test]
+    fn unknown_or_cross_source_event_types_are_rejected() {
+        let mut event = ProductEvent::chat_message_persisted(Uuid::new_v4());
+        event.event_type = "private text".into();
+        assert!(!event.is_valid());
+        event.event_type = "file.cleanup.succeeded".into();
+        assert!(!event.is_valid());
+        event.source_app = "desktop_pet".into();
+        assert!(event.is_valid());
+        event.event_id = Uuid::nil();
         assert!(!event.is_valid());
     }
 }

@@ -26,8 +26,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
+      - name: Format
+        run: cargo fmt --all -- --check
+      - name: Strict Clippy
+        run: cargo clippy --workspace --all-targets --locked -- -D warnings
       - name: Run workspace unit and PostgreSQL integration tests
-        run: cargo test --workspace --all-targets
+        run: cargo test --workspace --all-targets --locked
       - name: Verify strict event payload
         run: cargo test -p event-contract
 
@@ -43,18 +47,45 @@ jobs:
           ANALYTICS_DB_PASSWORD=ci_analytics_only_random_test_password
           CHAT_API_TOKEN=ci_chat_only_token_32_characters
           ANALYTICS_API_TOKEN=ci_analytics_only_token_32_characters
+          ANALYTICS_CHAT_TOKEN=ci_chat_ingest_only_token_32_characters
+          ANALYTICS_PET_TOKEN=ci_pet_ingest_only_token_32_characters
           ENV
       - name: Build and start isolated app and database containers
         run: docker compose --env-file .env up -d --build
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
       - name: Test durable end-to-end Chat to Analytics ingestion
         run: |
           set -a
           source .env
           set +a
           bash scripts/smoke.sh
+          node scripts/realtime-e2e.mjs
       - name: Collect service logs on failure
         if: failure()
         run: docker compose --env-file .env logs --no-color --tail=150
       - name: Shut down and delete CI databases
         if: always()
         run: docker compose --env-file .env down -v --remove-orphans
+
+  local-fault-recovery:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install isolated-test PostgreSQL tooling
+        run: sudo apt-get update && sudo apt-get install -y postgresql postgresql-client libpq-dev
+      - name: Run HTTP, WebSocket, restart, DB interruption and backup/restore tests
+        run: python3 scripts/local-verify.py
+      - uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: local-validation
+          path: target/local-validation.json

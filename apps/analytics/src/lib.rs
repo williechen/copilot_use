@@ -1,10 +1,10 @@
 //! Analytics：認證後持久事件、依 (source_app,event_id) 原子去重、Query API。
 pub mod dashboard;
 use axum::{
-    extract::{State, Json},
+    Router,
+    extract::{Json, Path, State},
     http::{HeaderMap, StatusCode},
     routing::{get, post},
-    Router,
 };
 use event_contract::ProductEvent;
 use serde::Serialize;
@@ -16,6 +16,8 @@ use std::sync::Arc;
 pub struct AnalyticsState {
     pub pool: PgPool,
     pub api_token: Arc<str>,
+    pub chat_token: Arc<str>,
+    pub pet_token: Arc<str>,
 }
 
 #[derive(Clone)]
@@ -24,18 +26,22 @@ pub struct EventStore {
 }
 
 impl EventStore {
-    pub fn new(pool: PgPool) -> Self { Self { pool } }
+    pub fn new(pool: PgPool) -> Self {
+        Self { pool }
+    }
 
     /// 真正持久化成功才回 2xx；同一來源/事件的重送不再增加計數。
     pub async fn insert_once(&self, event: &ProductEvent) -> Result<bool, sqlx::Error> {
         let result = sqlx::query(
             "INSERT INTO product_events (source_app,event_id,schema_version,event_type)
-             VALUES ($1,$2,$3,$4) ON CONFLICT (source_app,event_id) DO NOTHING"
+             VALUES ($1,$2,$3,$4) ON CONFLICT (source_app,event_id) DO NOTHING",
         )
-        .bind(&event.source_app).bind(event.event_id)
+        .bind(&event.source_app)
+        .bind(event.event_id)
         .bind(i16::try_from(event.schema_version).unwrap_or(-1))
         .bind(&event.event_type)
-        .execute(&self.pool).await?;
+        .execute(&self.pool)
+        .await?;
         Ok(result.rows_affected() == 1)
     }
 
@@ -43,13 +49,16 @@ impl EventStore {
         sqlx::query_as::<_, EventSummary>(
             "SELECT source_app, event_type, count(*)::bigint AS total
              FROM product_events
-             GROUP BY source_app, event_type ORDER BY source_app, event_type"
-        ).fetch_all(&self.pool).await
+             GROUP BY source_app, event_type ORDER BY source_app, event_type",
+        )
+        .fetch_all(&self.pool)
+        .await
     }
 
     pub async fn total(&self) -> Result<i64, sqlx::Error> {
         let row = sqlx::query("SELECT count(*) AS total FROM product_events")
-            .fetch_one(&self.pool).await?;
+            .fetch_one(&self.pool)
+            .await?;
         Ok(row.get("total"))
     }
 }
@@ -57,7 +66,8 @@ impl EventStore {
 fn authorized(headers: &HeaderMap, expected: &str) -> bool {
     // 僅演示受控 Bearer token；實際部署應用 secret manager、TLS 與 token rotation。
     !expected.is_empty()
-        && headers.get(axum::http::header::AUTHORIZATION)
+        && headers
+            .get(axum::http::header::AUTHORIZATION)
             .and_then(|v| v.to_str().ok())
             .and_then(|v| v.strip_prefix("Bearer "))
             .is_some_and(|v| v == expected)
@@ -68,8 +78,17 @@ async fn ingest(
     headers: HeaderMap,
     Json(event): Json<ProductEvent>,
 ) -> StatusCode {
-    if !authorized(&headers, &state.api_token) { return StatusCode::UNAUTHORIZED; }
-    if !event.is_valid() { return StatusCode::BAD_REQUEST; }
+    let expected = match event.source_app.as_str() {
+        "web_chat" => &state.chat_token,
+        "desktop_pet" => &state.pet_token,
+        _ => return StatusCode::BAD_REQUEST,
+    };
+    if !authorized(&headers, expected) {
+        return StatusCode::UNAUTHORIZED;
+    }
+    if !event.is_valid() {
+        return StatusCode::BAD_REQUEST;
+    }
     match EventStore::new(state.pool).insert_once(&event).await {
         Ok(_) => StatusCode::ACCEPTED,
         Err(_) => StatusCode::SERVICE_UNAVAILABLE,
@@ -84,14 +103,21 @@ pub struct EventSummary {
 }
 
 #[derive(Serialize)]
-struct CountResponse { total: i64 }
+struct CountResponse {
+    total: i64,
+}
 
 async fn count(
     State(state): State<AnalyticsState>,
     headers: HeaderMap,
 ) -> Result<Json<CountResponse>, StatusCode> {
-    if !authorized(&headers, &state.api_token) { return Err(StatusCode::UNAUTHORIZED); }
-    let total = EventStore::new(state.pool).total().await.map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
+    if !authorized(&headers, &state.api_token) {
+        return Err(StatusCode::UNAUTHORIZED);
+    }
+    let total = EventStore::new(state.pool)
+        .total()
+        .await
+        .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
     Ok(Json(CountResponse { total }))
 }
 
@@ -99,19 +125,51 @@ async fn summary(
     State(state): State<AnalyticsState>,
     headers: HeaderMap,
 ) -> Result<Json<Vec<EventSummary>>, StatusCode> {
-    if !authorized(&headers, &state.api_token) { return Err(StatusCode::UNAUTHORIZED); }
-    let values = EventStore::new(state.pool).summary().await
+    if !authorized(&headers, &state.api_token) {
+        return Err(StatusCode::UNAUTHORIZED);
+    }
+    let values = EventStore::new(state.pool)
+        .summary()
+        .await
         .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
     Ok(Json(values))
 }
 
-async fn health() -> StatusCode { StatusCode::OK }
+async fn health(State(state): State<AnalyticsState>) -> StatusCode {
+    match sqlx::query("SELECT 1").execute(&state.pool).await {
+        Ok(_) => StatusCode::OK,
+        Err(_) => StatusCode::SERVICE_UNAVAILABLE,
+    }
+}
+
+async fn event_lookup(
+    State(state): State<AnalyticsState>,
+    headers: HeaderMap,
+    Path((source, id)): Path<(String, uuid::Uuid)>,
+) -> Result<Json<serde_json::Value>, StatusCode> {
+    if !authorized(&headers, &state.api_token) {
+        return Err(StatusCode::UNAUTHORIZED);
+    }
+    let kind: Option<String> = sqlx::query_scalar(
+        "SELECT event_type FROM product_events WHERE source_app=$1 AND event_id=$2",
+    )
+    .bind(source)
+    .bind(id)
+    .fetch_optional(&state.pool)
+    .await
+    .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
+    match kind {
+        Some(kind) => Ok(Json(serde_json::json!({"event_id":id,"event_type":kind}))),
+        None => Err(StatusCode::NOT_FOUND),
+    }
+}
 
 pub fn build_app(state: AnalyticsState) -> Router {
     Router::new()
         .route("/", get(dashboard::dashboard))
         .route("/healthz", get(health))
         .route("/api/v1/events", post(ingest))
+        .route("/api/v1/events/{source}/{id}", get(event_lookup))
         .route("/api/v1/events/count", get(count))
         .route("/api/v1/events/summary", get(summary))
         .layer(axum::extract::DefaultBodyLimit::max(4096))
@@ -150,9 +208,24 @@ mod tests {
     #[sqlx::test(migrations = "./migrations")]
     async fn summary_counts_per_source_and_event_type(pool: PgPool) {
         let store = EventStore::new(pool);
-        assert!(store.insert_once(&ProductEvent::chat_message_persisted(Uuid::new_v4())).await.unwrap());
-        assert!(store.insert_once(&ProductEvent::chat_message_persisted(Uuid::new_v4())).await.unwrap());
-        assert!(store.insert_once(&ProductEvent::pet_cleanup_succeeded(Uuid::new_v4())).await.unwrap());
+        assert!(
+            store
+                .insert_once(&ProductEvent::chat_message_persisted(Uuid::new_v4()))
+                .await
+                .unwrap()
+        );
+        assert!(
+            store
+                .insert_once(&ProductEvent::chat_message_persisted(Uuid::new_v4()))
+                .await
+                .unwrap()
+        );
+        assert!(
+            store
+                .insert_once(&ProductEvent::pet_cleanup_succeeded(Uuid::new_v4()))
+                .await
+                .unwrap()
+        );
         let values = store.summary().await.unwrap();
         assert_eq!(values.len(), 2);
         assert_eq!(values.iter().map(|s| s.total).sum::<i64>(), 3);
@@ -162,8 +235,18 @@ mod tests {
     async fn two_sources_same_event_id_count_separately(pool: PgPool) {
         let id = Uuid::new_v4();
         let store = EventStore::new(pool);
-        assert!(store.insert_once(&ProductEvent::chat_message_persisted(id)).await.unwrap());
-        assert!(store.insert_once(&ProductEvent::pet_cleanup_succeeded(id)).await.unwrap());
+        assert!(
+            store
+                .insert_once(&ProductEvent::chat_message_persisted(id))
+                .await
+                .unwrap()
+        );
+        assert!(
+            store
+                .insert_once(&ProductEvent::pet_cleanup_succeeded(id))
+                .await
+                .unwrap()
+        );
         assert_eq!(store.total().await.unwrap(), 2);
     }
 }

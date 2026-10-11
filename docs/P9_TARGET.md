@@ -12,7 +12,7 @@
 |---|---|---|---|
 | Chat | Axum+Leptos Router、Nested/Protected Route、SSR/Hydration | 未完成 | UI/Route/Session |
 | Chat | 多主題房間、多使用者、私人聊天室、AI Personas、持久訊息/History | 部分 | Session/房間權限/History |
-| Chat | WS Presence/Typing/重連、AI streaming、可靠 Outbox | 部分 | 真實 WS + E2E |
+| Chat | WS Presence/Typing/重連、AI streaming、可靠 Outbox | 部分 | 已有初步 WS/E2E；完整協定/AI streaming 多 Persona 未完成 |
 | Chat | Structured Output、Tool calling、RAG/pgvector、MCP、Agent Runtime | 未完成 | 端到端 AI 核心 |
 | Chat | 全鏈路 OTel/追蹤、安全、部署與回滾 | 未完成 | 觀測/維運 |
 | Pet | Tauri+Leptos 桌面 GUI、多寵物、五項 Profile、進階覆寫 | 未完成 | GUI/設定儲存 |

@@ -1,5 +1,8 @@
 //! Desktop Pet CLI：檢查五項設定及安全預覽；預設絕不進行不可逆檔案操作。
-use day9_pet::{AuthorizedRoot, profile::{ProfileStore, AssetManifest}};
+use day9_pet::{
+    AuthorizedRoot,
+    profile::{AssetManifest, ProfileStore},
+};
 use std::{error::Error, path::Path};
 use uuid::Uuid;
 
@@ -30,9 +33,10 @@ fn main() -> Result<(), Box<dyn Error>> {
             if image_width == 0 || image_height == 0 {
                 return Err("image dimensions must be positive".into());
             }
-            println!("{}", serde_json::to_string_pretty(&AssetManifest::new(
-                id, image_width, image_height
-            ))?);
+            println!(
+                "{}",
+                serde_json::to_string_pretty(&AssetManifest::new(id, image_width, image_height))?
+            );
         }
         _ => return Err(usage().into()),
     }

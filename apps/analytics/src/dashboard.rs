@@ -3,7 +3,8 @@
 use axum::response::Html;
 
 pub async fn dashboard() -> Html<&'static str> {
-    Html(r##"<!doctype html>
+    Html(
+        r##"<!doctype html>
 <html lang="zh-Hant">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -66,5 +67,6 @@ document.getElementById('clear').addEventListener('click',()=>{
  token.value='';document.getElementById('total').textContent='—';
  document.getElementById('events').textContent='請先驗證';
 });
-</script></body></html>"##)
+</script></body></html>"##,
+    )
 }

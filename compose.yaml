@@ -34,6 +34,8 @@ services:
     environment:
       ANALYTICS_DATABASE_URL: postgres://analytics_user:${ANALYTICS_DB_PASSWORD:?set ANALYTICS_DB_PASSWORD}@analytics-db:5432/analytics_db
       ANALYTICS_API_TOKEN: ${ANALYTICS_API_TOKEN:?set ANALYTICS_API_TOKEN}
+      ANALYTICS_CHAT_TOKEN: ${ANALYTICS_CHAT_TOKEN:?set ANALYTICS_CHAT_TOKEN}
+      ANALYTICS_PET_TOKEN: ${ANALYTICS_PET_TOKEN:?set ANALYTICS_PET_TOKEN}
       ANALYTICS_LISTEN: 0.0.0.0:3100
     depends_on:
       analytics-db: {condition: service_healthy}
@@ -47,7 +49,7 @@ services:
     environment:
       CHAT_DATABASE_URL: postgres://chat_user:${CHAT_DB_PASSWORD:?set CHAT_DB_PASSWORD}@chat-db:5432/chat_db
       CHAT_API_TOKEN: ${CHAT_API_TOKEN:?set CHAT_API_TOKEN}
-      ANALYTICS_API_TOKEN: ${ANALYTICS_API_TOKEN:?set ANALYTICS_API_TOKEN}
+      ANALYTICS_CHAT_TOKEN: ${ANALYTICS_CHAT_TOKEN:?set ANALYTICS_CHAT_TOKEN}
       ANALYTICS_ENDPOINT: http://analytics:3100/api/v1/events
       ALLOW_INTERNAL_HTTP_DEV: "true"
       CHAT_LISTEN: 0.0.0.0:3001

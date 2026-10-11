@@ -4,7 +4,10 @@
 pub mod profile;
 use event_contract::ProductEvent;
 use serde::{Deserialize, Serialize};
-use std::{fs, io, path::{Path, PathBuf}};
+use std::{
+    fs, io,
+    path::{Path, PathBuf},
+};
 use thiserror::Error;
 use uuid::Uuid;
 
@@ -46,21 +49,33 @@ pub struct AuthorizedRoot {
 }
 
 fn validate_name(name: &str) -> Result<(), CleanupError> {
-    if name.is_empty() || name.starts_with('.') || name == "." || name == ".."
-        || !name.bytes().all(|b| b.is_ascii_alphanumeric() || matches!(b, b'.' | b'-' | b'_'))
-    { return Err(CleanupError::InvalidName); }
+    if name.is_empty()
+        || name.starts_with('.')
+        || name == "."
+        || name == ".."
+        || !name
+            .bytes()
+            .all(|b| b.is_ascii_alphanumeric() || matches!(b, b'.' | b'-' | b'_'))
+    {
+        return Err(CleanupError::InvalidName);
+    }
     Ok(())
 }
 
 fn modified_nanos(meta: &fs::Metadata) -> Result<u128, CleanupError> {
-    Ok(meta.modified()?.duration_since(std::time::UNIX_EPOCH)
-        .map_err(|_| io::Error::other("mtime predates epoch"))?.as_nanos())
+    Ok(meta
+        .modified()?
+        .duration_since(std::time::UNIX_EPOCH)
+        .map_err(|_| io::Error::other("mtime predates epoch"))?
+        .as_nanos())
 }
 
 impl AuthorizedRoot {
     pub fn new(path: impl AsRef<Path>) -> Result<Self, CleanupError> {
         let root = fs::canonicalize(path)?;
-        if !root.is_dir() { return Err(CleanupError::InvalidName); }
+        if !root.is_dir() {
+            return Err(CleanupError::InvalidName);
+        }
         Ok(Self { root })
     }
 
@@ -80,10 +95,18 @@ impl AuthorizedRoot {
 
     /// 必須由 UI 明確要求確認；只把一般檔案移至同一個授權根的 quarantine。
     /// 注意：metadata check 與 rename 非原子；本實作尚不符合高風險敵對目錄場景。
-    pub fn confirm_quarantine(&self, preview: &FilePreview, confirmed: bool) -> Result<CleanupReceipt, CleanupError> {
-        if !confirmed { return Err(CleanupError::InvalidName); }
+    pub fn confirm_quarantine(
+        &self,
+        preview: &FilePreview,
+        confirmed: bool,
+    ) -> Result<CleanupReceipt, CleanupError> {
+        if !confirmed {
+            return Err(CleanupError::InvalidName);
+        }
         let now = self.preview(&preview.file_name)?;
-        if &now != preview { return Err(CleanupError::Changed); }
+        if &now != preview {
+            return Err(CleanupError::Changed);
+        }
 
         let quarantine = self.root.join(".pet-quarantine");
         fs::create_dir_all(&quarantine)?;
@@ -92,7 +115,10 @@ impl AuthorizedRoot {
         }
         let operation_id = Uuid::new_v4();
         let quarantine_name = format!("{}-{}", operation_id, preview.file_name);
-        fs::rename(self.root.join(&preview.file_name), quarantine.join(&quarantine_name))?;
+        fs::rename(
+            self.root.join(&preview.file_name),
+            quarantine.join(&quarantine_name),
+        )?;
         Ok(CleanupReceipt {
             operation_id,
             quarantined_file: quarantine_name,
@@ -117,7 +143,11 @@ mod tests {
         assert!(dir.join("example.txt").exists());
         let receipt = root.confirm_quarantine(&preview, true).unwrap();
         assert!(!dir.join("example.txt").exists());
-        assert!(dir.join(".pet-quarantine").join(&receipt.quarantined_file).exists());
+        assert!(
+            dir.join(".pet-quarantine")
+                .join(&receipt.quarantined_file)
+                .exists()
+        );
         assert_eq!(receipt.event().source_app, "desktop_pet");
         fs::remove_dir_all(&dir).unwrap();
     }
@@ -131,7 +161,10 @@ mod tests {
         assert!(root.preview("../secret").is_err());
         let preview = root.preview("a.txt").unwrap();
         fs::write(dir.join("a.txt"), b"changed").unwrap();
-        assert!(matches!(root.confirm_quarantine(&preview, true), Err(CleanupError::Changed)));
+        assert!(matches!(
+            root.confirm_quarantine(&preview, true),
+            Err(CleanupError::Changed)
+        ));
         fs::remove_dir_all(&dir).unwrap();
     }
 }

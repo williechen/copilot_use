@@ -3,7 +3,7 @@
 FROM rust:1-bookworm AS builder
 WORKDIR /src
 COPY . .
-RUN cargo build --release -p day9-chat -p day9-analytics
+RUN cargo build --locked --release -p day9-chat -p day9-analytics
 
 FROM debian:bookworm-slim AS chat
 RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates libssl3 \

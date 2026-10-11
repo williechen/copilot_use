@@ -4,6 +4,20 @@
 > `rust_ai_chat` 是使用者控制、AI 永遠唯讀的教學 Repository；本 Repo 由 AI 獨立朝 P9 開發，不等待教學 Day 或 P0–P5 進度。
 > **目前狀態：P9 尚未完成。** 已存在的 Chat Outbox／Pet Quarantine／Analytics Ingest 只是早期切片，尚缺完整 UI、AI 能力、安全驗證、完整部署與跨產品 E2E。不可把早期切片宣稱為可交付最終產品。
 
+## 本地測試修復（2026-10-11；P9 仍未完成）
+
+已增加真正的房間 WebSocket 通知、OpenAI Responses 串流入口、來源專用 Analytics 憑證、隔離 PostgreSQL/HTTP/WS/故障恢復/備份還原驗證。完整已測範圍與未完成矩陣見 [本地驗證紀錄](docs/LOCAL_VALIDATION.md)。使用者已取消正式部署；不能將本次測試修復當作三產品 P9 交付，也不建立正式 Release/Tag 或新 Day。
+
+```sh
+python3 scripts/local-verify.py
+# 有效 OpenAI key 位於使用者自己的環境，密鑰不入 Repo。
+source ~/.bashrc
+export OPENAI_CHAT_MODEL=gpt-5.6-luna
+python3 scripts/local-verify.py --live-openai
+```
+
+Analytics 必須設定三個互異 token：`ANALYTICS_API_TOKEN`（query）、`ANALYTICS_CHAT_TOKEN`（Chat ingest）、`ANALYTICS_PET_TOKEN`（Pet ingest）。Chat dispatcher 使用 `ANALYTICS_CHAT_TOKEN`。未設定 OpenAI key/model 時 AI 回 503。
+
 ## P9 三產品交付範圍
 
 - **Chat**：Axum/Leptos SSR+Hydration、Router、多使用者/主題/AI Personas、Session 與授權、WebSocket presence/typing/private/reconnect、history、Transactional Outbox、Streaming、Structured Output、Function Calling、RAG/pgvector、MCP、Agent Runtime、OTel、部署/測試。
@@ -13,7 +27,7 @@
 
 ## 2026-10-11｜已提交的 P9 產品程式增量（非最終驗收）
 
-- Chat 已提供 Bearer-authenticated Room/Message REST API、持久 history 查詢和瀏覽器聊天畫面，包含 Message+Outbox 同交易及 Dispatcher。現在的 UI 是 polling，**尚未實作真正的 WebSocket/Leptos 完整產品**。
+- Chat 已提供 Bearer-authenticated Room/Message REST API、持久 history 查詢和瀏覽器聊天畫面，包含 Message+Outbox 同交易及 Dispatcher。已在本地修復加入真正 WebSocket 通知；**仍未完成 Leptos 完整產品**。
 - Pet 已增加五項繁體中文 pet.toml 設定解析、可選外觀/動畫覆寫、多寵物目錄隔離、200×200 Display Manifest、可操作 CLI；**Tauri/Leptos GUI、AI 圖像生成及安全 OS 原子操作仍未完成**。
 - Analytics 已增加 Dashboard 和依 source_app/event_type 聚合的查詢 API，與 ingestion 共用同一 Axum 服務。**完整權限／留存／AI 建議仍未完成**。
 - Dockerfile、compose.yaml、PostgreSQL 雙資料庫及 scripts/smoke.sh 已提交；GitHub Actions 含 Rust integration 與 Compose Chat→Outbox→Analytics E2E。**CI/E2E 未核實前不得稱測試成功；P9 仍未完成**。
