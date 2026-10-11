@@ -1,3 +1,4 @@
+pub mod dashboard;
 //! Analytics：認證後持久事件、依 (source_app,event_id) 原子去重、Query API。
 use axum::{
     extract::{State, Json},
@@ -7,6 +8,7 @@ use axum::{
 };
 use event_contract::ProductEvent;
 use serde::Serialize;
+use sqlx::FromRow;
 use sqlx::{PgPool, Row};
 use std::sync::Arc;
 
@@ -35,6 +37,14 @@ impl EventStore {
         .bind(&event.event_type)
         .execute(&self.pool).await?;
         Ok(result.rows_affected() == 1)
+    }
+
+    pub async fn summary(&self) -> Result<Vec<EventSummary>, sqlx::Error> {
+        sqlx::query_as::<_, EventSummary>(
+            "SELECT source_app, event_type, count(*)::bigint AS total
+             FROM product_events
+             GROUP BY source_app, event_type ORDER BY source_app, event_type"
+        ).fetch_all(&self.pool).await
     }
 
     pub async fn total(&self) -> Result<i64, sqlx::Error> {
@@ -66,6 +76,13 @@ async fn ingest(
     }
 }
 
+#[derive(Debug, Serialize, FromRow, PartialEq, Eq)]
+pub struct EventSummary {
+    pub source_app: String,
+    pub event_type: String,
+    pub total: i64,
+}
+
 #[derive(Serialize)]
 struct CountResponse { total: i64 }
 
@@ -78,13 +95,25 @@ async fn count(
     Ok(Json(CountResponse { total }))
 }
 
+async fn summary(
+    State(state): State<AnalyticsState>,
+    headers: HeaderMap,
+) -> Result<Json<Vec<EventSummary>>, StatusCode> {
+    if !authorized(&headers, &state.api_token) { return Err(StatusCode::UNAUTHORIZED); }
+    let values = EventStore::new(state.pool).summary().await
+        .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
+    Ok(Json(values))
+}
+
 async fn health() -> StatusCode { StatusCode::OK }
 
 pub fn build_app(state: AnalyticsState) -> Router {
     Router::new()
+        .route("/", get(dashboard::dashboard))
         .route("/healthz", get(health))
         .route("/api/v1/events", post(ingest))
         .route("/api/v1/events/count", get(count))
+        .route("/api/v1/events/summary", get(summary))
         .layer(axum::extract::DefaultBodyLimit::max(4096))
         .with_state(state)
 }
@@ -116,6 +145,17 @@ mod tests {
         let (first, second) = tokio::join!(store.insert_once(&event), store.insert_once(&event));
         assert!(first.unwrap() ^ second.unwrap(), "並發重送只有一筆成功新增");
         assert_eq!(store.total().await.unwrap(), 1);
+    }
+
+    #[sqlx::test(migrations = "./migrations")]
+    async fn summary_counts_per_source_and_event_type(pool: PgPool) {
+        let store = EventStore::new(pool);
+        assert!(store.insert_once(&ProductEvent::chat_message_persisted(Uuid::new_v4())).await.unwrap());
+        assert!(store.insert_once(&ProductEvent::chat_message_persisted(Uuid::new_v4())).await.unwrap());
+        assert!(store.insert_once(&ProductEvent::pet_cleanup_succeeded(Uuid::new_v4())).await.unwrap());
+        let values = store.summary().await.unwrap();
+        assert_eq!(values.len(), 2);
+        assert_eq!(values.iter().map(|s| s.total).sum::<i64>(), 3);
     }
 
     #[sqlx::test(migrations = "./migrations")]
