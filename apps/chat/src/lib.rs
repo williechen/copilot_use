@@ -18,8 +18,8 @@ impl ChatWriter {
         let mut tx = self.pool.begin().await?;
         sqlx::query("INSERT INTO chat_messages(id, room_id, content) VALUES ($1,$2,$3)")
             .bind(id).bind(room_id).bind(content).execute(&mut *tx).await?;
-        sqlx::query("INSERT INTO chat_outbox(event_id,schema_version,source_app,event_type) VALUES ($1,$2,$3,$4)")
-            .bind(event.event_id).bind(i16::try_from(event.schema_version).unwrap())
+        sqlx::query("INSERT INTO chat_outbox(event_id,message_id,schema_version,source_app,event_type) VALUES ($1,$2,$3,$4,$5)")
+            .bind(event.event_id).bind(id).bind(i16::try_from(event.schema_version).unwrap())
             .bind(event.source_app).bind(event.event_type).execute(&mut *tx).await?;
         tx.commit().await?;
         Ok(id)
@@ -129,6 +129,7 @@ mod tests {
     }
     #[sqlx::test(migrations = "./migrations")]
     async fn message_insert_has_exactly_one_outbox_event(pool: PgPool) {
+        sqlx::query("INSERT INTO chat_rooms(id,name) VALUES (\'room-1\',\'Test\')").execute(&pool).await.unwrap();
         let id = ChatWriter::new(pool.clone()).persist("room-1", "private").await.unwrap();
         let row: (i64,) = sqlx::query_as("SELECT count(*) FROM chat_outbox WHERE event_id=$1")
             .bind(id).fetch_one(&pool).await.unwrap();
@@ -136,6 +137,7 @@ mod tests {
     }
     #[sqlx::test(migrations = "./migrations")]
     async fn stale_lease_cannot_ack(pool: PgPool) {
+        sqlx::query("INSERT INTO chat_rooms(id,name) VALUES (\'room\',\'Test\')").execute(&pool).await.unwrap();
         let id = ChatWriter::new(pool.clone()).persist("room", "hello").await.unwrap();
         let store = OutboxStore::new(pool.clone());
         let stale = store.claim_one().await.unwrap().unwrap();
