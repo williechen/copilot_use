@@ -582,12 +582,42 @@ async fn active_pet(state: State<'_, DesktopState>) -> Result<Option<String>, St
         .await
         .map_err(|_| "無法讀取目前寵物".into())
 }
+fn gui_acceptance_enabled() -> bool {
+    std::env::var("PET_GUI_TEST").as_deref() == Ok("true")
+        && (cfg!(debug_assertions) || std::env::args().any(|arg| arg == "--acceptance-gui"))
+}
+fn validate_acceptance_fixture() -> Result<(), String> {
+    if !gui_acceptance_enabled() {
+        return Ok(());
+    }
+    let state =
+        std::path::PathBuf::from(std::env::var_os("PET_DATA_DIR").ok_or("missing isolated state")?);
+    let report =
+        std::path::PathBuf::from(std::env::var_os("PET_GUI_TEST_REPORT").ok_or("missing report")?);
+    let root = std::path::PathBuf::from(
+        std::env::var_os("PET_AUTHORIZED_ROOT").ok_or("missing fixture root")?,
+    );
+    let parent = root.parent().ok_or("missing fixture parent")?;
+    if state.exists()
+        || report.exists()
+        || state.parent() != Some(parent)
+        || report.parent() != Some(parent)
+        || std::fs::symlink_metadata(&root)
+            .map_err(|_| "missing fixture root")?
+            .file_type()
+            .is_symlink()
+        || std::fs::read(root.join("sample.txt")).map_err(|_| "missing sample fixture")?
+            != b"disposable GUI verification fixture"
+        || std::fs::read(root.join("second.txt")).map_err(|_| "missing confirmation fixture")?
+            != b"disposable UI confirmation fixture"
+    {
+        return Err("acceptance requires fresh disposable fixture".into());
+    }
+    Ok(())
+}
 #[tauri::command]
 fn gui_test_progress(phase: String) -> Result<(), String> {
-    if !cfg!(debug_assertions)
-        || std::env::var("PET_GUI_TEST").as_deref() != Ok("true")
-        || phase.len() > 64
-    {
+    if !gui_acceptance_enabled() || phase.len() > 64 {
         return Err("測試入口未啟用".into());
     }
     let path = std::env::var("PET_GUI_TEST_REPORT").map_err(|_| "未設定測試報告位置")?;
@@ -595,7 +625,7 @@ fn gui_test_progress(phase: String) -> Result<(), String> {
 }
 #[tauri::command]
 fn gui_test_result(app: tauri::AppHandle, success: bool, message: String) -> Result<(), String> {
-    if !cfg!(debug_assertions) || std::env::var("PET_GUI_TEST").as_deref() != Ok("true") {
+    if !gui_acceptance_enabled() {
         return Err("測試入口未啟用".into());
     }
     if success {
@@ -614,7 +644,7 @@ fn gui_test_result(app: tauri::AppHandle, success: bool, message: String) -> Res
     let path = std::env::var("PET_GUI_TEST_REPORT").map_err(|_| "未設定測試報告位置")?;
     std::fs::write(
         path,
-        serde_json::json!({"success":success,"message":message}).to_string(),
+        serde_json::json!({"success":success,"message":message,"version":app.package_info().version.to_string(),"source_sha":env!("COPILOT_SOURCE_SHA"),"source_dirty":env!("COPILOT_SOURCE_DIRTY")=="true","release":!cfg!(debug_assertions)}).to_string(),
     )
     .map_err(|_| "無法寫入測試報告")?;
     app.exit(if success { 0 } else { 1 });
@@ -628,6 +658,10 @@ fn main() {
         return;
     }
 
+    if let Err(error) = validate_acceptance_fixture() {
+        eprintln!("{error}");
+        std::process::exit(1);
+    }
     let _telemetry = copilot_telemetry::init("desktop_pet").expect("無法初始化觀測設定");
     #[cfg(unix)]
     if unsafe { libc::geteuid() } == 0 {
@@ -639,8 +673,7 @@ fn main() {
         .manage(updater::Updates::new())
         .on_page_load(|webview, payload| {
             if webview.label() == "main"
-                && cfg!(debug_assertions)
-                && std::env::var("PET_GUI_TEST").as_deref() == Ok("true")
+                && gui_acceptance_enabled()
                 && matches!(payload.event(), tauri::webview::PageLoadEvent::Finished)
             {
                 if std::env::var("PET_GUI_TEST_AI").as_deref() == Ok("true") {

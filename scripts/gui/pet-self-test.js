@@ -1,5 +1,5 @@
 window.addEventListener('error',e=>window.__PET_LOAD_ERROR=e.message);window.addEventListener('unhandledrejection',e=>window.__PET_LOAD_ERROR=String(e.reason));
-// 僅在明確開啟的 debug GUI 測試中執行，驗證真正 WebKit/WASM 與 Tauri IPC。
+// 只在明確啟用且通過全新 fixture 檢查的 GUI 驗收中執行。
 (async()=>{
  const assert=(value,message)=>{if(!value)throw Error(message)};
  const limit=Date.now()+15000;
@@ -46,6 +46,10 @@ window.addEventListener('error',e=>window.__PET_LOAD_ERROR=e.message);window.add
   await invoke('gui_test_progress',{phase:'live-image'});
   const asset=await invoke('generate_asset',{pet});assert(asset.png_base64.length>0&&asset.width>0&&asset.height>0,'real OpenAI sprite');
   const cached=await invoke('load_asset',{pet});assert(cached.png_base64===asset.png_base64,'sprite cache persistence');
+  await invoke('save_profile',{id:pet,profile:{...profile,'名字':'已修改角色'}});
+  assert((await invoke('load_asset',{pet}))===null,'changed profile cannot render stale generated sprite');
+  await invoke('save_profile',{id:pet,profile});
+  assert((await invoke('load_asset',{pet})).png_base64===asset.png_base64,'matching original profile restores cached sprite');
  }
  await invoke('gui_test_progress',{phase:'cleanup'});
  const files=await invoke('scan_file_preview');const sample=files.find(f=>f.name==='sample.txt');assert(sample&&sample.size_bytes>0,'file preview');
@@ -140,5 +144,5 @@ window.addEventListener('error',e=>window.__PET_LOAD_ERROR=e.message);window.add
   const tampered=await invoke('check_local_update');let tamperDenied=false;try{await invoke('verify_local_update',{id:tampered.id})}catch(_){tamperDenied=true}assert(tamperDenied,'modified updater package rejected');
   let remoteDenied=false;try{await invoke('check_local_update')}catch(_){remoteDenied=true}assert(remoteDenied,'updater remote URL rejected before download');
  }
- await invoke('gui_test_result',{success:true,message:'PASS: WebKit/WASM, 200x200, IPC, profiles, memory isolation/deletion, recall scheduling, advanced overrides, memory editing, opaque-ID confirmed cleanup, organizer GUI, journal/restore recovery, Trash UI, animation choices, learning summary, SQLite/assets snapshot restore, MCP stdio scope and rendered data; AI='+!!window.__PET_TEST_LIVE_AI+'; image='+!!window.__PET_TEST_LIVE_IMAGE+'; analytics='+!!window.__PET_TEST_ANALYTICS+'; updater_signature='+!!window.__PET_TEST_UPDATER});
+ await invoke('gui_test_result',{success:true,message:'PASS: WebKit/WASM, 200x200, IPC, profiles, memory isolation/deletion, recall scheduling, advanced overrides, memory editing, opaque-ID confirmed cleanup, organizer GUI, journal/restore recovery, Trash UI, animation choices, rendered proactive reminder and cooldown, learning summary, SQLite/assets snapshot restore, MCP stdio scope and rendered data; AI='+!!window.__PET_TEST_LIVE_AI+'; image='+!!window.__PET_TEST_LIVE_IMAGE+'; analytics='+!!window.__PET_TEST_ANALYTICS+'; updater_signature='+!!window.__PET_TEST_UPDATER});
 })().catch(async e=>{await window.__TAURI__.core.invoke('gui_test_result',{success:false,message:String(e?.message||e)})});

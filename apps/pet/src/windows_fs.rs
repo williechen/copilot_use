@@ -118,6 +118,7 @@ fn secure(file: &File, private: bool) -> Result<(), CleanupError> {
     let token = user()?;
     let current = user_sid(&token);
     if owner.is_null() || acl.is_null() || !trusted(owner, current) {
+        eprintln!("security_check_failed: missing_or_untrusted_owner_or_acl");
         return Err(CleanupError::UnsafeItem);
     }
     for i in 0..unsafe { (*acl).AceCount } {
@@ -146,11 +147,21 @@ fn secure(file: &File, private: bool) -> Result<(), CleanupError> {
                 if !trusted(sid, current)
                     && ((private && allowed.Mask != 0) || allowed.Mask & writes != 0)
                 {
+                    eprintln!(
+                        "security_check_failed: untrusted_allow_mask={:#x}, private={private}",
+                        allowed.Mask
+                    );
                     return Err(CleanupError::UnsafeItem);
                 }
             }
             1 => {}
-            _ => return Err(CleanupError::UnsafeItem),
+            _ => {
+                eprintln!(
+                    "security_check_failed: unsupported_ace_type={}",
+                    header.AceType
+                );
+                return Err(CleanupError::UnsafeItem);
+            }
         }
     }
     Ok(())
@@ -241,6 +252,10 @@ fn set_descriptor(file: &File, descriptor: &Local) -> Result<(), CleanupError> {
         || acl.is_null()
         || unsafe { GetSecurityDescriptorControl(descriptor.0, &mut control, &mut revision) } == 0
     {
+        eprintln!(
+            "security_descriptor_failed: present={present}, null_acl={}",
+            acl.is_null()
+        );
         return Err(CleanupError::UnsafeItem);
     }
     let flags = DACL_SECURITY_INFORMATION

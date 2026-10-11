@@ -155,9 +155,35 @@ jobs:
       - name: Optimized GLib security backport regression
         if: runner.os == 'Linux'
         run: cargo test --locked --release --manifest-path apps/pet_desktop/Cargo.toml --test glib_variant_safety
-      - name: Build native installer without claiming runtime acceptance
+      - name: Build native installer
         shell: bash
         run: cd apps/pet_desktop && NO_COLOR=true cargo tauri build --bundles "${{ matrix.bundle }}"
+      - name: Execute extracted Linux release package
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          package=$(find apps/pet_desktop/target/release/bundle/deb -name '*.deb' -print -quit)
+          dpkg-deb -x "$package" "$RUNNER_TEMP/pet-package"
+          executable=$(find "$RUNNER_TEMP/pet-package" -name copilot-desktop-pet -type f -print -quit)
+          xvfb-run -a python3 scripts/pet-gui-verify.py --executable "$executable" --updater
+      - name: Execute macOS release app
+        if: runner.os == 'macOS'
+        shell: bash
+        run: |
+          executable=$(find apps/pet_desktop/target/release/bundle/macos -path '*/Contents/MacOS/copilot-desktop-pet' -type f -print -quit)
+          python3 scripts/pet-gui-verify.py --executable "$executable" --updater
+      - name: Install and execute Windows release package in disposable runner
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $installer = Get-ChildItem apps/pet_desktop/target/release/bundle/nsis -Filter *.exe | Select-Object -First 1
+          $destination = Join-Path $env:RUNNER_TEMP 'pet-package'
+          $process = Start-Process $installer.FullName -ArgumentList "/S /D=$destination" -Wait -PassThru
+          if ($process.ExitCode -ne 0) { throw "NSIS installation failed: $($process.ExitCode)" }
+          $executable = Get-ChildItem $destination -Filter copilot-desktop-pet.exe -Recurse | Select-Object -First 1
+          if (-not $executable) { throw 'Installed executable missing' }
+          python3 scripts/pet-gui-verify.py --executable $executable.FullName --updater
+          if ($LASTEXITCODE -ne 0) { throw 'Installed release GUI verification failed' }
       - uses: actions/upload-artifact@v4
         with:
           name: desktop-${{ runner.os }}

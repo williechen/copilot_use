@@ -43,9 +43,9 @@
 | 必要門檻 | 剩餘驗證 |
 |---|---|
 | Windows 安全與 GUI | 新 SHA 上實跑備份 flush、handle-relative ACL 還原、安全測試、WebView GUI 與 NSIS |
-| 安裝包 runtime | 對三平台產生的安裝包／app 實際執行驗收；debug GUI 成功不取代此門檻 |
+| 安裝包 runtime | Linux deb 解包後的 release 程式已通過 GUI／SQLite／回收還原／簽章驗收；macOS app 與 Windows 安装包加入 CI，尚待結果 |
 | Updater | 真實有效簽章、篡改、版本不符、遠端 URL、未確認拒絕已過 Linux/macOS GUI；實際更新安裝尚未驗證 |
-| Analytics Dashboard | 新 Taipei 日期預設與非零封存／還原 UI 須驗證 |
+| Analytics Dashboard | 已通過 Taipei 當日趨勢、實際封存 13→12、還原 12→13 的瀏覽器操作 |
 | 身份／架構 | 核對 UUID domain 與 UUID/VARCHAR storage port；正式 tag 後在新 branch 對齊唯讀需求目錄與模組內測試 |
 | 安全／來源固定 | 最新四份 lock audit、手工 GLib 回移證據、新提交全部 CI；同一乾淨 SHA 的 Docker 重建、容器測試、安裝包與輸出校驗 |
 | 交付固定 | 更新文件、移除無用暫存、完成上列門檻後才正式 release/tag；目前尚未完成 |
