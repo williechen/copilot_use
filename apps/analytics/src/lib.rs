@@ -110,6 +110,15 @@ mod tests {
     }
 
     #[sqlx::test(migrations = "./migrations")]
+    async fn concurrent_delivery_of_same_event_is_idempotent(pool: PgPool) {
+        let store = EventStore::new(pool);
+        let event = ProductEvent::chat_message_persisted(Uuid::new_v4());
+        let (first, second) = tokio::join!(store.insert_once(&event), store.insert_once(&event));
+        assert!(first.unwrap() ^ second.unwrap(), "並發重送只有一筆成功新增");
+        assert_eq!(store.total().await.unwrap(), 1);
+    }
+
+    #[sqlx::test(migrations = "./migrations")]
     async fn two_sources_same_event_id_count_separately(pool: PgPool) {
         let id = Uuid::new_v4();
         let store = EventStore::new(pool);
