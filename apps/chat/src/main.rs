@@ -91,10 +91,13 @@ async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
     let endpoint = std::env::var("ANALYTICS_ENDPOINT")?;
     let token = std::env::var("ANALYTICS_API_TOKEN")?;
     let chat_token = std::env::var("CHAT_API_TOKEN")?;
+    let isolated_docker_dev = std::env::var("ALLOW_INTERNAL_HTTP_DEV")
+        .is_ok_and(|value| value == "true");
     if token.len() < 16 || chat_token.len() < 16 ||
        !(endpoint.starts_with("https://") ||
          endpoint.starts_with("http://127.0.0.1:") ||
-         endpoint.starts_with("http://localhost:")) {
+         endpoint.starts_with("http://localhost:") ||
+         (isolated_docker_dev && endpoint == "http://analytics:3100/api/v1/events")) {
         return Err("須設定安全 Token 和 HTTPS/localhost Analytics endpoint".into());
     }
     let pool = PgPoolOptions::new().max_connections(10).connect(&url).await?;
