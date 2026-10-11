@@ -1,5 +1,5 @@
-pub mod dashboard;
 //! Analytics：認證後持久事件、依 (source_app,event_id) 原子去重、Query API。
+pub mod dashboard;
 use axum::{
     extract::{State, Json},
     http::{HeaderMap, StatusCode},
