@@ -110,18 +110,45 @@ async fn connected(
     }
     let mut subscription = state.events.subscribe();
     let connection = Uuid::new_v4();
+    if super::fanout::join(
+        &state.pool,
+        &room_id,
+        connection,
+        cookie_actor.and_then(|actor| actor.user_id()),
+    )
+    .await
+    .is_err()
+    {
+        send(
+            &mut socket,
+            json!({"type":"error","code":"connection_quota"}),
+        )
+        .await;
+        let _ = socket.send(Message::Close(None)).await;
+        return;
+    }
+    let snapshot = super::fanout::snapshot(&state.pool, &room_id)
+        .await
+        .unwrap_or_default();
+
     if !send(
         &mut socket,
-        json!({"type":"ready","connection_id":connection}),
+        json!({"type":"ready","connection_id":connection,"presence":snapshot}),
     )
     .await
     {
+        let _ = sqlx::query("DELETE FROM chat_connections WHERE id=$1")
+            .bind(connection)
+            .execute(&state.pool)
+            .await;
         return;
     }
-    let _ = state.events.send(RoomEvent {
-        room_id: room_id.clone(),
-        payload: json!({"type":"presence","connection_id":connection,"online":true}),
-    });
+    let _ = super::fanout::publish(
+        &state.pool,
+        &room_id,
+        json!({"type":"presence","connection_id":connection,"online":true}),
+    )
+    .await;
     let mut last_typing = tokio::time::Instant::now() - Duration::from_secs(1);
     let mut expiry = tokio::time::interval_at(
         tokio::time::Instant::now() + Duration::from_secs(5),
@@ -132,6 +159,7 @@ async fn connected(
         tokio::select! {
             _ = expiry.tick() => {
                 if !session_valid(&state,&session_headers,cookie_actor,&room_id).await {break;}
+                if sqlx::query("UPDATE chat_connections SET expires_at=now()+interval '20 seconds' WHERE id=$1").bind(connection).execute(&state.pool).await.is_err(){break;}
             }
             incoming = socket.recv() => {
                 match incoming {
@@ -139,7 +167,7 @@ async fn connected(
                         if !session_valid(&state,&session_headers,cookie_actor,&room_id).await {break;}
                         if text.as_str() == r#"{"type":"typing"}"# && last_typing.elapsed() >= Duration::from_millis(500) {
                             last_typing = tokio::time::Instant::now();
-                            let _ = state.events.send(RoomEvent {room_id:room_id.clone(), payload:json!({"type":"typing","connection_id":connection})});
+                            let _=super::fanout::publish(&state.pool,&room_id,json!({"type":"typing","connection_id":connection})).await;
                         } else if !send(&mut socket, json!({"type":"error","code":"unsupported_or_rate_limited"})).await {break;}
                     }
                     Some(Ok(Message::Ping(value))) => {if socket.send(Message::Pong(value)).await.is_err() {break;}}
@@ -149,7 +177,7 @@ async fn connected(
             }
             event = subscription.recv() => {
                 match event {
-                    Ok(event) if event.room_id == room_id => {
+                    Ok(event) if event.room_id == room_id ||event.room_id=="*" => {
                         if !session_valid(&state,&session_headers,cookie_actor,&room_id).await {break;}
                         if !send(&mut socket, event.payload).await {break;}
                     }
@@ -162,10 +190,16 @@ async fn connected(
             }
         }
     }
-    let _ = state.events.send(RoomEvent {
-        room_id,
-        payload: json!({"type":"presence","connection_id":connection,"online":false}),
-    });
+    let _ = sqlx::query("DELETE FROM chat_connections WHERE id=$1")
+        .bind(connection)
+        .execute(&state.pool)
+        .await;
+    let _ = super::fanout::publish(
+        &state.pool,
+        &room_id,
+        json!({"type":"presence","connection_id":connection,"online":false}),
+    )
+    .await;
     let _ = socket.send(Message::Close(None)).await;
 }
 async fn session_valid(

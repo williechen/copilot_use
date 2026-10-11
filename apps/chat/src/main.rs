@@ -1,9 +1,11 @@
 //! Chat Web、HTTP、PostgreSQL Transactional Outbox；獨立測試庫與認證。
 mod agent;
 mod auth;
+mod fanout;
 mod knowledge;
 mod mcp;
 mod openai;
+mod personas;
 mod realtime;
 mod suggestions;
 mod web;
@@ -54,6 +56,7 @@ struct CreatedMessage {
 struct RoomItem {
     id: String,
     name: String,
+    can_manage: bool,
 }
 #[derive(Serialize, FromRow)]
 struct MessageItem {
@@ -82,7 +85,7 @@ async fn list_rooms(
 ) -> Result<Json<Vec<RoomItem>>, StatusCode> {
     let actor = auth::principal(&s, &headers, false).await?;
     let rooms = sqlx::query_as::<_, RoomItem>(
-        "SELECT id,name FROM chat_rooms WHERE $1::uuid IS NULL OR id IN (SELECT room_id FROM chat_room_members WHERE user_id=$1) ORDER BY name,id LIMIT 100",
+        "SELECT id,name,COALESCE($1::uuid IS NULL OR owner_id=$1,false) AS can_manage FROM chat_rooms WHERE $1::uuid IS NULL OR id IN (SELECT room_id FROM chat_room_members WHERE user_id=$1) ORDER BY name,id LIMIT 100",
     )
     .bind(actor.user_id())
     .fetch_all(&s.pool)
@@ -99,8 +102,13 @@ async fn create_room(
     let actor = auth::principal(&s, &headers, true).await?;
     if input.id.is_empty()
         || input.id.len() > 40
+        || !input
+            .id
+            .chars()
+            .all(|c| c.is_ascii_alphanumeric() || matches!(c, '_' | '-'))
         || input.name.trim().is_empty()
         || input.name.len() > 200
+        || input.name.contains('\0')
     {
         return Err(StatusCode::BAD_REQUEST);
     }
@@ -187,6 +195,7 @@ async fn send_message(
         || input.room_id.len() > 40
         || input.content.trim().is_empty()
         || input.content.len() > 65536
+        || input.content.contains('\0')
     {
         return Err(StatusCode::BAD_REQUEST);
     }
@@ -211,12 +220,7 @@ async fn send_message(
                 StatusCode::SERVICE_UNAVAILABLE
             }
         })?;
-    if inserted {
-        let _ = s.events.send(realtime::RoomEvent {
-            room_id: input.room_id,
-            payload: serde_json::json!({"type":"message", "id": id, "content": input.content}),
-        });
-    }
+
     Ok((
         if inserted {
             StatusCode::CREATED
@@ -259,6 +263,7 @@ async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
         }
     });
     let (events, _) = tokio::sync::broadcast::channel(256);
+    let fanout_task = fanout::start(&url, pool.clone(), events.clone()).await?;
     let addr: SocketAddr = std::env::var("CHAT_LISTEN")
         .unwrap_or_else(|_| "127.0.0.1:3001".into())
         .parse()?;
@@ -290,6 +295,20 @@ async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
         .route("/api/v1/auth/logout", axum::routing::post(auth::logout))
         .route("/api/v1/rooms/invite", axum::routing::post(auth::invite))
         .route("/api/v1/ws/{room_id}", get(realtime::upgrade))
+        .route("/api/v1/rooms/{room}/presence", get(fanout::presence))
+        .route(
+            "/api/v1/rooms/{room}/personas",
+            get(personas::list).post(personas::save),
+        )
+        .route(
+            "/api/v1/rooms/{room}/persona-runs",
+            axum::routing::post(personas::run),
+        )
+        .route("/api/v1/rooms/{room}/persona-runs/{id}", get(personas::get))
+        .route(
+            "/api/v1/rooms/{room}/persona-runs/{id}/cancel",
+            axum::routing::post(personas::cancel),
+        )
         .route(
             "/api/v1/knowledge",
             get(knowledge::list).post(knowledge::add),
@@ -333,6 +352,7 @@ async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
         })
         .await;
     worker.abort();
+    fanout_task.abort();
     result?;
     tokio::task::spawn_blocking(move || drop(telemetry)).await?;
     Ok(())

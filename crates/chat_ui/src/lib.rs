@@ -115,15 +115,26 @@ fn Chat() -> impl IntoView {
         });
     };
     let pending = RwSignal::new(Vec::<Value>::new());
+    let presence = RwSignal::new(Vec::<Value>::new());
+    let typing = RwSignal::new(String::new());
+    let typing_signal = RwSignal::new(0_u32);
     #[cfg(target_arch = "wasm32")]
     {
-        browser::observe_room(selected, messages, state.error);
+        browser::observe_room(
+            selected,
+            messages,
+            state.error,
+            presence,
+            typing,
+            typing_signal,
+        );
         browser::delivery_queue(selected, pending, messages, state.error);
     }
 
     view! {<section><h2>"聊天室"</h2><input id="room-name" placeholder="新房間名稱" maxlength="200" prop:value=move ||room_name.get() on:input=move |e|room_name.set(event_target_value(&e))/><button id="create-room" on:click=move |_|{let id=uuid();let name=room_name.get();spawn(async move{match api("/api/v1/rooms","POST",Some(json!({"id":id,"name":name}))).await{Ok(_)=>{room_name.set(String::new());if let Ok(v)=api("/api/v1/rooms","GET",None).await {rooms.set(v.as_array().cloned().unwrap_or_default());}load(id)},Err(e)=>state.error.set(e)}});}>"建立私人房間"</button>
         <select id="rooms" prop:value=move ||selected.get() on:change=move |e|load(event_target_value(&e))><option value="">"選擇房間"</option>{move ||rooms.get().into_iter().map(|r|view!{<option value=r["id"].as_str().unwrap_or("").to_owned()>{r["name"].as_str().unwrap_or("").to_owned()}</option>}).collect_view()}</select>
         <input placeholder="邀請的使用者名稱" on:input=move |e|invitee.set(event_target_value(&e))/><button on:click=move |_|{let body=json!({"room_id":selected.get(),"username":invitee.get()});spawn(async move{match api("/api/v1/rooms/invite","POST",Some(body)).await{Ok(_)=>state.error.set("邀請已完成".into()),Err(e)=>state.error.set(e)}});}>"邀請加入"</button>
+        <p id="presence" role="status">{move ||format!("在線連線：{}",presence.get().len())}</p><p id="typing" aria-live="polite">{move ||typing.get()}</p>
         <ul id="messages" aria-live="polite">{move ||messages.get().into_iter().map(|m|view!{<li>{m["content"].as_str().unwrap_or("").to_owned()}<small>{m["id"].as_str().unwrap_or("").to_owned()}</small></li>}).collect_view()}</ul>
         <button on:click=move |_| {
             if messages.get_untracked().len()>=1000 {state.error.set("此頁最多保留 1000 筆歷史訊息".into());return;}
@@ -134,7 +145,7 @@ fn Chat() -> impl IntoView {
                 *current=older;});}},Err(e)=>state.error.set(e)
             }});
         }>"載入較舊訊息"</button>
-        <input id="message" maxlength="65536" placeholder="輸入訊息" prop:value=move ||draft.get() on:input=move |e|draft.set(event_target_value(&e))/><button id="send" on:click=move |_| {
+        <input id="message" maxlength="65536" placeholder="輸入訊息" prop:value=move ||draft.get() on:input=move |e|{draft.set(event_target_value(&e));if !draft.get_untracked().is_empty(){typing_signal.update(|v|*v=v.wrapping_add(1));}}/><button id="send" on:click=move |_| {
             let room=selected.get();let content=draft.get();
             if room.is_empty() || content.trim().is_empty(){state.error.set("請選擇房間並輸入訊息".into());return;}
             if pending.get_untracked().len()>=32{state.error.set("待送出佇列已滿（32 筆）".into());return;}
@@ -164,7 +175,78 @@ fn Chat() -> impl IntoView {
         <button disabled=move ||!confirm_policy.get() on:click=move |_|{let path=format!("/api/v1/rooms/{}/suggestions/{}/apply",selected.get(),suggestion_id.get());spawn(async move{match api(&path,"POST",Some(json!({"confirmed":true}))).await{Ok(v)=>policy_result.set(v.to_string()),Err(e)=>state.error.set(e)}});}>"套用並回報"</button>
         <button disabled=move ||!confirm_policy.get() on:click=move |_|{let path=format!("/api/v1/rooms/{}/suggestions/{}/rollback",selected.get(),suggestion_id.get());spawn(async move{match api(&path,"POST",Some(json!({"confirmed":true}))).await{Ok(v)=>policy_result.set(v.to_string()),Err(e)=>state.error.set(e)}});}>"回退並回報"</button><pre>{move ||policy_result.get()}</pre>
 
+        <PersonaControls room=selected can_manage=Signal::derive(move ||rooms.get().iter().find(|r|r["id"]==selected.get()).is_some_and(|r|r["can_manage"]==true))/>
     </section>}
+}
+#[component]
+fn PersonaControls(room: RwSignal<String>, can_manage: Signal<bool>) -> impl IntoView {
+    let personas = RwSignal::new(Vec::<Value>::new());
+    let id = RwSignal::new(String::new());
+    let name = RwSignal::new(String::new());
+    let instructions = RwSignal::new(String::new());
+    let memory = RwSignal::new(String::new());
+    let cooldown = RwSignal::new(2_i32);
+    let enabled = RwSignal::new(true);
+    let topic = RwSignal::new(String::new());
+    let turns = RwSignal::new(2_i32);
+    let budget = RwSignal::new(4096_i32);
+    let tools = RwSignal::new(false);
+    let confirmed = RwSignal::new(false);
+    let busy = RwSignal::new(false);
+    let run_id = RwSignal::new(String::new());
+    let active_room = RwSignal::new(String::new());
+    let result = RwSignal::new(String::new());
+    let error = session().error;
+    let refresh = move || {
+        let current = room.get();
+        if current.is_empty() || !can_manage.get() {
+            return;
+        }
+        spawn(async move {
+            match api(&format!("/api/v1/rooms/{current}/personas"), "GET", None).await {
+                Ok(v) => {
+                    if room.get_untracked() == current {
+                        personas.set(v.as_array().cloned().unwrap_or_default());
+                    }
+                }
+                Err(e) => error.set(e),
+            }
+        });
+    };
+    Effect::new(move |_| {
+        let _ = room.get();
+        let _ = can_manage.get();
+        personas.set(Vec::new());
+        id.set(String::new());
+        name.set(String::new());
+        instructions.set(String::new());
+        memory.set(String::new());
+        topic.set(String::new());
+        confirmed.set(false);
+        if !busy.get_untracked() {
+            run_id.set(String::new());
+        }
+        result.set(String::new());
+        refresh();
+    });
+    view! {<Show when=move ||can_manage.get()><section><h3>"Persona 與 AI 對 AI（房主功能）"</h3><p>"最多八個角色，輪流發言。執行會把此房間近期訊息、角色設定與記憶交給 OpenAI；每次模型請求最多512輸出 tokens，工具模式每輪最多兩次模型請求。預算包含失敗的嘗試。"</p>
+    <select on:change=move |e|{let selected=event_target_value(&e);if let Some(p)=personas.get().iter().find(|p|p["id"]==selected){id.set(selected);name.set(p["name"].as_str().unwrap_or("").into());instructions.set(p["instructions"].as_str().unwrap_or("").into());memory.set(p["memory"].as_str().unwrap_or("").into());cooldown.set(p["cooldown_seconds"].as_i64().unwrap_or(2)as i32);enabled.set(p["enabled"]==true);}}><option value="">"選擇角色"</option>{move ||personas.get().into_iter().map(|p|view!{<option value=p["id"].as_str().unwrap_or("").to_owned()>{p["name"].as_str().unwrap_or("").to_owned()}</option>}).collect_view()}</select>
+    <button on:click=move |_|{id.set(uuid());name.set(String::new());instructions.set(String::new());memory.set(String::new());enabled.set(true);}>"新增角色"</button>
+    <label>"名字"<input maxlength="80" prop:value=move ||name.get() on:input=move |e|name.set(event_target_value(&e))/></label>
+    <label>"角色設定"<textarea maxlength="4096" prop:value=move ||instructions.get() on:input=move |e|instructions.set(event_target_value(&e))></textarea></label>
+    <label>"可編輯／清空的角色記憶"<textarea maxlength="2048" prop:value=move ||memory.get() on:input=move |e|memory.set(event_target_value(&e))></textarea></label>
+    <label>"同一角色冷卻秒數"<input type="number" min="1" max="30" prop:value=move ||cooldown.get() on:input=move |e|cooldown.set(event_target_value(&e).parse().unwrap_or(2))/></label>
+    <label><input type="checkbox" prop:checked=move ||enabled.get() on:change=move |e|enabled.set(event_target_checked(&e))/>"允許此角色參與"</label>
+    <button on:click=move |_|{let current=room.get();let pid=if id.get().is_empty(){uuid()}else{id.get()};id.set(pid.clone());let body=json!({"id":pid,"name":name.get(),"instructions":instructions.get(),"memory":memory.get(),"cooldown_seconds":cooldown.get(),"enabled":enabled.get()});spawn(async move{match api(&format!("/api/v1/rooms/{current}/personas"),"POST",Some(body)).await{Ok(_)=>refresh(),Err(e)=>error.set(e)}});}>"保存角色"</button>
+    <h4>"有界對話"</h4><textarea maxlength="4096" placeholder="共同討論的主題" prop:value=move ||topic.get() on:input=move |e|topic.set(event_target_value(&e))></textarea>
+    <label>"輪數（1–8）"<input type="number" min="1" max="8" prop:value=move ||turns.get() on:input=move |e|turns.set(event_target_value(&e).parse().unwrap_or(2))/></label>
+    <label>"輸出 token 上限"<input type="number" min="512" max="16384" prop:value=move ||budget.get() on:input=move |e|budget.set(event_target_value(&e).parse().unwrap_or(4096))/></label>
+    <label><input type="checkbox" on:change=move |e|tools.set(event_target_checked(&e))/>"允許唯讀 MCP 知識庫工具，並把檢索資料交給模型"</label>
+    <label><input type="checkbox" on:change=move |e|confirmed.set(event_target_checked(&e))/>"確認使用以上房間資料與請求預算"</label>
+    <button disabled=move ||!confirmed.get()||busy.get() on:click=move |_|{let current=room.get();let rid=uuid();active_room.set(current.clone());run_id.set(rid.clone());let body=json!({"id":rid,"topic":topic.get(),"max_turns":turns.get(),"max_output_budget":budget.get(),"tools":tools.get(),"confirmed":true});busy.set(true);result.set("執行中；已完成輪次會保存，最多180秒".into());spawn(async move{match api(&format!("/api/v1/rooms/{current}/persona-runs"),"POST",Some(body)).await{Ok(v)=>{if room.get_untracked()==current{result.set(v.to_string());refresh();}},Err(e)=>{if room.get_untracked()==current {result.set("執行未完成；請查看錯誤或執行收據".into());}error.set(e)}}busy.set(false);});}>"開始對話"</button>
+    <button disabled=move ||!busy.get() on:click=move |_|{let current=active_room.get();let rid=run_id.get();spawn(async move{match api(&format!("/api/v1/rooms/{current}/persona-runs/{rid}/cancel"),"POST",Some(json!({"confirmed":true}))).await{Ok(_)=>result.set("已請求取消；已完成輪次仍保留".into()),Err(e)=>error.set(e)}});}>"取消剩餘輪次"</button>
+    <button disabled=move ||run_id.get().is_empty() on:click=move |_|{let current=active_room.get();let rid=run_id.get();spawn(async move{match api(&format!("/api/v1/rooms/{current}/persona-runs/{rid}"),"GET",None).await{Ok(v)=>result.set(v.to_string()),Err(e)=>error.set(e)}});}>"查看執行收據"</button><pre aria-live="polite">{move ||result.get()}</pre>
+    </section></Show>}
 }
 #[component]
 fn Knowledge() -> impl IntoView {

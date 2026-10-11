@@ -106,6 +106,14 @@ with tempfile.TemporaryDirectory(prefix='copilot-verify-') as scratch:
             return proc
         chat=start('chat'); analytics=start('analytics')
         check('empty-database migrations and two independently running services')
+        abuse_headers={'Content-Type':'application/json','X-Copilot-Csrf':'1'}
+        def rejected_login(base):
+            req=urllib.request.Request(base+'/api/v1/auth/login',data=json.dumps({'username':'missing_abuse_fixture','password':'wrong-synthetic-password'}).encode(),headers=abuse_headers)
+            try:
+                with urllib.request.urlopen(req,timeout=10)as response:return response.status
+            except urllib.error.HTTPError as e:return e.code
+        check('sequential unknown-account attempts bounded before expensive password work',all(rejected_login(chat_url)==401 for _ in range(8)) and rejected_login(chat_url)==429)
+
         # 跨角色隔離不能只看資料庫名稱，實際拒絕 CONNECT。
         for app in ('chat','analytics'):
             run([PG/'psql',admin,'-v','ON_ERROR_STOP=1','-c',f'REVOKE CONNECT ON DATABASE {app}_test FROM PUBLIC'],stdout=subprocess.DEVNULL)
@@ -168,11 +176,33 @@ with tempfile.TemporaryDirectory(prefix='copilot-verify-') as scratch:
         check('session writes require CSRF header',member_http(alice,'/api/v1/messages',{'room_id':private,'content':'csrf'},csrf=False)[0]==403)
         check('owner can invite another user',member_http(alice,'/api/v1/rooms/invite',{'room_id':private,'username':bob_name})[0]==204)
         check('invited user can send private message',member_http(bob,'/api/v1/messages',{'room_id':private,'content':'authorized'})[0]==201)
+        persona_route='/api/v1/rooms/'+private+'/personas'
+        persona_id=str(uuid.uuid4());persona_body={'id':persona_id,'name':'老師','instructions':'協助學習 Rust，只使用授權資料。','memory':'','cooldown_seconds':2,'enabled':True}
+        check('room member cannot change owner personas',member_http(bob,persona_route,persona_body)[0]==403)
+        check('owner can configure personas',member_http(alice,persona_route,persona_body)[0]==204)
+        check('persona configuration persists with scoped memory',member_http(alice,persona_route)[1][0]['id']==persona_id)
+        run_route='/api/v1/rooms/'+private+'/persona-runs'
+        bounded={'id':str(uuid.uuid4()),'topic':'只討論測試資料','max_turns':2,'max_output_budget':1024,'tools':False,'confirmed':True}
+        check('persona runs reject unconfirmed requests',member_http(alice,run_route,bounded|{'confirmed':False})[0]==400)
+        check('persona turn budget rejects excessive rounds',member_http(alice,run_route,bounded|{'max_turns':99})[0]==400)
+        check('persona run with no provider configuration fails without a fake answer',member_http(alice,run_route,bounded)[0]==503)
         assert member_http(bob,'/api/v1/auth/logout',{})[0]==204
+
         check('logout revokes server-side session',member_http(bob,'/api/v1/messages?room_id='+private)[0]==401)
-        run(['node','scripts/realtime-e2e.mjs'],env=env)
+        wait(lambda:any(row['event_type']=='login.succeeded' and row['total']>=2 for row in http(analytics_url,'/api/v1/events/summary',analytics_token)[1]))
+        wait(lambda:any(row['event_type']=='logout.succeeded' and row['total']>=1 for row in http(analytics_url,'/api/v1/events/summary',analytics_token)[1]))
+        check('successful login/logout emits durable anonymous Analytics events')
+
+        second_port=port();second_url=f'http://127.0.0.1:{second_port}'
+        second_env=env|{'CHAT_LISTEN':f'127.0.0.1:{second_port}'}
+        second_log=open(d/'second-chat.log','a');handles.append(second_log)
+        second_chat=subprocess.Popen([ROOT/'target/debug/day9-chat'],cwd=ROOT,env=second_env,stdout=second_log,stderr=second_log);processes.append(second_chat)
+        wait(lambda:http(second_url,'/healthz')[0]==200)
+        run(['node','scripts/realtime-e2e.mjs'],env=env|{'CHAT_URL_SECOND':second_url})
+        check('two independent Chat processes share presence, typing and canonical message fan-out')
         check('real WebSocket two-client and room-isolation E2E')
-        run(['node','scripts/session-ws-e2e.mjs'],env=env)
+        run(['node','scripts/session-ws-e2e.mjs'],env=env|{'CHAT_URL_SECOND':second_url})
+        stop(second_chat)
         check('revoked cookie session cannot retain WebSocket access')
         # Seed reviewable, non-AI fixture to prove the real PostgreSQL/HTTP policy lifecycle.
         suggestion=str(uuid.uuid4())
@@ -266,6 +296,26 @@ with tempfile.TemporaryDirectory(prefix='copilot-verify-') as scratch:
             check('real OpenAI Function Calling through authenticated local MCP and strict JSON answer',status==200 and agent['steps'] and agent['follow_up_question'] and document['id'] in agent['sources'] and 'COMET-432' in agent['answer'])
             wait(lambda:http(analytics_url,'/api/v1/events/web_chat/'+agent['id'],analytics_token)[0]==200)
             check('completed Agent answer emits a durable Analytics event')
+            persona_base='/api/v1/rooms/'+live_room+'/personas'
+            for label,prompt in [('老師A','你是老師，短句解釋 Rust 所有權，再問一個理解問題。記憶不超過30字。'),('學生B','你是學生，回應老師的說明並提出一個簡短理解問題。記憶不超過30字。')]:
+                assert http(chat_url,persona_base,chat_token,{'id':str(uuid.uuid4()),'name':label,'instructions':prompt,'memory':'','cooldown_seconds':1,'enabled':True})[0]==204
+            run_base='/api/v1/rooms/'+live_room+'/persona-runs'
+            discussion={'id':str(uuid.uuid4()),'topic':'只用短句討論 Rust 所有權。本例只有測試資料。','max_turns':2,'max_output_budget':1024,'tools':False,'confirmed':True}
+            status,exchange=http(chat_url,run_base,chat_token,discussion)
+            check('real two-persona round-robin completes within reserved output budget',status==200 and exchange['status']=='completed' and len(exchange['turns'])==2 and len({turn['persona_id']for turn in exchange['turns']})==2 and exchange['reserved_output_tokens']==1024)
+            check('completed persona run replays without new provider calls',http(chat_url,run_base,chat_token,discussion)[1]==exchange)
+            for turn in exchange['turns']:
+                wait(lambda:http(analytics_url,'/api/v1/events/web_chat/'+turn['message_id'],analytics_token)[0]==200)
+            saved_personas=http(chat_url,persona_base,chat_token)[1]
+            check('each persona retains its own bounded memory',len(saved_personas)==2 and all(isinstance(p['memory'],str) and len(p['memory'].encode())<=2048 for p in saved_personas))
+            exhausted=discussion|{'id':str(uuid.uuid4()),'max_output_budget':512}
+            status,stopped=http(chat_url,run_base,chat_token,exhausted)
+            check('real persona loop stops before a second request when output budget is exhausted',status==200 and stopped['status']=='budget_exhausted' and len(stopped['turns'])==1 and stopped['reserved_output_tokens']==512)
+            tool_run=discussion|{'id':str(uuid.uuid4()),'max_turns':1,'tools':True,'topic':'使用知識庫工具找到本地驗證實驗代碼，短句回答、引用文件並提出理解問題。'}
+            status,grounded=http(chat_url,run_base,chat_token,tool_run)
+            print('Synthetic persona tool result:',status,json.dumps(grounded,ensure_ascii=False),flush=True)
+            check('real bounded persona Function Calling uses scoped MCP citations',status==200 and grounded['status']=='completed' and grounded['turns'][0]['steps'] and document['id'] in grounded['turns'][0]['sources'] and 'COMET-432' in grounded['turns'][0]['answer'])
+
             check('knowledge document can be deleted',http(chat_url,'/api/v1/knowledge/'+document['id'],chat_token,method='DELETE')[0]==204)
         if live_key:
             env['OPENAI_API_KEY']=live_key
@@ -298,10 +348,11 @@ with tempfile.TemporaryDirectory(prefix='copilot-verify-') as scratch:
             sql="INSERT INTO analysis_suggestions(id,target_app,metric_snapshot,summary,proposal,status) VALUES ('"+pet_suggestion+"','desktop_pet','{\"rows\":[]}','複習事件測試。','"+pet_proposal+"','approved')"
             run([PG/'psql',env['ANALYTICS_DATABASE_URL'],'-v','ON_ERROR_STOP=1','-c',sql],stdout=subprocess.DEVNULL)
             native_env=env | {'PET_GUI_TEST_ANALYTICS':'true','PET_GUI_TEST_SUGGESTION':pet_suggestion}
-            run(['python3','scripts/pet-gui-verify.py','--analytics'],env=native_env)
+            run(['python3','scripts/pet-gui-verify.py','--analytics']+(['--live-ai'] if '--live-openai' in sys.argv else []),env=native_env)
             summary=http(analytics_url,'/api/v1/events/summary',analytics_token)[1]
             bytype={(row['source_app'],row['event_type']):row['total'] for row in summary}
             check('native Pet policy apply and rollback acknowledged by Analytics',http(analytics_url,'/api/v1/suggestions/'+pet_suggestion,pet_token)[1]['status']=='rolled_back')
+            check('actual Pet restore event delivered exactly once to Analytics',bytype.get(('desktop_pet','file.restore.succeeded'))==1)
             check('actual Pet GUI receipts and learning events delivered exactly once to Analytics',bytype.get(('desktop_pet','file.cleanup.succeeded'))==2 and bytype.get(('desktop_pet','learning.review.completed'))==1)
             # Native file operations preserve traceparent into durable SQLite outbox.
             time.sleep(.5)

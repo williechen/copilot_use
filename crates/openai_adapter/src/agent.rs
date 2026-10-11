@@ -20,7 +20,11 @@ async fn response(body: Value) -> Result<Value, ProviderError> {
     let mut body = body;
     body["model"] = json!(model);
     body["store"] = json!(false);
-    body["max_output_tokens"] = json!(2048);
+    let tokens = body["max_output_tokens"].as_u64().unwrap_or(2048);
+    if !(64..=2048).contains(&tokens) {
+        return Err(ProviderError::Incomplete);
+    }
+    body["max_output_tokens"] = json!(tokens);
     body["reasoning"] = json!({"effort":"none"});
     body["include"] = json!(["reasoning.encrypted_content"]);
     if body.to_string().len() > 262144 {
@@ -87,16 +91,87 @@ fn output_text(value: &Value) -> Result<String, ProviderError> {
     }
     Ok(text)
 }
+#[derive(Clone, Copy)]
+pub struct Limits {
+    pub requests: usize,
+    pub tool_calls: usize,
+    pub output_tokens: u16,
+    pub memory: bool,
+}
+impl Default for Limits {
+    fn default() -> Self {
+        Self {
+            requests: 5,
+            tool_calls: 4,
+            output_tokens: 2048,
+            memory: false,
+        }
+    }
+}
+pub fn persona_schema() -> Value {
+    let mut schema = answer_schema();
+    schema["properties"]["memory"] = json!({"type":"string"});
+    schema["required"]
+        .as_array_mut()
+        .unwrap()
+        .push(json!("memory"));
+    schema
+}
+pub async fn structured_persona(input: Value, instructions: &str) -> Result<Value, ProviderError> {
+    let value=response(json!({"input":input.to_string(),"instructions":instructions,"max_output_tokens":512,"text":{"format":{"type":"json_schema","name":"copilot_persona","strict":true,"schema":persona_schema()}}})).await?;
+    let answer: Value =
+        serde_json::from_str(&output_text(&value)?).map_err(|_| ProviderError::Incomplete)?;
+    validate_persona(&answer)?;
+    Ok(answer)
+}
+fn validate_persona(value: &Value) -> Result<(), ProviderError> {
+    if value["memory"].as_str().is_none_or(|v| v.len() > 2048) {
+        return Err(ProviderError::Incomplete);
+    }
+    let mut answer = value.clone();
+    answer
+        .as_object_mut()
+        .ok_or(ProviderError::Incomplete)?
+        .remove("memory");
+    validate_answer(&answer)
+}
 pub async fn run<F, Fut>(
     input: Value,
     instructions: &str,
     tool_catalog: Vec<Value>,
-    mut execute: F,
+    execute: F,
 ) -> Result<Outcome, ProviderError>
 where
     F: FnMut(String, Value) -> Fut,
     Fut: std::future::Future<Output = Result<Value, ProviderError>>,
 {
+    run_limited(
+        input,
+        instructions,
+        tool_catalog,
+        execute,
+        Limits::default(),
+    )
+    .await
+}
+pub async fn run_limited<F, Fut>(
+    input: Value,
+    instructions: &str,
+    tool_catalog: Vec<Value>,
+    mut execute: F,
+    limits: Limits,
+) -> Result<Outcome, ProviderError>
+where
+    F: FnMut(String, Value) -> Fut,
+    Fut: std::future::Future<Output = Result<Value, ProviderError>>,
+{
+    if !(2..=5).contains(&limits.requests)
+        || limits.tool_calls == 0
+        || limits.tool_calls > 4
+        || !(64..=2048).contains(&limits.output_tokens)
+    {
+        return Err(ProviderError::Incomplete);
+    }
     if instructions.len() > 32768 || tool_catalog.is_empty() || tool_catalog.len() > 8 {
         return Err(ProviderError::Incomplete);
     }
@@ -122,13 +197,20 @@ where
         vec![json!({"role":"user","content":input.as_str().ok_or(ProviderError::Incomplete)?})]
     };
     let mut steps = Vec::new();
-    for round in 0..5 {
+    for round in 0..limits.requests {
         let choice = if round == 0 {
             json!("required")
+        } else if round + 1 == limits.requests {
+            json!("none")
         } else {
             json!("auto")
         };
-        let value=response(json!({"input":messages,"instructions":instructions,"tools":tools,"tool_choice":choice,"parallel_tool_calls":false,"text":{"format":{"type":"json_schema","name":"copilot_answer","strict":true,"schema":answer_schema()}}})).await?;
+        let schema = if limits.memory {
+            persona_schema()
+        } else {
+            answer_schema()
+        };
+        let value=response(json!({"max_output_tokens":limits.output_tokens,"input":messages,"instructions":instructions,"tools":tools,"tool_choice":choice,"parallel_tool_calls":false,"text":{"format":{"type":"json_schema","name":"copilot_answer","strict":true,"schema":schema}}})).await?;
         let output = value["output"]
             .as_array()
             .ok_or(ProviderError::Incomplete)?;
@@ -140,13 +222,17 @@ where
         if calls.is_empty() {
             let structured: Value = serde_json::from_str(&output_text(&value)?)
                 .map_err(|_| ProviderError::Incomplete)?;
-            validate_answer(&structured)?;
+            if limits.memory {
+                validate_persona(&structured)?;
+            } else {
+                validate_answer(&structured)?;
+            }
             return Ok(Outcome {
                 value: structured,
                 steps,
             });
         }
-        if calls.len() > 1 || steps.len() >= 4 {
+        if calls.len() > 1 || steps.len() >= limits.tool_calls {
             return Err(ProviderError::Incomplete);
         }
         messages.extend(output.clone());

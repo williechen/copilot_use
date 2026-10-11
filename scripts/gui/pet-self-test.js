@@ -68,6 +68,17 @@ window.addEventListener('error',e=>window.__PET_LOAD_ERROR=e.message);window.add
  await waitUntil(()=>section.textContent.includes('已隔離；收據'),'organizer UI success receipt');
  const recovered=await invoke('recover_cleanup_receipts');assert(recovered.length===2&&recovered.some(x=>x.operation_id===receipt.operation_id),'durable journal recovery');
  assert((await invoke('recover_cleanup_receipts')).length===2,'repeat recovery idempotence');
+ let restoreDenied=false;try{await invoke('restore_file',{id:receipt.operation_id,confirmed:false})}catch(_){restoreDenied=true;}assert(restoreDenied,'restore explicit confirmation');
+ document.querySelector('#load-trash').click();const trash=document.querySelector('#trash-browser');
+ await waitUntil(()=>[...trash.querySelectorAll('article')].some(x=>x.textContent.includes('sample.txt')),'trash UI listing');
+ const trashRow=[...trash.querySelectorAll('article')].find(x=>x.textContent.includes('sample.txt'));const restoreButton=trashRow.querySelector('button');assert(restoreButton.disabled,'restore UI confirmation');
+ const restoreBox=trashRow.querySelector('input');restoreBox.checked=true;restoreBox.dispatchEvent(new Event('change',{bubbles:true}));await waitUntil(()=>!restoreButton.disabled,'restore checkbox');restoreButton.click();
+ await waitUntil(()=>trash.textContent.includes('已還原；收據'),'restore UI receipt');
+ const restores=await invoke('recover_restore_receipts');assert(restores.length===1,'restore recovery');
+ const retry=await invoke('restore_file',{id:receipt.operation_id,confirmed:true});assert(retry.operation_id===restores[0].operation_id,'restore stable retry receipt');
+ assert((await invoke('recover_restore_receipts')).length===1,'restore recovery idempotence');
+ assert((await invoke('scan_file_preview')).some(x=>x.name==='sample.txt'),'restored file available');
+
  const select=document.querySelector('select');
  // 實際觸發 UI 的選擇與資料載入事件。
  const option=document.createElement('option');option.value=pet;select.appendChild(option);select.value=pet;select.dispatchEvent(new Event('change',{bubbles:true}));
@@ -91,11 +102,35 @@ window.addEventListener('error',e=>window.__PET_LOAD_ERROR=e.message);window.add
  let edited;const editDeadline=Date.now()+10000;do{edited=(await invoke('list_memories',{pet})).find(x=>x.id===knowledge);if(edited?.content==='edited ASTRO-771 test memory')break;await new Promise(r=>setTimeout(r,25));}while(Date.now()<editDeadline);
  assert(edited.content==='edited ASTRO-771 test memory','memory edit UI preserves scoped ID');
 
+ const actionControl=document.querySelector('#pet-action');actionControl.value='learning';actionControl.dispatchEvent(new Event('change',{bubbles:true}));
+ const speedControl=document.querySelector('#pet-speed');speedControl.value='fast';speedControl.dispatchEvent(new Event('change',{bubbles:true}));
+ document.querySelector('#save-interaction').click();
+ const interactionDeadline=Date.now()+10000;let preferences;
+ do{preferences=await invoke('interaction',{pet});if(preferences.action==='learning'&&preferences.speed==='fast')break;await new Promise(r=>setTimeout(r,25));}while(Date.now()<interactionDeadline);
+ assert(preferences.action==='learning'&&preferences.speed==='fast'&&!preferences.proactive,'animation action/speed UI persisted with proactive off');
+ assert((await invoke('learning_summary',{pet})).total>0,'actual learning summary');
+ assert(await invoke('recall_prompt')===null,'proactivity requires opt in');
+ const backups=document.querySelector('#pet-backups');document.querySelector('#create-snapshot').click();
+ await waitUntil(()=>backups.textContent.includes('備份完成'),'backup UI completion');const snapshots=await invoke('list_snapshots');assert(snapshots.length===1&&snapshots[0].sha256.length===64,'snapshot manifest');
+ await invoke('save_memory',{pet,id:knowledge,content:'changed after snapshot'});
+ let deniedBackup=false;try{await invoke('restore_snapshot',{id:snapshots[0].id,confirmed:false})}catch(_){deniedBackup=true;}assert(deniedBackup,'snapshot restore explicit confirmation');
+ const backupSelect=backups.querySelector('select');backupSelect.value=snapshots[0].id;backupSelect.dispatchEvent(new Event('change',{bubbles:true}));
+ const restoreSnapshotButton=backups.querySelector('#restore-snapshot');assert(restoreSnapshotButton.disabled,'snapshot UI confirmation');
+ const backupConfirm=backups.querySelector('input');backupConfirm.checked=true;backupConfirm.dispatchEvent(new Event('change',{bubbles:true}));await waitUntil(()=>!restoreSnapshotButton.disabled,'snapshot confirm checkbox');restoreSnapshotButton.click();
+ await waitUntil(()=>backups.textContent.includes('還原完成'),'snapshot restore UI completion');assert((await invoke('list_memories',{pet})).find(x=>x.id===knowledge).content==='edited ASTRO-771 test memory','SQLite memory restored');assert((await invoke('list_snapshots')).length===2,'pre-restore safety snapshot retained');
  if(window.__PET_TEST_ANALYTICS){
   await invoke('gui_test_progress',{phase:'analytics-outbox'});
   const deadline=Date.now()+30000;let outbox;
-  do {outbox=await invoke('outbox_status');if(outbox.delivered>=3&&!outbox.pending&&!outbox.leased&&!outbox.blocked)break;await new Promise(r=>setTimeout(r,100));}while(Date.now()<deadline);
-  assert(outbox.delivered>=3&&!outbox.pending&&!outbox.leased&&!outbox.blocked,'actual Pet to Analytics delivery');
+  do {outbox=await invoke('outbox_status');if(outbox.delivered>=4&&!outbox.pending&&!outbox.leased&&!outbox.blocked)break;await new Promise(r=>setTimeout(r,100));}while(Date.now()<deadline);
+  assert(outbox.delivered>=4&&!outbox.pending&&!outbox.leased&&!outbox.blocked,'actual Pet to Analytics delivery');
  }
- await invoke('gui_test_result',{success:true,message:'PASS: WebKit/WASM, 200x200, IPC, profiles, memory isolation/deletion, recall scheduling, advanced overrides, memory editing, opaque-ID confirmed cleanup, organizer GUI, journal recovery, MCP stdio scope and rendered data; AI='+!!window.__PET_TEST_LIVE_AI+'; image='+!!window.__PET_TEST_LIVE_IMAGE+'; analytics='+!!window.__PET_TEST_ANALYTICS});
+ if(window.__PET_TEST_UPDATER){
+  const available=await invoke('check_local_update');assert(available.status==='available'&&available.version==='0.1.1','local signed update discovered');
+  let unconfirmedInstall=false;try{await invoke('install_local_update',{id:available.id,confirmed:false})}catch(_){unconfirmedInstall=true}assert(unconfirmedInstall,'updater installation requires confirmation');
+  const verified=await invoke('verify_local_update',{id:available.id});assert(verified.status==='signature_verified'&&verified.bytes>0,'actual updater signature download verified');
+  const wrongVersion=await invoke('check_local_update');let versionDenied=false;try{await invoke('verify_local_update',{id:wrongVersion.id})}catch(_){versionDenied=true}assert(versionDenied,'signed version mismatch rejected');
+  const tampered=await invoke('check_local_update');let tamperDenied=false;try{await invoke('verify_local_update',{id:tampered.id})}catch(_){tamperDenied=true}assert(tamperDenied,'modified updater package rejected');
+  let remoteDenied=false;try{await invoke('check_local_update')}catch(_){remoteDenied=true}assert(remoteDenied,'updater remote URL rejected before download');
+ }
+ await invoke('gui_test_result',{success:true,message:'PASS: WebKit/WASM, 200x200, IPC, profiles, memory isolation/deletion, recall scheduling, advanced overrides, memory editing, opaque-ID confirmed cleanup, organizer GUI, journal/restore recovery, Trash UI, animation choices, learning summary, SQLite/assets snapshot restore, MCP stdio scope and rendered data; AI='+!!window.__PET_TEST_LIVE_AI+'; image='+!!window.__PET_TEST_LIVE_IMAGE+'; analytics='+!!window.__PET_TEST_ANALYTICS+'; updater_signature='+!!window.__PET_TEST_UPDATER});
 })().catch(async e=>{await window.__TAURI__.core.invoke('gui_test_result',{success:false,message:String(e?.message||e)})});

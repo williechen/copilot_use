@@ -224,6 +224,39 @@ impl PetStore {
         tx.commit().await?;
         Ok(())
     }
+    pub async fn record_restoration(
+        &self,
+        receipt: &crate::RestoreReceipt,
+    ) -> Result<(), sqlx::Error> {
+        let event = receipt.event();
+        if !event.is_valid() || receipt.quarantine_operation_id.is_nil() {
+            return Err(sqlx::Error::Protocol("invalid restoration receipt".into()));
+        }
+        let body =
+            serde_json::to_string(receipt).map_err(|e| sqlx::Error::Protocol(e.to_string()))?;
+        let payload =
+            serde_json::to_string(&event).map_err(|e| sqlx::Error::Protocol(e.to_string()))?;
+        let mut tx = self.pool.begin().await?;
+        sqlx::query("INSERT INTO restore_receipts(operation_id,receipt,created_at)VALUES(?,?,?) ON CONFLICT DO NOTHING").bind(receipt.operation_id.to_string()).bind(&body).bind(now()).execute(&mut *tx).await?;
+        let old: String =
+            sqlx::query_scalar("SELECT receipt FROM restore_receipts WHERE operation_id=?")
+                .bind(receipt.operation_id.to_string())
+                .fetch_one(&mut *tx)
+                .await?;
+        if old != body {
+            return Err(sqlx::Error::Protocol("restoration conflict".into()));
+        }
+        sqlx::query("INSERT INTO pet_outbox(event_id,payload,traceparent)VALUES(?,?,?) ON CONFLICT DO NOTHING").bind(receipt.operation_id.to_string()).bind(&payload).bind(copilot_telemetry::outgoing_headers().get("traceparent")).execute(&mut *tx).await?;
+        let old: String = sqlx::query_scalar("SELECT payload FROM pet_outbox WHERE event_id=?")
+            .bind(receipt.operation_id.to_string())
+            .fetch_one(&mut *tx)
+            .await?;
+        if old != payload {
+            return Err(sqlx::Error::Protocol("restoration event conflict".into()));
+        }
+        tx.commit().await?;
+        Ok(())
+    }
     pub async fn review(&self, pet: Uuid, id: Uuid, quality: u8) -> Result<Card, sqlx::Error> {
         let mut tx = self.pool.begin().await?;
         let mut card: Card = sqlx::query_as("SELECT * FROM cards WHERE pet_id=? AND id=?")
@@ -263,6 +296,39 @@ impl PetStore {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[tokio::test]
+    async fn restoration_receipt_and_event_roll_back_together_and_replay_once() {
+        let path = std::env::temp_dir().join(format!("pet-restoration-{}.sqlite", Uuid::new_v4()));
+        let store = PetStore::open(&path).await.unwrap();
+        let receipt = crate::RestoreReceipt {
+            operation_id: Uuid::new_v4(),
+            quarantine_operation_id: Uuid::new_v4(),
+            size_bytes: 8,
+        };
+        sqlx::query("CREATE TRIGGER restore_failure BEFORE INSERT ON pet_outbox BEGIN SELECT RAISE(FAIL,'fixture failure'); END").execute(&store.pool).await.unwrap();
+        assert!(store.record_restoration(&receipt).await.is_err());
+        let count: i64 = sqlx::query_scalar("SELECT count(*)FROM restore_receipts")
+            .fetch_one(&store.pool)
+            .await
+            .unwrap();
+        assert_eq!(count, 0);
+        sqlx::query("DROP TRIGGER restore_failure")
+            .execute(&store.pool)
+            .await
+            .unwrap();
+        store.record_restoration(&receipt).await.unwrap();
+        store.record_restoration(&receipt).await.unwrap();
+        let count: i64 = sqlx::query_scalar("SELECT count(*)FROM pet_outbox")
+            .fetch_one(&store.pool)
+            .await
+            .unwrap();
+        assert_eq!(count, 1);
+        let mut conflict = receipt;
+        conflict.size_bytes += 1;
+        assert!(store.record_restoration(&conflict).await.is_err());
+        store.pool.close().await;
+        std::fs::remove_file(path).unwrap();
+    }
     #[test]
     fn failed_recall_resets_schedule_and_ease_is_bounded() {
         let mut card = Card {

@@ -41,6 +41,8 @@ struct SocketGuard {
     _message: Closure<dyn FnMut(MessageEvent)>,
     _close: Closure<dyn FnMut(CloseEvent)>,
     retry: Rc<RefCell<Option<gloo_timers::callback::Timeout>>>,
+    _presence_poll: gloo_timers::callback::Interval,
+    typing_timer: Rc<RefCell<Option<gloo_timers::callback::Timeout>>>,
 }
 impl Drop for SocketGuard {
     fn drop(&mut self) {
@@ -49,6 +51,7 @@ impl Drop for SocketGuard {
         self.socket.set_onmessage(None);
         self.socket.set_onclose(None);
         self.retry.borrow_mut().take();
+        self.typing_timer.borrow_mut().take();
         let _ = self.socket.close();
     }
 }
@@ -56,12 +59,35 @@ pub fn observe_room(
     room: RwSignal<String>,
     messages: RwSignal<Vec<Value>>,
     error: RwSignal<String>,
+    presence: RwSignal<Vec<Value>>,
+    typing: RwSignal<String>,
+    typing_signal: RwSignal<u32>,
 ) {
+    let outgoing = Rc::new(RefCell::new(None::<WebSocket>));
+    let sender = outgoing.clone();
+    let last_typing = Rc::new(Cell::new(0_f64));
+    Effect::new(move |_| {
+        if typing_signal.get() == 0 {
+            return;
+        }
+        let now = js_sys::Date::now();
+        if now - last_typing.get() < 500.0 {
+            return;
+        }
+        last_typing.set(now);
+        if let Some(socket) = sender.borrow().as_ref()
+            && socket.ready_state() == WebSocket::OPEN
+        {
+            let _ = socket.send_with_str(r#"{"type":"typing"}"#);
+        }
+    });
     let generation = RwSignal::new(0_u32);
     let attempts = Rc::new(Cell::new(0_u32));
     Effect::new(move |_| {
         let _ = generation.get();
         let id = room.get();
+        presence.set(Vec::new());
+        typing.set(String::new());
         if id.is_empty() {
             return;
         }
@@ -76,6 +102,7 @@ pub fn observe_room(
             error.set("無法開啟即時連線".into());
             return;
         };
+        *outgoing.borrow_mut() = Some(socket.clone());
         let s = socket.clone();
         let open = Closure::<dyn FnMut()>::new(move || {
             let _ = s.send_with_str(&json!({"token":""}).to_string());
@@ -85,11 +112,41 @@ pub fn observe_room(
         let active = Rc::new(Cell::new(true));
         let listening = active.clone();
         let failures = attempts.clone();
+        let typing_timer = Rc::new(RefCell::new(None));
+        let timer = typing_timer.clone();
+        let own = Rc::new(RefCell::new(String::new()));
         let message = Closure::<dyn FnMut(MessageEvent)>::new(move |event: MessageEvent| {
+            if !listening.get() || room.get_untracked() != current {
+                return;
+            }
             if let Some(text) = event.data().as_string()
                 && let Ok(value) = serde_json::from_str::<Value>(&text)
             {
                 match value["type"].as_str() {
+                    Some("typing") => {
+                        if value["connection_id"].as_str() != Some(own.borrow().as_str()) {
+                            typing.set("有人正在輸入…".into());
+                            let listening = listening.clone();
+                            *timer.borrow_mut() =
+                                Some(gloo_timers::callback::Timeout::new(2000, move || {
+                                    if listening.get() {
+                                        typing.set(String::new());
+                                    }
+                                }));
+                        }
+                    }
+                    Some("presence") => {
+                        presence.update(|items| {
+                            let id = value["connection_id"].clone();
+                            if value["online"] == true {
+                                if !items.contains(&id) {
+                                    items.push(id);
+                                }
+                            } else {
+                                items.retain(|v| v != &id);
+                            }
+                        });
+                    }
                     Some("message") => messages.update(|items| {
                         if !items.iter().any(|m| m["id"] == value["id"]) {
                             items.push(value.clone());
@@ -99,6 +156,11 @@ pub fn observe_room(
                         }
                     }),
                     Some("ready" | "resync_required") => {
+                        if value["type"] == "ready" {
+                            *own.borrow_mut() =
+                                value["connection_id"].as_str().unwrap_or("").into();
+                            presence.set(value["presence"].as_array().cloned().unwrap_or_default());
+                        }
                         failures.set(0);
                         if ["即時連線中斷，正在重新連線", "連線失敗，請重試"]
                             .contains(&error.get_untracked().as_str())
@@ -123,7 +185,14 @@ pub fn observe_room(
                             }
                         });
                     }
-                    Some("error") => error.set("即時連線驗證失敗".into()),
+                    Some("error") => error.set(
+                        if value["code"] == "connection_quota" {
+                            "連線數已達上限，請關閉其他連線後重試"
+                        } else {
+                            "即時連線驗證失敗"
+                        }
+                        .into(),
+                    ),
                     _ => {}
                 }
             }
@@ -146,6 +215,20 @@ pub fn observe_room(
         });
         socket.set_onclose(Some(close.as_ref().unchecked_ref()));
 
+        let current = id.clone();
+        let live = active.clone();
+        let poll = gloo_timers::callback::Interval::new(5000, move || {
+            let current = current.clone();
+            let live = live.clone();
+            super::spawn(async move {
+                if let Ok(v) = api(&format!("/api/v1/rooms/{current}/presence"), "GET", None).await
+                    && live.get()
+                    && room.get_untracked() == current
+                {
+                    presence.set(v.as_array().cloned().unwrap_or_default());
+                }
+            });
+        });
         let guard = SendWrapper::new(SocketGuard {
             active,
             socket,
@@ -153,6 +236,8 @@ pub fn observe_room(
             _message: message,
             _close: close,
             retry,
+            _presence_poll: poll,
+            typing_timer,
         });
         on_cleanup(move || drop(guard));
     });

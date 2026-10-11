@@ -1,5 +1,5 @@
 //! OpenAI Responses SSE Adapter；只有完整成功的回答會持久化與產生 Outbox。
-use super::{StateData, auth, realtime::RoomEvent};
+use super::{StateData, auth};
 use axum::{
     Json,
     extract::State,
@@ -151,10 +151,6 @@ async fn produce(
                         .persist_as(room_id, &output, "ai", Some(model))
                         .await
                         .map_err(|_| ())?;
-                    let _ = state.events.send(RoomEvent {
-                        room_id: room_id.into(),
-                        payload: json!({"type":"message","id":id,"content":output}),
-                    });
                     sender
                         .send(Ok(Event::default()
                             .event("done")

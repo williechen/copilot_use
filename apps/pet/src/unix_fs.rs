@@ -21,6 +21,12 @@ struct PreparedOperation {
     preview: FilePreview,
     quarantined_file: String,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
+#[serde(deny_unknown_fields)]
+struct RestoreMarker {
+    restore_id: Uuid,
+    restoring: bool,
+}
 fn directory_names(directory: &File) -> Result<Vec<String>, CleanupError> {
     // openat(".") creates an independent directory offset; dup would share it.
     let file = open_at(directory, ".", libc::O_RDONLY | libc::O_DIRECTORY)?;
@@ -115,6 +121,213 @@ fn preview(metadata: Metadata, file_name: &str) -> Result<FilePreview, CleanupEr
     })
 }
 impl PinnedRoot {
+    fn trash_directory(&self) -> Result<File, CleanupError> {
+        let directory = open_at(
+            &self.directory,
+            ".pet-quarantine",
+            libc::O_RDONLY | libc::O_DIRECTORY,
+        )?;
+        let meta = directory.metadata()?;
+        if meta.uid() != unsafe { libc::geteuid() } || meta.mode() & 0o077 != 0 {
+            return Err(CleanupError::UnsafeItem);
+        }
+        Ok(directory)
+    }
+    fn journal(
+        &self,
+        directory: &File,
+        id: Uuid,
+    ) -> Result<(PreparedOperation, Option<Uuid>), CleanupError> {
+        if id.is_nil() {
+            return Err(CleanupError::InvalidName);
+        }
+        let mut file = open_at(directory, &format!("{id}.journal"), libc::O_RDONLY)?;
+        let meta = file.metadata()?;
+        if !meta.is_file()
+            || meta.nlink() != 1
+            || meta.uid() != unsafe { libc::geteuid() }
+            || meta.mode() & 0o077 != 0
+            || meta.len() > 8192
+        {
+            return Err(CleanupError::UnsafeItem);
+        }
+        let mut bytes = Vec::new();
+        (&mut file).take(8193).read_to_end(&mut bytes)?;
+        if bytes.len() > 8192 {
+            return Err(CleanupError::UnsafeItem);
+        }
+        let mut lines = bytes.split(|b| *b == b'\n');
+        let prepared: PreparedOperation =
+            serde_json::from_slice(lines.next().unwrap_or_default()).map_err(io::Error::other)?;
+        if prepared.operation_id != id || prepared.quarantined_file != format!("{id}.item") {
+            return Err(CleanupError::UnsafeItem);
+        }
+        validate_name(&prepared.preview.file_name)?;
+        let mut restore = None;
+        for line in lines {
+            if let Ok(marker) = serde_json::from_slice::<RestoreMarker>(line) {
+                if !marker.restoring || marker.restore_id.is_nil() {
+                    return Err(CleanupError::UnsafeItem);
+                }
+                if restore.is_some_and(|previous| previous != marker.restore_id) {
+                    return Err(CleanupError::UnsafeItem);
+                }
+                restore = Some(marker.restore_id);
+            }
+        }
+        Ok((prepared, restore))
+    }
+    fn is_restored(&self, folder: &File, prepared: &PreparedOperation) -> bool {
+        matches!(open_at(folder,&prepared.quarantined_file,libc::O_RDONLY),Err(CleanupError::Io(ref e))if e.kind()==io::ErrorKind::NotFound)
+            && self
+                .preview(&prepared.preview.file_name)
+                .is_ok_and(|actual| actual == prepared.preview)
+    }
+    pub fn trash(&self) -> Result<Vec<crate::TrashEntry>, CleanupError> {
+        let folder = match self.trash_directory() {
+            Ok(v) => v,
+            Err(CleanupError::Io(e)) if e.kind() == io::ErrorKind::NotFound => {
+                return Ok(Vec::new());
+            }
+            Err(e) => return Err(e),
+        };
+        let mut entries = Vec::new();
+        for filename in directory_names(&folder)? {
+            let Some(id) = filename
+                .strip_suffix(".journal")
+                .and_then(|s| Uuid::parse_str(s).ok())
+            else {
+                continue;
+            };
+            let Ok((record, restore)) = self.journal(&folder, id) else {
+                continue;
+            };
+            let available = open_at(&folder, &record.quarantined_file, libc::O_RDONLY)
+                .and_then(|f| preview(f.metadata()?, &record.preview.file_name))
+                .is_ok_and(|p| p == record.preview);
+            let restored = restore.is_some() && self.is_restored(&folder, &record);
+            if available || restored {
+                entries.push(crate::TrashEntry {
+                    operation_id: id,
+                    file_name: record.preview.file_name,
+                    size_bytes: record.preview.size_bytes,
+                    restored,
+                });
+            }
+        }
+        Ok(entries)
+    }
+    pub fn restore(&self, id: Uuid) -> Result<crate::RestoreReceipt, CleanupError> {
+        let folder = self.trash_directory()?;
+        // CLOEXEC descriptors may briefly remain shared with a concurrent fork.
+        // Wait a bounded interval for transient contention, never hold a GUI worker indefinitely.
+        let deadline = std::time::Instant::now() + std::time::Duration::from_millis(500);
+        loop {
+            if unsafe { libc::flock(folder.as_raw_fd(), libc::LOCK_EX | libc::LOCK_NB) } == 0 {
+                break;
+            }
+            let error = io::Error::last_os_error();
+            if error.kind() != io::ErrorKind::WouldBlock || std::time::Instant::now() >= deadline {
+                return Err(error.into());
+            }
+            std::thread::sleep(std::time::Duration::from_millis(1));
+        }
+        let (record, previous) = self.journal(&folder, id)?;
+        if let Some(restore_id) = previous
+            && self.is_restored(&folder, &record)
+        {
+            return Ok(crate::RestoreReceipt {
+                operation_id: restore_id,
+                quarantine_operation_id: id,
+                size_bytes: record.preview.size_bytes,
+            });
+        }
+        let captured = open_at(&folder, &record.quarantined_file, libc::O_RDONLY)?;
+        if preview(captured.metadata()?, &record.preview.file_name)? != record.preview {
+            return Err(CleanupError::Changed);
+        }
+        let restore_id = previous.unwrap_or_else(Uuid::new_v4);
+        let mut journal = open_at(
+            &folder,
+            &format!("{id}.journal"),
+            libc::O_WRONLY | libc::O_APPEND,
+        )?;
+        let meta = journal.metadata()?;
+        if !meta.is_file()
+            || meta.nlink() != 1
+            || meta.uid() != unsafe { libc::geteuid() }
+            || meta.mode() & 0o077 != 0
+        {
+            return Err(CleanupError::UnsafeItem);
+        }
+        if previous.is_none() {
+            journal.write_all(
+                &serde_json::to_vec(&RestoreMarker {
+                    restore_id,
+                    restoring: true,
+                })
+                .map_err(io::Error::other)?,
+            )?;
+            journal.write_all(b"\n")?;
+            journal.sync_all()?;
+        }
+        rename(
+            &folder,
+            &record.quarantined_file,
+            &self.directory,
+            &record.preview.file_name,
+        )?;
+        if !self
+            .preview(&record.preview.file_name)
+            .is_ok_and(|actual| actual == record.preview)
+        {
+            if rename(
+                &self.directory,
+                &record.preview.file_name,
+                &folder,
+                &record.quarantined_file,
+            )
+            .is_err()
+            {
+                return Err(CleanupError::RecoveryRequired(id));
+            }
+            return Err(CleanupError::Changed);
+        }
+        self.directory.sync_all()?;
+        folder.sync_all()?;
+        journal.write_all(b"{\"restored\":true}\n")?;
+        journal.sync_all()?;
+        Ok(crate::RestoreReceipt {
+            operation_id: restore_id,
+            quarantine_operation_id: id,
+            size_bytes: record.preview.size_bytes,
+        })
+    }
+    pub fn restored_receipts(&self) -> Result<Vec<crate::RestoreReceipt>, CleanupError> {
+        let folder = match self.trash_directory() {
+            Ok(v) => v,
+            Err(CleanupError::Io(e)) if e.kind() == io::ErrorKind::NotFound => {
+                return Ok(Vec::new());
+            }
+            Err(e) => return Err(e),
+        };
+        let mut receipts = Vec::new();
+        for item in self.trash()? {
+            if !item.restored {
+                continue;
+            }
+            let (_, Some(restore_id)) = self.journal(&folder, item.operation_id)? else {
+                continue;
+            };
+            receipts.push(crate::RestoreReceipt {
+                operation_id: restore_id,
+                quarantine_operation_id: item.operation_id,
+                size_bytes: item.size_bytes,
+            });
+        }
+        Ok(receipts)
+    }
+
     pub fn scan(&self) -> Result<Vec<FilePreview>, CleanupError> {
         let mut result = Vec::new();
         for name in directory_names(&self.directory)? {

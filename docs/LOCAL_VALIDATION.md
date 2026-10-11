@@ -1,16 +1,16 @@
-# 本地驗證紀錄（2026-10-11）
+# 本地驗證紀錄（2026-10-12）
 
 **P9 未完成。** 使用者取消正式部署；不建立正式完成 Release/Tag，不產生 Day 教學。`rust_ai_chat` 未修改。
 
 ## 基準與證據範圍
 
-起點 `26f25f62e5ade7538b19c5643df71f9e06f609d1`。已提交 `7bb8fc98465390d0173e2d53a6730713073627c3` 的六項 CI 全通過：Rust/PostgreSQL、Docker Compose E2E、本地故障恢復、Linux deb/GUI、macOS app、Windows NSIS。MCP/Agent、journal、租約、觀測 transport 與建議流程已提交 `5be001d06e9da1a00ebe336b8f529d37d909b1d2`。本地 46 個 workspace 測試、54 項整合檢查通過；其 CI 的 macOS variadic mode 型別錯誤已定位，後續修正仍需新 SHA CI。不得沿用舊提交結果。
+起點 `26f25f62e5ade7538b19c5643df71f9e06f609d1`。已提交 `7bb8fc98465390d0173e2d53a6730713073627c3` 的六項 CI 全通過：Rust/PostgreSQL、Docker Compose E2E、本地故障恢復、Linux deb/GUI、macOS app、Windows NSIS。MCP/Agent、journal、租約、觀測 transport 與建議流程已提交 `5be001d06e9da1a00ebe336b8f529d37d909b1d2`。最新本地基礎、真實 OpenAI/Persona/Pet GUI 整合通過；`990f703` 的 macOS 型別修正與六項 CI 已通過，新增功能仍須新 SHA CI。不得沿用舊提交結果。
 
 唯讀需求基準 `rust_ai_chat` SHA `fdc74c1ee244cf86df3fd1c427d893d2956f6211`，以及 Notion 共同主頁與三產品需求頁。本地 Rust/Cargo 1.99.0、PostgreSQL 18.6、pgvector 0.8.7、Node 22.22.1、Trunk 0.21.14、Tauri CLI 2.11.5。依賴版本固定於各 workspace 的 Cargo.lock。
 
 ## 已實際通過
 
-- `scripts/local-verify.py`：fmt、嚴格 Clippy、46 個 workspace 測試；全新隔離 DB migrations、兩個 non-superuser role 的 DB 隔離、HTTP/WS、精確訊息 ID 的跨服務事件、來源 token 與 schema 拒絕、Session/ACL/CSRF/邀請/登出、重啟冪等、服務與 DB 中斷恢復、pg_dump/restore 逐列核對。
+- `scripts/local-verify.py`：fmt、嚴格 Clippy、48 個 workspace 測試；全新隔離 DB migrations、兩個 non-superuser role 的 DB 隔離、HTTP/WS、精確訊息 ID 的跨服務事件、來源 token 與 schema 拒絕、Session/ACL/CSRF/邀請/登出、重啟冪等、服務與 DB 中斷恢復、pg_dump/restore 逐列核對。
 - Chat/Pet OpenAI 真實 `gpt-5.6-luna` 對話串流完成與持久化；Chat 真實 embedding → pgvector 檢索 → RAG 回覆 → Outbox/Analytics，以及知識文件刪除。生圖使用 Responses 的 image_generation tool，實際 PNG 與 SQLite 快取已驗證；不是 placeholder。
 - Chat 真實 Function Calling → MCP 2026-07-28 → owner-scoped pgvector → Strict JSON → 完整回答/Outbox/Analytics 已通過；確認測試代碼 COMET-432 與引用文件。MCP discovery、header mismatch、Origin 與未知工具拒絕皆以真實 HTTP 驗證。
 - Chat cursor API 按 `(created_at,id)` 提供最多 100 筆的早期訊息，拒絕不屬於房間的 cursor；UI 可載入舊訊息且最多 1000 筆。WS 全服務最多 128 連線，cookie Session/ACL 在事件送出前、typing 前與每五秒重新驗證。真實 RFC6455 cookie 測試確認登出後連線關閉，後續私人訊息不會送到被撤銷的 session。
@@ -31,15 +31,15 @@
 
 | 範圍 | 必須補齊 |
 |---|---|
-| Chat 即時產品 | presence snapshot、typing UI、每使用者連線配額與更完整資源限制、跨程序 fan-out；reload 後不保存未送出私人內容 |
-| Chat AI | 多 Persona orchestration、AI-to-AI speaker selection/turn budget/cooldown/context/memory、多 Persona 的工具/結構輸出整合與品質驗收 |
+| Chat 即時產品 | presence/typing/跨程序 fan-out 已以兩個 Chat 程序驗證；仍需更完整負載與故障界線、瀏覽器互動驗收 |
+| Chat AI | Persona CRUD/房主權限、八角色上限、輪流發言/冷卻/取消/獨立記憶/180秒時限/請求預算/Strict JSON/MCP 引用已實作；真實雙角色、重送、預算停止、COMET-432 工具引用及原子交易通過。瀏覽器 Persona 互動尚須驗收 |
 | 共同 AI | Chat/Pet 的本地唯讀 MCP/Agent 已驗證；更多工具、完整權限及品質驗收仍缺 |
-| Pet 完整互動 | 多動作動畫選擇、主動互動與更完整學習適應；外觀/動畫覆寫與記憶編輯、成功/困難/忘記複習選項已加入 UI，覆寫/編輯真實 GUI 已驗證 |
-| Pet 檔案安全 | Trash/restore、Windows 安全 Adapter、macOS/Windows 完整 GUI 執行與故障邊界 |
-| Pet 投遞與備份 | SQLite/asset 備份還原與更完整故障矩陣；租約/CAS、人工重試與 GUI 跨產品 E2E 已實測 |
-| Analytics | 登入等完整事件目錄、AI 摘要數字/語義的更完整 grounding 驗收、長期追蹤；新洞察/審核/採用/回退/描述性比較已本地實測，Dashboard 新控制尚需瀏覽器操作驗證 |
-| 安全/維運 | 四份 Cargo.lock RustSec 掃描沒有已知漏洞，但 paste/proc-macro-error 有未維護警告；Native glib 0.18.5 有 RUSTSEC-2024-0429 unsoundness 警告；仍需負載/滲透/金鑰輪替、Session 濫用控制、全部故障邊界、UUID/VARCHAR 雙模式驗證 |
-| Docker/CI/安裝 | 本機無 Docker/Podman；更新後 Compose/UI/pgvector 配置仍需新 SHA CI。`7bb8fc9` 六項 CI 全通過，含三平台包建置；最新變更仍須其新 SHA CI。updater、Windows/macOS runtime 全驗收尚缺 |
+| Pet 完整互動 | 四種動畫列、三種速度、每寵物持久設定與 GUI 操作已通過。預設關閉的本地到期題提醒有跨程序一小時冷卻；AI 使用實際複習摘要調整提示，真實串流通過。更完整的主動提醒顯示仍須驗收 |
+| Pet 檔案安全 | Linux/macOS descriptor-based Trash/restore 已實作，Linux 真實 GUI/SQLite/Analytics 已驗證；Windows handle-relative NT Adapter 已實作並通過 Windows 目標交叉編譯；macOS/Windows 的實際安全/完整 GUI 與故障驗證等待新 CI |
+| Pet 投遞與備份 | SQLite online snapshot 含資料與生成素材；SHA256/schema/integrity 檢查、交易還原、操作前快照、保留新增寵物/現有投遞/檔案收據已通過 unit 與真實 GUI；還原故障回滾仍須補驗 |
+| Analytics | 登入/登出與還原事件已加入，仍需核對其他完整事件目錄、AI 只選擇快照事實索引，服務產生一至三句可核對摘要；索引、數字及目標邊界 unit 通過，新的真實 OpenAI grounding 待驗、長期追蹤；新洞察/審核/採用/回退/描述性比較已本地實測，Dashboard 新控制尚需瀏覽器操作驗證 |
+| 安全/維運 | 四份 Cargo.lock RustSec 掃描沒有已知漏洞，但 paste/proc-macro-error 有未維護警告；Native glib 0.18.5 的 RUSTSEC-2024-0429 已回移官方修補並以 release 測試；版本警告與回移證據需一起核對；仍需負載/滲透/金鑰輪替、Session 濫用控制、全部故障邊界、UUID/VARCHAR 雙模式驗證 |
+| Docker/CI/安裝 | Docker 29.1.3 與 Compose 2.40.3 的實際 release image 建置及16項容器整合成功；舊映像來源工作樹 dirty，新增功能仍須固定來源 SHA 後重建驗證。`990f703` 六項 CI 全通過，含三平台包建置；新的回收區/fan-out/事件/安全回移仍須新 SHA CI。本地 updater 的真實簽章下載、版本不符/套件篡改/遠端URL/未确认安装拒絕通過；實際更新安裝與 Windows/macOS runtime 全驗收尚缺 |
 | 最終固定 | 所有必要功能通過後才可正式 release/tag；目前未達門檻 |
 
 ## 清理範圍
@@ -48,6 +48,12 @@
 
 新增階段證據不代表完整 P9。測試矩陣和未完成清單仍是 Release/Tag 門檻。
 
-RustSec 的 glib 問題修補於 >=0.20.0；目前 Tauri/GTK3 依賴仍使用 0.18.5，尚未完成相容升級或回移修補，不能宣稱安全驗收完成。來源：[RustSec advisory](https://rustsec.org/advisories/RUSTSEC-2024-0429.html)。
+RustSec 的 glib 問題修補於 >=0.20.0；目前 Tauri/GTK3 依賴仍使用 0.18.5，已將官方 `let mut p`/`&mut p` 修正回移到 MIT 相容來源 `vendor/glib-0.18.5`；所有受影響 iterator 方法的 release regression 通過，並加入 CI；其餘相容升級與完整安全驗收尚未完成，不能宣稱安全驗收完成。來源：[RustSec advisory](https://rustsec.org/advisories/RUSTSEC-2024-0429.html)。
 
 清理紀錄：已移除任務暫存發布 payload、過時 fixture/進度檔、舊測試庫及重複日誌；移除可重建增量編譯快取，保留 source/lock/migration/有效證據與唯讀參考 clone。
+
+新增已測功能：
+- 私人回收區 list/確認 restore/NOREPLACE/身份核對/跨程序 flock；journal 還原收據與 SQLite 事件同交易，重送及重啟不重複計數。實際 GUI 操作還原 sample.txt，Analytics 精確一筆 `file.restore.succeeded`。
+- Chat 以 transaction PG NOTIFY 的 message ID 跨程序通知，讀取 canonical DB content；兩個獨立程序驗證訊息與 typing 隔離、presence snapshot。每人 32／全系統 512／每程序 128 連線上限；presence lease 20 秒，每五秒續租，關閉後移除。
+- Session 成功建立/撤銷與登入/登出 Outbox 同交易；事件只有原四欄位，不帶帳號或 cookie。實際跨服務匿名事件通過。
+- 相容 GLib 安全回移保留 MIT 授權與來源；不修改全域 Cargo registry，也不以忽略 advisory 代替安全證據。

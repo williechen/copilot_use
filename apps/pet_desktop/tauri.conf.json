@@ -47,5 +47,13 @@
       "generated-icons/icon.ico",
       "generated-icons/icon.icns"
     ]
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "",
+      "endpoints": [],
+      "dangerousInsecureTransportProtocol": true,
+      "requireSignedVersion": true
+    }
   }
 }

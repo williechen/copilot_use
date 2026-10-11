@@ -92,3 +92,13 @@ python3 scripts/local-verify.py --live-insights --pet-gui
 Pet 的記憶工具使用同一 executable 的 `--mcp-once` readonly SQLite stdio 模式；只有所選寵物的資料可見，子程序不繼承 API key。MCP 支援範圍為上述本地唯讀工具，不代表任意第三方 MCP server 相容。
 
 Chat history 可傳 `before=<message UUID>`，最多 100 筆；UI 最多保留 1000 筆。WebSocket 全服務最多 128 連線，登出/Session 到期/ACL 失效會拒絕後續資料並關閉連線；idle 每五秒檢查。跨程序 fan-out 和更完整配額仍是未完成事項。
+
+## 本地備份、角色對話與更新
+
+Pet 的「本地備份與還原」會把生成素材一併存入 SQLite 快照，還原前另外保留目前快照。恢復快照中的寵物資料，保留後來新增的寵物、投遞事件與檔案操作收據；不移動授權目錄中的檔案。每個快照需符合 SHA256、SQLite integrity 與当前 migration checksums。
+
+Chat 房主可保存最多八個 Persona，明確確認後開始有界對話。每次輸出最多512 tokens；一般輪次保留512，工具輪次保留1024（最多兩次請求、一個唯讀檢索工具），最多八輪及180秒；失敗嘗試仍消耗保留預算。完成輪次與記憶、訊息、Outbox 同交易；取消保留已完成輪次。
+
+本地 updater 使用 `PET_UPDATE_ENDPOINT`（numeric loopback HTTP/HTTPS）與 `PET_UPDATE_PUBLIC_KEY`（可信公鑰）。下載網址必須與 channel 同 origin，停用 proxy/redirect，最多256 MiB。簽章必須包含與公告相同的版本；用 `cargo tauri signer sign --app-version VERSION`。GUI 先檢查、下載驗證，再明確確認安裝；先建立資料快照。Linux 自動更新需 AppImage 安裝格式；deb 使用套件管理器更新。測試公鑰/私鑰不等於正式發行簽章，不提交私鑰。
+
+`python3 scripts/pet-gui-verify.py --updater` 使用一次性私鑰與本機 fixture，實測簽章、版本不符、篡改與 URL 邊界，不以此宣稱已驗證三平台更新安裝。Docker 建置以 `COPILOT_BUILD_SHA=$(git rev-parse HEAD)` 設定映像來源 label，驗證報告記錄 image ID 與來源工作樹狀態。

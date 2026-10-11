@@ -9,3 +9,8 @@ target
 **/dist
 **/gen
 *.sqlite*
+
+**/*.sqlite*
+**/generated-icons
+**/.env
+**/.env.*

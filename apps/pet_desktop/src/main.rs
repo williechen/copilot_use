@@ -1,4 +1,5 @@
 //! Tauri Adapter：只暴露受型別限制的 Profile／Memory／Review 指令。
+mod updater;
 use day9_pet::{
     profile::PetProfile,
     state::{Card, Memory, PetItem, PetStore},
@@ -144,6 +145,87 @@ async fn rollback_analytics_suggestion(
     Ok(receipt)
 }
 
+#[tauri::command]
+async fn create_snapshot(
+    state: State<'_, DesktopState>,
+) -> Result<day9_pet::backup::Snapshot, String> {
+    state
+        .store
+        .create_snapshot()
+        .await
+        .map_err(|_| "無法建立 SQLite 與素材快照".into())
+}
+#[tauri::command]
+fn list_snapshots(
+    state: State<'_, DesktopState>,
+) -> Result<Vec<day9_pet::backup::Snapshot>, String> {
+    state
+        .store
+        .snapshots()
+        .map_err(|_| "無法讀取備份清單".into())
+}
+#[tauri::command]
+async fn restore_snapshot(
+    app: tauri::AppHandle,
+    state: State<'_, DesktopState>,
+    id: Uuid,
+    confirmed: bool,
+) -> Result<day9_pet::backup::Snapshot, String> {
+    let before = state
+        .store
+        .restore_snapshot(id, confirmed)
+        .await
+        .map_err(|_| "快照確認、完整性、相容性檢查或還原失敗；目前資料仍保留".to_owned())?;
+    let _ = app.emit("active-pet-changed", ());
+    Ok(before)
+}
+#[tauri::command]
+async fn interaction(
+    state: State<'_, DesktopState>,
+    pet: Uuid,
+) -> Result<day9_pet::interaction::Interaction, String> {
+    state
+        .store
+        .interaction(pet)
+        .await
+        .map_err(|_| "無法讀取互動設定".into())
+}
+#[tauri::command]
+async fn set_interaction(
+    app: tauri::AppHandle,
+    state: State<'_, DesktopState>,
+    pet: Uuid,
+    preferences: day9_pet::interaction::Interaction,
+) -> Result<(), String> {
+    state
+        .store
+        .set_interaction(pet, &preferences)
+        .await
+        .map_err(|_| "無法保存互動設定".to_owned())?;
+    app.emit("active-pet-changed", ())
+        .map_err(|_| "無法更新動畫".into())
+}
+#[tauri::command]
+async fn learning_summary(
+    state: State<'_, DesktopState>,
+    pet: Uuid,
+) -> Result<day9_pet::interaction::LearningSummary, String> {
+    state
+        .store
+        .learning_summary(pet)
+        .await
+        .map_err(|_| "無法讀取複習摘要".into())
+}
+#[tauri::command]
+async fn recall_prompt(
+    state: State<'_, DesktopState>,
+) -> Result<Option<serde_json::Value>, String> {
+    state
+        .store
+        .recall_prompt()
+        .await
+        .map_err(|_| "無法讀取回想提醒".into())
+}
 #[tauri::command]
 async fn list_pets(state: State<'_, DesktopState>) -> Result<Vec<PetItem>, String> {
     state.store.pets().await.map_err(|_| "無法讀取寵物".into())
@@ -401,6 +483,67 @@ async fn recover_cleanup_receipts(
     .await
 }
 #[tauri::command]
+fn list_trash(state: State<'_, DesktopState>) -> Result<Vec<day9_pet::TrashEntry>, String> {
+    state
+        .authorized_root()?
+        .trash()
+        .map_err(|_| "無法安全核對回收區".into())
+}
+#[tauri::command]
+async fn restore_file(
+    state: State<'_, DesktopState>,
+    id: Uuid,
+    confirmed: bool,
+) -> Result<day9_pet::RestoreReceipt, String> {
+    if !confirmed {
+        return Err("尚未確認還原".into());
+    }
+    copilot_telemetry::observe("pet.file.restore", async {
+        let root = state.authorized_root()?;
+        let entry = root
+            .trash()
+            .map_err(|_| "無法核對回收區")?
+            .into_iter()
+            .find(|item| item.operation_id == id)
+            .ok_or("項目不存在或身份已改變")?;
+        let original = day9_pet::CleanupReceipt {
+            operation_id: id,
+            quarantined_file: format!("{id}.item"),
+            size_bytes: entry.size_bytes,
+        };
+        state
+            .store
+            .record_cleanup(&original, &original.event())
+            .await
+            .map_err(|_| "無法保存原隔離收據")?;
+        let receipt = root.confirm_restore(id, true).map_err(|e| e.to_string())?;
+        state
+            .store
+            .record_restoration(&receipt)
+            .await
+            .map_err(|_| format!("檔案已還原，請復原還原收據：{}", receipt.operation_id))?;
+        Ok(receipt)
+    })
+    .await
+}
+#[tauri::command]
+async fn recover_restore_receipts(
+    state: State<'_, DesktopState>,
+) -> Result<Vec<day9_pet::RestoreReceipt>, String> {
+    let root = state.authorized_root()?;
+    let receipts = root
+        .restored_receipts()
+        .map_err(|_| "無法安全核對還原紀錄")?;
+    for receipt in &receipts {
+        state
+            .store
+            .record_restoration(receipt)
+            .await
+            .map_err(|_| "仍無法保存還原事件")?;
+    }
+    Ok(receipts)
+}
+#[tauri::command]
 async fn outbox_status(state: State<'_, DesktopState>) -> Result<serde_json::Value, String> {
     state
         .store
@@ -492,6 +635,8 @@ fn main() {
         std::process::exit(1);
     }
     tauri::Builder::default()
+        .plugin(tauri_plugin_updater::Builder::new().build())
+        .manage(updater::Updates::new())
         .on_page_load(|webview, payload| {
             if webview.label() == "main"
                 && cfg!(debug_assertions)
@@ -500,6 +645,9 @@ fn main() {
             {
                 if std::env::var("PET_GUI_TEST_AI").as_deref() == Ok("true") {
                     let _ = webview.eval("window.__PET_TEST_LIVE_AI=true;");
+                }
+                if std::env::var("PET_GUI_TEST_UPDATER").as_deref() == Ok("true") {
+                    let _ = webview.eval("window.__PET_TEST_UPDATER=true;");
                 }
                 if std::env::var("PET_GUI_TEST_IMAGE").as_deref() == Ok("true") {
                     let _ = webview.eval("window.__PET_TEST_LIVE_IMAGE=true;");
@@ -568,6 +716,16 @@ fn main() {
         })
         .invoke_handler(tauri::generate_handler![
             list_pets,
+            updater::check_local_update,
+            updater::verify_local_update,
+            updater::install_local_update,
+            create_snapshot,
+            list_snapshots,
+            restore_snapshot,
+            interaction,
+            set_interaction,
+            learning_summary,
+            recall_prompt,
             save_profile,
             list_memories,
             save_memory,
@@ -592,6 +750,9 @@ fn main() {
             scan_file_preview,
             confirm_cleanup,
             recover_cleanup_receipts,
+            list_trash,
+            restore_file,
+            recover_restore_receipts,
             outbox_status,
             requeue_failed_events
         ])

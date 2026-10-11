@@ -169,7 +169,7 @@ impl PetStore {
         let mut tx = self.pool.begin().await?;
         for (role, text) in [("user", question), ("assistant", answer)] {
             sqlx::query(
-                "INSERT INTO conversations(id,pet_id,role,content,created_at) VALUES (?,?,?,?,?)",
+                "INSERT INTO conversations(id,pet_id,role,content,created_at,ordinal) VALUES (?1,?2,?3,?4,?5,(SELECT COALESCE(MAX(ordinal),0)+1 FROM conversations WHERE pet_id=?2))",
             )
             .bind(Uuid::new_v4().to_string())
             .bind(pet.to_string())

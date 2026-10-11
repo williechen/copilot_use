@@ -36,6 +36,7 @@ services:
     build:
       context: .
       target: analytics
+      args: {COPILOT_BUILD_SHA: "${COPILOT_BUILD_SHA:-unversioned}"}
     environment:
       ANALYTICS_DATABASE_URL: postgres://analytics_user:${ANALYTICS_DB_PASSWORD:?set ANALYTICS_DB_PASSWORD}@analytics-db:5432/analytics_db
       ANALYTICS_API_TOKEN: ${ANALYTICS_API_TOKEN:?set ANALYTICS_API_TOKEN}
@@ -43,15 +44,31 @@ services:
       ANALYTICS_CHAT_TOKEN: ${ANALYTICS_CHAT_TOKEN:?set ANALYTICS_CHAT_TOKEN}
       ANALYTICS_PET_TOKEN: ${ANALYTICS_PET_TOKEN:?set ANALYTICS_PET_TOKEN}
       ANALYTICS_LISTEN: 0.0.0.0:3100
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_CHAT_MODEL: ${OPENAI_CHAT_MODEL:-gpt-5.6-luna}
     depends_on:
       analytics-db: {condition: service_healthy}
     networks: [backend]
     ports: ["127.0.0.1:3100:3100"]
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "--silent", "--output", "/dev/null", "http://127.0.0.1:3100/healthz"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 15s
     restart: unless-stopped
+    read_only: true
+    tmpfs: ["/tmp:size=16m,mode=1777"]
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    pids_limit: 128
+    mem_limit: 512m
+    cpus: 2
   chat:
     build:
       context: .
       target: chat
+      args: {COPILOT_BUILD_SHA: "${COPILOT_BUILD_SHA:-unversioned}"}
     environment:
       CHAT_DATABASE_URL: postgres://chat_user:${CHAT_DB_PASSWORD:?set CHAT_DB_PASSWORD}@chat-db:5432/chat_db
       CHAT_API_TOKEN: ${CHAT_API_TOKEN:?set CHAT_API_TOKEN}
@@ -64,10 +81,23 @@ services:
       OPENAI_EMBEDDING_MODEL: ${OPENAI_EMBEDDING_MODEL:-text-embedding-3-small}
     depends_on:
       chat-db: {condition: service_healthy}
-      analytics: {condition: service_started}
+      analytics: {condition: service_healthy}
     ports: ["127.0.0.1:3001:3001"]
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "--silent", "--output", "/dev/null", "http://127.0.0.1:3001/healthz"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 15s
     networks: [backend]
     restart: unless-stopped
+    read_only: true
+    tmpfs: ["/tmp:size=16m,mode=1777"]
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    pids_limit: 128
+    mem_limit: 512m
+    cpus: 2
 networks:
   backend:
     internal: false

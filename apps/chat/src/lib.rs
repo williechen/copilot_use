@@ -44,31 +44,82 @@ impl ChatWriter {
         if id.is_nil() {
             return Err(sqlx::Error::Protocol("invalid message id".into()));
         }
-        let event = ProductEvent::chat_message_persisted(id);
         let mut tx = self.pool.begin().await?;
+        let result = Self::stage(&mut tx, id, room_id, content, author_kind, author_id).await?;
+        tx.commit().await?;
+        Ok(result)
+    }
+    async fn stage(
+        tx: &mut sqlx::Transaction<'_, sqlx::Postgres>,
+        id: Uuid,
+        room_id: &str,
+        content: &str,
+        author_kind: &str,
+        author_id: Option<&str>,
+    ) -> Result<(Uuid, bool), sqlx::Error> {
+        let event = ProductEvent::chat_message_persisted(id);
         let inserted = sqlx::query("INSERT INTO chat_messages(id, room_id, content, author_kind, author_id) VALUES ($1,$2,$3,$4,$5) ON CONFLICT (id) DO NOTHING")
             .bind(id)
             .bind(room_id)
             .bind(content)
             .bind(author_kind)
             .bind(author_id)
-            .execute(&mut *tx)
+            .execute(&mut **tx)
             .await?.rows_affected() == 1;
         if !inserted {
             let matches: bool = sqlx::query_scalar("SELECT room_id=$2 AND content=$3 AND author_kind=$4 AND author_id IS NOT DISTINCT FROM $5 FROM chat_messages WHERE id=$1")
                 .bind(id).bind(room_id).bind(content).bind(author_kind).bind(author_id)
-                .fetch_one(&mut *tx).await?;
+                .fetch_one(&mut **tx).await?;
             if !matches {
                 return Err(sqlx::Error::Protocol("message id conflict".into()));
             }
-            tx.commit().await?;
             return Ok((id, false));
         }
         sqlx::query("INSERT INTO chat_outbox(event_id,message_id,schema_version,source_app,event_type,traceparent) VALUES ($1,$2,$3,$4,$5,$6)")
             .bind(event.event_id).bind(id).bind(i16::try_from(event.schema_version).unwrap())
-            .bind(event.source_app).bind(event.event_type).bind(copilot_telemetry::outgoing_headers().get("traceparent")).execute(&mut *tx).await?;
-        tx.commit().await?;
+            .bind(event.source_app).bind(event.event_type).bind(copilot_telemetry::outgoing_headers().get("traceparent")).execute(&mut **tx).await?;
+        sqlx::query("SELECT pg_notify('copilot_chat_realtime',$1)")
+            .bind(serde_json::json!({"type":"message","id":id,"room_id":room_id}).to_string())
+            .execute(&mut **tx)
+            .await?;
         Ok((id, true))
+    }
+    pub async fn persist_persona_turn(
+        &self,
+        room: &str,
+        persona: Uuid,
+        revision: i64,
+        run: Uuid,
+        lease: Uuid,
+        turn: &serde_json::Value,
+    ) -> Result<Uuid, sqlx::Error> {
+        let answer = turn["answer"]
+            .as_str()
+            .filter(|s| !s.trim().is_empty() && s.len() <= 65536)
+            .ok_or_else(|| sqlx::Error::Protocol("invalid persona answer".into()))?;
+        let memory = turn["memory"]
+            .as_str()
+            .filter(|s| s.len() <= 2048)
+            .ok_or_else(|| sqlx::Error::Protocol("invalid persona memory".into()))?;
+        let mut tx = self.pool.begin().await?;
+        let valid:bool=sqlx::query_scalar("SELECT EXISTS(SELECT 1 FROM chat_ai_room_locks WHERE room_id=$1 AND lease_token=$2 AND expires_at>now())").bind(room).bind(lease).fetch_one(&mut *tx).await?;
+        if !valid {
+            return Err(sqlx::Error::Protocol("persona lease expired".into()));
+        }
+        let id = Uuid::new_v4();
+        let mut record = turn.clone();
+        record["message_id"] = serde_json::json!(id);
+        let updated=sqlx::query("UPDATE chat_persona_runs SET result=result||jsonb_build_array($2::jsonb),updated_at=now() WHERE id=$1 AND room_id=$3 AND status='running' AND jsonb_array_length(result)<max_turns AND reserved_tokens>=512*(jsonb_array_length(result)+1)").bind(run).bind(&record).bind(room).execute(&mut *tx).await?;
+        if updated.rows_affected() != 1 {
+            return Err(sqlx::Error::Protocol("persona run stopped".into()));
+        }
+        let updated=sqlx::query("UPDATE chat_personas SET memory=$1,last_spoke_at=now() WHERE id=$2 AND room_id=$3 AND revision=$4 AND enabled").bind(memory).bind(persona).bind(room).bind(revision).execute(&mut *tx).await?;
+        if updated.rows_affected() != 1 {
+            return Err(sqlx::Error::Protocol("persona changed".into()));
+        }
+        Self::stage(&mut tx, id, room, answer, "ai", Some(&persona.to_string())).await?;
+        tx.commit().await?;
+        Ok(id)
     }
 }
 
@@ -222,6 +273,88 @@ pub async fn run_dispatcher(
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[sqlx::test(migrations = "./migrations")]
+    async fn persona_memory_message_event_and_run_commit_only_with_current_authority(pool: PgPool) {
+        let persona = Uuid::new_v4();
+        let run = Uuid::new_v4();
+        let lease = Uuid::new_v4();
+        sqlx::query("INSERT INTO chat_rooms(id,name)VALUES('persona-test','Test')")
+            .execute(&pool)
+            .await
+            .unwrap();
+        sqlx::query("INSERT INTO chat_personas(id,room_id,name,instructions)VALUES($1,'persona-test','Coach','Teach')").bind(persona).execute(&pool).await.unwrap();
+        sqlx::query(
+            "INSERT INTO chat_ai_room_locks VALUES('persona-test',$1,now()+interval '5 minutes')",
+        )
+        .bind(lease)
+        .execute(&pool)
+        .await
+        .unwrap();
+        sqlx::query("INSERT INTO chat_persona_runs(id,room_id,parameters,status,max_turns,max_output_budget,reserved_tokens)VALUES($1,'persona-test','{}','running',1,512,512)").bind(run).execute(&pool).await.unwrap();
+        let writer = ChatWriter::new(pool.clone());
+        let turn = serde_json::json!({"answer":"Complete answer","memory":"bounded memory"});
+        assert!(
+            writer
+                .persist_persona_turn("persona-test", persona, 99, run, lease, &turn)
+                .await
+                .is_err()
+        );
+        assert_eq!(
+            sqlx::query_scalar::<_, i64>("SELECT count(*) FROM chat_messages")
+                .fetch_one(&pool)
+                .await
+                .unwrap(),
+            0
+        );
+        assert_eq!(
+            sqlx::query_scalar::<_, serde_json::Value>("SELECT result FROM chat_persona_runs")
+                .fetch_one(&pool)
+                .await
+                .unwrap(),
+            serde_json::json!([])
+        );
+        assert!(
+            writer
+                .persist_persona_turn("persona-test", persona, 0, run, Uuid::new_v4(), &turn)
+                .await
+                .is_err()
+        );
+        let id = writer
+            .persist_persona_turn("persona-test", persona, 0, run, lease, &turn)
+            .await
+            .unwrap();
+        assert_eq!(
+            sqlx::query_scalar::<_, String>("SELECT memory FROM chat_personas")
+                .fetch_one(&pool)
+                .await
+                .unwrap(),
+            "bounded memory"
+        );
+        assert_eq!(
+            sqlx::query_scalar::<_, i64>("SELECT count(*) FROM chat_outbox WHERE event_id=$1")
+                .bind(id)
+                .fetch_one(&pool)
+                .await
+                .unwrap(),
+            1
+        );
+        assert!(
+            writer
+                .persist_persona_turn("persona-test", persona, 0, run, lease, &turn)
+                .await
+                .is_err()
+        );
+        sqlx::query("UPDATE chat_persona_runs SET status='cancelled'")
+            .execute(&pool)
+            .await
+            .unwrap();
+        assert!(
+            writer
+                .persist_persona_turn("persona-test", persona, 0, run, lease, &turn)
+                .await
+                .is_err()
+        );
+    }
     #[test]
     fn event_id_is_message_id_and_stable_for_retries() {
         let id = Uuid::new_v4();

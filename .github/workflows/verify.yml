@@ -56,7 +56,7 @@ jobs:
           ANALYTICS_PET_TOKEN=ci_pet_ingest_only_token_32_characters
           ENV
       - name: Build and start isolated app and database containers
-        run: docker compose --env-file .env up -d --build
+        run: COPILOT_BUILD_SHA="$GITHUB_SHA" docker compose --env-file .env up -d --build
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -137,7 +137,7 @@ jobs:
         run: |
           if ! command -v trunk; then cargo install trunk --version 0.21.14 --locked; fi
           if ! command -v cargo-tauri; then cargo install tauri-cli --version 2.11.5 --locked; fi
-      - name: Verify Pet persistence and platform refusal rules
+      - name: Verify Pet persistence and native platform safety
         run: cargo test --locked -p day9-pet --lib
       - name: Compile Chat hydration assets
         shell: bash
@@ -147,7 +147,14 @@ jobs:
         run: cd apps/pet_ui && NO_COLOR=true trunk build --release=true --no-color
       - name: Actual Linux WebKit GUI verification
         if: runner.os == 'Linux'
-        run: xvfb-run -a python3 scripts/pet-gui-verify.py
+        run: xvfb-run -a python3 scripts/pet-gui-verify.py --updater
+      - name: Actual Windows and macOS WebView GUI verification
+        if: runner.os != 'Linux'
+        shell: bash
+        run: python3 scripts/pet-gui-verify.py --updater
+      - name: Optimized GLib security backport regression
+        if: runner.os == 'Linux'
+        run: cargo test --locked --release --manifest-path apps/pet_desktop/Cargo.toml --test glib_variant_safety
       - name: Build native installer without claiming runtime acceptance
         shell: bash
         run: cd apps/pet_desktop && NO_COLOR=true cargo tauri build --bundles "${{ matrix.bundle }}"

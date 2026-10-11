@@ -34,9 +34,87 @@ fn strings(s: String) -> Vec<String> {
         .map(str::to_owned)
         .collect()
 }
+fn animation_y(value: Value) -> String {
+    match value["action"].as_str().unwrap_or("idle") {
+        "moving" => "-200px",
+        "happy" => "-400px",
+        "learning" => "-600px",
+        _ => "0px",
+    }
+    .into()
+}
+fn animation_duration(value: Value) -> String {
+    match value["speed"].as_str().unwrap_or("normal") {
+        "slow" => "2s",
+        "fast" => "0.5s",
+        _ => "1s",
+    }
+    .into()
+}
+#[component]
+fn RecallPrompt() -> impl IntoView {
+    let question = RwSignal::new(String::new());
+    let poll = move || {
+        leptos::task::spawn_local(async move {
+            if let Ok(v) = call("recall_prompt", json!({})).await {
+                if let Some(q) = v["question"].as_str() {
+                    question.set(q.into())
+                }
+            }
+        })
+    };
+    let timer = leptos::leptos_dom::helpers::set_interval_with_handle(
+        poll,
+        std::time::Duration::from_secs(60),
+    )
+    .ok();
+    on_cleanup(move || {
+        if let Some(timer) = timer {
+            timer.clear()
+        }
+    });
+    view! {<Show when=move ||!question.get().is_empty()><aside class="recall-prompt" aria-live="polite"><small>"試著回想："{move ||question.get()}</small><button on:click=move |_|question.set(String::new())>"關閉"</button></aside></Show>}
+}
+#[component]
+fn BackupControls() -> impl IntoView {
+    let entries = RwSignal::new(Vec::<Value>::new());
+    let selected = RwSignal::new(String::new());
+    let confirmed = RwSignal::new(false);
+    let status = RwSignal::new(String::new());
+    let busy = RwSignal::new(false);
+    let refresh = move || {
+        leptos::task::spawn_local(async move {
+            match call("list_snapshots", json!({})).await {
+                Ok(v) => entries.set(v.as_array().cloned().unwrap_or_default()),
+                Err(e) => status.set(e),
+            }
+        })
+    };
+    view! {<div id="pet-backups"><h3>"本地備份與還原"</h3><p>"快照包含角色、記憶、複習、對話及生成素材。還原會先備份目前狀態，再恢復快照中的寵物；保留新增寵物、事件投遞與檔案操作收據。"</p>
+    <button id="create-snapshot" disabled=move ||busy.get() on:click=move |_|{busy.set(true);leptos::task::spawn_local(async move {match call("create_snapshot",json!({})).await{Ok(v)=>{status.set(format!("備份完成 {}",v["id"]));refresh();},Err(e)=>status.set(e)}busy.set(false);});}>"建立快照"</button>
+    <button id="list-snapshots" on:click=move |_|refresh()>"讀取快照"</button>
+    <select prop:value=move ||selected.get() on:change=move |e|{selected.set(event_target_value(&e));confirmed.set(false);}>
+    <option value="">"選擇快照"</option>{move ||entries.get().into_iter().map(|v|view!{<option value=v["id"].as_str().unwrap_or("").to_owned()>{format!("{} — {} bytes",v["id"],v["bytes"])}</option>}).collect_view()}</select>
+    <label><input type="checkbox" prop:checked=move ||confirmed.get() on:change=move |e|confirmed.set(event_target_checked(&e))/>"確認恢復快照中的資料"</label>
+    <button id="restore-snapshot" disabled=move ||busy.get()||!confirmed.get()||selected.get().is_empty() on:click=move |_|{let id=selected.get();busy.set(true);leptos::task::spawn_local(async move{match call("restore_snapshot",json!({"id":id,"confirmed":true})).await{Ok(v)=>{status.set(format!("還原完成；操作前快照 {}。請重新選擇寵物讀取資料。",v["id"]));refresh();},Err(e)=>status.set(e)}busy.set(false);});}>"還原快照"</button><pre aria-live="polite">{move ||status.get()}</pre></div>}
+}
+#[component]
+fn UpdateControls() -> impl IntoView {
+    let id = RwSignal::new(String::new());
+    let verified = RwSignal::new(false);
+    let confirmed = RwSignal::new(false);
+    let busy = RwSignal::new(false);
+    let status = RwSignal::new(String::new());
+    view! {<div id="local-updater"><h3>"本地簽章更新"</h3><p>"檢查已設定的本地 channel，下載後驗證簽章與版本，再由你確認安裝。安裝前會建立資料快照。"</p>
+    <button id="check-update" disabled=move ||busy.get() on:click=move |_|{busy.set(true);id.set(String::new());verified.set(false);confirmed.set(false);leptos::task::spawn_local(async move{match call("check_local_update",json!({})).await{Ok(v)=>{id.set(v["id"].as_str().unwrap_or("").into());status.set(v.to_string());},Err(e)=>status.set(e)}busy.set(false);});}>"檢查本地更新"</button>
+    <button id="verify-update" disabled=move ||busy.get()||id.get().is_empty() on:click=move |_|{let current=id.get();busy.set(true);leptos::task::spawn_local(async move{match call("verify_local_update",json!({"id":current})).await{Ok(v)=>{verified.set(true);status.set(v.to_string());},Err(e)=>{verified.set(false);status.set(e)}}busy.set(false);});}>"下載並驗證"</button>
+    <label><input type="checkbox" prop:checked=move ||confirmed.get() on:change=move |e|confirmed.set(event_target_checked(&e))/>"確認安裝已驗證的版本"</label>
+    <button id="install-update" disabled=move ||busy.get()||!verified.get()||!confirmed.get() on:click=move |_|{let current=id.get();busy.set(true);leptos::task::spawn_local(async move{match call("install_local_update",json!({"id":current,"confirmed":true})).await{Ok(v)=>status.set(v.to_string()),Err(e)=>status.set(e)}busy.set(false);});}>"備份資料並安裝"</button><pre aria-live="polite">{move ||status.get()}</pre></div>}
+}
 #[component]
 fn Settings() -> impl IntoView {
     let sprite = RwSignal::new(String::new());
+    let animation = RwSignal::new(json!({"action":"idle","speed":"normal","proactive":false}));
     let prompt = RwSignal::new(String::new());
     let reply = RwSignal::new(String::new());
     let busy = RwSignal::new(false);
@@ -149,6 +227,11 @@ fn Settings() -> impl IntoView {
             if pet.get_untracked() != id {
                 return;
             }
+            if let Ok(v) = call("interaction", json!({"pet":id})).await {
+                if pet.get_untracked() == id {
+                    animation.set(v)
+                }
+            }
             match call("list_memories", json!({"pet":id})).await {
                 Ok(v) if pet.get_untracked() == id => {
                     memories.set(v.as_array().cloned().unwrap_or_default())
@@ -170,8 +253,15 @@ fn Settings() -> impl IntoView {
     view! {<main><h1>"桌面 AI 寵物"</h1><p class="error" role="alert">{move ||error.get()}</p>
        <section><h2>"我的寵物"</h2><select on:change=move |e|load(event_target_value(&e))><option value="">"選擇寵物"</option>{move ||pets.get().into_iter().map(|p|{let id=p["id"].as_str().unwrap_or("").to_owned();let profile:Value=serde_json::from_str(p["profile"].as_str().unwrap_or("{}")).unwrap_or_default();view!{<option value=id>{profile["名字"].as_str().unwrap_or("寵物").to_owned()}</option>}}).collect_view()}</select>
        <button on:click=move |_|{pet.set(uuid());name.set(String::new());species.set(String::new());likes.set(String::new());personality.set(String::new());interests.set(String::new());color.set(String::new());style.set(String::new());breed.set(String::new());actions.set(String::new());speed.set(String::new());memory.set(String::new());memory_edit_id.set(String::new());memories.set(Vec::new());cards.set(Vec::new());}>"新增寵物"</button>
-       <div class="pet" class:animated=move ||!sprite.get().is_empty() style:background-image=move ||sprite.get()><Show when=move ||sprite.get().is_empty()><span>"🐾"</span></Show></div>
+       <div class="pet" class:animated=move ||!sprite.get().is_empty() style:background-image=move ||sprite.get() style:background-position-y=move ||animation_y(animation.get()) style:animation-duration=move ||animation_duration(animation.get())><Show when=move ||sprite.get().is_empty()><span>"🐾"</span></Show></div>
     <small>{move ||if sprite.get().is_empty() {"200×200 顯示區；尚未生成素材"}else{"200×200 角色動畫；素材已快取"}}</small>
+    <label>"目前動作"<select id="pet-action" prop:value=move ||animation.get()["action"].as_str().unwrap_or("idle").to_owned() on:change=move |e|animation.update(|v|v["action"]=json!(event_target_value(&e)))><option value="idle">"待機"</option><option value="moving">"移動"</option><option value="happy">"開心"</option><option value="learning">"學習"</option></select></label>
+    <label>"播放速度"<select id="pet-speed" prop:value=move ||animation.get()["speed"].as_str().unwrap_or("normal").to_owned() on:change=move |e|animation.update(|v|v["speed"]=json!(event_target_value(&e)))><option value="slow">"慢"</option><option value="normal">"正常"</option><option value="fast">"快"</option></select></label>
+    <label><input id="pet-proactive" type="checkbox" prop:checked=move ||animation.get()["proactive"]==true on:change=move |e|animation.update(|v|v["proactive"]=json!(event_target_checked(&e)))/>"主動顯示本地到期複習題（每小時最多一次）"</label>
+    <button id="save-interaction" on:click=move |_|{let pid=pet.get();let preferences=animation.get();leptos::task::spawn_local(async move{if let Err(e)=call("set_interaction",json!({"pet":pid,"preferences":preferences})).await {error.set(e)}});}>"保存互動設定"</button>
+    <RecallPrompt/>
+    <BackupControls/>
+    <UpdateControls/>
     <button disabled=move ||busy.get() on:click=move |_|{let pid=pet.get();busy.set(true);leptos::task::spawn_local(async move{match call("generate_asset",json!({"pet":pid})).await{Ok(v)=>{if pet.get_untracked()==pid && let Some(png)=v["png_base64"].as_str(){sprite.set(format!("url(data:image/png;base64,{png})"));}},Err(e)=>error.set(e)}busy.set(false);});}>"生成角色動畫"</button>
        <label>"名字"<input prop:value=move ||name.get() on:input=move |e|name.set(event_target_value(&e))/></label>
        <label>"種類"<input prop:value=move ||species.get() on:input=move |e|species.set(event_target_value(&e))/></label>
@@ -262,6 +352,7 @@ fn FileOrganizer() -> impl IntoView {
             Err(e)=>status.set(e),
         }
     })>"復原收據與事件"</button><p role="status">{move ||status.get()}</p>
+    <TrashBrowser/>
     {move ||files.get().into_iter().map(|item| {
         let id=item["id"].as_str().unwrap_or("").to_owned();
         let confirmed=RwSignal::new(false);let working=RwSignal::new(false);
@@ -280,8 +371,31 @@ fn FileOrganizer() -> impl IntoView {
     }).collect_view()}</section>}
 }
 #[component]
+fn TrashBrowser() -> impl IntoView {
+    let items = RwSignal::new(Vec::<Value>::new());
+    let status = RwSignal::new(String::new());
+    let refresh = move || {
+        leptos::task::spawn_local(async move {
+            match call("list_trash", json!({})).await {
+                Ok(v) => items.set(v.as_array().cloned().unwrap_or_default()),
+                Err(e) => status.set(e),
+            }
+        })
+    };
+    view! {<div id="trash-browser"><h3>"本程式回收區"</h3><p>"檔案保留在授權目錄內的私人回收區。還原只回到原名稱；有同名檔案時拒絕覆寫。撤銷授權後不能還原。"</p>
+    <button id="load-trash" on:click=move |_|refresh()>"查看回收區"</button>
+    <button on:click=move |_|leptos::task::spawn_local(async move{match call("recover_restore_receipts",json!({})).await{Ok(v)=>status.set(format!("已復原 {} 筆還原事件",v.as_array().map_or(0,Vec::len))),Err(e)=>status.set(e)}})>"復原還原收據"</button><p role="status">{move ||status.get()}</p>
+    {move ||items.get().into_iter().map(|item|{
+        let id=item["operation_id"].as_str().unwrap_or("").to_owned();let restored=item["restored"].as_bool().unwrap_or(false);let confirmed=RwSignal::new(false);let busy=RwSignal::new(false);
+        view!{<article><p>{item["file_name"].as_str().unwrap_or("").to_owned()}{format!("（{} bytes）",item["size_bytes"])}</p><small>{if restored{"已還原"}else{"在回收區"}}</small>
+        <label><input type="checkbox" disabled=restored on:change=move |e|confirmed.set(event_target_checked(&e))/>"確認還原至原名稱"</label>
+        <button disabled=move ||restored||!confirmed.get()||busy.get() on:click=move |_|{let id=id.clone();busy.set(true);leptos::task::spawn_local(async move{match call("restore_file",json!({"id":id,"confirmed":true})).await{Ok(v)=>{status.set(format!("已還原；收據 {}",v["operation_id"]));refresh();},Err(e)=>status.set(e)}busy.set(false);});}>"還原檔案"</button></article>}
+    }).collect_view()}</div>}
+}
+#[component]
 fn PetOnly() -> impl IntoView {
     let sprite = RwSignal::new(String::new());
+    let animation = RwSignal::new(json!({"action":"idle","speed":"normal","proactive":false}));
     let generation = RwSignal::new(0_u32);
     let refresh = move || {
         generation.update(|v| *v = v.wrapping_add(1));
@@ -297,6 +411,11 @@ fn PetOnly() -> impl IntoView {
                     return;
                 }
                 sprite.set(format!("url(data:image/png;base64,{png})"));
+                if let Ok(v) = call("interaction", json!({"pet":id})).await {
+                    if generation.get_untracked() == version {
+                        animation.set(v)
+                    }
+                }
             }
         })
     };
@@ -310,7 +429,7 @@ fn PetOnly() -> impl IntoView {
         .await;
         handler.forget();
     });
-    view! {<div class="floating" data-tauri-drag-region=""><div class="pet" class:animated=move ||!sprite.get().is_empty() style:background-image=move ||sprite.get()><Show when=move ||sprite.get().is_empty()><span>"🐾"</span></Show></div></div>}
+    view! {<div class="floating" data-tauri-drag-region=""><div class="pet" class:animated=move ||!sprite.get().is_empty() style:background-image=move ||sprite.get() style:background-position-y=move ||animation_y(animation.get()) style:animation-duration=move ||animation_duration(animation.get())><Show when=move ||sprite.get().is_empty()><span>"🐾"</span></Show></div><RecallPrompt/></div>}
 }
 #[component]
 fn App() -> impl IntoView {

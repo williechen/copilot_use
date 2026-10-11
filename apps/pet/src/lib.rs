@@ -2,12 +2,16 @@
 //! 尚未驗證的其他平台 fail closed，不執行危險移動。
 pub mod agent;
 pub mod ai;
+pub mod backup;
+pub mod interaction;
 pub mod outbox;
 pub mod profile;
 pub mod state;
 pub mod suggestions;
 #[cfg(any(target_os = "linux", target_os = "macos"))]
 mod unix_fs;
+#[cfg(windows)]
+mod windows_fs;
 use event_contract::ProductEvent;
 use serde::{Deserialize, Serialize};
 use std::{
@@ -16,6 +20,8 @@ use std::{
 };
 use thiserror::Error;
 use uuid::Uuid;
+#[cfg(windows)]
+use windows_fs as unix_fs;
 
 #[derive(Debug, Error)]
 pub enum CleanupError {
@@ -47,6 +53,29 @@ pub struct CleanupReceipt {
     pub size_bytes: u64,
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct TrashEntry {
+    pub operation_id: Uuid,
+    pub file_name: String,
+    pub size_bytes: u64,
+    pub restored: bool,
+}
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct RestoreReceipt {
+    pub operation_id: Uuid,
+    pub quarantine_operation_id: Uuid,
+    pub size_bytes: u64,
+}
+impl RestoreReceipt {
+    pub fn event(&self) -> ProductEvent {
+        ProductEvent {
+            schema_version: 1,
+            event_id: self.operation_id,
+            source_app: "desktop_pet".into(),
+            event_type: "file.restore.succeeded".into(),
+        }
+    }
+}
 impl CleanupReceipt {
     /// 真實 rename 成功後才建立產品事件；預覽不產生成功事件。
     pub fn event(&self) -> ProductEvent {
@@ -55,9 +84,12 @@ impl CleanupReceipt {
 }
 
 pub struct AuthorizedRoot {
-    #[cfg_attr(any(target_os = "linux", target_os = "macos"), allow(dead_code))]
+    #[cfg_attr(
+        any(target_os = "linux", target_os = "macos", target_os = "windows"),
+        allow(dead_code)
+    )]
     root: PathBuf,
-    #[cfg(any(target_os = "linux", target_os = "macos"))]
+    #[cfg(any(target_os = "linux", target_os = "macos", target_os = "windows"))]
     pinned: unix_fs::PinnedRoot,
 }
 
@@ -99,11 +131,11 @@ impl AuthorizedRoot {
         if !root.is_dir() {
             return Err(CleanupError::InvalidName);
         }
-        #[cfg(any(target_os = "linux", target_os = "macos"))]
+        #[cfg(any(target_os = "linux", target_os = "macos", target_os = "windows"))]
         let pinned = unix_fs::PinnedRoot::open(&root)?;
         Ok(Self {
             root,
-            #[cfg(any(target_os = "linux", target_os = "macos"))]
+            #[cfg(any(target_os = "linux", target_os = "macos", target_os = "windows"))]
             pinned,
         })
     }
@@ -113,11 +145,11 @@ impl AuthorizedRoot {
     }
 
     pub fn scan(&self) -> Result<Vec<FilePreview>, CleanupError> {
-        #[cfg(any(target_os = "linux", target_os = "macos"))]
+        #[cfg(any(target_os = "linux", target_os = "macos", target_os = "windows"))]
         {
             self.pinned.scan()
         }
-        #[cfg(not(any(target_os = "linux", target_os = "macos")))]
+        #[cfg(not(any(target_os = "linux", target_os = "macos", target_os = "windows")))]
         {
             let mut result = Vec::new();
             for entry in fs::read_dir(&self.root)?.take(1000) {
@@ -132,11 +164,11 @@ impl AuthorizedRoot {
         }
     }
     pub fn preview(&self, name: &str) -> Result<FilePreview, CleanupError> {
-        #[cfg(any(target_os = "linux", target_os = "macos"))]
+        #[cfg(any(target_os = "linux", target_os = "macos", target_os = "windows"))]
         {
             self.pinned.preview(name)
         }
-        #[cfg(not(any(target_os = "linux", target_os = "macos")))]
+        #[cfg(not(any(target_os = "linux", target_os = "macos", target_os = "windows")))]
         {
             validate_name(name)?;
             let file = self.root.join(name);
@@ -163,11 +195,11 @@ impl AuthorizedRoot {
         if !confirmed {
             return Err(CleanupError::InvalidName);
         }
-        #[cfg(any(target_os = "linux", target_os = "macos"))]
+        #[cfg(any(target_os = "linux", target_os = "macos", target_os = "windows"))]
         {
             self.pinned.quarantine(preview)
         }
-        #[cfg(not(any(target_os = "linux", target_os = "macos")))]
+        #[cfg(not(any(target_os = "linux", target_os = "macos", target_os = "windows")))]
         {
             let _ = preview;
             Err(CleanupError::Io(io::Error::new(
@@ -176,12 +208,50 @@ impl AuthorizedRoot {
             )))
         }
     }
+    pub fn trash(&self) -> Result<Vec<TrashEntry>, CleanupError> {
+        #[cfg(any(target_os = "linux", target_os = "macos", target_os = "windows"))]
+        {
+            self.pinned.trash()
+        }
+        #[cfg(not(any(target_os = "linux", target_os = "macos", target_os = "windows")))]
+        {
+            Err(io::Error::new(io::ErrorKind::Unsupported, "安全回收區 Adapter 尚未驗證").into())
+        }
+    }
+    pub fn confirm_restore(
+        &self,
+        id: Uuid,
+        confirmed: bool,
+    ) -> Result<RestoreReceipt, CleanupError> {
+        if !confirmed {
+            return Err(CleanupError::InvalidName);
+        }
+        #[cfg(any(target_os = "linux", target_os = "macos", target_os = "windows"))]
+        {
+            self.pinned.restore(id)
+        }
+        #[cfg(not(any(target_os = "linux", target_os = "macos", target_os = "windows")))]
+        {
+            let _ = id;
+            Err(io::Error::new(io::ErrorKind::Unsupported, "安全還原 Adapter 尚未驗證").into())
+        }
+    }
+    pub fn restored_receipts(&self) -> Result<Vec<RestoreReceipt>, CleanupError> {
+        #[cfg(any(target_os = "linux", target_os = "macos", target_os = "windows"))]
+        {
+            self.pinned.restored_receipts()
+        }
+        #[cfg(not(any(target_os = "linux", target_os = "macos", target_os = "windows")))]
+        {
+            Err(io::Error::new(io::ErrorKind::Unsupported, "安全還原復原 Adapter 尚未驗證").into())
+        }
+    }
     pub fn recovered_receipts(&self) -> Result<Vec<CleanupReceipt>, CleanupError> {
-        #[cfg(any(target_os = "linux", target_os = "macos"))]
+        #[cfg(any(target_os = "linux", target_os = "macos", target_os = "windows"))]
         {
             self.pinned.recovered_receipts()
         }
-        #[cfg(not(any(target_os = "linux", target_os = "macos")))]
+        #[cfg(not(any(target_os = "linux", target_os = "macos", target_os = "windows")))]
         {
             Err(CleanupError::Io(io::Error::new(
                 io::ErrorKind::Unsupported,
@@ -242,19 +312,20 @@ mod tests {
         assert!(root.preview("../secret").is_err());
         let preview = root.preview("a.txt").unwrap();
         fs::write(dir.join("a.txt"), b"changed").unwrap();
-        #[cfg(any(target_os = "linux", target_os = "macos"))]
+        #[cfg(any(target_os = "linux", target_os = "macos", target_os = "windows"))]
         assert!(matches!(
             root.confirm_quarantine(&preview, true),
             Err(CleanupError::Changed)
         ));
-        #[cfg(not(any(target_os = "linux", target_os = "macos")))]
+        #[cfg(not(any(target_os = "linux", target_os = "macos", target_os = "windows")))]
         assert!(
             matches!(root.confirm_quarantine(&preview,true), Err(CleanupError::Io(e)) if e.kind()==io::ErrorKind::Unsupported)
         );
         assert_eq!(fs::read(dir.join("a.txt")).unwrap(), b"changed");
+        drop(root);
         fs::remove_dir_all(&dir).unwrap();
     }
-    #[cfg(not(any(target_os = "linux", target_os = "macos")))]
+    #[cfg(not(any(target_os = "linux", target_os = "macos", target_os = "windows")))]
     #[test]
     fn unverified_platform_cannot_move_file() {
         let dir = std::env::temp_dir().join(format!("pet-unsupported-{}", Uuid::new_v4()));
@@ -267,6 +338,89 @@ mod tests {
         fs::remove_dir_all(dir).unwrap();
     }
     #[cfg(any(target_os = "linux", target_os = "macos"))]
+    #[cfg(any(target_os = "linux", target_os = "macos"))]
+    #[test]
+    #[ignore = "Only invoked by the parent with its own disposable fixture"]
+    fn restore_process_child() {
+        let path = PathBuf::from(std::env::var("COPILOT_RESTORE_TEST_ROOT").unwrap());
+        let id = Uuid::parse_str(&std::env::var("COPILOT_RESTORE_TEST_ID").unwrap()).unwrap();
+        let root = AuthorizedRoot::new(&path).unwrap();
+        fs::write(path.join(format!("ready-{}", std::process::id())), b"ready").unwrap();
+        let limit = std::time::Instant::now() + std::time::Duration::from_secs(10);
+        while !path.join("go").exists() {
+            assert!(std::time::Instant::now() < limit);
+            std::thread::sleep(std::time::Duration::from_millis(1));
+        }
+        match root.confirm_restore(id, true) {
+            Ok(_) => {}
+            Err(CleanupError::Io(e)) if e.kind() == io::ErrorKind::WouldBlock => {}
+            result => panic!("unexpected child restore result {result:?}"),
+        }
+    }
+    #[cfg(any(target_os = "linux", target_os = "macos"))]
+    #[test]
+    fn two_processes_restore_with_one_durable_receipt() {
+        let path = std::env::temp_dir().join(format!("pet-restore-process-{}", Uuid::new_v4()));
+        private_directory(&path);
+        private_fixture(path.join("a.txt"), b"original");
+        let root = AuthorizedRoot::new(&path).unwrap();
+        let receipt = root
+            .confirm_quarantine(&root.preview("a.txt").unwrap(), true)
+            .unwrap();
+        let spawn = || {
+            std::process::Command::new(std::env::current_exe().unwrap())
+                .args(["--exact", "tests::restore_process_child", "--ignored"])
+                .env_clear()
+                .env("COPILOT_RESTORE_TEST_ROOT", &path)
+                .env("COPILOT_RESTORE_TEST_ID", receipt.operation_id.to_string())
+                .spawn()
+                .unwrap()
+        };
+        let mut first = spawn();
+        let mut second = spawn();
+        let limit = std::time::Instant::now() + std::time::Duration::from_secs(10);
+        while !(path.join(format!("ready-{}", first.id())).exists()
+            && path.join(format!("ready-{}", second.id())).exists())
+        {
+            assert!(std::time::Instant::now() < limit);
+            std::thread::sleep(std::time::Duration::from_millis(1));
+        }
+        fs::write(path.join("go"), b"go").unwrap();
+        assert!(first.wait().unwrap().success());
+        assert!(second.wait().unwrap().success());
+        assert_eq!(root.restored_receipts().unwrap().len(), 1);
+        assert_eq!(fs::read(path.join("a.txt")).unwrap(), b"original");
+        fs::remove_dir_all(path).unwrap();
+    }
+    #[cfg(any(target_os = "linux", target_os = "macos"))]
+    #[test]
+    fn restore_is_confirmed_idempotent_and_does_not_replace_a_new_file() {
+        let dir = std::env::temp_dir().join(format!("pet-restore-{}", Uuid::new_v4()));
+        private_directory(&dir);
+        private_fixture(dir.join("a.txt"), b"original");
+        let root = AuthorizedRoot::new(&dir).unwrap();
+        let saved = root
+            .confirm_quarantine(&root.preview("a.txt").unwrap(), true)
+            .unwrap();
+        assert!(!root.trash().unwrap()[0].restored);
+        assert!(root.confirm_restore(saved.operation_id, false).is_err());
+        private_fixture(dir.join("a.txt"), b"replacement");
+        assert!(root.confirm_restore(saved.operation_id, true).is_err());
+        assert_eq!(fs::read(dir.join("a.txt")).unwrap(), b"replacement");
+        fs::remove_file(dir.join("a.txt")).unwrap();
+        let restored = root.confirm_restore(saved.operation_id, true).unwrap();
+        assert_eq!(fs::read(dir.join("a.txt")).unwrap(), b"original");
+        assert_eq!(
+            root.confirm_restore(saved.operation_id, true).unwrap(),
+            restored
+        );
+        assert!(root.trash().unwrap()[0].restored);
+        drop(root);
+        let reopened = AuthorizedRoot::new(&dir).unwrap();
+        assert_eq!(reopened.restored_receipts().unwrap(), vec![restored]);
+        fs::remove_dir_all(dir).unwrap();
+    }
+    #[cfg(unix)]
     #[test]
     fn reject_source_and_quarantine_symlinks_without_touching_target() {
         use std::os::unix::fs::symlink;

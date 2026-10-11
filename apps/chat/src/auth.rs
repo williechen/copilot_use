@@ -105,6 +105,34 @@ fn validate(input: &Credentials) -> Result<(), StatusCode> {
     }
     Ok(())
 }
+// Shared PostgreSQL counters bound sequential abuse across independent Chat processes.
+async fn throttle(state: &StateData, operation: &str, username: &str) -> Result<(), StatusCode> {
+    let mut tx = state
+        .pool
+        .begin()
+        .await
+        .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
+    sqlx::query("DELETE FROM chat_auth_throttle WHERE key IN(SELECT key FROM chat_auth_throttle WHERE expires_at<=now() LIMIT 1000)").execute(&mut *tx).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
+    for (key, limit) in [
+        (format!("{operation}:global"), 120),
+        (
+            format!("{operation}:{:x}", Sha256::digest(username.as_bytes())),
+            8,
+        ),
+    ] {
+        let count:i32=sqlx::query_scalar("INSERT INTO chat_auth_throttle(key,attempts,expires_at)VALUES($1,1,now()+interval '60 seconds')ON CONFLICT(key)DO UPDATE SET attempts=CASE WHEN chat_auth_throttle.expires_at<=now()THEN 1 ELSE chat_auth_throttle.attempts+1 END,expires_at=CASE WHEN chat_auth_throttle.expires_at<=now()THEN now()+interval '60 seconds' ELSE chat_auth_throttle.expires_at END RETURNING attempts").bind(key).fetch_one(&mut *tx).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
+        if count > limit {
+            tx.commit()
+                .await
+                .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
+            return Err(StatusCode::TOO_MANY_REQUESTS);
+        }
+    }
+    tx.commit()
+        .await
+        .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
+    Ok(())
+}
 pub(super) async fn register(
     State(state): State<StateData>,
     headers: HeaderMap,
@@ -117,6 +145,7 @@ pub(super) async fn register(
         .clone()
         .try_acquire_owned()
         .map_err(|_| StatusCode::TOO_MANY_REQUESTS)?;
+    throttle(&state, "register", &input.username).await?;
     let password = input.password;
     let hash = tokio::task::spawn_blocking(move || {
         let salt = SaltString::encode_b64(Uuid::new_v4().as_bytes()).map_err(|_| ())?;
@@ -157,6 +186,7 @@ pub(super) async fn login(
         .clone()
         .try_acquire_owned()
         .map_err(|_| StatusCode::TOO_MANY_REQUESTS)?;
+    throttle(&state, "login", &input.username).await?;
     let row: Option<(Uuid, String)> =
         sqlx::query_as("SELECT id,password_hash FROM chat_users WHERE username=$1")
             .bind(input.username)
@@ -177,7 +207,17 @@ pub(super) async fn login(
         return Err(StatusCode::UNAUTHORIZED);
     }
     let token = format!("{}{}", Uuid::new_v4().simple(), Uuid::new_v4().simple());
-    sqlx::query("INSERT INTO chat_sessions(token_hash,user_id,expires_at) VALUES ($1,$2,now()+interval '24 hours')").bind(Sha256::digest(token.as_bytes()).to_vec()).bind(id).execute(&state.pool).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
+    let mut tx = state
+        .pool
+        .begin()
+        .await
+        .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
+    sqlx::query("DELETE FROM chat_sessions WHERE token_hash IN(SELECT token_hash FROM chat_sessions WHERE expires_at<=now() LIMIT 1000)").execute(&mut *tx).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
+    sqlx::query("INSERT INTO chat_sessions(token_hash,user_id,expires_at) VALUES ($1,$2,now()+interval '24 hours')").bind(Sha256::digest(token.as_bytes()).to_vec()).bind(id).execute(&mut *tx).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
+    auth_event(&mut tx, "login.succeeded").await?;
+    tx.commit()
+        .await
+        .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
     let secure = if std::env::var("COOKIE_SECURE").as_deref() == Ok("true") {
         "; Secure"
     } else {
@@ -206,9 +246,20 @@ pub(super) async fn logout(
                 .find_map(|v| v.trim().strip_prefix("copilot_session="))
         })
     {
-        sqlx::query("DELETE FROM chat_sessions WHERE token_hash=$1")
+        let mut tx = state
+            .pool
+            .begin()
+            .await
+            .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
+        let result = sqlx::query("DELETE FROM chat_sessions WHERE token_hash=$1")
             .bind(Sha256::digest(token.as_bytes()).to_vec())
-            .execute(&state.pool)
+            .execute(&mut *tx)
+            .await
+            .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
+        if result.rows_affected() == 1 {
+            auth_event(&mut tx, "logout.succeeded").await?;
+        }
+        tx.commit()
             .await
             .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
     }
@@ -258,4 +309,14 @@ pub(super) async fn invite(
     .await
     .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
     Ok(StatusCode::NO_CONTENT)
+}
+
+async fn auth_event(
+    tx: &mut sqlx::Transaction<'_, sqlx::Postgres>,
+    kind: &str,
+) -> Result<(), StatusCode> {
+    sqlx::query("INSERT INTO chat_outbox(event_id,schema_version,source_app,event_type,traceparent)VALUES($1,1,'web_chat',$2,$3)")
+        .bind(Uuid::new_v4()).bind(kind).bind(copilot_telemetry::outgoing_headers().get("traceparent"))
+        .execute(&mut **tx).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
+    Ok(())
 }

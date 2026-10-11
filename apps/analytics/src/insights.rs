@@ -14,7 +14,44 @@ pub(super) struct Generate {
     pub target_app: String,
 }
 fn schema() -> Value {
-    json!({"type":"object","properties":{"summary":{"type":"string"},"action":{"type":"string","enum":["chat_context_messages","pet_review_min_days"]},"value":{"type":"integer"},"rationale":{"type":"string"}},"required":["summary","action","value","rationale"],"additionalProperties":false})
+    json!({"type":"object","properties":{"fact_indices":{"type":"array","items":{"type":"integer"},"minItems":1,"maxItems":3},"action":{"type":"string","enum":["chat_context_messages","pet_review_min_days"]},"value":{"type":"integer"}},"required":["fact_indices","action","value"],"additionalProperties":false})
+}
+fn facts(snapshot: &Value) -> Option<Vec<String>> {
+    let rows = snapshot["rows"].as_array()?;
+    let total = rows
+        .iter()
+        .try_fold(0_i64, |sum, row| sum.checked_add(row["total"].as_i64()?))?;
+    let mut facts = vec![format!(
+        "最近七天共記錄 {total} 筆事件，事件次數不代表人數、學習品質或因果。"
+    )];
+    for row in rows {
+        let count = row["total"].as_i64()?;
+        if count < 0 {
+            return None;
+        }
+        let date = row["day"].as_str()?;
+        let event = row["event_type"].as_str()?;
+        facts.push(format!("台北日期 {date} 的 {event} 共記錄 {count} 次。"));
+    }
+    Some(facts)
+}
+fn grounded_proposal(snapshot: &Value, selection: &Value) -> Option<Value> {
+    let candidates = facts(snapshot)?;
+    let indices = selection["fact_indices"].as_array()?;
+    if !(1..=3).contains(&indices.len()) {
+        return None;
+    }
+    let mut used = std::collections::HashSet::new();
+    let mut summary = String::new();
+    for index in indices {
+        let i = usize::try_from(index.as_u64()?).ok()?;
+        if !used.insert(i) {
+            return None;
+        }
+        summary.push_str(candidates.get(i)?);
+    }
+    let proposal = json!({"summary":summary,"action":selection["action"],"value":selection["value"],"rationale":"AI 選擇以上實際事件數作為觀察線索；設定建議是待人工審核的實驗，事件數不能證明效果或品質。","grounding":{"fact_indices":indices,"facts":candidates,"method":"verified_snapshot_fact_selection"}});
+    valid(snapshot["target_app"].as_str()?, &proposal).then_some(proposal)
 }
 fn valid(target: &str, proposal: &Value) -> bool {
     let Some(value) = proposal["value"].as_i64() else {
@@ -56,16 +93,16 @@ pub(super) async fn generate(
         .map_err(|_| StatusCode::TOO_MANY_REQUESTS)?;
     let rows:Vec<(String,String,i64)>=sqlx::query_as("SELECT (received_at AT TIME ZONE 'Asia/Taipei')::date::text,event_type,count(*)::bigint FROM product_events WHERE NOT archived AND source_app=$1 AND received_at>=now()-interval '7 days' GROUP BY 1,2 ORDER BY 1,2").bind(&input.target_app).fetch_all(&state.pool).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
     let snapshot = json!({"target_app":input.target_app,"window":"last_7_days","timezone":"Asia/Taipei","rows":rows.into_iter().map(|(day,event_type,total)|json!({"day":day,"event_type":event_type,"total":total})).collect::<Vec<_>>()});
-    let instructions = format!(
-        "用繁體中文根據提供的真實聚合數字生成一至三句摘要，每句以中文句號結尾。不能捏造人數、滿意度、品質、因果或事件內容；這些資料只有事件次數。不足時明確說明。target={}；只能提出與該 target 相符的安全數值設定建議（chat_context_messages:10..100 或 pet_review_min_days:1..30），需要人工審核與可回退。rationale 必須引用 snapshot 中實際事件數。",
-        input.target_app
-    );
-    let proposal = openai_adapter::agent::structured(snapshot.clone(), &instructions, schema())
-        .await
-        .map_err(|_| StatusCode::BAD_GATEWAY)?;
-    if !valid(&input.target_app, &proposal) {
-        return Err(StatusCode::BAD_GATEWAY);
-    }
+    let candidates = facts(&snapshot).ok_or(StatusCode::BAD_GATEWAY)?;
+    let instructions = "根據真實事件聚合快照選出一至三個值得觀察的 facts 索引（從0開始、不重複）。不要生成新的事實或數字。只提出 target 對應的安全設定實驗：web_chat 用 chat_context_messages:10..100，desktop_pet 用 pet_review_min_days:1..30。提案必須經人工審核、可回退；事件數不代表人數、品質或因果。";
+    let selection = openai_adapter::agent::structured(
+        json!({"snapshot":snapshot,"facts":candidates}),
+        instructions,
+        schema(),
+    )
+    .await
+    .map_err(|_| StatusCode::BAD_GATEWAY)?;
+    let proposal = grounded_proposal(&snapshot, &selection).ok_or(StatusCode::BAD_GATEWAY)?;
     let id = Uuid::new_v4();
     sqlx::query("INSERT INTO analysis_suggestions(id,target_app,metric_snapshot,summary,proposal) VALUES ($1,$2,$3,$4,$5)").bind(id).bind(&input.target_app).bind(&snapshot).bind(proposal["summary"].as_str().unwrap()).bind(&proposal).execute(&state.pool).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
     Ok(Json(
@@ -215,6 +252,27 @@ pub(super) struct Evaluate {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn generated_numbers_and_claims_come_only_from_verified_snapshot_facts() {
+        let snapshot = json!({"target_app":"web_chat","rows":[{"day":"2026-10-12","event_type":"message.persisted","total":3}]});
+        let choice = json!({"fact_indices":[0,1],"action":"chat_context_messages","value":30});
+        let proposal = grounded_proposal(&snapshot, &choice).unwrap();
+        assert!(proposal["summary"].as_str().unwrap().contains("3 筆"));
+        for indices in [
+            json!([99]),
+            json!([-1]),
+            json!([0, 0]),
+            json!([]),
+            json!([0, 1, 0, 1]),
+        ] {
+            let mut bad = choice.clone();
+            bad["fact_indices"] = indices;
+            assert!(grounded_proposal(&snapshot, &bad).is_none());
+        }
+        let mut bad = choice;
+        bad["action"] = json!("pet_review_min_days");
+        assert!(grounded_proposal(&snapshot, &bad).is_none());
+    }
     #[test]
     fn proposal_is_bounded_and_cannot_change_target() {
         let p = json!({"summary":"目前有三筆事件。","action":"chat_context_messages","value":30,"rationale":"依三筆事件提出建議"});

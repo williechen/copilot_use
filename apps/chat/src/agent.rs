@@ -1,5 +1,5 @@
 //! Actor-scoped MCP tool execution; only a complete validated answer becomes a message/outbox event.
-use super::{StateData, auth, realtime};
+use super::{StateData, auth};
 use axum::{
     Json,
     extract::State,
@@ -88,10 +88,6 @@ pub(super) async fn reply(
         .persist_as(&input.room_id, &answer, "ai", Some("openai-agent"))
         .await
         .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
-    let _ = state.events.send(realtime::RoomEvent {
-        room_id: input.room_id,
-        payload: json!({"type":"message","id":id,"content":answer}),
-    });
     Ok(Json(
         json!({"id":id,"answer":answer,"sources":outcome.value["sources"],"follow_up_question":outcome.value["follow_up_question"],"steps":outcome.steps}),
     ))
