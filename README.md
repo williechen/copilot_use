@@ -1,4 +1,23 @@
-# copilot_use — AI 對照實作
+# copilot_use — P9 最終產品實作（AI 控制）
+
+> **正式目標：完成可部署的 Rust AI Chat、Desktop Pet、Product Analytics 三個完整產品，而非 Day 9 教學示範。**
+> `rust_ai_chat` 是使用者控制、AI 永遠唯讀的教學 Repository；本 Repo 由 AI 獨立朝 P9 開發，不等待教學 Day 或 P0–P5 進度。
+> **目前狀態：P9 尚未完成。** 已存在的 Chat Outbox／Pet Quarantine／Analytics Ingest 只是早期切片，尚缺完整 UI、AI 能力、安全驗證、完整部署與跨產品 E2E。不可把早期切片宣稱為可交付最終產品。
+
+## P9 三產品交付範圍
+
+- **Chat**：Axum/Leptos SSR+Hydration、Router、多使用者/主題/AI Personas、Session 與授權、WebSocket presence/typing/private/reconnect、history、Transactional Outbox、Streaming、Structured Output、Function Calling、RAG/pgvector、MCP、Agent Runtime、OTel、部署/測試。
+- **Desktop Pet**：Tauri/Leptos 桌面 GUI、五項設定與可選進階設定、多寵物、AI 角色/動畫生成、200×200 畫框、學習/記憶/複習/RAG/MCP/Agent、安全 FileOrganizer（授權、明確確認、TOCTOU 防護、Receipt）、跨平台打包與測試。
+- **Product Analytics**：獨立資料庫，同一個服務內的 Dashboard+Ingest/Query API、來源認證、持久冪等、聚合報表、事件最小化、資料保留/刪除/備份、可追溯 AI 建議及 OTel、部署/測試。
+- **整合驗收**：三產品可各自執行/部署、隔離資料庫，跨系統事件驗證、可靠重試、E2E、CI/CD、故障恢復；所有規格和測試皆有可查證證據後才可稱 P9 完成。
+
+## 開發軌道
+
+本 Repo 可直接實作最終功能，不受 `rust_ai_chat` 教學 Day 制約。每次更新必須說明具體新增的產品功能、仍缺的功能、真正的測試/CI 及部署證據。**工作中狀態不能與完成驗收混淆。**
+
+---
+
+## 舊有 Day 9 切片（歷史基準，不代表 P9 目標）
 
 **權責：** [rust_ai_chat](https://github.com/williechen/rust_ai_chat) 是使用者控制的教學程式碼，AI 完全唯讀；本 Repository `copilot_use` 是 AI 控制的實作／驗證區，兩者的 SHA、CI 與 Gate 必須獨立核算。
 
