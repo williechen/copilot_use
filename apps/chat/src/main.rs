@@ -25,6 +25,7 @@ struct StateData {
     events: tokio::sync::broadcast::Sender<realtime::RoomEvent>,
     ai_slots: Arc<tokio::sync::Semaphore>,
     auth_slots: Arc<tokio::sync::Semaphore>,
+    ws_slots: Arc<tokio::sync::Semaphore>,
     tool_slots: Arc<tokio::sync::Semaphore>,
     mcp_endpoint: Arc<str>,
 }
@@ -43,6 +44,7 @@ struct MessageRequest {
 #[derive(Deserialize)]
 struct MessagesQuery {
     room_id: String,
+    before: Option<uuid::Uuid>,
 }
 #[derive(Serialize)]
 struct CreatedMessage {
@@ -146,13 +148,27 @@ async fn list_messages(
     if input.room_id.is_empty() || input.room_id.len() > 40 {
         return Err(StatusCode::BAD_REQUEST);
     }
+    if let Some(cursor) = input.before {
+        let valid: bool = sqlx::query_scalar(
+            "SELECT EXISTS(SELECT 1 FROM chat_messages WHERE id=$1 AND room_id=$2)",
+        )
+        .bind(cursor)
+        .bind(&input.room_id)
+        .fetch_one(&s.pool)
+        .await
+        .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
+        if !valid {
+            return Err(StatusCode::NOT_FOUND);
+        }
+    }
     let messages = sqlx::query_as::<_, MessageItem>(
         "SELECT id::text AS id, content FROM (
           SELECT id, content, created_at FROM chat_messages
-          WHERE room_id=$1 ORDER BY created_at DESC, id DESC LIMIT 100
+          WHERE room_id=$1 AND ($2::uuid IS NULL OR (created_at,id)<(SELECT created_at,id FROM chat_messages WHERE id=$2 AND room_id=$1))
+          ORDER BY created_at DESC, id DESC LIMIT 100
          ) AS recent ORDER BY created_at ASC, id ASC",
     )
-    .bind(&input.room_id)
+    .bind(&input.room_id).bind(input.before)
     .fetch_all(&s.pool)
     .await
     .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
@@ -306,6 +322,7 @@ async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
             events,
             ai_slots: Arc::new(tokio::sync::Semaphore::new(2)),
             auth_slots: Arc::new(tokio::sync::Semaphore::new(4)),
+            ws_slots: Arc::new(tokio::sync::Semaphore::new(128)),
             tool_slots: Arc::new(tokio::sync::Semaphore::new(2)),
             mcp_endpoint,
         });

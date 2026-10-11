@@ -90,3 +90,5 @@ python3 scripts/local-verify.py --live-insights --pet-gui
 ```
 
 Pet 的記憶工具使用同一 executable 的 `--mcp-once` readonly SQLite stdio 模式；只有所選寵物的資料可見，子程序不繼承 API key。MCP 支援範圍為上述本地唯讀工具，不代表任意第三方 MCP server 相容。
+
+Chat history 可傳 `before=<message UUID>`，最多 100 筆；UI 最多保留 1000 筆。WebSocket 全服務最多 128 連線，登出/Session 到期/ACL 失效會拒絕後續資料並關閉連線；idle 每五秒檢查。跨程序 fan-out 和更完整配額仍是未完成事項。

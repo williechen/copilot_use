@@ -52,10 +52,15 @@ pub(super) async fn upgrade(
     } else {
         None
     };
+    let permit = state
+        .ws_slots
+        .clone()
+        .try_acquire_owned()
+        .map_err(|_| StatusCode::TOO_MANY_REQUESTS)?;
     Ok(ws
         .max_message_size(4096)
         .max_frame_size(4096)
-        .on_upgrade(move |socket| connected(socket, state, room_id, cookie_actor)))
+        .on_upgrade(move |socket| connected(socket, state, room_id, cookie_actor, headers, permit)))
 }
 async fn send(socket: &mut WebSocket, value: Value) -> bool {
     tokio::time::timeout(
@@ -70,6 +75,8 @@ async fn connected(
     state: StateData,
     room_id: String,
     cookie_actor: Option<auth::Principal>,
+    session_headers: HeaderMap,
+    _permit: tokio::sync::OwnedSemaphorePermit,
 ) {
     let auth = tokio::time::timeout(Duration::from_secs(5), socket.recv()).await;
     let authenticated = cookie_actor.is_some()
@@ -97,6 +104,10 @@ async fn connected(
         let _ = socket.send(Message::Close(None)).await;
         return;
     }
+    if !session_valid(&state, &session_headers, cookie_actor, &room_id).await {
+        let _ = socket.send(Message::Close(None)).await;
+        return;
+    }
     let mut subscription = state.events.subscribe();
     let connection = Uuid::new_v4();
     if !send(
@@ -112,11 +123,20 @@ async fn connected(
         payload: json!({"type":"presence","connection_id":connection,"online":true}),
     });
     let mut last_typing = tokio::time::Instant::now() - Duration::from_secs(1);
+    let mut expiry = tokio::time::interval_at(
+        tokio::time::Instant::now() + Duration::from_secs(5),
+        Duration::from_secs(5),
+    );
+    expiry.set_missed_tick_behavior(tokio::time::MissedTickBehavior::Skip);
     loop {
         tokio::select! {
+            _ = expiry.tick() => {
+                if !session_valid(&state,&session_headers,cookie_actor,&room_id).await {break;}
+            }
             incoming = socket.recv() => {
                 match incoming {
                     Some(Ok(Message::Text(text))) => {
+                        if !session_valid(&state,&session_headers,cookie_actor,&room_id).await {break;}
                         if text.as_str() == r#"{"type":"typing"}"# && last_typing.elapsed() >= Duration::from_millis(500) {
                             last_typing = tokio::time::Instant::now();
                             let _ = state.events.send(RoomEvent {room_id:room_id.clone(), payload:json!({"type":"typing","connection_id":connection})});
@@ -130,6 +150,7 @@ async fn connected(
             event = subscription.recv() => {
                 match event {
                     Ok(event) if event.room_id == room_id => {
+                        if !session_valid(&state,&session_headers,cookie_actor,&room_id).await {break;}
                         if !send(&mut socket, event.payload).await {break;}
                     }
                     Err(broadcast::error::RecvError::Lagged(_)) => {
@@ -145,4 +166,19 @@ async fn connected(
         room_id,
         payload: json!({"type":"presence","connection_id":connection,"online":false}),
     });
+    let _ = socket.send(Message::Close(None)).await;
+}
+async fn session_valid(
+    state: &StateData,
+    headers: &HeaderMap,
+    actor: Option<auth::Principal>,
+    room: &str,
+) -> bool {
+    let Some(actor) = actor else {
+        return true;
+    };
+    let Ok(current) = auth::principal(state, headers, false).await else {
+        return false;
+    };
+    current.user_id() == actor.user_id() && auth::room_allowed(state, current, room).await.is_ok()
 }

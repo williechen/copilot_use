@@ -4,7 +4,7 @@
 
 ## 基準與證據範圍
 
-起點 `26f25f62e5ade7538b19c5643df71f9e06f609d1`。已提交 `7bb8fc98465390d0173e2d53a6730713073627c3` 的六項 CI 全通過：Rust/PostgreSQL、Docker Compose E2E、本地故障恢復、Linux deb/GUI、macOS app、Windows NSIS。新 MCP/Agent、journal、租約、觀測 transport 與建議流程目前以本地工作樹驗證；必須以其新 SHA 再執行 CI，不能沿用舊提交結果。
+起點 `26f25f62e5ade7538b19c5643df71f9e06f609d1`。已提交 `7bb8fc98465390d0173e2d53a6730713073627c3` 的六項 CI 全通過：Rust/PostgreSQL、Docker Compose E2E、本地故障恢復、Linux deb/GUI、macOS app、Windows NSIS。MCP/Agent、journal、租約、觀測 transport 與建議流程已提交 `5be001d06e9da1a00ebe336b8f529d37d909b1d2`。本地 46 個 workspace 測試、54 項整合檢查通過；其 CI 的 macOS variadic mode 型別錯誤已定位，後續修正仍需新 SHA CI。不得沿用舊提交結果。
 
 唯讀需求基準 `rust_ai_chat` SHA `fdc74c1ee244cf86df3fd1c427d893d2956f6211`，以及 Notion 共同主頁與三產品需求頁。本地 Rust/Cargo 1.99.0、PostgreSQL 18.6、pgvector 0.8.7、Node 22.22.1、Trunk 0.21.14、Tauri CLI 2.11.5。依賴版本固定於各 workspace 的 Cargo.lock。
 
@@ -13,6 +13,7 @@
 - `scripts/local-verify.py`：fmt、嚴格 Clippy、46 個 workspace 測試；全新隔離 DB migrations、兩個 non-superuser role 的 DB 隔離、HTTP/WS、精確訊息 ID 的跨服務事件、來源 token 與 schema 拒絕、Session/ACL/CSRF/邀請/登出、重啟冪等、服務與 DB 中斷恢復、pg_dump/restore 逐列核對。
 - Chat/Pet OpenAI 真實 `gpt-5.6-luna` 對話串流完成與持久化；Chat 真實 embedding → pgvector 檢索 → RAG 回覆 → Outbox/Analytics，以及知識文件刪除。生圖使用 Responses 的 image_generation tool，實際 PNG 與 SQLite 快取已驗證；不是 placeholder。
 - Chat 真實 Function Calling → MCP 2026-07-28 → owner-scoped pgvector → Strict JSON → 完整回答/Outbox/Analytics 已通過；確認測試代碼 COMET-432 與引用文件。MCP discovery、header mismatch、Origin 與未知工具拒絕皆以真實 HTTP 驗證。
+- Chat cursor API 按 `(created_at,id)` 提供最多 100 筆的早期訊息，拒絕不屬於房間的 cursor；UI 可載入舊訊息且最多 1000 筆。WS 全服務最多 128 連線，cookie Session/ACL 在事件送出前、typing 前與每五秒重新驗證。真實 RFC6455 cookie 測試確認登出後連線關閉，後續私人訊息不會送到被撤銷的 session。
 - Chat 同 UUID 併發重送只保存一筆訊息與 Outbox；變更 room/author/content 拒絕。真實瀏覽器驗證 32 筆有上限佇列、離線保留、服務恢復後只送達一筆訊息/Outbox/Analytics，及重新訂閱後收到獨立 WS 通知。佇列只在當頁記憶體保存，離開頁面不留私人內容。
 - Leptos SSR 與 WASM hydration 編譯、真實瀏覽器登入/受保護路由/建房/送信/刷新 history/登出測試。舊 `/legacy` HTML 入口已移除。
 - Linux Tauri/WebKit/WASM/IPC 實際 GUI 測試：五項設定、多寵物、記憶隔離/刪除、複習排程、opaque ID 預覽/拒絕未確認操作/確認後 receipt、200×200 浮動視窗。真實生成 sprite 角色一致性經目視檢查，任意原圖尺寸縮放到固定顯示框。
@@ -30,7 +31,7 @@
 
 | 範圍 | 必須補齊 |
 |---|---|
-| Chat 即時產品 | history cursor、presence snapshot、typing UI、完整連線資源限制、跨程序 fan-out；reload 後不保存未送出私人內容 |
+| Chat 即時產品 | presence snapshot、typing UI、每使用者連線配額與更完整資源限制、跨程序 fan-out；reload 後不保存未送出私人內容 |
 | Chat AI | 多 Persona orchestration、AI-to-AI speaker selection/turn budget/cooldown/context/memory、多 Persona 的工具/結構輸出整合與品質驗收 |
 | 共同 AI | Chat/Pet 的本地唯讀 MCP/Agent 已驗證；更多工具、完整權限及品質驗收仍缺 |
 | Pet 完整互動 | 進階覆寫 UI、多動作動畫選擇、主動互動、記憶編輯與學習適應的完整 UI/流程 |

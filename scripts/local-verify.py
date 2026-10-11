@@ -172,6 +172,8 @@ with tempfile.TemporaryDirectory(prefix='copilot-verify-') as scratch:
         check('logout revokes server-side session',member_http(bob,'/api/v1/messages?room_id='+private)[0]==401)
         run(['node','scripts/realtime-e2e.mjs'],env=env)
         check('real WebSocket two-client and room-isolation E2E')
+        run(['node','scripts/session-ws-e2e.mjs'],env=env)
+        check('revoked cookie session cannot retain WebSocket access')
         # Seed reviewable, non-AI fixture to prove the real PostgreSQL/HTTP policy lifecycle.
         suggestion=str(uuid.uuid4())
         proposal=json.dumps({'summary':'測試資料只有事件次數。','action':'chat_context_messages','value':42,'rationale':'僅測試安全政策變更，不推論品質。'})
@@ -197,6 +199,11 @@ with tempfile.TemporaryDirectory(prefix='copilot-verify-') as scratch:
         check('evaluation stores actual descriptive counts without a causal claim',status==200 and evaluation['after']['target_app']=='web_chat' and 'cannot prove causal impact' in evaluation['interpretation'])
 
         stop(chat);stop(analytics);chat=start('chat');analytics=start('analytics')
+        recent=http(chat_url,'/api/v1/messages?room_id='+room,chat_token)[1]
+        cursor=recent[-1]['id']
+        older=http(chat_url,'/api/v1/messages?room_id='+room+'&before='+cursor,chat_token)
+        check('history cursor excludes its anchor without overlapping messages',older[0]==200 and all(row['id']!=cursor for row in older[1]))
+        check('foreign or missing history cursor is rejected',http(chat_url,'/api/v1/messages?room_id='+room+'&before='+str(uuid.uuid4()),chat_token)[0]==404)
         check('history survives service restart',any(x['id']==message['id'] for x in http(chat_url,'/api/v1/messages?room_id='+room,chat_token)[1]))
         count=http(analytics_url,'/api/v1/events/count',analytics_token)[1]['total']
         assert http(analytics_url,'/api/v1/events',ingest_token,event)[0]==202

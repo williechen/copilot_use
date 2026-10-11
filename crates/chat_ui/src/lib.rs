@@ -125,6 +125,15 @@ fn Chat() -> impl IntoView {
         <select id="rooms" prop:value=move ||selected.get() on:change=move |e|load(event_target_value(&e))><option value="">"選擇房間"</option>{move ||rooms.get().into_iter().map(|r|view!{<option value=r["id"].as_str().unwrap_or("").to_owned()>{r["name"].as_str().unwrap_or("").to_owned()}</option>}).collect_view()}</select>
         <input placeholder="邀請的使用者名稱" on:input=move |e|invitee.set(event_target_value(&e))/><button on:click=move |_|{let body=json!({"room_id":selected.get(),"username":invitee.get()});spawn(async move{match api("/api/v1/rooms/invite","POST",Some(body)).await{Ok(_)=>state.error.set("邀請已完成".into()),Err(e)=>state.error.set(e)}});}>"邀請加入"</button>
         <ul id="messages" aria-live="polite">{move ||messages.get().into_iter().map(|m|view!{<li>{m["content"].as_str().unwrap_or("").to_owned()}<small>{m["id"].as_str().unwrap_or("").to_owned()}</small></li>}).collect_view()}</ul>
+        <button on:click=move |_| {
+            if messages.get_untracked().len()>=1000 {state.error.set("此頁最多保留 1000 筆歷史訊息".into());return;}
+            let room=selected.get();let oldest=messages.get().first().and_then(|m|m["id"].as_str()).unwrap_or("").to_owned();
+            if room.is_empty() ||oldest.is_empty(){return;}
+            spawn(async move{match api(&format!("/api/v1/messages?room_id={room}&before={oldest}"),"GET",None).await {
+                Ok(v)=>{if selected.get_untracked()==room {let mut older=v.as_array().cloned().unwrap_or_default();messages.update(|current|{older.extend(current.iter().filter(|m|!older.iter().any(|o|o["id"]==m["id"])).cloned().collect::<Vec<_>>());if older.len()>1000 {older.drain(..older.len()-1000);}
+                *current=older;});}},Err(e)=>state.error.set(e)
+            }});
+        }>"載入較舊訊息"</button>
         <input id="message" maxlength="65536" placeholder="輸入訊息" prop:value=move ||draft.get() on:input=move |e|draft.set(event_target_value(&e))/><button id="send" on:click=move |_| {
             let room=selected.get();let content=draft.get();
             if room.is_empty() || content.trim().is_empty(){state.error.set("請選擇房間並輸入訊息".into());return;}
