@@ -1,1 +1,3 @@
-fn main(){chat_ui::hydrate();}
+fn main() {
+    chat_ui::hydrate();
+}

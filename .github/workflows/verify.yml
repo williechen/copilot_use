@@ -88,12 +88,12 @@ jobs:
       - name: Install isolated-test PostgreSQL tooling
         run: |
           sudo apt-get update
-          sudo apt-get install -y postgresql postgresql-client libpq-dev postgresql-server-dev-all
+          sudo apt-get install -y postgresql-16 postgresql-client-16 postgresql-server-dev-16 libpq-dev
           git clone --branch v0.8.7 --depth 1 https://github.com/pgvector/pgvector.git "$RUNNER_TEMP/pgvector"
-          make -C "$RUNNER_TEMP/pgvector"
-          sudo make -C "$RUNNER_TEMP/pgvector" install
+          make -C "$RUNNER_TEMP/pgvector" PG_CONFIG=/usr/lib/postgresql/16/bin/pg_config
+          sudo make -C "$RUNNER_TEMP/pgvector" PG_CONFIG=/usr/lib/postgresql/16/bin/pg_config install
       - name: Run HTTP, WebSocket, restart, DB interruption and backup/restore tests
-        run: python3 scripts/local-verify.py
+        run: PATH=/usr/lib/postgresql/16/bin:$PATH python3 scripts/local-verify.py
       - uses: actions/upload-artifact@v4
         if: success()
         with:
