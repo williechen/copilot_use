@@ -1,0 +1,8 @@
+[package]
+name = "event-contract"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+serde.workspace = true
+uuid.workspace = true
