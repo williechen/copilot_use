@@ -173,7 +173,7 @@ mod tests {
         let profile = PetProfile::parse(&format!(
             "{MINIMAL}\n[外觀]\n顏色 = \"綠色\"\n[動畫]\n動作 = [\"拍翅膀\"]\n"
         )).unwrap();
-        assert_eq!(profile.appearance.unwrap().color.as_deref(), Some("綠色"));
+        assert_eq!(profile.appearance.as_ref().unwrap().color.as_deref(), Some("綠色"));
         assert!(profile.requested_actions().contains("拍翅膀"));
     }
 
