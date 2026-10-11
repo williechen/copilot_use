@@ -12,6 +12,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     sqlx::migrate!("./migrations").run(&pool).await?;
     let app = build_app(AnalyticsState { pool, api_token: Arc::from(token) });
     let listener = tokio::net::TcpListener::bind("127.0.0.1:3100").await?;
-    axum::serve(listener, app).await?;
+    axum::serve(listener, app).with_graceful_shutdown(async { let _ = tokio::signal::ctrl_c().await; }).await?;
     Ok(())
 }
