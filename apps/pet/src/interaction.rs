@@ -52,10 +52,12 @@ impl PetStore {
         pet: Uuid,
         preferences: &Interaction,
     ) -> Result<(), sqlx::Error> {
-        if !sqlx::query_scalar::<_, bool>("SELECT EXISTS(SELECT 1 FROM pets WHERE id=?)")
-            .bind(pet.to_string())
-            .fetch_one(&self.pool)
-            .await?
+        if !sqlx::query_scalar::<_, bool>(
+            "SELECT EXISTS(SELECT 1 FROM pets WHERE id=? AND archived_at IS NULL)",
+        )
+        .bind(pet.to_string())
+        .fetch_one(&self.pool)
+        .await?
         {
             return Err(sqlx::Error::RowNotFound);
         }

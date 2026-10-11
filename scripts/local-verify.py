@@ -370,7 +370,7 @@ with tempfile.TemporaryDirectory(prefix='copilot-verify-') as scratch:
         chat_ids=trace_ids('chat','/api/v1/messages');analytics_ids=trace_ids('analytics','/api/v1/events')
         check('Chat Outbox and Analytics preserve W3C trace correlation',bool(chat_ids&analytics_ids))
 
-        forbidden=([live_key] if live_key else [])+[chat_token,analytics_token,ingest_token,pet_token,'transactional test','retry after outage','not committed']
+        forbidden=([live_key] if live_key else [])+[chat_token,analytics_token,ingest_token,pet_token,'transactional test','retry after outage','not committed','Rust token=synthetic-secret','Rust rust ownership']
         if '--pet-gui' in sys.argv:
             pet_suggestion=str(uuid.uuid4())
             pet_proposal=json.dumps({'summary':'複習事件測試。','action':'pet_review_min_days','value':3,'rationale':'測試可回退設定，不推論學習品質。'})
@@ -389,6 +389,13 @@ with tempfile.TemporaryDirectory(prefix='copilot-verify-') as scratch:
             analytics_ids=trace_ids('analytics','/api/v1/events')
             check('Pet and Analytics preserve W3C trace correlation',bool(pet_ids&analytics_ids))
             forbidden += ['安全隔離的測試記憶','Rust 的所有權如何避免 double free？','sample.txt','second.txt']
+        env['VERIFY_TOPIC_FIXTURE']=str(d/'topic-fixture.json')
+        run(['node','scripts/topic-consent-e2e.mjs'],env=env)
+        stop(analytics)
+        run(['node','scripts/topic-consent-e2e.mjs','--withdraw'],env=env)
+        analytics=start('analytics')
+        run(['node','scripts/topic-consent-e2e.mjs','--verify-withdrawal'],env=env)
+        check('explicit default-off topic consent, fixed vocabulary, filtering, idempotency and durable withdrawal across Analytics outage')
         check('OTLP transport strips inherited authentication headers',all('metadata-synthetic-secret' not in str(headers) and 'Authorization' not in headers for headers in observed_headers))
         check('telemetry excludes credentials and message contents',all(value.encode() not in payload for value in forbidden for _,payload in observed))
         REPORT.parent.mkdir(parents=True,exist_ok=True)

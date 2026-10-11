@@ -61,7 +61,7 @@ window.addEventListener('error',e=>window.__PET_LOAD_ERROR=e.message);window.add
  const fresh=await invoke('scan_file_preview');sample.id=fresh.find(x=>x.name==='sample.txt').id;
  let refused=false;try{await invoke('confirm_cleanup',{id:sample.id,confirmed:false})}catch(_){refused=true;}assert(refused,'explicit confirmation');
  const receipt=await invoke('confirm_cleanup',{id:sample.id,confirmed:true});assert(receipt.operation_id&&receipt.size_bytes>0,'real cleanup receipt');
- const waitUntil=async(test,label)=>{const until=Date.now()+10000;while(!test()){if(Date.now()>until)throw Error(label);await new Promise(r=>setTimeout(r,25));}};
+ const waitUntil=async(test,label)=>{const until=Date.now()+10000;while(!test()){if(Date.now()>until)throw Error(label+'; UI: '+(document.querySelector('[role="alert"]')?.textContent||''));await new Promise(r=>setTimeout(r,25));}};
  document.querySelector('#scan-files').click();
  const section=document.querySelector('#scan-files').closest('section');
  await waitUntil(()=>[...section.querySelectorAll('article')].some(x=>x.textContent.includes('second.txt')),'organizer UI preview');
@@ -88,6 +88,8 @@ window.addEventListener('error',e=>window.__PET_LOAD_ERROR=e.message);window.add
  const option=document.createElement('option');option.value=pet;select.appendChild(option);select.value=pet;select.dispatchEvent(new Event('change',{bubbles:true}));
  await new Promise(r=>setTimeout(r,250));
  assert(document.body.textContent.includes('Rust 的所有權'),'Leptos renders native data');
+ if(window.__PET_TEST_LIVE_IMAGE){await waitUntil(()=>document.querySelector('.sprite'),'generated sprite rendered');const current=await invoke('load_asset',{pet});const frame=document.querySelector('.sprite').getBoundingClientRect();assert(frame.width<=200&&frame.height<=200&&Math.abs(frame.width/frame.height-current.width/current.height)<0.01,'actual sprite frame preserves original aspect inside 200x200');}
+
 
  for(const [field,value]of [['名字','GUI 驗證'],['種類','鳥']]){
   const input=[...document.querySelectorAll('label')].find(x=>x.textContent===field).querySelector('input');input.value=value;input.dispatchEvent(new Event('input',{bubbles:true}));
@@ -99,6 +101,11 @@ window.addEventListener('error',e=>window.__PET_LOAD_ERROR=e.message);window.add
  let savedProfile;const profileDeadline=Date.now()+10000;
  do{savedProfile=JSON.parse((await invoke('list_pets')).find(x=>x.id===pet).profile);if(savedProfile['外觀']?.['顏色']==='翠綠色')break;await new Promise(r=>setTimeout(r,25));}while(Date.now()<profileDeadline);
  assert(savedProfile['外觀']['顏色']==='翠綠色','advanced override UI persisted');
+ let deniedImport=false;try{await invoke('import_pet_profile',{pet,confirmed:false})}catch(_){deniedImport=true}assert(deniedImport,'profile import requires confirmation');await invoke('import_pet_profile',{pet,confirmed:true});
+ const importButton=document.querySelector('#import-pet-profile');assert(importButton.disabled,'profile import UI confirmation');
+ const importConfirm=document.querySelector('#confirm-profile-import');importConfirm.checked=true;importConfirm.dispatchEvent(new Event('change',{bubbles:true}));await waitUntil(()=>!importButton.disabled,'profile import checkbox');importButton.click();
+ await waitUntil(()=>document.querySelector('#import-pet-profile').disabled,'actual profile import completed');assert(document.querySelector('#profile-location').textContent.includes(pet),'selected pet configuration path rendered');
+
  const memorySection=[...document.querySelectorAll('section')].find(x=>x.querySelector('h2')?.textContent==='可管理的記憶');
  await waitUntil(()=>[...memorySection.querySelectorAll('article')].some(x=>x.textContent.includes('ASTRO-771')),'memory UI load after profile save');
  const memoryRow=[...memorySection.querySelectorAll('article')].find(x=>x.textContent.includes('ASTRO-771'));
@@ -136,6 +143,15 @@ window.addEventListener('error',e=>window.__PET_LOAD_ERROR=e.message);window.add
  while(!document.querySelector('.recall-prompt')?.textContent.includes('主動回想測試題')){if(Date.now()>proactiveDeadline)throw Error('actual proactive recall timer did not display');await new Promise(r=>setTimeout(r,100));}
  assert(await invoke('recall_prompt')===null,'displayed reminder is rate limited across windows');
  document.querySelector('.recall-prompt button').click();
+
+ const registry=document.querySelector('#pet-archive');const archivePet=document.querySelector('#archive-pet');assert(archivePet.disabled,'pet removal UI confirmation');
+ let removalDenied=false;try{await invoke('set_pet_archived',{pet,archived:true,confirmed:false})}catch(_){removalDenied=true}assert(removalDenied,'pet removal IPC confirmation');
+ const removeConfirm=document.querySelector('#confirm-pet-archive');removeConfirm.checked=true;removeConfirm.dispatchEvent(new Event('change',{bubbles:true}));await waitUntil(()=>!archivePet.disabled,'pet removal checkbox');archivePet.click();
+ await waitUntil(()=>registry.querySelector(`article[data-pet="${pet}"]`),'removed pet appears in recoverable archive');
+ assert(!(await invoke('list_pets')).some(x=>x.id===pet)&&(await invoke('list_pets')).some(x=>x.id===other),'actual pet removal preserves other pet');
+ const archivedRow=registry.querySelector(`article[data-pet="${pet}"]`);const restorePet=archivedRow.querySelector('button');assert(restorePet.disabled,'pet restore UI confirmation');const restorePetConfirm=archivedRow.querySelector('input');restorePetConfirm.checked=true;restorePetConfirm.dispatchEvent(new Event('change',{bubbles:true}));await waitUntil(()=>!restorePet.disabled,'pet restore checkbox');restorePet.click();
+ await waitUntil(()=>registry.textContent.includes('已還原寵物與原有資料'),'actual pet restore receipt');assert((await invoke('list_memories',{pet})).some(x=>x.id===knowledge),'restored pet retains saved memory');
+ assert((await invoke('list_pets')).length===2,'restored pet registry');
  if(window.__PET_TEST_UPDATER){
   const available=await invoke('check_local_update');assert(available.status==='available'&&available.version==='0.1.1','local signed update discovered');
   let unconfirmedInstall=false;try{await invoke('install_local_update',{id:available.id,confirmed:false})}catch(_){unconfirmedInstall=true}assert(unconfirmedInstall,'updater installation requires confirmation');
@@ -149,5 +165,5 @@ window.addEventListener('error',e=>window.__PET_LOAD_ERROR=e.message);window.add
   let remoteDenied=false;try{await invoke('check_local_update')}catch(_){remoteDenied=true}assert(remoteDenied,'updater remote URL rejected before download');
   }
  }
- await invoke('gui_test_result',{success:true,message:'PASS: WebKit/WASM, 200x200, IPC, profiles, memory isolation/deletion, recall scheduling, advanced overrides, memory editing, opaque-ID confirmed cleanup, organizer GUI, journal/restore recovery, Trash UI, animation choices, rendered proactive reminder and cooldown, learning summary, SQLite/assets snapshot restore, MCP stdio scope and rendered data; AI='+!!window.__PET_TEST_LIVE_AI+'; image='+!!window.__PET_TEST_LIVE_IMAGE+'; analytics='+!!window.__PET_TEST_ANALYTICS+'; updater_signature='+!!window.__PET_TEST_UPDATER});
+ await invoke('gui_test_result',{success:true,message:'PASS: WebKit/WASM, 200x200, IPC, profiles, memory isolation/deletion, recall scheduling, advanced overrides, memory editing, opaque-ID confirmed cleanup, organizer GUI, journal/restore recovery, Trash UI, animation choices, rendered proactive reminder and cooldown, learning summary, SQLite/assets snapshot restore, per-pet TOML import and recoverable registry, MCP stdio scope and rendered data; AI='+!!window.__PET_TEST_LIVE_AI+'; image='+!!window.__PET_TEST_LIVE_IMAGE+'; analytics='+!!window.__PET_TEST_ANALYTICS+'; updater_signature='+!!window.__PET_TEST_UPDATER});
 })().catch(async e=>{await window.__TAURI__.core.invoke('gui_test_result',{success:false,message:String(e?.message||e)})});

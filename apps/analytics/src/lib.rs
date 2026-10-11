@@ -1,10 +1,13 @@
 //! Analytics：認證後持久事件、依 (source_app,event_id) 原子去重、Query API。
+pub mod application;
 pub mod dashboard;
+use application::{Analytics, RepositoryError};
 mod governance;
 mod insights;
+mod topics;
 use axum::{
     Router,
-    extract::{Json, Path, State},
+    extract::{Json, Path, Query, State},
     http::{HeaderMap, StatusCode},
     routing::{get, post},
 };
@@ -12,7 +15,8 @@ use event_contract::ProductEvent;
 use serde::Serialize;
 use sqlx::PgPool;
 mod persistence;
-pub use persistence::{EventStore, EventSummary};
+pub use application::EventSummary;
+pub use persistence::EventStore;
 use std::sync::Arc;
 
 #[derive(Clone)]
@@ -51,15 +55,48 @@ async fn ingest(
     if !event.is_valid() {
         return StatusCode::BAD_REQUEST;
     }
-    match EventStore::new(state.pool).insert_once(&event).await {
+    match Analytics::new(EventStore::new(state.pool))
+        .receive(&event)
+        .await
+    {
         Ok(_) => StatusCode::ACCEPTED,
-        Err(sqlx::Error::Protocol(message)) if message == "event_identity_conflict" => {
-            StatusCode::CONFLICT
-        }
+        Err(RepositoryError::IdentityConflict) => StatusCode::CONFLICT,
+        Err(RepositoryError::InvalidEvent) => StatusCode::BAD_REQUEST,
         Err(_) => StatusCode::SERVICE_UNAVAILABLE,
     }
 }
 
+#[derive(serde::Deserialize)]
+#[serde(deny_unknown_fields)]
+struct RecentQuery {
+    source_app: Option<String>,
+    event_type: Option<String>,
+}
+async fn recent(
+    State(state): State<AnalyticsState>,
+    headers: HeaderMap,
+    Query(input): Query<RecentQuery>,
+) -> Result<Json<Vec<application::EventRecord>>, StatusCode> {
+    if !authorized(&headers, &state.api_token) {
+        return Err(StatusCode::UNAUTHORIZED);
+    }
+    if input
+        .source_app
+        .as_deref()
+        .is_some_and(|v| !matches!(v, "web_chat" | "desktop_pet"))
+        || input
+            .event_type
+            .as_ref()
+            .is_some_and(|v| v.is_empty() || v.len() > 128)
+    {
+        return Err(StatusCode::BAD_REQUEST);
+    }
+    let records = Analytics::new(EventStore::new(state.pool))
+        .recent(input.source_app.as_deref(), input.event_type.as_deref())
+        .await
+        .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
+    Ok(Json(records))
+}
 #[derive(Serialize)]
 struct CountResponse {
     total: i64,
@@ -72,7 +109,7 @@ async fn count(
     if !authorized(&headers, &state.api_token) {
         return Err(StatusCode::UNAUTHORIZED);
     }
-    let total = EventStore::new(state.pool)
+    let total = Analytics::new(EventStore::new(state.pool))
         .total()
         .await
         .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
@@ -86,7 +123,7 @@ async fn summary(
     if !authorized(&headers, &state.api_token) {
         return Err(StatusCode::UNAUTHORIZED);
     }
-    let values = EventStore::new(state.pool)
+    let values = Analytics::new(EventStore::new(state.pool))
         .summary()
         .await
         .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
@@ -108,7 +145,7 @@ async fn event_lookup(
     if !authorized(&headers, &state.api_token) {
         return Err(StatusCode::UNAUTHORIZED);
     }
-    let kind = EventStore::new(state.pool)
+    let kind = Analytics::new(EventStore::new(state.pool))
         .lookup(&source, id)
         .await
         .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
@@ -132,8 +169,10 @@ pub fn build_app(state: AnalyticsState) -> Router {
             post(insights::evaluate),
         )
         .route("/api/v1/events", post(ingest))
+        .route("/api/v1/topics/withdraw", post(topics::withdraw))
         .route("/api/v1/events/{source}/{id}", get(event_lookup))
         .route("/api/v1/events/count", get(count))
+        .route("/api/v1/events/recent", get(recent))
         .route("/api/v1/events/summary", get(summary))
         .route("/api/v1/events/timeline", get(governance::timeline))
         .route("/api/v1/events/archive", post(governance::archive))

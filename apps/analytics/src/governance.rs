@@ -31,7 +31,7 @@ pub(super) async fn timeline(
     if range.to <= range.from || (range.to - range.from).num_days() > 366 {
         return Err(StatusCode::BAD_REQUEST);
     }
-    let rows=sqlx::query_as("SELECT (received_at AT TIME ZONE 'Asia/Taipei')::date::text AS day,source_app,event_type,count(*)::bigint AS total FROM product_events WHERE NOT archived AND received_at >= $1::timestamptz AND received_at < $2::timestamptz GROUP BY day,source_app,event_type ORDER BY day,source_app,event_type")
+    let rows=sqlx::query_as("SELECT (received_at AT TIME ZONE 'Asia/Taipei')::date::text AS day,source_app,event_type,count(*)::bigint AS total FROM product_events WHERE NOT archived AND NOT consent_withdrawn AND received_at >= $1::timestamptz AND received_at < $2::timestamptz GROUP BY day,source_app,event_type ORDER BY day,source_app,event_type")
   .bind(range.from.to_rfc3339()).bind(range.to.to_rfc3339()).fetch_all(&state.pool).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
     Ok(Json(rows))
 }
@@ -53,7 +53,7 @@ async fn set_archive(
     if !input.confirmed || input.before > Utc::now() {
         return Err(StatusCode::BAD_REQUEST);
     }
-    let result=sqlx::query("UPDATE product_events SET archived=$1 WHERE received_at < $2::timestamptz AND archived<>$1").bind(archived).bind(input.before.to_rfc3339()).execute(&state.pool).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
+    let result=sqlx::query("UPDATE product_events SET archived=$1 WHERE received_at < $2::timestamptz AND archived<>$1 AND NOT consent_withdrawn").bind(archived).bind(input.before.to_rfc3339()).execute(&state.pool).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
     Ok(Json(
         serde_json::json!({"changed":result.rows_affected(),"archived":archived,"reversible":true}),
     ))

@@ -69,6 +69,25 @@ impl Card {
         Ok(())
     }
 }
+impl crate::application::ProfileRepository for PetStore {
+    fn save<'a>(
+        &'a self,
+        id: Uuid,
+        profile: &'a PetProfile,
+    ) -> crate::application::ProfileFuture<'a> {
+        Box::pin(async move {
+            PetStore::save_profile(self, id, profile)
+                .await
+                .map_err(|error| {
+                    if error.to_string() == "settings_saved_projection_pending" {
+                        crate::application::ProfileError::ProjectionPending
+                    } else {
+                        crate::application::ProfileError::Unavailable
+                    }
+                })
+        })
+    }
+}
 impl PetStore {
     pub fn database_path(&self) -> &Path {
         &self.database_path
@@ -103,10 +122,12 @@ impl PetStore {
         })
     }
     pub async fn select_pet(&self, pet: Uuid) -> Result<(), sqlx::Error> {
-        let exists: bool = sqlx::query_scalar("SELECT EXISTS(SELECT 1 FROM pets WHERE id=?)")
-            .bind(pet.to_string())
-            .fetch_one(&self.pool)
-            .await?;
+        let exists: bool = sqlx::query_scalar(
+            "SELECT EXISTS(SELECT 1 FROM pets WHERE id=? AND archived_at IS NULL)",
+        )
+        .bind(pet.to_string())
+        .fetch_one(&self.pool)
+        .await?;
         if !exists {
             return Err(sqlx::Error::RowNotFound);
         }
@@ -119,7 +140,7 @@ impl PetStore {
             .await
     }
     pub async fn pets(&self) -> Result<Vec<PetItem>, sqlx::Error> {
-        sqlx::query_as("SELECT id,profile FROM pets ORDER BY id")
+        sqlx::query_as("SELECT id,profile FROM pets WHERE archived_at IS NULL ORDER BY id")
             .fetch_all(&self.pool)
             .await
     }
@@ -128,9 +149,18 @@ impl PetStore {
         id: Uuid,
         profile: &PetProfile,
     ) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
+        if id.is_nil() {
+            return Err("invalid pet identity".into());
+        }
         profile.validate()?;
         let text = serde_json::to_string(profile)?;
-        sqlx::query("INSERT INTO pets(id,profile) VALUES (?,?) ON CONFLICT(id) DO UPDATE SET profile=excluded.profile").bind(id.to_string()).bind(text).execute(&self.pool).await?;
+        let changed=sqlx::query("INSERT INTO pets(id,profile) VALUES (?,?) ON CONFLICT(id) DO UPDATE SET profile=excluded.profile WHERE pets.archived_at IS NULL").bind(id.to_string()).bind(text).execute(&self.pool).await?;
+        if changed.rows_affected() != 1 {
+            return Err("pet is archived".into());
+        }
+        self.sync_pet_files(id)
+            .await
+            .map_err(|_| "settings_saved_projection_pending")?;
         Ok(())
     }
     pub async fn memories(&self, id: Uuid) -> Result<Vec<Memory>, sqlx::Error> {

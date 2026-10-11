@@ -1,4 +1,6 @@
 //! Day 9: 訊息與 Outbox 同交易、租約 claim、CAS ACK、可重試投遞。
+pub mod application;
+pub mod topics;
 use event_contract::ProductEvent;
 use sqlx::{PgPool, Row};
 use std::time::Duration;
@@ -7,6 +9,26 @@ use uuid::Uuid;
 #[derive(Clone)]
 pub struct ChatWriter {
     pool: PgPool,
+}
+impl application::MessageRepository for ChatWriter {
+    fn commit<'a>(&'a self, input: application::MessageInput<'a>) -> application::CommitFuture<'a> {
+        Box::pin(async move {
+            match self
+                .persist_with_id(
+                    input.id,
+                    input.room,
+                    input.content,
+                    input.author_kind,
+                    input.author_id,
+                )
+                .await
+            {
+                Ok((id, inserted)) => Ok(application::Committed { id, inserted }),
+                Err(sqlx::Error::Protocol(_)) => Err(application::MessageError::Conflict),
+                Err(_) => Err(application::MessageError::Unavailable),
+            }
+        })
+    }
 }
 impl ChatWriter {
     pub fn new(pool: PgPool) -> Self {
@@ -78,6 +100,7 @@ impl ChatWriter {
         sqlx::query("INSERT INTO chat_outbox(event_id,message_id,schema_version,source_app,event_type,traceparent) VALUES ($1,$2,$3,$4,$5,$6)")
             .bind(event.event_id).bind(id).bind(i16::try_from(event.schema_version).unwrap())
             .bind(event.source_app).bind(event.event_type).bind(copilot_telemetry::outgoing_headers().get("traceparent")).execute(&mut **tx).await?;
+        topics::stage(tx, id, room_id, author_kind, author_id, content).await?;
         sqlx::query("SELECT pg_notify('copilot_chat_realtime',$1)")
             .bind(serde_json::json!({"type":"message","id":id,"room_id":room_id}).to_string())
             .execute(&mut **tx)
@@ -260,7 +283,9 @@ pub async fn run_dispatcher(
     let store = OutboxStore::new(pool);
     loop {
         // 暫時性 DB 故障不能永久終止投遞背景工作；不輸出敏感錯誤內容。
+        let privacy = topics::dispatch_withdrawal(&store.pool, &client, endpoint, token).await;
         match dispatch_once(&store, &client, endpoint, token).await {
+            Ok(false) if matches!(privacy, Ok(true)) => tokio::task::yield_now().await,
             Ok(true) => tokio::task::yield_now().await,
             Ok(false) => tokio::time::sleep(Duration::from_millis(500)).await,
             Err(_) => {

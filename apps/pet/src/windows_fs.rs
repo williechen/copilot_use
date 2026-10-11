@@ -166,6 +166,9 @@ fn secure(file: &File, private: bool) -> Result<(), CleanupError> {
     }
     Ok(())
 }
+pub(super) fn make_private(file: &File) -> Result<(), CleanupError> {
+    set_descriptor(file, &private_descriptor()?)
+}
 fn private_descriptor() -> Result<Local, CleanupError> {
     let token = user()?;
     let mut string = std::ptr::null_mut();

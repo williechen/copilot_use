@@ -2,10 +2,13 @@
 //! 尚未驗證的其他平台 fail closed，不執行危險移動。
 pub mod agent;
 pub mod ai;
+pub mod application;
 pub mod backup;
+pub mod files;
 pub mod interaction;
 pub mod outbox;
 pub mod profile;
+pub mod registry;
 pub mod state;
 pub mod suggestions;
 #[cfg(any(target_os = "linux", target_os = "macos"))]

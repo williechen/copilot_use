@@ -175,8 +175,63 @@ fn Chat() -> impl IntoView {
         <button disabled=move ||!confirm_policy.get() on:click=move |_|{let path=format!("/api/v1/rooms/{}/suggestions/{}/apply",selected.get(),suggestion_id.get());spawn(async move{match api(&path,"POST",Some(json!({"confirmed":true}))).await{Ok(v)=>policy_result.set(v.to_string()),Err(e)=>state.error.set(e)}});}>"套用並回報"</button>
         <button disabled=move ||!confirm_policy.get() on:click=move |_|{let path=format!("/api/v1/rooms/{}/suggestions/{}/rollback",selected.get(),suggestion_id.get());spawn(async move{match api(&path,"POST",Some(json!({"confirmed":true}))).await{Ok(v)=>policy_result.set(v.to_string()),Err(e)=>state.error.set(e)}});}>"回退並回報"</button><pre>{move ||policy_result.get()}</pre>
 
+        <TopicControls room=selected/>
         <PersonaControls room=selected can_manage=Signal::derive(move ||rooms.get().iter().find(|r|r["id"]==selected.get()).is_some_and(|r|r["can_manage"]==true))/>
     </section>}
+}
+#[component]
+fn TopicControls(room: RwSignal<String>) -> impl IntoView {
+    let enabled = RwSignal::new(false);
+    let known = RwSignal::new(false);
+    let epoch = RwSignal::new(0_u64);
+    let pending = RwSignal::new(0_i64);
+    let busy = RwSignal::new(false);
+    let error = RwSignal::new(String::new());
+    let refresh = move || {
+        let current = room.get();
+        let version = epoch.get_untracked();
+        if current.is_empty() {
+            return;
+        }
+        spawn(async move {
+            match api(
+                &format!("/api/v1/rooms/{current}/topic-consent"),
+                "GET",
+                None,
+            )
+            .await
+            {
+                Ok(v) => {
+                    if room.get_untracked() == current && epoch.get_untracked() == version {
+                        known.set(true);
+                        enabled.set(v["enabled"] == true);
+                        pending.set(v["withdrawal_pending"].as_i64().unwrap_or(0));
+                        error.set(String::new());
+                    }
+                }
+                Err(e) => {
+                    if room.get_untracked() == current && epoch.get_untracked() == version {
+                        error.set(e);
+                    }
+                }
+            }
+        });
+    };
+    Effect::new(move |_| {
+        let current = room.get();
+        epoch.update(|v| *v = v.wrapping_add(1));
+        enabled.set(false);
+        known.set(false);
+        busy.set(false);
+        pending.set(0);
+        error.set(String::new());
+        if !current.is_empty() {
+            refresh();
+        }
+    });
+    view! {<Show when=move ||!room.get().is_empty()><section id="topic-consent"><h3>"匿名技術詞彙統計"</h3><p>"啟用後，僅你在此房間的後續訊息中的固定技術詞會以匿名計數送至 Product Analytics。含憑證或聯絡資訊的訊息略過。停用會透過可靠佇列封存既有詞彙統計。"</p>
+    <label><input id="allow-topic-counting" type="checkbox" prop:checked=move ||enabled.get() disabled=move ||busy.get()||!known.get() on:change=move |e|{let value=event_target_checked(&e);let current=room.get();epoch.update(|v|*v=v.wrapping_add(1));let version=epoch.get_untracked();busy.set(true);spawn(async move{match api(&format!("/api/v1/rooms/{current}/topic-consent"),"POST",Some(json!({"enabled":value}))).await{Ok(v)=>{if room.get_untracked()==current&&epoch.get_untracked()==version{known.set(true);enabled.set(v["enabled"]==true);pending.set(v["withdrawal_pending"].as_i64().unwrap_or(0));error.set(String::new());}},Err(e)=>{if room.get_untracked()==current&&epoch.get_untracked()==version{enabled.set(enabled.get_untracked());error.set(e);}}}if epoch.get_untracked()==version{busy.set(false);}});}/>"同意此房間的技術詞彙計數"</label>
+    <p role="status">{move ||if !known.get(){"正在讀取此房間的設定".to_owned()}else if enabled.get(){"已啟用：固定詞表，最多每則32次".to_owned()}else if pending.get()>0{format!("已停用；{} 筆既有詞彙事件待封存確認",pending.get())}else{"已停用；沒有待封存的詞彙事件".to_owned()}}</p><button disabled=move ||busy.get() on:click=move |_|refresh()>"查看封存進度"</button><p role="alert">{move ||error.get()}</p></section></Show>}
 }
 #[component]
 fn PersonaControls(room: RwSignal<String>, can_manage: Signal<bool>) -> impl IntoView {

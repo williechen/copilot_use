@@ -193,7 +193,10 @@ pub(super) async fn login(
             .fetch_optional(&state.pool)
             .await
             .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
-    let (id, hash) = row.ok_or(StatusCode::UNAUTHORIZED)?;
+    let Some((id, hash)) = row else {
+        failed_login(&state.pool).await?;
+        return Err(StatusCode::UNAUTHORIZED);
+    };
     let verified = tokio::task::spawn_blocking(move || {
         PasswordHash::new(&hash).is_ok_and(|hash| {
             Argon2::default()
@@ -204,6 +207,7 @@ pub(super) async fn login(
     .await
     .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
     if !verified {
+        failed_login(&state.pool).await?;
         return Err(StatusCode::UNAUTHORIZED);
     }
     let token = format!("{}{}", Uuid::new_v4().simple(), Uuid::new_v4().simple());
@@ -311,6 +315,17 @@ pub(super) async fn invite(
     Ok(StatusCode::NO_CONTENT)
 }
 
+async fn failed_login(pool: &sqlx::PgPool) -> Result<(), StatusCode> {
+    let mut tx = pool
+        .begin()
+        .await
+        .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
+    auth_event(&mut tx, "login.failed").await?;
+    tx.commit()
+        .await
+        .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
+    Ok(())
+}
 async fn auth_event(
     tx: &mut sqlx::Transaction<'_, sqlx::Postgres>,
     kind: &str,

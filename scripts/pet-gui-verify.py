@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Exercise this application's own WebKit/WASM/IPC in an isolated disposable state."""
-import json, os, pathlib, subprocess, tempfile, sys, threading, argparse, hashlib, shutil, sqlite3
+import json, os, pathlib, subprocess, tempfile, sys, threading, argparse, hashlib, shutil, sqlite3, tomllib
 from http.server import ThreadingHTTPServer,BaseHTTPRequestHandler
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 REPORT = ROOT / "target/pet-gui-validation.json"
@@ -15,6 +15,8 @@ parser.add_argument('--analytics',action='store_true')
 parser.add_argument('--updater',action='store_true')
 options=parser.parse_args()
 if not options.executable:
+    if not (ROOT/'apps/pet_desktop/generated-icons/icon.ico').exists():
+        subprocess.run(['node','scripts/build-pet-ui.mjs'],cwd=ROOT,check=True)
     subprocess.run(["cargo", "build", "--manifest-path", str(ROOT / "apps/pet_desktop/Cargo.toml"), "--locked"], check=True, cwd=ROOT)
 executable=options.executable.resolve() if options.executable else ROOT / ("apps/pet_desktop/target/debug/copilot-desktop-pet.exe" if sys.platform=="win32" else "apps/pet_desktop/target/debug/copilot-desktop-pet")
 with tempfile.TemporaryDirectory(prefix="copilot-pet-gui-") as scratch:
@@ -68,6 +70,19 @@ with tempfile.TemporaryDirectory(prefix="copilot-pet-gui-") as scratch:
     completed = subprocess.run(command, env=env, cwd=ROOT, check=False, timeout=420 if live or options.update_package else 120)
     if server:server.shutdown();server.server_close()
     result = json.loads((directory / "report.json").read_text())
+    if result.get('success'):
+        with sqlite3.connect(directory/'state/pet.sqlite') as database:rows=database.execute('SELECT id,profile FROM pets').fetchall()
+        for identity,profile in rows:
+            pet_directory=directory/'state/pets'/identity
+            actual=tomllib.loads((pet_directory/'pet.toml').read_text());expected=json.loads(profile)
+            for field in ['名字','種類','喜好','個性','興趣']:
+                if actual[field]!=expected[field]:raise SystemExit('Per-pet configuration differs from canonical state')
+            if json.loads((pet_directory/'profile.manifest.json').read_text())['pet_id']!=identity:raise SystemExit('Per-pet identity manifest mismatch')
+        result['per_pet_files']={'profiles':len(rows),'canonical_fields_match':True,'identity_manifests':True}
+        if options.live_image:
+            png_files=list((directory/'state/pets/8df47580-64e1-4335-8e50-6b593051a398/assets/generated').glob('*/sheet.png'))
+            if not png_files or not all(p.read_bytes().startswith(b'\x89PNG\r\n\x1a\n') for p in png_files):raise SystemExit('Generated sprite was not persisted to per-pet assets')
+            result['per_pet_files']['generated_png']=True
     if options.update_package and result.get('success'):
         expected=hashlib.sha256(options.update_package.read_bytes()).hexdigest()
         actual=hashlib.sha256(executable.read_bytes()).hexdigest()

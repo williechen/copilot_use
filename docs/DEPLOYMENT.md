@@ -110,3 +110,7 @@ Chat 房主可保存最多八個 Persona，明確確認後開始有界對話。�
 `local-verify.py --varchar-events` 在新測試庫將 Analytics 事件 ID 欄位改為 VARCHAR(40)，以同一個 production EventStore、UUID domain/API 跑完整可靠性測試；預設 production migrations 仍使用原生 UUID。不是全資料庫任意 schema 的切換開關。
 
 正式 tag 固定後才建立 `copilot_use` 的教學對齊分支。測試隨各自模組／專案放置，不集中至最外層 `tests/`。每日教學必須列出該分支真實路徑、程式變更、驗證命令與結果；`rust_ai_chat` 保持唯讀。
+
+寵物實際設定位於 app_data_dir 的 `pets/<uuid>/pet.toml`（GUI 顯示精確位置）。五項必填設定使用中文鍵；選用覆寫分於中文 quoted tables。編輯後可啟動 GUI 明確確認匯入；啟動不覆蓋同一已保存版本的手動草稿。SQLite 備份包含已保存／匯入的設定與生成PNG；未匯入的檔案草稿不屬於已保存設定。封存區提供可還原的寵物移除，資料留在本機。
+
+Chat 房間中的技術詞統計預設關閉，可在「匿名技術詞彙統計」選擇同意。只對本人的後續訊息用固定詞表計數，停用會排程封存自己的既有詞彙事件；可查看實際 ACK 進度。Analytics 的 `/api/v1/events/recent` 與 Dashboard 明細使用 read token，最多100筆，支持來源／事件類型過濾；時間為實際接收時間，四欄 v1 事件契約維持，不傳送原文／帳號／檔案路徑。

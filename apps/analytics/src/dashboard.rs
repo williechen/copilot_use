@@ -33,12 +33,15 @@ small{opacity:.8}.error{color:#c33}#total{font-size:2.4rem;font-weight:700}
 <article><h2>累積事件</h2><output id="total">—</output><p><small>以資料庫持久化並依來源及事件 ID 去重</small></p></article>
 <article><h2>來源與事件類型</h2><table><thead><tr><th>來源</th><th>事件</th><th>數量</th></tr></thead><tbody id="events"><tr><td colspan="3">請先驗證</td></tr></tbody></table></article>
 </main>
+<section><h2>最近事件明細（最多100筆）</h2><label>來源<select id="recent-source"><option value="">全部</option><option value="web_chat">Chat</option><option value="desktop_pet">Desktop Pet</option></select></label><label>事件類型<input id="recent-kind" placeholder="例如 keyword.rust；留白顯示全部"></label><button id="recent-events">查詢事件明細</button><p>時間為 Analytics 實際接收時間（Asia/Taipei）；匿名技術詞彙事件只包含固定詞表中的詞與次數。</p><table><thead><tr><th>接收時間</th><th>來源</th><th>事件</th><th>事件 ID</th></tr></thead><tbody id="recent-rows"></tbody></table></section>
 <section><h2>每日趨勢（Asia/Taipei）</h2><label>開始<input id="from" type="date"></label><label>結束（不含當日）<input id="to" type="date"></label><button id="trend">載入趨勢</button><table><thead><tr><th>日期</th><th>來源</th><th>事件</th><th>次數</th></tr></thead><tbody id="timeline"></tbody></table></section>
 <section><h2>AI 洞察與可審核建議</h2><p>只使用聚合事件數，不把事件次數當成人數、品質或因果。建議需審核，再由目標 App 的使用者確認採用。</p><label>管理 token（只留本頁）<input id="admin" type="password" autocomplete="off"></label><label>目標<select id="target"><option value="web_chat">Chat</option><option value="desktop_pet">Desktop Pet</option></select></label><button id="generate-insight">根據實際資料產生洞察</button><button id="load-suggestions">查看建議與證據</button><div id="suggestions"></div></section>
 <section><h2>可逆資料封存</h2><label>封存／還原此台北時間以前<input id="before" type="datetime-local"></label><label><input id="confirm-archive" type="checkbox">我確認執行此可逆操作</label><button id="archive">封存</button><button id="restore">還原</button></section>
 <script>
 'use strict';
 const token = document.getElementById('token');
+document.getElementById('recent-events').onclick=async()=>{try{const params=new URLSearchParams();const source=document.getElementById('recent-source').value,kind=document.getElementById('recent-kind').value.trim();if(source)params.set('source_app',source);if(kind)params.set('event_type',kind);const rows=await query('/api/v1/events/recent?'+params);const body=document.getElementById('recent-rows');body.replaceChildren();for(const row of rows){const tr=document.createElement('tr');for(const value of [new Date(row.received_unix_ms).toLocaleString('zh-TW',{timeZone:'Asia/Taipei'}),row.source_app,row.event_type,row.event_id]){const td=document.createElement('td');td.textContent=String(value);tr.appendChild(td);}body.appendChild(tr);}}catch(e){error.textContent=e.message;}};
+
 const error = document.getElementById('error');
 const status = document.getElementById('status');
 async function query(path) {
@@ -77,7 +80,7 @@ for(const op of ['archive','restore'])get(op).onclick=guarded(async()=>{if(!get(
 document.getElementById('refresh').addEventListener('click',refresh);
 document.getElementById('clear').addEventListener('click',()=>{
  token.value='';get('admin').value='';get('suggestions').replaceChildren();document.getElementById('total').textContent='—';
- document.getElementById('events').textContent='請先驗證';
+ document.getElementById('events').textContent='請先驗證';document.getElementById('recent-rows').replaceChildren();document.getElementById('timeline').replaceChildren();document.getElementById('suggestions').replaceChildren();document.getElementById('admin').value='';
 });
 </script></body></html>"##,
     )

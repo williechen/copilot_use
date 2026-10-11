@@ -16,10 +16,11 @@ impl PetStore {
         if text.trim().is_empty() || text.len() > 8192 {
             return Err("提問不合法".into());
         }
-        let profile: String = sqlx::query_scalar("SELECT profile FROM pets WHERE id=?")
-            .bind(pet.to_string())
-            .fetch_one(&self.pool)
-            .await?;
+        let profile: String =
+            sqlx::query_scalar("SELECT profile FROM pets WHERE id=? AND archived_at IS NULL")
+                .bind(pet.to_string())
+                .fetch_one(&self.pool)
+                .await?;
         let memories = self.memories(pet).await?;
         let learning = serde_json::to_string(&self.learning_summary(pet).await?)?;
         let instructions = format!(
@@ -72,10 +73,11 @@ impl PetStore {
         &self,
         pet: Uuid,
     ) -> Result<Value, Box<dyn std::error::Error + Send + Sync>> {
-        let profile: String = sqlx::query_scalar("SELECT profile FROM pets WHERE id=?")
-            .bind(pet.to_string())
-            .fetch_one(&self.pool)
-            .await?;
+        let profile: String =
+            sqlx::query_scalar("SELECT profile FROM pets WHERE id=? AND archived_at IS NULL")
+                .bind(pet.to_string())
+                .fetch_one(&self.pool)
+                .await?;
         let p: PetProfile = serde_json::from_str(&profile)?;
         p.validate()?;
         let prompt = format!(
@@ -84,6 +86,7 @@ impl PetStore {
         let (png, width, height) = openai_adapter::generate_sprite(&prompt).await?;
         self.save_generated_asset(pet, &profile, &png, i64::from(width), i64::from(height))
             .await?;
+        self.sync_pet_files(pet).await?;
         Ok(json!({"png_base64":png,"width":width,"height":height}))
     }
     async fn save_generated_asset(

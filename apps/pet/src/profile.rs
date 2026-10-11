@@ -1,11 +1,7 @@
 //! Desktop Pet 使用者設定：五項必填，其他皆為可選覆寫。
 //! 生成素材屬於另一個系統管理的 manifest，不會寫回使用者 pet.toml。
 use serde::{Deserialize, Serialize};
-use std::{
-    collections::BTreeSet,
-    fs,
-    path::{Path, PathBuf},
-};
+use std::collections::BTreeSet;
 use thiserror::Error;
 use uuid::Uuid;
 
@@ -59,8 +55,6 @@ pub enum ProfileError {
     InvalidId,
     #[error("failed to parse profile: {0}")]
     Parse(#[from] toml::de::Error),
-    #[error("I/O: {0}")]
-    Io(#[from] std::io::Error),
 }
 
 fn valid_item(text: &str) -> bool {
@@ -78,6 +72,49 @@ impl PetProfile {
         Ok(value)
     }
 
+    /// TOML 1.0-compatible keys, including quoted Chinese table names.
+    pub fn user_toml(&self) -> Result<String, serde_json::Error> {
+        fn line(
+            out: &mut String,
+            key: &str,
+            value: &impl Serialize,
+        ) -> Result<(), serde_json::Error> {
+            out.push_str(&format!(
+                "{} = {}\n",
+                serde_json::to_string(key)?,
+                serde_json::to_string(value)?
+            ));
+            Ok(())
+        }
+        let mut out = String::new();
+        line(&mut out, "名字", &self.name)?;
+        line(&mut out, "種類", &self.species)?;
+        line(&mut out, "喜好", &self.likes)?;
+        line(&mut out, "個性", &self.personality)?;
+        line(&mut out, "興趣", &self.interests)?;
+        if let Some(appearance) = &self.appearance {
+            out.push_str("\n[\"外觀\"]\n");
+            for (key, value) in [
+                ("顏色", &appearance.color),
+                ("風格", &appearance.style),
+                ("品種", &appearance.breed),
+            ] {
+                if let Some(value) = value {
+                    line(&mut out, key, value)?;
+                }
+            }
+        }
+        if let Some(animation) = &self.animation {
+            out.push_str("\n[\"動畫\"]\n");
+            if let Some(actions) = &animation.actions {
+                line(&mut out, "動作", actions)?;
+            }
+            if let Some(speed) = &animation.speed {
+                line(&mut out, "速度", speed)?;
+            }
+        }
+        Ok(out)
+    }
     pub fn validate(&self) -> Result<(), ProfileError> {
         if !valid_item(&self.name) {
             return Err(ProfileError::Invalid("名字"));
@@ -129,9 +166,22 @@ pub struct AssetManifest {
     pub display_height: u32,
     pub asset_version: u32,
     pub generated_frames: Vec<String>,
+    pub profile_hash: String,
+    pub sha256: String,
+    pub file: String,
+    pub columns: u8,
+    pub rows: Vec<String>,
+    pub frames_per_row: u8,
 }
 
 impl AssetManifest {
+    pub fn generated(mut self, version: u32, profile_hash: String, sha256: String) -> Self {
+        self.asset_version = version;
+        self.profile_hash = profile_hash;
+        self.sha256 = sha256;
+        self.file = format!("generated/{version}/sheet.png");
+        self
+    }
     pub fn new(pet_id: Uuid, image_width: u32, image_height: u32) -> Self {
         Self {
             schema_version: 1,
@@ -141,37 +191,20 @@ impl AssetManifest {
             display_width: PET_WIDTH,
             display_height: PET_HEIGHT,
             asset_version: 1,
-            generated_frames: Vec::new(),
+            generated_frames: ["idle", "moving", "happy", "learning"]
+                .into_iter()
+                .flat_map(|row| (0..4).map(move |frame| format!("{row}/{frame}")))
+                .collect(),
+            profile_hash: String::new(),
+            sha256: String::new(),
+            file: String::new(),
+            columns: 4,
+            rows: ["idle", "moving", "happy", "learning"]
+                .into_iter()
+                .map(str::to_owned)
+                .collect(),
+            frames_per_row: 4,
         }
-    }
-}
-
-/// 透過 Uuid 作多寵物資料夾隔離。只讀既有 pet.toml，不擅自更改使用者設定。
-pub struct ProfileStore {
-    root: PathBuf,
-}
-
-impl ProfileStore {
-    pub fn new(root: impl AsRef<Path>) -> Result<Self, ProfileError> {
-        let root = fs::canonicalize(root)?;
-        if !root.is_dir() {
-            return Err(ProfileError::Invalid("root"));
-        }
-        Ok(Self { root })
-    }
-
-    pub fn load(&self, pet_id: Uuid) -> Result<PetProfile, ProfileError> {
-        let directory = self.root.join(pet_id.to_string());
-        let metadata = fs::symlink_metadata(&directory)?;
-        if !metadata.file_type().is_dir() || metadata.file_type().is_symlink() {
-            return Err(ProfileError::InvalidId);
-        }
-        let path = directory.join("pet.toml");
-        let metadata = fs::symlink_metadata(&path)?;
-        if !metadata.file_type().is_file() || metadata.file_type().is_symlink() {
-            return Err(ProfileError::InvalidId);
-        }
-        PetProfile::parse(&fs::read_to_string(path)?)
     }
 }
 
@@ -220,24 +253,5 @@ mod tests {
     fn missing_required_fields_fail() {
         assert!(PetProfile::parse(r#""名字" = "小啾""#).is_err());
         assert!(PetProfile::parse(&MINIMAL.replace(r#""種類" = "鳥""#, r#""種類" = """#)).is_err());
-    }
-
-    #[test]
-    fn profiles_remain_isolated_per_pet_directory() {
-        let dir = std::env::temp_dir().join(format!("pet-profile-{}", Uuid::new_v4()));
-        let first = Uuid::new_v4();
-        let second = Uuid::new_v4();
-        fs::create_dir_all(dir.join(first.to_string())).unwrap();
-        fs::create_dir_all(dir.join(second.to_string())).unwrap();
-        fs::write(dir.join(first.to_string()).join("pet.toml"), MINIMAL).unwrap();
-        fs::write(
-            dir.join(second.to_string()).join("pet.toml"),
-            MINIMAL.replace("小啾", "小花"),
-        )
-        .unwrap();
-        let store = ProfileStore::new(&dir).unwrap();
-        assert_eq!(store.load(first).unwrap().name, "小啾");
-        assert_eq!(store.load(second).unwrap().name, "小花");
-        fs::remove_dir_all(dir).unwrap();
     }
 }

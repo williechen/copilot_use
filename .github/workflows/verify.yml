@@ -126,7 +126,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - uses: actions/cache@v4
+      - uses: actions/cache/restore@v4
+        id: build-tools
         with:
           path: |
             ~/.cargo/bin/trunk*
@@ -144,12 +145,21 @@ jobs:
         run: |
           if ! command -v trunk; then cargo install trunk --version 0.21.14 --locked; fi
           if ! command -v cargo-tauri; then cargo install tauri-cli --version 2.11.5 --locked; fi
+      - uses: actions/cache/save@v4
+        if: steps.build-tools.outputs.cache-hit != 'true'
+        with:
+          path: |
+            ~/.cargo/bin/trunk*
+            ~/.cargo/bin/cargo-tauri*
+          key: ${{ runner.os }}-trunk-0.21.14-tauri-2.11.5
       - name: Compile Chat hydration assets
         shell: bash
         run: bash scripts/build-chat-ui.sh
       - name: Compile Pet hydration assets
         shell: bash
-        run: cd apps/pet_ui && NO_COLOR=true trunk build --release=true --no-color
+        run: node scripts/build-pet-ui.mjs
+      - name: Pet non-square sprite geometry regression
+        run: cargo test --locked --manifest-path apps/pet_ui/Cargo.toml
       - name: Actual Linux WebKit GUI verification
         if: runner.os == 'Linux'
         run: xvfb-run -a python3 scripts/pet-gui-verify.py --updater

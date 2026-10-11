@@ -42,12 +42,12 @@
 
 | 必要門檻 | 剩餘驗證 |
 |---|---|
-| Windows 安全與 GUI | 新 SHA 上實跑備份 flush、handle-relative ACL 還原、安全測試、WebView GUI 與 NSIS |
+| Windows 安全與 GUI | d873881 Windows 20/20 native safety/backup 通過；後續 GUI build 缺生成 icon，已補接。最新檔案／registry 功能仍須新 SHA 實跑 |
 | 安裝包 runtime | Linux deb 解包後的 release 程式已通過 GUI／SQLite／回收還原／簽章驗收；macOS app 與 Windows 安装包加入 CI，尚待結果 |
 | Updater | Linux/macOS 簽章拒絕邊界通過；Linux AppImage 真實 0.1.0→0.1.1 安裝、checksum、冷啟動版本、既有寵物/SQLite 完整性與更新前快照已過。本地測試私鑰不進 repository |
 | Analytics Dashboard | 已通過 Taipei 當日趨勢、實際封存 13→12、還原 12→13 的瀏覽器操作 |
 | 身份／架構 | 實際 Analytics Adapter 的原生 UUID↔VARCHAR(40) 轉換、並發去重/衝突/查詢及完整 VARCHAR HTTP/WS/故障 E2E 通過，domain/API 保持 UUID；正式 tag 後新 branch 對齊目錄與模組內測試 |
-| 安全／來源固定 | 最新四份 lock audit、手工 GLib 回移證據、新提交全部 CI；同一乾淨 SHA 的 Docker 重建、容器測試、安裝包與輸出校驗 |
+| 安全／來源固定 | 最新四份 lock audit 0 known vulnerabilities（有未維護警告）、GLib 官方修補回移 release regression；d873881 的乾淨 Docker release 建置／16項容器驗收與真實 OpenAI/Pet 整合通過；最新功能仍須同一乾淨 SHA 全部 CI／Docker／安裝包 |
 | 交付固定 | 更新文件、移除無用暫存、完成上列門檻後才正式 release/tag；目前尚未完成 |
 
 ## 清理範圍
@@ -65,3 +65,15 @@ RustSec 的 glib 問題修補於 >=0.20.0；目前 Tauri/GTK3 依賴仍使用 0.
 - Chat 以 transaction PG NOTIFY 的 message ID 跨程序通知，讀取 canonical DB content；兩個獨立程序驗證訊息與 typing 隔離、presence snapshot。每人 32／全系統 512／每程序 128 連線上限；presence lease 20 秒，每五秒續租，關閉後移除。
 - Session 成功建立/撤銷與登入/登出 Outbox 同交易；事件只有原四欄位，不帶帳號或 cookie。實際跨服務匿名事件通過。
 - 相容 GLib 安全回移保留 MIT 授權與來源；不修改全域 Cargo registry，也不以忽略 advisory 代替安全證據。
+
+## 新增完整接線驗收（尚需新 SHA 跨平台 CI）
+
+- `pets/<uuid>/pet.toml` 與 profile manifest 真正由保存／匯入／還原流程產生。每隻寵物獨立、檔案原子替換、私有權限；啟動保留尚未匯入的手動草稿，資料庫為已保存設定的權威來源。選用中文 table 名稱輸出兼容 TOML 1.0。投影同步失敗明確區分「資料已保存」與「檔案尚未同步」。
+- 真實 OpenAI PNG 保存於每隻寵物的 `assets/generated/<version>/sheet.png`，manifest 包含 SHA256／版本／原始尺寸／四列四格與200×200顯示範圍。非正方形素材保持比例；生成後通知浮動視窗更新。實際 GUI／生成素材接線通過。
+- 單隻寵物可確認後移除到封存區並還原；保留其他寵物、原記憶／素材；封存後不可選用或讓 AI 使用。交易事件去重，真實 GUI 通過。未提供永久抹除。
+- 匿名技術詞計數預設關閉、逐人逐房間同意；固定十個詞，每則最多32次。含憑證／聯絡資訊的訊息略過。消息與詞彙 Outbox 同交易、重送不增計。停用以有租約／重試的可靠撤銷佇列，消費端 transaction 鎖保護撤銷與延遲投遞，歷史詞彙不會被 admin restore 重新顯示。真實 HTTP／Cookie／Analytics 中斷與恢復通過原生 UUID 及 VARCHAR(40) E2E；介面已通過真實瀏覽器：同意送出兩次 rust／一次 ownership，Dashboard 明細顯示真實匿名 ID；停用後3筆撤銷 ACK 完成，總數31→28，明細與詞頻消失。
+- 匿名 `login.failed` 記錄真實認證失敗，不記錄帳號、密碼或 cookie；登入方式目前只有密碼，不杜撰 OAuth 或使用者數。
+- Chat 訊息、Pet 設定及 Analytics ingestion/query 的可移植 Application Port 已真正接到 Repository Adapter；核心 Port 不依賴 Driver、OS 或 UI。Persistence Adapter 保留 SQL、bind/decode、transaction 及投影。移除舊未接線 ProfileStore，CLI 只讀真正設定／素材 manifest。
+- 最新512 socket／64則併發 fan-out、Token輪替、故障及備份 E2E 通過；`recent` 真正事件明細（最多100筆）、來源／類型過濾與台北接收時間已通過 HTTP 及真實瀏覽器；仍需新提交 CI。
+
+統計僅描述確實發生的匿名事件與受控詞頻；不提供任意私密詞彙、原始聊天、問題正文或因果／品質推論。FileOrganizer 的 Trash 保留檔案，不宣稱釋放磁碟空間。

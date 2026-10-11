@@ -17,11 +17,12 @@ impl PetStore {
         if let Err((code, message)) = request.validate() {
             return mcp_bridge::error(request.id, code, message);
         }
-        let profile: Option<String> = sqlx::query_scalar("SELECT profile FROM pets WHERE id=?")
-            .bind(pet.to_string())
-            .fetch_optional(&self.pool)
-            .await
-            .unwrap_or(None);
+        let profile: Option<String> =
+            sqlx::query_scalar("SELECT profile FROM pets WHERE id=? AND archived_at IS NULL")
+                .bind(pet.to_string())
+                .fetch_optional(&self.pool)
+                .await
+                .unwrap_or(None);
         if profile.is_none() {
             return mcp_bridge::error(request.id, -32602, "Pet not authorized");
         }
@@ -96,10 +97,11 @@ impl PetStore {
         if question.trim().is_empty() || question.len() > 4096 {
             return Err("問題太長或空白".into());
         }
-        let profile: String = sqlx::query_scalar("SELECT profile FROM pets WHERE id=?")
-            .bind(pet.to_string())
-            .fetch_one(&self.pool)
-            .await?;
+        let profile: String =
+            sqlx::query_scalar("SELECT profile FROM pets WHERE id=? AND archived_at IS NULL")
+                .bind(pet.to_string())
+                .fetch_one(&self.pool)
+                .await?;
         let catalog = stdio_call(
             executable,
             self.database_path(),

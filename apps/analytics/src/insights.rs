@@ -91,7 +91,7 @@ pub(super) async fn generate(
         .clone()
         .try_acquire_owned()
         .map_err(|_| StatusCode::TOO_MANY_REQUESTS)?;
-    let rows:Vec<(String,String,i64)>=sqlx::query_as("SELECT (received_at AT TIME ZONE 'Asia/Taipei')::date::text,event_type,count(*)::bigint FROM product_events WHERE NOT archived AND source_app=$1 AND received_at>=now()-interval '7 days' GROUP BY 1,2 ORDER BY 1,2").bind(&input.target_app).fetch_all(&state.pool).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
+    let rows:Vec<(String,String,i64)>=sqlx::query_as("SELECT (received_at AT TIME ZONE 'Asia/Taipei')::date::text,event_type,count(*)::bigint FROM product_events WHERE NOT archived AND NOT consent_withdrawn AND source_app=$1 AND received_at>=now()-interval '7 days' GROUP BY 1,2 ORDER BY 1,2").bind(&input.target_app).fetch_all(&state.pool).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
     let snapshot = json!({"target_app":input.target_app,"window":"last_7_days","timezone":"Asia/Taipei","rows":rows.into_iter().map(|(day,event_type,total)|json!({"day":day,"event_type":event_type,"total":total})).collect::<Vec<_>>()});
     let candidates = facts(&snapshot).ok_or(StatusCode::BAD_GATEWAY)?;
     let instructions = "根據真實事件聚合快照選出一至三個值得觀察的 facts 索引（從0開始、不重複）。不要生成新的事實或數字。只提出 target 對應的安全設定實驗：web_chat 用 chat_context_messages:10..100，desktop_pet 用 pet_review_min_days:1..30。提案必須經人工審核、可回退；事件數不代表人數、品質或因果。";
@@ -229,7 +229,7 @@ pub(super) async fn evaluate(
     if !matches!(status.as_str(), "applied" | "rolled_back") {
         return Err(StatusCode::CONFLICT);
     }
-    let rows:Vec<(String,String,i64)>=sqlx::query_as("SELECT (received_at AT TIME ZONE 'Asia/Taipei')::date::text,event_type,count(*)::bigint FROM product_events WHERE NOT archived AND source_app=$1 AND received_at>=now()-interval '7 days' GROUP BY 1,2 ORDER BY 1,2")
+    let rows:Vec<(String,String,i64)>=sqlx::query_as("SELECT (received_at AT TIME ZONE 'Asia/Taipei')::date::text,event_type,count(*)::bigint FROM product_events WHERE NOT archived AND NOT consent_withdrawn AND source_app=$1 AND received_at>=now()-interval '7 days' GROUP BY 1,2 ORDER BY 1,2")
         .bind(&target).fetch_all(&mut *tx).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
     let after = json!({"target_app":target,"window":"last_7_days","timezone":"Asia/Taipei","rows":rows.into_iter().map(|(day,event_type,total)|json!({"day":day,"event_type":event_type,"total":total})).collect::<Vec<_>>()});
     let evaluation = json!({"before":before,"after":after,"interpretation":"Descriptive event counts only; overlapping windows and changing exposure cannot prove causal impact, learning quality, or unique users."});

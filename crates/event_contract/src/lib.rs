@@ -1,4 +1,5 @@
 //! P9 跨系統明確事件契約；不包含訊息本文、路徑或識別個資。
+pub mod topics;
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
@@ -33,19 +34,25 @@ impl ProductEvent {
     pub fn is_valid(&self) -> bool {
         self.schema_version == 1
             && !self.event_id.is_nil()
-            && matches!(
+            && (matches!(
                 (self.source_app.as_str(), self.event_type.as_str()),
                 (
                     "web_chat",
-                    "message.persisted" | "login.succeeded" | "logout.succeeded"
+                    "message.persisted" | "login.succeeded" | "login.failed" | "logout.succeeded"
                 ) | (
                     "desktop_pet",
                     "file.cleanup.succeeded"
                         | "file.restore.succeeded"
                         | "question.answered"
                         | "learning.review.completed"
+                        | "pet.archived"
+                        | "pet.restored"
                 )
-            )
+            ) || (self.source_app == "web_chat"
+                && self
+                    .event_type
+                    .strip_prefix("keyword.")
+                    .is_some_and(|word| topics::VOCABULARY.contains(&word))))
     }
 }
 

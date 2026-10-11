@@ -1,0 +1,1 @@
+ALTER TABLE pets ADD COLUMN archived_at INTEGER;

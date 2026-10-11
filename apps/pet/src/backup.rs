@@ -175,6 +175,9 @@ impl PetStore {
         .await;
         let _ = std::fs::remove_file(temporary);
         restored?;
+        self.sync_all_pet_files()
+            .await
+            .map_err(|_| "snapshot_restored_projection_pending")?;
         Ok(before)
     }
     async fn restore_verified(&self, path: &std::path::Path) -> Result<(), Error> {
@@ -189,7 +192,7 @@ impl PetStore {
             if !compatible{return Err("snapshot schema differs from current application".into())}
             sqlx::query("BEGIN IMMEDIATE").execute(&mut *connection).await?;
             let copied=async {
-                sqlx::query("INSERT INTO main.pets SELECT * FROM snapshot.pets WHERE true ON CONFLICT(id)DO UPDATE SET profile=excluded.profile").execute(&mut *connection).await?;
+                sqlx::query("INSERT INTO main.pets SELECT * FROM snapshot.pets WHERE true ON CONFLICT(id)DO UPDATE SET profile=excluded.profile,archived_at=excluded.archived_at").execute(&mut *connection).await?;
                 for (delete,copy) in [
  ("DELETE FROM main.memories WHERE pet_id IN(SELECT id FROM snapshot.pets)","INSERT INTO main.memories SELECT * FROM snapshot.memories"),
  ("DELETE FROM main.cards WHERE pet_id IN(SELECT id FROM snapshot.pets)","INSERT INTO main.cards SELECT * FROM snapshot.cards"),

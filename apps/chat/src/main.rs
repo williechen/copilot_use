@@ -8,6 +8,7 @@ mod openai;
 mod personas;
 mod realtime;
 mod suggestions;
+mod topic_http;
 mod web;
 use axum::{
     Json, Router,
@@ -200,27 +201,28 @@ async fn send_message(
         return Err(StatusCode::BAD_REQUEST);
     }
     let user = actor.user_id().map(|id| id.to_string());
-    let (id, inserted) = ChatWriter::new(s.pool.clone())
-        .persist_with_id(
-            input.id.unwrap_or_else(uuid::Uuid::new_v4),
-            &input.room_id,
-            &input.content,
-            if user.is_some() {
+    let committed = day9_chat::application::persist(
+        &ChatWriter::new(s.pool.clone()),
+        day9_chat::application::MessageInput {
+            id: input.id.unwrap_or_else(uuid::Uuid::new_v4),
+            room: &input.room_id,
+            content: &input.content,
+            author_kind: if user.is_some() {
                 "user"
             } else {
                 "anonymous_user"
             },
-            user.as_deref(),
-        )
-        .await
-        .map_err(|e| {
-            if matches!(e, sqlx::Error::Protocol(_)) {
-                StatusCode::CONFLICT
-            } else {
-                StatusCode::SERVICE_UNAVAILABLE
-            }
-        })?;
-
+            author_id: user.as_deref(),
+        },
+    )
+    .await
+    .map_err(|error| match error {
+        day9_chat::application::MessageError::InvalidInput => StatusCode::BAD_REQUEST,
+        day9_chat::application::MessageError::Conflict => StatusCode::CONFLICT,
+        day9_chat::application::MessageError::Unavailable => StatusCode::SERVICE_UNAVAILABLE,
+    })?;
+    let id = committed.id;
+    let inserted = committed.inserted;
     Ok((
         if inserted {
             StatusCode::CREATED
@@ -289,6 +291,10 @@ async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
         )
         .fallback(web::leptos_home)
         .route("/healthz", get(health))
+        .route(
+            "/api/v1/rooms/{room}/topic-consent",
+            get(topic_http::get).post(topic_http::set),
+        )
         .route("/api/v1/mcp", axum::routing::post(mcp::handler))
         .route("/api/v1/auth/register", axum::routing::post(auth::register))
         .route("/api/v1/auth/login", axum::routing::post(auth::login))

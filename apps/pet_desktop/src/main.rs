@@ -175,7 +175,13 @@ async fn restore_snapshot(
         .store
         .restore_snapshot(id, confirmed)
         .await
-        .map_err(|_| "快照確認、完整性、相容性檢查或還原失敗；目前資料仍保留".to_owned())?;
+        .map_err(|error| {
+            if error.to_string() == "snapshot_restored_projection_pending" {
+                "資料快照已還原，但本機檔案尚未同步；請檢查資料目錄後重新開啟。".to_owned()
+            } else {
+                "快照確認、完整性、相容性檢查或還原失敗；目前資料仍保留".to_owned()
+            }
+        })?;
     let _ = app.emit("active-pet-changed", ());
     Ok(before)
 }
@@ -236,11 +242,76 @@ async fn save_profile(
     id: Uuid,
     profile: PetProfile,
 ) -> Result<(), String> {
+    day9_pet::application::save_profile(&state.store, id, &profile)
+        .await
+        .map_err(|error| match error {
+            day9_pet::application::ProfileError::ProjectionPending => {
+                "設定已保存，但本機檔案同步未完成。請檢查程式資料目錄後重新開啟。".into()
+            }
+            day9_pet::application::ProfileError::Invalid => "寵物設定不合法".into(),
+            day9_pet::application::ProfileError::Unavailable => "無法保存寵物設定".into(),
+        })
+}
+#[tauri::command]
+async fn archived_pets(state: State<'_, DesktopState>) -> Result<Vec<PetItem>, String> {
     state
         .store
-        .save_profile(id, &profile)
+        .archived_pets()
         .await
-        .map_err(|_| "寵物設定不合法或無法保存".into())
+        .map_err(|_| "無法讀取封存寵物".into())
+}
+#[tauri::command]
+async fn set_pet_archived(
+    app: tauri::AppHandle,
+    state: State<'_, DesktopState>,
+    pet: Uuid,
+    archived: bool,
+    confirmed: bool,
+) -> Result<serde_json::Value, String> {
+    let receipt = state
+        .store
+        .set_pet_archived(pet, archived, confirmed)
+        .await
+        .map_err(|_| "無法移除或還原寵物".to_owned())?;
+    app.emit("active-pet-changed", serde_json::json!({}))
+        .map_err(|_| "無法更新浮動寵物")?;
+    Ok(receipt)
+}
+#[tauri::command]
+async fn profile_file(state: State<'_, DesktopState>, pet: Uuid) -> Result<String, String> {
+    if pet.is_nil()
+        || !state
+            .store
+            .pets()
+            .await
+            .map_err(|_| "無法讀取寵物")?
+            .iter()
+            .any(|p| p.id == pet.to_string())
+    {
+        return Err("寵物不存在".into());
+    }
+    Ok(state
+        .store
+        .database_path()
+        .parent()
+        .ok_or("設定目錄不存在")?
+        .join("pets")
+        .join(pet.to_string())
+        .join("pet.toml")
+        .to_string_lossy()
+        .into_owned())
+}
+#[tauri::command]
+async fn import_pet_profile(
+    state: State<'_, DesktopState>,
+    pet: Uuid,
+    confirmed: bool,
+) -> Result<(), String> {
+    state
+        .store
+        .import_pet_profile(pet, confirmed)
+        .await
+        .map_err(|_| "無法匯入此寵物的本機設定檔".into())
 }
 #[tauri::command]
 async fn list_memories(state: State<'_, DesktopState>, pet: Uuid) -> Result<Vec<Memory>, String> {
@@ -392,6 +463,7 @@ fn mcp_once() -> Result<(), Box<dyn std::error::Error>> {
 }
 #[tauri::command]
 async fn generate_asset(
+    app: tauri::AppHandle,
     state: State<'_, DesktopState>,
     pet: Uuid,
 ) -> Result<serde_json::Value, String> {
@@ -400,11 +472,13 @@ async fn generate_asset(
         .clone()
         .try_acquire_owned()
         .map_err(|_| "AI 正忙碌，請稍後重試")?;
-    state
+    let asset = state
         .store
         .generate_asset(pet)
         .await
-        .map_err(|e| e.to_string())
+        .map_err(|e| e.to_string())?;
+    let _ = app.emit("active-pet-changed", pet);
+    Ok(asset)
 }
 #[tauri::command]
 async fn load_asset(
@@ -651,11 +725,6 @@ fn gui_test_result(app: tauri::AppHandle, success: bool, message: String) -> Res
     Ok(())
 }
 fn main() {
-    if std::env::args().any(|arg| arg == "--version") {
-        let context: tauri::Context<tauri::Wry> = tauri::generate_context!();
-        println!("{}", context.package_info().version);
-        return;
-    }
     if std::env::args().any(|arg| arg == "--mcp-once") {
         if mcp_once().is_err() {
             std::process::exit(1);
@@ -663,6 +732,11 @@ fn main() {
         return;
     }
 
+    let context: tauri::Context<tauri::Wry> = tauri::generate_context!();
+    if std::env::args().any(|arg| arg == "--version") {
+        println!("{}", context.package_info().version);
+        return;
+    }
     if let Err(error) = validate_acceptance_fixture() {
         eprintln!("{error}");
         std::process::exit(1);
@@ -722,8 +796,12 @@ fn main() {
                 use std::os::unix::fs::PermissionsExt;
                 std::fs::set_permissions(&directory, std::fs::Permissions::from_mode(0o700))?;
             }
+            day9_pet::files::prepare_data_directory(&directory)
+                .map_err(|_| std::io::Error::other("資料目錄不安全"))?;
             let store =
                 tauri::async_runtime::block_on(PetStore::open(&directory.join("pet.sqlite")))?;
+            tauri::async_runtime::block_on(store.reconcile_pet_files_startup())
+                .map_err(|_| std::io::Error::other("無法同步寵物設定檔"))?;
             if let (Ok(endpoint), Ok(token)) = (
                 std::env::var("ANALYTICS_ENDPOINT"),
                 std::env::var("ANALYTICS_PET_TOKEN"),
@@ -768,6 +846,10 @@ fn main() {
             learning_summary,
             recall_prompt,
             save_profile,
+            import_pet_profile,
+            profile_file,
+            archived_pets,
+            set_pet_archived,
             list_memories,
             save_memory,
             delete_memory,
@@ -797,6 +879,6 @@ fn main() {
             outbox_status,
             requeue_failed_events
         ])
-        .run(tauri::generate_context!())
+        .run(context)
         .expect("無法啟動桌面寵物");
 }
