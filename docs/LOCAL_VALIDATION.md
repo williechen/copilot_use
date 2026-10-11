@@ -16,7 +16,7 @@
 - Chat cursor API 按 `(created_at,id)` 提供最多 100 筆的早期訊息，拒絕不屬於房間的 cursor；UI 可載入舊訊息且最多 1000 筆。WS 全服務最多 128 連線，cookie Session/ACL 在事件送出前、typing 前與每五秒重新驗證。真實 RFC6455 cookie 測試確認登出後連線關閉，後續私人訊息不會送到被撤銷的 session。
 - Chat 同 UUID 併發重送只保存一筆訊息與 Outbox；變更 room/author/content 拒絕。真實瀏覽器驗證 32 筆有上限佇列、離線保留、服務恢復後只送達一筆訊息/Outbox/Analytics，及重新訂閱後收到獨立 WS 通知。佇列只在當頁記憶體保存，離開頁面不留私人內容。
 - Leptos SSR 與 WASM hydration 編譯、真實瀏覽器登入/受保護路由/建房/送信/刷新 history/登出測試。舊 `/legacy` HTML 入口已移除。
-- Linux Tauri/WebKit/WASM/IPC 實際 GUI 測試：五項設定、多寵物、記憶隔離/刪除、複習排程、opaque ID 預覽/拒絕未確認操作/確認後 receipt、200×200 浮動視窗。真實生成 sprite 角色一致性經目視檢查，任意原圖尺寸縮放到固定顯示框。
+- Linux Tauri/WebKit/WASM/IPC 實際 GUI 測試：五項設定、多寵物、進階覆寫保存、記憶隔離/編輯/刪除、複習排程、opaque ID 預覽/拒絕未確認操作/確認後 receipt、200×200 浮動視窗。真實生成 sprite 角色一致性經目視檢查，任意原圖尺寸縮放到固定顯示框。
 - Unix 安全 Adapter 的 symlink、根目錄被替換、檔案變更拒絕與正常隔離測試。Linux 實際通過；macOS CI 實際 11 個 Pet 測試與 app bundle 建置通過，完整 runtime 尚未驗收。Windows 危險移動 fail closed。
 - 本機 numeric loopback collector 實收 OpenTelemetry traces/metrics/logs；Chat Outbox 與 Analytics W3C trace 關聯通過；未洩露憑證或對話內容。只允許本機 collector。
 - Pet 的 GUI 授權/撤銷、逐檔勾選确认、durable journal/收據復原、收據+事件同交易與冪等、SQLite 原子租約/CAS/過期重領/人工重試均已實測。真實 GUI → SQLite → Analytics 各兩筆清理、一筆複習事件，重複復原不增計，W3C trace 關聯通過。
@@ -34,7 +34,7 @@
 | Chat 即時產品 | presence snapshot、typing UI、每使用者連線配額與更完整資源限制、跨程序 fan-out；reload 後不保存未送出私人內容 |
 | Chat AI | 多 Persona orchestration、AI-to-AI speaker selection/turn budget/cooldown/context/memory、多 Persona 的工具/結構輸出整合與品質驗收 |
 | 共同 AI | Chat/Pet 的本地唯讀 MCP/Agent 已驗證；更多工具、完整權限及品質驗收仍缺 |
-| Pet 完整互動 | 進階覆寫 UI、多動作動畫選擇、主動互動、記憶編輯與學習適應的完整 UI/流程 |
+| Pet 完整互動 | 多動作動畫選擇、主動互動與更完整學習適應；外觀/動畫覆寫與記憶編輯、成功/困難/忘記複習選項已加入 UI，覆寫/編輯真實 GUI 已驗證 |
 | Pet 檔案安全 | Trash/restore、Windows 安全 Adapter、macOS/Windows 完整 GUI 執行與故障邊界 |
 | Pet 投遞與備份 | SQLite/asset 備份還原與更完整故障矩陣；租約/CAS、人工重試與 GUI 跨產品 E2E 已實測 |
 | Analytics | 登入等完整事件目錄、AI 摘要數字/語義的更完整 grounding 驗收、長期追蹤；新洞察/審核/採用/回退/描述性比較已本地實測，Dashboard 新控制尚需瀏覽器操作驗證 |
@@ -49,3 +49,5 @@
 新增階段證據不代表完整 P9。測試矩陣和未完成清單仍是 Release/Tag 門檻。
 
 RustSec 的 glib 問題修補於 >=0.20.0；目前 Tauri/GTK3 依賴仍使用 0.18.5，尚未完成相容升級或回移修補，不能宣稱安全驗收完成。來源：[RustSec advisory](https://rustsec.org/advisories/RUSTSEC-2024-0429.html)。
+
+清理紀錄：已移除任務暫存發布 payload、過時 fixture/進度檔、舊測試庫及重複日誌；移除可重建增量編譯快取，保留 source/lock/migration/有效證據與唯讀參考 clone。

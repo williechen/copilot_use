@@ -26,10 +26,10 @@ with tempfile.TemporaryDirectory(prefix="copilot-pet-gui-") as scratch:
     env.update(PET_GUI_TEST="true", PET_GUI_TEST_AI="true" if live else "false", PET_GUI_TEST_IMAGE="false",
                PET_GUI_TEST_REPORT=str(directory / "report.json"), PET_DATA_DIR=str(directory / "state"),
                PET_AUTHORIZED_ROOT=str(files))
-    subprocess.run([ROOT / "apps/pet_desktop/target/debug/copilot-desktop-pet"], env=env, cwd=ROOT, check=True, timeout=120)
+    completed = subprocess.run([ROOT / "apps/pet_desktop/target/debug/copilot-desktop-pet"], env=env, cwd=ROOT, check=False, timeout=120)
     result = json.loads((directory / "report.json").read_text())
-    if result.get("success") is not True:
-        raise SystemExit(result)
     REPORT.parent.mkdir(parents=True, exist_ok=True)
     REPORT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
+    if completed.returncode != 0 or result.get("success") is not True:
+        raise SystemExit(result)
     print(result["message"])

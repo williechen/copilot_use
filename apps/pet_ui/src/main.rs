@@ -67,6 +67,12 @@ fn Settings() -> impl IntoView {
     let likes = RwSignal::new(String::new());
     let personality = RwSignal::new(String::new());
     let interests = RwSignal::new(String::new());
+    let color = RwSignal::new(String::new());
+    let style = RwSignal::new(String::new());
+    let breed = RwSignal::new(String::new());
+    let actions = RwSignal::new(String::new());
+    let speed = RwSignal::new(String::new());
+    let memory_edit_id = RwSignal::new(String::new());
     let memories = RwSignal::new(Vec::<Value>::new());
     let cards = RwSignal::new(Vec::<Value>::new());
     let memory = RwSignal::new(String::new());
@@ -86,6 +92,8 @@ fn Settings() -> impl IntoView {
         pet.set(id.clone());
         memories.set(Vec::new());
         cards.set(Vec::new());
+        memory.set(String::new());
+        memory_edit_id.set(String::new());
         request.set(uuid());
         reply.set(String::new());
         prompt.set(String::new());
@@ -108,6 +116,21 @@ fn Settings() -> impl IntoView {
                 likes.set(join("喜好"));
                 personality.set(join("個性"));
                 interests.set(join("興趣"));
+                color.set(p["外觀"]["顏色"].as_str().unwrap_or("").into());
+                style.set(p["外觀"]["風格"].as_str().unwrap_or("").into());
+                breed.set(p["外觀"]["品種"].as_str().unwrap_or("").into());
+                speed.set(p["動畫"]["速度"].as_str().unwrap_or("").into());
+                actions.set(
+                    p["動畫"]["動作"]
+                        .as_array()
+                        .map(|a| {
+                            a.iter()
+                                .filter_map(Value::as_str)
+                                .collect::<Vec<_>>()
+                                .join(",")
+                        })
+                        .unwrap_or_default(),
+                );
             }
         }
         leptos::task::spawn_local(async move {
@@ -146,16 +169,22 @@ fn Settings() -> impl IntoView {
     };
     view! {<main><h1>"桌面 AI 寵物"</h1><p class="error" role="alert">{move ||error.get()}</p>
        <section><h2>"我的寵物"</h2><select on:change=move |e|load(event_target_value(&e))><option value="">"選擇寵物"</option>{move ||pets.get().into_iter().map(|p|{let id=p["id"].as_str().unwrap_or("").to_owned();let profile:Value=serde_json::from_str(p["profile"].as_str().unwrap_or("{}")).unwrap_or_default();view!{<option value=id>{profile["名字"].as_str().unwrap_or("寵物").to_owned()}</option>}}).collect_view()}</select>
-       <button on:click=move |_|{pet.set(uuid());name.set(String::new());species.set(String::new());likes.set(String::new());personality.set(String::new());interests.set(String::new());memories.set(Vec::new());cards.set(Vec::new());}>"新增寵物"</button>
+       <button on:click=move |_|{pet.set(uuid());name.set(String::new());species.set(String::new());likes.set(String::new());personality.set(String::new());interests.set(String::new());color.set(String::new());style.set(String::new());breed.set(String::new());actions.set(String::new());speed.set(String::new());memory.set(String::new());memory_edit_id.set(String::new());memories.set(Vec::new());cards.set(Vec::new());}>"新增寵物"</button>
        <div class="pet" class:animated=move ||!sprite.get().is_empty() style:background-image=move ||sprite.get()><Show when=move ||sprite.get().is_empty()><span>"🐾"</span></Show></div>
     <small>{move ||if sprite.get().is_empty() {"200×200 顯示區；尚未生成素材"}else{"200×200 角色動畫；素材已快取"}}</small>
-    <button disabled=move ||busy.get() on:click=move |_|{let pid=pet.get();busy.set(true);leptos::task::spawn_local(async move{match call("generate_asset",json!({"pet":pid})).await{Ok(v)=>{if let Some(png)=v["png_base64"].as_str(){sprite.set(format!("url(data:image/png;base64,{png})"));}},Err(e)=>error.set(e)}busy.set(false);});}>"生成角色動畫"</button>
+    <button disabled=move ||busy.get() on:click=move |_|{let pid=pet.get();busy.set(true);leptos::task::spawn_local(async move{match call("generate_asset",json!({"pet":pid})).await{Ok(v)=>{if pet.get_untracked()==pid && let Some(png)=v["png_base64"].as_str(){sprite.set(format!("url(data:image/png;base64,{png})"));}},Err(e)=>error.set(e)}busy.set(false);});}>"生成角色動畫"</button>
        <label>"名字"<input prop:value=move ||name.get() on:input=move |e|name.set(event_target_value(&e))/></label>
        <label>"種類"<input prop:value=move ||species.get() on:input=move |e|species.set(event_target_value(&e))/></label>
        <label>"喜好（逗號分隔）"<input prop:value=move ||likes.get() on:input=move |e|likes.set(event_target_value(&e))/></label>
        <label>"個性（逗號分隔）"<input prop:value=move ||personality.get() on:input=move |e|personality.set(event_target_value(&e))/></label>
        <label>"興趣（逗號分隔）"<input prop:value=move ||interests.get() on:input=move |e|interests.set(event_target_value(&e))/></label>
-       <button on:click=move |_|{let id=pet.get();let profile=json!({"名字":name.get(),"種類":species.get(),"喜好":strings(likes.get()),"個性":strings(personality.get()),"興趣":strings(interests.get())});leptos::task::spawn_local(async move{match call("save_profile",json!({"id":id,"profile":profile})).await{Ok(_)=>refresh(),Err(e)=>error.set(e)}});}>"保存設定"</button></section>
+       <details><summary>"選用外觀與動畫覆寫"</summary><p>"留白由五項設定決定。生成新素材時才套用，不會自動發送生圖請求。"</p>
+        <label>"顏色"<input maxlength="256" prop:value=move ||color.get() on:input=move |e|color.set(event_target_value(&e))/></label>
+        <label>"風格"<input maxlength="256" prop:value=move ||style.get() on:input=move |e|style.set(event_target_value(&e))/></label>
+        <label>"品種"<input maxlength="256" prop:value=move ||breed.get() on:input=move |e|breed.set(event_target_value(&e))/></label>
+        <label>"動作（逗號分隔）"<input prop:value=move ||actions.get() on:input=move |e|actions.set(event_target_value(&e))/></label>
+        <label>"速度描述"<input maxlength="256" prop:value=move ||speed.get() on:input=move |e|speed.set(event_target_value(&e))/></label></details>
+       <button on:click=move |_|{let id=pet.get();let optional=|s:String|if s.trim().is_empty(){Value::Null}else{json!(s)};let profile=json!({"名字":name.get(),"種類":species.get(),"喜好":strings(likes.get()),"個性":strings(personality.get()),"興趣":strings(interests.get()),"外觀":{"顏色":optional(color.get()),"風格":optional(style.get()),"品種":optional(breed.get())},"動畫":{"動作":if actions.get().trim().is_empty(){Value::Null}else{json!(strings(actions.get()))},"速度":optional(speed.get())}});leptos::task::spawn_local(async move{match call("save_profile",json!({"id":id,"profile":profile})).await{Ok(_)=>refresh(),Err(e)=>error.set(e)}});}>"保存設定"</button></section>
        <section><h2>"AI 對話與教學"</h2><p>"回答會使用此寵物的設定、記憶與對話歷史並傳送至 OpenAI；可先修改或刪除不想使用的記憶。"</p><textarea prop:value=move ||prompt.get() on:input=move |e|prompt.set(event_target_value(&e)) placeholder="輸入問題或想學習的主題"></textarea><button disabled=move ||busy.get() on:click=move |_|{let pid=pet.get();let text=prompt.get();let rid=uuid();request.set(rid.clone());reply.set(String::new());busy.set(true);leptos::task::spawn_local(async move{match call("pet_talk",json!({"pet":pid,"request":rid,"text":text})).await{Ok(v)=>{if pet.get_untracked()==pid && request.get_untracked()==rid {reply.set(v.as_str().unwrap_or("").to_owned());}},Err(e)=>{if pet.get_untracked()==pid {error.set(e);}}}busy.set(false);});}>"提問"</button><pre aria-live="polite">{move ||reply.get()}</pre>
     <label><input type="checkbox" on:change=move |e|allow_tools.set(event_target_checked(&e))/>"允許唯讀記憶檢索工具，將相關記憶交給 OpenAI 回答"</label>
     <button disabled=move ||busy.get() ||!allow_tools.get() on:click=move |_| {
@@ -164,10 +193,12 @@ fn Settings() -> impl IntoView {
             Ok(v)=>{if pet.get_untracked()==pid {reply.set(format!("{}\n理解問題：{}\n來源：{}\n工具：{}",v["answer"].as_str().unwrap_or(""),v["follow_up_question"].as_str().unwrap_or(""),v["sources"],v["steps"]));}},Err(e)=>{if pet.get_untracked()==pid {error.set(e);}}
         }busy.set(false);});
     }>"執行記憶 Agent"</button></section>
-    <section><h2>"可管理的記憶"</h2><textarea placeholder="新增記憶" prop:value=move ||memory.get() on:input=move |e|memory.set(event_target_value(&e))></textarea><button on:click=move |_|{let id=pet.get();let text=memory.get();leptos::task::spawn_local(async move{match call("save_memory",json!({"pet":id,"id":uuid(),"content":text})).await{Ok(_)=>{memory.set(String::new());load(id)},Err(e)=>error.set(e)}});}>"保存記憶"</button>
-       {move ||memories.get().into_iter().map(|m|{let id=m["id"].as_str().unwrap_or("").to_owned();view!{<article>{m["content"].as_str().unwrap_or("").to_owned()}<button on:click=move |_|{let mid=id.clone();let pid=pet.get();leptos::task::spawn_local(async move{match call("delete_memory",json!({"pet":pid,"id":mid})).await{Ok(_)=>load(pid),Err(e)=>error.set(e)}});}>"刪除"</button></article>}}).collect_view()}</section>
-       <section><h2>"主動回想與間隔複習"</h2><input placeholder="題目" on:input=move |e|question.set(event_target_value(&e))/><input placeholder="答案" on:input=move |e|answer.set(event_target_value(&e))/><button on:click=move |_|{let pid=pet.get();let q=question.get();let a=answer.get();leptos::task::spawn_local(async move{match call("add_card",json!({"pet":pid,"question":q,"answer":a})).await{Ok(_)=>load(pid),Err(e)=>error.set(e)}});}>"新增複習"</button>
-       {move ||cards.get().into_iter().map(|c|{let id=c["id"].as_str().unwrap_or("").to_owned();view!{<article><p>{c["question"].as_str().unwrap_or("").to_owned()}</p><details><summary>"顯示答案"</summary>{c["answer"].as_str().unwrap_or("").to_owned()}</details><small>{format!("間隔 {} 天；下次複習 Unix 時間 {}",c["interval_days"],c["due_at"])}</small><button on:click=move |_|{let cid=id.clone();let pid=pet.get();leptos::task::spawn_local(async move{match call("review_card",json!({"pet":pid,"id":cid,"quality":5})).await{Ok(_)=>load(pid),Err(e)=>error.set(e)}});}>"成功回想"</button></article>}}).collect_view()}</section>
+    <section><h2>"可管理的記憶"</h2><textarea placeholder="新增記憶" prop:value=move ||memory.get() on:input=move |e|memory.set(event_target_value(&e))></textarea><button on:click=move |_|{let id=pet.get();let text=memory.get();let mid=if memory_edit_id.get().is_empty(){uuid()}else{memory_edit_id.get()};leptos::task::spawn_local(async move{match call("save_memory",json!({"pet":id,"id":mid,"content":text})).await{Ok(_)=>{memory.set(String::new());if pet.get_untracked()==id {load(id)}},Err(e)=>error.set(e)}});}>"保存記憶"</button><button on:click=move |_|{memory_edit_id.set(String::new());memory.set(String::new());}>"新增／取消編輯"</button>
+       {move ||memories.get().into_iter().map(|m|{let id=m["id"].as_str().unwrap_or("").to_owned();let edit_id=id.clone();let edit_text=m["content"].as_str().unwrap_or("").to_owned();view!{<article>{m["content"].as_str().unwrap_or("").to_owned()}<button on:click=move |_|{memory_edit_id.set(edit_id.clone());memory.set(edit_text.clone());}>"編輯"</button><button on:click=move |_|{let mid=id.clone();let pid=pet.get();leptos::task::spawn_local(async move{match call("delete_memory",json!({"pet":pid,"id":mid})).await{Ok(_)=>{if pet.get_untracked()==pid {load(pid)}},Err(e)=>error.set(e)}});}>"刪除"</button></article>}}).collect_view()}</section>
+       <section><h2>"主動回想與間隔複習"</h2><input placeholder="題目" on:input=move |e|question.set(event_target_value(&e))/><input placeholder="答案" on:input=move |e|answer.set(event_target_value(&e))/><button on:click=move |_|{let pid=pet.get();let q=question.get();let a=answer.get();leptos::task::spawn_local(async move{match call("add_card",json!({"pet":pid,"question":q,"answer":a})).await{Ok(_)=>{if pet.get_untracked()==pid {load(pid)}},Err(e)=>error.set(e)}});}>"新增複習"</button>
+       {move ||cards.get().into_iter().map(|c|{let id=c["id"].as_str().unwrap_or("").to_owned();let failed=id.clone();let difficult=id.clone();view!{<article><p>{c["question"].as_str().unwrap_or("").to_owned()}</p><details><summary>"顯示答案"</summary>{c["answer"].as_str().unwrap_or("").to_owned()}</details><small>{format!("間隔 {} 天；下次複習 Unix 時間 {}",c["interval_days"],c["due_at"])}</small><button on:click=move |_|{let cid=id.clone();let pid=pet.get();leptos::task::spawn_local(async move{match call("review_card",json!({"pet":pid,"id":cid,"quality":5})).await{Ok(_)=>{if pet.get_untracked()==pid {load(pid)}},Err(e)=>error.set(e)}});}>"成功回想"</button>
+        <button on:click=move |_|{let cid=difficult.clone();let pid=pet.get();leptos::task::spawn_local(async move{match call("review_card",json!({"pet":pid,"id":cid,"quality":3})).await{Ok(_)=>{if pet.get_untracked()==pid {load(pid)}},Err(e)=>error.set(e)}});}>"想起來但困難"</button>
+        <button on:click=move |_|{let cid=failed.clone();let pid=pet.get();leptos::task::spawn_local(async move{match call("review_card",json!({"pet":pid,"id":cid,"quality":0})).await{Ok(_)=>{if pet.get_untracked()==pid {load(pid)}},Err(e)=>error.set(e)}});}>"忘記了，重新練習"</button></article>}}).collect_view()}</section>
        <SuggestionPolicy pet=pet/>
        <FileOrganizer/>
        </main>}
