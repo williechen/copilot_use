@@ -1,33 +1,38 @@
-# copilot_use — AI 對照程式碼
+# copilot_use — AI 對照實作
 
-這是由 AI 控制的獨立對照 Repository。使用者控制的 [rust_ai_chat](https://github.com/williechen/rust_ai_chat) **永遠唯讀**，不在此自動覆寫。基準 SHA: `fdc74c1ee244cf86df3fd1c427d893d2956f6211`。
+**權責：** [rust_ai_chat](https://github.com/williechen/rust_ai_chat) 是使用者控制的教學程式碼，AI 完全唯讀；本 Repository `copilot_use` 是 AI 控制的實作／驗證區，兩者的 SHA、CI 與 Gate 必須獨立核算。
 
-## Day 9 — 三專案可靠事件 Vertical Slice
+唯讀參考基準：`rust_ai_chat` main `fdc74c1ee244cf86df3fd1c427d893d2956f6211`（2026-10-11 查核時）。
 
-- `apps/chat`：獨立 PostgreSQL Chat 訊息 + Transactional Outbox；commit 後呼叫現有應用的 WS broadcast（本對照專案不包含既有完整 WS/Leptos UI）；lease / fencing / retry / worker。
-- `apps/pet`：授權根下的一般檔案預覽、明確確認、quarantine 操作 receipt；不代表已通過高安全等級 TOCTOU / GUI E2E。
-- `apps/analytics`：獨立 PostgreSQL DB、Bearer 認證、HTTP Ingest、`(source_app,event_id)` 唯一約束、持久冪等、count Query API。
-- `crates/event_contract`：跨專案一致、只有四欄且不帶私人內容的事件。
+## 已寫入的三專案 Day 9 最小可靠事件切片
 
-## 執行與測試
+| Crate | 功能 | 目前限制 |
+| --- | --- | --- |
+| `apps/chat` | Room 建立、訊息入 DB、同交易 Outbox、租約/重試/ACK、HTTP 寫入及 Dispatcher | 尚未移植完整 Leptos、WebSocket、AI Persona、Session 等產品功能 |
+| `apps/pet` | 授權根目錄一般檔案預覽、明確確認的隔離操作、成功 Receipt、唯讀 CLI | 隔離操作尚未具備敵對檔案系統的原子 TOCTOU 防護；未移植 Tauri GUI／AI 動畫 |
+| `apps/analytics` | 獨立 PostgreSQL、Bearer 認證 Ingest、持久冪等、Count Query API | 尚缺正式 Dashboard、細部分析、備份/保留與使用者授權 |
+| `crates/event_contract` | 四欄、版本化、無個資的跨系統事件 | Schema v1 僅涵蓋 Chat/Pet 最小事件 |
 
-需要 Rust stable (edition 2024) 與 PostgreSQL 17 測試環境。兩個資料庫必須獨立建立、使用不同角色。
+**本工作區尚不能被稱為三個最終完整產品，也不等於 P0 驗收完成。** 後續功能仍須逐項完成、測試及 CI 核驗。
 
-```sh
-export DATABASE_URL=postgres://postgres:postgres@localhost:5432/postgres  # 僅測試 CI，勿用生產 DB
-cargo test --workspace
-cargo fmt --all -- --check
-cargo clippy --workspace --all-targets -- -D warnings
+## 啟動、API 與隔離測試
 
-export ANALYTICS_DATABASE_URL='postgres://analytics_user:***@127.0.0.1:5432/analytics_db'
-export ANALYTICS_API_TOKEN='replace-with-strong-secret'
-cargo run -p day9-analytics
+請參閱 [部署與測試操作說明](docs/DEPLOYMENT.md)。
 
-export CHAT_DATABASE_URL='postgres://chat_user:***@127.0.0.1:5432/chat_db'
-export ANALYTICS_ENDPOINT='http://127.0.0.1:3100/api/v1/events'
-cargo run -p day9-chat
+```bash
+# 需 Rust stable 與本機 PostgreSQL，請在隔離測試庫執行
+export DATABASE_URL='postgres://postgres:postgres@127.0.0.1:5432/postgres'
+cargo test --workspace --all-targets
 ```
 
-**安全與未完成界線：** 本 Repository 是 Day9 的可驗證對照切片，**不是**三個最終產品的完整功能集合；未整合 rust_ai_chat 的 Leptos/WebSocket、Tauri 真實 GUI、Pet 的原子 OS 檔案操作、跨平台測試、全量 E2E、追蹤/部署。必須通過 CI 與後續整合才可宣稱 P0 驗收。任何 Copilot/AI 提交均只屬於 copilot_use。
+Chat 與 Analytics 需要各自獨立的 PostgreSQL 資料庫和使用者。啟動時僅對這兩套「AI 對照環境」執行各自的 migrations，不得觸及 rust_ai_chat 的既有 DB 或 migration。
 
-PostgreSQL 原生 UUID 及 VARCHAR(40) 都符合領域契約；本對照實作選 native UUID，SQLx 與 Migration 差異封裝在各自 persistence 層；切換不得重寫 domain/event contract。
+## UUID 與 Adapter
+
+跨系統契約以 Rust `Uuid` 表達 ID；本對照資料庫的實體欄位暫採 PostgreSQL 原生 `UUID`。改為 `VARCHAR(40)` 時，應將 SQL、SQLx bind/decode 與資料遷移限制在 Persistence Adapter；不改 Event Contract、Domain 與對外 JSON。雙模式的完整對照測試仍屬待完成項目。
+
+## GitHub CI
+
+`.github/workflows/verify.yml` 啟動 `postgres:17` 並執行 Workspace 測試。建立 Workflow 不代表已通過；請以 [Actions](https://github.com/williechen/copilot_use/actions) 真實結果為準。
+
+本倉庫目前以三專案 **P0 Day 9 Vertical Slice** 為起點，不以尚未實作的功能假裝最終交付。
