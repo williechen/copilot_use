@@ -10,8 +10,9 @@ use axum::{
 };
 use event_contract::ProductEvent;
 use serde::Serialize;
-use sqlx::FromRow;
-use sqlx::{PgPool, Row};
+use sqlx::PgPool;
+mod persistence;
+pub use persistence::{EventStore, EventSummary};
 use std::sync::Arc;
 
 #[derive(Clone)]
@@ -22,60 +23,6 @@ pub struct AnalyticsState {
     pub pet_token: Arc<str>,
     pub admin_token: Arc<str>,
     pub ai_slots: Arc<tokio::sync::Semaphore>,
-}
-
-#[derive(Clone)]
-pub struct EventStore {
-    pool: PgPool,
-}
-
-impl EventStore {
-    pub fn new(pool: PgPool) -> Self {
-        Self { pool }
-    }
-
-    /// 真正持久化成功才回 2xx；同一來源/事件的重送不再增加計數。
-    pub async fn insert_once(&self, event: &ProductEvent) -> Result<bool, sqlx::Error> {
-        use sha2::{Digest, Sha256};
-        let key =
-            Sha256::digest(format!("{}:{}", event.source_app, event.event_id).as_bytes()).to_vec();
-        let kind = Sha256::digest(event.event_type.as_bytes()).to_vec();
-        let mut tx = self.pool.begin().await?;
-        let inserted=sqlx::query("INSERT INTO event_dedup_keys(key_hash,type_hash) VALUES ($1,$2) ON CONFLICT DO NOTHING").bind(&key).bind(&kind).execute(&mut *tx).await?;
-        if inserted.rows_affected() == 0 {
-            let previous: Vec<u8> =
-                sqlx::query_scalar("SELECT type_hash FROM event_dedup_keys WHERE key_hash=$1")
-                    .bind(key)
-                    .fetch_one(&mut *tx)
-                    .await?;
-            if previous != kind {
-                return Err(sqlx::Error::Protocol("event_identity_conflict".into()));
-            }
-            tx.commit().await?;
-            return Ok(false);
-        }
-        sqlx::query("INSERT INTO product_events(source_app,event_id,schema_version,event_type) VALUES ($1,$2,$3,$4)")
-            .bind(&event.source_app).bind(event.event_id).bind(i16::try_from(event.schema_version).unwrap_or(-1)).bind(&event.event_type).execute(&mut *tx).await?;
-        tx.commit().await?;
-        Ok(true)
-    }
-
-    pub async fn summary(&self) -> Result<Vec<EventSummary>, sqlx::Error> {
-        sqlx::query_as::<_, EventSummary>(
-            "SELECT source_app, event_type, count(*)::bigint AS total
-             FROM product_events WHERE NOT archived
-             GROUP BY source_app, event_type ORDER BY source_app, event_type",
-        )
-        .fetch_all(&self.pool)
-        .await
-    }
-
-    pub async fn total(&self) -> Result<i64, sqlx::Error> {
-        let row = sqlx::query("SELECT count(*) AS total FROM product_events WHERE NOT archived")
-            .fetch_one(&self.pool)
-            .await?;
-        Ok(row.get("total"))
-    }
 }
 
 fn authorized(headers: &HeaderMap, expected: &str) -> bool {
@@ -113,13 +60,6 @@ async fn ingest(
     }
 }
 
-#[derive(Debug, Serialize, FromRow, PartialEq, Eq)]
-pub struct EventSummary {
-    pub source_app: String,
-    pub event_type: String,
-    pub total: i64,
-}
-
 #[derive(Serialize)]
 struct CountResponse {
     total: i64,
@@ -154,7 +94,7 @@ async fn summary(
 }
 
 async fn health(State(state): State<AnalyticsState>) -> StatusCode {
-    match sqlx::query("SELECT 1").execute(&state.pool).await {
+    match EventStore::new(state.pool).health().await {
         Ok(_) => StatusCode::OK,
         Err(_) => StatusCode::SERVICE_UNAVAILABLE,
     }
@@ -168,14 +108,10 @@ async fn event_lookup(
     if !authorized(&headers, &state.api_token) {
         return Err(StatusCode::UNAUTHORIZED);
     }
-    let kind: Option<String> = sqlx::query_scalar(
-        "SELECT event_type FROM product_events WHERE source_app=$1 AND event_id=$2 AND NOT archived",
-    )
-    .bind(source)
-    .bind(id)
-    .fetch_optional(&state.pool)
-    .await
-    .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
+    let kind = EventStore::new(state.pool)
+        .lookup(&source, id)
+        .await
+        .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
     match kind {
         Some(kind) => Ok(Json(serde_json::json!({"event_id":id,"event_type":kind}))),
         None => Err(StatusCode::NOT_FOUND),

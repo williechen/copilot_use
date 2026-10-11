@@ -785,11 +785,16 @@ mod tests {
         assert_eq!(root.restore(receipt.operation_id).unwrap(), restored);
         assert_eq!(root.restored_receipts().unwrap(), vec![restored]);
         assert_eq!(std::fs::read(path.join("a.txt")).unwrap(), b"original");
-        assert_eq!(
+        let restored_acl =
             security_text(&open_at(&root.directory, "a.txt", false, false, false, false).unwrap())
-                .unwrap(),
-            original_acl
-        );
+                .unwrap();
+        // SetSecurityInfo records SE_DACL_AUTO_INHERITED after propagation. This
+        // bookkeeping bit may change; every ACE, order and protection flag must match.
+        let permissions = |s: &str| {
+            let (control, aces) = s.split_once('(').expect("nonempty fixture DACL");
+            format!("{}({aces}", control.replace("AI", ""))
+        };
+        assert_eq!(permissions(&restored_acl), permissions(&original_acl));
         drop(root);
         std::fs::remove_dir_all(path).unwrap();
     }

@@ -651,6 +651,11 @@ fn gui_test_result(app: tauri::AppHandle, success: bool, message: String) -> Res
     Ok(())
 }
 fn main() {
+    if std::env::args().any(|arg| arg == "--version") {
+        let context: tauri::Context<tauri::Wry> = tauri::generate_context!();
+        println!("{}", context.package_info().version);
+        return;
+    }
     if std::env::args().any(|arg| arg == "--mcp-once") {
         if mcp_once().is_err() {
             std::process::exit(1);
@@ -678,6 +683,9 @@ fn main() {
             {
                 if std::env::var("PET_GUI_TEST_AI").as_deref() == Ok("true") {
                     let _ = webview.eval("window.__PET_TEST_LIVE_AI=true;");
+                }
+                if std::env::var("PET_GUI_TEST_INSTALL_UPDATE").as_deref() == Ok("true") {
+                    let _ = webview.eval("window.__PET_TEST_INSTALL_UPDATE=true;");
                 }
                 if std::env::var("PET_GUI_TEST_UPDATER").as_deref() == Ok("true") {
                     let _ = webview.eval("window.__PET_TEST_UPDATER=true;");

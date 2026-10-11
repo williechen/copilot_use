@@ -140,9 +140,14 @@ window.addEventListener('error',e=>window.__PET_LOAD_ERROR=e.message);window.add
   const available=await invoke('check_local_update');assert(available.status==='available'&&available.version==='0.1.1','local signed update discovered');
   let unconfirmedInstall=false;try{await invoke('install_local_update',{id:available.id,confirmed:false})}catch(_){unconfirmedInstall=true}assert(unconfirmedInstall,'updater installation requires confirmation');
   const verified=await invoke('verify_local_update',{id:available.id});assert(verified.status==='signature_verified'&&verified.bytes>0,'actual updater signature download verified');
+  if(window.__PET_TEST_INSTALL_UPDATE){
+   const installed=await invoke('install_local_update',{id:available.id,confirmed:true});
+   assert(installed.status==='installed_restart_required'&&installed.version==='0.1.1'&&installed.before_snapshot,'actual signed package installed after SQLite snapshot');
+  }else{
   const wrongVersion=await invoke('check_local_update');let versionDenied=false;try{await invoke('verify_local_update',{id:wrongVersion.id})}catch(_){versionDenied=true}assert(versionDenied,'signed version mismatch rejected');
   const tampered=await invoke('check_local_update');let tamperDenied=false;try{await invoke('verify_local_update',{id:tampered.id})}catch(_){tamperDenied=true}assert(tamperDenied,'modified updater package rejected');
   let remoteDenied=false;try{await invoke('check_local_update')}catch(_){remoteDenied=true}assert(remoteDenied,'updater remote URL rejected before download');
+  }
  }
  await invoke('gui_test_result',{success:true,message:'PASS: WebKit/WASM, 200x200, IPC, profiles, memory isolation/deletion, recall scheduling, advanced overrides, memory editing, opaque-ID confirmed cleanup, organizer GUI, journal/restore recovery, Trash UI, animation choices, rendered proactive reminder and cooldown, learning summary, SQLite/assets snapshot restore, MCP stdio scope and rendered data; AI='+!!window.__PET_TEST_LIVE_AI+'; image='+!!window.__PET_TEST_LIVE_IMAGE+'; analytics='+!!window.__PET_TEST_ANALYTICS+'; updater_signature='+!!window.__PET_TEST_UPDATER});
 })().catch(async e=>{await window.__TAURI__.core.invoke('gui_test_result',{success:false,message:String(e?.message||e)})});

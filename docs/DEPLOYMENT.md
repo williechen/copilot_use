@@ -102,3 +102,11 @@ Chat 房主可保存最多八個 Persona，明確確認後開始有界對話。�
 本地 updater 使用 `PET_UPDATE_ENDPOINT`（numeric loopback HTTP/HTTPS）與 `PET_UPDATE_PUBLIC_KEY`（可信公鑰）。下載網址必須與 channel 同 origin，停用 proxy/redirect，最多256 MiB。簽章必須包含與公告相同的版本；用 `cargo tauri signer sign --app-version VERSION`。GUI 先檢查、下載驗證，再明確確認安裝；先建立資料快照。Linux 自動更新需 AppImage 安裝格式；deb 使用套件管理器更新。測試公鑰/私鑰不等於正式發行簽章，不提交私鑰。
 
 `python3 scripts/pet-gui-verify.py --updater` 使用一次性私鑰與本機 fixture，實測簽章、版本不符、篡改與 URL 邊界，不以此宣稱已驗證三平台更新安裝。Docker 建置以 `COPILOT_BUILD_SHA=$(git rev-parse HEAD)` 設定映像來源 label，驗證報告記錄 image ID 與來源工作樹狀態。
+
+## 驗收來源與教學分支
+
+`pet-gui-verify.py --executable PATH` 實際執行安裝包的 release 程式。入口需要 `--acceptance-gui`、明確測試設定、全新 state/report 與已知可拋棄檔案 fixture；報告包含 source SHA、dirty、版本及 release 狀態。一般啟動不執行驗收脚本。Linux AppImage 更新測試只更換 tempfile 副本，驗證有效簽章／checksum／冷啟動版本／SQLite 完整性／資料及備份保留。`build-test-update.py` 產生 0.1.1 測試套件並還原 manifest/lock，該測試套件不是正式發行版。
+
+`local-verify.py --varchar-events` 在新測試庫將 Analytics 事件 ID 欄位改為 VARCHAR(40)，以同一個 production EventStore、UUID domain/API 跑完整可靠性測試；預設 production migrations 仍使用原生 UUID。不是全資料庫任意 schema 的切換開關。
+
+正式 tag 固定後才建立 `copilot_use` 的教學對齊分支。測試隨各自模組／專案放置，不集中至最外層 `tests/`。每日教學必須列出該分支真實路徑、程式變更、驗證命令與結果；`rust_ai_chat` 保持唯讀。

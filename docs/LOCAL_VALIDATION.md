@@ -38,15 +38,15 @@
 - Linux GUI 實際到期題主動提醒顯示與一小時冷卻通過。
 - 備份交易故障完整回滾、操作前快照保留，以及舊 schema 在私人工作副本升級後還原通過；原始備份 bytes 完全不变。
 - 真實 Chat 管理／Analytics 查詢／來源 ingest 金鑰輪替：舊憑證撤銷、新憑證跨服務投遞成功。
-- profile hash 阻止過時生圖結果覆蓋或顯示已修改角色；unit 通過，新版真實生圖仍待核對。
+- profile hash 阻止過時生圖結果覆蓋或顯示已修改角色；unit 與真實 OpenAI 生圖／快取／修改後停用舊素材／原設定恢復快取均通過。
 
 | 必要門檻 | 剩餘驗證 |
 |---|---|
 | Windows 安全與 GUI | 新 SHA 上實跑備份 flush、handle-relative ACL 還原、安全測試、WebView GUI 與 NSIS |
 | 安裝包 runtime | Linux deb 解包後的 release 程式已通過 GUI／SQLite／回收還原／簽章驗收；macOS app 與 Windows 安装包加入 CI，尚待結果 |
-| Updater | 真實有效簽章、篡改、版本不符、遠端 URL、未確認拒絕已過 Linux/macOS GUI；實際更新安裝尚未驗證 |
+| Updater | Linux/macOS 簽章拒絕邊界通過；Linux AppImage 真實 0.1.0→0.1.1 安裝、checksum、冷啟動版本、既有寵物/SQLite 完整性與更新前快照已過。本地測試私鑰不進 repository |
 | Analytics Dashboard | 已通過 Taipei 當日趨勢、實際封存 13→12、還原 12→13 的瀏覽器操作 |
-| 身份／架構 | 核對 UUID domain 與 UUID/VARCHAR storage port；正式 tag 後在新 branch 對齊唯讀需求目錄與模組內測試 |
+| 身份／架構 | 實際 Analytics Adapter 的原生 UUID↔VARCHAR(40) 轉換、並發去重/衝突/查詢及完整 VARCHAR HTTP/WS/故障 E2E 通過，domain/API 保持 UUID；正式 tag 後新 branch 對齊目錄與模組內測試 |
 | 安全／來源固定 | 最新四份 lock audit、手工 GLib 回移證據、新提交全部 CI；同一乾淨 SHA 的 Docker 重建、容器測試、安裝包與輸出校驗 |
 | 交付固定 | 更新文件、移除無用暫存、完成上列門檻後才正式 release/tag；目前尚未完成 |
 

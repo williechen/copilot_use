@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Exercise this application's own WebKit/WASM/IPC in an isolated disposable state."""
-import json, os, pathlib, subprocess, tempfile, sys, threading, argparse
+import json, os, pathlib, subprocess, tempfile, sys, threading, argparse, hashlib, shutil, sqlite3
 from http.server import ThreadingHTTPServer,BaseHTTPRequestHandler
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 REPORT = ROOT / "target/pet-gui-validation.json"
@@ -8,6 +8,7 @@ if sys.platform.startswith("linux") and not os.environ.get("DISPLAY"):
     raise SystemExit("A Linux desktop/X11 display is required for actual GUI execution")
 parser=argparse.ArgumentParser()
 parser.add_argument('--executable',type=pathlib.Path)
+parser.add_argument('--update-package',type=pathlib.Path)
 parser.add_argument('--live-ai',action='store_true')
 parser.add_argument('--live-image',action='store_true')
 parser.add_argument('--analytics',action='store_true')
@@ -37,8 +38,14 @@ with tempfile.TemporaryDirectory(prefix="copilot-pet-gui-") as scratch:
                PET_GUI_TEST_REPORT=str(directory / "report.json"), PET_DATA_DIR=str(directory / "state"),
                PET_AUTHORIZED_ROOT=str(files))
     server=None
-    if '--updater' in sys.argv:
-        key=directory/'updater-test.key';payload=directory/'fixture.bin';payload.write_bytes(b'isolated updater signature fixture')
+    if options.updater:
+        key=directory/'updater-test.key';payload=directory/'fixture.bin'
+        if options.update_package:
+            if not options.executable or options.executable.suffix!='.AppImage':raise SystemExit('Actual update acceptance requires disposable AppImage')
+            shutil.copyfile(options.update_package,payload)
+            disposable=directory/'current.AppImage';shutil.copy2(executable,disposable);executable=disposable
+            env['PET_GUI_TEST_INSTALL_UPDATE']='true'
+        else:payload.write_bytes(b'isolated updater signature fixture')
         subprocess.run(['cargo','tauri','signer','generate','--ci','--password','','--write-keys',str(key)],check=True,cwd=ROOT,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
         key.chmod(0o600)
         subprocess.run(['cargo','tauri','signer','sign','--private-key-path',str(key),'--password','','--app-version','0.1.1',str(payload)],check=True,cwd=ROOT,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
@@ -57,9 +64,22 @@ with tempfile.TemporaryDirectory(prefix="copilot-pet-gui-") as scratch:
                 self.send_response(200);self.send_header('Content-Type',kind);self.send_header('Content-Length',str(len(data)));self.end_headers();self.wfile.write(data)
         server=ThreadingHTTPServer(('127.0.0.1',0),UpdateServer);threading.Thread(target=server.serve_forever,daemon=True).start()
         env.update(PET_UPDATE_ENDPOINT=f'http://127.0.0.1:{server.server_port}/manifest',PET_UPDATE_PUBLIC_KEY=public,PET_GUI_TEST_UPDATER='true')
-    completed = subprocess.run([executable,"--acceptance-gui"], env=env, cwd=ROOT, check=False, timeout=420 if live else 120)
+    command=[executable]+(["--appimage-extract-and-run"] if executable.suffix==".AppImage" else [])+["--acceptance-gui"]
+    completed = subprocess.run(command, env=env, cwd=ROOT, check=False, timeout=420 if live or options.update_package else 120)
     if server:server.shutdown();server.server_close()
     result = json.loads((directory / "report.json").read_text())
+    if options.update_package and result.get('success'):
+        expected=hashlib.sha256(options.update_package.read_bytes()).hexdigest()
+        actual=hashlib.sha256(executable.read_bytes()).hexdigest()
+        if actual!=expected:raise SystemExit('Installed AppImage checksum differs from verified update package')
+        version=subprocess.check_output([executable,'--appimage-extract-and-run','--version'],env=env,cwd=ROOT,timeout=60,text=True).strip()
+        if version!='0.1.1':raise SystemExit('Cold updated executable did not report version 0.1.1')
+        with sqlite3.connect(directory/'state/pet.sqlite') as database:
+            if database.execute('PRAGMA integrity_check').fetchone()[0]!='ok':raise SystemExit('SQLite integrity after update failed')
+            if database.execute('SELECT count(*) FROM pets').fetchone()[0]<2:raise SystemExit('Existing pets lost after update')
+        manifests=list((directory/'state/backups').glob('*/manifest.json'))
+        if not manifests:raise SystemExit('Pre-update snapshot missing')
+        result['update_install']={'sha256':actual,'cold_version':version,'sqlite_integrity':'ok','pets_preserved':True,'pre_update_snapshot':True}
     REPORT.parent.mkdir(parents=True, exist_ok=True)
     REPORT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
     if completed.returncode != 0 or result.get("success") is not True:

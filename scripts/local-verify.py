@@ -3,6 +3,8 @@
 import json, uuid, os, pathlib, secrets, signal, socket, subprocess, sys, tempfile, time, urllib.request, urllib.error, threading
 from http.server import ThreadingHTTPServer,BaseHTTPRequestHandler
 ROOT = pathlib.Path(__file__).resolve().parents[1]
+SOURCE_SHA=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
+SOURCE_DIRTY=bool(subprocess.check_output(['git','status','--porcelain'],cwd=ROOT,text=True).strip())
 PG = pathlib.Path(subprocess.check_output(['pg_config','--bindir'],text=True).strip())
 REPORT = pathlib.Path(os.environ.get('VERIFY_REPORT', ROOT / 'target/local-validation.json'))
 live_key=os.environ.get('OPENAI_API_KEY') if any(flag in sys.argv for flag in ('--live-openai','--live-insights','--browser-live')) else None
@@ -106,6 +108,10 @@ with tempfile.TemporaryDirectory(prefix='copilot-verify-') as scratch:
             return proc
         chat=start('chat'); analytics=start('analytics')
         check('empty-database migrations and two independently running services')
+        if '--varchar-events' in sys.argv:
+            run([PG/'psql',env['ANALYTICS_DATABASE_URL'],'-v','ON_ERROR_STOP=1','-c','ALTER TABLE product_events ALTER COLUMN event_id TYPE VARCHAR(40) USING event_id::text'],stdout=subprocess.DEVNULL)
+            check('Analytics production event adapter uses VARCHAR(40) with unchanged UUID domain/API')
+
         abuse_headers={'Content-Type':'application/json','X-Copilot-Csrf':'1'}
         def rejected_login(base):
             req=urllib.request.Request(base+'/api/v1/auth/login',data=json.dumps({'username':'missing_abuse_fixture','password':'wrong-synthetic-password'}).encode(),headers=abuse_headers)
@@ -386,7 +392,7 @@ with tempfile.TemporaryDirectory(prefix='copilot-verify-') as scratch:
         check('OTLP transport strips inherited authentication headers',all('metadata-synthetic-secret' not in str(headers) and 'Authorization' not in headers for headers in observed_headers))
         check('telemetry excludes credentials and message contents',all(value.encode() not in payload for value in forbidden for _,payload in observed))
         REPORT.parent.mkdir(parents=True,exist_ok=True)
-        REPORT.write_text(json.dumps({'status':'passed','checks':results,'scope':'implemented reliability slice only; P9 incomplete','live_openai':bool(live_key),'openai_model':env.get('OPENAI_CHAT_MODEL') if live_key else None},ensure_ascii=False,indent=2)+'\n')
+        REPORT.write_text(json.dumps({'status':'passed','checks':results,'scope':'local synthetic reliability and integration; other release gates have separate evidence','source_sha':SOURCE_SHA,'source_dirty':SOURCE_DIRTY,'event_identity_storage':'varchar(40)' if '--varchar-events' in sys.argv else 'uuid','live_openai':bool(live_key),'openai_model':env.get('OPENAI_CHAT_MODEL') if live_key else None},ensure_ascii=False,indent=2)+'\n')
         if '--browser' in sys.argv or '--browser-live' in sys.argv:
             if '--browser-live' in sys.argv:
                 stop(chat);chat=start('chat')

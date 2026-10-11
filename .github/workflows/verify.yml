@@ -93,12 +93,17 @@ jobs:
           make -C "$RUNNER_TEMP/pgvector" PG_CONFIG=/usr/lib/postgresql/16/bin/pg_config with_llvm=no
           sudo make -C "$RUNNER_TEMP/pgvector" PG_CONFIG=/usr/lib/postgresql/16/bin/pg_config with_llvm=no install
       - name: Run HTTP, WebSocket, restart, DB interruption and backup/restore tests
-        run: PATH=/usr/lib/postgresql/16/bin:$PATH python3 scripts/local-verify.py --load
+        run: |
+          PATH=/usr/lib/postgresql/16/bin:$PATH VERIFY_REPORT=target/local-validation-native.json python3 scripts/local-verify.py --load
+          PATH=/usr/lib/postgresql/16/bin:$PATH python3 scripts/local-verify.py --varchar-events
       - uses: actions/upload-artifact@v4
         if: success()
         with:
           name: local-validation
-          path: target/local-validation.json
+          path: |
+            target/local-validation.json
+            target/local-validation-native.json
+            target/realtime-load-validation.json
 
   desktop:
     strategy:
@@ -106,7 +111,7 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            bundle: deb
+            bundle: deb,appimage
           - os: macos-latest
             bundle: app
           - os: windows-latest
@@ -166,6 +171,14 @@ jobs:
           dpkg-deb -x "$package" "$RUNNER_TEMP/pet-package"
           executable=$(find "$RUNNER_TEMP/pet-package" -name copilot-desktop-pet -type f -print -quit)
           xvfb-run -a python3 scripts/pet-gui-verify.py --executable "$executable" --updater
+      - name: Install signed AppImage update and cold-start updated executable
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          cp 'apps/pet_desktop/target/release/bundle/appimage/Copilot Desktop Pet_0.1.0_amd64.AppImage' "$RUNNER_TEMP/base.AppImage"
+          python3 scripts/build-test-update.py
+          xvfb-run -a python3 scripts/pet-gui-verify.py --executable "$RUNNER_TEMP/base.AppImage" --updater --update-package 'apps/pet_desktop/target/release/bundle/appimage/Copilot Desktop Pet_0.1.1_amd64.AppImage'
+          cp "$RUNNER_TEMP/base.AppImage" 'apps/pet_desktop/target/release/bundle/appimage/Copilot Desktop Pet_0.1.0_amd64.AppImage'
       - name: Execute macOS release app
         if: runner.os == 'macOS'
         shell: bash
@@ -188,5 +201,8 @@ jobs:
         with:
           name: desktop-${{ runner.os }}
           path: |
-            apps/pet_desktop/target/release/bundle/
+            apps/pet_desktop/target/release/bundle/deb/*.deb
+            apps/pet_desktop/target/release/bundle/appimage/*_0.1.0_*.AppImage
+            apps/pet_desktop/target/release/bundle/macos/*.app/
+            apps/pet_desktop/target/release/bundle/nsis/*.exe
             target/pet-gui-validation.json
