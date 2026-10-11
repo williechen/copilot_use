@@ -129,15 +129,24 @@ mod tests {
     }
     #[sqlx::test(migrations = "./migrations")]
     async fn message_insert_has_exactly_one_outbox_event(pool: PgPool) {
-        sqlx::query("INSERT INTO chat_rooms(id,name) VALUES (\'room-1\',\'Test\')").execute(&pool).await.unwrap();
+        sqlx::query("INSERT INTO chat_rooms(id,name) VALUES ('room-1','Test')").execute(&pool).await.unwrap();
         let id = ChatWriter::new(pool.clone()).persist("room-1", "private").await.unwrap();
         let row: (i64,) = sqlx::query_as("SELECT count(*) FROM chat_outbox WHERE event_id=$1")
             .bind(id).fetch_one(&pool).await.unwrap();
         assert_eq!(row.0, 1);
     }
     #[sqlx::test(migrations = "./migrations")]
+    async fn missing_room_rolls_back_both_message_and_event(pool: PgPool) {
+        let result = ChatWriter::new(pool.clone()).persist("missing-room", "hello").await;
+        assert!(result.is_err(), "FK 失敗應回滾整筆交易");
+        let row: (i64,) = sqlx::query_as("SELECT count(*) FROM chat_outbox")
+            .fetch_one(&pool).await.unwrap();
+        assert_eq!(row.0, 0, "失敗不可留下 Outbox 事件");
+    }
+
+    #[sqlx::test(migrations = "./migrations")]
     async fn stale_lease_cannot_ack(pool: PgPool) {
-        sqlx::query("INSERT INTO chat_rooms(id,name) VALUES (\'room\',\'Test\')").execute(&pool).await.unwrap();
+        sqlx::query("INSERT INTO chat_rooms(id,name) VALUES ('room','Test')").execute(&pool).await.unwrap();
         let id = ChatWriter::new(pool.clone()).persist("room", "hello").await.unwrap();
         let store = OutboxStore::new(pool.clone());
         let stale = store.claim_one().await.unwrap().unwrap();
