@@ -1,0 +1,65 @@
+# Isolated development integration environment; production requires TLS termination,
+# dedicated secrets manager, metrics, backups and a hardened deployment.
+services:
+  chat-db:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: chat_db
+      POSTGRES_USER: chat_user
+      POSTGRES_PASSWORD: ${CHAT_DB_PASSWORD:?set CHAT_DB_PASSWORD}
+    volumes: [chat-data:/var/lib/postgresql/data]
+    networks: [backend]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U chat_user -d chat_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  analytics-db:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: analytics_db
+      POSTGRES_USER: analytics_user
+      POSTGRES_PASSWORD: ${ANALYTICS_DB_PASSWORD:?set ANALYTICS_DB_PASSWORD}
+    volumes: [analytics-data:/var/lib/postgresql/data]
+    networks: [backend]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U analytics_user -d analytics_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  analytics:
+    build:
+      context: .
+      target: analytics
+    environment:
+      ANALYTICS_DATABASE_URL: postgres://analytics_user:${ANALYTICS_DB_PASSWORD:?set ANALYTICS_DB_PASSWORD}@analytics-db:5432/analytics_db
+      ANALYTICS_API_TOKEN: ${ANALYTICS_API_TOKEN:?set ANALYTICS_API_TOKEN}
+      ANALYTICS_LISTEN: 0.0.0.0:3100
+    depends_on:
+      analytics-db: {condition: service_healthy}
+    networks: [backend]
+    ports: ["127.0.0.1:3100:3100"]
+    restart: unless-stopped
+  chat:
+    build:
+      context: .
+      target: chat
+    environment:
+      CHAT_DATABASE_URL: postgres://chat_user:${CHAT_DB_PASSWORD:?set CHAT_DB_PASSWORD}@chat-db:5432/chat_db
+      CHAT_API_TOKEN: ${CHAT_API_TOKEN:?set CHAT_API_TOKEN}
+      ANALYTICS_API_TOKEN: ${ANALYTICS_API_TOKEN:?set ANALYTICS_API_TOKEN}
+      ANALYTICS_ENDPOINT: http://analytics:3100/api/v1/events
+      ALLOW_INTERNAL_HTTP_DEV: "true"
+      CHAT_LISTEN: 0.0.0.0:3001
+    depends_on:
+      chat-db: {condition: service_healthy}
+      analytics: {condition: service_started}
+    ports: ["127.0.0.1:3001:3001"]
+    networks: [backend]
+    restart: unless-stopped
+networks:
+  backend:
+    internal: false
+volumes:
+  chat-data:
+  analytics-data:
