@@ -1,0 +1,13 @@
+[package]
+name = "day9-chat"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+event-contract = { path = "../../crates/event_contract" }
+serde_json.workspace = true
+sqlx.workspace = true
+tokio.workspace = true
+uuid.workspace = true
+thiserror.workspace = true
+reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "json"] }
