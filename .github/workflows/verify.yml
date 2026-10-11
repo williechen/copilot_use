@@ -30,3 +30,31 @@ jobs:
         run: cargo test --workspace --all-targets
       - name: Verify strict event payload
         run: cargo test -p event-contract
+
+  compose-e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set isolated CI-only secrets
+        run: |
+          cat > .env <<'ENV'
+          CHAT_DB_PASSWORD=ci_chat_only_random_test_password
+          ANALYTICS_DB_PASSWORD=ci_analytics_only_random_test_password
+          CHAT_API_TOKEN=ci_chat_only_token_32_characters
+          ANALYTICS_API_TOKEN=ci_analytics_only_token_32_characters
+          ENV
+      - name: Build and start isolated app and database containers
+        run: docker compose --env-file .env up -d --build
+      - name: Test durable end-to-end Chat to Analytics ingestion
+        run: |
+          set -a
+          source .env
+          set +a
+          bash scripts/smoke.sh
+      - name: Collect service logs on failure
+        if: failure()
+        run: docker compose --env-file .env logs --no-color --tail=150
+      - name: Shut down and delete CI databases
+        if: always()
+        run: docker compose --env-file .env down -v --remove-orphans
