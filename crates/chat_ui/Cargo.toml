@@ -15,5 +15,6 @@ wasm-bindgen="0.2"
 wasm-bindgen-futures="0.4"
 js-sys="0.3"
 gloo-net={version="0.6",features=["http"]}
-web-sys={version="0.3",features=["Window","Document","Element","Location","WebSocket","MessageEvent","Event","HtmlInputElement"]}
+web-sys={version="0.3",features=["Window","Document","Element","Location","WebSocket","MessageEvent","Event","CloseEvent","HtmlInputElement"]}
 send_wrapper="0.6"
+gloo-timers={version="0.3",features=["futures"]}

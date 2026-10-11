@@ -5,7 +5,7 @@
   "identifier": "com.copilotuse.desktoppet",
   "build": {
     "frontendDist": "../pet_ui/dist",
-    "beforeBuildCommand": "cd ../pet_ui && trunk build --release=true --no-color"
+    "beforeBuildCommand": "node ../scripts/build-pet-ui.mjs"
   },
   "app": {
     "withGlobalTauri": true,
@@ -43,7 +43,9 @@
       "appimage"
     ],
     "icon": [
-      "icons/icon.png"
+      "icons/icon.png",
+      "generated-icons/icon.ico",
+      "generated-icons/icon.icns"
     ]
   }
 }

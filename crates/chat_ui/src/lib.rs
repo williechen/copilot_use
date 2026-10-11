@@ -94,21 +94,42 @@ fn Chat() -> impl IntoView {
     Effect::new(move |_| refresh());
     let load = move |id: String| {
         selected.set(id.clone());
+        messages.set(Vec::new());
         let query = format!("/api/v1/messages?room_id={id}");
         spawn(async move {
             match api(&query, "GET", None).await {
-                Ok(v) => messages.set(v.as_array().cloned().unwrap_or_default()),
+                Ok(v) => {
+                    if selected.get_untracked() == id {
+                        messages.set(v.as_array().cloned().unwrap_or_default());
+                    }
+                }
                 Err(e) => state.error.set(e),
             }
         });
     };
+    let pending = RwSignal::new(Vec::<Value>::new());
     #[cfg(target_arch = "wasm32")]
-    browser::observe_room(selected, messages, state.error);
+    {
+        browser::observe_room(selected, messages, state.error);
+        browser::delivery_queue(selected, pending, messages, state.error);
+    }
+
     view! {<section><h2>"聊天室"</h2><input id="room-name" placeholder="新房間名稱" maxlength="200" prop:value=move ||room_name.get() on:input=move |e|room_name.set(event_target_value(&e))/><button id="create-room" on:click=move |_|{let id=uuid();let name=room_name.get();spawn(async move{match api("/api/v1/rooms","POST",Some(json!({"id":id,"name":name}))).await{Ok(_)=>{room_name.set(String::new());if let Ok(v)=api("/api/v1/rooms","GET",None).await {rooms.set(v.as_array().cloned().unwrap_or_default());}load(id)},Err(e)=>state.error.set(e)}});}>"建立私人房間"</button>
     <select id="rooms" prop:value=move ||selected.get() on:change=move |e|load(event_target_value(&e))><option value="">"選擇房間"</option>{move ||rooms.get().into_iter().map(|r|view!{<option value=r["id"].as_str().unwrap_or("").to_owned()>{r["name"].as_str().unwrap_or("").to_owned()}</option>}).collect_view()}</select>
     <input placeholder="邀請的使用者名稱" on:input=move |e|invitee.set(event_target_value(&e))/><button on:click=move |_|{let body=json!({"room_id":selected.get(),"username":invitee.get()});spawn(async move{match api("/api/v1/rooms/invite","POST",Some(body)).await{Ok(_)=>state.error.set("邀請已完成".into()),Err(e)=>state.error.set(e)}});}>"邀請加入"</button>
     <ul id="messages" aria-live="polite">{move ||messages.get().into_iter().map(|m|view!{<li>{m["content"].as_str().unwrap_or("").to_owned()}<small>{m["id"].as_str().unwrap_or("").to_owned()}</small></li>}).collect_view()}</ul>
-    <input id="message" maxlength="65536" placeholder="輸入訊息" prop:value=move ||draft.get() on:input=move |e|draft.set(event_target_value(&e))/><button id="send" on:click=move |_|{let room=selected.get();let content=draft.get();spawn(async move{match api("/api/v1/messages","POST",Some(json!({"room_id":room,"content":content}))).await{Ok(_)=>{draft.set(String::new());load(room)},Err(e)=>state.error.set(e)}});}>"送出"</button>
+    <input id="message" maxlength="65536" placeholder="輸入訊息" prop:value=move ||draft.get() on:input=move |e|draft.set(event_target_value(&e))/><button id="send" on:click=move |_| {
+        let room=selected.get();let content=draft.get();
+        if room.is_empty() || content.trim().is_empty(){state.error.set("請選擇房間並輸入訊息".into());return;}
+        if pending.get_untracked().len()>=32{state.error.set("待送出佇列已滿（32 筆）".into());return;}
+        let id=uuid();if id.is_empty(){state.error.set("無法建立安全訊息 ID".into());return;}
+        pending.update(|items|items.push(json!({"id":id,"room_id":room,"content":content})));
+        draft.set(String::new());
+    }>"送出"</button>
+    <p role="status">{move ||format!("待送出：{} 筆（此頁關閉前保留）",pending.get().len())}</p>
+    <button on:click=move |_|pending.update(|_|{})>"重試待送出"</button>
+    <button on:click=move |_|pending.set(Vec::new())>"取消待送出"</button>
+    <p>"取消佇列不會撤回已開始的送出請求。"</p>
     <label><input type="checkbox" on:change=move |e|rag.set(event_target_checked(&e))/>"使用我的知識庫"</label><button id="ai" on:click=move |_|{let body=json!({"room_id":selected.get(),"rag":rag.get()});ai_output.set(String::new());
     #[cfg(target_arch="wasm32")] spawn(async move{if let Err(e)=browser::ai_stream(body,ai_output).await{state.error.set(e)}});
     #[cfg(not(target_arch="wasm32"))] let _=body;

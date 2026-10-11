@@ -239,7 +239,16 @@ with tempfile.TemporaryDirectory(prefix='copilot-verify-') as scratch:
             with urllib.request.urlopen(req) as response: assert response.status==201
             path=ROOT.parent/'browser-fixture.json';path.write_text(json.dumps(fixture));path.chmod(0o600)
             print('BROWSER_FIXTURE_READY',flush=True)
-            while True: time.sleep(1)
+            control=ROOT.parent/'browser-control.txt'
+            control.unlink(missing_ok=True)
+            while True:
+                if control.exists():
+                    command=control.read_text().strip();control.unlink()
+                    if command=='stop_chat':stop(chat)
+                    elif command=='start_chat' and chat.poll() is not None:
+                        chat=start('chat')
+                    (ROOT.parent/'browser-control-result.json').write_text(json.dumps({'command':command,'chat_running':chat.poll() is None}))
+                time.sleep(.2)
 
     finally:
         for proc in processes:stop(proc)

@@ -2,8 +2,12 @@
 use leptos::prelude::*;
 use send_wrapper::SendWrapper;
 use serde_json::{Value, json};
+use std::{
+    cell::{Cell, RefCell},
+    rc::Rc,
+};
 use wasm_bindgen::{JsCast, closure::Closure};
-use web_sys::{MessageEvent, WebSocket};
+use web_sys::{CloseEvent, MessageEvent, WebSocket};
 pub async fn api(path: &str, method: &str, body: Option<Value>) -> Result<Value, String> {
     let builder = gloo_net::http::RequestBuilder::new(path)
         .method(method.try_into().map_err(|_| "方法不合法")?)
@@ -31,14 +35,20 @@ pub async fn api(path: &str, method: &str, body: Option<Value>) -> Result<Value,
     response.json().await.map_err(|_| "回覆格式不合法".into())
 }
 struct SocketGuard {
+    active: Rc<Cell<bool>>,
     socket: WebSocket,
     _open: Closure<dyn FnMut()>,
     _message: Closure<dyn FnMut(MessageEvent)>,
+    _close: Closure<dyn FnMut(CloseEvent)>,
+    retry: Rc<RefCell<Option<gloo_timers::callback::Timeout>>>,
 }
 impl Drop for SocketGuard {
     fn drop(&mut self) {
+        self.active.set(false);
         self.socket.set_onopen(None);
         self.socket.set_onmessage(None);
+        self.socket.set_onclose(None);
+        self.retry.borrow_mut().take();
         let _ = self.socket.close();
     }
 }
@@ -47,7 +57,10 @@ pub fn observe_room(
     messages: RwSignal<Vec<Value>>,
     error: RwSignal<String>,
 ) {
+    let generation = RwSignal::new(0_u32);
+    let attempts = Rc::new(Cell::new(0_u32));
     Effect::new(move |_| {
+        let _ = generation.get();
         let id = room.get();
         if id.is_empty() {
             return;
@@ -69,6 +82,9 @@ pub fn observe_room(
         });
         socket.set_onopen(Some(open.as_ref().unchecked_ref()));
         let current = id.clone();
+        let active = Rc::new(Cell::new(true));
+        let listening = active.clone();
+        let failures = attempts.clone();
         let message = Closure::<dyn FnMut(MessageEvent)>::new(move |event: MessageEvent| {
             if let Some(text) = event.data().as_string()
                 && let Ok(value) = serde_json::from_str::<Value>(&text)
@@ -77,14 +93,33 @@ pub fn observe_room(
                     Some("message") => messages.update(|items| {
                         if !items.iter().any(|m| m["id"] == value["id"]) {
                             items.push(value.clone());
+                            if items.len() > 200 {
+                                items.remove(0);
+                            }
                         }
                     }),
                     Some("ready" | "resync_required") => {
+                        failures.set(0);
+                        if ["即時連線中斷，正在重新連線", "連線失敗，請重試"]
+                            .contains(&error.get_untracked().as_str())
+                        {
+                            error.set(String::new());
+                        }
+                        let current = current.clone();
+                        let listening = listening.clone();
                         let path = format!("/api/v1/messages?room_id={current}");
                         super::spawn(async move {
                             match api(&path, "GET", None).await {
-                                Ok(v) => messages.set(v.as_array().cloned().unwrap_or_default()),
-                                Err(e) => error.set(e),
+                                Ok(v) => {
+                                    if listening.get() && room.get_untracked() == current {
+                                        messages.set(v.as_array().cloned().unwrap_or_default());
+                                    }
+                                }
+                                Err(e) => {
+                                    if listening.get() {
+                                        error.set(e);
+                                    }
+                                }
                             }
                         });
                     }
@@ -94,12 +129,102 @@ pub fn observe_room(
             }
         });
         socket.set_onmessage(Some(message.as_ref().unchecked_ref()));
+        let retry = Rc::new(RefCell::new(None));
+        let pending = retry.clone();
+        let failures = attempts.clone();
+        let close = Closure::<dyn FnMut(CloseEvent)>::new(move |event: CloseEvent| {
+            if event.code() == 1008 || failures.get() >= 8 {
+                error.set("即時連線已停止；重新登入或重新選擇房間".into());
+                return;
+            }
+            let delay = 500 * 2_u32.pow(failures.get().min(5));
+            failures.set(failures.get() + 1);
+            error.set("即時連線中斷，正在重新連線".into());
+            *pending.borrow_mut() = Some(gloo_timers::callback::Timeout::new(delay, move || {
+                generation.update(|v| *v = v.wrapping_add(1));
+            }));
+        });
+        socket.set_onclose(Some(close.as_ref().unchecked_ref()));
+
         let guard = SendWrapper::new(SocketGuard {
+            active,
             socket,
             _open: open,
             _message: message,
+            _close: close,
+            retry,
         });
         on_cleanup(move || drop(guard));
+    });
+}
+/// Bounded in-memory queue: retries keep the exact same UUID and payload.
+/// Page reload intentionally does not retain private message content in browser storage.
+pub fn delivery_queue(
+    room: RwSignal<String>,
+    pending: RwSignal<Vec<Value>>,
+    messages: RwSignal<Vec<Value>>,
+    error: RwSignal<String>,
+) {
+    let active = Rc::new(Cell::new(true));
+    let running = Rc::new(Cell::new(false));
+    let cleanup = SendWrapper::new(active.clone());
+    on_cleanup(move || cleanup.set(false));
+    Effect::new(move |_| {
+        let entries = pending.get();
+        if entries.is_empty() || running.replace(true) {
+            return;
+        }
+        let active = active.clone();
+        let running = running.clone();
+        super::spawn(async move {
+            let mut attempts = 0_u32;
+            while active.get() {
+                let Some(body) = pending.get_untracked().first().cloned() else {
+                    break;
+                };
+                match api("/api/v1/messages", "POST", Some(body.clone())).await {
+                    Ok(_) => {
+                        if !active.get() {
+                            break;
+                        }
+                        pending.update(|queue| queue.retain(|entry| entry["id"] != body["id"]));
+                        if room.get_untracked() == body["room_id"].as_str().unwrap_or("") {
+                            messages.update(|items| {
+                                if !items.iter().any(|entry| entry["id"] == body["id"]) {
+                                    items.push(body.clone());
+                                }
+                                if items.len() > 200 {
+                                    items.remove(0);
+                                }
+                            });
+                        }
+                        if error.get_untracked() == "連線失敗，請重試" {
+                            error.set(String::new());
+                        }
+                        attempts = 0;
+                    }
+                    Err(e) => {
+                        if !active.get() {
+                            break;
+                        }
+                        error.set(e.clone());
+                        if !(e == "連線失敗，請重試"
+                            || e.ends_with("500")
+                            || e.ends_with("502")
+                            || e.ends_with("503")
+                            || e.ends_with("504"))
+                            || attempts >= 8
+                        {
+                            break;
+                        }
+                        let delay = 500 * 2_u32.pow(attempts.min(5));
+                        attempts += 1;
+                        gloo_timers::future::TimeoutFuture::new(delay).await;
+                    }
+                }
+            }
+            running.set(false);
+        });
     });
 }
 pub async fn ai_stream(body: Value, output: RwSignal<String>) -> Result<(), String> {

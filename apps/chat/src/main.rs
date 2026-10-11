@@ -30,6 +30,8 @@ struct RoomRequest {
 }
 #[derive(Deserialize)]
 struct MessageRequest {
+    #[serde(default)]
+    id: Option<uuid::Uuid>,
     room_id: String,
     content: String,
 }
@@ -167,8 +169,9 @@ async fn send_message(
         return Err(StatusCode::BAD_REQUEST);
     }
     let user = actor.user_id().map(|id| id.to_string());
-    let id = ChatWriter::new(s.pool.clone())
-        .persist_as(
+    let (id, inserted) = ChatWriter::new(s.pool.clone())
+        .persist_with_id(
+            input.id.unwrap_or_else(uuid::Uuid::new_v4),
             &input.room_id,
             &input.content,
             if user.is_some() {
@@ -179,13 +182,25 @@ async fn send_message(
             user.as_deref(),
         )
         .await
-        .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
-    let _ = s.events.send(realtime::RoomEvent {
-        room_id: input.room_id,
-        payload: serde_json::json!({"type":"message", "id": id, "content": input.content}),
-    });
+        .map_err(|e| {
+            if matches!(e, sqlx::Error::Protocol(_)) {
+                StatusCode::CONFLICT
+            } else {
+                StatusCode::SERVICE_UNAVAILABLE
+            }
+        })?;
+    if inserted {
+        let _ = s.events.send(realtime::RoomEvent {
+            room_id: input.room_id,
+            payload: serde_json::json!({"type":"message", "id": id, "content": input.content}),
+        });
+    }
     Ok((
-        StatusCode::CREATED,
+        if inserted {
+            StatusCode::CREATED
+        } else {
+            StatusCode::OK
+        },
         Json(CreatedMessage { id: id.to_string() }),
     ))
 }

@@ -205,10 +205,16 @@ mod tests {
         assert!(root.preview("../secret").is_err());
         let preview = root.preview("a.txt").unwrap();
         fs::write(dir.join("a.txt"), b"changed").unwrap();
+        #[cfg(any(target_os = "linux", target_os = "macos"))]
         assert!(matches!(
             root.confirm_quarantine(&preview, true),
             Err(CleanupError::Changed)
         ));
+        #[cfg(not(any(target_os = "linux", target_os = "macos")))]
+        assert!(
+            matches!(root.confirm_quarantine(&preview,true), Err(CleanupError::Io(e)) if e.kind()==io::ErrorKind::Unsupported)
+        );
+        assert_eq!(fs::read(dir.join("a.txt")).unwrap(), b"changed");
         fs::remove_dir_all(&dir).unwrap();
     }
     #[cfg(not(any(target_os = "linux", target_os = "macos")))]

@@ -42,12 +42,12 @@ AI 設定 `OPENAI_API_KEY`、`OPENAI_CHAT_MODEL=gpt-5.6-luna`；embedding 預設
 ## Linux Desktop Pet
 
 ```sh
-(cd apps/pet_ui && NO_COLOR=true trunk build --release=true --no-color)
+node scripts/build-pet-ui.mjs
 cargo run --locked --manifest-path apps/pet_desktop/Cargo.toml
 python3 scripts/pet-gui-verify.py
 ```
 
-需 wasm32-unknown-unknown target、Trunk、GTK3/WebKit 與 desktop display。正式 UI 有設定視窗及 200×200 浮動寵物視窗。資料存於 app_data；`PET_DATA_DIR` 可指定獨立測試目錄，請勿與 reference repo 共用。
+需 wasm32-unknown-unknown target、Trunk、Tauri CLI、Node 22、GTK3/WebKit 與 desktop display。建置 helper 只從單一來源 icon 產生必要 ICO/ICNS，產生檔不入 Git。正式 UI 有設定視窗及 200×200 浮動寵物視窗。資料存於 app_data；`PET_DATA_DIR` 可指定獨立測試目錄，請勿與 reference repo 共用。
 
 `PET_AUTHORIZED_ROOT` 必須明確指定使用者授權的檔案目錄，且以非 root 啟動。Linux Adapter 拒絕 symlink、非本人檔案、group/other 可寫檔案與多 hard links；預覽返回 opaque ID，確認後才移動至同根目錄的 private quarantine。目前完整 Organizer UI、journal/recovery、Trash/restore 與 Windows/macOS 驗收仍未完成。
 

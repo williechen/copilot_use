@@ -26,22 +26,46 @@ impl ChatWriter {
         author_kind: &str,
         author_id: Option<&str>,
     ) -> Result<Uuid, sqlx::Error> {
-        let id = Uuid::new_v4();
+        self.persist_with_id(Uuid::new_v4(), room_id, content, author_kind, author_id)
+            .await
+            .map(|(id, _)| id)
+    }
+
+    /// A retry may reuse an ID only for the identical room, author and content.
+    /// INSERT conflict serialization guarantees concurrent requests create one outbox.
+    pub async fn persist_with_id(
+        &self,
+        id: Uuid,
+        room_id: &str,
+        content: &str,
+        author_kind: &str,
+        author_id: Option<&str>,
+    ) -> Result<(Uuid, bool), sqlx::Error> {
         let event = ProductEvent::chat_message_persisted(id);
         let mut tx = self.pool.begin().await?;
-        sqlx::query("INSERT INTO chat_messages(id, room_id, content, author_kind, author_id) VALUES ($1,$2,$3,$4,$5)")
+        let inserted = sqlx::query("INSERT INTO chat_messages(id, room_id, content, author_kind, author_id) VALUES ($1,$2,$3,$4,$5) ON CONFLICT (id) DO NOTHING")
             .bind(id)
             .bind(room_id)
             .bind(content)
             .bind(author_kind)
             .bind(author_id)
             .execute(&mut *tx)
-            .await?;
+            .await?.rows_affected() == 1;
+        if !inserted {
+            let matches: bool = sqlx::query_scalar("SELECT room_id=$2 AND content=$3 AND author_kind=$4 AND author_id IS NOT DISTINCT FROM $5 FROM chat_messages WHERE id=$1")
+                .bind(id).bind(room_id).bind(content).bind(author_kind).bind(author_id)
+                .fetch_one(&mut *tx).await?;
+            if !matches {
+                return Err(sqlx::Error::Protocol("message id conflict".into()));
+            }
+            tx.commit().await?;
+            return Ok((id, false));
+        }
         sqlx::query("INSERT INTO chat_outbox(event_id,message_id,schema_version,source_app,event_type,traceparent) VALUES ($1,$2,$3,$4,$5,$6)")
             .bind(event.event_id).bind(id).bind(i16::try_from(event.schema_version).unwrap())
             .bind(event.source_app).bind(event.event_type).bind(copilot_telemetry::outgoing_headers().get("traceparent")).execute(&mut *tx).await?;
         tx.commit().await?;
-        Ok(id)
+        Ok((id, true))
     }
 }
 
@@ -311,5 +335,41 @@ mod tests {
         let lease = store.claim_one().await.unwrap().unwrap();
         assert!(store.fail(&lease, "http_401", false).await.unwrap());
         assert!(store.claim_one().await.unwrap().is_none());
+    }
+    #[sqlx::test(migrations = "./migrations")]
+    async fn concurrent_message_replay_has_one_outbox_and_conflicts_are_rejected(pool: PgPool) {
+        sqlx::query("INSERT INTO chat_rooms(id,name) VALUES ('replay','Test'),('other','Other')")
+            .execute(&pool)
+            .await
+            .unwrap();
+        let writer = ChatWriter::new(pool.clone());
+        let id = Uuid::new_v4();
+        let (a, b) = tokio::join!(
+            writer.persist_with_id(id, "replay", "same", "user", Some("alice")),
+            writer.persist_with_id(id, "replay", "same", "user", Some("alice"))
+        );
+        let a = a.unwrap();
+        let b = b.unwrap();
+        assert_eq!(a.0, b.0);
+        assert_ne!(a.1, b.1);
+        for (room, content, author) in [
+            ("other", "same", "alice"),
+            ("replay", "changed", "alice"),
+            ("replay", "same", "bob"),
+        ] {
+            assert!(matches!(
+                writer
+                    .persist_with_id(id, room, content, "user", Some(author))
+                    .await,
+                Err(sqlx::Error::Protocol(_))
+            ));
+        }
+        let counts: (i64, i64) = sqlx::query_as(
+            "SELECT (SELECT count(*) FROM chat_messages),(SELECT count(*) FROM chat_outbox)",
+        )
+        .fetch_one(&pool)
+        .await
+        .unwrap();
+        assert_eq!(counts, (1, 1));
     }
 }
