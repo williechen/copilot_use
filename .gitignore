@@ -24,3 +24,16 @@ rustc-ice-*.txt
 #.idea/
 
 *.log
+
+**/target/
+**/dist/
+__pycache__/
+
+# Secrets, private app databases and generated Tauri schemas
+.env
+.env.*
+!.env.example
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+/apps/pet_desktop/gen/

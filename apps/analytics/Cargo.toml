@@ -11,3 +11,8 @@ serde_json.workspace = true
 sqlx.workspace = true
 tokio.workspace = true
 uuid.workspace = true
+chrono = { version = "0.4", features = ["serde"] }
+sha2 = "0.10"
+openai-adapter = { path = "../../crates/openai_adapter" }
+
+copilot-telemetry = {path="../../crates/telemetry"}

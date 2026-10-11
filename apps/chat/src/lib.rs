@@ -37,9 +37,9 @@ impl ChatWriter {
             .bind(author_id)
             .execute(&mut *tx)
             .await?;
-        sqlx::query("INSERT INTO chat_outbox(event_id,message_id,schema_version,source_app,event_type) VALUES ($1,$2,$3,$4,$5)")
+        sqlx::query("INSERT INTO chat_outbox(event_id,message_id,schema_version,source_app,event_type,traceparent) VALUES ($1,$2,$3,$4,$5,$6)")
             .bind(event.event_id).bind(id).bind(i16::try_from(event.schema_version).unwrap())
-            .bind(event.source_app).bind(event.event_type).execute(&mut *tx).await?;
+            .bind(event.source_app).bind(event.event_type).bind(copilot_telemetry::outgoing_headers().get("traceparent")).execute(&mut *tx).await?;
         tx.commit().await?;
         Ok(id)
     }
@@ -50,6 +50,7 @@ pub struct LeasedEvent {
     pub event: ProductEvent,
     pub lease_token: Uuid,
     pub attempts: i32,
+    pub traceparent: Option<String>,
 }
 
 #[derive(Clone)]
@@ -75,7 +76,7 @@ impl OutboxStore {
              SET status='leased', lease_token=$1, lease_until=now()+interval '60 seconds',
                  attempts=e.attempts+1
              FROM candidate WHERE e.event_id=candidate.event_id
-             RETURNING e.event_id, e.schema_version, e.source_app, e.event_type, e.attempts",
+             RETURNING e.event_id, e.schema_version, e.source_app, e.event_type, e.attempts, e.traceparent",
         )
         .bind(token)
         .fetch_optional(&self.pool)
@@ -89,6 +90,7 @@ impl OutboxStore {
             },
             lease_token: token,
             attempts: r.get("attempts"),
+            traceparent: r.get("traceparent"),
         }))
     }
 
@@ -141,12 +143,14 @@ pub async fn dispatch_once(
     let Some(lease) = store.claim_one().await? else {
         return Ok(false);
     };
-    let result = client
-        .post(endpoint)
-        .bearer_auth(token)
-        .json(&lease.event)
-        .send()
-        .await;
+    let mut request = client.post(endpoint);
+    for (key, value) in copilot_telemetry::outgoing_headers() {
+        request = request.header(key, value);
+    }
+    if let Some(parent) = &lease.traceparent {
+        request = request.header("traceparent", parent);
+    }
+    let result = request.bearer_auth(token).json(&lease.event).send().await;
     match result {
         Ok(response) if response.status().is_success() => {
             store.ack(&lease).await?;

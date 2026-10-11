@@ -35,7 +35,13 @@ impl ProductEvent {
             && !self.event_id.is_nil()
             && matches!(
                 (self.source_app.as_str(), self.event_type.as_str()),
-                ("web_chat", "message.persisted") | ("desktop_pet", "file.cleanup.succeeded")
+                ("web_chat", "message.persisted")
+                    | (
+                        "desktop_pet",
+                        "file.cleanup.succeeded"
+                            | "question.answered"
+                            | "learning.review.completed"
+                    )
             )
     }
 }

@@ -2,15 +2,18 @@
 # dedicated secrets manager, metrics, backups and a hardened deployment.
 services:
   chat-db:
-    image: postgres:17
+    image: pgvector/pgvector:0.8.7-pg17-bookworm
     environment:
       POSTGRES_DB: chat_db
-      POSTGRES_USER: chat_user
-      POSTGRES_PASSWORD: ${CHAT_DB_PASSWORD:?set CHAT_DB_PASSWORD}
-    volumes: [chat-data:/var/lib/postgresql/data]
+      POSTGRES_USER: bootstrap_owner
+      POSTGRES_PASSWORD: ${CHAT_BOOTSTRAP_PASSWORD:?set CHAT_BOOTSTRAP_PASSWORD}
+      PG_APP_USER: chat_user
+      PG_APP_PASSWORD: ${CHAT_DB_PASSWORD:?set CHAT_DB_PASSWORD}
+      PG_ENABLE_VECTOR: "true"
+    volumes: [chat-data:/var/lib/postgresql/data, "./scripts/postgres-init.sh:/docker-entrypoint-initdb.d/10-app.sh:ro"]
     networks: [backend]
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U chat_user -d chat_db"]
+      test: ["CMD-SHELL", "pg_isready -U bootstrap_owner -d chat_db"]
       interval: 5s
       timeout: 5s
       retries: 20
@@ -18,12 +21,14 @@ services:
     image: postgres:17
     environment:
       POSTGRES_DB: analytics_db
-      POSTGRES_USER: analytics_user
-      POSTGRES_PASSWORD: ${ANALYTICS_DB_PASSWORD:?set ANALYTICS_DB_PASSWORD}
-    volumes: [analytics-data:/var/lib/postgresql/data]
+      POSTGRES_USER: bootstrap_owner
+      POSTGRES_PASSWORD: ${ANALYTICS_BOOTSTRAP_PASSWORD:?set ANALYTICS_BOOTSTRAP_PASSWORD}
+      PG_APP_USER: analytics_user
+      PG_APP_PASSWORD: ${ANALYTICS_DB_PASSWORD:?set ANALYTICS_DB_PASSWORD}
+    volumes: [analytics-data:/var/lib/postgresql/data, "./scripts/postgres-init.sh:/docker-entrypoint-initdb.d/10-app.sh:ro"]
     networks: [backend]
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U analytics_user -d analytics_db"]
+      test: ["CMD-SHELL", "pg_isready -U bootstrap_owner -d analytics_db"]
       interval: 5s
       timeout: 5s
       retries: 20
@@ -34,6 +39,7 @@ services:
     environment:
       ANALYTICS_DATABASE_URL: postgres://analytics_user:${ANALYTICS_DB_PASSWORD:?set ANALYTICS_DB_PASSWORD}@analytics-db:5432/analytics_db
       ANALYTICS_API_TOKEN: ${ANALYTICS_API_TOKEN:?set ANALYTICS_API_TOKEN}
+      ANALYTICS_ADMIN_TOKEN: ${ANALYTICS_ADMIN_TOKEN:?set ANALYTICS_ADMIN_TOKEN}
       ANALYTICS_CHAT_TOKEN: ${ANALYTICS_CHAT_TOKEN:?set ANALYTICS_CHAT_TOKEN}
       ANALYTICS_PET_TOKEN: ${ANALYTICS_PET_TOKEN:?set ANALYTICS_PET_TOKEN}
       ANALYTICS_LISTEN: 0.0.0.0:3100
@@ -53,6 +59,9 @@ services:
       ANALYTICS_ENDPOINT: http://analytics:3100/api/v1/events
       ALLOW_INTERNAL_HTTP_DEV: "true"
       CHAT_LISTEN: 0.0.0.0:3001
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_CHAT_MODEL: ${OPENAI_CHAT_MODEL:-gpt-5.6-luna}
+      OPENAI_EMBEDDING_MODEL: ${OPENAI_EMBEDDING_MODEL:-text-embedding-3-small}
     depends_on:
       chat-db: {condition: service_healthy}
       analytics: {condition: service_started}

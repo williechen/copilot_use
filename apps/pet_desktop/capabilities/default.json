@@ -1,0 +1,11 @@
+{
+  "identifier": "default",
+  "description": "本地寵物視窗基本權限",
+  "windows": [
+    "main",
+    "pet"
+  ],
+  "permissions": [
+    "core:default", "core:window:allow-start-dragging"
+  ]
+}

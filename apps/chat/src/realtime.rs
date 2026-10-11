@@ -1,5 +1,5 @@
 //! 房間隔離的即時通知；瀏覽器在第一個 frame 驗證，不把 Token 放 URL。
-use super::StateData;
+use super::{StateData, auth};
 use axum::{
     extract::{
         Path, State, WebSocketUpgrade,
@@ -45,10 +45,17 @@ pub(super) async fn upgrade(
             return Err(StatusCode::FORBIDDEN);
         }
     }
+    let cookie_actor = if headers.contains_key("cookie") {
+        let actor = auth::principal(&state, &headers, false).await?;
+        auth::room_allowed(&state, actor, &room_id).await?;
+        Some(actor)
+    } else {
+        None
+    };
     Ok(ws
         .max_message_size(4096)
         .max_frame_size(4096)
-        .on_upgrade(move |socket| connected(socket, state, room_id)))
+        .on_upgrade(move |socket| connected(socket, state, room_id, cookie_actor)))
 }
 async fn send(socket: &mut WebSocket, value: Value) -> bool {
     tokio::time::timeout(
@@ -58,13 +65,19 @@ async fn send(socket: &mut WebSocket, value: Value) -> bool {
     .await
     .is_ok_and(|r| r.is_ok())
 }
-async fn connected(mut socket: WebSocket, state: StateData, room_id: String) {
+async fn connected(
+    mut socket: WebSocket,
+    state: StateData,
+    room_id: String,
+    cookie_actor: Option<auth::Principal>,
+) {
     let auth = tokio::time::timeout(Duration::from_secs(5), socket.recv()).await;
-    let authenticated = match auth {
-        Ok(Some(Ok(Message::Text(value)))) => serde_json::from_str::<Authentication>(&value)
-            .is_ok_and(|a| !state.api_token.is_empty() && a.token == state.api_token.as_ref()),
-        _ => false,
-    };
+    let authenticated = cookie_actor.is_some()
+        || match auth {
+            Ok(Some(Ok(Message::Text(value)))) => serde_json::from_str::<Authentication>(&value)
+                .is_ok_and(|a| !state.api_token.is_empty() && a.token == state.api_token.as_ref()),
+            _ => false,
+        };
     if !authenticated {
         send(&mut socket, json!({"type":"error","code":"unauthorized"})).await;
         let _ = socket.send(Message::Close(None)).await;

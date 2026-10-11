@@ -1,0 +1,5 @@
+:root{font-family:system-ui;color:#22304a;background:#f4f7fb}body{margin:0;padding:24px}main{max-width:960px;margin:auto}section{background:white;padding:20px;border-radius:16px;margin-bottom:16px}h1{margin-top:0}input,textarea,select,button{font:inherit;padding:9px;border:1px solid #bdc7d8;border-radius:8px;margin:5px}textarea{width:92%;min-height:90px}button{background:#245ac4;color:white;cursor:pointer}label{display:inline-block;min-width:45%}.pet{width:200px;height:200px;background:#e4eefb;display:flex;align-items:center;justify-content:center;border-radius:24px;font-size:60px}.error{color:#b02035}article{border-top:1px solid #ddd;padding:10px}small{display:block;color:#526278}
+
+.pet.animated{background-size:800px 800px;background-repeat:no-repeat;animation:pet-idle 1s steps(4) infinite}@keyframes pet-idle{from{background-position-x:0}to{background-position-x:-800px}}pre{white-space:pre-wrap;overflow-wrap:anywhere}
+
+body:has(.floating){margin:0;padding:0;background:transparent}.floating,.floating .pet{width:200px;height:200px;border-radius:0;background-color:transparent}

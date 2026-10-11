@@ -1,0 +1,49 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Copilot Desktop Pet",
+  "version": "0.1.0",
+  "identifier": "com.copilotuse.desktoppet",
+  "build": {
+    "frontendDist": "../pet_ui/dist",
+    "beforeBuildCommand": "cd ../pet_ui && trunk build --release=true --no-color"
+  },
+  "app": {
+    "withGlobalTauri": true,
+    "windows": [
+      {
+        "label": "main",
+        "title": "桌面寵物",
+        "width": 860,
+        "height": 720
+      },
+      {
+        "label": "pet",
+        "title": "桌面 AI 寵物",
+        "width": 200,
+        "height": 200,
+        "resizable": false,
+        "decorations": false,
+        "transparent": true,
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "shadow": false
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; connect-src 'self' ipc: http://ipc.localhost",
+      "capabilities": [
+        "default"
+      ]
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": [
+      "deb",
+      "appimage"
+    ],
+    "icon": [
+      "icons/icon.png"
+    ]
+  }
+}

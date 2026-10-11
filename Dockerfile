@@ -3,6 +3,8 @@
 FROM rust:1-bookworm AS builder
 WORKDIR /src
 COPY . .
+RUN rustup target add wasm32-unknown-unknown && cargo install trunk --version 0.21.14 --locked
+RUN bash scripts/build-chat-ui.sh
 RUN cargo build --locked --release -p day9-chat -p day9-analytics
 
 FROM debian:bookworm-slim AS chat
@@ -11,6 +13,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates
 WORKDIR /app
 COPY --from=builder /src/target/release/day9-chat /app/server
 COPY --from=builder /src/apps/chat/migrations /app/migrations
+COPY --from=builder /src/target/site/pkg /app/site/pkg
+ENV CHAT_SITE_DIR=/app/site/pkg
 ENV CHAT_LISTEN=0.0.0.0:3001
 USER 65532:65532
 EXPOSE 3001

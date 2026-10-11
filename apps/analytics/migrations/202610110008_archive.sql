@@ -1,0 +1,4 @@
+ALTER TABLE product_events ADD COLUMN archived BOOLEAN NOT NULL DEFAULT FALSE;
+CREATE TABLE event_dedup_keys(key_hash BYTEA PRIMARY KEY CHECK(octet_length(key_hash)=32),type_hash BYTEA NOT NULL CHECK(octet_length(type_hash)=32));
+INSERT INTO event_dedup_keys(key_hash,type_hash) SELECT sha256(convert_to(source_app||':'||event_id::text,'UTF8')),sha256(convert_to(event_type,'UTF8')) FROM product_events;
+CREATE TABLE analysis_suggestions(id UUID PRIMARY KEY,target_app TEXT NOT NULL CHECK(target_app IN ('web_chat','desktop_pet')),metric_snapshot JSONB NOT NULL,summary TEXT NOT NULL,proposal JSONB NOT NULL,status TEXT NOT NULL DEFAULT 'pending' CHECK(status IN ('pending','applied','rejected','rolled_back')),created_at TIMESTAMPTZ NOT NULL DEFAULT now(),updated_at TIMESTAMPTZ NOT NULL DEFAULT now());

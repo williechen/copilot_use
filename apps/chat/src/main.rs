@@ -1,4 +1,6 @@
 //! Chat Web、HTTP、PostgreSQL Transactional Outbox；獨立測試庫與認證。
+mod auth;
+mod knowledge;
 mod openai;
 mod realtime;
 mod web;
@@ -19,6 +21,7 @@ struct StateData {
     api_token: Arc<str>,
     events: tokio::sync::broadcast::Sender<realtime::RoomEvent>,
     ai_slots: Arc<tokio::sync::Semaphore>,
+    auth_slots: Arc<tokio::sync::Semaphore>,
 }
 #[derive(Deserialize)]
 struct RoomRequest {
@@ -68,12 +71,11 @@ async fn list_rooms(
     State(s): State<StateData>,
     headers: HeaderMap,
 ) -> Result<Json<Vec<RoomItem>>, StatusCode> {
-    if !authorized(&headers, &s.api_token) {
-        return Err(StatusCode::UNAUTHORIZED);
-    }
+    let actor = auth::principal(&s, &headers, false).await?;
     let rooms = sqlx::query_as::<_, RoomItem>(
-        "SELECT id, name FROM chat_rooms ORDER BY name, id LIMIT 100",
+        "SELECT id,name FROM chat_rooms WHERE $1::uuid IS NULL OR id IN (SELECT room_id FROM chat_room_members WHERE user_id=$1) ORDER BY name,id LIMIT 100",
     )
+    .bind(actor.user_id())
     .fetch_all(&s.pool)
     .await
     .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
@@ -85,9 +87,7 @@ async fn create_room(
     headers: HeaderMap,
     Json(input): Json<RoomRequest>,
 ) -> Result<StatusCode, StatusCode> {
-    if !authorized(&headers, &s.api_token) {
-        return Err(StatusCode::UNAUTHORIZED);
-    }
+    let actor = auth::principal(&s, &headers, true).await?;
     if input.id.is_empty()
         || input.id.len() > 40
         || input.name.trim().is_empty()
@@ -95,10 +95,35 @@ async fn create_room(
     {
         return Err(StatusCode::BAD_REQUEST);
     }
-    sqlx::query("INSERT INTO chat_rooms(id,name) VALUES($1,$2) ON CONFLICT(id) DO NOTHING")
+    let mut tx = s
+        .pool
+        .begin()
+        .await
+        .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
+    sqlx::query("INSERT INTO chat_rooms(id,name,owner_id) VALUES($1,$2,$3)")
         .bind(&input.id)
         .bind(&input.name)
-        .execute(&s.pool)
+        .bind(actor.user_id())
+        .execute(&mut *tx)
+        .await
+        .map_err(|e| {
+            if e.as_database_error()
+                .is_some_and(|d| d.is_unique_violation())
+            {
+                StatusCode::CONFLICT
+            } else {
+                StatusCode::SERVICE_UNAVAILABLE
+            }
+        })?;
+    if let Some(id) = actor.user_id() {
+        sqlx::query("INSERT INTO chat_room_members(room_id,user_id) VALUES ($1,$2)")
+            .bind(&input.id)
+            .bind(id)
+            .execute(&mut *tx)
+            .await
+            .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
+    }
+    tx.commit()
         .await
         .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
     Ok(StatusCode::CREATED)
@@ -109,9 +134,8 @@ async fn list_messages(
     headers: HeaderMap,
     Query(input): Query<MessagesQuery>,
 ) -> Result<Json<Vec<MessageItem>>, StatusCode> {
-    if !authorized(&headers, &s.api_token) {
-        return Err(StatusCode::UNAUTHORIZED);
-    }
+    let actor = auth::principal(&s, &headers, false).await?;
+    auth::room_allowed(&s, actor, &input.room_id).await?;
     if input.room_id.is_empty() || input.room_id.len() > 40 {
         return Err(StatusCode::BAD_REQUEST);
     }
@@ -133,9 +157,8 @@ async fn send_message(
     headers: HeaderMap,
     Json(input): Json<MessageRequest>,
 ) -> Result<(StatusCode, Json<CreatedMessage>), StatusCode> {
-    if !authorized(&headers, &s.api_token) {
-        return Err(StatusCode::UNAUTHORIZED);
-    }
+    let actor = auth::principal(&s, &headers, true).await?;
+    auth::room_allowed(&s, actor, &input.room_id).await?;
     if input.room_id.is_empty()
         || input.room_id.len() > 40
         || input.content.trim().is_empty()
@@ -143,8 +166,18 @@ async fn send_message(
     {
         return Err(StatusCode::BAD_REQUEST);
     }
+    let user = actor.user_id().map(|id| id.to_string());
     let id = ChatWriter::new(s.pool.clone())
-        .persist(&input.room_id, &input.content)
+        .persist_as(
+            &input.room_id,
+            &input.content,
+            if user.is_some() {
+                "user"
+            } else {
+                "anonymous_user"
+            },
+            user.as_deref(),
+        )
         .await
         .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
     let _ = s.events.send(realtime::RoomEvent {
@@ -159,6 +192,8 @@ async fn send_message(
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
+    let _ = any_spawner::Executor::init_tokio();
+    let telemetry = tokio::task::spawn_blocking(|| copilot_telemetry::init("chat")).await??;
     let url = std::env::var("CHAT_DATABASE_URL")?;
     let endpoint = std::env::var("ANALYTICS_ENDPOINT")?;
     let token = std::env::var("ANALYTICS_CHAT_TOKEN")?;
@@ -188,18 +223,43 @@ async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
     });
     let (events, _) = tokio::sync::broadcast::channel(256);
     let app = Router::new()
-        .route("/", get(web::home))
+        .route("/", get(web::leptos_home))
+        .nest_service(
+            "/pkg",
+            tower_http::services::ServeDir::new(
+                std::env::var("CHAT_SITE_DIR").unwrap_or_else(|_| "target/site/pkg".into()),
+            ),
+        )
+        .fallback(web::leptos_home)
         .route("/healthz", get(health))
+        .route("/api/v1/auth/register", axum::routing::post(auth::register))
+        .route("/api/v1/auth/login", axum::routing::post(auth::login))
+        .route("/api/v1/auth/logout", axum::routing::post(auth::logout))
+        .route("/api/v1/rooms/invite", axum::routing::post(auth::invite))
         .route("/api/v1/ws/{room_id}", get(realtime::upgrade))
+        .route(
+            "/api/v1/knowledge",
+            get(knowledge::list).post(knowledge::add),
+        )
+        .route(
+            "/api/v1/knowledge/{id}",
+            axum::routing::delete(knowledge::delete),
+        )
+        .route(
+            "/api/v1/knowledge/search",
+            axum::routing::post(knowledge::search),
+        )
         .route("/api/v1/ai/reply", axum::routing::post(openai::reply))
         .route("/api/v1/rooms", get(list_rooms).post(create_room))
         .route("/api/v1/messages", get(list_messages).post(send_message))
         .layer(axum::extract::DefaultBodyLimit::max(65536))
+        .layer(axum::middleware::from_fn(copilot_telemetry::http))
         .with_state(StateData {
             pool,
             api_token: Arc::from(chat_token),
             events,
             ai_slots: Arc::new(tokio::sync::Semaphore::new(2)),
+            auth_slots: Arc::new(tokio::sync::Semaphore::new(4)),
         });
     let addr: SocketAddr = std::env::var("CHAT_LISTEN")
         .unwrap_or_else(|_| "127.0.0.1:3001".into())
@@ -208,11 +268,12 @@ async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
     println!("Chat listening on {addr}");
     let result = axum::serve(listener, app)
         .with_graceful_shutdown(async {
-            let _ = tokio::signal::ctrl_c().await;
+            copilot_telemetry::shutdown_signal().await;
         })
         .await;
     worker.abort();
     result?;
+    tokio::task::spawn_blocking(move || drop(telemetry)).await?;
     Ok(())
 }
 

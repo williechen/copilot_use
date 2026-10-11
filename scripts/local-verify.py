@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 """建立全新隔離 PostgreSQL，以真實 binary/API 驗證；結束時移除測試庫。"""
-import json, os, pathlib, secrets, socket, subprocess, sys, tempfile, time, urllib.request, urllib.error
+import json, os, pathlib, secrets, signal, socket, subprocess, sys, tempfile, time, urllib.request, urllib.error, threading
+from http.server import ThreadingHTTPServer,BaseHTTPRequestHandler
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 PG = pathlib.Path(subprocess.check_output(['pg_config','--bindir'],text=True).strip())
 REPORT = pathlib.Path(os.environ.get('VERIFY_REPORT', ROOT / 'target/local-validation.json'))
 live_key=os.environ.get('OPENAI_API_KEY') if '--live-openai' in sys.argv else None
 if '--live-openai' in sys.argv and not live_key: raise SystemExit('OPENAI_API_KEY not configured')
+def interrupted(*_): raise KeyboardInterrupt
+signal.signal(signal.SIGTERM,interrupted)
 results=[]
 processes=[]
 
@@ -54,15 +57,29 @@ with tempfile.TemporaryDirectory(prefix='copilot-verify-') as scratch:
     ingest_token=secrets.token_urlsafe(32); pet_token=secrets.token_urlsafe(32)
     chat_url=f'http://127.0.0.1:{chatport}'; analytics_url=f'http://127.0.0.1:{analyticsport}'
     env=common | {'CHAT_API_TOKEN':chat_token,'ANALYTICS_API_TOKEN':analytics_token,
-        'ANALYTICS_CHAT_TOKEN':ingest_token,'ANALYTICS_PET_TOKEN':pet_token,
+        'ANALYTICS_ADMIN_TOKEN':secrets.token_urlsafe(32),'ANALYTICS_CHAT_TOKEN':ingest_token,'ANALYTICS_PET_TOKEN':pet_token,
         'CHAT_URL':chat_url,'ANALYTICS_URL':analytics_url,
         'CHAT_LISTEN':f'127.0.0.1:{chatport}','ANALYTICS_LISTEN':f'127.0.0.1:{analyticsport}',
         'ANALYTICS_ENDPOINT':analytics_url+'/api/v1/events'}
+    observed=[]
+    class Collector(BaseHTTPRequestHandler):
+        def log_message(self,*_):pass
+        def do_POST(self):
+            length=int(self.headers.get('Content-Length','0'))
+            if length>2000000:self.send_error(413);return
+            payload=self.rfile.read(length)
+            observed.append((self.path,payload))
+            self.send_response(200);self.send_header('Content-Type','application/json');self.end_headers();self.wfile.write(b'{}')
+    collector=ThreadingHTTPServer(('127.0.0.1',0),Collector)
+    collector_thread=threading.Thread(target=collector.serve_forever,daemon=True);collector_thread.start()
+    env['COPILOT_LOCAL_OTLP_ENDPOINT']=f'http://127.0.0.1:{collector.server_port}'
+    env['OTEL_BSP_SCHEDULE_DELAY']='100';env['OTEL_BLRP_SCHEDULE_DELAY']='100';env['OTEL_METRIC_EXPORT_INTERVAL']='250'
     started=False
     try:
         run([PG/'initdb','-D',d/'data','-A','trust','--no-locale','-E','UTF8'],stdout=subprocess.DEVNULL)
         run([PG/'pg_ctl','-D',d/'data','-l',d/'pg.log','-o',f'-h 127.0.0.1 -p {dbport} -k {scratch}','start'],stdout=subprocess.DEVNULL)
         started=True
+        run([PG/'psql',admin.rsplit('/',1)[0]+'/template1','-v','ON_ERROR_STOP=1','-c','CREATE EXTENSION IF NOT EXISTS vector'],stdout=subprocess.DEVNULL)
         run(['cargo','fmt','--all','--','--check'])
         run(['cargo','clippy','--workspace','--all-targets','--locked','--','-D','warnings'])
         run(['cargo','test','--workspace','--all-targets','--locked'],env=common)
@@ -110,6 +127,30 @@ with tempfile.TemporaryDirectory(prefix='copilot-verify-') as scratch:
         check('Chat credential cannot impersonate Pet',http(analytics_url,'/api/v1/events',ingest_token,event|{'source_app':'desktop_pet','event_type':'file.cleanup.succeeded'})[0]==401)
         check('read credential cannot ingest',http(analytics_url,'/api/v1/events',analytics_token,event)[0]==401)
         check('invalid schema rejected',http(analytics_url,'/api/v1/events',ingest_token,event|{'schema_version':99})[0]==400)
+        def account(name):
+            payload={'username':name,'password':secrets.token_urlsafe(24)}
+            req=urllib.request.Request(chat_url+'/api/v1/auth/register',data=json.dumps(payload).encode(),headers={'Content-Type':'application/json','X-Copilot-CSRF':'1'})
+            with urllib.request.urlopen(req) as response: assert response.status==201
+            req=urllib.request.Request(chat_url+'/api/v1/auth/login',data=json.dumps(payload).encode(),headers={'Content-Type':'application/json','X-Copilot-CSRF':'1'})
+            with urllib.request.urlopen(req) as response:
+                cookie=response.headers['Set-Cookie']; assert 'HttpOnly' in cookie and 'SameSite=Strict' in cookie
+                return cookie.split(';')[0]
+        def member_http(cookie,path,body=None,csrf=True):
+            req=urllib.request.Request(chat_url+path,data=json.dumps(body).encode() if body is not None else None,headers={'Content-Type':'application/json','Cookie':cookie,**({'X-Copilot-CSRF':'1'} if csrf else {})})
+            try:
+                with urllib.request.urlopen(req,timeout=5) as response:
+                    text=response.read();return response.status,json.loads(text) if text else None
+            except urllib.error.HTTPError as e:return e.code,None
+        alice_name='alice_'+secrets.token_hex(5);bob_name='bob_'+secrets.token_hex(5)
+        alice=account(alice_name);bob=account(bob_name);private='private-'+secrets.token_hex(5)
+        check('session-authenticated owner creates private room',member_http(alice,'/api/v1/rooms',{'id':private,'name':'私人測試'})[0]==201)
+        check('uninvited user cannot read private history',member_http(bob,'/api/v1/messages?room_id='+private)[0]==403)
+        check('uninvited user cannot write private message',member_http(bob,'/api/v1/messages',{'room_id':private,'content':'denied'})[0]==403)
+        check('session writes require CSRF header',member_http(alice,'/api/v1/messages',{'room_id':private,'content':'csrf'},csrf=False)[0]==403)
+        check('owner can invite another user',member_http(alice,'/api/v1/rooms/invite',{'room_id':private,'username':bob_name})[0]==204)
+        check('invited user can send private message',member_http(bob,'/api/v1/messages',{'room_id':private,'content':'authorized'})[0]==201)
+        assert member_http(bob,'/api/v1/auth/logout',{})[0]==204
+        check('logout revokes server-side session',member_http(bob,'/api/v1/messages?room_id='+private)[0]==401)
         run(['node','scripts/realtime-e2e.mjs'],env=env)
         check('real WebSocket two-client and room-isolation E2E')
         stop(chat);stop(analytics);chat=start('chat');analytics=start('analytics')
@@ -151,7 +192,11 @@ with tempfile.TemporaryDirectory(prefix='copilot-verify-') as scratch:
             live_room='live-'+secrets.token_hex(8)
             assert http(chat_url,'/api/v1/rooms',chat_token,{'id':live_room,'name':'OpenAI 驗證'})[0]==201
             assert http(chat_url,'/api/v1/messages',chat_token,{'room_id':live_room,'content':'請只回答四個中文字：測試成功。'})[0]==201
-            request=urllib.request.Request(chat_url+'/api/v1/ai/reply',data=json.dumps({'room_id':live_room}).encode(),headers={'Authorization':'Bearer '+chat_token,'Content-Type':'application/json'})
+            status,document=http(chat_url,'/api/v1/knowledge',chat_token,{'title':'授權的實驗資料','content':'本地驗證的實驗代碼是 COMET-432。這是供 RAG 測試使用的非私人資料。'})
+            check('real OpenAI embedding persisted in pgvector',status==201)
+            status,hits=http(chat_url,'/api/v1/knowledge/search',chat_token,{'query':'實驗代碼是什麼？'})
+            check('pgvector retrieves the expected document',status==200 and any(hit['id']==document['id'] for hit in hits))
+            request=urllib.request.Request(chat_url+'/api/v1/ai/reply',data=json.dumps({'room_id':live_room,'rag':True}).encode(),headers={'Authorization':'Bearer '+chat_token,'Content-Type':'application/json'})
             streamed='';saved_id=None;event_type=None
             with urllib.request.urlopen(request,timeout=100) as response:
                 for line in response:
@@ -167,8 +212,36 @@ with tempfile.TemporaryDirectory(prefix='copilot-verify-') as scratch:
             check('completed real AI stream matches persisted message',any(row['id']==saved_id and row['content']==streamed for row in records))
             wait(lambda:http(analytics_url,'/api/v1/events/web_chat/'+saved_id,analytics_token)[0]==200)
             check('real AI answer emits durable Analytics event')
+            check('knowledge document can be deleted',http(chat_url,'/api/v1/knowledge/'+document['id'],chat_token,method='DELETE')[0]==204)
+        wait(lambda:all(any(path==expected for path,_ in observed) for expected in ('/v1/traces','/v1/metrics','/v1/logs')))
+        check('real local OTLP traces, metrics and logs received')
+        chat_ids=set();analytics_ids=set()
+        for path,payload in observed:
+            if path!='/v1/traces':continue
+            decoded=json.loads(payload)
+            for resource in decoded.get('resourceSpans',[]):
+                attrs={x['key']:x.get('value',{}).get('stringValue') for x in resource.get('resource',{}).get('attributes',[])}
+                service=attrs.get('service.name')
+                for scope in resource.get('scopeSpans',[]):
+                    for span in scope.get('spans',[]):
+                        values={x['key']:x.get('value',{}).get('stringValue') for x in span.get('attributes',[])}
+                        if service=='chat' and values.get('http.route')=='/api/v1/messages':chat_ids.add(span['traceId'])
+                        if service=='analytics' and values.get('http.route')=='/api/v1/events':analytics_ids.add(span['traceId'])
+        check('Chat Outbox and Analytics preserve W3C trace correlation',bool(chat_ids&analytics_ids))
+
+        forbidden=[chat_token,analytics_token,ingest_token,pet_token,'transactional test','retry after outage','not committed']
+        check('telemetry excludes credentials and message contents',all(value.encode() not in payload for value in forbidden for _,payload in observed))
         REPORT.parent.mkdir(parents=True,exist_ok=True)
         REPORT.write_text(json.dumps({'status':'passed','checks':results,'scope':'implemented reliability slice only; P9 incomplete','live_openai':bool(live_key),'openai_model':env.get('OPENAI_CHAT_MODEL') if live_key else None},ensure_ascii=False,indent=2)+'\n')
+        if '--browser' in sys.argv:
+            fixture={'chat_url':chat_url,'analytics_url':analytics_url,'username':'browser_'+secrets.token_hex(5),'password':secrets.token_urlsafe(24)}
+            req=urllib.request.Request(chat_url+'/api/v1/auth/register',data=json.dumps({'username':fixture['username'],'password':fixture['password']}).encode(),headers={'Content-Type':'application/json','X-Copilot-CSRF':'1'})
+            with urllib.request.urlopen(req) as response: assert response.status==201
+            path=ROOT.parent/'browser-fixture.json';path.write_text(json.dumps(fixture));path.chmod(0o600)
+            print('BROWSER_FIXTURE_READY',flush=True)
+            while True: time.sleep(1)
+
     finally:
         for proc in processes:stop(proc)
+        collector.shutdown();collector.server_close()
         if started:subprocess.run([PG/'pg_ctl','-D',d/'data','stop','-m','fast'],stdout=subprocess.DEVNULL)

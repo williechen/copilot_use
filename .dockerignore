@@ -4,3 +4,8 @@ target
 .env.*
 !.env.example
 **/*.log
+
+**/target
+**/dist
+**/gen
+*.sqlite*

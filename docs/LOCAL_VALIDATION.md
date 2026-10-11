@@ -1,51 +1,40 @@
-# 本地驗證紀錄（2026-10-11；P9 未完成）
+# 本地驗證紀錄（2026-10-11）
 
-本次使用者已改為「不正式部署，只測試完成」。未進行正式部署，不建立正式完成 Release/Tag，也不產生新 Day 教學。`williechen/rust_ai_chat` 只作唯讀需求參考，未修改或提交。
+**P9 未完成。** 使用者取消正式部署；不建立正式完成 Release/Tag，不產生 Day 教學。`rust_ai_chat` 未修改。
 
-## 需求與基準
+## 基準與證據範圍
 
-- copilot_use 起點：`26f25f62e5ade7538b19c5643df71f9e06f609d1`。
-- 唯讀需求參考：rust_ai_chat `fdc74c1ee244cf86df3fd1c427d893d2956f6211`、Notion 共同主頁及 Chat/Pet/Analytics 三主頁。
-- 本地工具：Rust/Cargo 1.99.0、PostgreSQL 18.6、Node 22.22.1、Tauri CLI 2.11.5、Trunk 0.21.14；實際解析依賴固定於 Cargo.lock。此紀錄不宣稱已完成所有最新版本/MSRV/安全稽核。
+起點 `26f25f62e5ade7538b19c5643df71f9e06f609d1`；已發布的先前局部修復 `05295d41a2078edd691c2b04ae02f6c825921a1f`。其四個 CI jobs 通過，但不能代表後續工作樹。當前新功能與清理必須以新提交的 CI 再驗證。
 
-## 實作與可重現驗證
+唯讀需求基準 `rust_ai_chat` SHA `fdc74c1ee244cf86df3fd1c427d893d2956f6211`，以及 Notion 共同主頁與三產品需求頁。本地 Rust/Cargo 1.99.0、PostgreSQL 18.6、pgvector 0.8.7、Node 22.22.1、Trunk 0.21.14、Tauri CLI 2.11.5。依賴版本固定於各 workspace 的 Cargo.lock。
 
-```sh
-python3 scripts/local-verify.py
-# 明確指定的 OpenAI 真實測試；需要有效 key，會有一次模型呼叫費用。
-source ~/.bashrc
-export OPENAI_CHAT_MODEL=gpt-5.6-luna
-python3 scripts/local-verify.py --live-openai
-```
+## 已實際通過
 
-測試建立全新的 UTF-8 PostgreSQL cluster、Chat/Analytics 各自 non-superuser role 與資料庫，動態選用 loopback port。所有測試資料/背景程序在結束時清除。不使用 rust_ai_chat 的 DB。測試報告寫入 `target/local-validation.json`，不含 token、API key、私人路徑或對話內容。
+- `scripts/local-verify.py`：fmt、嚴格 Clippy、32 個 workspace 測試；全新隔離 DB migrations、兩個 non-superuser role 的 DB 隔離、HTTP/WS、精確訊息 ID 的跨服務事件、來源 token 與 schema 拒絕、Session/ACL/CSRF/邀請/登出、重啟冪等、服務與 DB 中斷恢復、pg_dump/restore 逐列核對。
+- Chat/Pet OpenAI 真實 `gpt-5.6-luna` 對話串流完成與持久化；Chat 真實 embedding → pgvector 檢索 → RAG 回覆 → Outbox/Analytics，以及知識文件刪除。生圖使用 Responses 的 image_generation tool，實際 PNG 與 SQLite 快取已驗證；不是 placeholder。
+- Leptos SSR 與 WASM hydration 編譯、真實瀏覽器登入/受保護路由/建房/送信/刷新 history/登出測試。舊 `/legacy` HTML 入口已移除。
+- Linux Tauri/WebKit/WASM/IPC 實際 GUI 測試：五項設定、多寵物、記憶隔離/刪除、複習排程、opaque ID 預覽/拒絕未確認操作/確認後 receipt、200×200 浮動視窗。真實生成 sprite 角色一致性經目視檢查，任意原圖尺寸縮放到固定顯示框。
+- Unix 安全 Adapter 的 symlink、根目錄被替換、檔案變更拒絕與正常隔離測試。Linux 實際通過；macOS 分支尚未執行。Windows 危險移動 fail closed。
+- 本機 numeric loopback collector 實收 OpenTelemetry traces/metrics/logs；Chat Outbox 與 Analytics W3C trace 關聯通過；未洩露憑證或對話內容。只允許本機 collector。
+- Analytics 同 ID/同事件冪等、同 ID/不同事件衝突、可逆封存/還原測試通過。永久資料刪除尚未提供。
 
-- 修正缺失 serde_json dev dependency、無法解析的繁體中文 TOML fixture、fmt/Clippy 錯誤。
-- 消除兩套重複 CREATE TABLE migrations；保留完整 canonical migration 與 legacy 原文至本文件旁的 legacy-migrations。只對新建隔離 DB 驗證；已使用舊錯誤 schema 的測試庫須另行處理，不直接改寫已套用 canonical migration。
-- 實作 room-filtered WebSocket message/presence/typing 通知、第一 frame Token 認證、同 Origin 檢查、frame 限制與 subscriber lag resync。瀏覽器重連後重新載入最近 100 筆 history。這不是完整 send queue、私人房間授權或多實例 WS 系統。
-- 只有 DB commit 成功才發 WS message。新增 Outbox 寫入失敗回滾、租約崩潰回收、舊 token 拒絕 mutation、永久失敗 blocked 契約。
-- dispatcher 遇到暫時 DB 錯誤仍繼續重試；DB acquire timeout 限制健康檢查等待。
-- Analytics query、Chat ingest、Pet ingest 使用三個不同 token，拒絕跨來源冒用。只允許已實作的兩種事件，不將 arbitrary event_type 當成隱私保護。
-- 同一訊息 ID 的 Chat → Outbox → Analytics 真實事件查證、重啟與持久冪等、Analytics 中斷投遞重試、PostgreSQL 中斷復原、真實 pg_dump/pg_restore 逐列核對。
-- OpenAI Responses HTTPS Adapter、SSE 增量解碼、完整回答才存入 Chat 與 Outbox。未設定 key/model 回 503；上游失敗或不完整串流不保存 partial answer。這不等於完成多 Persona orchestration、Structured Output、tools、RAG/MCP 或 Agent Runtime。
-
-實際 Pass/Fail 以測試 JSON、命令輸出及該 SHA 的 CI 結果為準；新增 workflow 不算 CI 通過。
+命令與設定見 [操作說明](DEPLOYMENT.md)。`local-validation-result.json` 是最近一次基礎驗證的局部結果；`live_openai:false` 不代表該次執行有付費呼叫。GUI、生圖、live RAG 各有獨立證據，不能以基礎測試報告取代。
 
 ## 尚未完成／未驗證
 
-| 項目 | 狀態與具體缺口 |
+| 範圍 | 必須補齊 |
 |---|---|
-| Chat 完整 UI/身份 | 未實作 Leptos SSR/Hydration、Router/Protected Route、登入/session、使用者/私人房間 ACL；目前仍共享本機 bearer token 與 HTML/JS |
-| Chat 完整即時協定 | 未實作可靠 send queue/客戶端 idempotent message replay、無限 history cursor、presence snapshot、跨程序 fan-out、完整 WS 資源上限 |
-| Chat AI | 初步 Responses 串流入口；多 AI Persona、memory、speaker selection、turn budget/cooldown、Structured Output/tool calling 尚未完成 |
-| Pet GUI | `cargo tauri build --no-bundle` 實際失敗：apps/pet 沒有 tauri.conf/config；Tauri/Leptos GUI 尚未實作，不能把 CLI 稱為桌面成品 |
-| Pet AI 與學習 | 生圖/一致性動畫/快取回退、持久 memory、active recall/spaced repetition/difficulty adaptation、真實 Pet AI 尚未實作 |
-| Pet 檔案安全 | 現有 quarantine 仍有 metadata→rename TOCTOU，未通過敵對檔案系統安全驗收；無 opaque-ID GUI/receipt durable delivery、非 root 入口保護、Trash/restore workflow |
-| Analytics 完整產品 | 未實作時間區間/趨勢/詳細報表、登入/學習/提問等事件、資料留存/刪除、完整存取控制、AI 摘要與可審核建議 |
-| RAG/MCP/閉環 | pgvector RAG、MCP server/Adapter、Agent Runtime、三產品授權採用/回退/成效追蹤尚未實作與整合 |
-| OTel/安全 | 尚無完整 OTel trace/metrics/log exporter、完整安全稽核/依賴 audit、滲透/負載/隱私驗收 |
-| Docker/GUI/跨平台 | 本機未安裝 Docker/Podman，未跑本機 Compose；無 GUI runtime/Windows/macOS installer/updater 驗收。CI 必須查核實際結果 |
-| 正式部署 | 使用者取消此項；本次不做正式部署 |
-| 完成版本 | P9 未驗收，不建立正式完成 Release/Tag，不開啟 Day 教學 |
+| Chat 即時產品 | 新 Leptos 客戶端可靠 send queue、message replay 冪等、重連策略、history cursor、presence snapshot、typing UI、連線資源限制、跨程序 fan-out |
+| Chat AI | 多 Persona orchestration、AI-to-AI speaker selection/turn budget/cooldown/context/memory、Structured Output、受控 tool calling |
+| 共同 AI | MCP server/Adapter、Agent Runtime、安全工具權限及真正端到端驗收 |
+| Pet 完整互動 | 進階覆寫 UI、多動作動畫選擇、主動互動、記憶編輯與學習適應的完整 UI/流程 |
+| Pet 檔案安全 | 可操作的完整 Organizer GUI、durable filesystem journal/recovery、Trash/restore、Windows 安全 Adapter、macOS 執行證據 |
+| Pet 投遞與備份 | 跨 instance 租約/CAS、DLQ 管理、故障恢復、SQLite/asset 備份還原與跨產品 E2E |
+| Analytics | 完整趨勢 Dashboard、登入等事件目錄、1–3 句有資料依據的 AI 洞察與審核建議、授權採用/回退/成效追蹤閉環 |
+| 安全/維運 | 全面 dependency audit、負載/滲透/金鑰輪替、Session 濫用控制、全部故障邊界、UUID/VARCHAR 雙模式驗證 |
+| Docker/CI/安裝 | 本機無 Docker/Podman；更新後 Compose/UI/pgvector 配置仍需新 SHA CI。Windows/macOS installer/updater 與跨平台 runtime 未驗收 |
+| 最終固定 | 所有必要功能通過後才可正式 release/tag；目前未達門檻 |
 
-本次本地可靠性與初步 AI 串流驗證不能取代三產品 P9 最終驗收。
+## 清理範圍
+
+移除未使用的 `day9/`、重複 `rust-day9.yml`、舊 Chat HTML/JS UI、生圖臨時診斷、產生的 Tauri schema；新增忽略規則防止 .env/SQLite/generated files 誤提交。保留實際產品、各 Cargo.lock、canonical migrations、必要歷史 migration、重現腳本及測試證據。

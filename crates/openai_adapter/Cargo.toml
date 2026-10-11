@@ -1,0 +1,9 @@
+[package]
+name="openai-adapter"
+version.workspace=true
+edition.workspace=true
+[dependencies]
+reqwest={version="0.12",default-features=false,features=["rustls-tls","json"]}
+serde_json.workspace=true
+thiserror.workspace=true
+base64="0.22"
