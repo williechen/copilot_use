@@ -1,3 +1,4 @@
+pub mod profile;
 //! Day 9：先預覽、再明確確認，僅操作受控目錄內頂層一般檔案。
 //! 重要：本教學只演示隔離 quarantine 的最小 vertical slice；正式跨平台安全
 //! 清理仍須使用 openat2/O_NOFOLLOW/目錄 fd 等原子路徑約束防護並通過 GUI E2E。
