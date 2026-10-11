@@ -236,9 +236,14 @@ fn security_text(file: &File) -> Result<String, CleanupError> {
     if length == 0 || length > 8192 {
         return Err(CleanupError::UnsafeItem);
     }
-    let units = unsafe { std::slice::from_raw_parts(text, length as usize) };
-    String::from_utf16(units.strip_suffix(&[0]).unwrap_or(units))
-        .map_err(|_| CleanupError::UnsafeItem)
+    // Windows reports buffer capacity, not string length. Stop at the first NUL;
+    // reading/serializing the unused tail can include extra NULs or uninitialized data.
+    // https://learn.microsoft.com/windows/win32/api/sddl/nf-sddl-convertsecuritydescriptortostringsecuritydescriptorw
+    let used = (0..length as usize)
+        .find(|&index| unsafe { *text.add(index) } == 0)
+        .ok_or(CleanupError::UnsafeItem)?;
+    let units = unsafe { std::slice::from_raw_parts(text, used) };
+    String::from_utf16(units).map_err(|_| CleanupError::UnsafeItem)
 }
 fn set_descriptor(file: &File, descriptor: &Local) -> Result<(), CleanupError> {
     let mut present = 0;
@@ -295,7 +300,7 @@ fn restore_security(file: &File, text: &str) -> Result<(), CleanupError> {
         )
     } == 0
     {
-        return Err(CleanupError::UnsafeItem);
+        return Err(io::Error::last_os_error().into());
     }
     let descriptor = Local(descriptor);
     set_descriptor(file, &descriptor)?;
@@ -761,6 +766,10 @@ mod tests {
         let original_acl =
             security_text(&open_at(&root.directory, "a.txt", false, false, false, false).unwrap())
                 .unwrap();
+        assert!(
+            !original_acl.contains('\0'),
+            "SDDL excludes unused capacity and terminator"
+        );
         std::fs::write(path.join("a.txt"), b"changed").unwrap();
         assert!(root.quarantine(&item).is_err());
         std::fs::write(path.join("a.txt"), b"original").unwrap();
@@ -785,7 +794,7 @@ mod tests {
         std::fs::remove_dir_all(path).unwrap();
     }
     #[test]
-    fn windows_rejects_links_concurrent_writers_and_root_replacement() {
+    fn windows_rejects_links_and_writers_and_pins_renamed_root() {
         let path = std::env::temp_dir().join(format!("pet-windows-reject-{}", Uuid::new_v4()));
         std::fs::create_dir(&path).unwrap();
         std::fs::write(path.join("a.txt"), b"original").unwrap();
