@@ -1,0 +1,2 @@
+CREATE TABLE pet_policy(pet_id TEXT PRIMARY KEY REFERENCES pets(id) ON DELETE CASCADE,review_min_days INTEGER NOT NULL DEFAULT 1 CHECK(review_min_days BETWEEN 1 AND 30),revision INTEGER NOT NULL DEFAULT 0);
+CREATE TABLE pet_suggestion_receipts(proposal_id TEXT NOT NULL,pet_id TEXT NOT NULL REFERENCES pets(id) ON DELETE CASCADE,before_value INTEGER NOT NULL,after_value INTEGER NOT NULL,applied_revision INTEGER NOT NULL,applied INTEGER NOT NULL DEFAULT 1,apply_receipt TEXT NOT NULL,rollback_receipt TEXT,PRIMARY KEY(proposal_id,pet_id));

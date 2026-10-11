@@ -1,0 +1,2 @@
+CREATE TABLE chat_room_policy(room_id VARCHAR(40) PRIMARY KEY REFERENCES chat_rooms(id),context_messages BIGINT NOT NULL DEFAULT 30 CHECK(context_messages BETWEEN 10 AND 100),revision BIGINT NOT NULL DEFAULT 0);
+CREATE TABLE chat_suggestion_receipts(proposal_id UUID NOT NULL,room_id VARCHAR(40) NOT NULL REFERENCES chat_rooms(id),before_value BIGINT NOT NULL,after_value BIGINT NOT NULL,applied_revision BIGINT NOT NULL,applied BOOLEAN NOT NULL DEFAULT TRUE,apply_receipt UUID NOT NULL,rollback_receipt UUID,PRIMARY KEY(proposal_id,room_id));

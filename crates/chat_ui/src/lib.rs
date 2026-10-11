@@ -82,6 +82,13 @@ fn Chat() -> impl IntoView {
     let room_name = RwSignal::new(String::new());
     let ai_output = RwSignal::new(String::new());
     let rag = RwSignal::new(false);
+    let agent_question = RwSignal::new(String::new());
+    let agent_result = RwSignal::new(String::new());
+    let allow_tools = RwSignal::new(false);
+    let agent_busy = RwSignal::new(false);
+    let suggestion_id = RwSignal::new(String::new());
+    let confirm_policy = RwSignal::new(false);
+    let policy_result = RwSignal::new(String::new());
     let invitee = RwSignal::new(String::new());
     let refresh = move || {
         spawn(async move {
@@ -115,25 +122,40 @@ fn Chat() -> impl IntoView {
     }
 
     view! {<section><h2>"聊天室"</h2><input id="room-name" placeholder="新房間名稱" maxlength="200" prop:value=move ||room_name.get() on:input=move |e|room_name.set(event_target_value(&e))/><button id="create-room" on:click=move |_|{let id=uuid();let name=room_name.get();spawn(async move{match api("/api/v1/rooms","POST",Some(json!({"id":id,"name":name}))).await{Ok(_)=>{room_name.set(String::new());if let Ok(v)=api("/api/v1/rooms","GET",None).await {rooms.set(v.as_array().cloned().unwrap_or_default());}load(id)},Err(e)=>state.error.set(e)}});}>"建立私人房間"</button>
-    <select id="rooms" prop:value=move ||selected.get() on:change=move |e|load(event_target_value(&e))><option value="">"選擇房間"</option>{move ||rooms.get().into_iter().map(|r|view!{<option value=r["id"].as_str().unwrap_or("").to_owned()>{r["name"].as_str().unwrap_or("").to_owned()}</option>}).collect_view()}</select>
-    <input placeholder="邀請的使用者名稱" on:input=move |e|invitee.set(event_target_value(&e))/><button on:click=move |_|{let body=json!({"room_id":selected.get(),"username":invitee.get()});spawn(async move{match api("/api/v1/rooms/invite","POST",Some(body)).await{Ok(_)=>state.error.set("邀請已完成".into()),Err(e)=>state.error.set(e)}});}>"邀請加入"</button>
-    <ul id="messages" aria-live="polite">{move ||messages.get().into_iter().map(|m|view!{<li>{m["content"].as_str().unwrap_or("").to_owned()}<small>{m["id"].as_str().unwrap_or("").to_owned()}</small></li>}).collect_view()}</ul>
-    <input id="message" maxlength="65536" placeholder="輸入訊息" prop:value=move ||draft.get() on:input=move |e|draft.set(event_target_value(&e))/><button id="send" on:click=move |_| {
-        let room=selected.get();let content=draft.get();
-        if room.is_empty() || content.trim().is_empty(){state.error.set("請選擇房間並輸入訊息".into());return;}
-        if pending.get_untracked().len()>=32{state.error.set("待送出佇列已滿（32 筆）".into());return;}
-        let id=uuid();if id.is_empty(){state.error.set("無法建立安全訊息 ID".into());return;}
-        pending.update(|items|items.push(json!({"id":id,"room_id":room,"content":content})));
-        draft.set(String::new());
-    }>"送出"</button>
-    <p role="status">{move ||format!("待送出：{} 筆（此頁關閉前保留）",pending.get().len())}</p>
-    <button on:click=move |_|pending.update(|_|{})>"重試待送出"</button>
-    <button on:click=move |_|pending.set(Vec::new())>"取消待送出"</button>
-    <p>"取消佇列不會撤回已開始的送出請求。"</p>
-    <label><input type="checkbox" on:change=move |e|rag.set(event_target_checked(&e))/>"使用我的知識庫"</label><button id="ai" on:click=move |_|{let body=json!({"room_id":selected.get(),"rag":rag.get()});ai_output.set(String::new());
-    #[cfg(target_arch="wasm32")] spawn(async move{if let Err(e)=browser::ai_stream(body,ai_output).await{state.error.set(e)}});
-    #[cfg(not(target_arch="wasm32"))] let _=body;
-    }>"請 AI 回覆"</button><pre id="ai-reply" aria-live="polite">{move ||ai_output.get()}</pre></section>}
+        <select id="rooms" prop:value=move ||selected.get() on:change=move |e|load(event_target_value(&e))><option value="">"選擇房間"</option>{move ||rooms.get().into_iter().map(|r|view!{<option value=r["id"].as_str().unwrap_or("").to_owned()>{r["name"].as_str().unwrap_or("").to_owned()}</option>}).collect_view()}</select>
+        <input placeholder="邀請的使用者名稱" on:input=move |e|invitee.set(event_target_value(&e))/><button on:click=move |_|{let body=json!({"room_id":selected.get(),"username":invitee.get()});spawn(async move{match api("/api/v1/rooms/invite","POST",Some(body)).await{Ok(_)=>state.error.set("邀請已完成".into()),Err(e)=>state.error.set(e)}});}>"邀請加入"</button>
+        <ul id="messages" aria-live="polite">{move ||messages.get().into_iter().map(|m|view!{<li>{m["content"].as_str().unwrap_or("").to_owned()}<small>{m["id"].as_str().unwrap_or("").to_owned()}</small></li>}).collect_view()}</ul>
+        <input id="message" maxlength="65536" placeholder="輸入訊息" prop:value=move ||draft.get() on:input=move |e|draft.set(event_target_value(&e))/><button id="send" on:click=move |_| {
+            let room=selected.get();let content=draft.get();
+            if room.is_empty() || content.trim().is_empty(){state.error.set("請選擇房間並輸入訊息".into());return;}
+            if pending.get_untracked().len()>=32{state.error.set("待送出佇列已滿（32 筆）".into());return;}
+            let id=uuid();if id.is_empty(){state.error.set("無法建立安全訊息 ID".into());return;}
+            pending.update(|items|items.push(json!({"id":id,"room_id":room,"content":content})));
+            draft.set(String::new());
+        }>"送出"</button>
+        <p role="status">{move ||format!("待送出：{} 筆（此頁關閉前保留）",pending.get().len())}</p>
+        <button on:click=move |_|pending.update(|_|{})>"重試待送出"</button>
+        <button on:click=move |_|pending.set(Vec::new())>"取消待送出"</button>
+        <p>"取消佇列不會撤回已開始的送出請求。"</p>
+        <label><input type="checkbox" on:change=move |e|rag.set(event_target_checked(&e))/>"使用我的知識庫"</label><button id="ai" on:click=move |_|{let body=json!({"room_id":selected.get(),"rag":rag.get()});ai_output.set(String::new());
+        #[cfg(target_arch="wasm32")] spawn(async move{if let Err(e)=browser::ai_stream(body,ai_output).await{state.error.set(e)}});
+        #[cfg(not(target_arch="wasm32"))] let _=body;
+        }>"請 AI 回覆"</button><pre id="ai-reply" aria-live="polite">{move ||ai_output.get()}</pre>
+        <h3>"工具檢索與 Agent"</h3><textarea placeholder="讓 Agent 搜尋知識庫的問題" maxlength="4096" prop:value=move ||agent_question.get() on:input=move |e|agent_question.set(event_target_value(&e))></textarea>
+        <label><input type="checkbox" on:change=move |e|allow_tools.set(event_target_checked(&e))/>"允許唯讀搜尋我的知識庫，將相關資料交給 OpenAI 回答此房間"</label>
+        <button disabled=move ||!allow_tools.get() ||agent_busy.get() on:click=move |_| {
+            let body=json!({"room_id":selected.get(),"question":agent_question.get()});agent_busy.set(true);agent_result.set("正在使用唯讀知識庫工具…".into());
+            spawn(async move {match api("/api/v1/ai/agent","POST",Some(body)).await {
+                Ok(v)=>agent_result.set(format!("{}\n理解問題：{}\n來源：{}\n工具：{}",v["answer"].as_str().unwrap_or(""),v["follow_up_question"].as_str().unwrap_or(""),v["sources"],v["steps"])),Err(e)=>state.error.set(e)
+            }agent_busy.set(false);});
+        }>"執行 Agent"</button><pre aria-live="polite">{move ||agent_result.get()}</pre>
+        <h3>"已審核的設定建議"</h3><p>"在 Analytics 檢視證據並核准後，輸入建議 UUID。只改變目前房間的 AI 歷史訊息數；回退會檢查之後是否有其他變更。"</p>
+        <input placeholder="建議 UUID" prop:value=move ||suggestion_id.get() on:input=move |e|suggestion_id.set(event_target_value(&e))/>
+        <label><input type="checkbox" on:change=move |e|confirm_policy.set(event_target_checked(&e))/>"確認變更目前房間設定"</label>
+        <button disabled=move ||!confirm_policy.get() on:click=move |_|{let path=format!("/api/v1/rooms/{}/suggestions/{}/apply",selected.get(),suggestion_id.get());spawn(async move{match api(&path,"POST",Some(json!({"confirmed":true}))).await{Ok(v)=>policy_result.set(v.to_string()),Err(e)=>state.error.set(e)}});}>"套用並回報"</button>
+        <button disabled=move ||!confirm_policy.get() on:click=move |_|{let path=format!("/api/v1/rooms/{}/suggestions/{}/rollback",selected.get(),suggestion_id.get());spawn(async move{match api(&path,"POST",Some(json!({"confirmed":true}))).await{Ok(v)=>policy_result.set(v.to_string()),Err(e)=>state.error.set(e)}});}>"回退並回報"</button><pre>{move ||policy_result.get()}</pre>
+
+    </section>}
 }
 #[component]
 fn Knowledge() -> impl IntoView {

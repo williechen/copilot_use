@@ -13,6 +13,8 @@ uuid = { version = "1", features = ["v4", "serde"] }
 tokio = { version = "1.53", features = ["full"] }
 copilot-telemetry = {path="../../crates/telemetry"}
 
+reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "json"] }
+
 [target.'cfg(unix)'.dependencies]
 libc = "0.2"
 [build-dependencies]

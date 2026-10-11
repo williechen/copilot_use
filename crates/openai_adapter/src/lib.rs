@@ -1,4 +1,5 @@
 //! OpenAI HTTPS Adapter 與 bounded SSE 解碼，與 UI/DB Adapter 分離。
+pub mod agent;
 use serde_json::Value;
 // SSE 可以在任何 UTF-8 byte 或 CRLF 分界切開；整個事件完成後才解碼。
 #[derive(Default)]

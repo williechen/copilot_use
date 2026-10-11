@@ -57,9 +57,10 @@ impl PetStore {
             source_app: "desktop_pet".into(),
             event_type: "question.answered".into(),
         };
-        sqlx::query("INSERT INTO pet_outbox(event_id,payload) VALUES (?,?)")
+        sqlx::query("INSERT INTO pet_outbox(event_id,payload,traceparent) VALUES (?,?,?)")
             .bind(event.event_id.to_string())
             .bind(serde_json::to_string(&event)?)
+            .bind(copilot_telemetry::outgoing_headers().get("traceparent"))
             .execute(&mut *tx)
             .await?;
         tx.commit().await?;
@@ -92,40 +93,5 @@ impl PetStore {
         Ok(row
             .map(|(png, width, height)| json!({"png_base64":png,"width":width,"height":height}))
             .unwrap_or(Value::Null))
-    }
-    pub async fn dispatch_once(
-        &self,
-        endpoint: &str,
-        token: &str,
-    ) -> Result<bool, Box<dyn std::error::Error + Send + Sync>> {
-        let row:Option<(String,String,i64)>=sqlx::query_as("SELECT event_id,payload,attempts FROM pet_outbox WHERE delivered=0 AND next_attempt_at<=? AND attempts<10 ORDER BY rowid LIMIT 1").bind(now()).fetch_optional(&self.pool).await?;
-        let Some((id, payload, attempts)) = row else {
-            return Ok(false);
-        };
-        let event: event_contract::ProductEvent = serde_json::from_str(&payload)?;
-        let client = reqwest::Client::builder()
-            .timeout(std::time::Duration::from_secs(10))
-            .redirect(reqwest::redirect::Policy::none())
-            .build()?;
-        let result = client
-            .post(endpoint)
-            .bearer_auth(token)
-            .json(&event)
-            .send()
-            .await;
-        let delivered = result.as_ref().is_ok_and(|r| r.status().is_success());
-        let permanent = result.as_ref().is_ok_and(|r| {
-            r.status().is_client_error() && !matches!(r.status().as_u16(), 408 | 425 | 429)
-        });
-        sqlx::query(
-            "UPDATE pet_outbox SET delivered=?,attempts=?,next_attempt_at=? WHERE event_id=?",
-        )
-        .bind(delivered)
-        .bind(if permanent { 10 } else { attempts + 1 })
-        .bind(now() + (1_i64 << (attempts + 1).min(8)))
-        .bind(id)
-        .execute(&self.pool)
-        .await?;
-        Ok(true)
     }
 }

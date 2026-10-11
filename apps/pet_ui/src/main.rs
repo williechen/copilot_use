@@ -40,6 +40,7 @@ fn Settings() -> impl IntoView {
     let prompt = RwSignal::new(String::new());
     let reply = RwSignal::new(String::new());
     let busy = RwSignal::new(false);
+    let allow_tools = RwSignal::new(false);
     let request = RwSignal::new(String::new());
     leptos::task::spawn_local(async move {
         let handler = Closure::<dyn FnMut(JsValue)>::new(move |value: JsValue| {
@@ -83,6 +84,11 @@ fn Settings() -> impl IntoView {
     refresh();
     let load = move |id: String| {
         pet.set(id.clone());
+        memories.set(Vec::new());
+        cards.set(Vec::new());
+        request.set(uuid());
+        reply.set(String::new());
+        prompt.set(String::new());
         sprite.set(String::new());
         if let Some(item) = pets.get().iter().find(|x| x["id"] == id) {
             if let Ok(p) = serde_json::from_str::<Value>(item["profile"].as_str().unwrap_or("{}")) {
@@ -106,18 +112,35 @@ fn Settings() -> impl IntoView {
         }
         leptos::task::spawn_local(async move {
             let _ = call("select_pet", json!({"pet":id})).await;
+            if pet.get_untracked() != id {
+                return;
+            }
             if let Ok(asset) = call("load_asset", json!({"pet":id})).await
                 && let Some(png) = asset["png_base64"].as_str()
             {
+                if pet.get_untracked() != id {
+                    return;
+                }
                 sprite.set(format!("url(data:image/png;base64,{png})"));
             }
+            if pet.get_untracked() != id {
+                return;
+            }
             match call("list_memories", json!({"pet":id})).await {
-                Ok(v) => memories.set(v.as_array().cloned().unwrap_or_default()),
-                Err(e) => error.set(e),
+                Ok(v) if pet.get_untracked() == id => {
+                    memories.set(v.as_array().cloned().unwrap_or_default())
+                }
+                Ok(_) => {}
+                Err(e) if pet.get_untracked() == id => error.set(e),
+                Err(_) => {}
             }
             match call("list_cards", json!({"pet":id})).await {
-                Ok(v) => cards.set(v.as_array().cloned().unwrap_or_default()),
-                Err(e) => error.set(e),
+                Ok(v) if pet.get_untracked() == id => {
+                    cards.set(v.as_array().cloned().unwrap_or_default())
+                }
+                Ok(_) => {}
+                Err(e) if pet.get_untracked() == id => error.set(e),
+                Err(_) => {}
             }
         });
     };
@@ -133,23 +156,115 @@ fn Settings() -> impl IntoView {
        <label>"個性（逗號分隔）"<input prop:value=move ||personality.get() on:input=move |e|personality.set(event_target_value(&e))/></label>
        <label>"興趣（逗號分隔）"<input prop:value=move ||interests.get() on:input=move |e|interests.set(event_target_value(&e))/></label>
        <button on:click=move |_|{let id=pet.get();let profile=json!({"名字":name.get(),"種類":species.get(),"喜好":strings(likes.get()),"個性":strings(personality.get()),"興趣":strings(interests.get())});leptos::task::spawn_local(async move{match call("save_profile",json!({"id":id,"profile":profile})).await{Ok(_)=>refresh(),Err(e)=>error.set(e)}});}>"保存設定"</button></section>
-       <section><h2>"AI 對話與教學"</h2><p>"回答會使用此寵物的設定、記憶與對話歷史並傳送至 OpenAI；可先修改或刪除不想使用的記憶。"</p><textarea prop:value=move ||prompt.get() on:input=move |e|prompt.set(event_target_value(&e)) placeholder="輸入問題或想學習的主題"></textarea><button disabled=move ||busy.get() on:click=move |_|{let pid=pet.get();let text=prompt.get();let rid=uuid();request.set(rid.clone());reply.set(String::new());busy.set(true);leptos::task::spawn_local(async move{match call("pet_talk",json!({"pet":pid,"request":rid,"text":text})).await{Ok(v)=>reply.set(v.as_str().unwrap_or("").to_owned()),Err(e)=>error.set(e)}busy.set(false);});}>"提問"</button><pre aria-live="polite">{move ||reply.get()}</pre></section>
+       <section><h2>"AI 對話與教學"</h2><p>"回答會使用此寵物的設定、記憶與對話歷史並傳送至 OpenAI；可先修改或刪除不想使用的記憶。"</p><textarea prop:value=move ||prompt.get() on:input=move |e|prompt.set(event_target_value(&e)) placeholder="輸入問題或想學習的主題"></textarea><button disabled=move ||busy.get() on:click=move |_|{let pid=pet.get();let text=prompt.get();let rid=uuid();request.set(rid.clone());reply.set(String::new());busy.set(true);leptos::task::spawn_local(async move{match call("pet_talk",json!({"pet":pid,"request":rid,"text":text})).await{Ok(v)=>{if pet.get_untracked()==pid && request.get_untracked()==rid {reply.set(v.as_str().unwrap_or("").to_owned());}},Err(e)=>{if pet.get_untracked()==pid {error.set(e);}}}busy.set(false);});}>"提問"</button><pre aria-live="polite">{move ||reply.get()}</pre>
+    <label><input type="checkbox" on:change=move |e|allow_tools.set(event_target_checked(&e))/>"允許唯讀記憶檢索工具，將相關記憶交給 OpenAI 回答"</label>
+    <button disabled=move ||busy.get() ||!allow_tools.get() on:click=move |_| {
+        let pid=pet.get();let text=prompt.get();request.set(uuid());busy.set(true);reply.set("正在用本機記憶檢索工具…".into());
+        leptos::task::spawn_local(async move{match call("pet_agent",json!({"pet":pid,"text":text})).await {
+            Ok(v)=>{if pet.get_untracked()==pid {reply.set(format!("{}\n理解問題：{}\n來源：{}\n工具：{}",v["answer"].as_str().unwrap_or(""),v["follow_up_question"].as_str().unwrap_or(""),v["sources"],v["steps"]));}},Err(e)=>{if pet.get_untracked()==pid {error.set(e);}}
+        }busy.set(false);});
+    }>"執行記憶 Agent"</button></section>
     <section><h2>"可管理的記憶"</h2><textarea placeholder="新增記憶" prop:value=move ||memory.get() on:input=move |e|memory.set(event_target_value(&e))></textarea><button on:click=move |_|{let id=pet.get();let text=memory.get();leptos::task::spawn_local(async move{match call("save_memory",json!({"pet":id,"id":uuid(),"content":text})).await{Ok(_)=>{memory.set(String::new());load(id)},Err(e)=>error.set(e)}});}>"保存記憶"</button>
        {move ||memories.get().into_iter().map(|m|{let id=m["id"].as_str().unwrap_or("").to_owned();view!{<article>{m["content"].as_str().unwrap_or("").to_owned()}<button on:click=move |_|{let mid=id.clone();let pid=pet.get();leptos::task::spawn_local(async move{match call("delete_memory",json!({"pet":pid,"id":mid})).await{Ok(_)=>load(pid),Err(e)=>error.set(e)}});}>"刪除"</button></article>}}).collect_view()}</section>
        <section><h2>"主動回想與間隔複習"</h2><input placeholder="題目" on:input=move |e|question.set(event_target_value(&e))/><input placeholder="答案" on:input=move |e|answer.set(event_target_value(&e))/><button on:click=move |_|{let pid=pet.get();let q=question.get();let a=answer.get();leptos::task::spawn_local(async move{match call("add_card",json!({"pet":pid,"question":q,"answer":a})).await{Ok(_)=>load(pid),Err(e)=>error.set(e)}});}>"新增複習"</button>
        {move ||cards.get().into_iter().map(|c|{let id=c["id"].as_str().unwrap_or("").to_owned();view!{<article><p>{c["question"].as_str().unwrap_or("").to_owned()}</p><details><summary>"顯示答案"</summary>{c["answer"].as_str().unwrap_or("").to_owned()}</details><small>{format!("間隔 {} 天；下次複習 Unix 時間 {}",c["interval_days"],c["due_at"])}</small><button on:click=move |_|{let cid=id.clone();let pid=pet.get();leptos::task::spawn_local(async move{match call("review_card",json!({"pet":pid,"id":cid,"quality":5})).await{Ok(_)=>load(pid),Err(e)=>error.set(e)}});}>"成功回想"</button></article>}}).collect_view()}</section>
+       <SuggestionPolicy pet=pet/>
+       <FileOrganizer/>
        </main>}
+}
+#[component]
+fn SuggestionPolicy(pet: RwSignal<String>) -> impl IntoView {
+    let id = RwSignal::new(String::new());
+    let confirmed = RwSignal::new(false);
+    let result = RwSignal::new(String::new());
+    view! {<section><h2>"已審核的設定建議"</h2><p>"先在 Analytics 檢查證據並核准。套用只調整目前寵物成功回想的最短複習間隔；回退會檢查是否有之後的變更。"</p>
+    <input placeholder="建議 UUID" prop:value=move ||id.get() on:input=move |e|id.set(event_target_value(&e))/>
+    <label><input type="checkbox" on:change=move |e|confirmed.set(event_target_checked(&e))/>"確認變更目前寵物設定"</label>
+    <button disabled=move ||!confirmed.get() on:click=move |_|{let args=json!({"pet":pet.get(),"id":id.get(),"confirmed":true});leptos::task::spawn_local(async move{match call("apply_analytics_suggestion",args).await{Ok(v)=>result.set(v.to_string()),Err(e)=>result.set(e)}});}>"套用並回報"</button>
+    <button disabled=move ||!confirmed.get() on:click=move |_|{let args=json!({"pet":pet.get(),"id":id.get(),"confirmed":true});leptos::task::spawn_local(async move{match call("rollback_analytics_suggestion",args).await{Ok(v)=>result.set(v.to_string()),Err(e)=>result.set(e)}});}>"回退並回報"</button><pre aria-live="polite">{move ||result.get()}</pre></section>}
+}
+#[component]
+fn FileOrganizer() -> impl IntoView {
+    let root_path = RwSignal::new(String::new());
+    let authorized = RwSignal::new(false);
+    let files = RwSignal::new(Vec::<Value>::new());
+    let status = RwSignal::new(String::new());
+    leptos::task::spawn_local(async move {
+        if let Ok(v) = call("authorized_directory", json!({})).await {
+            if let Some(path) = v.as_str() {
+                root_path.set(path.into());
+            }
+        }
+    });
+    let refresh = move |notice: bool| {
+        leptos::task::spawn_local(async move {
+            match call("scan_file_preview", json!({})).await {
+                Ok(v) => {
+                    files.set(v.as_array().cloned().unwrap_or_default());
+                    if notice {
+                        status.set("預覽完成，尚未移動檔案".into());
+                    }
+                }
+                Err(e) => status.set(e),
+            }
+        })
+    };
+    view! {<section><h2>"檔案整理"</h2><p>"只處理你設定的授權目錄。每個檔案先預覽並確認，移到隔離區。"</p>
+    <label>"本機目錄的絕對路徑"<input id="authorized-root" maxlength="4096" prop:value=move ||root_path.get() on:input=move |e|{root_path.set(event_target_value(&e));authorized.set(false);}/></label>
+    <label><input id="authorize-root-confirm" type="checkbox" on:change=move |e|authorized.set(event_target_checked(&e))/>"我授權預覽與整理此目錄"</label>
+    <button disabled=move ||!authorized.get() on:click=move |_|{let path=root_path.get();leptos::task::spawn_local(async move{
+        match call("authorize_directory",json!({"path":path,"confirmed":true})).await {Ok(v)=>{root_path.set(v.as_str().unwrap_or("").into());files.set(Vec::new());status.set("目錄已授權；請先預覽檔案".into());},Err(e)=>status.set(e)}
+    });}>"使用此目錄"</button>
+    <button on:click=move |_|leptos::task::spawn_local(async move{match call("revoke_directory",json!({})).await{Ok(_)=>{files.set(Vec::new());authorized.set(false);status.set("已撤銷目錄授權".into());},Err(e)=>status.set(e)}})>"撤銷目錄授權"</button>
+    <button id="scan-files" on:click=move |_|refresh(true)>"預覽授權目錄"</button>
+    <button on:click=move |_|leptos::task::spawn_local(async move {
+        match call("outbox_status",json!({})).await {
+            Ok(v)=>status.set(format!("事件：已送達 {}、待送出 {}、投遞中 {}、需要重試 {}",v["delivered"],v["pending"],v["leased"],v["blocked"])),Err(e)=>status.set(e),
+        }
+    })>"查看事件投遞"</button>
+    <button on:click=move |_|leptos::task::spawn_local(async move {
+        match call("requeue_failed_events",json!({})).await {Ok(v)=>status.set(format!("已排入 {} 筆失敗事件重試",v)),Err(e)=>status.set(e)}
+    })>"重試失敗事件"</button>
+    <button id="recover-receipts" on:click=move |_|leptos::task::spawn_local(async move {
+        match call("recover_cleanup_receipts",json!({})).await {
+            Ok(v)=>status.set(format!("已核對 {} 筆收據與事件",v.as_array().map_or(0,Vec::len))),
+            Err(e)=>status.set(e),
+        }
+    })>"復原收據與事件"</button><p role="status">{move ||status.get()}</p>
+    {move ||files.get().into_iter().map(|item| {
+        let id=item["id"].as_str().unwrap_or("").to_owned();
+        let confirmed=RwSignal::new(false);let working=RwSignal::new(false);
+        view!{<article><p>{item["name"].as_str().unwrap_or("").to_owned()}{format!("（{} bytes）",item["size_bytes"])}</p>
+        <label><input type="checkbox" on:change=move |e|confirmed.set(event_target_checked(&e))/>"我確認移到隔離區"</label>
+        <button disabled=move ||!confirmed.get() ||working.get() on:click=move |_| {
+            working.set(true);let id=id.clone();
+            leptos::task::spawn_local(async move {
+                match call("confirm_cleanup",json!({"id":id,"confirmed":true})).await {
+                    Ok(v)=>{status.set(format!("已隔離；收據 {}",v["operation_id"].as_str().unwrap_or("")));refresh(false);}
+                    Err(e)=>status.set(e),
+                }
+                working.set(false);
+            });
+        }>"確認隔離"</button></article>}
+    }).collect_view()}</section>}
 }
 #[component]
 fn PetOnly() -> impl IntoView {
     let sprite = RwSignal::new(String::new());
+    let generation = RwSignal::new(0_u32);
     let refresh = move || {
+        generation.update(|v| *v = v.wrapping_add(1));
+        let version = generation.get_untracked();
+        sprite.set(String::new());
         leptos::task::spawn_local(async move {
             if let Ok(pet) = call("active_pet", json!({})).await
                 && let Some(id) = pet.as_str()
                 && let Ok(asset) = call("load_asset", json!({"pet":id})).await
                 && let Some(png) = asset["png_base64"].as_str()
             {
+                if generation.get_untracked() != version {
+                    return;
+                }
                 sprite.set(format!("url(data:image/png;base64,{png})"));
             }
         })

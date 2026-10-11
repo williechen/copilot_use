@@ -6,9 +6,9 @@ Rust AI Chat、Tauri/Leptos Desktop Pet、Product Analytics 的獨立產品工�
 
 | 產品 | 程式與資料 | 已驗證能力 |
 |---|---|---|
-| Chat | `apps/chat`、`crates/chat_ui`、`apps/chat_frontend`；獨立 PostgreSQL + pgvector | Leptos SSR/Hydration、登入 Session、私人房間 ACL、訊息/history、WS、交易 Outbox、真實 OpenAI 串流及 RAG |
-| Desktop Pet | `apps/pet_desktop`、`apps/pet_ui`、`apps/pet`；獨立 SQLite | Linux Tauri/WebKit GUI、多寵物與五項設定、記憶、複習排程、真實 AI 對話/生圖/快取、200×200 浮動視窗、安全預覽與確認 IPC |
-| Analytics | `apps/analytics`；獨立 PostgreSQL | 同服務 Dashboard + API、來源 token、持久冪等、事件查證、Taipei 日趨勢 API、可逆封存/還原、備份還原 |
+| Chat | `apps/chat`、`crates/chat_ui`、`apps/chat_frontend`；獨立 PostgreSQL + pgvector | Leptos SSR/Hydration、登入 Session、私人房間 ACL、訊息/history、WS、交易 Outbox、真實 OpenAI 串流、RAG、唯讀 MCP/Agent |
+| Desktop Pet | `apps/pet_desktop`、`apps/pet_ui`、`apps/pet`；獨立 SQLite | Linux Tauri/WebKit GUI、多寵物與五項設定、記憶、複習排程、真實 AI 對話/生圖/快取、200×200 浮動視窗、安全預覽與確認 IPC、journal/租約、唯讀 MCP/Agent |
+| Analytics | `apps/analytics`；獨立 PostgreSQL | 同服務 Dashboard + API、來源 token、持久冪等、事件查證、Taipei 日趨勢 API、可逆封存/還原、備份還原、結構洞察與人工審核/套用/回退 |
 
 上表是已實作與局部驗證，**不是完整 P9 驗收**。完整缺口見 [驗證紀錄](docs/LOCAL_VALIDATION.md)；既定目標見 [P9 規格](docs/P9_TARGET.md)。
 

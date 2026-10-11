@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Exercise this application's own WebKit/WASM/IPC in an isolated disposable state."""
-import json, os, pathlib, subprocess, tempfile
+import json, os, pathlib, subprocess, tempfile, sys
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 REPORT = ROOT / "target/pet-gui-validation.json"
 if not os.environ.get("DISPLAY"):
@@ -13,10 +13,17 @@ with tempfile.TemporaryDirectory(prefix="copilot-pet-gui-") as scratch:
     sample = files / "sample.txt"
     sample.write_text("disposable GUI verification fixture")
     sample.chmod(0o600)
+    second=files / "second.txt"
+    second.write_text("disposable UI confirmation fixture")
+    second.chmod(0o600)
     env = os.environ.copy()
-    env.pop("OPENAI_API_KEY", None)
-    env.pop("ANALYTICS_ENDPOINT", None)
-    env.update(PET_GUI_TEST="true", PET_GUI_TEST_AI="false", PET_GUI_TEST_IMAGE="false",
+    live="--live-ai" in sys.argv
+    if not live:env.pop("OPENAI_API_KEY", None)
+    if live and not env.get("OPENAI_API_KEY"):raise SystemExit("OPENAI_API_KEY not configured")
+    analytics="--analytics" in sys.argv
+    if not analytics:env.pop("ANALYTICS_ENDPOINT", None)
+    env["PET_GUI_TEST_ANALYTICS"]="true" if analytics else "false"
+    env.update(PET_GUI_TEST="true", PET_GUI_TEST_AI="true" if live else "false", PET_GUI_TEST_IMAGE="false",
                PET_GUI_TEST_REPORT=str(directory / "report.json"), PET_DATA_DIR=str(directory / "state"),
                PET_AUTHORIZED_ROOT=str(files))
     subprocess.run([ROOT / "apps/pet_desktop/target/debug/copilot-desktop-pet"], env=env, cwd=ROOT, check=True, timeout=120)

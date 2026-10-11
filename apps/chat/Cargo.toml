@@ -25,3 +25,6 @@ tower-http = {version="0.6",features=["fs"]}
 any_spawner={version="0.3",features=["tokio"]}
 
 copilot-telemetry = {path="../../crates/telemetry"}
+mcp-bridge={path="../../crates/mcp_bridge"}
+url="2"
+http="1"

@@ -20,6 +20,7 @@ pub fn now() -> i64 {
 #[derive(Clone)]
 pub struct PetStore {
     pub pool: SqlitePool,
+    database_path: std::path::PathBuf,
 }
 #[derive(Serialize, Deserialize, FromRow)]
 pub struct PetItem {
@@ -69,6 +70,23 @@ impl Card {
     }
 }
 impl PetStore {
+    pub fn database_path(&self) -> &Path {
+        &self.database_path
+    }
+    pub async fn open_readonly(path: &Path) -> Result<Self, sqlx::Error> {
+        let options = SqliteConnectOptions::new()
+            .filename(path)
+            .read_only(true)
+            .create_if_missing(false);
+        let pool = SqlitePoolOptions::new()
+            .max_connections(1)
+            .connect_with(options)
+            .await?;
+        Ok(Self {
+            pool,
+            database_path: path.to_owned(),
+        })
+    }
     pub async fn open(path: &Path) -> Result<Self, sqlx::Error> {
         let options = SqliteConnectOptions::new()
             .filename(path)
@@ -79,7 +97,10 @@ impl PetStore {
             .connect_with(options)
             .await?;
         sqlx::migrate!("./migrations").run(&pool).await?;
-        Ok(Self { pool })
+        Ok(Self {
+            pool,
+            database_path: path.to_owned(),
+        })
     }
     pub async fn select_pet(&self, pet: Uuid) -> Result<(), sqlx::Error> {
         let exists: bool = sqlx::query_scalar("SELECT EXISTS(SELECT 1 FROM pets WHERE id=?)")
@@ -164,18 +185,42 @@ impl PetStore {
         receipt: &crate::CleanupReceipt,
         event: &event_contract::ProductEvent,
     ) -> Result<(), sqlx::Error> {
+        if event != &receipt.event() {
+            return Err(sqlx::Error::Protocol("receipt event mismatch".into()));
+        }
+        let body =
+            serde_json::to_string(receipt).map_err(|e| sqlx::Error::Protocol(e.to_string()))?;
+        let payload =
+            serde_json::to_string(event).map_err(|e| sqlx::Error::Protocol(e.to_string()))?;
         let mut tx = self.pool.begin().await?;
-        sqlx::query("INSERT INTO cleanup_receipts(operation_id,receipt,created_at) VALUES (?,?,?)")
+        sqlx::query("INSERT INTO cleanup_receipts(operation_id,receipt,created_at) VALUES (?,?,?) ON CONFLICT(operation_id) DO NOTHING")
             .bind(receipt.operation_id.to_string())
-            .bind(serde_json::to_string(receipt).map_err(|e| sqlx::Error::Protocol(e.to_string()))?)
+            .bind(&body)
             .bind(now())
             .execute(&mut *tx)
             .await?;
-        sqlx::query("INSERT INTO pet_outbox(event_id,payload) VALUES (?,?)")
+        let existing: String =
+            sqlx::query_scalar("SELECT receipt FROM cleanup_receipts WHERE operation_id=?")
+                .bind(receipt.operation_id.to_string())
+                .fetch_one(&mut *tx)
+                .await?;
+        if existing != body {
+            return Err(sqlx::Error::Protocol("receipt conflict".into()));
+        }
+        sqlx::query("INSERT INTO pet_outbox(event_id,payload,traceparent) VALUES (?,?,?) ON CONFLICT(event_id) DO NOTHING")
             .bind(event.event_id.to_string())
-            .bind(serde_json::to_string(event).map_err(|e| sqlx::Error::Protocol(e.to_string()))?)
+            .bind(&payload)
+            .bind(copilot_telemetry::outgoing_headers().get("traceparent"))
             .execute(&mut *tx)
             .await?;
+        let existing: String =
+            sqlx::query_scalar("SELECT payload FROM pet_outbox WHERE event_id=?")
+                .bind(event.event_id.to_string())
+                .fetch_one(&mut *tx)
+                .await?;
+        if existing != payload {
+            return Err(sqlx::Error::Protocol("event conflict".into()));
+        }
         tx.commit().await?;
         Ok(())
     }
@@ -188,6 +233,15 @@ impl PetStore {
             .await?;
         card.review(quality, now())
             .map_err(|e| sqlx::Error::Protocol(e.into()))?;
+        let minimum: Option<i64> =
+            sqlx::query_scalar("SELECT review_min_days FROM pet_policy WHERE pet_id=?")
+                .bind(pet.to_string())
+                .fetch_optional(&mut *tx)
+                .await?;
+        if quality >= 3 {
+            card.interval_days = card.interval_days.max(minimum.unwrap_or(1));
+            card.due_at = now() + card.interval_days * 86_400;
+        }
         sqlx::query("UPDATE cards SET repetitions=?,interval_days=?,ease=?,due_at=? WHERE pet_id=? AND id=?")
             .bind(card.repetitions).bind(card.interval_days).bind(card.ease).bind(card.due_at).bind(pet.to_string()).bind(id.to_string()).execute(&mut *tx).await?;
         let event = event_contract::ProductEvent {
@@ -196,9 +250,10 @@ impl PetStore {
             source_app: "desktop_pet".into(),
             event_type: "learning.review.completed".into(),
         };
-        sqlx::query("INSERT INTO pet_outbox(event_id,payload) VALUES (?,?)")
+        sqlx::query("INSERT INTO pet_outbox(event_id,payload,traceparent) VALUES (?,?,?)")
             .bind(event.event_id.to_string())
             .bind(serde_json::to_string(&event).map_err(|e| sqlx::Error::Protocol(e.to_string()))?)
+            .bind(copilot_telemetry::outgoing_headers().get("traceparent"))
             .execute(&mut *tx)
             .await?;
         tx.commit().await?;
@@ -250,6 +305,61 @@ mod tests {
         next.delete_memory(pet, id).await.unwrap();
         assert!(next.memories(pet).await.unwrap().is_empty());
         next.pool.close().await;
+        std::fs::remove_file(path).unwrap();
+    }
+    #[tokio::test]
+    async fn recovered_receipt_and_event_are_atomic_and_idempotent() {
+        let path = std::env::temp_dir().join(format!("pet-receipt-{}.sqlite", Uuid::new_v4()));
+        let store = PetStore::open(&path).await.unwrap();
+        let receipt = crate::CleanupReceipt {
+            operation_id: Uuid::new_v4(),
+            quarantined_file: "fixture.item".into(),
+            size_bytes: 8,
+        };
+        sqlx::query("CREATE TRIGGER fail_outbox BEFORE INSERT ON pet_outbox BEGIN SELECT RAISE(ABORT,'fixture failure'); END").execute(&store.pool).await.unwrap();
+        assert!(
+            store
+                .record_cleanup(&receipt, &receipt.event())
+                .await
+                .is_err()
+        );
+        let count: i64 = sqlx::query_scalar("SELECT count(*) FROM cleanup_receipts")
+            .fetch_one(&store.pool)
+            .await
+            .unwrap();
+        assert_eq!(count, 0);
+        sqlx::query("DROP TRIGGER fail_outbox")
+            .execute(&store.pool)
+            .await
+            .unwrap();
+        store
+            .record_cleanup(&receipt, &receipt.event())
+            .await
+            .unwrap();
+        store
+            .record_cleanup(&receipt, &receipt.event())
+            .await
+            .unwrap();
+        let mut wrong = receipt.clone();
+        wrong.size_bytes = 999;
+        assert!(matches!(
+            store.record_cleanup(&wrong, &wrong.event()).await,
+            Err(sqlx::Error::Protocol(_))
+        ));
+        store.pool.close().await;
+        let store = PetStore::open(&path).await.unwrap();
+        store
+            .record_cleanup(&receipt, &receipt.event())
+            .await
+            .unwrap();
+        let counts: (i64, i64) = sqlx::query_as(
+            "SELECT (SELECT count(*) FROM cleanup_receipts),(SELECT count(*) FROM pet_outbox)",
+        )
+        .fetch_one(&store.pool)
+        .await
+        .unwrap();
+        assert_eq!(counts, (1, 1));
+        store.pool.close().await;
         std::fs::remove_file(path).unwrap();
     }
 }

@@ -19,5 +19,7 @@ openai-adapter = { path = "../../crates/openai_adapter" }
 
 copilot-telemetry = {path="../../crates/telemetry"}
 
+mcp-bridge={path="../../crates/mcp_bridge"}
+
 [target.'cfg(unix)'.dependencies]
 libc = "0.2"

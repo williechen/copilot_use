@@ -1,8 +1,11 @@
 //! 先預覽、再明確確認；Linux 使用 dirfd 原子捕獲與身份重驗證。
 //! 尚未驗證的其他平台 fail closed，不執行危險移動。
+pub mod agent;
 pub mod ai;
+pub mod outbox;
 pub mod profile;
 pub mod state;
+pub mod suggestions;
 #[cfg(any(target_os = "linux", target_os = "macos"))]
 mod unix_fs;
 use event_contract::ProductEvent;
@@ -83,6 +86,15 @@ fn modified_nanos(meta: &fs::Metadata) -> Result<u128, CleanupError> {
 
 impl AuthorizedRoot {
     pub fn new(path: impl AsRef<Path>) -> Result<Self, CleanupError> {
+        #[cfg(target_os = "windows")]
+        match path.as_ref().components().next() {
+            Some(std::path::Component::Prefix(prefix))
+                if matches!(
+                    prefix.kind(),
+                    std::path::Prefix::Disk(_) | std::path::Prefix::VerbatimDisk(_)
+                ) => {}
+            _ => return Err(CleanupError::InvalidName),
+        }
         let root = fs::canonicalize(path)?;
         if !root.is_dir() {
             return Err(CleanupError::InvalidName);
@@ -94,6 +106,10 @@ impl AuthorizedRoot {
             #[cfg(any(target_os = "linux", target_os = "macos"))]
             pinned,
         })
+    }
+
+    pub fn authorized_path(&self) -> &Path {
+        &self.root
     }
 
     pub fn scan(&self) -> Result<Vec<FilePreview>, CleanupError> {
@@ -160,11 +176,32 @@ impl AuthorizedRoot {
             )))
         }
     }
+    pub fn recovered_receipts(&self) -> Result<Vec<CleanupReceipt>, CleanupError> {
+        #[cfg(any(target_os = "linux", target_os = "macos"))]
+        {
+            self.pinned.recovered_receipts()
+        }
+        #[cfg(not(any(target_os = "linux", target_os = "macos")))]
+        {
+            Err(CleanupError::Io(io::Error::new(
+                io::ErrorKind::Unsupported,
+                "安全復原 Adapter 尚未驗證",
+            )))
+        }
+    }
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
+    fn private_directory(path: impl AsRef<Path>) {
+        fs::create_dir_all(&path).unwrap();
+        #[cfg(unix)]
+        {
+            use std::os::unix::fs::PermissionsExt;
+            fs::set_permissions(path, fs::Permissions::from_mode(0o700)).unwrap();
+        }
+    }
     fn private_fixture(path: impl AsRef<Path>, contents: &[u8]) {
         fs::write(&path, contents).unwrap();
         #[cfg(unix)]
@@ -178,7 +215,7 @@ mod tests {
     #[test]
     fn preview_is_readonly_confirmation_is_required() {
         let dir = std::env::temp_dir().join(format!("pet-day9-{}", Uuid::new_v4()));
-        fs::create_dir_all(&dir).unwrap();
+        private_directory(&dir);
         private_fixture(dir.join("example.txt"), b"sample");
         let root = AuthorizedRoot::new(&dir).unwrap();
         let preview = root.preview("example.txt").unwrap();
@@ -199,7 +236,7 @@ mod tests {
     #[test]
     fn reject_relative_escape_and_changed_file() {
         let dir = std::env::temp_dir().join(format!("pet-day9-{}", Uuid::new_v4()));
-        fs::create_dir_all(&dir).unwrap();
+        private_directory(&dir);
         private_fixture(dir.join("a.txt"), b"1");
         let root = AuthorizedRoot::new(&dir).unwrap();
         assert!(root.preview("../secret").is_err());
@@ -221,7 +258,7 @@ mod tests {
     #[test]
     fn unverified_platform_cannot_move_file() {
         let dir = std::env::temp_dir().join(format!("pet-unsupported-{}", Uuid::new_v4()));
-        fs::create_dir(&dir).unwrap();
+        private_directory(&dir);
         private_fixture(dir.join("a.txt"), b"original");
         let root = AuthorizedRoot::new(&dir).unwrap();
         let item = root.preview("a.txt").unwrap();
@@ -235,7 +272,7 @@ mod tests {
         use std::os::unix::fs::symlink;
         let dir = std::env::temp_dir().join(format!("pet-symlink-{}", Uuid::new_v4()));
         let outside = std::env::temp_dir().join(format!("pet-outside-{}", Uuid::new_v4()));
-        fs::create_dir(&dir).unwrap();
+        private_directory(&dir);
         fs::create_dir(&outside).unwrap();
         fs::write(outside.join("private.txt"), b"private").unwrap();
         let root = AuthorizedRoot::new(&dir).unwrap();
@@ -255,7 +292,7 @@ mod tests {
     fn replacing_authorized_root_path_cannot_redirect_operation() {
         let dir = std::env::temp_dir().join(format!("pet-pin-{}", Uuid::new_v4()));
         let moved = dir.with_extension("moved");
-        fs::create_dir(&dir).unwrap();
+        private_directory(&dir);
         private_fixture(dir.join("a.txt"), b"original");
         let root = AuthorizedRoot::new(&dir).unwrap();
         let preview = root.preview("a.txt").unwrap();
@@ -270,5 +307,39 @@ mod tests {
         );
         fs::remove_dir_all(dir).unwrap();
         fs::remove_dir_all(moved).unwrap();
+    }
+    #[cfg(any(target_os = "linux", target_os = "macos"))]
+    #[test]
+    fn journal_recovers_after_restart_but_never_for_replaced_file() {
+        let dir = std::env::temp_dir().join(format!("pet-journal-{}", Uuid::new_v4()));
+        private_directory(&dir);
+        private_fixture(dir.join("a.txt"), b"original");
+        let root = AuthorizedRoot::new(&dir).unwrap();
+        assert_eq!(root.scan().unwrap().len(), 1);
+        assert_eq!(root.scan().unwrap().len(), 1);
+        let receipt = root
+            .confirm_quarantine(&root.preview("a.txt").unwrap(), true)
+            .unwrap();
+        drop(root);
+        let root = AuthorizedRoot::new(&dir).unwrap();
+        assert_eq!(root.recovered_receipts().unwrap(), vec![receipt.clone()]);
+        let captured = dir.join(".pet-quarantine").join(receipt.quarantined_file);
+        fs::remove_file(&captured).unwrap();
+        private_fixture(captured, b"unrelated");
+        assert!(root.recovered_receipts().unwrap().is_empty());
+        fs::remove_dir_all(dir).unwrap();
+    }
+    #[cfg(any(target_os = "linux", target_os = "macos"))]
+    #[test]
+    fn externally_writable_root_is_not_authorized() {
+        use std::os::unix::fs::PermissionsExt;
+        let dir = std::env::temp_dir().join(format!("pet-public-{}", Uuid::new_v4()));
+        private_directory(&dir);
+        fs::set_permissions(&dir, fs::Permissions::from_mode(0o777)).unwrap();
+        assert!(matches!(
+            AuthorizedRoot::new(&dir),
+            Err(CleanupError::UnsafeItem)
+        ));
+        fs::remove_dir_all(dir).unwrap();
     }
 }

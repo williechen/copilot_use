@@ -20,12 +20,27 @@ window.addEventListener('error',e=>window.__PET_LOAD_ERROR=e.message);window.add
  await invoke('add_card',{pet,question:'Rust 的所有權如何避免 double free？',answer:'單一所有者與借用檢查'});
  const cards=await invoke('list_cards',{pet});assert(cards.length>0,'review card saved');
  const reviewed=await invoke('review_card',{pet,id:cards[0].id,quality:5});assert(reviewed.interval_days>0,'spaced review scheduling');
+ const knowledge=crypto.randomUUID();await invoke('save_memory',{pet,id:knowledge,content:'Agent 驗收代碼為 ASTRO-771。probe memory owned by this pet.'});
+ await invoke('save_memory',{pet:other,id:crypto.randomUUID(),content:'probe other pet hidden code STALE-999'});
+ const retrieved=await invoke('search_memory_tool',{pet,query:'probe'});assert(retrieved.hits.some(x=>x.id===knowledge)&&!retrieved.hits.some(x=>x.content.includes('STALE-999')),'actual readonly MCP stdio scope');
+
+ if(window.__PET_TEST_SUGGESTION){
+  const id=window.__PET_TEST_SUGGESTION;
+  let refused=false;try{await invoke('apply_analytics_suggestion',{pet,id,confirmed:false})}catch(_){refused=true;}assert(refused,'policy explicit confirmation');
+  const applied=await invoke('apply_analytics_suggestion',{pet,id,confirmed:true});
+  assert(applied.value===3&&applied.analytics_acknowledged,'native policy apply acknowledgement');
+  const replay=await invoke('apply_analytics_suggestion',{pet,id,confirmed:true});assert(replay.receipt_id===applied.receipt_id,'native policy idempotence');
+  const rolled=await invoke('rollback_analytics_suggestion',{pet,id,confirmed:true});assert(rolled.value===1&&rolled.analytics_acknowledged,'native policy rollback acknowledgement');
+ }
  await invoke('gui_test_progress',{phase:'core-complete'});
  if(window.__PET_TEST_LIVE_AI){
   await invoke('gui_test_progress',{phase:'live-ai'});
   let deltas=0;const request=crypto.randomUUID();const unlisten=await window.__TAURI__.event.listen('pet-reply-delta',e=>{if(e.payload.request===request)deltas++});
   const output=await invoke('pet_talk',{pet,request,text:'請用一句繁體中文說明 Rust 的所有權，再問一個理解問題。'});
   unlisten();assert(output.length>0&&deltas>0,'real AI streaming');
+  const agent=await invoke('pet_agent',{pet,text:'請使用記憶檢索工具回答 Agent 驗收代碼，引用資料並提出一個理解問題。'});
+  assert(agent.answer.includes('ASTRO-771')&&agent.sources.includes(knowledge)&&agent.steps.length>0&&agent.follow_up_question,'real Pet MCP Agent structured answer');
+
  }
  if(window.__PET_TEST_LIVE_IMAGE){
   await invoke('gui_test_progress',{phase:'live-image'});
@@ -34,12 +49,35 @@ window.addEventListener('error',e=>window.__PET_LOAD_ERROR=e.message);window.add
  }
  await invoke('gui_test_progress',{phase:'cleanup'});
  const files=await invoke('scan_file_preview');const sample=files.find(f=>f.name==='sample.txt');assert(sample&&sample.size_bytes>0,'file preview');
+ const rootPath=await invoke('authorized_directory');assert(rootPath,'authorized directory');
+ await invoke('revoke_directory');
+ let revoked=false;try{await invoke('confirm_cleanup',{id:sample.id,confirmed:true})}catch(_){revoked=true;}assert(revoked,'revocation invalidates old previews');
+ let unconfirmed=false;try{await invoke('authorize_directory',{path:rootPath,confirmed:false})}catch(_){unconfirmed=true;}assert(unconfirmed,'directory authorization requires confirmation');
+ await invoke('authorize_directory',{path:rootPath,confirmed:true});
+ const fresh=await invoke('scan_file_preview');sample.id=fresh.find(x=>x.name==='sample.txt').id;
  let refused=false;try{await invoke('confirm_cleanup',{id:sample.id,confirmed:false})}catch(_){refused=true;}assert(refused,'explicit confirmation');
  const receipt=await invoke('confirm_cleanup',{id:sample.id,confirmed:true});assert(receipt.operation_id&&receipt.size_bytes>0,'real cleanup receipt');
+ const waitUntil=async(test,label)=>{const until=Date.now()+10000;while(!test()){if(Date.now()>until)throw Error(label);await new Promise(r=>setTimeout(r,25));}};
+ document.querySelector('#scan-files').click();
+ const section=document.querySelector('#scan-files').closest('section');
+ await waitUntil(()=>[...section.querySelectorAll('article')].some(x=>x.textContent.includes('second.txt')),'organizer UI preview');
+ const row=[...section.querySelectorAll('article')].find(x=>x.textContent.includes('second.txt'));
+ const button=row.querySelector('button');assert(button.disabled,'organizer button requires confirmation');
+ const checkbox=row.querySelector('input');checkbox.checked=true;checkbox.dispatchEvent(new Event('change',{bubbles:true}));
+ await waitUntil(()=>!button.disabled,'organizer confirmation checkbox');button.click();
+ await waitUntil(()=>section.textContent.includes('已隔離；收據'),'organizer UI success receipt');
+ const recovered=await invoke('recover_cleanup_receipts');assert(recovered.length===2&&recovered.some(x=>x.operation_id===receipt.operation_id),'durable journal recovery');
+ assert((await invoke('recover_cleanup_receipts')).length===2,'repeat recovery idempotence');
  const select=document.querySelector('select');
  // 實際觸發 UI 的選擇與資料載入事件。
  const option=document.createElement('option');option.value=pet;select.appendChild(option);select.value=pet;select.dispatchEvent(new Event('change',{bubbles:true}));
  await new Promise(r=>setTimeout(r,250));
  assert(document.body.textContent.includes('Rust 的所有權'),'Leptos renders native data');
- await invoke('gui_test_result',{success:true,message:'PASS: WebKit/WASM, 200x200, IPC, profiles, memory isolation/deletion, recall scheduling, opaque-ID confirmed cleanup and rendered data; AI='+!!window.__PET_TEST_LIVE_AI+'; image='+!!window.__PET_TEST_LIVE_IMAGE});
+ if(window.__PET_TEST_ANALYTICS){
+  await invoke('gui_test_progress',{phase:'analytics-outbox'});
+  const deadline=Date.now()+30000;let outbox;
+  do {outbox=await invoke('outbox_status');if(outbox.delivered>=3&&!outbox.pending&&!outbox.leased&&!outbox.blocked)break;await new Promise(r=>setTimeout(r,100));}while(Date.now()<deadline);
+  assert(outbox.delivered>=3&&!outbox.pending&&!outbox.leased&&!outbox.blocked,'actual Pet to Analytics delivery');
+ }
+ await invoke('gui_test_result',{success:true,message:'PASS: WebKit/WASM, 200x200, IPC, profiles, memory isolation/deletion, recall scheduling, opaque-ID confirmed cleanup, organizer GUI, journal recovery, MCP stdio scope and rendered data; AI='+!!window.__PET_TEST_LIVE_AI+'; image='+!!window.__PET_TEST_LIVE_IMAGE+'; analytics='+!!window.__PET_TEST_ANALYTICS});
 })().catch(async e=>{await window.__TAURI__.core.invoke('gui_test_result',{success:false,message:String(e?.message||e)})});

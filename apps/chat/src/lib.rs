@@ -41,6 +41,9 @@ impl ChatWriter {
         author_kind: &str,
         author_id: Option<&str>,
     ) -> Result<(Uuid, bool), sqlx::Error> {
+        if id.is_nil() {
+            return Err(sqlx::Error::Protocol("invalid message id".into()));
+        }
         let event = ProductEvent::chat_message_persisted(id);
         let mut tx = self.pool.begin().await?;
         let inserted = sqlx::query("INSERT INTO chat_messages(id, room_id, content, author_kind, author_id) VALUES ($1,$2,$3,$4,$5) ON CONFLICT (id) DO NOTHING")

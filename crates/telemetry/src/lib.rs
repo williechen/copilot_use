@@ -48,6 +48,41 @@ fn local_endpoint(value: &str) -> Result<String, Box<dyn std::error::Error + Sen
     }
     Ok(value.trim_end_matches('/').into())
 }
+fn local_http_client() -> Result<reqwest::blocking::Client, reqwest::Error> {
+    reqwest::blocking::Client::builder()
+        .no_proxy()
+        .redirect(reqwest::redirect::Policy::none())
+        .timeout(Duration::from_secs(3))
+        .build()
+}
+#[derive(Debug, Clone)]
+struct LocalHttpClient {
+    inner: reqwest::blocking::Client,
+    allowed: std::collections::HashSet<String>,
+}
+#[async_trait::async_trait]
+impl opentelemetry_http::HttpClient for LocalHttpClient {
+    async fn send_bytes(
+        &self,
+        mut request: http::Request<bytes::Bytes>,
+    ) -> Result<http::Response<bytes::Bytes>, opentelemetry_http::HttpError> {
+        if request.method() != http::Method::POST
+            || !self.allowed.contains(&request.uri().to_string())
+        {
+            return Err(Box::new(std::io::Error::other(
+                "export destination rejected",
+            )));
+        }
+        // OTLP 0.33 merges signal-specific environment headers even after with_headers({}).
+        // Enforce the actual transport boundary instead of relying on builder precedence.
+        request.headers_mut().clear();
+        request.headers_mut().insert(
+            http::header::CONTENT_TYPE,
+            http::HeaderValue::from_static("application/json"),
+        );
+        opentelemetry_http::HttpClient::send_bytes(&self.inner, request).await
+    }
+}
 pub fn init(service: &'static str) -> Result<Telemetry, Box<dyn std::error::Error + Send + Sync>> {
     global::set_text_map_propagator(TraceContextPropagator::new());
     let Ok(base) = std::env::var("COPILOT_LOCAL_OTLP_ENDPOINT") else {
@@ -58,16 +93,24 @@ pub fn init(service: &'static str) -> Result<Telemetry, Box<dyn std::error::Erro
         });
     };
     let base = local_endpoint(&base)?;
+    let client = LocalHttpClient {
+        inner: local_http_client()?,
+        allowed: ["traces", "metrics", "logs"]
+            .iter()
+            .map(|signal| format!("{base}/v1/{signal}"))
+            .collect(),
+    };
     let resource = Resource::builder_empty()
         .with_service_name(service)
         .with_attributes([KeyValue::new("service.version", env!("CARGO_PKG_VERSION"))])
         .build();
-    // 明確 endpoint/空 headers 覆寫 OTEL_*；外部 exporter 設定不會被採用。
+    // 明確 endpoint 與 transport allowlist；strip SDK 合併的全部自訂 headers。
     let exporter = opentelemetry_otlp::SpanExporter::builder()
         .with_http()
         .with_protocol(Protocol::HttpJson)
         .with_endpoint(format!("{base}/v1/traces"))
         .with_headers(HashMap::new())
+        .with_http_client(client.clone())
         .with_timeout(Duration::from_secs(3))
         .build()?;
     let traces = SdkTracerProvider::builder()
@@ -79,6 +122,7 @@ pub fn init(service: &'static str) -> Result<Telemetry, Box<dyn std::error::Erro
         .with_protocol(Protocol::HttpJson)
         .with_endpoint(format!("{base}/v1/metrics"))
         .with_headers(HashMap::new())
+        .with_http_client(client.clone())
         .with_timeout(Duration::from_secs(3))
         .build()?;
     let metrics = SdkMeterProvider::builder()
@@ -90,6 +134,7 @@ pub fn init(service: &'static str) -> Result<Telemetry, Box<dyn std::error::Erro
         .with_protocol(Protocol::HttpJson)
         .with_endpoint(format!("{base}/v1/logs"))
         .with_headers(HashMap::new())
+        .with_http_client(client.clone())
         .with_timeout(Duration::from_secs(3))
         .build()?;
     let logs = SdkLoggerProvider::builder()
@@ -201,7 +246,10 @@ pub async fn observe<T, E>(
         context.span().set_status(Status::error("operation_failed"));
     }
     context.span().end();
-    event(operation, status);
+    {
+        let _guard = context.attach();
+        event(operation, status);
+    }
     result
 }
 
@@ -213,5 +261,80 @@ mod tests {
         assert!(local_endpoint("https://example.com").is_err());
         assert!(local_endpoint("http://key@127.0.0.1:4318").is_err());
         assert!(local_endpoint("http://127.0.0.1:4318").is_ok());
+    }
+    #[test]
+    fn local_exporter_client_never_follows_redirects() {
+        use std::{
+            io::{Read, Write},
+            net::TcpListener,
+        };
+        let target = TcpListener::bind("127.0.0.1:0").unwrap();
+        target.set_nonblocking(true).unwrap();
+        let source = TcpListener::bind("127.0.0.1:0").unwrap();
+        let address = source.local_addr().unwrap();
+        let location = target.local_addr().unwrap();
+        let thread = std::thread::spawn(move || {
+            let (mut stream, _) = source.accept().unwrap();
+            let mut bytes = [0; 1024];
+            let _ = stream.read(&mut bytes).unwrap();
+            write!(stream,"HTTP/1.1 302 Found\r\nLocation: http://{location}/redirect-target\r\nContent-Length: 0\r\nConnection: close\r\n\r\n").unwrap();
+        });
+        let response = local_http_client()
+            .unwrap()
+            .post(format!("http://{address}/v1/traces"))
+            .body("synthetic probe")
+            .send()
+            .unwrap();
+        assert_eq!(response.status(), reqwest::StatusCode::FOUND);
+        thread.join().unwrap();
+        assert!(matches!(target.accept(),Err(e) if e.kind()==std::io::ErrorKind::WouldBlock));
+    }
+    #[test]
+    fn transport_strips_environment_credentials_and_rejects_other_destinations() {
+        use std::{
+            io::{Read, Write},
+            net::TcpListener,
+        };
+        let listener = TcpListener::bind("127.0.0.1:0").unwrap();
+        let endpoint = format!("http://{}/v1/traces", listener.local_addr().unwrap());
+        let worker = std::thread::spawn(move || {
+            let (mut stream, _) = listener.accept().unwrap();
+            let mut bytes = [0; 4096];
+            let read = stream.read(&mut bytes).unwrap();
+            let request = String::from_utf8_lossy(&bytes[..read]);
+            assert!(!request.contains("synthetic-secret"));
+            assert!(!request.to_lowercase().contains("authorization:"));
+            stream
+                .write_all(b"HTTP/1.1 200 OK\r\nContent-Length: 2\r\nConnection: close\r\n\r\n{}")
+                .unwrap();
+        });
+        let client = LocalHttpClient {
+            inner: local_http_client().unwrap(),
+            allowed: [endpoint.clone()].into_iter().collect(),
+        };
+        let request = http::Request::builder()
+            .method("POST")
+            .uri(endpoint)
+            .header("Authorization", "synthetic-secret")
+            .body(bytes::Bytes::new())
+            .unwrap();
+        assert!(
+            futures_executor::block_on(opentelemetry_http::HttpClient::send_bytes(
+                &client, request
+            ))
+            .is_ok()
+        );
+        worker.join().unwrap();
+        let request = http::Request::builder()
+            .method("POST")
+            .uri("http://127.0.0.1:1/v1/traces")
+            .body(bytes::Bytes::new())
+            .unwrap();
+        assert!(
+            futures_executor::block_on(opentelemetry_http::HttpClient::send_bytes(
+                &client, request
+            ))
+            .is_err()
+        );
     }
 }

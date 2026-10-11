@@ -1,6 +1,7 @@
 //! Analytics：認證後持久事件、依 (source_app,event_id) 原子去重、Query API。
 pub mod dashboard;
 mod governance;
+mod insights;
 use axum::{
     Router,
     extract::{Json, Path, State},
@@ -20,6 +21,7 @@ pub struct AnalyticsState {
     pub chat_token: Arc<str>,
     pub pet_token: Arc<str>,
     pub admin_token: Arc<str>,
+    pub ai_slots: Arc<tokio::sync::Semaphore>,
 }
 
 #[derive(Clone)]
@@ -184,6 +186,15 @@ pub fn build_app(state: AnalyticsState) -> Router {
     Router::new()
         .route("/", get(dashboard::dashboard))
         .route("/healthz", get(health))
+        .route("/api/v1/insights", post(insights::generate))
+        .route("/api/v1/suggestions", get(insights::list))
+        .route("/api/v1/suggestions/{id}", get(insights::get))
+        .route("/api/v1/suggestions/{id}/review", post(insights::review))
+        .route("/api/v1/suggestions/{id}/receipt", post(insights::receipt))
+        .route(
+            "/api/v1/suggestions/{id}/evaluate",
+            post(insights::evaluate),
+        )
         .route("/api/v1/events", post(ingest))
         .route("/api/v1/events/{source}/{id}", get(event_lookup))
         .route("/api/v1/events/count", get(count))

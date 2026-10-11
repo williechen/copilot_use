@@ -1,8 +1,11 @@
 //! Chat Web、HTTP、PostgreSQL Transactional Outbox；獨立測試庫與認證。
+mod agent;
 mod auth;
 mod knowledge;
+mod mcp;
 mod openai;
 mod realtime;
+mod suggestions;
 mod web;
 use axum::{
     Json, Router,
@@ -22,6 +25,8 @@ struct StateData {
     events: tokio::sync::broadcast::Sender<realtime::RoomEvent>,
     ai_slots: Arc<tokio::sync::Semaphore>,
     auth_slots: Arc<tokio::sync::Semaphore>,
+    tool_slots: Arc<tokio::sync::Semaphore>,
+    mcp_endpoint: Arc<str>,
 }
 #[derive(Deserialize)]
 struct RoomRequest {
@@ -161,7 +166,8 @@ async fn send_message(
 ) -> Result<(StatusCode, Json<CreatedMessage>), StatusCode> {
     let actor = auth::principal(&s, &headers, true).await?;
     auth::room_allowed(&s, actor, &input.room_id).await?;
-    if input.room_id.is_empty()
+    if input.id.is_some_and(|id| id.is_nil())
+        || input.room_id.is_empty()
         || input.room_id.len() > 40
         || input.content.trim().is_empty()
         || input.content.len() > 65536
@@ -237,6 +243,21 @@ async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
         }
     });
     let (events, _) = tokio::sync::broadcast::channel(256);
+    let addr: SocketAddr = std::env::var("CHAT_LISTEN")
+        .unwrap_or_else(|_| "127.0.0.1:3001".into())
+        .parse()?;
+    let listener = tokio::net::TcpListener::bind(addr).await?;
+    let bound = listener.local_addr()?;
+    let mcp_endpoint: Arc<str> = format!(
+        "http://{}:{}/api/v1/mcp",
+        if bound.is_ipv6() {
+            "[::1]"
+        } else {
+            "127.0.0.1"
+        },
+        bound.port()
+    )
+    .into();
     let app = Router::new()
         .route("/", get(web::leptos_home))
         .nest_service(
@@ -247,6 +268,7 @@ async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
         )
         .fallback(web::leptos_home)
         .route("/healthz", get(health))
+        .route("/api/v1/mcp", axum::routing::post(mcp::handler))
         .route("/api/v1/auth/register", axum::routing::post(auth::register))
         .route("/api/v1/auth/login", axum::routing::post(auth::login))
         .route("/api/v1/auth/logout", axum::routing::post(auth::logout))
@@ -264,6 +286,15 @@ async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
             "/api/v1/knowledge/search",
             axum::routing::post(knowledge::search),
         )
+        .route(
+            "/api/v1/rooms/{room}/suggestions/{id}/apply",
+            axum::routing::post(suggestions::apply),
+        )
+        .route(
+            "/api/v1/rooms/{room}/suggestions/{id}/rollback",
+            axum::routing::post(suggestions::rollback),
+        )
+        .route("/api/v1/ai/agent", axum::routing::post(agent::reply))
         .route("/api/v1/ai/reply", axum::routing::post(openai::reply))
         .route("/api/v1/rooms", get(list_rooms).post(create_room))
         .route("/api/v1/messages", get(list_messages).post(send_message))
@@ -275,11 +306,9 @@ async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
             events,
             ai_slots: Arc::new(tokio::sync::Semaphore::new(2)),
             auth_slots: Arc::new(tokio::sync::Semaphore::new(4)),
+            tool_slots: Arc::new(tokio::sync::Semaphore::new(2)),
+            mcp_endpoint,
         });
-    let addr: SocketAddr = std::env::var("CHAT_LISTEN")
-        .unwrap_or_else(|_| "127.0.0.1:3001".into())
-        .parse()?;
-    let listener = tokio::net::TcpListener::bind(addr).await?;
     println!("Chat listening on {addr}");
     let result = axum::serve(listener, app)
         .with_graceful_shutdown(async {

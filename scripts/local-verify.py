@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """建立全新隔離 PostgreSQL，以真實 binary/API 驗證；結束時移除測試庫。"""
-import json, os, pathlib, secrets, signal, socket, subprocess, sys, tempfile, time, urllib.request, urllib.error, threading
+import json, uuid, os, pathlib, secrets, signal, socket, subprocess, sys, tempfile, time, urllib.request, urllib.error, threading
 from http.server import ThreadingHTTPServer,BaseHTTPRequestHandler
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 PG = pathlib.Path(subprocess.check_output(['pg_config','--bindir'],text=True).strip())
 REPORT = pathlib.Path(os.environ.get('VERIFY_REPORT', ROOT / 'target/local-validation.json'))
-live_key=os.environ.get('OPENAI_API_KEY') if '--live-openai' in sys.argv else None
-if '--live-openai' in sys.argv and not live_key: raise SystemExit('OPENAI_API_KEY not configured')
+live_key=os.environ.get('OPENAI_API_KEY') if any(flag in sys.argv for flag in ('--live-openai','--live-insights')) else None
+if any(flag in sys.argv for flag in ('--live-openai','--live-insights')) and not live_key: raise SystemExit('OPENAI_API_KEY not configured')
 def interrupted(*_): raise KeyboardInterrupt
 signal.signal(signal.SIGTERM,interrupted)
 results=[]
@@ -28,7 +28,7 @@ def http(base,path,token=None,body=None,method=None):
     req=urllib.request.Request(base+path, data=json.dumps(body).encode() if body is not None else None,
         headers={'Content-Type':'application/json', **({'Authorization':'Bearer '+token} if token else {})},method=method)
     try:
-        with urllib.request.urlopen(req,timeout=5) as r:
+        with urllib.request.urlopen(req,timeout=120) as r:
             data=r.read(); return r.status, json.loads(data) if data else None
     except urllib.error.HTTPError as e:
         return e.code,None
@@ -61,7 +61,7 @@ with tempfile.TemporaryDirectory(prefix='copilot-verify-') as scratch:
         'CHAT_URL':chat_url,'ANALYTICS_URL':analytics_url,
         'CHAT_LISTEN':f'127.0.0.1:{chatport}','ANALYTICS_LISTEN':f'127.0.0.1:{analyticsport}',
         'ANALYTICS_ENDPOINT':analytics_url+'/api/v1/events'}
-    observed=[]
+    observed=[];observed_headers=[]
     class Collector(BaseHTTPRequestHandler):
         def log_message(self,*_):pass
         def do_POST(self):
@@ -69,10 +69,14 @@ with tempfile.TemporaryDirectory(prefix='copilot-verify-') as scratch:
             if length>2000000:self.send_error(413);return
             payload=self.rfile.read(length)
             observed.append((self.path,payload))
+            observed_headers.append(dict(self.headers))
             self.send_response(200);self.send_header('Content-Type','application/json');self.end_headers();self.wfile.write(b'{}')
     collector=ThreadingHTTPServer(('127.0.0.1',0),Collector)
     collector_thread=threading.Thread(target=collector.serve_forever,daemon=True);collector_thread.start()
     env['COPILOT_LOCAL_OTLP_ENDPOINT']=f'http://127.0.0.1:{collector.server_port}'
+    env['OTEL_EXPORTER_OTLP_HEADERS']='Authorization=metadata-synthetic-secret,x-private=metadata-synthetic-secret'
+    for signal_name in ('TRACES','METRICS','LOGS'):
+        env['OTEL_EXPORTER_OTLP_'+signal_name+'_HEADERS']='Authorization=metadata-synthetic-secret'
     env['OTEL_BSP_SCHEDULE_DELAY']='100';env['OTEL_BLRP_SCHEDULE_DELAY']='100';env['OTEL_METRIC_EXPORT_INTERVAL']='250'
     started=False
     try:
@@ -110,11 +114,26 @@ with tempfile.TemporaryDirectory(prefix='copilot-verify-') as scratch:
         check('Chat database role cannot CONNECT to Analytics database',denied.returncode!=0)
         check('unauthorized Chat write rejected',http(chat_url,'/api/v1/rooms',body={'id':'bad','name':'bad'})[0]==401)
         check('unauthorized Analytics read rejected',http(analytics_url,'/api/v1/events/count')[0]==401)
+        def mcp_request(method,params=None,extra=None):
+            params=params or {};params['_meta']={'io.modelcontextprotocol/protocolVersion':'2026-07-28','io.modelcontextprotocol/clientInfo':{'name':'local-verify','version':'0.1'},'io.modelcontextprotocol/clientCapabilities':{}}
+            headers={'Content-Type':'application/json','Authorization':'Bearer '+chat_token,'MCP-Protocol-Version':'2026-07-28','Mcp-Method':method,'Accept':'application/json, text/event-stream'}
+            if 'name' in params:headers['Mcp-Name']=params['name']
+            headers.update(extra or {})
+            request=urllib.request.Request(chat_url+'/api/v1/mcp',data=json.dumps({'jsonrpc':'2.0','id':1,'method':method,'params':params}).encode(),headers=headers)
+            try:
+                with urllib.request.urlopen(request,timeout=120) as response:return response.status,json.loads(response.read())
+            except urllib.error.HTTPError as e:return e.code,None
+        check('actual MCP modern server discovery',mcp_request('server/discover')[1]['result']['supportedVersions']==['2026-07-28'])
+        check('MCP catalog exposes only authorized readonly knowledge tool',mcp_request('tools/list')[1]['result']['tools'][0]['name']=='knowledge_search')
+        check('MCP rejects method/header mismatch',mcp_request('tools/list',extra={'Mcp-Method':'tools/call'})[0]==400)
+        check('MCP rejects untrusted browser Origin',mcp_request('tools/list',extra={'Origin':'https://untrusted.invalid'})[0]==403)
+        check('MCP cannot invoke file or arbitrary execution tools',mcp_request('tools/call',{'name':'delete_file','arguments':{'query':'anything'}})[0]==400)
         room='test-'+secrets.token_hex(8)
         check('unconfigured AI returns 503 without mock output',http(chat_url,'/api/v1/ai/reply',chat_token,{'room_id':room})[0]==503)
         check('room created',http(chat_url,'/api/v1/rooms',chat_token,{'id':room,'name':'本地測試'})[0]==201)
         status,message=http(chat_url,'/api/v1/messages',chat_token,{'room_id':room,'content':'transactional test'})
         check('message persisted',status==201)
+        check('nil message replay ID rejected before persistence',http(chat_url,'/api/v1/messages',chat_token,{'id':'00000000-0000-0000-0000-000000000000','room_id':room,'content':'invalid id'})[0]==400)
         event={'schema_version':1,'event_id':message['id'],'source_app':'web_chat','event_type':'message.persisted'}
         lookup='/api/v1/events/web_chat/'+message['id']
         wait(lambda:http(analytics_url,lookup,analytics_token)[0]==200)
@@ -138,7 +157,7 @@ with tempfile.TemporaryDirectory(prefix='copilot-verify-') as scratch:
         def member_http(cookie,path,body=None,csrf=True):
             req=urllib.request.Request(chat_url+path,data=json.dumps(body).encode() if body is not None else None,headers={'Content-Type':'application/json','Cookie':cookie,**({'X-Copilot-CSRF':'1'} if csrf else {})})
             try:
-                with urllib.request.urlopen(req,timeout=5) as response:
+                with urllib.request.urlopen(req,timeout=120) as response:
                     text=response.read();return response.status,json.loads(text) if text else None
             except urllib.error.HTTPError as e:return e.code,None
         alice_name='alice_'+secrets.token_hex(5);bob_name='bob_'+secrets.token_hex(5)
@@ -153,6 +172,30 @@ with tempfile.TemporaryDirectory(prefix='copilot-verify-') as scratch:
         check('logout revokes server-side session',member_http(bob,'/api/v1/messages?room_id='+private)[0]==401)
         run(['node','scripts/realtime-e2e.mjs'],env=env)
         check('real WebSocket two-client and room-isolation E2E')
+        # Seed reviewable, non-AI fixture to prove the real PostgreSQL/HTTP policy lifecycle.
+        suggestion=str(uuid.uuid4())
+        proposal=json.dumps({'summary':'測試資料只有事件次數。','action':'chat_context_messages','value':42,'rationale':'僅測試安全政策變更，不推論品質。'})
+        sql="INSERT INTO analysis_suggestions(id,target_app,metric_snapshot,summary,proposal) VALUES ('"+suggestion+"','web_chat','{\"rows\":[]}','測試資料只有事件次數。','"+proposal+"')"
+        run([PG/'psql',env['ANALYTICS_DATABASE_URL'],'-v','ON_ERROR_STOP=1','-c',sql],stdout=subprocess.DEVNULL)
+        route='/api/v1/rooms/'+room+'/suggestions/'+suggestion
+        admin_token=env['ANALYTICS_ADMIN_TOKEN']
+        check('pending suggestion cannot be applied',http(chat_url,route+'/apply',chat_token,{'confirmed':True})[0]==409)
+        check('cross-source proposal reads rejected',http(analytics_url,'/api/v1/suggestions/'+suggestion,pet_token)[0]==404)
+        check('non-admin suggestion review rejected',http(analytics_url,'/api/v1/suggestions/'+suggestion+'/review',analytics_token,{'decision':'approved','confirmed':True})[0]==401)
+        check('unapplied suggestion cannot be evaluated',http(analytics_url,'/api/v1/suggestions/'+suggestion+'/evaluate',admin_token,{'confirmed':True})[0]==409)
+        assert http(analytics_url,'/api/v1/suggestions/'+suggestion+'/review',admin_token,{'decision':'approved','confirmed':True})[0]==204
+        check('policy change needs explicit confirmation',http(chat_url,route+'/apply',chat_token,{'confirmed':False})[0]==400)
+        status,applied=http(chat_url,route+'/apply',chat_token,{'confirmed':True})
+        assert status==200 and applied['analytics_acknowledged'] and applied['value']==42
+        check('scoped policy adoption has stable idempotent receipt',http(chat_url,route+'/apply',chat_token,{'confirmed':True})[1]==applied)
+        actual=subprocess.check_output([PG/'psql',env['CHAT_DATABASE_URL'],'-At','-c',"SELECT context_messages FROM chat_room_policy WHERE room_id='"+room+"'"],text=True).strip()
+        check('adoption modifies actual room context limit',actual=='42')
+        status,rolled=http(chat_url,route+'/rollback',chat_token,{'confirmed':True})
+        assert status==200 and rolled['value']==30 and rolled['analytics_acknowledged']
+        check('policy rollback is acknowledged and idempotent',http(chat_url,route+'/rollback',chat_token,{'confirmed':True})[1]==rolled)
+        status,evaluation=http(analytics_url,'/api/v1/suggestions/'+suggestion+'/evaluate',admin_token,{'confirmed':True})
+        check('evaluation stores actual descriptive counts without a causal claim',status==200 and evaluation['after']['target_app']=='web_chat' and 'cannot prove causal impact' in evaluation['interpretation'])
+
         stop(chat);stop(analytics);chat=start('chat');analytics=start('analytics')
         check('history survives service restart',any(x['id']==message['id'] for x in http(chat_url,'/api/v1/messages?room_id='+room,chat_token)[1]))
         count=http(analytics_url,'/api/v1/events/count',analytics_token)[1]['total']
@@ -184,7 +227,7 @@ with tempfile.TemporaryDirectory(prefix='copilot-verify-') as scratch:
         assert status==201
         wait(lambda:http(analytics_url,'/api/v1/events/web_chat/'+recovered['id'],analytics_token)[0]==200)
         check('dispatcher recovers after PostgreSQL interruption')
-        if live_key:
+        if '--live-openai' in sys.argv:
             stop(chat)
             env['OPENAI_API_KEY']=live_key
             env['OPENAI_CHAT_MODEL']=os.environ.get('OPENAI_CHAT_MODEL','gpt-5.6-luna')
@@ -212,24 +255,54 @@ with tempfile.TemporaryDirectory(prefix='copilot-verify-') as scratch:
             check('completed real AI stream matches persisted message',any(row['id']==saved_id and row['content']==streamed for row in records))
             wait(lambda:http(analytics_url,'/api/v1/events/web_chat/'+saved_id,analytics_token)[0]==200)
             check('real AI answer emits durable Analytics event')
+            status,agent=http(chat_url,'/api/v1/ai/agent',chat_token,{'room_id':live_room,'question':'請使用知識庫工具找到本地驗證的實驗代碼，回答代碼、引用文件，並提出一個理解問題。'})
+            check('real OpenAI Function Calling through authenticated local MCP and strict JSON answer',status==200 and agent['steps'] and agent['follow_up_question'] and document['id'] in agent['sources'] and 'COMET-432' in agent['answer'])
+            wait(lambda:http(analytics_url,'/api/v1/events/web_chat/'+agent['id'],analytics_token)[0]==200)
+            check('completed Agent answer emits a durable Analytics event')
             check('knowledge document can be deleted',http(chat_url,'/api/v1/knowledge/'+document['id'],chat_token,method='DELETE')[0]==204)
+        if live_key:
+            env['OPENAI_API_KEY']=live_key
+            env['OPENAI_CHAT_MODEL']=os.environ.get('OPENAI_CHAT_MODEL','gpt-5.6-luna')
+            stop(analytics);analytics=start('analytics')
+            status,insight=http(analytics_url,'/api/v1/insights',env['ANALYTICS_ADMIN_TOKEN'],{'target_app':'web_chat'})
+            check('real OpenAI Analytics structured insight uses a persisted aggregate snapshot',status==200 and insight['snapshot']['rows'] and insight['proposal']['action']=='chat_context_messages' and insight['status']=='pending')
+
         wait(lambda:all(any(path==expected for path,_ in observed) for expected in ('/v1/traces','/v1/metrics','/v1/logs')))
         check('real local OTLP traces, metrics and logs received')
-        chat_ids=set();analytics_ids=set()
-        for path,payload in observed:
-            if path!='/v1/traces':continue
-            decoded=json.loads(payload)
-            for resource in decoded.get('resourceSpans',[]):
-                attrs={x['key']:x.get('value',{}).get('stringValue') for x in resource.get('resource',{}).get('attributes',[])}
-                service=attrs.get('service.name')
-                for scope in resource.get('scopeSpans',[]):
-                    for span in scope.get('spans',[]):
-                        values={x['key']:x.get('value',{}).get('stringValue') for x in span.get('attributes',[])}
-                        if service=='chat' and values.get('http.route')=='/api/v1/messages':chat_ids.add(span['traceId'])
-                        if service=='analytics' and values.get('http.route')=='/api/v1/events':analytics_ids.add(span['traceId'])
+        def trace_ids(expected_service,expected_route=None):
+            ids=set()
+            for path,payload in observed:
+                if path!='/v1/traces':continue
+                for resource in json.loads(payload).get('resourceSpans',[]):
+                    attrs={x['key']:x.get('value',{}).get('stringValue') for x in resource.get('resource',{}).get('attributes',[])}
+                    if attrs.get('service.name')!=expected_service:continue
+                    for scope in resource.get('scopeSpans',[]):
+                        for span in scope.get('spans',[]):
+                            values={x['key']:x.get('value',{}).get('stringValue') for x in span.get('attributes',[])}
+                            if expected_route is None or values.get('http.route')==expected_route:ids.add(span['traceId'])
+            return ids
+        chat_ids=trace_ids('chat','/api/v1/messages');analytics_ids=trace_ids('analytics','/api/v1/events')
         check('Chat Outbox and Analytics preserve W3C trace correlation',bool(chat_ids&analytics_ids))
 
         forbidden=[chat_token,analytics_token,ingest_token,pet_token,'transactional test','retry after outage','not committed']
+        if '--pet-gui' in sys.argv:
+            pet_suggestion=str(uuid.uuid4())
+            pet_proposal=json.dumps({'summary':'複習事件測試。','action':'pet_review_min_days','value':3,'rationale':'測試可回退設定，不推論學習品質。'})
+            sql="INSERT INTO analysis_suggestions(id,target_app,metric_snapshot,summary,proposal,status) VALUES ('"+pet_suggestion+"','desktop_pet','{\"rows\":[]}','複習事件測試。','"+pet_proposal+"','approved')"
+            run([PG/'psql',env['ANALYTICS_DATABASE_URL'],'-v','ON_ERROR_STOP=1','-c',sql],stdout=subprocess.DEVNULL)
+            native_env=env | {'PET_GUI_TEST_ANALYTICS':'true','PET_GUI_TEST_SUGGESTION':pet_suggestion}
+            run(['python3','scripts/pet-gui-verify.py','--analytics'],env=native_env)
+            summary=http(analytics_url,'/api/v1/events/summary',analytics_token)[1]
+            bytype={(row['source_app'],row['event_type']):row['total'] for row in summary}
+            check('native Pet policy apply and rollback acknowledged by Analytics',http(analytics_url,'/api/v1/suggestions/'+pet_suggestion,pet_token)[1]['status']=='rolled_back')
+            check('actual Pet GUI receipts and learning events delivered exactly once to Analytics',bytype.get(('desktop_pet','file.cleanup.succeeded'))==2 and bytype.get(('desktop_pet','learning.review.completed'))==1)
+            # Native file operations preserve traceparent into durable SQLite outbox.
+            time.sleep(.5)
+            pet_ids=trace_ids('desktop_pet')
+            analytics_ids=trace_ids('analytics','/api/v1/events')
+            check('Pet and Analytics preserve W3C trace correlation',bool(pet_ids&analytics_ids))
+            forbidden += ['安全隔離的測試記憶','Rust 的所有權如何避免 double free？','sample.txt','second.txt']
+        check('OTLP transport strips inherited authentication headers',all('metadata-synthetic-secret' not in str(headers) and 'Authorization' not in headers for headers in observed_headers))
         check('telemetry excludes credentials and message contents',all(value.encode() not in payload for value in forbidden for _,payload in observed))
         REPORT.parent.mkdir(parents=True,exist_ok=True)
         REPORT.write_text(json.dumps({'status':'passed','checks':results,'scope':'implemented reliability slice only; P9 incomplete','live_openai':bool(live_key),'openai_model':env.get('OPENAI_CHAT_MODEL') if live_key else None},ensure_ascii=False,indent=2)+'\n')
