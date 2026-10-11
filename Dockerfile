@@ -8,10 +8,12 @@ RUN --mount=type=cache,id=copilot-cargo-registry,target=/usr/local/cargo/registr
 COPY . .
 RUN --mount=type=cache,id=copilot-cargo-registry,target=/usr/local/cargo/registry,sharing=locked \
     --mount=type=cache,id=copilot-chat-wasm,target=/src/apps/chat_frontend/target,sharing=locked \
-    bash scripts/build-chat-ui.sh
+    find apps crates -type f \( -name '*.rs' -o -name '*.sql' -o -name Cargo.toml \) -exec touch {} + \
+    && bash scripts/build-chat-ui.sh
 RUN --mount=type=cache,id=copilot-cargo-registry,target=/usr/local/cargo/registry,sharing=locked \
     --mount=type=cache,id=copilot-services-target,target=/src/target,sharing=locked \
-    cargo build --locked --release -p day9-chat -p day9-analytics \
+    find apps crates -type f \( -name '*.rs' -o -name '*.sql' -o -name Cargo.toml \) -exec touch {} + \
+    && cargo build --locked --release -p day9-chat -p day9-analytics \
     && mkdir /out && cp target/release/day9-chat target/release/day9-analytics /out/
 
 FROM debian:bookworm-slim AS chat

@@ -1,4 +1,4 @@
-//! Day 9 跨系統最小事件契約；不包含訊息本文、路徑或識別個資。
+//! P9 跨系統明確事件契約；不包含訊息本文、路徑或識別個資。
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 

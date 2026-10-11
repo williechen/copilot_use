@@ -5,8 +5,8 @@ from http.server import ThreadingHTTPServer,BaseHTTPRequestHandler
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 PG = pathlib.Path(subprocess.check_output(['pg_config','--bindir'],text=True).strip())
 REPORT = pathlib.Path(os.environ.get('VERIFY_REPORT', ROOT / 'target/local-validation.json'))
-live_key=os.environ.get('OPENAI_API_KEY') if any(flag in sys.argv for flag in ('--live-openai','--live-insights')) else None
-if any(flag in sys.argv for flag in ('--live-openai','--live-insights')) and not live_key: raise SystemExit('OPENAI_API_KEY not configured')
+live_key=os.environ.get('OPENAI_API_KEY') if any(flag in sys.argv for flag in ('--live-openai','--live-insights','--browser-live')) else None
+if any(flag in sys.argv for flag in ('--live-openai','--live-insights','--browser-live')) and not live_key: raise SystemExit('OPENAI_API_KEY not configured')
 def interrupted(*_): raise KeyboardInterrupt
 signal.signal(signal.SIGTERM,interrupted)
 results=[]
@@ -264,6 +264,29 @@ with tempfile.TemporaryDirectory(prefix='copilot-verify-') as scratch:
         assert status==201
         wait(lambda:http(analytics_url,'/api/v1/events/web_chat/'+recovered['id'],analytics_token)[0]==200)
         check('dispatcher recovers after PostgreSQL interruption')
+        # Rotate fixture-only credentials through real process restart; no old credential grace.
+        old_chat=chat_token;old_read=analytics_token;old_ingest=ingest_token
+        chat_token=secrets.token_urlsafe(32);analytics_token=secrets.token_urlsafe(32);ingest_token=secrets.token_urlsafe(32)
+        env.update(CHAT_API_TOKEN=chat_token,ANALYTICS_API_TOKEN=analytics_token,ANALYTICS_CHAT_TOKEN=ingest_token)
+        stop(analytics);analytics=start('analytics')
+        check('old Analytics query key is revoked after rotation',http(analytics_url,'/api/v1/events/count',old_read)[0]==401 and http(analytics_url,'/api/v1/events/count',analytics_token)[0]==200)
+        rotated_event={'schema_version':1,'event_id':str(uuid.uuid4()),'source_app':'web_chat','event_type':'message.persisted'}
+        check('old source ingest key is revoked after rotation',http(analytics_url,'/api/v1/events',old_ingest,rotated_event)[0]==401)
+        stop(chat);chat=start('chat')
+        check('old Chat administrative key is revoked after rotation',http(chat_url,'/api/v1/rooms',old_chat)[0]==401 and http(chat_url,'/api/v1/rooms',chat_token)[0]==200)
+        rotated_id=str(uuid.uuid4());assert http(chat_url,'/api/v1/messages',chat_token,{'id':rotated_id,'room_id':room,'content':'credential rotation fixture'})[0]==201
+        wait(lambda:http(analytics_url,'/api/v1/events/web_chat/'+rotated_id,analytics_token)[0]==200)
+        check('new Chat/Analytics source keys preserve durable cross-service delivery')
+
+        if '--load' in sys.argv:
+            load_urls=[chat_url]
+            additional=[]
+            for index in range(4):
+                loadport=port();url=f'http://127.0.0.1:{loadport}';log=open(d/f'load-chat-{index}.log','a');handles.append(log)
+                process=subprocess.Popen([ROOT/'target/debug/day9-chat'],cwd=ROOT,env=env|{'CHAT_LISTEN':f'127.0.0.1:{loadport}'},stdout=log,stderr=log);processes.append(process);additional.append(process);wait(lambda:http(url,'/healthz')[0]==200);load_urls.append(url)
+            run(['node','scripts/realtime-load-e2e.mjs'],env=env|{'CHAT_LOAD_URLS':json.dumps(load_urls),'CHAT_LOAD_REPORT':str(ROOT/'target/realtime-load-validation.json')})
+            check('real 512-socket admission boundaries and 64-message private cross-process fan-out load')
+            for process in additional:stop(process)
         if '--live-openai' in sys.argv:
             stop(chat)
             env['OPENAI_API_KEY']=live_key
@@ -341,7 +364,7 @@ with tempfile.TemporaryDirectory(prefix='copilot-verify-') as scratch:
         chat_ids=trace_ids('chat','/api/v1/messages');analytics_ids=trace_ids('analytics','/api/v1/events')
         check('Chat Outbox and Analytics preserve W3C trace correlation',bool(chat_ids&analytics_ids))
 
-        forbidden=[chat_token,analytics_token,ingest_token,pet_token,'transactional test','retry after outage','not committed']
+        forbidden=([live_key] if live_key else [])+[chat_token,analytics_token,ingest_token,pet_token,'transactional test','retry after outage','not committed']
         if '--pet-gui' in sys.argv:
             pet_suggestion=str(uuid.uuid4())
             pet_proposal=json.dumps({'summary':'複習事件測試。','action':'pet_review_min_days','value':3,'rationale':'測試可回退設定，不推論學習品質。'})
@@ -364,10 +387,13 @@ with tempfile.TemporaryDirectory(prefix='copilot-verify-') as scratch:
         check('telemetry excludes credentials and message contents',all(value.encode() not in payload for value in forbidden for _,payload in observed))
         REPORT.parent.mkdir(parents=True,exist_ok=True)
         REPORT.write_text(json.dumps({'status':'passed','checks':results,'scope':'implemented reliability slice only; P9 incomplete','live_openai':bool(live_key),'openai_model':env.get('OPENAI_CHAT_MODEL') if live_key else None},ensure_ascii=False,indent=2)+'\n')
-        if '--browser' in sys.argv:
-            fixture={'chat_url':chat_url,'analytics_url':analytics_url,'username':'browser_'+secrets.token_hex(5),'password':secrets.token_urlsafe(24)}
+        if '--browser' in sys.argv or '--browser-live' in sys.argv:
+            if '--browser-live' in sys.argv:
+                stop(chat);chat=start('chat')
+            fixture={'chat_url':chat_url,'analytics_url':analytics_url,'analytics_read_token':analytics_token,'analytics_admin_token':env['ANALYTICS_ADMIN_TOKEN'],'username':'browser_'+secrets.token_hex(5),'password':secrets.token_urlsafe(24)}
             req=urllib.request.Request(chat_url+'/api/v1/auth/register',data=json.dumps({'username':fixture['username'],'password':fixture['password']}).encode(),headers={'Content-Type':'application/json','X-Copilot-CSRF':'1'})
             with urllib.request.urlopen(req) as response: assert response.status==201
+            run([PG/'psql',env['ANALYTICS_DATABASE_URL'],'-v','ON_ERROR_STOP=1','-c',"UPDATE product_events SET received_at=received_at-interval '1 day' WHERE event_id='"+message['id']+"'"],stdout=subprocess.DEVNULL)
             path=ROOT.parent/'browser-fixture.json';path.write_text(json.dumps(fixture));path.chmod(0o600)
             print('BROWSER_FIXTURE_READY',flush=True)
             control=ROOT.parent/'browser-control.txt'

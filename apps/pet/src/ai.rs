@@ -4,6 +4,7 @@ use crate::{
     state::{PetStore, now},
 };
 use serde_json::{Value, json};
+use sha2::{Digest, Sha256};
 use uuid::Uuid;
 impl PetStore {
     pub async fn talk(
@@ -81,18 +82,68 @@ impl PetStore {
             "Create a transparent PNG sprite sheet for this desktop pet profile: {profile}. Exact 4 columns and 4 rows equal cells, no text, no borders. Same character identity, proportions and colors in every cell. Row 1 idle; row 2 moving; row 3 happy; row 4 learning. Four coherent animation frames in each row. Entire character visible, centered, sufficient margin in each cell. Use all user-specified appearance/animation overrides. Species and personality must match profile."
         );
         let (png, width, height) = openai_adapter::generate_sprite(&prompt).await?;
-        sqlx::query("INSERT INTO assets(pet_id,png_base64,width,height,version,generated_at) VALUES (?,?,?,?,1,?) ON CONFLICT(pet_id) DO UPDATE SET png_base64=excluded.png_base64,width=excluded.width,height=excluded.height,version=assets.version+1,generated_at=excluded.generated_at")
-   .bind(pet.to_string()).bind(&png).bind(width).bind(height).bind(now()).execute(&self.pool).await?;
+        self.save_generated_asset(pet, &profile, &png, i64::from(width), i64::from(height))
+            .await?;
         Ok(json!({"png_base64":png,"width":width,"height":height}))
     }
+    async fn save_generated_asset(
+        &self,
+        pet: Uuid,
+        profile: &str,
+        png: &str,
+        width: i64,
+        height: i64,
+    ) -> Result<(), sqlx::Error> {
+        let changed=sqlx::query("INSERT INTO assets(pet_id,png_base64,width,height,version,generated_at,profile_hash) SELECT ?1,?2,?3,?4,1,?5,?6 WHERE EXISTS(SELECT 1 FROM pets WHERE id=?1 AND profile=?7) ON CONFLICT(pet_id)DO UPDATE SET png_base64=excluded.png_base64,width=excluded.width,height=excluded.height,version=assets.version+1,generated_at=excluded.generated_at,profile_hash=excluded.profile_hash")
+        .bind(pet.to_string()).bind(png).bind(width).bind(height).bind(now()).bind(format!("{:x}",Sha256::digest(profile.as_bytes()))).bind(profile).execute(&self.pool).await?;
+        if changed.rows_affected() != 1 {
+            return Err(sqlx::Error::Protocol(
+                "profile changed during image generation; result not applied".into(),
+            ));
+        }
+        Ok(())
+    }
     pub async fn asset(&self, pet: Uuid) -> Result<Value, sqlx::Error> {
-        let row: Option<(String, i64, i64)> =
-            sqlx::query_as("SELECT png_base64,width,height FROM assets WHERE pet_id=?")
-                .bind(pet.to_string())
-                .fetch_optional(&self.pool)
-                .await?;
-        Ok(row
-            .map(|(png, width, height)| json!({"png_base64":png,"width":width,"height":height}))
-            .unwrap_or(Value::Null))
+        let row:Option<(String,i64,i64,String,String)>=sqlx::query_as("SELECT a.png_base64,a.width,a.height,a.profile_hash,p.profile FROM assets a JOIN pets p ON p.id=a.pet_id WHERE a.pet_id=?").bind(pet.to_string()).fetch_optional(&self.pool).await?;
+        Ok(row.filter(|(_,_,_,hash,profile)|*hash==format!("{:x}",Sha256::digest(profile.as_bytes()))).map(|(png,width,height,_,_)|json!({"png_base64":png,"width":width,"height":height})).unwrap_or(Value::Null))
+    }
+}
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[tokio::test]
+    async fn stale_images_never_replace_or_render_a_changed_profile() {
+        let path =
+            std::env::temp_dir().join(format!("pet-image-profile-{}.sqlite", Uuid::new_v4()));
+        let store = PetStore::open(&path).await.unwrap();
+        let pet = Uuid::new_v4();
+        let mut profile: PetProfile =
+            serde_json::from_str(r#"{"名字":"原始","種類":"鳥","喜好":[],"個性":[],"興趣":[]}"#)
+                .unwrap();
+        store.save_profile(pet, &profile).await.unwrap();
+        let before = serde_json::to_string(&profile).unwrap();
+        store
+            .save_generated_asset(pet, &before, "fixture", 200, 200)
+            .await
+            .unwrap();
+        assert_eq!(store.asset(pet).await.unwrap()["png_base64"], "fixture");
+        profile.name = "變更".into();
+        store.save_profile(pet, &profile).await.unwrap();
+        assert!(store.asset(pet).await.unwrap().is_null());
+        assert!(
+            store
+                .save_generated_asset(pet, &before, "stale", 200, 200)
+                .await
+                .is_err()
+        );
+        assert_eq!(
+            sqlx::query_scalar::<_, String>("SELECT png_base64 FROM assets")
+                .fetch_one(&store.pool)
+                .await
+                .unwrap(),
+            "fixture"
+        );
+        store.pool.close().await;
+        std::fs::remove_file(path).unwrap();
     }
 }

@@ -24,7 +24,7 @@ use windows_sys::{
             BY_HANDLE_FILE_INFORMATION, CreateFileW, FILE_ADD_FILE, FILE_APPEND_DATA,
             FILE_ATTRIBUTE_DIRECTORY, FILE_ATTRIBUTE_NORMAL, FILE_ATTRIBUTE_REPARSE_POINT,
             FILE_FLAG_BACKUP_SEMANTICS, FILE_FLAG_OPEN_REPARSE_POINT, FILE_READ_ATTRIBUTES,
-            FILE_READ_DATA, FILE_SHARE_READ, FILE_SHARE_WRITE, FILE_WRITE_DATA,
+            FILE_READ_DATA, FILE_SHARE_DELETE, FILE_SHARE_READ, FILE_SHARE_WRITE, FILE_WRITE_DATA,
             GetFileInformationByHandle, GetFinalPathNameByHandleW, OPEN_EXISTING,
         },
         System::{
@@ -518,7 +518,7 @@ impl PinnedRoot {
             CreateFileW(
                 path.as_ptr(),
                 FILE_READ_DATA | FILE_ADD_FILE | FILE_READ_ATTRIBUTES | 0x00020000 | 0x00100000,
-                FILE_SHARE_READ | FILE_SHARE_WRITE,
+                FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
                 std::ptr::null(),
                 OPEN_EXISTING,
                 FILE_FLAG_BACKUP_SEMANTICS | FILE_FLAG_OPEN_REPARSE_POINT,
@@ -593,13 +593,19 @@ impl PinnedRoot {
             true,
             true,
         )?;
-        log.write_all(&serde_json::to_vec(&record).map_err(|_| CleanupError::UnsafeItem)?)?;
+        let encoded = serde_json::to_vec(&record).map_err(|_| CleanupError::UnsafeItem)?;
+        if encoded.len() > 7168 {
+            return Err(CleanupError::UnsafeItem);
+        }
+        log.write_all(&encoded)?;
         log.write_all(b"\n")?;
         log.sync_all()?;
         set_descriptor(&file, &private_descriptor()?)?;
         if let Err(error) = rename(&file, &directory, &name) {
-            restore_security(&file, &record.original_security)
-                .map_err(|_| CleanupError::RecoveryRequired(id))?;
+            restore_security(&file, &record.original_security).map_err(|e| {
+                eprintln!("restore_security_failed: {e}");
+                CleanupError::RecoveryRequired(id)
+            })?;
             return Err(error);
         }
         Ok(CleanupReceipt {
@@ -629,8 +635,10 @@ impl PinnedRoot {
                 true,
                 false,
             )?;
-            restore_security(&file, &record.original_security)
-                .map_err(|_| CleanupError::RecoveryRequired(id))?;
+            restore_security(&file, &record.original_security).map_err(|e| {
+                eprintln!("restore_security_failed: {e}");
+                CleanupError::RecoveryRequired(id)
+            })?;
             return Ok(RestoreReceipt {
                 operation_id: restore_id,
                 quarantine_operation_id: id,
@@ -667,8 +675,10 @@ impl PinnedRoot {
             log.sync_all()?;
         }
         rename(&file, &self.directory, &record.preview.file_name)?;
-        restore_security(&file, &record.original_security)
-            .map_err(|_| CleanupError::RecoveryRequired(id))?;
+        restore_security(&file, &record.original_security).map_err(|e| {
+            eprintln!("restore_security_failed: {e}");
+            CleanupError::RecoveryRequired(id)
+        })?;
         Ok(RestoreReceipt {
             operation_id: restore_id,
             quarantine_operation_id: id,
@@ -775,10 +785,20 @@ mod tests {
             .unwrap();
         assert!(root.quarantine(&item).is_err());
         drop(writer);
-        assert!(std::fs::rename(&path, path.with_extension("moved")).is_err());
+        let moved = path.with_extension("moved");
+        std::fs::rename(&path, &moved).unwrap();
+        std::fs::create_dir(&path).unwrap();
+        std::fs::write(path.join("a.txt"), b"unrelated").unwrap();
+        let receipt = root.quarantine(&item).unwrap();
+        assert_eq!(std::fs::read(path.join("a.txt")).unwrap(), b"unrelated");
+        assert_eq!(
+            std::fs::read(moved.join(".pet-quarantine").join(receipt.quarantined_file)).unwrap(),
+            b"original"
+        );
         assert!(root.preview("../a.txt").is_err());
         assert!(root.preview("a.txt:stream").is_err());
         drop(root);
         std::fs::remove_dir_all(path).unwrap();
+        std::fs::remove_dir_all(moved).unwrap();
     }
 }

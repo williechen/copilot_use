@@ -42,6 +42,9 @@ impl PetStore {
             .bind(path.to_str().ok_or("invalid snapshot path")?)
             .execute(&self.pool)
             .await?;
+        if std::fs::metadata(&path)?.len() > 268435456 {
+            return Err("snapshot exceeds 256 MiB".into());
+        }
         let bytes = std::fs::read(&path)?;
         let snapshot = Snapshot {
             id,
@@ -53,8 +56,16 @@ impl PetStore {
             directory.join("manifest.json"),
             serde_json::to_vec(&snapshot)?,
         )?;
-        std::fs::File::open(&path)?.sync_all()?;
-        std::fs::File::open(directory.join("manifest.json"))?.sync_all()?;
+        std::fs::OpenOptions::new()
+            .read(true)
+            .write(true)
+            .open(&path)?
+            .sync_all()?;
+        std::fs::OpenOptions::new()
+            .read(true)
+            .write(true)
+            .open(directory.join("manifest.json"))?
+            .sync_all()?;
         #[cfg(unix)]
         std::fs::File::open(directory)?.sync_all()?;
         Ok(snapshot)
@@ -74,10 +85,16 @@ impl PetStore {
                 continue;
             };
             let file = item.path().join("manifest.json");
+            if !file.exists() {
+                continue;
+            }
             if std::fs::symlink_metadata(&file)?.file_type().is_symlink() {
                 continue;
             }
-            let bytes = std::fs::read(file)?;
+            let mut bytes = Vec::new();
+            std::fs::File::open(file)?
+                .take(4097)
+                .read_to_end(&mut bytes)?;
             if bytes.len() > 4096 {
                 continue;
             }
@@ -149,7 +166,13 @@ impl PetStore {
             file.write_all(&bytes)?;
             file.sync_all()?;
         }
-        let restored = self.restore_verified(&temporary).await;
+        let restored = async {
+            // Upgrade only the checked private copy; preserve the original older snapshot.
+            let upgraded = PetStore::open(&temporary).await?;
+            upgraded.pool.close().await;
+            self.restore_verified(&temporary).await
+        }
+        .await;
         let _ = std::fs::remove_file(temporary);
         restored?;
         Ok(before)
@@ -176,6 +199,7 @@ impl PetStore {
  sqlx::query(delete).execute(&mut *connection).await?;
  sqlx::query(copy).execute(&mut *connection).await?;
 }
+                sqlx::query("DELETE FROM main.settings WHERE key='active_pet' OR key IN(SELECT 'interaction:'||id FROM snapshot.pets UNION SELECT 'recall_after:'||id FROM snapshot.pets)").execute(&mut *connection).await?;
                 sqlx::query("INSERT INTO main.settings SELECT * FROM snapshot.settings WHERE true ON CONFLICT(key)DO UPDATE SET value=excluded.value").execute(&mut *connection).await?;
                 Ok::<(),sqlx::Error>(())
             }.await;
@@ -194,6 +218,94 @@ impl PetStore {
 mod tests {
     use super::*;
     #[tokio::test]
+    async fn older_snapshot_is_upgraded_in_private_copy_without_changing_original() {
+        let dir = std::env::temp_dir().join(format!("pet-backup-upgrade-{}", Uuid::new_v4()));
+        std::fs::create_dir(&dir).unwrap();
+        let store = PetStore::open(&dir.join("pet.sqlite")).await.unwrap();
+        let pet = Uuid::new_v4();
+        let profile =
+            serde_json::from_str(r#"{"名字":"原始","種類":"鳥","喜好":[],"個性":[],"興趣":[]}"#)
+                .unwrap();
+        store.save_profile(pet, &profile).await.unwrap();
+        let memory = Uuid::new_v4();
+        store.save_memory(pet, memory, "before").await.unwrap();
+        let mut snapshot = store.create_snapshot().await.unwrap();
+        let directory = store.backups().unwrap().join(snapshot.id.to_string());
+        let path = directory.join("snapshot.sqlite");
+        let old = sqlx::SqlitePool::connect_with(
+            sqlx::sqlite::SqliteConnectOptions::new().filename(&path),
+        )
+        .await
+        .unwrap();
+        sqlx::query("ALTER TABLE assets DROP COLUMN profile_hash")
+            .execute(&old)
+            .await
+            .unwrap();
+        sqlx::query("DELETE FROM _sqlx_migrations WHERE version=202610120022")
+            .execute(&old)
+            .await
+            .unwrap();
+        old.close().await;
+        let bytes = std::fs::read(&path).unwrap();
+        snapshot.sha256 = format!("{:x}", Sha256::digest(&bytes));
+        snapshot.bytes = bytes.len() as u64;
+        std::fs::write(
+            directory.join("manifest.json"),
+            serde_json::to_vec(&snapshot).unwrap(),
+        )
+        .unwrap();
+        store.save_memory(pet, memory, "after").await.unwrap();
+        store.restore_snapshot(snapshot.id, true).await.unwrap();
+        assert_eq!(store.memories(pet).await.unwrap()[0].content, "before");
+        assert_eq!(std::fs::read(&path).unwrap(), bytes);
+        let original = sqlx::SqlitePool::connect_with(
+            sqlx::sqlite::SqliteConnectOptions::new()
+                .filename(&path)
+                .read_only(true),
+        )
+        .await
+        .unwrap();
+        assert_eq!(
+            sqlx::query_scalar::<_, i64>(
+                "SELECT count(*) FROM _sqlx_migrations WHERE version=202610120022"
+            )
+            .fetch_one(&original)
+            .await
+            .unwrap(),
+            0
+        );
+        original.close().await;
+        store.pool.close().await;
+        std::fs::remove_dir_all(dir).unwrap();
+    }
+    #[tokio::test]
+    async fn restore_write_failure_rolls_back_all_user_data_and_preserves_safety_snapshot() {
+        let dir = std::env::temp_dir().join(format!("pet-backup-fault-{}", Uuid::new_v4()));
+        std::fs::create_dir(&dir).unwrap();
+        let store = PetStore::open(&dir.join("pet.sqlite")).await.unwrap();
+        let pet = Uuid::new_v4();
+        let profile =
+            serde_json::from_str(r#"{"名字":"原始","種類":"鳥","喜好":[],"個性":[],"興趣":[]}"#)
+                .unwrap();
+        store.save_profile(pet, &profile).await.unwrap();
+        let id = Uuid::new_v4();
+        store.save_memory(pet, id, "before").await.unwrap();
+        let snapshot = store.create_snapshot().await.unwrap();
+        store.save_memory(pet, id, "after").await.unwrap();
+        sqlx::query("CREATE TRIGGER reject_snapshot_insert BEFORE INSERT ON memories BEGIN SELECT RAISE(ABORT,'injected fixture fault');END").execute(&store.pool).await.unwrap();
+        assert!(store.restore_snapshot(snapshot.id, true).await.is_err());
+        assert_eq!(store.memories(pet).await.unwrap()[0].content, "after");
+        assert_eq!(store.snapshots().unwrap().len(), 2);
+        sqlx::query("DROP TRIGGER reject_snapshot_insert")
+            .execute(&store.pool)
+            .await
+            .unwrap();
+        store.restore_snapshot(snapshot.id, true).await.unwrap();
+        assert_eq!(store.memories(pet).await.unwrap()[0].content, "before");
+        store.pool.close().await;
+        std::fs::remove_dir_all(dir).unwrap();
+    }
+    #[tokio::test]
     async fn snapshots_restore_profiles_memories_and_assets_without_losing_delivery_or_new_pets() {
         let dir = std::env::temp_dir().join(format!("pet-backup-{}", Uuid::new_v4()));
         std::fs::create_dir(&dir).unwrap();
@@ -206,7 +318,7 @@ mod tests {
         let memory = Uuid::new_v4();
         store.save_memory(pet, memory, "before").await.unwrap();
         store.add_card(pet, "Q", "A").await.unwrap();
-        sqlx::query("INSERT INTO assets VALUES(?,?,200,200,1,0)")
+        sqlx::query("INSERT INTO assets(pet_id,png_base64,width,height,version,generated_at) VALUES(?,?,200,200,1,0)")
             .bind(pet.to_string())
             .bind("base64-fixture")
             .execute(&store.pool)

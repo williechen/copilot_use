@@ -96,6 +96,7 @@ window.addEventListener('error',e=>window.__PET_LOAD_ERROR=e.message);window.add
  do{savedProfile=JSON.parse((await invoke('list_pets')).find(x=>x.id===pet).profile);if(savedProfile['外觀']?.['顏色']==='翠綠色')break;await new Promise(r=>setTimeout(r,25));}while(Date.now()<profileDeadline);
  assert(savedProfile['外觀']['顏色']==='翠綠色','advanced override UI persisted');
  const memorySection=[...document.querySelectorAll('section')].find(x=>x.querySelector('h2')?.textContent==='可管理的記憶');
+ await waitUntil(()=>[...memorySection.querySelectorAll('article')].some(x=>x.textContent.includes('ASTRO-771')),'memory UI load after profile save');
  const memoryRow=[...memorySection.querySelectorAll('article')].find(x=>x.textContent.includes('ASTRO-771'));
  memoryRow.querySelector('button').click();const editor=memorySection.querySelector('textarea');editor.value='edited ASTRO-771 test memory';editor.dispatchEvent(new Event('input',{bubbles:true}));
  [...memorySection.querySelectorAll('button')].find(x=>x.textContent==='保存記憶').click();
@@ -124,6 +125,13 @@ window.addEventListener('error',e=>window.__PET_LOAD_ERROR=e.message);window.add
   do {outbox=await invoke('outbox_status');if(outbox.delivered>=4&&!outbox.pending&&!outbox.leased&&!outbox.blocked)break;await new Promise(r=>setTimeout(r,100));}while(Date.now()<deadline);
   assert(outbox.delivered>=4&&!outbox.pending&&!outbox.leased&&!outbox.blocked,'actual Pet to Analytics delivery');
  }
+ // Wait for the actual UI timer, shared between the settings and floating windows.
+ await invoke('add_card',{pet,question:'主動回想測試題：Rust 所有權',answer:'只有一個擁有者'});
+ const proactiveControl=document.querySelector('#pet-proactive');proactiveControl.checked=true;proactiveControl.dispatchEvent(new Event('change',{bubbles:true}));document.querySelector('#save-interaction').click();
+ const proactiveDeadline=Date.now()+70000;
+ while(!document.querySelector('.recall-prompt')?.textContent.includes('主動回想測試題')){if(Date.now()>proactiveDeadline)throw Error('actual proactive recall timer did not display');await new Promise(r=>setTimeout(r,100));}
+ assert(await invoke('recall_prompt')===null,'displayed reminder is rate limited across windows');
+ document.querySelector('.recall-prompt button').click();
  if(window.__PET_TEST_UPDATER){
   const available=await invoke('check_local_update');assert(available.status==='available'&&available.version==='0.1.1','local signed update discovered');
   let unconfirmedInstall=false;try{await invoke('install_local_update',{id:available.id,confirmed:false})}catch(_){unconfirmedInstall=true}assert(unconfirmedInstall,'updater installation requires confirmation');

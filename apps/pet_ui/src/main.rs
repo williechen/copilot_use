@@ -12,6 +12,8 @@ extern "C" {
     fn current_window() -> JsValue;
     #[wasm_bindgen(js_namespace=["window","__TAURI__","event"],js_name=listen)]
     fn listen(event: &str, handler: &js_sys::Function) -> js_sys::Promise;
+    #[wasm_bindgen(js_namespace=["window","__TAURI__","event"],js_name=emit)]
+    fn emit_event(event:&str,payload:JsValue)->js_sys::Promise;
 }
 async fn call(command: &str, args: Value) -> Result<Value, String> {
     let value = js_sys::JSON::parse(&args.to_string()).map_err(|_| "參數格式錯誤".to_owned())?;
@@ -54,11 +56,16 @@ fn animation_duration(value: Value) -> String {
 #[component]
 fn RecallPrompt() -> impl IntoView {
     let question = RwSignal::new(String::new());
+    leptos::task::spawn_local(async move {
+        let handler=Closure::<dyn FnMut(JsValue)>::new(move |v:JsValue|{if let Ok(raw)=js_sys::JSON::stringify(&v)&&let Some(raw)=raw.as_string()&&let Ok(value)=serde_json::from_str::<Value>(&raw)&&let Some(q)=value["payload"]["question"].as_str(){question.set(q.into());}});
+        let _=wasm_bindgen_futures::JsFuture::from(listen("recall-prompt",handler.as_ref().unchecked_ref())).await;handler.forget();
+    });
     let poll = move || {
         leptos::task::spawn_local(async move {
             if let Ok(v) = call("recall_prompt", json!({})).await {
                 if let Some(q) = v["question"].as_str() {
-                    question.set(q.into())
+                    question.set(q.into());
+                    if let Ok(payload)=js_sys::JSON::parse(&v.to_string()){let _=wasm_bindgen_futures::JsFuture::from(emit_event("recall-prompt",payload)).await;}
                 }
             }
         })
@@ -254,7 +261,7 @@ fn Settings() -> impl IntoView {
        <section><h2>"我的寵物"</h2><select on:change=move |e|load(event_target_value(&e))><option value="">"選擇寵物"</option>{move ||pets.get().into_iter().map(|p|{let id=p["id"].as_str().unwrap_or("").to_owned();let profile:Value=serde_json::from_str(p["profile"].as_str().unwrap_or("{}")).unwrap_or_default();view!{<option value=id>{profile["名字"].as_str().unwrap_or("寵物").to_owned()}</option>}}).collect_view()}</select>
        <button on:click=move |_|{pet.set(uuid());name.set(String::new());species.set(String::new());likes.set(String::new());personality.set(String::new());interests.set(String::new());color.set(String::new());style.set(String::new());breed.set(String::new());actions.set(String::new());speed.set(String::new());memory.set(String::new());memory_edit_id.set(String::new());memories.set(Vec::new());cards.set(Vec::new());}>"新增寵物"</button>
        <div class="pet" class:animated=move ||!sprite.get().is_empty() style:background-image=move ||sprite.get() style:background-position-y=move ||animation_y(animation.get()) style:animation-duration=move ||animation_duration(animation.get())><Show when=move ||sprite.get().is_empty()><span>"🐾"</span></Show></div>
-    <small>{move ||if sprite.get().is_empty() {"200×200 顯示區；尚未生成素材"}else{"200×200 角色動畫；素材已快取"}}</small>
+    <small>{move ||if sprite.get().is_empty() {"200×200 顯示區；目前設定尚無可用素材"}else{"200×200 角色動畫；素材已快取"}}</small>
     <label>"目前動作"<select id="pet-action" prop:value=move ||animation.get()["action"].as_str().unwrap_or("idle").to_owned() on:change=move |e|animation.update(|v|v["action"]=json!(event_target_value(&e)))><option value="idle">"待機"</option><option value="moving">"移動"</option><option value="happy">"開心"</option><option value="learning">"學習"</option></select></label>
     <label>"播放速度"<select id="pet-speed" prop:value=move ||animation.get()["speed"].as_str().unwrap_or("normal").to_owned() on:change=move |e|animation.update(|v|v["speed"]=json!(event_target_value(&e)))><option value="slow">"慢"</option><option value="normal">"正常"</option><option value="fast">"快"</option></select></label>
     <label><input id="pet-proactive" type="checkbox" prop:checked=move ||animation.get()["proactive"]==true on:change=move |e|animation.update(|v|v["proactive"]=json!(event_target_checked(&e)))/>"主動顯示本地到期複習題（每小時最多一次）"</label>
@@ -274,7 +281,7 @@ fn Settings() -> impl IntoView {
         <label>"品種"<input maxlength="256" prop:value=move ||breed.get() on:input=move |e|breed.set(event_target_value(&e))/></label>
         <label>"動作（逗號分隔）"<input prop:value=move ||actions.get() on:input=move |e|actions.set(event_target_value(&e))/></label>
         <label>"速度描述"<input maxlength="256" prop:value=move ||speed.get() on:input=move |e|speed.set(event_target_value(&e))/></label></details>
-       <button on:click=move |_|{let id=pet.get();let optional=|s:String|if s.trim().is_empty(){Value::Null}else{json!(s)};let profile=json!({"名字":name.get(),"種類":species.get(),"喜好":strings(likes.get()),"個性":strings(personality.get()),"興趣":strings(interests.get()),"外觀":{"顏色":optional(color.get()),"風格":optional(style.get()),"品種":optional(breed.get())},"動畫":{"動作":if actions.get().trim().is_empty(){Value::Null}else{json!(strings(actions.get()))},"速度":optional(speed.get())}});leptos::task::spawn_local(async move{match call("save_profile",json!({"id":id,"profile":profile})).await{Ok(_)=>refresh(),Err(e)=>error.set(e)}});}>"保存設定"</button></section>
+       <button on:click=move |_|{let id=pet.get();let optional=|s:String|if s.trim().is_empty(){Value::Null}else{json!(s)};let profile=json!({"名字":name.get(),"種類":species.get(),"喜好":strings(likes.get()),"個性":strings(personality.get()),"興趣":strings(interests.get()),"外觀":{"顏色":optional(color.get()),"風格":optional(style.get()),"品種":optional(breed.get())},"動畫":{"動作":if actions.get().trim().is_empty(){Value::Null}else{json!(strings(actions.get()))},"速度":optional(speed.get())}});leptos::task::spawn_local(async move{match call("save_profile",json!({"id":id,"profile":profile})).await{Ok(_)=>{refresh();load(id)},Err(e)=>error.set(e)}});}>"保存設定"</button></section>
        <section><h2>"AI 對話與教學"</h2><p>"回答會使用此寵物的設定、記憶與對話歷史並傳送至 OpenAI；可先修改或刪除不想使用的記憶。"</p><textarea prop:value=move ||prompt.get() on:input=move |e|prompt.set(event_target_value(&e)) placeholder="輸入問題或想學習的主題"></textarea><button disabled=move ||busy.get() on:click=move |_|{let pid=pet.get();let text=prompt.get();let rid=uuid();request.set(rid.clone());reply.set(String::new());busy.set(true);leptos::task::spawn_local(async move{match call("pet_talk",json!({"pet":pid,"request":rid,"text":text})).await{Ok(v)=>{if pet.get_untracked()==pid && request.get_untracked()==rid {reply.set(v.as_str().unwrap_or("").to_owned());}},Err(e)=>{if pet.get_untracked()==pid {error.set(e);}}}busy.set(false);});}>"提問"</button><pre aria-live="polite">{move ||reply.get()}</pre>
     <label><input type="checkbox" on:change=move |e|allow_tools.set(event_target_checked(&e))/>"允許唯讀記憶檢索工具，將相關記憶交給 OpenAI 回答"</label>
     <button disabled=move ||busy.get() ||!allow_tools.get() on:click=move |_| {

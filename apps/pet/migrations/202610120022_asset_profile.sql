@@ -1,0 +1,1 @@
+ALTER TABLE assets ADD COLUMN profile_hash TEXT NOT NULL DEFAULT '';

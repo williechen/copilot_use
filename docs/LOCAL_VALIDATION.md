@@ -1,6 +1,6 @@
 # 本地驗證紀錄（2026-10-12）
 
-**P9 未完成。** 使用者取消正式部署；不建立正式完成 Release/Tag，不產生 Day 教學。`rust_ai_chat` 未修改。
+**P9 驗收進行中，尚未固定正式 Release/Tag。** 使用者取消對外部署，仍要求本地 Docker 正式建置與測試。通過必要驗收後才固定正式版本，並建立 `copilot_use` 教學對齊分支。`rust_ai_chat` 保持唯讀。教學測試隨各模組／專案放置，不集中在最外層 `tests/`；正式 tag 前不產生 Day 教學。
 
 ## 基準與證據範圍
 
@@ -27,20 +27,28 @@
 
 命令與設定見 [操作說明](DEPLOYMENT.md)。`local-validation-result.json` 是最近一次基礎驗證的局部結果；`live_openai:false` 不代表該次執行有付費呼叫。GUI、生圖、live RAG 各有獨立證據，不能以基礎測試報告取代。
 
-## 尚未完成／未驗證
+## 最新驗收與剩餘門檻
 
-| 範圍 | 必須補齊 |
+`f9ff699a969dcf94fb1e2eff99df05a7c752c02f` 的 CI：Rust/PostgreSQL、Docker Compose、故障恢復、Linux desktop、macOS desktop 通過；Windows desktop 失敗。不可宣稱六項全過。Windows 實際測試發現唯讀 handle 無法 flush 備份，以及回收檔案 ACL 還原失敗；目前修正需要新 SHA 的 Windows 實跑確認。
+
+最新本地工作樹已通過（尚需提交後 CI，結果不能冒稱來自 f9ff699）：
+- 真實 512 個 cookie WebSocket、五個 Chat 程序：全域／每人／每程序超限拒絕；64 個併發私人訊息各送至 32 個訂閱者一次，history 與 Analytics 精確事件 ID 一致。p50 49.63 ms，p95 64.24 ms，範圍僅此本機合成負載。
+- 真實瀏覽器 presence／typing／跨客戶端訊息；OpenAI Persona 建立、保存、完成發言、切換房間後取消原 run，收據保留一個已完成回合。
+- 真實 OpenAI 只選擇 Analytics 快照事實索引；瀏覽器審核、Chat 採用收據、描述性前後比較、回退及狀態更新通過。
+- Linux GUI 實際到期題主動提醒顯示與一小時冷卻通過。
+- 備份交易故障完整回滾、操作前快照保留，以及舊 schema 在私人工作副本升級後還原通過；原始備份 bytes 完全不变。
+- 真實 Chat 管理／Analytics 查詢／來源 ingest 金鑰輪替：舊憑證撤銷、新憑證跨服務投遞成功。
+- profile hash 阻止過時生圖結果覆蓋或顯示已修改角色；unit 通過，新版真實生圖仍待核對。
+
+| 必要門檻 | 剩餘驗證 |
 |---|---|
-| Chat 即時產品 | presence/typing/跨程序 fan-out 已以兩個 Chat 程序驗證；仍需更完整負載與故障界線、瀏覽器互動驗收 |
-| Chat AI | Persona CRUD/房主權限、八角色上限、輪流發言/冷卻/取消/獨立記憶/180秒時限/請求預算/Strict JSON/MCP 引用已實作；真實雙角色、重送、預算停止、COMET-432 工具引用及原子交易通過。瀏覽器 Persona 互動尚須驗收 |
-| 共同 AI | Chat/Pet 的本地唯讀 MCP/Agent 已驗證；更多工具、完整權限及品質驗收仍缺 |
-| Pet 完整互動 | 四種動畫列、三種速度、每寵物持久設定與 GUI 操作已通過。預設關閉的本地到期題提醒有跨程序一小時冷卻；AI 使用實際複習摘要調整提示，真實串流通過。更完整的主動提醒顯示仍須驗收 |
-| Pet 檔案安全 | Linux/macOS descriptor-based Trash/restore 已實作，Linux 真實 GUI/SQLite/Analytics 已驗證；Windows handle-relative NT Adapter 已實作並通過 Windows 目標交叉編譯；macOS/Windows 的實際安全/完整 GUI 與故障驗證等待新 CI |
-| Pet 投遞與備份 | SQLite online snapshot 含資料與生成素材；SHA256/schema/integrity 檢查、交易還原、操作前快照、保留新增寵物/現有投遞/檔案收據已通過 unit 與真實 GUI；還原故障回滾仍須補驗 |
-| Analytics | 登入/登出與還原事件已加入，仍需核對其他完整事件目錄、AI 只選擇快照事實索引，服務產生一至三句可核對摘要；索引、數字及目標邊界 unit 通過，新的真實 OpenAI grounding 待驗、長期追蹤；新洞察/審核/採用/回退/描述性比較已本地實測，Dashboard 新控制尚需瀏覽器操作驗證 |
-| 安全/維運 | 四份 Cargo.lock RustSec 掃描沒有已知漏洞，但 paste/proc-macro-error 有未維護警告；Native glib 0.18.5 的 RUSTSEC-2024-0429 已回移官方修補並以 release 測試；版本警告與回移證據需一起核對；仍需負載/滲透/金鑰輪替、Session 濫用控制、全部故障邊界、UUID/VARCHAR 雙模式驗證 |
-| Docker/CI/安裝 | Docker 29.1.3 與 Compose 2.40.3 的實際 release image 建置及16項容器整合成功；舊映像來源工作樹 dirty，新增功能仍須固定來源 SHA 後重建驗證。`990f703` 六項 CI 全通過，含三平台包建置；新的回收區/fan-out/事件/安全回移仍須新 SHA CI。本地 updater 的真實簽章下載、版本不符/套件篡改/遠端URL/未确认安装拒絕通過；實際更新安裝與 Windows/macOS runtime 全驗收尚缺 |
-| 最終固定 | 所有必要功能通過後才可正式 release/tag；目前未達門檻 |
+| Windows 安全與 GUI | 新 SHA 上實跑備份 flush、handle-relative ACL 還原、安全測試、WebView GUI 與 NSIS |
+| 安裝包 runtime | 對三平台產生的安裝包／app 實際執行驗收；debug GUI 成功不取代此門檻 |
+| Updater | 真實有效簽章、篡改、版本不符、遠端 URL、未確認拒絕已過 Linux/macOS GUI；實際更新安裝尚未驗證 |
+| Analytics Dashboard | 新 Taipei 日期預設與非零封存／還原 UI 須驗證 |
+| 身份／架構 | 核對 UUID domain 與 UUID/VARCHAR storage port；正式 tag 後在新 branch 對齊唯讀需求目錄與模組內測試 |
+| 安全／來源固定 | 最新四份 lock audit、手工 GLib 回移證據、新提交全部 CI；同一乾淨 SHA 的 Docker 重建、容器測試、安裝包與輸出校驗 |
+| 交付固定 | 更新文件、移除無用暫存、完成上列門檻後才正式 release/tag；目前尚未完成 |
 
 ## 清理範圍
 

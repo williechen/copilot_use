@@ -260,13 +260,14 @@ pub async fn run_dispatcher(
     let store = OutboxStore::new(pool);
     loop {
         // 暫時性 DB 故障不能永久終止投遞背景工作；不輸出敏感錯誤內容。
-        if dispatch_once(&store, &client, endpoint, token)
-            .await
-            .is_err()
-        {
-            eprintln!("outbox_dispatch_failed");
+        match dispatch_once(&store, &client, endpoint, token).await {
+            Ok(true) => tokio::task::yield_now().await,
+            Ok(false) => tokio::time::sleep(Duration::from_millis(500)).await,
+            Err(_) => {
+                eprintln!("outbox_dispatch_failed");
+                tokio::time::sleep(Duration::from_millis(500)).await;
+            }
         }
-        tokio::time::sleep(Duration::from_millis(500)).await;
     }
 }
 

@@ -76,7 +76,7 @@ jobs:
 
   local-fault-recovery:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
@@ -93,7 +93,7 @@ jobs:
           make -C "$RUNNER_TEMP/pgvector" PG_CONFIG=/usr/lib/postgresql/16/bin/pg_config with_llvm=no
           sudo make -C "$RUNNER_TEMP/pgvector" PG_CONFIG=/usr/lib/postgresql/16/bin/pg_config with_llvm=no install
       - name: Run HTTP, WebSocket, restart, DB interruption and backup/restore tests
-        run: PATH=/usr/lib/postgresql/16/bin:$PATH python3 scripts/local-verify.py
+        run: PATH=/usr/lib/postgresql/16/bin:$PATH python3 scripts/local-verify.py --load
       - uses: actions/upload-artifact@v4
         if: success()
         with:
@@ -124,21 +124,21 @@ jobs:
       - uses: actions/cache@v4
         with:
           path: |
-            ~/.cargo/bin/trunk
-            ~/.cargo/bin/cargo-tauri
+            ~/.cargo/bin/trunk*
+            ~/.cargo/bin/cargo-tauri*
           key: ${{ runner.os }}-trunk-0.21.14-tauri-2.11.5
       - name: Linux native dependencies
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
           sudo apt-get install -y libgtk-3-dev libwebkit2gtk-4.1-dev libayatana-appindicator3-dev librsvg2-dev patchelf xvfb
+      - name: Verify Pet persistence and native platform safety
+        run: cargo test --locked -p day9-pet --lib
       - name: Install build tooling
         shell: bash
         run: |
           if ! command -v trunk; then cargo install trunk --version 0.21.14 --locked; fi
           if ! command -v cargo-tauri; then cargo install tauri-cli --version 2.11.5 --locked; fi
-      - name: Verify Pet persistence and native platform safety
-        run: cargo test --locked -p day9-pet --lib
       - name: Compile Chat hydration assets
         shell: bash
         run: bash scripts/build-chat-ui.sh
