@@ -1,0 +1,10 @@
+[package]
+name = "day9-pet"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+event-contract = { path = "../../crates/event_contract" }
+serde.workspace = true
+uuid.workspace = true
+thiserror.workspace = true
