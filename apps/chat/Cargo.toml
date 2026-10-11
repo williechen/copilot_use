@@ -4,6 +4,8 @@ version.workspace = true
 edition.workspace = true
 
 [dependencies]
+axum.workspace = true
+serde.workspace = true
 event-contract = { path = "../../crates/event_contract" }
 serde_json.workspace = true
 sqlx.workspace = true
