@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Exercise this application's own WebKit/WASM/IPC in an isolated disposable state."""
-import json, os, pathlib, subprocess, tempfile, sys, threading, argparse, hashlib, shutil, sqlite3, tomllib
+import time, json, os, pathlib, subprocess, tempfile, sys, threading, argparse, hashlib, shutil, sqlite3, tomllib
 from http.server import ThreadingHTTPServer,BaseHTTPRequestHandler
 from contextlib import closing
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -10,6 +10,7 @@ if sys.platform.startswith("linux") and not os.environ.get("DISPLAY"):
 parser=argparse.ArgumentParser()
 parser.add_argument('--executable',type=pathlib.Path)
 parser.add_argument('--update-package',type=pathlib.Path)
+parser.add_argument('--expected-executable',type=pathlib.Path)
 parser.add_argument('--live-ai',action='store_true')
 parser.add_argument('--live-image',action='store_true')
 parser.add_argument('--analytics',action='store_true')
@@ -58,9 +59,23 @@ Set-Acl -LiteralPath $env:COPILOT_GUI_FIXTURE_DIRECTORY -AclObject $acl
     if options.updater:
         key=directory/'updater-test.key';payload=directory/'fixture.bin'
         if options.update_package:
-            if not options.executable or options.executable.suffix!='.AppImage':raise SystemExit('Actual update acceptance requires disposable AppImage')
+            if not options.executable:raise SystemExit('Actual update acceptance requires a packaged executable')
             shutil.copyfile(options.update_package,payload)
-            disposable=directory/'current.AppImage';shutil.copy2(executable,disposable);executable=disposable
+            if sys.platform.startswith('linux'):
+                if executable.suffix!='.AppImage':raise SystemExit('Linux actual update requires AppImage')
+                disposable=directory/'current.AppImage';shutil.copy2(executable,disposable);executable=disposable
+            elif sys.platform=='darwin':
+                if not options.expected_executable:raise SystemExit('Expected updated executable required')
+                bundle=next((p for p in executable.parents if p.suffix=='.app'),None)
+                if bundle is None:raise SystemExit('macOS update requires app bundle')
+                disposable=directory/'application'/bundle.name;shutil.copytree(bundle,disposable,symlinks=True)
+                executable=disposable/executable.relative_to(bundle)
+            elif sys.platform=='win32':
+                if not options.expected_executable:raise SystemExit('Expected updated executable required')
+                disposable=directory/'application';shutil.copytree(executable.parent,disposable)
+                executable=disposable/executable.name
+            else:raise SystemExit('Unsupported update platform')
+            expected_updated_hash=hashlib.sha256((options.expected_executable or options.update_package).read_bytes()).hexdigest()
             env['PET_GUI_TEST_INSTALL_UPDATE']='true'
         else:payload.write_bytes(b'isolated updater signature fixture')
         subprocess.run(['cargo','tauri','signer','generate','--ci','--password','','--write-keys',str(key)],check=True,cwd=ROOT,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
@@ -85,6 +100,23 @@ Set-Acl -LiteralPath $env:COPILOT_GUI_FIXTURE_DIRECTORY -AclObject $acl
     completed = subprocess.run(command, env=env, cwd=ROOT, check=False, timeout=420 if live or options.update_package else 120)
     if server:server.shutdown();server.server_close()
     result = json.loads((directory / "report.json").read_text(encoding="utf-8"))
+    if options.update_package and (result.get('success')or(sys.platform=='win32'and result.get('update_pending')and result.get('prerequisites_passed')and result.get('before_snapshot'))):
+        deadline=time.monotonic()+180
+        cold_command=[executable]+(['--appimage-extract-and-run']if executable.suffix=='.AppImage'else[])+['--version']
+        while True:
+            try:
+                actual_updated_hash=hashlib.sha256(executable.read_bytes()).hexdigest()
+                cold_version=subprocess.check_output(cold_command,env=env,cwd=ROOT,timeout=30,text=True,encoding='utf-8').strip()
+                if actual_updated_hash==expected_updated_hash and cold_version=='0.1.1':break
+            except (OSError,subprocess.SubprocessError):pass
+            if time.monotonic()>=deadline:raise SystemExit('Signed update did not install expected bytes and cold version')
+            time.sleep(1)
+        with closing(sqlite3.connect(directory/'state/pet.sqlite'))as database:
+            if database.execute('PRAGMA integrity_check').fetchone()[0]!='ok'or database.execute('SELECT count(*) FROM pets').fetchone()[0]<2:raise SystemExit('Updated app lost SQLite integrity or user data')
+        if not list((directory/'state/backups').glob('*.sqlite')):raise SystemExit('Update did not preserve pre-install snapshot')
+        result['success']=True
+        result['update_install']={'sha256':actual_updated_hash,'cold_version':cold_version,'sqlite_integrity':'ok','pets_preserved':True,'pre_update_snapshot':True,'platform':sys.platform}
+        result['message']='PASS: complete pre-install GUI, verified signature, actual update bytes, cold 0.1.1, SQLite and snapshot preservation'
     if result.get('success'):
         with closing(sqlite3.connect(directory/'state/pet.sqlite')) as database:rows=database.execute('SELECT id,profile FROM pets').fetchall()
         for identity,profile in rows:
@@ -98,18 +130,6 @@ Set-Acl -LiteralPath $env:COPILOT_GUI_FIXTURE_DIRECTORY -AclObject $acl
             png_files=list((directory/'state/pets/8df47580-64e1-4335-8e50-6b593051a398/assets/generated').glob('*/sheet.png'))
             if not png_files or not all(p.read_bytes().startswith(b'\x89PNG\r\n\x1a\n') for p in png_files):raise SystemExit('Generated sprite was not persisted to per-pet assets')
             result['per_pet_files']['generated_png']=True
-    if options.update_package and result.get('success'):
-        expected=hashlib.sha256(options.update_package.read_bytes()).hexdigest()
-        actual=hashlib.sha256(executable.read_bytes()).hexdigest()
-        if actual!=expected:raise SystemExit('Installed AppImage checksum differs from verified update package')
-        version=subprocess.check_output([executable,'--appimage-extract-and-run','--version'],env=env,cwd=ROOT,timeout=60,text=True).strip()
-        if version!='0.1.1':raise SystemExit('Cold updated executable did not report version 0.1.1')
-        with closing(sqlite3.connect(directory/'state/pet.sqlite')) as database:
-            if database.execute('PRAGMA integrity_check').fetchone()[0]!='ok':raise SystemExit('SQLite integrity after update failed')
-            if database.execute('SELECT count(*) FROM pets').fetchone()[0]<2:raise SystemExit('Existing pets lost after update')
-        manifests=list((directory/'state/backups').glob('*/manifest.json'))
-        if not manifests:raise SystemExit('Pre-update snapshot missing')
-        result['update_install']={'sha256':actual,'cold_version':version,'sqlite_integrity':'ok','pets_preserved':True,'pre_update_snapshot':True}
     REPORT.parent.mkdir(parents=True, exist_ok=True)
     REPORT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     if completed.returncode != 0 or result.get("success") is not True:

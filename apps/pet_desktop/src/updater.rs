@@ -78,7 +78,7 @@ pub async fn check_local_update(
     if key.is_empty() || key.len() > 4096 {
         return Err("可信公鑰不合法".into());
     }
-    let updater = app
+    let builder = app
         .updater_builder()
         .endpoints(vec![endpoint.clone()])
         .map_err(|_| "更新 channel 不合法")?
@@ -86,9 +86,20 @@ pub async fn check_local_update(
         .no_proxy()
         .clear_headers()
         .timeout(Duration::from_secs(20))
-        .configure_client(|builder| builder.redirect(updater_http::redirect::Policy::none()))
-        .build()
-        .map_err(|_| "此安裝格式不支援自動更新")?;
+        .configure_client(|builder| builder.redirect(updater_http::redirect::Policy::none()));
+    #[cfg(windows)]
+    let builder = {
+        // NSIS /D is last and points only to this running application's directory.
+        // A manifest cannot select an arbitrary installation destination.
+        let executable = std::env::current_exe().map_err(|_| "無法確認目前安裝目錄")?;
+        let mut destination = std::ffi::OsString::from("/D=");
+        destination.push(executable.parent().ok_or("無法確認目前安裝目錄")?);
+        builder
+            .clear_installer_args()
+            .installer_arg("/S")
+            .installer_arg(destination)
+    };
+    let updater = builder.build().map_err(|_| "此安裝格式不支援自動更新")?;
     let Some(update) = updater.check().await.map_err(|_| "無法檢查本地更新")? else {
         return Ok(json!({"status":"up_to_date"}));
     };
@@ -176,6 +187,15 @@ pub async fn install_local_update(
     let version = pending.update.version.clone();
     let bytes = pending.bytes.take().ok_or("更新尚未驗證")?;
     verify(&bytes, &pending.update.signature, &pending.key, &version)?;
+    #[cfg(windows)]
+    if super::gui_acceptance_enabled()
+        && std::env::var("PET_GUI_TEST_INSTALL_UPDATE").as_deref() == Ok("true")
+    {
+        let path = std::env::var("PET_GUI_TEST_REPORT").map_err(|_| "missing isolated report")?;
+        // Windows updater exits after spawning NSIS. This is pending, never success;
+        // the external verifier must prove installed bytes and cold version first.
+        std::fs::write(path,json!({"success":false,"update_pending":true,"prerequisites_passed":true,"before_snapshot":before.id,"version":app.package_info().version.to_string(),"source_sha":env!("COPILOT_SOURCE_SHA"),"source_dirty":env!("COPILOT_SOURCE_DIRTY")=="true","release":!cfg!(debug_assertions)}).to_string()).map_err(|_| "無法保存待驗證的更新收據")?;
+    }
     let update = pending.update.restart_after_install(false);
     tokio::task::spawn_blocking(move || update.install(bytes))
         .await

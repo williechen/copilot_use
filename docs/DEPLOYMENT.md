@@ -105,7 +105,7 @@ Chat 房主可保存最多八個 Persona，明確確認後開始有界對話。�
 
 ## 驗收來源與教學分支
 
-`pet-gui-verify.py --executable PATH` 實際執行安裝包的 release 程式。入口需要 `--acceptance-gui`、明確測試設定、全新 state/report 與已知可拋棄檔案 fixture；報告包含 source SHA、dirty、版本及 release 狀態。一般啟動不執行驗收脚本。Linux AppImage 更新測試只更換 tempfile 副本，驗證有效簽章／checksum／冷啟動版本／SQLite 完整性／資料及備份保留。`build-test-update.py` 產生 0.1.1 測試套件並還原 manifest/lock，該測試套件不是正式發行版。
+`pet-gui-verify.py --executable PATH` 實際執行安裝包的 release 程式。入口需要 `--acceptance-gui`、明確測試設定、全新 state/report 與已知可拋棄檔案 fixture；報告包含 source SHA、dirty、版本及 release 狀態。一般啟動不執行驗收脚本。三平台更新測試只更換 tempfile 應用副本，驗證有效簽章／checksum／冷啟動版本／SQLite 完整性／資料及備份保留。`build-test-update.py` 依平台產生 AppImage／macOS app archive／Windows NSIS 的 0.1.1 測試套件並還原 manifest/lock，該測試套件不是正式發行版。
 
 `local-verify.py --varchar-events` 在新測試庫將 Analytics 事件 ID 欄位改為 VARCHAR(40)，以同一個 production EventStore、UUID domain/API 跑完整可靠性測試；預設 production migrations 仍使用原生 UUID。不是全資料庫任意 schema 的切換開關。
 
@@ -135,3 +135,5 @@ Pet 保留既有 SQLite 資料及 GUI 一致性備份／还原；完整可攜資
 舊 PostgreSQL Chat 資料不會自動轉成 SQLite。舊 migration 與 Docker volume 保留供讀取／遷移；不可把舊 DB URL 指向新 SQLite 服務，也不可刪除舊 volume 後宣稱已遷移。
 
 需要搬移舊 Chat PostgreSQL 資料時，先停止舊 Chat 寫入，保留原 DB／備份，在本機環境設定 `CHAT_LEGACY_DATABASE_URL`，執行 `python3 scripts/import-chat-postgres.py --output data/imported-chat.sqlite3`。工具以唯讀 repeatable-read snapshot 串流匯出所有已知表，转换 UUID／時間／JSON／向量，檢查 foreign keys/integrity，且只建立新檔，不覆寫原 DB 或既有 SQLite。未知表／欄位會拒絕，不能默默丟棄資料。匯入成功後另指定 `CHAT_DATABASE_URL` 啟動新服務；原資料保留到核對完成。
+
+跨平台 updater 安裝必須用實際套件與 `--update-package`；macOS／Windows 另提供 `--expected-executable` 核對安裝後 bytes。Windows SDK 會退出原程序並啟动 NSIS，因此先保存「待驗證」狀態，外部驗收在新 binary checksum／冷啟動版本及 SQLite／備份都通過後才標 success。更新目的目錄固定為目前執行檔所在目錄，manifest 不可指定任意目錄。
