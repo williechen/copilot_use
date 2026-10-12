@@ -1,6 +1,6 @@
 # 可攜式資料庫調整
 
-2026-10-12 使用者變更：Chat／Pet 使用可攜式 SQLite，Analytics 儀表板維持 PostgreSQL。本地測試仍為交付範圍，不公開部署；尚未建立正式完成 tag。
+2026-10-12 使用者變更：Chat／Pet 使用可攜式 SQLite，Analytics 儀表板維持 PostgreSQL。本地測試仍為交付範圍，不公開部署；正式版本及其來源 SHA 以 GitHub Release 與附件證據為準。
 
 Chat 的既有 PostgreSQL migration 原文保留於 `apps/chat/postgres-migrations`，不再由 Chat 啟動執行。SQLite 使用獨立 migration history。舊 Docker `chat-data` volume 不會被刪除或覆寫；新 Chat 使用 `chat-sqlite-data`。Pet 保留既有 SQLite 與備份／檔案 projection。Analytics 的原生 UUID／VARCHAR(40) adapter 與 PostgreSQL migrations 不變。
 
@@ -8,6 +8,6 @@ Chat 的既有 PostgreSQL migration 原文保留於 `apps/chat/postgres-migratio
 
 SQLite 精確檢索每位 owner 最多1000份知識文件；WAL 支援同一主機多程序，不支援跨主機網路共享檔案。備份使用 VACUUM INTO，不可單獨複製仍在使用的主 DB 檔。所用 libsqlite3-sys 0.37.0 bundled SQLite 為3.51.3，包含 WAL-reset 修正。設定／搬移／唯讀匯入命令見 DEPLOYMENT.md。
 
-先前 `78006cb` 的 Linux 桌面、Docker、Rust、故障恢復 CI 通過，macOS／Windows GUI 未通過，不能算成完成。macOS 固定250ms等待已改成有上限的實際DOM條件等待；Windows 測試暫存資料夾已明確設置私有 DACL，保留產品對不安全目錄的拒絕。仍需以新 SHA 的實際 runner 證明修正。
+先前 `78006cb` 的 Linux 桌面、Docker、Rust、故障恢復 CI 通過，macOS／Windows GUI 未通過，不能算成完成。macOS 固定250ms等待已改成有上限的實際DOM條件等待；Windows 測試暫存資料夾已明確設置私有 DACL，保留產品對不安全目錄的拒絕。是否通過須讀取正式版本 SHA 的實際 runner 結果。
 
 正式 tag 完成後才建立教學對齊分支，依唯讀 rust_ai_chat 的實際目錄／內容產生對應教學與程式調整；tests 保留在所屬專案／模組，不搬到最外層。現階段不新增 Day。

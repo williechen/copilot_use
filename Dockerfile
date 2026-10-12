@@ -8,6 +8,7 @@ RUN --mount=type=cache,id=copilot-cargo-registry,target=/usr/local/cargo/registr
 COPY . .
 RUN --mount=type=cache,id=copilot-cargo-registry,target=/usr/local/cargo/registry,sharing=locked \
     --mount=type=cache,id=copilot-chat-wasm,target=/src/apps/chat_frontend/target,sharing=locked \
+    --mount=type=cache,id=copilot-trunk-tools,target=/root/.cache/trunk,sharing=locked \
     find apps crates -type f \( -name '*.rs' -o -name '*.sql' -o -name Cargo.toml \) -exec touch {} + \
     && bash scripts/build-chat-ui.sh
 RUN --mount=type=cache,id=copilot-cargo-registry,target=/usr/local/cargo/registry,sharing=locked \
@@ -18,9 +19,9 @@ RUN --mount=type=cache,id=copilot-cargo-registry,target=/usr/local/cargo/registr
 
 FROM debian:bookworm-slim AS chat
 ARG COPILOT_BUILD_SHA
-LABEL org.opencontainers.image.revision=$COPILOT_BUILD_SHA
 RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates libssl3 curl \
     && rm -rf /var/lib/apt/lists/*
+LABEL org.opencontainers.image.revision=$COPILOT_BUILD_SHA
 WORKDIR /app
 COPY --from=builder /out/day9-chat /app/server
 COPY --from=builder /src/apps/chat/migrations /app/migrations
@@ -35,9 +36,9 @@ ENTRYPOINT ["/app/server"]
 
 FROM debian:bookworm-slim AS analytics
 ARG COPILOT_BUILD_SHA
-LABEL org.opencontainers.image.revision=$COPILOT_BUILD_SHA
 RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates libssl3 curl \
     && rm -rf /var/lib/apt/lists/*
+LABEL org.opencontainers.image.revision=$COPILOT_BUILD_SHA
 WORKDIR /app
 COPY --from=builder /out/day9-analytics /app/server
 COPY --from=builder /src/apps/analytics/migrations /app/migrations

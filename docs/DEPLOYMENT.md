@@ -51,7 +51,7 @@ python3 scripts/local-verify.py --pet-gui
 
 需 wasm32-unknown-unknown target、Trunk、Tauri CLI、Node 22、GTK3/WebKit 與 desktop display。建置 helper 只從單一來源 icon 產生必要 ICO/ICNS，產生檔不入 Git。正式 UI 有設定視窗及 200×200 浮動寵物視窗。資料存於 app_data；`PET_DATA_DIR` 可指定獨立測試目錄，請勿與 reference repo 共用。
 
-`PET_AUTHORIZED_ROOT` 必須明確指定使用者授權的檔案目錄，且以非 root 啟動。Linux Adapter 拒絕 symlink、非本人檔案、group/other 可寫檔案與多 hard links；預覽返回 opaque ID，確認後才移動至同根目錄的 private quarantine。GUI 可授權/撤銷目錄、逐檔確認，並以 journal 復原收據與事件。目錄必須是本人所有且無 group/other 寫入權限；quarantine 與 journal 是 private。Trash/restore、Windows 安全移動與完整跨平台 runtime 驗收仍缺。
+`PET_AUTHORIZED_ROOT` 必須明確指定使用者授權的檔案目錄，且以非 root 啟動。Linux Adapter 拒絕 symlink、非本人檔案、group/other 可寫檔案與多 hard links；預覽返回 opaque ID，確認後才移動至同根目錄的 private quarantine。GUI 可授權/撤銷目錄、逐檔確認，並以 journal 復原收據與事件。目錄必須是本人所有且無 group/other 寫入權限；quarantine 與 journal 是 private。Trash/restore 與 Windows 安全 Adapter 已實作；平台驗收結果以各 SHA 的實際安全測試及安裝包 GUI 報告為準。
 
 `ANALYTICS_ENDPOINT` 加 `ANALYTICS_PET_TOKEN` 才啟用 Pet 投遞。原始記憶、對話、檔案路徑不放入產品事件。
 
@@ -91,11 +91,11 @@ python3 scripts/local-verify.py --live-insights --pet-gui
 
 Pet 的記憶工具使用同一 executable 的 `--mcp-once` readonly SQLite stdio 模式；只有所選寵物的資料可見，子程序不繼承 API key。MCP 支援範圍為上述本地唯讀工具，不代表任意第三方 MCP server 相容。
 
-Chat history 可傳 `before=<message UUID>`，最多 100 筆；UI 最多保留 1000 筆。WebSocket 全服務最多 128 連線，登出/Session 到期/ACL 失效會拒絕後續資料並關閉連線；idle 每五秒檢查。同一主機的多個 Chat 程序共用 SQLite 檔案與持久通知佇列；全域最多512、每位使用者32、單程序128連線，idle 每五秒重查Session/ACL。SQLite WAL 不支援跨主機網路檔案系統。
+Chat history 可傳 `before=<message UUID>`，最多 100 筆；UI 最多保留 1000 筆。WebSocket 單程序最多 128 連線，登出/Session 到期/ACL 失效會拒絕後續資料並關閉連線；idle 每五秒檢查。同一主機的多個 Chat 程序共用 SQLite 檔案與持久通知佇列；全域最多512、每位使用者32、單程序128連線，idle 每五秒重查Session/ACL。SQLite WAL 不支援跨主機網路檔案系統。
 
 ## 本地備份、角色對話與更新
 
-Pet 的「本地備份與還原」會把生成素材一併存入 SQLite 快照，還原前另外保留目前快照。恢復快照中的寵物資料，保留後來新增的寵物、投遞事件與檔案操作收據；不移動授權目錄中的檔案。每個快照需符合 SHA256、SQLite integrity 與当前 migration checksums。
+Pet 的「本地備份與還原」會把生成素材一併存入 SQLite 快照，還原前另外保留目前快照。恢復快照中的寵物資料，保留後來新增的寵物、投遞事件與檔案操作收據；不移動授權目錄中的檔案。每個快照需符合 SHA256、SQLite integrity；受支援的舊 schema 在私有副本升級，原備份不修改。
 
 Chat 房主可保存最多八個 Persona，明確確認後開始有界對話。每次輸出最多512 tokens；一般輪次保留512，工具輪次保留1024（最多兩次請求、一個唯讀檢索工具），最多八輪及180秒；失敗嘗試仍消耗保留預算。完成輪次與記憶、訊息、Outbox 同交易；取消保留已完成輪次。
 
@@ -128,7 +128,7 @@ export CHAT_DATABASE_URL=sqlite://relocated/chat.sqlite3
 cargo run --locked -p day9-chat
 ```
 
-先建立 backups 目的目錄。不要單獨複製正在使用的 chat.sqlite3；未 checkpoint 的資料可能仍在 -wal。`--backup` 使用 VACUUM INTO，檢查 integrity/foreign keys，且拒絕覆寫既有檔案。停止全部 Chat 程序後亦可搬移整個資料目錄。備份含密碼雜湊與 Session，須保持私密、由可信使用者保管；服務 token/API key 仍由環境設定，不寫入 DB。
+先建立 backups 目的目錄。Chat DB 的所在目錄必須為本人所有且不可讓其他使用者寫入；Linux 建議 `mkdir -m 700 data backups relocated`。不要單獨複製正在使用的 chat.sqlite3；未 checkpoint 的資料可能仍在 -wal。`--backup` 使用 VACUUM INTO，檢查 integrity/foreign keys，且拒絕覆寫既有檔案。停止全部 Chat 程序後亦可搬移整個資料目錄。備份含密碼雜湊與 Session，須保持私密、由可信使用者保管；服務 token/API key 仍由環境設定，不寫入 DB。
 
 Pet 保留既有 SQLite 資料及 GUI 一致性備份／还原；完整可攜資料包含 pet.sqlite 與 pets/ 下的設定／生成素材。備份還原後由 SQLite 重建設定／素材 projection；手動未匯入的 pet.toml 草稿另行保存。Analytics 的 PostgreSQL、pg_dump/pg_restore、API 及 Dashboard 不變。
 

@@ -26,6 +26,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
+      - name: Release gate rejects incomplete evidence without network access
+        run: python3 scripts/tests/release-approval.py
       - name: Format
         run: cargo fmt --all -- --check
       - name: Strict Clippy

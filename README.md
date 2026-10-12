@@ -1,16 +1,16 @@
 # copilot_use
 
-Rust AI Chat、Tauri/Leptos Desktop Pet、Product Analytics 的獨立產品工作區。**P9 尚未完成，沒有正式完成 Release/Tag。** 使用者已取消正式部署；目前範圍為本地測試與 CI。`williechen/rust_ai_chat` 嚴格唯讀，完成驗收與固定成品前禁止產生新 Day 教學。
+Rust AI Chat、Tauri/Leptos Desktop Pet、Product Analytics 的獨立產品工作區。驗收與正式版本以 [GitHub Releases](https://github.com/williechen/copilot_use/releases) 附帶的 tag SHA、CI、Docker 與本地報告為準；未有匹配證據的提交不得宣稱完成。 使用者已取消正式部署；目前範圍為本地測試與 CI。`williechen/rust_ai_chat` 嚴格唯讀，完成驗收與固定成品前禁止產生新 Day 教學。
 
 ## 實際入口
 
-| 產品 | 程式與資料 | 已驗證能力 |
+| 產品 | 程式與資料 | 產品能力 |
 |---|---|---|
 | Chat | `apps/chat`、`crates/chat_ui`、`apps/chat_frontend`；可攜式 SQLite（包含知識庫向量） | Leptos SSR/Hydration、登入 Session、私人房間 ACL、訊息/history、WS、交易 Outbox、真實 OpenAI 串流、RAG、唯讀 MCP/Agent |
 | Desktop Pet | `apps/pet_desktop`、`apps/pet_ui`、`apps/pet`；獨立 SQLite | Linux Tauri/WebKit GUI、多寵物與五項設定、記憶、複習排程、真實 AI 對話/生圖/快取、200×200 浮動視窗、安全預覽與確認 IPC、journal/租約、唯讀 MCP/Agent |
 | Analytics | `apps/analytics`；獨立 PostgreSQL | 同服務 Dashboard + API、來源 token、持久冪等、事件查證、Taipei 日趨勢 API、可逆封存/還原、備份還原、結構洞察與人工審核/套用/回退 |
 
-上表是已實作與局部驗證，**不是完整 P9 驗收**。最新資料庫變更及待驗收項目見 [SQLite 調整](docs/SQLITE_TRANSITION.md)；歷史驗證见 [驗證紀錄](docs/LOCAL_VALIDATION.md)；既定目標見 [P9 規格](docs/P9_TARGET.md)。
+上表列出實作能力；完整驗收須逐項取得相同來源版本的證據。最新資料庫變更及待驗收項目見 [SQLite 調整](docs/SQLITE_TRANSITION.md)；歷史驗證见 [驗證紀錄](docs/LOCAL_VALIDATION.md)；既定目標見 [P9 規格](docs/P9_TARGET.md)。
 
 ## 本地驗證
 
