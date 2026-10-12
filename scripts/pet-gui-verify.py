@@ -36,7 +36,12 @@ foreach($sid in @($identity.Value,'S-1-5-18','S-1-5-32-544')) {
 }
 Set-Acl -LiteralPath $env:COPILOT_GUI_FIXTURE_DIRECTORY -AclObject $acl
 """
-        subprocess.run(['powershell','-NoProfile','-NonInteractive','-Command',permissions],env=os.environ|{'COPILOT_GUI_FIXTURE_DIRECTORY':str(directory)},check=True,stdout=subprocess.DEVNULL)
+        permission_env=os.environ|{'COPILOT_GUI_FIXTURE_DIRECTORY':str(directory)}
+        # Do not make Windows PowerShell load inherited PowerShell 7 modules.
+        permission_env.pop('PSModulePath',None)
+        permission_shell=shutil.which('pwsh') or shutil.which('powershell')
+        if not permission_shell:raise SystemExit('Windows fixture ACL tool unavailable')
+        subprocess.run([permission_shell,'-NoProfile','-NonInteractive','-Command',permissions],env=permission_env,check=True,stdout=subprocess.DEVNULL)
     files = directory / "files"
     files.mkdir(mode=0o700)
     sample = files / "sample.txt"
