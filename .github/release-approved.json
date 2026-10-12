@@ -1,0 +1,11 @@
+{
+  "approved_sha": "22b44f33b9e2c9edb0fb398fb9bff3efd57b00ee",
+  "tag": "v0.1.0",
+  "evidence": {
+    "live": "docs/release-evidence/live.json",
+    "docker": "docs/release-evidence/docker.json",
+    "packaged_gui": "docs/release-evidence/packaged_gui.json",
+    "appimage_update": "docs/release-evidence/appimage_update.json"
+  },
+  "notes": "Chat／Pet 已改為可攜式 SQLite（含知識庫向量、Session、角色、Outbox 與備份），Analytics 儀表板維持 PostgreSQL。已驗證真實 OpenAI gpt-5.6-luna 串流／RAG／MCP／Persona／Pet AI與生圖、512連線／跨程序可靠傳送、同意撤回、Docker release及故障／備份還原；三平台實際安裝包 GUI 與簽章更新／冷啟動／SQLite保留由同 SHA CI核對。\n\n本次僅本地測試與版本固定，不公開部署。安裝包未使用商業平台憑證簽章；匿名事件及描述性計數不代表獨立真人數或學習成效。rust_ai_chat 嚴格唯讀；成品固定後才建立教學對齊 branch，tests 依所屬專案／模組保存。"
+}
