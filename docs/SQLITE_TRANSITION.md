@@ -2,7 +2,7 @@
 
 2026-10-12 使用者變更：Chat／Pet 使用可攜式 SQLite，Analytics 儀表板維持 PostgreSQL。本地測試仍為交付範圍，不公開部署；正式版本及其來源 SHA 以 GitHub Release 與附件證據為準。
 
-Chat 的既有 PostgreSQL migration 原文保留於 `apps/chat/postgres-migrations`，不再由 Chat 啟動執行。SQLite 使用獨立 migration history。舊 Docker `chat-data` volume 不會被刪除或覆寫；新 Chat 使用 `chat-sqlite-data`。Pet 保留既有 SQLite 與備份／檔案 projection。Analytics 的原生 UUID／VARCHAR(40) adapter 與 PostgreSQL migrations 不變。
+Chat 的既有 PostgreSQL migration 原文保留於 `apps/server/postgres-migrations`，不再由 Chat 啟動執行。SQLite 使用獨立 migration history。舊 Docker `chat-data` volume 不會被刪除或覆寫；新 Chat 使用 `chat-sqlite-data`。Pet 保留既有 SQLite 與備份／檔案 projection。Analytics 的原生 UUID／VARCHAR(40) adapter 與 PostgreSQL migrations 不變。
 
 已實跑 SQLite 訊息／Outbox 原子交易、失敗回滾、併發去重、CAS 租約、Session／ACL、多人 WS、五程序512連線／64筆並行fan-out、同意撤回、備份逐表核對／搬移重啟、PostgreSQL 停機時 Chat 持續寫入／恢復投遞。舊 PostgreSQL 的唯讀匯入已核對 UUID、bytea、timestamp、JSONB、UUID[]，拒絕覆寫；原 DB 不修改。真實 OpenAI embedding／SQLite cosine RAG／串流／MCP／Persona 已實跑；上述功能已在乾淨來源 `22b44f33b9e2c9edb0fb398fb9bff3efd57b00ee` 完成本地／Docker／release GUI 驗收，且同 SHA 六項 CI 全部成功（包括三平台真正簽章更新與冷啟動）；正式發布以 GitHub Release 工作流程及附件為準。
 

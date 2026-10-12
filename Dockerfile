@@ -7,7 +7,7 @@ RUN --mount=type=cache,id=copilot-cargo-registry,target=/usr/local/cargo/registr
     rustup target add wasm32-unknown-unknown && cargo install trunk --version 0.21.14 --locked
 COPY . .
 RUN --mount=type=cache,id=copilot-cargo-registry,target=/usr/local/cargo/registry,sharing=locked \
-    --mount=type=cache,id=copilot-chat-wasm,target=/src/apps/chat_frontend/target,sharing=locked \
+    --mount=type=cache,id=copilot-chat-wasm,target=/src/apps/server/frontend/target,sharing=locked \
     --mount=type=cache,id=copilot-trunk-tools,target=/root/.cache/trunk,sharing=locked \
     find apps crates -type f \( -name '*.rs' -o -name '*.sql' -o -name Cargo.toml \) -exec touch {} + \
     && bash scripts/build-chat-ui.sh
@@ -24,7 +24,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates
 LABEL org.opencontainers.image.revision=$COPILOT_BUILD_SHA
 WORKDIR /app
 COPY --from=builder /out/day9-chat /app/server
-COPY --from=builder /src/apps/chat/migrations /app/migrations
+COPY --from=builder /src/crates/persistence/migrations /app/migrations
 COPY --from=builder /src/target/site/pkg /app/site/pkg
 RUN mkdir -p /data && chown 65532:65532 /data && chmod 700 /data
 ENV CHAT_DATABASE_URL=sqlite:///data/chat.sqlite3
@@ -41,7 +41,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates
 LABEL org.opencontainers.image.revision=$COPILOT_BUILD_SHA
 WORKDIR /app
 COPY --from=builder /out/day9-analytics /app/server
-COPY --from=builder /src/apps/analytics/migrations /app/migrations
+COPY --from=builder /src/apps/stats_server/migrations /app/migrations
 ENV ANALYTICS_LISTEN=0.0.0.0:3100
 USER 65532:65532
 EXPOSE 3100

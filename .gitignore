@@ -36,8 +36,8 @@ __pycache__/
 *.sqlite
 *.sqlite-shm
 *.sqlite-wal
-/apps/pet_desktop/gen/
-/apps/pet_desktop/generated-icons/
+/apps/desktop_pet/gen/
+/apps/desktop_pet/generated-icons/
 
 *.sqlite3
 *.sqlite3-shm

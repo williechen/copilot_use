@@ -333,6 +333,22 @@ dependencies = [
 ]
 
 [[package]]
+name = "chat-application"
+version = "0.1.0"
+dependencies = [
+ "chat-domain",
+ "tokio",
+ "uuid",
+]
+
+[[package]]
+name = "chat-domain"
+version = "0.1.0"
+dependencies = [
+ "uuid",
+]
+
+[[package]]
 name = "chat-ui"
 version = "0.1.0"
 dependencies = [
@@ -635,6 +651,7 @@ dependencies = [
  "any_spawner",
  "argon2",
  "axum",
+ "chat-application",
  "chat-ui",
  "copilot-telemetry",
  "event-contract",
@@ -643,6 +660,7 @@ dependencies = [
  "libc",
  "mcp-bridge",
  "openai-adapter",
+ "persistence",
  "reqwest 0.12.28",
  "serde",
  "serde_json",
@@ -2100,6 +2118,21 @@ name = "percent-encoding"
 version = "2.3.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9b4f627cb1b25917193a259e49bdad08f671f8d9708acfd5fe0a8c1455d87220"
+
+[[package]]
+name = "persistence"
+version = "0.1.0"
+dependencies = [
+ "chat-application",
+ "copilot-telemetry",
+ "event-contract",
+ "libc",
+ "reqwest 0.12.28",
+ "serde_json",
+ "sqlx",
+ "tokio",
+ "uuid",
+]
 
 [[package]]
 name = "pin-project"

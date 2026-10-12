@@ -6,7 +6,7 @@ edition.workspace = true
 [dependencies]
 axum.workspace = true
 serde.workspace = true
-event-contract = { path = "../../crates/event_contract" }
+event-contract = { path = "../../crates/shared" }
 serde_json.workspace = true
 sqlx.workspace = true
 tokio.workspace = true
@@ -15,11 +15,11 @@ thiserror.workspace = true
 reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "json"] }
 
 tokio-stream = "0.1"
-openai-adapter = { path = "../../crates/openai_adapter" }
+openai-adapter = { path = "../../crates/ai_core" }
 argon2 = "0.5"
 sha2 = "0.10"
 
-chat-ui = { path = "../../crates/chat_ui", features = ["ssr"] }
+chat-ui = { path = "../../crates/ui", features = ["ssr"] }
 leptos_axum = "0.8"
 tower-http = {version="0.6",features=["fs"]}
 any_spawner={version="0.3",features=["tokio"]}
@@ -28,6 +28,10 @@ copilot-telemetry = {path="../../crates/telemetry"}
 mcp-bridge={path="../../crates/mcp_bridge"}
 url="2"
 http="1"
+
+
+chat-application={path="../../crates/chat_application"}
+persistence={path="../../crates/persistence"}
 
 [target.'cfg(unix)'.dependencies]
 libc = "0.2"

@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "identifier": "com.copilotuse.desktoppet",
   "build": {
-    "frontendDist": "../pet_ui/dist",
+    "frontendDist": "frontend/dist",
     "beforeBuildCommand": "node ../scripts/build-pet-ui.mjs"
   },
   "app": {

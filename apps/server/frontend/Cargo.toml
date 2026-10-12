@@ -4,4 +4,4 @@ version="0.1.0"
 edition="2024"
 [workspace]
 [dependencies]
-chat-ui={path="../../crates/chat_ui",default-features=false,features=["hydrate"]}
+chat-ui={path="../../../crates/ui",default-features=false,features=["hydrate"]}

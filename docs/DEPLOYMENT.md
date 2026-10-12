@@ -43,7 +43,7 @@ AI 設定 `OPENAI_API_KEY`、`OPENAI_CHAT_MODEL=gpt-5.6-luna`；embedding 預設
 
 ```sh
 node scripts/build-pet-ui.mjs
-cargo run --locked --manifest-path apps/pet_desktop/Cargo.toml
+cargo run --locked --manifest-path apps/desktop_pet/Cargo.toml
 python3 scripts/pet-gui-verify.py
 # 同時驗證真正桌面投遞與三服務 trace：
 python3 scripts/local-verify.py --pet-gui
