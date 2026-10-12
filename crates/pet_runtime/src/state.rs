@@ -48,25 +48,17 @@ pub struct Card {
 }
 impl Card {
     pub fn review(&mut self, quality: u8, at: i64) -> Result<(), &'static str> {
-        if quality > 5 {
-            return Err("評分必須介於 0 到 5");
-        }
-        if quality < 3 {
-            self.repetitions = 0;
-            self.interval_days = 1;
-        } else {
-            self.interval_days = match self.repetitions {
-                0 => 1,
-                1 => 6,
-                _ => ((self.interval_days as f64) * self.ease)
-                    .round()
-                    .clamp(1.0, 3650.0) as i64,
-            };
-            self.repetitions += 1;
-        }
-        let delta = 5.0 - quality as f64;
-        self.ease = (self.ease + 0.1 - delta * (0.08 + delta * 0.02)).clamp(1.3, 3.0);
-        self.due_at = at + self.interval_days * 86400;
+        let mut schedule = pet_domain::learning::Schedule {
+            repetitions: self.repetitions,
+            interval_days: self.interval_days,
+            ease: self.ease,
+            due_at: self.due_at,
+        };
+        schedule.review(quality, at)?;
+        self.repetitions = schedule.repetitions;
+        self.interval_days = schedule.interval_days;
+        self.ease = schedule.ease;
+        self.due_at = schedule.due_at;
         Ok(())
     }
 }

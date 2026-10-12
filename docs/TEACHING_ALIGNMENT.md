@@ -12,7 +12,7 @@
 | `apps/analytics` | `apps/stats_server` |
 | `apps/pet_desktop` | `apps/desktop_pet` |
 | `apps/pet_ui` | `apps/desktop_pet/frontend` |
-| `apps/pet` | `crates/pet_domain` |
+| `apps/pet` | `crates/pet_runtime`，純設定／Port／複習規則另於 `crates/pet_domain` |
 | `crates/chat_ui` | `crates/ui` |
 | `crates/openai_adapter` | `crates/ai_core` |
 | `crates/event_contract` | `crates/shared` |
@@ -20,7 +20,7 @@
 
 Chat 訊息資料與原有輸入不變量實際移至 `crates/chat_domain`；`crates/chat_application` 使用 `MessageRepository` Port，驗證後才取得可發布的 durable commit。`crates/persistence` 保存真正 SQLite schema、ChatWriter、交易 Outbox、租約／CAS、同意撤回與備份 Adapter；`apps/server` HTTP／WS 入口使用這些 crates，透過 re-export 保留既有 API 與 CLI 相容。這些不是空 crate。
 
-SQLite migrations 為 `crates/persistence/migrations`；原 PostgreSQL migrations 保留在 `apps/server/postgres-migrations`，不在 SQLite 啟動時套用。Analytics 為 `apps/stats_server` 的 PostgreSQL。Pet 保持既有 SQLite；其 runtime／平台 Adapter 仍位於 pet_domain 所屬模組，純 Profile／Application 模組邊界保留，不能宣稱整個 crate 沒有 driver 依賴。
+SQLite migrations 為 `crates/persistence/migrations`；原 PostgreSQL migrations 保留在 `apps/server/postgres-migrations`，不在 SQLite 啟動時套用。Analytics 為 `apps/stats_server` 的 PostgreSQL。Pet 保持既有 SQLite；SQLite／HTTP／AI／OS／檔案與備份 Adapter 位於 `crates/pet_runtime`，package 名稱保留 day9-pet。`crates/pet_domain` 的 Profile、ProfileRepository/save_profile、Schedule 複習規則不依賴 DB／HTTP／OS／Tauri；runtime re-export 原有 profile/application 介面，Tauri 與 CLI 既有行為保留。
 
 Rust 回歸測試保留在所屬 crate／app：例如 `crates/chat_application/src/tests.rs`、`crates/persistence/src/tests.rs`、`crates/persistence/src/database/tests.rs`、`apps/server/src/knowledge/tests.rs`、`apps/desktop_pet/tests`。私有模組測試不因外移暴露危險 API；根目錄沒有 tests workspace。
 
@@ -55,3 +55,7 @@ crates/
 以上三個 app 與八個核心 crate 名稱對應唯讀 rust_ai_chat。`crates/mcp_bridge` 是本產品已使用的 MCP Adapter；`apps/server/frontend` 保留獨立 Chat hydration 建置入口。SQL migrations 保留所屬 Persistence／產品目錄，避免把 SQLite 與 PostgreSQL migrations 混合執行；不為複製參考外觀新增無用途的 deploy 或根 tests 目錄。部署與測試腳本、vendor 安全修補為本產品需要的附加內容。
 
 `native-source-audit.yml` 是固定 checkout v0.1.0 SHA 的歷史來源診斷，因此刻意使用正式 tag 的舊路徑；日常 `verify.yml` 與 Docker／建置腳本使用目前對齊後的路徑。該 Windows 診斷 run 38242215542 已成功，Cargo.toml 的 LF／CRLF 正規化造成 raw dirty 標記，所有觀測 tracked diff 為空白。正式 tag 和原始報告保持不變。
+
+模組語意與資料流程、保留的參考差異及本次必要重構見 [SEMANTIC_ARCHITECTURE_REVIEW.md](SEMANTIC_ARCHITECTURE_REVIEW.md)。CI 的 architecture-boundaries.py 檢查 Domain/Application 正常／建置依賴不得引入資料庫、HTTP、GUI 或產品 Adapter；測試用依賴另列。
+
+後續 rust_ai_chat 的微調以其最新 main 的實際變更為主，唯讀比較上次採用參考 SHA，再更新本分支的對應模組與教學；完整流程見語意審查文件。

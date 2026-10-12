@@ -22,3 +22,6 @@ pub async fn save_profile(
     }
     repository.save(id, profile).await
 }
+
+#[cfg(test)]
+mod tests;

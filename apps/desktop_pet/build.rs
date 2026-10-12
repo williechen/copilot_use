@@ -20,5 +20,6 @@ fn main() {
     }
     println!("cargo:rerun-if-changed=src");
     println!("cargo:rerun-if-changed=../../crates/pet_domain/src");
+    println!("cargo:rerun-if-changed=../../crates/pet_runtime/src");
     tauri_build::build()
 }

@@ -1,32 +1,15 @@
 [package]
-name = "day9-pet"
+name = "pet-domain"
 version.workspace = true
 edition.workspace = true
 
 [dependencies]
 toml = "0.9"
-serde_json.workspace = true
-event-contract = { path = "../shared" }
 serde.workspace = true
-uuid.workspace = true
+serde_json.workspace = true
 thiserror.workspace = true
-sqlx = { workspace = true, features = ["sqlite"] }
-tokio.workspace = true
-reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "json"] }
-base64 = "0.22"
-sha2 = "0.10"
-
-openai-adapter = { path = "../ai_core" }
-
-copilot-telemetry = {path="../telemetry"}
-
-mcp-bridge={path="../mcp_bridge"}
-
-[target.'cfg(unix)'.dependencies]
-libc = "0.2"
-
-[target.'cfg(windows)'.dependencies]
-windows-sys = {version="0.61",features=["Wdk_Foundation","Wdk_Storage_FileSystem","Win32_Foundation","Win32_Security","Win32_Security_Authorization","Win32_Storage_FileSystem","Win32_System_IO","Win32_System_Threading","Win32_System_WindowsProgramming"]}
+uuid = { version = "1", features = ["serde"] }
 
 [dev-dependencies]
-tempfile = "3"
+uuid = { version = "1", features = ["v4"] }
+tokio.workspace = true

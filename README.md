@@ -7,7 +7,7 @@ Rust AI Chat、Tauri/Leptos Desktop Pet、Product Analytics 的獨立產品工�
 | 產品 | 程式與資料 | 產品能力 |
 |---|---|---|
 | Chat | `apps/server`、`crates/ui`、`apps/server/frontend`；可攜式 SQLite（包含知識庫向量） | Leptos SSR/Hydration、登入 Session、私人房間 ACL、訊息/history、WS、交易 Outbox、真實 OpenAI 串流、RAG、唯讀 MCP/Agent |
-| Desktop Pet | `apps/desktop_pet`、`apps/desktop_pet/frontend`、`crates/pet_domain`；獨立 SQLite | Linux Tauri/WebKit GUI、多寵物與五項設定、記憶、複習排程、真實 AI 對話/生圖/快取、200×200 浮動視窗、安全預覽與確認 IPC、journal/租約、唯讀 MCP/Agent |
+| Desktop Pet | `apps/desktop_pet`、`apps/desktop_pet/frontend`、`crates/pet_domain`（規則／Port）、`crates/pet_runtime`（SQLite／平台 Adapter）；獨立 SQLite | Linux Tauri/WebKit GUI、多寵物與五項設定、記憶、複習排程、真實 AI 對話/生圖/快取、200×200 浮動視窗、安全預覽與確認 IPC、journal/租約、唯讀 MCP/Agent |
 | Analytics | `apps/stats_server`；獨立 PostgreSQL | 同服務 Dashboard + API、來源 token、持久冪等、事件查證、Taipei 日趨勢 API、可逆封存/還原、備份還原、結構洞察與人工審核/套用/回退 |
 
 上表列出實作能力；完整驗收須逐項取得相同來源版本的證據。最新資料庫變更及待驗收項目見 [SQLite 調整](docs/SQLITE_TRANSITION.md)；同來源驗收及重現見 [驗證紀錄](docs/LOCAL_VALIDATION.md)；既定目標見 [P9 規格](docs/P9_TARGET.md)。
