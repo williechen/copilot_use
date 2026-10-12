@@ -1,7 +1,7 @@
 {
   "reference_sha": "fdc74c1ee244cf86df3fd1c427d893d2956f6211",
-  "validated_program_sha": "97b290efe9fa5c90682bbff2fed5e8fec9bf3a7e",
-  "validated_program_ci_run": 38248095311,
+  "validated_program_sha": "39f34854b102eb96b44980d42d7b3f272307ec20",
+  "validated_program_ci_run": 38290016342,
   "fixed_tag": "v0.1.0",
   "fixed_tag_sha": "22b44f33b9e2c9edb0fb398fb9bff3efd57b00ee",
   "next_day": {
@@ -25,5 +25,12 @@
     "chat": "GitHub main persistence still PgPool; target migration is pending learning adoption",
     "pet": "SQLite implementation not established by current reference inspection",
     "writable": false
+  },
+  "analytics_transport": {
+    "ingestion": "gRPC/Protobuf",
+    "dashboard_query": "HTTP JSON",
+    "dashboard_updates": "SSE",
+    "contract": "crates/shared/proto/analytics.proto",
+    "validation": "docs/analytics-transport-validation.json"
   }
 }

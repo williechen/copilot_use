@@ -8,7 +8,7 @@ apps/
     frontend/             # Chat hydration 建置入口
   desktop_pet/            # Tauri IPC／updater
     frontend/             # Pet Leptos UI
-  stats_server/           # 同服務 Analytics Web／API
+  stats_server/           # 同服務 Analytics HTTP／gRPC／SSE
 crates/
   chat_domain/
   chat_application/
@@ -17,12 +17,13 @@ crates/
   pet_runtime/            # SQLite／HTTP／AI／OS／檔案 Adapter
   ai_core/                # OpenAI Provider／Agent Adapter
   mcp_bridge/
-  shared/                 # 跨產品事件契約
+  shared/                 # 跨產品事件契約與 proto/analytics.proto
+  analytics_transport/    # Tonic／Prost Driver；純層不匯入
   telemetry/
   ui/
 ```
 
-三個 app 與八個核心 crate 名稱對應 rust_ai_chat；pet_runtime、mcp_bridge 與 Chat frontend 是實際使用的產品 Adapter／建置入口。runtime 保留 day9-pet package／CLI 與 profile/application re-export，已有 Tauri IPC 格式保持。day9-* package 名稱為命令相容性，不是教學編號。
+三個 app 與八個核心 crate 名稱對應 rust_ai_chat；pet_runtime、mcp_bridge、analytics_transport 與 Chat frontend 是實際使用的產品 Adapter／建置入口。runtime 保留 day9-pet package／CLI 與 profile/application re-export，已有 Tauri IPC 格式保持。day9-* package 名稱為命令相容性，不是教學編號。
 
 SQLite Chat migration 在 crates/persistence/migrations；Pet 在 crates/pet_runtime/migrations；Analytics PostgreSQL 在 apps/stats_server/migrations。舊 Chat PG import 的 migration 原文在 apps/server/postgres-migrations，不套用到 SQLite。測試留在 owning app／crate／私有模組，不建立根 tests workspace。
 

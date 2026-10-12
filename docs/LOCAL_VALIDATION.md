@@ -36,3 +36,9 @@ Analytics 為匿名事件和受控詞頻的描述性計數，不代表獨立真�
 目錄與程式微調以 rust_ai_chat 為主，產品目標以 copilot_use 為主。依 [共同學習規則](COMMON_LEARNING_RULES.md) 和 [未來清單](FUTURE_WORK.md) 執行必要 source／fmt／Clippy／unit／DB／HTTP／WS／WASM／GUI／E2E／CI。文件整理不重複付費 AI 或相同程式的完整建置；確認程式 tree 未改變與文件連結有效。
 
 正式 Release／docs/release-evidence 保存固定成品證據；當前已驗證程式及參考來源見 learning-state.json。比較和教學的結果不得混算 rust_ai_chat 的實際套用進度。
+
+## 目前 Analytics 通訊變更驗收
+
+程式 SHA `39f34854b102eb96b44980d42d7b3f272307ec20`：[六項 CI 全部通過](https://github.com/williechen/copilot_use/actions/runs/38290016342)。本地 76 項 Cargo 測試、73 項跨服務檢查、Pet 真實 GUI、SSE 真實瀏覽器與 18 項 Docker release 驗證通過。gRPC／Protobuf 上報與 HTTP＋SSE 儀表板的契約／限制見 [ANALYTICS_TRANSPORT.md](ANALYTICS_TRANSPORT.md)，精確證據索引見 [analytics-transport-validation.json](analytics-transport-validation.json)。
+
+共享桌面曾有一次既有回想提醒 GUI 逾時；相同乾淨 SHA 在隔離 Xvfb 重測通過，失敗原因未建立，紀錄保留。新依賴兩份 lock audit 沒有已知漏洞，保留既有未維護警告。這次未重跑付費 OpenAI 功能；AI Provider 程式未變更，不把舊 AI 證據算成新 SHA 的重測。正式 v0.1.0 tag／附件維持原樣。

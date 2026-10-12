@@ -4,7 +4,7 @@
 
 ## Chat：持久化與通知的可靠邊界
 
-實際對照 chat_domain 訊息／作者規則、chat_application::MessageRepository/persist、persistence::ChatWriter/OutboxStore、server HTTP／WS 及 shared::ProductEvent。先驗證／持久化，再通知／投遞；DB 失敗、部分串流與重送不算新成功訊息。依兩邊相同的 SQLite 目標提供必要遷移銜接，完整 Domain／Port／Adapter／契約／必要 migration／呼叫端與既有測試重構一起提供。測非法作者／輸入、DB 失敗不通知、訊息／Outbox 原子性、重送／精確 ID，必要 HTTP／WS／SQLite 整合。
+實際對照 chat_domain 訊息／作者規則、chat_application::MessageRepository/persist、persistence::ChatWriter/OutboxStore／gRPC Transport、server HTTP／WS 及 shared::ProductEvent。先驗證／持久化，再通知／投遞；DB 失敗、部分串流與重送不算新成功訊息。依兩邊相同的 SQLite 目標提供必要遷移銜接，完整 Domain／Port／Adapter／契約／必要 migration／呼叫端與既有測試重構一起提供。測非法作者／輸入、DB 失敗不通知、訊息／Outbox 原子性、重送／精確 ID，必要 HTTP／WS／SQLite 整合。
 
 ## Desktop Pet：預覽、確認與真實成功收據
 
@@ -12,7 +12,7 @@
 
 ## Product Analytics：來源認證與 PostgreSQL 持久冪等
 
-對照 stats_server::application::EventRepository/Analytics、persistence::EventStore、認證 ingest、shared 四欄事件及所屬 migrations。真正來源認證、落庫成功後才回 2xx、same source/event ID 去重及衝突拒絕；記憶體去重不替代 DB。完整 Application／Adapter／HTTP／migration／測試與 FakeStore／HTTP 契約整併。測 401／400／409／DB 失敗非 2xx、並發／重送／重啟持久去重，以及必要 Chat/Pet→Analytics E2E。
+對照 stats_server::application::EventRepository/Analytics、persistence::EventStore、grpc 認證 ingest、shared/proto 四欄契約、analytics_transport Driver 及所屬 migrations。真正來源認證、落庫成功後才回逐事件 gRPC ACK、same source/event ID 去重及衝突拒絕；記憶體去重不替代 DB。完整 Application／Adapter／gRPC／HTTP／SSE／migration／測試與 FakeStore／傳輸契約整併。測來源認證／batch／schema／identity conflict／DB 失敗不得成功 ACK、SSE 提交／回滾／重連、並發／重送／重啟持久去重，以及必要 Chat/Pet→Analytics E2E。
 
 ## 正式 Day 五節
 

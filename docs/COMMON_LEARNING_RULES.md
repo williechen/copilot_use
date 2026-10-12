@@ -9,7 +9,7 @@
 
 ## 共同實作與教學規則
 
-1. Domain/Application 不引入 DB、HTTP、OS、UI Driver；Repository／Platform Adapter 隔離 SQL、placeholder、migration、交易及平台差異。維持真正使用的 Port，不建立空架構。
+1. Domain/Application 不引入 DB、HTTP／gRPC、OS、UI Driver；Repository／Platform Adapter 隔離 SQL、placeholder、migration、交易及平台差異。維持真正使用的 Port，不建立空架構。
 2. 每天 08:00 Asia/Taipei 讀取共同主頁、三專案主頁、最新 source／tests／Cargo／migration／CI，唯讀比較 rust_ai_chat 的微調；產品增量與必要重構一起前進。
 3. Dry Run 逐檔讀取實際程式、公開／私有介面、斷言及缺口，提出可驗證的最小切片。Dry Run 不寫 Git／Notion，不要求完整程式；未取得 source／結果就標 Blocked，寫入 Gate 為 N/A。
 4. 正式實作按 Red → 最小 Green → Refactor，保留已有功能與安全不變量；新功能與必要重構均附可追溯路徑、符號、SHA 與相應測試。DDD／事件驅動只用於真實業務邊界、解耦、重試或追蹤需求。
@@ -20,7 +20,7 @@
 9. 教學、註解與自有 UI 使用繁體中文；第三方識別保留。版本 Gate 查官方 stable／MSRV、安全與 native／WASM 相容性，記錄宣告及 lock 版本、來源與維持／升級理由；未查證不猜。
 10. 不改已套用的 migration；Domain/Application 不綁定 SQLx／PgPool／儲存型別。不同 DB Adapter 的原生 UUID／VARCHAR(40)、bind／decode／交易分別驗證。
 11. FileOrganizer 非 root，只處理使用者授權 root／opaque ID；預覽與成功分開，破壞性動作須確認並重新驗證 symlink／TOCTOU／權限。產品事件與 OTel 分離，不傳憑證、聊天原文或完整私人路徑。
-12. 分別記錄 Dry Run source 檢查、Day 教學準備、程式實作／驗收的 Pass／Blocked／N/A。依變更執行 fmt／Clippy／unit／DB／HTTP／WS／WASM／GUI／E2E／CI；三專案及跨服務必要證據齊全才前進共同里程碑。產品成功不代表學習倉庫已套用。
+12. 分別記錄 Dry Run source 檢查、Day 教學準備、程式實作／驗收的 Pass／Blocked／N/A。依變更執行 fmt／Clippy／unit／DB／HTTP／gRPC／SSE／WS／WASM／GUI／E2E／CI；三專案及跨服務必要證據齊全才前進共同里程碑。產品成功不代表學習倉庫已套用。
 13. AI provider 為 OpenAI，model 為 gpt-5.6-luna；需要真實呼叫時讀本機 ~/.bashrc 的 OPENAI_API_KEY，不寫 Git／Notion／報告。AI 邏輯未改動可沿用匹配來源的有效證據；付費、mock、未執行測試分開標示。
 
 ## 每週六完整比對
@@ -29,7 +29,7 @@
 
 1. 唯讀取得兩個 repository 的最新 SHA／完整 tracked tree，核對正式 tag、教學 branch、適用 CI 與文件。
 2. 比較全部 tracked 檔案：路徑、內容 hash／差異、各自新增／刪除／搬移；排除未追蹤的 build、私人 DB、key 與快取。
-3. 逐模組核對職責、公開介面、Domain／Application／Adapter 依賴、重要資料流程、HTTP／WS／IPC／事件契約、資料模型／migration、UI／建置／CI／測試覆蓋。文字不同不自動判為需要重構。
+3. 逐模組核對職責、公開介面、Domain／Application／Adapter 依賴、重要資料流程、HTTP／gRPC／SSE／WS／IPC／事件契約、資料模型／migration、UI／建置／CI／測試覆蓋。文字不同不自動判為需要重構。
 4. 目錄／程式微調依 rust_ai_chat；目標與前進項目依 copilot_use。分類為保留合理差異、必要銜接、架構違反、產品未完成項目及未核實項目；不覆蓋已驗證功能／安全邊界。
 5. 完成必要的 copilot_use 實作與相應回歸；更新當前對照、共同規則／未來清單與來源，不把歷史摘要累積到主頁。無來源、測試或權限時列出實際阻礙。
 6. 保存完整比對證據於分離的證據區；整輪完成後才更新來源與下一個週六到期日。僅完成、重要變更、失敗或需要使用者處理時通知；未變且不可行動時保持安靜。

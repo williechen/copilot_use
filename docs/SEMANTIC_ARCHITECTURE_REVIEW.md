@@ -26,8 +26,9 @@
 | desktop_pet::main/updater、frontend | Tauri IPC／confirmation／rendering、Profile Port、runtime Store、簽章／實際更新冷啟動；前端只 invoke IPC | 只更新 runtime dependency 與 build watch，IPC 命令／回傳格式／更新程式保留 |
 | stats_server::application | EventRepository、Analytics::receive/recent/summary/lookup；輸入不合法不進 repository | 保留無 DB Driver 的 Application 模組 |
 | stats_server::persistence | PostgreSQL atomic insert/dedup、identity conflict、typed query rows | 保留 DB Adapter；參考 InMemoryDeduplicator/501 是學習基線，不覆蓋真正持久化 |
-| stats_server::lib/main/dashboard | source token／query token、HTTP 路由／頁面、健康狀態，Application 接線 | 保留 UI／HTTP Adapter，沒有新增空層 |
+| stats_server::lib/main/dashboard/grpc/live | source token／query token、HTTP／gRPC 路由、SSE、頁面、健康狀態，Application 接線 | 保留 UI／HTTP／gRPC／SSE Adapter，沒有新增空層 |
 | stats_server::governance/insights/topics | 可逆事件封存、描述性統計、人工審核／receipt／evaluate、同意撤回 | 保留匿名事件範圍，不假稱獨立使用者或因果成效 |
+| analytics_transport | .proto 生成 Tonic／Prost client/server、事件映射、deadline／逐事件 ACK；Chat／Pet Outbox 共用 | 新需求所需 Driver；純 Domain／Application 不依賴它 |
 | shared | ProductEvent 四欄、source/type whitelist、固定 topic 字彙；不包含本文／路徑 | 保留跨產品事件契約；參考 shared 的 WS DTO 是另一通道，不混用 |
 | ai_core | package openai-adapter；Decoder、stream_text、embedding、generate_sprite、bounded agent | 保留已驗證 Provider Adapter。參考 ChatModel/MockChatModel 是抽象／測試教學階段；此處是具體 Provider，不宣稱是純 Domain |
 | mcp_bridge | HTTP MCP protocol／header／metadata、HttpClient、tool schemas；執行 scope 由 host 控制 | 保留通訊 Adapter，Domain/Application 依賴圖禁止匯入它 |
@@ -36,9 +37,9 @@
 
 ## 三條關鍵資料流程
 
-1. Chat：HTTP／ACL → MessageInput → application::persist/validate → MessageRepository → ChatWriter transaction → 訊息、Outbox、topic、realtime 同時 commit → fanout 讀取 canonical 內容／WS；Outbox 租約送到 Analytics，失敗保留重試。參考 publish closure 沒有直接拷貝到成品，因為成品通知必須跨程序且 durable。
+1. Chat：HTTP／ACL → MessageInput → application::persist/validate → MessageRepository → ChatWriter transaction → 訊息、Outbox、topic、realtime 同時 commit → fanout 讀取 canonical 內容／WS；Outbox 租約以 gRPC／Protobuf 送到 Analytics，失敗保留重試。參考 publish closure 沒有直接拷貝到成品，因為成品通知必須跨程序且 durable。
 2. Pet：Tauri save_profile → 純 save_profile Port → runtime PetStore → SQLite commit → 序列化檔案投影；ProjectionPending 原語意保留。複習 IPC → runtime Card → 純 Schedule → 同交易保存 Card／Outbox。cleanup preview 與確認的 OS 操作結果由 runtime 驗證，再保存成功 receipt／Outbox；GUI 和 Analytics 的實際事件 ID 在本地整合回歸核對。
-3. Analytics：來源 token／四欄事件驗證 → Analytics::receive → EventRepository → PostgreSQL dedup／product_events commit → 2xx；同來源同 ID 重送不重計，衝突不回成功。Dashboard 查詢、封存／撤回／審核是獨立授權路徑。
+3. Analytics：來源 token／四欄事件驗證 → Analytics::receive → EventRepository → PostgreSQL dedup／product_events commit → gRPC ACK（HTTP 相容入口仍回 2xx）；同來源同 ID 重送不重計，衝突不回成功。Dashboard 以 HTTP 查詢、SSE 依已提交 revision 通知重新查詢；封存／撤回／審核是獨立授權路徑。
 
 ## 公開介面與適配
 
