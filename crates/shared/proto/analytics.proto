@@ -1,0 +1,28 @@
+syntax = "proto3";
+package copilot.analytics.v1;
+
+// Only the existing four low-sensitivity fields cross the service boundary.
+message ProductEvent {
+  uint32 schema_version = 1;
+  string event_id = 2;
+  string source_app = 3;
+  string event_type = 4;
+}
+message IngestEventsRequest { repeated ProductEvent events = 1; }
+enum Outcome {
+  OUTCOME_UNSPECIFIED = 0;
+  STORED = 1;
+  ALREADY_EXISTS = 2;
+  INVALID_EVENT = 3;
+  IDENTITY_CONFLICT = 4;
+}
+message EventResult {
+  string event_id = 1;
+  string source_app = 2;
+  Outcome outcome = 3;
+}
+message IngestEventsResponse { repeated EventResult results = 1; }
+service EventIngestion {
+  // 1..64 events; each successful result acknowledges a committed transaction.
+  rpc IngestEvents(IngestEventsRequest) returns (IngestEventsResponse);
+}

@@ -4,6 +4,7 @@ version.workspace = true
 edition.workspace = true
 
 [dependencies]
+analytics-transport = { path = "../../crates/analytics_transport" }
 axum.workspace = true
 event-contract = { path = "../../crates/shared" }
 serde.workspace = true
@@ -16,3 +17,14 @@ sha2 = "0.10"
 openai-adapter = { path = "../../crates/ai_core" }
 
 copilot-telemetry = {path="../../crates/telemetry"}
+
+tonic = "0.14"
+async-stream = "0.3"
+futures-core = "0.3"
+
+[dev-dependencies]
+persistence = { path = "../../crates/persistence" }
+day9-pet = { path = "../../crates/pet_runtime" }
+tempfile = "3"
+reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "json", "stream"] }
+futures-util = "0.3"

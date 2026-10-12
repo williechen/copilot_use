@@ -40,3 +40,7 @@ python3 scripts/local-verify.py --live-openai
 正式 [v0.1.0](https://github.com/williechen/copilot_use/releases/tag/v0.1.0) 保持固定；每日教學在 teaching/rust-ai-chat-alignment，main 整合匹配驗收的變更。根 workspace 管理服務／共享 crates；frontend/native 保留獨立 lock。測試放所屬 app／crate／模組，沒有根 tests workspace。私人 .env／DB 與生成檔不提交。
 
 主文件保留有效規則與未來工作；封存及 Git 歷史不作現行待辦。已套用 migrations、固定 release 證據及操作手冊保留。
+
+## Analytics 通訊更新
+
+Chat／Pet SQLite Outbox 改以 gRPC／Protobuf 上報；Dashboard 保留 HTTP 查詢並以 SSE 即時更新。使用既有 Analytics port／來源 token，PostgreSQL 提交後才 ACK。這是正式 v0.1.0 固定後的新需求，不變更既有 tag 或安裝包。契約、測試與運作限制見 [ANALYTICS_TRANSPORT.md](docs/ANALYTICS_TRANSPORT.md)。

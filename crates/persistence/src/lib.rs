@@ -228,34 +228,30 @@ impl OutboxStore {
 
 pub async fn dispatch_once(
     store: &OutboxStore,
-    client: &reqwest::Client,
+    _client: &reqwest::Client,
     endpoint: &str,
     token: &str,
 ) -> Result<bool, Box<dyn std::error::Error + Send + Sync>> {
     let Some(lease) = store.claim_one().await? else {
         return Ok(false);
     };
-    let mut request = client.post(endpoint);
-    for (key, value) in copilot_telemetry::outgoing_headers() {
-        request = request.header(key, value);
-    }
-    if let Some(parent) = &lease.traceparent {
-        request = request.header("traceparent", parent);
-    }
-    let result = request.bearer_auth(token).json(&lease.event).send().await;
-    match result {
-        Ok(response) if response.status().is_success() => {
+    let parent = lease.traceparent.clone().or_else(|| {
+        copilot_telemetry::outgoing_headers()
+            .get("traceparent")
+            .cloned()
+    });
+    match analytics_transport::deliver(endpoint, token, &lease.event, parent.as_deref()).await {
+        Ok(()) => {
             store.ack(&lease).await?;
         }
-        Ok(response) => {
-            let status = response.status();
-            let retry = status.is_server_error() || matches!(status.as_u16(), 408 | 425 | 429);
+        Err(status) => {
             store
-                .fail(&lease, &format!("http_{}", status.as_u16()), retry)
+                .fail(
+                    &lease,
+                    "grpc_delivery_failed",
+                    analytics_transport::retryable(&status),
+                )
                 .await?;
-        }
-        Err(_) => {
-            store.fail(&lease, "transport_error", true).await?;
         }
     }
     Ok(true)

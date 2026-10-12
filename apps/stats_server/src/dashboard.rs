@@ -26,8 +26,8 @@ small{opacity:.8}.error{color:#c33}#total{font-size:2.4rem;font-weight:700}
 <section aria-label="驗證">
 <label for="token">API Bearer Token（僅保存在本頁的記憶體）</label>
 <div class="row"><input id="token" type="password" autocomplete="off" placeholder="輸入 API Token">
-<button id="refresh">更新統計</button><button id="clear">清除</button></div>
-<p id="error" role="alert" class="error"></p>
+<button id="refresh">更新統計並即時連線</button><button id="clear">清除</button></div>
+<p id="error" role="alert" class="error"></p><p id="live-status" role="status">即時更新尚未連線</p>
 </section>
 <main>
 <article><h2>累積事件</h2><output id="total">—</output><p><small>以資料庫持久化並依來源及事件 ID 去重</small></p></article>
@@ -50,11 +50,13 @@ async function query(path) {
   return await res.json();
 }
 async function refresh() {
+  const credential=token.value;
   error.textContent=''; status.textContent='查詢中…';
   try {
     const [counts, breakdown] = await Promise.all([
       query('/api/v1/events/count'),query('/api/v1/events/summary')
     ]);
+    if(token.value!==credential)return;
     document.getElementById('total').textContent=Number(counts.total).toLocaleString();
     const tbody=document.getElementById('events');tbody.replaceChildren();
     for(const row of breakdown){
@@ -66,7 +68,7 @@ async function refresh() {
     }
     if(!breakdown.length) tbody.textContent='尚無事件';
     status.textContent='已更新 · '+new Date().toLocaleString();
-  } catch (e) {error.textContent=String(e.message);status.textContent='查詢失敗';}
+  } catch (e) {if(token.value!==credential)return;error.textContent=String(e.message);status.textContent='查詢失敗';}
 }
 
 const get=id=>document.getElementById(id);
@@ -77,9 +79,43 @@ get('trend').onclick=guarded(async()=>{const from=get('from').value+'T00:00:00+0
 async function suggestions(){const rows=await action('/api/v1/suggestions');const target=get('suggestions');target.replaceChildren();for(const row of rows){const article=document.createElement('article');const title=document.createElement('h3');title.textContent=row.id+' · '+row.status;article.appendChild(title);const text=document.createElement('p');text.textContent=row.summary;article.appendChild(text);const evidence=document.createElement('pre');evidence.textContent=JSON.stringify({proposal:row.proposal,snapshot:row.snapshot,evaluation:row.evaluation},null,2);article.appendChild(evidence);for(const decision of ['approved','rejected']){const button=document.createElement('button');button.textContent=decision==='approved'?'核准此建議':'拒絕此建議';button.disabled=row.status!=='pending';button.onclick=guarded(async()=>{await action('/api/v1/suggestions/'+row.id+'/review',{decision,confirmed:true},true);await suggestions();});article.appendChild(button);}const evaluate=document.createElement('button');evaluate.textContent='記錄目前事件數以供比較（不代表因果）';evaluate.disabled=!['applied','rolled_back'].includes(row.status);evaluate.onclick=guarded(async()=>{await action('/api/v1/suggestions/'+row.id+'/evaluate',{confirmed:true},true);await suggestions();});article.appendChild(evaluate);target.appendChild(article);}}
 get('load-suggestions').onclick=guarded(suggestions);get('generate-insight').onclick=guarded(async()=>{await action('/api/v1/insights',{target_app:get('target').value},true);await suggestions();});
 for(const op of ['archive','restore'])get(op).onclick=guarded(async()=>{if(!get('confirm-archive').checked)throw Error('請先確認可逆資料操作');const before=get('before').value;if(!before)throw Error('請選擇台北時間');const result=await action('/api/v1/events/'+op,{before:before+(before.length===16?':00':'')+'+08:00',confirmed:true},true);await refresh();status.textContent=(op==='archive'?'已封存 ':'已還原 ')+result.changed+' 筆；操作可回復';});
-document.getElementById('refresh').addEventListener('click',refresh);
+// Use fetch streaming so Bearer credentials stay in headers, never URL/cookies/storage.
+let liveController=null, liveTimer=null, refreshTimer=null, refreshing=false, refreshAgain=false;
+const liveStatus=document.getElementById('live-status');
+function stopLive(){
+ if(liveController)liveController.abort();liveController=null;
+ clearTimeout(liveTimer);clearTimeout(refreshTimer);liveTimer=null;refreshTimer=null;refreshAgain=false;
+ liveStatus.textContent='即時更新已停止';
+}
+function scheduleRefresh(){
+ if(refreshing){refreshAgain=true;return;}
+ if(refreshTimer)return;
+ refreshTimer=setTimeout(async()=>{refreshTimer=null;refreshing=true;try{await refresh();}finally{refreshing=false;if(refreshAgain){refreshAgain=false;scheduleRefresh();}}},250);
+}
+async function connectLive(controller, credential){
+ try{
+  const res=await fetch('/api/v1/events/stream',{headers:{Authorization:'Bearer '+credential},cache:'no-store',signal:controller.signal});
+  if(!res.ok){if([401,403].includes(res.status)){liveStatus.textContent='即時更新驗證失敗';return;}throw Error('SSE HTTP '+res.status);}
+  if(!res.headers.get('content-type')?.startsWith('text/event-stream'))throw Error('SSE 格式不正確');
+  liveStatus.textContent='即時更新已連線';
+  const reader=res.body.getReader(),decoder=new TextDecoder();let buffer='';
+  while(!controller.signal.aborted){
+   const chunk=await reader.read();if(chunk.done)break;
+   buffer+=decoder.decode(chunk.value,{stream:true});
+   if(buffer.length>65536)throw Error('SSE 訊息過大');
+   let boundary;while((boundary=buffer.indexOf('\n\n'))>=0){
+    const frame=buffer.slice(0,boundary);buffer=buffer.slice(boundary+2);
+    if(frame.split('\n').some(line=>line.trim()==='event: invalidate'))scheduleRefresh();
+   }
+  }
+ }catch(e){if(controller.signal.aborted)return;}
+ if(!controller.signal.aborted){liveStatus.textContent='即時更新中斷，重新連線中…';liveTimer=setTimeout(()=>{liveTimer=null;connectLive(controller,credential);},2000);}
+}
+function startLive(){stopLive();if(!token.value)return;liveController=new AbortController();connectLive(liveController,token.value);}
+token.addEventListener('input',stopLive);
+document.getElementById('refresh').addEventListener('click',()=>{startLive();scheduleRefresh();});
 document.getElementById('clear').addEventListener('click',()=>{
- token.value='';get('admin').value='';get('suggestions').replaceChildren();document.getElementById('total').textContent='—';
+ stopLive();token.value='';get('admin').value='';get('suggestions').replaceChildren();document.getElementById('total').textContent='—';
  document.getElementById('events').textContent='請先驗證';document.getElementById('recent-rows').replaceChildren();document.getElementById('timeline').replaceChildren();document.getElementById('suggestions').replaceChildren();document.getElementById('admin').value='';
 });
 </script></body></html>"##,

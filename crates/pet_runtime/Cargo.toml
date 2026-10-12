@@ -4,6 +4,7 @@ version.workspace = true
 edition.workspace = true
 
 [dependencies]
+analytics-transport = { path = "../analytics_transport" }
 pet-domain = { path = "../pet_domain" }
 toml = "0.9"
 serde_json.workspace = true

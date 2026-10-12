@@ -1,6 +1,6 @@
 [workspace]
 resolver = "3"
-members = ["crates/shared", "crates/ai_core", "crates/ui", "crates/telemetry", "crates/mcp_bridge", "crates/chat_domain", "crates/chat_application", "crates/persistence", "apps/server", "crates/pet_domain", "crates/pet_runtime", "apps/stats_server"]
+members = ["crates/analytics_transport", "crates/shared", "crates/ai_core", "crates/ui", "crates/telemetry", "crates/mcp_bridge", "crates/chat_domain", "crates/chat_application", "crates/persistence", "apps/server", "crates/pet_domain", "crates/pet_runtime", "apps/stats_server"]
 
 [workspace.package]
 edition = "2024"

@@ -28,6 +28,8 @@ impl PetStore {
         let code = match code {
             "invalid_event" => "invalid_event",
             "http_rejected" => "http_rejected",
+            "grpc_rejected" => "grpc_rejected",
+            "grpc_unavailable" => "grpc_unavailable",
             _ => "transport_or_retryable_http",
         };
         Ok(sqlx::query("UPDATE pet_outbox SET attempts=?,next_attempt_at=?,lease_token=NULL,lease_until=NULL,last_error=? WHERE event_id=? AND lease_token=? AND delivered=0 AND lease_until>?")
@@ -66,32 +68,25 @@ impl PetStore {
                     return Ok(true);
                 }
             };
-        let client = reqwest::Client::builder()
-            .no_proxy()
-            .timeout(std::time::Duration::from_secs(10))
-            .redirect(reqwest::redirect::Policy::none())
-            .build()?;
-        let mut request = client.post(endpoint).bearer_auth(token).json(&event);
-        if let Some(parent) = &lease.traceparent {
-            request = request.header("traceparent", parent);
-        }
-        let result = request.send().await;
-        if result.as_ref().is_ok_and(|r| r.status().is_success()) {
-            self.ack_event(&lease).await?;
-        } else {
-            let permanent = result.as_ref().is_ok_and(|r| {
-                r.status().is_client_error() && !matches!(r.status().as_u16(), 408 | 425 | 429)
-            });
-            self.fail_event(
-                &lease,
-                if permanent {
-                    "http_rejected"
-                } else {
-                    "transport_or_retryable_http"
-                },
-                permanent,
-            )
-            .await?;
+        match analytics_transport::deliver(endpoint, token, &event, lease.traceparent.as_deref())
+            .await
+        {
+            Ok(()) => {
+                self.ack_event(&lease).await?;
+            }
+            Err(status) => {
+                let permanent = !analytics_transport::retryable(&status);
+                self.fail_event(
+                    &lease,
+                    if permanent {
+                        "grpc_rejected"
+                    } else {
+                        "grpc_unavailable"
+                    },
+                    permanent,
+                )
+                .await?;
+            }
         }
         Ok(true)
     }

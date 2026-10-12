@@ -9,7 +9,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 PURE = {"chat-domain", "chat-application", "pet-domain"}
 FORBIDDEN = {"reqwest", "axum", "hyper", "tauri", "gtk", "glib", "day9-pet",
              "day9-chat", "day9-analytics", "persistence", "mcp-bridge",
-             "openai-adapter", "copilot-telemetry"}
+             "openai-adapter", "copilot-telemetry", "analytics-transport", "tonic", "prost"}
 
 
 def main():

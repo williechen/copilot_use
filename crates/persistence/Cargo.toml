@@ -3,6 +3,7 @@ name="persistence"
 version.workspace=true
 edition.workspace=true
 [dependencies]
+analytics-transport = { path = "../analytics_transport" }
 chat-application={path="../chat_application"}
 event-contract={path="../shared"}
 copilot-telemetry={path="../telemetry"}

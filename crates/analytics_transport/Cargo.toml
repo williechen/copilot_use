@@ -1,0 +1,15 @@
+[package]
+name = "analytics-transport"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+event-contract = { path = "../shared" }
+tonic = { version = "0.14", features = ["tls-ring", "tls-native-roots"] }
+tonic-prost = "0.14"
+prost = "0.14"
+uuid.workspace = true
+
+[build-dependencies]
+tonic-prost-build = "0.14"
+protoc-bin-vendored = "3"

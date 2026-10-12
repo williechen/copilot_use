@@ -399,8 +399,8 @@ INSERT INTO chat_topic_withdraw_outbox VALUES('44444444-4444-4444-8444-444444444
                             values={x['key']:x.get('value',{}).get('stringValue') for x in span.get('attributes',[])}
                             if expected_route is None or values.get('http.route')==expected_route:ids.add(span['traceId'])
             return ids
-        chat_ids=trace_ids('chat','/api/v1/messages');analytics_ids=trace_ids('analytics','/api/v1/events')
-        check('Chat Outbox and Analytics preserve W3C trace correlation',bool(chat_ids&analytics_ids))
+        chat_ids=trace_ids('chat','/api/v1/messages');analytics_ids=trace_ids('analytics','/copilot.analytics.v1.EventIngestion/{*rest}')
+        check('Chat Outbox and gRPC Analytics preserve W3C trace correlation',bool(chat_ids&analytics_ids))
 
         forbidden=([live_key] if live_key else [])+[chat_token,analytics_token,ingest_token,pet_token,'transactional test','retry after outage','not committed','Rust token=synthetic-secret','Rust rust ownership']
         if '--pet-gui' in sys.argv:
@@ -418,7 +418,7 @@ INSERT INTO chat_topic_withdraw_outbox VALUES('44444444-4444-4444-8444-444444444
             # Native file operations preserve traceparent into durable SQLite outbox.
             time.sleep(.5)
             pet_ids=trace_ids('desktop_pet')
-            analytics_ids=trace_ids('analytics','/api/v1/events')
+            analytics_ids=trace_ids('analytics','/copilot.analytics.v1.EventIngestion/{*rest}')
             check('Pet and Analytics preserve W3C trace correlation',bool(pet_ids&analytics_ids))
             forbidden += ['安全隔離的測試記憶','Rust 的所有權如何避免 double free？','sample.txt','second.txt']
         env['VERIFY_TOPIC_FIXTURE']=str(d/'topic-fixture.json')

@@ -26,7 +26,7 @@ Chat 使用 `CHAT_DATABASE_URL=sqlite://data/chat.sqlite3`（未指定時為此�
 | ANALYTICS_PET_TOKEN | desktop_pet 投遞、只讀取自己的建議與回報收據 |
 | ANALYTICS_ADMIN_TOKEN | 可逆封存/還原、產生/審核建議、記錄描述性比較 |
 
-Chat 的 `ANALYTICS_ENDPOINT` 使用 `http://127.0.0.1:3100/api/v1/events`。`CHAT_LISTEN` 預設 127.0.0.1:3001；Analytics 預設 127.0.0.1:3100。
+事件上報已切換為 gRPC／Protobuf；既有 `ANALYTICS_ENDPOINT` 保留作相容設定與 HTTP 管理操作，gRPC client 使用其 origin。Chat 的 `ANALYTICS_ENDPOINT` 使用 `http://127.0.0.1:3100/api/v1/events`。`CHAT_LISTEN` 預設 127.0.0.1:3001；Analytics 預設 127.0.0.1:3100。
 
 ```sh
 bash scripts/build-chat-ui.sh
@@ -35,7 +35,7 @@ cargo run --locked -p day9-analytics
 cargo run --locked -p day9-chat
 ```
 
-Chat 開啟 `http://127.0.0.1:3001/login` 註冊/登入。密碼至少 12 字元；HttpOnly/SameSite cookie 與 CSRF header，房主邀請後才能讀寫私有房間。管理 API token 是獨立服務權限，不要傳給一般用戶。Analytics Dashboard 在 3100 根路徑，query token 只留當頁記憶體。
+Chat 開啟 `http://127.0.0.1:3001/login` 註冊/登入。密碼至少 12 字元；HttpOnly/SameSite cookie 與 CSRF header，房主邀請後才能讀寫私有房間。管理 API token 是獨立服務權限，不要傳給一般用戶。Analytics Dashboard 在 3100 根路徑，query token 只留當頁記憶體。按「更新統計並即時連線」後，以帶 Authorization header 的 fetch SSE 接收更新；清除／修改 token 會停止連線。SSE token 不放 URL。HTTP 與 gRPC 共用 3100 port，Docker 內網使用 h2c；跨主機須有支援 HTTP/2 gRPC 的 TLS 終止。
 
 AI 設定 `OPENAI_API_KEY`、`OPENAI_CHAT_MODEL=gpt-5.6-luna`；embedding 預設 `text-embedding-3-small`、1536 dimensions。未設定時回 503，不使用 mock。知識庫與 Pet AI 會依 UI 說明傳送選取資料到 OpenAI。
 

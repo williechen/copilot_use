@@ -1,6 +1,8 @@
 //! Analytics：認證後持久事件、依 (source_app,event_id) 原子去重、Query API。
 pub mod application;
 pub mod dashboard;
+pub mod grpc;
+mod live;
 use application::{Analytics, RepositoryError};
 mod governance;
 mod insights;
@@ -156,9 +158,11 @@ async fn event_lookup(
 }
 
 pub fn build_app(state: AnalyticsState) -> Router {
+    let grpc = grpc::routes(state.clone());
     Router::new()
         .route("/", get(dashboard::dashboard))
         .route("/healthz", get(health))
+        .route("/api/v1/events/stream", get(live::updates))
         .route("/api/v1/insights", post(insights::generate))
         .route("/api/v1/suggestions", get(insights::list))
         .route("/api/v1/suggestions/{id}", get(insights::get))
@@ -178,8 +182,9 @@ pub fn build_app(state: AnalyticsState) -> Router {
         .route("/api/v1/events/archive", post(governance::archive))
         .route("/api/v1/events/restore", post(governance::restore))
         .layer(axum::extract::DefaultBodyLimit::max(4096))
-        .layer(axum::middleware::from_fn(copilot_telemetry::http))
         .with_state(state)
+        .merge(grpc)
+        .layer(axum::middleware::from_fn(copilot_telemetry::http))
 }
 
 #[cfg(test)]
