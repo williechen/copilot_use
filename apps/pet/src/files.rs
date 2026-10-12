@@ -152,6 +152,10 @@ impl PetStore {
         if pet.is_nil() {
             return Err("invalid pet identity".into());
         }
+        // Fair async serialization for all clones of this store prevents an eight
+        // pet burst from racing directory ACL updates or timing out on our own lock.
+        // The file lock below still coordinates independently opened stores/processes.
+        let _queue = self.projection_queue.lock().await;
         let root = self.files_root()?;
         let _lock = lock(&root).await?;
         let profile: String = sqlx::query_scalar("SELECT profile FROM pets WHERE id=?")
@@ -271,7 +275,12 @@ mod tests {
             handles.push(tokio::spawn(async move{
                 let pet=Uuid::new_v4();
                 let profile:PetProfile=serde_json::from_value(json!({"名字":format!("Concurrent {index}"),"種類":"鳥","喜好":[],"個性":[],"興趣":[]})).unwrap();
-                barrier.wait().await;store.save_profile(pet,&profile).await.unwrap();pet
+                barrier.wait().await;
+                if let Err(error)=store.save_profile(pet,&profile).await {
+                    let retry=store.sync_pet_files(pet).await;
+                    panic!("synthetic concurrent projection failed: {error}; actual retry: {retry:?}");
+                }
+                pet
             }));
         }
         barrier.wait().await;

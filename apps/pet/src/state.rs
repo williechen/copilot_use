@@ -21,6 +21,7 @@ pub fn now() -> i64 {
 pub struct PetStore {
     pub pool: SqlitePool,
     database_path: std::path::PathBuf,
+    pub(crate) projection_queue: std::sync::Arc<tokio::sync::Mutex<()>>,
 }
 #[derive(Serialize, Deserialize, FromRow)]
 pub struct PetItem {
@@ -104,6 +105,7 @@ impl PetStore {
         Ok(Self {
             pool,
             database_path: path.to_owned(),
+            projection_queue: std::sync::Arc::new(tokio::sync::Mutex::new(())),
         })
     }
     pub async fn open(path: &Path) -> Result<Self, sqlx::Error> {
@@ -119,6 +121,7 @@ impl PetStore {
         Ok(Self {
             pool,
             database_path: path.to_owned(),
+            projection_queue: std::sync::Arc::new(tokio::sync::Mutex::new(())),
         })
     }
     pub async fn select_pet(&self, pet: Uuid) -> Result<(), sqlx::Error> {
