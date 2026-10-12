@@ -83,6 +83,9 @@ Set-Acl -LiteralPath $env:COPILOT_GUI_FIXTURE_DIRECTORY -AclObject $acl
                 executable=disposable/executable.name
             else:raise SystemExit('Unsupported update platform')
             expected_updated_hash=hashlib.sha256((options.expected_executable or options.update_package).read_bytes()).hexdigest()
+            if sys.platform=='win32':
+                fixture_version=subprocess.check_output([options.expected_executable.resolve(),'--version'],cwd=ROOT,env=env,timeout=30,text=True,encoding='utf-8').strip()
+                if fixture_version!='0.1.1':raise SystemExit('Windows update fixture version differs: '+repr(fixture_version))
             env['PET_GUI_TEST_INSTALL_UPDATE']='true'
         else:payload.write_bytes(b'isolated updater signature fixture')
         subprocess.run(['cargo','tauri','signer','generate','--ci','--password','','--write-keys',str(key)],check=True,cwd=ROOT,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
@@ -110,13 +113,17 @@ Set-Acl -LiteralPath $env:COPILOT_GUI_FIXTURE_DIRECTORY -AclObject $acl
     if options.update_package and (result.get('success')or(sys.platform=='win32'and result.get('update_pending')and result.get('prerequisites_passed')and result.get('before_snapshot'))):
         deadline=time.monotonic()+180
         cold_command=[executable]+(['--appimage-extract-and-run']if executable.suffix=='.AppImage'else[])+['--version']
+        actual_updated_hash=None;cold_version=None
         while True:
             try:
                 actual_updated_hash=hashlib.sha256(executable.read_bytes()).hexdigest()
-                cold_version=subprocess.check_output(cold_command,env=env,cwd=ROOT,timeout=30,text=True,encoding='utf-8').strip()
-                if actual_updated_hash==expected_updated_hash and cold_version=='0.1.1':break
+                # Avoid launching the old executable while NSIS checks running
+                # processes and replaces it. Cold-start only the expected bytes.
+                if actual_updated_hash==expected_updated_hash:
+                    cold_version=subprocess.check_output(cold_command,env=env,cwd=ROOT,timeout=30,text=True,encoding='utf-8').strip()
+                    if cold_version=='0.1.1':break
             except (OSError,subprocess.SubprocessError):pass
-            if time.monotonic()>=deadline:raise SystemExit('Signed update did not install expected bytes and cold version')
+            if time.monotonic()>=deadline:raise SystemExit(json.dumps({'error':'Signed update did not install expected bytes and cold version','expected_sha256':expected_updated_hash,'actual_sha256':actual_updated_hash,'cold_version':cold_version,'platform':sys.platform}))
             time.sleep(1)
         with closing(sqlite3.connect(directory/'state/pet.sqlite'))as database:
             if database.execute('PRAGMA integrity_check').fetchone()[0]!='ok'or database.execute('SELECT count(*) FROM pets').fetchone()[0]<2:raise SystemExit('Updated app lost SQLite integrity or user data')
