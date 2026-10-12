@@ -113,7 +113,12 @@ Set-Acl -LiteralPath $env:COPILOT_GUI_FIXTURE_DIRECTORY -AclObject $acl
             time.sleep(1)
         with closing(sqlite3.connect(directory/'state/pet.sqlite'))as database:
             if database.execute('PRAGMA integrity_check').fetchone()[0]!='ok'or database.execute('SELECT count(*) FROM pets').fetchone()[0]<2:raise SystemExit('Updated app lost SQLite integrity or user data')
-        if not list((directory/'state/backups').glob('*.sqlite')):raise SystemExit('Update did not preserve pre-install snapshot')
+        manifests=list((directory/'state/backups').glob('*/manifest.json'))
+        if not manifests:raise SystemExit('Update did not preserve pre-install snapshot')
+        for manifest in manifests:
+            metadata=json.loads(manifest.read_text(encoding='utf-8'));snapshot=manifest.parent/'snapshot.sqlite'
+            if metadata['sha256']!=hashlib.sha256(snapshot.read_bytes()).hexdigest():raise SystemExit('Pre-install snapshot checksum mismatch')
+        if result.get('before_snapshot') and not any(p.parent.name==result['before_snapshot'] for p in manifests):raise SystemExit('Actual pre-install snapshot receipt missing')
         result['success']=True
         result['update_install']={'sha256':actual_updated_hash,'cold_version':cold_version,'sqlite_integrity':'ok','pets_preserved':True,'pre_update_snapshot':True,'platform':sys.platform}
         result['message']='PASS: complete pre-install GUI, verified signature, actual update bytes, cold 0.1.1, SQLite and snapshot preservation'
