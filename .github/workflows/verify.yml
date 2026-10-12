@@ -236,3 +236,13 @@ jobs:
             apps/pet_desktop/target/release/bundle/macos/*.app/
             apps/pet_desktop/target/release/bundle/nsis/*_0.1.0_*.exe
             target/pet-gui-validation.json
+
+      - name: Preserve isolated Windows updater diagnostics on failure
+        if: failure() && runner.os == 'Windows'
+        uses: actions/upload-artifact@v4
+        with:
+          name: updater-diagnostic-Windows
+          path: |
+            apps/pet_desktop/target/release/bundle/nsis/*.exe
+            apps/pet_desktop/target/release/copilot-desktop-pet.exe
+            target/pet-gui-validation.json

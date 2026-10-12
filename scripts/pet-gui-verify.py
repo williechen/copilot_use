@@ -68,6 +68,8 @@ Set-Acl -LiteralPath $env:COPILOT_GUI_FIXTURE_DIRECTORY -AclObject $acl
         if options.update_package:
             if not options.executable:raise SystemExit('Actual update acceptance requires a packaged executable')
             shutil.copyfile(options.update_package,payload)
+            original_executable=executable
+            base_executable_hash=hashlib.sha256(executable.read_bytes()).hexdigest()
             if sys.platform.startswith('linux'):
                 if executable.suffix!='.AppImage':raise SystemExit('Linux actual update requires AppImage')
                 disposable=directory/'current.AppImage';shutil.copy2(executable,disposable);executable=disposable
@@ -113,7 +115,12 @@ Set-Acl -LiteralPath $env:COPILOT_GUI_FIXTURE_DIRECTORY -AclObject $acl
     if options.update_package and (result.get('success')or(sys.platform=='win32'and result.get('update_pending')and result.get('prerequisites_passed')and result.get('before_snapshot'))):
         deadline=time.monotonic()+180
         cold_command=[executable]+(['--appimage-extract-and-run']if executable.suffix=='.AppImage'else[])+['--version']
-        actual_updated_hash=None;cold_version=None
+        actual_updated_hash=None;cold_version=None;installer_activity=[]
+        if sys.platform=='win32':
+            query="Get-CimInstance Win32_Process | Where-Object { $_.ExecutablePath -like '*-updater-*\\*-installer.exe' } | Select-Object Name,ProcessId,CommandLine | ConvertTo-Json -Compress"
+            inspected=subprocess.run([permission_shell,'-NoProfile','-NonInteractive','-Command',query],env=permission_env,capture_output=True,text=True,encoding='utf-8',timeout=30)
+            if inspected.returncode==0 and inspected.stdout.strip():installer_activity=json.loads(inspected.stdout)
+            print('Isolated NSIS activity: '+json.dumps(installer_activity),flush=True)
         while True:
             try:
                 actual_updated_hash=hashlib.sha256(executable.read_bytes()).hexdigest()
@@ -123,7 +130,22 @@ Set-Acl -LiteralPath $env:COPILOT_GUI_FIXTURE_DIRECTORY -AclObject $acl
                     cold_version=subprocess.check_output(cold_command,env=env,cwd=ROOT,timeout=30,text=True,encoding='utf-8').strip()
                     if cold_version=='0.1.1':break
             except (OSError,subprocess.SubprocessError):pass
-            if time.monotonic()>=deadline:raise SystemExit(json.dumps({'error':'Signed update did not install expected bytes and cold version','expected_sha256':expected_updated_hash,'actual_sha256':actual_updated_hash,'cold_version':cold_version,'platform':sys.platform}))
+            if time.monotonic()>=deadline:
+                diagnostics={'error':'Signed update did not install expected bytes and cold version','expected_sha256':expected_updated_hash,'base_sha256':base_executable_hash,'actual_sha256':actual_updated_hash,'cold_version':cold_version,'platform':sys.platform,'installer_activity':installer_activity}
+                if sys.platform=='win32':
+                    import winreg
+                    diagnostics['registry']=[]
+                    for hive in (winreg.HKEY_CURRENT_USER,winreg.HKEY_LOCAL_MACHINE):
+                        try:
+                            with winreg.OpenKey(hive,r'Software\Microsoft\Windows\CurrentVersion\Uninstall\Copilot Desktop Pet')as registered:
+                                diagnostics['registry'].append({key:winreg.QueryValueEx(registered,key)[0] for key in ('InstallLocation','DisplayVersion')})
+                        except OSError:pass
+                    try:diagnostics['failed_cold_probe']=subprocess.check_output(cold_command,env=env,cwd=ROOT,timeout=30,text=True,encoding='utf-8').strip()
+                    except (OSError,subprocess.SubprocessError)as error:diagnostics['failed_cold_probe']=type(error).__name__
+                    diagnostics['original_location_sha256']=hashlib.sha256(original_executable.read_bytes()).hexdigest() if original_executable.exists()else None
+                result['update_diagnostics']=diagnostics
+                REPORT.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+                raise SystemExit(json.dumps(diagnostics))
             time.sleep(1)
         with closing(sqlite3.connect(directory/'state/pet.sqlite'))as database:
             if database.execute('PRAGMA integrity_check').fetchone()[0]!='ok'or database.execute('SELECT count(*) FROM pets').fetchone()[0]<2:raise SystemExit('Updated app lost SQLite integrity or user data')
