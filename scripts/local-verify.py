@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""建立全新隔離 PostgreSQL，以真實 binary/API 驗證；結束時移除測試庫。"""
+"""建立全新隔離 SQLite Chat/Pet 與 PostgreSQL Analytics，以真實 binary/API 驗證；結束時移除測試庫。"""
+import sqlite3
 import json, uuid, os, pathlib, secrets, signal, socket, subprocess, sys, tempfile, time, urllib.request, urllib.error, threading
 from http.server import ThreadingHTTPServer,BaseHTTPRequestHandler
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -85,19 +86,43 @@ with tempfile.TemporaryDirectory(prefix='copilot-verify-') as scratch:
         run([PG/'initdb','-D',d/'data','-A','trust','--no-locale','-E','UTF8'],stdout=subprocess.DEVNULL)
         run([PG/'pg_ctl','-D',d/'data','-l',d/'pg.log','-o',f'-h 127.0.0.1 -p {dbport} -k {scratch}','start'],stdout=subprocess.DEVNULL)
         started=True
-        run([PG/'psql',admin.rsplit('/',1)[0]+'/template1','-v','ON_ERROR_STOP=1','-c','CREATE EXTENSION IF NOT EXISTS vector'],stdout=subprocess.DEVNULL)
         run(['cargo','fmt','--all','--','--check'])
         run(['cargo','clippy','--workspace','--all-targets','--locked','--','-D','warnings'])
         run(['cargo','test','--workspace','--all-targets','--locked'],env=common)
         run(['cargo','build','--workspace','--locked'])
-        check('fmt, strict clippy, workspace unit/PostgreSQL tests, binaries')
+        check('fmt, strict clippy, SQLite Chat/Pet and PostgreSQL Analytics tests, binaries')
         # 應用使用各自 non-superuser role；測試 admin 只用於新建測試庫及備份。
-        for app in ('chat','analytics'):
+        for app in ('analytics',):
             password=secrets.token_hex(24)
             sql=f"CREATE ROLE {app}_test LOGIN PASSWORD '{password}'; CREATE DATABASE {app}_test OWNER {app}_test;"
             run([PG/'psql',admin,'-v','ON_ERROR_STOP=1','-c',sql.split(';')[0]],stdout=subprocess.DEVNULL)
             run([PG/'psql',admin,'-v','ON_ERROR_STOP=1','-c',sql.split(';')[1]],stdout=subprocess.DEVNULL)
             env[app.upper()+'_DATABASE_URL']=f'postgresql://{app}_test:{password}@127.0.0.1:{dbport}/{app}_test'
+        env['CHAT_DATABASE_URL']='sqlite://'+str(d/'chat.sqlite3')
+        # Legacy import fixture uses actual PostgreSQL UUID/bytea/timestamp/JSONB/UUID[] codecs.
+        run([PG/'psql',admin,'-v','ON_ERROR_STOP=1','-c','CREATE DATABASE legacy_chat_import'],stdout=subprocess.DEVNULL)
+        legacy=admin.rsplit('/',1)[0]+'/legacy_chat_import'
+        legacy_sql="""
+CREATE TABLE chat_rooms(id varchar(40) PRIMARY KEY,name varchar(200),owner_id uuid);
+INSERT INTO chat_rooms VALUES('import-fixture','Imported room',NULL);
+CREATE TABLE chat_users(id uuid PRIMARY KEY,username text,password_hash text);
+INSERT INTO chat_users VALUES('11111111-1111-4111-8111-111111111111','import-user','synthetic-unused-hash');
+CREATE TABLE chat_sessions(token_hash bytea PRIMARY KEY,user_id uuid,expires_at timestamptz);
+INSERT INTO chat_sessions VALUES(decode('abcd','hex'),'11111111-1111-4111-8111-111111111111','2030-01-01T00:00:00Z');
+CREATE TABLE chat_messages(id uuid PRIMARY KEY,room_id varchar(40),author_kind text,author_id text,content text,created_at timestamptz);
+INSERT INTO chat_messages VALUES('22222222-2222-4222-8222-222222222222','import-fixture','anonymous_user',NULL,'imported message','2026-10-11T00:00:00Z');
+CREATE TABLE chat_persona_runs(id uuid PRIMARY KEY,room_id varchar(40),parameters jsonb,status text,max_turns integer,max_output_budget integer,reserved_tokens integer,result jsonb,updated_at timestamptz,failure_status integer);
+INSERT INTO chat_persona_runs VALUES('33333333-3333-4333-8333-333333333333','import-fixture','{"topic":"fixture","id":"33333333-3333-4333-8333-333333333333"}','completed',1,512,512,'[{"answer":"imported"}]','2026-10-11T00:00:00Z',NULL);
+CREATE TABLE chat_topic_withdraw_outbox(id uuid PRIMARY KEY,event_ids uuid[],status text,attempts integer,next_attempt_at timestamptz,lease_token uuid,lease_until timestamptz);
+INSERT INTO chat_topic_withdraw_outbox VALUES('44444444-4444-4444-8444-444444444444',ARRAY['55555555-5555-4555-8555-555555555555']::uuid[],'pending',0,'2026-10-11T00:00:00Z',NULL,NULL);
+"""
+        run([PG/'psql',legacy,'-v','ON_ERROR_STOP=1','-c',legacy_sql],stdout=subprocess.DEVNULL)
+        run(['python3','scripts/import-chat-postgres.py','--output',d/'imported.sqlite3'],env=env|{'CHAT_LEGACY_DATABASE_URL':legacy})
+        with sqlite3.connect(d/'imported.sqlite3') as imported:
+            check('read-only legacy import preserves UUID, bytes, time, JSON and arrays',imported.execute('SELECT id,content,created_at FROM chat_messages').fetchone()==(uuid.UUID('22222222-2222-4222-8222-222222222222').bytes,'imported message',1791676800.0) and imported.execute('SELECT token_hash FROM chat_sessions').fetchone()[0]==bytes.fromhex('abcd') and json.loads(imported.execute('SELECT event_ids FROM chat_topic_withdraw_outbox').fetchone()[0])==['55555555-5555-4555-8555-555555555555'] and json.loads(imported.execute('SELECT result FROM chat_persona_runs').fetchone()[0])[0]['answer']=='imported')
+        before=(d/'imported.sqlite3').read_bytes()
+        refused=subprocess.run(['python3','scripts/import-chat-postgres.py','--output',d/'imported.sqlite3'],env=env|{'CHAT_LEGACY_DATABASE_URL':legacy},stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
+        check('legacy import refuses overwrite and leaves source PostgreSQL data unchanged',refused.returncode!=0 and before==(d/'imported.sqlite3').read_bytes() and subprocess.check_output([PG/'psql',legacy,'-At','-c','SELECT content FROM chat_messages'],text=True).strip()=='imported message')
         handles=[]
         def start(app):
             log=open(d/f'{app}.log','a');handles.append(log)
@@ -121,11 +146,9 @@ with tempfile.TemporaryDirectory(prefix='copilot-verify-') as scratch:
         check('sequential unknown-account attempts bounded before expensive password work',all(rejected_login(chat_url)==401 for _ in range(8)) and rejected_login(chat_url)==429)
 
         # 跨角色隔離不能只看資料庫名稱，實際拒絕 CONNECT。
-        for app in ('chat','analytics'):
+        for app in ('analytics',):
             run([PG/'psql',admin,'-v','ON_ERROR_STOP=1','-c',f'REVOKE CONNECT ON DATABASE {app}_test FROM PUBLIC'],stdout=subprocess.DEVNULL)
-        wrong=env['CHAT_DATABASE_URL'].rsplit('/',1)[0]+'/analytics_test'
-        denied=subprocess.run([PG/'psql',wrong,'-c','SELECT 1'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
-        check('Chat database role cannot CONNECT to Analytics database',denied.returncode!=0)
+        check('Chat is file-backed SQLite, Analytics remains isolated PostgreSQL',env['CHAT_DATABASE_URL'].startswith('sqlite:') and env['ANALYTICS_DATABASE_URL'].startswith('postgresql:'))
         check('unauthorized Chat write rejected',http(chat_url,'/api/v1/rooms',body={'id':'bad','name':'bad'})[0]==401)
         check('unauthorized Analytics read rejected',http(analytics_url,'/api/v1/events/count')[0]==401)
         def mcp_request(method,params=None,extra=None):
@@ -226,7 +249,7 @@ with tempfile.TemporaryDirectory(prefix='copilot-verify-') as scratch:
         status,applied=http(chat_url,route+'/apply',chat_token,{'confirmed':True})
         assert status==200 and applied['analytics_acknowledged'] and applied['value']==42
         check('scoped policy adoption has stable idempotent receipt',http(chat_url,route+'/apply',chat_token,{'confirmed':True})[1]==applied)
-        actual=subprocess.check_output([PG/'psql',env['CHAT_DATABASE_URL'],'-At','-c',"SELECT context_messages FROM chat_room_policy WHERE room_id='"+room+"'"],text=True).strip()
+        with sqlite3.connect(d/'chat.sqlite3') as connection: actual=str(connection.execute('SELECT context_messages FROM chat_room_policy WHERE room_id=?',(room,)).fetchone()[0])
         check('adoption modifies actual room context limit',actual=='42')
         status,rolled=http(chat_url,route+'/rollback',chat_token,{'confirmed':True})
         assert status==200 and rolled['value']==30 and rolled['analytics_acknowledged']
@@ -251,6 +274,15 @@ with tempfile.TemporaryDirectory(prefix='copilot-verify-') as scratch:
         analytics=start('analytics')
         wait(lambda:http(analytics_url,'/api/v1/events/web_chat/'+queued['id'],analytics_token)[0]==200)
         check('Analytics outage causes durable retry and later delivery')
+        run([ROOT/'target/debug/day9-chat','--backup',d/'chat-backup.sqlite3'],env=env)
+        with sqlite3.connect(d/'chat.sqlite3') as original, sqlite3.connect(d/'chat-backup.sqlite3') as copied:
+            tables=[r[0] for r in original.execute("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name")]
+            check('portable Chat backup includes exact committed data from every table',all(original.execute(f'SELECT * FROM "{t}" ORDER BY rowid').fetchall()==copied.execute(f'SELECT * FROM "{t}" ORDER BY rowid').fetchall() for t in tables))
+        stop(chat)
+        relocated=d/'relocated';relocated.mkdir(mode=0o700);(d/'chat-backup.sqlite3').rename(relocated/'chat.sqlite3')
+        env['CHAT_DATABASE_URL']='sqlite://'+str(relocated/'chat.sqlite3')
+        chat=start('chat')
+        check('relocated SQLite Chat starts with identical history',any(row['id']==message['id'] for row in http(chat_url,'/api/v1/messages?room_id='+room,chat_token)[1]))
         # 真實 pg_dump/pg_restore 到第三個隔離庫，逐列核對，不以備份檔存在宣稱成功。
         run([PG/'pg_dump',env['ANALYTICS_DATABASE_URL'],'-Fc','-f',d/'analytics.dump'])
         run([PG/'psql',admin,'-v','ON_ERROR_STOP=1','-c','CREATE DATABASE analytics_restore'],stdout=subprocess.DEVNULL)
@@ -262,7 +294,7 @@ with tempfile.TemporaryDirectory(prefix='copilot-verify-') as scratch:
         check('Analytics backup restored with exact matching event rows',a==b)
         # PostgreSQL 故障時 health 非 200，復原後 worker 仍工作。
         run([PG/'pg_ctl','-D',d/'data','stop','-m','fast'],stdout=subprocess.DEVNULL);started=False
-        check('database outage makes Chat unready',http(chat_url,'/healthz')[0]==503)
+        check('PostgreSQL outage does not make SQLite Chat unready',http(chat_url,'/healthz')[0]==200)
         check('database outage makes Analytics unready',http(analytics_url,'/healthz')[0]==503)
         run([PG/'pg_ctl','-D',d/'data','-l',d/'pg.log','-o',f'-h 127.0.0.1 -p {dbport} -k {scratch}','start'],stdout=subprocess.DEVNULL);started=True
         wait(lambda:http(chat_url,'/healthz')[0]==200 and http(analytics_url,'/healthz')[0]==200)
@@ -302,9 +334,9 @@ with tempfile.TemporaryDirectory(prefix='copilot-verify-') as scratch:
             assert http(chat_url,'/api/v1/rooms',chat_token,{'id':live_room,'name':'OpenAI 驗證'})[0]==201
             assert http(chat_url,'/api/v1/messages',chat_token,{'room_id':live_room,'content':'請只回答四個中文字：測試成功。'})[0]==201
             status,document=http(chat_url,'/api/v1/knowledge',chat_token,{'title':'授權的實驗資料','content':'本地驗證的實驗代碼是 COMET-432。這是供 RAG 測試使用的非私人資料。'})
-            check('real OpenAI embedding persisted in pgvector',status==201)
+            check('real OpenAI embedding persisted in portable SQLite',status==201)
             status,hits=http(chat_url,'/api/v1/knowledge/search',chat_token,{'query':'實驗代碼是什麼？'})
-            check('pgvector retrieves the expected document',status==200 and any(hit['id']==document['id'] for hit in hits))
+            check('SQLite cosine retrieval finds the expected document',status==200 and any(hit['id']==document['id'] for hit in hits))
             request=urllib.request.Request(chat_url+'/api/v1/ai/reply',data=json.dumps({'room_id':live_room,'rag':True}).encode(),headers={'Authorization':'Bearer '+chat_token,'Content-Type':'application/json'})
             streamed='';saved_id=None;event_type=None
             with urllib.request.urlopen(request,timeout=100) as response:

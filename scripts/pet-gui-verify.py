@@ -21,6 +21,20 @@ if not options.executable:
 executable=options.executable.resolve() if options.executable else ROOT / ("apps/pet_desktop/target/debug/copilot-desktop-pet.exe" if sys.platform=="win32" else "apps/pet_desktop/target/debug/copilot-desktop-pet")
 with tempfile.TemporaryDirectory(prefix="copilot-pet-gui-") as scratch:
     directory = pathlib.Path(scratch)
+    if sys.platform=='win32':
+        # Private disposable fixture only; chmod on Windows does not establish a DACL.
+        permissions=r"""
+$identity=[System.Security.Principal.WindowsIdentity]::GetCurrent().User
+$acl=New-Object System.Security.AccessControl.DirectorySecurity
+$acl.SetOwner($identity)
+$acl.SetAccessRuleProtection($true,$false)
+foreach($sid in @($identity.Value,'S-1-5-18','S-1-5-32-544')) {
+ $rule=New-Object System.Security.AccessControl.FileSystemAccessRule([System.Security.Principal.SecurityIdentifier]::new($sid),'FullControl','ContainerInherit,ObjectInherit','None','Allow')
+ $acl.AddAccessRule($rule)
+}
+Set-Acl -LiteralPath $env:COPILOT_GUI_FIXTURE_DIRECTORY -AclObject $acl
+"""
+        subprocess.run(['powershell','-NoProfile','-NonInteractive','-Command',permissions],env=os.environ|{'COPILOT_GUI_FIXTURE_DIRECTORY':str(directory)},check=True,stdout=subprocess.DEVNULL)
     files = directory / "files"
     files.mkdir(mode=0o700)
     sample = files / "sample.txt"

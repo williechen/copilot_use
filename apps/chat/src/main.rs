@@ -1,4 +1,4 @@
-//! Chat Web、HTTP、PostgreSQL Transactional Outbox；獨立測試庫與認證。
+//! Chat Web、HTTP、SQLite Transactional Outbox；獨立測試庫與認證。
 mod agent;
 mod auth;
 mod fanout;
@@ -18,12 +18,12 @@ use axum::{
 };
 use day9_chat::{ChatWriter, run_dispatcher};
 use serde::{Deserialize, Serialize};
-use sqlx::{FromRow, PgPool, postgres::PgPoolOptions};
+use sqlx::{FromRow, SqlitePool};
 use std::{error::Error, net::SocketAddr, sync::Arc};
 
 #[derive(Clone)]
 struct StateData {
-    pool: PgPool,
+    pool: SqlitePool,
     api_token: Arc<str>,
     events: tokio::sync::broadcast::Sender<realtime::RoomEvent>,
     ai_slots: Arc<tokio::sync::Semaphore>,
@@ -61,7 +61,7 @@ struct RoomItem {
 }
 #[derive(Serialize, FromRow)]
 struct MessageItem {
-    id: String,
+    id: uuid::Uuid,
     content: String,
 }
 
@@ -86,7 +86,7 @@ async fn list_rooms(
 ) -> Result<Json<Vec<RoomItem>>, StatusCode> {
     let actor = auth::principal(&s, &headers, false).await?;
     let rooms = sqlx::query_as::<_, RoomItem>(
-        "SELECT id,name,COALESCE($1::uuid IS NULL OR owner_id=$1,false) AS can_manage FROM chat_rooms WHERE $1::uuid IS NULL OR id IN (SELECT room_id FROM chat_room_members WHERE user_id=$1) ORDER BY name,id LIMIT 100",
+        "SELECT id,name,COALESCE(?1 IS NULL OR owner_id=?1,false) AS can_manage FROM chat_rooms WHERE ?1 IS NULL OR id IN (SELECT room_id FROM chat_room_members WHERE user_id=?1) ORDER BY name,id LIMIT 100",
     )
     .bind(actor.user_id())
     .fetch_all(&s.pool)
@@ -115,10 +115,10 @@ async fn create_room(
     }
     let mut tx = s
         .pool
-        .begin()
+        .begin_with("BEGIN IMMEDIATE")
         .await
         .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
-    sqlx::query("INSERT INTO chat_rooms(id,name,owner_id) VALUES($1,$2,$3)")
+    sqlx::query("INSERT INTO chat_rooms(id,name,owner_id) VALUES(?1,?2,?3)")
         .bind(&input.id)
         .bind(&input.name)
         .bind(actor.user_id())
@@ -134,7 +134,7 @@ async fn create_room(
             }
         })?;
     if let Some(id) = actor.user_id() {
-        sqlx::query("INSERT INTO chat_room_members(room_id,user_id) VALUES ($1,$2)")
+        sqlx::query("INSERT INTO chat_room_members(room_id,user_id) VALUES (?1,?2)")
             .bind(&input.id)
             .bind(id)
             .execute(&mut *tx)
@@ -159,7 +159,7 @@ async fn list_messages(
     }
     if let Some(cursor) = input.before {
         let valid: bool = sqlx::query_scalar(
-            "SELECT EXISTS(SELECT 1 FROM chat_messages WHERE id=$1 AND room_id=$2)",
+            "SELECT EXISTS(SELECT 1 FROM chat_messages WHERE id=?1 AND room_id=?2)",
         )
         .bind(cursor)
         .bind(&input.room_id)
@@ -171,9 +171,9 @@ async fn list_messages(
         }
     }
     let messages = sqlx::query_as::<_, MessageItem>(
-        "SELECT id::text AS id, content FROM (
+        "SELECT id AS id, content FROM (
           SELECT id, content, created_at FROM chat_messages
-          WHERE room_id=$1 AND ($2::uuid IS NULL OR (created_at,id)<(SELECT created_at,id FROM chat_messages WHERE id=$2 AND room_id=$1))
+          WHERE room_id=?1 AND (?2 IS NULL OR (created_at,id)<(SELECT created_at,id FROM chat_messages WHERE id=?2 AND room_id=?1))
           ORDER BY created_at DESC, id DESC LIMIT 100
          ) AS recent ORDER BY created_at ASC, id ASC",
     )
@@ -237,7 +237,22 @@ async fn send_message(
 async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
     let _ = any_spawner::Executor::init_tokio();
     let telemetry = tokio::task::spawn_blocking(|| copilot_telemetry::init("chat")).await??;
-    let url = std::env::var("CHAT_DATABASE_URL")?;
+    let url =
+        std::env::var("CHAT_DATABASE_URL").unwrap_or_else(|_| "sqlite://data/chat.sqlite3".into());
+    if std::env::args().nth(1).as_deref() == Some("--initialize") {
+        let pool = day9_chat::database::open(&url).await?;
+        pool.close().await;
+        return Ok(());
+    }
+    if std::env::args().nth(1).as_deref() == Some("--backup") {
+        let destination = std::env::args()
+            .nth(2)
+            .ok_or("usage: day9-chat --backup NEW_PATH.sqlite3")?;
+        let pool = day9_chat::database::open(&url).await?;
+        day9_chat::database::backup(&pool, std::path::Path::new(&destination)).await?;
+        pool.close().await;
+        return Ok(());
+    }
     let endpoint = std::env::var("ANALYTICS_ENDPOINT")?;
     let token = std::env::var("ANALYTICS_CHAT_TOKEN")?;
     let chat_token = std::env::var("CHAT_API_TOKEN")?;
@@ -252,12 +267,7 @@ async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
     {
         return Err("須設定安全 Token 和 HTTPS/localhost Analytics endpoint".into());
     }
-    let pool = PgPoolOptions::new()
-        .acquire_timeout(std::time::Duration::from_secs(2))
-        .max_connections(10)
-        .connect(&url)
-        .await?;
-    sqlx::migrate!("./migrations").run(&pool).await?;
+    let pool = day9_chat::database::open(&url).await?;
     let worker_pool = pool.clone();
     let worker = tokio::spawn(async move {
         if let Err(error) = run_dispatcher(worker_pool, &endpoint, &token).await {

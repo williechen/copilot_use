@@ -91,7 +91,7 @@ async fn connected(
         return;
     }
     let exists: Result<bool, _> =
-        sqlx::query_scalar("SELECT EXISTS(SELECT 1 FROM chat_rooms WHERE id=$1)")
+        sqlx::query_scalar("SELECT EXISTS(SELECT 1 FROM chat_rooms WHERE id=?1)")
             .bind(&room_id)
             .fetch_one(&state.pool)
             .await;
@@ -137,7 +137,7 @@ async fn connected(
     )
     .await
     {
-        let _ = sqlx::query("DELETE FROM chat_connections WHERE id=$1")
+        let _ = sqlx::query("DELETE FROM chat_connections WHERE id=?1")
             .bind(connection)
             .execute(&state.pool)
             .await;
@@ -159,7 +159,7 @@ async fn connected(
         tokio::select! {
             _ = expiry.tick() => {
                 if !session_valid(&state,&session_headers,cookie_actor,&room_id).await {break;}
-                if sqlx::query("UPDATE chat_connections SET expires_at=now()+interval '20 seconds' WHERE id=$1").bind(connection).execute(&state.pool).await.is_err(){break;}
+                if sqlx::query("UPDATE chat_connections SET expires_at=unixepoch('subsec')+20 WHERE id=?1").bind(connection).execute(&state.pool).await.is_err(){break;}
             }
             incoming = socket.recv() => {
                 match incoming {
@@ -190,7 +190,7 @@ async fn connected(
             }
         }
     }
-    let _ = sqlx::query("DELETE FROM chat_connections WHERE id=$1")
+    let _ = sqlx::query("DELETE FROM chat_connections WHERE id=?1")
         .bind(connection)
         .execute(&state.pool)
         .await;

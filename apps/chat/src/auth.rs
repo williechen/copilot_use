@@ -61,7 +61,7 @@ pub(super) async fn principal(
         csrf(headers)?;
     }
     let user: Option<Uuid> = sqlx::query_scalar(
-        "SELECT user_id FROM chat_sessions WHERE token_hash=$1 AND expires_at>now()",
+        "SELECT user_id FROM chat_sessions WHERE token_hash=?1 AND expires_at>unixepoch('subsec')",
     )
     .bind(Sha256::digest(token.as_bytes()).to_vec())
     .fetch_optional(&state.pool)
@@ -78,7 +78,7 @@ pub(super) async fn room_allowed(
         return Ok(());
     }
     let allowed: bool = sqlx::query_scalar(
-        "SELECT EXISTS(SELECT 1 FROM chat_room_members WHERE room_id=$1 AND user_id=$2)",
+        "SELECT EXISTS(SELECT 1 FROM chat_room_members WHERE room_id=?1 AND user_id=?2)",
     )
     .bind(room)
     .bind(principal.user_id())
@@ -105,14 +105,14 @@ fn validate(input: &Credentials) -> Result<(), StatusCode> {
     }
     Ok(())
 }
-// Shared PostgreSQL counters bound sequential abuse across independent Chat processes.
+// Shared SQLite counters bound sequential abuse across independent Chat processes.
 async fn throttle(state: &StateData, operation: &str, username: &str) -> Result<(), StatusCode> {
     let mut tx = state
         .pool
-        .begin()
+        .begin_with("BEGIN IMMEDIATE")
         .await
         .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
-    sqlx::query("DELETE FROM chat_auth_throttle WHERE key IN(SELECT key FROM chat_auth_throttle WHERE expires_at<=now() LIMIT 1000)").execute(&mut *tx).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
+    sqlx::query("DELETE FROM chat_auth_throttle WHERE key IN(SELECT key FROM chat_auth_throttle WHERE expires_at<=unixepoch('subsec') LIMIT 1000)").execute(&mut *tx).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
     for (key, limit) in [
         (format!("{operation}:global"), 120),
         (
@@ -120,7 +120,7 @@ async fn throttle(state: &StateData, operation: &str, username: &str) -> Result<
             8,
         ),
     ] {
-        let count:i32=sqlx::query_scalar("INSERT INTO chat_auth_throttle(key,attempts,expires_at)VALUES($1,1,now()+interval '60 seconds')ON CONFLICT(key)DO UPDATE SET attempts=CASE WHEN chat_auth_throttle.expires_at<=now()THEN 1 ELSE chat_auth_throttle.attempts+1 END,expires_at=CASE WHEN chat_auth_throttle.expires_at<=now()THEN now()+interval '60 seconds' ELSE chat_auth_throttle.expires_at END RETURNING attempts").bind(key).fetch_one(&mut *tx).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
+        let count:i32=sqlx::query_scalar("INSERT INTO chat_auth_throttle(key,attempts,expires_at)VALUES(?1,1,unixepoch('subsec')+60)ON CONFLICT(key)DO UPDATE SET attempts=CASE WHEN chat_auth_throttle.expires_at<=unixepoch('subsec')THEN 1 ELSE chat_auth_throttle.attempts+1 END,expires_at=CASE WHEN chat_auth_throttle.expires_at<=unixepoch('subsec')THEN unixepoch('subsec')+60 ELSE chat_auth_throttle.expires_at END RETURNING attempts").bind(key).fetch_one(&mut *tx).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
         if count > limit {
             tx.commit()
                 .await
@@ -157,7 +157,7 @@ pub(super) async fn register(
     .await
     .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?
     .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
-    let result = sqlx::query("INSERT INTO chat_users(id,username,password_hash) VALUES ($1,$2,$3)")
+    let result = sqlx::query("INSERT INTO chat_users(id,username,password_hash) VALUES (?1,?2,?3)")
         .bind(Uuid::new_v4())
         .bind(input.username)
         .bind(hash)
@@ -188,7 +188,7 @@ pub(super) async fn login(
         .map_err(|_| StatusCode::TOO_MANY_REQUESTS)?;
     throttle(&state, "login", &input.username).await?;
     let row: Option<(Uuid, String)> =
-        sqlx::query_as("SELECT id,password_hash FROM chat_users WHERE username=$1")
+        sqlx::query_as("SELECT id,password_hash FROM chat_users WHERE username=?1")
             .bind(input.username)
             .fetch_optional(&state.pool)
             .await
@@ -213,11 +213,11 @@ pub(super) async fn login(
     let token = format!("{}{}", Uuid::new_v4().simple(), Uuid::new_v4().simple());
     let mut tx = state
         .pool
-        .begin()
+        .begin_with("BEGIN IMMEDIATE")
         .await
         .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
-    sqlx::query("DELETE FROM chat_sessions WHERE token_hash IN(SELECT token_hash FROM chat_sessions WHERE expires_at<=now() LIMIT 1000)").execute(&mut *tx).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
-    sqlx::query("INSERT INTO chat_sessions(token_hash,user_id,expires_at) VALUES ($1,$2,now()+interval '24 hours')").bind(Sha256::digest(token.as_bytes()).to_vec()).bind(id).execute(&mut *tx).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
+    sqlx::query("DELETE FROM chat_sessions WHERE token_hash IN(SELECT token_hash FROM chat_sessions WHERE expires_at<=unixepoch('subsec') LIMIT 1000)").execute(&mut *tx).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
+    sqlx::query("INSERT INTO chat_sessions(token_hash,user_id,expires_at) VALUES (?1,?2,unixepoch('subsec')+86400)").bind(Sha256::digest(token.as_bytes()).to_vec()).bind(id).execute(&mut *tx).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
     auth_event(&mut tx, "login.succeeded").await?;
     tx.commit()
         .await
@@ -252,10 +252,10 @@ pub(super) async fn logout(
     {
         let mut tx = state
             .pool
-            .begin()
+            .begin_with("BEGIN IMMEDIATE")
             .await
             .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
-        let result = sqlx::query("DELETE FROM chat_sessions WHERE token_hash=$1")
+        let result = sqlx::query("DELETE FROM chat_sessions WHERE token_hash=?1")
             .bind(Sha256::digest(token.as_bytes()).to_vec())
             .execute(&mut *tx)
             .await
@@ -288,7 +288,7 @@ pub(super) async fn invite(
 ) -> Result<StatusCode, StatusCode> {
     let actor = principal(&state, &headers, true).await?;
     if let Principal::User(id) = actor {
-        let owner: Option<Uuid> = sqlx::query_scalar("SELECT owner_id FROM chat_rooms WHERE id=$1")
+        let owner: Option<Uuid> = sqlx::query_scalar("SELECT owner_id FROM chat_rooms WHERE id=?1")
             .bind(&input.room_id)
             .fetch_optional(&state.pool)
             .await
@@ -298,14 +298,14 @@ pub(super) async fn invite(
             return Err(StatusCode::FORBIDDEN);
         }
     }
-    let user: Uuid = sqlx::query_scalar("SELECT id FROM chat_users WHERE username=$1")
+    let user: Uuid = sqlx::query_scalar("SELECT id FROM chat_users WHERE username=?1")
         .bind(input.username)
         .fetch_optional(&state.pool)
         .await
         .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?
         .ok_or(StatusCode::NOT_FOUND)?;
     sqlx::query(
-        "INSERT INTO chat_room_members(room_id,user_id) VALUES ($1,$2) ON CONFLICT DO NOTHING",
+        "INSERT INTO chat_room_members(room_id,user_id) VALUES (?1,?2) ON CONFLICT DO NOTHING",
     )
     .bind(input.room_id)
     .bind(user)
@@ -315,9 +315,9 @@ pub(super) async fn invite(
     Ok(StatusCode::NO_CONTENT)
 }
 
-async fn failed_login(pool: &sqlx::PgPool) -> Result<(), StatusCode> {
+async fn failed_login(pool: &sqlx::SqlitePool) -> Result<(), StatusCode> {
     let mut tx = pool
-        .begin()
+        .begin_with("BEGIN IMMEDIATE")
         .await
         .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
     auth_event(&mut tx, "login.failed").await?;
@@ -327,10 +327,10 @@ async fn failed_login(pool: &sqlx::PgPool) -> Result<(), StatusCode> {
     Ok(())
 }
 async fn auth_event(
-    tx: &mut sqlx::Transaction<'_, sqlx::Postgres>,
+    tx: &mut sqlx::Transaction<'_, sqlx::Sqlite>,
     kind: &str,
 ) -> Result<(), StatusCode> {
-    sqlx::query("INSERT INTO chat_outbox(event_id,schema_version,source_app,event_type,traceparent)VALUES($1,1,'web_chat',$2,$3)")
+    sqlx::query("INSERT INTO chat_outbox(event_id,schema_version,source_app,event_type,traceparent)VALUES(?1,1,'web_chat',?2,?3)")
         .bind(Uuid::new_v4()).bind(kind).bind(copilot_telemetry::outgoing_headers().get("traceparent"))
         .execute(&mut **tx).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
     Ok(())

@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       postgres:
-        image: pgvector/pgvector:0.8.7-pg17-bookworm
+        image: postgres:17
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
@@ -26,13 +26,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
-      - name: Enable pgvector for disposable SQLx databases
-        run: PGPASSWORD=postgres psql -h 127.0.0.1 -U postgres -d template1 -v ON_ERROR_STOP=1 -c 'CREATE EXTENSION vector'
       - name: Format
         run: cargo fmt --all -- --check
       - name: Strict Clippy
         run: cargo clippy --workspace --all-targets --locked -- -D warnings
-      - name: Run workspace unit and PostgreSQL integration tests
+      - name: Run SQLite Chat/Pet and PostgreSQL Analytics integration tests
         run: cargo test --workspace --all-targets --locked
       - name: Verify strict event payload
         run: cargo test -p event-contract
@@ -45,10 +43,8 @@ jobs:
       - name: Set isolated CI-only secrets
         run: |
           cat > .env <<'ENV'
-          CHAT_BOOTSTRAP_PASSWORD=ci_chat_bootstrap_only_password
           ANALYTICS_BOOTSTRAP_PASSWORD=ci_analytics_bootstrap_only_password
           ANALYTICS_ADMIN_TOKEN=ci_governance_only_token_32_characters
-          CHAT_DB_PASSWORD=ci_chat_only_random_test_password
           ANALYTICS_DB_PASSWORD=ci_analytics_only_random_test_password
           CHAT_API_TOKEN=ci_chat_only_token_32_characters
           ANALYTICS_API_TOKEN=ci_analytics_only_token_32_characters
@@ -89,9 +85,6 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y postgresql-16 postgresql-client-16 postgresql-server-dev-16 libpq-dev
-          git clone --branch v0.8.7 --depth 1 https://github.com/pgvector/pgvector.git "$RUNNER_TEMP/pgvector"
-          make -C "$RUNNER_TEMP/pgvector" PG_CONFIG=/usr/lib/postgresql/16/bin/pg_config with_llvm=no
-          sudo make -C "$RUNNER_TEMP/pgvector" PG_CONFIG=/usr/lib/postgresql/16/bin/pg_config with_llvm=no install
       - name: Run HTTP, WebSocket, restart, DB interruption and backup/restore tests
         run: |
           PATH=/usr/lib/postgresql/16/bin:$PATH VERIFY_REPORT=target/local-validation-native.json python3 scripts/local-verify.py --load

@@ -46,13 +46,13 @@ pub(super) async fn reply(
         .try_acquire_owned()
         .map_err(|_| StatusCode::TOO_MANY_REQUESTS)?;
     let limit: i64 = sqlx::query_scalar(
-        "SELECT COALESCE((SELECT context_messages FROM chat_room_policy WHERE room_id=$1),30)",
+        "SELECT COALESCE((SELECT context_messages FROM chat_room_policy WHERE room_id=?1),30)",
     )
     .bind(&input.room_id)
     .fetch_one(&state.pool)
     .await
     .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
-    let rows:Vec<(String,String)>=sqlx::query_as("SELECT author_kind,content FROM (SELECT author_kind,content,created_at,id FROM chat_messages WHERE room_id=$1 ORDER BY created_at DESC,id DESC LIMIT $2) h ORDER BY created_at,id")
+    let rows:Vec<(String,String)>=sqlx::query_as("SELECT author_kind,content FROM (SELECT author_kind,content,created_at,id FROM chat_messages WHERE room_id=?1 ORDER BY created_at DESC,id DESC LIMIT ?2) h ORDER BY created_at,id")
         .bind(&input.room_id).bind(limit).fetch_all(&state.pool).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
     if rows.is_empty() {
         return Err(StatusCode::BAD_REQUEST);

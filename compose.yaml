@@ -1,22 +1,6 @@
 # Isolated development integration environment; production requires TLS termination,
 # dedicated secrets manager, metrics, backups and a hardened deployment.
 services:
-  chat-db:
-    image: pgvector/pgvector:0.8.7-pg17-bookworm
-    environment:
-      POSTGRES_DB: chat_db
-      POSTGRES_USER: bootstrap_owner
-      POSTGRES_PASSWORD: ${CHAT_BOOTSTRAP_PASSWORD:?set CHAT_BOOTSTRAP_PASSWORD}
-      PG_APP_USER: chat_user
-      PG_APP_PASSWORD: ${CHAT_DB_PASSWORD:?set CHAT_DB_PASSWORD}
-      PG_ENABLE_VECTOR: "true"
-    volumes: [chat-data:/var/lib/postgresql/data, "./scripts/postgres-init.sh:/docker-entrypoint-initdb.d/10-app.sh:ro"]
-    networks: [backend]
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U bootstrap_owner -d chat_db"]
-      interval: 5s
-      timeout: 5s
-      retries: 20
   analytics-db:
     image: postgres:17
     environment:
@@ -70,7 +54,7 @@ services:
       target: chat
       args: {COPILOT_BUILD_SHA: "${COPILOT_BUILD_SHA:-unversioned}"}
     environment:
-      CHAT_DATABASE_URL: postgres://chat_user:${CHAT_DB_PASSWORD:?set CHAT_DB_PASSWORD}@chat-db:5432/chat_db
+      CHAT_DATABASE_URL: sqlite:///data/chat.sqlite3
       CHAT_API_TOKEN: ${CHAT_API_TOKEN:?set CHAT_API_TOKEN}
       ANALYTICS_CHAT_TOKEN: ${ANALYTICS_CHAT_TOKEN:?set ANALYTICS_CHAT_TOKEN}
       ANALYTICS_ENDPOINT: http://analytics:3100/api/v1/events
@@ -80,8 +64,8 @@ services:
       OPENAI_CHAT_MODEL: ${OPENAI_CHAT_MODEL:-gpt-5.6-luna}
       OPENAI_EMBEDDING_MODEL: ${OPENAI_EMBEDDING_MODEL:-text-embedding-3-small}
     depends_on:
-      chat-db: {condition: service_healthy}
       analytics: {condition: service_healthy}
+    volumes: [chat-sqlite-data:/data]
     ports: ["127.0.0.1:3001:3001"]
     healthcheck:
       test: ["CMD", "curl", "--fail", "--silent", "--output", "/dev/null", "http://127.0.0.1:3001/healthz"]
@@ -102,5 +86,5 @@ networks:
   backend:
     internal: false
 volumes:
-  chat-data:
+  chat-sqlite-data:
   analytics-data:

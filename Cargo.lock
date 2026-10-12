@@ -640,6 +640,7 @@ dependencies = [
  "event-contract",
  "http",
  "leptos_axum",
+ "libc",
  "mcp-bridge",
  "openai-adapter",
  "reqwest 0.12.28",

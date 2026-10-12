@@ -6,11 +6,11 @@ Rust AI Chat、Tauri/Leptos Desktop Pet、Product Analytics 的獨立產品工�
 
 | 產品 | 程式與資料 | 已驗證能力 |
 |---|---|---|
-| Chat | `apps/chat`、`crates/chat_ui`、`apps/chat_frontend`；獨立 PostgreSQL + pgvector | Leptos SSR/Hydration、登入 Session、私人房間 ACL、訊息/history、WS、交易 Outbox、真實 OpenAI 串流、RAG、唯讀 MCP/Agent |
+| Chat | `apps/chat`、`crates/chat_ui`、`apps/chat_frontend`；可攜式 SQLite（包含知識庫向量） | Leptos SSR/Hydration、登入 Session、私人房間 ACL、訊息/history、WS、交易 Outbox、真實 OpenAI 串流、RAG、唯讀 MCP/Agent |
 | Desktop Pet | `apps/pet_desktop`、`apps/pet_ui`、`apps/pet`；獨立 SQLite | Linux Tauri/WebKit GUI、多寵物與五項設定、記憶、複習排程、真實 AI 對話/生圖/快取、200×200 浮動視窗、安全預覽與確認 IPC、journal/租約、唯讀 MCP/Agent |
 | Analytics | `apps/analytics`；獨立 PostgreSQL | 同服務 Dashboard + API、來源 token、持久冪等、事件查證、Taipei 日趨勢 API、可逆封存/還原、備份還原、結構洞察與人工審核/套用/回退 |
 
-上表是已實作與局部驗證，**不是完整 P9 驗收**。完整缺口見 [驗證紀錄](docs/LOCAL_VALIDATION.md)；既定目標見 [P9 規格](docs/P9_TARGET.md)。
+上表是已實作與局部驗證，**不是完整 P9 驗收**。最新資料庫變更及待驗收項目見 [SQLite 調整](docs/SQLITE_TRANSITION.md)；歷史驗證见 [驗證紀錄](docs/LOCAL_VALIDATION.md)；既定目標見 [P9 規格](docs/P9_TARGET.md)。
 
 ## 本地驗證
 
@@ -25,10 +25,10 @@ export OPENAI_CHAT_MODEL=gpt-5.6-luna
 python3 scripts/local-verify.py --live-openai
 ```
 
-需要 Rust、Node 22、PostgreSQL/pgvector、wasm32 target、Trunk，以及 Linux Tauri 的 GTK/WebKit 開發套件。API key 不進入 repository、測試報告或日誌。實際啟動與設定見 [操作說明](docs/DEPLOYMENT.md)。
+需要 Rust、Node 22、PostgreSQL（僅 Analytics）、wasm32 target、Trunk，以及 Linux Tauri 的 GTK/WebKit 開發套件。API key 不進入 repository、測試報告或日誌。實際啟動與設定見 [操作說明](docs/DEPLOYMENT.md)。
 
 ## 目錄與歷史
 
 根 Cargo workspace 管理服務、Pet domain 和共享 crates；三個 frontend/native app 的獨立 workspace 各自保留 Cargo.lock。`day9/` 重複範例與重複 workflow 已移除，歷史仍可由 Git 查閱。現有 crate 名稱 `day9-*` 為既有命令相容性而保留，不代表教學進度。
 
-已套用的 migration 不刪除或重寫；`docs/legacy-migrations` 保留先前重複 migration 原文供舊測試庫查核，不會在啟動時執行。產生的 dist/target/schema、私人資料庫、.env 不提交。
+既有 PostgreSQL Chat migrations 保留於 `apps/chat/postgres-migrations`，不會套用到 SQLite；SQLite 使用獨立 schema/migration history，舊 PostgreSQL volumes 不會被覆寫或刪除。其他已套用的 migration 不重寫；`docs/legacy-migrations` 保留先前重複 migration 原文供舊測試庫查核，不會在啟動時執行。產生的 dist/target/schema、私人資料庫、.env 不提交。

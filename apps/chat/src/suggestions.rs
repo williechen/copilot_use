@@ -33,7 +33,7 @@ fn remote() -> Result<(reqwest::Client, String, String), StatusCode> {
 async fn owner(state: &StateData, headers: &HeaderMap, room: &str) -> Result<(), StatusCode> {
     let actor = auth::principal(state, headers, true).await?;
     let allowed: bool = sqlx::query_scalar(
-        "SELECT EXISTS(SELECT 1 FROM chat_rooms WHERE id=$1 AND ($2::uuid IS NULL OR owner_id=$2))",
+        "SELECT EXISTS(SELECT 1 FROM chat_rooms WHERE id=?1 AND (?2 IS NULL OR owner_id=?2))",
     )
     .bind(room)
     .bind(actor.user_id())
@@ -79,22 +79,21 @@ pub(super) async fn apply(
         .ok_or(StatusCode::BAD_GATEWAY)?;
     let mut tx = state
         .pool
-        .begin()
+        .begin_with("BEGIN IMMEDIATE")
         .await
         .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
-    sqlx::query("INSERT INTO chat_room_policy(room_id) VALUES($1) ON CONFLICT DO NOTHING")
+    sqlx::query("INSERT INTO chat_room_policy(room_id) VALUES(?1) ON CONFLICT DO NOTHING")
         .bind(&room)
         .execute(&mut *tx)
         .await
         .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
-    let (before, revision): (i64, i64) = sqlx::query_as(
-        "SELECT context_messages,revision FROM chat_room_policy WHERE room_id=$1 FOR UPDATE",
-    )
-    .bind(&room)
-    .fetch_one(&mut *tx)
-    .await
-    .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
-    let existing:Option<(Uuid,bool)>=sqlx::query_as("SELECT apply_receipt,applied FROM chat_suggestion_receipts WHERE proposal_id=$1 AND room_id=$2").bind(id).bind(&room).fetch_optional(&mut *tx).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
+    let (before, revision): (i64, i64) =
+        sqlx::query_as("SELECT context_messages,revision FROM chat_room_policy WHERE room_id=?1")
+            .bind(&room)
+            .fetch_one(&mut *tx)
+            .await
+            .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
+    let existing:Option<(Uuid,bool)>=sqlx::query_as("SELECT apply_receipt,applied FROM chat_suggestion_receipts WHERE proposal_id=?1 AND room_id=?2").bind(id).bind(&room).fetch_optional(&mut *tx).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
     let receipt = if let Some((receipt, true)) = existing {
         receipt
     } else if existing.is_some() {
@@ -105,14 +104,14 @@ pub(super) async fn apply(
         }
         let receipt = Uuid::new_v4();
         sqlx::query(
-            "UPDATE chat_room_policy SET context_messages=$2,revision=revision+1 WHERE room_id=$1",
+            "UPDATE chat_room_policy SET context_messages=?2,revision=revision+1 WHERE room_id=?1",
         )
         .bind(&room)
         .bind(value)
         .execute(&mut *tx)
         .await
         .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
-        sqlx::query("INSERT INTO chat_suggestion_receipts(proposal_id,room_id,before_value,after_value,applied_revision,apply_receipt) VALUES($1,$2,$3,$4,$5,$6)").bind(id).bind(&room).bind(before).bind(value).bind(revision+1).bind(receipt).execute(&mut *tx).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
+        sqlx::query("INSERT INTO chat_suggestion_receipts(proposal_id,room_id,before_value,after_value,applied_revision,apply_receipt) VALUES(?1,?2,?3,?4,?5,?6)").bind(id).bind(&room).bind(before).bind(value).bind(revision+1).bind(receipt).execute(&mut *tx).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
         receipt
     };
     tx.commit()
@@ -142,17 +141,16 @@ pub(super) async fn rollback(
     let (client, base, token) = remote()?;
     let mut tx = state
         .pool
-        .begin()
+        .begin_with("BEGIN IMMEDIATE")
         .await
         .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
-    let (current, revision): (i64, i64) = sqlx::query_as(
-        "SELECT context_messages,revision FROM chat_room_policy WHERE room_id=$1 FOR UPDATE",
-    )
-    .bind(&room)
-    .fetch_one(&mut *tx)
-    .await
-    .map_err(|_| StatusCode::CONFLICT)?;
-    let row:Option<(i64,i64,i64,bool,Option<Uuid>)>=sqlx::query_as("SELECT before_value,after_value,applied_revision,applied,rollback_receipt FROM chat_suggestion_receipts WHERE proposal_id=$1 AND room_id=$2 FOR UPDATE").bind(id).bind(&room).fetch_optional(&mut *tx).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
+    let (current, revision): (i64, i64) =
+        sqlx::query_as("SELECT context_messages,revision FROM chat_room_policy WHERE room_id=?1")
+            .bind(&room)
+            .fetch_one(&mut *tx)
+            .await
+            .map_err(|_| StatusCode::CONFLICT)?;
+    let row:Option<(i64,i64,i64,bool,Option<Uuid>)>=sqlx::query_as("SELECT before_value,after_value,applied_revision,applied,rollback_receipt FROM chat_suggestion_receipts WHERE proposal_id=?1 AND room_id=?2").bind(id).bind(&room).fetch_optional(&mut *tx).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
     let (before, after, expected, applied, old) = row.ok_or(StatusCode::NOT_FOUND)?;
     let receipt = if !applied {
         old.ok_or(StatusCode::CONFLICT)?
@@ -162,14 +160,14 @@ pub(super) async fn rollback(
         }
         let receipt = Uuid::new_v4();
         sqlx::query(
-            "UPDATE chat_room_policy SET context_messages=$2,revision=revision+1 WHERE room_id=$1",
+            "UPDATE chat_room_policy SET context_messages=?2,revision=revision+1 WHERE room_id=?1",
         )
         .bind(&room)
         .bind(before)
         .execute(&mut *tx)
         .await
         .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
-        sqlx::query("UPDATE chat_suggestion_receipts SET applied=false,rollback_receipt=$3 WHERE proposal_id=$1 AND room_id=$2").bind(id).bind(&room).bind(receipt).execute(&mut *tx).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
+        sqlx::query("UPDATE chat_suggestion_receipts SET applied=false,rollback_receipt=?3 WHERE proposal_id=?1 AND room_id=?2").bind(id).bind(&room).bind(receipt).execute(&mut *tx).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
         receipt
     };
     tx.commit()

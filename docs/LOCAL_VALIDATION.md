@@ -1,3 +1,5 @@
+> 最新需求：Chat／Pet 已改用可攜式 SQLite，Analytics PostgreSQL 不變。以下為歷史驗證，不能沿用為 SQLite 正式交付證明；最新狀態見 [SQLite 調整](SQLITE_TRANSITION.md)。
+
 # 本地驗證紀錄（2026-10-12）
 
 **P9 驗收進行中，尚未固定正式 Release/Tag。** 使用者取消對外部署，仍要求本地 Docker 正式建置與測試。通過必要驗收後才固定正式版本，並建立 `copilot_use` 教學對齊分支。`rust_ai_chat` 保持唯讀。教學測試隨各模組／專案放置，不集中在最外層 `tests/`；正式 tag 前不產生 Day 教學。

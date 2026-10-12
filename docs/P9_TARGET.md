@@ -8,7 +8,7 @@
 
 ## P9 必備能力
 
-- Chat：Axum/Leptos SSR、Hydration、Nested/Protected Router、Session/ACL、多房間與使用者、history、WS presence/typing/private/reconnect/send queue、交易 Outbox、多 Persona/AI-to-AI、Streaming/Structured Output/tools、RAG/pgvector/MCP/Agent、OTel。
+- Chat：Axum/Leptos SSR、Hydration、Nested/Protected Router、Session/ACL、多房間與使用者、history、WS presence/typing/private/reconnect/send queue、交易 Outbox、多 Persona/AI-to-AI、Streaming/Structured Output/tools、RAG/SQLite vectors/MCP/Agent、OTel。
 - Desktop Pet：Tauri/Leptos、繁體中文五項設定與進階覆寫、多寵物、角色一致性生圖/動畫與固定 200×200 顯示、記憶/學習/active recall/spaced repetition/adaptation/proactivity、RAG/MCP/Agent、安全 FileOrganizer 的授權/預覽/確認/TOCTOU/receipt/Trash/restore、跨平台 installer/updater。
 - Analytics：獨立 DB、同服務 Dashboard/Ingest/Query、來源認證、冪等、完整來源事件、Taipei 趨勢、資料治理/備份、可追溯 1–3 句 AI 洞察及可審核建議、OTel。
 - 整合：獨立執行、隔離資料庫、跨服務事件/重試/故障恢復，Observe→Analyze→Act→Evaluate→Observe 閉環；Chat/Pet 採用必須授權且能回退。
@@ -24,3 +24,5 @@
 6. 對每個功能記錄規格→檔案/提交→測試/CI→未完成事項，持續前進直至全部 P9 要求被驗證。
 
 **目標是 P9 完整三產品，不是照著 Notion 教學 Day N 一天寫一小節。**
+
+2026-10-12 使用者需求變更：Chat 與 Pet 使用可攜式 SQLite；Analytics 儀表板維持 PostgreSQL。Chat PostgreSQL／pgvector 不再是交付依賴。正式 tag 需包含此變更的重新驗收。測試保留在所屬專案／模組目錄，不移到最外層。

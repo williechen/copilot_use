@@ -38,7 +38,7 @@ async fn owner(
 ) -> Result<auth::Principal, StatusCode> {
     let actor = auth::principal(state, headers, write).await?;
     let own: bool = sqlx::query_scalar(
-        "SELECT EXISTS(SELECT 1 FROM chat_rooms WHERE id=$1 AND ($2::uuid IS NULL OR owner_id=$2))",
+        "SELECT EXISTS(SELECT 1 FROM chat_rooms WHERE id=?1 AND (?2 IS NULL OR owner_id=?2))",
     )
     .bind(room)
     .bind(actor.user_id())
@@ -51,7 +51,7 @@ async fn owner(
     Ok(actor)
 }
 async fn load(state: &StateData, room: &str) -> Result<Vec<Persona>, StatusCode> {
-    sqlx::query_as("SELECT id,name,instructions,memory,cooldown_seconds,enabled,revision,COALESCE(extract(epoch FROM last_spoke_at)::bigint+cooldown_seconds,0) AS ready_at FROM chat_personas WHERE room_id=$1 ORDER BY created_at,id LIMIT 8")
+    sqlx::query_as("SELECT id,name,instructions,memory,cooldown_seconds,enabled,revision,COALESCE(CAST(last_spoke_at AS INTEGER)+cooldown_seconds,0) AS ready_at FROM chat_personas WHERE room_id=?1 ORDER BY created_at,id LIMIT 8")
  .bind(room).fetch_all(&state.pool).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)
 }
 pub(super) async fn list(
@@ -86,16 +86,16 @@ pub(super) async fn save(
     }
     let mut tx = state
         .pool
-        .begin()
+        .begin_with("BEGIN IMMEDIATE")
         .await
         .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
-    sqlx::query("SELECT id FROM chat_rooms WHERE id=$1 FOR UPDATE")
+    sqlx::query("SELECT id FROM chat_rooms WHERE id=?1")
         .bind(&room)
         .execute(&mut *tx)
         .await
         .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
     let existing: Option<String> =
-        sqlx::query_scalar("SELECT room_id FROM chat_personas WHERE id=$1")
+        sqlx::query_scalar("SELECT room_id FROM chat_personas WHERE id=?1")
             .bind(input.id)
             .fetch_optional(&mut *tx)
             .await
@@ -103,7 +103,7 @@ pub(super) async fn save(
     if existing.as_ref().is_some_and(|r| r != &room) {
         return Err(StatusCode::CONFLICT);
     }
-    let count: i64 = sqlx::query_scalar("SELECT count(*) FROM chat_personas WHERE room_id=$1")
+    let count: i64 = sqlx::query_scalar("SELECT count(*) FROM chat_personas WHERE room_id=?1")
         .bind(&room)
         .fetch_one(&mut *tx)
         .await
@@ -111,7 +111,7 @@ pub(super) async fn save(
     if existing.is_none() && count >= 8 {
         return Err(StatusCode::CONFLICT);
     }
-    sqlx::query("INSERT INTO chat_personas(id,room_id,name,instructions,memory,cooldown_seconds,enabled)VALUES($1,$2,$3,$4,COALESCE($5,''),$6,$7) ON CONFLICT(id)DO UPDATE SET name=excluded.name,instructions=excluded.instructions,memory=COALESCE($5,chat_personas.memory),cooldown_seconds=excluded.cooldown_seconds,enabled=excluded.enabled,revision=chat_personas.revision+1")
+    sqlx::query("INSERT INTO chat_personas(id,room_id,name,instructions,memory,cooldown_seconds,enabled)VALUES(?1,?2,?3,?4,COALESCE(?5,''),?6,?7) ON CONFLICT(id)DO UPDATE SET name=excluded.name,instructions=excluded.instructions,memory=COALESCE(?5,chat_personas.memory),cooldown_seconds=excluded.cooldown_seconds,enabled=excluded.enabled,revision=chat_personas.revision+1")
  .bind(input.id).bind(room).bind(input.name).bind(input.instructions).bind(input.memory).bind(input.cooldown_seconds).bind(input.enabled).execute(&mut *tx).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
     tx.commit()
         .await
@@ -129,8 +129,10 @@ pub(super) struct RunInput {
     confirmed: bool,
 }
 async fn result(state: &StateData, id: Uuid) -> Result<Value, StatusCode> {
-    sqlx::query_scalar("SELECT jsonb_build_object('id',id,'status',status,'turns',result,'reserved_output_tokens',reserved_tokens,'max_output_budget',max_output_budget,'max_turns',max_turns,'failure_status',failure_status) FROM chat_persona_runs WHERE id=$1")
- .bind(id).fetch_optional(&state.pool).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?.ok_or(StatusCode::NOT_FOUND)
+    let mut value: Value = sqlx::query_scalar("SELECT json_object('status',status,'turns',json(result),'reserved_output_tokens',reserved_tokens,'max_output_budget',max_output_budget,'max_turns',max_turns,'failure_status',failure_status) FROM chat_persona_runs WHERE id=?1")
+        .bind(id).fetch_optional(&state.pool).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?.ok_or(StatusCode::NOT_FOUND)?;
+    value["id"] = json!(id);
+    Ok(value)
 }
 pub(super) async fn get(
     State(state): State<StateData>,
@@ -139,7 +141,7 @@ pub(super) async fn get(
 ) -> Result<Json<Value>, StatusCode> {
     owner(&state, &headers, &room, false).await?;
     let matches: bool = sqlx::query_scalar(
-        "SELECT EXISTS(SELECT 1 FROM chat_persona_runs WHERE id=$1 AND room_id=$2)",
+        "SELECT EXISTS(SELECT 1 FROM chat_persona_runs WHERE id=?1 AND room_id=?2)",
     )
     .bind(id)
     .bind(room)
@@ -166,7 +168,7 @@ pub(super) async fn cancel(
     if !input.confirmed {
         return Err(StatusCode::BAD_REQUEST);
     }
-    let changed=sqlx::query("UPDATE chat_persona_runs SET status='cancelled',updated_at=now() WHERE id=$1 AND room_id=$2 AND status='running'").bind(id).bind(room).execute(&state.pool).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
+    let changed=sqlx::query("UPDATE chat_persona_runs SET status='cancelled',updated_at=unixepoch('subsec') WHERE id=?1 AND room_id=?2 AND status='running'").bind(id).bind(room).execute(&state.pool).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
     if changed.rows_affected() != 1 {
         return Err(StatusCode::CONFLICT);
     }
@@ -191,7 +193,7 @@ pub(super) async fn run(
     }
     let parameters = serde_json::to_value(&input).map_err(|_| StatusCode::BAD_REQUEST)?;
     let prior: Option<(String, Value, String)> =
-        sqlx::query_as("SELECT room_id,parameters,status FROM chat_persona_runs WHERE id=$1")
+        sqlx::query_as("SELECT room_id,parameters,status FROM chat_persona_runs WHERE id=?1")
             .bind(input.id)
             .fetch_optional(&state.pool)
             .await
@@ -221,12 +223,12 @@ pub(super) async fn run(
         .try_acquire_owned()
         .map_err(|_| StatusCode::TOO_MANY_REQUESTS)?;
     let lease = Uuid::new_v4();
-    let acquired=sqlx::query("INSERT INTO chat_ai_room_locks(room_id,lease_token,expires_at)VALUES($1,$2,now()+interval '5 minutes')ON CONFLICT(room_id)DO UPDATE SET lease_token=excluded.lease_token,expires_at=excluded.expires_at WHERE chat_ai_room_locks.expires_at<=now()")
+    let acquired=sqlx::query("INSERT INTO chat_ai_room_locks(room_id,lease_token,expires_at)VALUES(?1,?2,unixepoch('subsec')+300)ON CONFLICT(room_id)DO UPDATE SET lease_token=excluded.lease_token,expires_at=excluded.expires_at WHERE chat_ai_room_locks.expires_at<=unixepoch('subsec')")
  .bind(&room).bind(lease).execute(&state.pool).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
     if acquired.rows_affected() != 1 {
         return Err(StatusCode::CONFLICT);
     }
-    let initialized=sqlx::query("INSERT INTO chat_persona_runs(id,room_id,parameters,status,max_turns,max_output_budget)VALUES($1,$2,$3,'running',$4,$5) ON CONFLICT(id)DO UPDATE SET status='running',failure_status=NULL,updated_at=now() WHERE chat_persona_runs.status IN ('running','failed') AND chat_persona_runs.parameters=excluded.parameters AND chat_persona_runs.room_id=excluded.room_id")
+    let initialized=sqlx::query("INSERT INTO chat_persona_runs(id,room_id,parameters,status,max_turns,max_output_budget)VALUES(?1,?2,?3,'running',?4,?5) ON CONFLICT(id)DO UPDATE SET status='running',failure_status=NULL,updated_at=unixepoch('subsec') WHERE chat_persona_runs.status IN ('running','failed') AND chat_persona_runs.parameters=excluded.parameters AND chat_persona_runs.room_id=excluded.room_id")
  .bind(input.id).bind(&room).bind(parameters).bind(input.max_turns).bind(input.max_output_budget).execute(&state.pool).await;
     let performed = match initialized {
         Ok(v) if v.rows_affected() == 1 => tokio::time::timeout(
@@ -238,10 +240,10 @@ pub(super) async fn run(
         _ => Err(StatusCode::SERVICE_UNAVAILABLE),
     };
     if let Err(status) = performed {
-        let _=sqlx::query("UPDATE chat_persona_runs SET status='failed',failure_status=$2,updated_at=now() WHERE id=$1 AND status='running'").bind(input.id).bind(i32::from(status.as_u16())).execute(&state.pool).await;
+        let _=sqlx::query("UPDATE chat_persona_runs SET status='failed',failure_status=?2,updated_at=unixepoch('subsec') WHERE id=?1 AND status='running'").bind(input.id).bind(i32::from(status.as_u16())).execute(&state.pool).await;
     }
     let _ = sqlx::query(
-        "UPDATE chat_ai_room_locks SET expires_at=now() WHERE room_id=$1 AND lease_token=$2",
+        "UPDATE chat_ai_room_locks SET expires_at=unixepoch('subsec') WHERE room_id=?1 AND lease_token=?2",
     )
     .bind(&room)
     .bind(lease)
@@ -284,12 +286,12 @@ async fn execute(
             continue;
         }
         let reservation = if input.tools { 1024 } else { 512 };
-        let reserved=sqlx::query("UPDATE chat_persona_runs SET reserved_tokens=reserved_tokens+$2,updated_at=now() WHERE id=$1 AND status='running' AND reserved_tokens+$2<=max_output_budget").bind(input.id).bind(reservation).execute(&state.pool).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
+        let reserved=sqlx::query("UPDATE chat_persona_runs SET reserved_tokens=reserved_tokens+?2,updated_at=unixepoch('subsec') WHERE id=?1 AND status='running' AND reserved_tokens+?2<=max_output_budget").bind(input.id).bind(reservation).execute(&state.pool).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
         if reserved.rows_affected() != 1 {
-            sqlx::query("UPDATE chat_persona_runs SET status='budget_exhausted' WHERE id=$1 AND status='running'").bind(input.id).execute(&state.pool).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
+            sqlx::query("UPDATE chat_persona_runs SET status='budget_exhausted' WHERE id=?1 AND status='running'").bind(input.id).execute(&state.pool).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
             return Ok(());
         }
-        let history:Vec<(String,String)>=sqlx::query_as("SELECT author_kind,content FROM(SELECT author_kind,content,created_at,id FROM chat_messages WHERE room_id=$1 ORDER BY created_at DESC,id DESC LIMIT 12)h ORDER BY created_at,id")
+        let history:Vec<(String,String)>=sqlx::query_as("SELECT author_kind,content FROM(SELECT author_kind,content,created_at,id FROM chat_messages WHERE room_id=?1 ORDER BY created_at DESC,id DESC LIMIT 12)h ORDER BY created_at,id")
    .bind(room).fetch_all(&state.pool).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
         let context = json!({"topic":input.topic,"speaker":persona.name,"memory":persona.memory,"history":history.into_iter().map(|(role,text)|json!({"role":role,"content":text.chars().take(512).collect::<String>()})).collect::<Vec<_>>()});
         let instructions = format!(
@@ -315,7 +317,7 @@ async fn execute(
         done += 1;
         speaker += 1;
     }
-    sqlx::query("UPDATE chat_persona_runs SET status='completed',updated_at=now() WHERE id=$1 AND status='running'").bind(input.id).execute(&state.pool).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
+    sqlx::query("UPDATE chat_persona_runs SET status='completed',updated_at=unixepoch('subsec') WHERE id=?1 AND status='running'").bind(input.id).execute(&state.pool).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
     Ok(())
 }
 async fn cancelled(state: &StateData, id: Uuid) {

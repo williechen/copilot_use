@@ -11,11 +11,11 @@ export OPENAI_CHAT_MODEL=gpt-5.6-luna
 python3 scripts/local-verify.py --live-openai
 ```
 
-需要本機 PostgreSQL 的 initdb/pg_ctl/psql/pg_dump/pg_restore、pgvector 已安裝、Rust 與 Node。腳本建立 UTF-8 暫存 cluster、獨立 app roles/DB、random loopback ports，退出時清除 disposable 資料與程序。基礎測試移除 key 以避免外部呼叫；`--live-openai` 明確啟用真正 API 測試。報告位於 `target/local-validation.json`。
+需要本機 PostgreSQL 的 initdb/pg_ctl/psql/pg_dump/pg_restore、Rust 與 Node。腳本建立 UTF-8 暫存 cluster、SQLite Chat 檔案與 Analytics 獨立 app role/DB、random loopback ports，退出時清除 disposable 資料與程序。基礎測試移除 key 以避免外部呼叫；`--live-openai` 明確啟用真正 API 測試。報告位於 `target/local-validation.json`。
 
 ## Chat 與 Analytics
 
-先建立獨立空白測試 DB 及 non-superuser app roles；管理者在 Chat DB 啟用 `CREATE EXTENSION vector`。兩個 app 只對自己的 DB 執行 migrations。
+Chat 使用 `CHAT_DATABASE_URL=sqlite://data/chat.sqlite3`（未指定時為此預設）。只替 Analytics 建立 PostgreSQL DB 與 non-superuser app role。Chat/Pet 不需要 PostgreSQL 或向量 extension。
 
 設定 `CHAT_DATABASE_URL`、`ANALYTICS_DATABASE_URL`、`CHAT_API_TOKEN`，以及四個彼此不同、至少 16 字元的 Analytics token：
 
@@ -68,9 +68,9 @@ docker compose --env-file .env up --build -d
 bash scripts/smoke.sh
 ```
 
-Chat image 包含編譯後的 WASM/CSS；Chat DB 使用 [pgvector 官方 image](https://github.com/pgvector/pgvector#docker)，初始化 script 建立 non-superuser app role 與 extension。`.env` 的 AI key 不進 image build；只在明確設定後於 runtime 使用。
+Chat image 包含編譯後的 WASM/CSS；Chat 在 private `chat-sqlite-data` volume 的 `/data/chat.sqlite3` 使用 SQLite。Analytics PostgreSQL 初始化 script 建立 non-superuser app role。`.env` 的 AI key 不進 image build；只在明確設定後於 runtime 使用。
 
-此初始化只適用新空白 volume，不會自動降權或重建既有 DB。本機沒有 Docker，更新後的配置必須由新提交的 CI 驗證，不能沿用先前 SHA 的成功結果。
+此初始化只適用新空白 volume，不會自動降權或重建既有 DB。本機 Docker 已啟用；SQLite 配置需要重新建置及驗證，不能沿用 PostgreSQL Chat 的既有映像或測試結果。
 
 ## MCP 與 Agent
 
@@ -91,7 +91,7 @@ python3 scripts/local-verify.py --live-insights --pet-gui
 
 Pet 的記憶工具使用同一 executable 的 `--mcp-once` readonly SQLite stdio 模式；只有所選寵物的資料可見，子程序不繼承 API key。MCP 支援範圍為上述本地唯讀工具，不代表任意第三方 MCP server 相容。
 
-Chat history 可傳 `before=<message UUID>`，最多 100 筆；UI 最多保留 1000 筆。WebSocket 全服務最多 128 連線，登出/Session 到期/ACL 失效會拒絕後續資料並關閉連線；idle 每五秒檢查。跨程序 fan-out 和更完整配額仍是未完成事項。
+Chat history 可傳 `before=<message UUID>`，最多 100 筆；UI 最多保留 1000 筆。WebSocket 全服務最多 128 連線，登出/Session 到期/ACL 失效會拒絕後續資料並關閉連線；idle 每五秒檢查。同一主機的多個 Chat 程序共用 SQLite 檔案與持久通知佇列；全域最多512、每位使用者32、單程序128連線，idle 每五秒重查Session/ACL。SQLite WAL 不支援跨主機網路檔案系統。
 
 ## 本地備份、角色對話與更新
 
@@ -114,3 +114,24 @@ Chat 房主可保存最多八個 Persona，明確確認後開始有界對話。�
 寵物實際設定位於 app_data_dir 的 `pets/<uuid>/pet.toml`（GUI 顯示精確位置）。五項必填設定使用中文鍵；選用覆寫分於中文 quoted tables。編輯後可啟動 GUI 明確確認匯入；啟動不覆蓋同一已保存版本的手動草稿。SQLite 備份包含已保存／匯入的設定與生成PNG；未匯入的檔案草稿不屬於已保存設定。封存區提供可還原的寵物移除，資料留在本機。
 
 Chat 房間中的技術詞統計預設關閉，可在「匿名技術詞彙統計」選擇同意。只對本人的後續訊息用固定詞表計數，停用會排程封存自己的既有詞彙事件；可查看實際 ACK 進度。Analytics 的 `/api/v1/events/recent` 與 Dashboard 明細使用 read token，最多100筆，支持來源／事件類型過濾；時間為實際接收時間，四欄 v1 事件契約維持，不傳送原文／帳號／檔案路徑。
+
+## Chat／Pet 可攜式 SQLite
+
+Chat 的訊息、Session、房間權限、角色、知識文件／1536維向量、Outbox、分析同意及採用收據都在同一 SQLite。每位文件 owner 最多1000份文件；以真正 embedding 做 cosine distance 精確排序，不需要平台 extension。寫入使用 WAL、FULL synchronous、foreign keys、busy timeout；涉及多步驟狀態更新採 BEGIN IMMEDIATE，通知只有交易提交後才可被其他程序讀取。
+
+```sh
+export CHAT_DATABASE_URL=sqlite://data/chat.sqlite3
+# 一致性線上備份，目的檔必須不存在；不需要停止服務。
+cargo run --locked -p day9-chat -- --backup backups/chat.sqlite3
+# 以備份檔搬到另一個本地目錄後啟動。
+export CHAT_DATABASE_URL=sqlite://relocated/chat.sqlite3
+cargo run --locked -p day9-chat
+```
+
+先建立 backups 目的目錄。不要單獨複製正在使用的 chat.sqlite3；未 checkpoint 的資料可能仍在 -wal。`--backup` 使用 VACUUM INTO，檢查 integrity/foreign keys，且拒絕覆寫既有檔案。停止全部 Chat 程序後亦可搬移整個資料目錄。備份含密碼雜湊與 Session，須保持私密、由可信使用者保管；服務 token/API key 仍由環境設定，不寫入 DB。
+
+Pet 保留既有 SQLite 資料及 GUI 一致性備份／还原；完整可攜資料包含 pet.sqlite 與 pets/ 下的設定／生成素材。備份還原後由 SQLite 重建設定／素材 projection；手動未匯入的 pet.toml 草稿另行保存。Analytics 的 PostgreSQL、pg_dump/pg_restore、API 及 Dashboard 不變。
+
+舊 PostgreSQL Chat 資料不會自動轉成 SQLite。舊 migration 與 Docker volume 保留供讀取／遷移；不可把舊 DB URL 指向新 SQLite 服務，也不可刪除舊 volume 後宣稱已遷移。
+
+需要搬移舊 Chat PostgreSQL 資料時，先停止舊 Chat 寫入，保留原 DB／備份，在本機環境設定 `CHAT_LEGACY_DATABASE_URL`，執行 `python3 scripts/import-chat-postgres.py --output data/imported-chat.sqlite3`。工具以唯讀 repeatable-read snapshot 串流匯出所有已知表，转换 UUID／時間／JSON／向量，檢查 foreign keys/integrity，且只建立新檔，不覆寫原 DB 或既有 SQLite。未知表／欄位會拒絕，不能默默丟棄資料。匯入成功後另指定 `CHAT_DATABASE_URL` 啟動新服務；原資料保留到核對完成。

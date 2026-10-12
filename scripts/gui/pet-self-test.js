@@ -86,8 +86,7 @@ window.addEventListener('error',e=>window.__PET_LOAD_ERROR=e.message);window.add
  const select=document.querySelector('select');
  // 實際觸發 UI 的選擇與資料載入事件。
  const option=document.createElement('option');option.value=pet;select.appendChild(option);select.value=pet;select.dispatchEvent(new Event('change',{bubbles:true}));
- await new Promise(r=>setTimeout(r,250));
- assert(document.body.textContent.includes('Rust 的所有權'),'Leptos renders native data');
+ await waitUntil(()=>document.body.textContent.includes('Rust 的所有權'),'Leptos renders native data');
  if(window.__PET_TEST_LIVE_IMAGE){await waitUntil(()=>document.querySelector('.sprite'),'generated sprite rendered');const current=await invoke('load_asset',{pet});const frame=document.querySelector('.sprite').getBoundingClientRect();assert(frame.width<=200&&frame.height<=200&&Math.abs(frame.width/frame.height-current.width/current.height)<0.01,'actual sprite frame preserves original aspect inside 200x200');}
 
 

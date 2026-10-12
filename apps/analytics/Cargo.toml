@@ -8,7 +8,7 @@ axum.workspace = true
 event-contract = { path = "../../crates/event_contract" }
 serde.workspace = true
 serde_json.workspace = true
-sqlx.workspace = true
+sqlx = {workspace = true, features = ["postgres"]}
 tokio.workspace = true
 uuid.workspace = true
 chrono = { version = "0.4", features = ["serde"] }

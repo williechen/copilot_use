@@ -25,6 +25,8 @@ WORKDIR /app
 COPY --from=builder /out/day9-chat /app/server
 COPY --from=builder /src/apps/chat/migrations /app/migrations
 COPY --from=builder /src/target/site/pkg /app/site/pkg
+RUN mkdir -p /data && chown 65532:65532 /data && chmod 700 /data
+ENV CHAT_DATABASE_URL=sqlite:///data/chat.sqlite3
 ENV CHAT_SITE_DIR=/app/site/pkg
 ENV CHAT_LISTEN=0.0.0.0:3001
 USER 65532:65532

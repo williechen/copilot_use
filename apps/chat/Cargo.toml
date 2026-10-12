@@ -28,3 +28,6 @@ copilot-telemetry = {path="../../crates/telemetry"}
 mcp-bridge={path="../../crates/mcp_bridge"}
 url="2"
 http="1"
+
+[target.'cfg(unix)'.dependencies]
+libc = "0.2"

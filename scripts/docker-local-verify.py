@@ -36,10 +36,8 @@ for service in ('chat','analytics'):
  raw=subprocess.check_output(['docker','inspect','--format',fmt,cid],text=True).strip()
  checked(service+' uses non-root, read-only filesystem, dropped capabilities and resource bounds','"65532:65532" true ["ALL"] ["no-new-privileges:true"] 536870912 128'==raw)
  container_info[service]={'image_id':subprocess.check_output(['docker','inspect','--format','{{.Image}}',cid],text=True).strip(),'hardening':raw}
-checked('Chat app database role is not privileged',sql('chat-db',"SELECT rolsuper,rolcreatedb,rolcreaterole FROM pg_roles WHERE rolname='chat_user'",'chat_db')=='f|f|f')
 checked('Analytics app database role is not privileged',sql('analytics-db',"SELECT rolsuper,rolcreatedb,rolcreaterole FROM pg_roles WHERE rolname='analytics_user'",'analytics_db')=='f|f|f')
 checked('Chat cannot reuse its role in Analytics database',sql('analytics-db',"SELECT count(*) FROM pg_roles WHERE rolname='chat_user'",'analytics_db')=='0')
-checked('actual pgvector extension available',sql('chat-db',"SELECT extversion FROM pg_extension WHERE extname='vector'",'chat_db')=='0.8.7')
 with client.open(chat+'/pkg/chat_ui_bg.wasm')as response:checked('real WASM hydration asset is shipped',response.read(4)==b'\0asm')
 checked('unauthenticated writes rejected',http(chat,'/api/v1/messages',body={'room_id':'forbidden','content':'fixture'})[0]==401)
 room='docker-'+uuid.uuid4().hex[:20];assert http(chat,'/api/v1/rooms',ct,{'id':room,'name':'Docker release fixture'})[0]==201
@@ -53,10 +51,16 @@ checked('messages survive container recreation',any(row['id']==mid for row in ht
 command(['stop','analytics']);delayed=str(uuid.uuid4());assert http(chat,'/api/v1/messages',ct,{'id':delayed,'room_id':room,'content':'durable container outage fixture'})[0]==201
 command(['start','analytics']);wait(lambda:http(analytics,'/api/v1/events/web_chat/'+delayed,at)[0]==200)
 checked('durable retry recovers from an actual Analytics container outage')
-command(['stop','chat-db']);wait(lambda:http(chat,'/healthz')[0]!=200)
-checked('Chat reports unready while its actual database container is stopped')
-command(['start','chat-db']);wait(lambda:http(chat,'/healthz')[0]==200)
-checked('Chat reconnects after database container recovery')
+command(['stop','analytics-db']);wait(lambda:http(analytics,'/healthz')[0]!=200)
+checked('SQLite Chat stays ready while Analytics PostgreSQL is stopped',http(chat,'/healthz')[0]==200)
+queued=str(uuid.uuid4());assert http(chat,'/api/v1/messages',ct,{'id':queued,'room_id':room,'content':'SQLite while PostgreSQL offline'})[0]==201
+command(['start','analytics-db']);wait(lambda:http(analytics,'/healthz')[0]==200)
+wait(lambda:http(analytics,'/api/v1/events/web_chat/'+queued,at)[0]==200)
+checked('SQLite outbox delivers after actual PostgreSQL recovery')
+portable='/data/docker-portable-'+uuid.uuid4().hex+'.sqlite3'
+command(['exec','-T','chat','/app/server','--backup',portable])
+checked('release Chat creates integrity-checked portable SQLite snapshot')
+command(['exec','-T','chat','rm',portable])
 backup=command(['exec','-T','analytics-db','pg_dump','-U','bootstrap_owner','-d','analytics_db','-Fc'])
 fixture='p9_restore_'+uuid.uuid4().hex[:12]
 command(['exec','-T','analytics-db','createdb','-U','bootstrap_owner',fixture])
