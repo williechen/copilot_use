@@ -2,8 +2,7 @@
 
 ## 最高優先權的產品定位
 - 本 Repo 是 AI 控制的最終產品程式碼；**直接以 P9 為交付目標**。允許依相依性拆成多次 Commit/測試，但不按 rust_ai_chat 的 Day 編號或教學 P0–P5 進度等待。
-- rust_ai_chat 僅作使用者控制的唯讀學習/原始需求參考，兩套代碼與 CI、Gate、進度各自驗收。
-- 現在已有的 Day9 Chat/Pet/Analytics 範例只是 P9 起始實作，不能代表 P9 或完整產品完成。
+- 產品目標與前進項目以本 repo 為主；目錄／程式銜接以 rust_ai_chat 最新 main 為主，其他遵循 [共同學習規則](COMMON_LEARNING_RULES.md)，兩邊程式與學習進度分別驗收。
 - 以下是依既有需求整理的完整能力範圍；**Gate 以原始需求及實際證據逐項核對**，本文件不捏造已完成狀態。
 
 ## P9 必備能力
@@ -13,7 +12,7 @@
 - Analytics：獨立 DB、同服務 Dashboard/Ingest/Query、來源認證、冪等、完整來源事件、Taipei 趨勢、資料治理/備份、可追溯 1–3 句 AI 洞察及可審核建議、OTel。
 - 整合：獨立執行、隔離資料庫、跨服務事件/重試/故障恢復，Observe→Analyze→Act→Evaluate→Observe 閉環；Chat/Pet 採用必須授權且能回退。
 
-當前狀態、已測證據與逐項缺口統一維護於 [LOCAL_VALIDATION.md](LOCAL_VALIDATION.md)，避免多份矩陣互相矛盾。使用者已取消正式部署，保留本地/Docker/CI/跨平台測試與固定成品目標。
+未來教學／銜接清單維護於 [FUTURE_WORK.md](FUTURE_WORK.md)；驗收方式與有效證據入口見 [LOCAL_VALIDATION.md](LOCAL_VALIDATION.md)。使用者已取消正式部署，保留本地/Docker/CI/跨平台測試與固定成品目標。
 
 ## 開發與驗收政策
 1. 優先補齊**完整產品可啟動的實際入口**，不是只開新 trait 或只留 CLI；每次提交以可測試的真實跨層功能為單位。
@@ -25,4 +24,4 @@
 
 **目標是 P9 完整三產品，不是照著 Notion 教學 Day N 一天寫一小節。**
 
-2026-10-12 使用者需求變更：Chat 與 Pet 使用可攜式 SQLite；Analytics 儀表板維持 PostgreSQL。Chat PostgreSQL／pgvector 不再是交付依賴。正式 tag 需包含此變更的重新驗收。測試保留在所屬專案／模組目錄，不移到最外層。
+Chat／Pet 使用可攜式 SQLite；Analytics 維持 PostgreSQL。根據變更完成必要驗收；測試保留在所屬專案／模組，不放最外層。

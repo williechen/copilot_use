@@ -27,12 +27,16 @@ python3 scripts/local-verify.py --live-openai
 
 需要 Rust、Node 22、PostgreSQL（僅 Analytics）、wasm32 target、Trunk，以及 Linux Tauri 的 GTK/WebKit 開發套件。API key 不進入 repository、測試報告或日誌。實際啟動與設定見 [操作說明](docs/DEPLOYMENT.md)。
 
-## 目錄與歷史
+## 現行文件
 
-根 Cargo workspace 管理服務、Pet domain 和共享 crates；三個 frontend/native app 的獨立 workspace 各自保留 Cargo.lock。`day9/` 重複範例與重複 workflow 已移除，歷史仍可由 Git 查閱。現有 crate 名稱 `day9-*` 為既有命令相容性而保留，不代表教學進度。
+[目前系統架構與 DB 表格](docs/SYSTEM_ARCHITECTURE.md) · [下一次 Day9 範圍](docs/DAY9_PLAN.md)
 
-既有 PostgreSQL Chat migrations 保留於 `apps/server/postgres-migrations`，不會套用到 SQLite；SQLite 使用獨立 schema/migration history，舊 PostgreSQL volumes 不會被覆寫或刪除。其他已套用的 migration 不重寫；`docs/legacy-migrations` 保留先前重複 migration 原文供舊測試庫查核，不會在啟動時執行。產生的 dist/target/schema、私人資料庫、.env 不提交。
+- [共同學習規則](docs/COMMON_LEARNING_RULES.md)：目錄／內容以 rust_ai_chat 為主；目標／前進項目以 copilot_use 為主，其他遵循共同規則。
+- [未來前進項目](docs/FUTURE_WORK.md)：未完成的學習銜接、三產品切片及週六完整比對。
+- [產品目標](docs/P9_TARGET.md)、[目錄與程式銜接](docs/TEACHING_ALIGNMENT.md)、[模組與介面對照](docs/SEMANTIC_ARCHITECTURE_REVIEW.md)。
+- [操作說明](docs/DEPLOYMENT.md)、[可攜式資料](docs/SQLITE_TRANSITION.md)、[驗收方式](docs/LOCAL_VALIDATION.md)。
+- docs/learning-state.json 保存當前來源、有效程式驗證、下一教學編號與週六到期日。
 
-## 對應 rust_ai_chat 的目錄
+正式 [v0.1.0](https://github.com/williechen/copilot_use/releases/tag/v0.1.0) 保持固定；每日教學在 teaching/rust-ai-chat-alignment，main 整合匹配驗收的變更。根 workspace 管理服務／共享 crates；frontend/native 保留獨立 lock。測試放所屬 app／crate／模組，沒有根 tests workspace。私人 .env／DB 與生成檔不提交。
 
-正式產品固定於 [v0.1.0](https://github.com/williechen/copilot_use/releases/tag/v0.1.0)。`main` 已整合 `teaching/rust-ai-chat-alignment` 的實際目錄與程式；後續每日教學仍在教學分支推進。程式／目錄／所屬測試對齊見 [TEACHING_ALIGNMENT.md](docs/TEACHING_ALIGNMENT.md)，以獨立 CI 驗證；rust_ai_chat 嚴格唯讀。
+主文件保留有效規則與未來工作；封存及 Git 歷史不作現行待辦。已套用 migrations、固定 release 證據及操作手冊保留。

@@ -1,0 +1,29 @@
+{
+  "reference_sha": "fdc74c1ee244cf86df3fd1c427d893d2956f6211",
+  "validated_program_sha": "97b290efe9fa5c90682bbff2fed5e8fec9bf3a7e",
+  "validated_program_ci_run": 38248095311,
+  "fixed_tag": "v0.1.0",
+  "fixed_tag_sha": "22b44f33b9e2c9edb0fb398fb9bff3efd57b00ee",
+  "next_day": {
+    "chat": 9,
+    "pet": 9,
+    "analytics": 9
+  },
+  "last_full_comparison": null,
+  "next_full_comparison": "2026-10-17T08:00:00+08:00",
+  "timezone": "Asia/Taipei",
+  "archive_notion_page": "3f7e51d4-5093-81fa-a894-d3660c3252f7",
+  "full_comparison_weekday": "Saturday",
+  "full_comparison_interval_weeks": 1,
+  "database_targets": {
+    "chat": "portable SQLite",
+    "pet": "portable SQLite",
+    "analytics": "PostgreSQL"
+  },
+  "reference_source_db_observation": {
+    "sha": "fdc74c1ee244cf86df3fd1c427d893d2956f6211",
+    "chat": "GitHub main persistence still PgPool; target migration is pending learning adoption",
+    "pet": "SQLite implementation not established by current reference inspection",
+    "writable": false
+  }
+}

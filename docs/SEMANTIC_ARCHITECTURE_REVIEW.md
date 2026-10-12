@@ -1,14 +1,8 @@
-# 模組職責、公開介面與資料流程審查
+# 模組職責與介面對照
 
-本次基準：copilot_use main `a6eaf69a5db4d7d67655738d5896bcf9579422c6`；唯讀 rust_ai_chat main `fdc74c1ee244cf86df3fd1c427d893d2956f6211`。範圍為下表模組邊界、實際 Port 呼叫與關鍵資料流程，不是逐行安全認證，也不表示兩邊所有 wire contract／功能完全相同。
+目錄與程式銜接以 rust_ai_chat 最新 main 為主，產品前進目標以 copilot_use 為主，其餘按 [共同學習規則](COMMON_LEARNING_RULES.md)。此文件保存目前角色、介面映射及資料流程；每次微調與每週六完整比對後更新。它不是逐行安全認證或兩邊 wire contract 完全一致的宣告。
 
-## 使用者指定的更新方向
-
-後續 rust_ai_chat 的微調以其最新 main 實際內容為主：唯讀取得新 SHA，與上次已採用的參考 SHA 比較，讀取變更符號／呼叫端／所屬測試，再更新 copilot_use 對應模組、介面、目錄及教學。記錄參考 SHA、對應提交與實際回歸結果。rust_ai_chat 不寫入；正式 v0.1.0 tag 不覆寫。已有產品功能、安全驗證及使用者指定的 Chat/Pet SQLite、Analytics PostgreSQL 持續保留。
-
-本次重新核對遠端，rust_ai_chat 仍為 fdc74c1，尚無新的微調。既有快照的差異按下列實際語意對照，不以相同檔名視為相同契約。
-
-## 審查結果與重構決策
+## 當前模組邊界
 
 | 模組 | 公開介面／實際職責及資料流 | 決策與參考銜接 |
 |---|---|---|
@@ -46,16 +40,8 @@
 2. Pet：Tauri save_profile → 純 save_profile Port → runtime PetStore → SQLite commit → 序列化檔案投影；ProjectionPending 原語意保留。複習 IPC → runtime Card → 純 Schedule → 同交易保存 Card／Outbox。cleanup preview 與確認的 OS 操作結果由 runtime 驗證，再保存成功 receipt／Outbox；GUI 和 Analytics 的實際事件 ID 在本地整合回歸核對。
 3. Analytics：來源 token／四欄事件驗證 → Analytics::receive → EventRepository → PostgreSQL dedup／product_events commit → 2xx；同來源同 ID 重送不重計，衝突不回成功。Dashboard 查詢、封存／撤回／審核是獨立授權路徑。
 
-## 公開介面的保留差異
+## 公開介面與適配
 
 MessageAuthor::AnonymousUser → anonymous_user/None；User{user_id} → user/Some(id)；Ai{persona_id} → ai/Some(id)；System → system/None。這是概念映射，型別與序列化格式並不相同。
 
 參考 Room.category_room_id、RoomRepository/create_room 與成品房間 ACL／owner/topic 沒有一對一契約，不能把 topic 字彙當 category_room_id。後續教學需按參考的實際新增／微調銜接，保留成品房間資料與安全邊界。參考 PetMachine(PetState/PetCommand) 與成品 Action/Speed／動畫選擇也不是同一個 FSM；不建立未使用的同名型別來假裝已對應。
-
-## 實際驗證
-
-- 25 項 Pet runtime 回歸成功；原有隔離程序子測試與 1 項被忽略測試的狀態保留。
-- 6 項純 Profile／Port／Schedule 測試成功；非法輸入不呼叫 Adapter，投影錯誤不假報成功，非法評分不變更排程。
-- pet-domain 獨立 WASM 編譯成功；Chat Domain/Application 及 Pet Domain 的正常／build Cargo 依賴圖無 DB／HTTP／GUI／產品 Adapter。
-- 工作樹整合回歸 74 項成功：fmt／strict Clippy／workspace tests、HTTP／WS、512 連線／多程序、故障／key rotation／backup、真正 Pet GUI／IPC、Profile／snapshot／SQLite、Pet→Analytics event ID、policy rollback、W3C trace、同意撤回與低敏 telemetry。報告使用當時基準 SHA 並保留 source_dirty=true，不冒稱已提交版本或新一次真實 AI 測試。
-- Native Tauri dependency 編譯成功；沒有修改 AI request 或 updater 邏輯，本次未重複付費 AI 測試。三平台 installer／更新與 Docker 的新提交 CI 結果需另行核對，不能用舊 SHA 冒稱新 SHA 已全部通過。

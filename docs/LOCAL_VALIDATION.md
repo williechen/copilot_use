@@ -1,6 +1,6 @@
 # P9 本地與跨平台驗收
 
-交付範圍為三產品的本地測試、Docker release 建置、跨平台安裝／更新與版本固定；使用者已取消公開部署。正式來源 SHA、六項 CI 與安裝包 checksum 以 [GitHub Release](https://github.com/williechen/copilot_use/releases) 的 `release-manifest.json` 為準。每份報告必須指向同一個乾淨來源；舊提交的成功不替代新提交驗收。
+交付範圍為三產品的本地測試、Docker release 建置、跨平台安裝／更新與版本固定；使用者已取消公開部署。正式來源 SHA、六項 CI 與安裝包 checksum 以 [GitHub Release](https://github.com/williechen/copilot_use/releases) 的 `release-manifest.json` 為準。報告需核對精確來源及 dirty 說明；新程式變更要有匹配證據。有效程式基準見 learning-state.json。
 
 ## 產品與證據
 
@@ -31,8 +31,8 @@ SQLite 知識庫每 owner 最多1000文件；同主機多程序使用 WAL，不�
 
 Analytics 為匿名事件和受控詞頻的描述性計數，不代表獨立真人數、品質或因果成效。FileOrganizer 的 Trash 保留資料，不宣稱釋放磁碟空間。資料治理與寵物刪除提供可逆封存／還原，沒有永久抹除功能。跨平台安裝包沒有商業 Authenticode／Apple Developer notarization。
 
-## 清理與教學
+## 變更驗收
 
-移除重複 day9 範例、舊 workflow、未接線舊 UI／ProfileStore、生成檔與私人資料入 Git 的風險；保留必要 source、Cargo.lock、migration、重現腳本及有效驗收證據。舊測試和失敗原因可從 Git 歷史查核；不得把它們標成目前成功。
+目錄與程式微調以 rust_ai_chat 為主，產品目標以 copilot_use 為主。依 [共同學習規則](COMMON_LEARNING_RULES.md) 和 [未來清單](FUTURE_WORK.md) 執行必要 source／fmt／Clippy／unit／DB／HTTP／WS／WASM／GUI／E2E／CI。文件整理不重複付費 AI 或相同程式的完整建置；確認程式 tree 未改變與文件連結有效。
 
-`williechen/rust_ai_chat` 嚴格唯讀。正式 tag 固定後，才在 copilot_use 的獨立教學 branch 調整實際目錄、程式與對應教學；測試保留在所屬 app／crate／模組，禁止建立外層 tests workspace。每日教學與正式固定產品分開驗收。
+正式 Release／docs/release-evidence 保存固定成品證據；當前已驗證程式及參考來源見 learning-state.json。比較和教學的結果不得混算 rust_ai_chat 的實際套用進度。

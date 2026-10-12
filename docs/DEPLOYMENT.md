@@ -70,7 +70,7 @@ bash scripts/smoke.sh
 
 Chat image 包含編譯後的 WASM/CSS；Chat 在 private `chat-sqlite-data` volume 的 `/data/chat.sqlite3` 使用 SQLite。Analytics PostgreSQL 初始化 script 建立 non-superuser app role。`.env` 的 AI key 不進 image build；只在明確設定後於 runtime 使用。
 
-此初始化只適用新空白 volume，不會自動降權或重建既有 DB。本機 Docker 已啟用；SQLite 配置需要重新建置及驗證，不能沿用 PostgreSQL Chat 的既有映像或測試結果。
+此初始化適用新空白 volume；既有 DB 權限或 schema 調整需先備份並按匹配版本驗證，不自動重建資料。
 
 ## MCP 與 Agent
 
