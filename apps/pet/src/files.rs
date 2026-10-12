@@ -17,13 +17,16 @@ use uuid::Uuid;
 type Error = Box<dyn std::error::Error + Send + Sync>;
 
 fn private_directory(path: &Path) -> Result<(), Error> {
-    if path.exists() {
-        let meta = fs::symlink_metadata(path)?;
-        if !meta.is_dir() || meta.file_type().is_symlink() {
-            return Err("unsafe pet directory".into());
-        }
-    } else {
-        fs::create_dir(path)?;
+    match fs::create_dir(path) {
+        Ok(()) => {}
+        Err(error) if error.kind() == std::io::ErrorKind::AlreadyExists => {}
+        Err(error) => return Err(error.into()),
+    }
+    // Another process may create the same projection root concurrently. Always
+    // validate the resulting directory; never accept a symlink or another owner.
+    let meta = fs::symlink_metadata(path)?;
+    if !meta.is_dir() || meta.file_type().is_symlink() {
+        return Err("unsafe pet directory".into());
     }
     #[cfg(unix)]
     {
@@ -254,6 +257,37 @@ impl PetStore {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[tokio::test]
+    async fn concurrent_first_projection_creation_preserves_each_pet() {
+        let directory = tempfile::tempdir().unwrap();
+        let store = PetStore::open(&directory.path().join("pet.sqlite"))
+            .await
+            .unwrap();
+        let barrier = std::sync::Arc::new(tokio::sync::Barrier::new(9));
+        let mut handles = Vec::new();
+        for index in 0..8 {
+            let store = store.clone();
+            let barrier = barrier.clone();
+            handles.push(tokio::spawn(async move{
+                let pet=Uuid::new_v4();
+                let profile:PetProfile=serde_json::from_value(json!({"名字":format!("Concurrent {index}"),"種類":"鳥","喜好":[],"個性":[],"興趣":[]})).unwrap();
+                barrier.wait().await;store.save_profile(pet,&profile).await.unwrap();pet
+            }));
+        }
+        barrier.wait().await;
+        for handle in handles {
+            let pet = handle.await.unwrap();
+            assert!(
+                directory
+                    .path()
+                    .join("pets")
+                    .join(pet.to_string())
+                    .join("pet.toml")
+                    .is_file()
+            );
+        }
+        store.pool.close().await;
+    }
     #[tokio::test]
     async fn actual_per_pet_files_are_isolated_and_confirmed_import_updates_only_selected_pet() {
         let directory = std::env::temp_dir().join(format!("pet-files-{}", Uuid::new_v4()));

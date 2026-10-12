@@ -116,8 +116,8 @@ mod tests {
     use super::*;
     #[tokio::test]
     async fn stale_images_never_replace_or_render_a_changed_profile() {
-        let path =
-            std::env::temp_dir().join(format!("pet-image-profile-{}.sqlite", Uuid::new_v4()));
+        let directory = tempfile::tempdir().unwrap();
+        let path = directory.path().join("pet.sqlite");
         let store = PetStore::open(&path).await.unwrap();
         let pet = Uuid::new_v4();
         let mut profile: PetProfile =
