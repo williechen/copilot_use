@@ -1,0 +1,9 @@
+[package]
+name="chat-application"
+version.workspace=true
+edition.workspace=true
+[dependencies]
+chat-domain={path="../chat_domain"}
+[dev-dependencies]
+tokio.workspace=true
+uuid.workspace=true

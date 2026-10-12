@@ -17,10 +17,10 @@ parser.add_argument('--analytics',action='store_true')
 parser.add_argument('--updater',action='store_true')
 options=parser.parse_args()
 if not options.executable:
-    if not (ROOT/'apps/pet_desktop/generated-icons/icon.ico').exists():
+    if not (ROOT/'apps/desktop_pet/generated-icons/icon.ico').exists():
         subprocess.run(['node','scripts/build-pet-ui.mjs'],cwd=ROOT,check=True)
-    subprocess.run(["cargo", "build", "--manifest-path", str(ROOT / "apps/pet_desktop/Cargo.toml"), "--locked"], check=True, cwd=ROOT)
-executable=options.executable.resolve() if options.executable else ROOT / ("apps/pet_desktop/target/debug/copilot-desktop-pet.exe" if sys.platform=="win32" else "apps/pet_desktop/target/debug/copilot-desktop-pet")
+    subprocess.run(["cargo", "build", "--manifest-path", str(ROOT / "apps/desktop_pet/Cargo.toml"), "--locked"], check=True, cwd=ROOT)
+executable=options.executable.resolve() if options.executable else ROOT / ("apps/desktop_pet/target/debug/copilot-desktop-pet.exe" if sys.platform=="win32" else "apps/desktop_pet/target/debug/copilot-desktop-pet")
 with tempfile.TemporaryDirectory(prefix="copilot-pet-gui-") as scratch:
     # macOS /var is a symlink; run disposable bundles through the canonical
     # /private path so Tauri keeps its executable-path protection enabled.

@@ -1,81 +1,38 @@
-> 最新需求：Chat／Pet 已改用可攜式 SQLite，Analytics PostgreSQL 不變。以下為歷史驗證，不能沿用為 SQLite 正式交付證明；最新狀態見 [SQLite 調整](SQLITE_TRANSITION.md)。
+# P9 本地與跨平台驗收
 
-# 本地驗證紀錄（2026-10-12）
+交付範圍為三產品的本地測試、Docker release 建置、跨平台安裝／更新與版本固定；使用者已取消公開部署。正式來源 SHA、六項 CI 與安裝包 checksum 以 [GitHub Release](https://github.com/williechen/copilot_use/releases) 的 `release-manifest.json` 為準。每份報告必須指向同一個乾淨來源；舊提交的成功不替代新提交驗收。
 
-**P9 驗收進行中，尚未固定正式 Release/Tag。** 使用者取消對外部署，仍要求本地 Docker 正式建置與測試。通過必要驗收後才固定正式版本，並建立 `copilot_use` 教學對齊分支。`rust_ai_chat` 保持唯讀。教學測試隨各模組／專案放置，不集中在最外層 `tests/`；正式 tag 前不產生 Day 教學。
+## 產品與證據
 
-## 基準與證據範圍
+| 產品／整合 | 已執行驗收 | 證據 |
+|---|---|---|
+| Chat SQLite | 空庫 migration、Session／ACL、多房間、history、WS presence／typing／重連、跨程序可靠傳送、交易 Outbox／冪等 | `live.json`、CI |
+| Chat AI | 真實 OpenAI gpt-5.6-luna Responses 串流、結構化 Persona／AI-to-AI、SQLite 向量 RAG、唯讀 MCP／Agent 與引用 | `live.json` |
+| Chat 可攜資料 | 舊 PostgreSQL 唯讀匯入 codec／拒絕覆寫、VACUUM INTO 完整快照、所有資料表比對、搬移後 HTTP history | `live.json` |
+| Pet SQLite／檔案 | 多寵物、繁體中文五欄設定、每寵物 TOML／identity manifest／素材、記憶／到期複習／適應／主動提醒、可逆封存、備份與還原 | `packaged_gui.json`、三平台 native／GUI CI |
+| Pet AI／動畫 | 真實 AI 對話、RAG／MCP／Agent、生圖與角色 hash 快取、4×4素材、非正方形等比 200×200、浮動視窗更新 | `packaged_gui.json` |
+| FileOrganizer | 授權 root／opaque ID、預覽與明確確認、symlink／TOCTOU／ACL／lease／journal、私人 Trash／還原、重送與重啟事件去重 | native CI、GUI、`live.json` |
+| Analytics PostgreSQL | 獨立 DB／non-superuser role、來源認證、冪等／衝突、UUID 及 VARCHAR(40)、Taipei 趨勢、明細、可逆封存／還原、pg_dump／restore | `live.json`、`docker.json`、CI |
+| 分析閉環 | 真實 AI 使用持久 aggregate 快照產生可追溯洞察，人工審核、Chat／Pet 明確授權套用、收據、描述性前後比較及回退 | `live.json`、GUI |
+| 隱私與觀測 | 預設關閉技術詞計數、逐人逐房間同意／撤回、可靠撤銷、不復活詞頻；OTLP 收到 traces／metrics／logs，不含憑證或原始訊息 | `live.json` |
+| 負載／故障 | 512 sockets／五程序的 admission 邊界、64併發訊息至32訂閱者、精確 Analytics ID；服務重啟、PG 中斷、Outbox 恢復、金鑰輪替 | `live.json`、fault／Compose CI |
+| Docker release | 真實 image revision、非 root、唯讀 rootfs、drop ALL、no-new-privileges、資源邊界、WASM、容器重建、Chat SQLite 在 PG 中斷時可用、備份還原 | `docker.json` |
+| 安裝與更新 | Linux deb／AppImage、macOS app、Windows NSIS 實際 GUI；簽章拒絕邊界、真正0.1.0→0.1.1更新、預期bytes、冷啟動版本、SQLite與快照checksum保留 | 三平台 CI artifacts、`appimage_update.json` |
 
-起點 `26f25f62e5ade7538b19c5643df71f9e06f609d1`。已提交 `7bb8fc98465390d0173e2d53a6730713073627c3` 的六項 CI 全通過：Rust/PostgreSQL、Docker Compose E2E、本地故障恢復、Linux deb/GUI、macOS app、Windows NSIS。MCP/Agent、journal、租約、觀測 transport 與建議流程已提交 `5be001d06e9da1a00ebe336b8f529d37d909b1d2`。最新本地基礎、真實 OpenAI/Persona/Pet GUI 整合通過；`990f703` 的 macOS 型別修正與六項 CI 已通過，新增功能仍須新 SHA CI。不得沿用舊提交結果。
+正式 Release 的附件保留上述四份本地報告及三平台 CI 安裝包 ZIP。CI 成功只代表該 SHA 的實際執行結果；不是商業平台憑證簽章或公開部署證據。
 
-唯讀需求基準 `rust_ai_chat` SHA `fdc74c1ee244cf86df3fd1c427d893d2956f6211`，以及 Notion 共同主頁與三產品需求頁。本地 Rust/Cargo 1.99.0、PostgreSQL 18.6、pgvector 0.8.7、Node 22.22.1、Trunk 0.21.14、Tauri CLI 2.11.5。依賴版本固定於各 workspace 的 Cargo.lock。
+## 重現與安全邊界
 
-## 已實際通過
+使用 [操作說明](DEPLOYMENT.md) 與 `scripts/local-verify.py`、`scripts/docker-local-verify.py`、`scripts/pet-gui-verify.py` 重現。真實 AI 測試使用本機 `OPENAI_API_KEY` 與 `OPENAI_CHAT_MODEL=gpt-5.6-luna`；報告和 Git 不保存 key。MCP 用隔離本地唯讀 fixture，沒有冒稱已測任意外部 MCP server。
 
-- `scripts/local-verify.py`：fmt、嚴格 Clippy、48 個 workspace 測試；全新隔離 DB migrations、兩個 non-superuser role 的 DB 隔離、HTTP/WS、精確訊息 ID 的跨服務事件、來源 token 與 schema 拒絕、Session/ACL/CSRF/邀請/登出、重啟冪等、服務與 DB 中斷恢復、pg_dump/restore 逐列核對。
-- Chat/Pet OpenAI 真實 `gpt-5.6-luna` 對話串流完成與持久化；Chat 真實 embedding → pgvector 檢索 → RAG 回覆 → Outbox/Analytics，以及知識文件刪除。生圖使用 Responses 的 image_generation tool，實際 PNG 與 SQLite 快取已驗證；不是 placeholder。
-- Chat 真實 Function Calling → MCP 2026-07-28 → owner-scoped pgvector → Strict JSON → 完整回答/Outbox/Analytics 已通過；確認測試代碼 COMET-432 與引用文件。MCP discovery、header mismatch、Origin 與未知工具拒絕皆以真實 HTTP 驗證。
-- Chat cursor API 按 `(created_at,id)` 提供最多 100 筆的早期訊息，拒絕不屬於房間的 cursor；UI 可載入舊訊息且最多 1000 筆。WS 全服務最多 128 連線，cookie Session/ACL 在事件送出前、typing 前與每五秒重新驗證。真實 RFC6455 cookie 測試確認登出後連線關閉，後續私人訊息不會送到被撤銷的 session。
-- Chat 同 UUID 併發重送只保存一筆訊息與 Outbox；變更 room/author/content 拒絕。真實瀏覽器驗證 32 筆有上限佇列、離線保留、服務恢復後只送達一筆訊息/Outbox/Analytics，及重新訂閱後收到獨立 WS 通知。佇列只在當頁記憶體保存，離開頁面不留私人內容。
-- Leptos SSR 與 WASM hydration 編譯、真實瀏覽器登入/受保護路由/建房/送信/刷新 history/登出測試。舊 `/legacy` HTML 入口已移除。
-- Linux Tauri/WebKit/WASM/IPC 實際 GUI 測試：五項設定、多寵物、進階覆寫保存、記憶隔離/編輯/刪除、複習排程、opaque ID 預覽/拒絕未確認操作/確認後 receipt、200×200 浮動視窗。真實生成 sprite 角色一致性經目視檢查，任意原圖尺寸縮放到固定顯示框。
-- Unix 安全 Adapter 的 symlink、根目錄被替換、檔案變更拒絕與正常隔離測試。Linux 實際通過；macOS CI 實際 11 個 Pet 測試與 app bundle 建置通過，完整 runtime 尚未驗收。Windows 危險移動 fail closed。
-- 本機 numeric loopback collector 實收 OpenTelemetry traces/metrics/logs；Chat Outbox 與 Analytics W3C trace 關聯通過；未洩露憑證或對話內容。只允許本機 collector。
-- Pet 的 GUI 授權/撤銷、逐檔勾選确认、durable journal/收據復原、收據+事件同交易與冪等、SQLite 原子租約/CAS/過期重領/人工重試均已實測。真實 GUI → SQLite → Analytics 各兩筆清理、一筆複習事件，重複復原不增計，W3C trace 關聯通過。
-- 本機 OTLP transport 已固定精確 URL、停用 proxy/redirect 並移除 SDK 會合併的環境 headers；本機 receiver 實證沒有認證 header。
-- Pet 真實 OpenAI Function Calling → 本人寵物的 readonly SQLite MCP stdio 子程序 → Strict JSON 回答已通過；驗證 ASTRO-771、引用 memory ID、拒絕其他寵物記憶。子程序沒有 API key 或 GUI/OTEL 環境設定。
-- Analytics 真實 OpenAI 結構化 1–3 句洞察以新測試庫的 day/event_type/total 快照產生並持久化；審核權限、未核准拒絕、明確確認、Chat 實際 context limit 變更、Native Pet 套用/回退與穩定收據、描述性事件數評估均實測通過。事件數不足以證明因果、學習品質或人數；此限制保存在評估證據中。
-- Analytics 同 ID/同事件冪等、同 ID/不同事件衝突、可逆封存/還原測試通過。永久資料刪除尚未提供。
+四份 Cargo.lock 已執行 RustSec audit，當次沒有已知漏洞，但有未維護依賴警告。Tauri／GTK3 所需 GLib 0.18.5 使用帶 MIT 授權的官方安全修補回移，另外執行 optimized release regression；不以忽略 advisory 取代修正，也不宣稱這是全面安全認證。
 
-命令與設定見 [操作說明](DEPLOYMENT.md)。`local-validation-result.json` 是最近一次基礎驗證的局部結果；`live_openai:false` 不代表該次執行有付費呼叫。GUI、生圖、live RAG 各有獨立證據，不能以基礎測試報告取代。
+SQLite 知識庫每 owner 最多1000文件；同主機多程序使用 WAL，不支援多主機網路檔案系統。執行中不得只複製主 SQLite 檔；使用已驗證的備份命令，或完全停止所有寫入程序再搬移。Pet 備份保留 SQLite、設定與素材。
 
-## 最新驗收與剩餘門檻
+Analytics 為匿名事件和受控詞頻的描述性計數，不代表獨立真人數、品質或因果成效。FileOrganizer 的 Trash 保留資料，不宣稱釋放磁碟空間。資料治理與寵物刪除提供可逆封存／還原，沒有永久抹除功能。跨平台安裝包沒有商業 Authenticode／Apple Developer notarization。
 
-`f9ff699a969dcf94fb1e2eff99df05a7c752c02f` 的 CI：Rust/PostgreSQL、Docker Compose、故障恢復、Linux desktop、macOS desktop 通過；Windows desktop 失敗。不可宣稱六項全過。Windows 實際測試發現唯讀 handle 無法 flush 備份，以及回收檔案 ACL 還原失敗；目前修正需要新 SHA 的 Windows 實跑確認。
+## 清理與教學
 
-最新本地工作樹已通過（尚需提交後 CI，結果不能冒稱來自 f9ff699）：
-- 真實 512 個 cookie WebSocket、五個 Chat 程序：全域／每人／每程序超限拒絕；64 個併發私人訊息各送至 32 個訂閱者一次，history 與 Analytics 精確事件 ID 一致。p50 49.63 ms，p95 64.24 ms，範圍僅此本機合成負載。
-- 真實瀏覽器 presence／typing／跨客戶端訊息；OpenAI Persona 建立、保存、完成發言、切換房間後取消原 run，收據保留一個已完成回合。
-- 真實 OpenAI 只選擇 Analytics 快照事實索引；瀏覽器審核、Chat 採用收據、描述性前後比較、回退及狀態更新通過。
-- Linux GUI 實際到期題主動提醒顯示與一小時冷卻通過。
-- 備份交易故障完整回滾、操作前快照保留，以及舊 schema 在私人工作副本升級後還原通過；原始備份 bytes 完全不变。
-- 真實 Chat 管理／Analytics 查詢／來源 ingest 金鑰輪替：舊憑證撤銷、新憑證跨服務投遞成功。
-- profile hash 阻止過時生圖結果覆蓋或顯示已修改角色；unit 與真實 OpenAI 生圖／快取／修改後停用舊素材／原設定恢復快取均通過。
+移除重複 day9 範例、舊 workflow、未接線舊 UI／ProfileStore、生成檔與私人資料入 Git 的風險；保留必要 source、Cargo.lock、migration、重現腳本及有效驗收證據。舊測試和失敗原因可從 Git 歷史查核；不得把它們標成目前成功。
 
-| 必要門檻 | 剩餘驗證 |
-|---|---|
-| Windows 安全與 GUI | d873881 Windows 20/20 native safety/backup 通過；後續 GUI build 缺生成 icon，已補接。最新檔案／registry 功能仍須新 SHA 實跑 |
-| 安裝包 runtime | Linux deb 解包後的 release 程式已通過 GUI／SQLite／回收還原／簽章驗收；macOS app 與 Windows 安装包加入 CI，尚待結果 |
-| Updater | Linux/macOS 簽章拒絕邊界通過；Linux AppImage 真實 0.1.0→0.1.1 安裝、checksum、冷啟動版本、既有寵物/SQLite 完整性與更新前快照已過。本地測試私鑰不進 repository |
-| Analytics Dashboard | 已通過 Taipei 當日趨勢、實際封存 13→12、還原 12→13 的瀏覽器操作 |
-| 身份／架構 | 實際 Analytics Adapter 的原生 UUID↔VARCHAR(40) 轉換、並發去重/衝突/查詢及完整 VARCHAR HTTP/WS/故障 E2E 通過，domain/API 保持 UUID；正式 tag 後新 branch 對齊目錄與模組內測試 |
-| 安全／來源固定 | 最新四份 lock audit 0 known vulnerabilities（有未維護警告）、GLib 官方修補回移 release regression；d873881 的乾淨 Docker release 建置／16項容器驗收與真實 OpenAI/Pet 整合通過；最新功能仍須同一乾淨 SHA 全部 CI／Docker／安裝包 |
-| 交付固定 | 更新文件、移除無用暫存、完成上列門檻後才正式 release/tag；目前尚未完成 |
-
-## 清理範圍
-
-移除未使用的 `day9/`、重複 `rust-day9.yml`、舊 Chat HTML/JS UI、生圖臨時診斷、產生的 Tauri schema；新增忽略規則防止 .env/SQLite/generated files 誤提交。保留實際產品、各 Cargo.lock、canonical migrations、必要歷史 migration、重現腳本及測試證據。
-
-新增階段證據不代表完整 P9。測試矩陣和未完成清單仍是 Release/Tag 門檻。
-
-RustSec 的 glib 問題修補於 >=0.20.0；目前 Tauri/GTK3 依賴仍使用 0.18.5，已將官方 `let mut p`/`&mut p` 修正回移到 MIT 相容來源 `vendor/glib-0.18.5`；所有受影響 iterator 方法的 release regression 通過，並加入 CI；其餘相容升級與完整安全驗收尚未完成，不能宣稱安全驗收完成。來源：[RustSec advisory](https://rustsec.org/advisories/RUSTSEC-2024-0429.html)。
-
-清理紀錄：已移除任務暫存發布 payload、過時 fixture/進度檔、舊測試庫及重複日誌；移除可重建增量編譯快取，保留 source/lock/migration/有效證據與唯讀參考 clone。
-
-新增已測功能：
-- 私人回收區 list/確認 restore/NOREPLACE/身份核對/跨程序 flock；journal 還原收據與 SQLite 事件同交易，重送及重啟不重複計數。實際 GUI 操作還原 sample.txt，Analytics 精確一筆 `file.restore.succeeded`。
-- Chat 以 transaction PG NOTIFY 的 message ID 跨程序通知，讀取 canonical DB content；兩個獨立程序驗證訊息與 typing 隔離、presence snapshot。每人 32／全系統 512／每程序 128 連線上限；presence lease 20 秒，每五秒續租，關閉後移除。
-- Session 成功建立/撤銷與登入/登出 Outbox 同交易；事件只有原四欄位，不帶帳號或 cookie。實際跨服務匿名事件通過。
-- 相容 GLib 安全回移保留 MIT 授權與來源；不修改全域 Cargo registry，也不以忽略 advisory 代替安全證據。
-
-## 新增完整接線驗收（尚需新 SHA 跨平台 CI）
-
-- `pets/<uuid>/pet.toml` 與 profile manifest 真正由保存／匯入／還原流程產生。每隻寵物獨立、檔案原子替換、私有權限；啟動保留尚未匯入的手動草稿，資料庫為已保存設定的權威來源。選用中文 table 名稱輸出兼容 TOML 1.0。投影同步失敗明確區分「資料已保存」與「檔案尚未同步」。
-- 真實 OpenAI PNG 保存於每隻寵物的 `assets/generated/<version>/sheet.png`，manifest 包含 SHA256／版本／原始尺寸／四列四格與200×200顯示範圍。非正方形素材保持比例；生成後通知浮動視窗更新。實際 GUI／生成素材接線通過。
-- 單隻寵物可確認後移除到封存區並還原；保留其他寵物、原記憶／素材；封存後不可選用或讓 AI 使用。交易事件去重，真實 GUI 通過。未提供永久抹除。
-- 匿名技術詞計數預設關閉、逐人逐房間同意；固定十個詞，每則最多32次。含憑證／聯絡資訊的訊息略過。消息與詞彙 Outbox 同交易、重送不增計。停用以有租約／重試的可靠撤銷佇列，消費端 transaction 鎖保護撤銷與延遲投遞，歷史詞彙不會被 admin restore 重新顯示。真實 HTTP／Cookie／Analytics 中斷與恢復通過原生 UUID 及 VARCHAR(40) E2E；介面已通過真實瀏覽器：同意送出兩次 rust／一次 ownership，Dashboard 明細顯示真實匿名 ID；停用後3筆撤銷 ACK 完成，總數31→28，明細與詞頻消失。
-- 匿名 `login.failed` 記錄真實認證失敗，不記錄帳號、密碼或 cookie；登入方式目前只有密碼，不杜撰 OAuth 或使用者數。
-- Chat 訊息、Pet 設定及 Analytics ingestion/query 的可移植 Application Port 已真正接到 Repository Adapter；核心 Port 不依賴 Driver、OS 或 UI。Persistence Adapter 保留 SQL、bind/decode、transaction 及投影。移除舊未接線 ProfileStore，CLI 只讀真正設定／素材 manifest。
-- 最新512 socket／64則併發 fan-out、Token輪替、故障及備份 E2E 通過；`recent` 真正事件明細（最多100筆）、來源／類型過濾與台北接收時間已通過 HTTP 及真實瀏覽器；仍需新提交 CI。
-
-統計僅描述確實發生的匿名事件與受控詞頻；不提供任意私密詞彙、原始聊天、問題正文或因果／品質推論。FileOrganizer 的 Trash 保留檔案，不宣稱釋放磁碟空間。
+`williechen/rust_ai_chat` 嚴格唯讀。正式 tag 固定後，才在 copilot_use 的獨立教學 branch 調整實際目錄、程式與對應教學；測試保留在所屬 app／crate／模組，禁止建立外層 tests workspace。每日教學與正式固定產品分開驗收。

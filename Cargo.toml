@@ -1,6 +1,6 @@
 [workspace]
 resolver = "3"
-members = ["crates/event_contract", "crates/openai_adapter", "crates/chat_ui", "crates/telemetry", "crates/mcp_bridge", "apps/chat", "apps/pet", "apps/analytics"]
+members = ["crates/shared", "crates/ai_core", "crates/ui", "crates/telemetry", "crates/mcp_bridge", "crates/chat_domain", "crates/chat_application", "crates/persistence", "apps/server", "crates/pet_domain", "apps/stats_server"]
 
 [workspace.package]
 edition = "2024"

@@ -10,7 +10,7 @@ def verify_nsis_reference(compiled: bytes, packaged: bytes):
         raise ValueError('NSIS payload differs from compiled program beyond its bundle marker')
 
 def build():
-    root=pathlib.Path(__file__).resolve().parents[1]/'apps/pet_desktop'
+    root=pathlib.Path(__file__).resolve().parents[1]/'apps/desktop_pet'
     paths=[root/'Cargo.toml',root/'Cargo.lock'];saved={p:p.read_bytes() for p in paths}
     try:
         bundles='app' if sys.platform=='darwin' else 'nsis' if sys.platform=='win32' else 'appimage'
