@@ -2,6 +2,8 @@
 """Verify real local release containers without printing credentials or full inspect data."""
 import argparse,hashlib,json,os,pathlib,subprocess,time,urllib.request,urllib.error,uuid
 ROOT=pathlib.Path(__file__).resolve().parents[1]
+SOURCE_HEAD=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
+SOURCE_DIRTY=bool(subprocess.check_output(['git','status','--porcelain'],cwd=ROOT,text=True).strip())
 a=argparse.ArgumentParser();a.add_argument('--env-file',default='.env.docker-local');a.add_argument('--project',default='copilot-p9-local');args=a.parse_args()
 settings=ROOT/args.env_file
 if settings.stat().st_mode&0o077:raise SystemExit('Private settings file must have mode 0600')
@@ -35,7 +37,9 @@ for service in ('chat','analytics'):
  fmt='{{json .Config.User}} {{json .HostConfig.ReadonlyRootfs}} {{json .HostConfig.CapDrop}} {{json .HostConfig.SecurityOpt}} {{json .HostConfig.Memory}} {{json .HostConfig.PidsLimit}}'
  raw=subprocess.check_output(['docker','inspect','--format',fmt,cid],text=True).strip()
  checked(service+' uses non-root, read-only filesystem, dropped capabilities and resource bounds','"65532:65532" true ["ALL"] ["no-new-privileges:true"] 536870912 128'==raw)
- container_info[service]={'image_id':subprocess.check_output(['docker','inspect','--format','{{.Image}}',cid],text=True).strip(),'hardening':raw}
+ revision=subprocess.check_output(['docker','inspect','--format','{{index .Config.Labels "org.opencontainers.image.revision"}}',cid],text=True).strip()
+ checked(service+' actual image revision matches validation source SHA',revision==SOURCE_HEAD)
+ container_info[service]={'revision':revision,'image_id':subprocess.check_output(['docker','inspect','--format','{{.Image}}',cid],text=True).strip(),'hardening':raw}
 checked('Analytics app database role is not privileged',sql('analytics-db',"SELECT rolsuper,rolcreatedb,rolcreaterole FROM pg_roles WHERE rolname='analytics_user'",'analytics_db')=='f|f|f')
 checked('Chat cannot reuse its role in Analytics database',sql('analytics-db',"SELECT count(*) FROM pg_roles WHERE rolname='chat_user'",'analytics_db')=='0')
 with client.open(chat+'/pkg/chat_ui_bg.wasm')as response:checked('real WASM hydration asset is shipped',response.read(4)==b'\0asm')
@@ -69,5 +73,6 @@ try:
  query='SELECT source_app,event_id,event_type FROM product_events ORDER BY source_app,event_id'
  checked('container database backup restores exact event rows',sql('analytics-db',query,'analytics_db')==sql('analytics-db',query,fixture))
 finally:command(['exec','-T','analytics-db','dropdb','-U','bootstrap_owner',fixture])
-report={'status':'passed','checks':checks,'containers':container_info,'backup_sha256':hashlib.sha256(backup).hexdigest(),'scope':'actual local release Docker integration; complete P9 gates remain separate','source_head':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),'working_tree_dirty':bool(subprocess.check_output(['git','status','--porcelain'],cwd=ROOT,text=True).strip())}
+checked('validation source remains unchanged',subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()==SOURCE_HEAD)
+report={'status':'passed','checks':checks,'containers':container_info,'backup_sha256':hashlib.sha256(backup).hexdigest(),'scope':'actual local release Docker integration; complete P9 gates remain separate','source_head':SOURCE_HEAD,'working_tree_dirty':SOURCE_DIRTY or bool(subprocess.check_output(['git','status','--porcelain'],cwd=ROOT,text=True).strip())}
 (ROOT/'target/docker-local-validation.json').write_text(json.dumps(report,indent=2)+'\n')

@@ -32,6 +32,7 @@ for kind in sorted(required):
     dirty=report.get('source_dirty',report.get('working_tree_dirty',True))
     passed=report.get('status')=='passed'or report.get('success')is True
     if actual!=sha or dirty is not False or not passed:raise SystemExit('Local evidence does not prove exact clean source: '+kind)
+    if kind=='docker'and (set(report.get('containers',{}))!={'chat','analytics'}or any(c.get('revision')!=sha or not re.fullmatch('sha256:[0-9a-f]{64}',c.get('image_id',''))for c in report['containers'].values())):raise SystemExit('Actual Docker image revisions do not match approved source')
     if kind=='live'and(report.get('live_openai')is not True or report.get('openai_model')!='gpt-5.6-luna'):raise SystemExit('Real configured-model validation missing')
     if kind in ('packaged_gui','appimage_update')and report.get('release')is not True:raise SystemExit('Packaged release validation missing')
     if kind=='appimage_update'and not report.get('update_install'):raise SystemExit('Actual signed update installation missing')

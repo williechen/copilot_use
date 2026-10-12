@@ -14,11 +14,11 @@ class ReleaseGate(unittest.TestCase):
             evidence={k:'docs/release-evidence/'+k+'.json'for k in ('live','docker','packaged_gui','appimage_update')}
             approval={'approved_sha':sha,'tag':'v0.1.0-p9','evidence':evidence,'notes':'Disposable gate regression'}
             (root/'.github/release-approved.json').write_text(json.dumps(approval))
-            cases=[('live',{'source_sha':'0'*40},'exact clean source'),('live',{'source_dirty':True},'exact clean source'),('live',{'live_openai':False},'Real configured-model'),('packaged_gui',{'release':False},'Packaged release'),('appimage_update',{'update_install':False},'Actual signed update')]
+            cases=[('docker',{'containers':{'chat':{'revision':'0'*40,'image_id':'sha256:'+'1'*64},'analytics':{'revision':sha,'image_id':'sha256:'+'1'*64}}},'Actual Docker image revisions'),('live',{'source_sha':'0'*40},'exact clean source'),('live',{'source_dirty':True},'exact clean source'),('live',{'live_openai':False},'Real configured-model'),('packaged_gui',{'release':False},'Packaged release'),('appimage_update',{'update_install':False},'Actual signed update')]
             for kind,changes,expected in cases:
                 with self.subTest(kind=kind,changes=changes):
                     for name,path in evidence.items():
-                        report={'source_sha':sha,'source_dirty':False,'status':'passed','success':True,'live_openai':True,'openai_model':'gpt-5.6-luna','release':True,'update_install':{'fixture':True}}
+                        report={'source_sha':sha,'source_dirty':False,'status':'passed','success':True,'live_openai':True,'openai_model':'gpt-5.6-luna','release':True,'update_install':{'fixture':True},'containers':{name:{'revision':sha,'image_id':'sha256:'+'1'*64}for name in ('chat','analytics')}}
                         if name==kind:report.update(changes)
                         (root/path).write_text(json.dumps(report))
                     result=subprocess.run(['python3',root/'scripts/release-approved.py'],cwd=root,env=os.environ|{'GH_REPOSITORY':'williechen/copilot_use','GH_TOKEN':'synthetic-unused','PYTHONPATH':str(root)},text=True,capture_output=True)
