@@ -22,7 +22,9 @@ if not options.executable:
     subprocess.run(["cargo", "build", "--manifest-path", str(ROOT / "apps/pet_desktop/Cargo.toml"), "--locked"], check=True, cwd=ROOT)
 executable=options.executable.resolve() if options.executable else ROOT / ("apps/pet_desktop/target/debug/copilot-desktop-pet.exe" if sys.platform=="win32" else "apps/pet_desktop/target/debug/copilot-desktop-pet")
 with tempfile.TemporaryDirectory(prefix="copilot-pet-gui-") as scratch:
-    directory = pathlib.Path(scratch)
+    # macOS /var is a symlink; run disposable bundles through the canonical
+    # /private path so Tauri keeps its executable-path protection enabled.
+    directory = pathlib.Path(scratch).resolve()
     if sys.platform=='win32':
         # Private disposable fixture only; chmod on Windows does not establish a DACL.
         permissions=r"""
