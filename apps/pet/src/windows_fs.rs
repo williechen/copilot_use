@@ -144,7 +144,12 @@ fn secure(file: &File, private: bool) -> Result<(), CleanupError> {
                     | 0x10
                     | 0x40
                     | 0x100;
+                // OW applies only to the already-validated object owner. Python
+                // 3.13+ uses it for mkdir(mode=0700); it never grants another user.
+                // Keep ownership validation above strict; only this ACE is recognized.
+                let owner_rights = unsafe { IsWellKnownSid(sid, WinCreatorOwnerRightsSid) } != 0;
                 if !trusted(sid, current)
+                    && !owner_rights
                     && ((private && allowed.Mask != 0) || allowed.Mask & writes != 0)
                 {
                     eprintln!(
@@ -759,6 +764,42 @@ impl PinnedRoot {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn windows_owner_rights_private_acl_is_allowed_but_world_write_is_rejected() {
+        use std::os::windows::fs::OpenOptionsExt;
+        let path = std::env::temp_dir().join(format!("pet-owner-rights-{}", Uuid::new_v4()));
+        let file = std::fs::OpenOptions::new()
+            .read(true)
+            .write(true)
+            .create_new(true)
+            .access_mode(FILE_READ_DATA | FILE_WRITE_DATA | 0x00020000 | 0x00040000)
+            .open(&path)
+            .unwrap();
+        for (sddl, allowed) in [
+            ("D:P(A;;FA;;;OW)(A;;FA;;;SY)(A;;FA;;;BA)", true),
+            ("D:P(A;;FA;;;OW)(A;;FA;;;SY)(A;;FA;;;BA)(A;;FA;;;WD)", false),
+        ] {
+            let text = sddl.encode_utf16().chain(Some(0)).collect::<Vec<_>>();
+            let mut raw = std::ptr::null_mut();
+            assert_ne!(
+                unsafe {
+                    ConvertStringSecurityDescriptorToSecurityDescriptorW(
+                        text.as_ptr(),
+                        1,
+                        &mut raw,
+                        std::ptr::null_mut(),
+                    )
+                },
+                0
+            );
+            let descriptor = Local(raw);
+            set_descriptor(&file, &descriptor).unwrap();
+            assert_eq!(secure(&file, false).is_ok(), allowed);
+            assert_eq!(secure(&file, true).is_ok(), allowed);
+        }
+        drop(file);
+        std::fs::remove_file(path).unwrap();
+    }
     #[test]
     fn windows_handle_capture_restore_and_conflict_are_idempotent() {
         let path = std::env::temp_dir().join(format!("pet-windows-{}", Uuid::new_v4()));
