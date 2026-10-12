@@ -224,7 +224,7 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw 'Windows update fixture build failed' }
           $update = Get-ChildItem apps/pet_desktop/target/release/bundle/nsis -Filter '*_0.1.1_*.exe' | Select-Object -First 1
           if (-not $update) { throw 'Windows update package missing' }
-          python3 scripts/pet-gui-verify.py --executable $executable.FullName --updater --update-package $update.FullName --expected-executable apps/pet_desktop/target/release/copilot-desktop-pet.exe
+          python3 scripts/pet-gui-verify.py --executable $executable.FullName --updater --update-package $update.FullName --expected-executable apps/pet_desktop/target/test-update/copilot-desktop-pet.exe
           if ($LASTEXITCODE -ne 0) { throw 'Actual signed Windows update failed' }
           Copy-Item (Join-Path $env:RUNNER_TEMP 'base-installer.exe') (Join-Path 'apps/pet_desktop/target/release/bundle/nsis' $baseName) -Force
       - uses: actions/upload-artifact@v4
