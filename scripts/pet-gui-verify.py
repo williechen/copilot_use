@@ -2,6 +2,7 @@
 """Exercise this application's own WebKit/WASM/IPC in an isolated disposable state."""
 import json, os, pathlib, subprocess, tempfile, sys, threading, argparse, hashlib, shutil, sqlite3, tomllib
 from http.server import ThreadingHTTPServer,BaseHTTPRequestHandler
+from contextlib import closing
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 REPORT = ROOT / "target/pet-gui-validation.json"
 if sys.platform.startswith("linux") and not os.environ.get("DISPLAY"):
@@ -65,7 +66,7 @@ Set-Acl -LiteralPath $env:COPILOT_GUI_FIXTURE_DIRECTORY -AclObject $acl
         subprocess.run(['cargo','tauri','signer','generate','--ci','--password','','--write-keys',str(key)],check=True,cwd=ROOT,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
         key.chmod(0o600)
         subprocess.run(['cargo','tauri','signer','sign','--private-key-path',str(key),'--password','','--app-version','0.1.1',str(payload)],check=True,cwd=ROOT,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
-        signature=payload.with_suffix('.bin.sig').read_text().strip();public=key.with_suffix('.key.pub').read_text().strip();requests=[]
+        signature=payload.with_suffix('.bin.sig').read_text(encoding="utf-8").strip();public=key.with_suffix('.key.pub').read_text(encoding="utf-8").strip();requests=[]
         class UpdateServer(BaseHTTPRequestHandler):
             def log_message(self,*_):pass
             def do_GET(self):
@@ -83,15 +84,15 @@ Set-Acl -LiteralPath $env:COPILOT_GUI_FIXTURE_DIRECTORY -AclObject $acl
     command=[executable]+(["--appimage-extract-and-run"] if executable.suffix==".AppImage" else [])+["--acceptance-gui"]
     completed = subprocess.run(command, env=env, cwd=ROOT, check=False, timeout=420 if live or options.update_package else 120)
     if server:server.shutdown();server.server_close()
-    result = json.loads((directory / "report.json").read_text())
+    result = json.loads((directory / "report.json").read_text(encoding="utf-8"))
     if result.get('success'):
-        with sqlite3.connect(directory/'state/pet.sqlite') as database:rows=database.execute('SELECT id,profile FROM pets').fetchall()
+        with closing(sqlite3.connect(directory/'state/pet.sqlite')) as database:rows=database.execute('SELECT id,profile FROM pets').fetchall()
         for identity,profile in rows:
             pet_directory=directory/'state/pets'/identity
-            actual=tomllib.loads((pet_directory/'pet.toml').read_text());expected=json.loads(profile)
+            actual=tomllib.loads((pet_directory/'pet.toml').read_text(encoding="utf-8"));expected=json.loads(profile)
             for field in ['名字','種類','喜好','個性','興趣']:
                 if actual[field]!=expected[field]:raise SystemExit('Per-pet configuration differs from canonical state')
-            if json.loads((pet_directory/'profile.manifest.json').read_text())['pet_id']!=identity:raise SystemExit('Per-pet identity manifest mismatch')
+            if json.loads((pet_directory/'profile.manifest.json').read_text(encoding="utf-8"))['pet_id']!=identity:raise SystemExit('Per-pet identity manifest mismatch')
         result['per_pet_files']={'profiles':len(rows),'canonical_fields_match':True,'identity_manifests':True}
         if options.live_image:
             png_files=list((directory/'state/pets/8df47580-64e1-4335-8e50-6b593051a398/assets/generated').glob('*/sheet.png'))
@@ -103,14 +104,14 @@ Set-Acl -LiteralPath $env:COPILOT_GUI_FIXTURE_DIRECTORY -AclObject $acl
         if actual!=expected:raise SystemExit('Installed AppImage checksum differs from verified update package')
         version=subprocess.check_output([executable,'--appimage-extract-and-run','--version'],env=env,cwd=ROOT,timeout=60,text=True).strip()
         if version!='0.1.1':raise SystemExit('Cold updated executable did not report version 0.1.1')
-        with sqlite3.connect(directory/'state/pet.sqlite') as database:
+        with closing(sqlite3.connect(directory/'state/pet.sqlite')) as database:
             if database.execute('PRAGMA integrity_check').fetchone()[0]!='ok':raise SystemExit('SQLite integrity after update failed')
             if database.execute('SELECT count(*) FROM pets').fetchone()[0]<2:raise SystemExit('Existing pets lost after update')
         manifests=list((directory/'state/backups').glob('*/manifest.json'))
         if not manifests:raise SystemExit('Pre-update snapshot missing')
         result['update_install']={'sha256':actual,'cold_version':version,'sqlite_integrity':'ok','pets_preserved':True,'pre_update_snapshot':True}
     REPORT.parent.mkdir(parents=True, exist_ok=True)
-    REPORT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
+    REPORT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     if completed.returncode != 0 or result.get("success") is not True:
         raise SystemExit(result)
     print(result["message"])
