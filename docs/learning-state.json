@@ -41,14 +41,16 @@
     "day_status": "daily teaching and weekly formal acceptance tracked separately on same page"
   },
   "curriculum": {
-    "stage_count": 12,
-    "months_per_stage": 2,
+    "stage_count": 13,
+    "months_per_stage": null,
     "total_months": 24,
     "daily_total_minutes": 60,
     "scope": "Chat, Pet and Analytics combined",
     "start_date": null,
     "current_stage": null,
-    "stage_topics": "assigned from confirmed weekly gaps; not yet verified"
+    "stage_topics": "assigned from confirmed weekly gaps; not yet verified",
+    "stage_labels": "P0–P12（含 P0）",
+    "month_allocation_status": "待確認：既有總計24個月與原每階段2個月無法同時涵蓋13階段"
   },
   "daily_reference_sha": null,
   "daily_product_sha": null,
