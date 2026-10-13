@@ -38,17 +38,127 @@
     "daily_gate": "latest applicable rust_ai_chat CI success; no weekly implementation gate for daily teaching",
     "weekly_review": "Saturday full comparison, implementation, required tests and commit before formal Day publication; failed gates fixed in weekly work",
     "dry_run": "only document corrections addressing user-reported issues; code tests migrations read-only",
-    "day_status": "daily teaching and weekly formal acceptance tracked separately on same page"
+    "day_status": "daily teaching and weekly formal acceptance recorded separately; no preplanned Day topics",
+    "daily_time": "06:00 Asia/Taipei",
+    "teaching_sections": [
+      "學習大綱",
+      "實作內容",
+      "套件版本",
+      "驗證項目"
+    ],
+    "content_preservation": "retain original lessons; append necessary implementation at end of section 2",
+    "weekly_engineering": "separate engineering evidence; never add weekly operations to teaching",
+    "weekly_ai_validation": "excluded; functional gates only",
+    "phase_transition": "entering next phase does not imply learning or functional completion"
   },
   "curriculum": {
-    "stage_count": 12,
+    "stage_count": 13,
+    "stage_labels": [
+      "P0",
+      "P1",
+      "P2",
+      "P3",
+      "P4",
+      "P5",
+      "P6",
+      "P7",
+      "P8",
+      "P9",
+      "P10",
+      "P11",
+      "P12"
+    ],
     "months_per_stage": 2,
-    "total_months": 24,
+    "total_months": 26,
     "daily_total_minutes": 60,
     "scope": "Chat, Pet and Analytics combined",
-    "start_date": null,
-    "current_stage": null,
-    "stage_topics": "assigned from confirmed weekly gaps; not yet verified"
+    "start_date": "2026-10-12",
+    "current_stage_by_calendar": "P0",
+    "learning_completed": null,
+    "function_acceptance": null,
+    "stage_topics": "selected from confirmed gaps and daily differences; no preplanned Days",
+    "phase_notifications_sent": [],
+    "stage_calendar": [
+      {
+        "stage": "P0",
+        "start": "2026-10-12",
+        "end": "2026-12-12"
+      },
+      {
+        "stage": "P1",
+        "start": "2026-12-12",
+        "end": "2027-02-12"
+      },
+      {
+        "stage": "P2",
+        "start": "2027-02-12",
+        "end": "2027-04-12"
+      },
+      {
+        "stage": "P3",
+        "start": "2027-04-12",
+        "end": "2027-06-12"
+      },
+      {
+        "stage": "P4",
+        "start": "2027-06-12",
+        "end": "2027-08-12"
+      },
+      {
+        "stage": "P5",
+        "start": "2027-08-12",
+        "end": "2027-10-12"
+      },
+      {
+        "stage": "P6",
+        "start": "2027-10-12",
+        "end": "2027-12-12"
+      },
+      {
+        "stage": "P7",
+        "start": "2027-12-12",
+        "end": "2028-02-12"
+      },
+      {
+        "stage": "P8",
+        "start": "2028-02-12",
+        "end": "2028-04-12"
+      },
+      {
+        "stage": "P9",
+        "start": "2028-04-12",
+        "end": "2028-06-12"
+      },
+      {
+        "stage": "P10",
+        "start": "2028-06-12",
+        "end": "2028-08-12"
+      },
+      {
+        "stage": "P11",
+        "start": "2028-08-12",
+        "end": "2028-10-12"
+      },
+      {
+        "stage": "P12",
+        "start": "2028-10-12",
+        "end": "2028-12-12"
+      }
+    ],
+    "current_stage": "P0",
+    "stage_boundary_notifications": {
+      "enabled": true,
+      "trigger": "Notify once when entering a new phase by documented progress or calendar boundary; never mark actual learning or functional completion from date alone",
+      "requires_start_date": false,
+      "last_notified_boundary": null,
+      "distinguish_schedule_from_acceptance": true,
+      "early_completion_allowed": true,
+      "delay_allowed": false,
+      "early_completion_requires_evidence": true
+    },
+    "next_stage_boundary": "2026-12-12",
+    "planned_completion_date": "2028-12-12",
+    "stage_completion_policy": "階段切換、學習實際完成與功能驗收分別記錄；到期只進入下一階段，不自動標記學習或功能完成。未完成項目在原項目下保留後續工作和驗證，不另建重複項目。"
   },
   "daily_reference_sha": null,
   "daily_product_sha": null,

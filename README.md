@@ -29,7 +29,7 @@ python3 scripts/local-verify.py --live-openai
 
 ## 現行文件
 
-[目前系統架構與 DB 表格](docs/SYSTEM_ARCHITECTURE.md) · [下一次 Day9 範圍](docs/DAY9_PLAN.md)
+[目前系統架構與 DB 表格](docs/SYSTEM_ARCHITECTURE.md) · [教學格式與執行方式](docs/TEACHING_FORMAT.md)
 
 - [共同學習規則](docs/COMMON_LEARNING_RULES.md)：目錄／內容以 rust_ai_chat 為主；目標／前進項目以 copilot_use 為主，其他遵循共同規則。
 - [未來前進項目](docs/FUTURE_WORK.md)：未完成的學習銜接、三產品切片及週六完整比對。
