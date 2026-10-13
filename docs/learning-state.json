@@ -42,15 +42,21 @@
   },
   "curriculum": {
     "stage_count": 13,
-    "months_per_stage": null,
-    "total_months": 24,
+    "months_per_stage": 2,
+    "total_months": 26,
     "daily_total_minutes": 60,
     "scope": "Chat, Pet and Analytics combined",
     "start_date": null,
     "current_stage": null,
     "stage_topics": "assigned from confirmed weekly gaps; not yet verified",
     "stage_labels": "P0–P12（含 P0）",
-    "month_allocation_status": "待確認：既有總計24個月與原每階段2個月無法同時涵蓋13階段"
+    "stage_boundary_notifications": {
+      "enabled": true,
+      "trigger": "Each P0→P1 through P11→P12 transition, once per boundary, checked by daily task",
+      "requires_start_date": true,
+      "last_notified_boundary": null,
+      "distinguish_schedule_from_acceptance": true
+    }
   },
   "daily_reference_sha": null,
   "daily_product_sha": null,
