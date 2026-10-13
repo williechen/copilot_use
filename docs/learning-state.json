@@ -5,9 +5,9 @@
   "fixed_tag": "v0.1.0",
   "fixed_tag_sha": "22b44f33b9e2c9edb0fb398fb9bff3efd57b00ee",
   "next_day": {
-    "chat": 9,
-    "pet": 9,
-    "analytics": 9
+    "chat": 10,
+    "pet": 10,
+    "analytics": 10
   },
   "last_full_comparison": null,
   "next_full_comparison": "2026-10-17T08:00:00+08:00",
@@ -160,7 +160,7 @@
     "planned_completion_date": "2028-12-12",
     "stage_completion_policy": "到期階段結束且下一階段正常開始；功能未完成不得標記學習完成。原開發項目及原 Day 實作內容後補加跨階段工作，功能完成後回填原階段日期／證據；正式驗收獨立。"
   },
-  "daily_reference_sha": null,
+  "daily_reference_sha": "16261e0ebeef1a888997cc0ebc42b08ceaf8db24",
   "daily_product_sha": null,
   "next_formal_day": {
     "chat": 9,
