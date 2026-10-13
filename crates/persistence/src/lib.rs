@@ -1,4 +1,5 @@
-//! Day 9: 訊息與 Outbox 同交易、租約 claim、CAS ACK、可重試投遞。
+//! 訊息 Repository 的 SQLite Adapter：訊息與 Outbox 同交易，租約 claim／CAS ACK／重試。
+//! 對應參考持久化 Adapter 的職責，保留成品 durable realtime 與安全備份。
 pub use chat_application as application;
 pub mod database;
 pub mod topics;
@@ -54,8 +55,8 @@ impl ChatWriter {
             .map(|(id, _)| id)
     }
 
-    /// A retry may reuse an ID only for the identical room, author and content.
-    /// INSERT conflict serialization guarantees concurrent requests create one outbox.
+    /// 重送 ID 僅能對應相同房間、作者與本文；
+    /// INSERT 衝突序列化保證並發寫入只建立一筆 Outbox。
     pub async fn persist_with_id(
         &self,
         id: Uuid,

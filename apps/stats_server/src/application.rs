@@ -1,8 +1,16 @@
-//! Database-independent ingestion/query use cases and their actually wired Repository Port.
+//! Analytics 接收與查詢用例；事件驗證後才進入已接線的 Repository。
+//! 參考 valid_event／ingest 的驗證邊界在此收斂，認證、PostgreSQL 與 gRPC 留在 Adapter。
 use event_contract::ProductEvent;
 use serde::Serialize;
 use std::{future::Future, pin::Pin};
 use uuid::Uuid;
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum RepositoryError {
+    InvalidEvent,
+    IdentityConflict,
+    Unavailable,
+}
+
 #[derive(Debug, Clone, Serialize, PartialEq, Eq)]
 pub struct EventSummary {
     pub source_app: String,
@@ -16,14 +24,10 @@ pub struct EventRecord {
     pub event_type: String,
     pub received_unix_ms: i64,
 }
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum RepositoryError {
-    InvalidEvent,
-    IdentityConflict,
-    Unavailable,
-}
 pub type RepositoryFuture<'a, T> =
     Pin<Box<dyn Future<Output = Result<T, RepositoryError>> + Send + 'a>>;
+
+/// 交易成功才回傳結果；持久冪等不由記憶體去重器取代。
 pub trait EventRepository: Send + Sync {
     fn insert_once<'a>(&'a self, event: &'a ProductEvent) -> RepositoryFuture<'a, bool>;
     fn recent<'a>(
@@ -35,6 +39,8 @@ pub trait EventRepository: Send + Sync {
     fn summary(&self) -> RepositoryFuture<'_, Vec<EventSummary>>;
     fn lookup<'a>(&'a self, source: &'a str, id: Uuid) -> RepositoryFuture<'a, Option<String>>;
 }
+
+/// 純用例協調者，不持有 PgPool、HTTP 或 gRPC Driver。
 pub struct Analytics<R: EventRepository> {
     repository: R,
 }

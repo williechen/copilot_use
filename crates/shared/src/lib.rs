@@ -1,4 +1,6 @@
-//! P9 跨系統明確事件契約；不包含訊息本文、路徑或識別個資。
+//! 跨產品最小事件契約；不包含訊息本文、路徑或識別個資。
+//! 對應參考 persisted_message_event／succeeded_event 的四欄角色，
+//! 保留已驗證的來源／事件名稱白名單，不因參考命名不同改寫既有資料。
 pub mod topics;
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;

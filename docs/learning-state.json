@@ -21,9 +21,9 @@
     "analytics": "PostgreSQL"
   },
   "reference_source_db_observation": {
-    "sha": "fdc74c1ee244cf86df3fd1c427d893d2956f6211",
-    "chat": "GitHub main persistence still PgPool; target migration is pending learning adoption",
-    "pet": "SQLite implementation not established by current reference inspection",
+    "sha": "16261e0ebeef1a888997cc0ebc42b08ceaf8db24",
+    "chat": "latest main uses SqlitePool and SqliteRoomRepository/SqliteMessageRepository; product retains durable Outbox/realtime and its own migrations",
+    "pet": "SQLite product target; current reference Profile/FSM does not establish product persistence equivalence",
     "writable": false
   },
   "analytics_transport": {
@@ -166,5 +166,13 @@
     "chat": 9,
     "pet": 9,
     "analytics": 9
+  },
+  "content_alignment": {
+    "reference_sha": "16261e0ebeef1a888997cc0ebc42b08ceaf8db24",
+    "base_product_sha": "49e1d946dd3c22ffcc4b1aa0e7715cb5b1686724",
+    "source_paths_changed": 7,
+    "source_paths_added_or_removed": 0,
+    "scope": "declaration ordering, existing roles and Traditional Chinese documentation; no public interface or behavior changes",
+    "full_semantic_equivalence_claimed": false
   }
 }

@@ -8,23 +8,14 @@ use uuid::Uuid;
 pub const PET_WIDTH: u32 = 200;
 pub const PET_HEIGHT: u32 = 200;
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
-#[serde(deny_unknown_fields)]
-pub struct PetProfile {
-    #[serde(rename = "名字", alias = "name")]
-    pub name: String,
-    #[serde(rename = "種類", alias = "species")]
-    pub species: String,
-    #[serde(rename = "喜好", alias = "likes")]
-    pub likes: Vec<String>,
-    #[serde(rename = "個性", alias = "personality")]
-    pub personality: Vec<String>,
-    #[serde(rename = "興趣", alias = "interests")]
-    pub interests: Vec<String>,
-    #[serde(default, rename = "外觀", alias = "appearance")]
-    pub appearance: Option<AppearanceOverride>,
-    #[serde(default, rename = "動畫", alias = "animation")]
-    pub animation: Option<AnimationOverride>,
+#[derive(Debug, Error)]
+pub enum ProfileError {
+    #[error("invalid profile field: {0}")]
+    Invalid(&'static str),
+    #[error("invalid pet id")]
+    InvalidId,
+    #[error("failed to parse profile: {0}")]
+    Parse(#[from] toml::de::Error),
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq, Eq)]
@@ -47,14 +38,23 @@ pub struct AnimationOverride {
     pub speed: Option<String>,
 }
 
-#[derive(Debug, Error)]
-pub enum ProfileError {
-    #[error("invalid profile field: {0}")]
-    Invalid(&'static str),
-    #[error("invalid pet id")]
-    InvalidId,
-    #[error("failed to parse profile: {0}")]
-    Parse(#[from] toml::de::Error),
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(deny_unknown_fields)]
+pub struct PetProfile {
+    #[serde(rename = "名字", alias = "name")]
+    pub name: String,
+    #[serde(rename = "種類", alias = "species")]
+    pub species: String,
+    #[serde(rename = "喜好", alias = "likes")]
+    pub likes: Vec<String>,
+    #[serde(rename = "個性", alias = "personality")]
+    pub personality: Vec<String>,
+    #[serde(rename = "興趣", alias = "interests")]
+    pub interests: Vec<String>,
+    #[serde(default, rename = "外觀", alias = "appearance")]
+    pub appearance: Option<AppearanceOverride>,
+    #[serde(default, rename = "動畫", alias = "animation")]
+    pub animation: Option<AnimationOverride>,
 }
 
 fn valid_item(text: &str) -> bool {

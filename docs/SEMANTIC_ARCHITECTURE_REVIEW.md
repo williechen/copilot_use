@@ -1,6 +1,6 @@
 # 模組職責與介面對照
 
-目錄與程式銜接以 rust_ai_chat 最新 main 為主，產品前進目標以 copilot_use 為主，其餘按 [共同學習規則](COMMON_LEARNING_RULES.md)。此文件保存目前角色、介面映射及資料流程；每次微調與每週六完整比對後更新。它不是逐行安全認證或兩邊 wire contract 完全一致的宣告。
+目錄與程式銜接以 rust_ai_chat 最新 main 為主，產品前進目標以 copilot_use 為主，其餘按 [共同學習規則](COMMON_LEARNING_RULES.md)。此文件保存目前角色、介面映射及資料流程；每次微調與每週六完整比對後更新。內容整理參考 rust_ai_chat SHA `16261e0ebeef1a888997cc0ebc42b08ceaf8db24`。它不是逐行安全認證或兩邊 wire contract 完全一致的宣告。
 
 ## 當前模組邊界
 
@@ -8,7 +8,7 @@
 |---|---|---|
 | chat_domain | MessageInput、Committed、MessageError、validate；作者、ID、房間、本文輸入不變量 | 保留純 Domain；參考 ChatMessage/MessageAuthor 的 ID 字串在成品使用 UUID，作者 kind/author_id 對照表見下節 |
 | chat_application | MessageRepository::commit、persist：先驗證，再取得 durable commit | 保留已接線 Port；參考 persist_then_publish 的「儲存失敗不得通知」以交易 realtime/Outbox 實現 |
-| persistence::ChatWriter | MessageRepository 實作、persist_with_id、stage、persist_persona_turn；SQLite 單一交易訊息／Outbox／realtime／topic | 保留 Adapter；參考 PostgresMessageRepository 是歷史學習實作，成品依使用者指定 SQLite |
+| persistence::ChatWriter | MessageRepository 實作、persist_with_id、stage、persist_persona_turn；SQLite 單一交易訊息／Outbox／realtime／topic | 保留 Adapter；參考最新 SqliteRoomRepository／SqliteMessageRepository 已採 SQLite；成品保留同交易 Outbox／realtime、既有 migration 與安全備份 |
 | persistence::database/topics | 私有 SQLite 開啟、VACUUM INTO 備份、同意撤回與可靠投遞 | 保留 Adapter；migration 與 DB Driver 不進 Domain/Application |
 | server::main/auth | HTTP 入口、Session／房間 ACL、輸入映射、備份與舊 PG 匯入；呼叫 application::persist | 保留產品入口；SQL/crypto 在 app 的 Adapter 模組，沒有反向匯入 chat_domain |
 | server::realtime/fanout | 第一 frame 驗證、同 origin、房間隔離、DB durable 通知與 canonical 訊息讀取、配額／resync | 保留已驗證通知；與參考 ClientEvent/ServerEvent 格式不相同，教學需明示 protocol 變更 |
@@ -19,10 +19,10 @@
 | pet_domain::profile | 五欄 Profile、可選外觀／動畫、TOML codec、AssetManifest 素材／顯示尺寸不變量 | 保留原有程式與測試；參考 JSON codec 與成品 TOML 需分開教學 |
 | pet_domain::application | ProfileRepository、save_profile：不合法 ID/Profile 不到達 Adapter，投影未完成不回成功 | 保留已接線純 Port，Tauri save_profile 實際使用，不是空 trait |
 | pet_domain::learning | Schedule::review：評分、間隔、ease 與 due_at，時間由呼叫端提供 | 從帶 FromRow 的 Card 提取原演算法；不改公式。runtime Card::review 映射並委派，公開 Card 格式保留 |
-| pet_runtime::state | PetStore、PetItem/Memory/Card SQL rows、SQLite transaction、ProfileRepository 實作 | 從 pet_domain 移出 Driver。DB／migration／CLI 與 day9-pet package 名稱保留 |
-| pet_runtime::files/registry/backup | 每寵物 TOML／資產、私有目錄、投影序列化、可逆封存、checksum／SQLite snapshot 還原 | 只搬移已驗證 Adapter，程式與 migration 內容不改寫 |
-| pet_runtime::AuthorizedRoot/unix_fs/windows_fs | 安全 preview／confirmed quarantine／restore、固定 root、opaque ID、journal／recovery、OS ACL／TOCTOU | 搬到平台 Adapter，完整原文與回歸保留；參考 CleanupOperation 是純狀態示例，不取代真實 OS 操作結果 |
-| pet_runtime::ai/agent/interaction/suggestions/outbox | 真實 AI／素材、scope-bounded MCP stdio、互動與提醒、政策採用／回退、租約 ACK／重送 | 搬移；HTTP／SQLite 仍在 runtime，不進純 Domain。AI 呼叫與資料格式保持原文 |
+| pet_runtime::state | PetStore、PetItem/Memory/Card SQL rows、SQLite transaction、ProfileRepository 實作 | Driver 位於 pet_runtime；DB／migration／CLI 與 day9-pet package 名稱保留 |
+| pet_runtime::files/registry/backup | 每寵物 TOML／資產、私有目錄、投影序列化、可逆封存、checksum／SQLite snapshot 還原 | 保留已驗證 Adapter、原有資料格式與 migration |
+| pet_runtime::AuthorizedRoot/unix_fs/windows_fs | 安全 preview／confirmed quarantine／restore、固定 root、opaque ID、journal／recovery、OS ACL／TOCTOU | 平台 Adapter 保留完整安全流程與回歸；參考 CleanupOperation 是純狀態示例，不取代真實 OS 操作結果 |
+| pet_runtime::ai/agent/interaction/suggestions/outbox | 真實 AI／素材、scope-bounded MCP stdio、互動與提醒、政策採用／回退、租約 ACK／重送 | HTTP／SQLite 位於 runtime，不進純 Domain。AI 呼叫與資料格式保持原文 |
 | desktop_pet::main/updater、frontend | Tauri IPC／confirmation／rendering、Profile Port、runtime Store、簽章／實際更新冷啟動；前端只 invoke IPC | 只更新 runtime dependency 與 build watch，IPC 命令／回傳格式／更新程式保留 |
 | stats_server::application | EventRepository、Analytics::receive/recent/summary/lookup；輸入不合法不進 repository | 保留無 DB Driver 的 Application 模組 |
 | stats_server::persistence | PostgreSQL atomic insert/dedup、identity conflict、typed query rows | 保留 DB Adapter；參考 InMemoryDeduplicator/501 是學習基線，不覆蓋真正持久化 |
@@ -46,3 +46,9 @@
 MessageAuthor::AnonymousUser → anonymous_user/None；User{user_id} → user/Some(id)；Ai{persona_id} → ai/Some(id)；System → system/None。這是概念映射，型別與序列化格式並不相同。
 
 參考 Room.category_room_id、RoomRepository/create_room 與成品房間 ACL／owner/topic 沒有一對一契約，不能把 topic 字彙當 category_room_id。後續教學需按參考的實際新增／微調銜接，保留成品房間資料與安全邊界。參考 PetMachine(PetState/PetCommand) 與成品 Action/Speed／動畫選擇也不是同一個 FSM；不建立未使用的同名型別來假裝已對應。
+
+## 現有檔案內容整理
+
+不新增、刪除或搬移 source 路徑。Chat 輸入與收據、Pet Profile、Analytics 錯誤／讀取模型／Repository／用例按參考職責安排宣告順序；既有 Port 和持久化 Adapter 保留公開介面、函式實作、欄位及事件白名單。繁體中文說明標示參考概念與產品安全邊界，沒有新增平行架構或未使用型別。
+
+本輪只修改七份既有 source 的宣告順序、註解與空白。已核對全部追蹤路徑差異，但不把路徑清單或內容字元比較稱為所有模組語意已等同；參考仍有 Analytics 未實作入口、事件名稱和 UI 協定等合理差異，後續功能銜接須另按實際需求驗證。
