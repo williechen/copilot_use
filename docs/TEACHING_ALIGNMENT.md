@@ -29,4 +29,4 @@ SQLite Chat migration 在 crates/persistence/migrations；Pet 在 crates/pet_run
 
 每次銜接先核對型別／函式／呼叫端、資料流及斷言。不同 ID 型別、codec、WS／事件協定與 DB Adapter 必須說明映射，不以檔名一致推論相同語意；詳見 [模組與介面對照](SEMANTIC_ARCHITECTURE_REVIEW.md)。python3 scripts/architecture-boundaries.py 驗證實際 Cargo 的純層正常／build 依賴。
 
-教學只在 teaching/rust-ai-chat-alignment 推進；匹配驗收後整合 main。固定正式 tag／附件不覆寫。每日建立完整差異基線並逐項分類，從確認缺失選最小學習切片；教學發布與產品實作驗收分開，未實測標未執行。每週六另做深入架構／行為／跨服務完整比對，日常基線不替代週期驗收。既有 Day9 與計畫僅為候選，查重並重新確認後才前進。
+教學只在 teaching/rust-ai-chat-alignment 推進；匹配驗收後整合 main。固定正式 tag／附件不覆寫。每日以週六確認缺口為基線進行增量差異比對，最新適用 CI 通過即可產生一小時教學。每週六完整比對、必要實作／測試／提交與 Gate 通過後才發布正式 Day；每日不重做全量比對或程式修復。12 階段各兩個月，三專案每天合計一小時。Dry Run 僅修正使用者提出問題涉及的文件。

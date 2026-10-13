@@ -34,9 +34,27 @@
     "validation": "docs/analytics-transport-validation.json"
   },
   "learning_policy": {
-    "daily_selection": "complete tracked source difference baseline and semantic classification before selecting confirmed minimal missing slices",
-    "weekly_review": "Saturday complete architecture, behavior and cross-service review; daily baseline does not advance weekly due date",
-    "publication": "verified teaching independent of product implementation acceptance; label unexecuted tests",
-    "day9_status": "pending reselection and content acceptance; deduplicate existing pages before publication"
+    "daily_selection": "incremental differences against latest weekly confirmed gap baseline; no daily full comparison",
+    "daily_gate": "latest applicable rust_ai_chat CI success; no weekly implementation gate for daily teaching",
+    "weekly_review": "Saturday full comparison, implementation, required tests and commit before formal Day publication; failed gates fixed in weekly work",
+    "dry_run": "only document corrections addressing user-reported issues; code tests migrations read-only",
+    "day_status": "daily teaching and weekly formal acceptance tracked separately on same page"
+  },
+  "curriculum": {
+    "stage_count": 12,
+    "months_per_stage": 2,
+    "total_months": 24,
+    "daily_total_minutes": 60,
+    "scope": "Chat, Pet and Analytics combined",
+    "start_date": null,
+    "current_stage": null,
+    "stage_topics": "assigned from confirmed weekly gaps; not yet verified"
+  },
+  "daily_reference_sha": null,
+  "daily_product_sha": null,
+  "next_formal_day": {
+    "chat": 9,
+    "pet": 9,
+    "analytics": 9
   }
 }
