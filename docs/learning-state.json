@@ -34,11 +34,11 @@
     "validation": "docs/analytics-transport-validation.json"
   },
   "learning_policy": {
-    "daily_selection": "incremental differences against latest weekly confirmed gap baseline; no daily full comparison",
+    "daily_selection": "差異驅動＋最小功能切片；每日 TDD Red→最小 Green→Refactor→驗證，重大缺陷／阻塞／必要安全驗證在原 Day 第2節補加；不每日全量比對",
     "daily_gate": "latest applicable rust_ai_chat CI success; no weekly implementation gate for daily teaching",
     "weekly_review": "Saturday full comparison, necessary implementation, functional tests and commit; formal functional acceptance recorded separately; daily Day publication requires applicable CI success only",
     "dry_run": "only document corrections addressing user-reported issues; code tests migrations read-only",
-    "day_status": "daily teaching and weekly formal acceptance recorded separately; no preplanned Day topics",
+    "day_status": "教學已發布／程式尚待套用／功能已實作／功能正式驗收通過，依實際證據分別判定",
     "daily_time": "06:00 Asia/Taipei",
     "teaching_sections": [
       "學習大綱",
@@ -49,7 +49,7 @@
     "content_preservation": "retain original lessons; append necessary implementation at end of section 2",
     "weekly_engineering": "separate engineering evidence; never add weekly operations to teaching",
     "weekly_ai_validation": "excluded; functional gates only",
-    "phase_transition": "entering next phase does not imply learning or functional completion"
+    "phase_transition": "到期切換且不延後；功能未完成則原階段學習未完成，原項目跨階段補加，完工後回填原階段證據"
   },
   "curriculum": {
     "stage_count": 13,
@@ -76,7 +76,7 @@
     "current_stage_by_calendar": "P0",
     "learning_completed": null,
     "function_acceptance": null,
-    "stage_topics": "selected from confirmed gaps and daily differences; no preplanned Days",
+    "stage_topics": "FUTURE_WORK.md 既有開發項目對應 P0–P12 的功能完成條件及證據；每日 Day 題目不預排",
     "phase_notifications_sent": [],
     "stage_calendar": [
       {
@@ -148,7 +148,7 @@
     "current_stage": "P0",
     "stage_boundary_notifications": {
       "enabled": true,
-      "trigger": "Notify once when entering a new phase by documented progress or calendar boundary; never mark actual learning or functional completion from date alone",
+      "trigger": "按進度證據提前或日曆到期切換，通知一次；階段結束不等於學習完成，功能完成後回填原階段",
       "requires_start_date": false,
       "last_notified_boundary": null,
       "distinguish_schedule_from_acceptance": true,
@@ -158,7 +158,7 @@
     },
     "next_stage_boundary": "2026-12-12",
     "planned_completion_date": "2028-12-12",
-    "stage_completion_policy": "階段切換、學習實際完成與功能驗收分別記錄；到期只進入下一階段，不自動標記學習或功能完成。未完成項目在原項目下保留後續工作和驗證，不另建重複項目。"
+    "stage_completion_policy": "到期階段結束且下一階段正常開始；功能未完成不得標記學習完成。原開發項目及原 Day 實作內容後補加跨階段工作，功能完成後回填原階段日期／證據；正式驗收獨立。"
   },
   "daily_reference_sha": null,
   "daily_product_sha": null,
