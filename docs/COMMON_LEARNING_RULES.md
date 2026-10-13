@@ -4,8 +4,8 @@
 
 - **教學唯一實作基底為 williechen/rust_ai_chat 最新 main 的實際架構與程式。** 先讀該庫現有 Domain／Application／Repository、Adapter、呼叫端、測試、Cargo 與資料流程；以 copilot_use 已實作功能作為「最終功能行為／完成標準」比對，找出 rust_ai_chat 的確切缺口，教學只在既有程式和介面上作最小擴充與必要重構。**copilot_use 不是另一套必須複製的架構或程式模板**；不得為貼合產品檔名而預先新增重複 Trait／Port、平行服務或示範骨架。保留 rust_ai_chat 合理設計與已驗證行為，除非真實需求及呼叫端證據證明變更必要；記錄兩庫 SHA、差異、必要性與適配理由。
 - 產品目標、能力範圍及未來前進項目以 williechen/copilot_use 的 [P9_TARGET.md](P9_TARGET.md)、實際程式與 [FUTURE_WORK.md](FUTURE_WORK.md) 為主。學習倉庫的套用進度與產品的驗收狀態分開。
-- 其他依本文件的共同學習規則執行。rust_ai_chat 的 source、README、CI、PR、branch、commit、tag 與資料庫嚴格唯讀。copilot_use 的每週實作與每日教學文件在 teaching/rust-ai-chat-alignment；main 整合需匹配驗收，正式 v0.1.0 tag／附件保持固定。
-- 兩個 repository 的統一 DB 目標：Chat／Pet 使用可攜式 SQLite；Analytics 使用獨立 PostgreSQL。範圍為本地／Docker／跨平台測試；公開部署不在目前範圍。
+- 其他依本文件的共同學習規則執行。每日自動教學仍維持兩個 repository 程式碼唯讀；**使用者本次已明確授權正式開始修改 GitHub 原始碼**，因此在獨立正式開發工作中可對 rust_ai_chat 的現有程式進行最小功能擴充、必要重構與驗證，優先建立開發分支／PR，不直接推送 main，保留既有功能與測試。此授權不代表每日 06:00 排程可自動提交程式碼；實際寫入仍受 GitHub App 權限限制。copilot_use 的產品功能仍只作最終行為比對，不照搬架構；正式 v0.1.0 tag／附件保持固定。
+- **已確認且不再重新選型：** Chat／Pet 使用可攜式 SQLite；Analytics 使用獨立 PostgreSQL，並確定以 gRPC／Protobuf 接收來源事件，HTTP JSON／SSE 提供 Dashboard 查詢與更新。每日功能差異只決定切片及 Migration／Adapter 的實作順序，不決定 DB 或 gRPC 是否採用。範圍為本地／Docker／跨平台測試；公開部署不在目前範圍。
 
 ## 共同實作與教學規則
 
