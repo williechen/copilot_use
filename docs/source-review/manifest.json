@@ -1,0 +1,73 @@
+{
+  "reference_sha": "16261e0ebeef1a888997cc0ebc42b08ceaf8db24",
+  "product_source_sha": "cd3df07faef994eb544b0648c2e44f17d1853302",
+  "audit_date": "2026-10-14",
+  "scope": "complete static module/interface/data-flow review; no new runtime, paid AI or weekly acceptance",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "5397b651543ba4f694179d4af68f92f7e2d5fa55c45119d16083d512f2ad6ad9",
+      "bytes": 886
+    },
+    {
+      "path": "configuration-contracts.md",
+      "sha256": "75026011ce5fe3e6dbc42b0604ee5206cad653669056a7212f829fa40e00cbdf",
+      "bytes": 252561
+    },
+    {
+      "path": "content-alignment-validation.json",
+      "sha256": "0792625348f0e6c680e566685a8e69e450182304a109b31c12a6c303e1e220f8",
+      "bytes": 724
+    },
+    {
+      "path": "coverage.json",
+      "sha256": "d7169cee9f78f2b523540e6db98bde13f46721345151c8920f5dd65c65889e8e",
+      "bytes": 949
+    },
+    {
+      "path": "data-flow-review.md",
+      "sha256": "f95abe3eb9a9732b9a5a134ddd753cfbd255aa796d8b230c67c7aa9327b72190",
+      "bytes": 34047
+    },
+    {
+      "path": "documentation-validation.json",
+      "sha256": "4d777290e6ac8215438f99c1eae992544dbc08846f48c35ed3b70ac8842e56de",
+      "bytes": 381
+    },
+    {
+      "path": "evidence.zip",
+      "sha256": "9d4daf9b4823db479d7a879bbddbdf4e7c24e0b9cf8f3a31c0a34b45d7fc31c4",
+      "bytes": 955974
+    },
+    {
+      "path": "interface-catalog.md",
+      "sha256": "efbe302f3f64bcfb719d46b4c918cee56095fe23a54ac5ae56302952f91008fe",
+      "bytes": 407331
+    },
+    {
+      "path": "ipc-payloads.json",
+      "sha256": "5aff86a8f2b251aef2ed064d0cee67134f088d7fc4eda13295b238a14aec51ae",
+      "bytes": 38723
+    },
+    {
+      "path": "module-mapping.json",
+      "sha256": "a084844571a63ee9bc3393d0a24004393340b2110218caabfb31d54c666df13f",
+      "bytes": 20578
+    },
+    {
+      "path": "package-boundaries.json",
+      "sha256": "f6f37aa1c23d0319b251202eccc500ae00cbecfc3d3e275882f81d4c7a585ea8",
+      "bytes": 32664
+    },
+    {
+      "path": "report-validation.json",
+      "sha256": "1a0248efd795846e9a4dcdcb2247caff4a0f600c67725a02ef819c2713863ee4",
+      "bytes": 251
+    },
+    {
+      "path": "tracked-files.json",
+      "sha256": "e6b72f5986de53e1478dbe35b86f598b2834fcb947a8ab9ba802e27d521238c1",
+      "bytes": 96736
+    }
+  ]
+}

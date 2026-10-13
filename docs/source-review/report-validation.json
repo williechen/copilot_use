@@ -1,0 +1,9 @@
+{
+  "coverage": "passed",
+  "all_source_hashes_match": true,
+  "links_verified": 138,
+  "reference_clean": true,
+  "tag_preserved": true,
+  "review_scope": "static source/contract/flow audit",
+  "runtime_or_paid_ai_tests": "not executed this audit"
+}

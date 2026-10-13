@@ -1,5 +1,5 @@
 {
-  "reference_sha": "fdc74c1ee244cf86df3fd1c427d893d2956f6211",
+  "reference_sha": "16261e0ebeef1a888997cc0ebc42b08ceaf8db24",
   "validated_program_sha": "39f34854b102eb96b44980d42d7b3f272307ec20",
   "validated_program_ci_run": 38290016342,
   "fixed_tag": "v0.1.0",
@@ -36,7 +36,7 @@
   "learning_policy": {
     "daily_selection": "incremental differences against latest weekly confirmed gap baseline; no daily full comparison",
     "daily_gate": "latest applicable rust_ai_chat CI success; no weekly implementation gate for daily teaching",
-    "weekly_review": "Saturday full comparison, implementation, required tests and commit before formal Day publication; failed gates fixed in weekly work",
+    "weekly_review": "Saturday full comparison, necessary implementation, functional tests and commit; formal functional acceptance recorded separately; daily Day publication requires applicable CI success only",
     "dry_run": "only document corrections addressing user-reported issues; code tests migrations read-only",
     "day_status": "daily teaching and weekly formal acceptance recorded separately; no preplanned Day topics",
     "daily_time": "06:00 Asia/Taipei",
@@ -174,5 +174,31 @@
     "source_paths_added_or_removed": 0,
     "scope": "declaration ordering, existing roles and Traditional Chinese documentation; no public interface or behavior changes",
     "full_semantic_equivalence_claimed": false
-  }
+  },
+  "previous_adopted_reference_sha": "fdc74c1ee244cf86df3fd1c427d893d2956f6211",
+  "reference_sha_scope": "latest statically reviewed source baseline; not learning application, CI success or weekly acceptance",
+  "static_full_comparison": {
+    "status": "completed",
+    "date": "2026-10-14",
+    "reference_sha": "16261e0ebeef1a888997cc0ebc42b08ceaf8db24",
+    "product_sha": "cd3df07faef994eb544b0648c2e44f17d1853302",
+    "own_rust_files": {
+      "reference": 50,
+      "product": 67
+    },
+    "module_groups": 38,
+    "data_flows": 26,
+    "report": "docs/FULL_SOURCE_REVIEW.md",
+    "evidence": "docs/source-review/manifest.json",
+    "semantic_equivalence": false,
+    "identified_gaps_resolved": false,
+    "weekly_functional_acceptance": "not completed by static review"
+  },
+  "product_pending_requirements": [
+    "native desktop window roaming within monitor work area",
+    "SHA256 duplicate file grouping after safe preview revalidation"
+  ],
+  "product_pending_security_review": [
+    "Chat SSE completion: recheck current session/room authorization before persisting; static finding, regression not executed"
+  ]
 }

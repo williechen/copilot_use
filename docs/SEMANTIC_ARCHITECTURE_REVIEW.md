@@ -2,6 +2,8 @@
 
 目錄與程式銜接以 rust_ai_chat 最新 main 為主，產品前進目標以 copilot_use 為主，其餘按 [共同學習規則](COMMON_LEARNING_RULES.md)。此文件保存目前角色、介面映射及資料流程；每次微調與每週六完整比對後更新。內容整理參考 rust_ai_chat SHA `16261e0ebeef1a888997cc0ebc42b08ceaf8db24`。它不是逐行安全認證或兩邊 wire contract 完全一致的宣告。
 
+**逐模組、介面與資料流程的完整靜態核對已完成**：參考 50／成品 67 份自有 Rust 檔案、38 組模組、26 條流程，詳見 [完整報告](FULL_SOURCE_REVIEW.md)。以下保留簡明職責映射；核對完成不代表缺口已修正或功能驗收通過。
+
 ## 當前模組邊界
 
 | 模組 | 公開介面／實際職責及資料流 | 決策與參考銜接 |
@@ -12,8 +14,8 @@
 | persistence::database/topics | 私有 SQLite 開啟、VACUUM INTO 備份、同意撤回與可靠投遞 | 保留 Adapter；migration 與 DB Driver 不進 Domain/Application |
 | server::main/auth | HTTP 入口、Session／房間 ACL、輸入映射、備份與舊 PG 匯入；呼叫 application::persist | 保留產品入口；SQL/crypto 在 app 的 Adapter 模組，沒有反向匯入 chat_domain |
 | server::realtime/fanout | 第一 frame 驗證、同 origin、房間隔離、DB durable 通知與 canonical 訊息讀取、配額／resync | 保留已驗證通知；與參考 ClientEvent/ServerEvent 格式不相同，教學需明示 protocol 變更 |
-| server::openai | SSE delta 暫存，完整完成後 SQLite persist_as，done 只在持久化後送出 | 保留真實 OpenAI Adapter，部分串流不計為完成訊息 |
-| server::knowledge/mcp/agent/personas | owner-scoped RAG、認證 readonly tools、引用 ID 查證、有限工具迴圈、角色 revision／租約與 durable turn | 保留既有範圍、安全檢查與交易；外部呼叫後授權／版本複核仍在原有流程 |
+| server::openai | SSE delta 暫存，完整完成後 SQLite persist_as，done 只在持久化後送出 | 部分串流不計為完成訊息；完成前未重新複核 session／room ACL 是本輪靜態發現的待修正風險 |
+| server::knowledge/mcp/agent/personas | owner-scoped RAG、認證 readonly tools、引用 ID 查證、有限工具迴圈、角色 revision／租約與 durable turn | Agent 已有外部呼叫後 principal／room ACL 複核，Persona 保留 revision／lease／run 檢查；不得概括為所有 AI 入口皆有相同授權檢查 |
 | server::suggestions/topic_http | 人工確認、限定設定、CAS 回退、撤回同意 | 保留產品工作流；無需為目錄一致改寫已驗證 API |
 | ui/browser、server/frontend | Leptos SSR/hydrate、HTTP／WS／SSE、reconnect／delivery queue；只呼叫服務 API | 保留 UI Adapter，沒有 DB Driver；參考 room_api/chat_socket 課程應對應 API 操作與生命週期 |
 | pet_domain::profile | 五欄 Profile、可選外觀／動畫、TOML codec、AssetManifest 素材／顯示尺寸不變量 | 保留原有程式與測試；參考 JSON codec 與成品 TOML 需分開教學 |
@@ -47,8 +49,8 @@ MessageAuthor::AnonymousUser → anonymous_user/None；User{user_id} → user/So
 
 參考 Room.category_room_id、RoomRepository/create_room 與成品房間 ACL／owner/topic 沒有一對一契約，不能把 topic 字彙當 category_room_id。後續教學需按參考的實際新增／微調銜接，保留成品房間資料與安全邊界。參考 PetMachine(PetState/PetCommand) 與成品 Action/Speed／動畫選擇也不是同一個 FSM；不建立未使用的同名型別來假裝已對應。
 
-## 現有檔案內容整理
+## 核對後的前進項目
 
-不新增、刪除或搬移 source 路徑。Chat 輸入與收據、Pet Profile、Analytics 錯誤／讀取模型／Repository／用例按參考職責安排宣告順序；既有 Port 和持久化 Adapter 保留公開介面、函式實作、欄位及事件白名單。繁體中文說明標示參考概念與產品安全邊界，沒有新增平行架構或未使用型別。
+內容宣告順序整理保留公開介面與功能，不以檔名一致宣稱語意等同。Chat HTTP／WS／DB、Pet FSM／codec／事件名稱的適配與安全風險逐項記於完整報告；視窗漫遊及 SHA256 重複檔案分組已納入產品目標，尚未實作。
 
-本輪只修改七份既有 source 的宣告順序、註解與空白。已核對全部追蹤路徑差異，但不把路徑清單或內容字元比較稱為所有模組語意已等同；參考仍有 Analytics 未實作入口、事件名稱和 UI 協定等合理差異，後續功能銜接須另按實際需求驗證。
+後續只處理已確認缺口、架構邊界及必要教學適配，保留已驗證功能；活動項目以 [FUTURE_WORK.md](FUTURE_WORK.md) 為準。完整靜態核對、週六工程驗收、每日 CI Gate、學習實際套用分開記錄。

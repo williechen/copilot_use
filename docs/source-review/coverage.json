@@ -1,0 +1,39 @@
+{
+  "reference_sha": "16261e0ebeef1a888997cc0ebc42b08ceaf8db24",
+  "product_sha": "cd3df07faef994eb544b0648c2e44f17d1853302",
+  "tracked_counts": {
+    "reference-rust_ai_chat": 141,
+    "copilot_use": 294
+  },
+  "rust_counts": {
+    "reference-rust_ai_chat": 50,
+    "copilot_use": 175
+  },
+  "own_rust_counts": {
+    "reference-rust_ai_chat": 50,
+    "copilot_use": 67
+  },
+  "parse_errors": [],
+  "own_declarations": {
+    "function": 725,
+    "use": 423,
+    "foreign_interface": 2,
+    "enum": 25,
+    "module": 107,
+    "struct": 133,
+    "const": 17,
+    "trait": 7,
+    "type": 7,
+    "static": 2,
+    "associated_type": 1
+  },
+  "module_groups": 38,
+  "all_own_rust_files_assigned_once": true,
+  "backend_ipc_commands": 44,
+  "frontend_ipc_commands": 40,
+  "paid_ai_executed": false,
+  "semantic_equivalence": false,
+  "data_flows_reviewed": 26,
+  "ipc_declared_equals_registered": true,
+  "manual_payload_reviewed_frontend_commands": 40
+}

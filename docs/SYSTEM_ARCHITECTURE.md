@@ -23,9 +23,11 @@
 
 | 產品 | 兩個 repository 的統一目標 | copilot_use 實際 | rust_ai_chat 唯讀核對 |
 |---|---|---|---|
-| Chat | 可攜式 SQLite | SQLite URI／schema／WAL／backup，已驗證 | GitHub main fdc74c1 的 Persistence 仍使用 PgPool；列為 Day9 遷移／學習銜接，不宣稱已套用 |
-| Pet | 可攜式 SQLite | PetStore SQLite／獨立檔案／snapshot，已驗證 | 現有參考檢查尚不能建立 SQLite 已套用證據；教學按統一目標銜接 |
-| Analytics | PostgreSQL | 獨立 PostgreSQL／migration／來源角色，已驗證 | 依最新 source 與實際測試確認持久化，不把設定目標算成 DB 驗收 |
+| Chat | 可攜式 SQLite | SQLite URI／schema／WAL／backup，已驗證 | 本輪唯讀 source SHA `16261e0ebeef1a888997cc0ebc42b08ceaf8db24` 已使用 SqlitePool／SqliteRoomRepository／SqliteMessageRepository；schema／ID／Outbox 仍與成品不同，source 觀察不等於 DB 執行驗收 |
+| Pet | 可攜式 SQLite | PetStore SQLite／獨立檔案／snapshot，已驗證 | 本輪 source 為 Profile／FSM／唯讀檔案預覽，尚無 PetStore SQLite 等同實作；教學依統一目標及當日差異銜接 |
+| Analytics | PostgreSQL | 獨立 PostgreSQL／migration／來源角色，已驗證 | 本輪 source 為記憶體去重與有效請求回 501，尚無 PostgreSQL 持久化接線；不把 FakeStore 測試當 PostgreSQL 驗收 |
+
+本輪逐模組、介面與資料流程靜態核對已完成，範圍、差異與可攜式證據見 [完整核對報告](FULL_SOURCE_REVIEW.md)。產品待補項目與安全修正見 [未來工作](FUTURE_WORK.md)；尚未修正或重新驗收，不宣稱兩庫語意等同。
 
 若使用者本地設定尚未推送，GitHub 唯讀核對不代表該本機狀態。rust_ai_chat 不由助手寫入。
 

@@ -1,0 +1,663 @@
+[
+  {
+    "command": "active_pet",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 652,
+    "signature": "async fn active_pet (state : State < '_ , DesktopState >) -> Result < Option < String > , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 485,
+        "source": "if let Ok(pet) = call(\"active_pet\", json!({})).await"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "add_card",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 354,
+    "signature": "async fn add_card (state : State < '_ , DesktopState > , pet : Uuid , question : String , answer : String ,) -> Result < () , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 345,
+        "source": "<section><h2>\"主動回想與間隔複習\"</h2><input placeholder=\"題目\" on:input=move |e|question.set(event_target_value(&e))/><input placeholder=\"答案\" on:input=move |e|answer.set(event_target_value(&e))/><button on:click=move |_|{let pid=pet.get();let q=question.get();let a=answer.get();leptos::task::spawn_local(async move{match call(\"add_card\",json!({\"pet\":pid,\"question\":q,\"answer\":a})).await{Ok(_)=>{if pet.get_untracked()==pid {load(pid)}},Err(e)=>error.set(e)}});}>\"新增複習\"</button>"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "apply_analytics_suggestion",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 93,
+    "signature": "async fn apply_analytics_suggestion (state : State < '_ , DesktopState > , pet : Uuid , id : Uuid , confirmed : bool ,) -> Result < serde_json :: Value , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 361,
+        "source": "<button disabled=move ||!confirmed.get() on:click=move |_|{let args=json!({\"pet\":pet.get(),\"id\":id.get(),\"confirmed\":true});leptos::task::spawn_local(async move{match call(\"apply_analytics_suggestion\",args).await{Ok(v)=>result.set(v.to_string()),Err(e)=>result.set(e)}});}>\"套用並回報\"</button>"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "archived_pets",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 256,
+    "signature": "async fn archived_pets (state : State < '_ , DesktopState >) -> Result < Vec < PetItem > , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 459,
+        "source": "match call(\"archived_pets\", json!({})).await {"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "authorize_directory",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 54,
+    "signature": "fn authorize_directory (state : State < '_ , DesktopState > , path : String , confirmed : bool ,) -> Result < String , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 394,
+        "source": "match call(\"authorize_directory\",json!({\"path\":path,\"confirmed\":true})).await {Ok(v)=>{root_path.set(v.as_str().unwrap_or(\"\").into());files.set(Vec::new());status.set(\"目錄已授權；請先預覽檔案\".into());},Err(e)=>status.set(e)}"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "authorized_directory",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 45,
+    "signature": "fn authorized_directory (state : State < '_ , DesktopState >) -> Result < Option < String > , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 371,
+        "source": "if let Ok(v) = call(\"authorized_directory\", json!({})).await {"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "check_local_update",
+    "backend_path": "apps/desktop_pet/src/updater.rs",
+    "line": 64,
+    "signature": "async fn check_local_update (app : tauri :: AppHandle , state : State < '_ , Updates > ,) -> Result < Value , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 150,
+        "source": "<button id=\"check-update\" disabled=move ||busy.get() on:click=move |_|{busy.set(true);id.set(String::new());verified.set(false);confirmed.set(false);leptos::task::spawn_local(async move{match call(\"check_local_update\",json!({})).await{Ok(v)=>{id.set(v[\"id\"].as_str().unwrap_or(\"\").into());status.set(v.to_string());},Err(e)=>status.set(e)}busy.set(false);});}>\"檢查本地更新\"</button>"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "confirm_cleanup",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 511,
+    "signature": "async fn confirm_cleanup (state : State < '_ , DesktopState > , id : Uuid , confirmed : bool ,) -> Result < day9_pet :: CleanupReceipt , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 421,
+        "source": "match call(\"confirm_cleanup\",json!({\"id\":id,\"confirmed\":true})).await {"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "create_snapshot",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 149,
+    "signature": "async fn create_snapshot (state : State < '_ , DesktopState > ,) -> Result < day9_pet :: backup :: Snapshot , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 135,
+        "source": "<button id=\"create-snapshot\" disabled=move ||busy.get() on:click=move |_|{busy.set(true);leptos::task::spawn_local(async move {match call(\"create_snapshot\",json!({})).await{Ok(v)=>{status.set(format!(\"備份完成 {}\",v[\"id\"]));refresh();},Err(e)=>status.set(e)}busy.set(false);});}>\"建立快照\"</button>"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "delete_memory",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 338,
+    "signature": "async fn delete_memory (state : State < '_ , DesktopState > , pet : Uuid , id : Uuid) -> Result < () , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 344,
+        "source": "{move ||memories.get().into_iter().map(|m|{let id=m[\"id\"].as_str().unwrap_or(\"\").to_owned();let edit_id=id.clone();let edit_text=m[\"content\"].as_str().unwrap_or(\"\").to_owned();view!{<article>{m[\"content\"].as_str().unwrap_or(\"\").to_owned()}<button on:click=move |_|{memory_edit_id.set(edit_id.clone());memory.set(edit_text.clone());}>\"編輯\"</button><button on:click=move |_|{let mid=id.clone();let pid=pet.get();leptos::task::spawn_local(async move{match call(\"delete_memory\",json!({\"pet\":pid,\"id\":mid})).await{Ok(_)=>{if pet.get_untracked()==pid {load(pid)}},Err(e)=>error.set(e)}});}>\"刪除\"</button></article>}}).collect_view()}</section>"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "generate_asset",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 465,
+    "signature": "async fn generate_asset (app : tauri :: AppHandle , state : State < '_ , DesktopState > , pet : Uuid ,) -> Result < serde_json :: Value , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 319,
+        "source": "<button disabled=move ||busy.get() on:click=move |_|{let pid=pet.get();busy.set(true);leptos::task::spawn_local(async move{match call(\"generate_asset\",json!({\"pet\":pid})).await{Ok(v)=>{if pet.get_untracked()==pid && let Some(png)=v[\"png_base64\"].as_str(){shape.set(fit_sprite(v[\"width\"].as_f64().unwrap_or(200.0),v[\"height\"].as_f64().unwrap_or(200.0)));sprite.set(format!(\"url(data:image/png;base64,{png})\"));}},Err(e)=>error.set(e)}busy.set(false);});}>\"生成角色動畫\"</button>"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "gui_test_progress",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 693,
+    "signature": "fn gui_test_progress (phase : String) -> Result < () , String >",
+    "frontend_calls": [],
+    "registered": true,
+    "static_payload_result_review": "主UI無呼叫；learning_summary/search_memory_tool為補充IPC，gui_test_progress/gui_test_result由GUI驗證script呼叫"
+  },
+  {
+    "command": "gui_test_result",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 701,
+    "signature": "fn gui_test_result (app : tauri :: AppHandle , success : bool , message : String) -> Result < () , String >",
+    "frontend_calls": [],
+    "registered": true,
+    "static_payload_result_review": "主UI無呼叫；learning_summary/search_memory_tool為補充IPC，gui_test_progress/gui_test_result由GUI驗證script呼叫"
+  },
+  {
+    "command": "import_pet_profile",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 305,
+    "signature": "async fn import_pet_profile (state : State < '_ , DesktopState > , pet : Uuid , confirmed : bool ,) -> Result < () , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 334,
+        "source": "<button id=\"import-pet-profile\" disabled=move ||!confirm_import.get() on:click=move |_|{let id=pet.get();leptos::task::spawn_local(async move{match call(\"import_pet_profile\",json!({\"pet\":id,\"confirmed\":true})).await{Ok(_)=>{refresh();load(id);confirm_import.set(false)},Err(e)=>error.set(e)}});}>\"匯入 pet.toml\"</button></section>"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "install_local_update",
+    "backend_path": "apps/desktop_pet/src/updater.rs",
+    "line": 164,
+    "signature": "async fn install_local_update (app : tauri :: AppHandle , state : State < '_ , Updates > , desktop : State < '_ , super :: DesktopState > , id : Uuid , confirmed : bool ,) -> Result < Value , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 153,
+        "source": "<button id=\"install-update\" disabled=move ||busy.get()||!verified.get()||!confirmed.get() on:click=move |_|{let current=id.get();busy.set(true);leptos::task::spawn_local(async move{match call(\"install_local_update\",json!({\"id\":current,\"confirmed\":true})).await{Ok(v)=>status.set(v.to_string()),Err(e)=>status.set(e)}busy.set(false);});}>\"備份資料並安裝\"</button><pre aria-live=\"polite\">{move ||status.get()}</pre></div>}"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "interaction",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 189,
+    "signature": "async fn interaction (state : State < '_ , DesktopState > , pet : Uuid ,) -> Result < day9_pet :: interaction :: Interaction , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 278,
+        "source": "if let Ok(v) = call(\"interaction\", json!({\"pet\":id})).await {"
+      },
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 498,
+        "source": "if let Ok(v) = call(\"interaction\", json!({\"pet\":id})).await {"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "learning_summary",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 215,
+    "signature": "async fn learning_summary (state : State < '_ , DesktopState > , pet : Uuid ,) -> Result < day9_pet :: interaction :: LearningSummary , String >",
+    "frontend_calls": [],
+    "registered": true,
+    "static_payload_result_review": "主UI無呼叫；learning_summary/search_memory_tool為補充IPC，gui_test_progress/gui_test_result由GUI驗證script呼叫"
+  },
+  {
+    "command": "list_cards",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 346,
+    "signature": "async fn list_cards (state : State < '_ , DesktopState > , pet : Uuid) -> Result < Vec < Card > , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 296,
+        "source": "match call(\"list_cards\", json!({\"pet\":id})).await {"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "list_memories",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 317,
+    "signature": "async fn list_memories (state : State < '_ , DesktopState > , pet : Uuid) -> Result < Vec < Memory > , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 283,
+        "source": "match call(\"list_memories\", json!({\"pet\":id})).await {"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "list_pets",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 236,
+    "signature": "async fn list_pets (state : State < '_ , DesktopState >) -> Result < Vec < PetItem > , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 206,
+        "source": "match call(\"list_pets\", json!({})).await {"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "list_snapshots",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 159,
+    "signature": "fn list_snapshots (state : State < '_ , DesktopState > ,) -> Result < Vec < day9_pet :: backup :: Snapshot > , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 128,
+        "source": "match call(\"list_snapshots\", json!({})).await {"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "list_trash",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 560,
+    "signature": "fn list_trash (state : State < '_ , DesktopState >) -> Result < Vec < day9_pet :: TrashEntry > , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 436,
+        "source": "match call(\"list_trash\", json!({})).await {"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "load_asset",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 484,
+    "signature": "async fn load_asset (state : State < '_ , DesktopState > , pet : Uuid ,) -> Result < serde_json :: Value , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 263,
+        "source": "if let Ok(asset) = call(\"load_asset\", json!({\"pet\":id})).await"
+      },
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 487,
+        "source": "&& let Ok(asset) = call(\"load_asset\", json!({\"pet\":id})).await"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "outbox_status",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 621,
+    "signature": "async fn outbox_status (state : State < '_ , DesktopState >) -> Result < serde_json :: Value , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 399,
+        "source": "match call(\"outbox_status\",json!({})).await {"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "pet_agent",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 424,
+    "signature": "async fn pet_agent (state : State < '_ , DesktopState > , pet : Uuid , text : String ,) -> Result < serde_json :: Value , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 339,
+        "source": "leptos::task::spawn_local(async move{match call(\"pet_agent\",json!({\"pet\":pid,\"text\":text})).await {"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "pet_talk",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 383,
+    "signature": "async fn pet_talk (app : tauri :: AppHandle , state : State < '_ , DesktopState > , pet : Uuid , request : Uuid , text : String ,) -> Result < String , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 335,
+        "source": "<section><h2>\"AI 對話與教學\"</h2><p>\"回答會使用此寵物的設定、記憶與對話歷史並傳送至 OpenAI；可先修改或刪除不想使用的記憶。\"</p><textarea prop:value=move ||prompt.get() on:input=move |e|prompt.set(event_target_value(&e)) placeholder=\"輸入問題或想學習的主題\"></textarea><button disabled=move ||busy.get() on:click=move |_|{let pid=pet.get();let text=prompt.get();let rid=uuid();request.set(rid.clone());reply.set(String::new());busy.set(true);leptos::task::spawn_local(async move{match call(\"pet_talk\",json!({\"pet\":pid,\"request\":rid,\"text\":text})).await{Ok(v)=>{if pet.get_untracked()==pid && request.get_untracked()==rid {reply.set(v.as_str().unwrap_or(\"\").to_owned());}},Err(e)=>{if pet.get_untracked()==pid {error.set(e);}}}busy.set(false);});}>\"提問\"</button><pre aria-live=\"polite\">{move ||reply.get()}</pre>"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "profile_file",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 281,
+    "signature": "async fn profile_file (state : State < '_ , DesktopState > , pet : Uuid) -> Result < String , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 291,
+        "source": "if let Ok(value) = call(\"profile_file\", json!({\"pet\":id})).await"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "recall_prompt",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 226,
+    "signature": "async fn recall_prompt (state : State < '_ , DesktopState > ,) -> Result < Option < serde_json :: Value > , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 93,
+        "source": "if let Ok(v) = call(\"recall_prompt\", json!({})).await {"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "recover_cleanup_receipts",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 540,
+    "signature": "async fn recover_cleanup_receipts (state : State < '_ , DesktopState > ,) -> Result < Vec < day9_pet :: CleanupReceipt > , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 407,
+        "source": "match call(\"recover_cleanup_receipts\",json!({})).await {"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "recover_restore_receipts",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 604,
+    "signature": "async fn recover_restore_receipts (state : State < '_ , DesktopState > ,) -> Result < Vec < day9_pet :: RestoreReceipt > , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 444,
+        "source": "<button on:click=move |_|leptos::task::spawn_local(async move{match call(\"recover_restore_receipts\",json!({})).await{Ok(v)=>status.set(format!(\"已復原 {} 筆還原事件\",v.as_array().map_or(0,Vec::len))),Err(e)=>status.set(e)}})>\"復原還原收據\"</button><p role=\"status\">{move ||status.get()}</p>"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "requeue_failed_events",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 629,
+    "signature": "async fn requeue_failed_events (state : State < '_ , DesktopState >) -> Result < u64 , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 404,
+        "source": "match call(\"requeue_failed_events\",json!({})).await {Ok(v)=>status.set(format!(\"已排入 {} 筆失敗事件重試\",v)),Err(e)=>status.set(e)}"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "restore_file",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 567,
+    "signature": "async fn restore_file (state : State < '_ , DesktopState > , id : Uuid , confirmed : bool ,) -> Result < day9_pet :: RestoreReceipt , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 449,
+        "source": "<button disabled=move ||restored||!confirmed.get()||busy.get() on:click=move |_|{let id=id.clone();busy.set(true);leptos::task::spawn_local(async move{match call(\"restore_file\",json!({\"id\":id,\"confirmed\":true})).await{Ok(v)=>{status.set(format!(\"已還原；收據 {}\",v[\"operation_id\"]));refresh();},Err(e)=>status.set(e)}busy.set(false);});}>\"還原檔案\"</button></article>}"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "restore_snapshot",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 168,
+    "signature": "async fn restore_snapshot (app : tauri :: AppHandle , state : State < '_ , DesktopState > , id : Uuid , confirmed : bool ,) -> Result < day9_pet :: backup :: Snapshot , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 140,
+        "source": "<button id=\"restore-snapshot\" disabled=move ||busy.get()||!confirmed.get()||selected.get().is_empty() on:click=move |_|{let id=selected.get();busy.set(true);leptos::task::spawn_local(async move{match call(\"restore_snapshot\",json!({\"id\":id,\"confirmed\":true})).await{Ok(v)=>{status.set(format!(\"還原完成；操作前快照 {}。請重新選擇寵物讀取資料。\",v[\"id\"]));refresh();},Err(e)=>status.set(e)}busy.set(false);});}>\"還原快照\"</button><pre aria-live=\"polite\">{move ||status.get()}</pre></div>}"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "review_card",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 367,
+    "signature": "async fn review_card (state : State < '_ , DesktopState > , pet : Uuid , id : Uuid , quality : u8 ,) -> Result < Card , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 346,
+        "source": "{move ||cards.get().into_iter().map(|c|{let id=c[\"id\"].as_str().unwrap_or(\"\").to_owned();let failed=id.clone();let difficult=id.clone();view!{<article><p>{c[\"question\"].as_str().unwrap_or(\"\").to_owned()}</p><details><summary>\"顯示答案\"</summary>{c[\"answer\"].as_str().unwrap_or(\"\").to_owned()}</details><small>{format!(\"間隔 {} 天；下次複習 Unix 時間 {}\",c[\"interval_days\"],c[\"due_at\"])}</small><button on:click=move |_|{let cid=id.clone();let pid=pet.get();leptos::task::spawn_local(async move{match call(\"review_card\",json!({\"pet\":pid,\"id\":cid,\"quality\":5})).await{Ok(_)=>{if pet.get_untracked()==pid {load(pid)}},Err(e)=>error.set(e)}});}>\"成功回想\"</button>"
+      },
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 347,
+        "source": "<button on:click=move |_|{let cid=difficult.clone();let pid=pet.get();leptos::task::spawn_local(async move{match call(\"review_card\",json!({\"pet\":pid,\"id\":cid,\"quality\":3})).await{Ok(_)=>{if pet.get_untracked()==pid {load(pid)}},Err(e)=>error.set(e)}});}>\"想起來但困難\"</button>"
+      },
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 348,
+        "source": "<button on:click=move |_|{let cid=failed.clone();let pid=pet.get();leptos::task::spawn_local(async move{match call(\"review_card\",json!({\"pet\":pid,\"id\":cid,\"quality\":0})).await{Ok(_)=>{if pet.get_untracked()==pid {load(pid)}},Err(e)=>error.set(e)}});}>\"忘記了，重新練習\"</button></article>}}).collect_view()}</section>"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "revoke_directory",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 71,
+    "signature": "fn revoke_directory (state : State < '_ , DesktopState >) -> Result < () , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 396,
+        "source": "<button on:click=move |_|leptos::task::spawn_local(async move{match call(\"revoke_directory\",json!({})).await{Ok(_)=>{files.set(Vec::new());authorized.set(false);status.set(\"已撤銷目錄授權\".into());},Err(e)=>status.set(e)}})>\"撤銷目錄授權\"</button>"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "rollback_analytics_suggestion",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 126,
+    "signature": "async fn rollback_analytics_suggestion (state : State < '_ , DesktopState > , pet : Uuid , id : Uuid , confirmed : bool ,) -> Result < serde_json :: Value , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 362,
+        "source": "<button disabled=move ||!confirmed.get() on:click=move |_|{let args=json!({\"pet\":pet.get(),\"id\":id.get(),\"confirmed\":true});leptos::task::spawn_local(async move{match call(\"rollback_analytics_suggestion\",args).await{Ok(v)=>result.set(v.to_string()),Err(e)=>result.set(e)}});}>\"回退並回報\"</button><pre aria-live=\"polite\">{move ||result.get()}</pre></section>}"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "save_memory",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 325,
+    "signature": "async fn save_memory (state : State < '_ , DesktopState > , pet : Uuid , id : Uuid , content : String ,) -> Result < () , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 343,
+        "source": "<section><h2>\"可管理的記憶\"</h2><textarea placeholder=\"新增記憶\" prop:value=move ||memory.get() on:input=move |e|memory.set(event_target_value(&e))></textarea><button on:click=move |_|{let id=pet.get();let text=memory.get();let mid=if memory_edit_id.get().is_empty(){uuid()}else{memory_edit_id.get()};leptos::task::spawn_local(async move{match call(\"save_memory\",json!({\"pet\":id,\"id\":mid,\"content\":text})).await{Ok(_)=>{memory.set(String::new());if pet.get_untracked()==id {load(id)}},Err(e)=>error.set(e)}});}>\"保存記憶\"</button><button on:click=move |_|{memory_edit_id.set(String::new());memory.set(String::new());}>\"新增／取消編輯\"</button>"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "save_profile",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 240,
+    "signature": "async fn save_profile (state : State < '_ , DesktopState > , id : Uuid , profile : PetProfile ,) -> Result < () , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 331,
+        "source": "<button on:click=move |_|{let id=pet.get();let optional=|s:String|if s.trim().is_empty(){Value::Null}else{json!(s)};let profile=json!({\"名字\":name.get(),\"種類\":species.get(),\"喜好\":strings(likes.get()),\"個性\":strings(personality.get()),\"興趣\":strings(interests.get()),\"外觀\":{\"顏色\":optional(color.get()),\"風格\":optional(style.get()),\"品種\":optional(breed.get())},\"動畫\":{\"動作\":if actions.get().trim().is_empty(){Value::Null}else{json!(strings(actions.get()))},\"速度\":optional(speed.get())}});leptos::task::spawn_local(async move{match call(\"save_profile\",json!({\"id\":id,\"profile\":profile})).await{Ok(_)=>{refresh();load(id)},Err(e)=>error.set(e)}});}>\"保存設定\"</button></section>"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "scan_file_preview",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 495,
+    "signature": "fn scan_file_preview (state : State < '_ , DesktopState >) -> Result < Vec < serde_json :: Value > , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 379,
+        "source": "match call(\"scan_file_preview\", json!({})).await {"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "search_memory_tool",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 408,
+    "signature": "async fn search_memory_tool (state : State < '_ , DesktopState > , pet : Uuid , query : String ,) -> Result < serde_json :: Value , String >",
+    "frontend_calls": [],
+    "registered": true,
+    "static_payload_result_review": "主UI無呼叫；learning_summary/search_memory_tool為補充IPC，gui_test_progress/gui_test_result由GUI驗證script呼叫"
+  },
+  {
+    "command": "select_pet",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 637,
+    "signature": "async fn select_pet (app : tauri :: AppHandle , state : State < '_ , DesktopState > , pet : Uuid ,) -> Result < () , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 259,
+        "source": "let _ = call(\"select_pet\", json!({\"pet\":id})).await;"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "set_interaction",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 200,
+    "signature": "async fn set_interaction (app : tauri :: AppHandle , state : State < '_ , DesktopState > , pet : Uuid , preferences : day9_pet :: interaction :: Interaction ,) -> Result < () , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 314,
+        "source": "<button id=\"save-interaction\" on:click=move |_|{let pid=pet.get();let preferences=animation.get();leptos::task::spawn_local(async move{if let Err(e)=call(\"set_interaction\",json!({\"pet\":pid,\"preferences\":preferences})).await {error.set(e)}});}>\"保存互動設定\"</button>"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "set_pet_archived",
+    "backend_path": "apps/desktop_pet/src/main.rs",
+    "line": 264,
+    "signature": "async fn set_pet_archived (app : tauri :: AppHandle , state : State < '_ , DesktopState > , pet : Uuid , archived : bool , confirmed : bool ,) -> Result < serde_json :: Value , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 468,
+        "source": "<button id=\"archive-pet\" disabled=move ||!confirmed.get() on:click=move |_|{let id=pet.get();leptos::task::spawn_local(async move{match call(\"set_pet_archived\",json!({\"pet\":id,\"archived\":true,\"confirmed\":true})).await{Ok(_)=>{status.set(\"已移除，可從封存區還原\".into());changed.run(None);refresh();},Err(e)=>status.set(e)}});}>\"移除目前寵物\"</button>"
+      },
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 472,
+        "source": "<button disabled=move ||!restore_confirm.get() on:click=move |_|{let id=id.clone();leptos::task::spawn_local(async move{match call(\"set_pet_archived\",json!({\"pet\":id,\"archived\":false,\"confirmed\":true})).await{Ok(_)=>{status.set(\"已還原寵物與原有資料\".into());changed.run(Some(id));refresh();},Err(e)=>status.set(e)}});}>\"還原寵物\"</button></article>}}).collect_view()}</section>}"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  },
+  {
+    "command": "verify_local_update",
+    "backend_path": "apps/desktop_pet/src/updater.rs",
+    "line": 120,
+    "signature": "async fn verify_local_update (state : State < '_ , Updates > , id : Uuid) -> Result < Value , String >",
+    "frontend_calls": [
+      {
+        "path": "apps/desktop_pet/frontend/src/main.rs",
+        "line": 151,
+        "source": "<button id=\"verify-update\" disabled=move ||busy.get()||id.get().is_empty() on:click=move |_|{let current=id.get();busy.set(true);leptos::task::spawn_local(async move{match call(\"verify_local_update\",json!({\"id\":current})).await{Ok(v)=>{verified.set(true);status.set(v.to_string());},Err(e)=>{verified.set(false);status.set(e)}}busy.set(false);});}>\"下載並驗證\"</button>"
+      }
+    ],
+    "registered": true,
+    "static_payload_result_review": "前端參數名稱／UUID字串／bool／巢狀Profile或Interaction／結果使用已按source核對；動態Value並非Rust型別保證"
+  }
+]

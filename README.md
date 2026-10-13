@@ -1,6 +1,6 @@
 # copilot_use
 
-Rust AI Chat、Tauri/Leptos Desktop Pet、Product Analytics 的獨立產品工作區。驗收與正式版本以 [GitHub Releases](https://github.com/williechen/copilot_use/releases) 附帶的 tag SHA、CI、Docker 與本地報告為準；未有匹配證據的提交不得宣稱完成。 使用者已取消正式部署；目前範圍為本地測試與 CI。`williechen/rust_ai_chat` 嚴格唯讀，完成驗收與固定成品前禁止產生新 Day 教學。
+Rust AI Chat、Tauri/Leptos Desktop Pet、Product Analytics 的獨立產品工作區。驗收與正式版本以 [GitHub Releases](https://github.com/williechen/copilot_use/releases) 附帶的 tag SHA、CI、Docker 與本地報告為準；未有匹配證據的提交不得宣稱完成。 使用者已取消正式部署；目前範圍為本地測試與 CI。`williechen/rust_ai_chat` 嚴格唯讀。原始成品須先驗收並固定正式版本；既有 v0.1.0 固定後，每日依適用 CI Gate 產生教學，後續變更的週六功能驗收另記，不重新阻擋全部每日教學。
 
 ## 實際入口
 
@@ -33,7 +33,7 @@ python3 scripts/local-verify.py --live-openai
 
 - [共同學習規則](docs/COMMON_LEARNING_RULES.md)：目錄／內容以 rust_ai_chat 為主；目標／前進項目以 copilot_use 為主，其他遵循共同規則。
 - [未來前進項目](docs/FUTURE_WORK.md)：未完成的學習銜接、三產品切片及週六完整比對。
-- [產品目標](docs/P9_TARGET.md)、[目錄與程式銜接](docs/TEACHING_ALIGNMENT.md)、[模組與介面對照](docs/SEMANTIC_ARCHITECTURE_REVIEW.md)。
+- [產品目標](docs/P9_TARGET.md)、[目錄與程式銜接](docs/TEACHING_ALIGNMENT.md)、[模組與介面對照](docs/SEMANTIC_ARCHITECTURE_REVIEW.md)、[完整靜態核對與差異](docs/FULL_SOURCE_REVIEW.md)。
 - [操作說明](docs/DEPLOYMENT.md)、[可攜式資料](docs/SQLITE_TRANSITION.md)、[驗收方式](docs/LOCAL_VALIDATION.md)。
 - docs/learning-state.json 保存當前來源、有效程式驗證、下一教學編號與週六到期日。
 

@@ -2,9 +2,11 @@
 
 交付範圍為三產品的本地測試、Docker release 建置、跨平台安裝／更新與版本固定；使用者已取消公開部署。正式來源 SHA、六項 CI 與安裝包 checksum 以 [GitHub Release](https://github.com/williechen/copilot_use/releases) 的 `release-manifest.json` 為準。報告需核對精確來源及 dirty 說明；新程式變更要有匹配證據。有效程式基準見 learning-state.json。
 
-## 產品與證據
+## 固定成品與來源匹配證據
 
-| 產品／整合 | 已執行驗收 | 證據 |
+以下為固定成品證據涵蓋的能力；只歸屬各報告所記來源 SHA，不代表當前分支或新增目標已重新驗收。
+
+| 產品／整合 | 固定證據涵蓋範圍 | 證據 |
 |---|---|---|
 | Chat SQLite | 空庫 migration、Session／ACL、多房間、history、WS presence／typing／重連、跨程序可靠傳送、交易 Outbox／冪等 | `live.json`、CI |
 | Chat AI | 真實 OpenAI gpt-5.6-luna Responses 串流、結構化 Persona／AI-to-AI、SQLite 向量 RAG、唯讀 MCP／Agent 與引用 | `live.json` |
@@ -37,8 +39,12 @@ Analytics 為匿名事件和受控詞頻的描述性計數，不代表獨立真�
 
 正式 Release／docs/release-evidence 保存固定成品證據；當前已驗證程式及參考來源見 learning-state.json。比較和教學的結果不得混算 rust_ai_chat 的實際套用進度。
 
-## 目前 Analytics 通訊變更驗收
+## Analytics 通訊驗收索引
 
-程式 SHA `39f34854b102eb96b44980d42d7b3f272307ec20`：[六項 CI 全部通過](https://github.com/williechen/copilot_use/actions/runs/38290016342)。本地 76 項 Cargo 測試、73 項跨服務檢查、Pet 真實 GUI、SSE 真實瀏覽器與 18 項 Docker release 驗證通過。gRPC／Protobuf 上報與 HTTP＋SSE 儀表板的契約／限制見 [ANALYTICS_TRANSPORT.md](ANALYTICS_TRANSPORT.md)，精確證據索引見 [analytics-transport-validation.json](analytics-transport-validation.json)。
+有效程式基準 `39f34854b102eb96b44980d42d7b3f272307ec20`、匹配 CI 與各類實際驗證結果保留於 [analytics-transport-validation.json](analytics-transport-validation.json)。契約與限制見 [ANALYTICS_TRANSPORT.md](ANALYTICS_TRANSPORT.md)。此基準不同於本輪靜態核對 source SHA；不得把它算成最新分支完整重測。
 
-共享桌面曾有一次既有回想提醒 GUI 逾時；相同乾淨 SHA 在隔離 Xvfb 重測通過，失敗原因未建立，紀錄保留。新依賴兩份 lock audit 沒有已知漏洞，保留既有未維護警告。這次未重跑付費 OpenAI 功能；AI Provider 程式未變更，不把舊 AI 證據算成新 SHA 的重測。正式 v0.1.0 tag／附件維持原樣。
+## 當前核對與待驗收
+
+逐模組、介面與資料流程的完整靜態核對已完成，來源、覆蓋率及可攜式證據見 [FULL_SOURCE_REVIEW.md](FULL_SOURCE_REVIEW.md)。視窗漫遊、SHA256 重複檔案分組及 SSE 授權修正尚未實作／驗收，活動項目見 [FUTURE_WORK.md](FUTURE_WORK.md)。
+
+週六功能 Gate 依共同規則排除 AI 項目，不讀取 key、不以 AI 未重測阻擋功能通過；固定 Release 的 AI 證據及選擇性真實 AI 操作仍只歸屬原來源。每日 Day 由適用 CI Gate 決定，與週六提交／功能驗收及學習套用分開。

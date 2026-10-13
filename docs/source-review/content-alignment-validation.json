@@ -1,0 +1,17 @@
+{
+  "reference_sha": "16261e0ebeef1a888997cc0ebc42b08ceaf8db24",
+  "product_base_sha": "49e1d946dd3c22ffcc4b1aa0e7715cb5b1686724",
+  "source_files_reorganized": 7,
+  "source_files_added_removed_or_moved": 0,
+  "format": "passed",
+  "clippy_libs": "passed with -D warnings",
+  "pure_dependency_guard": "passed",
+  "functional_tests_passed": 48,
+  "ignored_fixture": 1,
+  "ignored_fixture_note": "parent restore test executes child fixture in separate processes",
+  "postgres_end_to_end": "not rerun; database queries and transports unchanged",
+  "paid_ai": "not executed",
+  "reference_worktree_clean": true,
+  "fixed_tag_preserved": "22b44f33b9e2c9edb0fb398fb9bff3efd57b00ee",
+  "full_semantic_equivalence_claimed": false
+}

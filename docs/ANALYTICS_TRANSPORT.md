@@ -45,6 +45,4 @@ cargo check --locked --manifest-path apps/desktop_pet/Cargo.toml
 
 新測試放在 stats_server 的私有 grpc/tests 模組，涵蓋真實 HTTP/2 gRPC、來源隔離、batch 邊界／大小、併發去重、identity conflict、restart、SQLite Chat／Pet 失敗重試與已存在 ACK、SSE 認證／commit／rollback／重連、DB 故障不成功 ACK。實際執行結果另存驗證報告；舊正式 Release 的通過證據不能替代新功能驗證。
 
-本地初次驗證：完整 Cargo／fmt／Clippy 通過，4 項新增 gRPC／SSE 測試通過；既有真實 Chat／Pet GUI／Analytics 跨服務、故障重送、來源輪替、撤回及 OTel 回歸通過。真實瀏覽器已驗證 SSE 自動更新、清除／重新啟用及 PostgreSQL 故障後自動重連。Docker 與新 SHA CI 結果以另存報告為準，不沿用舊 SHA 結果。
-
-完整固定 SHA、Docker、六項 CI 與重試紀錄見 [analytics-transport-validation.json](analytics-transport-validation.json)。
+實際執行結果與來源／CI／Docker 證據索引見 [analytics-transport-validation.json](analytics-transport-validation.json)；當前分支後續變更只採用匹配其來源的證據，不沿用舊 SHA 結果。靜態契約核對見 [FULL_SOURCE_REVIEW.md](FULL_SOURCE_REVIEW.md)，不等於 transport 執行重測。
