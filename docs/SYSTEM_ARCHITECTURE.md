@@ -19,6 +19,8 @@
 | Telemetry | crates/telemetry；OpenTelemetry 0.33.1 | traces／metrics／logs、W3C correlation；與產品事件分離 | 可選 numeric-loopback OTLP，剝除認證 headers |
 | 建置／驗收 | Cargo workspace、獨立 frontend/native locks、Docker／Compose／CI | Rust／WASM／GUI／跨服務／三平台 installer/updater | 本地測試範圍，正式 tag／附件固定 |
 
+本表為產品架構及當時觀察，不是最新學習倉庫的自動驗收結果；逐功能分別核對產品實作狀態、rust_ai_chat 學習套用狀態、對應 source／CI SHA 與正式驗收狀態。既有「已驗證」只代表其原始證據範圍，不因新 SHA 自動失效，也不能延伸宣稱新版本已驗證。
+
 ## DB 目標與實際套用
 
 | 產品 | 兩個 repository 的統一目標 | copilot_use 實際 | rust_ai_chat 唯讀核對 |
