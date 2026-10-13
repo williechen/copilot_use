@@ -52,14 +52,17 @@
     "stage_labels": "P0–P12（含 P0）",
     "stage_boundary_notifications": {
       "enabled": true,
-      "trigger": "Each P0→P1 through P11→P12 transition, once per boundary, checked by daily task",
+      "trigger": "Notify on documented early completion or the scheduled latest completion boundary; once per stage transition",
       "requires_start_date": false,
       "last_notified_boundary": null,
-      "distinguish_schedule_from_acceptance": true
+      "distinguish_schedule_from_acceptance": true,
+      "early_completion_allowed": true,
+      "delay_allowed": false,
+      "early_completion_requires_evidence": true
     },
     "next_stage_boundary": "2026-12-12",
     "planned_completion_date": "2028-12-12",
-    "stage_completion_policy": "預定切點到達即代表前一學習階段已完成並按時進入下一階段；正式驗收獨立，不因到期自動通過"
+    "stage_completion_policy": "學習階段可依明確進度證據提前完成並進入下一階段；預定切點為最晚完成日期，絕不延後，日期到時自動標記前一階段學習完成並切換。提前或到期完成都不代表正式驗收通過；未完成功能與驗收另行追蹤。"
   },
   "daily_reference_sha": null,
   "daily_product_sha": null,
