@@ -2,7 +2,7 @@
 
 ## 基準與權限
 
-- 目錄與程式銜接以 williechen/rust_ai_chat 最新 main 的實際內容為主。唯讀核對差異、函式／型別、介面、資料流程與所屬測試，再更新 copilot_use 的對應模組；記錄兩邊 SHA 及適配理由。
+- **教學唯一實作基底為 williechen/rust_ai_chat 最新 main 的實際架構與程式。** 先讀該庫現有 Domain／Application／Repository、Adapter、呼叫端、測試、Cargo 與資料流程；以 copilot_use 已實作功能作為「最終功能行為／完成標準」比對，找出 rust_ai_chat 的確切缺口，教學只在既有程式和介面上作最小擴充與必要重構。**copilot_use 不是另一套必須複製的架構或程式模板**；不得為貼合產品檔名而預先新增重複 Trait／Port、平行服務或示範骨架。保留 rust_ai_chat 合理設計與已驗證行為，除非真實需求及呼叫端證據證明變更必要；記錄兩庫 SHA、差異、必要性與適配理由。
 - 產品目標、能力範圍及未來前進項目以 williechen/copilot_use 的 [P9_TARGET.md](P9_TARGET.md)、實際程式與 [FUTURE_WORK.md](FUTURE_WORK.md) 為主。學習倉庫的套用進度與產品的驗收狀態分開。
 - 其他依本文件的共同學習規則執行。rust_ai_chat 的 source、README、CI、PR、branch、commit、tag 與資料庫嚴格唯讀。copilot_use 的每週實作與每日教學文件在 teaching/rust-ai-chat-alignment；main 整合需匹配驗收，正式 v0.1.0 tag／附件保持固定。
 - 兩個 repository 的統一 DB 目標：Chat／Pet 使用可攜式 SQLite；Analytics 使用獨立 PostgreSQL。範圍為本地／Docker／跨平台測試；公開部署不在目前範圍。
