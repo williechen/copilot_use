@@ -58,7 +58,8 @@
       "distinguish_schedule_from_acceptance": true
     },
     "next_stage_boundary": "2026-12-12",
-    "planned_completion_date": "2028-12-12"
+    "planned_completion_date": "2028-12-12",
+    "stage_completion_policy": "預定切點到達即代表前一學習階段已完成並按時進入下一階段；正式驗收獨立，不因到期自動通過"
   },
   "daily_reference_sha": null,
   "daily_product_sha": null,
