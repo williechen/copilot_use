@@ -46,17 +46,19 @@
     "total_months": 26,
     "daily_total_minutes": 60,
     "scope": "Chat, Pet and Analytics combined",
-    "start_date": null,
-    "current_stage": null,
+    "start_date": "2026-10-12",
+    "current_stage": "P0",
     "stage_topics": "assigned from confirmed weekly gaps; not yet verified",
     "stage_labels": "P0–P12（含 P0）",
     "stage_boundary_notifications": {
       "enabled": true,
       "trigger": "Each P0→P1 through P11→P12 transition, once per boundary, checked by daily task",
-      "requires_start_date": true,
+      "requires_start_date": false,
       "last_notified_boundary": null,
       "distinguish_schedule_from_acceptance": true
-    }
+    },
+    "next_stage_boundary": "2026-12-12",
+    "planned_completion_date": "2028-12-12"
   },
   "daily_reference_sha": null,
   "daily_product_sha": null,
