@@ -1,10 +1,10 @@
 # 兩庫逐模組、介面與資料流程完整核對
 
-核對日期：2026-10-14。**逐模組、介面與資料流程的完整靜態核對已完成；兩庫不具全部程式語意等同。** 核對完成不代表差異已修正，也不是目前 SHA 的完整部署或跨平台執行驗收。
+核對日期：2026-10-14。**逐模組、介面與資料流程的完整靜態核對已完成；兩庫不具全部程式語意等同。** 核對完成不代表差異已修正，也不是目前 SHA 的完整部署或跨平台執行驗收。下列為原完整靜態核對的固定來源快照，非最新 main 的全量重測；其後的局部來源／本地測試／CI 核對見 [參考庫驗證證據](source-review/rust-ai-chat-validation.json)。
 
 - 唯讀參考 `rust_ai_chat/main`：`16261e0ebeef1a888997cc0ebc42b08ceaf8db24`。
 - 成品本地 `teaching/rust-ai-chat-alignment`：`cd3df07faef994eb544b0648c2e44f17d1853302`。
-- 成品遠端 main／teaching 已確認仍為 `49e1d946dd3c22ffcc4b1aa0e7715cb5b1686724`；本報告未推送。
+- 原核對當時的成品遠端 main／teaching 為 `49e1d946dd3c22ffcc4b1aa0e7715cb5b1686724`；當時本報告尚未推送（歷史狀態）。
 - 正式 `v0.1.0` tag 保留 `22b44f33b9e2c9edb0fb398fb9bff3efd57b00ee`。
 - 參考庫不寫入；沒有載入 API key、付費 AI 呼叫、重構 source 或發布 Day。
 

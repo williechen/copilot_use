@@ -45,6 +45,8 @@ Analytics 為匿名事件和受控詞頻的描述性計數，不代表獨立真�
 
 ## 當前核對與待驗收
 
-逐模組、介面與資料流程的完整靜態核對已完成，來源、覆蓋率及可攜式證據見 [FULL_SOURCE_REVIEW.md](FULL_SOURCE_REVIEW.md)。視窗漫遊、SHA256 重複檔案分組及 SSE 授權修正尚未實作／驗收，活動項目見 [FUTURE_WORK.md](FUTURE_WORK.md)。
+兩庫既有完整靜態核對的來源與覆蓋率見 [FULL_SOURCE_REVIEW.md](FULL_SOURCE_REVIEW.md)，其歷史 SHA 不代表今日全量重測。最新參考庫局部複驗見 [rust_ai_chat 驗證證據](source-review/rust-ai-chat-validation.json)：2026-10-14 21:51 Asia/Taipei，乾淨 main `3b524f4720efbda691a8d2829b47e3b7dd8b45a5` 的 fmt、Clippy、WASM、UI／server SSR、desktop-pet 編譯及 89 項測試通過、零警告；遠端 CI 為 5/6 workflows、16/18 Check Runs success，Rust AI Chat 仍執行中，最新 Gate 尚未全通過。
+
+rust_ai_chat 的 Day 10 三項契約已實作並通過本地測試，但 Chat WS 房間守衛、Pet 驗證後外觀解析與 Analytics 去重入口仍僅測試使用；Analytics 有效 HTTP 事件仍回 501，故參考庫的產品路徑驗收未通過。此結果不替代 copilot_use 的固定成品／`validated_program_sha` 證據；本輪未重新驗收 copilot_use。copilot_use 的視窗漫遊、SHA256 重複檔案分組及 SSE 授權修正仍按既有來源列為未實作／待驗收，活動項目維持在 [FUTURE_WORK.md](FUTURE_WORK.md)。`last_full_comparison=null`、Day／階段及週六到期日未前移。
 
 週六功能 Gate 依共同規則排除 AI 項目，不讀取 key、不以 AI 未重測阻擋功能通過；固定 Release 的 AI 證據及選擇性真實 AI 操作仍只歸屬原來源。每日 Day 由適用 CI Gate 決定，與週六提交／功能驗收及學習套用分開。

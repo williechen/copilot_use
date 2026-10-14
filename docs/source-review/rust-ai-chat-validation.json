@@ -1,0 +1,408 @@
+{
+  "checked_at": "2026-10-14T21:51:36+08:00",
+  "repository": "williechen/rust_ai_chat",
+  "reference_sha": "3b524f4720efbda691a8d2829b47e3b7dd8b45a5",
+  "working_tree": "clean",
+  "scope": "Day 10 existing contracts, product call paths, local validation and matching remote CI; not a full two-repository comparison",
+  "previous_snapshots": [
+    {
+      "sha": "09f356a0fdd1a58e92ae5aa5b8e04745109094b2",
+      "working_tree": "3 modified files",
+      "tests": {
+        "chat_application": 5,
+        "pet_domain": 10,
+        "stats_server": 6
+      },
+      "note": "matching HEAD was dirty; later external commit c35b3348"
+    },
+    {
+      "sha": "c35b3348f9c917bf092aa7d869ce0e9b0be41d29",
+      "working_tree": "clean",
+      "tests": {
+        "chat_application": 5,
+        "pet_domain": 10,
+        "stats_server": 6,
+        "workspace_tests": 48,
+        "ui": 1
+      },
+      "wasm": "exit 101 E0425: _set_messages declaration did not match set_messages use"
+    },
+    {
+      "sha": "8b6df5cfa0af54a1428d23a1b18953ebf26cb581",
+      "working_tree": "2 modified files; +4 lines",
+      "tests": {
+        "total": 84,
+        "failed": 0,
+        "ignored": 0
+      },
+      "checks": "WASM, UI/server SSR, desktop-pet passed without warnings"
+    },
+    {
+      "checked_at": "2026-10-14T21:44:14+08:00",
+      "sha": "3b524f4720efbda691a8d2829b47e3b7dd8b45a5",
+      "working_tree": "clean",
+      "workflows": {
+        "success": 4,
+        "pending": 2,
+        "total": 6
+      },
+      "check_runs": {
+        "success": 14,
+        "pending": 4,
+        "total": 18
+      },
+      "tests": {
+        "total": 89,
+        "failed": 0,
+        "ignored": 0
+      }
+    }
+  ],
+  "local_validation": {
+    "rustc": "1.99.0 (b940084d7 2026-09-28)",
+    "cargo": "1.99.0 (5f94df478 2026-08-27)",
+    "offline": true,
+    "source_modified": false,
+    "commands": [
+      {
+        "command": "cargo fmt --all -- --check",
+        "exit_code": 0
+      },
+      {
+        "command": "cargo clippy --locked -p desktop-pet -p ui -p workspace-tests -p chat-application -p pet-domain -p stats-server -p server --all-targets -- -D warnings",
+        "exit_code": 0,
+        "warnings": 0
+      },
+      {
+        "command": "cargo check --locked -p ui --features hydrate --target wasm32-unknown-unknown",
+        "exit_code": 0,
+        "warnings": 0
+      },
+      {
+        "command": "cargo check --locked -p ui --features ssr",
+        "exit_code": 0,
+        "warnings": 0
+      },
+      {
+        "command": "cargo check --locked -p server --features ssr",
+        "exit_code": 0,
+        "warnings": 0
+      },
+      {
+        "command": "cargo check --locked -p desktop-pet",
+        "exit_code": 0,
+        "warnings": 0
+      },
+      {
+        "command": "cargo test --locked -p desktop-pet -p ui -p workspace-tests -p chat-application -p pet-domain -p stats-server -p server",
+        "exit_code": 0,
+        "passed": 89,
+        "failed": 0,
+        "ignored": 0,
+        "warnings": 0
+      }
+    ],
+    "tests_by_package": {
+      "desktop-pet": 14,
+      "ui": 1,
+      "workspace-tests": 48,
+      "chat-application": 5,
+      "pet-domain": 10,
+      "stats-server": 6,
+      "server": 5
+    },
+    "zero_test_targets": [
+      "analytics_postgres_ingest",
+      "doc-tests"
+    ],
+    "file_sha256": {
+      "crates/ui/src/lib.rs": "b7539d63f740fc08232a6d5fb74501cf582470daf67f4b11f4b721cf16d916e9",
+      "apps/desktop_pet/src/file_organizer.rs": "b80400664947c3082cbdd2d1f5c4050550f0397cab02ec1c2f1b593926cea403",
+      "Cargo.lock": "a663cafabb8aaa963979d58d9d3587342f05c00b43039f759e98b6a09c900309"
+    }
+  },
+  "remote_ci": {
+    "gate": "pending",
+    "workflows": [
+      {
+        "id": 38573766726,
+        "name": "Rust Dashboard",
+        "event": "push",
+        "head_sha": "3b524f4720efbda691a8d2829b47e3b7dd8b45a5",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/38573766726"
+      },
+      {
+        "id": 38573766057,
+        "name": "Persistence",
+        "event": "push",
+        "head_sha": "3b524f4720efbda691a8d2829b47e3b7dd8b45a5",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/38573766057"
+      },
+      {
+        "id": 38573766044,
+        "name": "Test All",
+        "event": "push",
+        "head_sha": "3b524f4720efbda691a8d2829b47e3b7dd8b45a5",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/38573766044"
+      },
+      {
+        "id": 38573766051,
+        "name": "Rust AI Chat",
+        "event": "push",
+        "head_sha": "3b524f4720efbda691a8d2829b47e3b7dd8b45a5",
+        "status": "in_progress",
+        "conclusion": null,
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/38573766051"
+      },
+      {
+        "id": 38573766082,
+        "name": "Node",
+        "event": "push",
+        "head_sha": "3b524f4720efbda691a8d2829b47e3b7dd8b45a5",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/38573766082"
+      },
+      {
+        "id": 38573766131,
+        "name": "Rust Desktop Pet",
+        "event": "push",
+        "head_sha": "3b524f4720efbda691a8d2829b47e3b7dd8b45a5",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/38573766131"
+      }
+    ],
+    "check_runs": [
+      {
+        "id": 115885403321,
+        "name": "check-pet",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/38573766131/job/115885403321"
+      },
+      {
+        "id": 115885402557,
+        "name": "build-pet",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/38573766131/job/115885402557"
+      },
+      {
+        "id": 115885399963,
+        "name": "build-dashboard",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/38573766726/job/115885399963"
+      },
+      {
+        "id": 115885399464,
+        "name": "build-chat",
+        "status": "in_progress",
+        "conclusion": null,
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/38573766051/job/115885399464"
+      },
+      {
+        "id": 115885399432,
+        "name": "check-dashboard",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/38573766726/job/115885399432"
+      },
+      {
+        "id": 115885398353,
+        "name": "check-chat",
+        "status": "in_progress",
+        "conclusion": null,
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/38573766051/job/115885398353"
+      },
+      {
+        "id": 115885398038,
+        "name": "test-shared",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/38573766044/job/115885398038"
+      },
+      {
+        "id": 115885398036,
+        "name": "test-server",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/38573766044/job/115885398036"
+      },
+      {
+        "id": 115885398022,
+        "name": "test-stats-server",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/38573766044/job/115885398022"
+      },
+      {
+        "id": 115885398011,
+        "name": "test-ui",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/38573766044/job/115885398011"
+      },
+      {
+        "id": 115885397828,
+        "name": "test-chat-application",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/38573766044/job/115885397828"
+      },
+      {
+        "id": 115885397817,
+        "name": "test-desktop-pet",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/38573766044/job/115885397817"
+      },
+      {
+        "id": 115885397814,
+        "name": "test-pet-domain",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/38573766044/job/115885397814"
+      },
+      {
+        "id": 115885397599,
+        "name": "test-chat-domain",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/38573766044/job/115885397599"
+      },
+      {
+        "id": 115885397553,
+        "name": "test-workspace",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/38573766044/job/115885397553"
+      },
+      {
+        "id": 115885397421,
+        "name": "test-node",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/38573766082/job/115885397421"
+      },
+      {
+        "id": 115885397304,
+        "name": "test-ai-core",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/38573766044/job/115885397304"
+      },
+      {
+        "id": 115885397102,
+        "name": "test-persistence",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/38573766057/job/115885397102"
+      }
+    ],
+    "legacy_status": {
+      "state": "pending",
+      "total": 0
+    }
+  },
+  "reference_product_acceptance": {
+    "status": "blocked",
+    "contracts_implemented": true,
+    "local_contract_tests_passed": true,
+    "blockers": [
+      {
+        "project": "chat",
+        "symbol": "persist_in_existing_room",
+        "definition": "crates/chat_application/src/lib.rs:59",
+        "product_call_site": "apps/server/src/ws.rs:138",
+        "observation": "new guard only referenced by tests; WS still uses persist_then_publish"
+      },
+      {
+        "project": "pet",
+        "symbol": "resolve_validated_appearance",
+        "definition": "crates/pet_domain/src/profile.rs:102",
+        "observation": "only referenced by tests; not wired to product Profile settings/storage/rendering"
+      },
+      {
+        "project": "analytics",
+        "symbol": "accept_valid_event",
+        "definition": "apps/stats_server/src/lib.rs:45",
+        "product_call_site": "apps/stats_server/src/lib.rs:70",
+        "observation": "only referenced by tests; valid HTTP ingest still returns 501; no PostgreSQL ingestion tests"
+      },
+      {
+        "project": "pet",
+        "symbol": "duplicate_preview",
+        "product_call_site": "apps/desktop_pet/src/lib.rs:65",
+        "observation": "IPC calls scan_preview only; targeted expect(dead_code) does not establish product integration"
+      }
+    ],
+    "not_executed": [
+      "full two-repository comparison",
+      "full workspace all packages",
+      "GUI/cross-platform installers",
+      "Docker",
+      "full product E2E",
+      "paid AI calls"
+    ]
+  },
+  "conflicts_and_reconciliation": [
+    {
+      "item": "reference baseline",
+      "old": "learning-state reference_sha=bdd646..., static_full_comparison=16261e...",
+      "new": "3b524f4720efbda691a8d2829b47e3b7dd8b45a5",
+      "resolution": "reference_sha now latest targeted review; original daily publication and full static comparison SHA remain separately preserved"
+    },
+    {
+      "item": "remote CI snapshots",
+      "old": "21:44 4/6 workflows and 14/18 checks success",
+      "new": "21:51 5/6 workflows and 16/18 checks success",
+      "resolution": "timestamped snapshots retained; latest snapshot pending, never use old success for new SHA"
+    },
+    {
+      "item": "WASM and warning status",
+      "old": "c35b3348 WASM E0425; desktop-pet dead_code warnings",
+      "new": "matching clean 3b524f47 local checks and 89 tests pass, zero warnings",
+      "resolution": "historical failure retained; latest matching source result used"
+    },
+    {
+      "item": "product acceptance scope",
+      "old": "copilot_use fixed release and validated_program_sha have independent matching evidence",
+      "new": "rust_ai_chat Day10 contracts not integrated in product routes",
+      "resolution": "reference acceptance blocked only; do not invalidate or advance copilot_use acceptance"
+    },
+    {
+      "item": "tests placement",
+      "old": "COMMON_LEARNING_RULES clause 8 forbids adopting a root tests workspace; Notion clause 8 omits that explicit prohibition",
+      "new": "rust_ai_chat retains root workspace-tests",
+      "resolution": "record source and Notion wording discrepancy; preserve copilot_use owning-module policy without new rules or source migration"
+    },
+    {
+      "item": "full comparison state",
+      "old": "static_full_comparison.status=completed while last_full_comparison=null",
+      "new": "this run is targeted validation",
+      "resolution": "static review is not weekly functional acceptance; both values remain intact"
+    },
+    {
+      "item": "P9 pending roaming/grouping wording",
+      "old": "unqualified currently not implemented",
+      "new": "rust_ai_chat already contains roaming and grouping core; copilot_use product gaps remain per existing snapshot",
+      "resolution": "qualify existing sentence as copilot_use; no full copilot_use product retest or completion claim"
+    }
+  ],
+  "copilot_use_validation": {
+    "rerun": false,
+    "validated_program_sha_preserved": "39f34854b102eb96b44980d42d7b3f272307ec20",
+    "fixed_tag_sha_preserved": "22b44f33b9e2c9edb0fb398fb9bff3efd57b00ee",
+    "weekly_acceptance_advanced": false,
+    "stage_advanced": false,
+    "day_advanced": false
+  }
+}

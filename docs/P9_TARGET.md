@@ -12,7 +12,7 @@
 - Analytics：獨立 PostgreSQL、gRPC／Protobuf 事件上報、HTTP Dashboard／Query＋SSE 即時更新、同服務 Dashboard/Ingest/Query、來源認證、冪等、完整來源事件、Taipei 趨勢、資料治理/備份、可追溯 1–3 句 AI 洞察及可審核建議、OTel；按 Provider／Model／來源產品／功能／請求 ID／時間統計 input、output、cached input、reasoning、total tokens、價格版本與估算／實際費用，日／月趨勢、預算警示及供應商實際提供的 quota／remaining／reset。缺失額度標未知，不以 Token 推算配額；串流、重試、失敗與缺失 usage 須去重／補帳，不記錄密鑰、Prompt 或回應本文。驗證採既有紀錄與模擬資料，不讀密鑰、不執行付費呼叫。
 - 整合：獨立執行、隔離資料庫、跨服務事件/重試/故障恢復，Observe→Analyze→Act→Evaluate→Observe 閉環；Chat/Pet 採用必須授權且能回退。
 
-視窗漫遊與 SHA256 重複檔案分組已納入產品目標，目前尚未實作；既有視窗內角色動畫或一般掃描預覽不代表這兩項完成。
+視窗漫遊與 SHA256 重複檔案分組已納入 copilot_use 產品目標；依既有成品來源核對仍尚未實作／驗收，rust_ai_chat 的對應核心或測試不等於 copilot_use 已完成；既有視窗內角色動畫或一般掃描預覽不代表這兩項完成。
 
 產品缺口、安全修正、參考適配及教學清單維護於 [FUTURE_WORK.md](FUTURE_WORK.md)；驗收方式與有效證據入口見 [LOCAL_VALIDATION.md](LOCAL_VALIDATION.md)。使用者已取消正式部署，保留本地/Docker/CI/跨平台測試與固定成品目標。
 

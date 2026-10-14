@@ -1,5 +1,5 @@
 {
-  "reference_sha": "bdd646060c11eb3a6b7dd709bd23e582636904fd",
+  "reference_sha": "3b524f4720efbda691a8d2829b47e3b7dd8b45a5",
   "validated_program_sha": "39f34854b102eb96b44980d42d7b3f272307ec20",
   "validated_program_ci_run": 38290016342,
   "fixed_tag": "v0.1.0",
@@ -176,7 +176,7 @@
     "full_semantic_equivalence_claimed": false
   },
   "previous_adopted_reference_sha": "fdc74c1ee244cf86df3fd1c427d893d2956f6211",
-  "reference_sha_scope": "latest statically reviewed source baseline; not learning application, CI success or weekly acceptance",
+  "reference_sha_scope": "latest targeted rust_ai_chat source review; daily publication and full static comparison retain their own SHA; not product acceptance",
   "static_full_comparison": {
     "status": "completed",
     "date": "2026-10-14",
@@ -200,5 +200,25 @@
   ],
   "product_pending_security_review": [
     "Chat SSE completion: recheck current session/room authorization before persisting; static finding, regression not executed"
-  ]
+  ],
+  "reference_validation": {
+    "checked_at": "2026-10-14T21:51:36+08:00",
+    "reference_sha": "3b524f4720efbda691a8d2829b47e3b7dd8b45a5",
+    "evidence": "docs/source-review/rust-ai-chat-validation.json",
+    "local_tests": {
+      "passed": 89,
+      "failed": 0,
+      "ignored": 0,
+      "warnings": 0
+    },
+    "remote_ci": {
+      "workflows_success": 5,
+      "workflows_total": 6,
+      "checks_success": 16,
+      "checks_total": 18,
+      "gate": "pending"
+    },
+    "reference_product_acceptance": "blocked: product call paths not integrated",
+    "copilot_use_product_acceptance": "not revalidated; retain existing matching evidence"
+  }
 }
