@@ -47,7 +47,7 @@
       "套件版本",
       "驗證項目"
     ],
-    "content_preservation": "retain original lessons; append necessary implementation at end of section 2",
+    "content_preservation": "retain original lessons and code; append necessary implementation in the original section 2 format with Red, complete minimum Green, necessary Refactor and verification; explanatory text alone is not implementation",
     "weekly_engineering": "separate engineering evidence; never add weekly operations to teaching",
     "weekly_ai_validation": "excluded; functional gates only",
     "phase_transition": "到期切換且不延後；功能未完成則原階段學習未完成，原項目跨階段補加，完工後回填原階段證據"
@@ -72,7 +72,7 @@
     "months_per_stage": 2,
     "total_months": 26,
     "daily_total_minutes": 60,
-    "scope": "Chat, Pet and Analytics combined",
+    "scope": "Chat, Pet and Analytics combined; only section 2 main Red/Green implementation counts toward daily_total_minutes; Refactor, necessary additions and sections 1/3/4 are excluded",
     "start_date": "2026-10-12",
     "current_stage_by_calendar": "P0",
     "learning_completed": null,
@@ -234,18 +234,19 @@
     "application_source_unchanged_since_local": true
   },
   "article_sync": {
-    "checked_at": "2026-10-16T00:17:56.399878+08:00",
-    "source_sha": "5a0a8cee0d1fb4d0cd248869d7b24ebb1d653399",
+    "checked_at": "2026-10-16T06:31:43+08:00",
+    "operation": "revise existing Day13 article format and learning-time accounting; sync current mirrors",
+    "source_sha": "2aecb0f02f9176287e848b7e4897f28ef3929072",
     "current_articles": "docs/teaching/current/manifest.json",
-    "existing_day": 12,
+    "existing_day": 13,
     "four_sections": true,
     "original_code_preserved": true,
     "new_day_published": false,
     "next_day_advanced": false,
-    "validation_source_sha": "a57e532c125f5f18d7fd2a250401efde0c9d2612",
-    "final_verdict": "Day12 applied; local formal a57e532 passed; application unchanged and latest d054389 CI all success",
-    "implementation_applied": true,
-    "new_lesson_tests_executed": true,
-    "latest_ci_sha": "d05438950b96e03c9c6c6f8f2c7e3573cc191a25"
+    "implementation_applied": false,
+    "new_lesson_tests_executed": false,
+    "notion_readback_verified": true,
+    "previous_sync_evidence": "docs/teaching/archive/day-12/article-sync.json",
+    "final_verdict": "Existing Day13 revised and read back; main implementation learning time 20/15/25 minutes; Refactor/additions excluded; no new implementation or acceptance claimed"
   }
 }

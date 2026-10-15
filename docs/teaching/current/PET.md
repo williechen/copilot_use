@@ -1,67 +1,168 @@
-# 2026-10-15｜P0 Pet Day 12｜桌面漫遊明確啟用控制
+# 2026-10-16｜P0 Pet Day 13｜重複預覽顯示群組大小與檔案數
 
-來源文章：[2026-10-15｜P0 Pet Day 12｜桌面漫遊明確啟用控制](https://app.notion.com/p/3fae51d4509381d0a80ddbbaf251fb03?pvs=204)。
+來源文章：[2026-10-16｜P0 Pet Day 13｜重複預覽顯示群組大小與檔案數](https://app.notion.com/p/3fae51d45093814dbdabee6deac48554?pvs=204)。
 
 ## 1. 學習大綱
-- P0 Pet Day 12（約 15 分鐘）：將**桌面視窗漫遊**由啟動時無條件執行，改為明確啟用才執行的安全功能開關。這是實際桌面視窗行為的最小功能切片，不重做 Day 11 已存在的 SHA256 重複預覽接線。
-- 來源：`williechen/rust_ai_chat@5a0a8cee0d1fb4d0cd248869d7b24ebb1d653399`，`apps/desktop_pet/src/lib.rs` 的 `application().setup` 目前直接 `spawn(roam_desktop)`，`apps/desktop_pet/src/roam.rs` 已有工作區邊界、負座標、stall 限制與測試。對照 `copilot_use/docs/FUTURE_WORK.md` 的桌面實際漫遊／安全性。
-- 本日只新增**啟用控制**；不宣稱跨平台 GUI 已驗收或已有使用者設定 UI。
+P0／Pet Day 13；主體實作學習時數 15 分鐘。學習時數只計第 2 節的主體實作（Red 與最小 Green）；Refactor／必要補加不計入學習時數，第 1、3、4 節亦不計入。三專案每日主體實作學習時數合計最多 60 分鐘。
+來源：rust_ai_chat/main `2aecb0f02f9176287e848b7e4897f28ef3929072`；copilot_use/main `49e1d946dd3c22ffcc4b1aa0e7715cb5b1686724`；產品教學分支 `1d1668b97e65ccfafc073829f131c93133c8bb7e`。已讀共同規則、P9_TARGET、FUTURE_WORK、SYSTEM_ARCHITECTURE、learning-state 與 Notion 共同／專案／Day 12；共同規則為準。當前 P0，最晚切點 2026-12-12，未達切點也無提前完成證據，不切換階段。首次週六完整比對尚未成功，last_full_comparison 保持 null；本日只核對選題相關差異，不冒稱全量完成。
+對應 FUTURE_WORK 原「FileOrganizer SHA256 重複檔案分組／IPC／UI 接線」及「使用者授權、型別化 preview／confirmation／receipt」項目。最新 file_[organizer.rs](http://organizer.rs) 已回 DuplicatePreview\{groups,warnings\}，每組含 sizeBytes／itemIds；Day 11 IPC、Day 12 漫遊 opt-in 都已套用。本日不重做掃描／SHA256，而是讓 UI 顯示每組的檔案大小及數量，並避免舊結果誤作本次結果。
+成品 pet_runtime 的 private directory／no-follow／receipt 是行為及安全目標；成品 SHA256 分組仍列未完成，不能聲稱已有成品等價。保留學習庫既有 Tauri → JS → WASM 路線與無路徑參數命令，不把成品檔名硬搬過來。
 ## 2. 實作內容
-### Red：預設不自動移動
-在 `apps/desktop_pet/src/lib.rs` 新增到現有私有測試模組（若尚無則在檔尾建立）：
+### Red：加入顯示契約測試
+新增 `apps/desktop_pet/frontend/src/duplicate_preview.rs`。先只加入下方 tests 模組，執行第 4 節第一條命令，預期缺 DuplicatePreviewView 而編譯失敗；再加入上方型別及 impl 完成 Green。以下是最終完整檔案，避免散落重複實作：
 ```rust
+use serde::Deserialize;
+
+// 僅保留顯示所需資料，不持有 hash、警告本文或私人路徑。
+#[derive(Debug, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct DuplicateGroupView {
+    size_bytes: u64,
+    item_ids: Vec<serde::de::IgnoredAny>,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct DuplicatePreviewView {
+    groups: Vec<DuplicateGroupView>,
+    warnings: Vec<serde::de::IgnoredAny>,
+}
+
+impl DuplicatePreviewView {
+    pub fn summary(&self) -> String {
+        let mut text = format!(
+            "SHA256 重複群組：{}；掃描警告：{}。僅供預覽，尚未移動或刪除檔案。",
+            self.groups.len(), self.warnings.len()
+        );
+        for (index, group) in self.groups.iter().enumerate() {
+            text.push_str(&format!(
+                "\n群組 {}：每檔 {} 位元組，{} 個檔案。",
+                index + 1, group.size_bytes, group.item_ids.len()
+            ));
+        }
+        text
+    }
+}
+
 #[cfg(test)]
-mod roam_setting_tests {
-    use super::roam_enabled_value;
+mod tests {
+    use super::*;
+
     #[test]
-    fn roam_requires_explicit_opt_in() {
-        assert!(!roam_enabled_value(None));
-        assert!(!roam_enabled_value(Some("")));
-        assert!(!roam_enabled_value(Some("false")));
-        assert!(!roam_enabled_value(Some("TRUE")));
-        assert!(roam_enabled_value(Some("true")));
-        assert!(roam_enabled_value(Some("1")));
+    fn summary_shows_group_sizes_without_private_paths() {
+        let value: DuplicatePreviewView = serde_json::from_str(r#"{
+            "groups": [
+                {"sizeBytes":4,"itemIds":["item-000000","item-000001"],
+                 "digestSha256":"private-hash"},
+                {"sizeBytes":0,"itemIds":["item-000002","item-000003","item-000004"]}
+            ],
+            "warnings":[{"relativePath":"private.txt","message":"private-error"}]
+        }"#).unwrap();
+        let text = value.summary();
+        assert!(text.contains("SHA256 重複群組：2；掃描警告：1"));
+        assert!(text.contains("群組 1：每檔 4 位元組，2 個檔案"));
+        assert!(text.contains("群組 2：每檔 0 位元組，3 個檔案"));
+        assert!(text.contains("尚未移動或刪除"));
+        for private in ["private.txt", "private-error", "private-hash", "item-000000"] {
+            assert!(!text.contains(private));
+        }
+    }
+
+    #[test]
+    fn empty_preview_is_explicit_and_missing_contract_is_rejected() {
+        let value: DuplicatePreviewView =
+            serde_json::from_str(r#"{"groups":[],"warnings":[]}"#).unwrap();
+        assert_eq!(value.summary(),
+            "SHA256 重複群組：0；掃描警告：0。僅供預覽，尚未移動或刪除檔案。");
+        assert!(serde_json::from_str::<DuplicatePreviewView>(
+            r#"{"groups":[{"itemIds":[]}],"warnings":[]}"#
+        ).is_err());
     }
 }
 ```
-預期 Red：找不到 `roam_enabled_value`。
-### 最小 Green：接上既有原生視窗漫遊
-在 `apps/desktop_pet/src/lib.rs` 的 `application` 之前加入：
+在 `apps/desktop_pet/frontend/Cargo.toml` 檔尾新增（若已有 dev-dependencies，合併一次）：
+```toml
+[dev-dependencies]
+serde_json.workspace = true
+```
+此套件已在 workspace／lock，沒有引入新版本。[main.rs](http://main.rs) 頂端既有 mod bridge／mod component 後加入：
 ```rust
-// 只接受明確的 true 或 1；其他值均維持不移動。
-fn roam_enabled_value(value: Option<&str>) -> bool {
-    matches!(value, Some("true" | "1"))
-}
-fn roam_enabled() -> bool {
-    let value = std::env::var("PET_ENABLE_ROAM").ok();
-    roam_enabled_value(value.as_deref())
+mod duplicate_preview;
+```
+### 最小 Green：將資料接到真實按鈕
+`apps/desktop_pet/frontend/src/bridge.rs` 刪除舊 DuplicatePreviewCounts 型別，將既有 scan_duplicate_preview 完整替換為：
+```rust
+pub async fn scan_duplicate_preview() -> Result<String, String> {
+    let value = JsFuture::from(scan_duplicate_preview_js())
+        .await.map_err(js_error)?;
+    let result: crate::duplicate_preview::DuplicatePreviewView =
+        serde_wasm_bindgen::from_value(value).map_err(|e| e.to_string())?;
+    Ok(result.summary())
 }
 ```
-在 `application().setup(|app| { ... })` 中，**只替換**原本無條件 spawn 的片段：
+保留 extern 中 scan_duplicate_preview_js 及其他 bridge 函式。`apps/desktop_pet/frontend/src/main.rs`::App 在 duplicate_status signal 後新增：
 ```rust
-if roam_enabled() {
-    let app_handle = app.handle().clone();
-    tauri::async_runtime::spawn(async move {
-        roam_desktop(app_handle).await;
-    });
+let (duplicate_loading, set_duplicate_loading) = signal(false);
+```
+將原「檢查重複檔案」按鈕及緊接其後顯示 duplicate_status 的 Show 整段替換為以下內容；保留後面的 ErrorMessage：
+```rust
+<button
+    type="button"
+    disabled=move || duplicate_loading.get()
+    on:click=move |_| {
+        // 清除過時預覽；同時只允許一次使用者請求。
+        if duplicate_loading.get_untracked() { return; }
+        set_duplicate_loading.set(true);
+        set_duplicate_status.set(None);
+        set_error.set(None);
+        spawn_local(async move {
+            match bridge::scan_duplicate_preview().await {
+                Ok(summary) => set_duplicate_status.set(Some(summary)),
+                Err(message) => set_error.set(Some(message)),
+            }
+            set_duplicate_loading.set(false);
+        });
+    }
+>"檢查重複檔案"</button>
+<Show when=move || duplicate_loading.get() fallback=|| ()>
+    <p role="status">"正在檢查重複檔案…"</p>
+</Show>
+<Show when=move || duplicate_status.get().is_some() fallback=|| ()>
+    <pre class="duplicate-preview" role="status">
+        {move || duplicate_status.get().unwrap_or_default()}
+    </pre>
+</Show>
+```
+`apps/desktop_pet/frontend/style.css` 檔尾追加（相同 selector 若已存在則合併）：
+```css
+.duplicate-preview {
+    max-width: 100%;
+    max-height: 5rem;
+    overflow: auto;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    font: inherit;
+    margin: 0;
 }
 ```
-不修改 `roam.rs` 的 `bounded_next_position`、`set_position` 或原有 stall 處理。啟用方式：啟動 Tauri 程序前設定 `PET_ENABLE_ROAM=1`；不設定則視窗保持由 OS／使用者控制。
-### Refactor／限制
-- `roam_enabled_value` 為純函式，測試不需修改程序環境變數，避免測試間競爭。
-- 不允許 GUI 默認啟動就自行移動；目前僅啟動時讀取一次，執行中切換及每隻寵物獨立偏好尚未實作。
-- 此變更不涉及掃描檔案、刪除、憑證或 SQLite；原有 FileOrganizer 授權根與唯讀預覽規則保持不變。
-### 實際套用補充（2026-10-15）
-本地已提交 `a57e532c125f5f18d7fd2a250401efde0c9d2612`。`roam_enabled_value`、`roam_enabled`、setup 的條件啟動與本日測試均已套用，未重寫既有漫遊演算法。實際檔案見[精確提交](https://github.com/williechen/rust_ai_chat/blob/a57e532c125f5f18d7fd2a250401efde0c9d2612/apps/desktop_pet/src/lib.rs)。
-函式在未設定環境變數時預設關閉；但目前 tracked `.env.example` 已填 `PET_ENABLE_ROAM=true`，若複製並載入該範例就會明確啟用。範例的 `PET_AUTHORIZED_ROOT=/` 不是本次測試設定，不應作為授權掃描範例；本次沒有載入它或掃描根目錄。GUI 實際移動／多螢幕仍未測。
+### Refactor
+沿用上方已提供的 `duplicate_preview.rs` 私有模組：純顯示型別與 `summary` 集中於此，`bridge.rs` 只負責 IPC 反序列化，`App` 只管理請求與呈現。套用時以本節列出的完整模組及替換片段為準，不再新增同名型別或第二套掃描流程。本次沒有額外必要補加實作。
+### 必要補加實作
+N/A。本次為文章格式與同步修正，沒有新增功能實作；日後需要補加時，在本節末尾沿用 Red → 最小 Green → Refactor → 驗證格式接續完整實作。
 ## 3. 套件版本
-- 使用既有 `tauri`、`tokio`、Rust 標準函式庫；不新增依賴。
-- Cargo.lock 精確版本、官方 stable／MSRV／三平台相容性本次**未另行查證**。
+workspace 0.2.12。frontend 既有宣告 leptos 0.8、serde 1.0、serde-wasm-bindgen 0.6、wasm-bindgen 0.2；同 SHA lock 分別 0.8.22、1.0.229、0.6.5、0.2.129；Tauri lock 2.12.4（不可沿用舊 Day 的 2.12.3 當今日版本）。測試沿用 workspace serde_json 1.0／lock 1.0.154，不升級依賴。官方最新 stable／MSRV／安全公告與新功能 native/WASM 相容性本次未查證。
 ## 4. 驗證項目
-- 建議 `cargo test -p desktop-pet roam_requires_explicit_opt_in`、`cargo test -p desktop-pet`、`cargo fmt --all -- --check`、`cargo clippy --workspace --all-targets -- -D warnings`。
-- GUI E2E：未設定時視窗不移動；設定 `PET_ENABLE_ROAM=1` 時確實移動且不超出 monitor work area；在負座標、多螢幕、視窗比工作區大及無法移動時檢查停止行為。
-- 程式與新增測試已套用；漫遊 opt-in 邏輯與原生 Release 建置通過。GUI 實際視窗移動 E2E 未執行，不能以單元測試替代。
-### 來源驗證最終判定（2026-10-16）
-**目前狀態：test-workspace 的 Analytics 測試環境缺口已修正，最新 GitHub CI 全部通過。** `rust_ai_chat/main@d05438950b96e03c9c6c6f8f2c7e3573cc191a25` 的 6／6 workflows、18／18 checks 均為 Success；[Test All／test-workspace 成功紀錄](https://github.com/williechen/rust_ai_chat/actions/runs/38765474606/job/116527415647)。最新 test.yml 已提供獨立 PostgreSQL、`ANALYTICS_DATABASE_URL` 與兩個合成來源 token。「缺少 Analytics 資料庫與 token」是舊提交 `a57e532` 的失敗原因，已不再是當前阻礙。
-本地正式驗證仍精確對應 `a57e532c125f5f18d7fd2a250401efde0c9d2612`：107 項 Rust、3 項 Node、fmt、嚴格 Clippy、SSR／兩個 WASM、Linux 原生／Chat Leptos／Pet 前端 Release，以及 14 項實際 HTTP／WS／DB 檢查通過。已唯讀比對 `a57e532..d054389`，只有 `test.yml` 與 `persistence.yml` 改動，應用程式／測試／依賴鎖均未變；因此保留原本地證據，不冒稱已對新 SHA 重跑全部本地驗證。[精確來源、CI 與可攜式證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/source-review/rust-ai-chat-validation.json)。
-Day 12 已由使用者套用；原撰寫基底 `5a0a8ce` 與全部原教學程式區塊保留。Analytics HTTP 已接 PostgreSQL，Typing／來源認證／持久冪等／併發／重啟／DB 故障測試通過。Pet 實際 GUI 移動、跨平台安裝包、gRPC／SSE 銜接及正式憑證安全審查仍未由本次驗證完成；不將 CI 全綠當作全部 Day／P9／週六或學習階段完成。未讀取私人 .env／AI key，未執行付費 AI，未寫入 rust_ai_chat。
+### 實作邊界與未完成項目
+顯示用純函式獨立在 owning frontend 私有模組，測試不呼叫 Tauri、不掃真實檔案。serde 只保留群組大小、成員數及警告數，不把 hash／opaque ID／警告路徑帶進畫面；預覽不估算「已釋放空間」。錯誤清除舊預覽，請求中停用按鈕，Leptos 以文字呈現結果。後端、JS、Domain、SQLite、migration 本日 N/A。
+沿用原限制：目前 hash 的 open/read 仍有 TOCTOU 風險；本日僅資訊性唯讀預覽，不是可刪除清單，也沒有新增刪除、Trash、restore 或成功事件。root 授權／non-root／symlink 回歸保留，不修改正式 tag。200×200 的實際佈局、鍵盤操作與不同縮放必須 GUI 驗證；CSS 上限不能代替實測。SQLite PetStore 仍在原 FUTURE_WORK，未因 UI 完成。
+### 驗證命令與結果
+本次重新查核最新來源 SHA 的六份 workflow 定義與實際紀錄：Rust AI Chat、Test All、Persistence、Node、Rust Dashboard、Rust Desktop Pet，6/6 workflows、18/18 checks 均 completed/success，沒有 skipped/cancelled/pending check。main 未設 branch protection 必要 contexts；另無 legacy commit-status context（status API 的 pending/total_count=0 只表示沒有 legacy status，並非一個待完成工作），此庫適用 Gate 為上述 Actions/check-runs，已逐一核對，沒有用歷史 CI 替代。[匹配 SHA 的 CI](https://github.com/williechen/rust_ai_chat/actions?query=branch%3Amain)。基準 CI 通過只允許教學發布，不代表以下新增程式已套用或測試通過。
+```bash
+cargo test --locked -p desktop-pet-frontend duplicate_preview::tests
+cargo check --locked -p desktop-pet-frontend --target wasm32-unknown-unknown
+node --test apps/desktop_pet/frontend/tests/duplicate-preview-contract.test.mjs
+cargo test --locked -p desktop-pet
+cargo fmt --all -- --check
+```
+若新增 dev-dependency 使既有 lock package dependency 清單需更新，由使用者在自己的套用工作區正常更新 Cargo.lock 後再執行 --locked；本助手不寫學習庫或 lock。Red／Green 預期依測試斷言；JS 無任意路徑參數與後端原掃描安全回歸須維持。
+GUI 使用專用、已授權非 root 測試目錄：同內容兩檔顯示 1 組及正確 size/count；不同內容同大小不成組；空結果明示 0；失敗不留舊成功；連按只送一次；預覽不改檔案；200×200 可捲動讀完。不得載入私人環境檔或用 / 作測試 root。
+本次未套用程式、未執行新 Rust／WASM／GUI 測試，未宣稱 Red／Green 已實測。狀態：程式尚待套用、功能尚未由本日實作證明、正式驗收未通過；Notion 發布及讀回另依實際交易紀錄。未讀密鑰、未執行付費 AI。

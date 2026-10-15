@@ -1,0 +1,15 @@
+{
+  "checked_at": "2026-10-16T00:17:56.399878+08:00",
+  "source_sha": "5a0a8cee0d1fb4d0cd248869d7b24ebb1d653399",
+  "current_articles": "docs/teaching/current/manifest.json",
+  "existing_day": 12,
+  "four_sections": true,
+  "original_code_preserved": true,
+  "new_day_published": false,
+  "next_day_advanced": false,
+  "validation_source_sha": "a57e532c125f5f18d7fd2a250401efde0c9d2612",
+  "final_verdict": "Day12 applied; local formal a57e532 passed; application unchanged and latest d054389 CI all success",
+  "implementation_applied": true,
+  "new_lesson_tests_executed": true,
+  "latest_ci_sha": "d05438950b96e03c9c6c6f8f2c7e3573cc191a25"
+}

@@ -1,160 +1,186 @@
-# 2026-10-15｜P0 Analytics Day 12｜HTTP 來源驗證與 PostgreSQL 持久化接線
+# 2026-10-16｜P0 Analytics Day 13｜來源隔離的 PostgreSQL 統計查詢
 
-來源文章：[2026-10-15｜P0 Analytics Day 12｜HTTP 來源驗證與 PostgreSQL 持久化接線](https://app.notion.com/p/3fae51d4509381ebb1e9f8482b5bf44e?pvs=204)。
+來源文章：[2026-10-16｜P0 Analytics Day 13｜來源隔離的 PostgreSQL 統計查詢](https://app.notion.com/p/3fae51d4509381808a9cd813423d52d1?pvs=204)。
 
 ## 1. 學習大綱
-- P0 Analytics Day 12（約 25 分鐘）：補齊 **HTTP JSON 攝取 → 來源驗證 → PostgreSQL 持久化 → ACK** 的最小實際呼叫路徑。Day 11 已有 `pg_store::persist_event`，但 `ingest` 對有效事件仍回 `501`；本日不重建 EventRepository 或 HashSet 假資料層。
-- 來源：`williechen/rust_ai_chat@5a0a8cee0d1fb4d0cd248869d7b24ebb1d653399`：`apps/stats_server/src/lib.rs`、`pg_store.rs`、`main.rs`、`Cargo.toml`。對照 `copilot_use/docs/FUTURE_WORK.md` 的「Analytics 參考 501／記憶體 fake 與 PostgreSQL／來源認證／gRPC 銜接」。此切片是保留的**HTTP 相容入口**，不是宣稱 gRPC／Protobuf 或 SSE 已完成。
-- 目標：無授權不寫 DB、source 與憑證綁定、有效事件 commit 後 ACK、重送可辨識、identity conflict 不回成功、DB 故障不回成功。保持 loopback 綁定。
+P0／Analytics Day 13；主體實作學習時數 25 分鐘。學習時數只計第 2 節的主體實作（Red 與最小 Green）；Refactor／必要補加不計入學習時數，第 1、3、4 節亦不計入。三專案每日主體實作學習時數合計最多 60 分鐘。
+來源：rust_ai_chat/main `2aecb0f02f9176287e848b7e4897f28ef3929072`；copilot_use/main `49e1d946dd3c22ffcc4b1aa0e7715cb5b1686724`；產品教學分支 `1d1668b97e65ccfafc073829f131c93133c8bb7e`。已讀共同規則、P9_TARGET、FUTURE_WORK、SYSTEM_ARCHITECTURE、learning-state 與 Notion 共同／專案／Day 12；共同規則為準。當前 P0，最晚切點 2026-12-12，未達切點也無提前完成證據，不切換階段。首次週六完整比對尚未成功，last_full_comparison 保持 null；本日只核對選題相關差異，不冒稱全量完成。
+對應 FUTURE_WORK 原「同服務 Dashboard／Ingest／Query」與「四欄事件及來源權限、獨立 PostgreSQL／持久冪等」。最新 HTTP ingest 已接 pg_store::persist_event，Day 12 不再是 501；目前 build_app 只有 /healthz 與 POST /api/v1/events，沒有查詢入口。
+成品 `apps/stats_server/src/lib.rs`::summary、[persistence.rs](http://persistence.rs)::EventStore::summary 已能依來源／事件類型聚合；學習庫沿用現有 pg_store 與 IngestState，新增來源授權的 GET /api/v1/events/\{source\}/summary。成品以獨立 API token 查全域資料；本日為避免直接搬入其整套狀態與管理權限，沿用學習庫來源 token，只能讀同來源聚合，不提供跨來源管理查詢。
 ## 2. 實作內容
-### Red：先定義失敗案例
-在 `apps/stats_server/src/lib.rs` 原有 `mod tests` 內追加：
+### Red：先定義真實 handler／PostgreSQL 行為
+在 `apps/stats_server/src/lib.rs` 檔尾新增以下私有模組（保留既有 tests）。先跑第 4 節命令，預期缺 source_summary／summary_for_source 而編譯失敗。合成 fixture 不讀環境密鑰；兩個 sqlx::test 僅在 postgres-integration feature 下執行，使用隔離測試 DB：
 ```rust
-#[test]
-fn token_must_match_the_claimed_source() {
-    let tokens = IngestTokens {
-        chat: "chat-secret".into(),
-        pet: "pet-secret".into(),
-    };
-    assert!(tokens.authorized("web_chat", "Bearer chat-secret"));
-    assert!(tokens.authorized("desktop_pet", "Bearer pet-secret"));
-    assert!(!tokens.authorized("desktop_pet", "Bearer chat-secret"));
-    assert!(!tokens.authorized("web_chat", "Bearer "));
-    assert!(!tokens.authorized("web_chat", "chat-secret"));
-}
-#[test]
-fn persist_outcomes_have_distinct_http_codes() {
-    use pg_store::PersistOutcome::*;
-    assert_eq!(outcome_status(Stored), StatusCode::CREATED);
-    assert_eq!(outcome_status(AlreadyExists), StatusCode::OK);
-    assert_eq!(outcome_status(IdentityConflict), StatusCode::CONFLICT);
-}
-```
-預期 Red：`IngestTokens`／`outcome_status` 尚不存在。
-### Green：實際連接原有 PostgreSQL Adapter
-在 `apps/stats_server/src/lib.rs` 保留既有 `EventInput`、`valid_event`、`pg_store` 及既有單元測試；新增以下 import：
-```rust
-use axum::{
-    extract::State,
-    http::{HeaderMap, header::AUTHORIZATION},
-};
-use sqlx::PgPool;
-use std::sync::Arc;
-use pg_store::{PersistError, PersistOutcome};
-```
-新增狀態、授權及回應映射：
-```rust
-#[derive(Clone)]
-pub struct IngestTokens {
-    pub chat: String,
-    pub pet: String,
-}
-#[derive(Clone)]
-pub struct IngestState {
-    pub pool: PgPool,
-    pub tokens: Arc<IngestTokens>,
-}
-impl IngestTokens {
-    fn authorized(&self, source: &str, header: &str) -> bool {
-        let token = match source {
-            "web_chat" => &self.chat,
-            "desktop_pet" => &self.pet,
-            _ => return false,
-        };
-        // 不接受空憑證；固定長度逐位比較避免提早依內容退出。
-        if token.is_empty() || token.len() > 512 { return false; }
-        let expected = format!("Bearer {token}");
-        let a = expected.as_bytes();
-        let b = header.as_bytes();
-        let mut diff = a.len() ^ b.len();
-        for i in 0..a.len().max(b.len()) {
-            diff |= usize::from(
-                a.get(i).copied().unwrap_or(0) ^ b.get(i).copied().unwrap_or(0)
-            );
+#[cfg(test)]
+mod source_summary_tests {
+    use super::*;
+    use axum::extract::Path;
+
+    fn fixture_tokens() -> Arc<IngestTokens> {
+        Arc::new(IngestTokens {
+            chat: "fixture-chat-only".into(),
+            pet: "fixture-pet-only".into(),
+        })
+    }
+    fn headers(token: &str) -> HeaderMap {
+        let mut headers = HeaderMap::new();
+        headers.insert(AUTHORIZATION, format!("Bearer {token}").parse().unwrap());
+        headers
+    }
+
+    #[tokio::test]
+    async fn summary_rejects_cross_source_before_database_access() {
+        let pool = sqlx::postgres::PgPoolOptions::new()
+            .connect_lazy("postgres://fixture:fixture@127.0.0.1:1/unused").unwrap();
+        pool.close().await;
+        let state = IngestState { pool, tokens: fixture_tokens() };
+        for (source, headers, expected) in [
+            ("desktop_pet", headers("fixture-chat-only"), StatusCode::UNAUTHORIZED),
+            ("web_chat", HeaderMap::new(), StatusCode::UNAUTHORIZED),
+            ("unknown", headers("fixture-chat-only"), StatusCode::BAD_REQUEST),
+            ("web_chat", headers("fixture-chat-only"), StatusCode::SERVICE_UNAVAILABLE),
+        ] {
+            let result = source_summary(
+                State(state.clone()), Path(source.into()), headers,
+            ).await;
+            assert_eq!(result.err().unwrap(), expected);
         }
-        diff == 0
     }
-}
-fn outcome_status(value: PersistOutcome) -> StatusCode {
-    match value {
-        PersistOutcome::Stored => StatusCode::CREATED,
-        PersistOutcome::AlreadyExists => StatusCode::OK,
-        PersistOutcome::IdentityConflict => StatusCode::CONFLICT,
+
+    #[cfg(feature = "postgres-integration")]
+    #[sqlx::test(migrations = "./migrations")]
+    async fn summary_counts_committed_rows_per_source_and_kind(pool: PgPool) {
+        let id = Uuid::new_v4();
+        for (source, event_id, kind) in [
+            ("web_chat", id, "chat.message.persisted"),
+            ("web_chat", Uuid::new_v4(), "chat.message.persisted"),
+            ("web_chat", Uuid::new_v4(), "chat.room.created"),
+            ("desktop_pet", id, "pet.cleanup.succeeded"),
+        ] {
+            let event = EventInput {
+                schema_version: 1, event_id,
+                source_app: source.into(), event_type: kind.into(),
+            };
+            assert_eq!(pg_store::persist_event(&pool, &event).await.unwrap(),
+                       PersistOutcome::Stored);
+            assert_eq!(pg_store::persist_event(&pool, &event).await.unwrap(),
+                       PersistOutcome::AlreadyExists);
+        }
+        let state = IngestState { pool: pool.clone(), tokens: fixture_tokens() };
+        let Json(chat) = source_summary(
+            State(state.clone()), Path("web_chat".into()), headers("fixture-chat-only"),
+        ).await.unwrap();
+        assert_eq!(chat.len(), 2);
+        assert_eq!(chat[0].event_type, "chat.message.persisted");
+        assert_eq!(chat[0].total, 2);
+        assert_eq!(chat[1].event_type, "chat.room.created");
+        assert_eq!(chat[1].total, 1);
+        assert!(chat.iter().all(|v| v.source_app == "web_chat"));
+        let Json(pet) = source_summary(
+            State(state), Path("desktop_pet".into()), headers("fixture-pet-only"),
+        ).await.unwrap();
+        assert_eq!(pet.len(), 1);
+        assert_eq!(pet[0].source_app, "desktop_pet");
+        assert_eq!(pet[0].total, 1);
+
+        // 查詢不依賴 event_id 儲存型別；既有 migration 保持不變。
+        sqlx::query(
+            "ALTER TABLE product_events ALTER COLUMN event_id TYPE UUID USING event_id::uuid"
+        ).execute(&pool).await.unwrap();
+        assert_eq!(pg_store::summary_for_source(&pool, "web_chat").await.unwrap(), chat);
+    }
+
+    #[cfg(feature = "postgres-integration")]
+    #[sqlx::test(migrations = "./migrations")]
+    async fn empty_and_rolled_back_events_are_not_counted(pool: PgPool) {
+        assert!(pg_store::summary_for_source(&pool, "web_chat").await.unwrap().is_empty());
+        let mut tx = pool.begin().await.unwrap();
+        sqlx::query(
+            "INSERT INTO product_events(source_app,event_id,schema_version,event_type)
+             VALUES ('web_chat',$1,1,'chat.message.persisted')"
+        ).bind(Uuid::new_v4().to_string()).execute(&mut *tx).await.unwrap();
+        tx.rollback().await.unwrap();
+        assert!(pg_store::summary_for_source(&pool, "web_chat").await.unwrap().is_empty());
     }
 }
 ```
-**替換** `ingest` 與 `build_app`，保留 `health`：
+第一個測試的 pool 先關閉，證明未授權在查 DB 前回 401，合法授權才碰到 pool 並回 503；不是把 DB 故障測成成功。資料庫測試實際寫入並重送，驗證去重後計數、相同 ID 不同來源隔離、事件類型分組、空資料與 rollback。
+### 最小 Green：擴充現有 PostgreSQL Adapter 與 HTTP
+`apps/stats_server/src/pg_store.rs` 保留現有 persist_event／lookup_existing_event／錯誤型別，在檔尾新增：
 ```rust
-pub async fn ingest(
+#[derive(Debug, serde::Serialize, sqlx::FromRow, PartialEq, Eq)]
+pub struct EventSummary {
+    pub source_app: String,
+    pub event_type: String,
+    pub total: i64,
+}
+
+pub async fn summary_for_source(
+    pool: &PgPool,
+    source: &str,
+) -> Result<Vec<EventSummary>, sqlx::Error> {
+    // 來源值一律綁定；同一 SQL statement 取得一致的聚合快照。
+    sqlx::query_as::<_, EventSummary>(
+        "SELECT source_app, event_type, COUNT(*)::bigint AS total
+         FROM product_events
+         WHERE source_app = $1
+         GROUP BY source_app, event_type
+         ORDER BY event_type",
+    ).bind(source).fetch_all(pool).await
+}
+```
+`apps/stats_server/src/lib.rs` 在 build_app 之前新增：
+```rust
+async fn source_summary(
     State(state): State<IngestState>,
+    axum::extract::Path(source): axum::extract::Path<String>,
     headers: HeaderMap,
-    Json(event): Json<EventInput>,
-) -> StatusCode {
-    if !valid_event(&event) { return StatusCode::BAD_REQUEST; }
+) -> Result<Json<Vec<pg_store::EventSummary>>, StatusCode> {
+    if !matches!(source.as_str(), "web_chat" | "desktop_pet") {
+        return Err(StatusCode::BAD_REQUEST);
+    }
     let authorization = headers.get(AUTHORIZATION)
         .and_then(|value| value.to_str().ok()).unwrap_or("");
-    if !state.tokens.authorized(&event.source_app, authorization) {
-        return StatusCode::UNAUTHORIZED;
+    // URL 來源必須與憑證相符；不接受另一來源的 token。
+    if !state.tokens.authorized(&source, authorization) {
+        return Err(StatusCode::UNAUTHORIZED);
     }
-    match pg_store::persist_event(&state.pool, &event).await {
-        Ok(outcome) => outcome_status(outcome),
-        Err(PersistError::Invalid) => StatusCode::BAD_REQUEST,
-        Err(PersistError::Database(_)) => StatusCode::SERVICE_UNAVAILABLE,
-    }
+    let rows = pg_store::summary_for_source(&state.pool, &source)
+        .await.map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
+    Ok(Json(rows))
 }
+```
+完整替換同檔既有 build_app：
+```rust
 pub fn build_app(state: IngestState) -> Router {
     Router::new()
         .route("/healthz", get(health))
         .route("/api/v1/events", post(ingest))
+        .route("/api/v1/events/{source}/summary", get(source_summary))
         .with_state(state)
         .layer(DefaultBodyLimit::max(4096))
 }
 ```
-`apps/stats_server/src/main.rs` **完整替換**：
-```rust
-use stats_server::{IngestState, IngestTokens, build_app};
-use std::sync::Arc;
-
-#[tokio::main]
-async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    // 啟動時 fail-closed；不得把密鑰值寫入日誌。
-    let database_url = std::env::var("ANALYTICS_DATABASE_URL")?;
-    let chat = std::env::var("ANALYTICS_CHAT_TOKEN")?;
-    let pet = std::env::var("ANALYTICS_PET_TOKEN")?;
-    if chat.is_empty() || pet.is_empty() || chat == pet
-        || chat.len() > 512 || pet.len() > 512
-    {
-        return Err("來源憑證設定不合法".into());
-    }
-    let pool = sqlx::PgPool::connect(&database_url).await?;
-    // Migration 由既有 DB 管理流程預先套用；不可修改已套用 migration。
-    let app = build_app(IngestState {
-        pool,
-        tokens: Arc::new(IngestTokens { chat, pet }),
-    });
-    let listener = tokio::net::TcpListener::bind("127.0.0.1:3100").await?;
-    axum::serve(listener, app).await?;
-    Ok(())
-}
-```
-真實呼叫路徑：`main` 建立 `PgPool`／來源憑證 → `build_app(state)` → `POST /api/v1/events` → `ingest` 驗證 → `pg_store::persist_event` → PostgreSQL `product_events` → 依 `PersistOutcome` 回應。有效事件只有 DB 完成後才回 201／200。
-### Refactor／必要安全與功能限制
-- 保留 `pg_store` 原 SQL 和資料庫唯一鍵，不使用 `InMemoryDeduplicator` 代替持久冪等；不將 SQLx 放進 Domain。
-- 來源憑證從**執行時環境**注入，教學／測試不讀真實密鑰、不印出值。上述手寫位元比較僅供本地最小切片，**尚未經密碼學安全審查**；正式安全 Gate 應替換為經審查的 constant-time 驗證或受信任本地身分機制，並驗證 header／token 長度上限與憑證輪替。
-- `source_app` 與所選 token 綁定；不接受只有合法 JSON 就寫入。Loopback 限制不等於來源認證，亦不代表可公開部署。
-- PostgreSQL 冪等查詢與寫入併發、故障重試、逐事件 ACK、gRPC／Protobuf、HTTP Query／SSE 均須後續測試／切片；不因本次 HTTP Adapter 存在就標記完成。
-### 實際套用補充（2026-10-15）
-本地已提交 `a57e532c125f5f18d7fd2a250401efde0c9d2612`。HTTP state／來源 token／PostgreSQL 呼叫／回應映射與本日兩個測試均已套用，真實路徑已實測。`apps/stats_server/src/main.rs` 在 main 開頭另加入 `dotenv::dotenv().ok();`；`apps/stats_server/Cargo.toml` 與 `tests/Cargo.toml` 新增既有 workspace 的 dotenv 依賴，tests 同時加入 sqlx。精確檔案與完整差異見[實際提交](https://github.com/williechen/rust_ai_chat/commit/a57e532c125f5f18d7fd2a250401efde0c9d2612)，原教學程式區塊保留。
-`tests/analytics/event_kind_tests.rs` 與 `http_contract_tests.rs` 已配合 `IngestState`／`build_app(state)` 更新：合法輸入但沒有 token 預期 401，舊測試名稱雖仍含 unimplemented／501，斷言已改為 401。執行 workspace 測試須先建立隔離 PostgreSQL，設定 `ANALYTICS_DATABASE_URL` 與兩個不同的合成來源 token；HTTP 實測前套用 `apps/stats_server/migrations`。本次未讀取私人 .env；使用者已在最新 `test.yml` 補齊 fixture，test-workspace 已通過，詳見第 4 節與[已修正的 CI 測試環境說明](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/source-review/DAY12_CI_ENVIRONMENT.md)。`persistence.yml` 的 env／service 不會傳到另一個 workflow 的 test-workspace；本次修正已直接設在 test.yml，助手未寫入學習倉庫。
+其他 imports 已存在，無新 crate／無 main 設定變更。真實流程：GET 路由 → source_summary → 檢查 source／來源 token → pg_store::summary_for_source → PostgreSQL group by → JSON；DB 失敗回 503，不回空成功。空資料回 200 與 \[\]。輸出只含 source_app、event_type、total，不包含憑證／本文／路徑／event_id。
+### Refactor
+沿用上方 `pg_store::summary_for_source` 的單一參數化 SQL 與 `source_summary` 的授權／回應映射；SQL 留在 Adapter，HTTP handler 不複製聚合邏輯。套用時保留現有攝取函式及測試，只按本節指定位置新增／替換。本次沒有額外必要補加實作。
+### 必要補加實作
+N/A。本次為文章格式與同步修正，沒有新增功能實作；日後需要補加時，在本節末尾沿用 Red → 最小 Green → Refactor → 驗證格式接續完整實作。
 ## 3. 套件版本
-- 沿用既有 `axum`、`sqlx`、`tokio`、`serde`、`uuid`；實際套用另在 stats-server／workspace-tests 加入既有 workspace 的 `dotenv`，Cargo.lock 精確版本為 `0.15.0`；workspace-tests 同時使用既有 `sqlx`。
-- Cargo.lock 精確版本、官方 stable／MSRV／安全公告本次**未重新查證**。
+workspace 0.2.12／edition 2024。沿用 axum 宣告 0.8／lock 0.8.9、sqlx 0.9／0.9.0（既有 postgres、macros feature）、serde 1.0／1.0.229、tokio 1.53／1.53.3、uuid 1.28／1.28.0；新 DTO 使用既有 serde Serialize 與 SQLx FromRow，不新增／升級依賴。官方 stable／MSRV／安全公告本次未另查證；既有 CI 不代表新增查詢已通過相容性測試。
 ## 4. 驗證項目
-- 建議：`cargo test -p stats-server`、`cargo test -p stats-server --features postgres-integration`（需隔離測試 DB）、`cargo fmt --all -- --check`、`cargo clippy -p stats-server --all-targets -- -D warnings`。
-- HTTP＋DB E2E 必測：無 token 401、跨來源 token 401、無效 payload 400、首次 201、相同 ID 相同內容 200、相同 ID 不同內容 409、DB 不可用 503 且無成功 ACK、重啟後仍去重、同 ID 並發及來源隔離。
-- 必須在測試前建立獨立 PostgreSQL、套用既有 migrations；不得用 HashSet 成功取代 DB 測試。gRPC／Protobuf 與 SSE 尚未涵蓋。
-- 程式與新增測試已套用；本地真實 HTTP／PostgreSQL 的 401／400／201／200／409／503、來源隔離、同 ID 併發與重啟去重通過。GitHub CI 另列，gRPC／SSE／正式安全與整體驗收未完成。
-### 來源驗證最終判定（2026-10-16）
-**目前狀態：test-workspace 的 Analytics 測試環境缺口已修正，最新 GitHub CI 全部通過。** `rust_ai_chat/main@d05438950b96e03c9c6c6f8f2c7e3573cc191a25` 的 6／6 workflows、18／18 checks 均為 Success；[Test All／test-workspace 成功紀錄](https://github.com/williechen/rust_ai_chat/actions/runs/38765474606/job/116527415647)。最新 test.yml 已提供獨立 PostgreSQL、`ANALYTICS_DATABASE_URL` 與兩個合成來源 token。「缺少 Analytics 資料庫與 token」是舊提交 `a57e532` 的失敗原因，已不再是當前阻礙。
-本地正式驗證仍精確對應 `a57e532c125f5f18d7fd2a250401efde0c9d2612`：107 項 Rust、3 項 Node、fmt、嚴格 Clippy、SSR／兩個 WASM、Linux 原生／Chat Leptos／Pet 前端 Release，以及 14 項實際 HTTP／WS／DB 檢查通過。已唯讀比對 `a57e532..d054389`，只有 `test.yml` 與 `persistence.yml` 改動，應用程式／測試／依賴鎖均未變；因此保留原本地證據，不冒稱已對新 SHA 重跑全部本地驗證。[精確來源、CI 與可攜式證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/source-review/rust-ai-chat-validation.json)。
-Day 12 已由使用者套用；原撰寫基底 `5a0a8ce` 與全部原教學程式區塊保留。Analytics HTTP 已接 PostgreSQL，Typing／來源認證／持久冪等／併發／重啟／DB 故障測試通過。Pet 實際 GUI 移動、跨平台安裝包、gRPC／SSE 銜接及正式憑證安全審查仍未由本次驗證完成；不將 CI 全綠當作全部 Day／P9／週六或學習階段完成。未讀取私人 .env／AI key，未執行付費 AI，未寫入 rust_ai_chat。
+### 實作邊界與未完成項目
+SQL 僅在既有 Adapter，採 \$1 bind，避免用字串拼 SQL 或記憶體 HashSet 假聚合；單次 SELECT 對應一次 statement snapshot。查詢不引用 event_id，測試在同一隔離 DB 將 VARCHAR(40) 改 UUID 後仍可讀；這是測試 schema 操作，不更改已套用 migration，也不表示舊 ingest 在 UUID 模式已驗收。
+沿用 Day 12 手寫 token 比較，其正式密碼學安全審查未完成，loopback 不等於可公開部署。沒有新增 gRPC／Protobuf／ACK、SSE、Dashboard UI、治理／封存／撤回、Token 費用／額度或 OTel。這些留原 FUTURE_WORK 項目，不標完成；本日統計是已存事件列數，不是獨立使用者、帳單或釋放空間。未變檔 N/A。
+### 驗證命令與結果
+本次重新查核最新來源 SHA 的六份 workflow 定義與實際紀錄：Rust AI Chat、Test All、Persistence、Node、Rust Dashboard、Rust Desktop Pet，6/6 workflows、18/18 checks 均 completed/success，沒有 skipped/cancelled/pending check。main 未設 branch protection 必要 contexts；另無 legacy commit-status context（status API 的 pending/total_count=0 只表示沒有 legacy status，並非一個待完成工作），此庫適用 Gate 為上述 Actions/check-runs，已逐一核對，沒有用歷史 CI 替代。[匹配 SHA 的 CI](https://github.com/williechen/rust_ai_chat/actions?query=branch%3Amain)。基準 CI 通過只允許教學發布，不代表以下新增程式已套用或測試通過。
+```bash
+cargo test --locked -p stats-server source_summary_tests
+cargo test --locked -p stats-server --features postgres-integration source_summary_tests
+cargo test --locked -p stats-server --features postgres-integration --test postgres_event_store
+cargo fmt --all -- --check
+cargo clippy --locked -p stats-server --all-targets --features postgres-integration -- -D warnings
+```
+資料庫測試須由使用者提供專用 PostgreSQL 與測試 runner 所需 DATABASE_URL（例如本地隔離 fixture），sqlx::test 每測試獨立建庫並套用原 migrations；不得指向私人或正式 DB。這裡未讀取／列印任何密鑰，不新增載入 .env 的指令。
+預期 Red 缺新函式；Green 同來源 200 JSON、跨來源／無憑證 401、未知來源 400、DB 關閉 503、重送不加計、rollback 不可見。另需啟動隔離服務後以合成憑證實際 HTTP GET 核對同一路由、Content-Type、上述 status、JSON 及 DB 計數；本日私有 handler 測試不能代替 router/socket E2E。
+本次未套用程式、未執行新測試或 PostgreSQL／HTTP E2E，Red／Green 為待執行預期；來源 SHA 的 CI 已重新查核。程式尚待套用、功能尚未由本日實作證明、正式驗收未通過；教學發布與讀回依實際交易紀錄。未讀密鑰、未執行付費 AI、未修改 tag。
