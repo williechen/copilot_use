@@ -29,7 +29,7 @@ python3 scripts/local-verify.py --live-openai
 
 ## 現行文件
 
-[現行三專案 Day 12 文章鏡像](docs/teaching/current/README.md) · [先本地、後 GitHub 的參考庫驗證](docs/source-review/rust-ai-chat-validation.json)（Day12 已套用於 a57e532；本地正式驗證通過，同 SHA GitHub CI：failed；GUI／整體驗收另列）。
+[現行三專案 Day 12 文章鏡像](docs/teaching/current/README.md) · [先本地、後 GitHub 的參考庫驗證](docs/source-review/rust-ai-chat-validation.json)（Day12 已套用；本地 a57e532 正式驗證通過，最新 d054389 僅 CI 變更且 6／6 workflows、18／18 checks 通過；GUI／整體驗收另列）。
 
 [目前系統架構與 DB 表格](docs/SYSTEM_ARCHITECTURE.md) · [教學格式與執行方式](docs/TEACHING_FORMAT.md)
 

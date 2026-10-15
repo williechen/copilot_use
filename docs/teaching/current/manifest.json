@@ -11,11 +11,12 @@
       "original_content_sha256": "e116ee6233d998de5aa6ae9d261ee9a106cb6e242165462ebb0b475cd70a76aa",
       "four_sections": true,
       "code_applied": true,
-      "synced_content_sha256": "8e5611f51013081a84e54a0b188f9080dccf08c21070975dbc48f827c3751a69",
+      "synced_content_sha256": "3eae77ef7b0ee01f8a929af9e5409cd83f48c5ac8cfa1aedbc013136fefe15bd",
       "notion_readback_verified": true,
       "validation_source_sha": "a57e532c125f5f18d7fd2a250401efde0c9d2612",
-      "validation_final_status": "Day12 applied and Linux local formal passed; GitHub CI failed; GUI/full acceptance separate",
-      "mirror_has_title_and_source_wrapper": true
+      "validation_final_status": "Day12 applied; local a57e532 formal passed; unchanged application/latest d054389 CI all success",
+      "mirror_has_title_and_source_wrapper": true,
+      "latest_ci_sha": "d05438950b96e03c9c6c6f8f2c7e3573cc191a25"
     },
     {
       "project": "pet",
@@ -27,11 +28,12 @@
       "original_content_sha256": "22687ac6a0ec891e8974468b6a27a2e118b3fc5e50a9a70ae63d091ffd9462fb",
       "four_sections": true,
       "code_applied": true,
-      "synced_content_sha256": "38cd15449b603d96f081c0d0fb354c85dd6fa2bf5be27f0521087499c2f296c4",
+      "synced_content_sha256": "435308847537e5ec1dfaf8a98ab2c23b1eb14507469554b861b2d7d861bd4744",
       "notion_readback_verified": true,
       "validation_source_sha": "a57e532c125f5f18d7fd2a250401efde0c9d2612",
-      "validation_final_status": "Day12 applied and Linux local formal passed; GitHub CI failed; GUI/full acceptance separate",
-      "mirror_has_title_and_source_wrapper": true
+      "validation_final_status": "Day12 applied; local a57e532 formal passed; unchanged application/latest d054389 CI all success",
+      "mirror_has_title_and_source_wrapper": true,
+      "latest_ci_sha": "d05438950b96e03c9c6c6f8f2c7e3573cc191a25"
     },
     {
       "project": "analytics",
@@ -43,15 +45,17 @@
       "original_content_sha256": "aba50445ca417d83315a3cf3daf0b0a34c8a44fb4f268a95274ccb3425c65704",
       "four_sections": true,
       "code_applied": true,
-      "synced_content_sha256": "9c9b37f7b3a6ced517539b1061a0484a6cebdaf301f2fa0cfa9f43c9a72f18ea",
+      "synced_content_sha256": "2c123227bee9afc583fddf5327c852b53932f3fa459c16c2fa63b75a351e5ebb",
       "notion_readback_verified": true,
       "validation_source_sha": "a57e532c125f5f18d7fd2a250401efde0c9d2612",
-      "validation_final_status": "Day12 applied and Linux local formal passed; GitHub CI failed; GUI/full acceptance separate",
-      "mirror_has_title_and_source_wrapper": true
+      "validation_final_status": "Day12 applied; local a57e532 formal passed; unchanged application/latest d054389 CI all success",
+      "mirror_has_title_and_source_wrapper": true,
+      "latest_ci_sha": "d05438950b96e03c9c6c6f8f2c7e3573cc191a25"
     }
   ],
-  "synced_at": "2026-10-15T21:54:07.303958+08:00",
+  "synced_at": "2026-10-16T00:17:56.399878+08:00",
   "code_applied": true,
   "validation_source_sha": "a57e532c125f5f18d7fd2a250401efde0c9d2612",
-  "final_status": "Day12 applied; Linux local formal passed; matching SHA GitHub CI failed"
+  "final_status": "Day12 applied; local formal a57e532 passed; application unchanged and latest d054389 CI all success",
+  "latest_ci_sha": "d05438950b96e03c9c6c6f8f2c7e3573cc191a25"
 }

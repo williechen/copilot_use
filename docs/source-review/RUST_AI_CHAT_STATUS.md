@@ -1,21 +1,15 @@
-# rust_ai_chat Day 12 正式驗證判定
+# rust_ai_chat Day 12 驗證判定
 
-實際本地專案 `/home/willie/Documents/rust_ai_chat`，驗證取樣時的乾淨提交 `a57e532c125f5f18d7fd2a250401efde0c9d2612`；時間 `2026-10-15T21:53:02.011664+08:00`。先驗本地，再核對同 SHA GitHub，未修改學習倉庫。
+最新來源 `d05438950b96e03c9c6c6f8f2c7e3573cc191a25`；核對時間 `2026-10-16T00:17:56.399878+08:00`。學習倉庫保持唯讀。
 
-| 範圍 | 判定 |
+| 範圍 | 目前判定 |
 |---|---|
-| Linux 本地正式驗證 | 通過：107 項 Rust、3 項 Node、fmt、嚴格 Clippy、SSR／兩個 WASM |
-| Release 建置 | Linux native、Chat Leptos SSR/hydrate、Pet frontend 通過 |
-| Chat Day 12 | 實作與測試已套用；實際 WS Typing 廣播／房間隔離／不寫訊息通過 |
-| Pet Day 12 | 明確啟用控制測試與 native build 通過；實際 GUI 移動尚未驗證 |
-| Analytics Day 12 | HTTP／PostgreSQL 真實攝取、認證、201／200／409／400／503、併發、重啟去重通過 |
-| 同 SHA GitHub CI | 3/6 workflows、13/18 checks，failed |
-| 全部 Day 12／P9／週六驗收 | 不宣稱全部完成；未前移週驗收或學習階段 |
+| test-workspace 的 Analytics 環境缺口 | 已修正：test.yml 已配置獨立 PostgreSQL、資料庫 URL 與兩個合成來源 token |
+| 最新 GitHub CI | 全部成功：6／6 workflows、18／18 checks |
+| 本地正式驗證 | `a57e532c125f5f18d7fd2a250401efde0c9d2612`：107 項 Rust、3 項 Node、fmt、嚴格 Clippy、SSR／兩個 WASM、三組 Release 與 14 項 HTTP／WS／DB 檢查通過 |
+| 新舊 source 比對 | a57e532..d054389 僅兩份 CI workflow 變更，應用程式／測試／Cargo.lock 不變；沿用原本地證據，未對新 SHA 重跑全部本地驗證 |
+| Day 12 | 程式已套用、本地 Green 驗證與最新 CI 通過；實際 GUI／完整產品驗收分開記錄 |
 
-Analytics 現已接上 PostgreSQL，已不再對有效事件固定回 501。當前 Test All workflow 未提供新增 workspace 測試要求的 ANALYTICS_DATABASE_URL／兩個來源 token／PostgreSQL；本次本地使用獨立資料庫與合成 token，CI 結果另列，不沿用舊 SHA 綠燈。rust_ai_chat 嚴格唯讀，不修改其 workflow。
+「缺少 Analytics 資料庫與 token」是 a57e532 的舊失敗原因，已不是當前阻礙。Analytics HTTP 已接 PostgreSQL，不再固定回 501；401／400／201／200／409／503、併發與重啟去重已在原本地 Release 驗證通過。Pet GUI、跨平台安裝包、gRPC／SSE 銜接及正式憑證安全審查仍未由本輪完成；不宣稱完整 P9、週六驗收或學習階段完成。未讀密鑰或執行付費 AI。
 
-未操作實際 GUI／跨平台安裝包；gRPC／SSE 及正式憑證安全審查不在本次 HTTP 切片通過範圍。未讀取私人 .env／AI key、未執行付費 AI。`.env.example` 的 PET_ENABLE_ROAM=true 與 PET_AUTHORIZED_ROOT=/ 不是本次安全測試設定；本次未授權或掃描根目錄。
-
-[精確結果](rust-ai-chat-validation.json) · [可攜式命令／日誌／來源雜湊](rust-ai-chat-validation-logs.zip) · [三篇文章](../teaching/current/README.md)。
-
-[CI 測試環境診斷與待套用設定](DAY12_CI_ENVIRONMENT.md)。驗證取樣後本地 `persistence.yml` 出現未提交調整，未納入上述 SHA 的驗證／CI；其 env 不會作用到另一個 workflow 的 test-workspace。
+[成功的 test-workspace](https://github.com/williechen/rust_ai_chat/actions/runs/38765474606/job/116527415647) · [已套用的 CI 設定](DAY12_CI_ENVIRONMENT.md) · [精確證據](rust-ai-chat-validation.json) · [可攜式日誌](rust-ai-chat-validation-logs.zip) · [三篇文章](../teaching/current/README.md)。

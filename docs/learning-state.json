@@ -1,5 +1,5 @@
 {
-  "reference_sha": "a57e532c125f5f18d7fd2a250401efde0c9d2612",
+  "reference_sha": "d05438950b96e03c9c6c6f8f2c7e3573cc191a25",
   "validated_program_sha": "39f34854b102eb96b44980d42d7b3f272307ec20",
   "validated_program_ci_run": 38290016342,
   "fixed_tag": "v0.1.0",
@@ -21,7 +21,7 @@
     "analytics": "PostgreSQL"
   },
   "reference_source_db_observation": {
-    "sha": "a57e532c125f5f18d7fd2a250401efde0c9d2612",
+    "sha": "d05438950b96e03c9c6c6f8f2c7e3573cc191a25",
     "chat": "SQLite via CHAT_DATABASE_URL; WS typing is transient, no message DB write",
     "pet": "reference has FSM/native roaming and SHA256 preview IPC; no PetStore SQLite product equivalent",
     "writable": false,
@@ -203,10 +203,10 @@
     "Chat SSE completion: recheck current session/room authorization before persisting; static finding, regression not executed"
   ],
   "reference_validation": {
-    "checked_at": "2026-10-15T21:53:02.011664+08:00",
-    "reference_sha": "a57e532c125f5f18d7fd2a250401efde0c9d2612",
+    "checked_at": "2026-10-16T00:17:56.399878+08:00",
+    "reference_sha": "d05438950b96e03c9c6c6f8f2c7e3573cc191a25",
     "evidence": "docs/source-review/rust-ai-chat-validation.json",
-    "final_status": "local Linux formal passed; matching SHA GitHub failed",
+    "final_status": "prior local formal passed; latest CI environment fixed and all workflows/checks success",
     "local_tests": {
       "passed": 107,
       "failed": 0,
@@ -216,23 +216,25 @@
     "strict_clippy": "passed -D warnings",
     "release_builds": "Linux native, Chat Leptos SSR/hydrate and Pet frontend passed",
     "remote_ci": {
-      "checked_at": "2026-10-15T21:52:19.647016+08:00",
-      "reference_sha": "a57e532c125f5f18d7fd2a250401efde0c9d2612",
-      "latest_main_sha": "a57e532c125f5f18d7fd2a250401efde0c9d2612",
+      "checked_at": "2026-10-16T00:17:56.399878+08:00",
+      "reference_sha": "d05438950b96e03c9c6c6f8f2c7e3573cc191a25",
+      "latest_main_sha": "d05438950b96e03c9c6c6f8f2c7e3573cc191a25",
       "latest_sha_matches": true,
-      "gate": "failed",
-      "workflow_success": 3,
+      "gate": "success",
+      "workflow_success": 6,
       "workflow_total": 6,
-      "check_success": 13,
+      "check_success": 18,
       "check_total": 18,
-      "checked_after_local": true,
-      "failed_job": "https://github.com/williechen/rust_ai_chat/actions/runs/38745289793/job/116457220577"
+      "checked_after_local": true
     },
-    "reference_product_acceptance": "Day12 implemented; local functional checks passed; GUI/full security/P9 acceptance not claimed",
-    "copilot_use_product_acceptance": "not revalidated; preserve existing evidence"
+    "reference_product_acceptance": "Day12 applied/local Green verified; latest CI success; GUI/full security/P9 acceptance not claimed",
+    "copilot_use_product_acceptance": "not revalidated; preserve existing evidence",
+    "local_formal_source_sha": "a57e532c125f5f18d7fd2a250401efde0c9d2612",
+    "local_formal_reexecuted": false,
+    "application_source_unchanged_since_local": true
   },
   "article_sync": {
-    "checked_at": "2026-10-15T21:54:07.303958+08:00",
+    "checked_at": "2026-10-16T00:17:56.399878+08:00",
     "source_sha": "5a0a8cee0d1fb4d0cd248869d7b24ebb1d653399",
     "current_articles": "docs/teaching/current/manifest.json",
     "existing_day": 12,
@@ -241,8 +243,9 @@
     "new_day_published": false,
     "next_day_advanced": false,
     "validation_source_sha": "a57e532c125f5f18d7fd2a250401efde0c9d2612",
-    "final_verdict": "Day12 applied and local formal passed; GitHub failed",
+    "final_verdict": "Day12 applied; local formal a57e532 passed; application unchanged and latest d054389 CI all success",
     "implementation_applied": true,
-    "new_lesson_tests_executed": true
+    "new_lesson_tests_executed": true,
+    "latest_ci_sha": "d05438950b96e03c9c6c6f8f2c7e3573cc191a25"
   }
 }
