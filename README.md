@@ -29,6 +29,8 @@ python3 scripts/local-verify.py --live-openai
 
 ## 現行文件
 
+[現行三專案 Day 12 文章鏡像](docs/teaching/current/README.md) · [先本地、後 GitHub 的參考庫驗證](docs/source-review/rust-ai-chat-validation.json)（GitHub CI 成功，本地嚴格 Clippy 尚未通過）。
+
 [目前系統架構與 DB 表格](docs/SYSTEM_ARCHITECTURE.md) · [教學格式與執行方式](docs/TEACHING_FORMAT.md)
 
 - [共同學習規則](docs/COMMON_LEARNING_RULES.md)：目錄／內容以 rust_ai_chat 為主；目標／前進項目以 copilot_use 為主，其他遵循共同規則。

@@ -1,0 +1,5 @@
+--- a/apps/desktop_pet/src/file_organizer.rs
++++ b/apps/desktop_pet/src/file_organizer.rs
+@@ -309,2 +309 @@
+-#[cfg_attr(not(test), expect(dead_code, reason = "重複檔案預覽尚待接入產品入口"))]
+ pub fn duplicate_preview(scan: &FileScan) -> DuplicatePreview {

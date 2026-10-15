@@ -50,3 +50,9 @@ Analytics 為匿名事件和受控詞頻的描述性計數，不代表獨立真�
 rust_ai_chat 的 Day 10 三項契約已實作並通過本地測試，但 Chat WS 房間守衛、Pet 驗證後外觀解析與 Analytics 去重入口仍僅測試使用；Analytics 有效 HTTP 事件仍回 501，故參考庫的產品路徑驗收未通過。此結果不替代 copilot_use 的固定成品／`validated_program_sha` 證據；本輪未重新驗收 copilot_use。copilot_use 的視窗漫遊、SHA256 重複檔案分組及 SSE 授權修正仍按既有來源列為未實作／待驗收，活動項目維持在 [FUTURE_WORK.md](FUTURE_WORK.md)。`last_full_comparison=null`、Day／階段及週六到期日未前移。
 
 週六功能 Gate 依共同規則排除 AI 項目，不讀取 key、不以 AI 未重測阻擋功能通過；固定 Release 的 AI 證據及選擇性真實 AI 操作仍只歸屬原來源。每日 Day 由適用 CI Gate 決定，與週六提交／功能驗收及學習套用分開。
+
+## 學習參考庫的當前驗證
+
+rust_ai_chat `5a0a8ce` 已依「先本地正式驗證、再核對相同 SHA GitHub」執行。102 項 Rust／3 項 Node 測試、SSR／WASM、Linux native／Chat Leptos／Pet frontend release 及 HTTP／WS／SQLite 檢查通過；嚴格 Clippy 因 file_organizer.rs:309 的失效 expect(dead_code) 未通過。GitHub 6／6 workflows、18／18 checks 成功，未包含這項嚴格 Gate。
+
+[精確命令與結果](source-review/rust-ai-chat-validation.json) · [完整日誌與驗證工具](source-review/rust-ai-chat-validation-logs.zip) · [尚未套用的最小修正 patch](source-review/rust-ai-chat-clippy-fix.patch)。Analytics 的真實 PostgreSQL core 測試通過，但 HTTP 攝取仍回501；Day12教學程式尚待使用者套用，不把既有來源通過算成新功能驗收。未執行GUI互動／跨平台套件、完整兩庫重比對或付費AI。

@@ -1,0 +1,46 @@
+{
+  "scope": "latest existing Notion articles mirrored; not new Day publication",
+  "articles": [
+    {
+      "project": "chat",
+      "day": 12,
+      "notion_page_id": "3fae51d45093812bbf88c3e7f51d6522",
+      "notion_url": "https://app.notion.com/p/3fae51d45093812bbf88c3e7f51d6522?pvs=204",
+      "source_sha": "5a0a8cee0d1fb4d0cd248869d7b24ebb1d653399",
+      "path": "docs/teaching/current/CHAT.md",
+      "original_content_sha256": "e116ee6233d998de5aa6ae9d261ee9a106cb6e242165462ebb0b475cd70a76aa",
+      "four_sections": true,
+      "code_applied": false,
+      "synced_content_sha256": "1d15347ff8ed5f7655071a80a4978fc468ad7df32b1d84085adb877e3f2f70d4",
+      "notion_readback_verified": true
+    },
+    {
+      "project": "pet",
+      "day": 12,
+      "notion_page_id": "3fae51d4509381d0a80ddbbaf251fb03",
+      "notion_url": "https://app.notion.com/p/3fae51d4509381d0a80ddbbaf251fb03?pvs=204",
+      "source_sha": "5a0a8cee0d1fb4d0cd248869d7b24ebb1d653399",
+      "path": "docs/teaching/current/PET.md",
+      "original_content_sha256": "22687ac6a0ec891e8974468b6a27a2e118b3fc5e50a9a70ae63d091ffd9462fb",
+      "four_sections": true,
+      "code_applied": false,
+      "synced_content_sha256": "bda1357b2c6f6ad187755d9a4ba10b628c4a9c4322794bf6f9bf25659bf530c6",
+      "notion_readback_verified": true
+    },
+    {
+      "project": "analytics",
+      "day": 12,
+      "notion_page_id": "3fae51d4509381ebb1e9f8482b5bf44e",
+      "notion_url": "https://app.notion.com/p/3fae51d4509381ebb1e9f8482b5bf44e?pvs=204",
+      "source_sha": "5a0a8cee0d1fb4d0cd248869d7b24ebb1d653399",
+      "path": "docs/teaching/current/ANALYTICS.md",
+      "original_content_sha256": "aba50445ca417d83315a3cf3daf0b0a34c8a44fb4f268a95274ccb3425c65704",
+      "four_sections": true,
+      "code_applied": false,
+      "synced_content_sha256": "6c41e1c00f3b1125dad92afe2597863d020c650e05d713cef3a13e214290f430",
+      "notion_readback_verified": true
+    }
+  ],
+  "synced_at": "2026-10-15T10:17:51.907984+08:00",
+  "code_applied": false
+}

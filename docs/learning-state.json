@@ -1,5 +1,5 @@
 {
-  "reference_sha": "3b524f4720efbda691a8d2829b47e3b7dd8b45a5",
+  "reference_sha": "5a0a8cee0d1fb4d0cd248869d7b24ebb1d653399",
   "validated_program_sha": "39f34854b102eb96b44980d42d7b3f272307ec20",
   "validated_program_ci_run": 38290016342,
   "fixed_tag": "v0.1.0",
@@ -21,10 +21,11 @@
     "analytics": "PostgreSQL"
   },
   "reference_source_db_observation": {
-    "sha": "16261e0ebeef1a888997cc0ebc42b08ceaf8db24",
-    "chat": "latest main uses SqlitePool and SqliteRoomRepository/SqliteMessageRepository; product retains durable Outbox/realtime and its own migrations",
-    "pet": "SQLite product target; current reference Profile/FSM does not establish product persistence equivalence",
-    "writable": false
+    "sha": "5a0a8cee0d1fb4d0cd248869d7b24ebb1d653399",
+    "chat": "SqlitePool with room guard wired through WS persist_ws_message; current schema tests passed",
+    "pet": "reference has FSM/native roaming and SHA256 preview IPC; no PetStore SQLite product equivalent",
+    "writable": false,
+    "analytics": "PostgreSQL pg_store core real integration passes; HTTP ingress still returns 501 and is not wired to pg_store"
   },
   "analytics_transport": {
     "ingestion": "gRPC/Protobuf",
@@ -202,23 +203,35 @@
     "Chat SSE completion: recheck current session/room authorization before persisting; static finding, regression not executed"
   ],
   "reference_validation": {
-    "checked_at": "2026-10-14T21:51:36+08:00",
-    "reference_sha": "3b524f4720efbda691a8d2829b47e3b7dd8b45a5",
+    "checked_at": "2026-10-15T10:17:51.907984+08:00",
+    "reference_sha": "5a0a8cee0d1fb4d0cd248869d7b24ebb1d653399",
     "evidence": "docs/source-review/rust-ai-chat-validation.json",
     "local_tests": {
-      "passed": 89,
+      "passed": 102,
       "failed": 0,
       "ignored": 0,
-      "warnings": 0
+      "warnings": 1
     },
+    "local_gate": "failed: strict Clippy obsolete dead_code expectation",
+    "release_builds": "Linux native, Chat Leptos and Pet frontend passed",
     "remote_ci": {
-      "workflows_success": 5,
+      "workflows_success": 6,
       "workflows_total": 6,
-      "checks_success": 16,
+      "checks_success": 18,
       "checks_total": 18,
-      "gate": "pending"
+      "gate": "success"
     },
-    "reference_product_acceptance": "blocked: product call paths not integrated",
+    "reference_product_acceptance": "not completed: strict Clippy failure, HTTP ingestion still501, Day12 implementations pending",
     "copilot_use_product_acceptance": "not revalidated; retain existing matching evidence"
+  },
+  "article_sync": {
+    "checked_at": "2026-10-15T10:17:51.907984+08:00",
+    "source_sha": "5a0a8cee0d1fb4d0cd248869d7b24ebb1d653399",
+    "current_articles": "docs/teaching/current/manifest.json",
+    "existing_day": 12,
+    "four_sections": true,
+    "original_code_preserved": true,
+    "new_day_published": false,
+    "next_day_advanced": false
   }
 }

@@ -7,3 +7,5 @@
 核對完成與產品缺口修正、週六功能驗收、每日 CI／Day、學習套用各自獨立。第三方 vendor 是解析列冊，未宣稱完整人工安全審計。
 
 可閱讀索引已清除行尾空白；完整 ZIP 保留核對原始資料。
+
+當前學習參考庫另見 [先本地、後 GitHub 驗證](rust-ai-chat-validation.json)、[驗證日誌／工具](rust-ai-chat-validation-logs.zip)；這是後續定點驗證，不改寫原完整靜態核對的來源與結果。
