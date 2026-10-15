@@ -47,7 +47,7 @@
       "套件版本",
       "驗證項目"
     ],
-    "content_preservation": "retain original lessons and code; append necessary implementation in the original section 2 format with Red, complete minimum Green, necessary Refactor and verification; explanatory text alone is not implementation",
+    "content_preservation": "retain original lessons; append necessary implementation at end of section 2",
     "weekly_engineering": "separate engineering evidence; never add weekly operations to teaching",
     "weekly_ai_validation": "excluded; functional gates only",
     "phase_transition": "到期切換且不延後；功能未完成則原階段學習未完成，原項目跨階段補加，完工後回填原階段證據"
@@ -234,8 +234,8 @@
     "application_source_unchanged_since_local": true
   },
   "article_sync": {
-    "checked_at": "2026-10-16T06:31:43+08:00",
-    "operation": "revise existing Day13 article format and learning-time accounting; sync current mirrors",
+    "checked_at": "2026-10-16T06:33:32+08:00",
+    "operation": "integrate existing Day13 articles and sync mirrors; remove explanatory rule additions",
     "source_sha": "2aecb0f02f9176287e848b7e4897f28ef3929072",
     "current_articles": "docs/teaching/current/manifest.json",
     "existing_day": 13,
@@ -247,6 +247,6 @@
     "new_lesson_tests_executed": false,
     "notion_readback_verified": true,
     "previous_sync_evidence": "docs/teaching/archive/day-12/article-sync.json",
-    "final_verdict": "Existing Day13 revised and read back; main implementation learning time 20/15/25 minutes; Refactor/additions excluded; no new implementation or acceptance claimed"
+    "final_verdict": "Day13 integrated and read back; original code preserved; main implementation time 20/15/25 minutes, excluding Refactor/additions; no new Day or implementation"
   }
 }

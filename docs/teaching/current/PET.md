@@ -3,7 +3,7 @@
 來源文章：[2026-10-16｜P0 Pet Day 13｜重複預覽顯示群組大小與檔案數](https://app.notion.com/p/3fae51d45093814dbdabee6deac48554?pvs=204)。
 
 ## 1. 學習大綱
-P0／Pet Day 13；主體實作學習時數 15 分鐘。學習時數只計第 2 節的主體實作（Red 與最小 Green）；Refactor／必要補加不計入學習時數，第 1、3、4 節亦不計入。三專案每日主體實作學習時數合計最多 60 分鐘。
+P0／Pet Day 13。主體實作 15 分鐘；Refactor／必要補加不計入學習時數。
 來源：rust_ai_chat/main `2aecb0f02f9176287e848b7e4897f28ef3929072`；copilot_use/main `49e1d946dd3c22ffcc4b1aa0e7715cb5b1686724`；產品教學分支 `1d1668b97e65ccfafc073829f131c93133c8bb7e`。已讀共同規則、P9_TARGET、FUTURE_WORK、SYSTEM_ARCHITECTURE、learning-state 與 Notion 共同／專案／Day 12；共同規則為準。當前 P0，最晚切點 2026-12-12，未達切點也無提前完成證據，不切換階段。首次週六完整比對尚未成功，last_full_comparison 保持 null；本日只核對選題相關差異，不冒稱全量完成。
 對應 FUTURE_WORK 原「FileOrganizer SHA256 重複檔案分組／IPC／UI 接線」及「使用者授權、型別化 preview／confirmation／receipt」項目。最新 file_[organizer.rs](http://organizer.rs) 已回 DuplicatePreview\{groups,warnings\}，每組含 sizeBytes／itemIds；Day 11 IPC、Day 12 漫遊 opt-in 都已套用。本日不重做掃描／SHA256，而是讓 UI 顯示每組的檔案大小及數量，並避免舊結果誤作本次結果。
 成品 pet_runtime 的 private directory／no-follow／receipt 是行為及安全目標；成品 SHA256 分組仍列未完成，不能聲稱已有成品等價。保留學習庫既有 Tauri → JS → WASM 路線與無路徑參數命令，不把成品檔名硬搬過來。
@@ -145,9 +145,7 @@ let (duplicate_loading, set_duplicate_loading) = signal(false);
 }
 ```
 ### Refactor
-沿用上方已提供的 `duplicate_preview.rs` 私有模組：純顯示型別與 `summary` 集中於此，`bridge.rs` 只負責 IPC 反序列化，`App` 只管理請求與呈現。套用時以本節列出的完整模組及替換片段為準，不再新增同名型別或第二套掃描流程。本次沒有額外必要補加實作。
-### 必要補加實作
-N/A。本次為文章格式與同步修正，沒有新增功能實作；日後需要補加時，在本節末尾沿用 Red → 最小 Green → Refactor → 驗證格式接續完整實作。
+將預覽顯示整理為三個職責：`duplicate_preview.rs` 的 `summary` 產生純文字摘要；`bridge.rs` 反序列化 IPC 結果；`App` 管理載入、錯誤與畫面。顯示模型僅保留大小與數量，避免 hash、opaque ID 及警告路徑進入畫面。
 ## 3. 套件版本
 workspace 0.2.12。frontend 既有宣告 leptos 0.8、serde 1.0、serde-wasm-bindgen 0.6、wasm-bindgen 0.2；同 SHA lock 分別 0.8.22、1.0.229、0.6.5、0.2.129；Tauri lock 2.12.4（不可沿用舊 Day 的 2.12.3 當今日版本）。測試沿用 workspace serde_json 1.0／lock 1.0.154，不升級依賴。官方最新 stable／MSRV／安全公告與新功能 native/WASM 相容性本次未查證。
 ## 4. 驗證項目

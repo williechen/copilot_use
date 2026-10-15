@@ -3,7 +3,7 @@
 來源文章：[2026-10-16｜P0 Analytics Day 13｜來源隔離的 PostgreSQL 統計查詢](https://app.notion.com/p/3fae51d4509381808a9cd813423d52d1?pvs=204)。
 
 ## 1. 學習大綱
-P0／Analytics Day 13；主體實作學習時數 25 分鐘。學習時數只計第 2 節的主體實作（Red 與最小 Green）；Refactor／必要補加不計入學習時數，第 1、3、4 節亦不計入。三專案每日主體實作學習時數合計最多 60 分鐘。
+P0／Analytics Day 13。主體實作 25 分鐘；Refactor／必要補加不計入學習時數。
 來源：rust_ai_chat/main `2aecb0f02f9176287e848b7e4897f28ef3929072`；copilot_use/main `49e1d946dd3c22ffcc4b1aa0e7715cb5b1686724`；產品教學分支 `1d1668b97e65ccfafc073829f131c93133c8bb7e`。已讀共同規則、P9_TARGET、FUTURE_WORK、SYSTEM_ARCHITECTURE、learning-state 與 Notion 共同／專案／Day 12；共同規則為準。當前 P0，最晚切點 2026-12-12，未達切點也無提前完成證據，不切換階段。首次週六完整比對尚未成功，last_full_comparison 保持 null；本日只核對選題相關差異，不冒稱全量完成。
 對應 FUTURE_WORK 原「同服務 Dashboard／Ingest／Query」與「四欄事件及來源權限、獨立 PostgreSQL／持久冪等」。最新 HTTP ingest 已接 pg_store::persist_event，Day 12 不再是 501；目前 build_app 只有 /healthz 與 POST /api/v1/events，沒有查詢入口。
 成品 `apps/stats_server/src/lib.rs`::summary、[persistence.rs](http://persistence.rs)::EventStore::summary 已能依來源／事件類型聚合；學習庫沿用現有 pg_store 與 IngestState，新增來源授權的 GET /api/v1/events/\{source\}/summary。成品以獨立 API token 查全域資料；本日為避免直接搬入其整套狀態與管理權限，沿用學習庫來源 token，只能讀同來源聚合，不提供跨來源管理查詢。
@@ -163,9 +163,7 @@ pub fn build_app(state: IngestState) -> Router {
 ```
 其他 imports 已存在，無新 crate／無 main 設定變更。真實流程：GET 路由 → source_summary → 檢查 source／來源 token → pg_store::summary_for_source → PostgreSQL group by → JSON；DB 失敗回 503，不回空成功。空資料回 200 與 \[\]。輸出只含 source_app、event_type、total，不包含憑證／本文／路徑／event_id。
 ### Refactor
-沿用上方 `pg_store::summary_for_source` 的單一參數化 SQL 與 `source_summary` 的授權／回應映射；SQL 留在 Adapter，HTTP handler 不複製聚合邏輯。套用時保留現有攝取函式及測試，只按本節指定位置新增／替換。本次沒有額外必要補加實作。
-### 必要補加實作
-N/A。本次為文章格式與同步修正，沒有新增功能實作；日後需要補加時，在本節末尾沿用 Red → 最小 Green → Refactor → 驗證格式接續完整實作。
+聚合 SQL 集中於 `pg_store::summary_for_source`，以參數綁定來源；`source_summary` 處理來源授權與 HTTP 狀態映射。沿用既有 `IngestState`、token 驗證與 PostgreSQL pool，攝取流程及原有測試保留。
 ## 3. 套件版本
 workspace 0.2.12／edition 2024。沿用 axum 宣告 0.8／lock 0.8.9、sqlx 0.9／0.9.0（既有 postgres、macros feature）、serde 1.0／1.0.229、tokio 1.53／1.53.3、uuid 1.28／1.28.0；新 DTO 使用既有 serde Serialize 與 SQLx FromRow，不新增／升級依賴。官方 stable／MSRV／安全公告本次未另查證；既有 CI 不代表新增查詢已通過相容性測試。
 ## 4. 驗證項目

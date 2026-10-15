@@ -3,7 +3,7 @@
 來源文章：[2026-10-16｜P0 Chat Day 13｜HTTP 建房名稱驗證與 201 Created](https://app.notion.com/p/3fae51d4509381e499e5e02cfba58336?pvs=204)。
 
 ## 1. 學習大綱
-P0／Chat Day 13；主體實作學習時數 20 分鐘。學習時數只計第 2 節的主體實作（Red 與最小 Green）；Refactor／必要補加不計入學習時數，第 1、3、4 節亦不計入。三專案每日主體實作學習時數合計最多 60 分鐘。
+P0／Chat Day 13。主體實作 20 分鐘；Refactor／必要補加不計入學習時數。
 來源：rust_ai_chat/main `2aecb0f02f9176287e848b7e4897f28ef3929072`；copilot_use/main `49e1d946dd3c22ffcc4b1aa0e7715cb5b1686724`；產品教學分支 `1d1668b97e65ccfafc073829f131c93133c8bb7e`。已讀共同規則、P9_TARGET、FUTURE_WORK、SYSTEM_ARCHITECTURE、learning-state 與 Notion 共同／專案／Day 12；共同規則為準。當前 P0，最晚切點 2026-12-12，未達切點也無提前完成證據，不切換階段。首次週六完整比對尚未成功，last_full_comparison 保持 null；本日只核對選題相關差異，不冒稱全量完成。
 對應 FUTURE_WORK「參考適配：Room／作者／ID／category、HTTP 建房 DTO／status」及 Chat 訊息／房間模型原項目。確切缺口：最新 `apps/server/src/http.rs` 的 create_room 接受空白／任意長度／NUL 名稱，成功預設回 200；成品 `apps/server/src/main.rs`::create_room 拒絕這些名稱並回 201。
 沿用學習庫的 server 產生 UUID、default-category、CreateRoomRequest\{name\} → CreateRoomResponse\{id\}；成品的 caller ID、Session／ACL／chat_rooms 交易不直接搬入。學習庫 `crates/ui/src/room_api.rs` 使用 response.ok()，因此可接受 201，無須改 UI。Day 12 typing 已存在，不重教。
@@ -111,9 +111,7 @@ pub async fn create_room(
 ```
 呼叫鏈維持 POST /api/rooms → http::create_room → chat_application::create_room → RoomRepository::create → SqliteRoomRepository::create。SQL 留在 persistence，沒有新增 Port、schema 或 migration。其他檔案 N/A。
 ### Refactor
-保留上方最小 Green 的單一 `create_room` 實作；名稱驗證集中在 Repository 呼叫之前，成功回應集中在寫入完成之後。沿用既有 `RoomRepository`，不新增平行服務或重複驗證函式。本次沒有額外重構程式或必要補加實作；上方完整程式與 Red 測試保持原樣。
-### 必要補加實作
-N/A。本次為文章格式與同步修正，沒有新增功能實作；日後需要補加時，在本節末尾沿用 Red → 最小 Green → Refactor → 驗證格式接續完整實作。
+名稱驗證與回應狀態統一由 `http::create_room` 處理：先拒絕非法名稱，再呼叫既有 `RoomRepository`，寫入成功後回傳 201 與既有 JSON。保留 `CreateRoomRequest`、`CreateRoomResponse`、UUID 產生方式與 `default-category`，UI 繼續以 `response.ok()` 接受成功回應。
 ## 3. 套件版本
 workspace 0.2.12／edition 2024。最新 Cargo.toml 宣告 axum 0.8、serde 1.0、tokio 1.53、sqlx 0.9、uuid 1.28；同 SHA Cargo.lock 分別為 0.8.9、1.0.229、1.53.3、0.9.0、1.28.0；serde_json 1.0.154、leptos 0.8.22。維持既有版本，無新依賴／無升級。官方最新 stable、MSRV、安全公告本次未查證；基準 native／WASM CI 通過不能代替新程式相容性驗證。
 ## 4. 驗證項目

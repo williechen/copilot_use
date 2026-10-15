@@ -1,6 +1,6 @@
 {
-  "scope": "Current Day 13 Notion mirrors; article format and learning-time clarification; no new Day publication",
-  "synced_at": "2026-10-16T06:31:43+08:00",
+  "scope": "Integrated existing Day13 articles; current mirrors of Notion; original implementation code preserved",
+  "synced_at": "2026-10-16T06:33:32+08:00",
   "learning_time": {
     "counted": "Section 2 main implementation: Red and minimum Green",
     "excluded": [
@@ -27,7 +27,7 @@
       "code_applied": false,
       "new_lesson_tests_executed": false,
       "formal_acceptance": false,
-      "synced_content_sha256": "c04d71c0b743d259557f68f84f14cd233d9fee38c89cf9178835b36b6f446572",
+      "synced_content_sha256": "b99dc1fc1c174bab348c285e352da7e7b7ea09bebf5eedaa49bb9f583e6c6d3f",
       "notion_readback_verified": true,
       "original_code_preserved": true,
       "mirror_has_title_and_source_wrapper": true
@@ -43,7 +43,7 @@
       "code_applied": false,
       "new_lesson_tests_executed": false,
       "formal_acceptance": false,
-      "synced_content_sha256": "f24a8a125680b61e0fa492ad2e48eb0d230777530019bf5f9a78339f53551603",
+      "synced_content_sha256": "2120b9affd977dc14932f0643cd29367533921f75ceaf13689b73d42e77d1b23",
       "notion_readback_verified": true,
       "original_code_preserved": true,
       "mirror_has_title_and_source_wrapper": true
@@ -59,7 +59,7 @@
       "code_applied": false,
       "new_lesson_tests_executed": false,
       "formal_acceptance": false,
-      "synced_content_sha256": "bf5e5e0911e6d73746e0731f508297645fe13646e09c2074c844fa47cf899a35",
+      "synced_content_sha256": "b15037433f51c1cb6eab766890ad88a50d6f61f386143dd6a37a434dacdf3486",
       "notion_readback_verified": true,
       "original_code_preserved": true,
       "mirror_has_title_and_source_wrapper": true
@@ -67,5 +67,5 @@
   ],
   "previous_mirror_manifest": "docs/teaching/archive/day-12/manifest.json",
   "code_applied": false,
-  "final_status": "Day13 published previously; current revision preserves original code, clarifies additions and learning-time accounting; code not applied and new tests not executed"
+  "final_status": "Day13 prose integrated into the original four sections; explanatory rule additions and empty supplement blocks removed; code not applied and new tests not executed"
 }
