@@ -6,4 +6,4 @@
 - [Pet：桌面漫遊明確啟用控制](PET.md)
 - [Analytics：HTTP 來源驗證與 PostgreSQL 持久化接線](ANALYTICS.md)
 
-三篇的來源均為 rust_ai_chat `5a0a8cee0d1fb4d0cd248869d7b24ebb1d653399`；文中新增功能是供使用者套用的教學，未寫入學習庫。本次來源驗證與教學新功能實作／驗收分開，結果見 [參考庫驗證](../../source-review/rust-ai-chat-validation.json)。
+三篇的來源均為 rust_ai_chat `5a0a8cee0d1fb4d0cd248869d7b24ebb1d653399`；文中新增功能是供使用者套用的教學，未寫入學習庫。最新來源 `bded382` 的本地正式驗證與同SHA GitHub CI皆通過；原教學撰寫基底仍保留5a0a8ce。本次來源驗證與教學新功能實作／驗收分開，結果見 [參考庫驗證](../../source-review/rust-ai-chat-validation.json)。

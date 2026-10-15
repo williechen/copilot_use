@@ -6,8 +6,13 @@
   "files": [
     {
       "path": "README.md",
-      "sha256": "81d50545be779c1133053af8511d9822914069421bc5b657bceff963a45f9ac2",
-      "bytes": 1118
+      "sha256": "0f17149863cd1533640e9d306639663d5e17881d5f8f0e83fd2c14e715330f91",
+      "bytes": 1252
+    },
+    {
+      "path": "RUST_AI_CHAT_STATUS.md",
+      "sha256": "9d4b65fe7b65ae28549c3c57263d8b15f654897093058401bf4e619a561fcd17",
+      "bytes": 1050
     },
     {
       "path": "configuration-contracts.md",
@@ -65,19 +70,14 @@
       "bytes": 251
     },
     {
-      "path": "rust-ai-chat-clippy-fix.patch",
-      "sha256": "e77d9dda410879d8779c68ffa8d5851b5237a2522c68b8710de7a168865f5355",
-      "bytes": 271
-    },
-    {
       "path": "rust-ai-chat-validation-logs.zip",
-      "sha256": "9b89b4b0e13df9588efe7bb2f229c688dacf6c4dc91389cc4ff768aabc5764e7",
-      "bytes": 43898
+      "sha256": "ed5e517163de7710c5e94dcdef0e62aeee21deeef60a57e8e3f1c479570a2efa",
+      "bytes": 30733
     },
     {
       "path": "rust-ai-chat-validation.json",
-      "sha256": "63be6b4f10c04d926c8448a5bc0a8bc5b72014cb9b055d60cee625c2311a87a5",
-      "bytes": 14789
+      "sha256": "ae1a9d2ca8de4c60116a6857979c2c7e430cbd9f4c7b9274f648e8080415f04d",
+      "bytes": 12156
     },
     {
       "path": "tracked-files.json",

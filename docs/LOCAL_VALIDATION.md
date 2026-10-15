@@ -51,8 +51,8 @@ rust_ai_chat 的 Day 10 三項契約已實作並通過本地測試，但 Chat WS
 
 週六功能 Gate 依共同規則排除 AI 項目，不讀取 key、不以 AI 未重測阻擋功能通過；固定 Release 的 AI 證據及選擇性真實 AI 操作仍只歸屬原來源。每日 Day 由適用 CI Gate 決定，與週六提交／功能驗收及學習套用分開。
 
-## 學習參考庫的當前驗證
+## 學習參考庫的當前最終判定
 
-rust_ai_chat `5a0a8ce` 已依「先本地正式驗證、再核對相同 SHA GitHub」執行。102 項 Rust／3 項 Node 測試、SSR／WASM、Linux native／Chat Leptos／Pet frontend release 及 HTTP／WS／SQLite 檢查通過；嚴格 Clippy 因 file_organizer.rs:309 的失效 expect(dead_code) 未通過。GitHub 6／6 workflows、18／18 checks 成功，未包含這項嚴格 Gate。
+rust_ai_chat `bded382` 已依「先本地正式驗證、再核對相同 SHA GitHub」通過本輪既有來源驗證：102 項 Rust／3 項 Node 測試、fmt、嚴格 Clippy -D warnings、SSR／WASM、Linux native／Chat Leptos／Pet frontend release 及實際HTTP／WS／SQLite檢查通過；GitHub 6／6 workflows、18／18 checks成功。上游已移除失效的expect(dead_code)，舊Clippy阻礙已解除。
 
-[精確命令與結果](source-review/rust-ai-chat-validation.json) · [完整日誌與驗證工具](source-review/rust-ai-chat-validation-logs.zip) · [尚未套用的最小修正 patch](source-review/rust-ai-chat-clippy-fix.patch)。Analytics 的真實 PostgreSQL core 測試通過，但 HTTP 攝取仍回501；Day12教學程式尚待使用者套用，不把既有來源通過算成新功能驗收。未執行GUI互動／跨平台套件、完整兩庫重比對或付費AI。
+[最終狀態與範圍](source-review/RUST_AI_CHAT_STATUS.md) · [精確命令與結果](source-review/rust-ai-chat-validation.json) · [完整日誌與驗證工具](source-review/rust-ai-chat-validation-logs.zip)。Analytics 真實 PostgreSQL core測試通過，但HTTP有效攝取仍回501；Day12教學程式尚待使用者套用，不把既有來源通過算成新功能驗收。未執行GUI互動／跨平台套件、完整兩庫重比對或付費AI；不前移Day、週六驗收或完整P9交付狀態。

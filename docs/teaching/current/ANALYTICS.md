@@ -151,6 +151,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 - HTTP＋DB E2E 必測：無 token 401、跨來源 token 401、無效 payload 400、首次 201、相同 ID 相同內容 200、相同 ID 不同內容 409、DB 不可用 503 且無成功 ACK、重啟後仍去重、同 ID 並發及來源隔離。
 - 必須在測試前建立獨立 PostgreSQL、套用既有 migrations；不得用 HashSet 成功取代 DB 測試。gRPC／Protobuf 與 SSE 尚未涵蓋。
 - **本次沒有套用程式或執行新增測試／DB E2E；只驗證來源 SHA 的既有 CI Success**。功能正式驗收：未完成。
-### 來源驗證同步（2026-10-15）
-先完成本地來源驗證，再核對相同 SHA `5a0a8cee0d1fb4d0cd248869d7b24ebb1d653399` 的 GitHub CI。本地 102 項 Rust 測試（含真實隔離 PostgreSQL）及 3 項 Node 測試通過，SSR／WASM 檢查、Linux 原生／Chat Leptos／Pet 前端 release 建置通過；實際 HTTP／WS／SQLite 檢查通過。嚴格 Clippy **未通過**：`apps/desktop_pet/src/file_organizer.rs:309` 的 `expect(dead_code)` 已失效；GitHub 6／6 workflows、18／18 checks 成功，不包含這項嚴格 Clippy Gate。[精確來源、命令與限制](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/source-review/rust-ai-chat-validation.json)。
-本次只驗證來源既有程式；本 Day 新增功能及測試仍尚待套用，未執行其 Green／GUI／功能 E2E，不將基線通過當成本 Day 功能驗收。未讀取 AI key，未執行付費 AI 呼叫。
+### 來源驗證最終判定（2026-10-15）
+先完成本地正式驗證，再核對相同 SHA `bded3825f3c7c76599bf3f4284452d5dc79e02b2` 的 GitHub CI。**最終判定：既有來源的本地驗證通過，同 SHA GitHub CI 通過。** 本地 102 項 Rust 測試（含真實隔離 PostgreSQL）、3 項 Node 測試、fmt、嚴格 Clippy `-D warnings`、SSR／WASM、Linux 原生／Chat Leptos／Pet 前端 release 及 HTTP／WS／SQLite 檢查均通過；GitHub 6／6 workflows、18／18 checks 成功。上游已移除失效的 `expect(dead_code)`，先前 `5a0a8ce` 的 Clippy 失敗已由本次修正版結果取代。[精確來源、命令與限制](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/source-review/rust-ai-chat-validation.json)。
+原教學仍以 `5a0a8ce` 為撰寫基底，程式區塊保留。本 Day 新功能及新增測試尚待套用，未執行其 Green／GUI／功能 E2E；Analytics HTTP 有效攝取仍回 501。教學已發布／已同步、程式尚待套用、功能正式驗收未完成，三者分開。未讀取 AI key，未執行付費 AI 呼叫；不將基線通過當作本 Day 或完整 P9 產品交付。

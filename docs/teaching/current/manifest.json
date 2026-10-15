@@ -11,8 +11,10 @@
       "original_content_sha256": "e116ee6233d998de5aa6ae9d261ee9a106cb6e242165462ebb0b475cd70a76aa",
       "four_sections": true,
       "code_applied": false,
-      "synced_content_sha256": "1d15347ff8ed5f7655071a80a4978fc468ad7df32b1d84085adb877e3f2f70d4",
-      "notion_readback_verified": true
+      "synced_content_sha256": "c23ad1059fd86cf4935459eb8b408a51ba72970155e08ec6cb45091b79cc8172",
+      "notion_readback_verified": true,
+      "validation_source_sha": "bded3825f3c7c76599bf3f4284452d5dc79e02b2",
+      "validation_final_status": "passed for existing source; lesson implementation pending"
     },
     {
       "project": "pet",
@@ -24,8 +26,10 @@
       "original_content_sha256": "22687ac6a0ec891e8974468b6a27a2e118b3fc5e50a9a70ae63d091ffd9462fb",
       "four_sections": true,
       "code_applied": false,
-      "synced_content_sha256": "bda1357b2c6f6ad187755d9a4ba10b628c4a9c4322794bf6f9bf25659bf530c6",
-      "notion_readback_verified": true
+      "synced_content_sha256": "5cc66b67ec7495165aa300c0798b63d389f3c3d355fcaae2658eee51f255adb6",
+      "notion_readback_verified": true,
+      "validation_source_sha": "bded3825f3c7c76599bf3f4284452d5dc79e02b2",
+      "validation_final_status": "passed for existing source; lesson implementation pending"
     },
     {
       "project": "analytics",
@@ -37,10 +41,14 @@
       "original_content_sha256": "aba50445ca417d83315a3cf3daf0b0a34c8a44fb4f268a95274ccb3425c65704",
       "four_sections": true,
       "code_applied": false,
-      "synced_content_sha256": "6c41e1c00f3b1125dad92afe2597863d020c650e05d713cef3a13e214290f430",
-      "notion_readback_verified": true
+      "synced_content_sha256": "9188266960d0b24fa963c994939c0e850f2a4c7f99e0769cd38e1f6dc33a2a00",
+      "notion_readback_verified": true,
+      "validation_source_sha": "bded3825f3c7c76599bf3f4284452d5dc79e02b2",
+      "validation_final_status": "passed for existing source; lesson implementation pending"
     }
   ],
-  "synced_at": "2026-10-15T10:17:51.907984+08:00",
-  "code_applied": false
+  "synced_at": "2026-10-15T10:44:36.729213+08:00",
+  "code_applied": false,
+  "validation_source_sha": "bded3825f3c7c76599bf3f4284452d5dc79e02b2",
+  "final_status": "source local+GitHub passed; Day12 proposed code not applied"
 }

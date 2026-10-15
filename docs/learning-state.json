@@ -1,5 +1,5 @@
 {
-  "reference_sha": "5a0a8cee0d1fb4d0cd248869d7b24ebb1d653399",
+  "reference_sha": "bded3825f3c7c76599bf3f4284452d5dc79e02b2",
   "validated_program_sha": "39f34854b102eb96b44980d42d7b3f272307ec20",
   "validated_program_ci_run": 38290016342,
   "fixed_tag": "v0.1.0",
@@ -21,7 +21,7 @@
     "analytics": "PostgreSQL"
   },
   "reference_source_db_observation": {
-    "sha": "5a0a8cee0d1fb4d0cd248869d7b24ebb1d653399",
+    "sha": "bded3825f3c7c76599bf3f4284452d5dc79e02b2",
     "chat": "SqlitePool with room guard wired through WS persist_ws_message; current schema tests passed",
     "pet": "reference has FSM/native roaming and SHA256 preview IPC; no PetStore SQLite product equivalent",
     "writable": false,
@@ -203,16 +203,18 @@
     "Chat SSE completion: recheck current session/room authorization before persisting; static finding, regression not executed"
   ],
   "reference_validation": {
-    "checked_at": "2026-10-15T10:17:51.907984+08:00",
-    "reference_sha": "5a0a8cee0d1fb4d0cd248869d7b24ebb1d653399",
+    "checked_at": "2026-10-15T10:44:36.729213+08:00",
+    "reference_sha": "bded3825f3c7c76599bf3f4284452d5dc79e02b2",
     "evidence": "docs/source-review/rust-ai-chat-validation.json",
+    "final_status": "existing source local formal verification and matching SHA GitHub CI passed",
     "local_tests": {
       "passed": 102,
       "failed": 0,
       "ignored": 0,
-      "warnings": 1
+      "warnings": 0
     },
-    "local_gate": "failed: strict Clippy obsolete dead_code expectation",
+    "local_gate": "passed",
+    "strict_clippy": "passed with -D warnings; obsolete expectation removed upstream",
     "release_builds": "Linux native, Chat Leptos and Pet frontend passed",
     "remote_ci": {
       "workflows_success": 6,
@@ -221,17 +223,19 @@
       "checks_total": 18,
       "gate": "success"
     },
-    "reference_product_acceptance": "not completed: strict Clippy failure, HTTP ingestion still501, Day12 implementations pending",
+    "reference_product_acceptance": "not completed: HTTP ingestion remains501 and Day12 proposed implementations/tests not applied; GUI/cross-platform not tested",
     "copilot_use_product_acceptance": "not revalidated; retain existing matching evidence"
   },
   "article_sync": {
-    "checked_at": "2026-10-15T10:17:51.907984+08:00",
+    "checked_at": "2026-10-15T10:44:36.729213+08:00",
     "source_sha": "5a0a8cee0d1fb4d0cd248869d7b24ebb1d653399",
     "current_articles": "docs/teaching/current/manifest.json",
     "existing_day": 12,
     "four_sections": true,
     "original_code_preserved": true,
     "new_day_published": false,
-    "next_day_advanced": false
+    "next_day_advanced": false,
+    "validation_source_sha": "bded3825f3c7c76599bf3f4284452d5dc79e02b2",
+    "final_verdict": "existing source local+GitHub passed; Day12 implementation/acceptance pending"
   }
 }
