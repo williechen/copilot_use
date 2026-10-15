@@ -10,11 +10,12 @@
       "path": "docs/teaching/current/CHAT.md",
       "original_content_sha256": "e116ee6233d998de5aa6ae9d261ee9a106cb6e242165462ebb0b475cd70a76aa",
       "four_sections": true,
-      "code_applied": false,
-      "synced_content_sha256": "c23ad1059fd86cf4935459eb8b408a51ba72970155e08ec6cb45091b79cc8172",
+      "code_applied": true,
+      "synced_content_sha256": "8e5611f51013081a84e54a0b188f9080dccf08c21070975dbc48f827c3751a69",
       "notion_readback_verified": true,
-      "validation_source_sha": "bded3825f3c7c76599bf3f4284452d5dc79e02b2",
-      "validation_final_status": "passed for existing source; lesson implementation pending"
+      "validation_source_sha": "a57e532c125f5f18d7fd2a250401efde0c9d2612",
+      "validation_final_status": "Day12 applied and Linux local formal passed; GitHub CI failed; GUI/full acceptance separate",
+      "mirror_has_title_and_source_wrapper": true
     },
     {
       "project": "pet",
@@ -25,11 +26,12 @@
       "path": "docs/teaching/current/PET.md",
       "original_content_sha256": "22687ac6a0ec891e8974468b6a27a2e118b3fc5e50a9a70ae63d091ffd9462fb",
       "four_sections": true,
-      "code_applied": false,
-      "synced_content_sha256": "5cc66b67ec7495165aa300c0798b63d389f3c3d355fcaae2658eee51f255adb6",
+      "code_applied": true,
+      "synced_content_sha256": "38cd15449b603d96f081c0d0fb354c85dd6fa2bf5be27f0521087499c2f296c4",
       "notion_readback_verified": true,
-      "validation_source_sha": "bded3825f3c7c76599bf3f4284452d5dc79e02b2",
-      "validation_final_status": "passed for existing source; lesson implementation pending"
+      "validation_source_sha": "a57e532c125f5f18d7fd2a250401efde0c9d2612",
+      "validation_final_status": "Day12 applied and Linux local formal passed; GitHub CI failed; GUI/full acceptance separate",
+      "mirror_has_title_and_source_wrapper": true
     },
     {
       "project": "analytics",
@@ -40,15 +42,16 @@
       "path": "docs/teaching/current/ANALYTICS.md",
       "original_content_sha256": "aba50445ca417d83315a3cf3daf0b0a34c8a44fb4f268a95274ccb3425c65704",
       "four_sections": true,
-      "code_applied": false,
-      "synced_content_sha256": "9188266960d0b24fa963c994939c0e850f2a4c7f99e0769cd38e1f6dc33a2a00",
+      "code_applied": true,
+      "synced_content_sha256": "9c9b37f7b3a6ced517539b1061a0484a6cebdaf301f2fa0cfa9f43c9a72f18ea",
       "notion_readback_verified": true,
-      "validation_source_sha": "bded3825f3c7c76599bf3f4284452d5dc79e02b2",
-      "validation_final_status": "passed for existing source; lesson implementation pending"
+      "validation_source_sha": "a57e532c125f5f18d7fd2a250401efde0c9d2612",
+      "validation_final_status": "Day12 applied and Linux local formal passed; GitHub CI failed; GUI/full acceptance separate",
+      "mirror_has_title_and_source_wrapper": true
     }
   ],
-  "synced_at": "2026-10-15T10:44:36.729213+08:00",
-  "code_applied": false,
-  "validation_source_sha": "bded3825f3c7c76599bf3f4284452d5dc79e02b2",
-  "final_status": "source local+GitHub passed; Day12 proposed code not applied"
+  "synced_at": "2026-10-15T21:54:07.303958+08:00",
+  "code_applied": true,
+  "validation_source_sha": "a57e532c125f5f18d7fd2a250401efde0c9d2612",
+  "final_status": "Day12 applied; Linux local formal passed; matching SHA GitHub CI failed"
 }

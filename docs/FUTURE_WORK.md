@@ -15,10 +15,10 @@
 
 ## 參考適配
 
-- [ ] 明列 Chat Room／作者／ID／category、HTTP 建房 DTO／status、WS 傳訊與通知協定映射；保留成品 ACL、durable realtime／Outbox。topic 不能代替 category。參考 `3b524f47…` 的 `persist_in_existing_room` 已有契約測試，但 WS 尚未接入；不把契約通過算成產品路徑驗收。
+- [ ] 明列 Chat Room／作者／ID／category、HTTP 建房 DTO／status、WS 傳訊與通知協定映射；保留成品 ACL、durable realtime／Outbox。topic 不能代替 category。參考 `a57e532` 已由 WS 呼叫 persist_ws_message／persist_in_existing_room；Typing 房間隔離已實測。成品 ACL／durable realtime 對應仍待銜接。
 - [ ] 明列 Pet Sleep／Wake／snapshot revision 與 Action／Speed 的差異、Profile JSON／TOML、ScanPreview／opaque preview 的契約；只作真正需要的適配，不新增未使用同名骨架。參考 `3b524f47…` 的 `resolve_validated_appearance` 已有契約測試，尚無產品設定／儲存／呈現呼叫端。
 - [ ] 明確決定 pet.cleanup.succeeded 與 file.cleanup.succeeded 的事件映射／版本，不默改既有白名單或把純狀態成功當真操作收據。
-- [ ] Analytics 參考 501／記憶體 fake 與成品 PostgreSQL／來源認證／gRPC 的銜接說明；保留實際持久冪等、HTTP＋SSE 能力。參考 `3b524f47…` 的 `accept_valid_event` 只有測試呼叫，有效 HTTP 仍回 501；不把 HashSet 契約當作 PostgreSQL 攝取驗收。
+- [ ] Analytics 參考 `a57e532` 已實作並本地驗證 HTTP 來源認證／PostgreSQL 攝取及持久冪等；後續銜接成品 gRPC／逐事件 ACK／SSE 與權限模型。HashSet 仍非 DB 驗收證據，Test All 的測試環境設定及正式憑證驗證安全審查尚待完成。
 
 ## 教學銜接
 

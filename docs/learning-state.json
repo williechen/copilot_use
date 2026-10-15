@@ -1,5 +1,5 @@
 {
-  "reference_sha": "bded3825f3c7c76599bf3f4284452d5dc79e02b2",
+  "reference_sha": "a57e532c125f5f18d7fd2a250401efde0c9d2612",
   "validated_program_sha": "39f34854b102eb96b44980d42d7b3f272307ec20",
   "validated_program_ci_run": 38290016342,
   "fixed_tag": "v0.1.0",
@@ -21,11 +21,11 @@
     "analytics": "PostgreSQL"
   },
   "reference_source_db_observation": {
-    "sha": "bded3825f3c7c76599bf3f4284452d5dc79e02b2",
-    "chat": "SqlitePool with room guard wired through WS persist_ws_message; current schema tests passed",
+    "sha": "a57e532c125f5f18d7fd2a250401efde0c9d2612",
+    "chat": "SQLite via CHAT_DATABASE_URL; WS typing is transient, no message DB write",
     "pet": "reference has FSM/native roaming and SHA256 preview IPC; no PetStore SQLite product equivalent",
     "writable": false,
-    "analytics": "PostgreSQL pg_store core real integration passes; HTTP ingress still returns 501 and is not wired to pg_store"
+    "analytics": "PostgreSQL pg_store now wired to authenticated HTTP ingest; real HTTP/DB validation passed"
   },
   "analytics_transport": {
     "ingestion": "gRPC/Protobuf",
@@ -203,31 +203,36 @@
     "Chat SSE completion: recheck current session/room authorization before persisting; static finding, regression not executed"
   ],
   "reference_validation": {
-    "checked_at": "2026-10-15T10:44:36.729213+08:00",
-    "reference_sha": "bded3825f3c7c76599bf3f4284452d5dc79e02b2",
+    "checked_at": "2026-10-15T21:53:02.011664+08:00",
+    "reference_sha": "a57e532c125f5f18d7fd2a250401efde0c9d2612",
     "evidence": "docs/source-review/rust-ai-chat-validation.json",
-    "final_status": "existing source local formal verification and matching SHA GitHub CI passed",
+    "final_status": "local Linux formal passed; matching SHA GitHub failed",
     "local_tests": {
-      "passed": 102,
+      "passed": 107,
       "failed": 0,
-      "ignored": 0,
-      "warnings": 0
+      "ignored": 0
     },
     "local_gate": "passed",
-    "strict_clippy": "passed with -D warnings; obsolete expectation removed upstream",
-    "release_builds": "Linux native, Chat Leptos and Pet frontend passed",
+    "strict_clippy": "passed -D warnings",
+    "release_builds": "Linux native, Chat Leptos SSR/hydrate and Pet frontend passed",
     "remote_ci": {
-      "workflows_success": 6,
-      "workflows_total": 6,
-      "checks_success": 18,
-      "checks_total": 18,
-      "gate": "success"
+      "checked_at": "2026-10-15T21:52:19.647016+08:00",
+      "reference_sha": "a57e532c125f5f18d7fd2a250401efde0c9d2612",
+      "latest_main_sha": "a57e532c125f5f18d7fd2a250401efde0c9d2612",
+      "latest_sha_matches": true,
+      "gate": "failed",
+      "workflow_success": 3,
+      "workflow_total": 6,
+      "check_success": 13,
+      "check_total": 18,
+      "checked_after_local": true,
+      "failed_job": "https://github.com/williechen/rust_ai_chat/actions/runs/38745289793/job/116457220577"
     },
-    "reference_product_acceptance": "not completed: HTTP ingestion remains501 and Day12 proposed implementations/tests not applied; GUI/cross-platform not tested",
-    "copilot_use_product_acceptance": "not revalidated; retain existing matching evidence"
+    "reference_product_acceptance": "Day12 implemented; local functional checks passed; GUI/full security/P9 acceptance not claimed",
+    "copilot_use_product_acceptance": "not revalidated; preserve existing evidence"
   },
   "article_sync": {
-    "checked_at": "2026-10-15T10:44:36.729213+08:00",
+    "checked_at": "2026-10-15T21:54:07.303958+08:00",
     "source_sha": "5a0a8cee0d1fb4d0cd248869d7b24ebb1d653399",
     "current_articles": "docs/teaching/current/manifest.json",
     "existing_day": 12,
@@ -235,7 +240,9 @@
     "original_code_preserved": true,
     "new_day_published": false,
     "next_day_advanced": false,
-    "validation_source_sha": "bded3825f3c7c76599bf3f4284452d5dc79e02b2",
-    "final_verdict": "existing source local+GitHub passed; Day12 implementation/acceptance pending"
+    "validation_source_sha": "a57e532c125f5f18d7fd2a250401efde0c9d2612",
+    "final_verdict": "Day12 applied and local formal passed; GitHub failed",
+    "implementation_applied": true,
+    "new_lesson_tests_executed": true
   }
 }

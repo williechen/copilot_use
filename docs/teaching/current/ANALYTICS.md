@@ -143,14 +143,18 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 - 來源憑證從**執行時環境**注入，教學／測試不讀真實密鑰、不印出值。上述手寫位元比較僅供本地最小切片，**尚未經密碼學安全審查**；正式安全 Gate 應替換為經審查的 constant-time 驗證或受信任本地身分機制，並驗證 header／token 長度上限與憑證輪替。
 - `source_app` 與所選 token 綁定；不接受只有合法 JSON 就寫入。Loopback 限制不等於來源認證，亦不代表可公開部署。
 - PostgreSQL 冪等查詢與寫入併發、故障重試、逐事件 ACK、gRPC／Protobuf、HTTP Query／SSE 均須後續測試／切片；不因本次 HTTP Adapter 存在就標記完成。
+### 實際套用補充（2026-10-15）
+本地已提交 `a57e532c125f5f18d7fd2a250401efde0c9d2612`。HTTP state／來源 token／PostgreSQL 呼叫／回應映射與本日兩個測試均已套用，真實路徑已實測。`apps/stats_server/src/main.rs` 在 main 開頭另加入 `dotenv::dotenv().ok();`；`apps/stats_server/Cargo.toml` 與 `tests/Cargo.toml` 新增既有 workspace 的 dotenv 依賴，tests 同時加入 sqlx。精確檔案與完整差異見[實際提交](https://github.com/williechen/rust_ai_chat/commit/a57e532c125f5f18d7fd2a250401efde0c9d2612)，原教學程式區塊保留。
+`tests/analytics/event_kind_tests.rs` 與 `http_contract_tests.rs` 已配合 `IngestState`／`build_app(state)` 更新：合法輸入但沒有 token 預期 401，舊測試名稱雖仍含 unimplemented／501，斷言已改為 401。執行 workspace 測試須先建立隔離 PostgreSQL，設定 `ANALYTICS_DATABASE_URL` 與兩個不同的合成來源 token；HTTP 實測前套用 `apps/stats_server/migrations`。本次未讀取私人 .env；現行 CI 尚缺上述 fixture，詳見第 4 節與[待套用的 CI 測試環境設定](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/source-review/DAY12_CI_ENVIRONMENT.md)。`persistence.yml` 的 env／service 不會傳到 `test.yml` 的 test-workspace job；此設定範例未由助手寫入學習倉庫。
 ## 3. 套件版本
-- 沿用 `apps/stats_server/Cargo.toml` 已宣告的 `axum`、`sqlx`、`tokio`、`serde`、`uuid`；不新增依賴。
+- 沿用既有 `axum`、`sqlx`、`tokio`、`serde`、`uuid`；實際套用另在 stats-server／workspace-tests 加入既有 workspace 的 `dotenv`，Cargo.lock 精確版本為 `0.15.0`；workspace-tests 同時使用既有 `sqlx`。
 - Cargo.lock 精確版本、官方 stable／MSRV／安全公告本次**未重新查證**。
 ## 4. 驗證項目
 - 建議：`cargo test -p stats-server`、`cargo test -p stats-server --features postgres-integration`（需隔離測試 DB）、`cargo fmt --all -- --check`、`cargo clippy -p stats-server --all-targets -- -D warnings`。
 - HTTP＋DB E2E 必測：無 token 401、跨來源 token 401、無效 payload 400、首次 201、相同 ID 相同內容 200、相同 ID 不同內容 409、DB 不可用 503 且無成功 ACK、重啟後仍去重、同 ID 並發及來源隔離。
 - 必須在測試前建立獨立 PostgreSQL、套用既有 migrations；不得用 HashSet 成功取代 DB 測試。gRPC／Protobuf 與 SSE 尚未涵蓋。
-- **本次沒有套用程式或執行新增測試／DB E2E；只驗證來源 SHA 的既有 CI Success**。功能正式驗收：未完成。
+- 程式與新增測試已套用；本地真實 HTTP／PostgreSQL 的 401／400／201／200／409／503、來源隔離、同 ID 併發與重啟去重通過。GitHub CI 另列，gRPC／SSE／正式安全與整體驗收未完成。
 ### 來源驗證最終判定（2026-10-15）
-先完成本地正式驗證，再核對相同 SHA `bded3825f3c7c76599bf3f4284452d5dc79e02b2` 的 GitHub CI。**最終判定：既有來源的本地驗證通過，同 SHA GitHub CI 通過。** 本地 102 項 Rust 測試（含真實隔離 PostgreSQL）、3 項 Node 測試、fmt、嚴格 Clippy `-D warnings`、SSR／WASM、Linux 原生／Chat Leptos／Pet 前端 release 及 HTTP／WS／SQLite 檢查均通過；GitHub 6／6 workflows、18／18 checks 成功。上游已移除失效的 `expect(dead_code)`，先前 `5a0a8ce` 的 Clippy 失敗已由本次修正版結果取代。[精確來源、命令與限制](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/source-review/rust-ai-chat-validation.json)。
-原教學仍以 `5a0a8ce` 為撰寫基底，程式區塊保留。本 Day 新功能及新增測試尚待套用，未執行其 Green／GUI／功能 E2E；Analytics HTTP 有效攝取仍回 501。教學已發布／已同步、程式尚待套用、功能正式驗收未完成，三者分開。未讀取 AI key，未執行付費 AI 呼叫；不將基線通過當作本 Day 或完整 P9 產品交付。
+使用者已將本 Day 實作提交於 `a57e532c125f5f18d7fd2a250401efde0c9d2612`，驗證取樣時本地工作目錄乾淨；其後出現未提交的 `persistence.yml` 設定調整，未納入此 SHA 證據。先驗本地，再核對同 SHA GitHub。**本地 Linux 正式驗證通過；同 SHA GitHub CI 未通過。** 本地 107 項 Rust、3 項 Node、fmt、嚴格 Clippy、SSR／兩個 WASM、Linux 原生／Chat Leptos／Pet 前端 Release 均通過；14 項實際 HTTP／WS／DB 檢查通過，包含來源認證、PostgreSQL 寫入／重複／衝突、併發去重、重啟後去重、DB 中斷回 503，以及 Typing 房間隔離與不寫入訊息。
+GitHub `Test All / test-workspace` 已失敗；[失敗工作與日誌](https://github.com/williechen/rust_ai_chat/actions/runs/38745289793/job/116457220577)顯示 `tests/analytics/event_kind_tests.rs:47、68` 因缺少 `ANALYTICS_DATABASE_URL` 出現 `NotPresent`。該工作也須提供 `ANALYTICS_CHAT_TOKEN`、`ANALYTICS_PET_TOKEN` 與獨立 PostgreSQL。本次本地已用合成 token／隔離 DB 通過；不沿用舊 SHA CI Success。其他未結束的 job 仍列執行中，精確查驗時間與計數見[可攜式驗證證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/source-review/rust-ai-chat-validation.json)。
+原教學撰寫基底 `5a0a8ce` 與全部原程式區塊保留，實際套用／驗證來源更新為 `a57e532c125f5f18d7fd2a250401efde0c9d2612`。Analytics HTTP 已接上 PostgreSQL，不再固定回 501。Pet 實際 GUI 移動、跨平台安裝包、gRPC／SSE 銜接及正式憑證安全審查未由本次驗證完成；不宣稱全部 Day／P9／週六驗收完成。不讀取私人 .env／AI key、不執行付費 AI、不前移 Day／階段。

@@ -27,7 +27,7 @@
 |---|---|---|---|
 | Chat | 可攜式 SQLite | SQLite URI／schema／WAL／backup，已驗證 | 本輪唯讀 source SHA `16261e0ebeef1a888997cc0ebc42b08ceaf8db24` 已使用 SqlitePool／SqliteRoomRepository／SqliteMessageRepository；schema／ID／Outbox 仍與成品不同，source 觀察不等於 DB 執行驗收 |
 | Pet | 可攜式 SQLite | PetStore SQLite／獨立檔案／snapshot，已驗證 | 本輪 source 為 Profile／FSM／唯讀檔案預覽，尚無 PetStore SQLite 等同實作；教學依統一目標及當日差異銜接 |
-| Analytics | PostgreSQL | 獨立 PostgreSQL／migration／來源角色，已驗證 | 本輪 source 為記憶體去重與有效請求回 501，尚無 PostgreSQL 持久化接線；不把 FakeStore 測試當 PostgreSQL 驗收 |
+| Analytics | PostgreSQL | 獨立 PostgreSQL／migration／來源角色，已驗證 | `a57e532` 已接上來源認證 → HTTP → PostgreSQL，實際寫入／冪等／衝突／故障測試通過；gRPC／SSE 尚未銜接，不等於產品驗收 |
 
 本輪逐模組、介面與資料流程靜態核對已完成，範圍、差異與可攜式證據見 [完整核對報告](FULL_SOURCE_REVIEW.md)。產品待補項目與安全修正見 [未來工作](FUTURE_WORK.md)；尚未修正或重新驗收，不宣稱兩庫語意等同。
 
