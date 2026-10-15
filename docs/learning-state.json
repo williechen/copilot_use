@@ -5,9 +5,9 @@
   "fixed_tag": "v0.1.0",
   "fixed_tag_sha": "22b44f33b9e2c9edb0fb398fb9bff3efd57b00ee",
   "next_day": {
-    "chat": 11,
-    "pet": 11,
-    "analytics": 11
+    "chat": 12,
+    "pet": 12,
+    "analytics": 12
   },
   "last_full_comparison": null,
   "next_full_comparison": "2026-10-17T08:00:00+08:00",
