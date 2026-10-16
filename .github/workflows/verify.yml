@@ -1,5 +1,10 @@
 name: Verify copilot_use
 on:
+  workflow_call:
+    inputs:
+      run_compose:
+        type: boolean
+        default: false
   push:
     branches: [main, 'teaching/**']
   pull_request:
@@ -40,6 +45,8 @@ jobs:
         run: cargo test -p event-contract
 
   compose-e2e:
+    # Historical container-only E2E; disabled under current native-only policy.
+    if: ${{ false }}
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
