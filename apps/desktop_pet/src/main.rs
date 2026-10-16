@@ -757,10 +757,7 @@ async fn github_update_status(app: tauri::AppHandle) -> Result<serde_json::Value
     let mut status = serde_json::json!({"enabled":enabled,"current_version":app.package_info().version.to_string(),"repository":"williechen/copilot_use","check_policy":"on_start_or_manual"});
     if let Ok(directory) = app.path().cache_dir() {
         // The updater uses XDG_CACHE_HOME/copilot-desktop-pet rather than the app identifier.
-        let cache = directory
-            .parent()
-            .unwrap_or(&directory)
-            .join("copilot-desktop-pet/update-status.json");
+        let cache = directory.join("copilot-desktop-pet/update-status.json");
         if let Ok(bytes) = std::fs::read(cache)
             && bytes.len() <= 65536
             && let Ok(value) = serde_json::from_slice::<serde_json::Value>(&bytes)
