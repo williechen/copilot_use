@@ -296,5 +296,12 @@
     "application_status": "record separately per lesson and exact source; publication does not imply application",
     "validation_status": "record separately per lesson and exact source; no validation inferred from Day number",
     "historical_numbering_record": "docs/teaching/archive/formal-day-numbering.json"
+  },
+  "teaching_document": {
+    "canonical": "docs/COMMON_LEARNING_RULES.md",
+    "notion_page": "https://app.notion.com/p/3f2e51d4509381ddb8a8ce7cb4cd3e60?pvs=204",
+    "format_document": "entry only: docs/TEACHING_FORMAT.md",
+    "scope": "teaching method, four-section format and three project outlines in one article",
+    "status": "consolidated and readback verified; discussions6-8 pending"
   }
 }
