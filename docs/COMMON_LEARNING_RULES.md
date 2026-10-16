@@ -17,7 +17,7 @@
 Refactor 整理當步實作及現有測試；例如將根 tests 的現有測試逐批歸回所屬 app／crate／私有模組，同批維護 Cargo、lock及CI，保留斷言與覆蓋。未搬完的套件／target／CI保留運作，全部歸位並驗證後才移除根tests與workspace-tests；不為測試公開危險私有API。
 舊Day的錯誤路徑、程式或失效教法，在**下一個Day的Refactor後面另外補加**，寫明原文章／問題、修正內容與驗證，與重構分開；不回填舊Day。功能增量繼續放當日實作，原文及來源保留。
 ### 3. 套件版本
-記錄本次涉及的Cargo宣告、lock、官方stable／MSRV／安全及native／WASM相容性查核，只使用最新的穩定版或長期維謢版，若版本涉及功能改寫，需在實作內容後面補增加需變更的內容。
+記錄本次涉及的Cargo宣告、lock、官方stable／MSRV／安全及native／WASM相容性查核，只使用最新的穩定版或長期維護版，若版本涉及功能改寫，需在實作內容後面補增加需變更的內容。
 ### 4. 驗證項目
 列與本次功能對應的命令、預期、實際結果及未執行範圍；從真實入口驗證到資料與畫面結果。handler單測、DB、router/socket、GUI及跨服務流程的證據分別交代。文章發布、使用者套用、流程接通與功能驗收各自依證據判定。
 ## 三專案功能大綱
@@ -29,7 +29,7 @@ Refactor 整理當步實作及現有測試；例如將根 tests 的現有測試�
 逐步完成五欄設定（名字／種類／喜好／個性／興趣）、選用外觀覆寫、每隻寵物獨立資料與素材、200×200等比動畫、多寵物、手動拖移與可選的自動漫遊、記憶／回想／複習／提醒、RAG／MCP／Agent、備份／還原及installer／簽章updater。安裝後的更新採啟動時檢查或手動檢查正式GitHub Release，也不要求重新安裝。
 安全檔案流程保持授權root／opaque ID、non-root、確認、symlink／TOCTOU／權限重驗、journal／receipt／Trash／restore；預覽或Domain成功狀態不能冒充filesystem成功憑證。
 ### Analytics：真實事件、查詢與管理
-基本主線：接收Chat／Pet真實動作 → 來源認證 → 去重並持久提交 → Dashboard查詢／篩選 → i趨勢與明細 → 管理紀錄 → 封存／還原／備份。
+基本主線：接收Chat／Pet真實動作 → 來源認證 → 去重並持久提交 → Dashboard查詢／篩選 → 趨勢與明細 → 管理紀錄 → 封存／還原／備份。
 產品上報目標採gRPC／Protobuf及逐事件ACK，Dashboard保留HTTP JSON＋SSE；學習庫已有HTTP相容入口的演進事實保留。獨立PostgreSQL、來源／事件ID冪等與衝突、commit後通知、重試／重連／故障恢復分別驗證。Chat／Pet各自SQLite，不共享業務DB。
 後續包括可追溯AI洞察、人工審核、Chat／Pet自主授權採用／回退，以及Provider／Model／來源／功能／請求／時間的Token使用量、成本及實際可取得額度。額度未知明示未知，不由Token推算配額；用既有紀錄或合成資料驗證。
 ## 當前功能狀態與證據入口

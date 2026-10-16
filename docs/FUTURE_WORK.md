@@ -1,8 +1,8 @@
 # 未來前進項目
 
-目標依 [P9_TARGET.md](P9_TARGET.md) 與 copilot_use 實際程式，目錄／內容銜接依 rust_ai_chat 最新 main。本清單分開記錄產品缺口、安全修正、參考適配與教學；未核實不標完成。每天從確認缺口與當日差異選三專案合計一小時的小切片，不預排 Day；週六工程與功能驗收另記。
+目標依 [P9_TARGET.md](P9_TARGET.md) 與 copilot_use 實際程式，目錄／內容銜接依 rust_ai_chat 最新 main。本清單分開記錄產品缺口、安全修正、參考適配與教學；未核實不標完成。教學方法、四節格式與三專案功能大綱統一見[教學總文章](COMMON_LEARNING_RULES.md)；本頁只追蹤功能缺口與實作待辦。
 
-既有開發項目是 P0～P12 階段功能完成條件的唯一追蹤來源；在原項目記錄所屬階段、可驗證功能條件、SHA／測試／CI／套用與驗收證據，未核實者保留未完成。跨階段只在原項目及原 Day 第 2 節後補加，不另開重複項目；完成後可退出活動清單，但原識別與證據須可追溯。P9 產品目標不等於 P9 學習階段。
+既有開發項目是 P0～P12 階段功能完成條件的唯一追蹤來源；在原項目記錄所屬階段、可驗證功能條件、SHA／測試／CI／套用與驗收證據，未核實者保留未完成。跨階段仍在原功能追蹤，不另開重複項目；Day補充位置依教學總文章，舊Day更正放下一Day第2節的Refactor後；完成後可退出活動清單，但原識別與證據須可追溯。P9 產品目標不等於 P9 學習階段。
 
 ## 產品缺口
 
@@ -28,15 +28,15 @@
 - [ ] 明列 Chat Room／作者／ID／category、HTTP 建房 DTO／status、WS 傳訊與通知協定映射；保留成品 ACL、durable realtime／Outbox。topic 不能代替 category。參考 `a57e532` 已由 WS 呼叫 persist_ws_message／persist_in_existing_room；Typing 房間隔離已實測。成品 ACL／durable realtime 對應仍待銜接。
 - [ ] 明列 Pet Sleep／Wake／snapshot revision 與 Action／Speed 的差異、Profile JSON／TOML、ScanPreview／opaque preview 的契約；只作真正需要的適配，不新增未使用同名骨架。參考 `3b524f47…` 的 `resolve_validated_appearance` 已有契約測試，尚無產品設定／儲存／呈現呼叫端。
 - [ ] 明確決定 pet.cleanup.succeeded 與 file.cleanup.succeeded 的事件映射／版本，不默改既有白名單或把純狀態成功當真操作收據。
-- [ ] Analytics 參考 `a57e532` 已實作並本地驗證 HTTP 來源認證／PostgreSQL 攝取及持久冪等；後續銜接成品 gRPC／逐事件 ACK／SSE 與權限模型。HashSet 仍非 DB 驗收證據，最新 d054389 已修正 Test All 測試環境並通過 CI；正式憑證驗證安全審查仍待完成。
+- [ ] Analytics 參考 `a57e532` 已實作並本地驗證 HTTP 來源認證／PostgreSQL 攝取及持久冪等；後續銜接成品 gRPC／逐事件 ACK／SSE 與權限模型。HashSet 仍非 DB 驗收證據，歷史 d054389 已修正 Test All 測試環境並通過該來源CI；正式憑證驗證安全審查仍待完成。
 
 ## 教學銜接
 
-以下保留原有學習範圍，checkbox 表示學習／適配未完成，不表示對應成品功能全部未實作。每次依最新 source、所屬測試與 CI 排除已套用項目，再選最小切片。本次參考庫 Day 10 實作／本地複驗及 CI、產品路徑狀態合併於 [驗證證據](source-review/rust-ai-chat-validation.json)，不重建待辦項目。
+以下保留原有學習範圍，checkbox 表示學習／適配未完成，不表示對應成品功能全部未實作。依文章與兩庫實作對照，排除已有能力後接續尚未完成的流程；當前核對入口見[教學總文章](COMMON_LEARNING_RULES.md)，[歷史驗證證據](source-review/rust-ai-chat-validation.json)保留各自來源與日期，不當作最新來源已通過。
 
 ### 共同主線
 
-- [ ] 現有測試歸位重構（目前 Day 14，Day 15 起可逐步納入各日第 2 節 Refactor）：依當日功能選一批現有測試搬回所屬 app／crate，不另計新功能、不回填 Day 13，也不要求同一天完成。Chat 兩檔 → chat-application；Server 一檔 → server；Pet 五檔 → pet-domain；Analytics 三檔 → stats-server。每批搬移前記錄清單，保留原斷言；同批調整原 tests/Cargo.toml 的對應 [[test]]（已搬的移除、未搬的保留），補齊接收套件 dev-dependencies、同步 Cargo.lock，並讓 CI 同時涵蓋剩餘 workspace-tests 與已歸位套件。比對測試名稱、數量、ignored 與執行結果，避免漏測或重複執行；Analytics 沿用本機測試 PostgreSQL 與合成憑證。最後一批全部驗證後，才移除根 workspace member、workspace-tests 套件、兩個空檔及根 tests 空目錄，更新 CI 移除舊引用。rust_ai_chat 由使用者套用；現況僅盤點，未搬移、未執行搬移後測試。
+- [ ] 現有測試歸位重構：自Day15起分批搬移11個非空測試檔，Chat兩檔歸chat-application、Server一檔歸server、Pet五檔歸pet-domain、Analytics三檔歸stats-server。整合步驟及文章位置見[教學總文章](COMMON_LEARNING_RULES.md)的Refactor；參考庫由使用者套用，尚未搬移或執行搬移後驗證。
 
 - [ ] 採用 rust_ai_chat 新增／微調的目錄、型別、Port、介面與所屬測試，更新 copilot_use 對應及適配理由。
 - [ ] 三專案各自產出完整可套用 Day；四節格式、原教學與第 2 節末尾必要實作補充對應一致。
@@ -71,4 +71,4 @@
 
 ## 完成條件
 
-逐項附規格 → 當前檔案／符號／SHA → 真正測試／CI → 學習套用狀態。產品功能驗收、每日教學發布、學習倉庫實際套用各自記錄，適用 CI 通過即可發布每日 Day，不等待週六提交。未完成或未核實項目留在對應分類；完成項目可從活動清單移除，但原項目識別、跨階段補加歷史及完成證據須永久可追溯。新產品需求需更新 P9 目標、實作與重新驗收；不以舊 Release 或教學頁宣稱新需求已完成。
+逐項附規格 → 當前檔案／符號／SHA → 真正測試／CI → 學習套用狀態。產品功能驗收、每日教學發布、學習倉庫實際套用各自記錄，每日發布方式統一引用[教學總文章](COMMON_LEARNING_RULES.md)，不在本頁另設CI發布門檻。未完成或未核實項目留在對應分類；完成項目可從活動清單移除，但原項目識別、跨階段補加歷史及完成證據須永久可追溯。新產品需求需更新 P9 目標、實作與重新驗收；不以舊 Release 或教學頁宣稱新需求已完成。

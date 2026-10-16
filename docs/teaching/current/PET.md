@@ -1,45 +1,33 @@
-# 2026-10-16｜P0 Pet Day 13｜重複預覽顯示群組大小與檔案數
+# 2026-10-16｜P0 Pet Day 14｜主動掃描授權目錄與摘要顯示
 
-來源文章：[2026-10-16｜P0 Pet Day 13｜重複預覽顯示群組大小與檔案數](https://app.notion.com/p/3fae51d45093814dbdabee6deac48554?pvs=204)。
+來源文章：[2026-10-16｜P0 Pet Day 14｜主動掃描授權目錄與摘要顯示](https://app.notion.com/p/3fbe51d4509381e484f4eb9e1f98fc68?pvs=204)。
 
 ## 1. 學習大綱
-P0／Pet Day 13。主體實作 15 分鐘；Refactor／必要補加不計入學習時數。
-來源：rust_ai_chat/main `2aecb0f02f9176287e848b7e4897f28ef3929072`；copilot_use/main `49e1d946dd3c22ffcc4b1aa0e7715cb5b1686724`；產品教學分支 `1d1668b97e65ccfafc073829f131c93133c8bb7e`。已讀共同規則、P9_TARGET、FUTURE_WORK、SYSTEM_ARCHITECTURE、learning-state 與 Notion 共同／專案／Day 12；共同規則為準。當前 P0，最晚切點 2026-12-12，未達切點也無提前完成證據，不切換階段。首次週六完整比對尚未成功，last_full_comparison 保持 null；本日只核對選題相關差異，不冒稱全量完成。
-對應 FUTURE_WORK 原「FileOrganizer SHA256 重複檔案分組／IPC／UI 接線」及「使用者授權、型別化 preview／confirmation／receipt」項目。最新 file_[organizer.rs](http://organizer.rs) 已回 DuplicatePreview\{groups,warnings\}，每組含 sizeBytes／itemIds；Day 11 IPC、Day 12 漫遊 opt-in 都已套用。本日不重做掃描／SHA256，而是讓 UI 顯示每組的檔案大小及數量，並避免舊結果誤作本次結果。
-成品 pet_runtime 的 private directory／no-follow／receipt 是行為及安全目標；成品 SHA256 分組仍列未完成，不能聲稱已有成品等價。保留學習庫既有 Tauri → JS → WASM 路線與無路徑參數命令，不把成品檔名硬搬過來。
+P0／Pet Day 14；主體 Red＋最小 Green 15 分鐘。
+來源：rust_ai_chat/main `aa85f9410c98452b48b9f6e63cdfb404b1bef28a`（workspace 0.2.14）；copilot_use/main `49e1d946dd3c22ffcc4b1aa0e7715cb5b1686724`；教學文件分支檢查點 `76e4dddeec5cd766f6730ee0cbe823ba8e4f598e`。已讀五份指定 docs、Notion 共同及三專案主頁與 Day 13，父頁未列 Day 14，搜尋亦未找到相同專案 Day 14。Day 13 三個功能均已出現在最新 source，本日不重複教學。首次週六完整比對尚未完成，`last_full_comparison=null`；本次為相關差異核對，未涵蓋全庫功能驗收。當前 P0，下一切點 2026-12-12，無提前完成證據，階段不變。
+對應 FUTURE_WORK 原「使用者授權、型別化 preview／confirmation／receipt」與「Tauri／Leptos IPC」項目。已核對 frontend App／bridge、Tauri scan_file_preview／authorized_root、file_organizer::ScanPreview／scan_preview 及其 non-root／symlink／候選群組測試。現在 App 啟動會自動 scan_file_preview，但 Ok 結果直接丟棄；只有 Day 13 的 SHA256 按鈕會顯示摘要。
+本日把既有一般掃描接成使用者主動操作的預覽按鈕，顯示檔案數、同大小候選數與警告數；不重做 SHA256 群組。成品安全目標是先授權、預覽與操作收據分開；沿用學習庫的環境設定授權 root 及無任意路徑參數 IPC，沒有宣稱本日完成成品 private Trash／receipt 或 SQLite PetStore。
 ## 2. 實作內容
-### Red：加入顯示契約測試
-新增 `apps/desktop_pet/frontend/src/duplicate_preview.rs`。先只加入下方 tests 模組，執行第 4 節第一條命令，預期缺 DuplicatePreviewView 而編譯失敗；再加入上方型別及 impl 完成 Green。以下是最終完整檔案，避免散落重複實作：
+### Red：先定義摘要契約
+新增 apps/desktop_pet/frontend/src/file_scan_[view.rs](http://view.rs)，先僅加入下方 tests 模組，再執行第 4 節測試，預期缺 FileScanView 而編譯失敗；隨後補上型別及 impl。以下為最終完整檔案：
 ```rust
 use serde::Deserialize;
 
-// 僅保留顯示所需資料，不持有 hash、警告本文或私人路徑。
+// 顯示層丟棄路徑、opaque ID 與警告本文。
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct DuplicateGroupView {
-    size_bytes: u64,
-    item_ids: Vec<serde::de::IgnoredAny>,
-}
-
-#[derive(Debug, Deserialize)]
-pub struct DuplicatePreviewView {
-    groups: Vec<DuplicateGroupView>,
+pub struct FileScanView {
+    files: Vec<serde::de::IgnoredAny>,
+    duplicate_size_candidates: Vec<serde::de::IgnoredAny>,
     warnings: Vec<serde::de::IgnoredAny>,
 }
 
-impl DuplicatePreviewView {
+impl FileScanView {
     pub fn summary(&self) -> String {
-        let mut text = format!(
-            "SHA256 重複群組：{}；掃描警告：{}。僅供預覽，尚未移動或刪除檔案。",
-            self.groups.len(), self.warnings.len()
-        );
-        for (index, group) in self.groups.iter().enumerate() {
-            text.push_str(&format!(
-                "\n群組 {}：每檔 {} 位元組，{} 個檔案。",
-                index + 1, group.size_bytes, group.item_ids.len()
-            ));
-        }
-        text
+        format!(
+            "掃描檔案：{}；同大小候選群組：{}；警告：{}。同大小不代表內容相同；僅供預覽，尚未移動或刪除檔案。",
+            self.files.len(), self.duplicate_size_candidates.len(), self.warnings.len()
+        )
     }
 }
 
@@ -48,119 +36,114 @@ mod tests {
     use super::*;
 
     #[test]
-    fn summary_shows_group_sizes_without_private_paths() {
-        let value: DuplicatePreviewView = serde_json::from_str(r#"{
-            "groups": [
-                {"sizeBytes":4,"itemIds":["item-000000","item-000001"],
-                 "digestSha256":"private-hash"},
-                {"sizeBytes":0,"itemIds":["item-000002","item-000003","item-000004"]}
-            ],
-            "warnings":[{"relativePath":"private.txt","message":"private-error"}]
+    fn counts_are_visible_but_private_values_are_discarded() {
+        let value: FileScanView = serde_json::from_str(r#"{
+            "files":[{"id":"private-id","relativePath":"private.txt","sizeBytes":3},{}],
+            "duplicateSizeCandidates":[{"sizeBytes":3,"itemIds":["private-id","other-id"]}],
+            "warnings":[{"relativePath":"secret.txt","message":"private-error"}]
         }"#).unwrap();
         let text = value.summary();
-        assert!(text.contains("SHA256 重複群組：2；掃描警告：1"));
-        assert!(text.contains("群組 1：每檔 4 位元組，2 個檔案"));
-        assert!(text.contains("群組 2：每檔 0 位元組，3 個檔案"));
+        assert!(text.contains("掃描檔案：2；同大小候選群組：1；警告：1"));
+        assert!(text.contains("同大小不代表內容相同"));
         assert!(text.contains("尚未移動或刪除"));
-        for private in ["private.txt", "private-error", "private-hash", "item-000000"] {
+        for private in ["private-id", "private.txt", "secret.txt", "private-error"] {
             assert!(!text.contains(private));
         }
     }
 
     #[test]
-    fn empty_preview_is_explicit_and_missing_contract_is_rejected() {
-        let value: DuplicatePreviewView =
-            serde_json::from_str(r#"{"groups":[],"warnings":[]}"#).unwrap();
-        assert_eq!(value.summary(),
-            "SHA256 重複群組：0；掃描警告：0。僅供預覽，尚未移動或刪除檔案。");
-        assert!(serde_json::from_str::<DuplicatePreviewView>(
-            r#"{"groups":[{"itemIds":[]}],"warnings":[]}"#
+    fn empty_is_explicit_and_incomplete_contract_is_rejected() {
+        let value: FileScanView = serde_json::from_str(
+            r#"{"files":[],"duplicateSizeCandidates":[],"warnings":[]}"#
+        ).unwrap();
+        assert!(value.summary().contains("掃描檔案：0；同大小候選群組：0；警告：0"));
+        assert!(serde_json::from_str::<FileScanView>(
+            r#"{"files":[],"warnings":[]}"#
         ).is_err());
     }
 }
 ```
-在 `apps/desktop_pet/frontend/Cargo.toml` 檔尾新增（若已有 dev-dependencies，合併一次）：
-```toml
-[dev-dependencies]
-serde_json.workspace = true
-```
-此套件已在 workspace／lock，沒有引入新版本。[main.rs](http://main.rs) 頂端既有 mod bridge／mod component 後加入：
+apps/desktop_pet/frontend/src/[main.rs](http://main.rs) 頂端在 mod duplicate_preview; 後新增：
 ```rust
-mod duplicate_preview;
+mod file_scan_view;
 ```
-### 最小 Green：將資料接到真實按鈕
-`apps/desktop_pet/frontend/src/bridge.rs` 刪除舊 DuplicatePreviewCounts 型別，將既有 scan_duplicate_preview 完整替換為：
+現有 dev-dependencies 已包含 serde_json，不重複新增。
+### 最小 Green：接既有 IPC 與真實按鈕
+在 frontend/src/[bridge.rs](http://bridge.rs) 完整替換 scan_file_preview，其 extern scan_file_preview_js 及其他函式保留：
 ```rust
-pub async fn scan_duplicate_preview() -> Result<String, String> {
-    let value = JsFuture::from(scan_duplicate_preview_js())
-        .await.map_err(js_error)?;
-    let result: crate::duplicate_preview::DuplicatePreviewView =
-        serde_wasm_bindgen::from_value(value).map_err(|e| e.to_string())?;
-    Ok(result.summary())
+pub async fn scan_file_preview() -> Result<String, String> {
+    let value = JsFuture::from(scan_file_preview_js()).await.map_err(js_error)?;
+    let view: crate::file_scan_view::FileScanView =
+        serde_wasm_bindgen::from_value(value).map_err(|error| error.to_string())?;
+    Ok(view.summary())
 }
 ```
-保留 extern 中 scan_duplicate_preview_js 及其他 bridge 函式。`apps/desktop_pet/frontend/src/main.rs`::App 在 duplicate_status signal 後新增：
+在 frontend/src/[main.rs](http://main.rs)::App 的 duplicate_loading signal 後新增：
 ```rust
-let (duplicate_loading, set_duplicate_loading) = signal(false);
+let (scan_loading, set_scan_loading) = signal(false);
+let (scan_status, set_scan_status) = signal::<Option<String>>(None);
 ```
-將原「檢查重複檔案」按鈕及緊接其後顯示 duplicate_status 的 Show 整段替換為以下內容；保留後面的 ErrorMessage：
+刪除 App 初始化區塊內下列整段自動掃描，其他兩個 pet state listener／get_pet_state spawn_local 均保留：
+```rust
+spawn_local(async move {
+    match bridge::scan_file_preview().await {
+        Ok(_) => {}
+        Err(message) => {
+            error_writer.set(Some(message));
+        }
+    }
+});
+```
+在既有「檢查重複檔案」按鈕前新增以下完整 view：
 ```rust
 <button
     type="button"
-    disabled=move || duplicate_loading.get()
+    disabled=move || scan_loading.get() || duplicate_loading.get()
     on:click=move |_| {
-        // 清除過時預覽；同時只允許一次使用者請求。
-        if duplicate_loading.get_untracked() { return; }
-        set_duplicate_loading.set(true);
-        set_duplicate_status.set(None);
+        if scan_loading.get_untracked() || duplicate_loading.get_untracked() { return; }
+        set_scan_loading.set(true);
+        set_scan_status.set(None);
         set_error.set(None);
         spawn_local(async move {
-            match bridge::scan_duplicate_preview().await {
-                Ok(summary) => set_duplicate_status.set(Some(summary)),
-                Err(message) => set_error.set(Some(message)),
+            match bridge::scan_file_preview().await {
+                Ok(summary) => set_scan_status.set(Some(summary)),
+                // 不把平台錯誤中的私人路徑顯示於畫面。
+                Err(_) => set_error.set(Some("掃描失敗，請確認已授權目錄後重試。".into())),
             }
-            set_duplicate_loading.set(false);
+            set_scan_loading.set(false);
         });
     }
->"檢查重複檔案"</button>
-<Show when=move || duplicate_loading.get() fallback=|| ()>
-    <p role="status">"正在檢查重複檔案…"</p>
+>"預覽授權目錄"</button>
+<Show when=move || scan_loading.get() fallback=|| ()>
+    <p role="status">"正在掃描授權目錄…"</p>
 </Show>
-<Show when=move || duplicate_status.get().is_some() fallback=|| ()>
-    <pre class="duplicate-preview" role="status">
-        {move || duplicate_status.get().unwrap_or_default()}
-    </pre>
+<Show when=move || scan_status.get().is_some() fallback=|| ()>
+    <p role="status">{move || scan_status.get().unwrap_or_default()}</p>
 </Show>
 ```
-`apps/desktop_pet/frontend/style.css` 檔尾追加（相同 selector 若已存在則合併）：
-```css
-.duplicate-preview {
-    max-width: 100%;
-    max-height: 5rem;
-    overflow: auto;
-    white-space: pre-wrap;
-    overflow-wrap: anywhere;
-    font: inherit;
-    margin: 0;
-}
+為避免一般掃描與 SHA256 掃描同時執行，既有「檢查重複檔案」按鈕只調整以下兩處，其他 Day 13 行為保留：
+```rust
+disabled=move || duplicate_loading.get() || scan_loading.get()
 ```
-### Refactor
-將預覽顯示整理為三個職責：`duplicate_preview.rs` 的 `summary` 產生純文字摘要；`bridge.rs` 反序列化 IPC 結果；`App` 管理載入、錯誤與畫面。顯示模型僅保留大小與數量，避免 hash、opaque ID 及警告路徑進入畫面。
+其 on:click 開頭原 if duplicate_loading.get_untracked() 判斷替換為：
+```rust
+if duplicate_loading.get_untracked() || scan_loading.get_untracked() { return; }
+```
+呼叫鏈：明確按鈕操作 → bridge → JS scanFilePreview → Tauri scan_file_preview → authorized_root → scan_preview → 既有 ScanPreview → FileScanView → 純文字摘要。
+### Refactor 與必要補加
+反序列化及文字契約放 owning frontend 私有模組；App 管理載入與錯誤，後端仍持有授權 root。移除的只有「啟動時掃描並丟棄成功結果」流程。原 SHA256 預覽仍保留；同大小候選不能說成重複檔或可刪清單。一般掃描失敗先清除舊摘要，再顯示固定繁中文案；不顯示 backend 原始路徑錯誤。既有 SHA256 錯誤文案及 OS TOCTOU 風險沒有因此完成修正。200×200 畫面布局／非 root／symlink／更動檔案回歸仍須實測。後端、Domain、SQLite、migration、JS IPC 其餘檔案 N/A。
 ## 3. 套件版本
-workspace 0.2.12。frontend 既有宣告 leptos 0.8、serde 1.0、serde-wasm-bindgen 0.6、wasm-bindgen 0.2；同 SHA lock 分別 0.8.22、1.0.229、0.6.5、0.2.129；Tauri lock 2.12.4（不可沿用舊 Day 的 2.12.3 當今日版本）。測試沿用 workspace serde_json 1.0／lock 1.0.154，不升級依賴。官方最新 stable／MSRV／安全公告與新功能 native/WASM 相容性本次未查證。
+同來源 SHA：workspace 0.2.14；frontend leptos 宣告 0.8／lock 0.8.22、serde 1.0／1.0.229、serde-wasm-bindgen 0.6／0.6.5、wasm-bindgen 0.2／0.2.129；既有測試 serde_json workspace 1.0／lock 1.0.154，Tauri lock 2.12.4。不新增或升級依賴。官方最新 stable、MSRV、安全公告未另查證；新增程式的 native／WASM／GUI 相容性未執行。
 ## 4. 驗證項目
-### 實作邊界與未完成項目
-顯示用純函式獨立在 owning frontend 私有模組，測試不呼叫 Tauri、不掃真實檔案。serde 只保留群組大小、成員數及警告數，不把 hash／opaque ID／警告路徑帶進畫面；預覽不估算「已釋放空間」。錯誤清除舊預覽，請求中停用按鈕，Leptos 以文字呈現結果。後端、JS、Domain、SQLite、migration 本日 N/A。
-沿用原限制：目前 hash 的 open/read 仍有 TOCTOU 風險；本日僅資訊性唯讀預覽，不是可刪除清單，也沒有新增刪除、Trash、restore 或成功事件。root 授權／non-root／symlink 回歸保留，不修改正式 tag。200×200 的實際佈局、鍵盤操作與不同縮放必須 GUI 驗證；CSS 上限不能代替實測。SQLite PetStore 仍在原 FUTURE_WORK，未因 UI 完成。
-### 驗證命令與結果
-本次重新查核最新來源 SHA 的六份 workflow 定義與實際紀錄：Rust AI Chat、Test All、Persistence、Node、Rust Dashboard、Rust Desktop Pet，6/6 workflows、18/18 checks 均 completed/success，沒有 skipped/cancelled/pending check。main 未設 branch protection 必要 contexts；另無 legacy commit-status context（status API 的 pending/total_count=0 只表示沒有 legacy status，並非一個待完成工作），此庫適用 Gate 為上述 Actions/check-runs，已逐一核對，沒有用歷史 CI 替代。[匹配 SHA 的 CI](https://github.com/williechen/rust_ai_chat/actions?query=branch%3Amain)。基準 CI 通過只允許教學發布，不代表以下新增程式已套用或測試通過。
+已讀最新 SHA 六份 workflow 定義，均適用 main push，沒有 path 條件排除。Rust AI Chat、Rust Desktop Pet、Persistence、Test All、Node、Rust Dashboard：6/6 workflows completed/success，18/18 checks completed/success；沒有 skipped/cancelled/pending。main 分支 API 回 protected=false、required contexts/checks=\[\]；protection 明細端點因 integration 權限回 403，未宣稱已讀明細。legacy status total_count=0、statuses=\[\]，不是一個尚待完成的檢查。以上 Gate 精確匹配來源 SHA，非沿用 Day 13 歷史快照。[Test All](https://github.com/williechen/rust_ai_chat/actions/runs/38823217315) · [Persistence](https://github.com/williechen/rust_ai_chat/actions/runs/38823217313)。來源 CI 通過只允許教學發布，不代表下列新增程式已執行。
 ```bash
+cargo test --locked -p desktop-pet-frontend file_scan_view::tests
 cargo test --locked -p desktop-pet-frontend duplicate_preview::tests
 cargo check --locked -p desktop-pet-frontend --target wasm32-unknown-unknown
-node --test apps/desktop_pet/frontend/tests/duplicate-preview-contract.test.mjs
 cargo test --locked -p desktop-pet
+node --test apps/desktop_pet/frontend/tests/scan-preview-contract.test.mjs
+node --test apps/desktop_pet/frontend/tests/scan-preview-no-path.test.mjs
 cargo fmt --all -- --check
 ```
-若新增 dev-dependency 使既有 lock package dependency 清單需更新，由使用者在自己的套用工作區正常更新 Cargo.lock 後再執行 --locked；本助手不寫學習庫或 lock。Red／Green 預期依測試斷言；JS 無任意路徑參數與後端原掃描安全回歸須維持。
-GUI 使用專用、已授權非 root 測試目錄：同內容兩檔顯示 1 組及正確 size/count；不同內容同大小不成組；空結果明示 0；失敗不留舊成功；連按只送一次；預覽不改檔案；200×200 可捲動讀完。不得載入私人環境檔或用 / 作測試 root。
-本次未套用程式、未執行新 Rust／WASM／GUI 測試，未宣稱 Red／Green 已實測。狀態：程式尚待套用、功能尚未由本日實作證明、正式驗收未通過；Notion 發布及讀回另依實際交易紀錄。未讀密鑰、未執行付費 AI。
+預期 Green：摘要顯示三個數量、空結果明示 0、缺契約拒絕、私人欄位不顯示；來源後端回歸維持。GUI 必須確認啟動不掃描、按一次送一次、載入中兩個掃描按鈕互斥、失敗清舊值、200×200 不遮蔽操作、鍵盤可操作。使用專用已授權測試目錄，不能指定私人目錄或 filesystem root；預覽不改任何檔案。上述測試與 GUI 均未執行。
+本輪只發布教學，程式尚待使用者套用；以下 Red／Green 是預期，未執行新功能測試、DB／HTTP／GUI E2E，未宣稱功能已實作或正式驗收通過。沒有修改兩庫產品 source、既有 migration、歷史 Day 或 tag，沒有讀取密鑰或付費 AI 呼叫。Notion 完整讀回後才允許本專案 next_day 更新為 15；寫入結果以實際交易回報為準。

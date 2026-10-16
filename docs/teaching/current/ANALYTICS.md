@@ -1,139 +1,140 @@
-# 2026-10-16｜P0 Analytics Day 13｜來源隔離的 PostgreSQL 統計查詢
+# 2026-10-16｜P0 Analytics Day 14｜依事件類型篩選來源統計
 
-來源文章：[2026-10-16｜P0 Analytics Day 13｜來源隔離的 PostgreSQL 統計查詢](https://app.notion.com/p/3fae51d4509381808a9cd813423d52d1?pvs=204)。
+來源文章：[2026-10-16｜P0 Analytics Day 14｜依事件類型篩選來源統計](https://app.notion.com/p/3fbe51d4509381f2a9a2e4b608706eea?pvs=204)。
 
 ## 1. 學習大綱
-P0／Analytics Day 13。主體實作 25 分鐘；Refactor／必要補加不計入學習時數。
-來源：rust_ai_chat/main `2aecb0f02f9176287e848b7e4897f28ef3929072`；copilot_use/main `49e1d946dd3c22ffcc4b1aa0e7715cb5b1686724`；產品教學分支 `1d1668b97e65ccfafc073829f131c93133c8bb7e`。已讀共同規則、P9_TARGET、FUTURE_WORK、SYSTEM_ARCHITECTURE、learning-state 與 Notion 共同／專案／Day 12；共同規則為準。當前 P0，最晚切點 2026-12-12，未達切點也無提前完成證據，不切換階段。首次週六完整比對尚未成功，last_full_comparison 保持 null；本日只核對選題相關差異，不冒稱全量完成。
-對應 FUTURE_WORK 原「同服務 Dashboard／Ingest／Query」與「四欄事件及來源權限、獨立 PostgreSQL／持久冪等」。最新 HTTP ingest 已接 pg_store::persist_event，Day 12 不再是 501；目前 build_app 只有 /healthz 與 POST /api/v1/events，沒有查詢入口。
-成品 `apps/stats_server/src/lib.rs`::summary、[persistence.rs](http://persistence.rs)::EventStore::summary 已能依來源／事件類型聚合；學習庫沿用現有 pg_store 與 IngestState，新增來源授權的 GET /api/v1/events/\{source\}/summary。成品以獨立 API token 查全域資料；本日為避免直接搬入其整套狀態與管理權限，沿用學習庫來源 token，只能讀同來源聚合，不提供跨來源管理查詢。
+P0／Analytics Day 14；主體 Red＋最小 Green 25 分鐘。
+來源：rust_ai_chat/main `aa85f9410c98452b48b9f6e63cdfb404b1bef28a`（workspace 0.2.14）；copilot_use/main `49e1d946dd3c22ffcc4b1aa0e7715cb5b1686724`；教學文件分支檢查點 `76e4dddeec5cd766f6730ee0cbe823ba8e4f598e`。已讀五份指定 docs、Notion 共同及三專案主頁與 Day 13，父頁未列 Day 14，搜尋亦未找到相同專案 Day 14。Day 13 三個功能均已出現在最新 source，本日不重複教學。首次週六完整比對尚未完成，`last_full_comparison=null`；本次為相關差異核對，未涵蓋全庫功能驗收。當前 P0，下一切點 2026-12-12，無提前完成證據，階段不變。
+對應 FUTURE_WORK 原「同服務 Dashboard／Ingest／Query」與「四欄事件及來源權限、獨立 PostgreSQL」項目。已核對 IngestState、IngestTokens::authorized、source_summary、EventSummary、summary_for_source、persist_event、既有 source_summary_tests 與 PostgreSQL feature／migration。Day 13 的來源彙總已套用，但沒有事件類型篩選入口；本日新增 GET /api/v1/events/\{source\}/summary/\{event_type\}，例如 web_chat 的 chat.message.persisted。
+成品 EventStore::summary 依來源與事件類型 group by，是 Dashboard 分類方向；學習庫以既有 PgPool／來源憑證延伸，只讀單一來源單一類型，不照搬成品全域管理 token、治理 schema 或另一套 Port。輸出仍為既有 Vec\<EventSummary\>，未記錄的類型回 \[\]。
 ## 2. 實作內容
-### Red：先定義真實 handler／PostgreSQL 行為
-在 `apps/stats_server/src/lib.rs` 檔尾新增以下私有模組（保留既有 tests）。先跑第 4 節命令，預期缺 source_summary／summary_for_source 而編譯失敗。合成 fixture 不讀環境密鑰；兩個 sqlx::test 僅在 postgres-integration feature 下執行，使用隔離測試 DB：
+### Red：先加入實際 handler 與 PostgreSQL 契約
+apps/stats_server/src/[lib.rs](http://lib.rs) 檔尾追加以下完整私有模組，保留原 tests／source_summary_tests。先執行第 4 節第一條，預期缺 source_kind_summary／summary_for_source_and_type 而編譯失敗；未實測。
 ```rust
 #[cfg(test)]
-mod source_summary_tests {
+mod source_kind_summary_tests {
     use super::*;
     use axum::extract::Path;
 
-    fn fixture_tokens() -> Arc<IngestTokens> {
-        Arc::new(IngestTokens {
-            chat: "fixture-chat-only".into(),
-            pet: "fixture-pet-only".into(),
-        })
+    fn state(pool: PgPool) -> IngestState {
+        IngestState {
+            pool,
+            tokens: Arc::new(IngestTokens {
+                chat: "fixture-chat-only".into(),
+                pet: "fixture-pet-only".into(),
+            }),
+        }
     }
+
     fn headers(token: &str) -> HeaderMap {
-        let mut headers = HeaderMap::new();
-        headers.insert(AUTHORIZATION, format!("Bearer {token}").parse().unwrap());
-        headers
+        let mut value = HeaderMap::new();
+        value.insert(AUTHORIZATION, format!("Bearer {token}").parse().unwrap());
+        value
     }
 
     #[tokio::test]
-    async fn summary_rejects_cross_source_before_database_access() {
+    async fn authorization_and_filter_validation_precede_database_access() {
         let pool = sqlx::postgres::PgPoolOptions::new()
             .connect_lazy("postgres://fixture:fixture@127.0.0.1:1/unused").unwrap();
         pool.close().await;
-        let state = IngestState { pool, tokens: fixture_tokens() };
-        for (source, headers, expected) in [
-            ("desktop_pet", headers("fixture-chat-only"), StatusCode::UNAUTHORIZED),
-            ("web_chat", HeaderMap::new(), StatusCode::UNAUTHORIZED),
-            ("unknown", headers("fixture-chat-only"), StatusCode::BAD_REQUEST),
-            ("web_chat", headers("fixture-chat-only"), StatusCode::SERVICE_UNAVAILABLE),
+        let state = state(pool);
+        for (source, kind, token, expected) in [
+            ("desktop_pet", "chat.message.persisted", "fixture-chat-only", StatusCode::UNAUTHORIZED),
+            ("web_chat", "chat.message.persisted", "", StatusCode::UNAUTHORIZED),
+            ("unknown", "chat.message.persisted", "fixture-chat-only", StatusCode::BAD_REQUEST),
+            ("web_chat", " ", "fixture-chat-only", StatusCode::BAD_REQUEST),
+            ("web_chat", "a\0b", "fixture-chat-only", StatusCode::BAD_REQUEST),
+            ("web_chat", "chat.message.persisted", "fixture-chat-only", StatusCode::SERVICE_UNAVAILABLE),
         ] {
-            let result = source_summary(
-                State(state.clone()), Path(source.into()), headers,
-            ).await;
-            assert_eq!(result.err().unwrap(), expected);
+            assert_eq!(source_kind_summary(
+                State(state.clone()), Path((source.into(), kind.into())), headers(token),
+            ).await.unwrap_err(), expected);
         }
     }
 
     #[cfg(feature = "postgres-integration")]
     #[sqlx::test(migrations = "./migrations")]
-    async fn summary_counts_committed_rows_per_source_and_kind(pool: PgPool) {
-        let id = Uuid::new_v4();
-        for (source, event_id, kind) in [
-            ("web_chat", id, "chat.message.persisted"),
+    async fn filters_committed_deduplicated_rows_by_source_and_kind(pool: PgPool) {
+        let shared_id = Uuid::new_v4();
+        for (source, id, kind) in [
+            ("web_chat", shared_id, "chat.message.persisted"),
             ("web_chat", Uuid::new_v4(), "chat.message.persisted"),
             ("web_chat", Uuid::new_v4(), "chat.room.created"),
-            ("desktop_pet", id, "pet.cleanup.succeeded"),
+            ("desktop_pet", shared_id, "chat.message.persisted"),
         ] {
             let event = EventInput {
-                schema_version: 1, event_id,
+                schema_version: 1, event_id: id,
                 source_app: source.into(), event_type: kind.into(),
             };
-            assert_eq!(pg_store::persist_event(&pool, &event).await.unwrap(),
-                       PersistOutcome::Stored);
-            assert_eq!(pg_store::persist_event(&pool, &event).await.unwrap(),
-                       PersistOutcome::AlreadyExists);
+            assert_eq!(pg_store::persist_event(&pool, &event).await.unwrap(), PersistOutcome::Stored);
+            assert_eq!(pg_store::persist_event(&pool, &event).await.unwrap(), PersistOutcome::AlreadyExists);
         }
-        let state = IngestState { pool: pool.clone(), tokens: fixture_tokens() };
-        let Json(chat) = source_summary(
-            State(state.clone()), Path("web_chat".into()), headers("fixture-chat-only"),
+        let state = state(pool.clone());
+        let Json(rows) = source_kind_summary(
+            State(state), Path(("web_chat".into(), "chat.message.persisted".into())),
+            headers("fixture-chat-only"),
         ).await.unwrap();
-        assert_eq!(chat.len(), 2);
-        assert_eq!(chat[0].event_type, "chat.message.persisted");
-        assert_eq!(chat[0].total, 2);
-        assert_eq!(chat[1].event_type, "chat.room.created");
-        assert_eq!(chat[1].total, 1);
-        assert!(chat.iter().all(|v| v.source_app == "web_chat"));
-        let Json(pet) = source_summary(
-            State(state), Path("desktop_pet".into()), headers("fixture-pet-only"),
-        ).await.unwrap();
-        assert_eq!(pet.len(), 1);
-        assert_eq!(pet[0].source_app, "desktop_pet");
-        assert_eq!(pet[0].total, 1);
+        assert_eq!(rows.len(), 1);
+        assert_eq!(rows[0].source_app, "web_chat");
+        assert_eq!(rows[0].event_type, "chat.message.persisted");
+        assert_eq!(rows[0].total, 2);
+        // SQL 字元視為資料，不變成跨來源的查詢條件。
+        assert!(pg_store::summary_for_source_and_type(
+            &pool, "web_chat", "' OR TRUE --"
+        ).await.unwrap().is_empty());
+        assert!(pg_store::summary_for_source_and_type(
+            &pool, "web_chat", "not.recorded"
+        ).await.unwrap().is_empty());
+        // 原 Day 13 的未篩選查詢仍可使用。
+        assert_eq!(pg_store::summary_for_source(&pool, "web_chat").await.unwrap().len(), 2);
 
-        // 查詢不依賴 event_id 儲存型別；既有 migration 保持不變。
-        sqlx::query(
-            "ALTER TABLE product_events ALTER COLUMN event_id TYPE UUID USING event_id::uuid"
-        ).execute(&pool).await.unwrap();
-        assert_eq!(pg_store::summary_for_source(&pool, "web_chat").await.unwrap(), chat);
-    }
-
-    #[cfg(feature = "postgres-integration")]
-    #[sqlx::test(migrations = "./migrations")]
-    async fn empty_and_rolled_back_events_are_not_counted(pool: PgPool) {
-        assert!(pg_store::summary_for_source(&pool, "web_chat").await.unwrap().is_empty());
         let mut tx = pool.begin().await.unwrap();
         sqlx::query(
             "INSERT INTO product_events(source_app,event_id,schema_version,event_type)
              VALUES ('web_chat',$1,1,'chat.message.persisted')"
         ).bind(Uuid::new_v4().to_string()).execute(&mut *tx).await.unwrap();
         tx.rollback().await.unwrap();
-        assert!(pg_store::summary_for_source(&pool, "web_chat").await.unwrap().is_empty());
+        assert_eq!(pg_store::summary_for_source_and_type(
+            &pool, "web_chat", "chat.message.persisted"
+        ).await.unwrap()[0].total, 2);
+
+        sqlx::query(
+            "ALTER TABLE product_events ALTER COLUMN event_id TYPE UUID USING event_id::uuid"
+        ).execute(&pool).await.unwrap();
+        assert_eq!(pg_store::summary_for_source_and_type(
+            &pool, "web_chat", "chat.message.persisted"
+        ).await.unwrap(), rows);
     }
 }
 ```
-第一個測試的 pool 先關閉，證明未授權在查 DB 前回 401，合法授權才碰到 pool 並回 503；不是把 DB 故障測成成功。資料庫測試實際寫入並重送，驗證去重後計數、相同 ID 不同來源隔離、事件類型分組、空資料與 rollback。
-### 最小 Green：擴充現有 PostgreSQL Adapter 與 HTTP
-`apps/stats_server/src/pg_store.rs` 保留現有 persist_event／lookup_existing_event／錯誤型別，在檔尾新增：
+此 fixture 的 desktop_pet 使用相同事件類型，是刻意驗證來源隔離；既有 valid_event 沒有來源／事件類型白名單，本日不默改其政策。
+### 最小 Green：擴充既有 Adapter、handler 與路由
+在 apps/stats_server/src/pg_[store.rs](http://store.rs) 的 summary_for_source 之後追加以下完整函式，EventSummary 與既有函式全部保留：
 ```rust
-#[derive(Debug, serde::Serialize, sqlx::FromRow, PartialEq, Eq)]
-pub struct EventSummary {
-    pub source_app: String,
-    pub event_type: String,
-    pub total: i64,
-}
-
-pub async fn summary_for_source(
+pub async fn summary_for_source_and_type(
     pool: &PgPool,
     source: &str,
+    event_type: &str,
 ) -> Result<Vec<EventSummary>, sqlx::Error> {
-    // 來源值一律綁定；同一 SQL statement 取得一致的聚合快照。
+    // 兩個值都綁定；不把 URL 內容拼入 SQL。
     sqlx::query_as::<_, EventSummary>(
         "SELECT source_app, event_type, COUNT(*)::bigint AS total
          FROM product_events
-         WHERE source_app = $1
-         GROUP BY source_app, event_type
-         ORDER BY event_type",
-    ).bind(source).fetch_all(pool).await
+         WHERE source_app = $1 AND event_type = $2
+         GROUP BY source_app, event_type",
+    )
+    .bind(source)
+    .bind(event_type)
+    .fetch_all(pool)
+    .await
 }
 ```
-`apps/stats_server/src/lib.rs` 在 build_app 之前新增：
+在 apps/stats_server/src/[lib.rs](http://lib.rs) 的 build_app 之前加入：
 ```rust
-async fn source_summary(
+async fn source_kind_summary(
     State(state): State<IngestState>,
-    axum::extract::Path(source): axum::extract::Path<String>,
+    axum::extract::Path((source, event_type)):
+        axum::extract::Path<(String, String)>,
     headers: HeaderMap,
 ) -> Result<Json<Vec<pg_store::EventSummary>>, StatusCode> {
     if !matches!(source.as_str(), "web_chat" | "desktop_pet") {
@@ -141,44 +142,49 @@ async fn source_summary(
     }
     let authorization = headers.get(AUTHORIZATION)
         .and_then(|value| value.to_str().ok()).unwrap_or("");
-    // URL 來源必須與憑證相符；不接受另一來源的 token。
+    // 先授權來源，不能用 Chat 憑證讀取 Pet。
     if !state.tokens.authorized(&source, authorization) {
         return Err(StatusCode::UNAUTHORIZED);
     }
-    let rows = pg_store::summary_for_source(&state.pool, &source)
-        .await.map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
+    if !valid_event_type(&event_type) || event_type.contains('\0') {
+        return Err(StatusCode::BAD_REQUEST);
+    }
+    let rows = pg_store::summary_for_source_and_type(
+        &state.pool, &source, &event_type,
+    ).await.map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
     Ok(Json(rows))
 }
 ```
-完整替換同檔既有 build_app：
+將同檔 build_app 完整替換為：
 ```rust
 pub fn build_app(state: IngestState) -> Router {
     Router::new()
         .route("/healthz", get(health))
         .route("/api/v1/events", post(ingest))
         .route("/api/v1/events/{source}/summary", get(source_summary))
+        .route(
+            "/api/v1/events/{source}/summary/{event_type}",
+            get(source_kind_summary),
+        )
         .with_state(state)
         .layer(DefaultBodyLimit::max(4096))
 }
 ```
-其他 imports 已存在，無新 crate／無 main 設定變更。真實流程：GET 路由 → source_summary → 檢查 source／來源 token → pg_store::summary_for_source → PostgreSQL group by → JSON；DB 失敗回 503，不回空成功。空資料回 200 與 \[\]。輸出只含 source_app、event_type、total，不包含憑證／本文／路徑／event_id。
-### Refactor
-聚合 SQL 集中於 `pg_store::summary_for_source`，以參數綁定來源；`source_summary` 處理來源授權與 HTTP 狀態映射。沿用既有 `IngestState`、token 驗證與 PostgreSQL pool，攝取流程及原有測試保留。
+路徑中的事件類型使用 URL percent encoding；不是 SQL fragment，也不接受另一來源憑證。真實資料鏈：GET → Path → 來源與憑證驗證 → 類型驗證 → PostgreSQL bind 查詢 → JSON。舊 source_summary 的簽名／URL／測試不需改，沒有新依賴或 migration。
+### Refactor 與必要補加
+沿用 EventSummary DTO 及既有 token 機制，SQL 全留 pg_store。兩條查詢各自只有一個 SELECT，沒有先查全量再用記憶體過濾。NUL 在本次查詢入口拒絕，避免 PostgreSQL text 編碼錯誤；原 ingest 的 NUL／其他控制字元政策與手寫 token 比較的密碼學審查仍未完成，留在原驗證／安全項目，不以本切片宣稱修正。查詢失敗回 503；空集合是成功但沒有資料。沒有把事件列數當真人數、Token 用量、費用或配額。gRPC／Protobuf、逐事件 ACK、SSE、Dashboard UI、治理與 OTel 仍在原 FUTURE_WORK。未變檔 N/A。
 ## 3. 套件版本
-workspace 0.2.12／edition 2024。沿用 axum 宣告 0.8／lock 0.8.9、sqlx 0.9／0.9.0（既有 postgres、macros feature）、serde 1.0／1.0.229、tokio 1.53／1.53.3、uuid 1.28／1.28.0；新 DTO 使用既有 serde Serialize 與 SQLx FromRow，不新增／升級依賴。官方 stable／MSRV／安全公告本次未另查證；既有 CI 不代表新增查詢已通過相容性測試。
+同來源 SHA Cargo.toml／Cargo.lock：workspace 0.2.14、edition 2024；axum 0.8／0.8.9、sqlx 0.9／0.9.0（既有 postgres/macros）、serde 1.0／1.0.229、tokio 1.53／1.53.3、uuid 1.28／1.28.0。postgres-integration feature 已存在；沒有新增或升級依賴。官方最新 stable、MSRV、安全公告未另查證，新增功能 native／PostgreSQL 相容性未執行。
 ## 4. 驗證項目
-### 實作邊界與未完成項目
-SQL 僅在既有 Adapter，採 \$1 bind，避免用字串拼 SQL 或記憶體 HashSet 假聚合；單次 SELECT 對應一次 statement snapshot。查詢不引用 event_id，測試在同一隔離 DB 將 VARCHAR(40) 改 UUID 後仍可讀；這是測試 schema 操作，不更改已套用 migration，也不表示舊 ingest 在 UUID 模式已驗收。
-沿用 Day 12 手寫 token 比較，其正式密碼學安全審查未完成，loopback 不等於可公開部署。沒有新增 gRPC／Protobuf／ACK、SSE、Dashboard UI、治理／封存／撤回、Token 費用／額度或 OTel。這些留原 FUTURE_WORK 項目，不標完成；本日統計是已存事件列數，不是獨立使用者、帳單或釋放空間。未變檔 N/A。
-### 驗證命令與結果
-本次重新查核最新來源 SHA 的六份 workflow 定義與實際紀錄：Rust AI Chat、Test All、Persistence、Node、Rust Dashboard、Rust Desktop Pet，6/6 workflows、18/18 checks 均 completed/success，沒有 skipped/cancelled/pending check。main 未設 branch protection 必要 contexts；另無 legacy commit-status context（status API 的 pending/total_count=0 只表示沒有 legacy status，並非一個待完成工作），此庫適用 Gate 為上述 Actions/check-runs，已逐一核對，沒有用歷史 CI 替代。[匹配 SHA 的 CI](https://github.com/williechen/rust_ai_chat/actions?query=branch%3Amain)。基準 CI 通過只允許教學發布，不代表以下新增程式已套用或測試通過。
+已讀最新 SHA 六份 workflow 定義，均適用 main push，沒有 path 條件排除。Rust AI Chat、Rust Desktop Pet、Persistence、Test All、Node、Rust Dashboard：6/6 workflows completed/success，18/18 checks completed/success；沒有 skipped/cancelled/pending。main 分支 API 回 protected=false、required contexts/checks=\[\]；protection 明細端點因 integration 權限回 403，未宣稱已讀明細。legacy status total_count=0、statuses=\[\]，不是一個尚待完成的檢查。以上 Gate 精確匹配來源 SHA，非沿用 Day 13 歷史快照。[Test All](https://github.com/williechen/rust_ai_chat/actions/runs/38823217315) · [Persistence](https://github.com/williechen/rust_ai_chat/actions/runs/38823217313)。來源 CI 通過只允許教學發布，不代表下列新增程式已執行。
 ```bash
-cargo test --locked -p stats-server source_summary_tests
+cargo test --locked -p stats-server source_kind_summary_tests
+cargo test --locked -p stats-server --features postgres-integration source_kind_summary_tests
 cargo test --locked -p stats-server --features postgres-integration source_summary_tests
 cargo test --locked -p stats-server --features postgres-integration --test postgres_event_store
 cargo fmt --all -- --check
 cargo clippy --locked -p stats-server --all-targets --features postgres-integration -- -D warnings
 ```
-資料庫測試須由使用者提供專用 PostgreSQL 與測試 runner 所需 DATABASE_URL（例如本地隔離 fixture），sqlx::test 每測試獨立建庫並套用原 migrations；不得指向私人或正式 DB。這裡未讀取／列印任何密鑰，不新增載入 .env 的指令。
-預期 Red 缺新函式；Green 同來源 200 JSON、跨來源／無憑證 401、未知來源 400、DB 關閉 503、重送不加計、rollback 不可見。另需啟動隔離服務後以合成憑證實際 HTTP GET 核對同一路由、Content-Type、上述 status、JSON 及 DB 計數；本日私有 handler 測試不能代替 router/socket E2E。
-本次未套用程式、未執行新測試或 PostgreSQL／HTTP E2E，Red／Green 為待執行預期；來源 SHA 的 CI 已重新查核。程式尚待套用、功能尚未由本日實作證明、正式驗收未通過；教學發布與讀回依實際交易紀錄。未讀密鑰、未執行付費 AI、未修改 tag。
+DB 測試須由使用者在隔離測試環境提供 sqlx::test 專用 DATABASE_URL；每個測試建立獨立 DB，不能指向私人或正式 DB。本助手沒有讀取環境憑證。預期：來源／類型正確才回計數 2，其他來源不混入，重送不加計，rollback 不可見，SQL 字元不注入，空結果 \[\]，UUID／VARCHAR 都可查，舊來源查詢仍回兩個類型。無憑證或跨來源 401、未知來源／不合法類型 400、DB 失敗 503。
+還需隔離服務的真實 HTTP GET 檢查路由、percent encoding、JSON、Content-Type、上述狀態與 DB 數值；私有 handler 測試不代替 router/socket E2E。CI 的 test-stats-server 未開 postgres-integration；Persistence 現有 workflow 只執行指定 postgres_event_store integration target，不能據此宣稱本日新增 DB tests 已跑。上述新測試與 E2E 均未執行。
+本輪只發布教學，程式尚待使用者套用；以下 Red／Green 是預期，未執行新功能測試、DB／HTTP／GUI E2E，未宣稱功能已實作或正式驗收通過。沒有修改兩庫產品 source、既有 migration、歷史 Day 或 tag，沒有讀取密鑰或付費 AI 呼叫。Notion 完整讀回後才允許本專案 next_day 更新為 15；寫入結果以實際交易回報為準。

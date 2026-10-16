@@ -29,23 +29,35 @@
   "evidence_presentation": "current status and evidence links only; complete history in engineering records",
   "engineering_record": "docs/source-review/teaching-correspondence-2026-10-17.md",
   "latest_user_revision": {
-    "notion_last_edited_at": "2026-10-16T17:30:35.007Z",
+    "notion_last_edited_at": "2026-10-16T17:33:29.603Z",
     "readback_verified": true,
     "local_mirror_updated": true,
     "program_modified": false,
     "pending_clarification": [],
-    "text_findings": [
-      "i趨勢與明細：疑似多餘字元i",
-      "長期維謢版：維謢疑似應為維護"
-    ],
+    "text_findings": [],
     "notion_user_text_preserved": true,
     "pet_movement": "手動拖移與可選的自動漫遊並存",
     "movement_clarification_readback_verified": true,
-    "content_sha256": "87f6404ecbd837aa7cbd84e8f3e408077a7c49b8a0e11ae7638464c506a5f328",
+    "content_sha256": "8584f4efc0e4cf3b2a4fdadf79895cb98308cd391583a8b4031bad3813a4aa64",
     "publication_ci_failure_allowed": true,
     "publication_requires_failure_disclosure": true,
     "weekly_time": "Saturday 00:00 Asia/Taipei",
     "schedule_verified": true,
     "next_weekly_run": "2026-10-24T00:00:00+08:00"
+  },
+  "latest_consistency_pass": {
+    "date": "2026-10-17",
+    "method": "replace outdated assertions and duplicate publication rules; no added conditions",
+    "files": [
+      "docs/FUTURE_WORK.md",
+      "docs/P9_TARGET.md",
+      "docs/teaching/current"
+    ],
+    "current_mirror_day": 14,
+    "next_day": 15,
+    "historical_day13_preserved": true,
+    "notion_master_readback_verified": true,
+    "product_code_changed": false,
+    "reference_modified": false
   }
 }

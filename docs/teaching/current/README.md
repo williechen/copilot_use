@@ -1,9 +1,10 @@
-# 教學文章鏡像狀態
+# 教學入口與現行Day鏡像
 
-此目錄三篇檔案是已保存的 Day 13 鏡像，不代表目前最新教學。使用者確認目前已到 Day 14；learning-state.json 的三專案 next_day 均為 15，維持不變。未在此宣稱已取得 Day 14 鏡像或發布 Day 15。
+- [教學總文章：方法、格式及三專案大綱](../../COMMON_LEARNING_RULES.md)
+- [Notion總文章](https://app.notion.com/p/3f2e51d4509381ddb8a8ce7cb4cd3e60)
+- [Chat Day14：HTTP讀回SQLite房間資料](CHAT.md)
+- [Pet Day14：主動掃描授權目錄與摘要](PET.md)
+- [Analytics Day14：依事件類型篩選來源統計](ANALYTICS.md)
+- [Day13原文鏡像封存](../archive/day-13/manifest.json)
 
-- [Chat Day 13](CHAT.md)
-- [Pet Day 13](PET.md)
-- [Analytics Day 13](ANALYTICS.md)
-
-誤加進 Day 13 的現有測試整合內容已撤回，原文與程式保留。測試歸位改為 Day 15 起可分批納入當日第 2 節 Refactor 的待辦，依當日功能及實際套用進度安排，不要求一天搬完。參見 [未來工作](../../FUTURE_WORK.md)；參考庫仍由使用者修改。
+現行三篇均由Notion全文同步，原文及程式未重寫；同步範圍見[manifest.json](manifest.json)。下一篇仍為Day15。參考庫對應實作已作靜態核對，本次沒有執行新測試或宣稱整體功能驗收通過。

@@ -1,79 +1,64 @@
 {
-  "scope": "Historical Day13 mirrors; current teaching is Day14, next eligible Day15; mistaken retroactive test-refactor additions withdrawn",
-  "synced_at": "2026-10-16T06:33:32+08:00",
-  "learning_time": {
-    "counted": "Section 2 main implementation: Red and minimum Green",
-    "excluded": [
-      "Refactor",
-      "necessary implementation additions",
-      "sections 1, 3 and 4"
-    ],
-    "total_main_minutes": 60,
-    "per_project_minutes": {
-      "chat": 20,
-      "pet": 15,
-      "analytics": 25
-    }
-  },
+  "scope": "Existing Notion Day14 mirrors, original prose and code retained; single teaching master handles methods and outline",
+  "synced_at": "2026-10-17T01:32:52+08:00",
   "articles": [
     {
       "project": "chat",
-      "day": 13,
-      "notion_page_id": "3fae51d4-5093-81e4-99e5-e02cfba58336",
-      "notion_url": "https://app.notion.com/p/3fae51d4509381e499e5e02cfba58336?pvs=204",
-      "source_sha": "2aecb0f02f9176287e848b7e4897f28ef3929072",
+      "day": 14,
+      "notion_page_id": "3fbe51d450938149af5dd68abc6109bd",
+      "notion_url": "https://app.notion.com/p/3fbe51d450938149af5dd68abc6109bd?pvs=204",
+      "source_sha": "aa85f9410c98452b48b9f6e63cdfb404b1bef28a",
       "path": "docs/teaching/current/CHAT.md",
       "four_sections": true,
-      "code_applied": false,
-      "new_lesson_tests_executed": false,
-      "formal_acceptance": false,
-      "synced_content_sha256": "b99dc1fc1c174bab348c285e352da7e7b7ea09bebf5eedaa49bb9f583e6c6d3f",
+      "synced_content_sha256": "f407964337d160a2e28f46336811e6a862fe0d34b0a77e49a4d4fb7d324c350d",
       "notion_readback_verified": true,
       "original_code_preserved": true,
-      "mirror_has_title_and_source_wrapper": true
+      "code_present_in_reference": true,
+      "code_presence_checked_sha": "3e58e650bd63bcd21ba58e7aabf751542401ef80",
+      "verification_scope": "static article / symbol / caller / test-location correspondence; no new tests executed",
+      "formal_acceptance": null
     },
     {
       "project": "pet",
-      "day": 13,
-      "notion_page_id": "3fae51d4-5093-814d-bdab-ee6deac48554",
-      "notion_url": "https://app.notion.com/p/3fae51d45093814dbdabee6deac48554?pvs=204",
-      "source_sha": "2aecb0f02f9176287e848b7e4897f28ef3929072",
+      "day": 14,
+      "notion_page_id": "3fbe51d4509381e484f4eb9e1f98fc68",
+      "notion_url": "https://app.notion.com/p/3fbe51d4509381e484f4eb9e1f98fc68?pvs=204",
+      "source_sha": "aa85f9410c98452b48b9f6e63cdfb404b1bef28a",
       "path": "docs/teaching/current/PET.md",
       "four_sections": true,
-      "code_applied": false,
-      "new_lesson_tests_executed": false,
-      "formal_acceptance": false,
-      "synced_content_sha256": "2120b9affd977dc14932f0643cd29367533921f75ceaf13689b73d42e77d1b23",
+      "synced_content_sha256": "4b762dca23cda41df764646aefb2834d1545e7b63ae4be3d56e90170a798d0ee",
       "notion_readback_verified": true,
       "original_code_preserved": true,
-      "mirror_has_title_and_source_wrapper": true
+      "code_present_in_reference": true,
+      "code_presence_checked_sha": "3e58e650bd63bcd21ba58e7aabf751542401ef80",
+      "verification_scope": "static article / symbol / caller / test-location correspondence; no new tests executed",
+      "formal_acceptance": null
     },
     {
       "project": "analytics",
-      "day": 13,
-      "notion_page_id": "3fae51d4-5093-8180-8a9c-d813423d52d1",
-      "notion_url": "https://app.notion.com/p/3fae51d4509381808a9cd813423d52d1?pvs=204",
-      "source_sha": "2aecb0f02f9176287e848b7e4897f28ef3929072",
+      "day": 14,
+      "notion_page_id": "3fbe51d4509381f2a9a2e4b608706eea",
+      "notion_url": "https://app.notion.com/p/3fbe51d4509381f2a9a2e4b608706eea?pvs=204",
+      "source_sha": "aa85f9410c98452b48b9f6e63cdfb404b1bef28a",
       "path": "docs/teaching/current/ANALYTICS.md",
       "four_sections": true,
-      "code_applied": false,
-      "new_lesson_tests_executed": false,
-      "formal_acceptance": false,
-      "synced_content_sha256": "b15037433f51c1cb6eab766890ad88a50d6f61f386143dd6a37a434dacdf3486",
+      "synced_content_sha256": "4a36c23271f758e5682c40b17654ea3a4fb9862252b2b05e36c954a0f32ca5fc",
       "notion_readback_verified": true,
       "original_code_preserved": true,
-      "mirror_has_title_and_source_wrapper": true
+      "code_present_in_reference": true,
+      "code_presence_checked_sha": "3e58e650bd63bcd21ba58e7aabf751542401ef80",
+      "verification_scope": "static article / symbol / caller / test-location correspondence; no new tests executed",
+      "formal_acceptance": null
     }
   ],
-  "previous_mirror_manifest": "docs/teaching/archive/day-12/manifest.json",
-  "code_applied": false,
-  "final_status": "Day13 prose integrated into the original four sections; explanatory rule additions and empty supplement blocks removed; code not applied and new tests not executed",
-  "test_refactor_scheduling": {
-    "current_day_confirmed_by_user": 14,
-    "earliest_day": 15,
-    "mode": "incremental alongside relevant daily feature",
-    "applied": false,
-    "day13_additions_withdrawn": true,
-    "notion_removal_readback_verified": true
-  }
+  "previous_mirror_manifest": "docs/teaching/archive/day-13/manifest.json",
+  "master": "docs/COMMON_LEARNING_RULES.md",
+  "next_day": {
+    "chat": 15,
+    "pet": 15,
+    "analytics": 15
+  },
+  "day_advanced": false,
+  "reference_modified": false,
+  "tests_executed_in_this_sync": false
 }
