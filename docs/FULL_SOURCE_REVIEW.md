@@ -205,7 +205,7 @@
 
 流程：參考 callback ordering；成品 DB atomic+fanout 重讀。
 
-判定：測試目的映射，保留 owning crate tests，不建立根 tests workspace。
+判定：測試目的映射，保留 owning crate tests，自 Day15 起逐批遷移根 tests，全部歸位且驗證後才移除根 tests workspace。
 
 ### P01 Pet FSM
 
