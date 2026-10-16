@@ -12,25 +12,16 @@ on:
 jobs:
   rust-postgres:
     runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:17
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: postgres
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd "pg_isready -U postgres"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-    env:
-      DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/postgres
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
+      - name: Install native PostgreSQL for Rust integration tests
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y postgresql postgresql-client libpq-dev
+          sudo systemctl start postgresql
+          sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgres';"
+          pg_isready -h 127.0.0.1 -p 5432
       - name: Release gate rejects incomplete evidence without network access
         run: python3 scripts/tests/release-approval.py
       - name: Enforce pure Domain/Application dependency boundaries
@@ -39,7 +30,9 @@ jobs:
         run: cargo fmt --all -- --check
       - name: Strict Clippy
         run: cargo clippy --workspace --all-targets --locked -- -D warnings
-      - name: Run SQLite Chat/Pet and PostgreSQL Analytics integration tests
+      - name: Run SQLite Chat/Pet and native PostgreSQL Analytics integration tests
+        env:
+          DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/postgres
         run: cargo test --workspace --all-targets --locked
       - name: Verify strict event payload
         run: cargo test -p event-contract
