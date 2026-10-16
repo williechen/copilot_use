@@ -26,7 +26,7 @@ Refactor 整理當步實作及現有測試；例如將根 tests 的現有測試�
 後續能力包括Session／ACL、SQLite歷史與備份、WS presence／typing／reconnect／queue、Outbox、Leptos SSR／hydration、Streaming／RAG／MCP／Agent、多Persona、同意／撤回及政策回退。
 ### Desktop Pet：啟動、互動及安全操作
 基本主線：啟動既有寵物 → 控制介面即時調整 → 設定／記憶持久保存 → 授權目錄 → 掃描及SHA256預覽 → 明確確認 → 真實操作結果／還原 → Analytics紀錄。
-逐步完成五欄設定（名字／種類／喜好／個性／興趣）、選用外觀覆寫、每隻寵物獨立資料與素材、200×200等比動畫、多寵物、桌面漫遊(手動拖移)、記憶／回想／複習／提醒、RAG／MCP／Agent、備份／還原及installer／簽章updater。安裝後的更新採啟動時檢查或手動檢查正式GitHub Release，也不要求重新安裝。
+逐步完成五欄設定（名字／種類／喜好／個性／興趣）、選用外觀覆寫、每隻寵物獨立資料與素材、200×200等比動畫、多寵物、手動拖移與可選的自動漫遊、記憶／回想／複習／提醒、RAG／MCP／Agent、備份／還原及installer／簽章updater。安裝後的更新採啟動時檢查或手動檢查正式GitHub Release，也不要求重新安裝。
 安全檔案流程保持授權root／opaque ID、non-root、確認、symlink／TOCTOU／權限重驗、journal／receipt／Trash／restore；預覽或Domain成功狀態不能冒充filesystem成功憑證。
 ### Analytics：真實事件、查詢與管理
 基本主線：接收Chat／Pet真實動作 → 來源認證 → 去重並持久提交 → Dashboard查詢／篩選 → i趨勢與明細 → 管理紀錄 → 封存／還原／備份。
