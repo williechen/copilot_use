@@ -59,7 +59,7 @@ python3 scripts/local-verify.py --pet-gui
 
 `COPILOT_LOCAL_OTLP_ENDPOINT=http://127.0.0.1:4318` 只允許 numeric loopback。三種信號使用 `/v1/traces`、`/v1/metrics`、`/v1/logs`。HTTP transport 固定白名單 URL，停用 proxy/redirect，移除 SDK 合併的全部自訂 headers。不接受遠端 exporter、credential headers 或 query string；不輸出原始對話、密鑰或路徑。
 
-## Docker Compose
+## Docker Compose（歷史／非現行開發與驗證流程）
 
 複製 `.env.example` 為 `.env`，替換全部 placeholder，以獨立隨機 bootstrap/app DB secrets 與四種 Analytics token 啟動全新 disposable volumes：
 
