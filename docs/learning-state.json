@@ -1,16 +1,16 @@
 {
-  "reference_sha": "d05438950b96e03c9c6c6f8f2c7e3573cc191a25",
-  "validated_program_sha": "39f34854b102eb96b44980d42d7b3f272307ec20",
-  "validated_program_ci_run": 38290016342,
-  "fixed_tag": "v0.1.0",
-  "fixed_tag_sha": "22b44f33b9e2c9edb0fb398fb9bff3efd57b00ee",
+  "reference_sha": "3e58e650bd63bcd21ba58e7aabf751542401ef80",
+  "validated_program_sha": "9bcae7c5d139f75ed08b4daffece602a71fdab34",
+  "validated_program_ci_run": null,
+  "fixed_tag": "v0.2.1",
+  "fixed_tag_sha": "9bcae7c5d139f75ed08b4daffece602a71fdab34",
   "next_day": {
     "chat": 15,
     "pet": 15,
     "analytics": 15
   },
-  "last_full_comparison": null,
-  "next_full_comparison": "2026-10-17T08:00:00+08:00",
+  "last_full_comparison": "2026-10-16T22:47:14.399027+08:00",
+  "next_full_comparison": "2026-10-24T00:00:00+08:00",
   "timezone": "Asia/Taipei",
   "archive_notion_page": "3f7e51d4-5093-81fa-a894-d3660c3252f7",
   "full_comparison_weekday": "Saturday",
@@ -21,11 +21,11 @@
     "analytics": "PostgreSQL"
   },
   "reference_source_db_observation": {
-    "sha": "d05438950b96e03c9c6c6f8f2c7e3573cc191a25",
-    "chat": "SQLite via CHAT_DATABASE_URL; WS typing is transient, no message DB write",
-    "pet": "reference has FSM/native roaming and SHA256 preview IPC; no PetStore SQLite product equivalent",
-    "writable": false,
-    "analytics": "PostgreSQL pg_store now wired to authenticated HTTP ingest; real HTTP/DB validation passed"
+    "sha": "3e58e650bd63bcd21ba58e7aabf751542401ef80",
+    "chat": "SQLite; WS persist_ws_message and room-scoped typing now implemented",
+    "pet": "FSM/native roaming/SHA256 preview; distinct from product PetStore/TOML contracts",
+    "analytics": "authenticated HTTP ingest, PostgreSQL dedup and query",
+    "writable": false
   },
   "analytics_transport": {
     "ingestion": "gRPC/Protobuf",
@@ -35,9 +35,9 @@
     "validation": "docs/analytics-transport-validation.json"
   },
   "learning_policy": {
-    "daily_selection": "差異驅動＋最小功能切片；每日 TDD Red→最小 Green→Refactor→驗證，重大缺陷／阻塞／必要安全驗證在原 Day 第2節補加；不每日全量比對",
-    "daily_gate": "latest applicable rust_ai_chat CI success; no weekly implementation gate for daily teaching",
-    "weekly_review": "Saturday full comparison, necessary implementation, functional tests and commit; formal functional acceptance recorded separately; daily Day publication requires applicable CI success only",
+    "daily_selection": "差異驅動＋最小功能切片；先建立可操作的基本功能項，基本流程與相應驗證通過後推進下一功能，再逐步補充細節、條件與例外；每日 TDD Red→最小 Green→Refactor→驗證。阻擋流程／資料安全／必要相依性在當步處理，其餘深化工作保留原功能項，不每日全量比對",
+    "daily_gate": "最新 CI 未全部 Success 或已有失敗仍可發布教學；列明 CI 狀態、失敗與待修問題，不宣稱驗證通過",
+    "weekly_review": "Saturday 00:00 Asia/Taipei full comparison, necessary implementation, functional tests and commit; formal functional acceptance separate; daily teaching publication independent of CI success",
     "dry_run": "only document corrections addressing user-reported issues; code tests migrations read-only",
     "day_status": "教學已發布／程式尚待套用／功能已實作／功能正式驗收通過，依實際證據分別判定",
     "daily_time": "06:00 Asia/Taipei",
@@ -50,7 +50,9 @@
     "content_preservation": "retain original lessons; append necessary implementation at end of section 2",
     "weekly_engineering": "separate engineering evidence; never add weekly operations to teaching",
     "weekly_ai_validation": "excluded; functional gates only",
-    "phase_transition": "到期切換且不延後；功能未完成則原階段學習未完成，原項目跨階段補加，完工後回填原階段證據"
+    "phase_transition": "到期切換且不延後；功能未完成則原階段學習未完成，原項目跨階段補加，完工後回填原階段證據",
+    "functional_progress": "新增可操作功能／接通流程為每日主體；條件補充回原功能，不把單點 API／純測試／欄位及狀態碼當成完整流程。三專案並行追蹤，不預排 Day、不自動推進學習階段。",
+    "synchronization_judgment": "核對與同步判定依「文章要求 → rust_ai_chat 實作 → copilot_use 對應實作 → 驗證結果」逐項追溯：記錄文章頁面／Day、兩庫精確 SHA、實作路徑與符號、實際呼叫端、對應測試及匹配來源的驗證結果；介面不同須說明合理差異與適配理由。缺少證據標示未核實，只有定義／單元測試而未接通流程標示部分完成，未執行標示未執行；不得以讀過文章、更新 SHA、同名符號或歷史 CI 判定同步完成。"
   },
   "curriculum": {
     "stage_count": 13,
@@ -159,15 +161,10 @@
     },
     "next_stage_boundary": "2026-12-12",
     "planned_completion_date": "2028-12-12",
-    "stage_completion_policy": "到期階段結束且下一階段正常開始；功能未完成不得標記學習完成。原開發項目及原 Day 實作內容後補加跨階段工作，功能完成後回填原階段日期／證據；正式驗收獨立。"
+    "stage_completion_policy": "階段到期照時切換；未完成留原功能追蹤，舊 Day 更正只在下一個 Day Refactor 後獨立補加，不回填原 Day；功能完成後回填階段證據"
   },
   "daily_reference_sha": "bdd646060c11eb3a6b7dd709bd23e582636904fd",
   "daily_product_sha": "579a418c425c7b94c6702689b0ed78d9e8f0998b",
-  "next_formal_day": {
-    "chat": 9,
-    "pet": 9,
-    "analytics": 9
-  },
   "content_alignment": {
     "reference_sha": "16261e0ebeef1a888997cc0ebc42b08ceaf8db24",
     "base_product_sha": "49e1d946dd3c22ffcc4b1aa0e7715cb5b1686724",
@@ -177,7 +174,7 @@
     "full_semantic_equivalence_claimed": false
   },
   "previous_adopted_reference_sha": "fdc74c1ee244cf86df3fd1c427d893d2956f6211",
-  "reference_sha_scope": "latest targeted rust_ai_chat source review; daily publication and full static comparison retain their own SHA; not product acceptance",
+  "reference_sha_scope": "2026-10-16 early Saturday full review; reference read-only; local Linux acceptance recorded separately",
   "static_full_comparison": {
     "status": "completed",
     "date": "2026-10-14",
@@ -196,12 +193,11 @@
     "weekly_functional_acceptance": "not completed by static review"
   },
   "product_pending_requirements": [
-    "native desktop window roaming within monitor work area",
-    "SHA256 duplicate file grouping after safe preview revalidation"
+    "Chat 房間成員停用／恢復：限房主自己的房間，不影響帳號與其他房間",
+    "Chat 房主交接：失去管理權，保留一般成員聊天資格；AI 設定仍限系統管理者",
+    "Chat 刪除自己的帳號：先交接可保留房間運作，剩餘持有房間封存並保留聊天紀錄"
   ],
-  "product_pending_security_review": [
-    "Chat SSE completion: recheck current session/room authorization before persisting; static finding, regression not executed"
-  ],
+  "product_pending_security_review": [],
   "reference_validation": {
     "checked_at": "2026-10-16T00:17:56.399878+08:00",
     "reference_sha": "d05438950b96e03c9c6c6f8f2c7e3573cc191a25",
@@ -248,5 +244,65 @@
     "notion_readback_verified": true,
     "previous_sync_evidence": "docs/teaching/archive/day-12/article-sync.json",
     "final_verdict": "Day13 integrated and read back; original code preserved; main implementation time 20/15/25 minutes, excluding Refactor/additions; no new Day or implementation"
-  }
+  },
+  "previous_product_validation": {
+    "validated_program_sha": "39f34854b102eb96b44980d42d7b3f272307ec20",
+    "validated_program_ci_run": 38290016342,
+    "fixed_tag": "v0.1.0",
+    "fixed_tag_sha": "22b44f33b9e2c9edb0fb398fb9bff3efd57b00ee"
+  },
+  "weekly_functional_acceptance": {
+    "status": "passed",
+    "scope": "local native Linux only",
+    "source_sha": "f66c8f38b69726fdc5ed777523dc84162bb3b425",
+    "evidence": "docs/weekly/2026-10-16/acceptance.json",
+    "remote_ci": "not run for this source",
+    "github_release": "not published",
+    "windows_macos": "not executed",
+    "ai_validation": "excluded"
+  },
+  "previous_local_release": {
+    "tag": "v0.2.0",
+    "source_sha": "f66c8f38b69726fdc5ed777523dc84162bb3b425"
+  },
+  "native_patch_validation": {
+    "version": "0.2.1",
+    "source_sha": "9bcae7c5d139f75ed08b4daffece602a71fdab34",
+    "status": "passed local Linux",
+    "evidence": "docs/weekly/2026-10-16/v0.2.1/acceptance.json",
+    "update_policy": "startup or manual only; no periodic timer",
+    "remote_ci": "not run for this source",
+    "github_release": "not published",
+    "learning_advanced": false
+  },
+  "pending_test_refactor": {
+    "current_day": 14,
+    "earliest_day": 15,
+    "mode": "incremental in section 2 Refactor alongside relevant daily function",
+    "new_feature": false,
+    "retroactive_day13": false,
+    "reference_writable": false,
+    "applied": false,
+    "tests_after_move_executed": false,
+    "transition": "Retain remaining workspace-tests targets and CI until each batch is moved and verified; remove root tests package only after final batch"
+  },
+  "teaching_progress": {
+    "last_published_day": {
+      "chat": 14,
+      "pet": 14,
+      "analytics": 14
+    },
+    "numbering": "single Day sequence per project; next_day is the active next publication index",
+    "application_status": "record separately per lesson and exact source; publication does not imply application",
+    "validation_status": "record separately per lesson and exact source; no validation inferred from Day number",
+    "historical_numbering_record": "docs/teaching/archive/formal-day-numbering.json"
+  },
+  "teaching_document": {
+    "canonical": "docs/COMMON_LEARNING_RULES.md",
+    "notion_page": "https://app.notion.com/p/3f2e51d4509381ddb8a8ce7cb4cd3e60?pvs=204",
+    "format_document": "entry only: docs/TEACHING_FORMAT.md",
+    "scope": "teaching method, four-section format and three project outlines in one article",
+    "status": "consolidated and Notion readback verified; discussions resolved using confirmed answers and prior explicit instructions"
+  },
+  "full_comparison_time": "00:00"
 }
