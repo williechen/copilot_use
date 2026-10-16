@@ -35,7 +35,7 @@
 | ai_core | package openai-adapter；Decoder、stream_text、embedding、generate_sprite、bounded agent | 保留已驗證 Provider Adapter。參考 ChatModel/MockChatModel 是抽象／測試教學階段；此處是具體 Provider，不宣稱是純 Domain |
 | mcp_bridge | HTTP MCP protocol／header／metadata、HttpClient、tool schemas；執行 scope 由 host 控制 | 保留通訊 Adapter，Domain/Application 依賴圖禁止匯入它 |
 | telemetry | OTel transport、trace correlation、低敏事件／HTTP指標、剝除繼承認證 header | 保留觀測 Adapter；參考空模組不等於成品沒有 telemetry |
-| Cargo／Docker／CI | 根 service workspace、獨立 frontend/native locks、WASM/native/docker 管線 | 加入純層依賴守門；新 pet_runtime 為實際使用 crate，沒有根 tests workspace |
+| Cargo／Docker／CI | 根 service workspace、獨立 frontend/native locks、WASM/native/docker 管線 | 加入純層依賴守門；新 pet_runtime 為實際使用 crate，根 tests 自 Day15 起逐批遷移，全部驗證後才移除 |
 
 ## 三條關鍵資料流程
 
@@ -53,4 +53,4 @@ MessageAuthor::AnonymousUser → anonymous_user/None；User{user_id} → user/So
 
 內容宣告順序整理保留公開介面與功能，不以檔名一致宣稱語意等同。Chat HTTP／WS／DB、Pet FSM／codec／事件名稱的適配與安全風險逐項記於完整報告；視窗漫遊及 SHA256 重複檔案分組已納入產品目標，尚未實作。
 
-後續只處理已確認缺口、架構邊界及必要教學適配，保留已驗證功能；活動項目以 [FUTURE_WORK.md](FUTURE_WORK.md) 為準。完整靜態核對、週六工程驗收、每日 CI Gate、學習實際套用分開記錄。
+後續只處理已確認缺口、架構邊界及必要教學適配，保留已驗證功能；活動項目以 [FUTURE_WORK.md](FUTURE_WORK.md) 為準。完整靜態核對、週六工程驗收、每日 CI 狀態揭露（不以全部 Success 作發布條件）、學習實際套用分開記錄。
