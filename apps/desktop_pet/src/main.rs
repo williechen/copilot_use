@@ -785,7 +785,7 @@ fn main() {
             {
                 if let Ok(version) = std::env::var("PET_GUI_TEST_UPDATE_VERSION") {
                     let literal = serde_json::to_string(&version).unwrap_or_default();
-                    let _ = webview.eval(&format!("window.__PET_TEST_UPDATE_VERSION={literal};"));
+                    let _ = webview.eval(format!("window.__PET_TEST_UPDATE_VERSION={literal};"));
                 }
                 if std::env::var("PET_GUI_TEST_FUNCTIONAL_ONLY").as_deref() == Ok("true") {
                     let _ = webview.eval("window.__PET_TEST_FUNCTIONAL_ONLY=true;");
@@ -808,7 +808,7 @@ fn main() {
                         .ok()
                         .and_then(|s| Uuid::parse_str(&s).ok())
                     {
-                        let _ = webview.eval(&format!("window.__PET_TEST_SUGGESTION='{}';", id));
+                        let _ = webview.eval(format!("window.__PET_TEST_SUGGESTION='{}';", id));
                     }
                 }
                 let _ = webview.eval(include_str!("../../../scripts/gui/pet-self-test.js"));
