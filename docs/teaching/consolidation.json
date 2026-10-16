@@ -29,7 +29,7 @@
   "evidence_presentation": "current status and evidence links only; complete history in engineering records",
   "engineering_record": "docs/source-review/teaching-correspondence-2026-10-17.md",
   "latest_user_revision": {
-    "notion_last_edited_at": "2026-10-16T17:23:25.655Z",
+    "notion_last_edited_at": "2026-10-16T17:30:35.007Z",
     "readback_verified": true,
     "local_mirror_updated": true,
     "program_modified": false,
@@ -40,6 +40,12 @@
     ],
     "notion_user_text_preserved": true,
     "pet_movement": "手動拖移與可選的自動漫遊並存",
-    "movement_clarification_readback_verified": true
+    "movement_clarification_readback_verified": true,
+    "content_sha256": "87f6404ecbd837aa7cbd84e8f3e408077a7c49b8a0e11ae7638464c506a5f328",
+    "publication_ci_failure_allowed": true,
+    "publication_requires_failure_disclosure": true,
+    "weekly_time": "Saturday 00:00 Asia/Taipei",
+    "schedule_verified": true,
+    "next_weekly_run": "2026-10-24T00:00:00+08:00"
   }
 }
