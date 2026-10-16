@@ -1,0 +1,39 @@
+name: Saturday source comparison and functional gates
+on:
+  schedule:
+    # Saturday 00:00 Asia/Taipei (Friday 16:00 UTC); GitHub may delay scheduled runs.
+    - cron: '0 16 * * 5'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: weekly-functional-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: product
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: williechen/rust_ai_chat
+          ref: main
+          path: reference
+          persist-credentials: false
+      - name: Verify comparison handles working changes and tracked differences
+        run: python3 product/scripts/tests/weekly-compare.py
+      - name: Record complete committed trees and differences
+        run: python3 product/scripts/weekly-compare.py --reference reference --product product --output evidence/comparison.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: weekly-source-comparison
+          path: evidence/comparison.json
+          retention-days: 90
+  functional:
+    needs: compare
+    uses: ./.github/workflows/verify.yml
+    with:
+      run_compose: false
