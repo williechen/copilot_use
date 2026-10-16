@@ -6,6 +6,17 @@ window.addEventListener('error',e=>window.__PET_LOAD_ERROR=e.message);window.add
  while(!document.querySelector('.pet')){if(Date.now()>limit)throw Error('Leptos mount timeout: '+document.body.innerHTML.slice(0,800)+' '+window.__PET_LOAD_ERROR);await new Promise(r=>setTimeout(r,50));}
  const box=document.querySelector('.pet').getBoundingClientRect();assert(box.width===200&&box.height===200,'200x200 display');
  const invoke=window.__TAURI__.core.invoke;
+ async function tab(name){
+  document.querySelector('#tab-'+name).click();
+  const deadline=Date.now()+5000;
+  while(document.querySelector('#panel-'+name).hidden){if(Date.now()>deadline)throw Error('tab did not open '+name);await new Promise(r=>setTimeout(r,20));}
+  assert([...document.querySelectorAll('[role="tabpanel"]')].filter(p=>!p.hidden).length===1,'only selected control tab is visible');
+ }
+ const tabPetIds=JSON.stringify((await invoke('list_pets')).map(p=>p.id).sort());
+ for(const name of ['interaction','profile','memory','files','manage','updates'])await tab(name);
+ assert(JSON.stringify((await invoke('list_pets')).map(p=>p.id).sort())===tabPetIds,'switching control tabs never creates pets');
+ await tab('interaction');
+
  const pet='8df47580-64e1-4335-8e50-6b593051a398';
  const other='a4105c9b-67f8-4c60-8376-181c706de117';
  const memory='b4197c3b-3f50-4dc1-b12f-fd1a7143ec85';
@@ -65,7 +76,7 @@ window.addEventListener('error',e=>window.__PET_LOAD_ERROR=e.message);window.add
  await invoke('set_interaction',{pet,preferences:{action:'idle',speed:'normal',proactive:false}});
  const duplicateGroups=await invoke('scan_duplicate_preview');
  assert(duplicateGroups.some(g=>g.some(f=>f.name==='sample.txt')&&g.some(f=>f.name==='sample-copy.txt')),'actual SHA256 duplicate IPC grouping');
- document.querySelector('#scan-duplicates').click();
+ await tab('files');document.querySelector('#scan-duplicates').click();
  const duplicateDeadline=Date.now()+10000;
  while(!document.body.textContent.includes('SHA256 重複群組：1')){if(Date.now()>duplicateDeadline)throw Error('duplicate grouping UI');await new Promise(r=>setTimeout(r,50));}
  const duplicateRows=[...document.querySelector('#scan-duplicates').closest('section').querySelectorAll('article')].filter(row=>row.textContent.includes('sample'));
@@ -109,6 +120,7 @@ window.addEventListener('error',e=>window.__PET_LOAD_ERROR=e.message);window.add
  if(window.__PET_TEST_LIVE_IMAGE){await waitUntil(()=>document.querySelector('.sprite'),'generated sprite rendered');const current=await invoke('load_asset',{pet});const frame=document.querySelector('.sprite').getBoundingClientRect();assert(frame.width<=200&&frame.height<=200&&Math.abs(frame.width/frame.height-current.width/current.height)<0.01,'actual sprite frame preserves original aspect inside 200x200');}
 
 
+ await tab('profile');
  for(const [field,value]of [['名字','GUI 驗證'],['種類','鳥']]){
   const input=[...document.querySelectorAll('label')].find(x=>x.textContent===field).querySelector('input');input.value=value;input.dispatchEvent(new Event('input',{bubbles:true}));
  }
@@ -124,6 +136,7 @@ window.addEventListener('error',e=>window.__PET_LOAD_ERROR=e.message);window.add
  const importConfirm=document.querySelector('#confirm-profile-import');importConfirm.checked=true;importConfirm.dispatchEvent(new Event('change',{bubbles:true}));await waitUntil(()=>!importButton.disabled,'profile import checkbox');importButton.click();
  await waitUntil(()=>document.querySelector('#import-pet-profile').disabled,'actual profile import completed');assert(document.querySelector('#profile-location').textContent.includes(pet),'selected pet configuration path rendered');
 
+ await tab('memory');
  const memorySection=[...document.querySelectorAll('section')].find(x=>x.querySelector('h2')?.textContent==='可管理的記憶');
  await waitUntil(()=>[...memorySection.querySelectorAll('article')].some(x=>x.textContent.includes('ASTRO-771')),'memory UI load after profile save');
  const memoryRow=[...memorySection.querySelectorAll('article')].find(x=>x.textContent.includes('ASTRO-771'));
@@ -132,6 +145,7 @@ window.addEventListener('error',e=>window.__PET_LOAD_ERROR=e.message);window.add
  let edited;const editDeadline=Date.now()+10000;do{edited=(await invoke('list_memories',{pet})).find(x=>x.id===knowledge);if(edited?.content==='edited ASTRO-771 test memory')break;await new Promise(r=>setTimeout(r,25));}while(Date.now()<editDeadline);
  assert(edited.content==='edited ASTRO-771 test memory','memory edit UI preserves scoped ID');
 
+ await tab('interaction');
  const actionControl=document.querySelector('#pet-action');await waitUntil(()=>!actionControl.disabled,'selected interaction settings loaded');actionControl.value='learning';actionControl.dispatchEvent(new Event('change',{bubbles:true}));
  const speedControl=document.querySelector('#pet-speed');await waitUntil(()=>!speedControl.disabled,'action auto-save completes');speedControl.value='fast';speedControl.dispatchEvent(new Event('change',{bubbles:true}));
  const interactionDeadline=Date.now()+10000;let preferences;
@@ -168,6 +182,7 @@ window.addEventListener('error',e=>window.__PET_LOAD_ERROR=e.message);window.add
  await roamingToggle(false);await preference('action','learning');
  assert((await invoke('learning_summary',{pet})).total>0,'actual learning summary');
  assert(await invoke('recall_prompt')===null,'proactivity requires opt in');
+ await tab('manage');
  const backups=document.querySelector('#pet-backups');document.querySelector('#create-snapshot').click();
  await waitUntil(()=>backups.textContent.includes('備份完成'),'backup UI completion');const snapshots=await invoke('list_snapshots');assert(snapshots.length===1&&snapshots[0].sha256.length===64,'snapshot manifest');
  await invoke('save_memory',{pet,id:knowledge,content:'changed after snapshot'});
@@ -184,12 +199,14 @@ window.addEventListener('error',e=>window.__PET_LOAD_ERROR=e.message);window.add
  }
  // Wait for the actual UI timer, shared between the settings and floating windows.
  await invoke('add_card',{pet,question:'主動回想測試題：Rust 所有權',answer:'只有一個擁有者'});
+ await tab('interaction');
  const proactiveControl=document.querySelector('#pet-proactive');proactiveControl.checked=true;proactiveControl.dispatchEvent(new Event('change',{bubbles:true}));
  const proactiveDeadline=Date.now()+70000;
  while(!document.querySelector('.recall-prompt')?.textContent.includes('主動回想測試題')){if(Date.now()>proactiveDeadline)throw Error('actual proactive recall timer did not display');await new Promise(r=>setTimeout(r,100));}
  assert(await invoke('recall_prompt')===null,'displayed reminder is rate limited across windows');
  document.querySelector('.recall-prompt button').click();
 
+ await tab('manage');
  const registry=document.querySelector('#pet-archive');const archivePet=document.querySelector('#archive-pet');assert(archivePet.disabled,'pet removal UI confirmation');
  let removalDenied=false;try{await invoke('set_pet_archived',{pet,archived:true,confirmed:false})}catch(_){removalDenied=true}assert(removalDenied,'pet removal IPC confirmation');
  const removeConfirm=document.querySelector('#confirm-pet-archive');removeConfirm.checked=true;removeConfirm.dispatchEvent(new Event('change',{bubbles:true}));await waitUntil(()=>!archivePet.disabled,'pet removal checkbox');archivePet.click();
@@ -198,7 +215,7 @@ window.addEventListener('error',e=>window.__PET_LOAD_ERROR=e.message);window.add
  const archivedRow=registry.querySelector(`article[data-pet="${pet}"]`);const restorePet=archivedRow.querySelector('button');assert(restorePet.disabled,'pet restore UI confirmation');const restorePetConfirm=archivedRow.querySelector('input');restorePetConfirm.checked=true;restorePetConfirm.dispatchEvent(new Event('change',{bubbles:true}));await waitUntil(()=>!restorePet.disabled,'pet restore checkbox');restorePet.click();
  await waitUntil(()=>registry.textContent.includes('已還原寵物與原有資料'),'actual pet restore receipt');assert((await invoke('list_memories',{pet})).some(x=>x.id===knowledge),'restored pet retains saved memory');
  assert((await invoke('list_pets')).length===2,'restored pet registry');
- if(window.__PET_TEST_UPDATER){
+ if(window.__PET_TEST_UPDATER){await tab('updates');document.querySelector('#local-updater').closest('details').open=true;
   const available=await invoke('check_local_update');assert(available.status==='available'&&available.version===window.__PET_TEST_UPDATE_VERSION,'local signed update discovered');
   let unconfirmedInstall=false;try{await invoke('install_local_update',{id:available.id,confirmed:false})}catch(_){unconfirmedInstall=true}assert(unconfirmedInstall,'updater installation requires confirmation');
   const verified=await invoke('verify_local_update',{id:available.id});assert(verified.status==='signature_verified'&&verified.bytes>0,'actual updater signature download verified');
@@ -211,5 +228,5 @@ window.addEventListener('error',e=>window.__PET_LOAD_ERROR=e.message);window.add
   let remoteDenied=false;try{await invoke('check_local_update')}catch(_){remoteDenied=true}assert(remoteDenied,'updater remote URL rejected before download');
   }
  }
- await invoke('gui_test_result',{success:true,message:'PASS: WebKit/WASM, 200x200, IPC, profiles, memory isolation/deletion, recall scheduling, advanced overrides, memory editing, opaque-ID confirmed cleanup, organizer GUI, journal/restore recovery, Trash UI, animation choices, rendered proactive reminder and cooldown, learning summary, SQLite/assets snapshot restore, per-pet TOML import and recoverable registry, right-click controls and single-instance reactivation without duplicate pets, native roaming and live UI toggle/action/speed auto-save without restart, SHA256 duplicate preview and per-file confirmation; MCP='+(window.__PET_TEST_FUNCTIONAL_ONLY?'excluded':'local protocol checks')+'; AI='+!!window.__PET_TEST_LIVE_AI+'; image='+!!window.__PET_TEST_LIVE_IMAGE+'; analytics='+!!window.__PET_TEST_ANALYTICS+'; updater_signature='+!!window.__PET_TEST_UPDATER});
+ await invoke('gui_test_result',{success:true,message:'PASS: WebKit/WASM, 200x200, IPC, profiles, memory isolation/deletion, recall scheduling, advanced overrides, memory editing, opaque-ID confirmed cleanup, organizer GUI, journal/restore recovery, Trash UI, animation choices, rendered proactive reminder and cooldown, learning summary, SQLite/assets snapshot restore, per-pet TOML import and recoverable registry, six functional control tabs, right-click controls and single-instance reactivation without duplicate pets, native roaming and live UI toggle/action/speed auto-save without restart, SHA256 duplicate preview and per-file confirmation; MCP='+(window.__PET_TEST_FUNCTIONAL_ONLY?'excluded':'local protocol checks')+'; AI='+!!window.__PET_TEST_LIVE_AI+'; image='+!!window.__PET_TEST_LIVE_IMAGE+'; analytics='+!!window.__PET_TEST_ANALYTICS+'; updater_signature='+!!window.__PET_TEST_UPDATER});
 })().catch(async e=>{await window.__TAURI__.core.invoke('gui_test_result',{success:false,message:String(e?.message||e)})});
