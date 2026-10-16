@@ -1,8 +1,8 @@
 [Unit]
-Description=Copilot Saturday 08:00 Asia/Taipei
+Description=Copilot Saturday 00:00 Asia/Taipei
 
 [Timer]
-OnCalendar=Sat *-*-* 08:00:00 Asia/Taipei
+OnCalendar=Sat *-*-* 00:00:00 Asia/Taipei
 Persistent=true
 Unit=copilot-weekly.service
 

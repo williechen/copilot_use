@@ -1,13 +1,13 @@
 # 週六同步與正式部署建置
 
 此環境使用 `/home/willie/Documents/rust_ai_chat` 作唯讀參考，
-`/home/willie/Documents/copilot_use` 的 `teaching/rust-ai-chat-alignment` 作工程工作區。
+`/home/willie/Documents/copilot_use` 的 `main` 作目前整合工作區。
 使用者於 2026-10-16 重新要求正式部署建置；本次新增建置準備，尚無外部上線證據。
 既有 v0.1.0、release 附件與歷史驗收保持固定。
 
 ## 週六執行
 
-`weekly-sync.yml` 在 main 安裝後，每週六台北時間 08:00 執行，也可手動觸發。
+`weekly-sync.yml` 在 main 安裝後，每週六台北時間 00:00 執行，也可手動觸發。
 GitHub 排程可能延遲；未推送與整合 main 前不會啟用。
 完整 tracked tree 比對保存兩庫 SHA、檔案 Git object ID、mode、新增／刪除／內容差異及 dirty 狀態。
 搬移候選可用相同 object ID 查核；差異本身不代表必要整合。
@@ -74,7 +74,7 @@ Chat 3001／Analytics 3100 只監聽 loopback；本機 HTTP 不啟用 Secure coo
 
 `deploy/systemd/copilot-weekly.service` 與 `.timer` 是 user unit；在同一台電腦直接執行 `scripts/run-weekly.sh`，不使用 GitHub runner 或 Docker。
 安裝到 `~/.config/systemd/user/` 後 `systemctl --user daemon-reload`、`systemctl --user enable --now copilot-weekly.timer`。
-台北時間週六 08:00 執行；未登入時能否常駐取決於使用者服務／linger 設定。Persistent 會在恢復時補跑錯過的排程。
+台北時間週六 00:00 執行；未登入時能否常駐取決於使用者服務／linger 設定。Persistent 會在恢復時補跑錯過的排程。
 此流程不 fetch／覆寫工作目錄、不自動 merge、不推進驗收日期；執行前應確認兩庫來源已更新。
 結果在 `target/weekly/<UTC timestamp>/`，失敗可查 `journalctl --user -u copilot-weekly.service`。
 

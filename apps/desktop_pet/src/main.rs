@@ -846,6 +846,8 @@ async fn gui_test_window_controls(app: tauri::AppHandle) -> Result<serde_json::V
     let mut child =
         tokio::process::Command::new(std::env::current_exe().map_err(|e| e.to_string())?)
             .env_remove("OPENAI_API_KEY")
+            // 第二次啟動只走正常單例交接，不重跑要求空白資料的驗收入口。
+            .env_remove("PET_GUI_TEST")
             .kill_on_drop(true)
             .spawn()
             .map_err(|e| e.to_string())?;
