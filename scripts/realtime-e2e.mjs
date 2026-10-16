@@ -34,7 +34,9 @@ try {
   const denied=await connect(rooms[0],'invalid');
   await until(()=>denied.events.some(e=>e.code==='unauthorized'));
   assert.ok(!denied.events.some(e=>e.type==='ready'));
-  const a=await connect(rooms[0]), b=await connect(rooms[0],token,process.env.CHAT_URL_SECOND||base), other=await connect(rooms[1]);
+  const a=await connect(rooms[0]);
+  await until(()=>a.events.some(e=>e.type==='ready'));
+  const b=await connect(rooms[0],token,process.env.CHAT_URL_SECOND||base), other=await connect(rooms[1]);
   await until(()=>[a,b,other].every(c=>c.events.some(e=>e.type==='ready')));
   assert.ok(b.events.find(e=>e.type==='ready').presence.length>=2,'presence snapshot');
   a.ws.send('{"type":"typing"}');
