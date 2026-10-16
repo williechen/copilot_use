@@ -1,0 +1,2457 @@
+[
+  {
+    "repository": "reference",
+    "path": ".env.example",
+    "sha256": "49b32678278c1c2cb536bce68f70181fb9c5e9ae6a8cce1da101dee76f2c0ec6"
+  },
+  {
+    "repository": "reference",
+    "path": ".github/workflows/ai_chat.yml",
+    "sha256": "a0591a9d6383e32c38710e14d45c53263da6a16cd2512dea83dbedbf7014f80e"
+  },
+  {
+    "repository": "reference",
+    "path": ".github/workflows/dashboard.yml",
+    "sha256": "5701caea4eb6572eca37b16b567d9fae94483c6535dcb298c4793059e3c71ed3"
+  },
+  {
+    "repository": "reference",
+    "path": ".github/workflows/desktop_pet.yml",
+    "sha256": "5faefb71485c0d23e76402a5c3f946254b07ce317000e5fc2baefd709ec03f4c"
+  },
+  {
+    "repository": "reference",
+    "path": ".github/workflows/node.yml",
+    "sha256": "4a9d92b11d010ef2108d0c4e2dd58e01fa46431996b04250da7202bfeeb51a3d"
+  },
+  {
+    "repository": "reference",
+    "path": ".github/workflows/persistence.yml",
+    "sha256": "c832b9ce06fee0d6000c874c35656a08cab0c4ec30fc9fff02071cf1d2422d9f"
+  },
+  {
+    "repository": "reference",
+    "path": ".github/workflows/test.yml",
+    "sha256": "23c93565dbb435130d874f6010775553ccd3bd40dd9c1a1f6e0f5b2bb605271a"
+  },
+  {
+    "repository": "reference",
+    "path": ".gitignore",
+    "sha256": "81648ec9a8b7519b720a32ca02bd00d316b082224c5fe6504b7c41a54375e260"
+  },
+  {
+    "repository": "reference",
+    "path": ".vscode/launch.json",
+    "sha256": "064060a5536c13604ce326c37aa3a56fae4a06cbf0db44c378bf10001435fccb"
+  },
+  {
+    "repository": "reference",
+    "path": ".vscode/tasks.json",
+    "sha256": "65e948d3fe25ef3daa9fd23ed39d3120f32da50cb0700cc94822705abb695c80"
+  },
+  {
+    "repository": "reference",
+    "path": "Cargo.lock",
+    "sha256": "a24db961208c1712dee67f3f70cbf8b55aeef89e89a127d8f52ed672503d19bd"
+  },
+  {
+    "repository": "reference",
+    "path": "Cargo.toml",
+    "sha256": "d4d8d9c7b94f3928b9d95d1a41980dc16b1f98241c6fe0d91a11f850d242ae27"
+  },
+  {
+    "repository": "reference",
+    "path": "README.md",
+    "sha256": "284374a590db3fb57cef6d2c13dc8cbaab98728351db2edce251773382ab0707"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/Cargo.toml",
+    "sha256": "9fb56a3ca1540c86713e550b3687153e6b4875a31b693ca54bb29df2d5e07ac3"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/build.rs",
+    "sha256": "487059eaf8a947b80f20a9aacac038a5047b2ad69d2401b827376c67d6fe847f"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/capabilities/default.json",
+    "sha256": "ef3a05cbc8980eb4bef93f81642de2380cf5e692713e45d0bdbe9d7051845eb1"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/frontend/Cargo.toml",
+    "sha256": "a06ef3121e07f7b56651fd5279fbf0fccbf813153fee09b71812973a9c5afecb"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/frontend/Trunk.toml",
+    "sha256": "afb983c9167e70c116dd8268940668d5ee85748a1e2a88d7170778dba0f075ad"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/frontend/index.html",
+    "sha256": "ad21adc28399397d4f35442d2571d89f5c2b8243f65c46fb740c8b7c33e5fa51"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/frontend/src/bridge.rs",
+    "sha256": "19fdba265e96263fffb05eeb2c269809dbf5116d28a14da635ea2493c402b01c"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/frontend/src/component/activity.rs",
+    "sha256": "609ddf07bda630be8ffeb11a15fc3143185a24a1cf2b159d40d5190dbff4d36b"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/frontend/src/component/chat.rs",
+    "sha256": "b6d95cbe50ec94856ce9b64bab030356cf9c3a54be645977a226578f5762198c"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/frontend/src/component/control.rs",
+    "sha256": "97b09443c6dfeea159f722ddb89768bd55a59682ff55b0bf05d303f4c42e7962"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/frontend/src/component/mod.rs",
+    "sha256": "fca359aac32f8c0b4f524d81517b065a0323f6b1243b5b45f5c5dc714f7a6a4f"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/frontend/src/duplicate_preview.rs",
+    "sha256": "3758377fad9b0ed1a32eeac9359b0b769b4868735798372d5aefade364027dcb"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/frontend/src/file_scan_view.rs",
+    "sha256": "67c422e761fce629b737094d1101ebfb45fe6d8347be8ed6a3a2bff400b352bf"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/frontend/src/main.rs",
+    "sha256": "4de5864885e93e969a20d4e8d4e03fdeb9008d26c3d377ab4127b6584c9dcc5d"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/frontend/style.css",
+    "sha256": "5ad5179a48f6fa0721ee31c303475efd25b6d9e8fe8a34db2123e5d87f05fe98"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/frontend/tests/duplicate-preview-contract.test.mjs",
+    "sha256": "599abdf4bb1dc080ea76f5646ef0db29594db7f6464d9c91b85cab1dc79b6bff"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/frontend/tests/scan-preview-contract.test.mjs",
+    "sha256": "1576d3ece20e5c14f4000436ae1ecd354a52ecac93ef7532bcefc66df0e0c5b3"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/frontend/tests/scan-preview-no-path.test.mjs",
+    "sha256": "c8f76cecbb8a4d79f8c0dd1af0747e8b5e2e58846d64c3f7c7275a946bbdc2ae"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/128x128.png",
+    "sha256": "dbea8a1ad3e897745d137ce43a39a9790aa2265916f12772966ef107b172d983"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/128x128@2x.png",
+    "sha256": "7b54be5d9aed58da54e0eb7c3d892a453b1eb450dc26361d7c317250ef8ba1ac"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/32x32.png",
+    "sha256": "16b4237176236a5088d4bac83cc384317eb288f1856c7935458d77a90f6c17aa"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/Square107x107Logo.png",
+    "sha256": "1c7f1d9661776471c66ab3f9f5f75d6059859c029e1167fe126a4f4c37c55906"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/Square142x142Logo.png",
+    "sha256": "832d64f701839da47b29b837c970fad48122b70d889f2a783fbc9ee29368c405"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/Square150x150Logo.png",
+    "sha256": "f32af4147669c7b9fe21fd70e13d040dd89694f44995294bcb7dc55b96bdc3bb"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/Square284x284Logo.png",
+    "sha256": "2fef81827f842f43a369e32895d2213cd443b70dd04af168dc2940c36b9379bc"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/Square30x30Logo.png",
+    "sha256": "9ee6d8935906a8422544bd57fdb7ce9e9a580ac1ab5756ab7395d351324b781b"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/Square310x310Logo.png",
+    "sha256": "174eb6847208769273f1c1d718db65e96b88583a1b221b32a317e60d150add55"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/Square44x44Logo.png",
+    "sha256": "832904a1ea791da3ea457f95d729b47e118600a2778715cf091b8132039f22e4"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/Square71x71Logo.png",
+    "sha256": "753b260f07f85b50107819ea47ec7791045dadbc728514350fdc2b277ecae4d5"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/Square89x89Logo.png",
+    "sha256": "a306f3318ff107efa2b89c9983977610f314899adfe27a35d2e0a19ba54a3580"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/StoreLogo.png",
+    "sha256": "93e0bce1e4a26f10a4212daf26eff4536b41d2b5a5bb63d823ba6e980917ef52"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/android/mipmap-hdpi/ic_launcher.png",
+    "sha256": "d3fac2d1cea946e10a1b8c8145b3045696cec5807d25ca2e4af04b2aed978e23"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/android/mipmap-hdpi/ic_launcher_foreground.png",
+    "sha256": "9bb9c3cdf35334befa28a358571f11dd0683b8188f5456cd535a7631da88d699"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/android/mipmap-hdpi/ic_launcher_round.png",
+    "sha256": "d3fac2d1cea946e10a1b8c8145b3045696cec5807d25ca2e4af04b2aed978e23"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/android/mipmap-mdpi/ic_launcher.png",
+    "sha256": "af9be69fc78d5d4a72a160d34bfcc5172f73193d9842c3d8f16fb1d0dbb6ab27"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/android/mipmap-mdpi/ic_launcher_foreground.png",
+    "sha256": "6c89470d0bb185f02b7f7ef825f0e42a7f27998fbaa51b6bccae12614024063c"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/android/mipmap-mdpi/ic_launcher_round.png",
+    "sha256": "af9be69fc78d5d4a72a160d34bfcc5172f73193d9842c3d8f16fb1d0dbb6ab27"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/android/mipmap-xhdpi/ic_launcher.png",
+    "sha256": "a0aa4abe094f9f20d1f3786becfedaf22502bcada6230901cfa14a32ed3b73f4"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/android/mipmap-xhdpi/ic_launcher_foreground.png",
+    "sha256": "8b8db343826a1beeda25b2f450209040a32c4e0a5b6fa57d8b883f852a7f00cc"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/android/mipmap-xhdpi/ic_launcher_round.png",
+    "sha256": "a0aa4abe094f9f20d1f3786becfedaf22502bcada6230901cfa14a32ed3b73f4"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/android/mipmap-xxhdpi/ic_launcher.png",
+    "sha256": "f96aa5a8f12e2e3c1d4e3eeb7a524584a52bace077bef995fd00560b95669afd"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/android/mipmap-xxhdpi/ic_launcher_foreground.png",
+    "sha256": "ae9119237ab76dc1ce9308e23959b595ca672df68737ed371fce20745d791f56"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/android/mipmap-xxhdpi/ic_launcher_round.png",
+    "sha256": "f96aa5a8f12e2e3c1d4e3eeb7a524584a52bace077bef995fd00560b95669afd"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/android/mipmap-xxxhdpi/ic_launcher.png",
+    "sha256": "a994b4a23e69a67ef90fb8264fcb17abe10f2ff45dc15e4d3668b4ba188c67a1"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/android/mipmap-xxxhdpi/ic_launcher_foreground.png",
+    "sha256": "139564bdf620f208d5b4dbc15e4d981e0fb4557cf342a7a2c920d9175b0f7978"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/android/mipmap-xxxhdpi/ic_launcher_round.png",
+    "sha256": "a994b4a23e69a67ef90fb8264fcb17abe10f2ff45dc15e4d3668b4ba188c67a1"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/icon.icns",
+    "sha256": "34799188eca85363aeffe9a6c9cc38ba68d8530a3c89338f06567dad36a862cf"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/icon.ico",
+    "sha256": "a940f5af1b3431847a7e5473a170de8c0f8d7ad48f965528f7a351488a3c0b42"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/icon.png",
+    "sha256": "8baa6ddc784e55e92664077db5215b31f6dcba93dc17e9a01f7d10df251ba9dd"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/ios/AppIcon-20x20@1x.png",
+    "sha256": "1578b55a386994d614f05e3e2ea0ae4dc542152edfbe34eedfe27d7fdc794eb1"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/ios/AppIcon-20x20@2x-1.png",
+    "sha256": "ce625227789f927cc52cf087d1f96505b2bd9b1c2cd938d1314401c13a152aa4"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/ios/AppIcon-20x20@2x.png",
+    "sha256": "ce625227789f927cc52cf087d1f96505b2bd9b1c2cd938d1314401c13a152aa4"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/ios/AppIcon-20x20@3x.png",
+    "sha256": "f95d8820101d83a41119ae40c1418d6897db658fe2a548f77678cd6599f86131"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/ios/AppIcon-29x29@1x.png",
+    "sha256": "f9184bd03c54ac2e734c7b0c9fc4bab3d58ce1839a51cfdadab2800d3567f815"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/ios/AppIcon-29x29@2x-1.png",
+    "sha256": "a89fd7b82c9019cee210b11d20c0d86cc84c39c2c5de11382026c009700ccd76"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/ios/AppIcon-29x29@2x.png",
+    "sha256": "a89fd7b82c9019cee210b11d20c0d86cc84c39c2c5de11382026c009700ccd76"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/ios/AppIcon-29x29@3x.png",
+    "sha256": "ee6d1c91039dad9b6a6945ecc65ec0e38a52e89af5b43b4594bb9aee9668a4f4"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/ios/AppIcon-40x40@1x.png",
+    "sha256": "ce625227789f927cc52cf087d1f96505b2bd9b1c2cd938d1314401c13a152aa4"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/ios/AppIcon-40x40@2x-1.png",
+    "sha256": "571d98584f7e9721ff74a706882182ea53d038caf38b7cbe0ccda0054b1c3fa0"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/ios/AppIcon-40x40@2x.png",
+    "sha256": "571d98584f7e9721ff74a706882182ea53d038caf38b7cbe0ccda0054b1c3fa0"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/ios/AppIcon-40x40@3x.png",
+    "sha256": "192356ed10ef98bf7d5c46beda25f6f917f5000f1c669212a10f5d64e834ffbd"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/ios/AppIcon-512@2x.png",
+    "sha256": "67372af16c540b63ab74c33a899af8dd0aa42d6342d75a0cbabbcda43bf1052c"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/ios/AppIcon-60x60@2x.png",
+    "sha256": "192356ed10ef98bf7d5c46beda25f6f917f5000f1c669212a10f5d64e834ffbd"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/ios/AppIcon-60x60@3x.png",
+    "sha256": "e6d3a1fcb466ee737df030ba344db626e21d9d27e5cd14f815580de6e3a09c64"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/ios/AppIcon-76x76@1x.png",
+    "sha256": "d8fc6013ada9d39fd2f947503d4b0b7fc01841205c3cb7571c46a822772df426"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/ios/AppIcon-76x76@2x.png",
+    "sha256": "5faafac34477102f930a6f71a8098f948a199223f812214b947be00c578c6fd3"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/ios/AppIcon-83.5x83.5@2x.png",
+    "sha256": "cf9108ff8ea210fa5c79d9419ac062621988e0c38b5f3ce566ecf8bc51a07297"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/icons/tortoise.jpg",
+    "sha256": "ca0e93326319cfd6902abb570bab6cd2b26ebdd59b61d07090c792019b6cbea0"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/public/index.html",
+    "sha256": "49454032eee6130f188d9b6dc8d7a3a20d6f0e25075d851a4e050171e8986622"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/public/pet.js",
+    "sha256": "2d2af56d184b5b003f1bc3346f78dcefd6097080f6f3c8609a8d3dc0f24a0bca"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/src/chat.rs",
+    "sha256": "c09321faf1b4fff0895015b203cd51492ed20c138281d726725b4887e3e68dfc"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/src/file_organizer.rs",
+    "sha256": "8953377806bafcb76a8eecd535b1f5003b5a26f48bf7b6e725d2067a3fdfebb3"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/src/lib.rs",
+    "sha256": "081e6588690e2833fd0a45f1dbbd1c1bd718a04bc3380c4baf469f1c8a015b4b"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/src/main.rs",
+    "sha256": "adf1b62e8528f0e1f3ee241f6a126ccbee0024f484321c4bcc4d34ffef339c66"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/src/roam.rs",
+    "sha256": "5b5c02bd1be01ba32175c0879aec9648df904cce20ca26b3fcedcd07cb08bab5"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/desktop_pet/tauri.conf.json",
+    "sha256": "ce37d971b58d0f857baa50de8339687498337a16df178c54bb286b2d0ce57b68"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/server/Cargo.toml",
+    "sha256": "b436777229dd4432cade9e8164850eeafbfb0bc532cdb73aaa09df68fdc28919"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/server/src/http.rs",
+    "sha256": "a38ee06efc2bcd92561f8ac0ed57e1a728039922f88d0a703672bf70e963ca0c"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/server/src/hub.rs",
+    "sha256": "b6e4e2d246d1e644ba5c4b7e6f21b63dec76850212641652cb7ced5fc053670e"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/server/src/lib.rs",
+    "sha256": "98cd8a15bb69d3253f5ab79b35164fcac60b8cb3530c03c6c854e37a168f3094"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/server/src/main.rs",
+    "sha256": "0381925059a1116535bf168825a2277e98d1fe742d56605ac5bf8ee4c3cb389b"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/server/src/ssr.rs",
+    "sha256": "f3a2f0bab01053468a65e1057d9ea6f62aefb256d7f10600200d6ab11dba4d7b"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/server/src/state.rs",
+    "sha256": "e6c05be0bc036caedaa55d6c72d9ada3a888ea6cbfdd35e57ece043044c508d3"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/server/src/ws.rs",
+    "sha256": "aa0df06b5620435bc5099d644aaa5bf6e58d9360f10c9e4a19cd1e59f782d206"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/stats_server/Cargo.toml",
+    "sha256": "549c647ed9e88438de4463adae50992b6555c14d29ffad7848226c08a8ab0e06"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/stats_server/migrations/20261014223748_create_product_events.sql",
+    "sha256": "44663555d34f077e8fcf40784b91a943227fd17630c8657f9574f787fca06eaf"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/stats_server/src/lib.rs",
+    "sha256": "a3d373883a5d7d3f021e523802a1b1a16aacbeed602a3a28f073827b0bde6ab6"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/stats_server/src/main.rs",
+    "sha256": "1d80b8050c7167246302ed1d9fcae91f6af9e20ba870f5a902f0664d503f49e3"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/stats_server/src/pg_store.rs",
+    "sha256": "32e21e4956c8a9594fe288340bc4ce65c868f8ed8f7099b86a4e8bc5be7ba1e2"
+  },
+  {
+    "repository": "reference",
+    "path": "apps/stats_server/tests/postgres_event_store.rs",
+    "sha256": "9254690667b84ce249d4d43c157195c1d265662844763e6cec4132727249fa7a"
+  },
+  {
+    "repository": "reference",
+    "path": "crates/ai_core/Cargo.toml",
+    "sha256": "8253f7e9d37b44b2d30a7949cdca7a3ad63eeaeb2f543d36f838d29c3b5e82dc"
+  },
+  {
+    "repository": "reference",
+    "path": "crates/ai_core/src/lib.rs",
+    "sha256": "e6db6a1f3136d99f27896bc8291ca16b677ff4ae92f0c0edcfae90cd23b28e15"
+  },
+  {
+    "repository": "reference",
+    "path": "crates/chat_application/Cargo.toml",
+    "sha256": "f3f7bf509bc01d5f1900686336def961c712b60db976c9627fddccae5a85adfb"
+  },
+  {
+    "repository": "reference",
+    "path": "crates/chat_application/src/lib.rs",
+    "sha256": "9ef274870c2144d31c2b02973b381b392676e6e71d11529df4f2f62b6c66dad9"
+  },
+  {
+    "repository": "reference",
+    "path": "crates/chat_application/src/product_event.rs",
+    "sha256": "e808811e86eab78249bd66c13ebddb468ac07371e21d60ce3d7a90d962b8b16f"
+  },
+  {
+    "repository": "reference",
+    "path": "crates/chat_application/src/repository.rs",
+    "sha256": "e8e0ecedcabbda59af3ce947ce4c18fe20d381f3fd0cb65b649916efe8fd6977"
+  },
+  {
+    "repository": "reference",
+    "path": "crates/chat_domain/Cargo.toml",
+    "sha256": "845e2c6d21feb9eccdbf60548669c7baa455a559b4d2b9853b199f2f6ea4a136"
+  },
+  {
+    "repository": "reference",
+    "path": "crates/chat_domain/src/lib.rs",
+    "sha256": "903f2cddd90d280a7cefc7b5984b2b114556dd3f3b08f3b4e4b37855c4e31360"
+  },
+  {
+    "repository": "reference",
+    "path": "crates/persistence/Cargo.toml",
+    "sha256": "90a3e011be596d6f15c5d184bdc19c49ac256aafd5535e3490095106fa4f60fd"
+  },
+  {
+    "repository": "reference",
+    "path": "crates/persistence/src/lib.rs",
+    "sha256": "c8cecb4088a61d564bd47d86fb798b5f7267de7e9d93777a2162a0a30e65b548"
+  },
+  {
+    "repository": "reference",
+    "path": "crates/pet_domain/Cargo.toml",
+    "sha256": "18b159f763532b13c1eec26e65ab4be1e0dda4c351e217b73fd2aa4bdc4a9a32"
+  },
+  {
+    "repository": "reference",
+    "path": "crates/pet_domain/src/cleanup.rs",
+    "sha256": "280c95603d60b7868f3112eb48bd627cb8a6887c28ea4203b55e853e42c98970"
+  },
+  {
+    "repository": "reference",
+    "path": "crates/pet_domain/src/cleanup_event.rs",
+    "sha256": "2b069c06f33901419a07db047eb5b9176858e8c8b9f34bad9a860aa71eac6a57"
+  },
+  {
+    "repository": "reference",
+    "path": "crates/pet_domain/src/error.rs",
+    "sha256": "99614b9674668220ca2905d59cc3361230d17094f97070f668f7d5d8781e40d4"
+  },
+  {
+    "repository": "reference",
+    "path": "crates/pet_domain/src/lib.rs",
+    "sha256": "36aa2be5757633e5703f0f455e2d0ff0cd7639564df51f8f97575b4a03b61736"
+  },
+  {
+    "repository": "reference",
+    "path": "crates/pet_domain/src/profile.rs",
+    "sha256": "0e37191f3c5d8f33e613dc6855a36e5bfbbc5a303d69295e0607773890201714"
+  },
+  {
+    "repository": "reference",
+    "path": "crates/shared/Cargo.toml",
+    "sha256": "3a52b82c2a2dfc4619deb6113c0a00fb782f36c32839ff7f61c98090c9335f46"
+  },
+  {
+    "repository": "reference",
+    "path": "crates/shared/src/lib.rs",
+    "sha256": "332a9588e8ced0d279663f373d1c6504b39d25e672ea90c70a20aebaa19c681e"
+  },
+  {
+    "repository": "reference",
+    "path": "crates/telemetry/Cargo.toml",
+    "sha256": "af9e3f9bb8f18ba50d6cb14cb0dcf5cdb37abe2c16464b464c6be5dcbdf57963"
+  },
+  {
+    "repository": "reference",
+    "path": "crates/telemetry/src/lib.rs",
+    "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+  },
+  {
+    "repository": "reference",
+    "path": "crates/ui/Cargo.toml",
+    "sha256": "2eabff6fe550a9a14f77f0babcb9ef3084dfa4734b6596b5a51b91f468cae931"
+  },
+  {
+    "repository": "reference",
+    "path": "crates/ui/src/chat_socket.rs",
+    "sha256": "8141e49be8df586d7097e7540117208ce54086377550d505481aed5523fa3316"
+  },
+  {
+    "repository": "reference",
+    "path": "crates/ui/src/lib.rs",
+    "sha256": "b7539d63f740fc08232a6d5fb74501cf582470daf67f4b11f4b721cf16d916e9"
+  },
+  {
+    "repository": "reference",
+    "path": "crates/ui/src/room_api.rs",
+    "sha256": "508b49f86b1c4000b0d7c1468608f874c78f806b81a03890e76c96dc5512b54c"
+  },
+  {
+    "repository": "reference",
+    "path": "deploy/nginx/config",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "repository": "reference",
+    "path": "deploy/otel_collector/config",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "repository": "reference",
+    "path": "deploy/systemd/config",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "repository": "reference",
+    "path": "migrations/20260930034455_crate_rooms.sql",
+    "sha256": "c27795888fa0d86f2163426b0c3309ced59eb7b20e8acc9c698921379af5dd09"
+  },
+  {
+    "repository": "reference",
+    "path": "migrations/20261007084321_create_messages.sql",
+    "sha256": "bb8ef5644ecdd75e1c9d529b46c8def45cdf7e4d92a03768ddf4f85856db37ba"
+  },
+  {
+    "repository": "reference",
+    "path": "rust-toolchain.toml",
+    "sha256": "32314ae0f25d85fda9b7ad0c033266f677a9d772b7a39038c62a386cc3085b75"
+  },
+  {
+    "repository": "reference",
+    "path": "tests/Cargo.toml",
+    "sha256": "e3d8986a01c77d694700bfe06f2affdbd170824fb11ac64853f4d4fab16220db"
+  },
+  {
+    "repository": "reference",
+    "path": "tests/analytics/event_kind_tests.rs",
+    "sha256": "99b867172459287d936c20f14c39a6862f0aea72aaf5dbe75529d7ff623dfdec"
+  },
+  {
+    "repository": "reference",
+    "path": "tests/analytics/http_contract_tests.rs",
+    "sha256": "223d8f86ef8124b7d9faba39a1377bf6461d6a77d432e99ec0fea5d6a00c8304"
+  },
+  {
+    "repository": "reference",
+    "path": "tests/analytics/idempotency_contract.rs",
+    "sha256": "fefd30adaf3436382a1454ed82a9f99355fc6bfbb310192af929f3014e1e2be4"
+  },
+  {
+    "repository": "reference",
+    "path": "tests/analytics/postgres_ingest.rs",
+    "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+  },
+  {
+    "repository": "reference",
+    "path": "tests/chat/persist_publish.rs",
+    "sha256": "94c2e67d4783557790240085bc0b3fa550658b50b3f8f8eef98bb6885383d38a"
+  },
+  {
+    "repository": "reference",
+    "path": "tests/chat/product_event_contract.rs",
+    "sha256": "541aea55c0cf01c05fbaf3522205995fe6d1bf82932405965a9eb0383ba9d93f"
+  },
+  {
+    "repository": "reference",
+    "path": "tests/common/mod.rs",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "repository": "reference",
+    "path": "tests/pet/cleanup_contract.rs",
+    "sha256": "6f10b065cba9e81f5266d68948ae7a7310818e916925e6e2da2efad9e5ab508e"
+  },
+  {
+    "repository": "reference",
+    "path": "tests/pet/cleanup_event_contract.rs",
+    "sha256": "c345a1f5efa4dc3adf318fa3c31460d5b7a0f73a59406392bde945a79498935e"
+  },
+  {
+    "repository": "reference",
+    "path": "tests/pet/day5_codec_tests.rs",
+    "sha256": "bd545efa7d30c873d062686cd014e00c991877271f164a012529801f2d8b9374"
+  },
+  {
+    "repository": "reference",
+    "path": "tests/pet/pet_machine.rs",
+    "sha256": "7fb62d5705a89fed2cacf08ebe57087f85e7846805f4b8d50cba325a3c989bfd"
+  },
+  {
+    "repository": "reference",
+    "path": "tests/pet/profile_contract.rs",
+    "sha256": "7c5ce157b8173a9167fb53b830336bcee7e1f5ac5fb64665997d5a7811b9d789"
+  },
+  {
+    "repository": "reference",
+    "path": "tests/server/day5_tests.rs",
+    "sha256": "03a90292ffcfb1c618442473ff08629baa757f9e72c2d8767a72320bf0bdb548"
+  },
+  {
+    "repository": "product",
+    "path": ".dockerignore",
+    "sha256": "c5da22764d7ce2e5e76a3dd060842686b143ceadc1662b5de079395d2b02051e"
+  },
+  {
+    "repository": "product",
+    "path": ".env.example",
+    "sha256": "96ee4e8d3b2d20e2d1506cbccab36ff786e5dec738cdc299653d35bf55ad9536"
+  },
+  {
+    "repository": "product",
+    "path": ".github/release-approved.json",
+    "sha256": "a6f34c7ede85e5abb02e6cfce725222842d76c55a8c063d3b7609f385a8add9e"
+  },
+  {
+    "repository": "product",
+    "path": ".github/workflows/native-source-audit.yml",
+    "sha256": "3d66825bc60855126cc4b464e9160bd52d237515f16d1e0bb1721df1f0ffb63c"
+  },
+  {
+    "repository": "product",
+    "path": ".github/workflows/release-approved.yml",
+    "sha256": "7202ea0faf4573d8d7104665f53e0849346c60b34c4cc646a363a25ca9a59d9a"
+  },
+  {
+    "repository": "product",
+    "path": ".github/workflows/verify.yml",
+    "sha256": "d889c77ddc81605a4f208624fb601598452c5805e8fc995f3c8387a6638c47ed"
+  },
+  {
+    "repository": "product",
+    "path": ".github/workflows/weekly-sync.yml",
+    "sha256": "1a65f39c1111391fd9dcf969eef4d6506979f1b6ce0c8f2069be5085218e70a5"
+  },
+  {
+    "repository": "product",
+    "path": ".gitignore",
+    "sha256": "f1f78161e2239fac65f84559806287f4f8079744f170328cfefb40c9f201a14f"
+  },
+  {
+    "repository": "product",
+    "path": "Cargo.lock",
+    "sha256": "a451ff1ffb8c2926b8b98f4d7436e123442bd3873943789429e934cf3a2ebaa3"
+  },
+  {
+    "repository": "product",
+    "path": "Cargo.toml",
+    "sha256": "96fc943bf43a143cdbaccae18aa0c0965ee2112152b98008d41964d14b9d94cf"
+  },
+  {
+    "repository": "product",
+    "path": "Dockerfile",
+    "sha256": "031719c7f9c533871106ff79e1b5483831d72fdf431b653cef16b35f58179be5"
+  },
+  {
+    "repository": "product",
+    "path": "LICENSE",
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  {
+    "repository": "product",
+    "path": "README.md",
+    "sha256": "218b705e1e1de5c56bf039a13b7b6cde8a5a01dda411b932e82e5141d5f95910"
+  },
+  {
+    "repository": "product",
+    "path": "apps/desktop_pet/Cargo.lock",
+    "sha256": "75e7ffb0cd3b088c928888d4948685fcef0293dedc2c824e3cb31223f9d21296"
+  },
+  {
+    "repository": "product",
+    "path": "apps/desktop_pet/Cargo.toml",
+    "sha256": "1f81009718238248de019cbb9b195a66da38c5e71d64b9c78e23580308719ec9"
+  },
+  {
+    "repository": "product",
+    "path": "apps/desktop_pet/build.rs",
+    "sha256": "66944695dc79f87d22bbb908e79b322b6771834e826a315fdba28b23478a6cba"
+  },
+  {
+    "repository": "product",
+    "path": "apps/desktop_pet/capabilities/default.json",
+    "sha256": "56e58758bc942665d03a48c054e1a6f22e8d2317baae6524545660e1a314218e"
+  },
+  {
+    "repository": "product",
+    "path": "apps/desktop_pet/frontend/Cargo.lock",
+    "sha256": "7970c8169fb4b0824b8e3acfa7a42dbdd33b534a41cc484c8b6949d316f28a86"
+  },
+  {
+    "repository": "product",
+    "path": "apps/desktop_pet/frontend/Cargo.toml",
+    "sha256": "d408602032305e19636dad65801475ed9faf3d57b432edc6258ff1da9c8a66b2"
+  },
+  {
+    "repository": "product",
+    "path": "apps/desktop_pet/frontend/index.html",
+    "sha256": "bdffd9ac19b27242e15efde070772654215cf7125ae629618d66124298a1c767"
+  },
+  {
+    "repository": "product",
+    "path": "apps/desktop_pet/frontend/src/main.rs",
+    "sha256": "847b6e0615e51f31d36bc5db355938f7c85c9e23774d155e6e4343e318b9bad8"
+  },
+  {
+    "repository": "product",
+    "path": "apps/desktop_pet/frontend/style.css",
+    "sha256": "893c0d215862d8f908856b765c0a4a0da091c1cfcc4e628d0e219af6c9bf9746"
+  },
+  {
+    "repository": "product",
+    "path": "apps/desktop_pet/icons/icon.png",
+    "sha256": "8baa6ddc784e55e92664077db5215b31f6dcba93dc17e9a01f7d10df251ba9dd"
+  },
+  {
+    "repository": "product",
+    "path": "apps/desktop_pet/src/main.rs",
+    "sha256": "1f7712f45f5f67204df303a0ab888c3438ba8af5a979a3ae477ff6aa3099f243"
+  },
+  {
+    "repository": "product",
+    "path": "apps/desktop_pet/src/roaming.rs",
+    "sha256": "414922ca83ab0d6bd93a202307c76ae8d042c1327b6b3908e438da143cd2a5f1"
+  },
+  {
+    "repository": "product",
+    "path": "apps/desktop_pet/src/updater.rs",
+    "sha256": "b98ae0be527653934618dad154c241cf3ef69b9d580df1eb675acf787f4ee94c"
+  },
+  {
+    "repository": "product",
+    "path": "apps/desktop_pet/tauri.conf.json",
+    "sha256": "85282fdca87ca19dbc99549ad13b49f0fd9c3c21d949718d043a6e528923d681"
+  },
+  {
+    "repository": "product",
+    "path": "apps/desktop_pet/tests/glib_variant_safety.rs",
+    "sha256": "aa7b3aac8536bff0bdcec1c8c15d6a93ca2c36bf1c4d372ef29ac0312b19f19d"
+  },
+  {
+    "repository": "product",
+    "path": "apps/server/Cargo.toml",
+    "sha256": "55854c9ca5c0477e7b984e05406774e34bee997596dc028a38da3d31a81e1ba7"
+  },
+  {
+    "repository": "product",
+    "path": "apps/server/frontend/Cargo.lock",
+    "sha256": "daf818a40e7379eb37f44bab34f925e6a5583ddb1e37f064b84a424d9bbc754b"
+  },
+  {
+    "repository": "product",
+    "path": "apps/server/frontend/Cargo.toml",
+    "sha256": "fbc1aceb0f7e3de2f6d256febc5f96d03118a70328a828cb95c640a622f2ef8b"
+  },
+  {
+    "repository": "product",
+    "path": "apps/server/frontend/index.html",
+    "sha256": "470961f201157ecdb2f7201a79a0dc88e170f0c2e2c1cdddfd423d1b55c11905"
+  },
+  {
+    "repository": "product",
+    "path": "apps/server/frontend/src/main.rs",
+    "sha256": "096ae7e5b93792ab84143bed88d3eb7a2458125345ab86a2dd246c440b251597"
+  },
+  {
+    "repository": "product",
+    "path": "apps/server/postgres-migrations/202610110001_chat.sql",
+    "sha256": "50895618cd1eff41cdac92cd24e7550753aafbc541319f90104b98a768c56d21"
+  },
+  {
+    "repository": "product",
+    "path": "apps/server/postgres-migrations/202610110006_auth.sql",
+    "sha256": "a5cf9d3c93013218dc79994ebe842ee6f00449b41d2cfeeb33e7b6f72ccfb8a8"
+  },
+  {
+    "repository": "product",
+    "path": "apps/server/postgres-migrations/202610110007_knowledge.sql",
+    "sha256": "f87b75b53c108482e623fbd97d7e2b6c971c240638a9214e77d9df86102b999e"
+  },
+  {
+    "repository": "product",
+    "path": "apps/server/postgres-migrations/202610110010_trace_context.sql",
+    "sha256": "973f278ce42e9480e828b962317338f33dad44520aa073dc3d318fa17007dab8"
+  },
+  {
+    "repository": "product",
+    "path": "apps/server/postgres-migrations/202610110013_suggestion_policy.sql",
+    "sha256": "1100a507bda01eef863c21955be2fcbd2c412bed5650078bff5933d0faa64ebf"
+  },
+  {
+    "repository": "product",
+    "path": "apps/server/postgres-migrations/202610120016_connections.sql",
+    "sha256": "99c8996ea7b1eaa1817fca30f9254922fafa289553c7ceb04f5c81b8a6c1f207"
+  },
+  {
+    "repository": "product",
+    "path": "apps/server/postgres-migrations/202610120017_auth_events.sql",
+    "sha256": "21e25d654b4fe510f043f1cb945b1ff47dfed81950b5374cf6157899bd7a4b59"
+  },
+  {
+    "repository": "product",
+    "path": "apps/server/postgres-migrations/202610120018_personas.sql",
+    "sha256": "9cc90f1d00bec8f1558a443746baa9759bf430eb8cbe4f77385e871484d0b21c"
+  },
+  {
+    "repository": "product",
+    "path": "apps/server/postgres-migrations/202610120020_persona_failure.sql",
+    "sha256": "ff4a21437f0e0fa46e85dfe99a4415b5501ff98f95b872a61e30cd77e5cc4c9a"
+  },
+  {
+    "repository": "product",
+    "path": "apps/server/postgres-migrations/202610120021_auth_throttle.sql",
+    "sha256": "2d146621cf22083caa2b4a14e5f3b7c403798825e5e8904bb6b09001013a7443"
+  },
+  {
+    "repository": "product",
+    "path": "apps/server/postgres-migrations/202610120024_topic_consent.sql",
+    "sha256": "f5eb40c3d7294e80f6f2158adc6cc49a2983a09584d8a7f6e3bd3214a4b76e0d"
+  },
+  {
+    "repository": "product",
+    "path": "apps/server/src/agent.rs",
+    "sha256": "647421bae54c62adfc8ded23f9bfeee3912b94d18a8d4e1ad06136980d298663"
+  },
+  {
+    "repository": "product",
+    "path": "apps/server/src/auth.rs",
+    "sha256": "c9f7c429c3d5e1d24d15a160914ccb97f71eab5f7eeaa5f49ad16765bc8bc16d"
+  },
+  {
+    "repository": "product",
+    "path": "apps/server/src/fanout.rs",
+    "sha256": "032ba919bc01925b516412ffd197865b33f6d20b3faa371e741887860ac3d8e3"
+  },
+  {
+    "repository": "product",
+    "path": "apps/server/src/knowledge.rs",
+    "sha256": "2aa8ee94143f739e353c8e3e452986b5c281e528e2f6019864dafeedf940a196"
+  },
+  {
+    "repository": "product",
+    "path": "apps/server/src/knowledge/tests.rs",
+    "sha256": "20f41098425633b40262b8f78f6cccdeca10501b6c1e5e855c5a33575ddee7e5"
+  },
+  {
+    "repository": "product",
+    "path": "apps/server/src/lib.rs",
+    "sha256": "1536b39cb5a7d3b5aef09bd9b8cc231213de568c9b62a6990e8d2d41af258ccd"
+  },
+  {
+    "repository": "product",
+    "path": "apps/server/src/main.rs",
+    "sha256": "3d91f54490d64a7692fbbbf39d4c25715cb11eb5cf770ed9e32c7d4ee368bfe4"
+  },
+  {
+    "repository": "product",
+    "path": "apps/server/src/mcp.rs",
+    "sha256": "28b09e7c054bccfbe64d4ebedaed165ab55e1e7ddeb4ae2c6948e2ebd3959af7"
+  },
+  {
+    "repository": "product",
+    "path": "apps/server/src/openai.rs",
+    "sha256": "de7788a8383ab9f3d049d0fac65ffb66214d709254dfe623ed582e3307ee1f19"
+  },
+  {
+    "repository": "product",
+    "path": "apps/server/src/openai/tests.rs",
+    "sha256": "046be5ccce36edffba656414ddc163aee73dc42f6505573325aed06c5b630c27"
+  },
+  {
+    "repository": "product",
+    "path": "apps/server/src/personas.rs",
+    "sha256": "549bc8bb755a308682434989c87240eac8eeea5efb3f67db3d7a9acfab7235b3"
+  },
+  {
+    "repository": "product",
+    "path": "apps/server/src/realtime.rs",
+    "sha256": "ba3cf9a326ddd6f1bb8f259287aea3b799a83409b2db87e7ef9b8f21d76a655c"
+  },
+  {
+    "repository": "product",
+    "path": "apps/server/src/suggestions.rs",
+    "sha256": "6cddbd06a7005952e728098b9b4648e4aae1fd3b6c9246396222b98a76ff4605"
+  },
+  {
+    "repository": "product",
+    "path": "apps/server/src/topic_http.rs",
+    "sha256": "658637383b307db9f686ef940c4855bd6b7a49308bf40e00effd84b6488b5e0e"
+  },
+  {
+    "repository": "product",
+    "path": "apps/server/src/web.rs",
+    "sha256": "5961acb3ac4288bc69138dc0c432d8869b9199b77588a444d6e258545b06d3e4"
+  },
+  {
+    "repository": "product",
+    "path": "apps/stats_server/Cargo.toml",
+    "sha256": "bf721704aca33aadce104c97a27b9925964fedea35158d59251a6dde7f503106"
+  },
+  {
+    "repository": "product",
+    "path": "apps/stats_server/migrations/202610110001_analytics.sql",
+    "sha256": "adb8cbb4c48ecc15e28b2d77be73549226fed3a6e82c9f1de838bd426d5d3346"
+  },
+  {
+    "repository": "product",
+    "path": "apps/stats_server/migrations/202610110008_archive.sql",
+    "sha256": "cfa1a82a7ac0d8535aeb9f94925e6e29d4461c6a9463ecd8dffab2fb6e937a25"
+  },
+  {
+    "repository": "product",
+    "path": "apps/stats_server/migrations/202610110012_suggestion_review.sql",
+    "sha256": "f7d55aa8eca684c2d95d345d6d5f8f353819e33648cb16c043148593783fe9e2"
+  },
+  {
+    "repository": "product",
+    "path": "apps/stats_server/migrations/202610120025_topic_withdrawal.sql",
+    "sha256": "267bad2901ca717b4e9b4b6f05c9c1a9adc02409606ce044885389798abc9e99"
+  },
+  {
+    "repository": "product",
+    "path": "apps/stats_server/migrations/202610130001_dashboard_revision.sql",
+    "sha256": "3776063e65407bf0ce49ad5d8c7c4ec56ef68869aeb334d07dc18fb771b15938"
+  },
+  {
+    "repository": "product",
+    "path": "apps/stats_server/src/application.rs",
+    "sha256": "e7bca9e0bbcd35e829ea0f2bc6dab9c8c1a5ac4031d6497b08e334e930e7821d"
+  },
+  {
+    "repository": "product",
+    "path": "apps/stats_server/src/dashboard.rs",
+    "sha256": "3990030f6019b751c0ac9a7d3fccca680f664f86916d83308fe25ca9452def29"
+  },
+  {
+    "repository": "product",
+    "path": "apps/stats_server/src/governance.rs",
+    "sha256": "3489b6a3ab9dbdade70552d8288dd836faf4880bca8d307df2c8848940e5182b"
+  },
+  {
+    "repository": "product",
+    "path": "apps/stats_server/src/grpc.rs",
+    "sha256": "3dfb335f9a518f66ed4860f8cb2f99af23b60c65630ae9f1d9c702819752c1f2"
+  },
+  {
+    "repository": "product",
+    "path": "apps/stats_server/src/grpc/tests.rs",
+    "sha256": "2ae5f67e98d8c6fe0fa237a644e86fd7aa2c64a71dfaee35bd531bfd7ae8b3c8"
+  },
+  {
+    "repository": "product",
+    "path": "apps/stats_server/src/insights.rs",
+    "sha256": "11172f255ae38046123ead0fd4ae1b4f955d811a454189f6c74d6bb8ea4ba33d"
+  },
+  {
+    "repository": "product",
+    "path": "apps/stats_server/src/lib.rs",
+    "sha256": "e266f714eeace05c0469df627c453faa2ae83c76de8e8e8d7e4c2062520f6a7f"
+  },
+  {
+    "repository": "product",
+    "path": "apps/stats_server/src/live.rs",
+    "sha256": "359b0f7b77d816318cd387ede4ae9c139b043cf202f035d665b903a8fa668281"
+  },
+  {
+    "repository": "product",
+    "path": "apps/stats_server/src/main.rs",
+    "sha256": "50e294e008fae3d973f5bb2a948b17867192747ffea1dfbb1f50cb9c8d7163db"
+  },
+  {
+    "repository": "product",
+    "path": "apps/stats_server/src/persistence.rs",
+    "sha256": "0327df3706e837945736e6dd5d5cd1c0c382bcef36c53bac0b03c5bce7b75628"
+  },
+  {
+    "repository": "product",
+    "path": "apps/stats_server/src/topics.rs",
+    "sha256": "f69fc22139e81e4f4d66b291354fc8d9a9833b037ae8bc28c64a3dc7198d7e66"
+  },
+  {
+    "repository": "product",
+    "path": "compose.yaml",
+    "sha256": "b7974fad8d2ec910a77460b1f6bfc6f59b6b6274dfc9abfa066e0c3ea8d1abf6"
+  },
+  {
+    "repository": "product",
+    "path": "crates/ai_core/Cargo.toml",
+    "sha256": "874c445d85901ba7d6e647cd46d277bb95d21cc415f22d17d0410c29bebda662"
+  },
+  {
+    "repository": "product",
+    "path": "crates/ai_core/src/agent.rs",
+    "sha256": "63871821be3cbe115918d078b02825f602fefdfb1ba42304d080d6fd85273658"
+  },
+  {
+    "repository": "product",
+    "path": "crates/ai_core/src/lib.rs",
+    "sha256": "b53663e79fc55426a311abb97f2eb3547dcba024c21122108a03abb58bd545da"
+  },
+  {
+    "repository": "product",
+    "path": "crates/analytics_transport/Cargo.toml",
+    "sha256": "b7b1fcede288e7186e8ce2b2ca7bfb454cb866947cbcbd19f784b2f45762f1a6"
+  },
+  {
+    "repository": "product",
+    "path": "crates/analytics_transport/build.rs",
+    "sha256": "c925cd9308fd6b74e97e1a904adea17edd8978d1172dd786900e806dab048dfc"
+  },
+  {
+    "repository": "product",
+    "path": "crates/analytics_transport/src/lib.rs",
+    "sha256": "15e1886c94392f82d87aca09063c04eb1862db2d51cf544fae702bb58e5fc88b"
+  },
+  {
+    "repository": "product",
+    "path": "crates/chat_application/Cargo.toml",
+    "sha256": "d2d9ccb51c14c9a9157b18ddbd1b3dca736cd480db0ce58b1a19044bee49d1d2"
+  },
+  {
+    "repository": "product",
+    "path": "crates/chat_application/src/lib.rs",
+    "sha256": "7c1cd42fcf6d1cca2d2c781895bac10bcd516755f737ea3d06ea04eea06148d6"
+  },
+  {
+    "repository": "product",
+    "path": "crates/chat_application/src/tests.rs",
+    "sha256": "ed9f2f4311fff16732625a50e3ce21d992de23a64fec07feb3d451f6fa7becac"
+  },
+  {
+    "repository": "product",
+    "path": "crates/chat_domain/Cargo.toml",
+    "sha256": "14dd10c1ed8e5fe7b5bbe284b3ddee880d95c927f85c1d076b86866100de1637"
+  },
+  {
+    "repository": "product",
+    "path": "crates/chat_domain/src/lib.rs",
+    "sha256": "42ea89fae6b4baca5f4f12d97b691332da95240c046908a48d339346534cfd14"
+  },
+  {
+    "repository": "product",
+    "path": "crates/mcp_bridge/Cargo.toml",
+    "sha256": "655709df4a6603fad91b379f239cad56b443eec38afc4502ea75d00131455bca"
+  },
+  {
+    "repository": "product",
+    "path": "crates/mcp_bridge/src/lib.rs",
+    "sha256": "8ffebc9e3e968a0df2c294d166cef2966dbce4aafe5a4e0d7ea0edca4f2ac14f"
+  },
+  {
+    "repository": "product",
+    "path": "crates/persistence/Cargo.toml",
+    "sha256": "a94c0893869c87c152e180f31f88e0becd6aeb0b167b0e8eafdf6158504df25a"
+  },
+  {
+    "repository": "product",
+    "path": "crates/persistence/migrations/202610120001_portable_chat.sql",
+    "sha256": "5f522dc05e12b7848e3189de6dca026a76809eb9f31f89e97ed4ffe3768de72e"
+  },
+  {
+    "repository": "product",
+    "path": "crates/persistence/src/database.rs",
+    "sha256": "9595c01e0dee6a5783c244983eb99a53e80eba76c754387e655b9df9b9c4be66"
+  },
+  {
+    "repository": "product",
+    "path": "crates/persistence/src/database/tests.rs",
+    "sha256": "b6ae4137c525c3ba8b27c7c2469bb9131d255bacf486e720a1684520a2f2386a"
+  },
+  {
+    "repository": "product",
+    "path": "crates/persistence/src/lib.rs",
+    "sha256": "377bc2f92faa075d4b3e6b2648d7892a8fdb6866e59e5ca53199726919815ebe"
+  },
+  {
+    "repository": "product",
+    "path": "crates/persistence/src/tests.rs",
+    "sha256": "789a585a0ca0695001da3eedc4e4f8ea6eaffc6ff03ede592bb377f4c0745ff3"
+  },
+  {
+    "repository": "product",
+    "path": "crates/persistence/src/topics.rs",
+    "sha256": "51262900ebc97210f2676d186714638def01ddc3a7c0eab76cc51227202c3182"
+  },
+  {
+    "repository": "product",
+    "path": "crates/pet_domain/Cargo.toml",
+    "sha256": "8a32922a94c31b63f2959995aa6eecfd260e22af69a5cd51cee889f0a2c45834"
+  },
+  {
+    "repository": "product",
+    "path": "crates/pet_domain/src/application.rs",
+    "sha256": "45f9164c18336af1bcfe027fab75f9c404fde7e35f510ef2e6653a2f0a1608b6"
+  },
+  {
+    "repository": "product",
+    "path": "crates/pet_domain/src/application/tests.rs",
+    "sha256": "5ff17b59610e6451f28d562c2965783aaa4895bfec4d92fdff667b218d3c4e55"
+  },
+  {
+    "repository": "product",
+    "path": "crates/pet_domain/src/learning.rs",
+    "sha256": "b7e109b18c8c084952072855c2d7992d325978d4ca02742ee9a3ab5e2a082bd3"
+  },
+  {
+    "repository": "product",
+    "path": "crates/pet_domain/src/lib.rs",
+    "sha256": "b6dadf97e77b5b290af6ce1d5a5c92893f7915d11f3ed84687289efc07bc59e8"
+  },
+  {
+    "repository": "product",
+    "path": "crates/pet_domain/src/profile.rs",
+    "sha256": "2e9f1147e402677288866f284796029d8686684a7e13c9a62d64c9d8bb26ecad"
+  },
+  {
+    "repository": "product",
+    "path": "crates/pet_domain/src/roaming.rs",
+    "sha256": "f33f6db23046080e05e61e4e5198c7e0c0c482f5f91551a7a26506968e74a56f"
+  },
+  {
+    "repository": "product",
+    "path": "crates/pet_runtime/Cargo.toml",
+    "sha256": "d52c046d52b358a012cf27a41f6c49b6537b7099264579d23093fd6c6f74b49d"
+  },
+  {
+    "repository": "product",
+    "path": "crates/pet_runtime/migrations/202610110003_pet_state.sql",
+    "sha256": "1c435ac74414494bd095669ec3cba512507d6e346446915d7764f3111e32cbc5"
+  },
+  {
+    "repository": "product",
+    "path": "crates/pet_runtime/migrations/202610110004_pet_assets.sql",
+    "sha256": "bd815470e3677749051fa2738194e2828f7b1337b54c8169c299191a62637f08"
+  },
+  {
+    "repository": "product",
+    "path": "crates/pet_runtime/migrations/202610110005_cleanup_receipts.sql",
+    "sha256": "ae11b701e081cbc33701dd560a28a549a7a2254ba7bcdd3c4353e29932855818"
+  },
+  {
+    "repository": "product",
+    "path": "crates/pet_runtime/migrations/202610110009_settings.sql",
+    "sha256": "3122b8e9b7c6ebc46041bbaaec85c9da42813a34bed49d30a2aa76b3720b6397"
+  },
+  {
+    "repository": "product",
+    "path": "crates/pet_runtime/migrations/202610110011_outbox_leases.sql",
+    "sha256": "1a7de2c0dd8ccf396bd199a43a685aa6a63cd3820615efda3f78d1849cf4e4a6"
+  },
+  {
+    "repository": "product",
+    "path": "crates/pet_runtime/migrations/202610110014_suggestion_policy.sql",
+    "sha256": "64056b043153c7ecb5a9d8396b7c4a933ab53262e775f974c6f5787ccd5bf451"
+  },
+  {
+    "repository": "product",
+    "path": "crates/pet_runtime/migrations/202610120015_restore_receipts.sql",
+    "sha256": "67544b566fcfc8972760655dff07baeaf972a836ddf16c4eb4af5ec3cc143251"
+  },
+  {
+    "repository": "product",
+    "path": "crates/pet_runtime/migrations/202610120019_conversation_order.sql",
+    "sha256": "717eb443a861846601adc1fcd9437b31047544ec05ed0c9c007d26b0c36ddced"
+  },
+  {
+    "repository": "product",
+    "path": "crates/pet_runtime/migrations/202610120022_asset_profile.sql",
+    "sha256": "1ea5a8a7c2983e71c98d094c562975b2379dc1104d3398768a61cc71881c668f"
+  },
+  {
+    "repository": "product",
+    "path": "crates/pet_runtime/migrations/202610120023_pet_archive.sql",
+    "sha256": "00b2282c38beb7125e92d25fb0aebf0022655e8ffa1235fe32c7e781e13d2578"
+  },
+  {
+    "repository": "product",
+    "path": "crates/pet_runtime/src/agent.rs",
+    "sha256": "ceb72c230fe4d1fddae26ee0038463bb087502f1b4ab1cb6cbaec423eb7d3ad5"
+  },
+  {
+    "repository": "product",
+    "path": "crates/pet_runtime/src/ai.rs",
+    "sha256": "c68e6f7c208d290a327d1ba84b33cc8c8045698e95f184cc8321cb3e3bd41889"
+  },
+  {
+    "repository": "product",
+    "path": "crates/pet_runtime/src/backup.rs",
+    "sha256": "aaf67a628232a4162748e1e1c09270e4b1b3dd61054a7adaa122af9b928aec53"
+  },
+  {
+    "repository": "product",
+    "path": "crates/pet_runtime/src/duplicates.rs",
+    "sha256": "52680eccbc6d94e35000d2b3b7768282221a6597dc400040aae20aac3a20c0e7"
+  },
+  {
+    "repository": "product",
+    "path": "crates/pet_runtime/src/files.rs",
+    "sha256": "e8963080d3341e7abb33bb3b227f97f7ee52f02f11964d227b0b4a7c4c0d46f7"
+  },
+  {
+    "repository": "product",
+    "path": "crates/pet_runtime/src/interaction.rs",
+    "sha256": "cca85d6c371d7c1d7d6890bf2328db3d81a24acd8c0a453180312fc28ca81a53"
+  },
+  {
+    "repository": "product",
+    "path": "crates/pet_runtime/src/lib.rs",
+    "sha256": "1ec992bcbf707da057255fdd41a5e0135c916306f8546b5c4dbe19e7e91753d4"
+  },
+  {
+    "repository": "product",
+    "path": "crates/pet_runtime/src/main.rs",
+    "sha256": "08a7b64ee7a92a2f83911daf23e5f95d5a05d39957f9189c1d6911177ce8d8df"
+  },
+  {
+    "repository": "product",
+    "path": "crates/pet_runtime/src/outbox.rs",
+    "sha256": "16a3fadc3558ea009e2ad980f6c821fc19dc4ff729fc5ca152a603755adcd2d9"
+  },
+  {
+    "repository": "product",
+    "path": "crates/pet_runtime/src/registry.rs",
+    "sha256": "2c3074ea011c5da52259830f0c8d442b5994f4c4d34bf6f83211c599f3c9920b"
+  },
+  {
+    "repository": "product",
+    "path": "crates/pet_runtime/src/state.rs",
+    "sha256": "dca0dab6ac87422cb02d2089f6daaaae2d1487a7ba63067e0e798fc194adacda"
+  },
+  {
+    "repository": "product",
+    "path": "crates/pet_runtime/src/suggestions.rs",
+    "sha256": "28e291c88b28d08b58e1b83b0c2dc18238a31734e62037478c0f88aedf5f7fe4"
+  },
+  {
+    "repository": "product",
+    "path": "crates/pet_runtime/src/unix_fs.rs",
+    "sha256": "b05b0d36316c7def5627febb4207e55d6b8b8b034cd38b17928cda434bd9f349"
+  },
+  {
+    "repository": "product",
+    "path": "crates/pet_runtime/src/windows_fs.rs",
+    "sha256": "5eb23e426abd9c36dcd4e7ffeca03fdb791e897d62a94b47063e188b75963dba"
+  },
+  {
+    "repository": "product",
+    "path": "crates/shared/Cargo.toml",
+    "sha256": "678113ba6d3371114ca91d3d9ad0c351d8e8188e6eefae627705d1b315849fc3"
+  },
+  {
+    "repository": "product",
+    "path": "crates/shared/proto/analytics.proto",
+    "sha256": "26d386852a4750d4cbaf63e1c51250e38be66b1c4fce3566cd449c8aa5e6b11e"
+  },
+  {
+    "repository": "product",
+    "path": "crates/shared/src/lib.rs",
+    "sha256": "eb0ed89ba34e53dcc4fac7a0f516ea5b7491f5b70b4f013f199c9e8afd4b4ae4"
+  },
+  {
+    "repository": "product",
+    "path": "crates/shared/src/topics.rs",
+    "sha256": "b85ac0a28792d37341e1ccccec559afd2b2125e4bedbbcd72bf877d9263204e9"
+  },
+  {
+    "repository": "product",
+    "path": "crates/telemetry/Cargo.toml",
+    "sha256": "5772c1ecfad55cc6fa7c1d02f20efc099afbb3a9916c90b94acc8f1e42e4b040"
+  },
+  {
+    "repository": "product",
+    "path": "crates/telemetry/src/lib.rs",
+    "sha256": "fba2e15fdf69e821e249859cc4f090a75a1eac1b6a1734bf9476a7c5560fdaa0"
+  },
+  {
+    "repository": "product",
+    "path": "crates/ui/Cargo.toml",
+    "sha256": "00f5e9f8e5ca87e7a62a52ddc58e32a7f1d9606749058797157589fe952fa90e"
+  },
+  {
+    "repository": "product",
+    "path": "crates/ui/src/browser.rs",
+    "sha256": "0e2c0b48e49e557da932b1d718f7d91e6b1cd58a1c7a6024c1dcdde57165aabd"
+  },
+  {
+    "repository": "product",
+    "path": "crates/ui/src/lib.rs",
+    "sha256": "642155a1142559d12930a2ff3a35adda2c39542157b2531439785e5a6add079e"
+  },
+  {
+    "repository": "product",
+    "path": "crates/ui/style.css",
+    "sha256": "ba0006968bd154077e71bdf435f3937b42a8814012ba2633af294068202469ab"
+  },
+  {
+    "repository": "product",
+    "path": "deploy/analytics.env.example",
+    "sha256": "c8a97cf74133d25fcc806d4d8fe48ea2cad21da6b6291aaecf38c605b6839945"
+  },
+  {
+    "repository": "product",
+    "path": "deploy/chat.env.example",
+    "sha256": "f3facddd13fa27ba8f5c5d633ddbbbccf1b4510ab598b4e6b6a97c43a9224ede"
+  },
+  {
+    "repository": "product",
+    "path": "deploy/systemd/copilot-analytics.service",
+    "sha256": "087823f189af78b1373396e2b6942c8d9309d6ad3d0c372bb02d68ede977b4ec"
+  },
+  {
+    "repository": "product",
+    "path": "deploy/systemd/copilot-chat.service",
+    "sha256": "77f9a3e89d466114f27eef6e4255b706d481ce0972ea1859f08fa168c9e86fcc"
+  },
+  {
+    "repository": "product",
+    "path": "deploy/systemd/copilot-weekly.service",
+    "sha256": "259a074d98f7b7f241ad5f2af5e49bf5aaf9187ca2a39f96e88d26e46257b6d8"
+  },
+  {
+    "repository": "product",
+    "path": "deploy/systemd/copilot-weekly.timer",
+    "sha256": "dde142de4383ee02bff26cc430e1551eef7d2ce404b84be3bbed6604addb0339"
+  },
+  {
+    "repository": "product",
+    "path": "docs/ANALYTICS_TRANSPORT.md",
+    "sha256": "c9178c26ad5796e53ddd66f791fa0ac804562f49700632f94cfb9df65e3332e9"
+  },
+  {
+    "repository": "product",
+    "path": "docs/COMMON_LEARNING_RULES.md",
+    "sha256": "17f79fa60809f967f1d90380d0782c44e2c2d4789d584e29e201405f0528884c"
+  },
+  {
+    "repository": "product",
+    "path": "docs/DEPLOYMENT.md",
+    "sha256": "d16d31d15d7e3c02ed3b584b02023f3c3f2e27a7bd72278fcdbd20c961d432fa"
+  },
+  {
+    "repository": "product",
+    "path": "docs/FULL_SOURCE_REVIEW.md",
+    "sha256": "f13fa1b7f9c0b1d4190929f3c6731c953b0eae7573999d0c1f782a7f9785e8b2"
+  },
+  {
+    "repository": "product",
+    "path": "docs/FUTURE_WORK.md",
+    "sha256": "99ad447af66dd02737e4855edab576c00b6986bd3b3994d109dca8b6f04e7bd3"
+  },
+  {
+    "repository": "product",
+    "path": "docs/LOCAL_VALIDATION.md",
+    "sha256": "57d4d9c826be8ace67917273c3e6572b5a1dae070750f966995e4a46cd83a145"
+  },
+  {
+    "repository": "product",
+    "path": "docs/P9_TARGET.md",
+    "sha256": "291f48817f676ddf3c05f3312dd19dc595cfbef8a4360ee506d7fa8d8be8081a"
+  },
+  {
+    "repository": "product",
+    "path": "docs/SATURDAY_OPERATIONS.md",
+    "sha256": "24e5b20ab52be39b1126dcb54d133646819e48ce41ce79e3a8a6c049219d4490"
+  },
+  {
+    "repository": "product",
+    "path": "docs/SEMANTIC_ARCHITECTURE_REVIEW.md",
+    "sha256": "a632732b6faa976c0d27a7e8bc81031237c92a0ff0357fea4f8f15d4cc4b363c"
+  },
+  {
+    "repository": "product",
+    "path": "docs/SQLITE_TRANSITION.md",
+    "sha256": "8d8d9c5c3d068d1bcddaeb4134ef4b318df58635c846c37e7863fbbecdf88b4d"
+  },
+  {
+    "repository": "product",
+    "path": "docs/SYSTEM_ARCHITECTURE.md",
+    "sha256": "5dd63d72fb967a988235e8b0a31ef18b8288e7d6fb0ceb711a34ac3698f2da95"
+  },
+  {
+    "repository": "product",
+    "path": "docs/TEACHING_ALIGNMENT.md",
+    "sha256": "718f0dfa700eb63302d9273c2effbee6531671080b4fc8e489e9b91ace6871f4"
+  },
+  {
+    "repository": "product",
+    "path": "docs/TEACHING_FORMAT.md",
+    "sha256": "f81beb16451e54f938c850b3e1a8e31ce68e574d90ce3f4101bf2392ea9acc50"
+  },
+  {
+    "repository": "product",
+    "path": "docs/analytics-transport-validation.json",
+    "sha256": "403c8300c8ac4ccf652ffc77549530931572edc6b84d6e91cf20f674e8296457"
+  },
+  {
+    "repository": "product",
+    "path": "docs/archive/local-validation-result.json",
+    "sha256": "961dd3665ed91d2915d2ebd74803a07e83bb7e701d160289e7bc4a813145c2cf"
+  },
+  {
+    "repository": "product",
+    "path": "docs/learning-state.json",
+    "sha256": "5bedb329e463ad80090dd33de53e7e1d4e42d002ee38c87d7ae5074d7c5eefe3"
+  },
+  {
+    "repository": "product",
+    "path": "docs/legacy-migrations/202610110001_day9_chat.sql",
+    "sha256": "274f2690e01f55770ae502e5f44d0ced0968809713bf6f81afbc1acd357343e8"
+  },
+  {
+    "repository": "product",
+    "path": "docs/legacy-migrations/202610110002_day9_analytics.sql",
+    "sha256": "d02e675f06625ecb4881726bd46943de75ca7891dfbc801828b943451a332559"
+  },
+  {
+    "repository": "product",
+    "path": "docs/release-evidence/appimage_update.json",
+    "sha256": "b647ad5263f27299d2906369cec925914d6f3f6a01e59b769c9bd20569dbeaae"
+  },
+  {
+    "repository": "product",
+    "path": "docs/release-evidence/docker.json",
+    "sha256": "929b33e10e4cbf24050469d110878f4d3808fcd27381d3a114590346a03a8f49"
+  },
+  {
+    "repository": "product",
+    "path": "docs/release-evidence/live.json",
+    "sha256": "5b61177696e81efcdc3c25da7ed6383c8e93266deeb063d26689ce70cd730c51"
+  },
+  {
+    "repository": "product",
+    "path": "docs/release-evidence/packaged_gui.json",
+    "sha256": "d9dd3c651243f1d2c891d5a268522eb056c0406b2abc24fc1d8106eea2523909"
+  },
+  {
+    "repository": "product",
+    "path": "docs/source-review/DAY12_CI_ENVIRONMENT.md",
+    "sha256": "7a6422e40fa88e49b2aabf18481bbef6e819bc2b88798fefd3866b12d0cae11c"
+  },
+  {
+    "repository": "product",
+    "path": "docs/source-review/README.md",
+    "sha256": "0f17149863cd1533640e9d306639663d5e17881d5f8f0e83fd2c14e715330f91"
+  },
+  {
+    "repository": "product",
+    "path": "docs/source-review/RUST_AI_CHAT_STATUS.md",
+    "sha256": "d6deee5734bf1b39453579bef21205bfc35ad33cea0bedcc76b8a028f45705ff"
+  },
+  {
+    "repository": "product",
+    "path": "docs/source-review/configuration-contracts.md",
+    "sha256": "75026011ce5fe3e6dbc42b0604ee5206cad653669056a7212f829fa40e00cbdf"
+  },
+  {
+    "repository": "product",
+    "path": "docs/source-review/content-alignment-validation.json",
+    "sha256": "0792625348f0e6c680e566685a8e69e450182304a109b31c12a6c303e1e220f8"
+  },
+  {
+    "repository": "product",
+    "path": "docs/source-review/coverage.json",
+    "sha256": "d7169cee9f78f2b523540e6db98bde13f46721345151c8920f5dd65c65889e8e"
+  },
+  {
+    "repository": "product",
+    "path": "docs/source-review/data-flow-review.md",
+    "sha256": "f95abe3eb9a9732b9a5a134ddd753cfbd255aa796d8b230c67c7aa9327b72190"
+  },
+  {
+    "repository": "product",
+    "path": "docs/source-review/documentation-validation.json",
+    "sha256": "4d777290e6ac8215438f99c1eae992544dbc08846f48c35ed3b70ac8842e56de"
+  },
+  {
+    "repository": "product",
+    "path": "docs/source-review/evidence.zip",
+    "sha256": "9d4daf9b4823db479d7a879bbddbdf4e7c24e0b9cf8f3a31c0a34b45d7fc31c4"
+  },
+  {
+    "repository": "product",
+    "path": "docs/source-review/interface-catalog.md",
+    "sha256": "efbe302f3f64bcfb719d46b4c918cee56095fe23a54ac5ae56302952f91008fe"
+  },
+  {
+    "repository": "product",
+    "path": "docs/source-review/ipc-payloads.json",
+    "sha256": "5aff86a8f2b251aef2ed064d0cee67134f088d7fc4eda13295b238a14aec51ae"
+  },
+  {
+    "repository": "product",
+    "path": "docs/source-review/manifest.json",
+    "sha256": "a4af95b5d068a12d4106b9e03359bca75640682a8b5485d8d35f223bb0f999d6"
+  },
+  {
+    "repository": "product",
+    "path": "docs/source-review/module-mapping.json",
+    "sha256": "a084844571a63ee9bc3393d0a24004393340b2110218caabfb31d54c666df13f"
+  },
+  {
+    "repository": "product",
+    "path": "docs/source-review/package-boundaries.json",
+    "sha256": "f6f37aa1c23d0319b251202eccc500ae00cbecfc3d3e275882f81d4c7a585ea8"
+  },
+  {
+    "repository": "product",
+    "path": "docs/source-review/report-validation.json",
+    "sha256": "1a0248efd795846e9a4dcdcb2247caff4a0f600c67725a02ef819c2713863ee4"
+  },
+  {
+    "repository": "product",
+    "path": "docs/source-review/rust-ai-chat-validation-logs.zip",
+    "sha256": "a07758ebb66a73143225fc2d9ab1eab39a1235894c8af8966bd7e64a6f42fe93"
+  },
+  {
+    "repository": "product",
+    "path": "docs/source-review/rust-ai-chat-validation.json",
+    "sha256": "362208bb61d951cf0e432997bfaba6b22eb29e6a6a9be9a132b2fa2daa73b172"
+  },
+  {
+    "repository": "product",
+    "path": "docs/source-review/tracked-files.json",
+    "sha256": "e6b72f5986de53e1478dbe35b86f598b2834fcb947a8ab9ba802e27d521238c1"
+  },
+  {
+    "repository": "product",
+    "path": "docs/teaching/archive/day-12/ANALYTICS.md",
+    "sha256": "2c123227bee9afc583fddf5327c852b53932f3fa459c16c2fa63b75a351e5ebb"
+  },
+  {
+    "repository": "product",
+    "path": "docs/teaching/archive/day-12/CHAT.md",
+    "sha256": "3eae77ef7b0ee01f8a929af9e5409cd83f48c5ac8cfa1aedbc013136fefe15bd"
+  },
+  {
+    "repository": "product",
+    "path": "docs/teaching/archive/day-12/PET.md",
+    "sha256": "435308847537e5ec1dfaf8a98ab2c23b1eb14507469554b861b2d7d861bd4744"
+  },
+  {
+    "repository": "product",
+    "path": "docs/teaching/archive/day-12/article-sync.json",
+    "sha256": "d723330b4d68a8e162c700272262f0989f4e12abb1f2323b32d83b2c9f2d3578"
+  },
+  {
+    "repository": "product",
+    "path": "docs/teaching/archive/day-12/manifest.json",
+    "sha256": "43c02f5c485e9234ba7cb0e953d9fdbb07aaa3bd939f14cc3c90885daf6f9a15"
+  },
+  {
+    "repository": "product",
+    "path": "docs/teaching/current/ANALYTICS.md",
+    "sha256": "8052258534eca483b92a595cbcde162cf9a65a03594a1ed9ee196b4186952b17"
+  },
+  {
+    "repository": "product",
+    "path": "docs/teaching/current/CHAT.md",
+    "sha256": "eafa2ab0c74128d90de55df30a78c15dc3349d9b02ea86959add6dbda4d9d9b9"
+  },
+  {
+    "repository": "product",
+    "path": "docs/teaching/current/PET.md",
+    "sha256": "b08214e3e56bdb6f2701137940678880941c93adb40f3b120ac3e1ad136c1e4c"
+  },
+  {
+    "repository": "product",
+    "path": "docs/teaching/current/README.md",
+    "sha256": "c540b268638e2fdd0ec9f6c7341032bb9dadc6172bce584c20c9471ae35ed399"
+  },
+  {
+    "repository": "product",
+    "path": "docs/teaching/current/manifest.json",
+    "sha256": "e67692c5d64f3ec4b848bb6f44768f65ec891552e0028b9a4cba05db0a616066"
+  },
+  {
+    "repository": "product",
+    "path": "examples/pet.toml",
+    "sha256": "717096edbf6929b6a48aaffb867c867161250455d0a80920903a954934caa3c6"
+  },
+  {
+    "repository": "product",
+    "path": "scripts/architecture-boundaries.py",
+    "sha256": "2b8c6984bbaacbbcd7643fac4b6998b189cf8fa6708f35434f9af5c24a28b3a0"
+  },
+  {
+    "repository": "product",
+    "path": "scripts/build-chat-ui.sh",
+    "sha256": "ab9a1549d317fbce80f55e30b5345953a56d665a4f14f47b2d3e36a3d59c6a59"
+  },
+  {
+    "repository": "product",
+    "path": "scripts/build-pet-ui.mjs",
+    "sha256": "c26bb834deecbd334294cd9cc2f96ed91f66d93a7d18dcaea5ffef6ab466e969"
+  },
+  {
+    "repository": "product",
+    "path": "scripts/build-production.sh",
+    "sha256": "137597cbb878c5abb111f876e785f17a3a6d22340c6fb1dfeb1072a98bf821a2"
+  },
+  {
+    "repository": "product",
+    "path": "scripts/build-test-update.py",
+    "sha256": "916e051b6e15b8ad585f036b831e2d280b088c18d82b4dac32d1b0e5f3a5bf37"
+  },
+  {
+    "repository": "product",
+    "path": "scripts/docker-local-verify.py",
+    "sha256": "f4d0723c38058d4e6a00419b09af3da9938a000ac18b4011ac9adc5348d50cc8"
+  },
+  {
+    "repository": "product",
+    "path": "scripts/gui/pet-self-test.js",
+    "sha256": "fb6f1490422a4da3c10845b2d65b28fe79f91b689aaad54dcbd25ba63bccc269"
+  },
+  {
+    "repository": "product",
+    "path": "scripts/import-chat-postgres.py",
+    "sha256": "dd2d55e8cfa44c66fbceca70233aabcf2a7e5144781c2bd58e4092527c8ccf11"
+  },
+  {
+    "repository": "product",
+    "path": "scripts/install-pet-local.py",
+    "sha256": "da6e2b8e1a7a16b592906301d976434bcf4eb098065398ed36dadc8d7ee90fe2"
+  },
+  {
+    "repository": "product",
+    "path": "scripts/local-services.py",
+    "sha256": "fcea4698fc96ff38e8b4b7dc7123f871d22e77a90efd99cbe803f11a90664f61"
+  },
+  {
+    "repository": "product",
+    "path": "scripts/local-verify.py",
+    "sha256": "277a8c9dbbdf7c881bffa8209571cd8b68f6a1081f75d1859dea69e32a6cef75"
+  },
+  {
+    "repository": "product",
+    "path": "scripts/native-env.sh",
+    "sha256": "f3ec428bf98f0621c9ad662a15e7030d5a313b16042f75bb9905e4bf322a1cc0"
+  },
+  {
+    "repository": "product",
+    "path": "scripts/pet-gui-verify.py",
+    "sha256": "ceb7b9da366198ad1dd3d16cfad7bc77998caf5c323c09bd92d09c983dfc8cee"
+  },
+  {
+    "repository": "product",
+    "path": "scripts/postgres-init.sh",
+    "sha256": "91cf8245bf3539e4f3818e0b4c1f3cf2345f98501e337c72d892e3e2719094db"
+  },
+  {
+    "repository": "product",
+    "path": "scripts/realtime-e2e.mjs",
+    "sha256": "e837a1670554446bd01571d251a3ec948143a37517fcaa0bb4b9f53f2cb790f3"
+  },
+  {
+    "repository": "product",
+    "path": "scripts/realtime-load-e2e.mjs",
+    "sha256": "a9128b1bcf4af266f1af2baa120016c9b8ac48302d58abb270dfb55f73c1e84b"
+  },
+  {
+    "repository": "product",
+    "path": "scripts/release-approved.py",
+    "sha256": "8b5fec162dd445c7f04a35f2aa3236126162e9a0a259daa038ad8d8c55c53357"
+  },
+  {
+    "repository": "product",
+    "path": "scripts/run-weekly.sh",
+    "sha256": "3191b09d688d0979ea8e9da336dff6c257176da86d55c91514e18784f0998604"
+  },
+  {
+    "repository": "product",
+    "path": "scripts/session-ws-e2e.mjs",
+    "sha256": "fb42fb61d3a60504dcec176ad003ac23a9ee493388d5d67bac25bd0cba24fbf7"
+  },
+  {
+    "repository": "product",
+    "path": "scripts/setup-native-tools.sh",
+    "sha256": "8a73a5e1aa4cb7561789740f8bfc290d5b03cc6779d104066dd658d5413f1662"
+  },
+  {
+    "repository": "product",
+    "path": "scripts/smoke.sh",
+    "sha256": "358aaa36d4c4eb7238faecfe544323789f832c12bb0616cceef82357b7a6682e"
+  },
+  {
+    "repository": "product",
+    "path": "scripts/tests/release-approval.py",
+    "sha256": "1ef6118d6b1ec20aa0b30a789561867898e277b66f30d1b0f6a5db197fcfac51"
+  },
+  {
+    "repository": "product",
+    "path": "scripts/tests/weekly-compare.py",
+    "sha256": "52b88de25ecec9659d5194e3a1f2a8978848fa42ec7edaf655af9a59805cb4e8"
+  },
+  {
+    "repository": "product",
+    "path": "scripts/topic-consent-e2e.mjs",
+    "sha256": "63d4569dcf1ac7e1b4b2e91e919f3920263b4ae1fb696a3ee16e09aec0477567"
+  },
+  {
+    "repository": "product",
+    "path": "scripts/versioning.py",
+    "sha256": "407676c6c910417e28a097bb0656c9740be0b435c7b1066da01ff4e1628dfdde"
+  },
+  {
+    "repository": "product",
+    "path": "scripts/weekly-compare.py",
+    "sha256": "7dd6d70effe50baebc8ec02806ec1ab062e4f46a8c9cb4e470d3284a92870e92"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/.cargo_vcs_info.json",
+    "sha256": "b301b45387ec3b66f1eace44a21991aaeac83e3140dab4faa0f6b9f7f0ec445b"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/COPILOT_BACKPORT.md",
+    "sha256": "b1946bb7af1df60ef56b251afa64ee5851074ad52b31d31ade7966cc7a732844"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/COPYRIGHT",
+    "sha256": "dae402989de65164815b7e2b6bc2b9576285434c3785934c8b6ece0fa055960d"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/Cargo.toml",
+    "sha256": "bcd52d812b4c111864ae8e88ba6c0a8311eb0cf781b5e81634950b4619592132"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/Cargo.toml.orig",
+    "sha256": "677a6833293bfb48a855a5965aa2616e5a8a67cfe32b348454aa90c829a138f0"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/Gir.toml",
+    "sha256": "c09a2a77e6b5872c356f158db02fb02a91d238acc2b3d74dac527ae113e9a9f3"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/Gir_GObject.toml",
+    "sha256": "02eca96b8fc6fe0e7b36407b91e4e91a5e1662bcdef9b4bbe4ab34744182e8a7"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/LICENSE",
+    "sha256": "8cf56d10131ce201cf69ab74b111d3ebac1acca3833d7efb39ae357224b70edb"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/README.md",
+    "sha256": "31d662868efe1db14c1ae19dc99c0352266dd6f6b2db31d4079cbb162268a819"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/benches/gstring.rs",
+    "sha256": "17387e7dab0bd4002cc8b4bac315e60a171a271b152acaebe709551f4d494589"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/auto/alias.rs",
+    "sha256": "55c23867766bc1f570c9d51dd165eb0f96ba606eae6ee4c15d9f3c7a8ccd19e5"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/auto/checksum.rs",
+    "sha256": "2c7f7d139aff5a28ba1672f633e0f76a79e4527e5abed0d9d588d823a3002646"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/auto/constants.rs",
+    "sha256": "c2fa5757279dcc2a357daa56cef643c622b2c387ddc48f88024f67bb72a4cd00"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/auto/date_time.rs",
+    "sha256": "fc05d7c90e522d5ef1cb7cef6d41de49b8357a8349c48745dff3f769b42d0fda"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/auto/enums.rs",
+    "sha256": "70685084d7462df9cf4f9a1a5254b298f0de8ea587cbd7f8ff28e468c306386a"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/auto/flags.rs",
+    "sha256": "c2f77a0bdeeea8af3d0a39d7afeb2b75affae58905522b5fa65922d460052d4e"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/auto/functions.rs",
+    "sha256": "e9b0cd6ddde7a2fcb157221e712d9f33f419aeae1aa3d206987ebce526152e7e"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/auto/key_file.rs",
+    "sha256": "263c41a0df370671ef65dbf77f4a1311c349ebbb2a7b6d0a4a19525d57788e9d"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/auto/main_context.rs",
+    "sha256": "6c8d3b897b821e73e1653aeff2ddfcffcfd7dd3805bb1d850656c1b8100cab84"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/auto/main_loop.rs",
+    "sha256": "79d3273a2e8357b7d1cf2e3d53ed98e85f3260ae9780a7a559234c0d2d797b57"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/auto/markup_parse_context.rs",
+    "sha256": "979a1e49c8cd5cbca751d40cb37defe20c2f0a72dd9e4b65838c527d0ae0d291"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/auto/mod.rs",
+    "sha256": "74aa2e241ebca146a4843974b2c83087bc93fb71e70d86d2011172cbc5616ce4"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/auto/source.rs",
+    "sha256": "b2360784363f49c9a2e63e2e7873bc478d93eb09dda22f0018ee69b84a5f92b8"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/auto/time_zone.rs",
+    "sha256": "62a86aac66665ec0843bb0ad0d202d72b03224b4b072895034c7daf1f09aba81"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/auto/uri.rs",
+    "sha256": "dd30e5981df044c95a3900c983da28c06fd8fa399b03c76acb45ec2f6c59fcae"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/auto/versions.txt",
+    "sha256": "035a7287797d47bfbc9811abee3a8bbae5f5e6ec7dab72ec394a123ddb88c4c2"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/boxed.rs",
+    "sha256": "1bb1a003c82fc5903b398aef6f07d8f828446eff0a793e4aa94abbadff79f3fa"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/boxed_any_object.rs",
+    "sha256": "bd11c46e03dea925ae9b15ba6c2c70f38e207aa70530f30c4a1e7b7322f19404"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/boxed_inline.rs",
+    "sha256": "9dd644d5be6a11e8a56dbb16f70c1570affdeceaaf2622f88d661fa5769b487d"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/bridged_logging.rs",
+    "sha256": "a74ff5afc558ac072d083703d234bb79d77362d56c6a2b50934c49a7abfe0eb1"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/byte_array.rs",
+    "sha256": "b859699a50b69878cbf4d7d83c25a3e34402147bc7febe481e92c6d01e31898c"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/bytes.rs",
+    "sha256": "2c4d37050af422a475380fdc05dda58a5179b7a54ac67d14e8ab1131833f5619"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/char.rs",
+    "sha256": "edb208444ce0760c6b52a86e90db0fe2b18472c2436f75b2d241acfaeb89c3f6"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/checksum.rs",
+    "sha256": "fc98c34788d878d2461a394b442a4d8797602b3d380d96260c71160c552faa6f"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/clone.rs",
+    "sha256": "87ff5bf8fca591fb8236d61c8b1bee0db54c645b0af1c1f97dd36298c4f0f79b"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/closure.rs",
+    "sha256": "2008243add8ac242fad14e79626ba4fcf3eac2eed72666ae9f9936bad163714a"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/collections/list.rs",
+    "sha256": "53887e634a8dc22fd79ad7d38f9e914d06a013061831f5e4bd2ba9095c668220"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/collections/mod.rs",
+    "sha256": "0a6967d4d9f22bcfa6dcc35b2ce4f26ce1cc82f83111812ab0815f4b33e2c81f"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/collections/ptr_slice.rs",
+    "sha256": "6fcb10ac7d9b4ba58cdbed9dc0ad40a4f4d4f608a3572403f8a7c77fc99c2221"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/collections/slice.rs",
+    "sha256": "64d450ea2799db681a2d8d505bcac94c9f3a9ab0e52deb8c7ad0eada7d9b15a8"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/collections/slist.rs",
+    "sha256": "15b7ae76a09001e2df9c43feed8f28e06385d6032d53010358e58eb4a693e54b"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/collections/strv.rs",
+    "sha256": "e519528d5006592cf682be0ddca09a7eb2b5997115df28184b19e81881c03f03"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/control_flow.rs",
+    "sha256": "9610f16228f2f57a426fbb0c8a9513cb22631d0dc52fa65dfdc5f5372757a40e"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/convert.rs",
+    "sha256": "78fb8fa4fcc6d4c42be9eacb782f456daa35fdab20698dbcc1b67c11e66cb05a"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/date.rs",
+    "sha256": "bed49f44abb204d94c062f137f7a39e3ad722adf90b11b833aaae12733871650"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/date_time.rs",
+    "sha256": "99cff4cd4e19d57bf81187bc6e74fe7f6936cbb6575728027bfe16595ec478d4"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/enums.rs",
+    "sha256": "a436d253d4f03bffacb488a890784304f231297607460c49ceab64bef21e5338"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/error.rs",
+    "sha256": "7350aca6f26e415d3fe653c6ec94e1e6b735d3f2cefbdae7131cb1342762b29a"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/exit_code.rs",
+    "sha256": "a3de4048a143860c2d38dd1067b91bc52da9c3994491d5f8ca5187100739ff48"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/future_with_timeout.rs",
+    "sha256": "59c508f47dd247b680ed4a31f05124ae753845a5416c8fec0e31f6218849972c"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/gobject/auto/binding.rs",
+    "sha256": "9fcf34d5a4e30234890ecf00af8c7b73362597d12007483d630c6fa94099106b"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/gobject/auto/binding_group.rs",
+    "sha256": "fa4186b216f273ad2d7d531018d60a4b2a68243e1c1526f20d11bc10dc45b662"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/gobject/auto/flags.rs",
+    "sha256": "9a900bdfccfa61f6b222df9cc2bd1859438f72fc17cbe807a268a17079599af3"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/gobject/auto/mod.rs",
+    "sha256": "71208f4ba80a250bd47ea5216e17da250b344f6e5c8cbd2fc154771bab0f1124"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/gobject/auto/signal_group.rs",
+    "sha256": "5ccbc1ee15564464d8107baf2631daa5dd426f8649d9710679f49f1407797a2b"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/gobject/binding.rs",
+    "sha256": "ff7537c94681056aba4cdb603653e1d781ae2d2c6728d55fc5b8b9786b13758a"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/gobject/binding_group.rs",
+    "sha256": "79705410a96508115ab8a601e13251a27a62507e93b1c88f9c90c590ed6f302b"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/gobject/flags.rs",
+    "sha256": "6c2bb2afff339f54225ebbe9d4ab7ef06e8f783612e1e079bc18a3be6ef0ba1d"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/gobject/mod.rs",
+    "sha256": "ad5a8530e2bb7e3a4e49d9d78f66451b0aa8c5b16b88e7185c4a8759d5aa3329"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/gobject/signal_group.rs",
+    "sha256": "17eb4995d8f13d37d25d3a0465ca135d69fc4e548db712c2bd80c5419d8812e6"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/gstring.rs",
+    "sha256": "f3fe8d70bd1e58b070d4ed9d34cdd3e39f511f341424a632b9d8acdf2aec8741"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/gstring_builder.rs",
+    "sha256": "bfb1b131433531af2efa8765853ef35bbe02dc86120a04b55e6ec97e60cc8fac"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/key_file.rs",
+    "sha256": "018b398bc1bd50fd0f9925408d6898d2974c7f510d79575cb655dad7e17243de"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/lib.rs",
+    "sha256": "70abc92bf0d02f3c4989034501065cdf64d70901e511f6720d8cd65fcbb662e1"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/log.rs",
+    "sha256": "d5458fa20083efdd1f46bc1464d46fcd32fb1af926f3151881f0c0ec37e330e1"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/main_context.rs",
+    "sha256": "a1dc45489f318659f0c4a94d3143807270e6cce6a8d127afa25944838ce66b25"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/main_context_channel.rs",
+    "sha256": "e619173fc993bb1ffa350ef692b50b3b268ed5b294208caede8271ae742d80e8"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/main_context_futures.rs",
+    "sha256": "49a56a433d4f57929d7ced0d438b8dcdbe05b78d097e28d27ead09821cb802be"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/manual_functions.rs",
+    "sha256": "8e9bea0686535b5a464c82fe8b0356734e82c6aafe8bec9c717d208a6fb76059"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/object.rs",
+    "sha256": "61304201fc2dd2ec7d0e8db7343bc62db6e9c81be07b2b16ad3f530a8972f017"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/param_spec.rs",
+    "sha256": "3ffc0efc67226b180ae4f625d6579749c1d74e58fc8790d4ad837697a65ea3ff"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/prelude.rs",
+    "sha256": "75479bc1c16d719f472d44f08450b6972af5b4b18a77bcba381fa34428b0a567"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/property.rs",
+    "sha256": "c35ba9d518b0866f4bd07de5b2433fd70ef0ed38a1fb68839d2e481ab77bd887"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/quark.rs",
+    "sha256": "edfba293a1a4fcce1d057f961a182fd6aa5bfe142ecf03a692593d6951a1af5c"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/shared.rs",
+    "sha256": "24678285b9553298767c5a866aa9005dd84e0b3dae4760fcbbc6d3bf32adab8a"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/signal.rs",
+    "sha256": "09af50bf7e406b7c36f0fcbcfdb2855d6db259ca14fd4922c25c13b62db45b1d"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/source.rs",
+    "sha256": "2b5ed41c030a532be71b8525f73e6097d43380899e352dc2b1db07e4ff2d4cc5"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/source_futures.rs",
+    "sha256": "7d2fde280f9830916e3392eb7cdb69e1dd731084089699a2ad1bc0ddcb7dbcd6"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/subclass/basic.rs",
+    "sha256": "e671bd06f057c34b0b0b1dbb8c2b49c1d088b8697a0143d592969162744601ae"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/subclass/boxed.rs",
+    "sha256": "77825d5f8f7c6a2c78e10a696bbcd379984c1174ab9e3ce5a67d0942c38c4d16"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/subclass/interface.rs",
+    "sha256": "7ce87736717fdba007b649501e6cd4121c69e18a6cf0bcaf79a5512b4864ca53"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/subclass/mod.rs",
+    "sha256": "c3b6cb807d4e5ba7bd88153fedff76de11bcd53797905fc94d1dfadc51caa3c9"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/subclass/object.rs",
+    "sha256": "77da557b5e346ae3cde5ddfe525eeba22054b5beeb8335ae4a54a95cafab8701"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/subclass/object_impl_ref.rs",
+    "sha256": "7395e7e9bd5f8e6221883daaf2918758171bd75a002c5ec45b3099449a088c5d"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/subclass/shared.rs",
+    "sha256": "d60b0164b5d71412d9e7ef7a405cf730eecc3825dea2889810512124f50aae80"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/subclass/signal.rs",
+    "sha256": "006c9ad5a763fa2922b933f18b19b253d771f4a89e3115acca9c445c26c361b2"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/subclass/types.rs",
+    "sha256": "a2ad0aa5a551d95e73eb31d0339007bc615ebcbdf72953a92ddcc66ba09f4e4e"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/thread_guard.rs",
+    "sha256": "33995f6ba5bb78698ce049be3129579b9d7cc7d101b64bc8252e2d46150369a8"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/thread_pool.rs",
+    "sha256": "82766026df3d2f06fc4917eab56c4c205d95eaebd46b06f3c53ec4b406b2b050"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/time_span.rs",
+    "sha256": "7c0ca119e080a460d2e2f4d92d0e4b2909e215b52126351a74d2c4f2a0d94857"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/time_zone.rs",
+    "sha256": "8f54373db83b228a3459d71c18b3229fe37646fe3deeba23ad5592f6f5aad9d9"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/translate.rs",
+    "sha256": "f7b8c4b8a778e02d9ab18a1e018c27504e79e77b78353805bce156c694a0e85f"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/types.rs",
+    "sha256": "37137fe328dd321ceb4c9bfb439b40c630204711d4b24cc78c31800f539be4af"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/unichar.rs",
+    "sha256": "b489b849e3d7fbfd6563f43526d07647c5344e25f3a0a27803294f2695b7b9ce"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/unicollate.rs",
+    "sha256": "0bf8fe3d5aca3dc7f9ebba97984b775f0bcbf3b158cdfac03fc71c5b2a11f77d"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/utils.rs",
+    "sha256": "3c05a182c7e19409198d560e04de9136d3dbbb6beba166def08a76c181be75df"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/value.rs",
+    "sha256": "37eb2396c22f6eec372da9561d2c1651e4a9aff1f5fc634ac6db78f885f8be80"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/value_array.rs",
+    "sha256": "61b40654fe0771b5fafde9b54f2fba8db9c81cb27f114376024b66b775a785e7"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/variant.rs",
+    "sha256": "b48295eca732e862b2c5347ee431c2f800c7b0c6b30f6a0f0879cd16fe13eb9b"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/variant_dict.rs",
+    "sha256": "7b22eeb2804a2ec07d32612b712374559f23ed1e2cc59f0d05b7f28e168d706b"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/variant_iter.rs",
+    "sha256": "a0f5ee8acb8faa089bcdfbc9a57372609fce7654026ccef7d9a224d05a654ccc"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/variant_type.rs",
+    "sha256": "3e0ed2dd6119876bac19599b3aa729d5252d5449fe7f40329fb702c8f224c6b8"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/win32.rs",
+    "sha256": "a221643d9be5f9cee911fad60890d3727fdd700f70da6dcf947b2631be2fcee6"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/src/wrapper.rs",
+    "sha256": "1356b5423ac469b1778a6f06d3855251f5f8f5246bbbe05812502deeadadca54"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/tests/check_gir.rs",
+    "sha256": "8984c8e380221bb61475e329b6206eaa5702efe7e3501ec14e56e0e7773e0101"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/tests/clone.rs",
+    "sha256": "2aee80da279e7072e853bcf15088e56748aebad3c9e15d1c3c62db0c0541f3d5"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/tests/derive.rs",
+    "sha256": "59ec971ff0de81728ddd8c528f590e962090a0eadda276b75951745b0aaf6b40"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/tests/log.rs",
+    "sha256": "04bb3d80acd39e8f58660ec590087e8a3f414794be97fcbe86535f6356182204"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/tests/print.rs",
+    "sha256": "07baf16c95976c35723a9e0ba4fe1b5d1916f22887a358a76b1010ade6aa4d87"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/tests/structured_log.rs",
+    "sha256": "023503c632375ce1f3196fa1249e1b7a79aedfa28b458036657ea0b389064b05"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/tests/subclass_compiletest.rs",
+    "sha256": "06fd13974d96c0a21ce9a906010f82db1fdf1b17c192716510cc93ed2ef79547"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/tests/subclass_compiletest/01-auto-send-sync.rs",
+    "sha256": "8ff975b8f4b5c94c4cb823f27668446e3f8da5c0cf359e1bd8ac6a86334d1aa4"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/tests/subclass_compiletest/02-no-auto-send-sync.rs",
+    "sha256": "39d1a1dd156bc2eaaf6a5ca57525b1f9c5b069ac6ee70ecea9455138c2eebe13"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/tests/subclass_compiletest/02-no-auto-send-sync.stderr",
+    "sha256": "064b2d5b0dceb949c288fe09cb056f870a34c0ae5a65a33ea2e827f6ef9725ad"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/tests/subclass_compiletest/03-object-no-auto-send-sync.rs",
+    "sha256": "f7d3ae563cbb02b07253b396bb9af5fa31394e4d64ee9b6d4ffa1641e1a50b52"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/tests/subclass_compiletest/03-object-no-auto-send-sync.stderr",
+    "sha256": "3e0ea73faa979d9ab9ddcc5c3a2824592378f53e4894d029572cddbf6e6f816f"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/tests/subclass_compiletest/04-auto-send-sync-with-send-sync-parent.rs",
+    "sha256": "6832dc8851d0fdabc906acc1af8234d8ae1143a1fe8f7d7f2134e706538b6dbe"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/tests/subclass_compiletest/05-no-auto-send-sync-with-non-send-sync-parent.rs",
+    "sha256": "2b05fad36e3311bd1f6bef737431b96bbbb579b3071aef685debaaa16b95cbda"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/tests/subclass_compiletest/05-no-auto-send-sync-with-non-send-sync-parent.stderr",
+    "sha256": "9cff33355447a4c18610a211ad2ee58b87536720e0685e44c8212992ef687f77"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/tests/subclass_compiletest/06-no-auto-send-sync-with-non-send-sync-ffi-parent.rs",
+    "sha256": "a37119bff708de5c84e8a82affa6cc9abe73595b08c9e0539d9cbe33af5e9f7a"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/tests/subclass_compiletest/06-no-auto-send-sync-with-non-send-sync-ffi-parent.stderr",
+    "sha256": "808ac199325749e28e4c5ea6a459463d87c375443dc73c143a8fc1032575895f"
+  },
+  {
+    "repository": "product",
+    "path": "vendor/glib-0.18.5/tests/value.rs",
+    "sha256": "c796ea2b30559e9c8ab6ebbb6c59c575d365a27b461c20f9ca0b1989dbe01d79"
+  }
+]

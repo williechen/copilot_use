@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-"""Build a disposable 0.1.1 package and preserve an exact packaged-executable reference."""
-import os,pathlib,shutil,subprocess,sys,tarfile
+"""Build a disposable next-patch package and preserve an exact packaged-executable reference."""
+import os,pathlib,shutil,subprocess,sys,tarfile,json
+from versioning import next_patch
 
 def verify_nsis_reference(compiled: bytes, packaged: bytes):
     # Tauri restores UNK in target/release after embedding NSS into NSIS.
@@ -11,10 +12,11 @@ def verify_nsis_reference(compiled: bytes, packaged: bytes):
 
 def build():
     root=pathlib.Path(__file__).resolve().parents[1]/'apps/desktop_pet'
+    update_version=next_patch()
     paths=[root/'Cargo.toml',root/'Cargo.lock'];saved={p:p.read_bytes() for p in paths}
     try:
         bundles='app' if sys.platform=='darwin' else 'nsis' if sys.platform=='win32' else 'appimage'
-        subprocess.run(['cargo','tauri','build','--bundles',bundles,'--config','{"version":"0.1.1"}'],cwd=root,env=os.environ|{'NO_COLOR':'true'},check=True)
+        subprocess.run(['cargo','tauri','build','--bundles',bundles,'--config',json.dumps({'version':update_version})],cwd=root,env=os.environ|{'NO_COLOR':'true'},check=True)
         if sys.platform=='darwin':
             app=root/'target/release/bundle/macos/Copilot Desktop Pet.app'
             with tarfile.open(app.with_suffix('.app.tar.gz'),'w:gz')as archive:archive.add(app,arcname=app.name)
@@ -24,7 +26,7 @@ def build():
                 known=pathlib.Path(os.environ.get('ProgramFiles','C:/Program Files'))/'7-Zip/7z.exe'
                 if known.is_file():seven_zip=str(known)
             if not seven_zip:raise RuntimeError('7-Zip required to verify actual NSIS payload')
-            package=root/'target/release/bundle/nsis/Copilot Desktop Pet_0.1.1_x64-setup.exe'
+            package=root/f'target/release/bundle/nsis/Copilot Desktop Pet_{update_version}_x64-setup.exe'
             extracted=root/'target/test-update/nsis'
             if extracted.exists():shutil.rmtree(extracted)
             subprocess.run([seven_zip,'x',str(package),'-o'+str(extracted),'-y'],check=True,stdout=subprocess.DEVNULL)

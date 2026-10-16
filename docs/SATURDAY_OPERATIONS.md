@@ -85,3 +85,27 @@ Ubuntu 26.04 缺少 GCC／CMake／pkg-config／OpenSSL headers 且 sudo 需密�
 `native-env.sh` 為建置與週六測試載入私有編譯器／函式庫並限制 Cargo jobs=2。
 Trunk 0.21.14 已由官方 GitHub release 下載、核對 SHA256，安裝到使用者 Cargo bin；WASM target 已安裝。
 Node 使用 Codex 現有 bundled runtime 作 fallback，沒有 Docker 依賴。
+
+## v0.2.0 桌面執行與安裝
+
+正常桌面執行使用系統 runtime：
+
+```sh
+sudo apt-get install -y libgtk-3-0t64 libwebkit2gtk-4.1-0 libayatana-appindicator3-1 libxdo3
+```
+
+本機 Ubuntu 26.04 已由使用者完成安裝。WebKitNetworkProcess 須存在於 `/usr/lib/x86_64-linux-gnu/webkit2gtk-4.1/`。
+不要只放 `.so` 而缺少 WebKit 子程序；這會在視窗初始化時退出。
+
+```sh
+source scripts/native-env.sh
+node scripts/build-pet-ui.mjs
+cargo build --release --locked --manifest-path apps/desktop_pet/Cargo.toml
+python3 scripts/install-pet-local.py
+~/.local/bin/copilot-desktop-pet
+```
+
+安裝至本人的 XDG applications 與 `~/.local/share/copilot-desktop-pet/releases/v0.2.0/`，保留舊版本與既有資料。
+安裝器只執行 `--version` 核對版本，不自行啟動 GUI 或加入開機自啟。
+後續 GUI 驗證直接使用目前桌面及系統 WebKit，不需要 Xvfb、容器或 WebKit 路徑轉接。
+週六 `--functional-only` 排除 MCP/Provider 驗證；授權修正使用本地文字 fixture。

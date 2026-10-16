@@ -1,4 +1,5 @@
 //! Tauri Adapter：只暴露受型別限制的 Profile／Memory／Review 指令。
+mod roaming;
 mod updater;
 use day9_pet::{
     profile::PetProfile,
@@ -508,6 +509,32 @@ fn scan_file_preview(state: State<'_, DesktopState>) -> Result<Vec<serde_json::V
     Ok(result)
 }
 #[tauri::command]
+async fn scan_duplicate_preview(
+    state: State<'_, DesktopState>,
+) -> Result<Vec<Vec<serde_json::Value>>, String> {
+    let root = state.authorized_root()?;
+    let worker = root.clone();
+    let groups = tauri::async_runtime::spawn_blocking(move || worker.duplicate_groups())
+        .await
+        .map_err(|_| "無法完成重複檔預覽")?
+        .map_err(|_| "檔案已變更、不安全或超出預覽讀取上限")?;
+    let roots = state.organizer.lock().map_err(|_| "無法讀取授權目錄")?;
+    if !roots
+        .as_ref()
+        .is_some_and(|current| std::sync::Arc::ptr_eq(current, &root))
+    {
+        return Err("目錄授權已變更，請重新預覽".into());
+    }
+    let mut previews = state.previews.lock().map_err(|_| "無法讀取預覽")?;
+    previews.clear();
+    Ok(groups.into_iter().enumerate().map(|(index,group)|group.files.into_iter().map(|item|{
+        let id=Uuid::new_v4();
+        let value=serde_json::json!({"id":id,"name":item.file_name,"size_bytes":item.size_bytes,"duplicate_group":index+1});
+        previews.insert(id,item);
+        value
+    }).collect()).collect())
+}
+#[tauri::command]
 async fn confirm_cleanup(
     state: State<'_, DesktopState>,
     id: Uuid,
@@ -750,11 +777,19 @@ fn main() {
     tauri::Builder::default()
         .plugin(tauri_plugin_updater::Builder::new().build())
         .manage(updater::Updates::new())
+        .manage(roaming::Roaming::from_environment())
         .on_page_load(|webview, payload| {
             if webview.label() == "main"
                 && gui_acceptance_enabled()
                 && matches!(payload.event(), tauri::webview::PageLoadEvent::Finished)
             {
+                if let Ok(version) = std::env::var("PET_GUI_TEST_UPDATE_VERSION") {
+                    let literal = serde_json::to_string(&version).unwrap_or_default();
+                    let _ = webview.eval(&format!("window.__PET_TEST_UPDATE_VERSION={literal};"));
+                }
+                if std::env::var("PET_GUI_TEST_FUNCTIONAL_ONLY").as_deref() == Ok("true") {
+                    let _ = webview.eval("window.__PET_TEST_FUNCTIONAL_ONLY=true;");
+                }
                 if std::env::var("PET_GUI_TEST_AI").as_deref() == Ok("true") {
                     let _ = webview.eval("window.__PET_TEST_LIVE_AI=true;");
                 }
@@ -831,6 +866,8 @@ fn main() {
                 ),
                 previews: std::sync::Mutex::new(std::collections::HashMap::new()),
             });
+            let handle = app.handle().clone();
+            tauri::async_runtime::spawn(roaming::run(handle));
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
@@ -871,6 +908,9 @@ fn main() {
             authorize_directory,
             revoke_directory,
             scan_file_preview,
+            scan_duplicate_preview,
+            roaming::set_roaming,
+            roaming::roaming_status,
             confirm_cleanup,
             recover_cleanup_receipts,
             list_trash,

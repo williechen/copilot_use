@@ -1,0 +1,15 @@
+{
+  "reference_sha": "3e58e650bd63bcd21ba58e7aabf751542401ef80",
+  "base_product_sha": "de22e95f22e5a84dc45c60a5c854166272bb5c63",
+  "module_groups": 38,
+  "own_rust_files": {
+    "reference": 54,
+    "product": 71
+  },
+  "rust_files_parsed": 233,
+  "parse_errors": 0,
+  "vendor_scope": "unchanged GLib backport listed; no fresh third-party security audit claimed",
+  "functional_acceptance": "pending final exact-source gates",
+  "ai_provider_validation": "excluded",
+  "fixed_v0_1_0": "22b44f33b9e2c9edb0fb398fb9bff3efd57b00ee"
+}

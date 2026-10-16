@@ -123,6 +123,9 @@ jobs:
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
+      - name: Resolve package and update fixture versions
+        shell: bash
+        run: python3 scripts/versioning.py >> "$GITHUB_ENV"
       - uses: dtolnay/rust-toolchain@stable
         with:
           targets: wasm32-unknown-unknown
@@ -188,10 +191,10 @@ jobs:
         if: runner.os == 'Linux'
         shell: bash
         run: |
-          cp 'apps/desktop_pet/target/release/bundle/appimage/Copilot Desktop Pet_0.1.0_amd64.AppImage' "$RUNNER_TEMP/base.AppImage"
+          cp 'apps/desktop_pet/target/release/bundle/appimage/Copilot Desktop Pet_${{ env.COPILOT_VERSION }}_amd64.AppImage' "$RUNNER_TEMP/base.AppImage"
           python3 scripts/build-test-update.py
-          xvfb-run -a python3 scripts/pet-gui-verify.py --executable "$RUNNER_TEMP/base.AppImage" --updater --update-package 'apps/desktop_pet/target/release/bundle/appimage/Copilot Desktop Pet_0.1.1_amd64.AppImage'
-          cp "$RUNNER_TEMP/base.AppImage" 'apps/desktop_pet/target/release/bundle/appimage/Copilot Desktop Pet_0.1.0_amd64.AppImage'
+          xvfb-run -a python3 scripts/pet-gui-verify.py --executable "$RUNNER_TEMP/base.AppImage" --updater --update-package 'apps/desktop_pet/target/release/bundle/appimage/Copilot Desktop Pet_${{ env.COPILOT_UPDATE_VERSION }}_amd64.AppImage'
+          cp "$RUNNER_TEMP/base.AppImage" 'apps/desktop_pet/target/release/bundle/appimage/Copilot Desktop Pet_${{ env.COPILOT_VERSION }}_amd64.AppImage'
       - name: Execute macOS release app
         if: runner.os == 'macOS'
         shell: bash
@@ -224,13 +227,13 @@ jobs:
         shell: pwsh
         run: |
           $executable = Get-ChildItem (Join-Path $env:RUNNER_TEMP 'pet-package') -Filter copilot-desktop-pet.exe -Recurse | Select-Object -First 1
-          $baseInstaller = Get-ChildItem apps/desktop_pet/target/release/bundle/nsis -Filter '*_0.1.0_*.exe' | Select-Object -First 1
+          $baseInstaller = Get-ChildItem apps/desktop_pet/target/release/bundle/nsis -Filter "*_$($env:COPILOT_VERSION)_*.exe" | Select-Object -First 1
           if (-not $baseInstaller) { throw 'Base Windows installer missing' }
           $baseName = $baseInstaller.Name
           Copy-Item $baseInstaller.FullName (Join-Path $env:RUNNER_TEMP 'base-installer.exe')
           python3 scripts/build-test-update.py
           if ($LASTEXITCODE -ne 0) { throw 'Windows update fixture build failed' }
-          $update = Get-ChildItem apps/desktop_pet/target/release/bundle/nsis -Filter '*_0.1.1_*.exe' | Select-Object -First 1
+          $update = Get-ChildItem apps/desktop_pet/target/release/bundle/nsis -Filter "*_$($env:COPILOT_UPDATE_VERSION)_*.exe" | Select-Object -First 1
           if (-not $update) { throw 'Windows update package missing' }
           python3 scripts/pet-gui-verify.py --executable $executable.FullName --updater --update-package $update.FullName --expected-executable apps/desktop_pet/target/test-update/copilot-desktop-pet.exe
           if ($LASTEXITCODE -ne 0) { throw 'Actual signed Windows update failed' }
@@ -240,9 +243,9 @@ jobs:
           name: desktop-${{ runner.os }}
           path: |
             apps/desktop_pet/target/release/bundle/deb/*.deb
-            apps/desktop_pet/target/release/bundle/appimage/*_0.1.0_*.AppImage
+            apps/desktop_pet/target/release/bundle/appimage/*_${{ env.COPILOT_VERSION }}_*.AppImage
             apps/desktop_pet/target/release/bundle/macos/*.app/
-            apps/desktop_pet/target/release/bundle/nsis/*_0.1.0_*.exe
+            apps/desktop_pet/target/release/bundle/nsis/*_${{ env.COPILOT_VERSION }}_*.exe
             target/pet-gui-validation.json
 
       - name: Preserve isolated Windows updater diagnostics on failure

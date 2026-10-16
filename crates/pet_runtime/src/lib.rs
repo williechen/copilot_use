@@ -4,10 +4,13 @@ pub mod agent;
 pub mod ai;
 pub use pet_domain::application;
 pub mod backup;
+mod duplicates;
 pub mod files;
+pub use duplicates::DuplicateGroup;
 pub mod interaction;
 pub mod outbox;
 pub use pet_domain::profile;
+pub use pet_domain::roaming;
 pub mod registry;
 pub mod state;
 pub mod suggestions;
@@ -145,6 +148,18 @@ impl AuthorizedRoot {
 
     pub fn authorized_path(&self) -> &Path {
         &self.root
+    }
+
+    /// 僅預覽 SHA256 分組，不執行檔案移動或刪除。
+    pub fn duplicate_groups(&self) -> Result<Vec<DuplicateGroup>, CleanupError> {
+        #[cfg(any(target_os = "linux", target_os = "macos", target_os = "windows"))]
+        {
+            duplicates::group(&self.pinned)
+        }
+        #[cfg(not(any(target_os = "linux", target_os = "macos", target_os = "windows")))]
+        {
+            Err(io::Error::new(io::ErrorKind::Unsupported, "安全 hash Adapter 尚未驗證").into())
+        }
     }
 
     pub fn scan(&self) -> Result<Vec<FilePreview>, CleanupError> {

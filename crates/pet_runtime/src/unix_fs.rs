@@ -353,6 +353,36 @@ impl PinnedRoot {
         let file = open_at(&self.directory, value, libc::O_RDONLY)?;
         preview(file.metadata()?, value)
     }
+    pub(crate) fn sha256(&self, expected: &FilePreview) -> Result<[u8; 32], CleanupError> {
+        // 只透過已固定的 root dirfd 開啟；讀取前後均重驗 owner、mode、inode 與 mtime。
+        let valid_root = || -> Result<(), CleanupError> {
+            let meta = self.directory.metadata()?;
+            if !meta.is_dir()
+                || meta.uid() != unsafe { libc::geteuid() }
+                || meta.mode() & 0o022 != 0
+            {
+                return Err(CleanupError::UnsafeItem);
+            }
+            Ok(())
+        };
+        valid_root()?;
+        validate_name(&expected.file_name)?;
+        let mut file = open_at(&self.directory, &expected.file_name, libc::O_RDONLY)?;
+        let before = file.metadata()?;
+        if preview(before.clone(), &expected.file_name)? != *expected {
+            return Err(CleanupError::Changed);
+        }
+        let digest = crate::duplicates::hash_contents(&mut file, expected.size_bytes)?;
+        let after = file.metadata()?;
+        if preview(after.clone(), &expected.file_name)? != *expected
+            || (before.ctime(), before.ctime_nsec()) != (after.ctime(), after.ctime_nsec())
+            || self.preview(&expected.file_name)? != *expected
+        {
+            return Err(CleanupError::Changed);
+        }
+        valid_root()?;
+        Ok(digest)
+    }
     pub fn quarantine(&self, expected: &FilePreview) -> Result<CleanupReceipt, CleanupError> {
         validate_name(&expected.file_name)?;
         if self.preview(&expected.file_name)? != *expected {

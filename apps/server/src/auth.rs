@@ -38,14 +38,7 @@ fn csrf(headers: &HeaderMap) -> Result<(), StatusCode> {
     }
     Ok(())
 }
-pub(super) async fn principal(
-    state: &StateData,
-    headers: &HeaderMap,
-    write: bool,
-) -> Result<Principal, StatusCode> {
-    if authorized(headers, &state.api_token) {
-        return Ok(Principal::Admin);
-    }
+pub(super) fn session_hash(headers: &HeaderMap) -> Result<Vec<u8>, StatusCode> {
     let token = headers
         .get(header::COOKIE)
         .and_then(|v| v.to_str().ok())
@@ -57,13 +50,24 @@ pub(super) async fn principal(
     if token.len() != 64 || !token.bytes().all(|b| b.is_ascii_hexdigit()) {
         return Err(StatusCode::UNAUTHORIZED);
     }
+    Ok(Sha256::digest(token.as_bytes()).to_vec())
+}
+pub(super) async fn principal(
+    state: &StateData,
+    headers: &HeaderMap,
+    write: bool,
+) -> Result<Principal, StatusCode> {
+    if authorized(headers, &state.api_token) {
+        return Ok(Principal::Admin);
+    }
+    let hash = session_hash(headers)?;
     if write {
         csrf(headers)?;
     }
     let user: Option<Uuid> = sqlx::query_scalar(
         "SELECT user_id FROM chat_sessions WHERE token_hash=?1 AND expires_at>unixepoch('subsec')",
     )
-    .bind(Sha256::digest(token.as_bytes()).to_vec())
+    .bind(hash)
     .fetch_optional(&state.pool)
     .await
     .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;

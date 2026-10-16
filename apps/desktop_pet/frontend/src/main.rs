@@ -159,6 +159,12 @@ fn Settings() -> impl IntoView {
     let sprite = RwSignal::new(String::new());
     let shape = RwSignal::new((200.0_f64, 200.0_f64));
     let animation = RwSignal::new(json!({"action":"idle","speed":"normal","proactive":false}));
+    let roaming = RwSignal::new(false);
+    leptos::task::spawn_local(async move {
+        if let Ok(v) = call("roaming_status", json!({})).await {
+            roaming.set(v["enabled"].as_bool().unwrap_or(false));
+        }
+    });
     let prompt = RwSignal::new(String::new());
     let reply = RwSignal::new(String::new());
     let busy = RwSignal::new(false);
@@ -311,6 +317,7 @@ fn Settings() -> impl IntoView {
     <label>"目前動作"<select id="pet-action" prop:value=move ||animation.get()["action"].as_str().unwrap_or("idle").to_owned() on:change=move |e|animation.update(|v|v["action"]=json!(event_target_value(&e)))><option value="idle">"待機"</option><option value="moving">"移動"</option><option value="happy">"開心"</option><option value="learning">"學習"</option></select></label>
     <label>"播放速度"<select id="pet-speed" prop:value=move ||animation.get()["speed"].as_str().unwrap_or("normal").to_owned() on:change=move |e|animation.update(|v|v["speed"]=json!(event_target_value(&e)))><option value="slow">"慢"</option><option value="normal">"正常"</option><option value="fast">"快"</option></select></label>
     <label><input id="pet-proactive" type="checkbox" prop:checked=move ||animation.get()["proactive"]==true on:change=move |e|animation.update(|v|v["proactive"]=json!(event_target_checked(&e)))/>"主動顯示本地到期複習題（每小時最多一次）"</label>
+    <label><input id="pet-roaming" type="checkbox" prop:checked=move ||roaming.get() on:change=move |e|{let enabled=event_target_checked(&e);leptos::task::spawn_local(async move{match call("set_roaming",json!({"enabled":enabled})).await{Ok(_)=>roaming.set(enabled),Err(e)=>error.set(e)}});}/>"啟用原生視窗漫遊（動作須選移動）"</label>
     <button id="save-interaction" on:click=move |_|{let pid=pet.get();let preferences=animation.get();leptos::task::spawn_local(async move{if let Err(e)=call("set_interaction",json!({"pet":pid,"preferences":preferences})).await {error.set(e)}});}>"保存互動設定"</button>
     <RecallPrompt/>
     <PetArchive pet=pet changed=Callback::new(move |id:Option<String>|{refresh();if let Some(id)=id{load(id)}else{pet.set(uuid());sprite.set(String::new());name.set(String::new());memories.set(Vec::new());cards.set(Vec::new());}})/>
@@ -394,6 +401,9 @@ fn FileOrganizer() -> impl IntoView {
         match call("authorize_directory",json!({"path":path,"confirmed":true})).await {Ok(v)=>{root_path.set(v.as_str().unwrap_or("").into());files.set(Vec::new());status.set("目錄已授權；請先預覽檔案".into());},Err(e)=>status.set(e)}
     });}>"使用此目錄"</button>
     <button on:click=move |_|leptos::task::spawn_local(async move{match call("revoke_directory",json!({})).await{Ok(_)=>{files.set(Vec::new());authorized.set(false);status.set("已撤銷目錄授權".into());},Err(e)=>status.set(e)}})>"撤銷目錄授權"</button>
+    <button id="scan-duplicates" on:click=move |_|leptos::task::spawn_local(async move{match call("scan_duplicate_preview",json!({})).await{
+        Ok(v)=>{let groups=v.as_array().cloned().unwrap_or_default();let count=groups.len();files.set(groups.into_iter().flat_map(|group|group.as_array().cloned().unwrap_or_default()).collect());status.set(format!("SHA256 重複群組：{count}；尚未移動，需逐檔確認"));},Err(e)=>status.set(e)
+    }})>"SHA256 重複檔預覽"</button>
     <button id="scan-files" on:click=move |_|refresh(true)>"預覽授權目錄"</button>
     <button on:click=move |_|leptos::task::spawn_local(async move {
         match call("outbox_status",json!({})).await {
@@ -413,7 +423,7 @@ fn FileOrganizer() -> impl IntoView {
     {move ||files.get().into_iter().map(|item| {
         let id=item["id"].as_str().unwrap_or("").to_owned();
         let confirmed=RwSignal::new(false);let working=RwSignal::new(false);
-        view!{<article><p>{item["name"].as_str().unwrap_or("").to_owned()}{format!("（{} bytes）",item["size_bytes"])}</p>
+        view!{<article><small>{item["duplicate_group"].as_u64().map(|n|format!("SHA256 重複群組 {n}")).unwrap_or_default()}</small><p>{item["name"].as_str().unwrap_or("").to_owned()}{format!("（{} bytes）",item["size_bytes"])}</p>
         <label><input type="checkbox" on:change=move |e|confirmed.set(event_target_checked(&e))/>"我確認移到隔離區"</label>
         <button disabled=move ||!confirmed.get() ||working.get() on:click=move |_| {
             working.set(true);let id=id.clone();

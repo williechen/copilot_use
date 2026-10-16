@@ -22,7 +22,7 @@ window.addEventListener('error',e=>window.__PET_LOAD_ERROR=e.message);window.add
  const reviewed=await invoke('review_card',{pet,id:cards[0].id,quality:5});assert(reviewed.interval_days>0,'spaced review scheduling');
  const knowledge=crypto.randomUUID();await invoke('save_memory',{pet,id:knowledge,content:'Agent 驗收代碼為 ASTRO-771。probe memory owned by this pet.'});
  await invoke('save_memory',{pet:other,id:crypto.randomUUID(),content:'probe other pet hidden code STALE-999'});
- const retrieved=await invoke('search_memory_tool',{pet,query:'probe'});assert(retrieved.hits.some(x=>x.id===knowledge)&&!retrieved.hits.some(x=>x.content.includes('STALE-999')),'actual readonly MCP stdio scope');
+ if(!window.__PET_TEST_FUNCTIONAL_ONLY){const retrieved=await invoke('search_memory_tool',{pet,query:'probe'});assert(retrieved.hits.some(x=>x.id===knowledge)&&!retrieved.hits.some(x=>x.content.includes('STALE-999')),'actual readonly MCP stdio scope');}
 
  if(window.__PET_TEST_SUGGESTION){
   const id=window.__PET_TEST_SUGGESTION;
@@ -51,6 +51,25 @@ window.addEventListener('error',e=>window.__PET_LOAD_ERROR=e.message);window.add
   await invoke('save_profile',{id:pet,profile});
   assert((await invoke('load_asset',{pet})).png_base64===asset.png_base64,'matching original profile restores cached sprite');
  }
+ // 明確啟用原生漫遊，驗證真實 pet 視窗移動與工作區邊界後立即關閉。
+ await invoke('select_pet',{pet});
+ await invoke('set_interaction',{pet,preferences:{action:'moving',speed:'fast',proactive:false}});
+ await invoke('set_roaming',{enabled:true});
+ const roamBefore=await invoke('roaming_status');let roamAfter=roamBefore;
+ const roamDeadline=Date.now()+10000;
+ while(roamAfter.moves<roamBefore.moves+3){if(Date.now()>roamDeadline)throw Error('native window roaming stalled');await new Promise(r=>setTimeout(r,100));roamAfter=await invoke('roaming_status');}
+ assert(roamAfter.x>=roamAfter.area.x&&roamAfter.y>=roamAfter.area.y&&roamAfter.x+roamAfter.width<=roamAfter.area.x+roamAfter.area.width&&roamAfter.y+roamAfter.height<=roamAfter.area.y+roamAfter.area.height,'native roaming stays in monitor work area');
+ await invoke('set_roaming',{enabled:false});
+ await new Promise(r=>setTimeout(r,200));const stopped=await invoke('roaming_status');await new Promise(r=>setTimeout(r,300));const still=await invoke('roaming_status');
+ assert(!still.enabled&&stopped.x===still.x&&stopped.y===still.y,'native roaming stops on explicit disable');
+ await invoke('set_interaction',{pet,preferences:{action:'idle',speed:'normal',proactive:false}});
+ const duplicateGroups=await invoke('scan_duplicate_preview');
+ assert(duplicateGroups.some(g=>g.some(f=>f.name==='sample.txt')&&g.some(f=>f.name==='sample-copy.txt')),'actual SHA256 duplicate IPC grouping');
+ document.querySelector('#scan-duplicates').click();
+ const duplicateDeadline=Date.now()+10000;
+ while(!document.body.textContent.includes('SHA256 重複群組：1')){if(Date.now()>duplicateDeadline)throw Error('duplicate grouping UI');await new Promise(r=>setTimeout(r,50));}
+ const duplicateRows=[...document.querySelector('#scan-duplicates').closest('section').querySelectorAll('article')].filter(row=>row.textContent.includes('sample'));
+ assert(duplicateRows.length===2&&duplicateRows.every(row=>row.querySelector('button')?.disabled),'duplicate UI preserves per-file confirmation');
  await invoke('gui_test_progress',{phase:'cleanup'});
  const files=await invoke('scan_file_preview');const sample=files.find(f=>f.name==='sample.txt');assert(sample&&sample.size_bytes>0,'file preview');
  const rootPath=await invoke('authorized_directory');assert(rootPath,'authorized directory');
@@ -152,17 +171,17 @@ window.addEventListener('error',e=>window.__PET_LOAD_ERROR=e.message);window.add
  await waitUntil(()=>registry.textContent.includes('已還原寵物與原有資料'),'actual pet restore receipt');assert((await invoke('list_memories',{pet})).some(x=>x.id===knowledge),'restored pet retains saved memory');
  assert((await invoke('list_pets')).length===2,'restored pet registry');
  if(window.__PET_TEST_UPDATER){
-  const available=await invoke('check_local_update');assert(available.status==='available'&&available.version==='0.1.1','local signed update discovered');
+  const available=await invoke('check_local_update');assert(available.status==='available'&&available.version===window.__PET_TEST_UPDATE_VERSION,'local signed update discovered');
   let unconfirmedInstall=false;try{await invoke('install_local_update',{id:available.id,confirmed:false})}catch(_){unconfirmedInstall=true}assert(unconfirmedInstall,'updater installation requires confirmation');
   const verified=await invoke('verify_local_update',{id:available.id});assert(verified.status==='signature_verified'&&verified.bytes>0,'actual updater signature download verified');
   if(window.__PET_TEST_INSTALL_UPDATE){
    const installed=await invoke('install_local_update',{id:available.id,confirmed:true});
-   assert(installed.status==='installed_restart_required'&&installed.version==='0.1.1'&&installed.before_snapshot,'actual signed package installed after SQLite snapshot');
+   assert(installed.status==='installed_restart_required'&&installed.version===window.__PET_TEST_UPDATE_VERSION&&installed.before_snapshot,'actual signed package installed after SQLite snapshot');
   }else{
   const wrongVersion=await invoke('check_local_update');let versionDenied=false;try{await invoke('verify_local_update',{id:wrongVersion.id})}catch(_){versionDenied=true}assert(versionDenied,'signed version mismatch rejected');
   const tampered=await invoke('check_local_update');let tamperDenied=false;try{await invoke('verify_local_update',{id:tampered.id})}catch(_){tamperDenied=true}assert(tamperDenied,'modified updater package rejected');
   let remoteDenied=false;try{await invoke('check_local_update')}catch(_){remoteDenied=true}assert(remoteDenied,'updater remote URL rejected before download');
   }
  }
- await invoke('gui_test_result',{success:true,message:'PASS: WebKit/WASM, 200x200, IPC, profiles, memory isolation/deletion, recall scheduling, advanced overrides, memory editing, opaque-ID confirmed cleanup, organizer GUI, journal/restore recovery, Trash UI, animation choices, rendered proactive reminder and cooldown, learning summary, SQLite/assets snapshot restore, per-pet TOML import and recoverable registry, MCP stdio scope and rendered data; AI='+!!window.__PET_TEST_LIVE_AI+'; image='+!!window.__PET_TEST_LIVE_IMAGE+'; analytics='+!!window.__PET_TEST_ANALYTICS+'; updater_signature='+!!window.__PET_TEST_UPDATER});
+ await invoke('gui_test_result',{success:true,message:'PASS: WebKit/WASM, 200x200, IPC, profiles, memory isolation/deletion, recall scheduling, advanced overrides, memory editing, opaque-ID confirmed cleanup, organizer GUI, journal/restore recovery, Trash UI, animation choices, rendered proactive reminder and cooldown, learning summary, SQLite/assets snapshot restore, per-pet TOML import and recoverable registry, native roaming, SHA256 duplicate preview and per-file confirmation; MCP='+(window.__PET_TEST_FUNCTIONAL_ONLY?'excluded':'local protocol checks')+'; AI='+!!window.__PET_TEST_LIVE_AI+'; image='+!!window.__PET_TEST_LIVE_IMAGE+'; analytics='+!!window.__PET_TEST_ANALYTICS+'; updater_signature='+!!window.__PET_TEST_UPDATER});
 })().catch(async e=>{await window.__TAURI__.core.invoke('gui_test_result',{success:false,message:String(e?.message||e)})});

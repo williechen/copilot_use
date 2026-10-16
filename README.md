@@ -50,3 +50,9 @@ Chat／Pet SQLite Outbox 改以 gRPC／Protobuf 上報；Dashboard 保留 HTTP �
 ## 週六系統與部署建置準備
 
 2026-10-16 重新要求的週六同步與正式部署建置入口見 [週六操作](docs/SATURDAY_OPERATIONS.md)。尚未上線；既有固定 release 的驗收範圍不變。
+
+## v0.2.0 原生整合版
+
+本機原生整合版本為 **v0.2.0**：Chat 完成保存時的 session／ACL 交易複核、Pet 原生視窗漫遊及 SHA256 重複檔預覽已接線。正式功能驗收及來源以本次週六工程紀錄為準，未把舊版證據當作新版驗收。
+使用系統 GTK／WebKit 執行，`python3 scripts/install-pet-local.py` 安裝桌面啟動入口；不使用 Docker。
+既有 `v0.1.0` tag／GitHub Release／附件保持固定。新版本的本機 tag、安裝與遠端發布分別記錄。
