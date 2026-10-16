@@ -41,7 +41,7 @@ Refactor 整理當步實作及現有測試；例如將根 tests 的現有測試�
 - **Analytics：查詢API已實作，Dashboard流程未接通。** Day14來源／類型查詢及測試已存在；成品有對應聚合／篩選能力，新增DB單測的實際執行證據仍需核對。證據：[參考庫查詢入口與測試](https://github.com/williechen/rust_ai_chat/blob/3e58e650bd63bcd21ba58e7aabf751542401ef80/apps/stats_server/src/lib.rs)、[工程對照紀錄](https://app.notion.com/p/3f7e51d4509381faa894d3660c3252f7)。
 本節只列當前狀態與證據入口；歷次結果、來源變化及完整日誌留在工程紀錄，不在總文章累加歷史摘要。
 ## 實作、發布及驗證的分工
-每日教學核對共同總綱、相關Day、兩庫最新來源、差異、所屬測試及適用CI。rust_ai_chat最新提交的CI即使未全部Success或已有失敗，教學仍可發布；須列明當前CI狀態、失敗與待修問題，不宣稱驗證通過。每日發布不等待週六工程驗收，也不把既有CI當新教學程式已驗證。
+每日教學核對共同總綱、相關Day、兩庫最新來源、差異、所屬測試及適用CI。每日教學發布條件僅檢視 rust_ai_chat 最新提交的 CI：即使未全部 Success 或已有失敗，教學仍可發布；須列明 rust_ai_chat 當前 CI 狀態、失敗與待修問題，不宣稱驗證通過。copilot_use 的 CI 不屬於每日教學發布 Gate；其 CI 結果只供 copilot_use 產品實作、整合及功能驗收各自判定。每日發布不等待週六工程驗收，也不把既有CI當新教學程式已驗證。
 週六00:00 Asia/Taipei完整比較tracked程式、介面、流程、DB／migration、UI、設定與測試，必要的copilot_use整合與功能回歸另存工程證據；每日沿用已確認缺口，不重做全量。工程完成、每日發布及學習庫套用各自記錄。固定正式tag及附件、已套用migration和既有證據保持可追溯，新成果不得覆蓋成歷史通過。
 本機採原生環境，不使用Docker或隔離runtime。Domain／Application不依賴DB／HTTP／OS／UI Driver，SQL、DB方言、交易與平台差異留在Adapter；不同DB分別驗證，已套用migration不改寫。PostgreSQL UUID或VARCHAR(40)由Adapter適配，不滲入Domain契約。
 Dry Run只處理使用者指出的文件／規則／路徑問題，程式、測試與migration唯讀；來源證據不足明示。教學、註解與自有UI用繁體中文。AI provider既定OpenAI；不讀API key、私人環境檔或\~/.bashrc、不執行付費AI、不把密鑰寫入Git／Notion／報告。週六功能Gate不重測AI對話、串流、生圖、RAG、MCP等AI能力；沿用有效證據或標示未驗證，不將功能通過當成AI已重測。
