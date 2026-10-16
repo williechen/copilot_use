@@ -1,9 +1,9 @@
 {
   "reference_sha": "3e58e650bd63bcd21ba58e7aabf751542401ef80",
-  "validated_program_sha": "f66c8f38b69726fdc5ed777523dc84162bb3b425",
+  "validated_program_sha": "9bcae7c5d139f75ed08b4daffece602a71fdab34",
   "validated_program_ci_run": null,
-  "fixed_tag": "v0.2.0",
-  "fixed_tag_sha": "f66c8f38b69726fdc5ed777523dc84162bb3b425",
+  "fixed_tag": "v0.2.1",
+  "fixed_tag_sha": "9bcae7c5d139f75ed08b4daffece602a71fdab34",
   "next_day": {
     "chat": 15,
     "pet": 15,
@@ -259,5 +259,19 @@
     "github_release": "not published",
     "windows_macos": "not executed",
     "ai_validation": "excluded"
+  },
+  "previous_local_release": {
+    "tag": "v0.2.0",
+    "source_sha": "f66c8f38b69726fdc5ed777523dc84162bb3b425"
+  },
+  "native_patch_validation": {
+    "version": "0.2.1",
+    "source_sha": "9bcae7c5d139f75ed08b4daffece602a71fdab34",
+    "status": "passed local Linux",
+    "evidence": "docs/weekly/2026-10-16/v0.2.1/acceptance.json",
+    "update_policy": "startup or manual only; no periodic timer",
+    "remote_ci": "not run for this source",
+    "github_release": "not published",
+    "learning_advanced": false
   }
 }
