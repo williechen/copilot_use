@@ -27,5 +27,20 @@
     "8": "使用者已確認文章要求→rust_ai_chat實作→copilot_use對應實作→驗證結果"
   },
   "evidence_presentation": "current status and evidence links only; complete history in engineering records",
-  "engineering_record": "docs/source-review/teaching-correspondence-2026-10-17.md"
+  "engineering_record": "docs/source-review/teaching-correspondence-2026-10-17.md",
+  "latest_user_revision": {
+    "notion_last_edited_at": "2026-10-16T17:23:25.655Z",
+    "content_sha256": "f53ee6efbdf85b207dc1f64f1b751a5306ace6f74ec295bb5df28e5f7e22d4bf",
+    "readback_verified": true,
+    "local_mirror_updated": true,
+    "program_modified": false,
+    "pending_clarification": [
+      "桌面漫遊（手動拖移）是否取代自動漫遊"
+    ],
+    "text_findings": [
+      "i趨勢與明細：疑似多餘字元i",
+      "長期維謢版：維謢疑似應為維護"
+    ],
+    "notion_user_text_preserved": true
+  }
 }
