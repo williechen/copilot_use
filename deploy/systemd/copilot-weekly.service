@@ -6,6 +6,7 @@ Type=oneshot
 WorkingDirectory=%h/Documents/copilot_use
 Environment=PATH=%h/.cargo/bin:/usr/local/bin:/usr/bin:/bin
 Environment=CARGO_BUILD_JOBS=2
+ExecCondition=/usr/bin/python3 %h/Documents/copilot_use/scripts/weekly-due.py
 ExecStart=/bin/bash %h/Documents/copilot_use/scripts/run-weekly.sh
 TimeoutStartSec=4h
 UMask=0077

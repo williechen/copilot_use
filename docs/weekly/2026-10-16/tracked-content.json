@@ -1452,7 +1452,7 @@
   {
     "repository": "product",
     "path": "deploy/systemd/copilot-weekly.service",
-    "sha256": "259a074d98f7b7f241ad5f2af5e49bf5aaf9187ca2a39f96e88d26e46257b6d8"
+    "sha256": "44ee8e94067f5e98e3e38b00d8bc91c52b2f5994582786c85e11692c698d2d64"
   },
   {
     "repository": "product",
@@ -1757,7 +1757,7 @@
   {
     "repository": "product",
     "path": "scripts/install-pet-local.py",
-    "sha256": "da6e2b8e1a7a16b592906301d976434bcf4eb098065398ed36dadc8d7ee90fe2"
+    "sha256": "93ac8f7b4b69701da75139972dc6bc4abf90eeba79cbc2cb86d954c00642eb27"
   },
   {
     "repository": "product",
@@ -2453,5 +2453,10 @@
     "repository": "product",
     "path": "vendor/glib-0.18.5/tests/value.rs",
     "sha256": "c796ea2b30559e9c8ab6ebbb6c59c575d365a27b461c20f9ca0b1989dbe01d79"
+  },
+  {
+    "repository": "product",
+    "path": "scripts/weekly-due.py",
+    "sha256": "8e722651c793055e7d8298ba8805a923447c17067dc35870a2ad22b67a4729b9"
   }
 ]

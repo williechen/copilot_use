@@ -26,7 +26,7 @@ def main():
         if not Path('/usr/lib/x86_64-linux-gnu/webkit2gtk-4.1/WebKitNetworkProcess').is_file():
             raise RuntimeError("缺少系統 WebKit runtime，請先依操作文件安裝")
         launcher=destination/"launch.sh"
-        launcher.write_text('#!/usr/bin/env bash\nset -euo pipefail\nbase=$(cd "$(dirname "$0")" && pwd)\nexec "$base/copilot-desktop-pet" "$@"\n')
+        launcher.write_text('#!/usr/bin/env bash\nset -euo pipefail\nbase=$(cd "$(dirname "$0")" && pwd)\nconfig="${XDG_CONFIG_HOME:-$HOME/.config}/copilot-desktop-pet/runtime.env"\nif [[ -f "$config" ]]; then set -a; source "$config"; set +a; fi\nexec "$base/copilot-desktop-pet" "$@"\n')
         launcher.chmod(0o700)
         clean_env=os.environ.copy()
         clean_env.pop('LD_LIBRARY_PATH',None)
@@ -37,6 +37,16 @@ def main():
         manifest={"version":version,"source_sha":subprocess.check_output(['git','-C',str(ROOT),'rev-parse','HEAD'],text=True).strip(),
                   "binary_sha256":hashlib.sha256(binary.read_bytes()).hexdigest(),"installation":"per-user native Linux","auto_start":False}
         (destination/"installation.json").write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n')
+        config_dir=Path(os.environ.get('XDG_CONFIG_HOME',Path.home()/'.config'))/'copilot-desktop-pet'
+        config_dir.mkdir(parents=True,exist_ok=True,mode=0o700)
+        config_path=config_dir/'runtime.env'
+        settings_path=ROOT/'.local/runtime/settings.json'
+        if not config_path.exists() and settings_path.is_file():
+            token=json.loads(settings_path.read_text())['pet_ingest']
+            if len(token)<16 or not all(c in '0123456789abcdef' for c in token):
+                raise RuntimeError('內部 Analytics token 格式不正確')
+            config_path.touch(mode=0o600)
+            config_path.write_text('ANALYTICS_ENDPOINT=http://127.0.0.1:3100/api/v1/events\nANALYTICS_PET_TOKEN='+token+'\n')
         current=app/'current';temporary=app/'.current-new'
         temporary.unlink(missing_ok=True);temporary.symlink_to(destination);temporary.replace(current)
         bin_dir=Path.home()/'.local/bin';bin_dir.mkdir(parents=True,exist_ok=True)
