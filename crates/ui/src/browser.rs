@@ -9,10 +9,29 @@ use std::{
 use wasm_bindgen::{JsCast, closure::Closure};
 use web_sys::{CloseEvent, MessageEvent, WebSocket};
 pub async fn api(path: &str, method: &str, body: Option<Value>) -> Result<Value, String> {
-    let builder = gloo_net::http::RequestBuilder::new(path)
+    request(path, method, body, None).await
+}
+pub async fn api_with_token(
+    token: &str,
+    path: &str,
+    method: &str,
+    body: Option<Value>,
+) -> Result<Value, String> {
+    request(path, method, body, Some(token)).await
+}
+async fn request(
+    path: &str,
+    method: &str,
+    body: Option<Value>,
+    token: Option<&str>,
+) -> Result<Value, String> {
+    let mut builder = gloo_net::http::RequestBuilder::new(path)
         .method(method.try_into().map_err(|_| "方法不合法")?)
         .header("X-Copilot-CSRF", "1")
         .header("Content-Type", "application/json");
+    if let Some(token) = token {
+        builder = builder.header("Authorization", &format!("Bearer {token}"));
+    }
     let response = if let Some(body) = body {
         builder
             .body(body.to_string())

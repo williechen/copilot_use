@@ -11,7 +11,7 @@ const api = async (path, body) => {
   assert.ok(r.ok, `HTTP ${r.status}`);
   return r.status === 201 && path.endsWith('/rooms') ? null : r.json();
 };
-for (const id of rooms) await api('/api/v1/rooms', {id, name:id});
+for (const id of rooms) await api('/api/v1/rooms', {id, name:id,is_private:true});
 const clients=[];
 async function connect(room, credential=token, endpoint=base) {
   const ws = new WebSocket(endpoint.replace(/^http/, 'ws') + '/api/v1/ws/' + room);

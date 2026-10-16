@@ -24,6 +24,7 @@ async fn server(pool: PgPool) -> Server {
         chat_token: Arc::from(CHAT),
         pet_token: Arc::from(PET),
         admin_token: Arc::from("grpc-admin-test-credential"),
+        audit_source: None,
         ai_slots: Arc::new(tokio::sync::Semaphore::new(2)),
     };
     let socket = tokio::net::TcpListener::bind("127.0.0.1:0").await.unwrap();

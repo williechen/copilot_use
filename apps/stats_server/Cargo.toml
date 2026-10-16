@@ -22,9 +22,10 @@ tonic = "0.14"
 async-stream = "0.3"
 futures-core = "0.3"
 
+reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "json", "stream"] }
+
 [dev-dependencies]
 persistence = { path = "../../crates/persistence" }
 day9-pet = { path = "../../crates/pet_runtime" }
 tempfile = "3"
-reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "json", "stream"] }
 futures-util = "0.3"

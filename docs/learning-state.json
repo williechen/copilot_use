@@ -50,7 +50,8 @@
     "content_preservation": "retain original lessons; append necessary implementation at end of section 2",
     "weekly_engineering": "separate engineering evidence; never add weekly operations to teaching",
     "weekly_ai_validation": "excluded; functional gates only",
-    "phase_transition": "到期切換且不延後；功能未完成則原階段學習未完成，原項目跨階段補加，完工後回填原階段證據"
+    "phase_transition": "到期切換且不延後；功能未完成則原階段學習未完成，原項目跨階段補加，完工後回填原階段證據",
+    "functional_progress": "新增可操作功能／接通流程為每日主體；條件補充回原功能，不把單點 API／純測試／欄位及狀態碼當成完整流程。三專案並行追蹤，不預排 Day、不自動推進學習階段。"
   },
   "curriculum": {
     "stage_count": 13,
@@ -195,7 +196,11 @@
     "identified_gaps_resolved": false,
     "weekly_functional_acceptance": "not completed by static review"
   },
-  "product_pending_requirements": [],
+  "product_pending_requirements": [
+    "Chat 房間成員停用／恢復：限房主自己的房間，不影響帳號與其他房間",
+    "Chat 房主交接：失去管理權，保留一般成員聊天資格；AI 設定仍限系統管理者",
+    "Chat 刪除自己的帳號：先交接可保留房間運作，剩餘持有房間封存並保留聊天紀錄"
+  ],
   "product_pending_security_review": [],
   "reference_validation": {
     "checked_at": "2026-10-16T00:17:56.399878+08:00",

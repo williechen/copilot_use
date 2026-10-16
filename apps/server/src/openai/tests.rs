@@ -15,7 +15,7 @@ async fn fixture() -> (StateData, HeaderMap, Uuid) {
         .await
         .unwrap();
     let user = Uuid::new_v4();
-    sqlx::query("INSERT INTO chat_users VALUES(?1,'fixture','unused')")
+    sqlx::query("INSERT INTO chat_users(id,username,password_hash) VALUES(?1,'fixture','unused')")
         .bind(user)
         .execute(&pool)
         .await
@@ -45,6 +45,7 @@ async fn fixture() -> (StateData, HeaderMap, Uuid) {
     let state = StateData {
         pool,
         api_token: Arc::from("fixture-admin-not-a-real-secret"),
+        audit_token: Arc::from("fixture-audit-not-a-real-secret"),
         events: tokio::sync::broadcast::channel(8).0,
         ai_slots: Arc::new(tokio::sync::Semaphore::new(1)),
         auth_slots: Arc::new(tokio::sync::Semaphore::new(1)),

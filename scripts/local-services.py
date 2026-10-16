@@ -77,6 +77,10 @@ def start():
         config_file.touch(mode=0o600)
         config_file.write_text(json.dumps(config))
     config = json.loads(config_file.read_text())
+    if "audit_token" not in config:
+        config["audit_token"] = secrets.token_hex(32)
+        config_file.write_text(json.dumps(config))
+        config_file.chmod(0o600)
     for port in (3001, 3100, 55432):
         with socket.socket() as sock:
             sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -107,6 +111,7 @@ def start():
         common.update({"ANALYTICS_CHAT_TOKEN": config["chat_ingest"],
             "ANALYTICS_PET_TOKEN": config["pet_ingest"], "ANALYTICS_API_TOKEN": config["query_token"],
             "ANALYTICS_ADMIN_TOKEN": config["admin_token"], "CHAT_API_TOKEN": config["chat_token"],
+            "CHAT_AUDIT_TOKEN": config["audit_token"], "CHAT_AUDIT_ENDPOINT": "http://127.0.0.1:3001/api/v1/audit/activity",
             "CHAT_LISTEN": "127.0.0.1:3001", "ANALYTICS_LISTEN": "127.0.0.1:3100",
             "ANALYTICS_DATABASE_URL": f"postgres://analytics_user:{config['db_password']}@127.0.0.1:55432/analytics_db",
             "CHAT_DATABASE_URL": f"sqlite://{STATE}/chat.sqlite3", "CHAT_SITE_DIR": str(ROOT / "target/site/pkg"),

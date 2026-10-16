@@ -1,6 +1,8 @@
-//! 跨產品最小事件契約；不包含訊息本文、路徑或識別個資。
+//! 匿名產品事件與獨立管理稽核契約；ProductEvent 不包含訊息本文、路徑或識別個資。
 //! 對應參考 persisted_message_event／succeeded_event 的四欄角色，
 //! 保留已驗證的來源／事件名稱白名單，不因參考命名不同改寫既有資料。
+/// 獨立管理稽核契約；ProductEvent 本身仍維持匿名四欄。
+pub mod audit;
 pub mod topics;
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
@@ -40,7 +42,11 @@ impl ProductEvent {
                 (self.source_app.as_str(), self.event_type.as_str()),
                 (
                     "web_chat",
-                    "message.persisted" | "login.succeeded" | "login.failed" | "logout.succeeded"
+                    "message.persisted"
+                        | "room.created"
+                        | "login.succeeded"
+                        | "login.failed"
+                        | "logout.succeeded"
                 ) | (
                     "desktop_pet",
                     "file.cleanup.succeeded"
