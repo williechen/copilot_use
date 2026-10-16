@@ -1,6 +1,6 @@
 # copilot_use
 
-Rust AI Chat、Tauri/Leptos Desktop Pet、Product Analytics 的獨立產品工作區。驗收與正式版本以 [GitHub Releases](https://github.com/williechen/copilot_use/releases) 附帶的 tag SHA、CI 與原生本地報告為準；未有匹配證據的提交不得宣稱完成。 使用者已取消正式部署；目前範圍為本地測試與 CI。`williechen/rust_ai_chat` 嚴格唯讀。原始成品須先驗收並固定正式版本；既有 v0.1.0 固定後，每日可在 CI 未全數通過時揭露狀態並產生教學，後續變更的週六功能驗收另記，不重新阻擋全部每日教學。
+Rust AI Chat、Tauri/Leptos Desktop Pet、Product Analytics 的獨立產品工作區。驗收與正式版本以 [GitHub Releases](https://github.com/williechen/copilot_use/releases) 附帶的 tag SHA、CI 與原生本地報告為準；未有匹配證據的提交不得宣稱完成。 使用者已取消正式部署；目前範圍為本地測試與 CI。`williechen/rust_ai_chat` 嚴格唯讀。原始成品須先驗收並固定正式版本；既有 v0.1.0 固定後，每日只核對 rust_ai_chat 最新提交 CI 狀態，即使未全數通過仍可揭露狀態並產生教學；copilot_use CI 僅用於產品整合與功能驗收，不作每日教學發布條件，後續變更的週六功能驗收另記，不重新阻擋全部每日教學。
 
 ## 實際入口
 
