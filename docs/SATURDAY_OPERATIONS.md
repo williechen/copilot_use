@@ -17,28 +17,63 @@ python3 scripts/weekly-compare.py --reference /home/willie/Documents/rust_ai_cha
 ```
 
 接著逐模組核對介面、契約、DB、流程與 UI，把差異分類為合理差異、必要銜接、架構違反、產品缺口與未核實。
-週六 workflow 呼叫既有 Verify（Rust／DB／Docker／故障復原／三平台 GUI）。
+週六 workflow 呼叫既有 Verify（Rust／DB／故障復原／三平台 GUI；週六明確略過 Compose job）。
 不傳入 AI key、不新增付費呼叫；不自動覆寫 source、merge 或推進 learning-state。
 完整語意核對、必要修正、精確 SHA 的功能 Gate 與提交完成後，才能更新完整比對日期與驗收。
 此工具只提供比對證據，不能代替人工或代理的語意核對。
 
-## 正式建置
+## 原生正式建置（不使用 Docker）
 
-安裝 Docker Engine 與 Compose v2；依 `.env.example` 建立私有 `.env`，
-每個 token／密碼使用獨立隨機值。AI key 可空白。
-提交並完成該 SHA 的 Verify 後執行：
+需要 Rust stable、wasm32-unknown-unknown target 與 Trunk 0.21.14。
+提交並完成該 SHA 的適用 Verify 後執行：
 
 ```sh
+rustup target add wasm32-unknown-unknown
+cargo install trunk --version 0.21.14 --locked
 bash scripts/build-production.sh
 ```
 
-此命令驗證 Compose 並建置 Chat／Analytics；不啟動服務。
-Desktop Pet 沿用 Verify 的三平台原生安裝包建置。
-production overlay 開啟 Secure cookie，服務仍只監聽 host loopback。
-正式入口需主機 TLS reverse proxy：Chat 3001 支援 WebSocket、Analytics 3100 支援 HTTP/2 gRPC 與 SSE（停用 buffering）。
-容器間沿用既有私有 network h2c，`ALLOW_INTERNAL_HTTP_DEV` 只供容器間 Analytics 傳輸。
-禁止把這個 listener 直接公開；TLS cookie 必須經 HTTPS 入口驗證登入。
+產出 `target/native-release/<SHA>/`，含 Chat／Analytics release 執行檔、WASM／CSS、systemd unit 與 SHA256 manifest。
+Desktop Pet 沿用原生三平台建置，不作背景 systemd 服務。
+原有 Docker 檔案保留為歷史可選工具；本次操作與週六 workflow 不使用 Docker。
 
-尚需部署主機／網域、TLS 憑證、監控告警、排程備份與實際還原演練、
-精確 image digest 留存、舊版映像及 DB 相容性回滾演練，才可進行上線驗收。
-目前配置與建置入口不代表以上項目通過。
+## 主機安裝與啟動
+
+以下需主機系統管理權限，尚未自動執行：
+
+1. 在本機 PostgreSQL 建立 analytics_db 與獨立 non-superuser analytics_user，只授權該 DB；先為既有資料備份。
+2. 把產物複製到 `/opt/copilot/releases/<SHA>`，使 `/opt/copilot/current` 指向該版本；程式及資產需服務可讀。
+3. 將 deploy 的兩份 env.example 複製到 `/etc/copilot/chat.env` 及 `analytics.env`，由 root 擁有、模式 0600。
+   填入獨立隨機 token、DB 密碼，兩服務的 ANALYTICS_CHAT_TOKEN 必須相同。AI key 可不設定。
+4. 將兩份 unit 安裝到 `/etc/systemd/system/`，執行 `systemctl daemon-reload`，先啟動 copilot-analytics，再啟動 copilot-chat；驗證成功後才 enable。
+   DynamicUser 與 StateDirectory 管理 SQLite 專用可寫目錄；不使用開發者家目錄或 reference DB。
+5. 主機 TLS proxy 轉發 Chat loopback 3001（支援 WebSocket）與 Analytics loopback 3100（支援 HTTP/2 gRPC、SSE 停用 buffering）。
+   Secure cookie 必須從 HTTPS 入口驗證登入；沒有 TLS 時不能宣稱正式登入驗收通過。
+6. 檢查兩個 `/healthz`、HTTPS 登入／權限／WS／SSE／gRPC、重新啟動與備份還原，保存來源 SHA 與結果。
+
+尚需部署網域、TLS、監控告警、排程備份與實際還原演練。
+回滾先停服務、備份 DB、核對 schema 向後相容，再切回舊 release 並啟動；不可盲目降版 DB。
+目前只新增原生建置與服務設定，不代表已完成外部上線或功能驗收。
+
+## 直接使用本機環境
+
+在專案目錄完成原生建置後：
+
+```sh
+python3 scripts/local-services.py start
+python3 scripts/local-services.py status
+python3 scripts/local-services.py stop
+```
+
+不需 root，不裝容器；使用既有 PostgreSQL 工具，在 `target/local-runtime` 建立私人 SCRAM cluster（55432）、non-superuser app role、SQLite 與隨機 token。
+Chat 3001／Analytics 3100 只監聽 loopback；本機 HTTP 不啟用 Secure cookie，不代表公網正式部署。
+私密設定與服務日誌只留本機，不會輸出 token；Analytics dashboard 的查詢 token 由本人從 settings.json 安全取得。
+啟動不呼叫 AI；此管理入口清除繼承的 OPENAI_API_KEY，避免週六功能檢查誤用付費 API。
+
+## 本機週六排程
+
+`deploy/systemd/copilot-weekly.service` 與 `.timer` 是 user unit；在同一台電腦直接執行 `scripts/run-weekly.sh`，不使用 GitHub runner 或 Docker。
+安裝到 `~/.config/systemd/user/` 後 `systemctl --user daemon-reload`、`systemctl --user enable --now copilot-weekly.timer`。
+台北時間週六 08:00 執行；未登入時能否常駐取決於使用者服務／linger 設定。Persistent 會在恢復時補跑錯過的排程。
+此流程不 fetch／覆寫工作目錄、不自動 merge、不推進驗收日期；執行前應確認兩庫來源已更新。
+結果在 `target/weekly/<UTC timestamp>/`，失敗可查 `journalctl --user -u copilot-weekly.service`。

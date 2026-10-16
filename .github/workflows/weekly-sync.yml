@@ -35,3 +35,5 @@ jobs:
   functional:
     needs: compare
     uses: ./.github/workflows/verify.yml
+    with:
+      run_compose: false

@@ -1,6 +1,10 @@
 name: Verify copilot_use
 on:
   workflow_call:
+    inputs:
+      run_compose:
+        type: boolean
+        default: true
   push:
     branches: [main, 'teaching/**']
   pull_request:
@@ -41,6 +45,7 @@ jobs:
         run: cargo test -p event-contract
 
   compose-e2e:
+    if: ${{ github.event_name != 'workflow_call' || inputs.run_compose }}
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
