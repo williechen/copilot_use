@@ -17,7 +17,7 @@
 | Analytics Transport | crates/analytics_transport；Tonic 0.14.6／Prost 0.14.4 | `.proto` 生成 gRPC client/server；Outbox 投遞、逐事件 ACK、deadline | 同一 Analytics 3100 port；HTTP JSON 保留相容入口 |
 | AI／MCP Adapter | crates/ai_core、mcp_bridge | OpenAI Responses／embedding／生圖、有限 Agent 與 owner-scoped readonly tools | OpenAI／gpt-5.6-luna；OPENAI_API_KEY 留在本機 |
 | Telemetry | crates/telemetry；OpenTelemetry 0.33.1 | traces／metrics／logs、W3C correlation；與產品事件分離 | 可選 numeric-loopback OTLP，剝除認證 headers |
-| 建置／驗收 | Cargo workspace、獨立 frontend/native locks、Docker／Compose／CI | Rust／WASM／GUI／跨服務／三平台 installer/updater | 本地測試範圍，正式 tag／附件固定 |
+| 建置／驗收 | Cargo workspace、獨立 frontend/native locks、原生環境／CI（Docker／Compose 僅歷史） | Rust／WASM／GUI／跨服務／三平台 installer/updater | 本地測試範圍，正式 tag／附件固定 |
 
 本表為產品架構及當時觀察，不是最新學習倉庫的自動驗收結果；逐功能分別核對產品實作狀態、rust_ai_chat 學習套用狀態、對應 source／CI SHA 與正式驗收狀態。既有「已驗證」只代表其原始證據範圍，不因新 SHA 自動失效，也不能延伸宣稱新版本已驗證。
 
@@ -35,7 +35,7 @@
 
 ## 學習與重構並行
 
-每日依 rust_ai_chat 現有架構、確認缺口與當日差異產生四節教學，原文保留，必要實作補在第 2 節末尾；不預排 Day，不設獨立重構章。週六工程按 Red → 最小 Green → Refactor 完成必要整合、功能測試與提交，證據獨立記錄，不納入教學，也不驗證 AI 項目；功能 Gate 通過即為功能通過，不為文字不同重寫已驗證功能。
+每日依 rust_ai_chat 現有架構、確認缺口與當日差異產生四節教學，原文保留，舊 Day 更正於下一個 Day 的 Refactor 後獨立補加，不回填舊 Day；不預排 Day，不設獨立重構章。週六工程按 Red → 最小 Green → Refactor 完成必要整合、功能測試與提交，證據獨立記錄，不納入教學，也不驗證 AI 項目；功能 Gate 通過即為功能通過，不為文字不同重寫已驗證功能。
 
 Chat／Pet 各自持久化訊息或真實操作結果及 Outbox → gRPC／Protobuf → 來源認證 Analytics → PostgreSQL 去重／查詢／洞察 → 人工審核 → Chat／Pet 確認採用／收據／可回退。
 
