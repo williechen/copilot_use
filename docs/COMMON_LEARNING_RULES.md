@@ -2,7 +2,7 @@
 
 ## 基準與權限
 
-- **教學唯一實作基底為 williechen/rust_ai_chat 最新 main 的實際架構與程式。** 先讀該庫現有 Domain／Application／Repository、Adapter、呼叫端、測試、Cargo 與資料流程；以 copilot_use 已實作功能作為「最終功能行為／完成標準」比對，找出 rust_ai_chat 的確切缺口，教學只在既有程式和介面上作最小擴充與必要重構。**copilot_use 不是另一套必須複製的架構或程式模板**；不得為貼合產品檔名而預先新增重複 Trait／Port、平行服務或示範骨架。保留 rust_ai_chat 合理設計與已驗證行為，除非真實需求及呼叫端證據證明變更必要；記錄兩庫 SHA、差異、必要性與適配理由。
+- **教學唯一實作基底為 williechen/rust_ai_chat 最新 main 的實際架構與程式。** 先讀該庫現有 Domain／Application／Repository、Adapter、呼叫端、測試、Cargo 與資料流程；以 copilot_use 已實作功能作為「最終功能行為／完成標準」比對，找出 rust_ai_chat 的確切缺口，教學只在既有程式和介面上作最小擴充與必要重構。**copilot_use 不是另一套必須複製的架構或程式模板**；不得為貼合產品檔名而預先新增重複 Trait／Port、平行服務或示範骨架。保留 rust_ai_chat 合理設計與已驗證行為，除非真實需求及呼叫端證據證明變更必要；記錄兩庫 SHA、差異、必要性與適配理由。 核對與同步判定依「文章要求 → rust_ai_chat 實作 → copilot_use 對應實作 → 驗證結果」逐項追溯：記錄文章頁面／Day、兩庫精確 SHA、實作路徑與符號、實際呼叫端、對應測試及匹配來源的驗證結果；介面不同須說明合理差異與適配理由。缺少證據標示未核實，只有定義／單元測試而未接通流程標示部分完成，未執行標示未執行；不得以讀過文章、更新 SHA、同名符號或歷史 CI 判定同步完成。
 - 產品目標、能力範圍及未來前進項目以 williechen/copilot_use 的 [P9_TARGET.md](P9_TARGET.md)、實際程式與 [FUTURE_WORK.md](FUTURE_WORK.md) 為主。學習倉庫的套用進度與產品的驗收狀態分開。
 - 其他依本文件的共同學習規則執行。rust_ai_chat 的 source、README、CI、PR、branch、commit、tag 與資料庫嚴格唯讀。copilot_use 的每週實作與每日教學文件在 teaching/rust-ai-chat-alignment；main 整合需匹配驗收，正式 v0.1.0 tag／附件保持固定。
 - 兩個 repository 的統一 DB 目標：Chat／Pet 使用可攜式 SQLite；Analytics 使用獨立 PostgreSQL。範圍為本地／Docker／跨平台測試；公開部署不在目前範圍。

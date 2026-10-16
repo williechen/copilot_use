@@ -51,7 +51,8 @@
     "weekly_engineering": "separate engineering evidence; never add weekly operations to teaching",
     "weekly_ai_validation": "excluded; functional gates only",
     "phase_transition": "到期切換且不延後；功能未完成則原階段學習未完成，原項目跨階段補加，完工後回填原階段證據",
-    "functional_progress": "新增可操作功能／接通流程為每日主體；條件補充回原功能，不把單點 API／純測試／欄位及狀態碼當成完整流程。三專案並行追蹤，不預排 Day、不自動推進學習階段。"
+    "functional_progress": "新增可操作功能／接通流程為每日主體；條件補充回原功能，不把單點 API／純測試／欄位及狀態碼當成完整流程。三專案並行追蹤，不預排 Day、不自動推進學習階段。",
+    "synchronization_judgment": "核對與同步判定依「文章要求 → rust_ai_chat 實作 → copilot_use 對應實作 → 驗證結果」逐項追溯：記錄文章頁面／Day、兩庫精確 SHA、實作路徑與符號、實際呼叫端、對應測試及匹配來源的驗證結果；介面不同須說明合理差異與適配理由。缺少證據標示未核實，只有定義／單元測試而未接通流程標示部分完成，未執行標示未執行；不得以讀過文章、更新 SHA、同名符號或歷史 CI 判定同步完成。"
   },
   "curriculum": {
     "stage_count": 13,
