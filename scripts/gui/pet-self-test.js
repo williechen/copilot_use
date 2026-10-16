@@ -132,11 +132,14 @@ window.addEventListener('error',e=>window.__PET_LOAD_ERROR=e.message);window.add
  let edited;const editDeadline=Date.now()+10000;do{edited=(await invoke('list_memories',{pet})).find(x=>x.id===knowledge);if(edited?.content==='edited ASTRO-771 test memory')break;await new Promise(r=>setTimeout(r,25));}while(Date.now()<editDeadline);
  assert(edited.content==='edited ASTRO-771 test memory','memory edit UI preserves scoped ID');
 
- const actionControl=document.querySelector('#pet-action');actionControl.value='learning';actionControl.dispatchEvent(new Event('change',{bubbles:true}));
+ const actionControl=document.querySelector('#pet-action');await waitUntil(()=>!actionControl.disabled,'selected interaction settings loaded');actionControl.value='learning';actionControl.dispatchEvent(new Event('change',{bubbles:true}));
  const speedControl=document.querySelector('#pet-speed');await waitUntil(()=>!speedControl.disabled,'action auto-save completes');speedControl.value='fast';speedControl.dispatchEvent(new Event('change',{bubbles:true}));
  const interactionDeadline=Date.now()+10000;let preferences;
  do{preferences=await invoke('interaction',{pet});if(preferences.action==='learning'&&preferences.speed==='fast')break;await new Promise(r=>setTimeout(r,25));}while(Date.now()<interactionDeadline);
- assert(preferences.action==='learning'&&preferences.speed==='fast'&&!preferences.proactive,'animation action/speed UI persisted with proactive off');
+ assert(preferences.action==='learning'&&preferences.speed==='fast'&&!preferences.proactive,'animation action/speed UI persisted with proactive off: '+JSON.stringify(preferences));
+ const beforeControls=(await invoke('list_pets')).map(p=>p.id).sort();
+ const controls=await invoke('gui_test_window_controls');assert(controls.right_click&&controls.second_instance_exited&&controls.existing_controls_visible&&controls.window_count===2,'right-click and repeated launch reuse existing windows');
+ assert(JSON.stringify(beforeControls)===JSON.stringify((await invoke('list_pets')).map(p=>p.id).sort()),'opening controls never creates another pet');
  // 操作真正控制介面；整段使用同一程序，不按保存、不重新啟動。
  async function preference(field,value){
   const control=document.querySelector('#pet-'+field);
@@ -208,5 +211,5 @@ window.addEventListener('error',e=>window.__PET_LOAD_ERROR=e.message);window.add
   let remoteDenied=false;try{await invoke('check_local_update')}catch(_){remoteDenied=true}assert(remoteDenied,'updater remote URL rejected before download');
   }
  }
- await invoke('gui_test_result',{success:true,message:'PASS: WebKit/WASM, 200x200, IPC, profiles, memory isolation/deletion, recall scheduling, advanced overrides, memory editing, opaque-ID confirmed cleanup, organizer GUI, journal/restore recovery, Trash UI, animation choices, rendered proactive reminder and cooldown, learning summary, SQLite/assets snapshot restore, per-pet TOML import and recoverable registry, native roaming and live UI toggle/action/speed auto-save without restart, SHA256 duplicate preview and per-file confirmation; MCP='+(window.__PET_TEST_FUNCTIONAL_ONLY?'excluded':'local protocol checks')+'; AI='+!!window.__PET_TEST_LIVE_AI+'; image='+!!window.__PET_TEST_LIVE_IMAGE+'; analytics='+!!window.__PET_TEST_ANALYTICS+'; updater_signature='+!!window.__PET_TEST_UPDATER});
+ await invoke('gui_test_result',{success:true,message:'PASS: WebKit/WASM, 200x200, IPC, profiles, memory isolation/deletion, recall scheduling, advanced overrides, memory editing, opaque-ID confirmed cleanup, organizer GUI, journal/restore recovery, Trash UI, animation choices, rendered proactive reminder and cooldown, learning summary, SQLite/assets snapshot restore, per-pet TOML import and recoverable registry, right-click controls and single-instance reactivation without duplicate pets, native roaming and live UI toggle/action/speed auto-save without restart, SHA256 duplicate preview and per-file confirmation; MCP='+(window.__PET_TEST_FUNCTIONAL_ONLY?'excluded':'local protocol checks')+'; AI='+!!window.__PET_TEST_LIVE_AI+'; image='+!!window.__PET_TEST_LIVE_IMAGE+'; analytics='+!!window.__PET_TEST_ANALYTICS+'; updater_signature='+!!window.__PET_TEST_UPDATER});
 })().catch(async e=>{await window.__TAURI__.core.invoke('gui_test_result',{success:false,message:String(e?.message||e)})});

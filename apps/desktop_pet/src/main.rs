@@ -751,6 +751,54 @@ fn gui_test_result(app: tauri::AppHandle, success: bool, message: String) -> Res
     app.exit(if success { 0 } else { 1 });
     Ok(())
 }
+#[tauri::command]
+fn show_controls(app: tauri::AppHandle) -> Result<(), String> {
+    let window = app.get_webview_window("main").ok_or("找不到控制面板")?;
+    window.show().map_err(|_| "無法顯示控制面板")?;
+    window.unminimize().map_err(|_| "無法還原控制面板")?;
+    window
+        .set_focus()
+        .map_err(|_| "無法聚焦控制面板")
+        .map_err(String::from)
+}
+#[tauri::command]
+fn quit_pet(app: tauri::AppHandle) {
+    app.exit(0);
+}
+#[tauri::command]
+async fn gui_test_window_controls(app: tauri::AppHandle) -> Result<serde_json::Value, String> {
+    if !gui_acceptance_enabled() {
+        return Err("僅限 GUI 驗收".into());
+    }
+    let main = app.get_webview_window("main").ok_or("missing main")?;
+    let pet = app.get_webview_window("pet").ok_or("missing pet")?;
+    main.hide().map_err(|e| e.to_string())?;
+    pet.eval("document.querySelector('.floating').dispatchEvent(new MouseEvent('contextmenu',{bubbles:true,cancelable:true,button:2}));setTimeout(()=>document.querySelector('#open-controls')?.click(),100);").map_err(|e|e.to_string())?;
+    let deadline = std::time::Instant::now() + std::time::Duration::from_secs(5);
+    while !main.is_visible().unwrap_or(false) {
+        if std::time::Instant::now() > deadline {
+            return Err("right-click menu did not show controls".into());
+        }
+        tokio::time::sleep(std::time::Duration::from_millis(50)).await;
+    }
+    main.hide().map_err(|e| e.to_string())?;
+    let mut child =
+        tokio::process::Command::new(std::env::current_exe().map_err(|e| e.to_string())?)
+            .env_remove("OPENAI_API_KEY")
+            .kill_on_drop(true)
+            .spawn()
+            .map_err(|e| e.to_string())?;
+    let status = tokio::time::timeout(std::time::Duration::from_secs(10), child.wait())
+        .await
+        .map_err(|_| "second instance did not exit")?
+        .map_err(|e| e.to_string())?;
+    if !status.success() || !main.is_visible().unwrap_or(false) {
+        return Err("second launch failed to focus existing controls".into());
+    }
+    Ok(
+        serde_json::json!({"pid":std::process::id(),"right_click":true,"second_instance_exited":true,"existing_controls_visible":true,"window_count":app.webview_windows().len()}),
+    )
+}
 fn main() {
     if std::env::args().any(|arg| arg == "--mcp-once") {
         if mcp_once().is_err() {
@@ -775,6 +823,17 @@ fn main() {
         std::process::exit(1);
     }
     tauri::Builder::default()
+        .plugin(tauri_plugin_single_instance::init(|app, _args, _cwd| {
+            let _ = show_controls(app.clone());
+        }))
+        .on_window_event(|window, event| {
+            if window.label() == "main"
+                && let tauri::WindowEvent::CloseRequested { api, .. } = event
+            {
+                api.prevent_close();
+                let _ = window.hide();
+            }
+        })
         .plugin(tauri_plugin_updater::Builder::new().build())
         .manage(updater::Updates::new())
         .on_page_load(|webview, payload| {
@@ -910,6 +969,9 @@ fn main() {
             revoke_directory,
             scan_file_preview,
             scan_duplicate_preview,
+            show_controls,
+            quit_pet,
+            gui_test_window_controls,
             roaming::set_roaming,
             roaming::roaming_status,
             confirm_cleanup,

@@ -160,6 +160,8 @@ fn Settings() -> impl IntoView {
     let shape = RwSignal::new((200.0_f64, 200.0_f64));
     let animation = RwSignal::new(json!({"action":"idle","speed":"normal","proactive":false}));
     let roaming = RwSignal::new(false);
+    let interaction_loading = RwSignal::new(false);
+    let load_generation = RwSignal::new(0_u64);
     leptos::task::spawn_local(async move {
         if let Ok(v) = call("roaming_status", json!({})).await {
             roaming.set(v["enabled"].as_bool().unwrap_or(false));
@@ -216,6 +218,9 @@ fn Settings() -> impl IntoView {
         });
     };
     let load = move |id: String| {
+        load_generation.update(|v| *v = v.wrapping_add(1));
+        let generation = load_generation.get_untracked();
+        interaction_loading.set(true);
         pet.set(id.clone());
         memories.set(Vec::new());
         cards.set(Vec::new());
@@ -262,13 +267,13 @@ fn Settings() -> impl IntoView {
         }
         leptos::task::spawn_local(async move {
             let _ = call("select_pet", json!({"pet":id})).await;
-            if pet.get_untracked() != id {
+            if pet.get_untracked() != id || load_generation.get_untracked() != generation {
                 return;
             }
             if let Ok(asset) = call("load_asset", json!({"pet":id})).await
                 && let Some(png) = asset["png_base64"].as_str()
             {
-                if pet.get_untracked() != id {
+                if pet.get_untracked() != id || load_generation.get_untracked() != generation {
                     return;
                 }
                 shape.set(fit_sprite(
@@ -277,33 +282,53 @@ fn Settings() -> impl IntoView {
                 ));
                 sprite.set(format!("url(data:image/png;base64,{png})"));
             }
-            if pet.get_untracked() != id {
+            if pet.get_untracked() != id || load_generation.get_untracked() != generation {
                 return;
             }
             if let Ok(v) = call("interaction", json!({"pet":id})).await {
-                if pet.get_untracked() == id {
+                if pet.get_untracked() == id && load_generation.get_untracked() == generation {
                     animation.set(v)
                 }
             }
+            if load_generation.get_untracked() == generation {
+                interaction_loading.set(false);
+            }
             match call("list_memories", json!({"pet":id})).await {
-                Ok(v) if pet.get_untracked() == id => {
+                Ok(v)
+                    if pet.get_untracked() == id
+                        && load_generation.get_untracked() == generation =>
+                {
                     memories.set(v.as_array().cloned().unwrap_or_default())
                 }
                 Ok(_) => {}
-                Err(e) if pet.get_untracked() == id => error.set(e),
+                Err(e)
+                    if pet.get_untracked() == id
+                        && load_generation.get_untracked() == generation =>
+                {
+                    error.set(e)
+                }
                 Err(_) => {}
             }
             if let Ok(value) = call("profile_file", json!({"pet":id})).await
                 && pet.get_untracked() == id
+                && load_generation.get_untracked() == generation
             {
                 profile_location.set(value.as_str().unwrap_or("").to_owned());
             }
             match call("list_cards", json!({"pet":id})).await {
-                Ok(v) if pet.get_untracked() == id => {
+                Ok(v)
+                    if pet.get_untracked() == id
+                        && load_generation.get_untracked() == generation =>
+                {
                     cards.set(v.as_array().cloned().unwrap_or_default())
                 }
                 Ok(_) => {}
-                Err(e) if pet.get_untracked() == id => error.set(e),
+                Err(e)
+                    if pet.get_untracked() == id
+                        && load_generation.get_untracked() == generation =>
+                {
+                    error.set(e)
+                }
                 Err(_) => {}
             }
         });
@@ -322,7 +347,10 @@ fn Settings() -> impl IntoView {
     let interaction_busy = RwSignal::new(false);
     let roaming_busy = RwSignal::new(false);
     let apply_interaction = move |field: &'static str, value: Value| {
-        if interaction_busy.get_untracked() || pet.get_untracked().is_empty() {
+        if interaction_busy.get_untracked()
+            || interaction_loading.get_untracked()
+            || pet.get_untracked().is_empty()
+        {
             return;
         }
         let id = pet.get_untracked();
@@ -351,12 +379,12 @@ fn Settings() -> impl IntoView {
        <button on:click=move |_|{pet.set(uuid());name.set(String::new());species.set(String::new());likes.set(String::new());personality.set(String::new());interests.set(String::new());color.set(String::new());style.set(String::new());breed.set(String::new());actions.set(String::new());speed.set(String::new());memory.set(String::new());memory_edit_id.set(String::new());memories.set(Vec::new());cards.set(Vec::new());}>"新增寵物"</button>
        <SpriteView image=sprite animation=animation shape=shape/>
     <small>{move ||if sprite.get().is_empty() {"200×200 顯示區；目前設定尚無可用素材"}else{"200×200 角色動畫；素材已快取"}}</small>
-    <label>"目前動作"<select id="pet-action" disabled=move ||interaction_busy.get()||pet.get().is_empty() prop:value=move ||animation.get()["action"].as_str().unwrap_or("idle").to_owned() on:change=move |e|apply_interaction("action",json!(event_target_value(&e)))><option value="idle">"待機"</option><option value="moving">"移動"</option><option value="happy">"開心"</option><option value="learning">"學習"</option></select></label>
-    <label>"播放速度"<select id="pet-speed" disabled=move ||interaction_busy.get()||pet.get().is_empty() prop:value=move ||animation.get()["speed"].as_str().unwrap_or("normal").to_owned() on:change=move |e|apply_interaction("speed",json!(event_target_value(&e)))><option value="slow">"慢"</option><option value="normal">"正常"</option><option value="fast">"快"</option></select></label>
-    <label><input id="pet-proactive" type="checkbox" disabled=move ||interaction_busy.get()||pet.get().is_empty() prop:checked=move ||animation.get()["proactive"]==true on:change=move |e|apply_interaction("proactive",json!(event_target_checked(&e)))/>"主動顯示本地到期複習題（每小時最多一次）"</label>
+    <label>"目前動作"<select id="pet-action" disabled=move ||interaction_busy.get()||interaction_loading.get()||pet.get().is_empty() prop:value=move ||animation.get()["action"].as_str().unwrap_or("idle").to_owned() on:change=move |e|apply_interaction("action",json!(event_target_value(&e)))><option value="idle">"待機"</option><option value="moving">"移動"</option><option value="happy">"開心"</option><option value="learning">"學習"</option></select></label>
+    <label>"播放速度"<select id="pet-speed" disabled=move ||interaction_busy.get()||interaction_loading.get()||pet.get().is_empty() prop:value=move ||animation.get()["speed"].as_str().unwrap_or("normal").to_owned() on:change=move |e|apply_interaction("speed",json!(event_target_value(&e)))><option value="slow">"慢"</option><option value="normal">"正常"</option><option value="fast">"快"</option></select></label>
+    <label><input id="pet-proactive" type="checkbox" disabled=move ||interaction_busy.get()||interaction_loading.get()||pet.get().is_empty() prop:checked=move ||animation.get()["proactive"]==true on:change=move |e|apply_interaction("proactive",json!(event_target_checked(&e)))/>"主動顯示本地到期複習題（每小時最多一次）"</label>
     <label><input id="pet-roaming" type="checkbox" disabled=move ||roaming_busy.get() prop:checked=move ||roaming.get() on:change=move |e|{let enabled=event_target_checked(&e);roaming_busy.set(true);leptos::task::spawn_local(async move{match call("set_roaming",json!({"enabled":enabled})).await{Ok(_)=>{roaming.set(enabled);error.set(String::new());},Err(e)=>error.set(e)}roaming_busy.set(false);});}/>"啟用原生視窗漫遊（動作須選移動）"</label>
     <p>"動作、速度與巡行開關即時生效並自動保存，不需重新啟動。"</p>
-    <button id="save-interaction" disabled=move ||interaction_busy.get()||pet.get().is_empty() on:click=move |_|{let pid=pet.get();let preferences=animation.get();leptos::task::spawn_local(async move{if let Err(e)=call("set_interaction",json!({"pet":pid,"preferences":preferences})).await {error.set(e)}});}>"保存互動設定"</button>
+    <button id="save-interaction" disabled=move ||interaction_busy.get()||interaction_loading.get()||pet.get().is_empty() on:click=move |_|{let pid=pet.get();let preferences=animation.get();leptos::task::spawn_local(async move{if let Err(e)=call("set_interaction",json!({"pet":pid,"preferences":preferences})).await {error.set(e)}});}>"保存互動設定"</button>
     <RecallPrompt/>
     <PetArchive pet=pet changed=Callback::new(move |id:Option<String>|{refresh();if let Some(id)=id{load(id)}else{pet.set(uuid());sprite.set(String::new());name.set(String::new());memories.set(Vec::new());cards.set(Vec::new());}})/>
     <BackupControls/>
@@ -521,6 +549,8 @@ fn PetArchive(pet: RwSignal<String>, changed: Callback<Option<String>>) -> impl 
 }
 #[component]
 fn PetOnly() -> impl IntoView {
+    let menu_open = RwSignal::new(false);
+    let menu_error = RwSignal::new(String::new());
     let sprite = RwSignal::new(String::new());
     let shape = RwSignal::new((200.0_f64, 200.0_f64));
     let animation = RwSignal::new(json!({"action":"idle","speed":"normal","proactive":false}));
@@ -564,7 +594,14 @@ fn PetOnly() -> impl IntoView {
         .await;
         handler.forget();
     });
-    view! {<div class="floating" data-tauri-drag-region=""><SpriteView image=sprite animation=animation shape=shape/><RecallPrompt/></div>}
+    view! {<div class="floating" data-tauri-drag-region="" on:contextmenu=move |e|{e.prevent_default();e.stop_propagation();menu_open.set(true);}>
+    <SpriteView image=sprite animation=animation shape=shape/><RecallPrompt/>
+    <Show when=move ||menu_open.get()><nav id="pet-context-menu" aria-label="寵物控制選單">
+    <button id="open-controls" on:click=move |_|{leptos::task::spawn_local(async move{match call("show_controls",json!({})).await{Ok(_)=>menu_open.set(false),Err(e)=>menu_error.set(e)}});}>"開啟控制面板"</button>
+    <button on:click=move |_|menu_open.set(false)>"關閉選單"</button>
+    <button id="quit-pet" on:click=move |_|{leptos::task::spawn_local(async move{let _=call("quit_pet",json!({})).await;});}>"結束程式"</button>
+    <span role="alert">{move ||menu_error.get()}</span></nav></Show>
+    </div>}
 }
 #[component]
 fn App() -> impl IntoView {
