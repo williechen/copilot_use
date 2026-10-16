@@ -1,16 +1,16 @@
 {
-  "reference_sha": "d05438950b96e03c9c6c6f8f2c7e3573cc191a25",
-  "validated_program_sha": "39f34854b102eb96b44980d42d7b3f272307ec20",
-  "validated_program_ci_run": 38290016342,
-  "fixed_tag": "v0.1.0",
-  "fixed_tag_sha": "22b44f33b9e2c9edb0fb398fb9bff3efd57b00ee",
+  "reference_sha": "3e58e650bd63bcd21ba58e7aabf751542401ef80",
+  "validated_program_sha": "f66c8f38b69726fdc5ed777523dc84162bb3b425",
+  "validated_program_ci_run": null,
+  "fixed_tag": "v0.2.0",
+  "fixed_tag_sha": "f66c8f38b69726fdc5ed777523dc84162bb3b425",
   "next_day": {
     "chat": 15,
     "pet": 15,
     "analytics": 15
   },
-  "last_full_comparison": null,
-  "next_full_comparison": "2026-10-17T08:00:00+08:00",
+  "last_full_comparison": "2026-10-16T22:47:14.399027+08:00",
+  "next_full_comparison": "2026-10-24T08:00:00+08:00",
   "timezone": "Asia/Taipei",
   "archive_notion_page": "3f7e51d4-5093-81fa-a894-d3660c3252f7",
   "full_comparison_weekday": "Saturday",
@@ -21,11 +21,11 @@
     "analytics": "PostgreSQL"
   },
   "reference_source_db_observation": {
-    "sha": "d05438950b96e03c9c6c6f8f2c7e3573cc191a25",
-    "chat": "SQLite via CHAT_DATABASE_URL; WS typing is transient, no message DB write",
-    "pet": "reference has FSM/native roaming and SHA256 preview IPC; no PetStore SQLite product equivalent",
-    "writable": false,
-    "analytics": "PostgreSQL pg_store now wired to authenticated HTTP ingest; real HTTP/DB validation passed"
+    "sha": "3e58e650bd63bcd21ba58e7aabf751542401ef80",
+    "chat": "SQLite; WS persist_ws_message and room-scoped typing now implemented",
+    "pet": "FSM/native roaming/SHA256 preview; distinct from product PetStore/TOML contracts",
+    "analytics": "authenticated HTTP ingest, PostgreSQL dedup and query",
+    "writable": false
   },
   "analytics_transport": {
     "ingestion": "gRPC/Protobuf",
@@ -177,7 +177,7 @@
     "full_semantic_equivalence_claimed": false
   },
   "previous_adopted_reference_sha": "fdc74c1ee244cf86df3fd1c427d893d2956f6211",
-  "reference_sha_scope": "latest targeted rust_ai_chat source review; daily publication and full static comparison retain their own SHA; not product acceptance",
+  "reference_sha_scope": "2026-10-16 early Saturday full review; reference read-only; local Linux acceptance recorded separately",
   "static_full_comparison": {
     "status": "completed",
     "date": "2026-10-14",
@@ -195,13 +195,8 @@
     "identified_gaps_resolved": false,
     "weekly_functional_acceptance": "not completed by static review"
   },
-  "product_pending_requirements": [
-    "native desktop window roaming within monitor work area",
-    "SHA256 duplicate file grouping after safe preview revalidation"
-  ],
-  "product_pending_security_review": [
-    "Chat SSE completion: recheck current session/room authorization before persisting; static finding, regression not executed"
-  ],
+  "product_pending_requirements": [],
+  "product_pending_security_review": [],
   "reference_validation": {
     "checked_at": "2026-10-16T00:17:56.399878+08:00",
     "reference_sha": "d05438950b96e03c9c6c6f8f2c7e3573cc191a25",
@@ -248,5 +243,21 @@
     "notion_readback_verified": true,
     "previous_sync_evidence": "docs/teaching/archive/day-12/article-sync.json",
     "final_verdict": "Day13 integrated and read back; original code preserved; main implementation time 20/15/25 minutes, excluding Refactor/additions; no new Day or implementation"
+  },
+  "previous_product_validation": {
+    "validated_program_sha": "39f34854b102eb96b44980d42d7b3f272307ec20",
+    "validated_program_ci_run": 38290016342,
+    "fixed_tag": "v0.1.0",
+    "fixed_tag_sha": "22b44f33b9e2c9edb0fb398fb9bff3efd57b00ee"
+  },
+  "weekly_functional_acceptance": {
+    "status": "passed",
+    "scope": "local native Linux only",
+    "source_sha": "f66c8f38b69726fdc5ed777523dc84162bb3b425",
+    "evidence": "docs/weekly/2026-10-16/acceptance.json",
+    "remote_ci": "not run for this source",
+    "github_release": "not published",
+    "windows_macos": "not executed",
+    "ai_validation": "excluded"
   }
 }

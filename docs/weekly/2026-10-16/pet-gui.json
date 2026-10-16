@@ -1,0 +1,13 @@
+{
+  "message": "PASS: WebKit/WASM, 200x200, IPC, profiles, memory isolation/deletion, recall scheduling, advanced overrides, memory editing, opaque-ID confirmed cleanup, organizer GUI, journal/restore recovery, Trash UI, animation choices, rendered proactive reminder and cooldown, learning summary, SQLite/assets snapshot restore, per-pet TOML import and recoverable registry, native roaming, SHA256 duplicate preview and per-file confirmation; MCP=excluded; AI=false; image=false; analytics=false; updater_signature=true",
+  "release": true,
+  "source_dirty": false,
+  "source_sha": "f66c8f38b69726fdc5ed777523dc84162bb3b425",
+  "success": true,
+  "version": "0.2.0",
+  "per_pet_files": {
+    "profiles": 2,
+    "canonical_fields_match": true,
+    "identity_manifests": true
+  }
+}

@@ -852,7 +852,7 @@
   {
     "repository": "product",
     "path": "apps/desktop_pet/src/main.rs",
-    "sha256": "1f7712f45f5f67204df303a0ab888c3438ba8af5a979a3ae477ff6aa3099f243"
+    "sha256": "f1aa49e54858beba9ca3ed46f85706f5c837b57a33b278b3c0c6c4fa5196baa0"
   },
   {
     "repository": "product",
@@ -1482,7 +1482,7 @@
   {
     "repository": "product",
     "path": "docs/FUTURE_WORK.md",
-    "sha256": "99ad447af66dd02737e4855edab576c00b6986bd3b3994d109dca8b6f04e7bd3"
+    "sha256": "dab42266be9a57f7d481d211e3a9607cc2104f2d872c049974d992fecb28c4ba"
   },
   {
     "repository": "product",
@@ -1502,7 +1502,7 @@
   {
     "repository": "product",
     "path": "docs/SEMANTIC_ARCHITECTURE_REVIEW.md",
-    "sha256": "a632732b6faa976c0d27a7e8bc81031237c92a0ff0357fea4f8f15d4cc4b363c"
+    "sha256": "241c8e44674874dfcdd0618d1a860f446800a71421990bf85dba723e56e2761c"
   },
   {
     "repository": "product",
@@ -1537,7 +1537,7 @@
   {
     "repository": "product",
     "path": "docs/learning-state.json",
-    "sha256": "5bedb329e463ad80090dd33de53e7e1d4e42d002ee38c87d7ae5074d7c5eefe3"
+    "sha256": "8fe345d2449dd78579e5a421857c5799cb550216e155f8b3ac9f3342b91a96b1"
   },
   {
     "repository": "product",
@@ -1787,7 +1787,7 @@
   {
     "repository": "product",
     "path": "scripts/realtime-e2e.mjs",
-    "sha256": "e837a1670554446bd01571d251a3ec948143a37517fcaa0bb4b9f53f2cb790f3"
+    "sha256": "6210fc90da162a6dc2e37c35db03b0d2dfc2934930a0e52398481ef1cab42aa0"
   },
   {
     "repository": "product",
@@ -1843,6 +1843,11 @@
     "repository": "product",
     "path": "scripts/weekly-compare.py",
     "sha256": "7dd6d70effe50baebc8ec02806ec1ab062e4f46a8c9cb4e470d3284a92870e92"
+  },
+  {
+    "repository": "product",
+    "path": "scripts/weekly-due.py",
+    "sha256": "8e722651c793055e7d8298ba8805a923447c17067dc35870a2ad22b67a4729b9"
   },
   {
     "repository": "product",
@@ -2453,10 +2458,5 @@
     "repository": "product",
     "path": "vendor/glib-0.18.5/tests/value.rs",
     "sha256": "c796ea2b30559e9c8ab6ebbb6c59c575d365a27b461c20f9ca0b1989dbe01d79"
-  },
-  {
-    "repository": "product",
-    "path": "scripts/weekly-due.py",
-    "sha256": "8e722651c793055e7d8298ba8805a923447c17067dc35870a2ad22b67a4729b9"
   }
 ]

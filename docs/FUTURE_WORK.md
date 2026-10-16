@@ -6,12 +6,12 @@
 
 ## 產品缺口
 
-- [ ] Desktop Pet 實際視窗漫遊：移動原生視窗，遵守監視器工作區邊界、負座標／不同尺寸與停滯處理。現有 sprite 動畫不算完成；需 owning module tests 與實際 GUI 功能驗證。
-- [ ] FileOrganizer SHA256 重複檔案分組：安全唯讀掃描、尺寸候選、hash 前重新驗證檔案與 root、分組及 IPC／UI 接線；不得自動刪除或跳過確認。需同內容／不同內容／變動檔案／symlink 等回歸。
+- [x] Desktop Pet 實際視窗漫遊：已實作並通過本輪原生 Linux 功能驗收（不代表三平台／學習階段完成），見 [精確來源與回歸證據](weekly/2026-10-16/acceptance.json)。
+- [x] FileOrganizer SHA256 重複檔案分組：已實作並通過本輪原生 Linux 功能驗收（不代表三平台／學習階段完成），見 [精確來源與回歸證據](weekly/2026-10-16/acceptance.json)。
 
 ## 安全修正
 
-- [ ] Chat SSE 完成前重新檢查目前 session／room ACL，再持久化回答；目前 openai::produce 未帶入授權身分，與 Agent 路徑不一致。屬 source 靜態發現，撤權情境尚未回歸；測試用可控 fixture，不要求真實 AI 呼叫。
+- [x] Chat SSE 完成前重新檢查：已實作並通過本輪原生 Linux 功能驗收（不代表三平台／學習階段完成），見 [精確來源與回歸證據](weekly/2026-10-16/acceptance.json)。
 
 ## 參考適配
 

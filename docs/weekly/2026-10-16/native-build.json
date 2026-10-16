@@ -1,0 +1,15 @@
+{
+  "source_sha": "f66c8f38b69726fdc5ed777523dc84162bb3b425",
+  "files": {
+    "bin/day9-analytics": "f0d86941c56ecf65651ee3ebc46378f0ab7c3c9b9d40f2592d180a0bb818c0e2",
+    "bin/day9-chat": "983da4e2625a75082e5cfd62554d2d54f470dc0e4fad2c9d708f757a2175697c",
+    "site/pkg/chat.css": "ba0006968bd154077e71bdf435f3937b42a8814012ba2633af294068202469ab",
+    "site/pkg/chat_ui.js": "f778d473d6a4d501b77a39089e1f42e3063c1eea3631f42cb18a331dba182c2f",
+    "site/pkg/chat_ui_bg.wasm": "9163a2da0d964938c3e4c60a5592a24f4f5d594dada6b1a4d445b594c8e69848",
+    "systemd/copilot-analytics.service": "087823f189af78b1373396e2b6942c8d9309d6ad3d0c372bb02d68ede977b4ec",
+    "systemd/copilot-chat.service": "77f9a3e89d466114f27eef6e4255b706d481ce0972ea1859f08fa168c9e86fcc",
+    "systemd/copilot-weekly.service": "44ee8e94067f5e98e3e38b00d8bc91c52b2f5994582786c85e11692c698d2d64",
+    "systemd/copilot-weekly.timer": "dde142de4383ee02bff26cc430e1551eef7d2ce404b84be3bbed6604addb0339"
+  },
+  "deployment": "not deployed"
+}

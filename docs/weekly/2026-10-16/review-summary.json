@@ -9,7 +9,8 @@
   "rust_files_parsed": 233,
   "parse_errors": 0,
   "vendor_scope": "unchanged GLib backport listed; no fresh third-party security audit claimed",
-  "functional_acceptance": "pending final exact-source gates",
+  "functional_acceptance": "passed local native Linux; acceptance.json",
   "ai_provider_validation": "excluded",
-  "fixed_v0_1_0": "22b44f33b9e2c9edb0fb398fb9bff3efd57b00ee"
+  "fixed_v0_1_0": "22b44f33b9e2c9edb0fb398fb9bff3efd57b00ee",
+  "validated_program_sha": "f66c8f38b69726fdc5ed777523dc84162bb3b425"
 }

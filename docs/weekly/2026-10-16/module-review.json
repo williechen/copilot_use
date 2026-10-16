@@ -163,8 +163,8 @@
     "contract": "ReplyRequest{room_id,rag}；delta/done/error；completed 才 persist",
     "data_flow": "先 auth/ACL→provider stream→Decoder/output buffer→ChatWriter.persist_as→done",
     "decision": "完成保存前重新 session／CSRF 驗證；使用者 session＋member 查核與訊息／Outbox／realtime 在 BEGIN IMMEDIATE 同交易完成",
-    "classification": "必要安全修正；待本輪最終 Gate",
-    "evidence": "完整 AST／逐檔 hash；未變模組承接 2026-10-14 核對，變更模組另列本輪決策"
+    "classification": "必要安全修正；本輪原生 Linux Gate 通過",
+    "evidence": "acceptance.json、functional.json 與 pet-gui.json；同一乾淨來源 f66c8f38b69726fdc5ed777523dc84162bb3b425"
   },
   {
     "id": "C11",
@@ -275,8 +275,8 @@
     "contract": "參考四 IPC/get_pet_state/send_pet_command/chat_with_pet/scan_file_preview → 44 IPC",
     "data_flow": "GUI→invoke→runtimeStore/confirmedRoot→serialized result；preview opaqueID cache",
     "decision": "新增 scan_duplicate_preview、set_roaming、roaming_status 並註冊 IPC；目錄授權於 hash 後仍須同一 Arc root",
-    "classification": "必要功能銜接；待本輪最終 Gate",
-    "evidence": "完整 AST／逐檔 hash；未變模組承接 2026-10-14 核對，變更模組另列本輪決策"
+    "classification": "必要功能銜接；本輪原生 Linux Gate 通過",
+    "evidence": "acceptance.json、functional.json 與 pet-gui.json；同一乾淨來源 f66c8f38b69726fdc5ed777523dc84162bb3b425"
   },
   {
     "id": "P05",
@@ -313,8 +313,8 @@
     "contract": "monitor work_area/current_position/set_position bounded movement",
     "data_flow": "參考 window moves→verify progress→bounce/stop；成品僅window內角色動畫",
     "decision": "純 bounded_step 處理負座標／邊界／過大視窗；Tauri 實際移動 pet 視窗，預設關閉、Moving＋Speed、停滯停用與 UI 控制",
-    "classification": "必要產品功能；待本輪最終 Gate",
-    "evidence": "完整 AST／逐檔 hash；未變模組承接 2026-10-14 核對，變更模組另列本輪決策"
+    "classification": "必要產品功能；本輪原生 Linux Gate 通過",
+    "evidence": "acceptance.json、functional.json 與 pet-gui.json；同一乾淨來源 f66c8f38b69726fdc5ed777523dc84162bb3b425"
   },
   {
     "id": "P07",
@@ -328,8 +328,8 @@
     "contract": "AuthorizedRoot/ScanPreview/duplicate_preview SHA256 → runtime AuthorizedRoot/FilePreview",
     "data_flow": "參考 recursivescan→sizegroups→revalidate+hash；成品 root.scan→opaqueUUID/name/size",
     "decision": "尺寸候選後 SHA256 分組，dirfd／handle 安全開啟與前後身份複核；64MiB/檔、256MiB/次；IPC 僅 opaque ID、名稱、大小，逐檔確認沿用",
-    "classification": "必要產品功能；待本輪最終 Gate",
-    "evidence": "完整 AST／逐檔 hash；未變模組承接 2026-10-14 核對，變更模組另列本輪決策"
+    "classification": "必要產品功能；本輪原生 Linux Gate 通過",
+    "evidence": "acceptance.json、functional.json 與 pet-gui.json；同一乾淨來源 f66c8f38b69726fdc5ed777523dc84162bb3b425"
   },
   {
     "id": "P08",

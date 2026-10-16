@@ -1,0 +1,26 @@
+{
+  "running": true,
+  "pid": 96079,
+  "executable": "/home/willie/.local/share/copilot-desktop-pet/releases/v0.2.0/copilot-desktop-pet",
+  "version": "0.2.0",
+  "source_sha": "f66c8f38b69726fdc5ed777523dc84162bb3b425",
+  "normal_launch": true,
+  "window_pids_match": true,
+  "windows": [
+    {
+      "id": "0x4400024",
+      "title": "0x4400024 \"桌面 AI 寵物\": (\"copilot-desktop-pet\" \"Copilot-desktop-pet\")  200x200+0+0  +540+324",
+      "pid": 96079
+    },
+    {
+      "id": "0x4400003",
+      "title": "0x4400003 \"桌面寵物\": (\"copilot-desktop-pet\" \"Copilot-desktop-pet\")  860x720+1+24  +1+49",
+      "pid": 96079
+    }
+  ],
+  "display": ":0.0",
+  "system_webkit": true,
+  "runtime_namespace": false,
+  "xvfb": false,
+  "startup_log": "/home/willie/.cache/copilot-desktop-pet/startup.log"
+}
