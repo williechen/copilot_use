@@ -1,0 +1,10 @@
+[Unit]
+Description=Copilot Saturday 00:00 Asia/Taipei
+
+[Timer]
+OnCalendar=Sat *-*-* 00:00:00 Asia/Taipei
+Persistent=true
+Unit=copilot-weekly.service
+
+[Install]
+WantedBy=timers.target
