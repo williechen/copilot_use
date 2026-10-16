@@ -36,8 +36,8 @@
   },
   "learning_policy": {
     "daily_selection": "差異驅動＋最小功能切片；先建立可操作的基本功能項，基本流程與相應驗證通過後推進下一功能，再逐步補充細節、條件與例外；每日 TDD Red→最小 Green→Refactor→驗證。阻擋流程／資料安全／必要相依性在當步處理，其餘深化工作保留原功能項，不每日全量比對",
-    "daily_gate": "最新 CI 未全部 Success 或已有失敗仍可發布教學；列明 CI 狀態、失敗與待修問題，不宣稱驗證通過",
-    "weekly_review": "Saturday 00:00 Asia/Taipei full comparison, necessary implementation, functional tests and commit; formal functional acceptance separate; daily teaching publication independent of CI success",
+    "daily_gate": "每日教學僅核對 rust_ai_chat 最新提交 CI；不論 Success、Failure、Pending、Skipped、Cancelled 或無紀錄均可發布，須揭露 rust_ai_chat CI 狀態及待修問題，不宣稱驗證通過；copilot_use CI 不作為每日教學發布條件，僅供產品整合及功能驗收",
+    "weekly_review": "Saturday 00:00 Asia/Taipei full comparison and separate product functional acceptance; copilot_use CI is product evidence only and never gates daily teaching",
     "dry_run": "only document corrections addressing user-reported issues; code tests migrations read-only",
     "day_status": "教學已發布／程式尚待套用／功能已實作／功能正式驗收通過，依實際證據分別判定",
     "daily_time": "06:00 Asia/Taipei",
