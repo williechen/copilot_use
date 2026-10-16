@@ -5,9 +5,9 @@
   "fixed_tag": "v0.2.1",
   "fixed_tag_sha": "9bcae7c5d139f75ed08b4daffece602a71fdab34",
   "next_day": {
-    "chat": 15,
-    "pet": 15,
-    "analytics": 15
+    "chat": 16,
+    "pet": 16,
+    "analytics": 16
   },
   "last_full_comparison": "2026-10-16T22:47:14.399027+08:00",
   "next_full_comparison": "2026-10-24T00:00:00+08:00",
@@ -288,14 +288,20 @@
   },
   "teaching_progress": {
     "last_published_day": {
-      "chat": 14,
-      "pet": 14,
-      "analytics": 14
+      "chat": 15,
+      "pet": 15,
+      "analytics": 15
     },
     "numbering": "single Day sequence per project; next_day is the active next publication index",
     "application_status": "record separately per lesson and exact source; publication does not imply application",
     "validation_status": "record separately per lesson and exact source; no validation inferred from Day number",
-    "historical_numbering_record": "docs/teaching/archive/formal-day-numbering.json"
+    "historical_numbering_record": "docs/teaching/archive/formal-day-numbering.json",
+    "last_published_notion_pages": {
+      "chat": "3fbe51d4-5093-8130-a3c0-c93171105f3a",
+      "pet": "3fbe51d4-5093-81d6-8666-d3031d1c8011",
+      "analytics": "3fbe51d4-5093-8131-9460-de180d9e173d"
+    },
+    "last_publication_status": "2026-10-17 Day15 corrected Notion pages fetched and checked; code not applied, tests not executed"
   },
   "teaching_document": {
     "canonical": "docs/COMMON_LEARNING_RULES.md",
