@@ -594,11 +594,11 @@ fn PetOnly() -> impl IntoView {
         .await;
         handler.forget();
     });
-    view! {<div class="floating" data-tauri-drag-region="" on:contextmenu=move |e|{e.prevent_default();e.stop_propagation();menu_open.set(true);}>
+    view! {<div class="floating" data-tauri-drag-region="" on:contextmenu=move |e|{e.prevent_default();e.stop_propagation();leptos::task::spawn_local(async move{match call("set_menu_open",json!({"open":true})).await{Ok(_)=>menu_open.set(true),Err(e)=>menu_error.set(e)}});}>
     <SpriteView image=sprite animation=animation shape=shape/><RecallPrompt/>
     <Show when=move ||menu_open.get()><nav id="pet-context-menu" aria-label="寵物控制選單">
-    <button id="open-controls" on:click=move |_|{leptos::task::spawn_local(async move{match call("show_controls",json!({})).await{Ok(_)=>menu_open.set(false),Err(e)=>menu_error.set(e)}});}>"開啟控制面板"</button>
-    <button on:click=move |_|menu_open.set(false)>"關閉選單"</button>
+    <button id="open-controls" on:click=move |_|{leptos::task::spawn_local(async move{match call("show_controls",json!({})).await{Ok(_)=>{let _=call("set_menu_open",json!({"open":false})).await;menu_open.set(false);},Err(e)=>menu_error.set(e)}});}>"開啟控制面板"</button>
+    <button on:click=move |_|{leptos::task::spawn_local(async move{let _=call("set_menu_open",json!({"open":false})).await;menu_open.set(false);});}>"關閉選單"</button>
     <button id="quit-pet" on:click=move |_|{leptos::task::spawn_local(async move{let _=call("quit_pet",json!({})).await;});}>"結束程式"</button>
     <span role="alert">{move ||menu_error.get()}</span></nav></Show>
     </div>}

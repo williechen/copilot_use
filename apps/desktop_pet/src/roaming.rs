@@ -10,6 +10,7 @@ pub struct Roaming {
     enabled: AtomicBool,
     stalled: AtomicBool,
     moves: AtomicU64,
+    menu_open: AtomicBool,
 }
 impl Roaming {
     pub fn new(enabled: bool) -> Self {
@@ -17,8 +18,13 @@ impl Roaming {
             enabled: AtomicBool::new(enabled),
             stalled: AtomicBool::new(false),
             moves: AtomicU64::new(0),
+            menu_open: AtomicBool::new(false),
         }
     }
+}
+#[tauri::command]
+pub fn set_menu_open(state: State<'_, Roaming>, open: bool) {
+    state.menu_open.store(open, Ordering::SeqCst);
 }
 #[tauri::command]
 pub async fn set_roaming(
@@ -57,7 +63,9 @@ pub async fn run(app: tauri::AppHandle) {
     let mut stalled = 0;
     loop {
         tokio::time::sleep(std::time::Duration::from_millis(100)).await;
-        if !app.state::<Roaming>().enabled.load(Ordering::SeqCst) {
+        if !app.state::<Roaming>().enabled.load(Ordering::SeqCst)
+            || app.state::<Roaming>().menu_open.load(Ordering::SeqCst)
+        {
             stalled = 0;
             continue;
         }
@@ -112,7 +120,9 @@ pub async fn run(app: tauri::AppHandle) {
         if next.position == (before.x, before.y) {
             continue;
         }
-        if !app.state::<Roaming>().enabled.load(Ordering::SeqCst) {
+        if !app.state::<Roaming>().enabled.load(Ordering::SeqCst)
+            || app.state::<Roaming>().menu_open.load(Ordering::SeqCst)
+        {
             continue;
         }
         if pet

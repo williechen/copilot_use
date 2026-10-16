@@ -972,6 +972,7 @@ fn main() {
             show_controls,
             quit_pet,
             gui_test_window_controls,
+            roaming::set_menu_open,
             roaming::set_roaming,
             roaming::roaming_status,
             confirm_cleanup,
