@@ -1,9 +1,9 @@
 # 現行教學文章同步
 
-本目錄保存最新既有 Notion Day 12 的四節教學鏡像，完整保留原文與程式區塊；來源、頁面、內容身分見 [manifest.json](manifest.json)。下一 Day 編號維持 learning-state.json 的13，不因同步重複發布或前移。
+本目錄保存既有 Notion Day 13 的四節教學鏡像；原文與程式區塊保留，來源及同步狀態見 [manifest.json](manifest.json)。本次將「整合現有測試」加入各篇第 2 節 Refactor，不新增 Day，不計新功能進度；Chat／Pet／Analytics 主體仍合計 60 分鐘。
 
-- [Chat：WebSocket 房間 Typing 即時通知](CHAT.md)
-- [Pet：桌面漫遊明確啟用控制](PET.md)
-- [Analytics：HTTP 來源驗證與 PostgreSQL 持久化接線](ANALYTICS.md)
+- [Chat：HTTP 建房名稱驗證與 201 Created](CHAT.md)
+- [Pet：重複預覽顯示群組大小與檔案數](PET.md)
+- [Analytics：來源隔離的 PostgreSQL 統計查詢](ANALYTICS.md)
 
-三篇原撰寫來源仍為 `5a0a8ce`，原教學與程式保留；使用者已將 Day12 套用並提交於 `a57e532c125f5f18d7fd2a250401efde0c9d2612`。本地 a57e532 正式驗證通過；最新 d054389 僅 CI 變更，6／6 workflows、18／18 checks 通過；Pet GUI、跨平台及整體驗收分別記錄。精確結果見 [參考庫驗證](../../source-review/rust-ai-chat-validation.json)。
+測試重構依參考庫 `3e58e650bd63bcd21ba58e7aabf751542401ef80` 盤點：11 個有內容的測試檔歸入擁有行為的 app／crate，更新 Cargo／CI，再移除根 tests 套件與空目錄。由使用者套用至 rust_ai_chat；助手維持該庫唯讀。重構尚未套用、搬移後測試尚未執行，原教學的 CI 證據不作本次重構驗收。

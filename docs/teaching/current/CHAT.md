@@ -112,6 +112,39 @@ pub async fn create_room(
 呼叫鏈維持 POST /api/rooms → http::create_room → chat_application::create_room → RoomRepository::create → SqliteRoomRepository::create。SQL 留在 persistence，沒有新增 Port、schema 或 migration。其他檔案 N/A。
 ### Refactor
 名稱驗證與回應狀態統一由 `http::create_room` 處理：先拒絕非法名稱，再呼叫既有 `RoomRepository`，寫入成功後回傳 201 與既有 JSON。保留 `CreateRoomRequest`、`CreateRoomResponse`、UUID 產生方式與 `default-category`，UI 繼續以 `response.ok()` 接受成功回應。
+#### 整合現有測試：移除 workspace 根目錄 tests
+本項是現有測試的歸屬整合與重構，加入既有 Day 13 第 2 節 Refactor；不計為新功能、不推進 Day，也不占三專案主體合計 60 分鐘。以下依唯讀參考庫 `3e58e650bd63bcd21ba58e7aabf751542401ef80` 盤點，由你在 `/home/willie/Documents/rust_ai_chat` 套用。原有測試內容、斷言與產品行為保持；依序完成 Chat、Pet、Analytics 的搬移後，才移除共同測試套件。
+先在任何搬移前，於 workspace 根目錄保存原測試清單：
+```bash
+cargo test --locked -p workspace-tests -- --list
+```
+本篇負責下列檔案，執行位置為 workspace 根目錄：
+```bash
+mkdir -p crates/chat_application/tests
+mkdir -p apps/server/tests
+git mv tests/chat/persist_publish.rs crates/chat_application/tests/persist_publish.rs
+git mv tests/chat/product_event_contract.rs crates/chat_application/tests/product_event_contract.rs
+git mv tests/server/day5_tests.rs apps/server/tests/day5_tests.rs
+```
+`chat-application` 已具備 async-trait、chat-domain、uuid 與 tokio；`server` 已具備 shared、tokio，沿用既有依賴，不新增公開 API。
+三篇搬移全部完成後，在同一次重構中收尾：
+1. 根 `Cargo.toml` 的 `workspace.members` 移除 `"tests"`；移除 `tests/Cargo.toml` 的 `workspace-tests` 套件。新位置採 Cargo 自動探索整合測試，不要搬回原本 `autotests = false` 或舊 `[[test]]` 清單。
+2. `.github/workflows/test.yml` 原 `cargo test --locked -p workspace-tests` 改為下列四個擁有測試的套件；保留既有測試環境設定與其他工作，不新增本機 Docker 需求。
+```bash
+cargo test --locked -p chat-application -p pet-domain -p server -p stats-server --tests
+```
+1. 確認 `tests/common/mod.rs` 仍為空檔、`tests/analytics/postgres_ingest.rs` 仍只有空白後，以 `git rm` 移除這兩個空檔及 `tests/Cargo.toml`，再以 `rmdir` 移除殘留空目錄。若檔案已有內容，先整合到對應套件，不可直接刪除；所有有斷言的檔案必須先完成搬移。
+2. 執行 `cargo metadata --offline --format-version 1 --no-deps > /dev/null` 讓 Cargo 同步套件關係與 lock；若需要鎖檔解析，再執行 `cargo generate-lockfile --offline`，檢查 `Cargo.lock` 僅移除 `workspace-tests` 及重接 `stats-server` 的既有 tower 依賴。若有無關版本變動，先還原該次 lock 變動並排除解析原因；不使用 `cargo update` 升級套件。
+3. 在原生本機測試環境先用 `cargo test --locked -p workspace-tests -- --list` 保存搬移前清單；搬移後以四套件的 `--tests -- --list` 比對函式名稱、數量與 ignored 狀態，再執行測試。這條搬移前命令必須在第 1 步之前執行。
+```bash
+cargo test --locked -p chat-application -p pet-domain -p server -p stats-server --tests -- --list
+cargo test --locked -p chat-application -p pet-domain -p server -p stats-server --tests
+cargo fmt --all -- --check
+test ! -d tests
+rg -n 'workspace-tests|tests/(chat|pet|analytics|server)/' Cargo.toml Cargo.lock .github
+```
+最後一條預期沒有舊套件／路徑命中（`rg` 無命中退出碼為 1）；不能只以整體綠燈認定測試未遺漏。四套件可能同時列出既有其他測試，應逐一確認這次搬移的 11 個非空測試檔都有被探索，斷言逐位元保留。Analytics HTTP 契約測試仍需原有 PostgreSQL 與 `ANALYTICS_DATABASE_URL`、`ANALYTICS_CHAT_TOKEN`、`ANALYTICS_PET_TOKEN`；使用本機測試資料庫與合成 Token，不指向正式資料或讀取私人 `.env`。原有 `postgres_event_store` 測試及其 feature gate 保留，不因空白的 `postgres_ingest.rs` 被移除而刪除。
+本次只盤點並提供重構步驟；參考庫維持唯讀，尚未套用搬移，也未執行搬移後測試。原文的版本與 CI 證據屬原教學基準，不能當作這次重構已通過的結果。
 ## 3. 套件版本
 workspace 0.2.12／edition 2024。最新 Cargo.toml 宣告 axum 0.8、serde 1.0、tokio 1.53、sqlx 0.9、uuid 1.28；同 SHA Cargo.lock 分別為 0.8.9、1.0.229、1.53.3、0.9.0、1.28.0；serde_json 1.0.154、leptos 0.8.22。維持既有版本，無新依賴／無升級。官方最新 stable、MSRV、安全公告本次未查證；基準 native／WASM CI 通過不能代替新程式相容性驗證。
 ## 4. 驗證項目
