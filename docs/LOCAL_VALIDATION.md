@@ -1,6 +1,6 @@
 # P9 本地與跨平台驗收
 
-交付範圍為三產品的本地測試、Docker release 建置、跨平台安裝／更新與版本固定；使用者已取消公開部署。正式來源 SHA、六項 CI 與安裝包 checksum 以 [GitHub Release](https://github.com/williechen/copilot_use/releases) 的 `release-manifest.json` 為準。報告需核對精確來源及 dirty 說明；新程式變更要有匹配證據。有效程式基準見 learning-state.json。
+現行交付範圍為三產品的原生本地測試、跨平台安裝／更新與版本固定；既有 Docker release 建置僅作歷史驗證證據；使用者已取消公開部署。正式來源 SHA、六項 CI 與安裝包 checksum 以 [GitHub Release](https://github.com/williechen/copilot_use/releases) 的 `release-manifest.json` 為準。報告需核對精確來源及 dirty 說明；新程式變更要有匹配證據。有效程式基準見 learning-state.json。
 
 ## 固定成品與來源匹配證據
 
@@ -49,7 +49,7 @@ Analytics 為匿名事件和受控詞頻的描述性計數，不代表獨立真�
 
 rust_ai_chat 的 Day 10 三項契約已實作並通過本地測試，但 Chat WS 房間守衛、Pet 驗證後外觀解析與 Analytics 去重入口仍僅測試使用；Analytics 有效 HTTP 事件仍回 501，故參考庫的產品路徑驗收未通過。此結果不替代 copilot_use 的固定成品／`validated_program_sha` 證據；本輪未重新驗收 copilot_use。copilot_use 的視窗漫遊、SHA256 重複檔案分組及 SSE 授權修正仍按既有來源列為未實作／待驗收，活動項目維持在 [FUTURE_WORK.md](FUTURE_WORK.md)。`last_full_comparison=null`、Day／階段及週六到期日未前移。
 
-週六功能 Gate 依共同規則排除 AI 項目，不讀取 key、不以 AI 未重測阻擋功能通過；固定 Release 的 AI 證據及選擇性真實 AI 操作仍只歸屬原來源。每日 Day 由適用 CI Gate 決定，與週六提交／功能驗收及學習套用分開。
+週六功能 Gate 依共同規則排除 AI 項目，不讀取 key、不以 AI 未重測阻擋功能通過；固定 Release 的 AI 證據及選擇性真實 AI 操作仍只歸屬原來源。每日 Day 可在適用 CI 未全部 Success 時發布，須揭露失敗與待修問題且不得宣稱驗證通過，與週六提交／功能驗收及學習套用分開。
 
 ## 學習參考庫的當前最終判定
 
