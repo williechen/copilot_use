@@ -79,6 +79,7 @@ def start():
     config = json.loads(config_file.read_text())
     for port in (3001, 3100, 55432):
         with socket.socket() as sock:
+            sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
             try:
                 sock.bind(("127.0.0.1", port))
             except OSError:
