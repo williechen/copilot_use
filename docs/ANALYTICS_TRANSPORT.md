@@ -32,7 +32,7 @@
 
 ## 設定與驗證
 
-本地 HTTP／h2c 同 port；跨主機部署需要支援 gRPC HTTP/2 的 TLS termination，SSE proxy 需停用回應 buffering。使用者範圍仍是本地與 Docker 測試，沒有正式外部部署。
+本地 HTTP／h2c 同 port；跨主機部署需要支援 gRPC HTTP/2 的 TLS termination，SSE proxy 需停用回應 buffering。使用者範圍仍是原生本地測試，沒有正式外部部署。
 
 ```sh
 cargo fmt --all -- --check
@@ -45,4 +45,4 @@ cargo check --locked --manifest-path apps/desktop_pet/Cargo.toml
 
 新測試放在 stats_server 的私有 grpc/tests 模組，涵蓋真實 HTTP/2 gRPC、來源隔離、batch 邊界／大小、併發去重、identity conflict、restart、SQLite Chat／Pet 失敗重試與已存在 ACK、SSE 認證／commit／rollback／重連、DB 故障不成功 ACK。實際執行結果另存驗證報告；舊正式 Release 的通過證據不能替代新功能驗證。
 
-實際執行結果與來源／CI／Docker 證據索引見 [analytics-transport-validation.json](analytics-transport-validation.json)；當前分支後續變更只採用匹配其來源的證據，不沿用舊 SHA 結果。靜態契約核對見 [FULL_SOURCE_REVIEW.md](FULL_SOURCE_REVIEW.md)，不等於 transport 執行重測。
+實際執行結果與來源／CI／歷史 Docker 證據索引見 [analytics-transport-validation.json](analytics-transport-validation.json)；當前分支後續變更只採用匹配其來源的證據，不沿用舊 SHA 結果。靜態契約核對見 [FULL_SOURCE_REVIEW.md](FULL_SOURCE_REVIEW.md)，不等於 transport 執行重測。
