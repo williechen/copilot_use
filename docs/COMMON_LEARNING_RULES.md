@@ -16,7 +16,7 @@
 5. 文件階層為共同主頁 → Chat／Desktop Pet／Product Analytics 主頁 → 各專案新 Day。固定順序 Chat → Pet → Analytics，各專案獨立編號。專案主頁固定大綱、最終目標、後續缺口、CI/CD、開發與執行五節。
 6. 每日教學與正式 Day 統一四節：1. 學習大綱、2. 實作內容、3. 套件版本、4. 驗證項目。不設獨立重構章；完整程式、繁體中文註解及必要實作補充集中在第 2 節。原教學文字、程式與來源保留，必要實作只補在第 2 節末尾，同檔不重複，未變檔 N/A。第 4 節記錄教學相關命令、預期、實際結果與未執行項目。
 7. 每日適用 CI 通過即可產生四節教學；教學與週六工程工作分開。既有教學保留，追加的必要實作放第 2 節末尾，不以新內容覆蓋原教學。週六完整比對、程式整合、測試、提交及功能驗收另存工程證據，不加入教學內容；必要功能 Gate 通過後才記錄正式驗收狀態。寫前查重、寫後讀回四節、完整程式、來源 SHA 與父子關係。
-8. 測試留在所屬 app／crate／私有模組，例如 apps/server/tests、apps/desktop_pet/tests 或 crates/<模組>/src/tests.rs。禁止根 tests workspace；私有測試不暴露危險 API，外移時保留斷言與覆蓋。
+8. 測試留在所屬 app／crate／私有模組，例如 apps/server/tests、apps/desktop_pet/tests 或 crates/<模組>/src/tests.rs。禁止根 tests workspace；私有測試不暴露危險 API，外移時保留斷言與覆蓋。 目前教學已到 Day 14；既有根 tests 的整合從 Day 15 起可隨當日相關功能分批列入第 2 節 Refactor，不回填 Day 13、不計新功能。每批保留斷言並驗證探索及執行結果；過渡期間保留未搬完的測試套件與 CI，全部歸位後才移除根 tests 與 workspace-tests。
 9. 教學、註解與自有 UI 使用繁體中文；第三方識別保留。版本 Gate 查官方 stable／MSRV、安全與 native／WASM 相容性，記錄宣告及 lock 版本、來源與維持／升級理由；未查證不猜。
 10. 資料庫 Adapter 與 Migration 規範：已套用的 migration 不得修改；不同資料庫 Adapter 須分別驗證。SQLite 與 PostgreSQL 的差異由各自 Adapter 處理，不得滲入 Domain/Application。
 11. FileOrganizer 非 root，只處理使用者授權 root／opaque ID；預覽與成功分開，破壞性動作須確認並重新驗證 symlink／TOCTOU／權限。產品事件與 OTel 分離，不傳憑證、聊天原文或完整私人路徑。

@@ -278,5 +278,16 @@
     "remote_ci": "not run for this source",
     "github_release": "not published",
     "learning_advanced": false
+  },
+  "pending_test_refactor": {
+    "current_day": 14,
+    "earliest_day": 15,
+    "mode": "incremental in section 2 Refactor alongside relevant daily function",
+    "new_feature": false,
+    "retroactive_day13": false,
+    "reference_writable": false,
+    "applied": false,
+    "tests_after_move_executed": false,
+    "transition": "Retain remaining workspace-tests targets and CI until each batch is moved and verified; remove root tests package only after final batch"
   }
 }

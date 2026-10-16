@@ -36,6 +36,8 @@
 
 ### 共同主線
 
+- [ ] 現有測試歸位重構（目前 Day 14，Day 15 起可逐步納入各日第 2 節 Refactor）：依當日功能選一批現有測試搬回所屬 app／crate，不另計新功能、不回填 Day 13，也不要求同一天完成。Chat 兩檔 → chat-application；Server 一檔 → server；Pet 五檔 → pet-domain；Analytics 三檔 → stats-server。每批搬移前記錄清單，保留原斷言；同批調整原 tests/Cargo.toml 的對應 [[test]]（已搬的移除、未搬的保留），補齊接收套件 dev-dependencies、同步 Cargo.lock，並讓 CI 同時涵蓋剩餘 workspace-tests 與已歸位套件。比對測試名稱、數量、ignored 與執行結果，避免漏測或重複執行；Analytics 沿用本機測試 PostgreSQL 與合成憑證。最後一批全部驗證後，才移除根 workspace member、workspace-tests 套件、兩個空檔及根 tests 空目錄，更新 CI 移除舊引用。rust_ai_chat 由使用者套用；現況僅盤點，未搬移、未執行搬移後測試。
+
 - [ ] 採用 rust_ai_chat 新增／微調的目錄、型別、Port、介面與所屬測試，更新 copilot_use 對應及適配理由。
 - [ ] 三專案各自產出完整可套用 Day；四節格式、原教學與第 2 節末尾必要實作補充對應一致。
 - [ ] 學習倉庫逐步達到產品能力，三專案與跨服務 E2E 共同驗收；獨立記錄學習套用與產品驗收。
