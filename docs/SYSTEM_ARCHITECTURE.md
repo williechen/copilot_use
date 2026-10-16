@@ -8,7 +8,7 @@
 | Chat UI | crates/ui、apps/server/frontend；SSR／WASM hydration | protected routes、HTTP／WS／reconnect／queue／串流畫面 | 不直連 DB |
 | Chat Domain/Application | crates/chat_domain、chat_application | 輸入不變量、MessageRepository、durable commit | 無 DB／HTTP／GUI Driver |
 | Chat Persistence | crates/persistence；SQLx 0.9.0 | SQLite 訊息／Outbox／topic／realtime 單一交易、租約／備份 | 私有 SQLite 檔／WAL；migrations 所屬 Adapter |
-| Pet Native/UI | apps/desktop_pet、frontend；Tauri 2.12.3／Leptos 0.8.22 | GUI／200×200、IPC／確認、更新與冷啟動 | 本機桌面程式，不是獨立 HTTP 服務 |
+| Pet Native/UI | apps/desktop_pet、frontend；Tauri 2.12.4／Leptos 0.8.22 | GUI／200×200、IPC／確認、更新與冷啟動 | 本機桌面程式，不是獨立 HTTP 服務 |
 | Pet Domain | crates/pet_domain | Profile、save_profile Port、Schedule 複習規則 | 無 DB／HTTP／OS／Tauri Driver |
 | Pet Runtime | crates/pet_runtime，package day9-pet | SQLite／TOML／素材、AI／MCP、平台 FS、安全 receipt、Outbox／備份 | app_data 或 PET_DATA_DIR；獨立 SQLite 與每寵物檔案 |
 | Analytics Web/API | apps/stats_server；Axum 0.8.9 | HTTP Dashboard／Query、gRPC Ingest、SSE 同服務；來源認證、冪等、明細、審核與回退收據 | ANALYTICS_DATABASE_URL；獨立 PostgreSQL；loopback 3100 |

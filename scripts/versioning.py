@@ -4,7 +4,7 @@ from pathlib import Path
 import re
 ROOT = Path(__file__).resolve().parents[1]
 def release_version():
-    version = json.loads((ROOT / "apps/desktop_pet/tauri.conf.json").read_text())["version"]
+    version = json.loads((ROOT / "apps/desktop_pet/tauri.conf.json").read_text(encoding="utf-8"))["version"]
     if not re.fullmatch(r"(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)", version):
         raise ValueError("版本必須是正常的 SemVer major.minor.patch")
     return version

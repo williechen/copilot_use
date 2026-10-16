@@ -10,6 +10,20 @@ on:
   pull_request:
     branches: [main]
 jobs:
+  dependency-security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Install RustSec lockfile auditor
+        run: cargo install cargo-audit --locked --version 0.22.2
+      - name: Audit all independent lockfiles
+        run: |
+          cargo audit --file Cargo.lock
+          cargo audit --file apps/desktop_pet/Cargo.lock
+          cargo audit --file apps/desktop_pet/frontend/Cargo.lock
+          cargo audit --file apps/server/frontend/Cargo.lock
+
   rust-postgres:
     runs-on: ubuntu-latest
     services:
@@ -126,6 +140,9 @@ jobs:
       - name: Resolve package and update fixture versions
         shell: bash
         run: python3 scripts/versioning.py >> "$GITHUB_ENV"
+      - name: Verify version metadata under non-UTF-8 locale
+        shell: bash
+        run: python3 scripts/tests/versioning.py
       - uses: dtolnay/rust-toolchain@stable
         with:
           targets: wasm32-unknown-unknown

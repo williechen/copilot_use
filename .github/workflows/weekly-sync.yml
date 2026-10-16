@@ -1,8 +1,8 @@
 name: Saturday source comparison and functional gates
 on:
   schedule:
-    # Saturday 08:00 Asia/Taipei (UTC+8); GitHub may delay scheduled runs.
-    - cron: '0 0 * * 6'
+    # Saturday 00:00 Asia/Taipei (Friday 16:00 UTC); GitHub may delay scheduled runs.
+    - cron: '0 16 * * 5'
   workflow_dispatch:
 permissions:
   contents: read
