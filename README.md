@@ -46,3 +46,7 @@ python3 scripts/local-verify.py --live-openai
 ## Analytics 通訊更新
 
 Chat／Pet SQLite Outbox 改以 gRPC／Protobuf 上報；Dashboard 保留 HTTP 查詢並以 SSE 即時更新。使用既有 Analytics port／來源 token，PostgreSQL 提交後才 ACK。這是正式 v0.1.0 固定後的新需求，不變更既有 tag 或安裝包。契約、測試與運作限制見 [ANALYTICS_TRANSPORT.md](docs/ANALYTICS_TRANSPORT.md)。
+
+## 週六系統與部署建置準備
+
+2026-10-16 重新要求的週六同步與正式部署建置入口見 [週六操作](docs/SATURDAY_OPERATIONS.md)。尚未上線；既有固定 release 的驗收範圍不變。

@@ -1,0 +1,15 @@
+# Overlay for a host-managed TLS proxy. No public listener is introduced.
+# Run with: docker compose -f compose.yaml -f deploy/compose.production.yaml ...
+services:
+  chat:
+    image: copilot-chat:${COPILOT_BUILD_SHA:?set COPILOT_BUILD_SHA}
+    environment:
+      COOKIE_SECURE: "true"
+  analytics:
+    image: copilot-analytics:${COPILOT_BUILD_SHA:?set COPILOT_BUILD_SHA}
+  analytics-db:
+    restart: unless-stopped
+    security_opt: ["no-new-privileges:true"]
+    pids_limit: 256
+    mem_limit: 1g
+    cpus: 2

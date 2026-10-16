@@ -1,5 +1,6 @@
 name: Verify copilot_use
 on:
+  workflow_call:
   push:
     branches: [main, 'teaching/**']
   pull_request:
