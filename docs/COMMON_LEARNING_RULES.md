@@ -50,8 +50,6 @@ Refactor 整理當步實作及現有測試；例如將根 tests 的現有測試�
 
 系統管理者是建置／安裝整套聊天室的人，另有真正後台管理全站AI角色與對話設定；房主沒有這項權限。後續能力包括Session／ACL、SQLite歷史與備份、WS presence／typing／reconnect／queue、Outbox、Leptos SSR／hydration、Streaming／RAG／MCP／Agent、多Persona、同意／撤回及政策回退。
 
-已查核Day14的get_room、route與room_details_tests存在於rust_ai_chat；前台room_api尚未呼叫該讀取API。此為靜態對照，不等於本輪已跑完整流程。下一次依最新來源重新核對，不將Day14再教成缺少handler。
-
 ### Desktop Pet：啟動、互動及安全操作
 
 基本主線：啟動既有寵物 → 控制介面即時調整 → 設定／記憶持久保存 → 授權目錄 → 掃描及SHA256預覽 → 明確確認 → 真實操作結果／還原 → Analytics紀錄。
@@ -59,8 +57,6 @@ Refactor 整理當步實作及現有測試；例如將根 tests 的現有測試�
 逐步完成五欄設定（名字／種類／喜好／個性／興趣）、選用外觀覆寫、每隻寵物獨立資料與素材、200×200等比動畫、多寵物、桌面漫遊、記憶／回想／複習／提醒、RAG／MCP／Agent、備份／還原及installer／簽章updater。安裝後的更新採啟動時檢查或手動檢查正式GitHub Release，不以15分鐘輪詢代替，也不要求重新安裝。
 
 安全檔案流程保持授權root／opaque ID、non-root、確認、symlink／TOCTOU／權限重驗、journal／receipt／Trash／restore；預覽或Domain成功狀態不能冒充filesystem成功憑證。
-
-已查核Day14主動掃描按鈕→bridge→Tauri→摘要與對應測試存在；完整控制、設定及真實操作流程仍逐段核對。copilot_use已有SHA256分組實作，舊文「尚未對應」不能直接當作目前缺口。
 
 ### Analytics：真實事件、查詢與管理
 
@@ -70,7 +66,15 @@ Refactor 整理當步實作及現有測試；例如將根 tests 的現有測試�
 
 匿名產品事件和「誰、何時、結果」的管理紀錄分清楚；不傳憑證、聊天本文或完整私人路徑，不把事件數當真人數。後續包括可追溯AI洞察、人工審核、Chat／Pet自主授權採用／回退，以及Provider／Model／來源／功能／請求／時間的Token使用量、成本及實際可取得額度。額度未知明示未知，不由Token推算配額；用既有紀錄或合成資料驗證。
 
-已查核Day14來源／類型查詢、SQL bind及測試存在；尚未接Dashboard UI。postgres-integration下的新增DB單測不能因CI只跑postgres_event_store就宣稱已執行。
+## 當前功能狀態與證據入口
+
+核對日期：2026-10-17（Asia/Taipei）。參考庫來源 `3e58e650bd63bcd21ba58e7aabf751542401ef80`；成品對應程式核對來源 `9f632c76ee432d77c1d20f46da9485d982d49c9e`。以下為程式／呼叫端／測試位置的靜態核對結果，本輪未重新執行測試或遠端CI，不能解讀為完整同步或功能驗收通過。
+
+- **Chat：部分接通。** Day14房間讀取API與測試已存在，尚未被學習庫前台呼叫；成品已有具權限的房間清單流程，介面差異仍需對照。證據：[參考庫房間入口與測試](https://github.com/williechen/rust_ai_chat/blob/3e58e650bd63bcd21ba58e7aabf751542401ef80/apps/server/src/http.rs)、[工程對照紀錄](https://app.notion.com/p/3f7e51d4509381faa894d3660c3252f7)。
+- **Desktop Pet：掃描入口已接通，整體流程未完整驗證。** Day14主動掃描到摘要及測試已存在；成品也有掃描與SHA256分組，資料契約不同。證據：[參考庫前台入口](https://github.com/williechen/rust_ai_chat/blob/3e58e650bd63bcd21ba58e7aabf751542401ef80/apps/desktop_pet/frontend/src/main.rs)、[工程對照紀錄](https://app.notion.com/p/3f7e51d4509381faa894d3660c3252f7)。
+- **Analytics：查詢API已實作，Dashboard流程未接通。** Day14來源／類型查詢及測試已存在；成品有對應聚合／篩選能力，新增DB單測的實際執行證據仍需核對。證據：[參考庫查詢入口與測試](https://github.com/williechen/rust_ai_chat/blob/3e58e650bd63bcd21ba58e7aabf751542401ef80/apps/stats_server/src/lib.rs)、[工程對照紀錄](https://app.notion.com/p/3f7e51d4509381faa894d3660c3252f7)。
+
+本節只列當前狀態與證據入口；歷次結果、來源變化及完整日誌留在工程紀錄，不在總文章累加歷史摘要。
 
 ## 實作、發布及驗證的分工
 
@@ -82,8 +86,8 @@ Refactor 整理當步實作及現有測試；例如將根 tests 的現有測試�
 
 Dry Run只處理使用者指出的文件／規則／路徑問題，程式、測試與migration唯讀；來源證據不足明示。教學、註解與自有UI用繁體中文。AI provider既定OpenAI；不讀API key、私人環境檔或~/.bashrc、不執行付費AI、不把密鑰寫入Git／Notion／報告。週六功能Gate不重測AI對話、串流、生圖、RAG、MCP等AI能力；沿用有效證據或標示未驗證，不將功能通過當成AI已重測。
 
-## 文件入口與待討論事項
+## 文件入口
 
 產品能力與未來清單、詳細架構、操作設定、功能對照與工程證據仍保留各自用途；本篇集中教學方法、格式及三專案大綱，其他教學入口改為引用。原Day及程式保留，舊規則／來源／失效教法只作歷史，不再套用為目前指令。
 
-已確認討論1至5：允許同流程跨日、舊Day更正放下一Day的Refactor後、測試自Day15起逐步歸位、單一Day編號、教學內容合成一篇。討論6的過時驗證敘述與當前證據入口、7的歷史Docker敘述、8的兩庫適配判定仍依序核對；目前已確認的原生操作與四段對照保持有效。未討論建議不當作新增條款。
+[三專案Day索引與歷史封存](https://app.notion.com/p/3f2e51d4509381ddb8a8ce7cb4cd3e60)。功能與實作對照的詳細歷史保留工程紀錄；本篇不再追加歷次討論或驗證摘要。

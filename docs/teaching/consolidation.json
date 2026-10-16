@@ -14,13 +14,18 @@
     2,
     3,
     4,
-    5
-  ],
-  "pending_discussion": [
+    5,
     6,
     7,
     8
   ],
+  "pending_discussion": [],
   "day_advanced": false,
-  "reference_modified": false
+  "reference_modified": false,
+  "existing_decisions_reused": {
+    "7": "使用者先前明確指定原生本機、不使用Docker；歷史CI事實保留在工程紀錄",
+    "8": "使用者已確認文章要求→rust_ai_chat實作→copilot_use對應實作→驗證結果"
+  },
+  "evidence_presentation": "current status and evidence links only; complete history in engineering records",
+  "engineering_record": "docs/source-review/teaching-correspondence-2026-10-17.md"
 }
