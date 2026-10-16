@@ -165,11 +165,6 @@
   },
   "daily_reference_sha": "bdd646060c11eb3a6b7dd709bd23e582636904fd",
   "daily_product_sha": "579a418c425c7b94c6702689b0ed78d9e8f0998b",
-  "next_formal_day": {
-    "chat": 9,
-    "pet": 9,
-    "analytics": 9
-  },
   "content_alignment": {
     "reference_sha": "16261e0ebeef1a888997cc0ebc42b08ceaf8db24",
     "base_product_sha": "49e1d946dd3c22ffcc4b1aa0e7715cb5b1686724",
@@ -290,5 +285,16 @@
     "applied": false,
     "tests_after_move_executed": false,
     "transition": "Retain remaining workspace-tests targets and CI until each batch is moved and verified; remove root tests package only after final batch"
+  },
+  "teaching_progress": {
+    "last_published_day": {
+      "chat": 14,
+      "pet": 14,
+      "analytics": 14
+    },
+    "numbering": "single Day sequence per project; next_day is the active next publication index",
+    "application_status": "record separately per lesson and exact source; publication does not imply application",
+    "validation_status": "record separately per lesson and exact source; no validation inferred from Day number",
+    "historical_numbering_record": "docs/teaching/archive/formal-day-numbering.json"
   }
 }
