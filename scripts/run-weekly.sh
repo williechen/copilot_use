@@ -1,12 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 cd "$(dirname "$0")/.."
+source scripts/native-env.sh
 unset OPENAI_API_KEY
 export CARGO_BUILD_JOBS="${CARGO_BUILD_JOBS:-2}"
-if ! command -v node >/dev/null; then
-  bundled_node="$HOME/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin"
-  export PATH="$bundled_node:$PATH"
-fi
 command -v node >/dev/null || { echo '缺少 Node.js' >&2; exit 1; }
 evidence="target/weekly/$(date -u +%Y%m%dT%H%M%SZ)"
 mkdir -p "$evidence"

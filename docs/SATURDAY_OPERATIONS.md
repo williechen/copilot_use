@@ -77,3 +77,11 @@ Chat 3001／Analytics 3100 只監聽 loopback；本機 HTTP 不啟用 Secure coo
 台北時間週六 08:00 執行；未登入時能否常駐取決於使用者服務／linger 設定。Persistent 會在恢復時補跑錯過的排程。
 此流程不 fetch／覆寫工作目錄、不自動 merge、不推進驗收日期；執行前應確認兩庫來源已更新。
 結果在 `target/weekly/<UTC timestamp>/`，失敗可查 `journalctl --user -u copilot-weekly.service`。
+
+## 此機器的原生工具
+
+Ubuntu 26.04 缺少 GCC／CMake／pkg-config／OpenSSL headers 且 sudo 需密碼。
+`scripts/setup-native-tools.sh` 可從已設定的 Ubuntu APT 來源下載並解包到 `target/native-tools/`，不修改系統套件庫。
+`native-env.sh` 為建置與週六測試載入私有編譯器／函式庫並限制 Cargo jobs=2。
+Trunk 0.21.14 已由官方 GitHub release 下載、核對 SHA256，安裝到使用者 Cargo bin；WASM target 已安裝。
+Node 使用 Codex 現有 bundled runtime 作 fallback，沒有 Docker 依賴。

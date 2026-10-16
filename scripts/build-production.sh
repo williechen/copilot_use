@@ -2,6 +2,7 @@
 # 原生 release 建置；不啟動服務、不修改資料庫。
 set -euo pipefail
 cd "$(dirname "$0")/.."
+source scripts/native-env.sh
 for tool in cargo rustup trunk python3; do
   command -v "$tool" >/dev/null || { echo "缺少建置工具：$tool" >&2; exit 1; }
 done
