@@ -1,131 +1,121 @@
-# 2026-10-16｜P0 Chat Day 13｜HTTP 建房名稱驗證與 201 Created
+# 2026-10-16｜P0 Chat Day 14｜以 HTTP 讀回 SQLite 房間資料
 
-來源文章：[2026-10-16｜P0 Chat Day 13｜HTTP 建房名稱驗證與 201 Created](https://app.notion.com/p/3fae51d4509381e499e5e02cfba58336?pvs=204)。
+來源文章：[2026-10-16｜P0 Chat Day 14｜以 HTTP 讀回 SQLite 房間資料](https://app.notion.com/p/3fbe51d450938149af5dd68abc6109bd?pvs=204)。
 
 ## 1. 學習大綱
-P0／Chat Day 13。主體實作 20 分鐘；Refactor／必要補加不計入學習時數。
-來源：rust_ai_chat/main `2aecb0f02f9176287e848b7e4897f28ef3929072`；copilot_use/main `49e1d946dd3c22ffcc4b1aa0e7715cb5b1686724`；產品教學分支 `1d1668b97e65ccfafc073829f131c93133c8bb7e`。已讀共同規則、P9_TARGET、FUTURE_WORK、SYSTEM_ARCHITECTURE、learning-state 與 Notion 共同／專案／Day 12；共同規則為準。當前 P0，最晚切點 2026-12-12，未達切點也無提前完成證據，不切換階段。首次週六完整比對尚未成功，last_full_comparison 保持 null；本日只核對選題相關差異，不冒稱全量完成。
-對應 FUTURE_WORK「參考適配：Room／作者／ID／category、HTTP 建房 DTO／status」及 Chat 訊息／房間模型原項目。確切缺口：最新 `apps/server/src/http.rs` 的 create_room 接受空白／任意長度／NUL 名稱，成功預設回 200；成品 `apps/server/src/main.rs`::create_room 拒絕這些名稱並回 201。
-沿用學習庫的 server 產生 UUID、default-category、CreateRoomRequest\{name\} → CreateRoomResponse\{id\}；成品的 caller ID、Session／ACL／chat_rooms 交易不直接搬入。學習庫 `crates/ui/src/room_api.rs` 使用 response.ok()，因此可接受 201，無須改 UI。Day 12 typing 已存在，不重教。
+P0／Chat Day 14；主體 Red＋最小 Green 20 分鐘。
+來源：rust_ai_chat/main `aa85f9410c98452b48b9f6e63cdfb404b1bef28a`（workspace 0.2.14）；copilot_use/main `49e1d946dd3c22ffcc4b1aa0e7715cb5b1686724`；教學文件分支檢查點 `76e4dddeec5cd766f6730ee0cbe823ba8e4f598e`。已讀五份指定 docs、Notion 共同及三專案主頁與 Day 13，父頁未列 Day 14，搜尋亦未找到相同專案 Day 14。Day 13 三個功能均已出現在最新 source，本日不重複教學。首次週六完整比對尚未完成，`last_full_comparison=null`；本次為相關差異核對，未涵蓋全庫功能驗收。當前 P0，下一切點 2026-12-12，無提前完成證據，階段不變。
+對應 FUTURE_WORK 原「訊息／作者／房間模型」及「HTTP／WS／UI」項目。已核對 http::create_room、application::create_room、RoomRepository::find_by_id、SqliteRoomRepository、AppState、server 路由及 UI room_api。Day 13 已提供建房 201，但目前無 HTTP 讀回房間資料入口；使用既有 find_by_id 新增 GET /api/rooms/\{id\}，讓建房後可讀回名稱與 category。
+成品 [main.rs](http://main.rs) 的 list_rooms 會回房間 metadata 並套 ACL；本日只採用「可讀取已存房間資料」的功能方向，沿用學習庫單筆 Port，不複製成品 SQL、StateData、caller ID 或另一套 Port。學習庫尚無 Session／ACL，本入口只適用既有本地匿名學習環境，不能視為受保護房間查詢。
 ## 2. 實作內容
-### Red：先加入行為測試
-在 `apps/server/src/http.rs` 檔尾新增以下私有模組。現有 imports 已足夠；不新增依賴。測試直接呼叫真實 HTTP handler 並經 IntoResponse，搭配隔離 SQLite；完整 router／socket HTTP 仍列為待執行。
+### Red：先定義讀回行為
+將下列完整私有 tests 模組新增到 apps/server/src/[http.rs](http://http.rs) 檔尾，保留 room_http_tests。先執行第 4 節第一條命令，預期 get_room／RoomDetails 尚不存在而編譯失敗；未實測。
 ```rust
 #[cfg(test)]
-mod room_http_tests {
+mod room_details_tests {
     use super::*;
-    use axum::response::IntoResponse;
+    use axum::{extract::Path, response::IntoResponse};
     use std::sync::Arc;
 
     async fn fixture() -> (AppState, sqlx::SqlitePool) {
         let pool = sqlx::sqlite::SqlitePoolOptions::new()
-            .max_connections(1)
-            .connect("sqlite::memory:").await.unwrap();
+            .max_connections(1).connect("sqlite::memory:").await.unwrap();
         persistence::migrate(&pool).await.unwrap();
+        let rooms = Arc::new(persistence::SqliteRoomRepository::new(pool.clone()));
+        chat_application::create_room(rooms.as_ref(), chat_application::CreateRoom {
+            id: "room-14".into(), category_room_id: "category-14".into(),
+            name: "第十四天房間".into(),
+        }).await.unwrap();
         let state = AppState::new(
-            leptos_config::LeptosOptions::default(),
-            Arc::new(persistence::SqliteRoomRepository::new(pool.clone())),
+            leptos_config::get_configuration(None).unwrap().leptos_options,
+            rooms,
             Arc::new(persistence::SqliteMessageRepository::new(pool.clone())),
         );
         (state, pool)
     }
 
     #[tokio::test]
-    async fn invalid_room_names_never_write() {
+    async fn returns_exact_saved_room_without_writing() {
         let (state, pool) = fixture().await;
-        for name in ["".to_string(), " \n\t".into(), "a\0b".into(),
-                     "x".repeat(201), "房".repeat(67)] {
-            let response = create_room(
-                State(state.clone()), Json(CreateRoomRequest { name }),
-            ).await.into_response();
-            assert_eq!(response.status(), StatusCode::BAD_REQUEST);
-        }
+        let response = get_room(State(state.clone()), Path("room-14".into()))
+            .await.into_response();
+        assert_eq!(response.status(), StatusCode::OK);
+        let body = axum::body::to_bytes(response.into_body(), 4096).await.unwrap();
+        let room: RoomDetails = serde_json::from_slice(&body).unwrap();
+        assert_eq!(room.id, "room-14");
+        assert_eq!(room.category_room_id, "category-14");
+        assert_eq!(room.name, "第十四天房間");
+        assert_eq!(get_room(State(state), Path("absent".into()))
+            .await.unwrap_err(), StatusCode::NOT_FOUND);
         let count: i64 = sqlx::query_scalar("SELECT COUNT(*) FROM rooms")
             .fetch_one(&pool).await.unwrap();
-        assert_eq!(count, 0);
+        assert_eq!(count, 1);
         pool.close().await;
     }
 
     #[tokio::test]
-    async fn valid_room_returns_201_and_saved_id() {
+    async fn invalid_input_and_database_failure_are_distinct() {
         let (state, pool) = fixture().await;
-        let name = " 房間 ".to_string();
-        let response = create_room(
-            State(state), Json(CreateRoomRequest { name: name.clone() }),
-        ).await.into_response();
-        assert_eq!(response.status(), StatusCode::CREATED);
-        let body = axum::body::to_bytes(response.into_body(), 4096).await.unwrap();
-        let created: CreateRoomResponse = serde_json::from_slice(&body).unwrap();
-        assert!(uuid::Uuid::parse_str(&created.id).is_ok());
-        let row: (String, String) = sqlx::query_as(
-            "SELECT name, category_room_id FROM rooms WHERE id = ?1"
-        ).bind(created.id).fetch_one(&pool).await.unwrap();
-        // 保留原名稱；trim 只檢查是否全為空白。
-        assert_eq!(row.0, name);
-        assert_eq!(row.1, "default-category");
         pool.close().await;
+        for id in [" ".to_string(), "x".repeat(41), "a\0b".into()] {
+            assert_eq!(get_room(State(state.clone()), Path(id))
+                .await.unwrap_err(), StatusCode::BAD_REQUEST);
+        }
+        assert_eq!(get_room(State(state), Path("room-14".into()))
+            .await.unwrap_err(), StatusCode::INTERNAL_SERVER_ERROR);
     }
 
-    #[tokio::test]
-    async fn database_failure_is_not_created() {
-        let (state, pool) = fixture().await;
-        pool.close().await;
-        let response = create_room(
-            State(state.clone()), Json(CreateRoomRequest { name: "有效名稱".into() }),
-        ).await.into_response();
-        assert_eq!(response.status(), StatusCode::INTERNAL_SERVER_ERROR);
-        // 即使 DB 關閉，無效輸入仍應先被拒絕。
-        let response = create_room(
-            State(state), Json(CreateRoomRequest { name: " ".into() }),
-        ).await.into_response();
-        assert_eq!(response.status(), StatusCode::BAD_REQUEST);
-    }
 }
 ```
-先執行第 4 節命令：原碼預期 invalid 名稱回 200、合法名稱也回 200，使斷言失敗。這是預期 Red，尚未實際執行。
-### 最小 Green：替換既有 create_room
-只替換 `apps/server/src/http.rs` 的 create_room，health、HealthResponse 與既有 imports 保留：
+### 最小 Green：新增 handler 並接真實路由
+在同檔 room_http_tests 之前加入以下完整型別與函式；既有 imports、health、create_room 及測試均保留。
 ```rust
-pub async fn create_room(
+#[derive(Debug, serde::Serialize, serde::Deserialize)]
+pub struct RoomDetails {
+    pub id: String,
+    pub category_room_id: String,
+    pub name: String,
+}
+
+pub async fn get_room(
     State(state): State<AppState>,
-    Json(request): Json<CreateRoomRequest>,
-) -> Result<(StatusCode, Json<CreateRoomResponse>), StatusCode> {
-    // 與成品相同：長度採 UTF-8 位元組，拒絕全空白與 NUL。
-    if request.name.trim().is_empty()
-        || request.name.len() > 200
-        || request.name.contains('\0')
-    {
+    axum::extract::Path(id): axum::extract::Path<String>,
+) -> Result<Json<RoomDetails>, StatusCode> {
+    // 沿用既有 ID 契約，不要求歷史 ID 必須是 UUID。
+    if id.trim().is_empty() || id.len() > 40 || id.contains('\0') {
         return Err(StatusCode::BAD_REQUEST);
     }
-    let room = chat_application::create_room(
-        state.room_repository.as_ref(),
-        chat_application::CreateRoom {
-            id: uuid::Uuid::new_v4().to_string(),
-            category_room_id: "default-category".to_string(),
-            name: request.name,
-        },
-    ).await.map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
-    // Repository 成功才回 201；JSON 契約仍只含既有 id。
-    Ok((StatusCode::CREATED, Json(CreateRoomResponse { id: room.id })))
+    let room = state.room_repository.find_by_id(&id)
+        .await.map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?
+        .ok_or(StatusCode::NOT_FOUND)?;
+    // Adapter 回傳錯誤房間時不洩漏該房間資料。
+    if room.id != id {
+        return Err(StatusCode::INTERNAL_SERVER_ERROR);
+    }
+    Ok(Json(RoomDetails {
+        id: room.id,
+        category_room_id: room.category_room_id,
+        name: room.name,
+    }))
 }
 ```
-呼叫鏈維持 POST /api/rooms → http::create_room → chat_application::create_room → RoomRepository::create → SqliteRoomRepository::create。SQL 留在 persistence，沒有新增 Port、schema 或 migration。其他檔案 N/A。
-### Refactor
-名稱驗證與回應狀態統一由 `http::create_room` 處理：先拒絕非法名稱，再呼叫既有 `RoomRepository`，寫入成功後回傳 201 與既有 JSON。保留 `CreateRoomRequest`、`CreateRoomResponse`、UUID 產生方式與 `default-category`，UI 繼續以 `response.ok()` 接受成功回應。
+在 apps/server/src/[lib.rs](http://lib.rs) 的 application 路由中，緊接原 .route("/api/rooms", post(http::create_room)) 新增：
+```rust
+.route("/api/rooms/{id}", get(http::get_room))
+```
+呼叫鏈：GET → http::get_room → 既有 RoomRepository::find_by_id → SqliteRoomRepository SELECT → RoomDetails JSON。沒有建立新 Port、schema 或 migration；其餘檔案 N/A。
+### Refactor 與必要補加
+HTTP DTO 保留在 HTTP Adapter，Domain Room 不新增 serde／SQL 相依；Repository 錯誤轉 500，查無資料 404，輸入無效 400。名稱及 category 原值讀回，沒有寫入或通知。保留 ID 相等防線；模擬錯誤 Adapter 回錯 ID 的測試尚未提供／執行，列為原房間模型項目的後續安全回歸。Session／ACL、history 分頁與 UI 路由整合仍在原 FUTURE_WORK，未宣稱完成。
 ## 3. 套件版本
-workspace 0.2.12／edition 2024。最新 Cargo.toml 宣告 axum 0.8、serde 1.0、tokio 1.53、sqlx 0.9、uuid 1.28；同 SHA Cargo.lock 分別為 0.8.9、1.0.229、1.53.3、0.9.0、1.28.0；serde_json 1.0.154、leptos 0.8.22。維持既有版本，無新依賴／無升級。官方最新 stable、MSRV、安全公告本次未查證；基準 native／WASM CI 通過不能代替新程式相容性驗證。
+已讀同 SHA Cargo.toml／Cargo.lock：workspace 0.2.14、edition 2024；axum 宣告 0.8／lock 0.8.9，serde 1.0／1.0.229、serde_json 1.0／1.0.154、sqlx 0.9／0.9.0、tokio 1.53／1.53.3、uuid 1.28／1.28.0、leptos_config lock 版本未另摘錄。沒有新增依賴或升級。官方最新 stable、MSRV、安全公告本次未查證；保留匹配來源的版本，不猜新版相容性。
 ## 4. 驗證項目
-### 實作邊界與未完成項目
-驗證放在 HTTP 邊界，因本切片明確是 HTTP DTO 契約；Application 的其他直接呼叫者仍須之後在原房間模型項目補齊共用業務不變量，不能聲稱全系統驗證已完成。保留周邊空白，避免默默更名；200 位元組上限與成品一致，不當作 200 個中文字。建房 Session／ACL、category 選擇、Outbox、history、安全撤權不在本日，仍留原 FUTURE_WORK。DB 失敗沿用既有 500，沒有擴大錯誤重構。
-### 驗證命令與結果
-本次重新查核最新來源 SHA 的六份 workflow 定義與實際紀錄：Rust AI Chat、Test All、Persistence、Node、Rust Dashboard、Rust Desktop Pet，6/6 workflows、18/18 checks 均 completed/success，沒有 skipped/cancelled/pending check。main 未設 branch protection 必要 contexts；另無 legacy commit-status context（status API 的 pending/total_count=0 只表示沒有 legacy status，並非一個待完成工作），此庫適用 Gate 為上述 Actions/check-runs，已逐一核對，沒有用歷史 CI 替代。[匹配 SHA 的 CI](https://github.com/williechen/rust_ai_chat/actions?query=branch%3Amain)。基準 CI 通過只允許教學發布，不代表以下新增程式已套用或測試通過。
-依序執行：
+已讀最新 SHA 六份 workflow 定義，均適用 main push，沒有 path 條件排除。Rust AI Chat、Rust Desktop Pet、Persistence、Test All、Node、Rust Dashboard：6/6 workflows completed/success，18/18 checks completed/success；沒有 skipped/cancelled/pending。main 分支 API 回 protected=false、required contexts/checks=\[\]；protection 明細端點因 integration 權限回 403，未宣稱已讀明細。legacy status total_count=0、statuses=\[\]，不是一個尚待完成的檢查。以上 Gate 精確匹配來源 SHA，非沿用 Day 13 歷史快照。[Test All](https://github.com/williechen/rust_ai_chat/actions/runs/38823217315) · [Persistence](https://github.com/williechen/rust_ai_chat/actions/runs/38823217313)。來源 CI 通過只允許教學發布，不代表下列新增程式已執行。
 ```bash
+cargo test --locked -p server room_details_tests
 cargo test --locked -p server room_http_tests
 cargo fmt --all -- --check
 cargo clippy --locked -p server --all-targets -- -D warnings
 cargo check --locked -p server --features ssr
-cargo check --locked -p ui --features hydrate --target wasm32-unknown-unknown
 ```
-預期 Green：非法名稱 400 且 rooms 數量為 0；合法名稱 201、JSON ID 對應實際 SQLite row；DB 關閉 500；UI 仍接受 201。另需在隔離 SQLite 啟動 server，實際 POST /api/rooms 核對 400／201／JSON／row；此 HTTP E2E 尚未執行。
-本次只產生教學，未套用以上程式、未執行新測試、未宣稱 Red／Green 實測成功；既有 source CI 已重新查核。發布與讀回由本次交易紀錄確認；功能狀態：程式尚待套用、功能尚未由本日實作證明、正式驗收未通過。未讀密鑰、未呼叫付費 AI、未修改兩庫產品 source／tag。
+預期 Green：已存房間 200 且三欄正確、未知 ID 404、無效 ID 400、DB 失敗 500，查詢前後 row count 不變。另需隔離 SQLite 啟動服務，實際 POST 建房後以回傳 ID GET，核對 router、JSON、Content-Type、404 與 DB 故障；handler 測試不等於 socket HTTP E2E。上述命令及 E2E 均未執行。
+本輪只發布教學，程式尚待使用者套用；以下 Red／Green 是預期，未執行新功能測試、DB／HTTP／GUI E2E，未宣稱功能已實作或正式驗收通過。沒有修改兩庫產品 source、既有 migration、歷史 Day 或 tag，沒有讀取密鑰或付費 AI 呼叫。Notion 完整讀回後才允許本專案 next_day 更新為 15；寫入結果以實際交易回報為準。
