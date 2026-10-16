@@ -1,6 +1,6 @@
 # copilot_use
 
-Rust AI Chat、Tauri/Leptos Desktop Pet、Product Analytics 的獨立產品工作區。驗收與正式版本以 [GitHub Releases](https://github.com/williechen/copilot_use/releases) 附帶的 tag SHA、CI、Docker 與本地報告為準；未有匹配證據的提交不得宣稱完成。 使用者已取消正式部署；目前範圍為本地測試與 CI。`williechen/rust_ai_chat` 嚴格唯讀。原始成品須先驗收並固定正式版本；既有 v0.1.0 固定後，每日依適用 CI Gate 產生教學，後續變更的週六功能驗收另記，不重新阻擋全部每日教學。
+Rust AI Chat、Tauri/Leptos Desktop Pet、Product Analytics 的獨立產品工作區。驗收與正式版本以 [GitHub Releases](https://github.com/williechen/copilot_use/releases) 附帶的 tag SHA、CI 與原生本地報告為準；未有匹配證據的提交不得宣稱完成。 使用者已取消正式部署；目前範圍為本地測試與 CI。`williechen/rust_ai_chat` 嚴格唯讀。原始成品須先驗收並固定正式版本；既有 v0.1.0 固定後，每日可在 CI 未全數通過時揭露狀態並產生教學，後續變更的週六功能驗收另記，不重新阻擋全部每日教學。
 
 ## 實際入口
 
@@ -29,7 +29,7 @@ python3 scripts/local-verify.py --live-openai
 
 ## 現行文件
 
-[現行三專案 Day 12 文章鏡像](docs/teaching/current/README.md) · [先本地、後 GitHub 的參考庫驗證](docs/source-review/rust-ai-chat-validation.json)（Day12 已套用；本地 a57e532 正式驗證通過，最新 d054389 僅 CI 變更且 6／6 workflows、18／18 checks 通過；GUI／整體驗收另列）。
+[現行三專案 Day 14 文章鏡像](docs/teaching/current/README.md) · [先本地、後 GitHub 的參考庫驗證](docs/source-review/rust-ai-chat-validation.json)（Day12 已套用；本地 a57e532 正式驗證通過，最新 d054389 僅 CI 變更且 6／6 workflows、18／18 checks 通過；GUI／整體驗收另列）。
 
 [目前系統架構與 DB 表格](docs/SYSTEM_ARCHITECTURE.md) · [教學格式與執行方式](docs/TEACHING_FORMAT.md)
 
@@ -39,7 +39,7 @@ python3 scripts/local-verify.py --live-openai
 - [操作說明](docs/DEPLOYMENT.md)、[可攜式資料](docs/SQLITE_TRANSITION.md)、[驗收方式](docs/LOCAL_VALIDATION.md)。
 - docs/learning-state.json 保存當前來源、有效程式驗證、下一教學編號與週六到期日。
 
-正式 [v0.1.0](https://github.com/williechen/copilot_use/releases/tag/v0.1.0) 保持固定；每日教學在 teaching/rust-ai-chat-alignment，main 整合匹配驗收的變更。根 workspace 管理服務／共享 crates；frontend/native 保留獨立 lock。測試放所屬 app／crate／模組，沒有根 tests workspace。私人 .env／DB 與生成檔不提交。
+正式 [v0.1.0](https://github.com/williechen/copilot_use/releases/tag/v0.1.0) 保持固定；每日教學在 teaching/rust-ai-chat-alignment，main 整合匹配驗收的變更。根 workspace 管理服務／共享 crates；frontend/native 保留獨立 lock。測試自 Day15 起逐批歸位所屬 app／crate／模組，未完成遷移前保留原有根 tests target 與 CI。私人 .env／DB 與生成檔不提交。
 
 主文件保留有效規則與未來工作；封存及 Git 歷史不作現行待辦。已套用 migrations、固定 release 證據及操作手冊保留。
 
