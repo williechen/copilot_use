@@ -178,30 +178,49 @@ fn Chat() -> impl IntoView {
     let confirm_policy = RwSignal::new(false);
     let policy_result = RwSignal::new(String::new());
     let invitee = RwSignal::new(String::new());
+    let room_loading = RwSignal::new(false);
+    let creating = RwSignal::new(false);
+    let load = move |id: String| {
+        state.error.set(String::new());
+        selected.set(id.clone());
+        messages.set(Vec::new());
+        room_loading.set(!id.is_empty());
+        if id.is_empty() {
+            return;
+        }
+        let query = format!("/api/v1/messages?room_id={id}");
+        spawn(async move {
+            let result = api(&query, "GET", None).await;
+            if selected.get_untracked() != id {
+                return;
+            }
+            match result {
+                Ok(v) => messages.set(v.as_array().cloned().unwrap_or_default()),
+                Err(e) => state.error.set(format!("讀取房間訊息失敗：{e}")),
+            }
+            room_loading.set(false);
+        });
+    };
     let refresh = move || {
         spawn(async move {
             match api("/api/v1/rooms", "GET", None).await {
-                Ok(v) => rooms.set(v.as_array().cloned().unwrap_or_default()),
-                Err(e) => state.error.set(e),
+                Ok(v) => {
+                    let available = v.as_array().cloned().unwrap_or_default();
+                    let first = available
+                        .first()
+                        .and_then(|r| r["id"].as_str())
+                        .unwrap_or("")
+                        .to_owned();
+                    rooms.set(available);
+                    if selected.get_untracked().is_empty() && !first.is_empty() {
+                        load(first);
+                    }
+                }
+                Err(e) => state.error.set(format!("讀取房間清單失敗：{e}")),
             }
         })
     };
     Effect::new(move |_| refresh());
-    let load = move |id: String| {
-        selected.set(id.clone());
-        messages.set(Vec::new());
-        let query = format!("/api/v1/messages?room_id={id}");
-        spawn(async move {
-            match api(&query, "GET", None).await {
-                Ok(v) => {
-                    if selected.get_untracked() == id {
-                        messages.set(v.as_array().cloned().unwrap_or_default());
-                    }
-                }
-                Err(e) => state.error.set(e),
-            }
-        });
-    };
     let pending = RwSignal::new(Vec::<Value>::new());
     let presence = RwSignal::new(Vec::<Value>::new());
     let typing = RwSignal::new(String::new());
@@ -219,9 +238,65 @@ fn Chat() -> impl IntoView {
         browser::delivery_queue(selected, pending, messages, state.error);
     }
 
-    view! {<section><h2>"聊天室"</h2><input id="room-name" placeholder="新房間名稱" maxlength="200" prop:value=move ||room_name.get() on:input=move |e|room_name.set(event_target_value(&e))/><button id="create-room" on:click=move |_|{let id=uuid();let name=room_name.get();spawn(async move{match api("/api/v1/rooms","POST",Some(json!({"id":id,"name":name}))).await{Ok(_)=>{room_name.set(String::new());if let Ok(v)=api("/api/v1/rooms","GET",None).await {rooms.set(v.as_array().cloned().unwrap_or_default());}load(id)},Err(e)=>state.error.set(e)}});}>"建立私人房間"</button>
+    let create = move || {
+        if creating.get_untracked() {
+            return;
+        }
+        let name = room_name.get_untracked().trim().to_owned();
+        if name.is_empty() || name.len() > 200 {
+            state
+                .error
+                .set("請填寫房間名稱，長度最多 200 bytes。".into());
+            return;
+        }
+        let id = uuid();
+        if id.is_empty() {
+            state.error.set("無法建立安全房間 ID".into());
+            return;
+        }
+        state.error.set(String::new());
+        creating.set(true);
+        spawn(async move {
+            match api("/api/v1/rooms", "POST", Some(json!({"id":id,"name":name}))).await {
+                Ok(_) => {
+                    room_name.set(String::new());
+                    // Use the confirmed new room immediately; a failed list refresh must not hide it.
+                    rooms
+                        .update(|items| items.push(json!({"id":id,"name":name,"can_manage":true})));
+                    load(id);
+                }
+                Err(e) => state.error.set(format!("建立房間失敗：{e}")),
+            }
+            creating.set(false);
+        });
+    };
+    let send = move || {
+        let room = selected.get_untracked();
+        let content = draft.get_untracked();
+        if room.is_empty() || content.trim().is_empty() {
+            state.error.set("請先選擇房間，再輸入訊息".into());
+            return;
+        }
+        if pending.get_untracked().len() >= 32 {
+            state.error.set("待送出佇列已滿（32 筆）".into());
+            return;
+        }
+        let id = uuid();
+        if id.is_empty() {
+            state.error.set("無法建立安全訊息 ID".into());
+            return;
+        }
+        state.error.set(String::new());
+        pending.update(|items| items.push(json!({"id":id,"room_id":room,"content":content})));
+        draft.set(String::new());
+    };
+    view! {<section><h2>"聊天室"</h2>
+        <form id="create-room-form" on:submit=move |e|{e.prevent_default();create();}>
+        <label for="room-name">"新房間名稱"</label><input id="room-name" placeholder="輸入名稱後按 Enter 建立" maxlength="200" prop:value=move ||room_name.get() on:input=move |e|room_name.set(event_target_value(&e))/><button id="create-room" type="submit" disabled=move ||creating.get()>{move ||if creating.get(){"建立中…"}else{"建立私人房間"}}</button></form>
+        <p id="room-status" role="status">{move ||if room_loading.get(){"正在讀取房間訊息…".to_owned()}else if selected.get().is_empty(){"請建立房間或從清單選擇房間，即可傳送訊息。".to_owned()}else{let name=rooms.get().iter().find(|r|r["id"]==selected.get()).and_then(|r|r["name"].as_str()).unwrap_or("").to_owned();format!("目前房間：{name}")}}</p>
+        <label for="rooms">"選擇房間"</label>
         <select id="rooms" prop:value=move ||selected.get() on:change=move |e|load(event_target_value(&e))><option value="">"選擇房間"</option>{move ||rooms.get().into_iter().map(|r|view!{<option value=r["id"].as_str().unwrap_or("").to_owned()>{r["name"].as_str().unwrap_or("").to_owned()}</option>}).collect_view()}</select>
-        <input placeholder="邀請的使用者名稱" on:input=move |e|invitee.set(event_target_value(&e))/><button on:click=move |_|{let body=json!({"room_id":selected.get(),"username":invitee.get()});spawn(async move{match api("/api/v1/rooms/invite","POST",Some(body)).await{Ok(_)=>state.error.set("邀請已完成".into()),Err(e)=>state.error.set(e)}});}>"邀請加入"</button>
+        <input placeholder="邀請的使用者名稱" on:input=move |e|invitee.set(event_target_value(&e))/><button disabled=move ||selected.get().is_empty()||invitee.get().trim().is_empty() on:click=move |_|{let body=json!({"room_id":selected.get(),"username":invitee.get()});spawn(async move{match api("/api/v1/rooms/invite","POST",Some(body)).await{Ok(_)=>state.error.set("邀請已完成".into()),Err(e)=>state.error.set(e)}});}>"邀請加入"</button>
         <p id="presence" role="status">{move ||format!("在線連線：{}",presence.get().len())}</p><p id="typing" aria-live="polite">{move ||typing.get()}</p>
         <ul id="messages" aria-live="polite">{move ||messages.get().into_iter().map(|m|view!{<li>{m["content"].as_str().unwrap_or("").to_owned()}<small>{m["id"].as_str().unwrap_or("").to_owned()}</small></li>}).collect_view()}</ul>
         <button on:click=move |_| {
@@ -233,19 +308,13 @@ fn Chat() -> impl IntoView {
                 *current=older;});}},Err(e)=>state.error.set(e)
             }});
         }>"載入較舊訊息"</button>
-        <input id="message" maxlength="65536" placeholder="輸入訊息" prop:value=move ||draft.get() on:input=move |e|{draft.set(event_target_value(&e));if !draft.get_untracked().is_empty(){typing_signal.update(|v|*v=v.wrapping_add(1));}}/><button id="send" on:click=move |_| {
-            let room=selected.get();let content=draft.get();
-            if room.is_empty() || content.trim().is_empty(){state.error.set("請選擇房間並輸入訊息".into());return;}
-            if pending.get_untracked().len()>=32{state.error.set("待送出佇列已滿（32 筆）".into());return;}
-            let id=uuid();if id.is_empty(){state.error.set("無法建立安全訊息 ID".into());return;}
-            pending.update(|items|items.push(json!({"id":id,"room_id":room,"content":content})));
-            draft.set(String::new());
-        }>"送出"</button>
+        <form id="message-form" on:submit=move |e|{e.prevent_default();send();}>
+        <label for="message">"訊息"</label><input id="message" maxlength="65536" placeholder="輸入訊息後按 Enter 送出" disabled=move ||selected.get().is_empty() prop:value=move ||draft.get() on:input=move |e|{draft.set(event_target_value(&e));if !draft.get_untracked().is_empty(){typing_signal.update(|v|*v=v.wrapping_add(1));}}/><button id="send" type="submit" disabled=move ||selected.get().is_empty()||draft.get().trim().is_empty()>"送出"</button></form>
         <p role="status">{move ||format!("待送出：{} 筆（此頁關閉前保留）",pending.get().len())}</p>
         <button on:click=move |_|pending.update(|_|{})>"重試待送出"</button>
         <button on:click=move |_|pending.set(Vec::new())>"取消待送出"</button>
         <p>"取消佇列不會撤回已開始的送出請求。"</p>
-        <label><input type="checkbox" on:change=move |e|rag.set(event_target_checked(&e))/>"使用我的知識庫"</label><button id="ai" on:click=move |_|{let body=json!({"room_id":selected.get(),"rag":rag.get()});ai_output.set(String::new());
+        <label><input type="checkbox" on:change=move |e|rag.set(event_target_checked(&e))/>"使用我的知識庫"</label><button id="ai" disabled=move ||selected.get().is_empty() on:click=move |_|{let body=json!({"room_id":selected.get(),"rag":rag.get()});ai_output.set(String::new());
         #[cfg(target_arch="wasm32")] spawn(async move{if let Err(e)=browser::ai_stream(body,ai_output).await{state.error.set(e)}});
         #[cfg(not(target_arch="wasm32"))] let _=body;
         }>"請 AI 回覆"</button><pre id="ai-reply" aria-live="polite">{move ||ai_output.get()}</pre>
