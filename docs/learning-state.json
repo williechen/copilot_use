@@ -35,7 +35,7 @@
     "validation": "docs/analytics-transport-validation.json"
   },
   "learning_policy": {
-    "daily_selection": "差異驅動＋最小功能切片；每日 TDD Red→最小 Green→Refactor→驗證，重大缺陷／阻塞／必要安全驗證在原 Day 第2節補加；不每日全量比對",
+    "daily_selection": "差異驅動＋最小功能切片；先建立可操作的基本功能項，基本流程與相應驗證通過後推進下一功能，再逐步補充細節、條件與例外；每日 TDD Red→最小 Green→Refactor→驗證。阻擋流程／資料安全／必要相依性在當步處理，其餘深化工作保留原功能項，不每日全量比對",
     "daily_gate": "latest applicable rust_ai_chat CI success; no weekly implementation gate for daily teaching",
     "weekly_review": "Saturday full comparison, necessary implementation, functional tests and commit; formal functional acceptance recorded separately; daily Day publication requires applicable CI success only",
     "dry_run": "only document corrections addressing user-reported issues; code tests migrations read-only",
