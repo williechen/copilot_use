@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""本機原生 Chat／Analytics；資料與憑證只存於忽略的 target/local-runtime。"""
+"""本機原生 Chat／Analytics；資料與憑證只存於忽略的 .local/runtime。"""
 import argparse
 import fcntl
 import json
@@ -12,7 +12,7 @@ import time
 import urllib.request
 
 ROOT = Path(__file__).resolve().parents[1]
-STATE = ROOT / "target/local-runtime"
+STATE = ROOT / ".local/runtime"
 
 
 def run(argv, **kwargs):
@@ -42,7 +42,7 @@ def stop():
             if not Path(f"/proc/{pid}/exe").exists():
                 pid_file.unlink(missing_ok=True)
                 continue
-            actual = Path(f"/proc/{pid}/exe").resolve()
+            actual = Path(os.readlink(f"/proc/{pid}/exe").removesuffix(" (deleted)"))
             expected = ROOT / "target/release" / binary
             if actual != expected:
                 raise RuntimeError(f"PID {pid} 不屬於此服務，拒絕停止")

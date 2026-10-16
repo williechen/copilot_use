@@ -65,7 +65,7 @@ python3 scripts/local-services.py status
 python3 scripts/local-services.py stop
 ```
 
-不需 root，不裝容器；使用既有 PostgreSQL 工具，在 `target/local-runtime` 建立私人 SCRAM cluster（55432）、non-superuser app role、SQLite 與隨機 token。
+不需 root，不裝容器；使用既有 PostgreSQL 工具，在 `.local/runtime` 建立私人 SCRAM cluster（55432）、non-superuser app role、SQLite 與隨機 token。
 Chat 3001／Analytics 3100 只監聽 loopback；本機 HTTP 不啟用 Secure cookie，不代表公網正式部署。
 私密設定與服務日誌只留本機，不會輸出 token；Analytics dashboard 的查詢 token 由本人從 settings.json 安全取得。
 啟動不呼叫 AI；此管理入口清除繼承的 OPENAI_API_KEY，避免週六功能檢查誤用付費 API。
