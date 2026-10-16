@@ -1,0 +1,7 @@
+[Unit]
+Description=Copilot Pet signed stable GitHub update
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 %h/.local/share/copilot-desktop-pet/current/github-update.py
+TimeoutStartSec=5min
+UMask=0077

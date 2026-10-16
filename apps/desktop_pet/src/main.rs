@@ -752,6 +752,70 @@ fn gui_test_result(app: tauri::AppHandle, success: bool, message: String) -> Res
     Ok(())
 }
 #[tauri::command]
+async fn github_update_status(app: tauri::AppHandle) -> Result<serde_json::Value, String> {
+    let enabled = github_update_on_start(&app);
+    let mut status = serde_json::json!({"enabled":enabled,"current_version":app.package_info().version.to_string(),"repository":"williechen/copilot_use","check_policy":"on_start_or_manual"});
+    if let Ok(directory) = app.path().cache_dir() {
+        // The updater uses XDG_CACHE_HOME/copilot-desktop-pet rather than the app identifier.
+        let cache = directory
+            .parent()
+            .unwrap_or(&directory)
+            .join("copilot-desktop-pet/update-status.json");
+        if let Ok(bytes) = std::fs::read(cache)
+            && bytes.len() <= 65536
+            && let Ok(value) = serde_json::from_slice::<serde_json::Value>(&bytes)
+        {
+            for key in ["status", "checked_at", "latest_release", "message"] {
+                if let Some(v) = value.get(key) {
+                    status[key] = v.clone();
+                }
+            }
+        }
+    }
+    Ok(status)
+}
+#[tauri::command]
+async fn check_github_update() -> Result<(), String> {
+    let result = tokio::process::Command::new("systemctl")
+        .args([
+            "--user",
+            "start",
+            "--no-block",
+            "copilot-pet-update.service",
+        ])
+        .output()
+        .await
+        .map_err(|_| "無法執行自動更新服務")?;
+    if !result.status.success() {
+        return Err("尚未設定 GitHub 自動更新服務".into());
+    }
+    Ok(())
+}
+fn github_update_on_start(app: &tauri::AppHandle) -> bool {
+    app.path()
+        .config_dir()
+        .ok()
+        .map(|directory| directory.join("copilot-desktop-pet/update-on-start"))
+        .and_then(|path| std::fs::read_to_string(path).ok())
+        .map(|value| value.trim() == "true")
+        .unwrap_or(true)
+}
+#[tauri::command]
+async fn set_github_auto_update(app: tauri::AppHandle, enabled: bool) -> Result<(), String> {
+    let directory = app
+        .path()
+        .config_dir()
+        .map_err(|_| "無法讀取設定目錄")?
+        .join("copilot-desktop-pet");
+    std::fs::create_dir_all(&directory).map_err(|_| "無法建立更新設定目錄")?;
+    let temporary = directory.join(".update-on-start-new");
+    std::fs::write(&temporary, if enabled { "true\n" } else { "false\n" })
+        .map_err(|_| "無法保存自動更新設定")?;
+    std::fs::rename(temporary, directory.join("update-on-start"))
+        .map_err(|_| "無法保存自動更新設定")?;
+    Ok(())
+}
+#[tauri::command]
 fn show_controls(app: tauri::AppHandle) -> Result<(), String> {
     let window = app.get_webview_window("main").ok_or("找不到控制面板")?;
     window.show().map_err(|_| "無法顯示控制面板")?;
@@ -807,6 +871,37 @@ fn main() {
         return;
     }
 
+    let args: Vec<String> = std::env::args().collect();
+    if args.get(1).map(String::as_str) == Some("--build-info") {
+        println!(
+            "{}",
+            serde_json::json!({"version":env!("CARGO_PKG_VERSION"),"source_sha":env!("COPILOT_SOURCE_SHA"),"source_dirty":env!("COPILOT_SOURCE_DIRTY")=="true","release":!cfg!(debug_assertions)})
+        );
+        return;
+    }
+    if args.get(1).map(String::as_str) == Some("--verify-native-update") {
+        let result = (|| -> Result<(), String> {
+            if args.len() != 6 {
+                return Err("更新驗證參數不完整".into());
+            }
+            if std::fs::metadata(&args[2])
+                .map_err(|_| "找不到更新包")?
+                .len()
+                > 128 * 1024 * 1024
+            {
+                return Err("更新包過大".into());
+            }
+            let bytes = std::fs::read(&args[2]).map_err(|_| "無法讀取更新包")?;
+            let signature = std::fs::read_to_string(&args[3]).map_err(|_| "無法讀取簽章")?;
+            let key = std::fs::read_to_string(&args[4]).map_err(|_| "無法讀取可信公鑰")?;
+            updater::verify(&bytes, signature.trim(), key.trim(), &args[5])
+        })();
+        if let Err(error) = result {
+            eprintln!("{error}");
+            std::process::exit(1);
+        }
+        return;
+    }
     let context: tauri::Context<tauri::Wry> = tauri::generate_context!();
     if std::env::args().any(|arg| arg == "--version") {
         println!("{}", context.package_info().version);
@@ -927,7 +1022,12 @@ fn main() {
                 previews: std::sync::Mutex::new(std::collections::HashMap::new()),
             });
             let handle = app.handle().clone();
-            tauri::async_runtime::spawn(roaming::run(handle));
+            tauri::async_runtime::spawn(roaming::run(handle.clone()));
+            if !gui_acceptance_enabled() && github_update_on_start(&handle) {
+                tauri::async_runtime::spawn(async {
+                    let _ = check_github_update().await;
+                });
+            }
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
@@ -969,6 +1069,9 @@ fn main() {
             revoke_directory,
             scan_file_preview,
             scan_duplicate_preview,
+            github_update_status,
+            check_github_update,
+            set_github_auto_update,
             show_controls,
             quit_pet,
             gui_test_window_controls,

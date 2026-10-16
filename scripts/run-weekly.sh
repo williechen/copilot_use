@@ -7,6 +7,7 @@ export CARGO_BUILD_JOBS="${CARGO_BUILD_JOBS:-2}"
 command -v node >/dev/null || { echo '缺少 Node.js' >&2; exit 1; }
 evidence="target/weekly/$(date -u +%Y%m%dT%H%M%SZ)"
 mkdir -p "$evidence"
+python3 scripts/tests/github-pet-update.py
 python3 scripts/tests/weekly-compare.py
 python3 scripts/weekly-compare.py --reference "${COPILOT_REFERENCE:-../rust_ai_chat}" --output "$evidence/comparison.json"
 VERIFY_REPORT="$PWD/$evidence/functional.json" python3 scripts/local-verify.py --functional-only

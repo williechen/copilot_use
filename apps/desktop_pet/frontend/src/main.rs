@@ -141,6 +141,28 @@ fn BackupControls() -> impl IntoView {
 }
 #[component]
 fn UpdateControls() -> impl IntoView {
+    let status = RwSignal::new(json!({}));
+    let message = RwSignal::new(String::new());
+    let refresh = move || {
+        leptos::task::spawn_local(async move {
+            match call("github_update_status", json!({})).await {
+                Ok(v) => status.set(v),
+                Err(e) => message.set(e),
+            }
+        })
+    };
+    refresh();
+    view! {<section id="github-auto-update"><h3>"GitHub 正式版自動更新"</h3>
+    <p>{concat!("目前版本：",env!("CARGO_PKG_VERSION"))}</p>
+    <p>"啟動時檢查一次 williechen/copilot_use 正式 Release；驗證簽章後更新原有程式並自動重新啟動，保留寵物與設定。略過預發行版與降版。"</p>
+    <label><input id="github-auto-update-enabled" type="checkbox" prop:checked=move ||status.get()["enabled"]==true on:change=move |e|{let enabled=event_target_checked(&e);leptos::task::spawn_local(async move{if let Err(e)=call("set_github_auto_update",json!({"enabled":enabled})).await{message.set(e)}refresh();});}/>"啟動時檢查 GitHub 更新"</label>
+    <button id="check-github-update" on:click=move |_|{leptos::task::spawn_local(async move{match call("check_github_update",json!({})).await{Ok(_)=>message.set("已排程檢查，稍後按更新狀態查看結果".into()),Err(e)=>message.set(e)}});}>"檢查更新"</button>
+    <button on:click=move |_|{refresh();}>"更新狀態"</button>
+    <p role="status">{move ||match status.get()["status"].as_str(){Some("up_to_date")=>format!("目前已是較新版本；GitHub 正式版 {}",status.get()["latest_release"].as_str().unwrap_or("未知")),Some("updated")=>"已完成自動更新".into(),Some("error")=>"暫時無法完成更新，會保留目前安裝並稍後重試".into(),_=>"等待檢查 GitHub 正式版".into()}}</p><p>{move ||message.get()}</p>
+    <details><summary>"手動本地簽章更新（進階）"</summary><LocalUpdateControls/></details></section>}
+}
+#[component]
+fn LocalUpdateControls() -> impl IntoView {
     let id = RwSignal::new(String::new());
     let verified = RwSignal::new(false);
     let confirmed = RwSignal::new(false);
@@ -347,29 +369,43 @@ fn Settings() -> impl IntoView {
     let interaction_busy = RwSignal::new(false);
     let roaming_busy = RwSignal::new(false);
     let apply_interaction = move |field: &'static str, value: Value| {
-        if interaction_busy.get_untracked()
-            || interaction_loading.get_untracked()
-            || pet.get_untracked().is_empty()
-        {
+        if interaction_loading.get_untracked() || pet.get_untracked().is_empty() {
+            return;
+        }
+        animation.update(|v| v[field] = value);
+        if interaction_busy.get_untracked() {
             return;
         }
         let id = pet.get_untracked();
-        let mut preferences = animation.get_untracked();
-        preferences[field] = value;
         interaction_busy.set(true);
         leptos::task::spawn_local(async move {
-            match call(
-                "set_interaction",
-                json!({"pet":id,"preferences":preferences}),
-            )
-            .await
-            {
-                Ok(_) if pet.get_untracked() == id => {
-                    animation.set(preferences);
-                    error.set(String::new());
+            loop {
+                if pet.get_untracked() != id {
+                    break;
                 }
-                Err(e) => error.set(e),
-                _ => {}
+                let preferences = animation.get_untracked();
+                match call(
+                    "set_interaction",
+                    json!({"pet":id,"preferences":preferences}),
+                )
+                .await
+                {
+                    Ok(_) => {
+                        error.set(String::new());
+                    }
+                    Err(e) => {
+                        error.set(e);
+                        if let Ok(saved) = call("interaction", json!({"pet":id})).await
+                            && pet.get_untracked() == id
+                        {
+                            animation.set(saved);
+                        }
+                        break;
+                    }
+                }
+                if pet.get_untracked() != id || animation.get_untracked() == preferences {
+                    break;
+                }
             }
             interaction_busy.set(false);
         });
@@ -379,9 +415,9 @@ fn Settings() -> impl IntoView {
        <button on:click=move |_|{pet.set(uuid());name.set(String::new());species.set(String::new());likes.set(String::new());personality.set(String::new());interests.set(String::new());color.set(String::new());style.set(String::new());breed.set(String::new());actions.set(String::new());speed.set(String::new());memory.set(String::new());memory_edit_id.set(String::new());memories.set(Vec::new());cards.set(Vec::new());}>"新增寵物"</button>
        <SpriteView image=sprite animation=animation shape=shape/>
     <small>{move ||if sprite.get().is_empty() {"200×200 顯示區；目前設定尚無可用素材"}else{"200×200 角色動畫；素材已快取"}}</small>
-    <label>"目前動作"<select id="pet-action" disabled=move ||interaction_busy.get()||interaction_loading.get()||pet.get().is_empty() prop:value=move ||animation.get()["action"].as_str().unwrap_or("idle").to_owned() on:change=move |e|apply_interaction("action",json!(event_target_value(&e)))><option value="idle">"待機"</option><option value="moving">"移動"</option><option value="happy">"開心"</option><option value="learning">"學習"</option></select></label>
-    <label>"播放速度"<select id="pet-speed" disabled=move ||interaction_busy.get()||interaction_loading.get()||pet.get().is_empty() prop:value=move ||animation.get()["speed"].as_str().unwrap_or("normal").to_owned() on:change=move |e|apply_interaction("speed",json!(event_target_value(&e)))><option value="slow">"慢"</option><option value="normal">"正常"</option><option value="fast">"快"</option></select></label>
-    <label><input id="pet-proactive" type="checkbox" disabled=move ||interaction_busy.get()||interaction_loading.get()||pet.get().is_empty() prop:checked=move ||animation.get()["proactive"]==true on:change=move |e|apply_interaction("proactive",json!(event_target_checked(&e)))/>"主動顯示本地到期複習題（每小時最多一次）"</label>
+    <label>"目前動作"<select id="pet-action" disabled=move ||interaction_loading.get()||pet.get().is_empty() prop:value=move ||animation.get()["action"].as_str().unwrap_or("idle").to_owned() on:change=move |e|apply_interaction("action",json!(event_target_value(&e)))><option value="idle">"待機"</option><option value="moving">"移動"</option><option value="happy">"開心"</option><option value="learning">"學習"</option></select></label>
+    <label>"播放速度"<select id="pet-speed" disabled=move ||interaction_loading.get()||pet.get().is_empty() prop:value=move ||animation.get()["speed"].as_str().unwrap_or("normal").to_owned() on:change=move |e|apply_interaction("speed",json!(event_target_value(&e)))><option value="slow">"慢"</option><option value="normal">"正常"</option><option value="fast">"快"</option></select></label>
+    <label><input id="pet-proactive" type="checkbox" disabled=move ||interaction_loading.get()||pet.get().is_empty() prop:checked=move ||animation.get()["proactive"]==true on:change=move |e|apply_interaction("proactive",json!(event_target_checked(&e)))/>"主動顯示本地到期複習題（每小時最多一次）"</label>
     <label><input id="pet-roaming" type="checkbox" disabled=move ||roaming_busy.get() prop:checked=move ||roaming.get() on:change=move |e|{let enabled=event_target_checked(&e);roaming_busy.set(true);leptos::task::spawn_local(async move{match call("set_roaming",json!({"enabled":enabled})).await{Ok(_)=>{roaming.set(enabled);error.set(String::new());},Err(e)=>error.set(e)}roaming_busy.set(false);});}/>"啟用原生視窗漫遊（動作須選移動）"</label>
     <p>"動作、速度與巡行開關即時生效並自動保存，不需重新啟動。"</p>
     <button id="save-interaction" disabled=move ||interaction_busy.get()||interaction_loading.get()||pet.get().is_empty() on:click=move |_|{let pid=pet.get();let preferences=animation.get();leptos::task::spawn_local(async move{if let Err(e)=call("set_interaction",json!({"pet":pid,"preferences":preferences})).await {error.set(e)}});}>"保存互動設定"</button>

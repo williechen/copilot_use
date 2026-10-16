@@ -35,7 +35,12 @@ fn local(url: &url::Url) -> bool {
             _ => false,
         }
 }
-fn verify(bytes: &[u8], signature: &str, key: &str, version: &str) -> Result<(), String> {
+pub(crate) fn verify(
+    bytes: &[u8],
+    signature: &str,
+    key: &str,
+    version: &str,
+) -> Result<(), String> {
     let decode = |s: &str| {
         base64::engine::general_purpose::STANDARD
             .decode(s)
