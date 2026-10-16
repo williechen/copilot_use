@@ -14,7 +14,7 @@
 
 視窗漫遊與 SHA256 重複檔案分組已納入 copilot_use 產品目標；依既有成品來源核對仍尚未實作／驗收，rust_ai_chat 的對應核心或測試不等於 copilot_use 已完成；既有視窗內角色動畫或一般掃描預覽不代表這兩項完成。
 
-產品缺口、安全修正、參考適配及教學清單維護於 [FUTURE_WORK.md](FUTURE_WORK.md)；驗收方式與有效證據入口見 [LOCAL_VALIDATION.md](LOCAL_VALIDATION.md)。使用者已取消正式部署，保留本地/Docker/CI/跨平台測試與固定成品目標。
+產品缺口、安全修正、參考適配及教學清單維護於 [FUTURE_WORK.md](FUTURE_WORK.md)；驗收方式與有效證據入口見 [LOCAL_VALIDATION.md](LOCAL_VALIDATION.md)。使用者已取消正式部署，保留原生本地／CI／跨平台測試；Docker 僅為歷史資產，不作現行開發或驗證 runtime與固定成品目標。
 
 ## 開發與驗收政策
 1. 優先補齊**完整產品可啟動的實際入口**，不是只開新 trait 或只留 CLI；每次提交以可測試的真實跨層功能為單位。
