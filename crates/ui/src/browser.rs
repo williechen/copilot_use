@@ -24,7 +24,7 @@ pub async fn api(path: &str, method: &str, body: Option<Value>) -> Result<Value,
     }
     .map_err(|_| "連線失敗，請重試")?;
     if !response.ok() {
-        return Err(format!("操作失敗：{}", response.status()));
+        return Err(super::api_failure(path, response.status()));
     }
     if response.status() == 204
         || response.status() == 201 && path == "/api/v1/rooms"

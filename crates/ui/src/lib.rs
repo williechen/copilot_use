@@ -46,21 +46,92 @@ fn Layout() -> impl IntoView {
     let state = session();
     view! {<section><button on:click=move |_|spawn(async move{match api("/api/v1/auth/logout","POST",Some(json!({}))).await{Ok(_)=>state.signed_in.set(false),Err(e)=>state.error.set(e)}})>"登出"</button><Outlet/></section>}
 }
+fn credential_error(username: &str, password: &str) -> Option<&'static str> {
+    if username.len() < 3 || username.len() > 100 {
+        Some("請填寫使用者名稱，長度須為 3–100 字元。")
+    } else if !username
+        .chars()
+        .all(|c| c.is_alphanumeric() || c == '_' || c == '-')
+    {
+        Some("使用者名稱只能包含文字、數字、底線（_）或連字號（-）。")
+    } else if password.len() < 12 || password.len() > 128 {
+        Some("密碼長度不符，請使用至少 12 字元、最多 128 字元的密碼。")
+    } else {
+        None
+    }
+}
+fn auth_input_values(username: RwSignal<String>, password: RwSignal<String>) -> (String, String) {
+    // Read the form controls as well as signals, including values filled by the browser.
+    #[cfg(target_arch = "wasm32")]
+    {
+        use wasm_bindgen::JsCast;
+        let value = |id: &str| {
+            web_sys::window()
+                .and_then(|w| w.document())
+                .and_then(|d| d.get_element_by_id(id))
+                .and_then(|e| e.dyn_into::<web_sys::HtmlInputElement>().ok())
+                .map(|input| input.value())
+        };
+        (
+            value("username")
+                .unwrap_or_else(|| username.get_untracked())
+                .trim()
+                .to_owned(),
+            value("password").unwrap_or_else(|| password.get_untracked()),
+        )
+    }
+    #[cfg(not(target_arch = "wasm32"))]
+    {
+        (
+            username.get_untracked().trim().to_owned(),
+            password.get_untracked(),
+        )
+    }
+}
+#[cfg(target_arch = "wasm32")]
+fn api_failure(path: &str, status: u16) -> String {
+    if matches!(path, "/api/v1/auth/login" | "/api/v1/auth/register") {
+        match status {
+            400 => "帳號或密碼格式不符：使用者名稱須為 3–100 字元，只能包含文字、數字、_ 或 -；密碼至少 12 字元。".into(),
+            401 => "帳號或密碼不正確。首次使用請先按「註冊」，成功後再登入。".into(),
+            403 => "頁面驗證未通過，請重新整理後再試。".into(),
+            409 => "此使用者名稱已被註冊，請登入或使用另一個名稱。".into(),
+            429 => "嘗試次數過多，請稍候一分鐘再試。".into(),
+            500..=599 => "服務暫時無法完成登入或註冊，請稍後再試。".into(),
+            _ => format!("操作失敗：{status}"),
+        }
+    } else {
+        format!("操作失敗：{status}")
+    }
+}
 #[component]
 fn Login() -> impl IntoView {
     let state = session();
     let username = RwSignal::new(String::new());
     let password = RwSignal::new(String::new());
     let busy = RwSignal::new(false);
+    let notice = RwSignal::new(String::new());
     let navigate = use_navigate();
-    let login = move |_| {
-        let credentials = json!({"username":username.get(),"password":password.get()});
+    let login = move || {
+        if busy.get_untracked() {
+            return;
+        }
+        let (name, secret) = auth_input_values(username, password);
+        state.error.set(String::new());
+        notice.set(String::new());
+        if let Some(error) = credential_error(&name, &secret) {
+            state.error.set(error.into());
+            return;
+        }
+        username.set(name.clone());
+        let credentials = json!({"username":name,"password":secret});
         let navigate = navigate.clone();
         busy.set(true);
         spawn(async move {
             match api("/api/v1/auth/login", "POST", Some(credentials)).await {
                 Ok(_) => {
                     password.set(String::new());
+                    state.error.set(String::new());
                     state.signed_in.set(true);
                     navigate("/app", Default::default());
                 }
@@ -69,8 +140,25 @@ fn Login() -> impl IntoView {
             busy.set(false)
         });
     };
-    view! {<section><h2>"登入帳號"</h2><label>"使用者名稱"<input id="username" minlength="3" maxlength="100" autocomplete="username" prop:value=move ||username.get() on:input=move |e|username.set(event_target_value(&e))/></label><label>"密碼（至少 12 字元）"<input id="password" type="password" minlength="12" maxlength="128" autocomplete="current-password" prop:value=move ||password.get() on:input=move |e|password.set(event_target_value(&e))/></label><button id="login" disabled=move ||busy.get() on:click=login>"登入"</button>
-    <button id="register" disabled=move ||busy.get() on:click=move |_|{let credentials=json!({"username":username.get(),"password":password.get()});busy.set(true);spawn(async move{match api("/api/v1/auth/register","POST",Some(credentials)).await{Ok(_)=>state.error.set("註冊成功，請登入".into()),Err(e)=>state.error.set(e)}busy.set(false)});}>"註冊"</button></section>}
+    view! {<section id="account-access"><h2>"登入帳號"</h2>
+    <p>"首次使用請先填寫帳號與密碼，按「註冊」建立帳號；註冊成功後再按「登入」。"</p>
+    <form id="auth-form" on:submit=move |event|{event.prevent_default();login();}>
+    <label>"使用者名稱"<input id="username" name="username" required autocomplete="username" prop:value=move ||username.get() on:input=move |e|username.set(event_target_value(&e)) on:change=move |e|username.set(event_target_value(&e))/></label>
+    <small>"3–100 字元，可使用文字、數字、_ 或 -。"</small>
+    <label>"密碼（至少 12 字元）"<input id="password" name="password" type="password" required autocomplete="current-password" prop:value=move ||password.get() on:input=move |e|password.set(event_target_value(&e)) on:change=move |e|password.set(event_target_value(&e))/></label>
+    <button id="login" type="submit" disabled=move ||busy.get()>"登入"</button>
+    <button id="register" type="button" disabled=move ||busy.get() on:click=move |_|{
+        if busy.get_untracked(){return;}
+        let (name,secret)=auth_input_values(username,password);
+        state.error.set(String::new());notice.set(String::new());
+        if let Some(error)=credential_error(&name,&secret){state.error.set(error.into());return;}
+        username.set(name.clone());
+        let credentials=json!({"username":name,"password":secret});busy.set(true);
+        spawn(async move{match api("/api/v1/auth/register","POST",Some(credentials)).await{
+            Ok(_)=>notice.set("註冊成功，請按「登入」進入聊天室。".into()),Err(e)=>state.error.set(e)
+        }busy.set(false)});
+    }>"註冊"</button>
+    <p class="success" role="status">{move ||notice.get()}</p></form></section>}
 }
 #[component]
 fn Chat() -> impl IntoView {
