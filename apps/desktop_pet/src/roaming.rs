@@ -12,21 +12,28 @@ pub struct Roaming {
     moves: AtomicU64,
 }
 impl Roaming {
-    pub fn from_environment() -> Self {
+    pub fn new(enabled: bool) -> Self {
         Self {
-            enabled: AtomicBool::new(matches!(
-                std::env::var("PET_ENABLE_ROAM").as_deref(),
-                Ok("true" | "1")
-            )),
+            enabled: AtomicBool::new(enabled),
             stalled: AtomicBool::new(false),
             moves: AtomicU64::new(0),
         }
     }
 }
 #[tauri::command]
-pub fn set_roaming(state: State<'_, Roaming>, enabled: bool) {
+pub async fn set_roaming(
+    state: State<'_, Roaming>,
+    desktop: State<'_, super::DesktopState>,
+    enabled: bool,
+) -> Result<(), String> {
+    desktop
+        .store
+        .set_roaming_enabled(enabled)
+        .await
+        .map_err(|_| "無法保存巡行設定")?;
     state.stalled.store(false, Ordering::SeqCst);
     state.enabled.store(enabled, Ordering::SeqCst);
+    Ok(())
 }
 #[tauri::command]
 pub fn roaming_status(

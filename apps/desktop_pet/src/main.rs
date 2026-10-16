@@ -777,7 +777,6 @@ fn main() {
     tauri::Builder::default()
         .plugin(tauri_plugin_updater::Builder::new().build())
         .manage(updater::Updates::new())
-        .manage(roaming::Roaming::from_environment())
         .on_page_load(|webview, payload| {
             if webview.label() == "main"
                 && gui_acceptance_enabled()
@@ -856,6 +855,8 @@ fn main() {
                     }
                 });
             }
+            let roaming_enabled = tauri::async_runtime::block_on(store.roaming_enabled())?;
+            app.manage(roaming::Roaming::new(roaming_enabled));
             app.manage(DesktopState {
                 store,
                 ai_slots: std::sync::Arc::new(tokio::sync::Semaphore::new(2)),

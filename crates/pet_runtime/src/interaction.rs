@@ -34,6 +34,19 @@ pub struct LearningSummary {
     pub established: i64,
 }
 impl PetStore {
+    pub async fn roaming_enabled(&self) -> Result<bool, sqlx::Error> {
+        let value: Option<String> =
+            sqlx::query_scalar("SELECT value FROM settings WHERE key='window_roaming'")
+                .fetch_optional(&self.pool)
+                .await?;
+        Ok(value.as_deref() == Some("true"))
+    }
+    pub async fn set_roaming_enabled(&self, enabled: bool) -> Result<(), sqlx::Error> {
+        sqlx::query("INSERT INTO settings(key,value)VALUES('window_roaming',?)ON CONFLICT(key)DO UPDATE SET value=excluded.value")
+            .bind(if enabled { "true" } else { "false" }).execute(&self.pool).await?;
+        Ok(())
+    }
+
     pub async fn interaction(&self, pet: Uuid) -> Result<Interaction, sqlx::Error> {
         let value: Option<String> = sqlx::query_scalar("SELECT value FROM settings WHERE key=?")
             .bind(format!("interaction:{pet}"))
@@ -107,6 +120,25 @@ impl PetStore {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[tokio::test]
+    async fn roaming_control_persists_both_enable_and_disable_across_reopen() {
+        let directory = std::env::temp_dir().join(format!("pet-roaming-{}", Uuid::new_v4()));
+        std::fs::create_dir(&directory).unwrap();
+        let path = directory.join("pet.db");
+        let store = PetStore::open(&path).await.unwrap();
+        assert!(!store.roaming_enabled().await.unwrap());
+        store.set_roaming_enabled(true).await.unwrap();
+        assert!(store.roaming_enabled().await.unwrap());
+        store.pool.close().await;
+        let reopened = PetStore::open(&path).await.unwrap();
+        assert!(reopened.roaming_enabled().await.unwrap());
+        reopened.set_roaming_enabled(false).await.unwrap();
+        reopened.pool.close().await;
+        let reopened = PetStore::open(&path).await.unwrap();
+        assert!(!reopened.roaming_enabled().await.unwrap());
+        reopened.pool.close().await;
+        std::fs::remove_dir_all(directory).unwrap();
+    }
     #[tokio::test]
     async fn local_reminders_require_opt_in_and_are_scoped_durable_and_rate_limited() {
         let directory = std::env::temp_dir().join(format!("pet-interaction-{}", Uuid::new_v4()));

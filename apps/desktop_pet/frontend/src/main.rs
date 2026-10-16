@@ -215,7 +215,6 @@ fn Settings() -> impl IntoView {
             }
         });
     };
-    refresh();
     let load = move |id: String| {
         pet.set(id.clone());
         memories.set(Vec::new());
@@ -309,16 +308,55 @@ fn Settings() -> impl IntoView {
             }
         });
     };
+    leptos::task::spawn_local(async move {
+        if let Ok(v) = call("list_pets", json!({})).await {
+            pets.set(v.as_array().cloned().unwrap_or_default());
+            if pet.get_untracked().is_empty()
+                && let Ok(active) = call("active_pet", json!({})).await
+                && let Some(id) = active.as_str()
+            {
+                load(id.to_owned());
+            }
+        }
+    });
+    let interaction_busy = RwSignal::new(false);
+    let roaming_busy = RwSignal::new(false);
+    let apply_interaction = move |field: &'static str, value: Value| {
+        if interaction_busy.get_untracked() || pet.get_untracked().is_empty() {
+            return;
+        }
+        let id = pet.get_untracked();
+        let mut preferences = animation.get_untracked();
+        preferences[field] = value;
+        interaction_busy.set(true);
+        leptos::task::spawn_local(async move {
+            match call(
+                "set_interaction",
+                json!({"pet":id,"preferences":preferences}),
+            )
+            .await
+            {
+                Ok(_) if pet.get_untracked() == id => {
+                    animation.set(preferences);
+                    error.set(String::new());
+                }
+                Err(e) => error.set(e),
+                _ => {}
+            }
+            interaction_busy.set(false);
+        });
+    };
     view! {<main><h1>"桌面 AI 寵物"</h1><p class="error" role="alert">{move ||error.get()}</p>
-       <section><h2>"我的寵物"</h2><select on:change=move |e|load(event_target_value(&e))><option value="">"選擇寵物"</option>{move ||pets.get().into_iter().map(|p|{let id=p["id"].as_str().unwrap_or("").to_owned();let profile:Value=serde_json::from_str(p["profile"].as_str().unwrap_or("{}")).unwrap_or_default();view!{<option value=id>{profile["名字"].as_str().unwrap_or("寵物").to_owned()}</option>}}).collect_view()}</select>
+       <section><h2>"我的寵物"</h2><select id="pet-selector" prop:value=move ||pet.get() on:change=move |e|load(event_target_value(&e))><option value="">"選擇寵物"</option>{move ||pets.get().into_iter().map(|p|{let id=p["id"].as_str().unwrap_or("").to_owned();let profile:Value=serde_json::from_str(p["profile"].as_str().unwrap_or("{}")).unwrap_or_default();view!{<option value=id>{profile["名字"].as_str().unwrap_or("寵物").to_owned()}</option>}}).collect_view()}</select>
        <button on:click=move |_|{pet.set(uuid());name.set(String::new());species.set(String::new());likes.set(String::new());personality.set(String::new());interests.set(String::new());color.set(String::new());style.set(String::new());breed.set(String::new());actions.set(String::new());speed.set(String::new());memory.set(String::new());memory_edit_id.set(String::new());memories.set(Vec::new());cards.set(Vec::new());}>"新增寵物"</button>
        <SpriteView image=sprite animation=animation shape=shape/>
     <small>{move ||if sprite.get().is_empty() {"200×200 顯示區；目前設定尚無可用素材"}else{"200×200 角色動畫；素材已快取"}}</small>
-    <label>"目前動作"<select id="pet-action" prop:value=move ||animation.get()["action"].as_str().unwrap_or("idle").to_owned() on:change=move |e|animation.update(|v|v["action"]=json!(event_target_value(&e)))><option value="idle">"待機"</option><option value="moving">"移動"</option><option value="happy">"開心"</option><option value="learning">"學習"</option></select></label>
-    <label>"播放速度"<select id="pet-speed" prop:value=move ||animation.get()["speed"].as_str().unwrap_or("normal").to_owned() on:change=move |e|animation.update(|v|v["speed"]=json!(event_target_value(&e)))><option value="slow">"慢"</option><option value="normal">"正常"</option><option value="fast">"快"</option></select></label>
-    <label><input id="pet-proactive" type="checkbox" prop:checked=move ||animation.get()["proactive"]==true on:change=move |e|animation.update(|v|v["proactive"]=json!(event_target_checked(&e)))/>"主動顯示本地到期複習題（每小時最多一次）"</label>
-    <label><input id="pet-roaming" type="checkbox" prop:checked=move ||roaming.get() on:change=move |e|{let enabled=event_target_checked(&e);leptos::task::spawn_local(async move{match call("set_roaming",json!({"enabled":enabled})).await{Ok(_)=>roaming.set(enabled),Err(e)=>error.set(e)}});}/>"啟用原生視窗漫遊（動作須選移動）"</label>
-    <button id="save-interaction" on:click=move |_|{let pid=pet.get();let preferences=animation.get();leptos::task::spawn_local(async move{if let Err(e)=call("set_interaction",json!({"pet":pid,"preferences":preferences})).await {error.set(e)}});}>"保存互動設定"</button>
+    <label>"目前動作"<select id="pet-action" disabled=move ||interaction_busy.get()||pet.get().is_empty() prop:value=move ||animation.get()["action"].as_str().unwrap_or("idle").to_owned() on:change=move |e|apply_interaction("action",json!(event_target_value(&e)))><option value="idle">"待機"</option><option value="moving">"移動"</option><option value="happy">"開心"</option><option value="learning">"學習"</option></select></label>
+    <label>"播放速度"<select id="pet-speed" disabled=move ||interaction_busy.get()||pet.get().is_empty() prop:value=move ||animation.get()["speed"].as_str().unwrap_or("normal").to_owned() on:change=move |e|apply_interaction("speed",json!(event_target_value(&e)))><option value="slow">"慢"</option><option value="normal">"正常"</option><option value="fast">"快"</option></select></label>
+    <label><input id="pet-proactive" type="checkbox" disabled=move ||interaction_busy.get()||pet.get().is_empty() prop:checked=move ||animation.get()["proactive"]==true on:change=move |e|apply_interaction("proactive",json!(event_target_checked(&e)))/>"主動顯示本地到期複習題（每小時最多一次）"</label>
+    <label><input id="pet-roaming" type="checkbox" disabled=move ||roaming_busy.get() prop:checked=move ||roaming.get() on:change=move |e|{let enabled=event_target_checked(&e);roaming_busy.set(true);leptos::task::spawn_local(async move{match call("set_roaming",json!({"enabled":enabled})).await{Ok(_)=>{roaming.set(enabled);error.set(String::new());},Err(e)=>error.set(e)}roaming_busy.set(false);});}/>"啟用原生視窗漫遊（動作須選移動）"</label>
+    <p>"動作、速度與巡行開關即時生效並自動保存，不需重新啟動。"</p>
+    <button id="save-interaction" disabled=move ||interaction_busy.get()||pet.get().is_empty() on:click=move |_|{let pid=pet.get();let preferences=animation.get();leptos::task::spawn_local(async move{if let Err(e)=call("set_interaction",json!({"pet":pid,"preferences":preferences})).await {error.set(e)}});}>"保存互動設定"</button>
     <RecallPrompt/>
     <PetArchive pet=pet changed=Callback::new(move |id:Option<String>|{refresh();if let Some(id)=id{load(id)}else{pet.set(uuid());sprite.set(String::new());name.set(String::new());memories.set(Vec::new());cards.set(Vec::new());}})/>
     <BackupControls/>
@@ -494,17 +532,20 @@ fn PetOnly() -> impl IntoView {
         leptos::task::spawn_local(async move {
             if let Ok(pet) = call("active_pet", json!({})).await
                 && let Some(id) = pet.as_str()
-                && let Ok(asset) = call("load_asset", json!({"pet":id})).await
-                && let Some(png) = asset["png_base64"].as_str()
             {
                 if generation.get_untracked() != version {
                     return;
                 }
-                shape.set(fit_sprite(
-                    asset["width"].as_f64().unwrap_or(200.0),
-                    asset["height"].as_f64().unwrap_or(200.0),
-                ));
-                sprite.set(format!("url(data:image/png;base64,{png})"));
+                if let Ok(asset) = call("load_asset", json!({"pet":id})).await
+                    && let Some(png) = asset["png_base64"].as_str()
+                    && generation.get_untracked() == version
+                {
+                    shape.set(fit_sprite(
+                        asset["width"].as_f64().unwrap_or(200.0),
+                        asset["height"].as_f64().unwrap_or(200.0),
+                    ));
+                    sprite.set(format!("url(data:image/png;base64,{png})"));
+                }
                 if let Ok(v) = call("interaction", json!({"pet":id})).await {
                     if generation.get_untracked() == version {
                         animation.set(v)
