@@ -29,7 +29,7 @@ python3 scripts/local-verify.py --live-openai
 
 ## 現行文件
 
-[現行三專案 Day 14 文章鏡像](docs/teaching/current/README.md) · [先本地、後 GitHub 的參考庫驗證](docs/source-review/rust-ai-chat-validation.json)（Day12 已套用；本地 a57e532 正式驗證通過，最新 d054389 僅 CI 變更且 6／6 workflows、18／18 checks 通過；GUI／整體驗收另列）。
+[現行 Day 索引與 Notion 封存原文](docs/teaching/current/README.md) · [最新來源檢驗與未完成項目](docs/teaching/evidence/2026-10-17-source-98f30d8-recheck.json)。Day16程式已由使用者同步，GitHub文章及舊修訂副本已移除；Notion原文、patch與歷史證據保留，next_day維持17。完整功能尚未驗收。
 
 [目前系統架構與 DB 表格](docs/SYSTEM_ARCHITECTURE.md) · [教學格式與執行方式](docs/TEACHING_FORMAT.md)
 

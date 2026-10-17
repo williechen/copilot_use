@@ -19,7 +19,7 @@
       "draft_validation": "passed; details in validation.json",
       "gui_acceptance": "not executed",
       "frozen": true,
-      "current_reference_evidence": "docs/teaching/evidence/2026-10-17-current-source-validation.json",
+      "current_reference_evidence": "docs/teaching/evidence/2026-10-17-source-98f30d8-recheck.json",
       "removed_github_article_path": "docs/teaching/current/CHAT.md",
       "github_article_status": "removed_by_user_request_after_code_sync"
     },
@@ -38,7 +38,7 @@
       "draft_validation": "passed; details in validation.json",
       "gui_acceptance": "not executed",
       "frozen": true,
-      "current_reference_evidence": "docs/teaching/evidence/2026-10-17-current-source-validation.json",
+      "current_reference_evidence": "docs/teaching/evidence/2026-10-17-source-98f30d8-recheck.json",
       "removed_github_article_path": "docs/teaching/current/PET.md",
       "github_article_status": "removed_by_user_request_after_code_sync"
     },
@@ -57,7 +57,7 @@
       "draft_validation": "passed; details in validation.json",
       "gui_acceptance": "not executed",
       "frozen": true,
-      "current_reference_evidence": "docs/teaching/evidence/2026-10-17-current-source-validation.json",
+      "current_reference_evidence": "docs/teaching/evidence/2026-10-17-source-98f30d8-recheck.json",
       "removed_github_article_path": "docs/teaching/current/ANALYTICS.md",
       "github_article_status": "removed_by_user_request_after_code_sync"
     }
@@ -115,8 +115,8 @@
   "frozen": true,
   "freeze_reason": "Day16 program filled; retain article body and source snapshot",
   "current_reference_observation": {
-    "sha": "ba5dc518c2b758b868e04852852b5382eed54042",
-    "evidence": "docs/teaching/evidence/2026-10-17-current-source-validation.json",
+    "sha": "98f30d8b3593d80103b1a4bdbb9f0cb8cb08069e",
+    "evidence": "docs/teaching/evidence/2026-10-17-source-98f30d8-recheck.json",
     "full_acceptance": false
   },
   "github_article_removal": {
@@ -125,5 +125,12 @@
     "notion_preserved": true,
     "patches_and_evidence_preserved": true,
     "next_day_advanced": false
+  },
+  "execution_policy": {
+    "canonical": "docs/COMMON_LEARNING_RULES.md",
+    "progress": "docs/learning-state.json",
+    "cached_conversations_override": false,
+    "notion_day16_preserved": true,
+    "github_day16_articles_removed": true
   }
 }

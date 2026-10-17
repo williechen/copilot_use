@@ -165,7 +165,7 @@
     "planned_completion_date": "2028-12-12",
     "stage_completion_policy": "階段到期照時切換；未完成留原功能追蹤；Day 修訂／封存依 learning_policy.day_revision，階段證據可回填但不覆寫已實作文章。"
   },
-  "daily_reference_sha": "ba5dc518c2b758b868e04852852b5382eed54042",
+  "daily_reference_sha": "98f30d8b3593d80103b1a4bdbb9f0cb8cb08069e",
   "daily_product_sha": "579a418c425c7b94c6702689b0ed78d9e8f0998b",
   "content_alignment": {
     "reference_sha": "16261e0ebeef1a888997cc0ebc42b08ceaf8db24",
@@ -393,7 +393,7 @@
       "pet": "3fce51d4-5093-81e9-aa03-d633822eee89",
       "analytics": "3fce51d4-5093-813f-a38a-e37a47ae4959"
     },
-    "last_publication_status": "Day16 frozen after user-applied code; current source evidence synchronized; no new publication or numbering advance"
+    "last_publication_status": "Day16 code synchronized by user; Notion frozen, GitHub article mirrors removed; no new Day"
   },
   "teaching_document": {
     "canonical": "docs/COMMON_LEARNING_RULES.md",
@@ -410,20 +410,133 @@
     "direct_source_edits": false,
     "formal_acceptance": false,
     "evidence": "docs/teaching/evidence/2026-10-17-source-98f30d8-recheck.json",
-    "copilot_use_code_revalidated": false
+    "copilot_use_code_revalidated": false,
+    "source_ci": {
+      "checks": [
+        {
+          "name": "test-pet-domain",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39024711866/job/117373314531"
+        },
+        {
+          "name": "test-persistence",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39024711917/job/117373314481"
+        },
+        {
+          "name": "test-stats-server",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39024711866/job/117373314466"
+        },
+        {
+          "name": "test-desktop-pet",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39024711866/job/117373314461"
+        },
+        {
+          "name": "test-chat-application",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39024711866/job/117373314458"
+        },
+        {
+          "name": "test-ui",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39024711866/job/117373314455"
+        },
+        {
+          "name": "test-server",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39024711866/job/117373314426"
+        },
+        {
+          "name": "test-shared",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39024711866/job/117373314392"
+        },
+        {
+          "name": "test-ai-core",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39024711866/job/117373314384"
+        },
+        {
+          "name": "check-dashboard",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39024711895/job/117373314372"
+        },
+        {
+          "name": "test-chat-domain",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39024711866/job/117373314242"
+        },
+        {
+          "name": "build-dashboard",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39024711895/job/117373314238"
+        },
+        {
+          "name": "check-chat",
+          "status": "in_progress",
+          "conclusion": null,
+          "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39024711896/job/117373314213"
+        },
+        {
+          "name": "check-pet",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39024711862/job/117373314124"
+        },
+        {
+          "name": "build-pet",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39024711862/job/117373314105"
+        },
+        {
+          "name": "build-chat",
+          "status": "in_progress",
+          "conclusion": null,
+          "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39024711896/job/117373314057"
+        },
+        {
+          "name": "test-node",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39024711860/job/117373313912"
+        }
+      ],
+      "success": 15,
+      "pending": [
+        "check-chat",
+        "build-chat"
+      ],
+      "failure": 0
+    }
   },
   "ui_alignment": {
     "requirements": "docs/UI_ALIGNMENT_REQUIREMENTS.md",
-    "pet": "dual-window implementation and startup observed; roaming still main; native interactive GUI acceptance not executed",
-    "analytics": "Leptos components using existing HTTP JSON; HTML lesson correction deferred to next Day",
-    "status": "basic Chat browser flow and Pet dual-window implementation observed; full acceptance incomplete",
+    "pet": "roam targets main control incorrectly; must target pet life; Control fixed",
+    "analytics": "key prototype; admin/admin and change password absent",
+    "status": "partial implementation; not full acceptance",
     "day15_frozen": true,
     "next_day_advanced": false,
-    "chat": "homepage only room list; create/manage on personal management page; ba5 search and browser chat verified, homepage separation pending",
+    "chat": "homepage create removed; new query button clears rows and stalls loading; personal management absent",
     "day16_green": "complete draft code supplied and native/WASM checks passed; reference not modified; GUI not accepted",
     "day16_frozen": true,
-    "reference_sha": "ba5dc518c2b758b868e04852852b5382eed54042",
-    "evidence": "docs/teaching/evidence/2026-10-17-current-source-validation.json"
+    "reference_sha": "98f30d8b3593d80103b1a4bdbb9f0cb8cb08069e",
+    "evidence": "docs/teaching/evidence/2026-10-17-source-98f30d8-recheck.json",
+    "day16_github_articles": "removed by explicit user request; Notion frozen"
   },
   "service_credentials": {
     "status": "requirements_confirmed_not_implemented",
@@ -462,11 +575,11 @@
     "initial_password": "admin",
     "initialization": "once only; never reset existing password on restart",
     "password_change": "authenticated change with persistent salted hash required",
-    "reference_sha": "ba5dc518c2b758b868e04852852b5382eed54042",
+    "reference_sha": "98f30d8b3593d80103b1a4bdbb9f0cb8cb08069e",
     "actual_startup": "fails missing ANALYTICS_ADMIN_KEY_SHA256; 3100 not started",
     "implementation_day_policy": "next Day; Day16 frozen",
     "tests_scope": "current key-based prototype/router PostgreSQL; not account/password acceptance",
-    "evidence": "docs/teaching/evidence/2026-10-17-current-source-validation.json"
+    "evidence": "docs/teaching/evidence/2026-10-17-source-98f30d8-recheck.json"
   },
   "day15_ci_validation": {
     "date": "2026-10-17",
@@ -520,7 +633,7 @@
         "complete_green_patch_verified": true
       }
     },
-    "status": "Day16 article frozen; current reference partially implemented and validated; later changes belong to next Day",
+    "status": "user confirms code synchronized; GitHub article mirrors removed; full acceptance incomplete",
     "revision": "r3",
     "root_tests_migration": "planned; no per-source-file unit test extraction",
     "next_day_advanced": false,
@@ -535,12 +648,13 @@
     "previous_page_restore": "failed target_not_found",
     "frozen": true,
     "frozen_reason": "user confirms program has been filled; no further Day16 article edits",
-    "current_reference_sha": "ba5dc518c2b758b868e04852852b5382eed54042",
-    "current_validation_evidence": "docs/teaching/evidence/2026-10-17-current-source-validation.json"
+    "current_reference_sha": "98f30d8b3593d80103b1a4bdbb9f0cb8cb08069e",
+    "current_validation_evidence": "docs/teaching/evidence/2026-10-17-source-98f30d8-recheck.json",
+    "github_articles": "removed; Notion preserved"
   },
   "day16_test_refactor": {
     "status": "partially applied in reference",
-    "reference_sha": "ba5dc518c2b758b868e04852852b5382eed54042",
+    "reference_sha": "98f30d8b3593d80103b1a4bdbb9f0cb8cb08069e",
     "root_only": true,
     "split_inline_unit_tests": false,
     "observed_pet_files": 4,
@@ -548,10 +662,10 @@
     "pet_actual_destination": "apps/desktop_pet/tests",
     "remaining_root_targets": 5,
     "remaining_root_nonempty_cases": 20,
-    "root_tests_local": "20 passed at unchanged source 520bfa1",
+    "root_tests_local": "20 passed with configured test environment at 98f30d8",
     "ci_gap": "test-workspace job removed while targets remain",
     "previous_draft_evidence": "docs/teaching/day16/test-relocation-evidence.json",
-    "current_reference_evidence": "docs/teaching/evidence/2026-10-17-current-source-validation.json"
+    "current_reference_evidence": "docs/teaching/evidence/2026-10-17-source-98f30d8-recheck.json"
   },
   "day16_github_articles": {
     "status": "removed_by_explicit_user_request",
@@ -572,5 +686,20 @@
     "patches_and_evidence_preserved": true,
     "next_day_advanced": false,
     "recheck_evidence": "docs/teaching/evidence/2026-10-17-source-98f30d8-recheck.json"
+  },
+  "documentation_execution_policy": {
+    "canonical": "docs/COMMON_LEARNING_RULES.md",
+    "notion_page": "3f2e51d4-5093-81dd-b8a8-ce7cb4cd3e60",
+    "current_index": "docs/teaching/current/manifest.json",
+    "progress": "docs/learning-state.json",
+    "web_and_local_same_policy": true,
+    "read_current_sources_each_run": true,
+    "cached_conversations_override": false,
+    "article_sync_implies_runtime_sync": false,
+    "runtime_source_observation": {
+      "chat": "ba5dc51 pre-existing binary; no restart this round",
+      "analytics": "3100 not listening",
+      "pet": "native GUI full acceptance not executed"
+    }
   }
 }

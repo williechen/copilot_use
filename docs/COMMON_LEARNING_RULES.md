@@ -4,7 +4,9 @@
 
 本篇集中教學方法、文章格式及 Chat／Desktop Pet／Analytics 大綱。其他教學入口只連到本篇及既有 Day，不再重述方法。原文章與程式保留於 Day／歷史封存，統整不代表完成程式同步或功能驗收。
 ## 目前進度與兩庫分工
-三專案目前已發布到 Day16，使用者已填入程式；Day15／Day16 原文與鏡像封存，後續增修於下一 Day 提出。下一篇編號沿用既有 Day17，本次同步不增加 next_day。套用與完整功能驗收分別記錄，不能從 Day 編號推算。
+三專案目前已發布到 Day16，使用者確認程式已同步。Day15／Day16 的 Notion 原文保持封存；依使用者明確要求，copilot_use 已移除 Day16 三篇鏡像及舊修訂文章，保留 Git 歷史、程式 patch 與驗證證據。後續增修於下一 Day 提出；next_day 維持既有 17，不因同步新增 Day。程式套用與完整功能驗收分別記錄。
+
+網頁版與本地版共用本篇規則及 GitHub docs/COMMON_LEARNING_RULES.md 鏡像，索引以 docs/teaching/current/manifest.json、進度以 docs/learning-state.json 為準。每次執行先重新讀取現行文件與來源 SHA；舊對話、快取、封存文章及歷史測試不能覆蓋現行規則。文件同步不等於執行檔更新；服務的後端 binary 與前端 JS／WASM 須各自記錄建置來源，版本不同先標示不同步，不宣稱同版驗收。
 教學從 rust_ai_chat 最新 main 的既有架構、程式、呼叫端與測試延伸，由使用者套用；助手對該庫的 source、README、CI、branch、PR、commit、tag及資料庫保持唯讀。copilot_use 依產品目標整合必要功能與適配，保留已有能力、安全邊界及合理差異，不按教學 Day 等待產品開發，也不為檔名一致創造平行 Port 或空架構。產品目標 P9 與學習階段 P9 分開。
 每個功能用同一條對照呈現：**文章要求 → rust_ai_chat 實作 → copilot_use 對應實作 → 驗證結果**。附文章／Day、兩庫精確 SHA、路徑／符號、實際呼叫端、對應測試及匹配來源的結果。介面不同說明適配理由；缺證據列未核實、未接通列部分完成、未執行明示，不能以更新 SHA、同名符號、文章發布或歷史 CI 宣稱同步完成。
 ## 教學方法與學習時程
@@ -39,13 +41,13 @@ Dashboard 畫面使用 Leptos 元件與 Rust 狀態管理，沿用 HTTP JSON＋S
 產品上報目標採gRPC／Protobuf及逐事件ACK，Dashboard保留HTTP JSON＋SSE；學習庫已有HTTP相容入口的演進事實保留。獨立PostgreSQL、來源／事件ID冪等與衝突、commit後通知、重試／重連／故障恢復分別驗證。Chat／Pet各自SQLite，不共享業務DB。
 後續包括可追溯AI洞察、人工審核、Chat／Pet自主授權採用／回退，以及Provider／Model／來源／功能／請求／時間的Token使用量、成本及實際可取得額度。額度未知明示未知，不由Token推算配額；用既有紀錄或合成資料驗證。
 ## 當前功能狀態與證據入口
-2026-10-17 核對 `rust_ai_chat/main` `ba5dc518c2b758b868e04852852b5382eed54042`；本機已 fast-forward、原生／WASM 建置及實際測試，沒有直接修改 source。copilot_use 本輪只同步文件與證據，產品程式未重新驗收。
-- Chat：瀏覽器讀清單→選房→送收訊及後端同房／跨房／SQLite 驗證通過。ba5dc51 已接通並實測搜尋與目前房間標記，首頁仍有建房按鈕；SSR-feature 測試 2 passed／1 failed，完整功能未通過。
-- Pet：雙窗與 IPC 骨架已存在，原生／前台測試及啟動通過；漫遊仍指向 main，原生互動 GUI／IPC 未完成驗收。
-- Analytics：Leptos SSR／Session 與 PostgreSQL 合成測試通過；實際服務因缺少登入碼設定退出。要求是初始化 admin/admin、帳密登入與登入後修改密碼，現行程式尚無此流程，不以 token／登入碼驗收代替。
-ba5dc51 僅改 Chat UI，server 17 個測試與瀏覽器搜尋／聊天已重驗；未變的 Pet／Analytics／根 tests 沿用 520bfa1 的驗證：73 個 app 一般測試、20 個剩餘根 tests、3 個 JS 契約測試通過；1 個預設 ignored DB 專項另行明確執行通過。原生 GUI、帳密流程等未完成範圍分開標示。根 tests 尚未搬完，但 source test-workspace CI job 已移除，保留追蹤，不能推定 CI 已覆蓋。
-同 SHA 遠端 CI 17/17 success，但預設 CI 未執行失敗的 SSR-feature 畫面測試，不能以 CI 成功取代該失敗。
-[目前驗證與未完成項目](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-17-current-source-validation.json)。Day15／Day16 已實作內容封存，後續補充只在下一 Day 提出；next_day 維持既有 17，本次不新建 Day。
+2026-10-17 目前來源 `rust_ai_chat/main` `98f30d8b3593d80103b1a4bdbb9f0cb8cb08069e`，本機已 fast-forward，沒有直接修改 source；copilot_use 本輪同步文件，產品程式未重新驗收。
+- Chat：首頁建房按鈕已移除，仍有登入入口；個人管理頁尚未接通。新增「查詢房間」會清空 rows、設定 loading，卻沒有發出請求或復原，清單與重新整理因此卡住。ba5dc51 的瀏覽器選房聊天結果保留為歷史，不作新版瀏覽器通過證據。
+- Pet：雙窗已存在，漫遊卻仍選取 main 控制台；正確目標是 pet 生活視窗，Control 固定。開啟／聚焦控制台仍應選 main。原生互動 GUI／IPC 尚未完整驗收。
+- Analytics：仍為 Leptos／Session 登入碼原型，未符合首次 admin/admin、帳密登入及登入後修改密碼；3100 未啟動。人員登入與來源交互換證分開追蹤。
+同 SHA 重驗：主要套件 73 passed／1 ignored；根 workspace-tests 載入既有測試設定後 20 passed（首次缺環境失敗已保留）；Chat hydrate WASM build passed；SSR-feature 2 passed／1 failed，缺少「歷史載入尚未接通」。遠端 CI 本次觀測 15 success／2 in_progress，不以預設 CI 代替 SSR 失敗或 GUI 驗收。獨立 PostgreSQL ignored 流程、JS 契約、瀏覽器及原生 GUI 本輪未重跑。
+本地 Chat HTTP 200 仍是 ba5dc51 舊 binary；本輪未重建／重啟服務，不能宣稱已執行 98f30d8。Analytics 3100 無監聽。根 tests 尚有 5 targets／20 cases，test-workspace CI job 已移除，仍須完成遷移與 CI 接續。
+[最新精確來源、結果與限制](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-17-source-98f30d8-recheck.json)；[先前 ba5dc51／520bfa1 證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-17-current-source-validation.json) 保留歷史身分。完整流程尚未驗收，不新增 Day。
 
 ## 實作、發布及驗證的分工
 每日教學核對共同總綱、相關Day、兩庫最新來源、差異、所屬測試及適用CI。每日教學發布條件僅檢視 rust_ai_chat 最新提交的 CI：即使未全部 Success 或已有失敗，教學仍可發布；須列明 rust_ai_chat 當前 CI 狀態、失敗與待修問題，不宣稱驗證通過。copilot_use 的 CI 不屬於每日教學發布 Gate；其 CI 結果只供 copilot_use 產品實作、整合及功能驗收各自判定。每日發布不等待週六工程驗收，也不把既有CI當新教學程式已驗證。
