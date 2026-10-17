@@ -251,7 +251,12 @@
       "package latest stable/MSRV/security not rechecked"
     ],
     "product_local_ipc_evidence": "docs/teaching/evidence/2026-10-17-pet-local-ipc.json",
-    "test_relocation_evidence": "docs/teaching/evidence/2026-10-17-day15-test-relocation.json"
+    "test_relocation_evidence": "docs/teaching/evidence/2026-10-17-day15-test-relocation.json",
+    "ci_evidence_backfilled_at": "2026-10-17",
+    "ci_source_sha": "fced2861bba21c33697051f685c50689f8052de8",
+    "ci_run_id": 38992992860,
+    "ci_status": "success",
+    "notion_day15_evidence_appended": true
   },
   "previous_product_validation": {
     "validated_program_sha": "39f34854b102eb96b44980d42d7b3f272307ec20",
@@ -389,7 +394,7 @@
       "pet": "3fbe51d4-5093-81d6-8666-d3031d1c8011",
       "analytics": "3fbe51d4-5093-8131-9460-de180d9e173d"
     },
-    "last_publication_status": "Day15-r3: three original pages rebuilt and read back; full relocation instructions for 10 existing tests; source not modified, Rust tests not executed, next_day unchanged"
+    "last_publication_status": "Day15-r3 original articles retained; Day15 Green SHA fced2861bba21c33697051f685c50689f8052de8 CI passed 6/6 workflows, 18/18 checks; implementation evidence appended to 3 original Notion pages; GUI/E2E formal acceptance pending; next_day unchanged"
   },
   "teaching_document": {
     "canonical": "docs/COMMON_LEARNING_RULES.md",
@@ -401,21 +406,27 @@
   "full_comparison_time": "00:00",
   "latest_source_observation": {
     "date": "2026-10-17",
-    "reference_sha": "8bbf884ed73038adbe9f7f51030bbb676ae4789f",
-    "previous_reference_sha": "3e58e650bd63bcd21ba58e7aabf751542401ef80",
-    "scope": "commit and compare read; Day15 Red and three test relocations observed; not complete Green",
+    "reference_sha": "fced2861bba21c33697051f685c50689f8052de8",
+    "previous_reference_sha": "8bbf884ed73038adbe9f7f51030bbb676ae4789f",
+    "scope": "Day15 Green source file inspection and exact-SHA GitHub Actions verification; UI/E2E manual acceptance not performed",
     "day15_articles_frozen": true,
     "day15_mirrors_modified": false,
     "tests_executed": false,
-    "ci_rechecked": false,
+    "ci_rechecked": true,
     "source_modified": false,
-    "full_lesson_applied": false,
+    "full_lesson_applied": null,
     "relocated_tests": {
       "chat": "apps/server/tests/root_hub_contract.rs",
       "pet": "crates/pet_domain/tests/cleanup_contract.rs",
       "analytics": "apps/stats_server/tests/idempotency_contract.rs"
     },
-    "ui_requirements": "docs/UI_ALIGNMENT_REQUIREMENTS.md"
+    "ui_requirements": "docs/UI_ALIGNMENT_REQUIREMENTS.md",
+    "ci_run": 38992992860,
+    "ci_status": "success",
+    "workflows_success": 6,
+    "workflows_total": 6,
+    "check_runs_success": 18,
+    "check_runs_total": 18
   },
   "ui_alignment": {
     "requirements": "docs/UI_ALIGNMENT_REQUIREMENTS.md",
@@ -458,5 +469,24 @@
     "day15_modified": false,
     "next_day_advanced": false,
     "tests_executed": false
+  },
+  "day15_ci_validation": {
+    "date": "2026-10-17",
+    "source_sha": "fced2861bba21c33697051f685c50689f8052de8",
+    "run_id": 38992992860,
+    "run_url": "https://github.com/williechen/rust_ai_chat/actions/runs/38992992860",
+    "workflow": "Test All",
+    "conclusion": "success",
+    "test_all_jobs_success": 10,
+    "test_all_jobs_total": 10,
+    "workflows_success": 6,
+    "workflows_total": 6,
+    "check_runs_success": 18,
+    "check_runs_total": 18,
+    "chat": "房間列表 API、UI RoomList、選房連結已觀察；CI passed；GUI/E2E not formally accepted",
+    "pet": "掃描確認／取消前台狀態已觀察；CI passed；真實檔案操作與 GUI/E2E not formally accepted",
+    "analytics": "Dashboard 頁面、路由與 summary 查詢接線已觀察；CI passed；真實瀏覽器及 PostgreSQL E2E not formally accepted",
+    "full_functional_acceptance": false,
+    "source_code_modified": false
   }
 }
