@@ -28,10 +28,12 @@ Refactor 整理當步實作及現有測試；例如將根 tests 的現有測試�
 後續能力包括Session／ACL、SQLite歷史與備份、WS presence／typing／reconnect／queue、Outbox、Leptos SSR／hydration、Streaming／RAG／MCP／Agent、多Persona、同意／撤回及政策回退。
 ### Desktop Pet：啟動、互動及安全操作
 基本主線：啟動既有寵物 → 控制介面即時調整 → 設定／記憶持久保存 → 授權目錄 → 掃描及SHA256預覽 → 明確確認 → 真實操作結果／還原 → Analytics紀錄。
+介面使用 Leptos，寵物顯示與控制視窗分離：200×200 寵物視窗保留動畫／拖曳／右鍵入口，控制視窗可縮放與捲動，分互動、設定、記憶、檔案、管理、更新；只接真實可用 IPC，未接通能力明示。控制面板不因開啟或切換而新增寵物。
 逐步完成五欄設定（名字／種類／喜好／個性／興趣）、選用外觀覆寫、每隻寵物獨立資料與素材、200×200等比動畫、多寵物、手動拖移與可選的自動漫遊、記憶／回想／複習／提醒、RAG／MCP／Agent、備份／還原及installer／簽章updater。安裝後的更新採啟動時檢查或手動檢查正式GitHub Release，也不要求重新安裝。
 安全檔案流程保持授權root／opaque ID、non-root、確認、symlink／TOCTOU／權限重驗、journal／receipt／Trash／restore；預覽或Domain成功狀態不能冒充filesystem成功憑證。
 ### Analytics：真實事件、查詢與管理
 基本主線：接收Chat／Pet真實動作 → 來源認證 → 去重並持久提交 → Dashboard查詢／篩選 → 趨勢與明細 → 管理紀錄 → 封存／還原／備份。
+Dashboard 畫面使用 Leptos 元件與 Rust 狀態管理，沿用 HTTP JSON＋SSE／來源授權／PostgreSQL Adapter；不另維護獨立 HTML／JavaScript 互動頁，不把服務密鑰嵌入前台。既有 Day 的教法更正依封存規則在下一 Day 提出。
 產品上報目標採gRPC／Protobuf及逐事件ACK，Dashboard保留HTTP JSON＋SSE；學習庫已有HTTP相容入口的演進事實保留。獨立PostgreSQL、來源／事件ID冪等與衝突、commit後通知、重試／重連／故障恢復分別驗證。Chat／Pet各自SQLite，不共享業務DB。
 後續包括可追溯AI洞察、人工審核、Chat／Pet自主授權採用／回退，以及Provider／Model／來源／功能／請求／時間的Token使用量、成本及實際可取得額度。額度未知明示未知，不由Token推算配額；用既有紀錄或合成資料驗證。
 ## 當前功能狀態與證據入口

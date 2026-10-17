@@ -290,7 +290,7 @@
     "new_feature": false,
     "retroactive_day13": false,
     "reference_writable": false,
-    "applied": false,
+    "applied": true,
     "tests_after_move_executed": false,
     "transition": "Retain remaining workspace-tests targets and CI until each batch is moved and verified; remove root tests package only after final batch",
     "batches": [
@@ -313,10 +313,13 @@
         "lock_change_expected": false,
         "ci_job": ".github/workflows/test.yml::test-server",
         "ci_change_required": false,
-        "applied": false,
+        "applied": true,
         "tests_before_executed": false,
         "tests_after_executed": false,
-        "notion_readback_verified": true
+        "notion_readback_verified": true,
+        "applied_reference_sha": "8bbf884ed73038adbe9f7f51030bbb676ae4789f",
+        "actual_destination": "apps/server/tests/root_hub_contract.rs",
+        "actual_target": "root_hub_contract"
       },
       {
         "project": "pet",
@@ -337,10 +340,11 @@
         "lock_change_expected": false,
         "ci_job": ".github/workflows/test.yml::test-pet-domain",
         "ci_change_required": false,
-        "applied": false,
+        "applied": true,
         "tests_before_executed": false,
         "tests_after_executed": false,
-        "notion_readback_verified": true
+        "notion_readback_verified": true,
+        "applied_reference_sha": "8bbf884ed73038adbe9f7f51030bbb676ae4789f"
       },
       {
         "project": "analytics",
@@ -359,15 +363,16 @@
         "lock_change_expected": false,
         "ci_job": ".github/workflows/test.yml::test-stats-server",
         "ci_change_required": false,
-        "applied": false,
+        "applied": true,
         "tests_before_executed": false,
         "tests_after_executed": false,
-        "notion_readback_verified": true
+        "notion_readback_verified": true,
+        "applied_reference_sha": "8bbf884ed73038adbe9f7f51030bbb676ae4789f"
       }
     ],
     "target_count_before": 12,
     "target_count_after_proposed": 9,
-    "status": "Day15-r3 lesson instructions published; not applied"
+    "status": "three Day15 batches observed relocated in reference 8bbf884e; remaining root targets retained; no fresh execution validation"
   },
   "teaching_progress": {
     "last_published_day": {
@@ -393,5 +398,31 @@
     "scope": "teaching method, four-section format and three project outlines in one article",
     "status": "single canonical rule; unimplemented Day may be revised in place; implemented content archived; changes proposed in next Day"
   },
-  "full_comparison_time": "00:00"
+  "full_comparison_time": "00:00",
+  "latest_source_observation": {
+    "date": "2026-10-17",
+    "reference_sha": "8bbf884ed73038adbe9f7f51030bbb676ae4789f",
+    "previous_reference_sha": "3e58e650bd63bcd21ba58e7aabf751542401ef80",
+    "scope": "commit and compare read; Day15 Red and three test relocations observed; not complete Green",
+    "day15_articles_frozen": true,
+    "day15_mirrors_modified": false,
+    "tests_executed": false,
+    "ci_rechecked": false,
+    "source_modified": false,
+    "full_lesson_applied": false,
+    "relocated_tests": {
+      "chat": "apps/server/tests/root_hub_contract.rs",
+      "pet": "crates/pet_domain/tests/cleanup_contract.rs",
+      "analytics": "apps/stats_server/tests/idempotency_contract.rs"
+    },
+    "ui_requirements": "docs/UI_ALIGNMENT_REQUIREMENTS.md"
+  },
+  "ui_alignment": {
+    "requirements": "docs/UI_ALIGNMENT_REQUIREMENTS.md",
+    "pet": "Leptos control window separate from 200x200 pet; six functional areas; real IPC capability gating",
+    "analytics": "Leptos components using existing HTTP JSON; HTML lesson correction deferred to next Day",
+    "status": "documented, not implemented",
+    "day15_frozen": true,
+    "next_day_advanced": false
+  }
 }
