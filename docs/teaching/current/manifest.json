@@ -1,7 +1,58 @@
 {
-  "scope": "Day16 original-page r2 consolidation; preserve applied Red; no new Day",
+  "scope": "Day16 rebuilt with complete Green and verifiable patches; Red precedes same-Day Green",
+  "revision": "r3",
   "synced_date": "2026-10-17",
   "source_sha": "b2733b7f78dce1da1aa07555122384c27109e4e8",
+  "articles": [
+    {
+      "project": "chat",
+      "day": 16,
+      "revision": "r3",
+      "notion_page_id": "3fce51d4-5093-8143-a0b9-cc9a3f93860e",
+      "notion_url": "https://app.notion.com/p/3fce51d450938143a0b9cc9a3f93860e?pvs=204",
+      "path": "docs/teaching/current/CHAT.md",
+      "four_sections": true,
+      "notion_readback_verified": true,
+      "green_patch_readback_verified": true,
+      "complete_green_supplied": true,
+      "red_applied_in_reference": true,
+      "green_applied_in_reference": false,
+      "draft_validation": "passed; details in validation.json",
+      "gui_acceptance": "not executed"
+    },
+    {
+      "project": "pet",
+      "day": 16,
+      "revision": "r3",
+      "notion_page_id": "3fce51d4-5093-81e9-aa03-d633822eee89",
+      "notion_url": "https://app.notion.com/p/3fce51d4509381e9aa03d633822eee89?pvs=204",
+      "path": "docs/teaching/current/PET.md",
+      "four_sections": true,
+      "notion_readback_verified": true,
+      "green_patch_readback_verified": true,
+      "complete_green_supplied": true,
+      "red_applied_in_reference": true,
+      "green_applied_in_reference": false,
+      "draft_validation": "passed; details in validation.json",
+      "gui_acceptance": "not executed"
+    },
+    {
+      "project": "analytics",
+      "day": 16,
+      "revision": "r3",
+      "notion_page_id": "3fce51d4-5093-813f-a38a-e37a47ae4959",
+      "notion_url": "https://app.notion.com/p/3fce51d45093813fa38ae37a47ae4959?pvs=204",
+      "path": "docs/teaching/current/ANALYTICS.md",
+      "four_sections": true,
+      "notion_readback_verified": true,
+      "green_patch_readback_verified": true,
+      "complete_green_supplied": true,
+      "red_applied_in_reference": true,
+      "green_applied_in_reference": false,
+      "draft_validation": "passed; details in validation.json",
+      "gui_acceptance": "not executed"
+    }
+  ],
   "source_ci": {
     "success": 16,
     "failure": 2,
@@ -10,53 +61,10 @@
       "test-stats-server"
     ]
   },
-  "articles": [
-    {
-      "project": "chat",
-      "day": 16,
-      "revision": "r2",
-      "notion_page_id": "3fce51d4-5093-813d-a411-e1ad2a73d329",
-      "notion_url": "https://app.notion.com/p/3fce51d45093813da411e1ad2a73d329",
-      "title": "2026-10-17｜P0 Chat Day 16｜清楚選房與聊天",
-      "path": "docs/teaching/current/CHAT.md",
-      "four_sections": true,
-      "notion_readback_verified": true,
-      "implementation_applied": "legacy Red only; revised core flow not applied",
-      "new_lesson_tests_executed": false,
-      "formal_acceptance": false
-    },
-    {
-      "project": "pet",
-      "day": 16,
-      "revision": "r2",
-      "notion_page_id": "3fce51d4-5093-8196-b41a-da9dab546654",
-      "notion_url": "https://app.notion.com/p/3fce51d450938196b41ada9dab546654",
-      "title": "2026-10-17｜P0 Pet Day 16｜寵物生活與控制雙視窗",
-      "path": "docs/teaching/current/PET.md",
-      "four_sections": true,
-      "notion_readback_verified": true,
-      "implementation_applied": "legacy Red only; revised core flow not applied",
-      "new_lesson_tests_executed": false,
-      "formal_acceptance": false
-    },
-    {
-      "project": "analytics",
-      "day": 16,
-      "revision": "r2",
-      "notion_page_id": "3fce51d4-5093-813c-96c5-dec6211d47be",
-      "notion_url": "https://app.notion.com/p/3fce51d45093813c96c5dec6211d47be",
-      "title": "2026-10-17｜P0 Analytics Day 16｜登入 Leptos 後台並查詢",
-      "path": "docs/teaching/current/ANALYTICS.md",
-      "four_sections": true,
-      "notion_readback_verified": true,
-      "implementation_applied": "legacy Red only; revised core flow not applied",
-      "new_lesson_tests_executed": false,
-      "formal_acceptance": false
-    }
-  ],
-  "previous_mirror_manifest": "docs/teaching/archive/day-15/manifest.json",
-  "previous_day16_text": "docs/teaching/archive/day-16-before-r2/",
-  "master": "docs/COMMON_LEARNING_RULES.md",
+  "code": "docs/teaching/day16/code-manifest.json",
+  "evidence": "docs/teaching/day16/validation.json",
+  "previous_revision": "docs/teaching/archive/day-16-r2/manifest.json",
+  "day15_frozen": true,
   "next_day": {
     "chat": 17,
     "pet": 17,
@@ -64,5 +72,35 @@
   },
   "day_advanced": false,
   "reference_modified": false,
-  "tests_executed_in_this_sync": false
+  "notion_reconstruction": {
+    "reason": "three prior Day16 IDs returned NOT_FOUND; restore failed target_not_found; no current matching Day16 found in project indexes/search",
+    "previous_page_ids": [
+      "3fce51d4-5093-813d-a411-e1ad2a73d329",
+      "3fce51d4-5093-8196-b41a-da9dab546654",
+      "3fce51d4-5093-813c-96c5-dec6211d47be"
+    ],
+    "new_pages": {
+      "chat": {
+        "id": "3fce51d4-5093-8143-a0b9-cc9a3f93860e",
+        "url": "https://app.notion.com/p/3fce51d450938143a0b9cc9a3f93860e?pvs=204",
+        "properties": {
+          "title": "2026-10-17｜P0 Chat Day 16｜清楚選房與聊天"
+        }
+      },
+      "pet": {
+        "id": "3fce51d4-5093-81e9-aa03-d633822eee89",
+        "url": "https://app.notion.com/p/3fce51d4509381e9aa03d633822eee89?pvs=204",
+        "properties": {
+          "title": "2026-10-17｜P0 Pet Day 16｜寵物生活與控制雙視窗"
+        }
+      },
+      "analytics": {
+        "id": "3fce51d4-5093-813f-a38a-e37a47ae4959",
+        "url": "https://app.notion.com/p/3fce51d45093813fa38ae37a47ae4959?pvs=204",
+        "properties": {
+          "title": "2026-10-17｜P0 Analytics Day 16｜登入 Leptos 後台並查詢"
+        }
+      }
+    }
+  }
 }

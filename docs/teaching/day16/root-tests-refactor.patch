@@ -59,16 +59,27 @@ diff --git a/Cargo.lock b/Cargo.lock
 diff --git a/.github/workflows/test.yml b/.github/workflows/test.yml
 --- a/.github/workflows/test.yml
 +++ b/.github/workflows/test.yml
-@@ -58,7 +58,7 @@
+@@ -30,6 +30,7 @@
+ 
+     env:
+       ANALYTICS_DATABASE_URL: postgres://postgres:postgres@localhost:5432/rust_ai_chat_test
++      ANALYTICS_TEST_DATABASE_URL: postgres://postgres:postgres@localhost:5432/rust_ai_chat_test
+       ANALYTICS_CHAT_TOKEN: local-ci-chat-token
+       ANALYTICS_PET_TOKEN: local-ci-pet-token
+       CHAT_DATABASE_URL: "sqlite::memory:"
+@@ -58,7 +59,10 @@
              libwebkit2gtk-4.1-dev
  
        - name: Test workspace
 -        run: cargo test --locked -p workspace-tests
 +        run: cargo test --locked -p chat-application -p pet-domain -p stats-server -p desktop-pet-frontend
++
++      - name: Test admin PostgreSQL login and query flow
++        run: cargo test --locked -p stats-server --lib admin::tests::login_query_postgres_and_logout_flow -- --ignored
  
    test-desktop-pet:
      runs-on: ubuntu-latest
-@@ -109,26 +109,6 @@
+@@ -109,26 +113,6 @@
        - name: Test server
          run: cargo test --locked -p server
  

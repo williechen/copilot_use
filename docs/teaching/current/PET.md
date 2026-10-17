@@ -1,27 +1,13 @@
 # 2026-10-17｜P0 Pet Day 16｜寵物生活與控制雙視窗
 
 ## 1. 學習大綱
-修訂 r2（2026-10-17）。來源：`rust_ai_chat/main` `b2733b7f78dce1da1aa07555122384c27109e4e8`；本機工作目錄仍為 `fced2861`，本輪僅 fetch／靜態讀取，未 checkout、未改原始碼。
-**狀態：舊版 Day16 的 Red 已部分套用；本次主流程為待套用教學計畫，未提供已驗證的完整實作。** 最新 SHA 的 18 個 checks 為 16 success／2 failure（`test-ui`、`test-stats-server`）；不沿用 Day15 CI 作為本篇通過證據。三篇主體只優先交付可操作的基本流程，搜尋／總數／競態是相關附加工作。
-
+修訂 r3，2026-10-17。以 `rust_ai_chat/main` `b2733b7f78dce1da1aa07555122384c27109e4e8` 為基底。**Red 是本日 Green 的前置測試；只有 Red 不算完成，也不會因此刪掉 Green 或改排下一 Day。**
+來源已有舊版 Day16 Red；本篇補齊對應 Green 與主流程可套用程式，已在獨立教學草稿驗證，尚未套用參考庫。不是只提供計畫。Day15 原文與既有程式不改。
 交付流程：開啟寵物生活視窗 → 開啟控制視窗 → 操作既有互動／睡眠／喚醒並看到雙窗一致狀態 → 使用既有聊天 → 在控制窗掃描、閱讀摘要並確認或取消。控制窗的按鈕與長內容必須可見、可捲動，不再擠進寵物小窗。
 本機 Tauri IPC 可使用；不要求新增遠端服務。確認目前只是預覽的 UI 確認，不能宣稱實際整理、刪除、Trash 或 restore 已完成。
 ## 2. 實作內容
-### Red：以雙視窗操作驗收
-保留已套用的 `day16_scan_generation_tests`（見本節末）。先記錄現有單窗無法完整顯示控制項；新增雙窗開啟、共享 revision、控制窗關閉後可再開、漫遊只移動寵物窗、掃描確認／取消的驗收案例。
-### Green：分開生活與控制
-1. `apps/desktop_pet/tauri.conf.json` 定義寵物生活窗與控制窗。寵物窗維持輕量呈現；控制窗可調整大小、可捲動。用明確 window label 與前台入口參數判定用途，不能只靠 CSS 隱藏整套控制項。
-2. `apps/desktop_pet/src/lib.rs` 保留同一份 `PetMachine`，兩窗使用既有 IPC 讀狀態及送命令，狀態變更向兩窗同步。增加開啟／聚焦控制窗的入口，明確定義關閉及退出行為。
-3. `apps/desktop_pet/src/roam.rs` 將漫遊目標指定為寵物窗，避免控制窗跟著走。前台 `main.rs`、`bridge.rs`、`index.html` 與樣式依用途呈現：生活窗顯示寵物與控制入口；控制窗放互動、既有聊天及檔案預覽。
-4. 接通現有 `scan_file_preview`、`scan_duplicate_preview`。長摘要換行，確認與取消可操作。將已套用 Red 的 generation 判斷接回兩個 IPC 完成處；取消清除預覽並讓舊結果失效。原生唯讀掃描不會因此中斷，busy 必須在舊請求完成後解除，不能提前宣稱已停止。
-5. 狀態與錯誤顯示要讓使用者知道掃描／預覽／確認各階段；不以勾選布林值冒充原生安全授權。
-### Refactor：根目錄 tests 的 Pet 批次
-`tests/pet/pet_machine.rs`、`day5_codec_tests.rs`、`cleanup_event_contract.rs`、`profile_contract.rs` → `crates/pet_domain/tests/`，保留原檔名；既有 `cleanup_contract.rs` 保留。這些是 domain 契約，不搬進前台或 Tauri crate。
-
-搬移前，以 `tests/Cargo.toml` 的 target、測試名稱與數量建立基準；搬移時保留原斷言，調整目的 package 的 dev-dependencies，再移除原 `[[test]]` 與不再使用的相依。不要拆分原始碼內嵌單元測試。同步 `.github/workflows/test.yml`：目的測試須在具備原 DB／環境設定的 job 執行；不得將需要 DB 的案例直接丟給未配置 DB 的 job。其他根目錄批次尚未完成時保留 `workspace-tests` 與 CI；全部驗證後才移除根目錄測試容器、workspace member 與空目錄，更新 lockfile。測試名稱／數量不得無故減少或重複，既有失敗與功能變更另記，不在純搬移中偷改斷言。
-
-### 舊 Day 更正補充與已套用紀錄
-Day15 原文封存。取消競態配合掃描流程處理，但不能取代雙視窗主體。以下 Red 已在來源 SHA 套用，原樣保留；函式與 IPC 接線尚待實作：
+### Red：先跑既有前置測試
+以下是已套用的原測試，保留斷言：
 ```rust
 #[cfg(test)]
 mod day16_scan_generation_tests {
@@ -35,8 +21,394 @@ mod day16_scan_generation_tests {
     }
 }
 ```
+來源原樣重跑：缺少 `accept_scan_result`，E0432，預期 Red；原 CI 的前台 check 未收集此單元測試，本次 Refactor 也補入 CI 測試命令。
+### Green：完整程式與接線
+兩個原生視窗共用同一份 PetMachine。生活窗 200×200，控制窗可縮放與捲動；控制窗關閉改為隱藏，既有入口可重新聚焦，退出按鈕才結束應用。漫遊只移動 pet 視窗。既有聊天、互動、掃描／確認／取消保留，尚無真實檔案變更 IPC。
+以下補丁包含本專案所有必要修改，無省略函式；也提供每個變更檔的完整內容。套用前核對基底 SHA 並保留自己的修改，不能對不同版本盲貼。變更入口及呼叫鏈直接見補丁，未變更檔案沿用基底。
+- [`apps/desktop_pet/tauri.conf.json` 完整檔案](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/day16/green/apps/desktop_pet/tauri.conf.json)
+- [`apps/desktop_pet/capabilities/default.json` 完整檔案](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/day16/green/apps/desktop_pet/capabilities/default.json)
+- [`apps/desktop_pet/src/lib.rs` 完整檔案](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/day16/green/apps/desktop_pet/src/lib.rs)
+- [`apps/desktop_pet/src/roam.rs` 完整檔案](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/day16/green/apps/desktop_pet/src/roam.rs)
+- [`apps/desktop_pet/frontend/index.html` 完整檔案](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/day16/green/apps/desktop_pet/frontend/index.html)
+- [`apps/desktop_pet/frontend/style.css` 完整檔案](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/day16/green/apps/desktop_pet/frontend/style.css)
+- [`apps/desktop_pet/frontend/src/main.rs` 完整檔案](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/day16/green/apps/desktop_pet/frontend/src/main.rs)
+- [`apps/desktop_pet/frontend/src/bridge.rs` 完整檔案](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/day16/green/apps/desktop_pet/frontend/src/bridge.rs)
+[下載完整 Green 補丁](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/day16/pet-green.patch)。將補丁存成 `pet-green.patch`，在參考庫根目錄操作：
+```sh
+git apply --check --ignore-whitespace pet-green.patch
+git apply --ignore-whitespace pet-green.patch
+```
+以下為同一份可套用完整補丁：
+```diff
+diff --git a/apps/desktop_pet/tauri.conf.json b/apps/desktop_pet/tauri.conf.json
+--- a/apps/desktop_pet/tauri.conf.json
++++ b/apps/desktop_pet/tauri.conf.json
+@@ -3,8 +3,8 @@
+   "productName": "Rust AI Desktop Pet",
+   "version": "0.2.11",
+   "identifier": "dev.rustai.desktop-pet",
+-  "build": { 
+-    "devUrl": "http://localhost:1420",
++  "build": {
++    "devUrl": "http://127.0.0.1:1420",
+     "frontendDist": "frontend/dist",
+     "beforeDevCommand": {
+       "script": "trunk serve --port 1420",
+@@ -18,11 +18,21 @@
+   "app": {
+     "withGlobalTauri": true,
+     "windows": [
+-      { 
++      {
+         "label": "main",
+-        "title": "Rust AI Desktop Pet",
+-        "width": 320,
+-        "height": 360,
++        "title": "Pet 控制台",
++        "width": 800,
++        "height": 680,
++        "minWidth": 360,
++        "minHeight": 420,
++        "resizable": true
++      },
++      {
++        "label": "pet",
++        "title": "Pet 生活",
++        "url": "index.html?view=pet",
++        "width": 200,
++        "height": 200,
+         "resizable": false,
+         "decorations": false,
+         "transparent": true,
+@@ -31,7 +41,7 @@
+       }
+     ]
+   },
+-  "bundle": { 
+-    "active": false 
++  "bundle": {
++    "active": false
+   }
+ }
+diff --git a/apps/desktop_pet/capabilities/default.json b/apps/desktop_pet/capabilities/default.json
+--- a/apps/desktop_pet/capabilities/default.json
++++ b/apps/desktop_pet/capabilities/default.json
+@@ -2,9 +2,12 @@
+   "$schema": "../gen/schemas/desktop-schema.json",
+   "identifier": "default",
+   "description": "Default permissions for Rust AI Desktop Pet",
+-  "windows": ["main"],
++  "windows": [
++    "main",
++    "pet"
++  ],
+   "permissions": [
+     "core:default",
+     "core:window:allow-start-dragging"
+   ]
+-}
+\ No newline at end of file
++}
+diff --git a/apps/desktop_pet/src/lib.rs b/apps/desktop_pet/src/lib.rs
+--- a/apps/desktop_pet/src/lib.rs
++++ b/apps/desktop_pet/src/lib.rs
+@@ -90,8 +90,28 @@
+     Ok(file_organizer::duplicate_preview(&scan))
+ }
+ 
++#[tauri::command]
++fn open_control_window(app: tauri::AppHandle) -> Result<(), String> {
++    let window = app.get_webview_window("main").ok_or("控制視窗不存在")?;
++    window.show().map_err(|_| "無法顯示控制視窗")?;
++    window.set_focus().map_err(|_| "無法聚焦控制視窗".into())
++}
++
++#[tauri::command]
++fn quit_pet(app: tauri::AppHandle) {
++    app.exit(0);
++}
++
+ pub fn application() {
+     tauri::Builder::default()
++        .on_window_event(|window, event| {
++            if window.label() == "main" {
++                if let tauri::WindowEvent::CloseRequested { api, .. } = event {
++                    api.prevent_close();
++                    let _ = window.hide();
++                }
++            }
++        })
+         .manage(Mutex::new(PetMachine::default()))
+         .manage(AiState::new(Arc::new(MockChatModel)))
+         .setup(|app| {
+@@ -103,6 +123,10 @@
+              * 才能 dispatch PetCommand。
+              */
+             app.on_menu_event(|app_handle, event| {
++                if event.id().0.as_str() == "open_controls" {
++                    let _ = open_control_window(app_handle.clone());
++                    return;
++                }
+                 let command = match event.id().0.as_str() {
+                     "interact" => Some(PetCommand::Interact),
+                     "sleep" => Some(PetCommand::Sleep),
+@@ -134,7 +158,9 @@
+             send_pet_command,
+             chat_with_pet,
+             scan_file_preview,
+-            scan_duplicate_preview
++            scan_duplicate_preview,
++            open_control_window,
++            quit_pet
+         ])
+         .run(tauri::generate_context!())
+         .expect("failed to run Rust AI Desktop Pet");
+diff --git a/apps/desktop_pet/src/roam.rs b/apps/desktop_pet/src/roam.rs
+--- a/apps/desktop_pet/src/roam.rs
++++ b/apps/desktop_pet/src/roam.rs
+@@ -63,7 +63,7 @@
+     let mut stalled_attempts = 0_u8;
+ 
+     loop {
+-        let window = match app.get_webview_window("main") {
++        let window = match app.get_webview_window("pet") {
+             Some(window) => window,
+             None => {
+                 println!("desktop roaming unavailable: main window not found");
+diff --git a/apps/desktop_pet/frontend/index.html b/apps/desktop_pet/frontend/index.html
+--- a/apps/desktop_pet/frontend/index.html
++++ b/apps/desktop_pet/frontend/index.html
+@@ -36,6 +36,9 @@
+       return invoke("chat_with_pet", { message });
+     };
+ 
++    window.isPetWindow = () => new URLSearchParams(location.search).get("view") === "pet";
++    window.openPetControls = () => invoke("open_control_window");
++    window.quitPet = () => invoke("quit_pet");
+     let petContextMenu = null;
+ 
+     async function getPetContextMenu() {
+@@ -47,6 +50,7 @@
+ 
+       petContextMenu = await Menu.new({
+         items: [
++          {id:"open_controls",text:"開啟控制台"},
+           {
+             id: "interact",
+             text: "互動",
+diff --git a/apps/desktop_pet/frontend/style.css b/apps/desktop_pet/frontend/style.css
+--- a/apps/desktop_pet/frontend/style.css
++++ b/apps/desktop_pet/frontend/style.css
+@@ -106,4 +106,13 @@
+ 
+ .chat-trigger {
+   cursor: pointer;
+-}
+\ No newline at end of file
++}
++/* Day16: life and controls occupy different native windows. */
++html,body{margin:0;min-height:100%;font-family:system-ui}body{overflow:auto}
++.control-shell{box-sizing:border-box;max-width:960px;padding:20px;margin:auto;background:#f5f7fb;color:#243247;min-height:100vh}
++.control-shell button{margin:6px;padding:10px;max-width:100%;height:auto;white-space:normal}
++.control-shell p,.control-shell pre{white-space:pre-wrap;overflow-wrap:anywhere;max-width:100%}
++.control-shell .chat-bubble{position:static;inset:auto;width:auto;max-width:100%;margin:16px 0;box-sizing:border-box}
++.pet-life{box-sizing:border-box;width:200px;height:200px;overflow:hidden;text-align:center;background:transparent;padding:4px}
++.pet-life .pet-face{font-size:44px}.pet-life button{padding:5px}.pet-life .error{font-size:11px}
++body{display:block}.control-shell .chat-bubble{background:white;color:#243247}.pet-life{color:#26384e}.pet-life .pet-status{gap:3px;margin:0}.pet-life .drag-handle{height:18px}.pet-life .pet-face{line-height:50px}
+diff --git a/apps/desktop_pet/frontend/src/main.rs b/apps/desktop_pet/frontend/src/main.rs
+--- a/apps/desktop_pet/frontend/src/main.rs
++++ b/apps/desktop_pet/frontend/src/main.rs
+@@ -8,6 +8,10 @@
+ use leptos::mount::mount_to_body;
+ use leptos::{prelude::*, task::spawn_local};
+ use pet_domain::PetSnapshot;
++
++fn accept_scan_result(request_generation: u64, current_generation: u64) -> bool {
++    request_generation == current_generation
++}
+ 
+ fn main() {
+     mount_to_body(|| {
+@@ -42,6 +46,7 @@
+ 
+     // 放在 App 的 signals 區塊；確認只針對目前顯示的掃描結果。
+     let (confirmed, set_confirmed) = signal(false);
++    let (generation, set_generation) = signal(0_u64);
+ 
+     {
+         let snapshot_reader = snapshot;
+@@ -72,18 +77,26 @@
+         });
+     }
+ 
++    if bridge::is_pet_window() {
++        return view! {
++            <main class="pet-life">
++                <DragHandle />
++                <BlinkController snapshot set_blinking />
++                <AnimationClock set_animation_phase />
++                <PetStatus snapshot blinking animation_phase />
++                <button on:click=move |_| spawn_local(async move {
++                    if bridge::open_controls().await.is_err() { set_error.set(Some("無法開啟控制台".into())); }
++                })>"控制台"</button>
++                <ErrorMessage error />
++            </main>
++        }.into_any();
++    }
+     view! {
+-        <main class="pet-shell">
+-            <DragHandle />
+-
+-            <BlinkController
+-                snapshot
+-                set_blinking
+-            />
+-            <AnimationClock set_animation_phase />
+-
+-            <PetStatus snapshot blinking animation_phase />
+-
++        <main class="control-shell">
++            <h1>"Pet 控制台"</h1>
++            <p>"控制台關閉後寵物仍運作；檔案功能目前只提供唯讀預覽。"</p>
++            <h2>"互動與聊天"</h2>
++            <p>{move || snapshot.get().map(|s| format!("狀態 {:?} · revision {}",s.state,s.revision)).unwrap_or_else(|| "讀取中…".into())}</p>
+             <PetControls
+                 snapshot
+                 set_snapshot
+@@ -109,11 +122,14 @@
+                  set_chat_error
+             />
+ 
++            <h2>"檔案預覽"</h2>
+             <button
+                 type="button"
+                 disabled=move || scan_loading.get() || duplicate_loading.get()
+                 on:click=move |_| {
+                     if scan_loading.get_untracked() || duplicate_loading.get_untracked() { return; }
++                    let request = generation.get_untracked().wrapping_add(1);
++                    set_generation.set(request);
+                     set_scan_loading.set(true);
+                     set_scan_status.set(None);
+                     set_error.set(None);
+@@ -122,7 +138,10 @@
+                     set_scan_status.set(None);
+                     set_duplicate_status.set(None);
+                     spawn_local(async move {
+-                        match bridge::scan_file_preview().await {
++                        let result = bridge::scan_file_preview().await;
++                        set_scan_loading.set(false);
++                        if !accept_scan_result(request, generation.get_untracked()) { return; }
++                        match result {
+                             Ok(summary) => set_scan_status.set(Some(summary)),
+                             // 不把平台錯誤中的私人路徑顯示於畫面。
+                             Err(_) => set_error.set(Some("掃描失敗，請確認已授權目錄後重試。".into())),
+@@ -144,6 +163,8 @@
+                 on:click=move |_| {
+                     // 清除過時預覽；同時只允許一次使用者請求。
+                     if duplicate_loading.get_untracked() || scan_loading.get_untracked()  { return; }
++                    let request = generation.get_untracked().wrapping_add(1);
++                    set_generation.set(request);
+                     set_duplicate_loading.set(true);
+                     set_duplicate_status.set(None);
+                     set_error.set(None);
+@@ -152,9 +173,12 @@
+                     set_scan_status.set(None);
+                     set_duplicate_status.set(None);
+                     spawn_local(async move {
+-                        match bridge::scan_duplicate_preview().await {
++                        let result = bridge::scan_duplicate_preview().await;
++                        set_duplicate_loading.set(false);
++                        if !accept_scan_result(request, generation.get_untracked()) { return; }
++                        match result {
+                             Ok(summary) => set_duplicate_status.set(Some(summary)),
+-                            Err(message) => set_error.set(Some(message)),
++                            Err(_) => set_error.set(Some("預覽失敗，請確認授權目錄後重試。".into())),
+                         }
+                         set_duplicate_loading.set(false);
+                     });
+@@ -175,8 +199,9 @@
+                 on:click=move |_| set_confirmed.set(true)
+             >"確認本次預覽"</button>
+             <button type="button"
+-                disabled=move || scan_loading.get() || duplicate_loading.get()
+                 on:click=move |_| {
++                    set_generation.update(|g| *g = g.wrapping_add(1));
++                    set_error.set(None);
+                     set_confirmed.set(false);
+                     set_scan_status.set(None);
+                     set_duplicate_status.set(None);
+@@ -187,8 +212,9 @@
+             </Show>
+ 
+             <ErrorMessage error />
++            <button on:click=move |_| spawn_local(async move { let _ = bridge::quit_pet().await; })>"退出寵物程式"</button>
+         </main>
+-    }
++    }.into_any()
+ }
+ 
+ #[component]
+diff --git a/apps/desktop_pet/frontend/src/bridge.rs b/apps/desktop_pet/frontend/src/bridge.rs
+--- a/apps/desktop_pet/frontend/src/bridge.rs
++++ b/apps/desktop_pet/frontend/src/bridge.rs
+@@ -5,6 +5,12 @@
+ 
+ #[wasm_bindgen]
+ extern "C" {
++    #[wasm_bindgen(js_namespace = window, js_name = isPetWindow)]
++    pub fn is_pet_window() -> bool;
++    #[wasm_bindgen(js_namespace = window, js_name = openPetControls)]
++    fn open_controls_js() -> Promise;
++    #[wasm_bindgen(js_namespace = window, js_name = quitPet)]
++    fn quit_pet_js() -> Promise;
+     #[wasm_bindgen(
+         js_namespace = window,
+         js_name = getPetState
+@@ -125,3 +131,12 @@
+         serde_wasm_bindgen::from_value(value).map_err(|e| e.to_string())?;
+     Ok(result.summary())
+ }
++
++pub async fn open_controls() -> Result<(), String> {
++    JsFuture::from(open_controls_js()).await.map_err(js_error)?;
++    Ok(())
++}
++pub async fn quit_pet() -> Result<(), String> {
++    JsFuture::from(quit_pet_js()).await.map_err(js_error)?;
++    Ok(())
++}
+```
+
+### Refactor：根目錄 tests 遷移，保留原斷言
+`tests/pet/pet_machine.rs`、`day5_codec_tests.rs`、`cleanup_event_contract.rs`、`profile_contract.rs` → `crates/pet_domain/tests/`，保留原檔名；既有 `cleanup_contract.rs` 保留。這些是 domain 契約，不搬進前台或 Tauri crate。
+
+搬移前，以 `tests/Cargo.toml` 的 target、測試名稱與數量建立基準；搬移時保留原斷言，調整目的 package 的 dev-dependencies，再移除原 `[[test]]` 與不再使用的相依。不要拆分原始碼內嵌單元測試。同步 `.github/workflows/test.yml`：目的測試須在具備原 DB／環境設定的 job 執行；不得將需要 DB 的案例直接丟給未配置 DB 的 job。其他根目錄批次尚未完成時保留 `workspace-tests` 與 CI；全部驗證後才移除根目錄測試容器、workspace member 與空目錄，更新 lockfile。測試名稱／數量不得無故減少或重複，既有失敗與功能變更另記，不在純搬移中偷改斷言。
+
+
+完整 [根目錄 tests 遷移補丁](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/day16/root-tests-refactor.patch) 包含 8 份原測試搬移、空 target 清理、Cargo／lock／CI 更新；[逐檔 SHA256 與案例清單](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/day16/test-relocation-evidence.json) 證明 38 個案例原文不變，不拆原始檔內嵌測試。
+**此共同補丁要在三份 Green 全部套用後才執行一次**；不要只搬單一專案就先刪掉其餘 workspace-tests。
+```sh
+git apply --check --ignore-whitespace root-tests-refactor.patch
+git apply --ignore-whitespace root-tests-refactor.patch
+cargo test --locked -p chat-application -p pet-domain -p stats-server -p desktop-pet-frontend
+```
+CI 的相關整合測試保留於有 PostgreSQL 與 fixture 環境的 job，移除會缺 DB 的重複 stats-server job；新增前台單元測試執行。真實 DB 專項需另行明確啟用，不用 ignored 冒充已驗收。
+### 舊 Day 更正補充
+Day15 保持封存。舊版 Day16 的搜尋／取消／總數 Red 保留，Green 已補回並配合主流程；全文與程式不再換成只有工作清單。修訂前文字可由 Git 歷史追溯。Notion 舊 Day16 ID 目前 NOT_FOUND、還原工具也回 target_not_found，因此按本次「重建 Day16」要求，在各原專案入口下重建同一 Day 的唯一現行頁並更新索引；不新增 Day17、不提高 next_day。
 ## 3. 套件版本
-沿用來源 workspace 0.2.15／edition 2024；Tauri 宣告 2.12、tauri-build 2.7、Leptos CSR 0.8。精確版本依來源 Cargo.lock。雙視窗不要求新增遠端 IPC 套件；未核實官方最新 stable 或 MSRV。
+Tauri 2.12.4、tauri-build 2.7.3、Leptos 0.8.22。
+以上為本輪實際 Cargo.lock 解析版本，workspace 0.2.15／edition 2024；native／WASM 檢查如第 4 節。沒有宣稱官方最新 stable、MSRV 或安全公告已重新核實。全檔案與 lock 的一致性見 [程式清單](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/day16/code-manifest.json)。
 ## 4. 驗證項目
-`cargo test -p desktop-pet --lib`；`cargo test -p desktop-pet-frontend day16_scan_generation_tests`；`cargo check -p desktop-pet-frontend --target wasm32-unknown-unknown`；搬移後 `cargo test -p pet-domain`。前台 host 測試若受 WASM 限制須改用可執行 target 並記錄，不能虛報通過。原生驗收：雙窗、狀態同步、控制項可見、聊天、掃描／確認／取消、控制窗重開、漫遊目標。
-本輪只核對來源、已套用 Red 與遠端 CI，**上述新主流程、Green、tests 搬移及驗收命令均未執行**。來源 Red 的預期失敗與非預期錯誤要分開記錄；修正後重新檢查同一 SHA 的結果，不能刪除測試讓 CI 變綠。完成條件是主流程可操作及相關驗證通過，不是只有頁面發布或 helper 測試通過。
+### 已執行結果
+`cargo test -p desktop-pet-frontend`：8 passed；Pet native check 與前台 WASM check：passed。
+三專案根目錄搬移與相關回歸合計 72 passed、0 failed，另有 1 個 DB 專項預設 ignored；該專項已另外明確執行並通過，不能與預設批次混算。完整四份補丁在乾淨基底的 39 個路徑已實際套用並比對完整內容。
+```sh
+cargo test -p desktop-pet-frontend
+cargo check -p desktop-pet
+cargo check -p desktop-pet-frontend --target wasm32-unknown-unknown
+```
+詳細結果與日誌：[驗證紀錄](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/day16/validation.json)、[日誌](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/day16/logs/)。
+### 待執行的人工流程驗收
+尚未執行新雙視窗 GUI／真實 IPC E2E：啟動雙窗→互動／睡眠／喚醒同步 revision→關閉控制窗後寵物仍在→由生活窗重開→控制窗縮放及捲動→既有 Mock 聊天→專用授權目錄掃描→確認／取消→取消後舊結果不得復活→漫遊只移動生活窗。這些檢查必須在原生 Tauri 執行，不能以純瀏覽器假 bridge 冒充。
+### 來源 CI 與套用狀態
+[來源 Test All](https://github.com/williechen/rust_ai_chat/actions/runs/39005304871) 的最新基底為 16 success／2 failure：`test-ui`、`test-stats-server`。本輪以本機 Red 重現相應缺實作／匯入錯誤，再驗證教學 Green；參考庫未套用，遠端 CI 未被本輪修復。**教學 Green 可用與本機檢查通過，不等於參考庫已 Green，也不等於上述人工 GUI 已驗收。**

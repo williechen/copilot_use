@@ -50,7 +50,7 @@
     ]
   },
   "patches": {
-    "root-tests-refactor.patch": "39bd03b9010f8f02c832fb01631701de4cb409bee0a33e96c152f529b2dd34cf",
+    "root-tests-refactor.patch": "bb264fd45650795ad8949c4c816b56c8d5e29123ba8e7734431542eef2c50feb",
     "chat-green.patch": "ad400d6f545d365d0436db799803ce921d1170e9c1117ac9dd500590e625f1a7",
     "pet-green.patch": "86f8a5ea05be1022ff23d99a9f6fa1b7c685272b29f46a2b57e95a9b7eb6ac46",
     "analytics-green.patch": "25537f1fbe1f4486fa963aa27b7e48fa6cad715e52d14b8c6dc384e2dc200ebc"

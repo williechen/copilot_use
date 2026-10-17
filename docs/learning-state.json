@@ -53,7 +53,8 @@
     "phase_transition": "到期切換且不延後；功能未完成則原階段學習未完成，原項目跨階段補加，完工後回填原階段證據",
     "functional_progress": "新增可操作功能／接通流程為每日主體；條件補充回原功能，不把單點 API／純測試／欄位及狀態碼當成完整流程。三專案並行追蹤，不預排 Day、不自動推進學習階段。",
     "synchronization_judgment": "核對與同步判定依「文章要求 → rust_ai_chat 實作 → copilot_use 對應實作 → 驗證結果」逐項追溯：記錄文章頁面／Day、兩庫精確 SHA、實作路徑與符號、實際呼叫端、對應測試及匹配來源的驗證結果；介面不同須說明合理差異與適配理由。缺少證據標示未核實，只有定義／單元測試而未接通流程標示部分完成，未執行標示未執行；不得以讀過文章、更新 SHA、同名符號或歷史 CI 判定同步完成。",
-    "day_revision": "未實作 Day 可在既有原頁重整，更新修訂版與來源、同步同一索引及鏡像，不另建相同專案／Day。已實作內容即封存，保留原文、程式及證據；修改方案只在下一 Day 的 Refactor 後「舊 Day 更正補充」提出。部分已實作時保留已實作段落，只重整尚未實作部分；實作狀態不明時先標未核實，不當作未實作覆寫。文章修訂不新增 Day，也不推進 next_day。"
+    "day_revision": "未實作 Day 可在既有原頁重整，更新修訂版與來源、同步同一索引及鏡像，不另建相同專案／Day。已實作內容即封存，保留原文、程式及證據；修改方案只在下一 Day 的 Refactor 後「舊 Day 更正補充」提出。部分已實作時保留已實作段落，只重整尚未實作部分；實作狀態不明時先標未核實，不當作未實作覆寫。文章修訂不新增 Day，也不推進 next_day。",
+    "red_green": "Red is the prerequisite test for same-feature Green; preserve applied tests and provide complete Green in the same Day; distinguish expected Red from test/import/environment errors"
   },
   "curriculum": {
     "stage_count": 13,
@@ -232,31 +233,32 @@
   },
   "article_sync": {
     "checked_date": "2026-10-17",
-    "operation": "consolidate existing Day16 original pages; preserve applied Red and Day15 snapshots",
+    "operation": "rebuild missing Day16 with full Green, original Red, root tests migration and validation",
     "source_sha": "b2733b7f78dce1da1aa07555122384c27109e4e8",
     "current_articles": "docs/teaching/current/manifest.json",
     "existing_day": 16,
-    "revision": "r2",
+    "revision": "r3",
     "four_sections": true,
     "new_day_published": false,
     "next_day_advanced": false,
-    "implementation_applied": "legacy Red only",
-    "new_lesson_tests_executed": false,
+    "complete_green_supplied": true,
+    "implementation_applied": "draft only; reference unchanged",
+    "new_lesson_tests_executed": true,
     "notion_readback_verified": true,
-    "previous_sync_evidence": "docs/teaching/archive/day-14/manifest.json",
-    "scope": "documentation consolidation and static source / exact-SHA CI inspection",
+    "scope": "native compiler / WASM / unit and router+PostgreSQL validation in draft; GUI unexecuted",
+    "evidence": "docs/teaching/day16/validation.json",
+    "source_ci": {
+      "success": 16,
+      "failure": 2,
+      "failed": [
+        "test-ui",
+        "test-stats-server"
+      ]
+    },
     "blockers": [
-      "core flow Green code not yet supplied/applied/validated",
-      "source test-ui and test-stats-server failing",
-      "new native/GUI/DB validation not executed"
-    ],
-    "product_local_ipc_evidence": "docs/teaching/evidence/2026-10-17-pet-local-ipc.json",
-    "test_relocation_evidence": "docs/teaching/evidence/2026-10-17-day15-test-relocation.json",
-    "ci_evidence_backfilled_at": "2026-10-17",
-    "ci_source_sha": "fced2861bba21c33697051f685c50689f8052de8",
-    "ci_run_id": 38992992860,
-    "ci_status": "success",
-    "notion_day15_evidence_appended": true
+      "Reference Green not applied under read-only constraint",
+      "New browser/native GUI acceptance not executed"
+    ]
   },
   "previous_product_validation": {
     "validated_program_sha": "39f34854b102eb96b44980d42d7b3f272307ec20",
@@ -390,11 +392,11 @@
     "validation_status": "record separately per lesson and exact source; no validation inferred from Day number",
     "historical_numbering_record": "docs/teaching/archive/formal-day-numbering.json",
     "last_published_notion_pages": {
-      "chat": "3fce51d4-5093-813d-a411-e1ad2a73d329",
-      "pet": "3fce51d4-5093-8196-b41a-da9dab546654",
-      "analytics": "3fce51d4-5093-813c-96c5-dec6211d47be"
+      "chat": "3fce51d4-5093-8143-a0b9-cc9a3f93860e",
+      "pet": "3fce51d4-5093-81e9-aa03-d633822eee89",
+      "analytics": "3fce51d4-5093-813f-a38a-e37a47ae4959"
     },
-    "last_publication_status": "Day16 r2 consolidated in original pages; legacy Red partially applied; revised core flow is plan only; no functional acceptance"
+    "last_publication_status": "Day16 r3 rebuilt after prior IDs unavailable; complete Green supplied and draft-validated; reference Red applied; reference Green not applied; GUI not accepted"
   },
   "teaching_document": {
     "canonical": "docs/COMMON_LEARNING_RULES.md",
@@ -435,7 +437,8 @@
     "status": "requirements confirmed; no new layout source changes applied",
     "day15_frozen": true,
     "next_day_advanced": false,
-    "chat": "confirmed: Leptos room sidebar, message area and multiline composer; responsive layout, real states, separate management routes; not implemented"
+    "chat": "confirmed: Leptos room sidebar, message area and multiline composer; responsive layout, real states, separate management routes; not implemented",
+    "day16_green": "complete draft code supplied and native/WASM checks passed; reference not modified; GUI not accepted"
   },
   "service_credentials": {
     "status": "requirements_confirmed_not_implemented",
@@ -468,7 +471,8 @@
     "machine_auth": "separate source identity for ingestion/pairing/renewal",
     "day15_modified": false,
     "next_day_advanced": false,
-    "tests_executed": false
+    "tests_executed": false,
+    "day16_green": "Leptos SSR login/query/logout and Session PostgreSQL router flow passed in draft; reference not modified; browser GUI not executed"
   },
   "day15_ci_validation": {
     "date": "2026-10-17",
@@ -492,29 +496,58 @@
   "day16_publication": {
     "date": "2026-10-17",
     "source_sha": "b2733b7f78dce1da1aa07555122384c27109e4e8",
-    "source_ci": "16 success; 2 failure: test-ui, test-stats-server",
-    "new_teaching_code_tested": false,
+    "source_ci": {
+      "success": 16,
+      "failure": 2,
+      "failed": [
+        "test-ui",
+        "test-stats-server"
+      ]
+    },
+    "new_teaching_code_tested": true,
     "source_code_modified": false,
     "notion_pages": {
       "chat": {
-        "id": "3fce51d4-5093-813d-a411-e1ad2a73d329",
-        "parent": "3f3e51d4-5093-807d-a638-c336e857543a",
-        "readback_verified": true
+        "id": "3fce51d4-5093-8143-a0b9-cc9a3f93860e",
+        "url": "https://app.notion.com/p/3fce51d450938143a0b9cc9a3f93860e?pvs=204",
+        "readback_verified": true,
+        "complete_green_patch_verified": true
       },
       "pet": {
-        "id": "3fce51d4-5093-8196-b41a-da9dab546654",
-        "parent": "3f3e51d4-5093-8067-923a-e5a424d30950",
-        "readback_verified": true
+        "id": "3fce51d4-5093-81e9-aa03-d633822eee89",
+        "url": "https://app.notion.com/p/3fce51d4509381e9aa03d633822eee89?pvs=204",
+        "readback_verified": true,
+        "complete_green_patch_verified": true
       },
       "analytics": {
-        "id": "3fce51d4-5093-813c-96c5-dec6211d47be",
-        "parent": "3f3e51d4-5093-817e-afae-e0cfc9ea4cc8",
-        "readback_verified": true
+        "id": "3fce51d4-5093-813f-a38a-e37a47ae4959",
+        "url": "https://app.notion.com/p/3fce51d45093813fa38ae37a47ae4959?pvs=204",
+        "readback_verified": true,
+        "complete_green_patch_verified": true
       }
     },
-    "status": "legacy Red applied; revised core flow planned, not implemented or tested",
-    "revision": "r2",
+    "status": "complete lesson code supplied; draft tests/checks passed; reference not modified; GUI pending",
+    "revision": "r3",
     "root_tests_migration": "planned; no per-source-file unit test extraction",
-    "next_day_advanced": false
+    "next_day_advanced": false,
+    "complete_green_supplied": true,
+    "test_scope": "draft only; see validation.json",
+    "green_applied_to_reference": false,
+    "previous_page_ids": [
+      "3fce51d4-5093-813d-a411-e1ad2a73d329",
+      "3fce51d4-5093-8196-b41a-da9dab546654",
+      "3fce51d4-5093-813c-96c5-dec6211d47be"
+    ],
+    "previous_page_restore": "failed target_not_found"
+  },
+  "day16_test_refactor": {
+    "status": "draft applied and verified; reference unchanged",
+    "root_only": true,
+    "split_inline_unit_tests": false,
+    "files": 8,
+    "cases_byte_identical": 38,
+    "related_suite_passed": 72,
+    "evidence": "docs/teaching/day16/test-relocation-evidence.json",
+    "ci_db_flow_explicit": true
   }
 }
