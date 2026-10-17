@@ -232,11 +232,11 @@
   },
   "article_sync": {
     "checked_date": "2026-10-17",
-    "operation": "revise existing unimplemented Day15 in place; archive implemented Day14 mirrors; sync canonical rules",
+    "operation": "rebuild existing Day15 pages in place with concrete per-project test relocation in section 2 Refactor",
     "source_sha": "3e58e650bd63bcd21ba58e7aabf751542401ef80",
     "current_articles": "docs/teaching/current/manifest.json",
     "existing_day": 15,
-    "revision": "r2",
+    "revision": "r3",
     "four_sections": true,
     "new_day_published": false,
     "next_day_advanced": false,
@@ -250,7 +250,8 @@
       "new lesson code/native/WASM/GUI/DB tests not executed",
       "package latest stable/MSRV/security not rechecked"
     ],
-    "product_local_ipc_evidence": "docs/teaching/evidence/2026-10-17-pet-local-ipc.json"
+    "product_local_ipc_evidence": "docs/teaching/evidence/2026-10-17-pet-local-ipc.json",
+    "test_relocation_evidence": "docs/teaching/evidence/2026-10-17-day15-test-relocation.json"
   },
   "previous_product_validation": {
     "validated_program_sha": "39f34854b102eb96b44980d42d7b3f272307ec20",
@@ -291,7 +292,82 @@
     "reference_writable": false,
     "applied": false,
     "tests_after_move_executed": false,
-    "transition": "Retain remaining workspace-tests targets and CI until each batch is moved and verified; remove root tests package only after final batch"
+    "transition": "Retain remaining workspace-tests targets and CI until each batch is moved and verified; remove root tests package only after final batch",
+    "batches": [
+      {
+        "project": "chat",
+        "from": "tests/server/day5_tests.rs",
+        "to": "apps/server/tests/room_hub_contract.rs",
+        "source_sha256": "03a90292ffcfb1c618442473ff08629baa757f9e72c2d8767a72320bf0bdb548",
+        "old_target": "server_day5_tests",
+        "package": "server",
+        "new_target": "room_hub_contract",
+        "test_names": [
+          "message_stays_inside_room",
+          "subscribers_share_events",
+          "last_receiver_cleanup_allows_new_subscription",
+          "count_tracks_receiver_lifecycle"
+        ],
+        "assertions_preserved": true,
+        "cargo_dependency_changes": "none",
+        "lock_change_expected": false,
+        "ci_job": ".github/workflows/test.yml::test-server",
+        "ci_change_required": false,
+        "applied": false,
+        "tests_before_executed": false,
+        "tests_after_executed": false,
+        "notion_readback_verified": true
+      },
+      {
+        "project": "pet",
+        "from": "tests/pet/cleanup_contract.rs",
+        "to": "crates/pet_domain/tests/cleanup_contract.rs",
+        "source_sha256": "6f10b065cba9e81f5266d68948ae7a7310818e916925e6e2da2efad9e5ab508e",
+        "old_target": "pet_cleanup_contract",
+        "package": "pet-domain",
+        "new_target": "cleanup_contract",
+        "test_names": [
+          "preview_cannot_be_counted_or_completed",
+          "confirmed_success_counts_only_after_completion",
+          "failed_operation_never_counts",
+          "four_legacy_operation_states_preserve_counting_rule"
+        ],
+        "assertions_preserved": true,
+        "cargo_dependency_changes": "none",
+        "lock_change_expected": false,
+        "ci_job": ".github/workflows/test.yml::test-pet-domain",
+        "ci_change_required": false,
+        "applied": false,
+        "tests_before_executed": false,
+        "tests_after_executed": false,
+        "notion_readback_verified": true
+      },
+      {
+        "project": "analytics",
+        "from": "tests/analytics/idempotency_contract.rs",
+        "to": "apps/stats_server/tests/idempotency_contract.rs",
+        "source_sha256": "fefd30adaf3436382a1454ed82a9f99355fc6bfbb310192af929f3014e1e2be4",
+        "old_target": "analytics_idempotency_contract",
+        "package": "stats-server",
+        "new_target": "idempotency_contract",
+        "test_names": [
+          "duplicate_is_counted_once_across_retries",
+          "event_identity_deduplicates_per_source"
+        ],
+        "assertions_preserved": true,
+        "cargo_dependency_changes": "none",
+        "lock_change_expected": false,
+        "ci_job": ".github/workflows/test.yml::test-stats-server",
+        "ci_change_required": false,
+        "applied": false,
+        "tests_before_executed": false,
+        "tests_after_executed": false,
+        "notion_readback_verified": true
+      }
+    ],
+    "target_count_before": 12,
+    "target_count_after_proposed": 9,
+    "status": "Day15-r3 lesson instructions published; not applied"
   },
   "teaching_progress": {
     "last_published_day": {
@@ -308,7 +384,7 @@
       "pet": "3fbe51d4-5093-81d6-8666-d3031d1c8011",
       "analytics": "3fbe51d4-5093-8131-9460-de180d9e173d"
     },
-    "last_publication_status": "Day15-r2: existing three pages revised and read back; code not applied; tests not executed; no new Day"
+    "last_publication_status": "Day15-r3: three original pages rebuilt and read back; full relocation instructions for 10 existing tests; source not modified, Rust tests not executed, next_day unchanged"
   },
   "teaching_document": {
     "canonical": "docs/COMMON_LEARNING_RULES.md",

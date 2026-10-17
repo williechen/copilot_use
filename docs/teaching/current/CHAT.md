@@ -4,7 +4,7 @@
 
 ## 1. 學習大綱
 主體 Red 5 分＋Green 15 分。使用者從首頁讀取 SQLite 房間列表、選房進入現有聊天室；保留建立房間功能。API 與畫面是同一主功能的必要接線，不各算新功能。登入／ACL 尚缺，這是本機學習流程；正式私人房間須先授權過濾。
-來源：rust_ai_chat/main `3e58e650bd63bcd21ba58e7aabf751542401ef80`；2026-10-17 重新讀取 main、相關 source／呼叫端及 CI，六個 workflow 均 success。這是既有來源 CI，不能驗證下列教學增量。copilot_use 教學分支基準 `adad4f26964b2518f47a9fde76544b544cd44334`；產品 `9f632c76ee432d77c1d20f46da9485d982d49c9e` 僅沿用舊靜態證據，本次未重新驗收產品。修訂版 Day15-r2：沿用原頁，原頁標記未套用且最新 main 缺少本次入口，故重整未實作內容。程式未套用、測試未執行、GUI／流程未驗收。
+來源：rust_ai_chat/main `3e58e650bd63bcd21ba58e7aabf751542401ef80`；2026-10-17 重新讀取 main、相關 source／呼叫端及 CI，六個 workflow 均 success。這是既有來源 CI，不能驗證下列教學增量。copilot_use 教學分支基準 `adad4f26964b2518f47a9fde76544b544cd44334`；產品 `9f632c76ee432d77c1d20f46da9485d982d49c9e` 僅沿用舊靜態證據，本次未重新驗收產品。修訂版 Day15-r3（補齊舊 tests 搬移）：沿用原頁，原頁標記未套用且最新 main 缺少本次入口，故重整未實作內容。程式未套用、測試未執行、GUI／流程未驗收。
 靜態現況：`crates/ui/src/lib.rs::HomePage` 只有 create_room；`room_api.rs` 只有 POST；server 的 GET 僅支援單房間。既有 Day14 不改寫。
 ## 2. 實作內容
 ### Red
@@ -130,6 +130,87 @@ fn RoomList() -> impl IntoView {
 完整呼叫鏈：首頁按鈕 → room_api::list_rooms → GET /api/rooms → RoomRepository::list → SQLite → Leptos 列表 → /room/\{id\} → 既有 RoomPage／ChatPage／WebSocket。未修改其他檔案 N/A；沒有重做平行 Port。
 ### Refactor
 共用 RoomDetails 後端 DTO；前台暫用現有 serde_json，待契約穩定再抽共享 DTO。保留所有 trait 替身及舊測試覆蓋，未搬完根 tests 不刪除 target／CI。既有聊天歷史、登入／ACL、重新連線未在本日宣稱完成。
+#### 本日舊 tests 搬移：4 個既有測試（待使用者套用）
+本批與本日主功能一起做，不計入 Red＋Green 主體時數。首頁選房後，聊天室必須維持房間隔離及訂閱生命週期。RoomHub 是既有公開 API，不為搬測試新增 production API。
+來源固定為 rust_ai_chat/main `3e58e650bd63bcd21ba58e7aabf751542401ef80`，已核對原測試、owning package Cargo、公開呼叫端與 `.github/workflows/test.yml`；目的檔目前不存在。
+- 來源：`tests/server/day5_tests.rs`（舊 target `server_day5_tests`）。
+- 目的：`apps/server/tests/room_hub_contract.rs`（package `server`，Cargo 自動整合測試 target `room_hub_contract`）。
+- 原測試 SHA256：`03a90292ffcfb1c618442473ff08629baa757f9e72c2d8767a72320bf0bdb548`；移動後檔案內容、函式名稱及斷言逐位元保留，共 4 個 `#[test]`。
+先在原位置建立基線（預期 4 個測試；實際未執行）：
+```bash
+cargo test --locked -p workspace-tests --test server_day5_tests
+```
+使用者在學習庫套用時，先檢查目的不存在，再移動；本次助手沒有執行以下修改：
+```bash
+mkdir -p apps/server/tests
+git mv tests/server/day5_tests.rs apps/server/tests/room_hub_contract.rs
+```
+目的檔完整最終內容如下（與原檔相同，不另複製保留兩份）：
+```rust
+use server::hub::RoomHub;
+use shared::ServerEvent;
+use tokio::sync::broadcast::error::TryRecvError;
+
+#[test]
+fn message_stays_inside_room() {
+    let hub = RoomHub::new(8);
+    let (_a_sender, mut a) = hub.subscribe("room-a".into());
+    let (_b_sender, mut b) = hub.subscribe("room-b".into());
+    hub.publish("room-a".into(), ServerEvent::Pong);
+    assert_eq!(a.try_recv().unwrap(), ServerEvent::Pong);
+    assert!(matches!(b.try_recv(), Err(TryRecvError::Empty)));
+}
+
+#[test]
+fn subscribers_share_events() {
+    let hub = RoomHub::new(8);
+    let (_sender1, mut one) = hub.subscribe("same".into());
+    let (_sender2, mut two) = hub.subscribe("same".into());
+    hub.publish("same".into(), ServerEvent::Pong);
+    assert_eq!(one.try_recv().unwrap(), ServerEvent::Pong);
+    assert_eq!(two.try_recv().unwrap(), ServerEvent::Pong);
+}
+
+#[test]
+fn last_receiver_cleanup_allows_new_subscription() {
+    let hub = RoomHub::new(8);
+    let (sender, receiver) = hub.subscribe("room".into());
+    drop(receiver);
+    hub.cleanup("room".into(), &sender);
+    let (_new_sender, mut new_receiver) = hub.subscribe("room".into());
+    hub.publish("room".into(), ServerEvent::Pong);
+    assert_eq!(new_receiver.try_recv().unwrap(), ServerEvent::Pong);
+}
+
+#[test]
+fn count_tracks_receiver_lifecycle() {
+    let hub = RoomHub::new(8);
+    assert_eq!(hub.subscriber_count("r"), 0);
+    let (sender, receiver) = hub.subscribe("r".into());
+    assert_eq!(hub.subscriber_count("r"), 1);
+    drop(receiver);
+    hub.cleanup("r".into(), &sender);
+    assert_eq!(hub.subscriber_count("r"), 0);
+}
+```
+在 `tests/Cargo.toml` **只刪除**本批的完整 target 區塊：
+```toml
+[[test]]
+name = "server_day5_tests"
+path = "server/day5_tests.rs"
+```
+owning package 的 `Cargo.toml`：N/A，原有依賴已涵蓋本檔 imports，且沒有 autotests=false，Cargo 自動發現目的 tests；不加重複 \[\[test\]\]，不加平行 workspace。根 `tests/Cargo.toml` 的其他 targets 與 dev-dependencies 保留；根 `Cargo.toml` 的 "tests" member 保留。依賴圖未改，本批 Cargo.lock 預期 N/A；若 --locked 指出 lock 不一致，先查明原因，不能改用非 locked 掩蓋。
+CI 已核對：`.github/workflows/test.yml::test-server` 的 `cargo test --locked -p server` 自動收錄新位置；`test-workspace` 繼續測其餘根 targets。workflow 本批 N/A，不能刪除 workspace-tests job。保留既有 [hub.rs](http://hub.rs) 內嵌測試；這批只搬外層整合測試。
+搬完後執行（以下全部待執行）：
+```bash
+cargo test --locked -p server --test room_hub_contract
+cargo test --locked -p server
+cargo test --locked -p workspace-tests
+cargo fmt --all -- --check
+git diff --check
+git diff --summary
+```
+核對 4 個測試名稱／斷言不減少，舊 target 已取消且來源不再留一份、新 target 只收錄一次。三篇全部套用後，根 manifest 從 12 個 target 減至 9 個；剩餘 9 個與 CI 保留，待後續相關功能分批搬完並驗證後才移除根 tests。不以「檔案已移動」或既有 CI 代替搬後測試通過。
 ### 舊 Day 更正補充
 Day14 已實作，原文封存不回填。本次只原頁重整未套用 Day15：將原 API 切片接到首頁與選房流程，沒有新增第二個 Day15。
 ## 3. 套件版本
@@ -137,3 +218,4 @@ Day14 已實作，原文封存不回填。本次只原頁重整未套用 Day15�
 ## 4. 驗證項目
 待執行：`cargo test --manifest-path apps/server/Cargo.toml list_rooms_returns_persisted_room`；`cargo test --workspace --locked`；`cargo check -p ui --features ssr`；`cargo check -p ui --features hydrate --target wasm32-unknown-unknown`；`cargo fmt --all -- --check`。
 GUI 從真實首頁驗證載入、空列表、讀取失敗、重試、選房、既有建房後重返列表與 SQLite 重啟保留。HTTP 確認 GET 200／DB 故障 500／POST 201；以兩個瀏覽器驗證所選房間 WS。上述命令、手動 Red／Green、DB 與 GUI 全部未執行。既有 CI success 只適用來源 SHA；不得標示本次增量通過。
+本輪 r3 文件重建驗證：已靜態核對本批來源／目的、4 個測試及 Cargo／CI 收錄；實際搬移、搬前與搬後測試均未執行，rust_ai_chat 保持唯讀。既有主功能程式與 Pet 本機局部證據沿用 r2，不因本輪文件修訂視為已套用或重新驗收。
