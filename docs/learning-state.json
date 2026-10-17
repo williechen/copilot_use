@@ -5,9 +5,9 @@
   "fixed_tag": "v0.2.1",
   "fixed_tag_sha": "9bcae7c5d139f75ed08b4daffece602a71fdab34",
   "next_day": {
-    "chat": 16,
-    "pet": 16,
-    "analytics": 16
+    "chat": 17,
+    "pet": 17,
+    "analytics": 17
   },
   "last_full_comparison": "2026-10-16T22:47:14.399027+08:00",
   "next_full_comparison": "2026-10-24T00:00:00+08:00",
@@ -394,7 +394,7 @@
       "pet": "3fbe51d4-5093-81d6-8666-d3031d1c8011",
       "analytics": "3fbe51d4-5093-8131-9460-de180d9e173d"
     },
-    "last_publication_status": "Day15-r3 original articles retained; Day15 Green SHA fced2861bba21c33697051f685c50689f8052de8 CI passed 6/6 workflows, 18/18 checks; implementation evidence appended to 3 original Notion pages; GUI/E2E formal acceptance pending; next_day unchanged"
+    "last_publication_status": "2026-10-17 P0 Day16: Chat/Pet/Analytics original Notion child pages created and read back; each contains four sections, Rust code and source SHA fced2861; source CI 6/6 workflows and 18/18 checks success; new teaching code not applied/tested; next_day 17 committed after readback"
   },
   "teaching_document": {
     "canonical": "docs/COMMON_LEARNING_RULES.md",
@@ -488,5 +488,30 @@
     "analytics": "Dashboard 頁面、路由與 summary 查詢接線已觀察；CI passed；真實瀏覽器及 PostgreSQL E2E not formally accepted",
     "full_functional_acceptance": false,
     "source_code_modified": false
+  },
+  "day16_publication": {
+    "date": "2026-10-17",
+    "source_sha": "fced2861bba21c33697051f685c50689f8052de8",
+    "source_ci": "success",
+    "new_teaching_code_tested": false,
+    "source_code_modified": false,
+    "notion_pages": {
+      "chat": {
+        "id": "3fce51d4-5093-813d-a411-e1ad2a73d329",
+        "parent": "3f3e51d4-5093-807d-a638-c336e857543a",
+        "readback_verified": true
+      },
+      "pet": {
+        "id": "3fce51d4-5093-8196-b41a-da9dab546654",
+        "parent": "3f3e51d4-5093-8067-923a-e5a424d30950",
+        "readback_verified": true
+      },
+      "analytics": {
+        "id": "3fce51d4-5093-813c-96c5-dec6211d47be",
+        "parent": "3f3e51d4-5093-817e-afae-e0cfc9ea4cc8",
+        "readback_verified": true
+      }
+    },
+    "status": "teaching published; source CI passed; not applied; no functional acceptance"
   }
 }
