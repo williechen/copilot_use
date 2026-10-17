@@ -1,14 +1,13 @@
-# Day16 封存與目前驗證入口
+# Day16 封存原文與程式驗證入口
 
+使用者確認 Day16 程式已同步，依要求移除本分支三篇文章及兩組舊修訂文章；Git 歷史保留。Notion Day16 原文仍封存，程式 patch 與歷次測試證據保留，並不代表完整流程已驗收。
+
+- [Chat Day16（Notion）](https://app.notion.com/p/3fce51d450938143a0b9cc9a3f93860e)
+- [Pet Day16（Notion）](https://app.notion.com/p/3fce51d4509381e9aa03d633822eee89)
+- [Analytics Day16（Notion）](https://app.notion.com/p/3fce51d45093813fa38ae37a47ae4959)
+- [本輪重新檢驗](../evidence/2026-10-17-source-98f30d8-recheck.json)
 - [共同規則](../../COMMON_LEARNING_RULES.md)
-- [Chat Day16 原文](CHAT.md) · [Notion](https://app.notion.com/p/3fce51d450938143a0b9cc9a3f93860e)
-- [Pet Day16 原文](PET.md) · [Notion](https://app.notion.com/p/3fce51d4509381e9aa03d633822eee89)
-- [Analytics Day16 原文](ANALYTICS.md) · [Notion](https://app.notion.com/p/3fce51d45093813fa38ae37a47ae4959)
-- [目前程式驗證與未完成項目](../evidence/2026-10-17-current-source-validation.json)
 - [Day15 封存](../archive/day-15/manifest.json)
-- [Day16 r2 歷史](../archive/day-16-r2/manifest.json)
-- [Day16 發布時完整 Green 與草稿證據](../day16/code-manifest.json)
+- [Day16 發布時程式與草稿證據](../day16/code-manifest.json)
 
-使用者已填入 Day16 程式，因此三篇 Notion 原文與 GitHub 鏡像維持封存，本輪沒有改動正文。現行參考來源為 `ba5dc518c2b758b868e04852852b5382eed54042`；套用／驗證狀態由專案入口與上方證據維護，不把發布時草稿證據改成目前來源通過。
-
-Chat 搜尋及基本瀏覽器聊天已重驗；首頁只清單尚未完成，SSR-feature 仍有一項失敗。Pet 完整原生 GUI／IPC 尚未驗收；Analytics 現行登入碼原型未符合 admin/admin 初始化及改密碼，服務啟動受阻。後續修改放下一 Day，next_day 沿用 17，不在此同步新建 Day。
+目前來源 `98f30d8`；Chat 首頁已移除建房，但查詢按鈕清空清單後沒有發出請求或解除 loading。Pet 漫遊仍指向控制台 main，應為 pet。Analytics 仍是 key 登入，尚未符合 admin/admin 初始化及登入後改密碼。SSR-feature 測試仍有失敗。下一 Day 維持 17，未新增文章。

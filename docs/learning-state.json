@@ -405,26 +405,12 @@
   "full_comparison_time": "00:00",
   "latest_source_observation": {
     "date": "2026-10-17",
-    "reference_sha": "ba5dc518c2b758b868e04852852b5382eed54042",
-    "previous_reference_sha": "520bfa13de8cbfd32c8483f2497c95aecb5aefb9",
+    "reference_sha": "98f30d8b3593d80103b1a4bdbb9f0cb8cb08069e",
     "local_updated_by": "fast-forward",
     "direct_source_edits": false,
-    "day15_articles_frozen": true,
-    "day16_articles_frozen": true,
-    "article_bodies_modified": false,
-    "tests_executed": true,
     "formal_acceptance": false,
-    "evidence": "docs/teaching/evidence/2026-10-17-current-source-validation.json",
-    "source_ci": {
-      "source_sha": "ba5dc518c2b758b868e04852852b5382eed54042",
-      "success": 17,
-      "failure": 0,
-      "pending": [],
-      "scope": "default CI test-ui does not cover local --features ssr test failure"
-    },
-    "scope": "local build/tests/browser + HTTP/WS/SQLite and inherited unchanged-source Pet/Analytics/PostgreSQL; not full product validation",
-    "copilot_use_code_revalidated": false,
-    "document_base_product_sha": "78c5503d1c7ab74e25e080c6d3b4f150127a58a4"
+    "evidence": "docs/teaching/evidence/2026-10-17-source-98f30d8-recheck.json",
+    "copilot_use_code_revalidated": false
   },
   "ui_alignment": {
     "requirements": "docs/UI_ALIGNMENT_REQUIREMENTS.md",
@@ -566,5 +552,25 @@
     "ci_gap": "test-workspace job removed while targets remain",
     "previous_draft_evidence": "docs/teaching/day16/test-relocation-evidence.json",
     "current_reference_evidence": "docs/teaching/evidence/2026-10-17-current-source-validation.json"
+  },
+  "day16_github_articles": {
+    "status": "removed_by_explicit_user_request",
+    "date": "2026-10-17",
+    "removed_paths": [
+      "docs/teaching/current/CHAT.md",
+      "docs/teaching/current/PET.md",
+      "docs/teaching/current/ANALYTICS.md",
+      "docs/teaching/archive/day-16-before-r2/CHAT.md",
+      "docs/teaching/archive/day-16-before-r2/PET.md",
+      "docs/teaching/archive/day-16-before-r2/ANALYTICS.md",
+      "docs/teaching/archive/day-16-r2/CHAT.md",
+      "docs/teaching/archive/day-16-r2/PET.md",
+      "docs/teaching/archive/day-16-r2/ANALYTICS.md",
+      "docs/teaching/archive/day-16-r2/README.md"
+    ],
+    "notion_preserved": true,
+    "patches_and_evidence_preserved": true,
+    "next_day_advanced": false,
+    "recheck_evidence": "docs/teaching/evidence/2026-10-17-source-98f30d8-recheck.json"
   }
 }

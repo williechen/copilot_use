@@ -18,12 +18,13 @@
       "notion_page_id": "3fce51d4-5093-813d-a411-e1ad2a73d329",
       "notion_url": "https://app.notion.com/p/3fce51d45093813da411e1ad2a73d329",
       "title": "2026-10-17｜P0 Chat Day 16｜清楚選房與聊天",
-      "path": "docs/teaching/current/CHAT.md",
       "four_sections": true,
       "notion_readback_verified": true,
       "implementation_applied": "legacy Red only; revised core flow not applied",
       "new_lesson_tests_executed": false,
-      "formal_acceptance": false
+      "formal_acceptance": false,
+      "removed_github_article_path": "docs/teaching/current/CHAT.md",
+      "github_article_status": "removed_by_user_request_after_code_sync"
     },
     {
       "project": "pet",
@@ -32,12 +33,13 @@
       "notion_page_id": "3fce51d4-5093-8196-b41a-da9dab546654",
       "notion_url": "https://app.notion.com/p/3fce51d450938196b41ada9dab546654",
       "title": "2026-10-17｜P0 Pet Day 16｜寵物生活與控制雙視窗",
-      "path": "docs/teaching/current/PET.md",
       "four_sections": true,
       "notion_readback_verified": true,
       "implementation_applied": "legacy Red only; revised core flow not applied",
       "new_lesson_tests_executed": false,
-      "formal_acceptance": false
+      "formal_acceptance": false,
+      "removed_github_article_path": "docs/teaching/current/PET.md",
+      "github_article_status": "removed_by_user_request_after_code_sync"
     },
     {
       "project": "analytics",
@@ -46,12 +48,13 @@
       "notion_page_id": "3fce51d4-5093-813c-96c5-dec6211d47be",
       "notion_url": "https://app.notion.com/p/3fce51d45093813c96c5dec6211d47be",
       "title": "2026-10-17｜P0 Analytics Day 16｜登入 Leptos 後台並查詢",
-      "path": "docs/teaching/current/ANALYTICS.md",
       "four_sections": true,
       "notion_readback_verified": true,
       "implementation_applied": "legacy Red only; revised core flow not applied",
       "new_lesson_tests_executed": false,
-      "formal_acceptance": false
+      "formal_acceptance": false,
+      "removed_github_article_path": "docs/teaching/current/ANALYTICS.md",
+      "github_article_status": "removed_by_user_request_after_code_sync"
     }
   ],
   "previous_mirror_manifest": "docs/teaching/archive/day-15/manifest.json",
@@ -64,5 +67,12 @@
   },
   "day_advanced": false,
   "reference_modified": false,
-  "tests_executed_in_this_sync": false
+  "tests_executed_in_this_sync": false,
+  "github_article_removal": {
+    "date": "2026-10-17",
+    "reason": "user confirms Day16 code synchronized; remove duplicate GitHub articles",
+    "notion_preserved": true,
+    "patches_and_evidence_preserved": true,
+    "next_day_advanced": false
+  }
 }

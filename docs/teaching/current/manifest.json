@@ -10,7 +10,6 @@
       "revision": "r3",
       "notion_page_id": "3fce51d4-5093-8143-a0b9-cc9a3f93860e",
       "notion_url": "https://app.notion.com/p/3fce51d450938143a0b9cc9a3f93860e?pvs=204",
-      "path": "docs/teaching/current/CHAT.md",
       "four_sections": true,
       "notion_readback_verified": true,
       "green_patch_readback_verified": true,
@@ -20,7 +19,9 @@
       "draft_validation": "passed; details in validation.json",
       "gui_acceptance": "not executed",
       "frozen": true,
-      "current_reference_evidence": "docs/teaching/evidence/2026-10-17-current-source-validation.json"
+      "current_reference_evidence": "docs/teaching/evidence/2026-10-17-current-source-validation.json",
+      "removed_github_article_path": "docs/teaching/current/CHAT.md",
+      "github_article_status": "removed_by_user_request_after_code_sync"
     },
     {
       "project": "pet",
@@ -28,7 +29,6 @@
       "revision": "r3",
       "notion_page_id": "3fce51d4-5093-81e9-aa03-d633822eee89",
       "notion_url": "https://app.notion.com/p/3fce51d4509381e9aa03d633822eee89?pvs=204",
-      "path": "docs/teaching/current/PET.md",
       "four_sections": true,
       "notion_readback_verified": true,
       "green_patch_readback_verified": true,
@@ -38,7 +38,9 @@
       "draft_validation": "passed; details in validation.json",
       "gui_acceptance": "not executed",
       "frozen": true,
-      "current_reference_evidence": "docs/teaching/evidence/2026-10-17-current-source-validation.json"
+      "current_reference_evidence": "docs/teaching/evidence/2026-10-17-current-source-validation.json",
+      "removed_github_article_path": "docs/teaching/current/PET.md",
+      "github_article_status": "removed_by_user_request_after_code_sync"
     },
     {
       "project": "analytics",
@@ -46,7 +48,6 @@
       "revision": "r3",
       "notion_page_id": "3fce51d4-5093-813f-a38a-e37a47ae4959",
       "notion_url": "https://app.notion.com/p/3fce51d45093813fa38ae37a47ae4959?pvs=204",
-      "path": "docs/teaching/current/ANALYTICS.md",
       "four_sections": true,
       "notion_readback_verified": true,
       "green_patch_readback_verified": true,
@@ -56,7 +57,9 @@
       "draft_validation": "passed; details in validation.json",
       "gui_acceptance": "not executed",
       "frozen": true,
-      "current_reference_evidence": "docs/teaching/evidence/2026-10-17-current-source-validation.json"
+      "current_reference_evidence": "docs/teaching/evidence/2026-10-17-current-source-validation.json",
+      "removed_github_article_path": "docs/teaching/current/ANALYTICS.md",
+      "github_article_status": "removed_by_user_request_after_code_sync"
     }
   ],
   "source_ci": {
@@ -115,5 +118,12 @@
     "sha": "ba5dc518c2b758b868e04852852b5382eed54042",
     "evidence": "docs/teaching/evidence/2026-10-17-current-source-validation.json",
     "full_acceptance": false
+  },
+  "github_article_removal": {
+    "date": "2026-10-17",
+    "reason": "user confirms Day16 code synchronized; remove duplicate GitHub articles",
+    "notion_preserved": true,
+    "patches_and_evidence_preserved": true,
+    "next_day_advanced": false
   }
 }
