@@ -5,6 +5,10 @@
 - 產品目標與前進項目以本 repo 為主；目錄／程式銜接以 rust_ai_chat 最新 main 為主，其他遵循 [共同學習規則](COMMON_LEARNING_RULES.md)，兩邊程式與學習進度分別驗收。
 - 以下是依既有需求整理的完整能力範圍；**Gate 以原始需求及實際證據逐項核對**，本文件不捏造已完成狀態。
 
+## 已確認的產品需求補充
+
+Chat 入口／註冊／帳號與 Session、Pet 多寵物出入籠／習性／右鍵坐下及多螢幕例外、Analytics 帳號／角色／來源授權／稽核，依 [現行共同規則](COMMON_LEARNING_RULES.md)「已逐項確認的現行需求（2026-10-17）」與 [詳細驗收條件](UI_ALIGNMENT_REQUIREMENTS.md)。這些已確認需求須逐項實作及驗收，本次僅同步文件，未新增功能完成聲明。
+
 ## P9 必備能力
 
 - Chat：Axum/Leptos SSR、Hydration、Nested/Protected Router、Session/ACL、多房間與使用者、history、WS presence/typing/private/reconnect/send queue、交易 Outbox、多 Persona/AI-to-AI、Streaming/Structured Output/tools、RAG/SQLite vectors/MCP/Agent、OTel。
