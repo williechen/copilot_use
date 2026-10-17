@@ -47,12 +47,13 @@
       "套件版本",
       "驗證項目"
     ],
-    "content_preservation": "retain original lessons; append necessary implementation at end of section 2",
+    "content_preservation": "未實作 Day 可在既有原頁重整，更新修訂版與來源、同步同一索引及鏡像，不另建相同專案／Day。已實作內容即封存，保留原文、程式及證據；修改方案只在下一 Day 的 Refactor 後「舊 Day 更正補充」提出。部分已實作時保留已實作段落，只重整尚未實作部分；實作狀態不明時先標未核實，不當作未實作覆寫。文章修訂不新增 Day，也不推進 next_day。",
     "weekly_engineering": "separate engineering evidence; never add weekly operations to teaching",
     "weekly_ai_validation": "excluded; functional gates only",
     "phase_transition": "到期切換且不延後；功能未完成則原階段學習未完成，原項目跨階段補加，完工後回填原階段證據",
     "functional_progress": "新增可操作功能／接通流程為每日主體；條件補充回原功能，不把單點 API／純測試／欄位及狀態碼當成完整流程。三專案並行追蹤，不預排 Day、不自動推進學習階段。",
-    "synchronization_judgment": "核對與同步判定依「文章要求 → rust_ai_chat 實作 → copilot_use 對應實作 → 驗證結果」逐項追溯：記錄文章頁面／Day、兩庫精確 SHA、實作路徑與符號、實際呼叫端、對應測試及匹配來源的驗證結果；介面不同須說明合理差異與適配理由。缺少證據標示未核實，只有定義／單元測試而未接通流程標示部分完成，未執行標示未執行；不得以讀過文章、更新 SHA、同名符號或歷史 CI 判定同步完成。"
+    "synchronization_judgment": "核對與同步判定依「文章要求 → rust_ai_chat 實作 → copilot_use 對應實作 → 驗證結果」逐項追溯：記錄文章頁面／Day、兩庫精確 SHA、實作路徑與符號、實際呼叫端、對應測試及匹配來源的驗證結果；介面不同須說明合理差異與適配理由。缺少證據標示未核實，只有定義／單元測試而未接通流程標示部分完成，未執行標示未執行；不得以讀過文章、更新 SHA、同名符號或歷史 CI 判定同步完成。",
+    "day_revision": "未實作 Day 可在既有原頁重整，更新修訂版與來源、同步同一索引及鏡像，不另建相同專案／Day。已實作內容即封存，保留原文、程式及證據；修改方案只在下一 Day 的 Refactor 後「舊 Day 更正補充」提出。部分已實作時保留已實作段落，只重整尚未實作部分；實作狀態不明時先標未核實，不當作未實作覆寫。文章修訂不新增 Day，也不推進 next_day。"
   },
   "curriculum": {
     "stage_count": 13,
@@ -161,9 +162,9 @@
     },
     "next_stage_boundary": "2026-12-12",
     "planned_completion_date": "2028-12-12",
-    "stage_completion_policy": "階段到期照時切換；未完成留原功能追蹤，舊 Day 更正只在下一個 Day Refactor 後獨立補加，不回填原 Day；功能完成後回填階段證據"
+    "stage_completion_policy": "階段到期照時切換；未完成留原功能追蹤；Day 修訂／封存依 learning_policy.day_revision，階段證據可回填但不覆寫已實作文章。"
   },
-  "daily_reference_sha": "bdd646060c11eb3a6b7dd709bd23e582636904fd",
+  "daily_reference_sha": "3e58e650bd63bcd21ba58e7aabf751542401ef80",
   "daily_product_sha": "579a418c425c7b94c6702689b0ed78d9e8f0998b",
   "content_alignment": {
     "reference_sha": "16261e0ebeef1a888997cc0ebc42b08ceaf8db24",
@@ -230,20 +231,26 @@
     "application_source_unchanged_since_local": true
   },
   "article_sync": {
-    "checked_at": "2026-10-16T06:33:32+08:00",
-    "operation": "integrate existing Day13 articles and sync mirrors; remove explanatory rule additions",
-    "source_sha": "2aecb0f02f9176287e848b7e4897f28ef3929072",
+    "checked_date": "2026-10-17",
+    "operation": "revise existing unimplemented Day15 in place; archive implemented Day14 mirrors; sync canonical rules",
+    "source_sha": "3e58e650bd63bcd21ba58e7aabf751542401ef80",
     "current_articles": "docs/teaching/current/manifest.json",
-    "existing_day": 13,
+    "existing_day": 15,
+    "revision": "r2",
     "four_sections": true,
-    "original_code_preserved": true,
     "new_day_published": false,
     "next_day_advanced": false,
     "implementation_applied": false,
     "new_lesson_tests_executed": false,
     "notion_readback_verified": true,
-    "previous_sync_evidence": "docs/teaching/archive/day-12/article-sync.json",
-    "final_verdict": "Day13 integrated and read back; original code preserved; main implementation time 20/15/25 minutes, excluding Refactor/additions; no new Day or implementation"
+    "previous_sync_evidence": "docs/teaching/archive/day-14/manifest.json",
+    "scope": "static source / caller / CI; no new lesson acceptance; existing local product native IPC partial observation, not lesson validation",
+    "blockers": [
+      "Pet reference has preview IPC only; no OS operation/receipt/restore IPC",
+      "new lesson code/native/WASM/GUI/DB tests not executed",
+      "package latest stable/MSRV/security not rechecked"
+    ],
+    "product_local_ipc_evidence": "docs/teaching/evidence/2026-10-17-pet-local-ipc.json"
   },
   "previous_product_validation": {
     "validated_program_sha": "39f34854b102eb96b44980d42d7b3f272307ec20",
@@ -276,7 +283,7 @@
     "learning_advanced": false
   },
   "pending_test_refactor": {
-    "current_day": 14,
+    "current_day": 15,
     "earliest_day": 15,
     "mode": "incremental in section 2 Refactor alongside relevant daily function",
     "new_feature": false,
@@ -301,14 +308,14 @@
       "pet": "3fbe51d4-5093-81d6-8666-d3031d1c8011",
       "analytics": "3fbe51d4-5093-8131-9460-de180d9e173d"
     },
-    "last_publication_status": "2026-10-17 Day15 corrected Notion pages fetched and checked; code not applied, tests not executed"
+    "last_publication_status": "Day15-r2: existing three pages revised and read back; code not applied; tests not executed; no new Day"
   },
   "teaching_document": {
     "canonical": "docs/COMMON_LEARNING_RULES.md",
     "notion_page": "https://app.notion.com/p/3f2e51d4509381ddb8a8ce7cb4cd3e60?pvs=204",
     "format_document": "entry only: docs/TEACHING_FORMAT.md",
     "scope": "teaching method, four-section format and three project outlines in one article",
-    "status": "consolidated and Notion readback verified; discussions resolved using confirmed answers and prior explicit instructions"
+    "status": "single canonical rule; unimplemented Day may be revised in place; implemented content archived; changes proposed in next Day"
   },
   "full_comparison_time": "00:00"
 }

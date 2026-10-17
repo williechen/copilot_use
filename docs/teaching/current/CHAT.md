@@ -1,121 +1,139 @@
-# 2026-10-16｜P0 Chat Day 14｜以 HTTP 讀回 SQLite 房間資料
+# 2026-10-17｜P0 Chat Day 15｜首頁房間列表與選房流程
 
-來源文章：[2026-10-16｜P0 Chat Day 14｜以 HTTP 讀回 SQLite 房間資料](https://app.notion.com/p/3fbe51d450938149af5dd68abc6109bd?pvs=204)。
+來源文章：[Notion 原頁](https://app.notion.com/p/3fbe51d450938130a3c0c93171105f3a)。
 
 ## 1. 學習大綱
-P0／Chat Day 14；主體 Red＋最小 Green 20 分鐘。
-來源：rust_ai_chat/main `aa85f9410c98452b48b9f6e63cdfb404b1bef28a`（workspace 0.2.14）；copilot_use/main `49e1d946dd3c22ffcc4b1aa0e7715cb5b1686724`；教學文件分支檢查點 `76e4dddeec5cd766f6730ee0cbe823ba8e4f598e`。已讀五份指定 docs、Notion 共同及三專案主頁與 Day 13，父頁未列 Day 14，搜尋亦未找到相同專案 Day 14。Day 13 三個功能均已出現在最新 source，本日不重複教學。首次週六完整比對尚未完成，`last_full_comparison=null`；本次為相關差異核對，未涵蓋全庫功能驗收。當前 P0，下一切點 2026-12-12，無提前完成證據，階段不變。
-對應 FUTURE_WORK 原「訊息／作者／房間模型」及「HTTP／WS／UI」項目。已核對 http::create_room、application::create_room、RoomRepository::find_by_id、SqliteRoomRepository、AppState、server 路由及 UI room_api。Day 13 已提供建房 201，但目前無 HTTP 讀回房間資料入口；使用既有 find_by_id 新增 GET /api/rooms/\{id\}，讓建房後可讀回名稱與 category。
-成品 [main.rs](http://main.rs) 的 list_rooms 會回房間 metadata 並套 ACL；本日只採用「可讀取已存房間資料」的功能方向，沿用學習庫單筆 Port，不複製成品 SQL、StateData、caller ID 或另一套 Port。學習庫尚無 Session／ACL，本入口只適用既有本地匿名學習環境，不能視為受保護房間查詢。
+主體 Red 5 分＋Green 15 分。使用者從首頁讀取 SQLite 房間列表、選房進入現有聊天室；保留建立房間功能。API 與畫面是同一主功能的必要接線，不各算新功能。登入／ACL 尚缺，這是本機學習流程；正式私人房間須先授權過濾。
+來源：rust_ai_chat/main `3e58e650bd63bcd21ba58e7aabf751542401ef80`；2026-10-17 重新讀取 main、相關 source／呼叫端及 CI，六個 workflow 均 success。這是既有來源 CI，不能驗證下列教學增量。copilot_use 教學分支基準 `adad4f26964b2518f47a9fde76544b544cd44334`；產品 `9f632c76ee432d77c1d20f46da9485d982d49c9e` 僅沿用舊靜態證據，本次未重新驗收產品。修訂版 Day15-r2：沿用原頁，原頁標記未套用且最新 main 缺少本次入口，故重整未實作內容。程式未套用、測試未執行、GUI／流程未驗收。
+靜態現況：`crates/ui/src/lib.rs::HomePage` 只有 create_room；`room_api.rs` 只有 POST；server 的 GET 僅支援單房間。既有 Day14 不改寫。
 ## 2. 實作內容
-### Red：先定義讀回行為
-將下列完整私有 tests 模組新增到 apps/server/src/[http.rs](http://http.rs) 檔尾，保留 room_http_tests。先執行第 4 節第一條命令，預期 get_room／RoomDetails 尚不存在而編譯失敗；未實測。
+### Red
+從首頁嘗試「讀取列表 → 選既有房間 → 進房」，目前無列表入口，屬預期手動 UI Red，尚未執行。另在 `apps/server/src/http.rs::room_details_tests` 新增：
 ```rust
-#[cfg(test)]
-mod room_details_tests {
-    use super::*;
-    use axum::{extract::Path, response::IntoResponse};
-    use std::sync::Arc;
-
-    async fn fixture() -> (AppState, sqlx::SqlitePool) {
-        let pool = sqlx::sqlite::SqlitePoolOptions::new()
-            .max_connections(1).connect("sqlite::memory:").await.unwrap();
-        persistence::migrate(&pool).await.unwrap();
-        let rooms = Arc::new(persistence::SqliteRoomRepository::new(pool.clone()));
-        chat_application::create_room(rooms.as_ref(), chat_application::CreateRoom {
-            id: "room-14".into(), category_room_id: "category-14".into(),
-            name: "第十四天房間".into(),
-        }).await.unwrap();
-        let state = AppState::new(
-            leptos_config::get_configuration(None).unwrap().leptos_options,
-            rooms,
-            Arc::new(persistence::SqliteMessageRepository::new(pool.clone())),
-        );
-        (state, pool)
-    }
-
-    #[tokio::test]
-    async fn returns_exact_saved_room_without_writing() {
-        let (state, pool) = fixture().await;
-        let response = get_room(State(state.clone()), Path("room-14".into()))
-            .await.into_response();
-        assert_eq!(response.status(), StatusCode::OK);
-        let body = axum::body::to_bytes(response.into_body(), 4096).await.unwrap();
-        let room: RoomDetails = serde_json::from_slice(&body).unwrap();
-        assert_eq!(room.id, "room-14");
-        assert_eq!(room.category_room_id, "category-14");
-        assert_eq!(room.name, "第十四天房間");
-        assert_eq!(get_room(State(state), Path("absent".into()))
-            .await.unwrap_err(), StatusCode::NOT_FOUND);
-        let count: i64 = sqlx::query_scalar("SELECT COUNT(*) FROM rooms")
-            .fetch_one(&pool).await.unwrap();
-        assert_eq!(count, 1);
-        pool.close().await;
-    }
-
-    #[tokio::test]
-    async fn invalid_input_and_database_failure_are_distinct() {
-        let (state, pool) = fixture().await;
-        pool.close().await;
-        for id in [" ".to_string(), "x".repeat(41), "a\0b".into()] {
-            assert_eq!(get_room(State(state.clone()), Path(id))
-                .await.unwrap_err(), StatusCode::BAD_REQUEST);
-        }
-        assert_eq!(get_room(State(state), Path("room-14".into()))
-            .await.unwrap_err(), StatusCode::INTERNAL_SERVER_ERROR);
-    }
-
+#[tokio::test]
+async fn list_rooms_returns_persisted_room() {
+    let (state, pool) = fixture().await;
+    let response = list_rooms(State(state)).await.into_response();
+    assert_eq!(response.status(), StatusCode::OK);
+    let body = axum::body::to_bytes(response.into_body(), 8192).await.unwrap();
+    let rooms: Vec<RoomDetails> = serde_json::from_slice(&body).unwrap();
+    assert_eq!(rooms.len(), 1);
+    assert_eq!(rooms[0].id, "room-14");
+    pool.close().await;
 }
 ```
-### 最小 Green：新增 handler 並接真實路由
-在同檔 room_http_tests 之前加入以下完整型別與函式；既有 imports、health、create_room 及測試均保留。
+預期新增 list_rooms 前編譯失敗；不能把既有 GET 單房間的測試當成本日 Red。
+### 最小 Green
+**檔案 A** `crates/chat_application/src/repository.rs`：在既有 `RoomRepository` trait 內新增：
 ```rust
-#[derive(Debug, serde::Serialize, serde::Deserialize)]
-pub struct RoomDetails {
-    pub id: String,
-    pub category_room_id: String,
-    pub name: String,
+async fn list(&self) -> Result<Vec<Room>, RepositoryError>;
+```
+所有實作此 trait 的既有測試替身（`crates/chat_application/src/lib.rs` 的 `ExistingRoom`、`MissingRoom`、`WrongRoom`）都需各加入：
+```rust
+async fn list(&self) -> Result<Vec<Room>, RepositoryError> {
+    Ok(Vec::new())
 }
-
-pub async fn get_room(
+```
+**檔案 B** `crates/persistence/src/lib.rs`：在既有 `impl RoomRepository for SqliteRoomRepository` 中新增：
+```rust
+async fn list(&self) -> Result<Vec<Room>, RepositoryError> {
+    sqlx::query_as::<_, RoomRow>(
+        "SELECT id, category_room_id, name FROM rooms ORDER BY name, id"
+    )
+    .fetch_all(&self.pool)
+    .await
+    .map(|rows| rows.into_iter().map(Room::from).collect())
+    .map_err(|e| RepositoryError::RoomAccessError(e.to_string()))
+}
+```
+**檔案 C** `apps/server/src/http.rs`：在 `get_room` 旁新增：
+```rust
+pub async fn list_rooms(
     State(state): State<AppState>,
-    axum::extract::Path(id): axum::extract::Path<String>,
-) -> Result<Json<RoomDetails>, StatusCode> {
-    // 沿用既有 ID 契約，不要求歷史 ID 必須是 UUID。
-    if id.trim().is_empty() || id.len() > 40 || id.contains('\0') {
-        return Err(StatusCode::BAD_REQUEST);
-    }
-    let room = state.room_repository.find_by_id(&id)
-        .await.map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?
-        .ok_or(StatusCode::NOT_FOUND)?;
-    // Adapter 回傳錯誤房間時不洩漏該房間資料。
-    if room.id != id {
-        return Err(StatusCode::INTERNAL_SERVER_ERROR);
-    }
-    Ok(Json(RoomDetails {
+) -> Result<Json<Vec<RoomDetails>>, StatusCode> {
+    let rooms = state.room_repository.list().await
+        .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
+    Ok(Json(rooms.into_iter().map(|room| RoomDetails {
         id: room.id,
         category_room_id: room.category_room_id,
         name: room.name,
-    }))
+    }).collect()))
 }
 ```
-在 apps/server/src/[lib.rs](http://lib.rs) 的 application 路由中，緊接原 .route("/api/rooms", post(http::create_room)) 新增：
+**檔案 D** `apps/server/src/lib.rs`：把原本 `.route("/api/rooms", post(http::create_room))` **替換**為：
 ```rust
-.route("/api/rooms/{id}", get(http::get_room))
+.route("/api/rooms", get(http::list_rooms).post(http::create_room))
 ```
-呼叫鏈：GET → http::get_room → 既有 RoomRepository::find_by_id → SqliteRoomRepository SELECT → RoomDetails JSON。沒有建立新 Port、schema 或 migration；其餘檔案 N/A。
-### Refactor 與必要補加
-HTTP DTO 保留在 HTTP Adapter，Domain Room 不新增 serde／SQL 相依；Repository 錯誤轉 500，查無資料 404，輸入無效 400。名稱及 category 原值讀回，沒有寫入或通知。保留 ID 相等防線；模擬錯誤 Adapter 回錯 ID 的測試尚未提供／執行，列為原房間模型項目的後續安全回歸。Session／ACL、history 分頁與 UI 路由整合仍在原 FUTURE_WORK，未宣稱完成。
+呼叫鏈：HTTP GET → AppState → RoomRepository::list → SqliteRoomRepository → SQLite → JSON。**安全界線：目前參考庫沒有登入授權，這是學習 API，不可直接對外公開私人房間；copilot_use 保留既有 Session/ACL，正式產品必須先依使用者過濾。**
+**前台接線 E**：在 `crates/ui/src/room_api.rs` 末尾新增：
+```rust
+// 接續既有 create_room；不重建另一個 HTTP client。
+pub async fn list_rooms() -> Result<Vec<(String, String)>, String> {
+    let window = web_sys::window().ok_or("無法取得瀏覽器")?;
+    let value = JsFuture::from(window.fetch_with_str("/api/rooms"))
+        .await.map_err(|_| "房間讀取失敗")?;
+    let response: web_sys::Response = value.dyn_into().map_err(|_| "無效回應")?;
+    if !response.ok() { return Err(format!("讀取失敗：{}", response.status())); }
+    let text = JsFuture::from(response.text().map_err(|_| "無法讀取回應")?)
+        .await.map_err(|_| "無法讀取回應")?
+        .as_string().ok_or("無效文字")?;
+    let rows: Vec<serde_json::Value> = serde_json::from_str(&text)
+        .map_err(|_| "房間格式錯誤")?;
+    rows.into_iter().map(|row| {
+        let id = row["id"].as_str().ok_or("缺少房間 ID")?;
+        let name = row["name"].as_str().ok_or("缺少房間名稱")?;
+        // 此學習入口沿用現有 UUID／fixture ID，不把任意字串當 URL。
+        if id.is_empty() || !id.bytes().all(|c| c.is_ascii_alphanumeric() || c == b'-' || c == b'_') {
+            return Err("房間 ID 不適用目前入口".into());
+        }
+        Ok((id.to_owned(), name.to_owned()))
+    }).collect()
+}
+```
+**前台接線 F**：在 `crates/ui/src/lib.rs` 的 HomePage view 歡迎文字後加入 `<RoomList />`，其他建房／聊天程式保留。新增完整元件：
+```rust
+#[component]
+fn RoomList() -> impl IntoView {
+    let (rows, set_rows) = signal(Vec::<(String, String)>::new());
+    let (loading, set_loading) = signal(false);
+    let (status, set_status) = signal(String::from("請讀取房間列表"));
+    view! {
+        <section>
+            <h2>"房間列表"</h2>
+            <button type="button" disabled=move || loading.get() on:click=move |_| {
+                if loading.get_untracked() { return; }
+                set_loading.set(true);
+                set_rows.set(Vec::new());
+                set_status.set("載入中…".into());
+                #[cfg(target_arch = "wasm32")]
+                wasm_bindgen_futures::spawn_local(async move {
+                    match room_api::list_rooms().await {
+                        Ok(value) => {
+                            set_status.set(if value.is_empty() { "尚無房間" } else { "請選擇房間" }.into());
+                            set_rows.set(value);
+                        }
+                        Err(message) => set_status.set(message),
+                    }
+                    set_loading.set(false);
+                });
+                #[cfg(not(target_arch = "wasm32"))]
+                { set_loading.set(false); }
+            }>"讀取／重新整理房間"</button>
+            <p role="status">{move || status.get()}</p>
+            <ul>{move || rows.get().into_iter().map(|(id, name)| view! {
+                <li><a href=format!("/room/{id}")>{name}</a></li>
+            }).collect_view()}</ul>
+        </section>
+    }
+}
+```
+完整呼叫鏈：首頁按鈕 → room_api::list_rooms → GET /api/rooms → RoomRepository::list → SQLite → Leptos 列表 → /room/\{id\} → 既有 RoomPage／ChatPage／WebSocket。未修改其他檔案 N/A；沒有重做平行 Port。
+### Refactor
+共用 RoomDetails 後端 DTO；前台暫用現有 serde_json，待契約穩定再抽共享 DTO。保留所有 trait 替身及舊測試覆蓋，未搬完根 tests 不刪除 target／CI。既有聊天歷史、登入／ACL、重新連線未在本日宣稱完成。
+### 舊 Day 更正補充
+Day14 已實作，原文封存不回填。本次只原頁重整未套用 Day15：將原 API 切片接到首頁與選房流程，沒有新增第二個 Day15。
 ## 3. 套件版本
-已讀同 SHA Cargo.toml／Cargo.lock：workspace 0.2.14、edition 2024；axum 宣告 0.8／lock 0.8.9，serde 1.0／1.0.229、serde_json 1.0／1.0.154、sqlx 0.9／0.9.0、tokio 1.53／1.53.3、uuid 1.28／1.28.0、leptos_config lock 版本未另摘錄。沒有新增依賴或升級。官方最新 stable、MSRV、安全公告本次未查證；保留匹配來源的版本，不猜新版相容性。
+沿用來源 workspace axum／sqlx／tokio、ui 的 Leptos 0.8、leptos_router、serde_json、web-sys 0.3、wasm-bindgen 0.2；不新增依賴。Cargo 宣告已讀，lock／官方最新 stable／MSRV／安全公告未重新核實，不宣稱符合最新版；native／WASM 未編譯。
 ## 4. 驗證項目
-已讀最新 SHA 六份 workflow 定義，均適用 main push，沒有 path 條件排除。Rust AI Chat、Rust Desktop Pet、Persistence、Test All、Node、Rust Dashboard：6/6 workflows completed/success，18/18 checks completed/success；沒有 skipped/cancelled/pending。main 分支 API 回 protected=false、required contexts/checks=\[\]；protection 明細端點因 integration 權限回 403，未宣稱已讀明細。legacy status total_count=0、statuses=\[\]，不是一個尚待完成的檢查。以上 Gate 精確匹配來源 SHA，非沿用 Day 13 歷史快照。[Test All](https://github.com/williechen/rust_ai_chat/actions/runs/38823217315) · [Persistence](https://github.com/williechen/rust_ai_chat/actions/runs/38823217313)。來源 CI 通過只允許教學發布，不代表下列新增程式已執行。
-```bash
-cargo test --locked -p server room_details_tests
-cargo test --locked -p server room_http_tests
-cargo fmt --all -- --check
-cargo clippy --locked -p server --all-targets -- -D warnings
-cargo check --locked -p server --features ssr
-```
-預期 Green：已存房間 200 且三欄正確、未知 ID 404、無效 ID 400、DB 失敗 500，查詢前後 row count 不變。另需隔離 SQLite 啟動服務，實際 POST 建房後以回傳 ID GET，核對 router、JSON、Content-Type、404 與 DB 故障；handler 測試不等於 socket HTTP E2E。上述命令及 E2E 均未執行。
-本輪只發布教學，程式尚待使用者套用；以下 Red／Green 是預期，未執行新功能測試、DB／HTTP／GUI E2E，未宣稱功能已實作或正式驗收通過。沒有修改兩庫產品 source、既有 migration、歷史 Day 或 tag，沒有讀取密鑰或付費 AI 呼叫。Notion 完整讀回後才允許本專案 next_day 更新為 15；寫入結果以實際交易回報為準。
+待執行：`cargo test --manifest-path apps/server/Cargo.toml list_rooms_returns_persisted_room`；`cargo test --workspace --locked`；`cargo check -p ui --features ssr`；`cargo check -p ui --features hydrate --target wasm32-unknown-unknown`；`cargo fmt --all -- --check`。
+GUI 從真實首頁驗證載入、空列表、讀取失敗、重試、選房、既有建房後重返列表與 SQLite 重啟保留。HTTP 確認 GET 200／DB 故障 500／POST 201；以兩個瀏覽器驗證所選房間 WS。上述命令、手動 Red／Green、DB 與 GUI 全部未執行。既有 CI success 只適用來源 SHA；不得標示本次增量通過。

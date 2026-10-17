@@ -1,0 +1,22 @@
+{
+  "exit_code": -15,
+  "binary_sha256": "24073b42a8717b355ec7d906340b0eb257c8571bfd1e25bff889f64be5f1762f",
+  "elapsed_seconds": 45.54,
+  "source_commit": "6256adec302b5f633568a89f4a4e48047922765d",
+  "binary_source_mapping": "unverified existing release binary; not rebuilt",
+  "remaining_files": {
+    "sample-copy.txt": "98687d3b8ae4a4fc73d9573e2f62c58ca56f7cc32074a18218a0ad67c808c0eb",
+    "sample.txt": "98687d3b8ae4a4fc73d9573e2f62c58ca56f7cc32074a18218a0ad67c808c0eb"
+  },
+  "targeted_ipc_observations": {
+    "cleanup_receipts": 2,
+    "restore_receipts": 1,
+    "sample_restored": true,
+    "second_isolated": true,
+    "full_gui_acceptance": "not completed; stopped after targeted evidence; no final GUI report",
+    "ai_calls": false,
+    "reference_source_modified": false
+  },
+  "source_commit_scope": "local checkout only; binary source mapping unverified",
+  "reference_sha": "3e58e650bd63bcd21ba58e7aabf751542401ef80"
+}

@@ -4,4 +4,4 @@
 
 - [Notion總文章](https://app.notion.com/p/3f2e51d4509381ddb8a8ce7cb4cd3e60)
 - [現有Day鏡像入口](teaching/current/README.md)
-- [統整前文件](teaching/archive/pre-consolidation-2026-10-17/TEACHING_FORMAT.md)
+- 統整前文件由 Git 歷史追溯；已實作 Day 與修訂規則統一引用總綱，不在入口另立一套。
