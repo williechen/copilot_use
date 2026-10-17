@@ -1,0 +1,109 @@
+{
+  "source_sha": "b2733b7f78dce1da1aa07555122384c27109e4e8",
+  "files": [
+    {
+      "from": "tests/chat/persist_publish.rs",
+      "to": "crates/chat_application/tests/persist_publish.rs",
+      "sha256": "94c2e67d4783557790240085bc0b3fa550658b50b3f8f8eef98bb6885383d38a",
+      "test_names": [
+        "success_persists_before_publish_once",
+        "failed_persistence_never_publishes",
+        "send_message_creates_user_message"
+      ],
+      "byte_identical": true
+    },
+    {
+      "from": "tests/chat/product_event_contract.rs",
+      "to": "crates/chat_application/tests/product_event_contract.rs",
+      "sha256": "541aea55c0cf01c05fbaf3522205995fe6d1bf82932405965a9eb0383ba9d93f",
+      "test_names": [
+        "success_generates_stable_minimal_event_only_after_persist",
+        "database_failure_never_generates_event",
+        "same_saved_message_keeps_same_event_id_and_does_not_leak_content",
+        "invalid_message_id_is_rejected_not_replaced"
+      ],
+      "byte_identical": true
+    },
+    {
+      "from": "tests/pet/pet_machine.rs",
+      "to": "crates/pet_domain/tests/pet_machine.rs",
+      "sha256": "7fb62d5705a89fed2cacf08ebe57087f85e7846805f4b8d50cba325a3c989bfd",
+      "test_names": [
+        "pet_starts_idle",
+        "interact_moves_idle_to_interacting",
+        "sleeping_pet_cannot_interact",
+        "wake_moves_sleeping_pet_back_to_idle"
+      ],
+      "byte_identical": true
+    },
+    {
+      "from": "tests/pet/day5_codec_tests.rs",
+      "to": "crates/pet_domain/tests/day5_codec_tests.rs",
+      "sha256": "bd545efa7d30c873d062686cd014e00c991877271f164a012529801f2d8b9374",
+      "test_names": [
+        "valid_five_fields_round_trip",
+        "rejects_blank_name_on_decode",
+        "rejects_invalid_json",
+        "optional_appearance_is_preserved",
+        "invalid_profile_cannot_be_encoded"
+      ],
+      "byte_identical": true
+    },
+    {
+      "from": "tests/pet/cleanup_event_contract.rs",
+      "to": "crates/pet_domain/tests/cleanup_event_contract.rs",
+      "sha256": "c345a1f5efa4dc3adf318fa3c31460d5b7a0f73a59406392bde945a79498935e",
+      "test_names": [
+        "preview_is_not_a_success_event",
+        "confirmation_without_filesystem_completion_is_not_success",
+        "failed_operation_is_not_counted",
+        "succeeded_operation_produces_stable_minimal_event",
+        "invalid_operation_id_never_falls_back_to_new_random_id"
+      ],
+      "byte_identical": true
+    },
+    {
+      "from": "tests/pet/profile_contract.rs",
+      "to": "crates/pet_domain/tests/profile_contract.rs",
+      "sha256": "7c5ce157b8173a9167fb53b830336bcee7e1f5ac5fb64665997d5a7811b9d789",
+      "test_names": [
+        "only_five_fields_are_enough",
+        "optional_override_keeps_other_fields_auto",
+        "missing_or_blank_fields_fail",
+        "species_is_extensible"
+      ],
+      "byte_identical": true
+    },
+    {
+      "from": "tests/analytics/event_kind_tests.rs",
+      "to": "apps/stats_server/tests/event_kind_tests.rs",
+      "sha256": "99b867172459287d936c20f14c39a6862f0aea72aaf5dbe75529d7ff623dfdec",
+      "test_names": [
+        "accepts_normal_kind",
+        "rejects_blank_or_long_kind",
+        "validates_event_inputs",
+        "valid_event_remains_unimplemented",
+        "invalid_event_is_rejected"
+      ],
+      "byte_identical": true
+    },
+    {
+      "from": "tests/analytics/http_contract_tests.rs",
+      "to": "apps/stats_server/tests/http_contract_tests.rs",
+      "sha256": "223d8f86ef8124b7d9faba39a1377bf6461d6a77d432e99ec0fea5d6a00c8304",
+      "test_names": [
+        "health_is_200",
+        "valid_event_still_returns_501",
+        "invalid_source_is_400",
+        "unknown_field_is_422",
+        "malformed_json_is_400",
+        "payload_over_4k_is_413",
+        "unsupported_schema_version_returns_400",
+        "missing_schema_version_returns_422"
+      ],
+      "byte_identical": true
+    }
+  ],
+  "empty_target_removed": "analytics_postgres_ingest",
+  "unit_tests_split": false
+}

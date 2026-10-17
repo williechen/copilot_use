@@ -1,0 +1,57 @@
+    Blocking waiting for file lock on build directory
+   Compiling tokio v1.53.3
+   Compiling digest v0.11.3
+   Compiling icu_normalizer v2.3.0
+   Compiling parking_lot_core v0.9.12
+   Compiling thiserror v2.0.21
+   Compiling idna_adapter v1.2.2
+   Compiling idna v1.1.0
+   Compiling parking_lot v0.12.5
+   Compiling futures-channel v0.3.34
+   Compiling futures-intrusive v0.5.0
+   Compiling url v2.5.8
+   Compiling hmac v0.13.0
+   Compiling either v1.19.0
+   Compiling flume v0.12.0
+   Compiling sqlx-core v0.9.0
+   Compiling hkdf v0.13.0
+   Compiling sha2 v0.11.1
+   Compiling md-5 v0.11.0
+   Compiling futures-executor v0.3.34
+   Compiling tokio-stream v0.1.19
+   Compiling sqlx-sqlite v0.9.0
+   Compiling sqlx-postgres v0.9.0
+   Compiling hyper v1.12.0
+   Compiling tungstenite v0.29.0
+   Compiling axum-core v0.5.6
+   Compiling sqlx-macros-core v0.9.0
+   Compiling tokio-tungstenite v0.29.0
+   Compiling serde_urlencoded v0.7.1
+   Compiling hyper-util v0.1.21
+   Compiling sqlx-macros v0.9.0
+   Compiling tower v0.5.3
+   Compiling axum v0.8.9
+   Compiling sqlx v0.9.0
+   Compiling stats-server v0.2.15 (/var/cache/rust-ai-chat/day16-red/apps/stats_server)
+error[E0432]: unresolved import `super::summary_total`
+   --> apps/stats_server/src/lib.rs:646:9
+    |
+646 |     use super::summary_total;
+    |         ^^^^^^^-------------
+    |                |
+    |                no `summary_total` in the root
+
+error[E0432]: unresolved import `pg_store`
+   --> apps/stats_server/src/lib.rs:647:9
+    |
+647 |     use pg_store::EventSummary;
+    |         ^^^^^^^^
+    |
+    = note: `use` statements changed in Rust 2018; read more at <https://doc.rust-lang.org/edition-guide/rust-2018/module-system/path-clarity.html>
+help: a similar path exists
+    |
+647 |     use crate::pg_store::EventSummary;
+    |         +++++++
+
+For more information about this error, try `rustc --explain E0432`.
+error: could not compile `stats-server` (lib test) due to 2 previous errors

@@ -1,0 +1,11 @@
+   Compiling desktop-pet-frontend v0.2.15 (/var/cache/rust-ai-chat/day16-red/apps/desktop_pet/frontend)
+error[E0432]: unresolved import `super::accept_scan_result`
+   --> apps/desktop_pet/frontend/src/main.rs:214:9
+    |
+214 |     use super::accept_scan_result;
+    |         ^^^^^^^------------------
+    |                |
+    |                no `accept_scan_result` in the root
+
+For more information about this error, try `rustc --explain E0432`.
+error: could not compile `desktop-pet-frontend` (bin "desktop-pet-frontend" test) due to 1 previous error

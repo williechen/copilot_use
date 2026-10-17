@@ -1,0 +1,11 @@
+   Compiling ui v0.2.15 (/var/cache/rust-ai-chat/day16-review/crates/ui)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.46s
+     Running unittests src/lib.rs (/var/cache/rust-ai-chat/target/debug/deps/ui-2647b97b3ecf2987)
+
+running 3 tests
+test day16_layout_tests::room_page_has_real_room_identity_and_multiline_composer ... ok
+test chat_socket::tests::decodes_pong_event ... ok
+test day16_room_search_tests::search_matches_chinese_names_and_preserves_ids ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
