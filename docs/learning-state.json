@@ -424,5 +424,21 @@
     "status": "documented, not implemented",
     "day15_frozen": true,
     "next_day_advanced": false
+  },
+  "service_credentials": {
+    "status": "requirements_confirmed_not_implemented",
+    "requirements": "docs/SERVICE_CREDENTIAL_REQUIREMENTS.md",
+    "flow": [
+      "approved_one_time_pairing",
+      "short_lived_scoped_access",
+      "automatic_interactive_renewal",
+      "bounded_overlap_rotation",
+      "revocation_and_repairing"
+    ],
+    "management_ui": "Leptos",
+    "protocol_choice": "not selected",
+    "tests_executed": false,
+    "day15_modified": false,
+    "next_day_advanced": false
   }
 }
