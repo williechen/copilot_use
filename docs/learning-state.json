@@ -232,23 +232,23 @@
   },
   "article_sync": {
     "checked_date": "2026-10-17",
-    "operation": "rebuild existing Day15 pages in place with concrete per-project test relocation in section 2 Refactor",
-    "source_sha": "3e58e650bd63bcd21ba58e7aabf751542401ef80",
+    "operation": "consolidate existing Day16 original pages; preserve applied Red and Day15 snapshots",
+    "source_sha": "b2733b7f78dce1da1aa07555122384c27109e4e8",
     "current_articles": "docs/teaching/current/manifest.json",
-    "existing_day": 15,
-    "revision": "r3",
+    "existing_day": 16,
+    "revision": "r2",
     "four_sections": true,
     "new_day_published": false,
     "next_day_advanced": false,
-    "implementation_applied": false,
+    "implementation_applied": "legacy Red only",
     "new_lesson_tests_executed": false,
     "notion_readback_verified": true,
     "previous_sync_evidence": "docs/teaching/archive/day-14/manifest.json",
-    "scope": "static source / caller / CI; no new lesson acceptance; existing local product native IPC partial observation, not lesson validation",
+    "scope": "documentation consolidation and static source / exact-SHA CI inspection",
     "blockers": [
-      "Pet reference has preview IPC only; no OS operation/receipt/restore IPC",
-      "new lesson code/native/WASM/GUI/DB tests not executed",
-      "package latest stable/MSRV/security not rechecked"
+      "core flow Green code not yet supplied/applied/validated",
+      "source test-ui and test-stats-server failing",
+      "new native/GUI/DB validation not executed"
     ],
     "product_local_ipc_evidence": "docs/teaching/evidence/2026-10-17-pet-local-ipc.json",
     "test_relocation_evidence": "docs/teaching/evidence/2026-10-17-day15-test-relocation.json",
@@ -381,20 +381,20 @@
   },
   "teaching_progress": {
     "last_published_day": {
-      "chat": 15,
-      "pet": 15,
-      "analytics": 15
+      "chat": 16,
+      "pet": 16,
+      "analytics": 16
     },
     "numbering": "single Day sequence per project; next_day is the active next publication index",
     "application_status": "record separately per lesson and exact source; publication does not imply application",
     "validation_status": "record separately per lesson and exact source; no validation inferred from Day number",
     "historical_numbering_record": "docs/teaching/archive/formal-day-numbering.json",
     "last_published_notion_pages": {
-      "chat": "3fbe51d4-5093-8130-a3c0-c93171105f3a",
-      "pet": "3fbe51d4-5093-81d6-8666-d3031d1c8011",
-      "analytics": "3fbe51d4-5093-8131-9460-de180d9e173d"
+      "chat": "3fce51d4-5093-813d-a411-e1ad2a73d329",
+      "pet": "3fce51d4-5093-8196-b41a-da9dab546654",
+      "analytics": "3fce51d4-5093-813c-96c5-dec6211d47be"
     },
-    "last_publication_status": "2026-10-17 P0 Day16: Chat/Pet/Analytics original Notion child pages created and read back; each contains four sections, Rust code and source SHA fced2861; source CI 6/6 workflows and 18/18 checks success; new teaching code not applied/tested; next_day 17 committed after readback"
+    "last_publication_status": "Day16 r2 consolidated in original pages; legacy Red partially applied; revised core flow is plan only; no functional acceptance"
   },
   "teaching_document": {
     "canonical": "docs/COMMON_LEARNING_RULES.md",
@@ -491,8 +491,8 @@
   },
   "day16_publication": {
     "date": "2026-10-17",
-    "source_sha": "fced2861bba21c33697051f685c50689f8052de8",
-    "source_ci": "success",
+    "source_sha": "b2733b7f78dce1da1aa07555122384c27109e4e8",
+    "source_ci": "16 success; 2 failure: test-ui, test-stats-server",
     "new_teaching_code_tested": false,
     "source_code_modified": false,
     "notion_pages": {
@@ -512,6 +512,9 @@
         "readback_verified": true
       }
     },
-    "status": "teaching published; source CI passed; not applied; no functional acceptance"
+    "status": "legacy Red applied; revised core flow planned, not implemented or tested",
+    "revision": "r2",
+    "root_tests_migration": "planned; no per-source-file unit test extraction",
+    "next_day_advanced": false
   }
 }

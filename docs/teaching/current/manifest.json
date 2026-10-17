@@ -1,129 +1,68 @@
 {
-  "scope": "Existing Day15-r3 pages rebuilt in place with concrete old-test relocation in Refactor; no new Day",
+  "scope": "Day16 original-page r2 consolidation; preserve applied Red; no new Day",
   "synced_date": "2026-10-17",
+  "source_sha": "b2733b7f78dce1da1aa07555122384c27109e4e8",
+  "source_ci": {
+    "success": 16,
+    "failure": 2,
+    "failed": [
+      "test-ui",
+      "test-stats-server"
+    ]
+  },
   "articles": [
     {
       "project": "chat",
-      "day": 15,
-      "revision": "r3",
-      "notion_page_id": "3fbe51d4-5093-8130-a3c0-c93171105f3a",
-      "notion_url": "https://app.notion.com/p/3fbe51d450938130a3c0c93171105f3a",
-      "source_sha": "3e58e650bd63bcd21ba58e7aabf751542401ef80",
+      "day": 16,
+      "revision": "r2",
+      "notion_page_id": "3fce51d4-5093-813d-a411-e1ad2a73d329",
+      "notion_url": "https://app.notion.com/p/3fce51d45093813da411e1ad2a73d329",
+      "title": "2026-10-17｜P0 Chat Day 16｜清楚選房與聊天",
       "path": "docs/teaching/current/CHAT.md",
       "four_sections": true,
       "notion_readback_verified": true,
-      "implementation_applied": false,
+      "implementation_applied": "legacy Red only; revised core flow not applied",
       "new_lesson_tests_executed": false,
-      "formal_acceptance": null,
-      "test_relocation": {
-        "project": "chat",
-        "from": "tests/server/day5_tests.rs",
-        "to": "apps/server/tests/room_hub_contract.rs",
-        "source_sha256": "03a90292ffcfb1c618442473ff08629baa757f9e72c2d8767a72320bf0bdb548",
-        "old_target": "server_day5_tests",
-        "package": "server",
-        "new_target": "room_hub_contract",
-        "test_names": [
-          "message_stays_inside_room",
-          "subscribers_share_events",
-          "last_receiver_cleanup_allows_new_subscription",
-          "count_tracks_receiver_lifecycle"
-        ],
-        "assertions_preserved": true,
-        "cargo_dependency_changes": "none",
-        "lock_change_expected": false,
-        "ci_job": ".github/workflows/test.yml::test-server",
-        "ci_change_required": false,
-        "applied": false,
-        "tests_before_executed": false,
-        "tests_after_executed": false,
-        "notion_readback_verified": true
-      }
+      "formal_acceptance": false
     },
     {
       "project": "pet",
-      "day": 15,
-      "revision": "r3",
-      "notion_page_id": "3fbe51d4-5093-81d6-8666-d3031d1c8011",
-      "notion_url": "https://app.notion.com/p/3fbe51d4509381d68666d3031d1c8011",
-      "source_sha": "3e58e650bd63bcd21ba58e7aabf751542401ef80",
+      "day": 16,
+      "revision": "r2",
+      "notion_page_id": "3fce51d4-5093-8196-b41a-da9dab546654",
+      "notion_url": "https://app.notion.com/p/3fce51d450938196b41ada9dab546654",
+      "title": "2026-10-17｜P0 Pet Day 16｜寵物生活與控制雙視窗",
       "path": "docs/teaching/current/PET.md",
       "four_sections": true,
       "notion_readback_verified": true,
-      "implementation_applied": false,
+      "implementation_applied": "legacy Red only; revised core flow not applied",
       "new_lesson_tests_executed": false,
-      "formal_acceptance": null,
-      "test_relocation": {
-        "project": "pet",
-        "from": "tests/pet/cleanup_contract.rs",
-        "to": "crates/pet_domain/tests/cleanup_contract.rs",
-        "source_sha256": "6f10b065cba9e81f5266d68948ae7a7310818e916925e6e2da2efad9e5ab508e",
-        "old_target": "pet_cleanup_contract",
-        "package": "pet-domain",
-        "new_target": "cleanup_contract",
-        "test_names": [
-          "preview_cannot_be_counted_or_completed",
-          "confirmed_success_counts_only_after_completion",
-          "failed_operation_never_counts",
-          "four_legacy_operation_states_preserve_counting_rule"
-        ],
-        "assertions_preserved": true,
-        "cargo_dependency_changes": "none",
-        "lock_change_expected": false,
-        "ci_job": ".github/workflows/test.yml::test-pet-domain",
-        "ci_change_required": false,
-        "applied": false,
-        "tests_before_executed": false,
-        "tests_after_executed": false,
-        "notion_readback_verified": true
-      }
+      "formal_acceptance": false
     },
     {
       "project": "analytics",
-      "day": 15,
-      "revision": "r3",
-      "notion_page_id": "3fbe51d4-5093-8131-9460-de180d9e173d",
-      "notion_url": "https://app.notion.com/p/3fbe51d4509381319460de180d9e173d",
-      "source_sha": "3e58e650bd63bcd21ba58e7aabf751542401ef80",
+      "day": 16,
+      "revision": "r2",
+      "notion_page_id": "3fce51d4-5093-813c-96c5-dec6211d47be",
+      "notion_url": "https://app.notion.com/p/3fce51d45093813c96c5dec6211d47be",
+      "title": "2026-10-17｜P0 Analytics Day 16｜登入 Leptos 後台並查詢",
       "path": "docs/teaching/current/ANALYTICS.md",
       "four_sections": true,
       "notion_readback_verified": true,
-      "implementation_applied": false,
+      "implementation_applied": "legacy Red only; revised core flow not applied",
       "new_lesson_tests_executed": false,
-      "formal_acceptance": null,
-      "test_relocation": {
-        "project": "analytics",
-        "from": "tests/analytics/idempotency_contract.rs",
-        "to": "apps/stats_server/tests/idempotency_contract.rs",
-        "source_sha256": "fefd30adaf3436382a1454ed82a9f99355fc6bfbb310192af929f3014e1e2be4",
-        "old_target": "analytics_idempotency_contract",
-        "package": "stats-server",
-        "new_target": "idempotency_contract",
-        "test_names": [
-          "duplicate_is_counted_once_across_retries",
-          "event_identity_deduplicates_per_source"
-        ],
-        "assertions_preserved": true,
-        "cargo_dependency_changes": "none",
-        "lock_change_expected": false,
-        "ci_job": ".github/workflows/test.yml::test-stats-server",
-        "ci_change_required": false,
-        "applied": false,
-        "tests_before_executed": false,
-        "tests_after_executed": false,
-        "notion_readback_verified": true
-      }
+      "formal_acceptance": false
     }
   ],
-  "previous_mirror_manifest": "docs/teaching/archive/day-14/manifest.json",
+  "previous_mirror_manifest": "docs/teaching/archive/day-15/manifest.json",
+  "previous_day16_text": "docs/teaching/archive/day-16-before-r2/",
   "master": "docs/COMMON_LEARNING_RULES.md",
   "next_day": {
-    "chat": 16,
-    "pet": 16,
-    "analytics": 16
+    "chat": 17,
+    "pet": 17,
+    "analytics": 17
   },
   "day_advanced": false,
   "reference_modified": false,
-  "tests_executed_in_this_sync": false,
-  "test_relocation_evidence": "docs/teaching/evidence/2026-10-17-day15-test-relocation.json"
+  "tests_executed_in_this_sync": false
 }

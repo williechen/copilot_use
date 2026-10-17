@@ -1,143 +1,42 @@
-# 2026-10-17｜P0 Pet Day 15｜掃描後確認與取消流程
-
-來源文章：[Notion 原頁](https://app.notion.com/p/3fbe51d4509381d68666d3031d1c8011)。
+# 2026-10-17｜P0 Pet Day 16｜寵物生活與控制雙視窗
 
 ## 1. 學習大綱
-主體 Red 5 分＋Green 10 分。接續既有「授權目錄 → 掃描／SHA256 → 摘要」，完成使用者可操作的確認／取消與重新掃描流程。確認的是目前預覽，不等於已執行檔案操作。
-來源：rust_ai_chat/main `3e58e650bd63bcd21ba58e7aabf751542401ef80`；2026-10-17 重新讀取 main、相關 source／呼叫端及 CI，六個 workflow 均 success。這是既有來源 CI，不能驗證下列教學增量。copilot_use 教學分支基準 `adad4f26964b2518f47a9fde76544b544cd44334`；產品 `9f632c76ee432d77c1d20f46da9485d982d49c9e` 僅沿用舊靜態證據，本次未重新驗收產品。修訂版 Day15-r3（補齊舊 tests 搬移）：沿用原頁，原頁標記未套用且最新 main 缺少本次入口，故重整未實作內容。程式未套用、測試未執行、GUI／流程未驗收。
-已讀 `apps/desktop_pet/frontend/src/main.rs`、bridge、Tauri `scan_file_preview`／`scan_duplicate_preview` 與 `file_organizer.rs`：目前只有預覽 IPC，沒有檔案移動／Trash／restore command；frontend 摘要丟棄 opaque ID。不能把既有 CleanupOperation domain 狀態當真實 filesystem receipt。
+修訂 r2（2026-10-17）。來源：`rust_ai_chat/main` `b2733b7f78dce1da1aa07555122384c27109e4e8`；本機工作目錄仍為 `fced2861`，本輪僅 fetch／靜態讀取，未 checkout、未改原始碼。
+**狀態：舊版 Day16 的 Red 已部分套用；本次主流程為待套用教學計畫，未提供已驗證的完整實作。** 最新 SHA 的 18 個 checks 為 16 success／2 failure（`test-ui`、`test-stats-server`）；不沿用 Day15 CI 作為本篇通過證據。三篇主體只優先交付可操作的基本流程，搜尋／總數／競態是相關附加工作。
+
+交付流程：開啟寵物生活視窗 → 開啟控制視窗 → 操作既有互動／睡眠／喚醒並看到雙窗一致狀態 → 使用既有聊天 → 在控制窗掃描、閱讀摘要並確認或取消。控制窗的按鈕與長內容必須可見、可捲動，不再擠進寵物小窗。
+本機 Tauri IPC 可使用；不要求新增遠端服務。確認目前只是預覽的 UI 確認，不能宣稱實際整理、刪除、Trash 或 restore 已完成。
 ## 2. 實作內容
-### Red
-手動驗收腳本：啟動 → 掃描 → 顯示摘要 → 確認 → 顯示確認狀態 → 取消 → 重掃後回到未確認。目前缺少確認／取消入口，預期 UI Red，尚未執行；不把已有摘要單測冒稱新功能 Red。
-### 最小 Green
-只修改 `apps/desktop_pet/frontend/src/main.rs::App`，沿用 scan_status／duplicate_status 與 loading signals，bridge／Tauri／Domain／DB N/A。signals 區塊新增：
+### Red：以雙視窗操作驗收
+保留已套用的 `day16_scan_generation_tests`（見本節末）。先記錄現有單窗無法完整顯示控制項；新增雙窗開啟、共享 revision、控制窗關閉後可再開、漫遊只移動寵物窗、掃描確認／取消的驗收案例。
+### Green：分開生活與控制
+1. `apps/desktop_pet/tauri.conf.json` 定義寵物生活窗與控制窗。寵物窗維持輕量呈現；控制窗可調整大小、可捲動。用明確 window label 與前台入口參數判定用途，不能只靠 CSS 隱藏整套控制項。
+2. `apps/desktop_pet/src/lib.rs` 保留同一份 `PetMachine`，兩窗使用既有 IPC 讀狀態及送命令，狀態變更向兩窗同步。增加開啟／聚焦控制窗的入口，明確定義關閉及退出行為。
+3. `apps/desktop_pet/src/roam.rs` 將漫遊目標指定為寵物窗，避免控制窗跟著走。前台 `main.rs`、`bridge.rs`、`index.html` 與樣式依用途呈現：生活窗顯示寵物與控制入口；控制窗放互動、既有聊天及檔案預覽。
+4. 接通現有 `scan_file_preview`、`scan_duplicate_preview`。長摘要換行，確認與取消可操作。將已套用 Red 的 generation 判斷接回兩個 IPC 完成處；取消清除預覽並讓舊結果失效。原生唯讀掃描不會因此中斷，busy 必須在舊請求完成後解除，不能提前宣稱已停止。
+5. 狀態與錯誤顯示要讓使用者知道掃描／預覽／確認各階段；不以勾選布林值冒充原生安全授權。
+### Refactor：根目錄 tests 的 Pet 批次
+`tests/pet/pet_machine.rs`、`day5_codec_tests.rs`、`cleanup_event_contract.rs`、`profile_contract.rs` → `crates/pet_domain/tests/`，保留原檔名；既有 `cleanup_contract.rs` 保留。這些是 domain 契約，不搬進前台或 Tauri crate。
+
+搬移前，以 `tests/Cargo.toml` 的 target、測試名稱與數量建立基準；搬移時保留原斷言，調整目的 package 的 dev-dependencies，再移除原 `[[test]]` 與不再使用的相依。不要拆分原始碼內嵌單元測試。同步 `.github/workflows/test.yml`：目的測試須在具備原 DB／環境設定的 job 執行；不得將需要 DB 的案例直接丟給未配置 DB 的 job。其他根目錄批次尚未完成時保留 `workspace-tests` 與 CI；全部驗證後才移除根目錄測試容器、workspace member 與空目錄，更新 lockfile。測試名稱／數量不得無故減少或重複，既有失敗與功能變更另記，不在純搬移中偷改斷言。
+
+### 舊 Day 更正補充與已套用紀錄
+Day15 原文封存。取消競態配合掃描流程處理，但不能取代雙視窗主體。以下 Red 已在來源 SHA 套用，原樣保留；函式與 IPC 接線尚待實作：
 ```rust
-// 放在 App 的 signals 區塊；確認只針對目前顯示的掃描結果。
-let (confirmed, set_confirmed) = signal(false);
-```
-兩個既有掃描按鈕 on:click 通過 loading guard 後，均先加入以下完整重設片段，再執行原有非同步掃描；其餘 IPC 保留：
-```rust
-// 新掃描一律使前一份確認失效，也不保留另一類舊摘要。
-set_confirmed.set(false);
-set_scan_status.set(None);
-set_duplicate_status.set(None);
-```
-在兩個預覽 Show 後、ErrorMessage 前新增：
-```rust
-<button type="button"
-    disabled=move || scan_loading.get() || duplicate_loading.get()
-        || (scan_status.get().is_none() && duplicate_status.get().is_none())
-    on:click=move |_| set_confirmed.set(true)
->"確認本次預覽"</button>
-<button type="button"
-    disabled=move || scan_loading.get() || duplicate_loading.get()
-    on:click=move |_| {
-        set_confirmed.set(false);
-        set_scan_status.set(None);
-        set_duplicate_status.set(None);
+#[cfg(test)]
+mod day16_scan_generation_tests {
+    use super::accept_scan_result;
+
+    #[test]
+    fn canceled_or_superseded_scan_cannot_restore_preview() {
+        assert!(accept_scan_result(3, 3));
+        assert!(!accept_scan_result(2, 3));
+        assert!(!accept_scan_result(3, 4));
     }
->"取消／清除本次預覽"</button>
-<Show when=move || confirmed.get() fallback=|| ()>
-    <p role="status">"已確認本次預覽；尚未執行移動、刪除或還原。"</p>
-</Show>
-```
-呼叫鏈：主動掃描按鈕 → bridge → Tauri → authorized_root → scan／SHA256 → 純文字摘要 → 使用者確認／取消 → Leptos 畫面狀態。loading 時禁用確認／取消，兩個 scan guard 保留，避免對未完成掃描確認；新掃描先失效舊確認。
-### Refactor
-本日完成可操作的「掃描 → 確認／取消」段落。真實檔案操作仍是同一功能的未完成下一段：後端保存 scan session／opaque ID、明確選擇項目、確認綁定不可重放的計畫、操作前 root／symlink／TOCTOU／權限重驗、journal／private Trash／receipt／restore，最後才上報真實成功事件。不得直接將目前摘要字串送進刪除函式，也不得由確認按鈕發出成功 Analytics。
-此處阻礙是真實 OS adapter／IPC 尚不存在，不因加上確認 UI 宣稱完整清理功能完成。先以專用測試檔案設計後端與還原，再在後續 Day 提案；不在本輪修改參考庫原始碼。
-#### 本日舊 tests 搬移：4 個既有測試（待使用者套用）
-本批與本日主功能一起做，不計入 Red＋Green 主體時數。確認預覽與完成真實操作必須分開，這批保留未確認不得完成、失敗不計數與完成只計一次的既有契約。CleanupOperation 是 domain 模型，不代表 OS 收據；不把 domain 測試當 IPC 成功證據。
-來源固定為 rust_ai_chat/main `3e58e650bd63bcd21ba58e7aabf751542401ef80`，已核對原測試、owning package Cargo、公開呼叫端與 `.github/workflows/test.yml`；目的檔目前不存在。
-- 來源：`tests/pet/cleanup_contract.rs`（舊 target `pet_cleanup_contract`）。
-- 目的：`crates/pet_domain/tests/cleanup_contract.rs`（package `pet-domain`，Cargo 自動整合測試 target `cleanup_contract`）。
-- 原測試 SHA256：`6f10b065cba9e81f5266d68948ae7a7310818e916925e6e2da2efad9e5ab508e`；移動後檔案內容、函式名稱及斷言逐位元保留，共 4 個 `#[test]`。
-先在原位置建立基線（預期 4 個測試；實際未執行）：
-```bash
-cargo test --locked -p workspace-tests --test pet_cleanup_contract
-```
-使用者在學習庫套用時，先檢查目的不存在，再移動；本次助手沒有執行以下修改：
-```bash
-mkdir -p crates/pet_domain/tests
-git mv tests/pet/cleanup_contract.rs crates/pet_domain/tests/cleanup_contract.rs
-```
-目的檔完整最終內容如下（與原檔相同，不另複製保留兩份）：
-```rust
-use pet_domain::cleanup::{CleanupError, CleanupOperation};
-use pet_domain::{OperationState, count_as_cleanup};
-
-#[test]
-fn preview_cannot_be_counted_or_completed() {
-    let mut operation = CleanupOperation::new();
-
-    // 尚在預覽狀態不得記作清理成功。
-    assert!(!operation.may_emit_success_event());
-    // 沒有明確確認時，不能跳過確認直接標記完成。
-    assert_eq!(
-        operation.complete(true),
-        Err(CleanupError::ConfirmationRequired)
-    );
-}
-
-#[test]
-fn confirmed_success_counts_only_after_completion() {
-    let mut operation = CleanupOperation::new();
-    operation.confirm().expect("預覽後應允許確認");
-
-    // 即使已確認，只要未完成仍不能發送成功事件。
-    assert!(!operation.may_emit_success_event());
-    operation.complete(true).expect("已確認才能完成");
-    assert!(operation.may_emit_success_event());
-
-    // 已完成的操作不可再次完成或重複累計。
-    assert_eq!(operation.complete(true), Err(CleanupError::AlreadyFinished));
-}
-
-#[test]
-fn failed_operation_never_counts() {
-    let mut operation = CleanupOperation::new();
-    operation.confirm().expect("預覽後應允許確認");
-
-    // 實際清理失敗時不得發送成功事件。
-    operation.complete(false).expect("已確認後可記錄失敗");
-    assert!(!operation.may_emit_success_event());
-}
-
-#[test]
-fn four_legacy_operation_states_preserve_counting_rule() {
-    // 將舊 tests/pet/operation_event_contract.rs 的唯一不同斷言合併到此。
-    assert!(!count_as_cleanup(OperationState::Previewed));
-    assert!(!count_as_cleanup(OperationState::Confirmed));
-    assert!(!count_as_cleanup(OperationState::Failed));
-    assert!(count_as_cleanup(OperationState::Succeeded));
 }
 ```
-在 `tests/Cargo.toml` **只刪除**本批的完整 target 區塊：
-```toml
-[[test]]
-name = "pet_cleanup_contract"
-path = "pet/cleanup_contract.rs"
-```
-owning package 的 `Cargo.toml`：N/A，原有依賴已涵蓋本檔 imports，且沒有 autotests=false，Cargo 自動發現目的 tests；不加重複 \[\[test\]\]，不加平行 workspace。根 `tests/Cargo.toml` 的其他 targets 與 dev-dependencies 保留；根 `Cargo.toml` 的 "tests" member 保留。依賴圖未改，本批 Cargo.lock 預期 N/A；若 --locked 指出 lock 不一致，先查明原因，不能改用非 locked 掩蓋。
-CI 已核對：`.github/workflows/test.yml::test-pet-domain` 的 `cargo test --locked -p pet-domain` 自動收錄新位置；`test-workspace` 繼續測其餘根 targets。workflow 本批 N/A，不能刪除 workspace-tests job。保留 [cleanup.rs](http://cleanup.rs) 內嵌測試與根 pet_cleanup_event_contract 等未搬 targets；本批不重寫斷言、不把同名場景直接刪掉當去重。
-搬完後執行（以下全部待執行）：
-```bash
-cargo test --locked -p pet-domain --test cleanup_contract
-cargo test --locked -p pet-domain
-cargo test --locked -p workspace-tests
-cargo fmt --all -- --check
-git diff --check
-git diff --summary
-```
-核對 4 個測試名稱／斷言不減少，舊 target 已取消且來源不再留一份、新 target 只收錄一次。三篇全部套用後，根 manifest 從 12 個 target 減至 9 個；剩餘 9 個與 CI 保留，待後續相關功能分批搬完並驗證後才移除根 tests。不以「檔案已移動」或既有 CI 代替搬後測試通過。
-### 舊 Day 更正補充
-已實作 Day14 保持封存；原未套用 Day15 的清除按鈕併入取消流程，同一頁修訂，不新增 Day。若使用者已在本機套用某段但尚未推到 main，該段應保留封存，修改改由下一 Day 提出；本次靜態判定只涵蓋遠端 main。
-### 本機產品 IPC 局部驗證（2026-10-17）
-已用本機 copilot_use 的既有原生 Release 執行 `--acceptance-gui`，設定全新測試資料目錄／授權測試目錄與 `PET_GUI_TEST_FUNCTIONAL_ONLY=true`，不執行 AI。測試腳本實際經 WebKit → Tauri invoke 呼叫 `scan_duplicate_preview`、`scan_file_preview`、`confirm_cleanup`、`restore_file`；專用 SQLite 讀回兩筆 cleanup_receipts、一筆 restore_receipts，sample.txt 內容還原正確，second.txt 留在專用隔離區。
-既有 binary SHA256：`24073b42a8717b355ec7d906340b0eb257c8571bfd1e25bff889f64be5f1762f`；本機 source HEAD `6256adec302b5f633568a89f4a4e48047922765d`，未重建，binary 與此 source 的精確對應尚未核實。整套驗收未產出最終 GUI 報告，取得目標收據後已停止程序；只記局部 IPC／檔案證據，不記整套通過。
-產品 IPC 的逐檔 opaque ID／confirmed 與 receipt 可作學習流程參照；rust_ai_chat 最新 main 沒有上述操作 IPC，不能只加前台 invoke 就當已接通，仍須由使用者在後續教學實作後端。本次 Day15 新增確認 UI 的編譯與 GUI 測試仍未執行。證據另存 GitHub `docs/teaching/evidence/2026-10-17-pet-local-ipc.json`。
 ## 3. 套件版本
-已讀 frontend Cargo：Leptos 0.8 CSR、serde 1.0、serde-wasm-bindgen 0.6、wasm-bindgen 0.2、web-sys 0.3；本日不新增依賴。lock／官方 stable／MSRV／安全公告未重新核實；native／WASM／Tauri GUI 未執行。
+沿用來源 workspace 0.2.15／edition 2024；Tauri 宣告 2.12、tauri-build 2.7、Leptos CSR 0.8。精確版本依來源 Cargo.lock。雙視窗不要求新增遠端 IPC 套件；未核實官方最新 stable 或 MSRV。
 ## 4. 驗證項目
-待執行：`cargo test --manifest-path apps/desktop_pet/frontend/Cargo.toml`、`cargo check --manifest-path apps/desktop_pet/frontend/Cargo.toml --target wasm32-unknown-unknown`。
-GUI：無摘要不能確認；一般／SHA256 掃描均可確認；掃描中禁用；取消清掉兩類摘要；重掃／失敗使前次確認失效；顯示繁中固定文案且無私人路徑。確認／取消前後測試目錄內容完全一致，不出現檔案成功收據或 Analytics 成功事件。命令、GUI、filesystem 回歸全部未執行；真實操作／還原／跨服務仍未接通，不能標正式驗收。
-本輪 r3 文件重建驗證：已靜態核對本批來源／目的、4 個測試及 Cargo／CI 收錄；實際搬移、搬前與搬後測試均未執行，rust_ai_chat 保持唯讀。既有主功能程式與 Pet 本機局部證據沿用 r2，不因本輪文件修訂視為已套用或重新驗收。
+`cargo test -p desktop-pet --lib`；`cargo test -p desktop-pet-frontend day16_scan_generation_tests`；`cargo check -p desktop-pet-frontend --target wasm32-unknown-unknown`；搬移後 `cargo test -p pet-domain`。前台 host 測試若受 WASM 限制須改用可執行 target 並記錄，不能虛報通過。原生驗收：雙窗、狀態同步、控制項可見、聊天、掃描／確認／取消、控制窗重開、漫遊目標。
+本輪只核對來源、已套用 Red 與遠端 CI，**上述新主流程、Green、tests 搬移及驗收命令均未執行**。來源 Red 的預期失敗與非預期錯誤要分開記錄；修正後重新檢查同一 SHA 的結果，不能刪除測試讓 CI 變綠。完成條件是主流程可操作及相關驗證通過，不是只有頁面發布或 helper 測試通過。
