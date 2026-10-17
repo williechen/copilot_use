@@ -165,7 +165,7 @@
     "planned_completion_date": "2028-12-12",
     "stage_completion_policy": "階段到期照時切換；未完成留原功能追蹤；Day 修訂／封存依 learning_policy.day_revision，階段證據可回填但不覆寫已實作文章。"
   },
-  "daily_reference_sha": "3e58e650bd63bcd21ba58e7aabf751542401ef80",
+  "daily_reference_sha": "ba5dc518c2b758b868e04852852b5382eed54042",
   "daily_product_sha": "579a418c425c7b94c6702689b0ed78d9e8f0998b",
   "content_alignment": {
     "reference_sha": "16261e0ebeef1a888997cc0ebc42b08ceaf8db24",
@@ -233,31 +233,28 @@
   },
   "article_sync": {
     "checked_date": "2026-10-17",
-    "operation": "rebuild missing Day16 with full Green, original Red, root tests migration and validation",
-    "source_sha": "b2733b7f78dce1da1aa07555122384c27109e4e8",
-    "current_articles": "docs/teaching/current/manifest.json",
+    "operation": "sync current program evidence and future requirements; freeze Day15/16 bodies",
+    "source_sha": "ba5dc518c2b758b868e04852852b5382eed54042",
     "existing_day": 16,
-    "revision": "r3",
-    "four_sections": true,
     "new_day_published": false,
     "next_day_advanced": false,
-    "complete_green_supplied": true,
-    "implementation_applied": "draft only; reference unchanged",
-    "new_lesson_tests_executed": true,
-    "notion_readback_verified": true,
-    "scope": "native compiler / WASM / unit and router+PostgreSQL validation in draft; GUI unexecuted",
-    "evidence": "docs/teaching/day16/validation.json",
+    "article_bodies_modified": false,
+    "notion_entry_readback_verified": true,
+    "implementation_status": "user-applied reference program; partial functional validation",
+    "tests_executed": true,
+    "evidence": "docs/teaching/evidence/2026-10-17-current-source-validation.json",
     "source_ci": {
-      "success": 16,
-      "failure": 2,
-      "failed": [
-        "test-ui",
-        "test-stats-server"
-      ]
+      "source_sha": "ba5dc518c2b758b868e04852852b5382eed54042",
+      "success": 17,
+      "failure": 0,
+      "pending": [],
+      "scope": "default CI test-ui does not cover local --features ssr test failure"
     },
     "blockers": [
-      "Reference Green not applied under read-only constraint",
-      "New browser/native GUI acceptance not executed"
+      "Chat homepage still includes create; SSR-feature history notice assertion fails",
+      "Pet native GUI/IPC not accepted; roam targets main",
+      "Analytics startup missing legacy login-key config; admin/admin and password change absent",
+      "remaining root test-workspace CI coverage gap"
     ]
   },
   "previous_product_validation": {
@@ -396,7 +393,7 @@
       "pet": "3fce51d4-5093-81e9-aa03-d633822eee89",
       "analytics": "3fce51d4-5093-813f-a38a-e37a47ae4959"
     },
-    "last_publication_status": "Day16 r3 rebuilt after prior IDs unavailable; complete Green supplied and draft-validated; reference Red applied; reference Green not applied; GUI not accepted"
+    "last_publication_status": "Day16 frozen after user-applied code; current source evidence synchronized; no new publication or numbering advance"
   },
   "teaching_document": {
     "canonical": "docs/COMMON_LEARNING_RULES.md",
@@ -408,37 +405,39 @@
   "full_comparison_time": "00:00",
   "latest_source_observation": {
     "date": "2026-10-17",
-    "reference_sha": "fced2861bba21c33697051f685c50689f8052de8",
-    "previous_reference_sha": "8bbf884ed73038adbe9f7f51030bbb676ae4789f",
-    "scope": "Day15 Green source file inspection and exact-SHA GitHub Actions verification; UI/E2E manual acceptance not performed",
+    "reference_sha": "ba5dc518c2b758b868e04852852b5382eed54042",
+    "previous_reference_sha": "520bfa13de8cbfd32c8483f2497c95aecb5aefb9",
+    "local_updated_by": "fast-forward",
+    "direct_source_edits": false,
     "day15_articles_frozen": true,
-    "day15_mirrors_modified": false,
-    "tests_executed": false,
-    "ci_rechecked": true,
-    "source_modified": false,
-    "full_lesson_applied": null,
-    "relocated_tests": {
-      "chat": "apps/server/tests/root_hub_contract.rs",
-      "pet": "crates/pet_domain/tests/cleanup_contract.rs",
-      "analytics": "apps/stats_server/tests/idempotency_contract.rs"
+    "day16_articles_frozen": true,
+    "article_bodies_modified": false,
+    "tests_executed": true,
+    "formal_acceptance": false,
+    "evidence": "docs/teaching/evidence/2026-10-17-current-source-validation.json",
+    "source_ci": {
+      "source_sha": "ba5dc518c2b758b868e04852852b5382eed54042",
+      "success": 17,
+      "failure": 0,
+      "pending": [],
+      "scope": "default CI test-ui does not cover local --features ssr test failure"
     },
-    "ui_requirements": "docs/UI_ALIGNMENT_REQUIREMENTS.md",
-    "ci_run": 38992992860,
-    "ci_status": "success",
-    "workflows_success": 6,
-    "workflows_total": 6,
-    "check_runs_success": 18,
-    "check_runs_total": 18
+    "scope": "local build/tests/browser + HTTP/WS/SQLite and inherited unchanged-source Pet/Analytics/PostgreSQL; not full product validation",
+    "copilot_use_code_revalidated": false,
+    "document_base_product_sha": "78c5503d1c7ab74e25e080c6d3b4f150127a58a4"
   },
   "ui_alignment": {
     "requirements": "docs/UI_ALIGNMENT_REQUIREMENTS.md",
-    "pet": "confirmed: separate native pet-life and control windows; shared backend state; single-window enlargement patch not adopted",
+    "pet": "dual-window implementation and startup observed; roaming still main; native interactive GUI acceptance not executed",
     "analytics": "Leptos components using existing HTTP JSON; HTML lesson correction deferred to next Day",
-    "status": "requirements confirmed; no new layout source changes applied",
+    "status": "basic Chat browser flow and Pet dual-window implementation observed; full acceptance incomplete",
     "day15_frozen": true,
     "next_day_advanced": false,
-    "chat": "confirmed: Leptos room sidebar, message area and multiline composer; responsive layout, real states, separate management routes; not implemented",
-    "day16_green": "complete draft code supplied and native/WASM checks passed; reference not modified; GUI not accepted"
+    "chat": "homepage only room list; create/manage on personal management page; ba5 search and browser chat verified, homepage separation pending",
+    "day16_green": "complete draft code supplied and native/WASM checks passed; reference not modified; GUI not accepted",
+    "day16_frozen": true,
+    "reference_sha": "ba5dc518c2b758b868e04852852b5382eed54042",
+    "evidence": "docs/teaching/evidence/2026-10-17-current-source-validation.json"
   },
   "service_credentials": {
     "status": "requirements_confirmed_not_implemented",
@@ -457,7 +456,7 @@
     "next_day_advanced": false
   },
   "analytics_admin_access": {
-    "status": "requirements_confirmed_not_implemented_or_validated",
+    "status": "reference Session/key-based prototype exists; required account/password flow absent",
     "surface": "authenticated Leptos administration only",
     "anonymous_dashboard": false,
     "protected": [
@@ -472,7 +471,16 @@
     "day15_modified": false,
     "next_day_advanced": false,
     "tests_executed": false,
-    "day16_green": "Leptos SSR login/query/logout and Session PostgreSQL router flow passed in draft; reference not modified; browser GUI not executed"
+    "day16_green": "Leptos SSR login/query/logout and Session PostgreSQL router flow passed in draft; reference not modified; browser GUI not executed",
+    "initial_account": "admin",
+    "initial_password": "admin",
+    "initialization": "once only; never reset existing password on restart",
+    "password_change": "authenticated change with persistent salted hash required",
+    "reference_sha": "ba5dc518c2b758b868e04852852b5382eed54042",
+    "actual_startup": "fails missing ANALYTICS_ADMIN_KEY_SHA256; 3100 not started",
+    "implementation_day_policy": "next Day; Day16 frozen",
+    "tests_scope": "current key-based prototype/router PostgreSQL; not account/password acceptance",
+    "evidence": "docs/teaching/evidence/2026-10-17-current-source-validation.json"
   },
   "day15_ci_validation": {
     "date": "2026-10-17",
@@ -526,28 +534,37 @@
         "complete_green_patch_verified": true
       }
     },
-    "status": "complete lesson code supplied; draft tests/checks passed; reference not modified; GUI pending",
+    "status": "Day16 article frozen; current reference partially implemented and validated; later changes belong to next Day",
     "revision": "r3",
     "root_tests_migration": "planned; no per-source-file unit test extraction",
     "next_day_advanced": false,
     "complete_green_supplied": true,
     "test_scope": "draft only; see validation.json",
-    "green_applied_to_reference": false,
+    "green_applied_to_reference": "partially observed; see per-project evidence",
     "previous_page_ids": [
       "3fce51d4-5093-813d-a411-e1ad2a73d329",
       "3fce51d4-5093-8196-b41a-da9dab546654",
       "3fce51d4-5093-813c-96c5-dec6211d47be"
     ],
-    "previous_page_restore": "failed target_not_found"
+    "previous_page_restore": "failed target_not_found",
+    "frozen": true,
+    "frozen_reason": "user confirms program has been filled; no further Day16 article edits",
+    "current_reference_sha": "ba5dc518c2b758b868e04852852b5382eed54042",
+    "current_validation_evidence": "docs/teaching/evidence/2026-10-17-current-source-validation.json"
   },
   "day16_test_refactor": {
-    "status": "draft applied and verified; reference unchanged",
+    "status": "partially applied in reference",
+    "reference_sha": "ba5dc518c2b758b868e04852852b5382eed54042",
     "root_only": true,
     "split_inline_unit_tests": false,
-    "files": 8,
-    "cases_byte_identical": 38,
-    "related_suite_passed": 72,
-    "evidence": "docs/teaching/day16/test-relocation-evidence.json",
-    "ci_db_flow_explicit": true
+    "observed_pet_files": 4,
+    "observed_pet_cases": 18,
+    "pet_actual_destination": "apps/desktop_pet/tests",
+    "remaining_root_targets": 5,
+    "remaining_root_nonempty_cases": 20,
+    "root_tests_local": "20 passed at unchanged source 520bfa1",
+    "ci_gap": "test-workspace job removed while targets remain",
+    "previous_draft_evidence": "docs/teaching/day16/test-relocation-evidence.json",
+    "current_reference_evidence": "docs/teaching/evidence/2026-10-17-current-source-validation.json"
   }
 }

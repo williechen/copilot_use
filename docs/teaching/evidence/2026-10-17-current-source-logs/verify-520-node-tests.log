@@ -1,0 +1,11 @@
+✔ 重複檔案 IPC 只接受後端授權 root，不傳入任意路徑 (3.9901ms)
+✔ scanFilePreview uses read-only command without path (5.272332ms)
+✔ 掃描預覽不得接受使用者指定路徑 (1.588622ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 208.742815

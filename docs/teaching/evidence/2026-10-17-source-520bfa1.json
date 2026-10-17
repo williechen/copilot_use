@@ -1,0 +1,152 @@
+{
+  "date": "2026-10-17",
+  "timezone": "Asia/Taipei",
+  "source_sha": "520bfa13de8cbfd32c8483f2497c95aecb5aefb9",
+  "reference_update": "fast-forward only; no direct source edits",
+  "day15_frozen": true,
+  "day16_frozen": true,
+  "next_day_advanced": false,
+  "native_build": "server/stats-server/desktop-pet passed",
+  "wasm": {
+    "chat_hydrate_build": "passed",
+    "pet_frontend_check_and_trunk_build": "passed"
+  },
+  "tests": {
+    "app_packages_passed": 73,
+    "app_packages_failed": 0,
+    "app_packages_default_ignored": 1,
+    "ignored_postgres_explicit_passed": 1,
+    "remaining_root_cases_passed": 20,
+    "pet_node_contract_passed": 3,
+    "chat_ssr_feature_passed": 2,
+    "chat_ssr_feature_failed": 1,
+    "chat_ssr_failure": "room_page_has_real_room_identity_and_multiline_composer: missing history-not-connected notice"
+  },
+  "chat_flow": {
+    "source_sha": "520bfa13de8cbfd32c8483f2497c95aecb5aefb9",
+    "roomA": "e32b5836-7872-43da-9e63-02aa84038ca4",
+    "roomB": "eba72a7d-a808-4aa0-a20e-96dca1755f0a",
+    "http_list": true,
+    "same_room_broadcast": true,
+    "cross_room_isolation": true,
+    "room_mismatch_rejected": true,
+    "blank_rejected": true,
+    "room_ssr_textarea": true,
+    "home_still_has_create_room": true,
+    "fixture_db": "/var/lib/rust-ai-chat/validation-520bfa1/chat.db",
+    "browser_gui": "not included",
+    "sqlite_persisted_count": 2,
+    "sqlite_cross_room_or_blank_not_persisted": true,
+    "browser_list_load": true,
+    "browser_select_room": true,
+    "browser_send_receive": true,
+    "browser_search_filters": false,
+    "browser_home_list_only": false,
+    "asset_cache_issue": "resolved by versioned rust_ai_chat_520bfa1 JS/WASM runtime asset name",
+    "screenshot": "/var/log/rust-ai-chat/chat-browser-520.png"
+  },
+  "pet_startup": {
+    "native_process_started": true,
+    "webkit_web_processes_observed": 2,
+    "frontend_url": "http://127.0.0.1:1420/",
+    "native_gui_ipc_acceptance": "not executed",
+    "known_roam_target": "main control window; should be pet window"
+  },
+  "analytics": {
+    "admin_router_postgres_flow": "passed using synthetic fixture login key and separate schema; not account/password acceptance",
+    "actual_startup": "exited: missing ANALYTICS_ADMIN_KEY_SHA256",
+    "listener_3100_started": false,
+    "admin_admin_initialization": "not implemented",
+    "change_password": "not implemented",
+    "new_login_key_generated": false
+  },
+  "remaining_root_ci": "workspace-tests still has 5 targets/20 non-empty cases; test-workspace job removed; local cases passed but CI coverage gap remains",
+  "not_executed": [
+    "Pet native two-window interactive IPC acceptance",
+    "Analytics browser GUI and account/password acceptance",
+    "SQLx postgres_event_store feature test (separate DB creation privileges required)"
+  ],
+  "next_day_requirements": {
+    "chat": "homepage only room list; create/manage via personal management; connect search after main flow",
+    "pet": "roaming targets pet; native dual-window and scan/confirm interaction validation",
+    "analytics": "initialize admin/admin once; username/password login; authenticated password change with persistent salted hash; restart does not reset"
+  },
+  "artifacts": {
+    "server": {
+      "sha256": "1bc89c4263371d4670ca299b15ffd2399586008a6de636686697e86f6e4ff641"
+    },
+    "stats-server": {
+      "sha256": "4f854d001f68266dd4063132b4a5421a25c2733f1ea34f6a10033032eb8d5754"
+    },
+    "desktop-pet": {
+      "sha256": "ae1ef041d639ddd25f83451ef7ec1382329883ff69a8a29db57b9118e586f698"
+    },
+    "chat_wasm": {
+      "sha256": "aca6057a32cc2ddf1055024f4d734473c3e301818090b230555fa494dfc6db98"
+    }
+  },
+  "remote_ci": {
+    "source_sha": "520bfa13de8cbfd32c8483f2497c95aecb5aefb9",
+    "success": 17,
+    "failure": 0,
+    "pending": []
+  },
+  "services_current": {
+    "chat": {
+      "started": true,
+      "url": "http://127.0.0.1:3000/",
+      "uses_existing_runtime_database": true,
+      "asset_output_name": "rust_ai_chat_520bfa1"
+    },
+    "pet": {
+      "started": true,
+      "frontend": "http://127.0.0.1:1420/",
+      "uses_existing_runtime_config": true
+    },
+    "analytics": {
+      "started": false,
+      "error": "缺少 ANALYTICS_ADMIN_KEY_SHA256",
+      "required_next_day": "admin/admin username/password initialization and change password"
+    }
+  },
+  "article_sync": {
+    "day15_body_modified": false,
+    "day16_body_modified": false,
+    "scope": "canonical status, project entry pages, UI requirements, FUTURE_WORK and learning-state",
+    "next_day_advanced": false
+  },
+  "reference_to_article": {
+    "chat": {
+      "article_day": 16,
+      "notion_id": "3fce51d4-5093-8143-a0b9-cc9a3f93860e",
+      "paths": [
+        "crates/ui/src/lib.rs::HomePage/RoomList/RoomPage/ChatPage",
+        "crates/ui/src/chat_socket.rs::ChatSocket",
+        "apps/server/src/lib.rs::application",
+        "apps/server/src/ws.rs::persist_ws_message"
+      ],
+      "result": "basic browser selection and chat verified; list-only homepage, wired search and SSR notice missing"
+    },
+    "pet": {
+      "article_day": 16,
+      "notion_id": "3fce51d4-5093-81e9-aa03-d633822eee89",
+      "paths": [
+        "apps/desktop_pet/tauri.conf.json::main/pet",
+        "apps/desktop_pet/src/lib.rs::open_control_window/send_pet_command",
+        "apps/desktop_pet/frontend/src/main.rs::App",
+        "apps/desktop_pet/src/roam.rs::roam_desktop"
+      ],
+      "result": "two-window implementation present and native started; full IPC GUI not accepted; roam targets main"
+    },
+    "analytics": {
+      "article_day": 16,
+      "notion_id": "3fce51d4-5093-813f-a38a-e37a47ae4959",
+      "paths": [
+        "apps/stats_server/src/admin.rs::login_page/login/dashboard/logout/Config",
+        "apps/stats_server/src/main.rs",
+        "apps/stats_server/src/pg_store.rs"
+      ],
+      "result": "key-based prototype and Session PostgreSQL router test pass; actual startup blocked; initialized admin/admin and password change absent"
+    }
+  }
+}

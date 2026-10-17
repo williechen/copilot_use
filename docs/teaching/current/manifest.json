@@ -18,7 +18,9 @@
       "red_applied_in_reference": true,
       "green_applied_in_reference": false,
       "draft_validation": "passed; details in validation.json",
-      "gui_acceptance": "not executed"
+      "gui_acceptance": "not executed",
+      "frozen": true,
+      "current_reference_evidence": "docs/teaching/evidence/2026-10-17-current-source-validation.json"
     },
     {
       "project": "pet",
@@ -34,7 +36,9 @@
       "red_applied_in_reference": true,
       "green_applied_in_reference": false,
       "draft_validation": "passed; details in validation.json",
-      "gui_acceptance": "not executed"
+      "gui_acceptance": "not executed",
+      "frozen": true,
+      "current_reference_evidence": "docs/teaching/evidence/2026-10-17-current-source-validation.json"
     },
     {
       "project": "analytics",
@@ -50,7 +54,9 @@
       "red_applied_in_reference": true,
       "green_applied_in_reference": false,
       "draft_validation": "passed; details in validation.json",
-      "gui_acceptance": "not executed"
+      "gui_acceptance": "not executed",
+      "frozen": true,
+      "current_reference_evidence": "docs/teaching/evidence/2026-10-17-current-source-validation.json"
     }
   ],
   "source_ci": {
@@ -102,5 +108,12 @@
         }
       }
     }
+  },
+  "frozen": true,
+  "freeze_reason": "Day16 program filled; retain article body and source snapshot",
+  "current_reference_observation": {
+    "sha": "ba5dc518c2b758b868e04852852b5382eed54042",
+    "evidence": "docs/teaching/evidence/2026-10-17-current-source-validation.json",
+    "full_acceptance": false
   }
 }
