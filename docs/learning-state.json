@@ -419,11 +419,12 @@
   },
   "ui_alignment": {
     "requirements": "docs/UI_ALIGNMENT_REQUIREMENTS.md",
-    "pet": "Leptos control window separate from 200x200 pet; six functional areas; real IPC capability gating",
+    "pet": "confirmed: separate native pet-life and control windows; shared backend state; single-window enlargement patch not adopted",
     "analytics": "Leptos components using existing HTTP JSON; HTML lesson correction deferred to next Day",
-    "status": "documented, not implemented",
+    "status": "requirements confirmed; no new layout source changes applied",
     "day15_frozen": true,
-    "next_day_advanced": false
+    "next_day_advanced": false,
+    "chat": "confirmed: Leptos room sidebar, message area and multiline composer; responsive layout, real states, separate management routes; not implemented"
   },
   "service_credentials": {
     "status": "requirements_confirmed_not_implemented",
