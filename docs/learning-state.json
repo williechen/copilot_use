@@ -440,5 +440,22 @@
     "tests_executed": false,
     "day15_modified": false,
     "next_day_advanced": false
+  },
+  "analytics_admin_access": {
+    "status": "requirements_confirmed_not_implemented_or_validated",
+    "surface": "authenticated Leptos administration only",
+    "anonymous_dashboard": false,
+    "protected": [
+      "business_pages",
+      "SSR_data_and_server_functions_if_used",
+      "query_api",
+      "management_api",
+      "SSE"
+    ],
+    "human_auth": "Session plus operation permissions",
+    "machine_auth": "separate source identity for ingestion/pairing/renewal",
+    "day15_modified": false,
+    "next_day_advanced": false,
+    "tests_executed": false
   }
 }

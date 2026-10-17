@@ -32,6 +32,7 @@ Refactor 整理當步實作及現有測試；例如將根 tests 的現有測試�
 逐步完成五欄設定（名字／種類／喜好／個性／興趣）、選用外觀覆寫、每隻寵物獨立資料與素材、200×200等比動畫、多寵物、手動拖移與可選的自動漫遊、記憶／回想／複習／提醒、RAG／MCP／Agent、備份／還原及installer／簽章updater。安裝後的更新採啟動時檢查或手動檢查正式GitHub Release，也不要求重新安裝。
 安全檔案流程保持授權root／opaque ID、non-root、確認、symlink／TOCTOU／權限重驗、journal／receipt／Trash／restore；預覽或Domain成功狀態不能冒充filesystem成功憑證。
 ### Analytics：真實事件、查詢與管理
+Analytics 定位為純管理後台，Leptos 提供後台畫面；除登入及必要的身分驗證流程外，所有業務頁面、查詢、管理與即時資料均須登入且具相應權限，不提供匿名 Dashboard。管理者 Session 與 Chat／Pet 服務憑證分開：服務上報／換證驗證機器身分，不以人員登入或來源 token 取代後台登入。
 服務間來源認證採「首次核准配對 → 短效憑證 → 來源端自動交互續期／輪替 → 撤銷／重新配對」；Chat／Pet 與 Analytics 互驗對方身分，不以 source_app 自我宣告或固定 token 無限換證。Leptos 管理畫面負責配對核准、期限／輪替政策、狀態與稽核；後端及來源端執行自動換證。此為已確認需求、未實作／未驗證，完整方案於後續 Day 提出，不回改 Day15。
 基本主線：接收Chat／Pet真實動作 → 來源認證 → 去重並持久提交 → Dashboard查詢／篩選 → 趨勢與明細 → 管理紀錄 → 封存／還原／備份。
 Dashboard 畫面使用 Leptos 元件與 Rust 狀態管理，沿用 HTTP JSON＋SSE／來源授權／PostgreSQL Adapter；不另維護獨立 HTML／JavaScript 互動頁，不把服務密鑰嵌入前台。既有 Day 的教法更正依封存規則在下一 Day 提出。
