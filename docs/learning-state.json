@@ -701,5 +701,18 @@
       "analytics": "3100 not listening",
       "pet": "native GUI full acceptance not executed"
     }
+  },
+  "confirmed_requirements_2026_10_17": {
+    "status": "requirements_confirmed_not_implementation_or_acceptance",
+    "groups": 16,
+    "canonical": "docs/COMMON_LEARNING_RULES.md",
+    "acceptance": "docs/UI_ALIGNMENT_REQUIREMENTS.md",
+    "notion_canonical": "3f2e51d4-5093-81dd-b8a8-ce7cb4cd3e60",
+    "chat": "two login destinations; registration logged out on separate completion page; account login backoff and active Session",
+    "pet": "independent multiple pets; cage lifecycle; species habits; sit disables roam; multi-monitor exceptions",
+    "analytics": "managed accounts; roles and source scopes; immediate revocation; audit and independent machine pairing",
+    "tests_executed": false,
+    "day15_day16_modified": false,
+    "next_day_advanced": false
   }
 }
