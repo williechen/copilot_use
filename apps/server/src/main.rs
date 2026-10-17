@@ -87,6 +87,22 @@ async fn health(State(s): State<StateData>) -> StatusCode {
     }
 }
 
+// 公開目錄只回傳可公開的識別與名稱，不暴露私人房間或管理能力。
+#[derive(Serialize, FromRow)]
+struct PublicRoomItem {
+    id: String,
+    name: String,
+}
+async fn public_rooms(State(s): State<StateData>) -> Result<Json<Vec<PublicRoomItem>>, StatusCode> {
+    sqlx::query_as::<_, PublicRoomItem>(
+        "SELECT id,name FROM chat_rooms WHERE NOT is_private ORDER BY name,id LIMIT 100",
+    )
+    .fetch_all(&s.pool)
+    .await
+    .map(Json)
+    .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)
+}
+
 async fn list_rooms(
     State(s): State<StateData>,
     headers: HeaderMap,
@@ -390,6 +406,7 @@ async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
         .route("/api/v1/me/rooms/{id}/members", get(management::members))
         .route("/api/v1/me/activity", axum::routing::post(audit::mine))
         .route("/api/v1/audit/activity", axum::routing::post(audit::query))
+        .route("/api/v1/public/rooms", get(public_rooms))
         .route("/api/v1/rooms", get(list_rooms).post(create_room))
         .route("/api/v1/messages", get(list_messages).post(send_message))
         .layer(axum::extract::DefaultBodyLimit::max(65536))

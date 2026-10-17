@@ -50,22 +50,78 @@ pub fn App(signed_in: bool) -> impl IntoView {
         error: RwSignal::new(String::new()),
     };
     provide_context(state);
-    view! {<Router><main><h1>"Rust AI Chat"</h1><nav><A href="/">"首頁"</A><A href="/login">"登入"</A><A href="/app">"房間列表"</A><A href="/app/manage">"我的管理"</A><A href="/app/knowledge">"知識庫"</A></nav><p class="error" role="alert">{move ||state.error.get()}</p>
+    view! {<Router><main><h1>"Rust AI Chat"</h1><nav><A href="/">"首頁"</A><a rel="external" href=move ||if state.signed_in.get(){"/app/manage"}else{"/login"}>{move ||if state.signed_in.get(){"管理"}else{"登入"}}</a></nav><p class="error" role="alert">{move ||state.error.get()}</p>
     <Routes fallback=||view!{<p>"找不到頁面"</p>}>
-    <Route path=path!("/") view=||view!{<p>"多人、多主題、持久訊息與 AI 對話"</p><A href="/app">"進入聊天室"</A>}/>
+    <Route path=path!("/") view=||view!{<management::RoomLobby public=true/>}/>
+    <Route path=path!("/enter") view=RoomEntry/>
+    <Route path=path!("/registration-complete") view=RegistrationComplete/>
     <Route path=path!("/login") view=Login/>
     <Route path=path!("/admin") view=management::SystemAdministration/>
     <ParentRoute path=path!("/app") view=Layout>
-    <ProtectedRoute path=path!("") view=management::RoomLobby condition=move ||Some(state.signed_in.get()) redirect_path=||"/login"/>
+    <ProtectedRoute path=path!("") view=||view!{<management::RoomLobby public=false/>} condition=move ||Some(state.signed_in.get()) redirect_path=||"/login"/>
     <ProtectedRoute path=path!("chat") view=Chat condition=move ||Some(state.signed_in.get()) redirect_path=||"/login"/>
     <ProtectedRoute path=path!("manage") view=management::MyManagement condition=move ||Some(state.signed_in.get()) redirect_path=||"/login"/>
     <ProtectedRoute path=path!("knowledge") view=Knowledge condition=move ||Some(state.signed_in.get()) redirect_path=||"/login"/>
     </ParentRoute></Routes></main></Router>}
 }
+// 只接受房間識別，不接受任意回跳網址，避免外部導向及路徑注入。
+fn valid_room_id(id: &str) -> bool {
+    !id.is_empty()
+        && id.len() <= 40
+        && id
+            .bytes()
+            .all(|c| c.is_ascii_alphanumeric() || c == b'_' || c == b'-')
+}
+fn login_destination(room: Option<&str>) -> String {
+    match room.filter(|id| valid_room_id(id)) {
+        Some(id) => format!("/enter?room={id}"),
+        None => "/app/manage".into(),
+    }
+}
+#[component]
+fn RegistrationComplete() -> impl IntoView {
+    view! {<section id="registration-complete"><h2>"註冊完成"</h2><p>"目前已登出。請回首頁重新選擇聊天室，或由首頁登入個人頁。"</p><A href="/">"回首頁"</A></section>}
+}
+#[component]
+fn RoomEntry() -> impl IntoView {
+    let state = session();
+    let params = leptos_router::hooks::use_query_map();
+    let navigate = use_navigate();
+    let error = RwSignal::new(String::new());
+    Effect::new(move |_| {
+        let id = params.with(|p| p.get("room")).unwrap_or_default();
+        if !valid_room_id(&id) {
+            error.set("房間識別不合法，請回首頁重新選房。".into());
+            return;
+        }
+        let navigate = navigate.clone();
+        if !state.signed_in.get_untracked() {
+            navigate(&format!("/login?room={id}"), Default::default());
+            return;
+        }
+        error.set(String::new());
+        spawn(async move {
+            // 進房前由伺服器檢查 Session 與房間權限。
+            let result = api(&format!("/api/v1/rooms/{id}/join"), "POST", Some(json!({}))).await;
+            if params.with_untracked(|p| p.get("room")).as_deref() != Some(id.as_str()) {
+                return;
+            }
+            match result {
+                Ok(_) => navigate(&format!("/app/chat?room={id}"), Default::default()),
+                Err(e) if e == "登入已失效，請重新登入。" => {
+                    state.signed_in.set(false);
+                    navigate(&format!("/login?room={id}"), Default::default());
+                }
+                Err(e) => error.set(format!("無法進入房間：{e}")),
+            }
+        });
+    });
+    view! {<section><h2>"進入聊天室"</h2><p role="status">{move ||if error.get().is_empty(){"正在核對房間進入權限…".into()}else{error.get()}}</p><A href="/">"回首頁"</A></section>}
+}
 #[component]
 fn Layout() -> impl IntoView {
     let state = session();
-    view! {<section><button on:click=move |_|spawn(async move{match api("/api/v1/auth/logout","POST",Some(json!({}))).await{Ok(_)=>state.signed_in.set(false),Err(e)=>state.error.set(e)}})>"登出"</button><Outlet/></section>}
+    view! {<section><nav><A href="/app">"房間列表"</A><A href="/app/manage">"我的管理"</A><A href="/app/knowledge">"知識庫"</A></nav><button on:click=move |_|spawn(async move{match api("/api/v1/auth/logout","POST",Some(json!({}))).await{Ok(_)=>state.signed_in.set(false),Err(e)=>state.error.set(e)}})>"登出"</button><Outlet/></section>}
 }
 fn credential_error(username: &str, password: &str) -> Option<&'static str> {
     if username.len() < 3 || username.len() > 100 {
@@ -122,7 +178,11 @@ fn api_failure(path: &str, status: u16) -> String {
             _ => format!("操作失敗：{status}"),
         }
     } else {
-        format!("操作失敗：{status}")
+        match status {
+            401 => "登入已失效，請重新登入。".into(),
+            403 => "你沒有進入或操作此房間的權限。".into(),
+            _ => format!("操作失敗：{status}"),
+        }
     }
 }
 #[component]
@@ -144,6 +204,7 @@ fn Login() -> impl IntoView {
         },
     );
     let navigate = use_navigate();
+    let register_navigate = navigate.clone();
     let login = move || {
         if busy.get_untracked() {
             return;
@@ -165,7 +226,10 @@ fn Login() -> impl IntoView {
                     password.set(String::new());
                     state.error.set(String::new());
                     state.signed_in.set(true);
-                    navigate("/app", Default::default());
+                    navigate(
+                        &login_destination(params.with_untracked(|p| p.get("room")).as_deref()),
+                        Default::default(),
+                    );
                 }
                 Err(e) => state.error.set(e),
             }
@@ -173,7 +237,7 @@ fn Login() -> impl IntoView {
         });
     };
     view! {<section id="account-access"><h2>"登入帳號"</h2>
-    <p>"首次使用請先填寫帳號與密碼，按「註冊」建立帳號；註冊成功後再按「登入」。"</p>
+    <p>"首次使用請先填寫帳號與密碼，按「註冊」建立帳號；註冊完成後會進入獨立訊息頁，請返回首頁重新選房或登入個人頁。"</p>
     <form id="auth-form" on:submit=move |event|{event.prevent_default();login();}>
     <label>"使用者名稱"<input id="username" name="username" required autocomplete="username" prop:value=move ||username.get() on:input=move |e|username.set(event_target_value(&e)) on:change=move |e|username.set(event_target_value(&e))/></label>
     <small>"3–100 字元，可使用文字、數字、_ 或 -。"</small>
@@ -186,8 +250,13 @@ fn Login() -> impl IntoView {
         if let Some(error)=credential_error(&name,&secret){state.error.set(error.into());return;}
         username.set(name.clone());
         let credentials=json!({"username":name,"password":secret});busy.set(true);
+        let navigate=register_navigate.clone();
         spawn(async move{match api("/api/v1/auth/register","POST",Some(credentials)).await{
-            Ok(_)=>notice.set("註冊成功，請按「登入」進入聊天室。".into()),Err(e)=>state.error.set(e)
+            Ok(_)=>match api("/api/v1/auth/logout","POST",Some(json!({}))).await {
+                Ok(_)=>{password.set(String::new());state.signed_in.set(false);navigate("/registration-complete",leptos_router::NavigateOptions{replace:true,..Default::default()});},
+                Err(e) if e == "登入已失效，請重新登入。" => {password.set(String::new());state.signed_in.set(false);navigate("/registration-complete",leptos_router::NavigateOptions{replace:true,..Default::default()});},
+                Err(e)=>state.error.set(format!("註冊完成，但無法確認登出：{e}")),
+            },Err(e)=>state.error.set(e)
         }busy.set(false)});
     }>"註冊"</button>
     <p class="success" role="status">{move ||notice.get()}</p></form></section>}
@@ -508,5 +577,51 @@ pub fn hydrate() {
             .as_deref()
             == Some("true");
         leptos::mount::hydrate_body(move || view! {<App signed_in/>});
+    }
+}
+
+#[cfg(test)]
+mod entry_tests {
+    use super::*;
+    #[cfg(feature = "ssr")]
+    fn render(path: &str, signed_in: bool) -> String {
+        let owner = Owner::new();
+        owner.with(|| {
+            provide_context(leptos_router::location::RequestUrl::new(path));
+            view! {<App signed_in/>}.to_html()
+        })
+    }
+    #[cfg(feature = "ssr")]
+    #[test]
+    fn homepage_and_registration_completion_have_distinct_entry_surfaces() {
+        let guest = render("/", false);
+        assert!(guest.contains("room-lobby"));
+        assert!(guest.contains(r#"href="/login""#));
+        let member = render("/", true);
+        assert!(member.contains("管理"));
+        assert!(member.contains(r#"href="/app/manage""#));
+        let completed = render("/registration-complete", false);
+        assert!(completed.contains(r#"id="registration-complete""#));
+        assert!(completed.contains("目前已登出"));
+        assert!(!completed.contains(r#"id="auth-form""#));
+        assert!(!completed.contains(r#"id="room-lobby""#));
+    }
+    #[test]
+    fn login_preserves_only_a_valid_room_target() {
+        assert_eq!(
+            login_destination(Some("room_123-abc")),
+            "/enter?room=room_123-abc"
+        );
+        for target in [
+            "",
+            "https://example.com",
+            "//example.com",
+            "room&admin=1",
+            "../admin",
+        ] {
+            assert_eq!(login_destination(Some(target)), "/app/manage");
+        }
+        assert_eq!(login_destination(Some(&"x".repeat(41))), "/app/manage");
+        assert_eq!(login_destination(None), "/app/manage");
     }
 }

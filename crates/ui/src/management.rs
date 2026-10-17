@@ -1,24 +1,34 @@
 //! 房間列表與各人的管理區；管理 API 仍依 Session／房主身分逐項授權。
 use super::*;
 #[component]
-pub(super) fn RoomLobby() -> impl IntoView {
+pub(super) fn RoomLobby(#[prop(default = false)] public: bool) -> impl IntoView {
     let state = session();
     let rooms = RwSignal::new(Vec::<Value>::new());
     let loading = RwSignal::new(true);
     Effect::new(move |_| {
         spawn(async move {
             state.error.set(String::new());
-            match api("/api/v1/rooms", "GET", None).await {
+            match api(
+                if public {
+                    "/api/v1/public/rooms"
+                } else {
+                    "/api/v1/rooms"
+                },
+                "GET",
+                None,
+            )
+            .await
+            {
                 Ok(v) => rooms.set(v.as_array().cloned().unwrap_or_default()),
                 Err(e) => state.error.set(e),
             }
             loading.set(false);
         })
     });
-    view! {<section id="room-lobby"><h2>"房間列表"</h2><p>"選擇可進入的房間開始聊天；建立與設定自己的房間請到「我的管理」。"</p><A href="/app/manage">"前往我的管理"</A>
+    view! {<section id="room-lobby"><h2>"房間列表"</h2><p>"點擊聊天室名稱後登入並核對權限；看得到房間不代表有權進入。建立與管理房間請由首頁登入個人頁。"</p><A href="/app/manage">"前往我的管理"</A>
     <Show when=move ||loading.get()><p role="status">"正在讀取房間…"</p></Show>
-    <Show when=move ||!loading.get()&&rooms.get().is_empty()><p>"目前沒有可進入的房間。你可以在我的管理建立房間，或請房主邀請你。"</p></Show>
-    <ul id="room-list">{move ||rooms.get().into_iter().map(|r|{let id=r["id"].as_str().unwrap_or("").to_owned();let name=r["name"].as_str().unwrap_or("").to_owned();view!{<li><A href=format!("/app/chat?room={id}")>{format!("進入：{name}")}</A></li>}}).collect_view()}</ul></section>}.into_any()
+    <Show when=move ||!loading.get()&&rooms.get().is_empty()><p>"目前沒有可顯示的房間。"</p></Show>
+    <ul id="room-list">{move ||rooms.get().into_iter().map(|r|{let id=r["id"].as_str().unwrap_or("").to_owned();let name=r["name"].as_str().unwrap_or("").to_owned();view!{<li><A href=format!("/enter?room={id}")>{name}</A></li>}}).collect_view()}</ul></section>}.into_any()
 }
 
 fn audit_time(ms: i64) -> String {
@@ -129,7 +139,7 @@ pub(super) fn MyManagement() -> impl IntoView {
     view! {<section id="my-management"><h2>"我的管理"</h2><p>"在這裡建立與管理自己的房間；AI 角色與對話設定由系統管理者負責。"</p><A href="/app">"回房間列表"</A><p class="success" role="status">{move ||notice.get()}</p>
            <form id="create-room-form" on:submit=move |e|{e.prevent_default();create();}>
                  <label for="room-name">"新房間名稱"</label><input id="room-name" placeholder="輸入名稱後按 Enter 建立" maxlength="200" prop:value=move ||room_name.get() on:input=move |e|room_name.set(event_target_value(&e))/><label><input type="checkbox" prop:checked=move ||new_private.get() on:change=move |e|new_private.set(event_target_checked(&e))/>"私聊房間（需要邀請）"</label><button id="create-room" type="submit" disabled=move ||creating.get()>{move ||if creating.get(){"建立中…"}else{"建立房間"}}</button></form>
-    <h3>"我建立的房間"</h3><ul id="owned-rooms">{move ||rooms.get().into_iter().map(|r|{let id=r["id"].as_str().unwrap_or("").to_owned();let name=r["name"].as_str().unwrap_or("").to_owned();view!{<li><A href=format!("/app/chat?room={id}")>{name}</A>{if r["is_private"]==true{"（私聊）"}else{"（公開）"}}</li>}}).collect_view()}</ul>
+    <h3>"我建立的房間"</h3><ul id="owned-rooms">{move ||rooms.get().into_iter().map(|r|{let id=r["id"].as_str().unwrap_or("").to_owned();let name=r["name"].as_str().unwrap_or("").to_owned();view!{<li><A href=format!("/enter?room={id}")>{name}</A>{if r["is_private"]==true{"（私聊）"}else{"（公開）"}}</li>}}).collect_view()}</ul>
     <label>"選擇自己的房間"<select id="managed-room" prop:value=move ||selected.get() on:change=move |e|{state.error.set(String::new());selected.set(event_target_value(&e));}><option value="">"選擇房間"</option>{move ||rooms.get().into_iter().map(|r|view!{<option value=r["id"].as_str().unwrap_or("").to_owned()>{r["name"].as_str().unwrap_or("").to_owned()}</option>}).collect_view()}</select></label>
     <Show when=move ||!selected.get().is_empty()><section id="room-settings"><h3>"房間成員"</h3><p>"公開房間不需邀請；私聊房間需要邀請。"</p>
            <input placeholder="邀請的使用者名稱" on:input=move |e|invitee.set(event_target_value(&e))/><button disabled=move ||selected.get().is_empty()||invitee.get().trim().is_empty() on:click=move |_|{let body=json!({"room_id":selected.get(),"username":invitee.get()});spawn(async move{match api("/api/v1/rooms/invite","POST",Some(body)).await{Ok(_)=>{notice.set("邀請已完成".into());member_epoch.update(|v|*v+=1);},Err(e)=>state.error.set(e)}});}>"邀請加入"</button>

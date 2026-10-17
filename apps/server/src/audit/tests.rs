@@ -39,6 +39,7 @@ async fn fixture() -> Fixture {
         .route("/room", axum::routing::post(crate::create_room))
         .route("/audit", axum::routing::post(query))
         .route("/rooms", axum::routing::get(crate::list_rooms))
+        .route("/public/rooms", axum::routing::get(crate::public_rooms))
         .route(
             "/messages",
             axum::routing::get(crate::list_messages).post(crate::send_message),
@@ -376,6 +377,76 @@ async fn public_room_and_private_room_follow_the_same_basic_user_journey() {
         get("/messages?room_id=private-room".into(), bob)
             .await
             .unwrap()
+            .status(),
+        403
+    );
+}
+
+#[tokio::test]
+async fn anonymous_directory_exposes_only_public_names_without_granting_entry() {
+    let f = fixture().await;
+    let credentials = json!({"username":"directory_owner","password":"synthetic-fixture-password"});
+    let registered = post(&f, "/register", credentials.clone(), None).await;
+    assert_eq!(registered.status(), 201);
+    assert!(
+        registered.headers().get("set-cookie").is_none(),
+        "registration must not sign in"
+    );
+    let login = post(&f, "/login", credentials, None).await;
+    let cookie = login.headers()["set-cookie"]
+        .to_str()
+        .unwrap()
+        .split(';')
+        .next()
+        .unwrap()
+        .to_owned();
+    for (id, private) in [("visible", false), ("hidden", true)] {
+        assert_eq!(
+            post(
+                &f,
+                "/room",
+                json!({"id":id,"name":id,"is_private":private}),
+                Some(&cookie)
+            )
+            .await
+            .status(),
+            201
+        );
+    }
+    let response = reqwest::Client::new()
+        .get(format!("{}/public/rooms", f.url))
+        .send()
+        .await
+        .unwrap();
+    assert_eq!(response.status(), 200);
+    let rows: Value = response.json().await.unwrap();
+    assert_eq!(rows, json!([{"id":"visible","name":"visible"}]));
+    assert_eq!(
+        post(&f, "/join/visible", json!({}), None).await.status(),
+        401
+    );
+    let stranger = json!({"username":"directory_guest","password":"synthetic-fixture-password"});
+    assert_eq!(
+        post(&f, "/register", stranger.clone(), None).await.status(),
+        201
+    );
+    let login = post(&f, "/login", stranger, None).await;
+    let guest = login.headers()["set-cookie"]
+        .to_str()
+        .unwrap()
+        .split(';')
+        .next()
+        .unwrap()
+        .to_owned();
+    assert_eq!(
+        post(&f, "/join/visible", json!({}), Some(&guest))
+            .await
+            .status(),
+        204
+    );
+    assert_eq!(
+        post(&f, "/join/hidden", json!({}), Some(&guest))
+            .await
             .status(),
         403
     );
