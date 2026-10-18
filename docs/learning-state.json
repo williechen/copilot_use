@@ -707,9 +707,9 @@
     "cached_conversations_override": false,
     "article_sync_implies_runtime_sync": false,
     "runtime_source_observation": {
-      "chat": "7917f8b2e05ed74703ff9a83b62732ce04461da7; relationship constraints improved; fresh SQLx/persistence5/startup passed; old DB checksum failed; primary IDs nullable; runtime unchanged; docs/teaching/evidence/2026-10-18-main-7917f8b/REPORT.md",
-      "pet": "7917f8b2e05ed74703ff9a83b62732ce04461da7; relationship constraints improved; fresh SQLx/persistence5/startup passed; old DB checksum failed; primary IDs nullable; runtime unchanged; docs/teaching/evidence/2026-10-18-main-7917f8b/REPORT.md",
-      "analytics": "7917f8b2e05ed74703ff9a83b62732ce04461da7; relationship constraints improved; fresh SQLx/persistence5/startup passed; old DB checksum failed; primary IDs nullable; runtime unchanged; docs/teaching/evidence/2026-10-18-main-7917f8b/REPORT.md"
+      "chat": "63f66e7742ecd09cd5199a47dbacc9df666af416; WS7 and build pass; main search3->2 and SSR assertion fail; candidate Green",
+      "pet": "63f66e7742ecd09cd5199a47dbacc9df666af416; SQLite separate migrations2; normal startup and four native cases pass; full GUI unverified",
+      "analytics": "63f66e7742ecd09cd5199a47dbacc9df666af416; fresh PG and guards pass; main Cookie and old31 upgrade fail; candidate Cookie/TCP Green"
     }
   },
   "confirmed_requirements_2026_10_17": {
@@ -836,10 +836,10 @@
     "last_full_comparison_unchanged": true
   },
   "functional_revalidation_2026_10_18": {
-    "main_sha": "7917f8b2e05ed74703ff9a83b62732ce04461da7",
-    "candidate_sha": null,
-    "evidence": "docs/teaching/evidence/2026-10-18-main-7917f8b/summary.json",
-    "notion_readback": "docs/teaching/evidence/2026-10-18-main-7917f8b/notion-readback.json",
+    "main_sha": "63f66e7742ecd09cd5199a47dbacc9df666af416",
+    "candidate_sha": "3eace139da323fc906133636fae93e4d54159173",
+    "evidence": "docs/teaching/evidence/2026-10-18-full-63f66e7/summary.json",
+    "notion_readback": "docs/teaching/evidence/2026-10-18-full-63f66e7/notion-readback.json",
     "formal_acceptance": false,
     "day_advanced": false,
     "rules_changed": false,

@@ -1,16 +1,14 @@
 ## 1. 學習大綱
-本次更新核對（main `7917f8b2e05ed74703ff9a83b62732ce04461da7`）：本輪只改兩份root SQLite migrations。新建SQLx遷移、persistence 5案、重新編譯／啟動及/health、/api/rooms HTTP200通過；從6e1c791既有DB升級與啟動仍因91733 checksum改變失敗。UI搜尋／SSR程式與lock無變，前輪3匹配→2顯示及歷史提示斷言缺口仍未修，本輪未重跑WASM／瀏覽器。 [本輪命令與27個schema案例](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-18-main-7917f8b/REPORT.md)。以下6e1c791及更早版本／候選保留為歷史基線，不回填為最新main通過。完整功能仍未驗收；未新增規則或Day。
-歷史候選e33971f只適用舊2eddd64；最新main已修改建表與ID契約並刪除ALTER檔，該patch不可直接套用。先前候選成功結果保留原SHA，不代表本輪checksum升級問題已解決。
-本次複驗來源 rust_ai_chat/main `1853876e0eb1cfe8e4562be8b3c661b55f1bc54b`；修正候選 `80ba01e6d965d0e3ff10bef18a5cbd17f01e8f05`，工作分支 codex/day18-revalidate-1853876，尚未合併 main。Day18 已發布，next_day 為 19，本次修訂不新增 Day。
-目標仍是首頁名稱查詢：按鈕 → GET /api/rooms → 完整 rows → filter_rooms（trim、忽略英文大小寫、名稱包含）→ 保留真實 ID 的房間連結；成功／空結果／失敗後可重試。原發布來源 98f30d8 的「未發請求」是歷史觀察；目前 main 已修正借用且 SSR/WASM 乾淨建置通過；但完整名稱查詢會先由 filter_room 取所有完全相同名稱，漏掉既有 filter_rooms 名稱包含邏輯原本應保留的其他房間。本次 API 有 3 筆匹配，瀏覽器只列 2 筆。先前 abebbef 的 E0382 已解除，保留歷史證據而非當成目前失敗。
-本切片不等於登入／ACL／歷史／整個產品通過。原 Red/Green 學習估時 15 分鐘；此次契約修正與回歸另估 20 分鐘，正式驗證耗時不算成使用者學習估時。
+本輪main `63f66e7742ecd09cd5199a47dbacc9df666af416`；修正候選 `3eace139da323fc906133636fae93e4d54159173` 在獨立分支 codex/full-acceptance-63f66e7，未合併或推送main。原Day18頁修訂，next_day各19不遞增。
+目標維持首頁名稱查詢完整切片：RoomList按鈕 → GET /api/rooms → 完整rows → 既有filter_rooms（trim、忽略英文大小寫、名稱包含）→ 真實ID連結。main完整workspace為126 passed／1 failed／0 ignored，失敗為SSR缺少「歷史載入尚未接通」。瀏覽器完整房名3匹配只顯示2；部分中文含空白／rUsT／空白查全部通過，無相符缺明確提示。真實WS七案、HTTP503保留清單與重試通過。候選128 passed／0 failed／0 ignored、名稱完整3筆與空結果提示通過；未合併main。
+本輪並查核新增服務分庫：Chat使用root四份SQLite migrations，Pet另用自己兩份。新建可以啟動；4198fb1／7917f8b舊Chat DB因missing applied migration91733升級失敗。重建空DB不是既有資料升級驗收。
+原Red／Green學習15分鐘；候選套用與回歸另估20分鐘，migration兼容為另項工作，未擴大成本篇全部產品驗收。
 ## 2. 實作內容
-### Red：本次已實際執行
-在 main 乾淨建置成功後，以獨立測試房間呼叫 API 並操作瀏覽器：兩筆同名「Rust 技術交流」及一筆「Rust 技術交流延伸」都符合既有名稱包含篩選，但查詢完整房名只回兩筆完全同名。這是本輪已實測的 Red；中文含空白與空白查全部已通過，不再說它們仍失敗。現有 day18_query_filter_preserves_room_ids 已存在且可通過，這不是新的 Red；不重複新增同名測試。
-另執行 SSR 測試，day16_layout_tests::room_page_has_real_room_identity_and_multiline_composer 因缺少「歷史載入尚未接通」失敗。歷史功能仍未接通，故修正畫面提示而非移除測試要求。
-### 完整最小 Green：候選程式，尚未套用 main
-在 crates/ui/src/room_[api.rs](http://api.rs) 刪除整個未再使用的 filter_room 函式；create_room、list_rooms 的 HTTP／JSON／ID 驗證保持既有實作。名稱搜尋由既有 filter_rooms 處理，不再用完全同名預先篩選先縮減 rows。這修正漏列既有匹配房間的行為，沒有增加名稱搜尋規則。
-將 RoomList 的 query_room 閉包完整替換如下：
+### 已執行的 Red
+獨立SQLite API有兩筆「Rust 技術交流」及一筆「Rust 技術交流延伸」。main filter_room先收集所有完全同名，導致按完整名稱後只顯示2筆，原包含匹配應有3筆。這不是舊98f30d8「沒有HTTP請求」，也不是794da6e「只取第一筆」；來源分開。
+無相符名稱時清單為空但仍說「查詢完成，請選擇房間」。SSR day16_layout_tests::room_page_has_real_room_identity_and_multiline_composer實際失敗，缺少歷史尚未接通提示。純filter測試已存在且通過，不重複當Red或新增同名符號。
+### 完整最小 Green
+在crates/ui/src/room_[api.rs](http://api.rs)刪除整個filter_room函式，保留既有create_room／list_rooms。RoomList的query_room閉包完整改為：
 ```rust
 let query_room = move || {
         if loading.get_untracked() {
@@ -46,17 +44,18 @@ let query_room = move || {
         }
     };
 ```
-按鈕 disabled/loading、輸入與 `filter_rooms(&rows.get(), &query.get())` 連結生成保留。HTTP 失敗不清空 rows；空白顯示全部，無相符名稱明示空結果。ChatPage 的 messages 列表之前恢復這一行，照實揭露現況：
+保留畫面現有`filter_rooms(&rows.get(), &query.get())`、disabled／loading與真實ID連結。ChatPage messages列表前恢復這一行，照實告知歷史未接通：
 ```rust
 <p>"歷史載入尚未接通"</p>
 ```
-[完整可套用 patch](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-18-main-1853876/day18-functional-fixes.patch) 包含本篇必要修改與相關回歸測試；其 parent 是本次 main，並非宣稱已合併。
-### Refactor／舊 Day 更正補充
-Day17／Day18 原有純篩選測試不能證明查詢按鈕接線。原發布時缺 GET／loading 不解除，與 abebbef 的 E0382、最新 1853876 的匹配房間漏列，是不同版本的缺陷。本次保留兩者來源身分，不把修正候選的通過回填到 main。讀取／重新整理與查詢的共用 helper 尚未重構。
+[以本次main為parent的完整patch](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-18-full-63f66e7/functional-fixes.patch)包含以上完整修改與回歸測試；parent正是本輪main。HTTP失敗不清空舊rows，成功後才更新；空白列全、大小寫與中文由既有filter處理。這些程式已在候選跑到Green，尚未套用main。
+### Refactor與歷史更正
+Day17原教學保留98f30d8發布身分；現在入口已接HTTP，不再要求重做已存在的Day18測試。列表讀取／篩選目前分層清楚，避免在API層提前縮減名稱結果。舊patch或候選不可直接當成最新main已修。
 ## 3. 套件版本
-Rust 1.99.1／Cargo 1.99.1；Cargo.lock：Axum 0.8.9、Leptos 0.8.22、SQLx 0.9.0、Tokio 1.53.3、Tauri 2.12.4、tauri-build 2.7.3、wasm-bindgen 0.2.129、web-sys 0.3.106、Tower 0.5.3。Ubuntu 26.04.1／PostgreSQL 18.6／Node 22.22.1／cargo-leptos 0.3.11／Trunk 0.21.14。本次不新增產品依賴；MSRV／跨平台未另行驗證。
+本輪實際 Rust／Cargo 1.99.1；SQLx 0.9.0、Axum 0.8.9、Leptos 0.8.22、Tokio 1.53.3、Tauri 2.12.4、tauri-build 2.7.3、wasm-bindgen 0.2.129（Cargo.lock）。cargo-leptos 0.3.11、Trunk 0.21.14；Ubuntu 26.04.1、PostgreSQL 18.6。測試用 bundled Node 24.19.0，與先前 Node22 紀錄分開；未另驗跨平台／MSRV。候選沒有新增產品依賴。
 ## 4. 驗證項目
-main：`cargo test --locked -p ui --features ssr -p stats-server -p desktop-pet`，合計 58 passed／1 failed／1 ignored；Chat SSR 子集 3 passed／1 failed。`cargo leptos build --cargo-locked` 通過；瀏覽器中文含空白／空白通過，但完整房名 3 筆匹配只列 2 筆，未通過完整查詢流程。
-候選：上一輪完整回歸 105 passed／0 failed／1 ignored；SSR/WASM 建置與瀏覽器中文含空白、空白查全部、rUsT、無相符、HTTP 503 保留列表與重試通過。本輪再次執行的精確命令、結果、產物與 SHA 統整於 [本次正式複驗與原始證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-18-main-1853876/REPORT.md)，候選證據與 main 分列。
-CI 按最新 main SHA 與 abebbef 歷史失敗分開記錄 workflow/job、時間與連結；不以 Test All 的預設 UI 測試取代 SSR 行為測試或 WASM hydrate build。此篇教學的正式功能結論仍是 main 未通過。
-產品剩餘：GET /signin 404，帳號／個人管理／server ACL、保留選房登入、歷史、跨瀏覽器 WS、手機／鍵盤等未完成或未驗證。必需修改集中在本篇 Green 與原產品項目，沒有增加規則。
+主線命令：fixture PG環境 `cargo test --locked --workspace --exclude desktop-pet-frontend --features ui/ssr,stats-server/postgres-integration --no-fail-fast -- --include-ignored`，126 passed／1 failed／0 ignored；其中SSR 3 passed／1 failed。候選同命令128 passed／0 failed／0 ignored，包含全部doc-tests與PG integration，不把0 tests當覆蓋。
+主線與候選`cargo leptos build --cargo-locked`皆通過。主線瀏覽器完整名稱3→2失敗；中文含空白3筆、rUsT4筆、空白5筆通過；503保留3筆並重試成功。候選完整名稱3筆、無相符提示與503重試通過，AX與截圖保存。
+主線真實WS：ping/pong、跨房拒絕、空白拒絕、同房typing、兩客戶同message ID、另一房無洩漏、重連七案通過，SQLite持久化row已讀回。這是同一測試環境的兩個WS客戶，不能稱跨瀏覽器產品驗收。HTTP全空白／201byte／NUL房名均400；/signin及/api/messages為404，匿名建房201不代表帳號權限通過。
+舊Chat DB升級仍失敗；完整帳號／ACL、歷史、跨瀏覽器、行動／鍵盤等原產品要求未完成或未驗證。CI精確SHA／workflow/job與覆蓋、全部命令與原始錯誤見[本輪完整證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-18-full-63f66e7/REPORT.md)；正式完整功能維持未驗收。
+最新main的17個CI jobs皆success；其中Test All/test-ui只跑cargo test --locked -p ui，未啟用SSR；Rust AI Chat/build-chat負責建置，沒有執行本輪失敗的SSR行為斷言。精確job連結與workflow原文見本輪報告，CI綠燈不覆蓋這個失敗。

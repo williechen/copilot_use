@@ -1,6 +1,6 @@
 # P9 最終三產品實作目標（獨立於教學進度）
 
-> 最新 main `7917f8b2e05ed74703ff9a83b62732ce04461da7`：關聯NOT NULL改善已測，新建遷移／persistence5案／啟動HTTP200通過；舊DB checksum升級仍失敗，owner／pet／AI主鍵仍可NULL。其他搜尋／Cookie／產品缺口未修。詳[最新證據](teaching/evidence/2026-10-18-main-7917f8b/REPORT.md)。
+> 本輪參考rust_ai_chat/main `63f66e7742ecd09cd5199a47dbacc9df666af416` 全面重測：workspace126通過／1失敗，候選128通過；WS七案、schema33案、Pet原生四案通過。main搜尋／SSR／Cookie及舊DB升級仍失敗，完整GUI／帳密等未驗證，完整產品未驗收。詳[證據](teaching/evidence/2026-10-18-full-63f66e7/REPORT.md)。下方舊SHA屬歷史，不自動代表copilot_use產品通過；原產品需求未增加。
 
 ## 最高優先權的產品定位
 - 本 Repo 是 AI 控制的最終產品程式碼；**直接以 P9 產品能力為交付目標（不等於 P0～P12 中的 P9 學習階段）**。允許依相依性拆成多次 Commit/測試，但不按 rust_ai_chat 的 Day 編號或教學 P0–P12 進度等待。

@@ -57,13 +57,13 @@ Notion 已完整讀回但 GitHub 狀態寫入／讀回失敗，保留頁面 ID�
 91 項原文與本次變更前規則保留於 docs/teaching/archive/rules-before-minimum-v1/；第17項原文無編號，依第16與18項間順序對應並註明。封存資料僅供追溯，不再產生下一個衝突討論，也不自動成為執行規則。
 
 
-## 目前進度（最新程式再次核對）
-最新 main `7917f8b2e05ed74703ff9a83b62732ce04461da7`。next_day各19，本次未遞增；正式完整驗收仍未通過。
+## 目前進度（本輪全面複驗）
+來源main `63f66e7742ecd09cd5199a47dbacc9df666af416`；候選 `3eace139da323fc906133636fae93e4d54159173` 僅在工作分支，未合併main。next_day各19，本次未遞增；完整產品功能仍未驗收。
 ## 當前功能狀態與證據入口
-- chat：本輪只改兩份root SQLite migrations。新建SQLx遷移、persistence 5案、重新編譯／啟動及/health、/api/rooms HTTP200通過；從6e1c791既有DB升級與啟動仍因91733 checksum改變失敗。UI搜尋／SSR程式與lock無變，前輪3匹配→2顯示及歷史提示斷言缺口仍未修，本輪未重跑WASM／瀏覽器。
-- pet：這次NOT NULL加在owner_id及附屬表pet_id，缺少關聯、無效外鍵拒絕已實測。各表id仍為TEXT PRIMARY KEY，沒有NOT NULL；主人及寵物缺少主鍵ID仍可插入NULL。新建遷移通過，舊DB checksum升級失敗。漫遊核心未變，前輪原生四案僅保留原SHA適用性，完整GUI未重跑。
-- analytics：root AI人物關聯ai_person_id及room_id已加NOT NULL，相關缺少欄位拒絕實測通過；AI人物主鍵id仍可NULL。Stats程式、PG migrations及Cargo.lock未變，Cookie續期與PG31→32升級的前輪失敗仍未修；本輪未重跑相同HTTP／PG流程，AI表不等於帳密／角色功能完成。
-[最新27個schema案例與啟動／升級證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-18-main-7917f8b/REPORT.md)。這次是關聯欄位必填改善，尚未修主鍵非空與已套用migration相容性。既有規則、原需求與歷史證據保留。
+- chat：main完整workspace為126 passed／1 failed／0 ignored，失敗為SSR缺少「歷史載入尚未接通」。瀏覽器完整房名3匹配只顯示2；部分中文含空白／rUsT／空白查全部通過，無相符缺明確提示。真實WS七案、HTTP503保留清單與重試通過。候選128 passed／0 failed／0 ignored、名稱完整3筆與空結果提示通過；未合併main。
+- pet：63f66e7已改SqlitePool，獨立apps/desktop_pet/migrations兩份已真實套用；主鍵NOT NULL與關聯約束已修，不再說NULL主鍵仍可插入。普通啟動與四案原生座標通過；main維持(100,100)，停用pet不動，邊界反彈，關閉pet不回退移動main。探針等待映射，不代表完整手動GUI／普通啟動漫遊時序通過。舊Chat DB仍因已套用Pet migration被移走而升級失敗。
+- analytics：main新建PG migration、登入／query／CSRF／Origin／來源身分分離／冪等／logout撤銷通過；活動Cookie續期assert實際失敗。舊PG migration31→32升級與啟動仍VersionMissing。候選同步server expiry／Cookie後真實HTTP通過，短deadline TCP到期401／不復活通過；未合併main。帳密admin/admin表單仍422缺key，角色／scope／1800秒browser soak未完成或未驗證。
+主線完整workspace126通過／1失敗／0忽略；候選128通過／0失敗／0忽略。完整命令、適用性、CI與所有未驗證gate見[本輪完整證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-18-full-63f66e7/REPORT.md)。舊版本與候選保留原SHA，不把建置／發文／口頭認定當完整功能驗收。v1正文及既有產品需求沒有增加。
 ## 文件入口
 產品能力與未來清單、詳細架構、操作設定、功能對照與工程證據仍保留各自用途；本篇集中教學方法、格式及三專案大綱，其他教學入口改為引用。原Day及程式保留，舊規則／來源／失效教法只作歷史，不再套用為目前指令。
 [聊天室](https://app.notion.com/p/3f3e51d45093807da638c336e857543a) · [桌面寵物](https://app.notion.com/p/3f3e51d450938067923ae5a424d30950) · [統計儀錶板｜聊天室 × 桌面寵物](https://app.notion.com/p/3f3e51d45093817eafaee0cfc9ea4cc8)。功能與實作對照的詳細歷史保留工程紀錄；本篇不再追加歷次討論或驗證摘要。

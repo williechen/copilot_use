@@ -1,8 +1,8 @@
 {
   "scope": "Latest published teaching index; Day16 snapshot preserved in archive",
-  "revision": "day18-main-7917f8b",
+  "revision": "day18-full-63f66e7",
   "synced_date": "2026-10-18",
-  "source_sha": "7917f8b2e05ed74703ff9a83b62732ce04461da7",
+  "source_sha": "63f66e7742ecd09cd5199a47dbacc9df666af416",
   "articles": [
     {
       "project": "chat",
@@ -11,12 +11,12 @@
       "notion_url": "https://app.notion.com/p/3fde51d45093816bb36dd9099190d907",
       "four_sections": true,
       "notion_readback_verified": true,
-      "source_sha": "7917f8b2e05ed74703ff9a83b62732ce04461da7",
-      "tests": "fresh migration pass; persistence5/0; startup HTTP200; schema27 cases show required relationships enforced but primary IDs nullable; old6e DB upgrade/startup fail; unchanged runtime evidence retains prior SHA",
-      "application_status": "relationship NOT NULL applied; primary key NOT NULL absent; old DB upgrade incompatible",
-      "functional_acceptance": "not passed; old DB checksum, nullable IDs and product gaps remain",
-      "candidate_sha": null,
-      "candidate_scope": "no new candidate; historical candidates retain original SHA"
+      "source_sha": "63f66e7742ecd09cd5199a47dbacc9df666af416",
+      "tests": "main workspace126/1; SSR3/1; WS7; browser3 matches->2; candidate128/0 and browser3 shown",
+      "application_status": "HTTP query wired; contains results truncated; candidate fixes; account/history incomplete",
+      "functional_acceptance": "not passed; blockers remain",
+      "candidate_sha": "3eace139da323fc906133636fae93e4d54159173",
+      "candidate_scope": "search/SSR and Session Cookie fixes; Pet opt-in native probe; migration/product gaps not fixed"
     },
     {
       "project": "pet",
@@ -25,12 +25,12 @@
       "notion_url": "https://app.notion.com/p/3fde51d4509381bfa106ea4d9b190480",
       "four_sections": true,
       "notion_readback_verified": true,
-      "source_sha": "7917f8b2e05ed74703ff9a83b62732ce04461da7",
-      "tests": "fresh migration pass; persistence5/0; startup HTTP200; schema27 cases show required relationships enforced but primary IDs nullable; old6e DB upgrade/startup fail; unchanged runtime evidence retains prior SHA",
-      "application_status": "relationship NOT NULL applied; primary key NOT NULL absent; old DB upgrade incompatible",
-      "functional_acceptance": "not passed; old DB checksum, nullable IDs and product gaps remain",
-      "candidate_sha": null,
-      "candidate_scope": "no new candidate; historical candidates retain original SHA"
+      "source_sha": "63f66e7742ecd09cd5199a47dbacc9df666af416",
+      "tests": "native unit/integration34; fresh SQLite2 migrations; four real native geometry cases passed; full manual GUI unverified",
+      "application_status": "SqlitePool and separate migrations applied; target pet correct; normal startup and geometry pass; full product incomplete",
+      "functional_acceptance": "not passed; blockers remain",
+      "candidate_sha": "3eace139da323fc906133636fae93e4d54159173",
+      "candidate_scope": "search/SSR and Session Cookie fixes; Pet opt-in native probe; migration/product gaps not fixed"
     },
     {
       "project": "analytics",
@@ -39,12 +39,12 @@
       "notion_url": "https://app.notion.com/p/3fde51d4509381c2a0d5f60041137619",
       "four_sections": true,
       "notion_readback_verified": true,
-      "source_sha": "7917f8b2e05ed74703ff9a83b62732ce04461da7",
-      "tests": "fresh migration pass; persistence5/0; startup HTTP200; schema27 cases show required relationships enforced but primary IDs nullable; old6e DB upgrade/startup fail; unchanged runtime evidence retains prior SHA",
-      "application_status": "relationship NOT NULL applied; primary key NOT NULL absent; old DB upgrade incompatible",
-      "functional_acceptance": "not passed; old DB checksum, nullable IDs and product gaps remain",
-      "candidate_sha": null,
-      "candidate_scope": "no new candidate; historical candidates retain original SHA"
+      "source_sha": "63f66e7742ecd09cd5199a47dbacc9df666af416",
+      "tests": "main guards/PG pass; Cookie assert fails; old31 DB upgrade/startup fails; candidate Cookie true and TCP expiry pass",
+      "application_status": "startup PG migrations applied; server touch present; browser Cookie not refreshed in main; role/password incomplete",
+      "functional_acceptance": "not passed; blockers remain",
+      "candidate_sha": "3eace139da323fc906133636fae93e4d54159173",
+      "candidate_scope": "search/SSR and Session Cookie fixes; Pet opt-in native probe; migration/product gaps not fixed"
     }
   ],
   "day15_frozen": true,
@@ -56,8 +56,8 @@
   "day_advanced": false,
   "reference_modified": false,
   "current_reference_observation": {
-    "sha": "7917f8b2e05ed74703ff9a83b62732ce04461da7",
-    "evidence": "docs/teaching/evidence/2026-10-18-main-7917f8b/summary.json",
+    "sha": "63f66e7742ecd09cd5199a47dbacc9df666af416",
+    "evidence": "docs/teaching/evidence/2026-10-18-full-63f66e7/summary.json",
     "full_acceptance": false
   },
   "execution_policy": {
@@ -69,5 +69,5 @@
     "rules_version": "daily-tdd-minimum-v1"
   },
   "previous_manifest": "docs/teaching/archive/rules-before-minimum-v1/manifest.json",
-  "functional_revalidation_evidence": "docs/teaching/evidence/2026-10-18-main-7917f8b/REPORT.md"
+  "functional_revalidation_evidence": "docs/teaching/evidence/2026-10-18-full-63f66e7/REPORT.md"
 }
