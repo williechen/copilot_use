@@ -1,17 +1,17 @@
 {
   "scope": "Latest published teaching index; Day16 snapshot preserved in archive",
-  "revision": "day19-r1-f692c2e",
+  "revision": "day19-r2-0cd9f79",
   "synced_date": "2026-10-19",
   "source_sha": "f692c2ebe7b414fe49858c1ab1c4a33ce7c3dfee",
   "articles": [
     {
       "project": "chat",
       "day": 19,
-      "revision": "r1",
+      "revision": "r2",
       "notion_page_id": "3fde51d4509381d2aac7ea4b356c213b",
       "notion_url": "https://app.notion.com/p/3fde51d4509381d2aac7ea4b356c213b",
       "notion_parent_id": "3f3e51d45093807da638c336e857543a",
-      "notion_page_last_edited_at": "2026-10-18T22:41:51.925Z",
+      "notion_page_last_edited_at": "2026-10-18T23:17:17.243Z",
       "four_sections": true,
       "notion_readback_verified": true,
       "code_and_commands_exact": true,
@@ -29,18 +29,21 @@
         "wasm_check": "passed",
         "remaining": "existing SSR history-message assertion; browser not executed"
       },
-      "application_status": "not applied to rust_ai_chat/main; tested in isolated candidate only",
-      "functional_acceptance": "not passed; remaining GUI/browser/DB scope disclosed",
-      "published_readback_at": "2026-10-19T06:43:16.506111+08:00"
+      "application_status": "Day19 slice merged to rust_ai_chat/main; deployment/user environment unverified",
+      "functional_acceptance": "not passed; product-level integration and manual acceptance outstanding",
+      "published_readback_at": "2026-10-19T06:43:16.506111+08:00",
+      "latest_main_sha": "0cd9f7995c196a7359864a9395c0fe2372d09222",
+      "github_mirror_commit": "f5aa911070197b462fceb2bfdbf0be8902751d60",
+      "revision_readback_verified": true
     },
     {
       "project": "pet",
       "day": 19,
-      "revision": "r1",
+      "revision": "r2",
       "notion_page_id": "3fde51d450938194ae7fdcc55bce44e2",
       "notion_url": "https://app.notion.com/p/3fde51d450938194ae7fdcc55bce44e2",
       "notion_parent_id": "3f3e51d450938067923ae5a424d30950",
-      "notion_page_last_edited_at": "2026-10-18T22:41:52.447Z",
+      "notion_page_last_edited_at": "2026-10-18T23:17:47.105Z",
       "four_sections": true,
       "notion_readback_verified": true,
       "code_and_commands_exact": true,
@@ -57,18 +60,21 @@
         "regression_ignored": 0,
         "remaining": "native GUI not executed"
       },
-      "application_status": "not applied to rust_ai_chat/main; tested in isolated candidate only",
-      "functional_acceptance": "not passed; remaining GUI/browser/DB scope disclosed",
-      "published_readback_at": "2026-10-19T06:43:16.506111+08:00"
+      "application_status": "Day19 slice merged to rust_ai_chat/main; deployment/user environment unverified",
+      "functional_acceptance": "not passed; product-level integration and manual acceptance outstanding",
+      "published_readback_at": "2026-10-19T06:43:16.506111+08:00",
+      "latest_main_sha": "0cd9f7995c196a7359864a9395c0fe2372d09222",
+      "github_mirror_commit": "e9cb13db9c158ee5be14bf33ca5cbf278a4c62ef",
+      "revision_readback_verified": true
     },
     {
       "project": "analytics",
       "day": 19,
-      "revision": "r1",
+      "revision": "r2",
       "notion_page_id": "3fde51d4509381ed8a2eecf3ba7e4093",
       "notion_url": "https://app.notion.com/p/3fde51d4509381ed8a2eecf3ba7e4093",
       "notion_parent_id": "3f3e51d45093817eafaee0cfc9ea4cc8",
-      "notion_page_last_edited_at": "2026-10-18T22:41:52.952Z",
+      "notion_page_last_edited_at": "2026-10-18T23:18:11.671Z",
       "four_sections": true,
       "notion_readback_verified": true,
       "code_and_commands_exact": true,
@@ -85,9 +91,12 @@
         "regression_ignored": 1,
         "remaining": "real PG/TCP/time-window/concurrency not executed"
       },
-      "application_status": "not applied to rust_ai_chat/main; tested in isolated candidate only",
-      "functional_acceptance": "not passed; remaining GUI/browser/DB scope disclosed",
-      "published_readback_at": "2026-10-19T06:43:16.506111+08:00"
+      "application_status": "Day19 slice merged to rust_ai_chat/main; deployment/user environment unverified",
+      "functional_acceptance": "not passed; product-level integration and manual acceptance outstanding",
+      "published_readback_at": "2026-10-19T06:43:16.506111+08:00",
+      "latest_main_sha": "0cd9f7995c196a7359864a9395c0fe2372d09222",
+      "github_mirror_commit": "7bac2999ea300b16749c45ed9a7456e35cf8f801",
+      "revision_readback_verified": true
     }
   ],
   "day15_frozen": true,
@@ -133,5 +142,13 @@
     "evidence": "docs/teaching/evidence/2026-10-18-sql-like-room-search/REPORT.md",
     "reference_main_applied_sha": "2c7ace259ef790cea303d841f5779cd5f022d554",
     "latest_reference_evidence": "docs/teaching/evidence/2026-10-19-full-2c7ace2/REPORT.md"
+  },
+  "last_content_verification": {
+    "date": "2026-10-19",
+    "observed_main_sha": "0cd9f7995c196a7359864a9395c0fe2372d09222",
+    "original_lesson_base_sha": "f692c2ebe7b414fe49858c1ab1c4a33ce7c3dfee",
+    "no_day_increment": true,
+    "coverage": "Notion/Markdown mirrored r2; three Day19 snippets and module tests present on main; Test All success; product acceptance not passed",
+    "workspace_tests_removed": true
   }
 }
