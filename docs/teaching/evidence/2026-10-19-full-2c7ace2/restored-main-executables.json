@@ -1,0 +1,10 @@
+{
+  "sha": "2c7ace259ef790cea303d841f5779cd5f022d554",
+  "binaries_sha256": {
+    "server": "913702abcaebbba885104884512a1bfd49c93ed1974eb40fda981234a901e7a0",
+    "stats-server": "913b65cdaa555a2d999466e3027ef28158bb480f57905161acc408de41a4dabb",
+    "desktop-pet": "8ac66317977877cd1674afa8387aad59849e6c2ac42b06b8f061ad5ccafce1cd"
+  },
+  "site": "/home/willie/Documents/rust_ai_chat/target/site built from main2c",
+  "fixture_services_stopped": true
+}

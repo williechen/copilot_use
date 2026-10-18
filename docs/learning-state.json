@@ -707,9 +707,9 @@
     "cached_conversations_override": false,
     "article_sync_implies_runtime_sync": false,
     "runtime_source_observation": {
-      "chat": "fa0888ea1e1ea93415a4ba7f16972938969b1be3; main126/1; WS7 and browser3->2; candidate129/0; protocol schema only",
-      "pet": "fa0888ea1e1ea93415a4ba7f16972938969b1be3; SQLite3 migrations9 tables; native4 pass; full GUI unverified",
-      "analytics": "fa0888ea1e1ea93415a4ba7f16972938969b1be3; PG3 migrations15 tables; main Cookie and old31 upgrade fail; candidate Green"
+      "chat": "2c7ace259ef790cea303d841f5779cd5f022d554; Chat：main已接通後端參數化SQL LIKE，名稱不是room ID；完整／部分名稱、字面%／_／反斜線、注入字串與輸入限制12案通過，瀏覽器「Rust 技術交流」完整顯示同名兩筆及「Rust 技術交流延伸」共三筆，空結果提示正確。真WS七案及SQLite持久化讀回通過。但SSR「歷史載入尚未接通」仍缺少，重新整理遇503會清空原有結果，故本切片仍有阻擋；候選恢復提示、直接顯示SQL結果並保留失敗前清單。",
+      "pet": "2c7ace259ef790cea303d841f5779cd5f022d554; Pet：最新main使用獨立SQLite三份migration／九張業務表，普通停用啟動與前端／原生建置通過。候選只加可選原生探針，對實際Tauri視窗重跑enabled／disabled／boundary／close四案：main不移動、停用不移動pet、邊界反彈及關窗不回退main通過。探針等待映射後啟動，不能代替普通啟動漫遊時序、完整手動GUI、拖曳暫停恢復、逐寵物設定持久化、多寵物及真實多螢幕驗證。",
+      "analytics": "2c7ace259ef790cea303d841f5779cd5f022d554; Analytics：main已用成功的受保護GET回應層，同時延長server Session與同一Cookie Max-Age=1800；實際HTTP require-renewal已通過。另10案確認成功query續期、400／401／錯CSRF／公開login不續期、logout撤銷且不復活。真PG、Origin、CSRF、來源服務身分分離、攝取冪等通過。候選真TCP短deadline到期／不復活通過；不代表1800秒browser soak。帳密admin/admin仍422缺key、角色／scope及服務換證／撤銷未完整實作驗證，完整產品未驗收。"
     }
   },
   "confirmed_requirements_2026_10_17": {
@@ -875,5 +875,67 @@
     "formal_full_acceptance": false,
     "day_advanced": false,
     "evidence": "docs/teaching/evidence/2026-10-18-sql-like-room-search/REPORT.md"
+  },
+  "functional_revalidation_2026_10_19": {
+    "main_sha": "2c7ace259ef790cea303d841f5779cd5f022d554",
+    "candidate_sha": "1abcb8aa6bc279e888a057b87069bea788281c7c",
+    "evidence": "docs/teaching/evidence/2026-10-19-full-2c7ace2/summary.json",
+    "notion_readback": "docs/teaching/evidence/2026-10-19-full-2c7ace2/notion-readback.json",
+    "formal_acceptance": false,
+    "day_advanced": false,
+    "rules_changed": false,
+    "main_modified": false,
+    "main_workspace": {
+      "passed": 126,
+      "failed": 1,
+      "ignored": 0
+    },
+    "candidate_workspace": {
+      "passed": 131,
+      "failed": 0,
+      "ignored": 0
+    },
+    "notion_pages": [
+      {
+        "id": "3f2e51d4509381ddb8a8ce7cb4cd3e60",
+        "page_last_edited_at": "2026-10-18T16:17:59.565Z"
+      },
+      {
+        "id": "3f3e51d45093807da638c336e857543a",
+        "page_last_edited_at": "2026-10-18T16:18:01.792Z"
+      },
+      {
+        "id": "3f3e51d450938067923ae5a424d30950",
+        "page_last_edited_at": "2026-10-18T16:18:04.059Z"
+      },
+      {
+        "id": "3f3e51d45093817eafaee0cfc9ea4cc8",
+        "page_last_edited_at": "2026-10-18T16:18:06.226Z"
+      },
+      {
+        "id": "3fde51d45093816bb36dd9099190d907",
+        "page_last_edited_at": "2026-10-18T16:18:09.057Z"
+      },
+      {
+        "id": "3fde51d4509381bfa106ea4d9b190480",
+        "page_last_edited_at": "2026-10-18T16:18:11.282Z"
+      },
+      {
+        "id": "3fde51d4509381c2a0d5f60041137619",
+        "page_last_edited_at": "2026-10-18T16:18:13.520Z"
+      },
+      {
+        "id": "3fce51d45093818b913bebb8dab5ab65",
+        "page_last_edited_at": "2026-10-18T16:18:54.815Z"
+      },
+      {
+        "id": "3fce51d4509381ca83e3e825f0313698",
+        "page_last_edited_at": "2026-10-18T16:18:38.688Z"
+      },
+      {
+        "id": "3fce51d4509381ea871ec9c92da37c1b",
+        "page_last_edited_at": "2026-10-18T16:18:40.160Z"
+      }
+    ]
   }
 }

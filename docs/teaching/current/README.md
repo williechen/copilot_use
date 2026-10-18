@@ -6,11 +6,11 @@
 - [PET Day18](PET.md) · [Notion](https://app.notion.com/p/3fde51d4509381bfa106ea4d9b190480)
 - [ANALYTICS Day18](ANALYTICS.md) · [Notion](https://app.notion.com/p/3fde51d4509381c2a0d5f60041137619)
 
-- [正式複驗、錯誤、命令與原始證據](../evidence/2026-10-18-full-fa0888e/REPORT.md)
+- [正式複驗、錯誤、命令與原始證據](../evidence/2026-10-19-full-2c7ace2/REPORT.md)
 - [索引與分別驗收狀態](manifest.json)
 
 Day15／Day16 Notion 原文與既有封存保留；先前移除的 Day16 GitHub 文章沒有復原。本目錄的 CHAT／PET／ANALYTICS 是 Day18，不能當成 Day16。
 
 - [copilot_use P0註冊身分試作](../evidence/2026-10-18-copilot-p0-registration/REPORT.md)（本地工作分支，與rust_ai_chat／Day18驗收分開）
 
-- [名稱搜尋SQL LIKE修正](../evidence/2026-10-18-sql-like-room-search/REPORT.md)（兩庫工作分支，取代舊前端contains候選）
+- [名稱搜尋SQL LIKE修正](../evidence/2026-10-18-sql-like-room-search/REPORT.md)（歷史兩庫工作分支證據；參考main現已採SQL LIKE，最新實測見上方全面複驗）

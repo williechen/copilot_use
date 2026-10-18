@@ -1,0 +1,532 @@
+diff --git a/apps/desktop_pet/Cargo.toml b/apps/desktop_pet/Cargo.toml
+index 43f0178..e80b05c 100644
+--- a/apps/desktop_pet/Cargo.toml
++++ b/apps/desktop_pet/Cargo.toml
+@@ -4,6 +4,9 @@ version.workspace = true
+ edition = "2024"
+ build = "build.rs"
+ 
++[features]
++acceptance-probe = []
++
+ [dependencies]
+ ai-core = { path = "../../crates/ai_core" }
+ 
+diff --git a/apps/desktop_pet/src/acceptance_probe.rs b/apps/desktop_pet/src/acceptance_probe.rs
+new file mode 100644
+index 0000000..3171ba6
+--- /dev/null
++++ b/apps/desktop_pet/src/acceptance_probe.rs
+@@ -0,0 +1,78 @@
++//! Opt-in native acceptance instrumentation. Runs only in a dedicated fixture
++//! process built with `acceptance-probe`; never touches user files or AI.
++use tauri::{Manager, PhysicalPosition};
++
++pub fn start(app: &tauri::AppHandle, enabled: bool) -> Result<(), String> {
++    let scenario = std::env::var("PET_ACCEPTANCE_SCENARIO").map_err(|e| e.to_string())?;
++    if !matches!(
++        scenario.as_str(),
++        "enabled" | "disabled" | "boundary" | "close"
++    ) {
++        return Err("unknown acceptance scenario".into());
++    }
++    if enabled != (scenario != "disabled") {
++        return Err("scenario and PET_ENABLE_ROAM disagree".into());
++    }
++    let main = app.get_webview_window("main").ok_or("missing main")?;
++    let pet = app.get_webview_window("pet").ok_or("missing pet")?;
++    let app = app.clone();
++    tauri::async_runtime::spawn(async move {
++        let result = async {
++            // Window managers can apply initial placement after setup. Wait for
++            // mapped windows, then position fixtures before starting roaming.
++            tokio::time::sleep(std::time::Duration::from_millis(1500)).await;
++            let monitor = pet.current_monitor().map_err(|_| "monitor unavailable")?.ok_or("missing monitor")?;
++            let area = *monitor.work_area();
++            let size = pet.outer_size().map_err(|_| "mapped pet size unavailable")?;
++            let x = area.position.x + (area.size.width.saturating_sub(size.width)) as i32;
++            let y = area.position.y + (area.size.height.saturating_sub(size.height)) as i32;
++            let initial = if scenario == "boundary" { PhysicalPosition::new(x, y) } else { PhysicalPosition::new(300, 300) };
++            main.set_position(PhysicalPosition::new(100, 100)).map_err(|_| "cannot position main fixture")?;
++            pet.set_position(initial).map_err(|_| "cannot position pet fixture")?;
++            tokio::time::sleep(std::time::Duration::from_millis(500)).await;
++            let main = app.get_webview_window("main").ok_or("main disappeared")?;
++            let pet = app.get_webview_window("pet").ok_or("pet disappeared")?;
++            let main_start = main.outer_position().map_err(|_| "main position unavailable")?;
++            let pet_start = pet.outer_position().map_err(|_| "pet position unavailable")?;
++            if pet_start != initial { return Err("window manager did not accept requested fixture position"); }
++            if enabled {
++                let handle = app.clone();
++                tauri::async_runtime::spawn(async move { crate::roam::roam_desktop(handle).await; });
++            }
++            println!("NATIVE_FIXTURE {}", serde_json::json!({"scenario":scenario,"pet_start":[pet_start.x,pet_start.y],"main_start":[main_start.x,main_start.y],"size":[size.width,size.height],"area":[area.position.x,area.position.y,area.size.width,area.size.height]}));
++            let mut moved = false;
++            let mut samples = Vec::new();
++            for _ in 0..16 {
++                tokio::time::sleep(std::time::Duration::from_millis(125)).await;
++                let m = main.outer_position().map_err(|_| "main position unavailable")?;
++                let p = pet.outer_position().map_err(|_| "pet position unavailable")?;
++                if m != main_start { return Err("main moved during automatic roaming"); }
++                moved |= p != pet_start;
++                if p.x < area.position.x || p.y < area.position.y || p.x > x || p.y > y {
++                    eprintln!("NATIVE_BOUNDARY_OBSERVED: x={} y={} expected x={}..{} y={}..{} current_size={:?} current_monitor={:?}", p.x, p.y, area.position.x, x, area.position.y, y, pet.outer_size(), pet.current_monitor());
++                    return Err("pet escaped monitor work area");
++                }
++                samples.push((p.x, p.y, m.x, m.y));
++            }
++            if moved != enabled { return Err("observed motion disagrees with enabled state"); }
++            if scenario == "close" {
++                pet.close().map_err(|_| "cannot close pet")?;
++                tokio::time::sleep(std::time::Duration::from_millis(800)).await;
++                if app.get_webview_window("pet").is_some() { return Err("pet did not close"); }
++                if main.outer_position().map_err(|_| "main unavailable")? != main_start {
++                    return Err("roaming fell back to main after pet closed");
++                }
++            }
++            println!("NATIVE_ACCEPTANCE {}", serde_json::json!({"scenario":scenario,"passed":true,"samples_pet_x_y_main_x_y":samples,"moved":moved,"work_area":[area.position.x,area.position.y,area.size.width as i32,area.size.height as i32]}));
++            Ok(())
++        }.await;
++        match result {
++            Ok(()) => app.exit(0),
++            Err(error) => {
++                eprintln!("NATIVE_ACCEPTANCE_FAILED: {error}");
++                app.exit(1);
++            }
++        }
++    });
++    Ok(())
++}
+diff --git a/apps/desktop_pet/src/lib.rs b/apps/desktop_pet/src/lib.rs
+index 5d0f90f..eff9d16 100644
+--- a/apps/desktop_pet/src/lib.rs
++++ b/apps/desktop_pet/src/lib.rs
+@@ -1,3 +1,5 @@
++#[cfg(feature = "acceptance-probe")]
++mod acceptance_probe;
+ mod chat;
+ mod file_organizer;
+ mod roam;
+@@ -7,7 +9,9 @@ use pet_domain::{PetCommand, PetMachine, PetSnapshot};
+ use std::sync::{Arc, Mutex};
+ use tauri::{Emitter, Manager, State};
+ 
+-use crate::{chat::AiState, roam::roam_desktop};
++use crate::chat::AiState;
++#[cfg(not(feature = "acceptance-probe"))]
++use crate::roam::roam_desktop;
+ 
+ // 派發寵物指令並更新狀態
+ fn dispatch_pet_command(
+@@ -105,11 +109,11 @@ fn quit_pet(app: tauri::AppHandle) {
+ pub fn application() {
+     tauri::Builder::default()
+         .on_window_event(|window, event| {
+-            if window.label() == "main" {
+-                if let tauri::WindowEvent::CloseRequested { api, .. } = event {
+-                    api.prevent_close();
+-                    let _ = window.hide();
+-                }
++            if window.label() == "main"
++                && let tauri::WindowEvent::CloseRequested { api, .. } = event
++            {
++                api.prevent_close();
++                let _ = window.hide();
+             }
+         })
+         .manage(Mutex::new(PetMachine::default()))
+@@ -145,6 +149,10 @@ pub fn application() {
+                 }
+             });
+ 
++            #[cfg(feature = "acceptance-probe")]
++            acceptance_probe::start(app.handle(), roam_enabled())?;
++
++            #[cfg(not(feature = "acceptance-probe"))]
+             if roam_enabled() {
+                 let app_handle = app.handle().clone();
+                 tauri::async_runtime::spawn(async move {
+diff --git a/apps/server/src/http.rs b/apps/server/src/http.rs
+index bd34caf..32fce5f 100644
+--- a/apps/server/src/http.rs
++++ b/apps/server/src/http.rs
+@@ -49,12 +49,6 @@ pub struct RoomDetails {
+     pub name: String,
+ }
+ 
+-#[derive(Default, serde::Deserialize)]
+-pub struct RoomSearch {
+-    #[serde(default)]
+-    q: String,
+-}
+-
+ pub async fn get_room(
+     State(state): State<AppState>,
+     axum::extract::Path(id): axum::extract::Path<String>,
+@@ -80,6 +74,12 @@ pub async fn get_room(
+     }))
+ }
+ 
++#[derive(Default, serde::Deserialize)]
++pub struct RoomSearch {
++    #[serde(default)]
++    q: String,
++}
++
+ pub async fn list_rooms(
+     State(state): State<AppState>,
+     Query(search): Query<RoomSearch>,
+@@ -276,10 +276,34 @@ mod room_details_tests {
+         );
+     }
+ 
++    #[tokio::test]
++    async fn room_query_filters_in_repository_and_rejects_invalid_input() {
++        let (state, pool) = fixture().await;
++        let rows = list_rooms(
++            State(state.clone()),
++            Query(RoomSearch {
++                q: "不存在".into()
++            }),
++        )
++        .await
++        .unwrap()
++        .0;
++        assert!(rows.is_empty());
++        for q in ["x".repeat(201), "bad\0query".into()] {
++            assert_eq!(
++                list_rooms(State(state.clone()), Query(RoomSearch { q }))
++                    .await
++                    .unwrap_err(),
++                StatusCode::BAD_REQUEST
++            );
++        }
++        pool.close().await;
++    }
++
+     #[tokio::test]
+     async fn list_rooms_returns_persisted_room() {
+         let (state, pool) = fixture().await;
+-        let response = list_rooms(State(state), Query(RoomSearch { q: "".to_string() }))
++        let response = list_rooms(State(state), Query(RoomSearch::default()))
+             .await
+             .into_response();
+         assert_eq!(response.status(), StatusCode::OK);
+diff --git a/apps/stats_server/src/admin.rs b/apps/stats_server/src/admin.rs
+index 7cf7955..15daa23 100644
+--- a/apps/stats_server/src/admin.rs
++++ b/apps/stats_server/src/admin.rs
+@@ -290,10 +290,10 @@ async fn logout(
+         return StatusCode::FORBIDDEN.into_response();
+     }
+ 
+-    if let Some(key) = cookie_key(&headers) {
+-        if let Ok(mut sessions) = state.sessions.lock() {
+-            sessions.remove(&key);
+-        }
++    if let Some(key) = cookie_key(&headers)
++        && let Ok(mut sessions) = state.sessions.lock()
++    {
++        sessions.remove(&key);
+     }
+ 
+     let mut response = Redirect::to("/login").into_response();
+@@ -789,4 +789,112 @@ mod tests {
+         touch_session(&mut session, now + Duration::from_secs(2));
+         assert_eq!(session.expires, now + Duration::from_secs(2) + TTL);
+     }
++    // Real loopback HTTP with isolated, explicitly controlled session deadlines.
++    // No production key, wall-clock change, or 30-minute delay is required.
++    #[tokio::test]
++    async fn day18_tcp_cookie_and_idle_expiry_move_together() {
++        use tokio::io::{AsyncReadExt, AsyncWriteExt};
++
++        async fn exchange(app: Router, cookie: &str) -> String {
++            let listener = tokio::net::TcpListener::bind("127.0.0.1:0").await.unwrap();
++            let addr = listener.local_addr().unwrap();
++            let task = tokio::spawn(async move { axum::serve(listener, app).await.unwrap() });
++            let mut stream = tokio::net::TcpStream::connect(addr).await.unwrap();
++            stream.write_all(format!(
++                "GET /probe HTTP/1.1\r\nHost: {addr}\r\nCookie: {cookie}\r\nConnection: close\r\n\r\n"
++            ).as_bytes()).await.unwrap();
++            let mut bytes = Vec::new();
++            tokio::time::timeout(Duration::from_secs(5), stream.read_to_end(&mut bytes))
++                .await
++                .unwrap()
++                .unwrap();
++            task.abort();
++            String::from_utf8(bytes).unwrap()
++        }
++
++        let state = Admin {
++            ingest: IngestState {
++                pool: sqlx::postgres::PgPoolOptions::new()
++                    .connect_lazy("postgres://fixture:fixture@127.0.0.1:1/fixture")
++                    .unwrap(),
++                tokens: Arc::new(crate::IngestTokens {
++                    chat: "fixture-chat".into(),
++                    pet: "fixture-pet".into(),
++                }),
++            },
++            config: None,
++            sessions: Arc::new(Mutex::new(HashMap::new())),
++            attempts: Arc::new(Mutex::new((Instant::now(), 0))),
++        };
++        let app = Router::new()
++            .route(
++                "/probe",
++                get(
++                    |State(state): State<Admin>, headers: HeaderMap| async move {
++                        csrf_for(&state, &headers)
++                            .map(|_| StatusCode::OK)
++                            .unwrap_or(StatusCode::UNAUTHORIZED)
++                    },
++                ),
++            )
++            .route_layer(axum::middleware::from_fn_with_state(
++                state.clone(),
++                refresh_session,
++            ))
++            .with_state(state.clone());
++        let raw = "b".repeat(64);
++        let key = hash(&raw);
++        let cookie = format!("analytics_session={raw}");
++        let old_deadline = Instant::now() + Duration::from_secs(2);
++        state.sessions.lock().unwrap().insert(
++            key.clone(),
++            Session {
++                expires: old_deadline,
++                csrf: "fixture".into(),
++            },
++        );
++
++        let response = exchange(app.clone(), &cookie).await;
++        assert!(response.starts_with("HTTP/1.1 200"), "{response}");
++        assert!(response.contains("Max-Age=1800"), "{response}");
++        assert!(response.contains("HttpOnly; SameSite=Strict; Path=/"));
++        assert!(
++            state.sessions.lock().unwrap()[&key].expires > old_deadline + Duration::from_secs(1700)
++        );
++
++        // The next request happens after the original deadline and must still
++        // succeed because prior activity extended both expiry clocks.
++        tokio::time::sleep(Duration::from_millis(2100)).await;
++        assert!(Instant::now() > old_deadline);
++        assert!(
++            exchange(app.clone(), &cookie)
++                .await
++                .starts_with("HTTP/1.1 200")
++        );
++
++        // Exercise actual idle expiry with a short, test-only deadline. A stale
++        // browser cookie must not bring the server record back to life.
++        state
++            .sessions
++            .lock()
++            .unwrap()
++            .get_mut(&key)
++            .unwrap()
++            .expires = Instant::now() + Duration::from_millis(30);
++        tokio::time::sleep(Duration::from_millis(60)).await;
++        let response = exchange(app.clone(), &cookie).await;
++        assert!(response.starts_with("HTTP/1.1 401"), "{response}");
++        assert!(!response.to_lowercase().contains("set-cookie:"));
++        assert!(!state.sessions.lock().unwrap().contains_key(&key));
++
++        for cookie in [
++            "analytics_session=bad".to_string(),
++            format!("analytics_session={}", "c".repeat(64)),
++            String::new(),
++        ] {
++            let response = exchange(app.clone(), &cookie).await;
++            assert!(response.starts_with("HTTP/1.1 401"), "{response}");
++            assert!(!response.to_lowercase().contains("set-cookie:"));
++        }
++    }
+ }
+diff --git a/crates/persistence/src/lib.rs b/crates/persistence/src/lib.rs
+index 9209e18..4bf00a8 100644
+--- a/crates/persistence/src/lib.rs
++++ b/crates/persistence/src/lib.rs
+@@ -85,13 +85,7 @@ impl RoomRepository for SqliteRoomRepository {
+     }
+ 
+     async fn list(&self) -> Result<Vec<Room>, RepositoryError> {
+-        sqlx::query_as::<_, RoomRow>(
+-            "SELECT id, category_room_id, name FROM rooms ORDER BY name, id",
+-        )
+-        .fetch_all(&self.pool)
+-        .await
+-        .map(|rows| rows.into_iter().map(Room::from).collect())
+-        .map_err(|e| RepositoryError::RoomAccessError(e.to_string()))
++        self.search_by_name("").await
+     }
+ 
+     async fn search_by_name(&self, query: &str) -> Result<Vec<Room>, RepositoryError> {
+@@ -102,16 +96,8 @@ impl RoomRepository for SqliteRoomRepository {
+             .replace('%', "\\%")
+             .replace('_', "\\_");
+         let pattern = format!("%{literal}%");
+-
+         sqlx::query_as::<_, RoomRow>(
+-            r"SELECT id
+-               , category_room_id
+-               , name 
+-            FROM rooms 
+-            WHERE name 
+-            LIKE ?1 
+-            ESCAPE '\' 
+-            ORDER BY name, id",
++            r"SELECT id, category_room_id, name FROM rooms WHERE name LIKE ?1 ESCAPE '\' ORDER BY name, id",
+         )
+         .bind(pattern)
+         .fetch_all(&self.pool)
+@@ -168,6 +154,66 @@ impl MessageRepository for SqliteMessageRepository {
+ mod tests {
+     use super::*;
+ 
++    #[sqlx::test(migrations = "../../migrations")]
++    async fn room_name_search_is_parameterized_sql_like(pool: SqlitePool) {
++        let names = [
++            "Rust 技術交流",
++            "Rust 技術交流",
++            "Rust 技術交流延伸",
++            "生活閒聊",
++            "100% 活動",
++            "under_score",
++            r"back\slash",
++            "' OR 1=1 --",
++        ];
++        for (i, name) in names.iter().enumerate() {
++            sqlx::query("INSERT INTO rooms(id,category_room_id,name,created_at,updated_at) VALUES(?1,'fixture',?2,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)")
++                .bind(format!("r{i}")).bind(name).execute(&pool).await.unwrap();
++        }
++        let repo = SqliteRoomRepository::new(pool);
++        for query in ["Rust 技術交流", " 技術 ", "rUsT"] {
++            let rows = repo.search_by_name(query).await.unwrap();
++            let mut ids: Vec<_> = rows.into_iter().map(|r| r.id).collect();
++            ids.sort();
++            assert_eq!(ids, ["r0", "r1", "r2"], "{query}");
++        }
++        assert_eq!(repo.search_by_name("  ").await.unwrap().len(), 8);
++        assert!(repo.search_by_name("不存在").await.unwrap().is_empty());
++        for (query, id) in [
++            ("%", "r4"),
++            ("_", "r5"),
++            (r"\", "r6"),
++            ("' OR 1=1 --", "r7"),
++        ] {
++            let rows = repo.search_by_name(query).await.unwrap();
++            assert_eq!(rows.len(), 1, "literal {query}");
++            assert_eq!(rows[0].id, id);
++        }
++    }
++
++    #[sqlx::test(migrations = "../../migrations")]
++    async fn chat_action_log_requires_stable_identity(pool: SqlitePool) {
++        sqlx::query("INSERT INTO chat_action_log(id, action_type, created_user_id) VALUES ('fixture-log', 'send', 'fixture-user')")
++            .execute(&pool).await.unwrap();
++        for sql in [
++            "INSERT INTO chat_action_log(action_type, created_user_id) VALUES ('send', 'fixture-user')",
++            "INSERT INTO chat_action_log(id, action_type, created_user_id) VALUES (NULL, 'send', 'fixture-user')",
++            "UPDATE chat_action_log SET id = NULL WHERE id = 'fixture-log'",
++            "INSERT INTO chat_action_log(id, action_type, created_user_id) VALUES ('fixture-log', 'send', 'fixture-user')",
++        ] {
++            assert!(
++                sqlx::query(sql).execute(&pool).await.is_err(),
++                "accepted invalid log identity: {sql}"
++            );
++        }
++        let count: i64 =
++            sqlx::query_scalar("SELECT count(*) FROM chat_action_log WHERE id = 'fixture-log'")
++                .fetch_one(&pool)
++                .await
++                .unwrap();
++        assert_eq!(count, 1);
++    }
++
+     #[sqlx::test(migrations = "../../migrations")]
+     async fn test_room_repository_find_by_id(pool: SqlitePool) {
+         sqlx::query(
+diff --git a/crates/ui/src/lib.rs b/crates/ui/src/lib.rs
+index 966362b..58d7380 100644
+--- a/crates/ui/src/lib.rs
++++ b/crates/ui/src/lib.rs
+@@ -29,6 +29,7 @@ fn author_label(author: &MessageAuthor) -> String {
+     }
+ }
+ 
++#[cfg(test)]
+ fn filter_rooms(rows: &[(String, String)], query: &str) -> Vec<(String, String)> {
+     let needle = query.trim().to_lowercase();
+     rows.iter()
+@@ -186,6 +187,7 @@ pub fn ChatPage(room_id: String) -> impl IntoView {
+                 <h2>{format!("房間 {heading}")}</h2>
+                 <p role="status">{move || connection.get()}</p>
+             </header>
++            <p>"歷史載入尚未接通"</p>
+             <ul class="messages" aria-live="polite">
+                 {move || messages.get().into_iter().map(|message|{
+                     view! {
+@@ -219,6 +221,8 @@ fn RoomList() -> impl IntoView {
+     let params = use_params_map();
+     let (query, set_query) = signal(String::new());
+     let (rows, set_rows) = signal(Vec::<(String, String)>::new());
++    #[cfg(not(target_arch = "wasm32"))]
++    let _ = set_rows;
+     let (loading, set_loading) = signal(false);
+     let (status, set_status) = signal(String::from("請讀取房間列表"));
+ 
+@@ -282,7 +286,7 @@ fn RoomList() -> impl IntoView {
+                 on:click=move |_| {
+                     if loading.get_untracked() { return; }
+                     set_loading.set(true);
+-                    set_rows.set(Vec::new());
++                    set_query.set(String::new());
+                     set_status.set("載入中…".into());
+ 
+                     #[cfg(target_arch = "wasm32")]
+@@ -306,7 +310,7 @@ fn RoomList() -> impl IntoView {
+                     { set_loading.set(false); }
+             }>"讀取／重新整理房間"</button>
+             <p role="status">{move || status.get()}</p>
+-            <ul>{move || filter_rooms(&rows.get(), &query.get()).into_iter().map(|(id, name)| view! {
++            <ul>{move || rows.get().into_iter().map(|(id, name)| view! {
+                 <li>
+                     <a
+                         rel="external"
+diff --git a/migrations/20261018122554_creat_chat_action_log.sql b/migrations/20261018122554_creat_chat_action_log.sql
+index 37d0b86..7b9d113 100644
+--- a/migrations/20261018122554_creat_chat_action_log.sql
++++ b/migrations/20261018122554_creat_chat_action_log.sql
+@@ -1,6 +1,6 @@
+ -- Add migration script here
+ CREATE TABLE chat_action_log (
+-    id TEXT NOT NULL PRIMARY KEY,
++    id TEXT PRIMARY KEY,
+     action_type VARCHAR(255) NOT NULL, -- (例: 登入, 登出, 發送訊息，刪除訊息，建立聊天室，加入聊天室，離開聊天室, 修改訊息)
+     action_content TEXT, -- (例: 動作的內容，例如訊息的文字)
+     ref_table VARCHAR(255), -- (例: chat, message, user)
+diff --git a/migrations/20261018130000_require_chat_action_id.sql b/migrations/20261018130000_require_chat_action_id.sql
+new file mode 100644
+index 0000000..43e47cf
+--- /dev/null
++++ b/migrations/20261018130000_require_chat_action_id.sql
+@@ -0,0 +1,18 @@
++-- Forward-only repair. Preserve valid rows; NULL legacy IDs abort the migration
++-- transaction so an operator can repair identity without silently losing logs.
++CREATE TABLE chat_action_log_required_id (
++    id TEXT NOT NULL PRIMARY KEY,
++    action_type VARCHAR(255) NOT NULL,
++    action_content TEXT,
++    ref_table VARCHAR(255),
++    ref_id TEXT,
++    ref_column VARCHAR(255),
++    created_user_id TEXT NOT NULL,
++    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
++);
++INSERT INTO chat_action_log_required_id
++    (id, action_type, action_content, ref_table, ref_id, ref_column, created_user_id, created_at)
++SELECT id, action_type, action_content, ref_table, ref_id, ref_column, created_user_id, created_at
++FROM chat_action_log;
++DROP TABLE chat_action_log;
++ALTER TABLE chat_action_log_required_id RENAME TO chat_action_log;

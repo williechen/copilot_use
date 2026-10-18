@@ -1,0 +1,15 @@
+{"time": "2026-10-19T00:12:59.496509", "method": "GET", "path": "/", "status": 200, "injected": false}
+{"time": "2026-10-19T00:13:00.707439", "method": "GET", "path": "/pkg/rust_ai_chat.js", "status": 200, "injected": false}
+{"time": "2026-10-19T00:13:00.744916", "method": "GET", "path": "/pkg/rust_ai_chat.wasm", "status": 200, "injected": false}
+{"time": "2026-10-19T00:13:19.128159", "method": "GET", "path": "/api/rooms?q=Rust+%E6%8A%80%E8%A1%93%E4%BA%A4%E6%B5%81", "status": 200, "injected": false}
+{"time": "2026-10-19T00:13:39.085502", "method": "GET", "path": "/api/rooms?q=", "status": 503, "injected": true}
+{"time": "2026-10-19T00:13:58.301065", "method": "GET", "path": "/api/rooms?q=", "status": 200, "injected": false}
+{"time": "2026-10-19T00:13:58.826379", "method": "GET", "path": "/api/rooms?q=%E4%B8%8D%E5%AD%98%E5%9C%A8", "status": 200, "injected": false}
+{"time": "2026-10-19T00:16:45.254430", "method": "GET", "path": "/", "status": 200, "injected": false}
+{"time": "2026-10-19T00:16:45.695069", "method": "GET", "path": "/pkg/rust_ai_chat.js", "status": 200, "injected": false}
+{"time": "2026-10-19T00:16:45.718061", "method": "GET", "path": "/pkg/rust_ai_chat.wasm", "status": 200, "injected": false}
+{"time": "2026-10-19T00:16:46.335830", "method": "GET", "path": "/api/rooms?q=Rust+%E6%8A%80%E8%A1%93%E4%BA%A4%E6%B5%81", "status": 200, "injected": false}
+{"time": "2026-10-19T00:16:58.570711", "method": "GET", "path": "/api/rooms?q=", "status": 503, "injected": true}
+{"time": "2026-10-19T00:17:06.866194", "method": "GET", "path": "/api/rooms?q=Rust+%E6%8A%80%E8%A1%93%E4%BA%A4%E6%B5%81", "status": 503, "injected": true}
+{"time": "2026-10-19T00:17:34.396967", "method": "GET", "path": "/api/rooms?q=Rust+%E6%8A%80%E8%A1%93%E4%BA%A4%E6%B5%81", "status": 200, "injected": false}
+{"time": "2026-10-19T00:17:34.772122", "method": "GET", "path": "/api/rooms?q=%E4%B8%8D%E5%AD%98%E5%9C%A8", "status": 200, "injected": false}

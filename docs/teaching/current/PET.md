@@ -1,7 +1,8 @@
 ## 1. 學習大綱
-本輪main `fa0888ea1e1ea93415a4ba7f16972938969b1be3`，Day18仍是寵物生活窗漫遊切片。63f66e7已改SqlitePool，獨立apps/desktop_pet/migrations三份已真實套用；主鍵NOT NULL與關聯約束已修，不再說NULL主鍵仍可插入。普通啟動與四案原生座標通過；main維持(100,100)，停用pet不動，邊界反彈，關閉pet不回退移動main。探針等待映射，不代表完整手動GUI／普通啟動漫遊時序通過。舊Chat DB仍因已套用Pet migration被移走而升級失敗。
-目標為只移動pet生活窗、main控制窗不動、工作區邊界、啟動停用與關閉pet。原學習15分鐘；原生探針重現另估20分鐘，不擴大為所有多寵物／檔案／UI功能通過。
-本次fa0888e新增chat_action_log：Chat六份migrations／20張業務表，Pet三份／9張，Analytics三份／15張。P0的table與field可依功能需求增減或修改，現有schema不是固定限制。新建及9a95a10→本版升級通過；action log缺少或NULL主鍵仍能插入、任意操作者ID可接受，且無Rust寫入呼叫端。候選以前向migration加NOT NULL，保留有效舊row，遇NULL舊row停止且保留原資料；操作者身分綁定、低敏稽核與真實寫入仍未完成。舊Chat91733／舊PG31升級仍失敗；本輪未操作使用者資料庫。
+本輪來源main `2c7ace259ef790cea303d841f5779cd5f022d554`；修正分支codex/revalidate-f9484f2，commit `1abcb8aa6bc279e888a057b87069bea788281c7c`，未合併main。完整workspace明確啟用SSR、PostgreSQL integration及include-ignored：main126通過／1失敗／0忽略，候選131通過／0失敗／0忽略。main的WASM／SSR、Pet前端及原生建置成功；fmt通過，嚴格Clippy仍失敗於logout巢狀if，候選嚴格Clippy通過。規則v1正文、既有需求及next_day各19不變；文章修訂不推進Day。
+Pet：最新main使用獨立SQLite三份migration／九張業務表，普通停用啟動與前端／原生建置通過。候選只加可選原生探針，對實際Tauri視窗重跑enabled／disabled／boundary／close四案：main不移動、停用不移動pet、邊界反彈及關窗不回退main通過。探針等待映射後啟動，不能代替普通啟動漫遊時序、完整手動GUI、拖曳暫停恢復、逐寵物設定持久化、多寵物及真實多螢幕驗證。
+資料庫：Chat六份migration／20張業務表；main新建chat_action_log已拒絕缺少／NULL主鍵，不能再寫「NULL仍可插入」。但任意created_user_id仍可接受、沒有Rust寫入呼叫端，不算完整稽核。main直接修改20261018122554，從fa0888e升級實際checksum mismatch；舊Chat91733與舊PG31仍missing migration。候選還原舊migration並新增20261018130000前向修補，有效舊row保留、NULL舊row中止且資料／歷史保留，共六案通過；此候選僅相容原fa歷史，已套用改版22554的f9484f2／2c7ace2資料庫仍checksum mismatch，不能直接套用或刪庫掩蓋。table及field可依功能需求增減，使用者資料庫未重建或清空。
+主體Red／Green學習15分鐘，原生／HTTP／升級回歸另估20分鐘；未完成的原產品要求保留。
 ## 2. 實作內容
 ### Red歷史與現在的程式
 98f30d8尚未選pet；目前apps/desktop_pet/src/[roam.rs](http://roam.rs)已使用roaming_window_label()，tauri.conf.json的main為控制台、pet為200×200生活窗。open_control_window仍操作main，這是正確分工，不再稱錯選main。
@@ -32,7 +33,7 @@ fn roaming_window_label() -> &'static str {
 ```
 呼叫鏈為main資料庫連線／遷移 → application/setup → PET_ENABLE_ROAM → roam_desktop → pet WebviewWindow → outer_position／outer_size／current_monitor → bounded_next_position → set_position。main只供控制台顯示／聚焦，缺pet即停止漫遊。
 ### 原生驗證與 Refactor
-候選 `2f60c731ca78c689cb78abbd7bea239146ed3aaa` 僅為Pet加上opt-in acceptance-probe，不改原漫遊核心。先套用[以本次main為基底的完整patch](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-18-full-fa0888e/functional-fixes.patch)，再於隔離資料夾與測試DB執行；main本身尚無這個feature，不能在未套patch時假稱可執行：
+本輪候選 `1abcb8aa6bc279e888a057b87069bea788281c7c` 為Pet加上opt-in acceptance-probe並整理既有關窗條件，不改原漫遊核心。先套用[以本次main為基底的完整patch](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-19-full-2c7ace2/functional-fixes.patch)，再於隔離資料夾與測試DB執行；main本身尚無這個feature，不能在未套patch時假稱可執行：
 ```bash
 cargo build --locked -p desktop-pet --features acceptance-probe,tauri/custom-protocol
 PET_DATABASE_URL=sqlite:///absolute/fixture-pet.db?mode=rwc PET_ACCEPTANCE_SCENARIO=enabled PET_ENABLE_ROAM=true LIBGL_ALWAYS_SOFTWARE=1 WEBKIT_DISABLE_DMABUF_RENDERER=1 target/debug/desktop-pet
@@ -44,9 +45,8 @@ Chat舊DB記錄過91733／95626，移走原migration後仍missing applied migrat
 ## 3. 套件版本
 本輪實際 Rust／Cargo 1.99.1；SQLx 0.9.0、Axum 0.8.9、Leptos 0.8.22、Tokio 1.53.3、Tauri 2.12.4、tauri-build 2.7.3、wasm-bindgen 0.2.129（Cargo.lock）。cargo-leptos 0.3.11、Trunk 0.21.14；Ubuntu 26.04.1、PostgreSQL 18.6。本輪WebSocket測試用Node 22.22.1，先前Node24為歷史環境；未另驗跨平台／MSRV。候選沒有新增產品依賴。 Cargo套件版0.2.17；tauri.conf.json產品版仍0.2.16，bundle.active=false，建置沒有產生安裝包。
 ## 4. 驗證項目
-完整主線workspace126 passed／1 failed，失敗在Chat SSR，Pet原生16單元＋18所屬整合通過。Pet release前端`NO_COLOR=true trunk build --locked --release`、原生`cargo build --locked -p stats-server -p desktop-pet --features tauri/custom-protocol`建置通過。普通啟動使用專用SQLite，三份migration套用、完整性ok、程序持續運行。
-原生enabled／disabled／boundary／close四案本輪全部通過。單X11 1280×800，workarea(0,25,1280,775)，pet200×200；main全程(100,100)，disabled pet固定(300,300)，boundary起點(1080,600)向內反彈，close後沒有回退移動main。負座標屬單元測試，真實多螢幕未測。
-`cua.getState`實際回apps=\[\]，原生GUI控制介面不可用；因此完整視覺／手動GUI、拖曳暫停恢復、普通啟動漫遊時序、執行中逐寵物啟停與持久化、多螢幕、多寵物、檔案操作端到端仍未驗證。既有file organizer測試只使用自有fixture，不掃描私人檔案。
-CI、完整命令、探針JSON、資料庫與失敗原文見[本輪完整證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-18-full-fa0888e/REPORT.md)。Day18幾何切片的通過不等於全部Pet產品正式驗收。
-最新main CI快照：17個jobs success、0個尚未完成；精確SHA／時間／job網址見本輪報告。Rust Desktop Pet/check-pet與build-pet覆蓋建置，Test All/test-desktop-pet覆蓋套件測試，皆沒有代替本輪原生座標或完整手動GUI驗證。精確job連結與時間見本輪報告。
-主線fmt通過、嚴格all-targets Clippy exit101（[admin.rs:254](http://admin.rs:254) collapsible_if）；候選已整理logout與refresh條件，但嚴格Clippy仍exit101於apps/desktop_pet/src/[lib.rs:110](http://lib.rs:110) collapsible_if，未宣稱品質全通過。完整命令／結果見本輪證據。
+本輪來源main `2c7ace259ef790cea303d841f5779cd5f022d554`；修正分支codex/revalidate-f9484f2，commit `1abcb8aa6bc279e888a057b87069bea788281c7c`，未合併main。完整workspace明確啟用SSR、PostgreSQL integration及include-ignored：main126通過／1失敗／0忽略，候選131通過／0失敗／0忽略。main的WASM／SSR、Pet前端及原生建置成功；fmt通過，嚴格Clippy仍失敗於logout巢狀if，候選嚴格Clippy通過。規則v1正文、既有需求及next_day各19不變；文章修訂不推進Day。
+Pet：最新main使用獨立SQLite三份migration／九張業務表，普通停用啟動與前端／原生建置通過。候選只加可選原生探針，對實際Tauri視窗重跑enabled／disabled／boundary／close四案：main不移動、停用不移動pet、邊界反彈及關窗不回退main通過。探針等待映射後啟動，不能代替普通啟動漫遊時序、完整手動GUI、拖曳暫停恢復、逐寵物設定持久化、多寵物及真實多螢幕驗證。
+資料庫：Chat六份migration／20張業務表；main新建chat_action_log已拒絕缺少／NULL主鍵，不能再寫「NULL仍可插入」。但任意created_user_id仍可接受、沒有Rust寫入呼叫端，不算完整稽核。main直接修改20261018122554，從fa0888e升級實際checksum mismatch；舊Chat91733與舊PG31仍missing migration。候選還原舊migration並新增20261018130000前向修補，有效舊row保留、NULL舊row中止且資料／歷史保留，共六案通過；此候選僅相容原fa歷史，已套用改版22554的f9484f2／2c7ace2資料庫仍checksum mismatch，不能直接套用或刪庫掩蓋。table及field可依功能需求增減，使用者資料庫未重建或清空。
+完整命令、預期／實際結果、環境、SHA、CI workflow/job與證據連結見[本輪完整證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-19-full-2c7ace2/REPORT.md)。CI只代表其實際覆蓋；零測試target、未執行與失敗不算通過。跨平台／MSRV、付費AI未測，未讀正式秘密。三專案完整功能均維持未驗收。
+普通啟動專用SQLite持續運行至測試timeout停止；四案使用可選acceptance-probe，X11 1280×800、工作區(0,25,1280,775)、pet200×200。原生CUA庫存apps=\[\]，手動GUI缺口照實保留。負座標只在單元測試，不冒稱真實多螢幕。

@@ -1,0 +1,11 @@
+import fs from 'node:fs/promises';
+const rows=JSON.parse(await fs.readFile('outputs/full-2c7ace2/rooms.json','utf8'));const room=rows.find(x=>x.name==='Rust 技術交流').id,other=rows.find(x=>x.name==='生活閒聊').id;const logs=[];
+function check(v,msg){if(!v)throw new Error(msg);logs.push({passed:true,case:msg});}
+async function connect(id){let ws=new WebSocket('ws://127.0.0.1:3000/ws/'+id),q=[],wait=[];ws.addEventListener('message',e=>{let m=JSON.parse(String(e.data));if(wait.length)wait.shift()(m);else q.push(m);});await new Promise((r,j)=>{ws.addEventListener('open',r,{once:true});ws.addEventListener('error',j,{once:true});});return{ws,q,next(){return q.length?Promise.resolve(q.shift()):new Promise((r,j)=>{let timer=setTimeout(()=>j(new Error('WS response timeout')),3000);wait.push(v=>{clearTimeout(timer);r(v);});});}};}
+const a=await connect(room),b=await connect(room),c=await connect(other);a.ws.send(JSON.stringify({type:'ping'}));check((await a.next()).type==='pong','real WebSocket ping pong');
+a.ws.send(JSON.stringify({type:'send_message',data:{room_id:other,content:'cross room'}}));check((await a.next()).data.code==='room_mismatch','cross-room send denied');
+a.ws.send(JSON.stringify({type:'send_message',data:{room_id:room,content:'   '}}));check((await a.next()).data.code==='invalid_message_content','blank content denied');
+a.ws.send(JSON.stringify({type:'typing',data:{room_id:room,active:true}}));check((await b.next()).type==='typing_changed','typing broadcast to same room');await a.next();
+a.ws.send(JSON.stringify({type:'send_message',data:{room_id:room,content:'fixture persistent WS message'}}));let ma=await a.next(),mb=await b.next();check(ma.type==='message_created'&&mb.type==='message_created'&&ma.data.id===mb.data.id,'two clients receive same persisted message ID');
+await new Promise(r=>setTimeout(r,300));check(c.q.length===0,'other room receives no message or typing');b.ws.close();const b2=await connect(room);b2.ws.send(JSON.stringify({type:'ping'}));check((await b2.next()).type==='pong','reconnected WebSocket works');
+for(let s of[a,b,b2,c])s.ws.close();await fs.writeFile('outputs/full-2c7ace2/ws.json',JSON.stringify({logs,persisted:ma.data},null,2));console.log(JSON.stringify(logs));

@@ -1,0 +1,124 @@
+[
+  {
+    "db": "chat-full2c",
+    "migrations": [
+      [
+        20260930034455,
+        1
+      ],
+      [
+        20261007084321,
+        1
+      ],
+      [
+        20261018073931,
+        1
+      ],
+      [
+        20261018094242,
+        1
+      ],
+      [
+        20261018114024,
+        1
+      ],
+      [
+        20261018122554,
+        1
+      ]
+    ],
+    "tables": [
+      "rooms",
+      "messages",
+      "uac_user",
+      "uac_role",
+      "uac_user_role",
+      "uac_acl",
+      "uac_role_acl",
+      "uac_user_acl",
+      "mbr_user",
+      "mbr_role",
+      "mbr_user_role",
+      "mbr_perm",
+      "mbr_role_perm",
+      "mbr_user_perm",
+      "ai_person",
+      "ai_person_extra",
+      "ai_person_life_log",
+      "chat_token_log",
+      "chat_send_log",
+      "chat_action_log"
+    ],
+    "integrity": [
+      [
+        "ok"
+      ]
+    ]
+  },
+  {
+    "db": "pet-full2c",
+    "migrations": [
+      [
+        20261018091733,
+        1
+      ],
+      [
+        20261018095626,
+        1
+      ],
+      [
+        20261018114025,
+        1
+      ]
+    ],
+    "tables": [
+      "pet_profile",
+      "pet_extra",
+      "pet_activity",
+      "pet_study",
+      "pet_life_log",
+      "codemap",
+      "pet_owner",
+      "pet_token_log",
+      "pet_send_log"
+    ],
+    "integrity": [
+      [
+        "ok"
+      ]
+    ]
+  },
+  {
+    "db": "pet-native2c",
+    "migrations": [
+      [
+        20261018091733,
+        1
+      ],
+      [
+        20261018095626,
+        1
+      ],
+      [
+        20261018114025,
+        1
+      ]
+    ],
+    "tables": [
+      "pet_profile",
+      "pet_extra",
+      "pet_activity",
+      "pet_study",
+      "pet_life_log",
+      "codemap",
+      "pet_owner",
+      "pet_token_log",
+      "pet_send_log"
+    ],
+    "integrity": [
+      [
+        "ok"
+      ]
+    ]
+  }
+]

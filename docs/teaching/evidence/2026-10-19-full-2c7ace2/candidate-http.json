@@ -1,0 +1,193 @@
+[
+  {
+    "query": "Rust 技術交流",
+    "expected": 3,
+    "actual": 3,
+    "rooms": [
+      {
+        "id": "d48ee74e-b097-4d96-b7ac-35298bf46189",
+        "category_room_id": "default-category",
+        "name": "Rust 技術交流"
+      },
+      {
+        "id": "eec8dc8a-8533-412a-99fa-59d1c55500dd",
+        "category_room_id": "default-category",
+        "name": "Rust 技術交流"
+      },
+      {
+        "id": "6fcf6ac0-ee94-44f9-b068-27bfba901728",
+        "category_room_id": "default-category",
+        "name": "Rust 技術交流延伸"
+      }
+    ]
+  },
+  {
+    "query": " 技術 ",
+    "expected": 3,
+    "actual": 3,
+    "rooms": [
+      {
+        "id": "d48ee74e-b097-4d96-b7ac-35298bf46189",
+        "category_room_id": "default-category",
+        "name": "Rust 技術交流"
+      },
+      {
+        "id": "eec8dc8a-8533-412a-99fa-59d1c55500dd",
+        "category_room_id": "default-category",
+        "name": "Rust 技術交流"
+      },
+      {
+        "id": "6fcf6ac0-ee94-44f9-b068-27bfba901728",
+        "category_room_id": "default-category",
+        "name": "Rust 技術交流延伸"
+      }
+    ]
+  },
+  {
+    "query": "rUsT",
+    "expected": 4,
+    "actual": 4,
+    "rooms": [
+      {
+        "id": "827bc569-08a5-406e-86d6-98b3ed19ec0c",
+        "category_room_id": "default-category",
+        "name": "RUST 中文長房名"
+      },
+      {
+        "id": "d48ee74e-b097-4d96-b7ac-35298bf46189",
+        "category_room_id": "default-category",
+        "name": "Rust 技術交流"
+      },
+      {
+        "id": "eec8dc8a-8533-412a-99fa-59d1c55500dd",
+        "category_room_id": "default-category",
+        "name": "Rust 技術交流"
+      },
+      {
+        "id": "6fcf6ac0-ee94-44f9-b068-27bfba901728",
+        "category_room_id": "default-category",
+        "name": "Rust 技術交流延伸"
+      }
+    ]
+  },
+  {
+    "query": " ",
+    "expected": 9,
+    "actual": 9,
+    "rooms": [
+      {
+        "id": "1f116fe1-f278-48a5-a1a5-b04263a2a279",
+        "category_room_id": "default-category",
+        "name": "100% 活動"
+      },
+      {
+        "id": "827bc569-08a5-406e-86d6-98b3ed19ec0c",
+        "category_room_id": "default-category",
+        "name": "RUST 中文長房名"
+      },
+      {
+        "id": "d48ee74e-b097-4d96-b7ac-35298bf46189",
+        "category_room_id": "default-category",
+        "name": "Rust 技術交流"
+      },
+      {
+        "id": "eec8dc8a-8533-412a-99fa-59d1c55500dd",
+        "category_room_id": "default-category",
+        "name": "Rust 技術交流"
+      },
+      {
+        "id": "6fcf6ac0-ee94-44f9-b068-27bfba901728",
+        "category_room_id": "default-category",
+        "name": "Rust 技術交流延伸"
+      },
+      {
+        "id": "e8c445f2-cd94-45f0-a5b7-1fc4e4782a7c",
+        "category_room_id": "default-category",
+        "name": "SQL 'quote'"
+      },
+      {
+        "id": "4462502d-97f8-4233-bdde-53702b42aa51",
+        "category_room_id": "default-category",
+        "name": "back\\slash"
+      },
+      {
+        "id": "56292073-0950-49d2-8436-9fe0fce13c67",
+        "category_room_id": "default-category",
+        "name": "under_score"
+      },
+      {
+        "id": "8561b40a-d381-48c0-985a-0afa4eba561a",
+        "category_room_id": "default-category",
+        "name": "生活閒聊"
+      }
+    ]
+  },
+  {
+    "query": "不存在",
+    "expected": 0,
+    "actual": 0,
+    "rooms": []
+  },
+  {
+    "query": "%",
+    "expected": 1,
+    "actual": 1,
+    "rooms": [
+      {
+        "id": "1f116fe1-f278-48a5-a1a5-b04263a2a279",
+        "category_room_id": "default-category",
+        "name": "100% 活動"
+      }
+    ]
+  },
+  {
+    "query": "_",
+    "expected": 1,
+    "actual": 1,
+    "rooms": [
+      {
+        "id": "56292073-0950-49d2-8436-9fe0fce13c67",
+        "category_room_id": "default-category",
+        "name": "under_score"
+      }
+    ]
+  },
+  {
+    "query": "\\",
+    "expected": 1,
+    "actual": 1,
+    "rooms": [
+      {
+        "id": "4462502d-97f8-4233-bdde-53702b42aa51",
+        "category_room_id": "default-category",
+        "name": "back\\slash"
+      }
+    ]
+  },
+  {
+    "query": "'quote'",
+    "expected": 1,
+    "actual": 1,
+    "rooms": [
+      {
+        "id": "e8c445f2-cd94-45f0-a5b7-1fc4e4782a7c",
+        "category_room_id": "default-category",
+        "name": "SQL 'quote'"
+      }
+    ]
+  },
+  {
+    "query": "' OR 1=1 --",
+    "expected": 0,
+    "actual": 0,
+    "rooms": []
+  },
+  {
+    "query": "invalid long/NUL",
+    "status": 400
+  },
+  {
+    "query": "invalid long/NUL",
+    "status": 400
+  }
+]

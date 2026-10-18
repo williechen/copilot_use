@@ -1,13 +1,13 @@
 ## 1. 學習大綱
-本輪main `fa0888ea1e1ea93415a4ba7f16972938969b1be3`；候選 `2f60c731ca78c689cb78abbd7bea239146ed3aaa` 未合併main。目標仍為登入後的活動Session切片：保留人員Session與來源服務身分分離，讓伺服器expires和瀏覽器Cookie期限一起更新。main新建PG migration、登入／query／CSRF／Origin／來源身分分離／冪等／logout撤銷通過；活動Cookie續期assert實際失敗。舊PG migration31→32升級與啟動仍VersionMissing。候選同步server expiry／Cookie後真實HTTP通過，短deadline TCP到期401／不復活通過；未合併main。帳密admin/admin表單仍422缺key，角色／scope／1800秒browser soak未完成或未驗證。
-目前入口main會先PgPool連線並執行apps/stats_server/migrations，再建立admin::build Router。新建PG啟動已通過；SQLx舊migration31改名32的既有庫升級及啟動仍失敗。這不是教學發文阻擋，但必須保留為產品驗收缺口。
-原Red／Green學習15分鐘；真實HTTP／PG及短deadline回歸另估20分鐘，角色、帳密與migration兼容另列原需求，沒有增加規則。
-本次fa0888e新增chat_action_log：Chat六份migrations／20張業務表，Pet三份／9張，Analytics三份／15張。P0的table與field可依功能需求增減或修改，現有schema不是固定限制。新建及9a95a10→本版升級通過；action log缺少或NULL主鍵仍能插入、任意操作者ID可接受，且無Rust寫入呼叫端。候選以前向migration加NOT NULL，保留有效舊row，遇NULL舊row停止且保留原資料；操作者身分綁定、低敏稽核與真實寫入仍未完成。舊Chat91733／舊PG31升級仍失敗；本輪未操作使用者資料庫。
+本輪來源main `2c7ace259ef790cea303d841f5779cd5f022d554`；修正分支codex/revalidate-f9484f2，commit `1abcb8aa6bc279e888a057b87069bea788281c7c`，未合併main。完整workspace明確啟用SSR、PostgreSQL integration及include-ignored：main126通過／1失敗／0忽略，候選131通過／0失敗／0忽略。main的WASM／SSR、Pet前端及原生建置成功；fmt通過，嚴格Clippy仍失敗於logout巢狀if，候選嚴格Clippy通過。規則v1正文、既有需求及next_day各19不變；文章修訂不推進Day。
+Analytics：main已用成功的受保護GET回應層，同時延長server Session與同一Cookie Max-Age=1800；實際HTTP require-renewal已通過。另10案確認成功query續期、400／401／錯CSRF／公開login不續期、logout撤銷且不復活。真PG、Origin、CSRF、來源服務身分分離、攝取冪等通過。候選真TCP短deadline到期／不復活通過；不代表1800秒browser soak。帳密admin/admin仍422缺key、角色／scope及服務換證／撤銷未完整實作驗證，完整產品未驗收。
+資料庫：Chat六份migration／20張業務表；main新建chat_action_log已拒絕缺少／NULL主鍵，不能再寫「NULL仍可插入」。但任意created_user_id仍可接受、沒有Rust寫入呼叫端，不算完整稽核。main直接修改20261018122554，從fa0888e升級實際checksum mismatch；舊Chat91733與舊PG31仍missing migration。候選還原舊migration並新增20261018130000前向修補，有效舊row保留、NULL舊row中止且資料／歷史保留，共六案通過；此候選僅相容原fa歷史，已套用改版22554的f9484f2／2c7ace2資料庫仍checksum mismatch，不能直接套用或刪庫掩蓋。table及field可依功能需求增減，使用者資料庫未重建或清空。
+主體Red／Green學習15分鐘，原生／HTTP／升級回歸另估20分鐘；未完成的原產品要求保留。
 ## 2. 實作內容
-### 真實 Red
-main `python3 full_http.py analytics require-renewal` 實際exit1，COOKIE_RENEWED: False。csrf_for已有touch_session但只延長server expires，活動Dashboard的200回應沒有Set-Cookie Max-Age=1800。基礎HTTP腳本exit0只代表其他assert通過，不能冒稱這個Cookie gate通過。
+### 真實 Red與已套用狀態
+fa0888e的require-renewal實際exit1、COOKIE_RENEWED False屬歷史Red。最新2c7ace2相同實際HTTP已exit0、True；以下helper、login Cookie及route_layer已存在main，不得重複新增。剩餘本日回歸為短deadline真TCP、拒絕續期與logout不復活；帳密、角色與舊PG升級仍是產品缺口。
 ### 完整最小 Green
-在apps/stats_server/src/[admin.rs](http://admin.rs)，將main原本從`fn cookie_key`到`fn document`之前的helper區，完整換成下面程式。既有TTL=1800、hash、Session／Admin與origin_ok不變；cookie_value為新增，不與舊cookie_key重複保留。csrf_for只檢查並清除逾期，續期交給成功的受保護GET回應層，避免在handler尚未通過時提前刷新：
+在apps/stats_server/src/[admin.rs](http://admin.rs)核對main已套用的完整helper。TTL=1800、hash、Session／Admin與origin_ok沿用；csrf_for只檢查並清除逾期，成功受保護GET完成後才同步續期：
 ```rust
 fn cookie_value(headers: &HeaderMap) -> Option<&str> {
     let value = headers
@@ -187,17 +187,15 @@ pub fn build(ingest: IngestState, config: Option<Config>) -> Router {
 }
 
 ```
-[以本次main為基底的完整patch](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-18-full-fa0888e/functional-fixes.patch)包含完整差異與真實TCP回歸測試。成功GET後再次確認Session仍存在且未過期，才同時touch與刷新同一Cookie；logout、已撤銷與過期不能被這層復活。這只是候選，main尚未套用。
+main已套用以下續期邏輯；本輪候選只補真TCP到期回歸及logout條件整理。完整patch與測試見[證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-19-full-2c7ace2/REPORT.md)，不能重複套用歷史fa0888e整份patch。
 ### Refactor及舊Day更正
 cookie_value解析只接受64位hex，cookie_key與Set-Cookie重用同一值，避免從Cookie名稱或未驗證輸入拼接header。Day17原98f30d8「沒有touch_session」保留歷史身分；現在不能重複新增該函式，也不能因server-only測試通過就宣稱瀏覽器生命周期完整。
 PG migration31／32兼容、admin/admin首次改密碼、Email、角色／來源scope與立即縮權屬原產品待完成項目，候選沒有實作。root AI人物表在Chat SQLite，不能用它當成Analytics人員帳密已完成的證據。
 ## 3. 套件版本
 本輪實際 Rust／Cargo 1.99.1；SQLx 0.9.0、Axum 0.8.9、Leptos 0.8.22、Tokio 1.53.3、Tauri 2.12.4、tauri-build 2.7.3、wasm-bindgen 0.2.129（Cargo.lock）。cargo-leptos 0.3.11、Trunk 0.21.14；Ubuntu 26.04.1、PostgreSQL 18.6。本輪WebSocket測試用Node 22.22.1，先前Node24為歷史環境；未另驗跨平台／MSRV。候選沒有新增產品依賴。
 ## 4. 驗證項目
-同完整workspace命令並啟用stats-server/postgres-integration、include-ignored：main126 passed／1 failed／0 ignored；候選129 passed／0 failed／0 ignored。Stats單元／所屬PG與契約21通過，已包含在workspace總數，不能再相加當唯一案例數。
-main真實HTTP：匿名Dashboard303、匿名／服務token不能登入人員query401、Origin／錯誤CSRF403、正確key登入303、來源上報201／冪等200、PG summary200、logout303及舊Cookie401通過；活動Cookie assert失敗。候選同流程與require-renewal通過，COOKIE_RENEWED: True。
-候選TCP測試跨初始2秒期限後仍200，再將測試Session deadline設30ms並實際等60ms，逾時回401且不刷新／不復活。生產TTL仍1800秒；這不是30分鐘瀏覽器soak。main已有expired-session檢查測試通過，但其server-only／router證據不能代替瀏覽器Cookie續期。
-舊PG31基線先套用再跑最新migration，實際missing migration31；最新main啟動同DB回VersionMissing(20261018073931)。workspace-tests的analytics_postgres_ingest被未宣告feature擋住，直接啟用的命令exit101；該target的0 tests不算覆蓋，Stats套件本身的真PG測試已執行。
-帳密表單username/password實測422缺key；角色／scope／立即停用及長連線撤銷未完成或未驗證，1800秒browser soak未執行。精確命令、來源SHA、CI job、HTTP、PG與剩餘gate見[本輪完整證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-18-full-fa0888e/REPORT.md)；正式完整功能維持未驗收。
-最新main CI快照：17個jobs success、0個尚未完成；精確SHA／時間／job網址見本輪報告。Test All/test-stats-server未開postgres-integration／include-ignored，不能代替本輪獨立PG、真實Cookie／升級測試；Rust Dashboard/build-dashboard為建置。精確job連結與時間見本輪報告。
-主線fmt通過、嚴格all-targets Clippy exit101（[admin.rs:254](http://admin.rs:254) collapsible_if）；候選已整理logout與refresh條件，但嚴格Clippy仍exit101於apps/desktop_pet/src/[lib.rs:110](http://lib.rs:110) collapsible_if，未宣稱品質全通過。完整命令／結果見本輪證據。
+本輪來源main `2c7ace259ef790cea303d841f5779cd5f022d554`；修正分支codex/revalidate-f9484f2，commit `1abcb8aa6bc279e888a057b87069bea788281c7c`，未合併main。完整workspace明確啟用SSR、PostgreSQL integration及include-ignored：main126通過／1失敗／0忽略，候選131通過／0失敗／0忽略。main的WASM／SSR、Pet前端及原生建置成功；fmt通過，嚴格Clippy仍失敗於logout巢狀if，候選嚴格Clippy通過。規則v1正文、既有需求及next_day各19不變；文章修訂不推進Day。
+Analytics：main已用成功的受保護GET回應層，同時延長server Session與同一Cookie Max-Age=1800；實際HTTP require-renewal已通過。另10案確認成功query續期、400／401／錯CSRF／公開login不續期、logout撤銷且不復活。真PG、Origin、CSRF、來源服務身分分離、攝取冪等通過。候選真TCP短deadline到期／不復活通過；不代表1800秒browser soak。帳密admin/admin仍422缺key、角色／scope及服務換證／撤銷未完整實作驗證，完整產品未驗收。
+資料庫：Chat六份migration／20張業務表；main新建chat_action_log已拒絕缺少／NULL主鍵，不能再寫「NULL仍可插入」。但任意created_user_id仍可接受、沒有Rust寫入呼叫端，不算完整稽核。main直接修改20261018122554，從fa0888e升級實際checksum mismatch；舊Chat91733與舊PG31仍missing migration。候選還原舊migration並新增20261018130000前向修補，有效舊row保留、NULL舊row中止且資料／歷史保留，共六案通過；此候選僅相容原fa歷史，已套用改版22554的f9484f2／2c7ace2資料庫仍checksum mismatch，不能直接套用或刪庫掩蓋。table及field可依功能需求增減，使用者資料庫未重建或清空。
+完整命令、預期／實際結果、環境、SHA、CI workflow/job與證據連結見[本輪完整證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-19-full-2c7ace2/REPORT.md)。CI只代表其實際覆蓋；零測試target、未執行與失敗不算通過。跨平台／MSRV、付費AI未測，未讀正式秘密。三專案完整功能均維持未驗收。
+workspace-tests的analytics_postgres_ingest所需postgres-integration未宣告，明確啟用命令exit101；該target零測試不算覆蓋。stats-server自己的真PG integration已使用隔離PostgreSQL與include-ignored實際執行。短deadline測試跨初始2秒後仍200，再設30ms、實等60ms後401無Set-Cookie且不復活；生產TTL維持1800秒。

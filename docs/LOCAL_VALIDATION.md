@@ -1,5 +1,8 @@
 # P9 本地與跨平台驗收
 
+> 本輪參考庫完整複驗：本輪來源main `2c7ace259ef790cea303d841f5779cd5f022d554`；修正分支codex/revalidate-f9484f2，commit `1abcb8aa6bc279e888a057b87069bea788281c7c`，未合併main。完整workspace明確啟用SSR、PostgreSQL integration及include-ignored：main126通過／1失敗／0忽略，候選131通過／0失敗／0忽略。main的WASM／SSR、Pet前端及原生建置成功；fmt通過，嚴格Clippy仍失敗於logout巢狀if，候選嚴格Clippy通過。規則v1正文、既有需求及next_day各19不變；文章修訂不推進Day。 [實際命令、通過／失敗／未驗證](teaching/evidence/2026-10-19-full-2c7ace2/REPORT.md)。下方成品固定報告保留其原SHA，不代表本輪產品重新驗收。
+
+
 現行交付範圍為三產品的原生本地測試、跨平台安裝／更新與版本固定；既有 Docker release 建置僅作歷史驗證證據；使用者已取消公開部署。正式來源 SHA、六項 CI 與安裝包 checksum 以 [GitHub Release](https://github.com/williechen/copilot_use/releases) 的 `release-manifest.json` 為準。報告需核對精確來源及 dirty 說明；新程式變更要有匹配證據。有效程式基準見 learning-state.json。
 
 ## 固定成品與來源匹配證據

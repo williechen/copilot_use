@@ -1,0 +1,40 @@
+{
+  "logs": [
+    {
+      "passed": true,
+      "case": "real WebSocket ping pong"
+    },
+    {
+      "passed": true,
+      "case": "cross-room send denied"
+    },
+    {
+      "passed": true,
+      "case": "blank content denied"
+    },
+    {
+      "passed": true,
+      "case": "typing broadcast to same room"
+    },
+    {
+      "passed": true,
+      "case": "two clients receive same persisted message ID"
+    },
+    {
+      "passed": true,
+      "case": "other room receives no message or typing"
+    },
+    {
+      "passed": true,
+      "case": "reconnected WebSocket works"
+    }
+  ],
+  "persisted": {
+    "id": "6cb2aba8-ebec-499f-9aa1-25bea6fcfa62",
+    "room_id": "534bd77e-34d5-44d8-bef5-0e832d05156f",
+    "author": {
+      "kind": "anonymous_user"
+    },
+    "content": "fixture persistent WS message"
+  }
+}

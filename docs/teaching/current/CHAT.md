@@ -1,11 +1,13 @@
 ## 1. 學習大綱
-名稱搜尋依使用者更正採後端參數化SQL LIKE：參考庫候選 `4c1e5f710ade90a84dad83555a3e06ae6027ad77`（codex/sql-like-room-search，基底fa0888e／前一候選2f60c73）；copilot_use產品 `78d5796200547bf9c1776b8dc82cbc0d842bf512`（codex/p0-table-trial，延續948685f）。兩者均未合併main。參考庫相關測試34通過、真HTTP12案與瀏覽器三筆／空結果／503重試通過；產品相關測試22通過、真HTTP5案與公開／成員權限及先搜尋再LIMIT測試通過，兩庫嚴格Clippy通過。先前全量main126／1及舊候選129／0仍只適用原SHA，本次沒有重跑PG／Pet全量、沒有宣稱整體驗收。詳[SQL LIKE修正證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-18-sql-like-room-search/REPORT.md)。
-目標仍為完整名稱包含搜尋切片；新增Query DTO與SQL接線，沿既有四節修訂，不新增Day。Red／Green另估20分鐘，原生及帳號等既有產品要求不算此切片已完成。
+本輪來源main `2c7ace259ef790cea303d841f5779cd5f022d554`；修正分支codex/revalidate-f9484f2，commit `1abcb8aa6bc279e888a057b87069bea788281c7c`，未合併main。完整workspace明確啟用SSR、PostgreSQL integration及include-ignored：main126通過／1失敗／0忽略，候選131通過／0失敗／0忽略。main的WASM／SSR、Pet前端及原生建置成功；fmt通過，嚴格Clippy仍失敗於logout巢狀if，候選嚴格Clippy通過。規則v1正文、既有需求及next_day各19不變；文章修訂不推進Day。
+Chat：main已接通後端參數化SQL LIKE，名稱不是room ID；完整／部分名稱、字面%／_／反斜線、注入字串與輸入限制12案通過，瀏覽器「Rust 技術交流」完整顯示同名兩筆及「Rust 技術交流延伸」共三筆，空結果提示正確。真WS七案及SQLite持久化讀回通過。但SSR「歷史載入尚未接通」仍缺少，重新整理遇503會清空原有結果，故本切片仍有阻擋；候選恢復提示、直接顯示SQL結果並保留失敗前清單。
+資料庫：Chat六份migration／20張業務表；main新建chat_action_log已拒絕缺少／NULL主鍵，不能再寫「NULL仍可插入」。但任意created_user_id仍可接受、沒有Rust寫入呼叫端，不算完整稽核。main直接修改20261018122554，從fa0888e升級實際checksum mismatch；舊Chat91733與舊PG31仍missing migration。候選還原舊migration並新增20261018130000前向修補，有效舊row保留、NULL舊row中止且資料／歷史保留，共六案通過；此候選僅相容原fa歷史，已套用改版22554的f9484f2／2c7ace2資料庫仍checksum mismatch，不能直接套用或刪庫掩蓋。table及field可依功能需求增減，使用者資料庫未重建或清空。
+主體Red／Green學習15分鐘，原生／HTTP／升級回歸另估20分鐘；未完成的原產品要求保留。
 ## 2. 實作內容
 ### 真實 Red
-最新main的filter_room比較room_name完全相等，不是room ID。直接請求GET /api/rooms?q=Rust%20技術交流時，main fa0888e仍忽略q而回全部5筆，預期3筆的assert失敗。舊候選「取全量再client contains」已由本次使用者指定的資料庫LIKE方案取代；舊證據只保留其歷史SHA。
+fa0888e的filter_room比較room_name完全相等，不是room ID；舊main忽略q回全量的Red只屬fa0888e歷史。最新2c7ace2已採SQL LIKE且HTTP12案、完整房名三筆通過，不能再當失敗。現在Red為既有SSR測試exit101缺限制提示，以及瀏覽器重新整理遇503清空三筆結果。中途f9484f2曾因search_rooms／search_room名稱不一致無法建WASM，2c7ace2已修正。
 ### 完整最小 Green：查詢在資料庫執行
-入口契約採GET /api/rooms?q=房名。空白查全部，其他輸入先trim，再做文字包含搜尋；英文大小寫沿SQLite LIKE語意。百分號、底線與反斜線視為房名中的字面字元，escape後以bind傳參數，不將使用者字串拼入SQL。UI只顯示API結果，不再下載全量後篩選。
+main已存在入口契約GET /api/rooms?q=房名；以下為核對用完整最小Green，已存在的trait／SQL／Query不得重複新增，對main僅套用證據patch的剩餘差異。空白查全部，其他輸入先trim，再做文字包含搜尋；英文大小寫沿SQLite LIKE語意。百分號、底線與反斜線視為房名中的字面字元，escape後以bind傳參數，不將使用者字串拼入SQL。UI只顯示API結果，不再下載全量後篩選。
 在crates/chat_application/src/[repository.rs](http://repository.rs)既有RoomRepository增加方法；其他既有方法保留：
 ```rust
 async fn search_by_name(&self, query: &str) -> Result<Vec<Room>, RepositoryError>;
@@ -153,8 +155,9 @@ let query_room = move || {
 畫面列表由`filter_rooms(&rows.get(), &query.get())`改為`rows.get()`後沿用原map／真實ID連結。重新整理按鈕清空query、呼叫list_rooms取得空條件的後端結果，不在查詢失敗前清空舊rows。filter_rooms只保留為歷史純函式測試，不再由正式畫面呼叫，不能把它的測試當SQL查詢證據。
 ### Refactor及舊Day更正
 UI只負責輸入／URL編碼／載入與錯誤；API負責輸入限制，Repository負責SQL。SQLite LIKE支援此切片的英文不分大小寫與中文部分名稱；未宣稱完整Unicode case folding。%關鍵字%前置萬用字元通常不能以一般B-tree加速，本次未新增無效索引或FTS機制。
-ChatPage仍保留前一候選已恢復的「歷史載入尚未接通」提示；main套用時須保留這個SSR限制說明，不能因搜尋已修就假稱歷史完成。完整候選及SQL增量patch、Repository／HTTP回歸見[本次證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-18-sql-like-room-search/REPORT.md)。
+ChatPage仍保留前一候選已恢復的「歷史載入尚未接通」提示；main套用時須保留這個SSR限制說明，不能因搜尋已修就假稱歷史完成。完整候選及SQL增量patch、Repository／HTTP回歸見[本次證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-19-full-2c7ace2/REPORT.md)。
 ### action log欄位修正與完整重測
+資料庫：Chat六份migration／20張業務表；main新建chat_action_log已拒絕缺少／NULL主鍵，不能再寫「NULL仍可插入」。但任意created_user_id仍可接受、沒有Rust寫入呼叫端，不算完整稽核。main直接修改20261018122554，從fa0888e升級實際checksum mismatch；舊Chat91733與舊PG31仍missing migration。候選還原舊migration並新增20261018130000前向修補，有效舊row保留、NULL舊row中止且資料／歷史保留，共六案通過；此候選僅相容原fa歷史，已套用改版22554的f9484f2／2c7ace2資料庫仍checksum mismatch，不能直接套用或刪庫掩蓋。table及field可依功能需求增減，使用者資料庫未重建或清空。
 本次新增表的真實Red：省略id與明確NULL都被SQLite接受。不要覆寫已套用的20261018122554原migration；新增20261018130000_require_chat_action_id.sql：
 ```sql
 -- Forward-only repair. Preserve valid rows; NULL legacy IDs abort the migration
@@ -205,7 +208,8 @@ async fn chat_action_log_requires_stable_identity(pool: SqlitePool) {
 ## 3. 套件版本
 本輪實際 Rust／Cargo 1.99.1；SQLx 0.9.0、Axum 0.8.9、Leptos 0.8.22、Tokio 1.53.3、Tauri 2.12.4、tauri-build 2.7.3、wasm-bindgen 0.2.129（Cargo.lock）。cargo-leptos 0.3.11、Trunk 0.21.14；Ubuntu 26.04.1、PostgreSQL 18.6。本輪WebSocket測試用Node 22.22.1，先前Node24為歷史環境；未另驗跨平台／MSRV。候選沒有新增產品依賴。
 ## 4. 驗證項目
-參考庫命令：cargo test --locked -p chat-application -p persistence -p server -p ui --features ui/ssr，34 passed／0 failed／0 ignored；相關all-targets Clippy與cargo leptos build通過。原main真HTTP q查詢忽略參數，Red exit1；SQL候選同查詢完整3筆。
-真HTTP12案覆蓋完整／部分中文、rUsT、空白、無相符、字面%／_／反斜線／引號、注入字串及過長／NUL。瀏覽器實際請求帶URL編碼q，顯示3筆，空結果提示正確；503保留3筆及重試通過。程式用bind，不以拼接SQL字串處理輸入。
-產品copilot_use相關命令測試22通過；真HTTP5案通過；其整合案例還驗證110個不相符房間不擋住SQL查詢、公開目錄不洩漏私房、一般成員不可越權、合法房主可查自己的私房。產品正式主線未合併，未將參考庫測試直接當產品驗收。
-本次兩庫工作分支無遠端CI，不拿前輪main17個success jobs當本次候選證據；未重跑全workspace／PG／Pet原生，也未驗收完整帳號／ACL／歷史／跨平台。先前action-log／Cookie等證據保留原版本身分。完整命令、兩庫SHA、patch及剩餘缺口見[本次完整證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-18-sql-like-room-search/REPORT.md)。v1規則及next_day各19不變。
+本輪來源main `2c7ace259ef790cea303d841f5779cd5f022d554`；修正分支codex/revalidate-f9484f2，commit `1abcb8aa6bc279e888a057b87069bea788281c7c`，未合併main。完整workspace明確啟用SSR、PostgreSQL integration及include-ignored：main126通過／1失敗／0忽略，候選131通過／0失敗／0忽略。main的WASM／SSR、Pet前端及原生建置成功；fmt通過，嚴格Clippy仍失敗於logout巢狀if，候選嚴格Clippy通過。規則v1正文、既有需求及next_day各19不變；文章修訂不推進Day。
+Chat：main已接通後端參數化SQL LIKE，名稱不是room ID；完整／部分名稱、字面%／_／反斜線、注入字串與輸入限制12案通過，瀏覽器「Rust 技術交流」完整顯示同名兩筆及「Rust 技術交流延伸」共三筆，空結果提示正確。真WS七案及SQLite持久化讀回通過。但SSR「歷史載入尚未接通」仍缺少，重新整理遇503會清空原有結果，故本切片仍有阻擋；候選恢復提示、直接顯示SQL結果並保留失敗前清單。
+資料庫：Chat六份migration／20張業務表；main新建chat_action_log已拒絕缺少／NULL主鍵，不能再寫「NULL仍可插入」。但任意created_user_id仍可接受、沒有Rust寫入呼叫端，不算完整稽核。main直接修改20261018122554，從fa0888e升級實際checksum mismatch；舊Chat91733與舊PG31仍missing migration。候選還原舊migration並新增20261018130000前向修補，有效舊row保留、NULL舊row中止且資料／歷史保留，共六案通過；此候選僅相容原fa歷史，已套用改版22554的f9484f2／2c7ace2資料庫仍checksum mismatch，不能直接套用或刪庫掩蓋。table及field可依功能需求增減，使用者資料庫未重建或清空。
+完整命令、預期／實際結果、環境、SHA、CI workflow/job與證據連結見[本輪完整證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-19-full-2c7ace2/REPORT.md)。CI只代表其實際覆蓋；零測試target、未執行與失敗不算通過。跨平台／MSRV、付費AI未測，未讀正式秘密。三專案完整功能均維持未驗收。
+主線HTTP12案與真WS七案通過；候選瀏覽器三筆、無相符、查詢503保留、重新整理503保留及重試逐案讀回。產品78d5796的22案是前輪產品證據，本次未重跑，不代表產品main已整合。
