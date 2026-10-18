@@ -1,0 +1,14 @@
+diff --git a/migrations/20261018095626_create_pet_owner.sql b/migrations/20261018095626_create_pet_owner.sql
+new file mode 100644
+index 0000000..d8bc425
+--- /dev/null
++++ b/migrations/20261018095626_create_pet_owner.sql
+@@ -0,0 +1,7 @@
++-- Add migration script here
++CREATE TABLE pet_owner (
++    id SERIAL PRIMARY KEY, -- PKNO
++    name VARCHAR(255) NOT NULL, -- 主人名稱
++    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 建立時間
++    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- 更新時間
++);
+\ No newline at end of file

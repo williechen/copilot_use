@@ -1,0 +1,58 @@
+    Blocking waiting for file lock on build directory
+   Compiling stats-server v0.2.17 (/home/willie/Documents/Codex/2026-10-18/referenced-chatgpt-conversation-this-is-an-2/work/latest-main/apps/stats_server)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 40.00s
+     Running unittests src/lib.rs (../rust_ai_chat/target/debug/deps/stats_server-333f4aa4d270ef62)
+
+running 18 tests
+test admin::tests::day18_activity_extends_valid_session_only ... ok
+test admin::tests::login_query_postgres_and_logout_flow ... FAILED
+test day16_total_tests::total_uses_actual_committed_summary_counts ... ok
+test source_kind_summary_tests::authorization_and_filter_validation_precede_database_access ... ok
+test admin::tests::origin_and_expired_sessions_fail_closed ... ok
+test source_summary_tests::empty_and_rolled_back_events_are_not_counted ... FAILED
+test source_kind_summary_tests::filters_committed_deduplicated_rows_by_source_and_kind ... FAILED
+test source_summary_tests::summary_counts_committed_rows_per_source_and_kind ... FAILED
+test tests::event_type_rejects_noncanonical_boundaries ... ok
+test tests::existing_event_validation_rejects_whitespace ... ok
+test tests::invalid_event_does_not_reserve_dedup_key ... ok
+test tests::nil_event_id_is_not_accepted ... ok
+test tests::persist_outcomes_have_distinct_http_codes ... ok
+test tests::rejects_bad_source_version_and_event_type ... ok
+test source_summary_tests::summary_rejects_cross_source_before_database_access ... ok
+test tests::token_must_match_the_claimed_source ... ok
+test tests::valid_event_is_accepted_once_per_source_and_id ... ok
+test admin::tests::admin_login_guard_and_session_are_separate_from_source_token ... ok
+
+failures:
+
+---- admin::tests::login_query_postgres_and_logout_flow stdout ----
+
+thread 'admin::tests::login_query_postgres_and_logout_flow' (90762) panicked at apps/stats_server/src/admin.rs:604:58:
+dedicated test database required: NotPresent
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+---- source_summary_tests::empty_and_rolled_back_events_are_not_counted stdout ----
+
+thread 'source_summary_tests::empty_and_rolled_back_events_are_not_counted' (90767) panicked at /home/willie/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sqlx-postgres-0.9.0/src/testing/mod.rs:93:44:
+DATABASE_URL must be set: EnvVar(NotPresent)
+
+---- source_kind_summary_tests::filters_committed_deduplicated_rows_by_source_and_kind stdout ----
+
+thread 'source_kind_summary_tests::filters_committed_deduplicated_rows_by_source_and_kind' (90766) panicked at /home/willie/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sqlx-postgres-0.9.0/src/testing/mod.rs:93:44:
+DATABASE_URL must be set: EnvVar(NotPresent)
+
+---- source_summary_tests::summary_counts_committed_rows_per_source_and_kind stdout ----
+
+thread 'source_summary_tests::summary_counts_committed_rows_per_source_and_kind' (90768) panicked at /home/willie/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sqlx-postgres-0.9.0/src/testing/mod.rs:93:44:
+DATABASE_URL must be set: EnvVar(NotPresent)
+
+
+failures:
+    admin::tests::login_query_postgres_and_logout_flow
+    source_kind_summary_tests::filters_committed_deduplicated_rows_by_source_and_kind
+    source_summary_tests::empty_and_rolled_back_events_are_not_counted
+    source_summary_tests::summary_counts_committed_rows_per_source_and_kind
+
+test result: FAILED. 14 passed; 4 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.10s
+
+error: test failed, to rerun pass `-p stats-server --lib`

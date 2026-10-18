@@ -1,6 +1,6 @@
 # 目前系統架構與 DB 設定
 
-> 2026-10-18 正式複驗：參考 main `794da6e57a6490d580a4c49789519998f941b4c2`；Chat SSR/WASM 建置通過但名稱查詢漏列與 SSR 斷言失敗、Pet 原生幾何 4 案通過、Analytics Cookie 續期與 migration 升級失敗。Day18 已發布，next_day 各 19，本次未遞增；詳細命令及剩餘缺口見 [複驗證據](teaching/evidence/2026-10-18-functional-revalidation/REPORT.md)。下方舊 SHA／next_day 屬歷史觀察，copilot_use 產品實作未由參考庫結果自動驗收。
+> 最新 main `1853876e0eb1cfe8e4562be8b3c661b55f1bc54b` 實測：Chat 3 筆匹配只顯示 2 筆、SSR 提示失敗；Pet 四案原生幾何通過，但新增 pet schema 引用缺少 owner；Analytics Cookie 與舊 migration 升級仍失敗。完整產品未驗收。既有需求不變，詳 [最新證據](teaching/evidence/2026-10-18-main-1853876/REPORT.md)。
 
 目錄／程式銜接以 rust_ai_chat 最新 main 為主；產品目標與前進項目以 copilot_use 為主，其餘按共同學習規則。以下是 copilot_use 當前程式架構；gRPC／SSE 新需求的驗證範圍見 [ANALYTICS_TRANSPORT.md](ANALYTICS_TRANSPORT.md)；兩個 repository 的 DB 目標統一，學習套用狀態另行核對。
 

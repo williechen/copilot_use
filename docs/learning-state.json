@@ -707,9 +707,9 @@
     "cached_conversations_override": false,
     "article_sync_implies_runtime_sync": false,
     "runtime_source_observation": {
-      "chat": "794da6e57a6490d580a4c49789519998f941b4c2; SSR/WASM builds; query 3 matches -> 1; SSR assertion fails; candidate shows 3",
-      "analytics": "794da6e57a6490d580a4c49789519998f941b4c2; fresh isolated HTTP/PG tested; Cookie false; old migration upgrade fails; candidate Cookie true",
-      "pet": "same main roaming core; four real native geometry probes passed; full GUI unverified"
+      "chat": "1853876e0eb1cfe8e4562be8b3c661b55f1bc54b; 3 matches ->2 shown; SSR assertion fails; candidate shows3",
+      "pet": "1853876e0eb1cfe8e4562be8b3c661b55f1bc54b; native4 passed; new root pet insert fails missing owner; full GUI unverified",
+      "analytics": "1853876e0eb1cfe8e4562be8b3c661b55f1bc54b; Cookie false, old migration upgrade fails; candidate Cookie true"
     }
   },
   "confirmed_requirements_2026_10_17": {
@@ -836,10 +836,10 @@
     "last_full_comparison_unchanged": true
   },
   "functional_revalidation_2026_10_18": {
-    "main_sha": "794da6e57a6490d580a4c49789519998f941b4c2",
-    "candidate_sha": "8e8469989642aa7ca6ab329f0bd95b3ac0fd170d",
-    "evidence": "docs/teaching/evidence/2026-10-18-functional-revalidation/summary.json",
-    "notion_readback": "docs/teaching/evidence/2026-10-18-functional-revalidation/notion-readback.json",
+    "main_sha": "1853876e0eb1cfe8e4562be8b3c661b55f1bc54b",
+    "candidate_sha": "80ba01e6d965d0e3ff10bef18a5cbd17f01e8f05",
+    "evidence": "docs/teaching/evidence/2026-10-18-main-1853876/summary.json",
+    "notion_readback": "docs/teaching/evidence/2026-10-18-main-1853876/notion-readback.json",
     "formal_acceptance": false,
     "day_advanced": false,
     "rules_changed": false,

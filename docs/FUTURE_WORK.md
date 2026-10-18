@@ -1,6 +1,6 @@
 # 未來前進項目
 
-> 2026-10-18 正式複驗：參考 main `794da6e57a6490d580a4c49789519998f941b4c2`；Chat SSR/WASM 建置通過但名稱查詢漏列與 SSR 斷言失敗、Pet 原生幾何 4 案通過、Analytics Cookie 續期與 migration 升級失敗。Day18 已發布，next_day 各 19，本次未遞增；詳細命令及剩餘缺口見 [複驗證據](teaching/evidence/2026-10-18-functional-revalidation/REPORT.md)。下方舊 SHA／next_day 屬歷史觀察，copilot_use 產品實作未由參考庫結果自動驗收。
+> 最新 main `1853876e0eb1cfe8e4562be8b3c661b55f1bc54b` 實測：Chat 3 筆匹配只顯示 2 筆、SSR 提示失敗；Pet 四案原生幾何通過，但新增 pet schema 引用缺少 owner；Analytics Cookie 與舊 migration 升級仍失敗。完整產品未驗收。既有需求不變，詳 [最新證據](teaching/evidence/2026-10-18-main-1853876/REPORT.md)。
 
 目標依 [P9_TARGET.md](P9_TARGET.md) 與 copilot_use 實際程式，目錄／內容銜接依 rust_ai_chat 最新 main。本清單分開記錄產品缺口、安全修正、參考適配與教學；未核實不標完成。每天從確認缺口與當日差異選三專案合計一小時的小切片，不預排 Day；週六工程與功能驗收另記。
 
