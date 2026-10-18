@@ -1,6 +1,6 @@
 # Chat 聊天前台、Pet 雙視窗與 Analytics 畫面銜接
 
-> 最新 main `6e1c791d3e55124cd1de0797fd2569d8ddaf60d1`：新SQLite遷移／persistence5案／啟動HTTP200通過；舊DB因已套用91733被修改而升級失敗，TEXT主鍵仍允許NULL。其他搜尋／Cookie／產品缺口未修。詳[最新證據](teaching/evidence/2026-10-18-main-6e1c791/REPORT.md)。
+> 最新 main `7917f8b2e05ed74703ff9a83b62732ce04461da7`：關聯NOT NULL改善已測，新建遷移／persistence5案／啟動HTTP200通過；舊DB checksum升級仍失敗，owner／pet／AI主鍵仍可NULL。其他搜尋／Cookie／產品缺口未修。詳[最新證據](teaching/evidence/2026-10-18-main-7917f8b/REPORT.md)。
 
 本文件是既有 FUTURE_WORK 項目的詳細驗收條件，不另立 Day 或重複開發清單。需求與程式套用、測試及完整驗收分開記錄。
 

@@ -707,9 +707,9 @@
     "cached_conversations_override": false,
     "article_sync_implies_runtime_sync": false,
     "runtime_source_observation": {
-      "chat": "6e1c791d3e55124cd1de0797fd2569d8ddaf60d1; fresh SQLite/startup passed; old DB checksum upgrade failed; runtime sources unchanged; see docs/teaching/evidence/2026-10-18-main-6e1c791/REPORT.md",
-      "pet": "6e1c791d3e55124cd1de0797fd2569d8ddaf60d1; fresh SQLite/startup passed; old DB checksum upgrade failed; runtime sources unchanged; see docs/teaching/evidence/2026-10-18-main-6e1c791/REPORT.md",
-      "analytics": "6e1c791d3e55124cd1de0797fd2569d8ddaf60d1; fresh SQLite/startup passed; old DB checksum upgrade failed; runtime sources unchanged; see docs/teaching/evidence/2026-10-18-main-6e1c791/REPORT.md"
+      "chat": "7917f8b2e05ed74703ff9a83b62732ce04461da7; relationship constraints improved; fresh SQLx/persistence5/startup passed; old DB checksum failed; primary IDs nullable; runtime unchanged; docs/teaching/evidence/2026-10-18-main-7917f8b/REPORT.md",
+      "pet": "7917f8b2e05ed74703ff9a83b62732ce04461da7; relationship constraints improved; fresh SQLx/persistence5/startup passed; old DB checksum failed; primary IDs nullable; runtime unchanged; docs/teaching/evidence/2026-10-18-main-7917f8b/REPORT.md",
+      "analytics": "7917f8b2e05ed74703ff9a83b62732ce04461da7; relationship constraints improved; fresh SQLx/persistence5/startup passed; old DB checksum failed; primary IDs nullable; runtime unchanged; docs/teaching/evidence/2026-10-18-main-7917f8b/REPORT.md"
     }
   },
   "confirmed_requirements_2026_10_17": {
@@ -836,10 +836,10 @@
     "last_full_comparison_unchanged": true
   },
   "functional_revalidation_2026_10_18": {
-    "main_sha": "6e1c791d3e55124cd1de0797fd2569d8ddaf60d1",
+    "main_sha": "7917f8b2e05ed74703ff9a83b62732ce04461da7",
     "candidate_sha": null,
-    "evidence": "docs/teaching/evidence/2026-10-18-main-6e1c791/summary.json",
-    "notion_readback": "docs/teaching/evidence/2026-10-18-main-6e1c791/notion-readback.json",
+    "evidence": "docs/teaching/evidence/2026-10-18-main-7917f8b/summary.json",
+    "notion_readback": "docs/teaching/evidence/2026-10-18-main-7917f8b/notion-readback.json",
     "formal_acceptance": false,
     "day_advanced": false,
     "rules_changed": false,

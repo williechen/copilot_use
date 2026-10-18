@@ -1,8 +1,8 @@
 {
   "scope": "Latest published teaching index; Day16 snapshot preserved in archive",
-  "revision": "day18-main-6e1c791",
+  "revision": "day18-main-7917f8b",
   "synced_date": "2026-10-18",
-  "source_sha": "6e1c791d3e55124cd1de0797fd2569d8ddaf60d1",
+  "source_sha": "7917f8b2e05ed74703ff9a83b62732ce04461da7",
   "articles": [
     {
       "project": "chat",
@@ -11,12 +11,12 @@
       "notion_url": "https://app.notion.com/p/3fde51d45093816bb36dd9099190d907",
       "four_sections": true,
       "notion_readback_verified": true,
-      "source_sha": "6e1c791d3e55124cd1de0797fd2569d8ddaf60d1",
-      "tests": "latest main: fresh SQLite pass; persistence5/0; startup HTTP200; old DB checksum/startup fail; missing TEXT PK ID accepted NULL; other runtime results retain prior SHA",
-      "application_status": "fresh migration fixed in main; existing DB upgrade incompatible; other product gates unchanged",
-      "functional_acceptance": "not passed; old DB migration fails and product gaps remain",
+      "source_sha": "7917f8b2e05ed74703ff9a83b62732ce04461da7",
+      "tests": "fresh migration pass; persistence5/0; startup HTTP200; schema27 cases show required relationships enforced but primary IDs nullable; old6e DB upgrade/startup fail; unchanged runtime evidence retains prior SHA",
+      "application_status": "relationship NOT NULL applied; primary key NOT NULL absent; old DB upgrade incompatible",
+      "functional_acceptance": "not passed; old DB checksum, nullable IDs and product gaps remain",
       "candidate_sha": null,
-      "candidate_scope": "prior SQLite candidate historical; no new candidate"
+      "candidate_scope": "no new candidate; historical candidates retain original SHA"
     },
     {
       "project": "pet",
@@ -25,12 +25,12 @@
       "notion_url": "https://app.notion.com/p/3fde51d4509381bfa106ea4d9b190480",
       "four_sections": true,
       "notion_readback_verified": true,
-      "source_sha": "6e1c791d3e55124cd1de0797fd2569d8ddaf60d1",
-      "tests": "latest main: fresh SQLite pass; persistence5/0; startup HTTP200; old DB checksum/startup fail; missing TEXT PK ID accepted NULL; other runtime results retain prior SHA",
-      "application_status": "fresh migration fixed in main; existing DB upgrade incompatible; other product gates unchanged",
-      "functional_acceptance": "not passed; old DB migration fails and product gaps remain",
+      "source_sha": "7917f8b2e05ed74703ff9a83b62732ce04461da7",
+      "tests": "fresh migration pass; persistence5/0; startup HTTP200; schema27 cases show required relationships enforced but primary IDs nullable; old6e DB upgrade/startup fail; unchanged runtime evidence retains prior SHA",
+      "application_status": "relationship NOT NULL applied; primary key NOT NULL absent; old DB upgrade incompatible",
+      "functional_acceptance": "not passed; old DB checksum, nullable IDs and product gaps remain",
       "candidate_sha": null,
-      "candidate_scope": "prior SQLite candidate historical; no new candidate"
+      "candidate_scope": "no new candidate; historical candidates retain original SHA"
     },
     {
       "project": "analytics",
@@ -39,12 +39,12 @@
       "notion_url": "https://app.notion.com/p/3fde51d4509381c2a0d5f60041137619",
       "four_sections": true,
       "notion_readback_verified": true,
-      "source_sha": "6e1c791d3e55124cd1de0797fd2569d8ddaf60d1",
-      "tests": "latest main: fresh SQLite pass; persistence5/0; startup HTTP200; old DB checksum/startup fail; missing TEXT PK ID accepted NULL; other runtime results retain prior SHA",
-      "application_status": "fresh migration fixed in main; existing DB upgrade incompatible; other product gates unchanged",
-      "functional_acceptance": "not passed; old DB migration fails and product gaps remain",
+      "source_sha": "7917f8b2e05ed74703ff9a83b62732ce04461da7",
+      "tests": "fresh migration pass; persistence5/0; startup HTTP200; schema27 cases show required relationships enforced but primary IDs nullable; old6e DB upgrade/startup fail; unchanged runtime evidence retains prior SHA",
+      "application_status": "relationship NOT NULL applied; primary key NOT NULL absent; old DB upgrade incompatible",
+      "functional_acceptance": "not passed; old DB checksum, nullable IDs and product gaps remain",
       "candidate_sha": null,
-      "candidate_scope": "prior SQLite candidate historical; no new candidate"
+      "candidate_scope": "no new candidate; historical candidates retain original SHA"
     }
   ],
   "day15_frozen": true,
@@ -56,8 +56,8 @@
   "day_advanced": false,
   "reference_modified": false,
   "current_reference_observation": {
-    "sha": "6e1c791d3e55124cd1de0797fd2569d8ddaf60d1",
-    "evidence": "docs/teaching/evidence/2026-10-18-main-6e1c791/summary.json",
+    "sha": "7917f8b2e05ed74703ff9a83b62732ce04461da7",
+    "evidence": "docs/teaching/evidence/2026-10-18-main-7917f8b/summary.json",
     "full_acceptance": false
   },
   "execution_policy": {
@@ -69,5 +69,5 @@
     "rules_version": "daily-tdd-minimum-v1"
   },
   "previous_manifest": "docs/teaching/archive/rules-before-minimum-v1/manifest.json",
-  "functional_revalidation_evidence": "docs/teaching/evidence/2026-10-18-main-6e1c791/REPORT.md"
+  "functional_revalidation_evidence": "docs/teaching/evidence/2026-10-18-main-7917f8b/REPORT.md"
 }

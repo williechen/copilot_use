@@ -1,5 +1,5 @@
 ## 1. 學習大綱
-本次更新核對（main `6e1c791d3e55124cd1de0797fd2569d8ddaf60d1`）：本輪修改僅root SQLite migration，Stats程式／PG migrations／lock未變。新SQLite能啟動Chat不代表Analytics帳密／角色／來源scope已完成；Cookie續期與PG migration31→32升級的前輪失敗仍未修，本輪未重跑相同HTTP／PG流程。 [本輪命令與證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-18-main-6e1c791/REPORT.md)。以下2eddd64／1853876與各候選結果均是歷史基線，不回填為最新main通過。正式完整驗收維持未通過，未新增規則或Day。
+本次更新核對（main `7917f8b2e05ed74703ff9a83b62732ce04461da7`）：root AI人物關聯ai_person_id及room_id已加NOT NULL，相關缺少欄位拒絕實測通過；AI人物主鍵id仍可NULL。Stats程式、PG migrations及Cargo.lock未變，Cookie續期與PG31→32升級的前輪失敗仍未修；本輪未重跑相同HTTP／PG流程，AI表不等於帳密／角色功能完成。 [本輪命令與27個schema案例](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-18-main-7917f8b/REPORT.md)。以下6e1c791及更早版本／候選保留為歷史基線，不回填為最新main通過。完整功能仍未驗收；未新增規則或Day。
 歷史候選e33971f只適用舊2eddd64；最新main已修改建表與ID契約並刪除ALTER檔，該patch不可直接套用。先前候選成功結果保留原SHA，不代表本輪checksum升級問題已解決。
 本次複驗 main `1853876e0eb1cfe8e4562be8b3c661b55f1bc54b`；修正候選 `80ba01e6d965d0e3ff10bef18a5cbd17f01e8f05` 尚未合併 main。Day18 原本的伺服器半切片已套用：csrf_for 先剔除過期 Session，再 touch_session 延長 expires。但登入 Cookie 只有固定 Max-Age=1800，受保護回應不刷新；因此「持續操作仍有效」的瀏覽器全流程尚未完成。
 本篇直接統整已套用部分、實測 Red 與完整 Cookie 同步候選，不改成新規則、不增加 Day。原主體學習 15 分鐘；Cookie 補教及 HTTP／PG 回歸另估 25 分鐘；跨 1800 秒的瀏覽器 soak 另估至少 35 分鐘，尚未執行。

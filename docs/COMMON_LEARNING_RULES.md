@@ -58,12 +58,12 @@ Notion 已完整讀回但 GitHub 狀態寫入／讀回失敗，保留頁面 ID�
 
 
 ## 目前進度（最新程式再次核對）
-最新 main `6e1c791d3e55124cd1de0797fd2569d8ddaf60d1`。next_day各19，本次未遞增；正式完整驗收仍未通過。
+最新 main `7917f8b2e05ed74703ff9a83b62732ce04461da7`。next_day各19，本次未遞增；正式完整驗收仍未通過。
 ## 當前功能狀態與證據入口
-- chat：新建SQLite已可遷移，清除persistence快取後5 passed，main編譯／啟動成功，/health與/api/rooms實際200。舊1853876資料庫升級與啟動因migration20261018091733 checksum已修改失敗。搜尋3匹配→2顯示與SSR提示程式未改，先前缺口仍保留；本輪未重跑瀏覽器搜尋。
-- pet：已移除不支援的ALTER，owner_id改為TEXT REFERENCES pet_owner(id)，明確文字ID的主人／寵物新增與無效外鍵拒絕已通過。主鍵改TEXT是目前設計，不再要求自增整數；但TEXT PRIMARY KEY未加NOT NULL，主人缺少ID實測仍插入NULL。已套用舊表migration的資料庫因checksum變動無法升級。漫遊核心及依賴未變，前輪原生四案僅保留原SHA適用性，完整GUI仍未驗證。
-- analytics：本輪修改僅root SQLite migration，Stats程式／PG migrations／lock未變。新SQLite能啟動Chat不代表Analytics帳密／角色／來源scope已完成；Cookie續期與PG migration31→32升級的前輪失敗仍未修，本輪未重跑相同HTTP／PG流程。
-[最新實測與證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-18-main-6e1c791/REPORT.md)。前輪SQLite候選e33971f以2eddd64為基底，最新已改成TEXT ID並刪除該ALTER檔，舊patch不可直接套用；候選的5通過／四案不是最新main升級證據。規則與原產品需求不變。
+- chat：本輪只改兩份root SQLite migrations。新建SQLx遷移、persistence 5案、重新編譯／啟動及/health、/api/rooms HTTP200通過；從6e1c791既有DB升級與啟動仍因91733 checksum改變失敗。UI搜尋／SSR程式與lock無變，前輪3匹配→2顯示及歷史提示斷言缺口仍未修，本輪未重跑WASM／瀏覽器。
+- pet：這次NOT NULL加在owner_id及附屬表pet_id，缺少關聯、無效外鍵拒絕已實測。各表id仍為TEXT PRIMARY KEY，沒有NOT NULL；主人及寵物缺少主鍵ID仍可插入NULL。新建遷移通過，舊DB checksum升級失敗。漫遊核心未變，前輪原生四案僅保留原SHA適用性，完整GUI未重跑。
+- analytics：root AI人物關聯ai_person_id及room_id已加NOT NULL，相關缺少欄位拒絕實測通過；AI人物主鍵id仍可NULL。Stats程式、PG migrations及Cargo.lock未變，Cookie續期與PG31→32升級的前輪失敗仍未修；本輪未重跑相同HTTP／PG流程，AI表不等於帳密／角色功能完成。
+[最新27個schema案例與啟動／升級證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-18-main-7917f8b/REPORT.md)。這次是關聯欄位必填改善，尚未修主鍵非空與已套用migration相容性。既有規則、原需求與歷史證據保留。
 ## 文件入口
 產品能力與未來清單、詳細架構、操作設定、功能對照與工程證據仍保留各自用途；本篇集中教學方法、格式及三專案大綱，其他教學入口改為引用。原Day及程式保留，舊規則／來源／失效教法只作歷史，不再套用為目前指令。
 [聊天室](https://app.notion.com/p/3f3e51d45093807da638c336e857543a) · [桌面寵物](https://app.notion.com/p/3f3e51d450938067923ae5a424d30950) · [統計儀錶板｜聊天室 × 桌面寵物](https://app.notion.com/p/3f3e51d45093817eafaee0cfc9ea4cc8)。功能與實作對照的詳細歷史保留工程紀錄；本篇不再追加歷次討論或驗證摘要。

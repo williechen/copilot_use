@@ -1,5 +1,5 @@
 ## 1. 學習大綱
-本次更新核對（main `6e1c791d3e55124cd1de0797fd2569d8ddaf60d1`）：已移除不支援的ALTER，owner_id改為TEXT REFERENCES pet_owner(id)，明確文字ID的主人／寵物新增與無效外鍵拒絕已通過。主鍵改TEXT是目前設計，不再要求自增整數；但TEXT PRIMARY KEY未加NOT NULL，主人缺少ID實測仍插入NULL。已套用舊表migration的資料庫因checksum變動無法升級。漫遊核心及依賴未變，前輪原生四案僅保留原SHA適用性，完整GUI仍未驗證。 [本輪命令與證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-18-main-6e1c791/REPORT.md)。以下2eddd64／1853876與各候選結果均是歷史基線，不回填為最新main通過。正式完整驗收維持未通過，未新增規則或Day。
+本次更新核對（main `7917f8b2e05ed74703ff9a83b62732ce04461da7`）：這次NOT NULL加在owner_id及附屬表pet_id，缺少關聯、無效外鍵拒絕已實測。各表id仍為TEXT PRIMARY KEY，沒有NOT NULL；主人及寵物缺少主鍵ID仍可插入NULL。新建遷移通過，舊DB checksum升級失敗。漫遊核心未變，前輪原生四案僅保留原SHA適用性，完整GUI未重跑。 [本輪命令與27個schema案例](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-18-main-7917f8b/REPORT.md)。以下6e1c791及更早版本／候選保留為歷史基線，不回填為最新main通過。完整功能仍未驗收；未新增規則或Day。
 歷史候選e33971f只適用舊2eddd64；最新main已修改建表與ID契約並刪除ALTER檔，該patch不可直接套用。先前候選成功結果保留原SHA，不代表本輪checksum升級問題已解決。
 本次複驗 main `1853876e0eb1cfe8e4562be8b3c661b55f1bc54b`。目前 tauri.conf.json 的 main 是控制台、pet 是生活窗；roam_desktop 已呼叫 roaming_window_label() 並選 pet，open_control_window 仍選 main。原頁「main 尚未套用」「尚未核對建窗標籤」已由實際來源核對取代。
 目標是生活窗移動、控制窗不動、工作區邊界、啟動停用與關閉生活窗。這個原生幾何切片已有實測；完整手動 GUI、多螢幕、多寵物與普通啟動時序仍分開標示未驗證。原學習主體 15 分鐘；原生探針重現另估 20 分鐘。

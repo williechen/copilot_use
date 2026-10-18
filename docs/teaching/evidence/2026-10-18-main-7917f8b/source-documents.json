@@ -1,0 +1,30 @@
+[
+  {
+    "path": "docs/COMMON_LEARNING_RULES.md",
+    "sha256": "853c7df10b54edfb041bd7183565a634bff21d38e5d94827fc546f687a0fa7fb"
+  },
+  {
+    "path": "docs/learning-state.json",
+    "sha256": "0f6d3c9019a7ba4a5aeec6aa7133c939040c0bd6d3c7b40a2dc17168661a7a78"
+  },
+  {
+    "path": "docs/P9_TARGET.md",
+    "sha256": "1f2dc8c523718141cc6fa21f7861ff5d456e338d3dc7d76cc27d768dbaeb5730"
+  },
+  {
+    "path": "docs/FUTURE_WORK.md",
+    "sha256": "ebe0c27f3410106f5f16eb020a37c10c081ad6ecbc6ec84d2954eb29fb3f29b6"
+  },
+  {
+    "path": "docs/SYSTEM_ARCHITECTURE.md",
+    "sha256": "d9ae21491d39044e177a5a5fa7366257c1e092a9a30cade755397a6428cae516"
+  },
+  {
+    "path": "docs/UI_ALIGNMENT_REQUIREMENTS.md",
+    "sha256": "914084ec19d9b1c7dadabe5bd1b15801870d0e0ccf9e38ce7f653dc70f131221"
+  },
+  {
+    "path": "docs/teaching/current/manifest.json",
+    "sha256": "de1572d6a84ea6f18791d84d0568b0b7a6873d2372307e75dfd5514c40217b7e"
+  }
+]
