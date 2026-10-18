@@ -1,0 +1,97 @@
+   Compiling ui v0.2.17 (/home/willie/Documents/Codex/2026-10-18/referenced-chatgpt-conversation-this-is-an-2/work/acceptance63/crates/ui)
+   Compiling server v0.2.17 (/home/willie/Documents/Codex/2026-10-18/referenced-chatgpt-conversation-this-is-an-2/work/acceptance63/apps/server)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 13.00s
+     Running unittests src/lib.rs (/home/willie/Documents/rust_ai_chat/target/debug/deps/chat_application-90fc452bea562d2c)
+
+running 5 tests
+test tests::existing_room_allows_persist_and_publish ... ok
+test tests::mismatched_room_id_must_not_persist_or_publish ... ok
+test tests::failed_write_never_publishes ... ok
+test tests::successful_write_publishes_exactly_once ... ok
+test tests::missing_room_blocks_message_and_publish ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (/home/willie/Documents/rust_ai_chat/target/debug/deps/persistence-4894449fb31a7e85)
+
+running 7 tests
+test tests::chat_action_log_requires_stable_identity ... ok
+test tests::test_message_repository_all_author_kinds ... ok
+test tests::room_name_search_is_parameterized_sql_like ... ok
+test tests::test_message_repository_rejects_missing_room ... ok
+test tests::test_message_schema_rejects_invalid_author_and_length ... ok
+test tests::test_room_repository_create_then_find ... ok
+test tests::test_room_repository_find_by_id ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.05s
+
+     Running unittests src/lib.rs (/home/willie/Documents/rust_ai_chat/target/debug/deps/server-f4dac573e5d951ee)
+
+running 14 tests
+test http::room_details_tests::invalid_input_and_database_failure_are_distinct ... ok
+test http::room_details_tests::list_rooms_returns_persisted_room ... ok
+test http::room_details_tests::returns_exact_saved_room_without_writing ... ok
+test http::room_details_tests::room_query_filters_in_repository_and_rejects_invalid_input ... ok
+test http::room_http_tests::database_failure_is_not_created ... ok
+test ws::test::accepts_nonblank_content ... ok
+test ws::test::blank_room ... ok
+test ws::test::different_room ... ok
+test ws::test::matching_room ... ok
+test ws::test::rejects_blank_content ... ok
+test ws::test::typing_is_only_forwarded_to_connection_room ... ok
+test http::room_http_tests::invalid_room_names_never_write ... ok
+test http::room_http_tests::valid_room_returns_201_and_saved_id ... ok
+test ws::test::ws_message_requires_room_at_write_time ... ok
+
+test result: ok. 14 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.50s
+
+     Running unittests src/main.rs (/home/willie/Documents/rust_ai_chat/target/debug/deps/server-21596170b3ceb9a8)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/root_hub_contract.rs (/home/willie/Documents/rust_ai_chat/target/debug/deps/root_hub_contract-72efd30c57cd4b3d)
+
+running 4 tests
+test count_tracks_receiver_lifecycle ... ok
+test message_stays_inside_room ... ok
+test last_receiver_cleanup_allows_new_subscription ... ok
+test subscribers_share_events ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (/home/willie/Documents/rust_ai_chat/target/debug/deps/ui-b6283ea383ce3dfd)
+
+running 4 tests
+test day16_room_search_tests::day18_query_filter_preserves_room_ids ... ok
+test chat_socket::tests::decodes_pong_event ... ok
+test day16_room_search_tests::search_matches_chinese_names_and_preserves_ids ... ok
+test day16_layout_tests::room_page_has_real_room_identity_and_multiline_composer ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests chat_application
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests persistence
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests server
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests ui
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

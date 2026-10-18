@@ -12,11 +12,11 @@
       "four_sections": true,
       "notion_readback_verified": true,
       "source_sha": "fa0888ea1e1ea93415a4ba7f16972938969b1be3",
-      "tests": "main workspace126/1; SSR3/1; WS7; browser3 matches->2; candidate129/0 and browser3 shown",
-      "application_status": "main name search and SSR fail; action log NULL ID allowed; candidate fixes identity/search; actor binding and account/history incomplete",
+      "tests": "SQL slice34/0; HTTP12 and browser3/empty/error retry pass; product22/0 separately; no new full workspace run",
+      "application_status": "main fa still ignores q; SQL candidate fixed; product SQL with ACL and LIMIT verified in local branch",
       "functional_acceptance": "not passed; blockers remain",
-      "candidate_sha": "2f60c731ca78c689cb78abbd7bea239146ed3aaa",
-      "candidate_scope": "search/SSR, Session Cookie, forward action-log ID migration; native probe; older DB/product gaps remain"
+      "candidate_sha": "4c1e5f710ade90a84dad83555a3e06ae6027ad77",
+      "candidate_scope": "DB parameterized LIKE with Query q and direct UI rows; prior candidate features preserved"
     },
     {
       "project": "pet",
@@ -76,5 +76,17 @@
     "evidence": "docs/teaching/evidence/2026-10-18-copilot-p0-registration/REPORT.md",
     "full_p0_acceptance": false,
     "day_advanced": false
+  },
+  "room_name_sql_search": {
+    "reference_candidate": "4c1e5f710ade90a84dad83555a3e06ae6027ad77",
+    "reference_base": "2f60c731ca78c689cb78abbd7bea239146ed3aaa",
+    "product_sha": "78d5796200547bf9c1776b8dc82cbc0d842bf512",
+    "product_base": "948685fe0692a9e56de94a4ae6a817fdf13fc0a2",
+    "reference_tests": 34,
+    "product_tests": 22,
+    "implementation": "parameterized SQL LIKE in DB; UI displays returned rows; ACL before LIMIT",
+    "formal_full_acceptance": false,
+    "day_advanced": false,
+    "evidence": "docs/teaching/evidence/2026-10-18-sql-like-room-search/REPORT.md"
   }
 }

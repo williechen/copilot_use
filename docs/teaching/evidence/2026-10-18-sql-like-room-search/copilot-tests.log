@@ -1,0 +1,70 @@
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on build directory
+   Compiling day9-chat v0.2.1 (/home/willie/Documents/copilot_use/apps/server)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 42.38s
+     Running unittests src/lib.rs (target/debug/deps/chat_ui-08b91ec393316651)
+
+running 2 tests
+test entry_tests::login_preserves_only_a_valid_room_target ... ok
+test entry_tests::homepage_and_registration_completion_have_distinct_entry_surfaces ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/day9_chat-9d3b66fee02a51ce)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (target/debug/deps/day9_chat-e868118820bca851)
+
+running 9 tests
+test audit::tests::additive_migration_preserves_all_outbox_columns_and_delivery_states ... ok
+test audit::tests::anonymous_directory_exposes_only_public_names_without_granting_entry ... ok
+test audit::tests::public_room_and_private_room_follow_the_same_basic_user_journey ... ok
+test knowledge::tests::portable_cosine_retrieval_rejects_invalid_vectors_and_preserves_ranking ... ok
+test openai::tests::authorized_completion_commits_message_event_and_realtime_together ... ok
+test openai::tests::completion_rejects_revoked_session_membership_expiry_and_csrf_without_side_effects ... ok
+test tests::missing_bearer_token_is_denied ... ok
+test audit::tests::identities_filters_authorization_and_transactional_rollback ... ok
+test audit::tests::sql_name_search_precedes_limit_and_keeps_public_and_member_boundaries ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 4.68s
+
+     Running unittests src/lib.rs (target/debug/deps/persistence-b49ff3bf4c89d990)
+
+running 11 tests
+test database::tests::sqlite_rejects_symlink_and_hardlinked_databases ... ok
+test tests::event_id_is_message_id_and_stable_for_retries ... ok
+test database::tests::snapshot_is_portable_with_wal_commits_and_never_overwrites_existing_data ... ok
+test tests::concurrent_message_replay_has_one_outbox_and_conflicts_are_rejected ... ok
+test tests::message_insert_has_exactly_one_outbox_event ... ok
+test tests::expired_lease_can_be_reclaimed_and_old_token_cannot_mutate ... ok
+test tests::missing_room_rolls_back_both_message_and_event ... ok
+test tests::outbox_insert_failure_rolls_back_inserted_message ... ok
+test tests::permanent_delivery_failure_is_blocked ... ok
+test tests::persona_memory_message_event_and_run_commit_only_with_current_authority ... ok
+test tests::stale_lease_cannot_ack ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.59s
+
+   Doc-tests chat_ui
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests day9_chat
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests persistence
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

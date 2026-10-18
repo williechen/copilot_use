@@ -2,6 +2,8 @@
 
 > 本輪參考rust_ai_chat/main `fa0888ea1e1ea93415a4ba7f16972938969b1be3` 全面重測：workspace126通過／1失敗，候選129通過；WS七案、schema既有33＋protocol27案、Pet原生四案通過。main搜尋／SSR／Cookie及舊DB升級仍失敗，完整GUI／帳密等未驗證，完整產品未驗收。詳[證據](teaching/evidence/2026-10-18-full-fa0888e/REPORT.md)。下方舊SHA屬歷史，不自動代表copilot_use產品通過；P0 table／field可依既有功能需求增減或修改；原產品需求未增加。
 
+> 名稱搜尋更正：參考庫4c1e5f710ade90a84dad83555a3e06ae6027ad77／產品78d5796200547bf9c1776b8dc82cbc0d842bf512已在工作分支改SQL LIKE，UI直接顯示後端結果；34／22項相關測試通過，產品保留授權並先查詢再LIMIT，未合併main或宣稱整體驗收。詳[證據](teaching/evidence/2026-10-18-sql-like-room-search/REPORT.md)。
+
 > copilot_use P0 試作（本地工作分支codex/p0-table-trial，948685fe0692a9e56de94a4ae6a817fdf13fc0a2）：Chat註冊必填唯一Email、帳號不分英文大小寫、成功註冊撤銷目前Session，已接通UI／HTTP／SQLite／獨立完成頁及重啟保存。相關測試21、HTTP／schema16、升級2案、fmt／嚴格Clippy／前端建置通過。既有帳號Email補填、寄信重設、admin初始化、活動Session與其他Pet／Analytics P0仍待完成；完整P0未驗收。詳[試作證據](teaching/evidence/2026-10-18-copilot-p0-registration/REPORT.md)。
 
 本文件是既有 FUTURE_WORK 項目的詳細驗收條件，不另立 Day 或重複開發清單。需求與程式套用、測試及完整驗收分開記錄。

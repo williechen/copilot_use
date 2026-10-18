@@ -1,0 +1,36 @@
+{
+  "recorded_at": "2026-10-18T23:20:45.119287+08:00",
+  "reference_main": "fa0888ea1e1ea93415a4ba7f16972938969b1be3",
+  "reference_candidate": "4c1e5f710ade90a84dad83555a3e06ae6027ad77",
+  "reference_base": "2f60c731ca78c689cb78abbd7bea239146ed3aaa",
+  "reference_branch": "codex/sql-like-room-search",
+  "product": "78d5796200547bf9c1776b8dc82cbc0d842bf512",
+  "product_base": "948685fe0692a9e56de94a4ae6a817fdf13fc0a2",
+  "product_branch": "codex/p0-table-trial",
+  "reference_tests": {
+    "passed": 34,
+    "failed": 0,
+    "ignored": 0
+  },
+  "product_tests": {
+    "passed": 22,
+    "failed": 0,
+    "ignored": 0
+  },
+  "reference_http": 12,
+  "product_http": 5,
+  "both_clippy": "passed",
+  "both_builds": "passed",
+  "browser_search": "3 expected/3 displayed both repos",
+  "reference_empty_error_retry": "passed",
+  "sql": "WHERE name LIKE bound_pattern ESCAPE backslash",
+  "name_query_semantics": "trimmed literal contains; ASCII case-insensitive; % _ and backslash escaped",
+  "product_authorization_and_filter_before_limit": "passed",
+  "notion_readback_pages": 4,
+  "main_changed": false,
+  "rules_changed": false,
+  "day_advanced": false,
+  "formal_full_acceptance": false,
+  "full_workspace_reexecuted": false,
+  "pg_pet_gui_paid_ai_reexecuted": false
+}

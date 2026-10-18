@@ -1,0 +1,285 @@
+diff --git a/apps/server/src/http.rs b/apps/server/src/http.rs
+index ba5d5ec..32fce5f 100644
+--- a/apps/server/src/http.rs
++++ b/apps/server/src/http.rs
+@@ -1,5 +1,5 @@
+ use crate::state::AppState;
+-use axum::extract::State;
++use axum::extract::{Query, State};
+ use axum::{Json, http::StatusCode};
+ use serde::Serialize;
+ use shared::{CreateRoomRequest, CreateRoomResponse};
+@@ -74,12 +74,22 @@ pub async fn get_room(
+     }))
+ }
+ 
++#[derive(Default, serde::Deserialize)]
++pub struct RoomSearch {
++    #[serde(default)]
++    q: String,
++}
++
+ pub async fn list_rooms(
+     State(state): State<AppState>,
++    Query(search): Query<RoomSearch>,
+ ) -> Result<Json<Vec<RoomDetails>>, StatusCode> {
++    if search.q.len() > 200 || search.q.contains('\0') {
++        return Err(StatusCode::BAD_REQUEST);
++    }
+     let rooms = state
+         .room_repository
+-        .list()
++        .search_by_name(&search.q)
+         .await
+         .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
+     Ok(Json(
+@@ -266,10 +276,36 @@ mod room_details_tests {
+         );
+     }
+ 
++    #[tokio::test]
++    async fn room_query_filters_in_repository_and_rejects_invalid_input() {
++        let (state, pool) = fixture().await;
++        let rows = list_rooms(
++            State(state.clone()),
++            Query(RoomSearch {
++                q: "不存在".into()
++            }),
++        )
++        .await
++        .unwrap()
++        .0;
++        assert!(rows.is_empty());
++        for q in ["x".repeat(201), "bad\0query".into()] {
++            assert_eq!(
++                list_rooms(State(state.clone()), Query(RoomSearch { q }))
++                    .await
++                    .unwrap_err(),
++                StatusCode::BAD_REQUEST
++            );
++        }
++        pool.close().await;
++    }
++
+     #[tokio::test]
+     async fn list_rooms_returns_persisted_room() {
+         let (state, pool) = fixture().await;
+-        let response = list_rooms(State(state)).await.into_response();
++        let response = list_rooms(State(state), Query(RoomSearch::default()))
++            .await
++            .into_response();
+         assert_eq!(response.status(), StatusCode::OK);
+         let body = axum::body::to_bytes(response.into_body(), 8192)
+             .await
+diff --git a/crates/chat_application/src/lib.rs b/crates/chat_application/src/lib.rs
+index 3a2d5ca..1b91b79 100644
+--- a/crates/chat_application/src/lib.rs
++++ b/crates/chat_application/src/lib.rs
+@@ -112,6 +112,9 @@ mod tests {
+         async fn list(&self) -> Result<Vec<Room>, RepositoryError> {
+             Ok(Vec::new())
+         }
++        async fn search_by_name(&self, _: &str) -> Result<Vec<Room>, RepositoryError> {
++            self.list().await
++        }
+     }
+ 
+     struct MissingRoom;
+@@ -126,6 +129,9 @@ mod tests {
+         async fn list(&self) -> Result<Vec<Room>, RepositoryError> {
+             Ok(Vec::new())
+         }
++        async fn search_by_name(&self, _: &str) -> Result<Vec<Room>, RepositoryError> {
++            self.list().await
++        }
+     }
+ 
+     struct WrongRoom;
+@@ -144,6 +150,9 @@ mod tests {
+         async fn list(&self) -> Result<Vec<Room>, RepositoryError> {
+             Ok(Vec::new())
+         }
++        async fn search_by_name(&self, _: &str) -> Result<Vec<Room>, RepositoryError> {
++            self.list().await
++        }
+     }
+ 
+     #[tokio::test]
+diff --git a/crates/chat_application/src/repository.rs b/crates/chat_application/src/repository.rs
+index 9d03a43..3050d92 100644
+--- a/crates/chat_application/src/repository.rs
++++ b/crates/chat_application/src/repository.rs
+@@ -17,6 +17,9 @@ pub trait RoomRepository: Send + Sync {
+     async fn create(&self, room: &Room) -> Result<(), RepositoryError>;
+ 
+     async fn list(&self) -> Result<Vec<Room>, RepositoryError>;
++
++    /// Trimmed literal name substring; ASCII case-insensitive in the SQLite adapter.
++    async fn search_by_name(&self, query: &str) -> Result<Vec<Room>, RepositoryError>;
+ }
+ 
+ #[async_trait]
+diff --git a/crates/persistence/src/lib.rs b/crates/persistence/src/lib.rs
+index c875c35..4bf00a8 100644
+--- a/crates/persistence/src/lib.rs
++++ b/crates/persistence/src/lib.rs
+@@ -85,9 +85,21 @@ impl RoomRepository for SqliteRoomRepository {
+     }
+ 
+     async fn list(&self) -> Result<Vec<Room>, RepositoryError> {
++        self.search_by_name("").await
++    }
++
++    async fn search_by_name(&self, query: &str) -> Result<Vec<Room>, RepositoryError> {
++        // Escape LIKE metacharacters; the user supplies a name, not a SQL pattern.
++        let literal = query
++            .trim()
++            .replace('\\', "\\\\")
++            .replace('%', "\\%")
++            .replace('_', "\\_");
++        let pattern = format!("%{literal}%");
+         sqlx::query_as::<_, RoomRow>(
+-            "SELECT id, category_room_id, name FROM rooms ORDER BY name, id",
++            r"SELECT id, category_room_id, name FROM rooms WHERE name LIKE ?1 ESCAPE '\' ORDER BY name, id",
+         )
++        .bind(pattern)
+         .fetch_all(&self.pool)
+         .await
+         .map(|rows| rows.into_iter().map(Room::from).collect())
+@@ -142,6 +154,43 @@ impl MessageRepository for SqliteMessageRepository {
+ mod tests {
+     use super::*;
+ 
++    #[sqlx::test(migrations = "../../migrations")]
++    async fn room_name_search_is_parameterized_sql_like(pool: SqlitePool) {
++        let names = [
++            "Rust 技術交流",
++            "Rust 技術交流",
++            "Rust 技術交流延伸",
++            "生活閒聊",
++            "100% 活動",
++            "under_score",
++            r"back\slash",
++            "' OR 1=1 --",
++        ];
++        for (i, name) in names.iter().enumerate() {
++            sqlx::query("INSERT INTO rooms(id,category_room_id,name,created_at,updated_at) VALUES(?1,'fixture',?2,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)")
++                .bind(format!("r{i}")).bind(name).execute(&pool).await.unwrap();
++        }
++        let repo = SqliteRoomRepository::new(pool);
++        for query in ["Rust 技術交流", " 技術 ", "rUsT"] {
++            let rows = repo.search_by_name(query).await.unwrap();
++            let mut ids: Vec<_> = rows.into_iter().map(|r| r.id).collect();
++            ids.sort();
++            assert_eq!(ids, ["r0", "r1", "r2"], "{query}");
++        }
++        assert_eq!(repo.search_by_name("  ").await.unwrap().len(), 8);
++        assert!(repo.search_by_name("不存在").await.unwrap().is_empty());
++        for (query, id) in [
++            ("%", "r4"),
++            ("_", "r5"),
++            (r"\", "r6"),
++            ("' OR 1=1 --", "r7"),
++        ] {
++            let rows = repo.search_by_name(query).await.unwrap();
++            assert_eq!(rows.len(), 1, "literal {query}");
++            assert_eq!(rows[0].id, id);
++        }
++    }
++
+     #[sqlx::test(migrations = "../../migrations")]
+     async fn chat_action_log_requires_stable_identity(pool: SqlitePool) {
+         sqlx::query("INSERT INTO chat_action_log(id, action_type, created_user_id) VALUES ('fixture-log', 'send', 'fixture-user')")
+diff --git a/crates/ui/Cargo.toml b/crates/ui/Cargo.toml
+index 132222a..39576fc 100644
+--- a/crates/ui/Cargo.toml
++++ b/crates/ui/Cargo.toml
+@@ -25,6 +25,7 @@ wasm-bindgen = "0.2"
+ wasm-bindgen-futures = "0.4"
+ web-sys = { version = "0.3", features = [
+     "Headers",
++    "UrlSearchParams",
+     "MessageEvent",
+     "Request",
+     "RequestInit",
+diff --git a/crates/ui/src/lib.rs b/crates/ui/src/lib.rs
+index f468ca0..58d7380 100644
+--- a/crates/ui/src/lib.rs
++++ b/crates/ui/src/lib.rs
+@@ -29,6 +29,7 @@ fn author_label(author: &MessageAuthor) -> String {
+     }
+ }
+ 
++#[cfg(test)]
+ fn filter_rooms(rows: &[(String, String)], query: &str) -> Vec<(String, String)> {
+     let needle = query.trim().to_lowercase();
+     rows.iter()
+@@ -220,6 +221,8 @@ fn RoomList() -> impl IntoView {
+     let params = use_params_map();
+     let (query, set_query) = signal(String::new());
+     let (rows, set_rows) = signal(Vec::<(String, String)>::new());
++    #[cfg(not(target_arch = "wasm32"))]
++    let _ = set_rows;
+     let (loading, set_loading) = signal(false);
+     let (status, set_status) = signal(String::from("請讀取房間列表"));
+ 
+@@ -231,13 +234,16 @@ fn RoomList() -> impl IntoView {
+         set_status.set("查詢中…".into());
+         #[cfg(target_arch = "wasm32")]
+         wasm_bindgen_futures::spawn_local(async move {
+-            match room_api::list_rooms().await {
++            let submitted = query.get_untracked();
++            match room_api::search_rooms(&submitted).await {
+                 Ok(value) => {
+                     set_status.set(
+                         if value.is_empty() {
+-                            "尚無房間"
+-                        } else if filter_rooms(&value, &query.get_untracked()).is_empty() {
+-                            "沒有符合條件的房間"
++                            if submitted.trim().is_empty() {
++                                "尚無房間"
++                            } else {
++                                "沒有符合條件的房間"
++                            }
+                         } else {
+                             "查詢完成，請選擇房間"
+                         }
+@@ -280,7 +286,7 @@ fn RoomList() -> impl IntoView {
+                 on:click=move |_| {
+                     if loading.get_untracked() { return; }
+                     set_loading.set(true);
+-                    set_rows.set(Vec::new());
++                    set_query.set(String::new());
+                     set_status.set("載入中…".into());
+ 
+                     #[cfg(target_arch = "wasm32")]
+@@ -304,7 +310,7 @@ fn RoomList() -> impl IntoView {
+                     { set_loading.set(false); }
+             }>"讀取／重新整理房間"</button>
+             <p role="status">{move || status.get()}</p>
+-            <ul>{move || filter_rooms(&rows.get(), &query.get()).into_iter().map(|(id, name)| view! {
++            <ul>{move || rows.get().into_iter().map(|(id, name)| view! {
+                 <li>
+                     <a
+                         rel="external"
+diff --git a/crates/ui/src/room_api.rs b/crates/ui/src/room_api.rs
+index 864751f..2debb38 100644
+--- a/crates/ui/src/room_api.rs
++++ b/crates/ui/src/room_api.rs
+@@ -55,8 +55,15 @@ pub async fn create_room(name: &str) -> Result<CreateRoomResponse, String> {
+ 
+ // 接續既有 create_room；不重建另一個 HTTP client。
+ pub async fn list_rooms() -> Result<Vec<(String, String)>, String> {
++    search_rooms("").await
++}
++
++pub async fn search_rooms(query: &str) -> Result<Vec<(String, String)>, String> {
++    let params = web_sys::UrlSearchParams::new().map_err(|_| "無法建立查詢")?;
++    params.append("q", query);
++    let url = format!("/api/rooms?{}", params.to_string());
+     let window = web_sys::window().ok_or("無法取得瀏覽器")?;
+-    let value = JsFuture::from(window.fetch_with_str("/api/rooms"))
++    let value = JsFuture::from(window.fetch_with_str(&url))
+         .await
+         .map_err(|_| "房間讀取失敗")?;
+     let response: web_sys::Response = value.dyn_into().map_err(|_| "無效回應")?;
