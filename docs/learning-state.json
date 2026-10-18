@@ -5,9 +5,9 @@
   "fixed_tag": "v0.2.1",
   "fixed_tag_sha": "9bcae7c5d139f75ed08b4daffece602a71fdab34",
   "next_day": {
-    "chat": 19,
-    "pet": 19,
-    "analytics": 19
+    "chat": 20,
+    "pet": 20,
+    "analytics": 20
   },
   "last_full_comparison": "2026-10-16T22:47:14.399027+08:00",
   "next_full_comparison": "2026-10-24T00:00:00+08:00",
@@ -175,8 +175,8 @@
       "flex": 15
     }
   },
-  "daily_reference_sha": "98f30d8b3593d80103b1a4bdbb9f0cb8cb08069e",
-  "daily_product_sha": "579a418c425c7b94c6702689b0ed78d9e8f0998b",
+  "daily_reference_sha": "f692c2ebe7b414fe49858c1ab1c4a33ce7c3dfee",
+  "daily_product_sha": "44dabb3eebed12639cd949b93521cbdc47a401fb",
   "content_alignment": {
     "reference_sha": "16261e0ebeef1a888997cc0ebc42b08ceaf8db24",
     "base_product_sha": "49e1d946dd3c22ffcc4b1aa0e7715cb5b1686724",
@@ -390,20 +390,20 @@
   },
   "teaching_progress": {
     "last_published_day": {
-      "chat": 17,
-      "pet": 17,
-      "analytics": 17
+      "chat": 19,
+      "pet": 19,
+      "analytics": 19
     },
     "numbering": "single Day sequence per project; next_day is the active next publication index",
     "application_status": "record separately per lesson and exact source; publication does not imply application",
     "validation_status": "record separately per lesson and exact source; no validation inferred from Day number",
     "historical_numbering_record": "docs/teaching/archive/formal-day-numbering.json",
     "last_published_notion_pages": {
-      "chat": "3fce51d45093818b913bebb8dab5ab65",
-      "pet": "3fce51d4509381ca83e3e825f0313698",
-      "analytics": "3fce51d4509381ea871ec9c92da37c1b"
+      "chat": "3fde51d4509381d2aac7ea4b356c213b",
+      "pet": "3fde51d450938194ae7fdcc55bce44e2",
+      "analytics": "3fde51d4509381ed8a2eecf3ba7e4093"
     },
-    "last_publication_status": "Existing Day17 pages read back on 2026-10-18; no new publication or next_day increment; not retroactively certified against minimum-v1"
+    "last_publication_status": "Day19 r1 published to existing project pages and fully read back; next_day advanced 19 to 20 per project. Source code application and full acceptance remain incomplete."
   },
   "teaching_document": {
     "canonical": "docs/COMMON_LEARNING_RULES.md",
@@ -937,5 +937,113 @@
         "page_last_edited_at": "2026-10-18T16:18:40.160Z"
       }
     ]
+  },
+  "day19_publication": {
+    "date": "2026-10-19",
+    "revision": "r1",
+    "recorded_at": "2026-10-19T06:43:16.506111+08:00",
+    "branch_before_sha": "44dabb3eebed12639cd949b93521cbdc47a401fb",
+    "source_sha": "f692c2ebe7b414fe49858c1ab1c4a33ce7c3dfee",
+    "expected_next_day_before": {
+      "chat": 19,
+      "pet": 19,
+      "analytics": 19
+    },
+    "next_day_after": {
+      "chat": 20,
+      "pet": 20,
+      "analytics": 20
+    },
+    "articles": [
+      {
+        "project": "chat",
+        "day": 19,
+        "revision": "r1",
+        "notion_page_id": "3fde51d4509381d2aac7ea4b356c213b",
+        "notion_url": "https://app.notion.com/p/3fde51d4509381d2aac7ea4b356c213b",
+        "notion_parent_id": "3f3e51d45093807da638c336e857543a",
+        "notion_page_last_edited_at": "2026-10-18T22:41:51.925Z",
+        "four_sections": true,
+        "notion_readback_verified": true,
+        "code_and_commands_exact": true,
+        "source_sha": "f692c2ebe7b414fe49858c1ab1c4a33ce7c3dfee",
+        "teaching_branch_before_sha": "44dabb3eebed12639cd949b93521cbdc47a401fb",
+        "rules_version": "daily-tdd-minimum-v1",
+        "rule_blob": "d33e42581be48d495ff7a2e32ac97821ab08df6e",
+        "article_path": "docs/teaching/day19/chat.md",
+        "evidence_path": "docs/teaching/evidence/2026-10-19-day19-review",
+        "tests": {
+          "day19_passed": 3,
+          "regression_passed": 6,
+          "regression_failed": 1,
+          "regression_ignored": 0,
+          "wasm_check": "passed",
+          "remaining": "existing SSR history-message assertion; browser not executed"
+        },
+        "application_status": "not applied to rust_ai_chat/main; tested in isolated candidate only",
+        "functional_acceptance": "not passed; remaining GUI/browser/DB scope disclosed",
+        "published_readback_at": "2026-10-19T06:43:16.506111+08:00"
+      },
+      {
+        "project": "pet",
+        "day": 19,
+        "revision": "r1",
+        "notion_page_id": "3fde51d450938194ae7fdcc55bce44e2",
+        "notion_url": "https://app.notion.com/p/3fde51d450938194ae7fdcc55bce44e2",
+        "notion_parent_id": "3f3e51d450938067923ae5a424d30950",
+        "notion_page_last_edited_at": "2026-10-18T22:41:52.447Z",
+        "four_sections": true,
+        "notion_readback_verified": true,
+        "code_and_commands_exact": true,
+        "source_sha": "f692c2ebe7b414fe49858c1ab1c4a33ce7c3dfee",
+        "teaching_branch_before_sha": "44dabb3eebed12639cd949b93521cbdc47a401fb",
+        "rules_version": "daily-tdd-minimum-v1",
+        "rule_blob": "d33e42581be48d495ff7a2e32ac97821ab08df6e",
+        "article_path": "docs/teaching/day19/pet.md",
+        "evidence_path": "docs/teaching/evidence/2026-10-19-day19-review",
+        "tests": {
+          "day19_passed": 2,
+          "regression_passed": 36,
+          "regression_failed": 0,
+          "regression_ignored": 0,
+          "remaining": "native GUI not executed"
+        },
+        "application_status": "not applied to rust_ai_chat/main; tested in isolated candidate only",
+        "functional_acceptance": "not passed; remaining GUI/browser/DB scope disclosed",
+        "published_readback_at": "2026-10-19T06:43:16.506111+08:00"
+      },
+      {
+        "project": "analytics",
+        "day": 19,
+        "revision": "r1",
+        "notion_page_id": "3fde51d4509381ed8a2eecf3ba7e4093",
+        "notion_url": "https://app.notion.com/p/3fde51d4509381ed8a2eecf3ba7e4093",
+        "notion_parent_id": "3f3e51d45093817eafaee0cfc9ea4cc8",
+        "notion_page_last_edited_at": "2026-10-18T22:41:52.952Z",
+        "four_sections": true,
+        "notion_readback_verified": true,
+        "code_and_commands_exact": true,
+        "source_sha": "f692c2ebe7b414fe49858c1ab1c4a33ce7c3dfee",
+        "teaching_branch_before_sha": "44dabb3eebed12639cd949b93521cbdc47a401fb",
+        "rules_version": "daily-tdd-minimum-v1",
+        "rule_blob": "d33e42581be48d495ff7a2e32ac97821ab08df6e",
+        "article_path": "docs/teaching/day19/analytics.md",
+        "evidence_path": "docs/teaching/evidence/2026-10-19-day19-review",
+        "tests": {
+          "day19_passed": 2,
+          "regression_passed": 18,
+          "regression_failed": 0,
+          "regression_ignored": 1,
+          "remaining": "real PG/TCP/time-window/concurrency not executed"
+        },
+        "application_status": "not applied to rust_ai_chat/main; tested in isolated candidate only",
+        "functional_acceptance": "not passed; remaining GUI/browser/DB scope disclosed",
+        "published_readback_at": "2026-10-19T06:43:16.506111+08:00"
+      }
+    ],
+    "original_zip_available": false,
+    "replacement_bundle": "docs/teaching/evidence/2026-10-19-day19-review",
+    "reference_main_modified": false,
+    "full_functional_acceptance": false
   }
 }

@@ -1,0 +1,46 @@
+   Compiling ui v0.2.17 (/home/willie/Documents/Codex/2026-10-19/referenced-chatgpt-conversation-this-is-an/work/candidate/crates/ui)
+warning: unused variable: `set_rows`
+   --> crates/ui/src/lib.rs:242:16
+    |
+242 |     let (rows, set_rows) = signal(Vec::<(String, String)>::new());
+    |                ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_set_rows`
+    |
+    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `refreshed_room_list` is never used
+   --> crates/ui/src/lib.rs:217:4
+    |
+217 | fn refreshed_room_list(
+    |    ^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `ui` (lib) generated 2 warnings (run `cargo fix --lib -p ui` to apply 1 suggestion)
+warning: `ui` (lib test) generated 1 warning (1 duplicate)
+    Finished `test` profile [unoptimized] target(s) in 0.54s
+     Running unittests src/lib.rs (work/target/debug/deps/ui-bfe8a3d90e7ded48)
+
+running 7 tests
+test day16_room_search_tests::day18_query_filter_preserves_room_ids ... ok
+test chat_socket::tests::decodes_pong_event ... ok
+test day16_room_search_tests::day19_failure_preserves_complete_rows_and_message ... ok
+test day16_room_search_tests::day19_empty_success_replaces_previous_rows ... ok
+test day16_layout_tests::room_page_has_real_room_identity_and_multiline_composer ... FAILED
+test day16_room_search_tests::day19_refresh_failure_keeps_previous_room_links ... ok
+test day16_room_search_tests::search_matches_chinese_names_and_preserves_ids ... ok
+
+failures:
+
+---- day16_layout_tests::room_page_has_real_room_identity_and_multiline_composer stdout ----
+
+thread 'day16_layout_tests::room_page_has_real_room_identity_and_multiline_composer' (17901) panicked at crates/ui/src/lib.rs:403:9:
+assertion failed: html.contains("歷史載入尚未接通")
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    day16_layout_tests::room_page_has_real_room_identity_and_multiline_composer
+
+test result: FAILED. 6 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `-p ui --lib`

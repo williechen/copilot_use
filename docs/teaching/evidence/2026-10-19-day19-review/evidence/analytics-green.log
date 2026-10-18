@@ -1,0 +1,28 @@
+   Compiling stats-server v0.2.17 (/home/willie/Documents/Codex/2026-10-19/referenced-chatgpt-conversation-this-is-an/work/candidate/apps/stats_server)
+    Finished `test` profile [unoptimized] target(s) in 5.11s
+     Running unittests src/lib.rs (work/target/debug/deps/stats_server-4db6a9a8b95ef6c3)
+
+running 2 tests
+test admin::tests::day19_success_does_not_reset_previous_failures ... ok
+test admin::tests::day19_successful_logins_do_not_consume_failure_budget ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 15 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (work/target/debug/deps/stats_server-e46d663ebf7e0dbf)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/idempotency_contract.rs (work/target/debug/deps/idempotency_contract-626100eac8f2255e)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out; finished in 0.00s
+
+     Running tests/postgres_event_store.rs (work/target/debug/deps/postgres_event_store-3749a9625bc0c6b9)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
