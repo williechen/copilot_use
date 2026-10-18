@@ -1,7 +1,10 @@
 # Pet Day19 修正版：觀察到非預期偏差時停止漫遊
 ## 1. 學習大綱
-來源 `rust_ai_chat/main=f692c2ebe7b414fe49858c1ab1c4a33ce7c3dfee`；教學分支 `44dabb3eebed12639cd949b93521cbdc47a401fb`。本篇為 Day19 r1 完整教學修訂；原稿的占位、缺碼與契約說明已修正。教學測試在獨立候選副本執行，使用者套用、產品整合及完整功能驗收仍未完成。主體 Red 5 分鐘、Green 10 分鐘，Refactor／額外驗證另計；實際測試結果見[完整驗證紀錄](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-19-day19-review/驗證結果.md)。完整修改檔與原始日誌見[查核證據目錄](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-19-day19-review)；[修正 patch](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-19-day19-review/corrected.patch)的基底為上述來源 SHA。
+來源 `rust_ai_chat/main=f692c2ebe7b414fe49858c1ab1c4a33ce7c3dfee`；教學分支 `44dabb3eebed12639cd949b93521cbdc47a401fb`。本篇為 Day19 r1 完整教學修訂；原稿的占位、缺碼與契約說明已修正。原教學 Red／Green 測試在獨立候選副本執行（歷史證據依原 SHA 保留）；截至 2026-10-19，Day19 Pet 切片已進入 rust_ai_chat/main，但使用者桌面環境、產品整合與完整功能驗收仍未確認。主體 Red 5 分鐘、Green 10 分鐘，Refactor／額外驗證另計；實際測試結果見[完整驗證紀錄](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-19-day19-review/驗證結果.md)。完整修改檔與原始日誌見[查核證據目錄](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-19-day19-review)；[修正 patch](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-19-day19-review/corrected.patch)的基底為上述來源 SHA。
 
+### 2026-10-19 現行程式重新核對（r2；不新增 Day）
+現行 `rust_ai_chat/main=0cd9f7995c196a7359864a9395c0fe2372d09222`，相對原教學 `f692c2ebe7b414fe49858c1ab1c4a33ce7c3dfee` 前進四個 commit。`apps/desktop_pet/src/roam.rs` 已有 `unexpected_displacement(requested, after)`，由 `roam_desktop` 在 `window.set_position` → 等待 `ROAM_VERIFY_INTERVAL=200ms` → `outer_position()` 讀回後呼叫，任一座標軸偏差大於 32 physical pixels 則 `break`；兩個 `day19_*` 單元測試仍留在模組內。教學 Green 主循環與目前 main 實際邏輯一致。本日 Red E0425 僅適用於未新增 helper 的教學基底，不能在已合入的 main 當作預期結果。
+目前 Cargo workspace version 由 0.2.17 升至 0.2.19，且獨立 `tests/` workspace 已移除；原生模組內本日兩項單元測試仍存在。新 SHA 的 `Test All/test-desktop-pet` success（[run 39175426410](https://github.com/williechen/rust_ai_chat/actions/runs/39175426410)／job 117816980549），`Rust Desktop Pet` 的 `build-pet`／`check-pet` 在本次核對時仍 in_progress（[run 39175426495](https://github.com/williechen/rust_ai_chat/actions/runs/39175426495)）。這只能確認特定 CI 步驟；未執行真實視窗拖曳、WM 吸附、多螢幕、逐寵物獨立漫遊或完整 native GUI 驗收。程式有兩行重複的『在桌面上漫遊寵物的主循環』註解，屬非功能性清理，不影響本篇 Green 操作。
 目標：每次 set_position 後約200ms讀回位置，任一軸與 requested 偏差嚴格大於32 physical pixels，就 break 本次漫遊。入口 application/setup→PET_ENABLE_ROAM→roam_desktop→get_webview_window("pet")→outer_position/outer_size/current_monitor→bounded_next_position→set_position→after。tauri.conf.json 的 pet 生活窗與 main 控制窗標籤已核對。
 
 這是單一觀察時點的安全停止。WM吸附或限制也可能觸發；並不能辨識人為拖曳，也不能涵蓋兩次觀察間所有位移。恰32不停止，(23,23)也不停止；採每軸判斷，並非歐氏距離。只要落在下一次set_position前但未被本次after觀察的外部位移，仍可能被後續移動覆寫。
@@ -232,7 +235,7 @@ fn day19_large_external_reposition_stops_roam() {
 兩軸統一使用容許值常數，先轉i64再相減與abs，避免i32極值溢位。保留原work_area、負原點、stall三次、關窗退出及只選pet的行為。helper通過不能證明原生WM、GUI拖曳與loop break；這些需獨立驗證。
 ## 3. 套件版本
 Cargo.lock：tauri 2.12.4、tauri-build 2.7.3、tokio 1.53.3。Linux GTK 3.24.52、WebKitGTK 2.52.6（pkg-config）。未量測實際WM／多螢幕與縮放行為。
-本輪 Linux x86_64，rustc 1.99.1／cargo 1.99.1、stable 工具鏈，WASM target 已安裝。專案未宣告 rust-version，最低 MSRV 未驗證；其他作業系統未驗證。無新增套件或 migration，Cargo.lock 未改。
+本輪 Linux x86_64，rustc 1.99.1／cargo 1.99.1、stable 工具鏈，WASM target 已安裝。專案未宣告 rust-version，最低 MSRV 未驗證；其他作業系統未驗證。原 Day19 切片未新增第三方套件或 migration；但相對教學基底，目前 main 的 workspace version 由 0.2.17 升至 0.2.19，Cargo.lock 已更新。上列第三方套件版本為原教學驗證快照，重跑以 main 最新 lock 為準。
 
 ## 4. 驗證項目
 ```sh
@@ -240,7 +243,7 @@ cargo test --locked -p desktop-pet day19
 cargo test --locked -p desktop-pet
 cargo build --locked -p desktop-pet
 ```
-本輪實際命令與結果以驗證結果表為準；未列為通過的建置不得推定執行過。單元涵蓋大小位移、32/33、負軸與極值；原生GUI未執行，尚需正常漫遊→在驗證窗口位移→停止、main不移動、小位移及WM調整、多螢幕、關窗不回退。來源Pet CI不含本次Green；未完成完整產品驗收。
+本輪實際命令與結果以驗證結果表為準；未列為通過的建置不得推定執行過。單元涵蓋大小位移、32/33、負軸與極值；原生GUI未執行，尚需正常漫遊→在驗證窗口位移→停止、main不移動、小位移及WM調整、多螢幕、關窗不回退。原教學時來源 Pet CI 尚未包含獨立候選 Green；現已合入 main，該 SHA 的 `Test All/test-desktop-pet` success，但原生 GUI／多螢幕／實際外部拖曳停止仍未驗收，完整產品驗收未完成。
 
 本輪實際驗證：Day19 Green 2 passed；套件回歸36 passed／0 failed／0 ignored。Red已實測E0425缺helper。原生GUI未測，不能宣稱loop行為已驗收。
 
