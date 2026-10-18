@@ -1,6 +1,6 @@
 # Chat 聊天前台、Pet 雙視窗與 Analytics 畫面銜接
 
-> 本輪參考rust_ai_chat/main `63f66e7742ecd09cd5199a47dbacc9df666af416` 全面重測：workspace126通過／1失敗，候選128通過；WS七案、schema33案、Pet原生四案通過。main搜尋／SSR／Cookie及舊DB升級仍失敗，完整GUI／帳密等未驗證，完整產品未驗收。詳[證據](teaching/evidence/2026-10-18-full-63f66e7/REPORT.md)。下方舊SHA屬歷史，不自動代表copilot_use產品通過；原產品需求未增加。
+> 本輪參考rust_ai_chat/main `9a95a10a0ad2e53a542fd0eaba4aed7458a9016d` 全面重測：workspace126通過／1失敗，候選128通過；WS七案、schema33案、Pet原生四案通過。main搜尋／SSR／Cookie及舊DB升級仍失敗，完整GUI／帳密等未驗證，完整產品未驗收。詳[證據](teaching/evidence/2026-10-18-full-9a95a10/REPORT.md)。下方舊SHA屬歷史，不自動代表copilot_use產品通過；原產品需求未增加。
 
 本文件是既有 FUTURE_WORK 項目的詳細驗收條件，不另立 Day 或重複開發清單。需求與程式套用、測試及完整驗收分開記錄。
 

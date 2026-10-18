@@ -1,0 +1,13 @@
+commit 9a95a10a0ad2e53a542fd0eaba4aed7458a9016d
+Author:     Chen Willie Guan-yu <bcskcnuj@hotmail.com>
+AuthorDate: Sun Oct 18 20:08:04 2026 +0800
+Commit:     Chen Willie Guan-yu <bcskcnuj@hotmail.com>
+CommitDate: Sun Oct 18 20:08:04 2026 +0800
+
+    add table
+
+ .../migrations/20261018114025_creat_protocol.sql   |  26 +++++++++++++++++++++
+ .../migrations/20261018114026_creat_protocol.sql   |  26 +++++++++++++++++++++
+ migrations/20261018114024_creat_protocol.sql       |  26 +++++++++++++++++++++
+ rust_ai_chat.db                                    | Bin 135168 -> 0 bytes
+ 4 files changed, 78 insertions(+)

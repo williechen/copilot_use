@@ -58,12 +58,13 @@ Notion 已完整讀回但 GitHub 狀態寫入／讀回失敗，保留頁面 ID�
 
 
 ## 目前進度（本輪全面複驗）
-來源main `63f66e7742ecd09cd5199a47dbacc9df666af416`；候選 `3eace139da323fc906133636fae93e4d54159173` 僅在工作分支，未合併main。next_day各19，本次未遞增；完整產品功能仍未驗收。
+來源main `9a95a10a0ad2e53a542fd0eaba4aed7458a9016d`；候選 `a15afcf174cd51766d870fa135db0ea188db00d2` 僅在工作分支，未合併main。next_day各19，本次未遞增；完整產品功能仍未驗收。
 ## 當前功能狀態與證據入口
 - chat：main完整workspace為126 passed／1 failed／0 ignored，失敗為SSR缺少「歷史載入尚未接通」。瀏覽器完整房名3匹配只顯示2；部分中文含空白／rUsT／空白查全部通過，無相符缺明確提示。真實WS七案、HTTP503保留清單與重試通過。候選128 passed／0 failed／0 ignored、名稱完整3筆與空結果提示通過；未合併main。
-- pet：63f66e7已改SqlitePool，獨立apps/desktop_pet/migrations兩份已真實套用；主鍵NOT NULL與關聯約束已修，不再說NULL主鍵仍可插入。普通啟動與四案原生座標通過；main維持(100,100)，停用pet不動，邊界反彈，關閉pet不回退移動main。探針等待映射，不代表完整手動GUI／普通啟動漫遊時序通過。舊Chat DB仍因已套用Pet migration被移走而升級失敗。
+- pet：63f66e7已改SqlitePool，獨立apps/desktop_pet/migrations三份已真實套用；主鍵NOT NULL與關聯約束已修，不再說NULL主鍵仍可插入。普通啟動與四案原生座標通過；main維持(100,100)，停用pet不動，邊界反彈，關閉pet不回退移動main。探針等待映射，不代表完整手動GUI／普通啟動漫遊時序通過。舊Chat DB仍因已套用Pet migration被移走而升級失敗。
 - analytics：main新建PG migration、登入／query／CSRF／Origin／來源身分分離／冪等／logout撤銷通過；活動Cookie續期assert實際失敗。舊PG migration31→32升級與啟動仍VersionMissing。候選同步server expiry／Cookie後真實HTTP通過，短deadline TCP到期401／不復活通過；未合併main。帳密admin/admin表單仍422缺key，角色／scope／1800秒browser soak未完成或未驗證。
-主線完整workspace126通過／1失敗／0忽略；候選128通過／0失敗／0忽略。完整命令、適用性、CI與所有未驗證gate見[本輪完整證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-18-full-63f66e7/REPORT.md)。舊版本與候選保留原SHA，不把建置／發文／口頭認定當完整功能驗收。v1正文及既有產品需求沒有增加。
+主線完整workspace126通過／1失敗／0忽略；候選128通過／0失敗／0忽略。完整命令、適用性、CI與所有未驗證gate見[本輪完整證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-18-full-9a95a10/REPORT.md)。舊版本與候選保留原SHA，不把建置／發文／口頭認定當完整功能驗收。v1正文及既有產品需求沒有增加。
+本次9a95a10新增三服務各自的protocol migration：Chat五份／19張業務表，Pet三份／9張，Analytics三份／15張。新建、63f66e7→新版三服務升級與新增表27項約束實測通過；舊Chat91733／舊PG31仍升級失敗。Rust無新增表呼叫端，HTTP／原生啟動後紀錄表仍空，不能視為服務配對、短效憑證輪替、撤銷或稽核接線完成。版本庫移除rust_ai_chat.db；本輪僅測fixture，未刪重建使用者資料。
 ## 文件入口
 產品能力與未來清單、詳細架構、操作設定、功能對照與工程證據仍保留各自用途；本篇集中教學方法、格式及三專案大綱，其他教學入口改為引用。原Day及程式保留，舊規則／來源／失效教法只作歷史，不再套用為目前指令。
 [聊天室](https://app.notion.com/p/3f3e51d45093807da638c336e857543a) · [桌面寵物](https://app.notion.com/p/3f3e51d450938067923ae5a424d30950) · [統計儀錶板｜聊天室 × 桌面寵物](https://app.notion.com/p/3f3e51d45093817eafaee0cfc9ea4cc8)。功能與實作對照的詳細歷史保留工程紀錄；本篇不再追加歷次討論或驗證摘要。

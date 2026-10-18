@@ -1,0 +1,12 @@
+   Compiling desktop-pet v0.2.17 (/home/willie/Documents/Codex/2026-10-18/referenced-chatgpt-conversation-this-is-an-2/work/acceptance63/apps/desktop_pet)
+   Compiling stats-server v0.2.17 (/home/willie/Documents/Codex/2026-10-18/referenced-chatgpt-conversation-this-is-an-2/work/acceptance63/apps/stats_server)
+warning: unused import: `roam::roam_desktop`
+  --> apps/desktop_pet/src/lib.rs:12:28
+   |
+12 | use crate::{chat::AiState, roam::roam_desktop};
+   |                            ^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `desktop-pet` (lib) generated 1 warning (run `cargo fix --lib -p desktop-pet` to apply 1 suggestion)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 20.41s

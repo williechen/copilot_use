@@ -1,6 +1,6 @@
 # 目前系統架構與 DB 設定
 
-> 本輪參考rust_ai_chat/main `63f66e7742ecd09cd5199a47dbacc9df666af416` 全面重測：workspace126通過／1失敗，候選128通過；WS七案、schema33案、Pet原生四案通過。main搜尋／SSR／Cookie及舊DB升級仍失敗，完整GUI／帳密等未驗證，完整產品未驗收。詳[證據](teaching/evidence/2026-10-18-full-63f66e7/REPORT.md)。下方舊SHA屬歷史，不自動代表copilot_use產品通過；原產品需求未增加。
+> 本輪參考rust_ai_chat/main `9a95a10a0ad2e53a542fd0eaba4aed7458a9016d` 全面重測：workspace126通過／1失敗，候選128通過；WS七案、schema33案、Pet原生四案通過。main搜尋／SSR／Cookie及舊DB升級仍失敗，完整GUI／帳密等未驗證，完整產品未驗收。詳[證據](teaching/evidence/2026-10-18-full-9a95a10/REPORT.md)。下方舊SHA屬歷史，不自動代表copilot_use產品通過；原產品需求未增加。
 
 目錄／程式銜接以 rust_ai_chat 最新 main 為主；產品目標與前進項目以 copilot_use 為主，其餘按共同學習規則。以下是 copilot_use 當前程式架構；gRPC／SSE 新需求的驗證範圍見 [ANALYTICS_TRANSPORT.md](ANALYTICS_TRANSPORT.md)；兩個 repository 的 DB 目標統一，學習套用狀態另行核對。
 

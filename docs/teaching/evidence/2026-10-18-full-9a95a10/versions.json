@@ -1,0 +1,11 @@
+{
+  "rustc": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+  "cargo": "cargo 1.99.1 (5f94df478 2026-08-27)",
+  "leptos": "cargo-leptos 0.3.11",
+  "trunk": "trunk 0.21.14",
+  "sqlx": "sqlx-cli 0.9.0",
+  "node": "v22.22.1",
+  "postgres": "postgres (PostgreSQL) 18.6 (Ubuntu 18.6-1.pgdg26.04+2)",
+  "source": "9a95a10a0ad2e53a542fd0eaba4aed7458a9016d",
+  "lock": "81b74ae6cb2ef602ee5dc98a0874b747bebf2dda"
+}
