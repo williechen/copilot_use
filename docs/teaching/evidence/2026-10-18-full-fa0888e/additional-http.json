@@ -1,0 +1,52 @@
+[
+  {
+    "case": "signin",
+    "expected": 404,
+    "status": 404,
+    "body": ""
+  },
+  {
+    "case": "history",
+    "expected": 404,
+    "status": 404,
+    "body": ""
+  },
+  {
+    "case": "blank name",
+    "expected": 400,
+    "status": 400,
+    "body": ""
+  },
+  {
+    "case": "long name",
+    "expected": 400,
+    "status": 400,
+    "body": ""
+  },
+  {
+    "case": "NUL name",
+    "expected": 400,
+    "status": 400,
+    "body": ""
+  },
+  {
+    "case": "username/password",
+    "expected": 422,
+    "status": 422,
+    "body": "Failed to deserialize form body: missing field `key`"
+  },
+  {
+    "case": "chat protocol tables after live requests",
+    "rows": {
+      "chat_token_log": 0,
+      "chat_send_log": 0
+    }
+  },
+  {
+    "case": "pet protocol tables after live requests",
+    "rows": {
+      "pet_token_log": 0,
+      "pet_send_log": 0
+    }
+  }
+]

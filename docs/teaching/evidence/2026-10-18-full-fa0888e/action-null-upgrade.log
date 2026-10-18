@@ -1,0 +1,1 @@
+error: while executing migration 20261018130000: error returned from database: (code: 1299) NOT NULL constraint failed: chat_action_log_required_id.id

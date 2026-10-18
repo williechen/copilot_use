@@ -1,0 +1,3 @@
+Applied 20261014223748/migrate create product events (31.666893ms)
+Applied 20261018073932/migrate create auth user (66.152804ms)
+Applied 20261018114026/migrate creat protocol (20.812327ms)

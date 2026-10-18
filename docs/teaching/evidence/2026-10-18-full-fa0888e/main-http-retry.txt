@@ -1,0 +1,4 @@
+Browser tab: 8, Title: "Rust AI Chat", URL: "http://127.0.0.1:3002/".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+~		11 text 查詢完成，請選擇房間
+The focused UI element is 0 AXWebArea Rust AI Chat, URL: 127.0.0.1:3002/

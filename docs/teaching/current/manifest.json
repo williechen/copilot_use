@@ -1,8 +1,8 @@
 {
   "scope": "Latest published teaching index; Day16 snapshot preserved in archive",
-  "revision": "day18-full-9a95a10",
+  "revision": "day18-full-fa0888e",
   "synced_date": "2026-10-18",
-  "source_sha": "9a95a10a0ad2e53a542fd0eaba4aed7458a9016d",
+  "source_sha": "fa0888ea1e1ea93415a4ba7f16972938969b1be3",
   "articles": [
     {
       "project": "chat",
@@ -11,12 +11,12 @@
       "notion_url": "https://app.notion.com/p/3fde51d45093816bb36dd9099190d907",
       "four_sections": true,
       "notion_readback_verified": true,
-      "source_sha": "9a95a10a0ad2e53a542fd0eaba4aed7458a9016d",
-      "tests": "main workspace126/1; SSR3/1; WS7; browser3 matches->2; candidate128/0 and browser3 shown",
-      "application_status": "HTTP query wired; contains results truncated; candidate fixes; account/history incomplete",
+      "source_sha": "fa0888ea1e1ea93415a4ba7f16972938969b1be3",
+      "tests": "main workspace126/1; SSR3/1; WS7; browser3 matches->2; candidate129/0 and browser3 shown",
+      "application_status": "main name search and SSR fail; action log NULL ID allowed; candidate fixes identity/search; actor binding and account/history incomplete",
       "functional_acceptance": "not passed; blockers remain",
-      "candidate_sha": "a15afcf174cd51766d870fa135db0ea188db00d2",
-      "candidate_scope": "search/SSR and Session Cookie fixes; Pet opt-in native probe; migration/product gaps not fixed"
+      "candidate_sha": "2f60c731ca78c689cb78abbd7bea239146ed3aaa",
+      "candidate_scope": "search/SSR, Session Cookie, forward action-log ID migration; native probe; older DB/product gaps remain"
     },
     {
       "project": "pet",
@@ -25,12 +25,12 @@
       "notion_url": "https://app.notion.com/p/3fde51d4509381bfa106ea4d9b190480",
       "four_sections": true,
       "notion_readback_verified": true,
-      "source_sha": "9a95a10a0ad2e53a542fd0eaba4aed7458a9016d",
+      "source_sha": "fa0888ea1e1ea93415a4ba7f16972938969b1be3",
       "tests": "native unit/integration34; fresh SQLite3 migrations; four real native geometry cases passed; full manual GUI unverified",
       "application_status": "SqlitePool separate3 migrations9 tables; native geometry4 pass; full GUI and product incomplete",
       "functional_acceptance": "not passed; blockers remain",
-      "candidate_sha": "a15afcf174cd51766d870fa135db0ea188db00d2",
-      "candidate_scope": "search/SSR and Session Cookie fixes; Pet opt-in native probe; migration/product gaps not fixed"
+      "candidate_sha": "2f60c731ca78c689cb78abbd7bea239146ed3aaa",
+      "candidate_scope": "search/SSR, Session Cookie, forward action-log ID migration; native probe; older DB/product gaps remain"
     },
     {
       "project": "analytics",
@@ -39,12 +39,12 @@
       "notion_url": "https://app.notion.com/p/3fde51d4509381c2a0d5f60041137619",
       "four_sections": true,
       "notion_readback_verified": true,
-      "source_sha": "9a95a10a0ad2e53a542fd0eaba4aed7458a9016d",
+      "source_sha": "fa0888ea1e1ea93415a4ba7f16972938969b1be3",
       "tests": "main guards/PG pass; Cookie assert fails; old31 DB upgrade/startup fails; candidate Cookie true and TCP expiry pass",
       "application_status": "startup PG migrations applied; server touch present; browser Cookie not refreshed in main; role/password incomplete",
       "functional_acceptance": "not passed; blockers remain",
-      "candidate_sha": "a15afcf174cd51766d870fa135db0ea188db00d2",
-      "candidate_scope": "search/SSR and Session Cookie fixes; Pet opt-in native probe; migration/product gaps not fixed"
+      "candidate_sha": "2f60c731ca78c689cb78abbd7bea239146ed3aaa",
+      "candidate_scope": "search/SSR, Session Cookie, forward action-log ID migration; native probe; older DB/product gaps remain"
     }
   ],
   "day15_frozen": true,
@@ -56,8 +56,8 @@
   "day_advanced": false,
   "reference_modified": false,
   "current_reference_observation": {
-    "sha": "9a95a10a0ad2e53a542fd0eaba4aed7458a9016d",
-    "evidence": "docs/teaching/evidence/2026-10-18-full-9a95a10/summary.json",
+    "sha": "fa0888ea1e1ea93415a4ba7f16972938969b1be3",
+    "evidence": "docs/teaching/evidence/2026-10-18-full-fa0888e/summary.json",
     "full_acceptance": false
   },
   "execution_policy": {
@@ -69,5 +69,5 @@
     "rules_version": "daily-tdd-minimum-v1"
   },
   "previous_manifest": "docs/teaching/archive/rules-before-minimum-v1/manifest.json",
-  "functional_revalidation_evidence": "docs/teaching/evidence/2026-10-18-full-9a95a10/REPORT.md"
+  "functional_revalidation_evidence": "docs/teaching/evidence/2026-10-18-full-fa0888e/REPORT.md"
 }

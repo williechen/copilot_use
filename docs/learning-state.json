@@ -707,9 +707,9 @@
     "cached_conversations_override": false,
     "article_sync_implies_runtime_sync": false,
     "runtime_source_observation": {
-      "chat": "9a95a10a0ad2e53a542fd0eaba4aed7458a9016d; main126/1; WS7 and browser3->2; candidate128/0; protocol schema only",
-      "pet": "9a95a10a0ad2e53a542fd0eaba4aed7458a9016d; SQLite3 migrations9 tables; native4 pass; full GUI unverified",
-      "analytics": "9a95a10a0ad2e53a542fd0eaba4aed7458a9016d; PG3 migrations15 tables; main Cookie and old31 upgrade fail; candidate Green"
+      "chat": "fa0888ea1e1ea93415a4ba7f16972938969b1be3; main126/1; WS7 and browser3->2; candidate129/0; protocol schema only",
+      "pet": "fa0888ea1e1ea93415a4ba7f16972938969b1be3; SQLite3 migrations9 tables; native4 pass; full GUI unverified",
+      "analytics": "fa0888ea1e1ea93415a4ba7f16972938969b1be3; PG3 migrations15 tables; main Cookie and old31 upgrade fail; candidate Green"
     }
   },
   "confirmed_requirements_2026_10_17": {
@@ -836,10 +836,10 @@
     "last_full_comparison_unchanged": true
   },
   "functional_revalidation_2026_10_18": {
-    "main_sha": "9a95a10a0ad2e53a542fd0eaba4aed7458a9016d",
-    "candidate_sha": "a15afcf174cd51766d870fa135db0ea188db00d2",
-    "evidence": "docs/teaching/evidence/2026-10-18-full-9a95a10/summary.json",
-    "notion_readback": "docs/teaching/evidence/2026-10-18-full-9a95a10/notion-readback.json",
+    "main_sha": "fa0888ea1e1ea93415a4ba7f16972938969b1be3",
+    "candidate_sha": "2f60c731ca78c689cb78abbd7bea239146ed3aaa",
+    "evidence": "docs/teaching/evidence/2026-10-18-full-fa0888e/summary.json",
+    "notion_readback": "docs/teaching/evidence/2026-10-18-full-fa0888e/notion-readback.json",
     "formal_acceptance": false,
     "day_advanced": false,
     "rules_changed": false,

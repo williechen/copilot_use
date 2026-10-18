@@ -1,6 +1,6 @@
 # 未來前進項目
 
-> 本輪參考rust_ai_chat/main `9a95a10a0ad2e53a542fd0eaba4aed7458a9016d` 全面重測：workspace126通過／1失敗，候選128通過；WS七案、schema33案、Pet原生四案通過。main搜尋／SSR／Cookie及舊DB升級仍失敗，完整GUI／帳密等未驗證，完整產品未驗收。詳[證據](teaching/evidence/2026-10-18-full-9a95a10/REPORT.md)。下方舊SHA屬歷史，不自動代表copilot_use產品通過；原產品需求未增加。
+> 本輪參考rust_ai_chat/main `fa0888ea1e1ea93415a4ba7f16972938969b1be3` 全面重測：workspace126通過／1失敗，候選129通過；WS七案、schema既有33＋protocol27案、Pet原生四案通過。main搜尋／SSR／Cookie及舊DB升級仍失敗，完整GUI／帳密等未驗證，完整產品未驗收。詳[證據](teaching/evidence/2026-10-18-full-fa0888e/REPORT.md)。下方舊SHA屬歷史，不自動代表copilot_use產品通過；P0 table／field可依既有功能需求增減或修改；原產品需求未增加。
 
 目標依 [P9_TARGET.md](P9_TARGET.md) 與 copilot_use 實際程式，目錄／內容銜接依 rust_ai_chat 最新 main。本清單分開記錄產品缺口、安全修正、參考適配與教學；未核實不標完成。每天從確認缺口與當日差異選三專案合計一小時的小切片，不預排 Day；週六工程與功能驗收另記。
 

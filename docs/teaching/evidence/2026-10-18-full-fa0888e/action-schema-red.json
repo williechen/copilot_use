@@ -1,0 +1,58 @@
+[
+  {
+    "case": "valid",
+    "sql": "insert into chat_action_log(id,action_type,created_user_id) values('fixture','send','fixture-user')",
+    "expected_accept": true,
+    "accepted": true,
+    "passed": true,
+    "error": null
+  },
+  {
+    "case": "duplicate",
+    "sql": "insert into chat_action_log(id,action_type,created_user_id) values('fixture','send','fixture-user')",
+    "expected_accept": false,
+    "accepted": false,
+    "passed": true,
+    "error": "UNIQUE constraint failed: chat_action_log.id"
+  },
+  {
+    "case": "missing id",
+    "sql": "insert into chat_action_log(action_type,created_user_id) values('send','fixture-user')",
+    "expected_accept": false,
+    "accepted": true,
+    "passed": false,
+    "error": null
+  },
+  {
+    "case": "explicit NULL id",
+    "sql": "insert into chat_action_log(id,action_type,created_user_id) values(NULL,'send','fixture-user')",
+    "expected_accept": false,
+    "accepted": true,
+    "passed": false,
+    "error": null
+  },
+  {
+    "case": "missing action",
+    "sql": "insert into chat_action_log(id,created_user_id) values('a','fixture-user')",
+    "expected_accept": false,
+    "accepted": false,
+    "passed": true,
+    "error": "NOT NULL constraint failed: chat_action_log.action_type"
+  },
+  {
+    "case": "missing actor",
+    "sql": "insert into chat_action_log(id,action_type) values('b','send')",
+    "expected_accept": false,
+    "accepted": false,
+    "passed": true,
+    "error": "NOT NULL constraint failed: chat_action_log.created_user_id"
+  },
+  {
+    "case": "orphan actor",
+    "sql": "insert into chat_action_log(id,action_type,created_user_id) values('c','send','missing-user')",
+    "expected_accept": false,
+    "accepted": true,
+    "passed": false,
+    "error": null
+  }
+]

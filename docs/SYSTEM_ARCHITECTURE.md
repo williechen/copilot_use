@@ -1,6 +1,6 @@
 # 目前系統架構與 DB 設定
 
-> 本輪參考rust_ai_chat/main `9a95a10a0ad2e53a542fd0eaba4aed7458a9016d` 全面重測：workspace126通過／1失敗，候選128通過；WS七案、schema33案、Pet原生四案通過。main搜尋／SSR／Cookie及舊DB升級仍失敗，完整GUI／帳密等未驗證，完整產品未驗收。詳[證據](teaching/evidence/2026-10-18-full-9a95a10/REPORT.md)。下方舊SHA屬歷史，不自動代表copilot_use產品通過；原產品需求未增加。
+> 本輪參考rust_ai_chat/main `fa0888ea1e1ea93415a4ba7f16972938969b1be3` 全面重測：workspace126通過／1失敗，候選129通過；WS七案、schema既有33＋protocol27案、Pet原生四案通過。main搜尋／SSR／Cookie及舊DB升級仍失敗，完整GUI／帳密等未驗證，完整產品未驗收。詳[證據](teaching/evidence/2026-10-18-full-fa0888e/REPORT.md)。下方舊SHA屬歷史，不自動代表copilot_use產品通過；P0 table／field可依既有功能需求增減或修改；原產品需求未增加。
 
 目錄／程式銜接以 rust_ai_chat 最新 main 為主；產品目標與前進項目以 copilot_use 為主，其餘按共同學習規則。以下是 copilot_use 當前程式架構；gRPC／SSE 新需求的驗證範圍見 [ANALYTICS_TRANSPORT.md](ANALYTICS_TRANSPORT.md)；兩個 repository 的 DB 目標統一，學習套用狀態另行核對。
 
@@ -50,3 +50,5 @@
 Chat／Pet 各自持久化訊息或真實操作結果及 Outbox → gRPC／Protobuf → 來源認證 Analytics → PostgreSQL 去重／查詢／洞察 → 人工審核 → Chat／Pet 確認採用／收據／可回退。
 
 Dashboard 以 HTTP 查詢最新聚合；SSE `/api/v1/events/stream` 通知資料版本改變。每次連線／重連都觸發重新查詢，PostgreSQL 為唯一資料來源。
+
+本輪參考庫新增的chat_action_log尚無runtime writer，NULL主鍵及任意操作者可插入；候選僅修主鍵，完整身分／稽核仍待接線。P0資料模型按功能調整，並以實際操作、授權、保存及升級驗證。

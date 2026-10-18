@@ -1,0 +1,28 @@
+   Compiling desktop-pet v0.2.17 (/home/willie/Documents/rust_ai_chat/apps/desktop_pet)
+    Checking persistence v0.2.17 (/home/willie/Documents/rust_ai_chat/crates/persistence)
+    Checking ui v0.2.17 (/home/willie/Documents/rust_ai_chat/crates/ui)
+    Checking stats-server v0.2.17 (/home/willie/Documents/rust_ai_chat/apps/stats_server)
+    Checking server v0.2.17 (/home/willie/Documents/rust_ai_chat/apps/server)
+error: this `if` statement can be collapsed
+   --> apps/stats_server/src/admin.rs:254:5
+    |
+254 | /     if let Some(key) = cookie_key(&headers) {
+255 | |         if let Ok(mut sessions) = state.sessions.lock() {
+256 | |             sessions.remove(&key);
+257 | |         }
+258 | |     }
+    | |_____^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#collapsible_if
+    = note: `-D clippy::collapsible-if` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(clippy::collapsible_if)]`
+help: collapse nested if block
+    |
+254 ~     if let Some(key) = cookie_key(&headers)
+255 ~         && let Ok(mut sessions) = state.sessions.lock() {
+256 |             sessions.remove(&key);
+257 ~         }
+    |
+
+error: could not compile `stats-server` (lib) due to 1 previous error
+warning: build failed, waiting for other jobs to finish...

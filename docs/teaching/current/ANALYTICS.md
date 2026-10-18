@@ -1,8 +1,8 @@
 ## 1. 學習大綱
-本輪main `9a95a10a0ad2e53a542fd0eaba4aed7458a9016d`；候選 `a15afcf174cd51766d870fa135db0ea188db00d2` 未合併main。目標仍為登入後的活動Session切片：保留人員Session與來源服務身分分離，讓伺服器expires和瀏覽器Cookie期限一起更新。main新建PG migration、登入／query／CSRF／Origin／來源身分分離／冪等／logout撤銷通過；活動Cookie續期assert實際失敗。舊PG migration31→32升級與啟動仍VersionMissing。候選同步server expiry／Cookie後真實HTTP通過，短deadline TCP到期401／不復活通過；未合併main。帳密admin/admin表單仍422缺key，角色／scope／1800秒browser soak未完成或未驗證。
+本輪main `fa0888ea1e1ea93415a4ba7f16972938969b1be3`；候選 `2f60c731ca78c689cb78abbd7bea239146ed3aaa` 未合併main。目標仍為登入後的活動Session切片：保留人員Session與來源服務身分分離，讓伺服器expires和瀏覽器Cookie期限一起更新。main新建PG migration、登入／query／CSRF／Origin／來源身分分離／冪等／logout撤銷通過；活動Cookie續期assert實際失敗。舊PG migration31→32升級與啟動仍VersionMissing。候選同步server expiry／Cookie後真實HTTP通過，短deadline TCP到期401／不復活通過；未合併main。帳密admin/admin表單仍422缺key，角色／scope／1800秒browser soak未完成或未驗證。
 目前入口main會先PgPool連線並執行apps/stats_server/migrations，再建立admin::build Router。新建PG啟動已通過；SQLx舊migration31改名32的既有庫升級及啟動仍失敗。這不是教學發文阻擋，但必須保留為產品驗收缺口。
 原Red／Green學習15分鐘；真實HTTP／PG及短deadline回歸另估20分鐘，角色、帳密與migration兼容另列原需求，沒有增加規則。
-本次9a95a10新增三服務各自的protocol migration：Chat五份／19張業務表，Pet三份／9張，Analytics三份／15張。新建、63f66e7→新版三服務升級與新增表27項約束實測通過；舊Chat91733／舊PG31仍升級失敗。Rust無新增表呼叫端，HTTP／原生啟動後紀錄表仍空，不能視為服務配對、短效憑證輪替、撤銷或稽核接線完成。版本庫移除rust_ai_chat.db；本輪僅測fixture，未刪重建使用者資料。
+本次fa0888e新增chat_action_log：Chat六份migrations／20張業務表，Pet三份／9張，Analytics三份／15張。P0的table與field可依功能需求增減或修改，現有schema不是固定限制。新建及9a95a10→本版升級通過；action log缺少或NULL主鍵仍能插入、任意操作者ID可接受，且無Rust寫入呼叫端。候選以前向migration加NOT NULL，保留有效舊row，遇NULL舊row停止且保留原資料；操作者身分綁定、低敏稽核與真實寫入仍未完成。舊Chat91733／舊PG31升級仍失敗；本輪未操作使用者資料庫。
 ## 2. 實作內容
 ### 真實 Red
 main `python3 full_http.py analytics require-renewal` 實際exit1，COOKIE_RENEWED: False。csrf_for已有touch_session但只延長server expires，活動Dashboard的200回應沒有Set-Cookie Max-Age=1800。基礎HTTP腳本exit0只代表其他assert通過，不能冒稱這個Cookie gate通過。
@@ -60,18 +60,17 @@ async fn refresh_session(
         None
     };
     let mut response = next.run(request).await;
-    if response.status().is_success() {
-        if let Some(raw) = raw {
-            if let Ok(mut sessions) = state.sessions.lock() {
-                let now = Instant::now();
-                sessions.retain(|_, session| session.expires > now);
-                if let Some(session) = sessions.get_mut(&hash(&raw)) {
-                    touch_session(session, now);
-                    response
-                        .headers_mut()
-                        .insert(header::SET_COOKIE, session_cookie(&raw));
-                }
-            }
+    if response.status().is_success()
+        && let Some(raw) = raw
+        && let Ok(mut sessions) = state.sessions.lock()
+    {
+        let now = Instant::now();
+        sessions.retain(|_, session| session.expires > now);
+        if let Some(session) = sessions.get_mut(&hash(&raw)) {
+            touch_session(session, now);
+            response
+                .headers_mut()
+                .insert(header::SET_COOKIE, session_cookie(&raw));
         }
     }
     response
@@ -188,17 +187,17 @@ pub fn build(ingest: IngestState, config: Option<Config>) -> Router {
 }
 
 ```
-[以本次main為parent的完整patch](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-18-full-9a95a10/functional-fixes.patch)包含完整差異與真實TCP回歸測試。成功GET後再次確認Session仍存在且未過期，才同時touch與刷新同一Cookie；logout、已撤銷與過期不能被這層復活。這只是候選，main尚未套用。
+[以本次main為基底的完整patch](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-18-full-fa0888e/functional-fixes.patch)包含完整差異與真實TCP回歸測試。成功GET後再次確認Session仍存在且未過期，才同時touch與刷新同一Cookie；logout、已撤銷與過期不能被這層復活。這只是候選，main尚未套用。
 ### Refactor及舊Day更正
 cookie_value解析只接受64位hex，cookie_key與Set-Cookie重用同一值，避免從Cookie名稱或未驗證輸入拼接header。Day17原98f30d8「沒有touch_session」保留歷史身分；現在不能重複新增該函式，也不能因server-only測試通過就宣稱瀏覽器生命周期完整。
 PG migration31／32兼容、admin/admin首次改密碼、Email、角色／來源scope與立即縮權屬原產品待完成項目，候選沒有實作。root AI人物表在Chat SQLite，不能用它當成Analytics人員帳密已完成的證據。
 ## 3. 套件版本
 本輪實際 Rust／Cargo 1.99.1；SQLx 0.9.0、Axum 0.8.9、Leptos 0.8.22、Tokio 1.53.3、Tauri 2.12.4、tauri-build 2.7.3、wasm-bindgen 0.2.129（Cargo.lock）。cargo-leptos 0.3.11、Trunk 0.21.14；Ubuntu 26.04.1、PostgreSQL 18.6。本輪WebSocket測試用Node 22.22.1，先前Node24為歷史環境；未另驗跨平台／MSRV。候選沒有新增產品依賴。
 ## 4. 驗證項目
-同完整workspace命令並啟用stats-server/postgres-integration、include-ignored：main126 passed／1 failed／0 ignored；候選128 passed／0 failed／0 ignored。Stats單元／所屬PG與契約21通過，已包含在workspace總數，不能再相加當唯一案例數。
+同完整workspace命令並啟用stats-server/postgres-integration、include-ignored：main126 passed／1 failed／0 ignored；候選129 passed／0 failed／0 ignored。Stats單元／所屬PG與契約21通過，已包含在workspace總數，不能再相加當唯一案例數。
 main真實HTTP：匿名Dashboard303、匿名／服務token不能登入人員query401、Origin／錯誤CSRF403、正確key登入303、來源上報201／冪等200、PG summary200、logout303及舊Cookie401通過；活動Cookie assert失敗。候選同流程與require-renewal通過，COOKIE_RENEWED: True。
 候選TCP測試跨初始2秒期限後仍200，再將測試Session deadline設30ms並實際等60ms，逾時回401且不刷新／不復活。生產TTL仍1800秒；這不是30分鐘瀏覽器soak。main已有expired-session檢查測試通過，但其server-only／router證據不能代替瀏覽器Cookie續期。
 舊PG31基線先套用再跑最新migration，實際missing migration31；最新main啟動同DB回VersionMissing(20261018073931)。workspace-tests的analytics_postgres_ingest被未宣告feature擋住，直接啟用的命令exit101；該target的0 tests不算覆蓋，Stats套件本身的真PG測試已執行。
-帳密表單username/password實測422缺key；角色／scope／立即停用及長連線撤銷未完成或未驗證，1800秒browser soak未執行。精確命令、來源SHA、CI job、HTTP、PG與剩餘gate見[本輪完整證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-18-full-9a95a10/REPORT.md)；正式完整功能維持未驗收。
+帳密表單username/password實測422缺key；角色／scope／立即停用及長連線撤銷未完成或未驗證，1800秒browser soak未執行。精確命令、來源SHA、CI job、HTTP、PG與剩餘gate見[本輪完整證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-18-full-fa0888e/REPORT.md)；正式完整功能維持未驗收。
 最新main CI快照：17個jobs success、0個尚未完成；精確SHA／時間／job網址見本輪報告。Test All/test-stats-server未開postgres-integration／include-ignored，不能代替本輪獨立PG、真實Cookie／升級測試；Rust Dashboard/build-dashboard為建置。精確job連結與時間見本輪報告。
-補充品質檢查：cargo fmt --all -- --check通過；主線完整all-targets Clippy（-D warnings）實際exit101，apps/stats_server/src/[admin.rs](http://admin.rs)\:254有clippy\::collapsible_if。這是尚待修正的品質檢查失敗，沒有算成測試通過；原始clippy.log與精確命令見本輪完整證據。
+主線fmt通過、嚴格all-targets Clippy exit101（[admin.rs:254](http://admin.rs:254) collapsible_if）；候選已整理logout與refresh條件，但嚴格Clippy仍exit101於apps/desktop_pet/src/[lib.rs:110](http://lib.rs:110) collapsible_if，未宣稱品質全通過。完整命令／結果見本輪證據。
