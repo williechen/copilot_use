@@ -1,7 +1,11 @@
 # Analytics Day19 修正版：成功登入不累加失敗額度
 ## 1. 學習大綱
-來源 `rust_ai_chat/main=f692c2ebe7b414fe49858c1ab1c4a33ce7c3dfee`；教學分支 `44dabb3eebed12639cd949b93521cbdc47a401fb`。本篇為 Day19 r1 完整教學修訂；原稿的占位、缺碼與契約說明已修正。教學測試在獨立候選副本執行，使用者套用、產品整合及完整功能驗收仍未完成。主體 Red 5 分鐘、Green 10 分鐘，Refactor／額外驗證另計；實際測試結果見[完整驗證紀錄](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-19-day19-review/驗證結果.md)。完整修改檔與原始日誌見[查核證據目錄](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-19-day19-review)；[修正 patch](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-19-day19-review/corrected.patch)的基底為上述來源 SHA。
+來源 `rust_ai_chat/main=f692c2ebe7b414fe49858c1ab1c4a33ce7c3dfee`；教學分支 `44dabb3eebed12639cd949b93521cbdc47a401fb`。本篇為 Day19 r1 完整教學修訂；原稿的占位、缺碼與契約說明已修正。原教學 Red／Green 測試在獨立候選副本執行（歷史證據依原 SHA 保留）；截至 2026-10-19，Day19 Analytics 切片已進入 rust_ai_chat/main，但帳密產品流程、產品整合與完整功能驗收仍未確認。主體 Red 5 分鐘、Green 10 分鐘，Refactor／額外驗證另計；實際測試結果見[完整驗證紀錄](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-19-day19-review/驗證結果.md)。完整修改檔與原始日誌見[查核證據目錄](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-19-day19-review)；[修正 patch](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-19-day19-review/corrected.patch)的基底為上述來源 SHA。
 
+### 2026-10-19 現行程式重新核對（r2；不新增 Day）
+現行 `rust_ai_chat/main=0cd9f7995c196a7359864a9395c0fe2372d09222`，相對原教學 `f692c2ebe7b414fe49858c1ab1c4a33ce7c3dfee` 前進四個 commit。`apps/stats_server/src/admin.rs` 的 `login` 實際先檢查 Origin／設定，再鎖住 `attempts`、處理 60 秒窗口及 10 次門檻，只有 64 字元十六進位登入碼格式或 hash 驗證失敗時才 `attempts.1 += 1`；成功後 drop counter lock，建立 session 並回傳重導與 Cookie。模組內兩個 `day19_*` tests 仍存在，Green 的 `login` 函式與現行 main 相符。當前 main 已有此修正，本日 Red 的『第 11 次成功登入卻提前 429』只能在原教學基底重現。
+**規格差異（必須保留）**：現行實作仍是全域共享的 60 秒／10 次失敗計數，不是已要求的『各帳號獨立、15 秒起倍增等待、等待期間不重計數、成功清空失敗次數與等待時間』正式登入政策；成功登入目前僅不增加計數，**不會清空先前的失敗累計**。Day19 單一切片測試通過不能標示為完整登入政策 Green 或產品驗收。這是後續補齊整體帳號／持久化／權限流程的缺口，而非改寫本日教學目標。
+現行 Cargo workspace version 由 0.2.17 升至 0.2.19，獨立 `tests/` workspace 已移除，但本日兩個測試留在 [admin.rs](http://admin.rs)。新 SHA `Test All/test-stats-server` success（[run 39175426410](https://github.com/williechen/rust_ai_chat/actions/runs/39175426410)／job 117816980728），`Rust Dashboard/check-dashboard` 與 `build-dashboard` success（[run 39175426389](https://github.com/williechen/rust_ai_chat/actions/runs/39175426389)）。只覆蓋所列 CI，不能據此宣稱真 PostgreSQL、帳號權限、真 TCP、完整瀏覽器驗收通過。
 目標：同一60秒固定窗口內，11次合法登入均303；10次錯誤key均401，之後429。成功既不累加也不清零先前失敗；已滿10次時正確key仍429，直到窗口重置。這是既有全域單一額度，不是每帳號／IP，也不是滾動時間窗。
 
 呼叫鏈：build→POST /login→Axum Form extractor→handler內Origin檢查→Config存在性→attempts Mutex／窗口／門檻→64字元hex及SHA256比較→失敗累加／成功Session→Set-Cookie與/dashboard redirect。錯誤Form可能在handler前先被extractor拒絕，不能聲稱所有請求都先檢查Origin。原程式在key驗證前對成功也累加。前置沿用測試app()／request()，不用真實秘密或DB；不是admin/admin帳密或角色實作。
@@ -124,14 +128,14 @@ async fn login(
 本切片不再抽額外架構；保留驗證運算與回應建立順序、drop(attempts)、舊Session替換及Cookie契約。成功不重置額度，避免有人以合法登入重置共用限制；窗口逾60秒的重置原碼沿用，時間經過與併發行為本輪未新增實測。不要記錄key或hash。全域額度與Session1024容量仍是後續問題，不因11次成功測試而聲稱可無限登入。
 ## 3. 套件版本
 Cargo.lock：axum0.8.9、sqlx0.9.0、tokio1.53.3、sha2直接依賴0.11.1（lock另有間接0.10.9）、serde1.0.229、tower0.5.3、leptos0.8.22。
-本輪 Linux x86_64，rustc 1.99.1／cargo 1.99.1、stable 工具鏈，WASM target 已安裝。專案未宣告 rust-version，最低 MSRV 未驗證；其他作業系統未驗證。無新增套件或 migration，Cargo.lock 未改。
+本輪 Linux x86_64，rustc 1.99.1／cargo 1.99.1、stable 工具鏈，WASM target 已安裝。專案未宣告 rust-version，最低 MSRV 未驗證；其他作業系統未驗證。原 Day19 切片未新增第三方套件或 migration；但相對教學基底，目前 main 的 workspace version 由 0.2.17 升至 0.2.19，Cargo.lock 已更新。上列第三方套件版本為原教學驗證快照，重跑以 main 最新 lock 為準。
 
 ## 4. 驗證項目
 ```sh
 cargo test --locked -p stats-server day19
 cargo test --locked -p stats-server
 ```
-測試使用既有connect_lazy的不可連線fixture地址；登入路徑不需查PG，並檢查303 Location、Cookie屬性、401／429不發Cookie，以及成功不清零既有錯誤。它是Axum oneshot測試，並非真TCP／真PostgreSQL或瀏覽器驗收。完整PG整合、真HTTP、60秒實時等待、併發及cookie長時間存活未測。既有Origin／CSRF回歸測試結果見驗證表。來源Dashboard CI是check/build，Test All另有stats測試，都不含尚未提交的Day19候選。
+測試使用既有connect_lazy的不可連線fixture地址；登入路徑不需查PG，並檢查303 Location、Cookie屬性、401／429不發Cookie，以及成功不清零既有錯誤。它是Axum oneshot測試，並非真TCP／真PostgreSQL或瀏覽器驗收。完整PG整合、真HTTP、60秒實時等待、併發及cookie長時間存活未測。既有Origin／CSRF回歸測試結果見驗證表。原教學候選尚未提交時 Dashboard CI 只覆蓋 check/build，Test All 另有 stats 測試；目前此切片已合入 main，對應 SHA 的 Dashboard check/build 與 `Test All/test-stats-server` success，但真 PostgreSQL／真 HTTP／完整政策驗收仍未完成。
 
 本輪實際驗證：Day19 Green 2 passed；套件回歸18 passed／0 failed／1 ignored（需真PG）。Red實測2 failed，精確重現過早429。真HTTP／PG與時間窗實時等待未測。
 
