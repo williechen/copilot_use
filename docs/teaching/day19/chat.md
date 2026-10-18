@@ -1,7 +1,10 @@
 # Chat Day19 修正版：刷新失敗保留已載入房間
 ## 1. 學習大綱
-來源 `rust_ai_chat/main=f692c2ebe7b414fe49858c1ab1c4a33ce7c3dfee`；教學分支 `44dabb3eebed12639cd949b93521cbdc47a401fb`。本篇為 Day19 r1 完整教學修訂；原稿的占位、缺碼與契約說明已修正。教學測試在獨立候選副本執行，使用者套用、產品整合及完整功能驗收仍未完成。主體 Red 5 分鐘、Green 10 分鐘，Refactor／額外驗證另計；實際測試結果見[完整驗證紀錄](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-19-day19-review/驗證結果.md)。完整修改檔與原始日誌見[查核證據目錄](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-19-day19-review)；[修正 patch](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-19-day19-review/corrected.patch)的基底為上述來源 SHA。
+來源 `rust_ai_chat/main=f692c2ebe7b414fe49858c1ab1c4a33ce7c3dfee`；教學分支 `44dabb3eebed12639cd949b93521cbdc47a401fb`。本篇為 Day19 r1 完整教學修訂；原稿的占位、缺碼與契約說明已修正。原教學 Red／Green 測試在獨立候選副本執行（歷史證據依原 SHA 保留）；截至 2026-10-19，Day19 Chat 切片已進入 rust_ai_chat/main，但使用者環境部署、產品整合與完整功能驗收仍未確認。主體 Red 5 分鐘、Green 10 分鐘，Refactor／額外驗證另計；實際測試結果見[完整驗證紀錄](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-19-day19-review/驗證結果.md)。完整修改檔與原始日誌見[查核證據目錄](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-19-day19-review)；[修正 patch](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-19-day19-review/corrected.patch)的基底為上述來源 SHA。
 
+### 2026-10-19 現行程式重新核對（r2；不新增 Day）
+現行 `rust_ai_chat/main=0cd9f7995c196a7359864a9395c0fe2372d09222`，相對原教學 `f692c2ebe7b414fe49858c1ab1c4a33ce7c3dfee` 已前進四個 commit。`crates/ui/src/lib.rs` 實際包含 `refreshed_room_list`、`RoomList` 刷新按鈕的 `room_api::list_rooms().await` 呼叫，以及 `day19_*` 三個單元測試；錯誤路徑使用原 rows，成功空值清空 rows；獨立搜尋 `search_rooms` 的錯誤處理沒有覆寫 rows。Notion 教學碼和現行程式在 Rustfmt 排版上有差異，實際邏輯與呼叫鏈相符。本日 Red 的 E0425 僅可在原教學基底／移除 helper 的情境重現，不應直接期待現行 main 出現 Red。
+現行 Cargo workspace version 已由 0.2.17 升至 0.2.19，且 `tests/` workspace 已自 Cargo members 移除、其獨立測試檔被刪除；但本功能三項測試仍留在 `crates/ui/src/lib.rs`。新的 CI `Test All`／`test-ui` 在此 SHA 為 success（[run 39175426410](https://github.com/williechen/rust_ai_chat/actions/runs/39175426410)／job 117816980740）；`Rust AI Chat` 的 `check-chat`／`build-chat` 在本次核對時仍 in_progress（[run 39175426527](https://github.com/williechen/rust_ai_chat/actions/runs/39175426527)）。這些結果不包含真實瀏覽器的 200→503→200 流程驗收，亦不證明移除的獨立測試覆蓋仍存在。
 目標：已成功載入房間後，刷新失敗時保留所有既有 (id,name)，顯示可重試提示；成功回傳空列表則清空。前置：Leptos 現有 RoomList、room_api API 及房間 ID 驗證。原程式在 HTTP 前清空 rows，失敗即遺失舊清單。
 
 呼叫鏈：RoomList 刷新 callback → list_rooms → search_rooms("") → GET /api/rooms?q= → Axum list_rooms → 空 q 走 RoomRepository::list／SQLite → JSON(id,name,category_room_id) → (id,name) → filter_rooms → /room/{id} 連結。非空查詢走 search_by_name。這次保留既有 query 篩選，因此變更搜尋輸入仍可能隱藏部分已保存房間。
@@ -196,7 +199,7 @@ fn day19_refresh_failure_keeps_previous_room_links() {
 用 helper 集中成功／失敗的資料與提示轉換，不改 HTTP JSON、房間 ID、搜尋及網址契約。錯誤 message 已由 room_api 加上「讀取失敗」，helper 只加重試文字，避免原建議的重複前綴。loading 防重入及 await 後復原保留。helper 單元測試不會證明 callback 沒有清空 rows，必須另驗 WASM 及瀏覽器。
 ## 3. 套件版本
 Cargo.lock：leptos 0.8.22、leptos_router 0.8.17、web-sys 0.3.106、wasm-bindgen 0.2.129、wasm-bindgen-futures 0.4.79。
-本輪 Linux x86_64，rustc 1.99.1／cargo 1.99.1、stable 工具鏈，WASM target 已安裝。專案未宣告 rust-version，最低 MSRV 未驗證；其他作業系統未驗證。無新增套件或 migration，Cargo.lock 未改。
+本輪 Linux x86_64，rustc 1.99.1／cargo 1.99.1、stable 工具鏈，WASM target 已安裝。專案未宣告 rust-version，最低 MSRV 未驗證；其他作業系統未驗證。原 Day19 切片未新增第三方套件或 migration；但相對教學基底，目前 main 的 workspace version 由 0.2.17 升至 0.2.19，Cargo.lock 已更新。上列 lock 第三方套件版本是原教學驗證快照，若重跑需以本次 main 的 lock 為準。
 
 ## 4. 驗證項目
 ```sh
@@ -204,7 +207,7 @@ cargo test --locked -p ui --features ssr day19
 cargo test --locked -p ui --features ssr
 cargo check --locked -p ui --features hydrate --target wasm32-unknown-unknown
 ```
-單元涵蓋失敗保留同名不同 ID、成功替換、空成功清空與完整提示。SSR 既有「歷史載入尚未接通」斷言不在本日修正範圍，結果單獨列示。未執行 cargo leptos 完整建置或瀏覽器 200→503→200；瀏覽器需確認 loading 時舊連結仍存在、失敗保留 href、重試成功替換。後端 repository 錯誤原生為500，503可由測試代理注入。解析／fetch 失敗也應保留。來源 CI 成功不包含本次候選，產品整合及完整驗收未完成。
+單元涵蓋失敗保留同名不同 ID、成功替換、空成功清空與完整提示。SSR 既有「歷史載入尚未接通」斷言不在本日修正範圍，結果單獨列示。未執行 cargo leptos 完整建置或瀏覽器 200→503→200；瀏覽器需確認 loading 時舊連結仍存在、失敗保留 href、重試成功替換。後端 repository 錯誤原生為500，503可由測試代理注入。解析／fetch 失敗也應保留。原教學的來源 CI 成功不包含當時獨立候選；後續切片已合入 main，對應新 SHA 的 `Test All/test-ui` 已成功，但完整 Chat 建置在核對時未完成。瀏覽器與產品整合仍未驗收。
 
 本輪實際驗證：Day19 Green 3 passed；WASM check exit0；套件回歸6 passed／1 failed（既有SSR提示斷言，原始來源同樣失敗）。Red已實測E0425缺helper。瀏覽器未測。
 
