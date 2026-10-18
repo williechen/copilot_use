@@ -1,6 +1,6 @@
 # 目前系統架構與 DB 設定
 
-> 最新 main `2eddd6428cda6c81c53b1e261d0846ebcf56e6a0`：root SQLite migration語法失敗，persistence 0通過／5失敗、Chat啟動退出。候選 `e33971f508e9612770ad72960b62a8b090efd53e` 修正後5通過、四種遷移情境通過、HTTP200；未合併main，完整產品仍未驗收。詳[證據](teaching/evidence/2026-10-18-main-2eddd64/REPORT.md)。
+> 最新 main `6e1c791d3e55124cd1de0797fd2569d8ddaf60d1`：新SQLite遷移／persistence5案／啟動HTTP200通過；舊DB因已套用91733被修改而升級失敗，TEXT主鍵仍允許NULL。其他搜尋／Cookie／產品缺口未修。詳[最新證據](teaching/evidence/2026-10-18-main-6e1c791/REPORT.md)。
 
 目錄／程式銜接以 rust_ai_chat 最新 main 為主；產品目標與前進項目以 copilot_use 為主，其餘按共同學習規則。以下是 copilot_use 當前程式架構；gRPC／SSE 新需求的驗證範圍見 [ANALYTICS_TRANSPORT.md](ANALYTICS_TRANSPORT.md)；兩個 repository 的 DB 目標統一，學習套用狀態另行核對。
 

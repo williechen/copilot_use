@@ -1,6 +1,6 @@
 # 未來前進項目
 
-> 最新 main `2eddd6428cda6c81c53b1e261d0846ebcf56e6a0`：root SQLite migration語法失敗，persistence 0通過／5失敗、Chat啟動退出。候選 `e33971f508e9612770ad72960b62a8b090efd53e` 修正後5通過、四種遷移情境通過、HTTP200；未合併main，完整產品仍未驗收。詳[證據](teaching/evidence/2026-10-18-main-2eddd64/REPORT.md)。
+> 最新 main `6e1c791d3e55124cd1de0797fd2569d8ddaf60d1`：新SQLite遷移／persistence5案／啟動HTTP200通過；舊DB因已套用91733被修改而升級失敗，TEXT主鍵仍允許NULL。其他搜尋／Cookie／產品缺口未修。詳[最新證據](teaching/evidence/2026-10-18-main-6e1c791/REPORT.md)。
 
 目標依 [P9_TARGET.md](P9_TARGET.md) 與 copilot_use 實際程式，目錄／內容銜接依 rust_ai_chat 最新 main。本清單分開記錄產品缺口、安全修正、參考適配與教學；未核實不標完成。每天從確認缺口與當日差異選三專案合計一小時的小切片，不預排 Day；週六工程與功能驗收另記。
 

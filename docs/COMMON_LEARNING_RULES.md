@@ -58,13 +58,12 @@ Notion 已完整讀回但 GitHub 狀態寫入／讀回失敗，保留頁面 ID�
 
 
 ## 目前進度（最新程式再次核對）
-最新 main `2eddd6428cda6c81c53b1e261d0846ebcf56e6a0`。既有 Day18 已發布，next_day 各19，本次未遞增；正式完整驗收維持未通過。
+最新 main `6e1c791d3e55124cd1de0797fd2569d8ddaf60d1`。next_day各19，本次未遞增；正式完整驗收仍未通過。
 ## 當前功能狀態與證據入口
-- chat：新 migration 20261018100114 使用 SQLite 不支援的 MODIFY COLUMN。SQLx 新建與從1853876升級均失敗；清除 persistence 套件後 0 passed／5 failed。Chat 啟動亦受 migration 阻擋，尚不能驗收房間功能。搜尋三筆只顯示兩筆與 SSR 提示失敗仍是未修的1853876基線；本輪沒有宣稱最新服務已可供瀏覽器驗證。
-- pet：本輪新增 migration 嘗試把 owner_id 對齊 pet_owner，但開頭 MODIFY COLUMN 在實際 SQLite 執行失敗，尚未到欄位／外鍵修正；pet_owner 實際欄位仍為 id，不存在 pet_owner_id。先前 missing owner／SERIAL NULL 不能宣告解除。漫遊核心、設定與依賴無變，1853876的四案原生幾何證據仍適用該核心；本輪未重跑完整 GUI。
-- analytics：本輪只更動 root SQLite migration，Analytics PG程式及其migrations／lock未變；先前 Cookie 未續期、PG migration31→32既有庫升級失敗仍未修。新 SQLite migration 本身又在 MODIFY 語法失敗，不能作帳密／角色或資料管理功能已完成的證據。本輪未重跑相同 HTTP／PG 流程，沿用前輪時明確保留1853876來源。
-[最新實測與原始錯誤](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-18-main-2eddd64/REPORT.md)。候選80ba01e以1853876為基底，沒有包含本次 migration，不是最新 main 的 Green；需先修遷移並重跑。v1正文、原需求與歷史證據保留。
-SQLite 修正候選 `e33971f508e9612770ad72960b62a8b090efd53e`（工作分支，未合併main）：以重建表取代不支援的ALTER，保留有效資料／ID，owner_id對齊pet_owner_id並強制外鍵。新建／有效資料升級／缺少owner ID／孤兒owner四案通過，後兩者須拒絕並rollback。最新main仍失敗；此候選只修SQLite migration，未包含之前Chat搜尋與Analytics Cookie候選。完整SQL與重現命令見 [修正與證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-18-main-2eddd64/REPORT.md)。
+- chat：新建SQLite已可遷移，清除persistence快取後5 passed，main編譯／啟動成功，/health與/api/rooms實際200。舊1853876資料庫升級與啟動因migration20261018091733 checksum已修改失敗。搜尋3匹配→2顯示與SSR提示程式未改，先前缺口仍保留；本輪未重跑瀏覽器搜尋。
+- pet：已移除不支援的ALTER，owner_id改為TEXT REFERENCES pet_owner(id)，明確文字ID的主人／寵物新增與無效外鍵拒絕已通過。主鍵改TEXT是目前設計，不再要求自增整數；但TEXT PRIMARY KEY未加NOT NULL，主人缺少ID實測仍插入NULL。已套用舊表migration的資料庫因checksum變動無法升級。漫遊核心及依賴未變，前輪原生四案僅保留原SHA適用性，完整GUI仍未驗證。
+- analytics：本輪修改僅root SQLite migration，Stats程式／PG migrations／lock未變。新SQLite能啟動Chat不代表Analytics帳密／角色／來源scope已完成；Cookie續期與PG migration31→32升級的前輪失敗仍未修，本輪未重跑相同HTTP／PG流程。
+[最新實測與證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-18-main-6e1c791/REPORT.md)。前輪SQLite候選e33971f以2eddd64為基底，最新已改成TEXT ID並刪除該ALTER檔，舊patch不可直接套用；候選的5通過／四案不是最新main升級證據。規則與原產品需求不變。
 ## 文件入口
 產品能力與未來清單、詳細架構、操作設定、功能對照與工程證據仍保留各自用途；本篇集中教學方法、格式及三專案大綱，其他教學入口改為引用。原Day及程式保留，舊規則／來源／失效教法只作歷史，不再套用為目前指令。
 [聊天室](https://app.notion.com/p/3f3e51d45093807da638c336e857543a) · [桌面寵物](https://app.notion.com/p/3f3e51d450938067923ae5a424d30950) · [統計儀錶板｜聊天室 × 桌面寵物](https://app.notion.com/p/3f3e51d45093817eafaee0cfc9ea4cc8)。功能與實作對照的詳細歷史保留工程紀錄；本篇不再追加歷次討論或驗證摘要。

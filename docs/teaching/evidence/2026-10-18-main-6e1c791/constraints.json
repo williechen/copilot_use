@@ -1,0 +1,31 @@
+[
+  {
+    "sql": "insert into pet_owner(id,name) values('owner-fixture','fixture')",
+    "result": "accepted"
+  },
+  {
+    "sql": "insert into pet_profile(id,name,species,owner_id) values('pet-fixture','fixture','cat','owner-fixture')",
+    "result": "accepted"
+  },
+  {
+    "sql": "insert into pet_profile(id,name,species,owner_id) values('pet-invalid','invalid','cat','missing')",
+    "error": "FOREIGN KEY constraint failed"
+  },
+  {
+    "sql": "insert into pet_owner(name) values('missing id')",
+    "result": "accepted"
+  },
+  {
+    "owner_ids": [
+      [
+        "owner-fixture",
+        "fixture"
+      ],
+      [
+        null,
+        "missing id"
+      ]
+    ],
+    "fk_violations": []
+  }
+]
