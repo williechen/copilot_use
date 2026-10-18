@@ -844,5 +844,24 @@
     "day_advanced": false,
     "rules_changed": false,
     "main_modified": false
+  },
+  "copilot_use_p0_trial_2026_10_18": {
+    "source_sha": "948685fe0692a9e56de94a4ae6a817fdf13fc0a2",
+    "base_sha": "0bf1d460ea8f20dfaa3bcdaf14b7a895d1b3aacd",
+    "branch": "codex/p0-table-trial",
+    "scope": "Chat registration unique email and ASCII case-insensitive identity; existing completion/login flows",
+    "tests": {
+      "passed": 21,
+      "failed": 0,
+      "ignored": 0
+    },
+    "http_cases": 16,
+    "migration_cases": 2,
+    "fmt": "passed",
+    "strict_clippy": "passed",
+    "frontend": "passed",
+    "formal_p0_acceptance": false,
+    "main_merged": false,
+    "evidence": "docs/teaching/evidence/2026-10-18-copilot-p0-registration/REPORT.md"
   }
 }

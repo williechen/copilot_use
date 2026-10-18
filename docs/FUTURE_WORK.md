@@ -2,6 +2,8 @@
 
 > 本輪參考rust_ai_chat/main `fa0888ea1e1ea93415a4ba7f16972938969b1be3` 全面重測：workspace126通過／1失敗，候選129通過；WS七案、schema既有33＋protocol27案、Pet原生四案通過。main搜尋／SSR／Cookie及舊DB升級仍失敗，完整GUI／帳密等未驗證，完整產品未驗收。詳[證據](teaching/evidence/2026-10-18-full-fa0888e/REPORT.md)。下方舊SHA屬歷史，不自動代表copilot_use產品通過；P0 table／field可依既有功能需求增減或修改；原產品需求未增加。
 
+> copilot_use P0 試作（本地工作分支codex/p0-table-trial，948685fe0692a9e56de94a4ae6a817fdf13fc0a2）：Chat註冊必填唯一Email、帳號不分英文大小寫、成功註冊撤銷目前Session，已接通UI／HTTP／SQLite／獨立完成頁及重啟保存。相關測試21、HTTP／schema16、升級2案、fmt／嚴格Clippy／前端建置通過。既有帳號Email補填、寄信重設、admin初始化、活動Session與其他Pet／Analytics P0仍待完成；完整P0未驗收。詳[試作證據](teaching/evidence/2026-10-18-copilot-p0-registration/REPORT.md)。
+
 目標依 [P9_TARGET.md](P9_TARGET.md) 與 copilot_use 實際程式，目錄／內容銜接依 rust_ai_chat 最新 main。本清單分開記錄產品缺口、安全修正、參考適配與教學；未核實不標完成。每天從確認缺口與當日差異選三專案合計一小時的小切片，不預排 Day；週六工程與功能驗收另記。
 
 既有開發項目是 P0～P12 階段功能完成條件的唯一追蹤來源；在原項目記錄所屬階段、可驗證功能條件、SHA／測試／CI／套用與驗收證據，未核實者保留未完成。跨階段工作留原功能項目追蹤；舊 Day 更正僅於下一個 Day 的 Refactor 後獨立補加，不回填原 Day，不另開重複項目；完成後可退出活動清單，但原識別與證據須可追溯。P9 產品目標不等於 P9 學習階段。

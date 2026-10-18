@@ -69,5 +69,12 @@
     "rules_version": "daily-tdd-minimum-v1"
   },
   "previous_manifest": "docs/teaching/archive/rules-before-minimum-v1/manifest.json",
-  "functional_revalidation_evidence": "docs/teaching/evidence/2026-10-18-full-fa0888e/REPORT.md"
+  "functional_revalidation_evidence": "docs/teaching/evidence/2026-10-18-full-fa0888e/REPORT.md",
+  "copilot_use_product_trial": {
+    "source_sha": "948685fe0692a9e56de94a4ae6a817fdf13fc0a2",
+    "scope": "Chat registration unique email and ASCII case-insensitive identity; existing completion/login flows",
+    "evidence": "docs/teaching/evidence/2026-10-18-copilot-p0-registration/REPORT.md",
+    "full_p0_acceptance": false,
+    "day_advanced": false
+  }
 }

@@ -10,3 +10,5 @@
 - [索引與分別驗收狀態](manifest.json)
 
 Day15／Day16 Notion 原文與既有封存保留；先前移除的 Day16 GitHub 文章沒有復原。本目錄的 CHAT／PET／ANALYTICS 是 Day18，不能當成 Day16。
+
+- [copilot_use P0註冊身分試作](../evidence/2026-10-18-copilot-p0-registration/REPORT.md)（本地工作分支，與rust_ai_chat／Day18驗收分開）
