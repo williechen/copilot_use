@@ -30,23 +30,22 @@
     },
     {
       "project": "analytics",
-      "day": 17,
-      "notion_page_id": "3fce51d4509381ea871ec9c92da37c1b",
-      "notion_url": "https://app.notion.com/p/3fce51d4509381ea871ec9c92da37c1b",
+      "day": 18,
+      "notion_page_id": "3fde51d4509381c2a0d5f60041137619",
+      "notion_url": "https://app.notion.com/p/3fde51d4509381c2a0d5f60041137619",
       "four_sections": true,
       "notion_readback_verified": true,
       "source_sha": "98f30d8b3593d80103b1a4bdbb9f0cb8cb08069e",
-      "tests": "not executed in published article",
+      "tests": "not executed",
       "application_status": "unverified",
-      "functional_acceptance": "not verified",
-      "minimum_v1_compliance": "not retroactively certified; see learning-state rollout day17_limitations"
+      "functional_acceptance": "not verified"
     }
   ],
   "day15_frozen": true,
   "next_day": {
     "chat": 19,
     "pet": 19,
-    "analytics": 18
+    "analytics": 19
   },
   "day_advanced": false,
   "reference_modified": false,
