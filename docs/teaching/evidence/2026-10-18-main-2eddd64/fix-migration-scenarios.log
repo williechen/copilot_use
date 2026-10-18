@@ -1,0 +1,44 @@
+CASE fresh
+COMMAND cargo sqlx migrate run --source /home/willie/Documents/Codex/2026-10-18/referenced-chatgpt-conversation-this-is-an-2/work/rust_ai_chat/migrations EXIT 0
+Applied 20260930034455/migrate crate rooms (258.361µs)
+Applied 20261007084321/migrate create messages (224.842µs)
+Applied 20261018073931/migrate create auth user (612.601µs)
+Applied 20261018091733/migrate create pet (428.537µs)
+Applied 20261018094242/migrate create ai person (320.087µs)
+Applied 20261018095626/migrate create pet owner (207.089µs)
+Applied 20261018100114/migrate update pet (3.867788ms)
+PASS migrated; preserved data; generated integer IDs; enforced owner IDs and foreign keys
+CASE upgrade
+COMMAND cargo sqlx migrate run --source /tmp/pet-migration-3ylsv5tj/old EXIT 0
+Applied 20260930034455/migrate crate rooms (199.136µs)
+Applied 20261007084321/migrate create messages (254.603µs)
+Applied 20261018073931/migrate create auth user (548.678µs)
+Applied 20261018091733/migrate create pet (416.896µs)
+Applied 20261018094242/migrate create ai person (262.146µs)
+Applied 20261018095626/migrate create pet owner (175.799µs)
+COMMAND cargo sqlx migrate run --source /home/willie/Documents/Codex/2026-10-18/referenced-chatgpt-conversation-this-is-an-2/work/rust_ai_chat/migrations EXIT 0
+Applied 20261018100114/migrate update pet (9.211744ms)
+PASS migrated; preserved data; generated integer IDs; enforced owner IDs and foreign keys
+CASE null_owner_id
+COMMAND cargo sqlx migrate run --source /tmp/pet-migration-3ylsv5tj/old EXIT 0
+Applied 20260930034455/migrate crate rooms (547.545µs)
+Applied 20261007084321/migrate create messages (287.022µs)
+Applied 20261018073931/migrate create auth user (1.022954ms)
+Applied 20261018091733/migrate create pet (1.244972ms)
+Applied 20261018094242/migrate create ai person (361.012µs)
+Applied 20261018095626/migrate create pet owner (180.603µs)
+COMMAND cargo sqlx migrate run --source /home/willie/Documents/Codex/2026-10-18/referenced-chatgpt-conversation-this-is-an-2/work/rust_ai_chat/migrations EXIT 1
+error: while executing migration 20261018100114: error returned from database: (code: 275) CHECK constraint failed: valid = 1
+PASS invalid ownership rejected; original data/schema and migration history preserved
+CASE orphan_owner
+COMMAND cargo sqlx migrate run --source /tmp/pet-migration-3ylsv5tj/old EXIT 0
+Applied 20260930034455/migrate crate rooms (367.872µs)
+Applied 20261007084321/migrate create messages (516.79µs)
+Applied 20261018073931/migrate create auth user (927.186µs)
+Applied 20261018091733/migrate create pet (355.221µs)
+Applied 20261018094242/migrate create ai person (279.47µs)
+Applied 20261018095626/migrate create pet owner (147.182µs)
+COMMAND cargo sqlx migrate run --source /home/willie/Documents/Codex/2026-10-18/referenced-chatgpt-conversation-this-is-an-2/work/rust_ai_chat/migrations EXIT 1
+error: while executing migration 20261018100114: error returned from database: (code: 275) CHECK constraint failed: valid = 1
+PASS invalid ownership rejected; original data/schema and migration history preserved
+PASS 4 scenarios; SQLite 3.46.1

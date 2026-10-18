@@ -1,6 +1,6 @@
 # Chat 聊天前台、Pet 雙視窗與 Analytics 畫面銜接
 
-> 最新 main `1853876e0eb1cfe8e4562be8b3c661b55f1bc54b` 實測：Chat 3 筆匹配只顯示 2 筆、SSR 提示失敗；Pet 四案原生幾何通過，但新增 pet schema 引用缺少 owner；Analytics Cookie 與舊 migration 升級仍失敗。完整產品未驗收。既有需求不變，詳 [最新證據](teaching/evidence/2026-10-18-main-1853876/REPORT.md)。
+> 最新 main `2eddd6428cda6c81c53b1e261d0846ebcf56e6a0`：root SQLite migration語法失敗，persistence 0通過／5失敗、Chat啟動退出。候選 `e33971f508e9612770ad72960b62a8b090efd53e` 修正後5通過、四種遷移情境通過、HTTP200；未合併main，完整產品仍未驗收。詳[證據](teaching/evidence/2026-10-18-main-2eddd64/REPORT.md)。
 
 本文件是既有 FUTURE_WORK 項目的詳細驗收條件，不另立 Day 或重複開發清單。需求與程式套用、測試及完整驗收分開記錄。
 

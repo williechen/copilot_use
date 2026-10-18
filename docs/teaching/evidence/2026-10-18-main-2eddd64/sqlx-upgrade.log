@@ -1,0 +1,1 @@
+error: while executing migration 20261018100114: error returned from database: (code: 1) near "MODIFY": syntax error

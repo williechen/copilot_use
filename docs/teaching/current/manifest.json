@@ -1,8 +1,8 @@
 {
   "scope": "Latest published teaching index; Day16 snapshot preserved in archive",
-  "revision": "day18-main-1853876",
+  "revision": "day18-main-2eddd64",
   "synced_date": "2026-10-18",
-  "source_sha": "1853876e0eb1cfe8e4562be8b3c661b55f1bc54b",
+  "source_sha": "2eddd6428cda6c81c53b1e261d0846ebcf56e6a0",
   "articles": [
     {
       "project": "chat",
@@ -11,11 +11,12 @@
       "notion_url": "https://app.notion.com/p/3fde51d45093816bb36dd9099190d907",
       "four_sections": true,
       "notion_readback_verified": true,
-      "source_sha": "1853876e0eb1cfe8e4562be8b3c661b55f1bc54b",
-      "tests": "main 3 matches ->2; SSR assertion fails; candidate185 shows3; full candidate105 pass/1 ignored",
-      "application_status": "main search improves exact duplicate rows; contains contract still fails",
-      "functional_acceptance": "not passed; measured blockers remain",
-      "candidate_sha": "80ba01e6d965d0e3ff10bef18a5cbd17f01e8f05"
+      "source_sha": "2eddd6428cda6c81c53b1e261d0846ebcf56e6a0",
+      "tests": "main SQLite new/upgrade fail; persistence0/5; startup exit1. SQLite candidate5/0 +4 migration scenarios +HTTP200; prior project tests retain1853876 attribution",
+      "application_status": "main new migration fails; candidate SQLite fix not merged; other product gaps remain",
+      "functional_acceptance": "not passed; main migration/startup fails",
+      "candidate_sha": "e33971f508e9612770ad72960b62a8b090efd53e",
+      "candidate_scope": "SQLite migration only; separate prior Chat/Cookie candidate remains historical"
     },
     {
       "project": "pet",
@@ -24,11 +25,12 @@
       "notion_url": "https://app.notion.com/p/3fde51d4509381bfa106ea4d9b190480",
       "four_sections": true,
       "notion_readback_verified": true,
-      "source_sha": "1853876e0eb1cfe8e4562be8b3c661b55f1bc54b",
-      "tests": "34 unit/integration +4 native passed; new SQLite pet insert fails missing owner; full GUI unverified",
-      "application_status": "roaming target applied; new schema missing referenced owner and no generated SQLite SERIAL ID",
-      "functional_acceptance": "not passed; measured blockers remain",
-      "candidate_sha": "80ba01e6d965d0e3ff10bef18a5cbd17f01e8f05"
+      "source_sha": "2eddd6428cda6c81c53b1e261d0846ebcf56e6a0",
+      "tests": "main SQLite new/upgrade fail; persistence0/5; startup exit1. SQLite candidate5/0 +4 migration scenarios +HTTP200; prior project tests retain1853876 attribution",
+      "application_status": "main new migration fails; candidate SQLite fix not merged; other product gaps remain",
+      "functional_acceptance": "not passed; main migration/startup fails",
+      "candidate_sha": "e33971f508e9612770ad72960b62a8b090efd53e",
+      "candidate_scope": "SQLite migration only; separate prior Chat/Cookie candidate remains historical"
     },
     {
       "project": "analytics",
@@ -37,11 +39,12 @@
       "notion_url": "https://app.notion.com/p/3fde51d4509381c2a0d5f60041137619",
       "four_sections": true,
       "notion_readback_verified": true,
-      "source_sha": "1853876e0eb1cfe8e4562be8b3c661b55f1bc54b",
-      "tests": "main Cookie false and migration upgrade fails; candidate Cookie true; fresh PG main21/candidate22 passed",
-      "application_status": "touch applied; browser Cookie and migration upgrade still fail",
-      "functional_acceptance": "not passed; measured blockers remain",
-      "candidate_sha": "80ba01e6d965d0e3ff10bef18a5cbd17f01e8f05"
+      "source_sha": "2eddd6428cda6c81c53b1e261d0846ebcf56e6a0",
+      "tests": "main SQLite new/upgrade fail; persistence0/5; startup exit1. SQLite candidate5/0 +4 migration scenarios +HTTP200; prior project tests retain1853876 attribution",
+      "application_status": "main new migration fails; candidate SQLite fix not merged; other product gaps remain",
+      "functional_acceptance": "not passed; main migration/startup fails",
+      "candidate_sha": "e33971f508e9612770ad72960b62a8b090efd53e",
+      "candidate_scope": "SQLite migration only; separate prior Chat/Cookie candidate remains historical"
     }
   ],
   "day15_frozen": true,
@@ -53,8 +56,8 @@
   "day_advanced": false,
   "reference_modified": false,
   "current_reference_observation": {
-    "sha": "1853876e0eb1cfe8e4562be8b3c661b55f1bc54b",
-    "evidence": "docs/teaching/evidence/2026-10-18-main-1853876/summary.json",
+    "sha": "2eddd6428cda6c81c53b1e261d0846ebcf56e6a0",
+    "evidence": "docs/teaching/evidence/2026-10-18-main-2eddd64/summary.json",
     "full_acceptance": false
   },
   "execution_policy": {
@@ -66,5 +69,5 @@
     "rules_version": "daily-tdd-minimum-v1"
   },
   "previous_manifest": "docs/teaching/archive/rules-before-minimum-v1/manifest.json",
-  "functional_revalidation_evidence": "docs/teaching/evidence/2026-10-18-main-1853876/REPORT.md"
+  "functional_revalidation_evidence": "docs/teaching/evidence/2026-10-18-main-2eddd64/REPORT.md"
 }

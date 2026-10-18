@@ -57,63 +57,14 @@ Notion 已完整讀回但 GitHub 狀態寫入／讀回失敗，保留頁面 ID�
 91 項原文與本次變更前規則保留於 docs/teaching/archive/rules-before-minimum-v1/；第17項原文無編號，依第16與18項間順序對應並註明。封存資料僅供追溯，不再產生下一個衝突討論，也不自動成為執行規則。
 
 
-## 目前進度（2026-10-18 正式複驗讀回）
-三專案既有 Day18 已發布，learning-state／manifest 的 next_day 各為 19。本次直接修訂 Day17／Day18 與入口的過時現況，沒有新增 Day、沒有遞增進度。
-本次 main `1853876e0eb1cfe8e4562be8b3c661b55f1bc54b`；修正候選 `80ba01e6d965d0e3ff10bef18a5cbd17f01e8f05` 僅在工作分支，未修改遠端 main。正式完整功能驗收仍未通過；測試、套用與產品缺口見下節及三篇 Day18。
-## 已逐項確認的現行需求（2026-10-17）
-以下 16 組需求經使用者逐項核對；屬現行要求，未宣稱已實作或驗收。網頁／本地排程每次重新讀取並採用；與下方歷史來源觀察或封存 Day 不同時，以本節作為後續需求，歷史證據保留原 SHA 與範圍。Day15／Day16 保持封存，不新增 Day，next_day 維持三專案各 17。
-### Chat：已確認的入口、註冊與管理
-- 首頁未登入即可查看可公開顯示的聊天室清單；點聊天室名稱連結後，未登入者先登入並保留目標房間，再由伺服器核對進入權限。有權才進房，無權顯示拒絕原因；看得到房間不代表有權進入。已登入者直接核對權限，不重複登入。
-- 首頁「登入」成功後前往個人頁；已登入時文字改為「管理」，直接進個人頁。Session 失效才重新登入，成功後仍回個人頁。個人頁建立／管理自己有權管理的聊天室；系統管理另設入口並由伺服器核權。
-- 一般使用者自行註冊，以唯一且不分英文大小寫的自訂帳號＋密碼登入；Email 唯一、不需驗證，用於密碼重設。註冊完成維持登出、清除原選房目標，顯示獨立完成訊息頁，不自動跳轉；只有按「回首頁」才返回清單，之後須重新選房。
-- 僅首次初始化建立系統管理者 admin/admin；首次登入須修改密碼並設定唯一 Email，完成後才可使用系統管理功能；之後仍可修改密碼。密碼以加鹽雜湊持久保存，重啟不重設。
-### Chat 與 Analytics：各系統獨立的人員登入保護
-- 連續登入失敗次數以各系統的帳號累計，由伺服器保存；等待自 15 秒起逐次加倍（15、30、60、120 秒……），不設上限，重新整理、換瀏覽器或 IP 不重設。失敗保留原登入導向。
-- 等待期間再次送出時拒絕驗證並回傳剩餘時間；不增加次數、不重新起算倒數。登入成功清除失敗次數及等待時間。
-- 管理頁修改密碼須驗目前密碼；忘記密碼則寄重設連結至登記 Email。修改或重設成功均清除失敗次數與等待時間，使該帳號所有 Session 失效，須重新登入。
-- 登入後持續操作會更新活動時間，Session 持續有效；閒置逾時由各系統的管理後台設定。不能只因登入後經過固定時間而強制登出；密碼變更、停用與授權撤銷仍須生效。
-### Pet：多寵物、出入籠與活動
-- 控制窗有多隻寵物清單，每隻各有獨立狀態、設定與生活窗，可同時出籠；狀態同步以寵物識別分流，不將所有寵物共用一份狀態。
-- 「回籠子」關閉該隻生活窗、停止活動，保留資料與設定，不刪除也不影響其他寵物；直接關生活窗等同回籠子。只有出籠寵物會活動。啟動時僅預設寵物自動出籠，可預設多隻；回籠不取消預設資格。
-- 關閉控制窗不停止已出籠寵物；重開只顯示並聚焦既有控制窗。已出籠者再按出籠只聚焦自己的既有生活窗。
-- 右鍵提供「開啟控制窗」「回籠子」「坐下」「放風」；開啟控制窗時自動選取自己；坐下等同關閉該隻漫遊；放風等同開啟該隻漫遊。
-- 控制窗與寵物生活窗皆可手動拖曳，自動漫遊只移動寵物，不移動控制窗。拖曳寵物時暫停漫遊，放開依原開關恢復；漫遊開關逐隻持久保存，重啟沿用。
-- 走、跑、睡、跳依種類習性自然交替，不提供使用者固定速度設定。關閉漫遊時坐原地，僅保留眨眼、呼吸等細微待機動畫，不跑跳。睡覺停止自動位移，仍可手動拖曳。
-- 多隻寵物可重疊並依習性互相打鬧，打鬧會吵醒睡覺的寵物；被吵醒後依種類與個性決定加入、避開或繼續睡。關閉漫遊者不參與追逐或跑跳打鬧。
-- 正常活動支援跨螢幕並遵守可用工作區邊界；螢幕拔除或配置改變不立即搬回，讓寵物自行跑回。控制窗提供「找回寵物」，手動移回可見螢幕，不改漫遊設定。
-### Analytics：帳號、授權、稽核與來源
-- 僅首次初始化建立 admin/admin；首次登入強制改密碼並設定唯一 Email，之後可修改密碼。不開放自行註冊；由系統管理者新增帳號、初始密碼與唯一 Email，新帳號首次登入須改密碼，之後可修改或以 Email 重設。密碼加鹽雜湊持久保存，重啟不重設。
-- 採系統管理者及唯讀檢視者兩角色；管理者管理帳號、來源與設定，可授權檢視者查看 Chat、Pet 或兩者。
-- 除登入及必要的密碼重設流程外，所有業務頁面、查詢／管理 API 與即時資料由伺服器檢查人員 Session、角色及來源範圍。帳號停用或權限縮減立即影響既有 Session 與即時連線，不等待重登。
-- 帳號、權限、來源憑證及資料管理操作記錄操作者、時間、對象與結果，不保存密碼、重設連結或憑證秘密。
-- Chat／Pet 各用獨立服務身分與權限，採管理者核准配對 → 短效憑證 → 自動續期／輪替 → 可撤銷。服務憑證不能代替人員後台登入。
-## 三專案功能大綱
-### Chat：房間與聊天流程
-基本主線：公開房間清單 → 點房名 → 必要時登入 → 伺服器核對房間權限 → 進房聊天 → 重進讀回歷史 → 操作紀錄送達 Analytics；首頁登入／管理另導向個人頁。註冊完成維持登出，須重新選房；功能分段完成。
-後台：管理漫遊的ai聊天者、個人可開房間最大數、系統公告、預設管理者帳號、可增加管理人員
-後續能力包括Session／ACL、SQLite歷史與備份、WS presence／typing／reconnect／queue、Outbox、Leptos SSR／hydration、Streaming／RAG／MCP／Agent、多Persona、同意／撤回及政策回退。
-### Desktop Pet：啟動、互動及安全操作
-基本主線：啟動既有寵物 → 控制介面即時調整 → 設定／記憶持久保存 → 授權目錄 → 掃描及SHA256預覽 → 明確確認 → 真實操作結果／還原 → Analytics紀錄。
-介面使用 Leptos，寵物顯示與控制視窗分離：200×200 寵物視窗保留動畫／拖曳／右鍵入口，控制視窗可縮放與捲動，分互動、設定、記憶、檔案、管理、更新；只接真實可用 IPC，未接通能力明示。控制面板不因開啟或切換而新增寵物。
-逐步完成五欄設定（名字／種類／喜好／個性／興趣）、選用外觀覆寫、每隻寵物獨立資料與素材、200×200等比動畫、多寵物、手動拖移與可選的自動漫遊、記憶／回想／複習／提醒、RAG／MCP／Agent、備份／還原及installer／簽章updater。安裝後的更新採啟動時檢查或手動檢查正式GitHub Release，也不要求重新安裝。
-安全檔案流程保持授權root／opaque ID、non-root、確認、symlink／TOCTOU／權限重驗、journal／receipt／Trash／restore；預覽或Domain成功狀態不能冒充filesystem成功憑證。
-### Analytics：真實事件、查詢與管理
-Analytics 定位為純管理後台，Leptos 提供後台畫面；除登入及必要的身分驗證流程外，所有業務頁面、查詢、管理與即時資料均須登入且具相應權限，不提供匿名 Dashboard。後台首次初始化 `admin/admin`，以帳號與密碼登入，登入後可修改密碼；持久保存加鹽密碼雜湊，重啟不重設。服務 token／登入碼不能取代此人員帳密流程。管理者 Session 與 Chat／Pet 服務憑證分開：服務上報／換證驗證機器身分，不以人員登入或來源 token 取代後台登入。
-服務間來源認證採「首次核准配對 → 短效憑證 → 來源端自動交互續期／輪替 → 撤銷／重新配對」；Chat／Pet 與 Analytics 互驗對方身分，不以 source_app 自我宣告或固定 token 無限換證。Leptos 管理畫面負責配對核准、期限／輪替政策、狀態與稽核；後端及來源端執行自動換證。此為已確認需求、未實作／未驗證，完整方案於後續 Day 提出，不回改 Day15。
-基本主線：接收Chat／Pet真實動作 → 來源認證 → 去重並持久提交 → Dashboard查詢／篩選 → 趨勢與明細 → 管理紀錄 → 封存／還原／備份。
-Dashboard 畫面使用 Leptos 元件與 Rust 狀態管理，沿用 HTTP JSON＋SSE／來源授權／PostgreSQL Adapter；不另維護獨立 HTML／JavaScript 互動頁，不把服務密鑰嵌入前台。既有 Day 的教法更正依封存規則在下一 Day 提出。
-產品上報目標採gRPC／Protobuf及逐事件ACK，Dashboard保留HTTP JSON＋SSE；學習庫已有HTTP相容入口的演進事實保留。獨立PostgreSQL、來源／事件ID冪等與衝突、commit後通知、重試／重連／故障恢復分別驗證。Chat／Pet各自SQLite，不共享業務DB。
-後續包括可追溯AI洞察、人工審核、Chat／Pet自主授權採用／回退，以及Provider／Model／來源／功能／請求／時間的Token使用量、成本及實際可取得額度。額度未知明示未知，不由Token推算配額；用既有紀錄或合成資料驗證。
+## 目前進度（最新程式再次核對）
+最新 main `2eddd6428cda6c81c53b1e261d0846ebcf56e6a0`。既有 Day18 已發布，next_day 各19，本次未遞增；正式完整驗收維持未通過。
 ## 當前功能狀態與證據入口
-本次最新 main `1853876e0eb1cfe8e4562be8b3c661b55f1bc54b`；正式完整驗收仍未通過。
-- chat：最新 main 已從僅第一筆完全同名改為所有完全同名。API 有 3 筆名稱包含匹配，瀏覽器實測由舊版 1 筆改善為 2 筆，但仍漏掉「Rust 技術交流延伸」；中文含空白查詢顯示 3 筆、空白列出全部 5 筆通過。SSR/WASM build 通過；歷史未接通提示的 SSR 斷言仍失敗。候選改用 list_rooms → filter_rooms，未合併 main。
-- pet：漫遊核心與 Cargo.lock 自上次基線未變；真實 Tauri/X11 enabled／disabled／boundary／close 四案本輪再次通過，main 均在 (100,100)。最新 1853876 又新增 pet_owner，但 pet_profile 仍引用不存在的 owner；隔離 SQLite 開啟外鍵後插入寵物實際失敗 no such table: main.owner。pet_owner 的 SERIAL 在 SQLite 實測未自動產生 ID（NULL），資料表尚未接到 repository／API／UI，不能當成寵物資料管理已完成。完整 GUI、多螢幕、執行中設定與持久化仍未驗證。
-- analytics：main 真實 HTTP／PG／Origin／CSRF／來源 token 分離／登出測試通過，但活動回應 COOKIE_RENEWED: False。舊 20261018073931 migration 已套用的隔離 DB 升級至 32 仍實際失敗 previously applied but is missing。新增 root SQLite auth／pet／ai_person schema 並沒有接上 Analytics 帳密／角色／來源 scope。候選 Cookie 修正未合併；完整產品未驗收。
-- Chat：名稱查詢已接 HTTP，但 main `1853876e0eb1cfe8e4562be8b3c661b55f1bc54b` 的 SSR/WASM 已乾淨建置成功，中文含空白與空白查詢通過；但 filter_room 完全匹配時只取同名筆數，API 的 3 筆名稱包含匹配房間在瀏覽器只列 2 筆；SSR 仍有 1 項「歷史載入尚未接通」提示斷言失敗。main 未通過。工作分支 `80ba01e6d965d0e3ff10bef18a5cbd17f01e8f05` 以 list_rooms／既有 filter_rooms 修正，候選完整回歸 105 passed／1 ignored，SSR/WASM 成功；候選不等於已套用 main。
-- Pet：main `1853876e0eb1cfe8e4562be8b3c661b55f1bc54b` 已選 pet 生活窗，open_control_window 仍選 main 控制窗；不是仍錯選 main。原生單元／整合 34 passed；相同漫遊核心透過真實 Tauri 視窗座標探針，本輪 enabled／disabled／boundary／close 4 案再次通過，main 全程原位。完整 GUI／多螢幕／拖曳／普通啟動時序／多寵物仍未驗證，完整產品未驗收。
-- Analytics：main `1853876e0eb1cfe8e4562be8b3c661b55f1bc54b` 已套用伺服器 touch_session，但活動 Dashboard 200 回應沒有刷新 Cookie，Cookie 續期 Red 本輪再次失敗；獨立 PostgreSQL 登入查詢登出通過。候選 `80ba01e6d965d0e3ff10bef18a5cbd17f01e8f05` 同步 server expiry／Cookie 的 HTTP 回歸通過，尚未合併 main。帳密／角色／來源 scope、立即撤銷與 30 分鐘瀏覽器 soak 未完成或未驗證，migration 31→32 改名造成舊版升級實測 missing migration 失敗，兼容修正尚未完成；完整產品未驗收。
-先前 abebbef 的 CI 為 15 success、2 failure；最新 1853876 已解決編譯，CI 與剩餘功能失敗分列於證據。本輪再次執行的環境、命令、實際結果與原始錯誤統整於 [正式複驗與原始證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-18-main-1853876/REPORT.md)；這是實測資料更新，既有 v1 規則及產品需求文字沒有增加。
-原 2026-10-17／98f30d8 的來源觀察及測試保留在歷史證據，沒有將未執行改寫成當時已執行。
+- chat：新 migration 20261018100114 使用 SQLite 不支援的 MODIFY COLUMN。SQLx 新建與從1853876升級均失敗；清除 persistence 套件後 0 passed／5 failed。Chat 啟動亦受 migration 阻擋，尚不能驗收房間功能。搜尋三筆只顯示兩筆與 SSR 提示失敗仍是未修的1853876基線；本輪沒有宣稱最新服務已可供瀏覽器驗證。
+- pet：本輪新增 migration 嘗試把 owner_id 對齊 pet_owner，但開頭 MODIFY COLUMN 在實際 SQLite 執行失敗，尚未到欄位／外鍵修正；pet_owner 實際欄位仍為 id，不存在 pet_owner_id。先前 missing owner／SERIAL NULL 不能宣告解除。漫遊核心、設定與依賴無變，1853876的四案原生幾何證據仍適用該核心；本輪未重跑完整 GUI。
+- analytics：本輪只更動 root SQLite migration，Analytics PG程式及其migrations／lock未變；先前 Cookie 未續期、PG migration31→32既有庫升級失敗仍未修。新 SQLite migration 本身又在 MODIFY 語法失敗，不能作帳密／角色或資料管理功能已完成的證據。本輪未重跑相同 HTTP／PG 流程，沿用前輪時明確保留1853876來源。
+[最新實測與原始錯誤](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-18-main-2eddd64/REPORT.md)。候選80ba01e以1853876為基底，沒有包含本次 migration，不是最新 main 的 Green；需先修遷移並重跑。v1正文、原需求與歷史證據保留。
+SQLite 修正候選 `e33971f508e9612770ad72960b62a8b090efd53e`（工作分支，未合併main）：以重建表取代不支援的ALTER，保留有效資料／ID，owner_id對齊pet_owner_id並強制外鍵。新建／有效資料升級／缺少owner ID／孤兒owner四案通過，後兩者須拒絕並rollback。最新main仍失敗；此候選只修SQLite migration，未包含之前Chat搜尋與Analytics Cookie候選。完整SQL與重現命令見 [修正與證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-18-main-2eddd64/REPORT.md)。
 ## 文件入口
 產品能力與未來清單、詳細架構、操作設定、功能對照與工程證據仍保留各自用途；本篇集中教學方法、格式及三專案大綱，其他教學入口改為引用。原Day及程式保留，舊規則／來源／失效教法只作歷史，不再套用為目前指令。
 [聊天室](https://app.notion.com/p/3f3e51d45093807da638c336e857543a) · [桌面寵物](https://app.notion.com/p/3f3e51d450938067923ae5a424d30950) · [統計儀錶板｜聊天室 × 桌面寵物](https://app.notion.com/p/3f3e51d45093817eafaee0cfc9ea4cc8)。功能與實作對照的詳細歷史保留工程紀錄；本篇不再追加歷次討論或驗證摘要。

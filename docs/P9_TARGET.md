@@ -1,6 +1,6 @@
 # P9 最終三產品實作目標（獨立於教學進度）
 
-> 最新 main `1853876e0eb1cfe8e4562be8b3c661b55f1bc54b` 實測：Chat 3 筆匹配只顯示 2 筆、SSR 提示失敗；Pet 四案原生幾何通過，但新增 pet schema 引用缺少 owner；Analytics Cookie 與舊 migration 升級仍失敗。完整產品未驗收。既有需求不變，詳 [最新證據](teaching/evidence/2026-10-18-main-1853876/REPORT.md)。
+> 最新 main `2eddd6428cda6c81c53b1e261d0846ebcf56e6a0`：root SQLite migration語法失敗，persistence 0通過／5失敗、Chat啟動退出。候選 `e33971f508e9612770ad72960b62a8b090efd53e` 修正後5通過、四種遷移情境通過、HTTP200；未合併main，完整產品仍未驗收。詳[證據](teaching/evidence/2026-10-18-main-2eddd64/REPORT.md)。
 
 ## 最高優先權的產品定位
 - 本 Repo 是 AI 控制的最終產品程式碼；**直接以 P9 產品能力為交付目標（不等於 P0～P12 中的 P9 學習階段）**。允許依相依性拆成多次 Commit/測試，但不按 rust_ai_chat 的 Day 編號或教學 P0–P12 進度等待。
