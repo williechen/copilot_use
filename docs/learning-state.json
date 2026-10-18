@@ -733,7 +733,7 @@
     "decisions_archive": "docs/teaching/archive/rules-before-minimum-v1/decisions-01-91.json",
     "deferred_mechanisms": "37-91 advanced mechanisms; evidence applicability, conditional writes, readback and honest verification retained",
     "next_day_changed": false,
-    "scheduler_status": "blocked: no existing local automation configuration; ChatGPT browser not signed in; replacement prompt prepared only",
+    "scheduler_status": "Existing cloud task updated and read back; Run now completed Day18 for all projects with independent Notion/GitHub readback on 2026-10-18; future scheduled runs not yet observed",
     "day17_limitations": [
       "tests not executed; application and formal acceptance unverified",
       "Chat real browser Red not executed",
@@ -766,6 +766,73 @@
         "rule_version": "daily-tdd-minimum-v1",
         "readback_verified": true
       }
-    ]
+    ],
+    "scheduler_status_initial": "blocked: no existing local automation configuration; ChatGPT browser not signed in; replacement prompt prepared only"
+  },
+  "scheduler_execution_repair": {
+    "date": "2026-10-18",
+    "task_id": "6acd967c15fc8191ade8407954c5b354",
+    "task_name": "三專案每日 TDD 教學",
+    "task_url": "https://chatgpt.com/scheduled?automationId=6acd967c15fc8191ade8407954c5b354&automationSource=cloud",
+    "schedule": "daily 06:00 Asia/Taipei; existing task retained",
+    "observed_failure": "Normal final response after source inspection; available Notion/GitHub write tools not invoked; no observed write error or timeout",
+    "prompt_only_retest": "failed: ended with delivery incomplete and no publication attempt",
+    "changes": [
+      "Existing prompt updated and exact readback verified: finish one project's publication/readback/state before next project",
+      "Original conversation performance changed from Instant to High; subsequent Run now completed all three publications"
+    ],
+    "successful_retest": {
+      "publishing_head_sha": "8a0caf0896307df18c440515249c3dca9bfac722",
+      "next_day": {
+        "chat": 19,
+        "pet": 19,
+        "analytics": 19
+      },
+      "notion_pages": [
+        {
+          "id": "3fde51d45093816bb36dd9099190d907",
+          "title": "2026-10-18｜P0 Chat Day 18｜查詢房間完成 HTTP 接線與錯誤恢復",
+          "version": "2026-10-18T00:45:07.908Z",
+          "url": "https://app.notion.com/p/3fde51d45093816bb36dd9099190d907?pvs=204",
+          "sections": [
+            "## 1. 學習大綱",
+            "## 2. 實作內容",
+            "## 3. 套件版本",
+            "## 4. 驗證項目"
+          ],
+          "length": 3744
+        },
+        {
+          "id": "3fde51d4509381bfa106ea4d9b190480",
+          "title": "2026-10-18｜P0 Pet Day 18｜漫遊只移動生活窗並核對真實標籤",
+          "version": "2026-10-18T00:46:04.546Z",
+          "url": "https://app.notion.com/p/3fde51d4509381bfa106ea4d9b190480?pvs=204",
+          "sections": [
+            "## 1. 學習大綱",
+            "## 2. 實作內容",
+            "## 3. 套件版本",
+            "## 4. 驗證項目"
+          ],
+          "length": 3220
+        },
+        {
+          "id": "3fde51d4509381c2a0d5f60041137619",
+          "title": "2026-10-18｜P0 Analytics Day 18｜有效活動延長伺服器 Session 並拒絕過期",
+          "version": "2026-10-18T00:46:51.727Z",
+          "url": "https://app.notion.com/p/3fde51d4509381c2a0d5f60041137619?pvs=204",
+          "sections": [
+            "## 1. 學習大綱",
+            "## 2. 實作內容",
+            "## 3. 套件版本",
+            "## 4. 驗證項目"
+          ],
+          "length": 3489
+        }
+      ],
+      "independent_notion_and_github_readback": true
+    },
+    "causal_limit": "The observed defect is premature completion. The successful combined configuration does not prove reasoning intensity is the sole underlying cause or guarantee future scheduled runs.",
+    "product_tests": "not executed; source application and formal functional acceptance separate",
+    "last_full_comparison_unchanged": true
   }
 }
