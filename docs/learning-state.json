@@ -42,10 +42,10 @@
     "day_status": "教學已發布／程式尚待套用／功能已實作／功能正式驗收通過，依實際證據分別判定",
     "daily_time": "06:00 Asia/Taipei",
     "teaching_sections": [
-      "學習大綱",
-      "實作內容",
+      "學習大綱：目標、現況與來源",
+      "實作內容：Red／完整最小Green／Refactor／必要補教",
       "套件版本",
-      "驗證項目"
+      "驗證項目：測試、證據、待完成"
     ],
     "content_preservation": "未實作 Day 可在既有原頁重整，更新修訂版與來源、同步同一索引及鏡像，不另建相同專案／Day。已實作內容即封存，保留原文、程式及證據；修改方案只在下一 Day 的 Refactor 後「舊 Day 更正補充」提出。部分已實作時保留已實作段落，只重整尚未實作部分；實作狀態不明時先標未核實，不當作未實作覆寫。文章修訂不新增 Day，也不推進 next_day。",
     "weekly_engineering": "separate engineering evidence; never add weekly operations to teaching",
@@ -54,7 +54,11 @@
     "functional_progress": "新增可操作功能／接通流程為每日主體；條件補充回原功能，不把單點 API／純測試／欄位及狀態碼當成完整流程。三專案並行追蹤，不預排 Day、不自動推進學習階段。",
     "synchronization_judgment": "核對與同步判定依「文章要求 → rust_ai_chat 實作 → copilot_use 對應實作 → 驗證結果」逐項追溯：記錄文章頁面／Day、兩庫精確 SHA、實作路徑與符號、實際呼叫端、對應測試及匹配來源的驗證結果；介面不同須說明合理差異與適配理由。缺少證據標示未核實，只有定義／單元測試而未接通流程標示部分完成，未執行標示未執行；不得以讀過文章、更新 SHA、同名符號或歷史 CI 判定同步完成。",
     "day_revision": "未實作 Day 可在既有原頁重整，更新修訂版與來源、同步同一索引及鏡像，不另建相同專案／Day。已實作內容即封存，保留原文、程式及證據；修改方案只在下一 Day 的 Refactor 後「舊 Day 更正補充」提出。部分已實作時保留已實作段落，只重整尚未實作部分；實作狀態不明時先標未核實，不當作未實作覆寫。文章修訂不新增 Day，也不推進 next_day。",
-    "red_green": "Red is the prerequisite test for same-feature Green; preserve applied tests and provide complete Green in the same Day; distinguish expected Red from test/import/environment errors"
+    "red_green": "Red is the prerequisite test for same-feature Green; preserve applied tests and provide complete Green in the same Day; distinguish expected Red from test/import/environment errors",
+    "rules_version": "daily-tdd-minimum-v1",
+    "rules_document": "docs/COMMON_LEARNING_RULES.md",
+    "day_advance": "Per project: complete Notion original Day N publication + full readback, then conditional expected-N to N+1 state update and readback; revision/makeup/rules/CI do not increment; retry only missing state, never duplicate publication",
+    "failure_recovery": "Single pending record per project/Day/revision; read and deduplicate before retry; 3 consecutive failures require manual review; evidence persistence and actual verification are separate; detailed historical mechanisms 37-91 deferred"
   },
   "curriculum": {
     "stage_count": 13,
@@ -163,7 +167,13 @@
     },
     "next_stage_boundary": "2026-12-12",
     "planned_completion_date": "2028-12-12",
-    "stage_completion_policy": "階段到期照時切換；未完成留原功能追蹤；Day 修訂／封存依 learning_policy.day_revision，階段證據可回填但不覆寫已實作文章。"
+    "stage_completion_policy": "階段到期照時切換；未完成留原功能追蹤；Day 修訂／封存依 learning_policy.day_revision，階段證據可回填但不覆寫已實作文章。",
+    "daily_project_minutes": {
+      "chat": 15,
+      "pet": 15,
+      "analytics": 15,
+      "flex": 15
+    }
   },
   "daily_reference_sha": "98f30d8b3593d80103b1a4bdbb9f0cb8cb08069e",
   "daily_product_sha": "579a418c425c7b94c6702689b0ed78d9e8f0998b",
@@ -380,20 +390,20 @@
   },
   "teaching_progress": {
     "last_published_day": {
-      "chat": 16,
-      "pet": 16,
-      "analytics": 16
+      "chat": 17,
+      "pet": 17,
+      "analytics": 17
     },
     "numbering": "single Day sequence per project; next_day is the active next publication index",
     "application_status": "record separately per lesson and exact source; publication does not imply application",
     "validation_status": "record separately per lesson and exact source; no validation inferred from Day number",
     "historical_numbering_record": "docs/teaching/archive/formal-day-numbering.json",
     "last_published_notion_pages": {
-      "chat": "3fce51d4-5093-8143-a0b9-cc9a3f93860e",
-      "pet": "3fce51d4-5093-81e9-aa03-d633822eee89",
-      "analytics": "3fce51d4-5093-813f-a38a-e37a47ae4959"
+      "chat": "3fce51d45093818b913bebb8dab5ab65",
+      "pet": "3fce51d4509381ca83e3e825f0313698",
+      "analytics": "3fce51d4509381ea871ec9c92da37c1b"
     },
-    "last_publication_status": "Day16 code synchronized by user; Notion frozen, GitHub article mirrors removed; no new Day"
+    "last_publication_status": "Existing Day17 pages read back on 2026-10-18; no new publication or next_day increment; not retroactively certified against minimum-v1"
   },
   "teaching_document": {
     "canonical": "docs/COMMON_LEARNING_RULES.md",
@@ -714,5 +724,48 @@
     "tests_executed": false,
     "day15_day16_modified": false,
     "next_day_advanced": false
+  },
+  "minimum_rules_v1_rollout": {
+    "date": "2026-10-18",
+    "version": "daily-tdd-minimum-v1",
+    "source_main_sha": "98f30d8b3593d80103b1a4bdbb9f0cb8cb08069e",
+    "prior_branch_sha": "77150f96069aef48c2f741ec388bfec779feca0d",
+    "decisions_archive": "docs/teaching/archive/rules-before-minimum-v1/decisions-01-91.json",
+    "deferred_mechanisms": "37-91 advanced mechanisms; evidence applicability, conditional writes, readback and honest verification retained",
+    "next_day_changed": false,
+    "scheduler_status": "blocked: no existing local automation configuration; ChatGPT browser not signed in; replacement prompt prepared only",
+    "day17_limitations": [
+      "tests not executed; application and formal acceptance unverified",
+      "Chat real browser Red not executed",
+      "Pet actual creation window label contract not confirmed",
+      "Analytics browser cookie sliding expiry incomplete"
+    ],
+    "notion_rule_status": "updated and full readback verified",
+    "notion_versions": [
+      {
+        "id": "3f2e51d4-5093-81dd-b8a8-ce7cb4cd3e60",
+        "page_last_edited_at": "2026-10-18T00:14:09.518Z",
+        "rule_version": "daily-tdd-minimum-v1",
+        "readback_verified": true
+      },
+      {
+        "id": "3f3e51d45093807da638c336e857543a",
+        "page_last_edited_at": "2026-10-18T00:13:14.802Z",
+        "rule_version": "daily-tdd-minimum-v1",
+        "readback_verified": true
+      },
+      {
+        "id": "3f3e51d450938067923ae5a424d30950",
+        "page_last_edited_at": "2026-10-18T00:13:15.595Z",
+        "rule_version": "daily-tdd-minimum-v1",
+        "readback_verified": true
+      },
+      {
+        "id": "3f3e51d45093817eafaee0cfc9ea4cc8",
+        "page_last_edited_at": "2026-10-18T00:13:16.323Z",
+        "rule_version": "daily-tdd-minimum-v1",
+        "readback_verified": true
+      }
+    ]
   }
 }

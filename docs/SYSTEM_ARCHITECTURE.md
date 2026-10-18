@@ -1,5 +1,7 @@
 # 目前系統架構與 DB 設定
 
+> 每日教學流程採 [每日 TDD 教學最小必要規則 v1](COMMON_LEARNING_RULES.md)。2026-10-18 讀回：既有 Day17 已發布，next_day 各為18；本文件的 Day16／next_day=17 與舊 SHA 段落保留為歷史觀察，不覆蓋目前 learning-state／manifest，也不代表產品驗收。
+
 目錄／程式銜接以 rust_ai_chat 最新 main 為主；產品目標與前進項目以 copilot_use 為主，其餘按共同學習規則。以下是 copilot_use 當前程式架構；gRPC／SSE 新需求的驗證範圍見 [ANALYTICS_TRANSPORT.md](ANALYTICS_TRANSPORT.md)；兩個 repository 的 DB 目標統一，學習套用狀態另行核對。
 
 | 元件 | 目錄與框架 | 職責／資料流程 | 資料／設定 |

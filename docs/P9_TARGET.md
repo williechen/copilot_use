@@ -1,5 +1,7 @@
 # P9 最終三產品實作目標（獨立於教學進度）
 
+> 每日教學流程採 [每日 TDD 教學最小必要規則 v1](COMMON_LEARNING_RULES.md)。2026-10-18 讀回：既有 Day17 已發布，next_day 各為18；本文件的 Day16／next_day=17 與舊 SHA 段落保留為歷史觀察，不覆蓋目前 learning-state／manifest，也不代表產品驗收。
+
 ## 最高優先權的產品定位
 - 本 Repo 是 AI 控制的最終產品程式碼；**直接以 P9 產品能力為交付目標（不等於 P0～P12 中的 P9 學習階段）**。允許依相依性拆成多次 Commit/測試，但不按 rust_ai_chat 的 Day 編號或教學 P0–P12 進度等待。
 - 產品目標與前進項目以本 repo 為主；目錄／程式銜接以 rust_ai_chat 最新 main 為主，其他遵循 [共同學習規則](COMMON_LEARNING_RULES.md)，兩邊程式與學習進度分別驗收。

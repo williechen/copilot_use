@@ -1,29 +1,68 @@
 # Rust AI 三專案：教學總綱與實作對照
 
-> 唯一現行規則來源：[Notion｜Rust AI 三專案共同學習規則與前進目標](https://app.notion.com/p/3f2e51d4509381ddb8a8ce7cb4cd3e60)。本文件是 GitHub 同步鏡像；有差異時以 Notion 最新總頁為準。
+> 現行規則正本：[Notion 共同總頁](https://app.notion.com/p/3f2e51d4509381ddb8a8ce7cb4cd3e60)。本文件為 GitHub 鏡像。
 
-本篇集中教學方法、文章格式及 Chat／Desktop Pet／Analytics 大綱。其他教學入口只連到本篇及既有 Day，不再重述方法。原文章與程式保留於 Day／歷史封存，統整不代表完成程式同步或功能驗收。
-## 目前進度與兩庫分工
-三專案目前已發布到 Day16，使用者確認程式已同步。Day15／Day16 的 Notion 原文保持封存；依使用者明確要求，copilot_use 已移除 Day16 三篇鏡像及舊修訂文章，保留 Git 歷史、程式 patch 與驗證證據。後續增修於下一 Day 提出；next_day 維持既有 17，不因同步新增 Day。程式套用與完整功能驗收分別記錄。
+## 每日 TDD 教學最小必要規則 v1
 
-網頁版與本地版共用本篇規則及 GitHub docs/COMMON_LEARNING_RULES.md 鏡像，索引以 docs/teaching/current/manifest.json、進度以 docs/learning-state.json 為準。每次執行先重新讀取現行文件與來源 SHA；舊對話、快取、封存文章及歷史測試不能覆蓋現行規則。文件同步不等於執行檔更新；服務的後端 binary 與前端 JS／WASM 須各自記錄建置來源，版本不同先標示不同步，不宣稱同版驗收。
-教學從 rust_ai_chat 最新 main 的既有架構、程式、呼叫端與測試延伸，由使用者套用；助手對該庫的 source、README、CI、branch、PR、commit、tag及資料庫保持唯讀。copilot_use 依產品目標整合必要功能與適配，保留已有能力、安全邊界及合理差異，不按教學 Day 等待產品開發，也不為檔名一致創造平行 Port 或空架構。產品目標 P9 與學習階段 P9 分開。
-每個功能用同一條對照呈現：**文章要求 → rust_ai_chat 實作 → copilot_use 對應實作 → 驗證結果**。附文章／Day、兩庫精確 SHA、路徑／符號、實際呼叫端、對應測試及匹配來源的結果。介面不同說明適配理由；缺證據列未核實、未接通列部分完成、未執行明示，不能以更新 SHA、同名符號、文章發布或歷史 CI 宣稱同步完成。
-## 教學方法與學習時程
-先建立粗略但可操作的基本功能，再接通前台、後台及資料流程，逐步加入細節與例外。每天可延續同一基本流程，交代已完成哪一段、可驗證成果與下一段銜接；允許跨日，不把中間的 API、欄位、狀態碼或單純補測另計完整新功能。阻擋基本流程或資料安全的問題當步處理，其餘深化留在原功能下。
-每天06:00 Asia/Taipei，按 Chat→Pet→Analytics 產出；三專案主體學習合計最多60分鐘，只計第2節 Red與最小Green，Refactor／必要補加及第1、3、4節不計入主體時數。按已確認功能缺口及當日程式差異選題，不固定預排未來各Day題目；測試歸位自Day15起可隨相關功能分批做。
-學習為P0–P12共13階段、每階段2個月、合計26個月；起始2026-10-12，P0下一切點2026-12-12，預定2028-12-12結束。階段到期照時切換、通知一次；未完成項目留在原功能追蹤，階段切換不等於學習或功能驗收完成。提前完成以實際學習證據判定。
-## 每篇 Day 的四節格式
-### 1. 學習大綱
-說明本次使用者能多完成哪一步、前置能力、目前程式與文章差異、對應功能及來源。先排除已套用內容，接續已有流程，不重教已完成切片。
-### 2. 實作內容
-按 **Red → 最小 Green → Refactor → 舊 Day 更正補充** 排列。Red 是同一功能 Green 的前置測試；已加入 Red 仍須提供對應完整 Green，不能因此刪除 Green、改成只有計畫或逕移到下一 Day。測試匯入／環境錯誤須與預期 Red 分開。提供本次必要修改的完整程式、實際檔案位置及繁體中文註解，同檔不重複，未變檔N/A。實作要說明入口、呼叫鏈、資料處理及畫面如何接通。
-Refactor 整理當步實作及現有測試；例如將根 tests 的現有測試逐批歸回所屬 app／crate／私有模組，同批維護 Cargo、lock及CI，保留斷言與覆蓋。未搬完的套件／target／CI保留運作，全部歸位並驗證後才移除根tests與workspace-tests；不為測試公開危險私有API。
-未實作 Day 可在既有原頁重整，更新修訂版與來源、同步同一索引及鏡像，不另建相同專案／Day。已實作內容即封存，保留原文、程式及證據；修改方案只在下一 Day 的 Refactor 後「舊 Day 更正補充」提出。部分已實作時保留已實作段落，只重整尚未實作部分；實作狀態不明時先標未核實，不當作未實作覆寫。文章修訂不新增 Day，也不推進 next_day。
-### 3. 套件版本
-記錄本次涉及的Cargo宣告、lock、官方stable／MSRV／安全及native／WASM相容性查核，只使用最新的穩定版或長期維護版，若版本涉及功能改寫，需在實作內容後面補增加需變更的內容。
-### 4. 驗證項目
-列與本次功能對應的命令、預期、實際結果及未執行範圍；從真實入口驗證到資料與畫面結果。handler單測、DB、router/socket、GUI及跨服務流程的證據分別交代。文章發布、使用者套用、流程接通與功能驗收各自依證據判定。
+規則版本：daily-tdd-minimum-v1／2026-10-18。這是正式規則變更，取代舊版每日流程；產品需求、安全邊界、既有 Day 與證據仍保留。Notion 共同總頁是現行規則正本，GitHub `COMMON_LEARNING_RULES.md` 為鏡像；不以舊對話或歷史決議覆蓋本版。規則／索引衝突須揭露並核對，不能默認已同步。
+
+### 1. 來源與選題
+
+每次實際重讀 copilot_use 的 `docs/COMMON_LEARNING_RULES.md`、`docs/learning-state.json`、`docs/P9_TARGET.md`、`docs/FUTURE_WORK.md`、`docs/SYSTEM_ARCHITECTURE.md`、`docs/UI_ALIGNMENT_REQUIREMENTS.md`、`docs/teaching/current/manifest.json`，以及 Notion 共同總頁、三專案入口與相關 Day。取得 rust_ai_chat/main 與 copilot_use 教學分支最新完整 SHA，核對本日相關程式、實際呼叫端、測試及差異。必要來源讀取失敗，只暫停受影響專案，不能以快取冒充最新。
+
+發布每篇前再取 main SHA 及必要規則版本；來源 SHA 改變就重建所有尚未發布草稿，規則改變則重新核對、必要時重建。已完整發布讀回的 Day 不自動撤銷。記錄規則版本、Notion page_last_edited_at、GitHub 規則 blob／commit SHA、兩庫來源 SHA 及讀取時間。rust_ai_chat 全庫唯讀，教學程式由使用者套用；copilot_use 產品整合與教學分開。
+
+### 2. 文章最小格式
+
+沿用四節：①學習大綱＝目標、現況、前置條件與本日差異；②實作內容＝Red → 完整最小 Green → Refactor → 必要的舊 Day 更正補充；③套件版本＝本日涉及的 Cargo／lock、stable／MSRV／native／WASM 核對，未查明示；④驗證項目＝測試、證據、待完成與下一步。
+
+每篇只教一個最小完整切片，提供真實檔案位置、必要完整修改與繁體中文說明，交代入口到資料／畫面的呼叫鏈。Red 必須對應同篇 Green，預期行為失敗、缺少待新增符號的預期編譯失敗、匯入／環境錯誤分別標示；已通過的既有測試不能冒稱 Red。不能以未確認的建窗標籤或介面假設冒稱完整可套用 Green；必要契約未核實先補齊，否則只存草稿。
+
+大功能可跨日；原切片未完成如實保留，不把 API、欄位或純補測當完整新功能。已實作 Day 封存，未實作部分可在原頁修訂；狀態不明先列未核實。重大錯誤由人工逐案裁定影響範圍及是否版本化重發，保留原文與版本；更正不自動新增 Day 或倒退進度。
+
+### 3. 測試與證據
+
+CI 必須核對並揭露精確 SHA、workflow／job、狀態、時間與連結；Success／Failure／Pending／Skipped／Cancelled／無紀錄均不單獨阻擋教學發布或 next_day。CI Success 只證明實際執行的範圍，不能代替 DB、HTTP／WS、SSR／WASM、GUI 或端到端驗收；copilot_use CI 僅是產品證據。
+
+每項列命令、預期、實際結果、證據 SHA、覆蓋範圍、未執行／失敗／待修。未執行明示，不捏造 Red／Green 成功；教學發布、使用者套用、產品整合、功能驗收分別記錄。跨 SHA 引用證據須核對相關差異及依賴，不能直接沿用成功結論。寫入／補償成功不等於測試成功，驗證範圍縮小須列剩餘缺口。
+
+### 4. Notion 發布與 Day 推進
+
+按專案＋Day＋修訂版查現有頁與索引，重用既有頁，不重複建同一教學。先完整發布 Notion，再讀回全文，核對四節、Red／完整 Green、程式碼、來源版本與索引；部分失敗保留失敗紀錄，重建同一文章的完整內容，成功讀回前不得推進。
+
+每專案獨立處理：原教學 Day N 完整發布且讀回成功，才可將該專案 next_day 從預期 N 更新為 N+1。更新前重新讀取 learning-state 及 blob／branch SHA，依 Notion 證據於單次條件提交更新進度及既有 makeup_queue，保留其他欄位，寫後讀回；manifest 同步目前索引。若現值已為 N+1 且證據一致，視為已補更新，不再遞增。併發衝突重新讀取，不能安全合併就暫停該狀態更新。
+
+文章修訂、規則同步、補教、CI 成功與週六比對都不自行推進 next_day。原教學與補教分開；已存在的 makeup_queue 採 FIFO，每篇最多一個舊 Day 補教單元，完整讀回才結案，不因補教失敗回退已確認的原教學進度。未完成原教學不冒充已發布；隔日新內容須標明原教學與待補內容，不能跳號掩蓋失敗。
+
+### 5. 最小失敗恢復
+
+Notion 已完整讀回但 GitHub 狀態寫入／讀回失敗，保留頁面 ID、專案／Day／修訂、來源版本、預期狀態及錯誤，下次先讀 Notion 與 GitHub，只補缺少的狀態，不重發、不重複加 Day。狀態不明只暫停受影響專案，其他來源完整者繼續。
+
+證據檔保存失敗另記 pending 與錯誤；原教學已完整讀回時可依上節推進，不能聲稱證據已保存或測試已驗證。重試前先讀取去重，沿用同一筆待辦；同項連續三次失敗轉 needs_manual_review、停止相同自動寫入，人工重新啟用才恢復，保留歷史。若失敗紀錄也無法持久保存，回報明示。只保留必要失敗紀錄，不新增多層補償／cycle／復發風險系統。
+
+### 6. 時程與邊界
+
+每日 06:00 Asia/Taipei，依 Chat → Pet → Analytics；主體 Red／最小 Green 學習合計最多 60 分鐘，各預留 15 分鐘，加共用彈性 15 分鐘。保留既有主體學習計時口徑：Refactor、必要補加／補教及第1、3、4節另列估時，不隱藏成本，也不為填滿時間擴大切片。超出主體預算的內容留待後續，不以缺少 Green 的文章冒稱完成；執行遇到時間上限先保存可恢復進度。
+
+週六 00:00 Asia/Taipei 獨立完整比對 tracked 程式、介面、呼叫流程、契約、DB／migration、UI、設定、測試、CI 與文件；只有完整成功才更新 last_full_comparison 並讀回。每日做增量核對，不覆蓋完整比對時間。週六失敗不自動阻擋每日教學，須揭露並重新讀取必要來源。既有排程原地更新，不建立重複任務；指令保存不等於排程已更新或實際執行成功。
+
+保留原生環境、Domain／Application 與 Adapter 邊界、不同 DB 分別驗證、既有 migration／固定 tag／證據不可改寫、權限與檔案操作確認。不得讀正式秘密或執行付費 AI；週六功能驗收不冒稱 AI 已重測。P9 產品目標、P0–P12 學習階段及實際驗收分開。
+
+### 7. 91 項決議的適用分類
+
+教學必要規則：來源／規則／SHA、最小完整 TDD、CI 範圍揭露、Notion 發布讀回、逐專案條件推進與封存。可靠性輔助：去重、條件寫入、狀態讀回、單層 pending／有界重試與人工處理、FIFO 補教。歷史第13項「CI 成功即相關功能已驗證」以本版第3節的實際覆蓋範圍解釋，不能泛化為整體驗收。
+
+歷史 37～91 的每次失敗另開補償、獨立多層佇列、cycle、補償彼此補償、事後依賴風險、追蹤完整性風險與復發統計等複雜機制暫緩實作，也不作每日發文 Gate。不是整段刪除驗證原則：證據適用性、缺口揭露、去重、條件寫入、讀回、不可把持久化當驗證、不可偽造完成仍依上文強制保留。既有歷史狀態不刪除、不批次改 resolved／verified。
+
+91 項原文與本次變更前規則保留於 docs/teaching/archive/rules-before-minimum-v1/；第17項原文無編號，依第16與18項間順序對應並註明。封存資料僅供追溯，不再產生下一個衝突討論，也不自動成為執行規則。
+
+
+## 目前進度（2026-10-18 讀回）
+
+三專案 Day17 已在既有 Notion 頁完整存在並讀回，learning-state 的 next_day 各為18，本次不遞增。Day17 的測試、程式套用與完整功能驗收仍未確認；Pet 建窗契約與 Analytics cookie 續期等限制留待核對，不回填成通過。Day15／Day16 及以下2026-10-17來源觀察保留歷史身分，其中 next_day=17 不是目前進度。
+
+rust_ai_chat/main 本次讀取為 `98f30d8b3593d80103b1a4bdbb9f0cb8cb08069e`；copilot_use 更新前來源為 `77150f96069aef48c2f741ec388bfec779feca0d`。規則變更不代表程式或 runtime 已更新。
+
 ## 已逐項確認的現行需求（2026-10-17）
 以下 16 組需求經使用者逐項核對；屬現行要求，未宣稱已實作或驗收。網頁／本地排程每次重新讀取並採用；與下方歷史來源觀察或封存 Day 不同時，以本節作為後續需求，歷史證據保留原 SHA 與範圍。Day15／Day16 保持封存，不新增 Day，next_day 維持三專案各 17。
 ### Chat：已確認的入口、註冊與管理
@@ -77,11 +116,6 @@ Dashboard 畫面使用 Leptos 元件與 Rust 狀態管理，沿用 HTTP JSON＋S
 本地 Chat HTTP 200 仍是 ba5dc51 舊 binary；本輪未重建／重啟服務，不能宣稱已執行 98f30d8。Analytics 3100 無監聽。根 tests 尚有 5 targets／20 cases，test-workspace CI job 已移除，仍須完成遷移與 CI 接續。
 [最新精確來源、結果與限制](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-17-source-98f30d8-recheck.json)；[先前 ba5dc51／520bfa1 證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-17-current-source-validation.json) 保留歷史身分。完整流程尚未驗收，不新增 Day。
 
-## 實作、發布及驗證的分工
-每日教學核對共同總綱、相關Day、兩庫最新來源、差異、所屬測試及適用CI。每日教學發布條件僅檢視 rust_ai_chat 最新提交的 CI：即使未全部 Success 或已有失敗，教學仍可發布；須列明 rust_ai_chat 當前 CI 狀態、失敗與待修問題，不宣稱驗證通過。copilot_use 的 CI 不屬於每日教學發布 Gate；其 CI 結果只供 copilot_use 產品實作、整合及功能驗收各自判定。每日發布不等待週六工程驗收，也不把既有CI當新教學程式已驗證。
-週六00:00 Asia/Taipei完整比較tracked程式、介面、流程、DB／migration、UI、設定與測試，必要的copilot_use整合與功能回歸另存工程證據；每日沿用已確認缺口，不重做全量。工程完成、每日發布及學習庫套用各自記錄。固定正式tag及附件、已套用migration和既有證據保持可追溯，新成果不得覆蓋成歷史通過。
-本機採原生環境，不使用Docker或隔離runtime。Domain／Application不依賴DB／HTTP／OS／UI Driver，SQL、DB方言、交易與平台差異留在Adapter；不同DB分別驗證，已套用migration不改寫。PostgreSQL UUID或VARCHAR(40)由Adapter適配，不滲入Domain契約。
-Dry Run只處理使用者指出的文件／規則／路徑問題，程式、測試與migration唯讀；來源證據不足明示。教學、註解與自有UI用繁體中文。AI provider既定OpenAI；不讀API key、私人環境檔或\~/.bashrc、不執行付費AI、不把密鑰寫入Git／Notion／報告。週六功能Gate不重測AI對話、串流、生圖、RAG、MCP等AI能力；沿用有效證據或標示未驗證，不將功能通過當成AI已重測。
 ## 文件入口
 產品能力與未來清單、詳細架構、操作設定、功能對照與工程證據仍保留各自用途；本篇集中教學方法、格式及三專案大綱，其他教學入口改為引用。原Day及程式保留，舊規則／來源／失效教法只作歷史，不再套用為目前指令。
 [聊天室](https://app.notion.com/p/3f3e51d45093807da638c336e857543a) · [桌面寵物](https://app.notion.com/p/3f3e51d450938067923ae5a424d30950) · [統計儀錶板｜聊天室 × 桌面寵物](https://app.notion.com/p/3f3e51d45093817eafaee0cfc9ea4cc8)。功能與實作對照的詳細歷史保留工程紀錄；本篇不再追加歷次討論或驗證摘要。

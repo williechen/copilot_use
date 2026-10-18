@@ -1,0 +1,48 @@
+{
+  "rules_version": "daily-tdd-minimum-v1",
+  "date": "2026-10-18",
+  "notion_versions": [
+    {
+      "id": "3f2e51d4-5093-81dd-b8a8-ce7cb4cd3e60",
+      "page_last_edited_at": "2026-10-18T00:14:09.518Z",
+      "rule_version": "daily-tdd-minimum-v1",
+      "readback_verified": true
+    },
+    {
+      "id": "3f3e51d45093807da638c336e857543a",
+      "page_last_edited_at": "2026-10-18T00:13:14.802Z",
+      "rule_version": "daily-tdd-minimum-v1",
+      "readback_verified": true
+    },
+    {
+      "id": "3f3e51d450938067923ae5a424d30950",
+      "page_last_edited_at": "2026-10-18T00:13:15.595Z",
+      "rule_version": "daily-tdd-minimum-v1",
+      "readback_verified": true
+    },
+    {
+      "id": "3f3e51d45093817eafaee0cfc9ea4cc8",
+      "page_last_edited_at": "2026-10-18T00:13:16.323Z",
+      "rule_version": "daily-tdd-minimum-v1",
+      "readback_verified": true
+    }
+  ],
+  "rules_full_readback": "matched after blank-line normalization",
+  "next_day_before": {
+    "chat": 18,
+    "pet": 18,
+    "analytics": 18
+  },
+  "next_day_after": {
+    "chat": 18,
+    "pet": 18,
+    "analytics": 18
+  },
+  "reference_main_sha": "98f30d8b3593d80103b1a4bdbb9f0cb8cb08069e",
+  "prior_branch_sha": "77150f96069aef48c2f741ec388bfec779feca0d",
+  "scheduler": "blocked: no existing local automation configuration; ChatGPT browser not signed in; replacement prompt prepared only",
+  "product_tests": "not executed: documentation and policy change only",
+  "history_decisions": 91,
+  "decision_17_numbering": "inferred from original sequence; original user text retained",
+  "full_comparison_timestamp_changed": false
+}
