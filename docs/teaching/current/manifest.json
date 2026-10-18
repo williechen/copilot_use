@@ -18,16 +18,15 @@
     },
     {
       "project": "pet",
-      "day": 17,
-      "notion_page_id": "3fce51d4509381ca83e3e825f0313698",
-      "notion_url": "https://app.notion.com/p/3fce51d4509381ca83e3e825f0313698",
+      "day": 18,
+      "notion_page_id": "3fde51d4509381bfa106ea4d9b190480",
+      "notion_url": "https://app.notion.com/p/3fde51d4509381bfa106ea4d9b190480",
       "four_sections": true,
       "notion_readback_verified": true,
       "source_sha": "98f30d8b3593d80103b1a4bdbb9f0cb8cb08069e",
-      "tests": "not executed in published article",
+      "tests": "not executed",
       "application_status": "unverified",
-      "functional_acceptance": "not verified",
-      "minimum_v1_compliance": "not retroactively certified; see learning-state rollout day17_limitations"
+      "functional_acceptance": "not verified"
     },
     {
       "project": "analytics",
@@ -46,7 +45,7 @@
   "day15_frozen": true,
   "next_day": {
     "chat": 19,
-    "pet": 18,
+    "pet": 19,
     "analytics": 18
   },
   "day_advanced": false,
