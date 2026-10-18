@@ -1,0 +1,557 @@
+diff --git a/apps/desktop_pet/Cargo.toml b/apps/desktop_pet/Cargo.toml
+index 485b942..2bfda22 100644
+--- a/apps/desktop_pet/Cargo.toml
++++ b/apps/desktop_pet/Cargo.toml
+@@ -4,6 +4,9 @@ version.workspace = true
+ edition = "2024"
+ build = "build.rs"
+ 
++[features]
++acceptance-probe = []
++
+ [dependencies]
+ ai-core = { path = "../../crates/ai_core" }
+ 
+diff --git a/apps/desktop_pet/src/acceptance_probe.rs b/apps/desktop_pet/src/acceptance_probe.rs
+new file mode 100644
+index 0000000..7877dd5
+--- /dev/null
++++ b/apps/desktop_pet/src/acceptance_probe.rs
+@@ -0,0 +1,78 @@
++//! Opt-in native acceptance instrumentation. Runs only in a dedicated fixture
++//! process built with `acceptance-probe`; never touches user files or AI.
++use tauri::{Manager, PhysicalPosition};
++
++pub fn start(app: &tauri::AppHandle, enabled: bool) -> Result<(), String> {
++    let scenario = std::env::var("PET_ACCEPTANCE_SCENARIO").map_err(|e| e.to_string())?;
++    if !matches!(
++        scenario.as_str(),
++        "enabled" | "disabled" | "boundary" | "close"
++    ) {
++        return Err("unknown acceptance scenario".into());
++    }
++    if enabled != (scenario != "disabled") {
++        return Err("scenario and PET_ENABLE_ROAM disagree".into());
++    }
++    let main = app.get_webview_window("main").ok_or("missing main")?;
++    let pet = app.get_webview_window("pet").ok_or("missing pet")?;
++    let app = app.clone();
++    tauri::async_runtime::spawn(async move {
++        let result = async {
++            // Window managers can apply initial placement after setup. Wait for
++            // mapped windows, then position fixtures before starting roaming.
++            tokio::time::sleep(std::time::Duration::from_millis(1500)).await;
++            let monitor = pet.current_monitor().map_err(|_| "monitor unavailable")?.ok_or("missing monitor")?;
++            let area = monitor.work_area().clone();
++            let size = pet.outer_size().map_err(|_| "mapped pet size unavailable")?;
++            let x = area.position.x + (area.size.width.saturating_sub(size.width)) as i32;
++            let y = area.position.y + (area.size.height.saturating_sub(size.height)) as i32;
++            let initial = if scenario == "boundary" { PhysicalPosition::new(x, y) } else { PhysicalPosition::new(300, 300) };
++            main.set_position(PhysicalPosition::new(100, 100)).map_err(|_| "cannot position main fixture")?;
++            pet.set_position(initial).map_err(|_| "cannot position pet fixture")?;
++            tokio::time::sleep(std::time::Duration::from_millis(500)).await;
++            let main = app.get_webview_window("main").ok_or("main disappeared")?;
++            let pet = app.get_webview_window("pet").ok_or("pet disappeared")?;
++            let main_start = main.outer_position().map_err(|_| "main position unavailable")?;
++            let pet_start = pet.outer_position().map_err(|_| "pet position unavailable")?;
++            if pet_start != initial { return Err("window manager did not accept requested fixture position"); }
++            if enabled {
++                let handle = app.clone();
++                tauri::async_runtime::spawn(async move { crate::roam::roam_desktop(handle).await; });
++            }
++            println!("NATIVE_FIXTURE {}", serde_json::json!({"scenario":scenario,"pet_start":[pet_start.x,pet_start.y],"main_start":[main_start.x,main_start.y],"size":[size.width,size.height],"area":[area.position.x,area.position.y,area.size.width,area.size.height]}));
++            let mut moved = false;
++            let mut samples = Vec::new();
++            for _ in 0..16 {
++                tokio::time::sleep(std::time::Duration::from_millis(125)).await;
++                let m = main.outer_position().map_err(|_| "main position unavailable")?;
++                let p = pet.outer_position().map_err(|_| "pet position unavailable")?;
++                if m != main_start { return Err("main moved during automatic roaming"); }
++                moved |= p != pet_start;
++                if p.x < area.position.x || p.y < area.position.y || p.x > x || p.y > y {
++                    eprintln!("NATIVE_BOUNDARY_OBSERVED: x={} y={} expected x={}..{} y={}..{} current_size={:?} current_monitor={:?}", p.x, p.y, area.position.x, x, area.position.y, y, pet.outer_size(), pet.current_monitor());
++                    return Err("pet escaped monitor work area");
++                }
++                samples.push((p.x, p.y, m.x, m.y));
++            }
++            if moved != enabled { return Err("observed motion disagrees with enabled state"); }
++            if scenario == "close" {
++                pet.close().map_err(|_| "cannot close pet")?;
++                tokio::time::sleep(std::time::Duration::from_millis(800)).await;
++                if app.get_webview_window("pet").is_some() { return Err("pet did not close"); }
++                if main.outer_position().map_err(|_| "main unavailable")? != main_start {
++                    return Err("roaming fell back to main after pet closed");
++                }
++            }
++            println!("NATIVE_ACCEPTANCE {}", serde_json::json!({"scenario":scenario,"passed":true,"samples_pet_x_y_main_x_y":samples,"moved":moved,"work_area":[area.position.x,area.position.y,area.size.width as i32,area.size.height as i32]}));
++            Ok(())
++        }.await;
++        match result {
++            Ok(()) => app.exit(0),
++            Err(error) => {
++                eprintln!("NATIVE_ACCEPTANCE_FAILED: {error}");
++                app.exit(1);
++            }
++        }
++    });
++    Ok(())
++}
+diff --git a/apps/desktop_pet/src/lib.rs b/apps/desktop_pet/src/lib.rs
+index 5d0f90f..4e19bb5 100644
+--- a/apps/desktop_pet/src/lib.rs
++++ b/apps/desktop_pet/src/lib.rs
+@@ -1,3 +1,5 @@
++#[cfg(feature = "acceptance-probe")]
++mod acceptance_probe;
+ mod chat;
+ mod file_organizer;
+ mod roam;
+@@ -145,6 +147,10 @@ pub fn application() {
+                 }
+             });
+ 
++            #[cfg(feature = "acceptance-probe")]
++            acceptance_probe::start(app.handle(), roam_enabled())?;
++
++            #[cfg(not(feature = "acceptance-probe"))]
+             if roam_enabled() {
+                 let app_handle = app.handle().clone();
+                 tauri::async_runtime::spawn(async move {
+diff --git a/apps/stats_server/src/admin.rs b/apps/stats_server/src/admin.rs
+index aa7c270..c6291bb 100644
+--- a/apps/stats_server/src/admin.rs
++++ b/apps/stats_server/src/admin.rs
+@@ -80,7 +80,7 @@ fn origin_ok(headers: &HeaderMap) -> bool {
+     headers.get(header::ORIGIN).and_then(|s| s.to_str().ok()) == Some(ORIGIN)
+ }
+ 
+-fn cookie_key(headers: &HeaderMap) -> Option<String> {
++fn cookie_value(headers: &HeaderMap) -> Option<&str> {
+     let value = headers
+         .get(header::COOKIE)?
+         .to_str()
+@@ -92,7 +92,11 @@ fn cookie_key(headers: &HeaderMap) -> Option<String> {
+     if value.len() != 64 || !value.bytes().all(|b| b.is_ascii_hexdigit()) {
+         return None;
+     }
+-    Some(hash(value))
++    Some(value)
++}
++
++fn cookie_key(headers: &HeaderMap) -> Option<String> {
++    cookie_value(headers).map(hash)
+ }
+ 
+ fn csrf_for(state: &Admin, headers: &HeaderMap) -> Option<String> {
+@@ -100,11 +104,50 @@ fn csrf_for(state: &Admin, headers: &HeaderMap) -> Option<String> {
+     let now = Instant::now();
+     let mut sessions = state.sessions.lock().ok()?;
+     sessions.retain(|_, session| session.expires > now);
+-    let session = sessions.get_mut(&key)?;
+-    touch_session(session, now);
++    let session = sessions.get(&key)?;
+     Some(session.csrf.clone())
+ }
+ 
++// Refresh both expiry clocks only after a successful protected GET. Logout and
++// login never pass through this layer. Recheck after the handler so a revoked or
++// expired session cannot be resurrected by an in-flight response.
++fn session_cookie(raw: &str) -> axum::http::HeaderValue {
++    format!(
++        "analytics_session={raw}; HttpOnly; SameSite=Strict; Path=/; Max-Age={}",
++        TTL.as_secs()
++    )
++    .parse()
++    .expect("validated hex session cookie")
++}
++
++async fn refresh_session(
++    State(state): State<Admin>,
++    request: axum::extract::Request,
++    next: axum::middleware::Next,
++) -> Response {
++    let raw = if request.method() == axum::http::Method::GET {
++        cookie_value(request.headers()).map(str::to_owned)
++    } else {
++        None
++    };
++    let mut response = next.run(request).await;
++    if response.status().is_success() {
++        if let Some(raw) = raw {
++            if let Ok(mut sessions) = state.sessions.lock() {
++                let now = Instant::now();
++                sessions.retain(|_, session| session.expires > now);
++                if let Some(session) = sessions.get_mut(&hash(&raw)) {
++                    touch_session(session, now);
++                    response
++                        .headers_mut()
++                        .insert(header::SET_COOKIE, session_cookie(&raw));
++                }
++            }
++        }
++    }
++    response
++}
++
+ fn document(body: String) -> Html<String> {
+     Html(format!(
+         r#"<!doctype html>
+@@ -228,12 +271,9 @@ async fn login(
+     );
+ 
+     let mut response = Redirect::to("/dashboard").into_response();
+-    response.headers_mut().insert(
+-        header::SET_COOKIE,
+-        format!("analytics_session={raw}; HttpOnly; SameSite=Strict; Path=/; Max-Age=1800")
+-            .parse()
+-            .unwrap(),
+-    );
++    response
++        .headers_mut()
++        .insert(header::SET_COOKIE, session_cookie(&raw));
+     response
+ }
+ 
+@@ -389,14 +429,18 @@ pub fn build(ingest: IngestState, config: Option<Config>) -> Router {
+     };
+     let protected = Router::new()
+         .route("/", get(dashboard))
+-        .route("/login", get(login_page).post(login))
+-        .route("/logout", post(logout))
+         .route("/dashboard", get(dashboard))
+         .route("/api/v1/events/{source}/summary", get(summary))
+         .route(
+             "/api/v1/events/{source}/summary/{event_type}",
+             get(kind_summary),
+         )
++        .route_layer(axum::middleware::from_fn_with_state(
++            admin.clone(),
++            refresh_session,
++        ))
++        .route("/login", get(login_page).post(login))
++        .route("/logout", post(logout))
+         .with_state(admin);
+ 
+     Router::new()
+@@ -746,4 +790,112 @@ mod tests {
+         touch_session(&mut session, now + Duration::from_secs(2));
+         assert_eq!(session.expires, now + Duration::from_secs(2) + TTL);
+     }
++    // Real loopback HTTP with isolated, explicitly controlled session deadlines.
++    // No production key, wall-clock change, or 30-minute delay is required.
++    #[tokio::test]
++    async fn day18_tcp_cookie_and_idle_expiry_move_together() {
++        use tokio::io::{AsyncReadExt, AsyncWriteExt};
++
++        async fn exchange(app: Router, cookie: &str) -> String {
++            let listener = tokio::net::TcpListener::bind("127.0.0.1:0").await.unwrap();
++            let addr = listener.local_addr().unwrap();
++            let task = tokio::spawn(async move { axum::serve(listener, app).await.unwrap() });
++            let mut stream = tokio::net::TcpStream::connect(addr).await.unwrap();
++            stream.write_all(format!(
++                "GET /probe HTTP/1.1\r\nHost: {addr}\r\nCookie: {cookie}\r\nConnection: close\r\n\r\n"
++            ).as_bytes()).await.unwrap();
++            let mut bytes = Vec::new();
++            tokio::time::timeout(Duration::from_secs(5), stream.read_to_end(&mut bytes))
++                .await
++                .unwrap()
++                .unwrap();
++            task.abort();
++            String::from_utf8(bytes).unwrap()
++        }
++
++        let state = Admin {
++            ingest: IngestState {
++                pool: sqlx::postgres::PgPoolOptions::new()
++                    .connect_lazy("postgres://fixture:fixture@127.0.0.1:1/fixture")
++                    .unwrap(),
++                tokens: Arc::new(crate::IngestTokens {
++                    chat: "fixture-chat".into(),
++                    pet: "fixture-pet".into(),
++                }),
++            },
++            config: None,
++            sessions: Arc::new(Mutex::new(HashMap::new())),
++            attempts: Arc::new(Mutex::new((Instant::now(), 0))),
++        };
++        let app = Router::new()
++            .route(
++                "/probe",
++                get(
++                    |State(state): State<Admin>, headers: HeaderMap| async move {
++                        csrf_for(&state, &headers)
++                            .map(|_| StatusCode::OK)
++                            .unwrap_or(StatusCode::UNAUTHORIZED)
++                    },
++                ),
++            )
++            .route_layer(axum::middleware::from_fn_with_state(
++                state.clone(),
++                refresh_session,
++            ))
++            .with_state(state.clone());
++        let raw = "b".repeat(64);
++        let key = hash(&raw);
++        let cookie = format!("analytics_session={raw}");
++        let old_deadline = Instant::now() + Duration::from_secs(2);
++        state.sessions.lock().unwrap().insert(
++            key.clone(),
++            Session {
++                expires: old_deadline,
++                csrf: "fixture".into(),
++            },
++        );
++
++        let response = exchange(app.clone(), &cookie).await;
++        assert!(response.starts_with("HTTP/1.1 200"), "{response}");
++        assert!(response.contains("Max-Age=1800"), "{response}");
++        assert!(response.contains("HttpOnly; SameSite=Strict; Path=/"));
++        assert!(
++            state.sessions.lock().unwrap()[&key].expires > old_deadline + Duration::from_secs(1700)
++        );
++
++        // The next request happens after the original deadline and must still
++        // succeed because prior activity extended both expiry clocks.
++        tokio::time::sleep(Duration::from_millis(2100)).await;
++        assert!(Instant::now() > old_deadline);
++        assert!(
++            exchange(app.clone(), &cookie)
++                .await
++                .starts_with("HTTP/1.1 200")
++        );
++
++        // Exercise actual idle expiry with a short, test-only deadline. A stale
++        // browser cookie must not bring the server record back to life.
++        state
++            .sessions
++            .lock()
++            .unwrap()
++            .get_mut(&key)
++            .unwrap()
++            .expires = Instant::now() + Duration::from_millis(30);
++        tokio::time::sleep(Duration::from_millis(60)).await;
++        let response = exchange(app.clone(), &cookie).await;
++        assert!(response.starts_with("HTTP/1.1 401"), "{response}");
++        assert!(!response.to_lowercase().contains("set-cookie:"));
++        assert!(!state.sessions.lock().unwrap().contains_key(&key));
++
++        for cookie in [
++            "analytics_session=bad".to_string(),
++            format!("analytics_session={}", "c".repeat(64)),
++            String::new(),
++        ] {
++            let response = exchange(app.clone(), &cookie).await;
++            assert!(response.starts_with("HTTP/1.1 401"), "{response}");
++            assert!(!response.to_lowercase().contains("set-cookie:"));
++        }
++    }
+ }
+diff --git a/crates/ui/src/lib.rs b/crates/ui/src/lib.rs
+index ebe59a3..f468ca0 100644
+--- a/crates/ui/src/lib.rs
++++ b/crates/ui/src/lib.rs
+@@ -186,6 +186,7 @@ pub fn ChatPage(room_id: String) -> impl IntoView {
+                 <h2>{format!("房間 {heading}")}</h2>
+                 <p role="status">{move || connection.get()}</p>
+             </header>
++            <p>"歷史載入尚未接通"</p>
+             <ul class="messages" aria-live="polite">
+                 {move || messages.get().into_iter().map(|message|{
+                     view! {
+@@ -230,11 +231,13 @@ fn RoomList() -> impl IntoView {
+         set_status.set("查詢中…".into());
+         #[cfg(target_arch = "wasm32")]
+         wasm_bindgen_futures::spawn_local(async move {
+-            match room_api::filter_room(&query.get()).await {
++            match room_api::list_rooms().await {
+                 Ok(value) => {
+                     set_status.set(
+                         if value.is_empty() {
+                             "尚無房間"
++                        } else if filter_rooms(&value, &query.get_untracked()).is_empty() {
++                            "沒有符合條件的房間"
+                         } else {
+                             "查詢完成，請選擇房間"
+                         }
+diff --git a/crates/ui/src/room_api.rs b/crates/ui/src/room_api.rs
+index 54fae79..864751f 100644
+--- a/crates/ui/src/room_api.rs
++++ b/crates/ui/src/room_api.rs
+@@ -85,13 +85,3 @@ pub async fn list_rooms() -> Result<Vec<(String, String)>, String> {
+         })
+         .collect()
+ }
+-
+-pub async fn filter_room(name: &str) -> Result<Vec<(String, String)>, String> {
+-    let rooms = list_rooms().await?;
+-    for (room_id, room_name) in &rooms {
+-        if room_name == name {
+-            return Ok(vec![(room_id.to_owned(), room_name.to_owned())]);
+-        }
+-    }
+-    Ok(rooms)
+-}
+diff --git a/scripts/acceptance/README.md b/scripts/acceptance/README.md
+new file mode 100644
+index 0000000..49a51b5
+--- /dev/null
++++ b/scripts/acceptance/README.md
+@@ -0,0 +1,64 @@
++# Day18 functional acceptance fixtures
++
++Use only disposable local databases and fixture credentials. These checks do not
++call paid AI. A passing fixture is evidence for its stated scope, not full product
++acceptance (account/ACL, multiple pets, multiple monitors and browser lifetime
++requirements remain separate gates).
++
++## Rust and PostgreSQL
++
++```sh
++cargo test --locked -p ui --features ssr -p stats-server -p desktop-pet -p server -p desktop-pet-frontend
++ANALYTICS_TEST_DATABASE_URL=postgres://day18@127.0.0.1:55418/day18 cargo test --locked -p stats-server -- --include-ignored
++cargo leptos build --cargo-locked
++```
++
++Create a dedicated PostgreSQL database first. The ignored login/query test creates
++and drops its own schema. Never substitute a production database URL.
++
++`day18_tcp_cookie_and_idle_expiry_move_together` sends real loopback TCP/HTTP,
++continues after the initial 2-second fixture deadline, then verifies a real
++30-millisecond idle deadline expires. Production TTL remains 1800 seconds; this
++does not claim a 30-minute browser soak was executed.
++
++## Live HTTP and browser
++
++Start the Chat server against an empty disposable SQLite file. Run
++`python3 scripts/acceptance/day18_http.py chat` once to create three fixture rooms.
++The Analytics server must use a disposable migrated PostgreSQL database,
++`fixture-chat` / `fixture-pet` service tokens and a login key of 64 `a` characters.
++Its fixture SHA256 is
++`ffe054fe7ae0cb6dc65c3af9b61d5209f439851db43d0ba5997337df154668eb`.
++
++```sh
++python3 scripts/acceptance/day18_http.py analytics require-renewal
++```
++
++For browser HTTP evidence, create `work/` and `outputs/` in a dedicated acceptance
++directory, set `DAY18_ACCEPTANCE_DIR` to it and run
++`python3 scripts/acceptance/day18_chat_proxy.py`. Browse port 3002. Creating its
++`work/rooms-fail` flag makes only GET `/api/rooms` return 503; remove the flag to
++retry. The proxy records HTTP paths/status in `outputs/chat-network.jsonl`.
++It does not proxy WebSockets; test chat/WS directly on port 3000.
++
++Verify blank/all, Chinese partial names with whitespace, case-insensitive names,
++no match, preserved IDs/links, HTTP 503 with prior list preserved and retry.
++
++## Native geometry
++
++```sh
++cargo build --locked -p desktop-pet --features acceptance-probe
++PET_ACCEPTANCE_SCENARIO=enabled PET_ENABLE_ROAM=true LIBGL_ALWAYS_SOFTWARE=1 WEBKIT_DISABLE_DMABUF_RENDERER=1 target/debug/desktop-pet
++PET_ACCEPTANCE_SCENARIO=disabled PET_ENABLE_ROAM=false LIBGL_ALWAYS_SOFTWARE=1 WEBKIT_DISABLE_DMABUF_RENDERER=1 target/debug/desktop-pet
++PET_ACCEPTANCE_SCENARIO=boundary PET_ENABLE_ROAM=true LIBGL_ALWAYS_SOFTWARE=1 WEBKIT_DISABLE_DMABUF_RENDERER=1 target/debug/desktop-pet
++PET_ACCEPTANCE_SCENARIO=close PET_ENABLE_ROAM=true LIBGL_ALWAYS_SOFTWARE=1 WEBKIT_DISABLE_DMABUF_RENDERER=1 target/debug/desktop-pet
++```
++
++The opt-in probe maps real Tauri windows, waits for window-manager placement,
++reads mapped size/work area, positions test windows, then invokes the actual
++`roam_desktop` algorithm. It samples native `pet` and `main` positions, verifies
++boundaries/disabled state, and checks closing pet never falls back to main.
++It logs JSON evidence and exits 0 only for a passing scenario. Normal builds do
++not include this instrumentation. The probe delays roaming until fixture mapping
++completes; it does not verify normal startup timing, dragging, visual rendering,
++runtime enable/disable controls, multiple monitors or multiple pets.
+diff --git a/scripts/acceptance/day18_chat_proxy.py b/scripts/acceptance/day18_chat_proxy.py
+new file mode 100644
+index 0000000..3c66a01
+--- /dev/null
++++ b/scripts/acceptance/day18_chat_proxy.py
+@@ -0,0 +1,25 @@
++from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
++from pathlib import Path
++import http.client, json, datetime, os
++ROOT = Path(os.environ['DAY18_ACCEPTANCE_DIR']).resolve()
++class Proxy(BaseHTTPRequestHandler):
++    def do_GET(self):
++        fail = self.path == '/api/rooms' and (ROOT/'work/rooms-fail').exists()
++        if fail:
++            status, headers, body = 503, {}, b'fixture unavailable'
++        else:
++            conn = http.client.HTTPConnection('127.0.0.1',3000,timeout=10)
++            conn.request('GET',self.path)
++            r = conn.getresponse()
++            status, headers, body = r.status, dict(r.getheaders()), r.read()
++            conn.close()
++        with (ROOT/'outputs/chat-network.jsonl').open('a') as f:
++            f.write(json.dumps({'time':datetime.datetime.now().isoformat(),'method':'GET','path':self.path,'status':status,'injected':fail})+'\n')
++        self.send_response(status)
++        for k,v in headers.items():
++            if k.lower() not in ['content-length','transfer-encoding','connection','date','server']: self.send_header(k,v)
++        self.send_header('Content-Length',str(len(body)))
++        self.end_headers()
++        self.wfile.write(body)
++    def log_message(self,*args): pass
++ThreadingHTTPServer(('127.0.0.1',3002),Proxy).serve_forever()
+diff --git a/scripts/acceptance/day18_http.py b/scripts/acceptance/day18_http.py
+new file mode 100644
+index 0000000..1b42272
+--- /dev/null
++++ b/scripts/acceptance/day18_http.py
+@@ -0,0 +1,57 @@
++import http.client, json, re, sys, time, uuid
++
++def call(port, method, path, body=None, headers=None):
++    c = http.client.HTTPConnection('127.0.0.1', port, timeout=10)
++    c.request(method, path, body, headers or {})
++    r = c.getresponse()
++    result = (r.status, dict(r.getheaders()), r.read().decode())
++    c.close()
++    return result
++
++def check(name, result, expected):
++    assert result[0] == expected, (name, result)
++    print(f'PASS {name}: HTTP {result[0]}')
++    return result
++
++mode = sys.argv[1]
++if mode == 'chat':
++    for name in ['Rust 技術交流', '生活閒聊', 'RUST 中文長房名' * 4]:
++        check('create fixture room', call(3000, 'POST', '/api/rooms', json.dumps({'name': name}), {'Content-Type': 'application/json'}), 201)
++    r = check('list rooms', call(3000, 'GET', '/api/rooms'), 200)
++    rows = json.loads(r[2])
++    assert len(rows) == 3
++    print('PASS fixture names and IDs:', json.dumps(rows, ensure_ascii=False))
++    check('SSR homepage', call(3000, 'GET', '/'), 200)
++    check('SSR room route', call(3000, 'GET', '/room/' + rows[0]['id']), 200)
++else:
++    url = '/api/v1/events/web_chat/summary'
++    check('anonymous dashboard redirect', call(3100, 'GET', '/dashboard'), 303)
++    check('anonymous query denied', call(3100, 'GET', url), 401)
++    check('service token cannot log into human query', call(3100, 'GET', url, headers={'Authorization': 'Bearer fixture-chat'}), 401)
++    login_headers = {'Origin': 'http://127.0.0.1:3100', 'Content-Type': 'application/x-www-form-urlencoded'}
++    check('missing origin denied', call(3100, 'POST', '/login', 'key=' + 'a'*64, {'Content-Type': 'application/x-www-form-urlencoded'}), 403)
++    check('wrong login denied', call(3100, 'POST', '/login', 'key=wrong', login_headers), 401)
++    r = check('fixture login', call(3100, 'POST', '/login', 'key=' + 'a'*64, login_headers), 303)
++    cookie = r[1]['set-cookie'].split(';')[0]
++    assert 'HttpOnly' in r[1]['set-cookie'] and 'SameSite=Strict' in r[1]['set-cookie'] and 'Max-Age=1800' in r[1]['set-cookie']
++    event = json.dumps({'schema_version': 1, 'event_id': str(uuid.uuid4()), 'source_app': 'web_chat', 'event_type': 'fixture.day18'})
++    check('missing ingestion identity denied', call(3100, 'POST', '/api/v1/events', event, {'Content-Type': 'application/json'}), 401)
++    check('cross-source ingestion denied', call(3100, 'POST', '/api/v1/events', event, {'Content-Type': 'application/json','Authorization': 'Bearer fixture-pet'}), 401)
++    check('ingest committed event', call(3100, 'POST', '/api/v1/events', event, {'Content-Type': 'application/json','Authorization': 'Bearer fixture-chat'}), 201)
++    check('idempotent ingest', call(3100, 'POST', '/api/v1/events', event, {'Content-Type': 'application/json','Authorization': 'Bearer fixture-chat'}), 200)
++    h = {'Cookie': cookie}
++    r = check('authenticated PostgreSQL summary', call(3100, 'GET', url, headers=h), 200)
++    print('Query body:', r[2])
++    time.sleep(1.1)
++    r = check('active dashboard', call(3100, 'GET', '/dashboard', headers=h), 200)
++    renewed = r[1].get('set-cookie','')
++    print('COOKIE_RENEWED:', 'Max-Age=1800' in renewed)
++    if len(sys.argv) > 2 and sys.argv[2] == 'require-renewal':
++        assert 'Max-Age=1800' in renewed, 'valid activity did not renew browser cookie'
++        assert renewed.split(';')[0] == cookie
++    csrf = re.search('name="csrf" value="([^"]+)"', r[2]).group(1)
++    check('invalid source denied', call(3100, 'GET', '/dashboard?source=invalid', headers=h), 400)
++    check('wrong CSRF logout denied', call(3100, 'POST', '/logout', 'csrf=wrong', {**h, **login_headers}), 403)
++    r = check('logout revokes session', call(3100, 'POST', '/logout', 'csrf='+csrf, {**h, **login_headers}), 303)
++    assert 'Max-Age=0' in r[1]['set-cookie']
++    check('revoked cookie denied', call(3100, 'GET', url, headers=h), 401)

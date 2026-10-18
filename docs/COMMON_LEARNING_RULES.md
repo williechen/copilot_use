@@ -57,12 +57,9 @@ Notion 已完整讀回但 GitHub 狀態寫入／讀回失敗，保留頁面 ID�
 91 項原文與本次變更前規則保留於 docs/teaching/archive/rules-before-minimum-v1/；第17項原文無編號，依第16與18項間順序對應並註明。封存資料僅供追溯，不再產生下一個衝突討論，也不自動成為執行規則。
 
 
-## 目前進度（2026-10-18 讀回）
-
-三專案 Day17 已在既有 Notion 頁完整存在並讀回，learning-state 的 next_day 各為18，本次不遞增。Day17 的測試、程式套用與完整功能驗收仍未確認；Pet 建窗契約與 Analytics cookie 續期等限制留待核對，不回填成通過。Day15／Day16 及以下2026-10-17來源觀察保留歷史身分，其中 next_day=17 不是目前進度。
-
-rust_ai_chat/main 本次讀取為 `98f30d8b3593d80103b1a4bdbb9f0cb8cb08069e`；copilot_use 更新前來源為 `77150f96069aef48c2f741ec388bfec779feca0d`。規則變更不代表程式或 runtime 已更新。
-
+## 目前進度（2026-10-18 正式複驗讀回）
+三專案既有 Day18 已發布，learning-state／manifest 的 next_day 各為 19。本次直接修訂 Day17／Day18 與入口的過時現況，沒有新增 Day、沒有遞增進度。
+本次 main `794da6e57a6490d580a4c49789519998f941b4c2`；修正候選 `8e8469989642aa7ca6ab329f0bd95b3ac0fd170d` 僅在工作分支，未修改遠端 main。正式完整功能驗收仍未通過；測試、套用與產品缺口見下節及三篇 Day18。
 ## 已逐項確認的現行需求（2026-10-17）
 以下 16 組需求經使用者逐項核對；屬現行要求，未宣稱已實作或驗收。網頁／本地排程每次重新讀取並採用；與下方歷史來源觀察或封存 Day 不同時，以本節作為後續需求，歷史證據保留原 SHA 與範圍。Day15／Day16 保持封存，不新增 Day，next_day 維持三專案各 17。
 ### Chat：已確認的入口、註冊與管理
@@ -108,14 +105,11 @@ Dashboard 畫面使用 Leptos 元件與 Rust 狀態管理，沿用 HTTP JSON＋S
 產品上報目標採gRPC／Protobuf及逐事件ACK，Dashboard保留HTTP JSON＋SSE；學習庫已有HTTP相容入口的演進事實保留。獨立PostgreSQL、來源／事件ID冪等與衝突、commit後通知、重試／重連／故障恢復分別驗證。Chat／Pet各自SQLite，不共享業務DB。
 後續包括可追溯AI洞察、人工審核、Chat／Pet自主授權採用／回退，以及Provider／Model／來源／功能／請求／時間的Token使用量、成本及實際可取得額度。額度未知明示未知，不由Token推算配額；用既有紀錄或合成資料驗證。
 ## 當前功能狀態與證據入口
-2026-10-17 目前來源 `rust_ai_chat/main` `98f30d8b3593d80103b1a4bdbb9f0cb8cb08069e`，本機已 fast-forward，沒有直接修改 source；copilot_use 本輪同步文件，產品程式未重新驗收。
-- Chat：首頁建房按鈕已移除，仍有登入入口；個人管理頁尚未接通。新增「查詢房間」會清空 rows、設定 loading，卻沒有發出請求或復原，清單與重新整理因此卡住。ba5dc51 的瀏覽器選房聊天結果保留為歷史，不作新版瀏覽器通過證據。
-- Pet：雙窗已存在，漫遊卻仍選取 main 控制台；正確目標是 pet 生活視窗，Control 不受自動漫遊移動，但可手動拖曳。開啟／聚焦控制台仍應選 main。原生互動 GUI／IPC 尚未完整驗收。
-- Analytics：仍為 Leptos／Session 登入碼原型，未符合首次 admin/admin、帳密登入及登入後修改密碼；3100 未啟動。人員登入與來源交互換證分開追蹤。
-同 SHA 重驗：主要套件 73 passed／1 ignored；根 workspace-tests 載入既有測試設定後 20 passed（首次缺環境失敗已保留）；Chat hydrate WASM build passed；SSR-feature 2 passed／1 failed，缺少「歷史載入尚未接通」。遠端 CI 本次觀測 15 success／2 in_progress，不以預設 CI 代替 SSR 失敗或 GUI 驗收。獨立 PostgreSQL ignored 流程、JS 契約、瀏覽器及原生 GUI 本輪未重跑。
-本地 Chat HTTP 200 仍是 ba5dc51 舊 binary；本輪未重建／重啟服務，不能宣稱已執行 98f30d8。Analytics 3100 無監聽。根 tests 尚有 5 targets／20 cases，test-workspace CI job 已移除，仍須完成遷移與 CI 接續。
-[最新精確來源、結果與限制](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-17-source-98f30d8-recheck.json)；[先前 ba5dc51／520bfa1 證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-17-current-source-validation.json) 保留歷史身分。完整流程尚未驗收，不新增 Day。
-
+- Chat：名稱查詢已接 HTTP，但 main `794da6e57a6490d580a4c49789519998f941b4c2` 的 SSR/WASM 已乾淨建置成功，中文含空白與空白查詢通過；但 filter_room 完全匹配時只取第一筆，API 的 3 筆名稱包含匹配房間在瀏覽器只列 1 筆；SSR 仍有 1 項「歷史載入尚未接通」提示斷言失敗。main 未通過。工作分支 `8e8469989642aa7ca6ab329f0bd95b3ac0fd170d` 以 list_rooms／既有 filter_rooms 修正，候選完整回歸 100 passed／1 ignored，SSR/WASM 成功；候選不等於已套用 main。
+- Pet：main `794da6e57a6490d580a4c49789519998f941b4c2` 已選 pet 生活窗，open_control_window 仍選 main 控制窗；不是仍錯選 main。原生單元／整合 34 passed；相同漫遊核心透過真實 Tauri 視窗座標探針，本輪 enabled／disabled／boundary／close 4 案再次通過，main 全程原位。完整 GUI／多螢幕／拖曳／普通啟動時序／多寵物仍未驗證，完整產品未驗收。
+- Analytics：main `794da6e57a6490d580a4c49789519998f941b4c2` 已套用伺服器 touch_session，但活動 Dashboard 200 回應沒有刷新 Cookie，Cookie 續期 Red 本輪再次失敗；獨立 PostgreSQL 登入查詢登出通過。候選 `8e8469989642aa7ca6ab329f0bd95b3ac0fd170d` 同步 server expiry／Cookie 的 HTTP 回歸通過，尚未合併 main。帳密／角色／來源 scope、立即撤銷與 30 分鐘瀏覽器 soak 未完成或未驗證，migration 31→32 改名造成舊版升級實測 missing migration 失敗，兼容修正尚未完成；完整產品未驗收。
+先前 abebbef 的 CI 為 15 success、2 failure；最新 794da6e 已解決編譯，CI 與剩餘功能失敗分列於證據。本輪再次執行的環境、命令、實際結果與原始錯誤統整於 [正式複驗與原始證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-18-functional-revalidation/REPORT.md)；這是實測資料更新，既有 v1 規則及產品需求文字沒有增加。
+原 2026-10-17／98f30d8 的來源觀察及測試保留在歷史證據，沒有將未執行改寫成當時已執行。
 ## 文件入口
 產品能力與未來清單、詳細架構、操作設定、功能對照與工程證據仍保留各自用途；本篇集中教學方法、格式及三專案大綱，其他教學入口改為引用。原Day及程式保留，舊規則／來源／失效教法只作歷史，不再套用為目前指令。
 [聊天室](https://app.notion.com/p/3f3e51d45093807da638c336e857543a) · [桌面寵物](https://app.notion.com/p/3f3e51d450938067923ae5a424d30950) · [統計儀錶板｜聊天室 × 桌面寵物](https://app.notion.com/p/3f3e51d45093817eafaee0cfc9ea4cc8)。功能與實作對照的詳細歷史保留工程紀錄；本篇不再追加歷次討論或驗證摘要。

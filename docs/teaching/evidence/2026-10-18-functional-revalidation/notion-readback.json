@@ -1,0 +1,174 @@
+[
+  {
+    "id": "3fde51d45093816bb36dd9099190d907",
+    "title": "2026-10-18｜P0 Chat Day 18｜查詢房間完成 HTTP 接線與錯誤恢復",
+    "url": "https://app.notion.com/p/3fde51d45093816bb36dd9099190d907?pvs=204",
+    "last_edited": "2026-10-18T09:02:50.201Z",
+    "main_sha": "794da6e57a6490d580a4c49789519998f941b4c2",
+    "headings": [
+      "## 1. 學習大綱",
+      "## 2. 實作內容",
+      "## 3. 套件版本",
+      "## 4. 驗證項目"
+    ],
+    "main_sha_present": true,
+    "children_preserved": true,
+    "v1_rules_unchanged": null
+  },
+  {
+    "id": "3fde51d4509381bfa106ea4d9b190480",
+    "title": "2026-10-18｜P0 Pet Day 18｜漫遊只移動生活窗並核對真實標籤",
+    "url": "https://app.notion.com/p/3fde51d4509381bfa106ea4d9b190480?pvs=204",
+    "last_edited": "2026-10-18T09:02:48.536Z",
+    "main_sha": "794da6e57a6490d580a4c49789519998f941b4c2",
+    "headings": [
+      "## 1. 學習大綱",
+      "## 2. 實作內容",
+      "## 3. 套件版本",
+      "## 4. 驗證項目"
+    ],
+    "main_sha_present": true,
+    "children_preserved": true,
+    "v1_rules_unchanged": null
+  },
+  {
+    "id": "3fde51d4509381c2a0d5f60041137619",
+    "title": "2026-10-18｜P0 Analytics Day 18｜有效活動延長伺服器 Session 並拒絕過期",
+    "url": "https://app.notion.com/p/3fde51d4509381c2a0d5f60041137619?pvs=204",
+    "last_edited": "2026-10-18T09:02:46.837Z",
+    "main_sha": "794da6e57a6490d580a4c49789519998f941b4c2",
+    "headings": [
+      "## 1. 學習大綱",
+      "## 2. 實作內容",
+      "## 3. 套件版本",
+      "## 4. 驗證項目"
+    ],
+    "main_sha_present": true,
+    "children_preserved": true,
+    "v1_rules_unchanged": null
+  },
+  {
+    "id": "3f3e51d45093807da638c336e857543a",
+    "title": "聊天室",
+    "url": "https://app.notion.com/p/3f3e51d45093807da638c336e857543a?pvs=204",
+    "last_edited": "2026-10-18T09:02:51.914Z",
+    "main_sha": "794da6e57a6490d580a4c49789519998f941b4c2",
+    "headings": [
+      "## 1. 專案大綱與操作主線",
+      "## 已逐項確認的現行需求（2026-10-17）",
+      "## 2. 功能目標與完成條件",
+      "## 3. 目前程式與 Day16 封存",
+      "## 4. 驗證方式與尚未驗收範圍",
+      "## 5. 開發位置與使用本入口的方式",
+      "## 既有Day索引"
+    ],
+    "main_sha_present": true,
+    "children_preserved": true,
+    "v1_rules_unchanged": null
+  },
+  {
+    "id": "3f3e51d450938067923ae5a424d30950",
+    "title": "桌面寵物",
+    "url": "https://app.notion.com/p/3f3e51d450938067923ae5a424d30950?pvs=204",
+    "last_edited": "2026-10-18T09:02:53.912Z",
+    "main_sha": "794da6e57a6490d580a4c49789519998f941b4c2",
+    "headings": [
+      "## 1. 專案大綱與操作主線",
+      "## 已逐項確認的現行需求（2026-10-17）",
+      "## 2. 功能目標與完成條件",
+      "## 3. 目前程式與 Day16 封存",
+      "## 4. 驗證方式與尚未驗收範圍",
+      "## 5. 開發位置與使用本入口的方式",
+      "## 既有Day索引"
+    ],
+    "main_sha_present": true,
+    "children_preserved": true,
+    "v1_rules_unchanged": null
+  },
+  {
+    "id": "3f3e51d45093817eafaee0cfc9ea4cc8",
+    "title": "📊 統計儀錶板｜聊天室 × 桌面寵物",
+    "url": "https://app.notion.com/p/3f3e51d45093817eafaee0cfc9ea4cc8?pvs=204",
+    "last_edited": "2026-10-18T09:02:55.790Z",
+    "main_sha": "794da6e57a6490d580a4c49789519998f941b4c2",
+    "headings": [
+      "## 1. 專案大綱與操作主線",
+      "## 已逐項確認的現行需求（2026-10-17）",
+      "## 2. 功能目標與完成條件",
+      "## 3. 目前程式與 Day16 封存",
+      "## 4. 驗證方式與尚未驗收範圍",
+      "## 5. 開發位置與使用本入口的方式",
+      "## 既有Day索引"
+    ],
+    "main_sha_present": true,
+    "children_preserved": true,
+    "v1_rules_unchanged": null
+  },
+  {
+    "id": "3f2e51d4509381ddb8a8ce7cb4cd3e60",
+    "title": "🦀 Rust AI 三專案｜共同學習規則與前進目標",
+    "url": "https://app.notion.com/p/3f2e51d4509381ddb8a8ce7cb4cd3e60?pvs=204",
+    "last_edited": "2026-10-18T09:02:57.748Z",
+    "main_sha": "794da6e57a6490d580a4c49789519998f941b4c2",
+    "headings": [
+      "## 每日 TDD 教學最小必要規則 v1",
+      "## 目前進度（2026-10-18 正式複驗讀回）",
+      "## 已逐項確認的現行需求（2026-10-17）",
+      "## 三專案功能大綱",
+      "## 當前功能狀態與證據入口",
+      "## 文件入口",
+      "## Day索引入口"
+    ],
+    "main_sha_present": true,
+    "children_preserved": true,
+    "v1_rules_unchanged": true
+  },
+  {
+    "id": "3fce51d45093818b913bebb8dab5ab65",
+    "title": "2026-10-18｜P0 Chat Day 17｜查詢房間接通 HTTP",
+    "url": "https://app.notion.com/p/3fce51d45093818b913bebb8dab5ab65?pvs=204",
+    "last_edited": "2026-10-18T09:03:59.859Z",
+    "main_sha": "794da6e57a6490d580a4c49789519998f941b4c2",
+    "headings": [
+      "## 1. 學習大綱",
+      "## 2. 實作內容",
+      "## 3. 套件版本",
+      "## 4. 驗證項目"
+    ],
+    "main_sha_present": true,
+    "children_preserved": true,
+    "v1_rules_unchanged": null
+  },
+  {
+    "id": "3fce51d4509381ca83e3e825f0313698",
+    "title": "2026-10-18｜P0 Pet Day 17｜漫遊指向寵物生活窗",
+    "url": "https://app.notion.com/p/3fce51d4509381ca83e3e825f0313698?pvs=204",
+    "last_edited": "2026-10-18T09:04:02.307Z",
+    "main_sha": "794da6e57a6490d580a4c49789519998f941b4c2",
+    "headings": [
+      "## 1. 學習大綱",
+      "## 2. 實作內容",
+      "## 3. 套件版本",
+      "## 4. 驗證項目"
+    ],
+    "main_sha_present": true,
+    "children_preserved": true,
+    "v1_rules_unchanged": null
+  },
+  {
+    "id": "3fce51d4509381ea871ec9c92da37c1b",
+    "title": "2026-10-18｜P0 Analytics Day 17｜活動延長管理員 Session",
+    "url": "https://app.notion.com/p/3fce51d4509381ea871ec9c92da37c1b?pvs=204",
+    "last_edited": "2026-10-18T09:04:04.788Z",
+    "main_sha": "794da6e57a6490d580a4c49789519998f941b4c2",
+    "headings": [
+      "## 1. 學習大綱",
+      "## 2. 實作內容",
+      "## 3. 套件版本",
+      "## 4. 驗證項目"
+    ],
+    "main_sha_present": true,
+    "children_preserved": true,
+    "v1_rules_unchanged": null
+  }
+]

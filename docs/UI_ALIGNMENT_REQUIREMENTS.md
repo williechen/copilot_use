@@ -1,6 +1,6 @@
 # Chat 聊天前台、Pet 雙視窗與 Analytics 畫面銜接
 
-> 每日教學流程採 [每日 TDD 教學最小必要規則 v1](COMMON_LEARNING_RULES.md)。2026-10-18 讀回：既有 Day17 已發布，next_day 各為18；本文件的 Day16／next_day=17 與舊 SHA 段落保留為歷史觀察，不覆蓋目前 learning-state／manifest，也不代表產品驗收。
+> 2026-10-18 正式複驗：參考 main `794da6e57a6490d580a4c49789519998f941b4c2`；Chat SSR/WASM 建置通過但名稱查詢漏列與 SSR 斷言失敗、Pet 原生幾何 4 案通過、Analytics Cookie 續期與 migration 升級失敗。Day18 已發布，next_day 各 19，本次未遞增；詳細命令及剩餘缺口見 [複驗證據](teaching/evidence/2026-10-18-functional-revalidation/REPORT.md)。下方舊 SHA／next_day 屬歷史觀察，copilot_use 產品實作未由參考庫結果自動驗收。
 
 本文件是既有 FUTURE_WORK 項目的詳細驗收條件，不另立 Day 或重複開發清單。需求與程式套用、測試及完整驗收分開記錄。
 
