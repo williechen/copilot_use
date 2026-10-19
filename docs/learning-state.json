@@ -58,7 +58,8 @@
     "rules_version": "daily-tdd-minimum-v1",
     "rules_document": "docs/COMMON_LEARNING_RULES.md",
     "day_advance": "Per project: complete Notion original Day N publication + full readback, then conditional expected-N to N+1 state update and readback; revision/makeup/rules/CI do not increment; retry only missing state, never duplicate publication",
-    "failure_recovery": "Single pending record per project/Day/revision; read and deduplicate before retry; 3 consecutive failures require manual review; evidence persistence and actual verification are separate; detailed historical mechanisms 37-91 deferred"
+    "failure_recovery": "Single pending record per project/Day/revision; read and deduplicate before retry; 3 consecutive failures require manual review; evidence persistence and actual verification are separate; detailed historical mechanisms 37-91 deferred",
+    "basic_user_flow_gate": "Before selecting advanced Day topics, verify the earliest missing user-operable prerequisite using latest source/contract: Chat signup/login/session/authorized room entry; Pet create first named pet through Tauri IPC, persist in SQLite and reload; Analytics persistent admin account/password-first-login/session. Keep public room listing accessible without login where allowed; entering protected rooms requires authentication and ACL. Continue one end-to-end capability across days; do not present API, helper or status-code tests as completed product flows."
   },
   "curriculum": {
     "stage_count": 13,
@@ -1109,5 +1110,33 @@
     "manual_validation": "not executed",
     "product_integration": "not accepted",
     "functional_acceptance": false
+  },
+  "confirmed_functional_priorities_2026_10_19": {
+    "status": "priority only; not implementation acceptance",
+    "current_main_observation": "5654591f3002fc619c883af9b5197e2126cc6494",
+    "chat": {
+      "priority": "registration -> login -> session -> authorized room entry; anonymous public room listing preserved",
+      "not_accepted": [
+        "working sign-in UI",
+        "session-protected room entry"
+      ]
+    },
+    "pet": {
+      "priority": "create first named pet -> Tauri IPC -> SQLite persistence -> view -> restart reload",
+      "not_accepted": [
+        "end-user create pet UI",
+        "persistent create/reload flow"
+      ]
+    },
+    "analytics": {
+      "priority": "admin bootstrap -> salted-password account -> first-login change -> session and protected dashboard",
+      "not_accepted": [
+        "persistent account/password sign-in",
+        "first-login change"
+      ]
+    },
+    "future_work": "docs/FUTURE_WORK.md",
+    "product_gate": "docs/P9_TARGET.md",
+    "source_scope": "selection intent; do not increment next_day or rewrite historical evidence"
   }
 }
