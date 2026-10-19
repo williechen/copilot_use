@@ -1053,7 +1053,20 @@
     "teaching_branch_before_sha": "092066d59837a790cf18eb5bbfe1c2abd09321d1",
     "day": 20,
     "test_executed": false,
-    "product_acceptance": false
+    "product_acceptance": false,
+    "original_source_sha": "0cd9f7995c196a7359864a9395c0fe2372d09222",
+    "latest_reviewed_main_sha": "c92831e105fb0000860f995ea288e29631b5fed8",
+    "notion_revision": "r2",
+    "code_merged_in_main": true,
+    "ci": {
+      "sha": "c92831e105fb0000860f995ea288e29631b5fed8",
+      "run_id": 39202728570,
+      "job": "test-ui",
+      "status": "success"
+    },
+    "manual_validation": "not executed",
+    "product_integration": "not accepted",
+    "functional_acceptance": false
   },
   "day20_pet_delivery": {
     "notion_page_id": "3fee51d45093816897feec3468239e43",
@@ -1061,7 +1074,20 @@
     "source_sha": "0cd9f7995c196a7359864a9395c0fe2372d09222",
     "day": 20,
     "test_executed": false,
-    "product_acceptance": false
+    "product_acceptance": false,
+    "original_source_sha": "0cd9f7995c196a7359864a9395c0fe2372d09222",
+    "latest_reviewed_main_sha": "c92831e105fb0000860f995ea288e29631b5fed8",
+    "notion_revision": "r2",
+    "code_merged_in_main": true,
+    "ci": {
+      "sha": "c92831e105fb0000860f995ea288e29631b5fed8",
+      "run_id": 39202728570,
+      "job": "test-desktop-pet",
+      "status": "success"
+    },
+    "manual_validation": "not executed",
+    "product_integration": "not accepted",
+    "functional_acceptance": false
   },
   "day20_analytics_delivery": {
     "notion_page_id": "3fee51d4509381618739f23dcd766996",
@@ -1069,6 +1095,19 @@
     "source_sha": "0cd9f7995c196a7359864a9395c0fe2372d09222",
     "day": 20,
     "test_executed": false,
-    "product_acceptance": false
+    "product_acceptance": false,
+    "original_source_sha": "0cd9f7995c196a7359864a9395c0fe2372d09222",
+    "latest_reviewed_main_sha": "c92831e105fb0000860f995ea288e29631b5fed8",
+    "notion_revision": "r2",
+    "code_merged_in_main": true,
+    "ci": {
+      "sha": "c92831e105fb0000860f995ea288e29631b5fed8",
+      "run_id": 39202728570,
+      "job": "test-stats-server",
+      "status": "success"
+    },
+    "manual_validation": "not executed",
+    "product_integration": "not accepted",
+    "functional_acceptance": false
   }
 }
