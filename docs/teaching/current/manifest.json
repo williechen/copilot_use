@@ -1,6 +1,6 @@
 {
   "scope": "Latest published teaching index; Day16 snapshot preserved in archive",
-  "revision": "day21-all-published",
+  "revision": "day21-pet-r2-schema-observed",
   "synced_date": "2026-10-19",
   "source_sha": "5654591f3002fc619c883af9b5197e2126cc6494",
   "articles": [
@@ -29,24 +29,37 @@
     {
       "project": "pet",
       "day": 21,
-      "revision": "r1",
+      "revision": "r2",
       "notion_page_id": "3fee51d450938163b451e803639e657c",
       "notion_url": "https://app.notion.com/p/3fee51d450938163b451e803639e657c",
       "notion_parent_id": "3f3e51d450938067923ae5a424d30950",
       "four_sections": true,
       "notion_readback_verified": true,
-      "notion_page_last_edited_at": "2026-10-19T10:34:51.532Z",
+      "notion_page_last_edited_at": "2026-10-19T11:41:55.526Z",
       "source_sha": "5654591f3002fc619c883af9b5197e2126cc6494",
       "rules_version": "daily-tdd-minimum-v1",
       "article_path": "docs/teaching/day21/pet.md",
-      "github_mirror_blob_sha": "50f3572a4ae6aecd8711faa3b577dfd767214f5a",
+      "github_mirror_blob_sha": "2f6acf2be75b92e4a7d39e0d8f7b85e51b2f5935",
       "main_application": "not applied; source read-only",
       "product_integration": "not completed",
       "functional_acceptance": "not completed",
       "tests": {
         "day21": "proposed Red/Green only; not executed locally or in matching-source CI",
         "manual_validation": "not executed"
-      }
+      },
+      "github_mirror_commit": "a312a4d3b8b40b677d30297f807b5093242aa7ad",
+      "schema_observation": {
+        "sha": "5654591f3002fc619c883af9b5197e2126cc6494",
+        "path": "apps/desktop_pet/migrations/20261018091733_create_pet.sql",
+        "pet_profile_new_fields": [
+          "sexy",
+          "image_path"
+        ],
+        "schema_migration_applied": "not verified",
+        "migration_checksum_risk": true,
+        "pet_create_flow": "not yet connected"
+      },
+      "revision_readback_verified": true
     },
     {
       "project": "analytics",
