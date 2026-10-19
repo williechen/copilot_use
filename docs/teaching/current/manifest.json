@@ -160,5 +160,15 @@
     "all_notion_pages_readback": true,
     "all_mirrors_readback": true,
     "increment_next_day": false
+  },
+  "selection_priority_alignment": {
+    "revision": "foundational-flow-2026-10-19",
+    "notion_page_id": "3f2e51d4509381ddb8a8ce7cb4cd3e60",
+    "github_rules": "docs/COMMON_LEARNING_RULES.md",
+    "github_backlog": "docs/FUTURE_WORK.md",
+    "github_targets": "docs/P9_TARGET.md",
+    "state_policy": "docs/learning-state.json",
+    "priority": "Chat login; Pet creation; Analytics admin login",
+    "next_day_unchanged": true
   }
 }
