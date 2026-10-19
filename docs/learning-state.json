@@ -6,7 +6,7 @@
   "fixed_tag_sha": "9bcae7c5d139f75ed08b4daffece602a71fdab34",
   "next_day": {
     "chat": 23,
-    "pet": 22,
+    "pet": 23,
     "analytics": 22
   },
   "last_full_comparison": "2026-10-16T22:47:14.399027+08:00",
@@ -1198,5 +1198,26 @@
     "product_integration": "not performed",
     "functional_acceptance": false,
     "readback_at": "2026-10-19T22:52:08.619Z"
+  },
+  "day22_pet_delivery": {
+    "project": "pet",
+    "day": 22,
+    "revision": "r2",
+    "notion_page_id": "3fee51d45093811c83eed982ef9ab69e",
+    "notion_url": "https://app.notion.com/p/3fee51d45093811c83eed982ef9ab69e?pvs=204",
+    "notion_page_last_edited_at": "2026-10-19T22:53:45.611Z",
+    "notion_readback_verified": true,
+    "code_blocks_exact": true,
+    "four_sections": true,
+    "source_sha": "da5155265bf66ef9d495fd38913ad6cb93e1bac8",
+    "teaching_branch_before_sha": "fba1845f8488c1a347259f0ad71e8bdac47069cd",
+    "rules_version": "daily-tdd-minimum-v1",
+    "rule_blob_sha": "9f5efa59fee115405d2c3e5892c0460fed5bbc0f",
+    "article_path": "docs/teaching/day22/pet.md",
+    "tests": "candidate compiling; no result; Red not executed",
+    "main_application": "not applied",
+    "product_integration": "not performed",
+    "functional_acceptance": false,
+    "readback_at": "2026-10-19T22:53:57.477Z"
   }
 }
