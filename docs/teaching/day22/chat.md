@@ -5,8 +5,7 @@ Day 22 r2 延續原頁：會員註冊表單 → Axum POST /signup → 加鹽 Arg
 前置：既有 SQLite migrations 可成功執行、可編譯 native SSR；若 checksum mismatch 或舊帳號大小寫／Email 衝突，停下人工處理，不清空 DB、不改舊 migration。
 ## 2. 實作內容
 ### Red：先加測試
-先在 apps/server/src/lib.rs 宣告 `mod signup;`，新增 apps/server/src/signup.rs，只放以下測試；先加入後述 dev-dependency。執行 `cargo test -p server day22_signup`，此時缺少 routes 等符號，預期編譯失敗。本輪未實測此 Red，不把環境或匯入錯誤當成行為 Red。測試涵蓋 POST、DB、大小寫衝突、密碼驗證及錯誤 Origin。
-
+先在 apps/server/src/[lib.rs](http://lib.rs) 宣告 `mod signup;`，新增 apps/server/src/[signup.rs](http://signup.rs)，只放以下測試；先加入後述 dev-dependency。執行 `cargo test -p server day22_signup`，此時缺少 routes 等符號，預期編譯失敗。本輪未實測此 Red，不把環境或匯入錯誤當成行為 Red。測試涵蓋 POST、DB、大小寫衝突、密碼驗證及錯誤 Origin。
 ```rust
 #[cfg(test)]
 mod day22_tests {
@@ -50,19 +49,15 @@ mod day22_tests {
     }
 }
 ```
-
 ### Green：唯一索引及完整處理器
 新增 migrations/20261020060000_member_identity.sql，既有 persistence::migrate 會套用。重複值造成 migration 失敗須人工裁定，不自動修資料。
-
 ```sql
 -- 若既有帳號或 Email 大小寫衝突，migration 失敗並交由人工處理；不得刪資料。
 CREATE UNIQUE INDEX uq_mbr_user_account_ci ON mbr_user(lower(user_acnt));
 CREATE UNIQUE INDEX uq_mbr_user_email_ci ON mbr_user(lower(user_email));
 ```
-
-在 apps/server/Cargo.toml 的 dependencies 加 `argon2 = "0.5"`；新增 dev-dependencies 的 `tower = { version = "0.5", features = ["util"] }`。更新並提交 Cargo.lock；不要先用 --locked 阻止新增依賴。
-將以下完整程式放在 apps/server/src/signup.rs 的測試之前：
-
+在 apps/server/Cargo.toml 的 dependencies 加 `argon2 = "0.5"` 及 `rand_core = { version = "0.6", features = ["getrandom"] }`（啟用 OsRng）；新增 dev-dependencies 的 `tower = { version = "0.5", features = ["util"] }`。更新並提交 Cargo.lock；不要先用 --locked 阻止新增依賴。
+將以下完整程式放在 apps/server/src/[signup.rs](http://signup.rs) 的測試之前：
 ```rust
 use argon2::{Argon2, PasswordHasher, password_hash::{SaltString, rand_core::OsRng}};
 use axum::{Router, Form, extract::{State, DefaultBodyLimit}, http::{HeaderMap, StatusCode}, response::{Html, Redirect}, routing::get};
@@ -119,13 +114,12 @@ async fn signup(State(pool): State<SqlitePool>, headers: HeaderMap, Form(form): 
     Ok(Redirect::to("/signin"))
 }
 ```
-
-apps/server/src/lib.rs 保留原路由；在 AppState 建立之後加入 `let signup_routes = signup::routes(db.clone());`，將原 `.with_state(state);` 改為：
+apps/server/src/[lib.rs](http://lib.rs) 保留原路由；在 AppState 建立之後加入 `let signup_routes = signup::routes(db.clone());`，將原 `.with_state(state);` 改為：
 ```rust
 .with_state(state)
 .merge(signup_routes);
 ```
-crates/ui/src/lib.rs 的 SignInPage，在回首頁連結前新增可操作入口：
+crates/ui/src/[lib.rs](http://lib.rs) 的 SignInPage，在回首頁連結前新增可操作入口：
 ```rust
 <a href="/signup" rel="external">"建立會員"</a>
 ```
@@ -138,5 +132,6 @@ GET /signup 由獨立原生 HTML 表單回應，正常瀏覽器 submit 會附 Or
 命令 `cargo test -p server day22_signup`：預期 303、mbr_user 一筆、Argon2id 可驗密碼、重複 409、無效欄位 422、跨來源 403。實際結果以本輪附註為準；候選在隔離目錄，未寫入 rust_ai_chat。
 來源 CI [Test All](https://github.com/williechen/rust_ai_chat/actions/runs/39302157333) 精確 SHA 為上列 main，2026-10-19T18:23:57Z 開始；test-server job 成功，18:24:00Z–18:26:21Z，命令 cargo test --locked -p server。CI 未包含本日新增程式，不證明 Day22 Green、瀏覽器、真實使用者 DB、重啟或 Session 通過。
 待使用者套用後：瀏覽器由登入提示頁進註冊、提交、獨立查 DB；重啟確認帳號仍在；確認舊重複資料升級會保留並中止。缺口：錯誤友善頁、驗證信、登入、Session、授權房間、產品整合與完整功能驗收。不得以本篇發布替代這些驗收。
-
-本輪實際驗證附註：隔離候選已啟動 cargo test -p server day22_signup，目前仍在編譯，尚無測試結果；Red 未執行。全文程式碼區塊已逐一讀回一致。未套用 main、未整合產品、未做瀏覽器或功能驗收。
+本輪實際驗證附註：隔離候選 cargo test -p server day22_signup：1 passed／0 failed／0 ignored；其他 target 的 0 測試未計入。首次編譯因 OsRng 缺 getrandom 功能失敗，已補明確 rand_core 依賴並重跑通過。Red 未執行。未套用 main、未整合產品、未做瀏覽器或完整功能驗收。
+版本與 SSR 補充：候選 lock 解析 Argon2 0.5.3／rand_core 0.6.4、Axum 0.8.9／SQLx 0.9.0／Tokio 1.53.3／Leptos 0.8.22。cargo check -p server --features ssr 通過，檢查含原 AppState 與註冊路由合併，不代替瀏覽器驗收。
+本輪來源證據：GitHub 規則 blob 9f5efa59fee115405d2c3e5892c0460fed5bbc0f（教學基底 b3db92fcc1ff488b758eee5702f320d623d603b8）；隔離教學候選 commit 43d445ef367460ce1bb4e01f9b0c90d66f0db77a，未推送 rust_ai_chat。完整 patch SHA-256：8aedb7c8d4e01ce568201a779b05c7ff873ab8ace0c92b01ab4f328dcf43c50a，已對精確 main 基底 git apply --check 通過。copilot_use 基底 CI Verify copilot_use / run 39332356560 成功，compose-e2e skipped；僅屬產品既有程式證據，不代替本日教學測試。讀回與完整命令紀錄存教學分支 docs/teaching/day22/。

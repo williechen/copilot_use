@@ -1,0 +1,31 @@
+    Updating crates.io index
+     Locking 2 packages to highest Rust 1.99.1 compatible versions
+      Adding rpassword v7.5.4
+      Adding rtoolbox v0.0.6
+ Downloading crates ...
+  Downloaded rtoolbox v0.0.6
+   Compiling server_fn_macro v0.8.12
+   Compiling reactive_graph v0.2.16
+   Compiling any_spawner v0.3.0
+   Compiling server_fn v0.8.13
+   Compiling sqlx-postgres v0.9.0
+   Compiling server_fn_macro_default v0.8.6
+   Compiling leptos_macro v0.8.19
+   Compiling leptos v0.8.22
+   Compiling reactive_stores v0.4.4
+   Compiling tachys v0.2.19
+   Compiling sqlx-macros-core v0.9.0
+   Compiling sqlx-macros v0.9.0
+   Compiling rtoolbox v0.0.6
+   Compiling axum v0.8.9
+   Compiling sqlx v0.9.0
+   Compiling rpassword v7.5.4
+   Compiling leptos_server v0.8.8
+   Compiling leptos_dom v0.8.8
+   Compiling stats-server v0.2.21 (/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-2/work/candidate/apps/stats_server)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 21.21s
+  Executable unittests src/lib.rs (work/candidate/target/debug/deps/stats_server-d379300b2d91d9f8)
+  Executable unittests src/bin/bootstrap_admin.rs (work/candidate/target/debug/deps/bootstrap_admin-2acd8e28360cb804)
+  Executable unittests src/main.rs (work/candidate/target/debug/deps/stats_server-62d91329c723787f)
+  Executable tests/idempotency_contract.rs (work/candidate/target/debug/deps/idempotency_contract-747555c69601d062)
+  Executable tests/postgres_event_store.rs (work/candidate/target/debug/deps/postgres_event_store-1f00478ca882aee5)

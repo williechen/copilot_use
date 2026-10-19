@@ -1,6 +1,6 @@
 {
   "scope": "Latest published teaching index; Day16 snapshot preserved in archive",
-  "revision": "day22-partial-chat-pet-r2",
+  "revision": "day22-r2-all-readback-verified",
   "synced_date": "2026-10-20",
   "source_sha": "5654591f3002fc619c883af9b5197e2126cc6494",
   "articles": [
@@ -10,20 +10,29 @@
       "revision": "r2",
       "notion_page_id": "3fee51d45093814385cdcdc9e693789a",
       "notion_url": "https://app.notion.com/p/3fee51d45093814385cdcdc9e693789a?pvs=204",
-      "notion_page_last_edited_at": "2026-10-19T22:51:56.816Z",
+      "notion_page_last_edited_at": "2026-10-19T22:57:49.241Z",
       "notion_readback_verified": true,
-      "code_blocks_exact": true,
       "four_sections": true,
+      "code_blocks_exact": true,
+      "index_verified": true,
       "source_sha": "da5155265bf66ef9d495fd38913ad6cb93e1bac8",
-      "teaching_branch_before_sha": "b3db92fcc1ff488b758eee5702f320d623d603b8",
+      "candidate_commit": "43d445ef367460ce1bb4e01f9b0c90d66f0db77a",
       "rules_version": "daily-tdd-minimum-v1",
       "rule_blob_sha": "9f5efa59fee115405d2c3e5892c0460fed5bbc0f",
       "article_path": "docs/teaching/day22/chat.md",
-      "tests": "candidate compiling; no result; Red not executed",
+      "evidence_path": "docs/teaching/day22/completion.json",
+      "tests": {
+        "command": "cargo test -p server day22_signup",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0,
+        "scope": "Axum in-process POST/SQLite/Argon2/duplicate/Origin",
+        "ssr": "cargo check -p server --features ssr passed"
+      },
       "main_application": "not applied",
       "product_integration": "not performed",
       "functional_acceptance": false,
-      "readback_at": "2026-10-19T22:52:08.619Z"
+      "readback_at": "2026-10-19T22:58:26.275Z"
     },
     {
       "project": "pet",
@@ -31,56 +40,72 @@
       "revision": "r2",
       "notion_page_id": "3fee51d45093811c83eed982ef9ab69e",
       "notion_url": "https://app.notion.com/p/3fee51d45093811c83eed982ef9ab69e?pvs=204",
-      "notion_page_last_edited_at": "2026-10-19T22:53:45.611Z",
+      "notion_page_last_edited_at": "2026-10-19T22:57:50.455Z",
       "notion_readback_verified": true,
-      "code_blocks_exact": true,
       "four_sections": true,
+      "code_blocks_exact": true,
+      "index_verified": true,
       "source_sha": "da5155265bf66ef9d495fd38913ad6cb93e1bac8",
-      "teaching_branch_before_sha": "fba1845f8488c1a347259f0ad71e8bdac47069cd",
+      "candidate_commit": "43d445ef367460ce1bb4e01f9b0c90d66f0db77a",
       "rules_version": "daily-tdd-minimum-v1",
       "rule_blob_sha": "9f5efa59fee115405d2c3e5892c0460fed5bbc0f",
       "article_path": "docs/teaching/day22/pet.md",
-      "tests": "candidate compiling; no result; Red not executed",
+      "evidence_path": "docs/teaching/day22/completion.json",
+      "tests": {
+        "command": "cargo test -p desktop-pet day22_create_pet",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0,
+        "scope": "SQLite SQLx fixture; trimmed name/species/owner/blank/FK",
+        "wasm": "cargo check -p desktop-pet-frontend --target wasm32-unknown-unknown passed"
+      },
       "main_application": "not applied",
       "product_integration": "not performed",
       "functional_acceptance": false,
-      "readback_at": "2026-10-19T22:53:57.477Z"
+      "readback_at": "2026-10-19T22:58:26.281Z"
     },
     {
       "project": "analytics",
-      "day": 21,
-      "revision": "r1",
-      "notion_page_id": "3fee51d450938178bdb6c37fede38fd4",
-      "notion_url": "https://app.notion.com/p/3fee51d450938178bdb6c37fede38fd4",
-      "notion_parent_id": "3f3e51d45093817eafaee0cfc9ea4cc8",
-      "four_sections": true,
+      "day": 22,
+      "revision": "r2",
+      "notion_page_id": "3fee51d450938103b0eafc50f32822c1",
+      "notion_url": "https://app.notion.com/p/3fee51d450938103b0eafc50f32822c1?pvs=204",
+      "notion_page_last_edited_at": "2026-10-19T22:57:51.950Z",
       "notion_readback_verified": true,
-      "notion_page_last_edited_at": "2026-10-19T10:36:43.181Z",
-      "source_sha": "5654591f3002fc619c883af9b5197e2126cc6494",
+      "four_sections": true,
+      "code_blocks_exact": true,
+      "index_verified": true,
+      "source_sha": "da5155265bf66ef9d495fd38913ad6cb93e1bac8",
+      "candidate_commit": "43d445ef367460ce1bb4e01f9b0c90d66f0db77a",
       "rules_version": "daily-tdd-minimum-v1",
-      "article_path": "docs/teaching/day21/analytics.md",
-      "github_mirror_blob_sha": "808b2759abda9a4cc1e16588a8f4d7425a21259c",
-      "main_application": "not applied; source read-only",
-      "product_integration": "not completed",
-      "functional_acceptance": "not completed",
+      "rule_blob_sha": "9f5efa59fee115405d2c3e5892c0460fed5bbc0f",
+      "article_path": "docs/teaching/day22/analytics.md",
+      "evidence_path": "docs/teaching/day22/completion.json",
       "tests": {
-        "day21": "proposed Red/Green only; not executed locally or in matching-source CI",
-        "manual_validation": "not executed"
-      }
+        "command": "DATABASE_URL=<isolated-loopback-fixture> cargo test -p stats-server --features postgres-integration day22_bootstrap",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0,
+        "scope": "PostgreSQL 18.6 isolated cluster; concurrent one-time init/Argon2/must-change marker/hash preservation"
+      },
+      "main_application": "not applied",
+      "product_integration": "not performed",
+      "functional_acceptance": false,
+      "readback_at": "2026-10-19T22:58:26.281Z"
     }
   ],
   "day15_frozen": true,
   "next_day": {
     "chat": 23,
     "pet": 23,
-    "analytics": 22
+    "analytics": 23
   },
   "day_advanced": true,
   "reference_modified": false,
   "current_reference_observation": {
-    "sha": "5654591f3002fc619c883af9b5197e2126cc6494",
+    "sha": "da5155265bf66ef9d495fd38913ad6cb93e1bac8",
     "full_acceptance": false,
-    "scope": "Day21 lesson proposals only; no code applied or tests executed"
+    "scope": "Day22 isolated candidate tests; reference remains read-only"
   },
   "execution_policy": {
     "canonical": "docs/COMMON_LEARNING_RULES.md",
@@ -161,5 +186,6 @@
       "notion_page_id": "3fee51d4509381618739f23dcd766996",
       "article_path": "docs/teaching/day20/analytics.md"
     }
-  ]
+  ],
+  "day22_completion": "docs/teaching/day22/completion.json"
 }

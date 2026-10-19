@@ -1,13 +1,12 @@
 ## 1. 學習大綱
 Day22 r2 重用原草稿：控制台「建立寵物」→ 現有 Leptos bridge → JavaScript invoke → Tauri create_pet → SQLite transaction → 提交後 SELECT → 控制台回應名稱及 ID。主體 Red／Green 估 15 分鐘，Refactor 3 分鐘、來源／版本／驗證閱讀另估 7 分鐘。
 來源 rust_ai_chat/main `da5155265bf66ef9d495fd38913ad6cb93e1bac8`，copilot_use 教學基底 `b3db92fcc1ff488b758eee5702f320d623d603b8`，規則 daily-tdd-minimum-v1；共同頁最後修改 2026-10-19T08:19:19.122Z。2026-10-20 Asia/Taipei 重讀共同規則、三專案入口、Day21、目標與狀態。入口 next_day=19/17 為過去觀察，learning-state 的 22 為本次條件更新基準。
-目前 main.rs 已開 PET_DATABASE_URL 並 migrate，但沒有把 pool 傳給 Tauri；表單只驗證名稱。沿用這份 pool，避免另外開 app_data_dir DB 造成寫入與讀取不同檔案。DB 須由使用者事先建立；不自動清空或重建。既有 pet_profile 的 species 預設本日寫入 tortoise，owner 使用明確本機 ID。sexy／image_path 可空，尚未接外觀渲染。
+目前 [main.rs](http://main.rs) 已開 PET_DATABASE_URL 並 migrate，但沒有把 pool 傳給 Tauri；表單只驗證名稱。沿用這份 pool，避免另外開 app_data_dir DB 造成寫入與讀取不同檔案。DB 須由使用者事先建立；不自動清空或重建。既有 pet_profile 的 species 預設本日寫入 tortoise，owner 使用明確本機 ID。sexy／image_path 可空，尚未接外觀渲染。
 本日只完成建立／資料儲存與回應切片；生活窗仍使用 PetMachine::default()，逐寵物身分、初始外觀畫面、重啟載入及多寵物 UI 尚未接通。copilot_use 使用 crates/pet_runtime 的 PetStore／registry 與不同 Tauri state，不能把本教學直接當產品實作或已驗收。
 前置：既有 migrations 可執行。原 pet migration 被改過 sexy／image_path；舊 DB 若 checksum mismatch，停止並保留 DB 交人工處理，不改 migration、不刪庫。
 ## 2. 實作內容
 ### Red：持久化與拒絕空白
-先在 apps/desktop_pet/src/lib.rs 加 `mod pet_store;`，新增 apps/desktop_pet/src/pet_store.rs，只放以下測試。執行 `cargo test -p desktop-pet day22_create_pet`，PetStore 尚不存在，預期編譯失敗。本輪未實測此 Red；匯入或原生依賴失敗不算測到業務行為。
-
+先在 apps/desktop_pet/src/[lib.rs](http://lib.rs) 加 `mod pet_store;`，新增 apps/desktop_pet/src/pet_[store.rs](http://store.rs)，只放以下測試。執行 `cargo test -p desktop-pet day22_create_pet`，PetStore 尚不存在，預期編譯失敗。本輪未實測此 Red；匯入或原生依賴失敗不算測到業務行為。
 ```rust
 #[cfg(test)]
 mod day22_tests {
@@ -28,10 +27,8 @@ mod day22_tests {
     }
 }
 ```
-
 ### Green：完整 Store 與原生命令
-在 apps/desktop_pet/src/pet_store.rs 的測試前加入完整 Store。沿用父 module 已有 normalize_new_pet_name。只在 transaction 內確保本機 owner、建立具 UUID 的 profile，失敗回滾；提交後獨立讀回。若提交成功但讀回失敗，訊息要求先核對，避免盲目重送建立另一隻。
-
+在 apps/desktop_pet/src/pet_[store.rs](http://store.rs) 的測試前加入完整 Store。沿用父 module 已有 normalize_new_pet_name。只在 transaction 內確保本機 owner、建立具 UUID 的 profile，失敗回滾；提交後獨立讀回。若提交成功但讀回失敗，訊息要求先核對，避免盲目重送建立另一隻。
 ```rust
 #[derive(Clone)]
 pub struct PetStore { pub pool: sqlx::SqlitePool }
@@ -52,9 +49,7 @@ impl PetStore {
     }
 }
 ```
-
-apps/desktop_pet/src/main.rs 全文改為：
-
+apps/desktop_pet/src/[main.rs](http://main.rs) 全文改為：
 ```rust
 use std::str::FromStr;
 #[tokio::main]
@@ -68,9 +63,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-
-apps/desktop_pet/src/lib.rs 依下列 diff 加入 module、pool state 與命令，保留原 menu／事件／漫遊等程式：
-
+apps/desktop_pet/src/[lib.rs](http://lib.rs) 依下列 diff 加入 module、pool state 與命令，保留原 menu／事件／漫遊等程式：
 ```diff
 --- a/apps/desktop_pet/src/lib.rs
 +++ b/apps/desktop_pet/src/lib.rs
@@ -108,10 +101,8 @@ apps/desktop_pet/src/lib.rs 依下列 diff 加入 module、pool state 與命令�
          .run(tauri::generate_context!())
          .expect("failed to run Rust AI Desktop Pet");
 ```
-
 ### Green：真實控制台接線
-下列兩份 diff 使既有 frontend/src/bridge.rs 的 validate_new_pet_name → window.validateNewPetName 呼叫真正 create_pet。這個舊 bridge 名稱暫留以縮小改動；按鈕改稱建立寵物，成功訊息只在 DB 提交且讀回後顯示。原驗證 IPC 保留供 Day21 與既有測試使用。
-
+下列兩份 diff 使既有 frontend/src/[bridge.rs](http://bridge.rs) 的 validate_new_pet_name → window.validateNewPetName 呼叫真正 create_pet。這個舊 bridge 名稱暫留以縮小改動；按鈕改稱建立寵物，成功訊息只在 DB 提交且讀回後顯示。原驗證 IPC 保留供 Day21 與既有測試使用。
 ```diff
 --- a/apps/desktop_pet/frontend/index.html
 +++ b/apps/desktop_pet/frontend/index.html
@@ -125,7 +116,6 @@ apps/desktop_pet/src/lib.rs 依下列 diff 加入 module、pool state 與命令�
  
    </script>
 ```
-
 ```diff
 --- a/apps/desktop_pet/frontend/src/main.rs
 +++ b/apps/desktop_pet/frontend/src/main.rs
@@ -145,7 +135,6 @@ apps/desktop_pet/src/lib.rs 依下列 diff 加入 module、pool state 與命令�
              </section>
  
 ```
-
 不改 public/pet.js，那是生活窗狀態流程，並非本日控制台建立表單的真實呼叫者。不假設新建生活視窗標籤，也不把 profile 寫入當成生活窗已綁定。
 ### Refactor 與必要補充
 main 已驗 migrations，Store 不再重開另一份 DB；資料／OS Adapter 保持在 native，frontend 只送名稱與顯示結果。後續可統一 bridge 名稱，但需同步 Rust extern、wrapper、JS、呼叫者四處。Day21 的名稱有效不是建立成功；本頁更正原草稿預計改用 app_data_dir 的做法，與現有 PET_DATABASE_URL 保持一致。未改 Day21／封存 Day，未新增補教佇列。
@@ -155,5 +144,6 @@ main 已驗 migrations，Store 不再重開另一份 DB；資料／OS Adapter �
 命令 `cargo test -p desktop-pet day22_create_pet`：預期獨立 SQLite fixture 中名稱正規化、species=tortoise、owner 有效、空白不插入、foreign_key_check=0。本輪候選執行結果另附，未套用 rust_ai_chat，Red 未執行。
 來源 [Test All](https://github.com/williechen/rust_ai_chat/actions/runs/39302157333) 在精確 main SHA 的 test-desktop-pet 成功，2026-10-19T18:24:00Z–18:26:32Z，命令 cargo test --locked -p desktop-pet。只覆蓋來源原有程式，沒有 Day22 Store／IPC，不代表資料庫／GUI／端到端驗收。
 套用後應以專用 PET_DATABASE_URL 啟動控制台，按建立、看到名稱與 ID，獨立查 pet_profile／pet_owner；無效名稱不新增，DB 失敗不顯示成功。關閉再啟動只能先驗 DB row 還在，不能聲稱 UI 已自動載入。多次點擊會建立多隻、尚無冪等 key 與按鈕 busy guard，先單次提交；多寵物與完整 UI 流程留後續。產品整合、生活窗、外觀／重啟載入與完整驗收未完成。
-
-本輪實際結果：隔離候選 cargo test -p desktop-pet day22_create_pet 仍在原生編譯，尚無測試結果；本頁完整程式碼區塊讀回一致。未執行 GUI／WASM／重啟載入驗收。
+本輪實際結果：隔離候選 cargo test -p desktop-pet day22_create_pet：1 passed／0 failed／0 ignored；其他 target 的 0 測試未計入。原生 SQLite fixture 已實測，GUI／重啟載入未驗收；WASM check 結果另附。Red 未執行。
+WASM 補充：cargo check -p desktop-pet-frontend --target wasm32-unknown-unknown 通過（35.84 秒），只證明控制台編譯，不代替 Tauri IPC 或 GUI 驗收。
+本輪來源證據：GitHub 規則 blob 9f5efa59fee115405d2c3e5892c0460fed5bbc0f（教學基底 b3db92fcc1ff488b758eee5702f320d623d603b8）；隔離教學候選 commit 43d445ef367460ce1bb4e01f9b0c90d66f0db77a，未推送 rust_ai_chat。完整 patch SHA-256：8aedb7c8d4e01ce568201a779b05c7ff873ab8ace0c92b01ab4f328dcf43c50a，已對精確 main 基底 git apply --check 通過。copilot_use 基底 CI Verify copilot_use / run 39332356560 成功，compose-e2e skipped；僅屬產品既有程式證據，不代替本日教學測試。讀回與完整命令紀錄存教學分支 docs/teaching/day22/。
