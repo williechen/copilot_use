@@ -6,7 +6,7 @@
   "fixed_tag_sha": "9bcae7c5d139f75ed08b4daffece602a71fdab34",
   "next_day": {
     "chat": 22,
-    "pet": 21,
+    "pet": 22,
     "analytics": 21
   },
   "last_full_comparison": "2026-10-16T22:47:14.399027+08:00",
@@ -1147,5 +1147,15 @@
     "main_modified": false,
     "tests_run": false,
     "status": "Notion article verified; user login still unavailable"
+  },
+  "day21_pet_delivery": {
+    "day": 21,
+    "notion_page_id": "3fee51d450938163b451e803639e657c",
+    "notion_page_last_edited_at": "2026-10-19T10:34:51.532Z",
+    "source_sha": "5654591f3002fc619c883af9b5197e2126cc6494",
+    "notion_readback_verified": true,
+    "main_modified": false,
+    "new_tests_run": false,
+    "scope": "pet name input and real JS/Tauri IPC validation, no create/persist/restart"
   }
 }
