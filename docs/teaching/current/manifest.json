@@ -1,62 +1,101 @@
 {
   "scope": "Latest published teaching index; Day16 snapshot preserved in archive",
-  "revision": "day20-all-published",
+  "revision": "day20-r2-c92831e",
   "synced_date": "2026-10-19",
   "source_sha": "f692c2ebe7b414fe49858c1ab1c4a33ce7c3dfee",
   "articles": [
     {
       "project": "chat",
       "day": 20,
-      "revision": "r1",
+      "revision": "r2",
       "notion_page_id": "3fee51d4509381d1a1e6eb5e5a1c996e",
       "notion_url": "https://app.notion.com/p/3fee51d4509381d1a1e6eb5e5a1c996e",
       "notion_parent_id": "3f3e51d45093807da638c336e857543a",
       "four_sections": true,
       "notion_readback_verified": true,
-      "source_sha": "0cd9f7995c196a7359864a9395c0fe2372d09222",
+      "source_sha": "c92831e105fb0000860f995ea288e29631b5fed8",
       "rules_version": "daily-tdd-minimum-v1",
       "tests": {
-        "day20": "not executed",
-        "expected": "2 TDD unit tests"
+        "day20": "Day20 tests present on main; matched Test All CI job success; not rerun locally",
+        "expected": "2 TDD unit tests",
+        "source_ci_sha": "c92831e105fb0000860f995ea288e29631b5fed8",
+        "source_ci_run": 39202728570,
+        "source_ci_workflow": "Test All",
+        "source_ci_job": "test-ui",
+        "source_ci_job_result": "success",
+        "manual_validation": "not executed"
       },
-      "application_status": "proposed lesson; not applied to rust_ai_chat/main",
-      "functional_acceptance": "not executed"
+      "application_status": "Day20 code merged into rust_ai_chat/main; deployment not confirmed",
+      "functional_acceptance": "not completed; manual E2E and product integration pending",
+      "latest_main_sha": "c92831e105fb0000860f995ea288e29631b5fed8",
+      "original_lesson_base_sha": "0cd9f7995c196a7359864a9395c0fe2372d09222",
+      "notion_page_last_edited_at": "2026-10-19T07:53:21.381Z",
+      "revision_readback_verified": true,
+      "article_path": "docs/teaching/day20/chat.md",
+      "github_mirror_blob_sha": "99f2b0236586b6da64724a327ff1ec00de3f226a",
+      "github_mirror_commit": "64d2cc447de205c54e471256aa884862f1252beb"
     },
     {
       "project": "pet",
       "day": 20,
-      "revision": "r1",
+      "revision": "r2",
       "notion_page_id": "3fee51d45093816897feec3468239e43",
       "notion_url": "https://app.notion.com/p/3fee51d45093816897feec3468239e43",
       "notion_parent_id": "3f3e51d450938067923ae5a424d30950",
       "four_sections": true,
       "notion_readback_verified": true,
-      "source_sha": "0cd9f7995c196a7359864a9395c0fe2372d09222",
+      "source_sha": "c92831e105fb0000860f995ea288e29631b5fed8",
       "rules_version": "daily-tdd-minimum-v1",
       "tests": {
-        "day20": "not executed",
-        "expected": "3 TDD unit tests"
+        "day20": "Day20 tests present on main; matched Test All CI job success; not rerun locally",
+        "expected": "3 TDD unit tests",
+        "source_ci_sha": "c92831e105fb0000860f995ea288e29631b5fed8",
+        "source_ci_run": 39202728570,
+        "source_ci_workflow": "Test All",
+        "source_ci_job": "test-desktop-pet",
+        "source_ci_job_result": "success",
+        "manual_validation": "not executed"
       },
-      "application_status": "proposed lesson; not applied to rust_ai_chat/main",
-      "functional_acceptance": "not executed"
+      "application_status": "Day20 code merged into rust_ai_chat/main; deployment not confirmed",
+      "functional_acceptance": "not completed; manual E2E and product integration pending",
+      "latest_main_sha": "c92831e105fb0000860f995ea288e29631b5fed8",
+      "original_lesson_base_sha": "0cd9f7995c196a7359864a9395c0fe2372d09222",
+      "notion_page_last_edited_at": "2026-10-19T07:54:02.048Z",
+      "revision_readback_verified": true,
+      "article_path": "docs/teaching/day20/pet.md",
+      "github_mirror_blob_sha": "2c4c94ecba8c09a6b811cf61f7c59764006c71c3",
+      "github_mirror_commit": "41985ba7dfd77d7b9ece04713e7115cb151b8a29"
     },
     {
       "project": "analytics",
       "day": 20,
-      "revision": "r1",
+      "revision": "r2",
       "notion_page_id": "3fee51d4509381618739f23dcd766996",
       "notion_url": "https://app.notion.com/p/3fee51d4509381618739f23dcd766996",
       "notion_parent_id": "3f3e51d45093817eafaee0cfc9ea4cc8",
       "four_sections": true,
       "notion_readback_verified": true,
-      "source_sha": "0cd9f7995c196a7359864a9395c0fe2372d09222",
+      "source_sha": "c92831e105fb0000860f995ea288e29631b5fed8",
       "rules_version": "daily-tdd-minimum-v1",
       "tests": {
-        "day20": "not executed",
-        "expected": "1 HTTP TDD test"
+        "day20": "Day20 tests present on main; matched Test All CI job success; not rerun locally",
+        "expected": "1 HTTP TDD test",
+        "source_ci_sha": "c92831e105fb0000860f995ea288e29631b5fed8",
+        "source_ci_run": 39202728570,
+        "source_ci_workflow": "Test All",
+        "source_ci_job": "test-stats-server",
+        "source_ci_job_result": "success",
+        "manual_validation": "not executed"
       },
-      "application_status": "proposed lesson; not applied to rust_ai_chat/main",
-      "functional_acceptance": "not executed"
+      "application_status": "Day20 code merged into rust_ai_chat/main; deployment not confirmed",
+      "functional_acceptance": "not completed; manual E2E and product integration pending",
+      "latest_main_sha": "c92831e105fb0000860f995ea288e29631b5fed8",
+      "original_lesson_base_sha": "0cd9f7995c196a7359864a9395c0fe2372d09222",
+      "notion_page_last_edited_at": "2026-10-19T07:54:42.990Z",
+      "revision_readback_verified": true,
+      "article_path": "docs/teaching/day20/analytics.md",
+      "github_mirror_blob_sha": "338fe47c5875e31d8def8b8830e43d3038c82bd1",
+      "github_mirror_commit": "ade4255e23ca6eff5c59f936326510b4b6092018"
     }
   ],
   "day15_frozen": true,
@@ -68,9 +107,12 @@
   "day_advanced": true,
   "reference_modified": false,
   "current_reference_observation": {
-    "sha": "f692c2ebe7b414fe49858c1ab1c4a33ce7c3dfee",
+    "sha": "c92831e105fb0000860f995ea288e29631b5fed8",
     "evidence": "docs/teaching/evidence/2026-10-19-day19-review/驗證結果.md",
-    "full_acceptance": false
+    "full_acceptance": false,
+    "day20_merged": true,
+    "ci_test_all_run": 39202728570,
+    "ci_result": "success"
   },
   "execution_policy": {
     "canonical": "docs/COMMON_LEARNING_RULES.md",
@@ -110,5 +152,13 @@
     "no_day_increment": true,
     "coverage": "Notion/Markdown mirrored r2; three Day19 snippets and module tests present on main; Test All success; product acceptance not passed",
     "workspace_tests_removed": true
+  },
+  "last_article_review": {
+    "revision": "r2",
+    "source_sha": "c92831e105fb0000860f995ea288e29631b5fed8",
+    "teaching_branch_head_before_update": "ade4255e23ca6eff5c59f936326510b4b6092018",
+    "all_notion_pages_readback": true,
+    "all_mirrors_readback": true,
+    "increment_next_day": false
   }
 }
