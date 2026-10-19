@@ -5,7 +5,7 @@
   "fixed_tag": "v0.2.1",
   "fixed_tag_sha": "9bcae7c5d139f75ed08b4daffece602a71fdab34",
   "next_day": {
-    "chat": 21,
+    "chat": 22,
     "pet": 21,
     "analytics": 21
   },
@@ -1138,5 +1138,14 @@
     "future_work": "docs/FUTURE_WORK.md",
     "product_gate": "docs/P9_TARGET.md",
     "source_scope": "selection intent; do not increment next_day or rewrite historical evidence"
+  },
+  "day21_chat_delivery": {
+    "day": 21,
+    "notion_page_id": "3fee51d450938168aaa0c11d9ad7d827",
+    "notion_page_last_edited_at": "2026-10-19T10:32:45.652Z",
+    "source_sha": "5654591f3002fc619c883af9b5197e2126cc6494",
+    "main_modified": false,
+    "tests_run": false,
+    "status": "Notion article verified; user login still unavailable"
   }
 }
