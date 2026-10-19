@@ -14,7 +14,7 @@
 
 這是**既有 P0～P12 功能項目的優先序與驗收 Gate**，不是新建重複任務或宣稱功能已完成。2026-10-19 核對參考 `rust_ai_chat/main`：`5654591f3002fc619c883af9b5197e2126cc6494`。今日相對 Day20 僅更動 Pet migration，Chat/Pet/Analytics 的上述入口實作尚無新的功能完成證據。每日重新讀兩庫最新 SHA，若實際實作已進步，依真實資料與測試調整，不固定下一個 Day 的小題目。產品 `copilot_use` 的舊分支試作不等於教學分支或使用者環境已合併／驗收。
 
-- [ ] **Chat 第一優先：註冊／登入→Session→受保護房間清單→加入／建立聊天室。** 現行參考前端 `crates/ui/src/lib.rs::App` 有 `/signin` 連結，卻只有 `/` 與 `/room/:room_id` 的 Leptos 路由；先核對是否已有可重用後端及 SQLite 契約，再從最早斷點接通 UI/HTTP/DB 身分鏈。未登入不可繞過授權讀取私人房間。已有 `codex/p0-table-trial` 的註冊/Email 試作證據，須先確認合併狀態與契約，不重新打造第二套。歷史訊息、WS 重連、進階畫面排後；基本登入未可用時，不以後者作每日主切片。
+- [ ] **Chat 第一優先：註冊／登入→Session→可公開閱覽的房間清單／進房授權→加入／建立聊天室。** 現行參考前端 `crates/ui/src/lib.rs::App` 有 `/signin` 連結，卻只有 `/` 與 `/room/:room_id` 的 Leptos 路由；先核對是否已有可重用後端及 SQLite 契約，再從最早斷點接通 UI/HTTP/DB 身分鏈。未登入不可繞過授權讀取私人房間。已有 `codex/p0-table-trial` 的註冊/Email 試作證據，須先確認合併狀態與契約，不重新打造第二套。歷史訊息、WS 重連、進階畫面排後；基本登入未可用時，不以後者作每日主切片。
 - [ ] **Pet 第一優先：建立第一隻寵物→名稱／初始外觀→Tauri IPC→SQLite 保存→生活視窗顯示→重啟載入。** 現行參考 `apps/desktop_pet/src/lib.rs` 在 startup 管理 `PetMachine::default()`，缺少已核實的使用者建立寵物入口；SQLite 存在不等於已接通建立流程。完成基本建立/載入後，再逐步做出籠/回籠、互動、拖曳/漫遊、手動找回、多寵物；Day20 漫遊幾何測試不算建立寵物完成。
 - [ ] **Analytics 第一優先：管理員初始化→可登入的持久化帳號／加鹽密碼雜湊→首次強制改密碼→授權 Session／Dashboard。** 現行參考 `apps/stats_server/src/admin.rs` 仍使用固定格式 64 hex 登入碼；Day20 `Retry-After` 不代表帳密登入、角色權限或持久化帳號已完成。安全初始化與首次強制改密碼需做真 HTTP、DB 與拒絕未授權情境驗證，不以預設密碼作正式長期憑證。
 
