@@ -13,6 +13,16 @@
 
 Chat 入口／註冊／帳號與 Session、Pet 多寵物出入籠／習性／右鍵坐下及多螢幕例外、Analytics 帳號／角色／來源授權／稽核，依 [現行共同規則](COMMON_LEARNING_RULES.md)「已逐項確認的現行需求（2026-10-17）」與 [詳細驗收條件](UI_ALIGNMENT_REQUIREMENTS.md)。這些已確認需求須逐項實作及驗收，本次僅同步文件，未新增功能完成聲明。
 
+## 實作依賴 Gate：先能建立身分／實體，才擴充能力（2026-10-19）
+
+這是對下列 **P9 必備能力** 的施作順序補充，**沒有刪除、延後或降低最終 P9 產品功能條件**，也不把已發佈教學視為成品驗收。以 `FUTURE_WORK.md` 當前功能清單追蹤，並以兩庫最新入口、資料庫、UI、實際測試重新判斷。
+
+1. **Chat：** 首先確保使用者能完成註冊或正確登入 → 持久化帳號／Session → 受保護的房間列表 → 加入／建立房間，才接訊息歷史、多角色聊天、AI、RAG/Agent 等上層能力；未經授權的房間或訊息不得開放。若其他分支已有 P0 註冊試作，先查重用與合併狀態。
+2. **Desktop Pet：** 首先能以 UI 建立第一隻有身分、名稱及初始外觀的寵物 → Tauri IPC → SQLite 持久化 → 生活視窗顯示及重啟載入，然後才發展出籠/回籠、基本互動、漫遊、手動找回、多寵物、AI/記憶。預設建立的 `PetMachine` 不是使用者建立寵物的驗收證據。
+3. **Analytics：** 首先是可安全初始化、持久化、登入與首次強制改密碼的管理員身分以及 Session/後台權限，再加其他角色、帳號級等待、來源授權、事件/成本統計與 gRPC/SSE。固定登入碼與 429 header 不是正式登入驗收證據。
+
+產品端要有 **UI→API/IPC→Domain/Application→DB→UI 回饋及重啟讀回** 的最低限度可操作驗收；教學端則可每天完成該功能的一個 Red→最小 Green 切片，但須明列整條功能尚未接通的缺口。不得讓既有的低階測試、CI success 或文章 Day 遞增掩蓋基本功能未完成。正式部署仍非固定交付目標，保留本地／CI／原生操作驗收。
+
 ## P9 必備能力
 
 - Chat：Axum/Leptos SSR、Hydration、Nested/Protected Router、Session/ACL、多房間與使用者、history、WS presence/typing/private/reconnect/send queue、交易 Outbox、多 Persona/AI-to-AI、Streaming/Structured Output/tools、RAG/SQLite vectors/MCP/Agent、OTel。
