@@ -7,7 +7,7 @@
   "next_day": {
     "chat": 21,
     "pet": 21,
-    "analytics": 20
+    "analytics": 21
   },
   "last_full_comparison": "2026-10-16T22:47:14.399027+08:00",
   "next_full_comparison": "2026-10-24T00:00:00+08:00",
@@ -1057,6 +1057,14 @@
   },
   "day20_pet_delivery": {
     "notion_page_id": "3fee51d45093816897feec3468239e43",
+    "notion_readback": true,
+    "source_sha": "0cd9f7995c196a7359864a9395c0fe2372d09222",
+    "day": 20,
+    "test_executed": false,
+    "product_acceptance": false
+  },
+  "day20_analytics_delivery": {
+    "notion_page_id": "3fee51d4509381618739f23dcd766996",
     "notion_readback": true,
     "source_sha": "0cd9f7995c196a7359864a9395c0fe2372d09222",
     "day": 20,
