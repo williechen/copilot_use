@@ -7,7 +7,7 @@
   "next_day": {
     "chat": 22,
     "pet": 22,
-    "analytics": 21
+    "analytics": 22
   },
   "last_full_comparison": "2026-10-16T22:47:14.399027+08:00",
   "next_full_comparison": "2026-10-24T00:00:00+08:00",
@@ -1157,5 +1157,15 @@
     "main_modified": false,
     "new_tests_run": false,
     "scope": "pet name input and real JS/Tauri IPC validation, no create/persist/restart"
+  },
+  "day21_analytics_delivery": {
+    "day": 21,
+    "notion_page_id": "3fee51d450938178bdb6c37fede38fd4",
+    "notion_page_last_edited_at": "2026-10-19T10:36:43.181Z",
+    "source_sha": "5654591f3002fc619c883af9b5197e2126cc6494",
+    "notion_readback_verified": true,
+    "main_modified": false,
+    "new_tests_run": false,
+    "scope": "username form field and legacy key handler guard; persistent password login incomplete"
   }
 }
