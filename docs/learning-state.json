@@ -5,7 +5,7 @@
   "fixed_tag": "v0.2.1",
   "fixed_tag_sha": "9bcae7c5d139f75ed08b4daffece602a71fdab34",
   "next_day": {
-    "chat": 20,
+    "chat": 21,
     "pet": 20,
     "analytics": 20
   },
@@ -1045,5 +1045,14 @@
     "replacement_bundle": "docs/teaching/evidence/2026-10-19-day19-review",
     "reference_main_modified": false,
     "full_functional_acceptance": false
+  },
+  "day20_chat_delivery": {
+    "notion_page_id": "3fee51d4509381d1a1e6eb5e5a1c996e",
+    "notion_readback": true,
+    "source_sha": "0cd9f7995c196a7359864a9395c0fe2372d09222",
+    "teaching_branch_before_sha": "092066d59837a790cf18eb5bbfe1c2abd09321d1",
+    "day": 20,
+    "test_executed": false,
+    "product_acceptance": false
   }
 }
