@@ -1,6 +1,6 @@
 ## 1. 學習大綱
 **P0 Pet Day 21：讓控制台開始真正的「新增第一隻寵物」操作。** 這一天先接通使用者輸入寵物名稱 → 前端 Tauri IPC → 原生端真實驗證 → 回應驗證後名稱，為後續持久化建立唯一寵物身分的前置切片；**尚未建立資料庫紀錄、沒有新生活窗，不可宣稱已完成建立寵物**。
-基底來源 `rust_ai_chat/main=5654591f3002fc619c883af9b5197e2126cc6494`（唯讀）； `apps/desktop_pet/src/lib.rs::application` 目前 `.manage(Mutex::new(PetMachine::default()))`，`generate_handler!` 只有狀態／動作／聊天／掃描／開控制窗等指令，沒有新增寵物命令；`apps/desktop_pet/frontend/src/main.rs::App` 在非 pet 視窗顯示控制台，沒有建立寵物表單；`bridge.rs` 封裝 JS invoke。這個完整切片是**操作表單+IPC 契約**，後續再補 id、SQLite 交易與重啟讀回。使用者明確指出不能跳過建立寵物而先做漫遊。
+基底來源 `rust_ai_chat/main=5654591f3002fc619c883af9b5197e2126cc6494`（唯讀）； `apps/desktop_pet/src/lib.rs::application` 目前 `.manage(Mutex::new(PetMachine::default()))`，`generate_handler!` 只有狀態／動作／聊天／掃描／開控制窗等指令，沒有新增寵物命令；`apps/desktop_pet/frontend/src/main.rs::App` 在非 pet 視窗顯示控制台，沒有建立寵物表單；`bridge.rs` 封裝 JS invoke。這個切片是**操作表單＋IPC 名稱驗證契約**，尚未執行真正的新增；後續應**使用已存在的 ****`pet_profile`**** Table**，補 Repository／SQLite 寫入、寵物 ID、生活窗綁定與重啟讀回，不得再另建重複的寵物主表。使用者明確指出不能跳過建立寵物而先做漫遊。
 ## 2. 實作內容
 ### Red：先驗證寵物名稱契約
 在 `apps/desktop_pet/src/lib.rs` 的既有 `#[cfg(test)] mod roam_setting_tests` 之外，新增同層測試模組：
@@ -83,7 +83,10 @@ let (new_pet_feedback, set_new_pet_feedback) = signal(String::new());
 ```
 上方為需要插入現有 `App` 的完整互動片段；**若未先確認現有 JS extern import module 與其匯出實作，不得宣稱 Green 可執行**，必須先接通真正 JS → Rust invoke。不能把按鈕標「建立完成」。
 ### Refactor 與下一個必要環節
-下一步先設計新寵物 `id`、name、初始 appearance 的資料模型與 SQLite schema／前向 migration，確保 unique ID、原子新增、重啟載入，然後把上面的「檢查名稱」改成真正 `create_pet` 的保存動作，並在生活窗綁定該 ID。不得覆寫已有寵物、不得把 default singleton 與多寵物資料混淆。安全上注意本日來源 `apps/desktop_pet/migrations/20261018091733_create_pet.sql` 在最新 SHA **有修改**，必須先檢查已套用 migration checksum 與升級相容性，不可直接重建／清空使用者 SQLite。
+**2026-10-19 r2｜已核對 Pet Table 變更，沿用現有 Schema，不重建 ****`pet_profile`****。** 來源 `rust_ai_chat/main` commit `5654591f3002fc619c883af9b5197e2126cc6494`（提交訊息 `modify table`）改動 `apps/desktop_pet/migrations/20261018091733_create_pet.sql`：在原 `pet_profile` 表新增 `sexy VARCHAR(255)`（目前 SQL 實際名稱如此，不擅自更名）和 `image_path VARCHAR(255)`。這是 **migration 定義更新**，沒有證據證明現存使用者 SQLite 已執行且成功套用。
+既有 `pet_profile` 具 `id TEXT PRIMARY KEY`、`name VARCHAR(255) NOT NULL`、`species VARCHAR(255) NOT NULL`、`owner_id TEXT NOT NULL REFERENCES pet_owner(id)`、`age`、`ai_api_key`、`is_default_closure`、`created_at`、`updated_at`，另有 `pet_extra`、`pet_activity`、`pet_study`、`pet_life_log` 和 `codemap`；`pet_owner` 則由後續 migration 定義。正式新增應在既有 Schema 上建立 `create_pet`：輸入 name、species、可選 `sexy`／`image_path`，取有效 owner_id，產生不可重複 id，驗證授權及路徑，使用 SQLite 交易原子新增，再由列表／重啟讀回並讓生活視窗綁定該寵物；不得以只驗證 name 或 `PetMachine::default()` 宣稱建立成功。`image_path` 必須遵守資產路徑驗證，AI API key 不應混入 UI 回應。
+**升級警告：** 已存在的 migration 檔案被直接修改，對先前執行過舊版 migration 的資料庫可能產生 SQLx checksum mismatch。應先辨識實際套用歷史，設計保留既有 migration 的前向修補（例如對舊資料庫新增欄位）及新安裝的相容方案；不得直接修改已發佈 migration 當作可重複升級，也不能清空 DB 迴避驗證。新增資料表／欄位只能在現有 Schema 缺少且需求確定時進行。
+下一個 Pet Day 應優先補**真正的 SQLite create→readback／重啟載入**，並提供舊資料庫升級測試；目前 Day21 的名稱 IPC 只是尚未套用的前置教學切片。
 ## 3. 套件版本
 最新 Cargo 工作區版號 `0.2.20`、edition 2024；使用現有 Tauri 2.x、Leptos 0.8、tokio 1.53，沒有新增依賴或新增 migration。本切片未實測 Rust、OS/WM、WASM/原生 SDK。
 ## 4. 驗證項目
