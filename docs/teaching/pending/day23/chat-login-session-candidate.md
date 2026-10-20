@@ -21,6 +21,7 @@
 mod day23_tests {
     use super::*;
     use axum::{body::Body, http::Request};
+    use argon2::PasswordHasher;
     use tower::ServiceExt;
 
     #[tokio::test]
