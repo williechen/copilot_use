@@ -29,4 +29,13 @@ class GateTests(unittest.TestCase):
   with self.assertRaises(AssertionError): g.transition(new,'chat',proof)
  def test_failed_readback(self):
   with self.assertRaises(AssertionError): g.transition(self.state,'chat',{})
+class RevisionTests(unittest.TestCase):
+ setUp=GateTests.setUp
+ proof=GateTests.proof
+ def test_revision_never_advances(self):
+  state,_=g.transition(self.state,'pet',self.proof());old=self.proof()['body_sha256'];proof=self.proof();proof['body_sha256']='new-revision';proof['revision']='r2'
+  result,changed=g.revise(state,'pet',old,proof);self.assertTrue(changed);self.assertEqual(result['next_day'],state['next_day']);self.assertEqual(result['makeup_queue'],state['makeup_queue'])
+ def test_revision_conflict_is_rejected(self):
+  state,_=g.transition(self.state,'pet',self.proof());proof=self.proof();proof['body_sha256']='new-revision'
+  with self.assertRaises(AssertionError): g.revise(state,'pet','wrong-old-body',proof)
 unittest.main()

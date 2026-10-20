@@ -31,3 +31,12 @@ def transition(state,project,proof):
     return before,True
 if __name__=='__main__':
     print('Import verify/transition; writes require caller branch SHA and blob compare plus normal fast-forward push.')
+
+def revise(state,project,expected_body_sha256,proof):
+    assert proof.get('full_text_verified') and proof.get('code_blocks_exact') and proof.get('index_verified'), 'unverified revision'
+    assert state['next_day'][project]==25, 'revision cannot advance or skip a day'
+    current=state.get('day24_'+project+'_delivery',{})
+    if current.get('body_sha256')==proof['body_sha256']: return copy.deepcopy(state),False
+    assert current.get('body_sha256')==expected_body_sha256, 'revision evidence conflict; reread'
+    result=copy.deepcopy(state);result['day24_'+project+'_delivery']=copy.deepcopy(proof)
+    return result,True

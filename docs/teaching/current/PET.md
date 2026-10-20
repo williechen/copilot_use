@@ -1,95 +1,136 @@
-## 1. 學習大綱：把儲存身分接到真正生活窗
+## 1. 學習大綱：兩隻以上同時出籠，各有自己的生活窗
 
-本日一個最小切片是「控制台明確選取已儲存寵物→SQLite 保存選取→生活窗立即顯示名字與初始烏龜外觀→程序重啟載入同一身分」。來源 `rust_ai_chat/main` 為 `4f0cd00b8d571bdaf120298efebf0d62b795498f`，workspace 0.2.23。原始碼雖可建立與列出三欄 `SavedPet`，生活窗仍只使用 `PetMachine::default()`，沒有已儲存 ID／名稱；動畫還是貓咪 emoji，與資料中的 tortoise 不一致。本篇不再優先加漫遊細節。
+這是 Pet Day24 r2，依使用者確認把原 r1 的單生活窗切片補成「任意已儲存寵物依 ID 出籠→各建原生生活窗→獨立狀態／事件→單隻回籠」。不是寫死兩隻；實際 GUI 使用三隻同時顯示，另以十二個 UUID 驗證標籤沒有兩窗上限。視窗數仍受系統記憶體與桌面空間限制，不宣稱無限資源。
 
-真實呼叫鏈：Leptos 清單按鈕→Rust bridge→`window.selectPet`→Tauri `select_pet`→同一 `PetStore` pool 交易寫入新增的 `local_pet_selection`→提交後 emit `pet-profile-changed`→生活窗顯示名字；啟動時 `active_pet` join 回本機寵物三欄。原生視窗標籤確定是 `main` 控制窗、`pet` 生活窗（URL `index.html?view=pet`），沒有假設不存在的多寵物建窗 API。
+來源 `rust_ai_chat/main`：`4f0cd00b8d571bdaf120298efebf0d62b795498f`，workspace 0.2.23。教學初始基準 `f3b32b6a27d06db72e40f7d92a1530f52d549342`；規則 daily-tdd-minimum-v1、GitHub blob `ebebad6b3d671b7cdfa48a5f121a9958010b15b4`，共同 Notion 更新 `2026-10-20T16:32:31.684Z`。發布前 c965681→4f0cd00 的差異只有 root AI migration；Pet 程式、依賴與 SQL 未改，已於更新基準重驗。Day23（含）以前正文不動，r1 原文／patch／讀回證據保存在本日 revisions；修訂沿用同一 Notion 頁面，next_day 維持25，不再遞增。
 
-本篇只支援既有單生活窗的一隻明確選取寵物；建立不自動指定第一筆、尚未選取就顯示引導，不把預設 FSM 當作新寵物。ID 放在名字的 title 屬性，外觀依現有唯一建立物種 tortoise 提供烏龜 emoji；不是自訂素材、逐物種素材引擎或多隻獨立狀態。FSM 與漫遊仍是既有單一模型，切換身分不重設成多份；這些未完成處須保留。
+真實主線：控制台建立並讀回多筆三欄 `SavedPet` → 各列按「出籠」→ JS／Rust bridge → Tauri `open_saved_pet` → 查核 `local-owner` profile → 以 `pet-UUID` 動態建窗 → URL 固定帶該隻 ID → 查自己的 profile 與 FSM。單隻狀態由 Runtime HashMap 以 ID 分流；事件 envelope 包含 ID，前端只接受自己的事件，原生右鍵 menu ID 也綁定該隻。這不是只把相同畫面複製三份。
 
-規則 daily-tdd-minimum-v1；共同 Notion 更新 `2026-10-20T16:32:31.684Z`，規則 blob `ebebad6b3d671b7cdfa48a5f121a9958010b15b4`，教學初始基準 `f3b32b6a27d06db72e40f7d92a1530f52d549342`。Chat Day24 已完整交付，依序才處理 Pet。Day23（含）以前不改。主體 Red／Green 估 15 分鐘，Refactor／migration 閱讀 8 分鐘，版本與驗證 8 分鐘另列。`copilot_use` 產品的 `DesktopState/PetItem`、registry 與 `pet_runtime` 契約不同，本篇不冒稱產品整合。
+「出籠」不更換其他生活窗，也不把清單第一筆當預設；已出籠再按只顯示並聚焦。生活窗的「回籠子」關閉自己、移除自己的活動狀態，保留 SQLite profile 與選取設定。關控制窗只隱藏控制窗。原靜態匿名 pet 視窗移除，只保留 main 控制窗；啟動只載入明確保存的單一預設身分。
 
-前置是 `PET_DATABASE_URL` 指向可遷移的 SQLite。新增 migration 僅建選取表，保留所有舊 SQL/checksum；遇舊庫 checksum 不符就停下人工核對，不刪舊庫、不修 checksum。任何 DB、IPC 讀取失敗顯示錯誤，不任意選寵物。
+本篇仍未實作多個啟動預設、逐寵物持久 FSM／漫遊開關、跨螢幕自然漫遊、完整外觀素材。舊 roam 只認 `pet` 標籤，動態生活窗不套此舊迴圈；明確啟用舊環境開關也會找不到舊窗並停止，不會移動控制窗或錯移其他寵物。初始物種僅支援既有建立值 tortoise，以烏龜 emoji 顯示與簡單狀態動畫，不冒稱自訂素材引擎。`copilot_use` 產品的 registry／DesktopState 契約另行整合，不能直接視為已套用。
 
-發布前 main 由 c965681 更新到 4f0cd00，差異只有 root 的 AI migration；Pet 的所有程式、manifest／lock 與 migration 都未改。已在更新後隔離基準重新執行 44 項測試、WASM check、native build 與真雙視窗／程序重啟驗證。Red log 仍保留 c965681 的原始缺符號失敗，經差異核對對 4f0cd00 仍適用。Chat 已完成發布的歷史來源不回寫。
+主體 Red／Green 估25分鐘（含r2補接線），Refactor／版本／驗證閱讀另15分鐘；三案主體合計約50分鐘，不以複雜度填滿時間。SQLite 前置、舊 migration/checksum 邊界與 r1 相同：新增選取表，不修改任何歷史 SQL、不刪舊庫。
 
 ## 2. 實作內容：Red → 完整最小 Green → Refactor
 
-### Red：先要求明確選取能重開資料庫
+### Red：重現不是只有兩隻的需求
 
-新增 `apps/desktop_pet/tests/day24_active_pet.rs` 後，對未修改 store 的來源執行 `cargo test --locked -p desktop-pet --test day24_active_pet`。實際 E0599：缺少 `active`／`select`，屬預期新增符號 Red，不是環境或匯入錯誤。測試不用第一筆當預設，建立兩筆後仍未選取；明確選第二筆，未知 ID 不可覆寫舊選取，關 pool 重開並再跑 migration，仍是同一完整身分。關閉 pool 後刪除本測試自己的暫存 SQLite。
+最初 store Red 是缺少 `active/select` 的 E0599，原始 log 保留。r2 另外對 r1 原生程式做行為 Red：建立三隻、逐次選為生活窗寵物，預期控制窗加三個生活窗共四窗，實際只有兩窗（控制窗＋同一生活窗），下列斷言失敗。這是已重現的產品行為限制，不拿既有通過測試冒稱 Red。
 
-```rs
-use desktop_pet::pet_store::PetStore;
-use sqlx::sqlite::{SqliteConnectOptions, SqlitePoolOptions};
-#[tokio::test]
-async fn day24_explicit_selection_survives_reopen_and_rejects_unknown_id() {
-    let path = std::env::temp_dir().join(format!("day24-pet-{}.sqlite", uuid::Uuid::new_v4()));
-    let options = SqliteConnectOptions::new()
-        .filename(&path)
-        .create_if_missing(true)
-        .foreign_keys(true);
-    let pool = SqlitePoolOptions::new()
-        .max_connections(1)
-        .connect_with(options.clone())
-        .await
-        .unwrap();
-    sqlx::migrate!("./migrations").run(&pool).await.unwrap();
-    let store = PetStore { pool: pool.clone() };
-    assert!(store.active().await.unwrap().is_none());
-    store.create("小橘").await.unwrap();
-    store.create("小綠").await.unwrap();
-    assert!(store.active().await.unwrap().is_none());
-    let chosen = store.list().await.unwrap().remove(1);
-    assert_eq!(store.select(&chosen.id).await.unwrap(), chosen);
-    assert!(store.select("missing-id").await.is_err());
-    assert_eq!(store.active().await.unwrap(), Some(chosen.clone()));
-    pool.close().await;
-    let pool = SqlitePoolOptions::new()
-        .max_connections(1)
-        .connect_with(options)
-        .await
-        .unwrap();
-    sqlx::migrate!("./migrations").run(&pool).await.unwrap();
-    assert_eq!(
-        (PetStore { pool: pool.clone() }).active().await.unwrap(),
-        Some(chosen)
-    );
-    pool.close().await;
-    std::fs::remove_file(path).unwrap();
-}
+```py
+# 完整 helper、建三筆資料、驅動與清理見 multi-native-red-test.py。
+handles = ses('GET', '/window/handles')
+assert len(handles) == 4, 'expected control plus three life windows; actual=' + str(len(handles))
+# r1 實際：AssertionError ... actual=2
 ```
 
-### Green：完整可套用修改
+### Green：依每隻真實 ID 動態建立完整呼叫鏈
 
-以下完整 patch 包含 additive migration、store、Tauri commands 與註冊、JS、Rust bridge、Leptos 清單／生活窗與初始外觀、測試。若先手動加上 Red 檔案，套其餘修改即可；或在乾淨隔離副本一次套全部，不能重複新增檔案。完整原始 patch 在第4節附件，精確基準 apply check 通過。無新增依賴或修改 lock。
-
-選取表主鍵 slot 限制為 1，外鍵連到現有 profile，刪除該 profile 才 cascade 刪選取；不刪寵物資料。查詢限制 `local-owner`，只回 `id/name/species`，不把 AI key 或 owner 資料傳前端。這是單機身分篩選，不是遠端多使用者授權模型。
+以下為精確 4f0cd00 基準的完整 r2 patch，包含 r1 的 store／選取 migration／測試，再加入動態視窗 Runtime、獨立狀態命令、IPC／event／原生 menu ID 分流、動態視窗 capability、控制窗出籠與生活窗回籠、200×200可操作佈局。已套過 r1 時請先比對差異，不要把完整 patch 重貼到已修改工作樹；原始 r1 與 r2 patch 均保留。對乾淨基準 apply check 通過，沒有更新 Cargo 或 lock。
 
 ```diff
+diff --git a/apps/desktop_pet/capabilities/default.json b/apps/desktop_pet/capabilities/default.json
+index b893b2e..ef634db 100644
+--- a/apps/desktop_pet/capabilities/default.json
++++ b/apps/desktop_pet/capabilities/default.json
+@@ -2,9 +2,12 @@
+   "$schema": "../gen/schemas/desktop-schema.json",
+   "identifier": "default",
+   "description": "Default permissions for Rust AI Desktop Pet",
+-  "windows": ["main", "pet"],
++  "windows": [
++    "main",
++    "pet-*"
++  ],
+   "permissions": [
+     "core:default",
+     "core:window:allow-start-dragging"
+   ]
+-}
+\ No newline at end of file
++}
 diff --git a/apps/desktop_pet/frontend/index.html b/apps/desktop_pet/frontend/index.html
-index 7242117..05072ca 100644
+index 7242117..fc92d82 100644
 --- a/apps/desktop_pet/frontend/index.html
 +++ b/apps/desktop_pet/frontend/index.html
-@@ -104,6 +104,11 @@
+@@ -17,20 +17,19 @@
+     const { invoke } = window.__TAURI__.core;
+     const { listen } = window.__TAURI__.event;
+ 
+-    window.getPetState = () => {
+-      return invoke("get_pet_state");
+-    };
+-
+-    window.sendPetCommand = (command) => {
+-      return invoke("send_pet_command", { command });
+-    };
+-
+-    window.listenPetState = (callback) => {
+-      return listen(
+-        "pet://state-changed",
+-        (event) => callback(event.payload),
+-      );
++    const windowPetId = new URLSearchParams(location.search).get("pet_id");
++    const currentPetId = async () => {
++      const id = windowPetId || (await invoke("active_pet"))?.id;
++      if (!id) throw "請先選擇並出籠寵物";
++      return id;
+     };
++    window.getPetState = async () => invoke("get_saved_pet_state", { id: await currentPetId() });
++    window.sendPetCommand = async (command) => invoke("send_saved_pet_command", { id: await currentPetId(), command });
++    window.listenPetState = (callback) => listen("saved-pet-state", async (event) => {
++      try { if (event.payload.id === await currentPetId()) callback(event.payload.snapshot); } catch (_) {}
++    });
++    window.openSavedPet = (id) => invoke("open_saved_pet", { id });
++    window.cageSavedPet = async () => invoke("cage_saved_pet", { id: await currentPetId() });
+ 
+     window.chatWithPet = (message) => {
+       return invoke("chat_with_pet", { message });
+@@ -60,15 +59,15 @@
+       petContextMenu = await Menu.new({
+         items: [
+           {
+-            id: "interact",
++            id: `pet:${await currentPetId()}:interact`,
+             text: "互動",
+           },
+           {
+-            id: "sleep",
++            id: `pet:${await currentPetId()}:sleep`,
+             text: "睡覺",
+           },
+           {
+-            id: "wake",
++            id: `pet:${await currentPetId()}:wake`,
+             text: "醒來",
+           },
+         ],
+@@ -104,6 +103,11 @@
        return invoke("scan_duplicate_preview");
      };
  
-+    window.activePet = () => invoke("active_pet");
++    window.activePet = () => windowPetId ? invoke("saved_pet_profile", { id: windowPetId }) : invoke("active_pet");
 +    window.selectPet = (id) => invoke("select_pet", { id });
 +    window.listenPetProfile = (callback) => window.__TAURI__.event.listen(
-+      "pet-profile-changed", (event) => callback(event.payload));
++      "pet-profile-changed", (event) => { if (!windowPetId || event.payload.id === windowPetId) callback(event.payload); });
 +
      window.listPets = () => {
        return invoke("list_pets");
      };
 diff --git a/apps/desktop_pet/frontend/src/bridge.rs b/apps/desktop_pet/frontend/src/bridge.rs
-index 0a6e104..9693a66 100644
+index 0a6e104..6dca3f5 100644
 --- a/apps/desktop_pet/frontend/src/bridge.rs
 +++ b/apps/desktop_pet/frontend/src/bridge.rs
-@@ -5,6 +5,12 @@ use wasm_bindgen_futures::JsFuture;
+@@ -5,6 +5,17 @@ use wasm_bindgen_futures::JsFuture;
  
  #[wasm_bindgen]
  extern "C" {
++    #[wasm_bindgen(js_namespace=window, js_name=openSavedPet)]
++    fn open_saved_pet_js(id: &str) -> Promise;
++    #[wasm_bindgen(js_namespace=window, js_name=cageSavedPet)]
++    fn cage_saved_pet_js() -> Promise;
++
 +    #[wasm_bindgen(js_namespace=window, js_name=activePet)]
 +    fn active_pet_js() -> Promise;
 +    #[wasm_bindgen(js_namespace=window, js_name=selectPet)]
@@ -99,7 +140,7 @@ index 0a6e104..9693a66 100644
  
      #[wasm_bindgen(
          js_namespace=window,
-@@ -184,3 +190,26 @@ pub async fn list_pets() -> Result<Vec<SavedPet>, String> {
+@@ -184,3 +195,39 @@ pub async fn list_pets() -> Result<Vec<SavedPet>, String> {
      let value = JsFuture::from(list_pets_js()).await.map_err(js_error)?;
      serde_wasm_bindgen::from_value(value).map_err(|_| "寵物清單格式錯誤".into())
  }
@@ -126,6 +167,19 @@ index 0a6e104..9693a66 100644
 +    closure.forget(); // 與此單一 App 視窗同壽命。
 +    Ok(())
 +}
++
++pub async fn open_saved_pet(id: &str) -> Result<(), String> {
++    JsFuture::from(open_saved_pet_js(id))
++        .await
++        .map_err(js_error)?;
++    Ok(())
++}
++pub async fn cage_saved_pet() -> Result<(), String> {
++    JsFuture::from(cage_saved_pet_js())
++        .await
++        .map_err(js_error)?;
++    Ok(())
++}
 diff --git a/apps/desktop_pet/frontend/src/component/activity.rs b/apps/desktop_pet/frontend/src/component/activity.rs
 index c09a246..6ed0383 100644
 --- a/apps/desktop_pet/frontend/src/component/activity.rs
@@ -150,10 +204,10 @@ index c09a246..6ed0383 100644
      });
  
 diff --git a/apps/desktop_pet/frontend/src/main.rs b/apps/desktop_pet/frontend/src/main.rs
-index 080f06b..63c1070 100644
+index 080f06b..8e1951b 100644
 --- a/apps/desktop_pet/frontend/src/main.rs
 +++ b/apps/desktop_pet/frontend/src/main.rs
-@@ -54,6 +54,25 @@ fn App() -> impl IntoView {
+@@ -54,6 +54,32 @@ fn App() -> impl IntoView {
      let (saved_pets, set_saved_pets) = signal(Vec::<bridge::SavedPet>::new());
      let (pets_busy, set_pets_busy) = signal(false);
  
@@ -163,6 +217,13 @@ index 080f06b..63c1070 100644
 +        if let Err(message) = bridge::listen_pet_profile(move |pet| {
 +            profile_events.update(|n| *n += 1);
 +            set_active_pet.set(Some(pet));
++            set_snapshot.set(None);
++            set_error.set(None);
++            spawn_local(async move {
++                if let Ok(incoming) = bridge::get_pet_state().await {
++                    set_snapshot.set(Some(incoming));
++                }
++            });
 +        })
 +        .await
 +        {
@@ -179,7 +240,7 @@ index 080f06b..63c1070 100644
      if !bridge::is_pet_window() {
          set_pets_busy.set(true);
          spawn_local(async move {
-@@ -106,7 +125,13 @@ fn App() -> impl IntoView {
+@@ -106,7 +132,16 @@ fn App() -> impl IntoView {
                      set_blinking
                  />
                  <AnimationClock set_animation_phase />
@@ -190,17 +251,20 @@ index 080f06b..63c1070 100644
 +                <Show when=move || active_pet.get().is_some() fallback=|| ()>
 +                    <PetStatus snapshot blinking animation_phase />
 +                </Show>
++                <button type="button" on:click=move |_| spawn_local(async move {
++                    if let Err(e)=bridge::cage_saved_pet().await {set_error.set(Some(e));}
++                })>"回籠子"</button>
 +                <p role="alert">{move || error.get().unwrap_or_default()}</p>
                  <button
                      type="button"
                      on:click=move |_| spawn_local(async move{
-@@ -173,7 +198,23 @@ fn App() -> impl IntoView {
+@@ -173,7 +208,32 @@ fn App() -> impl IntoView {
                  <Show when=move || pets_busy.get() fallback=|| ()><p>"處理中…"</p></Show>
                  <ul>
                      <For each=move || saved_pets.get() key=|pet| pet.id.clone()
 -                        children=|pet| view! { <li>{format!("{}／{}（{}）", pet.name, pet.species, pet.id)}</li> } />
 +                        children=move |pet| {
-+                            let id=pet.id.clone();
++                            let id=pet.id.clone(); let open_id=id.clone();
 +                            view! { <li>{format!("{}／{}（{}）", pet.name, pet.species, pet.id)}
 +                                <button type="button" disabled=move || pets_busy.get()
 +                                    on:click=move |_| {
@@ -214,11 +278,38 @@ index 080f06b..63c1070 100644
 +                                            set_pets_busy.set(false);
 +                                        });
 +                                    }>"選為生活窗寵物"</button>
++                                <button type="button" disabled=move || pets_busy.get()
++                                    on:click=move |_| {
++                                        if pets_busy.get_untracked() {return;}
++                                        set_pets_busy.set(true);let id=open_id.clone();
++                                        spawn_local(async move {
++                                            match bridge::open_saved_pet(&id).await {Ok(())=>set_new_pet_feedback.set("已出籠；重複操作只聚焦既有生活窗".into()),Err(e)=>set_new_pet_feedback.set(e)}
++                                            set_pets_busy.set(false);
++                                        });
++                                    }>"出籠"</button>
 +                            </li> }
 +                        } />
                  </ul>
              </section>
  
+diff --git a/apps/desktop_pet/frontend/style.css b/apps/desktop_pet/frontend/style.css
+index 99ead04..cf027b8 100644
+--- a/apps/desktop_pet/frontend/style.css
++++ b/apps/desktop_pet/frontend/style.css
+@@ -199,4 +199,11 @@ body {
+ 
+ .pet-life .pet-face{
+   line-height:50px;
+-}
+\ No newline at end of file
++}
++/* Each dynamic life window remains usable within the existing 200x200 shell. */
++.pet-life > p { margin:2px 0; font-size:12px; line-height:16px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
++.pet-life > p:empty { display:none; }
++.pet-life .pet-status strong { font-size:12px; line-height:14px; }
++.pet-life .pet-status small { font-size:10px; line-height:12px; }
++.pet-life > button { display:inline-block; padding:2px 6px; margin:2px; }
++.pet-life > p, .pet-life strong, .pet-life small { color:white; text-shadow:0 1px 3px #000; }
 diff --git a/apps/desktop_pet/migrations/20261021070000_active_pet.sql b/apps/desktop_pet/migrations/20261021070000_active_pet.sql
 new file mode 100644
 index 0000000..3eb9a01
@@ -231,10 +322,18 @@ index 0000000..3eb9a01
 + pet_id TEXT NOT NULL REFERENCES pet_profile(id) ON DELETE CASCADE
 +);
 diff --git a/apps/desktop_pet/src/lib.rs b/apps/desktop_pet/src/lib.rs
-index ad65ded..6feafdb 100644
+index ad65ded..ad642f1 100644
 --- a/apps/desktop_pet/src/lib.rs
 +++ b/apps/desktop_pet/src/lib.rs
-@@ -128,6 +128,17 @@ async fn list_pets(
+@@ -1,6 +1,7 @@
+ mod chat;
+ mod file_organizer;
+ pub mod pet_store;
++pub mod pet_windows;
+ mod roam;
+ 
+ use ai_core::{ChatRequest, MockChatModel};
+@@ -128,9 +129,28 @@ async fn list_pets(
      store.list().await
  }
  
@@ -245,6 +344,7 @@ index ad65ded..6feafdb 100644
 +#[tauri::command]
 +async fn select_pet(id: String, app: tauri::AppHandle, store: State<'_, pet_store::PetStore>) -> Result<pet_store::SavedPet, String> {
 +    let saved=store.select(&id).await?;
++    pet_windows::open(&app,&saved)?;
 +    app.emit("pet-profile-changed", &saved).map_err(|_| "選取已儲存，通知失敗，請重新載入生活窗".to_owned())?;
 +    Ok(saved)
 +}
@@ -252,23 +352,82 @@ index ad65ded..6feafdb 100644
  pub fn application(db: sqlx::SqlitePool) {
      tauri::Builder::default()
          .on_window_event(|window, event| {
-@@ -191,6 +202,8 @@ pub fn application(db: sqlx::SqlitePool) {
++            if window.label().starts_with("pet-") {
++                if let tauri::WindowEvent::Destroyed=event {
++                    if let Some(id)=window.label().strip_prefix("pet-").and_then(|s| uuid::Uuid::parse_str(s).ok()) {
++                        window.app_handle().state::<pet_windows::Runtime>().remove(&id.to_string());
++                    }
++                }
++            }
+             if window.label() == "main" {
+                 if let tauri::WindowEvent::CloseRequested { api, .. } = event {
+                     api.prevent_close();
+@@ -139,9 +159,17 @@ pub fn application(db: sqlx::SqlitePool) {
+             }
+         })
+         .manage(Mutex::new(PetMachine::default()))
++        .manage(pet_windows::Runtime::default())
+         .manage(AiState::new(Arc::new(MockChatModel)))
+         .manage(pet_store::PetStore { pool: db })
+         .setup(|app| {
++            let handle=app.handle().clone();
++            let store=app.state::<pet_store::PetStore>().inner().clone();
++            tauri::async_runtime::spawn(async move {
++                if let Ok(Some(pet))=store.active().await {
++                    if let Err(e)=pet_windows::open(&handle,&pet) { eprintln!("載入預設寵物失敗：{e}"); }
++                }
++            });
+             /*
+              * JS Menu.new() 建立的 native menu item
+              * 仍會產生 native menu event。
+@@ -154,6 +182,13 @@ pub fn application(db: sqlx::SqlitePool) {
+                     let _ = open_control_window(app_handle.clone());
+                     return;
+                 }
++                if let Some(scoped)=event.id().0.strip_prefix("pet:") {
++                    if let Some((id,action))=scoped.split_once(':') {
++                        let command=match action {"sleep"=>Some(PetCommand::Sleep),"wake"=>Some(PetCommand::Wake),"interact"=>Some(PetCommand::Interact),_=>None};
++                        if let Some(command)=command {let _=pet_windows::dispatch_and_emit(app_handle,id,command);}
++                    }
++                    return;
++                }
+                 let command = match event.id().0.as_str() {
+                     "interact" => Some(PetCommand::Interact),
+                     "sleep" => Some(PetCommand::Sleep),
+@@ -191,6 +226,13 @@ pub fn application(db: sqlx::SqlitePool) {
              validate_new_pet_name,
              create_pet,
              list_pets,
 +            active_pet,
 +            select_pet,
++            pet_windows::saved_pet_profile,
++            pet_windows::open_saved_pet,
++            pet_windows::get_saved_pet_state,
++            pet_windows::send_saved_pet_command,
++            pet_windows::cage_saved_pet,
          ])
          .run(tauri::generate_context!())
          .expect("failed to run Rust AI Desktop Pet");
 diff --git a/apps/desktop_pet/src/pet_store.rs b/apps/desktop_pet/src/pet_store.rs
-index 7f66eae..c9955eb 100644
+index 7f66eae..64e3bf8 100644
 --- a/apps/desktop_pet/src/pet_store.rs
 +++ b/apps/desktop_pet/src/pet_store.rs
-@@ -11,6 +11,36 @@ pub struct PetStore {
+@@ -11,6 +11,48 @@ pub struct PetStore {
  }
  
  impl PetStore {
++    pub async fn profile(&self, id: &str) -> Result<SavedPet, String> {
++        let row: Option<(String, String, String)> = sqlx::query_as(
++            "SELECT id,name,species FROM pet_profile WHERE id=?1 AND owner_id='local-owner'",
++        )
++        .bind(id)
++        .fetch_optional(&self.pool)
++        .await
++        .map_err(|_| "無法讀取寵物")?;
++        row.map(|(id, name, species)| SavedPet { id, name, species })
++            .ok_or_else(|| "找不到寵物".into())
++    }
++
 +    pub async fn active(&self) -> Result<Option<SavedPet>, String> {
 +        let row: Option<(String,String,String)> = sqlx::query_as(
 +            "SELECT p.id,p.name,p.species FROM local_pet_selection s JOIN pet_profile p ON p.id=s.pet_id WHERE s.slot=1 AND p.owner_id='local-owner'")
@@ -302,6 +461,196 @@ index 7f66eae..c9955eb 100644
      pub async fn list(&self) -> Result<Vec<SavedPet>, String> {
          let rows: Vec<(String, String, String)> = sqlx::query_as(
              "SELECT id,name,species FROM pet_profile WHERE owner_id='local-owner' ORDER BY name,id",
+diff --git a/apps/desktop_pet/src/pet_windows.rs b/apps/desktop_pet/src/pet_windows.rs
+new file mode 100644
+index 0000000..3b09131
+--- /dev/null
++++ b/apps/desktop_pet/src/pet_windows.rs
+@@ -0,0 +1,146 @@
++use crate::pet_store::{PetStore, SavedPet};
++use pet_domain::{PetCommand, PetMachine, PetSnapshot};
++use std::{collections::HashMap, sync::Mutex};
++use tauri::{Emitter, Manager, State};
++
++#[derive(Default)]
++pub struct Runtime {
++    machines: Mutex<HashMap<String, PetMachine>>,
++}
++impl Runtime {
++    pub fn snapshot(&self, id: &str) -> Result<PetSnapshot, String> {
++        self.machines
++            .lock()
++            .map_err(|_| "寵物狀態無法使用")?
++            .get(id)
++            .map(PetMachine::snapshot)
++            .ok_or_else(|| "寵物尚未出籠".into())
++    }
++    pub fn dispatch(&self, id: &str, command: PetCommand) -> Result<PetSnapshot, String> {
++        let mut pets = self.machines.lock().map_err(|_| "寵物狀態無法使用")?;
++        let pet = pets.get_mut(id).ok_or("寵物尚未出籠")?;
++        pet.dispatch(command).map_err(|e| e.to_string())?;
++        Ok(pet.snapshot())
++    }
++    pub fn remove(&self, id: &str) {
++        if let Ok(mut pets) = self.machines.lock() {
++            pets.remove(id);
++        }
++    }
++}
++fn label(id: &str) -> Result<String, String> {
++    let id = uuid::Uuid::parse_str(id).map_err(|_| "寵物ID格式錯誤")?;
++    Ok(format!("pet-{}", id.simple()))
++}
++pub fn open(app: &tauri::AppHandle, pet: &SavedPet) -> Result<(), String> {
++    let name = label(&pet.id)?;
++    let runtime = app.state::<Runtime>();
++    // 同 ID 開窗序列化；重複出籠只 show/focus，不重新建立或重設狀態。
++    let mut machines = runtime.machines.lock().map_err(|_| "寵物狀態無法使用")?;
++    if let Some(window) = app.get_webview_window(&name) {
++        window.show().map_err(|e| e.to_string())?;
++        return window.set_focus().map_err(|e| e.to_string());
++    }
++    let count = machines.len();
++    machines.insert(pet.id.clone(), PetMachine::default());
++    let result = tauri::WebviewWindowBuilder::new(
++        app,
++        &name,
++        tauri::WebviewUrl::App(format!("index.html?view=pet&pet_id={}", pet.id).into()),
++    )
++    .title(&pet.name)
++    .inner_size(200.0, 200.0)
++    .position(
++        80.0 + (count % 4) as f64 * 220.0,
++        80.0 + (count / 4) as f64 * 220.0,
++    )
++    .resizable(false)
++    .decorations(false)
++    .transparent(true)
++    .always_on_top(true)
++    .shadow(false)
++    .build();
++    if let Err(e) = result {
++        machines.remove(&pet.id);
++        return Err(e.to_string());
++    }
++    Ok(())
++}
++pub fn dispatch_and_emit(
++    app: &tauri::AppHandle,
++    id: &str,
++    command: PetCommand,
++) -> Result<PetSnapshot, String> {
++    let snapshot = app.state::<Runtime>().dispatch(id, command)?;
++    app.emit(
++        "saved-pet-state",
++        serde_json::json!({"id":id,"snapshot":snapshot}),
++    )
++    .map_err(|e| e.to_string())?;
++    Ok(snapshot)
++}
++#[tauri::command]
++pub async fn saved_pet_profile(id: String, store: State<'_, PetStore>) -> Result<SavedPet, String> {
++    store.profile(&id).await
++}
++#[tauri::command]
++pub async fn open_saved_pet(
++    id: String,
++    app: tauri::AppHandle,
++    store: State<'_, PetStore>,
++) -> Result<(), String> {
++    let pet = store.profile(&id).await?;
++    open(&app, &pet)
++}
++#[tauri::command]
++pub fn get_saved_pet_state(id: String, runtime: State<'_, Runtime>) -> Result<PetSnapshot, String> {
++    runtime.snapshot(&id)
++}
++#[tauri::command]
++pub fn send_saved_pet_command(
++    id: String,
++    command: PetCommand,
++    app: tauri::AppHandle,
++) -> Result<PetSnapshot, String> {
++    dispatch_and_emit(&app, &id, command)
++}
++#[tauri::command]
++pub fn cage_saved_pet(id: String, app: tauri::AppHandle) -> Result<(), String> {
++    if let Some(window) = app.get_webview_window(&label(&id)?) {
++        window.close().map_err(|e| e.to_string())?;
++    }
++    app.state::<Runtime>().remove(&id);
++    Ok(())
++}
++#[cfg(test)]
++mod tests {
++    use super::*;
++    #[test]
++    fn day24_more_than_two_pet_states_are_independent_and_caging_is_local() {
++        let runtime = Runtime::default();
++        for id in ["one", "two", "three"] {
++            runtime
++                .machines
++                .lock()
++                .unwrap()
++                .insert(id.into(), PetMachine::default());
++        }
++        let before_two = runtime.snapshot("two").unwrap();
++        let before_three = runtime.snapshot("three").unwrap();
++        runtime.dispatch("one", PetCommand::Sleep).unwrap();
++        assert_eq!(runtime.snapshot("two").unwrap(), before_two);
++        assert_eq!(runtime.snapshot("three").unwrap(), before_three);
++        runtime.remove("one");
++        assert!(runtime.snapshot("one").is_err());
++        assert!(runtime.snapshot("two").is_ok());
++        assert!(runtime.snapshot("three").is_ok());
++    }
++    #[test]
++    fn day24_window_labels_are_derived_from_each_uuid_not_a_two_window_limit() {
++        let labels: std::collections::HashSet<_> = (0..12)
++            .map(|_| label(&uuid::Uuid::new_v4().to_string()).unwrap())
++            .collect();
++        assert_eq!(labels.len(), 12);
++        assert!(label("../invalid").is_err());
++    }
++}
+diff --git a/apps/desktop_pet/tauri.conf.json b/apps/desktop_pet/tauri.conf.json
+index 35798fa..e7b14e6 100644
+--- a/apps/desktop_pet/tauri.conf.json
++++ b/apps/desktop_pet/tauri.conf.json
+@@ -3,7 +3,7 @@
+   "productName": "Rust AI Desktop Pet",
+   "version": "0.2.16",
+   "identifier": "dev.rustai.desktop-pet",
+-  "build": { 
++  "build": {
+     "devUrl": "http://localhost:1420",
+     "frontendDist": "frontend/dist",
+     "beforeDevCommand": {
+@@ -26,22 +26,10 @@
+         "minWidth": 360,
+         "minHeight": 420,
+         "resizable": true
+-      },
+-      {
+-        "label": "pet",
+-        "title": "Pet 生活",
+-        "url": "index.html?view=pet",
+-        "width": 200,
+-        "height": 200,
+-        "resizable": false,
+-        "decorations": false,
+-        "transparent": true,
+-        "alwaysOnTop": true,
+-        "shadow": false
+       }
+     ]
+   },
+-  "bundle": { 
+-    "active": false 
++  "bundle": {
++    "active": false
+   }
+ }
 diff --git a/apps/desktop_pet/tests/day24_active_pet.rs b/apps/desktop_pet/tests/day24_active_pet.rs
 new file mode 100644
 index 0000000..ce723b4
@@ -348,31 +697,35 @@ index 0000000..ce723b4
 +}
 ```
 
-### Refactor：先提交，再通知；啟動讀取不蓋過新事件
+### Refactor：以 ID 作為視窗、狀態和事件的共同邊界
 
-`select` 於同交易確認 ID 與本機主人並寫設定；查無資料直接 rollback。提交後才通知其他視窗，通知失敗明示「已儲存」，不把 DB 已提交冒稱完全失敗；重啟仍能讀取持久選取。前端先註冊 listener，再讀啟動值，事件計數避免慢啟動結果覆蓋較新選取。按鈕處理中停用；錯誤保留原身分，不顯示假成功。listener 隨整個 App 視窗生存，沿用現有 bridge 的 closure lifetime 模式。
+`Runtime` 用 HashMap 保存各自 `PetMachine`。開窗在鎖內序列化，同 ID 已有視窗便聚焦，不重設既有狀態；build失敗會移除剛加入的狀態。profile 只查本機主人、只回 ID／name／species，不回 AI key。UUID 先解析再形成安全 label／URL，不接受路徑片段。視窗並非直接由未驗證前端任意建立。
+
+原生狀態事件是 ID＋snapshot；生活窗 URL 的 ID 在整個生命週期固定，不因控制台換選取就變成另一隻。控制台的互動目標以明確保存選取為準；選取變更重置本地 snapshot，避免不同寵物 revision 比較互相覆蓋。右鍵睡覺／醒來／互動使用 `pet:ID:action`；不發送舊共用指令。capability 對象改為 `main` 與 `pet-*`，不是只改 builder 卻讓動態窗沒有 IPC／事件權限。
+
+原生直接關窗與回籠都只移除該隻 Runtime；不刪 profile，不取消啟動預設。重啟目前只自動出籠一隻明確預設，其他資料仍可從清單各自出籠。這個預設數量限制不同於同時出籠數量，後者沒有兩隻硬上限；多預設與逐寵物漫遊仍是未完成需求。原生 GUI 失敗紀錄中有一次測試腳本誤把控制窗所有 disabled 按鈕當作未完成，修正為檢查建立按鈕後重跑成功，沒有把 harness 錯誤當成產品 Red。
 
 ### 舊 Day 更正補充
 
-本篇未修改封存 Day23；先前 Day22 補教已結案，不重複新增。最新 main 的建立物種本來是 tortoise，因此本日生活窗接線一併把貓咪 emoji 改為烏龜狀態，這是新切片所需的實際畫面差異，不宣稱所有素材／個性／多寵物需求已完成。
+不回寫 Day23、Day22；本次只修尚未封存的 Day24，保留 r1 原文與證據。makeup_queue 已完成項目不重開，不因 r2 再推 Day。r1 單窗限制如實留下歷史，本篇以 r2 為目前可套用版本。
 
 ## 3. 套件版本與平台界線
 
-保留原始 manifest／lock；本日直接涉及 SQLx 0.9.0、Tauri 2.12.4、Leptos 0.8.22、Serde 1.0.229、Tokio 1.54.0、UUID 1.28.0、wasm-bindgen 0.2.129，本次官方 registry 查得 stable 與這些 lock 相同。查詢原始資料與本日 lock 對照在附件，[官方 Tauri 套件資料](https://crates.io/api/v1/crates/tauri)。不因最新版本而更新來源依賴。
+原 manifest／lock 不變。本日 SQLx 0.9.0、Tauri 2.12.4、Leptos 0.8.22、Serde 1.0.229、Tokio 1.54.0、UUID 1.28.0、wasm-bindgen 0.2.129 與本次官方 registry 查得 stable 一致。[官方 Tauri 套件資料](https://crates.io/api/v1/crates/tauri)；完整 lock／查詢對照在附件。沒有僅憑最新版而升級產品依賴。
 
-實測 Rust/Cargo 1.99.1、Linux native、wasm32-unknown-unknown。`cargo check` WASM 與 Trunk 真建置通過；最初離線 Trunk 找不到 wasm-bindgen 執行檔而失敗，改正常下載模式後成功，保留兩次 log。不是 Rust 型別錯誤。Windows、macOS、最低 MSRV、正式安裝包與簽章未測。
+本機 Rust/Cargo 1.99.1、Linux native／wasm32-unknown-unknown。Trunk 真正產生 Wasm 與 JS，native Tauri binary 編譯成功。最初離線 Trunk 因找不到 wasm-bindgen 失敗，正常模式成功，原始兩次 log 保留。最低 MSRV、Windows、macOS、安裝包與簽章未測；桌面空間與位置演算法尚未涵蓋所有螢幕配置。
 
 ## 4. 驗證項目、證據與未完成
 
-- Red `cargo test --locked -p desktop-pet --test day24_active_pet`：實際 E0599，缺少本日方法。
-- Green `cargo test --locked -p desktop-pet`：44 項通過、0 失敗，含新增選取／重開／未知 ID 測試及全部 Pet 現有測試。
-- `cargo check --locked -p desktop-pet-frontend --target wasm32-unknown-unknown`：通過，真實 UI/bridge 型別與 Wasm import 編譯成功。
-- `trunk build --locked`：成功；離線版本下載失敗另記，未冒稱離線可用。
-- `cargo build --locked -p desktop-pet`：通過。
-- 原生 Linux Xvfb + WebKitWebDriver／tauri-driver：真控制窗建立寵物→SQLite 查到同一 ID→按「選為生活窗寵物」→生活窗即時顯示名字、title ID 與烏龜→關掉整個程序重開→同生活窗載入同一身分，五項流程斷言全部通過。使用隔離測試 DB，無付費 AI；腳本與截圖在附件。
-- 原始 patch 對精確來源基準 `git apply --cached --check` 通過。三份原有 migration 保留；新 migration 初次與再次執行都通過。真實歷史 DB checksum 升級、跨平台、多生活窗、每隻 FSM／漫遊及自訂外觀仍未驗收。
+- `cargo test --locked -p desktop-pet`：46 項通過、0 失敗；含三隻獨立狀態、移除一隻不影響另外兩隻、十二個不同 UUID label、選取持久／未知 ID／重新連線。
+- r1 原生 GUI 行為 Red：三筆資料預期四窗，實際兩窗；原始 assertion log 保留。
+- `cargo build --locked -p desktop-pet`、`trunk build --locked`：r2 通過，真實 Rust／WASM／JS 接線已編譯。
+- r2 原生 Linux Xvfb＋WebKitWebDriver＋tauri-driver：控制窗建立三隻→各自出籠→同時三個不同 ID／名字／烏龜的200×200生活窗，位置分別 x=80、300、520，y=80；各窗按鈕在可見範圍。
+- 重複出籠第一隻仍四窗，只聚焦；第一隻 sleep、另外兩隻仍 idle；實際按第一隻「回籠子」後只少一窗、另外兩隻仍 idle，三筆 SQLite profile 都保留；重新出籠可用。
+- 關閉整個程序重啟：明確預設的同 ID 自動回到自己的生活窗；其餘兩筆仍在 DB，沒有把所有資料都誤當預設，也沒有殘留匿名生活窗。
+- `git apply --cached --check candidate.patch`：精確來源4f0cd00通過。publication gate 13 項測試通過，含完整文章、截斷／literal code／索引拒絕、條件式冪等推進、修訂不得加 Day 與衝突拒絕。
 
-精確來源 4f0cd00 的 CI（未包含本日隔離 patch）如下；查詢時尚在排隊／執行，未把 Pending 當成成功。先前 c965681 的 CI 結果保留附件，不冒充新 SHA 的結果。
+精確來源4f0cd00的 CI 查詢快照如下，未包含本日隔離 patch；查詢時尚在排隊／執行，未把 Pending 當成功，另有本地真 GUI 結果：
 
 - [Rust AI Chat](https://github.com/williechen/rust_ai_chat/actions/runs/39511377716)：queued/None；2026-10-20T22:54:04Z；jobs check-chat=None, build-chat=None
 - [Persistence](https://github.com/williechen/rust_ai_chat/actions/runs/39511377839)：queued/None；2026-10-20T22:54:04Z；jobs test-persistence=None
@@ -381,6 +734,6 @@ index 0000000..ce723b4
 - [Rust Dashboard](https://github.com/williechen/rust_ai_chat/actions/runs/39511377730)：in_progress/None；2026-10-20T22:54:14Z；jobs build-dashboard=None, check-dashboard=None
 - [Rust Desktop Pet](https://github.com/williechen/rust_ai_chat/actions/runs/39511377861)：in_progress/None；2026-10-20T22:54:07Z；jobs build-pet=None, check-pet=None
 
-[完整修改、GUI 腳本與截圖、測試／CI／套件原始證據](https://github.com/williechen/copilot_use/tree/teaching/rust-ai-chat-alignment/docs/teaching/day24/pet-validation)。教學發布、使用者套用、產品整合、完整功能驗收分別記錄；本篇未寫產品原始碼。本次測試 SQLite 在驗證後清除，保留程式與 log，不碰 copilot_use 資料。
+[完整 r2 patch、原生腳本、三窗截圖、逐 ID／rect 結果與原始測試 log](https://github.com/williechen/copilot_use/tree/teaching/rust-ai-chat-alignment/docs/teaching/day24/pet-validation)；[r1 原文與證據](https://github.com/williechen/copilot_use/tree/teaching/rust-ai-chat-alignment/docs/teaching/day24/revisions/pet-r1)。測試 DB 使用隔離路徑，完成後刪除本次 SQLite，不碰 copilot_use 資料。
 
-本篇完整四節、完整程式與索引實際寫入並全文讀回，literal code 一致，才條件式更新 Pet next_day 24→25；保留 Chat、Analytics、makeup_queue 與 last_full_comparison。短測試內容寫入成功不足以推進；同證據重試不重複遞增，衝突先重讀，不強制覆寫。正式排程本次不恢復、不新增重複任務。
+本篇完整寫入同一正式頁後，四節全文與 literal code／來源／索引全部讀回，才條件式替換 Pet 的 Day24 r1→r2 交付證據；預期原body hash與state blob都要一致。Pet next_day固定25，不再加到26；其他案、makeup_queue、last_full_comparison保留。尚未完成多預設、持久每隻FSM、漫遊與跨平台，不能宣稱完整產品驗收。此次只做教學交付，正式排程未恢復，也未建立重複任務。
