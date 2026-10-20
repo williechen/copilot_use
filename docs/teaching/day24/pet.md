@@ -1,6 +1,6 @@
 ## 1. 學習大綱：把儲存身分接到真正生活窗
 
-本日一個最小切片是「控制台明確選取已儲存寵物→SQLite 保存選取→生活窗立即顯示名字與初始烏龜外觀→程序重啟載入同一身分」。來源 `rust_ai_chat/main` 為 `c965681eeb2b4791dba8d157624424b7f274b2fd`，workspace 0.2.23。原始碼雖可建立與列出三欄 `SavedPet`，生活窗仍只使用 `PetMachine::default()`，沒有已儲存 ID／名稱；動畫還是貓咪 emoji，與資料中的 tortoise 不一致。本篇不再優先加漫遊細節。
+本日一個最小切片是「控制台明確選取已儲存寵物→SQLite 保存選取→生活窗立即顯示名字與初始烏龜外觀→程序重啟載入同一身分」。來源 `rust_ai_chat/main` 為 `4f0cd00b8d571bdaf120298efebf0d62b795498f`，workspace 0.2.23。原始碼雖可建立與列出三欄 `SavedPet`，生活窗仍只使用 `PetMachine::default()`，沒有已儲存 ID／名稱；動畫還是貓咪 emoji，與資料中的 tortoise 不一致。本篇不再優先加漫遊細節。
 
 真實呼叫鏈：Leptos 清單按鈕→Rust bridge→`window.selectPet`→Tauri `select_pet`→同一 `PetStore` pool 交易寫入新增的 `local_pet_selection`→提交後 emit `pet-profile-changed`→生活窗顯示名字；啟動時 `active_pet` join 回本機寵物三欄。原生視窗標籤確定是 `main` 控制窗、`pet` 生活窗（URL `index.html?view=pet`），沒有假設不存在的多寵物建窗 API。
 
@@ -9,6 +9,8 @@
 規則 daily-tdd-minimum-v1；共同 Notion 更新 `2026-10-20T16:32:31.684Z`，規則 blob `ebebad6b3d671b7cdfa48a5f121a9958010b15b4`，教學初始基準 `f3b32b6a27d06db72e40f7d92a1530f52d549342`。Chat Day24 已完整交付，依序才處理 Pet。Day23（含）以前不改。主體 Red／Green 估 15 分鐘，Refactor／migration 閱讀 8 分鐘，版本與驗證 8 分鐘另列。`copilot_use` 產品的 `DesktopState/PetItem`、registry 與 `pet_runtime` 契約不同，本篇不冒稱產品整合。
 
 前置是 `PET_DATABASE_URL` 指向可遷移的 SQLite。新增 migration 僅建選取表，保留所有舊 SQL/checksum；遇舊庫 checksum 不符就停下人工核對，不刪舊庫、不修 checksum。任何 DB、IPC 讀取失敗顯示錯誤，不任意選寵物。
+
+發布前 main 由 c965681 更新到 4f0cd00，差異只有 root 的 AI migration；Pet 的所有程式、manifest／lock 與 migration 都未改。已在更新後隔離基準重新執行 44 項測試、WASM check、native build 與真雙視窗／程序重啟驗證。Red log 仍保留 c965681 的原始缺符號失敗，經差異核對對 4f0cd00 仍適用。Chat 已完成發布的歷史來源不回寫。
 
 ## 2. 實作內容：Red → 完整最小 Green → Refactor
 
@@ -370,14 +372,14 @@ index 0000000..ce723b4
 - 原生 Linux Xvfb + WebKitWebDriver／tauri-driver：真控制窗建立寵物→SQLite 查到同一 ID→按「選為生活窗寵物」→生活窗即時顯示名字、title ID 與烏龜→關掉整個程序重開→同生活窗載入同一身分，五項流程斷言全部通過。使用隔離測試 DB，無付費 AI；腳本與截圖在附件。
 - 原始 patch 對精確來源基準 `git apply --cached --check` 通過。三份原有 migration 保留；新 migration 初次與再次執行都通過。真實歷史 DB checksum 升級、跨平台、多生活窗、每隻 FSM／漫遊及自訂外觀仍未驗收。
 
-精確來源 SHA 的 CI（未包含本日隔離 patch）如下；不能把 build job 成功當作本日原生 GUI 驗證：
+精確來源 4f0cd00 的 CI（未包含本日隔離 patch）如下；查詢時尚在排隊／執行，未把 Pending 當成成功。先前 c965681 的 CI 結果保留附件，不冒充新 SHA 的結果。
 
-- [Rust AI Chat](https://github.com/williechen/rust_ai_chat/actions/runs/39465675559)：success；2026-10-20T17:38:52Z；jobs build-chat=success, check-chat=success
-- [Rust Desktop Pet](https://github.com/williechen/rust_ai_chat/actions/runs/39465675538)：success；2026-10-20T17:34:10Z；jobs check-pet=success, build-pet=success
-- [Persistence](https://github.com/williechen/rust_ai_chat/actions/runs/39465675580)：failure；2026-10-20T17:25:52Z；jobs test-persistence=failure
-- [Node](https://github.com/williechen/rust_ai_chat/actions/runs/39465675860)：success；2026-10-20T17:23:44Z；jobs test-node=success
-- [Test All](https://github.com/williechen/rust_ai_chat/actions/runs/39465675661)：failure；2026-10-20T17:26:17Z；jobs test-ai-core=success, test-chat-domain=success, test-server=failure, test-chat-application=success, test-desktop-pet=success, test-pet-domain=success, test-shared=success, test-ui=success, test-stats-server=success
-- [Rust Dashboard](https://github.com/williechen/rust_ai_chat/actions/runs/39465675519)：success；2026-10-20T17:26:41Z；jobs check-dashboard=success, build-dashboard=success
+- [Rust AI Chat](https://github.com/williechen/rust_ai_chat/actions/runs/39511377716)：queued/None；2026-10-20T22:54:04Z；jobs check-chat=None, build-chat=None
+- [Persistence](https://github.com/williechen/rust_ai_chat/actions/runs/39511377839)：queued/None；2026-10-20T22:54:04Z；jobs test-persistence=None
+- [Test All](https://github.com/williechen/rust_ai_chat/actions/runs/39511377875)：queued/None；2026-10-20T22:54:04Z；jobs test-chat-application=None, test-server=None, test-pet-domain=None, test-ui=None, test-shared=None, test-stats-server=None, test-ai-core=None, test-desktop-pet=None, test-chat-domain=None
+- [Node](https://github.com/williechen/rust_ai_chat/actions/runs/39511377669)：completed/success；2026-10-20T22:54:14Z；jobs test-node=success
+- [Rust Dashboard](https://github.com/williechen/rust_ai_chat/actions/runs/39511377730)：in_progress/None；2026-10-20T22:54:14Z；jobs build-dashboard=None, check-dashboard=None
+- [Rust Desktop Pet](https://github.com/williechen/rust_ai_chat/actions/runs/39511377861)：in_progress/None；2026-10-20T22:54:07Z；jobs build-pet=None, check-pet=None
 
 [完整修改、GUI 腳本與截圖、測試／CI／套件原始證據](https://github.com/williechen/copilot_use/tree/teaching/rust-ai-chat-alignment/docs/teaching/day24/pet-validation)。教學發布、使用者套用、產品整合、完整功能驗收分別記錄；本篇未寫產品原始碼。本次測試 SQLite 在驗證後清除，保留程式與 log，不碰 copilot_use 資料。
 
