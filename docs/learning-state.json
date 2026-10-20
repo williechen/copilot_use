@@ -7,7 +7,7 @@
   "next_day": {
     "chat": 24,
     "pet": 24,
-    "analytics": 23
+    "analytics": 24
   },
   "last_full_comparison": "2026-10-16T22:47:14.399027+08:00",
   "next_full_comparison": "2026-10-24T00:00:00+08:00",
@@ -1324,7 +1324,7 @@
       "id": "analytics-day22-postfreeze-20261020",
       "project": "analytics",
       "source_day": 22,
-      "status": "pending",
+      "status": "completed",
       "expected_next_day": 23,
       "placement": "section 2 after new Red/Green and Refactor; old-Day correction unit",
       "content_path": "docs/teaching/pending/day23/analytics-day22-corrections.md",
@@ -1332,7 +1332,12 @@
       "source_sha": "cabacb75e946b03c67c455ce13a7a4ea85652f8e",
       "created_at": "2026-10-20T12:01:32.285Z",
       "complete_only_after": "next original lesson and correction published with full Notion readback",
-      "not_completed": true
+      "not_completed": false,
+      "published_in_day": 23,
+      "notion_page_id": "3ffe51d4509381f88d1be27bc5ec5f9f",
+      "readback_verified": true,
+      "completed_at": "2026-10-20T15:22:18.054062+00:00",
+      "completion_scope": "teaching correction published and read back; product not applied"
     }
   ],
   "archived_lessons": {
@@ -2003,5 +2008,39 @@
     "body_sha256": "6ce1516b8d48f228ce4613e685a93e8216c3e747b1fb7cfc2bf62e687d6963bb",
     "expected_branch_sha_before_state_commit": "4ef62b1a6128dfb452da1c66ef04c364e0ade21e",
     "state_blob_before": "dcacd4c50ac9de1be362a88fdc5a46690bdb0b62"
+  },
+  "day23_analytics_delivery": {
+    "project": "analytics",
+    "day": 23,
+    "revision": "r1",
+    "notion_page_id": "3ffe51d4509381f88d1be27bc5ec5f9f",
+    "notion_url": "https://app.notion.com/p/3ffe51d4509381f88d1be27bc5ec5f9f?pvs=204",
+    "notion_page_last_edited_at": "2026-10-20T15:21:36.135Z",
+    "notion_readback_verified": true,
+    "full_text_verified_ignoring_whitespace": true,
+    "four_sections": true,
+    "code_blocks_exact": true,
+    "code_block_count": 2,
+    "index_verified": true,
+    "source_sha": "f38360cd537daf6dc20e1d3868221bb56390cc7c",
+    "content_commit": "aba0e84db91dba64c13690dd4e959a5f11af8687",
+    "rules_version": "daily-tdd-minimum-v1",
+    "article_path": "docs/teaching/day23/analytics.md",
+    "evidence_path": "docs/teaching/day23/analytics-completion.json",
+    "readback_path": "docs/teaching/day23/analytics-readback.json",
+    "tests": {
+      "passed": 30,
+      "failed": 0,
+      "scope": "see article and validation logs; product acceptance separate"
+    },
+    "main_application": "not applied",
+    "product_integration": "not performed",
+    "functional_acceptance": false,
+    "readback_at": "2026-10-20T15:22:18.054062+00:00",
+    "next_day_before": 23,
+    "next_day_after": 24,
+    "body_sha256": "d085fd1abccc29df7b9859a3cf37f660cdd34f72311c3dcbe7cd056203cfdc8c",
+    "expected_branch_sha_before_state_commit": "aba0e84db91dba64c13690dd4e959a5f11af8687",
+    "state_blob_before": "17811230d16f83516959e90f26ad57d307ac637e"
   }
 }

@@ -69,7 +69,7 @@ Notion 已完整讀回但 GitHub 狀態寫入／讀回失敗，保留頁面 ID�
 
 ## 目前進度
 
-三專案 Day22（含）以前文章均已封存；chat／pet Day23已發布並全文讀回，next_day=24；analytics next_day=23，Day23尚未發布。實作、測試與未完成項目見[目前進度](teaching/current/STATUS.md)。
+三專案 Day22（含）以前文章均已封存；chat／pet／analytics Day23已發布並全文讀回，next_day=24。實作、測試與未完成項目見[目前進度](teaching/current/STATUS.md)。
 
 ## 文件入口
 產品能力與未來清單、詳細架構、操作設定、功能對照與工程證據仍保留各自用途；本篇集中教學方法、格式及三專案大綱，其他教學入口改為引用。原Day及程式保留，舊規則／來源／失效教法只作歷史，不再套用為目前指令。
