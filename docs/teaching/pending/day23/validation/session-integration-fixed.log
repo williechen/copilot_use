@@ -1,0 +1,33 @@
+warning: unused variable: `set_rows`
+   --> crates/ui/src/lib.rs:273:16
+    |
+273 |     let (rows, set_rows) = signal(Vec::<(String, String)>::new());
+    |                ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_set_rows`
+    |
+    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `refreshed_room_list` is never used
+  --> crates/ui/src/lib.rs:40:4
+   |
+40 | fn refreshed_room_list(
+   |    ^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `refresh_result_view` is never used
+  --> crates/ui/src/lib.rs:57:4
+   |
+57 | fn refresh_result_view(
+   |    ^^^^^^^^^^^^^^^^^^^
+
+warning: `ui` (lib) generated 3 warnings (run `cargo fix --lib -p ui` to apply 1 suggestion)
+   Compiling server v0.2.22 (/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-3/work/source/apps/server)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.14s
+     Running tests/day23_session.rs (/home/willie/Documents/rust_ai_chat/target/debug/deps/day23_session-79cbc9b200f81f6a)
+
+running 2 tests
+test day23_old_migration_checksum_stops_upgrade ... ok
+test day23_full_runner_restart_and_session_rejections ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.99s
+
