@@ -1,89 +1,55 @@
-# Chat Day 23：註冊前置 SQLite 契約修補（未驗證候選）
+# Chat Day23：註冊 SQLite 契約查證（本地驗證修訂）
 
-狀態：**pending／不得冒充 Day23 Green**。來源 rust_ai_chat/main `5bcef70219b480a7999fdd0fbed5384d8d28d9be`；教學分支寫入前 `b8fd48cfc77a864764363e572e5d75bdcd5a9eae`。Day22（含）以前文章封存、不得改。此候選用於真實 Red/Green 前的資料契約核對；登入與 Session 尚需另一完整 Red/Green。
+狀態：pending／非正式文章。最新 rust_ai_chat/main `f38360cd537daf6dc20e1d3868221bb56390cc7c`；教學分支基底 `fc4a72825dac985e7d0a8e8e72edb7848349caa0`。Day22（含）以前正文與證據封存，不修改。本檔是前置契約查證，不另算新 Day，也不取代登入主體。
 
-## 已由程式核實的前置錯誤
+## 1. 現況與舊候選錯誤
 
-`migrations/20261018073931_create_auth_user.sql` 中 `mbr_user.user_sexy`、`mbr_user.user_birthday` 為 `NOT NULL` 且沒有 `DEFAULT`。現有 `apps/server/src/signup.rs` 的 `INSERT INTO mbr_user` 未提供這兩欄。按 SQLite NOT NULL 約束，成功註冊會被 DB 拒絕；現有 409/422 測試若未執行不能當作成功證據。已讀後續 root migrations：member_identity 只新增大小寫唯一索引；mbr_room 只新增房間關聯表，沒有解除上述限制。
+舊來源 `5bcef70219b480a7999fdd0fbed5384d8d28d9be` 的性別、生日為 NOT NULL，當時「省略欄位註冊回500」可重現；最新 main 已將 `mbr_user.user_sexy`、`user_birthday` 改為 nullable。完整 root migrations 執行後 PRAGMA table_info 兩欄 notnull=0，現有 signup INSERT 不填兩欄可成功。
 
-**避免捏造使用者性別／生日。** 表單需求不要求收集這些個資，因此建議以新的*前向 migration* 使兩欄可為 NULL，保留舊資料值，且不更改任何已套用歷史 migration。此提案必須在專用 SQLite DB 與完整外鍵／索引／trigger 盤點後測試，才可作為 Green。禁止直接在正式 DB 執行本文範例。
+因此移除舊候選的 DROP TABLE／RENAME 重建 SQL。最新 fresh DB **不需要**再修 nullable，也不能把已通過案例冒稱新的 Red。不得為套用本候選改任何既有 migration、修 checksum 或刪除正式 DB。
 
-## Red（先以真實遷移 schema 重現）
+## 2. 真正程式契約與驗證程式
 
-檔案：`apps/server/src/signup.rs` 測試模組。新增如下案例，使用既有 `routes(pool.clone())`：
+`apps/server/src/lib.rs` 建 pool→`persistence::migrate`（SQLx 完整 root migrator）→merge signup routes。GET /signup 原生表單、POST /signup 使用 form-urlencoded，Origin 必須為 http://127.0.0.1:3000，body 上限4096。Argon2 0.6 單參數 hash_password 在 blocking thread 執行；user_status=active，成功303 /signin，尚不建立 Session。大小寫唯一性由現有 20261019221857_member_identity.sql 的 uq_mbr_user_account／uq_mbr_user_email 保障。
+
+main 仍只驗欄位非空，既有短帳號測試會回409而非422。既有 `chat-day22-corrections.md` 的伺服器驗證修正應在當日 Refactor 後作一個 FIFO 補教，不在本檔聲稱已套用產品。
+
+以下是本輪實際執行的 integration test，新增於隔離副本 `apps/server/tests/day23_contract.rs`。歷史 schema fixture 為舊 SHA 的原始 auth SQL，保存在 validation/tests/fixtures/old-auth.sql；只供專用測試 DB 使用。
 
 ```rust
+use axum::{body::Body, http::{Request,StatusCode}};
+use tower::ServiceExt;
 #[tokio::test]
-async fn day23_signup_fresh_schema_returns_303_and_persists() {
-    use axum::{body::Body, http::Request};
-    use tower::ServiceExt;
-    let pool = sqlx::sqlite::SqlitePoolOptions::new()
-        .max_connections(1).connect("sqlite::memory:").await.unwrap();
-    sqlx::raw_sql(include_str!("../../../migrations/20261018073931_create_auth_user.sql"))
-        .execute(&pool).await.unwrap();
-    sqlx::raw_sql(include_str!("../../../migrations/20261019221857_member_identity.sql"))
-        .execute(&pool).await.unwrap();
-    let response = routes(pool.clone())
-        .oneshot(Request::post("/signup")
-            .header("origin", "http://127.0.0.1:3000")
-            .header("content-type", "application/x-www-form-urlencoded")
-            .body(Body::from(
-                "username=day23learner&email=day23%40example.test&display_name=Day23&password=lesson-only-password"
-            )).unwrap()).await.unwrap();
-    assert_eq!(response.status(), axum::http::StatusCode::SEE_OTHER);
-    let count: i64 = sqlx::query_scalar("SELECT count(*) FROM mbr_user")
-        .fetch_one(&pool).await.unwrap();
-    assert_eq!(count, 1);
+async fn day23_fresh_signup_contract() {
+ let pool=sqlx::SqlitePool::connect("sqlite::memory:").await.unwrap();
+ persistence::migrate(&pool).await.unwrap();
+ let response=server::signup::routes(pool.clone()).oneshot(Request::post("/signup").header("origin","http://127.0.0.1:3000").header("content-type","application/x-www-form-urlencoded").body(Body::from("username=day23learner&email=day23%40example.test&display_name=Day23&password=lesson-only-password")).unwrap()).await.unwrap();
+ assert_eq!(response.status(),StatusCode::SEE_OTHER);
+ let (hash,sex,birthday):(String,Option<String>,Option<String>)=sqlx::query_as("SELECT user_pd,user_sexy,user_birthday FROM mbr_user").fetch_one(&pool).await.unwrap();
+ assert_eq!((sex,birthday),(None,None));
+ use argon2::{Argon2,PasswordHash,PasswordVerifier};
+ Argon2::default().verify_password(b"lesson-only-password",&PasswordHash::new(&hash).unwrap()).unwrap();
+}
+#[tokio::test]
+async fn day23_old_schema_returns_500() {
+ let pool=sqlx::sqlite::SqlitePoolOptions::new().max_connections(1).connect("sqlite::memory:").await.unwrap();
+ sqlx::raw_sql(include_str!("fixtures/old-auth.sql")).execute(&pool).await.unwrap();
+ let r=server::signup::routes(pool.clone()).oneshot(Request::post("/signup").header("origin","http://127.0.0.1:3000").header("content-type","application/x-www-form-urlencoded").body(Body::from("username=day23learner&email=day23%40example.test&display_name=Day23&password=lesson-only-password")).unwrap()).await.unwrap();
+ assert_eq!(r.status(),StatusCode::INTERNAL_SERVER_ERROR);
+ let count:i64=sqlx::query_scalar("SELECT count(*) FROM mbr_user").fetch_one(&pool).await.unwrap();assert_eq!(count,0);
 }
 ```
 
-預期舊 schema 的實際回應不是 303，而是資料庫 NOT NULL 失敗導致 500；**本輪尚未實際執行此 Red**，不得將推論當作測試紀錄。
+## 3. migration 安全與套件
 
-## Green 前向 migration 設計（待整合測試）
+最新 tracked schema 的 mbr_user 關聯表包含 mbr_user_role、mbr_user_perm、mbr_room、mbr_exclude，欄位註解中的 FK 不等於真正 FOREIGN KEY 約束。兩個大小寫唯一索引存在；本輪 fresh schema 未查到依附 mbr_user 的 trigger／view。這份盤點僅適用來源 schema，不能代替使用者 DB 的自訂索引／trigger／view／外鍵盤點。新增 Session 使用獨立 additive CREATE TABLE／INDEX，沒有 DROP mbr_user。
 
-新檔案建議：`migrations/20261020XXXXXX_mbr_optional_profile_fields.sql`（時間戳命名先檢查當時分支，不能和既有檔案撞名）。必須保留所有原始欄位與原有資料，不用 `ALTER ... DROP COLUMN` 毀損使用者資料。
+最新 main 改過歷史 auth SQL，故不能把 fresh schema 成功推論為既有 DB 升級成功。本輪用舊 SHA 全套 migration 建隔離庫，再以最新 migrator 執行，實際得到「previously applied but has been modified」；原 migration 記錄數未變。這證明阻擋存在，不是通用修復。SQLx 每個 migration 的 transaction 不等於整批 migration 全有或全無；仍須先備份、查實際 _sqlx_migrations 與有效歷史基底，另訂前向方案。禁止 migrate repair、重建正式 DB 或直接套用舊 DROP/RENAME 提案。
 
-```sql
-CREATE TABLE mbr_user_day23 (
-    id varchar(40) NOT NULL PRIMARY KEY,
-    user_acnt TEXT NOT NULL,
-    user_pd TEXT NOT NULL,
-    user_email TEXT NOT NULL,
-    user_name TEXT NOT NULL,
-    user_status TEXT NOT NULL,
-    user_sexy TEXT,
-    user_birthday TIMESTAMP,
-    is_init_pd BOOLEAN NOT NULL,
-    expired_pd_at TIMESTAMP,
-    last_login_at TIMESTAMP,
-    created_at TIMESTAMP NOT NULL,
-    updated_at TIMESTAMP NOT NULL
-);
-INSERT INTO mbr_user_day23 (
-    id,user_acnt,user_pd,user_email,user_name,user_status,
-    user_sexy,user_birthday,is_init_pd,expired_pd_at,last_login_at,created_at,updated_at
-)
-SELECT id,user_acnt,user_pd,user_email,user_name,user_status,
-       user_sexy,user_birthday,is_init_pd,expired_pd_at,last_login_at,created_at,updated_at
-FROM mbr_user;
-DROP TABLE mbr_user;
-ALTER TABLE mbr_user_day23 RENAME TO mbr_user;
-CREATE UNIQUE INDEX uq_mbr_user_account ON mbr_user(lower(user_acnt));
-CREATE UNIQUE INDEX uq_mbr_user_email ON mbr_user(lower(user_email));
-```
+manifest／lock 精確版本及官方穩定版核對見登入候選第3節與 validation/packages-latest.json。本輪未升級來源依賴。
 
-此 SQL 只是候選。使用前須查 `sqlite_master` 及 `pragma_foreign_key_list` 找出所有指向 mbr_user 的外鍵、trigger、view、其他索引。若存在相依物，依實際 schema 改寫 migration 並於 transaction/備份回復方案下測試；不可假定 DROP/RENAME 在所有現有 DB 都安全。實際 sqlite/sqlx migration transaction 行為亦須驗證。
+## 4. 實際結果與限制
 
-## Red/Green 的測試要求
+`cargo test --locked -p server day23 -- --nocapture`：本輪5項通過，其中本檔舊schema500／最新完整schema303兩項通過，且最新註冊後性別／生日為NULL、Argon2密碼驗證成功。其餘3項覆蓋登入與Session及舊庫checksum拒絕，見登入候選。
 
-1. 專用 fresh SQLite：原 schema 的 Red 必須真的失敗於 NOT NULL；加新 migration 後同一 HTTP 行為變 303，且密碼雜湊可驗證。
-2. 模擬既有 DB：先插入一筆包含性別／生日的合法舊資料，再跑前向 migration；原 ID、歷史值、帳密 hash 與大小寫唯一索引全部保留；`pragma_foreign_key_check` 無違規。
-3. 以完整 migration runner 驗證既有 checksum 沒被更改；任何 mismatch 立即停止人工確認，不執行 `sqlx migrate repair`、不重建正式 DB。
-4. 登入最小切片仍須另外提供 Account verification + durable Session + Cookie + server protected endpoint 的同一 Day 完整程式與測試，否則 Day23 只能標未完成。
-5. 新版 Argon2 0.6 使用現有專案的單參數 `hash_password`，不可引入封存 Day22 的 0.5 範例；版本依精確當日 `Cargo.toml`／`Cargo.lock`。
-
-## 本輪實際限制及續接點
-
-直接嘗試 `git ls-remote https://github.com/williechen/rust_ai_chat.git HEAD`，原始錯誤：`fatal: unable to access 'https://github.com/williechen/rust_ai_chat.git/': Could not resolve host: github.com`。因此目前本地執行環境無法 clone／build／test 專案。GitHub connector 可唯讀檢索，教學分支可寫入證據。尚未執行 Day23 測試、Notion 正式發布、全文讀回或狀態遞增。此文件是具體可操作的下一步與 Red／migration 候選，不是完整已驗證登入教學。
-
-CI 來源：`rust_ai_chat/main` 上 Persistence run 39426649469 `test-persistence` 的 `Test persistence` step 失敗，`Run database migrations` step 成功；沒有取得失敗 log，不應推測此 CI 失敗就是上述 NOT NULL 問題。
+main library 全測為8通過／6失敗，另五項失敗涉及 rooms.desc 必填；不能宣稱server整套全綠。完整logs、來源SHA、可套用隔離patch與重現步驟見 validation/REPORT.md。未操作正式DB、未改封存Notion頁、未發布Day23、未推進next_day，未建立排程。
