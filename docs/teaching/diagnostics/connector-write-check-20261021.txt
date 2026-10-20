@@ -1,2 +1,0 @@
-Connector write diagnostic.
-No credentials, product code, or learning state changes.
