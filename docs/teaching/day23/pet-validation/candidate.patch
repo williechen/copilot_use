@@ -1,0 +1,394 @@
+diff --git a/apps/desktop_pet/src/pet_store.rs b/apps/desktop_pet/src/pet_store.rs
+index 52bd56b..7f66eae 100644
+--- a/apps/desktop_pet/src/pet_store.rs
++++ b/apps/desktop_pet/src/pet_store.rs
+@@ -1,9 +1,29 @@
++#[derive(Clone, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
++pub struct SavedPet {
++    pub id: String,
++    pub name: String,
++    pub species: String,
++}
++
+ #[derive(Clone)]
+ pub struct PetStore {
+     pub pool: sqlx::SqlitePool,
+ }
+ 
+ impl PetStore {
++    pub async fn list(&self) -> Result<Vec<SavedPet>, String> {
++        let rows: Vec<(String, String, String)> = sqlx::query_as(
++            "SELECT id,name,species FROM pet_profile WHERE owner_id='local-owner' ORDER BY name,id",
++        )
++        .fetch_all(&self.pool)
++        .await
++        .map_err(|_| "無法讀取已儲存寵物".to_owned())?;
++        Ok(rows
++            .into_iter()
++            .map(|(id, name, species)| SavedPet { id, name, species })
++            .collect())
++    }
++
+     pub async fn create(&self, input: &str) -> Result<String, String> {
+         let name = crate::normalize_new_pet_name(input)?;
+         let id = uuid::Uuid::new_v4().to_string();
+diff --git a/apps/desktop_pet/src/lib.rs b/apps/desktop_pet/src/lib.rs
+index 72a6c4f..6bc11d7 100644
+--- a/apps/desktop_pet/src/lib.rs
++++ b/apps/desktop_pet/src/lib.rs
+@@ -121,6 +121,11 @@ async fn create_pet(name: String, store: State<'_, pet_store::PetStore>) -> Resu
+     store.create(&name).await
+ }
+ 
++#[tauri::command]
++async fn list_pets(store: State<'_, pet_store::PetStore>) -> Result<Vec<pet_store::SavedPet>, String> {
++    store.list().await
++}
++
+ pub fn application(db: sqlx::SqlitePool) {
+     tauri::Builder::default()
+         .on_window_event(|window, event| {
+@@ -183,6 +188,7 @@ pub fn application(db: sqlx::SqlitePool) {
+             quit_pet,
+             validate_new_pet_name,
+             create_pet,
++            list_pets,
+         ])
+         .run(tauri::generate_context!())
+         .expect("failed to run Rust AI Desktop Pet");
+diff --git a/apps/desktop_pet/frontend/index.html b/apps/desktop_pet/frontend/index.html
+index 0a8d8df..6b300d3 100644
+--- a/apps/desktop_pet/frontend/index.html
++++ b/apps/desktop_pet/frontend/index.html
+@@ -104,7 +104,9 @@
+       return invoke("scan_duplicate_preview");
+     };
+ 
+-    window.validateNewPetName = (name) => {
++    window.listPets = () => invoke("list_pets");
++
++    window.createPet = (name) => {
+       return invoke("create_pet", { name });
+     };
+ 
+diff --git a/apps/desktop_pet/frontend/src/bridge.rs b/apps/desktop_pet/frontend/src/bridge.rs
+index 0993949..83e3469 100644
+--- a/apps/desktop_pet/frontend/src/bridge.rs
++++ b/apps/desktop_pet/frontend/src/bridge.rs
+@@ -63,8 +63,11 @@ extern "C" {
+     #[wasm_bindgen(js_namespace = window, js_name = scanDuplicatePreview)]
+     fn scan_duplicate_preview_js() -> Promise;
+ 
+-    #[wasm_bindgen(js_namespace = window, js_name = validateNewPetName)]
+-    fn validate_new_pet_name_js(name: &str) -> Promise;
++    #[wasm_bindgen(js_namespace = window, js_name = listPets)]
++    fn list_pets_js() -> Promise;
++
++    #[wasm_bindgen(js_namespace = window, js_name = createPet)]
++    fn create_pet_js(name: &str) -> Promise;
+ }
+ 
+ // 將 JavaScript 的錯誤轉換為 Rust 的字串
+@@ -160,9 +163,21 @@ pub async fn quit_pet() -> Result<(), String> {
+     Ok(())
+ }
+ 
+-pub async fn validate_new_pet_name(name: String) -> Result<String, String> {
+-    let value = JsFuture::from(validate_new_pet_name_js(&name))
++pub async fn create_pet(name: String) -> Result<String, String> {
++    let value = JsFuture::from(create_pet_js(&name))
+         .await
+         .map_err(js_error)?;
+     value.as_string().ok_or_else(|| "名稱回應格式錯誤".into())
+ }
++
++#[derive(Clone, Debug, PartialEq, Eq, serde::Deserialize)]
++pub struct SavedPet {
++    pub id: String,
++    pub name: String,
++    pub species: String,
++}
++
++pub async fn list_pets() -> Result<Vec<SavedPet>, String> {
++    let value = JsFuture::from(list_pets_js()).await.map_err(js_error)?;
++    serde_wasm_bindgen::from_value(value).map_err(|_| "寵物清單格式錯誤".into())
++}
+diff --git a/apps/desktop_pet/frontend/src/main.rs b/apps/desktop_pet/frontend/src/main.rs
+index 462606f..e90d5e8 100644
+--- a/apps/desktop_pet/frontend/src/main.rs
++++ b/apps/desktop_pet/frontend/src/main.rs
+@@ -51,6 +51,22 @@ fn App() -> impl IntoView {
+     let (new_pet_name, set_new_pet_name) = signal(String::new());
+     let (new_pet_feedback, set_new_pet_feedback) = signal(String::new());
+ 
++    let (saved_pets, set_saved_pets) = signal(Vec::<bridge::SavedPet>::new());
++    let (pets_busy, set_pets_busy) = signal(false);
++    if !bridge::is_pet_window() {
++        set_pets_busy.set(true);
++        spawn_local(async move {
++            match bridge::list_pets().await {
++                Ok(rows) => {
++                    set_saved_pets.set(rows);
++                    set_new_pet_feedback.set("已載入儲存清單".into());
++                }
++                Err(error) => set_new_pet_feedback.set(error),
++            }
++            set_pets_busy.set(false);
++        });
++    }
++
+     {
+         let snapshot_reader = snapshot;
+         let snapshot_writer = set_snapshot;
+@@ -116,19 +132,46 @@ fn App() -> impl IntoView {
+                         on:input=move |ev| set_new_pet_name.set(event_target_value(&ev)) />
+                 </label>
+                 <button
+-                    type="button" 
++                    type="button"
++                    disabled=move || pets_busy.get()
+                     on:click=move |_| {
++                        if pets_busy.get_untracked() { return; }
++                        set_pets_busy.set(true);
+                         let proposed = new_pet_name.get_untracked();
+                         spawn_local(async move {
+-                            let response = bridge::validate_new_pet_name(proposed).await;
+-                            set_new_pet_feedback.set(match response {
+-                                Ok(name) => format!("已儲存名稱：{name}"),
+-                                Err(error) => error,
+-                            });
++                            match bridge::create_pet(proposed).await {
++                                Ok(saved) => match bridge::list_pets().await {
++                                    Ok(rows) => {
++                                        set_saved_pets.set(rows);
++                                        set_new_pet_feedback.set(format!("已儲存：{saved}"));
++                                    }
++                                    Err(_) => set_new_pet_feedback.set(format!("已建立：{saved}；清單讀回失敗，請重新載入，勿重送建立。")),
++                                },
++                                Err(error) => set_new_pet_feedback.set(error),
++                            }
++                            set_pets_busy.set(false);
+                         });
+                     }
+                 >"建立寵物"</button>
+                 <p role="status">{move || new_pet_feedback.get()}</p>
++                <h3>"已儲存寵物"</h3>
++                <button type="button" disabled=move || pets_busy.get()
++                    on:click=move |_| {
++                        if pets_busy.get_untracked() { return; }
++                        set_pets_busy.set(true);
++                        spawn_local(async move {
++                            match bridge::list_pets().await {
++                                Ok(rows) => { set_saved_pets.set(rows); set_new_pet_feedback.set("已重新載入清單".into()); }
++                                Err(error) => set_new_pet_feedback.set(error),
++                            }
++                            set_pets_busy.set(false);
++                        });
++                    }>"重新載入清單"</button>
++                <Show when=move || pets_busy.get() fallback=|| ()><p>"處理中…"</p></Show>
++                <ul>
++                    <For each=move || saved_pets.get() key=|pet| pet.id.clone()
++                        children=|pet| view! { <li>{format!("{}／{}（{}）", pet.name, pet.species, pet.id)}</li> } />
++                </ul>
+             </section>
+ 
+             <h2>"互動與聊天"</h2>
+diff --git a/apps/desktop_pet/tests/day23_saved_pets.rs b/apps/desktop_pet/tests/day23_saved_pets.rs
+new file mode 100644
+index 0000000..ebfcd5f
+--- /dev/null
++++ b/apps/desktop_pet/tests/day23_saved_pets.rs
+@@ -0,0 +1,75 @@
++use desktop_pet::pet_store::PetStore;
++use sqlx::sqlite::{SqliteConnectOptions, SqlitePoolOptions};
++#[tokio::test]
++async fn day23_control_list_survives_pool_reopen() {
++    let path = std::env::temp_dir().join(format!("day23-pet-{}.sqlite", uuid::Uuid::new_v4()));
++    let options = SqliteConnectOptions::new()
++        .filename(&path)
++        .create_if_missing(true)
++        .foreign_keys(true);
++    let pool = SqlitePoolOptions::new()
++        .max_connections(1)
++        .connect_with(options.clone())
++        .await
++        .unwrap();
++    sqlx::migrate!("./migrations").run(&pool).await.unwrap();
++    let store = PetStore { pool: pool.clone() };
++    assert!(store.list().await.unwrap().is_empty());
++    store.create(" 小橘 ").await.unwrap();
++    let before = store.list().await.unwrap();
++    assert_eq!(before.len(), 1);
++    assert_eq!(before[0].name, "小橘");
++    assert_eq!(before[0].species, "tortoise");
++    assert!(uuid::Uuid::parse_str(&before[0].id).is_ok());
++    let encoded = serde_json::to_value(&before[0]).unwrap();
++    assert_eq!(encoded.as_object().unwrap().len(), 3); // 不回傳主人或AI密鑰。
++    assert!(store.create("  ").await.is_err());
++    assert_eq!(store.list().await.unwrap(), before);
++    pool.close().await;
++    let reopened = SqlitePoolOptions::new()
++        .max_connections(1)
++        .connect_with(options)
++        .await
++        .unwrap();
++    let store = PetStore {
++        pool: reopened.clone(),
++    };
++    assert_eq!(store.list().await.unwrap(), before);
++    sqlx::migrate!("./migrations").run(&reopened).await.unwrap();
++    assert_eq!(store.list().await.unwrap(), before);
++    reopened.close().await;
++    std::fs::remove_file(path).unwrap();
++}
++
++#[tokio::test]
++async fn day23_old_pet_checksum_rejects_without_deleting_saved_pet() {
++    let pool = SqlitePoolOptions::new()
++        .max_connections(1)
++        .connect("sqlite::memory:")
++        .await
++        .unwrap();
++    let old = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/pet-day22");
++    sqlx::migrate::Migrator::new(old.as_path())
++        .await
++        .unwrap()
++        .run(&pool)
++        .await
++        .unwrap();
++    sqlx::query("INSERT INTO pet_owner(id,name) VALUES ('local-owner','舊主人')")
++        .execute(&pool)
++        .await
++        .unwrap();
++    sqlx::query("INSERT INTO pet_profile(id,name,species,owner_id) VALUES ('sentinel','舊寵物','tortoise','local-owner')").execute(&pool).await.unwrap();
++    let result = sqlx::migrate!("./migrations").run(&pool).await;
++    assert!(
++        result
++            .unwrap_err()
++            .to_string()
++            .contains("previously applied but has been modified")
++    );
++    let saved: String = sqlx::query_scalar("SELECT name FROM pet_profile WHERE id='sentinel'")
++        .fetch_one(&pool)
++        .await
++        .unwrap();
++    assert_eq!(saved, "舊寵物");
++}
+diff --git a/apps/desktop_pet/tests/fixtures/pet-day22/20261018095626_create_pet_owner.sql b/apps/desktop_pet/tests/fixtures/pet-day22/20261018095626_create_pet_owner.sql
+new file mode 100644
+index 0000000..8c72040
+--- /dev/null
++++ b/apps/desktop_pet/tests/fixtures/pet-day22/20261018095626_create_pet_owner.sql
+@@ -0,0 +1,7 @@
++-- Add migration script here
++CREATE TABLE pet_owner (
++    id TEXT NOT NULL PRIMARY KEY, -- PKNO
++    name VARCHAR(255) NOT NULL, -- 主人名稱
++    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 建立時間
++    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- 更新時間
++);
+\ No newline at end of file
+diff --git a/apps/desktop_pet/tests/fixtures/pet-day22/20261018091733_create_pet.sql b/apps/desktop_pet/tests/fixtures/pet-day22/20261018091733_create_pet.sql
+new file mode 100644
+index 0000000..2b96297
+--- /dev/null
++++ b/apps/desktop_pet/tests/fixtures/pet-day22/20261018091733_create_pet.sql
+@@ -0,0 +1,65 @@
++-- Add migration script here
++CREATE TABLE pet_profile (
++    id TEXT NOT NULL PRIMARY KEY, -- PKNO
++    name VARCHAR(255) NOT NULL, -- 寵物名稱
++    ai_api_key VARCHAR(255), -- AI API 金鑰
++    species VARCHAR(255) NOT NULL, -- 物種
++    age INT, -- 年齡
++    sexy VARCHAR(255), -- 性別
++    image_path VARCHAR(255), -- 圖片路徑
++    is_default_closure BOOLEAN DEFAULT FALSE, -- 是否預設關籠 
++    owner_id TEXT NOT NULL REFERENCES pet_owner(id), -- 主人ID
++    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 建立時間
++    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- 更新時間
++);
++
++CREATE TABLE pet_extra (
++    id TEXT NOT NULL PRIMARY KEY, -- PKNO
++    pet_id TEXT NOT NULL REFERENCES pet_profile(id), -- 寵物ID
++    owner_id TEXT NOT NULL REFERENCES pet_owner(id), -- 主人ID
++    category VARCHAR(255), -- 類別(例如: 興趣、個性、喜好、其他)
++    content VARCHAR(255), -- 內容
++    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 建立時間
++    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- 更新時間
++);
++
++CREATE TABLE pet_activity (
++    id TEXT NOT NULL PRIMARY KEY, -- PKNO
++    pet_id TEXT NOT NULL REFERENCES pet_profile(id), -- 寵物ID
++    owner_id TEXT NOT NULL REFERENCES pet_owner(id), -- 主人ID
++    activity_type VARCHAR(255), -- 活動類型(例如: 散步、玩耍、訓練)
++    is_activity BOOLEAN DEFAULT FALSE, -- 是否進行中
++    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 建立時間
++    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- 更新時間
++);
++
++CREATE TABLE pet_study(
++    id TEXT NOT NULL PRIMARY KEY, -- PKNO
++    pet_id TEXT NOT NULL REFERENCES pet_profile(id), -- 寵物ID
++    owner_id TEXT NOT NULL REFERENCES pet_owner(id), -- 主人ID
++    study_item VARCHAR(255), -- 學習項目(例如: 尋找、刪除、整理)
++    is_study BOOLEAN DEFAULT FALSE, -- 是否進行中
++    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 建立時間
++    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- 更新時間
++);
++
++CREATE TABLE pet_life_log (
++    id TEXT NOT NULL PRIMARY KEY, -- PKNO
++    pet_id TEXT NOT NULL REFERENCES pet_profile(id), -- 寵物ID
++    owner_id TEXT NOT NULL REFERENCES pet_owner(id), -- 主人ID
++    do_item VARCHAR(255), -- 執行項目(例如: 散步、玩耍、訓練)
++    do_title TEXT, -- 標題(例如: 今天有散步，找到球)
++    content TEXT, -- 內容(例如: 今天的散步情況．找到球的過程)
++    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 建立時間
++    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- 更新時間
++);
++
++CREATE TABLE codemap (
++    id TEXT NOT NULL PRIMARY KEY, -- PKNO
++    category VARCHAR(255), -- 類別(例如: 活動類型, 寵物屬性)
++    code VARCHAR(255), -- 代碼(例如: WALK, PLAY, TRAIN)
++    value VARCHAR(255), -- 值(例如: 散步、玩耍、訓練)
++    description VARCHAR(255), -- 描述
++    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 建立時間
++    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- 更新時間
++);
+\ No newline at end of file
+diff --git a/apps/desktop_pet/tests/fixtures/pet-day22/20261018114025_creat_protocol.sql b/apps/desktop_pet/tests/fixtures/pet-day22/20261018114025_creat_protocol.sql
+new file mode 100644
+index 0000000..6ebb517
+--- /dev/null
++++ b/apps/desktop_pet/tests/fixtures/pet-day22/20261018114025_creat_protocol.sql
+@@ -0,0 +1,26 @@
++-- Add migration script here
++CREATE TABLE pet_token_log(
++    id TEXT NOT NULL PRIMARY KEY,
++    token_src TEXT NOT NULL, -- 憑證來源(pet)
++    token_type TEXT NOT NULL,  -- 憑證類型(jwt, sha256, md5)
++    token_context TEXT NOT NULL,  -- 憑證內容
++    
++    ref_token_src TEXT,  -- 參考的憑證來源(analytic)
++    ref_token_type TEXT,  -- 參考的憑證類型(jwt, sha256, md5)
++    ref_token_context TEXT,  -- 參考的憑證內容
++
++    expired_at TIMESTAMP,  -- 憑證過期時間
++    token_status TEXT,  -- 憑證狀態
++    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
++);
++
++CREATE TABLE pet_send_log(
++    id TEXT NOT NULL PRIMARY KEY,
++    local_token TEXT NOT NULL,  -- 本地的憑證
++    remote_token TEXT,  -- 遠端的憑證
++    json_data TEXT NOT NULL,  -- 本地的JSON數據
++    send_status TEXT,  -- 發送狀態
++    send_at TIMESTAMP,  -- 發送時間
++    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
++);
++

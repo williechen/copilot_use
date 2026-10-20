@@ -1,0 +1,2 @@
+PASS: git apply --check against clean f38360cd537daf6dc20e1d3868221bb56390cc7c archive
+SHA256 1cfc90d5c56e8f3db4b0eedbde1079e93bcd28e829431a0748c99f8cc9862664
