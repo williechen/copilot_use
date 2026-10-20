@@ -27,6 +27,9 @@
 
 大功能可跨日；原切片未完成如實保留，不把 API、欄位或純補測當完整新功能。已實作 Day 封存，未實作部分可在原頁修訂；狀態不明先列未核實。重大錯誤由人工逐案裁定影響範圍及是否版本化重發，保留原文與版本；更正不自動新增 Day 或倒退進度。
 
+#### Day 22 封存與後續修正順序（2026-10-20）
+依使用者要求，Day 22 Chat／Pet／Analytics 文章以目前內容封存，保留既有版本勘誤、原文、程式及證據，不再直接修訂正文。每次下一 Day 前核對最新 rust_ai_chat/main、真實呼叫鏈、CI 與本日涉及套件的 manifest／lock／官方最新穩定版本；有差異時，在下一 Day 第2節的新 Red／完整 Green／Refactor 之後，另加「舊 Day 更正補充（程式／套件差異）」，提供真實路徑、必要完整修改、版本理由與驗證／未驗證範圍。原教學與補教分開，既有 makeup_queue 採 FIFO、每篇最多一個舊 Day 單元；新發現差異去重排入，不預先宣稱補教完成、不為修正新增 Day 或遞增 next_day。最新依賴不等於適合直接升級，不自動更新產品或來源 lock；跨主要版本需先核實 API 與相容性。
+
 ### 3. 測試與證據
 
 CI 必須核對並揭露精確 SHA、workflow／job、狀態、時間與連結；Success／Failure／Pending／Skipped／Cancelled／無紀錄均不單獨阻擋教學發布或 next_day。CI Success 只證明實際執行的範圍，不能代替 DB、HTTP／WS、SSR／WASM、GUI 或端到端驗收；copilot_use CI 僅是產品證據。

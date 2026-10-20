@@ -1,0 +1,31 @@
+    Checking hydration_context v0.3.2
+   Compiling tachys v0.2.19
+   Compiling leptos_macro v0.8.19
+   Compiling leptos v0.8.22
+   Compiling leptos_router v0.8.17
+    Checking reactive_graph v0.2.16
+    Checking chat-domain v0.2.22 (/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-2/work/day22-review/source/crates/chat_domain)
+   Compiling leptos_router_macro v0.8.7
+    Checking shared v0.2.22 (/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-2/work/day22-review/source/crates/shared)
+    Checking pet-domain v0.2.22 (/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-2/work/day22-review/source/crates/pet_domain)
+    Checking reactive_stores v0.4.4
+    Checking leptos_server v0.8.8
+    Checking leptos_dom v0.8.8
+    Checking desktop-pet-frontend v0.2.22 (/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-2/work/day22-review/source/apps/desktop_pet/frontend)
+    Checking ui v0.2.22 (/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-2/work/day22-review/source/crates/ui)
+warning: function `refreshed_room_list` is never used
+  --> crates/ui/src/lib.rs:40:4
+   |
+40 | fn refreshed_room_list(
+   |    ^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `create_room` is never used
+ --> crates/ui/src/room_api.rs:6:14
+  |
+6 | pub async fn create_room(name: &str) -> Result<CreateRoomResponse, String> {
+  |              ^^^^^^^^^^^
+
+warning: `ui` (lib) generated 2 warnings
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 10.20s

@@ -1,6 +1,6 @@
 {
   "scope": "Latest published teaching index; Day16 snapshot preserved in archive",
-  "revision": "day22-r2-all-readback-verified",
+  "revision": "day22-frozen-post-source-package-review",
   "synced_date": "2026-10-20",
   "source_sha": "5654591f3002fc619c883af9b5197e2126cc6494",
   "articles": [
@@ -32,7 +32,12 @@
       "main_application": "not applied",
       "product_integration": "not performed",
       "functional_acceptance": false,
-      "readback_at": "2026-10-19T22:58:26.275Z"
+      "readback_at": "2026-10-19T22:58:26.275Z",
+      "archived": true,
+      "archive_manifest": "docs/teaching/archive/day-22/manifest.json",
+      "frozen_notion_page_last_edited_at": "2026-10-20T11:54:10.262Z",
+      "frozen_body_sha256": "ad6cef4a58f20f6162fb01a4c71ef1a752992856327063d9988112c91a639184",
+      "frozen_notion_snapshot": "docs/teaching/archive/day-22/notion/chat.md"
     },
     {
       "project": "pet",
@@ -62,7 +67,12 @@
       "main_application": "not applied",
       "product_integration": "not performed",
       "functional_acceptance": false,
-      "readback_at": "2026-10-19T22:58:26.281Z"
+      "readback_at": "2026-10-19T22:58:26.281Z",
+      "archived": true,
+      "archive_manifest": "docs/teaching/archive/day-22/manifest.json",
+      "frozen_notion_page_last_edited_at": "2026-10-20T11:54:12.172Z",
+      "frozen_body_sha256": "88fa706c5a3f7f3d6255957b8ed317d64cb1a6c57f1cf6638bfb838d5e6b282f",
+      "frozen_notion_snapshot": "docs/teaching/archive/day-22/notion/pet.md"
     },
     {
       "project": "analytics",
@@ -91,7 +101,12 @@
       "main_application": "not applied",
       "product_integration": "not performed",
       "functional_acceptance": false,
-      "readback_at": "2026-10-19T22:58:26.281Z"
+      "readback_at": "2026-10-19T22:58:26.281Z",
+      "archived": true,
+      "archive_manifest": "docs/teaching/archive/day-22/manifest.json",
+      "frozen_notion_page_last_edited_at": "2026-10-20T11:54:14.054Z",
+      "frozen_body_sha256": "ae01b5aee1d29eec4a60a8ae8800e1a07ab8c9e7a838c4fa1ed17bfedc9069d1",
+      "frozen_notion_snapshot": "docs/teaching/archive/day-22/notion/analytics.md"
     }
   ],
   "day15_frozen": true,
@@ -103,9 +118,9 @@
   "day_advanced": true,
   "reference_modified": false,
   "current_reference_observation": {
-    "sha": "da5155265bf66ef9d495fd38913ad6cb93e1bac8",
+    "sha": "cabacb75e946b03c67c455ce13a7a4ea85652f8e",
     "full_acceptance": false,
-    "scope": "Day22 isolated candidate tests; reference remains read-only"
+    "scope": "latest main source tested; Chat 13/1, Pet 42/0, Analytics PG26/0; frozen lesson kept"
   },
   "execution_policy": {
     "canonical": "docs/COMMON_LEARNING_RULES.md",
@@ -187,5 +202,7 @@
       "article_path": "docs/teaching/day20/analytics.md"
     }
   ],
-  "day22_completion": "docs/teaching/day22/completion.json"
+  "day22_completion": "docs/teaching/day22/completion.json",
+  "day22_archive": "docs/teaching/archive/day-22/manifest.json",
+  "latest_source_review": "docs/teaching/evidence/2026-10-20-day22-freeze/review.json"
 }
