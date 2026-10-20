@@ -1,6 +1,6 @@
 {
   "scope": "Latest published teaching index; Day16 snapshot preserved in archive",
-  "revision": "analytics-day23-r1-published",
+  "revision": "day23-archived",
   "synced_date": "2026-10-20",
   "source_sha": "5654591f3002fc619c883af9b5197e2126cc6494",
   "articles": [
@@ -40,7 +40,12 @@
       "makeup_completed": "chat-day22-postfreeze-20261020",
       "body_sha256": "fda5933e8996ff1c9541644ad42c97c65c8eac2d0d255e7db0d7e8bf9cbed780",
       "expected_branch_sha_before_state_commit": "9c384e7def31dc062e296c007f3312a74be4adc8",
-      "state_blob_before": "5a50543f6c50ef09a815016ed50745e58d98de1c"
+      "state_blob_before": "5a50543f6c50ef09a815016ed50745e58d98de1c",
+      "archived": true,
+      "archive_manifest": "docs/teaching/archive/day-23/manifest.json",
+      "frozen_notion_page_last_edited_at": "2026-10-20T16:22:45.900Z",
+      "frozen_body_sha256": "2bd47c7f22f9ef5b0939b79801c05eccc1d9331d7b0f41851b9c71d504755f93",
+      "frozen_notion_snapshot": "docs/teaching/archive/day-23/notion/chat.md"
     },
     {
       "project": "pet",
@@ -74,7 +79,12 @@
       "next_day_after": 24,
       "body_sha256": "6ce1516b8d48f228ce4613e685a93e8216c3e747b1fb7cfc2bf62e687d6963bb",
       "expected_branch_sha_before_state_commit": "4ef62b1a6128dfb452da1c66ef04c364e0ade21e",
-      "state_blob_before": "dcacd4c50ac9de1be362a88fdc5a46690bdb0b62"
+      "state_blob_before": "dcacd4c50ac9de1be362a88fdc5a46690bdb0b62",
+      "archived": true,
+      "archive_manifest": "docs/teaching/archive/day-23/manifest.json",
+      "frozen_notion_page_last_edited_at": "2026-10-20T16:22:46.610Z",
+      "frozen_body_sha256": "a5fcdb3f5f780ddc48b51d3576b5c3a3f727841c48ee007327fd79f6fbc2a4bd",
+      "frozen_notion_snapshot": "docs/teaching/archive/day-23/notion/pet.md"
     },
     {
       "project": "analytics",
@@ -108,7 +118,12 @@
       "next_day_after": 24,
       "body_sha256": "d085fd1abccc29df7b9859a3cf37f660cdd34f72311c3dcbe7cd056203cfdc8c",
       "expected_branch_sha_before_state_commit": "aba0e84db91dba64c13690dd4e959a5f11af8687",
-      "state_blob_before": "17811230d16f83516959e90f26ad57d307ac637e"
+      "state_blob_before": "17811230d16f83516959e90f26ad57d307ac637e",
+      "archived": true,
+      "archive_manifest": "docs/teaching/archive/day-23/manifest.json",
+      "frozen_notion_page_last_edited_at": "2026-10-20T16:22:47.282Z",
+      "frozen_body_sha256": "93d4c00a6e4d3516fcab18a3fc605bd84af28acda551670f37b5deb1b606adb5",
+      "frozen_notion_snapshot": "docs/teaching/archive/day-23/notion/analytics.md"
     }
   ],
   "day15_frozen": true,
@@ -208,9 +223,9 @@
   "day22_archive": "docs/teaching/archive/day-22/manifest.json",
   "latest_source_review": "docs/teaching/evidence/2026-10-20-day22-freeze/review.json",
   "archived_through_day": {
-    "chat": 22,
-    "pet": 22,
-    "analytics": 22
+    "chat": 23,
+    "pet": 23,
+    "analytics": 23
   },
   "archive_scope_manifest": "docs/teaching/archive/scope.json",
   "current_status_document": "docs/teaching/current/STATUS.md",
@@ -325,5 +340,6 @@
     "frozen_body_sha256": "ae01b5aee1d29eec4a60a8ae8800e1a07ab8c9e7a838c4fa1ed17bfedc9069d1",
     "frozen_notion_snapshot": "docs/teaching/archive/day-22/notion/analytics.md"
   },
-  "latest_analytics_publication": "docs/teaching/day23/analytics-completion.json"
+  "latest_analytics_publication": "docs/teaching/day23/analytics-completion.json",
+  "day23_archive": "docs/teaching/archive/day-23/manifest.json"
 }

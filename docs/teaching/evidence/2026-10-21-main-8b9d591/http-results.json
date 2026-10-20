@@ -1,0 +1,13 @@
+{
+  "chat_signup_page": 200,
+  "chat_signup": 303,
+  "chat_login": 303,
+  "chat_session_process_restart": true,
+  "chat_unauthenticated_account": 401,
+  "chat_unprotected_room_page_status": 200,
+  "analytics_legacy_key_rejected": 422,
+  "analytics_password_login": 303,
+  "analytics_restricted_query": 403,
+  "analytics_session_process_restart": true,
+  "analytics_logout_revocation": 401
+}

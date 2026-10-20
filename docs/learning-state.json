@@ -2042,5 +2042,20 @@
     "body_sha256": "d085fd1abccc29df7b9859a3cf37f660cdd34f72311c3dcbe7cd056203cfdc8c",
     "expected_branch_sha_before_state_commit": "aba0e84db91dba64c13690dd4e959a5f11af8687",
     "state_blob_before": "17811230d16f83516959e90f26ad57d307ac637e"
+  },
+  "day23_archive": {
+    "archived_at": "2026-10-20T16:24:33.387339+00:00",
+    "manifest": "docs/teaching/archive/day-23/manifest.json",
+    "user_reported_completed": true,
+    "formal_validation_separate": true,
+    "next_day_unchanged": true
+  },
+  "day23_local_validation": {
+    "source_sha": "8b9d59110349609c940e540ee9d5b42883d52b3e",
+    "status": "completed with failures and functional gaps; not full acceptance",
+    "summary": "docs/teaching/evidence/2026-10-21-main-8b9d591/summary.json",
+    "report": "docs/teaching/evidence/2026-10-21-main-8b9d591/REPORT.md",
+    "db_cleanup": "docs/teaching/evidence/2026-10-21-main-8b9d591/db-cleanup.json",
+    "next_day_unchanged": true
   }
 }

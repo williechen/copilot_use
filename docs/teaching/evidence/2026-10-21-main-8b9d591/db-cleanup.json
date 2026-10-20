@@ -1,0 +1,39 @@
+{
+  "authorized_scope": "rust_ai_chat development DBs only; preserve copilot_use",
+  "configured_app_databases_found": false,
+  "existing_5432_databases": [
+    "postgres",
+    "willie"
+  ],
+  "existing_5432_application_tables": 0,
+  "existing_5432_service_preserved": true,
+  "copilot_use_databases_touched": false,
+  "deleted": [
+    {
+      "kind": "SQLite test DB",
+      "path": "/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-3/work/formal-runtime/pet.sqlite",
+      "bytes": 94208
+    },
+    {
+      "kind": "SQLite test DB",
+      "path": "/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-3/work/formal-runtime/chat.sqlite",
+      "bytes": 241664
+    },
+    {
+      "kind": "SQLite test DB",
+      "path": "/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-3/work/source/apps/server/target/sqlx/test-dbs/server/ws/test/ws_message_requires_room_at_write_time.sqlite",
+      "bytes": 225280
+    },
+    {
+      "kind": "dedicated PostgreSQL test cluster",
+      "path": "/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-3/work/analytics23-pg",
+      "stopped_before_delete": true
+    },
+    {
+      "kind": "dedicated PostgreSQL test cluster",
+      "path": "/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-3/work/formal-pg",
+      "stopped_before_delete": true
+    }
+  ],
+  "remaining_database_files_in_task_work": []
+}

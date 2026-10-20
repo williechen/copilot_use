@@ -1,0 +1,90 @@
+{
+  "source_sha": "8b9d59110349609c940e540ee9d5b42883d52b3e",
+  "workspace_version": "0.2.23",
+  "run_at": "2026-10-20T16:31:45.537640+00:00",
+  "scope": "current rust_ai_chat/main; no teaching patches",
+  "workspace": {
+    "passed": 122,
+    "failed": 0,
+    "ignored": 1
+  },
+  "postgres": {
+    "passed": 28,
+    "failed": 0,
+    "ignored": 0
+  },
+  "fmt": "passed",
+  "ssr": "passed",
+  "chat_wasm": "passed",
+  "pet_wasm": "passed",
+  "native_build": "passed",
+  "pet_trunk": "passed after clearing invalid NO_COLOR=1 and allowing tool download",
+  "strict_clippy": "failed: collapsible_if in stats_server/admin.rs:321 and desktop_pet/lib.rs:134",
+  "http": {
+    "chat_signup_page": 200,
+    "chat_signup": 303,
+    "chat_login": 303,
+    "chat_session_process_restart": true,
+    "chat_unauthenticated_account": 401,
+    "chat_unprotected_room_page_status": 200,
+    "analytics_legacy_key_rejected": 422,
+    "analytics_password_login": 303,
+    "analytics_restricted_query": 403,
+    "analytics_session_process_restart": true,
+    "analytics_logout_revocation": 401
+  },
+  "pet_native_gui": {
+    "native_startup_list": true,
+    "real_ui_ipc_sqlite_create": true,
+    "native_process_restart_saved_id": true,
+    "reload_button": true
+  },
+  "db_cleanup": {
+    "authorized_scope": "rust_ai_chat development DBs only; preserve copilot_use",
+    "configured_app_databases_found": false,
+    "existing_5432_databases": [
+      "postgres",
+      "willie"
+    ],
+    "existing_5432_application_tables": 0,
+    "existing_5432_service_preserved": true,
+    "copilot_use_databases_touched": false,
+    "deleted": [
+      {
+        "kind": "SQLite test DB",
+        "path": "/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-3/work/formal-runtime/pet.sqlite",
+        "bytes": 94208
+      },
+      {
+        "kind": "SQLite test DB",
+        "path": "/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-3/work/formal-runtime/chat.sqlite",
+        "bytes": 241664
+      },
+      {
+        "kind": "SQLite test DB",
+        "path": "/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-3/work/source/apps/server/target/sqlx/test-dbs/server/ws/test/ws_message_requires_room_at_write_time.sqlite",
+        "bytes": 225280
+      },
+      {
+        "kind": "dedicated PostgreSQL test cluster",
+        "path": "/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-3/work/analytics23-pg",
+        "stopped_before_delete": true
+      },
+      {
+        "kind": "dedicated PostgreSQL test cluster",
+        "path": "/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-3/work/formal-pg",
+        "stopped_before_delete": true
+      }
+    ],
+    "remaining_database_files_in_task_work": []
+  },
+  "full_product_acceptance": false,
+  "source_code_modified": false,
+  "preexisting_readme_dirty_preserved": true,
+  "next_day_unchanged": {
+    "chat": 24,
+    "pet": 24,
+    "analytics": 24
+  },
+  "schedule_modified": false
+}

@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-3/work/formal-pet-gui.py", line 42, in <module>
+    wait(lambda:'已儲存：' in text());rows=sqlite3.connect(db).execute('SELECT id,name FROM pet_profile').fetchall();assert len(rows)==1 and rows[0][1]=='正式驗證寵物';assert rows[0][0] in text();results['real_ui_ipc_sqlite_create']=True
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-3/work/formal-pet-gui.py", line 23, in wait
+    raise RuntimeError('timeout: '+str(last))
+RuntimeError: timeout: False

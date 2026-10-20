@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "confirmed_at": "2026-10-20T12:26:30.115Z",
+  "authority": "explicit user confirmation",
+  "projects": [
+    "chat",
+    "pet",
+    "analytics"
+  ],
+  "archived_through_day": 22,
+  "inclusive": true,
+  "scope": "all existing lesson articles with Day <= 22",
+  "article_body_edit_allowed": false,
+  "correction_placement": "next original Day section 2 after new Red/Green and Refactor",
+  "existing_archives_preserved": true,
+  "lesson_bodies_modified": false,
+  "earlier_article_snapshots_reaudited": false,
+  "does_not_imply_implementation_or_acceptance": true,
+  "current_next_day": {
+    "chat": 23,
+    "pet": 23,
+    "analytics": 23
+  },
+  "canonical_notion_page": "3f2e51d4509381ddb8a8ce7cb4cd3e60",
+  "canonical_notion_edited_at": "2026-10-20T12:25:56.958Z",
+  "github_rules": "docs/COMMON_LEARNING_RULES.md",
+  "day22_snapshot_manifest": "docs/teaching/archive/day-22/manifest.json",
+  "schedule_changed": false
+}

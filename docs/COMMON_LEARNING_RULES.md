@@ -30,6 +30,9 @@
 #### Day 22（含）以前文章封存與後續修正順序（2026-10-20）
 依使用者確認，Chat／Pet／Analytics 的 Day 22（含）以前所有既有文章均已封存；封存範圍不只 Day 22 三篇。保留原文、程式、既有版本勘誤及歷史證據，不再直接修訂正文；即使舊文存在未實作、未驗證或錯誤，也只在下一 Day 的新實作／Refactor 後提出更正，不因這些狀態重新開放舊文。一般「未實作 Day 可原頁修訂」條款僅適用尚未封存的新草稿，不能套用到 Day 22（含）以前。封存本身不代表程式已套用或功能已驗收。每次下一 Day 前核對最新 rust_ai_chat/main、真實呼叫鏈、CI 與本日涉及套件的 manifest／lock／官方最新穩定版本；有差異時，在下一 Day 第2節的新 Red／完整 Green／Refactor 之後，另加「舊 Day 更正補充（程式／套件差異）」，提供真實路徑、必要完整修改、版本理由與驗證／未驗證範圍。原教學與補教分開，既有 makeup_queue 採 FIFO、每篇最多一個舊 Day 單元；新發現差異去重排入，不預先宣稱補教完成、不為修正新增 Day 或遞增 next_day。最新依賴不等於適合直接升級，不自動更新產品或來源 lock；跨主要版本需先核實 API 與相容性。
 
+#### Day23（含）以前文章封存（2026-10-21）
+使用者已確認三案Day23完成並封存；Day23（含）以前正文、程式與歷史證據全部保留，不再回寫。新差異只在Day24或之後的新Red／Green／Refactor後補充。封存與使用者完成回報不代替本地正式檢驗；next_day仍為24，未新增排程。
+
 ### 3. 測試與證據
 
 CI 必須核對並揭露精確 SHA、workflow／job、狀態、時間與連結；Success／Failure／Pending／Skipped／Cancelled／無紀錄均不單獨阻擋教學發布或 next_day。CI Success 只證明實際執行的範圍，不能代替 DB、HTTP／WS、SSR／WASM、GUI 或端到端驗收；copilot_use CI 僅是產品證據。
@@ -69,7 +72,7 @@ Notion 已完整讀回但 GitHub 狀態寫入／讀回失敗，保留頁面 ID�
 
 ## 目前進度
 
-三專案 Day22（含）以前文章均已封存；chat／pet／analytics Day23已發布並全文讀回，next_day=24。實作、測試與未完成項目見[目前進度](teaching/current/STATUS.md)。
+三專案 Day23（含）以前文章均已封存；chat／pet／analytics Day23已發布並全文讀回，next_day=24。實作、測試與未完成項目見[目前進度](teaching/current/STATUS.md)。
 
 ## 文件入口
 產品能力與未來清單、詳細架構、操作設定、功能對照與工程證據仍保留各自用途；本篇集中教學方法、格式及三專案大綱，其他教學入口改為引用。原Day及程式保留，舊規則／來源／失效教法只作歷史，不再套用為目前指令。
