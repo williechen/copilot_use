@@ -1,29 +1,17 @@
 # Chat 聊天前台、Pet 雙視窗與 Analytics 畫面銜接
 
-> 本輪來源main `2c7ace259ef790cea303d841f5779cd5f022d554`；修正分支codex/revalidate-f9484f2，commit `1abcb8aa6bc279e888a057b87069bea788281c7c`，未合併main。完整workspace明確啟用SSR、PostgreSQL integration及include-ignored：main126通過／1失敗／0忽略，候選131通過／0失敗／0忽略。main的WASM／SSR、Pet前端及原生建置成功；fmt通過，嚴格Clippy仍失敗於logout巢狀if，候選嚴格Clippy通過。規則v1正文、既有需求及next_day各19不變；文章修訂不推進Day。 Chat：main已接通後端參數化SQL LIKE，名稱不是room ID；完整／部分名稱、字面%／_／反斜線、注入字串與輸入限制12案通過，瀏覽器「Rust 技術交流」完整顯示同名兩筆及「Rust 技術交流延伸」共三筆，空結果提示正確。真WS七案及SQLite持久化讀回通過。但SSR「歷史載入尚未接通」仍缺少，重新整理遇503會清空原有結果，故本切片仍有阻擋；候選恢復提示、直接顯示SQL結果並保留失敗前清單。 Analytics：main已用成功的受保護GET回應層，同時延長server Session與同一Cookie Max-Age=1800；實際HTTP require-renewal已通過。另10案確認成功query續期、400／401／錯CSRF／公開login不續期、logout撤銷且不復活。真PG、Origin、CSRF、來源服務身分分離、攝取冪等通過。候選真TCP短deadline到期／不復活通過；不代表1800秒browser soak。帳密admin/admin仍422缺key、角色／scope及服務換證／撤銷未完整實作驗證，完整產品未驗收。 詳[證據](teaching/evidence/2026-10-19-full-2c7ace2/REPORT.md)。table與field依功能需求可增減。
-
-> SQL LIKE已在參考main套用且真HTTP／瀏覽器通過；copilot_use產品78d5796仍屬前輪本地分支證據，本輪未重測產品。
-
-> copilot_use P0 試作（本地工作分支codex/p0-table-trial，948685fe0692a9e56de94a4ae6a817fdf13fc0a2）：Chat註冊必填唯一Email、帳號不分英文大小寫、成功註冊撤銷目前Session，已接通UI／HTTP／SQLite／獨立完成頁及重啟保存。相關測試21、HTTP／schema16、升級2案、fmt／嚴格Clippy／前端建置通過。既有帳號Email補填、寄信重設、admin初始化、活動Session與其他Pet／Analytics P0仍待完成；完整P0未驗收。詳[試作證據](teaching/evidence/2026-10-18-copilot-p0-registration/REPORT.md)。
+> 實作進度、精確來源與驗證結果統一見[目前進度](teaching/current/STATUS.md)。本文件保留功能需求／完成條件或架構；歷次測試摘要已移入歷史紀錄，不作現行完成聲明。
 
 本文件是既有 FUTURE_WORK 項目的詳細驗收條件，不另立 Day 或重複開發清單。需求與程式套用、測試及完整驗收分開記錄。
 
 ## 目前來源與封存界線
 
-三專案目前已發布到 Day16，使用者確認程式已同步。Day15／Day16 的 Notion 原文保持封存；依使用者明確要求，copilot_use 已移除 Day16 三篇鏡像及舊修訂文章，保留 Git 歷史、程式 patch 與驗證證據。後續增修於下一 Day 提出；next_day 維持既有 17，不因同步新增 Day。程式套用與完整功能驗收分別記錄。
+Day22（含）以前三專案既有文章均已封存，next_day 均為23；原文與歷史證據保留，修正只在下一Day的新實作／Refactor後補充。文章發布、程式套用與功能驗收分開記錄。
 
-網頁版與本地版共用本篇規則及 GitHub docs/COMMON_LEARNING_RULES.md 鏡像，索引以 docs/teaching/current/manifest.json、進度以 docs/learning-state.json 為準。每次執行先重新讀取現行文件與來源 SHA；舊對話、快取、封存文章及歷史測試不能覆蓋現行規則。文件同步不等於執行檔更新；服務的後端 binary 與前端 JS／WASM 須各自記錄建置來源，版本不同先標示不同步，不宣稱同版驗收。
-
-2026-10-17 目前來源 `rust_ai_chat/main` `98f30d8b3593d80103b1a4bdbb9f0cb8cb08069e`，本機已 fast-forward，沒有直接修改 source；copilot_use 本輪同步文件，產品程式未重新驗收。
-- Chat：首頁建房按鈕已移除，仍有登入入口；個人管理頁尚未接通。新增「查詢房間」會清空 rows、設定 loading，卻沒有發出請求或復原，清單與重新整理因此卡住。ba5dc51 的瀏覽器選房聊天結果保留為歷史，不作新版瀏覽器通過證據。
-- Pet：雙窗已存在，漫遊卻仍選取 main 控制台；正確目標是 pet 生活視窗，Control 不受自動漫遊移動，但可手動拖曳。開啟／聚焦控制台仍應選 main。原生互動 GUI／IPC 尚未完整驗收。
-- Analytics：仍為 Leptos／Session 登入碼原型，未符合首次 admin/admin、帳密登入及登入後修改密碼；3100 未啟動。人員登入與來源交互換證分開追蹤。
-同 SHA 重驗：主要套件 73 passed／1 ignored；根 workspace-tests 載入既有測試設定後 20 passed（首次缺環境失敗已保留）；Chat hydrate WASM build passed；SSR-feature 2 passed／1 failed，缺少「歷史載入尚未接通」。遠端 CI 本次觀測 15 success／2 in_progress，不以預設 CI 代替 SSR 失敗或 GUI 驗收。獨立 PostgreSQL ignored 流程、JS 契約、瀏覽器及原生 GUI 本輪未重跑。
-本地 Chat HTTP 200 仍是 ba5dc51 舊 binary；本輪未重建／重啟服務，不能宣稱已執行 98f30d8。Analytics 3100 無監聽。根 tests 尚有 5 targets／20 cases，test-workspace CI job 已移除，仍須完成遷移與 CI 接續。
-[最新精確來源、結果與限制](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-17-source-98f30d8-recheck.json)；[先前 ba5dc51／520bfa1 證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-17-current-source-validation.json) 保留歷史身分。完整流程尚未驗收，不新增 Day。
+現行實作、來源SHA與驗證限制見[目前進度](teaching/current/STATUS.md)，原始報告見其證據連結；本頁只保留驗收條件。每次執行重新讀取規則與來源，後端binary與前端JS／WASM須各自核對建置來源；文件整理不代表重新建置或驗收。
 
 ## 已逐項確認的現行需求（2026-10-17）
-以下 16 組需求經使用者逐項核對；屬現行要求，未宣稱已實作或驗收。網頁／本地排程每次重新讀取並採用；與下方歷史來源觀察或封存 Day 不同時，以本節作為後續需求，歷史證據保留原 SHA 與範圍。Day15／Day16 保持封存，不新增 Day，next_day 維持三專案各 17。
+以下 16 組需求經使用者逐項核對；屬現行要求，未宣稱已實作或驗收。網頁／本地排程每次重新讀取並採用；與下方歷史來源觀察或封存 Day 不同時，以本節作為後續需求，歷史證據保留原 SHA 與範圍。Day22（含）以前文章均封存；本文件整理不增加Day。
 ### Chat：已確認的入口、註冊與管理
 - 首頁未登入即可查看可公開顯示的聊天室清單；點聊天室名稱連結後，未登入者先登入並保留目標房間，再由伺服器核對進入權限。有權才進房，無權顯示拒絕原因；看得到房間不代表有權進入。已登入者直接核對權限，不重複登入。
 - 首頁「登入」成功後前往個人頁；已登入時文字改為「管理」，直接進個人頁。Session 失效才重新登入，成功後仍回個人頁。個人頁建立／管理自己有權管理的聊天室；系統管理另設入口並由伺服器核權。
@@ -58,13 +46,13 @@
 
 #### 聊天前台：基本選房聊天已實測，首頁／管理入口待分離
 聊天前台使用 Leptos，採左側房間欄、中央訊息區、底部輸入區；個人管理與系統後台使用各自頁面／路由及後端權限，不塞進聊天訊息區。
-- 首頁只顯示聊天室清單與必要的載入／空／錯誤狀態；點選後進入聊天頁，建立／管理房間放個人管理頁。98f30d8 已移除首頁 Create Room；個人管理未接通，新增查詢按鈕會清空清單並卡住，完整清單流程未通過。
+- 首頁只顯示聊天室清單與必要的載入／空／錯誤狀態；點選後進入聊天頁，建立／管理房間放個人管理頁。房間查詢須發出真實請求，具備載入、失敗恢復與重試，並保留必要的上次結果。
 - 房間欄：顯示可存取房間與目前選取狀態，沿用既有列表 API；窄螢幕時可收合，切換不應把草稿送往錯誤房間。
 - 訊息區：房間名稱與連線狀態固定可見，訊息以氣泡與適當寬度呈現；辨識自己、其他使用者、AI／系統。作者、時間與日期分隔只使用實際資料，缺少時明示或省略，不編造頭像、線上人數或歷史紀錄。
 - 輸入區：多行輸入、送出與清楚的鍵盤操作，處理中文輸入法組字；空白／送出中禁用，保留失敗草稿。傳送中、失敗／重試等狀態須由真實協定與回應支持，不將本地送出成功冒稱伺服器已持久化。
 - 使用回饋：載入、空房間引導、錯誤及重新連線狀態清楚可辨；歷史載入或重連若尚無完整後端能力，明示未接通，不顯示沒有作用的按鈕。
 - 視覺與可用性：柔和背景、清楚留白與一致字體；訊息區獨立捲動，輸入區不被長訊息擠出，長文字／網址可換行。不能只靠顏色區分作者；鍵盤焦點、對比、窄螢幕與系統縮放均需驗證。
-驗收從真實房間列表進房，測同房收發／跨房隔離、切房與草稿、長訊息、空／錯誤狀態、斷線、中文多行輸入及窄螢幕；無訊息確認或重試冪等能力時不能宣稱傳送狀態已完整實作。基本瀏覽器讀列表／選房／送收訊已實測，其餘條件未完整驗收；Day15／Day16 保留。ba5dc51 的 filter_rooms 與瀏覽器通過證據保留原來源；98f30d8 新增查詢按鈕已有卡住缺陷，尚未重新驗收瀏覽器。
+驗收從真實房間列表進房，測同房收發／跨房隔離、切房與草稿、長訊息、空／錯誤狀態、斷線、中文多行輸入及窄螢幕；無訊息確認或重試冪等能力時不能宣稱傳送狀態已完整實作。各項是否已通過以[目前進度](teaching/current/STATUS.md)的來源與證據為準，歷史瀏覽器結果不自動沿用。
 
 ## Desktop Pet
 
@@ -108,7 +96,7 @@ Day15 的 HTML／JavaScript 提案保留歷史；改採 Leptos 的完整變更�
 
 ## 驗證與交付界線
 
-只同步共同總頁、專案入口、原功能缺口、驗證證據與 learning-state；Day15 原文與鏡像、Day16 Notion 原文封存；Day16 GitHub 文章依使用者要求移除，程式 patch 與證據保留，next_day 沿用 17。參考庫僅 fast-forward 使用者提交的 main，未直接修改原始碼；發布當時文字不回填成新驗收通過。後續功能沿原項目由下一 Day 推進。
+共同總頁與專案入口只保留現行需求和統一進度入口；Day22（含）以前文章、程式與歷史證據封存。參考庫main唯讀，發布／文件同步不等於功能驗收；後續修正沿原項目在下一Day新實作／Refactor後提出，不因整理增加Day。
 
 ## Chat 聊天室清單：UTMall 截圖參考（2026-10-17 確認）
 
@@ -140,4 +128,4 @@ Day 15 Green 已觀察到房間列表 API、Leptos RoomList 和選房連結，�
 - 視覺採可讀對比與字級、觸控目標、鍵盤焦點；不能僅靠顏色區分成員狀態。長訊息／長暱稱／斷線重連／空列表與不同裝置尺寸需驗證。
 - 本項與前節 UTMall「房間分類清單」構成「房間目錄 → 選房 → 房間內訊息＋成員 → 輸入」完整使用者流程；不把聊天室清單與在線名單混為同一資料來源。
 
-**狀態與 Day 界線：** Day 15 已實作的清單／選房功能與 CI 證據保持封存。此為後續 UI 需求，Day16 已封存；尚未完成的條件在下一 Day 的「舊 Day 更正補充」提出。基本瀏覽器選房聊天已實測，其餘 GUI 尚未完整驗收；未建立新 Day，`next_day` 維持 17。
+**狀態與Day界線：** 本節為UI驗收需求；Day22（含）以前原文與證據封存。未完成條件在下一Day新實作／Refactor後補充，是否已實作或驗收以[目前進度](teaching/current/STATUS.md)為準，需求整理不新增Day。

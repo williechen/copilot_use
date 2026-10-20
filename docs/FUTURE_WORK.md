@@ -1,24 +1,17 @@
 # 未來前進項目
 
-> 本輪來源main `2c7ace259ef790cea303d841f5779cd5f022d554`；修正分支codex/revalidate-f9484f2，commit `1abcb8aa6bc279e888a057b87069bea788281c7c`，未合併main。完整workspace明確啟用SSR、PostgreSQL integration及include-ignored：main126通過／1失敗／0忽略，候選131通過／0失敗／0忽略。main的WASM／SSR、Pet前端及原生建置成功；fmt通過，嚴格Clippy仍失敗於logout巢狀if，候選嚴格Clippy通過。規則v1正文、既有需求及next_day各19不變；文章修訂不推進Day。 Chat：main已接通後端參數化SQL LIKE，名稱不是room ID；完整／部分名稱、字面%／_／反斜線、注入字串與輸入限制12案通過，瀏覽器「Rust 技術交流」完整顯示同名兩筆及「Rust 技術交流延伸」共三筆，空結果提示正確。真WS七案及SQLite持久化讀回通過。但SSR「歷史載入尚未接通」仍缺少，重新整理遇503會清空原有結果，故本切片仍有阻擋；候選恢復提示、直接顯示SQL結果並保留失敗前清單。 Analytics：main已用成功的受保護GET回應層，同時延長server Session與同一Cookie Max-Age=1800；實際HTTP require-renewal已通過。另10案確認成功query續期、400／401／錯CSRF／公開login不續期、logout撤銷且不復活。真PG、Origin、CSRF、來源服務身分分離、攝取冪等通過。候選真TCP短deadline到期／不復活通過；不代表1800秒browser soak。帳密admin/admin仍422缺key、角色／scope及服務換證／撤銷未完整實作驗證，完整產品未驗收。 詳[證據](teaching/evidence/2026-10-19-full-2c7ace2/REPORT.md)。table與field依功能需求可增減。
-
-> SQL LIKE已在參考main套用且真HTTP／瀏覽器通過；copilot_use產品78d5796仍屬前輪本地分支證據，本輪未重測產品。
-
-> copilot_use P0 試作（本地工作分支codex/p0-table-trial，948685fe0692a9e56de94a4ae6a817fdf13fc0a2）：Chat註冊必填唯一Email、帳號不分英文大小寫、成功註冊撤銷目前Session，已接通UI／HTTP／SQLite／獨立完成頁及重啟保存。相關測試21、HTTP／schema16、升級2案、fmt／嚴格Clippy／前端建置通過。既有帳號Email補填、寄信重設、admin初始化、活動Session與其他Pet／Analytics P0仍待完成；完整P0未驗收。詳[試作證據](teaching/evidence/2026-10-18-copilot-p0-registration/REPORT.md)。
+> 實作進度、精確來源與驗證結果統一見[目前進度](teaching/current/STATUS.md)。本文件保留功能需求／完成條件或架構；歷次測試摘要已移入歷史紀錄，不作現行完成聲明。
 
 目標依 [P9_TARGET.md](P9_TARGET.md) 與 copilot_use 實際程式，目錄／內容銜接依 rust_ai_chat 最新 main。本清單分開記錄產品缺口、安全修正、參考適配與教學；未核實不標完成。每天從確認缺口與當日差異選三專案合計一小時的小切片，不預排 Day；週六工程與功能驗收另記。
 
 既有開發項目是 P0～P12 階段功能完成條件的唯一追蹤來源；在原項目記錄所屬階段、可驗證功能條件、SHA／測試／CI／套用與驗收證據，未核實者保留未完成。跨階段工作留原功能項目追蹤；舊 Day 更正僅於下一個 Day 的 Refactor 後獨立補加，不回填原 Day，不另開重複項目；完成後可退出活動清單，但原識別與證據須可追溯。P9 產品目標不等於 P9 學習階段。
 
-## 當前最高優先順序：先完成使用者可操作的基本流程（2026-10-19）
-
-這是**既有 P0～P12 功能項目的優先序與驗收 Gate**，不是新建重複任務或宣稱功能已完成。2026-10-19 核對參考 `rust_ai_chat/main`：`5654591f3002fc619c883af9b5197e2126cc6494`。今日相對 Day20 僅更動 Pet migration，Chat/Pet/Analytics 的上述入口實作尚無新的功能完成證據。每日重新讀兩庫最新 SHA，若實際實作已進步，依真實資料與測試調整，不固定下一個 Day 的小題目。產品 `copilot_use` 的舊分支試作不等於教學分支或使用者環境已合併／驗收。
-
-- [ ] **Chat 第一優先：註冊／登入→Session→可公開閱覽的房間清單／進房授權→加入／建立聊天室。** 現行參考前端 `crates/ui/src/lib.rs::App` 有 `/signin` 連結，卻只有 `/` 與 `/room/:room_id` 的 Leptos 路由；先核對是否已有可重用後端及 SQLite 契約，再從最早斷點接通 UI/HTTP/DB 身分鏈。未登入不可繞過授權讀取私人房間。已有 `codex/p0-table-trial` 的註冊/Email 試作證據，須先確認合併狀態與契約，不重新打造第二套。歷史訊息、WS 重連、進階畫面排後；基本登入未可用時，不以後者作每日主切片。
-- [ ] **Pet 第一優先：建立第一隻寵物→名稱／初始外觀→Tauri IPC→SQLite 保存→生活視窗顯示→重啟載入。** 現行參考 `apps/desktop_pet/src/lib.rs` 在 startup 管理 `PetMachine::default()`，缺少已核實的使用者建立寵物入口；SQLite 存在不等於已接通建立流程。**最新 Pet Table 核對（main `5654591f…`）：** `apps/desktop_pet/migrations/20261018091733_create_pet.sql` 已有 `pet_profile(id, name, species, owner_id, ...)`，最新提交新增 `sexy`、`image_path` 兩欄；後續 Day 應沿用既有 Table 建立 `create_pet` 和 SQLite 持久化／重啟讀回，勿另建重複寵物主表。原 migration 已被直接修改，須先核對舊資料庫的 SQLx checksum 與安全前向修補，不能清空 DB 假裝驗收。完成基本建立/載入後，再逐步做出籠/回籠、互動、拖曳/漫遊、手動找回、多寵物；Day20 漫遊幾何測試不算建立寵物完成。
-- [ ] **Analytics 第一優先：管理員初始化→可登入的持久化帳號／加鹽密碼雜湊→首次強制改密碼→授權 Session／Dashboard。** 現行參考 `apps/stats_server/src/admin.rs` 仍使用固定格式 64 hex 登入碼；Day20 `Retry-After` 不代表帳密登入、角色權限或持久化帳號已完成。安全初始化與首次強制改密碼需做真 HTTP、DB 與拒絕未授權情境驗證，不以預設密碼作正式長期憑證。
-
-每日仍以 Chat → Pet → Analytics 各一個可以套用的 **Red→完整最小 Green** 切片推進；一條基礎流程可跨日，未全部接通時保持待完成且列出阻擋環節。優先補真實呼叫鏈，不以單純新增欄位、trait、helper、HTTP 狀態碼或 isolated test 取代使用者流程。每次發布 Notion 全文讀回後才條件更新 `next_day`；規則/清單更新本身不增加 Day。既有 P9 進階目標、DB/權限安全、週六工程驗收和其他待辦仍保留。
+## 當前最高優先順序：先接通可操作的基本流程
+這是既有 P0～P12 功能項目的實作順序與驗收 Gate；實際缺口及最新來源見[目前進度](teaching/current/STATUS.md)。每次依真實入口、資料庫與測試調整最小切片，不預排Day，也不以其他分支的舊試作當成已合併／驗收。
+- [ ] **Chat：註冊／登入→Session→公開房間清單與進房授權→加入／建立聊天室。** 沿用現有signup／mbr_user，先處理欄位驗證並接通登入授權，不重建平行身分表。基本鏈未完成前不優先擴充歷史訊息或進階UI。
+- [ ] **Pet：建立第一隻寵物→名稱／初始外觀→Tauri IPC→SQLite→生活窗→重啟載入。** 沿用現有PetStore、create_pet與pet_profile；補齊逐寵物身分／畫面／載入後再深化多寵物與漫遊。先核對舊DB歷史，以前向migration處理相容性，不清空DB。
+- [ ] **Analytics：管理員初始化→持久化帳密登入→首次改密碼→Session／Dashboard授權。** 沿用現有bootstrap，將帳號接到真正登入／改密碼／授權鏈；固定key登入或429回應不等於完成帳密身分流程。
+每日仍以Chat→Pet→Analytics各一個可套用的Red→完整最小Green切片推進，未接通部分明示缺口。舊Day更正在本日新實作／Refactor後補充；完整Notion發布讀回才可條件更新next_day，清單整理本身不增加Day。P9功能條件、權限／資料安全、週六工程驗收與其他待辦保留。
 
 ## 產品缺口
 
@@ -31,16 +24,16 @@
 
 ## 參考適配
 
-- [ ] 明列 Chat Room／作者／ID／category、HTTP 建房 DTO／status、WS 傳訊與通知協定映射；保留成品 ACL、durable realtime／Outbox。topic 不能代替 category。參考 `a57e532` 已由 WS 呼叫 persist_ws_message／persist_in_existing_room；Typing 房間隔離已實測。成品 ACL／durable realtime 對應仍待銜接。
-- [ ] 明列 Pet Sleep／Wake／snapshot revision 與 Action／Speed 的差異、Profile JSON／TOML、ScanPreview／opaque preview 的契約；只作真正需要的適配，不新增未使用同名骨架。參考 `3b524f47…` 的 `resolve_validated_appearance` 已有契約測試，尚無產品設定／儲存／呈現呼叫端。
+- [ ] 明列 Chat Room／作者／ID／category、HTTP 建房 DTO／status、WS 傳訊與通知協定映射；保留成品 ACL、durable realtime／Outbox。topic 不能代替 category。成品 ACL／durable realtime 對應仍待銜接。
+- [ ] 明列 Pet Sleep／Wake／snapshot revision 與 Action／Speed 的差異、Profile JSON／TOML、ScanPreview／opaque preview 的契約；只作真正需要的適配，不新增未使用同名骨架。設定／儲存／呈現呼叫端與契約測試須依最新兩庫來源核對。
 - [ ] 明確決定 pet.cleanup.succeeded 與 file.cleanup.succeeded 的事件映射／版本，不默改既有白名單或把純狀態成功當真操作收據。
-- [ ] Analytics 參考 `a57e532` 已實作並本地驗證 HTTP 來源認證／PostgreSQL 攝取及持久冪等；後續銜接成品 gRPC／逐事件 ACK／SSE 與權限模型。HashSet 仍非 DB 驗收證據，最新 d054389 已修正 Test All 測試環境並通過 CI；正式憑證驗證安全審查仍待完成。
+- [ ] 銜接學習庫 HTTP 來源認證／PostgreSQL 與成品 gRPC／逐事件 ACK／SSE／權限模型；驗證必須包含真資料庫與正式憑證契約，不以記憶體去重或歷史CI代替。
 
 ## 教學銜接
 
-2026-10-17 目前參考來源 98f30d8b3593d80103b1a4bdbb9f0cb8cb08069e，詳見[重新檢驗](teaching/evidence/2026-10-17-source-98f30d8-recheck.json)。Notion Day16封存，GitHub Day16文章依使用者要求移除，patch／證據保留；next_day維持17。以下沿用原項目追蹤，不代表產品程式已整合或驗收。
+來源、進度與驗證結果統一見[目前進度](teaching/current/STATUS.md)。Day22（含）以前文章封存；以下沿用原功能項追蹤，不代表產品已整合或驗收。
 
-以下保留原有學習範圍，checkbox 表示學習／適配未完成，不表示對應成品功能全部未實作。每次依最新 source、所屬測試與 CI 排除已套用項目，再選最小切片。本次參考庫 Day 10 實作／本地複驗及 CI、產品路徑狀態合併於 [驗證證據](source-review/rust-ai-chat-validation.json)，不重建待辦項目。
+以下保留原有學習範圍，checkbox 表示學習／適配未完成，不表示對應成品功能全部未實作。每次依最新 source、所屬測試與 CI 排除已套用項目，再選最小切片。歷史驗證保留原來源，新一輪只更新統一進度與對應原項目，不重建待辦。
 
 ### 共同主線
 
@@ -55,7 +48,7 @@
 
 - [ ] 訊息／作者／房間模型、MessageRepository Port、SQLite schema／history／備份及持久化後通知。
 - [ ] Session／ACL、HTTP／WS 房間隔離、presence／typing／reconnect／queue、durable realtime／Outbox／故障恢復。
-- [ ] Leptos SSR／hydration／protected routes、真實 streaming／RAG／MCP／Agent／多 Persona。 首頁僅聊天室清單，點選後進房；建立／管理放個人管理頁。98f30d8已移除首頁建房，個人管理仍未接通；新增查詢按鈕清空清單並卡住 loading，須修正並驗證恢復／重試。房間頁採房間欄／訊息氣泡／多行輸入與真實操作回饋，窄螢幕可收合房間欄；個人與系統管理路由分開。驗收條件見 [畫面銜接需求](UI_ALIGNMENT_REQUIREMENTS.md)。
+- [ ] Leptos SSR／hydration／protected routes、真實 streaming／RAG／MCP／Agent／多 Persona。 首頁僅聊天室清單，點選後進房；建立／管理放個人管理頁。房間查詢須發出真實請求，並驗證載入、失敗恢復／重試與清單保留。房間頁採房間欄／訊息氣泡／多行輸入與真實操作回饋，窄螢幕可收合房間欄；個人與系統管理路由分開。驗收條件見 [畫面銜接需求](UI_ALIGNMENT_REQUIREMENTS.md)。
 - [ ] 同意／撤回、來源事件、OTel 與可審核政策採用／CAS 回退，跨服務 ID 對應與 E2E。
 
 ### Desktop Pet
@@ -63,7 +56,7 @@
 原有多寵物／漫遊／UI 項目納入獨立狀態與生活窗、多預設出籠、回籠停活動、右鍵坐下／控制窗選取、習性速度、打鬧吵醒、拖曳與多螢幕例外／手動找回。詳細依共同規則及 UI 需求；不提供固定速度設定，不以單 pet 共用狀態取代多寵物需求。未重新實作／驗收。
 
 - [ ] 純 Profile／Application Port／Schedule 與 SQLite／HTTP／OS runtime 的邊界。
-- [ ] Tauri／Leptos IPC、五欄設定及可選覆寫、多寵物獨立 TOML／資產／備份與可逆封存。學習庫畫面適配：200×200 寵物顯示與可縮放／捲動的控制視窗分離；六區為互動、設定、記憶、檔案、管理、更新，未接通能力明示，反覆開啟只聚焦既有視窗。98f30d8 的雙窗骨架仍在，漫遊錯指 main 控制台，須移動 pet 生活窗且 Control 不受自動漫遊移動，但可手動拖曳；完整原生 GUI／IPC 尚未驗收。詳細條件見 [畫面銜接需求](UI_ALIGNMENT_REQUIREMENTS.md)。
+- [ ] Tauri／Leptos IPC、五欄設定及可選覆寫、多寵物獨立 TOML／資產／備份與可逆封存。學習庫畫面適配：200×200 寵物顯示與可縮放／捲動的控制視窗分離；六區為互動、設定、記憶、檔案、管理、更新，未接通能力明示，反覆開啟只聚焦既有視窗。漫遊只移動寵物生活窗，控制窗保留手動拖曳；需以完整原生GUI／IPC驗收。詳細條件見 [畫面銜接需求](UI_ALIGNMENT_REQUIREMENTS.md)。
 - [ ] 使用者授權、型別化 preview／confirmation／實際 receipt、private Trash／restore、symlink／TOCTOU／journal／OS 安全。
 - [ ] AI 外觀／素材與角色一致性、200×200 等比動畫、記憶／回想／複習／提醒、RAG／MCP／Agent。
 - [ ] 真實事件至 Analytics、政策確認／回退、三平台 GUI／installer／簽章 updater 與資料保留。
@@ -78,7 +71,7 @@
   來源認證延伸為服務間核准配對、短效存取、自動交互換證、輪替與撤銷；Leptos 提供管理狀態，實際換證由來源與後端交互完成。驗收條件見 [交互憑證需求](SERVICE_CREDENTIAL_REQUIREMENTS.md)，既有固定 token 僅為過渡實作，未完成此需求。
 
 - [ ] 四欄產品事件及來源權限、EventRepository Port、獨立 PostgreSQL migration／交易／持久冪等／衝突與故障恢復。
-- [ ] 同服務 Dashboard／Ingest／Query、Taipei 趨勢／明細、可逆封存／同意撤回、備份還原。Analytics 後台首次初始化 `admin/admin`，帳密登入後可修改密碼，持久保存加鹽雜湊且重啟不重設；服務 token 分開。98f30d8 仍為登入碼原型、3100未監聽，帳密需求未完成。除登入／必要驗證外的頁面、Query／管理 API／SSE 均須人員 Session 與權限；服務上報／換證另用機器身分，禁止匿名 Dashboard。詳細條件見 [畫面銜接需求](UI_ALIGNMENT_REQUIREMENTS.md)。畫面沿用 Leptos 元件與 Rust 狀態，呼叫既有 HTTP JSON API；不維護獨立 HTML／JavaScript 互動頁。Day15／Day16 均封存，後續修正於下一 Day 提出；條件見 [畫面銜接需求](UI_ALIGNMENT_REQUIREMENTS.md)。
+- [ ] 同服務 Dashboard／Ingest／Query、Taipei 趨勢／明細、可逆封存／同意撤回、備份還原。Analytics 後台首次初始化 `admin/admin`，帳密登入後可修改密碼，持久保存加鹽雜湊且重啟不重設；服務 token 分開。除登入／必要驗證外的頁面、Query／管理 API／SSE 均須人員 Session 與權限；服務上報／換證另用機器身分，禁止匿名 Dashboard。詳細條件見 [畫面銜接需求](UI_ALIGNMENT_REQUIREMENTS.md)。畫面沿用 Leptos 元件與 Rust 狀態，呼叫既有 HTTP JSON API；不維護獨立 HTML／JavaScript 互動頁。Day22（含）以前均封存，後續修正於下一Day新實作／Refactor後提出；條件見 [畫面銜接需求](UI_ALIGNMENT_REQUIREMENTS.md)。
 - [ ] 聚合快照、可追溯 AI 洞察、人工審核、Chat／Pet 自主確認採用、收據／描述性評估／回退。
 - [ ] 事件與 OTel 分離、跨服務 schema／ID／retry／trace、GUI／HTTP／DB／E2E／CI。
 

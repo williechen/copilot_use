@@ -67,15 +67,10 @@ Notion 已完整讀回但 GitHub 狀態寫入／讀回失敗，保留頁面 ID�
 91 項原文與本次變更前規則保留於 docs/teaching/archive/rules-before-minimum-v1/；第17項原文無編號，依第16與18項間順序對應並註明。封存資料僅供追溯，不再產生下一個衝突討論，也不自動成為執行規則。
 
 
-## 目前進度（本輪全面複驗）
-本輪來源main `2c7ace259ef790cea303d841f5779cd5f022d554`；修正分支codex/revalidate-f9484f2，commit `1abcb8aa6bc279e888a057b87069bea788281c7c`，未合併main。完整workspace明確啟用SSR、PostgreSQL integration及include-ignored：main126通過／1失敗／0忽略，候選131通過／0失敗／0忽略。main的WASM／SSR、Pet前端及原生建置成功；fmt通過，嚴格Clippy仍失敗於logout巢狀if，候選嚴格Clippy通過。規則v1正文、既有需求及next_day各19不變；文章修訂不推進Day。
-Chat：main已接通後端參數化SQL LIKE，名稱不是room ID；完整／部分名稱、字面%／_／反斜線、注入字串與輸入限制12案通過，瀏覽器「Rust 技術交流」完整顯示同名兩筆及「Rust 技術交流延伸」共三筆，空結果提示正確。真WS七案及SQLite持久化讀回通過。但SSR「歷史載入尚未接通」仍缺少，重新整理遇503會清空原有結果，故本切片仍有阻擋；候選恢復提示、直接顯示SQL結果並保留失敗前清單。
-Pet：最新main使用獨立SQLite三份migration／九張業務表，普通停用啟動與前端／原生建置通過。候選只加可選原生探針，對實際Tauri視窗重跑enabled／disabled／boundary／close四案：main不移動、停用不移動pet、邊界反彈及關窗不回退main通過。探針等待映射後啟動，不能代替普通啟動漫遊時序、完整手動GUI、拖曳暫停恢復、逐寵物設定持久化、多寵物及真實多螢幕驗證。
-Analytics：main已用成功的受保護GET回應層，同時延長server Session與同一Cookie Max-Age=1800；實際HTTP require-renewal已通過。另10案確認成功query續期、400／401／錯CSRF／公開login不續期、logout撤銷且不復活。真PG、Origin、CSRF、來源服務身分分離、攝取冪等通過。候選真TCP短deadline到期／不復活通過；不代表1800秒browser soak。帳密admin/admin仍422缺key、角色／scope及服務換證／撤銷未完整實作驗證，完整產品未驗收。
-資料庫：Chat六份migration／20張業務表；main新建chat_action_log已拒絕缺少／NULL主鍵，不能再寫「NULL仍可插入」。但任意created_user_id仍可接受、沒有Rust寫入呼叫端，不算完整稽核。main直接修改20261018122554，從fa0888e升級實際checksum mismatch；舊Chat91733與舊PG31仍missing migration。候選還原舊migration並新增20261018130000前向修補，有效舊row保留、NULL舊row中止且資料／歷史保留，共六案通過；此候選僅相容原fa歷史，已套用改版22554的f9484f2／2c7ace2資料庫仍checksum mismatch，不能直接套用或刪庫掩蓋。table及field可依功能需求增減，使用者資料庫未重建或清空。
-完整命令、預期／實際結果、環境、SHA、CI workflow/job與證據連結見[本輪完整證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-19-full-2c7ace2/REPORT.md)。CI只代表其實際覆蓋；零測試target、未執行與失敗不算通過。跨平台／MSRV、付費AI未測，未讀正式秘密。三專案完整功能均維持未驗收。
-copilot_use P0 試作已完成註冊身分切片：本地工作分支 `codex/p0-table-trial`，commit `948685fe0692a9e56de94a4ae6a817fdf13fc0a2`（基底 `0bf1d460ea8f20dfaa3bcdaf14b7a895d1b3aacd`，未合併main）。沿用chat_users，新增email與帳號／Email不分英文大小寫唯一索引；註冊必填Email，成功後撤銷該瀏覽器舊Session並保持登出。UI→HTTP→SQLite→獨立完成頁、不同大小寫登入個人頁、重啟保存已實測。相關測試21通過／0失敗，HTTP／資料檢查16案、舊資料升級2案、fmt／嚴格Clippy／前端建置通過。既有帳號Email暫為NULL、大小寫衝突升級回滾；Email重設寄信、舊帳號補Email、admin初始化、遞增登入等待及完整活動Session仍待實作，Pet／Analytics本次未新增功能，完整P0未驗收。詳[試作與重現證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-18-copilot-p0-registration/REPORT.md)。
-產品SQL搜尋工作分支78d5796200547bf9c1776b8dc82cbc0d842bf512的22案與HTTP5案屬前輪產品證據，本次未重跑copilot_use產品，不把參考庫結果轉作產品通過。
+## 目前進度
+
+三專案 Day22（含）以前文章均已封存，next_day 均為23。實作、測試、套件與未完成項目統一見[目前進度](teaching/current/STATUS.md)，本規則頁不再累積歷次來源與驗證摘要。
+
 ## 文件入口
 產品能力與未來清單、詳細架構、操作設定、功能對照與工程證據仍保留各自用途；本篇集中教學方法、格式及三專案大綱，其他教學入口改為引用。原Day及程式保留，舊規則／來源／失效教法只作歷史，不再套用為目前指令。
 [聊天室](https://app.notion.com/p/3f3e51d45093807da638c336e857543a) · [桌面寵物](https://app.notion.com/p/3f3e51d450938067923ae5a424d30950) · [統計儀錶板｜聊天室 × 桌面寵物](https://app.notion.com/p/3f3e51d45093817eafaee0cfc9ea4cc8)。功能與實作對照的詳細歷史保留工程紀錄；本篇不再追加歷次討論或驗證摘要。

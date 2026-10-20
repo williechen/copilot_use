@@ -1,6 +1,6 @@
 {
   "scope": "Latest published teaching index; Day16 snapshot preserved in archive",
-  "revision": "day22-and-earlier-archive-scope-confirmed",
+  "revision": "day22-archived-current-status-consolidated",
   "synced_date": "2026-10-20",
   "source_sha": "5654591f3002fc619c883af9b5197e2126cc6494",
   "articles": [
@@ -210,5 +210,11 @@
     "pet": 22,
     "analytics": 22
   },
-  "archive_scope_manifest": "docs/teaching/archive/scope.json"
+  "archive_scope_manifest": "docs/teaching/archive/scope.json",
+  "current_status_document": "docs/teaching/current/STATUS.md",
+  "last_document_cleanup": {
+    "completed_at": "2026-10-20T12:35:43.496Z",
+    "evidence": "docs/teaching/archive/status-before-2026-10-20-consolidation/cleanup.json",
+    "day_advanced": false
+  }
 }
