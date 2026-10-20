@@ -47,20 +47,20 @@
       "套件版本",
       "驗證項目：測試、證據、待完成"
     ],
-    "content_preservation": "未實作 Day 可在既有原頁重整，更新修訂版與來源、同步同一索引及鏡像，不另建相同專案／Day。已實作內容即封存，保留原文、程式及證據；修改方案只在下一 Day 的 Refactor 後「舊 Day 更正補充」提出。部分已實作時保留已實作段落，只重整尚未實作部分；實作狀態不明時先標未核實，不當作未實作覆寫。文章修訂不新增 Day，也不推進 next_day。",
+    "content_preservation": "Day22（含）以前三專案全部既有文章已封存，依使用者確認保留原文與證據；任何更正只在下一Day的新實作／Refactor後補充，不回寫舊文，封存不代表已套用或驗收。以下一般修訂規則僅適用尚未封存的新草稿：未實作 Day 可在既有原頁重整，更新修訂版與來源、同步同一索引及鏡像，不另建相同專案／Day。已實作內容即封存，保留原文、程式及證據；修改方案只在下一 Day 的 Refactor 後「舊 Day 更正補充」提出。部分已實作時保留已實作段落，只重整尚未實作部分；實作狀態不明時先標未核實，不當作未實作覆寫。文章修訂不新增 Day，也不推進 next_day。",
     "weekly_engineering": "separate engineering evidence; never add weekly operations to teaching",
     "weekly_ai_validation": "excluded; functional gates only",
     "phase_transition": "到期切換且不延後；功能未完成則原階段學習未完成，原項目跨階段補加，完工後回填原階段證據",
     "functional_progress": "新增可操作功能／接通流程為每日主體；條件補充回原功能，不把單點 API／純測試／欄位及狀態碼當成完整流程。三專案並行追蹤，不預排 Day、不自動推進學習階段。",
     "synchronization_judgment": "核對與同步判定依「文章要求 → rust_ai_chat 實作 → copilot_use 對應實作 → 驗證結果」逐項追溯：記錄文章頁面／Day、兩庫精確 SHA、實作路徑與符號、實際呼叫端、對應測試及匹配來源的驗證結果；介面不同須說明合理差異與適配理由。缺少證據標示未核實，只有定義／單元測試而未接通流程標示部分完成，未執行標示未執行；不得以讀過文章、更新 SHA、同名符號或歷史 CI 判定同步完成。",
-    "day_revision": "未實作 Day 可在既有原頁重整，更新修訂版與來源、同步同一索引及鏡像，不另建相同專案／Day。已實作內容即封存，保留原文、程式及證據；修改方案只在下一 Day 的 Refactor 後「舊 Day 更正補充」提出。部分已實作時保留已實作段落，只重整尚未實作部分；實作狀態不明時先標未核實，不當作未實作覆寫。文章修訂不新增 Day，也不推進 next_day。",
+    "day_revision": "Day22（含）以前三專案全部既有文章已封存，依使用者確認保留原文與證據；任何更正只在下一Day的新實作／Refactor後補充，不回寫舊文，封存不代表已套用或驗收。以下一般修訂規則僅適用尚未封存的新草稿：未實作 Day 可在既有原頁重整，更新修訂版與來源、同步同一索引及鏡像，不另建相同專案／Day。已實作內容即封存，保留原文、程式及證據；修改方案只在下一 Day 的 Refactor 後「舊 Day 更正補充」提出。部分已實作時保留已實作段落，只重整尚未實作部分；實作狀態不明時先標未核實，不當作未實作覆寫。文章修訂不新增 Day，也不推進 next_day。",
     "red_green": "Red is the prerequisite test for same-feature Green; preserve applied tests and provide complete Green in the same Day; distinguish expected Red from test/import/environment errors",
     "rules_version": "daily-tdd-minimum-v1",
     "rules_document": "docs/COMMON_LEARNING_RULES.md",
     "day_advance": "Per project: complete Notion original Day N publication + full readback, then conditional expected-N to N+1 state update and readback; revision/makeup/rules/CI do not increment; retry only missing state, never duplicate publication",
     "failure_recovery": "Single pending record per project/Day/revision; read and deduplicate before retry; 3 consecutive failures require manual review; evidence persistence and actual verification are separate; detailed historical mechanisms 37-91 deferred",
     "basic_user_flow_gate": "Before selecting advanced Day topics, verify the earliest missing user-operable prerequisite using latest source/contract: Chat signup/login/session/authorized room entry; Pet create first named pet through Tauri IPC, persist in SQLite and reload; Analytics persistent admin account/password-first-login/session. Keep public room listing accessible without login where allowed; entering protected rooms requires authentication and ACL. Continue one end-to-end capability across days; do not present API, helper or status-code tests as completed product flows.",
-    "next_day_correction_placement": "每次先核對最新程式與涉及套件；Day22封存，差異只在下一Day第2節新Red／完整Green／Refactor之後追加舊Day更正補充；makeup_queue FIFO，每篇最多一個舊Day單元，全文讀回才結案，不推進next_day。"
+    "next_day_correction_placement": "每次核對最新程式與涉及套件；Chat／Pet／Analytics Day22（含）以前全部既有文章封存；差異只在下一Day第2節新Red／完整Green／Refactor後追加舊Day更正補充；makeup_queue FIFO，每篇最多一個舊Day單元，全文讀回才結案，不因補教推進next_day。"
   },
   "curriculum": {
     "stage_count": 13,
@@ -1329,6 +1329,19 @@
       "archived_at": "2026-10-20T12:01:32.285Z",
       "notion_body_modified": false,
       "main_modified": false
+    },
+    "scope": {
+      "through_day": 22,
+      "inclusive": true,
+      "projects": [
+        "chat",
+        "pet",
+        "analytics"
+      ],
+      "status": "archived",
+      "manifest": "docs/teaching/archive/scope.json",
+      "confirmed_by": "user",
+      "existing_articles_read_only": true
     }
   },
   "latest_daily_source_review": {

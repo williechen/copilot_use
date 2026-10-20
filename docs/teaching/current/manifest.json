@@ -1,6 +1,6 @@
 {
   "scope": "Latest published teaching index; Day16 snapshot preserved in archive",
-  "revision": "day22-frozen-post-source-package-review",
+  "revision": "day22-and-earlier-archive-scope-confirmed",
   "synced_date": "2026-10-20",
   "source_sha": "5654591f3002fc619c883af9b5197e2126cc6494",
   "articles": [
@@ -204,5 +204,11 @@
   ],
   "day22_completion": "docs/teaching/day22/completion.json",
   "day22_archive": "docs/teaching/archive/day-22/manifest.json",
-  "latest_source_review": "docs/teaching/evidence/2026-10-20-day22-freeze/review.json"
+  "latest_source_review": "docs/teaching/evidence/2026-10-20-day22-freeze/review.json",
+  "archived_through_day": {
+    "chat": 22,
+    "pet": 22,
+    "analytics": 22
+  },
+  "archive_scope_manifest": "docs/teaching/archive/scope.json"
 }
