@@ -1,0 +1,220 @@
+{
+  "scope": "Latest published teaching index; Day16 snapshot preserved in archive",
+  "revision": "day22-archived-current-status-consolidated",
+  "synced_date": "2026-10-20",
+  "source_sha": "5654591f3002fc619c883af9b5197e2126cc6494",
+  "articles": [
+    {
+      "project": "chat",
+      "day": 22,
+      "revision": "r2",
+      "notion_page_id": "3fee51d45093814385cdcdc9e693789a",
+      "notion_url": "https://app.notion.com/p/3fee51d45093814385cdcdc9e693789a?pvs=204",
+      "notion_page_last_edited_at": "2026-10-19T22:57:49.241Z",
+      "notion_readback_verified": true,
+      "four_sections": true,
+      "code_blocks_exact": true,
+      "index_verified": true,
+      "source_sha": "da5155265bf66ef9d495fd38913ad6cb93e1bac8",
+      "candidate_commit": "43d445ef367460ce1bb4e01f9b0c90d66f0db77a",
+      "rules_version": "daily-tdd-minimum-v1",
+      "rule_blob_sha": "9f5efa59fee115405d2c3e5892c0460fed5bbc0f",
+      "article_path": "docs/teaching/day22/chat.md",
+      "evidence_path": "docs/teaching/day22/completion.json",
+      "tests": {
+        "command": "cargo test -p server day22_signup",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0,
+        "scope": "Axum in-process POST/SQLite/Argon2/duplicate/Origin",
+        "ssr": "cargo check -p server --features ssr passed"
+      },
+      "main_application": "not applied",
+      "product_integration": "not performed",
+      "functional_acceptance": false,
+      "readback_at": "2026-10-19T22:58:26.275Z",
+      "archived": true,
+      "archive_manifest": "docs/teaching/archive/day-22/manifest.json",
+      "frozen_notion_page_last_edited_at": "2026-10-20T11:54:10.262Z",
+      "frozen_body_sha256": "ad6cef4a58f20f6162fb01a4c71ef1a752992856327063d9988112c91a639184",
+      "frozen_notion_snapshot": "docs/teaching/archive/day-22/notion/chat.md"
+    },
+    {
+      "project": "pet",
+      "day": 22,
+      "revision": "r2",
+      "notion_page_id": "3fee51d45093811c83eed982ef9ab69e",
+      "notion_url": "https://app.notion.com/p/3fee51d45093811c83eed982ef9ab69e?pvs=204",
+      "notion_page_last_edited_at": "2026-10-19T22:57:50.455Z",
+      "notion_readback_verified": true,
+      "four_sections": true,
+      "code_blocks_exact": true,
+      "index_verified": true,
+      "source_sha": "da5155265bf66ef9d495fd38913ad6cb93e1bac8",
+      "candidate_commit": "43d445ef367460ce1bb4e01f9b0c90d66f0db77a",
+      "rules_version": "daily-tdd-minimum-v1",
+      "rule_blob_sha": "9f5efa59fee115405d2c3e5892c0460fed5bbc0f",
+      "article_path": "docs/teaching/day22/pet.md",
+      "evidence_path": "docs/teaching/day22/completion.json",
+      "tests": {
+        "command": "cargo test -p desktop-pet day22_create_pet",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0,
+        "scope": "SQLite SQLx fixture; trimmed name/species/owner/blank/FK",
+        "wasm": "cargo check -p desktop-pet-frontend --target wasm32-unknown-unknown passed"
+      },
+      "main_application": "not applied",
+      "product_integration": "not performed",
+      "functional_acceptance": false,
+      "readback_at": "2026-10-19T22:58:26.281Z",
+      "archived": true,
+      "archive_manifest": "docs/teaching/archive/day-22/manifest.json",
+      "frozen_notion_page_last_edited_at": "2026-10-20T11:54:12.172Z",
+      "frozen_body_sha256": "88fa706c5a3f7f3d6255957b8ed317d64cb1a6c57f1cf6638bfb838d5e6b282f",
+      "frozen_notion_snapshot": "docs/teaching/archive/day-22/notion/pet.md"
+    },
+    {
+      "project": "analytics",
+      "day": 22,
+      "revision": "r2",
+      "notion_page_id": "3fee51d450938103b0eafc50f32822c1",
+      "notion_url": "https://app.notion.com/p/3fee51d450938103b0eafc50f32822c1?pvs=204",
+      "notion_page_last_edited_at": "2026-10-19T22:57:51.950Z",
+      "notion_readback_verified": true,
+      "four_sections": true,
+      "code_blocks_exact": true,
+      "index_verified": true,
+      "source_sha": "da5155265bf66ef9d495fd38913ad6cb93e1bac8",
+      "candidate_commit": "43d445ef367460ce1bb4e01f9b0c90d66f0db77a",
+      "rules_version": "daily-tdd-minimum-v1",
+      "rule_blob_sha": "9f5efa59fee115405d2c3e5892c0460fed5bbc0f",
+      "article_path": "docs/teaching/day22/analytics.md",
+      "evidence_path": "docs/teaching/day22/completion.json",
+      "tests": {
+        "command": "DATABASE_URL=<isolated-loopback-fixture> cargo test -p stats-server --features postgres-integration day22_bootstrap",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0,
+        "scope": "PostgreSQL 18.6 isolated cluster; concurrent one-time init/Argon2/must-change marker/hash preservation"
+      },
+      "main_application": "not applied",
+      "product_integration": "not performed",
+      "functional_acceptance": false,
+      "readback_at": "2026-10-19T22:58:26.281Z",
+      "archived": true,
+      "archive_manifest": "docs/teaching/archive/day-22/manifest.json",
+      "frozen_notion_page_last_edited_at": "2026-10-20T11:54:14.054Z",
+      "frozen_body_sha256": "ae01b5aee1d29eec4a60a8ae8800e1a07ab8c9e7a838c4fa1ed17bfedc9069d1",
+      "frozen_notion_snapshot": "docs/teaching/archive/day-22/notion/analytics.md"
+    }
+  ],
+  "day15_frozen": true,
+  "next_day": {
+    "chat": 23,
+    "pet": 23,
+    "analytics": 23
+  },
+  "day_advanced": true,
+  "reference_modified": false,
+  "current_reference_observation": {
+    "sha": "cabacb75e946b03c67c455ce13a7a4ea85652f8e",
+    "full_acceptance": false,
+    "scope": "latest main source tested; Chat 13/1, Pet 42/0, Analytics PG26/0; frozen lesson kept"
+  },
+  "execution_policy": {
+    "canonical": "docs/COMMON_LEARNING_RULES.md",
+    "progress": "docs/learning-state.json",
+    "cached_conversations_override": false,
+    "notion_day16_preserved": true,
+    "github_day16_articles_removed": true,
+    "rules_version": "daily-tdd-minimum-v1"
+  },
+  "previous_manifest": "docs/teaching/current/manifest.json@494e6dbad63b72c2a4124bcd98a93859ac8aac98",
+  "functional_revalidation_evidence": "docs/teaching/evidence/2026-10-19-full-2c7ace2/REPORT.md",
+  "copilot_use_product_trial": {
+    "source_sha": "948685fe0692a9e56de94a4ae6a817fdf13fc0a2",
+    "scope": "Chat registration unique email and ASCII case-insensitive identity; existing completion/login flows",
+    "evidence": "docs/teaching/evidence/2026-10-18-copilot-p0-registration/REPORT.md",
+    "full_p0_acceptance": false,
+    "day_advanced": false
+  },
+  "room_name_sql_search": {
+    "reference_candidate": "4c1e5f710ade90a84dad83555a3e06ae6027ad77",
+    "reference_base": "2f60c731ca78c689cb78abbd7bea239146ed3aaa",
+    "product_sha": "78d5796200547bf9c1776b8dc82cbc0d842bf512",
+    "product_base": "948685fe0692a9e56de94a4ae6a817fdf13fc0a2",
+    "reference_tests": 34,
+    "product_tests": 22,
+    "implementation": "parameterized SQL LIKE in DB; UI displays returned rows; ACL before LIMIT",
+    "formal_full_acceptance": false,
+    "day_advanced": false,
+    "evidence": "docs/teaching/evidence/2026-10-18-sql-like-room-search/REPORT.md",
+    "reference_main_applied_sha": "2c7ace259ef790cea303d841f5779cd5f022d554",
+    "latest_reference_evidence": "docs/teaching/evidence/2026-10-19-full-2c7ace2/REPORT.md"
+  },
+  "last_content_verification": {
+    "date": "2026-10-19",
+    "observed_main_sha": "0cd9f7995c196a7359864a9395c0fe2372d09222",
+    "original_lesson_base_sha": "f692c2ebe7b414fe49858c1ab1c4a33ce7c3dfee",
+    "no_day_increment": true,
+    "coverage": "Notion/Markdown mirrored r2; three Day19 snippets and module tests present on main; Test All success; product acceptance not passed",
+    "workspace_tests_removed": true
+  },
+  "last_article_review": {
+    "revision": "r2",
+    "source_sha": "c92831e105fb0000860f995ea288e29631b5fed8",
+    "teaching_branch_head_before_update": "ade4255e23ca6eff5c59f936326510b4b6092018",
+    "all_notion_pages_readback": true,
+    "all_mirrors_readback": true,
+    "increment_next_day": false
+  },
+  "selection_priority_alignment": {
+    "revision": "foundational-flow-2026-10-19",
+    "notion_page_id": "3f2e51d4509381ddb8a8ce7cb4cd3e60",
+    "github_rules": "docs/COMMON_LEARNING_RULES.md",
+    "github_backlog": "docs/FUTURE_WORK.md",
+    "github_targets": "docs/P9_TARGET.md",
+    "state_policy": "docs/learning-state.json",
+    "priority": "Chat login; Pet creation; Analytics admin login",
+    "next_day_unchanged": true
+  },
+  "previous_day20_articles": [
+    {
+      "project": "chat",
+      "day": 20,
+      "revision": "r2",
+      "notion_page_id": "3fee51d4509381d1a1e6eb5e5a1c996e",
+      "article_path": "docs/teaching/day20/chat.md"
+    },
+    {
+      "project": "pet",
+      "day": 20,
+      "revision": "r2",
+      "notion_page_id": "3fee51d45093816897feec3468239e43",
+      "article_path": "docs/teaching/day20/pet.md"
+    },
+    {
+      "project": "analytics",
+      "day": 20,
+      "revision": "r2",
+      "notion_page_id": "3fee51d4509381618739f23dcd766996",
+      "article_path": "docs/teaching/day20/analytics.md"
+    }
+  ],
+  "day22_completion": "docs/teaching/day22/completion.json",
+  "day22_archive": "docs/teaching/archive/day-22/manifest.json",
+  "latest_source_review": "docs/teaching/evidence/2026-10-20-day22-freeze/review.json",
+  "archived_through_day": {
+    "chat": 22,
+    "pet": 22,
+    "analytics": 22
+  },
+  "archive_scope_manifest": "docs/teaching/archive/scope.json",
+  "current_status_document": "docs/teaching/current/STATUS.md",
+  "last_document_cleanup": {
+    "completed_at": "2026-10-20T12:35:43.496Z",
+    "evidence": "docs/teaching/archive/status-before-2026-10-20-consolidation/cleanup.json",
+    "day_advanced": false
+  }
+}

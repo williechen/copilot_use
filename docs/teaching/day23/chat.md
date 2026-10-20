@@ -259,7 +259,7 @@ let signin_routes = signin::routes(db.clone());
 <p><a href="/login" rel="external">"帳密登入"</a></p>
 ```
 
-`apps/server/Cargo.toml` 的 `[dependencies]` 增加 `sha2.workspace = true`。既有 `argon2.workspace = true`、`tower` dev-dependency 保留；不要引入舊 `rand_core 0.6` 或重新建立 Day22 signup.rs。本輪 `cargo test --offline` 已解析隔離 lock：server dependencies 只新增 `"sha2 0.11.1"`，無其他套件版本變更；先解析再執行 `--locked`。完整差異見[登入切片完整 patch](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/pending/day23/validation/candidate.patch)。
+`apps/server/Cargo.toml` 的 `[dependencies]` 增加 `sha2.workspace = true`。既有 `argon2.workspace = true`、`tower` dev-dependency 保留；不要引入舊 `rand_core 0.6` 或重新建立 Day22 `signup.rs`。本輪 `cargo test --offline` 已解析隔離 lock：server dependencies 只新增 `"sha2 0.11.1"`，無其他套件版本變更；先解析再執行 `--locked`。完整差異見[登入切片完整 patch](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/pending/day23/validation/candidate.patch)。
 
 ### Refactor／安全與舊 Day 補教
 
@@ -272,9 +272,9 @@ let signin_routes = signin::routes(db.clone());
 
 這是當日新 Red／Green／Refactor 後的一個 FIFO 補教單元，對應 chat-day22-postfreeze-20261020。Day22 原文與封存證據不修改。
 
-最新 main 已有 signup.rs 與 20261019221857_member_identity.sql，不再照舊文新增同名功能或 20261020060000_member_identity.sql。workspace Argon2 0.6 使用單參數 hash_password 自帶隨機鹽，不加舊 SaltString／rand_core 0.6。現有表單密碼下界為8 bytes，與舊文12不同；本次保留新版表單政策並在伺服器重驗。Email 只做基本格式檢查，寄信重設仍待完成。
+最新 main 已有 `signup.rs` 與 20261019221857_member_identity.sql，不再照舊文新增同名功能或 20261020060000_member_identity.sql。workspace Argon2 0.6 使用單參數 hash_password 自帶隨機鹽，不加舊 SaltString／rand_core 0.6。現有表單密碼下界為8 bytes，與舊文12不同；本次保留新版表單政策並在伺服器重驗。Email 只做基本格式檢查，寄信重設仍待完成。
 
-main 的短帳號測試409≠422不是登入 Red。以下是對最新 SHA 的完整 apps/server/src/signup.rs 替換內容：保留0.6雜湊與現有路由，只補欄位驗證和回歸測試，不重建mbr_user。
+main 的短帳號測試409≠422不是登入 Red。以下是對最新 SHA 的完整 `apps/server/src/signup.rs` 替換內容：保留0.6雜湊與現有路由，只補欄位驗證和回歸測試，不重建mbr_user。
 
 ```rust
 use argon2::{Argon2, PasswordHasher};
@@ -532,9 +532,9 @@ mod day23_correction_tests {
 
 ## 3. 套件版本
 
-本輪 crates.io 官方 API max_stable_version 核對與 lock 一致；未修改來源 lock。精確解析：Argon2 0.6.0、password-hash 0.6.1、Axum 0.8.9、SQLx 0.9.0、Tokio 1.54.0、UUID 1.28.0、SHA2 0.11.1、Leptos 0.8.22、tower 0.5.3。來源 lock 另有 SHA2 0.10.9，server 明確使用 workspace 的 0.11.1。
+本輪 [crates.io](https://crates.io) 官方 API max_stable_version 核對與 lock 一致；未修改來源 lock。精確解析：Argon2 0.6.0、password-hash 0.6.1、Axum 0.8.9、SQLx 0.9.0、Tokio 1.54.0、UUID 1.28.0、SHA2 0.11.1、Leptos 0.8.22、tower 0.5.3。來源 lock 另有 SHA2 0.10.9，server 明確使用 workspace 的 0.11.1。
 
-來源 manifest：workspace 0.2.22、edition 2024；Argon2 `0.6`、Axum `0.8`、SQLx `0.9`、Tokio `1.54`、UUID `1.28`、SHA2 `0.11`。這些是 Cargo.toml 的範圍，不冒充 lock 精確解析版。上述精確解析值已讀本次 Cargo.lock 並核對 crates.io 官方 max_stable_version，沒有升級產品依賴。
+來源 manifest：workspace 0.2.22、edition 2024；Argon2 `0.6`、Axum `0.8`、SQLx `0.9`、Tokio `1.54`、UUID `1.28`、SHA2 `0.11`。這些是 Cargo.toml 的範圍，不冒充 lock 精確解析版。上述精確解析值已讀本次 Cargo.lock 並核對 [crates.io](https://crates.io) 官方 max_stable_version，沒有升級產品依賴。
 
 ## 4. 驗證項目與實際結果
 
@@ -566,7 +566,7 @@ mod day23_correction_tests {
 
 ### 額外驗證程式（完整migration runner與檔案SQLite）
 
-以下新增於 apps/server/tests/day23_session.rs；歷史fixtures僅給隔離測試DB。fixtures與完整patch見教學分支validation/tests，不可作正式migration重送。
+以下新增於 `apps/server/tests/day23_session.rs`；歷史fixtures僅給隔離測試DB。fixtures與完整patch見教學分支validation/tests，不可作正式migration重送。
 
 ```rust
 use axum::{body::Body,http::{Request,StatusCode,header}};
