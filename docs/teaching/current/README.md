@@ -1,16 +1,9 @@
-# Day18 教學與正式複驗入口
+# 最新教學入口
 
-三篇為既有 Notion Day18 的當前修訂鏡像；next_day 各 19，本次未遞增。
+Day23（含）以前正文封存。chat next_day=25；pet next_day=24；analytics next_day=24。Day24僅在各案完整文章、程式碼與索引讀回成功後推進；排程維持暫停，未新增排程。
 
-- [CHAT Day18](CHAT.md) · [Notion](https://app.notion.com/p/3fde51d45093816bb36dd9099190d907)
-- [PET Day18](PET.md) · [Notion](https://app.notion.com/p/3fde51d4509381bfa106ea4d9b190480)
-- [ANALYTICS Day18](ANALYTICS.md) · [Notion](https://app.notion.com/p/3fde51d4509381c2a0d5f60041137619)
+- [chat Day24](https://app.notion.com/p/3ffe51d4509381ee9326ce6cc7f1c8a1?pvs=204)
+- [pet Day23](https://app.notion.com/p/3ffe51d450938198871cddfdb6f7044a?pvs=204)
+- [analytics Day23](https://app.notion.com/p/3ffe51d4509381f88d1be27bc5ec5f9f?pvs=204)
 
-- [正式複驗、錯誤、命令與原始證據](../evidence/2026-10-19-full-2c7ace2/REPORT.md)
-- [索引與分別驗收狀態](manifest.json)
-
-Day15／Day16 Notion 原文與既有封存保留；先前移除的 Day16 GitHub 文章沒有復原。本目錄的 CHAT／PET／ANALYTICS 是 Day18，不能當成 Day16。
-
-- [copilot_use P0註冊身分試作](../evidence/2026-10-18-copilot-p0-registration/REPORT.md)（本地工作分支，與rust_ai_chat／Day18驗收分開）
-
-- [名稱搜尋SQL LIKE修正](../evidence/2026-10-18-sql-like-room-search/REPORT.md)（歷史兩庫工作分支證據；參考main現已採SQL LIKE，最新實測見上方全面複驗）
+[發布證據與索引](manifest.json) · [目前狀態](STATUS.md)；歷史篇章與證據保留於原路徑。

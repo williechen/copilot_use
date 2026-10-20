@@ -4,7 +4,12 @@ from pathlib import Path
 
 def sha(text): return hashlib.sha256(text.encode()).hexdigest()
 def blocks(text): return [(m[0],m[1].removesuffix('\n')) for m in re.findall(r'```([^\n]*)\n([\s\S]*?)```',text.replace('\r\n','\n'))]
-def normal(text): return re.sub(r'\s+',' ',text).strip()
+def normal(text):
+    parts=re.split(r'(```[\s\S]*?```)',text)
+    for i in range(0,len(parts),2):
+        parts[i]=re.sub(r'<code>([\s\S]*?)</code>',r'`\1`',parts[i])
+        parts[i]=re.sub(r'\\([\\*~`$\[\]<>{}|^_])',r'\1',parts[i])
+    return re.sub(r'\s+',' ',''.join(parts)).strip()
 def verify(source,readback,source_sha,index_text,page_id):
     assert len(source)>3000, 'short test payload cannot be published as full lesson'
     assert re.findall(r'^## ([1-4])\.',source,re.M)==['1','2','3','4'], 'four sections required'

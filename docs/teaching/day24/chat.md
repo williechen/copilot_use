@@ -16,7 +16,7 @@
 
 測試檔 `apps/server/tests/day24_signup_complete.rs` 完整內容如下。先手動加入此檔時，只套 Green 的 handler 部分；或在乾淨副本一次套下方完整 patch，不能重複新增測試。
 
-```rust
+```rs
 use axum::{
     body::{Body, to_bytes},
     http::{Request, StatusCode},

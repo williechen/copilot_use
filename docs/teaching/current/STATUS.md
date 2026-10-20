@@ -24,3 +24,9 @@
 ## Day23 封存與本地正式檢驗
 
 2026-10-21使用者確認完成並封存Day23；原文未改，next_day維持24。已對main 8b9d59110349609c940e540ee9d5b42883d52b3e完成獨立正式檢驗，不重套教學patch：workspace122通過／PG28通過、真HTTP與Pet原生GUI重啟通過；嚴格Clippy兩處失敗，房間授權與首次改密碼等缺口保留。已清除隔離DB，copilot_use及既有5432保留。詳見[正式檢驗報告](../evidence/2026-10-21-main-8b9d591/REPORT.md)。
+
+## Day24 完整發布與讀回
+
+Day23（含）以前正文封存。chat next_day=25；pet next_day=24；analytics next_day=24。Day24僅在各案完整文章、程式碼與索引讀回成功後推進；排程維持暫停，未新增排程。
+
+- [chat Day24](https://app.notion.com/p/3ffe51d4509381ee9326ce6cc7f1c8a1?pvs=204)：完整讀回；docs/teaching/day24/chat-readback.json
