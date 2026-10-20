@@ -63,7 +63,7 @@ async fn day23_control_list_survives_pool_reopen() {
 
 ### Green：完整可套用修改
 
-以下patch以精確main SHA產生，`git apply --check`已通過。若已手動新增上方Red檔案，先保留其內容並只套其餘修改，或在乾淨隔離副本一次套完整patch；不要重複新增同一測試。patch完整包含store、Tauri command與註冊、JS、Rust bridge、Leptos控制窗、兩個測試與舊SQL唯讀fixture。沒有新增依賴、改Cargo.lock或改任何正式migration。
+以下patch以精確main SHA產生，原始下載patch的 `git apply --check`已通過（保留來源換行）；Notion內diff用於閱讀，套用請使用下方驗證資料連結的原始patch。若已手動新增上方Red檔案，先保留其內容並只套其餘修改，或在乾淨隔離副本一次套完整patch；不要重複新增同一測試。patch完整包含store、Tauri command與註冊、JS、Rust bridge、Leptos控制窗、兩個測試與舊SQL唯讀fixture。沒有新增依賴、改Cargo.lock或改任何正式migration。
 
 ```diff
 diff --git a/apps/desktop_pet/src/pet_store.rs b/apps/desktop_pet/src/pet_store.rs

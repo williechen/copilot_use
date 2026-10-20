@@ -1,5 +1,5 @@
 ## 目前進度（2026-10-20｜增量核對）
-三專案 Day22（含）以前文章均已封存；[Chat Day23](https://app.notion.com/p/3ffe51d4509381cf8532fb767afc33ab?pvs=204)已正式發布並全文讀回，Chat next_day=24；Pet／Analytics next_day=23，Day23尚未發布。舊文更正只在下一 Day 的新 Red／完整 Green／Refactor 後追加，依各專案待補佇列處理。
+三專案 Day22（含）以前文章均已封存；chat／pet Day23已發布並全文讀回，next_day=24；analytics next_day=23，Day23尚未發布。舊文更正只放下一Day的新實作之後。
 先前產品狀態快照的 rust_ai_chat/main 為 `cabacb75e946b03c67c455ce13a7a4ea85652f8e`（workspace 0.2.22）。以下是該 SHA 的最近一次實測結果；本次僅整理文件，沒有重跑測試或進行新的全面複驗。
 - **Chat：** 註冊表單→HTTP→SQLite 已有實作；13 項測試通過、1 項失敗，失敗為短帳號驗證實際回 409／預期 422。隔離修正候選 19 項通過，未套用 main。登入、Session 與聊天室授權主線仍待接通。
 - **Pet：** 控制台→Tauri IPC→SQLite 建立並讀回寵物已接線；42 項測試通過。逐寵物生活窗身分、初始外觀及重啟載入仍待完成。
@@ -12,3 +12,7 @@
 ## Chat Day23 教學發布（與產品驗收分開）
 
 來源f38360cd537daf6dc20e1d3868221bb56390cc7c。登入切片與Day22補教在隔離副本7項測試通過、SSR check通過；原main library 8通過／6失敗。全文四節與8個程式碼區塊讀回一致，Day22補教僅在Day23內發布，未改封存正文。仍未套用產品；閒置續期、房間授權與真實舊庫升級等缺口見[發布證據](../day23/chat-completion.json)。
+
+## pet Day23 教學發布
+
+[正式文章](https://app.notion.com/p/3ffe51d450938198871cddfdb6f7044a?pvs=204)已全文讀回，四節與2個程式碼區塊一致；來源f38360cd537daf6dc20e1d3868221bb56390cc7c，隔離測試44項通過。產品未套用、未宣稱完整驗收；限制與精確命令見正式文章及[發布證據](../day23/pet-completion.json)。

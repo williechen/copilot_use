@@ -6,7 +6,7 @@
   "fixed_tag_sha": "9bcae7c5d139f75ed08b4daffece602a71fdab34",
   "next_day": {
     "chat": 24,
-    "pet": 23,
+    "pet": 24,
     "analytics": 23
   },
   "last_full_comparison": "2026-10-16T22:47:14.399027+08:00",
@@ -1305,7 +1305,7 @@
       "id": "pet-day22-postfreeze-20261020",
       "project": "pet",
       "source_day": 22,
-      "status": "pending",
+      "status": "completed",
       "expected_next_day": 23,
       "placement": "section 2 after new Red/Green and Refactor; old-Day correction unit",
       "content_path": "docs/teaching/pending/day23/pet-day22-corrections.md",
@@ -1313,7 +1313,12 @@
       "source_sha": "cabacb75e946b03c67c455ce13a7a4ea85652f8e",
       "created_at": "2026-10-20T12:01:32.285Z",
       "complete_only_after": "next original lesson and correction published with full Notion readback",
-      "not_completed": true
+      "not_completed": false,
+      "published_in_day": 23,
+      "notion_page_id": "3ffe51d450938198871cddfdb6f7044a",
+      "readback_verified": true,
+      "completed_at": "2026-10-20T15:09:49.820614+00:00",
+      "completion_scope": "teaching correction published and read back; product not applied"
     },
     {
       "id": "analytics-day22-postfreeze-20261020",
@@ -1964,5 +1969,39 @@
     "body_sha256": "fda5933e8996ff1c9541644ad42c97c65c8eac2d0d255e7db0d7e8bf9cbed780",
     "expected_branch_sha_before_state_commit": "9c384e7def31dc062e296c007f3312a74be4adc8",
     "state_blob_before": "5a50543f6c50ef09a815016ed50745e58d98de1c"
+  },
+  "day23_pet_delivery": {
+    "project": "pet",
+    "day": 23,
+    "revision": "r1",
+    "notion_page_id": "3ffe51d450938198871cddfdb6f7044a",
+    "notion_url": "https://app.notion.com/p/3ffe51d450938198871cddfdb6f7044a?pvs=204",
+    "notion_page_last_edited_at": "2026-10-20T15:08:55.864Z",
+    "notion_readback_verified": true,
+    "full_text_verified_ignoring_whitespace": true,
+    "four_sections": true,
+    "code_blocks_exact": true,
+    "code_block_count": 2,
+    "index_verified": true,
+    "source_sha": "f38360cd537daf6dc20e1d3868221bb56390cc7c",
+    "content_commit": "4ef62b1a6128dfb452da1c66ef04c364e0ade21e",
+    "rules_version": "daily-tdd-minimum-v1",
+    "article_path": "docs/teaching/day23/pet.md",
+    "evidence_path": "docs/teaching/day23/pet-completion.json",
+    "readback_path": "docs/teaching/day23/pet-readback.json",
+    "tests": {
+      "passed": 44,
+      "failed": 0,
+      "scope": "see article and validation logs; product acceptance separate"
+    },
+    "main_application": "not applied",
+    "product_integration": "not performed",
+    "functional_acceptance": false,
+    "readback_at": "2026-10-20T15:09:49.820614+00:00",
+    "next_day_before": 23,
+    "next_day_after": 24,
+    "body_sha256": "6ce1516b8d48f228ce4613e685a93e8216c3e747b1fb7cfc2bf62e687d6963bb",
+    "expected_branch_sha_before_state_commit": "4ef62b1a6128dfb452da1c66ef04c364e0ade21e",
+    "state_blob_before": "dcacd4c50ac9de1be362a88fdc5a46690bdb0b62"
   }
 }
