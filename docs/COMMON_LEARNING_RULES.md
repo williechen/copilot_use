@@ -75,7 +75,7 @@ Notion 已完整讀回但 GitHub 狀態寫入／讀回失敗，保留頁面 ID�
 
 ## 目前進度
 
-三專案 Day23（含）以前文章均已封存；Chat Day24 r1／Pet Day24 r2／Analytics Day24 r1均已完整發布並全文讀回，next_day均為25。Pet r2實測三隻同時出籠、獨立狀態與單隻回籠，修訂未再次遞增Day；排程本次未恢復或新增。實作、測試與未完成項目見[目前進度](teaching/current/STATUS.md)。
+三案Day24（含）以前正文與程式已封存，三篇完整發布讀回，next_day均為25。另對使用者已推送main08b891a正式驗證：workspace127通過／1ignored；完整PG測試缺SQL檔編譯失敗，可執行子集28通過；Pet重複渲染／事件權限、Analytics後續改密碼入口及兩案舊庫checksum阻擋均已重現，不標完整驗收通過。封存正文未改，更正排Day25待補，排程未改。見[Day24正式驗證報告](teaching/evidence/2026-10-21-day24-main-08b891a/REPORT.md)。實作、測試與未完成項目見[目前進度](teaching/current/STATUS.md)。
 
 ## 文件入口
 產品能力與未來清單、詳細架構、操作設定、功能對照與工程證據仍保留各自用途；本篇集中教學方法、格式及三專案大綱，其他教學入口改為引用。原Day及程式保留，舊規則／來源／失效教法只作歷史，不再套用為目前指令。

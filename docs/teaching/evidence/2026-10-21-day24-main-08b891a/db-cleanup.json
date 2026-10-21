@@ -1,0 +1,11 @@
+{
+  "dedicated_pg_removed": "/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-3/work/day24-validation-pg",
+  "sqlite_files_removed": [
+    "work/day24-validation-runtime/pet.sqlite",
+    "work/day24-validation-runtime/chat.sqlite",
+    "work/day24-runtime/pet.sqlite"
+  ],
+  "system_5432_untouched": true,
+  "copilot_use_data_untouched": true,
+  "runtime_cache_scope": "only this run XDG directories removed"
+}

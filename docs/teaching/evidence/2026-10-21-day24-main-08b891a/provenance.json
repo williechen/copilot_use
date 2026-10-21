@@ -1,0 +1,5 @@
+{
+  "source_sha": "08b891a22c1934a2bf0b1edbb103c9b16bcf12de",
+  "archive_sha256": "4116ee085dc7d105244f99f2988ac9d21c6736b53e7065fa78ecad988b1dc6ea",
+  "scope": "exact main archive without teaching/fix patches; product readonly"
+}

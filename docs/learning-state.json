@@ -1338,6 +1338,34 @@
       "readback_verified": true,
       "completed_at": "2026-10-20T15:22:18.054062+00:00",
       "completion_scope": "teaching correction published and read back; product not applied"
+    },
+    {
+      "id": "pet-day24-postfreeze-20261021",
+      "project": "pet",
+      "source_day": 24,
+      "status": "pending",
+      "expected_next_day": 25,
+      "placement": "section 2 after new Red/Green and Refactor; one old-Day correction unit",
+      "content_path": "docs/teaching/pending/day25/pet-day24-corrections.md",
+      "review_evidence": "docs/teaching/evidence/2026-10-21-day24-main-08b891a/REPORT.md",
+      "source_sha": "08b891a22c1934a2bf0b1edbb103c9b16bcf12de",
+      "created_at": "2026-10-21T12:25:21.934286+00:00",
+      "complete_only_after": "next original lesson and correction published with full Notion readback",
+      "not_completed": true
+    },
+    {
+      "id": "analytics-day24-postfreeze-20261021",
+      "project": "analytics",
+      "source_day": 24,
+      "status": "pending",
+      "expected_next_day": 25,
+      "placement": "section 2 after new Red/Green and Refactor; one old-Day correction unit",
+      "content_path": "docs/teaching/pending/day25/analytics-day24-corrections.md",
+      "review_evidence": "docs/teaching/evidence/2026-10-21-day24-main-08b891a/REPORT.md",
+      "source_sha": "08b891a22c1934a2bf0b1edbb103c9b16bcf12de",
+      "created_at": "2026-10-21T12:25:21.934286+00:00",
+      "complete_only_after": "next original lesson and correction published with full Notion readback",
+      "not_completed": true
     }
   ],
   "archived_lessons": {
@@ -2142,5 +2170,13 @@
     "requested_by": "user",
     "formal_acceptance_separate": true,
     "next_day_unchanged": true
+  },
+  "day24_local_validation": {
+    "source_sha": "08b891a22c1934a2bf0b1edbb103c9b16bcf12de",
+    "status": "completed with reproduced defects; full acceptance failed",
+    "report": "docs/teaching/evidence/2026-10-21-day24-main-08b891a/REPORT.md",
+    "summary": "docs/teaching/evidence/2026-10-21-day24-main-08b891a/summary.json",
+    "next_day_unchanged": true,
+    "frozen_bodies_unchanged": true
   }
 }

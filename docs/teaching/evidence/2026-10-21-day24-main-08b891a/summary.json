@@ -1,0 +1,236 @@
+{
+  "source_sha": "08b891a22c1934a2bf0b1edbb103c9b16bcf12de",
+  "run_at": "2026-10-21T12:25:21.934286+00:00",
+  "scope": "main source; no teaching or corrective patches applied",
+  "source_byte_verification": {
+    "source_sha": "08b891a22c1934a2bf0b1edbb103c9b16bcf12de",
+    "tracked_files_verified": 167,
+    "mismatches": [],
+    "external_test_only_files": [
+      "apps/desktop_pet/tests/validation_upgrade_probe.rs",
+      "apps/stats_server/tests/validation_upgrade_probe.rs"
+    ]
+  },
+  "workspace": {
+    "passed": 127,
+    "failed": 0,
+    "ignored": 1
+  },
+  "complete_postgres_suite": {
+    "status": "compile failed",
+    "missing_file": "apps/stats_server/migrations/20261021071000_unique_account_email.sql",
+    "tests_not_run": true
+  },
+  "available_postgres_subset": {
+    "passed": 28,
+    "failed": 0,
+    "ignored": 0
+  },
+  "checks": {
+    "fmt": {
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0
+    },
+    "ssr": {
+      "command": [
+        "cargo",
+        "check",
+        "--locked",
+        "-p",
+        "server",
+        "--features",
+        "ssr"
+      ],
+      "exit_code": 0
+    },
+    "chat-wasm": {
+      "command": [
+        "cargo",
+        "check",
+        "--locked",
+        "-p",
+        "ui",
+        "--features",
+        "hydrate",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "exit_code": 0
+    },
+    "pet-wasm": {
+      "command": [
+        "cargo",
+        "check",
+        "--locked",
+        "-p",
+        "desktop-pet-frontend",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "exit_code": 0
+    },
+    "build": {
+      "command": [
+        "cargo",
+        "build",
+        "--locked",
+        "-p",
+        "server",
+        "--features",
+        "ssr",
+        "-p",
+        "stats-server",
+        "--bins",
+        "-p",
+        "desktop-pet"
+      ],
+      "exit_code": 0
+    },
+    "clippy": {
+      "command": [
+        "cargo",
+        "clippy",
+        "--locked",
+        "--workspace",
+        "--exclude",
+        "desktop-pet-frontend",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 101
+    }
+  },
+  "chat_http": {
+    "fresh_full_root_migration_startup": true,
+    "signup_redirect_and_logged_out": true,
+    "completion_page_stays_until_home_link": true,
+    "login_session_survives_process_restart": true,
+    "new_signup_revokes_current_browser_session": true,
+    "duplicate_account_casefold_rejected": true,
+    "unauthenticated_room_page_status": 200,
+    "chat_logout_route_status": 404
+  },
+  "analytics_first_change": {
+    "restricted_before_change": true,
+    "real_http_change": true,
+    "old_cookie_rejected": true
+  },
+  "analytics_followup": {
+    "old_password_status": 401,
+    "new_password_login_status": 303,
+    "login_location": "/dashboard",
+    "dashboard_status": 200,
+    "subsequent_change_page_status": 303,
+    "subsequent_change_location": "/dashboard"
+  },
+  "pet_gui": {
+    "observed_life_windows": {
+      "eb0980e4-719d-4695-8508-e167773b41a0": {
+        "faces": 2,
+        "alerts": [
+          "event.listen not allowed on window \"pet-eb0980e4719d46958508e167773b41a0\", webview \"pet-eb0980e4719d46958508e167773b41a0\", URL: local\n\nallowed on: [windows: \"main\", \"pet\", URL: local]\n\nreferenced by: capability: default, permission: allow-listen"
+        ],
+        "all_buttons_visible": false
+      },
+      "d2777618-7e14-4e13-b72f-408455b1ca6b": {
+        "faces": 2,
+        "alerts": [
+          "event.listen not allowed on window \"pet-d27776187e144e13b72f408455b1ca6b\", webview \"pet-d27776187e144e13b72f408455b1ca6b\", URL: local\n\nallowed on: [windows: \"main\", \"pet\", URL: local]\n\nreferenced by: capability: default, permission: allow-listen"
+        ],
+        "all_buttons_visible": false
+      },
+      "63f1a8de-98e9-4351-97a7-0b8995d102d0": {
+        "faces": 2,
+        "alerts": [
+          "event.listen not allowed on window \"pet-63f1a8de98e9435197a70b8995d102d0\", webview \"pet-63f1a8de98e9435197a70b8995d102d0\", URL: local\n\nallowed on: [windows: \"main\", \"pet\", URL: local]\n\nreferenced by: capability: default, permission: allow-listen"
+        ],
+        "all_buttons_visible": false
+      }
+    },
+    "three_simultaneous_identity_windows": true,
+    "ids": [
+      "63f1a8de-98e9-4351-97a7-0b8995d102d0",
+      "d2777618-7e14-4e13-b72f-408455b1ca6b",
+      "eb0980e4-719d-4695-8508-e167773b41a0"
+    ],
+    "window_rects": {
+      "eb0980e4-719d-4695-8508-e167773b41a0": {
+        "x": 520,
+        "y": 80,
+        "width": 200,
+        "height": 200
+      },
+      "d2777618-7e14-4e13-b72f-408455b1ca6b": {
+        "x": 300,
+        "y": 80,
+        "width": 200,
+        "height": 200
+      },
+      "63f1a8de-98e9-4351-97a7-0b8995d102d0": {
+        "x": 80,
+        "y": 80,
+        "width": 200,
+        "height": 200
+      }
+    },
+    "duplicate_open_focuses_existing": true,
+    "three_independent_states": true,
+    "sleep_animation_text": [
+      "🐢",
+      "🐢"
+    ],
+    "cage_one_preserves_other_two_and_data": true,
+    "restart_explicit_default_identity": true
+  },
+  "upgrade": {
+    "baseline_sha": "4f0cd00b8d571bdaf120298efebf0d62b795498f",
+    "pet": "blocked by modified migration 20261018095626",
+    "analytics": "blocked by modified migration 20261018073932",
+    "existing_rows_preserved": true
+  },
+  "frozen_notion_bodies": {
+    "chat": {
+      "body_sha256": "844f8e10d0d49628fda00af2a4015bfa2451a7e88142a7092a5af64f966348e7",
+      "body_exact": true,
+      "title_archived": true
+    },
+    "pet": {
+      "body_sha256": "f257b4513052a8d69e8a871acc8b0aff2038aedb6e370a5f02f19f109e73d426",
+      "body_exact": true,
+      "title_archived": true
+    },
+    "analytics": {
+      "body_sha256": "1f8d8a271a9a8ccd42b56057973a7c48d1f696da6d2628fd7599b9d29c0ad91d",
+      "body_exact": true,
+      "title_archived": true
+    }
+  },
+  "full_acceptance_passed": false,
+  "next_day_unchanged": {
+    "chat": 25,
+    "pet": 25,
+    "analytics": 25
+  },
+  "last_full_comparison_unchanged": true,
+  "source_modified": false,
+  "scheduler_modified": false,
+  "cleanup": {
+    "dedicated_pg_removed": "/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-3/work/day24-validation-pg",
+    "sqlite_files_removed": [
+      "work/day24-validation-runtime/pet.sqlite",
+      "work/day24-validation-runtime/chat.sqlite",
+      "work/day24-runtime/pet.sqlite"
+    ],
+    "system_5432_untouched": true,
+    "copilot_use_data_untouched": true,
+    "runtime_cache_scope": "only this run XDG directories removed"
+  }
+}

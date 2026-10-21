@@ -36,3 +36,7 @@ Day23（含）以前正文封存。chat next_day=25；pet next_day=25；analytic
 ## Day24封存
 
 三案Day24含程式與動畫已依使用者要求封存，正文未改，next_day均維持25。後續Pet動畫單圖像、重複渲染與動態窗權限更正放在Day25待辦，不回寫Day24；封存與產品正式驗收分開。
+
+## Day24最新main正式驗證（2026-10-21）
+
+[完整報告](../evidence/2026-10-21-day24-main-08b891a/REPORT.md)：精確main08b891a，workspace127通過／1ignored；完整PG缺SQL檔編譯失敗，可執行子集28通過。Chat註冊／重啟通過；Pet三窗能開但每窗兩圖與事件權限錯誤；Analytics首次改密碼通過但後續改密碼入口導回；Pet／Analytics舊庫checksum阻擋，strictClippy4處失敗。不是完整驗收通過，封存正文未改，next_day維持25。更正去重排Day25待補。

@@ -1,0 +1,10 @@
+{
+  "fresh_full_root_migration_startup": true,
+  "signup_redirect_and_logged_out": true,
+  "completion_page_stays_until_home_link": true,
+  "login_session_survives_process_restart": true,
+  "new_signup_revokes_current_browser_session": true,
+  "duplicate_account_casefold_rejected": true,
+  "unauthenticated_room_page_status": 200,
+  "chat_logout_route_status": 404
+}

@@ -1,0 +1,54 @@
+   Compiling stats-server v0.2.23 (/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-3/work/day24-validation-main/apps/stats_server)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.87s
+     Running unittests src/lib.rs (/home/willie/Documents/rust_ai_chat/target/debug/deps/stats_server-71dadcc56540c67c)
+
+running 23 tests
+test admin::tests::day18_activity_extends_valid_session_only ... ok
+test admin::tests::day19_success_does_not_reset_previous_failures ... ok
+test admin::tests::day20_login_rate_limit_provides_retry_after ... ok
+test admin::tests::day21_admin_account_is_explicit ... ok
+test admin::tests::day19_successful_logins_do_not_consume_failure_budget ... ok
+test admin::tests::origin_and_expired_sessions_fail_closed ... ok
+test admin::tests::login_query_postgres_and_logout_flow ... ok
+test day16_total_tests::total_uses_actual_committed_summary_counts ... ok
+test source_kind_summary_tests::authorization_and_filter_validation_precede_database_access ... ok
+test admin::tests::admin_login_guard_and_session_are_separate_from_source_token ... ok
+test source_summary_tests::empty_and_rolled_back_events_are_not_counted ... ok
+test source_kind_summary_tests::filters_committed_deduplicated_rows_by_source_and_kind ... ok
+test source_summary_tests::summary_rejects_cross_source_before_database_access ... ok
+test tests::event_type_rejects_noncanonical_boundaries ... ok
+test tests::existing_event_validation_rejects_whitespace ... ok
+test tests::invalid_event_does_not_reserve_dedup_key ... ok
+test tests::nil_event_id_is_not_accepted ... ok
+test tests::persist_outcomes_have_distinct_http_codes ... ok
+test tests::rejects_bad_source_version_and_event_type ... ok
+test tests::token_must_match_the_claimed_source ... ok
+test tests::valid_event_is_accepted_once_per_source_and_id ... ok
+test bootstrap::day22_tests::day22_bootstrap_serializes_and_preserves_hash ... ok
+test source_summary_tests::summary_counts_committed_rows_per_source_and_kind ... ok
+
+test result: ok. 23 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.14s
+
+     Running tests/day23_password_login.rs (/home/willie/Documents/rust_ai_chat/target/debug/deps/day23_password_login-7c6b40069f40ae7c)
+
+running 2 tests
+test day23_ready_account_session_survives_new_pool_and_is_revocable ... ok
+test day23_bootstrapped_password_is_restricted_before_first_change ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.40s
+
+     Running tests/idempotency_contract.rs (/home/willie/Documents/rust_ai_chat/target/debug/deps/idempotency_contract-56fbd2b5183e9483)
+
+running 2 tests
+test duplicate_is_counted_once_across_retries ... ok
+test event_identity_deduplicates_per_source ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/postgres_event_store.rs (/home/willie/Documents/rust_ai_chat/target/debug/deps/postgres_event_store-6f839d4164c9f1c7)
+
+running 1 test
+test postgres_event_idempotency ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.19s
+

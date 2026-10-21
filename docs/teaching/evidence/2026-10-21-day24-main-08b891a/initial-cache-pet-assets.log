@@ -1,0 +1,20 @@
+127.0.0.1 - - [21/Oct/2026 20:17:09] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [21/Oct/2026 20:17:09] code 404, message File not found
+127.0.0.1 - - [21/Oct/2026 20:17:09] "GET /style-e37f4ac4648c0df2.css HTTP/1.1" 404 -
+127.0.0.1 - - [21/Oct/2026 20:17:09] "GET /style-f705be438a37bef7.css HTTP/1.1" 200 -
+127.0.0.1 - - [21/Oct/2026 20:17:09] "GET /desktop-pet-frontend-8a70b279cdb19410.js HTTP/1.1" 200 -
+127.0.0.1 - - [21/Oct/2026 20:17:09] "GET /desktop-pet-frontend-8a70b279cdb19410_bg.wasm HTTP/1.1" 200 -
+127.0.0.1 - - [21/Oct/2026 20:17:09] "GET /desktop-pet-frontend-8a70b279cdb19410_bg.wasm HTTP/1.1" 200 -
+127.0.0.1 - - [21/Oct/2026 20:17:11] "GET /index.html?view=pet&pet_id=4212fac1-c4ca-4a29-ac49-314d42cfb29a HTTP/1.1" 200 -
+127.0.0.1 - - [21/Oct/2026 20:17:12] "GET /index.html?view=pet&pet_id=c2b5e9f9-93ba-48ae-b8b1-567baa0d822f HTTP/1.1" 200 -
+127.0.0.1 - - [21/Oct/2026 20:17:13] "GET /index.html?view=pet&pet_id=96b353e8-9efe-4e5b-a73e-2fd1196e3f66 HTTP/1.1" 200 -
+127.0.0.1 - - [21/Oct/2026 20:17:17] "GET / HTTP/1.1" 304 -
+127.0.0.1 - - [21/Oct/2026 20:17:17] code 404, message File not found
+127.0.0.1 - - [21/Oct/2026 20:17:17] "GET /style-e37f4ac4648c0df2.css HTTP/1.1" 404 -
+127.0.0.1 - - [21/Oct/2026 20:17:17] "GET /style-f705be438a37bef7.css HTTP/1.1" 304 -
+127.0.0.1 - - [21/Oct/2026 20:17:17] "GET /style-f705be438a37bef7.css HTTP/1.1" 304 -
+127.0.0.1 - - [21/Oct/2026 20:17:17] "GET /desktop-pet-frontend-8a70b279cdb19410.js HTTP/1.1" 304 -
+127.0.0.1 - - [21/Oct/2026 20:17:17] "GET /desktop-pet-frontend-8a70b279cdb19410_bg.wasm HTTP/1.1" 304 -
+127.0.0.1 - - [21/Oct/2026 20:17:17] "GET /desktop-pet-frontend-8a70b279cdb19410.js HTTP/1.1" 304 -
+127.0.0.1 - - [21/Oct/2026 20:17:17] "GET /desktop-pet-frontend-8a70b279cdb19410_bg.wasm HTTP/1.1" 304 -
+127.0.0.1 - - [21/Oct/2026 20:17:17] "GET /desktop-pet-frontend-8a70b279cdb19410_bg.wasm HTTP/1.1" 304 -

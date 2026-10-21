@@ -1,0 +1,1 @@
+External validation-only test files added after workspace test; no application/migration code modified. Baseline exact main 4f0cd00, candidate exact main 08b891a. Passing probes mean defects were successfully reproduced, not upgrade success.

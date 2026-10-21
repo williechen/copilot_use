@@ -461,5 +461,13 @@
     "frozen_body_sha256": "93d4c00a6e4d3516fcab18a3fc605bd84af28acda551670f37b5deb1b606adb5",
     "frozen_notion_snapshot": "docs/teaching/archive/day-23/notion/analytics.md"
   },
-  "day24_archive": "docs/teaching/archive/day-24/manifest.json"
+  "day24_archive": "docs/teaching/archive/day-24/manifest.json",
+  "day24_local_validation": {
+    "source_sha": "08b891a22c1934a2bf0b1edbb103c9b16bcf12de",
+    "status": "completed with reproduced defects; full acceptance failed",
+    "report": "docs/teaching/evidence/2026-10-21-day24-main-08b891a/REPORT.md",
+    "summary": "docs/teaching/evidence/2026-10-21-day24-main-08b891a/summary.json",
+    "next_day_unchanged": true,
+    "frozen_bodies_unchanged": true
+  }
 }
