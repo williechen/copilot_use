@@ -1360,7 +1360,7 @@
       "id": "analytics-day24-postfreeze-20261021",
       "project": "analytics",
       "source_day": 24,
-      "status": "pending",
+      "status": "completed",
       "expected_next_day": 25,
       "placement": "section 2 after new Red/Green and Refactor; one old-Day correction unit",
       "content_path": "docs/teaching/pending/day25/analytics-day24-corrections.md",
@@ -1368,19 +1368,29 @@
       "source_sha": "08b891a22c1934a2bf0b1edbb103c9b16bcf12de",
       "created_at": "2026-10-21T12:25:21.934286+00:00",
       "complete_only_after": "next original lesson and correction published with full Notion readback",
-      "not_completed": true,
-      "latest_review": "2026-10-22 main aaa9194: Day24 mail/email and SQL quote fixes verified; PG31 passed with --include-ignored. Default tests20 passed/1 ignored and CI Test All success. Historical checksum and next-lesson correction publication remain pending.",
+      "not_completed": false,
+      "latest_review": "2026-10-22 closure: existing Day25 correction publication/readback and main fixture implementation verified. User withdrew historical data-preserving upgrade requirement in favor of delete/rebuild; no Day26 republication required. No database deleted or rebuilt.",
       "fixture_technical_repair_verified": {
         "source_sha": "aaa9194a966aefae1ef4724f5d2b576b4289c550",
         "evidence": "docs/teaching/evidence/2026-10-22-main-aaa9194/REPORT.md"
       },
-      "completion_requirements_confirmed_2026_10_22": [
+      "selection_policy": "oldest pending item for this project; after the next applicable original Red/Green/Refactor; maximum one old-Day correction per article; no fixed lesson day assigned",
+      "superseded_completion_requirements_2026_10_22": [
         "Fixture repair is verified but does not close this queue item.",
         "Audit actual historical migration and checksum state without modifying historical checksums or deleting user data.",
         "Validate a data-preserving upgrade path and record covered and unsupported histories.",
         "Publish the correction after new original Red/Green/Refactor, read back full text, and synchronize state before closure."
       ],
-      "selection_policy": "oldest pending item for this project; after the next applicable original Red/Green/Refactor; maximum one old-Day correction per article; no fixed lesson day assigned"
+      "completion_requirements_current": [
+        "Existing correction section published after original Day25 Red/Green/Refactor and full text read back.",
+        "Fixture repair implemented in main and PostgreSQL31 verified.",
+        "Historical data-preserving upgrade requirement replaced by explicit user delete/rebuild policy; no actual database deletion performed this turn."
+      ],
+      "completed_in_day": 25,
+      "completed_notion_page_id": "400e51d45093810796cbd6074c8d35c3",
+      "readback_verified": true,
+      "completion_evidence": "docs/teaching/evidence/2026-10-22-analytics-day24-closure/closure.json",
+      "completion_scope": "Existing Analytics Day24 correction published in Day25; fixture implementation verified; historical in-place data-preserving upgrade requirement withdrawn by user in favor of deletion/rebuild. Not full Analytics product acceptance."
     },
     {
       "id": "chat-day25-shared-auth-20261022",
@@ -1398,7 +1408,8 @@
         "Place one old-Day correction after new original Red/Green/Refactor following per-project FIFO.",
         "Do not edit frozen Day25 or earlier articles; publish/read back and synchronize before closure."
       ],
-      "selection_policy": "oldest pending item for this project; after the next applicable original Red/Green/Refactor; maximum one old-Day correction per article; no fixed lesson day assigned"
+      "selection_policy": "oldest pending item for this project; after the next applicable original Red/Green/Refactor; maximum one old-Day correction per article; no fixed lesson day assigned",
+      "scope_clarification": "Pending shared-auth follow-up only; Day25 room-page Session Gate was already implemented and tested at aaa9194. Do not reteach completed gate or republish frozen Day25."
     },
     {
       "id": "pet-day25-single-image-20261022",
@@ -1417,7 +1428,8 @@
         "Place one old-Day correction after new original Red/Green/Refactor following per-project FIFO.",
         "Do not edit frozen Day25 or earlier articles; publish/read back and synchronize before closure."
       ],
-      "selection_policy": "oldest pending item for this project; after the next applicable original Red/Green/Refactor; maximum one old-Day correction per article; no fixed lesson day assigned"
+      "selection_policy": "oldest pending item for this project; after the next applicable original Red/Green/Refactor; maximum one old-Day correction per article; no fixed lesson day assigned",
+      "scope_clarification": "Pending single-image animation and exact-SHA native GUI/event verification only; Day25 capability and duplicate-component fixes were already implemented at aaa9194. Do not repeat completed fixes or edit frozen Day25."
     }
   ],
   "archived_lessons": {
@@ -2453,7 +2465,6 @@
   "followup_confirmation_2026_10_22": {
     "source": "direct user confirmation",
     "pending_ids": [
-      "analytics-day24-postfreeze-20261021",
       "chat-day25-shared-auth-20261022",
       "pet-day25-single-image-20261022"
     ],
@@ -2482,6 +2493,45 @@
       "settings_changed": false,
       "delivery_assumed_from_success": false,
       "verification_source": "task execution history, Notion article readback and GitHub evidence"
-    }
+    },
+    "initial_pending_ids": [
+      "analytics-day24-postfreeze-20261021",
+      "chat-day25-shared-auth-20261022",
+      "pet-day25-single-image-20261022"
+    ],
+    "completed_ids": [
+      "analytics-day24-postfreeze-20261021"
+    ]
+  },
+  "analytics_day24_closure_2026_10_22": {
+    "date": "2026-10-22",
+    "status": "completed",
+    "scope": "Existing Analytics Day24 correction published in Day25; fixture implementation verified; historical in-place data-preserving upgrade requirement withdrawn by user in favor of deletion/rebuild. Not full Analytics product acceptance.",
+    "notion_page_id": "400e51d45093810796cbd6074c8d35c3",
+    "notion_page_last_edited_at": "2026-10-21T14:05:32.307Z",
+    "article_body_sha256": "89767f8e8920b71c379b4f8c852915ffb7bf9ebe0833351914cec62ff79c963c",
+    "article_matches_frozen_archive": true,
+    "existing_publication_and_readback_verified": true,
+    "implementation_source_sha": "aaa9194a966aefae1ef4724f5d2b576b4289c550",
+    "implementation_tests": {
+      "postgres_with_include_ignored": {
+        "passed": 31,
+        "failed": 0
+      },
+      "evidence": "docs/teaching/evidence/2026-10-22-main-aaa9194/REPORT.md"
+    },
+    "historical_upgrade_requirement": "superseded by direct user policy: delete and rebuild for the Analytics historical database discussed here",
+    "existing_database_deleted_or_rebuilt": false,
+    "republication_required": false,
+    "archived_articles_edited": false,
+    "next_day_advanced": false,
+    "functional_acceptance": false
+  },
+  "historical_database_handling_2026_10_22": {
+    "scope": "Analytics Day24 historical local/learning database discussed in this chat",
+    "policy": "delete and recreate rather than preserve-data in-place upgrade",
+    "source": "direct user instruction: 歷史資料庫升級: 以後刪除重建",
+    "data_preserving_upgrade_required_for_day24_closure": false,
+    "database_operation_performed": false
   }
 }

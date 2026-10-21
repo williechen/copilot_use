@@ -545,5 +545,13 @@
     "summary": "docs/teaching/evidence/2026-10-22-main-aaa9194/summary.json",
     "functional_acceptance": false,
     "next_day_unchanged": true
+  },
+  "analytics_day24_correction_closure": {
+    "status": "completed",
+    "evidence": "docs/teaching/evidence/2026-10-22-analytics-day24-closure/closure.json",
+    "completed_in_day": 25,
+    "notion_page_id": "400e51d45093810796cbd6074c8d35c3",
+    "next_day_unchanged": true,
+    "republication_required": false
   }
 }

@@ -40,7 +40,7 @@
 
 三案 Day25 已依既有封存 manifest 封存；本輪重新讀回三篇 Notion 全文，與 GitHub 封存正文 SHA256 逐字一致。Chat／Pet／Analytics 的 next_day 均為26，這是教學發布進度，不能當成功能驗收。Day25（含）以前正文、程式及歷史證據不回寫；後續差異按 FIFO 放在下一 Day 新 Red／完整 Green／Refactor 之後，不因驗證、文件同步或補教另增 Day。
 
-登入、登出、Cookie 與 Session 必須採共用實作，各系統透過儲存介面及政策接入；SQLite／PostgreSQL 與各系統登入狀態仍獨立。Pet 至少以三個不同 pet id 的生活窗驗證獨立狀態；每窗單一元件與動畫每幀單一寵物圖像分別驗證，設定字串測試不能代替 GUI／事件授權實測。Analytics 需核對完整 postgres-integration targets、歷史 migration checksum 與舊資料保留，單一 Day25 target 不代表全部測試通過。
+登入、登出、Cookie 與 Session 必須採共用實作，各系統透過儲存介面及政策接入；SQLite／PostgreSQL 與各系統登入狀態仍獨立。Pet 至少以三個不同 pet id 的生活窗驗證獨立狀態；每窗單一元件與動畫每幀單一寵物圖像分別驗證，設定字串測試不能代替 GUI／事件授權實測。Analytics 需核對完整 postgres-integration targets與全新建庫流程，單一 Day25 target 不代表全部測試通過。2026-10-22使用者針對本次Analytics歷史庫處理指定「以後刪除重建」：不再要求保留舊資料的原地升級或checksum相容修復。歷史升級失敗仍保留證據；本次只更新政策，未刪除或重建任何現有資料庫。
 
 ### 3. 測試與證據
 
@@ -95,11 +95,11 @@ Notion 已完整讀回但 GitHub 狀態寫入／讀回失敗，保留頁面 ID�
 
 本輪未重跑workspace、fmt／Clippy、WASM、真HTTP、Pet GUI或舊庫升級。前次a06c038的137通過／1ignored不冒稱新SHA整套結果；相關程式與依賴未變的HTTP／UI／DB觀察只保留原SHA與範圍，見[前次報告](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-22-main-a06c038/REPORT.md)。
 
-保留缺口：Chat共用登入／登出／Cookie／Session與API／WS房間ACL；Pet單圖像動畫及此SHA三窗GUI；Analytics角色／來源授權及歷史庫checksum。舊庫migration未改：前次Pet自4f0cd00升級阻擋、自Day24成功；Analytics自4f0cd00成功、自Day24阻擋，均非本輪新實測。
+保留缺口：Chat共用登入／登出／Cookie／Session與API／WS房間ACL；Pet單圖像動畫及此SHA三窗GUI；Analytics角色／來源授權。舊庫migration未改：前次Pet自4f0cd00升級阻擋、自Day24成功；Analytics自4f0cd00成功、自Day24阻擋，均非本輪新實測。 上述Analytics升級結果僅保留為歷史證據；依2026-10-22新政策，該歷史庫改採刪除重建，不再列保留資料升級為Day24結案阻擋。
 
 三案Day25（含）以前正文與程式封存，next_day均維持26，last_full_comparison不變。後續補教按各專案既有佇列FIFO，在下一個適用原教學的新Red／完整Green／Refactor後加入，每篇最多一個舊Day單元；不預先指定新題目、不回寫封存原文、不因補教或文件同步增加Day。copilot_use產品未重新驗收，不宣稱完整產品功能通過。
 
-- **Analytics Day24：pending。** fixture已修正並驗證；仍須核對實際歷史migration／checksum，提出並驗證保留資料的升級方案，再完成正式補教發布、全文讀回及狀態同步，才能整筆結案。
+- **Analytics Day24：已結案（2026-10-22）。** 補教已在Day25第2節新實作／Refactor之後發布並全文讀回；fixture修正已進main aaa9194，含ignored的PostgreSQL31項通過。使用者已將本次歷史庫處理改為刪除重建，保留資料升級要求撤除，因此不再等待Day26重發。這是既有補教結案，不增加Day、不修改封存原文，也不代表Analytics全部功能驗收。
 - **Chat Day25：pending。** 共用登入／登出／Cookie／Session要求列入Chat後續FIFO補教；不能以房間頁Gate測試通過當作共用實作已完成。
 - **Pet Day25：pending。** 單圖像動畫及對應三窗原生GUI驗證列入Pet後續FIFO補教；每窗單一元件、每幀單一圖像與事件同步分別驗證。
 
