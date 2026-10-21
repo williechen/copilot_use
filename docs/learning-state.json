@@ -5,7 +5,7 @@
   "fixed_tag": "v0.2.1",
   "fixed_tag_sha": "9bcae7c5d139f75ed08b4daffece602a71fdab34",
   "next_day": {
-    "chat": 25,
+    "chat": 26,
     "pet": 25,
     "analytics": 25
   },
@@ -2178,5 +2178,20 @@
     "summary": "docs/teaching/evidence/2026-10-21-day24-main-08b891a/summary.json",
     "next_day_unchanged": true,
     "frozen_bodies_unchanged": true
+  },
+  "day25_chat_delivery": {
+    "project": "chat",
+    "day": 25,
+    "revision": "r1",
+    "notion_page_id": "400e51d450938155a6a1c5dee070f1b8",
+    "notion_url": "https://app.notion.com/p/400e51d450938155a6a1c5dee070f1b8",
+    "source_sha": "08b891a22c1934a2bf0b1edbb103c9b16bcf12de",
+    "full_text_readback": true,
+    "red_executed": false,
+    "green_executed": false,
+    "main_application": "not applied",
+    "functional_acceptance": false,
+    "learning_rules": "daily-tdd-minimum-v1",
+    "note": "Published and read back 4 sections and code, source read-only; product unmodified; Day24 archive kept."
   }
 }
