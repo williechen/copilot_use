@@ -2461,6 +2461,21 @@
     "archived_through_day": 25,
     "next_day_unchanged": true,
     "notifications": {
+      "enabled": true,
+      "channels": {
+        "push": true,
+        "email": true
+      },
+      "scope": "account task-notification category",
+      "evidence_source": "live ChatGPT Settings > Notifications > Tasks UI; both checked",
+      "independently_rechecked_this_turn": true,
+      "already_enabled_when_inspected": true,
+      "settings_changed": false,
+      "delivery_tested": false,
+      "delivery_assumed_from_success": false,
+      "verification_source": "task history, Notion readback and GitHub evidence"
+    },
+    "previous_notifications_user_report": {
       "enabled": false,
       "evidence_source": "user report in this chat",
       "independently_rechecked_this_turn": false,

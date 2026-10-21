@@ -103,7 +103,7 @@ Notion 已完整讀回但 GitHub 狀態寫入／讀回失敗，保留頁面 ID�
 - **Chat Day25：pending。** 共用登入／登出／Cookie／Session要求列入Chat後續FIFO補教；不能以房間頁Gate測試通過當作共用實作已完成。
 - **Pet Day25：pending。** 單圖像動畫及對應三窗原生GUI驗證列入Pet後續FIFO補教；每窗單一元件、每幀單一圖像與事件同步分別驗證。
 
-[本輪完整驗證與原始證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-22-main-aaa9194/REPORT.md)。依使用者說明排程內容已更新，本輪未再修改、啟停、新增或觸發排程，亦未重新驗證實際模型設定。依使用者於2026-10-22確認，自動任務通知設定目前關閉；本輪未獨立重查介面、未變更通知設定。排程執行成功與通知送達分開記錄，不能假定會收到推播或Email；結果仍以任務紀錄、Notion文章與GitHub證據讀回確認。
+[本輪完整驗證與原始證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-22-main-aaa9194/REPORT.md)。依使用者說明排程內容已更新，本輪未再修改、啟停、新增或觸發排程，亦未重新驗證實際模型設定。2026-10-22依使用者要求開啟通知，已實際檢查ChatGPT設定→通知→任務：推播與電子郵件皆已勾選開啟。這是帳戶的「任務」通知分類；查驗時本來即為開啟，本輪無須切換、未變更其他通知分類。此實際介面觀察取代先前依使用者回報的「關閉」快照。未測試真實通知送達，結果仍以任務紀錄、Notion文章與GitHub證據讀回確認。
 
 ## 文件入口
 產品能力與未來清單、詳細架構、操作設定、功能對照與工程證據仍保留各自用途；本篇集中教學方法、格式及三專案大綱，其他教學入口改為引用。原Day及程式保留，舊規則／來源／失效教法只作歷史，不再套用為目前指令。
