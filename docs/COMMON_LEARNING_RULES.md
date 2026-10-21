@@ -36,6 +36,12 @@
 #### Day24（含）以前文章封存（2026-10-21）
 使用者要求先封存三案Day24，包含既有程式與動畫內容。Day24（含）以前正文、程式及歷史證據保留，不再回寫；Cookie共用工具整理、Pet重複渲染與動畫多圖像的後續方案，僅在Day25或之後的新Red／Green／Refactor後補充。封存不代表完整產品驗收；next_day維持三案25，正式排程未恢復、未新增。
 
+#### Day25（含）以前文章封存與需求覆核（2026-10-22 同步）
+
+三案 Day25 已依既有封存 manifest 封存；本輪重新讀回三篇 Notion 全文，與 GitHub 封存正文 SHA256 逐字一致。Chat／Pet／Analytics 的 next_day 均為26，這是教學發布進度，不能當成功能驗收。Day25（含）以前正文、程式及歷史證據不回寫；後續差異按 FIFO 放在下一 Day 新 Red／完整 Green／Refactor 之後，不因驗證、文件同步或補教另增 Day。
+
+登入、登出、Cookie 與 Session 必須採共用實作，各系統透過儲存介面及政策接入；SQLite／PostgreSQL 與各系統登入狀態仍獨立。Pet 至少以三個不同 pet id 的生活窗驗證獨立狀態；每窗單一元件與動畫每幀單一寵物圖像分別驗證，設定字串測試不能代替 GUI／事件授權實測。Analytics 需核對完整 postgres-integration targets、歷史 migration checksum 與舊資料保留，單一 Day25 target 不代表全部測試通過。
+
 ### 3. 測試與證據
 
 CI 必須核對並揭露精確 SHA、workflow／job、狀態、時間與連結；Success／Failure／Pending／Skipped／Cancelled／無紀錄均不單獨阻擋教學發布或 next_day。CI Success 只證明實際執行的範圍，不能代替 DB、HTTP／WS、SSR／WASM、GUI 或端到端驗收；copilot_use CI 僅是產品證據。
@@ -64,6 +70,12 @@ Notion 已完整讀回但 GitHub 狀態寫入／讀回失敗，保留頁面 ID�
 
 保留原生環境、Domain／Application 與 Adapter 邊界、不同 DB 分別驗證、既有 migration／固定 tag／證據不可改寫、權限與檔案操作確認。不得讀正式秘密或執行付費 AI；週六功能驗收不冒稱 AI 已重測。P9 產品目標、P0–P12 學習階段及實際驗收分開。
 
+### 排程模型設定（2026-10-22）
+
+使用者指定模型 `gpt-6.1-sol`（GPT-6.1 Sol），推理強度 `medium`（中）。既有「三專案每日 TDD 教學」雲端任務提示詞已原地更新，重新載入後全文比對一致；每日06:00、Asia/Taipei、原啟用狀態保留，沒有建立替代任務。排程每次須實際讀取本共同主頁與最新 GitHub 來源，依現行項目執行。
+
+實際模型選單目前只列 GPT-6 與 GPT-5.6 Sol，未提供 `gpt-6.1-sol`；原對話推理強度為「中」。因此本次僅確認模型要求已寫入提示詞，實際引擎切換仍受介面可選項目限制，不能宣稱已改為 GPT-6.1 Sol，也不保證後續排程執行結果。
+
 ### 7. 91 項決議的適用分類
 
 教學必要規則：來源／規則／SHA、最小完整 TDD、CI 範圍揭露、Notion 發布讀回、逐專案條件推進與封存。可靠性輔助：去重、條件寫入、狀態讀回、單層 pending／有界重試與人工處理、FIFO 補教。歷史第13項「CI 成功即相關功能已驗證」以本版第3節的實際覆蓋範圍解釋，不能泛化為整體驗收。
@@ -73,9 +85,23 @@ Notion 已完整讀回但 GitHub 狀態寫入／讀回失敗，保留頁面 ID�
 91 項原文與本次變更前規則保留於 docs/teaching/archive/rules-before-minimum-v1/；第17項原文無編號，依第16與18項間順序對應並註明。封存資料僅供追溯，不再產生下一個衝突討論，也不自動成為執行規則。
 
 
-## 目前進度
+## 目前進度（2026-10-22｜main a06c038 增量驗證）
 
-三案Day24（含）以前正文與程式已封存，三篇完整發布讀回，next_day均為25。另對使用者已推送main08b891a正式驗證：workspace127通過／1ignored；完整PG測試缺SQL檔編譯失敗，可執行子集28通過；Pet重複渲染／事件權限、Analytics後續改密碼入口及兩案舊庫checksum阻擋均已重現，不標完整驗收通過。封存正文未改，更正排Day25待補，排程未改。見[Day24正式驗證報告](teaching/evidence/2026-10-21-day24-main-08b891a/REPORT.md)。實作、測試與未完成項目見[目前進度](teaching/current/STATUS.md)。
+三案 Day25（含）以前正文與程式已封存；本輪三篇 Notion 全文與 GitHub 封存 SHA256 逐字一致。Chat／Pet／Analytics next_day 均為26，未因驗證、文件同步或補教遞增。Day25文章中的「未套用」保留為當時歷史狀態；最新 main 已有相關修改，是否驗收依下列實測分開判定。
+
+本輪來源 rust_ai_chat/main `a06c0386d892d28021d6327a5962b3ebbd7a2bb3`（0.2.25），教學基準 `149f526f90d62c41a1f255bce34846af0740ca0b`；隔離副本170個tracked檔案與Git blob逐位元組一致，未修改產品原始碼或遠端。workspace137通過／1 ignored；Chat SSR、Chat與Pet WASM check通過。完整PG targets可編譯，分target執行計29通過／2失敗；與workspace有重疊，不能相加。fmt因Pet main.rs:135空白失敗；strict Clippy在stats admin.rs:321停止；Node三項VM測試缺URLSearchParams而失敗。
+
+- **Chat：** 真HTTP註冊完成保持登出、帳號大小寫登入、SQLite Session重啟讀回通過；匿名房間頁401、有效Session200。登出404，API／WS房間授權與共用登入／Cookie／Session實作仍未完成；公開清單200本身不代表越權。
+- **Pet：** pet-*事件權限設定與單一PetStatus已進main且Rust契約測試通過；動畫仍含複合符號。此SHA三窗原生GUI／事件同步／每幀單一圖像／裁切未重驗，不宣稱GUI完成。
+- **Analytics：** 真TTY初始化與HTTP首次改密碼、舊Session失效、重啟新密碼登入及再次開表單200通過；Day25第二次提交／Email／全Session撤銷整合測試通過。Day24 fixture仍有mail／email導致422而非403，以及SQL引號錯誤；缺失migration檔已補上，不再標示最新版本不能編譯。角色、來源授權與共用登入仍未完整驗收。
+
+舊庫探針均保留原資料：Pet自4f0cd00升級仍VersionMismatch(20261018095626)，自Day24升級成功；Analytics自4f0cd00成功，自Day24仍VersionMismatch(20261018073932)。不能將fresh DB或單一路徑通過當完整升級驗收。
+
+同SHA CI：Test All九個job、Chat、Pet、Dashboard與Persistence均success，Node failure；精確job／時間／連結與所有本地命令、結果及限制見[本輪完整驗證報告](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-22-main-a06c038/REPORT.md)。未執行跨平台、付費AI或完整產品驗收；copilot_use產品未重新驗收，last_full_comparison不變。
+
+既有每日06:00 Asia/Taipei雲端任務原本即啟用；本輪只更新提示詞並全文讀回，沒有另建任務或改時程。模型要求已寫入gpt-6.1-sol／medium，但實際選單未提供GPT-6.1 Sol，不能宣稱引擎已切換；詳見本頁「排程模型設定」。
+
+歷史證據保留於[Day24報告](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-21-day24-main-08b891a/REPORT.md)及[Day25封存](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/archive/day-25/manifest.json)，不以舊SHA覆蓋目前結果。
 
 ## 文件入口
 產品能力與未來清單、詳細架構、操作設定、功能對照與工程證據仍保留各自用途；本篇集中教學方法、格式及三專案大綱，其他教學入口改為引用。原Day及程式保留，舊規則／來源／失效教法只作歷史，不再套用為目前指令。

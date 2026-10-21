@@ -538,5 +538,12 @@
     "next_day_unchanged": true,
     "frozen_bodies_unchanged": true
   },
-  "day25_archive": "docs/teaching/archive/day-25/manifest.json"
+  "day25_archive": "docs/teaching/archive/day-25/manifest.json",
+  "latest_source_validation": {
+    "source_sha": "a06c0386d892d28021d6327a5962b3ebbd7a2bb3",
+    "report": "docs/teaching/evidence/2026-10-22-main-a06c038/REPORT.md",
+    "summary": "docs/teaching/evidence/2026-10-22-main-a06c038/summary.json",
+    "functional_acceptance": false,
+    "next_day_unchanged": true
+  }
 }

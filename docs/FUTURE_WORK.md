@@ -31,6 +31,8 @@
 
 ## 教學銜接
 
+2026-10-22最新學習來源main a06c038驗證與缺口見[驗證報告](teaching/evidence/2026-10-22-main-a06c038/REPORT.md)。三案Day25封存、next_day=26；Chat共用登入／登出／Session、Pet單圖像動畫與此SHA三窗GUI、Analytics Day24 fixture及各歷史舊庫升級依原項目繼續，未因本輪驗證標完成。這是rust_ai_chat學習來源觀察，不代表copilot_use產品已套用或驗收。
+
 來源、進度與驗證結果統一見[目前進度](teaching/current/STATUS.md)。Day22（含）以前文章封存；以下沿用原功能項追蹤，不代表產品已整合或驗收。
 
 以下保留原有學習範圍，checkbox 表示學習／適配未完成，不表示對應成品功能全部未實作。每次依最新 source、所屬測試與 CI 排除已套用項目，再選最小切片。歷史驗證保留原來源，新一輪只更新統一進度與對應原項目，不重建待辦。
