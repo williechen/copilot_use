@@ -1,0 +1,82 @@
+{
+  "day": 25,
+  "archived_at": "2026-10-21 14:06:10 UTC",
+  "requested_by": "user",
+  "mode": "policy freeze and title markers; no permission lock claimed",
+  "article_body_edit_allowed": false,
+  "notion_bodies_unchanged": true,
+  "github_originals_unchanged": true,
+  "formal_acceptance_separate": true,
+  "teaching_branch_sha": "840d8450674cbb927218aa8ca68b424b8af9d67e",
+  "reference_sha": "08b891a22c1934a2bf0b1edbb103c9b16bcf12de",
+  "rules_blob_sha": "54c734a07a53dc64bb2e873c3b851fc3a4f63668",
+  "next_day": {
+    "chat": 26,
+    "pet": 26,
+    "analytics": 26
+  },
+  "articles": [
+    {
+      "project": "chat",
+      "day": 25,
+      "revision": "r1",
+      "notion_page_id": "400e51d450938155a6a1c5dee070f1b8",
+      "title": "2026-10-21｜Chat Day 25｜聊天室頁登入 Session Gate（未套用）【已封存・不可再編修】",
+      "notion_url": "https://app.notion.com/p/400e51d450938155a6a1c5dee070f1b8?pvs=204",
+      "notion_page_last_edited_at": "2026-10-21T14:05:31.015Z",
+      "previous_notion_page_last_edited_at": "2026-10-21T12:50:42.999Z",
+      "body_sha256": "e0a490546c0a39159f92112c68f8c18272ef5186b322ec59bcfc7c828bb3f3f0",
+      "notion_snapshot": "docs/teaching/archive/day-25/notion/chat.md",
+      "body_unchanged_on_freeze": true,
+      "four_sections": true,
+      "code_block_count": 6,
+      "code_blocks_unchanged": true,
+      "github_day25_original_present": false,
+      "github_original_observation": "No docs/teaching/day25 directory at source branch tree; current uppercase mirrors still Day24; not substituted as Day25 originals.",
+      "functional_acceptance": false
+    },
+    {
+      "project": "pet",
+      "day": 25,
+      "revision": "r1",
+      "notion_page_id": "400e51d4509381d69745c299feea5a8f",
+      "title": "2026-10-21｜Pet Day 25｜動態生活窗事件權限與 Day24 補教（未套用）【已封存・不可再編修】",
+      "notion_url": "https://app.notion.com/p/400e51d4509381d69745c299feea5a8f?pvs=204",
+      "notion_page_last_edited_at": "2026-10-21T14:05:31.674Z",
+      "previous_notion_page_last_edited_at": "2026-10-21T12:50:57.657Z",
+      "body_sha256": "42fc0d80b87e16e71d6d15a14e0865f58a17719068deceb6eaa9636bf0834093",
+      "notion_snapshot": "docs/teaching/archive/day-25/notion/pet.md",
+      "body_unchanged_on_freeze": true,
+      "four_sections": true,
+      "code_block_count": 4,
+      "code_blocks_unchanged": true,
+      "github_day25_original_present": false,
+      "github_original_observation": "No docs/teaching/day25 directory at source branch tree; current uppercase mirrors still Day24; not substituted as Day25 originals.",
+      "functional_acceptance": false
+    },
+    {
+      "project": "analytics",
+      "day": 25,
+      "revision": "r1",
+      "notion_page_id": "400e51d45093810796cbd6074c8d35c3",
+      "title": "2026-10-21｜Analytics Day 25｜已初始化管理員再次修改密碼與 Email（未套用）【已封存・不可再編修】",
+      "notion_url": "https://app.notion.com/p/400e51d45093810796cbd6074c8d35c3?pvs=204",
+      "notion_page_last_edited_at": "2026-10-21T14:05:32.307Z",
+      "previous_notion_page_last_edited_at": "2026-10-21T12:50:50.188Z",
+      "body_sha256": "89767f8e8920b71c379b4f8c852915ffb7bf9ebe0833351914cec62ff79c963c",
+      "notion_snapshot": "docs/teaching/archive/day-25/notion/analytics.md",
+      "body_unchanged_on_freeze": true,
+      "four_sections": true,
+      "code_block_count": 4,
+      "code_blocks_unchanged": true,
+      "github_day25_original_present": false,
+      "github_original_observation": "No docs/teaching/day25 directory at source branch tree; current uppercase mirrors still Day24; not substituted as Day25 originals.",
+      "functional_acceptance": false
+    }
+  ],
+  "blockers": [
+    "Notion permission lock not exposed; policy/title freeze only.",
+    "Day25 GitHub original bodies absent at baseline; exact current Notion bodies archived.",
+    "Red/Green execution and functional acceptance remain incomplete; Analytics Day24 technical repair pending."
+  ]
+}

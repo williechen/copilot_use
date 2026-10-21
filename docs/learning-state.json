@@ -2195,7 +2195,13 @@
     "main_application": "not applied",
     "functional_acceptance": false,
     "learning_rules": "daily-tdd-minimum-v1",
-    "note": "Published and read back 4 sections and code, source read-only; product unmodified; Day24 archive kept."
+    "note": "Published and read back 4 sections and code, source read-only; product unmodified; Day24 archive kept.",
+    "archived": true,
+    "archive_manifest": "docs/teaching/archive/day-25/manifest.json",
+    "frozen_notion_page_last_edited_at": "2026-10-21T14:05:31.015Z",
+    "frozen_body_sha256": "e0a490546c0a39159f92112c68f8c18272ef5186b322ec59bcfc7c828bb3f3f0",
+    "frozen_notion_snapshot": "docs/teaching/archive/day-25/notion/chat.md",
+    "article_body_edit_allowed": false
   },
   "day25_pet_delivery": {
     "project": "pet",
@@ -2209,7 +2215,13 @@
     "green_executed": false,
     "main_application": "not applied",
     "functional_acceptance": false,
-    "learning_rules": "daily-tdd-minimum-v1"
+    "learning_rules": "daily-tdd-minimum-v1",
+    "archived": true,
+    "archive_manifest": "docs/teaching/archive/day-25/manifest.json",
+    "frozen_notion_page_last_edited_at": "2026-10-21T14:05:31.674Z",
+    "frozen_body_sha256": "42fc0d80b87e16e71d6d15a14e0865f58a17719068deceb6eaa9636bf0834093",
+    "frozen_notion_snapshot": "docs/teaching/archive/day-25/notion/pet.md",
+    "article_body_edit_allowed": false
   },
   "day25_analytics_delivery": {
     "project": "analytics",
@@ -2224,6 +2236,19 @@
     "main_application": "not applied",
     "functional_acceptance": false,
     "learning_rules": "daily-tdd-minimum-v1",
-    "day24_correction": "documented, test/migration repair pending"
+    "day24_correction": "documented, test/migration repair pending",
+    "archived": true,
+    "archive_manifest": "docs/teaching/archive/day-25/manifest.json",
+    "frozen_notion_page_last_edited_at": "2026-10-21T14:05:32.307Z",
+    "frozen_body_sha256": "89767f8e8920b71c379b4f8c852915ffb7bf9ebe0833351914cec62ff79c963c",
+    "frozen_notion_snapshot": "docs/teaching/archive/day-25/notion/analytics.md",
+    "article_body_edit_allowed": false
+  },
+  "day25_archive": {
+    "archived_at": "2026-10-21 14:06:10 UTC",
+    "manifest": "docs/teaching/archive/day-25/manifest.json",
+    "requested_by": "user",
+    "formal_acceptance_separate": true,
+    "next_day_unchanged": true
   }
 }

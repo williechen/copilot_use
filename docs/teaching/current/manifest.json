@@ -110,9 +110,14 @@
       "functional_acceptance": false,
       "red_executed": false,
       "green_executed": false,
-      "archived": false,
+      "archived": true,
       "next_day_before": 25,
-      "next_day_after": 26
+      "next_day_after": 26,
+      "archive_manifest": "docs/teaching/archive/day-25/manifest.json",
+      "frozen_notion_page_last_edited_at": "2026-10-21T14:05:31.015Z",
+      "frozen_body_sha256": "e0a490546c0a39159f92112c68f8c18272ef5186b322ec59bcfc7c828bb3f3f0",
+      "frozen_notion_snapshot": "docs/teaching/archive/day-25/notion/chat.md",
+      "article_body_edit_allowed": false
     },
     {
       "project": "pet",
@@ -122,15 +127,20 @@
       "notion_url": "https://app.notion.com/p/400e51d4509381d69745c299feea5a8f",
       "source_sha": "08b891a22c1934a2bf0b1edbb103c9b16bcf12de",
       "full_text_verified": true,
-      "code_block_count": 3,
+      "code_block_count": 4,
       "main_application": "not applied",
       "functional_acceptance": false,
       "red_executed": false,
       "green_executed": false,
-      "archived": false,
+      "archived": true,
       "next_day_before": 25,
       "next_day_after": 26,
-      "fifo_correction": "pet-day24-postfreeze-20261021"
+      "fifo_correction": "pet-day24-postfreeze-20261021",
+      "archive_manifest": "docs/teaching/archive/day-25/manifest.json",
+      "frozen_notion_page_last_edited_at": "2026-10-21T14:05:31.674Z",
+      "frozen_body_sha256": "42fc0d80b87e16e71d6d15a14e0865f58a17719068deceb6eaa9636bf0834093",
+      "frozen_notion_snapshot": "docs/teaching/archive/day-25/notion/pet.md",
+      "article_body_edit_allowed": false
     },
     {
       "project": "analytics",
@@ -145,10 +155,15 @@
       "functional_acceptance": false,
       "red_executed": false,
       "green_executed": false,
-      "archived": false,
+      "archived": true,
       "next_day_before": 25,
       "next_day_after": 26,
-      "day24_correction": "pending follow-up technical repair"
+      "day24_correction": "pending follow-up technical repair",
+      "archive_manifest": "docs/teaching/archive/day-25/manifest.json",
+      "frozen_notion_page_last_edited_at": "2026-10-21T14:05:32.307Z",
+      "frozen_body_sha256": "89767f8e8920b71c379b4f8c852915ffb7bf9ebe0833351914cec62ff79c963c",
+      "frozen_notion_snapshot": "docs/teaching/archive/day-25/notion/analytics.md",
+      "article_body_edit_allowed": false
     }
   ],
   "day15_frozen": true,
@@ -248,9 +263,9 @@
   "day22_archive": "docs/teaching/archive/day-22/manifest.json",
   "latest_source_review": "docs/teaching/evidence/2026-10-20-day22-freeze/review.json",
   "archived_through_day": {
-    "chat": 24,
-    "pet": 24,
-    "analytics": 24
+    "chat": 25,
+    "pet": 25,
+    "analytics": 25
   },
   "archive_scope_manifest": "docs/teaching/archive/scope.json",
   "current_status_document": "docs/teaching/current/STATUS.md",
@@ -522,5 +537,6 @@
     "summary": "docs/teaching/evidence/2026-10-21-day24-main-08b891a/summary.json",
     "next_day_unchanged": true,
     "frozen_bodies_unchanged": true
-  }
+  },
+  "day25_archive": "docs/teaching/archive/day-25/manifest.json"
 }
