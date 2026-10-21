@@ -6,7 +6,7 @@
   "fixed_tag_sha": "9bcae7c5d139f75ed08b4daffece602a71fdab34",
   "next_day": {
     "chat": 26,
-    "pet": 25,
+    "pet": 26,
     "analytics": 25
   },
   "last_full_comparison": "2026-10-16T22:47:14.399027+08:00",
@@ -1343,7 +1343,7 @@
       "id": "pet-day24-postfreeze-20261021",
       "project": "pet",
       "source_day": 24,
-      "status": "pending",
+      "status": "completed",
       "expected_next_day": 25,
       "placement": "section 2 after new Red/Green and Refactor; one old-Day correction unit",
       "content_path": "docs/teaching/pending/day25/pet-day24-corrections.md",
@@ -1351,7 +1351,10 @@
       "source_sha": "08b891a22c1934a2bf0b1edbb103c9b16bcf12de",
       "created_at": "2026-10-21T12:25:21.934286+00:00",
       "complete_only_after": "next original lesson and correction published with full Notion readback",
-      "not_completed": true
+      "not_completed": false,
+      "completed_in_day": 25,
+      "completed_notion_page_id": "400e51d4509381d69745c299feea5a8f",
+      "note": "Day25 includes FIFO correction, not applied to main, source archival unchanged."
     },
     {
       "id": "analytics-day24-postfreeze-20261021",
@@ -2193,5 +2196,19 @@
     "functional_acceptance": false,
     "learning_rules": "daily-tdd-minimum-v1",
     "note": "Published and read back 4 sections and code, source read-only; product unmodified; Day24 archive kept."
+  },
+  "day25_pet_delivery": {
+    "project": "pet",
+    "day": 25,
+    "revision": "r1",
+    "notion_page_id": "400e51d4509381d69745c299feea5a8f",
+    "notion_url": "https://app.notion.com/p/400e51d4509381d69745c299feea5a8f",
+    "source_sha": "08b891a22c1934a2bf0b1edbb103c9b16bcf12de",
+    "full_text_readback": true,
+    "red_executed": false,
+    "green_executed": false,
+    "main_application": "not applied",
+    "functional_acceptance": false,
+    "learning_rules": "daily-tdd-minimum-v1"
   }
 }
