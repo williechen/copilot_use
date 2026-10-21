@@ -1,19 +1,28 @@
-## 目前進度（2026-10-22｜main aaa9194 增量驗證）
+## 目前進度
 
-最新已核驗來源 rust_ai_chat/main `aaa9194a966aefae1ef4724f5d2b576b4289c550`，教學基準 `9716c24f7b3c87a1337f91a82ad10635db598591`。隔離副本170個tracked檔案與Git blob逐位元組一致，產品原始碼與遠端未修改。相較前次a06c038，只改Analytics測試及Persistence workflow；production handler、UI、migration與Cargo／lock未變。
+資料核驗日：2026-10-22。最近已核驗來源：rust_ai_chat/main `aaa9194a966aefae1ef4724f5d2b576b4289c550`。以下為已確認範圍，並非即時 CI 或完整產品驗收。
 
-**最新SHA：預設stats-server測試20通過／1ignored；隔離PostgreSQL加 --include-ignored 後31通過、0失敗、0ignored。** Day24的mail／email與兩處SQL引號錯誤已修正並實跑通過。183a058／13a60ed曾因取消ignore而在缺DB URL時失敗；aaa9194恢復ignore後預設測試已通過，不能再把先前的NotPresent失敗寫成最新結果。被略過的PG測試實際讀DATABASE_URL，雖然ignore提示仍保留舊變數名。
+| 專案 | 已實作 | 待完成／補教 |
+| --- | --- | --- |
+| Chat | 註冊、帳密登入、SQLite 持久 Session、房間頁 Session Gate | 共用登入／登出／Cookie／Session；API／WebSocket 房間 ACL |
+| Pet | SQLite 建立／載入、逐寵物生活窗、pet-* 事件權限、單一 PetStatus 元件 | 動畫每幀單一寵物圖像；三個不同 pet id 原生生活窗的狀態、事件、裁切與重啟驗收 |
+| Analytics | 管理員初始化、帳密登入、持久 Session、首次與後續修改密碼／Email | 共用登入、角色／來源授權、服務配對換證與完整後台互動 |
 
-最新同SHA Test All九個job均success；Dashboard亦success，Node failure，其他workflow擷取時尚在執行者保留in_progress。Persistence workflow已擴大到全部PG targets，但沒有 --include-ignored，因此仍會略過上述登入／查詢／登出PG測試；若要宣稱CI全部31項執行，需在已配置PG的job加上該旗標或等效命令。本輪只記錄覆蓋範圍，未改來源workflow。
+- Analytics Day24 補教：已結案，無須重發。
+- Chat／Pet Day25 補教：各自 pending，依各專案 FIFO 處理已列缺口；已實作內容不重教。
+- 三案 next_day 均為 26；Day25（含）以前正文與程式封存。教學發布、程式套用及功能驗收分開記錄。
+- Analytics 本次歷史學習庫採刪除重建政策，不要求保留資料原地升級；本次未操作資料庫。
 
-本輪未重跑workspace、fmt／Clippy、WASM、真HTTP、Pet GUI或舊庫升級。前次a06c038的137通過／1ignored不冒稱新SHA整套結果；相關程式與依賴未變的HTTP／UI／DB觀察只保留原SHA與範圍，見[前次報告](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-22-main-a06c038/REPORT.md)。
+### 驗證範圍
 
-保留缺口：Chat共用登入／登出／Cookie／Session與API／WS房間ACL；Pet單圖像動畫及此SHA三窗GUI；Analytics角色／來源授權。舊庫migration未改：前次Pet自4f0cd00升級阻擋、自Day24成功；Analytics自4f0cd00成功、自Day24阻擋，均非本輪新實測。 上述Analytics升級結果僅保留為歷史證據；依2026-10-22新政策，該歷史庫改採刪除重建，不再列保留資料升級為Day24結案阻擋。
+上述來源的預設 stats-server 測試：20 通過、0 失敗、1 ignored；隔離 PostgreSQL 18.6 配置 DATABASE_URL 並加 `--include-ignored`：31 通過、0 失敗、0 ignored。CI 的 PG workflow 未加此旗標，不能視為覆蓋全部 31 項。
 
-三案Day25（含）以前正文與程式封存，next_day均維持26，last_full_comparison不變。後續補教按各專案既有佇列FIFO，在下一個適用原教學的新Red／完整Green／Refactor後加入，每篇最多一個舊Day單元；不預先指定新題目、不回寫封存原文、不因補教或文件同步增加Day。copilot_use產品未重新驗收，不宣稱完整產品功能通過。
+Chat 真瀏覽器完整流程與 API／WS 授權、Pet 三窗 GUI、Analytics 完整角色／來源授權仍須驗收；本次文章整理未重跑程式測試。copilot_use 產品整合與驗收另列。
 
-- **Analytics Day24：已結案（2026-10-22）。** 補教已在Day25第2節新實作／Refactor之後發布並全文讀回；fixture修正已進main aaa9194，含ignored的PostgreSQL31項通過。使用者已將本次歷史庫處理改為刪除重建，保留資料升級要求撤除，因此不再等待Day26重發。這是既有補教結案，不增加Day、不修改封存原文，也不代表Analytics全部功能驗收。
-- **Chat Day25：pending。** 共用登入／登出／Cookie／Session要求列入Chat後續FIFO補教；不能以房間頁Gate測試通過當作共用實作已完成。
-- **Pet Day25：pending。** 單圖像動畫及對應三窗原生GUI驗證列入Pet後續FIFO補教；每窗單一元件、每幀單一圖像與事件同步分別驗證。
+[驗證證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-22-main-aaa9194/REPORT.md)
 
-[本輪完整驗證與原始證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-22-main-aaa9194/REPORT.md)。依使用者說明排程內容已更新，本輪未再修改、啟停、新增或觸發排程，亦未重新驗證實際模型設定。2026-10-22依使用者要求開啟通知，已實際檢查ChatGPT設定→通知→任務：推播與電子郵件皆已勾選開啟。這是帳戶的「任務」通知分類；查驗時本來即為開啟，本輪無須切換、未變更其他通知分類。此實際介面觀察取代先前依使用者回報的「關閉」快照。未測試真實通知送達，結果仍以任務紀錄、Notion文章與GitHub證據讀回確認。
+### 排程與通知
+
+- 三專案每日 TDD 教學：每日 06:00，Asia/Taipei，啟用。
+- 提示詞指定 `gpt-6.1-sol`、推理強度中；實際引擎選用尚未核實。
+- 帳戶「任務」通知：推播與電子郵件均已開啟；實際送達未測試。

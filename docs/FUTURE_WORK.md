@@ -31,9 +31,9 @@
 
 ## 教學銜接
 
-2026-10-22最新學習來源main aaa9194與缺口見[驗證報告](teaching/evidence/2026-10-22-main-aaa9194/REPORT.md)。三案Day25封存、next_day=26；Day24 fixture已修正，隔離PG加--include-ignored後31項通過，預設stats測試20通過／1ignored，Test All成功。Chat共用登入／登出／Session、Pet單圖像動畫與此SHA三窗GUI、Analytics CI的ignored PG覆蓋仍沿原項目追蹤。本次Analytics歷史庫依使用者政策改採刪除重建，不再要求保留資料升級；Day24既有補教與fixture修正已確認結案。這是rust_ai_chat學習來源觀察，不代表copilot_use產品已套用或完整驗收。
+學習來源現況與驗證範圍見[目前進度](teaching/current/STATUS.md)。Chat／Pet 各自依 FIFO 補教尚未完成的部分；Analytics Day24 已結案。三案下一教學均為 Day26，產品整合與功能驗收分開追蹤。
 
-來源、進度與驗證結果統一見[目前進度](teaching/current/STATUS.md)。Day22（含）以前文章封存；以下沿用原功能項追蹤，不代表產品已整合或驗收。
+來源、進度與驗證結果統一見[目前進度](teaching/current/STATUS.md)。Day25（含）以前文章封存；以下沿用原功能項追蹤，不代表產品已整合或驗收。
 
 以下保留原有學習範圍，checkbox 表示學習／適配未完成，不表示對應成品功能全部未實作。每次依最新 source、所屬測試與 CI 排除已套用項目，再選最小切片。歷史驗證保留原來源，新一輪只更新統一進度與對應原項目，不重建待辦。
 
