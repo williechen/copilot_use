@@ -1,6 +1,6 @@
 {
   "scope": "Latest published teaching index; Day16 snapshot preserved in archive",
-  "revision": "day25-chat-and-pet-published-r1",
+  "revision": "day25-three-projects-published-r1",
   "synced_date": "2026-10-21",
   "source_sha": "5654591f3002fc619c883af9b5197e2126cc6494",
   "articles": [
@@ -131,13 +131,31 @@
       "next_day_before": 25,
       "next_day_after": 26,
       "fifo_correction": "pet-day24-postfreeze-20261021"
+    },
+    {
+      "project": "analytics",
+      "day": 25,
+      "revision": "r1",
+      "notion_page_id": "400e51d45093810796cbd6074c8d35c3",
+      "notion_url": "https://app.notion.com/p/400e51d45093810796cbd6074c8d35c3",
+      "source_sha": "08b891a22c1934a2bf0b1edbb103c9b16bcf12de",
+      "full_text_verified": true,
+      "code_block_count": 4,
+      "main_application": "not applied",
+      "functional_acceptance": false,
+      "red_executed": false,
+      "green_executed": false,
+      "archived": false,
+      "next_day_before": 25,
+      "next_day_after": 26,
+      "day24_correction": "pending follow-up technical repair"
     }
   ],
   "day15_frozen": true,
   "next_day": {
     "chat": 26,
     "pet": 26,
-    "analytics": 25
+    "analytics": 26
   },
   "day_advanced": true,
   "reference_modified": false,
