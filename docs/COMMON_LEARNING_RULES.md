@@ -97,9 +97,13 @@ Notion 已完整讀回但 GitHub 狀態寫入／讀回失敗，保留頁面 ID�
 
 保留缺口：Chat共用登入／登出／Cookie／Session與API／WS房間ACL；Pet單圖像動畫及此SHA三窗GUI；Analytics角色／來源授權及歷史庫checksum。舊庫migration未改：前次Pet自4f0cd00升級阻擋、自Day24成功；Analytics自4f0cd00成功、自Day24阻擋，均非本輪新實測。
 
-三案Day25（含）以前正文與程式封存，next_day均維持26，last_full_comparison不變。Analytics Day24補教保留pending，註明fixture已修正通過、舊庫升級及下一原教學補教發布仍未完成；不因測試、文件更新或補教增加Day。copilot_use產品未重新驗收，不宣稱完整產品功能通過。
+三案Day25（含）以前正文與程式封存，next_day均維持26，last_full_comparison不變。後續補教按各專案既有佇列FIFO，在下一個適用原教學的新Red／完整Green／Refactor後加入，每篇最多一個舊Day單元；不預先指定新題目、不回寫封存原文、不因補教或文件同步增加Day。copilot_use產品未重新驗收，不宣稱完整產品功能通過。
 
-[本輪完整驗證與原始證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-22-main-aaa9194/REPORT.md)。依使用者說明排程內容已更新，本輪未再修改、啟停、新增或觸發排程，亦未重新驗證實際模型設定。
+- **Analytics Day24：pending。** fixture已修正並驗證；仍須核對實際歷史migration／checksum，提出並驗證保留資料的升級方案，再完成正式補教發布、全文讀回及狀態同步，才能整筆結案。
+- **Chat Day25：pending。** 共用登入／登出／Cookie／Session要求列入Chat後續FIFO補教；不能以房間頁Gate測試通過當作共用實作已完成。
+- **Pet Day25：pending。** 單圖像動畫及對應三窗原生GUI驗證列入Pet後續FIFO補教；每窗單一元件、每幀單一圖像與事件同步分別驗證。
+
+[本輪完整驗證與原始證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-22-main-aaa9194/REPORT.md)。依使用者說明排程內容已更新，本輪未再修改、啟停、新增或觸發排程，亦未重新驗證實際模型設定。依使用者於2026-10-22確認，自動任務通知設定目前關閉；本輪未獨立重查介面、未變更通知設定。排程執行成功與通知送達分開記錄，不能假定會收到推播或Email；結果仍以任務紀錄、Notion文章與GitHub證據讀回確認。
 
 ## 文件入口
 產品能力與未來清單、詳細架構、操作設定、功能對照與工程證據仍保留各自用途；本篇集中教學方法、格式及三專案大綱，其他教學入口改為引用。原Day及程式保留，舊規則／來源／失效教法只作歷史，不再套用為目前指令。

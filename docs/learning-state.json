@@ -1373,7 +1373,14 @@
       "fixture_technical_repair_verified": {
         "source_sha": "aaa9194a966aefae1ef4724f5d2b576b4289c550",
         "evidence": "docs/teaching/evidence/2026-10-22-main-aaa9194/REPORT.md"
-      }
+      },
+      "completion_requirements_confirmed_2026_10_22": [
+        "Fixture repair is verified but does not close this queue item.",
+        "Audit actual historical migration and checksum state without modifying historical checksums or deleting user data.",
+        "Validate a data-preserving upgrade path and record covered and unsupported histories.",
+        "Publish the correction after new original Red/Green/Refactor, read back full text, and synchronize state before closure."
+      ],
+      "selection_policy": "oldest pending item for this project; after the next applicable original Red/Green/Refactor; maximum one old-Day correction per article; no fixed lesson day assigned"
     },
     {
       "id": "chat-day25-shared-auth-20261022",
@@ -1385,7 +1392,13 @@
       "placement": "section 2 after next original Red/Green and Refactor; FIFO; at most one old-Day unit",
       "review_evidence": "docs/teaching/evidence/2026-10-22-main-a06c038/REPORT.md",
       "source_sha": "a06c0386d892d28021d6327a5962b3ebbd7a2bb3",
-      "note": "Day25 room_auth and signin still duplicate Cookie/hash/Session logic; shared login/logout/session implementation remains required."
+      "note": "Day25 room_auth and signin still duplicate Cookie/hash/Session logic; shared login/logout/session implementation remains required.",
+      "completion_requirements_confirmed_2026_10_22": [
+        "Implement and validate shared login/logout/Cookie/Session through actual callers.",
+        "Place one old-Day correction after new original Red/Green/Refactor following per-project FIFO.",
+        "Do not edit frozen Day25 or earlier articles; publish/read back and synchronize before closure."
+      ],
+      "selection_policy": "oldest pending item for this project; after the next applicable original Red/Green/Refactor; maximum one old-Day correction per article; no fixed lesson day assigned"
     },
     {
       "id": "pet-day25-single-image-20261022",
@@ -1397,7 +1410,14 @@
       "placement": "section 2 after next original Red/Green and Refactor; FIFO; at most one old-Day unit",
       "review_evidence": "docs/teaching/evidence/2026-10-22-main-a06c038/REPORT.md",
       "source_sha": "a06c0386d892d28021d6327a5962b3ebbd7a2bb3",
-      "note": "Day25 setting/one component is in main, but compound animation glyphs and exact-SHA three-window GUI validation remain incomplete."
+      "note": "Day25 setting/one component is in main, but compound animation glyphs and exact-SHA three-window GUI validation remain incomplete.",
+      "completion_requirements_confirmed_2026_10_22": [
+        "Validate single-image animation separately from single-component rendering.",
+        "Verify three distinct pet-id native windows, independent state and events, frame imagery and clipping at the applicable source SHA.",
+        "Place one old-Day correction after new original Red/Green/Refactor following per-project FIFO.",
+        "Do not edit frozen Day25 or earlier articles; publish/read back and synchronize before closure."
+      ],
+      "selection_policy": "oldest pending item for this project; after the next applicable original Red/Green/Refactor; maximum one old-Day correction per article; no fixed lesson day assigned"
     }
   ],
   "archived_lessons": {
@@ -2429,5 +2449,24 @@
       }
     },
     "report": "docs/teaching/evidence/2026-10-22-main-13a60ed/REPORT.md"
+  },
+  "followup_confirmation_2026_10_22": {
+    "source": "direct user confirmation",
+    "pending_ids": [
+      "analytics-day24-postfreeze-20261021",
+      "chat-day25-shared-auth-20261022",
+      "pet-day25-single-image-20261022"
+    ],
+    "fifo_scope": "per project",
+    "archived_through_day": 25,
+    "next_day_unchanged": true,
+    "notifications": {
+      "enabled": false,
+      "evidence_source": "user report in this chat",
+      "independently_rechecked_this_turn": false,
+      "settings_changed": false,
+      "delivery_assumed_from_success": false,
+      "verification_source": "task execution history, Notion article readback and GitHub evidence"
+    }
   }
 }
