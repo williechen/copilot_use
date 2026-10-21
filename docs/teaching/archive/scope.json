@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
-  "confirmed_at": "2026-10-20T16:24:33.387339+00:00",
+  "confirmed_at": "2026-10-21T12:05:33.008115+00:00",
   "authority": "explicit user confirmation",
   "projects": [
     "chat",
     "pet",
     "analytics"
   ],
-  "archived_through_day": 23,
+  "archived_through_day": 24,
   "inclusive": true,
-  "scope": "all existing lesson articles with Day <= 23",
+  "scope": "all existing lesson articles with Day <= 24",
   "article_body_edit_allowed": false,
   "correction_placement": "next original Day section 2 after new Red/Green and Refactor",
   "existing_archives_preserved": true,
@@ -17,14 +17,15 @@
   "earlier_article_snapshots_reaudited": false,
   "does_not_imply_implementation_or_acceptance": true,
   "current_next_day": {
-    "chat": 24,
-    "pet": 24,
-    "analytics": 24
+    "chat": 25,
+    "pet": 25,
+    "analytics": 25
   },
   "canonical_notion_page": "3f2e51d4509381ddb8a8ce7cb4cd3e60",
   "canonical_notion_edited_at": "2026-10-20T12:25:56.958Z",
   "github_rules": "docs/COMMON_LEARNING_RULES.md",
   "day22_snapshot_manifest": "docs/teaching/archive/day-22/manifest.json",
   "schedule_changed": false,
-  "day23_snapshot_manifest": "docs/teaching/archive/day-23/manifest.json"
+  "day23_snapshot_manifest": "docs/teaching/archive/day-23/manifest.json",
+  "day24_snapshot_manifest": "docs/teaching/archive/day-24/manifest.json"
 }

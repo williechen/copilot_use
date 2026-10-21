@@ -32,3 +32,7 @@ Day23（含）以前正文封存。chat next_day=25；pet next_day=25；analytic
 - [chat Day24](https://app.notion.com/p/3ffe51d4509381ee9326ce6cc7f1c8a1?pvs=204)：完整讀回；docs/teaching/day24/chat-readback.json
 - [pet Day24](https://app.notion.com/p/3ffe51d450938186b15fd1c014df8edd?pvs=204)：完整讀回；docs/teaching/day24/pet-readback.json
 - [analytics Day24](https://app.notion.com/p/3ffe51d4509381c88f26f4a90c2958fc?pvs=204)：完整讀回；docs/teaching/day24/analytics-readback.json
+
+## Day24封存
+
+三案Day24含程式與動畫已依使用者要求封存，正文未改，next_day均維持25。後續Pet動畫單圖像、重複渲染與動態窗權限更正放在Day25待辦，不回寫Day24；封存與產品正式驗收分開。

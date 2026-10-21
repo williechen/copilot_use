@@ -1,6 +1,6 @@
 {
   "scope": "Latest published teaching index; Day16 snapshot preserved in archive",
-  "revision": "day24-r1-published",
+  "revision": "day24-archived",
   "synced_date": "2026-10-21",
   "source_sha": "5654591f3002fc619c883af9b5197e2126cc6494",
   "articles": [
@@ -28,7 +28,12 @@
       "next_day_after": 25,
       "main_application": "not applied",
       "functional_acceptance": false,
-      "rules_version": "daily-tdd-minimum-v1"
+      "rules_version": "daily-tdd-minimum-v1",
+      "archived": true,
+      "archive_manifest": "docs/teaching/archive/day-24/manifest.json",
+      "frozen_notion_page_last_edited_at": "2026-10-21T12:04:35.328Z",
+      "frozen_body_sha256": "844f8e10d0d49628fda00af2a4015bfa2451a7e88142a7092a5af64f966348e7",
+      "frozen_notion_snapshot": "docs/teaching/archive/day-24/notion/chat.md"
     },
     {
       "full_text_verified": true,
@@ -54,7 +59,12 @@
       "next_day_after": 25,
       "main_application": "not applied",
       "functional_acceptance": false,
-      "rules_version": "daily-tdd-minimum-v1"
+      "rules_version": "daily-tdd-minimum-v1",
+      "archived": true,
+      "archive_manifest": "docs/teaching/archive/day-24/manifest.json",
+      "frozen_notion_page_last_edited_at": "2026-10-21T12:04:36.090Z",
+      "frozen_body_sha256": "f257b4513052a8d69e8a871acc8b0aff2038aedb6e370a5f02f19f109e73d426",
+      "frozen_notion_snapshot": "docs/teaching/archive/day-24/notion/pet.md"
     },
     {
       "full_text_verified": true,
@@ -80,7 +90,12 @@
       "next_day_after": 25,
       "main_application": "not applied",
       "functional_acceptance": false,
-      "rules_version": "daily-tdd-minimum-v1"
+      "rules_version": "daily-tdd-minimum-v1",
+      "archived": true,
+      "archive_manifest": "docs/teaching/archive/day-24/manifest.json",
+      "frozen_notion_page_last_edited_at": "2026-10-21T12:04:36.878Z",
+      "frozen_body_sha256": "1f8d8a271a9a8ccd42b56057973a7c48d1f696da6d2628fd7599b9d29c0ad91d",
+      "frozen_notion_snapshot": "docs/teaching/archive/day-24/notion/analytics.md"
     }
   ],
   "day15_frozen": true,
@@ -180,9 +195,9 @@
   "day22_archive": "docs/teaching/archive/day-22/manifest.json",
   "latest_source_review": "docs/teaching/evidence/2026-10-20-day22-freeze/review.json",
   "archived_through_day": {
-    "chat": 23,
-    "pet": 23,
-    "analytics": 23
+    "chat": 24,
+    "pet": 24,
+    "analytics": 24
   },
   "archive_scope_manifest": "docs/teaching/archive/scope.json",
   "current_status_document": "docs/teaching/current/STATUS.md",
@@ -445,5 +460,6 @@
     "frozen_notion_page_last_edited_at": "2026-10-20T16:22:47.282Z",
     "frozen_body_sha256": "93d4c00a6e4d3516fcab18a3fc605bd84af28acda551670f37b5deb1b606adb5",
     "frozen_notion_snapshot": "docs/teaching/archive/day-23/notion/analytics.md"
-  }
+  },
+  "day24_archive": "docs/teaching/archive/day-24/manifest.json"
 }

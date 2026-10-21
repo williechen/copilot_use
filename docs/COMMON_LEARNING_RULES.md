@@ -33,6 +33,9 @@
 #### Day23（含）以前文章封存（2026-10-21）
 使用者已確認三案Day23完成並封存；Day23（含）以前正文、程式與歷史證據全部保留，不再回寫。新差異只在Day24或之後的新Red／Green／Refactor後補充。封存與使用者完成回報不代替本地正式檢驗；next_day仍為24，未新增排程。
 
+#### Day24（含）以前文章封存（2026-10-21）
+使用者要求先封存三案Day24，包含既有程式與動畫內容。Day24（含）以前正文、程式及歷史證據保留，不再回寫；Cookie共用工具整理、Pet重複渲染與動畫多圖像的後續方案，僅在Day25或之後的新Red／Green／Refactor後補充。封存不代表完整產品驗收；next_day維持三案25，正式排程未恢復、未新增。
+
 ### 3. 測試與證據
 
 CI 必須核對並揭露精確 SHA、workflow／job、狀態、時間與連結；Success／Failure／Pending／Skipped／Cancelled／無紀錄均不單獨阻擋教學發布或 next_day。CI Success 只證明實際執行的範圍，不能代替 DB、HTTP／WS、SSR／WASM、GUI 或端到端驗收；copilot_use CI 僅是產品證據。

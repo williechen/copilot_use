@@ -1,0 +1,4 @@
+20260930034455_crate_rooms.sql: PASS
+20261007084321_create_messages.sql: PASS
+20261018073931_create_auth_user.sql: PASS
+20261018094242_create_ai_person.sql: FAIL near "CREATE": syntax error

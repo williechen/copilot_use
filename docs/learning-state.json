@@ -2135,5 +2135,12 @@
     "main_application": "not applied",
     "functional_acceptance": false,
     "rules_version": "daily-tdd-minimum-v1"
+  },
+  "day24_archive": {
+    "archived_at": "2026-10-21T12:05:33.008115+00:00",
+    "manifest": "docs/teaching/archive/day-24/manifest.json",
+    "requested_by": "user",
+    "formal_acceptance_separate": true,
+    "next_day_unchanged": true
   }
 }
