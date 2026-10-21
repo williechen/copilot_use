@@ -540,9 +540,9 @@
   },
   "day25_archive": "docs/teaching/archive/day-25/manifest.json",
   "latest_source_validation": {
-    "source_sha": "a06c0386d892d28021d6327a5962b3ebbd7a2bb3",
-    "report": "docs/teaching/evidence/2026-10-22-main-a06c038/REPORT.md",
-    "summary": "docs/teaching/evidence/2026-10-22-main-a06c038/summary.json",
+    "source_sha": "aaa9194a966aefae1ef4724f5d2b576b4289c550",
+    "report": "docs/teaching/evidence/2026-10-22-main-aaa9194/REPORT.md",
+    "summary": "docs/teaching/evidence/2026-10-22-main-aaa9194/summary.json",
     "functional_acceptance": false,
     "next_day_unchanged": true
   }

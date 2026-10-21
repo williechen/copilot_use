@@ -31,7 +31,7 @@
 
 ## 教學銜接
 
-2026-10-22最新學習來源main a06c038驗證與缺口見[驗證報告](teaching/evidence/2026-10-22-main-a06c038/REPORT.md)。三案Day25封存、next_day=26；Chat共用登入／登出／Session、Pet單圖像動畫與此SHA三窗GUI、Analytics Day24 fixture及各歷史舊庫升級依原項目繼續，未因本輪驗證標完成。這是rust_ai_chat學習來源觀察，不代表copilot_use產品已套用或驗收。
+2026-10-22最新學習來源main aaa9194與缺口見[驗證報告](teaching/evidence/2026-10-22-main-aaa9194/REPORT.md)。三案Day25封存、next_day=26；Day24 fixture已修正，隔離PG加--include-ignored後31項通過，預設stats測試20通過／1ignored，Test All成功。Chat共用登入／登出／Session、Pet單圖像動畫與此SHA三窗GUI、Analytics CI的ignored PG覆蓋及歷史舊庫升級仍沿原項目追蹤。這是rust_ai_chat學習來源觀察，不代表copilot_use產品已套用或完整驗收。
 
 來源、進度與驗證結果統一見[目前進度](teaching/current/STATUS.md)。Day22（含）以前文章封存；以下沿用原功能項追蹤，不代表產品已整合或驗收。
 

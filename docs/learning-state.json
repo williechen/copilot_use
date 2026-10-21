@@ -1369,7 +1369,11 @@
       "created_at": "2026-10-21T12:25:21.934286+00:00",
       "complete_only_after": "next original lesson and correction published with full Notion readback",
       "not_completed": true,
-      "latest_review": "2026-10-22 main a06c038: migration file restored; Day24 fixture mail/email and SQL quote failures plus Day24 database checksum remain; pending retained."
+      "latest_review": "2026-10-22 main aaa9194: Day24 mail/email and SQL quote fixes verified; PG31 passed with --include-ignored. Default tests20 passed/1 ignored and CI Test All success. Historical checksum and next-lesson correction publication remain pending.",
+      "fixture_technical_repair_verified": {
+        "source_sha": "aaa9194a966aefae1ef4724f5d2b576b4289c550",
+        "evidence": "docs/teaching/evidence/2026-10-22-main-aaa9194/REPORT.md"
+      }
     },
     {
       "id": "chat-day25-shared-auth-20261022",
@@ -2277,6 +2281,71 @@
     "next_day_unchanged": true
   },
   "latest_reference_validation_2026_10_22": {
+    "date": "2026-10-22",
+    "timezone": "Asia/Taipei",
+    "source_sha": "aaa9194a966aefae1ef4724f5d2b576b4289c550",
+    "teaching_base_sha": "9716c24f7b3c87a1337f91a82ad10635db598591",
+    "postgres_with_include_ignored": {
+      "passed": 31,
+      "failed": 0,
+      "ignored": 0
+    },
+    "default_stats_without_database_url": {
+      "passed": 20,
+      "failed": 0,
+      "ignored": 1
+    },
+    "day24_fixtures_fixed_and_verified": true,
+    "ci_test_all": "success",
+    "ci_node": "failure",
+    "ci_pg_coverage_note": "Persistence runs full feature but omits --include-ignored; one ignored library PG test needs explicit execution for all31.",
+    "full_workspace_rerun": false,
+    "http_gui_upgrade_rerun": false,
+    "functional_acceptance": false,
+    "main_modified": false,
+    "schedule_modified": false,
+    "next_day": {
+      "chat": 26,
+      "pet": 26,
+      "analytics": 26
+    },
+    "last_full_comparison_updated": false,
+    "notion_readback": {
+      "3f3e51d4-5093-817e-afae-e0cfc9ea4cc8": {
+        "page_last_edited_at": "2026-10-21T18:22:17.779Z",
+        "sha256": "00ee1481bbfebf298b0513a81f8fb4c8040bb12bc8ccae7b50bd05e3e8452669",
+        "readback_verified": true
+      },
+      "3f2e51d4-5093-81dd-b8a8-ce7cb4cd3e60": {
+        "page_last_edited_at": "2026-10-21T18:22:15.894Z",
+        "sha256": "8d9525568f90e22101c33542df816c9d8aec2ec9be97d92ff74678d86d4272eb",
+        "readback_verified": true
+      }
+    },
+    "report": "docs/teaching/evidence/2026-10-22-main-aaa9194/REPORT.md"
+  },
+  "scheduler_model_update_2026_10_22": {
+    "task_id": "6acd967c15fc8191ade8407954c5b354",
+    "task_name": "三專案每日 TDD 教學",
+    "requested_model": "gpt-6.1-sol",
+    "requested_reasoning_effort": "medium",
+    "prompt_updated": true,
+    "prompt_full_readback_matches": true,
+    "effective_model_change_verified": false,
+    "observed_model_options": [
+      "GPT-6",
+      "GPT-5.6 Sol"
+    ],
+    "observed_reasoning": "中",
+    "status_before": "active",
+    "status_after": "active",
+    "schedule": "daily 06:00 Asia/Taipei",
+    "schedule_changed": false,
+    "duplicate_created": false,
+    "run_now_triggered": false,
+    "limitation": "Exact requested model is not selectable in existing ChatGPT cloud task conversation."
+  },
+  "previous_reference_validation_2026_10_22_a06c038": {
     "source_sha": "a06c0386d892d28021d6327a5962b3ebbd7a2bb3",
     "teaching_base_sha": "149f526f90d62c41a1f255bce34846af0740ca0b",
     "date": "2026-10-22",
@@ -2318,25 +2387,47 @@
     ],
     "report": "docs/teaching/evidence/2026-10-22-main-a06c038/REPORT.md"
   },
-  "scheduler_model_update_2026_10_22": {
-    "task_id": "6acd967c15fc8191ade8407954c5b354",
-    "task_name": "三專案每日 TDD 教學",
-    "requested_model": "gpt-6.1-sol",
-    "requested_reasoning_effort": "medium",
-    "prompt_updated": true,
-    "prompt_full_readback_matches": true,
-    "effective_model_change_verified": false,
-    "observed_model_options": [
-      "GPT-6",
-      "GPT-5.6 Sol"
-    ],
-    "observed_reasoning": "中",
-    "status_before": "active",
-    "status_after": "active",
-    "schedule": "daily 06:00 Asia/Taipei",
-    "schedule_changed": false,
-    "duplicate_created": false,
-    "run_now_triggered": false,
-    "limitation": "Exact requested model is not selectable in existing ChatGPT cloud task conversation."
+  "intermediate_reference_validation_2026_10_22_13a60ed": {
+    "date": "2026-10-22",
+    "timezone": "Asia/Taipei",
+    "source_sha": "13a60edeafd6c0f54460f0d2af5ee330fbc34f7e",
+    "previous_sha": "a06c0386d892d28021d6327a5962b3ebbd7a2bb3",
+    "intermediate_sha": "183a058a66aec63cd7ee50beaa0e87ddfdf8f560",
+    "teaching_base_sha": "9716c24f7b3c87a1337f91a82ad10635db598591",
+    "postgres_full_feature": {
+      "passed": 31,
+      "failed": 0,
+      "ignored": 0
+    },
+    "default_stats_without_database_url": {
+      "passed": 18,
+      "failed": 1,
+      "error": "DATABASE_URL NotPresent"
+    },
+    "day24_fixtures_fixed_and_verified": true,
+    "full_workspace_rerun": false,
+    "http_gui_upgrade_rerun": false,
+    "functional_acceptance": false,
+    "main_modified": false,
+    "schedule_modified": false,
+    "next_day": {
+      "chat": 26,
+      "pet": 26,
+      "analytics": 26
+    },
+    "last_full_comparison_updated": false,
+    "notion_readback": {
+      "3f3e51d4-5093-817e-afae-e0cfc9ea4cc8": {
+        "page_last_edited_at": "2026-10-21T18:18:12.611Z",
+        "sha256": "db6d44f1430c0be26a1546675641dbe4af92fcec6292bac4f6f936c54905c90f",
+        "readback_verified": true
+      },
+      "3f2e51d4-5093-81dd-b8a8-ce7cb4cd3e60": {
+        "page_last_edited_at": "2026-10-21T18:18:11.840Z",
+        "sha256": "a06559e5796b911bead6dbb3aa39c8acb8c71e36d514ca4837937ad04bb558b3",
+        "readback_verified": true
+      }
+    },
+    "report": "docs/teaching/evidence/2026-10-22-main-13a60ed/REPORT.md"
   }
 }
