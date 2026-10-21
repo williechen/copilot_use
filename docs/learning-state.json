@@ -5,7 +5,7 @@
   "fixed_tag": "v0.2.1",
   "fixed_tag_sha": "9bcae7c5d139f75ed08b4daffece602a71fdab34",
   "next_day": {
-    "chat": 26,
+    "chat": 27,
     "pet": 26,
     "analytics": 26
   },
@@ -2579,5 +2579,24 @@
     "evidence": "docs/teaching/evidence/2026-10-22-current-only-cleanup/verification.json",
     "frozen_bodies_unchanged": true,
     "next_day_unchanged": true
+  },
+  "day26_chat_delivery": {
+    "day": 26,
+    "status": "published_full_readback",
+    "page_id": "400e51d45093811ea480d6d75449afe4",
+    "notion_url": "https://app.notion.com/p/400e51d45093811ea480d6d75449afe4",
+    "source_sha": "aaa9194a966aefae1ef4724f5d2b576b4289c550",
+    "expected_branch_sha": "4c759cf1c25eecb762be266915ed4abe3a273faa",
+    "notion_page_last_edited_at": "2026-10-21T22:54:23.097Z",
+    "teaching_path": "docs/teaching/day26/chat.md",
+    "rules_version": "daily-tdd-minimum-v1",
+    "rules_blob_sha": "143fd1592322acda2a2c7821006f87020eec3518",
+    "code_block_count": 5,
+    "full_text_verified": true,
+    "main_application": "not applied",
+    "functional_acceptance": false,
+    "ci_run": "https://github.com/williechen/rust_ai_chat/actions/runs/39651403341",
+    "ci_scope": "source SHA only; lesson not applied",
+    "makeup_queue": "chat Day25 remains pending"
   }
 }

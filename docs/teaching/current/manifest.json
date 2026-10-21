@@ -1,7 +1,7 @@
 {
   "scope": "Latest published teaching index; Day16 snapshot preserved in archive",
-  "revision": "day25-three-projects-published-r1",
-  "synced_date": "2026-10-21",
+  "revision": "day26-chat-published",
+  "synced_date": "2026-10-22",
   "source_sha": "5654591f3002fc619c883af9b5197e2126cc6494",
   "articles": [
     {
@@ -164,6 +164,25 @@
       "frozen_body_sha256": "89767f8e8920b71c379b4f8c852915ffb7bf9ebe0833351914cec62ff79c963c",
       "frozen_notion_snapshot": "docs/teaching/archive/day-25/notion/analytics.md",
       "article_body_edit_allowed": false
+    },
+    {
+      "project": "chat",
+      "day": 26,
+      "revision": "r1",
+      "page_id": "400e51d45093811ea480d6d75449afe4",
+      "notion_url": "https://app.notion.com/p/400e51d45093811ea480d6d75449afe4",
+      "source_sha": "aaa9194a966aefae1ef4724f5d2b576b4289c550",
+      "full_text_verified": true,
+      "code_blocks_exact": true,
+      "code_block_count": 5,
+      "notion_page_last_edited_at": "2026-10-21T22:54:23.097Z",
+      "expected_branch_sha": "4c759cf1c25eecb762be266915ed4abe3a273faa",
+      "article_path": "docs/teaching/day26/chat.md",
+      "next_day_before": 26,
+      "next_day_after": 27,
+      "main_application": "not applied",
+      "functional_acceptance": false,
+      "rules_version": "daily-tdd-minimum-v1"
     }
   ],
   "day15_frozen": true,
