@@ -7,7 +7,7 @@
   "next_day": {
     "chat": 27,
     "pet": 27,
-    "analytics": 26
+    "analytics": 27
   },
   "last_full_comparison": "2026-10-16T22:47:14.399027+08:00",
   "next_full_comparison": "2026-10-24T00:00:00+08:00",
@@ -2615,5 +2615,23 @@
     "three_id_native_gui": "not executed",
     "makeup_queue": "pet Day25 remains pending",
     "article_path": "docs/teaching/day26/pet.md"
+  },
+  "day26_analytics_delivery": {
+    "day": 26,
+    "status": "published_full_readback",
+    "page_id": "400e51d4509381d28023deaccdef65bf",
+    "notion_url": "https://app.notion.com/p/400e51d4509381d28023deaccdef65bf",
+    "source_sha": "aaa9194a966aefae1ef4724f5d2b576b4289c550",
+    "expected_branch_sha": "c0777e681e3ddbf4a67926734f592c6b52c2ee8d",
+    "rules_version": "daily-tdd-minimum-v1",
+    "rules_blob_sha": "143fd1592322acda2a2c7821006f87020eec3518",
+    "code_block_count": 2,
+    "full_text_verified": true,
+    "main_application": "not applied",
+    "functional_acceptance": false,
+    "postgres_integration": "not executed",
+    "historical_migration_checksum": "not verified",
+    "event_data_retention": "not verified",
+    "article_path": "docs/teaching/day26/analytics.md"
   }
 }
