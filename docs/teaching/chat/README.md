@@ -55,8 +55,8 @@
 
 ## 目前教學
 
-- **最新已發布：** [Chat Day 27](../daily/day-27/chat.md)（教學文章與程式套用／驗收分開）
-- 前一篇：[Chat Day 26](../daily/day-26/chat.md)
+- **最新已發布：** [Chat Day 28](../daily/day-28/chat.md)（教學文章與程式套用／驗收分開）
+- 前一篇：[Chat Day 27](../daily/day-27/chat.md)
 - **下一篇 Day：** 以 [learning-state.json](../../learning-state.json) 的 `next_day.chat` 即時值為準；不依首頁快照或直接重發 Day27。
 
 <details>
