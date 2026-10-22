@@ -12,32 +12,22 @@
 
 之後仍須每次讀取 [即時學習狀態](../../learning-state.json)，不把 28 寫死；GitHub 規則最新架構要求為 Leptos UI → Axum HTTP/API／Tauri IPC → Application／Domain → SQLx Adapter。Chat／Pet Day25 FIFO 更正尚待完整驗證，沒有因同步索引而結案。Day27 三篇全文與 blob／SHA256 已保存在 [manifest](manifest.json)，原始文章和歷史資料均不更動。
 
-以下為較早產品／功能驗證快照（2026-10-22），**非最新 Day27 原始碼測試結果**。當時核驗來源：rust_ai_chat/main `aaa9194a966aefae1ef4724f5d2b576b4289c550`。以下為已確認範圍，並非即時 CI 或完整產品驗收。
+### 程式來源與驗證邊界
 
-| 專案 | 已實作 | 待完成／補教 |
-| --- | --- | --- |
-| Chat | 註冊、帳密登入、SQLite 持久 Session、房間頁 Session Gate | 共用登入／登出／Cookie／Session；API／WebSocket 房間 ACL |
-| Pet | SQLite 建立／載入、逐寵物生活窗、pet-* 事件權限、單一 PetStatus 元件 | 動畫每幀單一寵物圖像；三個不同 pet id 原生生活窗的狀態、事件、裁切與重啟驗收 |
-| Analytics | 管理員初始化、帳密登入、持久 Session、首次與後續修改密碼／Email | 共用登入、角色／來源授權、服務配對換證與完整後台互動 |
+唯一主體為 rust_ai_chat/main。本次文件同步讀取到 `f61ea1c59667f3c92c78e576e3c48038a8ce030a`，只靜態核對入口，未對此 SHA 執行新測試或功能驗收；較早 SHA 的測試不可當作最新 main 結果。
 
-- Analytics Day24 補教：已結案，無須重發。
-- Chat／Pet Day25 補教：各自 pending，依各專案 FIFO 處理已列缺口；已實作內容不重教。
-- 下一教學日只依即時 learning-state 判定；此處產品狀態快照不作 Day 推進依據。Day25（含）以前正文與程式封存，教學發布、程式套用及功能驗收分開記錄。
-- Analytics 本次歷史學習庫採刪除重建政策，不要求保留資料原地升級；本次未操作資料庫。
+- 程式、測試、CI／job、UI／API／IPC／DB、功能及重啟驗收只認 rust_ai_chat 的精確來源。
+- copilot_use 的 commit／blob／SHA256 只證明規則、文章、next_day／manifest 與全文讀回；舊程式、Release、CI 與產品試驗不作主體驗收。
+- learning-state／manifest 內舊 validated_program_sha、daily_product_sha、fixed_tag、acceptance 與試驗紀錄完整保留原用途，不能用來挑選本次主體 checkout 或推進 Day。
+- Analytics Day24 補教既有結案證據保留；Chat／Pet Day25 FIFO 仍依狀態與匹配證據逐項判定，不因本次規則整理結案。
 
-### 驗證範圍
-
-以下僅為前述較早來源 SHA 的歷史測試結果，不代表 Day27 Green 已套用：預設 stats-server 測試：20 通過、0 失敗、1 ignored；隔離 PostgreSQL 18.6 配置 DATABASE_URL 並加 `--include-ignored`：31 通過、0 失敗、0 ignored。CI 的 PG workflow 未加此旗標，不能視為覆蓋全部 31 項。
-
-Chat 真瀏覽器完整流程與 API／WS 授權、Pet 三窗 GUI、Analytics 完整角色／來源授權仍須驗收；本次文章整理未重跑程式測試。copilot_use 產品整合與驗收另列。
-
-[驗證證據](../history/evidence/2026-10-22-main-aaa9194/REPORT.md)
+原產品狀態、較早測試數字及證據連結[完整保留](../history/evidence/2026-10-23-repository-roles/before/docs/teaching/current/STATUS.md)。本次不改 learning-state、manifest、補教佇列或 last_full_comparison。現行目標見 [FUTURE_WORK](../../FUTURE_WORK.md)；流程設定的剩餘差異見 [同步範圍](../../REPOSITORY_ROLE_TRANSITION.md)。
 
 ### 排程與通知
 
-- 三專案每日 TDD 教學：每日 06:00，Asia/Taipei，啟用。
+- 既有每日教學紀錄為每日 06:00，Asia/Taipei、啟用；本次未重新讀回雲端任務狀態，亦未變更任務。
 - 歷史提示詞的模型名稱不作實際引擎選用證據；此處未重新驗證排程模型設定。
-- 帳戶「任務」通知：推播與電子郵件均已開啟；實際送達未測試。
+- 歷史通知紀錄為推播與電子郵件已開啟；本次未重新核驗設定或實際送達。
 
 ### 教學交付
 

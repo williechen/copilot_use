@@ -1,6 +1,6 @@
 # 文件總入口
 
-先讀 [共用文章](COMMON_LEARNING_RULES.md)，再進入各案首頁。實作進度與驗證限制只維護在 [目前進度](teaching/current/STATUS.md)，最新下一 Day 以 [learning-state](learning-state.json) 為準。
+先讀 [共用文章](COMMON_LEARNING_RULES.md) 的儲存庫分工，再進入各案首頁。`copilot_use` 是規則、教學文章、next_day、manifest、交付讀回與歷史證據的正本；`rust_ai_chat` 是唯一程式、測試、CI 與功能驗收主體。實作進度與驗證限制只維護在 [目前進度](teaching/current/STATUS.md)，最新下一 Day 以 [learning-state](learning-state.json) 為準。
 
 | 用途 | 文件 |
 | --- | --- |
@@ -22,4 +22,4 @@
 
 </details>
 
-現行操作、目標與架構頁已依產品程式整理；[改寫前原文、來源 commit 與 SHA256](teaching/history/evidence/2026-10-22-current-docs/README.md) 集中保留，歷史驗證仍依原來源解讀。
+現行架構、操作與驗收以 rust_ai_chat 為程式來源；copilot_use 舊產品腳本、workflow、Release 僅保留原用途，轉換限制見 [分工同步範圍](REPOSITORY_ROLE_TRANSITION.md)；[改寫前原文、來源 commit 與 SHA256](teaching/history/evidence/2026-10-22-current-docs/README.md) 集中保留，歷史驗證仍依原來源解讀。

@@ -2,40 +2,37 @@
 
 > 實作進度、精確來源與驗證結果統一見[目前進度](teaching/current/STATUS.md)。本文件保留功能需求／完成條件或架構；歷次測試摘要已移入歷史紀錄，不作現行完成聲明。
 
-目標依 [P9_TARGET.md](P9_TARGET.md) 與 copilot_use 實際程式，目錄／內容銜接依 rust_ai_chat 最新 main。本清單分開記錄產品缺口、安全修正、參考適配與教學；未核實不標完成。每天從確認缺口與當日差異選三專案合計一小時的小切片，不預排 Day；週六工程與功能驗收另記。
+需求正文依 [P9_TARGET.md](P9_TARGET.md)，實作缺口、目錄／內容、測試／CI 與功能驗收只依 rust_ai_chat 最新 main。本庫保存需求與教學，不另追蹤 copilot_use 產品程式；未核實不標完成。每天從確認缺口與當日差異選三專案合計一小時的小切片，不預排 Day；週六工程與功能驗收另記。
 
 既有開發項目是 P0～P12 階段功能完成條件的唯一追蹤來源；在原項目記錄所屬階段、可驗證功能條件、SHA／測試／CI／套用與驗收證據，未核實者保留未完成。跨階段工作留原功能項目追蹤；舊 Day 更正僅於下一個 Day 的 Refactor 後獨立補加，不回填原 Day，不另開重複項目；完成後可退出活動清單，但原識別與證據須可追溯。P9 產品目標不等於 P9 學習階段。
 
 ## 清單使用方式
 
-下列 checkbox 表示產品或教學仍待核對／完成的條件，不能據此推論所有底層程式都不存在。產品程式與 [學習庫狀態](teaching/current/STATUS.md) 分開判定；例如 copilot_use Analytics 目前仍是 token Dashboard，學習庫帳密／Session 的完成紀錄不會自動套用到產品。每項完成須附目前檔案、來源 SHA、適用測試與 UI／跨層結果；僅更新文件不勾選完成。
+下列 checkbox 表示產品或教學仍待核對／完成的條件，不能據此推論所有底層程式都不存在。主體程式狀態見 [目前進度](teaching/current/STATUS.md) 的來源與證據範圍；舊 copilot_use token Dashboard、程式或驗收紀錄不作主體缺口判定。每項完成須附目前檔案、來源 SHA、適用測試與 UI／跨層結果；僅更新文件不勾選完成。
 
 [改寫前完整清單及雜湊](teaching/history/evidence/2026-10-22-current-docs/README.md) 永久保留；以下保留原功能識別與待驗收條件，不重排教學 Day。
 
 ## 當前最高優先順序：先接通可操作的基本流程
 這是既有 P0～P12 功能項目的實作順序與驗收 Gate；實際缺口及最新來源見[目前進度](teaching/current/STATUS.md)。每次依真實入口、資料庫與測試調整最小切片，不預排Day，也不以其他分支的舊試作當成已合併／驗收。
-- [ ] **Chat：註冊／登入→Session→公開房間清單與進房授權→加入／建立聊天室。** 產品沿用 `apps/server/src/auth.rs` 的 register／login 與 `chat_users`；學習庫 signup／mbr_user 另按其來源核對。先完成欄位驗證與登入授權，不重建平行身分表。基本鏈未完成前不優先擴充歷史訊息或進階UI。
-- [ ] **Pet：建立第一隻寵物→名稱／初始外觀→Tauri IPC→SQLite→生活窗→重啟載入。** 產品沿用 pet_runtime 的 PetStore／save_profile／pets，學習庫 create_pet／pet_profile 另按其來源核對；補齊逐寵物身分／畫面／載入後再深化多寵物與漫遊。先核對舊DB歷史，以前向migration處理相容性，不清空DB。
-- [ ] **Analytics：管理員初始化→持久化帳密登入→首次改密碼→Session／Dashboard授權。** 產品目前仍是 token 後台；參考學習庫 bootstrap 的實際來源，將產品帳號接到真正登入／改密碼／授權鏈；固定key登入或429回應不等於完成帳密身分流程。
+- [ ] **Chat：註冊／登入→Session→公開房間清單與進房授權→加入／建立聊天室。** 沿 rust_ai_chat 的 signup／signin／logout、mbr_user／Session 與房間授權實際來源核對；不引用舊庫 auth.rs／chat_users 介面。先完成欄位驗證與登入授權，不重建平行身分表。基本鏈未完成前不優先擴充歷史訊息或進階UI。
+- [ ] **Pet：建立第一隻寵物→名稱／初始外觀→Tauri IPC→SQLite→生活窗→重啟載入。** 沿 rust_ai_chat 的 create_pet／pet_store／pet_profile 與 Tauri command 實際來源核對；補齊逐寵物身分／畫面／載入後再深化多寵物與漫遊。先核對舊DB歷史，以前向migration處理相容性，不清空DB。
+- [ ] **Analytics：管理員初始化→持久化帳密登入→首次改密碼→Session／Dashboard授權。** 沿 rust_ai_chat bootstrap／password_login／Session 的最新來源，核對真正登入／改密碼／授權鏈及未完成部分；固定key登入或429回應不等於完成帳密身分流程。
 每日仍以Chat→Pet→Analytics各一個可套用的Red→完整最小Green切片推進，未接通部分明示缺口。舊Day更正在本日新實作／Refactor後補充；每新增一個專案Day獨立GitHub commit推送並全文讀回後，才可條件同步next_day及manifest，清單整理本身不增加Day。P9功能條件、權限／資料安全、週六工程驗收與其他待辦保留。
 
 ## 既有實作的驗收邊界
 
-視窗漫遊、SHA256 重複檔案分組、Chat SSE 保存前授權複核已有產品實作及指定來源的原生 Linux 驗收，見 [2026-10-16 證據](weekly/2026-10-16/acceptance.json)。不再將原功能重列為「完全未實作」；新增需求與跨平台驗收仍獨立追蹤。
+[2026-10-16 舊庫 Linux 證據](weekly/2026-10-16/acceptance.json) 保留原來源，不作 rust_ai_chat 的完成證據。原功能是否已實作、是否有新增需求與跨平台缺口，須在主體最新 SHA 核對；不因來源角色調整重教已完成內容。
 
 - [ ] Pet 漫遊後續需求：多寵物獨立生活窗、出入籠與互動、螢幕移除不立即搬回／手動找回；逐項按 [UI 需求](UI_ALIGNMENT_REQUIREMENTS.md) 核對目前來源、所屬測試及真實桌面結果。
 - [ ] 漫遊與 SHA256 分組的 Windows／macOS 功能驗收，以及相對原 Linux 證據新增程式的回歸；沒有匹配證據前不標完成。
 
-## 參考適配
+## 歷史雙庫適配項的判讀
 
-- [ ] 明列 Chat Room／作者／ID／category、HTTP 建房 DTO／status、WS 傳訊與通知協定映射；保留成品 ACL、durable realtime／Outbox。topic 不能代替 category。成品 ACL／durable realtime 對應仍待銜接。
-- [ ] 明列 Pet Sleep／Wake／snapshot revision 與 Action／Speed 的差異、Profile JSON／TOML、ScanPreview／opaque preview 的契約；只作真正需要的適配，不新增未使用同名骨架。設定／儲存／呈現呼叫端與契約測試須依最新兩庫來源核對。
-- [ ] 明確決定 pet.cleanup.succeeded 與 file.cleanup.succeeded 的事件映射／版本，不默改既有白名單或把純狀態成功當真操作收據。
-- [ ] 銜接學習庫 HTTP 來源認證／PostgreSQL 與成品 gRPC／逐事件 ACK／SSE／權限模型；驗證必須包含真資料庫與正式憑證契約，不以記憶體去重或歷史CI代替。
+舊 Room／WS DTO、Pet FSM／JSON／TOML、事件名稱、gRPC／ACK 與 SSE 的雙庫差異表[原文保留](teaching/history/evidence/2026-10-23-repository-roles/before/docs/FUTURE_WORK.md)。不再要求把 rust_ai_chat 移植到 copilot_use；必要的 ID／契約／傳輸需求留在原功能項，依 rust_ai_chat 的實際呼叫者與測試判定，不默改既有契約或增加無呼叫者骨架。
 
 ## 教學銜接
 
-學習來源現況與驗證範圍見[目前進度](teaching/current/STATUS.md)。Chat／Pet 各自依 FIFO 補教尚未完成的部分；Analytics Day24 已結案。下一 Day 即時值只引用 [learning-state](learning-state.json)，不在此複製固定 Day。產品整合與功能驗收分開追蹤。
+學習來源現況與驗證範圍見[目前進度](teaching/current/STATUS.md)。Chat／Pet 各自依 FIFO 補教尚未完成的部分；Analytics Day24 已結案。下一 Day 即時值只引用 [learning-state](learning-state.json)，不在此複製固定 Day。主體程式套用與功能驗收分開追蹤。
 
 來源、進度與驗證結果統一見[目前進度](teaching/current/STATUS.md)。Day25（含）以前文章封存；以下沿用原功能項追蹤，不代表產品已整合或驗收。
 
@@ -45,10 +42,10 @@
 
 - [ ] 現有測試歸位重構：自Day15起分批搬移11個非空測試檔，Chat兩檔歸chat-application、Server一檔歸server、Pet五檔歸pet-domain、Analytics三檔歸stats-server。整合步驟及文章位置見[教學總文章](COMMON_LEARNING_RULES.md)的Refactor；參考庫由使用者套用，尚未搬移或執行搬移後驗證。
 
-- [ ] 採用 rust_ai_chat 新增／微調的目錄、型別、Port、介面與所屬測試，更新 copilot_use 對應及適配理由。
+- [ ] 依 rust_ai_chat 最新目錄、型別、Port、介面與所屬測試更新教學對應及理由；不在 copilot_use 建立平行程式。
 - [ ] 三專案各自產出完整可套用 Day；四節格式、原教學與第 2 節末尾必要實作補充對應一致。
 - [ ] 學習倉庫逐步達到產品能力，三專案與跨服務 E2E 共同驗收；獨立記錄學習套用與產品驗收。
-- [ ] 每週六完整比對兩邊 source／介面／流程／契約／DB／UI／CI／測試／文件；依共同規則完成必要銜接。
+- [ ] 每週六完整核對 rust_ai_chat 的 source／介面／流程／契約／DB／UI／CI／測試，再核對 copilot_use 文件、教學與證據的對應；既有執行流程尚待調整見 [同步範圍](REPOSITORY_ROLE_TRANSITION.md)。
 
 ### Chat
 

@@ -1,14 +1,14 @@
-# 本地操作入口
+# 主體程式操作與驗收索引
 
-一般使用請依 [本地啟動](LOCAL_START.md)：首次建置、Chat／Analytics 啟停、Pet 開發執行與個人安裝、資料位置及排查均集中在該頁。
+`copilot_use` 是規則、教學文章、next_day、manifest、交付讀回與歷史證據的正本；`rust_ai_chat` 是唯一程式、測試、CI 與功能驗收主體。 使用者已取消公開部署，本次不新增部署或安裝要求。
 
-| 工作 | 現行文件 |
+| 工作 | 現行來源 |
 | --- | --- |
-| 啟動三產品 | [本地啟動](LOCAL_START.md) |
-| 測試範圍與功能驗收 | [本地與跨平台驗收](LOCAL_VALIDATION.md) |
-| 週六來源比對與原生產物 | [週六工程](SATURDAY_OPERATIONS.md) |
-| SQLite 備份／資料操作 | [SQLite 操作](SQLITE_TRANSITION.md) |
-| Pet 更新機制 | [GitHub Pet 更新](GITHUB_PET_UPDATES.md) |
-| 系統連線及資料庫 | [系統架構](SYSTEM_ARCHITECTURE.md) |
+| 來源／架構 | [系統架構](SYSTEM_ARCHITECTURE.md)、[rust_ai_chat/main](https://github.com/williechen/rust_ai_chat) |
+| 啟動與依賴 | [本地入口](LOCAL_START.md)、主體 README／Cargo／app 配置 |
+| 測試與功能驗收 | [驗收範圍](LOCAL_VALIDATION.md) |
+| 週六核對 | [週六流程與設定限制](SATURDAY_OPERATIONS.md) |
+| DB／migration | [資料邊界](SQLITE_TRANSITION.md)、主體的 Adapter 與 migration |
+| 舊庫發行／更新 | [歷史適用範圍](GITHUB_PET_UPDATES.md)，不作主體交付 |
 
-目前交付以原生本地與 CI 驗證為主。舊版文件混合手動開發、歷史 Docker、主機部署及固定版本操作；[原文完整保留](teaching/history/evidence/2026-10-22-current-docs/before/docs/DEPLOYMENT.md)，來源 commit 與 SHA256 見同目錄 manifest。歷史步驟僅供追溯，使用前須依當前程式另行核對。
+原本操作索引[原文保留](teaching/history/evidence/2026-10-23-repository-roles/before/docs/DEPLOYMENT.md)。現行流程設定尚未變更的部分見 [分工同步範圍](REPOSITORY_ROLE_TRANSITION.md)。

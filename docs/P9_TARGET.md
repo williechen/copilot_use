@@ -4,13 +4,13 @@
 
 ## 需求、實作與驗收
 
-本頁列出產品最終需求，不是已完成功能清單。當前原始碼位置見 [系統架構](SYSTEM_ARCHITECTURE.md)，待做及待驗收項目見 [開發清單](FUTURE_WORK.md)。[目前進度](teaching/current/STATUS.md) 的最近來源主要是學習庫，不能據此認定 copilot_use 已具備相同功能。兩庫來源、教學交付、功能實作及產品驗收須分別核對。
+本頁列出產品最終需求，不是已完成功能清單。當前原始碼位置見 [系統架構](SYSTEM_ARCHITECTURE.md)，待做及待驗收項目見 [開發清單](FUTURE_WORK.md)。程式、測試、CI 與功能驗收全部以 rust_ai_chat 為主；copilot_use 保存需求、規則、教學及交付證據。需求存在不表示程式已實作或驗收。
 
 本次只整理文件；保留所有原需求，不新增產品完成聲明。改寫前版本及來源雜湊見 [封存紀錄](teaching/history/evidence/2026-10-22-current-docs/README.md)。
 
 ## 最高優先權的產品定位
-- 本 Repo 是 AI 控制的最終產品程式碼；**直接以 P9 產品能力為交付目標（不等於 P0～P12 中的 P9 學習階段）**。允許依相依性拆成多次 Commit/測試，但不按 rust_ai_chat 的 Day 編號或教學 P0–P12 進度等待。
-- 產品目標與前進項目以本 repo 為主；目錄／程式銜接以 rust_ai_chat 最新 main 為主，其他遵循 [共同學習規則](COMMON_LEARNING_RULES.md)，兩邊程式與學習進度分別驗收。
+- 本 Repo 是需求、規則與教學文件庫；主體程式為 rust_ai_chat。**P9 產品能力是最終需求目標（不等於 P0～P12 中的 P9 學習階段）**。允許依相依性拆成多次 Commit/測試，但不按 rust_ai_chat 的 Day 編號或教學 P0–P12 進度等待。
+- 需求正文維護在本 repo；實作現況、選題缺口、目錄／呼叫鏈、測試／CI／驗收只以 rust_ai_chat 最新 main 為主，依 [共同學習規則](COMMON_LEARNING_RULES.md) 分開記錄教學交付與主體程式的套用／驗收。
 - 以下是依既有需求整理的完整能力範圍；**Gate 以原始需求及實際證據逐項核對**，本文件不捏造已完成狀態。
 
 ## 已確認的產品需求補充
@@ -19,7 +19,7 @@ Chat 入口／註冊／帳號與 Session、Pet 多寵物出入籠／習性／右
 
 ## 實作依賴 Gate：先能建立身分／實體，才擴充能力（2026-10-19）
 
-這是對下列 **P9 必備能力** 的施作順序補充，**沒有刪除、延後或降低最終 P9 產品功能條件**，也不把已發佈教學視為成品驗收。以 `FUTURE_WORK.md` 當前功能清單追蹤，並以兩庫最新入口、資料庫、UI、實際測試重新判斷。
+這是對下列 **P9 必備能力** 的施作順序補充，**沒有刪除、延後或降低最終 P9 產品功能條件**，也不把已發佈教學視為成品驗收。以 `FUTURE_WORK.md` 當前功能清單追蹤，並以 rust_ai_chat 最新入口、資料庫、UI、實際測試重新判斷。
 
 1. **Chat：** 首先確保使用者能完成註冊或正確登入 → 持久化帳號／Session → 公開清單顯示與進房時的身分／ACL 核對 → 加入／建立房間，才接訊息歷史、多角色聊天、AI、RAG/Agent 等上層能力；未經授權的房間或訊息不得開放。若其他分支已有 P0 註冊試作，先查重用與合併狀態。
 2. **Desktop Pet：** 首先能以 UI 建立第一隻有身分、名稱及初始外觀的寵物 → Tauri IPC → SQLite 持久化 → 生活視窗顯示及重啟載入，然後才發展出籠/回籠、基本互動、漫遊、手動找回、多寵物、AI/記憶。預設建立的 `PetMachine` 不是使用者建立寵物的驗收證據。
@@ -34,7 +34,7 @@ Chat 入口／註冊／帳號與 Session、Pet 多寵物出入籠／習性／右
 - Analytics：獨立 PostgreSQL、gRPC／Protobuf 事件上報、HTTP Dashboard／Query＋SSE 即時更新、同服務 Dashboard/Ingest/Query、來源認證、冪等、完整來源事件、Taipei 趨勢、資料治理/備份、可追溯 1–3 句 AI 洞察及可審核建議、OTel；按 Provider／Model／來源產品／功能／請求 ID／時間統計 input、output、cached input、reasoning、total tokens、價格版本與估算／實際費用，日／月趨勢、預算警示及供應商實際提供的 quota／remaining／reset。缺失額度標未知，不以 Token 推算配額；串流、重試、失敗與缺失 usage 須去重／補帳，不記錄密鑰、Prompt 或回應本文。驗證採既有紀錄與模擬資料，不讀密鑰、不執行付費呼叫。
 - 整合：獨立執行、隔離資料庫、跨服務事件/重試/故障恢復，Observe→Analyze→Act→Evaluate→Observe 閉環；Chat/Pet 採用必須授權且能回退。
 
-視窗漫遊（手動拖移與可選的自動漫遊）及SHA256重複檔案分組已有copilot_use實作；原生Linux驗證紀錄見[精確來源與結果](weekly/2026-10-16/acceptance.json)。紀錄僅涵蓋其指定來源與平台，不推算為目前全部產品能力、Windows／macOS或學習階段已驗收。
+舊庫視窗漫遊與 SHA256 分組的 [Linux 紀錄](weekly/2026-10-16/acceptance.json) 只保留其原來源與平台，不作 rust_ai_chat 已實作／已驗收的證據；主體現況需匹配其精確 SHA 另行核對。
 
 產品缺口、安全修正、參考適配及教學清單維護於 [FUTURE_WORK.md](FUTURE_WORK.md)；驗收方式與有效證據入口見 [LOCAL_VALIDATION.md](LOCAL_VALIDATION.md)。使用者已取消正式部署，保留原生本地／CI／跨平台測試；Docker 僅為歷史資產，不作現行開發或驗證 runtime與固定成品目標。
 

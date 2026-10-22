@@ -1,5 +1,7 @@
 # Analytics 首頁
 
+> 本頁需求與教學交付保存在 copilot_use；程式入口、套件、測試、CI 與功能驗收只依 rust_ai_chat 精確 SHA，舊庫產品工具不作主體驗收。
+
 [共用文章](../../COMMON_LEARNING_RULES.md) · [三專案首頁](../README.md)
 
 ## 目前狀態

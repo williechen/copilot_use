@@ -8,11 +8,19 @@
 
 規則版本：daily-tdd-minimum-v1（GitHub 交付政策 github-only-v1，2026-10-22）。GitHub <code>docs/COMMON_LEARNING_RULES.md</code> 是現行規則正本，唯一教學交付為 williechen/copilot_use 的 main 分支；不以舊對話或歷史決議覆蓋本版。規則／索引衝突須揭露並核對，不能默認已同步。
 
+### 儲存庫分工（2026-10-23 確認）
+
+- **williechen/copilot_use/main：** 規則、教學文章、next_day、manifest、交付讀回與歷史證據的正本。
+- **williechen/rust_ai_chat/main：** 唯一程式、測試、CI 與功能驗收主體。UI／HTTP／IPC／DB／ACL、Cargo／lock／套件、命令及實作缺口均以該庫當時精確 SHA 核對；教學流程保持原始碼唯讀，由使用者套用。
+- 兩庫 SHA 分開記錄為「文件交付 SHA」與「程式來源 SHA」。copilot_use 既有程式、scripts、Actions、Release 或本地測試不作主體程式的驗收 Gate，也不能替代 rust_ai_chat 的功能現況或 CI 證據。
+- learning-state／manifest 中的舊 validated_program_sha、daily_product_sha、fixed_tag、產品試驗與 weekly acceptance 保留其歷史來源用途；不得據此選取本次程式 checkout 或自動宣稱主體功能已完成。next_day 只按各案即時值與交付證據處理。
+- 既有 Day、commit／blob／SHA256、歷史原文及固定發行證據不回寫。此分工更新不增加 Day、不結案補教、不更新 last_full_comparison，也不代表已變更既有雲端任務、GitHub workflow 或排程設定。
+
 ### 1. 來源與選題
 
-每次實際重讀 copilot\_use 的 <code>docs/COMMON_LEARNING_RULES.md</code>、<code>docs/learning-state.json</code>、<code>docs/P9_TARGET.md</code>、<code>docs/FUTURE_WORK.md</code>、<code>docs/SYSTEM_ARCHITECTURE.md</code>、<code>docs/UI_ALIGNMENT_REQUIREMENTS.md</code>、<code>docs/teaching/current/manifest.json</code>，以及 GitHub 三專案入口、<code>docs/teaching/daily/README.md</code> 與相關 Day。取得 rust\_ai\_chat/main 與 copilot\_use 教學分支最新完整 SHA，核對本日相關程式、實際呼叫端、測試及差異。必要來源讀取失敗，只暫停受影響專案，不能以快取冒充最新。
+每次實際重讀 copilot\_use 的 <code>docs/COMMON_LEARNING_RULES.md</code>、<code>docs/learning-state.json</code>、<code>docs/P9_TARGET.md</code>、<code>docs/FUTURE_WORK.md</code>、<code>docs/SYSTEM_ARCHITECTURE.md</code>、<code>docs/UI_ALIGNMENT_REQUIREMENTS.md</code>、<code>docs/teaching/current/manifest.json</code>，以及 GitHub 三專案入口、<code>docs/teaching/daily/README.md</code> 與相關 Day。取得 rust\_ai\_chat/main 的程式來源 SHA 與 copilot\_use/main 的文件交付 SHA；只在 rust\_ai\_chat 核對本日程式、實際呼叫端、測試及差異，在 copilot\_use 核對規則、文章、索引與交付證據。必要來源讀取失敗，只暫停受影響專案，不能以快取冒充最新。
 
-發布每篇前再取 main SHA 及必要規則版本；來源 SHA 改變就重建所有尚未發布草稿，規則改變則重新核對、必要時重建。已完整發布讀回的 Day 不自動撤銷。記錄規則版本、文章 commit／blob SHA、全文 SHA256 與讀回時間、GitHub 規則 blob／commit SHA、兩庫來源 SHA 及讀取時間。rust\_ai\_chat 全庫唯讀，教學程式由使用者套用；copilot\_use 產品整合與教學分開。
+發布每篇前再取 main SHA 及必要規則版本；來源 SHA 改變就重建所有尚未發布草稿，規則改變則重新核對、必要時重建。已完整發布讀回的 Day 不自動撤銷。記錄規則版本、文章 commit／blob SHA、全文 SHA256 與讀回時間、GitHub 規則 blob／commit SHA、兩庫來源 SHA 及讀取時間。rust\_ai\_chat 全庫唯讀，教學程式由使用者套用；copilot\_use 只維護文件與教學交付，不另作產品程式整合或功能驗收。
 
 #### 既定技術分層與 Leptos UI 強制規則（2026-10-22 確認）
 
@@ -28,7 +36,7 @@
 
 #### 基本可操作流程優先
 
-每日選題必須先核對最新 <code>rust_ai_chat/main</code> 與對應 <code>copilot_use</code> 真正入口、可操作 UI、HTTP/IPC、Session/權限、SQLite/PostgreSQL 持久化和對應 CI；找出使用者操作流程中最早缺失的必要環節，先教／補最小可套用、已連至真實呼叫者的 Red→Green。不能因 API、helper、單元測試、HTTP 狀態碼、視窗動畫已存在，就跳過前面的註冊、登入或寵物建立。若早期流程尚未可用，不優先教後段的歷史訊息、漫遊細節或登入限流細節；未完成的同一功能跨日延續，依最新程式重新判斷，不預排 Day。
+每日選題必須先核對最新 <code>rust_ai_chat/main</code> 的真正入口、可操作 UI、HTTP/IPC、Session/權限、SQLite/PostgreSQL 持久化和該庫 CI；<code>copilot_use</code> 僅讀取需求、教學、進度與原始證據；找出使用者操作流程中最早缺失的必要環節，先教／補最小可套用、已連至真實呼叫者的 Red→Green。不能因 API、helper、單元測試、HTTP 狀態碼、視窗動畫已存在，就跳過前面的註冊、登入或寵物建立。若早期流程尚未可用，不優先教後段的歷史訊息、漫遊細節或登入限流細節；未完成的同一功能跨日延續，依最新程式重新判斷，不預排 Day。
 
 - <b>Chat 基本功能門檻：</b> 使用者能註冊／登入，帳號資料與 Session 合理持久化，未登入者不能進入需要授權的聊天室；登入後可看見房間清單並加入或建立房間，才能依需要開發歷史訊息、重連及進階 UI。只有首頁 <code>/signin</code> 連結，或僅能透過 <code>/room/:id</code> 開啟頁面，不等於登入與授權鏈完成；須檢查後端、前端與 SQLite 之間的實際接線。
 - <b>Pet 基本功能門檻：</b> 使用者可建立第一隻具身分、名稱、初始外觀的寵物，透過 Tauri IPC 真正儲存 SQLite、顯示於生活視窗，重新啟動後能載入。<code>PetMachine::default()</code> 不等於使用者建立寵物；在建立、載入流程可用前，視窗漫遊／拖曳／找回與多寵物進階特性只列後續項目。
@@ -54,7 +62,7 @@
 
 ### 3. 測試與證據
 
-CI 必須核對並揭露精確 SHA、workflow／job、狀態、時間與連結；Success／Failure／Pending／Skipped／Cancelled／無紀錄均不單獨阻擋教學發布或 next\_day。CI Success 只證明實際執行的範圍，不能代替 DB、HTTP／WS、SSR／WASM、GUI 或端到端驗收；copilot\_use CI 僅是產品證據。
+CI 必須核對並揭露精確 SHA、workflow／job、狀態、時間與連結；Success／Failure／Pending／Skipped／Cancelled／無紀錄均不單獨阻擋教學發布或 next\_day。CI Success 只證明實際執行的範圍，不能代替 DB、HTTP／WS、SSR／WASM、GUI 或端到端驗收；只有 rust\_ai\_chat 的精確 SHA／workflow／job 作主體程式 CI 證據；copilot\_use 的交付讀回或文件檢查只證明文件一致性，既有程式 CI 不納入主體驗收。
 
 每項列命令、預期、實際結果、證據 SHA、覆蓋範圍、未執行／失敗／待修。未執行明示，不捏造 Red／Green 成功；教學發布、使用者套用、產品整合、功能驗收分別記錄。跨 SHA 引用證據須核對相關差異及依賴，不能直接沿用成功結論。寫入／補償成功不等於測試成功，驗證範圍縮小須列剩餘缺口。
 
@@ -80,7 +88,7 @@ GitHub williechen/copilot_use 的 main 為唯一教學文章交付處。新文�
 
 每日 06:00 Asia/Taipei，依 Chat → Pet → Analytics；主體 Red／最小 Green 學習合計最多 60 分鐘，各預留 15 分鐘，加共用彈性 15 分鐘。保留既有主體學習計時口徑：Refactor、必要補加／補教及第1、3、4節另列估時，不隱藏成本，也不為填滿時間擴大切片。超出主體預算的內容留待後續，不以缺少 Green 的文章冒稱完成；執行遇到時間上限先保存可恢復進度。
 
-週六 00:00 Asia/Taipei 獨立完整比對 tracked 程式、介面、呼叫流程、契約、DB／migration、UI、設定、測試、CI 與文件；只有完整成功才更新 last\_full\_comparison 並讀回。每日做增量核對，不覆蓋完整比對時間。週六失敗不自動阻擋每日教學，須揭露並重新讀取必要來源。既有排程原地更新，不建立重複任務；指令保存不等於排程已更新或實際執行成功。
+週六 00:00 Asia/Taipei 獨立核對 rust_ai_chat 的 tracked 程式、介面、呼叫流程、契約、DB／migration、UI、設定、測試與 CI，再核對 copilot_use 文件／教學與該程式來源的對應；只有完整成功才更新 last\_full\_comparison 並讀回。每日做增量核對，不覆蓋完整比對時間。週六失敗不自動阻擋每日教學，須揭露並重新讀取必要來源。既有排程原地更新，不建立重複任務；指令保存不等於排程已更新或實際執行成功。
 
 保留原生環境、Domain／Application 與 Adapter 邊界、不同 DB 分別驗證、既有 migration／固定 tag／證據不可改寫、權限與檔案操作確認。不得讀正式秘密或執行付費 AI；週六功能驗收不冒稱 AI 已重測。P9 產品目標、P0–P12 學習階段及實際驗收分開。
 

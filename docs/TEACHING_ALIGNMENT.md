@@ -1,28 +1,17 @@
-# 目錄與程式銜接
+# 教學與主體程式銜接
 
-產品來源為 copilot_use/main；目錄／程式適配依 rust_ai_chat/main 的實際來源及當日差異核對。兩庫各記精確 SHA，不因檔名相同宣稱功能、資料或 wire contract 等同。本次只核對產品現有接線，未重新完整比對參考庫。
+`copilot_use` 是規則、教學文章、next_day、manifest、交付讀回與歷史證據的正本；`rust_ai_chat` 是唯一程式、測試、CI 與功能驗收主體。 教學原始碼保持唯讀，由使用者套用；兩庫分別記錄程式來源 SHA 與文件交付 SHA。
 
-| 邊界 | 產品位置 | 接線規則 |
-| --- | --- | --- |
-| Chat HTTP／WS | `apps/server` | 入口轉換與授權後呼叫 Application／Adapter |
-| Chat 前端 | `crates/ui`、`apps/server/frontend` | SSR／hydration；只透過服務介面 |
-| Chat 純核心 | `crates/chat_domain`、`crates/chat_application` | 輸入不變量與 MessageRepository Port |
-| Chat SQLite | `crates/persistence` | 實作 Port，訊息／Outbox／realtime 同交易 |
-| Pet UI／原生 | `apps/desktop_pet`、其 `frontend` | IPC、桌面視窗、確認與結果呈現 |
-| Pet 純核心 | `crates/pet_domain` | Profile／Application Port／Schedule |
-| Pet Adapter | `crates/pet_runtime` | SQLite／OS／HTTP／AI，package 名稱保留 day9-pet |
-| Analytics | `apps/stats_server` | 內部分 application／persistence／HTTP／gRPC／SSE |
-| 共用傳輸 | `crates/shared`、`crates/analytics_transport` | 事件契約與實際 gRPC Driver |
-| 其他 Adapter | `ai_core`、`mcp_bridge`、`telemetry` | 不回流純 Domain／Application |
+## 每次核對
 
-`day9-*` 是既有 package／命令相容名稱，不是目前教學 Day。Chat／Pet／Analytics migration 分別歸 `crates/persistence/migrations`、`crates/pet_runtime/migrations`、`apps/stats_server/migrations`；舊 PostgreSQL 匯入 schema 在 `apps/server/postgres-migrations`，不套用至 Chat SQLite。
+1. 在 rust_ai_chat 最新 main 找出型別／函式、實際 UI／HTTP／IPC 呼叫者、Application／Domain、SQLx Adapter 與測試。目錄入口見 [系統架構](SYSTEM_ARCHITECTURE.md)。
+2. 只依該庫 Cargo.toml／Cargo.lock、package／feature、路由與 DB 契約給出可套用的命令和完整 Green；不移植舊庫 day9-*、pet_runtime、analytics_transport 或腳本名稱作為已存在介面。
+3. 測試放所屬 app／crate／模組；舊測試搬移計畫按最新已完成部分查重，不因歷史待辦重做。
+4. 純 Domain／Application 不依賴 HTTP／DB／Tauri driver。依主體 Cargo normal／build 依賴及實際呼叫鏈驗證；copilot_use 的 architecture-boundaries.py 不是主體的通過證據。
+5. 程式測試及 CI 只認 rust_ai_chat 精確 SHA、workflow／job 與覆蓋；文件全文讀回、next_day／manifest 條件同步在 copilot_use，兩者不互相替代。
 
-## 修改時核對
+## 交付
 
-1. 同時找出型別／函式、實際呼叫端與 UI／API／IPC，再核對測試斷言及持久化結果。
-2. 明列 ID、作者／房間、category 與 topic、JSON／TOML、WS DTO、事件名稱及 DB Adapter 的映射；合理差異保留，不新增無呼叫端的同名骨架。
-3. 測試放所屬 app／crate／模組。學習庫測試歸位的剩餘工作依 [開發清單](FUTURE_WORK.md) 追蹤，不能把歷史根 tests 遷移計畫誤認為產品目前 workspace 結構。
-4. 修改純層依賴時執行 `python3 scripts/architecture-boundaries.py --offline`；它核對實際 Cargo normal／build 依賴，不把 dev-only harness 當執行邊界。
-5. 文件與教學發布、參考庫實際套用、產品功能驗收分開記錄。每日依 [共用規則](COMMON_LEARNING_RULES.md) 交付，每案每 Day 獨立 commit／推送／全文讀回後才條件同步狀態。
+先核對 Day27，再取各案最新 next_day；每案每 Day 獨立文章 commit、全文讀回與條件同步，依 [共用規則](COMMON_LEARNING_RULES.md)。已發布正文與歷史證據不回寫，規則同步不加 Day。
 
-[關鍵模組及呼叫鏈](SEMANTIC_ARCHITECTURE_REVIEW.md) · [產品目標](P9_TARGET.md) · [既有完整比對及原來源](FULL_SOURCE_REVIEW.md) · [本次原文封存](teaching/history/evidence/2026-10-22-current-docs/README.md)
+舊雙庫程式適配表[原文保留](teaching/history/evidence/2026-10-23-repository-roles/before/docs/TEACHING_ALIGNMENT.md)，只供歷史追溯；現行缺口依 [FUTURE_WORK](FUTURE_WORK.md) 對 rust_ai_chat 最新來源核對。

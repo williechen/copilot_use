@@ -1,0 +1,174 @@
+{
+  "scope": "Original document bytes before repository-role correction; no historical evidence rewritten",
+  "source_repository": "williechen/copilot_use",
+  "source_commit": "d384f045921dca6c6d1b92c9de21d9c3e59fc33e",
+  "program_static_observation": {
+    "repository": "williechen/rust_ai_chat",
+    "sha": "f61ea1c59667f3c92c78e576e3c48038a8ce030a",
+    "tests_this_change": "not executed"
+  },
+  "files": [
+    {
+      "path": "README.md",
+      "source_commit": "d384f045921dca6c6d1b92c9de21d9c3e59fc33e",
+      "blob_sha": "420a2fb2e5567357ac28b17e8ee83974d1540b51",
+      "sha256": "2df4bd786f10620c2f0eb8b6e9340713b6e10b46524bfc74bc15680f6305568a",
+      "archive_path": "docs/teaching/history/evidence/2026-10-23-repository-roles/before/README.md"
+    },
+    {
+      "path": "docs/ANALYTICS_TRANSPORT.md",
+      "source_commit": "d384f045921dca6c6d1b92c9de21d9c3e59fc33e",
+      "blob_sha": "600d04c1421ed24fa79f2c64a46138a1fa82dbf7",
+      "sha256": "50d8822f24bf68071054b3f0db02f6231fdede613a0509ca8286fb1c3b82713a",
+      "archive_path": "docs/teaching/history/evidence/2026-10-23-repository-roles/before/docs/ANALYTICS_TRANSPORT.md"
+    },
+    {
+      "path": "docs/COMMON_LEARNING_RULES.md",
+      "source_commit": "d384f045921dca6c6d1b92c9de21d9c3e59fc33e",
+      "blob_sha": "80c39639dae91d1c1fb6776e024fae0b76885c12",
+      "sha256": "1b4426ba50b4e9f42f91b62ee7b46229f9d0579121c6507a1944a8bdb31d2e2e",
+      "archive_path": "docs/teaching/history/evidence/2026-10-23-repository-roles/before/docs/COMMON_LEARNING_RULES.md"
+    },
+    {
+      "path": "docs/DEPLOYMENT.md",
+      "source_commit": "d384f045921dca6c6d1b92c9de21d9c3e59fc33e",
+      "blob_sha": "1c9676ec95c3ec8b2f334da9c07955b9faa04a5d",
+      "sha256": "7d37b32d606cd8227e4f28304d9ca9e9b6a0aed484d62696b54c7c7857d24ce1",
+      "archive_path": "docs/teaching/history/evidence/2026-10-23-repository-roles/before/docs/DEPLOYMENT.md"
+    },
+    {
+      "path": "docs/FULL_SOURCE_REVIEW.md",
+      "source_commit": "d384f045921dca6c6d1b92c9de21d9c3e59fc33e",
+      "blob_sha": "7872f4fc4a1f09b8c1eda1968d3ca61901510660",
+      "sha256": "0524f2a8fa2cff52225dca6d1823cd8c381c5b3f0a0d476bf043a83e8741c044",
+      "archive_path": "docs/teaching/history/evidence/2026-10-23-repository-roles/before/docs/FULL_SOURCE_REVIEW.md"
+    },
+    {
+      "path": "docs/FUTURE_WORK.md",
+      "source_commit": "d384f045921dca6c6d1b92c9de21d9c3e59fc33e",
+      "blob_sha": "3903336c28d9cc650b87298a7946c0bf4ae2c1a4",
+      "sha256": "5253ab2ca027d89882fa0a7aa9df1c805400a064cadb1abe025709336ed18957",
+      "archive_path": "docs/teaching/history/evidence/2026-10-23-repository-roles/before/docs/FUTURE_WORK.md"
+    },
+    {
+      "path": "docs/GITHUB_PET_UPDATES.md",
+      "source_commit": "d384f045921dca6c6d1b92c9de21d9c3e59fc33e",
+      "blob_sha": "0fb87ac8930990518a4cc9049889f51b54bf9fc1",
+      "sha256": "2f6cbcb3644dc9120a3409f77a3ba988a63069e07e3c974163cd764f37d5aaa3",
+      "archive_path": "docs/teaching/history/evidence/2026-10-23-repository-roles/before/docs/GITHUB_PET_UPDATES.md"
+    },
+    {
+      "path": "docs/LOCAL_START.md",
+      "source_commit": "d384f045921dca6c6d1b92c9de21d9c3e59fc33e",
+      "blob_sha": "24a28dfd0c3b038242e6dcbd235449770285959c",
+      "sha256": "97c48cfdbe1cbe86468ad3db89a0c5ff7d82691343e6c475c1c8e86e45e9f50c",
+      "archive_path": "docs/teaching/history/evidence/2026-10-23-repository-roles/before/docs/LOCAL_START.md"
+    },
+    {
+      "path": "docs/LOCAL_VALIDATION.md",
+      "source_commit": "d384f045921dca6c6d1b92c9de21d9c3e59fc33e",
+      "blob_sha": "f65576f4379c0fa7bbb6850aa732ad24e5030fd2",
+      "sha256": "5bd33d8b108eb31ed512690ff825249c7363b7f2b3742d7babbc4e23593dde49",
+      "archive_path": "docs/teaching/history/evidence/2026-10-23-repository-roles/before/docs/LOCAL_VALIDATION.md"
+    },
+    {
+      "path": "docs/P9_TARGET.md",
+      "source_commit": "d384f045921dca6c6d1b92c9de21d9c3e59fc33e",
+      "blob_sha": "4208c28bea889b1219de1962e117398437028d6f",
+      "sha256": "80bcc1549b27bf52a7bcda0c51e2f91d52c822905e77fff5035f480c2ebd856c",
+      "archive_path": "docs/teaching/history/evidence/2026-10-23-repository-roles/before/docs/P9_TARGET.md"
+    },
+    {
+      "path": "docs/README.md",
+      "source_commit": "d384f045921dca6c6d1b92c9de21d9c3e59fc33e",
+      "blob_sha": "95ce21c12e0d734fc9663294d8802eef5ab83a3e",
+      "sha256": "70b2c17f5c7a681178aacc882ac053c4421123d2f092aced566fe9deb7d7a3e1",
+      "archive_path": "docs/teaching/history/evidence/2026-10-23-repository-roles/before/docs/README.md"
+    },
+    {
+      "path": "docs/SATURDAY_OPERATIONS.md",
+      "source_commit": "d384f045921dca6c6d1b92c9de21d9c3e59fc33e",
+      "blob_sha": "6716681d45a74603831d70c5d0cb8c7666c72144",
+      "sha256": "ed1ea599e6cc48bc7a25dad9a07de4127b37024e08987297df88e43350bd21e5",
+      "archive_path": "docs/teaching/history/evidence/2026-10-23-repository-roles/before/docs/SATURDAY_OPERATIONS.md"
+    },
+    {
+      "path": "docs/SEMANTIC_ARCHITECTURE_REVIEW.md",
+      "source_commit": "d384f045921dca6c6d1b92c9de21d9c3e59fc33e",
+      "blob_sha": "4170817da8e472776fc12701170b27c4318aa5be",
+      "sha256": "62904cceba8dd66577c21010c56d2f55668f8027bcb4bb35fda340723002bf55",
+      "archive_path": "docs/teaching/history/evidence/2026-10-23-repository-roles/before/docs/SEMANTIC_ARCHITECTURE_REVIEW.md"
+    },
+    {
+      "path": "docs/SQLITE_TRANSITION.md",
+      "source_commit": "d384f045921dca6c6d1b92c9de21d9c3e59fc33e",
+      "blob_sha": "4dc014e68b4d97facf77474faae6f1e2e067add0",
+      "sha256": "8d8d9c5c3d068d1bcddaeb4134ef4b318df58635c846c37e7863fbbecdf88b4d",
+      "archive_path": "docs/teaching/history/evidence/2026-10-23-repository-roles/before/docs/SQLITE_TRANSITION.md"
+    },
+    {
+      "path": "docs/SYSTEM_ARCHITECTURE.md",
+      "source_commit": "d384f045921dca6c6d1b92c9de21d9c3e59fc33e",
+      "blob_sha": "5ae38829c0ec82e9dd5450e7b6e0573a7e4c1277",
+      "sha256": "42aa0925128574c6a563b77b2ff1aee3cd7322719768fb5482ffa462277663fe",
+      "archive_path": "docs/teaching/history/evidence/2026-10-23-repository-roles/before/docs/SYSTEM_ARCHITECTURE.md"
+    },
+    {
+      "path": "docs/TEACHING_ALIGNMENT.md",
+      "source_commit": "d384f045921dca6c6d1b92c9de21d9c3e59fc33e",
+      "blob_sha": "f0a9da055fa1d5d5e087e04e89ae0f47fd071fee",
+      "sha256": "b08d10fe3ab4cecb1d55fbf875d92c00bfa2bfc3173666b14be339eb427c572f",
+      "archive_path": "docs/teaching/history/evidence/2026-10-23-repository-roles/before/docs/TEACHING_ALIGNMENT.md"
+    },
+    {
+      "path": "docs/source-review/README.md",
+      "source_commit": "d384f045921dca6c6d1b92c9de21d9c3e59fc33e",
+      "blob_sha": "226fbe4a422a3f08ec06a8e0b5fdb3ef12108724",
+      "sha256": "171255b4922d8a5523d949d3f1008a649e4a5a0aeb418d4f6142a6a16111643a",
+      "archive_path": "docs/teaching/history/evidence/2026-10-23-repository-roles/before/docs/source-review/README.md"
+    },
+    {
+      "path": "docs/teaching/analytics/README.md",
+      "source_commit": "d384f045921dca6c6d1b92c9de21d9c3e59fc33e",
+      "blob_sha": "8a908341b5ba32b2e27503aa4d1b01decec3e31a",
+      "sha256": "39666d6aa5e3b39d02a17526ff5b29a52dc05b04fdbb04ef61543b384826173e",
+      "archive_path": "docs/teaching/history/evidence/2026-10-23-repository-roles/before/docs/teaching/analytics/README.md"
+    },
+    {
+      "path": "docs/teaching/chat/README.md",
+      "source_commit": "d384f045921dca6c6d1b92c9de21d9c3e59fc33e",
+      "blob_sha": "22ff1ae5c97c7bd6e3a808c5bded4174fb392de0",
+      "sha256": "685a4b1f5238e859f195b2c2ef5907358e0aa5c32af9769a565fc338ee026a43",
+      "archive_path": "docs/teaching/history/evidence/2026-10-23-repository-roles/before/docs/teaching/chat/README.md"
+    },
+    {
+      "path": "docs/teaching/current/STATUS.md",
+      "source_commit": "d384f045921dca6c6d1b92c9de21d9c3e59fc33e",
+      "blob_sha": "bc1512a050155e4396346d668de62814bcf4e9fb",
+      "sha256": "09a84246ce98b475f7db65dfd8add4cfb8ff8f54d5c2ff84db74fb8e218b11c0",
+      "archive_path": "docs/teaching/history/evidence/2026-10-23-repository-roles/before/docs/teaching/current/STATUS.md"
+    },
+    {
+      "path": "docs/teaching/pet/README.md",
+      "source_commit": "d384f045921dca6c6d1b92c9de21d9c3e59fc33e",
+      "blob_sha": "f6880498f94f25f3d00c1e69d6244256f1716b30",
+      "sha256": "64370ced73cf759fc6fc6ddc5cce2d2394fa9decc4c60ed63a355031581fc933",
+      "archive_path": "docs/teaching/history/evidence/2026-10-23-repository-roles/before/docs/teaching/pet/README.md"
+    },
+    {
+      "path": "docs/teaching/scheduler-instructions-v1.md",
+      "source_commit": "d384f045921dca6c6d1b92c9de21d9c3e59fc33e",
+      "blob_sha": "9d9ac68357ee87edd9e54d670b3b7d449422c9d3",
+      "sha256": "e98bba0971a03691eef5358c0a6082fa5e12656d9b2d2134c69f9124ef4ec2e0",
+      "archive_path": "docs/teaching/history/evidence/2026-10-23-repository-roles/before/docs/teaching/scheduler-instructions-v1.md"
+    }
+  ],
+  "protected": [
+    "docs/learning-state.json",
+    "docs/teaching/current/manifest.json",
+    "all Day articles",
+    "existing history",
+    "source code",
+    "workflows and live schedules"
+  ]
+}
