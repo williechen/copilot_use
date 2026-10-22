@@ -1,31 +1,8 @@
-## 目前進度
+# 三專案共用文章｜學習規則與交付方式
 
-資料核驗日：2026-10-22。最近已核驗來源：rust\_ai\_chat/main <code>aaa9194a966aefae1ef4724f5d2b576b4289c550</code>。以下為已確認範圍，並非即時 CI 或完整產品驗收。
+[文件總入口](README.md) · [目前進度](teaching/current/STATUS.md) · [Chat 首頁](teaching/chat/README.md) · [Pet 首頁](teaching/pet/README.md) · [Analytics 首頁](teaching/analytics/README.md)
 
-| 專案 | 已實作 | 待完成／補教 |
-| --- | --- | --- |
-| Chat | 註冊、帳密登入、SQLite 持久 Session、房間頁 Session Gate | 共用登入／登出／Cookie／Session；API／WebSocket 房間 ACL |
-| Pet | SQLite 建立／載入、逐寵物生活窗、pet-\* 事件權限、單一 PetStatus 元件 | 動畫每幀單一寵物圖像；三個不同 pet id 原生生活窗的狀態、事件、裁切與重啟驗收 |
-| Analytics | 管理員初始化、帳密登入、持久 Session、首次與後續修改密碼／Email | 共用登入、角色／來源授權、服務配對換證與完整後台互動 |
-
-- Analytics Day24 補教：已結案，無須重發。
-- Chat／Pet Day25 補教：各自 pending，依各專案 FIFO 處理已列缺口；已實作內容不重教。
-- 三案 next\_day 均為 27；Day25（含）以前正文與程式封存。教學發布、程式套用及功能驗收分開記錄。
-- Analytics 本次歷史學習庫採刪除重建政策，不要求保留資料原地升級；本次未操作資料庫。
-
-### 驗證範圍
-
-上述來源的預設 stats-server 測試：20 通過、0 失敗、1 ignored；隔離 PostgreSQL 18.6 配置 DATABASE\_URL 並加 <code>--include-ignored</code>：31 通過、0 失敗、0 ignored。CI 的 PG workflow 未加此旗標，不能視為覆蓋全部 31 項。
-
-Chat 真瀏覽器完整流程與 API／WS 授權、Pet 三窗 GUI、Analytics 完整角色／來源授權仍須驗收；本次文章整理未重跑程式測試。copilot\_use 產品整合與驗收另列。
-
-[驗證證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-22-main-aaa9194/REPORT.md)
-
-### 排程與通知
-
-- 三專案每日 TDD 教學：每日 06:00，Asia/Taipei，啟用。
-- 提示詞指定 <code>gpt-6.1-sol</code>、推理強度中；實際引擎選用尚未核實。
-- 帳戶「任務」通知：推播與電子郵件均已開啟；實際送達未測試。
+三案 next_day 以 [learning-state.json](learning-state.json) 即時值為準；教學交付、程式套用與功能驗收分別記錄。共同規則只在本篇維護，歷史正文、封存與原始證據集中於 [歷史資料](teaching/history/README.md)。
 
 ## 每日 TDD 教學最小必要規則 v1
 
@@ -71,7 +48,7 @@ CI 必須核對並揭露精確 SHA、workflow／job、狀態、時間與連結�
 
 ### 4. GitHub 發布、獨立 commit 與 Day 推進
 
-GitHub williechen/copilot_use 的 teaching/rust-ai-chat-alignment 為唯一教學文章交付處。新文章一律放在 <code>docs/teaching/daily/day-NN/{chat,pet,analytics}.md</code>；依專案＋Day＋修訂查重，不複製已交付文章。既有 Day26 等歷史檔保留原路徑，由新入口連結，搬遷不新增 Day。
+GitHub williechen/copilot_use 的 teaching/rust-ai-chat-alignment 為唯一教學文章交付處。新文章一律放在 <code>docs/teaching/daily/day-NN/{chat,pet,analytics}.md</code>；依專案＋Day＋修訂查重，不複製已交付文章。既有 Day26 已歸入 daily/day-26；Day25（含）以前正文與原始證據統一歸入 history/day-NN，由三案首頁與歷史索引連結，搬遷不新增 Day。
 
 **每新增一個專案 Day 就獨立 commit 並推送**，提交訊息含專案／Day／修訂；不能累積多天或三案後才一起提交。文章 commit 完成後從 GitHub 精確 commit SHA 讀回全文，逐字核對四節、完整 Red／Green／程式碼與來源版本，保存路徑、blob SHA、SHA256、讀回時間及結果；commit 存在或工具寫入成功本身不代表交付成功。
 
@@ -79,7 +56,7 @@ GitHub williechen/copilot_use 的 teaching/rust-ai-chat-alignment 為唯一教�
 
 文章修訂、搬遷、規則同步、補教、CI 或週六比對均不增加 Day。各專案 makeup_queue 採 FIFO，每篇最多一項舊 Day 單元，有完整發布讀回證據才結案；補教失敗不回退已確認原教學。教學交付、程式套用、產品整合與功能驗收分開記錄。
 
-停止 Notion 教學建立、更新、發布與每日讀回依賴。共同主頁及三案教學子頁依使用者確認，先逐頁原文搬回 GitHub、全文讀回驗證，再移至 Notion 垃圾桶（可還原）；不永久刪除、不影響其他 Notion 資料。原文、頁面 metadata、父子關係及 GitHub 讀回證據保存於 <code>docs/teaching/notion-export/2026-10-22/</code>。Day25（含）以前 GitHub 封存檔不改寫；原文搬遷只新增保存，不重新發文或改進度。
+停止 Notion 教學建立、更新、發布與每日讀回依賴。共同主頁及三案教學子頁依使用者確認，先逐頁原文搬回 GitHub、全文讀回驗證，再移至 Notion 垃圾桶（可還原）；不永久刪除、不影響其他 Notion 資料。原文、頁面 metadata、父子關係及 GitHub 讀回證據保存於 <code>docs/teaching/history/evidence/notion-export/2026-10-22/</code>。Day25（含）以前 GitHub 封存檔不改寫；原文搬遷只新增保存，不重新發文或改進度。
 
 ### 5. 最小失敗恢復
 
@@ -94,3 +71,7 @@ GitHub williechen/copilot_use 的 teaching/rust-ai-chat-alignment 為唯一教�
 週六 00:00 Asia/Taipei 獨立完整比對 tracked 程式、介面、呼叫流程、契約、DB／migration、UI、設定、測試、CI 與文件；只有完整成功才更新 last\_full\_comparison 並讀回。每日做增量核對，不覆蓋完整比對時間。週六失敗不自動阻擋每日教學，須揭露並重新讀取必要來源。既有排程原地更新，不建立重複任務；指令保存不等於排程已更新或實際執行成功。
 
 保留原生環境、Domain／Application 與 Adapter 邊界、不同 DB 分別驗證、既有 migration／固定 tag／證據不可改寫、權限與檔案操作確認。不得讀正式秘密或執行付費 AI；週六功能驗收不冒稱 AI 已重測。P9 產品目標、P0–P12 學習階段及實際驗收分開。
+
+### 文件整理與歷史追溯
+
+共用文章與三案首頁是正式閱讀入口。同一 Day／專案的正文、修訂與原始封存證據集中在 history/day-NN；跨 Day 的完整比對或來源證據集中 history/evidence。同內容原文可按雜湊去重，但保留每個來源的路徑、SHA256 與新位置。舊證據內記錄的原始路徑、SHA、結果不改寫，透過 [路徑對照](teaching/history/PATH_MAP.json) 解析；歷史版本也可在對應 Git commit 讀回。整理不新增 Day、不變更補教結案或完整比對時間。

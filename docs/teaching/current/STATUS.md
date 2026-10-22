@@ -19,7 +19,7 @@
 
 Chat 真瀏覽器完整流程與 API／WS 授權、Pet 三窗 GUI、Analytics 完整角色／來源授權仍須驗收；本次文章整理未重跑程式測試。copilot_use 產品整合與驗收另列。
 
-[驗證證據](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/teaching/evidence/2026-10-22-main-aaa9194/REPORT.md)
+[驗證證據](../history/evidence/2026-10-22-main-aaa9194/REPORT.md)
 
 ### 排程與通知
 
@@ -29,4 +29,4 @@ Chat 真瀏覽器完整流程與 API／WS 授權、Pet 三窗 GUI、Analytics �
 
 ### 教學交付
 
-GitHub 教學分支為唯一正本；[每日教學入口](../daily/README.md)。每新增一個專案 Day 獨立 commit、推送及全文讀回，之後才條件同步狀態與 manifest。共同主頁與三案 Notion 教學原文搬遷至 [GitHub 匯出索引](../notion-export/2026-10-22/README.md)，核對後移至可還原垃圾桶。本次未新增 Day，未改補教佇列或完整比對時間。
+GitHub 教學分支為唯一正本；[每日教學入口](../daily/README.md)。每新增一個專案 Day 獨立 commit、推送及全文讀回，之後才條件同步狀態與 manifest。共同主頁與三案 Notion 教學原文搬遷至 [GitHub 匯出索引](../history/evidence/notion-export/2026-10-22/README.md)，核對後移至可還原垃圾桶。本次未新增 Day，未改補教佇列或完整比對時間。

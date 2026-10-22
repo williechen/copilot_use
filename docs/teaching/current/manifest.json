@@ -22,18 +22,24 @@
       "readback_at": "2026-10-20T22:44:58.753533+00:00",
       "expected_branch_sha": "d84e8de641dac08808c5cb06494840ee64b2ea18",
       "state_blob_before": "6e97d9995448e189fdcd273e7306ab86d8131dc0",
-      "article_path": "docs/teaching/day24/chat.md",
-      "readback_path": "docs/teaching/day24/chat-readback.json",
+      "article_path": "docs/teaching/history/day-24/chat/github.md",
+      "readback_path": "docs/teaching/history/day-24/support/chat-readback.json",
       "next_day_before": 24,
       "next_day_after": 25,
       "main_application": "not applied",
       "functional_acceptance": false,
       "rules_version": "daily-tdd-minimum-v1",
       "archived": true,
-      "archive_manifest": "docs/teaching/archive/day-24/manifest.json",
+      "archive_manifest": "docs/teaching/history/day-24/archive/manifest.json",
       "frozen_notion_page_last_edited_at": "2026-10-21T12:04:35.328Z",
       "frozen_body_sha256": "844f8e10d0d49628fda00af2a4015bfa2451a7e88142a7092a5af64f966348e7",
-      "frozen_notion_snapshot": "docs/teaching/archive/day-24/notion/chat.md"
+      "frozen_notion_snapshot": "docs/teaching/history/day-24/archive/notion/chat.md",
+      "original_paths": {
+        "article_path": "docs/teaching/day24/chat.md",
+        "frozen_notion_snapshot": "docs/teaching/archive/day-24/notion/chat.md",
+        "archive_manifest": "docs/teaching/archive/day-24/manifest.json",
+        "readback_path": "docs/teaching/day24/chat-readback.json"
+      }
     },
     {
       "full_text_verified": true,
@@ -53,18 +59,24 @@
       "readback_at": "2026-10-20T23:06:49.545045+00:00",
       "expected_branch_sha": "8e5d56c41e1a8454d5c2ab3af4d1cc7cb7520600",
       "state_blob_before": "89fcfbc111d4b38474d57cfa1a73c10986019d93",
-      "article_path": "docs/teaching/day24/pet.md",
-      "readback_path": "docs/teaching/day24/pet-readback.json",
+      "article_path": "docs/teaching/history/day-24/pet/github.md",
+      "readback_path": "docs/teaching/history/day-24/support/pet-readback.json",
       "next_day_before": 25,
       "next_day_after": 25,
       "main_application": "not applied",
       "functional_acceptance": false,
       "rules_version": "daily-tdd-minimum-v1",
       "archived": true,
-      "archive_manifest": "docs/teaching/archive/day-24/manifest.json",
+      "archive_manifest": "docs/teaching/history/day-24/archive/manifest.json",
       "frozen_notion_page_last_edited_at": "2026-10-21T12:04:36.090Z",
       "frozen_body_sha256": "f257b4513052a8d69e8a871acc8b0aff2038aedb6e370a5f02f19f109e73d426",
-      "frozen_notion_snapshot": "docs/teaching/archive/day-24/notion/pet.md"
+      "frozen_notion_snapshot": "docs/teaching/history/day-24/archive/notion/pet.md",
+      "original_paths": {
+        "article_path": "docs/teaching/day24/pet.md",
+        "frozen_notion_snapshot": "docs/teaching/archive/day-24/notion/pet.md",
+        "archive_manifest": "docs/teaching/archive/day-24/manifest.json",
+        "readback_path": "docs/teaching/day24/pet-readback.json"
+      }
     },
     {
       "full_text_verified": true,
@@ -84,18 +96,24 @@
       "readback_at": "2026-10-20T23:10:54.129046+00:00",
       "expected_branch_sha": "8cbdec46f93ca12d35af75f6c14cdffa8bb2b03f",
       "state_blob_before": "baf073af4385626a0475eeb7590b38c3604542d8",
-      "article_path": "docs/teaching/day24/analytics.md",
-      "readback_path": "docs/teaching/day24/analytics-readback.json",
+      "article_path": "docs/teaching/history/day-24/analytics/github.md",
+      "readback_path": "docs/teaching/history/day-24/support/analytics-readback.json",
       "next_day_before": 24,
       "next_day_after": 25,
       "main_application": "not applied",
       "functional_acceptance": false,
       "rules_version": "daily-tdd-minimum-v1",
       "archived": true,
-      "archive_manifest": "docs/teaching/archive/day-24/manifest.json",
+      "archive_manifest": "docs/teaching/history/day-24/archive/manifest.json",
       "frozen_notion_page_last_edited_at": "2026-10-21T12:04:36.878Z",
       "frozen_body_sha256": "1f8d8a271a9a8ccd42b56057973a7c48d1f696da6d2628fd7599b9d29c0ad91d",
-      "frozen_notion_snapshot": "docs/teaching/archive/day-24/notion/analytics.md"
+      "frozen_notion_snapshot": "docs/teaching/history/day-24/archive/notion/analytics.md",
+      "original_paths": {
+        "article_path": "docs/teaching/day24/analytics.md",
+        "frozen_notion_snapshot": "docs/teaching/archive/day-24/notion/analytics.md",
+        "archive_manifest": "docs/teaching/archive/day-24/manifest.json",
+        "readback_path": "docs/teaching/day24/analytics-readback.json"
+      }
     },
     {
       "project": "chat",
@@ -113,11 +131,15 @@
       "archived": true,
       "next_day_before": 25,
       "next_day_after": 26,
-      "archive_manifest": "docs/teaching/archive/day-25/manifest.json",
+      "archive_manifest": "docs/teaching/history/day-25/archive/manifest.json",
       "frozen_notion_page_last_edited_at": "2026-10-21T14:05:31.015Z",
       "frozen_body_sha256": "e0a490546c0a39159f92112c68f8c18272ef5186b322ec59bcfc7c828bb3f3f0",
-      "frozen_notion_snapshot": "docs/teaching/archive/day-25/notion/chat.md",
-      "article_body_edit_allowed": false
+      "frozen_notion_snapshot": "docs/teaching/history/day-25/archive/notion/chat.md",
+      "article_body_edit_allowed": false,
+      "original_paths": {
+        "frozen_notion_snapshot": "docs/teaching/archive/day-25/notion/chat.md",
+        "archive_manifest": "docs/teaching/archive/day-25/manifest.json"
+      }
     },
     {
       "project": "pet",
@@ -136,11 +158,15 @@
       "next_day_before": 25,
       "next_day_after": 26,
       "fifo_correction": "pet-day24-postfreeze-20261021",
-      "archive_manifest": "docs/teaching/archive/day-25/manifest.json",
+      "archive_manifest": "docs/teaching/history/day-25/archive/manifest.json",
       "frozen_notion_page_last_edited_at": "2026-10-21T14:05:31.674Z",
       "frozen_body_sha256": "42fc0d80b87e16e71d6d15a14e0865f58a17719068deceb6eaa9636bf0834093",
-      "frozen_notion_snapshot": "docs/teaching/archive/day-25/notion/pet.md",
-      "article_body_edit_allowed": false
+      "frozen_notion_snapshot": "docs/teaching/history/day-25/archive/notion/pet.md",
+      "article_body_edit_allowed": false,
+      "original_paths": {
+        "frozen_notion_snapshot": "docs/teaching/archive/day-25/notion/pet.md",
+        "archive_manifest": "docs/teaching/archive/day-25/manifest.json"
+      }
     },
     {
       "project": "analytics",
@@ -159,11 +185,15 @@
       "next_day_before": 25,
       "next_day_after": 26,
       "day24_correction": "pending follow-up technical repair",
-      "archive_manifest": "docs/teaching/archive/day-25/manifest.json",
+      "archive_manifest": "docs/teaching/history/day-25/archive/manifest.json",
       "frozen_notion_page_last_edited_at": "2026-10-21T14:05:32.307Z",
       "frozen_body_sha256": "89767f8e8920b71c379b4f8c852915ffb7bf9ebe0833351914cec62ff79c963c",
-      "frozen_notion_snapshot": "docs/teaching/archive/day-25/notion/analytics.md",
-      "article_body_edit_allowed": false
+      "frozen_notion_snapshot": "docs/teaching/history/day-25/analytics/notion/400e51d45093810796cbd6074c8d35c3.md",
+      "article_body_edit_allowed": false,
+      "original_paths": {
+        "frozen_notion_snapshot": "docs/teaching/archive/day-25/notion/analytics.md",
+        "archive_manifest": "docs/teaching/archive/day-25/manifest.json"
+      }
     },
     {
       "project": "chat",
@@ -177,12 +207,15 @@
       "code_block_count": 5,
       "notion_page_last_edited_at": "2026-10-21T22:54:23.097Z",
       "expected_branch_sha": "4c759cf1c25eecb762be266915ed4abe3a273faa",
-      "article_path": "docs/teaching/day26/chat.md",
+      "article_path": "docs/teaching/daily/day-26/chat.md",
       "next_day_before": 26,
       "next_day_after": 27,
       "main_application": "not applied",
       "functional_acceptance": false,
-      "rules_version": "daily-tdd-minimum-v1"
+      "rules_version": "daily-tdd-minimum-v1",
+      "original_paths": {
+        "article_path": "docs/teaching/day26/chat.md"
+      }
     },
     {
       "project": "pet",
@@ -195,12 +228,15 @@
       "code_blocks_exact": true,
       "code_block_count": 3,
       "expected_branch_sha": "bee8540d036bbca6b7a79e1a79a176935a7f585a",
-      "article_path": "docs/teaching/day26/pet.md",
+      "article_path": "docs/teaching/daily/day-26/pet.md",
       "next_day_before": 26,
       "next_day_after": 27,
       "main_application": "not applied",
       "functional_acceptance": false,
-      "rules_version": "daily-tdd-minimum-v1"
+      "rules_version": "daily-tdd-minimum-v1",
+      "original_paths": {
+        "article_path": "docs/teaching/day26/pet.md"
+      }
     },
     {
       "project": "analytics",
@@ -213,12 +249,15 @@
       "code_blocks_exact": true,
       "code_block_count": 2,
       "expected_branch_sha": "c0777e681e3ddbf4a67926734f592c6b52c2ee8d",
-      "article_path": "docs/teaching/day26/analytics.md",
+      "article_path": "docs/teaching/daily/day-26/analytics.md",
       "next_day_before": 26,
       "next_day_after": 27,
       "main_application": "not applied",
       "functional_acceptance": false,
-      "rules_version": "daily-tdd-minimum-v1"
+      "rules_version": "daily-tdd-minimum-v1",
+      "original_paths": {
+        "article_path": "docs/teaching/day26/analytics.md"
+      }
     }
   ],
   "day15_frozen": true,
@@ -676,7 +715,7 @@
     ],
     "concurrency": "check active runs and branch/blob SHA; expected_sha lease; no overwrite",
     "frozen_through_day": 25,
-    "notion_export_root": "docs/teaching/notion-export/2026-10-22"
+    "notion_export_root": "docs/teaching/history/evidence/notion-export/2026-10-22"
   },
   "migration": {
     "base_commit": "51aa7ec30a5edb4663f8991e7bb2ed70871c67d6",
@@ -688,5 +727,23 @@
     "notion_pages_trashed_and_readback_verified": 86,
     "cleanup_evidence": "docs/teaching/notion-export/2026-10-22/cleanup.json",
     "scheduler_evidence": "docs/teaching/notion-export/2026-10-22/scheduler.json"
+  },
+  "homepages": {
+    "chat": "docs/teaching/chat/README.md",
+    "pet": "docs/teaching/pet/README.md",
+    "analytics": "docs/teaching/analytics/README.md"
+  },
+  "shared_article": "docs/COMMON_LEARNING_RULES.md",
+  "history": {
+    "root": "docs/teaching/history",
+    "path_map": "docs/teaching/history/PATH_MAP.json",
+    "articles": "docs/teaching/history/ARTICLES.json",
+    "original_bytes_preserved": true
+  },
+  "document_consolidation": {
+    "date": "2026-10-22",
+    "base_commit": "8d82f1eb658cc0305eff90792870e0889ad9e8eb",
+    "new_day_published": false,
+    "next_day_advanced": false
   }
 }

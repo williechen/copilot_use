@@ -9,7 +9,7 @@
 
 ## 已確認的產品需求補充
 
-Chat 入口／註冊／帳號與 Session、Pet 多寵物出入籠／習性／右鍵坐下及多螢幕例外、Analytics 帳號／角色／來源授權／稽核，依 [現行共同規則](COMMON_LEARNING_RULES.md)「已逐項確認的現行需求（2026-10-17）」與 [詳細驗收條件](UI_ALIGNMENT_REQUIREMENTS.md)。這些已確認需求須逐項實作及驗收，本次僅同步文件，未新增功能完成聲明。
+Chat 入口／註冊／帳號與 Session、Pet 多寵物出入籠／習性／右鍵坐下及多螢幕例外、Analytics 帳號／角色／來源授權／稽核，依 [現行使用者流程](requirements/USER_FLOWS.md)與 [詳細驗收條件](UI_ALIGNMENT_REQUIREMENTS.md)。這些已確認需求須逐項實作及驗收，本次僅同步文件，未新增功能完成聲明。
 
 ## 實作依賴 Gate：先能建立身分／實體，才擴充能力（2026-10-19）
 

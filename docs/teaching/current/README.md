@@ -1,11 +1,7 @@
-# 現行教學入口
+# 目前進度入口
 
-唯一正本：`williechen/copilot_use` 的 `teaching/rust-ai-chat-alignment` 分支。
+[三專案首頁](../README.md) · [共用文章](../../COMMON_LEARNING_RULES.md) · [目前進度](STATUS.md) · [manifest](manifest.json)
 
-- [每日教學目錄](../daily/README.md)
-- [共同規則](../../COMMON_LEARNING_RULES.md)
-- [目前狀態](STATUS.md) · [manifest](manifest.json) · [進度](../../learning-state.json)
-- [Chat](CHAT_ENTRY.md) · [Pet](PET_ENTRY.md) · [Analytics](ANALYTICS_ENTRY.md)
-- [Notion 原文完整搬遷索引](../notion-export/2026-10-22/README.md)
+[Chat](../chat/README.md) · [Pet](../pet/README.md) · [Analytics](../analytics/README.md)
 
-三案最新已發布 Day26，next_day 均為 27。文章發布不代表已套用或產品驗收。每新增一個專案 Day 就獨立 commit，推送、全文讀回後才條件同步狀態。Day25（含）以前原檔與證據封存。
+目前進度只維護於 STATUS.md 和 learning-state.json；Day 文章及原始證據統一由各案首頁導覽。

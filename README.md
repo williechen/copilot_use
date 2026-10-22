@@ -29,7 +29,9 @@ python3 scripts/local-verify.py --live-openai
 
 ## 現行文件
 
-[每日教學入口](docs/teaching/daily/README.md) · [目前狀態與待完成項目](docs/teaching/current/STATUS.md) · [全部 Notion 原文搬遷](docs/teaching/notion-export/2026-10-22/README.md)。GitHub 教學分支是唯一交付正本；每新增一個專案 Day 就獨立 commit、推送及全文讀回，之後才條件同步進度。三案目前 next_day 均為27，產品功能尚未完整驗收。
+[文件總入口](docs/README.md) · [共用文章](docs/COMMON_LEARNING_RULES.md) · [Chat 首頁](docs/teaching/chat/README.md) · [Pet 首頁](docs/teaching/pet/README.md) · [Analytics 首頁](docs/teaching/analytics/README.md)
+
+[每日教學入口](docs/teaching/daily/README.md) · [目前狀態與待完成項目](docs/teaching/current/STATUS.md) · [全部 Notion 原文搬遷](docs/teaching/history/evidence/notion-export/2026-10-22/README.md)。GitHub 教學分支是唯一交付正本；每新增一個專案 Day 就獨立 commit、推送及全文讀回，之後才條件同步進度。三案目前 next_day 均為27，產品功能尚未完整驗收。
 
 [目前系統架構與 DB 表格](docs/SYSTEM_ARCHITECTURE.md) · [教學格式與執行方式](docs/TEACHING_FORMAT.md)
 

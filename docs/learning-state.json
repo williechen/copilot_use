@@ -80,7 +80,7 @@
       ],
       "concurrency": "check active runs and branch/blob SHA; expected_sha lease; no overwrite",
       "frozen_through_day": 25,
-      "notion_export_root": "docs/teaching/notion-export/2026-10-22"
+      "notion_export_root": "docs/teaching/history/evidence/notion-export/2026-10-22"
     }
   },
   "curriculum": {
@@ -455,7 +455,7 @@
       ],
       "concurrency": "check active runs and branch/blob SHA; expected_sha lease; no overwrite",
       "frozen_through_day": 25,
-      "notion_export_root": "docs/teaching/notion-export/2026-10-22"
+      "notion_export_root": "docs/teaching/history/evidence/notion-export/2026-10-22"
     }
   },
   "full_comparison_time": "00:00",
@@ -776,7 +776,7 @@
       ],
       "concurrency": "check active runs and branch/blob SHA; expected_sha lease; no overwrite",
       "frozen_through_day": 25,
-      "notion_export_root": "docs/teaching/notion-export/2026-10-22"
+      "notion_export_root": "docs/teaching/history/evidence/notion-export/2026-10-22"
     },
     "notion_role": "historical exported originals only; teaching subtree moved to recoverable Trash after verified migration"
   },
@@ -2730,5 +2730,20 @@
       "tool_limitation": "Desktop automation_update requires local heartbeat target fields; cloud-task prompt-only edit completed in existing task owner UI.",
       "prompt_path": "docs/teaching/scheduler-instructions-v1.md"
     }
+  },
+  "document_navigation": {
+    "shared_article": "docs/COMMON_LEARNING_RULES.md",
+    "homepages": {
+      "chat": "docs/teaching/chat/README.md",
+      "pet": "docs/teaching/pet/README.md",
+      "analytics": "docs/teaching/analytics/README.md"
+    },
+    "history": {
+      "root": "docs/teaching/history",
+      "path_map": "docs/teaching/history/PATH_MAP.json",
+      "articles": "docs/teaching/history/ARTICLES.json",
+      "original_bytes_preserved": true
+    },
+    "source_path_resolution": "Resolve historical paths via history/PATH_MAP.json; historical queue and source evidence remain unchanged."
   }
 }
