@@ -67,7 +67,9 @@ Analytics 定位為純管理後台，Leptos 提供後台畫面；除登入及必
 
 ## 目前教學
 
-- [Analytics day-26](../daily/day-26/analytics.md)
+- **最新已發布：** [Analytics Day 27](../daily/day-27/analytics.md)（教學文章與程式套用／驗收分開）
+- 前一篇：[Analytics Day 26](../daily/day-26/analytics.md)
+- **下一篇 Day：** 以 [learning-state.json](../../learning-state.json) 的 `next_day.analytics` 即時值為準；不依首頁快照或直接重發 Day27。
 
 <details>
 <summary>歷史文章、修訂與原始封存證據</summary>
