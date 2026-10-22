@@ -7,7 +7,7 @@
   "original_github_archives_untouched": true,
   "source_policy": "historical Notion text is frozen evidence, not current policy; GitHub COMMON_LEARNING_RULES governs",
   "attachments": "No native file/image/audio/video/database blocks or notion-file-block references found in fetched page bodies",
-  "notion_cleanup": "pending exact-commit GitHub full readback before recoverable Trash",
+  "notion_cleanup": "GitHub full readback verified; ready for user-authorized recoverable Trash",
   "pages": [
     {
       "id": "3f7e51d4509381faa894d3660c3252f7",
@@ -1217,5 +1217,12 @@
       "body_chars": 6792,
       "code_block_count": 3
     }
-  ]
+  ],
+  "readback": {
+    "article_commit": "fb50aaf16761e45733b88a8e81961dc495f0930e",
+    "evidence": "docs/teaching/notion-export/2026-10-22/readback.json",
+    "all_pages": 86,
+    "all_changed_files": 187,
+    "full_text_exact": true
+  }
 }
