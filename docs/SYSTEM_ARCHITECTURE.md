@@ -2,6 +2,19 @@
 
 本頁以 copilot_use/main 原始碼核對，來源 commit 見 [本次紀錄](teaching/history/evidence/2026-10-22-current-docs/README.md)。它描述產品接線；[學習庫目前進度](teaching/current/STATUS.md)、[最終產品需求](P9_TARGET.md) 與功能驗收分開。依賴版本以各 Cargo.lock 為準。
 
+## 既定技術分層與後續教學
+
+架構規則以 [共用規則](COMMON_LEARNING_RULES.md#既定技術分層與-leptos-ui-強制規則2026-10-22-確認) 與 [UI 驗收要求](UI_ALIGNMENT_REQUIREMENTS.md) 為準。以下是沿用既定架構、修正教學偏差的強制要求；不表示本次已套用程式、重跑測試或完成產品驗收，既有實作與缺口仍依目前進度及匹配 SHA 的證據判定。
+
+- **Leptos UI** 負責頁面、元件與互動：Chat 沿既有 SSR／hydration／Router，Pet 沿 Leptos CSR + Tauri，Analytics 正式登入、修改密碼與管理後台逐步接入 Leptos 元件、表單及 Signals／Actions／Resources／Router。不得以 Axum `Html(...)`／`Html(format!(...))` 完整字串頁面取代原有 Leptos UI，或作為新 UI 的完整 Green。
+- **Axum HTTP/API** 負責路由、Middleware、HTTP／WebSocket、安全性檢查、Cookie／Session 與服務端 ACL；沿用既有 API／認證契約，頁面呈現與 HTTP Handler 分離。前端隱藏按鈕或 route guard 不能代替服務端授權。
+- **Application／Domain** 承擔使用案例、流程及業務／領域規則，透過 Port 銜接外部能力；UI 不直接查 DB，也不承擔服務端授權。**SQLx Adapter** 處理查詢、交易與 migration；Chat／Pet SQLite 與 Analytics PostgreSQL 各自隔離。
+- **Tauri IPC** 配合 Pet Leptos CSR，負責原生橋接與視窗操作，業務規則與持久化沿 Application／Domain 及 Adapter 邊界處理。
+
+後續每 Day 的 Red → 完整最小 Green → Refactor 必須核對真實 `Leptos UI → Axum HTTP/API 或 Tauri IPC → Application/Domain → SQLx Adapter` 的當日可操作切片；只有 API/helper、Axum HTML 或假設性頁面成功，不能宣稱 Leptos UI 功能完成。測試、程式套用與功能驗收各自記錄。
+
+下一次教學先逐案讀回已發布 [Day27](teaching/daily/README.md)、最新兩庫 main、規則、manifest、索引與實際 UI／HTTP／IPC／DB／ACL 呼叫鏈，確認架構偏差及已完成內容；新文章編號只取 [learning-state.json](learning-state.json) 當時各案 `next_day`，不把 Day27 或任何後續 Day 寫死、不倒退、不跳號、不重教已完成功能。必要修正放後續適用 Day 的 Red／完整 Green／Refactor 後，或依保留原 commit／blob／SHA256 的版本化勘誤流程處理；Day25（含）以前封存及 Day26／Day27 已發布正文與歷史證據不因規則同步回寫。核對、修訂與文件同步不增加 Day。
+
 ## 產品組成
 
 | 元件 | 入口與職責 | 資料／執行 |
