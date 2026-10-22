@@ -1,6 +1,6 @@
 {
   "scope": "Latest published teaching index; Day16 snapshot preserved in archive",
-  "revision": "chat-day27-state-synced",
+  "revision": "pet-day27-state-synced",
   "synced_date": "2026-10-22",
   "source_sha": "5654591f3002fc619c883af9b5197e2126cc6494",
   "articles": [
@@ -274,12 +274,28 @@
       "functional_acceptance": false,
       "next_day_before": 27,
       "next_day_after": 28
+    },
+    {
+      "project": "pet",
+      "day": 27,
+      "revision": "r1",
+      "path": "docs/teaching/daily/day-27/pet.md",
+      "article_commit": "9c29a657a8e93e34064b2d838ddfefeba9afe4e7",
+      "blob_sha": "1153424acc176ae44358cfce5382ab5589a80e69",
+      "sha256": "9564bc2c90ef130af3698190466e577375f03fa4f96e2954b6010094c2f8973e",
+      "source_sha": "8cf82626c9c82939a3a56eab32e24a8a5b5b00ed",
+      "full_text_verified": true,
+      "code_blocks": 5,
+      "main_application": "not applied",
+      "functional_acceptance": false,
+      "next_day_before": 27,
+      "next_day_after": 28
     }
   ],
   "day15_frozen": true,
   "next_day": {
     "chat": 28,
-    "pet": 27,
+    "pet": 28,
     "analytics": 27
   },
   "day_advanced": true,

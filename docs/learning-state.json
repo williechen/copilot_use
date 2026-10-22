@@ -6,7 +6,7 @@
   "fixed_tag_sha": "9bcae7c5d139f75ed08b4daffece602a71fdab34",
   "next_day": {
     "chat": 28,
-    "pet": 27,
+    "pet": 28,
     "analytics": 27
   },
   "last_full_comparison": "2026-10-16T22:47:14.399027+08:00",
@@ -2768,6 +2768,29 @@
     "makeup_queue": "chat Day25 remains pending",
     "ci_evidence": [
       "https://github.com/williechen/rust_ai_chat/actions/runs/39785099385",
+      "https://github.com/williechen/rust_ai_chat/actions/runs/39785099220"
+    ]
+  },
+  "day27_pet_delivery": {
+    "project": "pet",
+    "day": 27,
+    "revision": "r1",
+    "status": "github_article_readback_verified",
+    "article_path": "docs/teaching/daily/day-27/pet.md",
+    "article_commit": "9c29a657a8e93e34064b2d838ddfefeba9afe4e7",
+    "article_blob_sha": "1153424acc176ae44358cfce5382ab5589a80e69",
+    "article_sha256": "9564bc2c90ef130af3698190466e577375f03fa4f96e2954b6010094c2f8973e",
+    "source_sha": "8cf82626c9c82939a3a56eab32e24a8a5b5b00ed",
+    "publication_method": "github-only-v1",
+    "full_text_verified": true,
+    "code_blocks": 5,
+    "implementation": "not applied",
+    "tests": "not run",
+    "three_pet_id_gui": "not tested",
+    "functional_acceptance": false,
+    "makeup_queue": "pet Day25 pending",
+    "ci_evidence": [
+      "https://github.com/williechen/rust_ai_chat/actions/runs/39785099304",
       "https://github.com/williechen/rust_ai_chat/actions/runs/39785099220"
     ]
   }
