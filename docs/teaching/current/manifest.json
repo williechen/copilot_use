@@ -1,6 +1,6 @@
 {
   "scope": "Latest published teaching index; Day16 snapshot preserved in archive",
-  "revision": "github-only-delivery-policy",
+  "revision": "chat-day27-state-synced",
   "synced_date": "2026-10-22",
   "source_sha": "5654591f3002fc619c883af9b5197e2126cc6494",
   "articles": [
@@ -258,11 +258,27 @@
       "original_paths": {
         "article_path": "docs/teaching/day26/analytics.md"
       }
+    },
+    {
+      "project": "chat",
+      "day": 27,
+      "revision": "r1",
+      "path": "docs/teaching/daily/day-27/chat.md",
+      "article_commit": "c8d63b6764d9eae12320bebe01c58cbf2556f832",
+      "blob_sha": "c6c73bda229f99f99c8b39c8ca5bae524838e5bc",
+      "sha256": "88a1c3f46e3fc30bef0cd5f36b7c0e561c0f1f5d19b4a5f7e5ec044cf9f30647",
+      "source_sha": "8cf82626c9c82939a3a56eab32e24a8a5b5b00ed",
+      "full_text_verified": true,
+      "code_blocks": 4,
+      "main_application": "not applied",
+      "functional_acceptance": false,
+      "next_day_before": 27,
+      "next_day_after": 28
     }
   ],
   "day15_frozen": true,
   "next_day": {
-    "chat": 27,
+    "chat": 28,
     "pet": 27,
     "analytics": 27
   },

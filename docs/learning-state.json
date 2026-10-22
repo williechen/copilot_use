@@ -5,7 +5,7 @@
   "fixed_tag": "v0.2.1",
   "fixed_tag_sha": "9bcae7c5d139f75ed08b4daffece602a71fdab34",
   "next_day": {
-    "chat": 27,
+    "chat": 28,
     "pet": 27,
     "analytics": 27
   },
@@ -2748,5 +2748,27 @@
     "source_path_resolution": "Resolve historical paths via history/PATH_MAP.json; historical queue and source evidence remain unchanged.",
     "publication_branch": "main",
     "branch_note": "Former teaching branch merged into main and deleted; do not recreate."
+  },
+  "day27_chat_delivery": {
+    "day": 27,
+    "project": "chat",
+    "revision": "r1",
+    "status": "github_article_readback_verified",
+    "article_path": "docs/teaching/daily/day-27/chat.md",
+    "article_commit": "c8d63b6764d9eae12320bebe01c58cbf2556f832",
+    "article_blob_sha": "c6c73bda229f99f99c8b39c8ca5bae524838e5bc",
+    "article_sha256": "88a1c3f46e3fc30bef0cd5f36b7c0e561c0f1f5d19b4a5f7e5ec044cf9f30647",
+    "article_bytes_utf8_readback": true,
+    "full_text_verified": true,
+    "source_sha": "8cf82626c9c82939a3a56eab32e24a8a5b5b00ed",
+    "publication_method": "github-only-v1",
+    "implementation": "not applied",
+    "tests": "not run",
+    "functional_acceptance": false,
+    "makeup_queue": "chat Day25 remains pending",
+    "ci_evidence": [
+      "https://github.com/williechen/rust_ai_chat/actions/runs/39785099385",
+      "https://github.com/williechen/rust_ai_chat/actions/runs/39785099220"
+    ]
   }
 }
