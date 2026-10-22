@@ -1,4 +1,5 @@
 //! Tauri Adapter：只暴露受型別限制的 Profile／Memory／Review 指令。
+mod roaming;
 mod updater;
 use day9_pet::{
     profile::PetProfile,
@@ -508,6 +509,32 @@ fn scan_file_preview(state: State<'_, DesktopState>) -> Result<Vec<serde_json::V
     Ok(result)
 }
 #[tauri::command]
+async fn scan_duplicate_preview(
+    state: State<'_, DesktopState>,
+) -> Result<Vec<Vec<serde_json::Value>>, String> {
+    let root = state.authorized_root()?;
+    let worker = root.clone();
+    let groups = tauri::async_runtime::spawn_blocking(move || worker.duplicate_groups())
+        .await
+        .map_err(|_| "無法完成重複檔預覽")?
+        .map_err(|_| "檔案已變更、不安全或超出預覽讀取上限")?;
+    let roots = state.organizer.lock().map_err(|_| "無法讀取授權目錄")?;
+    if !roots
+        .as_ref()
+        .is_some_and(|current| std::sync::Arc::ptr_eq(current, &root))
+    {
+        return Err("目錄授權已變更，請重新預覽".into());
+    }
+    let mut previews = state.previews.lock().map_err(|_| "無法讀取預覽")?;
+    previews.clear();
+    Ok(groups.into_iter().enumerate().map(|(index,group)|group.files.into_iter().map(|item|{
+        let id=Uuid::new_v4();
+        let value=serde_json::json!({"id":id,"name":item.file_name,"size_bytes":item.size_bytes,"duplicate_group":index+1});
+        previews.insert(id,item);
+        value
+    }).collect()).collect())
+}
+#[tauri::command]
 async fn confirm_cleanup(
     state: State<'_, DesktopState>,
     id: Uuid,
@@ -724,6 +751,117 @@ fn gui_test_result(app: tauri::AppHandle, success: bool, message: String) -> Res
     app.exit(if success { 0 } else { 1 });
     Ok(())
 }
+#[tauri::command]
+async fn github_update_status(app: tauri::AppHandle) -> Result<serde_json::Value, String> {
+    let enabled = github_update_on_start(&app);
+    let mut status = serde_json::json!({"enabled":enabled,"current_version":app.package_info().version.to_string(),"repository":"williechen/copilot_use","check_policy":"on_start_or_manual"});
+    if let Ok(directory) = app.path().cache_dir() {
+        // The updater uses XDG_CACHE_HOME/copilot-desktop-pet rather than the app identifier.
+        let cache = directory.join("copilot-desktop-pet/update-status.json");
+        if let Ok(bytes) = std::fs::read(cache)
+            && bytes.len() <= 65536
+            && let Ok(value) = serde_json::from_slice::<serde_json::Value>(&bytes)
+        {
+            for key in ["status", "checked_at", "latest_release", "message"] {
+                if let Some(v) = value.get(key) {
+                    status[key] = v.clone();
+                }
+            }
+        }
+    }
+    Ok(status)
+}
+#[tauri::command]
+async fn check_github_update() -> Result<(), String> {
+    let result = tokio::process::Command::new("systemctl")
+        .args([
+            "--user",
+            "start",
+            "--no-block",
+            "copilot-pet-update.service",
+        ])
+        .output()
+        .await
+        .map_err(|_| "無法執行自動更新服務")?;
+    if !result.status.success() {
+        return Err("尚未設定 GitHub 自動更新服務".into());
+    }
+    Ok(())
+}
+fn github_update_on_start(app: &tauri::AppHandle) -> bool {
+    app.path()
+        .config_dir()
+        .ok()
+        .map(|directory| directory.join("copilot-desktop-pet/update-on-start"))
+        .and_then(|path| std::fs::read_to_string(path).ok())
+        .map(|value| value.trim() == "true")
+        .unwrap_or(true)
+}
+#[tauri::command]
+async fn set_github_auto_update(app: tauri::AppHandle, enabled: bool) -> Result<(), String> {
+    let directory = app
+        .path()
+        .config_dir()
+        .map_err(|_| "無法讀取設定目錄")?
+        .join("copilot-desktop-pet");
+    std::fs::create_dir_all(&directory).map_err(|_| "無法建立更新設定目錄")?;
+    let temporary = directory.join(".update-on-start-new");
+    std::fs::write(&temporary, if enabled { "true\n" } else { "false\n" })
+        .map_err(|_| "無法保存自動更新設定")?;
+    std::fs::rename(temporary, directory.join("update-on-start"))
+        .map_err(|_| "無法保存自動更新設定")?;
+    Ok(())
+}
+#[tauri::command]
+fn show_controls(app: tauri::AppHandle) -> Result<(), String> {
+    let window = app.get_webview_window("main").ok_or("找不到控制面板")?;
+    window.show().map_err(|_| "無法顯示控制面板")?;
+    window.unminimize().map_err(|_| "無法還原控制面板")?;
+    window
+        .set_focus()
+        .map_err(|_| "無法聚焦控制面板")
+        .map_err(String::from)
+}
+#[tauri::command]
+fn quit_pet(app: tauri::AppHandle) {
+    app.exit(0);
+}
+#[tauri::command]
+async fn gui_test_window_controls(app: tauri::AppHandle) -> Result<serde_json::Value, String> {
+    if !gui_acceptance_enabled() {
+        return Err("僅限 GUI 驗收".into());
+    }
+    let main = app.get_webview_window("main").ok_or("missing main")?;
+    let pet = app.get_webview_window("pet").ok_or("missing pet")?;
+    main.hide().map_err(|e| e.to_string())?;
+    pet.eval("document.querySelector('.floating').dispatchEvent(new MouseEvent('contextmenu',{bubbles:true,cancelable:true,button:2}));setTimeout(()=>document.querySelector('#open-controls')?.click(),100);").map_err(|e|e.to_string())?;
+    let deadline = std::time::Instant::now() + std::time::Duration::from_secs(5);
+    while !main.is_visible().unwrap_or(false) {
+        if std::time::Instant::now() > deadline {
+            return Err("right-click menu did not show controls".into());
+        }
+        tokio::time::sleep(std::time::Duration::from_millis(50)).await;
+    }
+    main.hide().map_err(|e| e.to_string())?;
+    let mut child =
+        tokio::process::Command::new(std::env::current_exe().map_err(|e| e.to_string())?)
+            .env_remove("OPENAI_API_KEY")
+            // 第二次啟動只走正常單例交接，不重跑要求空白資料的驗收入口。
+            .env_remove("PET_GUI_TEST")
+            .kill_on_drop(true)
+            .spawn()
+            .map_err(|e| e.to_string())?;
+    let status = tokio::time::timeout(std::time::Duration::from_secs(10), child.wait())
+        .await
+        .map_err(|_| "second instance did not exit")?
+        .map_err(|e| e.to_string())?;
+    if !status.success() || !main.is_visible().unwrap_or(false) {
+        return Err("second launch failed to focus existing controls".into());
+    }
+    Ok(
+        serde_json::json!({"pid":std::process::id(),"right_click":true,"second_instance_exited":true,"existing_controls_visible":true,"window_count":app.webview_windows().len()}),
+    )
+}
 fn main() {
     if std::env::args().any(|arg| arg == "--mcp-once") {
         if mcp_once().is_err() {
@@ -732,6 +870,37 @@ fn main() {
         return;
     }
 
+    let args: Vec<String> = std::env::args().collect();
+    if args.get(1).map(String::as_str) == Some("--build-info") {
+        println!(
+            "{}",
+            serde_json::json!({"version":env!("CARGO_PKG_VERSION"),"source_sha":env!("COPILOT_SOURCE_SHA"),"source_dirty":env!("COPILOT_SOURCE_DIRTY")=="true","release":!cfg!(debug_assertions)})
+        );
+        return;
+    }
+    if args.get(1).map(String::as_str) == Some("--verify-native-update") {
+        let result = (|| -> Result<(), String> {
+            if args.len() != 6 {
+                return Err("更新驗證參數不完整".into());
+            }
+            if std::fs::metadata(&args[2])
+                .map_err(|_| "找不到更新包")?
+                .len()
+                > 128 * 1024 * 1024
+            {
+                return Err("更新包過大".into());
+            }
+            let bytes = std::fs::read(&args[2]).map_err(|_| "無法讀取更新包")?;
+            let signature = std::fs::read_to_string(&args[3]).map_err(|_| "無法讀取簽章")?;
+            let key = std::fs::read_to_string(&args[4]).map_err(|_| "無法讀取可信公鑰")?;
+            updater::verify(&bytes, signature.trim(), key.trim(), &args[5])
+        })();
+        if let Err(error) = result {
+            eprintln!("{error}");
+            std::process::exit(1);
+        }
+        return;
+    }
     let context: tauri::Context<tauri::Wry> = tauri::generate_context!();
     if std::env::args().any(|arg| arg == "--version") {
         println!("{}", context.package_info().version);
@@ -748,6 +917,17 @@ fn main() {
         std::process::exit(1);
     }
     tauri::Builder::default()
+        .plugin(tauri_plugin_single_instance::init(|app, _args, _cwd| {
+            let _ = show_controls(app.clone());
+        }))
+        .on_window_event(|window, event| {
+            if window.label() == "main"
+                && let tauri::WindowEvent::CloseRequested { api, .. } = event
+            {
+                api.prevent_close();
+                let _ = window.hide();
+            }
+        })
         .plugin(tauri_plugin_updater::Builder::new().build())
         .manage(updater::Updates::new())
         .on_page_load(|webview, payload| {
@@ -755,6 +935,13 @@ fn main() {
                 && gui_acceptance_enabled()
                 && matches!(payload.event(), tauri::webview::PageLoadEvent::Finished)
             {
+                if let Ok(version) = std::env::var("PET_GUI_TEST_UPDATE_VERSION") {
+                    let literal = serde_json::to_string(&version).unwrap_or_default();
+                    let _ = webview.eval(format!("window.__PET_TEST_UPDATE_VERSION={literal};"));
+                }
+                if std::env::var("PET_GUI_TEST_FUNCTIONAL_ONLY").as_deref() == Ok("true") {
+                    let _ = webview.eval("window.__PET_TEST_FUNCTIONAL_ONLY=true;");
+                }
                 if std::env::var("PET_GUI_TEST_AI").as_deref() == Ok("true") {
                     let _ = webview.eval("window.__PET_TEST_LIVE_AI=true;");
                 }
@@ -773,7 +960,7 @@ fn main() {
                         .ok()
                         .and_then(|s| Uuid::parse_str(&s).ok())
                     {
-                        let _ = webview.eval(&format!("window.__PET_TEST_SUGGESTION='{}';", id));
+                        let _ = webview.eval(format!("window.__PET_TEST_SUGGESTION='{}';", id));
                     }
                 }
                 let _ = webview.eval(include_str!("../../../scripts/gui/pet-self-test.js"));
@@ -821,6 +1008,8 @@ fn main() {
                     }
                 });
             }
+            let roaming_enabled = tauri::async_runtime::block_on(store.roaming_enabled())?;
+            app.manage(roaming::Roaming::new(roaming_enabled));
             app.manage(DesktopState {
                 store,
                 ai_slots: std::sync::Arc::new(tokio::sync::Semaphore::new(2)),
@@ -831,6 +1020,13 @@ fn main() {
                 ),
                 previews: std::sync::Mutex::new(std::collections::HashMap::new()),
             });
+            let handle = app.handle().clone();
+            tauri::async_runtime::spawn(roaming::run(handle.clone()));
+            if !gui_acceptance_enabled() && github_update_on_start(&handle) {
+                tauri::async_runtime::spawn(async {
+                    let _ = check_github_update().await;
+                });
+            }
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
@@ -871,6 +1067,16 @@ fn main() {
             authorize_directory,
             revoke_directory,
             scan_file_preview,
+            scan_duplicate_preview,
+            github_update_status,
+            check_github_update,
+            set_github_auto_update,
+            show_controls,
+            quit_pet,
+            gui_test_window_controls,
+            roaming::set_menu_open,
+            roaming::set_roaming,
+            roaming::roaming_status,
             confirm_cleanup,
             recover_cleanup_receipts,
             list_trash,

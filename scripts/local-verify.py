@@ -8,6 +8,9 @@ SOURCE_SHA=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True
 SOURCE_DIRTY=bool(subprocess.check_output(['git','status','--porcelain'],cwd=ROOT,text=True).strip())
 PG = pathlib.Path(subprocess.check_output(['pg_config','--bindir'],text=True).strip())
 REPORT = pathlib.Path(os.environ.get('VERIFY_REPORT', ROOT / 'target/local-validation.json'))
+functional_only='--functional-only' in sys.argv
+if functional_only and any(flag in sys.argv for flag in ('--live-openai','--live-insights','--browser-live')):
+    raise SystemExit('週六功能模式禁止 AI 驗證選項')
 live_key=os.environ.get('OPENAI_API_KEY') if any(flag in sys.argv for flag in ('--live-openai','--live-insights','--browser-live')) else None
 if any(flag in sys.argv for flag in ('--live-openai','--live-insights','--browser-live')) and not live_key: raise SystemExit('OPENAI_API_KEY not configured')
 def interrupted(*_): raise KeyboardInterrupt
@@ -59,7 +62,7 @@ with tempfile.TemporaryDirectory(prefix='copilot-verify-') as scratch:
     chat_token=secrets.token_urlsafe(32); analytics_token=secrets.token_urlsafe(32)
     ingest_token=secrets.token_urlsafe(32); pet_token=secrets.token_urlsafe(32)
     chat_url=f'http://127.0.0.1:{chatport}'; analytics_url=f'http://127.0.0.1:{analyticsport}'
-    env=common | {'CHAT_API_TOKEN':chat_token,'ANALYTICS_API_TOKEN':analytics_token,
+    env=common | {'CHAT_API_TOKEN':chat_token,'ANALYTICS_API_TOKEN':analytics_token,'CHAT_AUDIT_TOKEN':secrets.token_urlsafe(32),'CHAT_AUDIT_ENDPOINT':chat_url+'/api/v1/audit/activity',
         'ANALYTICS_ADMIN_TOKEN':secrets.token_urlsafe(32),'ANALYTICS_CHAT_TOKEN':ingest_token,'ANALYTICS_PET_TOKEN':pet_token,
         'CHAT_URL':chat_url,'ANALYTICS_URL':analytics_url,
         'CHAT_LISTEN':f'127.0.0.1:{chatport}','ANALYTICS_LISTEN':f'127.0.0.1:{analyticsport}',
@@ -151,20 +154,21 @@ INSERT INTO chat_topic_withdraw_outbox VALUES('44444444-4444-4444-8444-444444444
         check('Chat is file-backed SQLite, Analytics remains isolated PostgreSQL',env['CHAT_DATABASE_URL'].startswith('sqlite:') and env['ANALYTICS_DATABASE_URL'].startswith('postgresql:'))
         check('unauthorized Chat write rejected',http(chat_url,'/api/v1/rooms',body={'id':'bad','name':'bad'})[0]==401)
         check('unauthorized Analytics read rejected',http(analytics_url,'/api/v1/events/count')[0]==401)
-        def mcp_request(method,params=None,extra=None):
-            params=params or {};params['_meta']={'io.modelcontextprotocol/protocolVersion':'2026-07-28','io.modelcontextprotocol/clientInfo':{'name':'local-verify','version':'0.1'},'io.modelcontextprotocol/clientCapabilities':{}}
-            headers={'Content-Type':'application/json','Authorization':'Bearer '+chat_token,'MCP-Protocol-Version':'2026-07-28','Mcp-Method':method,'Accept':'application/json, text/event-stream'}
-            if 'name' in params:headers['Mcp-Name']=params['name']
-            headers.update(extra or {})
-            request=urllib.request.Request(chat_url+'/api/v1/mcp',data=json.dumps({'jsonrpc':'2.0','id':1,'method':method,'params':params}).encode(),headers=headers)
-            try:
-                with urllib.request.urlopen(request,timeout=120) as response:return response.status,json.loads(response.read())
-            except urllib.error.HTTPError as e:return e.code,None
-        check('actual MCP modern server discovery',mcp_request('server/discover')[1]['result']['supportedVersions']==['2026-07-28'])
-        check('MCP catalog exposes only authorized readonly knowledge tool',mcp_request('tools/list')[1]['result']['tools'][0]['name']=='knowledge_search')
-        check('MCP rejects method/header mismatch',mcp_request('tools/list',extra={'Mcp-Method':'tools/call'})[0]==400)
-        check('MCP rejects untrusted browser Origin',mcp_request('tools/list',extra={'Origin':'https://untrusted.invalid'})[0]==403)
-        check('MCP cannot invoke file or arbitrary execution tools',mcp_request('tools/call',{'name':'delete_file','arguments':{'query':'anything'}})[0]==400)
+        if not functional_only:
+            def mcp_request(method,params=None,extra=None):
+                params=params or {};params['_meta']={'io.modelcontextprotocol/protocolVersion':'2026-07-28','io.modelcontextprotocol/clientInfo':{'name':'local-verify','version':'0.1'},'io.modelcontextprotocol/clientCapabilities':{}}
+                headers={'Content-Type':'application/json','Authorization':'Bearer '+chat_token,'MCP-Protocol-Version':'2026-07-28','Mcp-Method':method,'Accept':'application/json, text/event-stream'}
+                if 'name' in params:headers['Mcp-Name']=params['name']
+                headers.update(extra or {})
+                request=urllib.request.Request(chat_url+'/api/v1/mcp',data=json.dumps({'jsonrpc':'2.0','id':1,'method':method,'params':params}).encode(),headers=headers)
+                try:
+                    with urllib.request.urlopen(request,timeout=120) as response:return response.status,json.loads(response.read())
+                except urllib.error.HTTPError as e:return e.code,None
+            check('actual MCP modern server discovery',mcp_request('server/discover')[1]['result']['supportedVersions']==['2026-07-28'])
+            check('MCP catalog exposes only authorized readonly knowledge tool',mcp_request('tools/list')[1]['result']['tools'][0]['name']=='knowledge_search')
+            check('MCP rejects method/header mismatch',mcp_request('tools/list',extra={'Mcp-Method':'tools/call'})[0]==400)
+            check('MCP rejects untrusted browser Origin',mcp_request('tools/list',extra={'Origin':'https://untrusted.invalid'})[0]==403)
+            check('MCP cannot invoke file or arbitrary execution tools',mcp_request('tools/call',{'name':'delete_file','arguments':{'query':'anything'}})[0]==400)
         room='test-'+secrets.token_hex(8)
         check('unconfigured AI returns 503 without mock output',http(chat_url,'/api/v1/ai/reply',chat_token,{'room_id':room})[0]==503)
         check('room created',http(chat_url,'/api/v1/rooms',chat_token,{'id':room,'name':'本地測試'})[0]==201)
@@ -199,7 +203,7 @@ INSERT INTO chat_topic_withdraw_outbox VALUES('44444444-4444-4444-8444-444444444
             except urllib.error.HTTPError as e:return e.code,None
         alice_name='alice_'+secrets.token_hex(5);bob_name='bob_'+secrets.token_hex(5)
         alice=account(alice_name);bob=account(bob_name);private='private-'+secrets.token_hex(5)
-        check('session-authenticated owner creates private room',member_http(alice,'/api/v1/rooms',{'id':private,'name':'私人測試'})[0]==201)
+        check('session-authenticated owner creates private room',member_http(alice,'/api/v1/rooms',{'id':private,'name':'私人測試','is_private':True})[0]==201)
         check('uninvited user cannot read private history',member_http(bob,'/api/v1/messages?room_id='+private)[0]==403)
         check('uninvited user cannot write private message',member_http(bob,'/api/v1/messages',{'room_id':private,'content':'denied'})[0]==403)
         check('session writes require CSRF header',member_http(alice,'/api/v1/messages',{'room_id':private,'content':'csrf'},csrf=False)[0]==403)
@@ -207,14 +211,22 @@ INSERT INTO chat_topic_withdraw_outbox VALUES('44444444-4444-4444-8444-444444444
         check('invited user can send private message',member_http(bob,'/api/v1/messages',{'room_id':private,'content':'authorized'})[0]==201)
         persona_route='/api/v1/rooms/'+private+'/personas'
         persona_id=str(uuid.uuid4());persona_body={'id':persona_id,'name':'老師','instructions':'協助學習 Rust，只使用授權資料。','memory':'','cooldown_seconds':2,'enabled':True}
-        check('room member cannot change owner personas',member_http(bob,persona_route,persona_body)[0]==403)
-        check('owner can configure personas',member_http(alice,persona_route,persona_body)[0]==204)
-        check('persona configuration persists with scoped memory',member_http(alice,persona_route)[1][0]['id']==persona_id)
+        check('room member cannot change system AI personas',member_http(bob,persona_route,persona_body)[0]==403)
+        check('room owner cannot configure system AI personas',member_http(alice,persona_route,persona_body)[0]==403)
+        check('system administrator can configure personas',http(chat_url,persona_route,chat_token,persona_body)[0]==204)
+        check('persona configuration persists with scoped memory',http(chat_url,persona_route,chat_token)[1][0]['id']==persona_id)
         run_route='/api/v1/rooms/'+private+'/persona-runs'
         bounded={'id':str(uuid.uuid4()),'topic':'只討論測試資料','max_turns':2,'max_output_budget':1024,'tools':False,'confirmed':True}
-        check('persona runs reject unconfirmed requests',member_http(alice,run_route,bounded|{'confirmed':False})[0]==400)
-        check('persona turn budget rejects excessive rounds',member_http(alice,run_route,bounded|{'max_turns':99})[0]==400)
-        check('persona run with no provider configuration fails without a fake answer',member_http(alice,run_route,bounded)[0]==503)
+        check('persona runs reject unconfirmed requests',http(chat_url,run_route,chat_token,bounded|{'confirmed':False})[0]==400)
+        check('persona turn budget rejects excessive rounds',http(chat_url,run_route,chat_token,bounded|{'max_turns':99})[0]==400)
+        check('persona run with no provider configuration fails without a fake answer',http(chat_url,run_route,chat_token,bounded)[0]==503)
+        check('room member cannot manage another owners membership list',member_http(bob,'/api/v1/me/rooms/'+private+'/members')[0]==403)
+        check('room owner cannot change system AI policy',member_http(alice,'/api/v1/rooms/'+private+'/suggestions/'+str(uuid.uuid4())+'/apply',{'confirmed':True})[0]==403)
+        own=member_http(alice,'/api/v1/me/activity',{'username':bob_name})[1]
+        check('personal activity query cannot switch to another user',own and all(r['username']==alice_name for r in own))
+        check('read-only analytics token cannot query identifiable audit',http(analytics_url,'/api/v1/audit/chat',analytics_token,{})[0]==401)
+        audit_rows=http(analytics_url,'/api/v1/audit/chat',env['ANALYTICS_ADMIN_TOKEN'],{'username':alice_name})[1]
+        check('admin analytics query identifies login and room creation',isinstance(audit_rows,list) and any(r['event_type']=='login.succeeded' and r['username']==alice_name for r in audit_rows) and any(r['event_type']=='room.created' and r['room_id']==private for r in audit_rows))
         assert member_http(bob,'/api/v1/auth/logout',{})[0]==204
 
         check('logout revokes server-side session',member_http(bob,'/api/v1/messages?room_id='+private)[0]==401)
@@ -431,7 +443,7 @@ INSERT INTO chat_topic_withdraw_outbox VALUES('44444444-4444-4444-8444-444444444
         check('OTLP transport strips inherited authentication headers',all('metadata-synthetic-secret' not in str(headers) and 'Authorization' not in headers for headers in observed_headers))
         check('telemetry excludes credentials and message contents',all(value.encode() not in payload for value in forbidden for _,payload in observed))
         REPORT.parent.mkdir(parents=True,exist_ok=True)
-        REPORT.write_text(json.dumps({'status':'passed','checks':results,'scope':'local synthetic reliability and integration; other release gates have separate evidence','source_sha':SOURCE_SHA,'source_dirty':SOURCE_DIRTY,'event_identity_storage':'varchar(40)' if '--varchar-events' in sys.argv else 'uuid','live_openai':bool(live_key),'openai_model':env.get('OPENAI_CHAT_MODEL') if live_key else None},ensure_ascii=False,indent=2)+'\n')
+        REPORT.write_text(json.dumps({'status':'passed','checks':results,'scope':'local synthetic reliability and integration; other release gates have separate evidence','source_sha':SOURCE_SHA,'source_dirty':SOURCE_DIRTY,'event_identity_storage':'varchar(40)' if '--varchar-events' in sys.argv else 'uuid','functional_only':functional_only,'mcp_validation':'excluded' if functional_only else 'local protocol checks','live_openai':bool(live_key),'openai_model':env.get('OPENAI_CHAT_MODEL') if live_key else None},ensure_ascii=False,indent=2)+'\n')
         if '--browser' in sys.argv or '--browser-live' in sys.argv:
             if '--browser-live' in sys.argv:
                 stop(chat);chat=start('chat')

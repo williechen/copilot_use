@@ -1,5 +1,5 @@
 //! User-confirmed scoped adoption and compare-and-swap rollback; remote acknowledgement is retryable.
-use super::{StateData, auth};
+use super::StateData;
 use axum::{
     Json,
     extract::{Path, State},
@@ -30,16 +30,19 @@ fn remote() -> Result<(reqwest::Client, String, String), StatusCode> {
         .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
     Ok((client, base, token))
 }
-async fn owner(state: &StateData, headers: &HeaderMap, room: &str) -> Result<(), StatusCode> {
-    let actor = auth::principal(state, headers, true).await?;
-    let allowed: bool = sqlx::query_scalar(
-        "SELECT EXISTS(SELECT 1 FROM chat_rooms WHERE id=?1 AND (?2 IS NULL OR owner_id=?2))",
-    )
-    .bind(room)
-    .bind(actor.user_id())
-    .fetch_one(&state.pool)
-    .await
-    .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
+async fn system_administrator(
+    state: &StateData,
+    headers: &HeaderMap,
+    room: &str,
+) -> Result<(), StatusCode> {
+    if !super::authorized(headers, &state.api_token) {
+        return Err(StatusCode::FORBIDDEN);
+    }
+    let allowed: bool = sqlx::query_scalar("SELECT EXISTS(SELECT 1 FROM chat_rooms WHERE id=?1)")
+        .bind(room)
+        .fetch_one(&state.pool)
+        .await
+        .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
     if allowed {
         Ok(())
     } else {
@@ -52,7 +55,7 @@ pub(super) async fn apply(
     Path((room, id)): Path<(String, Uuid)>,
     Json(input): Json<Confirm>,
 ) -> Result<Json<Value>, StatusCode> {
-    owner(&state, &headers, &room).await?;
+    system_administrator(&state, &headers, &room).await?;
     if !input.confirmed {
         return Err(StatusCode::BAD_REQUEST);
     }
@@ -134,7 +137,7 @@ pub(super) async fn rollback(
     Path((room, id)): Path<(String, Uuid)>,
     Json(input): Json<Confirm>,
 ) -> Result<Json<Value>, StatusCode> {
-    owner(&state, &headers, &room).await?;
+    system_administrator(&state, &headers, &room).await?;
     if !input.confirmed {
         return Err(StatusCode::BAD_REQUEST);
     }

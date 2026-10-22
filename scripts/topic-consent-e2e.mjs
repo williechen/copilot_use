@@ -16,7 +16,7 @@ if(process.argv.includes('--withdraw')){
 }else{
  async function user(){const username='topic_'+randomUUID().replaceAll('-','').slice(0,20),password='fixture-'+randomUUID();assert((await request(chat,'/api/v1/auth/register',{username,password})).status===201,'synthetic user registered');const login=await request(chat,'/api/v1/auth/login',{username,password});assert(login.status===200,'synthetic user logged in');return login.headers.get('set-cookie').split(';')[0];}
  const cookie=await user(),foreign=await user(),room='topics-'+randomUUID().replaceAll('-','').slice(0,24);
- assert((await request(chat,'/api/v1/rooms',{id:room,name:'Synthetic topic consent fixture'},{Cookie:cookie})).status===201,'owned room created');
+ assert((await request(chat,'/api/v1/rooms',{id:room,name:'Synthetic topic consent fixture',is_private:true},{Cookie:cookie})).status===201,'owned room created');
  const endpoint=`/api/v1/rooms/${room}/topic-consent`,initial=await request(chat,endpoint,undefined,{Cookie:cookie});assert(initial.status===200&&initial.value.enabled===false&&initial.headers.get('cache-control')==='no-store','explicit default-off private consent');
  assert([403,404].includes((await request(chat,endpoint,{enabled:true},{Cookie:foreign})).status),'foreign room cannot grant consent');
  const before=await summary();

@@ -14,7 +14,7 @@
 | persistence::database/topics | 私有 SQLite 開啟、VACUUM INTO 備份、同意撤回與可靠投遞 | 保留 Adapter；migration 與 DB Driver 不進 Domain/Application |
 | server::main/auth | HTTP 入口、Session／房間 ACL、輸入映射、備份與舊 PG 匯入；呼叫 application::persist | 保留產品入口；SQL/crypto 在 app 的 Adapter 模組，沒有反向匯入 chat_domain |
 | server::realtime/fanout | 第一 frame 驗證、同 origin、房間隔離、DB durable 通知與 canonical 訊息讀取、配額／resync | 保留已驗證通知；與參考 ClientEvent/ServerEvent 格式不相同，教學需明示 protocol 變更 |
-| server::openai | SSE delta 暫存，完整完成後 SQLite persist_as，done 只在持久化後送出 | 部分串流不計為完成訊息；完成前未重新複核 session／room ACL 是本輪靜態發現的待修正風險 |
+| server::openai | SSE delta 暫存，完整完成後 SQLite persist_as，done 只在持久化後送出 | 部分串流不計為完成訊息；2026-10-16 已在保存交易內複核 session／room ACL，撤權／過期／CSRF fixture 通過 |
 | server::knowledge/mcp/agent/personas | owner-scoped RAG、認證 readonly tools、引用 ID 查證、有限工具迴圈、角色 revision／租約與 durable turn | Agent 已有外部呼叫後 principal／room ACL 複核，Persona 保留 revision／lease／run 檢查；不得概括為所有 AI 入口皆有相同授權檢查 |
 | server::suggestions/topic_http | 人工確認、限定設定、CAS 回退、撤回同意 | 保留產品工作流；無需為目錄一致改寫已驗證 API |
 | ui/browser、server/frontend | Leptos SSR/hydrate、HTTP／WS／SSE、reconnect／delivery queue；只呼叫服務 API | 保留 UI Adapter，沒有 DB Driver；參考 room_api/chat_socket 課程應對應 API 操作與生命週期 |
@@ -51,6 +51,6 @@ MessageAuthor::AnonymousUser → anonymous_user/None；User{user_id} → user/So
 
 ## 核對後的前進項目
 
-內容宣告順序整理保留公開介面與功能，不以檔名一致宣稱語意等同。Chat HTTP／WS／DB、Pet FSM／codec／事件名稱的適配與安全風險逐項記於完整報告；視窗漫遊及 SHA256 重複檔案分組已納入產品目標，尚未實作。
+內容宣告順序整理保留公開介面與功能，不以檔名一致宣稱語意等同。Chat HTTP／WS／DB、Pet FSM／codec／事件名稱的適配與安全風險逐項記於完整報告；視窗漫遊及 SHA256 重複檔案分組已實作，2026-10-16 原生 Linux／實際桌面功能驗收通過，證據見 weekly/2026-10-16/acceptance.json；Windows／macOS 未重測。
 
 後續只處理已確認缺口、架構邊界及必要教學適配，保留已驗證功能；活動項目以 [FUTURE_WORK.md](FUTURE_WORK.md) 為準。完整靜態核對、週六工程驗收、每日 CI 狀態揭露（不以全部 Success 作發布條件）、學習實際套用分開記錄。

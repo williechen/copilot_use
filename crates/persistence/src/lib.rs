@@ -55,6 +55,28 @@ impl ChatWriter {
             .map(|(id, _)| id)
     }
 
+    /// 在同一個 SQLite 寫入交易內複核 session 與房間成員資格，避免撤權與保存交錯。
+    pub async fn persist_session_reply(
+        &self,
+        room: &str,
+        content: &str,
+        model: &str,
+        user: Uuid,
+        token_hash: &[u8],
+    ) -> Result<Uuid, sqlx::Error> {
+        let mut tx = self.pool.begin_with("BEGIN IMMEDIATE").await?;
+        let allowed: bool = sqlx::query_scalar(
+            "SELECT EXISTS(SELECT 1 FROM chat_sessions s JOIN chat_room_members m ON m.user_id=s.user_id WHERE s.token_hash=?1 AND s.user_id=?2 AND s.expires_at>unixepoch('subsec') AND m.room_id=?3)",
+        ).bind(token_hash).bind(user).bind(room).fetch_one(&mut *tx).await?;
+        if !allowed {
+            return Err(sqlx::Error::Protocol("reply authorization expired".into()));
+        }
+        let id = Uuid::new_v4();
+        Self::stage(&mut tx, id, room, content, "ai", Some(model)).await?;
+        tx.commit().await?;
+        Ok(id)
+    }
+
     /// 重送 ID 僅能對應相同房間、作者與本文；
     /// INSERT 衝突序列化保證並發寫入只建立一筆 Outbox。
     pub async fn persist_with_id(

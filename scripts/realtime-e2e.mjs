@@ -11,7 +11,7 @@ const api = async (path, body) => {
   assert.ok(r.ok, `HTTP ${r.status}`);
   return r.status === 201 && path.endsWith('/rooms') ? null : r.json();
 };
-for (const id of rooms) await api('/api/v1/rooms', {id, name:id});
+for (const id of rooms) await api('/api/v1/rooms', {id, name:id,is_private:true});
 const clients=[];
 async function connect(room, credential=token, endpoint=base) {
   const ws = new WebSocket(endpoint.replace(/^http/, 'ws') + '/api/v1/ws/' + room);
@@ -34,7 +34,9 @@ try {
   const denied=await connect(rooms[0],'invalid');
   await until(()=>denied.events.some(e=>e.code==='unauthorized'));
   assert.ok(!denied.events.some(e=>e.type==='ready'));
-  const a=await connect(rooms[0]), b=await connect(rooms[0],token,process.env.CHAT_URL_SECOND||base), other=await connect(rooms[1]);
+  const a=await connect(rooms[0]);
+  await until(()=>a.events.some(e=>e.type==='ready'));
+  const b=await connect(rooms[0],token,process.env.CHAT_URL_SECOND||base), other=await connect(rooms[1]);
   await until(()=>[a,b,other].every(c=>c.events.some(e=>e.type==='ready')));
   assert.ok(b.events.find(e=>e.type==='ready').presence.length>=2,'presence snapshot');
   a.ws.send('{"type":"typing"}');

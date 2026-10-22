@@ -2,3 +2,5 @@
 pub mod application;
 pub mod learning;
 pub mod profile;
+
+pub mod roaming;

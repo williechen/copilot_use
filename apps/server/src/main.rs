@@ -1,8 +1,11 @@
+#![recursion_limit = "256"]
 //! Chat Web、HTTP、SQLite Transactional Outbox；獨立測試庫與認證。
 mod agent;
+mod audit;
 mod auth;
 mod fanout;
 mod knowledge;
+mod management;
 mod mcp;
 mod openai;
 mod personas;
@@ -25,6 +28,7 @@ use std::{error::Error, net::SocketAddr, sync::Arc};
 struct StateData {
     pool: SqlitePool,
     api_token: Arc<str>,
+    audit_token: Arc<str>,
     events: tokio::sync::broadcast::Sender<realtime::RoomEvent>,
     ai_slots: Arc<tokio::sync::Semaphore>,
     auth_slots: Arc<tokio::sync::Semaphore>,
@@ -36,6 +40,8 @@ struct StateData {
 struct RoomRequest {
     id: String,
     name: String,
+    #[serde(default)]
+    is_private: bool,
 }
 #[derive(Deserialize)]
 struct MessageRequest {
@@ -58,6 +64,7 @@ struct RoomItem {
     id: String,
     name: String,
     can_manage: bool,
+    is_private: bool,
 }
 #[derive(Serialize, FromRow)]
 struct MessageItem {
@@ -80,13 +87,29 @@ async fn health(State(s): State<StateData>) -> StatusCode {
     }
 }
 
+// 公開目錄只回傳可公開的識別與名稱，不暴露私人房間或管理能力。
+#[derive(Serialize, FromRow)]
+struct PublicRoomItem {
+    id: String,
+    name: String,
+}
+async fn public_rooms(State(s): State<StateData>) -> Result<Json<Vec<PublicRoomItem>>, StatusCode> {
+    sqlx::query_as::<_, PublicRoomItem>(
+        "SELECT id,name FROM chat_rooms WHERE NOT is_private ORDER BY name,id LIMIT 100",
+    )
+    .fetch_all(&s.pool)
+    .await
+    .map(Json)
+    .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)
+}
+
 async fn list_rooms(
     State(s): State<StateData>,
     headers: HeaderMap,
 ) -> Result<Json<Vec<RoomItem>>, StatusCode> {
     let actor = auth::principal(&s, &headers, false).await?;
     let rooms = sqlx::query_as::<_, RoomItem>(
-        "SELECT id,name,COALESCE(?1 IS NULL OR owner_id=?1,false) AS can_manage FROM chat_rooms WHERE ?1 IS NULL OR id IN (SELECT room_id FROM chat_room_members WHERE user_id=?1) ORDER BY name,id LIMIT 100",
+        "SELECT r.id,r.name,COALESCE(?1 IS NULL OR r.owner_id=?1,false) AS can_manage,r.is_private FROM chat_rooms r WHERE ?1 IS NULL OR NOT r.is_private OR EXISTS(SELECT 1 FROM chat_room_members m WHERE m.room_id=r.id AND m.user_id=?1) ORDER BY r.name,r.id LIMIT 100",
     )
     .bind(actor.user_id())
     .fetch_all(&s.pool)
@@ -118,10 +141,11 @@ async fn create_room(
         .begin_with("BEGIN IMMEDIATE")
         .await
         .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
-    sqlx::query("INSERT INTO chat_rooms(id,name,owner_id) VALUES(?1,?2,?3)")
+    sqlx::query("INSERT INTO chat_rooms(id,name,owner_id,is_private) VALUES(?1,?2,?3,?4)")
         .bind(&input.id)
         .bind(&input.name)
         .bind(actor.user_id())
+        .bind(input.is_private)
         .execute(&mut *tx)
         .await
         .map_err(|e| {
@@ -141,6 +165,27 @@ async fn create_room(
             .await
             .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
     }
+    let username: Option<String> =
+        sqlx::query_scalar("SELECT username FROM chat_users WHERE id=?1")
+            .bind(actor.user_id())
+            .fetch_optional(&mut *tx)
+            .await
+            .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
+    let event_id = uuid::Uuid::new_v4();
+    sqlx::query("INSERT INTO chat_outbox(event_id,schema_version,source_app,event_type,traceparent)VALUES(?1,1,'web_chat','room.created',?2)").bind(event_id).bind(copilot_telemetry::outgoing_headers().get("traceparent")).execute(&mut *tx).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
+    audit::record(
+        &mut tx,
+        audit::Entry {
+            id: event_id,
+            kind: "room.created",
+            user_id: actor.user_id(),
+            username: username.as_deref().unwrap_or(""),
+            room_id: Some(&input.id),
+            room_name: Some(&input.name),
+            target_username: None,
+        },
+    )
+    .await?;
     tx.commit()
         .await
         .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
@@ -256,6 +301,12 @@ async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
     let endpoint = std::env::var("ANALYTICS_ENDPOINT")?;
     let token = std::env::var("ANALYTICS_CHAT_TOKEN")?;
     let chat_token = std::env::var("CHAT_API_TOKEN")?;
+    let audit_token = std::env::var("CHAT_AUDIT_TOKEN").unwrap_or_default();
+    if !audit_token.is_empty()
+        && (audit_token.len() < 16 || audit_token == chat_token || audit_token == token)
+    {
+        return Err("稽核 Token 必須獨立且至少16字元".into());
+    }
     let isolated_docker_dev =
         std::env::var("ALLOW_INTERNAL_HTTP_DEV").is_ok_and(|value| value == "true");
     if token.len() < 16
@@ -347,6 +398,15 @@ async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
         )
         .route("/api/v1/ai/agent", axum::routing::post(agent::reply))
         .route("/api/v1/ai/reply", axum::routing::post(openai::reply))
+        .route(
+            "/api/v1/rooms/{id}/join",
+            axum::routing::post(management::join),
+        )
+        .route("/api/v1/me/rooms", get(management::rooms))
+        .route("/api/v1/me/rooms/{id}/members", get(management::members))
+        .route("/api/v1/me/activity", axum::routing::post(audit::mine))
+        .route("/api/v1/audit/activity", axum::routing::post(audit::query))
+        .route("/api/v1/public/rooms", get(public_rooms))
         .route("/api/v1/rooms", get(list_rooms).post(create_room))
         .route("/api/v1/messages", get(list_messages).post(send_message))
         .layer(axum::extract::DefaultBodyLimit::max(65536))
@@ -354,6 +414,7 @@ async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
         .with_state(StateData {
             pool,
             api_token: Arc::from(chat_token),
+            audit_token: Arc::from(audit_token),
             events,
             ai_slots: Arc::new(tokio::sync::Semaphore::new(2)),
             auth_slots: Arc::new(tokio::sync::Semaphore::new(4)),

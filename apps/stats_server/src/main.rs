@@ -38,6 +38,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
         chat_token: Arc::from(chat_token),
         pet_token: Arc::from(pet_token),
         admin_token: Arc::from(admin_token),
+        audit_source: day9_analytics::audit::ChatAuditSource::from_env()?,
         ai_slots: Arc::new(tokio::sync::Semaphore::new(2)),
     });
     let address = std::env::var("ANALYTICS_LISTEN").unwrap_or_else(|_| "127.0.0.1:3100".into());

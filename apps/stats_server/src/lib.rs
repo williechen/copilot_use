@@ -1,5 +1,6 @@
 //! Analytics：認證後持久事件、依 (source_app,event_id) 原子去重、Query API。
 pub mod application;
+pub mod audit;
 pub mod dashboard;
 pub mod grpc;
 mod live;
@@ -28,6 +29,7 @@ pub struct AnalyticsState {
     pub chat_token: Arc<str>,
     pub pet_token: Arc<str>,
     pub admin_token: Arc<str>,
+    pub audit_source: Option<audit::ChatAuditSource>,
     pub ai_slots: Arc<tokio::sync::Semaphore>,
 }
 
@@ -161,7 +163,9 @@ pub fn build_app(state: AnalyticsState) -> Router {
     let grpc = grpc::routes(state.clone());
     Router::new()
         .route("/", get(dashboard::dashboard))
+        .route("/admin", get(dashboard::management))
         .route("/healthz", get(health))
+        .route("/api/v1/audit/chat", post(audit::query))
         .route("/api/v1/events/stream", get(live::updates))
         .route("/api/v1/insights", post(insights::generate))
         .route("/api/v1/suggestions", get(insights::list))

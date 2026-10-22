@@ -1,0 +1,63 @@
+{
+  "date": "2026-10-17",
+  "timezone": "Asia/Taipei",
+  "master_notion_page": "https://app.notion.com/p/3f2e51d4509381ddb8a8ce7cb4cd3e60?pvs=204",
+  "master_local_path": "docs/COMMON_LEARNING_RULES.md",
+  "other_teaching_pages": "entry and existing Day index only",
+  "existing_day_pages_preserved": 24,
+  "master_child_entries_preserved": 4,
+  "original_snapshot": "docs/teaching/archive/pre-consolidation-2026-10-17",
+  "notion_archive": "https://app.notion.com/p/3f7e51d4509381faa894d3660c3252f7",
+  "readback_verified": true,
+  "decisions_applied": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "pending_discussion": [],
+  "day_advanced": false,
+  "reference_modified": false,
+  "existing_decisions_reused": {
+    "7": "使用者先前明確指定原生本機、不使用Docker；歷史CI事實保留在工程紀錄",
+    "8": "使用者已確認文章要求→rust_ai_chat實作→copilot_use對應實作→驗證結果"
+  },
+  "evidence_presentation": "current status and evidence links only; complete history in engineering records",
+  "engineering_record": "docs/source-review/teaching-correspondence-2026-10-17.md",
+  "latest_user_revision": {
+    "notion_last_edited_at": "2026-10-16T17:33:29.603Z",
+    "readback_verified": true,
+    "local_mirror_updated": true,
+    "program_modified": false,
+    "pending_clarification": [],
+    "text_findings": [],
+    "notion_user_text_preserved": true,
+    "pet_movement": "手動拖移與可選的自動漫遊並存",
+    "movement_clarification_readback_verified": true,
+    "content_sha256": "8584f4efc0e4cf3b2a4fdadf79895cb98308cd391583a8b4031bad3813a4aa64",
+    "publication_ci_failure_allowed": true,
+    "publication_requires_failure_disclosure": true,
+    "weekly_time": "Saturday 00:00 Asia/Taipei",
+    "schedule_verified": true,
+    "next_weekly_run": "2026-10-24T00:00:00+08:00"
+  },
+  "latest_consistency_pass": {
+    "date": "2026-10-17",
+    "method": "replace outdated assertions and duplicate publication rules; no added conditions",
+    "files": [
+      "docs/FUTURE_WORK.md",
+      "docs/P9_TARGET.md",
+      "docs/teaching/current"
+    ],
+    "current_mirror_day": 14,
+    "next_day": 15,
+    "historical_day13_preserved": true,
+    "notion_master_readback_verified": true,
+    "product_code_changed": false,
+    "reference_modified": false
+  }
+}

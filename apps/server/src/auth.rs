@@ -38,14 +38,7 @@ fn csrf(headers: &HeaderMap) -> Result<(), StatusCode> {
     }
     Ok(())
 }
-pub(super) async fn principal(
-    state: &StateData,
-    headers: &HeaderMap,
-    write: bool,
-) -> Result<Principal, StatusCode> {
-    if authorized(headers, &state.api_token) {
-        return Ok(Principal::Admin);
-    }
+pub(super) fn session_hash(headers: &HeaderMap) -> Result<Vec<u8>, StatusCode> {
     let token = headers
         .get(header::COOKIE)
         .and_then(|v| v.to_str().ok())
@@ -57,13 +50,24 @@ pub(super) async fn principal(
     if token.len() != 64 || !token.bytes().all(|b| b.is_ascii_hexdigit()) {
         return Err(StatusCode::UNAUTHORIZED);
     }
+    Ok(Sha256::digest(token.as_bytes()).to_vec())
+}
+pub(super) async fn principal(
+    state: &StateData,
+    headers: &HeaderMap,
+    write: bool,
+) -> Result<Principal, StatusCode> {
+    if authorized(headers, &state.api_token) {
+        return Ok(Principal::Admin);
+    }
+    let hash = session_hash(headers)?;
     if write {
         csrf(headers)?;
     }
     let user: Option<Uuid> = sqlx::query_scalar(
         "SELECT user_id FROM chat_sessions WHERE token_hash=?1 AND expires_at>unixepoch('subsec')",
     )
-    .bind(Sha256::digest(token.as_bytes()).to_vec())
+    .bind(hash)
     .fetch_optional(&state.pool)
     .await
     .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
@@ -78,7 +82,7 @@ pub(super) async fn room_allowed(
         return Ok(());
     }
     let allowed: bool = sqlx::query_scalar(
-        "SELECT EXISTS(SELECT 1 FROM chat_room_members WHERE room_id=?1 AND user_id=?2)",
+        "SELECT EXISTS(SELECT 1 FROM chat_rooms r WHERE r.id=?1 AND (NOT r.is_private OR EXISTS(SELECT 1 FROM chat_room_members m WHERE m.room_id=r.id AND m.user_id=?2)))",
     )
     .bind(room)
     .bind(principal.user_id())
@@ -106,7 +110,11 @@ fn validate(input: &Credentials) -> Result<(), StatusCode> {
     Ok(())
 }
 // Shared SQLite counters bound sequential abuse across independent Chat processes.
-async fn throttle(state: &StateData, operation: &str, username: &str) -> Result<(), StatusCode> {
+pub(super) async fn throttle(
+    state: &StateData,
+    operation: &str,
+    username: &str,
+) -> Result<(), StatusCode> {
     let mut tx = state
         .pool
         .begin_with("BEGIN IMMEDIATE")
@@ -187,14 +195,15 @@ pub(super) async fn login(
         .try_acquire_owned()
         .map_err(|_| StatusCode::TOO_MANY_REQUESTS)?;
     throttle(&state, "login", &input.username).await?;
+    let username = input.username.clone();
     let row: Option<(Uuid, String)> =
         sqlx::query_as("SELECT id,password_hash FROM chat_users WHERE username=?1")
-            .bind(input.username)
+            .bind(&username)
             .fetch_optional(&state.pool)
             .await
             .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
     let Some((id, hash)) = row else {
-        failed_login(&state.pool).await?;
+        failed_login(&state.pool, &username, None).await?;
         return Err(StatusCode::UNAUTHORIZED);
     };
     let verified = tokio::task::spawn_blocking(move || {
@@ -207,7 +216,7 @@ pub(super) async fn login(
     .await
     .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
     if !verified {
-        failed_login(&state.pool).await?;
+        failed_login(&state.pool, &username, Some(id)).await?;
         return Err(StatusCode::UNAUTHORIZED);
     }
     let token = format!("{}{}", Uuid::new_v4().simple(), Uuid::new_v4().simple());
@@ -218,7 +227,20 @@ pub(super) async fn login(
         .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
     sqlx::query("DELETE FROM chat_sessions WHERE token_hash IN(SELECT token_hash FROM chat_sessions WHERE expires_at<=unixepoch('subsec') LIMIT 1000)").execute(&mut *tx).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
     sqlx::query("INSERT INTO chat_sessions(token_hash,user_id,expires_at) VALUES (?1,?2,unixepoch('subsec')+86400)").bind(Sha256::digest(token.as_bytes()).to_vec()).bind(id).execute(&mut *tx).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
-    auth_event(&mut tx, "login.succeeded").await?;
+    let event_id = auth_event(&mut tx, "login.succeeded").await?;
+    super::audit::record(
+        &mut tx,
+        super::audit::Entry {
+            id: event_id,
+            kind: "login.succeeded",
+            user_id: Some(id),
+            username: &username,
+            room_id: None,
+            room_name: None,
+            target_username: None,
+        },
+    )
+    .await?;
     tx.commit()
         .await
         .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
@@ -241,7 +263,7 @@ pub(super) async fn logout(
     State(state): State<StateData>,
     headers: HeaderMap,
 ) -> Result<impl IntoResponse, StatusCode> {
-    let _ = principal(&state, &headers, true).await?;
+    let actor = principal(&state, &headers, true).await?;
     if let Some(token) = headers
         .get(header::COOKIE)
         .and_then(|v| v.to_str().ok())
@@ -261,7 +283,26 @@ pub(super) async fn logout(
             .await
             .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
         if result.rows_affected() == 1 {
-            auth_event(&mut tx, "logout.succeeded").await?;
+            let event_id = auth_event(&mut tx, "logout.succeeded").await?;
+            let username: Option<String> =
+                sqlx::query_scalar("SELECT username FROM chat_users WHERE id=?1")
+                    .bind(actor.user_id())
+                    .fetch_optional(&mut *tx)
+                    .await
+                    .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
+            super::audit::record(
+                &mut tx,
+                super::audit::Entry {
+                    id: event_id,
+                    kind: "logout.succeeded",
+                    user_id: actor.user_id(),
+                    username: username.as_deref().unwrap_or(""),
+                    room_id: None,
+                    room_name: None,
+                    target_username: None,
+                },
+            )
+            .await?;
         }
         tx.commit()
             .await
@@ -287,6 +328,7 @@ pub(super) async fn invite(
     Json(input): Json<Invitation>,
 ) -> Result<StatusCode, StatusCode> {
     let actor = principal(&state, &headers, true).await?;
+    room_allowed(&state, actor, &input.room_id).await?;
     if let Principal::User(id) = actor {
         let owner: Option<Uuid> = sqlx::query_scalar("SELECT owner_id FROM chat_rooms WHERE id=?1")
             .bind(&input.room_id)
@@ -304,23 +346,48 @@ pub(super) async fn invite(
         .await
         .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?
         .ok_or(StatusCode::NOT_FOUND)?;
+    let mut tx = state
+        .pool
+        .begin_with("BEGIN IMMEDIATE")
+        .await
+        .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
     sqlx::query(
         "INSERT INTO chat_room_members(room_id,user_id) VALUES (?1,?2) ON CONFLICT DO NOTHING",
     )
-    .bind(input.room_id)
+    .bind(&input.room_id)
     .bind(user)
-    .execute(&state.pool)
+    .execute(&mut *tx)
     .await
     .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
+    tx.commit()
+        .await
+        .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
     Ok(StatusCode::NO_CONTENT)
 }
 
-async fn failed_login(pool: &sqlx::SqlitePool) -> Result<(), StatusCode> {
+async fn failed_login(
+    pool: &sqlx::SqlitePool,
+    username: &str,
+    user_id: Option<Uuid>,
+) -> Result<(), StatusCode> {
     let mut tx = pool
         .begin_with("BEGIN IMMEDIATE")
         .await
         .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
-    auth_event(&mut tx, "login.failed").await?;
+    let event_id = auth_event(&mut tx, "login.failed").await?;
+    super::audit::record(
+        &mut tx,
+        super::audit::Entry {
+            id: event_id,
+            kind: "login.failed",
+            user_id,
+            username,
+            room_id: None,
+            room_name: None,
+            target_username: None,
+        },
+    )
+    .await?;
     tx.commit()
         .await
         .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
@@ -329,9 +396,10 @@ async fn failed_login(pool: &sqlx::SqlitePool) -> Result<(), StatusCode> {
 async fn auth_event(
     tx: &mut sqlx::Transaction<'_, sqlx::Sqlite>,
     kind: &str,
-) -> Result<(), StatusCode> {
+) -> Result<Uuid, StatusCode> {
+    let id = Uuid::new_v4();
     sqlx::query("INSERT INTO chat_outbox(event_id,schema_version,source_app,event_type,traceparent)VALUES(?1,1,'web_chat',?2,?3)")
-        .bind(Uuid::new_v4()).bind(kind).bind(copilot_telemetry::outgoing_headers().get("traceparent"))
+        .bind(id).bind(kind).bind(copilot_telemetry::outgoing_headers().get("traceparent"))
         .execute(&mut **tx).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
-    Ok(())
+    Ok(id)
 }

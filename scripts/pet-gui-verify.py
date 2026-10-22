@@ -3,6 +3,8 @@
 import time, json, os, pathlib, subprocess, tempfile, sys, threading, argparse, hashlib, shutil, sqlite3, tomllib
 from http.server import ThreadingHTTPServer,BaseHTTPRequestHandler
 from contextlib import closing
+from versioning import next_patch
+UPDATE_VERSION=next_patch()
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 REPORT = ROOT / "target/pet-gui-validation.json"
 if sys.platform.startswith("linux") and not os.environ.get("DISPLAY"):
@@ -11,11 +13,14 @@ parser=argparse.ArgumentParser()
 parser.add_argument('--executable',type=pathlib.Path)
 parser.add_argument('--update-package',type=pathlib.Path)
 parser.add_argument('--expected-executable',type=pathlib.Path)
+parser.add_argument('--functional-only',action='store_true')
 parser.add_argument('--live-ai',action='store_true')
 parser.add_argument('--live-image',action='store_true')
 parser.add_argument('--analytics',action='store_true')
 parser.add_argument('--updater',action='store_true')
 options=parser.parse_args()
+if options.functional_only and (options.live_ai or options.live_image):
+    raise SystemExit('週六功能模式禁止 AI 驗證選項')
 if not options.executable:
     if not (ROOT/'apps/desktop_pet/generated-icons/icon.ico').exists():
         subprocess.run(['node','scripts/build-pet-ui.mjs'],cwd=ROOT,check=True)
@@ -49,10 +54,15 @@ Set-Acl -LiteralPath $env:COPILOT_GUI_FIXTURE_DIRECTORY -AclObject $acl
     sample = files / "sample.txt"
     sample.write_text("disposable GUI verification fixture")
     sample.chmod(0o600)
+    copy=files / "sample-copy.txt"
+    copy.write_bytes(sample.read_bytes())
+    copy.chmod(0o600)
     second=files / "second.txt"
     second.write_text("disposable UI confirmation fixture")
     second.chmod(0o600)
     env = os.environ.copy()
+    env["PET_GUI_TEST_UPDATE_VERSION"]=UPDATE_VERSION
+    env["PET_GUI_TEST_FUNCTIONAL_ONLY"]="true" if options.functional_only else "false"
     live=options.live_ai or options.live_image
     if not live:env.pop("OPENAI_API_KEY", None)
     if live and not env.get("OPENAI_API_KEY"):raise SystemExit("OPENAI_API_KEY not configured")
@@ -87,19 +97,19 @@ Set-Acl -LiteralPath $env:COPILOT_GUI_FIXTURE_DIRECTORY -AclObject $acl
             expected_updated_hash=hashlib.sha256((options.expected_executable or options.update_package).read_bytes()).hexdigest()
             if sys.platform=='win32':
                 fixture_version=subprocess.check_output([options.expected_executable.resolve(),'--version'],cwd=ROOT,env=env,timeout=30,text=True,encoding='utf-8').strip()
-                if fixture_version!='0.1.1':raise SystemExit('Windows update fixture version differs: '+repr(fixture_version))
+                if fixture_version!=UPDATE_VERSION:raise SystemExit('Windows update fixture version differs: '+repr(fixture_version))
             env['PET_GUI_TEST_INSTALL_UPDATE']='true'
         else:payload.write_bytes(b'isolated updater signature fixture')
         subprocess.run(['cargo','tauri','signer','generate','--ci','--password','','--write-keys',str(key)],check=True,cwd=ROOT,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
         key.chmod(0o600)
-        subprocess.run(['cargo','tauri','signer','sign','--private-key-path',str(key),'--password','','--app-version','0.1.1',str(payload)],check=True,cwd=ROOT,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
+        subprocess.run(['cargo','tauri','signer','sign','--private-key-path',str(key),'--password','','--app-version',UPDATE_VERSION,str(payload)],check=True,cwd=ROOT,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
         signature=payload.with_suffix('.bin.sig').read_text(encoding="utf-8").strip();public=key.with_suffix('.key.pub').read_text(encoding="utf-8").strip();requests=[]
         class UpdateServer(BaseHTTPRequestHandler):
             def log_message(self,*_):pass
             def do_GET(self):
                 if self.path=='/manifest':
                     requests.append(self.path);mode=len(requests)
-                    value={'version':'0.1.2' if mode==2 else '0.1.1','url':f'http://127.0.0.1:{self.server.server_port}/'+('tampered' if mode==3 else 'package'),'signature':signature}
+                    value={'version':next_patch(UPDATE_VERSION) if mode==2 else UPDATE_VERSION,'url':f'http://127.0.0.1:{self.server.server_port}/'+('tampered' if mode==3 else 'package'),'signature':signature}
                     if mode>=4:value['url']='http://192.0.2.1/package'
                     data=json.dumps(value).encode();kind='application/json'
                 elif self.path=='/package':data=payload.read_bytes();kind='application/octet-stream'
@@ -128,7 +138,7 @@ Set-Acl -LiteralPath $env:COPILOT_GUI_FIXTURE_DIRECTORY -AclObject $acl
                 # processes and replaces it. Cold-start only the expected bytes.
                 if actual_updated_hash==expected_updated_hash:
                     cold_version=subprocess.check_output(cold_command,env=env,cwd=ROOT,timeout=30,text=True,encoding='utf-8').strip()
-                    if cold_version=='0.1.1':break
+                    if cold_version==UPDATE_VERSION:break
             except (OSError,subprocess.SubprocessError):pass
             if time.monotonic()>=deadline:
                 diagnostics={'error':'Signed update did not install expected bytes and cold version','expected_sha256':expected_updated_hash,'base_sha256':base_executable_hash,'actual_sha256':actual_updated_hash,'cold_version':cold_version,'platform':sys.platform,'installer_activity':installer_activity}
@@ -157,7 +167,7 @@ Set-Acl -LiteralPath $env:COPILOT_GUI_FIXTURE_DIRECTORY -AclObject $acl
         if result.get('before_snapshot') and not any(p.parent.name==result['before_snapshot'] for p in manifests):raise SystemExit('Actual pre-install snapshot receipt missing')
         result['success']=True
         result['update_install']={'sha256':actual_updated_hash,'cold_version':cold_version,'sqlite_integrity':'ok','pets_preserved':True,'pre_update_snapshot':True,'platform':sys.platform}
-        result['message']='PASS: complete pre-install GUI, verified signature, actual update bytes, cold 0.1.1, SQLite and snapshot preservation'
+        result['message']=f'PASS: complete pre-install GUI, verified signature, actual update bytes, cold {UPDATE_VERSION}, SQLite and snapshot preservation'
     if result.get('success'):
         with closing(sqlite3.connect(directory/'state/pet.sqlite')) as database:rows=database.execute('SELECT id,profile FROM pets').fetchall()
         for identity,profile in rows:

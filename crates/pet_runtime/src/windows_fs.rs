@@ -590,6 +590,29 @@ impl PinnedRoot {
             .filter_map(|name| self.preview(&name).ok())
             .collect())
     }
+    pub(crate) fn sha256(&self, expected: &FilePreview) -> Result<[u8; 32], CleanupError> {
+        secure(&self.directory, false)?;
+        validate_name(&expected.file_name)?;
+        let mut file = open_at(
+            &self.directory,
+            &expected.file_name,
+            false,
+            false,
+            false,
+            false,
+        )?;
+        if preview(&file, &expected.file_name)? != *expected {
+            return Err(CleanupError::Changed);
+        }
+        let digest = crate::duplicates::hash_contents(&mut file, expected.size_bytes)?;
+        if preview(&file, &expected.file_name)? != *expected
+            || self.preview(&expected.file_name)? != *expected
+        {
+            return Err(CleanupError::Changed);
+        }
+        secure(&self.directory, false)?;
+        Ok(digest)
+    }
     pub fn quarantine(&self, expected: &FilePreview) -> Result<CleanupReceipt, CleanupError> {
         validate_name(&expected.file_name)?;
         let directory = self.trash_directory()?;

@@ -1,0 +1,12 @@
+--- a/.github/workflows/persistence.yml
++++ b/.github/workflows/persistence.yml
+@@ -50,5 +50,8 @@
+       - name: Test persistence
+         run: DATABASE_URL="$CHAT_DATABASE_URL" cargo test --locked -p persistence
+ 
++      - name: Test all Analytics unit and PostgreSQL summary contracts
++        run: DATABASE_URL="$ANALYTICS_DATABASE_URL" cargo test --locked -p stats-server --features postgres-integration --lib
++
+       - name: Test stats server with PostgreSQL
+         run: DATABASE_URL="$ANALYTICS_DATABASE_URL" cargo test --locked -p stats-server --features postgres-integration --test postgres_event_store
+\ No newline at end of file

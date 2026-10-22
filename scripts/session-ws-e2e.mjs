@@ -9,7 +9,7 @@ const credentials={username:name,password:'isolated-test-password-'+crypto.rando
 assert.equal((await call('/api/v1/auth/register',credentials)).status,201);
 const login=await call('/api/v1/auth/login',credentials);assert.equal(login.status,200);
 const cookie=login.headers.get('set-cookie').split(';')[0];
-assert.equal((await call('/api/v1/rooms',{id:room,name:room},cookie)).status,201);
+assert.equal((await call('/api/v1/rooms',{id:room,name:room,is_private:true},cookie)).status,201);
 const clients=[];
 const until=async fn=>{const limit=Date.now()+10000;while(!fn()){if(Date.now()>limit)throw Error('session socket timed out');await new Promise(r=>setTimeout(r,25));}};
 async function connect(endpoint){

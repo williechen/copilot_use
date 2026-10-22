@@ -98,7 +98,7 @@ pub(super) async fn reply(
     let (sender, receiver) = tokio::sync::mpsc::channel(32);
     tokio::spawn(async move {
         let _permit = permit;
-        if produce(response, &sender, &state, &input.room_id, &model)
+        if produce(response, &sender, &state, &headers, &input.room_id, &model)
             .await
             .is_err()
         {
@@ -117,6 +117,7 @@ async fn produce(
     mut response: reqwest::Response,
     sender: &tokio::sync::mpsc::Sender<Result<Event, Infallible>>,
     state: &StateData,
+    headers: &HeaderMap,
     room_id: &str,
     model: &str,
 ) -> Result<(), ()> {
@@ -147,10 +148,7 @@ async fn produce(
                     if output.trim().is_empty() {
                         return Err(());
                     }
-                    let id = ChatWriter::new(state.pool.clone())
-                        .persist_as(room_id, &output, "ai", Some(model))
-                        .await
-                        .map_err(|_| ())?;
+                    let id = persist_completed(state, headers, room_id, &output, model).await?;
                     sender
                         .send(Ok(Event::default()
                             .event("done")
@@ -166,3 +164,36 @@ async fn produce(
         }
     }
 }
+
+async fn persist_completed(
+    state: &StateData,
+    headers: &HeaderMap,
+    room: &str,
+    output: &str,
+    model: &str,
+) -> Result<uuid::Uuid, ()> {
+    // 外部串流期間權限可能已撤銷；一般使用者的檢查與寫入必須共用寫入交易。
+    let actor = auth::principal(state, headers, true)
+        .await
+        .map_err(|_| ())?;
+    let writer = ChatWriter::new(state.pool.clone());
+    match actor {
+        auth::Principal::Admin => writer.persist_as(room, output, "ai", Some(model)).await,
+        auth::Principal::User(user) => {
+            writer
+                .persist_session_reply(
+                    room,
+                    output,
+                    model,
+                    user,
+                    &auth::session_hash(headers).map_err(|_| ())?,
+                )
+                .await
+        }
+    }
+    .map_err(|_| ())
+}
+
+#[cfg(test)]
+#[path = "openai/tests.rs"]
+mod tests;

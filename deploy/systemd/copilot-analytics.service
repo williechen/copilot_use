@@ -1,0 +1,28 @@
+[Unit]
+Description=Copilot analytics
+After=network.target
+
+[Service]
+Type=simple
+DynamicUser=yes
+WorkingDirectory=/opt/copilot/current
+EnvironmentFile=/etc/copilot/analytics.env
+ExecStart=/opt/copilot/current/bin/day9-analytics
+Restart=on-failure
+RestartSec=5
+StateDirectory=copilot-analytics
+UMask=0077
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+
+[Install]
+WantedBy=multi-user.target
