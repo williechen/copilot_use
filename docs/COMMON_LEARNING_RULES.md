@@ -14,6 +14,18 @@
 
 發布每篇前再取 main SHA 及必要規則版本；來源 SHA 改變就重建所有尚未發布草稿，規則改變則重新核對、必要時重建。已完整發布讀回的 Day 不自動撤銷。記錄規則版本、文章 commit／blob SHA、全文 SHA256 與讀回時間、GitHub 規則 blob／commit SHA、兩庫來源 SHA 及讀取時間。rust\_ai\_chat 全庫唯讀，教學程式由使用者套用；copilot\_use 產品整合與教學分開。
 
+#### 既定技術分層與 Leptos UI 強制規則（2026-10-22 確認）
+
+本規則是**沿用原本架構、修正教學偏差**，不是重新選型或變更產品架構；與 P9_TARGET、SYSTEM_ARCHITECTURE、UI_ALIGNMENT_REQUIREMENTS 並行，發生矛盾應先核對最新真實程式與規則正本，不得跳過既有呼叫鏈。
+
+- **Leptos** 是三案適用的 UI／頁面元件框架：Chat 使用既有 Leptos SSR／Hydration 與 Router；Pet 維持 Leptos CSR + Tauri；Analytics 的正式登入、修改密碼及管理後台頁面應逐步採用 Leptos 元件、表單、Signals／Actions／Resources／Router，而不是以 Axum `Html(...)`／`Html(format!(...))` 完整字串頁面作為新 UI Green。
+- **Axum** 負責 HTTP API、WebSocket、Routing／Middleware、Cookie、Session、安全性檢查與 ACL。保留既有可運作的 API／Session／認證契約；逐步將頁面呈現從 Axum HTML Handler 分離。Axum 可處理 HTTP response，但不得藉此取代原有 Leptos UI。
+- **Application／Domain** 負責使用案例、流程、業務與領域規則，UI 不直接存取資料庫或偷渡授權邏輯。**SQLx** 在各自的持久化 Adapter 處理資料查詢、交易與 migration；Chat／Pet SQLite 與 Analytics PostgreSQL 維持隔離。Pet 的 Tauri IPC 只負責原生橋接與視窗操作，配合 Leptos CSR。
+- 往後每一 Day 的 Red → 完整最小 Green → Refactor 須覆蓋真實 `Leptos UI → Axum HTTP/API 或 Tauri IPC → Application/Domain → SQLx Adapter` 的該日最小可操作切片。沒有真實 UI 呼叫端、只有 Axum 回傳 HTML、API/helper 單獨成功或假設性頁面者，不能宣稱完成 Leptos UI 功能；測試未跑與未驗收仍須明記。
+- **先核對已發布 Day27，再從最新 next_day 銜接，不跳號**：下次每日教學先逐案讀回 Day27 正文、最新 `rust_ai_chat/main`、`copilot_use/main`、規則、manifest、索引及實際 UI／HTTP／IPC／DB 呼叫鏈，辨識 Chat／Analytics Axum HTML 與既有 Leptos 的架構偏差及 Pet 現況。必要更正須在後續對應 Day 的 Red／完整 Green／Refactor 之後記錄，或走保留原 commit／blob／SHA256 的版本化勘誤流程；不得覆寫、抹除 Day27 原始 GitHub 證據，亦不得將核對／修訂自動計為新 Day。對原文已完成的功能不能假裝尚未完成或重教。
+- 新文章 Day **僅**取 `docs/learning-state.json` 當時各案 `next_day`（本次規則修改時三案均為 28，僅為核對快照、不是寫死後續 Day）；確認 N 的文章與同步狀態沒有完成證據才依既有獨立 commit／全文讀回／條件同步流程推進 N→N+1。絕不因「從 Day27 銜接」而回退至 27 或跳過 28。Day25（含）以前封存、Day26／Day27 已發布文章與歷史證據不因本規則更新回寫。
+- 每日教學 CI 的真實測試來源**只採 `williechen/rust_ai_chat` Actions 精確 workflow／job／SHA／覆蓋**；`copilot_use` 的分支、commit、blob、SHA256 僅驗證規則、文章與進度交付，不得引用其 Actions 冒充教學 Green／產品驗收。保留程式套用、CI、DB／GUI 與功能驗收互相獨立的認定。
+
 #### 基本可操作流程優先
 
 每日選題必須先核對最新 <code>rust_ai_chat/main</code> 與對應 <code>copilot_use</code> 真正入口、可操作 UI、HTTP/IPC、Session/權限、SQLite/PostgreSQL 持久化和對應 CI；找出使用者操作流程中最早缺失的必要環節，先教／補最小可套用、已連至真實呼叫者的 Red→Green。不能因 API、helper、單元測試、HTTP 狀態碼、視窗動畫已存在，就跳過前面的註冊、登入或寵物建立。若早期流程尚未可用，不優先教後段的歷史訊息、漫遊細節或登入限流細節；未完成的同一功能跨日延續，依最新程式重新判斷，不預排 Day。
