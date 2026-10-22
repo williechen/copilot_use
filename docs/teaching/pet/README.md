@@ -54,7 +54,7 @@
 
 本機 IPC 可用於測試實際能力，使用全新測試資料與授權目錄；本入口不要求重跑付費 AI。實作與驗證步驟看對應 Day，不將專用測試收據當成私人檔案已處理。
 
-[產品操作設定](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/DEPLOYMENT.md) · [產品未來清單](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/FUTURE_WORK.md)
+[產品操作設定](https://github.com/williechen/copilot_use/blob/main/docs/DEPLOYMENT.md) · [產品未來清單](https://github.com/williechen/copilot_use/blob/main/docs/FUTURE_WORK.md)
 
 
 ## 目前教學

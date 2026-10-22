@@ -64,7 +64,7 @@
     "delivery": {
       "version": "github-only-v1",
       "repository": "williechen/copilot_use",
-      "branch": "teaching/rust-ai-chat-alignment",
+      "branch": "main",
       "canonical_rules": "docs/COMMON_LEARNING_RULES.md",
       "article_root": "docs/teaching/daily",
       "article_path": "docs/teaching/daily/day-NN/{project}.md",
@@ -73,7 +73,7 @@
       "notion_history": "migrate exact originals, verify GitHub full readback, then move three-project teaching subtree to recoverable Trash; no permanent deletion",
       "commit_policy": "one independent article commit and push per project/Day; never batch multiple projects or days",
       "success_gate": [
-        "article commit pushed to teaching branch",
+        "article commit pushed to main",
         "full exact-commit GitHub readback: all sections and code; blob SHA and SHA256 evidence",
         "conditional expected-N to N+1 state+manifest/index synchronization on latest branch/blob SHA",
         "state and manifest full readback"
@@ -439,7 +439,7 @@
     "delivery": {
       "version": "github-only-v1",
       "repository": "williechen/copilot_use",
-      "branch": "teaching/rust-ai-chat-alignment",
+      "branch": "main",
       "canonical_rules": "docs/COMMON_LEARNING_RULES.md",
       "article_root": "docs/teaching/daily",
       "article_path": "docs/teaching/daily/day-NN/{project}.md",
@@ -448,7 +448,7 @@
       "notion_history": "migrate exact originals, verify GitHub full readback, then move three-project teaching subtree to recoverable Trash; no permanent deletion",
       "commit_policy": "one independent article commit and push per project/Day; never batch multiple projects or days",
       "success_gate": [
-        "article commit pushed to teaching branch",
+        "article commit pushed to main",
         "full exact-commit GitHub readback: all sections and code; blob SHA and SHA256 evidence",
         "conditional expected-N to N+1 state+manifest/index synchronization on latest branch/blob SHA",
         "state and manifest full readback"
@@ -760,7 +760,7 @@
     "delivery": {
       "version": "github-only-v1",
       "repository": "williechen/copilot_use",
-      "branch": "teaching/rust-ai-chat-alignment",
+      "branch": "main",
       "canonical_rules": "docs/COMMON_LEARNING_RULES.md",
       "article_root": "docs/teaching/daily",
       "article_path": "docs/teaching/daily/day-NN/{project}.md",
@@ -769,7 +769,7 @@
       "notion_history": "migrate exact originals, verify GitHub full readback, then move three-project teaching subtree to recoverable Trash; no permanent deletion",
       "commit_policy": "one independent article commit and push per project/Day; never batch multiple projects or days",
       "success_gate": [
-        "article commit pushed to teaching branch",
+        "article commit pushed to main",
         "full exact-commit GitHub readback: all sections and code; blob SHA and SHA256 evidence",
         "conditional expected-N to N+1 state+manifest/index synchronization on latest branch/blob SHA",
         "state and manifest full readback"
@@ -778,7 +778,8 @@
       "frozen_through_day": 25,
       "notion_export_root": "docs/teaching/history/evidence/notion-export/2026-10-22"
     },
-    "notion_role": "historical exported originals only; teaching subtree moved to recoverable Trash after verified migration"
+    "notion_role": "historical exported originals only; teaching subtree moved to recoverable Trash after verified migration",
+    "publication_branch": "main"
   },
   "confirmed_requirements_2026_10_17": {
     "status": "requirements_confirmed_not_implementation_or_acceptance",
@@ -2744,6 +2745,8 @@
       "articles": "docs/teaching/history/ARTICLES.json",
       "original_bytes_preserved": true
     },
-    "source_path_resolution": "Resolve historical paths via history/PATH_MAP.json; historical queue and source evidence remain unchanged."
+    "source_path_resolution": "Resolve historical paths via history/PATH_MAP.json; historical queue and source evidence remain unchanged.",
+    "publication_branch": "main",
+    "branch_note": "Former teaching branch merged into main and deleted; do not recreate."
   }
 }

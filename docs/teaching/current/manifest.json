@@ -699,7 +699,7 @@
   "delivery_policy": {
     "version": "github-only-v1",
     "repository": "williechen/copilot_use",
-    "branch": "teaching/rust-ai-chat-alignment",
+    "branch": "main",
     "canonical_rules": "docs/COMMON_LEARNING_RULES.md",
     "article_root": "docs/teaching/daily",
     "article_path": "docs/teaching/daily/day-NN/{project}.md",
@@ -708,7 +708,7 @@
     "notion_history": "migrate exact originals, verify GitHub full readback, then move three-project teaching subtree to recoverable Trash; no permanent deletion",
     "commit_policy": "one independent article commit and push per project/Day; never batch multiple projects or days",
     "success_gate": [
-      "article commit pushed to teaching branch",
+      "article commit pushed to main",
       "full exact-commit GitHub readback: all sections and code; blob SHA and SHA256 evidence",
       "conditional expected-N to N+1 state+manifest/index synchronization on latest branch/blob SHA",
       "state and manifest full readback"
@@ -743,6 +743,13 @@
   "document_consolidation": {
     "date": "2026-10-22",
     "base_commit": "8d82f1eb658cc0305eff90792870e0889ad9e8eb",
+    "new_day_published": false,
+    "next_day_advanced": false
+  },
+  "publication_branch": "main",
+  "branch_alignment": {
+    "observed_base_commit": "5a8516b40176b0d88e71a74a05251d3e4ddecf2f",
+    "former_branch_merged_and_deleted": true,
     "new_day_published": false,
     "next_day_advanced": false
   }

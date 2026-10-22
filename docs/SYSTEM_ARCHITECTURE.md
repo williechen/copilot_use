@@ -51,4 +51,4 @@ Chat／Pet 各自持久化訊息或真實操作結果及 Outbox → gRPC／Proto
 
 Dashboard 以 HTTP 查詢最新聚合；SSE `/api/v1/events/stream` 通知資料版本改變。每次連線／重連都觸發重新查詢，PostgreSQL 為唯一資料來源。
 
-本輪參考庫新增的chat_action_log尚無runtime writer，NULL主鍵及任意操作者可插入；候選僅修主鍵，完整身分／稽核仍待接線。P0資料模型按功能調整，並以實際操作、授權、保存及升級驗證。
+稽核資料必須由真實操作與已驗證的操作者身分寫入，資料模型按功能調整並驗證授權、保存與升級；實作現況依統一進度與匹配 SHA 的證據判定。原本特定來源的診斷保留於 [歷史註記](teaching/history/evidence/2026-10-22-article-scan/source-notes.md)。

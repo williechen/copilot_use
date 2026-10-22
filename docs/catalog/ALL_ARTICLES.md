@@ -1,14 +1,15 @@
 # 全部文章清單
 
-[文件總入口](../README.md) · [歷史文章與原始封存證據](../teaching/history/README.md)
+[儲存庫首頁](../../README.md) · [文件總入口](../README.md) · [逐檔掃描結果](ARTICLE_SCAN.md)
 
-| 類別 | 文章 |
+| 用途 | 文章 |
 | --- | --- |
 | 現行文件／入口 | [docs/ANALYTICS_TRANSPORT.md](../ANALYTICS_TRANSPORT.md) |
 | 現行文件／入口 | [docs/COMMON_LEARNING_RULES.md](../COMMON_LEARNING_RULES.md) |
 | 現行文件／入口 | [docs/DEPLOYMENT.md](../DEPLOYMENT.md) |
 | 現行文件／入口 | [docs/FULL_SOURCE_REVIEW.md](../FULL_SOURCE_REVIEW.md) |
 | 現行文件／入口 | [docs/FUTURE_WORK.md](../FUTURE_WORK.md) |
+| 現行文件／入口 | [docs/GITHUB_PET_UPDATES.md](../GITHUB_PET_UPDATES.md) |
 | 現行文件／入口 | [docs/LOCAL_VALIDATION.md](../LOCAL_VALIDATION.md) |
 | 現行文件／入口 | [docs/P9_TARGET.md](../P9_TARGET.md) |
 | 現行文件／入口 | [docs/README.md](../README.md) |
@@ -20,7 +21,10 @@
 | 現行文件／入口 | [docs/TEACHING_ALIGNMENT.md](../TEACHING_ALIGNMENT.md) |
 | 現行文件／入口 | [docs/TEACHING_FORMAT.md](../TEACHING_FORMAT.md) |
 | 現行文件／入口 | [docs/UI_ALIGNMENT_REQUIREMENTS.md](../UI_ALIGNMENT_REQUIREMENTS.md) |
+| 現行文件／入口 | [docs/USER_JOURNEYS.md](../USER_JOURNEYS.md) |
 | 現行文件／入口 | [docs/catalog/ALL_ARTICLES.md](ALL_ARTICLES.md) |
+| 現行文件／入口 | [docs/catalog/ARTICLE_SCAN.md](ARTICLE_SCAN.md) |
+| 現行文件／入口 | [docs/catalog/CONSOLIDATION.md](CONSOLIDATION.md) |
 | 現行文件／入口 | [docs/requirements/AUTHENTICATION.md](../requirements/AUTHENTICATION.md) |
 | 現行文件／入口 | [docs/requirements/USER_FLOWS.md](../requirements/USER_FLOWS.md) |
 | 現行文件／入口 | [docs/source-review/DAY12_CI_ENVIRONMENT.md](../source-review/DAY12_CI_ENVIRONMENT.md) |
@@ -29,8 +33,21 @@
 | 現行文件／入口 | [docs/source-review/configuration-contracts.md](../source-review/configuration-contracts.md) |
 | 現行文件／入口 | [docs/source-review/data-flow-review.md](../source-review/data-flow-review.md) |
 | 現行文件／入口 | [docs/source-review/interface-catalog.md](../source-review/interface-catalog.md) |
+| 現行文件／入口 | [docs/source-review/teaching-correspondence-2026-10-17.md](../source-review/teaching-correspondence-2026-10-17.md) |
 | 現行文件／入口 | [docs/teaching/README.md](../teaching/README.md) |
 | 現行文件／入口 | [docs/teaching/analytics/README.md](../teaching/analytics/README.md) |
+| 歷史原文／證據 | [docs/teaching/archive/day-13/ANALYTICS.md](../teaching/archive/day-13/ANALYTICS.md) |
+| 歷史原文／證據 | [docs/teaching/archive/day-13/CHAT.md](../teaching/archive/day-13/CHAT.md) |
+| 歷史原文／證據 | [docs/teaching/archive/day-13/PET.md](../teaching/archive/day-13/PET.md) |
+| 歷史原文／證據 | [docs/teaching/archive/day-13/README.md](../teaching/archive/day-13/README.md) |
+| 歷史原文／證據 | [docs/teaching/archive/pre-alignment-2026-10-17/FUTURE_WORK.md](../teaching/archive/pre-alignment-2026-10-17/FUTURE_WORK.md) |
+| 歷史原文／證據 | [docs/teaching/archive/pre-alignment-2026-10-17/P9_TARGET.md](../teaching/archive/pre-alignment-2026-10-17/P9_TARGET.md) |
+| 歷史原文／證據 | [docs/teaching/archive/pre-consolidation-2026-10-17/COMMON_LEARNING_RULES.md](../teaching/archive/pre-consolidation-2026-10-17/COMMON_LEARNING_RULES.md) |
+| 歷史原文／證據 | [docs/teaching/archive/pre-consolidation-2026-10-17/TEACHING_FORMAT.md](../teaching/archive/pre-consolidation-2026-10-17/TEACHING_FORMAT.md) |
+| 歷史原文／證據 | [docs/teaching/archive/pre-consolidation-2026-10-17/notion-0.md](../teaching/archive/pre-consolidation-2026-10-17/notion-0.md) |
+| 歷史原文／證據 | [docs/teaching/archive/pre-consolidation-2026-10-17/notion-1.md](../teaching/archive/pre-consolidation-2026-10-17/notion-1.md) |
+| 歷史原文／證據 | [docs/teaching/archive/pre-consolidation-2026-10-17/notion-2.md](../teaching/archive/pre-consolidation-2026-10-17/notion-2.md) |
+| 歷史原文／證據 | [docs/teaching/archive/pre-consolidation-2026-10-17/notion-3.md](../teaching/archive/pre-consolidation-2026-10-17/notion-3.md) |
 | 現行文件／入口 | [docs/teaching/chat/README.md](../teaching/chat/README.md) |
 | 現行文件／入口 | [docs/teaching/current/ANALYTICS_ENTRY.md](../teaching/current/ANALYTICS_ENTRY.md) |
 | 現行文件／入口 | [docs/teaching/current/CHAT_ENTRY.md](../teaching/current/CHAT_ENTRY.md) |
@@ -125,10 +142,13 @@
 | 歷史原文／證據 | [docs/teaching/history/day-13/README.md](../teaching/history/day-13/README.md) |
 | 歷史原文／證據 | [docs/teaching/history/day-13/analytics/README.md](../teaching/history/day-13/analytics/README.md) |
 | 歷史原文／證據 | [docs/teaching/history/day-13/analytics/notion/3fae51d4509381808a9cd813423d52d1.md](../teaching/history/day-13/analytics/notion/3fae51d4509381808a9cd813423d52d1.md) |
+| 歷史原文／證據 | [docs/teaching/history/day-13/analytics/notion/merge-5a8516b-3fae51d4509381808a9cd813423d52d1.md](../teaching/history/day-13/analytics/notion/merge-5a8516b-3fae51d4509381808a9cd813423d52d1.md) |
 | 歷史原文／證據 | [docs/teaching/history/day-13/chat/README.md](../teaching/history/day-13/chat/README.md) |
 | 歷史原文／證據 | [docs/teaching/history/day-13/chat/notion/3fae51d4509381e499e5e02cfba58336.md](../teaching/history/day-13/chat/notion/3fae51d4509381e499e5e02cfba58336.md) |
+| 歷史原文／證據 | [docs/teaching/history/day-13/chat/notion/merge-5a8516b-3fae51d4509381e499e5e02cfba58336.md](../teaching/history/day-13/chat/notion/merge-5a8516b-3fae51d4509381e499e5e02cfba58336.md) |
 | 歷史原文／證據 | [docs/teaching/history/day-13/pet/README.md](../teaching/history/day-13/pet/README.md) |
 | 歷史原文／證據 | [docs/teaching/history/day-13/pet/notion/3fae51d45093814dbdabee6deac48554.md](../teaching/history/day-13/pet/notion/3fae51d45093814dbdabee6deac48554.md) |
+| 歷史原文／證據 | [docs/teaching/history/day-13/pet/notion/merge-5a8516b-3fae51d45093814dbdabee6deac48554.md](../teaching/history/day-13/pet/notion/merge-5a8516b-3fae51d45093814dbdabee6deac48554.md) |
 | 歷史原文／證據 | [docs/teaching/history/day-14/README.md](../teaching/history/day-14/README.md) |
 | 歷史原文／證據 | [docs/teaching/history/day-14/analytics/README.md](../teaching/history/day-14/analytics/README.md) |
 | 歷史原文／證據 | [docs/teaching/history/day-14/analytics/notion/3fbe51d4509381f2a9a2e4b608706eea.md](../teaching/history/day-14/analytics/notion/3fbe51d4509381f2a9a2e4b608706eea.md) |
@@ -379,6 +399,7 @@
 | 歷史原文／證據 | [docs/teaching/history/evidence/2026-10-19-full-2c7ace2/REPORT.md](../teaching/history/evidence/2026-10-19-full-2c7ace2/REPORT.md) |
 | 歷史原文／證據 | [docs/teaching/history/evidence/2026-10-19-full-2c7ace2/RUNBOOK.md](../teaching/history/evidence/2026-10-19-full-2c7ace2/RUNBOOK.md) |
 | 歷史原文／證據 | [docs/teaching/history/evidence/2026-10-21-main-8b9d591/REPORT.md](../teaching/history/evidence/2026-10-21-main-8b9d591/REPORT.md) |
+| 歷史原文／證據 | [docs/teaching/history/evidence/2026-10-22-article-scan/source-notes.md](../teaching/history/evidence/2026-10-22-article-scan/source-notes.md) |
 | 歷史原文／證據 | [docs/teaching/history/evidence/2026-10-22-current-only-cleanup/0-after.md](../teaching/history/evidence/2026-10-22-current-only-cleanup/0-after.md) |
 | 歷史原文／證據 | [docs/teaching/history/evidence/2026-10-22-current-only-cleanup/0-before.md](../teaching/history/evidence/2026-10-22-current-only-cleanup/0-before.md) |
 | 歷史原文／證據 | [docs/teaching/history/evidence/2026-10-22-current-only-cleanup/1-after.md](../teaching/history/evidence/2026-10-22-current-only-cleanup/1-after.md) |
@@ -417,4 +438,7 @@
 | 歷史原文／證據 | [docs/teaching/history/evidence/notion-export/2026-10-22/pages/3f8e51d4509381bf9da4c44750ffc726.md](../teaching/history/evidence/notion-export/2026-10-22/pages/3f8e51d4509381bf9da4c44750ffc726.md) |
 | 現行文件／入口 | [docs/teaching/pet/README.md](../teaching/pet/README.md) |
 | 現行文件／入口 | [docs/teaching/scheduler-instructions-v1.md](../teaching/scheduler-instructions-v1.md) |
-| 現行文件／入口 | [docs/catalog/CONSOLIDATION.md](CONSOLIDATION.md) |
+| 歷史原文／證據 | [docs/verification/2026-10-17/README.md](../verification/2026-10-17/README.md) |
+| 歷史原文／證據 | [docs/weekly/2026-10-16/README.md](../weekly/2026-10-16/README.md) |
+| 歷史原文／證據 | [docs/weekly/2026-10-16/chat-auth/README.md](../weekly/2026-10-16/chat-auth/README.md) |
+| 歷史原文／證據 | [docs/weekly/2026-10-16/v0.2.1/README.md](../weekly/2026-10-16/v0.2.1/README.md) |

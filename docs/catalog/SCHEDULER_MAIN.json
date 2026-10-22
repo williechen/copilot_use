@@ -1,0 +1,13 @@
+{
+  "task_id": "6acd967c15fc8191ade8407954c5b354",
+  "operation": "update existing prompt only",
+  "publication_branch": "main",
+  "schedule": "daily 06:00 Asia/Taipei",
+  "status": "ACTIVE",
+  "new_task_created": false,
+  "model_changed": false,
+  "schedule_changed": false,
+  "prompt_full_readback_matches": true,
+  "readback_after_server_page_reload": true,
+  "prompt_sha256": "1bba61c134cb333c928fbbbafb34bf747b52681da8a26be8457773d741a38f60"
+}

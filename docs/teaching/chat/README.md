@@ -50,7 +50,7 @@
 
 先讀目前 Day 的「學習大綱」確認前置能力，再按第 2 節套用與 Refactor，最後照第 4 節從真實入口驗證。已實作的舊篇用來追溯，不照順序把所有舊程式再貼一次。
 
-[產品操作設定](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/DEPLOYMENT.md) · [產品未來清單](https://github.com/williechen/copilot_use/blob/teaching/rust-ai-chat-alignment/docs/FUTURE_WORK.md)；兩者是 copilot\_use 產品文件，執行學習庫時仍以該庫目前 Cargo／README 為準。
+[產品操作設定](https://github.com/williechen/copilot_use/blob/main/docs/DEPLOYMENT.md) · [產品未來清單](https://github.com/williechen/copilot_use/blob/main/docs/FUTURE_WORK.md)；兩者是 copilot\_use 產品文件，執行學習庫時仍以該庫目前 Cargo／README 為準。
 
 
 ## 目前教學

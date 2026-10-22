@@ -12,3 +12,7 @@
 | `docs/teaching/notion-export/2026-10-22/day-13/analytics/3fae51d4509381808a9cd813423d52d1.md` | [3fae51d4509381808a9cd813423d52d1.md](notion/3fae51d4509381808a9cd813423d52d1.md) |
 
 </details>
+
+## 合併版本留存
+
+[合併後的原文副本](notion/merge-5a8516b-3fae51d4509381808a9cd813423d52d1.md) 保留 5a8516b 的內容；原始 Notion 正文已按既存 PATH_MAP 的 SHA256 還原。兩份原文均保留，本次未重新發布教學。

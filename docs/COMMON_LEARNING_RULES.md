@@ -6,7 +6,7 @@
 
 ## 每日 TDD 教學最小必要規則 v1
 
-規則版本：daily-tdd-minimum-v1（GitHub 交付政策 github-only-v1，2026-10-22）。GitHub <code>docs/COMMON_LEARNING_RULES.md</code> 是現行規則正本，唯一教學交付為 williechen/copilot_use 的 teaching/rust-ai-chat-alignment 分支；不以舊對話或歷史決議覆蓋本版。規則／索引衝突須揭露並核對，不能默認已同步。
+規則版本：daily-tdd-minimum-v1（GitHub 交付政策 github-only-v1，2026-10-22）。GitHub <code>docs/COMMON_LEARNING_RULES.md</code> 是現行規則正本，唯一教學交付為 williechen/copilot_use 的 main 分支；不以舊對話或歷史決議覆蓋本版。規則／索引衝突須揭露並核對，不能默認已同步。
 
 ### 1. 來源與選題
 
@@ -48,7 +48,7 @@ CI 必須核對並揭露精確 SHA、workflow／job、狀態、時間與連結�
 
 ### 4. GitHub 發布、獨立 commit 與 Day 推進
 
-GitHub williechen/copilot_use 的 teaching/rust-ai-chat-alignment 為唯一教學文章交付處。新文章一律放在 <code>docs/teaching/daily/day-NN/{chat,pet,analytics}.md</code>；依專案＋Day＋修訂查重，不複製已交付文章。既有 Day26 已歸入 daily/day-26；Day25（含）以前正文與原始證據統一歸入 history/day-NN，由三案首頁與歷史索引連結，搬遷不新增 Day。
+GitHub williechen/copilot_use 的 main 為唯一教學文章交付處。新文章一律放在 <code>docs/teaching/daily/day-NN/{chat,pet,analytics}.md</code>；依專案＋Day＋修訂查重，不複製已交付文章。既有 Day26 已歸入 daily/day-26；Day25（含）以前正文與原始證據統一歸入 history/day-NN，由三案首頁與歷史索引連結，搬遷不新增 Day。
 
 **每新增一個專案 Day 就獨立 commit 並推送**，提交訊息含專案／Day／修訂；不能累積多天或三案後才一起提交。文章 commit 完成後從 GitHub 精確 commit SHA 讀回全文，逐字核對四節、完整 Red／Green／程式碼與來源版本，保存路徑、blob SHA、SHA256、讀回時間及結果；commit 存在或工具寫入成功本身不代表交付成功。
 

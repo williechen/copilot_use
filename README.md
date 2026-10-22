@@ -1,60 +1,47 @@
 # copilot_use
 
-Rust AI Chat、Tauri/Leptos Desktop Pet、Product Analytics 的獨立產品工作區。驗收與正式版本以 [GitHub Releases](https://github.com/williechen/copilot_use/releases) 附帶的 tag SHA、CI 與原生本地報告為準；未有匹配證據的提交不得宣稱完成。 使用者已取消正式部署；目前範圍為本地測試與 CI。`williechen/rust_ai_chat` 嚴格唯讀。原始成品須先驗收並固定正式版本；既有 v0.1.0 固定後，每日只核對 rust_ai_chat 最新提交 CI 狀態，即使未全數通過仍可揭露狀態並產生教學；copilot_use CI 僅用於產品整合與功能驗收，不作每日教學發布條件，後續變更的週六功能驗收另記，不重新阻擋全部每日教學。
+以 Rust 開發的 Chat、Desktop Pet 與 Analytics 三專案工作區。
 
-## 實際入口
+## 從這裡開始
 
-| 產品 | 程式與資料 | 產品能力 |
-|---|---|---|
-| Chat | `apps/server`、`crates/ui`、`apps/server/frontend`；可攜式 SQLite（包含知識庫向量） | Leptos SSR/Hydration、登入 Session、私人房間 ACL、訊息/history、WS、交易 Outbox、真實 OpenAI 串流、RAG、唯讀 MCP/Agent |
-| Desktop Pet | `apps/desktop_pet`、`apps/desktop_pet/frontend`、`crates/pet_domain`（規則／Port）、`crates/pet_runtime`（SQLite／平台 Adapter）；獨立 SQLite | Linux Tauri/WebKit GUI、多寵物與五項設定、記憶、複習排程、真實 AI 對話/生圖/快取、200×200 浮動視窗、安全預覽與確認 IPC、journal/租約、唯讀 MCP/Agent |
-| Analytics | `apps/stats_server`；獨立 PostgreSQL | 同服務 Dashboard + API、來源 token、持久冪等、事件查證、Taipei 日趨勢 API、可逆封存/還原、備份還原、結構洞察與人工審核/套用/回退 |
+| 入口 | 內容 |
+| --- | --- |
+| [共用文章與規則](https://github.com/williechen/copilot_use/blob/main/docs/COMMON_LEARNING_RULES.md) | 共用學習方式、文章格式、交付與驗證規則 |
+| [Chat 首頁](https://github.com/williechen/copilot_use/blob/main/docs/teaching/chat/README.md) | 聊天系統目標、操作主線、目前教學與待辦入口 |
+| [Pet 首頁](https://github.com/williechen/copilot_use/blob/main/docs/teaching/pet/README.md) | 桌面寵物目標、操作主線、目前教學與待辦入口 |
+| [Analytics 首頁](https://github.com/williechen/copilot_use/blob/main/docs/teaching/analytics/README.md) | 統計後台目標、操作主線、目前教學與待辦入口 |
 
-上表列出實作能力；完整驗收須逐項取得相同來源版本的證據。最新資料庫變更及待驗收項目見 [SQLite 調整](docs/SQLITE_TRANSITION.md)；同來源驗收及重現見 [驗證紀錄](docs/LOCAL_VALIDATION.md)；既定目標見 [P9 規格](docs/P9_TARGET.md)。
+[目前進度與待完成項目](https://github.com/williechen/copilot_use/blob/main/docs/teaching/current/STATUS.md) · [最新學習進度](https://github.com/williechen/copilot_use/blob/main/docs/learning-state.json) · [文件總目錄](https://github.com/williechen/copilot_use/blob/main/docs/README.md)
 
-## 本地驗證
+## 三專案
 
-```sh
-python3 scripts/local-verify.py
-bash scripts/build-chat-ui.sh
-(cd apps/desktop_pet/frontend && NO_COLOR=true trunk build --release=true --no-color)
-python3 scripts/pet-gui-verify.py
-# 選擇性真實 OpenAI 測試；使用本機環境中的 key，會產生模型費用。
-source ~/.bashrc
-export OPENAI_CHAT_MODEL=gpt-5.6-luna
-python3 scripts/local-verify.py --live-openai
-```
+| 專案 | 目標 | 主要程式位置 | 資料庫 |
+| --- | --- | --- | --- |
+| Chat | 多人、多房間聊天及使用者與房間管理 | `apps/server`、`crates/ui` | SQLite |
+| Desktop Pet | 可互動、保存個別狀態的桌面寵物 | `apps/desktop_pet`、`crates/pet_domain`、`crates/pet_runtime` | 獨立 SQLite |
+| Analytics | 事件統計、查詢與管理後台 | `apps/stats_server` | PostgreSQL |
 
-需要 Rust、Node 22、PostgreSQL（僅 Analytics）、wasm32 target、Trunk，以及 Linux Tauri 的 GTK/WebKit 開發套件。API key 不進入 repository、測試報告或日誌。實際啟動與設定見 [操作說明](docs/DEPLOYMENT.md)。
+各項實作與驗收結果見目前進度及對應來源證據。產品目標、教學發布、程式套用與功能驗收分別記錄。
 
-## 現行文件
+## 開發與教學
 
-[文件總入口](docs/README.md) · [共用文章](docs/COMMON_LEARNING_RULES.md) · [Chat 首頁](docs/teaching/chat/README.md) · [Pet 首頁](docs/teaching/pet/README.md) · [Analytics 首頁](docs/teaching/analytics/README.md)
+產品程式、現行共用文章、三專案首頁、教學與歷史資料統一維護於 `main`。從儲存庫首頁與文件目錄都能開啟同一份現行內容。
 
-[每日教學入口](docs/teaching/daily/README.md) · [目前狀態與待完成項目](docs/teaching/current/STATUS.md) · [全部 Notion 原文搬遷](docs/teaching/history/evidence/notion-export/2026-10-22/README.md)。GitHub 教學分支是唯一交付正本；每新增一個專案 Day 就獨立 commit、推送及全文讀回，之後才條件同步進度。三案目前 next_day 均為27，產品功能尚未完整驗收。
+- [產品目標與工作清單](https://github.com/williechen/copilot_use/blob/main/docs/FUTURE_WORK.md)
+- [系統架構](https://github.com/williechen/copilot_use/blob/main/docs/SYSTEM_ARCHITECTURE.md)
+- [本地操作與設定](https://github.com/williechen/copilot_use/blob/main/docs/DEPLOYMENT.md)
+- [驗收方式](https://github.com/williechen/copilot_use/blob/main/docs/LOCAL_VALIDATION.md)
 
-[目前系統架構與 DB 表格](docs/SYSTEM_ARCHITECTURE.md) · [教學格式與執行方式](docs/TEACHING_FORMAT.md)
+新教學文章存於 `docs/teaching/daily/day-NN/{chat,pet,analytics}.md`。每新增一個專案 Day，獨立 commit、推送並全文讀回，再條件同步進度與 manifest。下一 Day 以最新進度檔為準。
 
-- [共同學習規則](docs/COMMON_LEARNING_RULES.md)：目錄／內容以 rust_ai_chat 為主；目標／前進項目以 copilot_use 為主，其他遵循共同規則。
-- [未來前進項目](docs/FUTURE_WORK.md)：未完成的學習銜接、三產品切片及週六完整比對。
-- [產品目標](docs/P9_TARGET.md)、[目錄與程式銜接](docs/TEACHING_ALIGNMENT.md)、[模組與介面對照](docs/SEMANTIC_ARCHITECTURE_REVIEW.md)、[完整靜態核對與差異](docs/FULL_SOURCE_REVIEW.md)。
-- [操作說明](docs/DEPLOYMENT.md)、[可攜式資料](docs/SQLITE_TRANSITION.md)、[驗收方式](docs/LOCAL_VALIDATION.md)。
-- docs/learning-state.json 保存當前來源、有效程式驗證、下一教學編號與週六到期日。
+教學與參考程式碼以 `williechen/rust_ai_chat` 為唯讀來源；不因文章發布自動修改參考庫或宣稱產品驗收完成。
 
-正式 [v0.1.0](https://github.com/williechen/copilot_use/releases/tag/v0.1.0) 保持固定；每日教學在 teaching/rust-ai-chat-alignment，main 整合匹配驗收的變更。根 workspace 管理服務／共享 crates；frontend/native 保留獨立 lock。測試自 Day15 起逐批歸位所屬 app／crate／模組，未完成遷移前保留原有根 tests target 與 CI。私人 .env／DB 與生成檔不提交。
+<details>
+<summary>歷史文章與原始封存證據</summary>
 
-主文件保留有效規則與未來工作；封存及 Git 歷史不作現行待辦。已套用 migrations、固定 release 證據及操作手冊保留。
+[統一歷史目錄](https://github.com/williechen/copilot_use/blob/main/docs/teaching/history/README.md) · [原始路徑對照](https://github.com/williechen/copilot_use/blob/main/docs/teaching/history/PATH_MAP.json) · [GitHub Releases](https://github.com/williechen/copilot_use/releases)
 
-## Analytics 通訊更新
+同一 Day 的文章、修訂與原始封存證據集中保存；跨 Day 報告放在共用歷史證據區。歷史內容保留其來源版本與驗證範圍，現行待辦由目前進度頁追蹤。
 
-Chat／Pet SQLite Outbox 改以 gRPC／Protobuf 上報；Dashboard 保留 HTTP 查詢並以 SSE 即時更新。使用既有 Analytics port／來源 token，PostgreSQL 提交後才 ACK。這是正式 v0.1.0 固定後的新需求，不變更既有 tag 或安裝包。契約、測試與運作限制見 [ANALYTICS_TRANSPORT.md](docs/ANALYTICS_TRANSPORT.md)。
+</details>
 
-## 週六系統與部署建置準備
-
-2026-10-16 重新要求的週六同步與正式部署建置入口見 [週六操作](docs/SATURDAY_OPERATIONS.md)。尚未上線；既有固定 release 的驗收範圍不變。
-
-## v0.2.0 原生整合版
-
-本機原生整合版本為 **v0.2.0**：Chat 完成保存時的 session／ACL 交易複核、Pet 原生視窗漫遊及 SHA256 重複檔預覽已接線。正式功能驗收及來源以本次週六工程紀錄為準，未把舊版證據當作新版驗收。
-使用系統 GTK／WebKit 執行，`python3 scripts/install-pet-local.py` 安裝桌面啟動入口；不使用 Docker。
-既有 `v0.1.0` tag／GitHub Release／附件保持固定。新版本的本機 tag、安裝與遠端發布分別記錄。

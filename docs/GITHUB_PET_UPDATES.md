@@ -26,7 +26,7 @@ python3 scripts/package-pet-update.py \
 
 私鑰只留本機模式 0600，不入 Git，也不包含在更新包。`deploy/pet-update-public-key.pub` 為對應公鑰，首次設定時固定到使用者 config；更新包不能自行替換信任公鑰。更新包由固定私鑰簽署，簽章包含版本；manifest 保存該簽章，內容再與已簽署的更新包核對。
 
-目前 GitHub 正式 Release 為歷史 v0.1.0，其資產保持不變；新版原生更新格式用於後續正式 Release。不以本機建置或測試包冒稱 GitHub 已發行。
+目前已發布版本以 [GitHub Releases](https://github.com/williechen/copilot_use/releases) 即時結果為準；既有發行資產與驗收範圍保持固定。本文規定後續原生更新格式，不以本機建置或測試包冒稱 GitHub 已發行。
 
 ## 本機服務
 
