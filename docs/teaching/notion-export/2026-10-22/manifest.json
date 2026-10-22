@@ -7,7 +7,7 @@
   "original_github_archives_untouched": true,
   "source_policy": "historical Notion text is frozen evidence, not current policy; GitHub COMMON_LEARNING_RULES governs",
   "attachments": "No native file/image/audio/video/database blocks or notion-file-block references found in fetched page bodies",
-  "notion_cleanup": "GitHub full readback verified; ready for user-authorized recoverable Trash",
+  "notion_cleanup": "completed: all 86 pages moved to recoverable Notion Trash after committed exact GitHub full readback; all 86 deleted flags read back",
   "pages": [
     {
       "id": "3f7e51d4509381faa894d3660c3252f7",
@@ -1224,5 +1224,7 @@
     "all_pages": 86,
     "all_changed_files": 187,
     "full_text_exact": true
-  }
+  },
+  "cleanup_evidence": "docs/teaching/notion-export/2026-10-22/cleanup.json",
+  "scheduler_evidence": "docs/teaching/notion-export/2026-10-22/scheduler.json"
 }

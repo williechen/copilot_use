@@ -681,6 +681,12 @@
   "migration": {
     "base_commit": "51aa7ec30a5edb4663f8991e7bb2ed70871c67d6",
     "new_day_published": false,
-    "next_day_advanced": false
+    "next_day_advanced": false,
+    "article_commit": "fb50aaf16761e45733b88a8e81961dc495f0930e",
+    "readback_commit": "3195ab2c518481327216d432646a5fedee21aeb4",
+    "notion_pages_exported": 86,
+    "notion_pages_trashed_and_readback_verified": 86,
+    "cleanup_evidence": "docs/teaching/notion-export/2026-10-22/cleanup.json",
+    "scheduler_evidence": "docs/teaching/notion-export/2026-10-22/scheduler.json"
   }
 }

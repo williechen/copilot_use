@@ -1,13 +1,9 @@
-# 既有每日排程提示詞
+# 既有每日排程提示詞（已更新並重新載入全文核對）
 
-既有 task ID：`6acd967c15fc8191ade8407954c5b354`。僅原地更新，保留每日 06:00 Asia/Taipei、啟用狀態及現有實際模型設定；不建立新任務。實際更新證據另見交付報告，保存本檔不等於已更新。
+Task ID：`6acd967c15fc8191ade8407954c5b354`。每日 06:00 Asia/Taipei，啟用；原地修改提示詞，未新增任務、未觸發立即執行、未改實際模型設定。完整提示詞 SHA256：`ca1f00d812dbc7c4a814f1d2eba2d2e23b9c86809a2e615a30536ca67c3c41d4`。
 
-每天 06:00 Asia/Taipei 沿用既有「三專案每日 TDD 教學」任務（ID 6acd967c15fc8191ade8407954c5b354），只原地更新，不建立任何新排程。GitHub williechen/copilot_use 的 teaching/rust-ai-chat-alignment 是唯一規則、進度與教學交付正本。停止所有 Notion 教學建立、更新、發文和讀回要求；三專案既有 Notion 教學資料搬回 GitHub 後已依使用者要求移至垃圾桶，不再依賴 Notion。先讀最新 docs/COMMON_LEARNING_RULES.md、docs/learning-state.json、docs/teaching/current/manifest.json、docs/teaching/daily/README.md、docs/P9_TARGET.md、docs/FUTURE_WORK.md、docs/SYSTEM_ARCHITECTURE.md、docs/UI_ALIGNMENT_REQUIREMENTS.md 與相關 Day。取得教學分支與 rust_ai_chat/main 最新完整 SHA，核對真實程式、符號、呼叫端、UI/HTTP/IPC/DB/ACL、套件及 CI；必要來源失敗只暫停受影響專案。rust_ai_chat 全庫唯讀，不修改 main，不讀正式秘密，不使用付費 AI。
-
-依 Chat → Pet → Analytics 逐案完成。各案從最新 learning-state.next_day 取 N，不寫死 Day、不從舊 Day 重來；開始與寫入前檢查執行中任務及最新 branch/blob SHA，拒絕併發覆寫。每新增一個專案 Day，就獨立 commit 並推送到指定教學分支（不可累積多天或多案後才一起 commit），路徑 docs/teaching/daily/day-NN/{chat,pet,analytics}.md。先查重；相同 project/Day/revision 只補缺少步驟。完整四節包含：1 學習大綱與真實現況；2 對應同篇的真 Red、完整可套用最小 Green、Refactor、必要 FIFO 舊 Day 更正（每篇最多一項）；3 Cargo/套件版本；4 命令、預期與實際、來源/CI/job/SHA/連結、限制。發文前再核對兩庫 SHA 與規則，來源變動重建未發布草稿。
-
-文章 commit 推送後，以精確 commit SHA 從 GitHub 全文讀回，逐字核對四節、全部程式碼及來源版本，保存路徑、blob SHA、內容雜湊與讀回證據。只有原教學全文讀回通過，才重新讀最新 branch/blob SHA，以條件提交將該案 next_day 從預期 N 更新到 N+1，原子同步 manifest、必要索引及有證據的 makeup_queue 變更，再全文讀回確認狀態。若已 N+1 且證據一致，不再加 Day。完成一案發布、讀回和狀態 gate 才換下一案；未完成不得推進。狀態同步可另 commit，必須引用已驗證文章 commit。文章修訂、搬遷、補教、規則或 CI 成功均不增加 Day。文章成功而狀態失敗只補狀態，不重發。單一 pending 去重、有界重試；同項連續三次失敗轉 needs_manual_review，保存原始錯誤與續接點，其他完整來源專案繼續。
-
-先完成真實可操作基本流程，依最新差異選最小切片，不預排題目。Chat 優先註冊/登入、共用登入登出/Cookie/Session、持久化、房間清單與加入建立及 API/WS ACL。共用實作由各系統透過儲存介面和政策接入，SQLite/PostgreSQL及登入狀態各自獨立。Pet 優先建立第一隻命名寵物→Tauri IPC→SQLite→生活窗→重啟載入，單一元件和每幀單一寵物圖像分別驗證，三個不同 pet id 原生 GUI/事件不能以字串測試取代。Analytics 優先持久管理員帳密登入、首次及再次改密碼、Session、角色/來源授權，核對完整 postgres-integration；本次歷史學習庫依使用者政策採刪除重建，不要求保留資料原地升級，未另授權不實際刪資料庫，已套用 migration 證據保留。
-
-Day25（含）以前正文、程式、歷史證據不改寫；搬遷是原文新增保存，不回寫舊文。makeup_queue 按各專案 FIFO，每篇最多一項，完整讀回有證據才結案；保留未完成補教。主體學習各案15分鐘＋共用15分鐘合計60分鐘，Refactor/版本/證據另列，此為學習估時而非模型執行時限。CI 任一狀態只揭露精確 SHA 和覆蓋範圍，不單獨阻擋教學、不代替測試/產品驗收；未執行、未套用、未部署如實標示。回報各案文章連結、commit、讀回、next_day、產品套用/整合/驗收及缺口。週六00:00全面比對是另一既有工作，勿新建或在每日覆蓋 last_full_comparison；只有完整比對成功才更新該值。模型/推理強度保留現有實際任務設定，提示詞不作切換證據。
+【GitHub 唯一交付・每 Day 獨立 commit】沿用本既有三專案每日 TDD 教學排程，每日06:00 Asia/Taipei，保留啟用與實際模型設定，不新增任務。每次重讀 williechen/copilot_use 的 teaching/rust-ai-chat-alignment 分支 docs/COMMON_LEARNING_RULES.md、docs/learning-state.json、docs/teaching/current/manifest.json、docs/teaching/daily/README.md、P9_TARGET、FUTURE_WORK、SYSTEM_ARCHITECTURE、UI_ALIGNMENT_REQUIREMENTS及相關Day；GitHub為唯一規則和文章正本。停止所有Notion教學發文、更新與讀回依賴；共同主頁及三案全部教學子頁已依使用者要求完整搬至 docs/teaching/notion-export/2026-10-22/，GitHub逐頁全文讀回後移至Notion可還原垃圾桶，不永久刪除其他資料。
+依Chat→Pet→Analytics逐案交付，從各案最新next_day取N，不寫死或跳號。每新增一個專案Day立即獨立commit並推送至上述教學分支的docs/teaching/daily/day-NN/{chat,pet,analytics}.md，不能累積多案或多天一起commit。文章須含四節：學習大綱與真實現況；真Red/完整可套用最小Green/Refactor及必要FIFO舊Day更正；套件版本；命令、預期/實際、CI/job/SHA與限制。先查重並核對最新兩庫SHA、真實呼叫鏈/UI/HTTP/IPC/DB/ACL與套件；來源變動重建未發草稿。
+文章commit推送後，從精確commit SHA讀回全文與全部程式碼，保存blob SHA、SHA256及證據；然後重新讀最新branch/blob SHA，以條件commit原子同步該案next_day N→N+1、manifest及必要索引和有證據的makeup_queue變更，寫後讀回。狀態commit可另提交並引用文章commit。全部gate通過才換下一案；已N+1且證據一致不再增加；衝突先重讀，禁止覆寫。開始與推送前檢查其他執行。文章成功但狀態失敗只補狀態、不重發。單一pending去重，有界重試，同項連續三次失敗轉needs_manual_review，只暫停受影響專案。
+Day25含以前GitHub正文/程式/證據不回寫；搬遷新增原文不算新Day。保留makeup_queue各案FIFO，每篇最多一項舊Day補教，有全文讀回證據才結案；修訂/補教/規則/搬遷/CI不增加Day。真實可操作基本流程優先，依最新缺口選最小切片，不預排題目；登入/登出/Cookie/Session共用實作、各系統儲存與政策獨立。Chat先註冊登入/房間流程與ACL；Pet先建立持久寵物/生活窗/重啟，單元件及每幀單一圖像、三個不同id原生GUI分別驗；Analytics先持久管理員帳密/改密碼/Session/角色來源授權和完整postgres-integration。SQLite與PostgreSQL分離；本次Analytics歷史學習庫採使用者刪除重建政策，不要求保留資料升級，未另授權不操作DB。
+rust_ai_chat全庫唯讀，不修改main、不讀正式秘密、不使用付費AI。CI只揭露精確SHA與覆蓋，未執行測試/套用/部署/驗收如實標示，教學交付與產品驗收分開。主體學習各案15分鐘加共用15分鐘共60分鐘，其他估時另列，非模型時限。週六00:00全面比對為另一既有工作，勿新建；只有完整成功才更新last_full_comparison，每日不覆蓋。每次回報文章連結、commit、讀回、next_day及未完成事項；提示詞不作模型已切換證據。

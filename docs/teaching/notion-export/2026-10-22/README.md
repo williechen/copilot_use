@@ -4,7 +4,9 @@
 
 文章按 day／專案分層，頁 ID 保留不同修訂與補跑版本；未帶 Day 的入口放 pages/。原始 Notion 連結不改寫以保留原文，請用下表或 manifest 的 ID 映射在 GitHub 導覽。此搬遷不新增教學 Day、不變更 next_day、makeup_queue、last_full_comparison，不回寫既有 GitHub 封存正文。使用者已確認：精確 commit 全文讀回後，這些教學頁全部移到 Notion 可還原垃圾桶，不永久刪除其他資料。
 
-[結構與來源 manifest](manifest.json) · [每日新文章入口](../../daily/README.md)
+搬遷與清理已完成：86 頁逐頁 GitHub 全文比對通過、Notion 86 頁垃圾桶狀態讀回通過。原排程提示詞已原地更新並重新載入核對，維持每日 06:00。
+
+[全文讀回證據](readback.json) · [Notion 清理證據](cleanup.json) · [原排程更新證據](scheduler.json) · [結構與來源 manifest](manifest.json) · [每日新文章入口](../../daily/README.md)
 
 | Day | 專案 | 原頁標題與完整正文 |
 | --- | --- | --- |
