@@ -1,11 +1,11 @@
-# 最新教學入口
+# 現行教學入口
 
-Day24（含）以前正文與動畫內容封存。chat next_day=25；pet next_day=25；analytics next_day=25。Day24僅在各案完整文章、程式碼與索引讀回成功後推進；排程維持暫停，未新增排程。
+唯一正本：`williechen/copilot_use` 的 `teaching/rust-ai-chat-alignment` 分支。
 
-- [chat Day24](https://app.notion.com/p/3ffe51d4509381ee9326ce6cc7f1c8a1?pvs=204)
-- [pet Day24](https://app.notion.com/p/3ffe51d450938186b15fd1c014df8edd?pvs=204)
-- [analytics Day24](https://app.notion.com/p/3ffe51d4509381c88f26f4a90c2958fc?pvs=204)
+- [每日教學目錄](../daily/README.md)
+- [共同規則](../../COMMON_LEARNING_RULES.md)
+- [目前狀態](STATUS.md) · [manifest](manifest.json) · [進度](../../learning-state.json)
+- [Chat](CHAT_ENTRY.md) · [Pet](PET_ENTRY.md) · [Analytics](ANALYTICS_ENTRY.md)
+- [Notion 原文完整搬遷索引](../notion-export/2026-10-22/README.md)
 
-[發布證據與索引](manifest.json) · [目前狀態](STATUS.md)；歷史篇章與證據保留於原路徑。
-
-- [Day24最新main正式驗證：未全部通過](../evidence/2026-10-21-day24-main-08b891a/REPORT.md)
+三案最新已發布 Day26，next_day 均為 27。文章發布不代表已套用或產品驗收。每新增一個專案 Day 就獨立 commit，推送、全文讀回後才條件同步狀態。Day25（含）以前原檔與證據封存。

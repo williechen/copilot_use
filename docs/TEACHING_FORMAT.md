@@ -1,7 +1,5 @@
 # 教學入口
 
-教學方法、四節格式與三專案大綱已整併至[教學總綱與實作對照](COMMON_LEARNING_RULES.md)。
+[共同規則與四節格式](COMMON_LEARNING_RULES.md) · [每日文章](teaching/daily/README.md) · [現況](teaching/current/README.md) · [Notion 原文搬遷](teaching/notion-export/2026-10-22/README.md)
 
-- [Notion總文章](https://app.notion.com/p/3f2e51d4509381ddb8a8ce7cb4cd3e60)
-- [現行Day索引與Notion封存入口](teaching/current/README.md)
-- 統整前文件由 Git 歷史追溯；已實作 Day 與修訂規則統一引用總綱，不在入口另立一套。
+GitHub 教學分支為唯一正本。每新增一個專案 Day 就獨立 commit、推送及全文讀回，條件同步進度／manifest 後才完成交付。

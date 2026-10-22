@@ -1,6 +1,6 @@
 {
   "scope": "Latest published teaching index; Day16 snapshot preserved in archive",
-  "revision": "day26-three-projects-published",
+  "revision": "github-only-delivery-policy",
   "synced_date": "2026-10-22",
   "source_sha": "5654591f3002fc619c883af9b5197e2126cc6494",
   "articles": [
@@ -223,9 +223,9 @@
   ],
   "day15_frozen": true,
   "next_day": {
-    "chat": 26,
-    "pet": 26,
-    "analytics": 26
+    "chat": 27,
+    "pet": 27,
+    "analytics": 27
   },
   "day_advanced": true,
   "reference_modified": false,
@@ -240,7 +240,9 @@
     "cached_conversations_override": false,
     "notion_day16_preserved": true,
     "github_day16_articles_removed": true,
-    "rules_version": "daily-tdd-minimum-v1"
+    "rules_version": "daily-tdd-minimum-v1",
+    "delivery": "github-only",
+    "notion_required": false
   },
   "previous_manifest": "docs/teaching/current/manifest.json@494e6dbad63b72c2a4124bcd98a93859ac8aac98",
   "functional_revalidation_evidence": "docs/teaching/evidence/2026-10-19-full-2c7ace2/REPORT.md",
@@ -654,5 +656,31 @@
     "evidence": "docs/teaching/evidence/2026-10-22-current-only-cleanup/verification.json",
     "frozen_bodies_unchanged": true,
     "next_day_unchanged": true
+  },
+  "delivery_policy": {
+    "version": "github-only-v1",
+    "repository": "williechen/copilot_use",
+    "branch": "teaching/rust-ai-chat-alignment",
+    "canonical_rules": "docs/COMMON_LEARNING_RULES.md",
+    "article_root": "docs/teaching/daily",
+    "article_path": "docs/teaching/daily/day-NN/{project}.md",
+    "notion_publication": false,
+    "notion_readback_required": false,
+    "notion_history": "migrate exact originals, verify GitHub full readback, then move three-project teaching subtree to recoverable Trash; no permanent deletion",
+    "commit_policy": "one independent article commit and push per project/Day; never batch multiple projects or days",
+    "success_gate": [
+      "article commit pushed to teaching branch",
+      "full exact-commit GitHub readback: all sections and code; blob SHA and SHA256 evidence",
+      "conditional expected-N to N+1 state+manifest/index synchronization on latest branch/blob SHA",
+      "state and manifest full readback"
+    ],
+    "concurrency": "check active runs and branch/blob SHA; expected_sha lease; no overwrite",
+    "frozen_through_day": 25,
+    "notion_export_root": "docs/teaching/notion-export/2026-10-22"
+  },
+  "migration": {
+    "base_commit": "51aa7ec30a5edb4663f8991e7bb2ed70871c67d6",
+    "new_day_published": false,
+    "next_day_advanced": false
   }
 }

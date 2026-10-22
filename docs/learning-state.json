@@ -47,20 +47,41 @@
       "套件版本",
       "驗證項目：測試、證據、待完成"
     ],
-    "content_preservation": "Day22（含）以前三專案全部既有文章已封存，依使用者確認保留原文與證據；任何更正只在下一Day的新實作／Refactor後補充，不回寫舊文，封存不代表已套用或驗收。以下一般修訂規則僅適用尚未封存的新草稿：未實作 Day 可在既有原頁重整，更新修訂版與來源、同步同一索引及鏡像，不另建相同專案／Day。已實作內容即封存，保留原文、程式及證據；修改方案只在下一 Day 的 Refactor 後「舊 Day 更正補充」提出。部分已實作時保留已實作段落，只重整尚未實作部分；實作狀態不明時先標未核實，不當作未實作覆寫。文章修訂不新增 Day，也不推進 next_day。",
+    "content_preservation": "Day25（含）以前三專案全部既有文章已封存，依使用者確認保留原文與證據；任何更正只在下一Day的新實作／Refactor後補充，不回寫舊文，封存不代表已套用或驗收。以下一般修訂規則僅適用尚未封存的新草稿：未實作 Day 可在既有GitHub 原檔重整，更新修訂版與來源、同步同一索引及鏡像，不另建相同專案／Day。已實作內容即封存，保留原文、程式及證據；修改方案只在下一 Day 的 Refactor 後「舊 Day 更正補充」提出。部分已實作時保留已實作段落，只重整尚未實作部分；實作狀態不明時先標未核實，不當作未實作覆寫。文章修訂不新增 Day，也不推進 next_day。",
     "weekly_engineering": "separate engineering evidence; never add weekly operations to teaching",
     "weekly_ai_validation": "excluded; functional gates only",
     "phase_transition": "到期切換且不延後；功能未完成則原階段學習未完成，原項目跨階段補加，完工後回填原階段證據",
     "functional_progress": "新增可操作功能／接通流程為每日主體；條件補充回原功能，不把單點 API／純測試／欄位及狀態碼當成完整流程。三專案並行追蹤，不預排 Day、不自動推進學習階段。",
     "synchronization_judgment": "核對與同步判定依「文章要求 → rust_ai_chat 實作 → copilot_use 對應實作 → 驗證結果」逐項追溯：記錄文章頁面／Day、兩庫精確 SHA、實作路徑與符號、實際呼叫端、對應測試及匹配來源的驗證結果；介面不同須說明合理差異與適配理由。缺少證據標示未核實，只有定義／單元測試而未接通流程標示部分完成，未執行標示未執行；不得以讀過文章、更新 SHA、同名符號或歷史 CI 判定同步完成。",
-    "day_revision": "Day22（含）以前三專案全部既有文章已封存，依使用者確認保留原文與證據；任何更正只在下一Day的新實作／Refactor後補充，不回寫舊文，封存不代表已套用或驗收。以下一般修訂規則僅適用尚未封存的新草稿：未實作 Day 可在既有原頁重整，更新修訂版與來源、同步同一索引及鏡像，不另建相同專案／Day。已實作內容即封存，保留原文、程式及證據；修改方案只在下一 Day 的 Refactor 後「舊 Day 更正補充」提出。部分已實作時保留已實作段落，只重整尚未實作部分；實作狀態不明時先標未核實，不當作未實作覆寫。文章修訂不新增 Day，也不推進 next_day。",
+    "day_revision": "Day25（含）以前三專案全部既有文章已封存，依使用者確認保留原文與證據；任何更正只在下一Day的新實作／Refactor後補充，不回寫舊文，封存不代表已套用或驗收。以下一般修訂規則僅適用尚未封存的新草稿：未實作 Day 可在既有GitHub 原檔重整，更新修訂版與來源、同步同一索引及鏡像，不另建相同專案／Day。已實作內容即封存，保留原文、程式及證據；修改方案只在下一 Day 的 Refactor 後「舊 Day 更正補充」提出。部分已實作時保留已實作段落，只重整尚未實作部分；實作狀態不明時先標未核實，不當作未實作覆寫。文章修訂不新增 Day，也不推進 next_day。",
     "red_green": "Red is the prerequisite test for same-feature Green; preserve applied tests and provide complete Green in the same Day; distinguish expected Red from test/import/environment errors",
-    "rules_version": "daily-tdd-minimum-v1",
+    "rules_version": "daily-tdd-minimum-v1+github-only-v1",
     "rules_document": "docs/COMMON_LEARNING_RULES.md",
-    "day_advance": "Per project: complete Notion original Day N publication + full readback, then conditional expected-N to N+1 state update and readback; revision/makeup/rules/CI do not increment; retry only missing state, never duplicate publication",
+    "day_advance": "Per project: independent GitHub article commit+push, exact-commit full readback and persisted evidence, then expected-N to N+1 conditional state/manifest/index update and readback; never increment for migration/revision/makeup/rules/CI.",
     "failure_recovery": "Single pending record per project/Day/revision; read and deduplicate before retry; 3 consecutive failures require manual review; evidence persistence and actual verification are separate; detailed historical mechanisms 37-91 deferred",
     "basic_user_flow_gate": "Before selecting advanced Day topics, verify the earliest missing user-operable prerequisite using latest source/contract: Chat signup/login/session/authorized room entry; Pet create first named pet through Tauri IPC, persist in SQLite and reload; Analytics persistent admin account/password-first-login/session. Keep public room listing accessible without login where allowed; entering protected rooms requires authentication and ACL. Continue one end-to-end capability across days; do not present API, helper or status-code tests as completed product flows.",
-    "next_day_correction_placement": "每次核對最新程式與涉及套件；Chat／Pet／Analytics Day22（含）以前全部既有文章封存；差異只在下一Day第2節新Red／完整Green／Refactor後追加舊Day更正補充；makeup_queue FIFO，每篇最多一個舊Day單元，全文讀回才結案，不因補教推進next_day。"
+    "next_day_correction_placement": "每次核對最新程式與涉及套件；Chat／Pet／Analytics Day25（含）以前全部既有文章封存；差異只在下一Day第2節新Red／完整Green／Refactor後追加舊Day更正補充；makeup_queue FIFO，每篇最多一個舊Day單元，全文讀回才結案，不因補教推進next_day。",
+    "delivery": {
+      "version": "github-only-v1",
+      "repository": "williechen/copilot_use",
+      "branch": "teaching/rust-ai-chat-alignment",
+      "canonical_rules": "docs/COMMON_LEARNING_RULES.md",
+      "article_root": "docs/teaching/daily",
+      "article_path": "docs/teaching/daily/day-NN/{project}.md",
+      "notion_publication": false,
+      "notion_readback_required": false,
+      "notion_history": "migrate exact originals, verify GitHub full readback, then move three-project teaching subtree to recoverable Trash; no permanent deletion",
+      "commit_policy": "one independent article commit and push per project/Day; never batch multiple projects or days",
+      "success_gate": [
+        "article commit pushed to teaching branch",
+        "full exact-commit GitHub readback: all sections and code; blob SHA and SHA256 evidence",
+        "conditional expected-N to N+1 state+manifest/index synchronization on latest branch/blob SHA",
+        "state and manifest full readback"
+      ],
+      "concurrency": "check active runs and branch/blob SHA; expected_sha lease; no overwrite",
+      "frozen_through_day": 25,
+      "notion_export_root": "docs/teaching/notion-export/2026-10-22"
+    }
   },
   "curriculum": {
     "stage_count": 13,
@@ -414,7 +435,28 @@
     "scope": "teaching method, four-section format and three project outlines in one article",
     "status": "single canonical rule; unimplemented Day may be revised in place; implemented content archived; changes proposed in next Day",
     "current_status": "docs/teaching/current/STATUS.md",
-    "progress_summary_policy": "現行正文只保留一份具來源與驗證範圍的目前進度；歷次SHA／測試摘要移入歷史紀錄，不在各入口重複累積。已確認需求與封存Day原文保持原用途。"
+    "progress_summary_policy": "現行正文只保留一份具來源與驗證範圍的目前進度；歷次SHA／測試摘要移入歷史紀錄，不在各入口重複累積。已確認需求與封存Day原文保持原用途。",
+    "delivery": {
+      "version": "github-only-v1",
+      "repository": "williechen/copilot_use",
+      "branch": "teaching/rust-ai-chat-alignment",
+      "canonical_rules": "docs/COMMON_LEARNING_RULES.md",
+      "article_root": "docs/teaching/daily",
+      "article_path": "docs/teaching/daily/day-NN/{project}.md",
+      "notion_publication": false,
+      "notion_readback_required": false,
+      "notion_history": "migrate exact originals, verify GitHub full readback, then move three-project teaching subtree to recoverable Trash; no permanent deletion",
+      "commit_policy": "one independent article commit and push per project/Day; never batch multiple projects or days",
+      "success_gate": [
+        "article commit pushed to teaching branch",
+        "full exact-commit GitHub readback: all sections and code; blob SHA and SHA256 evidence",
+        "conditional expected-N to N+1 state+manifest/index synchronization on latest branch/blob SHA",
+        "state and manifest full readback"
+      ],
+      "concurrency": "check active runs and branch/blob SHA; expected_sha lease; no overwrite",
+      "frozen_through_day": 25,
+      "notion_export_root": "docs/teaching/notion-export/2026-10-22"
+    }
   },
   "full_comparison_time": "00:00",
   "latest_source_observation": {
@@ -714,7 +756,29 @@
       "chat": "2c7ace259ef790cea303d841f5779cd5f022d554; Chat：main已接通後端參數化SQL LIKE，名稱不是room ID；完整／部分名稱、字面%／_／反斜線、注入字串與輸入限制12案通過，瀏覽器「Rust 技術交流」完整顯示同名兩筆及「Rust 技術交流延伸」共三筆，空結果提示正確。真WS七案及SQLite持久化讀回通過。但SSR「歷史載入尚未接通」仍缺少，重新整理遇503會清空原有結果，故本切片仍有阻擋；候選恢復提示、直接顯示SQL結果並保留失敗前清單。",
       "pet": "2c7ace259ef790cea303d841f5779cd5f022d554; Pet：最新main使用獨立SQLite三份migration／九張業務表，普通停用啟動與前端／原生建置通過。候選只加可選原生探針，對實際Tauri視窗重跑enabled／disabled／boundary／close四案：main不移動、停用不移動pet、邊界反彈及關窗不回退main通過。探針等待映射後啟動，不能代替普通啟動漫遊時序、完整手動GUI、拖曳暫停恢復、逐寵物設定持久化、多寵物及真實多螢幕驗證。",
       "analytics": "2c7ace259ef790cea303d841f5779cd5f022d554; Analytics：main已用成功的受保護GET回應層，同時延長server Session與同一Cookie Max-Age=1800；實際HTTP require-renewal已通過。另10案確認成功query續期、400／401／錯CSRF／公開login不續期、logout撤銷且不復活。真PG、Origin、CSRF、來源服務身分分離、攝取冪等通過。候選真TCP短deadline到期／不復活通過；不代表1800秒browser soak。帳密admin/admin仍422缺key、角色／scope及服務換證／撤銷未完整實作驗證，完整產品未驗收。"
-    }
+    },
+    "delivery": {
+      "version": "github-only-v1",
+      "repository": "williechen/copilot_use",
+      "branch": "teaching/rust-ai-chat-alignment",
+      "canonical_rules": "docs/COMMON_LEARNING_RULES.md",
+      "article_root": "docs/teaching/daily",
+      "article_path": "docs/teaching/daily/day-NN/{project}.md",
+      "notion_publication": false,
+      "notion_readback_required": false,
+      "notion_history": "migrate exact originals, verify GitHub full readback, then move three-project teaching subtree to recoverable Trash; no permanent deletion",
+      "commit_policy": "one independent article commit and push per project/Day; never batch multiple projects or days",
+      "success_gate": [
+        "article commit pushed to teaching branch",
+        "full exact-commit GitHub readback: all sections and code; blob SHA and SHA256 evidence",
+        "conditional expected-N to N+1 state+manifest/index synchronization on latest branch/blob SHA",
+        "state and manifest full readback"
+      ],
+      "concurrency": "check active runs and branch/blob SHA; expected_sha lease; no overwrite",
+      "frozen_through_day": 25,
+      "notion_export_root": "docs/teaching/notion-export/2026-10-22"
+    },
+    "notion_role": "historical exported originals only; teaching subtree moved to recoverable Trash after verified migration"
   },
   "confirmed_requirements_2026_10_17": {
     "status": "requirements_confirmed_not_implementation_or_acceptance",
@@ -2633,5 +2697,16 @@
     "historical_migration_checksum": "not verified",
     "event_data_retention": "not verified",
     "article_path": "docs/teaching/day26/analytics.md"
+  },
+  "github_delivery_policy_migration": {
+    "date": "2026-10-22",
+    "base_commit": "51aa7ec30a5edb4663f8991e7bb2ed70871c67d6",
+    "new_day_published": false,
+    "next_day_advanced": false,
+    "makeup_queue_changed": false,
+    "last_full_comparison_changed": false,
+    "notion_export": "docs/teaching/notion-export/2026-10-22",
+    "scheduler_task_id": "6acd967c15fc8191ade8407954c5b354",
+    "scheduler_new_task_created": false
   }
 }

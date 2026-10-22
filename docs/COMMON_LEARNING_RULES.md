@@ -10,7 +10,7 @@
 
 - Analytics Day24 補教：已結案，無須重發。
 - Chat／Pet Day25 補教：各自 pending，依各專案 FIFO 處理已列缺口；已實作內容不重教。
-- 三案 next\_day 均為 26；Day25（含）以前正文與程式封存。教學發布、程式套用及功能驗收分開記錄。
+- 三案 next\_day 均為 27；Day25（含）以前正文與程式封存。教學發布、程式套用及功能驗收分開記錄。
 - Analytics 本次歷史學習庫採刪除重建政策，不要求保留資料原地升級；本次未操作資料庫。
 
 ### 驗證範圍
@@ -29,13 +29,13 @@ Chat 真瀏覽器完整流程與 API／WS 授權、Pet 三窗 GUI、Analytics �
 
 ## 每日 TDD 教學最小必要規則 v1
 
-規則版本：daily-tdd-minimum-v1。Notion 共同總頁是現行規則正本，GitHub <code>COMMON_LEARNING_RULES.md</code> 為鏡像；不以舊對話或歷史決議覆蓋本版。規則／索引衝突須揭露並核對，不能默認已同步。
+規則版本：daily-tdd-minimum-v1（GitHub 交付政策 github-only-v1，2026-10-22）。GitHub <code>docs/COMMON_LEARNING_RULES.md</code> 是現行規則正本，唯一教學交付為 williechen/copilot_use 的 teaching/rust-ai-chat-alignment 分支；不以舊對話或歷史決議覆蓋本版。規則／索引衝突須揭露並核對，不能默認已同步。
 
 ### 1. 來源與選題
 
-每次實際重讀 copilot\_use 的 <code>docs/COMMON_LEARNING_RULES.md</code>、<code>docs/learning-state.json</code>、<code>docs/P9_TARGET.md</code>、<code>docs/FUTURE_WORK.md</code>、<code>docs/SYSTEM_ARCHITECTURE.md</code>、<code>docs/UI_ALIGNMENT_REQUIREMENTS.md</code>、<code>docs/teaching/current/manifest.json</code>，以及 Notion 共同總頁、三專案入口與相關 Day。取得 rust\_ai\_chat/main 與 copilot\_use 教學分支最新完整 SHA，核對本日相關程式、實際呼叫端、測試及差異。必要來源讀取失敗，只暫停受影響專案，不能以快取冒充最新。
+每次實際重讀 copilot\_use 的 <code>docs/COMMON_LEARNING_RULES.md</code>、<code>docs/learning-state.json</code>、<code>docs/P9_TARGET.md</code>、<code>docs/FUTURE_WORK.md</code>、<code>docs/SYSTEM_ARCHITECTURE.md</code>、<code>docs/UI_ALIGNMENT_REQUIREMENTS.md</code>、<code>docs/teaching/current/manifest.json</code>，以及 GitHub 三專案入口、<code>docs/teaching/daily/README.md</code> 與相關 Day。取得 rust\_ai\_chat/main 與 copilot\_use 教學分支最新完整 SHA，核對本日相關程式、實際呼叫端、測試及差異。必要來源讀取失敗，只暫停受影響專案，不能以快取冒充最新。
 
-發布每篇前再取 main SHA 及必要規則版本；來源 SHA 改變就重建所有尚未發布草稿，規則改變則重新核對、必要時重建。已完整發布讀回的 Day 不自動撤銷。記錄規則版本、Notion page\_last\_edited\_at、GitHub 規則 blob／commit SHA、兩庫來源 SHA 及讀取時間。rust\_ai\_chat 全庫唯讀，教學程式由使用者套用；copilot\_use 產品整合與教學分開。
+發布每篇前再取 main SHA 及必要規則版本；來源 SHA 改變就重建所有尚未發布草稿，規則改變則重新核對、必要時重建。已完整發布讀回的 Day 不自動撤銷。記錄規則版本、文章 commit／blob SHA、全文 SHA256 與讀回時間、GitHub 規則 blob／commit SHA、兩庫來源 SHA 及讀取時間。rust\_ai\_chat 全庫唯讀，教學程式由使用者套用；copilot\_use 產品整合與教學分開。
 
 #### 基本可操作流程優先
 
@@ -45,7 +45,7 @@ Chat 真瀏覽器完整流程與 API／WS 授權、Pet 三窗 GUI、Analytics �
 - <b>Pet 基本功能門檻：</b> 使用者可建立第一隻具身分、名稱、初始外觀的寵物，透過 Tauri IPC 真正儲存 SQLite、顯示於生活視窗，重新啟動後能載入。<code>PetMachine::default()</code> 不等於使用者建立寵物；在建立、載入流程可用前，視窗漫遊／拖曳／找回與多寵物進階特性只列後續項目。
 - <b>Analytics 基本功能門檻：</b> 建立並持久化管理員帳號，安全的加鹽密碼雜湊、首次登入強制改密碼、有效 Session 與後台頁面授權先接通，再深化角色、帳號級登入等待、報表及來源事件。
 
-主體為各專案每天 <b>一個</b>可驗證的最小 Green 切片，功能可跨日，真正使用者流程尚未可用須在文章與進度明示缺口；以最新程式與資料庫契約優先，不強制當天一次完成註冊／登入或整套寵物建立。原 P9 產品目標、功能 Gate、歷史 Day、四節文章、Notion 正式發布及全文讀回、條件式更新 <code>next_day</code>、CI 覆蓋範圍與每日／週六各自驗收規則全部保留。
+主體為各專案每天 <b>一個</b>可驗證的最小 Green 切片，功能可跨日，真正使用者流程尚未可用須在文章與進度明示缺口；以最新程式與資料庫契約優先，不強制當天一次完成註冊／登入或整套寵物建立。原 P9 產品目標、功能 Gate、歷史 Day、四節文章、GitHub commit 推送及全文讀回、條件式更新 <code>next_day</code>、CI 覆蓋範圍與每日／週六各自驗收規則全部保留。
 
 ### 2. 文章最小格式
 
@@ -69,19 +69,23 @@ CI 必須核對並揭露精確 SHA、workflow／job、狀態、時間與連結�
 
 每項列命令、預期、實際結果、證據 SHA、覆蓋範圍、未執行／失敗／待修。未執行明示，不捏造 Red／Green 成功；教學發布、使用者套用、產品整合、功能驗收分別記錄。跨 SHA 引用證據須核對相關差異及依賴，不能直接沿用成功結論。寫入／補償成功不等於測試成功，驗證範圍縮小須列剩餘缺口。
 
-### 4. Notion 發布與 Day 推進
+### 4. GitHub 發布、獨立 commit 與 Day 推進
 
-按專案＋Day＋修訂版查現有頁與索引，重用既有頁，不重複建同一教學。先完整發布 Notion，再讀回全文，核對四節、Red／完整 Green、程式碼、來源版本與索引；部分失敗保留失敗紀錄，重建同一文章的完整內容，成功讀回前不得推進。
+GitHub williechen/copilot_use 的 teaching/rust-ai-chat-alignment 為唯一教學文章交付處。新文章一律放在 <code>docs/teaching/daily/day-NN/{chat,pet,analytics}.md</code>；依專案＋Day＋修訂查重，不複製已交付文章。既有 Day26 等歷史檔保留原路徑，由新入口連結，搬遷不新增 Day。
 
-每專案獨立處理：原教學 Day N 完整發布且讀回成功，才可將該專案 next\_day 從預期 N 更新為 N+1。更新前重新讀取 learning-state 及 blob／branch SHA，依 Notion 證據於單次條件提交更新進度及既有 makeup\_queue，保留其他欄位，寫後讀回；manifest 同步目前索引。若現值已為 N+1 且證據一致，視為已補更新，不再遞增。併發衝突重新讀取，不能安全合併就暫停該狀態更新。
+**每新增一個專案 Day 就獨立 commit 並推送**，提交訊息含專案／Day／修訂；不能累積多天或三案後才一起提交。文章 commit 完成後從 GitHub 精確 commit SHA 讀回全文，逐字核對四節、完整 Red／Green／程式碼與來源版本，保存路徑、blob SHA、SHA256、讀回時間及結果；commit 存在或工具寫入成功本身不代表交付成功。
 
-文章修訂、規則同步、補教、CI 成功與週六比對都不自行推進 next\_day。原教學與補教分開；已存在的 makeup\_queue 採 FIFO，每篇最多一個舊 Day 補教單元，完整讀回才結案，不因補教失敗回退已確認的原教學進度。未完成原教學不冒充已發布；隔日新內容須標明原教學與待補內容，不能跳號掩蓋失敗。
+每專案獨立：文章 commit 推送＋全文讀回通過，才重新讀最新 learning-state、manifest、blob／branch SHA，以 expected branch SHA 條件提交原子同步該案 next_day（預期 N→N+1）、manifest 與必要索引／有證據的 makeup_queue 變更，再讀回狀態。狀態提交可另 commit，引用已驗證文章 commit，不合併下一篇原教學。若已 N+1 且證據一致只補缺少資料，不再遞增；值或 SHA 不符先重讀，無法安全合併就暫停受影響更新，禁止強制覆寫。完成一案全部 gate 後再交付下一案。
+
+文章修訂、搬遷、規則同步、補教、CI 或週六比對均不增加 Day。各專案 makeup_queue 採 FIFO，每篇最多一項舊 Day 單元，有完整發布讀回證據才結案；補教失敗不回退已確認原教學。教學交付、程式套用、產品整合與功能驗收分開記錄。
+
+停止 Notion 教學建立、更新、發布與每日讀回依賴。共同主頁及三案教學子頁依使用者確認，先逐頁原文搬回 GitHub、全文讀回驗證，再移至 Notion 垃圾桶（可還原）；不永久刪除、不影響其他 Notion 資料。原文、頁面 metadata、父子關係及 GitHub 讀回證據保存於 <code>docs/teaching/notion-export/2026-10-22/</code>。Day25（含）以前 GitHub 封存檔不改寫；原文搬遷只新增保存，不重新發文或改進度。
 
 ### 5. 最小失敗恢復
 
-Notion 已完整讀回但 GitHub 狀態寫入／讀回失敗，保留頁面 ID、專案／Day／修訂、來源版本、預期狀態及錯誤，下次先讀 Notion 與 GitHub，只補缺少的狀態，不重發、不重複加 Day。狀態不明只暫停受影響專案，其他來源完整者繼續。
+文章已 commit 並全文讀回但狀態寫入／讀回失敗，保留文章路徑、commit／blob SHA、SHA256、專案／Day／修訂、來源 SHA、預期狀態與原始錯誤；下次先重讀 GitHub，只補缺少狀態，不重發、不重複加 Day。未保存全文讀回證據不得宣稱 gate 完成。狀態不明只暫停受影響專案，其餘來源完整者繼續。
 
-證據檔保存失敗另記 pending 與錯誤；原教學已完整讀回時可依上節推進，不能聲稱證據已保存或測試已驗證。重試前先讀取去重，沿用同一筆待辦；同項連續三次失敗轉 needs\_manual\_review、停止相同自動寫入，人工重新啟用才恢復，保留歷史。若失敗紀錄也無法持久保存，回報明示。只保留必要失敗紀錄，不新增多層補償／cycle／復發風險系統。
+每專案／Day／修訂單一 pending，重試先讀取去重；同項連續三次失敗轉 needs_manual_review，停止相同自動寫入，人工重新啟用才恢復。失敗紀錄無法保存須明示；不新增多層補償系統。開始及推送前核對其他執行中任務與分支 SHA，使用條件提交避免併發覆寫。
 
 ### 6. 時程與邊界
 

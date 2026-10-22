@@ -1,0 +1,16 @@
+{
+  "id": "3f8e51d45093810d830ef3fd40e419f0",
+  "title": "2026-10-14｜P0 Analytics Day 9｜事件類型前後空白拒絕",
+  "text": "Here is the result of \"fetch\" for the Page with URL https://app.notion.com/p/3f8e51d45093810d830ef3fd40e419f0 as of 2026-10-14T07:10:46.680Z:\n<page url=\"https://app.notion.com/p/3f8e51d45093810d830ef3fd40e419f0\">\n<ancestor-path>\n<parent-page url=\"https://app.notion.com/p/bf5d685db7fc46b58d0069347f5525db\" title=\"封存教學索引\"/>\n<ancestor-2-page url=\"https://app.notion.com/p/3f3e51d45093817eafaee0cfc9ea4cc8\" title=\"統計儀錶板｜聊天室 × 桌面寵物\"/>\n<ancestor-3-page url=\"https://app.notion.com/p/3f2e51d4509381ddb8a8ce7cb4cd3e60\" title=\"Rust AI 三專案｜共同學習規則與前進目標\"/>\n</ancestor-path>\n<properties>\n{\"title\":\"2026-10-14｜P0 Analytics Day 9｜事件類型前後空白拒絕\"}\n</properties>\n<iconMetadata>null</iconMetadata>\n<content>\n## 1. 學習大綱\n\nP0 Day 9：收緊既有 valid\\_event\\_type 契約，避免事件類型前後空白導致分類歧義。rust\\_ai\\_chat main 16261e0，六個 GitHub Actions 成功。\n\n## 2. 實作內容\n\nRed：在 apps/stats\\_server/src/[lib.rs](http://lib.rs) 原測試模組補測合法事件類型可接受；前置空白、尾端空白、純空白、129 bytes 均拒絕。\n\nGreen：修改既有 valid\\_event\\_type(value: &str) -> bool 的判斷為 \\![value.is](http://value.is)\\_empty() && value.len() \\<= 128 && value.trim() == value。\n\nRefactor：沿用 valid\\_event 呼叫鏈，不新增驗證器。現有 ingest 仍應回傳 NOT\\_IMPLEMENTED，不能在來源認證及 PostgreSQL 寫入前回傳成功 ACK；後續接線留原開發項目。\n\n完整程式補充：在 apps/stats\\_server/src/[lib.rs](http://lib.rs) 替換原有函式，保留原 valid\\_event／ingest／build\\_app：\n\n```rs\npub fn valid_event_type(value: &str) -> bool {\n    !value.is_empty() && value.len() <= 128 && value.trim() == value\n}\n```\n\n在原檔既有 tests 模組中追加兩個測試，先確認 Red 再套用上述 Green；不建立重複模組。\n\n```rs\n#[test]\nfn event_type_rejects_noncanonical_boundaries() {\n    assert!(valid_event_type(\"chat.message.persisted\"));\n    assert!(!valid_event_type(\" chat.message.persisted\"));\n    assert!(!valid_event_type(\"chat.message.persisted \"));\n    assert!(!valid_event_type(\"\\n\"));\n    assert!(!valid_event_type(\"\"));\n    assert!(!valid_event_type(&\"x\".repeat(129)));\n}\n#[test]\nfn existing_event_validation_rejects_whitespace() {\n    let event = EventInput {\n        schema_version: 1,\n        event_id: Uuid::new_v4(),\n        source_app: \"web_chat\".into(),\n        event_type: \" chat.message.persisted\".into(),\n    };\n    assert!(!valid_event(&event));\n}\n```\n\nRefactor：沿用原 valid\\_event 呼叫鏈，原 ingest 仍維持 NOT\\_IMPLEMENTED。套用後建議 cargo test -p stats\\_server；未執行、未套用、未驗收。\n\n## 3. 套件版本\n\n沿用 axum 0.8、serde 1.0、uuid 1.28；lock 未核實。\n\n## 4. 驗證項目\n\n套用後 cargo test -p stats\\_server；未執行、未套用、未驗收。\n</content>\n</page>",
+  "url": "https://app.notion.com/p/3f8e51d45093810d830ef3fd40e419f0?pvs=204",
+  "metadata": {
+    "type": "page"
+  },
+  "cover": null,
+  "icon": null,
+  "path": "Rust AI 三專案｜共同學習規則與前進目標 / 統計儀錶板｜聊天室 × 桌面寵物",
+  "verification": {
+    "state": "unverified"
+  },
+  "page_last_edited_at": "2026-10-14T07:10:46.680Z"
+}

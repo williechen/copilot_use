@@ -11,7 +11,7 @@
 - [ ] **Chat：註冊／登入→Session→公開房間清單與進房授權→加入／建立聊天室。** 沿用現有signup／mbr_user，先處理欄位驗證並接通登入授權，不重建平行身分表。基本鏈未完成前不優先擴充歷史訊息或進階UI。
 - [ ] **Pet：建立第一隻寵物→名稱／初始外觀→Tauri IPC→SQLite→生活窗→重啟載入。** 沿用現有PetStore、create_pet與pet_profile；補齊逐寵物身分／畫面／載入後再深化多寵物與漫遊。先核對舊DB歷史，以前向migration處理相容性，不清空DB。
 - [ ] **Analytics：管理員初始化→持久化帳密登入→首次改密碼→Session／Dashboard授權。** 沿用現有bootstrap，將帳號接到真正登入／改密碼／授權鏈；固定key登入或429回應不等於完成帳密身分流程。
-每日仍以Chat→Pet→Analytics各一個可套用的Red→完整最小Green切片推進，未接通部分明示缺口。舊Day更正在本日新實作／Refactor後補充；完整Notion發布讀回才可條件更新next_day，清單整理本身不增加Day。P9功能條件、權限／資料安全、週六工程驗收與其他待辦保留。
+每日仍以Chat→Pet→Analytics各一個可套用的Red→完整最小Green切片推進，未接通部分明示缺口。舊Day更正在本日新實作／Refactor後補充；每新增一個專案Day獨立GitHub commit推送並全文讀回後，才可條件同步next_day及manifest，清單整理本身不增加Day。P9功能條件、權限／資料安全、週六工程驗收與其他待辦保留。
 
 ## 產品缺口
 

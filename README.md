@@ -29,7 +29,7 @@ python3 scripts/local-verify.py --live-openai
 
 ## 現行文件
 
-[現行 Day 索引與 Notion 封存原文](docs/teaching/current/README.md) · [最新來源檢驗與未完成項目](docs/teaching/evidence/2026-10-17-source-98f30d8-recheck.json)。Day16程式已由使用者同步，GitHub文章及舊修訂副本已移除；Notion原文、patch與歷史證據保留，next_day維持17。完整功能尚未驗收。
+[每日教學入口](docs/teaching/daily/README.md) · [目前狀態與待完成項目](docs/teaching/current/STATUS.md) · [全部 Notion 原文搬遷](docs/teaching/notion-export/2026-10-22/README.md)。GitHub 教學分支是唯一交付正本；每新增一個專案 Day 就獨立 commit、推送及全文讀回，之後才條件同步進度。三案目前 next_day 均為27，產品功能尚未完整驗收。
 
 [目前系統架構與 DB 表格](docs/SYSTEM_ARCHITECTURE.md) · [教學格式與執行方式](docs/TEACHING_FORMAT.md)
 
