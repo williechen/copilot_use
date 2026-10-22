@@ -7,7 +7,7 @@
   "next_day": {
     "chat": 28,
     "pet": 28,
-    "analytics": 27
+    "analytics": 28
   },
   "last_full_comparison": "2026-10-16T22:47:14.399027+08:00",
   "next_full_comparison": "2026-10-24T00:00:00+08:00",
@@ -2791,6 +2791,29 @@
     "makeup_queue": "pet Day25 pending",
     "ci_evidence": [
       "https://github.com/williechen/rust_ai_chat/actions/runs/39785099304",
+      "https://github.com/williechen/rust_ai_chat/actions/runs/39785099220"
+    ]
+  },
+  "day27_analytics_delivery": {
+    "project": "analytics",
+    "day": 27,
+    "revision": "r1",
+    "status": "github_article_readback_verified",
+    "article_path": "docs/teaching/daily/day-27/analytics.md",
+    "article_commit": "adf829e0efe092a72538d0abef3b5402e3289097",
+    "article_blob_sha": "edfeedfdf074a3bdaa9f42d2a2fd9e055a278f78",
+    "article_sha256": "6473eb9cf2be4065e1055e285164b122beec87e06c3d8bbc285b877d4ffbc48f",
+    "source_sha": "8cf82626c9c82939a3a56eab32e24a8a5b5b00ed",
+    "publication_method": "github-only-v1",
+    "full_text_verified": true,
+    "code_blocks": 3,
+    "implementation": "not applied",
+    "tests": "not run",
+    "postgres_integration": "not rerun",
+    "historical_checksum": "not verified",
+    "functional_acceptance": false,
+    "ci_evidence": [
+      "https://github.com/williechen/rust_ai_chat/actions/runs/39785099458",
       "https://github.com/williechen/rust_ai_chat/actions/runs/39785099220"
     ]
   }
