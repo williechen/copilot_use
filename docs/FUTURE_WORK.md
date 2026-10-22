@@ -6,21 +6,25 @@
 
 既有開發項目是 P0～P12 階段功能完成條件的唯一追蹤來源；在原項目記錄所屬階段、可驗證功能條件、SHA／測試／CI／套用與驗收證據，未核實者保留未完成。跨階段工作留原功能項目追蹤；舊 Day 更正僅於下一個 Day 的 Refactor 後獨立補加，不回填原 Day，不另開重複項目；完成後可退出活動清單，但原識別與證據須可追溯。P9 產品目標不等於 P9 學習階段。
 
+## 清單使用方式
+
+下列 checkbox 表示產品或教學仍待核對／完成的條件，不能據此推論所有底層程式都不存在。產品程式與 [學習庫狀態](teaching/current/STATUS.md) 分開判定；例如 copilot_use Analytics 目前仍是 token Dashboard，學習庫帳密／Session 的完成紀錄不會自動套用到產品。每項完成須附目前檔案、來源 SHA、適用測試與 UI／跨層結果；僅更新文件不勾選完成。
+
+[改寫前完整清單及雜湊](teaching/history/evidence/2026-10-22-current-docs/README.md) 永久保留；以下保留原功能識別與待驗收條件，不重排教學 Day。
+
 ## 當前最高優先順序：先接通可操作的基本流程
 這是既有 P0～P12 功能項目的實作順序與驗收 Gate；實際缺口及最新來源見[目前進度](teaching/current/STATUS.md)。每次依真實入口、資料庫與測試調整最小切片，不預排Day，也不以其他分支的舊試作當成已合併／驗收。
-- [ ] **Chat：註冊／登入→Session→公開房間清單與進房授權→加入／建立聊天室。** 沿用現有signup／mbr_user，先處理欄位驗證並接通登入授權，不重建平行身分表。基本鏈未完成前不優先擴充歷史訊息或進階UI。
-- [ ] **Pet：建立第一隻寵物→名稱／初始外觀→Tauri IPC→SQLite→生活窗→重啟載入。** 沿用現有PetStore、create_pet與pet_profile；補齊逐寵物身分／畫面／載入後再深化多寵物與漫遊。先核對舊DB歷史，以前向migration處理相容性，不清空DB。
-- [ ] **Analytics：管理員初始化→持久化帳密登入→首次改密碼→Session／Dashboard授權。** 沿用現有bootstrap，將帳號接到真正登入／改密碼／授權鏈；固定key登入或429回應不等於完成帳密身分流程。
+- [ ] **Chat：註冊／登入→Session→公開房間清單與進房授權→加入／建立聊天室。** 產品沿用 `apps/server/src/auth.rs` 的 register／login 與 `chat_users`；學習庫 signup／mbr_user 另按其來源核對。先完成欄位驗證與登入授權，不重建平行身分表。基本鏈未完成前不優先擴充歷史訊息或進階UI。
+- [ ] **Pet：建立第一隻寵物→名稱／初始外觀→Tauri IPC→SQLite→生活窗→重啟載入。** 產品沿用 pet_runtime 的 PetStore／save_profile／pets，學習庫 create_pet／pet_profile 另按其來源核對；補齊逐寵物身分／畫面／載入後再深化多寵物與漫遊。先核對舊DB歷史，以前向migration處理相容性，不清空DB。
+- [ ] **Analytics：管理員初始化→持久化帳密登入→首次改密碼→Session／Dashboard授權。** 產品目前仍是 token 後台；參考學習庫 bootstrap 的實際來源，將產品帳號接到真正登入／改密碼／授權鏈；固定key登入或429回應不等於完成帳密身分流程。
 每日仍以Chat→Pet→Analytics各一個可套用的Red→完整最小Green切片推進，未接通部分明示缺口。舊Day更正在本日新實作／Refactor後補充；每新增一個專案Day獨立GitHub commit推送並全文讀回後，才可條件同步next_day及manifest，清單整理本身不增加Day。P9功能條件、權限／資料安全、週六工程驗收與其他待辦保留。
 
-## 產品缺口
+## 既有實作的驗收邊界
 
-- [ ] Desktop Pet 實際視窗漫遊：移動原生視窗，正常遵守監視器工作區邊界、負座標／不同尺寸；螢幕移除不立即搬回，提供手動找回，依現行 UI 需求。現有 sprite 動畫不算完成；需 owning module tests 與實際 GUI 功能驗證。
-- [ ] FileOrganizer SHA256 重複檔案分組：安全唯讀掃描、尺寸候選、hash 前重新驗證檔案與 root、分組及 IPC／UI 接線；不得自動刪除或跳過確認。需同內容／不同內容／變動檔案／symlink 等回歸。
+視窗漫遊、SHA256 重複檔案分組、Chat SSE 保存前授權複核已有產品實作及指定來源的原生 Linux 驗收，見 [2026-10-16 證據](weekly/2026-10-16/acceptance.json)。不再將原功能重列為「完全未實作」；新增需求與跨平台驗收仍獨立追蹤。
 
-## 安全修正
-
-- [x] Chat SSE 完成前重新檢查：已實作並通過本輪原生 Linux 功能驗收（不代表三平台／學習階段完成），見 [精確來源與回歸證據](weekly/2026-10-16/acceptance.json)。
+- [ ] Pet 漫遊後續需求：多寵物獨立生活窗、出入籠與互動、螢幕移除不立即搬回／手動找回；逐項按 [UI 需求](UI_ALIGNMENT_REQUIREMENTS.md) 核對目前來源、所屬測試及真實桌面結果。
+- [ ] 漫遊與 SHA256 分組的 Windows／macOS 功能驗收，以及相對原 Linux 證據新增程式的回歸；沒有匹配證據前不標完成。
 
 ## 參考適配
 
@@ -31,7 +35,7 @@
 
 ## 教學銜接
 
-學習來源現況與驗證範圍見[目前進度](teaching/current/STATUS.md)。Chat／Pet 各自依 FIFO 補教尚未完成的部分；Analytics Day24 已結案。三案下一教學均為 Day26，產品整合與功能驗收分開追蹤。
+學習來源現況與驗證範圍見[目前進度](teaching/current/STATUS.md)。Chat／Pet 各自依 FIFO 補教尚未完成的部分；Analytics Day24 已結案。下一 Day 即時值只引用 [learning-state](learning-state.json)，不在此複製固定 Day。產品整合與功能驗收分開追蹤。
 
 來源、進度與驗證結果統一見[目前進度](teaching/current/STATUS.md)。Day25（含）以前文章封存；以下沿用原功能項追蹤，不代表產品已整合或驗收。
 

@@ -2,6 +2,12 @@
 
 > 實作進度、精確來源與驗證結果統一見[目前進度](teaching/current/STATUS.md)。本文件保留功能需求／完成條件或架構；歷次測試摘要已移入歷史紀錄，不作現行完成聲明。
 
+## 需求、實作與驗收
+
+本頁列出產品最終需求，不是已完成功能清單。當前原始碼位置見 [系統架構](SYSTEM_ARCHITECTURE.md)，待做及待驗收項目見 [開發清單](FUTURE_WORK.md)。[目前進度](teaching/current/STATUS.md) 的最近來源主要是學習庫，不能據此認定 copilot_use 已具備相同功能。兩庫來源、教學交付、功能實作及產品驗收須分別核對。
+
+本次只整理文件；保留所有原需求，不新增產品完成聲明。改寫前版本及來源雜湊見 [封存紀錄](teaching/history/evidence/2026-10-22-current-docs/README.md)。
+
 ## 最高優先權的產品定位
 - 本 Repo 是 AI 控制的最終產品程式碼；**直接以 P9 產品能力為交付目標（不等於 P0～P12 中的 P9 學習階段）**。允許依相依性拆成多次 Commit/測試，但不按 rust_ai_chat 的 Day 編號或教學 P0–P12 進度等待。
 - 產品目標與前進項目以本 repo 為主；目錄／程式銜接以 rust_ai_chat 最新 main 為主，其他遵循 [共同學習規則](COMMON_LEARNING_RULES.md)，兩邊程式與學習進度分別驗收。
@@ -40,6 +46,6 @@ Chat 入口／註冊／帳號與 Session、Pet 多寵物出入籠／習性／右
 5. 驗證須提供 Rust fmt、clippy、unit/DB/HTTP/WS/GUI/E2E、跨平台、部署/回滾、資安、監控的真實結果。缺證據標 Blocked；不可把 scaffold/README/CI 配置當測試通過。
 6. 對每個功能記錄規格→檔案/提交→測試/CI→未完成事項，持續前進直至全部 P9 要求被驗證。
 
-**目標是 P9 完整三產品，不是照著 Notion 教學 Day N 一天寫一小節。**
+**產品交付以完整三產品能力及逐項驗收為準。每日教學依 GitHub 現行共用規則獨立交付。**
 
 Chat／Pet 使用可攜式 SQLite；Analytics 維持 PostgreSQL。根據變更完成必要驗收；測試保留在所屬專案／模組，不放最外層。

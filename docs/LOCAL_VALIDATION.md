@@ -5,6 +5,8 @@
 
 現行交付範圍為三產品的原生本地測試、跨平台安裝／更新與版本固定；既有 Docker release 建置僅作歷史驗證證據；使用者已取消公開部署。正式來源 SHA、六項 CI 與安裝包 checksum 以 [GitHub Release](https://github.com/williechen/copilot_use/releases) 的 `release-manifest.json` 為準。報告需核對精確來源及 dirty 說明；新程式變更要有匹配證據。有效程式基準見 learning-state.json。
 
+一般使用先依 [本地啟動](LOCAL_START.md)；啟停服務與隔離驗證不同，`/healthz` 成功不等於業務驗收。
+
 ## 固定成品與來源匹配證據
 
 以下為固定成品證據涵蓋的能力；只歸屬各報告所記來源 SHA，不代表當前分支或新增目標已重新驗收。
@@ -28,7 +30,7 @@
 
 ## 重現與安全邊界
 
-使用 [操作說明](DEPLOYMENT.md) 與 `scripts/local-verify.py`、`scripts/docker-local-verify.py`、`scripts/pet-gui-verify.py` 重現。真實 AI 測試使用本機 `OPENAI_API_KEY` 與 `OPENAI_CHAT_MODEL=gpt-5.6-luna`；報告和 Git 不保存 key。MCP 用隔離本地唯讀 fixture，沒有冒稱已測任意外部 MCP server。
+本地隔離測試入口為 `scripts/local-verify.py`，Pet GUI 為 `scripts/pet-gui-verify.py`；先查腳本參數、必要環境與資料影響，再執行適用範圍。Docker 腳本僅屬歷史工具。固定 Release 的真實 AI 結果只歸屬原來源，本次不讀 key、不重跑付費呼叫。MCP 驗證範圍依報告的隔離唯讀 fixture，不延伸為任意外部 MCP server 已驗收。
 
 四份 Cargo.lock 已執行 RustSec audit，當次沒有已知漏洞，但有未維護依賴警告。Tauri／GTK3 所需 GLib 0.18.5 使用帶 MIT 授權的官方安全修補回移，另外執行 optimized release regression；不以忽略 advisory 取代修正，也不宣稱這是全面安全認證。
 
@@ -46,16 +48,8 @@ Analytics 為匿名事件和受控詞頻的描述性計數，不代表獨立真�
 
 有效程式基準 `39f34854b102eb96b44980d42d7b3f272307ec20`、匹配 CI 與各類實際驗證結果保留於 [analytics-transport-validation.json](analytics-transport-validation.json)。契約與限制見 [ANALYTICS_TRANSPORT.md](ANALYTICS_TRANSPORT.md)。此基準不同於本輪靜態核對 source SHA；不得把它算成最新分支完整重測。
 
-## 當前核對與待驗收
+## 目前驗收的判讀
 
-兩庫既有完整靜態核對的來源與覆蓋率見 [FULL_SOURCE_REVIEW.md](FULL_SOURCE_REVIEW.md)，其歷史 SHA 不代表今日全量重測。最新參考庫局部複驗見 [rust_ai_chat 驗證證據](source-review/rust-ai-chat-validation.json)：2026-10-14 21:51 Asia/Taipei，乾淨 main `3b524f4720efbda691a8d2829b47e3b7dd8b45a5` 的 fmt、Clippy、WASM、UI／server SSR、desktop-pet 編譯及 89 項測試通過、零警告；遠端 CI 為 5/6 workflows、16/18 Check Runs success，Rust AI Chat 仍執行中，最新 Gate 尚未全通過。
+[目前進度](teaching/current/STATUS.md) 記錄最近核驗的學習庫來源及範圍；copilot_use 產品需另附匹配 SHA 的測試證據，不能交叉借用完成狀態。歷史 Day10／Day12、舊 CI 及 501 觀察留在 [原始文件](teaching/history/evidence/2026-10-22-current-docs/before/docs/LOCAL_VALIDATION.md)，不作目前程式判定。
 
-rust_ai_chat 的 Day 10 三項契約已實作並通過本地測試，但 Chat WS 房間守衛、Pet 驗證後外觀解析與 Analytics 去重入口仍僅測試使用；Analytics 有效 HTTP 事件仍回 501，故參考庫的產品路徑驗收未通過。此結果不替代 copilot_use 的固定成品／`validated_program_sha` 證據；本輪未重新驗收 copilot_use。copilot_use 的視窗漫遊、SHA256 重複檔案分組及 SSE 授權修正仍按既有來源列為未實作／待驗收，活動項目維持在 [FUTURE_WORK.md](FUTURE_WORK.md)。`last_full_comparison=null`、Day／階段及週六到期日未前移。
-
-週六功能 Gate 依共同規則排除 AI 項目，不讀取 key、不以 AI 未重測阻擋功能通過；固定 Release 的 AI 證據及選擇性真實 AI 操作仍只歸屬原來源。每日 Day 可在適用 CI 未全部 Success 時發布，須揭露失敗與待修問題且不得宣稱驗證通過，與週六提交／功能驗收及學習套用分開。
-
-## 學習參考庫的當前最終判定
-
-rust_ai_chat `bded382` 已依「先本地正式驗證、再核對相同 SHA GitHub」通過本輪既有來源驗證：102 項 Rust／3 項 Node 測試、fmt、嚴格 Clippy -D warnings、SSR／WASM、Linux native／Chat Leptos／Pet frontend release 及實際HTTP／WS／SQLite檢查通過；GitHub 6／6 workflows、18／18 checks成功。上游已移除失效的expect(dead_code)，舊Clippy阻礙已解除。
-
-[最終狀態與範圍](source-review/RUST_AI_CHAT_STATUS.md) · [精確命令與結果](source-review/rust-ai-chat-validation.json) · [完整日誌與驗證工具](source-review/rust-ai-chat-validation-logs.zip)。Analytics 真實 PostgreSQL core測試通過，但HTTP有效攝取仍回501；Day12教學程式尚待使用者套用，不把既有來源通過算成新功能驗收。未執行GUI互動／跨平台套件、完整兩庫重比對或付費AI；不前移Day、週六驗收或完整P9交付狀態。
+視窗漫遊、SHA256 分組與 SSE 授權複核按既有 [Linux 證據](weekly/2026-10-16/acceptance.json) 保留來源範圍；新需求、跨平台與最新變更需另驗。本次文件更新只做 CLI／語法、程式接線及文件連結核對，未執行新的 build、服務、GUI、付費 AI 或資料庫操作，不推進 Day 或完整比對日期。

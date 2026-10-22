@@ -1,111 +1,29 @@
-# 週六比對與原生建置操作
+# 週六來源比對與原生建置
 
-此環境使用 `/home/willie/Documents/rust_ai_chat` 作唯讀參考，
-`/home/willie/Documents/copilot_use` 的 `main` 作目前整合工作區。
-本頁保存週六比對、原生建置及安裝操作；目前交付範圍為本地測試與 CI。主機安裝章節是操作參考，不代表已獲得外部部署授權或已完成上線。
-既有 v0.1.0、release 附件與歷史驗收保持固定。
+日常操作請讀 [本地啟動](LOCAL_START.md)。本頁僅說明週六工程，執行前使用各自實際 checkout 路徑並記錄兩庫 SHA 與 dirty 狀態。
 
-## 週六執行
+## 來源比對
 
-`weekly-sync.yml` 在 main 安裝後，每週六台北時間 00:00 執行，也可手動觸發。
-GitHub 排程可能延遲；未推送與整合 main 前不會啟用。
-完整 tracked tree 比對保存兩庫 SHA、檔案 Git object ID、mode、新增／刪除／內容差異及 dirty 狀態。
-搬移候選可用相同 object ID 查核；差異本身不代表必要整合。
+在 copilot_use 根目錄，以唯讀參考庫路徑執行：
 
 ```sh
-python3 scripts/weekly-compare.py --reference /home/willie/Documents/rust_ai_chat --output target/weekly-comparison.json
+python3 scripts/weekly-compare.py --reference /path/to/rust_ai_chat --output target/weekly-comparison.json
 ```
 
-接著逐模組核對介面、契約、DB、流程與 UI，把差異分類為合理差異、必要銜接、架構違反、產品缺口與未核實。
-週六 workflow 呼叫既有 Verify（Rust／DB／故障復原／三平台 GUI；週六明確略過 Compose job）。
-不傳入 AI key、不新增付費呼叫；不自動覆寫 source、merge 或推進 learning-state。
-完整語意核對、必要修正、精確 SHA 的功能 Gate 與提交完成後，才能更新完整比對日期與驗收。
-此工具只提供比對證據，不能代替人工或代理的語意核對。
+報告保存完整 tracked tree、Git object ID、mode 及差異。相同物件可輔助辨認搬移；內容差異不能直接判為缺口。再逐項核對型別、呼叫端、流程、DB、UI、契約與測試，區分合理差異、必要適配、產品缺口及未核實項目。
 
-## 原生正式建置（不使用 Docker）
+現有 `.github/workflows/weekly-sync.yml` 設定週六 00:00 Asia/Taipei（前一日 16:00 UTC），並可手動觸發；GitHub 可能延遲。它讀取兩庫 main、保存比較 artifact、呼叫 Verify 並略過 Compose，不會自行合併或推進教學狀態。此處描述儲存庫設定，未查驗本週實際執行結果。
 
-需要 Rust stable、wasm32-unknown-unknown target 與 Trunk 0.21.14。
-提交並完成該 SHA 的適用 Verify 後執行：
+既有本機 user unit `deploy/systemd/copilot-weekly.service`／`.timer` 與 `scripts/run-weekly.sh` 保留；是否已安裝／啟用應在該主機查核。執行結果在 `target/weekly/<UTC timestamp>/`。本次沒有新增、安裝或變更任何排程。
+
+## 原生產物與 Gate
 
 ```sh
-rustup target add wasm32-unknown-unknown
-cargo install trunk --version 0.21.14 --locked
 bash scripts/build-production.sh
 ```
 
-產出 `target/native-release/<SHA>/`，含 Chat／Analytics release 執行檔、WASM／CSS、systemd unit 與 SHA256 manifest。
-Desktop Pet 沿用原生三平台建置，不作背景 systemd 服務。
-原有 Docker 檔案保留為歷史可選工具；本次操作與週六 workflow 不使用 Docker。
+需乾淨的已提交來源及完整工具，細節見本地啟動頁。產物在 `target/native-release/<SHA>/`，包含 Chat／Analytics、前端資產、systemd 參考檔與 SHA256 manifest。Pet 另行原生建置。產物存在不代表已安裝、服務已啟動或 GUI 通過。
 
-## 主機安裝與啟動
+工程修正依 Red → 最小 Green → Refactor，提供精確 SHA 的適用測試、DB／HTTP／WS／GUI／整合證據後，才更新對應驗收。完整兩庫比對及 Gate 都完成後才能更新 `last_full_comparison`；單次文件核對不能前移該值。功能驗收不讀 AI key、不新增付費呼叫。
 
-以下需主機系統管理權限，尚未自動執行：
-
-1. 在本機 PostgreSQL 建立 analytics_db 與獨立 non-superuser analytics_user，只授權該 DB；先為既有資料備份。
-2. 把產物複製到 `/opt/copilot/releases/<SHA>`，使 `/opt/copilot/current` 指向該版本；程式及資產需服務可讀。
-3. 將 deploy 的兩份 env.example 複製到 `/etc/copilot/chat.env` 及 `analytics.env`，由 root 擁有、模式 0600。
-   填入獨立隨機 token、DB 密碼，兩服務的 ANALYTICS_CHAT_TOKEN 必須相同。AI key 可不設定。
-4. 將兩份 unit 安裝到 `/etc/systemd/system/`，執行 `systemctl daemon-reload`，先啟動 copilot-analytics，再啟動 copilot-chat；驗證成功後才 enable。
-   DynamicUser 與 StateDirectory 管理 SQLite 專用可寫目錄；不使用開發者家目錄或 reference DB。
-5. 主機 TLS proxy 轉發 Chat loopback 3001（支援 WebSocket）與 Analytics loopback 3100（支援 HTTP/2 gRPC、SSE 停用 buffering）。
-   Secure cookie 必須從 HTTPS 入口驗證登入；沒有 TLS 時不能宣稱正式登入驗收通過。
-6. 檢查兩個 `/healthz`、HTTPS 登入／權限／WS／SSE／gRPC、重新啟動與備份還原，保存來源 SHA 與結果。
-
-尚需部署網域、TLS、監控告警、排程備份與實際還原演練。
-回滾先停服務、備份 DB、核對 schema 向後相容，再切回舊 release 並啟動；不可盲目降版 DB。
-目前只新增原生建置與服務設定，不代表已完成外部上線或功能驗收。
-
-## 直接使用本機環境
-
-在專案目錄完成原生建置後：
-
-```sh
-python3 scripts/local-services.py start
-python3 scripts/local-services.py status
-python3 scripts/local-services.py stop
-```
-
-不需 root，不裝容器；使用既有 PostgreSQL 工具，在 `.local/runtime` 建立私人 SCRAM cluster（55432）、non-superuser app role、SQLite 與隨機 token。
-Chat 3001／Analytics 3100 只監聽 loopback；本機 HTTP 不啟用 Secure cookie，不代表公網正式部署。
-私密設定與服務日誌只留本機，不會輸出 token；Analytics dashboard 的查詢 token 由本人從 settings.json 安全取得。
-啟動不呼叫 AI；此管理入口清除繼承的 OPENAI_API_KEY，避免週六功能檢查誤用付費 API。
-
-## 本機週六排程
-
-`deploy/systemd/copilot-weekly.service` 與 `.timer` 是 user unit；在同一台電腦直接執行 `scripts/run-weekly.sh`，不使用 GitHub runner 或 Docker。
-安裝到 `~/.config/systemd/user/` 後 `systemctl --user daemon-reload`、`systemctl --user enable --now copilot-weekly.timer`。
-台北時間週六 00:00 執行；未登入時能否常駐取決於使用者服務／linger 設定。Persistent 會在恢復時補跑錯過的排程。
-此流程不 fetch／覆寫工作目錄、不自動 merge、不推進驗收日期；執行前應確認兩庫來源已更新。
-結果在 `target/weekly/<UTC timestamp>/`，失敗可查 `journalctl --user -u copilot-weekly.service`。
-
-## 此機器的原生工具
-
-Ubuntu 26.04 缺少 GCC／CMake／pkg-config／OpenSSL headers 且 sudo 需密碼。
-`scripts/setup-native-tools.sh` 可從已設定的 Ubuntu APT 來源下載並解包到 `target/native-tools/`，不修改系統套件庫。
-`native-env.sh` 為建置與週六測試載入私有編譯器／函式庫並限制 Cargo jobs=2。
-Trunk 0.21.14 已由官方 GitHub release 下載、核對 SHA256，安裝到使用者 Cargo bin；WASM target 已安裝。
-Node 使用 Codex 現有 bundled runtime 作 fallback，沒有 Docker 依賴。
-
-## v0.2.0 桌面執行與安裝
-
-正常桌面執行使用系統 runtime：
-
-```sh
-sudo apt-get install -y libgtk-3-0t64 libwebkit2gtk-4.1-0 libayatana-appindicator3-1 libxdo3
-```
-
-本機 Ubuntu 26.04 已由使用者完成安裝。WebKitNetworkProcess 須存在於 `/usr/lib/x86_64-linux-gnu/webkit2gtk-4.1/`。
-不要只放 `.so` 而缺少 WebKit 子程序；這會在視窗初始化時退出。
-
-```sh
-source scripts/native-env.sh
-node scripts/build-pet-ui.mjs
-cargo build --release --locked --manifest-path apps/desktop_pet/Cargo.toml
-python3 scripts/install-pet-local.py
-~/.local/bin/copilot-desktop-pet
-```
-
-安裝至本人的 XDG applications 與 `~/.local/share/copilot-desktop-pet/releases/v0.2.0/`，保留舊版本與既有資料。
-安裝器只執行 `--version` 核對版本，不自行啟動 GUI 或加入開機自啟。
-後續 GUI 驗證直接使用目前桌面及系統 WebKit，不需要 Xvfb、容器或 WebKit 路徑轉接。
-週六 `--functional-only` 排除 MCP/Provider 驗證；授權修正使用本地文字 fixture。
+舊機器工具狀態、固定 v0.2.0 安裝與主機部署步驟完整保留於 [原始文件](teaching/history/evidence/2026-10-22-current-docs/before/docs/SATURDAY_OPERATIONS.md)，不再作目前主機已具備條件的聲明。

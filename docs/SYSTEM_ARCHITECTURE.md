@@ -1,54 +1,48 @@
-# 目前系統架構與 DB 設定
+# 系統架構與執行邊界
 
-> 實作進度、精確來源與驗證結果統一見[目前進度](teaching/current/STATUS.md)。本文件保留功能需求／完成條件或架構；歷次測試摘要已移入歷史紀錄，不作現行完成聲明。
+本頁以 copilot_use/main 原始碼核對，來源 commit 見 [本次紀錄](teaching/history/evidence/2026-10-22-current-docs/README.md)。它描述產品接線；[學習庫目前進度](teaching/current/STATUS.md)、[最終產品需求](P9_TARGET.md) 與功能驗收分開。依賴版本以各 Cargo.lock 為準。
 
-目錄／程式銜接以 rust_ai_chat 最新 main 為主；產品目標與前進項目以 copilot_use 為主，其餘按共同學習規則。以下是 copilot_use 當前程式架構；gRPC／SSE 新需求的驗證範圍見 [ANALYTICS_TRANSPORT.md](ANALYTICS_TRANSPORT.md)；兩個 repository 的 DB 目標統一，學習套用狀態另行核對。
+## 產品組成
 
-| 元件 | 目錄與框架 | 職責／資料流程 | 資料／設定 |
-|---|---|---|---|
-| Chat Web/API | apps/server；Axum 0.8.9／Leptos 0.8.22 | HTTP／Session／ACL／WS／SSE；呼叫訊息 Port | CHAT_DATABASE_URL，預設 sqlite://data/chat.sqlite3；loopback 3001 |
-| Chat UI | crates/ui、apps/server/frontend；SSR／WASM hydration | protected routes、HTTP／WS／reconnect／queue／串流畫面 | 不直連 DB |
-| Chat Domain/Application | crates/chat_domain、chat_application | 輸入不變量、MessageRepository、durable commit | 無 DB／HTTP／GUI Driver |
-| Chat Persistence | crates/persistence；SQLx 0.9.0 | SQLite 訊息／Outbox／topic／realtime 單一交易、租約／備份 | 私有 SQLite 檔／WAL；migrations 所屬 Adapter |
-| Pet Native/UI | apps/desktop_pet、frontend；Tauri 2.12.3／Leptos 0.8.22 | GUI／200×200、IPC／確認、更新與冷啟動 | 本機桌面程式，不是獨立 HTTP 服務 |
-| Pet Domain | crates/pet_domain | Profile、save_profile Port、Schedule 複習規則 | 無 DB／HTTP／OS／Tauri Driver |
-| Pet Runtime | crates/pet_runtime，package day9-pet | SQLite／TOML／素材、AI／MCP、平台 FS、安全 receipt、Outbox／備份 | app_data 或 PET_DATA_DIR；獨立 SQLite 與每寵物檔案 |
-| Analytics Web/API | apps/stats_server；Axum 0.8.9 | HTTP Dashboard／Query、gRPC Ingest、SSE 同服務；來源認證、冪等、明細、審核與回退收據 | ANALYTICS_DATABASE_URL；獨立 PostgreSQL；loopback 3100 |
-| Analytics Application/Persistence | stats_server application／persistence 模組 | EventRepository → PostgreSQL transaction／dedup → gRPC ACK／HTTP 2xx | non-superuser role；migrations／權限獨立 |
-| Shared integration | crates/shared | 四欄低敏 ProductEvent；Chat/Pet Outbox → authenticated Analytics | 不共享業務 DB，不含本文／路徑／憑證 |
-| Analytics Transport | crates/analytics_transport；Tonic 0.14.6／Prost 0.14.4 | `.proto` 生成 gRPC client/server；Outbox 投遞、逐事件 ACK、deadline | 同一 Analytics 3100 port；HTTP JSON 保留相容入口 |
-| AI／MCP Adapter | crates/ai_core、mcp_bridge | OpenAI Responses／embedding／生圖、有限 Agent 與 owner-scoped readonly tools | OpenAI／gpt-5.6-luna；OPENAI_API_KEY 留在本機 |
-| Telemetry | crates/telemetry；OpenTelemetry 0.33.1 | traces／metrics／logs、W3C correlation；與產品事件分離 | 可選 numeric-loopback OTLP，剝除認證 headers |
-| 建置／驗收 | Cargo workspace、獨立 frontend/native locks、原生環境／CI（Docker／Compose 僅歷史） | Rust／WASM／GUI／跨服務／三平台 installer/updater | 本地測試範圍，正式 tag／附件固定 |
+| 元件 | 入口與職責 | 資料／執行 |
+| --- | --- | --- |
+| Chat Web/API | [server main](../apps/server/src/main.rs)：Axum 路由、帳號／Session、房間授權、HTTP／WS／SSE | Chat 獨立 SQLite；本地 3001 |
+| Chat UI | [ui](../crates/ui/src/lib.rs) 與 [前端入口](../apps/server/frontend/src/main.rs)：Leptos SSR／hydration，呼叫 HTTP／WS | 不直接連 DB；資產 `target/site/pkg` |
+| Chat 核心 | [chat_domain](../crates/chat_domain/src/lib.rs) → [chat_application](../crates/chat_application/src/lib.rs) → MessageRepository | 不匯入 DB／HTTP driver |
+| Chat 儲存 | [persistence](../crates/persistence/src/lib.rs)：ChatWriter、訊息／Outbox／realtime 交易 | migration 在 `crates/persistence/migrations` |
+| Pet Native/UI | [Tauri 入口](../apps/desktop_pet/src/main.rs)、[前端](../apps/desktop_pet/frontend/src/main.rs)：生活窗、控制窗與 IPC | 獨立桌面程序；不由 local-services 管理 |
+| Pet 核心 | [pet_domain](../crates/pet_domain/src/lib.rs)：Profile、儲存 Port、複習規則 | 純核心，不依賴 Tauri／SQLx |
+| Pet Runtime | [pet_runtime](../crates/pet_runtime/src/lib.rs)：PetStore、SQLite、檔案、OS 操作、Outbox、AI Adapter | 自有 app data／`PET_DATA_DIR`；migration 在 runtime |
+| Analytics | [main](../apps/stats_server/src/main.rs)、[路由](../apps/stats_server/src/lib.rs)：Dashboard／Query／管理、HTTP 與 gRPC 攝取、SSE | 獨立 PostgreSQL；本地 3100 |
+| Analytics 核心與儲存 | `apps/stats_server/src/application`／`persistence` 模組：EventRepository、驗證、交易去重 | migration 在 `apps/stats_server/migrations` |
+| 跨產品契約 | [shared](../crates/shared/src/lib.rs)、[analytics_transport](../crates/analytics_transport/src/lib.rs) | ProductEvent／Protobuf、gRPC client/server、逐事件 ACK |
+| 外部能力 | `ai_core`、`mcp_bridge`、`telemetry` | Provider／MCP／觀測 Adapter；不作純領域依賴 |
 
-本表為產品架構及當時觀察，不是最新學習倉庫的自動驗收結果；逐功能分別核對產品實作狀態、rust_ai_chat 學習套用狀態、對應 source／CI SHA 與正式驗收狀態。既有「已驗證」只代表其原始證據範圍，不因新 SHA 自動失效，也不能延伸宣稱新版本已驗證。
+## 資料流與一致性
 
-## 已確認需求的架構責任（尚未實作／驗收）
+```mermaid
+flowchart LR
+  C[Chat UI] --> H[Chat HTTP / WS]
+  H --> A[Application Port]
+  A --> D[(Chat SQLite + Outbox)]
+  P[Pet UI] --> T[Tauri IPC]
+  T --> R[Pet Runtime / Domain]
+  R --> S[(Pet SQLite + Outbox)]
+  D --> G[gRPC / Protobuf]
+  S --> G
+  G --> E[Analytics source authentication]
+  E --> Q[(PostgreSQL dedup / events)]
+  Q --> V[HTTP Query / SSE]
+```
 
-- Chat：HTTP／UI 區分房名登入回房及登入／管理回個人頁；伺服器負責帳號唯一性、房間權限、登入等待、活動 Session、密碼生命週期與撤銷。不得只以前台倒數或路由守衛代替。
-- Pet：控制窗以寵物識別管理獨立狀態、持久設定及每隻生活窗；runtime 負責出入籠生命週期、依種類／個性的活動與互動、漫遊拖曳及多螢幕政策。既有單 pet 來源觀察保留歷史身分。
-- Analytics：人員帳密／Session／角色及來源資料範圍與服務配對憑證分開；伺服器對頁面、API、即時連線執行授權及立即撤銷，持久化登入等待與不含秘密的管理稽核。
+Chat 先完成持久交易，再對外通知；Pet 的真實檔案操作需 preview／明確確認／receipt，不以純狀態成功取代 OS 結果。Chat／Pet Outbox 保留投遞重試；Analytics 完成資料庫交易後才 ACK，同 ID 去重與衝突分開處理。HTTP JSON 相容攝取入口仍存在。詳細契約及原驗證來源見 [通訊文件](ANALYTICS_TRANSPORT.md)。
 
-完整條件引用 [共同規則](COMMON_LEARNING_RULES.md)及 [UI 需求](UI_ALIGNMENT_REQUIREMENTS.md)。此節為架構需求，不改寫上表既有驗證範圍。
+三產品不共享業務 DB。Analytics 的查詢 token、管理 token、Chat／Pet 來源 token 分離。**目前 copilot_use Dashboard 仍使用 Bearer token**；人員帳密、Session、角色與來源資料範圍是 [待完成需求](requirements/AUTHENTICATION.md)，不能由學習庫完成紀錄推定此產品已具備。
 
-## DB 目標與實際套用
+## 執行及後續接線
 
-| 產品 | 兩個 repository 的統一目標 | copilot_use 實際 | rust_ai_chat 唯讀核對 |
-|---|---|---|---|
-| Chat | 可攜式 SQLite | SQLite URI／schema／WAL／backup，已驗證 | 本輪唯讀 source SHA `16261e0ebeef1a888997cc0ebc42b08ceaf8db24` 已使用 SqlitePool／SqliteRoomRepository／SqliteMessageRepository；schema／ID／Outbox 仍與成品不同，source 觀察不等於 DB 執行驗收 |
-| Pet | 可攜式 SQLite | PetStore SQLite／獨立檔案／snapshot，已驗證 | 本輪 source 為 Profile／FSM／唯讀檔案預覽，尚無 PetStore SQLite 等同實作；教學依統一目標及當日差異銜接 |
-| Analytics | PostgreSQL | 獨立 PostgreSQL／migration／來源角色 | 學習庫HTTP／PostgreSQL與產品gRPC／SSE契約分開核對；實測範圍見[目前進度](teaching/current/STATUS.md)，不以舊來源結果推定產品驗收 |
+本地服務管理器使用 `.local/runtime/chat.sqlite3` 與 `.local/runtime/postgres`，Chat／Analytics 只聽 loopback；Pet 另行建置與啟動。具體步驟及憑證使用見 [本地啟動](LOCAL_START.md)。啟動／healthz 與完整業務驗收分開。
 
-本輪逐模組、介面與資料流程靜態核對已完成，範圍、差異與可攜式證據見 [完整核對報告](FULL_SOURCE_REVIEW.md)。產品待補項目與安全修正見 [未來工作](FUTURE_WORK.md)；尚未修正或重新驗收，不宣稱兩庫語意等同。
+目錄與純層規則見 [程式銜接](TEACHING_ALIGNMENT.md)，關鍵符號與呼叫鏈見 [模組對照](SEMANTIC_ARCHITECTURE_REVIEW.md)，開發缺口見 [FUTURE_WORK](FUTURE_WORK.md)。既有完整兩庫靜態報告保存原來源範圍於 [FULL_SOURCE_REVIEW](FULL_SOURCE_REVIEW.md)，本次未重新做兩庫完整比對或產品測試。
 
-若使用者本地設定尚未推送，GitHub 唯讀核對不代表該本機狀態。rust_ai_chat 不由助手寫入。
-
-## 學習與重構並行
-
-每日依 rust_ai_chat 現有架構、確認缺口與當日差異產生四節教學，原文保留，舊 Day 更正於下一個 Day 的 Refactor 後獨立補加，不回填舊 Day；不預排 Day，不設獨立重構章。週六工程按 Red → 最小 Green → Refactor 完成必要整合、功能測試與提交，證據獨立記錄，不納入教學，也不驗證 AI 項目；功能 Gate 通過即為功能通過，不為文字不同重寫已驗證功能。
-
-Chat／Pet 各自持久化訊息或真實操作結果及 Outbox → gRPC／Protobuf → 來源認證 Analytics → PostgreSQL 去重／查詢／洞察 → 人工審核 → Chat／Pet 確認採用／收據／可回退。
-
-Dashboard 以 HTTP 查詢最新聚合；SSE `/api/v1/events/stream` 通知資料版本改變。每次連線／重連都觸發重新查詢，PostgreSQL 為唯一資料來源。
-
-稽核資料必須由真實操作與已驗證的操作者身分寫入，資料模型按功能調整並驗證授權、保存與升級；實作現況依統一進度與匹配 SHA 的證據判定。原本特定來源的診斷保留於 [歷史註記](teaching/history/evidence/2026-10-22-article-scan/source-notes.md)。
+已確認的架構責任維持：Chat 由服務端執行帳號／Session／房間授權；Pet 以 pet id 隔離持久狀態與生活窗；Analytics 將人員 Session／角色與機器配對憑證分離。需求完成須提供匹配 SHA 的跨層及重啟驗收。原文及歷史證據完整保留於 [文件封存](teaching/history/evidence/2026-10-22-current-docs/README.md)。

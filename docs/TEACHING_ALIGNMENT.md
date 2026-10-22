@@ -1,32 +1,28 @@
 # 目錄與程式銜接
 
-以 rust_ai_chat 最新 main 的真實 source 為目錄／程式微調基準，按 [共同學習規則](COMMON_LEARNING_RULES.md) 更新 copilot_use。產品目標及待前進項目以 [P9_TARGET.md](P9_TARGET.md) 與 [FUTURE_WORK.md](FUTURE_WORK.md) 為準。
+產品來源為 copilot_use/main；目錄／程式適配依 rust_ai_chat/main 的實際來源及當日差異核對。兩庫各記精確 SHA，不因檔名相同宣稱功能、資料或 wire contract 等同。本次只核對產品現有接線，未重新完整比對參考庫。
 
-```text
-apps/
-  server/                 # Chat HTTP／WS Adapter
-    frontend/             # Chat hydration 建置入口
-  desktop_pet/            # Tauri IPC／updater
-    frontend/             # Pet Leptos UI
-  stats_server/           # 同服務 Analytics HTTP／gRPC／SSE
-crates/
-  chat_domain/
-  chat_application/
-  persistence/            # Chat SQLite Adapter／migrations
-  pet_domain/             # Profile／Port／Schedule
-  pet_runtime/            # SQLite／HTTP／AI／OS／檔案 Adapter
-  ai_core/                # OpenAI Provider／Agent Adapter
-  mcp_bridge/
-  shared/                 # 跨產品事件契約與 proto/analytics.proto
-  analytics_transport/    # Tonic／Prost Driver；純層不匯入
-  telemetry/
-  ui/
-```
+| 邊界 | 產品位置 | 接線規則 |
+| --- | --- | --- |
+| Chat HTTP／WS | `apps/server` | 入口轉換與授權後呼叫 Application／Adapter |
+| Chat 前端 | `crates/ui`、`apps/server/frontend` | SSR／hydration；只透過服務介面 |
+| Chat 純核心 | `crates/chat_domain`、`crates/chat_application` | 輸入不變量與 MessageRepository Port |
+| Chat SQLite | `crates/persistence` | 實作 Port，訊息／Outbox／realtime 同交易 |
+| Pet UI／原生 | `apps/desktop_pet`、其 `frontend` | IPC、桌面視窗、確認與結果呈現 |
+| Pet 純核心 | `crates/pet_domain` | Profile／Application Port／Schedule |
+| Pet Adapter | `crates/pet_runtime` | SQLite／OS／HTTP／AI，package 名稱保留 day9-pet |
+| Analytics | `apps/stats_server` | 內部分 application／persistence／HTTP／gRPC／SSE |
+| 共用傳輸 | `crates/shared`、`crates/analytics_transport` | 事件契約與實際 gRPC Driver |
+| 其他 Adapter | `ai_core`、`mcp_bridge`、`telemetry` | 不回流純 Domain／Application |
 
-三個 app 與八個核心 crate 名稱對應 rust_ai_chat；pet_runtime、mcp_bridge、analytics_transport 與 Chat frontend 是實際使用的產品 Adapter／建置入口。runtime 保留 day9-pet package／CLI 與 profile/application re-export，已有 Tauri IPC 格式保持。day9-* package 名稱為命令相容性，不是教學編號。
+`day9-*` 是既有 package／命令相容名稱，不是目前教學 Day。Chat／Pet／Analytics migration 分別歸 `crates/persistence/migrations`、`crates/pet_runtime/migrations`、`apps/stats_server/migrations`；舊 PostgreSQL 匯入 schema 在 `apps/server/postgres-migrations`，不套用至 Chat SQLite。
 
-SQLite Chat migration 在 crates/persistence/migrations；Pet 在 crates/pet_runtime/migrations；Analytics PostgreSQL 在 apps/stats_server/migrations。舊 Chat PG import 的 migration 原文在 apps/server/postgres-migrations，不套用到 SQLite。測試留在 owning app／crate／私有模組，從 Day15 起逐批遷移根 tests 至所屬 app／crate，保留未遷移 target 與 CI，完成驗證後才移除根 tests workspace。
+## 修改時核對
 
-每次銜接先核對型別／函式／呼叫端、資料流及斷言。不同 ID 型別、codec、WS／事件協定與 DB Adapter 必須說明映射，不以檔名一致推論相同語意；詳見 [模組與介面對照](SEMANTIC_ARCHITECTURE_REVIEW.md) 與 [完整靜態核對](FULL_SOURCE_REVIEW.md)。視窗漫遊與 SHA256 重複檔案分組已納入產品目標，實作進度另見未來清單，不以目錄對齊代表功能完成。python3 scripts/architecture-boundaries.py 驗證實際 Cargo 的純層正常／build 依賴。
+1. 同時找出型別／函式、實際呼叫端與 UI／API／IPC，再核對測試斷言及持久化結果。
+2. 明列 ID、作者／房間、category 與 topic、JSON／TOML、WS DTO、事件名稱及 DB Adapter 的映射；合理差異保留，不新增無呼叫端的同名骨架。
+3. 測試放所屬 app／crate／模組。學習庫測試歸位的剩餘工作依 [開發清單](FUTURE_WORK.md) 追蹤，不能把歷史根 tests 遷移計畫誤認為產品目前 workspace 結構。
+4. 修改純層依賴時執行 `python3 scripts/architecture-boundaries.py --offline`；它核對實際 Cargo normal／build 依賴，不把 dev-only harness 當執行邊界。
+5. 文件與教學發布、參考庫實際套用、產品功能驗收分開記錄。每日依 [共用規則](COMMON_LEARNING_RULES.md) 交付，每案每 Day 獨立 commit／推送／全文讀回後才條件同步狀態。
 
-教學方法、時程、CI發布方式、四節格式與更正位置統一引用[教學總文章](COMMON_LEARNING_RULES.md)，本頁僅保存目錄與程式銜接方式。工程證據另存，不因目錄對齊或文章發布宣稱功能已完成。
+[關鍵模組及呼叫鏈](SEMANTIC_ARCHITECTURE_REVIEW.md) · [產品目標](P9_TARGET.md) · [既有完整比對及原來源](FULL_SOURCE_REVIEW.md) · [本次原文封存](teaching/history/evidence/2026-10-22-current-docs/README.md)

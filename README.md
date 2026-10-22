@@ -29,7 +29,7 @@
 
 - [產品目標與工作清單](https://github.com/williechen/copilot_use/blob/main/docs/FUTURE_WORK.md)
 - [系統架構](https://github.com/williechen/copilot_use/blob/main/docs/SYSTEM_ARCHITECTURE.md)
-- [本地操作與設定](https://github.com/williechen/copilot_use/blob/main/docs/DEPLOYMENT.md)
+- [本地啟動](https://github.com/williechen/copilot_use/blob/main/docs/LOCAL_START.md) · [操作索引](https://github.com/williechen/copilot_use/blob/main/docs/DEPLOYMENT.md)
 - [驗收方式](https://github.com/williechen/copilot_use/blob/main/docs/LOCAL_VALIDATION.md)
 
 新教學文章存於 `docs/teaching/daily/day-NN/{chat,pet,analytics}.md`。每新增一個專案 Day，獨立 commit、推送並全文讀回，再條件同步進度與 manifest。下一 Day 以最新進度檔為準。
@@ -44,4 +44,3 @@
 同一 Day 的文章、修訂與原始封存證據集中保存；跨 Day 報告放在共用歷史證據區。歷史內容保留其來源版本與驗證範圍，現行待辦由目前進度頁追蹤。
 
 </details>
-
