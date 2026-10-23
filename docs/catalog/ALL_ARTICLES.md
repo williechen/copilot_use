@@ -55,8 +55,8 @@
 | 現行文件／入口 | [docs/teaching/current/README.md](../teaching/current/README.md) |
 | 現行文件／入口 | [docs/teaching/current/STATUS.md](../teaching/current/STATUS.md) |
 | 現行文件／入口 | [docs/teaching/daily/README.md](../teaching/daily/README.md) |
-| 現行文件／入口 | [docs/teaching/daily/day-26/analytics.md](../teaching/daily/day-26/analytics.md) |
-| 現行文件／入口 | [docs/teaching/daily/day-26/chat.md](../teaching/daily/day-26/chat.md) |
+| 已驗證切片封存 | [docs/teaching/history/day-26/analytics/github.md](../teaching/history/day-26/analytics/github.md) |
+| 已驗證切片封存 | [docs/teaching/history/day-26/chat/github.md](../teaching/history/day-26/chat/github.md) |
 | 現行文件／入口 | [docs/teaching/daily/day-26/pet.md](../teaching/daily/day-26/pet.md) |
 | 歷史原文／證據 | [docs/teaching/history/README.md](../teaching/history/README.md) |
 | 歷史原文／證據 | [docs/teaching/history/day-02/README.md](../teaching/history/day-02/README.md) |
@@ -442,3 +442,7 @@
 | 歷史原文／證據 | [docs/weekly/2026-10-16/README.md](../weekly/2026-10-16/README.md) |
 | 歷史原文／證據 | [docs/weekly/2026-10-16/chat-auth/README.md](../weekly/2026-10-16/chat-auth/README.md) |
 | 歷史原文／證據 | [docs/weekly/2026-10-16/v0.2.1/README.md](../weekly/2026-10-16/v0.2.1/README.md) |
+
+## 本輪全部教學文章驗證
+
+[84篇逐篇結果、483份Markdown靜態清單及6篇完成封存](../teaching/history/evidence/2026-10-23-all-articles-9c2b7cf/REPORT.md)。這是新驗證快照；原掃描／讀回JSON保留原日期與來源，不冒稱已重新執行。

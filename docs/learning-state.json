@@ -2937,5 +2937,23 @@
     "next_day_before": 29,
     "next_day_after": 30,
     "status": "github_article_readback_verified"
+  },
+  "latest_source_validation": {
+    "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3",
+    "document_baseline_sha": "fad5db13a6711ac45a9cfece8198b612d7ce4607",
+    "date": "2026-10-23",
+    "report": "docs/teaching/history/evidence/2026-10-23-all-articles-9c2b7cf/REPORT.md",
+    "article_matrix": "docs/teaching/history/evidence/2026-10-23-all-articles-9c2b7cf/ALL_ARTICLES.md",
+    "summary": "docs/teaching/history/evidence/2026-10-23-all-articles-9c2b7cf/summary.json",
+    "canonical_articles": 84,
+    "archive_manifest": "docs/teaching/history/evidence/2026-10-23-all-articles-9c2b7cf/archive-manifest.json",
+    "functional_acceptance": false,
+    "next_day_unchanged": true
+  },
+  "completed_article_archive": {
+    "policy": "archive after lesson-slice verification with matching source and evidence; full-product acceptance independent",
+    "manifest": "docs/teaching/history/evidence/2026-10-23-all-articles-9c2b7cf/archive-manifest.json",
+    "count": 6,
+    "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3"
   }
 }

@@ -13,6 +13,8 @@
 [改寫前完整清單及雜湊](teaching/history/evidence/2026-10-22-current-docs/README.md) 永久保留；以下保留原功能識別與待驗收條件，不重排教學 Day。
 
 ## 當前最高優先順序：先接通可操作的基本流程
+
+本輪全部文章核對與待修來源見[84篇矩陣](teaching/history/evidence/2026-10-23-all-articles-9c2b7cf/ALL_ARTICLES.md)。精確程式9c2b7cf：Chat頁面／WS基本Session已接通，但SSR歷史提示與API／逐房ACL仍缺；Pet控制窗恢復及動態窗漫遊未接妥；Analytics正式事件類型summary路由404，帳密入口未沿用舊限流。各項留在原功能待辦，不由舊helper測試或本次文件封存結案。
 這是既有 P0～P12 功能項目的實作順序與驗收 Gate；實際缺口及最新來源見[目前進度](teaching/current/STATUS.md)。每次依真實入口、資料庫與測試調整最小切片，不預排Day，也不以其他分支的舊試作當成已合併／驗收。
 - [ ] **Chat：註冊／登入→Session→公開房間清單與進房授權→加入／建立聊天室。** 沿 rust_ai_chat 的 signup／signin／logout、mbr_user／Session 與房間授權實際來源核對；不引用舊庫 auth.rs／chat_users 介面。先完成欄位驗證與登入授權，不重建平行身分表。基本鏈未完成前不優先擴充歷史訊息或進階UI。
 - [ ] **Pet：建立第一隻寵物→名稱／初始外觀→Tauri IPC→SQLite→生活窗→重啟載入。** 沿 rust_ai_chat 的 create_pet／pet_store／pet_profile 與 Tauri command 實際來源核對；補齊逐寵物身分／畫面／載入後再深化多寵物與漫遊。先核對舊DB歷史，以前向migration處理相容性，不清空DB。

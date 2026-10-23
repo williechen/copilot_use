@@ -6,6 +6,8 @@
 
 | Day | 文章、修訂與證據 |
 | --- | --- |
+| 29 | [資料夾](day-29/README.md) |
+| 27 | [資料夾](day-27/README.md) |
 | 26 | [資料夾](day-26/README.md) |
 | 25 | [資料夾](day-25/README.md) |
 | 24 | [資料夾](day-24/README.md) |

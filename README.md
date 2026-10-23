@@ -17,9 +17,9 @@ Chat、Desktop Pet 與 Analytics 的規則、教學與交付證據庫。`copilot
 
 | 專案 | 最新文章 | 下一篇 |
 | --- | --- | --- |
-| Chat | [Day29](docs/teaching/daily/day-29/chat.md) | Day30 |
+| Chat | [Day29](docs/teaching/history/day-29/chat/github.md) | Day30 |
 | Pet | [Day29](docs/teaching/daily/day-29/pet.md) | Day30 |
-| Analytics | [Day29](docs/teaching/daily/day-29/analytics.md) | Day30 |
+| Analytics | [Day29](docs/teaching/history/day-29/analytics/github.md) | Day30 |
 
 以 [即時學習進度](docs/learning-state.json) 為準；上述為教學交付，不代表主體程式已套用或驗收。
 

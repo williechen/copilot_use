@@ -1,0 +1,121 @@
+{
+  "total_count": 1,
+  "jobs": [
+    {
+      "id": 120213214555,
+      "run_id": 39891849758,
+      "workflow_name": "Persistence",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/williechen/rust_ai_chat/actions/runs/39891849758",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOUlFt_c8AAAAb_UQVWw",
+      "head_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3",
+      "url": "https://api.github.com/repos/williechen/rust_ai_chat/actions/jobs/120213214555",
+      "html_url": "https://github.com/williechen/rust_ai_chat/actions/runs/39891849758/job/120213214555",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-23T02:51:29Z",
+      "started_at": "2026-10-23T02:51:31Z",
+      "completed_at": "2026-10-23T02:54:55Z",
+      "name": "test-persistence",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-23T02:51:32Z",
+          "completed_at": "2026-10-23T02:51:33Z"
+        },
+        {
+          "name": "Initialize containers",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-23T02:51:33Z",
+          "completed_at": "2026-10-23T02:51:55Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-23T02:51:55Z",
+          "completed_at": "2026-10-23T02:51:56Z"
+        },
+        {
+          "name": "Install Rust",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-23T02:51:56Z",
+          "completed_at": "2026-10-23T02:52:04Z"
+        },
+        {
+          "name": "Install sqlx-cli",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-23T02:52:04Z",
+          "completed_at": "2026-10-23T02:53:15Z"
+        },
+        {
+          "name": "Run database migrations",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-10-23T02:53:15Z",
+          "completed_at": "2026-10-23T02:53:15Z"
+        },
+        {
+          "name": "Test persistence",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-10-23T02:53:15Z",
+          "completed_at": "2026-10-23T02:53:42Z"
+        },
+        {
+          "name": "Test stats server with PostgreSQL",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8,
+          "started_at": "2026-10-23T02:53:42Z",
+          "completed_at": "2026-10-23T02:54:49Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15,
+          "started_at": "2026-10-23T02:54:49Z",
+          "completed_at": "2026-10-23T02:54:49Z"
+        },
+        {
+          "name": "Stop containers",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 16,
+          "started_at": "2026-10-23T02:54:49Z",
+          "completed_at": "2026-10-23T02:54:53Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 17,
+          "started_at": "2026-10-23T02:54:53Z",
+          "completed_at": "2026-10-23T02:54:53Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/williechen/rust_ai_chat/check-runs/120213214555",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000009330,
+      "runner_name": "GitHub Actions 1000009330",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    }
+  ]
+}

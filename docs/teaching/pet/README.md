@@ -97,3 +97,7 @@
 | 2 | [文章／版本／證據](../history/day-02/pet/README.md) |
 
 </details>
+
+## 本輪文章驗證與封存
+
+[全部文章逐篇結果](../history/evidence/2026-10-23-all-articles-9c2b7cf/ALL_ARTICLES.md) · [實跑證據與必要勘誤](../history/evidence/2026-10-23-all-articles-9c2b7cf/REPORT.md)。原生／前端契約通過不代替GUI；控制窗恢復、動態生活窗漫遊、三id畫面與故障注入／真App重啟仍待驗收，相關活動文章保留。

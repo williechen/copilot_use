@@ -69,7 +69,7 @@ Analytics 定位為純管理後台，Leptos 提供後台畫面；除登入及必
 
 ## 目前教學
 
-- **最新已發布：** [Analytics Day 29](../daily/day-29/analytics.md)（教學文章已發布；程式套用與功能驗收另行判定）
+- **最新已發布：** [Analytics Day 29](../history/day-29/analytics/github.md)（教學文章已發布；程式套用與功能驗收另行判定）
 - 前一篇：[Analytics Day 28](../daily/day-28/analytics.md)
 - **下一篇 Day：** **Day 30**（以 [learning-state.json](../../learning-state.json) 的 `next_day.analytics` 為準）。
 - [全部最新文章與三專案對照](../daily/README.md) · [交付狀態與證據](../current/STATUS.md)
@@ -105,3 +105,7 @@ Analytics 定位為純管理後台，Leptos 提供後台畫面；除登入及必
 | 2 | [文章／版本／證據](../history/day-02/analytics/README.md) |
 
 </details>
+
+## 本輪文章驗證與封存
+
+[全部文章逐篇結果](../history/evidence/2026-10-23-all-articles-9c2b7cf/ALL_ARTICLES.md) · [實跑證據與必要勘誤](../history/evidence/2026-10-23-all-articles-9c2b7cf/REPORT.md)。本案Day26、Day27、Day29已完成本篇切片驗證並封存；全產品功能驗收仍獨立，Day28原文SSR API勘誤另記。

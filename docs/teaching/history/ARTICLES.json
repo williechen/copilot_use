@@ -1071,6 +1071,84 @@
           "path": "docs/teaching/history/day-25/archive/notion/pet.md"
         }
       ]
+    },
+    {
+      "day": 26,
+      "project": "analytics",
+      "entry": "docs/teaching/history/day-26/analytics/README.md",
+      "article": "docs/teaching/history/day-26/analytics/github.md",
+      "sources": [
+        {
+          "old": "docs/teaching/daily/day-26/analytics.md",
+          "path": "docs/teaching/history/day-26/analytics/github.md"
+        }
+      ],
+      "archive_validation": "docs/teaching/history/evidence/2026-10-23-all-articles-9c2b7cf/REPORT.md"
+    },
+    {
+      "day": 26,
+      "project": "chat",
+      "entry": "docs/teaching/history/day-26/chat/README.md",
+      "article": "docs/teaching/history/day-26/chat/github.md",
+      "sources": [
+        {
+          "old": "docs/teaching/daily/day-26/chat.md",
+          "path": "docs/teaching/history/day-26/chat/github.md"
+        }
+      ],
+      "archive_validation": "docs/teaching/history/evidence/2026-10-23-all-articles-9c2b7cf/REPORT.md"
+    },
+    {
+      "day": 27,
+      "project": "analytics",
+      "entry": "docs/teaching/history/day-27/analytics/README.md",
+      "article": "docs/teaching/history/day-27/analytics/github.md",
+      "sources": [
+        {
+          "old": "docs/teaching/daily/day-27/analytics.md",
+          "path": "docs/teaching/history/day-27/analytics/github.md"
+        }
+      ],
+      "archive_validation": "docs/teaching/history/evidence/2026-10-23-all-articles-9c2b7cf/REPORT.md"
+    },
+    {
+      "day": 27,
+      "project": "chat",
+      "entry": "docs/teaching/history/day-27/chat/README.md",
+      "article": "docs/teaching/history/day-27/chat/github.md",
+      "sources": [
+        {
+          "old": "docs/teaching/daily/day-27/chat.md",
+          "path": "docs/teaching/history/day-27/chat/github.md"
+        }
+      ],
+      "archive_validation": "docs/teaching/history/evidence/2026-10-23-all-articles-9c2b7cf/REPORT.md"
+    },
+    {
+      "day": 29,
+      "project": "analytics",
+      "entry": "docs/teaching/history/day-29/analytics/README.md",
+      "article": "docs/teaching/history/day-29/analytics/github.md",
+      "sources": [
+        {
+          "old": "docs/teaching/daily/day-29/analytics.md",
+          "path": "docs/teaching/history/day-29/analytics/github.md"
+        }
+      ],
+      "archive_validation": "docs/teaching/history/evidence/2026-10-23-all-articles-9c2b7cf/REPORT.md"
+    },
+    {
+      "day": 29,
+      "project": "chat",
+      "entry": "docs/teaching/history/day-29/chat/README.md",
+      "article": "docs/teaching/history/day-29/chat/github.md",
+      "sources": [
+        {
+          "old": "docs/teaching/daily/day-29/chat.md",
+          "path": "docs/teaching/history/day-29/chat/github.md"
+        }
+      ],
+      "archive_validation": "docs/teaching/history/evidence/2026-10-23-all-articles-9c2b7cf/REPORT.md"
     }
   ],
   "supplements": [

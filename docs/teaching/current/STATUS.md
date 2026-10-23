@@ -6,22 +6,25 @@
 
 | 專案 | 最新已發布教學 | 下一 Day | 文章 Commit |
 | --- | --- | --- | --- |
-| Chat | [Day29](../daily/day-29/chat.md) | **30** | `d8ef21fd2f0eca49df445244a805f22dd64eb5e4` |
+| Chat | [Day29](../history/day-29/chat/github.md) | **30** | `d8ef21fd2f0eca49df445244a805f22dd64eb5e4` |
 | Pet | [Day29](../daily/day-29/pet.md) | **30** | `ef58906758a744d98b46c6c62c1e886343717ebd` |
-| Analytics | [Day29](../daily/day-29/analytics.md) | **30** | `ae5001c214bd5c571f3d2d150ba1e097ce984bbb` |
+| Analytics | [Day29](../history/day-29/analytics/github.md) | **30** | `ae5001c214bd5c571f3d2d150ba1e097ce984bbb` |
 
 本表是 Day29 文件交付快照；往後實際下一 Day 仍以 [即時學習狀態](../../learning-state.json) 為準。Day29 三篇已全文讀回、manifest 與每日索引已同步；Chat／Pet Day25 FIFO 更正仍 pending，不能因教學文件發布而結案。文章 Commit／Blob 只證明 GitHub 文件，不代表產品驗收。
 
 ### 程式來源與驗證邊界
 
-唯一主體為 rust_ai_chat/main。Day29 教學核對使用 `143d6b3f5180b669860b1300286b89464c669434`，只靜態核對入口，未對此 SHA 執行新測試或功能驗收；較早 SHA 的測試不可當作最新 main 結果。
+唯一主體為 rust_ai_chat/main。本輪驗證 `9c2b7cf5a4c60a08254445911916c4ed9b02d7b3`、文件基準 `fad5db13a6711ac45a9cfece8198b612d7ce4607`；[全部84篇逐篇結果](../history/evidence/2026-10-23-all-articles-9c2b7cf/ALL_ARTICLES.md)與[命令、真入口、缺陷、CI及勘誤](../history/evidence/2026-10-23-all-articles-9c2b7cf/REPORT.md)已保存。不是三案全通過。
 
+Chat後端25通過、UI SSR9通過／1失敗；Pet原生49與前端9通過、Node0通過／3失敗；Analytics隔離PG完整35通過。另核心套件32通過、WASM檢查與fmt通過；Chat嚴格Clippy失敗。workspace整體命令因磁碟空間不足未完成，各套件已分開補驗，不能稱單一workspace命令成功。
+
+真HTTP/WS與DB驗證支持Chat Day26/27/29、Analytics Day26/27/29共6篇完成切片封存；原文按blob／SHA256保留。[封存清單](../history/evidence/2026-10-23-all-articles-9c2b7cf/archive-manifest.json)。原文舊命令更正獨立記錄，未將原樣錯誤命令當成功。其他活動篇保留：Day28原文SSR API須勘誤、Pet控制窗恢復／動態窗漫遊／故障及三窗GUI未驗收；Analytics舊類型summary正式路由404、帳密入口缺舊限流政策。現存GitHub索引Day2–29為84篇；Day1正文未找到，另列來源缺口。
 - 程式、測試、CI／job、UI／API／IPC／DB、功能及重啟驗收只認 rust_ai_chat 的精確來源。
 - copilot_use 的 commit／blob／SHA256 只證明規則、文章、next_day／manifest 與全文讀回；舊程式、Release、CI 與產品試驗不作主體驗收。
 - learning-state／manifest 內舊 validated_program_sha、daily_product_sha、fixed_tag、acceptance 與試驗紀錄完整保留原用途，不能用來挑選本次主體 checkout 或推進 Day。
 - Analytics Day24 補教既有結案證據保留；Chat／Pet Day25 FIFO 仍依狀態與匹配證據逐項判定，不因本次規則整理結案。
 
-原產品狀態、較早測試數字及證據連結[完整保留](../history/evidence/2026-10-23-repository-roles/before/docs/teaching/current/STATUS.md)。本次不改 learning-state、manifest、補教佇列或 last_full_comparison。現行目標見 [FUTURE_WORK](../../FUTURE_WORK.md)；流程設定的剩餘差異見 [同步範圍](../../REPOSITORY_ROLE_TRANSITION.md)。
+原產品狀態、較早測試數字及證據連結[完整保留](../history/evidence/2026-10-23-repository-roles/before/docs/teaching/current/STATUS.md)。本次只在 learning-state／manifest 增加最新驗證與完成封存資料；next_day、補教佇列與 last_full_comparison 不變。現行目標見 [FUTURE_WORK](../../FUTURE_WORK.md)；流程設定的剩餘差異見 [同步範圍](../../REPOSITORY_ROLE_TRANSITION.md)。
 
 ### 排程與通知
 
@@ -31,4 +34,4 @@
 
 ### 教學交付
 
-GitHub `williechen/copilot_use/main` 為唯一規則與教學文章正本；[每日教學入口](../daily/README.md)。每新增一個專案 Day 獨立 commit、推送及全文讀回，之後才條件同步狀態與 manifest。共同主頁與三案 Notion 教學原文搬遷至 [GitHub 匯出索引](../history/evidence/notion-export/2026-10-22/README.md)，核對後移至可還原垃圾桶。本次同步 Day29 首頁與狀態摘要，不新增 Day、不修改補教佇列或完整比對時間。
+GitHub `williechen/copilot_use/main` 為唯一規則與教學文章正本；[每日教學入口](../daily/README.md)。每新增一個專案 Day 獨立 commit、推送及全文讀回，之後才條件同步狀態與 manifest。共同主頁與三案 Notion 教學原文搬遷至 [GitHub 匯出索引](../history/evidence/notion-export/2026-10-22/README.md)，核對後移至可還原垃圾桶。本次核對全部文章並封存完成切片，不新增Day、不修改補教佇列或完整比對時間。

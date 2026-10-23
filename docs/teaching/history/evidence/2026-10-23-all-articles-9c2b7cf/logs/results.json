@@ -1,0 +1,105 @@
+[
+  {
+    "name": "chat-server-tests",
+    "command": [
+      "cargo",
+      "test",
+      "--locked",
+      "-p",
+      "server",
+      "--features",
+      "ssr"
+    ],
+    "exit": 0,
+    "seconds": 18.7,
+    "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3"
+  },
+  {
+    "name": "chat-ui-ssr",
+    "command": [
+      "cargo",
+      "test",
+      "--locked",
+      "-p",
+      "ui",
+      "--features",
+      "ssr"
+    ],
+    "exit": 101,
+    "seconds": 7.8,
+    "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3"
+  },
+  {
+    "name": "pet-tests",
+    "command": [
+      "cargo",
+      "test",
+      "--locked",
+      "-p",
+      "desktop-pet"
+    ],
+    "exit": 0,
+    "seconds": 24.2,
+    "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3"
+  },
+  {
+    "name": "analytics-default",
+    "command": [
+      "cargo",
+      "test",
+      "--locked",
+      "-p",
+      "stats-server"
+    ],
+    "exit": 0,
+    "seconds": 11.4,
+    "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3"
+  },
+  {
+    "name": "chat-build",
+    "command": [
+      "cargo",
+      "build",
+      "--locked",
+      "-p",
+      "server",
+      "--features",
+      "ssr"
+    ],
+    "exit": 0,
+    "seconds": 25.8,
+    "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3"
+  },
+  {
+    "name": "chat-wasm",
+    "command": [
+      "cargo",
+      "check",
+      "--locked",
+      "-p",
+      "ui",
+      "--features",
+      "hydrate",
+      "--target",
+      "wasm32-unknown-unknown"
+    ],
+    "exit": 0,
+    "seconds": 2.6,
+    "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3"
+  },
+  {
+    "name": "pet-wasm",
+    "command": [
+      "cargo",
+      "check",
+      "--locked",
+      "-p",
+      "desktop-pet-frontend",
+      "--target",
+      "wasm32-unknown-unknown"
+    ],
+    "exit": 0,
+    "seconds": 1.4,
+    "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3"
+  }
+]

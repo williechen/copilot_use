@@ -1,0 +1,83 @@
+{
+  "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3",
+  "checks": [
+    {
+      "name": "healthz",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "unauthenticated ingest",
+      "actual": 401,
+      "expected": 401,
+      "passed": true
+    },
+    {
+      "name": "authenticated ingest",
+      "actual": 201,
+      "expected": 201,
+      "passed": true
+    },
+    {
+      "name": "duplicate ingest",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "identity conflict",
+      "actual": 409,
+      "expected": 409,
+      "passed": true
+    },
+    {
+      "name": "unsupported version",
+      "actual": 400,
+      "expected": 400,
+      "passed": true
+    },
+    {
+      "name": "unknown field",
+      "actual": 422,
+      "expected": 422,
+      "passed": true
+    },
+    {
+      "name": "malformed JSON",
+      "actual": 400,
+      "expected": 400,
+      "passed": true
+    },
+    {
+      "name": "oversized JSON",
+      "actual": 413,
+      "expected": 413,
+      "passed": true
+    },
+    {
+      "name": "Day20 legacy rate-limit expectation after 11 bad logins",
+      "actual": 401,
+      "expected": 429,
+      "passed": false
+    },
+    {
+      "name": "ready account login",
+      "actual": 303,
+      "expected": 303,
+      "passed": true
+    },
+    {
+      "name": "Day14 event-kind summary route",
+      "actual": 404,
+      "expected": 200,
+      "passed": false
+    },
+    {
+      "name": "production source summary",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    }
+  ]
+}

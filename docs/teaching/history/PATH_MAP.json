@@ -8372,6 +8372,48 @@
       "path": "docs/teaching/history/day-25/pending/pet-day24-corrections.md",
       "sha256": "a069d6006fba7fa83f3b093481afe8aeacf2e93d9271df8fa9ceb0faf46a8f4b",
       "bytes": 797
+    },
+    {
+      "original_path": "docs/teaching/daily/day-26/analytics.md",
+      "path": "docs/teaching/history/day-26/analytics/github.md",
+      "sha256": "16dab77db3f849b573390803c8d969597cde25ff2047ef68b7bc86f73594fa84",
+      "bytes": 5437,
+      "archive_validation": "docs/teaching/history/evidence/2026-10-23-all-articles-9c2b7cf/REPORT.md"
+    },
+    {
+      "original_path": "docs/teaching/daily/day-26/chat.md",
+      "path": "docs/teaching/history/day-26/chat/github.md",
+      "sha256": "02a8fa86b6e6f12c70f4384104a0feb481fba70a31637dcc667edf61fb22c0fa",
+      "bytes": 11661,
+      "archive_validation": "docs/teaching/history/evidence/2026-10-23-all-articles-9c2b7cf/REPORT.md"
+    },
+    {
+      "original_path": "docs/teaching/daily/day-27/analytics.md",
+      "path": "docs/teaching/history/day-27/analytics/github.md",
+      "sha256": "6473eb9cf2be4065e1055e285164b122beec87e06c3d8bbc285b877d4ffbc48f",
+      "bytes": 12254,
+      "archive_validation": "docs/teaching/history/evidence/2026-10-23-all-articles-9c2b7cf/REPORT.md"
+    },
+    {
+      "original_path": "docs/teaching/daily/day-27/chat.md",
+      "path": "docs/teaching/history/day-27/chat/github.md",
+      "sha256": "88a1c3f46e3fc30bef0cd5f36b7c0e561c0f1f5d19b4a5f7e5ec044cf9f30647",
+      "bytes": 9423,
+      "archive_validation": "docs/teaching/history/evidence/2026-10-23-all-articles-9c2b7cf/REPORT.md"
+    },
+    {
+      "original_path": "docs/teaching/daily/day-29/analytics.md",
+      "path": "docs/teaching/history/day-29/analytics/github.md",
+      "sha256": "e005c6c79ef65284a8c137ad409ed6e181a099872bd387e9758710d41645ea2b",
+      "bytes": 4640,
+      "archive_validation": "docs/teaching/history/evidence/2026-10-23-all-articles-9c2b7cf/REPORT.md"
+    },
+    {
+      "original_path": "docs/teaching/daily/day-29/chat.md",
+      "path": "docs/teaching/history/day-29/chat/github.md",
+      "sha256": "51640b468b51fe5f1b9b91b8dc38fd67a451ba19807efbf1f8755329d3362429",
+      "bytes": 4933,
+      "archive_validation": "docs/teaching/history/evidence/2026-10-23-all-articles-9c2b7cf/REPORT.md"
     }
   ]
 }
