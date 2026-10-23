@@ -6,7 +6,7 @@
   "fixed_tag_sha": "9bcae7c5d139f75ed08b4daffece602a71fdab34",
   "next_day": {
     "chat": 31,
-    "pet": 30,
+    "pet": 31,
     "analytics": 30
   },
   "last_full_comparison": "2026-10-16T22:47:14.399027+08:00",
@@ -2985,5 +2985,24 @@
       "sha256": "366ab24910f132feecc097284ea574c38968b30224279cbfeabc4e43bf289efa"
     },
     "note": "Day29 unfinished-item supplement and corrected HTTP method router; documentation only; next_day unchanged"
+  },
+  "day30_pet_delivery": {
+    "project": "pet",
+    "day": 30,
+    "revision": "r1",
+    "path": "docs/teaching/daily/day-30/pet.md",
+    "article_commit": "99c1edf022e88cf9c863e961326c528090da0c9a",
+    "blob_sha": "038d6f5cc2c807ebe26789b0c036245067ba23e3",
+    "sha256": "d01fc34fdb9d23e7f55e218aa3aab187b83d611698f3763c8ee6caa8a1287cd6",
+    "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3",
+    "rules_version": "daily-tdd-minimum-v1+github-only-v1",
+    "full_text_verified": true,
+    "code_blocks": 1,
+    "main_application": "not applied",
+    "tests": "not run",
+    "functional_acceptance": false,
+    "next_day_before": 30,
+    "next_day_after": 31,
+    "status": "github_article_readback_verified"
   }
 }

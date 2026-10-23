@@ -1,6 +1,6 @@
 {
   "scope": "Latest published teaching index; Day16 snapshot preserved in archive",
-  "revision": "chat-day30-r2-evidence-synced",
+  "revision": "pet-day30-state-synced",
   "synced_date": "2026-10-23",
   "source_sha": "e62ed41e2122ef0979af8e2d453bafa2e05aa2e5",
   "articles": [
@@ -495,12 +495,31 @@
         "sha256": "366ab24910f132feecc097284ea574c38968b30224279cbfeabc4e43bf289efa"
       },
       "note": "Day29 unfinished-item supplement and corrected HTTP method router; documentation only; next_day unchanged"
+    },
+    {
+      "project": "pet",
+      "day": 30,
+      "revision": "r1",
+      "path": "docs/teaching/daily/day-30/pet.md",
+      "article_commit": "99c1edf022e88cf9c863e961326c528090da0c9a",
+      "blob_sha": "038d6f5cc2c807ebe26789b0c036245067ba23e3",
+      "sha256": "d01fc34fdb9d23e7f55e218aa3aab187b83d611698f3763c8ee6caa8a1287cd6",
+      "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3",
+      "rules_version": "daily-tdd-minimum-v1+github-only-v1",
+      "full_text_verified": true,
+      "code_blocks": 1,
+      "main_application": "not applied",
+      "tests": "not run",
+      "functional_acceptance": false,
+      "next_day_before": 30,
+      "next_day_after": 31,
+      "status": "github_article_readback_verified"
     }
   ],
   "day15_frozen": true,
   "next_day": {
     "chat": 31,
-    "pet": 30,
+    "pet": 31,
     "analytics": 30
   },
   "day_advanced": true,
