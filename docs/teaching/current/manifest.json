@@ -598,11 +598,39 @@
         "sha256": "4177549918ebfc23c15026013dc66b6b71026517daa0b7b9dfca4308ce3d5c82"
       },
       "note": "Redelivered to match twelve agreed policies; original Git history preserved; no Gate 2 validation; no Day increment"
+    },
+    {
+      "parent": "259a1e6f08a6522ef596fe1448af4ac2bed56167",
+      "tree": "b43dac3b747ae4e0626bfd4bab88b4a41044be2d",
+      "rules_sha": "419e357989595184ce31a5ad062dfd78b35f19e7",
+      "source_sha": "1d1866dbbb30255fafa4c7f74b1868919662913c",
+      "read_at": "2026-10-23T12:32:20.324Z",
+      "project": "chat",
+      "day": 31,
+      "revision": "r1",
+      "article_commit": "66a7d1141ce057c04ee631434d959b1cb22e9ef2",
+      "blob_sha": "13a492c16273b60241d7d38ed8942ffc57334491",
+      "sha256": "5b1197262ad8ed903796eb9a3746c87e3f400e510d53ff0b85b7d90fa04a0fb2",
+      "bytes": 14082,
+      "full_text_verified": true,
+      "readback_at": "2026-10-23T12:32:40.763Z",
+      "raw_error": null,
+      "path": "docs/teaching/daily/day-31/chat.md",
+      "rules_version": "daily-tdd-minimum-v1+github-only-v1",
+      "status": "github_article_readback_verified",
+      "main_application": "not applied",
+      "tests": "not run",
+      "functional_acceptance": false,
+      "next_day_before": 31,
+      "next_day_after": 32,
+      "archived": false,
+      "remaining_gaps": "表單、CSRF、HTTP／SQLite 與瀏覽器流程待驗證；逐房 ACL 等缺口保留",
+      "expected_state_parent_sha": "66a7d1141ce057c04ee631434d959b1cb22e9ef2"
     }
   ],
   "day15_frozen": true,
   "next_day": {
-    "chat": 31,
+    "chat": 32,
     "pet": 31,
     "analytics": 31
   },
@@ -745,7 +773,7 @@
     "frozen_body_sha256": "ad6cef4a58f20f6162fb01a4c71ef1a752992856327063d9988112c91a639184",
     "frozen_notion_snapshot": "docs/teaching/archive/day-22/notion/chat.md"
   },
-  "latest_chat_publication": "docs/teaching/day23/chat-completion.json",
+  "latest_chat_publication": "docs/teaching/daily/day-31/chat-readback.json",
   "previous_day22_pet_article": {
     "project": "pet",
     "day": 22,

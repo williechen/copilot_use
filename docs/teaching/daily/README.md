@@ -18,6 +18,8 @@
 | 30 | [Pet](day-30/pet.md) | SQLite 失敗補償與三窗原生 GUI 驗收尚未完成 |
 | 30 | [Analytics](day-30/analytics.md) | Leptos 登入頁尚未套用；PG／路由整合尚待驗證 |
 
+| 31 | [chat：個人頁建房](day-31/chat.md) | 表單、CSRF、HTTP／SQLite 與瀏覽器流程待驗證；逐房 ACL 等缺口保留；程式未套用、測試未執行 |
+
 上述結果以 [逐篇驗證矩陣](../history/evidence/2026-10-23-all-articles-9c2b7cf/ALL_ARTICLES.md) 與 [最新補驗報告](../history/evidence/2026-10-23-browser-sqlite-9c2b7cf/REPORT.md) 的精確來源及覆蓋範圍為準。文章發布、程式已套用及單元測試通過，不直接等於本篇必要驗證完成。
 
 ## 完成後封存
