@@ -88,7 +88,7 @@ GitHub `williechen/copilot_use/main` 為唯一文章交付處：新篇位於 `do
 
 每日 06:00 Asia/Taipei，依 Chat → Pet → Analytics。**核心學習 60 分鐘**：三案各 15 分鐘均包含 Red → Green → Refactor，加共用彈性 15 分鐘。前一 Day 未完成補教、FIFO 舊補教、來源／套件版本核對、文章①③④節、GitHub commit／全文讀回／同步及 Gate 2 測試／整合驗收一律**額外計時**，不得因時間壓力省略最小完整 Green；超額工作記錄為待完成，不假裝驗收通過。
 
-**每日增量核對持續執行**，同一差異去重追蹤；必要來源不足時，只暫停受影響專案。
+**雙週期來源核對：** 每日增量核對只檢查當日教學切片、真實呼叫鏈、相關測試、版本、上一 Day 與 pending，來源不足只暫停受影響專案。**每週至少一次全專案重新比對**，現行每週日 08:00 Asia/Taipei（彈性執行，排程啟用）；逐案核對 `rust_ai_chat/main` 全部實際程式、Leptos UI、Axum／Tauri IPC、Domain／Application、SQLx、DB／migration、認證與 ACL、配置、測試／CI，與 `copilot_use/main` 的 P9 目標、架構、UI 契約、文章、狀態、manifest、待辦及版本證據比對。記錄兩庫精確 SHA、差異與證據，去重追蹤並供每日選題使用；不以週比對取代每日增量。只有全面核對**實際完整成功**才更新 `last_full_comparison`；失敗或證據不足不得更新，且不因比對推進 Day 或結案補教。兩庫分工不變，`rust_ai_chat` 始終唯讀。
 
 保留原生環境、Domain／Application 與 Adapter 邊界、各 DB 獨立驗證、migration／固定 tag／原始證據不可改寫、權限與檔案操作確認。不讀正式秘密、不執行付費 AI；產品驗收不得冒稱本次已重跑。P9 目標、P0–P12 學習階段與實際產品驗收分開。
 
