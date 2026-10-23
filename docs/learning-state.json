@@ -6,7 +6,7 @@
   "fixed_tag_sha": "9bcae7c5d139f75ed08b4daffece602a71fdab34",
   "next_day": {
     "chat": 29,
-    "pet": 28,
+    "pet": 29,
     "analytics": 29
   },
   "last_full_comparison": "2026-10-16T22:47:14.399027+08:00",
@@ -2864,5 +2864,24 @@
     "next_day_after": 29,
     "status": "github_article_readback_verified",
     "postgres_integration": "not run"
+  },
+  "day28_pet_delivery": {
+    "project": "pet",
+    "day": 28,
+    "revision": "r1",
+    "path": "docs/teaching/daily/day-28/pet.md",
+    "article_commit": "0cf3c78b1a14dc627b7767254bd4dcae2ba0eaf8",
+    "blob_sha": "ba5d417db164a4ac446d5a6f7d3b7f93ec0a9943",
+    "sha256": "3fdf22f606dfb0c0340a2a9ac329ee95347714636434f3bdab7616f91723d0fd",
+    "source_sha": "e62ed41e2122ef0979af8e2d453bafa2e05aa2e5",
+    "full_text_verified": true,
+    "code_blocks": 4,
+    "main_application": "not applied",
+    "tests": "not run",
+    "functional_acceptance": false,
+    "next_day_before": 28,
+    "next_day_after": 29,
+    "status": "github_article_readback_verified",
+    "makeup_queue": "pet Day25 remains pending"
   }
 }
