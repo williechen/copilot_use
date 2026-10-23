@@ -1,6 +1,6 @@
 {
   "scope": "Latest published teaching index; Day16 snapshot preserved in archive",
-  "revision": "pet-day30-state-synced",
+  "revision": "analytics-day30-state-synced",
   "synced_date": "2026-10-23",
   "source_sha": "e62ed41e2122ef0979af8e2d453bafa2e05aa2e5",
   "articles": [
@@ -514,13 +514,32 @@
       "next_day_before": 30,
       "next_day_after": 31,
       "status": "github_article_readback_verified"
+    },
+    {
+      "project": "analytics",
+      "day": 30,
+      "revision": "r1",
+      "path": "docs/teaching/daily/day-30/analytics.md",
+      "article_commit": "0ae5ca99eeee215fbd1b9ea9f257a79f6bb33d69",
+      "blob_sha": "00f09eab59a3f95371d348d1552431faee02cf90",
+      "sha256": "4177549918ebfc23c15026013dc66b6b71026517daa0b7b9dfca4308ce3d5c82",
+      "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3",
+      "rules_version": "daily-tdd-minimum-v1+github-only-v1",
+      "full_text_verified": true,
+      "code_blocks": 3,
+      "main_application": "not applied",
+      "tests": "not run",
+      "functional_acceptance": false,
+      "next_day_before": 30,
+      "next_day_after": 31,
+      "status": "github_article_readback_verified"
     }
   ],
   "day15_frozen": true,
   "next_day": {
     "chat": 31,
     "pet": 31,
-    "analytics": 30
+    "analytics": 31
   },
   "day_advanced": true,
   "reference_modified": false,
