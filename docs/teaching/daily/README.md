@@ -28,4 +28,6 @@
 
 [已驗收文章](../archived/README.md) · [既有歷史與證據](../history/README.md) · [已驗證完成切片清單](../history/evidence/2026-10-23-browser-sqlite-9c2b7cf/archive-manifest.json)
 
+第③節依共同規則核對本篇涉及套件及軟體**交付當日官方最新穩定版**，附官方來源、核對日、現有 manifest／lock 或安裝版、相容性與選版理由；未查明不得宣稱最新或通過 Gate 1。最新穩定版優先作為教學目標，`rust_ai_chat` 維持唯讀，不自動升級。
+
 新文章按 `day-NN/{chat,pet,analytics}.md` 存放。每新增一個專案 Day 立即獨立 commit／推送，全文讀回後條件同步狀態與 manifest，再讀回；不能累積多天或多案一起提交。實際下一 Day 取 [learning-state.json](../../learning-state.json)，不依目錄推算。封存、勘誤及驗證更新均不增加 Day，也不改變完整產品驗收的判定。
