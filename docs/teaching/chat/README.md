@@ -95,3 +95,7 @@
 ## 本輪文章驗證與封存
 
 [全部文章逐篇結果](../history/evidence/2026-10-23-all-articles-9c2b7cf/ALL_ARTICLES.md) · [實跑證據與必要勘誤](../history/evidence/2026-10-23-all-articles-9c2b7cf/REPORT.md)。本案Day26、Day27、Day29已完成本篇切片驗證並封存；全產品功能驗收仍獨立，Day28原文SSR API勘誤另記。
+
+## 瀏覽器與SQLite驗收更新
+
+[Day15／17／19／20本篇瀏覽器切片已驗證完成；Day18舊庫升級與真稽核未通過](../history/evidence/2026-10-23-browser-sqlite-9c2b7cf/REPORT.md)。已存在的封存正文不變，最新結果以此證據與逐篇矩陣為準。

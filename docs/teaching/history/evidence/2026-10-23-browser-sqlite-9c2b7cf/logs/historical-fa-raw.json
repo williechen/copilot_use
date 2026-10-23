@@ -1,0 +1,26 @@
+[
+  {
+    "file": "migrations/20260930034455_crate_rooms.sql",
+    "result": "applied"
+  },
+  {
+    "file": "migrations/20261007084321_create_messages.sql",
+    "result": "applied"
+  },
+  {
+    "file": "migrations/20261018073931_create_auth_user.sql",
+    "result": "applied"
+  },
+  {
+    "file": "migrations/20261018094242_create_ai_person.sql",
+    "result": "applied"
+  },
+  {
+    "file": "migrations/20261018114024_creat_protocol.sql",
+    "result": "applied"
+  },
+  {
+    "file": "migrations/20261018122554_creat_chat_action_log.sql",
+    "result": "applied"
+  }
+]

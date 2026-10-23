@@ -522,7 +522,13 @@
           "old": "docs/teaching/notion-export/2026-10-22/day-15/chat/3fbe51d450938130a3c0c93171105f3a.md",
           "path": "docs/teaching/history/day-15/chat/notion/3fbe51d450938130a3c0c93171105f3a.md"
         }
-      ]
+      ],
+      "latest_slice_validation": {
+        "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3",
+        "verdict": "本篇切片通過",
+        "report": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/REPORT.md",
+        "original_body_unchanged": true
+      }
     },
     {
       "day": 15,
@@ -598,7 +604,13 @@
           "old": "docs/teaching/notion-export/2026-10-22/day-17/chat/3fce51d45093818b913bebb8dab5ab65.md",
           "path": "docs/teaching/history/day-17/chat/notion/3fce51d45093818b913bebb8dab5ab65.md"
         }
-      ]
+      ],
+      "latest_slice_validation": {
+        "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3",
+        "verdict": "本篇切片通過",
+        "report": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/REPORT.md",
+        "original_body_unchanged": true
+      }
     },
     {
       "day": 17,
@@ -634,7 +646,13 @@
           "old": "docs/teaching/notion-export/2026-10-22/day-18/chat/3fde51d45093816bb36dd9099190d907.md",
           "path": "docs/teaching/history/day-18/chat/notion/3fde51d45093816bb36dd9099190d907.md"
         }
-      ]
+      ],
+      "latest_slice_validation": {
+        "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3",
+        "verdict": "實測失敗",
+        "report": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/REPORT.md",
+        "original_body_unchanged": true
+      }
     },
     {
       "day": 18,
@@ -678,7 +696,13 @@
           "old": "docs/teaching/notion-export/2026-10-22/day-19/chat/3fde51d4509381d2aac7ea4b356c213b.md",
           "path": "docs/teaching/history/day-19/chat/notion/3fde51d4509381d2aac7ea4b356c213b.md"
         }
-      ]
+      ],
+      "latest_slice_validation": {
+        "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3",
+        "verdict": "本篇切片通過",
+        "report": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/REPORT.md",
+        "original_body_unchanged": true
+      }
     },
     {
       "day": 19,
@@ -726,7 +750,13 @@
           "old": "docs/teaching/notion-export/2026-10-22/day-20/chat/3fee51d4509381d1a1e6eb5e5a1c996e.md",
           "path": "docs/teaching/history/day-20/chat/notion/3fee51d4509381d1a1e6eb5e5a1c996e.md"
         }
-      ]
+      ],
+      "latest_slice_validation": {
+        "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3",
+        "verdict": "本篇切片通過",
+        "report": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/REPORT.md",
+        "original_body_unchanged": true
+      }
     },
     {
       "day": 20,

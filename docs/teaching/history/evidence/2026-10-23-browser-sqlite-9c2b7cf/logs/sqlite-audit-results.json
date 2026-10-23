@@ -1,0 +1,80 @@
+{
+  "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3",
+  "legacy_source": "fa0888e",
+  "legacy_fixture_method": "exact historical migration SQL plus faithful SQLx SHA384 history; reconstructed fixtures, not user databases",
+  "runner_cases": [
+    {
+      "case": "current-reopen",
+      "started": true,
+      "exit": -15,
+      "logical_database_unchanged": true,
+      "log": "sqlite-current-reopen.log",
+      "migration_error": null
+    },
+    {
+      "case": "full-fa-valid",
+      "started": false,
+      "exit": 1,
+      "logical_database_unchanged": true,
+      "log": "sqlite-full-fa-valid.log",
+      "migration_error": "Error: Migrate(VersionMismatch(20260930034455))"
+    },
+    {
+      "case": "full-fa-null",
+      "started": false,
+      "exit": 1,
+      "logical_database_unchanged": true,
+      "log": "sqlite-full-fa-null.log",
+      "migration_error": "Error: Migrate(VersionMismatch(20260930034455))"
+    },
+    {
+      "case": "action-history-valid",
+      "started": false,
+      "exit": 1,
+      "logical_database_unchanged": true,
+      "log": "sqlite-action-history-valid.log",
+      "migration_error": "Error: Migrate(VersionMismatch(20261018122554))"
+    },
+    {
+      "case": "action-history-null",
+      "started": false,
+      "exit": 1,
+      "logical_database_unchanged": true,
+      "log": "sqlite-action-history-null.log",
+      "migration_error": "Error: Migrate(VersionMismatch(20261018122554))"
+    },
+    {
+      "case": "missing-version",
+      "started": false,
+      "exit": 1,
+      "logical_database_unchanged": true,
+      "log": "sqlite-missing-version.log",
+      "migration_error": "Error: Migrate(VersionMissing(20261001000000))"
+    }
+  ],
+  "current_schema_constraints": [
+    {
+      "case": "unbound_actor_id",
+      "accepted": true,
+      "meaning": "created_user_id is NOT NULL but not linked to a real authenticated user"
+    },
+    {
+      "case": "missing_id",
+      "accepted": false
+    },
+    {
+      "case": "null_id",
+      "accepted": false
+    },
+    {
+      "case": "update_id_to_null",
+      "accepted": false
+    },
+    {
+      "case": "duplicate_id",
+      "accepted": false
+    }
+  ],
+  "rust_action_log_callers": [],
+  "full_product_audit_complete": false
+}

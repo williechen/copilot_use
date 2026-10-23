@@ -1,0 +1,31 @@
+{
+  "original_articles": [
+    {
+      "path": "docs/teaching/history/day-15/chat/notion/3fbe51d450938130a3c0c93171105f3a.md",
+      "full_bytes_preserved": true,
+      "sha256": "b5438ed11f39f843f2c21de16bbe5727163f7225de8c207988ea2386f41c7244",
+      "original_blob_sha": "c172d83822232fe06bf5c16df42ffe9bc268412d"
+    },
+    {
+      "path": "docs/teaching/history/day-17/chat/notion/3fce51d45093818b913bebb8dab5ab65.md",
+      "full_bytes_preserved": true,
+      "sha256": "f3199b0e1160e1f2d101d8b28f908465b15a31b29c925be6df85453203c459cf",
+      "original_blob_sha": "67f494290f1b2486a8a6ddde20188eb0112cb5fb"
+    },
+    {
+      "path": "docs/teaching/history/day-19/chat/github.md",
+      "full_bytes_preserved": true,
+      "sha256": "c06d41904bc35e82d577fa74004163384da0df6c0fe7f73ccc38bec2ec1e66a0",
+      "original_blob_sha": "6e42e1ab761acc047545e4e3dd83a130d26c3d6b"
+    },
+    {
+      "path": "docs/teaching/history/day-20/chat/github.md",
+      "full_bytes_preserved": true,
+      "sha256": "3450a89ebf2e83d58d3732eb6652d36c3593cb87cda9f5e87a1fa970c855fa89",
+      "original_blob_sha": "99f2b0236586b6da64724a327ff1ec00de3f226a"
+    }
+  ],
+  "next_day_unchanged": true,
+  "other_learning_state_fields_unchanged": true,
+  "source_worktree_clean": true
+}
