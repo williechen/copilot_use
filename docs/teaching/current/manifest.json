@@ -1,6 +1,6 @@
 {
   "scope": "Latest published teaching index; Day16 snapshot preserved in archive",
-  "revision": "analytics-day30-state-synced",
+  "revision": "day30-revisions-12-policy-sync",
   "synced_date": "2026-10-23",
   "source_sha": "e62ed41e2122ef0979af8e2d453bafa2e05aa2e5",
   "articles": [
@@ -473,10 +473,10 @@
     {
       "project": "chat",
       "day": 30,
-      "revision": "r2",
+      "revision": "r3",
       "path": "docs/teaching/daily/day-30/chat.md",
-      "article_commit": "8d569638d067a69fcb81c66d117aaf0b9c022c30",
-      "blob_sha": "6f0a653729cb2ef4fa1dd016757a15f84163efc1",
+      "article_commit": "0548392623eed068ce9b29cd4c188cd3bb8668ba",
+      "blob_sha": "699bbd469ff12d259cbd8cb0a2069fca968037b4",
       "sha256": "5b7bc3be9fa000950715cb903707b05e41ef8639cabd3d65936a6bbf98aec4ee",
       "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3",
       "rules_version": "daily-tdd-minimum-v1+github-only-v1",
@@ -489,20 +489,21 @@
       "next_day_after": 31,
       "status": "github_article_readback_verified",
       "previous_revision": {
-        "revision": "r1",
-        "article_commit": "b56167f81b1279648fcc24ce0d35d2542b1e7b80",
-        "blob_sha": "822a838733f73dae2501dd23d9e985506f0258e6",
-        "sha256": "366ab24910f132feecc097284ea574c38968b30224279cbfeabc4e43bf289efa"
+        "revision": "r2",
+        "article_commit": "8d569638d067a69fcb81c66d117aaf0b9c022c30",
+        "blob_sha": "6f0a653729cb2ef4fa1dd016757a15f84163efc1",
+        "sha256": "5b7bc3be9fa000950715cb903707b05e41ef8639cabd3d65936a6bbf98aec4ee"
       },
-      "note": "Day29 unfinished-item supplement and corrected HTTP method router; documentation only; next_day unchanged"
+      "note": "Redelivered to match twelve agreed policies; original Git history preserved; no Gate 2 validation; no Day increment",
+      "sha256_status": "recompute required"
     },
     {
       "project": "pet",
       "day": 30,
-      "revision": "r1",
+      "revision": "r2",
       "path": "docs/teaching/daily/day-30/pet.md",
-      "article_commit": "99c1edf022e88cf9c863e961326c528090da0c9a",
-      "blob_sha": "038d6f5cc2c807ebe26789b0c036245067ba23e3",
+      "article_commit": "ed0fcdd51341fd9866cb78e08573463be7e06d71",
+      "blob_sha": "9824a0728ce1feb2fccbc71b66441f90000c2997",
       "sha256": "d01fc34fdb9d23e7f55e218aa3aab187b83d611698f3763c8ee6caa8a1287cd6",
       "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3",
       "rules_version": "daily-tdd-minimum-v1+github-only-v1",
@@ -513,15 +514,23 @@
       "functional_acceptance": false,
       "next_day_before": 30,
       "next_day_after": 31,
-      "status": "github_article_readback_verified"
+      "status": "github_article_readback_verified",
+      "previous_revision": {
+        "revision": "r1",
+        "article_commit": "99c1edf022e88cf9c863e961326c528090da0c9a",
+        "blob_sha": "038d6f5cc2c807ebe26789b0c036245067ba23e3",
+        "sha256": "d01fc34fdb9d23e7f55e218aa3aab187b83d611698f3763c8ee6caa8a1287cd6"
+      },
+      "note": "Redelivered to match twelve agreed policies; original Git history preserved; no Gate 2 validation; no Day increment",
+      "sha256_status": "recompute required"
     },
     {
       "project": "analytics",
       "day": 30,
-      "revision": "r1",
+      "revision": "r2",
       "path": "docs/teaching/daily/day-30/analytics.md",
-      "article_commit": "0ae5ca99eeee215fbd1b9ea9f257a79f6bb33d69",
-      "blob_sha": "00f09eab59a3f95371d348d1552431faee02cf90",
+      "article_commit": "d6175ee83aad7cd3a32433826ccb20b01f0211de",
+      "blob_sha": "5ed1ea4cd2729863e14187a5c3a5593d493460e7",
       "sha256": "4177549918ebfc23c15026013dc66b6b71026517daa0b7b9dfca4308ce3d5c82",
       "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3",
       "rules_version": "daily-tdd-minimum-v1+github-only-v1",
@@ -532,7 +541,15 @@
       "functional_acceptance": false,
       "next_day_before": 30,
       "next_day_after": 31,
-      "status": "github_article_readback_verified"
+      "status": "github_article_readback_verified",
+      "previous_revision": {
+        "revision": "r1",
+        "article_commit": "0ae5ca99eeee215fbd1b9ea9f257a79f6bb33d69",
+        "blob_sha": "00f09eab59a3f95371d348d1552431faee02cf90",
+        "sha256": "4177549918ebfc23c15026013dc66b6b71026517daa0b7b9dfca4308ce3d5c82"
+      },
+      "note": "Redelivered to match twelve agreed policies; original Git history preserved; no Gate 2 validation; no Day increment",
+      "sha256_status": "recompute required"
     }
   ],
   "day15_frozen": true,
