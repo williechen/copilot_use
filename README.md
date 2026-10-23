@@ -15,13 +15,13 @@ Chat、Desktop Pet 與 Analytics 的規則、教學與交付證據庫。`copilot
 
 [目前進度與待完成項目](https://github.com/williechen/copilot_use/blob/main/docs/teaching/current/STATUS.md) · [最新學習進度](https://github.com/williechen/copilot_use/blob/main/docs/learning-state.json) · [文件總目錄](https://github.com/williechen/copilot_use/blob/main/docs/README.md)
 
-## 最新教學（Day30）
+## 最新教學（Day32）
 
 | 專案 | 最新文章 | 下一篇 |
 | --- | --- | --- |
-| Chat | [Day30 r3](docs/teaching/daily/day-30/chat.md) | Day31 |
-| Pet | [Day30 r2](docs/teaching/daily/day-30/pet.md) | Day31 |
-| Analytics | [Day30 r2](docs/teaching/daily/day-30/analytics.md) | Day31 |
+| Chat | [Day32](docs/teaching/daily/day-32/chat.md) | Day33 |
+| Pet | [Day32](docs/teaching/daily/day-32/pet.md) | Day33 |
+| Analytics | [Day32](docs/teaching/daily/day-32/analytics.md) | Day33 |
 
 以 [即時學習進度](docs/learning-state.json) 為準；上述為教學交付，不代表主體程式已套用或驗收。
 
