@@ -4,6 +4,10 @@
 
 三案 next_day 以 [learning-state.json](learning-state.json) 即時值為準；教學交付、程式套用與功能驗收分別記錄。本文是教學政策唯一正本；新教學在 [daily](teaching/daily/README.md)，必要驗證完成才移至 `docs/teaching/archived/day-NN/{project}.md`；既有歷史正文與原始證據維持於 [history](teaching/history/README.md)。
 
+### 現行需求與已廢除規則
+
+P9 規則已廢除且與現況不同，不再作為產品目標、選題、待辦優先順序、驗收門檻或全面比對依據。需求以使用者最新確認內容為優先，再依現行使用者流程、人員驗證及 UI 條件核對；實作與驗證以 rust_ai_chat 精確 SHA 為證據。若現行文件仍殘留舊要求，先記錄差異並更新，不從已廢除規則推定必做功能。
+
 ### 現況文章的呈現方式
 
 現況文章與專案首頁只說明功能、實作狀態、驗證結果、缺口及來源證據，不在正文列教學日編號或「驗證支持哪些 Day」的對照。例如僅寫「DB 驗證」，再列實際範圍與結果。教學編號、版本、交付、封存與補教追蹤保留於既有狀態檔、manifest、教學索引和原始歷史證據；本規則不改變進度或驗收條件。
@@ -22,13 +26,13 @@
 
 ### 1. 來源與選題
 
-每次實際重讀 copilot\_use 的 <code>docs/COMMON_LEARNING_RULES.md</code>、<code>docs/learning-state.json</code>、<code>docs/P9_TARGET.md</code>、<code>docs/FUTURE_WORK.md</code>、<code>docs/SYSTEM_ARCHITECTURE.md</code>、<code>docs/UI_ALIGNMENT_REQUIREMENTS.md</code>、<code>docs/teaching/current/manifest.json</code>，以及 GitHub 三專案入口、<code>docs/teaching/daily/README.md</code> 與相關 Day。取得 rust\_ai\_chat/main 的程式來源 SHA 與 copilot\_use/main 的文件交付 SHA；只在 rust\_ai\_chat 核對本日程式、實際呼叫端、測試及差異，在 copilot\_use 核對規則、文章、索引與交付證據。必要來源讀取失敗，只暫停受影響專案，不能以快取冒充最新。
+每次實際重讀 copilot\_use 的 <code>docs/COMMON_LEARNING_RULES.md</code>、<code>docs/learning-state.json</code>、<code>docs/requirements/USER_FLOWS.md</code>、<code>docs/requirements/AUTHENTICATION.md</code>、<code>docs/FUTURE_WORK.md</code>、<code>docs/SYSTEM_ARCHITECTURE.md</code>、<code>docs/UI_ALIGNMENT_REQUIREMENTS.md</code>、<code>docs/teaching/current/manifest.json</code>，以及 GitHub 三專案入口、<code>docs/teaching/daily/README.md</code> 與相關 Day。取得 rust\_ai\_chat/main 的程式來源 SHA 與 copilot\_use/main 的文件交付 SHA；只在 rust\_ai\_chat 核對本日程式、實際呼叫端、測試及差異，在 copilot\_use 核對規則、文章、索引與交付證據。必要來源讀取失敗，只暫停受影響專案，不能以快取冒充最新。
 
 發布每篇前再取 main SHA 及必要規則版本；來源 SHA 改變就重建所有尚未發布草稿，規則改變則重新核對、必要時重建。已完整發布讀回的 Day 不自動撤銷。記錄規則版本、文章 commit／blob SHA、全文 SHA256 與讀回時間、GitHub 規則 blob／commit SHA、兩庫來源 SHA 及讀取時間。rust\_ai\_chat 全庫唯讀，教學程式由使用者套用；copilot\_use 只維護文件與教學交付，不另作產品程式整合或功能驗收。
 
 #### 既定技術分層與 Leptos UI 強制規則（2026-10-22 確認）
 
-本規則是**沿用原本架構、修正教學偏差**，不是重新選型或變更產品架構；與 P9_TARGET、SYSTEM_ARCHITECTURE、UI_ALIGNMENT_REQUIREMENTS 並行，發生矛盾應先核對最新真實程式與規則正本，不得跳過既有呼叫鏈。
+本規則是**沿用原本架構、修正教學偏差**，不是重新選型或變更產品架構；與現行使用者流程、SYSTEM_ARCHITECTURE、UI_ALIGNMENT_REQUIREMENTS 並行，發生矛盾應先核對最新真實程式與規則正本，不得跳過既有呼叫鏈。
 
 - **Leptos** 是三案適用的 UI／頁面元件框架：Chat 使用既有 Leptos SSR／Hydration 與 Router；Pet 維持 Leptos CSR + Tauri；Analytics 的正式登入、修改密碼及管理後台頁面應逐步採用 Leptos 元件、表單、Signals／Actions／Resources／Router，而不是以 Axum `Html(...)`／`Html(format!(...))` 完整字串頁面作為新 UI Green。
 - **Axum** 負責 HTTP API、WebSocket、Routing／Middleware、Cookie、Session、安全性檢查與 ACL。保留既有可運作的 API／Session／認證契約；逐步將頁面呈現從 Axum HTML Handler 分離。Axum 可處理 HTTP response，但不得藉此取代原有 Leptos UI。
@@ -46,7 +50,7 @@
 - <b>Pet 基本功能門檻：</b> 使用者可建立第一隻具身分、名稱、初始外觀的寵物，透過 Tauri IPC 真正儲存 SQLite、顯示於生活視窗，重新啟動後能載入。<code>PetMachine::default()</code> 不等於使用者建立寵物；在建立、載入流程可用前，視窗漫遊／拖曳／找回與多寵物進階特性只列後續項目。
 - <b>Analytics 基本功能門檻：</b> 建立並持久化管理員帳號，安全的加鹽密碼雜湊、首次登入強制改密碼、有效 Session 與後台頁面授權先接通，再深化角色、帳號級登入等待、報表及來源事件。
 
-主體為各專案每天**一個**可驗證的最小切片，整體能力可跨 Day 漸進完成；每日新內容須接到既有真實呼叫鏈。教學文章完整交付可推進 Day，程式套用與產品驗收獨立判定；產品 Gate 由 [P9_TARGET](P9_TARGET.md) 定義。
+主體為各專案每天**一個**可驗證的最小切片，整體能力可跨 Day 漸進完成；每日新內容須接到既有真實呼叫鏈。教學文章完整交付可推進 Day，程式套用與產品驗收獨立判定；產品驗收條件依使用者最新確認內容、[現行使用者流程](requirements/USER_FLOWS.md)與[UI 驗收條件](UI_ALIGNMENT_REQUIREMENTS.md)逐項核對。
 
 ### 2. 文章最小格式
 
@@ -80,7 +84,7 @@ GitHub `williechen/copilot_use/main` 為唯一文章交付處：新篇位於 `do
 
 **原文不可變＋版本化修訂：** 發布後保留原始 commit／blob／SHA256；發現錯誤另存 r2/r3 修訂與勘誤證據，不覆寫原版本的歷史證據、不額外增加 Day，未通過 Gate 2 不得封存。既有 `makeup_queue` 嚴格 FIFO 且每篇最多結案一項，補教失敗不回退 Day；規則整理、驗證、修訂及封存均不增加 Day。
 
-**文件職責：** 本文唯一管理教學流程、TDD、交付、補教及封存；[P9_TARGET](P9_TARGET.md) 管產品目標與完成門檻，[SYSTEM_ARCHITECTURE](SYSTEM_ARCHITECTURE.md) 管架構分層，[UI_ALIGNMENT_REQUIREMENTS](UI_ALIGNMENT_REQUIREMENTS.md) 管 UI 契約，[FUTURE_WORK](FUTURE_WORK.md) 管待辦；`learning-state.json` 管即時進度，`manifest.json` 管文章與版本索引。實際程式現況只以 `rust_ai_chat/main` 精確 SHA 為準。不同文件發生矛盾先記錄核對，不擅改產品要求；根 README 僅導覽。
+**文件職責：** 本文唯一管理教學流程、TDD、交付、補教及封存；[現行使用者流程](requirements/USER_FLOWS.md)與[人員驗證需求](requirements/AUTHENTICATION.md)管理已確認需求，[SYSTEM_ARCHITECTURE](SYSTEM_ARCHITECTURE.md) 管架構分層，[UI_ALIGNMENT_REQUIREMENTS](UI_ALIGNMENT_REQUIREMENTS.md) 管 UI 契約，[FUTURE_WORK](FUTURE_WORK.md) 管待辦；`learning-state.json` 管即時進度，`manifest.json` 管文章與版本索引。實際程式現況只以 `rust_ai_chat/main` 精確 SHA 為準。不同文件發生矛盾先記錄核對，不擅改產品要求；根 README 僅導覽。
 
 ### 5. 最小失敗恢復
 
@@ -92,9 +96,9 @@ GitHub `williechen/copilot_use/main` 為唯一文章交付處：新篇位於 `do
 
 每日 06:00 Asia/Taipei，依 Chat → Pet → Analytics。**核心學習 60 分鐘**：三案各 15 分鐘均包含 Red → Green → Refactor，加共用彈性 15 分鐘。前一 Day 未完成補教、FIFO 舊補教、來源／套件版本核對、文章①③④節、GitHub commit／全文讀回／同步及 Gate 2 測試／整合驗收一律**額外計時**，不得因時間壓力省略最小完整 Green；超額工作記錄為待完成，不假裝驗收通過。
 
-**雙週期來源核對：** 每日增量核對只檢查當日教學切片、真實呼叫鏈、相關測試、版本、上一 Day 與 pending，來源不足只暫停受影響專案。**每週至少一次全專案重新比對**，現行每週日 08:00 Asia/Taipei（彈性執行，排程啟用）；逐案核對 `rust_ai_chat/main` 全部實際程式、Leptos UI、Axum／Tauri IPC、Domain／Application、SQLx、DB／migration、認證與 ACL、配置、測試／CI，與 `copilot_use/main` 的 P9 目標、架構、UI 契約、文章、狀態、manifest、待辦及版本證據比對。記錄兩庫精確 SHA、差異與證據，去重追蹤並供每日選題使用；不以週比對取代每日增量。只有全面核對**實際完整成功**才更新 `last_full_comparison`；失敗或證據不足不得更新，且不因比對推進 Day 或結案補教。兩庫分工不變，`rust_ai_chat` 始終唯讀。
+**雙週期來源核對：** 每日增量核對只檢查當日教學切片、真實呼叫鏈、相關測試、版本、上一 Day 與 pending，來源不足只暫停受影響專案。**每週至少一次全專案重新比對**，現行每週日 08:00 Asia/Taipei（彈性執行，排程啟用）；逐案核對 `rust_ai_chat/main` 全部實際程式、Leptos UI、Axum／Tauri IPC、Domain／Application、SQLx、DB／migration、認證與 ACL、配置、測試／CI，與 `copilot_use/main` 的現行使用者需求、架構、UI 契約、文章、狀態、manifest、待辦及版本證據比對。記錄兩庫精確 SHA、差異與證據，去重追蹤並供每日選題使用；不以週比對取代每日增量。只有全面核對**實際完整成功**才更新 `last_full_comparison`；失敗或證據不足不得更新，且不因比對推進 Day 或結案補教。兩庫分工不變，`rust_ai_chat` 始終唯讀。
 
-保留原生環境、Domain／Application 與 Adapter 邊界、各 DB 獨立驗證、migration／固定 tag／原始證據不可改寫、權限與檔案操作確認。不讀正式秘密、不執行付費 AI；產品驗收不得冒稱本次已重跑。P9 目標、P0–P12 學習階段與實際產品驗收分開。
+保留原生環境、Domain／Application 與 Adapter 邊界、各 DB 獨立驗證、migration／固定 tag／原始證據不可改寫、權限與檔案操作確認。不讀正式秘密、不執行付費 AI；產品驗收不得冒稱本次已重跑。學習階段與實際產品驗收分開，已廢除的規則不作驗收依據。
 
 ### 文件整理與歷史追溯
 

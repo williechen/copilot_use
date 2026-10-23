@@ -49,7 +49,7 @@
 - 最新 Node 測試及對應 CI 成功；其他 CI 狀態以精確 SHA 的報告快照或實際 run 為準，不由本地通過推論。
 - 原生 GUI、失敗注入、跨平台與完整產品 E2E 尚未全面完成；編譯、單元測試、文章交付各自判定。
 - 只有全面比對真正成功才更新 `last_full_comparison`；目前保留 `2026-10-16T22:47:14.399027+08:00`。
-- [待完成功能](../../FUTURE_WORK.md) · [需求與驗收條件](../../P9_TARGET.md) · [即時追蹤資料](../../learning-state.json) · [歷史原文與證據](../history/README.md)。
+- [待完成功能](../../FUTURE_WORK.md) · [現行使用者需求](../../requirements/USER_FLOWS.md) · [即時追蹤資料](../../learning-state.json) · [歷史原文與證據](../history/README.md)。
 
 ## 排程與通知
 

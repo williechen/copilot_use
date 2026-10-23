@@ -1,4 +1,20 @@
 {
+  "requirements_policy": {
+    "status": "current",
+    "confirmed_at": "2026-10-23",
+    "retired_rules": [
+      "P9"
+    ],
+    "retired_rule_use": "historical reference only; not a product target, selection rule or acceptance gate",
+    "requirements_priority": "latest direct user confirmation, then current requirements documents",
+    "requirements_documents": [
+      "docs/requirements/USER_FLOWS.md",
+      "docs/requirements/AUTHENTICATION.md",
+      "docs/UI_ALIGNMENT_REQUIREMENTS.md"
+    ],
+    "implementation_evidence": "rust_ai_chat exact commit and actual validation evidence",
+    "historical_records_are_not_current_policy": true
+  },
   "reference_sha": "3e58e650bd63bcd21ba58e7aabf751542401ef80",
   "validated_program_sha": "9bcae7c5d139f75ed08b4daffece602a71fdab34",
   "validated_program_ci_run": null,

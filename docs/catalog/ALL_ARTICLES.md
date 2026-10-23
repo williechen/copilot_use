@@ -11,7 +11,7 @@
 | 現行文件／入口 | [docs/FUTURE_WORK.md](../FUTURE_WORK.md) |
 | 現行文件／入口 | [docs/GITHUB_PET_UPDATES.md](../GITHUB_PET_UPDATES.md) |
 | 現行文件／入口 | [docs/LOCAL_VALIDATION.md](../LOCAL_VALIDATION.md) |
-| 現行文件／入口 | [docs/P9_TARGET.md](../P9_TARGET.md) |
+| 已廢除規則／歷史入口 | [docs/P9_TARGET.md](../P9_TARGET.md) |
 | 現行文件／入口 | [docs/README.md](../README.md) |
 | 現行文件／入口 | [docs/SATURDAY_OPERATIONS.md](../SATURDAY_OPERATIONS.md) |
 | 現行文件／入口 | [docs/SEMANTIC_ARCHITECTURE_REVIEW.md](../SEMANTIC_ARCHITECTURE_REVIEW.md) |

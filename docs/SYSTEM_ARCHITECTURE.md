@@ -1,6 +1,6 @@
 # 系統架構與執行邊界
 
-`copilot_use` 是規則、教學文章、next_day、manifest、交付讀回與歷史證據的正本；`rust_ai_chat` 是唯一程式、測試、CI 與功能驗收主體。 規則正本見 [共用規則](COMMON_LEARNING_RULES.md)，需求及未完成項見 [P9_TARGET](P9_TARGET.md)、[FUTURE_WORK](FUTURE_WORK.md)。
+`copilot_use` 是規則、教學文章、next_day、manifest、交付讀回與歷史證據的正本；`rust_ai_chat` 是唯一程式、測試、CI 與功能驗收主體。 規則正本見 [共用規則](COMMON_LEARNING_RULES.md)，需求及未完成項見[現行使用者流程](requirements/USER_FLOWS.md)、[人員驗證需求](requirements/AUTHENTICATION.md)與[FUTURE_WORK](FUTURE_WORK.md)。
 
 ## 程式來源與驗證範圍
 

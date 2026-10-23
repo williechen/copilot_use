@@ -6,4 +6,4 @@
 
 尚無實際呼叫鏈或匹配測試的目標列為未接通，不以記憶體假成功、舊 501 或 copilot_use 已實作能力當成主體現況。契約變更保留版本與原證據，必要更正按後續 Day 規則處理。
 
-[原 copilot_use 傳輸文件](teaching/history/evidence/2026-10-23-repository-roles/before/docs/ANALYTICS_TRANSPORT.md) 保留固定來源的契約與結果；需求詳見 [P9](P9_TARGET.md)、[工作項目](FUTURE_WORK.md)、[服務憑證要求](SERVICE_CREDENTIAL_REQUIREMENTS.md)。
+[原 copilot_use 傳輸文件](teaching/history/evidence/2026-10-23-repository-roles/before/docs/ANALYTICS_TRANSPORT.md) 保留固定來源的契約與結果；需求詳見[現行使用者流程](requirements/USER_FLOWS.md)、[UI 驗收條件](UI_ALIGNMENT_REQUIREMENTS.md)、[工作項目](FUTURE_WORK.md)、[服務憑證要求](SERVICE_CREDENTIAL_REQUIREMENTS.md)。

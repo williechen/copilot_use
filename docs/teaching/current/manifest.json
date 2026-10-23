@@ -1,4 +1,20 @@
 {
+  "requirements_policy": {
+    "status": "current",
+    "confirmed_at": "2026-10-23",
+    "retired_rules": [
+      "P9"
+    ],
+    "retired_rule_use": "historical reference only; not a product target, selection rule or acceptance gate",
+    "requirements_priority": "latest direct user confirmation, then current requirements documents",
+    "requirements_documents": [
+      "docs/requirements/USER_FLOWS.md",
+      "docs/requirements/AUTHENTICATION.md",
+      "docs/UI_ALIGNMENT_REQUIREMENTS.md"
+    ],
+    "implementation_evidence": "rust_ai_chat exact commit and actual validation evidence",
+    "historical_records_are_not_current_policy": true
+  },
   "scope": "Latest published teaching index; Day16 snapshot preserved in archive",
   "revision": "day30-revisions-12-policy-sync",
   "synced_date": "2026-10-23",
