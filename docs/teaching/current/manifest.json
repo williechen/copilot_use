@@ -626,12 +626,40 @@
       "archived": false,
       "remaining_gaps": "表單、CSRF、HTTP／SQLite 與瀏覽器流程待驗證；逐房 ACL 等缺口保留",
       "expected_state_parent_sha": "66a7d1141ce057c04ee631434d959b1cb22e9ef2"
+    },
+    {
+      "parent": "791a31ad1292559a6eb7a6cdca8b72ecc2f08389",
+      "tree": "c3d0c5db7b82cc57ec078434337b14303839904b",
+      "rules_sha": "419e357989595184ce31a5ad062dfd78b35f19e7",
+      "source_sha": "1d1866dbbb30255fafa4c7f74b1868919662913c",
+      "read_at": "2026-10-23T12:36:38.760Z",
+      "project": "pet",
+      "day": 31,
+      "revision": "r1",
+      "article_commit": "e1f2dee87de9e161ab1001377ad1916f1aefcf87",
+      "blob_sha": "fdb034e5612668d06d8019e5a29a1234e2719de0",
+      "sha256": "1cfe08490a593e37b680b2936e05f69d7b7a237a1b81bfb175b60dc3e7f593b3",
+      "bytes": 13964,
+      "full_text_verified": true,
+      "readback_at": "2026-10-23T12:36:41.938Z",
+      "raw_error": null,
+      "path": "docs/teaching/daily/day-31/pet.md",
+      "rules_version": "daily-tdd-minimum-v1+github-only-v1",
+      "status": "github_article_readback_verified",
+      "main_application": "not applied",
+      "tests": "not run",
+      "functional_acceptance": false,
+      "next_day_before": 31,
+      "next_day_after": 32,
+      "archived": false,
+      "remaining_gaps": "原生 close／hide／重開與三窗 GUI 未驗證；回籠補償及單圖 FIFO 保留",
+      "expected_state_parent_sha": "e1f2dee87de9e161ab1001377ad1916f1aefcf87"
     }
   ],
   "day15_frozen": true,
   "next_day": {
     "chat": 32,
-    "pet": 31,
+    "pet": 32,
     "analytics": 31
   },
   "day_advanced": true,
@@ -809,7 +837,7 @@
     "frozen_body_sha256": "88fa706c5a3f7f3d6255957b8ed317d64cb1a6c57f1cf6638bfb838d5e6b282f",
     "frozen_notion_snapshot": "docs/teaching/archive/day-22/notion/pet.md"
   },
-  "latest_pet_publication": "docs/teaching/day23/pet-completion.json",
+  "latest_pet_publication": "docs/teaching/daily/day-31/pet-readback.json",
   "previous_day22_analytics_article": {
     "project": "analytics",
     "day": 22,

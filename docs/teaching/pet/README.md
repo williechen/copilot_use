@@ -63,3 +63,5 @@ rust_ai_chat 的 apps/desktop\_pet 負責 Tauri／OS 入口，frontend 負責 Le
 回籠補償程式已套用，原生 Rust 與 Node 契約測試通過；關窗／DB 失敗注入、三窗 GUI 與 App 重啟仍待驗證。
 
 [完整現況](../current/STATUS.md) · [驗證報告](../history/evidence/2026-10-23-day30-validation-1d1866d/REPORT.md) · [歷史文章與原始證據](../history/README.md)
+
+[最新教學提案：控制窗關閉後重開](../daily/day-31/pet.md)（程式尚待使用者套用與驗收）。
