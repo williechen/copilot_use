@@ -22,6 +22,8 @@
 
 | 31 | [pet：控制窗關閉後重開](day-31/pet.md) | 原生 close／hide／重開與三窗 GUI 未驗證；回籠補償及單圖 FIFO 保留；程式未套用、測試未執行 |
 
+| 31 | [analytics：Leptos 改密碼頁](day-31/analytics.md) | SSR／正式路由、隔離 PostgreSQL 全 targets 與瀏覽器驗收未執行；初始化及 ACL 差異保留；程式未套用、測試未執行 |
+
 上述結果以 [逐篇驗證矩陣](../history/evidence/2026-10-23-all-articles-9c2b7cf/ALL_ARTICLES.md) 與 [最新補驗報告](../history/evidence/2026-10-23-browser-sqlite-9c2b7cf/REPORT.md) 的精確來源及覆蓋範圍為準。文章發布、程式已套用及單元測試通過，不直接等於本篇必要驗證完成。
 
 ## 完成後封存

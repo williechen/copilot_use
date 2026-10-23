@@ -71,3 +71,5 @@ rust_ai_chat 的 apps/stats\_server/src/<code>lib.rs</code> 與正式登入 rout
 Leptos 登入、DB、HTTP 與真實瀏覽器登入／來源切換／登出已通過；完整角色與來源權限仍待完成。
 
 [完整現況](../current/STATUS.md) · [驗證報告](../history/evidence/2026-10-23-day30-validation-1d1866d/REPORT.md) · [歷史文章與原始證據](../history/README.md)
+
+[最新教學提案：Leptos 改密碼頁](../daily/day-31/analytics.md)（程式尚待使用者套用與驗收）。
