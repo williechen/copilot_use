@@ -1,0 +1,102 @@
+{
+  "publication_commit": "3fdf5ca6df8aa93d8e3653649b7f9a13b4f1f177",
+  "readback_at": "2026-10-23T12:49:27.251660+08:00",
+  "full_changed_files_match": true,
+  "changed_files": 14,
+  "completed_slice_records": 9,
+  "newly_completed_chat_days": [
+    17,
+    19,
+    20
+  ],
+  "day15_partial_not_completed": true,
+  "day18_legacy_upgrade_and_audit_incomplete": true,
+  "original_archived_bodies_preserved": true,
+  "next_day_makeup_queue_last_full_comparison_unchanged": true,
+  "files": [
+    {
+      "path": "docs/FUTURE_WORK.md",
+      "sha256": "f18b3d2a1fed43cb3d356361a038045f0fbddfdaac531de61c7b567ef0c78b0f",
+      "bytes": 13422,
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/learning-state.json",
+      "sha256": "71f7fd8aac4c73e7160feb8a8c4025524e8be67a69704338c7a185bdbc2429d6",
+      "bytes": 126211,
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/chat/README.md",
+      "sha256": "06e3b0941ed8735f2f67d8b40bb67ddc503506c3b918151b55992afd568c8416",
+      "bytes": 7642,
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/current/STATUS.md",
+      "sha256": "f421bb80449ef29b79acd10cdf118a47bc394bdb0fcb724361942b3a419c9c8b",
+      "bytes": 5262,
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/current/manifest.json",
+      "sha256": "2c26329f5c37f9f718fbbbee6944f0bbef7cb311981ca48b82d938e0c28c70b5",
+      "bytes": 43493,
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/history/ARTICLES.json",
+      "sha256": "f47e96777a49f291bd5c5db57b8cc866a8a3e4eaa480ea43c42bdf6c700902c0",
+      "bytes": 47384,
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/history/day-15/chat/README.md",
+      "sha256": "ff6c24d0e91912776d5e7319d795e8bce46297bf934517375c2320222ae56172",
+      "bytes": 1111,
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/history/evidence/2026-10-23-all-articles-9c2b7cf/ALL_ARTICLES.md",
+      "sha256": "31db98cd481b205e13028bcbd894e4617959789abc5e1aac7bc5871df8a80cb6",
+      "bytes": 27477,
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/ALL_ARTICLES.md",
+      "sha256": "61e38b51c76e76f97a2cbc7a30c9a423e3294ea59ab259443e05ed2c8415e4e8",
+      "bytes": 27255,
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/REPORT.md",
+      "sha256": "599a7e35e99ea8fc2196c24f99d48a12f238c46f1b5de4acc2a9941ad950dc1f",
+      "bytes": 8202,
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/all-articles-validation.json.gz",
+      "sha256": "deb37ffc0867d1281a7e5fa832f97c7aa1222174a15c3e50dbe275b1d3592054",
+      "bytes": 183044,
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/archive-manifest.json",
+      "sha256": "d5690d64d17ec18a1735084872a1a5c14f0467b3749dd3279c71d856e05c49f6",
+      "bytes": 9018,
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/logs/browser-ui-results.json",
+      "sha256": "7c4cec22c2ba1edf4f1d1ca7e26ff54bb05b31fc5db513225774a59767e151c5",
+      "bytes": 23522,
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/summary.json",
+      "sha256": "ee2b749ba8ce6333b4c62da237a856f57c0ac4b0bb109d35a401e2a43f590e95",
+      "bytes": 824,
+      "full_bytes_match": true
+    }
+  ]
+}
