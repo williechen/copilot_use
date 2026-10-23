@@ -5,7 +5,7 @@
   "fixed_tag": "v0.2.1",
   "fixed_tag_sha": "9bcae7c5d139f75ed08b4daffece602a71fdab34",
   "next_day": {
-    "chat": 30,
+    "chat": 31,
     "pet": 30,
     "analytics": 30
   },
@@ -2959,5 +2959,24 @@
     "newly_completed": 3,
     "newly_moved": 0,
     "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3"
+  },
+  "day30_chat_delivery": {
+    "project": "chat",
+    "day": 30,
+    "revision": "r1",
+    "path": "docs/teaching/daily/day-30/chat.md",
+    "article_commit": "b56167f81b1279648fcc24ce0d35d2542b1e7b80",
+    "blob_sha": "822a838733f73dae2501dd23d9e985506f0258e6",
+    "sha256": "366ab24910f132feecc097284ea574c38968b30224279cbfeabc4e43bf289efa",
+    "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3",
+    "rules_version": "daily-tdd-minimum-v1+github-only-v1",
+    "full_text_verified": true,
+    "code_blocks": 4,
+    "main_application": "not applied",
+    "tests": "not run",
+    "functional_acceptance": false,
+    "next_day_before": 30,
+    "next_day_after": 31,
+    "status": "github_article_readback_verified"
   }
 }
