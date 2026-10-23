@@ -1,4 +1,4 @@
-# Chat Day30｜公開房間清單、建立房間須驗證會員 Session
+# Chat Day30 r2｜公開房間清單、建立房間須驗證會員 Session
 
 ## ① 學習大綱與真實現況
 
@@ -10,16 +10,18 @@
 
 **Red：生產 Router 的可重現失敗**。在隔離 SQLite 依現有 migrations 啟動服務，無 Cookie 使用 `curl -i -X POST http://127.0.0.1:3000/api/rooms -H 'Content-Type: application/json' -d '{"name":"匿名房間"}'`。現有公開 route 對有效名稱可返回 201 並寫入一列；安全預期 401、rooms 數量不變。這是由精確 source 推導的預期 Red，**本次未實際執行**。既有 `http::room_http_tests::valid_room_returns_201_and_saved_id` 直接呼叫 handler，不能用來證明 Router ACL。
 
-**Green：完整 Router 修改**。在 `apps/server/src/lib.rs` 既有 `guarded_ws` 之後、`let app` 之前加入：
+**Green：完整 Router 修改**。在 `apps/server/src/lib.rs` 既有 `guarded_ws` 之後、`let app` 之前加入可合併不同 HTTP method 的 `MethodRouter`：
 
 ```rust
 // 建立房間需要有效會員；公開列表保持可讀。
-let guarded_room_create = Router::new()
-    .route("/api/rooms", axum::routing::post(http::create_room))
-    .route_layer(axum::middleware::from_fn_with_state(
-        db.clone(),
-        room_auth::require_member,
-    ));
+// GET 公開；只替 POST method 加上會員 Session middleware。
+let room_methods = get(http::list_rooms).merge(
+    axum::routing::post(http::create_room)
+        .route_layer(axum::middleware::from_fn_with_state(
+            db.clone(),
+            room_auth::require_member,
+        )),
+);
 ```
 
 將 `let app = Router::new()` 鏈中原本這一行：
@@ -31,13 +33,11 @@ let guarded_room_create = Router::new()
 **完整替換**成以下一行；並在原本 `.merge(guarded_ws)` 後、`.with_state(state)` 前合併受保護 Router：
 
 ```rust
-.route("/api/rooms", get(http::list_rooms))
-.route("/api/rooms/{id}", get(http::get_room))
-// 其餘既有 /signin、/、guarded_room、guarded_ws 不變
-.merge(guarded_room_create)
+.route("/api/rooms", room_methods)
+// 原本 /api/rooms/{id}、/signin、/、guarded_room、guarded_ws 不變
 ```
 
-**注意**：此處 `/api/rooms/{id}` 僅展示相鄰上下文，保留其原有一次 route，**不要再次新增**；也不要重複合併 `guarded_room_create`。最終同一路徑 GET 公開、POST 經 middleware，不得留下公開 POST。若 Axum 0.8 對兩個 Router 合併相同路徑不同 method 的行為或型別有差異，以編譯及 Router HTTP 回歸為準；不得因未驗證而宣稱 Green 通過。
+**注意**：上述 `MethodRouter::merge` 只組合不同方法；不得在同一路徑再次建立公開 POST。須以 Axum 0.8 的實際編譯與 HTTP 路由測試驗證，未實測不宣稱通過。
 
 **新增真實 Router 測試**：在 `apps/server/src/room_auth.rs` 既有 `day25_tests` module 中加入此測試，沿用同 module 的 `use super::*;`、`tower::ServiceExt` 與 `axum` imports：
 
@@ -55,14 +55,14 @@ async fn anonymous_create_is_rejected_while_public_list_is_available() {
         std::sync::Arc::new(persistence::SqliteRoomRepository::new(db.clone())),
         std::sync::Arc::new(persistence::SqliteMessageRepository::new(db.clone())),
     );
-    let guarded_create = Router::new()
-        .route("/api/rooms", axum::routing::post(crate::http::create_room))
-        .route_layer(axum::middleware::from_fn_with_state(
-            db.clone(), require_member,
-        ));
+    let room_methods = get(crate::http::list_rooms).merge(
+        axum::routing::post(crate::http::create_room)
+            .route_layer(axum::middleware::from_fn_with_state(
+                db.clone(), require_member,
+            )),
+    );
     let app = Router::new()
-        .route("/api/rooms", get(crate::http::list_rooms))
-        .merge(guarded_create)
+        .route("/api/rooms", room_methods)
         .with_state(state);
 
     let anonymous = app.clone().oneshot(
@@ -86,6 +86,24 @@ async fn anonymous_create_is_rejected_while_public_list_is_available() {
 此測試刻意經過真實 Axum Router 和 SQLite，但使用測試建構的 route；**仍須**驗證生產 `application()` 路由接線、有效 Session 的 POST 201、登出後 401。測試 Red 應先以原公開 POST Router 執行並確認失敗，再套用 Green；直接在測試中提前使用 guarded router 會失去 Red 證明，不能冒充已執行 TDD。既有 Session fixture 可沿 `room_auth::day25_tests` 建立 `mbr_user/mbr_session` 與 token digest 驗證有效、偽造、過期 Cookie。
 
 **Refactor**：只重用 `room_auth::require_member`，不在 `http::create_room` 重複解析 Cookie；保留 `chat_application` 與 SQLite adapter 既有契約。未實作 CSRF 對策、建立者 ownership 與逐房 ACL，這些不可因 401 而視為完成。
+
+### Day29 未完成項目補充教學（銜接原 Day29）
+
+**來源 Day：** Chat Day29「WebSocket 握手前驗證 SQLite 會員 Session」，原文 `docs/teaching/history/day-29/chat/github.md`。其第④節尚未執行匿名／偽造／過期 Cookie 的實際 WebSocket Upgrade、有效 Session 的 101 與訊息收發，也尚未完成逐房 ACL 與 `POST /api/rooms` 授權。這些事項不是 Day29 已驗收成果；本日修正 POST 授權是其中一個最小切片，不能將整組未完成事項結案。
+
+**沿用而非重教：** `apps/server/src/lib.rs::guarded_ws` 已掛接 `room_auth::require_member` → `auth_session::active_member` → SQLite `mbr_session`／`mbr_user`；保持 Day29 已接線程式不動。以測試資料庫及真正 WebSocket Upgrade 重跑以下矩陣：無 Cookie／偽造／過期 → HTTP 401；有效會員 Cookie → HTTP 101 並能收發。僅測 middleware 或原有普通 HTTP handler 不代表此 Gate 完成。
+
+**待實作及驗證：** 逐房間成員 ACL、登出撤銷後的 WS 重連拒絕；在 `apps/server/src/ws.rs`、`apps/server/src/room_auth.rs` 與 `apps/server/src/lib.rs` 核對 HTTP 與 WS 是否使用相同成員／房間授權，資料來源為各案 SQLite。若資料模型尚無真正 room membership，不可捏造資料表或宣稱 ACL 完成。
+
+| Day29 未完成操作 | 預期 | 本次實際 |
+| --- | --- | --- |
+| 無 Cookie／偽造或過期 Cookie 的 `GET /ws/{room_id}` Upgrade | 401，不升級 | 未執行 |
+| 有效會員 Cookie 的 WS Upgrade 與送收 | 101 且正確隔離房間 | 未執行 |
+| Session 登出撤銷後再次 WS Upgrade | 401 | 未執行 |
+| 跨房間成員與非成員 ACL | 未獲授權不可存取 | 未完成 |
+| `POST /api/rooms` 無 Cookie 與有效 Cookie | 401／201；不影響公開 GET | 此篇提供修補，未套用、未驗證 |
+
+**FIFO：** 更早的 `chat-day25-shared-auth-20261022` 仍為 pending，不能跳過它宣稱 Day29 全部結案。此補充為 Day29 未完成項目追蹤，不新增 Day、不修改 Day29 原文、不清空既有 makeup_queue。
 
 **FIFO 舊 Day 補教（本篇最多一項）**：`chat-day25-shared-auth-20261022` 仍 pending。Day25 舊文及證據不回寫；原登入／登出／Cookie／Session 尚有共用化缺口。此處只識別需沿真實 `signin.rs`、`logout.rs`、`auth_session.rs` 統一 token/hash/撤銷策略；未提供已核實完整補教實作，因此**本篇不結案、不變更 makeup_queue**。
 
