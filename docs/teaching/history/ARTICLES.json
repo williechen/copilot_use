@@ -525,7 +525,7 @@
       ],
       "latest_slice_validation": {
         "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3",
-        "verdict": "本篇切片通過",
+        "verdict": "部分通過",
         "report": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/REPORT.md",
         "original_body_unchanged": true
       }

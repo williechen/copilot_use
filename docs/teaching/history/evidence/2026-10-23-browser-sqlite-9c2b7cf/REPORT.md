@@ -2,7 +2,7 @@
 
 日期：2026-10-23T12:45:07.066127+08:00（Asia/Taipei）。程式 `rust_ai_chat/main@9c2b7cf5a4c60a08254445911916c4ed9b02d7b3`；文件基準 `copilot_use/main@1a27390916fbf28ee6582b452362cf4978c96fce`。本輪回應指定的「待瀏覽器驗收」與「SQLite schema及搜尋存在」五列，沒有重跑前輪所有84篇或其他專案。
 
-**Chat Day15／17／19／20本篇瀏覽器切片通過；Day18已完成實測但升級與稽核未通過。** [更新後完整矩陣](ALL_ARTICLES.md)。歷史正文不回寫，GitHub原84篇矩陣入口已同步五列，其他列維持原證據及範圍。
+**Chat Day17／19／20本篇瀏覽器切片通過；Day15列表／選房通過但保留建房UI的要求未達成，只部分通過；Day18已完成實測但升級與稽核未通過。** [更新後完整矩陣](ALL_ARTICLES.md)。歷史正文不回寫，GitHub原84篇矩陣入口已同步五列，其他列維持原證據及範圍。
 
 ## 原樣建置與真正瀏覽器
 
@@ -19,7 +19,7 @@ CARGO_TARGET_DIR=/absolute/isolated/target cargo leptos build --server-only --ca
 
 | Day／流程 | 實際觀察 | 判定 |
 | --- | --- | --- |
-| Day15 列表→選房 | 點讀取載入7筆；登入後點第二個同名房，導向/room/browser-room-2，標題ID一致，WebSocket已連線 | 本篇切片通過 |
+| Day15 列表→選房 | 點讀取載入7筆；登入後點第二個同名房，導向/room/browser-room-2，標題ID一致，WebSocket已連線；但首頁／個人頁沒有原文要求保留的建房UI | 部分通過，不列完成 |
 | Day17 中文完整／部分名稱 | Rust技術交流的兩個同名ID及延伸名稱共3筆；部分「技術」仍3筆 | 通過 |
 | Day17 英文大小寫／trim | rust、帶前後空白的Rust技術查詢符合既有SQLite LIKE與UI篩選契約 | 通過；未宣稱完整Unicode case folding |
 | Day17 LIKE特殊字元 | %、_、反斜線各只找到對應字面名稱；SQL注入字串無匹配 | 通過 |
@@ -57,6 +57,10 @@ CARGO_TARGET_DIR=/absolute/isolated/target cargo leptos build --server-only --ca
 
 ## 完成記錄、封存與剩餘項
 
-Day15／17／19／20原本已在歷史封存位置。本輪新增的是4篇「本篇切片驗證完成」證據，不重複搬移或重發；原body／blob／SHA256全部保留。在原6篇完成封存記錄上累計10篇已驗證切片，詳見[完成清單](archive-manifest.json)。Day18既有封存身分保留，但狀態改為「實測失敗」，不能加入完成名單。next_day三案仍30、makeup_queue與last_full_comparison不動，沒有新增Day、改排程、修改Notion或寫產品庫。
+Day17／19／20原本已在歷史封存位置。本輪新增的是3篇「本篇切片驗證完成」證據，不重複搬移或重發；原body／blob／SHA256全部保留。在原6篇完成封存記錄上累計9篇已驗證切片，詳見[完成清單](archive-manifest.json)。Day15列表／選房通過，但原文第2節要求保留建房／聊天程式；現行HomePage只有RoomList，account只有登出與回首頁，沒有建房UI。依現行需求建房應放個人管理頁，不能拿匿名POST建房201替代UI完成，因此Day15不加入完成名單。Day18既有封存身分保留，但狀態改為「實測失敗」，不能加入完成名單。next_day三案仍30、makeup_queue與last_full_comparison不動，沒有新增Day、改排程、修改Notion或寫產品庫。
 
 本輪沒有順便結案Chat Day16：其歷史未接通提示的SSR斷言仍是前輪失敗；發訊雖回顯且持久化，畫面狀態仍寫「已發送，等待回應...」，未宣稱完整訊息狀態驗收。房間成員ACL／匿名API建房、SQLite任意actor、真稽核寫入、舊庫升級、其他瀏覽器／跨平台仍須各自修正或驗收。新發現與剩餘問題沿原功能項追蹤，不用本次瀏覽器通過替它們結案。
+
+### 完成判定更正
+
+初次瀏覽器補驗提交b79f92e以列表／選房的主切片將Day15也列完成；回查原文「保留建房功能」與目前首頁／個人頁後，發現入口缺失，已在本次最終結果撤銷Day15完成判定。初次提交及其讀回證據保留歷史，最新完成數為3篇新增、累計9篇。原文沒有改寫，產品程式沒有套修補。

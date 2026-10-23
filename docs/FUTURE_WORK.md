@@ -88,4 +88,4 @@
 
 ### Chat瀏覽器與SQLite最新實證
 
-[2026-10-23後續驗收](teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/REPORT.md)：列表／中文搜尋／刷新故障保留及重試已實機通過；不再列為單純「待瀏覽器驗收」。原SQLite／稽核項仍未完成：歷史migration升級checksum不符（資料保留），created_user_id未綁真實身分，註冊登入與發訊沒有action log寫入。保留原待辦與歷史正文，不結案整個Chat產品。
+[2026-10-23後續驗收](teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/REPORT.md)：列表／中文搜尋／刷新故障保留及重試已實機通過；不再列為單純「待瀏覽器驗收」。Day15原文要求保留建房功能，但目前首頁／個人頁都沒有建房UI，只有API；按現行需求應接到個人管理頁，該篇只部分通過。原SQLite／稽核項仍未完成：歷史migration升級checksum不符（資料保留），created_user_id未綁真實身分，註冊登入與發訊沒有action log寫入。保留原待辦與歷史正文，不結案整個Chat產品。

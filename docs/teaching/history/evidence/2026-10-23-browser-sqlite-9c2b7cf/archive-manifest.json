@@ -3,9 +3,9 @@
   "validated_at": "2026-10-23T12:45:07.066127+08:00",
   "document_baseline_sha": "1a27390916fbf28ee6582b452362cf4978c96fce",
   "previous_manifest": "docs/teaching/history/evidence/2026-10-23-all-articles-9c2b7cf/archive-manifest.json",
-  "newly_completed": 4,
+  "newly_completed": 3,
   "newly_moved": 0,
-  "completed_slice_records": 10,
+  "completed_slice_records": 9,
   "articles": [
     {
       "project": "analytics",
@@ -105,23 +105,6 @@
     },
     {
       "project": "chat",
-      "day": 15,
-      "original_path": "docs/teaching/history/day-15/chat/notion/3fbe51d450938130a3c0c93171105f3a.md",
-      "path": "docs/teaching/history/day-15/chat/notion/3fbe51d450938130a3c0c93171105f3a.md",
-      "document_baseline_sha": "1a27390916fbf28ee6582b452362cf4978c96fce",
-      "original_blob_sha": "c172d83822232fe06bf5c16df42ffe9bc268412d",
-      "sha256": "b5438ed11f39f843f2c21de16bbe5727163f7225de8c207988ea2386f41c7244",
-      "bytes": 17319,
-      "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3",
-      "validation_report": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/REPORT.md",
-      "scope": "原樣Leptos JS/WASM hydration後，真瀏覽器載入7筆SQLite房間、登入並選取第二個同名房間，URL與房間ID正確；Day15列表／選房切片完成。",
-      "full_product_acceptance": false,
-      "original_bytes_preserved": true,
-      "already_archived": true,
-      "archival_action": "record verified completion on existing archive; no body rewritten or moved"
-    },
-    {
-      "project": "chat",
       "day": 17,
       "original_path": "docs/teaching/history/day-17/chat/notion/3fce51d45093818b913bebb8dab5ab65.md",
       "path": "docs/teaching/history/day-17/chat/notion/3fce51d45093818b913bebb8dab5ab65.md",
@@ -172,5 +155,6 @@
       "archival_action": "record verified completion on existing archive; no body rewritten or moved"
     }
   ],
-  "original_bytes_preserved": true
+  "original_bytes_preserved": true,
+  "completion_review": "Day15 excluded: list/select passed but retained create-room UI missing"
 }

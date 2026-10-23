@@ -112,5 +112,12 @@
       "passed": true,
       "state": "Browser tab: 2, Title: \"Rust AI Chat\", URL: \"http://127.0.0.1:3000/room/browser-room-2\".\n1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3000/room/browser-room-2\n\t2 container\n\t\t3 heading Rust AI Chat, Value: 1\n\t\t\t4 link Description: Rust AI Chat, Value: 127.0.0.1:3000/\n\t\t5 heading 房間列表, Value: 2\n\t\t\t6 text 房間列表\n\t\t7 search text field (settable) 搜尋房間\n\t\t8 button 查詢房間\n\t\t9 button 讀取／重新整理房間\n\t\t10 text 請讀取房間列表\n\t\t11 container\n\t\t\t12 heading 房間 browser-room-2, Value: 2\n\t\t\t\t13 text 房間 browser-room-2\n\t\t\t14 text 已發送，等待回應...\n\t\t18 content list\n\t\t\t19 container\n\t\t\t\t20 text You :  瀏覽器驗收：SQLite 搜尋與刷新測試\n\t\t15 container\n\t\t\t16 text entry area (settable) 聊天訊息\n\t\t\t17 button (disabled) Send\n\nThe focused UI element is 1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3000/room/browser-room-2"
     }
+  ],
+  "contract_findings": [
+    {
+      "article": "Chat Day15",
+      "status": "partial",
+      "reason": "real list/select passed; HomePage and account have no retained create-room UI; POST API alone insufficient"
+    }
   ]
 }

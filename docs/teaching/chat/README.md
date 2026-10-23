@@ -98,4 +98,4 @@
 
 ## 瀏覽器與SQLite驗收更新
 
-[Day15／17／19／20本篇瀏覽器切片已驗證完成；Day18舊庫升級與真稽核未通過](../history/evidence/2026-10-23-browser-sqlite-9c2b7cf/REPORT.md)。已存在的封存正文不變，最新結果以此證據與逐篇矩陣為準。
+[Day17／19／20本篇瀏覽器切片已驗證完成；Day15缺建房入口而部分通過，Day18舊庫升級與真稽核未通過](../history/evidence/2026-10-23-browser-sqlite-9c2b7cf/REPORT.md)。已存在的封存正文不變，最新結果以此證據與逐篇矩陣為準。

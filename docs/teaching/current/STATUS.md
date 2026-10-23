@@ -28,7 +28,7 @@ Chat後端25通過、UI SSR9通過／1失敗；Pet原生49與前端9通過、Nod
 
 ### Chat瀏覽器／SQLite後續驗收（2026-10-23）
 
-程式仍為`9c2b7cf5a4c60a08254445911916c4ed9b02d7b3`；[本輪報告與畫面](../history/evidence/2026-10-23-browser-sqlite-9c2b7cf/REPORT.md)。Chat Day15／17／19／20已用真正hydrated瀏覽器驗證列表／選房、中文及特殊字元搜尋、真DB故障保留rows、恢復重試與刷新清query，改為本篇切片通過；4篇沿既有封存原文記錄完成，累計10篇完成切片（本次沒有新搬移）。Day18目前schema正常，但完整fa歷史庫先遇rooms migration checksum mismatch，單獨22554歷史也拒絕升級且資料保留；任意actor可寫、真操作後稽核0筆，改列實測失敗，不能標完成。其他前輪測試／失敗與未驗收範圍保留；[更新後84篇矩陣](../history/evidence/2026-10-23-browser-sqlite-9c2b7cf/ALL_ARTICLES.md)。
+程式仍為`9c2b7cf5a4c60a08254445911916c4ed9b02d7b3`；[本輪報告與畫面](../history/evidence/2026-10-23-browser-sqlite-9c2b7cf/REPORT.md)。Chat Day17／19／20已用真正hydrated瀏覽器驗證中文及特殊字元搜尋、真DB故障保留rows、恢復重試與刷新清query，改為本篇切片通過；3篇沿既有封存原文記錄完成，累計9篇完成切片（本次沒有新搬移）。Day15列表／選房通過，但保留建房功能的UI入口缺失，只部分通過，不列完成。Day18目前schema正常，但完整fa歷史庫先遇rooms migration checksum mismatch，單獨22554歷史也拒絕升級且資料保留；任意actor可寫、真操作後稽核0筆，改列實測失敗，不能標完成。其他前輪測試／失敗與未驗收範圍保留；[更新後84篇矩陣](../history/evidence/2026-10-23-browser-sqlite-9c2b7cf/ALL_ARTICLES.md)。
 
 ### 排程與通知
 

@@ -2955,8 +2955,8 @@
   "completed_article_archive": {
     "policy": "archive after lesson-slice verification with matching source and evidence; full-product acceptance independent",
     "manifest": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/archive-manifest.json",
-    "count": 10,
-    "newly_completed": 4,
+    "count": 9,
+    "newly_completed": 3,
     "newly_moved": 0,
     "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3"
   }
