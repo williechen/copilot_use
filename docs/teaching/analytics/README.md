@@ -73,3 +73,8 @@ Leptos登入／改密碼、完整PG與實際HTTP通過；本輪未重跑Analytic
 [完整現況](../current/STATUS.md) · [本輪報告](../history/evidence/2026-10-23-formal-be0494a/REPORT.md) · [歷史文章與原始證據](../history/README.md)
 
 [Day31教學：Leptos 改密碼頁](../daily/day-31/analytics.md)（Leptos改密碼頁已套用並通過本輪PG／HTTP驗證；完整後台仍有獨立待辦。）
+
+
+## 最新教學（Day32）
+
+[Day32：Dashboard 事件類型篩選](../daily/day-32/analytics.md)（教學已交付；程式未套用、測試未執行、功能未驗收）。下一篇 Day33，以 [即時進度檔](../../learning-state.json) 為準；Day31 與歷史驗證證據保留。
