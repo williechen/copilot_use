@@ -4,6 +4,10 @@
 
 三案 next_day 以 [learning-state.json](learning-state.json) 即時值為準；教學交付、程式套用與功能驗收分別記錄。本文是教學政策唯一正本；新教學在 [daily](teaching/daily/README.md)，必要驗證完成才移至 `docs/teaching/archived/day-NN/{project}.md`；既有歷史正文與原始證據維持於 [history](teaching/history/README.md)。
 
+### 現況文章的呈現方式
+
+現況文章與專案首頁只說明功能、實作狀態、驗證結果、缺口及來源證據，不在正文列教學日編號或「驗證支持哪些 Day」的對照。例如僅寫「DB 驗證」，再列實際範圍與結果。教學編號、版本、交付、封存與補教追蹤保留於既有狀態檔、manifest、教學索引和原始歷史證據；本規則不改變進度或驗收條件。
+
 ## 每日 TDD 教學最小必要規則 v1
 
 規則版本：daily-tdd-minimum-v1（GitHub 交付政策 github-only-v1，2026-10-22）。GitHub <code>docs/COMMON_LEARNING_RULES.md</code> 是現行規則正本，唯一教學交付為 williechen/copilot_use 的 main 分支；不以舊對話或歷史決議覆蓋本版。規則／索引衝突須揭露並核對，不能默認已同步。

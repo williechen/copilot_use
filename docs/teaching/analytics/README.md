@@ -6,7 +6,7 @@
 
 ## 目前狀態
 
-[單一目前進度](../current/STATUS.md) · [即時進度檔](../../learning-state.json)。本文的需求不代表已完成；不在首頁複製過期的 Day 或測試快照。
+[單一目前進度](../current/STATUS.md) · [即時進度檔](../../learning-state.json)。本文的需求不代表已完成；現況依功能與驗證範圍說明。
 
 ## 專案大綱與操作主線
 
@@ -62,50 +62,12 @@ Analytics 定位為純管理後台，Leptos 提供後台畫面；除登入及必
 
 學習庫 apps/stats\_server/src/<code>lib.rs</code> 負責 HTTP 路由與來源授權，pg\_<code>store.rs</code> 負責 PostgreSQL 聚合與持久化，migrations 保留已套用歷史；產品端 shared/proto 與 analytics\_transport 提供產品通訊契約，不能視為學習庫已有同一實作。
 
-先沿既有 API 接通粗略可操作畫面，再逐步補趨勢、明細與管理。資料安全或基本流程阻礙當步處理，其他深化留在原功能追蹤；詳細程式與驗證仍看既有 Day。
+先沿既有 API 接通粗略可操作畫面，再逐步補趨勢、明細與管理。資料安全或基本流程阻礙當步處理，其他深化留在原功能追蹤；詳細程式與驗證仍看相關功能教學。
 
 [產品通訊契約](https://github.com/williechen/copilot_use/blob/main/docs/ANALYTICS_TRANSPORT.md) · [操作設定](https://github.com/williechen/copilot_use/blob/main/docs/DEPLOYMENT.md) · [產品未來清單](https://github.com/williechen/copilot_use/blob/main/docs/FUTURE_WORK.md)
 
+## 功能驗證現況
 
-## 目前教學
+Leptos 登入、DB、HTTP 與真實瀏覽器登入／來源切換／登出已通過；完整角色與來源權限仍待完成。
 
-- **最新已發布：** [Analytics Day 30](../daily/day-30/analytics.md)（教學文章已發布；程式套用與功能驗收另行判定）
-- 前一篇：[Analytics Day 28](../daily/day-28/analytics.md)
-- **下一篇 Day：** **Day 31**（以 [learning-state.json](../../learning-state.json) 的 `next_day.analytics` 為準）。
-- [全部最新文章與三專案對照](../daily/README.md) · [交付狀態與證據](../current/STATUS.md)
-
-<details>
-<summary>歷史文章、修訂與原始封存證據</summary>
-
-| Day | 文章與原始資料 |
-| --- | --- |
-| 25 | [文章／版本／證據](../history/day-25/analytics/README.md) |
-| 24 | [文章／版本／證據](../history/day-24/analytics/README.md) |
-| 23 | [文章／版本／證據](../history/day-23/analytics/README.md) |
-| 22 | [文章／版本／證據](../history/day-22/analytics/README.md) |
-| 21 | [文章／版本／證據](../history/day-21/analytics/README.md) |
-| 20 | [文章／版本／證據](../history/day-20/analytics/README.md) |
-| 19 | [文章／版本／證據](../history/day-19/analytics/README.md) |
-| 18 | [文章／版本／證據](../history/day-18/analytics/README.md) |
-| 17 | [文章／版本／證據](../history/day-17/analytics/README.md) |
-| 16 | [文章／版本／證據](../history/day-16/analytics/README.md) |
-| 15 | [文章／版本／證據](../history/day-15/analytics/README.md) |
-| 14 | [文章／版本／證據](../history/day-14/analytics/README.md) |
-| 13 | [文章／版本／證據](../history/day-13/analytics/README.md) |
-| 12 | [文章／版本／證據](../history/day-12/analytics/README.md) |
-| 11 | [文章／版本／證據](../history/day-11/analytics/README.md) |
-| 10 | [文章／版本／證據](../history/day-10/analytics/README.md) |
-| 9 | [文章／版本／證據](../history/day-09/analytics/README.md) |
-| 8 | [文章／版本／證據](../history/day-08/analytics/README.md) |
-| 7 | [文章／版本／證據](../history/day-07/analytics/README.md) |
-| 6 | [文章／版本／證據](../history/day-06/analytics/README.md) |
-| 5 | [文章／版本／證據](../history/day-05/analytics/README.md) |
-| 4 | [文章／版本／證據](../history/day-04/analytics/README.md) |
-| 3 | [文章／版本／證據](../history/day-03/analytics/README.md) |
-| 2 | [文章／版本／證據](../history/day-02/analytics/README.md) |
-
-</details>
-
-## 本輪文章驗證與封存
-
-[全部文章逐篇結果](../history/evidence/2026-10-23-all-articles-9c2b7cf/ALL_ARTICLES.md) · [實跑證據與必要勘誤](../history/evidence/2026-10-23-all-articles-9c2b7cf/REPORT.md)。本案Day26、Day27、Day29已完成本篇切片驗證並封存；全產品功能驗收仍獨立，Day28原文SSR API勘誤另記。
+[完整現況](../current/STATUS.md) · [驗證報告](../history/evidence/2026-10-23-day30-validation-1d1866d/REPORT.md) · [歷史文章與原始證據](../history/README.md)

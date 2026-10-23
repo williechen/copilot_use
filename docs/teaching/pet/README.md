@@ -6,13 +6,13 @@
 
 ## 目前狀態
 
-[單一目前進度](../current/STATUS.md) · [即時進度檔](../../learning-state.json)。本文的需求不代表已完成；不在首頁複製過期的 Day 或測試快照。
+[單一目前進度](../current/STATUS.md) · [即時進度檔](../../learning-state.json)。本文的需求不代表已完成；現況依功能與驗證範圍說明。
 
 ## 專案大綱與操作主線
 
 建立可啟動、互動與持久保存設定的桌面寵物，再逐步提供受控的檔案整理、學習記憶及 AI 協作。
 
-基本主線：啟動寵物 → 即時調整互動／設定 → 保存設定與記憶 → 授權目錄 → 掃描／SHA256 預覽 → 確認或取消 → 受控操作 → 成功收據／還原 → Analytics 紀錄。每段可跨 Day 完成；確認預覽與實際檔案操作分別判定。
+基本主線：啟動寵物 → 即時調整互動／設定 → 保存設定與記憶 → 授權目錄 → 掃描／SHA256 預覽 → 確認或取消 → 受控操作 → 成功收據／還原 → Analytics 紀錄。各段分別實作與驗證；確認預覽與實際檔案操作分別判定。
 
 ## 現行需求
 
@@ -44,7 +44,7 @@
 
 控制窗依寵物識別同步各生活窗的獨立後端狀態；分頁切換不新增寵物、不自行掃描或觸發檔案動作。掃描、確認、收據與錯誤保留在對應功能區，長結果可換行／捲動且操作按鈕可到達。
 
-驗收包含：控制視窗縮至可用小尺寸及放大、系統縮放、鍵盤焦點與捲動、長清單／錯誤文案、六區切換、反覆開啟不重複建立、關閉後寵物仍運作；專用目錄實測 UI → bridge → Tauri → OS／資料層 → 回應 → 畫面，無後端的功能不得假報成功。雙窗骨架已有實作；上述完整 GUI／IPC／檔案流程仍需後續 Day 分段驗收。
+驗收包含：控制視窗縮至可用小尺寸及放大、系統縮放、鍵盤焦點與捲動、長清單／錯誤文案、六區切換、反覆開啟不重複建立、關閉後寵物仍運作；專用目錄實測 UI → bridge → Tauri → OS／資料層 → 回應 → 畫面，無後端的功能不得假報成功。雙窗骨架已有實作；上述完整 GUI／IPC／檔案流程仍需後續按功能分段驗收。
 
 ## 驗證範圍
 
@@ -54,50 +54,12 @@
 
 學習庫 apps/desktop\_pet 負責 Tauri／OS 入口，frontend 負責 Leptos 畫面與 bridge，crates/pet\_domain 負責純規則；產品端另有 crates/pet\_runtime，介面與學習庫不同，不照抄檔名當成已同步。
 
-本機 IPC 可用於測試實際能力，使用全新測試資料與授權目錄；本入口不要求重跑付費 AI。實作與驗證步驟看對應 Day，不將專用測試收據當成私人檔案已處理。
+本機 IPC 可用於測試實際能力，使用全新測試資料與授權目錄；本入口不要求重跑付費 AI。實作與驗證步驟看對應功能教學，不將專用測試收據當成私人檔案已處理。
 
 [產品操作設定](https://github.com/williechen/copilot_use/blob/main/docs/DEPLOYMENT.md) · [產品未來清單](https://github.com/williechen/copilot_use/blob/main/docs/FUTURE_WORK.md)
 
+## 功能驗證現況
 
-## 目前教學
+回籠補償程式已套用，原生 Rust 與 Node 契約測試通過；關窗／DB 失敗注入、三窗 GUI 與 App 重啟仍待驗證。
 
-- **最新已發布：** [Pet Day 30](../daily/day-30/pet.md)（教學文章已發布；程式套用與功能驗收另行判定）
-- 前一篇：[Pet Day 28](../daily/day-28/pet.md)
-- **下一篇 Day：** **Day 31**（以 [learning-state.json](../../learning-state.json) 的 `next_day.pet` 為準）。
-- [全部最新文章與三專案對照](../daily/README.md) · [交付狀態與證據](../current/STATUS.md)
-
-<details>
-<summary>歷史文章、修訂與原始封存證據</summary>
-
-| Day | 文章與原始資料 |
-| --- | --- |
-| 25 | [文章／版本／證據](../history/day-25/pet/README.md) |
-| 24 | [文章／版本／證據](../history/day-24/pet/README.md) |
-| 23 | [文章／版本／證據](../history/day-23/pet/README.md) |
-| 22 | [文章／版本／證據](../history/day-22/pet/README.md) |
-| 21 | [文章／版本／證據](../history/day-21/pet/README.md) |
-| 20 | [文章／版本／證據](../history/day-20/pet/README.md) |
-| 19 | [文章／版本／證據](../history/day-19/pet/README.md) |
-| 18 | [文章／版本／證據](../history/day-18/pet/README.md) |
-| 17 | [文章／版本／證據](../history/day-17/pet/README.md) |
-| 16 | [文章／版本／證據](../history/day-16/pet/README.md) |
-| 15 | [文章／版本／證據](../history/day-15/pet/README.md) |
-| 14 | [文章／版本／證據](../history/day-14/pet/README.md) |
-| 13 | [文章／版本／證據](../history/day-13/pet/README.md) |
-| 12 | [文章／版本／證據](../history/day-12/pet/README.md) |
-| 11 | [文章／版本／證據](../history/day-11/pet/README.md) |
-| 10 | [文章／版本／證據](../history/day-10/pet/README.md) |
-| 9 | [文章／版本／證據](../history/day-09/pet/README.md) |
-| 8 | [文章／版本／證據](../history/day-08/pet/README.md) |
-| 7 | [文章／版本／證據](../history/day-07/pet/README.md) |
-| 6 | [文章／版本／證據](../history/day-06/pet/README.md) |
-| 5 | [文章／版本／證據](../history/day-05/pet/README.md) |
-| 4 | [文章／版本／證據](../history/day-04/pet/README.md) |
-| 3 | [文章／版本／證據](../history/day-03/pet/README.md) |
-| 2 | [文章／版本／證據](../history/day-02/pet/README.md) |
-
-</details>
-
-## 本輪文章驗證與封存
-
-[全部文章逐篇結果](../history/evidence/2026-10-23-all-articles-9c2b7cf/ALL_ARTICLES.md) · [實跑證據與必要勘誤](../history/evidence/2026-10-23-all-articles-9c2b7cf/REPORT.md)。原生／前端契約通過不代替GUI；控制窗恢復、動態生活窗漫遊、三id畫面與故障注入／真App重啟仍待驗收，相關活動文章保留。
+[完整現況](../current/STATUS.md) · [驗證報告](../history/evidence/2026-10-23-day30-validation-1d1866d/REPORT.md) · [歷史文章與原始證據](../history/README.md)

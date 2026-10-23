@@ -1,41 +1,56 @@
-## 目前進度
+# 目前功能與驗證狀態
 
-### 最新教學交付狀態（GitHub main）
+程式與功能驗收以 `williechen/rust_ai_chat` 為準；`copilot_use` 保存需求、文章與證據。本頁按功能說明現況，教學編號、交付與封存對照集中於索引和原始證據。
 
-教學文件正本：`williechen/copilot_use/main`。已按 `learning-state.json`、`manifest.json` 與 Day30 文章讀回核對。**文章交付不代表已套用主體程式、測試通過或產品功能驗收完成。**
+## 驗證來源
 
-| 專案 | 最新已發布教學 | 下一 Day | 文章 Commit |
-| --- | --- | --- | --- |
-| Chat | [Day30 r3](../daily/day-30/chat.md) | **31** | `0548392623eed068ce9b29cd4c188cd3bb8668ba` |
-| Pet | [Day30 r2](../daily/day-30/pet.md) | **31** | `ed0fcdd51341fd9866cb78e08573463be7e06d71` |
-| Analytics | [Day30 r2](../daily/day-30/analytics.md) | **31** | `d6175ee83aad7cd3a32433826ccb20b01f0211de` |
+- 最近已驗證程式 SHA：`1d1866dbbb30255fafa4c7f74b1868919662913c`。
+- 原生、DB、HTTP、WASM 與瀏覽器主要測試來源：`974db9ff29f0ba640d1df84a3aaaf2556d7624e1`；兩版只差三個 Node 測試檔，其餘程式、依賴與 migrations 未變，已核對後沿用相關證據。
+- [目前驗證報告](../history/evidence/2026-10-23-day30-validation-1d1866d/REPORT.md) · [測試與來源摘要](../history/evidence/2026-10-23-day30-validation-1d1866d/SUMMARY.json)。
+- 以下是已取得證據的範圍，不代表所有產品功能均已完成，也不表示本次文字整理重新執行測試。
 
-本表是 Day30 已交付快照；往後實際下一 Day 仍以 [即時學習狀態](../../learning-state.json) 為準。Day30 三篇已全文讀回，manifest 已同步；Chat／Pet Day25 FIFO 更正仍 pending，不能因教學文件發布而結案。文章 Commit／Blob 只證明 GitHub 文件，不代表產品驗收。
+## Chat
 
-### 程式來源與驗證邊界
+| 功能／驗證 | 現況 |
+| --- | --- |
+| 帳號與 Session | 註冊、登入、登出及持久化 Session 已接通。 |
+| 建房權限 | 先建立帳號並登入，具有有效會員 Session 才能建房；一般會員可建房，匿名訪客不可建房。 |
+| HTTP／DB 驗證 | 公開清單 200；未登入、偽造、過期或撤銷 Session 建房 401；一般會員建房 201；拒絕時不寫入；成功寫入及服務重啟讀回通過。 |
+| 建房 UI | 個人頁尚缺實際建房操作入口，不能由 API 成功推論完整 UI 流程已完成。 |
+| 瀏覽器清單 | 較早來源已驗證中文／特殊字元搜尋、刷新、DB 故障時保留結果與恢復重試；[瀏覽器與 SQLite 證據](../history/evidence/2026-10-23-browser-sqlite-9c2b7cf/REPORT.md)。 |
+| 待修／待驗證 | 逐房 ACL、建立者與訊息作者身分、長連線撤銷、稽核、歷史 DB 升級與完整 UI。 |
+| SSR 回歸 | 9 通過、1 失敗；缺少「歷史載入尚未接通」提示。 |
 
-唯一主體為 rust_ai_chat/main。本輪驗證 `9c2b7cf5a4c60a08254445911916c4ed9b02d7b3`、文件基準 `fad5db13a6711ac45a9cfece8198b612d7ce4607`；[全部84篇逐篇結果](../history/evidence/2026-10-23-all-articles-9c2b7cf/ALL_ARTICLES.md)與[命令、真入口、缺陷、CI及勘誤](../history/evidence/2026-10-23-all-articles-9c2b7cf/REPORT.md)已保存。不是三案全通過。
+## Pet
 
-Chat後端25通過、UI SSR9通過／1失敗；Pet原生49與前端9通過、Node0通過／3失敗；Analytics隔離PG完整35通過。另核心套件32通過、WASM檢查與fmt通過；Chat嚴格Clippy失敗。workspace整體命令因磁碟空間不足未完成，各套件已分開補驗，不能稱單一workspace命令成功。
+| 功能／驗證 | 現況 |
+| --- | --- |
+| 建立與持久化 | 已有建立、清單、選取、SQLite 讀回與 pool 重開測試。 |
+| 回籠補償 | 關窗同步失敗時嘗試恢復 SQLite 出籠標記；補償也失敗時回報兩個錯誤，程式已套用。 |
+| 原生 Rust 驗證 | 49 項既有測試通過；不包含新增補償失敗路徑的完整驗收。 |
+| 前端驗證 | WASM 編譯檢查通過；最新 Node 契約測試 3／3 通過。 |
+| 待驗證 | DB 寫入失敗、關窗失敗與補償失敗注入；三個不同寵物 ID 的原生視窗、單圖動畫、回籠與 App 重啟一致性。 |
+| 待調整 | 控制窗關閉後恢復、動態生活窗漫遊、多寵物預設出籠與相關 UI。 |
 
-真HTTP/WS與DB驗證支持Chat Day26/27/29、Analytics Day26/27/29共6篇完成切片封存；原文按blob／SHA256保留。[封存清單](../history/evidence/2026-10-23-all-articles-9c2b7cf/archive-manifest.json)。原文舊命令更正獨立記錄，未將原樣錯誤命令當成功。其他活動篇保留：Day28原文SSR API須勘誤、Pet控制窗恢復／動態窗漫遊／故障及三窗GUI未驗收；Analytics舊類型summary正式路由404、帳密入口缺舊限流政策。現存GitHub索引Day2–29為84篇；Day1正文未找到，另列來源缺口。
-- 程式、測試、CI／job、UI／API／IPC／DB、功能及重啟驗收只認 rust_ai_chat 的精確來源。
-- copilot_use 的 commit／blob／SHA256 只證明規則、文章、next_day／manifest 與全文讀回；舊程式、Release、CI 與產品試驗不作主體驗收。
-- learning-state／manifest 內舊 validated_program_sha、daily_product_sha、fixed_tag、acceptance 與試驗紀錄完整保留原用途，不能用來挑選本次主體 checkout 或推進 Day。
-- Analytics Day24 補教既有結案證據保留；Chat／Pet Day25 FIFO 仍依狀態與匹配證據逐項判定，不因本次規則整理結案。
+## Analytics
 
-原產品狀態、較早測試數字及證據連結[完整保留](../history/evidence/2026-10-23-repository-roles/before/docs/teaching/current/STATUS.md)。本次只在 learning-state／manifest 增加最新驗證與完成封存資料；next_day、補教佇列與 last_full_comparison 不變。現行目標見 [FUTURE_WORK](../../FUTURE_WORK.md)；流程設定的剩餘差異見 [同步範圍](../../REPOSITORY_ROLE_TRANSITION.md)。
+| 功能／驗證 | 現況 |
+| --- | --- |
+| 登入 UI | 正式登入頁已改為 Leptos SSR；單一 doctype、欄位與 label 契約測試通過。 |
+| DB 驗證 | 隔離 PostgreSQL 完整 integration targets 36／36 通過，包含原先忽略的測試；各 router 的覆蓋分開判定。 |
+| HTTP 驗證 | 初始化、帳密登入、首次改密碼、Session 撤銷與重新登入、來源統計及未知來源拒絕通過。 |
+| 瀏覽器驗證 | 真實登入、Chat／Pet 來源切換與登出通過。 |
+| 待完成 | 改密碼頁 Leptos 遷移、角色／來源 ACL、持久登入等待、事件類型查詢與即時更新等產品條件。 |
 
-### Chat瀏覽器／SQLite後續驗收（2026-10-23）
+## 共用驗證與限制
 
-程式仍為`9c2b7cf5a4c60a08254445911916c4ed9b02d7b3`；[本輪報告與畫面](../history/evidence/2026-10-23-browser-sqlite-9c2b7cf/REPORT.md)。Chat Day17／19／20已用真正hydrated瀏覽器驗證中文及特殊字元搜尋、真DB故障保留rows、恢復重試與刷新清query，改為本篇切片通過；3篇沿既有封存原文記錄完成，累計9篇完成切片（本次沒有新搬移）。Day15列表／選房通過，但保留建房功能的UI入口缺失，只部分通過，不列完成。Day18目前schema正常，但完整fa歷史庫先遇rooms migration checksum mismatch，單獨22554歷史也拒絕升級且資料保留；任意actor可寫、真操作後稽核0筆，改列實測失敗，不能標完成。其他前輪測試／失敗與未驗收範圍保留；[更新後84篇矩陣](../history/evidence/2026-10-23-browser-sqlite-9c2b7cf/ALL_ARTICLES.md)。
+- 原生三案測試 98 通過、0 失敗、1 忽略；PostgreSQL 完整測試另跑 36 通過、0 失敗、0 忽略。兩組有重複覆蓋，不合併當成獨立測試總數。
+- 生產 HTTP 32／32 通過；兩項 WASM 編譯檢查與格式檢查通過。
+- 最新 Node 測試及對應 CI 成功；其他 CI 狀態以精確 SHA 的報告快照或實際 run 為準，不由本地通過推論。
+- 原生 GUI、失敗注入、跨平台與完整產品 E2E 尚未全面完成；編譯、單元測試、文章交付各自判定。
+- 只有全面比對真正成功才更新 `last_full_comparison`；目前保留 `2026-10-16T22:47:14.399027+08:00`。
+- [待完成功能](../../FUTURE_WORK.md) · [需求與驗收條件](../../P9_TARGET.md) · [即時追蹤資料](../../learning-state.json) · [歷史原文與證據](../history/README.md)。
 
-### 排程與通知
+## 排程與通知
 
-- 既有每日教學紀錄為每日 06:00，Asia/Taipei、啟用；本次未重新讀回雲端任務狀態，亦未變更任務。
-- 歷史提示詞的模型名稱不作實際引擎選用證據；此處未重新驗證排程模型設定。
-- 歷史通知紀錄為推播與電子郵件已開啟；本次未重新核驗設定或實際送達。
-
-### 教學交付
-
-GitHub `williechen/copilot_use/main` 為唯一規則與教學文章正本；[每日教學入口](../daily/README.md)。每新增一個專案 Day 獨立 commit、推送及全文讀回，之後才條件同步狀態與 manifest。`williechen/rust_ai_chat/main` 是程式、測試、CI 與功能驗收的唯一來源。本次文件整理不新增 Day、不修改補教佇列或完整比對時間。
+既有記錄的每日教學時間為 06:00 Asia/Taipei；本次未重新查核任務啟用、通知或送達狀態，也未修改排程。教學交付與功能驗收分開追蹤，文字整理不推進進度或結案補教。

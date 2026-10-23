@@ -4,7 +4,7 @@
 
 ## 目前狀態
 
-[單一目前進度](../current/STATUS.md) · [即時進度檔](../../learning-state.json)。本文的需求不代表已完成；不在首頁複製過期的 Day 或測試快照。
+[單一目前進度](../current/STATUS.md) · [即時進度檔](../../learning-state.json)。本文的需求不代表已完成；現況依功能與驗證範圍說明。
 
 ## 專案大綱與操作主線
 
@@ -48,54 +48,12 @@
 
 學習庫：apps/server 負責 HTTP／WS，crates/ui 負責畫面，chat\_domain／chat\_application 負責規則與 Port，crates/persistence 負責 SQLite／migration；資料庫差異留在 Adapter。
 
-先讀目前 Day 的「學習大綱」確認前置能力，再按第 2 節套用與 Refactor，最後照第 4 節從真實入口驗證。已實作的舊篇用來追溯，不照順序把所有舊程式再貼一次。
+先讀相關功能教學的「學習大綱」確認前置能力，再按第 2 節套用與 Refactor，最後照第 4 節從真實入口驗證。已實作的舊篇用來追溯，不照順序把所有舊程式再貼一次。
 
 [產品操作設定](https://github.com/williechen/copilot_use/blob/main/docs/DEPLOYMENT.md) · [產品未來清單](https://github.com/williechen/copilot_use/blob/main/docs/FUTURE_WORK.md)；兩者是文件庫的需求／操作入口；主體程式、命令與驗收只依 rust_ai_chat 當時 Cargo／README／精確 SHA。
 
+## 功能驗證現況
 
-## 目前教學
+會員建房 HTTP／DB 驗證已通過；建房 UI、逐房 ACL、SSR 提示與完整操作流程仍有缺口。
 
-- **最新已發布：** [Chat Day 30 r2](../daily/day-30/chat.md)（教學文章已發布；程式套用與功能驗收另行判定）
-- 前一篇：[Chat Day 28](../daily/day-28/chat.md)
-- **下一篇 Day：** **Day 31**（以 [learning-state.json](../../learning-state.json) 的 `next_day.chat` 為準）。
-- [全部最新文章與三專案對照](../daily/README.md) · [交付狀態與證據](../current/STATUS.md)
-
-<details>
-<summary>歷史文章、修訂與原始封存證據</summary>
-
-| Day | 文章與原始資料 |
-| --- | --- |
-| 25 | [文章／版本／證據](../history/day-25/chat/README.md) |
-| 24 | [文章／版本／證據](../history/day-24/chat/README.md) |
-| 23 | [文章／版本／證據](../history/day-23/chat/README.md) |
-| 22 | [文章／版本／證據](../history/day-22/chat/README.md) |
-| 21 | [文章／版本／證據](../history/day-21/chat/README.md) |
-| 20 | [文章／版本／證據](../history/day-20/chat/README.md) |
-| 19 | [文章／版本／證據](../history/day-19/chat/README.md) |
-| 18 | [文章／版本／證據](../history/day-18/chat/README.md) |
-| 17 | [文章／版本／證據](../history/day-17/chat/README.md) |
-| 16 | [文章／版本／證據](../history/day-16/chat/README.md) |
-| 15 | [文章／版本／證據](../history/day-15/chat/README.md) |
-| 14 | [文章／版本／證據](../history/day-14/chat/README.md) |
-| 13 | [文章／版本／證據](../history/day-13/chat/README.md) |
-| 12 | [文章／版本／證據](../history/day-12/chat/README.md) |
-| 11 | [文章／版本／證據](../history/day-11/chat/README.md) |
-| 10 | [文章／版本／證據](../history/day-10/chat/README.md) |
-| 9 | [文章／版本／證據](../history/day-09/chat/README.md) |
-| 8 | [文章／版本／證據](../history/day-08/chat/README.md) |
-| 7 | [文章／版本／證據](../history/day-07/chat/README.md) |
-| 6 | [文章／版本／證據](../history/day-06/chat/README.md) |
-| 5 | [文章／版本／證據](../history/day-05/chat/README.md) |
-| 4 | [文章／版本／證據](../history/day-04/chat/README.md) |
-| 3 | [文章／版本／證據](../history/day-03/chat/README.md) |
-| 2 | [文章／版本／證據](../history/day-02/chat/README.md) |
-
-</details>
-
-## 本輪文章驗證與封存
-
-[全部文章逐篇結果](../history/evidence/2026-10-23-all-articles-9c2b7cf/ALL_ARTICLES.md) · [實跑證據與必要勘誤](../history/evidence/2026-10-23-all-articles-9c2b7cf/REPORT.md)。本案Day26、Day27、Day29已完成本篇切片驗證並封存；全產品功能驗收仍獨立，Day28原文SSR API勘誤另記。
-
-## 瀏覽器與SQLite驗收更新
-
-[Day17／19／20本篇瀏覽器切片已驗證完成；Day15缺建房入口而部分通過，Day18舊庫升級與真稽核未通過](../history/evidence/2026-10-23-browser-sqlite-9c2b7cf/REPORT.md)。已存在的封存正文不變，最新結果以此證據與逐篇矩陣為準。
+[完整現況](../current/STATUS.md) · [驗證報告](../history/evidence/2026-10-23-day30-validation-1d1866d/REPORT.md) · [歷史文章與原始證據](../history/README.md)
