@@ -2,19 +2,19 @@
 
 ### 最新教學交付狀態（GitHub main）
 
-現行教學正本為 `williechen/copilot_use/main`。本次核對 `docs/learning-state.json`、`docs/teaching/current/manifest.json` 與 Day27 文章；**已發布的教學不等於學習庫已套用、測試已跑或產品驗收成功**。
+教學文件正本：`williechen/copilot_use/main`。已按 `learning-state.json`、`manifest.json` 與 Day29 文章讀回核對。**文章交付不代表已套用主體程式、測試通過或產品功能驗收完成。**
 
-| 專案 | 最新已發布教學 | 下個 Day（本次讀回） | 文章提交 |
+| 專案 | 最新已發布教學 | 下一 Day | 文章 Commit |
 | --- | --- | --- | --- |
-| Chat | [Day27](../daily/day-27/chat.md) | 28 | `c8d63b6764d9eae12320bebe01c58cbf2556f832` |
-| Pet | [Day27](../daily/day-27/pet.md) | 28 | `9c29a657a8e93e34064b2d838ddfefeba9afe4e7` |
-| Analytics | [Day27](../daily/day-27/analytics.md) | 28 | `adf829e0efe092a72538d0abef3b5402e3289097` |
+| Chat | [Day29](../daily/day-29/chat.md) | **30** | `d8ef21fd2f0eca49df445244a805f22dd64eb5e4` |
+| Pet | [Day29](../daily/day-29/pet.md) | **30** | `ef58906758a744d98b46c6c62c1e886343717ebd` |
+| Analytics | [Day29](../daily/day-29/analytics.md) | **30** | `ae5001c214bd5c571f3d2d150ba1e097ce984bbb` |
 
-之後仍須每次讀取 [即時學習狀態](../../learning-state.json)，不把 28 寫死；GitHub 規則最新架構要求為 Leptos UI → Axum HTTP/API／Tauri IPC → Application／Domain → SQLx Adapter。Chat／Pet Day25 FIFO 更正尚待完整驗證，沒有因同步索引而結案。Day27 三篇全文與 blob／SHA256 已保存在 [manifest](manifest.json)，原始文章和歷史資料均不更動。
+本表是 Day29 文件交付快照；往後實際下一 Day 仍以 [即時學習狀態](../../learning-state.json) 為準。Day29 三篇已全文讀回、manifest 與每日索引已同步；Chat／Pet Day25 FIFO 更正仍 pending，不能因教學文件發布而結案。文章 Commit／Blob 只證明 GitHub 文件，不代表產品驗收。
 
 ### 程式來源與驗證邊界
 
-唯一主體為 rust_ai_chat/main。本次文件同步讀取到 `f61ea1c59667f3c92c78e576e3c48038a8ce030a`，只靜態核對入口，未對此 SHA 執行新測試或功能驗收；較早 SHA 的測試不可當作最新 main 結果。
+唯一主體為 rust_ai_chat/main。Day29 教學核對使用 `143d6b3f5180b669860b1300286b89464c669434`，只靜態核對入口，未對此 SHA 執行新測試或功能驗收；較早 SHA 的測試不可當作最新 main 結果。
 
 - 程式、測試、CI／job、UI／API／IPC／DB、功能及重啟驗收只認 rust_ai_chat 的精確來源。
 - copilot_use 的 commit／blob／SHA256 只證明規則、文章、next_day／manifest 與全文讀回；舊程式、Release、CI 與產品試驗不作主體驗收。
@@ -31,4 +31,4 @@
 
 ### 教學交付
 
-GitHub `williechen/copilot_use/main` 為唯一規則與教學文章正本；[每日教學入口](../daily/README.md)。每新增一個專案 Day 獨立 commit、推送及全文讀回，之後才條件同步狀態與 manifest。共同主頁與三案 Notion 教學原文搬遷至 [GitHub 匯出索引](../history/evidence/notion-export/2026-10-22/README.md)，核對後移至可還原垃圾桶。本次只同步目前教學入口與狀態摘要，不新增 Day、不修改補教佇列或完整比對時間。
+GitHub `williechen/copilot_use/main` 為唯一規則與教學文章正本；[每日教學入口](../daily/README.md)。每新增一個專案 Day 獨立 commit、推送及全文讀回，之後才條件同步狀態與 manifest。共同主頁與三案 Notion 教學原文搬遷至 [GitHub 匯出索引](../history/evidence/notion-export/2026-10-22/README.md)，核對後移至可還原垃圾桶。本次同步 Day29 首頁與狀態摘要，不新增 Day、不修改補教佇列或完整比對時間。
