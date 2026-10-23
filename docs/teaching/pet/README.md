@@ -65,3 +65,8 @@ rust_ai_chat 的 apps/desktop\_pet 負責 Tauri／OS 入口，frontend 負責 Le
 [完整現況](../current/STATUS.md) · [本輪報告](../history/evidence/2026-10-23-formal-be0494a/REPORT.md) · [歷史文章與原始證據](../history/README.md)
 
 [Day31教學：控制窗關閉後重開](../daily/day-31/pet.md)（控制窗隱藏／再開已套用並由原生關窗事件實測；完整寵物生命週期仍待補驗。）
+
+
+## 最新教學（Day32）
+
+[Day32：右鍵開啟控制窗並選取對應寵物](../daily/day-32/pet.md)（教學已交付；程式未套用、測試未執行、功能未驗收）。下一篇 Day33，以 [即時進度檔](../../learning-state.json) 為準；Day31 與歷史驗證證據保留。
