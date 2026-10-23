@@ -51,9 +51,9 @@
     "historical_records_are_not_current_policy": true
   },
   "scope": "Latest published teaching index; Day16 snapshot preserved in archive",
-  "revision": "day30-revisions-12-policy-sync",
-  "synced_date": "2026-10-23",
-  "source_sha": "e62ed41e2122ef0979af8e2d453bafa2e05aa2e5",
+  "revision": "day32-chat-r1",
+  "synced_date": "2026-10-24",
+  "source_sha": "be0494a2a70be91eb74b2b726970a23fc3e5c044",
   "articles": [
     {
       "full_text_verified": true,
@@ -682,11 +682,41 @@
       "archived": false,
       "remaining_gaps": "SSR／正式路由、隔離 PostgreSQL 全 targets 與瀏覽器驗收未執行；初始化及 ACL 差異保留",
       "expected_state_parent_sha": "7b1fe052730d7a6d074a95fcd6f0ce19bed2259e"
+    },
+    {
+      "repository": "williechen/copilot_use",
+      "branch": "main",
+      "parent": "9dfeb0583d9267028c3e1fbbbc8adb4781582ce4",
+      "tree": "19530f6b4543e309198062a587710f0f2d77d1fa",
+      "rules_sha": "419e357989595184ce31a5ad062dfd78b35f19e7",
+      "source_sha": "be0494a2a70be91eb74b2b726970a23fc3e5c044",
+      "read_at": "2026-10-23T22:54:26.550Z",
+      "project": "chat",
+      "day": 32,
+      "revision": "r1",
+      "article_commit": "9c39d359f7a99b61bd7128648ec3825fc6ccf5a5",
+      "blob_sha": "1b758a1b2604d7ac321b3015b5cdf583d46b4837",
+      "sha256": "b7f2c284ae475a34976afbebe4a39be099aa9a9388250ff7924ec203783bc11e",
+      "bytes": 11183,
+      "full_text_verified": true,
+      "readback_at": "2026-10-23T22:54:26.550Z",
+      "raw_error": null,
+      "path": "docs/teaching/daily/day-32/chat.md",
+      "rules_version": "daily-tdd-minimum-v1+github-only-v1",
+      "status": "github_article_readback_verified",
+      "main_application": "not applied",
+      "tests": "not run",
+      "functional_acceptance": false,
+      "next_day_before": 32,
+      "next_day_after": 33,
+      "archived": false,
+      "remaining_gaps": "Chat 歷史載入／逐房 ACL／作者身分與真實 SSR/瀏覽器驗收未完成；Day25 共用認證 FIFO pending",
+      "expected_state_parent_sha": "9c39d359f7a99b61bd7128648ec3825fc6ccf5a5"
     }
   ],
   "day15_frozen": true,
   "next_day": {
-    "chat": 32,
+    "chat": 33,
     "pet": 32,
     "analytics": 32
   },
@@ -829,7 +859,7 @@
     "frozen_body_sha256": "ad6cef4a58f20f6162fb01a4c71ef1a752992856327063d9988112c91a639184",
     "frozen_notion_snapshot": "docs/teaching/archive/day-22/notion/chat.md"
   },
-  "latest_chat_publication": "docs/teaching/daily/day-31/chat-readback.json",
+  "latest_chat_publication": "docs/teaching/daily/day-32/chat-readback.json",
   "previous_day22_pet_article": {
     "project": "pet",
     "day": 22,
