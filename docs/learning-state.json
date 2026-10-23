@@ -3008,18 +3008,16 @@
     "status": "github_article_readback_verified"
   },
   "latest_source_validation": {
-    "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3",
-    "document_baseline_sha": "1a27390916fbf28ee6582b452362cf4978c96fce",
-    "date": "2026-10-23T12:45:07.066127+08:00",
-    "report": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/REPORT.md",
-    "article_matrix": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/ALL_ARTICLES.md",
-    "summary": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/summary.json",
-    "archive_manifest": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/archive-manifest.json",
-    "canonical_articles": 84,
-    "newly_verified_articles": 5,
-    "scope": "follow-up Chat15/17/18/19/20; prior84-article review retained",
+    "source_sha": "be0494a2a70be91eb74b2b726970a23fc3e5c044",
+    "full_execution_sha": "7b016106058084de7c1d0e19eec061b17ceda063",
+    "checked_at": "2026-10-23T23:38:30.233513+08:00",
+    "report": "docs/teaching/history/evidence/2026-10-23-formal-be0494a/REPORT.md",
+    "summary": "docs/teaching/history/evidence/2026-10-23-formal-be0494a/SUMMARY.json",
+    "scope": "local formal validation; test-only followup; not full source comparison",
+    "overall": "not_all_passed",
     "functional_acceptance": false,
-    "next_day_unchanged": true
+    "next_day_unchanged": true,
+    "ci_snapshot": "docs/teaching/history/evidence/2026-10-23-formal-be0494a/ci-latest.json"
   },
   "completed_article_archive": {
     "policy": "archive after lesson-slice verification with matching source and evidence; full-product acceptance independent",
@@ -3190,5 +3188,19 @@
     "archived": false,
     "remaining_gaps": "SSR／正式路由、隔離 PostgreSQL 全 targets 與瀏覽器驗收未執行；初始化及 ACL 差異保留",
     "expected_state_parent_sha": "7b1fe052730d7a6d074a95fcd6f0ce19bed2259e"
+  },
+  "previous_source_validation_before_formal_be0494a": {
+    "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3",
+    "document_baseline_sha": "1a27390916fbf28ee6582b452362cf4978c96fce",
+    "date": "2026-10-23T12:45:07.066127+08:00",
+    "report": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/REPORT.md",
+    "article_matrix": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/ALL_ARTICLES.md",
+    "summary": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/summary.json",
+    "archive_manifest": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/archive-manifest.json",
+    "canonical_articles": 84,
+    "newly_verified_articles": 5,
+    "scope": "follow-up Chat15/17/18/19/20; prior84-article review retained",
+    "functional_acceptance": false,
+    "next_day_unchanged": true
   }
 }

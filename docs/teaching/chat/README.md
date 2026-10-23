@@ -54,8 +54,8 @@ rust_ai_chat：apps/server 負責 HTTP／WS，crates/ui 負責畫面，chat\_dom
 
 ## 功能驗證現況
 
-會員建房 HTTP／DB 驗證已通過；建房 UI、逐房 ACL、SSR 提示與完整操作流程仍有缺口。
+會員個人頁真瀏覽器建房、進房與登出通過；雙頁WS寫入通過，但歷史重載、訊息作者及SSR提示仍有缺口。
 
-[完整現況](../current/STATUS.md) · [驗證報告](../history/evidence/2026-10-23-day30-validation-1d1866d/REPORT.md) · [歷史文章與原始證據](../history/README.md)
+[完整現況](../current/STATUS.md) · [本輪報告](../history/evidence/2026-10-23-formal-be0494a/REPORT.md) · [歷史文章與原始證據](../history/README.md)
 
-[最新教學提案：個人頁建房](../daily/day-31/chat.md)（程式尚待使用者套用與驗收）。
+[Day31教學：個人頁建房](../daily/day-31/chat.md)（個人頁建房切片已套用並通過本輪瀏覽器操作；整體驗證仍未全部通過。）

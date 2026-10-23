@@ -16,7 +16,7 @@ P9 規則已廢除。本清單中僅源自舊規則、尚未依最新需求確�
 
 ## 當前最高優先順序：先接通可操作的基本流程
 
-本輪全部文章核對與待修來源見[84篇矩陣](teaching/history/evidence/2026-10-23-all-articles-9c2b7cf/ALL_ARTICLES.md)。精確程式9c2b7cf：Chat頁面／WS基本Session已接通，但SSR歷史提示與API／逐房ACL仍缺；Pet控制窗恢復及動態窗漫遊未接妥；Analytics正式事件類型summary路由404，帳密入口未沿用舊限流。各項留在原功能待辦，不由舊helper測試或本次文件封存結案。
+歷史全部文章核對與待修來源見[84篇矩陣](teaching/history/evidence/2026-10-23-all-articles-9c2b7cf/ALL_ARTICLES.md)。精確程式9c2b7cf：Chat頁面／WS基本Session已接通，但SSR歷史提示與API／逐房ACL仍缺；Pet控制窗恢復及動態窗漫遊未接妥；Analytics正式事件類型summary路由404，帳密入口未沿用舊限流。各項依精確來源追蹤，不由舊helper測試或文件封存結案。最新be0494a的跨SHA正式驗證已確認個人頁建房、Pet控制窗原生關閉再開與Analytics Leptos改密碼頁；仍有SSR提示、Clippy、Pet舊庫升級及完整產品缺口，見[新報告](teaching/history/evidence/2026-10-23-formal-be0494a/REPORT.md)。
 這是目前已確認功能的實作順序與驗收條件；實際缺口及最新來源見[目前進度](teaching/current/STATUS.md)。每次依真實入口、資料庫與測試調整最小切片，不預排Day，也不以其他分支的舊試作當成已合併／驗收。
 - [ ] **Chat：註冊／登入→Session→公開房間清單與進房授權→加入／建立聊天室。** 沿 rust_ai_chat 的 signup／signin／logout、mbr_user／Session 與房間授權實際來源核對；不引用舊庫 auth.rs／chat_users 介面。先完成欄位驗證與登入授權，不重建平行身分表。基本鏈未完成前不優先擴充歷史訊息或進階UI。
 - [ ] **Pet：建立第一隻寵物→名稱／初始外觀→Tauri IPC→SQLite→生活窗→重啟載入。** 沿 rust_ai_chat 的 create_pet／pet_store／pet_profile 與 Tauri command 實際來源核對；補齊逐寵物身分／畫面／載入後再深化多寵物與漫遊。先核對舊DB歷史，以前向migration處理相容性，不清空DB。
@@ -89,4 +89,4 @@ P9 規則已廢除。本清單中僅源自舊規則、尚未依最新需求確�
 
 ### Chat瀏覽器與SQLite最新實證
 
-[2026-10-23後續驗收](teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/REPORT.md)：列表／中文搜尋／刷新故障保留及重試已實機通過；不再列為單純「待瀏覽器驗收」。Day15原文要求保留建房功能，但目前首頁／個人頁都沒有建房UI，只有API；按現行需求應接到個人管理頁，該篇只部分通過。原SQLite／稽核項仍未完成：歷史migration升級checksum不符（資料保留），created_user_id未綁真實身分，註冊登入與發訊沒有action log寫入。保留原待辦與歷史正文，不結案整個Chat產品。
+[2026-10-23後續驗收](teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/REPORT.md)：列表／中文搜尋／刷新故障保留及重試已實機通過；不再列為單純「待瀏覽器驗收」。9c2b7cf當時尚缺個人頁建房UI；最新be0494a對應生產程式已接通，真瀏覽器個人頁建房與進房通過。這補足操作入口，但不改寫Day15原文或追認該篇其他Gate全部通過。原SQLite／稽核項仍未完成：歷史migration升級checksum不符（資料保留），created_user_id未綁真實身分，註冊登入與發訊沒有action log寫入。保留原待辦與歷史正文，不結案整個Chat產品。

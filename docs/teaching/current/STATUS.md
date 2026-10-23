@@ -6,52 +6,47 @@
 
 ## 驗證來源
 
-- 最近已驗證程式 SHA：`1d1866dbbb30255fafa4c7f74b1868919662913c`。
-- 原生、DB、HTTP、WASM 與瀏覽器主要測試來源：`974db9ff29f0ba640d1df84a3aaaf2556d7624e1`；兩版只差三個 Node 測試檔，其餘程式、依賴與 migrations 未變，已核對後沿用相關證據。
-- [目前驗證報告](../history/evidence/2026-10-23-day30-validation-1d1866d/REPORT.md) · [測試與來源摘要](../history/evidence/2026-10-23-day30-validation-1d1866d/SUMMARY.json)。
-- 以下是已取得證據的範圍，不代表所有產品功能均已完成，也不表示本次文字整理重新執行測試。
+- 本輪最新目標：`be0494a2a70be91eb74b2b726970a23fc3e5c044`；**正式驗證未全部通過**。
+- 完整建置、DB、HTTP、瀏覽器與原生GUI來源：`7b016106058084de7c1d0e19eec061b17ceda063`。be0494a只調整Day31 UI測試SSR feature gate，生產程式、依賴與migrations未變；已核對差異，並在新版重跑fmt／UI／workspace。
+- [本輪完整報告](../history/evidence/2026-10-23-formal-be0494a/REPORT.md) · [精確摘要](../history/evidence/2026-10-23-formal-be0494a/SUMMARY.json) · [日誌、工具與截圖](../history/evidence/2026-10-23-formal-be0494a/evidence.tar.gz)。本輪結果取代前次對「尚未套用」的現況敘述，原日誌與文章當時事實保留。
 
 ## Chat
 
 | 功能／驗證 | 現況 |
 | --- | --- |
-| 帳號與 Session | 註冊、登入、登出及持久化 Session 已接通。 |
-| 建房權限 | 先建立帳號並登入，具有有效會員 Session 才能建房；一般會員可建房，匿名訪客不可建房。 |
-| HTTP／DB 驗證 | 公開清單 200；未登入、偽造、過期或撤銷 Session 建房 401；一般會員建房 201；拒絕時不寫入；成功寫入及服務重啟讀回通過。 |
-| 建房 UI | 個人頁尚缺實際建房操作入口，不能由 API 成功推論完整 UI 流程已完成。 |
-| 瀏覽器清單 | 較早來源已驗證中文／特殊字元搜尋、刷新、DB 故障時保留結果與恢復重試；[瀏覽器與 SQLite 證據](../history/evidence/2026-10-23-browser-sqlite-9c2b7cf/REPORT.md)。 |
-| 待修／待驗證 | 逐房 ACL、建立者與訊息作者身分、長連線撤銷、稽核、歷史 DB 升級與完整 UI。 |
-| SSR 回歸 | 9 通過、1 失敗；缺少「歷史載入尚未接通」提示。 |
+| 帳號、Session與建房 | 新註冊一般會員登入、匿名建房401、個人頁表單CSRF拒絕403／成功201、API建房201、重啟讀回Session與房間、登出撤銷通過。 |
+| Day31個人頁UI | 真瀏覽器登入→輸入名稱→建立→顯示進房連結→點擊進房→登出通過；不再列為未套用。 |
+| 訊息 | 雙頁WS廣播與SQLite恰1筆寫入通過；重新整理後沒有載入既有訊息，登入者發送仍保存為anonymous_user。 |
+| SSR回歸 | 最新版10通過、1失敗：缺少「歷史載入尚未接通」提示。 |
+| 待完成 | 作者身分、逐房ACL、長連線撤銷、歷史／重連、完整管理與歷史DB升級等仍獨立追蹤。 |
 
 ## Pet
 
 | 功能／驗證 | 現況 |
 | --- | --- |
-| 建立與持久化 | 已有建立、清單、選取、SQLite 讀回與 pool 重開測試。 |
-| 回籠補償 | 關窗同步失敗時嘗試恢復 SQLite 出籠標記；補償也失敗時回報兩個錯誤，程式已套用。 |
-| 原生 Rust 驗證 | 49 項既有測試通過；不包含新增補償失敗路徑的完整驗收。 |
-| 前端驗證 | WASM 編譯檢查通過；最新 Node 契約測試 3／3 通過。 |
-| 待驗證 | DB 寫入失敗、關窗失敗與補償失敗注入；三個不同寵物 ID 的原生視窗、單圖動畫、回籠與 App 重啟一致性。 |
-| 待調整 | 控制窗關閉後恢復、動態生活窗漫遊、多寵物預設出籠與相關 UI。 |
+| 建立與多窗 | 真控制台建立三個ID、SQLite三筆；三個200×200生活窗各單一寵物圖像，睡眠事件只更新所選ID，另兩窗保持待機。 |
+| Day31控制窗生命週期 | 真原生WM_DELETE_WINDOW關閉控制台後，從生活窗點「控制台」可恢復；已實測。 |
+| 回籠與重啟 | 回籠只關閉該生活窗；App重啟讀回三筆profile清單通過，未證明生活窗自動恢復／出籠標記全部一致。 |
+| 舊庫升級 | 從指定4f0cd00 migrations升級，仍VersionMismatch(20261018095626)；合成sentinel保留，不能列為升級通過。 |
+| 待驗證 | DB／關窗／補償失敗注入、預設出籠與重啟生命週期、漫遊／拖曳及跨平台安裝仍未完成。 |
 
 ## Analytics
 
 | 功能／驗證 | 現況 |
 | --- | --- |
-| 登入 UI | 正式登入頁已改為 Leptos SSR；單一 doctype、欄位與 label 契約測試通過。 |
-| DB 驗證 | 隔離 PostgreSQL 完整 integration targets 36／36 通過，包含原先忽略的測試；各 router 的覆蓋分開判定。 |
-| HTTP 驗證 | 初始化、帳密登入、首次改密碼、Session 撤銷與重新登入、來源統計及未知來源拒絕通過。 |
-| 瀏覽器驗證 | 真實登入、Chat／Pet 來源切換與登出通過。 |
-| 待完成 | 改密碼頁 Leptos 遷移、角色／來源 ACL、持久登入等待、事件類型查詢與即時更新等產品條件。 |
+| Leptos登入與改密碼 | Day31改密碼頁已套用；新CLI初始化、首次限制、Leptos表單與CSRF、交易改密碼、撤銷與新密碼重登、日後改密碼頁200等真HTTP通過。 |
+| DB與攝取 | PostgreSQL全部targets36通過，另1項ignored實跑通過；Chat／Pet分別token攝取201、重送200通過。 |
+| 指定舊庫升級 | 4f0cd00→本輪migrations成功，合成sentinel保留；不等於所有歷史cohort都已驗收。 |
+| 瀏覽器與權限 | 本輪未重跑Analytics瀏覽器；原瀏覽器證據仍依原SHA。角色／來源ACL、登入等待、即時更新等仍待完成。 |
 
 ## 共用驗證與限制
 
-- 原生三案測試 98 通過、0 失敗、1 忽略；PostgreSQL 完整測試另跑 36 通過、0 失敗、0 忽略。兩組有重複覆蓋，不合併當成獨立測試總數。
-- 生產 HTTP 32／32 通過；兩項 WASM 編譯檢查與格式檢查通過。
-- 最新 Node 測試及對應 CI 成功；其他 CI 狀態以精確 SHA 的報告快照或實際 run 為準，不由本地通過推論。
-- 原生 GUI、失敗注入、跨平台與完整產品 E2E 尚未全面完成；編譯、單元測試、文章交付各自判定。
-- 只有全面比對真正成功才更新 `last_full_comparison`；目前保留 `2026-10-16T22:47:14.399027+08:00`。
-- [待完成功能](../../FUTURE_WORK.md) · [現行使用者需求](../../requirements/USER_FLOWS.md) · [即時追蹤資料](../../learning-state.json) · [歷史原文與證據](../history/README.md)。
+- 最新be0494a workspace139通過／0失敗／1 ignored；UI CI同命令8通過／0失敗；UI SSR10通過／1失敗。PG、SSR與workspace有重疊覆蓋，不相加為獨立測試總數。
+- 原始7b01610：workspace140通過／1 ignored、Server SSR26通過；Node3/3、SSR／兩案WASM compile、Chat與Analytics release、Pet frontend release與native debug build通過。
+- 嚴格Clippy仍失敗：Pet巢狀if，以及UI unused變數與dead_code。Pet歷史migration阻擋與Chat歷史缺口仍存在，整體Gate未通過。
+- 相同SHA CI快照見[報告](../history/evidence/2026-10-23-formal-be0494a/REPORT.md)；舊7b01610的test-ui失敗與新版feature gate修正分開判定，不把執行中的run記為成功。
+- 未執行付費AI、真實舊庫修復、跨平台或全面兩庫比對；next_day維持三案各32，last_full_comparison維持2026-10-16T22:47:14.399027+08:00，makeup_queue與原Day正文不改寫。
+- [待完成功能](../../FUTURE_WORK.md) · [現行需求](../../requirements/USER_FLOWS.md) · [即時資料](../../learning-state.json) · [歷史證據](../history/README.md)。
 
 ## 排程與通知
 
