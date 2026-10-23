@@ -42,9 +42,9 @@ P9 規則已廢除。本清單中僅源自舊規則、尚未依最新需求確�
 
 ### 共同主線
 
-- [ ] 現有測試歸位重構：自Day15起分批搬移11個非空測試檔，Chat兩檔歸chat-application、Server一檔歸server、Pet五檔歸pet-domain、Analytics三檔歸stats-server。整合步驟及文章位置見[教學總文章](COMMON_LEARNING_RULES.md)的Refactor；參考庫由使用者套用，尚未搬移或執行搬移後驗證。
+2026-10-23 依使用者確認，舊「分批搬移 11 個測試檔」及「依目錄、型別、Port、介面與所屬測試更新教學對應及理由／建立平行程式」兩項已廢除，已移出活動待辦；不作重構計畫、教學選題或驗收要求。[廢除紀錄與原文](teaching/history/evidence/2026-10-23-retired-legacy-work-items/REPORT.md)僅供追溯。
 
-- [ ] 依 rust_ai_chat 最新目錄、型別、Port、介面與所屬測試更新教學對應及理由；不在 copilot_use 建立平行程式。
+
 - [ ] 三專案各自產出完整可套用 Day；四節格式、原教學與第 2 節末尾必要實作補充對應一致。
 - [ ] 學習倉庫逐步達到產品能力，三專案與跨服務 E2E 共同驗收；獨立記錄學習套用與產品驗收。
 - [ ] 每週六完整核對 rust_ai_chat 的 source／介面／流程／契約／DB／UI／CI／測試，再核對 copilot_use 文件、教學與證據的對應；既有執行流程尚待調整見 [同步範圍](REPOSITORY_ROLE_TRANSITION.md)。
