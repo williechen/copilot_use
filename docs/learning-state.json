@@ -2963,11 +2963,11 @@
   "day30_chat_delivery": {
     "project": "chat",
     "day": 30,
-    "revision": "r1",
+    "revision": "r2",
     "path": "docs/teaching/daily/day-30/chat.md",
-    "article_commit": "b56167f81b1279648fcc24ce0d35d2542b1e7b80",
-    "blob_sha": "822a838733f73dae2501dd23d9e985506f0258e6",
-    "sha256": "366ab24910f132feecc097284ea574c38968b30224279cbfeabc4e43bf289efa",
+    "article_commit": "8d569638d067a69fcb81c66d117aaf0b9c022c30",
+    "blob_sha": "6f0a653729cb2ef4fa1dd016757a15f84163efc1",
+    "sha256": "5b7bc3be9fa000950715cb903707b05e41ef8639cabd3d65936a6bbf98aec4ee",
     "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3",
     "rules_version": "daily-tdd-minimum-v1+github-only-v1",
     "full_text_verified": true,
@@ -2977,6 +2977,13 @@
     "functional_acceptance": false,
     "next_day_before": 30,
     "next_day_after": 31,
-    "status": "github_article_readback_verified"
+    "status": "github_article_readback_verified",
+    "previous_revision": {
+      "revision": "r1",
+      "article_commit": "b56167f81b1279648fcc24ce0d35d2542b1e7b80",
+      "blob_sha": "822a838733f73dae2501dd23d9e985506f0258e6",
+      "sha256": "366ab24910f132feecc097284ea574c38968b30224279cbfeabc4e43bf289efa"
+    },
+    "note": "Day29 unfinished-item supplement and corrected HTTP method router; documentation only; next_day unchanged"
   }
 }
