@@ -9,7 +9,7 @@
 | 26 | [Chat](day-26/chat.md) | [Pet](day-26/pet.md) | [Analytics](day-26/analytics.md) |
 | 27 | [Chat](day-27/chat.md) | [Pet](day-27/pet.md) | [Analytics](day-27/analytics.md) |
 | 28 | [Chat](day-28/chat.md) | [Pet](day-28/pet.md) | [Analytics](day-28/analytics.md) |
-| 29 | [Chat](day-29/chat.md) | — | — |
+| 29 | [Chat](day-29/chat.md) | [Pet](day-29/pet.md) | — |
 
 <details>
 <summary>歷史文章與原始封存證據</summary>
