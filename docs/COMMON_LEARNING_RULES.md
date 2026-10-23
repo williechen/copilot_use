@@ -20,6 +20,8 @@ P9 規則已廢除且與現況不同，不再作為產品目標、選題、待�
 
 ### 儲存庫分工（2026-10-23 確認）
 
+2026-10-23 依使用者確認，所有涉及 copilot_use 程式開發、移植、同步適配、重構、套用、建置、測試、CI、產品試驗、發布、安裝更新與功能驗收的工作要求均已廢除，不再列為待辦、選題或驗收門檻。copilot_use 僅維護需求、規則、教學文章、進度、索引與交付證據；文件內的教學程式碼用於說明 rust_ai_chat 的實作，不建立第二套產品。程式功能、測試、CI 與驗收只依 rust_ai_chat 精確 SHA。既有 copilot_use 程式、腳本、workflow、Release 及歷史欄位僅供追溯，不代表仍有維護或執行義務。
+
 - **williechen/copilot_use/main：** 規則、教學文章、next_day、manifest、交付讀回與歷史證據的正本。
 - **williechen/rust_ai_chat/main：** 唯一程式、測試、CI 與功能驗收主體。UI／HTTP／IPC／DB／ACL、Cargo／lock／套件、命令及實作缺口均以該庫當時精確 SHA 核對；教學流程保持原始碼唯讀，由使用者套用。
 - 兩庫 SHA 分開記錄為「文件交付 SHA」與「程式來源 SHA」。copilot_use 既有程式、scripts、Actions、Release 或本地測試不作主體程式的驗收 Gate，也不能替代 rust_ai_chat 的功能現況或 CI 證據。

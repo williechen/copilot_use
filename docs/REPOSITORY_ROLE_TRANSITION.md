@@ -6,9 +6,13 @@
 
 首頁、共用規則、架構／銜接、目標／待辦、操作／驗收、教學現況及排程文件的現行角色已同步。程序來源本次讀取 rust_ai_chat/main `f61ea1c59667f3c92c78e576e3c48038a8ce030a`，只作靜態入口核對，未重新測試。改寫前原文與 blob／SHA256 [完整保留](teaching/history/evidence/2026-10-23-repository-roles/README.md)。
 
-learning-state 與 manifest 原始 bytes、next_day、FIFO、last_full_comparison、所有 Day 正文與既有歷史證據保持原狀。舊程式與 Release 保留原適用範圍；不再作主體驗收。
+learning-state 與 manifest 原始 bytes、next_day、FIFO、last_full_comparison、所有 Day 正文與既有歷史證據保持原狀。舊程式與 Release 僅作歷史追溯；其相關工作已廢除。以上原始 bytes 不變的描述是先前分工整理的紀錄；目前狀態檔已另增現行政策，原歷史值與進度保留。
 
-## 尚未變更的執行設定
+## 已廢除的程式工作與殘留執行設定
+
+2026-10-23 依使用者確認，所有涉及 copilot_use 程式開發、移植、同步適配、重構、套用、建置、測試、CI、產品試驗、發布、安裝更新與功能驗收的工作要求均已廢除，不再列為待辦、選題或驗收門檻。copilot_use 僅維護需求、規則、教學文章、進度、索引與交付證據；文件內的教學程式碼用於說明 rust_ai_chat 的實作，不建立第二套產品。程式功能、測試、CI 與驗收只依 rust_ai_chat 精確 SHA。既有 copilot_use 程式、腳本、workflow、Release 及歷史欄位僅供追溯，不代表仍有維護或執行義務。
+
+以下僅記錄尚未變更的設定檔，不是活動工作清單；本次未查核或停用實際執行中的排程。
 
 | 設定 | 既有行為與本次界線 |
 | --- | --- |

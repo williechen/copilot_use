@@ -52,7 +52,7 @@
 
 ## 開發位置
 
-學習庫 apps/desktop\_pet 負責 Tauri／OS 入口，frontend 負責 Leptos 畫面與 bridge，crates/pet\_domain 負責純規則；產品端另有 crates/pet\_runtime，介面與學習庫不同，不照抄檔名當成已同步。
+rust_ai_chat 的 apps/desktop\_pet 負責 Tauri／OS 入口，frontend 負責 Leptos 畫面與 bridge，crates/pet\_domain 負責純規則；每次依該庫精確 SHA 核對。copilot_use 舊 pet_runtime 不作移植、適配或驗收工作。
 
 本機 IPC 可用於測試實際能力，使用全新測試資料與授權目錄；本入口不要求重跑付費 AI。實作與驗證步驟看對應功能教學，不將專用測試收據當成私人檔案已處理。
 

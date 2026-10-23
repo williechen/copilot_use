@@ -46,7 +46,7 @@
 
 ## 開發位置
 
-學習庫：apps/server 負責 HTTP／WS，crates/ui 負責畫面，chat\_domain／chat\_application 負責規則與 Port，crates/persistence 負責 SQLite／migration；資料庫差異留在 Adapter。
+rust_ai_chat：apps/server 負責 HTTP／WS，crates/ui 負責畫面，chat\_domain／chat\_application 負責規則與 Port，crates/persistence 負責 SQLite／migration；資料庫差異留在 Adapter。
 
 先讀相關功能教學的「學習大綱」確認前置能力，再按第 2 節套用與 Refactor，最後照第 4 節從真實入口驗證。已實作的舊篇用來追溯，不照順序把所有舊程式再貼一次。
 

@@ -1,4 +1,27 @@
 {
+  "repository_work_policy": {
+    "confirmed_at": "2026-10-23",
+    "copilot_use_program_work": "abolished",
+    "abolished_scope": [
+      "development",
+      "porting",
+      "implementation alignment",
+      "refactoring",
+      "application",
+      "build",
+      "tests",
+      "CI",
+      "product trials",
+      "releases",
+      "installation and updates",
+      "functional acceptance"
+    ],
+    "copilot_use_role": "requirements, rules, teaching documents, progress, indexes and delivery evidence only",
+    "program_repository": "williechen/rust_ai_chat",
+    "historical_program_records": "preserved for traceability only; not active tasks or acceptance gates",
+    "documentation_code_examples": "teaching content for rust_ai_chat; not a second product implementation",
+    "execution_settings_changed": false
+  },
   "date": "2026-10-17",
   "timezone": "Asia/Taipei",
   "master_notion_page": "https://app.notion.com/p/3f2e51d4509381ddb8a8ce7cb4cd3e60?pvs=204",
