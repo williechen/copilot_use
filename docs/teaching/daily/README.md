@@ -1,6 +1,6 @@
 # 每日新文章
 
-[共用文章](../../COMMON_LEARNING_RULES.md) · [Chat 首頁](../chat/README.md) · [Pet 首頁](../pet/README.md) · [目前進度](../current/STATUS.md)
+[共用文章](../../COMMON_LEARNING_RULES.md) · [Chat 首頁](../chat/README.md) · [Pet 首頁](../pet/README.md) · [Analytics 首頁](../analytics/README.md) · [目前進度](../current/STATUS.md)
 
 **完成本篇必要驗證後，原文移入 history 封存。** 本目錄的閱讀清單只保留尚待完成必要驗證或必要勘誤的文章；已完成文章由 [歷史索引](../history/README.md) 查閱。
 
