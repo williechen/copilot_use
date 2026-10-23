@@ -477,7 +477,7 @@
       "path": "docs/teaching/daily/day-30/chat.md",
       "article_commit": "0548392623eed068ce9b29cd4c188cd3bb8668ba",
       "blob_sha": "699bbd469ff12d259cbd8cb0a2069fca968037b4",
-      "sha256": "5b7bc3be9fa000950715cb903707b05e41ef8639cabd3d65936a6bbf98aec4ee",
+      "sha256": "05635739697fb80050d8591cb316ad68c86226f5119b4a0af08a94e70b462a4c",
       "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3",
       "rules_version": "daily-tdd-minimum-v1+github-only-v1",
       "full_text_verified": true,
@@ -494,8 +494,7 @@
         "blob_sha": "6f0a653729cb2ef4fa1dd016757a15f84163efc1",
         "sha256": "5b7bc3be9fa000950715cb903707b05e41ef8639cabd3d65936a6bbf98aec4ee"
       },
-      "note": "Redelivered to match twelve agreed policies; original Git history preserved; no Gate 2 validation; no Day increment",
-      "sha256_status": "recompute required"
+      "note": "Redelivered to match twelve agreed policies; original Git history preserved; no Gate 2 validation; no Day increment"
     },
     {
       "project": "pet",
@@ -504,7 +503,7 @@
       "path": "docs/teaching/daily/day-30/pet.md",
       "article_commit": "ed0fcdd51341fd9866cb78e08573463be7e06d71",
       "blob_sha": "9824a0728ce1feb2fccbc71b66441f90000c2997",
-      "sha256": "d01fc34fdb9d23e7f55e218aa3aab187b83d611698f3763c8ee6caa8a1287cd6",
+      "sha256": "122f5460b3eb89b1a6400461f819a16edfc12a6c2fbe52ff1eb72f9c453f2431",
       "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3",
       "rules_version": "daily-tdd-minimum-v1+github-only-v1",
       "full_text_verified": true,
@@ -521,8 +520,7 @@
         "blob_sha": "038d6f5cc2c807ebe26789b0c036245067ba23e3",
         "sha256": "d01fc34fdb9d23e7f55e218aa3aab187b83d611698f3763c8ee6caa8a1287cd6"
       },
-      "note": "Redelivered to match twelve agreed policies; original Git history preserved; no Gate 2 validation; no Day increment",
-      "sha256_status": "recompute required"
+      "note": "Redelivered to match twelve agreed policies; original Git history preserved; no Gate 2 validation; no Day increment"
     },
     {
       "project": "analytics",
@@ -531,7 +529,7 @@
       "path": "docs/teaching/daily/day-30/analytics.md",
       "article_commit": "d6175ee83aad7cd3a32433826ccb20b01f0211de",
       "blob_sha": "5ed1ea4cd2729863e14187a5c3a5593d493460e7",
-      "sha256": "4177549918ebfc23c15026013dc66b6b71026517daa0b7b9dfca4308ce3d5c82",
+      "sha256": "f47f77823ed2cea400c1a9e8bdab2c5b9732fb756a891e08383300a557fc09a3",
       "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3",
       "rules_version": "daily-tdd-minimum-v1+github-only-v1",
       "full_text_verified": true,
@@ -548,8 +546,7 @@
         "blob_sha": "00f09eab59a3f95371d348d1552431faee02cf90",
         "sha256": "4177549918ebfc23c15026013dc66b6b71026517daa0b7b9dfca4308ce3d5c82"
       },
-      "note": "Redelivered to match twelve agreed policies; original Git history preserved; no Gate 2 validation; no Day increment",
-      "sha256_status": "recompute required"
+      "note": "Redelivered to match twelve agreed policies; original Git history preserved; no Gate 2 validation; no Day increment"
     }
   ],
   "day15_frozen": true,
