@@ -76,7 +76,7 @@ GitHub williechen/copilot_use 的 main 為唯一教學文章交付處。新文�
 
 文章修訂、搬遷、規則同步、補教、CI 或週六比對均不增加 Day。各專案 makeup_queue 採 FIFO，每篇最多一項舊 Day 單元，有完整發布讀回證據才結案；補教失敗不回退已確認原教學。教學交付、程式套用、產品整合與功能驗收分開記錄。
 
-停止 Notion 教學建立、更新、發布與每日讀回依賴。共同主頁及三案教學子頁依使用者確認，先逐頁原文搬回 GitHub、全文讀回驗證，再移至 Notion 垃圾桶（可還原）；不永久刪除、不影響其他 Notion 資料。原文、頁面 metadata、父子關係及 GitHub 讀回證據保存於 <code>docs/teaching/history/evidence/notion-export/2026-10-22/</code>。Day25（含）以前 GitHub 封存檔不改寫；原文搬遷只新增保存，不重新發文或改進度。
+現行教學政策僅採 GitHub 兩個 Repository 定義：<code>williechen/copilot_use/main</code> 保存共同規則、三案文章、next_day、manifest、文件交付與追溯證據；<code>williechen/rust_ai_chat/main</code> 提供程式、測試、CI 與功能驗收的唯一來源。不同庫的文件交付與程式實作須分開驗證，不依賴其他出版平台或鏡像規則。Day25（含）以前封存檔不改寫。
 
 ### 5. 最小失敗恢復
 

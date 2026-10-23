@@ -38,4 +38,4 @@ Chat後端25通過、UI SSR9通過／1失敗；Pet原生49與前端9通過、Nod
 
 ### 教學交付
 
-GitHub `williechen/copilot_use/main` 為唯一規則與教學文章正本；[每日教學入口](../daily/README.md)。每新增一個專案 Day 獨立 commit、推送及全文讀回，之後才條件同步狀態與 manifest。共同主頁與三案 Notion 教學原文搬遷至 [GitHub 匯出索引](../history/evidence/notion-export/2026-10-22/README.md)，核對後移至可還原垃圾桶。本次核對全部文章並封存完成切片，不新增Day、不修改補教佇列或完整比對時間。
+GitHub `williechen/copilot_use/main` 為唯一規則與教學文章正本；[每日教學入口](../daily/README.md)。每新增一個專案 Day 獨立 commit、推送及全文讀回，之後才條件同步狀態與 manifest。`williechen/rust_ai_chat/main` 是程式、測試、CI 與功能驗收的唯一來源。本次文件整理不新增 Day、不修改補教佇列或完整比對時間。
