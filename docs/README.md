@@ -13,7 +13,7 @@
 | 使用者與安全需求 | [使用者流程](requirements/USER_FLOWS.md) · [共用驗證](requirements/AUTHENTICATION.md) · [服務憑證](SERVICE_CREDENTIAL_REQUIREMENTS.md) · [UI](UI_ALIGNMENT_REQUIREMENTS.md) |
 | 本地操作與驗收 | [本地啟動](LOCAL_START.md) · [操作索引](DEPLOYMENT.md) · [驗收](LOCAL_VALIDATION.md) · [資料移轉](SQLITE_TRANSITION.md) |
 | 系統間通訊 | [Analytics Transport](ANALYTICS_TRANSPORT.md) |
-| 每日文章與進度 | [新文章](teaching/daily/README.md) · [manifest](teaching/current/manifest.json) |
+| 每日文章與進度 | [新文章](teaching/daily/README.md) · [驗收完成封存](teaching/archived/README.md) · [manifest](teaching/current/manifest.json) |
 
 <details>
 <summary>歷史文章、原始封存與工程證據</summary>

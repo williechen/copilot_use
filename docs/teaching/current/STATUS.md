@@ -2,15 +2,15 @@
 
 ### 最新教學交付狀態（GitHub main）
 
-教學文件正本：`williechen/copilot_use/main`。已按 `learning-state.json`、`manifest.json` 與 Day29 文章讀回核對。**文章交付不代表已套用主體程式、測試通過或產品功能驗收完成。**
+教學文件正本：`williechen/copilot_use/main`。已按 `learning-state.json`、`manifest.json` 與 Day30 文章讀回核對。**文章交付不代表已套用主體程式、測試通過或產品功能驗收完成。**
 
 | 專案 | 最新已發布教學 | 下一 Day | 文章 Commit |
 | --- | --- | --- | --- |
-| Chat | [Day29](../history/day-29/chat/github.md) | **30** | `d8ef21fd2f0eca49df445244a805f22dd64eb5e4` |
-| Pet | [Day29](../daily/day-29/pet.md) | **30** | `ef58906758a744d98b46c6c62c1e886343717ebd` |
-| Analytics | [Day29](../history/day-29/analytics/github.md) | **30** | `ae5001c214bd5c571f3d2d150ba1e097ce984bbb` |
+| Chat | [Day30 r2](../daily/day-30/chat.md) | **31** | `8d569638d067a69fcb81c66d117aaf0b9c022c30` |
+| Pet | [Day30](../daily/day-30/pet.md) | **31** | `99c1edf022e88cf9c863e961326c528090da0c9a` |
+| Analytics | [Day30](../daily/day-30/analytics.md) | **31** | `0ae5ca99eeee215fbd1b9ea9f257a79f6bb33d69` |
 
-本表是 Day29 文件交付快照；往後實際下一 Day 仍以 [即時學習狀態](../../learning-state.json) 為準。Day29 三篇已全文讀回、manifest 與每日索引已同步；Chat／Pet Day25 FIFO 更正仍 pending，不能因教學文件發布而結案。文章 Commit／Blob 只證明 GitHub 文件，不代表產品驗收。
+本表是 Day30 已交付快照；往後實際下一 Day 仍以 [即時學習狀態](../../learning-state.json) 為準。Day30 三篇已全文讀回，manifest 已同步；Chat／Pet Day25 FIFO 更正仍 pending，不能因教學文件發布而結案。文章 Commit／Blob 只證明 GitHub 文件，不代表產品驗收。
 
 ### 程式來源與驗證邊界
 

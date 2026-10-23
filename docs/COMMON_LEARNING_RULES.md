@@ -2,7 +2,7 @@
 
 [文件總入口](README.md) · [目前進度](teaching/current/STATUS.md) · [Chat 首頁](teaching/chat/README.md) · [Pet 首頁](teaching/pet/README.md) · [Analytics 首頁](teaching/analytics/README.md)
 
-三案 next_day 以 [learning-state.json](learning-state.json) 即時值為準；教學交付、程式套用與功能驗收分別記錄。共同規則只在本篇維護，歷史正文、封存與原始證據集中於 [歷史資料](teaching/history/README.md)。
+三案 next_day 以 [learning-state.json](learning-state.json) 即時值為準；教學交付、程式套用與功能驗收分別記錄。本文是教學政策唯一正本；新教學在 [daily](teaching/daily/README.md)，必要驗證完成才移至 `docs/teaching/archived/day-NN/{project}.md`；既有歷史正文與原始證據維持於 [history](teaching/history/README.md)。
 
 ## 每日 TDD 教學最小必要規則 v1
 
@@ -29,9 +29,9 @@
 - **Leptos** 是三案適用的 UI／頁面元件框架：Chat 使用既有 Leptos SSR／Hydration 與 Router；Pet 維持 Leptos CSR + Tauri；Analytics 的正式登入、修改密碼及管理後台頁面應逐步採用 Leptos 元件、表單、Signals／Actions／Resources／Router，而不是以 Axum `Html(...)`／`Html(format!(...))` 完整字串頁面作為新 UI Green。
 - **Axum** 負責 HTTP API、WebSocket、Routing／Middleware、Cookie、Session、安全性檢查與 ACL。保留既有可運作的 API／Session／認證契約；逐步將頁面呈現從 Axum HTML Handler 分離。Axum 可處理 HTTP response，但不得藉此取代原有 Leptos UI。
 - **Application／Domain** 負責使用案例、流程、業務與領域規則，UI 不直接存取資料庫或偷渡授權邏輯。**SQLx** 在各自的持久化 Adapter 處理資料查詢、交易與 migration；Chat／Pet SQLite 與 Analytics PostgreSQL 維持隔離。Pet 的 Tauri IPC 只負責原生橋接與視窗操作，配合 Leptos CSR。
-- 往後每一 Day 的 Red → 完整最小 Green → Refactor 須覆蓋真實 `Leptos UI → Axum HTTP/API 或 Tauri IPC → Application/Domain → SQLx Adapter` 的該日最小可操作切片。沒有真實 UI 呼叫端、只有 Axum 回傳 HTML、API/helper 單獨成功或假設性頁面者，不能宣稱完成 Leptos UI 功能；測試未跑與未驗收仍須明記。
-- **先核對已發布 Day27，再從最新 next_day 銜接，不跳號**：下次每日教學先逐案讀回 Day27 正文、最新 `rust_ai_chat/main`、`copilot_use/main`、規則、manifest、索引及實際 UI／HTTP／IPC／DB 呼叫鏈，辨識 Chat／Analytics Axum HTML 與既有 Leptos 的架構偏差及 Pet 現況。必要更正須在後續對應 Day 的 Red／完整 Green／Refactor 之後記錄，或走保留原 commit／blob／SHA256 的版本化勘誤流程；不得覆寫、抹除 Day27 原始 GitHub 證據，亦不得將核對／修訂自動計為新 Day。對原文已完成的功能不能假裝尚未完成或重教。
-- 新文章 Day **僅**取 `docs/learning-state.json` 當時各案 `next_day`（本次規則修改時三案均為 28，僅為核對快照、不是寫死後續 Day）；確認 N 的文章與同步狀態沒有完成證據才依既有獨立 commit／全文讀回／條件同步流程推進 N→N+1。絕不因「從 Day27 銜接」而回退至 27 或跳過 28。Day25（含）以前封存、Day26／Day27 已發布文章與歷史證據不因本規則更新回寫。
+- **增量式完整呼叫鏈：** 每 Day 只新增一個最小可套用切片，需核對並說明真實 `Leptos UI → Axum HTTP/API 或 Tauri IPC → Application/Domain → SQLx Adapter` 呼叫鏈；**重用已存在的分層，不要求每日每層都修改**。Red → 完整 Green → Refactor 聚焦當日變更與真實呼叫端；僅測 helper/API、假設性畫面不可冒充已完成 UI 流程，未跑測試必須明記。
+- **動態 Day：** 每次從 `docs/learning-state.json` 取得各案 `next_day=N`，核對上一 Day 正文、manifest、交付／驗收證據、未完成事項及最新兩庫 SHA，再銜接 N；不得固定指定歷史 Day、跳號、回退或重發。更正使用版本化修訂／後續補教，保留原始 commit／blob／SHA256，不因勘誤增加 Day。
+- **推進條件：** 只有確認 Day N 的 GitHub 文章尚未完成交付、獨立提交並通過精確 commit 全文讀回後，才以條件式同步推進 N→N+1；已 N+1 且證據匹配不重複計數。歷史封存及已發文章均不得覆寫原始證據。
 - 每日教學 CI 的真實測試來源**只採 `williechen/rust_ai_chat` Actions 精確 workflow／job／SHA／覆蓋**；`copilot_use` 的分支、commit、blob、SHA256 僅驗證規則、文章與進度交付，不得引用其 Actions 冒充教學 Green／產品驗收。保留程式套用、CI、DB／GUI 與功能驗收互相獨立的認定。
 
 #### 基本可操作流程優先
@@ -42,7 +42,7 @@
 - <b>Pet 基本功能門檻：</b> 使用者可建立第一隻具身分、名稱、初始外觀的寵物，透過 Tauri IPC 真正儲存 SQLite、顯示於生活視窗，重新啟動後能載入。<code>PetMachine::default()</code> 不等於使用者建立寵物；在建立、載入流程可用前，視窗漫遊／拖曳／找回與多寵物進階特性只列後續項目。
 - <b>Analytics 基本功能門檻：</b> 建立並持久化管理員帳號，安全的加鹽密碼雜湊、首次登入強制改密碼、有效 Session 與後台頁面授權先接通，再深化角色、帳號級登入等待、報表及來源事件。
 
-主體為各專案每天 <b>一個</b>可驗證的最小 Green 切片，功能可跨日，真正使用者流程尚未可用須在文章與進度明示缺口；以最新程式與資料庫契約優先，不強制當天一次完成註冊／登入或整套寵物建立。原 P9 產品目標、功能 Gate、歷史 Day、四節文章、GitHub commit 推送及全文讀回、條件式更新 <code>next_day</code>、CI 覆蓋範圍與每日／週六各自驗收規則全部保留。
+主體為各專案每天**一個**可驗證的最小切片，整體能力可跨 Day 漸進完成；每日新內容須接到既有真實呼叫鏈。教學文章完整交付可推進 Day，程式套用與產品驗收獨立判定；產品 Gate 由 [P9_TARGET](P9_TARGET.md) 定義。
 
 ### 2. 文章最小格式
 
@@ -56,44 +56,44 @@
 
 三案 Day25（含）以前正文、程式與證據不回寫；封存不代表產品驗收。每次先核對最新來源、真實呼叫鏈、CI 與涉及套件的 manifest／lock／官方穩定版本，再將必要更正放在下一個適用原教學第2節的新 Red／完整 Green／Refactor 之後，另列「舊 Day 更正補充」。提供真實路徑、必要完整修改、版本理由及驗證範圍。
 
-各專案 makeup\_queue 採 FIFO、每篇最多一個舊 Day 單元；新差異去重入列，完整發布讀回才結案，不因補教、文件整理或驗證增加 Day。最新依賴不直接等於適合升級，不自動修改來源 lock。
+**雙軌補教：** ① 同案上一 Day 第④節及狀態中的未完成事項，於新 Day 第②節當日 Red → Green → Refactor 後增列「上一 Day 未完成事項補充」，標明來源、缺口、必要程式修補、測試命令與預期／實際；未驗收持續追蹤。② 更早的 `makeup_queue` 嚴格 FIFO，每篇最多**結案一個**舊 Day 補教單元。相同問題去重、不能跳過較早項；補充教學或全文讀回本身不代表程式驗收通過。未完成與補教均不新增 Day，不更新封存舊文章。
 
 登入、登出、Cookie 與 Session 採共用實作，各系統透過儲存介面及政策接入；SQLite／PostgreSQL 與登入狀態保持獨立。Pet 每窗單一元件、動畫每幀單一寵物圖像及至少三個不同 pet id 的生活窗各自驗證。Analytics 須驗完整 postgres-integration targets 與全新建庫流程。
 
 ### 3. 測試與證據
 
-CI 必須核對並揭露精確 SHA、workflow／job、狀態、時間與連結；Success／Failure／Pending／Skipped／Cancelled／無紀錄均不單獨阻擋教學發布或 next\_day。CI Success 只證明實際執行的範圍，不能代替 DB、HTTP／WS、SSR／WASM、GUI 或端到端驗收；只有 rust\_ai\_chat 的精確 SHA／workflow／job 作主體程式 CI 證據；copilot\_use 的交付讀回或文件檢查只證明文件一致性，既有程式 CI 不納入主體驗收。
+**Gate 1（文件交付）：** 真實路徑與現有呼叫鏈、完整可套用 Red／Green／Refactor、版本與測試設計、預期／實際明列，GitHub 每篇獨立 commit、精確 SHA 全文讀回和狀態同步完成，方可推進 next_day。**Gate 2（程式驗收）：** 使用者在 `rust_ai_chat` 套用後依精確 SHA 進行測試／CI／DB／HTTP／GUI／端到端核對；不直接影響 next_day，僅影響切片驗收及封存。既有 CI Success 不能證明未套用的新 Green 成功；CI Fail/Pending 也不能單獨阻止合格文件發布。CI 須揭露精確來源 SHA、workflow/job、狀態、時間與覆蓋；`copilot_use` CI 不替代主體程式驗收。
 
 每項列命令、預期、實際結果、證據 SHA、覆蓋範圍、未執行／失敗／待修。未執行明示，不捏造 Red／Green 成功；教學發布、使用者套用、產品整合、功能驗收分別記錄。跨 SHA 引用證據須核對相關差異及依賴，不能直接沿用成功結論。寫入／補償成功不等於測試成功，驗證範圍縮小須列剩餘缺口。
 
 ### 4. GitHub 發布、獨立 commit 與 Day 推進
 
-GitHub williechen/copilot_use 的 main 為唯一教學文章交付處。新文章一律放在 <code>docs/teaching/daily/day-NN/{chat,pet,analytics}.md</code>；依專案＋Day＋修訂查重，不複製已交付文章。既有 Day26 已歸入 daily/day-26；Day25（含）以前正文與原始證據統一歸入 history/day-NN，由三案首頁與歷史索引連結，搬遷不新增 Day。
+GitHub `williechen/copilot_use/main` 為唯一文章交付處：新篇位於 `docs/teaching/daily/day-NN/{chat,pet,analytics}.md`；必要 Gate 2 驗證全部通過後，保持正文 byte-for-byte 不變移至 `docs/teaching/archived/day-NN/{project}.md`。原交付 commit、blob SHA、SHA256 及 Git 歷史不可改寫，manifest 更新封存狀態與實際路徑，更新閱讀索引及舊路徑對照。既存 `history/day-NN` 文章與證據維持原位；封存不代表整體產品完成。
 
 **每新增一個專案 Day 就獨立 commit 並推送**，提交訊息含專案／Day／修訂；不能累積多天或三案後才一起提交。文章 commit 完成後從 GitHub 精確 commit SHA 讀回全文，逐字核對四節、完整 Red／Green／程式碼與來源版本，保存路徑、blob SHA、SHA256、讀回時間及結果；commit 存在或工具寫入成功本身不代表交付成功。
 
 每專案獨立：文章 commit 推送＋全文讀回通過，才重新讀最新 learning-state、manifest、blob／branch SHA，以 expected branch SHA 條件提交原子同步該案 next_day（預期 N→N+1）、manifest 與必要索引／有證據的 makeup_queue 變更，再讀回狀態。狀態提交可另 commit，引用已驗證文章 commit，不合併下一篇原教學。若已 N+1 且證據一致只補缺少資料，不再遞增；值或 SHA 不符先重讀，無法安全合併就暫停受影響更新，禁止強制覆寫。完成一案全部 gate 後再交付下一案。
 
-文章修訂、搬遷、規則同步、補教、CI 或週六比對均不增加 Day。各專案 makeup_queue 採 FIFO，每篇最多一項舊 Day 單元，有完整發布讀回證據才結案；補教失敗不回退已確認原教學。教學交付、程式套用、產品整合與功能驗收分開記錄。
+**原文不可變＋版本化修訂：** 發布後保留原始 commit／blob／SHA256；發現錯誤另存 r2/r3 修訂與勘誤證據，不覆寫原版本的歷史證據、不額外增加 Day，未通過 Gate 2 不得封存。既有 `makeup_queue` 嚴格 FIFO 且每篇最多結案一項，補教失敗不回退 Day；規則整理、驗證、修訂及封存均不增加 Day。
 
-現行教學政策僅採 GitHub 兩個 Repository 定義：<code>williechen/copilot_use/main</code> 保存共同規則、三案文章、next_day、manifest、文件交付與追溯證據；<code>williechen/rust_ai_chat/main</code> 提供程式、測試、CI 與功能驗收的唯一來源。不同庫的文件交付與程式實作須分開驗證，不依賴其他出版平台或鏡像規則。Day25（含）以前封存檔不改寫。
+**文件職責：** 本文唯一管理教學流程、TDD、交付、補教及封存；[P9_TARGET](P9_TARGET.md) 管產品目標與完成門檻，[SYSTEM_ARCHITECTURE](SYSTEM_ARCHITECTURE.md) 管架構分層，[UI_ALIGNMENT_REQUIREMENTS](UI_ALIGNMENT_REQUIREMENTS.md) 管 UI 契約，[FUTURE_WORK](FUTURE_WORK.md) 管待辦；`learning-state.json` 管即時進度，`manifest.json` 管文章與版本索引。實際程式現況只以 `rust_ai_chat/main` 精確 SHA 為準。不同文件發生矛盾先記錄核對，不擅改產品要求；根 README 僅導覽。
 
 ### 5. 最小失敗恢復
 
 文章已 commit 並全文讀回但狀態寫入／讀回失敗，保留文章路徑、commit／blob SHA、SHA256、專案／Day／修訂、來源 SHA、預期狀態與原始錯誤；下次先重讀 GitHub，只補缺少狀態，不重發、不重複加 Day。未保存全文讀回證據不得宣稱 gate 完成。狀態不明只暫停受影響專案，其餘來源完整者繼續。
 
-每專案／Day／修訂單一 pending，重試先讀取去重；同項連續三次失敗轉 needs_manual_review，停止相同自動寫入，人工重新啟用才恢復。失敗紀錄無法保存須明示；不新增多層補償系統。開始及推送前核對其他執行中任務與分支 SHA，使用條件提交避免併發覆寫。
+**重試以 `project/day/revision/operation` 獨立計數**：article_publish、article_readback、state_sync、manifest_sync、archive 各自去重記錄；同一操作連續三次失敗才標 `needs_manual_review`，成功即將該操作連續失敗數歸零，只暫停該操作與依賴步驟。狀態不明先從 GitHub 讀回辨認結果，不能盲目重送；保存原始錯誤、期望 SHA 與實際結果，失敗紀錄無法保存須明示。推送前核對其他任務與分支 SHA，以 expected_sha 條件提交，不得強制覆寫。
 
 ### 6. 時程與邊界
 
-每日 06:00 Asia/Taipei，依 Chat → Pet → Analytics；主體 Red／最小 Green 學習合計最多 60 分鐘，各預留 15 分鐘，加共用彈性 15 分鐘。保留既有主體學習計時口徑：Refactor、必要補加／補教及第1、3、4節另列估時，不隱藏成本，也不為填滿時間擴大切片。超出主體預算的內容留待後續，不以缺少 Green 的文章冒稱完成；執行遇到時間上限先保存可恢復進度。
+每日 06:00 Asia/Taipei，依 Chat → Pet → Analytics。**核心學習 60 分鐘**：三案各 15 分鐘均包含 Red → Green → Refactor，加共用彈性 15 分鐘。前一 Day 未完成補教、FIFO 舊補教、來源／套件版本核對、文章①③④節、GitHub commit／全文讀回／同步及 Gate 2 測試／整合驗收一律**額外計時**，不得因時間壓力省略最小完整 Green；超額工作記錄為待完成，不假裝驗收通過。
 
-週六 00:00 Asia/Taipei 獨立核對 rust_ai_chat 的 tracked 程式、介面、呼叫流程、契約、DB／migration、UI、設定、測試與 CI，再核對 copilot_use 文件／教學與該程式來源的對應；只有完整成功才更新 last\_full\_comparison 並讀回。每日做增量核對，不覆蓋完整比對時間。週六失敗不自動阻擋每日教學，須揭露並重新讀取必要來源。既有排程原地更新，不建立重複任務；指令保存不等於排程已更新或實際執行成功。
+**每日增量核對持續執行**，同一差異去重追蹤，來源不足只暫停受影響專案。**週六完整比對目前不執行**：保留歷史定義但不作每日教學前置 Gate，`last_full_comparison` 不更新，除非未來另經確認重新啟用並完成全庫核對。此為規則政策，**不等於雲端既有排程已停用**；未核實排程實際狀態時不得聲稱已停用，也不建立重複任務。
 
-保留原生環境、Domain／Application 與 Adapter 邊界、不同 DB 分別驗證、既有 migration／固定 tag／證據不可改寫、權限與檔案操作確認。不得讀正式秘密或執行付費 AI；週六功能驗收不冒稱 AI 已重測。P9 產品目標、P0–P12 學習階段及實際驗收分開。
+保留原生環境、Domain／Application 與 Adapter 邊界、各 DB 獨立驗證、migration／固定 tag／原始證據不可改寫、權限與檔案操作確認。不讀正式秘密、不執行付費 AI；歷史完整比對與產品驗收不得冒稱本次已重跑。P9 目標、P0–P12 學習階段與實際產品驗收分開。
 
 ### 文件整理與歷史追溯
 
-2026-10-23 使用者確認：**全部已發布文章都要驗證；完成本篇必要驗證的文章進入封存。** 逐篇核對文章要求、rust_ai_chat精確SHA、真實呼叫鏈與必要測試／DB／HTTP／GUI證據。只有文件發布或單元測試成功，不當作使用者流程已驗收；缺測、失敗或未接線留待完成。完成切片原文移入history/day-NN，保留原commit／blob／SHA256與路徑對照，並同步閱讀入口；只更正文的當前驗證與版本化勘誤，不改原文。封存與修訂不新增Day，產品整體驗收獨立。
+**封存門檻與固定路徑：** 全部已發布文章逐篇驗證；只有本篇 Gate 2 所要求的實測證據全部成立才把正文**原樣**移至 `docs/teaching/archived/day-NN/{project}.md`。沒有實際程式套用、測試、DB／HTTP／GUI 證據不可因文件讀回通過而封存。manifest 記錄已驗收狀態、新路徑、來源 SHA、原始 commit／blob／SHA256 與驗證證據；原始 Git 歷史不改寫、舊連結維護路徑對照；修訂、封存不推進 Day。
 
-共用文章與三案首頁是正式閱讀入口。同一 Day／專案的正文、修訂與原始封存證據集中在 history/day-NN；跨 Day 的完整比對或來源證據集中 history/evidence。同內容原文可按雜湊去重，但保留每個來源的路徑、SHA256 與新位置。舊證據內記錄的原始路徑、SHA、結果不改寫，透過 [路徑對照](teaching/history/PATH_MAP.json) 解析；歷史版本也可在對應 Git commit 讀回。整理不新增 Day、不變更補教結案或完整比對時間。
+**索引與歷史：** 共用文章與三案首頁是正式閱讀入口；`daily/day-NN/{project}.md` 為尚待驗收的現行文章，`archived/day-NN/{project}.md` 為新政策下已驗收的原文。過往已存入 `history/day-NN` 的文章與原始封存證據維持其實際位置，不做批次強制搬移；跨 Day 報告留在 `history/evidence`，舊路徑以 [PATH_MAP](teaching/history/PATH_MAP.json) 與 Git commit 追溯。

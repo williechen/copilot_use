@@ -38,7 +38,7 @@ Chat、Desktop Pet 與 Analytics 的規則、教學與交付證據庫。`copilot
 
 新教學文章存於 `docs/teaching/daily/day-NN/{chat,pet,analytics}.md`。每新增一個專案 Day，獨立 commit、推送並全文讀回，再條件同步進度與 manifest。下一 Day 以最新進度檔為準。
 
-教學的主體程式以 `williechen/rust_ai_chat` 為唯讀來源；不因文章發布自動修改參考庫或宣稱產品驗收完成。
+教學的主體程式以 `williechen/rust_ai_chat` 為唯讀來源；不因文章發布自動修改參考庫或宣稱產品驗收完成。必要 Gate 2 驗證完成後，正文原樣移至 [`docs/teaching/archived/day-NN/{project}.md`](docs/teaching/archived/README.md)，保留原 Git 交付證據。
 
 <details>
 <summary>歷史文章與原始封存證據</summary>
