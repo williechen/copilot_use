@@ -1,4 +1,4 @@
-# Pet Day30｜回籠關窗失敗時補償 SQLite 標記（附 Day29 未完成補教）
+# Pet Day30 r2｜回籠關窗失敗時補償 SQLite 標記（附 Day29 未完成補教）
 
 ## ① 學習大綱、來源與真實現況
 
@@ -49,6 +49,19 @@ pub async fn cage_saved_pet(
 
 Day29 已提示 SQLite 成功但 `window.close()` 失敗造成不一致，本篇提供上述**可套用補償方案**，但未實跑，不結案。仍須逐一在測試用 DB/原生 GUI 驗證：① DB 失敗前視窗不關、Runtime 不清；② 關窗失敗後恢復 `is_default_closure=false`；③ 補償也失敗會明確回報雙重錯誤；④ 正常回籠、App 重啟載入；⑤ 三個不同 pet id 的視窗與事件互不干涉。預期見上述路徑與第④節；本次實際皆未執行。更早 FIFO `pet-day25-single-image-20261022` 仍 pending：動畫每幀單一圖像與三個不同 ID 的 GUI 本次沒有完成，**不關閉 makeup_queue**，不回寫 Day25 文章。
 
+
+### 新共同規則 12 項一致性補充（r2）
+
+**適用政策：** 文件 Gate 1 與程式 Gate 2 分離；`copilot_use/main` 是唯一教學寫入位置，`rust_ai_chat/main` 在本教學操作中唯讀。此篇僅修訂 Day30，不產生 Day31、不得以文章讀回聲稱程式已套用。原始版本 commit、blob 與 SHA256 在 GitHub 歷史及 manifest 持續可追溯。
+
+**增量式呼叫鏈：** 只新增本篇最小差異，沿用精確來源 SHA 已存在的 Leptos UI、Axum／Tauri IPC、Application／Domain 與 SQLx；完整鏈路用以確認整合上下文，不要求每天各層均重新編寫。UI 以 Leptos 元件為準，Axum 可以包裝 Leptos SSR HTTP Response，但不得手寫正式頁面取代。
+
+**雙軌補教追蹤：** 先接續 Day29 第④節未驗收內容，核對具體路徑／測試／預期與實際；同時保持更早 makeup_queue FIFO，最多結案一筆舊 Day，且須具備對應的 Gate 2 證據。追蹤、文件更正、補教討論均不自動結案。當日未完成部分下一 Day 第②節再補充，不跳號或重覆課題。
+
+**估時與封存：** 核心 60 分鐘包括每案 Red→Green→Refactor 各 15 分鐘及共用 15 分鐘；補教、版本核對、文件 ①③④、GitHub 提交／讀回與 Gate 2 測試額外計時。Gate 2 尚未通過，不得搬至 `docs/teaching/archived/day-30/pet.md`；依新規則只有必要測試與驗收成立後才將**正文原樣**移至 archived 並同步 manifest／連結。週六完整比對目前不執行、`last_full_comparison` 不更新；這不代表已停用任何實際排程。
+
+**本次修訂驗證結果：** 此次是 GitHub 教學文本重交付；尚未修改 `rust_ai_chat`、尚未實際執行 Day30 提案的 Red／Green、HTTP、資料庫或 GUI 驗收，功能狀態仍為 pending。
+
 ## ③ 套件版本
 
 沿用程式既有 `tauri` 2.x、`sqlx`、`leptos` 與 SQLite adapter，不增加相依、不修改 Cargo.lock 或 migration。實際 resolved patch 版本、MSRV 與原生 GUI 作業系統版本本次未查明；不能以 workspace manifest 當成 lockfile 版本。
@@ -57,8 +70,8 @@ Day29 已提示 SQLite 成功但 `window.close()` 失敗造成不一致，本篇
 
 | 命令或測試流程 | 預期 | 本次實際 |
 | --- | --- | --- |
-| `cargo check --locked -p desktop-pet` | command 可編譯 | 未執行 |
-| `cargo test --locked -p desktop-pet` | 原有資料／多寵測試不退化 | 未執行 |
+| `cargo check --locked -p desktop_pet` | command 可編譯 | 未執行 |
+| `cargo test --locked -p desktop_pet` | 原有資料／多寵測試不退化 | 未執行 |
 | SQLite `set_caged(true)` 注入失敗 | 視窗／Runtime 保留 | 未執行 |
 | 模擬 `window.close()` 失敗 | 嘗試 `set_caged(false)`、回傳錯誤 | 未執行 |
 | DB 補償失敗 | 同時揭露關窗／DB 錯誤 | 未執行 |
