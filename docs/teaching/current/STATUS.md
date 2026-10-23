@@ -6,9 +6,9 @@
 
 | 專案 | 最新已發布教學 | 下一 Day | 文章 Commit |
 | --- | --- | --- | --- |
-| Chat | [Day30 r2](../daily/day-30/chat.md) | **31** | `8d569638d067a69fcb81c66d117aaf0b9c022c30` |
-| Pet | [Day30](../daily/day-30/pet.md) | **31** | `99c1edf022e88cf9c863e961326c528090da0c9a` |
-| Analytics | [Day30](../daily/day-30/analytics.md) | **31** | `0ae5ca99eeee215fbd1b9ea9f257a79f6bb33d69` |
+| Chat | [Day30 r3](../daily/day-30/chat.md) | **31** | `0548392623eed068ce9b29cd4c188cd3bb8668ba` |
+| Pet | [Day30 r2](../daily/day-30/pet.md) | **31** | `ed0fcdd51341fd9866cb78e08573463be7e06d71` |
+| Analytics | [Day30 r2](../daily/day-30/analytics.md) | **31** | `d6175ee83aad7cd3a32433826ccb20b01f0211de` |
 
 本表是 Day30 已交付快照；往後實際下一 Day 仍以 [即時學習狀態](../../learning-state.json) 為準。Day30 三篇已全文讀回，manifest 已同步；Chat／Pet Day25 FIFO 更正仍 pending，不能因教學文件發布而結案。文章 Commit／Blob 只證明 GitHub 文件，不代表產品驗收。
 
