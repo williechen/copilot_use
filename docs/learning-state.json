@@ -58,7 +58,7 @@
   "next_day": {
     "chat": 33,
     "pet": 33,
-    "analytics": 32
+    "analytics": 33
   },
   "last_full_comparison": "2026-10-16T22:47:14.399027+08:00",
   "next_full_comparison": "2026-10-24T00:00:00+08:00",
@@ -3262,5 +3262,35 @@
     "archived": false,
     "remaining_gaps": "Pet 真實原生多窗選取/焦點/重啟與 DB GUI 一致性未驗收；Day25 單圖 FIFO pending",
     "expected_state_parent_sha": "10c109a66cd1a3383cdf8a123673e085cf4705ed"
+  },
+  "day32_analytics_delivery": {
+    "repository": "williechen/copilot_use",
+    "branch": "main",
+    "parent": "059f255233124371242ad854dac6b1dd50bea637",
+    "tree": "c8d9b1de50f8906908243cad2427801df2a4330f",
+    "rules_sha": "419e357989595184ce31a5ad062dfd78b35f19e7",
+    "source_sha": "be0494a2a70be91eb74b2b726970a23fc3e5c044",
+    "read_at": "2026-10-23T22:58:00.220Z",
+    "project": "analytics",
+    "day": 32,
+    "revision": "r1",
+    "article_commit": "5646bef7b7accd951897354114eba853444833c8",
+    "blob_sha": "b9206bbe51d7a64620413580459ac5b001fe925f",
+    "sha256": "ad0a9119e36a7c5dbcaa558243d2b1cfcd4abfacba7567ebaa5b9b9ac7235940",
+    "bytes": 15494,
+    "full_text_verified": true,
+    "readback_at": "2026-10-23T22:58:00.220Z",
+    "raw_error": null,
+    "path": "docs/teaching/daily/day-32/analytics.md",
+    "rules_version": "daily-tdd-minimum-v1+github-only-v1",
+    "status": "github_article_readback_verified",
+    "main_application": "not applied",
+    "tests": "not run",
+    "functional_acceptance": false,
+    "next_day_before": 32,
+    "next_day_after": 33,
+    "archived": false,
+    "remaining_gaps": "Analytics 真 PostgreSQL/SSR/HTTP/瀏覽器篩選未驗收；管理員初始化、角色/來源 ACL、SSE/明細缺口保留",
+    "expected_state_parent_sha": "5646bef7b7accd951897354114eba853444833c8"
   }
 }
