@@ -1,4 +1,4 @@
-# Chat Day30 r2｜公開房間清單、建立房間須驗證會員 Session
+# Chat Day30 r3｜公開房間清單、建立房間須驗證會員 Session
 
 ## ① 學習大綱與真實現況
 
@@ -30,7 +30,7 @@ let room_methods = get(http::list_rooms).merge(
 .route("/api/rooms", get(http::list_rooms).post(http::create_room))
 ```
 
-**完整替換**成以下一行；並在原本 `.merge(guarded_ws)` 後、`.with_state(state)` 前合併受保護 Router：
+**完整替換**成以下一行，不另行重複合併受保護 Router（同一路徑只註冊一次）：
 
 ```rust
 .route("/api/rooms", room_methods)
@@ -106,6 +106,19 @@ async fn anonymous_create_is_rejected_while_public_list_is_available() {
 **FIFO：** 更早的 `chat-day25-shared-auth-20261022` 仍為 pending，不能跳過它宣稱 Day29 全部結案。此補充為 Day29 未完成項目追蹤，不新增 Day、不修改 Day29 原文、不清空既有 makeup_queue。
 
 **FIFO 舊 Day 補教（本篇最多一項）**：`chat-day25-shared-auth-20261022` 仍 pending。Day25 舊文及證據不回寫；原登入／登出／Cookie／Session 尚有共用化缺口。此處只識別需沿真實 `signin.rs`、`logout.rs`、`auth_session.rs` 統一 token/hash/撤銷策略；未提供已核實完整補教實作，因此**本篇不結案、不變更 makeup_queue**。
+
+
+### 新共同規則 12 項一致性補充（r3）
+
+**適用政策：** 文件 Gate 1 與程式 Gate 2 分離；`copilot_use/main` 是唯一教學寫入位置，`rust_ai_chat/main` 在本教學操作中唯讀。此篇僅修訂 Day30，不產生 Day31、不得以文章讀回聲稱程式已套用。原始版本 commit、blob 與 SHA256 在 GitHub 歷史及 manifest 持續可追溯。
+
+**增量式呼叫鏈：** 只新增本篇最小差異，沿用精確來源 SHA 已存在的 Leptos UI、Axum／Tauri IPC、Application／Domain 與 SQLx；完整鏈路用以確認整合上下文，不要求每天各層均重新編寫。UI 以 Leptos 元件為準，Axum 可以包裝 Leptos SSR HTTP Response，但不得手寫正式頁面取代。
+
+**雙軌補教追蹤：** 先接續 Day29 第④節未驗收內容，核對具體路徑／測試／預期與實際；同時保持更早 makeup_queue FIFO，最多結案一筆舊 Day，且須具備對應的 Gate 2 證據。追蹤、文件更正、補教討論均不自動結案。當日未完成部分下一 Day 第②節再補充，不跳號或重覆課題。
+
+**估時與封存：** 核心 60 分鐘包括每案 Red→Green→Refactor 各 15 分鐘及共用 15 分鐘；補教、版本核對、文件 ①③④、GitHub 提交／讀回與 Gate 2 測試額外計時。Gate 2 尚未通過，不得搬至 `docs/teaching/archived/day-30/chat.md`；依新規則只有必要測試與驗收成立後才將**正文原樣**移至 archived 並同步 manifest／連結。週六完整比對目前不執行、`last_full_comparison` 不更新；這不代表已停用任何實際排程。
+
+**本次修訂驗證結果：** 此次是 GitHub 教學文本重交付；尚未修改 `rust_ai_chat`、尚未實際執行 Day30 提案的 Red／Green、HTTP、資料庫或 GUI 驗收，功能狀態仍為 pending。
 
 ## ③ 套件版本
 
