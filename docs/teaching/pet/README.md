@@ -61,9 +61,9 @@
 
 ## 目前教學
 
-- **最新已發布：** [Pet Day 29](../daily/day-29/pet.md)（教學文章已發布；程式套用與功能驗收另行判定）
+- **最新已發布：** [Pet Day 30](../daily/day-30/pet.md)（教學文章已發布；程式套用與功能驗收另行判定）
 - 前一篇：[Pet Day 28](../daily/day-28/pet.md)
-- **下一篇 Day：** **Day 30**（以 [learning-state.json](../../learning-state.json) 的 `next_day.pet` 為準）。
+- **下一篇 Day：** **Day 31**（以 [learning-state.json](../../learning-state.json) 的 `next_day.pet` 為準）。
 - [全部最新文章與三專案對照](../daily/README.md) · [交付狀態與證據](../current/STATUS.md)
 
 <details>

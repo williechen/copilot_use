@@ -55,9 +55,9 @@
 
 ## 目前教學
 
-- **最新已發布：** [Chat Day 29](../history/day-29/chat/github.md)（教學文章已發布；程式套用與功能驗收另行判定）
+- **最新已發布：** [Chat Day 30 r2](../daily/day-30/chat.md)（教學文章已發布；程式套用與功能驗收另行判定）
 - 前一篇：[Chat Day 28](../daily/day-28/chat.md)
-- **下一篇 Day：** **Day 30**（以 [learning-state.json](../../learning-state.json) 的 `next_day.chat` 為準）。
+- **下一篇 Day：** **Day 31**（以 [learning-state.json](../../learning-state.json) 的 `next_day.chat` 為準）。
 - [全部最新文章與三專案對照](../daily/README.md) · [交付狀態與證據](../current/STATUS.md)
 
 <details>
