@@ -14,7 +14,7 @@
 - **williechen/rust_ai_chat/main：** 唯一程式、測試、CI 與功能驗收主體。UI／HTTP／IPC／DB／ACL、Cargo／lock／套件、命令及實作缺口均以該庫當時精確 SHA 核對；教學流程保持原始碼唯讀，由使用者套用。
 - 兩庫 SHA 分開記錄為「文件交付 SHA」與「程式來源 SHA」。copilot_use 既有程式、scripts、Actions、Release 或本地測試不作主體程式的驗收 Gate，也不能替代 rust_ai_chat 的功能現況或 CI 證據。
 - learning-state／manifest 中的舊 validated_program_sha、daily_product_sha、fixed_tag、產品試驗與 weekly acceptance 保留其歷史來源用途；不得據此選取本次程式 checkout 或自動宣稱主體功能已完成。next_day 只按各案即時值與交付證據處理。
-- 既有 Day、commit／blob／SHA256、歷史原文及固定發行證據不回寫。此分工更新不增加 Day、不結案補教、不更新 last_full_comparison，也不代表已變更既有雲端任務、GitHub workflow 或排程設定。
+- 既有 Day、commit／blob／SHA256、歷史原文及固定發行證據不回寫。此分工更新不增加 Day、不結案補教，也不代表已變更既有雲端任務、GitHub workflow 或排程設定。
 
 ### 1. 來源與選題
 
@@ -88,9 +88,9 @@ GitHub `williechen/copilot_use/main` 為唯一文章交付處：新篇位於 `do
 
 每日 06:00 Asia/Taipei，依 Chat → Pet → Analytics。**核心學習 60 分鐘**：三案各 15 分鐘均包含 Red → Green → Refactor，加共用彈性 15 分鐘。前一 Day 未完成補教、FIFO 舊補教、來源／套件版本核對、文章①③④節、GitHub commit／全文讀回／同步及 Gate 2 測試／整合驗收一律**額外計時**，不得因時間壓力省略最小完整 Green；超額工作記錄為待完成，不假裝驗收通過。
 
-**每日增量核對持續執行**，同一差異去重追蹤，來源不足只暫停受影響專案。**週六完整比對已實際停用，目前不執行**：依使用者確認及現有 ChatGPT 任務清單核對，沒有啟用中的「週六完整比對」任務；此狀態僅涵蓋已核對的任務範圍，不代表未查詢的外部 GitHub Actions／其他排程平台。週六完整比對不作每日教學前置 Gate，`last_full_comparison` 不更新；只有未來明確重新啟用並完成全部比對，才可更新。不得自行建立重複任務。
+**每日增量核對持續執行**，同一差異去重追蹤；必要來源不足時，只暫停受影響專案。
 
-保留原生環境、Domain／Application 與 Adapter 邊界、各 DB 獨立驗證、migration／固定 tag／原始證據不可改寫、權限與檔案操作確認。不讀正式秘密、不執行付費 AI；歷史完整比對與產品驗收不得冒稱本次已重跑。P9 目標、P0–P12 學習階段與實際產品驗收分開。
+保留原生環境、Domain／Application 與 Adapter 邊界、各 DB 獨立驗證、migration／固定 tag／原始證據不可改寫、權限與檔案操作確認。不讀正式秘密、不執行付費 AI；產品驗收不得冒稱本次已重跑。P9 目標、P0–P12 學習階段與實際產品驗收分開。
 
 ### 文件整理與歷史追溯
 
