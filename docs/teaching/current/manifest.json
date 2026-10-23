@@ -1,4 +1,16 @@
 {
+  "schedule_document_policy": {
+    "confirmed_at": "2026-10-23",
+    "previous_schedule_article": "outdated; historical only",
+    "current_document": "docs/teaching/scheduler-instructions-v1.md",
+    "execution_rules": "latest docs/COMMON_LEARNING_RULES.md and direct user confirmations",
+    "fixed_historical_lesson_prerequisite": false,
+    "actual_task_configuration": "not verified from scheduling service",
+    "local_matching_automation_files": 0,
+    "actual_tasks_modified": false,
+    "historical_schedule_fields": "not evidence of current activation, timing, model or prompt",
+    "weekly_full_comparison_requirement": "at least once per week; update last_full_comparison only on genuinely complete success"
+  },
   "repository_work_policy": {
     "confirmed_at": "2026-10-23",
     "copilot_use_program_work": "abolished",

@@ -437,7 +437,7 @@
 | 歷史原文／證據 | [docs/teaching/history/evidence/notion-export/2026-10-22/pages/3f8e51d450938174a707d200f2e0de52.md](../teaching/history/evidence/notion-export/2026-10-22/pages/3f8e51d450938174a707d200f2e0de52.md) |
 | 歷史原文／證據 | [docs/teaching/history/evidence/notion-export/2026-10-22/pages/3f8e51d4509381bf9da4c44750ffc726.md](../teaching/history/evidence/notion-export/2026-10-22/pages/3f8e51d4509381bf9da4c44750ffc726.md) |
 | 現行文件／入口 | [docs/teaching/pet/README.md](../teaching/pet/README.md) |
-| 現行文件／入口 | [docs/teaching/scheduler-instructions-v1.md](../teaching/scheduler-instructions-v1.md) |
+| 排程狀態入口／原文已過時 | [docs/teaching/scheduler-instructions-v1.md](../teaching/scheduler-instructions-v1.md) |
 | 歷史原文／證據 | [docs/verification/2026-10-17/README.md](../verification/2026-10-17/README.md) |
 | 歷史原文／證據 | [docs/weekly/2026-10-16/README.md](../weekly/2026-10-16/README.md) |
 | 歷史原文／證據 | [docs/weekly/2026-10-16/chat-auth/README.md](../weekly/2026-10-16/chat-auth/README.md) |
