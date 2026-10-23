@@ -57,7 +57,7 @@
   "fixed_tag_sha": "9bcae7c5d139f75ed08b4daffece602a71fdab34",
   "next_day": {
     "chat": 33,
-    "pet": 32,
+    "pet": 33,
     "analytics": 32
   },
   "last_full_comparison": "2026-10-16T22:47:14.399027+08:00",
@@ -3232,5 +3232,35 @@
     "archived": false,
     "remaining_gaps": "Chat 歷史載入／逐房 ACL／作者身分與真實 SSR/瀏覽器驗收未完成；Day25 共用認證 FIFO pending",
     "expected_state_parent_sha": "9c39d359f7a99b61bd7128648ec3825fc6ccf5a5"
+  },
+  "day32_pet_delivery": {
+    "repository": "williechen/copilot_use",
+    "branch": "main",
+    "parent": "4f808071ee3abc69386e5324f9cbb9ef87b43f1e",
+    "tree": "3dc69ad0afc055a8f8f5d3c74bfbf692a722106f",
+    "rules_sha": "419e357989595184ce31a5ad062dfd78b35f19e7",
+    "source_sha": "be0494a2a70be91eb74b2b726970a23fc3e5c044",
+    "read_at": "2026-10-23T22:56:06.669Z",
+    "project": "pet",
+    "day": 32,
+    "revision": "r1",
+    "article_commit": "10c109a66cd1a3383cdf8a123673e085cf4705ed",
+    "blob_sha": "87f788eca38ec2a82706f58fed9b1591c1c17f2b",
+    "sha256": "343ec7a47837ec5906768da91772c8b33722900c89d16d10320e98cb383924e9",
+    "bytes": 12484,
+    "full_text_verified": true,
+    "readback_at": "2026-10-23T22:56:06.669Z",
+    "raw_error": null,
+    "path": "docs/teaching/daily/day-32/pet.md",
+    "rules_version": "daily-tdd-minimum-v1+github-only-v1",
+    "status": "github_article_readback_verified",
+    "main_application": "not applied",
+    "tests": "not run",
+    "functional_acceptance": false,
+    "next_day_before": 32,
+    "next_day_after": 33,
+    "archived": false,
+    "remaining_gaps": "Pet 真實原生多窗選取/焦點/重啟與 DB GUI 一致性未驗收；Day25 單圖 FIFO pending",
+    "expected_state_parent_sha": "10c109a66cd1a3383cdf8a123673e085cf4705ed"
   }
 }
