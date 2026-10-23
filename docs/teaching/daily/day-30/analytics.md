@@ -1,4 +1,4 @@
-# Analytics Day30｜帳密登入頁改用 Leptos SSR（含 Day29 未完成補教）
+# Analytics Day30 r2｜帳密登入頁改用 Leptos SSR（含 Day29 未完成補教）
 
 ## ① 學習大綱與現況
 
@@ -80,6 +80,16 @@ async fn login_page() -> Html<String> {
 ### Day29 未完成項目補充教學
 
 原 Day29 `docs/teaching/history/day-29/analytics/github.md` 的來源篩選 `aria-current` 目前已套入 `dashboard_ui.rs`，但以下仍缺操作證據：`cargo test --locked -p stats-server active_source_is_marked_for_accessibility`、`cargo check --locked -p stats-server`、登入後 Chat/Pet 來源切換與 `aria-current` 互斥、PostgreSQL `summary_for_source` 數字、未知來源 HTTP 400、未登入轉向登入頁。需在隔離 PostgreSQL 的真實路由測試及 SSR 頁面讀回核對，不以字串測試當端對端結果。**本次都未執行**，Day29 未完成部分保留待驗收；不重發或改寫 Day29 原 commit，無證據不更動 makeup_queue。
+
+### 新共同規則一致性補充（r2）
+
+此篇僅修訂 Day30 的可套用教學，並非 Day31：文件 Gate 1 與程式 Gate 2 分開，僅寫入 copilot_use/main，rust_ai_chat/main 保持唯讀。原文的 Git commit、blob SHA、SHA256 繼續保留以供追溯。
+
+**增量式完整呼叫鏈：** 登入的 UI 使用 Leptos SSR，Axum 僅包裝其 HTTP Response，沿用既有認證與 PostgreSQL；無須為單一切片重寫每一層。上一 Day29 未完成事項應放在本篇第②節補充，下一 Day 繼續追蹤仍未驗收項目；歷史 makeup_queue 保持 FIFO，不因文件交付而結案。
+
+**時間與封存：** 每案 Red→Green→Refactor 核心 15 分鐘，加共用 15 分鐘共 60 分鐘。舊 Day 補教、來源／版本、文件交付與 Gate 2 實際驗證額外計時。只有本篇必要 Gate 2 驗收通過才能將正文原樣移至 docs/teaching/archived/day-30/analytics.md；本次未套用提案程式，未執行測試，仍不可封存。
+
+週六完整比對目前不執行，不更新 last_full_comparison，且不代表雲端排程已實際停用。修訂不新增 Day，next_day 維持 31。
 
 ## ③ 套件版本
 
