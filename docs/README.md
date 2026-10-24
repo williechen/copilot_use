@@ -7,7 +7,7 @@
 | --- | --- | --- | --- |
 | Chat | [Day34：帳密登入頁採 Leptos 並補齊可存取表單](teaching/daily/day-34/chat.md) | Day35 | 教學已交付／功能未驗收 |
 | Pet | [Day34：新增寵物名稱規則接入 application 並拒絕控制字元](teaching/daily/day-34/pet.md) | Day35 | 教學已交付／功能未驗收 |
-| Analytics | [Day33：Dashboard 數量標示](teaching/daily/day-33/analytics.md) | Day34 | 教學已交付／功能未驗收 |
+| Analytics | [Day34：首次 admin/admin 初始化及強制改密碼銜接](teaching/daily/day-34/analytics.md) | Day35 | 教學已交付／功能未驗收 |
 
 來源、套用及測試證據各自記錄；文章發布不代表產品驗收。
 <!-- daily-delivery:end -->

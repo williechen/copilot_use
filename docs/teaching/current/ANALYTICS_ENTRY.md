@@ -1,7 +1,7 @@
-# Analytics 首頁入口
+# Analytics 現行教學入口
 
-內容已整併到 [Analytics 首頁](../analytics/README.md)。
+[Day34：首次 admin/admin 初始化及強制改密碼銜接](../daily/day-34/analytics.md)
 
-[共用文章](../../COMMON_LEARNING_RULES.md) · [目前進度](STATUS.md)
+教學已交付並完成精確 commit 全文讀回；產品未套用、測試未執行、功能未驗收。下一篇 Day35。
 
-[現行程式來源、workspace 與新舊路徑對照](../../SOURCE_LAYOUT.md)
+[首頁](../analytics/README.md) · [目前功能與驗證現況](STATUS.md) · [進度](../../learning-state.json) · [manifest](manifest.json) · [CI 補充與來源證據](../daily/day-34/source-snapshot.json)
