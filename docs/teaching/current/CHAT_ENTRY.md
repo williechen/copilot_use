@@ -1,10 +1,10 @@
 # Chat 現行教學入口
 
-[Day34 r2：重用 SignInPage，合併重複登入入口](../daily/day-34/chat-r2.md)
+[Day35：建房名稱規則共用：拒絕控制字元且兩種入口一致](../daily/day-35/chat.md)
 
-教學修訂已交付並完成精確 commit 全文讀回；最新來源已見 r2 去重與相應測試；本次 Rust／HTTP／瀏覽器未執行，功能未驗收。下一篇維持 Day35。
+**教學已交付／功能未驗收**：精確 commit 全文讀回已完成；本次產品未套用、Rust／SQLite／HTTP／瀏覽器未測。下一篇 **Day36**。原有 Leptos 個人頁與 JSON 建房 handler 保留，本文提供兩入口共用名稱規則的完整 Red／Green／Refactor。
 
-沿用既有 `/signin` 的 SignInPage；GET `/login` 改導向 `/signin`，POST `/login` 沿用原認證。r1 的新增 LoginView 方向已撤回；[原文及原始證據](../daily/day-34/chat.md) 保留。
+[Day35 交付與讀回證據](../daily/day-35/chat-readback.json) · [上一篇 Day34 r2](../daily/day-34/chat-r2.md)（登入入口去重已見來源，未當次驗收）。
 
 [首頁](../chat/README.md) · [功能與驗證現況](STATUS.md) · [進度](../../learning-state.json) · [manifest](manifest.json) · [r2 交付證據](../daily/day-34/chat-r2-readback.json)
 

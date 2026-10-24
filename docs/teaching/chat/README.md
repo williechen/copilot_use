@@ -13,7 +13,7 @@
 
 | 專案 | 最新文章 | 下一篇 | 狀態 |
 | --- | --- | --- | --- |
-| Chat | [Day34 r2：重用 SignInPage，合併重複登入入口](../daily/day-34/chat-r2.md) | Day35 | 教學已交付／功能未驗收 |
+| Chat | [Day35：建房名稱規則共用：拒絕控制字元且兩種入口一致](../daily/day-35/chat.md) | Day36 | 教學已交付／功能未驗收 |
 | Pet | [Day34：新增寵物名稱規則接入 application 並拒絕控制字元](../daily/day-34/pet.md) | Day35 | 教學已交付／功能未驗收 |
 | Analytics | [Day34：首次 admin/admin 初始化及強制改密碼銜接](../daily/day-34/analytics.md) | Day35 | 教學已交付／功能未驗收 |
 
