@@ -1,8 +1,10 @@
 # Pet 現行教學入口
 
-[Day34：新增寵物名稱規則接入 application 並拒絕控制字元](../daily/day-34/pet.md)
+[Day35：逐寵物回籠狀態搬入 pet-persistence，接回 Tauri 真實呼叫鏈](../daily/day-35/pet.md)
 
-教學已交付並完成精確 commit 全文讀回；最新來源已見名稱規則與 caller 接線；本次未執行該功能的 Rust／DB／GUI 測試，功能未驗收。下一篇 Day35。
+**教學已交付／功能未驗收**：精確 commit 全文讀回；產品未套用，SQLx／Tauri／SQLite／GUI／WASM 未當次執行。下一篇 **Day36**。本篇只把逐 ID 回籠標記 adapter 接到 pet-persistence，並未搬完 PetStore。
+
+[Day35 交付與讀回證據](../daily/day-35/pet-readback.json) · [上一篇 Day34](../daily/day-34/pet.md)（名稱規則已接 application／Tauri／PetStore）。
 
 [首頁](../pet/README.md) · [目前功能與驗證現況](STATUS.md) · [進度](../../learning-state.json) · [manifest](manifest.json) · [CI 補充與來源證據](../daily/day-34/source-snapshot.json)
 

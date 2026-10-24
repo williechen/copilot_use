@@ -10,7 +10,7 @@
 | 專案 | 最新文章 | 下一篇 | 狀態 |
 | --- | --- | --- | --- |
 | Chat | [Day35：建房名稱規則共用：拒絕控制字元且兩種入口一致](day-35/chat.md) | Day36 | 教學已交付／功能未驗收 |
-| Pet | [Day34：新增寵物名稱規則接入 application 並拒絕控制字元](day-34/pet.md) | Day35 | 教學已交付／功能未驗收 |
+| Pet | [Day35：逐寵物回籠狀態搬入 pet-persistence，接回 Tauri 真實呼叫鏈](day-35/pet.md) | Day36 | 教學已交付／功能未驗收 |
 | Analytics | [Day34：首次 admin/admin 初始化及強制改密碼銜接](day-34/analytics.md) | Day35 | 教學已交付／功能未驗收 |
 
 來源、套用及測試證據各自記錄；文章發布不代表產品驗收。

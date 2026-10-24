@@ -57,7 +57,7 @@
   "fixed_tag_sha": "9bcae7c5d139f75ed08b4daffece602a71fdab34",
   "next_day": {
     "chat": 36,
-    "pet": 35,
+    "pet": 36,
     "analytics": 35
   },
   "last_full_comparison": "2026-10-16T22:47:14.399027+08:00",
@@ -3815,5 +3815,36 @@
     "expected_state_parent_sha": "8ef0511b73b8c64c21967b90d4a15d7ef6d3095b",
     "raw_error": null,
     "remaining_gaps": "選房登入導向、逐房 ACL、歷史與作者、共用認證 FIFO；本次新 Green 未套用或執行"
-  }
+  },
+  "day35_pet_delivery": {
+    "repository": "williechen/copilot_use",
+    "branch": "main",
+    "project": "pet",
+    "day": 35,
+    "revision": "r1",
+    "title": "逐寵物回籠狀態搬入 pet-persistence，接回 Tauri 真實呼叫鏈",
+    "path": "docs/teaching/daily/day-35/pet.md",
+    "parent": "23a523923b74bfac0ee7839ae3a7c23ba8d3718b",
+    "article_commit": "04bd36f487b43139cc8658e887c32e61f093e4f6",
+    "blob_sha": "517754268fff3c638fcef5eec1510db2d5026544",
+    "sha256": "a0623acda523eded0125c437c366fe38da622df51ca2cdaade3c611df876f281",
+    "bytes": 12561,
+    "full_text_verified": true,
+    "readback_at": "2026-10-24T22:14:39.372Z",
+    "source_repository": "williechen/rust_ai_ring",
+    "source_sha": "891ff32ae29e1588dc40027cd5c9c99ca91d2378",
+    "rules_sha": "3b5d00291cdd44e1fa039aad4b10d8f82b59982d",
+    "rules_version": "daily-tdd-minimum-v1+github-only-v1",
+    "status": "github_article_readback_verified",
+    "main_application": "not applied",
+    "tests": "not run",
+    "functional_acceptance": false,
+    "archived": false,
+    "next_day_before": 35,
+    "next_day_after": 36,
+    "expected_state_parent_sha": "04bd36f487b43139cc8658e887c32e61f093e4f6",
+    "raw_error": null,
+    "remaining_gaps": "三 ID 原生 GUI／回籠失敗補償／重啟及單幀單圖 FIFO 待驗；其餘 PetStore SQLx 尚在 server"
+  },
+  "latest_pet_publication": "docs/teaching/daily/day-35/pet-readback.json"
 }
