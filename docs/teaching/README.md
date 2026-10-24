@@ -8,7 +8,7 @@
 | Pet | [目標、操作主線、待辦與全部 Day](pet/README.md) |
 | Analytics | [目標、操作主線、待辦與全部 Day](analytics/README.md) |
 
-**最新已發布：** [Chat Day33](daily/day-33/chat.md)（下一篇 Day34） · [Pet Day33](daily/day-33/pet.md) （下一篇 Day34） · [Analytics Day33](daily/day-33/analytics.md)（下一篇 Day34）；教學交付不代表程式已套用或驗收，詳見 [即時狀態](../learning-state.json)。
+**最新已發布：** [Chat Day33](daily/day-33/chat.md)（下一篇 Day34） · [Pet Day33](daily/day-33/pet.md)（下一篇 Day34） · [Analytics Day33](daily/day-33/analytics.md)（下一篇 Day34）；教學交付不代表程式已套用或驗收，詳見 [即時狀態](../learning-state.json)。
 
 [新文章目錄](daily/README.md) · [驗收完成文章](archived/README.md) · [既有歷史文章與原始證據](history/README.md)
 

@@ -16,11 +16,11 @@
 
 | 專案 | 文章 | 狀態 |
 | --- | --- | --- |
-| Chat | [Day32：聊天室歷史載入狀態](day-32/chat.md) | 教學已交付；程式未套用、測試未執行、功能未驗收 |
-| Pet | [Day32：右鍵開啟控制窗並選取對應寵物](day-32/pet.md) | 教學已交付；程式未套用、測試未執行、功能未驗收 |
-| Analytics | [Day32：Dashboard 事件類型篩選](day-32/analytics.md) | 教學已交付；程式未套用、測試未執行、功能未驗收 |
+| Chat | [Day32：聊天室歷史載入狀態](day-32/chat.md) | 教學已交付；後續主體程式驗證另見目前進度，完整功能仍未驗收 |
+| Pet | [Day32：右鍵開啟控制窗並選取對應寵物](day-32/pet.md) | 教學已交付；後續主體程式驗證另見目前進度，完整功能仍未驗收 |
+| Analytics | [Day32：Dashboard 事件類型篩選](day-32/analytics.md) | 教學已交付；後續主體程式驗證另見目前進度，完整功能仍未驗收 |
 
-下一篇均為 Day33；以 [learning-state](../../learning-state.json) 為準。
+本表保留 Day32 發布時的狀態；Day33 已發布，目前下一篇均為 Day34；以 [learning-state](../../learning-state.json) 為準。
 
 ## 尚待完成
 

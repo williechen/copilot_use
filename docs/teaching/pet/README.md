@@ -69,7 +69,7 @@ rust_ai_chat 的 apps/desktop\_pet 負責 Tauri／OS 入口，frontend 負責 Le
 
 ## 最新教學（Day32）
 
-[Day32：右鍵開啟控制窗並選取對應寵物](../daily/day-32/pet.md)（程式已套用，原生右鍵選單選取路徑已實測通過；完整產品驗收仍未完成）。下一篇 Day33，以 [即時進度檔](../../learning-state.json) 為準；Day31 與歷史驗證證據保留。
+[Day32：右鍵開啟控制窗並選取對應寵物](../daily/day-32/pet.md)（程式已套用，原生右鍵選單選取路徑已實測通過；完整產品驗收仍未完成）。此段保留 Day32 當時的進度；Day33 已發布，最新下一篇 Day34，以 [即時進度檔](../../learning-state.json) 為準；Day31 與歷史驗證證據保留。
 
 ## 最新教學（Day33）
 
