@@ -1,8 +1,10 @@
 # 主體程式呼叫鏈核對
 
-`copilot_use` 是規則、教學文章、next_day、manifest、交付讀回與歷史證據的正本；`rust_ai_chat` 是唯一程式、測試、CI 與功能驗收主體。 本頁規範核對方法，不把舊庫程式的靜態對照當 rust_ai_chat 已接通或已驗收證據。
+現行程式來源與目錄：[rust_ai_ring 四個 workspace 對照](SOURCE_LAYOUT.md)（來源 `0b3e5844`，2026-10-24 靜態核對）。
 
-| 使用者起點 | 每次須在 rust_ai_chat 核對的實際鏈 |
+`copilot_use` 是規則、教學文章、next_day、manifest、交付讀回與歷史證據的正本；`rust_ai_ring` 是唯一程式、測試、CI 與功能驗收主體。 本頁規範核對方法，不把舊庫程式的靜態對照當 rust_ai_ring 已接通或已驗收證據。
+
+| 使用者起點 | 每次須在 rust_ai_ring 核對的實際鏈 |
 | --- | --- |
 | Chat 註冊／登入／登出／進房 | Leptos 元件／路由 → Axum Handler／Cookie／Session／ACL → 使用案例／Port → SQLx SQLite → UI 回饋 |
 | Chat 訊息／即時操作 | 真 UI 呼叫 → HTTP／WS → 房間／作者權限 → 持久化與通知；逐項檢查錯誤、隔離及重連 |

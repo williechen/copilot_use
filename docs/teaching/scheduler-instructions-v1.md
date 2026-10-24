@@ -1,5 +1,7 @@
 # 排程文章狀態與執行依據
 
+現行程式來源與目錄：[rust_ai_ring 四個 workspace 對照](../SOURCE_LAYOUT.md)（來源 `0b3e5844`，2026-10-24 靜態核對）。
+
 **2026-10-23：原排程文章已過時，不再作現行排程提示詞或執行規格。** 原文中的固定教學篇章、P9、雙庫程式工作、舊排程時間、Task ID、ACTIVE 與讀回敘述均只屬歷史紀錄，不能據此確認目前任務設定。
 
 ## 執行時應讀取的正本
@@ -8,7 +10,7 @@
 - [即時進度](../learning-state.json)與[文章索引](current/manifest.json)：各案實際進度、已交付版本及證據；不得固定指定先核對某一舊篇章。
 - [目前功能與驗證狀態](current/STATUS.md)、[使用者流程](../requirements/USER_FLOWS.md)、[人員驗證](../requirements/AUTHENTICATION.md)、[UI 條件](../UI_ALIGNMENT_REQUIREMENTS.md)：核對最新需求、功能與缺口。
 
-每次取得 rust_ai_chat/main 的程式來源 SHA 及 copilot_use/main 的文件來源 SHA，再按最新確認需求與真實呼叫鏈選擇尚未完成的工作。rust_ai_chat 保持唯讀；copilot_use 只維護文件、教學、進度、索引與證據，不執行其舊程式工作。P9 與已廢除工作不得從歷史提示詞恢復。
+每次取得 rust_ai_ring/main 的程式來源 SHA 及 copilot_use/main 的文件來源 SHA，再按最新確認需求與真實呼叫鏈選擇尚未完成的工作。rust_ai_ring 保持唯讀；copilot_use 只維護文件、教學、進度、索引與證據，不執行其舊程式工作。P9 與已廢除工作不得從歷史提示詞恢復。
 
 只有全面比對真正完整成功才更新 last_full_comparison；文件整理、比對或排程修訂不改 next_day，也不自動結案補教。
 

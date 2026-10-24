@@ -29,9 +29,9 @@
       "functional acceptance"
     ],
     "copilot_use_role": "requirements, rules, teaching documents, progress, indexes and delivery evidence only",
-    "program_repository": "williechen/rust_ai_chat",
+    "program_repository": "williechen/rust_ai_ring",
     "historical_program_records": "preserved for traceability only; not active tasks or acceptance gates",
-    "documentation_code_examples": "teaching content for rust_ai_chat; not a second product implementation",
+    "documentation_code_examples": "teaching content for rust_ai_ring; not a second product implementation",
     "execution_settings_changed": false
   },
   "requirements_policy": {
@@ -47,7 +47,7 @@
       "docs/requirements/AUTHENTICATION.md",
       "docs/UI_ALIGNMENT_REQUIREMENTS.md"
     ],
-    "implementation_evidence": "rust_ai_chat exact commit and actual validation evidence",
+    "implementation_evidence": "rust_ai_ring exact commit and actual validation evidence",
     "historical_records_are_not_current_policy": true
   },
   "reference_sha": "3e58e650bd63bcd21ba58e7aabf751542401ef80",
@@ -87,8 +87,8 @@
   },
   "learning_policy": {
     "daily_selection": "差異驅動＋最小功能切片；先建立可操作的基本功能項，基本流程與相應驗證通過後推進下一功能，再逐步補充細節、條件與例外；每日 TDD Red→最小 Green→Refactor→驗證。阻擋流程／資料安全／必要相依性在當步處理，其餘深化工作保留原功能項，不每日全量比對",
-    "daily_gate": "每日教學只揭露 rust_ai_chat 精確 SHA 的 CI 狀態及待修問題；copilot_use 程式 CI、產品整合與功能驗收工作已廢除，文件交付僅核對文章、規則、JSON、連結及精確 commit 全文讀回。",
-    "weekly_review": "週比對只審查 rust_ai_chat 程式與其精確 SHA 的測試／CI／功能證據，以及 copilot_use 文件與證據一致性；copilot_use 程式驗收工作已廢除。排程本次未更動。",
+    "daily_gate": "每日教學只揭露 rust_ai_ring 精確 SHA 的 CI 狀態及待修問題；copilot_use 程式 CI、產品整合與功能驗收工作已廢除，文件交付僅核對文章、規則、JSON、連結及精確 commit 全文讀回。",
+    "weekly_review": "週比對只審查 rust_ai_ring 程式與其精確 SHA 的測試／CI／功能證據，以及 copilot_use 文件與證據一致性；copilot_use 程式驗收工作已廢除。排程本次未更動。",
     "dry_run": "only document corrections addressing user-reported issues; code tests migrations read-only",
     "day_status": "教學已發布／程式尚待套用／功能已實作／功能正式驗收通過，依實際證據分別判定",
     "daily_time": "06:00 Asia/Taipei",
@@ -103,7 +103,7 @@
     "weekly_ai_validation": "excluded; functional gates only",
     "phase_transition": "到期切換且不延後；功能未完成則原階段學習未完成，原項目跨階段補加，完工後回填原階段證據",
     "functional_progress": "新增可操作功能／接通流程為每日主體；條件補充回原功能，不把單點 API／純測試／欄位及狀態碼當成完整流程。三專案並行追蹤，不預排 Day、不自動推進學習階段。",
-    "synchronization_judgment": "核對依「已確認需求／文章 → rust_ai_chat 精確 SHA 實作與實際呼叫者 → 匹配來源的測試／CI／功能驗證」追溯；copilot_use 僅核對文件、進度與交付證據，不要求對應程式實作、程式同步或驗收。缺證標未核實，未接通流程標部分完成，未執行明示。",
+    "synchronization_judgment": "核對依「已確認需求／文章 → rust_ai_ring 精確 SHA 實作與實際呼叫者 → 匹配來源的測試／CI／功能驗證」追溯；copilot_use 僅核對文件、進度與交付證據，不要求對應程式實作、程式同步或驗收。缺證標未核實，未接通流程標部分完成，未執行明示。",
     "day_revision": "Day25（含）以前三專案全部既有文章已封存，依使用者確認保留原文與證據；任何更正只在下一Day的新實作／Refactor後補充，不回寫舊文，封存不代表已套用或驗收。以下一般修訂規則僅適用尚未封存的新草稿：未實作 Day 可在既有GitHub 原檔重整，更新修訂版與來源、同步同一索引及鏡像，不另建相同專案／Day。已實作內容即封存，保留原文、程式及證據；修改方案只在下一 Day 的 Refactor 後「舊 Day 更正補充」提出。部分已實作時保留已實作段落，只重整尚未實作部分；實作狀態不明時先標未核實，不當作未實作覆寫。文章修訂不新增 Day，也不推進 next_day。",
     "red_green": "Red is the prerequisite test for same-feature Green; preserve applied tests and provide complete Green in the same Day; distinguish expected Red from test/import/environment errors",
     "rules_version": "daily-tdd-minimum-v1+github-only-v1",
@@ -3378,5 +3378,15 @@
     "next_day_before": 33,
     "next_day_after": 34,
     "remaining_gaps": "Analytics 管理員初始化/角色來源ACL/SSE/明細與新標示瀏覽器驗收未完成"
+  },
+  "current_source_layout": {
+    "repository": "williechen/rust_ai_ring",
+    "branch": "main",
+    "source_sha": "0b3e58440bf4b36a398e3698e352e69faf53cfa2",
+    "document": "docs/SOURCE_LAYOUT.md",
+    "manifest": "docs/source-review/rust-ai-ring-layout.json",
+    "observed_date": "2026-10-24",
+    "scope": "static_source_layout_only",
+    "future_teaching_requirement": "Adapt code paths, package/import names, dependencies, callers and tests to latest rust_ai_ring layout in subsequent lessons; preserve published lessons and existing progress."
   }
 }

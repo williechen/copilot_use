@@ -1,14 +1,21 @@
 # 未來前進項目
 
+現行程式來源與目錄：[rust_ai_ring 四個 workspace 對照](SOURCE_LAYOUT.md)（來源 `0b3e5844`，2026-10-24 靜態核對）。
+
 > 實作進度、精確來源與驗證結果統一見[目前進度](teaching/current/STATUS.md)。本文件保留功能需求／完成條件或架構；歷次測試摘要已移入歷史紀錄，不作現行完成聲明。
 
-需求依使用者最新確認內容及[現行使用者流程](requirements/USER_FLOWS.md)、[人員驗證需求](requirements/AUTHENTICATION.md)、[UI 驗收條件](UI_ALIGNMENT_REQUIREMENTS.md)，實作缺口、目錄／內容、測試／CI 與功能驗收只依 rust_ai_chat 最新 main。本庫保存需求與教學，不另追蹤 copilot_use 產品程式；未核實不標完成。每天從確認缺口與當日差異選三專案合計一小時的小切片，不預排 Day；週六工程與功能驗收另記。
+需求依使用者最新確認內容及[現行使用者流程](requirements/USER_FLOWS.md)、[人員驗證需求](requirements/AUTHENTICATION.md)、[UI 驗收條件](UI_ALIGNMENT_REQUIREMENTS.md)，實作缺口、目錄／內容、測試／CI 與功能驗收只依 rust_ai_ring 最新 main。本庫保存需求與教學，不另追蹤 copilot_use 產品程式；未核實不標完成。每天從確認缺口與當日差異選三專案合計一小時的小切片，不預排 Day；週六工程與功能驗收另記。
 
 P9 規則已廢除。本清單中僅源自舊規則、尚未依最新需求確認的項目只作候選，不自動作必做功能或驗收門檻。已確認的開發項目在原項目記錄可驗證功能條件、SHA／測試／CI／套用與驗收證據，未核實者保留未完成。跨階段工作留原功能項目追蹤；舊 Day 更正僅於下一個 Day 的 Refactor 後獨立補加，不回填原 Day，不另開重複項目；完成後可退出活動清單，但原識別與證據須可追溯。學習階段不代表產品功能已驗收。
 
+## 新目錄銜接的後續教學要求
+
+- [ ] 每次後續教學依 rust_ai_ring 最新目錄提供必要的程式調整；依實際情況同步檔案搬移、Cargo dependency / feature、Rust imports、呼叫端與測試。新 application / persistence 目前僅為空 library，需真正接線與驗證才記完成。
+- [ ] 發布前核對最新來源與尚未發布草稿，保留已發布文章及歷史證據；不因更名額外新增 Day，也不在 copilot_use 建立平行產品。
+
 ## 清單使用方式
 
-2026-10-23 依使用者確認，所有涉及 copilot_use 程式開發、移植、同步適配、重構、套用、建置、測試、CI、產品試驗、發布、安裝更新與功能驗收的工作要求均已廢除，不再列為待辦、選題或驗收門檻。copilot_use 僅維護需求、規則、教學文章、進度、索引與交付證據；文件內的教學程式碼用於說明 rust_ai_chat 的實作，不建立第二套產品。程式功能、測試、CI 與驗收只依 rust_ai_chat 精確 SHA。既有 copilot_use 程式、腳本、workflow、Release 及歷史欄位僅供追溯，不代表仍有維護或執行義務。
+2026-10-23 依使用者確認，所有涉及 copilot_use 程式開發、移植、同步適配、重構、套用、建置、測試、CI、產品試驗、發布、安裝更新與功能驗收的工作要求均已廢除，不再列為待辦、選題或驗收門檻。copilot_use 僅維護需求、規則、教學文章、進度、索引與交付證據；文件內的教學程式碼用於說明 rust_ai_ring 的實作，不建立第二套產品。程式功能、測試、CI 與驗收只依 rust_ai_ring 精確 SHA。既有 copilot_use 程式、腳本、workflow、Release 及歷史欄位僅供追溯，不代表仍有維護或執行義務。
 
 下列 checkbox 表示產品或教學仍待核對／完成的條件，不能據此推論所有底層程式都不存在。主體程式狀態見 [目前進度](teaching/current/STATUS.md) 的來源與證據範圍；舊 copilot_use token Dashboard、程式或驗收紀錄不作主體缺口判定。每項完成須附目前檔案、來源 SHA、適用測試與 UI／跨層結果；僅更新文件不勾選完成。
 
@@ -18,21 +25,21 @@ P9 規則已廢除。本清單中僅源自舊規則、尚未依最新需求確�
 
 歷史全部文章核對與待修來源見[84篇矩陣](teaching/history/evidence/2026-10-23-all-articles-9c2b7cf/ALL_ARTICLES.md)。精確程式9c2b7cf：Chat頁面／WS基本Session已接通，但SSR歷史提示與API／逐房ACL仍缺；Pet控制窗恢復及動態窗漫遊未接妥；Analytics正式事件類型summary路由404，帳密入口未沿用舊限流。各項依精確來源追蹤，不由舊helper測試或文件封存結案。最新f3f8255清理後冷建置已修復SSR歷史提示斷言，Day32三案實測範圍見[新報告](teaching/history/evidence/2026-10-24-formal-f3f8255/REPORT.md)。仍有Clippy、Pet舊庫checksum、Chat歷史讀回／作者及完整產品缺口；清庫只針對使用者明確授權且已定位的資料，不作歷史升級修復方案。
 這是目前已確認功能的實作順序與驗收條件；實際缺口及最新來源見[目前進度](teaching/current/STATUS.md)。每次依真實入口、資料庫與測試調整最小切片，不預排Day，也不以其他分支的舊試作當成已合併／驗收。
-- [ ] **Chat：註冊／登入→Session→公開房間清單與進房授權→加入／建立聊天室。** 沿 rust_ai_chat 的 signup／signin／logout、mbr_user／Session 與房間授權實際來源核對；不引用舊庫 auth.rs／chat_users 介面。先完成欄位驗證與登入授權，不重建平行身分表。基本鏈未完成前不優先擴充歷史訊息或進階UI。
-- [ ] **Pet：建立第一隻寵物→名稱／初始外觀→Tauri IPC→SQLite→生活窗→重啟載入。** 沿 rust_ai_chat 的 create_pet／pet_store／pet_profile 與 Tauri command 實際來源核對；補齊逐寵物身分／畫面／載入後再深化多寵物與漫遊。先核對舊DB歷史，以前向migration處理相容性，不清空DB。
-- [ ] **Analytics：管理員初始化→持久化帳密登入→首次改密碼→Session／Dashboard授權。** 沿 rust_ai_chat bootstrap／password_login／Session 的最新來源，核對真正登入／改密碼／授權鏈及未完成部分；固定key登入或429回應不等於完成帳密身分流程。
+- [ ] **Chat：註冊／登入→Session→公開房間清單與進房授權→加入／建立聊天室。** 沿 rust_ai_ring 的 signup／signin／logout、mbr_user／Session 與房間授權實際來源核對；不引用舊庫 auth.rs／chat_users 介面。先完成欄位驗證與登入授權，不重建平行身分表。基本鏈未完成前不優先擴充歷史訊息或進階UI。
+- [ ] **Pet：建立第一隻寵物→名稱／初始外觀→Tauri IPC→SQLite→生活窗→重啟載入。** 沿 rust_ai_ring 的 create_pet／pet_store／pet_profile 與 Tauri command 實際來源核對；補齊逐寵物身分／畫面／載入後再深化多寵物與漫遊。先核對舊DB歷史，以前向migration處理相容性，不清空DB。
+- [ ] **Analytics：管理員初始化→持久化帳密登入→首次改密碼→Session／Dashboard授權。** 沿 rust_ai_ring bootstrap／password_login／Session 的最新來源，核對真正登入／改密碼／授權鏈及未完成部分；固定key登入或429回應不等於完成帳密身分流程。
 每日仍以Chat→Pet→Analytics各一個可套用的Red→完整最小Green切片推進，未接通部分明示缺口。舊Day更正在本日新實作／Refactor後補充；每新增一個專案Day獨立GitHub commit推送並全文讀回後，才可條件同步next_day及manifest，清單整理本身不增加Day。已確認功能條件、權限／資料安全、週六工程驗收與其他待辦保留。
 
 ## 既有實作的驗收邊界
 
-[2026-10-16 舊庫 Linux 證據](weekly/2026-10-16/acceptance.json) 保留原來源，不作 rust_ai_chat 的完成證據。原功能是否已實作、是否有新增需求與跨平台缺口，須在主體最新 SHA 核對；不因來源角色調整重教已完成內容。
+[2026-10-16 舊庫 Linux 證據](weekly/2026-10-16/acceptance.json) 保留原來源，不作 rust_ai_ring 的完成證據。原功能是否已實作、是否有新增需求與跨平台缺口，須在主體最新 SHA 核對；不因來源角色調整重教已完成內容。
 
 - [ ] Pet 漫遊後續需求：多寵物獨立生活窗、出入籠與互動、螢幕移除不立即搬回／手動找回；逐項按 [UI 需求](UI_ALIGNMENT_REQUIREMENTS.md) 核對目前來源、所屬測試及真實桌面結果。
 - [ ] 漫遊與 SHA256 分組的 Windows／macOS 功能驗收，以及相對原 Linux 證據新增程式的回歸；沒有匹配證據前不標完成。
 
 ## 歷史雙庫適配項的判讀
 
-舊 Room／WS DTO、Pet FSM／JSON／TOML、事件名稱、gRPC／ACK 與 SSE 的雙庫差異表[原文保留](teaching/history/evidence/2026-10-23-repository-roles/before/docs/FUTURE_WORK.md)。不再要求把 rust_ai_chat 移植到 copilot_use；必要的 ID／契約／傳輸需求留在原功能項，依 rust_ai_chat 的實際呼叫者與測試判定，不默改既有契約或增加無呼叫者骨架。
+舊 Room／WS DTO、Pet FSM／JSON／TOML、事件名稱、gRPC／ACK 與 SSE 的雙庫差異表[原文保留](teaching/history/evidence/2026-10-23-repository-roles/before/docs/FUTURE_WORK.md)。不再要求把 rust_ai_ring 移植到 copilot_use；必要的 ID／契約／傳輸需求留在原功能項，依 rust_ai_ring 的實際呼叫者與測試判定，不默改既有契約或增加無呼叫者骨架。
 
 ## 教學銜接
 
@@ -48,7 +55,7 @@ P9 規則已廢除。本清單中僅源自舊規則、尚未依最新需求確�
 
 
 - [ ] 三專案各自產出完整可套用 Day；四節格式、原教學與第 2 節末尾必要實作補充對應一致。
-- [ ] 每週六完整核對 rust_ai_chat 的 source／介面／流程／契約／DB／UI／CI／測試，再核對 copilot_use 文件、教學與證據的對應；既有執行流程尚待調整見 [同步範圍](REPOSITORY_ROLE_TRANSITION.md)。
+- [ ] 每週六完整核對 rust_ai_ring 的 source／介面／流程／契約／DB／UI／CI／測試，再核對 copilot_use 文件、教學與證據的對應；既有執行流程尚待調整見 [同步範圍](REPOSITORY_ROLE_TRANSITION.md)。
 
 ### Chat
 
@@ -64,7 +71,7 @@ P9 規則已廢除。本清單中僅源自舊規則、尚未依最新需求確�
 原有多寵物／漫遊／UI 項目納入獨立狀態與生活窗、多預設出籠、回籠停活動、右鍵坐下／控制窗選取、習性速度、打鬧吵醒、拖曳與多螢幕例外／手動找回。詳細依共同規則及 UI 需求；不提供固定速度設定，不以單 pet 共用狀態取代多寵物需求。未重新實作／驗收。
 
 - [ ] 純 Profile／Application Port／Schedule 與 SQLite／HTTP／OS runtime 的邊界。
-- [ ] Tauri／Leptos IPC、五欄設定及可選覆寫、多寵物獨立 TOML／資產／備份與可逆封存。rust_ai_chat 畫面需求：200×200 寵物顯示與可縮放／捲動的控制視窗分離；六區為互動、設定、記憶、檔案、管理、更新，未接通能力明示，反覆開啟只聚焦既有視窗。漫遊只移動寵物生活窗，控制窗保留手動拖曳；需以完整原生GUI／IPC驗收。詳細條件見 [畫面銜接需求](UI_ALIGNMENT_REQUIREMENTS.md)。
+- [ ] Tauri／Leptos IPC、五欄設定及可選覆寫、多寵物獨立 TOML／資產／備份與可逆封存。rust_ai_ring 畫面需求：200×200 寵物顯示與可縮放／捲動的控制視窗分離；六區為互動、設定、記憶、檔案、管理、更新，未接通能力明示，反覆開啟只聚焦既有視窗。漫遊只移動寵物生活窗，控制窗保留手動拖曳；需以完整原生GUI／IPC驗收。詳細條件見 [畫面銜接需求](UI_ALIGNMENT_REQUIREMENTS.md)。
 - [ ] 使用者授權、型別化 preview／confirmation／實際 receipt、private Trash／restore、symlink／TOCTOU／journal／OS 安全。
 - [ ] AI 外觀／素材與角色一致性、200×200 等比動畫、記憶／回想／複習／提醒、RAG／MCP／Agent。
 - [ ] 真實事件至 Analytics、政策確認／回退、三平台 GUI／installer／簽章 updater 與資料保留。
@@ -85,7 +92,7 @@ P9 規則已廢除。本清單中僅源自舊規則、尚未依最新需求確�
 
 ## 完成條件
 
-逐項附規格 → 當前檔案／符號／SHA → rust_ai_chat 真正測試／CI → 程式套用狀態。rust_ai_chat 產品功能驗收、每日教學發布、主體程式實際套用各自記錄，適用 CI 未全部 Success 仍可發布每日 Day，但須揭露失敗與待修問題，不宣稱驗證通過，不等待週六提交。未完成或未核實項目留在對應分類；完成項目可從活動清單移除，但原項目識別、跨階段補加歷史及完成證據須永久可追溯。新產品需求需同步現行需求文件、實作與重新驗收；不以舊 Release 或教學頁宣稱新需求已完成。
+逐項附規格 → 當前檔案／符號／SHA → rust_ai_ring 真正測試／CI → 程式套用狀態。rust_ai_ring 產品功能驗收、每日教學發布、主體程式實際套用各自記錄，適用 CI 未全部 Success 仍可發布每日 Day，但須揭露失敗與待修問題，不宣稱驗證通過，不等待週六提交。未完成或未核實項目留在對應分類；完成項目可從活動清單移除，但原項目識別、跨階段補加歷史及完成證據須永久可追溯。新產品需求需同步現行需求文件、實作與重新驗收；不以舊 Release 或教學頁宣稱新需求已完成。
 
 ### Chat瀏覽器與SQLite最新實證
 

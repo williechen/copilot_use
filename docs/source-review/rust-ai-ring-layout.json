@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "observed_date": "2026-10-24",
+  "repository": "williechen/rust_ai_ring",
+  "previous_repository": "williechen/rust_ai_chat",
+  "branch": "main",
+  "source_sha": "0b3e58440bf4b36a398e3698e352e69faf53cfa2",
+  "document_repository": "williechen/copilot_use",
+  "document_base_sha": "8c40a78091fd463c9ab9fb071f877ea1f097e73c",
+  "scope": "static source layout and documentation alignment only",
+  "workspaces": [
+    {
+      "directory": "chat_apps",
+      "manifest": "chat_apps/Cargo.toml",
+      "lockfile": "chat_apps/Cargo.lock",
+      "members": [
+        {
+          "directory": "chat_apps/chat_server",
+          "package": "chat-server",
+          "manifest": "chat_apps/chat_server/Cargo.toml",
+          "manifest_sha256": "4c6c74c8431696d17cc42f6e6aa2df802091ba1dd8129dd2f0f9ac13293c97e4",
+          "empty_library": false
+        },
+        {
+          "directory": "chat_apps/chat_application",
+          "package": "chat-application",
+          "manifest": "chat_apps/chat_application/Cargo.toml",
+          "manifest_sha256": "f3f7bf509bc01d5f1900686336def961c712b60db976c9627fddccae5a85adfb",
+          "empty_library": false
+        },
+        {
+          "directory": "chat_apps/chat_domain",
+          "package": "chat-domain",
+          "manifest": "chat_apps/chat_domain/Cargo.toml",
+          "manifest_sha256": "845e2c6d21feb9eccdbf60548669c7baa455a559b4d2b9853b199f2f6ea4a136",
+          "empty_library": false
+        },
+        {
+          "directory": "chat_apps/chat_persistence",
+          "package": "chat-persistence",
+          "manifest": "chat_apps/chat_persistence/Cargo.toml",
+          "manifest_sha256": "49e09c28737e97f64ee6d0a78496f7610cec797d34ac355819b51f37adbdf529",
+          "empty_library": false
+        },
+        {
+          "directory": "chat_apps/chat_ui",
+          "package": "chat-ui",
+          "manifest": "chat_apps/chat_ui/Cargo.toml",
+          "manifest_sha256": "83f9b6172b1a8c7c1fb65c938c86f1622d59da37e14f8db18b2a5c2efaba7ff5",
+          "empty_library": false
+        }
+      ]
+    },
+    {
+      "directory": "pet_apps",
+      "manifest": "pet_apps/Cargo.toml",
+      "lockfile": "pet_apps/Cargo.lock",
+      "members": [
+        {
+          "directory": "pet_apps/pet_server",
+          "package": "pet-server",
+          "manifest": "pet_apps/pet_server/Cargo.toml",
+          "manifest_sha256": "8dcf9a097e8e08335e3110df69b982bad188dae1bf00a131de61ba0091f303d3",
+          "empty_library": false
+        },
+        {
+          "directory": "pet_apps/pet_ui",
+          "package": "pet-ui",
+          "manifest": "pet_apps/pet_ui/Cargo.toml",
+          "manifest_sha256": "6c9b1e2b4c518c28467bc7b41d392d74aaf56bc21823c2dc2fe437f22b93f21d",
+          "empty_library": false
+        },
+        {
+          "directory": "pet_apps/pet_domain",
+          "package": "pet-domain",
+          "manifest": "pet_apps/pet_domain/Cargo.toml",
+          "manifest_sha256": "18b159f763532b13c1eec26e65ab4be1e0dda4c351e217b73fd2aa4bdc4a9a32",
+          "empty_library": false
+        },
+        {
+          "directory": "pet_apps/pet_application",
+          "package": "pet-application",
+          "manifest": "pet_apps/pet_application/Cargo.toml",
+          "manifest_sha256": "c33e8f93f92f6079e0e8b81098ff404f58c8ed9b600304c413de30cd1e7837c8",
+          "empty_library": true
+        },
+        {
+          "directory": "pet_apps/pet_persistence",
+          "package": "pet-persistence",
+          "manifest": "pet_apps/pet_persistence/Cargo.toml",
+          "manifest_sha256": "5f12c2a246563401f122cedfb178709e86c1bf7d4aa216b2cfee37ce665f34c2",
+          "empty_library": true
+        }
+      ]
+    },
+    {
+      "directory": "analytics_apps",
+      "manifest": "analytics_apps/Cargo.toml",
+      "lockfile": "analytics_apps/Cargo.lock",
+      "members": [
+        {
+          "directory": "analytics_apps/analytics_server",
+          "package": "analytics-server",
+          "manifest": "analytics_apps/analytics_server/Cargo.toml",
+          "manifest_sha256": "459cf9d902cd909d6011a7737d63cbefc5bf7e8f1c8cc2da650eb39fc3d99985",
+          "empty_library": false
+        },
+        {
+          "directory": "analytics_apps/analytics_persistence",
+          "package": "analytics-persistence",
+          "manifest": "analytics_apps/analytics_persistence/Cargo.toml",
+          "manifest_sha256": "b93c92d8a6e539c07afeb1382bd8ce4083c129553883ee3cdc4ea88770c7c005",
+          "empty_library": true
+        }
+      ]
+    },
+    {
+      "directory": "crates",
+      "manifest": "crates/Cargo.toml",
+      "lockfile": "crates/Cargo.lock",
+      "members": [
+        {
+          "directory": "crates/ai_core",
+          "package": "ai-core",
+          "manifest": "crates/ai_core/Cargo.toml",
+          "manifest_sha256": "8253f7e9d37b44b2d30a7949cdca7a3ad63eeaeb2f543d36f838d29c3b5e82dc",
+          "empty_library": false
+        },
+        {
+          "directory": "crates/shared",
+          "package": "shared",
+          "manifest": "crates/shared/Cargo.toml",
+          "manifest_sha256": "12ae15dab9c0bd8c1649e9afdfb135a3483910c9e93f39330569976936ab8c3b",
+          "empty_library": false
+        },
+        {
+          "directory": "crates/telemetry",
+          "package": "telemetry",
+          "manifest": "crates/telemetry/Cargo.toml",
+          "manifest_sha256": "af9e3f9bb8f18ba50d6cb14cb0dcf5cdb37abe2c16464b464c6be5dcbdf57963",
+          "empty_library": false
+        }
+      ]
+    }
+  ],
+  "legacy_path_mapping": {
+    "apps/server": "chat_apps/chat_server",
+    "crates/ui": "chat_apps/chat_ui",
+    "crates/chat_application": "chat_apps/chat_application",
+    "crates/chat_domain": "chat_apps/chat_domain",
+    "crates/persistence": "chat_apps/chat_persistence",
+    "apps/desktop_pet": "pet_apps/pet_server",
+    "apps/desktop_pet/frontend": "pet_apps/pet_ui",
+    "crates/pet_domain": "pet_apps/pet_domain",
+    "apps/stats_server": "analytics_apps/analytics_server",
+    "migrations": "chat_apps/migrations",
+    "apps/stats_server/migrations": "analytics_apps/migrations",
+    "apps/desktop_pet/migrations": "pet_apps/migrations",
+    "chat_apps/server": "chat_apps/chat_server",
+    "chat_apps/ui": "chat_apps/chat_ui",
+    "chat_apps/persistence": "chat_apps/chat_persistence",
+    "pet_apps/desktop_pet": "pet_apps/pet_server",
+    "pet_apps/frontend": "pet_apps/pet_ui",
+    "analytics_apps/stats_server": "analytics_apps/analytics_server"
+  },
+  "migration_directories": [
+    "chat_apps/migrations",
+    "pet_apps/migrations",
+    "analytics_apps/migrations"
+  ],
+  "new_placeholder_packages": [
+    "pet-application",
+    "pet-persistence",
+    "analytics-persistence"
+  ],
+  "validation_scope": "Manifest and path inspection; no runtime, DB, GUI or CI execution performed by this documentation update.",
+  "legacy_package_mapping": {
+    "server": "chat-server",
+    "ui": "chat-ui",
+    "persistence": "chat-persistence",
+    "stats-server": "analytics-server",
+    "desktop-pet": "pet-server",
+    "desktop-pet-frontend": "pet-ui"
+  }
+}

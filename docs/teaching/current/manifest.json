@@ -29,9 +29,9 @@
       "functional acceptance"
     ],
     "copilot_use_role": "requirements, rules, teaching documents, progress, indexes and delivery evidence only",
-    "program_repository": "williechen/rust_ai_chat",
+    "program_repository": "williechen/rust_ai_ring",
     "historical_program_records": "preserved for traceability only; not active tasks or acceptance gates",
-    "documentation_code_examples": "teaching content for rust_ai_chat; not a second product implementation",
+    "documentation_code_examples": "teaching content for rust_ai_ring; not a second product implementation",
     "execution_settings_changed": false
   },
   "requirements_policy": {
@@ -47,7 +47,7 @@
       "docs/requirements/AUTHENTICATION.md",
       "docs/UI_ALIGNMENT_REQUIREMENTS.md"
     ],
-    "implementation_evidence": "rust_ai_chat exact commit and actual validation evidence",
+    "implementation_evidence": "rust_ai_ring exact commit and actual validation evidence",
     "historical_records_are_not_current_policy": true
   },
   "scope": "Latest published teaching index; Day16 snapshot preserved in archive",
@@ -1354,5 +1354,15 @@
     "newly_completed": 3,
     "newly_moved": 0,
     "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3"
+  },
+  "current_source_layout": {
+    "repository": "williechen/rust_ai_ring",
+    "branch": "main",
+    "source_sha": "0b3e58440bf4b36a398e3698e352e69faf53cfa2",
+    "document": "docs/SOURCE_LAYOUT.md",
+    "manifest": "docs/source-review/rust-ai-ring-layout.json",
+    "observed_date": "2026-10-24",
+    "scope": "static_source_layout_only",
+    "future_teaching_requirement": "Adapt code paths, package/import names, dependencies, callers and tests to latest rust_ai_ring layout in subsequent lessons; preserve published lessons and existing progress."
   }
 }

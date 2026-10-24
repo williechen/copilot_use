@@ -1,11 +1,34 @@
-# 主體程式本地操作入口
+# rust_ai_ring 本地操作入口
 
-`copilot_use` 是規則、教學文章、next_day、manifest、交付讀回與歷史證據的正本；`rust_ai_chat` 是唯一程式、測試、CI 與功能驗收主體。
+本次命令依 `0b3e58440bf4b36a398e3698e352e69faf53cfa2` 的 manifests 與入口核對；每次操作及後續教學仍須取最新 main。目錄／package／import 對照見 [SOURCE_LAYOUT](SOURCE_LAYOUT.md)。本頁是操作文件，未在此次更新啟動服務。
 
-操作前讀取 [rust_ai_chat/main README](https://github.com/williechen/rust_ai_chat/blob/main/README.md)、當時的 Cargo.toml／Cargo.lock 與各 app 原始碼；以精確 SHA 決定 package、feature、路由、埠號、migration 及資料目錄，不從文件庫的舊腳本推導。
+本機程式目錄為 `/home/willie/Documents/rust_ai_ring`。在程式庫根目錄依 `.env.example` 設定本機 `.env`；Chat / Pet 使用 SQLite，Analytics 使用 PostgreSQL。資料庫 URL、tokens 與私有資料不放入文件或 Git，SQLite 採絕對路徑可避免因 workspace 切換而連到不同資料檔。
 
-本次靜態讀取 `f61ea1c59667f3c92c78e576e3c48038a8ce030a`：Chat 入口為 [apps/server/src/lib.rs](https://github.com/williechen/rust_ai_chat/blob/f61ea1c59667f3c92c78e576e3c48038a8ce030a/apps/server/src/lib.rs)，Analytics 為 [apps/stats_server/src/main.rs](https://github.com/williechen/rust_ai_chat/blob/f61ea1c59667f3c92c78e576e3c48038a8ce030a/apps/stats_server/src/main.rs)，Pet 為 [apps/desktop_pet](https://github.com/williechen/rust_ai_chat/blob/f61ea1c59667f3c92c78e576e3c48038a8ce030a/apps/desktop_pet/src/lib.rs)。這是來源定位，不是已啟動或驗收聲明；實際操作時仍重取最新程式。
+## Chat
 
-舊庫 local-services.py、day9-*、Chat 3001、token Dashboard 與 copilot-desktop-pet 安裝步驟不作 rust_ai_chat 啟動指令；[原文保留](teaching/history/evidence/2026-10-23-repository-roles/before/docs/LOCAL_START.md)。不因本次文件同步安裝、啟動、停止服務或操作現有 DB。
+```bash
+cd /home/willie/Documents/rust_ai_ring/chat_apps
+cargo leptos watch --cargo-locked
+```
 
-[驗收方式](LOCAL_VALIDATION.md) · [操作索引](DEPLOYMENT.md) · [分工同步範圍](REPOSITORY_ROLE_TRANSITION.md)
+package 為 chat-server / chat-ui；Leptos 輸出名稱仍為 rust_ai_chat。服務位址依目前來源為 http://127.0.0.1:3000，health endpoint 為 /health。
+
+## Pet
+
+```bash
+cd /home/willie/Documents/rust_ai_ring/pet_apps/pet_server
+NO_COLOR=true cargo tauri dev
+```
+
+Cargo package 為 pet-server，Rust import 為 pet_server。Tauri 從 ../pet_ui 啟動 Trunk，前端目錄為 pet_apps/pet_ui；本機 Trunk 如繼承 NO_COLOR=1，改用布林字串 true。資料、IPC 與視窗流程需另作真正 GUI 驗收。
+
+## Analytics
+
+```bash
+cd /home/willie/Documents/rust_ai_ring/analytics_apps
+cargo run --locked -p analytics-server
+```
+
+管理員初始化工具為 `cargo run --locked -p analytics-server --bin bootstrap_admin`；帳密初始化與服務驗收依當時來源核對。服務位址為 http://127.0.0.1:3100，health endpoint 為 /healthz。
+
+[驗證方式](LOCAL_VALIDATION.md) · [架構](SYSTEM_ARCHITECTURE.md) · [儲存庫分工](REPOSITORY_ROLE_TRANSITION.md)
