@@ -1,8 +1,10 @@
 # Analytics 現行教學入口
 
-[Day34：首次 admin/admin 初始化及強制改密碼銜接](../daily/day-34/analytics.md)
+[Day35 r2：事件類型精確統計 SQLx Adapter 與正式路由一併接通](../daily/day-35/analytics-r2.md)
 
-教學已交付並完成精確 commit 全文讀回；最新來源已見初始化／登入銜接；本次未執行 PostgreSQL／瀏覽器測試，功能未驗收。下一篇 Day35。
+**教學已交付／功能未驗收**：精確 commit 全文讀回；產品未套用，PostgreSQL／Rust／HTTP／Leptos／瀏覽器未當次測試。下一篇 **Day36**。r2 修正 r1 漏掉的 source_kind_summary #[cfg(test)] 與正式 Router 註冊，完整接回真實 caller；[r1 原文](../daily/day-35/analytics.md) 僅保留歷史，不照原樣套用。
+
+[Day35 r2 交付與讀回證據](../daily/day-35/analytics-r2-readback.json) · [上一篇 Day34](../daily/day-34/analytics.md)（首次 admin/admin 初始化與強制改密碼）。
 
 [首頁](../analytics/README.md) · [目前功能與驗證現況](STATUS.md) · [進度](../../learning-state.json) · [manifest](manifest.json) · [CI 補充與來源證據](../daily/day-34/source-snapshot.json)
 
