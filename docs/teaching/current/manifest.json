@@ -51,7 +51,7 @@
     "historical_records_are_not_current_policy": true
   },
   "scope": "Latest published teaching index; Day16 snapshot preserved in archive",
-  "revision": "day33-chat-r1",
+  "revision": "day33-pet-r1",
   "synced_date": "2026-10-24",
   "source_sha": "f3f8255b0b701a1b57cb8c0a1737c3caa4319f2d",
   "articles": [
@@ -797,12 +797,36 @@
       "next_day_before": 33,
       "next_day_after": 34,
       "remaining_gaps": "Chat歷史讀回/作者/逐房ACL/長連線撤銷與 Day25 FIFO 尚未驗收"
+    },
+    {
+      "repository": "williechen/copilot_use",
+      "branch": "main",
+      "project": "pet",
+      "day": 33,
+      "revision": "r1",
+      "parent": "700fe372770ed8c82b149df861e707f3e467838d",
+      "article_commit": "90bf9cd24dcdfdf630d0c59886830aaa264609f3",
+      "blob_sha": "d68a189bdffa242da9d96b2c62077dafd5ad54f7",
+      "sha256": "6e7c4f570386e13057133afd7b20642f51825050be7b9dbb065e26289904c248",
+      "bytes": 8865,
+      "full_text_verified": true,
+      "path": "docs/teaching/daily/day-33/pet.md",
+      "source_sha": "f3f8255b0b701a1b57cb8c0a1737c3caa4319f2d",
+      "rules_sha": "419e357989595184ce31a5ad062dfd78b35f19e7",
+      "rules_version": "daily-tdd-minimum-v1+github-only-v1",
+      "main_application": "not applied",
+      "tests": "not run",
+      "functional_acceptance": false,
+      "archived": false,
+      "next_day_before": 33,
+      "next_day_after": 34,
+      "remaining_gaps": "Pet GUI兩窗選取/重啟與 SQLite失敗注入、Day25 FIFO 尚未驗收"
     }
   ],
   "day15_frozen": true,
   "next_day": {
     "chat": 34,
-    "pet": 33,
+    "pet": 34,
     "analytics": 33
   },
   "day_advanced": true,
@@ -980,7 +1004,7 @@
     "frozen_body_sha256": "88fa706c5a3f7f3d6255957b8ed317d64cb1a6c57f1cf6638bfb838d5e6b282f",
     "frozen_notion_snapshot": "docs/teaching/archive/day-22/notion/pet.md"
   },
-  "latest_pet_publication": "docs/teaching/daily/day-32/pet-readback.json",
+  "latest_pet_publication": "docs/teaching/daily/day-33/pet-readback.json",
   "previous_day22_analytics_article": {
     "project": "analytics",
     "day": 22,
