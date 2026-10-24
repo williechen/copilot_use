@@ -27,6 +27,14 @@ P9 規則已廢除且與現況不同，不再作為產品目標、選題、待�
 - 若需要把現有 server 中的使用案例或 SQLx adapter 搬到 application / persistence，採一個最小可驗證切片，完整提供調整後程式、Cargo dependency、呼叫端與相應測試；不能只新增空 crate 或只改路徑就宣稱已完成分層。未涉及的層不必每日修改。
 - 已發布文章及其來源 SHA / commit / blob / SHA256 保留。改名與路徑銜接放在後續教學；發布前來源變動時重新核對尚未發布草稿。每案 next_day 只依即時狀態與正式交付證據推進，此次目錄整理不加 Day。
 
+### 後續調整的檢核與清理（2026-10-25）
+
+使用者最新要求：統整重複套用、未使用函式與測試、來源與建置產物分歧，供後續調整。完整項目與依賴集中於 [FUTURE_WORK 的後續調整](FUTURE_WORK.md)，不建立另一套平行工作清單、不固定排入歷史 Day。
+
+選題與 Green 前核對真實 caller、框架註冊、pub API、cfg/feature、WASM/JS 與測試用途；「未被主流程呼叫」「重複」「只有測試呼叫」不能直接當成可刪除。確認未使用者才在當次最小切片一併提供函式、imports、註冊與失效專用測試的清理；仍有效的斷言先遷至真實函式／HTTP／IPC／DB 路徑。已存在且接通的功能不重教，已套用與未驗收分別記錄。
+
+bootstrap::initialize 仍被整合測試 fixture 使用，不能因主啟動已用 ensure_default 就刪除；#[test] 等測試由框架收集。來源／dist 差異須核對實際重建產物，不能以來源測試通過冒充包內程式已更新。每篇只處理必要切片，無需每日全庫掃描或強制修改每層。依原儲存庫分工維持 rust_ai_ring 唯讀，產品由使用者套用；本次整理不新增 Day、不變更 FIFO 或全面比對時間。
+
 ## 每日 TDD 教學最小必要規則 v1
 
 規則版本：daily-tdd-minimum-v1（GitHub 交付政策 github-only-v1，2026-10-22）。GitHub <code>docs/COMMON_LEARNING_RULES.md</code> 是現行規則正本，唯一教學交付為 williechen/copilot_use 的 main 分支；不以舊對話或歷史決議覆蓋本版。規則／索引衝突須揭露並核對，不能默認已同步。

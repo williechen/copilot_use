@@ -3702,5 +3702,35 @@
     "product_modified": false,
     "progress_unchanged": true,
     "last_full_comparison_unchanged": true
+  },
+  "followup_adjustments": {
+    "date": "2026-10-25",
+    "source_repository": "williechen/rust_ai_ring",
+    "source_sha": "3236b94e95555c20e4709b5db40b0a8688b5762e",
+    "canonical": "docs/FUTURE_WORK.md",
+    "item_count": 13,
+    "items": [
+      "Chat-1:D01",
+      "Chat-2:unused-room-api",
+      "Chat-3:D06",
+      "Chat-4:D05,D07",
+      "Pet-1:D02",
+      "Pet-2:unused-bridge",
+      "Pet-3:D03",
+      "Pet-4:D08",
+      "Analytics-1:D09",
+      "Analytics-2:D04",
+      "Analytics-3:keep-fixture",
+      "Analytics-4:test-only-handlers",
+      "Analytics-5:stale-assertions"
+    ],
+    "status": "organized for subsequent minimal teaching slices; product changes not applied",
+    "rules": "docs/COMMON_LEARNING_RULES.md",
+    "baseline_document_commit": "51d888bcefe1d85e31f51aaac89c01a25536d07c",
+    "evidence": "docs/source-review/followup-adjustments-2026-10-25.json",
+    "next_day_unchanged": true,
+    "makeup_queue_unchanged": true,
+    "last_full_comparison_unchanged": true,
+    "product_repository_read_only": true
   }
 }

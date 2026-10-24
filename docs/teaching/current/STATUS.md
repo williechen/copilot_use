@@ -75,3 +75,5 @@
 
 
 本頁舊版與完整原始敘述可由 [原文件 commit](https://github.com/williechen/copilot_use/blob/e46733542aadb81f05f6bf1699cf899bcda405b7/docs/teaching/current/STATUS.md) 追溯；教學交付索引與產品驗收各自記錄。
+
+[後續調整統整](../../FUTURE_WORK.md) 已將未使用函式／測試、重複流程及產物分歧集中追蹤；本次只整理文件，未執行產品清理或新的功能驗收。

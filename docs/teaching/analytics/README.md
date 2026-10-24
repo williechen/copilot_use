@@ -1,7 +1,7 @@
 # Analytics 首頁
 
 <!-- duplicate-review:start -->
-[重複套用與來源／產物核對（2026-10-25）](../../source-review/2026-10-25-duplicate-application-review.md)：程式來源 `3236b94e`，核對與產品驗收分開記錄。
+[後續調整清單（13 項）](../../FUTURE_WORK.md) · [原始核對報告](../../source-review/2026-10-25-duplicate-application-review.md)。可清除、先遷測試與保留項目分別列明，產品套用／驗收另記。
 <!-- duplicate-review:end -->
 
 <!-- daily-delivery:start -->

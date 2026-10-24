@@ -8,13 +8,47 @@
 
 P9 規則已廢除。本清單中僅源自舊規則、尚未依最新需求確認的項目只作候選，不自動作必做功能或驗收門檻。已確認的開發項目在原項目記錄可驗證功能條件、SHA／測試／CI／套用與驗收證據，未核實者保留未完成。跨階段工作留原功能項目追蹤；舊 Day 更正僅於下一個 Day 的 Refactor 後獨立補加，不回填原 Day，不另開重複項目；完成後可退出活動清單，但原識別與證據須可追溯。學習階段不代表產品功能已驗收。
 
-## 重複套用核對與既有功能缺口（2026-10-25）
+## 後續調整：重複與未使用程式、測試及產物（2026-10-25）
 
-[精確來源核對報告](source-review/2026-10-25-duplicate-application-review.md) 綁定 rust_ai_ring `3236b94e95555c20e4709b5db40b0a8688b5762e`。下列是既有功能項的證據補充，不重建每日 Day 或第二份產品待辦：Chat 兩份登入表單、舊刷新 helper、共用認證重複規則；Pet 新舊狀態通道及來源／tracked dist 分歧；Analytics 舊登入碼後台殘留與未接線範本。細節及處理邊界見 D01–D09。
+本節統整本輪全部核對與使用者「檢核清除不使用函式與測試」的要求，作為後續調整單一清單。程式基準為 `williechen/rust_ai_ring/main@3236b94e95555c20e4709b5db40b0a8688b5762e`；每次動手前重讀最新來源與 caller，不固定套用此 SHA。證據仍見 [重複套用報告 D01–D09](source-review/2026-10-25-duplicate-application-review.md)；本節補足未使用判定與測試保留條件，不覆寫原報告或已發教學。
 
-Pet 名稱規則已在 pet-application，Tauri 與 PetStore 共用，不能再列為空 library；pet-persistence 仍未承接 Adapter。Analytics ensure_default 已接 startup/CLI，不能再說缺初始化 caller；其正式帳密流程仍待本次 DB／GUI 驗收，舊 admin::build 不在當前 main 路徑。新 Analytics application/domain/ui 目前只有 add 範本，不能宣稱已分層完成。
+目前只完成檢核／整理，以下程式清理均未由本次任務套用；已有來源實作的 Pet 名稱規則、Analytics ensure_default 不重教。Chat 既有 r2 優先銜接，後續由各案即時 next_day 選一個最小切片，仍依 Chat→Pet→Analytics 交付，不預排 Day，不要求每日改完所有項目。各項完成須附實際變更 SHA、caller／註冊與相應測試證據。
 
-本次來源 bridge 六個 Node 契約測試通過，tracked dist 同三個契約測試二個失敗；未執行產品 Rust／DB／GUI 驗收。產品去重與產物重建尚未由本次任務套用，原功能 checkbox 不因報告發布而勾選完成；last_full_comparison 不變。
+### 清理順序與保留條件
+
+同案先處理使用者可見流程與來源／產物一致性，再做無呼叫者清理及必要分層。下表順序是功能依賴與優先序，並非每日排程或新增一套待辦編號；原有 D01–D09 與既有功能項持續追蹤。
+
+| 專案／順序 | 後續調整與位置 | 清除／保留判準 | 必要驗證與目前狀態 |
+| --- | --- | --- | --- |
+| Chat 1／D01 | 沿 [Day34 r2](teaching/daily/day-34/chat-r2.md) 合併登入頁；保留 SignInPage，GET /login 導向 /signin，移除 login.rs 與多餘模組／舊頁面測試 | 兩個頁面皆有 caller，屬功能合併；不能冒稱為無用函式直接刪除。POST /login 保留 | redirect、唯一表單、登入／Session／SQLite、SSR/hydration 與瀏覽器回歸；修正尚未套入來源 |
+| Chat 2／未使用函式 | 移除 chat_ui/src/room_api.rs 的 create_room 及僅供它使用的 CreateRoomRequest/CreateRoomResponse、JsValue、Request/RequestInit/RequestMode imports | 私有 room_api 模組內未找到此函式 caller；保留 list_rooms/search_rooms 與 server JSON API、個人頁建房流程 | WASM check、房間查詢／重新整理及個人頁建房；待清理 |
+| Chat 3／D06 | 將 refreshed_room_list 的舊測試轉至 RoomList 實際呼叫的 refresh_result_view，再移除舊 helper | 保留空結果、失敗保留清單／搜尋字、成功清除搜尋與重試條件；不直接刪掉回歸斷言 | 測真正 helper 及 RoomList，SSR／WASM 與瀏覽器回歸；待遷移 |
+| Chat 4／D05、D07 | 共用 Cookie／token_digest 與建房名稱規則；signin/signup/JSON／表單 caller 同步 | shared::auth 已存在，不再新增另一份 helper；保留各 transport 的 JSON/HTML、400/422、CSRF 與原交易 | 登入／登出／註冊撤銷、建房邊界／DB 測試；接回既有共用認證 FIFO，不另增或提前結案 |
+| Pet 1／D02 | 以 pet_ui/index.html 為 bridge 編輯正本，重建並核對 tracked dist、WASM／JS 與 Tauri 實際產物 | source/dist 是正常建置關係；處理版本分歧，不手改兩份程式。正常 beforeBuildCommand 應重建，但不得假設實際 binary 已更新 | source 六個 Node 測試已過；tracked dist 同三測試二敗。新產物須重跑同契約與原生 GUI，待修 |
+| Pet 2／未使用宣告 | 清除 pet_ui/src/bridge.rs 的 validate_new_pet_name_js extern 宣告 | 未找到 Rust wrapper/caller，現行 index.html 也未提供 validateNewPetName；不因此刪掉 PetStore 的必要名稱驗證 | WASM check、建立寵物的非法名稱不寫 DB／合法名稱儲存；待清理 |
+| Pet 3／D03 | 盤點舊 get_pet_state/send_pet_command、global Mutex<PetMachine>、pet://state-changed、舊選單分支及 public 原型 | 舊 IPC 仍在 generate_handler 註冊，不是零入口。確認現行／相容客戶端後才連同註冊、state、舊資產與專屬測試清理；新逐 ID Runtime 保留 | 三個不同 ID 的狀態／事件、互動與選單、回籠／重開／重啟，依原 GUI 項目驗證；待核對／清理 |
+| Pet 4／D08 | 移除掃描 handler 內多餘 reset／loading setter | 每次 await／過時 generation 早退仍須正確釋放 busy，不刪除唯一必要清理；未證實有雙重 scan invoke | 預覽成功／失敗／取消／過時回應與重新點選；待清理 |
+| Analytics 1／D09 | 清除 analytics_application/domain/ui 中三份 add 函式與 it_works 範本測試 | 三檔是預設範本，未接業務 caller；保留已有 workspace/package，無必要不新增分層骨架，也不將空 library 當功能完成 | Cargo metadata／workspace check；待清理 |
+| Analytics 2／D04 | 盤點並淘汰舊 admin.rs 登入碼／memory Session 後台與其專屬測試、Config／模組出口 | main/build_app 目前採 password_login::build；確認無相容 caller 再移除舊公開 API，不刪除正式帳密／Session／PostgreSQL 測試 | 正式登入／首次改密碼／後台／登出與 Session 撤銷；角色／來源 ACL 原缺口保留，待核對／清理 |
+| Analytics 3／測試 fixture | 保留 bootstrap::initialize；僅在 fixture 完整遷移後評估縮為測試支援或移除 | day23_password_login、day24_password_change、day25_repeat_password_change、day26_session_contract、day27_dashboard_source 等整合測試仍直接使用；不能因 main 不呼叫就刪掉 | 原測試的自訂初始密碼、重複初始化／hash 保留、Session／Email／權限條件均須保留；目前保留 |
+| Analytics 4／測試用舊 handler | 檢核 lib.rs 的 cfg(test) source_summary/source_kind_summary 與所屬測試 | 只供測試的函式不自動等於無用。純 SQL 聚合斷言可遷至 pg_store；授權斷言應落到 password_login 的真正 HTTP/Session 路徑，完成映射後才刪舊測試 handler | 來源隔離、類型篩選、commit/rollback、空結果／schema 契約須仍有驗證；待映射 |
+| Analytics 5／過時斷言 | 檢核舊 Dashboard 測試仍期待「Pet 已提交事件總數 2」等舊標籤 | 現行標籤已改為「Pet 全部事件類型：2 筆已提交事件」；應更新語意斷言與 source links／escaping 驗證，不以刪測試掩蓋失敗 | SSR 與完整 postgres-integration targets／全新建庫流程；未在本輪重跑 |
+
+### 每項調整的最小交付
+
+1. 在最新精確 SHA 查清 Rust caller、mod/pub export、Axum route、Tauri generate_handler／menu、WASM/JS bridge、cfg/feature、測試與 CI 入口；跨 workspace 和 tracked dist 也需查看。搜尋不到一般函式呼叫不等於沒有框架或外部入口。
+2. 確認可刪才一併清掉函式、專用 imports/dependencies/features、註冊、已失效的獨占測試或範本。有效回歸測試先遷到真實 caller；每個被移除測試要能說明驗證條件已由何處保留，或其測試目標確實已淘汰。
+3. 完整提供當次最小 Green 的新增／修改／刪除／必要搬移、Cargo/lock、imports、caller 與測試；重用已存在實作。從對應 workspace 驗證 native／WASM、HTTP/IPC、DB/GUI；未執行項目明記。
+4. 教學發布與產品套用／驗收分開；未有實測證據不標完成。保留原篇、來源 SHA、commit/blob/SHA256；修訂、清理檢核與本次整理不加 Day、不結案 FIFO、不更新 last_full_comparison。
+
+### 明確保留與不誤刪範圍
+
+- Rust #[test]/#[tokio::test]/#[sqlx::test] 由測試框架收集；是否執行也受 cfg/feature/target 影響，沒有一般 caller 不是刪除理由。
+- bootstrap::initialize 與整合測試 fixture 有真實用途；主啟動／CLI 使用 ensure_default 亦已接通，兩種入口用途分開記錄，不重教初始化。
+- Pet application 的名稱規則已由 Tauri/PetStore 共用，保留該規則及非法輸入的 DB 回歸；server/bridge 傳輸 DTO 相似也不能當成重複寫入。
+- 各產品 SQLite／PostgreSQL、Session／Cookie、migration 維持獨立；四個 workspace 的 manifest/lock/toolchain 依原架構保留。
+- cfg(unix)/cfg(not(unix)) 的互斥平台函式、真實 JSON/HTML 操作入口、Query／Ingest 不因函式名稱或資料形狀相似而刪除。
+- 本清單沒有授權直接改寫 rust_ai_ring/main；維持先前分工，產品調整由後續教學與使用者套用。本次只向 copilot_use/main 整理規則、缺口與入口。
 
 ## 新目錄銜接的後續教學要求
 

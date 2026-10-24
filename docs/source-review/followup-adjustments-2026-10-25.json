@@ -1,0 +1,119 @@
+{
+  "repository": "williechen/copilot_use",
+  "branch": "main",
+  "expected_parent_sha": "51d888bcefe1d85e31f51aaac89c01a25536d07c",
+  "source_sha": "3236b94e95555c20e4709b5db40b0a8688b5762e",
+  "canonical": "docs/FUTURE_WORK.md",
+  "items": [
+    "Chat-1:D01",
+    "Chat-2:unused-room-api",
+    "Chat-3:D06",
+    "Chat-4:D05,D07",
+    "Pet-1:D02",
+    "Pet-2:unused-bridge",
+    "Pet-3:D03",
+    "Pet-4:D08",
+    "Analytics-1:D09",
+    "Analytics-2:D04",
+    "Analytics-3:keep-fixture",
+    "Analytics-4:test-only-handlers",
+    "Analytics-5:stale-assertions"
+  ],
+  "item_count": 13,
+  "write_paths": [
+    "docs/FUTURE_WORK.md",
+    "docs/COMMON_LEARNING_RULES.md",
+    "docs/learning-state.json",
+    "docs/teaching/current/manifest.json",
+    "README.md",
+    "docs/README.md",
+    "docs/teaching/README.md",
+    "docs/teaching/daily/README.md",
+    "docs/teaching/chat/README.md",
+    "docs/teaching/pet/README.md",
+    "docs/teaching/analytics/README.md",
+    "docs/teaching/current/CHAT_ENTRY.md",
+    "docs/teaching/current/PET_ENTRY.md",
+    "docs/teaching/current/ANALYTICS_ENTRY.md",
+    "docs/teaching/current/STATUS.md"
+  ],
+  "read_inputs": [
+    {
+      "path": "docs/FUTURE_WORK.md",
+      "blob_sha": "311c7785dd9376e8be71c2208cf42bcf7b40dff8"
+    },
+    {
+      "path": "docs/COMMON_LEARNING_RULES.md",
+      "blob_sha": "b5ca6059f1d14f5d358542a690e2efab1ad94d04"
+    },
+    {
+      "path": "docs/learning-state.json",
+      "blob_sha": "397b0e23fa3990a0c66e8c847a4a238b86f38545"
+    },
+    {
+      "path": "docs/teaching/current/manifest.json",
+      "blob_sha": "78228a75785e4730c5bcadd0ffff3e3757612258"
+    },
+    {
+      "path": "docs/teaching/current/STATUS.md",
+      "blob_sha": "09dad3656a1b653ba911df759345deb2e2118252"
+    },
+    {
+      "path": "README.md",
+      "blob_sha": "0d2348ae4982644c3c3a3c312b1d9915ad507028"
+    },
+    {
+      "path": "docs/README.md",
+      "blob_sha": "db9b05ac4db5f7f821b5d96e5baeca81870a6775"
+    },
+    {
+      "path": "docs/teaching/README.md",
+      "blob_sha": "791531b9f23499c7d2cf7b1c21bd8dfea83940b1"
+    },
+    {
+      "path": "docs/teaching/daily/README.md",
+      "blob_sha": "b632e89ddcf2e671f76fa8e44f2e9bd428c02a60"
+    },
+    {
+      "path": "docs/teaching/chat/README.md",
+      "blob_sha": "6c2e7fb0e1c893fb67a2f17ba901cd1c3d9ec26f"
+    },
+    {
+      "path": "docs/teaching/pet/README.md",
+      "blob_sha": "e00409988ffcc4437d6c4ee93318d0e2c41368d4"
+    },
+    {
+      "path": "docs/teaching/analytics/README.md",
+      "blob_sha": "3cb58107580188c04e480b680b930cca732aae7c"
+    },
+    {
+      "path": "docs/teaching/current/CHAT_ENTRY.md",
+      "blob_sha": "996b4f0941db67b6a47a28801e9007ce7d50287d"
+    },
+    {
+      "path": "docs/teaching/current/PET_ENTRY.md",
+      "blob_sha": "1632ea9954f8d550a63aaed9a5c08c924b639f9c"
+    },
+    {
+      "path": "docs/teaching/current/ANALYTICS_ENTRY.md",
+      "blob_sha": "bbfef8fb321560f83123df0aead79651fd958813"
+    }
+  ],
+  "next_day_before": {
+    "chat": 35,
+    "pet": 35,
+    "analytics": 35
+  },
+  "next_day_after": {
+    "chat": 35,
+    "pet": 35,
+    "analytics": 35
+  },
+  "last_full_comparison_before": "2026-10-16T22:47:14.399027+08:00",
+  "last_full_comparison_after": "2026-10-16T22:47:14.399027+08:00",
+  "makeup_queue_changed": false,
+  "product_modified": false,
+  "new_tests_executed": false,
+  "scope": "documentation consolidation; not a new teaching Day or source acceptance",
+  "raw_error": null
+}
