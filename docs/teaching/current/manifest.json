@@ -51,7 +51,7 @@
     "historical_records_are_not_current_policy": true
   },
   "scope": "Latest published teaching index; Day16 snapshot preserved in archive",
-  "revision": "day33-pet-r1",
+  "revision": "day33-analytics-r1",
   "synced_date": "2026-10-24",
   "source_sha": "f3f8255b0b701a1b57cb8c0a1737c3caa4319f2d",
   "articles": [
@@ -821,13 +821,37 @@
       "next_day_before": 33,
       "next_day_after": 34,
       "remaining_gaps": "Pet GUI兩窗選取/重啟與 SQLite失敗注入、Day25 FIFO 尚未驗收"
+    },
+    {
+      "repository": "williechen/copilot_use",
+      "branch": "main",
+      "project": "analytics",
+      "day": 33,
+      "revision": "r1",
+      "parent": "ea4d8bdd8c9b6a88beacc6cd8eda018430437903",
+      "article_commit": "419d753aecede146f15ed1cff3502bbebed9c24d",
+      "blob_sha": "49d164c77149c9978ccb8cadd68cd8660f4b2d73",
+      "sha256": "3fa99745e6362c90cf000a68e763fa68567262dc2205a9f3f03dc25f3f8745a1",
+      "bytes": 8350,
+      "full_text_verified": true,
+      "path": "docs/teaching/daily/day-33/analytics.md",
+      "source_sha": "f3f8255b0b701a1b57cb8c0a1737c3caa4319f2d",
+      "rules_sha": "419e357989595184ce31a5ad062dfd78b35f19e7",
+      "rules_version": "daily-tdd-minimum-v1+github-only-v1",
+      "main_application": "not applied",
+      "tests": "not run",
+      "functional_acceptance": false,
+      "archived": false,
+      "next_day_before": 33,
+      "next_day_after": 34,
+      "remaining_gaps": "Analytics 管理員初始化/角色來源ACL/SSE/明細與新標示瀏覽器驗收未完成"
     }
   ],
   "day15_frozen": true,
   "next_day": {
     "chat": 34,
     "pet": 34,
-    "analytics": 33
+    "analytics": 34
   },
   "day_advanced": true,
   "reference_modified": false,
@@ -1039,7 +1063,7 @@
     "frozen_body_sha256": "ae01b5aee1d29eec4a60a8ae8800e1a07ab8c9e7a838c4fa1ed17bfedc9069d1",
     "frozen_notion_snapshot": "docs/teaching/archive/day-22/notion/analytics.md"
   },
-  "latest_analytics_publication": "docs/teaching/daily/day-32/analytics-readback.json",
+  "latest_analytics_publication": "docs/teaching/daily/day-33/analytics-readback.json",
   "day23_archive": "docs/teaching/archive/day-23/manifest.json",
   "previous_day23_chat_article": {
     "project": "chat",
