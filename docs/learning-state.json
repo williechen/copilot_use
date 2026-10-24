@@ -3674,5 +3674,33 @@
     "expected_state_parent_sha": "7a3400259b59cf617d6c3c721bfc10d1014542b0",
     "raw_error": null
   },
-  "latest_chat_publication": "docs/teaching/daily/day-34/chat-r2-readback.json"
+  "latest_chat_publication": "docs/teaching/daily/day-34/chat-r2-readback.json",
+  "duplicate_application_review": {
+    "date": "2026-10-25",
+    "source_repository": "williechen/rust_ai_ring",
+    "source_sha": "3236b94e95555c20e4709b5db40b0a8688b5762e",
+    "report": "docs/source-review/2026-10-25-duplicate-application-review.md",
+    "report_commit": "521b294cddf33196c15befebddda2ef6146e4f85",
+    "report_blob_sha": "39106d099934f1dee67e1f1210ce95dbd49fbef1",
+    "report_sha256": "149bd063d3f60fe97123e802ae7222a8944925758dc025fa860514f3b20625ca",
+    "full_text_verified": true,
+    "readback_at": "2026-10-24T20:31:07.326Z",
+    "findings": 9,
+    "status": "confirmed duplicates and legacy paths; code corrections not applied by this task",
+    "node_source_result": {
+      "tested_source_sha": "ff89918df8e6da0480308497abc81ba5188703c9",
+      "passed": 6,
+      "failed": 0,
+      "pet_files_unchanged_in_latest": true
+    },
+    "node_tracked_dist_result": {
+      "passed": 1,
+      "failed": 2,
+      "exit_code": 1
+    },
+    "rust_db_gui": "not run",
+    "product_modified": false,
+    "progress_unchanged": true,
+    "last_full_comparison_unchanged": true
+  }
 }

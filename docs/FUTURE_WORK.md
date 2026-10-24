@@ -8,9 +8,17 @@
 
 P9 規則已廢除。本清單中僅源自舊規則、尚未依最新需求確認的項目只作候選，不自動作必做功能或驗收門檻。已確認的開發項目在原項目記錄可驗證功能條件、SHA／測試／CI／套用與驗收證據，未核實者保留未完成。跨階段工作留原功能項目追蹤；舊 Day 更正僅於下一個 Day 的 Refactor 後獨立補加，不回填原 Day，不另開重複項目；完成後可退出活動清單，但原識別與證據須可追溯。學習階段不代表產品功能已驗收。
 
+## 重複套用核對與既有功能缺口（2026-10-25）
+
+[精確來源核對報告](source-review/2026-10-25-duplicate-application-review.md) 綁定 rust_ai_ring `3236b94e95555c20e4709b5db40b0a8688b5762e`。下列是既有功能項的證據補充，不重建每日 Day 或第二份產品待辦：Chat 兩份登入表單、舊刷新 helper、共用認證重複規則；Pet 新舊狀態通道及來源／tracked dist 分歧；Analytics 舊登入碼後台殘留與未接線範本。細節及處理邊界見 D01–D09。
+
+Pet 名稱規則已在 pet-application，Tauri 與 PetStore 共用，不能再列為空 library；pet-persistence 仍未承接 Adapter。Analytics ensure_default 已接 startup/CLI，不能再說缺初始化 caller；其正式帳密流程仍待本次 DB／GUI 驗收，舊 admin::build 不在當前 main 路徑。新 Analytics application/domain/ui 目前只有 add 範本，不能宣稱已分層完成。
+
+本次來源 bridge 六個 Node 契約測試通過，tracked dist 同三個契約測試二個失敗；未執行產品 Rust／DB／GUI 驗收。產品去重與產物重建尚未由本次任務套用，原功能 checkbox 不因報告發布而勾選完成；last_full_comparison 不變。
+
 ## 新目錄銜接的後續教學要求
 
-- [ ] 每次後續教學依 rust_ai_ring 最新目錄提供必要的程式調整；依實際情況同步檔案搬移、Cargo dependency / feature、Rust imports、呼叫端與測試。新 application / persistence 目前僅為空 library，需真正接線與驗證才記完成。
+- [ ] 每次後續教學依 rust_ai_ring 最新目錄提供必要的程式調整；依實際情況同步檔案搬移、Cargo dependency / feature、Rust imports、呼叫端與測試。application / persistence 依本次來源核對接線；未接通的 library 不因目錄存在記為完成，已接通的 Pet 名稱規則不重做。
 - [ ] 發布前核對最新來源與尚未發布草稿，保留已發布文章及歷史證據；不因更名額外新增 Day，也不在 copilot_use 建立平行產品。
 
 ## 清單使用方式

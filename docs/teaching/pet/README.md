@@ -1,5 +1,9 @@
 # Pet 首頁
 
+<!-- duplicate-review:start -->
+[重複套用與來源／產物核對（2026-10-25）](../../source-review/2026-10-25-duplicate-application-review.md)：程式來源 `3236b94e`，核對與產品驗收分開記錄。
+<!-- duplicate-review:end -->
+
 <!-- daily-delivery:start -->
 ## 最新交付與下一篇
 
