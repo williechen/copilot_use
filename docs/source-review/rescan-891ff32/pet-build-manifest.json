@@ -1,0 +1,33 @@
+{
+  "source_sha": "891ff32ae29e1588dc40027cd5c9c99ca91d2378",
+  "profile": "debug",
+  "build_command": "env NO_COLOR=true trunk build --locked",
+  "build_exit": 0,
+  "contract_tests": {
+    "passed": 6,
+    "failed": 0,
+    "method": "Unmodified assertions from four tracked mjs files; HTML URL replaced with newly built dist/index.html"
+  },
+  "files": [
+    {
+      "path": "pet_apps/pet_ui/dist/index.html",
+      "bytes": 4386,
+      "sha256": "14496a2bd0351d60df6a26b89eb86842e46e6d836fd4e1c53ca271c9a7b724bc"
+    },
+    {
+      "path": "pet_apps/pet_ui/dist/pet-ui-362b2fb0a680bbfe.js",
+      "bytes": 43463,
+      "sha256": "e43bc546f3a44f3ef924fc460ac7c1292eaf752462db6d499e1f40a233448cf5"
+    },
+    {
+      "path": "pet_apps/pet_ui/dist/pet-ui-362b2fb0a680bbfe_bg.wasm",
+      "bytes": 7545859,
+      "sha256": "a50775ad6c3796112cb9286b4c3b5476adc8a2bca187a4c8b17a891b436996ca"
+    },
+    {
+      "path": "pet_apps/pet_ui/dist/style-efdbc821b0786fd8.css",
+      "bytes": 4150,
+      "sha256": "13cd5bcea6f883021bbb67cdec49bf93e559dea8619606ad94956485b0637f4d"
+    }
+  ]
+}

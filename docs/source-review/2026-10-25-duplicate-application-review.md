@@ -1,5 +1,8 @@
 # 三案重複套用與殘留程式核對
 
+> 歷史報告：下文保留原 `3236b94e` 核對與測試結果。最新 `891ff32` 已套用 Chat r2，且移除 Pet 舊 tracked dist／public 原型；Chat 定向測試及新 Pet debug 產物契約已通過。後端 legacy 清理與 Analytics 兩個舊文案斷言失敗仍待處理。請先讀 [最新專案重掃](2026-10-25-project-rescan.md) 與 [後續調整清單](../FUTURE_WORK.md)。
+
+
 核對日期：2026-10-25（Asia/Taipei）。程式來源：`williechen/rust_ai_ring/main@3236b94e95555c20e4709b5db40b0a8688b5762e`；文件基準：`williechen/copilot_use/main@9650b170218dc115f33aca5f7603ee353cace1ab`。產品程式與 README 均未修改。
 
 ## 結果
