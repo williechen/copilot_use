@@ -1,12 +1,24 @@
 # 每日新文章
 
+<!-- daily-delivery:start -->
+## 最新交付與下一篇
+
+| 專案 | 最新文章 | 下一篇 | 狀態 |
+| --- | --- | --- | --- |
+| Chat | [Day34：帳密登入頁採 Leptos 並補齊可存取表單](day-34/chat.md) | Day35 | 教學已交付／功能未驗收 |
+| Pet | [Day33：生活窗控制台按鈕選取來源寵物](day-33/pet.md) | Day34 | 教學已交付／功能未驗收 |
+| Analytics | [Day33：Dashboard 數量標示](day-33/analytics.md) | Day34 | 教學已交付／功能未驗收 |
+
+來源、套用及測試證據各自記錄；文章發布不代表產品驗收。
+<!-- daily-delivery:end -->
+
 2026-10-24 目錄已同步至 [williechen/rust_ai_ring](https://github.com/williechen/rust_ai_ring)：保留 `chat_apps`、`pet_apps`、`analytics_apps`、`crates` 四個 workspace；[新目錄與套件對照](../../SOURCE_LAYOUT.md)。後續教學依當次來源 SHA 調整程式、Cargo、imports、呼叫端與測試。
 
 [共用文章](../../COMMON_LEARNING_RULES.md) · [Chat 首頁](../chat/README.md) · [Pet 首頁](../pet/README.md) · [Analytics 首頁](../analytics/README.md) · [目前進度](../current/STATUS.md)
 
 **必要 Gate 2 驗證通過後，正文原樣移至 `../archived/day-NN/{project}.md`。** 本目錄只追蹤尚待驗收或勘誤的教學；舊有 `history` 已封存文章與證據保留原位，不批次重寫。
 
-## 最新發布（三專案 Day33）
+## 先前交付快照（三專案 Day33）
 
 [Analytics Day33：Dashboard 數量標示區分全部與精確篩選](day-33/analytics.md)（教學已發布；程式未套用、測試未執行、功能未驗收；下一篇 Day34）。
 
@@ -22,7 +34,7 @@
 | Pet | [Day32：右鍵開啟控制窗並選取對應寵物](day-32/pet.md) | 教學已交付；後續主體程式驗證另見目前進度，完整功能仍未驗收 |
 | Analytics | [Day32：Dashboard 事件類型篩選](day-32/analytics.md) | 教學已交付；後續主體程式驗證另見目前進度，完整功能仍未驗收 |
 
-本表保留 Day32 發布時的狀態；Day33 已發布，目前下一篇均為 Day34；以 [learning-state](../../learning-state.json) 為準。
+本表保留 Day32 發布時的狀態；最新交付與下一篇以本頁頂端各案清單為準；以 [learning-state](../../learning-state.json) 為準。
 
 ## 尚待完成
 

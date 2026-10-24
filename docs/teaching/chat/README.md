@@ -1,5 +1,17 @@
 # Chat 首頁
 
+<!-- daily-delivery:start -->
+## 最新交付與下一篇
+
+| 專案 | 最新文章 | 下一篇 | 狀態 |
+| --- | --- | --- | --- |
+| Chat | [Day34：帳密登入頁採 Leptos 並補齊可存取表單](../daily/day-34/chat.md) | Day35 | 教學已交付／功能未驗收 |
+| Pet | [Day33：生活窗控制台按鈕選取來源寵物](../daily/day-33/pet.md) | Day34 | 教學已交付／功能未驗收 |
+| Analytics | [Day33：Dashboard 數量標示](../daily/day-33/analytics.md) | Day34 | 教學已交付／功能未驗收 |
+
+來源、套用及測試證據各自記錄；文章發布不代表產品驗收。
+<!-- daily-delivery:end -->
+
 2026-10-24 目錄已同步至 [williechen/rust_ai_ring](https://github.com/williechen/rust_ai_ring)：保留 `chat_apps`、`pet_apps`、`analytics_apps`、`crates` 四個 workspace；[新目錄與套件對照](../../SOURCE_LAYOUT.md)。後續教學依當次來源 SHA 調整程式、Cargo、imports、呼叫端與測試。
 
 [共用文章](../../COMMON_LEARNING_RULES.md) · [三專案首頁](../README.md)
@@ -63,10 +75,10 @@
 [Day31教學：個人頁建房](../daily/day-31/chat.md)（個人頁建房切片已套用並通過本輪瀏覽器操作；整體驗證仍未全部通過。）
 
 
-## 最新教學（Day32）
+## 先前教學（Day32）
 
-[Day32：聊天室歷史載入狀態](../daily/day-32/chat.md)（程式已套用，SSR與本輪瀏覽器顯示已驗證；歷史功能仍未接通；完整產品驗收仍未完成）。此段保留 Day32 當時的進度；Day33 已發布，最新下一篇 Day34，以 [即時進度檔](../../learning-state.json) 為準；Day31 與歷史驗證證據保留。
+[Day32：聊天室歷史載入狀態](../daily/day-32/chat.md)（程式已套用，SSR與本輪瀏覽器顯示已驗證；歷史功能仍未接通；完整產品驗收仍未完成）。此段保留 Day32 當時的進度；最新交付與下一篇見頁首各案清單，以 [即時進度檔](../../learning-state.json) 為準；Day31 與歷史驗證證據保留。
 
-## 最新教學（Day33）
+## 先前教學（Day33）
 
-[Day33：房間搜尋結果與尚未載入狀態](../daily/day-33/chat.md)（[版本補核](../daily/day-33/chat-version-verification.md)；教學已交付，程式未套用、測試未執行、功能未驗收）。下一篇 Day34，以 [即時進度檔](../../learning-state.json) 為準。
+[Day33：房間搜尋結果與尚未載入狀態](../daily/day-33/chat.md)（[版本補核](../daily/day-33/chat-version-verification.md)；教學已交付，程式未套用、測試未執行、功能未驗收）。當時下一篇為 Day34；目前以 [即時進度檔](../../learning-state.json) 為準。

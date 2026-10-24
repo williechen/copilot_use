@@ -1,0 +1,1585 @@
+{
+  "repository": "williechen/rust_ai_ring",
+  "branch": "main",
+  "source_sha": "54f5d80a5678e68e164d56e6d9f11c57cdff1f36",
+  "read_at": "2026-10-24T19:38:22.524362+00:00",
+  "scope": "daily source/manifest/lock and teaching slice review; not full comparison",
+  "workspaces": [
+    {
+      "path": "chat_apps/Cargo.toml",
+      "blob_sha": "b0ecb60bd9d3af80d872a927a1ac343e7f7e6890",
+      "sha256": "7cc618535fe195e79bf426c2337171ec8e36474846ee8b2ddde5a31980403557"
+    },
+    {
+      "path": "chat_apps/Cargo.lock",
+      "blob_sha": "6d69eec0f91d474f4b72087c281319c584ef3101",
+      "sha256": "9e09192e124e90b5c776b7c2fc522698a488f927e9d934d68b4806d5dd89b6d8"
+    },
+    {
+      "path": "pet_apps/Cargo.toml",
+      "blob_sha": "7eeaad0ba65108b4dbda4046ef476061222a2f33",
+      "sha256": "c89171acb9b8043f7c69828422b22623bc7cd22242b7dd7105640ce302848a40"
+    },
+    {
+      "path": "pet_apps/Cargo.lock",
+      "blob_sha": "39013c4720e4a192f35ea8dae554c210e8015f55",
+      "sha256": "f4e2311d100066f81fe78a93477c82cd9b71cebde4a947c84ea3f84cb0b30d3d"
+    },
+    {
+      "path": "analytics_apps/Cargo.toml",
+      "blob_sha": "88dea68acb7e1caf26b6f081b1d3d5a153d1c67c",
+      "sha256": "cbccee107b4adb1aa1eef6035a615c4a3ba1ed954a9a4baef7002a813f05091e"
+    },
+    {
+      "path": "analytics_apps/Cargo.lock",
+      "blob_sha": "36dc9892add6ee765641d840fafc3072ccf61861",
+      "sha256": "bd9da0f90f92fd52c8c2102d6d6cf7090c3500345694be900ed8dffb2d3e131c"
+    },
+    {
+      "path": "crates/Cargo.toml",
+      "blob_sha": "a337ce196e55817f4790e4f64e1747045323894f",
+      "sha256": "4801f223d1fbaa40d83f8e5d5b69652429c17a4d679dd859bd5ca53555406e0f"
+    },
+    {
+      "path": "crates/Cargo.lock",
+      "blob_sha": "7fc26b6a71369546607e666fb101d395505ef6dd",
+      "sha256": "61f818c85eb1e8dee9bcbe679442f6a80a534a39d780a36f03cbcb04e0f3c71e"
+    }
+  ],
+  "ci": [
+    {
+      "id": 40101549354,
+      "name": "Node",
+      "head_sha": "54f5d80a5678e68e164d56e6d9f11c57cdff1f36",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40101549354",
+      "jobs": [
+        {
+          "id": 120894576525,
+          "name": "test-node",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40101549354/job/120894576525",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-10-24T14:13:41Z",
+              "completed_at": "2026-10-24T14:13:42Z"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-10-24T14:13:42Z",
+              "completed_at": "2026-10-24T14:13:42Z"
+            },
+            {
+              "name": "Install Node.js",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-10-24T14:13:42Z",
+              "completed_at": "2026-10-24T14:13:43Z"
+            },
+            {
+              "name": "Run Node.js tests",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-10-24T14:13:43Z",
+              "completed_at": "2026-10-24T14:13:43Z"
+            },
+            {
+              "name": "Post Install Node.js",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7,
+              "started_at": "2026-10-24T14:13:43Z",
+              "completed_at": "2026-10-24T14:13:44Z"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8,
+              "started_at": "2026-10-24T14:13:44Z",
+              "completed_at": "2026-10-24T14:13:44Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9,
+              "started_at": "2026-10-24T14:13:44Z",
+              "completed_at": "2026-10-24T14:13:44Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 40101549363,
+      "name": "Cargo workspaces",
+      "head_sha": "54f5d80a5678e68e164d56e6d9f11c57cdff1f36",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40101549363",
+      "jobs": [
+        {
+          "id": 120894576541,
+          "name": "metadata (chat_apps)",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40101549363/job/120894576541",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-10-24T14:13:41Z",
+              "completed_at": "2026-10-24T14:13:42Z"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-10-24T14:13:42Z",
+              "completed_at": "2026-10-24T14:13:43Z"
+            },
+            {
+              "name": "Run dtolnay/rust-toolchain@stable",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-10-24T14:13:43Z",
+              "completed_at": "2026-10-24T14:13:53Z"
+            },
+            {
+              "name": "Validate workspace and locked dependency graph",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-10-24T14:13:53Z",
+              "completed_at": "2026-10-24T14:13:56Z"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8,
+              "started_at": "2026-10-24T14:13:56Z",
+              "completed_at": "2026-10-24T14:13:56Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9,
+              "started_at": "2026-10-24T14:13:56Z",
+              "completed_at": "2026-10-24T14:13:56Z"
+            }
+          ]
+        },
+        {
+          "id": 120894576625,
+          "name": "metadata (pet_apps)",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40101549363/job/120894576625",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-10-24T14:13:41Z",
+              "completed_at": "2026-10-24T14:13:42Z"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-10-24T14:13:42Z",
+              "completed_at": "2026-10-24T14:13:43Z"
+            },
+            {
+              "name": "Run dtolnay/rust-toolchain@stable",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-10-24T14:13:43Z",
+              "completed_at": "2026-10-24T14:13:52Z"
+            },
+            {
+              "name": "Validate workspace and locked dependency graph",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-10-24T14:13:52Z",
+              "completed_at": "2026-10-24T14:13:58Z"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8,
+              "started_at": "2026-10-24T14:13:58Z",
+              "completed_at": "2026-10-24T14:13:58Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9,
+              "started_at": "2026-10-24T14:13:58Z",
+              "completed_at": "2026-10-24T14:13:58Z"
+            }
+          ]
+        },
+        {
+          "id": 120894576633,
+          "name": "metadata (analytics_apps)",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40101549363/job/120894576633",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-10-24T14:13:41Z",
+              "completed_at": "2026-10-24T14:13:42Z"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-10-24T14:13:42Z",
+              "completed_at": "2026-10-24T14:13:43Z"
+            },
+            {
+              "name": "Run dtolnay/rust-toolchain@stable",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-10-24T14:13:43Z",
+              "completed_at": "2026-10-24T14:13:54Z"
+            },
+            {
+              "name": "Validate workspace and locked dependency graph",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-10-24T14:13:54Z",
+              "completed_at": "2026-10-24T14:13:58Z"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8,
+              "started_at": "2026-10-24T14:13:58Z",
+              "completed_at": "2026-10-24T14:13:58Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9,
+              "started_at": "2026-10-24T14:13:58Z",
+              "completed_at": "2026-10-24T14:13:58Z"
+            }
+          ]
+        },
+        {
+          "id": 120894576700,
+          "name": "metadata (crates)",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40101549363/job/120894576700",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-10-24T14:13:41Z",
+              "completed_at": "2026-10-24T14:13:42Z"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-10-24T14:13:42Z",
+              "completed_at": "2026-10-24T14:13:43Z"
+            },
+            {
+              "name": "Run dtolnay/rust-toolchain@stable",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-10-24T14:13:43Z",
+              "completed_at": "2026-10-24T14:13:55Z"
+            },
+            {
+              "name": "Validate workspace and locked dependency graph",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-10-24T14:13:55Z",
+              "completed_at": "2026-10-24T14:13:58Z"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8,
+              "started_at": "2026-10-24T14:13:58Z",
+              "completed_at": "2026-10-24T14:13:58Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9,
+              "started_at": "2026-10-24T14:13:58Z",
+              "completed_at": "2026-10-24T14:13:58Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 40101549286,
+      "name": "Rust AI Chat",
+      "head_sha": "54f5d80a5678e68e164d56e6d9f11c57cdff1f36",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40101549286",
+      "jobs": [
+        {
+          "id": 120894576419,
+          "name": "check-chat",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40101549286/job/120894576419",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-10-24T14:13:41Z",
+              "completed_at": "2026-10-24T14:13:42Z"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-10-24T14:13:42Z",
+              "completed_at": "2026-10-24T14:13:43Z"
+            },
+            {
+              "name": "Install Rust",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-10-24T14:13:43Z",
+              "completed_at": "2026-10-24T14:14:07Z"
+            },
+            {
+              "name": "Install Linux dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-10-24T14:14:07Z",
+              "completed_at": "2026-10-24T14:14:24Z"
+            },
+            {
+              "name": "Install cargo-leptos",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-10-24T14:14:24Z",
+              "completed_at": "2026-10-24T14:21:59Z"
+            },
+            {
+              "name": "Check server ssr",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6,
+              "started_at": "2026-10-24T14:21:59Z",
+              "completed_at": "2026-10-24T14:22:47Z"
+            },
+            {
+              "name": "Check ui ssr",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7,
+              "started_at": "2026-10-24T14:22:47Z",
+              "completed_at": "2026-10-24T14:23:10Z"
+            },
+            {
+              "name": "Check ui",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8,
+              "started_at": "2026-10-24T14:23:10Z",
+              "completed_at": "2026-10-24T14:23:55Z"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 16,
+              "started_at": "2026-10-24T14:23:55Z",
+              "completed_at": "2026-10-24T14:23:56Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 17,
+              "started_at": "2026-10-24T14:23:56Z",
+              "completed_at": "2026-10-24T14:23:56Z"
+            }
+          ]
+        },
+        {
+          "id": 120894576495,
+          "name": "build-chat",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40101549286/job/120894576495",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-10-24T14:13:42Z",
+              "completed_at": "2026-10-24T14:13:42Z"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-10-24T14:13:42Z",
+              "completed_at": "2026-10-24T14:13:43Z"
+            },
+            {
+              "name": "Install Rust",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-10-24T14:13:43Z",
+              "completed_at": "2026-10-24T14:13:54Z"
+            },
+            {
+              "name": "Install Linux dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-10-24T14:13:54Z",
+              "completed_at": "2026-10-24T14:14:11Z"
+            },
+            {
+              "name": "Install cargo-leptos",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-10-24T14:14:11Z",
+              "completed_at": "2026-10-24T14:23:38Z"
+            },
+            {
+              "name": "Build server",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6,
+              "started_at": "2026-10-24T14:23:38Z",
+              "completed_at": "2026-10-24T14:28:03Z"
+            },
+            {
+              "name": "Upload build artifacts",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7,
+              "started_at": "2026-10-24T14:28:03Z",
+              "completed_at": "2026-10-24T14:28:05Z"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 14,
+              "started_at": "2026-10-24T14:28:05Z",
+              "completed_at": "2026-10-24T14:28:05Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 15,
+              "started_at": "2026-10-24T14:28:05Z",
+              "completed_at": "2026-10-24T14:28:05Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 40101549329,
+      "name": "Rust Desktop Pet",
+      "head_sha": "54f5d80a5678e68e164d56e6d9f11c57cdff1f36",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40101549329",
+      "jobs": [
+        {
+          "id": 120894576187,
+          "name": "check-pet",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40101549329/job/120894576187",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-10-24T14:13:41Z",
+              "completed_at": "2026-10-24T14:13:42Z"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-10-24T14:13:42Z",
+              "completed_at": "2026-10-24T14:13:43Z"
+            },
+            {
+              "name": "Install Rust",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-10-24T14:13:43Z",
+              "completed_at": "2026-10-24T14:13:55Z"
+            },
+            {
+              "name": "Install Linux dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-10-24T14:13:55Z",
+              "completed_at": "2026-10-24T14:15:11Z"
+            },
+            {
+              "name": "Check native dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-10-24T14:15:11Z",
+              "completed_at": "2026-10-24T14:15:11Z"
+            },
+            {
+              "name": "Install trunk",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6,
+              "started_at": "2026-10-24T14:15:11Z",
+              "completed_at": "2026-10-24T14:20:20Z"
+            },
+            {
+              "name": "Check native workspace",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7,
+              "started_at": "2026-10-24T14:20:20Z",
+              "completed_at": "2026-10-24T14:21:36Z"
+            },
+            {
+              "name": "Check desktop frontend",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8,
+              "started_at": "2026-10-24T14:21:36Z",
+              "completed_at": "2026-10-24T14:22:26Z"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 16,
+              "started_at": "2026-10-24T14:22:26Z",
+              "completed_at": "2026-10-24T14:22:26Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 17,
+              "started_at": "2026-10-24T14:22:26Z",
+              "completed_at": "2026-10-24T14:22:26Z"
+            }
+          ]
+        },
+        {
+          "id": 120894576518,
+          "name": "build-pet",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40101549329/job/120894576518",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-10-24T14:13:42Z",
+              "completed_at": "2026-10-24T14:13:43Z"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-10-24T14:13:43Z",
+              "completed_at": "2026-10-24T14:13:44Z"
+            },
+            {
+              "name": "Install Rust",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-10-24T14:13:44Z",
+              "completed_at": "2026-10-24T14:13:55Z"
+            },
+            {
+              "name": "Install Linux dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-10-24T14:13:55Z",
+              "completed_at": "2026-10-24T14:15:01Z"
+            },
+            {
+              "name": "Install trunk",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-10-24T14:15:01Z",
+              "completed_at": "2026-10-24T14:20:20Z"
+            },
+            {
+              "name": "Build desktop",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6,
+              "started_at": "2026-10-24T14:20:20Z",
+              "completed_at": "2026-10-24T14:21:44Z"
+            },
+            {
+              "name": "Build native desktop",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7,
+              "started_at": "2026-10-24T14:21:44Z",
+              "completed_at": "2026-10-24T14:25:23Z"
+            },
+            {
+              "name": "Upload build artifacts",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8,
+              "started_at": "2026-10-24T14:25:23Z",
+              "completed_at": "2026-10-24T14:25:26Z"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 16,
+              "started_at": "2026-10-24T14:25:26Z",
+              "completed_at": "2026-10-24T14:25:26Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 17,
+              "started_at": "2026-10-24T14:25:26Z",
+              "completed_at": "2026-10-24T14:25:26Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 40101549361,
+      "name": "Rust Analytics",
+      "head_sha": "54f5d80a5678e68e164d56e6d9f11c57cdff1f36",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40101549361",
+      "jobs": [
+        {
+          "id": 120894576465,
+          "name": "build-analytics",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40101549361/job/120894576465",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-10-24T14:13:41Z",
+              "completed_at": "2026-10-24T14:13:42Z"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-10-24T14:13:42Z",
+              "completed_at": "2026-10-24T14:13:43Z"
+            },
+            {
+              "name": "Install Rust",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-10-24T14:13:43Z",
+              "completed_at": "2026-10-24T14:13:53Z"
+            },
+            {
+              "name": "Install Linux dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-10-24T14:13:53Z",
+              "completed_at": "2026-10-24T14:14:07Z"
+            },
+            {
+              "name": "Build analytics server",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-10-24T14:14:07Z",
+              "completed_at": "2026-10-24T14:15:44Z"
+            },
+            {
+              "name": "Upload build artifacts",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6,
+              "started_at": "2026-10-24T14:15:44Z",
+              "completed_at": "2026-10-24T14:15:46Z"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 12,
+              "started_at": "2026-10-24T14:15:46Z",
+              "completed_at": "2026-10-24T14:15:46Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13,
+              "started_at": "2026-10-24T14:15:46Z",
+              "completed_at": "2026-10-24T14:15:46Z"
+            }
+          ]
+        },
+        {
+          "id": 120894576716,
+          "name": "check-analytics",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40101549361/job/120894576716",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-10-24T14:13:48Z",
+              "completed_at": "2026-10-24T14:13:49Z"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-10-24T14:13:49Z",
+              "completed_at": "2026-10-24T14:13:50Z"
+            },
+            {
+              "name": "Install Rust",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-10-24T14:13:50Z",
+              "completed_at": "2026-10-24T14:14:07Z"
+            },
+            {
+              "name": "Install Linux dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-10-24T14:14:07Z",
+              "completed_at": "2026-10-24T14:14:31Z"
+            },
+            {
+              "name": "Check analytics server",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-10-24T14:14:31Z",
+              "completed_at": "2026-10-24T14:15:24Z"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10,
+              "started_at": "2026-10-24T14:15:24Z",
+              "completed_at": "2026-10-24T14:15:24Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11,
+              "started_at": "2026-10-24T14:15:24Z",
+              "completed_at": "2026-10-24T14:15:24Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 40101549290,
+      "name": "Test All",
+      "head_sha": "54f5d80a5678e68e164d56e6d9f11c57cdff1f36",
+      "status": "completed",
+      "conclusion": "failure",
+      "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40101549290",
+      "jobs": [
+        {
+          "id": 120894576212,
+          "name": "test-pet-server",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40101549290/job/120894576212",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-10-24T14:13:41Z",
+              "completed_at": "2026-10-24T14:13:41Z"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-10-24T14:13:41Z",
+              "completed_at": "2026-10-24T14:13:42Z"
+            },
+            {
+              "name": "Install Rust",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-10-24T14:13:42Z",
+              "completed_at": "2026-10-24T14:13:54Z"
+            },
+            {
+              "name": "Install Linux dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-10-24T14:13:54Z",
+              "completed_at": "2026-10-24T14:14:43Z"
+            },
+            {
+              "name": "Test pet-server",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-10-24T14:14:43Z",
+              "completed_at": "2026-10-24T14:16:37Z"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10,
+              "started_at": "2026-10-24T14:16:37Z",
+              "completed_at": "2026-10-24T14:16:37Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11,
+              "started_at": "2026-10-24T14:16:37Z",
+              "completed_at": "2026-10-24T14:16:37Z"
+            }
+          ]
+        },
+        {
+          "id": 120894576347,
+          "name": "test-shared",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40101549290/job/120894576347",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-10-24T14:13:41Z",
+              "completed_at": "2026-10-24T14:13:42Z"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-10-24T14:13:42Z",
+              "completed_at": "2026-10-24T14:13:44Z"
+            },
+            {
+              "name": "Install Rust",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-10-24T14:13:44Z",
+              "completed_at": "2026-10-24T14:13:57Z"
+            },
+            {
+              "name": "Install Linux dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-10-24T14:13:57Z",
+              "completed_at": "2026-10-24T14:14:05Z"
+            },
+            {
+              "name": "Test shared",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-10-24T14:14:05Z",
+              "completed_at": "2026-10-24T14:14:11Z"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10,
+              "started_at": "2026-10-24T14:14:11Z",
+              "completed_at": "2026-10-24T14:14:12Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11,
+              "started_at": "2026-10-24T14:14:12Z",
+              "completed_at": "2026-10-24T14:14:12Z"
+            }
+          ]
+        },
+        {
+          "id": 120894576357,
+          "name": "test-chat-domain",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40101549290/job/120894576357",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-10-24T14:13:42Z",
+              "completed_at": "2026-10-24T14:13:43Z"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-10-24T14:13:43Z",
+              "completed_at": "2026-10-24T14:13:43Z"
+            },
+            {
+              "name": "Install Rust",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-10-24T14:13:43Z",
+              "completed_at": "2026-10-24T14:13:55Z"
+            },
+            {
+              "name": "Install Linux dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-10-24T14:13:55Z",
+              "completed_at": "2026-10-24T14:14:02Z"
+            },
+            {
+              "name": "Test chat domain",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-10-24T14:14:02Z",
+              "completed_at": "2026-10-24T14:14:07Z"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10,
+              "started_at": "2026-10-24T14:14:07Z",
+              "completed_at": "2026-10-24T14:14:07Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11,
+              "started_at": "2026-10-24T14:14:07Z",
+              "completed_at": "2026-10-24T14:14:07Z"
+            }
+          ]
+        },
+        {
+          "id": 120894576378,
+          "name": "test-server",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40101549290/job/120894576378",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-10-24T14:13:43Z",
+              "completed_at": "2026-10-24T14:13:44Z"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-10-24T14:13:44Z",
+              "completed_at": "2026-10-24T14:13:45Z"
+            },
+            {
+              "name": "Install Rust",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-10-24T14:13:45Z",
+              "completed_at": "2026-10-24T14:13:56Z"
+            },
+            {
+              "name": "Install Linux dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-10-24T14:13:56Z",
+              "completed_at": "2026-10-24T14:14:02Z"
+            },
+            {
+              "name": "Test server",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-10-24T14:14:02Z",
+              "completed_at": "2026-10-24T14:15:29Z"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10,
+              "started_at": "2026-10-24T14:15:29Z",
+              "completed_at": "2026-10-24T14:15:30Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11,
+              "started_at": "2026-10-24T14:15:30Z",
+              "completed_at": "2026-10-24T14:15:30Z"
+            }
+          ]
+        },
+        {
+          "id": 120894576383,
+          "name": "test-ai-core",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40101549290/job/120894576383",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-10-24T14:13:41Z",
+              "completed_at": "2026-10-24T14:13:42Z"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-10-24T14:13:42Z",
+              "completed_at": "2026-10-24T14:13:42Z"
+            },
+            {
+              "name": "Install Rust",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-10-24T14:13:42Z",
+              "completed_at": "2026-10-24T14:13:53Z"
+            },
+            {
+              "name": "Install Linux dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-10-24T14:13:53Z",
+              "completed_at": "2026-10-24T14:14:00Z"
+            },
+            {
+              "name": "Test ai core",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-10-24T14:14:00Z",
+              "completed_at": "2026-10-24T14:14:08Z"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10,
+              "started_at": "2026-10-24T14:14:08Z",
+              "completed_at": "2026-10-24T14:14:08Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11,
+              "started_at": "2026-10-24T14:14:08Z",
+              "completed_at": "2026-10-24T14:14:08Z"
+            }
+          ]
+        },
+        {
+          "id": 120894576407,
+          "name": "test-chat-application",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40101549290/job/120894576407",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-10-24T14:13:42Z",
+              "completed_at": "2026-10-24T14:13:42Z"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-10-24T14:13:42Z",
+              "completed_at": "2026-10-24T14:13:43Z"
+            },
+            {
+              "name": "Install Rust",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-10-24T14:13:43Z",
+              "completed_at": "2026-10-24T14:13:54Z"
+            },
+            {
+              "name": "Install Linux dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-10-24T14:13:54Z",
+              "completed_at": "2026-10-24T14:14:01Z"
+            },
+            {
+              "name": "Test chat application",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-10-24T14:14:01Z",
+              "completed_at": "2026-10-24T14:14:10Z"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10,
+              "started_at": "2026-10-24T14:14:10Z",
+              "completed_at": "2026-10-24T14:14:10Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11,
+              "started_at": "2026-10-24T14:14:10Z",
+              "completed_at": "2026-10-24T14:14:10Z"
+            }
+          ]
+        },
+        {
+          "id": 120894576434,
+          "name": "test-analytics-server",
+          "status": "completed",
+          "conclusion": "failure",
+          "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40101549290/job/120894576434",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-10-24T14:13:41Z",
+              "completed_at": "2026-10-24T14:13:42Z"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-10-24T14:13:42Z",
+              "completed_at": "2026-10-24T14:13:43Z"
+            },
+            {
+              "name": "Install Rust",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-10-24T14:13:43Z",
+              "completed_at": "2026-10-24T14:13:53Z"
+            },
+            {
+              "name": "Install Linux dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-10-24T14:13:53Z",
+              "completed_at": "2026-10-24T14:14:00Z"
+            },
+            {
+              "name": "Test analytics server",
+              "status": "completed",
+              "conclusion": "failure",
+              "number": 5,
+              "started_at": "2026-10-24T14:14:00Z",
+              "completed_at": "2026-10-24T14:14:46Z"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10,
+              "started_at": "2026-10-24T14:14:46Z",
+              "completed_at": "2026-10-24T14:14:47Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11,
+              "started_at": "2026-10-24T14:14:47Z",
+              "completed_at": "2026-10-24T14:14:47Z"
+            }
+          ]
+        },
+        {
+          "id": 120894576498,
+          "name": "test-pet-domain",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40101549290/job/120894576498",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-10-24T14:13:41Z",
+              "completed_at": "2026-10-24T14:13:42Z"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-10-24T14:13:42Z",
+              "completed_at": "2026-10-24T14:13:43Z"
+            },
+            {
+              "name": "Install Rust",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-10-24T14:13:43Z",
+              "completed_at": "2026-10-24T14:13:52Z"
+            },
+            {
+              "name": "Install Linux dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-10-24T14:13:52Z",
+              "completed_at": "2026-10-24T14:13:58Z"
+            },
+            {
+              "name": "Test pet domain",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-10-24T14:13:58Z",
+              "completed_at": "2026-10-24T14:14:03Z"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10,
+              "started_at": "2026-10-24T14:14:03Z",
+              "completed_at": "2026-10-24T14:14:03Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11,
+              "started_at": "2026-10-24T14:14:03Z",
+              "completed_at": "2026-10-24T14:14:03Z"
+            }
+          ]
+        },
+        {
+          "id": 120894576527,
+          "name": "test-ui",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40101549290/job/120894576527",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-10-24T14:13:41Z",
+              "completed_at": "2026-10-24T14:13:42Z"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-10-24T14:13:42Z",
+              "completed_at": "2026-10-24T14:13:43Z"
+            },
+            {
+              "name": "Install Rust",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-10-24T14:13:43Z",
+              "completed_at": "2026-10-24T14:13:54Z"
+            },
+            {
+              "name": "Install Linux dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-10-24T14:13:54Z",
+              "completed_at": "2026-10-24T14:14:01Z"
+            },
+            {
+              "name": "Test ui",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-10-24T14:14:01Z",
+              "completed_at": "2026-10-24T14:14:55Z"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10,
+              "started_at": "2026-10-24T14:14:55Z",
+              "completed_at": "2026-10-24T14:14:55Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11,
+              "started_at": "2026-10-24T14:14:55Z",
+              "completed_at": "2026-10-24T14:14:55Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 40101549347,
+      "name": "Persistence",
+      "head_sha": "54f5d80a5678e68e164d56e6d9f11c57cdff1f36",
+      "status": "completed",
+      "conclusion": "failure",
+      "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40101549347",
+      "jobs": [
+        {
+          "id": 120894576508,
+          "name": "test-persistence",
+          "status": "completed",
+          "conclusion": "failure",
+          "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40101549347/job/120894576508",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-10-24T14:13:41Z",
+              "completed_at": "2026-10-24T14:13:42Z"
+            },
+            {
+              "name": "Initialize containers",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-10-24T14:13:42Z",
+              "completed_at": "2026-10-24T14:14:06Z"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-10-24T14:14:06Z",
+              "completed_at": "2026-10-24T14:14:07Z"
+            },
+            {
+              "name": "Install Rust",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-10-24T14:14:07Z",
+              "completed_at": "2026-10-24T14:14:18Z"
+            },
+            {
+              "name": "Install sqlx-cli",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-10-24T14:14:18Z",
+              "completed_at": "2026-10-24T14:16:07Z"
+            },
+            {
+              "name": "Run database migrations",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6,
+              "started_at": "2026-10-24T14:16:07Z",
+              "completed_at": "2026-10-24T14:16:07Z"
+            },
+            {
+              "name": "Test persistence",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7,
+              "started_at": "2026-10-24T14:16:07Z",
+              "completed_at": "2026-10-24T14:16:36Z"
+            },
+            {
+              "name": "Test analytics server with PostgreSQL",
+              "status": "completed",
+              "conclusion": "failure",
+              "number": 8,
+              "started_at": "2026-10-24T14:16:36Z",
+              "completed_at": "2026-10-24T14:17:50Z"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 15,
+              "started_at": "2026-10-24T14:17:50Z",
+              "completed_at": "2026-10-24T14:17:51Z"
+            },
+            {
+              "name": "Stop containers",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 16,
+              "started_at": "2026-10-24T14:17:51Z",
+              "completed_at": "2026-10-24T14:17:57Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 17,
+              "started_at": "2026-10-24T14:17:57Z",
+              "completed_at": "2026-10-24T14:17:57Z"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "product_modified": false,
+  "product_tests": "not run",
+  "document_baseline": "fd426c68facdfdfd97616cf04a8bbc6badfe02cc"
+}

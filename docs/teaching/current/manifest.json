@@ -845,11 +845,87 @@
       "next_day_before": 33,
       "next_day_after": 34,
       "remaining_gaps": "Analytics 管理員初始化/角色來源ACL/SSE/明細與新標示瀏覽器驗收未完成"
+    },
+    {
+      "repository": "williechen/copilot_use",
+      "branch": "main",
+      "project": "chat",
+      "day": 34,
+      "revision": "r1",
+      "title": "帳密登入頁採 Leptos 並補齊可存取表單",
+      "path": "docs/teaching/daily/day-34/chat.md",
+      "parent": "fd426c68facdfdfd97616cf04a8bbc6badfe02cc",
+      "article_commit": "3353e7a67ec440489e11545f5ae64e0ab327fc95",
+      "verified": true,
+      "blob_sha": "b43a2718c7bdb7066c9c66f1e907786dc9634c48",
+      "sha256": "793dc5ac604b3db36f67d1646421760856d2b08735da4fc9308de8c238660691",
+      "readback_at": "2026-10-24T19:37:43.279Z",
+      "full_text_verified": true,
+      "source_sha": "54f5d80a5678e68e164d56e6d9f11c57cdff1f36",
+      "rules_sha": "b5ca6059f1d14f5d358542a690e2efab1ad94d04",
+      "rules_commit": "3353e7a67ec440489e11545f5ae64e0ab327fc95",
+      "rules_version": "daily-tdd-minimum-v1+github-only-v1",
+      "main_application": "not applied",
+      "tests": "not run",
+      "functional_acceptance": false,
+      "archived": false,
+      "next_day_before": 34,
+      "next_day_after": 35,
+      "remaining_gaps": "選房導向／逐房 ACL／作者歷史與共用認證 FIFO；產品套用及瀏覽器驗收未執行",
+      "expected_state_parent_sha": "3353e7a67ec440489e11545f5ae64e0ab327fc95",
+      "raw_error": null,
+      "sync_inputs": [
+        {
+          "path": "docs/learning-state.json",
+          "blob_sha": "c75e48d2ab1e88bf77d91f83ec72ba3406038a35"
+        },
+        {
+          "path": "docs/teaching/current/manifest.json",
+          "blob_sha": "8db65980fb701170d27562203f8e8fc16d97a85b"
+        },
+        {
+          "path": "README.md",
+          "blob_sha": "894431cee89030e0c6d6e3d5bbc58f6c610715ab"
+        },
+        {
+          "path": "docs/README.md",
+          "blob_sha": "682b1840c37a8c64ce12ca0d2e9c181cf7a47f20"
+        },
+        {
+          "path": "docs/teaching/README.md",
+          "blob_sha": "6a3b9d90192e56fa81ad5c7fee5042eff5d47e63"
+        },
+        {
+          "path": "docs/teaching/daily/README.md",
+          "blob_sha": "537edea99fb5edba5e4cbaf9039aab3dc609784b"
+        },
+        {
+          "path": "docs/teaching/chat/README.md",
+          "blob_sha": "9c87df3ef1282a0b049a5263837cd25aa59a4d07"
+        },
+        {
+          "path": "docs/teaching/pet/README.md",
+          "blob_sha": "327d6a01cd68ba490f995af0e113dbb65d1383cb"
+        },
+        {
+          "path": "docs/teaching/analytics/README.md",
+          "blob_sha": "6cc41fec9ac6ab0dd22cd9e2d9b0cf01fc5e3312"
+        },
+        {
+          "path": "docs/teaching/current/CHAT_ENTRY.md",
+          "blob_sha": "fec0ae2fc771b23247a25fe10fa08ca734e01649"
+        },
+        {
+          "path": "docs/COMMON_LEARNING_RULES.md",
+          "blob_sha": "b5ca6059f1d14f5d358542a690e2efab1ad94d04"
+        }
+      ],
+      "ci_supplement": "docs/teaching/daily/day-34/source-snapshot.json"
     }
   ],
   "day15_frozen": true,
   "next_day": {
-    "chat": 34,
+    "chat": 35,
     "pet": 34,
     "analytics": 34
   },
@@ -992,7 +1068,7 @@
     "frozen_body_sha256": "ad6cef4a58f20f6162fb01a4c71ef1a752992856327063d9988112c91a639184",
     "frozen_notion_snapshot": "docs/teaching/archive/day-22/notion/chat.md"
   },
-  "latest_chat_publication": "docs/teaching/daily/day-33/chat-readback.json",
+  "latest_chat_publication": "docs/teaching/daily/day-34/chat-readback.json",
   "previous_day22_pet_article": {
     "project": "pet",
     "day": 22,

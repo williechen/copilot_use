@@ -1,5 +1,17 @@
 # Pet 首頁
 
+<!-- daily-delivery:start -->
+## 最新交付與下一篇
+
+| 專案 | 最新文章 | 下一篇 | 狀態 |
+| --- | --- | --- | --- |
+| Chat | [Day34：帳密登入頁採 Leptos 並補齊可存取表單](../daily/day-34/chat.md) | Day35 | 教學已交付／功能未驗收 |
+| Pet | [Day33：生活窗控制台按鈕選取來源寵物](../daily/day-33/pet.md) | Day34 | 教學已交付／功能未驗收 |
+| Analytics | [Day33：Dashboard 數量標示](../daily/day-33/analytics.md) | Day34 | 教學已交付／功能未驗收 |
+
+來源、套用及測試證據各自記錄；文章發布不代表產品驗收。
+<!-- daily-delivery:end -->
+
 2026-10-24 目錄已同步至 [williechen/rust_ai_ring](https://github.com/williechen/rust_ai_ring)：保留 `chat_apps`、`pet_apps`、`analytics_apps`、`crates` 四個 workspace；[新目錄與套件對照](../../SOURCE_LAYOUT.md)。後續教學依當次來源 SHA 調整程式、Cargo、imports、呼叫端與測試。
 
 > 本頁需求與教學交付保存在 copilot_use；程式入口、套件、測試、CI 與功能驗收只依 rust_ai_ring 精確 SHA，舊庫產品工具不作主體驗收。
@@ -69,10 +81,10 @@
 [Day31教學：控制窗關閉後重開](../daily/day-31/pet.md)（控制窗隱藏／再開已套用並由原生關窗事件實測；完整寵物生命週期仍待補驗。）
 
 
-## 最新教學（Day32）
+## 先前教學（Day32）
 
-[Day32：右鍵開啟控制窗並選取對應寵物](../daily/day-32/pet.md)（程式已套用，原生右鍵選單選取路徑已實測通過；完整產品驗收仍未完成）。此段保留 Day32 當時的進度；Day33 已發布，最新下一篇 Day34，以 [即時進度檔](../../learning-state.json) 為準；Day31 與歷史驗證證據保留。
+[Day32：右鍵開啟控制窗並選取對應寵物](../daily/day-32/pet.md)（程式已套用，原生右鍵選單選取路徑已實測通過；完整產品驗收仍未完成）。此段保留 Day32 當時的進度；最新交付與下一篇見頁首各案清單，以 [即時進度檔](../../learning-state.json) 為準；Day31 與歷史驗證證據保留。
 
-## 最新教學（Day33）
+## 先前教學（Day33）
 
-[Day33：生活窗「控制台」按鈕選取自己的寵物再開窗](../daily/day-33/pet.md)（教學已交付；程式未套用、測試未執行、功能未驗收）。下一篇 Day34，以 [即時進度檔](../../learning-state.json) 為準。
+[Day33：生活窗「控制台」按鈕選取自己的寵物再開窗](../daily/day-33/pet.md)（教學已交付；程式未套用、測試未執行、功能未驗收）。當時下一篇為 Day34；目前以 [即時進度檔](../../learning-state.json) 為準。

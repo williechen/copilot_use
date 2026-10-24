@@ -1,5 +1,17 @@
 # copilot_use
 
+<!-- daily-delivery:start -->
+## 最新交付與下一篇
+
+| 專案 | 最新文章 | 下一篇 | 狀態 |
+| --- | --- | --- | --- |
+| Chat | [Day34：帳密登入頁採 Leptos 並補齊可存取表單](docs/teaching/daily/day-34/chat.md) | Day35 | 教學已交付／功能未驗收 |
+| Pet | [Day33：生活窗控制台按鈕選取來源寵物](docs/teaching/daily/day-33/pet.md) | Day34 | 教學已交付／功能未驗收 |
+| Analytics | [Day33：Dashboard 數量標示](docs/teaching/daily/day-33/analytics.md) | Day34 | 教學已交付／功能未驗收 |
+
+來源、套用及測試證據各自記錄；文章發布不代表產品驗收。
+<!-- daily-delivery:end -->
+
 2026-10-24 目錄已同步至 [williechen/rust_ai_ring](https://github.com/williechen/rust_ai_ring)：保留 `chat_apps`、`pet_apps`、`analytics_apps`、`crates` 四個 workspace；[新目錄與套件對照](docs/SOURCE_LAYOUT.md)。後續教學依當次來源 SHA 調整程式、Cargo、imports、呼叫端與測試。
 
 2026-10-23 依使用者確認，所有涉及 copilot_use 程式開發、移植、同步適配、重構、套用、建置、測試、CI、產品試驗、發布、安裝更新與功能驗收的工作要求均已廢除，不再列為待辦、選題或驗收門檻。copilot_use 僅維護需求、規則、教學文章、進度、索引與交付證據；文件內的教學程式碼用於說明 rust_ai_ring 的實作，不建立第二套產品。程式功能、測試、CI 與驗收只依 rust_ai_ring 精確 SHA。既有 copilot_use 程式、腳本、workflow、Release 及歷史欄位僅供追溯，不代表仍有維護或執行義務。
@@ -17,15 +29,6 @@ Chat、Desktop Pet 與 Analytics 的規則、教學與交付證據庫。`copilot
 
 [目前進度與待完成項目](https://github.com/williechen/copilot_use/blob/main/docs/teaching/current/STATUS.md) · [最新學習進度](https://github.com/williechen/copilot_use/blob/main/docs/learning-state.json) · [文件總目錄](https://github.com/williechen/copilot_use/blob/main/docs/README.md)
 
-## 最新教學（各案最新 Day）
-
-| 專案 | 最新文章 | 下一篇 |
-| --- | --- | --- |
-| Chat | [Day33：房間搜尋狀態](docs/teaching/daily/day-33/chat.md)（教學已發布／未驗收） | Day34 |
-| Pet | [Day33：生活窗控制台按鈕](docs/teaching/daily/day-33/pet.md)（教學已發布／未驗收） | Day34 |
-| Analytics | [Day33：Dashboard 數量標示](docs/teaching/daily/day-33/analytics.md)（教學已發布／未驗收） | Day34 |
-
-以 [即時學習進度](docs/learning-state.json) 為準；上述為教學交付，不代表主體程式已套用或驗收。
 
 ## 目前目錄與每日排程
 
