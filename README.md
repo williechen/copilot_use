@@ -21,7 +21,7 @@ Chat、Desktop Pet 與 Analytics 的規則、教學與交付證據庫。`copilot
 | --- | --- | --- |
 | Chat | [Day33：房間搜尋狀態](docs/teaching/daily/day-33/chat.md)（教學已發布／未驗收） | Day34 |
 | Pet | [Day33：生活窗控制台按鈕](docs/teaching/daily/day-33/pet.md)（教學已發布／未驗收） | Day34 |
-| Analytics | [Day32](docs/teaching/daily/day-32/analytics.md) | Day33 |
+| Analytics | [Day33：Dashboard 數量標示](docs/teaching/daily/day-33/analytics.md)（教學已發布／未驗收） | Day34 |
 
 以 [即時學習進度](docs/learning-state.json) 為準；上述為教學交付，不代表主體程式已套用或驗收。
 

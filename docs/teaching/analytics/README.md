@@ -78,3 +78,7 @@ Leptos登入／改密碼、完整PG與實際HTTP通過；Day32事件類型篩選
 ## 最新教學（Day32）
 
 [Day32：Dashboard 事件類型篩選](../daily/day-32/analytics.md)（程式已套用，PG／HTTP與本輪瀏覽器篩選已驗證；完整產品驗收仍未完成）。下一篇 Day33，以 [即時進度檔](../../learning-state.json) 為準；Day31 與歷史驗證證據保留。
+
+## 最新教學（Day33）
+
+[Day33：Dashboard 數量標示區分全部與精確篩選](../daily/day-33/analytics.md)（教學已交付；程式未套用、測試未執行、功能未驗收）。下一篇 Day34，以 [即時進度檔](../../learning-state.json) 為準。

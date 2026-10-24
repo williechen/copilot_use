@@ -16,7 +16,7 @@
 | 本地操作與驗收 | [本地啟動](LOCAL_START.md) · [操作索引](DEPLOYMENT.md) · [驗收](LOCAL_VALIDATION.md) · [資料移轉](SQLITE_TRANSITION.md) |
 | 系統間通訊 | [Analytics Transport](ANALYTICS_TRANSPORT.md) |
 | 排程狀態與規則入口 | [排程文章狀態](teaching/scheduler-instructions-v1.md)（原文已過時；實際任務設定待核實） |
-| 最新教學 | [Chat Day33](teaching/daily/day-33/chat.md)（下一篇 Day34） · [Pet Day33](teaching/daily/day-33/pet.md) （下一篇 Day34） · [Analytics Day32](teaching/daily/day-32/analytics.md)（下一篇 Day33） |
+| 最新教學 | [Chat Day33](teaching/daily/day-33/chat.md)（下一篇 Day34） · [Pet Day33](teaching/daily/day-33/pet.md) （下一篇 Day34） · [Analytics Day33](teaching/daily/day-33/analytics.md)（下一篇 Day34） |
 | 每日文章與進度 | [新文章](teaching/daily/README.md) · [驗收完成封存](teaching/archived/README.md) · [manifest](teaching/current/manifest.json) |
 
 <details>

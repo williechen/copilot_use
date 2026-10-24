@@ -4,7 +4,9 @@
 
 **必要 Gate 2 驗證通過後，正文原樣移至 `../archived/day-NN/{project}.md`。** 本目錄只追蹤尚待驗收或勘誤的教學；舊有 `history` 已封存文章與證據保留原位，不批次重寫。
 
-## 最新發布（Chat、Pet Day33／Analytics Day32）
+## 最新發布（三專案 Day33）
+
+[Analytics Day33：Dashboard 數量標示區分全部與精確篩選](day-33/analytics.md)（教學已發布；程式未套用、測試未執行、功能未驗收；下一篇 Day34）。
 
 [Pet Day33：生活窗「控制台」按鈕選取來源寵物](day-33/pet.md)（教學已發布；程式未套用、測試未執行、功能未驗收；下一篇 Day34）。
 
