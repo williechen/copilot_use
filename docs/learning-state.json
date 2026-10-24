@@ -3732,5 +3732,58 @@
     "makeup_queue_unchanged": true,
     "last_full_comparison_unchanged": true,
     "product_repository_read_only": true
+  },
+  "article_status_review": {
+    "date": "2026-10-25",
+    "document_baseline_sha": "5d66ad95b96a7fffd85856eb80676ddd7120baa6",
+    "source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+    "canonical_article_count": 99,
+    "reviewed_revisions": 100,
+    "teaching_markdown_static_read": 492,
+    "index": "docs/teaching/current/ARTICLE_STATUS.md",
+    "machine_readable": "docs/teaching/current/article-states.json",
+    "markdown_inventory": "docs/teaching/current/article-markdown-inventory.json",
+    "scope": "old article content and current state reconciliation; not full code/functional comparison",
+    "article_bodies_modified": false,
+    "new_runtime_tests": false,
+    "new_archive_moves": 0,
+    "next_day_unchanged": true,
+    "last_full_comparison_unchanged": true,
+    "evidence": "docs/source-review/article-status-review-2026-10-25.json"
+  },
+  "current_article_status": {
+    "chat": {
+      "review_date": "2026-10-25",
+      "review_source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+      "status": "程式已見／待當次驗收",
+      "implementation_state": "observed",
+      "assessment": "現行閱讀版本為 r2；最新來源已移除 LoginView／模組宣告，GET /login redirect /signin 與唯一表單測試已見，POST /login 保留。本次尚未執行 Rust／HTTP／瀏覽器，不追認 Gate 2。",
+      "path": "docs/teaching/daily/day-34/chat-r2.md",
+      "canonical_index": "docs/teaching/current/article-states.json",
+      "full_slice_acceptance": false,
+      "original_record_preserved": true
+    },
+    "pet": {
+      "review_date": "2026-10-25",
+      "review_source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+      "status": "程式已見／待當次驗收",
+      "implementation_state": "observed",
+      "assessment": "名稱規則已移到 pet-application，Tauri 及 PetStore 使用同一函式，含控制字元拒絕與測試；pet-persistence 仍空。本次 Rust／SQLite／GUI 未執行。",
+      "path": "docs/teaching/daily/day-34/pet.md",
+      "canonical_index": "docs/teaching/current/article-states.json",
+      "full_slice_acceptance": false,
+      "original_record_preserved": true
+    },
+    "analytics": {
+      "review_date": "2026-10-25",
+      "review_source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+      "status": "程式已見／待當次驗收",
+      "implementation_state": "observed",
+      "assessment": "ensure_default 已接主啟動與 CLI，login 允許預設 admin 抵達 Argon2 驗證，首次改密碼路由重用；本文「admin=4 bytes」已有獨立勘誤為5。本次新 PG／HTTP／瀏覽器未重跑。",
+      "path": "docs/teaching/daily/day-34/analytics.md",
+      "canonical_index": "docs/teaching/current/article-states.json",
+      "full_slice_acceptance": false,
+      "original_record_preserved": true
+    }
   }
 }

@@ -8,11 +8,15 @@
 
 P9 規則已廢除。本清單中僅源自舊規則、尚未依最新需求確認的項目只作候選，不自動作必做功能或驗收門檻。已確認的開發項目在原項目記錄可驗證功能條件、SHA／測試／CI／套用與驗收證據，未核實者保留未完成。跨階段工作留原功能項目追蹤；舊 Day 更正僅於下一個 Day 的 Refactor 後獨立補加，不回填原 Day，不另開重複項目；完成後可退出活動清單，但原識別與證據須可追溯。學習階段不代表產品功能已驗收。
 
+## 舊內容與現存狀態（2026-10-25）
+
+[99 篇目前閱讀版本與舊修訂逐篇狀態](teaching/current/ARTICLE_STATUS.md) 已核對原文、現存程式與歷史證據。程式已見、已被後續取代、legacy 專用與原文待勘誤分開追蹤；本次不新增完成 checkbox 或改變既有 FIFO。Pet 名稱規則、控制窗 hide/show、Analytics Leptos 帳密與 ensure_default 已見 caller，不再以原文「未套用」重教；最新 3aeab095 已見 Chat r2 去重與測試；歷史／作者／ACL 等缺口保留，當次驗收未重跑。
+
 ## 後續調整：重複與未使用程式、測試及產物（2026-10-25）
 
 本節統整本輪全部核對與使用者「檢核清除不使用函式與測試」的要求，作為後續調整單一清單。程式基準為 `williechen/rust_ai_ring/main@3236b94e95555c20e4709b5db40b0a8688b5762e`；每次動手前重讀最新來源與 caller，不固定套用此 SHA。證據仍見 [重複套用報告 D01–D09](source-review/2026-10-25-duplicate-application-review.md)；本節補足未使用判定與測試保留條件，不覆寫原報告或已發教學。
 
-目前只完成檢核／整理，以下程式清理均未由本次任務套用；已有來源實作的 Pet 名稱規則、Analytics ensure_default 不重教。Chat 既有 r2 優先銜接，後續由各案即時 next_day 選一個最小切片，仍依 Chat→Pet→Analytics 交付，不預排 Day，不要求每日改完所有項目。各項完成須附實際變更 SHA、caller／註冊與相應測試證據。
+目前只完成檢核／整理，以下程式清理均未由本次任務套用；已有來源實作的 Pet 名稱規則、Analytics ensure_default 不重教。Chat 既有 r2 已在最新來源接通，先核對驗證／排除已套部分，後續由各案即時 next_day 選一個最小切片，仍依 Chat→Pet→Analytics 交付，不預排 Day，不要求每日改完所有項目。各項完成須附實際變更 SHA、caller／註冊與相應測試證據。
 
 ### 清理順序與保留條件
 
@@ -20,7 +24,7 @@ P9 規則已廢除。本清單中僅源自舊規則、尚未依最新需求確�
 
 | 專案／順序 | 後續調整與位置 | 清除／保留判準 | 必要驗證與目前狀態 |
 | --- | --- | --- | --- |
-| Chat 1／D01 | 沿 [Day34 r2](teaching/daily/day-34/chat-r2.md) 合併登入頁；保留 SignInPage，GET /login 導向 /signin，移除 login.rs 與多餘模組／舊頁面測試 | 兩個頁面皆有 caller，屬功能合併；不能冒稱為無用函式直接刪除。POST /login 保留 | redirect、唯一表單、登入／Session／SQLite、SSR/hydration 與瀏覽器回歸；修正尚未套入來源 |
+| Chat 1／D01 | 沿 [Day34 r2](teaching/daily/day-34/chat-r2.md) 合併登入頁；保留 SignInPage，GET /login 導向 /signin，移除 login.rs 與多餘模組／舊頁面測試 | 兩個頁面皆有 caller，屬功能合併；不能冒稱為無用函式直接刪除。POST /login 保留 | redirect、唯一表單、登入／Session／SQLite、SSR/hydration 與瀏覽器回歸；最新 3aeab095 已見去重與測試；當次功能驗收未執行 |
 | Chat 2／未使用函式 | 移除 chat_ui/src/room_api.rs 的 create_room 及僅供它使用的 CreateRoomRequest/CreateRoomResponse、JsValue、Request/RequestInit/RequestMode imports | 私有 room_api 模組內未找到此函式 caller；保留 list_rooms/search_rooms 與 server JSON API、個人頁建房流程 | WASM check、房間查詢／重新整理及個人頁建房；待清理 |
 | Chat 3／D06 | 將 refreshed_room_list 的舊測試轉至 RoomList 實際呼叫的 refresh_result_view，再移除舊 helper | 保留空結果、失敗保留清單／搜尋字、成功清除搜尋與重試條件；不直接刪掉回歸斷言 | 測真正 helper 及 RoomList，SSR／WASM 與瀏覽器回歸；待遷移 |
 | Chat 4／D05、D07 | 共用 Cookie／token_digest 與建房名稱規則；signin/signup/JSON／表單 caller 同步 | shared::auth 已存在，不再新增另一份 helper；保留各 transport 的 JSON/HTML、400/422、CSRF 與原交易 | 登入／登出／註冊撤銷、建房邊界／DB 測試；接回既有共用認證 FIFO，不另增或提前結案 |
@@ -65,7 +69,7 @@ P9 規則已廢除。本清單中僅源自舊規則、尚未依最新需求確�
 
 ## 當前最高優先順序：先接通可操作的基本流程
 
-歷史全部文章核對與待修來源見[84篇矩陣](teaching/history/evidence/2026-10-23-all-articles-9c2b7cf/ALL_ARTICLES.md)。精確程式9c2b7cf：Chat頁面／WS基本Session已接通，但SSR歷史提示與API／逐房ACL仍缺；Pet控制窗恢復及動態窗漫遊未接妥；Analytics正式事件類型summary路由404，帳密入口未沿用舊限流。各項依精確來源追蹤，不由舊helper測試或文件封存結案。最新f3f8255清理後冷建置已修復SSR歷史提示斷言，Day32三案實測範圍見[新報告](teaching/history/evidence/2026-10-24-formal-f3f8255/REPORT.md)。仍有Clippy、Pet舊庫checksum、Chat歷史讀回／作者及完整產品缺口；清庫只針對使用者明確授權且已定位的資料，不作歷史升級修復方案。
+舊文章與目前程式的核對以 [最新逐篇狀態](teaching/current/ARTICLE_STATUS.md) 為準；舊84篇矩陣、固定來源 cold-build／瀏覽器／GUI 證據保留各自來源，不直接當成最新通過或失敗。已見程式的切片不重建，原文版本／路徑及 SSR 勘誤、實際功能與未驗收缺口分開調整。
 這是目前已確認功能的實作順序與驗收條件；實際缺口及最新來源見[目前進度](teaching/current/STATUS.md)。每次依真實入口、資料庫與測試調整最小切片，不預排Day，也不以其他分支的舊試作當成已合併／驗收。
 - [ ] **Chat：註冊／登入→Session→公開房間清單與進房授權→加入／建立聊天室。** 沿 rust_ai_ring 的 signup／signin／logout、mbr_user／Session 與房間授權實際來源核對；不引用舊庫 auth.rs／chat_users 介面。先完成欄位驗證與登入授權，不重建平行身分表。基本鏈未完成前不優先擴充歷史訊息或進階UI。
 - [ ] **Pet：建立第一隻寵物→名稱／初始外觀→Tauri IPC→SQLite→生活窗→重啟載入。** 沿 rust_ai_ring 的 create_pet／pet_store／pet_profile 與 Tauri command 實際來源核對；補齊逐寵物身分／畫面／載入後再深化多寵物與漫遊。先核對舊DB歷史，以前向migration處理相容性，不清空DB。

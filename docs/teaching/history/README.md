@@ -1,5 +1,7 @@
 # 歷史文章與原始封存證據
 
+[舊文章與現存狀態核對](../current/ARTICLE_STATUS.md)：歷史正文與固定來源成功／失敗保留，現行狀態另列。此輪沒有新增封存或移動文章。
+
 [共用文章](../../COMMON_LEARNING_RULES.md) · [Chat 首頁](../chat/README.md) · [Pet 首頁](../pet/README.md) · [Analytics 首頁](../analytics/README.md)
 
 同一 Day 的正文、修訂、Notion 原文、原始封存與專屬證據集中在同一資料夾。跨 Day 的比對與搬遷證據放 evidence/。所有搬移檔案按 SHA256 核對原始內容；完全相同的同案同日 Markdown 可共用同一份保存內容，所有來源仍在對照表中。

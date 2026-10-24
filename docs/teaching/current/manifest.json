@@ -90,6 +90,17 @@
         "frozen_notion_snapshot": "docs/teaching/archive/day-24/notion/chat.md",
         "archive_manifest": "docs/teaching/archive/day-24/manifest.json",
         "readback_path": "docs/teaching/day24/chat-readback.json"
+      },
+      "current_state": {
+        "review_date": "2026-10-25",
+        "review_source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+        "status": "程式已見／待當次驗收",
+        "implementation_state": "observed",
+        "assessment": "註冊、帳密／Session、完成頁、會員守衛、登出、個人頁建房及 WS 守衛的對應 caller 已見；舊來源實證保留其範圍，本次不追認全部驗收。",
+        "path": "docs/teaching/history/day-24/chat/github.md",
+        "canonical_index": "docs/teaching/current/article-states.json",
+        "full_slice_acceptance": false,
+        "original_record_preserved": true
       }
     },
     {
@@ -127,6 +138,17 @@
         "frozen_notion_snapshot": "docs/teaching/archive/day-24/notion/pet.md",
         "archive_manifest": "docs/teaching/archive/day-24/manifest.json",
         "readback_path": "docs/teaching/day24/pet-readback.json"
+      },
+      "current_state": {
+        "review_date": "2026-10-25",
+        "review_source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+        "status": "程式已見／仍有缺口",
+        "implementation_state": "observed_with_gap",
+        "assessment": "建立／列表／逐 ID Runtime、出入籠、選取／元件的對應切片已見；歷史 GUI 證據限原來源，本次失敗注入、三窗／重啟／產物 GUI 尚未重跑。",
+        "path": "docs/teaching/history/day-24/pet/github.md",
+        "canonical_index": "docs/teaching/current/article-states.json",
+        "full_slice_acceptance": false,
+        "original_record_preserved": true
       }
     },
     {
@@ -164,6 +186,17 @@
         "frozen_notion_snapshot": "docs/teaching/archive/day-24/notion/analytics.md",
         "archive_manifest": "docs/teaching/archive/day-24/manifest.json",
         "readback_path": "docs/teaching/day24/analytics-readback.json"
+      },
+      "current_state": {
+        "review_date": "2026-10-25",
+        "review_source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+        "status": "程式已見／仍有缺口",
+        "implementation_state": "observed_with_gap",
+        "assessment": "對應改密碼／Session、來源切換、事件類型與標籤已在正式 password_login／Leptos／PG caller；不再列單純未套用。舊標籤測試與正式授權／角色等缺口仍需核對。",
+        "path": "docs/teaching/history/day-24/analytics/github.md",
+        "canonical_index": "docs/teaching/current/article-states.json",
+        "full_slice_acceptance": false,
+        "original_record_preserved": true
       }
     },
     {
@@ -190,6 +223,17 @@
       "original_paths": {
         "frozen_notion_snapshot": "docs/teaching/archive/day-25/notion/chat.md",
         "archive_manifest": "docs/teaching/archive/day-25/manifest.json"
+      },
+      "current_state": {
+        "review_date": "2026-10-25",
+        "review_source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+        "status": "程式已見／待當次驗收",
+        "implementation_state": "observed",
+        "assessment": "註冊、帳密／Session、完成頁、會員守衛、登出、個人頁建房及 WS 守衛的對應 caller 已見；舊來源實證保留其範圍，本次不追認全部驗收。",
+        "path": "docs/teaching/history/day-25/archive/notion/chat.md",
+        "canonical_index": "docs/teaching/current/article-states.json",
+        "full_slice_acceptance": false,
+        "original_record_preserved": true
       }
     },
     {
@@ -217,6 +261,17 @@
       "original_paths": {
         "frozen_notion_snapshot": "docs/teaching/archive/day-25/notion/pet.md",
         "archive_manifest": "docs/teaching/archive/day-25/manifest.json"
+      },
+      "current_state": {
+        "review_date": "2026-10-25",
+        "review_source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+        "status": "程式已見／仍有缺口",
+        "implementation_state": "observed_with_gap",
+        "assessment": "建立／列表／逐 ID Runtime、出入籠、選取／元件的對應切片已見；歷史 GUI 證據限原來源，本次失敗注入、三窗／重啟／產物 GUI 尚未重跑。",
+        "path": "docs/teaching/history/day-25/archive/notion/pet.md",
+        "canonical_index": "docs/teaching/current/article-states.json",
+        "full_slice_acceptance": false,
+        "original_record_preserved": true
       }
     },
     {
@@ -244,6 +299,17 @@
       "original_paths": {
         "frozen_notion_snapshot": "docs/teaching/archive/day-25/notion/analytics.md",
         "archive_manifest": "docs/teaching/archive/day-25/manifest.json"
+      },
+      "current_state": {
+        "review_date": "2026-10-25",
+        "review_source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+        "status": "程式已見／仍有缺口",
+        "implementation_state": "observed_with_gap",
+        "assessment": "對應改密碼／Session、來源切換、事件類型與標籤已在正式 password_login／Leptos／PG caller；不再列單純未套用。舊標籤測試與正式授權／角色等缺口仍需核對。",
+        "path": "docs/teaching/history/day-25/analytics/notion/400e51d45093810796cbd6074c8d35c3.md",
+        "canonical_index": "docs/teaching/current/article-states.json",
+        "full_slice_acceptance": false,
+        "original_record_preserved": true
       }
     },
     {
@@ -276,7 +342,18 @@
         "scope": "lesson slice only",
         "full_product_acceptance": false
       },
-      "delivery_metadata_scope": "original publication; latest implementation status is in archive_validation"
+      "delivery_metadata_scope": "original publication; latest implementation status is in archive_validation",
+      "current_state": {
+        "review_date": "2026-10-25",
+        "review_source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+        "status": "程式已見／待當次驗收",
+        "implementation_state": "observed",
+        "assessment": "註冊、帳密／Session、完成頁、會員守衛、登出、個人頁建房及 WS 守衛的對應 caller 已見；舊來源實證保留其範圍，本次不追認全部驗收。",
+        "path": "docs/teaching/history/day-26/chat/github.md",
+        "canonical_index": "docs/teaching/current/article-states.json",
+        "full_slice_acceptance": false,
+        "original_record_preserved": true
+      }
     },
     {
       "project": "pet",
@@ -297,6 +374,17 @@
       "rules_version": "daily-tdd-minimum-v1",
       "original_paths": {
         "article_path": "docs/teaching/day26/pet.md"
+      },
+      "current_state": {
+        "review_date": "2026-10-25",
+        "review_source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+        "status": "程式已見／仍有缺口",
+        "implementation_state": "observed_with_gap",
+        "assessment": "建立／列表／逐 ID Runtime、出入籠、選取／元件的對應切片已見；歷史 GUI 證據限原來源，本次失敗注入、三窗／重啟／產物 GUI 尚未重跑。",
+        "path": "docs/teaching/daily/day-26/pet.md",
+        "canonical_index": "docs/teaching/current/article-states.json",
+        "full_slice_acceptance": false,
+        "original_record_preserved": true
       }
     },
     {
@@ -328,7 +416,18 @@
         "scope": "lesson slice only",
         "full_product_acceptance": false
       },
-      "delivery_metadata_scope": "original publication; latest implementation status is in archive_validation"
+      "delivery_metadata_scope": "original publication; latest implementation status is in archive_validation",
+      "current_state": {
+        "review_date": "2026-10-25",
+        "review_source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+        "status": "程式已見／仍有缺口",
+        "implementation_state": "observed_with_gap",
+        "assessment": "對應改密碼／Session、來源切換、事件類型與標籤已在正式 password_login／Leptos／PG caller；不再列單純未套用。舊標籤測試與正式授權／角色等缺口仍需核對。",
+        "path": "docs/teaching/history/day-26/analytics/github.md",
+        "canonical_index": "docs/teaching/current/article-states.json",
+        "full_slice_acceptance": false,
+        "original_record_preserved": true
+      }
     },
     {
       "project": "chat",
@@ -353,7 +452,18 @@
         "scope": "lesson slice only",
         "full_product_acceptance": false
       },
-      "delivery_metadata_scope": "original publication; latest implementation status is in archive_validation"
+      "delivery_metadata_scope": "original publication; latest implementation status is in archive_validation",
+      "current_state": {
+        "review_date": "2026-10-25",
+        "review_source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+        "status": "程式已見／待當次驗收",
+        "implementation_state": "observed",
+        "assessment": "註冊、帳密／Session、完成頁、會員守衛、登出、個人頁建房及 WS 守衛的對應 caller 已見；舊來源實證保留其範圍，本次不追認全部驗收。",
+        "path": "docs/teaching/history/day-27/chat/github.md",
+        "canonical_index": "docs/teaching/current/article-states.json",
+        "full_slice_acceptance": false,
+        "original_record_preserved": true
+      }
     },
     {
       "project": "pet",
@@ -369,7 +479,18 @@
       "main_application": "not applied",
       "functional_acceptance": false,
       "next_day_before": 27,
-      "next_day_after": 28
+      "next_day_after": 28,
+      "current_state": {
+        "review_date": "2026-10-25",
+        "review_source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+        "status": "程式已見／仍有缺口",
+        "implementation_state": "observed_with_gap",
+        "assessment": "建立／列表／逐 ID Runtime、出入籠、選取／元件的對應切片已見；歷史 GUI 證據限原來源，本次失敗注入、三窗／重啟／產物 GUI 尚未重跑。",
+        "path": "docs/teaching/daily/day-27/pet.md",
+        "canonical_index": "docs/teaching/current/article-states.json",
+        "full_slice_acceptance": false,
+        "original_record_preserved": true
+      }
     },
     {
       "project": "analytics",
@@ -394,7 +515,18 @@
         "scope": "lesson slice only",
         "full_product_acceptance": false
       },
-      "delivery_metadata_scope": "original publication; latest implementation status is in archive_validation"
+      "delivery_metadata_scope": "original publication; latest implementation status is in archive_validation",
+      "current_state": {
+        "review_date": "2026-10-25",
+        "review_source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+        "status": "程式已見／仍有缺口",
+        "implementation_state": "observed_with_gap",
+        "assessment": "對應改密碼／Session、來源切換、事件類型與標籤已在正式 password_login／Leptos／PG caller；不再列單純未套用。舊標籤測試與正式授權／角色等缺口仍需核對。",
+        "path": "docs/teaching/history/day-27/analytics/github.md",
+        "canonical_index": "docs/teaching/current/article-states.json",
+        "full_slice_acceptance": false,
+        "original_record_preserved": true
+      }
     },
     {
       "project": "chat",
@@ -414,7 +546,18 @@
       "tests": "not run",
       "functional_acceptance": false,
       "next_day_before": 28,
-      "next_day_after": 29
+      "next_day_after": 29,
+      "current_state": {
+        "review_date": "2026-10-25",
+        "review_source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+        "status": "原文待勘誤／現碼另記",
+        "implementation_state": "correction_required",
+        "assessment": "SignInPage 已有正式表單；原文的 leptos::ssr::render_to_string 已不適用，現行程式用 view!/.to_html()。後續 r2 已說明 API，原篇仍不能直接原樣套用。",
+        "path": "docs/teaching/daily/day-28/chat.md",
+        "canonical_index": "docs/teaching/current/article-states.json",
+        "full_slice_acceptance": false,
+        "original_record_preserved": true
+      }
     },
     {
       "project": "analytics",
@@ -433,7 +576,18 @@
       "tests": "not run",
       "functional_acceptance": false,
       "next_day_before": 28,
-      "next_day_after": 29
+      "next_day_after": 29,
+      "current_state": {
+        "review_date": "2026-10-25",
+        "review_source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+        "status": "原文待勘誤／現碼另記",
+        "implementation_state": "correction_required",
+        "assessment": "Dashboard Leptos renderer 已見；原文 SSR API／舊總數標籤測試需版本化勘誤，不能原樣重貼。",
+        "path": "docs/teaching/daily/day-28/analytics.md",
+        "canonical_index": "docs/teaching/current/article-states.json",
+        "full_slice_acceptance": false,
+        "original_record_preserved": true
+      }
     },
     {
       "project": "pet",
@@ -450,7 +604,18 @@
       "tests": "not run",
       "functional_acceptance": false,
       "next_day_before": 28,
-      "next_day_after": 29
+      "next_day_after": 29,
+      "current_state": {
+        "review_date": "2026-10-25",
+        "review_source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+        "status": "程式已見／仍有缺口",
+        "implementation_state": "observed_with_gap",
+        "assessment": "建立／列表／逐 ID Runtime、出入籠、選取／元件的對應切片已見；歷史 GUI 證據限原來源，本次失敗注入、三窗／重啟／產物 GUI 尚未重跑。",
+        "path": "docs/teaching/daily/day-28/pet.md",
+        "canonical_index": "docs/teaching/current/article-states.json",
+        "full_slice_acceptance": false,
+        "original_record_preserved": true
+      }
     },
     {
       "project": "chat",
@@ -476,7 +641,18 @@
         "scope": "lesson slice only",
         "full_product_acceptance": false
       },
-      "delivery_metadata_scope": "original publication; latest implementation status is in archive_validation"
+      "delivery_metadata_scope": "original publication; latest implementation status is in archive_validation",
+      "current_state": {
+        "review_date": "2026-10-25",
+        "review_source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+        "status": "程式已見／待當次驗收",
+        "implementation_state": "observed",
+        "assessment": "註冊、帳密／Session、完成頁、會員守衛、登出、個人頁建房及 WS 守衛的對應 caller 已見；舊來源實證保留其範圍，本次不追認全部驗收。",
+        "path": "docs/teaching/history/day-29/chat/github.md",
+        "canonical_index": "docs/teaching/current/article-states.json",
+        "full_slice_acceptance": false,
+        "original_record_preserved": true
+      }
     },
     {
       "project": "pet",
@@ -493,7 +669,18 @@
       "tests": "not run",
       "functional_acceptance": false,
       "next_day_before": 29,
-      "next_day_after": 30
+      "next_day_after": 30,
+      "current_state": {
+        "review_date": "2026-10-25",
+        "review_source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+        "status": "程式已見／仍有缺口",
+        "implementation_state": "observed_with_gap",
+        "assessment": "建立／列表／逐 ID Runtime、出入籠、選取／元件的對應切片已見；歷史 GUI 證據限原來源，本次失敗注入、三窗／重啟／產物 GUI 尚未重跑。",
+        "path": "docs/teaching/daily/day-29/pet.md",
+        "canonical_index": "docs/teaching/current/article-states.json",
+        "full_slice_acceptance": false,
+        "original_record_preserved": true
+      }
     },
     {
       "project": "analytics",
@@ -519,7 +706,18 @@
         "scope": "lesson slice only",
         "full_product_acceptance": false
       },
-      "delivery_metadata_scope": "original publication; latest implementation status is in archive_validation"
+      "delivery_metadata_scope": "original publication; latest implementation status is in archive_validation",
+      "current_state": {
+        "review_date": "2026-10-25",
+        "review_source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+        "status": "程式已見／仍有缺口",
+        "implementation_state": "observed_with_gap",
+        "assessment": "對應改密碼／Session、來源切換、事件類型與標籤已在正式 password_login／Leptos／PG caller；不再列單純未套用。舊標籤測試與正式授權／角色等缺口仍需核對。",
+        "path": "docs/teaching/history/day-29/analytics/github.md",
+        "canonical_index": "docs/teaching/current/article-states.json",
+        "full_slice_acceptance": false,
+        "original_record_preserved": true
+      }
     },
     {
       "project": "chat",
@@ -545,7 +743,18 @@
         "blob_sha": "6f0a653729cb2ef4fa1dd016757a15f84163efc1",
         "sha256": "5b7bc3be9fa000950715cb903707b05e41ef8639cabd3d65936a6bbf98aec4ee"
       },
-      "note": "Redelivered to match twelve agreed policies; original Git history preserved; no Gate 2 validation; no Day increment"
+      "note": "Redelivered to match twelve agreed policies; original Git history preserved; no Gate 2 validation; no Day increment",
+      "current_state": {
+        "review_date": "2026-10-25",
+        "review_source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+        "status": "程式已見／待當次驗收",
+        "implementation_state": "observed",
+        "assessment": "註冊、帳密／Session、完成頁、會員守衛、登出、個人頁建房及 WS 守衛的對應 caller 已見；舊來源實證保留其範圍，本次不追認全部驗收。",
+        "path": "docs/teaching/daily/day-30/chat.md",
+        "canonical_index": "docs/teaching/current/article-states.json",
+        "full_slice_acceptance": false,
+        "original_record_preserved": true
+      }
     },
     {
       "project": "pet",
@@ -571,7 +780,18 @@
         "blob_sha": "038d6f5cc2c807ebe26789b0c036245067ba23e3",
         "sha256": "d01fc34fdb9d23e7f55e218aa3aab187b83d611698f3763c8ee6caa8a1287cd6"
       },
-      "note": "Redelivered to match twelve agreed policies; original Git history preserved; no Gate 2 validation; no Day increment"
+      "note": "Redelivered to match twelve agreed policies; original Git history preserved; no Gate 2 validation; no Day increment",
+      "current_state": {
+        "review_date": "2026-10-25",
+        "review_source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+        "status": "程式已見／仍有缺口",
+        "implementation_state": "observed_with_gap",
+        "assessment": "建立／列表／逐 ID Runtime、出入籠、選取／元件的對應切片已見；歷史 GUI 證據限原來源，本次失敗注入、三窗／重啟／產物 GUI 尚未重跑。",
+        "path": "docs/teaching/daily/day-30/pet.md",
+        "canonical_index": "docs/teaching/current/article-states.json",
+        "full_slice_acceptance": false,
+        "original_record_preserved": true
+      }
     },
     {
       "project": "analytics",
@@ -597,7 +817,18 @@
         "blob_sha": "00f09eab59a3f95371d348d1552431faee02cf90",
         "sha256": "4177549918ebfc23c15026013dc66b6b71026517daa0b7b9dfca4308ce3d5c82"
       },
-      "note": "Redelivered to match twelve agreed policies; original Git history preserved; no Gate 2 validation; no Day increment"
+      "note": "Redelivered to match twelve agreed policies; original Git history preserved; no Gate 2 validation; no Day increment",
+      "current_state": {
+        "review_date": "2026-10-25",
+        "review_source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+        "status": "程式已見／待當次驗收",
+        "implementation_state": "observed",
+        "assessment": "正式 LoginView／ChangePasswordView／Dashboard 均已由 Leptos renderer 接到 password_login；舊「登入／改密碼仍 HTML 字串」或「尚未套用」已過時；目前 DB／瀏覽器未新驗。",
+        "path": "docs/teaching/daily/day-30/analytics.md",
+        "canonical_index": "docs/teaching/current/article-states.json",
+        "full_slice_acceptance": false,
+        "original_record_preserved": true
+      }
     },
     {
       "parent": "259a1e6f08a6522ef596fe1448af4ac2bed56167",
@@ -625,7 +856,18 @@
       "next_day_after": 32,
       "archived": false,
       "remaining_gaps": "表單、CSRF、HTTP／SQLite 與瀏覽器流程待驗證；逐房 ACL 等缺口保留",
-      "expected_state_parent_sha": "66a7d1141ce057c04ee631434d959b1cb22e9ef2"
+      "expected_state_parent_sha": "66a7d1141ce057c04ee631434d959b1cb22e9ef2",
+      "current_state": {
+        "review_date": "2026-10-25",
+        "review_source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+        "status": "程式已見／待當次驗收",
+        "implementation_state": "observed",
+        "assessment": "註冊、帳密／Session、完成頁、會員守衛、登出、個人頁建房及 WS 守衛的對應 caller 已見；舊來源實證保留其範圍，本次不追認全部驗收。",
+        "path": "docs/teaching/daily/day-31/chat.md",
+        "canonical_index": "docs/teaching/current/article-states.json",
+        "full_slice_acceptance": false,
+        "original_record_preserved": true
+      }
     },
     {
       "parent": "791a31ad1292559a6eb7a6cdca8b72ecc2f08389",
@@ -653,7 +895,18 @@
       "next_day_after": 32,
       "archived": false,
       "remaining_gaps": "原生 close／hide／重開與三窗 GUI 未驗證；回籠補償及單圖 FIFO 保留",
-      "expected_state_parent_sha": "e1f2dee87de9e161ab1001377ad1916f1aefcf87"
+      "expected_state_parent_sha": "e1f2dee87de9e161ab1001377ad1916f1aefcf87",
+      "current_state": {
+        "review_date": "2026-10-25",
+        "review_source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+        "status": "程式已見／歷史驗證保留",
+        "implementation_state": "observed_with_history",
+        "assessment": "控制窗 CloseRequested 已攔截並 hide，open_control_window show/focus 同窗；舊「關閉後無法恢復」缺漏已在來源修正。歷史 GUI 證據限原來源，本次未重跑。",
+        "path": "docs/teaching/daily/day-31/pet.md",
+        "canonical_index": "docs/teaching/current/article-states.json",
+        "full_slice_acceptance": false,
+        "original_record_preserved": true
+      }
     },
     {
       "parent": "eeb27bb667904ddc343483701afda8272ef9c87a",
@@ -681,7 +934,18 @@
       "next_day_after": 32,
       "archived": false,
       "remaining_gaps": "SSR／正式路由、隔離 PostgreSQL 全 targets 與瀏覽器驗收未執行；初始化及 ACL 差異保留",
-      "expected_state_parent_sha": "7b1fe052730d7a6d074a95fcd6f0ce19bed2259e"
+      "expected_state_parent_sha": "7b1fe052730d7a6d074a95fcd6f0ce19bed2259e",
+      "current_state": {
+        "review_date": "2026-10-25",
+        "review_source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+        "status": "程式已見／待當次驗收",
+        "implementation_state": "observed",
+        "assessment": "正式 LoginView／ChangePasswordView／Dashboard 均已由 Leptos renderer 接到 password_login；舊「登入／改密碼仍 HTML 字串」或「尚未套用」已過時；目前 DB／瀏覽器未新驗。",
+        "path": "docs/teaching/daily/day-31/analytics.md",
+        "canonical_index": "docs/teaching/current/article-states.json",
+        "full_slice_acceptance": false,
+        "original_record_preserved": true
+      }
     },
     {
       "repository": "williechen/copilot_use",
@@ -711,7 +975,18 @@
       "next_day_after": 33,
       "archived": false,
       "remaining_gaps": "Chat 歷史載入／逐房 ACL／作者身分與真實 SSR/瀏覽器驗收未完成；Day25 共用認證 FIFO pending",
-      "expected_state_parent_sha": "9c39d359f7a99b61bd7128648ec3825fc6ccf5a5"
+      "expected_state_parent_sha": "9c39d359f7a99b61bd7128648ec3825fc6ccf5a5",
+      "current_state": {
+        "review_date": "2026-10-25",
+        "review_source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+        "status": "程式已見／仍有缺口",
+        "implementation_state": "observed_with_gap",
+        "assessment": "房間畫面、多行輸入與歷史未接通提示已見，舊 SSR 提示缺漏已由後續來源修正；真正歷史查詢、作者與完整 ACL 仍未完成。",
+        "path": "docs/teaching/daily/day-32/chat.md",
+        "canonical_index": "docs/teaching/current/article-states.json",
+        "full_slice_acceptance": false,
+        "original_record_preserved": true
+      }
     },
     {
       "repository": "williechen/copilot_use",
@@ -741,7 +1016,18 @@
       "next_day_after": 33,
       "archived": false,
       "remaining_gaps": "Pet 真實原生多窗選取/焦點/重啟與 DB GUI 一致性未驗收；Day25 單圖 FIFO pending",
-      "expected_state_parent_sha": "10c109a66cd1a3383cdf8a123673e085cf4705ed"
+      "expected_state_parent_sha": "10c109a66cd1a3383cdf8a123673e085cf4705ed",
+      "current_state": {
+        "review_date": "2026-10-25",
+        "review_source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+        "status": "程式已見／仍有缺口",
+        "implementation_state": "observed_with_gap",
+        "assessment": "建立／列表／逐 ID Runtime、出入籠、選取／元件的對應切片已見；歷史 GUI 證據限原來源，本次失敗注入、三窗／重啟／產物 GUI 尚未重跑。",
+        "path": "docs/teaching/daily/day-32/pet.md",
+        "canonical_index": "docs/teaching/current/article-states.json",
+        "full_slice_acceptance": false,
+        "original_record_preserved": true
+      }
     },
     {
       "repository": "williechen/copilot_use",
@@ -771,7 +1057,18 @@
       "next_day_after": 33,
       "archived": false,
       "remaining_gaps": "Analytics 真 PostgreSQL/SSR/HTTP/瀏覽器篩選未驗收；管理員初始化、角色/來源 ACL、SSE/明細缺口保留",
-      "expected_state_parent_sha": "5646bef7b7accd951897354114eba853444833c8"
+      "expected_state_parent_sha": "5646bef7b7accd951897354114eba853444833c8",
+      "current_state": {
+        "review_date": "2026-10-25",
+        "review_source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+        "status": "程式已見／仍有缺口",
+        "implementation_state": "observed_with_gap",
+        "assessment": "對應改密碼／Session、來源切換、事件類型與標籤已在正式 password_login／Leptos／PG caller；不再列單純未套用。舊標籤測試與正式授權／角色等缺口仍需核對。",
+        "path": "docs/teaching/daily/day-32/analytics.md",
+        "canonical_index": "docs/teaching/current/article-states.json",
+        "full_slice_acceptance": false,
+        "original_record_preserved": true
+      }
     },
     {
       "repository": "williechen/copilot_use",
@@ -796,7 +1093,18 @@
       "archived": false,
       "next_day_before": 33,
       "next_day_after": 34,
-      "remaining_gaps": "Chat歷史讀回/作者/逐房ACL/長連線撤銷與 Day25 FIFO 尚未驗收"
+      "remaining_gaps": "Chat歷史讀回/作者/逐房ACL/長連線撤銷與 Day25 FIFO 尚未驗收",
+      "current_state": {
+        "review_date": "2026-10-25",
+        "review_source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+        "status": "程式已見／待當次驗收",
+        "implementation_state": "observed",
+        "assessment": "room_list_feedback 與 has_snapshot 已接 RoomList；不再列單純未套用，當次瀏覽器狀態驗收未執行。",
+        "path": "docs/teaching/daily/day-33/chat.md",
+        "canonical_index": "docs/teaching/current/article-states.json",
+        "full_slice_acceptance": false,
+        "original_record_preserved": true
+      }
     },
     {
       "repository": "williechen/copilot_use",
@@ -820,7 +1128,18 @@
       "archived": false,
       "next_day_before": 33,
       "next_day_after": 34,
-      "remaining_gaps": "Pet GUI兩窗選取/重啟與 SQLite失敗注入、Day25 FIFO 尚未驗收"
+      "remaining_gaps": "Pet GUI兩窗選取/重啟與 SQLite失敗注入、Day25 FIFO 尚未驗收",
+      "current_state": {
+        "review_date": "2026-10-25",
+        "review_source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+        "status": "來源 JS 已驗／產物仍有差異",
+        "implementation_state": "source_contract_verified",
+        "assessment": "來源 openPetControls 已先 select_pet 再開控制窗，既有三個 source 契約測試全過；tracked dist 的同測試一過兩敗，完整打包／GUI 未完成。",
+        "path": "docs/teaching/daily/day-33/pet.md",
+        "canonical_index": "docs/teaching/current/article-states.json",
+        "full_slice_acceptance": false,
+        "original_record_preserved": true
+      }
     },
     {
       "repository": "williechen/copilot_use",
@@ -844,7 +1163,18 @@
       "archived": false,
       "next_day_before": 33,
       "next_day_after": 34,
-      "remaining_gaps": "Analytics 管理員初始化/角色來源ACL/SSE/明細與新標示瀏覽器驗收未完成"
+      "remaining_gaps": "Analytics 管理員初始化/角色來源ACL/SSE/明細與新標示瀏覽器驗收未完成",
+      "current_state": {
+        "review_date": "2026-10-25",
+        "review_source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+        "status": "程式已見／仍有缺口",
+        "implementation_state": "observed_with_gap",
+        "assessment": "對應改密碼／Session、來源切換、事件類型與標籤已在正式 password_login／Leptos／PG caller；不再列單純未套用。舊標籤測試與正式授權／角色等缺口仍需核對。",
+        "path": "docs/teaching/daily/day-33/analytics.md",
+        "canonical_index": "docs/teaching/current/article-states.json",
+        "full_slice_acceptance": false,
+        "original_record_preserved": true
+      }
     },
     {
       "repository": "williechen/copilot_use",
@@ -920,7 +1250,18 @@
           "blob_sha": "b5ca6059f1d14f5d358542a690e2efab1ad94d04"
         }
       ],
-      "ci_supplement": "docs/teaching/daily/day-34/source-snapshot.json"
+      "ci_supplement": "docs/teaching/daily/day-34/source-snapshot.json",
+      "current_state": {
+        "review_date": "2026-10-25",
+        "review_source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+        "status": "已被 r2 取代",
+        "implementation_state": "superseded_revision",
+        "assessment": "已由 chat-r2.md 取代閱讀／套用指引；r1 曾被套入而造成登入頁重複，最新來源已依 r2 移除，不再建議照貼 r1；原正文與交付證據保留。",
+        "path": "docs/teaching/daily/day-34/chat.md",
+        "canonical_index": "docs/teaching/current/article-states.json",
+        "full_slice_acceptance": false,
+        "original_record_preserved": true
+      }
     },
     {
       "repository": "williechen/copilot_use",
@@ -996,7 +1337,18 @@
           "blob_sha": "b5ca6059f1d14f5d358542a690e2efab1ad94d04"
         }
       ],
-      "ci_supplement": "docs/teaching/daily/day-34/source-snapshot.json"
+      "ci_supplement": "docs/teaching/daily/day-34/source-snapshot.json",
+      "current_state": {
+        "review_date": "2026-10-25",
+        "review_source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+        "status": "程式已見／待當次驗收",
+        "implementation_state": "observed",
+        "assessment": "名稱規則已移到 pet-application，Tauri 及 PetStore 使用同一函式，含控制字元拒絕與測試；pet-persistence 仍空。本次 Rust／SQLite／GUI 未執行。",
+        "path": "docs/teaching/daily/day-34/pet.md",
+        "canonical_index": "docs/teaching/current/article-states.json",
+        "full_slice_acceptance": false,
+        "original_record_preserved": true
+      }
     },
     {
       "repository": "williechen/copilot_use",
@@ -1073,7 +1425,18 @@
         }
       ],
       "ci_supplement": "docs/teaching/daily/day-34/source-snapshot.json",
-      "correction_path": "docs/teaching/daily/day-34/analytics-corrections-r1.md"
+      "correction_path": "docs/teaching/daily/day-34/analytics-corrections-r1.md",
+      "current_state": {
+        "review_date": "2026-10-25",
+        "review_source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+        "status": "程式已見／待當次驗收",
+        "implementation_state": "observed",
+        "assessment": "ensure_default 已接主啟動與 CLI，login 允許預設 admin 抵達 Argon2 驗證，首次改密碼路由重用；本文「admin=4 bytes」已有獨立勘誤為5。本次新 PG／HTTP／瀏覽器未重跑。",
+        "path": "docs/teaching/daily/day-34/analytics.md",
+        "canonical_index": "docs/teaching/current/article-states.json",
+        "full_slice_acceptance": false,
+        "original_record_preserved": true
+      }
     },
     {
       "repository": "williechen/copilot_use",
@@ -1106,7 +1469,18 @@
         "reason": "r1 duplicated existing SignInPage; preserve original body and hashes"
       },
       "expected_state_parent_sha": "7a3400259b59cf617d6c3c721bfc10d1014542b0",
-      "raw_error": null
+      "raw_error": null,
+      "current_state": {
+        "review_date": "2026-10-25",
+        "review_source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+        "status": "程式已見／待當次驗收",
+        "implementation_state": "observed",
+        "assessment": "現行閱讀版本為 r2；最新來源已移除 LoginView／模組宣告，GET /login redirect /signin 與唯一表單測試已見，POST /login 保留。本次尚未執行 Rust／HTTP／瀏覽器，不追認 Gate 2。",
+        "path": "docs/teaching/daily/day-34/chat-r2.md",
+        "canonical_index": "docs/teaching/current/article-states.json",
+        "full_slice_acceptance": false,
+        "original_record_preserved": true
+      }
     }
   ],
   "day15_frozen": true,
@@ -1707,5 +2081,23 @@
     "makeup_queue_unchanged": true,
     "last_full_comparison_unchanged": true,
     "product_repository_read_only": true
+  },
+  "article_status_review": {
+    "date": "2026-10-25",
+    "document_baseline_sha": "5d66ad95b96a7fffd85856eb80676ddd7120baa6",
+    "source_sha": "3aeab095f27aa3fc7f1b76995e0d059a94c5dd4d",
+    "canonical_article_count": 99,
+    "reviewed_revisions": 100,
+    "teaching_markdown_static_read": 492,
+    "index": "docs/teaching/current/ARTICLE_STATUS.md",
+    "machine_readable": "docs/teaching/current/article-states.json",
+    "markdown_inventory": "docs/teaching/current/article-markdown-inventory.json",
+    "scope": "old article content and current state reconciliation; not full code/functional comparison",
+    "article_bodies_modified": false,
+    "new_runtime_tests": false,
+    "new_archive_moves": 0,
+    "next_day_unchanged": true,
+    "last_full_comparison_unchanged": true,
+    "evidence": "docs/source-review/article-status-review-2026-10-25.json"
   }
 }

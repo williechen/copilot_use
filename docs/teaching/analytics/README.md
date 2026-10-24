@@ -1,5 +1,9 @@
 # Analytics 首頁
 
+<!-- article-status:start -->
+[全部文章現存狀態（99 篇＋舊修訂）](../current/ARTICLE_STATUS.md)：原文、程式所見與歷史／目前驗證分開記錄；已由後續實作取代者勿原樣套回。
+<!-- article-status:end -->
+
 <!-- duplicate-review:start -->
 [後續調整清單（13 項）](../../FUTURE_WORK.md) · [原始核對報告](../../source-review/2026-10-25-duplicate-application-review.md)。可清除、先遷測試與保留項目分別列明，產品套用／驗收另記。
 <!-- duplicate-review:end -->
@@ -78,7 +82,7 @@ Analytics 定位為純管理後台，Leptos 提供後台畫面；除登入及必
 
 ## 開發位置
 
-`rust_ai_ring/analytics_apps/analytics_server`（package `analytics-server`）負責 HTTP 路由、登入授權、Leptos 後台與現有 PostgreSQL Adapter；migration 位於 `analytics_apps/migrations`。`analytics_persistence` 目前為空 library；若後續教學移出 SQLx Adapter，須一併提供真實呼叫端與測試。copilot_use 舊 shared/proto 與 analytics_transport 僅供歷史追溯。
+`rust_ai_ring/analytics_apps/analytics_server`（package `analytics-server`）負責 HTTP 路由、登入授權、Leptos 後台與現有 PostgreSQL Adapter；migration 位於 `analytics_apps/migrations`。`analytics_persistence` 仍為空 library；`analytics_ui`／`analytics_application`／`analytics_domain` 是未接業務的預設範本，正式 Leptos／帳密流程仍在 server；若後續教學移出 SQLx Adapter，須一併提供真實呼叫端與測試。copilot_use 舊 shared/proto 與 analytics_transport 僅供歷史追溯。
 
 先沿既有 API 接通粗略可操作畫面，再逐步補趨勢、明細與管理。資料安全或基本流程阻礙當步處理，其他深化留在原功能追蹤；詳細程式與驗證仍看相關功能教學。
 
@@ -93,10 +97,6 @@ Leptos登入／改密碼、完整PG與實際HTTP通過；Day32事件類型篩選
 [Day31教學：Leptos 改密碼頁](../daily/day-31/analytics.md)（Leptos改密碼頁已套用並通過本輪PG／HTTP驗證；完整後台仍有獨立待辦。）
 
 
-## 先前教學（Day32）
+## 教學與現存狀態
 
-[Day32：Dashboard 事件類型篩選](../daily/day-32/analytics.md)（程式已套用，PG／HTTP與本輪瀏覽器篩選已驗證；完整產品驗收仍未完成）。此段保留 Day32 當時的進度；最新交付與下一篇見頁首各案清單，以 [即時進度檔](../../learning-state.json) 為準；Day31 與歷史驗證證據保留。
-
-## 先前教學（Day33）
-
-[Day33：Dashboard 數量標示區分全部與精確篩選](../daily/day-33/analytics.md)（教學已交付；程式未套用、測試未執行、功能未驗收）。當時下一篇為 Day34；目前以 [即時進度檔](../../learning-state.json) 為準。
+完整歷史及目前程式／驗證狀態見 [逐篇狀態](../current/ARTICLE_STATUS.md)；最新交付與下一篇仍依頁首及 learning-state。舊文章原文保留當時語境，後續修訂與程式套用另列，不再沿用過時「尚未套用」作為現在的判定。

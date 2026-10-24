@@ -1,5 +1,9 @@
 # Chat 首頁
 
+<!-- article-status:start -->
+[全部文章現存狀態（99 篇＋舊修訂）](../current/ARTICLE_STATUS.md)：原文、程式所見與歷史／目前驗證分開記錄；已由後續實作取代者勿原樣套回。
+<!-- article-status:end -->
+
 <!-- duplicate-review:start -->
 [後續調整清單（13 項）](../../FUTURE_WORK.md) · [原始核對報告](../../source-review/2026-10-25-duplicate-application-review.md)。可清除、先遷測試與保留項目分別列明，產品套用／驗收另記。
 <!-- duplicate-review:end -->
@@ -79,10 +83,6 @@
 [Day31教學：個人頁建房](../daily/day-31/chat.md)（個人頁建房切片已套用並通過本輪瀏覽器操作；整體驗證仍未全部通過。）
 
 
-## 先前教學（Day32）
+## 教學與現存狀態
 
-[Day32：聊天室歷史載入狀態](../daily/day-32/chat.md)（程式已套用，SSR與本輪瀏覽器顯示已驗證；歷史功能仍未接通；完整產品驗收仍未完成）。此段保留 Day32 當時的進度；最新交付與下一篇見頁首各案清單，以 [即時進度檔](../../learning-state.json) 為準；Day31 與歷史驗證證據保留。
-
-## 先前教學（Day33）
-
-[Day33：房間搜尋結果與尚未載入狀態](../daily/day-33/chat.md)（[版本補核](../daily/day-33/chat-version-verification.md)；教學已交付，程式未套用、測試未執行、功能未驗收）。當時下一篇為 Day34；目前以 [即時進度檔](../../learning-state.json) 為準。
+完整歷史及目前程式／驗證狀態見 [逐篇狀態](../current/ARTICLE_STATUS.md)；最新交付與下一篇仍依頁首及 learning-state。舊文章原文保留當時語境，後續修訂與程式套用另列，不再沿用過時「尚未套用」作為現在的判定。

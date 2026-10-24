@@ -1,5 +1,9 @@
 # 三專案教學首頁
 
+<!-- article-status:start -->
+[全部文章現存狀態（99 篇＋舊修訂）](current/ARTICLE_STATUS.md)：原文、程式所見與歷史／目前驗證分開記錄；已由後續實作取代者勿原樣套回。
+<!-- article-status:end -->
+
 <!-- duplicate-review:start -->
 [後續調整清單（13 項）](../FUTURE_WORK.md) · [原始核對報告](../source-review/2026-10-25-duplicate-application-review.md)。可清除、先遷測試與保留項目分別列明，產品套用／驗收另記。
 <!-- duplicate-review:end -->

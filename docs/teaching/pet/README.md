@@ -1,5 +1,9 @@
 # Pet 首頁
 
+<!-- article-status:start -->
+[全部文章現存狀態（99 篇＋舊修訂）](../current/ARTICLE_STATUS.md)：原文、程式所見與歷史／目前驗證分開記錄；已由後續實作取代者勿原樣套回。
+<!-- article-status:end -->
+
 <!-- duplicate-review:start -->
 [後續調整清單（13 項）](../../FUTURE_WORK.md) · [原始核對報告](../../source-review/2026-10-25-duplicate-application-review.md)。可清除、先遷測試與保留項目分別列明，產品套用／驗收另記。
 <!-- duplicate-review:end -->
@@ -70,7 +74,7 @@
 
 ## 開發位置
 
-`rust_ai_ring/pet_apps/pet_server`（package `pet-server`）負責 Tauri／OS 入口，`pet_ui` 負責 Leptos 畫面與 bridge，`pet_domain` 負責純規則，migration 位於 `pet_apps/migrations`。`pet_application` 與 `pet_persistence` 目前為空 library，後續教學須按實際呼叫鏈提供最小接線與測試，不能宣稱已接通。copilot_use 舊 pet_runtime 僅供歷史追溯。
+`rust_ai_ring/pet_apps/pet_server`（package `pet-server`）負責 Tauri／OS 入口，`pet_ui` 負責 Leptos 畫面與 bridge，`pet_domain` 負責純規則，migration 位於 `pet_apps/migrations`。`pet_application` 已承接建立名稱規則並由 Tauri／PetStore 呼叫；`pet_persistence` 仍未承接 SQLx Adapter。其餘分層依最新 caller 與測試逐切片調整。copilot_use 舊 pet_runtime 僅供歷史追溯。
 
 本機 IPC 可用於測試實際能力，使用全新測試資料與授權目錄；本入口不要求重跑付費 AI。實作與驗證步驟看對應功能教學，不將專用測試收據當成私人檔案已處理。
 
@@ -85,10 +89,6 @@
 [Day31教學：控制窗關閉後重開](../daily/day-31/pet.md)（控制窗隱藏／再開已套用並由原生關窗事件實測；完整寵物生命週期仍待補驗。）
 
 
-## 先前教學（Day32）
+## 教學與現存狀態
 
-[Day32：右鍵開啟控制窗並選取對應寵物](../daily/day-32/pet.md)（程式已套用，原生右鍵選單選取路徑已實測通過；完整產品驗收仍未完成）。此段保留 Day32 當時的進度；最新交付與下一篇見頁首各案清單，以 [即時進度檔](../../learning-state.json) 為準；Day31 與歷史驗證證據保留。
-
-## 先前教學（Day33）
-
-[Day33：生活窗「控制台」按鈕選取自己的寵物再開窗](../daily/day-33/pet.md)（教學已交付；程式未套用、測試未執行、功能未驗收）。當時下一篇為 Day34；目前以 [即時進度檔](../../learning-state.json) 為準。
+完整歷史及目前程式／驗證狀態見 [逐篇狀態](../current/ARTICLE_STATUS.md)；最新交付與下一篇仍依頁首及 learning-state。舊文章原文保留當時語境，後續修訂與程式套用另列，不再沿用過時「尚未套用」作為現在的判定。
