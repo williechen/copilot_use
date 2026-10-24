@@ -1,0 +1,21 @@
+{
+  "task_id": "6acd967c15fc8191ade8407954c5b354",
+  "task_name": "三專案每日 TDD 教學",
+  "task_url": "https://chatgpt.com/scheduled?automationId=6acd967c15fc8191ade8407954c5b354&automationSource=cloud",
+  "observed_date": "2026-10-24",
+  "status": "active",
+  "frequency_display": "每天",
+  "time_display": "上午",
+  "schedule_changed": false,
+  "model_changed": false,
+  "duplicate_created": false,
+  "run_now_triggered": false,
+  "prompt_full_readback_matches": true,
+  "readback_after_server_page_reload": true,
+  "prompt_before_sha256": "bc832473e5c9764e1dfd8dffffb7eb0671f71f14a54aeb32e7ec9b04b9941bda",
+  "prompt_sha256": "635aefd9cdac0ab2af53f22776b68fecd575f92a6429540bd9d593aa87be37d3",
+  "readme_updates": false,
+  "documentation_commit": "86acd3c46dc1883c824bf7bab86fac4b8f071b21",
+  "prompt_document": "docs/teaching/scheduler-instructions-v1.md",
+  "verification_scope": "Existing cloud task prompt saved, page reloaded, and exact full text compared; no Run now or new lesson publication."
+}

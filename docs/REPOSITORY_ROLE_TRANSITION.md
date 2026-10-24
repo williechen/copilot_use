@@ -24,8 +24,8 @@ learning-state 與 manifest 原始 bytes、next_day、FIFO、last_full_compariso
 | .github/workflows/release-approved.yml | 舊庫 Release 發布設定仍在；本次不觸發／發布／搬移資產 |
 | scripts/run-weekly.sh、deploy/systemd/copilot-weekly.* | 舊範例的工作目錄與測試來源未改，本次不執行／安裝／停用 timer |
 | scripts/github-pet-update.py、release-approved.py | 舊庫更新來源與簽章契約保留，不重定向主體安裝包 |
-| 既有每日雲端任務 | 原 scheduler-instructions 文章已過時，僅保留歷史快照；新入口只指向最新規則與狀態，實際提示詞／模型／頻率／啟用狀態尚未讀回，未修改或觸發任務 |
+| 既有每日雲端任務 | 2026-10-24 已更新原每日教學任務的提示詞，重新載入全文讀回一致；時間／模型不變，未建立新任務或立即執行。[現行指令與證據](teaching/scheduler-instructions-v1.md)。其他任務設定未據此認定。 |
 
-既有排程不變的限制下，本次文件同步不宣稱上述執行設定已調整或 dry run 所有項目已結案。後續如調整流程，應保留任務身份／歷史證據，只驗證文件庫的文件一致性，主體程式測試／CI 歸 rust_ai_ring。
+既有排程不變的限制下，除上表明列的每日教學提示詞外，其餘執行設定未在本次調整，也未宣稱 dry run 所有項目已結案。後續如調整流程，應保留任務身份／歷史證據，只驗證文件庫的文件一致性，主體程式測試／CI 歸 rust_ai_ring。
 
 本次提交採 [skip ci] 避免純文件更新觸發舊庫程式測試；這只適用本次 push 的跳過標記，不是 workflow 或未來排程已停用的證據。

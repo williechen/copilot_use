@@ -1,13 +1,13 @@
 {
   "schedule_document_policy": {
     "confirmed_at": "2026-10-23",
-    "previous_schedule_article": "outdated; historical only",
+    "previous_schedule_article": "Prior article preserved as history; current document refreshed on 2026-10-24.",
     "current_document": "docs/teaching/scheduler-instructions-v1.md",
     "execution_rules": "latest docs/COMMON_LEARNING_RULES.md and direct user confirmations",
     "fixed_historical_lesson_prerequisite": false,
-    "actual_task_configuration": "not verified from scheduling service",
+    "actual_task_configuration": "Existing daily teaching task prompt saved and verified after page reload on 2026-10-24; schedule/model unchanged; see current_daily_schedule. Other schedules not verified.",
     "local_matching_automation_files": 0,
-    "actual_tasks_modified": false,
+    "actual_tasks_modified": true,
     "historical_schedule_fields": "not evidence of current activation, timing, model or prompt",
     "weekly_full_comparison_requirement": "at least once per week; update last_full_comparison only on genuinely complete success"
   },
@@ -32,7 +32,7 @@
     "program_repository": "williechen/rust_ai_ring",
     "historical_program_records": "preserved for traceability only; not active tasks or acceptance gates",
     "documentation_code_examples": "teaching content for rust_ai_ring; not a second product implementation",
-    "execution_settings_changed": false
+    "execution_settings_changed": true
   },
   "requirements_policy": {
     "status": "current",
@@ -3388,5 +3388,26 @@
     "observed_date": "2026-10-24",
     "scope": "static_source_layout_only",
     "future_teaching_requirement": "Adapt code paths, package/import names, dependencies, callers and tests to latest rust_ai_ring layout in subsequent lessons; preserve published lessons and existing progress."
+  },
+  "current_daily_schedule": {
+    "task_id": "6acd967c15fc8191ade8407954c5b354",
+    "task_name": "三專案每日 TDD 教學",
+    "task_url": "https://chatgpt.com/scheduled?automationId=6acd967c15fc8191ade8407954c5b354&automationSource=cloud",
+    "observed_date": "2026-10-24",
+    "status": "active",
+    "frequency_display": "每天",
+    "time_display": "上午",
+    "schedule_changed": false,
+    "model_changed": false,
+    "duplicate_created": false,
+    "run_now_triggered": false,
+    "prompt_full_readback_matches": true,
+    "readback_after_server_page_reload": true,
+    "prompt_before_sha256": "bc832473e5c9764e1dfd8dffffb7eb0671f71f14a54aeb32e7ec9b04b9941bda",
+    "prompt_sha256": "635aefd9cdac0ab2af53f22776b68fecd575f92a6429540bd9d593aa87be37d3",
+    "readme_updates": false,
+    "documentation_commit": "86acd3c46dc1883c824bf7bab86fac4b8f071b21",
+    "prompt_document": "docs/teaching/scheduler-instructions-v1.md",
+    "verification_scope": "Existing cloud task prompt saved, page reloaded, and exact full text compared; no Run now or new lesson publication."
   }
 }
