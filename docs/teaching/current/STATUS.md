@@ -8,13 +8,15 @@
 
 ## 最新來源的靜態與 CI 現況（2026-10-25）
 
-目前程式來源為 `williechen/rust_ai_ring/main@54f5d80a5678e68e164d56e6d9f11c57cdff1f36`。本次只核對四個 workspace、相關呼叫者與測試、GitHub Actions；未套用程式、未在此環境執行 Rust／DB／HTTP／GUI 驗收，未做全面比對。
+最新 Chat 核對來源為 `williechen/rust_ai_ring/main@d241cb04765002df797c614049149c3a0a3f7630`；下列其他功能與 CI 觀察保留其原來源 54f5d80a，不直接轉移到新來源。本次只核對四個 workspace、相關呼叫者與測試、GitHub Actions；未套用程式、未在此環境執行 Rust／DB／HTTP／GUI 驗收，未做全面比對。
 
-- 現行帳密登入：Chat 的 `/login` 仍為手寫 HTML 頁面；Leptos 呈現調整待使用者套用與驗證。選房導向、逐房 ACL、作者／歷史與共用認證仍有缺口。
+- 現行帳密登入：`/signin` 已有 SignInPage，最新來源另新增 `/login` 的 LoginView，兩者為重複 Leptos 登入表單。教學已改為重用 SignInPage、GET `/login` 重新導向與移除 LoginView；產品尚未套用此去重修正，HTTP／SQLite／瀏覽器回歸未執行。選房導向、逐房 ACL、作者／歷史與共用認證仍有缺口。
 - 寵物建立：既有 IPC、PetStore 與 SQLite 呼叫鏈存在；pet-application／pet-persistence 仍為空 library。名稱規則分層與控制字元拒絕尚未套用，原生多窗、故障注入與重啟仍待驗證。
 - 管理員初始化：現有 bootstrap 自訂密碼至少 8 bytes，主啟動未初始化；預設 admin/admin 初始化與登入銜接尚未套用。角色、來源 ACL、SSE 與明細仍未驗收；analytics-persistence 尚空。
-- 該來源 [Test All](https://github.com/williechen/rust_ai_ring/actions/runs/40101549290) 的 test-analytics-server 失敗；[Persistence](https://github.com/williechen/rust_ai_ring/actions/runs/40101549347) 的 test-persistence／PostgreSQL 步驟失敗。完整錯誤日誌根因未確認，不能宣稱現行 PG 測試通過。
-- Node、Cargo workspaces 四個 metadata jobs、Chat／Pet／Analytics check/build workflows 成功；此覆蓋不包含未套用程式或完整產品驗收。[精確 run/job/step 證據](../daily/day-34/source-snapshot.json)。
+- 舊來源 54f5d80a 的 [Test All](https://github.com/williechen/rust_ai_ring/actions/runs/40101549290) 的 test-analytics-server 失敗；[Persistence](https://github.com/williechen/rust_ai_ring/actions/runs/40101549347) 的 test-persistence／PostgreSQL 步驟失敗。完整錯誤日誌根因未確認，不能宣稱現行 PG 測試通過。
+- 舊來源 54f5d80a 的 Node、Cargo workspaces 四個 metadata jobs、Chat／Pet／Analytics check/build workflows 成功；此覆蓋不包含未套用程式或完整產品驗收。[精確 run/job/step 證據](../daily/day-34/source-snapshot.json)。
+
+最新 d241cb04 的 CI workflow/job 本次尚未取得可確認結果，標記未知；未將修訂文件發布視為程式驗收。
 
 ## 歷史正式驗證來源（以下結果限原固定來源）
 

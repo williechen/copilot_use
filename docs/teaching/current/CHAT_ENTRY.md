@@ -1,7 +1,9 @@
 # Chat 現行教學入口
 
-[Day34：帳密登入頁採 Leptos 並補齊可存取表單](../daily/day-34/chat.md)
+[Day34 r2：重用 SignInPage，合併重複登入入口](../daily/day-34/chat-r2.md)
 
-教學已交付並完成精確 commit 全文讀回；產品未套用、測試未執行、功能未驗收。下一篇 Day35。
+教學修訂已交付並完成精確 commit 全文讀回；產品去重尚未套用、測試未執行、功能未驗收。下一篇維持 Day35。
 
-[首頁](../chat/README.md) · [目前功能與驗證現況](STATUS.md) · [進度](../../learning-state.json) · [manifest](manifest.json) · [CI 補充與來源證據](../daily/day-34/source-snapshot.json)
+沿用既有 `/signin` 的 SignInPage；GET `/login` 改導向 `/signin`，POST `/login` 沿用原認證。r1 的新增 LoginView 方向已撤回；[原文及原始證據](../daily/day-34/chat.md) 保留。
+
+[首頁](../chat/README.md) · [功能與驗證現況](STATUS.md) · [進度](../../learning-state.json) · [manifest](manifest.json) · [r2 交付證據](../daily/day-34/chat-r2-readback.json)

@@ -1,0 +1,33 @@
+{
+  "repository": "williechen/copilot_use",
+  "branch": "main",
+  "project": "chat",
+  "day": 34,
+  "revision": "r2",
+  "title": "重用 SignInPage，合併重複登入入口",
+  "path": "docs/teaching/daily/day-34/chat-r2.md",
+  "parent": "66cf6fe0f5f3331502a1461572822d2fe92adeba",
+  "article_commit": "7a3400259b59cf617d6c3c721bfc10d1014542b0",
+  "blob_sha": "20dc2729312e2be2203f2142b724cd34e7a20635",
+  "sha256": "64576415d0d714dedfb0e588d71a2d7092d897748fc5bf3512b2920a04b4ef77",
+  "full_text_verified": true,
+  "readback_at": "2026-10-24T20:17:17.541Z",
+  "source_sha": "d241cb04765002df797c614049149c3a0a3f7630",
+  "rules_sha": "b5ca6059f1d14f5d358542a690e2efab1ad94d04",
+  "rules_commit": "66cf6fe0f5f3331502a1461572822d2fe92adeba",
+  "rules_version": "daily-tdd-minimum-v1+github-only-v1",
+  "main_application": "not applied",
+  "tests": "not run",
+  "functional_acceptance": false,
+  "archived": false,
+  "next_day_before": 35,
+  "next_day_after": 35,
+  "remaining_gaps": "LoginView重複頁面待使用者按r2移除；瀏覽器/HTTP/SQLite回歸未執行；共用認證FIFO仍pending",
+  "supersedes": {
+    "article_commit": "3353e7a67ec440489e11545f5ae64e0ab327fc95",
+    "path": "docs/teaching/daily/day-34/chat.md",
+    "reason": "r1 duplicated existing SignInPage; preserve original body and hashes"
+  },
+  "expected_state_parent_sha": "7a3400259b59cf617d6c3c721bfc10d1014542b0",
+  "raw_error": null
+}
