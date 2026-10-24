@@ -41,6 +41,20 @@
     "docs/learning-state.json",
     "docs/teaching/current/manifest.json"
   ],
-  "sync_status": "pending until exact sync commit readback",
-  "source_readonly": true
+  "sync_status": "verified",
+  "source_readonly": true,
+  "sync_expected_parent_sha": "04bd36f487b43139cc8658e887c32e61f093e4f6",
+  "sync_commit": "72c9d5b9a31c8247cfdd17ac3291ff9f7ab2649f",
+  "sync_readback_verified": true,
+  "sync_verified_at": "2026-10-24T22:18:51.274Z",
+  "sync_blob_sha": {
+    "README.md": "e0f83fac25868aa3aa29d1ed612d5c197a29b226",
+    "docs/README.md": "ddfd6967b2668adbe1005d1c6a39c31c967953a2",
+    "docs/teaching/README.md": "eb03c10c1c31298475f15363bf61494c17a58790",
+    "docs/teaching/daily/README.md": "bd46faca0bda8b8194eceb2ccb2eae1518afcc0c",
+    "docs/teaching/chat/README.md": "375278eabf1066bc99f9d13f39bcff9c986677a1",
+    "docs/teaching/pet/README.md": "b5feab357cfd54b14943d02f3d07dfc30169a4af",
+    "docs/teaching/analytics/README.md": "6a04d595decdb81c0acc3cd3984c12bd8387368d",
+    "docs/teaching/current/PET_ENTRY.md": "7f1b683d7ead398e3ff18fba85f1548953cc0be2"
+  }
 }

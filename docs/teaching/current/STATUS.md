@@ -20,7 +20,7 @@
 - [歷史來源與 JS 契約證據](../../source-review/2026-10-25-duplicate-application-review.md)：Node 實測來源 ff89918d，source 六項通過；tracked dist 同三個 bridge 契約一過兩敗。該結論僅適用歷史來源與相同 blob；891ff32 已移除舊 tracked dist，不能當最新失敗。整套 Rust／GUI 未在最新來源重跑。
 - [九筆歷史切片證據](../history/evidence/2026-10-23-browser-sqlite-9c2b7cf/archive-manifest.json) 限 9c2b7cf 原來源；此次原文雜湊核對相符，沒有新增封存通過。
 - [歷史正式冷建置摘要](../history/evidence/2026-10-24-formal-f3f8255/SUMMARY.json) 限 f3f8255，保留當時測試／PG／SSR／GUI／Clippy／升級缺口；不能直接推論最新來源通過。
-- [舊來源 CI 補充](../daily/day-34/CI_SUPPLEMENT.md) 限 54f5d80a。此次沒有完整核實最新 workflow/job 或重跑 CI；最新 CI 不在本頁宣稱全綠或全失敗。
+- [舊來源 CI 補充](../daily/day-34/CI_SUPPLEMENT.md) 限 54f5d80a。**2026-10-25 已核對最新 891ff32 的 GitHub Actions push workflows**：Test All [run 40134969908](https://github.com/williechen/rust_ai_ring/actions/runs/40134969908) 失敗（test-analytics-server / Test analytics server）；Persistence [run 40134969909](https://github.com/williechen/rust_ai_ring/actions/runs/40134969909) 失敗（test-persistence / Test analytics server with PostgreSQL）；Rust AI Chat、Rust Desktop Pet、Rust Analytics、Cargo workspaces、Node 五項 workflow 成功。未取得失敗 step 完整日誌，不能臆測根因；CI 僅限原 SHA，不是未套用 Day35 Green 的驗收。
 - 本次有上述 Rust、HTTP redirect 與 WASM/debug 產物契約實測；未完整執行 DB、瀏覽器、Tauri GUI，也不是全產品功能驗收。沒有修改產品、migration checksum 或刪除資料庫。
 
 ## 後續調整

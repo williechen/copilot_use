@@ -1510,7 +1510,25 @@
       "next_day_after": 36,
       "expected_state_parent_sha": "8ef0511b73b8c64c21967b90d4a15d7ef6d3095b",
       "raw_error": null,
-      "remaining_gaps": "選房登入導向、逐房 ACL、歷史與作者、共用認證 FIFO；本次新 Green 未套用或執行"
+      "remaining_gaps": "選房登入導向、逐房 ACL、歷史與作者、共用認證 FIFO；本次新 Green 未套用或執行",
+      "sync_expected_parent_sha": "8ef0511b73b8c64c21967b90d4a15d7ef6d3095b",
+      "sync_commit": "23a523923b74bfac0ee7839ae3a7c23ba8d3718b",
+      "sync_status": "verified",
+      "sync_readback_verified": true,
+      "sync_verified_at": "2026-10-24T22:18:51.274Z",
+      "sync_paths": [
+        "README.md",
+        "docs/README.md",
+        "docs/teaching/README.md",
+        "docs/teaching/daily/README.md",
+        "docs/teaching/chat/README.md",
+        "docs/teaching/pet/README.md",
+        "docs/teaching/analytics/README.md",
+        "docs/teaching/current/CHAT_ENTRY.md",
+        "docs/learning-state.json",
+        "docs/teaching/current/manifest.json"
+      ],
+      "sync_raw_error": null
     },
     {
       "repository": "williechen/copilot_use",
@@ -1540,7 +1558,25 @@
       "next_day_after": 36,
       "expected_state_parent_sha": "04bd36f487b43139cc8658e887c32e61f093e4f6",
       "raw_error": null,
-      "remaining_gaps": "三 ID 原生 GUI／回籠失敗補償／重啟及單幀單圖 FIFO 待驗；其餘 PetStore SQLx 尚在 server"
+      "remaining_gaps": "三 ID 原生 GUI／回籠失敗補償／重啟及單幀單圖 FIFO 待驗；其餘 PetStore SQLx 尚在 server",
+      "sync_expected_parent_sha": "04bd36f487b43139cc8658e887c32e61f093e4f6",
+      "sync_commit": "72c9d5b9a31c8247cfdd17ac3291ff9f7ab2649f",
+      "sync_status": "verified",
+      "sync_readback_verified": true,
+      "sync_verified_at": "2026-10-24T22:18:51.274Z",
+      "sync_paths": [
+        "README.md",
+        "docs/README.md",
+        "docs/teaching/README.md",
+        "docs/teaching/daily/README.md",
+        "docs/teaching/chat/README.md",
+        "docs/teaching/pet/README.md",
+        "docs/teaching/analytics/README.md",
+        "docs/teaching/current/PET_ENTRY.md",
+        "docs/learning-state.json",
+        "docs/teaching/current/manifest.json"
+      ],
+      "sync_raw_error": null
     },
     {
       "repository": "williechen/copilot_use",
@@ -1606,7 +1642,25 @@
         "blob_sha": "4db38a9b31b7043e9f865fdc01a0fdd36f3dbbe9",
         "sha256": "bf40a85887eb95dab0ff280fb6cd987aa5bd65e8485954f4ca75499ad67f8b83",
         "reason": "r1 omitted production route and cfg(test) removal; original preserved"
-      }
+      },
+      "sync_expected_parent_sha": "e82c95b7055181139ac41fd7b0352ac91c0322f4",
+      "sync_commit": "ede36f78230eedfedb722daff15ad9198510e9fc",
+      "sync_status": "verified",
+      "sync_readback_verified": true,
+      "sync_verified_at": "2026-10-24T22:18:51.274Z",
+      "sync_paths": [
+        "README.md",
+        "docs/README.md",
+        "docs/teaching/README.md",
+        "docs/teaching/daily/README.md",
+        "docs/teaching/chat/README.md",
+        "docs/teaching/pet/README.md",
+        "docs/teaching/analytics/README.md",
+        "docs/teaching/current/ANALYTICS_ENTRY.md",
+        "docs/learning-state.json",
+        "docs/teaching/current/manifest.json"
+      ],
+      "sync_raw_error": null
     }
   ],
   "day15_frozen": true,
