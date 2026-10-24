@@ -1072,7 +1072,8 @@
           "blob_sha": "b5ca6059f1d14f5d358542a690e2efab1ad94d04"
         }
       ],
-      "ci_supplement": "docs/teaching/daily/day-34/source-snapshot.json"
+      "ci_supplement": "docs/teaching/daily/day-34/source-snapshot.json",
+      "correction_path": "docs/teaching/daily/day-34/analytics-corrections-r1.md"
     }
   ],
   "day15_frozen": true,

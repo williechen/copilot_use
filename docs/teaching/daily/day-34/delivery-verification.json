@@ -1,0 +1,381 @@
+{
+  "repository": "williechen/copilot_use",
+  "branch": "main",
+  "date": "2026-10-25",
+  "document_baseline": "fd426c68facdfdfd97616cf04a8bbc6badfe02cc",
+  "program_repository": "williechen/rust_ai_ring",
+  "program_source_sha": "54f5d80a5678e68e164d56e6d9f11c57cdff1f36",
+  "program_read_only": true,
+  "product_code_applied": false,
+  "product_tests": "not run; Rust/Cargo not installed in execution environment",
+  "functional_acceptance": false,
+  "full_comparison_performed": false,
+  "last_full_comparison_unchanged": "2026-10-16T22:47:14.399027+08:00",
+  "automation": {
+    "task_id": "6acd967c15fc8191ade8407954c5b354",
+    "is_enabled": true,
+    "existing_prompt_matches_request": true,
+    "new_task_created": false,
+    "settings_changed": false
+  },
+  "next_day": {
+    "chat": 35,
+    "pet": 35,
+    "analytics": 35
+  },
+  "operations": [
+    {
+      "repository": "williechen/copilot_use",
+      "branch": "main",
+      "operation": "article_publish",
+      "paths": [
+        "docs/teaching/daily/day-34/chat.md"
+      ],
+      "expected_parent_sha": "fd426c68facdfdfd97616cf04a8bbc6badfe02cc",
+      "actual_commit": "3353e7a67ec440489e11545f5ae64e0ab327fc95",
+      "raw_error": null
+    },
+    {
+      "repository": "williechen/copilot_use",
+      "branch": "main",
+      "operation": "state_manifest_seven_homepages_entry_sync",
+      "paths": [
+        "docs/learning-state.json",
+        "docs/teaching/current/manifest.json",
+        "docs/teaching/daily/day-34/chat-readback.json",
+        "README.md",
+        "docs/README.md",
+        "docs/teaching/README.md",
+        "docs/teaching/daily/README.md",
+        "docs/teaching/chat/README.md",
+        "docs/teaching/pet/README.md",
+        "docs/teaching/analytics/README.md",
+        "docs/teaching/current/CHAT_ENTRY.md",
+        "docs/teaching/daily/day-34/source-snapshot.json",
+        "docs/teaching/daily/day-34/CI_SUPPLEMENT.md"
+      ],
+      "expected_parent_sha": "3353e7a67ec440489e11545f5ae64e0ab327fc95",
+      "actual_commit": "e39be621ef478804e15a676b29e8a0e5b2fd24d5",
+      "raw_error": null
+    },
+    {
+      "repository": "williechen/copilot_use",
+      "branch": "main",
+      "operation": "article_publish",
+      "paths": [
+        "docs/teaching/daily/day-34/pet.md"
+      ],
+      "expected_parent_sha": "e39be621ef478804e15a676b29e8a0e5b2fd24d5",
+      "actual_commit": "eb169a1754fca8594491b59db82dcb8534894711",
+      "raw_error": null
+    },
+    {
+      "repository": "williechen/copilot_use",
+      "branch": "main",
+      "operation": "state_manifest_seven_homepages_entry_sync",
+      "paths": [
+        "docs/learning-state.json",
+        "docs/teaching/current/manifest.json",
+        "docs/teaching/daily/day-34/pet-readback.json",
+        "README.md",
+        "docs/README.md",
+        "docs/teaching/README.md",
+        "docs/teaching/daily/README.md",
+        "docs/teaching/chat/README.md",
+        "docs/teaching/pet/README.md",
+        "docs/teaching/analytics/README.md",
+        "docs/teaching/current/PET_ENTRY.md"
+      ],
+      "expected_parent_sha": "eb169a1754fca8594491b59db82dcb8534894711",
+      "actual_commit": "488f28307a02a6bb6441a50a3851f4b4545d5a3c",
+      "raw_error": null
+    },
+    {
+      "repository": "williechen/copilot_use",
+      "branch": "main",
+      "operation": "article_publish",
+      "paths": [
+        "docs/teaching/daily/day-34/analytics.md"
+      ],
+      "expected_parent_sha": "488f28307a02a6bb6441a50a3851f4b4545d5a3c",
+      "actual_commit": "b1deae8691736faa4b948bd51c338e3009ce4296",
+      "raw_error": null
+    },
+    {
+      "repository": "williechen/copilot_use",
+      "branch": "main",
+      "operation": "state_manifest_seven_homepages_entry_sync",
+      "paths": [
+        "docs/learning-state.json",
+        "docs/teaching/current/manifest.json",
+        "docs/teaching/daily/day-34/analytics-readback.json",
+        "README.md",
+        "docs/README.md",
+        "docs/teaching/README.md",
+        "docs/teaching/daily/README.md",
+        "docs/teaching/chat/README.md",
+        "docs/teaching/pet/README.md",
+        "docs/teaching/analytics/README.md",
+        "docs/teaching/current/ANALYTICS_ENTRY.md"
+      ],
+      "expected_parent_sha": "b1deae8691736faa4b948bd51c338e3009ce4296",
+      "actual_commit": "e46733542aadb81f05f6bf1699cf899bcda405b7",
+      "raw_error": null
+    }
+  ],
+  "deliveries": [
+    {
+      "project": "chat",
+      "article_commit": "3353e7a67ec440489e11545f5ae64e0ab327fc95",
+      "verified": true,
+      "blob_sha": "b43a2718c7bdb7066c9c66f1e907786dc9634c48",
+      "sha256": "793dc5ac604b3db36f67d1646421760856d2b08735da4fc9308de8c238660691",
+      "readback_at": "2026-10-24T19:37:43.279Z",
+      "sync_commit": "e39be621ef478804e15a676b29e8a0e5b2fd24d5",
+      "sync_readback": [
+        {
+          "path": "docs/learning-state.json",
+          "blob_sha": "d160905c7e260174bcb5ba5d9fa260c26e6d0675",
+          "full_text_verified": true
+        },
+        {
+          "path": "docs/teaching/current/manifest.json",
+          "blob_sha": "86890e7c84cc1c220a309eb0c5e4691c425be399",
+          "full_text_verified": true
+        },
+        {
+          "path": "docs/teaching/daily/day-34/chat-readback.json",
+          "blob_sha": "4e1f918fe5c118445e5ff7b62b0064443dc9b748",
+          "full_text_verified": true
+        },
+        {
+          "path": "README.md",
+          "blob_sha": "b7ade70d0cb4e213cdc6dff4ab70f68cb5b94519",
+          "full_text_verified": true
+        },
+        {
+          "path": "docs/README.md",
+          "blob_sha": "f8a2aa2aebb6d334a89f48b0b835feb3db217f77",
+          "full_text_verified": true
+        },
+        {
+          "path": "docs/teaching/README.md",
+          "blob_sha": "64cda18c84b907922d075d77c14f0b8a1a352d97",
+          "full_text_verified": true
+        },
+        {
+          "path": "docs/teaching/daily/README.md",
+          "blob_sha": "88a6f4676c11f2711bd3758561a917005789894a",
+          "full_text_verified": true
+        },
+        {
+          "path": "docs/teaching/chat/README.md",
+          "blob_sha": "fbd14276d29120d73ef671dd323832e405b76ac3",
+          "full_text_verified": true
+        },
+        {
+          "path": "docs/teaching/pet/README.md",
+          "blob_sha": "6ce1bd607d7460aa6ddf51dca74aeafc5b71c8ef",
+          "full_text_verified": true
+        },
+        {
+          "path": "docs/teaching/analytics/README.md",
+          "blob_sha": "40db4a23149583eff1f1afec43e09ed739640075",
+          "full_text_verified": true
+        },
+        {
+          "path": "docs/teaching/current/CHAT_ENTRY.md",
+          "blob_sha": "04472a5299197573cdf87c815d7eaf3c5137d909",
+          "full_text_verified": true
+        },
+        {
+          "path": "docs/teaching/daily/day-34/source-snapshot.json",
+          "blob_sha": "4ca8fc11a2c3638447436bc4923cdef02c7e4315",
+          "full_text_verified": true
+        },
+        {
+          "path": "docs/teaching/daily/day-34/CI_SUPPLEMENT.md",
+          "blob_sha": "4800a01211c96ff34da4da57764bfc12f7dbfd35",
+          "full_text_verified": true
+        }
+      ],
+      "relative_link_check": {
+        "checked": 163,
+        "broken": []
+      }
+    },
+    {
+      "project": "pet",
+      "article_commit": "eb169a1754fca8594491b59db82dcb8534894711",
+      "verified": true,
+      "blob_sha": "161bfe2e57a9ed214bf1801c660285ce6eaee159",
+      "sha256": "fedb8f455eeeeee7c807ac68f16292d2ed90d5407f6ecb463fd3253f1222353a",
+      "readback_at": "2026-10-24T19:41:25.840Z",
+      "sync_commit": "488f28307a02a6bb6441a50a3851f4b4545d5a3c",
+      "sync_readback": [
+        {
+          "path": "docs/learning-state.json",
+          "blob_sha": "aee10db2cf9d0870041d3300fb3b9e6d8a2531a4",
+          "full_text_verified": true
+        },
+        {
+          "path": "docs/teaching/current/manifest.json",
+          "blob_sha": "ec5e652a2def451a3db74c29b03d3e83f7e1b49d",
+          "full_text_verified": true
+        },
+        {
+          "path": "docs/teaching/daily/day-34/pet-readback.json",
+          "blob_sha": "6c9cc640e64c7cb2dfc47fcb86a799dc37657b5b",
+          "full_text_verified": true
+        },
+        {
+          "path": "README.md",
+          "blob_sha": "955d0dcfabce1c7efe54ff566044f12c5992e606",
+          "full_text_verified": true
+        },
+        {
+          "path": "docs/README.md",
+          "blob_sha": "4a622e8e91fe24025f7ee3b01fa4570f92f780e4",
+          "full_text_verified": true
+        },
+        {
+          "path": "docs/teaching/README.md",
+          "blob_sha": "8537701207eefdaab64b596f41055fd2d665c9e1",
+          "full_text_verified": true
+        },
+        {
+          "path": "docs/teaching/daily/README.md",
+          "blob_sha": "fe9d8adfd3dbc9b3c92eb9b828b105d5fb5599ce",
+          "full_text_verified": true
+        },
+        {
+          "path": "docs/teaching/chat/README.md",
+          "blob_sha": "d24acde635adec9f6a4a81c8a1264ce0e06b90fc",
+          "full_text_verified": true
+        },
+        {
+          "path": "docs/teaching/pet/README.md",
+          "blob_sha": "9aebdbddc97ffaedfbe05f34dd45c9de20a5a401",
+          "full_text_verified": true
+        },
+        {
+          "path": "docs/teaching/analytics/README.md",
+          "blob_sha": "7102f0976eda128f1906394c60d824085c553da0",
+          "full_text_verified": true
+        },
+        {
+          "path": "docs/teaching/current/PET_ENTRY.md",
+          "blob_sha": "11fcf2cb94a4c620857d9a3f9fae0cebd0a6c8cc",
+          "full_text_verified": true
+        }
+      ],
+      "relative_link_check": {
+        "checked": 162,
+        "broken": []
+      }
+    },
+    {
+      "project": "analytics",
+      "article_commit": "b1deae8691736faa4b948bd51c338e3009ce4296",
+      "verified": true,
+      "blob_sha": "6f907e5879ba167c35838913f8376573d2b8e38f",
+      "sha256": "26ad367a50e2acef773e30cb8afcf8e1d3dbf9abf6e93ded071b4776e8243c57",
+      "readback_at": "2026-10-24T19:44:19.753Z",
+      "sync_commit": "e46733542aadb81f05f6bf1699cf899bcda405b7",
+      "sync_readback": [
+        {
+          "path": "docs/learning-state.json",
+          "blob_sha": "46af8a751fe49d59f83d076b049d95d5ce2b6953",
+          "full_text_verified": true
+        },
+        {
+          "path": "docs/teaching/current/manifest.json",
+          "blob_sha": "7b2df3ed82570aede58c469502e1572656a7bddd",
+          "full_text_verified": true
+        },
+        {
+          "path": "docs/teaching/daily/day-34/analytics-readback.json",
+          "blob_sha": "2158814c2fb138eb34d9c8845e8475cccb6d6ff4",
+          "full_text_verified": true
+        },
+        {
+          "path": "README.md",
+          "blob_sha": "e0292eaf7a1df150758af11ea60d39ad18d4733f",
+          "full_text_verified": true
+        },
+        {
+          "path": "docs/README.md",
+          "blob_sha": "6c627eb24f99849dafa8d5117d009e5f393f6fab",
+          "full_text_verified": true
+        },
+        {
+          "path": "docs/teaching/README.md",
+          "blob_sha": "1241433b4b73469696e74a76617b54dc30246ffb",
+          "full_text_verified": true
+        },
+        {
+          "path": "docs/teaching/daily/README.md",
+          "blob_sha": "56b16b39153a2406efab3e8b33c325a22857b3e3",
+          "full_text_verified": true
+        },
+        {
+          "path": "docs/teaching/chat/README.md",
+          "blob_sha": "7e17a1342ac254326470b635a86187a0db7a880f",
+          "full_text_verified": true
+        },
+        {
+          "path": "docs/teaching/pet/README.md",
+          "blob_sha": "af9188d7b77e65d85a8dbe71a6a1e197b4690318",
+          "full_text_verified": true
+        },
+        {
+          "path": "docs/teaching/analytics/README.md",
+          "blob_sha": "13faffff30d28e53d7b60bd7e025a0f9c04253c0",
+          "full_text_verified": true
+        },
+        {
+          "path": "docs/teaching/current/ANALYTICS_ENTRY.md",
+          "blob_sha": "98be8b6fca08aeda2fbf54b7ce769c666bdebd64",
+          "full_text_verified": true
+        }
+      ],
+      "relative_link_check": {
+        "checked": 162,
+        "broken": []
+      }
+    }
+  ],
+  "raw_errors": [],
+  "followup": {
+    "expected_parent_sha": "e46733542aadb81f05f6bf1699cf899bcda405b7",
+    "paths": [
+      "docs/teaching/current/STATUS.md",
+      "docs/teaching/daily/day-34/analytics-corrections-r1.md",
+      "docs/teaching/daily/day-34/delivery-verification.json",
+      "docs/learning-state.json",
+      "docs/teaching/current/manifest.json",
+      "docs/teaching/current/ANALYTICS_ENTRY.md"
+    ],
+    "status_blob_before": "ad57ffac7d032d884826835975efe441a5932730",
+    "reason": "persist successful write/readback/link evidence; update functional status without teaching Day mappings; preserve article body and correct byte-count wording in separate note",
+    "raw_error": null,
+    "input_blobs": [
+      {
+        "path": "docs/teaching/current/STATUS.md",
+        "blob_sha": "ad57ffac7d032d884826835975efe441a5932730"
+      },
+      {
+        "path": "docs/learning-state.json",
+        "blob_sha": "46af8a751fe49d59f83d076b049d95d5ce2b6953"
+      },
+      {
+        "path": "docs/teaching/current/manifest.json",
+        "blob_sha": "7b2df3ed82570aede58c469502e1572656a7bddd"
+      },
+      {
+        "path": "docs/teaching/current/ANALYTICS_ENTRY.md",
+        "blob_sha": "98be8b6fca08aeda2fbf54b7ce769c666bdebd64"
+      }
+    ]
+  }
+}
