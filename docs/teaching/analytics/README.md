@@ -68,13 +68,13 @@ rust_ai_chat 的 apps/stats\_server/src/<code>lib.rs</code> 與正式登入 rout
 
 ## 功能驗證現況
 
-Leptos登入／改密碼、完整PG與實際HTTP通過；本輪未重跑Analytics瀏覽器，角色與來源權限仍待完成。
+Leptos登入／改密碼、完整PG與實際HTTP通過；Day32事件類型篩選／清除／來源切換另有本輪真瀏覽器證據。角色與來源權限仍待完成。
 
-[完整現況](../current/STATUS.md) · [本輪報告](../history/evidence/2026-10-23-formal-be0494a/REPORT.md) · [歷史文章與原始證據](../history/README.md)
+[完整現況](../current/STATUS.md) · [本輪報告](../history/evidence/2026-10-24-formal-f3f8255/REPORT.md) · [歷史文章與原始證據](../history/README.md)
 
 [Day31教學：Leptos 改密碼頁](../daily/day-31/analytics.md)（Leptos改密碼頁已套用並通過本輪PG／HTTP驗證；完整後台仍有獨立待辦。）
 
 
 ## 最新教學（Day32）
 
-[Day32：Dashboard 事件類型篩選](../daily/day-32/analytics.md)（教學已交付；程式未套用、測試未執行、功能未驗收）。下一篇 Day33，以 [即時進度檔](../../learning-state.json) 為準；Day31 與歷史驗證證據保留。
+[Day32：Dashboard 事件類型篩選](../daily/day-32/analytics.md)（程式已套用，PG／HTTP與本輪瀏覽器篩選已驗證；完整產品驗收仍未完成）。下一篇 Day33，以 [即時進度檔](../../learning-state.json) 為準；Day31 與歷史驗證證據保留。

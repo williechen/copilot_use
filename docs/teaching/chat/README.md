@@ -54,13 +54,13 @@ rust_ai_chat：apps/server 負責 HTTP／WS，crates/ui 負責畫面，chat\_dom
 
 ## 功能驗證現況
 
-會員個人頁真瀏覽器建房、進房與登出通過；雙頁WS寫入通過，但歷史重載、訊息作者及SSR提示仍有缺口。
+個人頁建房與訊息廣播沿真實入口驗證；Day32歷史未接通提示與空狀態已加入，UI SSR12/12通過。歷史讀回及作者身分仍未完成。
 
-[完整現況](../current/STATUS.md) · [本輪報告](../history/evidence/2026-10-23-formal-be0494a/REPORT.md) · [歷史文章與原始證據](../history/README.md)
+[完整現況](../current/STATUS.md) · [本輪報告](../history/evidence/2026-10-24-formal-f3f8255/REPORT.md) · [歷史文章與原始證據](../history/README.md)
 
 [Day31教學：個人頁建房](../daily/day-31/chat.md)（個人頁建房切片已套用並通過本輪瀏覽器操作；整體驗證仍未全部通過。）
 
 
 ## 最新教學（Day32）
 
-[Day32：聊天室歷史載入狀態](../daily/day-32/chat.md)（教學已交付；程式未套用、測試未執行、功能未驗收）。下一篇 Day33，以 [即時進度檔](../../learning-state.json) 為準；Day31 與歷史驗證證據保留。
+[Day32：聊天室歷史載入狀態](../daily/day-32/chat.md)（程式已套用，SSR與本輪瀏覽器顯示已驗證；歷史功能仍未接通；完整產品驗收仍未完成）。下一篇 Day33，以 [即時進度檔](../../learning-state.json) 為準；Day31 與歷史驗證證據保留。

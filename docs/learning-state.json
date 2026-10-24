@@ -3008,16 +3008,17 @@
     "status": "github_article_readback_verified"
   },
   "latest_source_validation": {
-    "source_sha": "be0494a2a70be91eb74b2b726970a23fc3e5c044",
-    "full_execution_sha": "7b016106058084de7c1d0e19eec061b17ceda063",
-    "checked_at": "2026-10-23T23:38:30.233513+08:00",
-    "report": "docs/teaching/history/evidence/2026-10-23-formal-be0494a/REPORT.md",
-    "summary": "docs/teaching/history/evidence/2026-10-23-formal-be0494a/SUMMARY.json",
-    "scope": "local formal validation; test-only followup; not full source comparison",
+    "source_sha": "f3f8255b0b701a1b57cb8c0a1737c3caa4319f2d",
+    "full_execution_sha": "f3f8255b0b701a1b57cb8c0a1737c3caa4319f2d",
+    "checked_at": "2026-10-24T08:56:16.845179+08:00",
+    "report": "docs/teaching/history/evidence/2026-10-24-formal-f3f8255/REPORT.md",
+    "summary": "docs/teaching/history/evidence/2026-10-24-formal-f3f8255/SUMMARY.json",
+    "scope": "local formal validation after user-authorized project cache and test DB reset; cold build; not full comparison",
     "overall": "not_all_passed",
     "functional_acceptance": false,
     "next_day_unchanged": true,
-    "ci_snapshot": "docs/teaching/history/evidence/2026-10-23-formal-be0494a/ci-latest.json"
+    "ci_snapshot": "docs/teaching/history/evidence/2026-10-24-formal-f3f8255/ci.json",
+    "reset_manifest": "docs/teaching/history/evidence/2026-10-24-formal-f3f8255/reset-cleanup.json"
   },
   "completed_article_archive": {
     "policy": "archive after lesson-slice verification with matching source and evidence; full-product acceptance independent",
@@ -3292,5 +3293,17 @@
     "archived": false,
     "remaining_gaps": "Analytics 真 PostgreSQL/SSR/HTTP/瀏覽器篩選未驗收；管理員初始化、角色/來源 ACL、SSE/明細缺口保留",
     "expected_state_parent_sha": "5646bef7b7accd951897354114eba853444833c8"
+  },
+  "previous_source_validation_before_formal_f3f8255": {
+    "source_sha": "be0494a2a70be91eb74b2b726970a23fc3e5c044",
+    "full_execution_sha": "7b016106058084de7c1d0e19eec061b17ceda063",
+    "checked_at": "2026-10-23T23:38:30.233513+08:00",
+    "report": "docs/teaching/history/evidence/2026-10-23-formal-be0494a/REPORT.md",
+    "summary": "docs/teaching/history/evidence/2026-10-23-formal-be0494a/SUMMARY.json",
+    "scope": "local formal validation; test-only followup; not full source comparison",
+    "overall": "not_all_passed",
+    "functional_acceptance": false,
+    "next_day_unchanged": true,
+    "ci_snapshot": "docs/teaching/history/evidence/2026-10-23-formal-be0494a/ci-latest.json"
   }
 }

@@ -1,0 +1,87 @@
+{
+  "date": "2026-10-24T08:42:26.828777",
+  "user_authorized_application_db_reset": true,
+  "application_db_targets_found": [],
+  "system_pg_databases_preserved": [
+    "postgres",
+    "willie"
+  ],
+  "removed": [
+    {
+      "path": "/home/willie/Documents/Codex/2026-10-23/new-chat-2/work/rust_ai_chat",
+      "removed_bytes": 7781299487
+    },
+    {
+      "path": "/home/willie/Documents/Codex/2026-10-23/new-chat-2/work/pg-data",
+      "removed_bytes": 66515843
+    },
+    {
+      "path": "/home/willie/Documents/Codex/2026-10-23/new-chat-2/work/pg-socket",
+      "removed_bytes": 0
+    },
+    {
+      "path": "/home/willie/Documents/Codex/2026-10-23/new-chat-2/work/pet-upgrade.sqlite",
+      "removed_bytes": 98304
+    },
+    {
+      "path": "/home/willie/Documents/Codex/2026-10-23/new-chat-2/work/chat-runtime.sqlite",
+      "removed_bytes": 258048
+    },
+    {
+      "path": "/home/willie/Documents/Codex/2026-10-23/new-chat-2/work/gui-runtime",
+      "removed_bytes": 2516228
+    },
+    {
+      "path": "/home/willie/Documents/Codex/2026-10-23/new-chat-2/work/gui-runtime-2",
+      "removed_bytes": 2516228
+    },
+    {
+      "path": "/home/willie/Documents/Codex/2026-10-23/new-chat-2/work/gui-runtime-3",
+      "removed_bytes": 2516232
+    },
+    {
+      "path": "/home/willie/Documents/Codex/2026-10-23/new-chat-2/work/gui-runtime-4",
+      "removed_bytes": 2516232
+    },
+    {
+      "path": "/home/willie/Documents/Codex/2026-10-23/new-chat-2/work/gui-runtime-5",
+      "removed_bytes": 2516228
+    },
+    {
+      "path": "/home/willie/Documents/Codex/2026-10-23/new-chat-2/work/upgrade-probe",
+      "removed_bytes": 17463248
+    },
+    {
+      "path": "/home/willie/Documents/Codex/2026-10-23/new-chat-2/work/publish",
+      "removed_bytes": 465738
+    },
+    {
+      "path": "/home/willie/Documents/Codex/2026-10-23/new-chat-2/work/initial-cache-unavailable",
+      "removed_bytes": 32223
+    },
+    {
+      "path": "/home/willie/Documents/Codex/2026-10-23/new-chat-2/work/pre-update-interrupted",
+      "removed_bytes": 44460
+    },
+    {
+      "path": "/home/willie/Documents/Codex/2026-10-23/new-chat-2/work/pg.log",
+      "removed_bytes": 11253
+    },
+    {
+      "path": "/home/willie/Documents/rust_ai_chat/apps/desktop_pet/frontend/dist",
+      "removed_bytes": 5572262
+    },
+    {
+      "path": "/home/willie/Documents/rust_ai_chat/apps/desktop_pet/gen",
+      "removed_bytes": 301446
+    },
+    {
+      "path": "/home/willie/.local/share/dev.rustai.desktop-pet",
+      "removed_bytes": 100047129
+    }
+  ],
+  "historical_outputs_preserved": true,
+  "source_status_after": " M README.md\n?? docs/\n",
+  "system_pg_user_tables_in_postgres_and_willie": 0,
+  "application_database_reset_note": "No configured application DB URL or identifiable application database existed; old isolated DBs removed and current verification will initialize fresh SQLite/PostgreSQL."
+}

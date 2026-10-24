@@ -12,6 +12,6 @@ CI 只採 [rust_ai_chat Actions](https://github.com/williechen/rust_ai_chat/acti
 
 ## 歷史與現行 Gate
 
-舊 copilot_use 512 sockets、gRPC、跨平台安裝／更新與 Release 驗收[完整原文保留](teaching/history/evidence/2026-10-23-repository-roles/before/docs/LOCAL_VALIDATION.md)，只屬原來源，不作 rust_ai_chat 的已完成能力或測試門檻。最新本地正式驗證目標為 `be0494a2a70be91eb74b2b726970a23fc3e5c044`，結果未全部通過；完整執行來源、跨SHA差異、命令與限制見[本輪報告](teaching/history/evidence/2026-10-23-formal-be0494a/REPORT.md)。
+舊 copilot_use 512 sockets、gRPC、跨平台安裝／更新與 Release 驗收[完整原文保留](teaching/history/evidence/2026-10-23-repository-roles/before/docs/LOCAL_VALIDATION.md)，只屬原來源，不作 rust_ai_chat 的已完成能力或測試門檻。最新本地正式驗證目標為 `f3f8255b0b701a1b57cb8c0a1737c3caa4319f2d`，結果未全部通過；本輪清理、空庫冷建置、命令與限制見[本輪報告](teaching/history/evidence/2026-10-24-formal-f3f8255/REPORT.md)。
 
 [共同規則](COMMON_LEARNING_RULES.md) · [目前進度與驗證邊界](teaching/current/STATUS.md) · [既有流程尚未調整](REPOSITORY_ROLE_TRANSITION.md)
