@@ -1,6 +1,8 @@
 # Analytics 首頁
 
-> 本頁需求與教學交付保存在 copilot_use；程式入口、套件、測試、CI 與功能驗收只依 rust_ai_chat 精確 SHA，舊庫產品工具不作主體驗收。
+2026-10-24 目錄已同步至 [williechen/rust_ai_ring](https://github.com/williechen/rust_ai_ring)：保留 `chat_apps`、`pet_apps`、`analytics_apps`、`crates` 四個 workspace；[新目錄與套件對照](../../SOURCE_LAYOUT.md)。後續教學依當次來源 SHA 調整程式、Cargo、imports、呼叫端與測試。
+
+> 本頁需求與教學交付保存在 copilot_use；程式入口、套件、測試、CI 與功能驗收只依 rust_ai_ring 精確 SHA，舊庫產品工具不作主體驗收。
 
 [共用文章](../../COMMON_LEARNING_RULES.md) · [三專案首頁](../README.md)
 
@@ -24,7 +26,7 @@ Analytics 定位為純管理後台，Leptos 提供後台畫面；除登入及必
 
 - 攝取與持久化：相同來源／事件 ID 重送不重複計數，內容衝突明確拒絕；失敗不能回成功 ACK，重啟後仍可查。
 - Dashboard：選來源與事件類型、載入／空資料／錯誤／重試、數量與明細；不同來源資料與授權隔離，交易未提交不得先通知畫面。
-- 通訊與資料：產品攝取目標為 gRPC／Protobuf 與逐事件 ACK，Dashboard 使用 HTTP JSON＋SSE；rust_ai_chat 既有 HTTP 入口依該庫實際契約核對。Analytics 獨立 PostgreSQL，不讀寫 Chat／Pet 的業務 SQLite。
+- 通訊與資料：產品攝取目標為 gRPC／Protobuf 與逐事件 ACK，Dashboard 使用 HTTP JSON＋SSE；rust_ai_ring 既有 HTTP 入口依該庫實際契約核對。Analytics 獨立 PostgreSQL，不讀寫 Chat／Pet 的業務 SQLite。
 - 管理與洞察：封存／還原／備份、可追溯 AI 洞察、人工審核及採用／回退；再加入 Provider／Model／來源／功能的 Token 用量、成本與實際可取得額度。未知額度明示未知，不能由 Token 數推算。
 
 ## 介面與接線要求
@@ -35,7 +37,7 @@ Analytics 畫面沿用 Leptos 與 Rust 元件，不以獨立手寫 HTML／JavaSc
 
 基本元件為來源選擇、事件類型篩選、查詢／重新整理、載入狀態、空資料、錯誤／重試與結果表格；由 Leptos 狀態與非同步請求呼叫現有 HTTP JSON Query API，保留來源授權與 PostgreSQL Adapter。篩選切換時清除過時結果，取消或辨識舊請求，避免晚回應覆蓋新結果。SSE 於基本查詢接通後逐步補齊。
 
-UI 不持有 SQLx／PgPool，不另建平行 total API 或資料來源；正式管理者 Session／唯讀查詢權限與服務憑證分開，不把後端來源密鑰嵌入 WASM／HTML。rust_ai_chat 來源 token 的既有契約保留為過渡事實，不當成正式 Dashboard 授權模型。
+UI 不持有 SQLx／PgPool，不另建平行 total API 或資料來源；正式管理者 Session／唯讀查詢權限與服務憑證分開，不把後端來源密鑰嵌入 WASM／HTML。rust_ai_ring 來源 token 的既有契約保留為過渡事實，不當成正式 Dashboard 授權模型。
 
 驗證須分別包含 native SSR（若採用）、WASM hydration／CSR、元件狀態、HTTP／來源隔離、真實 PostgreSQL 結果與瀏覽器流程；既有 API 或 CI 成功不能代替 Leptos 畫面驗收。完整畫面流程尚未驗收。
 
@@ -60,7 +62,7 @@ Analytics 定位為純管理後台，Leptos 提供後台畫面；除登入及必
 
 ## 開發位置
 
-rust_ai_chat 的 apps/stats\_server/src/<code>lib.rs</code> 與正式登入 router 負責 HTTP 路由與授權，pg\_<code>store.rs</code> 負責 PostgreSQL 聚合與持久化；依該庫精確 SHA 核對 migrations 與實際呼叫鏈。copilot_use 舊 shared/proto 與 analytics_transport 僅供歷史追溯，不列雙庫適配工作。
+`rust_ai_ring/analytics_apps/analytics_server`（package `analytics-server`）負責 HTTP 路由、登入授權、Leptos 後台與現有 PostgreSQL Adapter；migration 位於 `analytics_apps/migrations`。`analytics_persistence` 目前為空 library；若後續教學移出 SQLx Adapter，須一併提供真實呼叫端與測試。copilot_use 舊 shared/proto 與 analytics_transport 僅供歷史追溯。
 
 先沿既有 API 接通粗略可操作畫面，再逐步補趨勢、明細與管理。資料安全或基本流程阻礙當步處理，其他深化留在原功能追蹤；詳細程式與驗證仍看相關功能教學。
 

@@ -1,5 +1,7 @@
 # 每日新文章
 
+2026-10-24 目錄已同步至 [williechen/rust_ai_ring](https://github.com/williechen/rust_ai_ring)：保留 `chat_apps`、`pet_apps`、`analytics_apps`、`crates` 四個 workspace；[新目錄與套件對照](../../SOURCE_LAYOUT.md)。後續教學依當次來源 SHA 調整程式、Cargo、imports、呼叫端與測試。
+
 [共用文章](../../COMMON_LEARNING_RULES.md) · [Chat 首頁](../chat/README.md) · [Pet 首頁](../pet/README.md) · [Analytics 首頁](../analytics/README.md) · [目前進度](../current/STATUS.md)
 
 **必要 Gate 2 驗證通過後，正文原樣移至 `../archived/day-NN/{project}.md`。** 本目錄只追蹤尚待驗收或勘誤的教學；舊有 `history` 已封存文章與證據保留原位，不批次重寫。
@@ -46,12 +48,12 @@
 
 ## 完成後封存
 
-1. 核對文章要求、`rust_ai_chat` 精確 SHA、實際呼叫鏈與本篇必要測試／DB／HTTP／瀏覽器或 GUI 證據；未驗收或失敗項不得標為完成。
+1. 核對文章要求、`rust_ai_ring` 精確 SHA、實際呼叫鏈與本篇必要測試／DB／HTTP／瀏覽器或 GUI 證據；未驗收或失敗項不得標為完成。
 2. 將完成文章正文原樣移至 `archived/day-NN/{project}.md`，保留原 commit、blob、全文 SHA256、驗證結果與路徑對照；已在 history 的原文只補完成證據，不重複搬移或改寫。
 3. 同步本清單、專案首頁、目前進度、manifest 與歷史索引，再從 GitHub 精確提交讀回核對。必要勘誤另存，保留原發布內容。
 
 [已驗收文章](../archived/README.md) · [既有歷史與證據](../history/README.md) · [已驗證完成切片清單](../history/evidence/2026-10-23-browser-sqlite-9c2b7cf/archive-manifest.json)
 
-第③節依共同規則核對本篇涉及套件及軟體**交付當日官方最新穩定版**，附官方來源、核對日、現有 manifest／lock 或安裝版、相容性與選版理由；未查明不得宣稱最新或通過 Gate 1。最新穩定版優先作為教學目標，`rust_ai_chat` 維持唯讀，不自動升級。
+第③節依共同規則核對本篇涉及套件及軟體**交付當日官方最新穩定版**，附官方來源、核對日、現有 manifest／lock 或安裝版、相容性與選版理由；未查明不得宣稱最新或通過 Gate 1。最新穩定版優先作為教學目標，`rust_ai_ring` 維持唯讀，不自動升級。
 
 新文章按 `day-NN/{chat,pet,analytics}.md` 存放。每新增一個專案 Day 立即獨立 commit／推送，全文讀回後條件同步狀態與 manifest，再讀回；不能累積多天或多案一起提交。實際下一 Day 取 [learning-state.json](../../learning-state.json)，不依目錄推算。封存、勘誤及驗證更新均不增加 Day，也不改變完整產品驗收的判定。

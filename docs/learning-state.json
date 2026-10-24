@@ -3403,11 +3403,13 @@
     "run_now_triggered": false,
     "prompt_full_readback_matches": true,
     "readback_after_server_page_reload": true,
-    "prompt_before_sha256": "bc832473e5c9764e1dfd8dffffb7eb0671f71f14a54aeb32e7ec9b04b9941bda",
-    "prompt_sha256": "635aefd9cdac0ab2af53f22776b68fecd575f92a6429540bd9d593aa87be37d3",
-    "readme_updates": false,
-    "documentation_commit": "86acd3c46dc1883c824bf7bab86fac4b8f071b21",
+    "prompt_before_sha256": "635aefd9cdac0ab2af53f22776b68fecd575f92a6429540bd9d593aa87be37d3",
+    "prompt_sha256": "2aedae264fb3c146fd13be3715fd89305242d5c28c68c1248f9bc86979c1ba59",
+    "readme_updates": true,
+    "documentation_commit": "94c39a13d546bfb41acd4079817578d5ed7efb13",
     "prompt_document": "docs/teaching/scheduler-instructions-v1.md",
-    "verification_scope": "Existing cloud task prompt saved, page reloaded, and exact full text compared; no Run now or new lesson publication."
+    "verification_scope": "Existing cloud task prompt saved, page reloaded, and exact full text compared; no Run now or new lesson publication.",
+    "readme_scope": "copilot_use seven navigation homepages; rust_ai_ring stays read-only",
+    "documentation_commit_role": "Parent documentation commit before homepage correction; corrected homepages accompany this evidence."
   }
 }

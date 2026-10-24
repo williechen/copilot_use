@@ -1,5 +1,7 @@
 # Chat 首頁
 
+2026-10-24 目錄已同步至 [williechen/rust_ai_ring](https://github.com/williechen/rust_ai_ring)：保留 `chat_apps`、`pet_apps`、`analytics_apps`、`crates` 四個 workspace；[新目錄與套件對照](../../SOURCE_LAYOUT.md)。後續教學依當次來源 SHA 調整程式、Cargo、imports、呼叫端與測試。
+
 [共用文章](../../COMMON_LEARNING_RULES.md) · [三專案首頁](../README.md)
 
 ## 目前狀態
@@ -46,11 +48,11 @@
 
 ## 開發位置
 
-rust_ai_chat：apps/server 負責 HTTP／WS，crates/ui 負責畫面，chat\_domain／chat\_application 負責規則與 Port，crates/persistence 負責 SQLite／migration；資料庫差異留在 Adapter。
+`rust_ai_ring/chat_apps/chat_server` 負責 HTTP／WS，`chat_ui` 負責 Leptos 畫面，`chat_domain`／`chat_application` 負責規則與 Port，`chat_persistence` 負責 SQLite Adapter；migration 位於 `chat_apps/migrations`。Cargo package 使用 `chat-server`、`chat-ui`、`chat-persistence` 等實際名稱。
 
 先讀相關功能教學的「學習大綱」確認前置能力，再按第 2 節套用與 Refactor，最後照第 4 節從真實入口驗證。已實作的舊篇用來追溯，不照順序把所有舊程式再貼一次。
 
-[產品操作設定](https://github.com/williechen/copilot_use/blob/main/docs/DEPLOYMENT.md) · [產品未來清單](https://github.com/williechen/copilot_use/blob/main/docs/FUTURE_WORK.md)；兩者是文件庫的需求／操作入口；主體程式、命令與驗收只依 rust_ai_chat 當時 Cargo／README／精確 SHA。
+[產品操作設定](https://github.com/williechen/copilot_use/blob/main/docs/DEPLOYMENT.md) · [產品未來清單](https://github.com/williechen/copilot_use/blob/main/docs/FUTURE_WORK.md)；兩者是文件庫的需求／操作入口；主體程式、命令與驗收只依 rust_ai_ring 當時 Cargo／README／精確 SHA。
 
 ## 功能驗證現況
 

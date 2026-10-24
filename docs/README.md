@@ -1,8 +1,10 @@
 # 文件總入口
 
-2026-10-23 依使用者確認，所有涉及 copilot_use 程式開發、移植、同步適配、重構、套用、建置、測試、CI、產品試驗、發布、安裝更新與功能驗收的工作要求均已廢除，不再列為待辦、選題或驗收門檻。copilot_use 僅維護需求、規則、教學文章、進度、索引與交付證據；文件內的教學程式碼用於說明 rust_ai_chat 的實作，不建立第二套產品。程式功能、測試、CI 與驗收只依 rust_ai_chat 精確 SHA。既有 copilot_use 程式、腳本、workflow、Release 及歷史欄位僅供追溯，不代表仍有維護或執行義務。
+2026-10-24 目錄已同步至 [williechen/rust_ai_ring](https://github.com/williechen/rust_ai_ring)：保留 `chat_apps`、`pet_apps`、`analytics_apps`、`crates` 四個 workspace；[新目錄與套件對照](SOURCE_LAYOUT.md)。後續教學依當次來源 SHA 調整程式、Cargo、imports、呼叫端與測試。
 
-先讀 [共用文章](COMMON_LEARNING_RULES.md) 的儲存庫分工，再進入各案首頁。`copilot_use` 是規則、教學文章、next_day、manifest、交付讀回與歷史證據的正本；`rust_ai_chat` 是唯一程式、測試、CI 與功能驗收主體。實作進度與驗證限制只維護在 [目前進度](teaching/current/STATUS.md)，最新下一 Day 以 [learning-state](learning-state.json) 為準。
+2026-10-23 依使用者確認，所有涉及 copilot_use 程式開發、移植、同步適配、重構、套用、建置、測試、CI、產品試驗、發布、安裝更新與功能驗收的工作要求均已廢除，不再列為待辦、選題或驗收門檻。copilot_use 僅維護需求、規則、教學文章、進度、索引與交付證據；文件內的教學程式碼用於說明 rust_ai_ring 的實作，不建立第二套產品。程式功能、測試、CI 與驗收只依 rust_ai_ring 精確 SHA。既有 copilot_use 程式、腳本、workflow、Release 及歷史欄位僅供追溯，不代表仍有維護或執行義務。
+
+先讀 [共用文章](COMMON_LEARNING_RULES.md) 的儲存庫分工，再進入各案首頁。`copilot_use` 是規則、教學文章、next_day、manifest、交付讀回與歷史證據的正本；`rust_ai_ring` 是唯一程式、測試、CI 與功能驗收主體。實作進度與驗證限制只維護在 [目前進度](teaching/current/STATUS.md)，最新下一 Day 以 [learning-state](learning-state.json) 為準。
 
 | 用途 | 文件 |
 | --- | --- |
@@ -15,7 +17,7 @@
 | 使用者與安全需求 | [使用者流程](requirements/USER_FLOWS.md) · [共用驗證](requirements/AUTHENTICATION.md) · [服務憑證](SERVICE_CREDENTIAL_REQUIREMENTS.md) · [UI](UI_ALIGNMENT_REQUIREMENTS.md) |
 | 本地操作與驗收 | [本地啟動](LOCAL_START.md) · [操作索引](DEPLOYMENT.md) · [驗收](LOCAL_VALIDATION.md) · [資料移轉](SQLITE_TRANSITION.md) |
 | 系統間通訊 | [Analytics Transport](ANALYTICS_TRANSPORT.md) |
-| 排程狀態與規則入口 | [排程文章狀態](teaching/scheduler-instructions-v1.md)（原文已過時；實際任務設定待核實） |
+| 排程狀態與規則入口 | [排程文章狀態](teaching/scheduler-instructions-v1.md)（原任務已更新並重新載入全文讀回確認） |
 | 最新教學 | [Chat Day33](teaching/daily/day-33/chat.md)（下一篇 Day34） · [Pet Day33](teaching/daily/day-33/pet.md)（下一篇 Day34） · [Analytics Day33](teaching/daily/day-33/analytics.md)（下一篇 Day34） |
 | 每日文章與進度 | [新文章](teaching/daily/README.md) · [驗收完成封存](teaching/archived/README.md) · [manifest](teaching/current/manifest.json) |
 
@@ -26,4 +28,4 @@
 
 </details>
 
-現行架構、操作與驗收以 rust_ai_chat 為程式來源；copilot_use 舊產品腳本、workflow、Release 僅供歷史追溯，不再要求維護或執行，轉換限制見 [分工同步範圍](REPOSITORY_ROLE_TRANSITION.md)；[改寫前原文、來源 commit 與 SHA256](teaching/history/evidence/2026-10-22-current-docs/README.md) 集中保留，歷史驗證仍依原來源解讀。
+現行架構、操作與驗收以 rust_ai_ring 為程式來源；copilot_use 舊產品腳本、workflow、Release 僅供歷史追溯，不再要求維護或執行，轉換限制見 [分工同步範圍](REPOSITORY_ROLE_TRANSITION.md)；[改寫前原文、來源 commit 與 SHA256](teaching/history/evidence/2026-10-22-current-docs/README.md) 集中保留，歷史驗證仍依原來源解讀。

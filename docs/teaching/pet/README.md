@@ -1,6 +1,8 @@
 # Pet 首頁
 
-> 本頁需求與教學交付保存在 copilot_use；程式入口、套件、測試、CI 與功能驗收只依 rust_ai_chat 精確 SHA，舊庫產品工具不作主體驗收。
+2026-10-24 目錄已同步至 [williechen/rust_ai_ring](https://github.com/williechen/rust_ai_ring)：保留 `chat_apps`、`pet_apps`、`analytics_apps`、`crates` 四個 workspace；[新目錄與套件對照](../../SOURCE_LAYOUT.md)。後續教學依當次來源 SHA 調整程式、Cargo、imports、呼叫端與測試。
+
+> 本頁需求與教學交付保存在 copilot_use；程式入口、套件、測試、CI 與功能驗收只依 rust_ai_ring 精確 SHA，舊庫產品工具不作主體驗收。
 
 [共用文章](../../COMMON_LEARNING_RULES.md) · [三專案首頁](../README.md)
 
@@ -52,7 +54,7 @@
 
 ## 開發位置
 
-rust_ai_chat 的 apps/desktop\_pet 負責 Tauri／OS 入口，frontend 負責 Leptos 畫面與 bridge，crates/pet\_domain 負責純規則；每次依該庫精確 SHA 核對。copilot_use 舊 pet_runtime 不作移植、適配或驗收工作。
+`rust_ai_ring/pet_apps/pet_server`（package `pet-server`）負責 Tauri／OS 入口，`pet_ui` 負責 Leptos 畫面與 bridge，`pet_domain` 負責純規則，migration 位於 `pet_apps/migrations`。`pet_application` 與 `pet_persistence` 目前為空 library，後續教學須按實際呼叫鏈提供最小接線與測試，不能宣稱已接通。copilot_use 舊 pet_runtime 僅供歷史追溯。
 
 本機 IPC 可用於測試實際能力，使用全新測試資料與授權目錄；本入口不要求重跑付費 AI。實作與驗證步驟看對應功能教學，不將專用測試收據當成私人檔案已處理。
 

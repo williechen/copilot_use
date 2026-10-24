@@ -18,7 +18,7 @@ P9 規則已廢除且與現況不同，不再作為產品目標、選題、待�
 
 ### 2026-10-24：後續教學依新目錄調整程式
 
-使用者已明確排除 README 處理：所有 README.md 不新增或修改。交付後同步三案非 README 現行入口 CHAT_ENTRY.md／PET_ENTRY.md／ANALYTICS_ENTRY.md、learning-state 與 manifest，提供最新文章連結及交付／未驗收狀態；README 更新不作交付 Gate。實際每日排程指令見 [排程正本](teaching/scheduler-instructions-v1.md)。
+`rust_ai_ring`（含其 README）維持唯讀。`copilot_use` 的七個導覽首頁須更新：根 README、docs/README、docs/teaching/README、daily/README 與 chat／pet／analytics/README。每篇交付後同步最新文章連結、交付／未驗收狀態、對應現行 ENTRY、learning-state 與 manifest；首頁更新須推送並從精確 commit 讀回。實際每日排程指令見 [排程正本](teaching/scheduler-instructions-v1.md)。
 
 使用者最新要求：後續教學須按照 rust_ai_ring 新目錄調整程式。這項要求適用於後續教學中的實際程式銜接，不要求在 copilot_use 維護第二套產品，也不恢復已廢除的固定測試搬移計畫。
 
