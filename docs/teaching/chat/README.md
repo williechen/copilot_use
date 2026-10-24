@@ -64,3 +64,7 @@ rust_ai_chat：apps/server 負責 HTTP／WS，crates/ui 負責畫面，chat\_dom
 ## 最新教學（Day32）
 
 [Day32：聊天室歷史載入狀態](../daily/day-32/chat.md)（程式已套用，SSR與本輪瀏覽器顯示已驗證；歷史功能仍未接通；完整產品驗收仍未完成）。下一篇 Day33，以 [即時進度檔](../../learning-state.json) 為準；Day31 與歷史驗證證據保留。
+
+## 最新教學（Day33）
+
+[Day33：房間搜尋結果與尚未載入狀態](../daily/day-33/chat.md)（[版本補核](../daily/day-33/chat-version-verification.md)；教學已交付，程式未套用、測試未執行、功能未驗收）。下一篇 Day34，以 [即時進度檔](../../learning-state.json) 為準。

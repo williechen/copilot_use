@@ -15,11 +15,11 @@ Chat、Desktop Pet 與 Analytics 的規則、教學與交付證據庫。`copilot
 
 [目前進度與待完成項目](https://github.com/williechen/copilot_use/blob/main/docs/teaching/current/STATUS.md) · [最新學習進度](https://github.com/williechen/copilot_use/blob/main/docs/learning-state.json) · [文件總目錄](https://github.com/williechen/copilot_use/blob/main/docs/README.md)
 
-## 最新教學（Day32）
+## 最新教學（各案最新 Day）
 
 | 專案 | 最新文章 | 下一篇 |
 | --- | --- | --- |
-| Chat | [Day32](docs/teaching/daily/day-32/chat.md) | Day33 |
+| Chat | [Day33：房間搜尋狀態](docs/teaching/daily/day-33/chat.md)（教學已發布／未驗收） | Day34 |
 | Pet | [Day32](docs/teaching/daily/day-32/pet.md) | Day33 |
 | Analytics | [Day32](docs/teaching/daily/day-32/analytics.md) | Day33 |
 

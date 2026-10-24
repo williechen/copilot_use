@@ -4,7 +4,11 @@
 
 **必要 Gate 2 驗證通過後，正文原樣移至 `../archived/day-NN/{project}.md`。** 本目錄只追蹤尚待驗收或勘誤的教學；舊有 `history` 已封存文章與證據保留原位，不批次重寫。
 
-## 最新發布（Day32）
+## 最新發布（Chat Day33／Pet、Analytics Day32）
+
+[Chat Day33：房間搜尋結果與尚未載入狀態](day-33/chat.md)（教學已發布、版本補核見 [附件](day-33/chat-version-verification.md)；程式未套用、測試未執行、功能未驗收；下一篇 Day34）。
+
+## Day32 教學
 
 | 專案 | 文章 | 狀態 |
 | --- | --- | --- |
