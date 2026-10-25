@@ -86,7 +86,7 @@
     "validation": "docs/analytics-transport-validation.json"
   },
   "learning_policy": {
-    "daily_selection": "差異驅動＋最小功能切片；先建立可操作的基本功能項，基本流程與相應驗證通過後推進下一功能，再逐步補充細節、條件與例外；每日 TDD Red→最小 Green→Refactor→驗證。阻擋流程／資料安全／必要相依性在當步處理，其餘深化工作保留原功能項，不每日全量比對",
+    "daily_selection": "差異驅動＋最小功能切片；先建立可操作的基本功能項，基本流程與相應驗證通過後推進下一功能，再逐步補充細節、條件與例外；功能教學Red→完整Green→驗證；Refactor另依專案累積工程接續。阻擋流程／資料安全／必要相依性在當步處理，其餘深化工作保留原功能項，不每日全量比對",
     "daily_gate": "每日教學只揭露 rust_ai_ring 精確 SHA 的 CI 狀態及待修問題；copilot_use 程式 CI、產品整合與功能驗收工作已廢除，文件交付僅核對文章、規則、JSON、連結及精確 commit 全文讀回。",
     "weekly_review": "At least weekly full source/requirements/tests/CI/evidence comparison; product stays read-only; daily engineering separate; last_full_comparison changes only after actual complete success.",
     "dry_run": "read-only product review; publish complete documentation and engineering patch/test proposals; not product validation",
@@ -94,7 +94,7 @@
     "daily_time": "06:00 Asia/Taipei",
     "teaching_sections": [
       "學習大綱：目標、現況與來源",
-      "實作內容：Red／完整最小Green／Refactor／必要補教",
+      "實作內容：Red／完整Green；專案Refactor接續摘要／工程包連結與必要補教",
       "套件版本",
       "驗證項目：測試、證據、待完成"
     ],
@@ -105,12 +105,12 @@
     "synchronization_judgment": "核對依「已確認需求／文章 → rust_ai_ring 精確 SHA 實作與實際呼叫者 → 匹配來源的測試／CI／功能驗證」追溯；copilot_use 僅核對文件、進度與交付證據，不要求對應程式實作、程式同步或驗收。缺證標未核實，未接通流程標部分完成，未執行明示。",
     "day_revision": "已發布文章與原始commit/blob/SHA256保留；修訂使用不可變版本檔與獨立讀回，同步同一Day索引，不新增或倒退Day；封存Day正文不回寫。",
     "red_green": "Red is the prerequisite test for same-feature Green; preserve applied tests and provide complete Green in the same Day; distinguish expected Red from test/import/environment errors",
-    "rules_version": "daily-teaching-project-engineering-v2",
+    "rules_version": "daily-teaching-project-engineering-v3",
     "rules_document": "docs/COMMON_LEARNING_RULES.md",
     "day_advance": "Per project: independent GitHub article commit+push, exact-commit full readback and persisted evidence, then expected-N to N+1 conditional state/manifest/index update and readback; never increment for migration/revision/makeup/rules/CI.",
     "failure_recovery": "Single pending record per project/Day/revision; read and deduplicate before retry; 3 consecutive failures require manual review; evidence persistence and actual verification are separate; detailed historical mechanisms 37-91 deferred",
     "basic_user_flow_gate": "Before selecting advanced Day topics, verify the earliest missing user-operable prerequisite using latest source/contract: Chat signup/login/session/authorized room entry; Pet create first named pet through Tauri IPC, persist in SQLite and reload; Analytics persistent admin account/password-first-login/session. Keep public room listing accessible without login where allowed; entering protected rooms requires authentication and ACL. Continue one end-to-end capability across days; do not present API, helper or status-code tests as completed product flows.",
-    "next_day_correction_placement": "每次核對最新程式與涉及套件；Chat／Pet／Analytics Day25（含）以前全部既有文章封存；差異只在下一Day第2節新Red／完整Green／Refactor後追加舊Day更正補充；makeup_queue FIFO，每篇最多一個舊Day單元，全文讀回才結案，不因補教推進next_day。",
+    "next_day_correction_placement": "每次核對最新程式與涉及套件；Chat／Pet／Analytics Day25（含）以前全部既有文章封存；差異只在下一Day第2節新Red／完整Green及專案Refactor接續摘要後追加舊Day更正補充；makeup_queue FIFO，每篇最多一個舊Day單元，全文讀回才結案，不因補教推進next_day。",
     "delivery": {
       "version": "github-only-v1",
       "repository": "williechen/copilot_use",
@@ -132,7 +132,7 @@
       "frozen_through_day": 25,
       "notion_export_root": "docs/teaching/history/evidence/notion-export/2026-10-22"
     },
-    "daily_engineering": "Whole-project incremental work package every day, separate evidence/time, no Day advance; complete patch/test plan, product read-only and user applies."
+    "daily_engineering": "Project-wide architecture, dependencies, tests and CI; continue cumulative project progress independently of the feature slice. Complete package/patch and test plan, product read-only, user applies; local cleanup does not count."
   },
   "curriculum": {
     "stage_count": 13,
@@ -3430,14 +3430,13 @@
     "prompt_full_readback_matches": true,
     "readback_after_server_page_reload": true,
     "prompt_before_sha256": "635aefd9cdac0ab2af53f22776b68fecd575f92a6429540bd9d593aa87be37d3",
-    "prompt_sha256": "c2ac614f2d8ae2c5c4f08c216f4bb042c8cf9557ee2951b953c39a47ce94856f",
+    "prompt_sha256": "b5b81d0348ad462d848070c5ebd0ee7921735aa3f4ab14bf3d0ccb5f7019ba70",
     "readme_updates": true,
-    "documentation_commit": "43b0c4f4eb5d6b65d6d3155a473b2a673d944046",
     "prompt_document": "docs/teaching/scheduler-instructions-v1.md",
-    "verification_scope": "Existing web task prompt saved and fresh-page full text matched; schedule/model preserved; no Run now.",
+    "verification_scope": "Existing cloud task prompt saved; full text read back after reload; project-wide cumulative Refactor independent of teaching slice; schedule/model preserved.",
     "readme_scope": "copilot_use seven navigation homepages; rust_ai_ring stays read-only",
-    "documentation_commit_role": "Parent documentation commit before homepage correction; corrected homepages accompany this evidence.",
-    "verification_evidence": "docs/teaching/current/scheduler-document-refresh-2026-10-26.json"
+    "verification_evidence": "docs/teaching/current/project-refactor-scope-2026-10-26-schedule.json",
+    "previous_documentation_commit": "43b0c4f4eb5d6b65d6d3155a473b2a673d944046"
   },
   "day34_chat_delivery": {
     "repository": "williechen/copilot_use",
@@ -4732,7 +4731,11 @@
     "product_repository_read_only": true,
     "progress": "docs/teaching/functional-refactoring/PROGRESS.md",
     "core_minutes_excluded": true,
-    "day_advance": false
+    "day_advance": false,
+    "selection": "continue each project's cumulative architecture/test/CI dependency plan; independent of today's feature slice",
+    "article_refactor": "project cumulative status, current complete package/patch link, validation and next package; local cleanup in Green does not count",
+    "cross_project_packages": "single shared evidence; do not count once per project",
+    "project_progress": "docs/teaching/functional-refactoring/PROGRESS.md"
   },
   "day38_chat_r2_delivery": {
     "project": "chat",

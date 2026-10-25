@@ -1,6 +1,6 @@
 # 文件總入口
 
-每日功能教學與全專案漸進工程分開交付及驗收。核心60分鐘只計Red／Green，局部Refactor、工程與其他交付另計；rust_ai_ring唯讀，使用者自行套用。
+每日功能教學與全專案漸進工程分開交付及驗收。核心60分鐘只計Red／Green，專案Refactor與其他交付另計；rust_ai_ring唯讀，使用者自行套用。
 
 [共用規則](COMMON_LEARNING_RULES.md) · [功能與驗證](teaching/current/STATUS.md) · [工程進度](teaching/functional-refactoring/PROGRESS.md) · [學習進度](learning-state.json) · [manifest](teaching/current/manifest.json)
 

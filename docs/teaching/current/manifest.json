@@ -2900,14 +2900,13 @@
     "prompt_full_readback_matches": true,
     "readback_after_server_page_reload": true,
     "prompt_before_sha256": "635aefd9cdac0ab2af53f22776b68fecd575f92a6429540bd9d593aa87be37d3",
-    "prompt_sha256": "c2ac614f2d8ae2c5c4f08c216f4bb042c8cf9557ee2951b953c39a47ce94856f",
+    "prompt_sha256": "b5b81d0348ad462d848070c5ebd0ee7921735aa3f4ab14bf3d0ccb5f7019ba70",
     "readme_updates": true,
-    "documentation_commit": "43b0c4f4eb5d6b65d6d3155a473b2a673d944046",
     "prompt_document": "docs/teaching/scheduler-instructions-v1.md",
-    "verification_scope": "Existing web task prompt saved and fresh-page full text matched; schedule/model preserved; no Run now.",
+    "verification_scope": "Existing cloud task prompt saved; full text read back after reload; project-wide cumulative Refactor independent of teaching slice; schedule/model preserved.",
     "readme_scope": "copilot_use seven navigation homepages; rust_ai_ring stays read-only",
-    "documentation_commit_role": "Parent documentation commit before homepage correction; corrected homepages accompany this evidence.",
-    "verification_evidence": "docs/teaching/current/scheduler-document-refresh-2026-10-26.json"
+    "verification_evidence": "docs/teaching/current/project-refactor-scope-2026-10-26-schedule.json",
+    "previous_documentation_commit": "43b0c4f4eb5d6b65d6d3155a473b2a673d944046"
   },
   "duplicate_application_review": {
     "date": "2026-10-25",
@@ -3344,7 +3343,11 @@
     "product_repository_read_only": true,
     "progress": "docs/teaching/functional-refactoring/PROGRESS.md",
     "core_minutes_excluded": true,
-    "day_advance": false
+    "day_advance": false,
+    "selection": "continue each project's cumulative architecture/test/CI dependency plan; independent of today's feature slice",
+    "article_refactor": "project cumulative status, current complete package/patch link, validation and next package; local cleanup in Green does not count",
+    "cross_project_packages": "single shared evidence; do not count once per project",
+    "project_progress": "docs/teaching/functional-refactoring/PROGRESS.md"
   },
   "day38_r2_delivery": {
     "chat": {

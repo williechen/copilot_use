@@ -22,13 +22,13 @@
 
 沿現有Leptos UI、Axum HTTP／WS或Tauri IPC、用例／Domain、SQLx Adapter的真呼叫鏈交付。Chat維持SSR／hydrate／Router，Pet為CSR＋Tauri，Analytics正式頁面採Leptos，不以完整Axum HTML字串頁面作新UI Green。前台隱藏不等於伺服器授權；三案DB與Session隔離。
 
-文章保留四節：①目標／現況／前置條件；②Red→完整Green→必要局部Refactor與補教；③版本；④驗證、證據與未完成。提供當次功能必要完整函式、檔案、Cargo／features、imports、組裝／caller及直接相關測試，不留未接線骨架。跨功能搬層、全庫測試去重及CI重整放入獨立工程，不塞入當日教材。
+文章保留四節：①目標／現況／前置條件；②Red→完整Green，其後列專案Refactor接續與補教；③版本；④驗證、證據與未完成。提供當次功能必要完整函式、檔案、Cargo／features、imports、組裝／caller及直接相關測試，不留未接線骨架。Refactor以所屬專案整體架構、共用依賴、測試及CI的累積工程為主，工作範圍不綁當日切片。正文的「專案Refactor接續」只列累積狀態、本次工程工作包／完整patch連結、驗證與下一步；完整工程內容維持獨立文件。切片內必要小整理併Green說明，不能抵算專案重構交付。
 
 Red須對應同篇Green；已通過測試只算回歸。預期行為Red、缺新符號編譯Red、環境／匯入錯誤分開。完整Green未準備好只能存草稿；未跑DB／native／GUI不得宣稱功能驗收。
 
 ## 3. 每日全專案工程
 
-[工程入口與進度](teaching/functional-refactoring/README.md)統整三案、共用crates及跨workspace依賴。每天依相依順序完成一個小工作包，接續前日未完成處；不作當日教學主題，不增加Day。產品保持唯讀，每包交付可套用的完整程式／patch與測試方案。
+[工程入口與進度](teaching/functional-refactoring/README.md)統整三案、共用crates及跨workspace依賴。先讀Chat、Pet、Analytics各自工程進度，再從專案整體依賴選擇每天一個完整小工作包，接續前日未完成處；不因教學換題重設重構範圍。跨案包共用同一份證據，逐案列受影響邊界，不重複計功；無工程推進的專案如實列續辦／受阻與原因；不作當日教學主題，不增加Day。產品保持唯讀，每包交付可套用的完整程式／patch與測試方案。
 
 工作包須有來源SHA、範圍／相依、完整程式與Port／DTO／錯誤、Adapter／組裝／正式caller、Cargo及必要相容處理；同步測試／fixture與CI，列實際／未執行驗證、風險、回復方式和下一步。以最新已套用程式作下一包基準；相依patch標清順序，不能拿未套用方案冒充主分支狀態。
 
@@ -59,7 +59,7 @@ Red須對應同篇Green；已通過測試只算回歸。預期行為Red、缺新
 
 ## 6. 補教、計時與全面比對
 
-- 上一Day未完成事項於下一篇新Red／Green／局部Refactor後補充；更早makeup_queue依同案FIFO，每篇最多結案一個舊Day單元。補教、修訂、工程與封存均不增加Day；全文交付不等於產品驗收。
+- 上一Day未完成事項於下一篇新Red／Green及專案工程接續摘要後補充；更早makeup_queue依同案FIFO，每篇最多結案一個舊Day單元。補教、修訂、工程與封存均不增加Day；全文交付不等於產品驗收。
 - **核心60分鐘只計第②節主要Red／Green**：三案各15分鐘，加彈性15分鐘。局部Refactor、全專案工程、補教、版本／來源核對、①③④節、提交／讀回／同步及產品驗收一律另計。不得因時限省略完整Green，超額與受阻如實記錄。
 - 每日作當次功能／工程的增量核對；每週至少一次全專案重新比對，包含產品、需求、架構、UI、DB、測試／CI及文件對應。只在實際完整成功後更新last_full_comparison；日常工程或文章整理不更新，也不因週比對推進Day。
 - 排程指令見[現行文件與雲端核對](teaching/scheduler-instructions-v1.md)，不從舊時間文字推定實際任務設定。學習階段按[P0–P12規劃](ROADMAP_P0_P12.md)追蹤，日曆、學習完成與產品驗收分開。

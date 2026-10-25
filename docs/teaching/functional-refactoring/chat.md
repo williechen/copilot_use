@@ -1,8 +1,20 @@
-# 房間查詢與畫面回饋：後續測試重構整理
+# Chat 專案重構
 
-本篇是全專案獨立工程的專案盤點，不作當日教學內容。測試與實作需依工程相依性一併調整，目前尚未套用產品。
+範圍涵蓋整個專案及共用依賴，依[同一工程進度](PROGRESS.md)逐日接續，不以當日教學切片限定範圍。以下是工程責任清單，產品仍唯讀；尚未交付完整patch的項目只算盤點。
 
-## 測試責任與重複覆蓋處理
+## 專案範圍與相依
+
+| 工程責任 | 需銜接的邊界 |
+| --- | --- |
+| 認證與Session | Application用例／Session與身份Port；HTTP／WS adapter及組裝，登入／登出／續期契約 |
+| 房間與成員 | 房間／成員／加入與ACL用例、SQLite repository，公開清單與授權進房分責任 |
+| 訊息與即時傳輸 | 訊息／作者／歷史與WS生命週期，HTTP／WS共用授權邊界與真caller |
+| Leptos UI | 房間列表、帳號／管理與進房流程；UI狀態與API client邊界，SSR／hydrate保持一致 |
+| 共用依賴／組裝 | 檢視四workspace公開契約、shared、Cargo normal／build／dev／target依賴、features與正式caller；先承接再清舊碼 |
+
+先完成專案caller／Port／Adapter與斷言基線，再依相依選完整包。新功能與未完成需求依FUTURE_WORK另追蹤，不能把表內規劃寫成已存在或已重構。
+
+## 已有局部盤點：保留為專案清單的一部分
 
 | 舊測試／群組 | 判斷 | 處理與必留斷言 | 目標責任 |
 | --- | --- | --- | --- |
@@ -13,14 +25,11 @@
 
 來源 `rust_ai_ring@9b89656f964b99e0cb89ba421855704a35c5ecb9`。此表是來源核對後的擬議映射，非已遷移清單；完整跨案對照見 [測試覆蓋表](test-coverage-map.csv)。同層同契約才整併；跨層保留接線、SQL、HTTP／IPC或DOM獨有的驗證責任。fixture抽共用準備，不複製業務實作或將情境斷言藏入共用helper。
 
-## 工程工作包須完成什麼
 
-- **Red：** 新增瀏覽器Red：進首頁不按按鈕即讀取；500時看到錯誤、可重試、保留舊快照。既有filter／Signal通過案例只列回歸。
-- **Green：** 在同一工程工作包提供必要完整用例／Port／adapter／caller與測試、Cargo／module／feature／fixture接線；目前仍待撰寫，不能把既有教材Green當成此次測試重構已完成。
-- **Refactor：** 逐條核對表中斷言已在新正式路徑保留，再刪失效helper／獨占測試；保留不同邊界值、故障模式與資料隔離。測試以功能／行為命名，Day識別保留在來源對照，不改寫舊文。
-- **CI：** 純內層、各案DB、server正式整合、Pet原生與UI分責任；不因刪掉重複測試而漏選正式Router／IPC或PG feature。三案不串接阻擋，必要項失敗仍使整體檢核失敗。
+## 每日接續與驗收
 
+每次列：前次包與產品已套用SHA→本次按專案依賴選的完整包／patch→有效測試與CI去向→實際／未執行驗證→累積狀態與下一包。未套用的前包不能當已存在基準；無本案工程進展就明列原因，不用切片helper整理補數。
 
-## 適用界線
+已交付的跨案[CI責任隔離](../../engineering/2026-10-26/ci-isolation.md)共用同一份patch及證據，不能各案各算一包；目前未套用／未驗收。下一步及其餘案狀態見[PROGRESS](PROGRESS.md)。
 
-新用例／Port／adapter／正式caller與完整測試程式仍須在全專案工程調整中完成，本次只發布文件，沒有套用產品或跑新測試。版本資料見[當日核對](../../source-review/2026-10-26-versions-and-summary-refresh.md)；換日期或增依賴時重新查核。本工程不改教學進度，不因工程整理增減Day或結案FIFO。
+完整包須交付必要用例／Port／DTO／錯誤、Adapter／組裝／正式caller、Cargo／features、測試遷移與CI相容內容；保留不同邊界值、故障模式及隔離斷言。不因測試搬家假造行為Red，也不刪斷言換全綠。規則集中於[共用正本](../../COMMON_LEARNING_RULES.md)，本頁不複製另一套規則。
