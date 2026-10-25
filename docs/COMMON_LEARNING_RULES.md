@@ -130,3 +130,7 @@ GitHub `williechen/copilot_use/main` 為唯一文章交付處：新篇位於 `do
 **封存門檻與固定路徑：** 全部已發布文章逐篇驗證；只有本篇 Gate 2 所要求的實測證據全部成立才把正文**原樣**移至 `docs/teaching/archived/day-NN/{project}.md`。沒有實際程式套用、測試、DB／HTTP／GUI 證據不可因文件讀回通過而封存。manifest 記錄已驗收狀態、新路徑、來源 SHA、原始 commit／blob／SHA256 與驗證證據；原始 Git 歷史不改寫、舊連結維護路徑對照；修訂、封存不推進 Day。
 
 **索引與歷史：** 共用文章與三案首頁是正式閱讀入口；`daily/day-NN/{project}.md` 為尚待驗收的現行文章，`archived/day-NN/{project}.md` 為新政策下已驗收的原文。過往已存入 `history/day-NN` 的文章與原始封存證據維持其實際位置，不做批次強制搬移；跨 Day 報告留在 `history/evidence`，舊路徑以 [PATH_MAP](teaching/history/PATH_MAP.json) 與 Git commit 追溯。
+
+## 十三階段規劃銜接（2026-10-25）
+
+正式為 [P0–P12 共 13 階段](ROADMAP_P0_P12.md)，採本地 curriculum 原日曆／每日三產品合計 60 分鐘；P1.0 為 P1 首工作包。日曆切換、學習完成、產品 Verified 分列；新 P9 不恢復已廢除的舊 P9 規則。依精確來源與原功能選最小切片，不改原文章、不增加重複 FIFO。

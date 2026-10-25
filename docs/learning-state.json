@@ -159,7 +159,7 @@
     "current_stage_by_calendar": "P0",
     "learning_completed": null,
     "function_acceptance": null,
-    "stage_topics": "FUTURE_WORK.md 既有開發項目對應 P0–P12 的功能完成條件及證據；每日 Day 題目不預排",
+    "stage_topics": "docs/ROADMAP_P0_P12.md 十三階段；功能沿 FUTURE_WORK 原項目追蹤，不預排 Day",
     "phase_notifications_sent": [],
     "stage_calendar": [
       {
@@ -247,7 +247,25 @@
       "pet": 15,
       "analytics": 15,
       "flex": 15
-    }
+    },
+    "roadmap_document": "docs/ROADMAP_P0_P12.md",
+    "stage_names": {
+      "P0": "Foundation & MVP｜非 AI 基礎產品",
+      "P1": "Security & Identity｜含 P1.0 共用 Logging",
+      "P2": "Reliability & Persistence｜可靠性與資料恢復",
+      "P3": "Real-time Communication｜即時連線與同步",
+      "P4": "AI Integration｜真實模型整合",
+      "P5": "AI Persona & Conversation｜角色與對話控制",
+      "P6": "Memory & RAG｜授權記憶與檢索",
+      "P7": "MCP & Tool Integration｜工具權限與可追溯執行",
+      "P8": "Agent Runtime｜有界任務與恢復",
+      "P9": "Learning & Teaching Agent｜新定義的教學代理",
+      "P10": "Observability & Operations｜完整觀測",
+      "P11": "Production Readiness & Deployment｜正式部署與營運就緒",
+      "P12": "Release & Lifecycle｜發布、安裝更新與回滾"
+    },
+    "phase_plan_version": "p0-p12-local-merge-2026-10-25",
+    "phase_plan_evidence": "docs/source-review/phase-plan-merge-2026-10-25/README.md"
   },
   "daily_reference_sha": "f692c2ebe7b414fe49858c1ab1c4a33ce7c3dfee",
   "daily_product_sha": "44dabb3eebed12639cd949b93521cbdc47a401fb",

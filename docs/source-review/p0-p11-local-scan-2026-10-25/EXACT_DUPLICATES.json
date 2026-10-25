@@ -1,0 +1,93 @@
+[
+  {
+    "sha256": "f76250ce1ce5dba10b4f4c9e7d9a84ab9a2bfbfe192f7850acc9fd9eeee1d088",
+    "paths": [
+      "docs/teaching/history/day-24/archive/github/REPORT.md",
+      "docs/teaching/history/day-24/support/REPORT.md"
+    ]
+  },
+  {
+    "sha256": "db3ceb149e7126c41905d81e2c9b04a0f7a51a1d6d68b84943aafe60adbdb847",
+    "paths": [
+      "docs/teaching/history/day-24/archive/github/revisions/pet-r1/pet.md",
+      "docs/teaching/history/day-24/support/revisions/pet-r1/pet.md"
+    ]
+  },
+  {
+    "sha256": "fa2b5e58aa31666f22f545c6de9ac9b26f2f6ee5b265f7dc64c5671c43006f86",
+    "paths": [
+      "docs/teaching/history/evidence/2026-10-18-full-9a95a10/3f2e51d4509381ddb8a8ce7cb4cd3e60-after.md",
+      "docs/teaching/history/evidence/2026-10-18-full-fa0888e/3f2e51d4509381ddb8a8ce7cb4cd3e60-before.md"
+    ]
+  },
+  {
+    "sha256": "92e133b083635f2c27d29bae115c0d90f8847cd9f28f593d3a53210650622bd7",
+    "paths": [
+      "docs/teaching/history/evidence/2026-10-18-full-9a95a10/3f3e51d450938067923ae5a424d30950-after.md",
+      "docs/teaching/history/evidence/2026-10-18-full-fa0888e/3f3e51d450938067923ae5a424d30950-before.md"
+    ]
+  },
+  {
+    "sha256": "a75757c016e7824808c436656be9d67b48b3986d13a622c57565fb9947fd5393",
+    "paths": [
+      "docs/teaching/history/evidence/2026-10-18-full-9a95a10/3f3e51d45093807da638c336e857543a-after.md",
+      "docs/teaching/history/evidence/2026-10-18-full-fa0888e/3f3e51d45093807da638c336e857543a-before.md"
+    ]
+  },
+  {
+    "sha256": "777967477da4d3c40f85706e5da63c733ee216b60a2ecaf4c7fe6732d76a6d44",
+    "paths": [
+      "docs/teaching/history/evidence/2026-10-18-full-9a95a10/3f3e51d45093817eafaee0cfc9ea4cc8-after.md",
+      "docs/teaching/history/evidence/2026-10-18-full-fa0888e/3f3e51d45093817eafaee0cfc9ea4cc8-before.md"
+    ]
+  },
+  {
+    "sha256": "6a26945cb9e079b7f86c8fa99343ca13a872f661e1ca1535c44dfc63419e4dc4",
+    "paths": [
+      "docs/teaching/history/evidence/2026-10-18-full-9a95a10/3fce51d45093818b913bebb8dab5ab65-after.md",
+      "docs/teaching/history/evidence/2026-10-18-full-fa0888e/3fce51d45093818b913bebb8dab5ab65-before.md"
+    ]
+  },
+  {
+    "sha256": "756cbfca1bd7c32fff4c78a286e9d2391f696dba1a7b00664187b714098d2cc1",
+    "paths": [
+      "docs/teaching/history/evidence/2026-10-18-full-9a95a10/3fce51d4509381ca83e3e825f0313698-after.md",
+      "docs/teaching/history/evidence/2026-10-18-full-fa0888e/3fce51d4509381ca83e3e825f0313698-before.md"
+    ]
+  },
+  {
+    "sha256": "6a50d4f23e92df9f64a55a05b3fbe8ec60f98ce0de09640b90b2c2255ae03a61",
+    "paths": [
+      "docs/teaching/history/evidence/2026-10-18-full-9a95a10/3fce51d4509381ea871ec9c92da37c1b-after.md",
+      "docs/teaching/history/evidence/2026-10-18-full-fa0888e/3fce51d4509381ea871ec9c92da37c1b-before.md"
+    ]
+  },
+  {
+    "sha256": "12445c54afb268c688ab6142b59f719f3e74e418a2da178deec148becdec70d3",
+    "paths": [
+      "docs/teaching/history/evidence/2026-10-18-full-9a95a10/3fde51d45093816bb36dd9099190d907-after.md",
+      "docs/teaching/history/evidence/2026-10-18-full-fa0888e/3fde51d45093816bb36dd9099190d907-before.md"
+    ]
+  },
+  {
+    "sha256": "8a5d32c0c0edd9bd8c7b1aeebc1140eb660a17fcd80e09e6cd3e12b55a4a1fbc",
+    "paths": [
+      "docs/teaching/history/evidence/2026-10-18-full-9a95a10/3fde51d4509381bfa106ea4d9b190480-after.md",
+      "docs/teaching/history/evidence/2026-10-18-full-fa0888e/3fde51d4509381bfa106ea4d9b190480-before.md"
+    ]
+  },
+  {
+    "sha256": "d50adbcda21948a5cb13c52d1bb84fbdadff934386a243bf734cdd121d3a32a6",
+    "paths": [
+      "docs/teaching/history/evidence/2026-10-18-full-9a95a10/3fde51d4509381c2a0d5f60041137619-after.md",
+      "docs/teaching/history/evidence/2026-10-18-full-fa0888e/3fde51d4509381c2a0d5f60041137619-before.md"
+    ]
+  },
+  {
+    "sha256": "58c0bf576b2025ca8cf12beeb473facce0ea1908ada4c70fb244b6700fe38e21",
+    "paths": [
+      "docs/teaching/history/evidence/2026-10-18-functional-revalidation/REPRODUCTION.md",
+      "docs/teaching/history/evidence/2026-10-18-main-1853876/REPRODUCTION.md"
+    ]
+  }
+]

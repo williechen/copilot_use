@@ -2749,5 +2749,28 @@
     "next_day_changed": false,
     "makeup_queue_changed": false,
     "last_full_comparison_changed": false
+  },
+  "phase_plan_reference": {
+    "document": "docs/ROADMAP_P0_P12.md",
+    "stage_count": 13,
+    "stage_labels": [
+      "P0",
+      "P1",
+      "P2",
+      "P3",
+      "P4",
+      "P5",
+      "P6",
+      "P7",
+      "P8",
+      "P9",
+      "P10",
+      "P11",
+      "P12"
+    ],
+    "version": "p0-p12-local-merge-2026-10-25",
+    "evidence": "docs/source-review/phase-plan-merge-2026-10-25/README.md",
+    "next_day_unchanged": true,
+    "acceptance_unchanged": true
   }
 }

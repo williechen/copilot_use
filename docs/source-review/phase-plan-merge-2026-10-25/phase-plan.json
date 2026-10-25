@@ -1,0 +1,663 @@
+{
+  "version": "p0-p12-local-merge-2026-10-25",
+  "stage_count": 13,
+  "stage_labels": [
+    "P0",
+    "P1",
+    "P2",
+    "P3",
+    "P4",
+    "P5",
+    "P6",
+    "P7",
+    "P8",
+    "P9",
+    "P10",
+    "P11",
+    "P12"
+  ],
+  "policy_source": "direct user correction: 13 phases; local curriculum retained",
+  "document_base_commit": "4a3c43187e1ffd7cf4ba8d44cd4f8529f0d9d6d4",
+  "program_source_commit": "5c713553daee4055738239f047d6c774fcc7a7a1",
+  "local_calendar_preserved": true,
+  "phase_scope_note": "P0–P10 topics retained from 12-phase planning; P11/P12 split is this revision design, not a recovered historical title; local 13-stage data only fixes count/calendar.",
+  "new_runtime_tests": false,
+  "verified_phases": [],
+  "phases": [
+    {
+      "id": "P0",
+      "name": "Foundation & MVP｜非 AI 基礎產品",
+      "calendar": {
+        "stage": "P0",
+        "start": "2026-10-12",
+        "end": "2026-12-12"
+      },
+      "scope": [
+        "Chat：公開清單→選房→登入保留目標並核權→兩人聊天→成功持久化→重載／程序重啟後讀回→登出撤銷；首頁登入回個人頁，註冊完成保持登出且清除選房目標。",
+        "Pet：建立／列表／選取、多寵物獨立生活窗與狀態；回籠及直接關生活窗都停止該隻活動而保留資料；控制窗關閉後可恢復。",
+        "Pet 啟動依 USER_FLOWS 的「預設寵物」政策，可多隻；預設資格與當次回籠狀態分離。不可把 Day36 的所有未回籠恢復直接當此需求完成。基本移動／睡醒／逐 ID 事件須實際可用。",
+        "Analytics：初始化管理員→首次改密碼與唯一 Email→登入→授權機器事件寫入／同來源去重→人員 Session 查統計及篩選→重啟一致→登出拒絕。",
+        "最低安全條件：伺服器核對身分與資源權限、敏感操作拒絕未授權、密碼加鹽雜湊、資料庫分離；P1 將能力系統化，不能用後續階段作不安全基本流程的豁免。"
+      ],
+      "non_goals": [
+        "不要求真 AI、RAG、MCP、Agent、完整 OTel、正式發布；FileOrganizer 破壞性操作不作 P0 Gate。",
+        "產品基本程式已存在的切片只補真缺口及驗收，不重做已接通的 Day36 撤銷／統計／恢復查詢。"
+      ],
+      "prerequisites": "使用最新需求及精確 rust_ai_ring SHA，具隔離 SQLite／PostgreSQL、瀏覽器及 Tauri 原生環境。",
+      "deliverables": [
+        "三產品可操作基本旅程與正／負向案例表；每個失敗步驟連回原 FUTURE_WORK 功能。",
+        "前後端、DB、原生 binary／JS／WASM 的一致來源紀錄，以及 fresh DB 與需支援舊 DB 的邊界。"
+      ],
+      "exit_gate": [
+        "三條完整旅程均通過；重載／真正程序重啟仍可讀取正確資料；無 P0 blocker。",
+        "Chat 跨房授權／作者身分及登出後既有連線不得越權；Pet 不串錯 ID／不重複窗且符合預設政策；Analytics 人員與機器身分互不替代。",
+        "必要同 SHA 測試與適用 CI 可追溯；未執行或環境不支援須明列，不能標 Verified。"
+      ],
+      "tests": [
+        "Chat 真 HTTP＋雙瀏覽器／WS＋SQLite 讀回，含匿名／越權／撤銷／重啟。",
+        "Pet 真三窗、逐 ID 操作、回籠／直接關窗／控制窗恢復、預設與非預設重啟；DB 及窗失敗另記。",
+        "Analytics 真 PG＋HTTP／Browser：stored／duplicate／conflict、登入／改密碼／登出與重新啟動。"
+      ],
+      "follow_up": [
+        "chat-auth",
+        "chat-history",
+        "pet-lifecycle",
+        "pet-roaming",
+        "analytics-auth",
+        "analytics-session",
+        "ci-coverage"
+      ],
+      "products": [
+        "Chat：主體",
+        "Pet：主體",
+        "Analytics：主體"
+      ],
+      "status": {
+        "plan": "documented",
+        "implementation": "partial source observations only; see SOURCE_BASELINE.md",
+        "tests": "not rerun",
+        "ci": "configuration inspected; runs not refreshed",
+        "acceptance": "not verified in this review"
+      }
+    },
+    {
+      "id": "P1",
+      "name": "Security & Identity｜含 P1.0 共用 Logging",
+      "calendar": {
+        "stage": "P1",
+        "start": "2026-12-12",
+        "end": "2027-02-12"
+      },
+      "scope": [
+        "第一工作包 P1.0：三程序共用 tracing／tracing-subscriber 初始化、可切 JSON／文字、RUST_LOG、timestamp／level／target／service.name／event_name、request_id；明確敏感值 allowlist。",
+        "各產品接啟停、auth failure、HTTP／WS 生命週期、Pet 建立／選取／DB 拒絕、Analytics stored／duplicate／conflict 與管理員登入；補三程序 runtime smoke。",
+        "Chat／Analytics 共用 Cookie／Session 政策和 Port，但各自 SQLite／PG 與登入狀態獨立；活動續期、閒置後台設定、帳號級登入等待、改密碼／Email 重設及所有 Session 撤銷。",
+        "Chat 房主／資源 ACL／管理入口；Analytics 管理者及唯讀角色、來源範圍、停用／縮權立即作用於既有連線，管理動作低敏稽核。",
+        "機器來源管理者核准配對、短效資格、自動續期輪替、撤銷與重放防護；協定依本地 SERVICE_CREDENTIAL_REQUIREMENTS 選型，不預定 JWT 或 mTLS。"
+      ],
+      "non_goals": [
+        "P1.0 不含 OTel Collector／exporter／distributed traces／metrics Dashboard；P10 負責完整觀測。",
+        "日誌不是業務事件投遞；機器服務憑證不能取代人員後台 Session。"
+      ],
+      "prerequisites": "P0 基本旅程已完成工程 Gate；P1.0 隨即優先。已知授權漏洞須即時修復，不等待日曆切點。",
+      "deliverables": [
+        "共用 Logging 初始化與欄位／redaction 契約、stdout/stderr 收集／rotation／retention 操作文件。",
+        "人員、角色、資源、來源及機器憑證的權限矩陣與撤銷生效界線；找回密碼合成郵件測試流程。"
+      ],
+      "exit_gate": [
+        "P1.0 JSON 可解析、filter 正確、必要欄位齊、注入秘密未輸出，三程序成功／失敗事件可取證。",
+        "跨角色／房間／來源、CSRF、過期／撤銷資格均拒絕；活躍 Session 與閒置政策符合 AUTHENTICATION。",
+        "帳號等待 15 秒起倍增的既有需求、刷新／IP 無法繞過、等待中不重新起算；輪替／回應遺失／撤銷後無法續期可驗。"
+      ],
+      "tests": [
+        "logger unit＋subprocess smoke、秘密哨兵與 JSON schema 檢查。",
+        "真 HTTP／WS／SSE（若已有）負向授權、並發撤銷、fake clock 等待／閒置、密碼重設一次性與過期。",
+        "合成服務配對／換證／重放／重啟測試及管理畫面狀態一致性，不操作正式秘密。"
+      ],
+      "follow_up": [
+        "chat-auth",
+        "analytics-auth",
+        "analytics-session",
+        "event-transport",
+        "ci-coverage"
+      ],
+      "products": [
+        "Chat：Logging／人員與房間授權",
+        "Pet：Logging／原生 capability／來源身分",
+        "Analytics：Logging／角色、來源與配對管理"
+      ],
+      "status": {
+        "plan": "documented",
+        "implementation": "partial source observations only; see SOURCE_BASELINE.md",
+        "tests": "not rerun",
+        "ci": "configuration inspected; runs not refreshed",
+        "acceptance": "not verified in this review"
+      }
+    },
+    {
+      "id": "P2",
+      "name": "Reliability & Persistence｜可靠性與資料恢復",
+      "calendar": {
+        "stage": "P2",
+        "start": "2027-02-12",
+        "end": "2027-04-12"
+      },
+      "scope": [
+        "交易邊界、同鍵同內容冪等／不同內容衝突、並發重送及程序重啟；持久化失敗不廣播、不回成功 ACK。",
+        "Chat／Pet 真來源事件→可靠佇列或 outbox（確有跨交易需求才採）→傳輸→Analytics PG commit ACK；HTTP／gRPC 的必要契約依 ANALYTICS_TRANSPORT 逐項選型。",
+        "不可改寫已交付 migration；fresh／支援舊庫前向升級、失敗保資料；Pet DB／開關窗／Runtime 的部分失敗補償。",
+        "隔離備份、還原、資料保留／撤回需求及可核對的恢復目標，數值以產品需求決定。"
+      ],
+      "non_goals": [
+        "不用無界重試或記憶體去重冒充跨程序保證；不用空 Port 或空資料表作完成。"
+      ],
+      "prerequisites": "P0 儲存流程與 P1 必要安全、Logging 契約可用；傳輸選型先有實際來源 caller。",
+      "deliverables": [
+        "寫入與 ACK／事件發送的一致性設計、重試上限／錯誤分類、migration 支援矩陣。",
+        "故障注入與備份還原 runbook、重啟／並發／去重原始證據。"
+      ],
+      "exit_gate": [
+        "相同事件多次並發／重啟後只計一次，不同內容同鍵明確衝突，DB 錯誤不得成功。",
+        "升級及失敗回復保留舊資料；還原後可驗資料數與語義；部分 OS 失敗有可見錯誤與可恢復狀態。"
+      ],
+      "tests": [
+        "真 SQLite／PG 交易、rollback、斷線、程序 kill/restart、重放／並發去重。",
+        "支援版本舊 DB fixture 升級、checksum 保護、backup→restore→產品讀回及 Pet 視窗故障補償。"
+      ],
+      "follow_up": [
+        "chat-history",
+        "pet-lifecycle",
+        "event-transport",
+        "analytics-capabilities"
+      ],
+      "products": [
+        "Chat：訊息／migration／事件",
+        "Pet：OS 與 DB 一致性／事件",
+        "Analytics：PG 冪等／備份恢復"
+      ],
+      "status": {
+        "plan": "documented",
+        "implementation": "partial source observations only; see SOURCE_BASELINE.md",
+        "tests": "not rerun",
+        "ci": "configuration inspected; runs not refreshed",
+        "acceptance": "not verified in this review"
+      }
+    },
+    {
+      "id": "P3",
+      "name": "Real-time Communication｜即時連線與同步",
+      "calendar": {
+        "stage": "P3",
+        "start": "2027-04-12",
+        "end": "2027-06-12"
+      },
+      "scope": [
+        "Chat reconnect、presence、typing、歷史增量同步與斷線補訊；以穩定訊息 ID／游標避免重複及順序歧義。",
+        "Pet 動態 ID 事件訂閱、窗口生命週期／關窗釋放、重開／重連同步；本機 IPC 不強制新增網路服務。",
+        "Analytics 即時查詢／SSE 的 commit 後通知、rollback 無事件、Last-Event-ID／補查、慢消費者及授權續查。"
+      ],
+      "non_goals": [
+        "不將 typing／presence 寫成永久聊天訊息；不因使用 WS／SSE 就宣稱可靠送達。"
+      ],
+      "prerequisites": "P0 歷史基本讀回、P1 撤銷與來源授權、P2 穩定 ID／持久化事件邊界。",
+      "deliverables": [
+        "連線狀態機、重連／補查／backpressure 契約、UI 載入／離線／錯誤狀態。",
+        "長連線撤銷、訂閱釋放及漏訊補回端到端證據。"
+      ],
+      "exit_gate": [
+        "斷線期間提交的資料可補回且不重複，跨房／來源不洩漏；登出／縮權影響既有串流。",
+        "慢接收端、重連風暴、頁面卸載／原生關窗不造成無界累積或幽靈訂閱。"
+      ],
+      "tests": [
+        "網路中斷／重連、並發房間、游標過期、慢消費者、取消訂閱。",
+        "SSE 真 PG commit／rollback、已撤銷 Session、多 Pet ID 事件隔離與原生重開。"
+      ],
+      "follow_up": [
+        "chat-capabilities",
+        "event-transport",
+        "pet-lifecycle",
+        "analytics-auth"
+      ],
+      "products": [
+        "Chat：即時主體",
+        "Pet：逐窗 IPC 同步",
+        "Analytics：授權即時後台"
+      ],
+      "status": {
+        "plan": "documented",
+        "implementation": "partial source observations only; see SOURCE_BASELINE.md",
+        "tests": "not rerun",
+        "ci": "configuration inspected; runs not refreshed",
+        "acceptance": "not verified in this review"
+      }
+    },
+    {
+      "id": "P4",
+      "name": "AI Integration｜真實模型整合",
+      "calendar": {
+        "stage": "P4",
+        "start": "2027-06-12",
+        "end": "2027-08-12"
+      },
+      "scope": [
+        "透過 Model Port 接真 Provider；Responses API 等供應商 adapter 的版本／契約以實作當時官方文件與 SDK 為準。",
+        "HTTP／SSE 串流、structured output、function calling 的編解碼與錯誤分類；function calling 尚不等於可以任意執行工具。",
+        "逾時、取消、rate limit、重試及 usage 缺失；Analytics 接最小 usage schema，未知 quota／成本明示未知。"
+      ],
+      "non_goals": [
+        "MockChatModel 僅作測試替身；不宣稱已接真 AI。未經授權不執行付費或正式帳號呼叫。",
+        "不在此階段加入完整 RAG／MCP／Agent 或多角色自治循環。"
+      ],
+      "prerequisites": "P1 安全保管／Logging、P2 請求可靠性、P3 串流與取消邊界；先明確模型與成本上限。",
+      "deliverables": [
+        "provider adapter、模型設定、串流 UI、錯誤與取消行為、usage schema／估算標示。",
+        "固定 fixture 契約測試與另列、獲授權的真 Provider smoke。"
+      ],
+      "exit_gate": [
+        "真 Provider 成功／失敗／取消／stream end 可辨識，串流與非串流結果相容；敏感值不進日誌／事件。",
+        "usage 缺漏不作 0、重試不重複計費；有上限且能停，真實呼叫證據與 mock 測試分開。"
+      ],
+      "tests": [
+        "假 provider／HTTP replay：分段 SSE、schema 失配、429／5xx、timeout／cancel。",
+        "獲授權的少量真實 smoke；精確模型／版本／請求結果／usage，原文以低敏證據保存。"
+      ],
+      "follow_up": [
+        "chat-capabilities",
+        "pet-capabilities",
+        "analytics-capabilities"
+      ],
+      "products": [
+        "Chat：AI 對話入口",
+        "Pet：AI 對話／素材按需求",
+        "Analytics：usage 接收；AI 洞察另按需求"
+      ],
+      "status": {
+        "plan": "documented",
+        "implementation": "partial source observations only; see SOURCE_BASELINE.md",
+        "tests": "not rerun",
+        "ci": "configuration inspected; runs not refreshed",
+        "acceptance": "not verified in this review"
+      }
+    },
+    {
+      "id": "P5",
+      "name": "AI Persona & Conversation｜角色與對話控制",
+      "calendar": {
+        "stage": "P5",
+        "start": "2027-08-12",
+        "end": "2027-10-12"
+      },
+      "scope": [
+        "Persona、系統規則、context window／摘要與多回合持續；使用者輸入與工具回覆不得越過安全政策。",
+        "多角色 turn-taking、cooldown、token／費用／回合預算、停止／取消與循環偵測。",
+        "Pet 五項 Profile 與可選外觀設定接到實際 AI 行為；非 AI 漫遊／基本睡醒仍按 P0／既有原需求追蹤。"
+      ],
+      "non_goals": [
+        "不把 PetProfile 值物件或角色列舉當成完整 AI 對話；不要求 Analytics 模擬人格。"
+      ],
+      "prerequisites": "P4 真模型與 usage／取消可用；P1 權限和 P2 對話狀態保存邊界。",
+      "deliverables": [
+        "角色與上下文政策、對話／回合狀態、預算設定、UI 角色識別。",
+        "預算耗盡／角色衝突／使用者停止的可重現案例。"
+      ],
+      "exit_gate": [
+        "多角色不自我無限呼叫，超預算與取消停止後續發言；跨房／跨角色上下文不洩漏。",
+        "Profile 變更有可解釋的行為效果，前端顯示與實際使用角色一致。"
+      ],
+      "tests": [
+        "固定模型替身＋seed 的回合／預算／上下文單測，實際 UI 多回合／中斷。",
+        "角色輸入注入、輪流競態、usage 缺失保守處理與新舊 Profile 相容。"
+      ],
+      "follow_up": [
+        "chat-capabilities",
+        "pet-capabilities",
+        "analytics-capabilities"
+      ],
+      "products": [
+        "Chat：多角色對話",
+        "Pet：人格與互動",
+        "Analytics：usage／費用統計；Persona N/A"
+      ],
+      "status": {
+        "plan": "documented",
+        "implementation": "not established by this review",
+        "tests": "not rerun",
+        "ci": "configuration inspected; runs not refreshed",
+        "acceptance": "not verified in this review"
+      }
+    },
+    {
+      "id": "P6",
+      "name": "Memory & RAG｜授權記憶與檢索",
+      "calendar": {
+        "stage": "P6",
+        "start": "2027-10-12",
+        "end": "2027-12-12"
+      },
+      "scope": [
+        "對話記憶保存、來源／owner／room 範圍、embedding／retriever adapter、chunk／metadata 版本與可管理生命週期。",
+        "查詢前授權、刪除／撤回／更新同步於原文與索引；跨程序重啟後可取回正確記憶。",
+        "RAG 引文、找不到證據的回答策略與檢索品質資料集；依本地需求選儲存方案，不預先指定向量 DB。"
+      ],
+      "non_goals": [
+        "模型 context 不是持久記憶；相似度不等於授權；不因資料表存在就標 RAG 完成。"
+      ],
+      "prerequisites": "P4／P5 對話與上下文、P1 資源授權、P2 資料保留與刪除／備份語義。",
+      "deliverables": [
+        "記憶／Retriever Port、索引與重建工作、管理 UI、查詢與引用 trace。",
+        "授權、刪除、跨重啟與品質基準。"
+      ],
+      "exit_gate": [
+        "跨房／跨使用者記憶不可讀；撤回資料不再被檢索／回答，重建不復活已刪資料。",
+        "重啟能查回，引用能回到實際來源；品質門檻先定測試集再量測，不臆造通過率。"
+      ],
+      "tests": [
+        "真儲存與索引 integration、ACL／刪除／重建、空查詢與 provider embedding 錯誤。",
+        "固定資料集檢索評估及 UI 引文可追溯驗證。"
+      ],
+      "follow_up": [
+        "chat-capabilities",
+        "pet-capabilities",
+        "analytics-capabilities"
+      ],
+      "products": [
+        "Chat：房間／個人記憶",
+        "Pet：獨立寵物記憶",
+        "Analytics：品質／治理；個人記憶 N/A"
+      ],
+      "status": {
+        "plan": "documented",
+        "implementation": "not established by this review",
+        "tests": "not rerun",
+        "ci": "configuration inspected; runs not refreshed",
+        "acceptance": "not verified in this review"
+      }
+    },
+    {
+      "id": "P7",
+      "name": "MCP & Tool Integration｜工具權限與可追溯執行",
+      "calendar": {
+        "stage": "P7",
+        "start": "2027-12-12",
+        "end": "2028-02-12"
+      },
+      "scope": [
+        "MCP client、能力協商、Tool Registry、參數 schema 與結果映射；實際採用 transport／版本於實作當時確認。",
+        "依使用者／來源／工具／操作授權，必要的破壞性或外部副作用確認；工具回覆視為非可信資料。",
+        "Pet FileOrganizer 作可選工具 adapter：授權根目錄、opaque preview、確認與真 filesystem receipt／restore 分開，依既有需求逐項完成。"
+      ],
+      "non_goals": [
+        "現有 Tauri IPC／掃描預覽不等於 MCP；不把工具回傳的文字當成新授權。",
+        "FileOrganizer 尚未進核心 Gate 的部分不強制前移 P0。"
+      ],
+      "prerequisites": "P1 工具／資源權限與稽核、P4 function calling 契約、P2 副作用冪等與回復。",
+      "deliverables": [
+        "工具目錄／schema／權限矩陣、拒絕與確認 UI、timeout／取消／錯誤映射。",
+        "合成 MCP server 與實際副作用 receipt 的分層證據。"
+      ],
+      "exit_gate": [
+        "未授權／未確認／越界參數不執行，回覆無法升權；重試不重複破壞性副作用。",
+        "工具失敗與取消可回復，稽核記對象與結果但不含秘密／私密檔內容。"
+      ],
+      "tests": [
+        "協商／工具列舉／呼叫／斷線、schema 不符、惡意工具輸出／路徑 symlink。",
+        "隔離目錄 preview→確認→操作→receipt→restore；未執行 OS 僅能標模型測試。"
+      ],
+      "follow_up": [
+        "pet-capabilities",
+        "chat-capabilities",
+        "event-transport"
+      ],
+      "products": [
+        "Chat：可授權工具",
+        "Pet：可選 OS 工具",
+        "Analytics：工具稽核查詢；MCP 執行 N/A 除非另需"
+      ],
+      "status": {
+        "plan": "documented",
+        "implementation": "not established by this review",
+        "tests": "not rerun",
+        "ci": "configuration inspected; runs not refreshed",
+        "acceptance": "not verified in this review"
+      }
+    },
+    {
+      "id": "P8",
+      "name": "Agent Runtime｜有界任務與恢復",
+      "calendar": {
+        "stage": "P8",
+        "start": "2028-02-12",
+        "end": "2028-04-12"
+      },
+      "scope": [
+        "任務 state machine、execution／turn boundary、步數／時間／費用預算、cancel／pause 的明確語義。",
+        "checkpoint、程序重啟 recovery、工具副作用記錄與重試；人員介入／必要確認不跨過授權邊界。",
+        "UI 顯示任務狀態與可核對的進度，失敗不冒充成功，重試仍追蹤原任務。"
+      ],
+      "non_goals": [
+        "PetMachine 的存在不等於 Agent Runtime；不預建無用途的多 Agent 框架。"
+      ],
+      "prerequisites": "P4–P7 所需 provider／記憶／工具已具能力；P1 權限、P2 恢復必須存在。",
+      "deliverables": [
+        "任務／執行／checkpoint 資料契約、取消／恢復入口、可追溯事件。",
+        "跨程序恢復及工具副作用不重做的驗收案例。"
+      ],
+      "exit_gate": [
+        "所有執行有界，取消後不再啟動新工具，已提交副作用有正確結果；崩潰後可繼續或明確終止。",
+        "權限縮減影響待執行步驟，checkpoint 不攜帶可重用秘密。"
+      ],
+      "tests": [
+        "固定 clock／模型／工具替身的狀態轉移、budget、取消競態。",
+        "真程序 kill／restart、重複訊息、工具回應遺失與副作用去重 integration。"
+      ],
+      "follow_up": [
+        "chat-capabilities",
+        "pet-capabilities",
+        "event-transport"
+      ],
+      "products": [
+        "Chat：可見的任務",
+        "Pet：可選背景任務",
+        "Analytics：執行稽核與使用量"
+      ],
+      "status": {
+        "plan": "documented",
+        "implementation": "not established by this review",
+        "tests": "not rerun",
+        "ci": "configuration inspected; runs not refreshed",
+        "acceptance": "not verified in this review"
+      }
+    },
+    {
+      "id": "P9",
+      "name": "Learning & Teaching Agent｜新定義的教學代理",
+      "calendar": {
+        "stage": "P9",
+        "start": "2028-04-12",
+        "end": "2028-06-12"
+      },
+      "scope": [
+        "learner state、能力目標／證據、active recall、spaced repetition、可解釋的下題選擇。",
+        "保留原 Day／修訂／來源與原始作答；學習完成、文章交付與產品 Gate 獨立。",
+        "依學習者授權管理資料、人工更正／撤回與重新計算；教學建議不自動改寫歷史文章或工程結案。"
+      ],
+      "non_goals": [
+        "新 P9 不恢復已廢除 P9_TARGET；目前 learning-state.json 與排程文件只是規劃來源，不等於產品代理已實作。"
+      ],
+      "prerequisites": "P6 授權記憶、P8 有界執行及 P4–P5 對話；先有可核對的學習資料模型。",
+      "deliverables": [
+        "learner／recall／review 契約、複習排程與解釋、教師／使用者調整入口。",
+        "固定題庫與合成學習歷程驗證資料；資料刪除／更正證據。"
+      ],
+      "exit_gate": [
+        "相同歷程與規則可說明選題；複習間隔與錯答調整可重現，無歷程不捏造學會。",
+        "學習狀態重啟保留且權限隔離，調整不覆寫歷史證據或把 CI 當學習完成。"
+      ],
+      "tests": [
+        "固定 clock 的 recall／複習／時區邊界與冷啟動資料缺漏。",
+        "真儲存、撤回／更正、人工介入、跨使用者隔離與 UI 解釋驗收。"
+      ],
+      "follow_up": [
+        "chat-capabilities",
+        "pet-capabilities",
+        "analytics-capabilities"
+      ],
+      "products": [
+        "Chat：教學互動",
+        "Pet：可選學習陪伴",
+        "Analytics：經授權的學習成效分析"
+      ],
+      "status": {
+        "plan": "documented",
+        "implementation": "not established by this review",
+        "tests": "not rerun",
+        "ci": "configuration inspected; runs not refreshed",
+        "acceptance": "not verified in this review"
+      }
+    },
+    {
+      "id": "P10",
+      "name": "Observability & Operations｜完整觀測",
+      "calendar": {
+        "stage": "P10",
+        "start": "2028-06-12",
+        "end": "2028-08-12"
+      },
+      "scope": [
+        "擴展 P1.0：跨 HTTP／WS／工具／模型／事件鏈的 context propagation、traces／metrics、exporter／collector 與營運查詢。",
+        "錯誤率／延遲／佇列／資料庫／模型 usage 與成本；模型 quota 未提供時標未知，產品統計與觀測分流。",
+        "告警、sampling／cardinality、低敏欄位、retention 與敏感資料刪除／遮蔽。"
+      ],
+      "non_goals": [
+        "不把 Analytics 業務 event-id 當 trace ID，也不以 request_id 宣稱跨服務追蹤。",
+        "不等到本階段才有基本日誌；不由零散 tracing import 宣稱完整 OTel。"
+      ],
+      "prerequisites": "P1.0 Logging 和 P1 安全已可用；選已存在的端到端旅程，其他階段新增能力增量納入。",
+      "deliverables": [
+        "觀測欄位與傳播契約、Dashboard／alerts、collector/export 操作與故障降級。",
+        "端到端 trace／metrics 範例與告警演練。"
+      ],
+      "exit_gate": [
+        "從使用者操作追至必要服務與儲存邊界；敏感值無洩漏，告警能觸發、定位並恢復。",
+        "觀測後端不可用不拖垮產品；負載與高 cardinality 仍受控，費用／quota 狀態來源清楚。"
+      ],
+      "tests": [
+        "合成 collector 斷線、抽樣／propagation、跨服務錯誤與 secret sentinel。",
+        "受控負載與告警演練、restore 後觀測、固定資料集成本去重與未知欄位。"
+      ],
+      "follow_up": [
+        "ci-coverage",
+        "event-transport",
+        "analytics-capabilities"
+      ],
+      "products": [
+        "Chat：請求／WS／模型",
+        "Pet：原生／工具／模型",
+        "Analytics：ingest／query／營運觀測"
+      ],
+      "status": {
+        "plan": "documented",
+        "implementation": "not established by this review",
+        "tests": "not rerun",
+        "ci": "configuration inspected; runs not refreshed",
+        "acceptance": "not verified in this review"
+      }
+    },
+    {
+      "id": "P11",
+      "name": "Production Readiness & Deployment｜正式部署與營運就緒",
+      "calendar": {
+        "stage": "P11",
+        "start": "2028-08-12",
+        "end": "2028-10-12"
+      },
+      "scope": [
+        "部署拓撲、組態／秘密注入、HTTPS／可信對端、DB 權限、連線池、備份與 disaster-recovery 演練。",
+        "staging→production 的變更流程、health/readiness、graceful shutdown、資源限制與容量基準。",
+        "建立服務維運、診斷、告警／事故處理 runbook；Desktop 與後端的版本／通訊相容及安全連線。"
+      ],
+      "non_goals": [
+        "部署腳本存在或本地 build 成功不等於正式部署；不自動操作實際正式環境。",
+        "安裝包發行、updater 信任鏈、跨版升級／回滾由 P12 驗收。"
+      ],
+      "prerequisites": "擬部署的功能 Gate 及 P1 安全／P2 備份恢復／P10 必要觀測已具證據；N/A 有理由。",
+      "deliverables": [
+        "環境與秘密契約、可重建部署設定、容量／備份恢復目標、運維 runbook。",
+        "隔離 staging 的 clean install、DB restore、依賴不可用、shutdown 演練結果。"
+      ],
+      "exit_gate": [
+        "部署可重現、秘密不落庫／日誌／映像；readiness 與依賴故障相符，停機不遺失已確認資料。",
+        "還原演練符合先確認的恢復目標；責任人能依 runbook 定位與恢復。"
+      ],
+      "tests": [
+        "隔離部署 smoke／負載、秘密輪替、DB／服務故障、TLS 設定、關閉／重啟。",
+        "backup→restore→三產品關鍵旅程；環境未備妥時只交付計畫，不能標部署完成。"
+      ],
+      "follow_up": [
+        "ci-coverage",
+        "event-transport",
+        "analytics-capabilities"
+      ],
+      "products": [
+        "Chat：Web／服務部署",
+        "Pet：桌面組態與服務相容",
+        "Analytics：PG／後台部署"
+      ],
+      "status": {
+        "plan": "documented",
+        "implementation": "not established by this review",
+        "tests": "not rerun",
+        "ci": "configuration inspected; runs not refreshed",
+        "acceptance": "not verified in this review"
+      }
+    },
+    {
+      "id": "P12",
+      "name": "Release & Lifecycle｜發布、安裝更新與回滾",
+      "calendar": {
+        "stage": "P12",
+        "start": "2028-10-12",
+        "end": "2028-12-12"
+      },
+      "scope": [
+        "以精確 tag／commit 產生可追溯版本、產物雜湊、release notes 與相依／授權資訊。",
+        "Pet 依目標平台產生 installer、簽章／信任與更新檢查；平台能力與實測分列，不以 Linux 通過代表 Windows／macOS。",
+        "升級／中斷恢復／回滾與 DB 相容政策；不可降級的 migration 明確拒絕或前向修復，不以程式退版保證資料可回復。",
+        "跨產品版本相容、release channel、可控制的更新推出與回退；卸載／重裝的使用者資料保留與刪除政策。"
+      ],
+      "non_goals": [
+        "不重建第二個 copilot_use 產品或 CI；舊 copilot_use tag／三平台記錄僅歷史，不移作 rust_ai_ring 驗收。",
+        "發布到真實使用者或正式環境仍須具該操作授權，本輪只發布規劃文件。"
+      ],
+      "prerequisites": "P11 部署與支援矩陣、P2 migration／restore、P1 更新來源與簽章信任、P10 故障可觀測。",
+      "deliverables": [
+        "版本／tag／產物清單、平台測試矩陣、installer／updater 契約、upgrade／rollback runbook。",
+        "舊版→新版→允許回退版本的可重現資料與流程證據；不能回退時有前向恢復方案。"
+      ],
+      "exit_gate": [
+        "每個宣稱支援的平台均完成真實安裝、啟動、保資料更新、中斷恢復與支援回退流程。",
+        "錯誤簽章／來源／舊版本拒絕；tag、產物、文件與已部署版本可互相核對，未完成平台標未驗收。"
+      ],
+      "tests": [
+        "clean install／upgrade／repair／uninstall／reinstall，真實平台與 updater 換版／中斷／拒絕。",
+        "版本相容、簽章負向、migration 不可回退、資料保留、release smoke 與復原演練。"
+      ],
+      "follow_up": [
+        "ci-coverage",
+        "pet-capabilities"
+      ],
+      "products": [
+        "Chat：服務版本與資產發布",
+        "Pet：原生 installer／updater",
+        "Analytics：服務／schema 發布與回復"
+      ],
+      "status": {
+        "plan": "documented",
+        "implementation": "not established by this review",
+        "tests": "not rerun",
+        "ci": "configuration inspected; runs not refreshed",
+        "acceptance": "not verified in this review"
+      }
+    }
+  ]
+}

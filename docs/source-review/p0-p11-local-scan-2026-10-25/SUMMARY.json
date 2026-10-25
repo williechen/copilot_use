@@ -1,0 +1,67 @@
+{
+  "date": "2026-10-25 Asia/Taipei",
+  "repository": "williechen/copilot_use",
+  "base_commit": "4a3c43187e1ffd7cf4ba8d44cd4f8529f0d9d6d4",
+  "previous_local_commit": "532e739f1ef4e5920de300eba0f90adeeaf96187",
+  "roadmap_path": "docs/ROADMAP_P0_P11.md",
+  "roadmap_git_blob": "fc67de29a53841c2edd0899609611c21d58f7fe3",
+  "roadmap_sha256": "55007b1e62a86f56d9a0ee743184d5adb94b251460ca6ec40ee026550d8b78ee",
+  "all_docs_markdown": 554,
+  "teaching_markdown": 505,
+  "physical_article_files": 157,
+  "reading_versions": 105,
+  "roles": {
+    "reading_version": 105,
+    "mirror_or_archive_variant": 45,
+    "earlier_revision": 7
+  },
+  "primary_phase_counts": {
+    "P0": 86,
+    "未排期延伸": 9,
+    "P2": 8,
+    "P3": 2
+  },
+  "exact_duplicate_groups": 13,
+  "missing": [
+    {
+      "project": "chat",
+      "day": 1,
+      "status": "no original body found in refreshed tracked docs; not reconstructed"
+    },
+    {
+      "project": "pet",
+      "day": 1,
+      "status": "no original body found in refreshed tracked docs; not reconstructed"
+    },
+    {
+      "project": "analytics",
+      "day": 1,
+      "status": "no original body found in refreshed tracked docs; not reconstructed"
+    }
+  ],
+  "product_source_verification": "limited targeted static inspection only; not whole product acceptance",
+  "old_index_verdicts_imported": false,
+  "original_bodies_modified": false,
+  "scope_limit": "All local tracked docs Markdown machine-read, all discovered lesson bodies mapped with line excerpts. Not independent line-by-line semantic review of every code block, no compilation/runtime/CI acceptance. Embedded copies under evidence are inventoried, not promoted to independent lessons.",
+  "stage_count": 13,
+  "stage_labels": [
+    "P0",
+    "P1",
+    "P2",
+    "P3",
+    "P4",
+    "P5",
+    "P6",
+    "P7",
+    "P8",
+    "P9",
+    "P10",
+    "P11",
+    "P12"
+  ],
+  "active_roadmap": "docs/ROADMAP_P0_P12.md",
+  "roadmap_correction": "Direct user correction: 13 phases. Original snapshot hash retained as provenance; P0–P12 is not obsolete.",
+  "source_context_commit": "5c713553daee4055738239f047d6c774fcc7a7a1",
+  "source_context_report": "docs/source-review/phase-plan-merge-2026-10-25/SOURCE_BASELINE.md",
+  "phase_acceptance_unchanged": true
+}

@@ -15,3 +15,9 @@
 可閱讀索引已清除行尾空白；完整 ZIP 保留核對原始資料。
 
 歷史定點判定見 [狀態表](RUST_AI_CHAT_STATUS.md)（bded382 本地及同SHA GitHub CI通過；Day12新功能尚待套用）。當前學習參考庫另見 [先本地、後 GitHub 驗證](rust-ai-chat-validation.json)、[驗證日誌／工具](rust-ai-chat-validation-logs.zip)；這是後續定點驗證，不改寫原完整靜態核對的來源與結果。
+
+## 正式 P0–P12 十三階段本地文章掃描
+
+[2026-10-25 逐篇分類、重複／過時／缺口與證據矩陣](p0-p11-local-scan-2026-10-25/README.md)：更新至 `4a3c431` 後重新讀取本地原文；105 個閱讀版本、157 份正文／修訂／鏡像。未追認產品、CI 或功能驗收。
+
+[十三階段完整本地合併規劃](phase-plan-merge-2026-10-25/README.md)：最新程式／文章、本地13階段日曆與640行詳細Roadmap；原文與產品驗收狀態保留。

@@ -1,6 +1,6 @@
 # 文件總入口
 
-**正式階段規劃：** [P0～P11 Roadmap](ROADMAP_P0_P11.md)：P0 僅含三產品非 AI 基礎流程，P1.0 建立共用 Logging，P10 完整可觀測。正式驗收以 `rust_ai_ring` 為準。
+**正式階段規劃：** [P0～P12 十三階段 Roadmap](ROADMAP_P0_P12.md)：P0 僅含三產品非 AI 基礎流程，P1.0 建立共用 Logging，P10 完整可觀測。正式驗收以 `rust_ai_ring` 為準。
 
 <!-- comparison-5c713553:start -->
 [最新三專案程式／文章比對](source-review/2026-10-25-full-comparison-5c713553.md)：105個閱讀版本、111份修訂、21項差異；來源 `5c713553`，局部測試與完整驗收分開記錄。

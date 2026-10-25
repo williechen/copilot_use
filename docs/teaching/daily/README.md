@@ -61,6 +61,6 @@
 
 ## 封存與進度
 
-只有必要 Gate 2 實測成立才移動原篇與更新驗收；本次不新增驗收封存、不增加 Day、不結案 FIFO。三案下一篇仍為 Day35，以 [learning-state](../../learning-state.json)／[manifest](../current/manifest.json) 一致值為準。
+只有必要 Gate 2 實測成立才移動原篇與更新驗收；本次不新增驗收封存、不增加 Day、不結案 FIFO。三案下一篇仍為 Day37，以 [learning-state](../../learning-state.json)／[manifest](../current/manifest.json) 一致值為準。
 
 [歷史文章與來源](../history/README.md) · [封存政策](../archived/README.md) · [共同規則](../../COMMON_LEARNING_RULES.md)
