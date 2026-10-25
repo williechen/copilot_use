@@ -5,7 +5,7 @@
 [Chat Day38｜搜尋失敗顯示在真正的 Leptos 房間列表](../daily/day-38/chat.md) — **教學已交付／程式未套用／Red-Green 與瀏覽器未執行／產品未驗收**；程式來源 `9b89656f964b99e0cb89ba421855704a35c5ecb9`；最新 Day38、下一篇 **Day39**。原 Day37 r3 及下列舊摘要保留歷史當時的驗證範圍，不是 Day38 已通過的證據。
 
 
-**2026-10-26 功能與測試整理已更新。** [三案整理與12組覆蓋對照](../functional-refactoring/README.md)說明同層重複整併、跨層契約保留及CI責任。Day37不重建、不新增修訂；本次只更新文件，完整新Green與產品測試重構仍待完成，進度不變。
+**2026-10-26 功能與測試整理已更新。** [三案整理與12組覆蓋對照](../functional-refactoring/README.md)說明同層重複整併、跨層契約保留及CI責任。本次只更新文件，完整新Green與產品測試重構仍待完成，進度不變。
 
 **2026-10-26 現行摘要已核對。** 最新程式來源 `9b89656`（upgrade）；新CI快照為1成功／6執行中，尚未全綠。舊648b903為六成功／Persistence失敗，已配置的Analytics PostgreSQL步驟被略過。當日官方版本、manifest／lock與本機工具差異已補查；未升級產品、未重跑測試、未完成整體驗收。[版本與摘要核對](../../source-review/2026-10-26-versions-and-summary-refresh.md)。
 

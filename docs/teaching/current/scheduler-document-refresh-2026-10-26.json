@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-26",
+  "timezone": "Asia/Taipei",
+  "documentation_baseline_sha": "395c6d5e7754b5baa3ac1776d9a3725c397cb2a9",
+  "rules_blob_sha": "388067394aa73f62991bf33a6bd3ffa11b79b802",
+  "document": "docs/teaching/scheduler-instructions-v1.md",
+  "prompt_sha256": "33fd9bdb8ae062c1f9ec922900812955538b73bdf991a73be6e2cc4a7cc0f3cf",
+  "prompt_hash_scope": "UTF-8 text inside fenced text block without leading or trailing newline",
+  "previous_document_blob": "119308d4db5ceb6a38b49ada744faaa44d3d441c",
+  "previous_document_archive": "docs/teaching/history/evidence/2026-10-26-scheduler-document-refresh/before.md",
+  "actual_automation_updated": false,
+  "actual_prompt_readback_verified": false,
+  "last_traceable_cloud_prompt_verification": "2026-10-24",
+  "task_id": "6acd967c15fc8191ade8407954c5b354",
+  "schedule_or_model_changed": false,
+  "local_automation_files_found": 0,
+  "next_day_unchanged": true,
+  "observed_next_day": {
+    "chat": 39,
+    "pet": 39,
+    "analytics": 39
+  },
+  "state_blob_preserved": "1274a35b9f715f3e536e5c8b5be21c869e5d8a74",
+  "manifest_blob_preserved": "b89c9efc72e1f06184c62208011787cb181b0249",
+  "published_articles_unchanged": true,
+  "product_modified": false
+}

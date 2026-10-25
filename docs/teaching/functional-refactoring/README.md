@@ -1,6 +1,6 @@
 # 功能重構與測試整理
 
-2026-10-26整理。**Day37不重建、不新增修訂**；原文章、commit／blob／SHA256與驗證證據保留。這裡按功能整理後續程式、測試及CI責任，不指定教學日，不是完整Green、新Day交付或產品驗收。
+2026-10-26整理。保留已發布文章與原始證據。這裡按功能整理後續程式、測試及CI責任，不指定教學日，不是完整Green、新Day交付或產品驗收。
 
 程式來源 [`rust_ai_ring@9b89656f964b99e0cb89ba421855704a35c5ecb9`](https://github.com/williechen/rust_ai_ring/tree/9b89656f964b99e0cb89ba421855704a35c5ecb9)；文件整理基準 `c67044f59a161fb2d131771c0db3d09cd80e6e05`。產品程式與workflow唯讀。本次未執行產品測試、未修改DB／lock／migration，三案next_day仍38，不變更FIFO或last_full_comparison。
 
