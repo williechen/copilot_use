@@ -4648,5 +4648,17 @@
     },
     "source_observation": "docs/teaching/daily/day-37/source-review-r2.json",
     "official_versions": "docs/teaching/daily/day-37/versions-r2.json"
+  },
+  "latest_document_maintenance": {
+    "date": "2026-10-26",
+    "source_sha": "648b90323af7b381d6a79dc2fd08a53b63173a43",
+    "baseline_docs_sha": "f1cdfdc3ce3e986e1bab381be54c783b75191dd0",
+    "report": "docs/source-review/2026-10-26-versions-and-summary-refresh.md",
+    "evidence": "docs/source-review/version-refresh-2026-10-26/evidence.json",
+    "scope": "official versions and current summaries; metadata compatibility only; no new lesson or runtime tests",
+    "ci": "6 success; Persistence failure; configured Analytics PG step skipped",
+    "next_day_unchanged": true,
+    "last_full_comparison_unchanged": true,
+    "product_modified": false
   }
 }

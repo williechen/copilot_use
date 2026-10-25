@@ -1,5 +1,7 @@
 # 目前功能與驗證狀態
 
+**2026-10-26 現行摘要已核對。** 程式來源 `648b903`；同SHA CI六成功、Persistence失敗，已配置的Analytics PostgreSQL步驟被略過。當日官方版本、manifest／lock與本機工具差異已補查；未升級產品、未重跑測試、未完成整體驗收。[版本與摘要核對](../../source-review/2026-10-26-versions-and-summary-refresh.md)。
+
 **2026-10-25 後續功能分層要求已確認。** 後續教學按功能提供用例／Port／Adapter／UI／正式caller與測試的完整必要重構，沿原功能項追蹤；本次僅更新規則，未重構產品、未新增Day或驗收。[架構正本](../../SYSTEM_ARCHITECTURE.md#functional-layering) · [來源評估與範圍](../../source-review/2026-10-25-functional-layering.md)。
 
 ## 2026-10-25 最新增量驗證（648b903）
@@ -9,7 +11,7 @@
 同SHA六個CI成功、Persistence失敗：Test Pet Persistence包含pet-server，runner缺GLib／GObject開發依賴；後續已配置完整Analytics PG測試但被skipped。全部測試、CI與功能驗收分列，未完整驗收、不封存、不更改全面比對時間。
 
 
-**2026-10-25 Pet 錯誤回報：尚未修復／未驗收。** 最新來源 `744a75fc` 的漫遊仍查固定 pet，與 pet-UUID 生活窗不符；使用者補充所有視窗空白、每次出籠重新開啟；WebKit／共用前端載入原因待查，尚未證實同 ID 重複建窗。[原始錯誤與來源核對](../../source-review/2026-10-25-pet-roaming-webkit-feedback.md)。本來源已見 Day37 出籠補償／協調函式；舊交付摘要限原時點，不代表目前完全未套用。本次未做產品修改或 GUI 驗收，進度不變。
+**2026-10-25 Pet 原始錯誤回報（歷史）：後續控制窗、生活窗與同ID重複出籠局部通過；漫遊／故障注入／完整驗收仍待完成。** 該次來源 `744a75fc` 的漫遊仍查固定 pet，與 pet-UUID 生活窗不符；使用者補充所有視窗空白、每次出籠重新開啟；WebKit／共用前端載入原因待查，尚未證實同 ID 重複建窗。[原始錯誤與來源核對](../../source-review/2026-10-25-pet-roaming-webkit-feedback.md)。本來源已見 Day37 出籠補償／協調函式；舊交付摘要限原時點，不代表目前完全未套用。本次未做產品修改或 GUI 驗收，進度不變。
 
 **2026-10-25 首頁操作回報：尚未修復／未驗收。** 使用者已登入仍見「登入」，進入首頁仍須按讀取才有房間；最新來源 `dbe00814` 靜態確認固定登入入口與缺少初次自動載入。[完整證據與完成條件](../../source-review/2026-10-25-chat-homepage-feedback.md)。本來源已見 Day37 搜尋完成函式與 caller；下方舊來源的「未套用」只限原交付時點。本次產品唯讀、未新跑測試、不推進 Day。
 
@@ -22,7 +24,7 @@ Pet：[Day37 修訂教學已交付](../daily/day-37/pet-r2.md)，來源 `5c71355
 <!-- day37-chat -->
 Chat：[Day37 修訂教學已交付](../daily/day-37/chat-r2.md)，來源 `5c713553`；本次僅文件交付，程式未套用、新測試未執行、功能未驗收。[讀回證據](../daily/day-37/chat-r2-readback.json)。
 
-目前程式基準：`williechen/rust_ai_ring@5c713553daee4055738239f047d6c774fcc7a7a1`。文件比對基準：`copilot_use@532e739f1ef4e5920de300eba0f90adeeaf96187`。本輪靜態比對、Node／metadata／schema探測及同 SHA CI 已核對；以下舊來源段落是歷史證據，不覆蓋本段目前判定。
+下表為先前比對基準（歷史）：`williechen/rust_ai_ring@5c713553daee4055738239f047d6c774fcc7a7a1`。文件比對基準：`copilot_use@532e739f1ef4e5920de300eba0f90adeeaf96187`。本輪靜態比對、Node／metadata／schema探測及同 SHA CI 已核對；以下表格與舊來源段落限各次歷史證據；目前狀態以前方648b903驗證與2026-10-26摘要為準。
 
 [完整比對與21項差異](../../source-review/2026-10-25-full-comparison-5c713553.md) · [105個閱讀版本／111份修訂](ARTICLE_STATUS.md) · [既有後續條件](../../FUTURE_WORK.md)
 
@@ -33,7 +35,7 @@ Chat：[Day37 修訂教學已交付](../daily/day-37/chat-r2.md)，來源 `5c713
 | Analytics | 正式 exact-kind 查詢先驗人員 Session；POST ingestion 保留機器token；Leptos SSR帳密／Dashboard存在 | 同SHA既有PG42通過／1 ignored，另跑ignored1通過與HTTP證據，非本輪重跑。只有admin、角色／來源ACL、正式登入等待、SSE與互動前端未完成 |
 | CI | 同SHA七個workflow全success，Pet source／native build與上傳成功 | Persistence工作名為server PG，但實際執行analytics-persistence；Test All的server未加postgres-integration。正式server PG選取與新dist契約仍缺，CI成功不是原生GUI驗收 |
 
-本輪未更新last_full_comparison、不增加Day、不封存或結案FIFO，三案完整產品驗收仍未完成。官方最新穩定版本未重新逐套件查證，未將歷史版本表當本機或目前相容性證明。
+本輪未更新last_full_comparison、不增加Day、不封存或結案FIFO，三案完整產品驗收仍未完成。當次未重查版本；2026-10-26已在前方連結補查官方版本與本機差異，仍未新增產品相容性實測。
 
 ## 歷史來源與實測範圍
 

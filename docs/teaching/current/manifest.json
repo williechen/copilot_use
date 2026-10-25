@@ -51,7 +51,7 @@
     "historical_records_are_not_current_policy": true
   },
   "scope": "Latest published teaching index; Day16 snapshot preserved in archive",
-  "revision": "day36-actual-verification",
+  "revision": "day37-r3-versions-and-summary-refresh-2026-10-26",
   "synced_date": "2026-10-25",
   "source_sha": "f3f8255b0b701a1b57cb8c0a1737c3caa4319f2d",
   "articles": [
@@ -3043,5 +3043,19 @@
       "summary": "程式已見／PG45項加略過另1項通過／CI受阻／完整驗收待完成",
       "functional_acceptance": false
     }
-  }
+  },
+  "latest_document_maintenance": {
+    "date": "2026-10-26",
+    "source_sha": "648b90323af7b381d6a79dc2fd08a53b63173a43",
+    "baseline_docs_sha": "f1cdfdc3ce3e986e1bab381be54c783b75191dd0",
+    "report": "docs/source-review/2026-10-26-versions-and-summary-refresh.md",
+    "evidence": "docs/source-review/version-refresh-2026-10-26/evidence.json",
+    "scope": "official versions and current summaries; metadata compatibility only; no new lesson or runtime tests",
+    "ci": "6 success; Persistence failure; configured Analytics PG step skipped",
+    "next_day_unchanged": true,
+    "last_full_comparison_unchanged": true,
+    "product_modified": false
+  },
+  "previous_revision_before_2026_10_26_summary_refresh": "day36-actual-verification",
+  "source_field_interpretation": "Historical source_sha/current_reference_observation/latest_source_validation keep original evidence; current document maintenance source is latest_document_maintenance.source_sha; latest project publications remain Day37 r3."
 }

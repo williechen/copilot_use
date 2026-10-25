@@ -1,5 +1,7 @@
 # Analytics 現行教學入口
 
+**2026-10-26 現行摘要已核對。** 程式來源 `648b903`；同SHA CI六成功、Persistence失敗，已配置的Analytics PostgreSQL步驟被略過。當日官方版本、manifest／lock與本機工具差異已補查；未升級產品、未重跑測試、未完成整體驗收。[版本與摘要核對](../../source-review/2026-10-26-versions-and-summary-refresh.md)。
+
 **2026-10-25 後續功能分層要求已確認。** 後續教學按功能提供用例／Port／Adapter／UI／正式caller與測試的完整必要重構，沿原功能項追蹤；本次僅更新規則，未重構產品、未新增Day或驗收。[架構正本](../../SYSTEM_ARCHITECTURE.md#functional-layering) · [來源評估與範圍](../../source-review/2026-10-25-functional-layering.md)。
 
 [Day37 r3：驗證更新](../daily/day-37/analytics-r3.md)
@@ -14,7 +16,7 @@
 <!-- comparison-5c713553:start -->
 [最新三專案程式／文章比對](../../source-review/2026-10-25-full-comparison-5c713553.md)：105個閱讀版本、111份修訂、21項差異；來源 `5c713553`，局部測試與完整驗收分開記錄。
 
-精確查詢Session修正已在來源；一般帳號／角色／來源ACL仍缺。Persistence雖名為server PG，實際只測analytics-persistence，server PG feature仍需獨立選取。
+精確查詢Session修正已在來源；一般帳號／角色／來源ACL仍缺。本段5c713553的CI摘要已過時；648b903已選analytics-server＋analytics-persistence並加postgres-integration，但前段Pet失敗使該步驟skipped，仍未獲CI通過證據。
 <!-- comparison-5c713553:end -->
 
 [問題文章與後續更正總表](ARTICLE_CORRECTIONS.md)：已整併最新瀏覽器／Pet 原生證據；下方個別來源的交付／測試摘要保留其當次範圍。
@@ -39,4 +41,4 @@ PostgreSQL 全套 42 項通過、原略過項另跑 1 項通過；真 HTTP Sessi
 
 [全部文章逐篇核對](ARTICLE_STATUS.md) · [機器可讀狀態](article-states.json)
 
-此案現行來源：精確查詢 persistence／Dashboard／路由已接通；bb95a60 修編譯、afdbb6e 修四處文字斷言，PostgreSQL 回歸通過。原pg_store公開路徑相容性、角色／來源ACL與server PG CI仍追蹤；精確查詢人員Session已接；r1／r2 正文及原 commit/blob/SHA256 保留，完整功能未驗收。
+此案現行來源：精確查詢 persistence／Dashboard／路由已接通；bb95a60 修編譯、afdbb6e 修四處文字斷言，PostgreSQL 回歸通過。原pg_store公開路徑相容性、角色／來源ACL與server PG CI實際通過仍追蹤（配置已補，執行被Pet失敗阻擋）；精確查詢人員Session已接；r1／r2 正文及原 commit/blob/SHA256 保留，完整功能未驗收。

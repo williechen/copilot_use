@@ -1,5 +1,7 @@
 # 現行程式來源與目錄對照
 
+**2026-10-26 現行摘要已核對。** 程式來源 `648b903`；同SHA CI六成功、Persistence失敗，已配置的Analytics PostgreSQL步驟被略過。當日官方版本、manifest／lock與本機工具差異已補查；未升級產品、未重跑測試、未完成整體驗收。[版本與摘要核對](source-review/2026-10-26-versions-and-summary-refresh.md)。
+
 2026-10-24：使用者已將 `williechen/rust_ai_chat` 改名為 [`williechen/rust_ai_ring`](https://github.com/williechen/rust_ai_ring)，並調整為四個 Cargo workspace。2026-10-25 更新來源為 `5c713553daee4055738239f047d6c774fcc7a7a1`；文件基準為 copilot_use `532e739f1ef4e5920de300eba0f90adeeaf96187`。後續教學每次仍須重新讀取最新 main，不固定使用本頁 SHA。
 
 ## 兩個目錄的用途
@@ -82,4 +84,4 @@ copilot_use 保存教學程式碼與交付；產品程式調整以 rust_ai_ring 
 
 [架構](SYSTEM_ARCHITECTURE.md) · [本地啟動](LOCAL_START.md) · [驗證命令](LOCAL_VALIDATION.md) · [後續教學規則](COMMON_LEARNING_RULES.md) · [教學銜接](TEACHING_ALIGNMENT.md) · [目前狀態](teaching/current/STATUS.md) · [機器可讀目錄](source-review/rust-ai-ring-layout.json) · [本次文件核對](source-review/rust-ai-ring-layout-validation.json)
 
-本輪四workspace metadata、Node source6項與Pet記憶體SQLite探測通過；同SHA七個CI成功，但server PG feature未完整選取。Rust／PG／HTTP引用同SHA既有證據，非本輪重跑；GUI／完整驗收未執行。[最新比對](source-review/2026-10-25-full-comparison-5c713553.md)明列範圍，舊目錄核對JSON仍限其原日期。
+本輪四workspace metadata、Node source6項與Pet記憶體SQLite探測通過；該5c713553快照七個CI成功但server PG feature未完整選取；648b903已配置正式server PG，但被Pet步驟失敗阻擋。Rust／PG／HTTP引用同SHA既有證據，非本輪重跑；GUI／完整驗收未執行。[最新比對](source-review/2026-10-25-full-comparison-5c713553.md)明列範圍，舊目錄核對JSON仍限其原日期。

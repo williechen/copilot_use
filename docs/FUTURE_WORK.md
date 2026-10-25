@@ -1,5 +1,7 @@
 # 未來前進項目
 
+**2026-10-26 現行摘要已核對。** 程式來源 `648b903`；同SHA CI六成功、Persistence失敗，已配置的Analytics PostgreSQL步驟被略過。當日官方版本、manifest／lock與本機工具差異已補查；未升級產品、未重跑測試、未完成整體驗收。[版本與摘要核對](source-review/2026-10-26-versions-and-summary-refresh.md)。
+
 正式階段依 [P0–P12 十三階段詳細規劃](ROADMAP_P0_P12.md)：沿原功能／D01–D09 追蹤，不新增重複 Day／FIFO；原日曆與學習進度保留，規劃不作產品驗收。
 
 現行程式來源與目錄：[rust_ai_ring 四個 workspace 對照](SOURCE_LAYOUT.md)（最新來源、接線與驗證範圍見下方重掃及目前進度）。
@@ -18,7 +20,7 @@ P9 規則已廢除。本清單中僅源自舊規則、尚未依最新需求確�
 
 ## 所有問題文章的後續修正（2026-10-25）
 
-目前來源 `5c713553daee4055738239f047d6c774fcc7a7a1`；[完整比對與21項差異](source-review/2026-10-25-full-comparison-5c713553.md)。本輪只更新原功能的狀態與證據，不增加Day／FIFO。
+本節先前比對來源（歷史）`5c713553daee4055738239f047d6c774fcc7a7a1`；[完整比對與21項差異](source-review/2026-10-25-full-comparison-5c713553.md)。本輪只更新原功能的狀態與證據，不增加Day／FIFO。
 
 [105個目前閱讀版本／111份版本的問題與更正索引](teaching/current/ARTICLE_CORRECTIONS.md)已整併原盤點與最新實測。下表是原功能的集中修正條件，沿用原 D01–D09 及既有項目，不另建任務編號或 FIFO。狀態限各證據來源，不將需求未驗收一律稱為文章錯誤。
 
@@ -56,7 +58,7 @@ D05 共用認證保留；WS持續重驗已接並有同SHA局部證據，尚缺�
 
 2026-10-25 使用者操作回報：首頁進入時必須按讀取才有房間；房間頁共用列表也顯示未讀取。最新來源 `dbe00814` 未見首次載入，須補「進入首頁即自動讀取」，保留手動刷新、載入／空／錯誤／重試與舊快照；核對 hydration 重複請求及新舊搜尋競態。[證據與完成條件](source-review/2026-10-25-chat-homepage-feedback.md)。本來源已見 Day37 apply_room_search 與 WASM caller；下段 `5c713553` 診斷保留其歷史範圍，不代表自動載入已完成。
 
-最新來源仍有兩段房間status；query_room成功未清除查詢中，不能把刪除成功set_status當合併完成。MessageCreated沒有解除等待狀態；D06僅遷refreshed_room_list舊測試，refresh_result_view仍有真caller。
+先前5c713553的成功未清狀態診斷已由後續apply_room_search處理；648b903目前缺口是status未綁DOM，不能將helper通過當可見錯誤／重試已完成。MessageCreated沒有解除等待狀態；D06僅遷refreshed_room_list舊測試，refresh_result_view仍有真caller。
 
 目前：本地候選／待套用；其它待修。完成條件：單一房間狀態；成功回應後送出狀態明確；保留搜尋／重試及真正 helper 回歸。
 
@@ -66,7 +68,7 @@ D05 共用認證保留；WS持續重驗已接並有同SHA局部證據，尚缺�
 
 最新648b903：出籠先保存／失敗補償及協調鎖已見，62項測試通過；使用者確認控制窗／生活窗／同ID重複出籠局部正常。native故障注入、併行、直接關窗與重啟仍未驗收，不能沿舊來源再說補償完全未套用。[範圍與證據](source-review/2026-10-25-day37-verification-648b903.md)。
 
-歷史三窗與狀態隔離局部通過；最新setup已逐ID恢復全部未回籠資料。預設資格與回籠未分離、直接關生活窗只清Runtime、出籠先開窗後寫DB；真程序重啟與失敗補償仍待驗。
+歷史三窗與狀態隔離局部通過；最新setup已逐ID恢復全部未回籠資料。預設資格與回籠未分離、直接關生活窗只清Runtime；出籠已改先保存／建窗失敗補償，真native失敗仍待驗；真程序重啟與失敗補償仍待驗。
 
 目前：恢復迴圈已接／原生與需求模型未完整驗收。完成條件：依現行USER_FLOWS區分預設資格與回籠、回籠不取消預設；直接關窗等同回籠；真程序啟動符合預設政策，開窗／關窗／DB失敗可恢復且不重複開窗。
 
@@ -174,7 +176,7 @@ presence／typing／reconnect／queue、streaming／RAG／MCP／Agent／Persona�
 
 [5d28e96 真瀏覽器／HTTP／資料庫與 Pet 啟動報告](source-review/2026-10-25-acceptance-5d28e96.md) 已接回原功能項，整體未通過：Chat 歷史、會員作者、匿名進房回登入及登出撤銷既有 WS；Analytics 查詢的人員 Session；Pet 多窗與漫遊仍待完成。首頁重複狀態已製作本地候選差異並通過瀏覽器驗證，未提交產品 main。D06 測試遷移仍是原項目。
 
-最新 workflow 已新增 Pet persistence 測試並將 Analytics 該步改選 analytics-persistence；需另核對 server PG 整合測試入口，不能只把 library 測試加入視為完整覆蓋。下列 afdbb6e 的 CI 快照與盤點保留其當次來源。
+先前workflow變化保留歷史；648b903的Analytics該步已選server＋persistence並加PG feature，因前段Pet失敗被skipped，尚未有該步實際通過證據。下列 afdbb6e 的 CI 快照與盤點保留其當次來源。
 
 ## 後續調整：重複與未使用程式、測試及產物（2026-10-25）
 
@@ -182,7 +184,7 @@ presence／typing／reconnect／queue、streaming／RAG／MCP／Agent／Persona�
 
 原 13 項中，7 項待清理／測試遷移／相容性盤點，2 項部分完成，2 項程式或建置已處理但驗收未完，1 項明確保留，1 項已結案。已完成的登入頁合併、房名共用、Pet 回籠 adapter、Analytics 精確查詢 adapter、編譯及文案修復不重教；未完成的權限、GUI 與 FIFO 不因此結案。
 
-本次沒有產品變更，沿用同 SHA 的 Analytics 44 passed／0 failed／1 ignored，以及經 git diff 確認來源相同的 Chat／Pet 原範圍結果；沒有冒稱重新跑整套測試。最新七個 push workflows 均 success，仍有下述 CI 覆蓋與功能接線缺口。後續仍依 Chat→Pet→Analytics 的即時 next_day 選最小切片，不預排 Day。
+本次沒有產品變更，沿用同 SHA 的 Analytics 44 passed／0 failed／1 ignored，以及經 git diff 確認來源相同的 Chat／Pet 原範圍結果；沒有冒稱重新跑整套測試。該afdbb6e快照七個push workflows為success；648b903目前為六success／Persistence失敗，不能沿用為全綠。後續仍依 Chat→Pet→Analytics 的即時 next_day 選最小切片，不預排 Day。
 
 ### 清理順序與保留條件
 
@@ -201,7 +203,7 @@ presence／typing／reconnect／queue、streaming／RAG／MCP／Agent／Persona�
 | Analytics 1／D09 | 清除 analytics_application/domain/ui 中三份 add 函式與 it_works 範本測試 | 三檔是預設範本，未接業務 caller；保留已有 workspace/package，無必要不新增分層骨架，也不將空 library 當功能完成 | Cargo metadata／workspace check；待清理 |
 | Analytics 2／D04 | 盤點並淘汰舊 admin.rs 登入碼／memory Session 後台與其專屬測試、Config／模組出口 | main/build_app 目前採 password_login::build；確認無相容 caller 再移除舊公開 API，不刪除正式帳密／Session／PostgreSQL 測試 | 正式登入／首次改密碼／後台／登出與 Session 撤銷；角色／來源 ACL 原缺口保留，待核對／清理 |
 | Analytics 3／測試 fixture | 保留 bootstrap::initialize；僅在 fixture 完整遷移後評估縮為測試支援或移除 | day23_password_login、day24_password_change、day25_repeat_password_change、day26_session_contract、day27_dashboard_source 等整合測試仍直接使用；不能因 main 不呼叫就刪掉 | 原測試的自訂初始密碼、重複初始化／hash 保留、Session／Email／權限條件均須保留；目前保留 |
-| Analytics 4／測試 handler／正式查詢 | source_summary 仍 cfg(test)；正式精確查詢已接 persistence；bb95a60 測試改用新函式路徑並局部建立 fixture | 五個 E0425 已消除；未新增相容 re-export，舊公開 pg_store 路徑已變更。新正式查詢仍只用來源 token，與人員 Session 需求有落差 | 全部 PG 測試目標可編譯；Day35 live Router／來源隔離／commit／rollback 實測通過。仍須對齊查詢授權需求，不能將 Router 成功當成完整權限驗收 |
+| Analytics 4／測試 handler／正式查詢 | source_summary 仍 cfg(test)；正式精確查詢已接 persistence；bb95a60 測試改用新函式路徑並局部建立 fixture | 五個 E0425 已消除；未新增相容 re-export，舊公開 pg_store 路徑已變更。此列afdbb6e的來源token診斷是歷史；648b903正式查詢已用人員Session，角色／來源ACL仍缺 | 全部 PG 測試目標可編譯；Day35 live Router／來源隔離／commit／rollback 實測通過。仍須對齊查詢授權需求，不能將 Router 成功當成完整權限驗收 |
 | Analytics 5／過時斷言（已修復） | afdbb6e 在三檔更新四處「已提交事件總數」舊文字，涵蓋 Day27 Chat／Pet 與 Day28／29 | 保留來源切換、HTTP／Session、連結、可及性、escaping 等既有斷言，未刪測試；原識別與失敗證據保留 | 完整 PG 回歸 44 passed／0 failed／1 ignored、exit 0。此三敗已結案，不重教；其它授權／產品驗收仍待辦 |
 
 
@@ -212,7 +214,7 @@ presence／typing／reconnect／queue、streaming／RAG／MCP／Agent／Persona�
 - Analytics精確查詢已改人員Session；角色／來源ACL及正式登入政策需求落差仍在。已編譯、CI 成功與來源隔離測試通過均不足以驗收人員權限；source_summary 的測試遷移及舊公開 API 路徑相容性仍分別核對。
 - Pet set_caged 與 Analytics 精確查詢已有 persistence caller，不再當空庫；其餘 SQL 搬移只按實際切片處理。initialize fixture／InMemoryDeduplicator 契約測試保留用途。
 - Chat persisted_message_event 未見 caller，Pet succeeded_event 只有測試 caller；接回既有真實事件／Analytics／Outbox 項，不因無 caller 就當垃圾刪除，也不因有 DTO 宣稱已上報。
-- CI覆蓋：兩個persistence library自身測試已直接選取；analytics-server PG feature未由test.yml／persistence.yml選取，須另補正式server PG命令。metadata／dependency feature不等於執行dependency tests。
+- CI覆蓋：兩個persistence library自身測試已直接選取；648b903的persistence.yml已選analytics-server＋analytics-persistence並加postgres-integration；目前需修復前段Pet native依賴後取得該步驟實際通過證據。metadata／dependency feature不等於執行dependency tests。
 - Pet Node workflow 仍只讀 source HTML；CI build 後需同測新 dist，接回 D02，不維護平行 bridge 邏輯。
 
 ### 每項調整的最小交付

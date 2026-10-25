@@ -1,12 +1,14 @@
 # Pet 現行教學入口
 
+**2026-10-26 現行摘要已核對。** 程式來源 `648b903`；同SHA CI六成功、Persistence失敗，已配置的Analytics PostgreSQL步驟被略過。當日官方版本、manifest／lock與本機工具差異已補查；未升級產品、未重跑測試、未完成整體驗收。[版本與摘要核對](../../source-review/2026-10-26-versions-and-summary-refresh.md)。
+
 **2026-10-25 後續功能分層要求已確認。** 後續教學按功能提供用例／Port／Adapter／UI／正式caller與測試的完整必要重構，沿原功能項追蹤；本次僅更新規則，未重構產品、未新增Day或驗收。[架構正本](../../SYSTEM_ARCHITECTURE.md#functional-layering) · [來源評估與範圍](../../source-review/2026-10-25-functional-layering.md)。
 
 [Day37 r3：驗證更新](../daily/day-37/pet-r3.md)
 
 **程式已見／62項與WASM通過／GUI局部通過／故障注入待驗**；來源 `648b90323af7b381d6a79dc2fd08a53b63173a43`，下一篇仍為 **Day38**。[精確交付讀回](../daily/day-37/pet-r3-readback.json) · [本次完整驗證／錯誤與恢復](../../source-review/2026-10-25-day37-verification-648b903.md)。下方先前來源、交付及「未套用／未測試」摘要僅保留其當時範圍，不代表目前狀態。
 
-**2026-10-25 Pet 錯誤回報：尚未修復／未驗收。** 最新來源 `744a75fc` 的漫遊仍查固定 pet，與 pet-UUID 生活窗不符；使用者補充所有視窗空白、每次出籠重新開啟；WebKit／共用前端載入原因待查，尚未證實同 ID 重複建窗。[原始錯誤與來源核對](../../source-review/2026-10-25-pet-roaming-webkit-feedback.md)。本來源已見 Day37 出籠補償／協調函式；舊交付摘要限原時點，不代表目前完全未套用。本次未做產品修改或 GUI 驗收，進度不變。
+**2026-10-25 Pet 原始錯誤回報（歷史）：後續控制窗、生活窗與同ID重複出籠局部通過；漫遊／故障注入／完整驗收仍待完成。** 該次來源 `744a75fc` 的漫遊仍查固定 pet，與 pet-UUID 生活窗不符；使用者補充所有視窗空白、每次出籠重新開啟；WebKit／共用前端載入原因待查，尚未證實同 ID 重複建窗。[原始錯誤與來源核對](../../source-review/2026-10-25-pet-roaming-webkit-feedback.md)。本來源已見 Day37 出籠補償／協調函式；舊交付摘要限原時點，不代表目前完全未套用。本次未做產品修改或 GUI 驗收，進度不變。
 
 [Day37 r2：先保存再開窗，失敗回復原標記](../daily/day-37/pet-r2.md)
 
