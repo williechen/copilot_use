@@ -15,7 +15,7 @@
 
 | 專案 | 最新文章 | 下一篇 | 狀態 |
 | --- | --- | --- | --- |
-| Chat | [Day36 r2：既有 WebSocket 會話於登出後撤銷並停止後續收發](day-36/chat-r2.md) | Day37 | 程式已存在／相關實測通過／完整產品未驗收 |
+| Chat | [Day37 r2：房間搜尋完成時更新真實畫面狀態](day-37/chat-r2.md) | Day38 | 教學已交付／程式未套用／新測試未執行／產品未驗收 |
 | Pet | [Day36 r3：重啟恢復全部未回籠寵物，而非只恢復最後選取者](day-36/pet-r3.md) | Day37 | 程式已存在／相關實測通過／完整產品未驗收 |
 | Analytics | [Day36 r2：精確事件統計 API 改用人員 Session，不再接受來源 token 查詢](day-36/analytics-r2.md) | Day37 | 程式已存在／相關實測通過／完整產品未驗收 |
 
@@ -61,6 +61,6 @@
 
 ## 封存與進度
 
-只有必要 Gate 2 實測成立才移動原篇與更新驗收；本次不新增驗收封存、不增加 Day、不結案 FIFO。三案下一篇仍為 Day37，以 [learning-state](../../learning-state.json)／[manifest](../current/manifest.json) 一致值為準。
+只有必要 Gate 2 實測成立才移動原篇與更新驗收；本次僅推進已完整交付並精確讀回的專案，不新增驗收封存、不結案 FIFO。各案下一篇以即時狀態為準，以 [learning-state](../../learning-state.json)／[manifest](../current/manifest.json) 一致值為準。
 
 [歷史文章與來源](../history/README.md) · [封存政策](../archived/README.md) · [共同規則](../../COMMON_LEARNING_RULES.md)

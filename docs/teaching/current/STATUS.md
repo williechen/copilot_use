@@ -1,5 +1,8 @@
 # 目前功能與驗證狀態
 
+<!-- day37-chat -->
+Chat：[Day37 修訂教學已交付](../daily/day-37/chat-r2.md)，來源 `5c713553`；本次僅文件交付，程式未套用、新測試未執行、功能未驗收。[讀回證據](../daily/day-37/chat-r2-readback.json)。
+
 目前程式基準：`williechen/rust_ai_ring@5c713553daee4055738239f047d6c774fcc7a7a1`。文件比對基準：`copilot_use@532e739f1ef4e5920de300eba0f90adeeaf96187`。本輪靜態比對、Node／metadata／schema探測及同 SHA CI 已核對；以下舊來源段落是歷史證據，不覆蓋本段目前判定。
 
 [完整比對與21項差異](../../source-review/2026-10-25-full-comparison-5c713553.md) · [105個閱讀版本／111份修訂](ARTICLE_STATUS.md) · [既有後續條件](../../FUTURE_WORK.md)

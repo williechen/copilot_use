@@ -1890,11 +1890,53 @@
       "report": "docs/source-review/2026-10-25-day36-verification-5c713553.md",
       "evidence": "docs/source-review/day36-verification-5c713553/evidence.zip",
       "raw_error": null
+    },
+    {
+      "project": "chat",
+      "day": 37,
+      "revision": "r2",
+      "path": "docs/teaching/daily/day-37/chat-r2.md",
+      "parent": "cc4d5c8ecf283680d34a48f65a52a0af9fc40b2b",
+      "article_commit": "42f8b89a6406845d397ed81486d8daad582c48af",
+      "blob_sha": "43480df7bc6c3cf2688a661d7a26a4829c6a01af",
+      "readback_at": "2026-10-25T13:09:21.218Z",
+      "source_sha": "5c713553daee4055738239f047d6c774fcc7a7a1",
+      "functional_acceptance": false,
+      "archived": false,
+      "main_application": "not applied",
+      "red_executed": false,
+      "green_executed": false,
+      "raw_error": null,
+      "sha256": "797fe407f3ff473cee15fb4c7aab323121a10593d71473fb0ce8c10870006f4b",
+      "full_text_verified": true,
+      "code_blocks_exact": true,
+      "rules_version": "daily-tdd-minimum-v1 / github-only-v1",
+      "rules_commit": "42f8b89a6406845d397ed81486d8daad582c48af",
+      "rules_blob": "152355cad7306cc902605ebed1eca7ce9572a540",
+      "next_day_before": 37,
+      "next_day_after": 38,
+      "status": "article_delivered_product_not_applied_acceptance_pending",
+      "tests": "not run; source CI does not contain proposed Green",
+      "gate1": "content_and_exact_readback_passed; completes with atomic state/index sync",
+      "gate2": false,
+      "expected_branch_sha": "42f8b89a6406845d397ed81486d8daad582c48af",
+      "state_blob_before": "1ad6e282ba7c9a70b782074302e2c1e2f027cc7e",
+      "manifest_blob_before": "ea6a301faeb6142245052a62ec50a0ebb975183f",
+      "operations": {
+        "article_publish": {
+          "consecutive_failures": 0
+        },
+        "article_readback": {
+          "consecutive_failures": 0
+        }
+      },
+      "source_observation": "docs/teaching/daily/day-37/source-review-r2.json",
+      "official_versions": "docs/teaching/daily/day-37/versions-r2.json"
     }
   ],
   "day15_frozen": true,
   "next_day": {
-    "chat": 37,
+    "chat": 38,
     "pet": 37,
     "analytics": 37
   },
@@ -2037,7 +2079,7 @@
     "frozen_body_sha256": "ad6cef4a58f20f6162fb01a4c71ef1a752992856327063d9988112c91a639184",
     "frozen_notion_snapshot": "docs/teaching/archive/day-22/notion/chat.md"
   },
-  "latest_chat_publication": "docs/teaching/daily/day-36/chat-r2-readback.json",
+  "latest_chat_publication": "docs/teaching/daily/day-37/chat-r2-readback.json",
   "previous_day22_pet_article": {
     "project": "pet",
     "day": 22,
@@ -2772,5 +2814,13 @@
     "evidence": "docs/source-review/phase-plan-merge-2026-10-25/README.md",
     "next_day_unchanged": true,
     "acceptance_unchanged": true
+  },
+  "day37_delivery": {
+    "chat": {
+      "evidence": "docs/teaching/daily/day-37/chat-r2-readback.json",
+      "article_commit": "42f8b89a6406845d397ed81486d8daad582c48af",
+      "next_day": 38,
+      "functional_acceptance": false
+    }
   }
 }
