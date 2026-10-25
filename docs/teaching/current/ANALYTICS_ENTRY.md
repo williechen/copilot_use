@@ -2,7 +2,7 @@
 
 [Day35 r2：事件類型精確統計 SQLx Adapter 與正式路由一併接通](../daily/day-35/analytics-r2.md)
 
-**已套用／驗證結果**：Analytics Day35 r2 主要程式已在 e753c36 套用，但未驗收：persistence PG 2 項通過；library 23 通過／2 失敗／1 忽略，server PG target 有 5 個 E0425。新精確查詢以來源 token 讀取，與人員 Session 查詢需求有落差。下一篇 **Day36**。 [完整結果與勘誤](https://github.com/williechen/copilot_use/blob/main/docs/source-review/2026-10-25-update-e753c36.md)。
+**已套用／驗證結果**：bb95a60 已消除五個 E0425，全部 PG 測試目標可編譯；完整回歸 41 passed／3 failed／1 ignored。三敗為舊 Dashboard 文案，來源 token／人員 Session 查詢需求落差仍待修。下一篇 **Day36**。[完整結果與勘誤](https://github.com/williechen/copilot_use/blob/main/docs/source-review/2026-10-25-compile-bb95a60.md)。
 
 [Day35 r2 交付與讀回證據](../daily/day-35/analytics-r2-readback.json) · [上一篇 Day34](../daily/day-34/analytics.md)（首次 admin/admin 初始化與強制改密碼）。
 
@@ -18,4 +18,4 @@
 
 [全部文章逐篇核對](ARTICLE_STATUS.md) · [機器可讀狀態](article-states.json)
 
-此案現行來源：ensure_default／帳密主線保留；analytics-persistence 已承接精確查詢，Dashboard 與新路由已接 caller。缺相容 re-export；r2 測試 state helper scope 待勘誤；舊文案與授權契約待修。r1 仍由 r2 取代，只供歷史。 教學正文與原 commit/blob/SHA256 保留；局部測試不代表整產品功能驗收。
+此案現行來源：精確查詢 persistence／Dashboard／路由已接通；測試改用新函式路徑與局部 fixture，五個編譯錯誤已修。未恢復舊 pg_store 公開匯出；三個舊斷言與查詢授權契約仍待修。r1／r2 正文及原 commit/blob/SHA256 保留，完整功能未驗收。

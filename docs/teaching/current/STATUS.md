@@ -1,6 +1,6 @@
 # 目前功能與驗證狀態
 
-程式來源：`williechen/rust_ai_ring/main@e753c36294ed6a7781830e26c5c71f2bdc233eca`。本頁只記功能與驗證現況；文章版本／交付與歷史證據另由 [逐篇狀態](ARTICLE_STATUS.md)、manifest 與 learning-state 管理。copilot_use 為文件庫，產品程式維持唯讀，本次沒有套用產品程式；僅新增下述局部實測，不代表全產品驗收完成。
+程式來源：`williechen/rust_ai_ring/main@bb95a6065584ebc00ce339bdd904b3d47bf1ea15`。本頁只記功能與驗證現況；文章版本／交付與歷史證據另由 [逐篇狀態](ARTICLE_STATUS.md)、manifest 與 learning-state 管理。copilot_use 為文件庫，產品程式維持唯讀，本次沒有套用產品程式；僅新增下述局部實測，不代表全產品驗收完成。
 
 ## 現存程式與缺口
 
@@ -12,11 +12,13 @@
 | Pet 預覽與產物 | 唯讀掃描／SHA256／摘要、確認取消與 source bridge 保留；本次未改 UI／bridge | 前次 891ff32 source／新 debug dist 各六契約通過；e753c36 本輪未重建 release／GUI。確認預覽不是 OS 操作成功，真正清理／receipt／restore 仍未接通 |
 | Pet 漫遊 | 開關／幾何 guard 存在，runtime 固定找 pet；動態生活窗採 pet-UUID | 真正逐寵物漫遊、拖曳／多螢幕與跨平台仍需接線／驗證，舊固定字串測試不足以證明完成 |
 | Analytics 帳密與 UI | ensure_default、正式 password_login／Leptos Dashboard 保留；精確類型查詢已接 analytics-persistence；新增來源 token API | persistence 真 PG 2 passed；HTTP oneshot 證實新 API 無管理者 Cookie、僅來源 token 可讀統計；與業務查詢須人員登入需求有落差。瀏覽器／角色 ACL／登入等待／SSE／服務配對仍待驗收 |
-| Analytics 舊碼與範本 | legacy admin 仍在但不屬 main 登入路徑；initialize fixture 保留；persistence 已承接精確查詢，其它三個新 library 仍為範本 | library 23 passed／2 failed／1 ignored（Day28／29 舊文案）；PG server target 四個舊函式路徑＋一個 state scope 共 5 個 E0425。新切片已套用但尚未 Green |
+| Analytics 舊碼與範本 | bb95a60 已修復四處舊查詢引用與 Day35 fixture scope；persistence／server PG 測試目標全部可編譯；legacy admin／範本仍保留 | 完整 PG 測試合計 41 passed／3 failed／1 ignored；Day27／28／29 舊文案斷言仍失敗。編譯不再阻擋，查詢授權契約及其它功能仍待修 |
 
 ## 可引用的測試證據範圍
 
-- [e753c36 最新增量驗證](../../source-review/2026-10-25-update-e753c36.md)：Chat 35＋UI 14、Pet 55、Analytics persistence 2 通過；Analytics library 兩敗、server PG target 編譯失敗。Test All／Persistence CI 原始日誌已對上相同原因；其它 workflow 完成／進行中狀態見報告 CI 快照。新 API 授權落差亦已用合成事件／真 DB 實測。三案 Day35 已有來源實作，完整功能驗收維持未完成。
+- [bb95a60 編譯修復與完整 PG 回歸](../../source-review/2026-10-25-compile-bb95a60.md)：no-run 編譯 exit 0；no-fail-fast 實跑 41 passed／3 failed／1 ignored；五個 E0425 已消除，三敗均為舊 Dashboard 文案。Day35 真實 Router／資料層測試已通過；來源 token 查詢與人員 Session 的需求落差未解。Chat／Pet 本提交無變更，沿用前次原範圍證據。
+
+- [e753c36 前次增量驗證](../../source-review/2026-10-25-update-e753c36.md)：Chat 35＋UI 14、Pet 55、Analytics persistence 2 通過；Analytics library 兩敗、server PG target 編譯失敗。Test All／Persistence CI 原始日誌已對上相同原因；其它 workflow 完成／進行中狀態見報告 CI 快照。新 API 授權落差亦已用合成事件／真 DB 實測。三案 Day35 已有來源實作，完整功能驗收維持未完成。
 
 
 - [前次來源重掃與測試日誌](../../source-review/2026-10-25-project-rescan.md)：891ff32；四個 workspace metadata 通過，Chat SSR 14 與 redirect 1 通過，Pet source／新 dist 各六項契約通過且 debug 前端建置成功；Analytics library 23 通過／2 失敗／1 忽略。DB 整合／native GUI 未在本輪完整重跑。
