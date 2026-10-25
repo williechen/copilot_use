@@ -2298,5 +2298,13 @@
   },
   "compatibility": "metadata review only; no upgrade/build/DB migration/native acceptance executed",
   "source_modified": false,
-  "next_day_advanced": false
+  "next_day_advanced": false,
+  "subsequent_source_observation": {
+    "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+    "checked_at": "2026-10-25T21:38:21.400Z",
+    "external_dependencies_unchanged": true,
+    "report": "docs/source-review/version-refresh-2026-10-26/source-followup.json",
+    "ci_snapshot": "1 success / 6 in progress; not all green",
+    "runtime_revalidated": false
+  }
 }

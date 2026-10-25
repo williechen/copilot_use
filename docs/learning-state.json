@@ -4651,14 +4651,17 @@
   },
   "latest_document_maintenance": {
     "date": "2026-10-26",
-    "source_sha": "648b90323af7b381d6a79dc2fd08a53b63173a43",
+    "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
     "baseline_docs_sha": "f1cdfdc3ce3e986e1bab381be54c783b75191dd0",
     "report": "docs/source-review/2026-10-26-versions-and-summary-refresh.md",
     "evidence": "docs/source-review/version-refresh-2026-10-26/evidence.json",
     "scope": "official versions and current summaries; metadata compatibility only; no new lesson or runtime tests",
-    "ci": "6 success; Persistence failure; configured Analytics PG step skipped",
+    "ci": "9b89656: 1 success / 6 in progress; 648b903 historical: 6 success / Persistence failure",
     "next_day_unchanged": true,
     "last_full_comparison_unchanged": true,
-    "product_modified": false
+    "product_modified": false,
+    "previous_source_sha": "648b90323af7b381d6a79dc2fd08a53b63173a43",
+    "source_followup": "docs/source-review/version-refresh-2026-10-26/source-followup.json",
+    "source_followup_checked_at": "2026-10-25T21:38:21.400Z"
   }
 }

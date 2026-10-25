@@ -1,6 +1,6 @@
 # 文件總入口
 
-**2026-10-26 現行摘要已核對。** 程式來源 `648b903`；同SHA CI六成功、Persistence失敗，已配置的Analytics PostgreSQL步驟被略過。當日官方版本、manifest／lock與本機工具差異已補查；未升級產品、未重跑測試、未完成整體驗收。[版本與摘要核對](source-review/2026-10-26-versions-and-summary-refresh.md)。
+**2026-10-26 現行摘要已核對。** 最新程式來源 `9b89656`（upgrade）；新CI快照為1成功／6執行中，尚未全綠。舊648b903為六成功／Persistence失敗，已配置的Analytics PostgreSQL步驟被略過。當日官方版本、manifest／lock與本機工具差異已補查；未升級產品、未重跑測試、未完成整體驗收。[版本與摘要核對](source-review/2026-10-26-versions-and-summary-refresh.md)。
 
 **正式階段規劃：** [P0～P12 十三階段 Roadmap](ROADMAP_P0_P12.md)：P0 僅含三產品非 AI 基礎流程，P1.0 建立共用 Logging，P10 完整可觀測。正式驗收以 `rust_ai_ring` 為準。
 

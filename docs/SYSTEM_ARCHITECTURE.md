@@ -1,6 +1,6 @@
 # 系統架構與現行程式入口
 
-**2026-10-26 現行摘要已核對。** 程式來源 `648b903`；同SHA CI六成功、Persistence失敗，已配置的Analytics PostgreSQL步驟被略過。當日官方版本、manifest／lock與本機工具差異已補查；未升級產品、未重跑測試、未完成整體驗收。[版本與摘要核對](source-review/2026-10-26-versions-and-summary-refresh.md)。
+**2026-10-26 現行摘要已核對。** 最新程式來源 `9b89656`（upgrade）；新CI快照為1成功／6執行中，尚未全綠。舊648b903為六成功／Persistence失敗，已配置的Analytics PostgreSQL步驟被略過。當日官方版本、manifest／lock與本機工具差異已補查；未升級產品、未重跑測試、未完成整體驗收。[版本與摘要核對](source-review/2026-10-26-versions-and-summary-refresh.md)。
 
 `copilot_use` 維護規則、教學、進度與證據；`rust_ai_ring` 為唯一程式、測試、CI 與功能驗收主體。現行目錄及名稱見 [SOURCE_LAYOUT](SOURCE_LAYOUT.md)，政策正本見 [共用規則](COMMON_LEARNING_RULES.md)。
 

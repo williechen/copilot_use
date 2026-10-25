@@ -80,3 +80,12 @@ Rust stable：[1.99.1 (58cf8f9c3 2026-10-13)](https://static.rust-lang.org/dist/
 5. state／manifest新增本次文件維護觀察；舊通用source／comparison欄位保留其歷史用途並加解讀說明。更新現行manifest revision標記，不修改last_full_comparison、FIFO、Day37交付或驗收紀錄。
 
 先前測試數字僅引用 [Day37精確來源驗證](2026-10-25-day37-verification-648b903.md)：Chat UI15、Pet62、Analytics PG45加略過另跑1；全部不是本次重新測試。本文不是新教學、完整Green或產品通過證據。
+
+
+## 發布後偵測到新的程式來源
+
+2026-10-25T21:38:21.400Z 再讀main已前進至 `9b89656f964b99e0cb89ba421855704a35c5ecb9`（upgrade）。精確compare共8檔：Persistence workflow新增Linux開發依賴，三案workspace package由0.2.35改0.2.37及四個lock內部package版本。逐檔讀回並解析新舊TOML／lock後，外部依賴宣告與resolved完整相同，沒有Rust／UI功能程式差異，所以本日官方外部版本表仍適用；不是重新測試新SHA。
+
+新SHA CI讀取快照：Node成功，其餘6個執行中，包括 [Persistence 40236329539](https://github.com/williechen/rust_ai_ring/actions/runs/40236329539)。安裝步驟已加入不等於修復已驗證；舊648失敗／skipped記錄保留原SHA。上述測試數與GUI證據仍限648或各自原始來源，不改掛新SHA。
+
+完整差異、8檔blob及CI快照見 [來源跟進紀錄](version-refresh-2026-10-26/source-followup.json)。本次沒有由代理修改rust_ai_ring或升級本機工具，三案next_day維持38。
