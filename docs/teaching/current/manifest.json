@@ -1502,15 +1502,15 @@
       "rules_sha": "3b5d00291cdd44e1fa039aad4b10d8f82b59982d",
       "rules_version": "daily-tdd-minimum-v1+github-only-v1",
       "status": "github_article_readback_verified",
-      "main_application": "not applied",
-      "tests": "not run",
+      "main_application": "applied at e753c36294ed6a7781830e26c5c71f2bdc233eca; full functional acceptance pending",
+      "tests": "35 application/server/integration + 14 UI SSR passed; full browser/acceptance pending",
       "functional_acceptance": false,
       "archived": false,
       "next_day_before": 35,
       "next_day_after": 36,
       "expected_state_parent_sha": "8ef0511b73b8c64c21967b90d4a15d7ef6d3095b",
       "raw_error": null,
-      "remaining_gaps": "選房登入導向、逐房 ACL、歷史與作者、共用認證 FIFO；本次新 Green 未套用或執行",
+      "remaining_gaps": "共用認證 FIFO、選房登入導向、逐房 ACL、歷史／作者、瀏覽器／hydration 待驗；Day35 名稱規則已套用且增量測試通過",
       "sync_expected_parent_sha": "8ef0511b73b8c64c21967b90d4a15d7ef6d3095b",
       "sync_commit": "23a523923b74bfac0ee7839ae3a7c23ba8d3718b",
       "sync_status": "verified",
@@ -1528,7 +1528,16 @@
         "docs/learning-state.json",
         "docs/teaching/current/manifest.json"
       ],
-      "sync_raw_error": null
+      "sync_raw_error": null,
+      "main_application_at_publication": "not applied",
+      "tests_at_publication": "not run",
+      "application_source_sha": "e753c36294ed6a7781830e26c5c71f2bdc233eca",
+      "application_verification": {
+        "report": "docs/source-review/2026-10-25-update-e753c36.md",
+        "source_sha": "e753c36294ed6a7781830e26c5c71f2bdc233eca",
+        "checked_at": "2026-10-25T00:17:34.863790+00:00",
+        "scope": "incremental verification only"
+      }
     },
     {
       "repository": "williechen/copilot_use",
@@ -1550,15 +1559,15 @@
       "rules_sha": "3b5d00291cdd44e1fa039aad4b10d8f82b59982d",
       "rules_version": "daily-tdd-minimum-v1+github-only-v1",
       "status": "github_article_readback_verified",
-      "main_application": "not applied",
-      "tests": "not run",
+      "main_application": "applied at e753c36294ed6a7781830e26c5c71f2bdc233eca; full functional acceptance pending",
+      "tests": "55 persistence/server unit and integration passed; native GUI/restart/compensation pending",
       "functional_acceptance": false,
       "archived": false,
       "next_day_before": 35,
       "next_day_after": 36,
       "expected_state_parent_sha": "04bd36f487b43139cc8658e887c32e61f093e4f6",
       "raw_error": null,
-      "remaining_gaps": "三 ID 原生 GUI／回籠失敗補償／重啟及單幀單圖 FIFO 待驗；其餘 PetStore SQLx 尚在 server",
+      "remaining_gaps": "原生三窗／事件、故障補償、重啟、單幀單圖 FIFO／其餘 SQL 搬移待驗；set_caged 已接 persistence 且增量測試通過",
       "sync_expected_parent_sha": "04bd36f487b43139cc8658e887c32e61f093e4f6",
       "sync_commit": "72c9d5b9a31c8247cfdd17ac3291ff9f7ab2649f",
       "sync_status": "verified",
@@ -1576,7 +1585,16 @@
         "docs/learning-state.json",
         "docs/teaching/current/manifest.json"
       ],
-      "sync_raw_error": null
+      "sync_raw_error": null,
+      "main_application_at_publication": "not applied",
+      "tests_at_publication": "not run",
+      "application_source_sha": "e753c36294ed6a7781830e26c5c71f2bdc233eca",
+      "application_verification": {
+        "report": "docs/source-review/2026-10-25-update-e753c36.md",
+        "source_sha": "e753c36294ed6a7781830e26c5c71f2bdc233eca",
+        "checked_at": "2026-10-25T00:17:34.863790+00:00",
+        "scope": "incremental verification only"
+      }
     },
     {
       "repository": "williechen/copilot_use",
@@ -1617,8 +1635,8 @@
       "source_sha": "891ff32ae29e1588dc40027cd5c9c99ca91d2378",
       "rules_sha": "3b5d00291cdd44e1fa039aad4b10d8f82b59982d",
       "rules_version": "daily-tdd-minimum-v1+github-only-v1",
-      "main_application": "not applied",
-      "tests": "not run",
+      "main_application": "applied at e753c36294ed6a7781830e26c5c71f2bdc233eca; full functional acceptance pending",
+      "tests": "persistence PG 2 passed; library 23 passed/2 failed/1 ignored; server PG compile failed (5 E0425); query authorization mismatch",
       "functional_acceptance": false,
       "archived": false,
       "next_day_before": 35,
@@ -1635,7 +1653,7 @@
       "status": "github_article_readback_verified",
       "next_day_after": 36,
       "expected_state_parent_sha": "e82c95b7055181139ac41fd7b0352ac91c0322f4",
-      "remaining_gaps": "PG/HTTP/Leptos/CI 未當次執行；角色來源 ACL、SSE、明細、gRPC、其他 SQL adapter 未搬移",
+      "remaining_gaps": "相容匯出未套、r2 fixture helper scope 勘誤、兩個舊文案斷言、機器 token 查詢與人員 Session 需求落差；角色／SSE／明細／gRPC 仍待辦",
       "supersedes": {
         "path": "docs/teaching/daily/day-35/analytics.md",
         "article_commit": "c9619d72bfc15116417d5b011b595adb6e57c58f",
@@ -1660,7 +1678,16 @@
         "docs/learning-state.json",
         "docs/teaching/current/manifest.json"
       ],
-      "sync_raw_error": null
+      "sync_raw_error": null,
+      "main_application_at_publication": "not applied",
+      "tests_at_publication": "not run",
+      "application_source_sha": "e753c36294ed6a7781830e26c5c71f2bdc233eca",
+      "application_verification": {
+        "report": "docs/source-review/2026-10-25-update-e753c36.md",
+        "source_sha": "e753c36294ed6a7781830e26c5c71f2bdc233eca",
+        "checked_at": "2026-10-25T00:17:34.863790+00:00",
+        "scope": "incremental verification only"
+      }
     }
   ],
   "day15_frozen": true,
@@ -2039,18 +2066,37 @@
   },
   "day25_archive": "docs/teaching/archive/day-25/manifest.json",
   "latest_source_validation": {
-    "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3",
-    "document_baseline_sha": "1a27390916fbf28ee6582b452362cf4978c96fce",
-    "date": "2026-10-23T12:45:07.066127+08:00",
-    "report": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/REPORT.md",
-    "article_matrix": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/ALL_ARTICLES.md",
-    "summary": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/summary.json",
-    "archive_manifest": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/archive-manifest.json",
-    "canonical_articles": 84,
-    "newly_verified_articles": 5,
-    "scope": "follow-up Chat15/17/18/19/20; prior84-article review retained",
+    "source_sha": "e753c36294ed6a7781830e26c5c71f2bdc233eca",
+    "previous_source_sha": "891ff32ae29e1588dc40027cd5c9c99ca91d2378",
+    "checked_at": "2026-10-25T00:17:34.863790+00:00",
+    "scope": "incremental Day35 application and local tests; not full functional acceptance",
+    "report": "docs/source-review/2026-10-25-update-e753c36.md",
+    "summary": "docs/source-review/update-e753c36/summary.json",
+    "overall": "not_all_passed",
     "functional_acceptance": false,
-    "next_day_unchanged": true
+    "source_modified_by_agent": false,
+    "next_day_unchanged": true,
+    "last_full_comparison_unchanged": true,
+    "tests": {
+      "chat": {
+        "passed": 35,
+        "ui_passed": 14,
+        "failed": 0
+      },
+      "pet": {
+        "passed": 55,
+        "failed": 0
+      },
+      "analytics": {
+        "persistence_passed": 2,
+        "library_passed": 23,
+        "library_failed": 2,
+        "library_ignored": 1,
+        "postgres_server": "compile_failed_E0425_5",
+        "http_route_probe": "source_token_without_person_session_returns_200; requirement_mismatch"
+      }
+    },
+    "ci_snapshot": "docs/source-review/update-e753c36/ci.json"
   },
   "analytics_day24_correction_closure": {
     "status": "completed",
@@ -2174,11 +2220,11 @@
   "current_source_layout": {
     "repository": "williechen/rust_ai_ring",
     "branch": "main",
-    "source_sha": "0b3e58440bf4b36a398e3698e352e69faf53cfa2",
+    "source_sha": "e753c36294ed6a7781830e26c5c71f2bdc233eca",
     "document": "docs/SOURCE_LAYOUT.md",
     "manifest": "docs/source-review/rust-ai-ring-layout.json",
-    "observed_date": "2026-10-24",
-    "scope": "static_source_layout_only",
+    "observed_date": "2026-10-25",
+    "scope": "current layout with partial persistence adapters; runtime evidence in latest_source_validation",
     "future_teaching_requirement": "Adapt code paths, package/import names, dependencies, callers and tests to latest rust_ai_ring layout in subsequent lessons; preserve published lessons and existing progress."
   },
   "current_daily_schedule": {
@@ -2235,7 +2281,7 @@
   "followup_adjustments": {
     "date": "2026-10-25",
     "source_repository": "williechen/rust_ai_ring",
-    "source_sha": "3236b94e95555c20e4709b5db40b0a8688b5762e",
+    "source_sha": "e753c36294ed6a7781830e26c5c71f2bdc233eca",
     "canonical": "docs/FUTURE_WORK.md",
     "item_count": 13,
     "items": [
@@ -2253,14 +2299,16 @@
       "Analytics-4:test-only-handlers",
       "Analytics-5:stale-assertions"
     ],
-    "status": "organized for subsequent minimal teaching slices; product changes not applied",
+    "status": "Day35 source applied; Chat/Pet incremental tests passed, Analytics corrections pending",
     "rules": "docs/COMMON_LEARNING_RULES.md",
     "baseline_document_commit": "51d888bcefe1d85e31f51aaac89c01a25536d07c",
     "evidence": "docs/source-review/followup-adjustments-2026-10-25.json",
     "next_day_unchanged": true,
     "makeup_queue_unchanged": true,
     "last_full_comparison_unchanged": true,
-    "product_repository_read_only": true
+    "product_repository_read_only": true,
+    "previous_source_sha": "3236b94e95555c20e4709b5db40b0a8688b5762e",
+    "latest_verification": "docs/source-review/2026-10-25-update-e753c36.md"
   },
   "article_status_review": {
     "date": "2026-10-25",
@@ -2279,5 +2327,19 @@
     "next_day_unchanged": true,
     "last_full_comparison_unchanged": true,
     "evidence": "docs/source-review/article-status-review-2026-10-25.json"
+  },
+  "previous_source_validation_before_e753c36": {
+    "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3",
+    "document_baseline_sha": "1a27390916fbf28ee6582b452362cf4978c96fce",
+    "date": "2026-10-23T12:45:07.066127+08:00",
+    "report": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/REPORT.md",
+    "article_matrix": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/ALL_ARTICLES.md",
+    "summary": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/summary.json",
+    "archive_manifest": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/archive-manifest.json",
+    "canonical_articles": 84,
+    "newly_verified_articles": 5,
+    "scope": "follow-up Chat15/17/18/19/20; prior84-article review retained",
+    "functional_acceptance": false,
+    "next_day_unchanged": true
   }
 }

@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "observed_date": "2026-10-24",
+  "observed_date": "2026-10-25",
   "repository": "williechen/rust_ai_ring",
   "previous_repository": "williechen/rust_ai_chat",
   "branch": "main",
-  "source_sha": "0b3e58440bf4b36a398e3698e352e69faf53cfa2",
+  "source_sha": "e753c36294ed6a7781830e26c5c71f2bdc233eca",
   "document_repository": "williechen/copilot_use",
-  "document_base_sha": "8c40a78091fd463c9ab9fb071f877ea1f097e73c",
+  "document_base_sha": "9da2a51d8b10b23ba5a14be7d8fbb2eb6cc231c6",
   "scope": "static source layout and documentation alignment only",
   "workspaces": [
     {
@@ -60,14 +60,14 @@
           "directory": "pet_apps/pet_server",
           "package": "pet-server",
           "manifest": "pet_apps/pet_server/Cargo.toml",
-          "manifest_sha256": "8dcf9a097e8e08335e3110df69b982bad188dae1bf00a131de61ba0091f303d3",
+          "manifest_sha256": "d6207a0382c7b2d07e27bf5b45508fd8347604563731121a71e9a2251ee5927a",
           "empty_library": false
         },
         {
-          "directory": "pet_apps/pet_ui",
-          "package": "pet-ui",
-          "manifest": "pet_apps/pet_ui/Cargo.toml",
-          "manifest_sha256": "6c9b1e2b4c518c28467bc7b41d392d74aaf56bc21823c2dc2fe437f22b93f21d",
+          "directory": "pet_apps/pet_application",
+          "package": "pet-application",
+          "manifest": "pet_apps/pet_application/Cargo.toml",
+          "manifest_sha256": "c33e8f93f92f6079e0e8b81098ff404f58c8ed9b600304c413de30cd1e7837c8",
           "empty_library": false
         },
         {
@@ -78,18 +78,18 @@
           "empty_library": false
         },
         {
-          "directory": "pet_apps/pet_application",
-          "package": "pet-application",
-          "manifest": "pet_apps/pet_application/Cargo.toml",
-          "manifest_sha256": "c33e8f93f92f6079e0e8b81098ff404f58c8ed9b600304c413de30cd1e7837c8",
-          "empty_library": true
-        },
-        {
           "directory": "pet_apps/pet_persistence",
           "package": "pet-persistence",
           "manifest": "pet_apps/pet_persistence/Cargo.toml",
-          "manifest_sha256": "5f12c2a246563401f122cedfb178709e86c1bf7d4aa216b2cfee37ce665f34c2",
-          "empty_library": true
+          "manifest_sha256": "f46583f7e63c1b10293e36db20897c1f9ea1f41a2e9506b46140005daaab3308",
+          "empty_library": false
+        },
+        {
+          "directory": "pet_apps/pet_ui",
+          "package": "pet-ui",
+          "manifest": "pet_apps/pet_ui/Cargo.toml",
+          "manifest_sha256": "6c9b1e2b4c518c28467bc7b41d392d74aaf56bc21823c2dc2fe437f22b93f21d",
+          "empty_library": false
         }
       ]
     },
@@ -102,7 +102,7 @@
           "directory": "analytics_apps/analytics_server",
           "package": "analytics-server",
           "manifest": "analytics_apps/analytics_server/Cargo.toml",
-          "manifest_sha256": "459cf9d902cd909d6011a7737d63cbefc5bf7e8f1c8cc2da650eb39fc3d99985",
+          "manifest_sha256": "b3aeb39f77064d1b451fef2922de1a4af1c86031ea2b602ca15cf7090a30307f",
           "empty_library": false
         },
         {
@@ -110,7 +110,28 @@
           "package": "analytics-persistence",
           "manifest": "analytics_apps/analytics_persistence/Cargo.toml",
           "manifest_sha256": "b93c92d8a6e539c07afeb1382bd8ce4083c129553883ee3cdc4ea88770c7c005",
-          "empty_library": true
+          "empty_library": false
+        },
+        {
+          "directory": "analytics_apps/analytics_ui",
+          "package": "analytics-ui",
+          "manifest": "analytics_apps/analytics_ui/Cargo.toml",
+          "manifest_sha256": "0422bbf75b0fcebdca6a0c25428ec92f6dfcb1a5af59ce444660a336b6176940",
+          "empty_library": false
+        },
+        {
+          "directory": "analytics_apps/analytics_domain",
+          "package": "analytics-domain",
+          "manifest": "analytics_apps/analytics_domain/Cargo.toml",
+          "manifest_sha256": "b3b5b44a25b313c7f52a9bb411c62a3dcb05ca8343ef2d6bf1b939e5e4babd30",
+          "empty_library": false
+        },
+        {
+          "directory": "analytics_apps/analytics_application",
+          "package": "analytics-application",
+          "manifest": "analytics_apps/analytics_application/Cargo.toml",
+          "manifest_sha256": "f3821e0d9ecd9693ee28ea8ef1bbdaf9e6bb040ae1aa8ac530a212efc69595fd",
+          "empty_library": false
         }
       ]
     },
@@ -138,7 +159,7 @@
           "package": "telemetry",
           "manifest": "crates/telemetry/Cargo.toml",
           "manifest_sha256": "af9e3f9bb8f18ba50d6cb14cb0dcf5cdb37abe2c16464b464c6be5dcbdf57963",
-          "empty_library": false
+          "empty_library": true
         }
       ]
     }
@@ -169,11 +190,11 @@
     "analytics_apps/migrations"
   ],
   "new_placeholder_packages": [
-    "pet-application",
-    "pet-persistence",
-    "analytics-persistence"
+    "analytics-application",
+    "analytics-domain",
+    "analytics-ui"
   ],
-  "validation_scope": "Manifest and path inspection; no runtime, DB, GUI or CI execution performed by this documentation update.",
+  "validation_scope": "All four workspace metadata passed; partial persistence wiring and runtime results in docs/source-review/2026-10-25-update-e753c36.md",
   "legacy_package_mapping": {
     "server": "chat-server",
     "ui": "chat-ui",
@@ -181,5 +202,7 @@
     "stats-server": "analytics-server",
     "desktop-pet": "pet-server",
     "desktop-pet-frontend": "pet-ui"
-  }
+  },
+  "previous_source_sha": "0b3e58440bf4b36a398e3698e352e69faf53cfa2",
+  "latest_verification": "docs/source-review/2026-10-25-update-e753c36.md"
 }

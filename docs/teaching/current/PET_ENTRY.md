@@ -2,7 +2,7 @@
 
 [Day35：逐寵物回籠狀態搬入 pet-persistence，接回 Tauri 真實呼叫鏈](../daily/day-35/pet.md)
 
-**教學已交付／功能未驗收**：精確 commit 全文讀回；產品未套用，SQLx／Tauri／SQLite／GUI／WASM 未當次執行。下一篇 **Day36**。本篇只把逐 ID 回籠標記 adapter 接到 pet-persistence，並未搬完 PetStore。
+**已套用／驗證結果**：Pet Day35 已在 e753c36 套用；persistence＋server 單元／整合共 55 項通過。三窗 GUI、故障補償注入、重啟及單幀單圖 FIFO 未驗收。下一篇 **Day36**。 [完整結果與勘誤](https://github.com/williechen/copilot_use/blob/main/docs/source-review/2026-10-25-update-e753c36.md)。
 
 [Day35 交付與讀回證據](../daily/day-35/pet-readback.json) · [上一篇 Day34](../daily/day-34/pet.md)（名稱規則已接 application／Tauri／PetStore）。
 
@@ -16,4 +16,4 @@
 
 [全部文章逐篇核對](ARTICLE_STATUS.md) · [機器可讀狀態](article-states.json)
 
-此案現行文章：名稱規則已移到 pet-application，Tauri 及 PetStore 使用同一函式，含控制字元拒絕與測試；pet-persistence 仍空。本次 Rust／SQLite／GUI 未執行。 教學編號、交付與歷史證據保持原值；當次完整驗收未重跑。
+此案現行來源：pet-application 名稱規則保留；pet-persistence::set_caged 已接 PetStore／Tauri 真實 caller，其它 SQL 仍在 server。後端 global runtime／legacy IPC 仍待清理。 教學正文與原 commit/blob/SHA256 保留；局部測試不代表整產品功能驗收。

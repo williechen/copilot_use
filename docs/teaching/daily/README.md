@@ -9,11 +9,11 @@
 
 | 專案 | 最新文章 | 下一篇 | 狀態 |
 | --- | --- | --- | --- |
-| Chat | [Day35：建房名稱規則共用：拒絕控制字元且兩種入口一致](day-35/chat.md) | Day36 | 教學已交付／功能未驗收 |
-| Pet | [Day35：逐寵物回籠狀態搬入 pet-persistence，接回 Tauri 真實呼叫鏈](day-35/pet.md) | Day36 | 教學已交付／功能未驗收 |
-| Analytics | [Day35 r2：事件類型精確統計 SQLx Adapter 與正式路由一併接通](day-35/analytics-r2.md) | Day36 | 教學已交付／功能未驗收 |
+| Chat | [Day35：建房名稱規則共用：拒絕控制字元且兩種入口一致](day-35/chat.md) | Day36 | e753c36 已套用；增量測試通過／完整驗收待做 |
+| Pet | [Day35：逐寵物回籠狀態搬入 pet-persistence，接回 Tauri 真實呼叫鏈](day-35/pet.md) | Day36 | e753c36 已套用；增量測試通過／GUI 待驗 |
+| Analytics | [Day35 r2：事件類型精確統計 SQLx Adapter 與正式路由一併接通](day-35/analytics-r2.md) | Day36 | e753c36 已套用；測試／編譯及授權契約待修 |
 
-來源、套用及測試證據各自記錄；文章發布不代表產品驗收。
+最新套用／測試與勘誤見 [e753c36 更新驗證](https://github.com/williechen/copilot_use/blob/main/docs/source-review/2026-10-25-update-e753c36.md)；原 Day35 正文與交付證據保留，完整產品驗收尚未完成。
 <!-- daily-delivery:end -->
 
 2026-10-24 目錄已同步至 [williechen/rust_ai_ring](https://github.com/williechen/rust_ai_ring)：保留 `chat_apps`、`pet_apps`、`analytics_apps`、`crates` 四個 workspace；[新目錄與套件對照](../../SOURCE_LAYOUT.md)。後續教學依當次來源 SHA 調整程式、Cargo、imports、呼叫端與測試。

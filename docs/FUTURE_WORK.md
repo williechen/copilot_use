@@ -14,7 +14,7 @@ P9 規則已廢除。本清單中僅源自舊規則、尚未依最新需求確�
 
 ## 後續調整：重複與未使用程式、測試及產物（2026-10-25）
 
-本節統整本輪全部核對與使用者「檢核清除不使用函式與測試」的要求，作為後續調整單一清單。最新重掃基準為 `williechen/rust_ai_ring/main@891ff32ae29e1588dc40027cd5c9c99ca91d2378`；每次動手前重讀最新來源與 caller，不固定套用此 SHA。最新逐項結果與測試證據見 [2026-10-25 專案重掃](source-review/2026-10-25-project-rescan.md)；原 [D01–D09 報告](source-review/2026-10-25-duplicate-application-review.md) 保留其歷史來源，不再以舊 dist 失敗描述最新 main。
+本節統整本輪全部核對與使用者「檢核清除不使用函式與測試」的要求，作為後續調整單一清單。最新增量驗證基準為 `williechen/rust_ai_ring/main@e753c36294ed6a7781830e26c5c71f2bdc233eca`；每次動手前重讀最新來源與 caller，不固定套用此 SHA。Day35 套用、測試及待修證據見 [e753c36 更新驗證](source-review/2026-10-25-update-e753c36.md)；前次逐項結果見 [2026-10-25 專案重掃](source-review/2026-10-25-project-rescan.md)；原 [D01–D09 報告](source-review/2026-10-25-duplicate-application-review.md) 保留其歷史來源，不再以舊 dist 失敗描述最新 main。
 
 本次完成來源重掃及部分實測，下列程式清理未由本次任務套用；已有來源實作的 Pet 名稱規則、Analytics ensure_default 不重教。Chat 既有 r2 已在最新來源接通，先核對驗證／排除已套部分，後續由各案即時 next_day 選一個最小切片，仍依 Chat→Pet→Analytics 交付，不預排 Day，不要求每日改完所有項目。各項完成須附實際變更 SHA、caller／註冊與相應測試證據。
 
@@ -27,7 +27,7 @@ P9 規則已廢除。本清單中僅源自舊規則、尚未依最新需求確�
 | Chat 1／D01 | [Day34 r2](teaching/daily/day-34/chat-r2.md) 登入頁合併已套用：SignInPage 保留，GET /login 導向 /signin，login.rs 與多餘模組已移除 | POST /login 保留；排除重複套用 r2，原合併不是零 caller 刪除 | 891ff32 實測 chat-ui SSR 14 passed、HTTP redirect 1 passed；完整登入／Session／SQLite、hydration 與瀏覽器回歸仍待驗收 |
 | Chat 2／未使用函式 | 移除 chat_ui/src/room_api.rs 的 create_room 及僅供它使用的 CreateRoomRequest/CreateRoomResponse、JsValue、Request/RequestInit/RequestMode imports | 私有 room_api 模組內未找到此函式 caller；保留 list_rooms/search_rooms 與 server JSON API、個人頁建房流程 | WASM check、房間查詢／重新整理及個人頁建房；待清理 |
 | Chat 3／D06 | 將 refreshed_room_list 的舊測試轉至 RoomList 實際呼叫的 refresh_result_view，再移除舊 helper | 保留空結果、失敗保留清單／搜尋字、成功清除搜尋與重試條件；不直接刪掉回歸斷言 | 測真正 helper 及 RoomList，SSR／WASM 與瀏覽器回歸；待遷移 |
-| Chat 4／D05、D07 | 共用 Cookie／token_digest 與建房名稱規則；signin/signup/JSON／表單 caller 同步 | shared::auth 已存在，不再新增另一份 helper；保留各 transport 的 JSON/HTML、400/422、CSRF 與原交易 | 登入／登出／註冊撤銷、建房邊界／DB 測試；接回既有共用認證 FIFO，不另增或提前結案 |
+| Chat 4／D05、D07 | D07 建房名稱驗證已移到 chat_application::validate_room_name，JSON／個人頁皆接回；D05 Cookie／digest 共用仍待清理 | 保留 400 JSON／422 HTML、Session／Origin／CSRF；控制字元、200 UTF-8 bytes 邊界與原字串規則已有測試，不重做房名 helper | e753c36 application／server／整合 35 passed，UI 14 passed；共用認證 FIFO 與完整瀏覽器驗收仍未結案 |
 | Pet 1／D02 | 舊 tracked dist、public 原型及生成 schema 已移除；以 pet_ui/index.html 為正本核對新建置 WASM／JS／CSS 與 Tauri 實際產物 | source/dist 是正常建置關係，不手改兩份程式；舊 dist 二敗只屬歷史紀錄，不代表最新 binary | 891ff32 source 六個 Node 測試通過；Trunk debug 建置成功，新 dist 沿用原六個契約全過。release、打包／原生 GUI 尚待驗收 |
 | Pet 2／未使用宣告 | 清除 pet_ui/src/bridge.rs 的 validate_new_pet_name_js extern 宣告 | 未找到 Rust wrapper/caller，現行 index.html 也未提供 validateNewPetName；不因此刪掉 PetStore 的必要名稱驗證 | WASM check、建立寵物的非法名稱不寫 DB／合法名稱儲存；待清理 |
 | Pet 3／D03 | 盤點舊 get_pet_state/send_pet_command、global Mutex<PetMachine>、pet://state-changed、舊選單分支；public 原型已刪 | 舊 IPC 仍在 generate_handler 註冊，不是零入口。確認現行／相容客戶端後才連同註冊、state、舊資產與專屬測試清理；新逐 ID Runtime 保留 | 三個不同 ID 的狀態／事件、互動與選單、回籠／重開／重啟，依原 GUI 項目驗證；後端 global state／event／無 ID fallback 仍待清理，不能誤刪已映射逐 ID IPC 的現行 UI wrapper |
@@ -35,11 +35,14 @@ P9 規則已廢除。本清單中僅源自舊規則、尚未依最新需求確�
 | Analytics 1／D09 | 清除 analytics_application/domain/ui 中三份 add 函式與 it_works 範本測試 | 三檔是預設範本，未接業務 caller；保留已有 workspace/package，無必要不新增分層骨架，也不將空 library 當功能完成 | Cargo metadata／workspace check；待清理 |
 | Analytics 2／D04 | 盤點並淘汰舊 admin.rs 登入碼／memory Session 後台與其專屬測試、Config／模組出口 | main/build_app 目前採 password_login::build；確認無相容 caller 再移除舊公開 API，不刪除正式帳密／Session／PostgreSQL 測試 | 正式登入／首次改密碼／後台／登出與 Session 撤銷；角色／來源 ACL 原缺口保留，待核對／清理 |
 | Analytics 3／測試 fixture | 保留 bootstrap::initialize；僅在 fixture 完整遷移後評估縮為測試支援或移除 | day23_password_login、day24_password_change、day25_repeat_password_change、day26_session_contract、day27_dashboard_source 等整合測試仍直接使用；不能因 main 不呼叫就刪掉 | 原測試的自訂初始密碼、重複初始化／hash 保留、Session／Email／權限條件均須保留；目前保留 |
-| Analytics 4／測試用舊 handler | 檢核 lib.rs 的 cfg(test) source_summary/source_kind_summary 與所屬測試 | 只供測試的函式不自動等於無用。純 SQL 聚合斷言可遷至 pg_store；授權斷言應落到 password_login 的真正 HTTP/Session 路徑，完成映射後才刪舊測試 handler | 來源隔離、類型篩選、commit/rollback、空結果／schema 契約須仍有驗證；待映射 |
-| Analytics 5／過時斷言 | 檢核舊 Dashboard 測試仍期待「Pet 已提交事件總數 2」等舊標籤 | 現行標籤已改為「Pet 全部事件類型：2 筆已提交事件」；應更新語意斷言與 source links／escaping 驗證，不以刪測試掩蓋失敗 | 891ff32 library 實測 23 passed／2 failed／1 ignored：dashboard_ui.rs:207、lib.rs:673 舊標籤斷言失敗；day27_dashboard_source.rs:139 另有相同舊文案，DB target 尚未跑。修正後重跑 SSR／完整 postgres-integration／全新建庫 |
+| Analytics 4／測試 handler／正式查詢 | source_summary 仍是 cfg(test)；source_kind_summary 已解除 test-only 並掛入正式路由，SQLx 精確查詢已移至 analytics-persistence | 原 Day35 r2 相容 re-export 漏套；新 root 測試 state helper scope 有勘誤；正式精確查詢只用來源 token，與人員查詢 Session 需求有落差 | e753c36 server PostgreSQL target 出現 5 個 E0425，尚未執行；persistence 獨立 2 passed。先補相容匯出／fixture，再處理查詢授權，保留來源隔離與 commit／rollback 契約 |
+| Analytics 5／過時斷言 | Dashboard 舊斷言仍期待「Pet 已提交事件總數」 | 應更新語意斷言並保留 source links／可及性／escaping；不刪測試掩蓋失敗 | e753c36 library 23 passed／2 failed／1 ignored：dashboard_ui.rs:207、lib.rs:672；Day27 DB 同類斷言尚被編譯錯誤阻擋。Test All 與 Persistence CI 均紅，詳見更新驗證 |
 
 
 ### 本次重掃補充
+
+- e753c36 已接通 Pet set_caged 與 Analytics 精確查詢 persistence，不再當成空 library；Pet 55 項本機測試通過，Analytics persistence 2 項 PG 測試通過。完整 GUI／瀏覽器與其它 SQL 搬移仍未完成。
+
 
 - Chat product_event::persisted_message_event 未見本庫 caller；Pet cleanup_event::succeeded_event 僅見契約測試。沿既有真實事件／Analytics／Outbox 項目核對接線，不把公開契約直接當垃圾刪除，也不因型別存在宣稱上報完成。
 - EventIdentity／InMemoryDeduplicator 有內部與整合測試用途；正式 ingest 走 pg_store。記憶體契約成功不代表持久化冪等驗收。

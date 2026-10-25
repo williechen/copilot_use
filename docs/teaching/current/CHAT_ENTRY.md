@@ -2,7 +2,7 @@
 
 [Day35：建房名稱規則共用：拒絕控制字元且兩種入口一致](../daily/day-35/chat.md)
 
-**教學已交付／功能未驗收**：精確 commit 全文讀回已完成；本次產品未套用、Rust／SQLite／HTTP／瀏覽器未測。下一篇 **Day36**。原有 Leptos 個人頁與 JSON 建房 handler 保留，本文提供兩入口共用名稱規則的完整 Red／Green／Refactor。
+**已套用／驗證結果**：Chat Day35 已在 e753c36 套用；application／server／整合 35 項、UI SSR 14 項通過。瀏覽器／hydration 與完整功能未驗收。下一篇 **Day36**。 [完整結果與勘誤](https://github.com/williechen/copilot_use/blob/main/docs/source-review/2026-10-25-update-e753c36.md)。
 
 [Day35 交付與讀回證據](../daily/day-35/chat-readback.json) · [上一篇 Day34 r2](../daily/day-34/chat-r2.md)（登入入口去重已見來源，未當次驗收）。
 
@@ -16,4 +16,4 @@
 
 [全部文章逐篇核對](ARTICLE_STATUS.md) · [機器可讀狀態](article-states.json)
 
-此案現行文章：現行閱讀版本為 r2；最新來源已移除 LoginView／模組宣告，GET /login redirect /signin 與唯一表單測試已見，POST /login 保留。本次尚未執行 Rust／HTTP／瀏覽器，不追認 Gate 2。 教學編號、交付與歷史證據保持原值。
+此案現行來源：Day35 共用房名規則已接回兩個 handler，Session／Origin／CSRF 及 JSON 400／HTML 422 保留；目前測試通過。共用認證 FIFO／ACL／歷史仍待完成。 教學正文與原 commit/blob/SHA256 保留；局部測試不代表整產品功能驗收。
