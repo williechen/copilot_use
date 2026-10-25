@@ -2,7 +2,7 @@
 
 [Day35 r2：事件類型精確統計 SQLx Adapter 與正式路由一併接通](../daily/day-35/analytics-r2.md)
 
-**已套用／驗證結果**：bb95a60 已消除五個 E0425，全部 PG 測試目標可編譯；完整回歸 41 passed／3 failed／1 ignored。三敗為舊 Dashboard 文案，來源 token／人員 Session 查詢需求落差仍待修。下一篇 **Day36**。[完整結果與勘誤](https://github.com/williechen/copilot_use/blob/main/docs/source-review/2026-10-25-compile-bb95a60.md)。
+**已套用／驗證結果**：afdbb6e 完整 PostgreSQL 回歸 **44 passed／0 failed／1 ignored**、exit 0。五個 E0425 與三個舊文案失敗均已消除；既有查詢授權需求落差、角色等功能與完整瀏覽器驗收保留。下一篇 **Day36**。[完整結果](https://github.com/williechen/copilot_use/blob/main/docs/source-review/2026-10-25-assertions-afdbb6e.md)。
 
 [Day35 r2 交付與讀回證據](../daily/day-35/analytics-r2-readback.json) · [上一篇 Day34](../daily/day-34/analytics.md)（首次 admin/admin 初始化與強制改密碼）。
 
@@ -18,4 +18,4 @@
 
 [全部文章逐篇核對](ARTICLE_STATUS.md) · [機器可讀狀態](article-states.json)
 
-此案現行來源：精確查詢 persistence／Dashboard／路由已接通；測試改用新函式路徑與局部 fixture，五個編譯錯誤已修。未恢復舊 pg_store 公開匯出；三個舊斷言與查詢授權契約仍待修。r1／r2 正文及原 commit/blob/SHA256 保留，完整功能未驗收。
+此案現行來源：精確查詢 persistence／Dashboard／路由已接通；bb95a60 修編譯、afdbb6e 修四處文字斷言，PostgreSQL 回歸通過。原 pg_store 公開路徑變更與查詢授權契約仍追蹤；r1／r2 正文及原 commit/blob/SHA256 保留，完整功能未驗收。

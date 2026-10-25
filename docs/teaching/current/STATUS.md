@@ -1,6 +1,6 @@
 # 目前功能與驗證狀態
 
-程式來源：`williechen/rust_ai_ring/main@bb95a6065584ebc00ce339bdd904b3d47bf1ea15`。本頁只記功能與驗證現況；文章版本／交付與歷史證據另由 [逐篇狀態](ARTICLE_STATUS.md)、manifest 與 learning-state 管理。copilot_use 為文件庫，產品程式維持唯讀，本次沒有套用產品程式；僅新增下述局部實測，不代表全產品驗收完成。
+程式來源：`williechen/rust_ai_ring/main@afdbb6e81382e8d82095827a90c52cc3309a3e20`。本頁只記功能與驗證現況；文章版本／交付與歷史證據另由 [逐篇狀態](ARTICLE_STATUS.md)、manifest 與 learning-state 管理。copilot_use 為文件庫，產品程式維持唯讀，本次沒有套用產品程式；僅新增下述局部實測，不代表全產品驗收完成。
 
 ## 現存程式與缺口
 
@@ -12,11 +12,13 @@
 | Pet 預覽與產物 | 唯讀掃描／SHA256／摘要、確認取消與 source bridge 保留；本次未改 UI／bridge | 前次 891ff32 source／新 debug dist 各六契約通過；e753c36 本輪未重建 release／GUI。確認預覽不是 OS 操作成功，真正清理／receipt／restore 仍未接通 |
 | Pet 漫遊 | 開關／幾何 guard 存在，runtime 固定找 pet；動態生活窗採 pet-UUID | 真正逐寵物漫遊、拖曳／多螢幕與跨平台仍需接線／驗證，舊固定字串測試不足以證明完成 |
 | Analytics 帳密與 UI | ensure_default、正式 password_login／Leptos Dashboard 保留；精確類型查詢已接 analytics-persistence；新增來源 token API | persistence 真 PG 2 passed；HTTP oneshot 證實新 API 無管理者 Cookie、僅來源 token 可讀統計；與業務查詢須人員登入需求有落差。瀏覽器／角色 ACL／登入等待／SSE／服務配對仍待驗收 |
-| Analytics 舊碼與範本 | bb95a60 已修復四處舊查詢引用與 Day35 fixture scope；persistence／server PG 測試目標全部可編譯；legacy admin／範本仍保留 | 完整 PG 測試合計 41 passed／3 failed／1 ignored；Day27／28／29 舊文案斷言仍失敗。編譯不再阻擋，查詢授權契約及其它功能仍待修 |
+| Analytics 舊碼與範本 | bb95a60 修復五個 E0425；afdbb6e 更新四處舊文案斷言，保留來源／連結／可及性檢查；legacy admin／範本仍保留 | 最新完整 PostgreSQL 回歸 44 passed／0 failed／1 ignored、exit 0；Day27／28／29 全過。查詢授權需求落差、其它功能與 GUI／瀏覽器仍未驗收 |
 
 ## 可引用的測試證據範圍
 
-- [bb95a60 編譯修復與完整 PG 回歸](../../source-review/2026-10-25-compile-bb95a60.md)：no-run 編譯 exit 0；no-fail-fast 實跑 41 passed／3 failed／1 ignored；五個 E0425 已消除，三敗均為舊 Dashboard 文案。Day35 真實 Router／資料層測試已通過；來源 token 查詢與人員 Session 的需求落差未解。Chat／Pet 本提交無變更，沿用前次原範圍證據。
+- [afdbb6e 舊文案斷言修復驗證](../../source-review/2026-10-25-assertions-afdbb6e.md)：analytics-server／analytics-persistence 啟用 postgres-integration，所有測試目標與 doc tests 執行結果 44 passed／0 failed／1 ignored、exit 0；三個先前失敗測試已恢復通過。僅本機回歸，不代表新 CI 或全產品功能驗收；查詢授權需求落差保留。
+
+- [bb95a60 前次編譯修復與 PG 回歸](../../source-review/2026-10-25-compile-bb95a60.md)：no-run 編譯 exit 0；no-fail-fast 實跑 41 passed／3 failed／1 ignored；五個 E0425 已消除，三敗均為舊 Dashboard 文案。Day35 真實 Router／資料層測試已通過；來源 token 查詢與人員 Session 的需求落差未解。Chat／Pet 本提交無變更，沿用前次原範圍證據。
 
 - [e753c36 前次增量驗證](../../source-review/2026-10-25-update-e753c36.md)：Chat 35＋UI 14、Pet 55、Analytics persistence 2 通過；Analytics library 兩敗、server PG target 編譯失敗。Test All／Persistence CI 原始日誌已對上相同原因；其它 workflow 完成／進行中狀態見報告 CI 快照。新 API 授權落差亦已用合成事件／真 DB 實測。三案 Day35 已有來源實作，完整功能驗收維持未完成。
 

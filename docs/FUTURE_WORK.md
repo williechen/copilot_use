@@ -14,7 +14,7 @@ P9 規則已廢除。本清單中僅源自舊規則、尚未依最新需求確�
 
 ## 後續調整：重複與未使用程式、測試及產物（2026-10-25）
 
-本節統整本輪全部核對與使用者「檢核清除不使用函式與測試」的要求，作為後續調整單一清單。最新增量驗證基準為 `williechen/rust_ai_ring/main@bb95a6065584ebc00ce339bdd904b3d47bf1ea15`；每次動手前重讀最新來源與 caller，不固定套用此 SHA。最新 [bb95a60 編譯修復驗證](source-review/2026-10-25-compile-bb95a60.md) 已確認五個 E0425 消除，剩三個舊文案斷言；Day35 前次套用、測試及待修證據見 [e753c36 更新驗證](source-review/2026-10-25-update-e753c36.md)；前次逐項結果見 [2026-10-25 專案重掃](source-review/2026-10-25-project-rescan.md)；原 [D01–D09 報告](source-review/2026-10-25-duplicate-application-review.md) 保留其歷史來源，不再以舊 dist 失敗描述最新 main。
+本節統整本輪全部核對與使用者「檢核清除不使用函式與測試」的要求，作為後續調整單一清單。最新增量驗證基準為 `williechen/rust_ai_ring/main@afdbb6e81382e8d82095827a90c52cc3309a3e20`；每次動手前重讀最新來源與 caller，不固定套用此 SHA。最新 [afdbb6e 斷言修復驗證](source-review/2026-10-25-assertions-afdbb6e.md) 已確認舊文案三敗消除，完整 PG 回歸 44 passed／0 failed／1 ignored；[bb95a60 編譯修復](source-review/2026-10-25-compile-bb95a60.md) 保留歷史；Day35 前次套用、測試及待修證據見 [e753c36 更新驗證](source-review/2026-10-25-update-e753c36.md)；前次逐項結果見 [2026-10-25 專案重掃](source-review/2026-10-25-project-rescan.md)；原 [D01–D09 報告](source-review/2026-10-25-duplicate-application-review.md) 保留其歷史來源，不再以舊 dist 失敗描述最新 main。
 
 本次完成來源重掃及部分實測，下列程式清理未由本次任務套用；已有來源實作的 Pet 名稱規則、Analytics ensure_default 不重教。Chat 既有 r2 已在最新來源接通，先核對驗證／排除已套部分，後續由各案即時 next_day 選一個最小切片，仍依 Chat→Pet→Analytics 交付，不預排 Day，不要求每日改完所有項目。各項完成須附實際變更 SHA、caller／註冊與相應測試證據。
 
@@ -36,7 +36,7 @@ P9 規則已廢除。本清單中僅源自舊規則、尚未依最新需求確�
 | Analytics 2／D04 | 盤點並淘汰舊 admin.rs 登入碼／memory Session 後台與其專屬測試、Config／模組出口 | main/build_app 目前採 password_login::build；確認無相容 caller 再移除舊公開 API，不刪除正式帳密／Session／PostgreSQL 測試 | 正式登入／首次改密碼／後台／登出與 Session 撤銷；角色／來源 ACL 原缺口保留，待核對／清理 |
 | Analytics 3／測試 fixture | 保留 bootstrap::initialize；僅在 fixture 完整遷移後評估縮為測試支援或移除 | day23_password_login、day24_password_change、day25_repeat_password_change、day26_session_contract、day27_dashboard_source 等整合測試仍直接使用；不能因 main 不呼叫就刪掉 | 原測試的自訂初始密碼、重複初始化／hash 保留、Session／Email／權限條件均須保留；目前保留 |
 | Analytics 4／測試 handler／正式查詢 | source_summary 仍 cfg(test)；正式精確查詢已接 persistence；bb95a60 測試改用新函式路徑並局部建立 fixture | 五個 E0425 已消除；未新增相容 re-export，舊公開 pg_store 路徑已變更。新正式查詢仍只用來源 token，與人員 Session 需求有落差 | 全部 PG 測試目標可編譯；Day35 live Router／來源隔離／commit／rollback 實測通過。仍須對齊查詢授權需求，不能將 Router 成功當成完整權限驗收 |
-| Analytics 5／過時斷言 | Dashboard 舊斷言仍期待「已提交事件總數」 | 改成現行全部事件類型文案，保留 source links／可及性／escaping；不刪測試 | bb95a60 完整 PG 測試 41 passed／3 failed／1 ignored：dashboard_ui.rs:207、lib.rs:680、day27_dashboard_source.rs:129。Day27 另有後段 Pet 舊文案須同步核對；編譯已通過 |
+| Analytics 5／過時斷言（已修復） | afdbb6e 在三檔更新四處「已提交事件總數」舊文字，涵蓋 Day27 Chat／Pet 與 Day28／29 | 保留來源切換、HTTP／Session、連結、可及性、escaping 等既有斷言，未刪測試；原識別與失敗證據保留 | 完整 PG 回歸 44 passed／0 failed／1 ignored、exit 0。此三敗已結案，不重教；其它授權／產品驗收仍待辦 |
 
 
 ### 本次重掃補充
