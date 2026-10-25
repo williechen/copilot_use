@@ -27,7 +27,7 @@ WebKit 上游 [WebLoaderStrategy.cpp](https://github.com/WebKit/WebKit/blob/main
 
 本產品 tauri.conf.json 的 devUrl 是 http://localhost:1420、frontendDist 是 ../pet_ui/dist；動態生活窗載入 index.html?view=pet&pet_id=...。開發模式需先確認 Trunk readiness 與該 URL／實際資源可讀；直接 cargo run 與 cargo tauri dev 的前置啟動行為須分辨。正式模式則核對打包資產與實際 URL，不把 dev server 檢查當正式資產驗收。
 
-工具當次只讀 ss／ps 觀察：本執行環境 1420 未見 listener、未見 pet-server／trunk serve；這不代表使用者貼出錯誤當時的環境，也不足以結案定因。使用者後續已補充視窗現象，見下節；完整啟動指令仍待提供。
+工具當次只讀 ss／ps 觀察：本執行環境 1420 未見 listener、未見 pet-server／trunk serve；這不代表使用者貼出錯誤當時的環境，也不足以結案定因。使用者後續已補充視窗現象，見下節；啟動指令後續確認為 cargo tauri dev，見文末。
 
 後續先取得啟動命令、失敗 URL、WebView label／pet id、載入前後日誌、WebKitGTK 套件版本及 binary／前端建置來源；開發端等待資源就緒後再重現，記錄是否仍有相同 WebKit 錯誤。未確定前不變更系統套件、GPU／sandbox 設定、不重設 DB。
 
@@ -49,4 +49,12 @@ WebKit：使用者錯誤回報已保存，原因待查，未驗收。
 
 本 SHA 的 pet_ui/index.html 只有前端橋接 script 與 Trunk Rust 載入入口，畫面依 WASM 掛載；因此 JS／WASM 失敗是需要查驗的路徑，尚非已確認原因。必須取得失敗 URL、HTTP／自訂協定回應與 WebView console／載入事件，再判定啟動服務、資源打包、JS 或 WebKit 內部錯誤。未安裝／升級任何套件、未關閉 sandbox／GPU、未清資料。
 
-尚待使用者提供完整啟動指令，以辨別 devUrl 或打包資產模式。本補充不宣稱產品已修復或已通過重複出籠／載入驗收。
+使用者後續確認啟動指令為 cargo tauri dev，已確認應查開發模式的 devUrl，見文末。本補充不宣稱產品已修復或已通過重複出籠／載入驗收。
+
+## 啟動方式確認與下一個必要檢查
+
+使用者確認指令為 `cargo tauri dev`。本次來源 tauri.conf.json 的 beforeDevCommand 會以 pet_ui 為 cwd 執行 `trunk serve --port 1420`；devUrl 為 `http://localhost:1420`。依 [Tauri 官方設定參考](https://v2.tauri.app/reference/config/#buildconfig)，這是開發頁面 URL；不應先把問題當作 release 打包資產缺失，也不需另啟第二個 Trunk 造成埠衝突。
+
+本工具環境此時 `curl -I --max-time 5 http://localhost:1420/` 回 exit 7／connection failed；此時沒有可連服務可供重現，不推定使用者出錯當時同樣未啟動。接下來需在使用者的 cargo tauri dev 保持執行時確認同一 URL 的回應，並保存 Trunk 初始 build／serve 的第一個錯誤；若 HTML 可讀，再查實際 JS／WASM 的 Network 失敗 URL 與 WebView console，單獨 HTML 200 不足以證明畫面可載入。
+
+目前沒有重啟使用者的 app，也未新增啟動程序、修改產品或宣稱已修復。漫遊固定 label 缺口仍獨立存在。
