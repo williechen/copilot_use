@@ -499,21 +499,21 @@
     "latest_github_publication": {
       "chat": {
         "day": 37,
-        "revision": "r2",
-        "path": "docs/teaching/daily/day-37/chat-r2.md",
-        "article_commit": "42f8b89a6406845d397ed81486d8daad582c48af"
+        "revision": "r3",
+        "path": "docs/teaching/daily/day-37/chat-r3.md",
+        "article_commit": "32521d026d80d4fac3aeb1ce21b201fc1b52040a"
       },
       "pet": {
         "day": 37,
-        "revision": "r2",
-        "path": "docs/teaching/daily/day-37/pet-r2.md",
-        "article_commit": "009b04a793a88335736c9a906d6ff5a36a591a08"
+        "revision": "r3",
+        "path": "docs/teaching/daily/day-37/pet-r3.md",
+        "article_commit": "16f327c616c180472b339f20c13278ae21f5fb08"
       },
       "analytics": {
         "day": 37,
-        "revision": "r2",
-        "path": "docs/teaching/daily/day-37/analytics-r2.md",
-        "article_commit": "5841c14768de75a32abb039d6261bec613b96a38"
+        "revision": "r3",
+        "path": "docs/teaching/daily/day-37/analytics-r3.md",
+        "article_commit": "3b01712fba0ac9d39ac0b8ad7f20da0c3e469100"
       }
     },
     "legacy_notion_fields_scope": "Preserved historical Notion publication snapshot; current progress is next_day and latest_github_publication."
@@ -3700,7 +3700,7 @@
     "expected_state_parent_sha": "7a3400259b59cf617d6c3c721bfc10d1014542b0",
     "raw_error": null
   },
-  "latest_chat_publication": "docs/teaching/daily/day-37/chat-r2-readback.json",
+  "latest_chat_publication": "docs/teaching/daily/day-37/chat-r3-readback.json",
   "duplicate_application_review": {
     "date": "2026-10-25",
     "source_repository": "williechen/rust_ai_ring",
@@ -3930,7 +3930,7 @@
       "scope": "incremental verification only"
     }
   },
-  "latest_pet_publication": "docs/teaching/daily/day-37/pet-r2-readback.json",
+  "latest_pet_publication": "docs/teaching/daily/day-37/pet-r3-readback.json",
   "day35_analytics_r1_delivery": {
     "repository": "williechen/copilot_use",
     "branch": "main",
@@ -4024,7 +4024,7 @@
       "scope": "local PostgreSQL regression; not full product acceptance or CI"
     }
   },
-  "latest_analytics_publication": "docs/teaching/daily/day-37/analytics-r2-readback.json",
+  "latest_analytics_publication": "docs/teaching/daily/day-37/analytics-r3-readback.json",
   "previous_source_validation_before_e753c36": {
     "source_sha": "f3f8255b0b701a1b57cb8c0a1737c3caa4319f2d",
     "full_execution_sha": "f3f8255b0b701a1b57cb8c0a1737c3caa4319f2d",
@@ -4401,6 +4401,111 @@
   "day37_chat_delivery": {
     "project": "chat",
     "day": 37,
+    "revision": "r3",
+    "path": "docs/teaching/daily/day-37/chat-r3.md",
+    "article_commit": "32521d026d80d4fac3aeb1ce21b201fc1b52040a",
+    "parent": "af77de7528a03dd46ef933b7d8b63851364b5f8b",
+    "blob_sha": "8103893af4da0e1dcb3f047861b88b850244f075",
+    "readback_at": "2026-10-25T15:04:19.227Z",
+    "source_sha": "648b90323af7b381d6a79dc2fd08a53b63173a43",
+    "teaching_baseline_sha": "5c713553daee4055738239f047d6c774fcc7a7a1",
+    "full_text_verified": true,
+    "code_blocks_exact": true,
+    "main_application": "already present in exact source main; not applied by verification task",
+    "green_executed": true,
+    "red_executed": false,
+    "tests": "see exact-source verification report and raw logs",
+    "functional_acceptance": false,
+    "archived": false,
+    "next_day_before": 38,
+    "next_day_after": 38,
+    "next_day_advanced": false,
+    "report": "docs/source-review/2026-10-25-day37-verification-648b903.md",
+    "evidence": "docs/source-review/day37-verification-648b903/evidence.zip",
+    "status": "article_verified_tests_executed_partial_acceptance",
+    "raw_error": null,
+    "sha256": "5db9a69ab8020efe9e06e94b07220526d27c936aa1a9f51e2c389b22261fbc0f",
+    "rules_version": "daily-tdd-minimum-v1 / github-only-v1",
+    "rules_commit": "af77de7528a03dd46ef933b7d8b63851364b5f8b",
+    "rules_blob": "152355cad7306cc902605ebed1eca7ce9572a540",
+    "state_sync_expected_sha": "3b01712fba0ac9d39ac0b8ad7f20da0c3e469100",
+    "state_blob_before": "67e3e404a06cced94c2340c186d4654ee57c0ef9",
+    "manifest_blob_before": "24006273b5fe44c8c80b3f94fdd61c3c4a527b85",
+    "verification_summary": "程式已見／15項與WASM建置通過／瀏覽器錯誤提示未通過"
+  },
+  "day37_pet_delivery": {
+    "project": "pet",
+    "day": 37,
+    "revision": "r3",
+    "path": "docs/teaching/daily/day-37/pet-r3.md",
+    "article_commit": "16f327c616c180472b339f20c13278ae21f5fb08",
+    "parent": "32521d026d80d4fac3aeb1ce21b201fc1b52040a",
+    "blob_sha": "9f256098f893632ca84adb3f48185ca2dd4065d6",
+    "readback_at": "2026-10-25T15:04:39.515Z",
+    "source_sha": "648b90323af7b381d6a79dc2fd08a53b63173a43",
+    "teaching_baseline_sha": "5c713553daee4055738239f047d6c774fcc7a7a1",
+    "full_text_verified": true,
+    "code_blocks_exact": true,
+    "main_application": "already present in exact source main; not applied by verification task",
+    "green_executed": true,
+    "red_executed": false,
+    "tests": "see exact-source verification report and raw logs",
+    "functional_acceptance": false,
+    "archived": false,
+    "next_day_before": 38,
+    "next_day_after": 38,
+    "next_day_advanced": false,
+    "report": "docs/source-review/2026-10-25-day37-verification-648b903.md",
+    "evidence": "docs/source-review/day37-verification-648b903/evidence.zip",
+    "status": "article_verified_tests_executed_partial_acceptance",
+    "raw_error": null,
+    "sha256": "77ff223fff4ddec76c6d06cd4fce1cbcfe4acb36eab13507133951036036f9ae",
+    "rules_version": "daily-tdd-minimum-v1 / github-only-v1",
+    "rules_commit": "af77de7528a03dd46ef933b7d8b63851364b5f8b",
+    "rules_blob": "152355cad7306cc902605ebed1eca7ce9572a540",
+    "state_sync_expected_sha": "3b01712fba0ac9d39ac0b8ad7f20da0c3e469100",
+    "state_blob_before": "67e3e404a06cced94c2340c186d4654ee57c0ef9",
+    "manifest_blob_before": "24006273b5fe44c8c80b3f94fdd61c3c4a527b85",
+    "verification_summary": "程式已見／62項與WASM通過／GUI局部通過／故障注入待驗"
+  },
+  "day37_analytics_delivery": {
+    "project": "analytics",
+    "day": 37,
+    "revision": "r3",
+    "path": "docs/teaching/daily/day-37/analytics-r3.md",
+    "article_commit": "3b01712fba0ac9d39ac0b8ad7f20da0c3e469100",
+    "parent": "16f327c616c180472b339f20c13278ae21f5fb08",
+    "blob_sha": "7d9d3309993d17d6dd2c89ba55051d2065843c42",
+    "readback_at": "2026-10-25T15:04:46.218Z",
+    "source_sha": "648b90323af7b381d6a79dc2fd08a53b63173a43",
+    "teaching_baseline_sha": "5c713553daee4055738239f047d6c774fcc7a7a1",
+    "full_text_verified": true,
+    "code_blocks_exact": true,
+    "main_application": "already present in exact source main; not applied by verification task",
+    "green_executed": true,
+    "red_executed": false,
+    "tests": "see exact-source verification report and raw logs",
+    "functional_acceptance": false,
+    "archived": false,
+    "next_day_before": 38,
+    "next_day_after": 38,
+    "next_day_advanced": false,
+    "report": "docs/source-review/2026-10-25-day37-verification-648b903.md",
+    "evidence": "docs/source-review/day37-verification-648b903/evidence.zip",
+    "status": "article_verified_tests_executed_partial_acceptance",
+    "raw_error": null,
+    "sha256": "b4faac2b8a000289c9a4dae3958e6d4bbabfd6a21d519087eb958b6f9c8ce97b",
+    "rules_version": "daily-tdd-minimum-v1 / github-only-v1",
+    "rules_commit": "af77de7528a03dd46ef933b7d8b63851364b5f8b",
+    "rules_blob": "152355cad7306cc902605ebed1eca7ce9572a540",
+    "state_sync_expected_sha": "3b01712fba0ac9d39ac0b8ad7f20da0c3e469100",
+    "state_blob_before": "67e3e404a06cced94c2340c186d4654ee57c0ef9",
+    "manifest_blob_before": "24006273b5fe44c8c80b3f94fdd61c3c4a527b85",
+    "verification_summary": "程式已見／PG45項加略過另1項通過／CI受阻／完整驗收待完成"
+  },
+  "day37_chat_r2_delivery": {
+    "project": "chat",
+    "day": 37,
     "revision": "r2",
     "path": "docs/teaching/daily/day-37/chat-r2.md",
     "parent": "cc4d5c8ecf283680d34a48f65a52a0af9fc40b2b",
@@ -4440,7 +4545,27 @@
     "source_observation": "docs/teaching/daily/day-37/source-review-r2.json",
     "official_versions": "docs/teaching/daily/day-37/versions-r2.json"
   },
-  "day37_pet_delivery": {
+  "day37_runtime_verification": {
+    "chat": {
+      "source_sha": "648b90323af7b381d6a79dc2fd08a53b63173a43",
+      "report": "docs/source-review/2026-10-25-day37-verification-648b903.md",
+      "summary": "程式已見／15項與WASM建置通過／瀏覽器錯誤提示未通過",
+      "functional_acceptance": false
+    },
+    "pet": {
+      "source_sha": "648b90323af7b381d6a79dc2fd08a53b63173a43",
+      "report": "docs/source-review/2026-10-25-day37-verification-648b903.md",
+      "summary": "程式已見／62項與WASM通過／GUI局部通過／故障注入待驗",
+      "functional_acceptance": false
+    },
+    "analytics": {
+      "source_sha": "648b90323af7b381d6a79dc2fd08a53b63173a43",
+      "report": "docs/source-review/2026-10-25-day37-verification-648b903.md",
+      "summary": "程式已見／PG45項加略過另1項通過／CI受阻／完整驗收待完成",
+      "functional_acceptance": false
+    }
+  },
+  "day37_pet_r2_delivery": {
     "project": "pet",
     "day": 37,
     "revision": "r2",
@@ -4482,7 +4607,7 @@
     "source_observation": "docs/teaching/daily/day-37/source-review-r2.json",
     "official_versions": "docs/teaching/daily/day-37/versions-r2.json"
   },
-  "day37_analytics_delivery": {
+  "day37_analytics_r2_delivery": {
     "project": "analytics",
     "day": 37,
     "revision": "r2",

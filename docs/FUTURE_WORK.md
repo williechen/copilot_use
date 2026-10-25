@@ -46,6 +46,8 @@ D05 共用認證保留；WS持續重驗已接並有同SHA局部證據，尚缺�
 
 ### Chat 房間與訊息回饋
 
+最新648b903增量實測：apply_room_search與真WASM caller已見、UI15項與建置通過；但API500時status未綁DOM，舊清單保留卻無錯誤／重試提示，待修且未驗收。[本次證據](source-review/2026-10-25-day37-verification-648b903.md)。下方5c713553與其他來源診斷保留其歷史範圍。
+
 2026-10-25 使用者操作回報：首頁進入時必須按讀取才有房間；房間頁共用列表也顯示未讀取。最新來源 `dbe00814` 未見首次載入，須補「進入首頁即自動讀取」，保留手動刷新、載入／空／錯誤／重試與舊快照；核對 hydration 重複請求及新舊搜尋競態。[證據與完成條件](source-review/2026-10-25-chat-homepage-feedback.md)。本來源已見 Day37 apply_room_search 與 WASM caller；下段 `5c713553` 診斷保留其歷史範圍，不代表自動載入已完成。
 
 最新來源仍有兩段房間status；query_room成功未清除查詢中，不能把刪除成功set_status當合併完成。MessageCreated沒有解除等待狀態；D06僅遷refreshed_room_list舊測試，refresh_result_view仍有真caller。
@@ -55,6 +57,8 @@ D05 共用認證保留；WS持續重驗已接並有同SHA局部證據，尚缺�
 <a id="pet-lifecycle"></a>
 
 ### Pet 多寵物／回籠／重啟
+
+最新648b903：出籠先保存／失敗補償及協調鎖已見，62項測試通過；使用者確認控制窗／生活窗／同ID重複出籠局部正常。native故障注入、併行、直接關窗與重啟仍未驗收，不能沿舊來源再說補償完全未套用。[範圍與證據](source-review/2026-10-25-day37-verification-648b903.md)。
 
 歷史三窗與狀態隔離局部通過；最新setup已逐ID恢復全部未回籠資料。預設資格與回籠未分離、直接關生活窗只清Runtime、出籠先開窗後寫DB；真程序重啟與失敗補償仍待驗。
 
@@ -105,6 +109,8 @@ D05 共用認證保留；WS持續重驗已接並有同SHA局部證據，尚缺�
 <a id="ci-coverage"></a>
 
 ### CI／產物與測試覆蓋
+
+最新648b903不是全綠：6成功、Persistence失敗。Pet step已選pet-server＋pet-persistence但缺GLib／GObject native依賴；Analytics server＋persistence完整PG targets已配置，該步被前一步失敗阻擋。本機完整PG45＋略過另1通過不能替代CI；沿原CI項修正runner並重跑，不新增FIFO。[精確job／錯誤](source-review/2026-10-25-day37-verification-648b903.md)。下段舊workflow快照不當作目前配置。
 
 目前七個workflow成功，兩個persistence package已直接選取；Persistence的server PG工作實測命令是analytics-persistence，Test All的analytics-server未啟用postgres-integration。正式server PG targets、新dist契約與實際安裝驗收仍缺。
 
