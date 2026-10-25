@@ -4105,5 +4105,27 @@
       "Pet native multiwindow, restart and roaming"
     ],
     "teaching_progress_changed": false
+  },
+  "latest_native_pet_acceptance": {
+    "date": "2026-10-25",
+    "source_sha": "5d28e969ceb10f7ae9bb7d15212f6a0dd63c9af1",
+    "report": "docs/source-review/2026-10-25-pet-native-5d28e96.md",
+    "functional_acceptance": false,
+    "evidence_method": "User native desktop operations and screenshots; agent SQLite/log/source verification; no automated native GUI control",
+    "passed": [
+      "three named life windows",
+      "sleep/wake isolation via native menu",
+      "single-pet caging",
+      "control hide and reopen",
+      "SQLite retention across restart",
+      "manual reopen and duplicate-open reuse"
+    ],
+    "failed": [
+      "restart restores only selected pet",
+      "roaming fixed label does not match dynamic UUID windows"
+    ],
+    "local_runner_fix": "Wait for Trunk readiness before launching development binary",
+    "program_modified": false,
+    "teaching_progress_changed": false
   }
 }

@@ -2,7 +2,13 @@
 
 程式來源：`williechen/rust_ai_ring/main@afdbb6e81382e8d82095827a90c52cc3309a3e20`。本頁只記功能與驗證現況；文章版本／交付與歷史證據另由 [逐篇狀態](ARTICLE_STATUS.md)、manifest 與 learning-state 管理。以下舊段落保留 afdbb6e 當次範圍；最新實機驗收見下節。
 
-## 最新實機驗收：5d28e96（2026-10-25）
+## Pet 原生驗證補充（2026-10-25）
+
+[真實桌面操作與 SQLite／日誌證據](../../source-review/2026-10-25-pet-native-5d28e96.md)：使用者操作並提供截圖，代理核對 DB／日誌／來源；工具仍無原生 UI 自動控制能力。三個各自具名的生活窗、睡覺／醒來逐 ID 隔離、單隻回籠、控制台隱藏／重開、資料跨重啟保留及手動／重複出籠均通過局部驗證。
+
+重啟只恢復最後選取的丙，漏掉另一隻未回籠寵物；漫遊仍回 pet window not found，兩項未通過。透明窗在淺色背景的文字對比另待調整。第一次 Connection refused 是驗收 runner 未等 Trunk 就緒，已加等待並重開成功；不再將錯誤頁當控制台載入通過。Pet 產品程式未修改，整體功能驗收仍未通過。
+
+## 先前實機驗收：5d28e96（2026-10-25）
 
 [本輪報告](../../source-review/2026-10-25-acceptance-5d28e96.md)：Chat／Analytics 真瀏覽器、HTTP、隔離 SQLite／PostgreSQL，以及 Pet 原生程序啟動。整體尚未通過功能驗收。
 
