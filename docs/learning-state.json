@@ -56,7 +56,7 @@
   "fixed_tag": "v0.2.1",
   "fixed_tag_sha": "9bcae7c5d139f75ed08b4daffece602a71fdab34",
   "next_day": {
-    "chat": 38,
+    "chat": 39,
     "pet": 38,
     "analytics": 38
   },
@@ -498,10 +498,10 @@
     "last_publication_status": "Day19 r1 published to existing project pages and fully read back; next_day advanced 19 to 20 per project. Source code application and full acceptance remain incomplete.",
     "latest_github_publication": {
       "chat": {
-        "day": 37,
-        "revision": "r3",
-        "path": "docs/teaching/daily/day-37/chat-r3.md",
-        "article_commit": "32521d026d80d4fac3aeb1ce21b201fc1b52040a"
+        "day": 38,
+        "revision": "r1",
+        "path": "docs/teaching/daily/day-38/chat.md",
+        "article_commit": "877ed638a5c9d2c0ec129b980a792b3893e0942c"
       },
       "pet": {
         "day": 37,
@@ -4663,5 +4663,22 @@
     "previous_source_sha": "648b90323af7b381d6a79dc2fd08a53b63173a43",
     "source_followup": "docs/source-review/version-refresh-2026-10-26/source-followup.json",
     "source_followup_checked_at": "2026-10-25T21:38:21.400Z"
+  },
+  "day38_chat_delivery": {
+    "day": 38,
+    "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+    "article_path": "docs/teaching/daily/day-38/chat.md",
+    "article_commit": "877ed638a5c9d2c0ec129b980a792b3893e0942c",
+    "blob_sha": "85aa8cfa3f633a21d7bd11ac59d4942e6fc7a3ae",
+    "sha256": "31fbf53bfc129ace9c04cd9142d0b56f91168b2a863e3633f3f34af732119c93",
+    "full_text_verified": true,
+    "red_executed": false,
+    "green_executed": false,
+    "main_application": "not applied",
+    "functional_acceptance": false,
+    "next_day_before": 38,
+    "next_day_after": 39,
+    "status": "article_delivered_pending_product_validation",
+    "homepage_sync": "pending_this_commit"
   }
 }

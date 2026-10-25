@@ -19,7 +19,7 @@
 
 | 專案 | 最新文章 | 下一篇 | 狀態 |
 | --- | --- | --- | --- |
-| Chat | [Day37 r3：房間搜尋完成時更新真實畫面狀態](day-37/chat-r3.md) | Day38 | 程式已見／15項與WASM建置通過／瀏覽器錯誤提示未通過 |
+| Chat | [Day38：搜尋失敗顯示在真正的 Leptos 房間列表](day-38/chat.md) | Day39 | 教學已交付／產品未套用／Red-Green與瀏覽器未執行／未驗收 |
 | Pet | [Day37 r3：先保存再開窗，失敗回復原標記](day-37/pet-r3.md) | Day38 | 程式已見／62項與WASM通過／GUI局部通過／故障注入待驗 |
 | Analytics | [Day37 r3：拒絕歧義 Session Cookie，兩種查詢共用 Guard](day-37/analytics-r3.md) | Day38 | 程式已見／PG45項加略過另1項通過／CI受阻／完整驗收待完成 |
 

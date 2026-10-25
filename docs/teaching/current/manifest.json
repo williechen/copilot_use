@@ -51,8 +51,8 @@
     "historical_records_are_not_current_policy": true
   },
   "scope": "Latest published teaching index; Day16 snapshot preserved in archive",
-  "revision": "day37-r3-versions-and-summary-refresh-2026-10-26",
-  "synced_date": "2026-10-25",
+  "revision": "day38-chat-published-2026-10-26",
+  "synced_date": "2026-10-26",
   "source_sha": "f3f8255b0b701a1b57cb8c0a1737c3caa4319f2d",
   "articles": [
     {
@@ -2121,11 +2121,34 @@
       "state_blob_before": "67e3e404a06cced94c2340c186d4654ee57c0ef9",
       "manifest_blob_before": "24006273b5fe44c8c80b3f94fdd61c3c4a527b85",
       "verification_summary": "程式已見／PG45項加略過另1項通過／CI受阻／完整驗收待完成"
+    },
+    {
+      "project": "chat",
+      "day": 38,
+      "revision": "r1",
+      "path": "docs/teaching/daily/day-38/chat.md",
+      "article_commit": "877ed638a5c9d2c0ec129b980a792b3893e0942c",
+      "parent": "73006339537d93a34d820c05b305547fa64033f7",
+      "blob_sha": "85aa8cfa3f633a21d7bd11ac59d4942e6fc7a3ae",
+      "sha256": "31fbf53bfc129ace9c04cd9142d0b56f91168b2a863e3633f3f34af732119c93",
+      "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+      "full_text_verified": true,
+      "code_blocks_exact": true,
+      "red_executed": false,
+      "green_executed": false,
+      "main_application": "not applied",
+      "functional_acceptance": false,
+      "archived": false,
+      "next_day_before": 38,
+      "next_day_after": 39,
+      "status": "article_delivered_pending_product_validation",
+      "rules_version": "daily-tdd-minimum-v1 / github-only-v1",
+      "raw_error": null
     }
   ],
   "day15_frozen": true,
   "next_day": {
-    "chat": 38,
+    "chat": 39,
     "pet": 38,
     "analytics": 38
   },
@@ -3060,5 +3083,15 @@
     "source_followup_checked_at": "2026-10-25T21:38:21.400Z"
   },
   "previous_revision_before_2026_10_26_summary_refresh": "day36-actual-verification",
-  "source_field_interpretation": "Historical source_sha/current_reference_observation/latest_source_validation keep original evidence; current document maintenance source is latest_document_maintenance.source_sha; latest project publications remain Day37 r3."
+  "source_field_interpretation": "Historical source_sha/current_reference_observation/latest_source_validation keep original evidence; current document maintenance source is latest_document_maintenance.source_sha; latest project publications remain Day37 r3.",
+  "day38_delivery": {
+    "chat": {
+      "article_commit": "877ed638a5c9d2c0ec129b980a792b3893e0942c",
+      "article_path": "docs/teaching/daily/day-38/chat.md",
+      "blob_sha": "85aa8cfa3f633a21d7bd11ac59d4942e6fc7a3ae",
+      "sha256": "31fbf53bfc129ace9c04cd9142d0b56f91168b2a863e3633f3f34af732119c93",
+      "next_day": 39,
+      "functional_acceptance": false
+    }
+  }
 }
