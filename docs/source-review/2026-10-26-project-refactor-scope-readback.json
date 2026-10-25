@@ -1,0 +1,158 @@
+{
+  "parent": "e5baa39559ce57453205cd6485aa71a2c2c9f646",
+  "commit": "b4ea4c6d484d172859873a6f2791a0febce44e27",
+  "readback_at": "2026-10-25T23:35:46.170Z",
+  "files": [
+    {
+      "path": "docs/COMMON_LEARNING_RULES.md",
+      "blob_sha": "a36fc30e641b8e99cf5dc8c76d6d274ea61f2cb4",
+      "full_text_verified": true,
+      "sha256": "879d68f992d04bec16498faa5de5bad20cd047348edeccb1aed098c651551d21"
+    },
+    {
+      "path": "docs/TEACHING_ALIGNMENT.md",
+      "blob_sha": "6f6354ce78d9e570f32f40fda5ae4bfcd1041bec",
+      "full_text_verified": true,
+      "sha256": "52d285507cb81d20b116896f38d23035f28e5afc6d60f43fa511a1c0625b81bd"
+    },
+    {
+      "path": "docs/teaching/functional-refactoring/README.md",
+      "blob_sha": "7f3d9e90ae00d7fd5f5fb904b612b1100218d1f2",
+      "full_text_verified": true,
+      "sha256": "27211de41aa8ee6685baf5a4c95b0dfcd196a03a56f315a5072b229a26615203"
+    },
+    {
+      "path": "docs/teaching/functional-refactoring/chat.md",
+      "blob_sha": "062e8f757c4cc4b78205c6af13af16bc61d2856e",
+      "full_text_verified": true,
+      "sha256": "de7466352c19521a8a2a47e6e5dde144221ad795f10ab6674886c417745f4f3a"
+    },
+    {
+      "path": "docs/teaching/functional-refactoring/pet.md",
+      "blob_sha": "1a735ff56b3555d469ffd3e0783da5f8f9475484",
+      "full_text_verified": true,
+      "sha256": "ce408cad92f0f501eb180ff405c419550dcbf1b7b1a2a0be97bb1a9dcf9acaec"
+    },
+    {
+      "path": "docs/teaching/functional-refactoring/analytics.md",
+      "blob_sha": "9c90de6fa22dbc500852e13d6ce01bea2923995c",
+      "full_text_verified": true,
+      "sha256": "02e91798248e0bf372d1447d32ea25ff7f9f331165a354d532adb3955bd02f51"
+    },
+    {
+      "path": "docs/teaching/functional-refactoring/PROGRESS.md",
+      "blob_sha": "57939bee05fe5181115656f1339d8da47ba9d86d",
+      "full_text_verified": true,
+      "sha256": "f2531e0fbec946ccf72d3ff1c7cea2771e4ea568be7b538462a94010e6bbd562"
+    },
+    {
+      "path": "docs/learning-state.json",
+      "blob_sha": "fadaa40e48feadb908f9fb05a600215bd880971e",
+      "full_text_verified": true,
+      "sha256": "ea1a62a2b6312ed6887d91cf8ad20b5c57b7ed1303c60ad5d709d05e7005908a"
+    },
+    {
+      "path": "docs/teaching/current/manifest.json",
+      "blob_sha": "9fbe93d5319d7f506bb05b8f1d3d4bd4a88d1cb3",
+      "full_text_verified": true,
+      "sha256": "a66a1f0f2307406a519f27656bde0f28f6e864d6a62c4794a6190426edb6cd0b"
+    },
+    {
+      "path": "README.md",
+      "blob_sha": "8c08bf30e2b4d5401dc173432ea0d275a59816f9",
+      "full_text_verified": true,
+      "sha256": "0f4f95aa726c1d29a335f30de3bc52336e60417cb50d03b8bf06cea0e41d6f47"
+    },
+    {
+      "path": "docs/README.md",
+      "blob_sha": "d312620752aba0bc321b94a8add699b8fc104c5e",
+      "full_text_verified": true,
+      "sha256": "928860a5d7d24984774b938f6780b6c35a83ed44c55dd890e028bea077559104"
+    },
+    {
+      "path": "docs/teaching/README.md",
+      "blob_sha": "0fb177da77e52727f9a8d1e490feb1e6fe72274d",
+      "full_text_verified": true,
+      "sha256": "d170ee808f8bcfd3b1456078eaf5866c39056a577727d2215ed8a654e9d7c46e"
+    },
+    {
+      "path": "docs/teaching/daily/README.md",
+      "blob_sha": "735ea948d84a4305c4c623712c2bae3e3b148241",
+      "full_text_verified": true,
+      "sha256": "4699c669b104803c840e0953c725e787d9b04595249ff661d13a3b7fec90bb39"
+    },
+    {
+      "path": "docs/teaching/chat/README.md",
+      "blob_sha": "4b62da1c75b9f31aacbd99ed8695f690e6ac091e",
+      "full_text_verified": true,
+      "sha256": "f16b5f249dda7a84227871954af4dca764cc5cf7158db323b8843ffef2012f12"
+    },
+    {
+      "path": "docs/teaching/pet/README.md",
+      "blob_sha": "aeabb9ae66faccb20fb4aa6ffed55b431756c732",
+      "full_text_verified": true,
+      "sha256": "5eaa7db452a72123b7dd004c75bc890276be6af023f7aca64ee902a95568220b"
+    },
+    {
+      "path": "docs/teaching/analytics/README.md",
+      "blob_sha": "9ca26ae6396c8b0f9a27c160d04966997c035e25",
+      "full_text_verified": true,
+      "sha256": "566c144172cc2c0f077859a05d256d2c3998833d37769591665a4c187e1e33fc"
+    },
+    {
+      "path": "docs/teaching/current/CHAT_ENTRY.md",
+      "blob_sha": "58c2216ec627e4c8b049b28e1208f8f087addfa8",
+      "full_text_verified": true,
+      "sha256": "4f6a46738a1aa8a0392ab50b7eef0e0a8b659cbe3e26892e157777b7a1b99606"
+    },
+    {
+      "path": "docs/teaching/current/PET_ENTRY.md",
+      "blob_sha": "9b17b698b793ab6dc7efed34821b0aebc3c267df",
+      "full_text_verified": true,
+      "sha256": "008f18aabbf5ae2ad4272892b865928d4437fe8c500e2f2f20c97d44facf2a99"
+    },
+    {
+      "path": "docs/teaching/current/ANALYTICS_ENTRY.md",
+      "blob_sha": "2139412cba1f062f8617e22f39a1cc359a4b7537",
+      "full_text_verified": true,
+      "sha256": "d677910b99703645ba32109d703d04407da6c5df67edbff325c0a07317c1602d"
+    },
+    {
+      "path": "docs/SYSTEM_ARCHITECTURE.md",
+      "blob_sha": "c5957c3e390defc56d823e8254245cc895e60f30",
+      "full_text_verified": true,
+      "sha256": "16715d5258d4066e62fa89cc4d3401bf2b8011d81feea665899d445b2ef34347"
+    },
+    {
+      "path": "docs/teaching/scheduler-instructions-v1.md",
+      "blob_sha": "aef517d13d0cf4216fb1d6229a729f89121861f4",
+      "full_text_verified": true,
+      "sha256": "95ecf80bac4834052ad4033a4ee193dbfd4c50db657e5d51be3e74bf9f5aa169"
+    },
+    {
+      "path": "docs/teaching/current/project-refactor-scope-2026-10-26-schedule.json",
+      "blob_sha": "ca1f0163187ff69916389ce9b110e3ffd4a755c6",
+      "full_text_verified": true,
+      "sha256": "ceb2cf911260080202087b3ad6cce4a8bac22dabfd30f45c9c1a9aa4be21feef"
+    }
+  ],
+  "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+  "product_modified": false,
+  "next_day": {
+    "chat": 39,
+    "pet": 39,
+    "analytics": 39
+  },
+  "last_full_comparison_unchanged": true,
+  "existing_daily_articles_modified": [],
+  "day39_article_status": "not present on observed main; corrected generating rules and actual scheduled task, not a Day39 article rewrite",
+  "schedule_evidence": "docs/teaching/current/project-refactor-scope-2026-10-26-schedule.json",
+  "validation": [
+    "JSON parsed",
+    "protected progress preserved",
+    "all22 files exact commit full text read back",
+    "required slice-local Refactor instruction removed"
+  ],
+  "product_tests_executed": false,
+  "github_write_errors": []
+}
