@@ -2143,7 +2143,12 @@
       "next_day_after": 39,
       "status": "article_delivered_pending_product_validation",
       "rules_version": "daily-tdd-minimum-v1 / github-only-v1",
-      "raw_error": null
+      "raw_error": null,
+      "readback_at": "2026-10-25T22:34:21.950Z",
+      "readback_sha256": "31fbf53bfc129ace9c04cd9142d0b56f91168b2a863e3633f3f34af732119c93",
+      "state_sync_expected_sha": "877ed638a5c9d2c0ec129b980a792b3893e0942c",
+      "state_sync_commit": "864312e1a5df88bca3bc9590c015c5f292df4537",
+      "evidence": "docs/teaching/daily/day-38/chat-readback.json"
     },
     {
       "project": "pet",
@@ -2166,7 +2171,12 @@
       "next_day_after": 39,
       "status": "article_delivered_pending_product_validation",
       "rules_version": "daily-tdd-minimum-v1 / github-only-v1",
-      "raw_error": null
+      "raw_error": null,
+      "readback_at": "2026-10-25T22:34:21.950Z",
+      "readback_sha256": "954a996d5fc8d7be2dd500c42648d26e3e9b5fdd9aff85bc0d3c89e9c6922c48",
+      "state_sync_expected_sha": "64dfc516c151bfc753d707a4ee5ca7b044382ec8",
+      "state_sync_commit": "47a38fa368bf03f5aa0290a3182dd39e39222a2c",
+      "evidence": "docs/teaching/daily/day-38/pet-readback.json"
     },
     {
       "project": "analytics",
@@ -2189,7 +2199,12 @@
       "next_day_after": 39,
       "status": "article_delivered_pending_product_validation",
       "rules_version": "daily-tdd-minimum-v1 / github-only-v1",
-      "raw_error": null
+      "raw_error": null,
+      "readback_at": "2026-10-25T22:34:21.950Z",
+      "readback_sha256": "38d66b70379b3b49b7f6de09b82c17161ad0f7ba370103d4020b0cb4f05cb290",
+      "state_sync_expected_sha": "0c64832a570f294190817f7bcc07459eb5e8f6f1",
+      "state_sync_commit": "ba333ede3e2f03e61e97cf54e122bf168a34802d",
+      "evidence": "docs/teaching/daily/day-38/analytics-readback.json"
     }
   ],
   "day15_frozen": true,
@@ -3137,7 +3152,10 @@
       "blob_sha": "85aa8cfa3f633a21d7bd11ac59d4942e6fc7a3ae",
       "sha256": "31fbf53bfc129ace9c04cd9142d0b56f91168b2a863e3633f3f34af732119c93",
       "next_day": 39,
-      "functional_acceptance": false
+      "functional_acceptance": false,
+      "evidence": "docs/teaching/daily/day-38/chat-readback.json",
+      "homepage_sync_commit": "864312e1a5df88bca3bc9590c015c5f292df4537",
+      "readback_verified": true
     },
     "pet": {
       "article_commit": "64dfc516c151bfc753d707a4ee5ca7b044382ec8",
@@ -3145,7 +3163,10 @@
       "blob_sha": "842b6a127b3738ed5e1f514801b304356114201e",
       "sha256": "954a996d5fc8d7be2dd500c42648d26e3e9b5fdd9aff85bc0d3c89e9c6922c48",
       "next_day": 39,
-      "functional_acceptance": false
+      "functional_acceptance": false,
+      "evidence": "docs/teaching/daily/day-38/pet-readback.json",
+      "homepage_sync_commit": "47a38fa368bf03f5aa0290a3182dd39e39222a2c",
+      "readback_verified": true
     },
     "analytics": {
       "article_commit": "0c64832a570f294190817f7bcc07459eb5e8f6f1",
@@ -3153,7 +3174,10 @@
       "blob_sha": "79ffd0556c6ec6eddbda7fea0afab8af48ae727e",
       "sha256": "38d66b70379b3b49b7f6de09b82c17161ad0f7ba370103d4020b0cb4f05cb290",
       "next_day": 39,
-      "functional_acceptance": false
+      "functional_acceptance": false,
+      "evidence": "docs/teaching/daily/day-38/analytics-readback.json",
+      "homepage_sync_commit": "ba333ede3e2f03e61e97cf54e122bf168a34802d",
+      "readback_verified": true
     }
   }
 }
