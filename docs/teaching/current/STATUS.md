@@ -1,8 +1,21 @@
 # 目前功能與驗證狀態
 
-[所有問題文章與後續更正](ARTICLE_CORRECTIONS.md)已整併目前閱讀版本、原始修訂及最新實測；功能修正與完成條件集中於 [原待辦](../../FUTURE_WORK.md#article-api)。文章整理不代表產品已修復。
+目前程式基準：`williechen/rust_ai_ring@5c713553daee4055738239f047d6c774fcc7a7a1`。文件比對基準：`copilot_use@532e739f1ef4e5920de300eba0f90adeeaf96187`。本輪靜態比對、Node／metadata／schema探測及同 SHA CI 已核對；以下舊來源段落是歷史證據，不覆蓋本段目前判定。
 
-最新局部實測來源：`williechen/rust_ai_ring/main@5d28e969ceb10f7ae9bb7d15212f6a0dd63c9af1`；afdbb6e 的舊盤點段落另保留原範圍。本頁只記功能與驗證現況；文章版本／交付與歷史證據另由 [逐篇狀態](ARTICLE_STATUS.md)、manifest 與 learning-state 管理。以下舊段落保留 afdbb6e 當次範圍；最新實機驗收見下節。
+[完整比對與21項差異](../../source-review/2026-10-25-full-comparison-5c713553.md) · [105個閱讀版本／111份修訂](ARTICLE_STATUS.md) · [既有後續條件](../../FUTURE_WORK.md)
+
+| 專案 | 目前來源所見 | 證據與仍缺項目 |
+|---|---|---|
+| Chat | WS tick／incoming／broadcast 已重查 Session；共用房名與唯一登入表單已接 | 同 SHA 既有 server31／UI14與真WS五情境通過，非本輪重跑；查詢成功仍留查詢中、兩段房間提示、登入回跳、作者／歷史／逐房 ACL、活動Session與撤銷競態仍缺 |
+| Pet | Store／persistence 的 set_caged／list_uncaged 及 setup 逐 ID open 已接 | 本輪source Node6通過；同SHA既有server54通過但Store重建不是原生重啟。預設資格／回籠未分離、直接關窗未保存、出籠DB失敗補償、動態漫遊、原生多窗重啟與bundle仍待驗 |
+| Analytics | 正式 exact-kind 查詢先驗人員 Session；POST ingestion 保留機器token；Leptos SSR帳密／Dashboard存在 | 同SHA既有PG42通過／1 ignored，另跑ignored1通過與HTTP證據，非本輪重跑。只有admin、角色／來源ACL、正式登入等待、SSE與互動前端未完成 |
+| CI | 同SHA七個workflow全success，Pet source／native build與上傳成功 | Persistence工作名為server PG，但實際執行analytics-persistence；Test All的server未加postgres-integration。正式server PG選取與新dist契約仍缺，CI成功不是原生GUI驗收 |
+
+本輪未更新last_full_comparison、不增加Day、不封存或結案FIFO，三案完整產品驗收仍未完成。官方最新穩定版本未重新逐套件查證，未將歷史版本表當本機或目前相容性證明。
+
+## 歷史來源與實測範圍
+
+以下保留各次來源：5d28e96的「WS仍可寫」「重啟只恢復一隻」「token可查精確統計」不能當目前程式事實；其中WS持續重驗、Pet恢復迴圈及精確查詢Session已由後續來源接通。歷史原生日誌／GUI結果不追認為本次SHA已重新驗收。
 
 ## Pet 原生驗證補充（2026-10-25）
 

@@ -1,5 +1,11 @@
 # Chat 現行教學入口
 
+<!-- comparison-5c713553:start -->
+[最新三專案程式／文章比對](../../source-review/2026-10-25-full-comparison-5c713553.md)：105個閱讀版本、111份修訂、21項差異；來源 `5c713553`，局部測試與完整驗收分開記錄。
+
+目前另見查詢成功仍留「查詢中…」及兩段房間status；refresh_result_view有WASM真caller，不能和舊helper一併當unused。
+<!-- comparison-5c713553:end -->
+
 [問題文章與後續更正總表](ARTICLE_CORRECTIONS.md)：已整併最新瀏覽器／Pet 原生證據；下方個別來源的交付／測試摘要保留其當次範圍。
 
 [Day36 r2：既有 WebSocket 會話於登出後撤銷並停止後續收發](../daily/day-36/chat-r2.md)
@@ -10,7 +16,7 @@ Server 31、UI 14 項測試與 WASM 通過；真 HTTP／WS 五情境通過。每
 
 [上一篇 Day35：建房名稱規則共用](../daily/day-35/chat.md) 已在後續來源套用並完成增量測試，但整體功能仍待驗收；[Day35 原始交付證據](../daily/day-35/chat-readback.json)。
 
-[首頁](../chat/README.md) · [功能與驗證現況](STATUS.md) · [進度](../../learning-state.json) · [manifest](manifest.json) · [r2 交付證據](../daily/day-34/chat-r2-readback.json)
+[首頁](../chat/README.md) · [功能與驗證現況](STATUS.md) · [進度](../../learning-state.json) · [manifest](manifest.json) · [登入頁合併原交付證據](../daily/day-34/chat-r2-readback.json)
 
 [前次程式重複套用核對](../../source-review/2026-10-25-duplicate-application-review.md)（來源 `3236b94e`；保留原教學與交付證據，進度不變）。
 

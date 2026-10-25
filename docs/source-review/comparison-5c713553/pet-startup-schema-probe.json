@@ -1,0 +1,30 @@
+{
+  "scope": "in-memory SQLite schema and actual list_uncaged SQL only; no native GUI proof",
+  "columns": [
+    "id",
+    "name",
+    "ai_api_key",
+    "species",
+    "age",
+    "sexy",
+    "image_path",
+    "is_default_closure",
+    "owner_id",
+    "created_at",
+    "updated_at"
+  ],
+  "query": "SELECT id\n            , name\n            , species\n        FROM pet_profile\n        WHERE owner_id='local-owner'\n            AND COALESCE(is_default_closure, 0)=0\n        ORDER BY name\n            , id",
+  "returned": [
+    [
+      "A",
+      "A",
+      "tortoise"
+    ],
+    [
+      "C",
+      "C",
+      "tortoise"
+    ]
+  ],
+  "separate_default_and_caged_fields": false
+}

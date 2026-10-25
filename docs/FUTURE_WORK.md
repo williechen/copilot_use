@@ -10,7 +10,9 @@ P9 規則已廢除。本清單中僅源自舊規則、尚未依最新需求確�
 
 ## 所有問題文章的後續修正（2026-10-25）
 
-[102 篇目前閱讀版本／104 份版本的問題與更正索引](teaching/current/ARTICLE_CORRECTIONS.md)已整併原盤點與最新實測。下表是原功能的集中修正條件，沿用原 D01–D09 及既有項目，不另建任務編號或 FIFO。狀態限各證據來源，不將需求未驗收一律稱為文章錯誤。
+目前來源 `5c713553daee4055738239f047d6c774fcc7a7a1`；[完整比對與21項差異](source-review/2026-10-25-full-comparison-5c713553.md)。本輪只更新原功能的狀態與證據，不增加Day／FIFO。
+
+[105個目前閱讀版本／111份版本的問題與更正索引](teaching/current/ARTICLE_CORRECTIONS.md)已整併原盤點與最新實測。下表是原功能的集中修正條件，沿用原 D01–D09 及既有項目，不另建任務編號或 FIFO。狀態限各證據來源，不將需求未驗收一律稱為文章錯誤。
 
 <a id="article-api"></a>
 
@@ -24,9 +26,9 @@ Chat／Analytics 舊 SSR API、兩個被取代修訂及過時斷言分開記錄�
 
 ### Chat Session／作者／房主與 ACL
 
-D05 共用認證保留；補登出撤銷既有 WS、匿名進房登入回跳、會員作者及房主／逐房授權。
+D05 共用認證保留；WS持續重驗已接並有同SHA局部證據，尚缺原子撤銷競態、匿名進房登入回跳、會員作者及房主／逐房授權。
 
-目前：實測缺口／待修正。完成條件：登出後舊 WS 不可寫入；原房間回跳；訊息作者與房主為真實 ID；未授權 HTTP／WS 拒絕。
+目前：WS重驗已接／其它需求待完成。完成條件：保留有效WS撤銷，補原房間回跳、真實作者／房主、逐房HTTP／WS授權、活動Session與原子競態驗證。
 
 <a id="chat-history"></a>
 
@@ -40,7 +42,7 @@ D05 共用認證保留；補登出撤銷既有 WS、匿名進房登入回跳、�
 
 ### Chat 房間與訊息回饋
 
-首頁雙提示已有本地候選 patch，未推送產品；MessageCreated 沒有解除等待狀態；D06 helper 測試遷移仍待。
+最新來源仍有兩段房間status；query_room成功未清除查詢中，不能把刪除成功set_status當合併完成。MessageCreated沒有解除等待狀態；D06僅遷refreshed_room_list舊測試，refresh_result_view仍有真caller。
 
 目前：本地候選／待套用；其它待修。完成條件：單一房間狀態；成功回應後送出狀態明確；保留搜尋／重試及真正 helper 回歸。
 
@@ -48,9 +50,9 @@ D05 共用認證保留；補登出撤銷既有 WS、匿名進房登入回跳、�
 
 ### Pet 多寵物／回籠／重啟
 
-三窗、狀態隔離、回籠、控制台恢復及重複開窗已局部通過；重啟仍只恢復最後選取一隻，失敗補償注入待做。
+歷史三窗與狀態隔離局部通過；最新setup已逐ID恢復全部未回籠資料。預設資格與回籠未分離、直接關生活窗只清Runtime、出籠先開窗後寫DB；真程序重啟與失敗補償仍待驗。
 
-目前：重啟實測未通過；其它局部通過。完成條件：恢復所有未回籠 ID；回籠不恢復；開窗／關窗／DB 失敗不遺失狀態或重複開窗。
+目前：恢復迴圈已接／原生與需求模型未完整驗收。完成條件：依現行USER_FLOWS區分預設資格與回籠、回籠不取消預設；直接關窗等同回籠；真程序啟動符合預設政策，開窗／關窗／DB失敗可恢復且不重複開窗。
 
 <a id="pet-roaming"></a>
 
@@ -72,9 +74,9 @@ D05 共用認證保留；補登出撤銷既有 WS、匿名進房登入回跳、�
 
 ### Analytics 正式人員查詢授權
 
-來源 token 無人員 Session 仍可讀精確統計；角色／來源 ACL、停用縮權仍屬原需求。
+正式exact-kind已改人員Session，來源token單獨查詢遭拒；POST攝取保留機器token。一般帳號、角色／來源ACL及停用縮權仍屬原需求。
 
-目前：HTTP 實測需求不符／待修。完成條件：Query／管理／SSE 經人員 Session 與權限；上報機器身分另驗；撤銷立即生效。
+目前：精確查詢Session已修正並局部驗證／角色ACL與SSE待完成。完成條件：Query／管理／SSE經人員Session與角色來源權限；上報機器身分另驗；撤銷立即生效。
 
 <a id="analytics-session"></a>
 
@@ -96,7 +98,7 @@ D05 共用認證保留；補登出撤銷既有 WS、匿名進房登入回跳、�
 
 ### CI／產物與測試覆蓋
 
-5d28e96 已直接選取兩個 persistence package；Analytics server PG targets 的獨立 CI 入口、新 dist 契約與實際安裝產物仍需核對。
+目前七個workflow成功，兩個persistence package已直接選取；Persistence的server PG工作實測命令是analytics-persistence，Test All的analytics-server未啟用postgres-integration。正式server PG targets、新dist契約與實際安裝驗收仍缺。
 
 目前：library 選取已見；完整覆蓋待驗。完成條件：同 SHA 真 PG server＋library、source＋新 dist、native build／安裝更新；不延用舊 SHA 綠燈。
 
@@ -142,9 +144,9 @@ presence／typing／reconnect／queue、streaming／RAG／MCP／Agent／Persona�
 
 ## 舊內容與現存狀態（2026-10-25）
 
-[99 篇目前閱讀版本與舊修訂逐篇狀態](teaching/current/ARTICLE_STATUS.md) 已核對原文、現存程式與歷史證據。程式已見、已被後續取代、legacy 專用與原文待勘誤分開追蹤；本次不新增完成 checkbox 或改變既有 FIFO。Pet 名稱規則、控制窗 hide/show、Analytics Leptos 帳密與 ensure_default 已見 caller，不再以原文「未套用」重教；最新 3aeab095 已見 Chat r2 去重與測試；歷史／作者／ACL 等缺口保留，當次驗收未重跑。
+[105個目前閱讀版本／111份修訂逐篇狀態](teaching/current/ARTICLE_STATUS.md) 已核對原文、現存程式與歷史證據。程式已見、已被後續取代、legacy 專用與原文待勘誤分開追蹤；本次不新增完成 checkbox 或改變既有 FIFO。Pet 名稱規則、控制窗 hide/show、Analytics Leptos 帳密與 ensure_default 已見 caller，不再以原文「未套用」重教；目前5c713553已見Chat r2登入去重、WS重驗、Pet恢復迴圈與Analytics人員Session查詢；歷史／作者／ACL 等缺口保留，當次驗收未重跑。
 
-## Pet 原生驗證補充（2026-10-25）
+## Pet 原生驗證補充（2026-10-25，歷史5d28e96）
 
 [三窗／回籠／控制台／重啟實測](source-review/2026-10-25-pet-native-5d28e96.md) 已補入使用者真實桌面操作、截圖與 DB／日誌證據：三窗具名、逐 ID 睡覺醒來、單隻回籠、控制台關閉／重開、資料保留、手動出籠及重複開窗通過局部驗證。重啟仍只恢復最後選取的一隻、漫遊固定 label 仍失敗；接回原多寵物／重啟／漫遊功能項，整體不結案。透明窗淺色背景文字對比另待調整。Pet 程式未修改；本地 runner 已加前端就緒等待，修正首次 Connection refused 的啟動順序問題。
 
@@ -156,7 +158,7 @@ presence／typing／reconnect／queue、streaming／RAG／MCP／Agent／Persona�
 
 ## 後續調整：重複與未使用程式、測試及產物（2026-10-25）
 
-本節維持原 13 項及 D01–D09 識別，最新逐項重掃來源為 `williechen/rust_ai_ring/main@afdbb6e81382e8d82095827a90c52cc3309a3e20`；每次動手仍須重新核對最新 main 與 caller。[本次重掃報告與 CI／來源一致性證據](source-review/2026-10-25-adjustments-rescan-afdbb6e.md) 為調整清單最新核對，歷史原報告與已發布文章保留。
+本節維持原 13 項及 D01–D09 識別，下表原13項逐項快照來源為 `williechen/rust_ai_ring@afdbb6e81382e8d82095827a90c52cc3309a3e20`；目前5c713553的變化見本節最新比對入口；每次動手仍須重新核對最新 main 與 caller。[本次重掃報告與 CI／來源一致性證據](source-review/2026-10-25-adjustments-rescan-afdbb6e.md) 保留為原13項的定點核對，歷史原報告與已發布文章保留。
 
 原 13 項中，7 項待清理／測試遷移／相容性盤點，2 項部分完成，2 項程式或建置已處理但驗收未完，1 項明確保留，1 項已結案。已完成的登入頁合併、房名共用、Pet 回籠 adapter、Analytics 精確查詢 adapter、編譯及文案修復不重教；未完成的權限、GUI 與 FIFO 不因此結案。
 
@@ -183,14 +185,14 @@ presence／typing／reconnect／queue、streaming／RAG／MCP／Agent／Persona�
 | Analytics 5／過時斷言（已修復） | afdbb6e 在三檔更新四處「已提交事件總數」舊文字，涵蓋 Day27 Chat／Pet 與 Day28／29 | 保留來源切換、HTTP／Session、連結、可及性、escaping 等既有斷言，未刪測試；原識別與失敗證據保留 | 完整 PG 回歸 44 passed／0 failed／1 ignored、exit 0。此三敗已結案，不重教；其它授權／產品驗收仍待辦 |
 
 
-### 本次重掃補充：接回既有功能與測試項
+### 目前來源補充：接回既有功能與測試項
 
 - Chat 作者／身分：require_member 驗證後未往 handler 傳 member ID，WebSocket 用例仍建立 AnonymousUser 訊息，建房 repository 未綁真實房主。接回既有身分／作者／ACL／共用認證項，不另建身分表。
-- Pet 漫遊仍只查固定 `pet`，實際生活窗為 `pet-{UUID}`；重啟只讀 active slot=1 開一窗，未逐筆恢復所有未回籠寵物。接回原多寵物／漫遊／重啟驗收項，先接真實生命週期，不能以固定 label 或 DB 旗標測試結案。
-- Analytics 精確查詢的來源 token／人員 Session 需求落差仍在。已編譯、CI 成功與來源隔離測試通過均不足以驗收人員權限；source_summary 的測試遷移及舊公開 API 路徑相容性仍分別核對。
+- Pet 漫遊仍只查固定 `pet`，實際生活窗為 `pet-{UUID}`；目前setup已逐筆讀uncaged並開窗；預設資格／回籠模型、直接關窗持久化及失敗補償仍未完整。接回原多寵物／漫遊／重啟驗收項，先接真實生命週期，不能以固定 label 或 DB 旗標測試結案。
+- Analytics精確查詢已改人員Session；角色／來源ACL及正式登入政策需求落差仍在。已編譯、CI 成功與來源隔離測試通過均不足以驗收人員權限；source_summary 的測試遷移及舊公開 API 路徑相容性仍分別核對。
 - Pet set_caged 與 Analytics 精確查詢已有 persistence caller，不再當空庫；其餘 SQL 搬移只按實際切片處理。initialize fixture／InMemoryDeduplicator 契約測試保留用途。
 - Chat persisted_message_event 未見 caller，Pet succeeded_event 只有測試 caller；接回既有真實事件／Analytics／Outbox 項，不因無 caller 就當垃圾刪除，也不因有 DTO 宣稱已上報。
-- CI 覆蓋：test.yml 只選 pet-server，persistence.yml 只選 analytics-server，未直接執行兩個 persistence library 自身測試。後續各自加入 `-p pet-persistence`／`-p analytics-persistence`，沿既有命令與隔離 DB 執行；metadata／dependency feature 不等於執行 dependency tests。
+- CI覆蓋：兩個persistence library自身測試已直接選取；analytics-server PG feature未由test.yml／persistence.yml選取，須另補正式server PG命令。metadata／dependency feature不等於執行dependency tests。
 - Pet Node workflow 仍只讀 source HTML；CI build 後需同測新 dist，接回 D02，不維護平行 bridge 邏輯。
 
 ### 每項調整的最小交付

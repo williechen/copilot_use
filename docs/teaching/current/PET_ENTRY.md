@@ -1,10 +1,16 @@
 # Pet 現行教學入口
 
+<!-- comparison-5c713553:start -->
+[最新三專案程式／文章比對](../../source-review/2026-10-25-full-comparison-5c713553.md)：105個閱讀版本、111份修訂、21項差異；來源 `5c713553`，局部測試與完整驗收分開記錄。
+
+啟動已逐ID恢復未回籠資料；預設資格／回籠分離、直接關窗保存、出籠DB失敗補償及動態漫遊仍待處理。
+<!-- comparison-5c713553:end -->
+
 [問題文章與後續更正總表](ARTICLE_CORRECTIONS.md)：已整併最新瀏覽器／Pet 原生證據；下方個別來源的交付／測試摘要保留其當次範圍。
 
 [Day36 r3：重啟恢復全部未回籠寵物，而非只恢復最後選取者](../daily/day-36/pet-r3.md)
 
-**程式已存在／相關實測通過／完整產品未驗收**；實測來源 rust_ai_ring `5c713553daee4055738239f047d6c774fcc7a7a1`，原始教學基準 `61ed5930`。下一篇 **Day37**；[r2 交付全文讀回](../daily/day-36/pet-r3-readback.json)。
+**程式已存在／相關實測通過／完整產品未驗收**；實測來源 rust_ai_ring `5c713553daee4055738239f047d6c774fcc7a7a1`，原始教學基準 `61ed5930`。下一篇 **Day37**；[r3 交付全文讀回](../daily/day-36/pet-r3-readback.json)。
 
 Server 54、Day36 adapter／Store 測試與 WASM 通過。Store 重建不是原生程序重啟；Tauri 多窗重啟及建窗失敗注入待驗。 [完整實測報告](../../source-review/2026-10-25-day36-verification-5c713553.md)。原版文章及交付證據均保留。
 
@@ -20,4 +26,4 @@ Server 54、Day36 adapter／Store 測試與 WASM 通過。Store 重建不是原�
 
 [全部文章逐篇核對](ARTICLE_STATUS.md) · [機器可讀狀態](article-states.json)
 
-此案現行來源：pet-application 名稱規則保留；pet-persistence::set_caged 已接 PetStore／Tauri 真實 caller，其它 SQL 仍在 server。後端 global runtime／legacy IPC 仍待清理。 教學正文與原 commit/blob/SHA256 保留；局部測試不代表整產品功能驗收。
+此案現行來源：pet-application 名稱規則保留；pet-persistence::set_caged／list_uncaged已接PetStore／Tauri與啟動caller，其它 SQL 仍在 server。後端 global runtime／legacy IPC 仍待清理。 教學正文與原 commit/blob/SHA256 保留；局部測試不代表整產品功能驗收。

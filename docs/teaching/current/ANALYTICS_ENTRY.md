@@ -1,5 +1,11 @@
 # Analytics 現行教學入口
 
+<!-- comparison-5c713553:start -->
+[最新三專案程式／文章比對](../../source-review/2026-10-25-full-comparison-5c713553.md)：105個閱讀版本、111份修訂、21項差異；來源 `5c713553`，局部測試與完整驗收分開記錄。
+
+精確查詢Session修正已在來源；一般帳號／角色／來源ACL仍缺。Persistence雖名為server PG，實際只測analytics-persistence，server PG feature仍需獨立選取。
+<!-- comparison-5c713553:end -->
+
 [問題文章與後續更正總表](ARTICLE_CORRECTIONS.md)：已整併最新瀏覽器／Pet 原生證據；下方個別來源的交付／測試摘要保留其當次範圍。
 
 [Day36 r2：精確事件統計 API 改用人員 Session，不再接受來源 token 查詢](../daily/day-36/analytics-r2.md)
@@ -22,4 +28,4 @@ PostgreSQL 全套 42 項通過、原略過項另跑 1 項通過；真 HTTP Sessi
 
 [全部文章逐篇核對](ARTICLE_STATUS.md) · [機器可讀狀態](article-states.json)
 
-此案現行來源：精確查詢 persistence／Dashboard／路由已接通；bb95a60 修編譯、afdbb6e 修四處文字斷言，PostgreSQL 回歸通過。原 pg_store 公開路徑變更與查詢授權契約仍追蹤；r1／r2 正文及原 commit/blob/SHA256 保留，完整功能未驗收。
+此案現行來源：精確查詢 persistence／Dashboard／路由已接通；bb95a60 修編譯、afdbb6e 修四處文字斷言，PostgreSQL 回歸通過。原pg_store公開路徑相容性、角色／來源ACL與server PG CI仍追蹤；精確查詢人員Session已接；r1／r2 正文及原 commit/blob/SHA256 保留，完整功能未驗收。

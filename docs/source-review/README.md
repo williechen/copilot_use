@@ -1,5 +1,9 @@
 # 靜態核對證據
 
+<!-- comparison-5c713553:start -->
+[最新三專案程式／文章比對](2026-10-25-full-comparison-5c713553.md)：105個閱讀版本、111份修訂、21項差異；來源 `5c713553`，局部測試與完整驗收分開記錄。
+<!-- comparison-5c713553:end -->
+
 > 歷史雙庫靜態比較，保留原文、固定 SHA 與結果；其中「成品／參考」是當時命名，不是現行儲存庫分工。現行主體只為 rust_ai_chat，分工見 [共用規則](../COMMON_LEARNING_RULES.md)。本次未重新執行全量比較。
 
 核對範圍及固定來源見 [完整報告](../FULL_SOURCE_REVIEW.md)。可閱讀的介面、流程及模組映射在此目錄；[完整證據包](evidence.zip) 包含全部 AST、反向名稱引用、tracked snapshot、IPC、Cargo／SQL／Proto／CI／scripts、原核對工具與原驗證结果，不含編譯產物或秘密。

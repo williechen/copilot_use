@@ -1,5 +1,9 @@
 # 每日新文章
 
+<!-- comparison-5c713553:start -->
+[最新三專案程式／文章比對](../../source-review/2026-10-25-full-comparison-5c713553.md)：105個閱讀版本、111份修訂、21項差異；來源 `5c713553`，局部測試與完整驗收分開記錄。
+<!-- comparison-5c713553:end -->
+
 [問題文章與後續更正總表](../current/ARTICLE_CORRECTIONS.md)：已整併最新瀏覽器／Pet 原生證據；下方個別來源的交付／測試摘要保留其當次範圍。
 
 <!-- duplicate-review:start -->
