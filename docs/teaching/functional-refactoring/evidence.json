@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-26",
+  "timezone": "Asia/Taipei",
+  "documentation_baseline_sha": "c67044f59a161fb2d131771c0db3d09cd80e6e05",
+  "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+  "source_files": [
+    {
+      "path": "chat_apps/chat_ui/src/lib.rs",
+      "blob_sha": "c27a771d456853a2e71e29e5d7228328947c44f9"
+    },
+    {
+      "path": "pet_apps/pet_server/src/pet_windows.rs",
+      "blob_sha": "4c4aa4c79cbb761abc144d03f9a5e97f86ee1f6d"
+    },
+    {
+      "path": "pet_apps/pet_persistence/src/lib.rs",
+      "blob_sha": "7d4719bb6b726719f2fa576637f0045b6215d10e"
+    },
+    {
+      "path": "analytics_apps/analytics_server/tests/day37_query_cookie.rs",
+      "blob_sha": "a7b47ca97115cb872b16aaddfb269aa3901297d2"
+    },
+    {
+      "path": "analytics_apps/analytics_server/tests/day26_session_contract.rs",
+      "blob_sha": "938198c9dc84552b5d2e38f06b1099b480a53650"
+    }
+  ],
+  "canonical_policy": "test-refactor-v1 in docs/COMMON_LEARNING_RULES.md",
+  "coverage_groups": 12,
+  "day37_rebuilt": false,
+  "day37_revision_created": false,
+  "new_lesson_delivered": false,
+  "product_modified": false,
+  "product_tests_executed": false,
+  "next_day": {
+    "chat": 38,
+    "pet": 38,
+    "analytics": 38
+  },
+  "state_blob_preserved": "9fb7fda0b4c82be4a55b2b886be09f74907d7de2",
+  "manifest_blob_preserved": "326a4ed763d89eb8f8eebbfe56dfb4fcdf740dc3",
+  "fifo_unchanged": true,
+  "last_full_comparison_unchanged": true,
+  "scope": "publish approved local functional/test organization and canonical rules; no product implementation or acceptance"
+}

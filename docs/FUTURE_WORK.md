@@ -1,5 +1,15 @@
 # 未來前進項目
 
+## 原測試整理項補充（2026-10-26）
+
+沿原D06、Pet生命週期與Analytics正式Router／fixture項，將測試重構納入功能切片，不建立平行待辦。完整規則見[共用規則test-refactor-v1](COMMON_LEARNING_RULES.md)，[12組對照](teaching/functional-refactoring/test-coverage-map.csv)列具體保留／合併／遷移判斷。
+
+- Chat：兩份filter測試與舊刷新helper的重疊斷言整併到正式路徑；保留搜尋空白／同名不同ID／失敗快照等條件，Signal與DOM各負責任。
+- Pet：用例抽出時同步遷移純補償流程測試；真SQL、共用鎖接線、原生視窗與正式IPC覆蓋保留，不把它們全當同一組fake測試。
+- Analytics：兩正式查詢路由的Cookie矩陣參數化；首次登入restricted／DB契約保留。Fixture只共用穩定準備，bootstrap::initialize仍有真實測試用途。
+
+完成條件是完整測試與caller／Cargo／CI接線、有效斷言保留及相應實測；現階段只有文章與靜態對照，尚未搬移／刪除／合併任何產品測試，不結案原項目。
+
 ## 原CI覆蓋項補充：依層與專案拆開驗證（2026-10-26）
 
 使用者確認Pet原生步驟阻擋Analytics暴露CI責任混合；接回原CI覆蓋／必要功能分層項，不新增平行待辦或FIFO。[來源分析與矩陣](source-review/2026-10-26-ci-layer-boundaries.md)。

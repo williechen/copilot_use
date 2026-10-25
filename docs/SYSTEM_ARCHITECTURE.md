@@ -1,5 +1,19 @@
 # 系統架構與現行程式入口
 
+## 測試的分層責任（2026-10-26）
+
+測試是各層契約的驗證，需與功能程式一起重構。測試去重／遷移規則只維護於[共用規則](COMMON_LEARNING_RULES.md)的test-refactor-v1，不在各入口複製一份政策。
+
+| 責任 | 主要驗證 | 不能取代 |
+| --- | --- | --- |
+| Domain | 業務不變條件與邊界值 | IO、HTTP或畫面 |
+| Application | 真用例的流程順序、授權決策、補償；以Port fake隔離IO | SQLx／原生實作正確性 |
+| Persistence | 真SQL、資料隔離、交易與錯誤 | 正式caller接線 |
+| Delivery／native | 正式Router／IPC、協定與錯誤映射、原生契約 | 用例所有細節的第二份fake測試 |
+| UI | 狀態、元件與可見互動；必要瀏覽器驗證 | 單測Signal不能冒稱DOM驗收 |
+
+同一情境跨層有不同失敗模式時保留；同層同入口的相同斷言才整併。Fixture按責任共用準備，不能讓純內層依賴server fixture。本次更新規則，沒有搬移產品測試。
+
 ## CI與程式邊界的對應
 
 2026-10-26補充：job以驗證責任拆分，不能以一個Persistence名稱覆蓋所有server與原生測試。[精確來源與建議矩陣](source-review/2026-10-26-ci-layer-boundaries.md)。
