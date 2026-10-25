@@ -1840,6 +1840,31 @@
       "report": "docs/source-review/2026-10-25-day36-verification-5c713553.md",
       "evidence": "docs/source-review/day36-verification-5c713553/evidence.zip",
       "raw_error": null
+    },
+    {
+      "project": "pet",
+      "day": 36,
+      "revision": "r3",
+      "path": "docs/teaching/daily/day-36/pet-r3.md",
+      "old_path": "docs/teaching/daily/day-36/pet-r2.md",
+      "parent": "4571fa29e38e139b26a70ed6a0252ae4be2f7bc2",
+      "article_commit": "4218e74ac08ae05ba5e26d74e4630fb7d7c0e075",
+      "blob_sha": "5df329b38c9d63dd2ed9ddaa075e8b51a2402b7d",
+      "sha256": "b84c59941aba6374a7db6ffa3f543a6f43b0ed0514d70b26a9f9560c3a7f1359",
+      "full_text_verified": true,
+      "readback_at": "2026-10-25T08:15:18.489Z",
+      "source_sha": "5c713553daee4055738239f047d6c774fcc7a7a1",
+      "teaching_baseline_sha": "61ed5930bd9ff38e0d5822eea2983121001d8422",
+      "main_application": "already present in source main; not applied by verification agent",
+      "tests": "executed; see linked verification report",
+      "functional_acceptance": false,
+      "archived": false,
+      "next_day_before": 37,
+      "next_day_after": 37,
+      "status": "article_delivered_code_present_tests_passed_acceptance_pending",
+      "report": "docs/source-review/2026-10-25-day36-verification-5c713553.md",
+      "evidence": "docs/source-review/day36-verification-5c713553/evidence.zip",
+      "raw_error": null
     }
   ],
   "day15_frozen": true,
@@ -2023,7 +2048,7 @@
     "frozen_body_sha256": "88fa706c5a3f7f3d6255957b8ed317d64cb1a6c57f1cf6638bfb838d5e6b282f",
     "frozen_notion_snapshot": "docs/teaching/archive/day-22/notion/pet.md"
   },
-  "latest_pet_publication": "docs/teaching/daily/day-36/pet-r2-readback.json",
+  "latest_pet_publication": "docs/teaching/daily/day-36/pet-r3-readback.json",
   "previous_day22_analytics_article": {
     "project": "analytics",
     "day": 22,
@@ -2621,6 +2646,13 @@
         "path": "docs/teaching/daily/day-36/chat-r2.md",
         "article_commit": "1f573cdea8f67e8fbaabaf5fb60b10c3cb85a733",
         "summary": "Server 31、UI 14 項測試與 WASM 通過；真 HTTP／WS 五情境通過。每秒重查不等於硬性 ≤1 秒；原子撤銷競態、ACL／歷史及瀏覽器待驗。",
+        "functional_acceptance": false
+      },
+      "pet": {
+        "revision": "r3",
+        "path": "docs/teaching/daily/day-36/pet-r3.md",
+        "article_commit": "4218e74ac08ae05ba5e26d74e4630fb7d7c0e075",
+        "summary": "Server 54、Day36 adapter／Store 測試與 WASM 通過。Store 重建不是原生程序重啟；Tauri 多窗重啟及建窗失敗注入待驗。",
         "functional_acceptance": false
       }
     }

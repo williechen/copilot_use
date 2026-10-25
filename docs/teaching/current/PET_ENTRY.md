@@ -2,9 +2,11 @@
 
 [問題文章與後續更正總表](ARTICLE_CORRECTIONS.md)：已整併最新瀏覽器／Pet 原生證據；下方個別來源的交付／測試摘要保留其當次範圍。
 
-[Day36 r2：重啟恢復全部未回籠寵物，而非只恢復最後選取者](../daily/day-36/pet-r2.md)
+[Day36 r3：重啟恢復全部未回籠寵物，而非只恢復最後選取者](../daily/day-36/pet-r3.md)
 
-**文章已交付／程式未套用／新測試未執行／未驗收**；來源 rust_ai_ring `61ed5930bd9ff38e0d5822eea2983121001d8422`。下一篇 **Day37**；[r2 交付全文讀回](../daily/day-36/pet-r2-readback.json)。
+**程式已存在／相關實測通過／完整產品未驗收**；實測來源 rust_ai_ring `5c713553daee4055738239f047d6c774fcc7a7a1`，原始教學基準 `61ed5930`。下一篇 **Day37**；[r2 交付全文讀回](../daily/day-36/pet-r3-readback.json)。
+
+Server 54、Day36 adapter／Store 測試與 WASM 通過。Store 重建不是原生程序重啟；Tauri 多窗重啟及建窗失敗注入待驗。 [完整實測報告](../../source-review/2026-10-25-day36-verification-5c713553.md)。原版文章及交付證據均保留。
 
 [Day36 r1 原始文章](../daily/day-36/pet.md)（保留原 commit/blob/SHA256，r2 只修正來源報告相對路徑） · [上一篇 Day35：逐寵物回籠狀態](../daily/day-35/pet.md) 已在後續來源套用並完成增量測試，真原生重啟與補償仍待驗；[Day35 原始交付證據](../daily/day-35/pet-readback.json)。
 

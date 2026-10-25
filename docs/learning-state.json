@@ -487,8 +487,9 @@
       },
       "pet": {
         "day": 36,
-        "path": "docs/teaching/daily/day-36/pet-r2.md",
-        "article_commit": "f3c25d9ae6b9e61963a238940ef387301cde1f9c"
+        "revision": "r3",
+        "path": "docs/teaching/daily/day-36/pet-r3.md",
+        "article_commit": "4218e74ac08ae05ba5e26d74e4630fb7d7c0e075"
       },
       "analytics": {
         "day": 36,
@@ -3910,7 +3911,7 @@
       "scope": "incremental verification only"
     }
   },
-  "latest_pet_publication": "docs/teaching/daily/day-36/pet-r2-readback.json",
+  "latest_pet_publication": "docs/teaching/daily/day-36/pet-r3-readback.json",
   "day35_analytics_r1_delivery": {
     "repository": "williechen/copilot_use",
     "branch": "main",
@@ -4170,41 +4171,29 @@
     "raw_error": null
   },
   "day36_pet_delivery": {
-    "repository": "williechen/copilot_use",
-    "branch": "main",
     "project": "pet",
     "day": 36,
-    "revision": "r2",
-    "title": "重啟恢復全部未回籠寵物，而非只恢復最後選取者",
-    "path": "docs/teaching/daily/day-36/pet-r2.md",
-    "parent": "5fa26f6a3900509a7891feb1032ce37c2fde8ea0",
-    "article_commit": "f3c25d9ae6b9e61963a238940ef387301cde1f9c",
-    "blob_sha": "b59f394ca6727ec3261347f60da58d736a1bbf68",
-    "sha256": "d14b2cf73ddc5873712498c6378559e344772f767abd6cf549e743f4886e8872",
+    "revision": "r3",
+    "path": "docs/teaching/daily/day-36/pet-r3.md",
+    "old_path": "docs/teaching/daily/day-36/pet-r2.md",
+    "parent": "4571fa29e38e139b26a70ed6a0252ae4be2f7bc2",
+    "article_commit": "4218e74ac08ae05ba5e26d74e4630fb7d7c0e075",
+    "blob_sha": "5df329b38c9d63dd2ed9ddaa075e8b51a2402b7d",
+    "sha256": "b84c59941aba6374a7db6ffa3f543a6f43b0ed0514d70b26a9f9560c3a7f1359",
     "full_text_verified": true,
-    "readback_at": "2026-10-25T06:17:33.222Z",
-    "source_repository": "williechen/rust_ai_ring",
-    "source_sha": "61ed5930bd9ff38e0d5822eea2983121001d8422",
-    "rules_sha": "3b5d00291cdd44e1fa039aad4b10d8f82b59982d",
-    "rules_version": "daily-tdd-minimum-v1+github-only-v1",
-    "status": "article_delivered_unapplied_unverified",
-    "main_application": "not applied",
-    "tests": "not run",
+    "readback_at": "2026-10-25T08:15:18.489Z",
+    "source_sha": "5c713553daee4055738239f047d6c774fcc7a7a1",
+    "teaching_baseline_sha": "61ed5930bd9ff38e0d5822eea2983121001d8422",
+    "main_application": "already present in source main; not applied by verification agent",
+    "tests": "executed; see linked verification report",
     "functional_acceptance": false,
     "archived": false,
-    "next_day_before": 36,
+    "next_day_before": 37,
     "next_day_after": 37,
-    "raw_error": null,
-    "remaining_gaps": "真原生多窗重啟、失敗補償注入、漫遊動態 label、單幀單圖與 bundle 驗收待做",
-    "sync_expected_parent_sha": "f3c25d9ae6b9e61963a238940ef387301cde1f9c",
-    "sync_status": "pending",
-    "supersedes": {
-      "path": "docs/teaching/daily/day-36/pet.md",
-      "article_commit": "f02f1d3c3ecd55f59ba661a458a2e9661e34d011",
-      "blob_sha": "76d3933ae4a501b0da130b78473580f569b85a92",
-      "sha256": "43299125496c16bb3cdff4dc6ca6bd1a7fd93d282a8ae7cb98a8df75066c229c",
-      "reason": "r1 source-review relative link resolved under wrong directory; original immutable"
-    }
+    "status": "article_delivered_code_present_tests_passed_acceptance_pending",
+    "report": "docs/source-review/2026-10-25-day36-verification-5c713553.md",
+    "evidence": "docs/source-review/day36-verification-5c713553/evidence.zip",
+    "raw_error": null
   },
   "day36_analytics_delivery": {
     "repository": "williechen/copilot_use",
@@ -4311,7 +4300,51 @@
         "article_commit": "1f573cdea8f67e8fbaabaf5fb60b10c3cb85a733",
         "summary": "Server 31、UI 14 項測試與 WASM 通過；真 HTTP／WS 五情境通過。每秒重查不等於硬性 ≤1 秒；原子撤銷競態、ACL／歷史及瀏覽器待驗。",
         "functional_acceptance": false
+      },
+      "pet": {
+        "revision": "r3",
+        "path": "docs/teaching/daily/day-36/pet-r3.md",
+        "article_commit": "4218e74ac08ae05ba5e26d74e4630fb7d7c0e075",
+        "summary": "Server 54、Day36 adapter／Store 測試與 WASM 通過。Store 重建不是原生程序重啟；Tauri 多窗重啟及建窗失敗注入待驗。",
+        "functional_acceptance": false
       }
+    }
+  },
+  "day36_pet_r2_delivery": {
+    "repository": "williechen/copilot_use",
+    "branch": "main",
+    "project": "pet",
+    "day": 36,
+    "revision": "r2",
+    "title": "重啟恢復全部未回籠寵物，而非只恢復最後選取者",
+    "path": "docs/teaching/daily/day-36/pet-r2.md",
+    "parent": "5fa26f6a3900509a7891feb1032ce37c2fde8ea0",
+    "article_commit": "f3c25d9ae6b9e61963a238940ef387301cde1f9c",
+    "blob_sha": "b59f394ca6727ec3261347f60da58d736a1bbf68",
+    "sha256": "d14b2cf73ddc5873712498c6378559e344772f767abd6cf549e743f4886e8872",
+    "full_text_verified": true,
+    "readback_at": "2026-10-25T06:17:33.222Z",
+    "source_repository": "williechen/rust_ai_ring",
+    "source_sha": "61ed5930bd9ff38e0d5822eea2983121001d8422",
+    "rules_sha": "3b5d00291cdd44e1fa039aad4b10d8f82b59982d",
+    "rules_version": "daily-tdd-minimum-v1+github-only-v1",
+    "status": "article_delivered_unapplied_unverified",
+    "main_application": "not applied",
+    "tests": "not run",
+    "functional_acceptance": false,
+    "archived": false,
+    "next_day_before": 36,
+    "next_day_after": 37,
+    "raw_error": null,
+    "remaining_gaps": "真原生多窗重啟、失敗補償注入、漫遊動態 label、單幀單圖與 bundle 驗收待做",
+    "sync_expected_parent_sha": "f3c25d9ae6b9e61963a238940ef387301cde1f9c",
+    "sync_status": "pending",
+    "supersedes": {
+      "path": "docs/teaching/daily/day-36/pet.md",
+      "article_commit": "f02f1d3c3ecd55f59ba661a458a2e9661e34d011",
+      "blob_sha": "76d3933ae4a501b0da130b78473580f569b85a92",
+      "sha256": "43299125496c16bb3cdff4dc6ca6bd1a7fd93d282a8ae7cb98a8df75066c229c",
+      "reason": "r1 source-review relative link resolved under wrong directory; original immutable"
     }
   }
 }
