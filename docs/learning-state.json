@@ -57,7 +57,7 @@
   "fixed_tag_sha": "9bcae7c5d139f75ed08b4daffece602a71fdab34",
   "next_day": {
     "chat": 37,
-    "pet": 36,
+    "pet": 37,
     "analytics": 36
   },
   "last_full_comparison": "2026-10-16T22:47:14.399027+08:00",
@@ -485,9 +485,9 @@
         "article_commit": "79c785f2bc42a64e34c986315c7a954d954a4abc"
       },
       "pet": {
-        "day": 31,
-        "path": "docs/teaching/daily/day-31/pet.md",
-        "article_commit": "e1f2dee87de9e161ab1001377ad1916f1aefcf87"
+        "day": 36,
+        "path": "docs/teaching/daily/day-36/pet.md",
+        "article_commit": "f02f1d3c3ecd55f59ba661a458a2e9661e34d011"
       },
       "analytics": {
         "day": 31,
@@ -3909,7 +3909,7 @@
       "scope": "incremental verification only"
     }
   },
-  "latest_pet_publication": "docs/teaching/daily/day-35/pet-readback.json",
+  "latest_pet_publication": "docs/teaching/daily/day-36/pet-readback.json",
   "day35_analytics_r1_delivery": {
     "repository": "williechen/copilot_use",
     "branch": "main",
@@ -4171,6 +4171,36 @@
     "raw_error": null,
     "remaining_gaps": "原子撤銷與訊息寫入競態、選房登入回跳、逐房 ACL、作者／歷史、瀏覽器與 CI 待驗",
     "sync_expected_parent_sha": "79c785f2bc42a64e34c986315c7a954d954a4abc",
+    "sync_status": "pending"
+  },
+  "day36_pet_delivery": {
+    "repository": "williechen/copilot_use",
+    "branch": "main",
+    "project": "pet",
+    "day": 36,
+    "revision": "r1",
+    "title": "重啟恢復全部未回籠寵物，而非只恢復最後選取者",
+    "path": "docs/teaching/daily/day-36/pet.md",
+    "parent": "5782d5acd5b4dc2a9e0100ec1b9c483554731fa0",
+    "article_commit": "f02f1d3c3ecd55f59ba661a458a2e9661e34d011",
+    "blob_sha": "76d3933ae4a501b0da130b78473580f569b85a92",
+    "sha256": "43299125496c16bb3cdff4dc6ca6bd1a7fd93d282a8ae7cb98a8df75066c229c",
+    "full_text_verified": true,
+    "readback_at": "2026-10-25T06:14:41.648Z",
+    "source_repository": "williechen/rust_ai_ring",
+    "source_sha": "61ed5930bd9ff38e0d5822eea2983121001d8422",
+    "rules_sha": "3b5d00291cdd44e1fa039aad4b10d8f82b59982d",
+    "rules_version": "daily-tdd-minimum-v1+github-only-v1",
+    "status": "article_delivered_unapplied_unverified",
+    "main_application": "not applied",
+    "tests": "not run",
+    "functional_acceptance": false,
+    "archived": false,
+    "next_day_before": 36,
+    "next_day_after": 37,
+    "raw_error": null,
+    "remaining_gaps": "真原生多窗重啟、失敗補償注入、漫遊動態 label、單幀單圖與 bundle 驗收待做",
+    "sync_expected_parent_sha": "f02f1d3c3ecd55f59ba661a458a2e9661e34d011",
     "sync_status": "pending"
   }
 }

@@ -16,7 +16,7 @@
 | 專案 | 最新文章 | 下一篇 | 狀態 |
 | --- | --- | --- | --- |
 | Chat | [Day36：既有 WebSocket 會話於登出後撤銷並停止後續收發](../daily/day-36/chat.md) | Day37 | 教學已交付／程式未套用／未測試／未驗收 |
-| Pet | [Day35：逐寵物回籠狀態搬入 pet-persistence，接回 Tauri 真實呼叫鏈](../daily/day-35/pet.md) | Day36 | e753c36 已套用；增量測試通過／GUI 待驗 |
+| Pet | [Day36：重啟恢復全部未回籠寵物，而非只恢復最後選取者](../daily/day-36/pet.md) | Day37 | 教學已交付／程式未套用／未測試／未驗收 |
 | Analytics | [Day35 r2：事件類型精確統計 SQLx Adapter 與正式路由一併接通](../daily/day-35/analytics-r2.md) | Day36 | afdbb6e PG 回歸通過；授權契約／完整驗收待做 |
 
 文案修復與最新 PG 結果見 [afdbb6e 驗證](https://github.com/williechen/copilot_use/blob/main/docs/source-review/2026-10-25-assertions-afdbb6e.md)；前次編譯修復見 [bb95a60 驗證](https://github.com/williechen/copilot_use/blob/main/docs/source-review/2026-10-25-compile-bb95a60.md)；前次套用／測試見 [e753c36 更新驗證](https://github.com/williechen/copilot_use/blob/main/docs/source-review/2026-10-25-update-e753c36.md)；原 Day35 正文與交付證據保留，完整產品驗收尚未完成。
