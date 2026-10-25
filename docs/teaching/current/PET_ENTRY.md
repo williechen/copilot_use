@@ -1,5 +1,7 @@
 # Pet 現行教學入口
 
+**2026-10-25 Pet 錯誤回報：尚未修復／未驗收。** 最新來源 `744a75fc` 的漫遊仍查固定 pet，與 pet-UUID 生活窗不符；WebKit 載入錯誤另列原因待查。[原始錯誤與來源核對](../../source-review/2026-10-25-pet-roaming-webkit-feedback.md)。本來源已見 Day37 出籠補償／協調函式；舊交付摘要限原時點，不代表目前完全未套用。本次未做產品修改或 GUI 驗收，進度不變。
+
 [Day37 r2：先保存再開窗，失敗回復原標記](../daily/day-37/pet-r2.md)
 
 **教學已交付／程式未套用／新測試未執行／產品未驗收**；下一篇 **Day38**。[精確 commit 全文讀回、blob 與 SHA256](../daily/day-37/pet-r2-readback.json)。程式來源 `5c713553daee4055738239f047d6c774fcc7a7a1`；以下保留前次來源／驗證摘要，不能當成新 Green 成功。
