@@ -58,7 +58,7 @@
   "next_day": {
     "chat": 39,
     "pet": 39,
-    "analytics": 38
+    "analytics": 39
   },
   "last_full_comparison": "2026-10-16T22:47:14.399027+08:00",
   "next_full_comparison": "2026-10-24T00:00:00+08:00",
@@ -510,10 +510,10 @@
         "article_commit": "64dfc516c151bfc753d707a4ee5ca7b044382ec8"
       },
       "analytics": {
-        "day": 37,
-        "revision": "r3",
-        "path": "docs/teaching/daily/day-37/analytics-r3.md",
-        "article_commit": "3b01712fba0ac9d39ac0b8ad7f20da0c3e469100"
+        "day": 38,
+        "revision": "r1",
+        "path": "docs/teaching/daily/day-38/analytics.md",
+        "article_commit": "0c64832a570f294190817f7bcc07459eb5e8f6f1"
       }
     },
     "legacy_notion_fields_scope": "Preserved historical Notion publication snapshot; current progress is next_day and latest_github_publication."
@@ -4688,6 +4688,22 @@
     "article_commit": "64dfc516c151bfc753d707a4ee5ca7b044382ec8",
     "blob_sha": "842b6a127b3738ed5e1f514801b304356114201e",
     "sha256": "954a996d5fc8d7be2dd500c42648d26e3e9b5fdd9aff85bc0d3c89e9c6922c48",
+    "full_text_verified": true,
+    "red_executed": false,
+    "green_executed": false,
+    "main_application": "not applied",
+    "functional_acceptance": false,
+    "next_day_before": 38,
+    "next_day_after": 39,
+    "status": "article_delivered_pending_product_validation"
+  },
+  "day38_analytics_delivery": {
+    "day": 38,
+    "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+    "article_path": "docs/teaching/daily/day-38/analytics.md",
+    "article_commit": "0c64832a570f294190817f7bcc07459eb5e8f6f1",
+    "blob_sha": "79ffd0556c6ec6eddbda7fea0afab8af48ae727e",
+    "sha256": "38d66b70379b3b49b7f6de09b82c17161ad0f7ba370103d4020b0cb4f05cb290",
     "full_text_verified": true,
     "red_executed": false,
     "green_executed": false,

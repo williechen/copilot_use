@@ -1,5 +1,10 @@
 # Analytics 現行教學入口
 
+## 最新交付（2026-10-26）
+
+[Analytics Day38｜機器上報拒絕重複 Authorization Header，PostgreSQL CI 獨立](../daily/day-38/analytics.md) — **教學已交付／程式未套用／Red-Green、PostgreSQL、CI 未執行／產品未驗收**；來源 `9b89656f964b99e0cb89ba421855704a35c5ecb9`；最新 Day38、下一篇 **Day39**。下方 Day37 驗證及舊 Day38 預告保留當時範圍，不代表本篇已測。
+
+
 **2026-10-26 功能與測試整理已更新。** [三案整理與12組覆蓋對照](../functional-refactoring/README.md)說明同層重複整併、跨層契約保留及CI責任。Day37不重建、不新增修訂；本次只更新文件，完整新Green與產品測試重構仍待完成，進度不變。
 
 **2026-10-26 現行摘要已核對。** 最新程式來源 `9b89656`（upgrade）；新CI快照為1成功／6執行中，尚未全綠。舊648b903為六成功／Persistence失敗，已配置的Analytics PostgreSQL步驟被略過。當日官方版本、manifest／lock與本機工具差異已補查；未升級產品、未重跑測試、未完成整體驗收。[版本與摘要核對](../../source-review/2026-10-26-versions-and-summary-refresh.md)。
@@ -8,7 +13,7 @@
 
 [Day37 r3：驗證更新](../daily/day-37/analytics-r3.md)
 
-**程式已見／PG45項加略過另1項通過／CI受阻／完整驗收待完成**；來源 `648b90323af7b381d6a79dc2fd08a53b63173a43`，下一篇仍為 **Day38**。[精確交付讀回](../daily/day-37/analytics-r3-readback.json) · [本次完整驗證／錯誤與恢復](../../source-review/2026-10-25-day37-verification-648b903.md)。下方先前來源、交付及「未套用／未測試」摘要僅保留其當時範圍，不代表目前狀態。
+**程式已見／PG45項加略過另1項通過／CI受阻／完整驗收待完成**；來源 `648b90323af7b381d6a79dc2fd08a53b63173a43`，當時下一篇為 **Day38**（現行 Day39）。[精確交付讀回](../daily/day-37/analytics-r3-readback.json) · [本次完整驗證／錯誤與恢復](../../source-review/2026-10-25-day37-verification-648b903.md)。下方先前來源、交付及「未套用／未測試」摘要僅保留其當時範圍，不代表目前狀態。
 
 [Day37 r2：拒絕歧義 Session Cookie，兩種查詢共用 Guard](../daily/day-37/analytics-r2.md)
 

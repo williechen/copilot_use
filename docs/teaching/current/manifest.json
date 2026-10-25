@@ -51,7 +51,7 @@
     "historical_records_are_not_current_policy": true
   },
   "scope": "Latest published teaching index; Day16 snapshot preserved in archive",
-  "revision": "day38-chat-pet-published-2026-10-26",
+  "revision": "day38-three-projects-published-2026-10-26",
   "synced_date": "2026-10-26",
   "source_sha": "f3f8255b0b701a1b57cb8c0a1737c3caa4319f2d",
   "articles": [
@@ -2167,13 +2167,36 @@
       "status": "article_delivered_pending_product_validation",
       "rules_version": "daily-tdd-minimum-v1 / github-only-v1",
       "raw_error": null
+    },
+    {
+      "project": "analytics",
+      "day": 38,
+      "revision": "r1",
+      "path": "docs/teaching/daily/day-38/analytics.md",
+      "article_commit": "0c64832a570f294190817f7bcc07459eb5e8f6f1",
+      "parent": "47a38fa368bf03f5aa0290a3182dd39e39222a2c",
+      "blob_sha": "79ffd0556c6ec6eddbda7fea0afab8af48ae727e",
+      "sha256": "38d66b70379b3b49b7f6de09b82c17161ad0f7ba370103d4020b0cb4f05cb290",
+      "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+      "full_text_verified": true,
+      "code_blocks_exact": true,
+      "red_executed": false,
+      "green_executed": false,
+      "main_application": "not applied",
+      "functional_acceptance": false,
+      "archived": false,
+      "next_day_before": 38,
+      "next_day_after": 39,
+      "status": "article_delivered_pending_product_validation",
+      "rules_version": "daily-tdd-minimum-v1 / github-only-v1",
+      "raw_error": null
     }
   ],
   "day15_frozen": true,
   "next_day": {
     "chat": 39,
     "pet": 39,
-    "analytics": 38
+    "analytics": 39
   },
   "day_advanced": true,
   "reference_modified": false,
@@ -3121,6 +3144,14 @@
       "article_path": "docs/teaching/daily/day-38/pet.md",
       "blob_sha": "842b6a127b3738ed5e1f514801b304356114201e",
       "sha256": "954a996d5fc8d7be2dd500c42648d26e3e9b5fdd9aff85bc0d3c89e9c6922c48",
+      "next_day": 39,
+      "functional_acceptance": false
+    },
+    "analytics": {
+      "article_commit": "0c64832a570f294190817f7bcc07459eb5e8f6f1",
+      "article_path": "docs/teaching/daily/day-38/analytics.md",
+      "blob_sha": "79ffd0556c6ec6eddbda7fea0afab8af48ae727e",
+      "sha256": "38d66b70379b3b49b7f6de09b82c17161ad0f7ba370103d4020b0cb4f05cb290",
       "next_day": 39,
       "functional_acceptance": false
     }
