@@ -1,0 +1,350 @@
+{
+  "checked_at": "2026-10-25T13:08:57.848392+00:00",
+  "source_sha": "5c713553daee4055738239f047d6c774fcc7a7a1",
+  "document_baseline_sha": "cc4d5c8ecf283680d34a48f65a52a0af9fc40b2b",
+  "rules_version": "daily-tdd-minimum-v1 / github-only-v1",
+  "rules_blob": "152355cad7306cc902605ebed1eca7ce9572a540",
+  "source_read_only": true,
+  "new_product_tests_executed": false,
+  "last_full_comparison_changed": false,
+  "source_files": {
+    "analytics_apps/Cargo.toml": {
+      "sha256": "e8c97b50845bd52ce28c93d6265a1f2e20bab7640346946490ae1f344f71ccfa",
+      "blob": "fafbcb351ae605cf0bc1db2c5f68703c60dad87e"
+    },
+    "analytics_apps/Cargo.lock": {
+      "sha256": "2e0989325d77ea60b413b63f192daaa8a0c776ec76b4959e707dbb928f543965",
+      "blob": "44abb16f1ec3f74fa181c69d46e8bd984a090f21"
+    },
+    "crates/Cargo.toml": {
+      "sha256": "ef43b0a4647623a9c06da864be4abd64ae095126c07076c54a19c1fa07514532",
+      "blob": "31fcd8fd27cdafc351a424a3e54f37e825b6ab4a"
+    },
+    "crates/Cargo.lock": {
+      "sha256": "cfaa85828861a4513e8369fedae4b941e011bb952d2595b4d87ee179173b15e1",
+      "blob": "c5ec8079981d59244ce5482258424cd8ff57f9a3"
+    },
+    "pet_apps/Cargo.toml": {
+      "sha256": "f6a237775dbc019a8df118616dfccbcd586b962ca597b1ed82ed60f7627b55d7",
+      "blob": "5b59d450126b024879f515b29023eba7601af50b"
+    },
+    "pet_apps/Cargo.lock": {
+      "sha256": "5e16b770e5e19e8c5ece56ec1aaa1a9aa8022c9ea6801c26e5f0277b7068d65f",
+      "blob": "7097f943da5c88be851979cec74641fa35e6e613"
+    },
+    "chat_apps/Cargo.toml": {
+      "sha256": "f1fa5434f06a98ee792e4580a654e890eb3658eccacd4fb647e682862dc4de17",
+      "blob": "49f4b76a380fe02432239043fdb95c68ddaa3b04"
+    },
+    "chat_apps/Cargo.lock": {
+      "sha256": "bad5d8b07dac0f4b3033a1918dd1e50c0b44d81a6c4927c4027c4809f8619ce5",
+      "blob": "384bcb23a13bc0f4e876f29e3037f2181ebbc3d5"
+    },
+    "chat_apps/chat_ui/Cargo.toml": {
+      "sha256": "83f9b6172b1a8c7c1fb65c938c86f1622d59da37e14f8db18b2a5c2efaba7ff5",
+      "blob": "9ba328350ed12160d469171c4f975b618816c9cf"
+    },
+    "chat_apps/chat_domain/Cargo.toml": {
+      "sha256": "845e2c6d21feb9eccdbf60548669c7baa455a559b4d2b9853b199f2f6ea4a136",
+      "blob": "af579a44cffb90a0c0f7d11b2527f4b8a308e862"
+    },
+    "chat_apps/chat_server/Cargo.toml": {
+      "sha256": "4c6c74c8431696d17cc42f6e6aa2df802091ba1dd8129dd2f0f9ac13293c97e4",
+      "blob": "e463272eb947dbf58ffd31ec4976cfebb9d990f0"
+    },
+    "chat_apps/chat_application/Cargo.toml": {
+      "sha256": "f3f7bf509bc01d5f1900686336def961c712b60db976c9627fddccae5a85adfb",
+      "blob": "0f02d259d3870bccd29ec6879520418ba1be4d97"
+    },
+    "chat_apps/chat_persistence/Cargo.toml": {
+      "sha256": "49e09c28737e97f64ee6d0a78496f7610cec797d34ac355819b51f37adbdf529",
+      "blob": "05963c9374b40036531d66015a32ac6ca2f0062b"
+    },
+    "chat_apps/chat_ui/src/account.rs": {
+      "sha256": "122050363f2835198f20207a7ca56420a7f37c3651fa4314664aaf4b7df90a77",
+      "blob": "9aa8fd5bc6b0d33fdad954388dd5f1ef9031dde1"
+    },
+    "chat_apps/chat_ui/src/lib.rs": {
+      "sha256": "8a2462228ade8d6ad3b24873e1258e9bea3a48deffae33340e89d53c1b86f0d7",
+      "blob": "d077abc5bf58b62ccda51880cbcb7f5fdd9a8394"
+    },
+    "chat_apps/chat_ui/src/chat_socket.rs": {
+      "sha256": "5cd0cf7b850eb16a4eaf2decaab9910a7fba67799576a123cfa14e24f05601cb",
+      "blob": "ba07764134263de919827176ab79fa54cb90d74e"
+    },
+    "chat_apps/chat_ui/src/chat.css": {
+      "sha256": "f33288d7f6c480c894ad3d0dab6396df11371b09c9406346c3aadd3428061b8b",
+      "blob": "a66d1d4b9d9e08dcdfc7a5c8467d1319076b0c7c"
+    },
+    "chat_apps/chat_ui/src/room_api.rs": {
+      "sha256": "8f47d0c2994b01a2a33f2af2efcc65ec57da8e6d839926cbd4e8fa4a3e12f307",
+      "blob": "2debb388c7ed24844027080bfd272596216140af"
+    },
+    "pet_apps/pet_persistence/Cargo.toml": {
+      "sha256": "f46583f7e63c1b10293e36db20897c1f9ea1f41a2e9506b46140005daaab3308",
+      "blob": "3e0608f53454842dcfa49d8ba31f7ba67c021f50"
+    },
+    "pet_apps/pet_ui/Cargo.toml": {
+      "sha256": "6c9b1e2b4c518c28467bc7b41d392d74aaf56bc21823c2dc2fe437f22b93f21d",
+      "blob": "0734cd9857791d5e582b23be3d6045e87cd5950f"
+    },
+    "pet_apps/pet_application/Cargo.toml": {
+      "sha256": "c33e8f93f92f6079e0e8b81098ff404f58c8ed9b600304c413de30cd1e7837c8",
+      "blob": "1fd1740e1ce1d5cbfed7a8317475d16bd8c7c99b"
+    },
+    "pet_apps/pet_domain/Cargo.toml": {
+      "sha256": "18b159f763532b13c1eec26e65ab4be1e0dda4c351e217b73fd2aa4bdc4a9a32",
+      "blob": "1e0a38a5ca0b31f6ee5bb0acc31e3c816d03351d"
+    },
+    "pet_apps/pet_server/Cargo.toml": {
+      "sha256": "d6207a0382c7b2d07e27bf5b45508fd8347604563731121a71e9a2251ee5927a",
+      "blob": "e477d4f8c518586c9720abf1e073df00326e86c3"
+    },
+    "pet_apps/pet_server/src/file_organizer.rs": {
+      "sha256": "8953377806bafcb76a8eecd535b1f5003b5a26f48bf7b6e725d2067a3fdfebb3",
+      "blob": "dd11f663a619d882b0fbbc7ea7c84f34b755db72"
+    },
+    "pet_apps/pet_server/src/pet_windows.rs": {
+      "sha256": "d07f2db516b6bc83dbe144a6a2d7acffbf0db24df888818d5de85086e41a746b",
+      "blob": "e93e3f2348c0fb0b2de81601d79a7b69ee6d6166"
+    },
+    "pet_apps/pet_server/src/roam.rs": {
+      "sha256": "434494adfbd58cb3765c269b6ad16d7ba26d87bd2fca666d02800a61e4b76034",
+      "blob": "0de01ffd6e98a7fbc9388ed31a7ae7855c4c6749"
+    },
+    "pet_apps/pet_server/src/lib.rs": {
+      "sha256": "3780d1f629bc0caa5e27503a85b5baec959c3fc76c06ee9c7bdb4416ee626dce",
+      "blob": "652c2d75a6cdfafe93d015803af7af04f60e41a7"
+    },
+    "pet_apps/pet_server/src/chat.rs": {
+      "sha256": "c09321faf1b4fff0895015b203cd51492ed20c138281d726725b4887e3e68dfc",
+      "blob": "88525d3c4fd9b2ca304ff8d3ece79f3f4552b8b5"
+    },
+    "pet_apps/pet_server/src/main.rs": {
+      "sha256": "a3d879bcc777d3f26266953d4e115084660d8b2fbcf5101c8f1303c14c389cfa",
+      "blob": "1b2ebc70ca38c556fb7071a962d375a2d02917fd"
+    },
+    "pet_apps/pet_server/src/pet_store.rs": {
+      "sha256": "2430872d4cc929ab25c378a28586ba6d928569415fdf0c7e4768342a7d31ddf7",
+      "blob": "831118d42dfafd26153219b2c7b1aa09a613e336"
+    },
+    "pet_apps/pet_ui/src/main.rs": {
+      "sha256": "1261a7a73e5ad3b30ed6c05073d57d6c76f72313372e6364b0c3b8ecaf0806fd",
+      "blob": "9a713f7a2460f807f0c0991093675e1e81c06b31"
+    },
+    "pet_apps/pet_ui/src/file_scan_view.rs": {
+      "sha256": "67c422e761fce629b737094d1101ebfb45fe6d8347be8ed6a3a2bff400b352bf",
+      "blob": "00dddc35c94aa337beba12a1c5dcd6528437595e"
+    },
+    "pet_apps/pet_ui/src/duplicate_preview.rs": {
+      "sha256": "3758377fad9b0ed1a32eeac9359b0b769b4868735798372d5aefade364027dcb",
+      "blob": "f01d1b194a119f0b4c1a23c94d636e68108a58b8"
+    },
+    "pet_apps/pet_ui/src/bridge.rs": {
+      "sha256": "2d4583cdad3e9e88b4bd9c57c43336f3c56845e1f2089f297aa27493ad2cc690",
+      "blob": "faf1c28ab4e9ea571893b44f61146370d0b1e0d5"
+    },
+    "pet_apps/pet_ui/src/component/mod.rs": {
+      "sha256": "fca359aac32f8c0b4f524d81517b065a0323f6b1243b5b45f5c5dc714f7a6a4f",
+      "blob": "dba9cc380dfa1fe36b41ffeba357a6aed0f671e8"
+    },
+    "pet_apps/pet_ui/src/component/control.rs": {
+      "sha256": "97b09443c6dfeea159f722ddb89768bd55a59682ff55b0bf05d303f4c42e7962",
+      "blob": "e7c2631ade40a55152ce44ee8b59ab1747ac7737"
+    },
+    "pet_apps/pet_ui/src/component/chat.rs": {
+      "sha256": "b6d95cbe50ec94856ce9b64bab030356cf9c3a54be645977a226578f5762198c",
+      "blob": "688644d0d5548dc212178e04214854db0851ef40"
+    },
+    "pet_apps/pet_ui/src/component/activity.rs": {
+      "sha256": "769875b2827e2983947e5349e95711a7c2ae1d8271c449b836807cfe37e748f0",
+      "blob": "83c6f1862acf7e11f9d6819376b66ac9debfa53b"
+    },
+    "crates/ai_core/Cargo.toml": {
+      "sha256": "8253f7e9d37b44b2d30a7949cdca7a3ad63eeaeb2f543d36f838d29c3b5e82dc",
+      "blob": "681bd9bf03aadac40359fa1dc46c7ea326cd84e6"
+    },
+    "crates/shared/Cargo.toml": {
+      "sha256": "12ae15dab9c0bd8c1649e9afdfb135a3483910c9e93f39330569976936ab8c3b",
+      "blob": "488a348a3ce65a942804ed671e0cd25227e51922"
+    },
+    "crates/telemetry/Cargo.toml": {
+      "sha256": "af9e3f9bb8f18ba50d6cb14cb0dcf5cdb37abe2c16464b464c6be5dcbdf57963",
+      "blob": "b12a8918948c4448652a65ec32fd520bad490a44"
+    },
+    "analytics_apps/analytics_application/Cargo.toml": {
+      "sha256": "f3821e0d9ecd9693ee28ea8ef1bbdaf9e6bb040ae1aa8ac530a212efc69595fd",
+      "blob": "d74e5356ae10ed5f98758196357af6f4c9e17fc5"
+    },
+    "analytics_apps/analytics_persistence/Cargo.toml": {
+      "sha256": "b93c92d8a6e539c07afeb1382bd8ce4083c129553883ee3cdc4ea88770c7c005",
+      "blob": "7f3af2d352d219a550ed9805ea0991464c793639"
+    },
+    "analytics_apps/analytics_server/Cargo.toml": {
+      "sha256": "b3aeb39f77064d1b451fef2922de1a4af1c86031ea2b602ca15cf7090a30307f",
+      "blob": "d43f3c41eae7d40d0b75e2040751e6cb7de35316"
+    },
+    "analytics_apps/analytics_ui/Cargo.toml": {
+      "sha256": "0422bbf75b0fcebdca6a0c25428ec92f6dfcb1a5af59ce444660a336b6176940",
+      "blob": "3ce854b53a06b1c57bb9fc86fd5b088c6620cfbe"
+    },
+    "analytics_apps/analytics_domain/Cargo.toml": {
+      "sha256": "b3b5b44a25b313c7f52a9bb411c62a3dcb05ca8343ef2d6bf1b939e5e4babd30",
+      "blob": "3f7a6a00e49dfe9e17cff801b44583ab8b1b9de2"
+    },
+    "analytics_apps/analytics_server/src/bootstrap.rs": {
+      "sha256": "88b7c7380c38273629d0540e85088c48429eac0fb255443313514d218fa1ee2d",
+      "blob": "365f8402cd927662a709a5da31e8023bdebc172d"
+    },
+    "analytics_apps/analytics_server/src/password_login.rs": {
+      "sha256": "d675dc7188e76fb43740aa0073d954db0a76697ecebe653292c4b10e451173af",
+      "blob": "041fa0a3d2dddfd69fe52c68395ab4f757f1842b"
+    },
+    "analytics_apps/analytics_server/src/pg_store.rs": {
+      "sha256": "527db96d3ec8ce528aeb5ac9444eeebc635d29a6720ff5d8c7d1db7bfec07c8c",
+      "blob": "16e22ff5c35de3b49ef01263617bbf446a5114a5"
+    },
+    "analytics_apps/analytics_server/src/lib.rs": {
+      "sha256": "f80f1fc0f9b69434a18c1b55a57893b759577ec73629756087aa61f414e4eae8",
+      "blob": "0f535e1cdcc08fd17b4ad91b271c179ba4228c66"
+    },
+    "analytics_apps/analytics_server/src/main.rs": {
+      "sha256": "95ba5cb074eb3d70e09547b3e00be57a8b7512781c63307ca37f7f57f56c9027",
+      "blob": "b4c138f003d9df7cfdaaf9c3c90154d917d6505d"
+    },
+    "analytics_apps/analytics_server/src/admin.rs": {
+      "sha256": "d85f6cbedb0c18f05bfeb9a95d07f18d22e856b40f4a9eed8ca03d222c2cc001",
+      "blob": "11076ee4063cf7f3683117bc53b7f1bfca1d459a"
+    },
+    "analytics_apps/analytics_server/src/dashboard_ui.rs": {
+      "sha256": "d205a5da05c613f69e587549b26900ef5b0d65bed6bf537ec2434027b5a3dca1",
+      "blob": "b65d291c6c2a94f79d283d263f2a7dba29000cee"
+    },
+    "analytics_apps/analytics_server/src/bin/bootstrap_admin.rs": {
+      "sha256": "0dae162edc823ba4a33599bfd5a9ff241509e847cd68e3a2898cc09c89e0d5a0",
+      "blob": "a5973b7db23cc433b930006774adfd43e3779e39"
+    }
+  },
+  "original_drafts": {
+    "chat": {
+      "commit": "78721b1465a4086034a28e8e4e358c105cbb80ef",
+      "blob_sha": "c548cc9a81c7d6393aa6803dbaebf8e00e7ed76d",
+      "sha256": "4339027d502d707184afcd41d4ff3b371df3b77a7800496597d059e24c3876bf",
+      "path": "docs/teaching/daily/day-37/chat.md",
+      "preserved": true
+    },
+    "pet": {
+      "commit": "76e8b029887d40bbc514cc24d0fae1f01520a159",
+      "blob_sha": "43416eda697b227a44045788f83afe80c31dbd02",
+      "sha256": "c13d16dbd8d7d1e097f5666900e1dff1320f7c8db8eea86e81cfb7d9a7ed38ac",
+      "path": "docs/teaching/daily/day-37/pet.md",
+      "preserved": true
+    },
+    "analytics": {
+      "commit": "cc4d5c8ecf283680d34a48f65a52a0af9fc40b2b",
+      "blob_sha": "23c3d4db44e5e20d5d589cd74047a41ad8dfeb31",
+      "sha256": "a4e2e2d7d12513b436f996f63ea06b1daa7a05d26d9d4bab24104bc6ddb7c578",
+      "path": "docs/teaching/daily/day-37/analytics.md",
+      "preserved": true
+    }
+  },
+  "ci_runs": [
+    {
+      "id": 40174572111,
+      "name": "Node",
+      "head_sha": "5c713553daee4055738239f047d6c774fcc7a7a1",
+      "path": ".github/workflows/node.yml",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-10-25T07:54:52Z",
+      "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40174572111"
+    },
+    {
+      "id": 40174572137,
+      "name": "Rust Analytics",
+      "head_sha": "5c713553daee4055738239f047d6c774fcc7a7a1",
+      "path": ".github/workflows/analytics.yml",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-10-25T07:57:04Z",
+      "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40174572137"
+    },
+    {
+      "id": 40174572101,
+      "name": "Test All",
+      "head_sha": "5c713553daee4055738239f047d6c774fcc7a7a1",
+      "path": ".github/workflows/test.yml",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-10-25T07:57:53Z",
+      "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40174572101"
+    },
+    {
+      "id": 40174572112,
+      "name": "Rust Desktop Pet",
+      "head_sha": "5c713553daee4055738239f047d6c774fcc7a7a1",
+      "path": ".github/workflows/desktop_pet.yml",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-10-25T08:05:52Z",
+      "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40174572112"
+    },
+    {
+      "id": 40174572128,
+      "name": "Persistence",
+      "head_sha": "5c713553daee4055738239f047d6c774fcc7a7a1",
+      "path": ".github/workflows/persistence.yml",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-10-25T07:59:07Z",
+      "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40174572128"
+    },
+    {
+      "id": 40174572170,
+      "name": "Cargo workspaces",
+      "head_sha": "5c713553daee4055738239f047d6c774fcc7a7a1",
+      "path": ".github/workflows/workspaces.yml",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-10-25T08:02:30Z",
+      "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40174572170"
+    },
+    {
+      "id": 40174572102,
+      "name": "Rust AI Chat",
+      "head_sha": "5c713553daee4055738239f047d6c774fcc7a7a1",
+      "path": ".github/workflows/ai_chat.yml",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "updated_at": "2026-10-25T08:09:31Z",
+      "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40174572102"
+    }
+  ],
+  "documentation_checks": [
+    {
+      "path": "docs/teaching/daily/day-37/chat-r2.md",
+      "rust_blocks_parsed": true,
+      "typecheck": "not run",
+      "tests": "not run"
+    },
+    {
+      "path": "docs/teaching/daily/day-37/pet-r2.md",
+      "rust_blocks_parsed": true,
+      "typecheck": "not run",
+      "tests": "not run"
+    },
+    {
+      "path": "docs/teaching/daily/day-37/analytics-r2.md",
+      "rust_blocks_parsed": true,
+      "typecheck": "not run",
+      "tests": "not run"
+    }
+  ]
+}
