@@ -51,7 +51,7 @@
     "historical_records_are_not_current_policy": true
   },
   "scope": "Latest published teaching index; Day16 snapshot preserved in archive",
-  "revision": "day35-analytics-r2",
+  "revision": "day36-actual-verification",
   "synced_date": "2026-10-25",
   "source_sha": "f3f8255b0b701a1b57cb8c0a1737c3caa4319f2d",
   "articles": [
@@ -1815,6 +1815,31 @@
         "sha256": "43299125496c16bb3cdff4dc6ca6bd1a7fd93d282a8ae7cb98a8df75066c229c",
         "reason": "r1 source-review relative link resolved under wrong directory; original immutable"
       }
+    },
+    {
+      "project": "chat",
+      "day": 36,
+      "revision": "r2",
+      "path": "docs/teaching/daily/day-36/chat-r2.md",
+      "old_path": "docs/teaching/daily/day-36/chat.md",
+      "parent": "fcf4ecfc06292e68a11b56156fda34a9960fd5d6",
+      "article_commit": "1f573cdea8f67e8fbaabaf5fb60b10c3cb85a733",
+      "blob_sha": "e5719d061eb0e70db27e3a51a0c2760fa6ca38ca",
+      "sha256": "61f790ef80f806dd51816a5b0f29fa5886260cf8ba3490453e00e55e9ebdddb0",
+      "full_text_verified": true,
+      "readback_at": "2026-10-25T08:13:52.091Z",
+      "source_sha": "5c713553daee4055738239f047d6c774fcc7a7a1",
+      "teaching_baseline_sha": "61ed5930bd9ff38e0d5822eea2983121001d8422",
+      "main_application": "already present in source main; not applied by verification agent",
+      "tests": "executed; see linked verification report",
+      "functional_acceptance": false,
+      "archived": false,
+      "next_day_before": 37,
+      "next_day_after": 37,
+      "status": "article_delivered_code_present_tests_passed_acceptance_pending",
+      "report": "docs/source-review/2026-10-25-day36-verification-5c713553.md",
+      "evidence": "docs/source-review/day36-verification-5c713553/evidence.zip",
+      "raw_error": null
     }
   ],
   "day15_frozen": true,
@@ -1962,7 +1987,7 @@
     "frozen_body_sha256": "ad6cef4a58f20f6162fb01a4c71ef1a752992856327063d9988112c91a639184",
     "frozen_notion_snapshot": "docs/teaching/archive/day-22/notion/chat.md"
   },
-  "latest_chat_publication": "docs/teaching/daily/day-36/chat-readback.json",
+  "latest_chat_publication": "docs/teaching/daily/day-36/chat-r2-readback.json",
   "previous_day22_pet_article": {
     "project": "pet",
     "day": 22,
@@ -2581,5 +2606,23 @@
     "makeup_queue_changed": false,
     "last_full_comparison_changed": false,
     "full_product_acceptance": false
+  },
+  "day36_runtime_verification": {
+    "date": "2026-10-25",
+    "source_sha": "5c713553daee4055738239f047d6c774fcc7a7a1",
+    "report": "docs/source-review/2026-10-25-day36-verification-5c713553.md",
+    "evidence": "docs/source-review/day36-verification-5c713553/evidence.zip",
+    "scope": "Day36 incremental verification only; not full comparison or product acceptance",
+    "functional_acceptance": false,
+    "source_modified_by_agent": false,
+    "projects": {
+      "chat": {
+        "revision": "r2",
+        "path": "docs/teaching/daily/day-36/chat-r2.md",
+        "article_commit": "1f573cdea8f67e8fbaabaf5fb60b10c3cb85a733",
+        "summary": "Server 31、UI 14 項測試與 WASM 通過；真 HTTP／WS 五情境通過。每秒重查不等於硬性 ≤1 秒；原子撤銷競態、ACL／歷史及瀏覽器待驗。",
+        "functional_acceptance": false
+      }
+    }
   }
 }

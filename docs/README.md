@@ -15,7 +15,7 @@
 
 | 專案 | 最新文章 | 下一篇 | 狀態 |
 | --- | --- | --- | --- |
-| Chat | [Day36：既有 WebSocket 會話於登出後撤銷並停止後續收發](teaching/daily/day-36/chat.md) | Day37 | 教學已交付／程式未套用／未測試／未驗收 |
+| Chat | [Day36 r2：既有 WebSocket 會話於登出後撤銷並停止後續收發](teaching/daily/day-36/chat-r2.md) | Day37 | 程式已存在／相關實測通過／完整產品未驗收 |
 | Pet | [Day36 r2：重啟恢復全部未回籠寵物，而非只恢復最後選取者](teaching/daily/day-36/pet-r2.md) | Day37 | 教學已交付／程式未套用／未測試／未驗收 |
 | Analytics | [Day36：精確事件統計 API 改用人員 Session，不再接受來源 token 查詢](teaching/daily/day-36/analytics.md) | Day37 | 教學已交付／程式未套用／未測試／未驗收 |
 

@@ -481,8 +481,9 @@
     "latest_github_publication": {
       "chat": {
         "day": 36,
-        "path": "docs/teaching/daily/day-36/chat.md",
-        "article_commit": "79c785f2bc42a64e34c986315c7a954d954a4abc"
+        "revision": "r2",
+        "path": "docs/teaching/daily/day-36/chat-r2.md",
+        "article_commit": "1f573cdea8f67e8fbaabaf5fb60b10c3cb85a733"
       },
       "pet": {
         "day": 36,
@@ -3679,7 +3680,7 @@
     "expected_state_parent_sha": "7a3400259b59cf617d6c3c721bfc10d1014542b0",
     "raw_error": null
   },
-  "latest_chat_publication": "docs/teaching/daily/day-36/chat-readback.json",
+  "latest_chat_publication": "docs/teaching/daily/day-36/chat-r2-readback.json",
   "duplicate_application_review": {
     "date": "2026-10-25",
     "source_repository": "williechen/rust_ai_ring",
@@ -4144,34 +4145,29 @@
     "full_product_acceptance": false
   },
   "day36_chat_delivery": {
-    "repository": "williechen/copilot_use",
-    "branch": "main",
     "project": "chat",
     "day": 36,
-    "revision": "r1",
-    "title": "既有 WebSocket 會話於登出後撤銷並停止後續收發",
-    "path": "docs/teaching/daily/day-36/chat.md",
-    "parent": "17c52c091bd2b4d2a9be4ec41ffa87dad3c0d1fa",
-    "article_commit": "79c785f2bc42a64e34c986315c7a954d954a4abc",
-    "blob_sha": "d398f42033eb53a80f446f95e58f73a92c4a1810",
-    "sha256": "7f68d39a0a133db6bb336de9b6c9bd140a1baa7bf46370f6da3191b2e43cc9eb",
+    "revision": "r2",
+    "path": "docs/teaching/daily/day-36/chat-r2.md",
+    "old_path": "docs/teaching/daily/day-36/chat.md",
+    "parent": "fcf4ecfc06292e68a11b56156fda34a9960fd5d6",
+    "article_commit": "1f573cdea8f67e8fbaabaf5fb60b10c3cb85a733",
+    "blob_sha": "e5719d061eb0e70db27e3a51a0c2760fa6ca38ca",
+    "sha256": "61f790ef80f806dd51816a5b0f29fa5886260cf8ba3490453e00e55e9ebdddb0",
     "full_text_verified": true,
-    "readback_at": "2026-10-25T06:13:20.874Z",
-    "source_repository": "williechen/rust_ai_ring",
-    "source_sha": "61ed5930bd9ff38e0d5822eea2983121001d8422",
-    "rules_sha": "3b5d00291cdd44e1fa039aad4b10d8f82b59982d",
-    "rules_version": "daily-tdd-minimum-v1+github-only-v1",
-    "status": "article_delivered_unapplied_unverified",
-    "main_application": "not applied",
-    "tests": "not run",
+    "readback_at": "2026-10-25T08:13:52.091Z",
+    "source_sha": "5c713553daee4055738239f047d6c774fcc7a7a1",
+    "teaching_baseline_sha": "61ed5930bd9ff38e0d5822eea2983121001d8422",
+    "main_application": "already present in source main; not applied by verification agent",
+    "tests": "executed; see linked verification report",
     "functional_acceptance": false,
     "archived": false,
-    "next_day_before": 36,
+    "next_day_before": 37,
     "next_day_after": 37,
-    "raw_error": null,
-    "remaining_gaps": "原子撤銷與訊息寫入競態、選房登入回跳、逐房 ACL、作者／歷史、瀏覽器與 CI 待驗",
-    "sync_expected_parent_sha": "79c785f2bc42a64e34c986315c7a954d954a4abc",
-    "sync_status": "pending"
+    "status": "article_delivered_code_present_tests_passed_acceptance_pending",
+    "report": "docs/source-review/2026-10-25-day36-verification-5c713553.md",
+    "evidence": "docs/source-review/day36-verification-5c713553/evidence.zip",
+    "raw_error": null
   },
   "day36_pet_delivery": {
     "repository": "williechen/copilot_use",
@@ -4269,5 +4265,53 @@
     "remaining_gaps": "真原生多窗重啟、失敗補償注入、漫遊動態 label、單幀單圖與 bundle 驗收待做",
     "sync_expected_parent_sha": "f02f1d3c3ecd55f59ba661a458a2e9661e34d011",
     "sync_status": "pending"
+  },
+  "day36_chat_r1_delivery": {
+    "repository": "williechen/copilot_use",
+    "branch": "main",
+    "project": "chat",
+    "day": 36,
+    "revision": "r1",
+    "title": "既有 WebSocket 會話於登出後撤銷並停止後續收發",
+    "path": "docs/teaching/daily/day-36/chat.md",
+    "parent": "17c52c091bd2b4d2a9be4ec41ffa87dad3c0d1fa",
+    "article_commit": "79c785f2bc42a64e34c986315c7a954d954a4abc",
+    "blob_sha": "d398f42033eb53a80f446f95e58f73a92c4a1810",
+    "sha256": "7f68d39a0a133db6bb336de9b6c9bd140a1baa7bf46370f6da3191b2e43cc9eb",
+    "full_text_verified": true,
+    "readback_at": "2026-10-25T06:13:20.874Z",
+    "source_repository": "williechen/rust_ai_ring",
+    "source_sha": "61ed5930bd9ff38e0d5822eea2983121001d8422",
+    "rules_sha": "3b5d00291cdd44e1fa039aad4b10d8f82b59982d",
+    "rules_version": "daily-tdd-minimum-v1+github-only-v1",
+    "status": "article_delivered_unapplied_unverified",
+    "main_application": "not applied",
+    "tests": "not run",
+    "functional_acceptance": false,
+    "archived": false,
+    "next_day_before": 36,
+    "next_day_after": 37,
+    "raw_error": null,
+    "remaining_gaps": "原子撤銷與訊息寫入競態、選房登入回跳、逐房 ACL、作者／歷史、瀏覽器與 CI 待驗",
+    "sync_expected_parent_sha": "79c785f2bc42a64e34c986315c7a954d954a4abc",
+    "sync_status": "pending"
+  },
+  "day36_runtime_verification": {
+    "date": "2026-10-25",
+    "source_sha": "5c713553daee4055738239f047d6c774fcc7a7a1",
+    "report": "docs/source-review/2026-10-25-day36-verification-5c713553.md",
+    "evidence": "docs/source-review/day36-verification-5c713553/evidence.zip",
+    "scope": "Day36 incremental verification only; not full comparison or product acceptance",
+    "functional_acceptance": false,
+    "source_modified_by_agent": false,
+    "projects": {
+      "chat": {
+        "revision": "r2",
+        "path": "docs/teaching/daily/day-36/chat-r2.md",
+        "article_commit": "1f573cdea8f67e8fbaabaf5fb60b10c3cb85a733",
+        "summary": "Server 31、UI 14 項測試與 WASM 通過；真 HTTP／WS 五情境通過。每秒重查不等於硬性 ≤1 秒；原子撤銷競態、ACL／歷史及瀏覽器待驗。",
+        "functional_acceptance": false
+      }
+    }
   }
 }
