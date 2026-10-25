@@ -1778,6 +1778,43 @@
       "remaining_gaps": "角色／來源 ACL、SSE、CSRF、機器配對、完整 PostgreSQL／HTTP／瀏覽器與 CI 待驗",
       "sync_expected_parent_sha": "6bd111650673758f667e3c929bb85439b846ad9c",
       "sync_status": "pending"
+    },
+    {
+      "repository": "williechen/copilot_use",
+      "branch": "main",
+      "project": "pet",
+      "day": 36,
+      "revision": "r2",
+      "title": "重啟恢復全部未回籠寵物，而非只恢復最後選取者",
+      "path": "docs/teaching/daily/day-36/pet-r2.md",
+      "parent": "5fa26f6a3900509a7891feb1032ce37c2fde8ea0",
+      "article_commit": "f3c25d9ae6b9e61963a238940ef387301cde1f9c",
+      "blob_sha": "b59f394ca6727ec3261347f60da58d736a1bbf68",
+      "sha256": "d14b2cf73ddc5873712498c6378559e344772f767abd6cf549e743f4886e8872",
+      "full_text_verified": true,
+      "readback_at": "2026-10-25T06:17:33.222Z",
+      "source_repository": "williechen/rust_ai_ring",
+      "source_sha": "61ed5930bd9ff38e0d5822eea2983121001d8422",
+      "rules_sha": "3b5d00291cdd44e1fa039aad4b10d8f82b59982d",
+      "rules_version": "daily-tdd-minimum-v1+github-only-v1",
+      "status": "article_delivered_unapplied_unverified",
+      "main_application": "not applied",
+      "tests": "not run",
+      "functional_acceptance": false,
+      "archived": false,
+      "next_day_before": 36,
+      "next_day_after": 37,
+      "raw_error": null,
+      "remaining_gaps": "真原生多窗重啟、失敗補償注入、漫遊動態 label、單幀單圖與 bundle 驗收待做",
+      "sync_expected_parent_sha": "f3c25d9ae6b9e61963a238940ef387301cde1f9c",
+      "sync_status": "pending",
+      "supersedes": {
+        "path": "docs/teaching/daily/day-36/pet.md",
+        "article_commit": "f02f1d3c3ecd55f59ba661a458a2e9661e34d011",
+        "blob_sha": "76d3933ae4a501b0da130b78473580f569b85a92",
+        "sha256": "43299125496c16bb3cdff4dc6ca6bd1a7fd93d282a8ae7cb98a8df75066c229c",
+        "reason": "r1 source-review relative link resolved under wrong directory; original immutable"
+      }
     }
   ],
   "day15_frozen": true,
@@ -1961,7 +1998,7 @@
     "frozen_body_sha256": "88fa706c5a3f7f3d6255957b8ed317d64cb1a6c57f1cf6638bfb838d5e6b282f",
     "frozen_notion_snapshot": "docs/teaching/archive/day-22/notion/pet.md"
   },
-  "latest_pet_publication": "docs/teaching/daily/day-36/pet-readback.json",
+  "latest_pet_publication": "docs/teaching/daily/day-36/pet-r2-readback.json",
   "previous_day22_analytics_article": {
     "project": "analytics",
     "day": 22,

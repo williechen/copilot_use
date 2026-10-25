@@ -2,11 +2,11 @@
 
 [問題文章與後續更正總表](ARTICLE_CORRECTIONS.md)：已整併最新瀏覽器／Pet 原生證據；下方個別來源的交付／測試摘要保留其當次範圍。
 
-[Day36：重啟恢復全部未回籠寵物，而非只恢復最後選取者](../daily/day-36/pet.md)
+[Day36 r2：重啟恢復全部未回籠寵物，而非只恢復最後選取者](../daily/day-36/pet-r2.md)
 
-**文章已交付／程式未套用／新測試未執行／未驗收**；來源 rust_ai_ring `61ed5930bd9ff38e0d5822eea2983121001d8422`。下一篇 **Day37**；[交付全文讀回](../daily/day-36/pet-readback.json)。
+**文章已交付／程式未套用／新測試未執行／未驗收**；來源 rust_ai_ring `61ed5930bd9ff38e0d5822eea2983121001d8422`。下一篇 **Day37**；[r2 交付全文讀回](../daily/day-36/pet-r2-readback.json)。
 
-[上一篇 Day35：逐寵物回籠狀態](../daily/day-35/pet.md) 已在後續來源套用並完成增量測試，真原生重啟與補償仍待驗；[Day35 原始交付證據](../daily/day-35/pet-readback.json)。
+[Day36 r1 原始文章](../daily/day-36/pet.md)（保留原 commit/blob/SHA256，r2 只修正來源報告相對路徑） · [上一篇 Day35：逐寵物回籠狀態](../daily/day-35/pet.md) 已在後續來源套用並完成增量測試，真原生重啟與補償仍待驗；[Day35 原始交付證據](../daily/day-35/pet-readback.json)。
 
 [首頁](../pet/README.md) · [目前功能與驗證現況](STATUS.md) · [進度](../../learning-state.json) · [manifest](manifest.json) · [CI 補充與來源證據](../daily/day-34/source-snapshot.json)
 
