@@ -1,0 +1,1015 @@
+{
+  "source_sha": "afdbb6e81382e8d82095827a90c52cc3309a3e20",
+  "files": [
+    {
+      "path": ".env.example",
+      "bytes": 224,
+      "sha256": "c97353583217f5d3a57cbc663d953cac158002a314e74771e0322b851c45d862"
+    },
+    {
+      "path": ".github/workflows/ai_chat.yml",
+      "bytes": 1984,
+      "sha256": "347c0da55f33d565ac9540878500aa729acf6ec1efff8d9aa101c5f6c607e2f3"
+    },
+    {
+      "path": ".github/workflows/analytics.yml",
+      "bytes": 1607,
+      "sha256": "d71f32cf1e7555a2df910d85000e5742dc0dea3e25afa33115bbcdf5a5d0ef17"
+    },
+    {
+      "path": ".github/workflows/desktop_pet.yml",
+      "bytes": 2767,
+      "sha256": "e4f0aa967aa14b86541d25bde92328fd6ffcb7d35cc1fc0c3e995e22d2b3699a"
+    },
+    {
+      "path": ".github/workflows/node.yml",
+      "bytes": 552,
+      "sha256": "96608f3f1f314f90e2bad4216d1fb1b76028c4aac1f20cf4b530ca7e80b44b2a"
+    },
+    {
+      "path": ".github/workflows/persistence.yml",
+      "bytes": 1756,
+      "sha256": "39dba76d3879f928a48f5030f7b35830306ab967fc4c905fe48d25f272472651"
+    },
+    {
+      "path": ".github/workflows/test.yml",
+      "bytes": 5261,
+      "sha256": "f0635ba0e81d488a605d643fcee2231cb5b3fbab1d94bc9450d3ecccb265e827"
+    },
+    {
+      "path": ".github/workflows/workspaces.yml",
+      "bytes": 688,
+      "sha256": "5c89760b8de33c0c8f2ce1bb9101e89c55cd315e0515058d858fc83f564af19b"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 103,
+      "sha256": "70cf7601dc9bc8a84624d3c501f6927b45ecaca793d5867b7c39b30c587efba1"
+    },
+    {
+      "path": ".vscode/launch.json",
+      "bytes": 3414,
+      "sha256": "a1f287ccad03c52b1aa7d9a12f77c0980c779d38002ef16a82a6d5ffc86a7822"
+    },
+    {
+      "path": ".vscode/settings.json",
+      "bytes": 176,
+      "sha256": "cbdf044ce70e0597719805c704a94ceeee0f9eec257161f6ef6d94e3279107a5"
+    },
+    {
+      "path": ".vscode/tasks.json",
+      "bytes": 14623,
+      "sha256": "37222314389298d3e1ec5109fa5fc52476ef2c2220350d9c8dba0effcef91b29"
+    },
+    {
+      "path": "README.md",
+      "bytes": 19721,
+      "sha256": "284374a590db3fb57cef6d2c13dc8cbaab98728351db2edce251773382ab0707"
+    },
+    {
+      "path": "analytics_apps/Cargo.lock",
+      "bytes": 73319,
+      "sha256": "c5b35fa41299642ba980f44c92fb3599b97edf4b46fd97856a1c571c1504e8c4"
+    },
+    {
+      "path": "analytics_apps/Cargo.toml",
+      "bytes": 812,
+      "sha256": "454d1530327e5ac101e225e56fb3950237d80260f346f74b64afa1a4a2d2c73f"
+    },
+    {
+      "path": "analytics_apps/analytics_application/Cargo.toml",
+      "bytes": 107,
+      "sha256": "f3821e0d9ecd9693ee28ea8ef1bbdaf9e6bb040ae1aa8ac530a212efc69595fd"
+    },
+    {
+      "path": "analytics_apps/analytics_application/src/lib.rs",
+      "bytes": 210,
+      "sha256": "c04c976b49d9540ebad87db788a0887ce2806ffef3f1ea64736bb845e6c7568b"
+    },
+    {
+      "path": "analytics_apps/analytics_domain/Cargo.toml",
+      "bytes": 102,
+      "sha256": "b3b5b44a25b313c7f52a9bb411c62a3dcb05ca8343ef2d6bf1b939e5e4babd30"
+    },
+    {
+      "path": "analytics_apps/analytics_domain/src/lib.rs",
+      "bytes": 210,
+      "sha256": "c04c976b49d9540ebad87db788a0887ce2806ffef3f1ea64736bb845e6c7568b"
+    },
+    {
+      "path": "analytics_apps/analytics_persistence/Cargo.toml",
+      "bytes": 540,
+      "sha256": "b93c92d8a6e539c07afeb1382bd8ce4083c129553883ee3cdc4ea88770c7c005"
+    },
+    {
+      "path": "analytics_apps/analytics_persistence/src/lib.rs",
+      "bytes": 3311,
+      "sha256": "c10b20858e25dd6342e0e32de3f7abfbfdd958e8e9019e085312048452a1d90e"
+    },
+    {
+      "path": "analytics_apps/analytics_server/Cargo.toml",
+      "bytes": 745,
+      "sha256": "b3aeb39f77064d1b451fef2922de1a4af1c86031ea2b602ca15cf7090a30307f"
+    },
+    {
+      "path": "analytics_apps/analytics_server/src/admin.rs",
+      "bytes": 29765,
+      "sha256": "d85f6cbedb0c18f05bfeb9a95d07f18d22e856b40f4a9eed8ca03d222c2cc001"
+    },
+    {
+      "path": "analytics_apps/analytics_server/src/bin/bootstrap_admin.rs",
+      "bytes": 477,
+      "sha256": "0dae162edc823ba4a33599bfd5a9ff241509e847cd68e3a2898cc09c89e0d5a0"
+    },
+    {
+      "path": "analytics_apps/analytics_server/src/bootstrap.rs",
+      "bytes": 12070,
+      "sha256": "88b7c7380c38273629d0540e85088c48429eac0fb255443313514d218fa1ee2d"
+    },
+    {
+      "path": "analytics_apps/analytics_server/src/dashboard_ui.rs",
+      "bytes": 11049,
+      "sha256": "d205a5da05c613f69e587549b26900ef5b0d65bed6bf537ec2434027b5a3dca1"
+    },
+    {
+      "path": "analytics_apps/analytics_server/src/lib.rs",
+      "bytes": 23620,
+      "sha256": "7765dd6b7a455a8eb961b3851f34cf84ffc550059841d0133c309da1767604d1"
+    },
+    {
+      "path": "analytics_apps/analytics_server/src/main.rs",
+      "bytes": 1235,
+      "sha256": "95ba5cb074eb3d70e09547b3e00be57a8b7512781c63307ca37f7f57f56c9027"
+    },
+    {
+      "path": "analytics_apps/analytics_server/src/password_login.rs",
+      "bytes": 14370,
+      "sha256": "af0d74a816358a8b944205b4199f722daa2247a1a884a7004882e7cce7c2bbc0"
+    },
+    {
+      "path": "analytics_apps/analytics_server/src/pg_store.rs",
+      "bytes": 2353,
+      "sha256": "527db96d3ec8ce528aeb5ac9444eeebc635d29a6720ff5d8c7d1db7bfec07c8c"
+    },
+    {
+      "path": "analytics_apps/analytics_server/tests/day23_password_login.rs",
+      "bytes": 6155,
+      "sha256": "c9b9e3ad01d3fbd7c97bd63a31c6b33c176ec3f72d229fca888469275b2ec504"
+    },
+    {
+      "path": "analytics_apps/analytics_server/tests/day24_password_change.rs",
+      "bytes": 11986,
+      "sha256": "8d9a25865166eeb030605ab2a16b2edf50738457ae2c851e591f124ffb365af3"
+    },
+    {
+      "path": "analytics_apps/analytics_server/tests/day25_repeat_password_change.rs",
+      "bytes": 5193,
+      "sha256": "ad2c8da535d56418256ce75463ad3eca43b453b48577d228c4e49bf220796e87"
+    },
+    {
+      "path": "analytics_apps/analytics_server/tests/day26_session_contract.rs",
+      "bytes": 2204,
+      "sha256": "439b06a67420f2822c9d085b933151a23ebbeee6a6850605f5438396b6a5c199"
+    },
+    {
+      "path": "analytics_apps/analytics_server/tests/day27_dashboard_source.rs",
+      "bytes": 4878,
+      "sha256": "0ead215bf3e30dd66b00458da5981adcf3b86dff591ef28bd39ddbb6a48adfb4"
+    },
+    {
+      "path": "analytics_apps/analytics_server/tests/idempotency_contract.rs",
+      "bytes": 1422,
+      "sha256": "a1be8b5b429539f573099eb9c589ec0a667f9219bcd021f3b72ec150705cf447"
+    },
+    {
+      "path": "analytics_apps/analytics_server/tests/postgres_event_store.rs",
+      "bytes": 1754,
+      "sha256": "ca01b9cd41445ac515d0f03438b991c8b11b1de04b7d725ab717c972c4115672"
+    },
+    {
+      "path": "analytics_apps/analytics_ui/Cargo.toml",
+      "bytes": 98,
+      "sha256": "0422bbf75b0fcebdca6a0c25428ec92f6dfcb1a5af59ce444660a336b6176940"
+    },
+    {
+      "path": "analytics_apps/analytics_ui/src/lib.rs",
+      "bytes": 210,
+      "sha256": "c04c976b49d9540ebad87db788a0887ce2806ffef3f1ea64736bb845e6c7568b"
+    },
+    {
+      "path": "analytics_apps/migrations/20261014223748_create_product_events.sql",
+      "bytes": 496,
+      "sha256": "44663555d34f077e8fcf40784b91a943227fd17630c8657f9574f787fca06eaf"
+    },
+    {
+      "path": "analytics_apps/migrations/20261018073932_create_auth_user.sql",
+      "bytes": 4109,
+      "sha256": "63fe5fd0d14121ad20855105b89877ff8a33bcd701ebcafa986a7ae0850c11a9"
+    },
+    {
+      "path": "analytics_apps/migrations/20261018114026_creat_protocol.sql",
+      "bytes": 935,
+      "sha256": "660feafdacf9ba7ccd850ff63eb81679e2fd2f99e282d1da57870ec89e8b2e83"
+    },
+    {
+      "path": "analytics_apps/migrations/20261020154237_password_login_session.sql",
+      "bytes": 279,
+      "sha256": "e1cefd4d54c4c010bebd65bc813858eeca4c811e9bb31712846c5d6702199485"
+    },
+    {
+      "path": "analytics_apps/migrations/20261021071000_unique_account_email.sql",
+      "bytes": 75,
+      "sha256": "0d21b80fd4b71229cf67ad2c76ee7b972f1737121a5902e61de08ef497188da0"
+    },
+    {
+      "path": "analytics_apps/migrations/20261022070000_session_contract.sql",
+      "bytes": 604,
+      "sha256": "58ddc5b3bfa1edf67ae867055b188db26cff3c38a4953c761ceca1114f6cf68a"
+    },
+    {
+      "path": "analytics_apps/rust-toolchain.toml",
+      "bytes": 103,
+      "sha256": "32314ae0f25d85fda9b7ad0c033266f677a9d772b7a39038c62a386cc3085b75"
+    },
+    {
+      "path": "chat_apps/Cargo.lock",
+      "bytes": 78227,
+      "sha256": "b788884950790cb43ec14876e9b134d002b7b79022e112e969d5ac6fdd084c86"
+    },
+    {
+      "path": "chat_apps/Cargo.toml",
+      "bytes": 1018,
+      "sha256": "dc7f800965bf6cade7ac700dd7c21ef09a5c5b75c974a9a98b6988eb50adec0b"
+    },
+    {
+      "path": "chat_apps/chat_application/Cargo.toml",
+      "bytes": 303,
+      "sha256": "f3f7bf509bc01d5f1900686336def961c712b60db976c9627fddccae5a85adfb"
+    },
+    {
+      "path": "chat_apps/chat_application/src/lib.rs",
+      "bytes": 8531,
+      "sha256": "8d567bc40ef244a92041c19644b8c267408fac4a31834450989674356680b143"
+    },
+    {
+      "path": "chat_apps/chat_application/src/product_event.rs",
+      "bytes": 543,
+      "sha256": "e808811e86eab78249bd66c13ebddb468ac07371e21d60ce3d7a90d962b8b16f"
+    },
+    {
+      "path": "chat_apps/chat_application/src/repository.rs",
+      "bytes": 800,
+      "sha256": "b3ff22194258c7ef8a6cd3cdaf5efc8c913807483dd2d350b33500cda31ae0db"
+    },
+    {
+      "path": "chat_apps/chat_domain/Cargo.toml",
+      "bytes": 142,
+      "sha256": "845e2c6d21feb9eccdbf60548669c7baa455a559b4d2b9853b199f2f6ea4a136"
+    },
+    {
+      "path": "chat_apps/chat_domain/src/lib.rs",
+      "bytes": 598,
+      "sha256": "903f2cddd90d280a7cefc7b5984b2b114556dd3f3b08f3b4e4b37855c4e31360"
+    },
+    {
+      "path": "chat_apps/chat_persistence/Cargo.toml",
+      "bytes": 274,
+      "sha256": "49e09c28737e97f64ee6d0a78496f7610cec797d34ac355819b51f37adbdf529"
+    },
+    {
+      "path": "chat_apps/chat_persistence/src/lib.rs",
+      "bytes": 11239,
+      "sha256": "396b47775e9d9021d07b8a348402bedb3a4b5f5d1ca9f6b6e0cf473b22c62ae3"
+    },
+    {
+      "path": "chat_apps/chat_server/Cargo.toml",
+      "bytes": 725,
+      "sha256": "4c6c74c8431696d17cc42f6e6aa2df802091ba1dd8129dd2f0f9ac13293c97e4"
+    },
+    {
+      "path": "chat_apps/chat_server/src/auth_session.rs",
+      "bytes": 4006,
+      "sha256": "ffdf6770665faf3f3a48970e2a190d0617a13bb7f188c60008bf96917c60b584"
+    },
+    {
+      "path": "chat_apps/chat_server/src/http.rs",
+      "bytes": 10503,
+      "sha256": "5100f68bfe2ac001e03b0904702289b3c3f7c402901a022760ee8406feb5b845"
+    },
+    {
+      "path": "chat_apps/chat_server/src/hub.rs",
+      "bytes": 1856,
+      "sha256": "b6e4e2d246d1e644ba5c4b7e6f21b63dec76850212641652cb7ced5fc053670e"
+    },
+    {
+      "path": "chat_apps/chat_server/src/lib.rs",
+      "bytes": 2872,
+      "sha256": "ef6d75f189f2371709960bb2dfb03debd897db7eef71aa846a925c3ac8349b39"
+    },
+    {
+      "path": "chat_apps/chat_server/src/logout.rs",
+      "bytes": 1677,
+      "sha256": "8cfb63b62c4451f2d10c9dde59fadb3a9bfd9f85cf484f960ac66af2e5ddab02"
+    },
+    {
+      "path": "chat_apps/chat_server/src/main.rs",
+      "bytes": 141,
+      "sha256": "b0df000b64f7e56623b22f62c54f65e084b73f8eaa80fbb1baca3c1d601519c7"
+    },
+    {
+      "path": "chat_apps/chat_server/src/room_auth.rs",
+      "bytes": 5253,
+      "sha256": "8633e4df177a01f5a10ddf0d9cf515ac8d48c9508ada71f06947f6c93c1a7288"
+    },
+    {
+      "path": "chat_apps/chat_server/src/signin.rs",
+      "bytes": 11580,
+      "sha256": "2d4eab2ace9ed7632f6106b06fc64395236ddf209babd1d04b99eccae5945679"
+    },
+    {
+      "path": "chat_apps/chat_server/src/signup.rs",
+      "bytes": 12204,
+      "sha256": "493bf96ce87d223de732c6214a51ae5b9ade0b30a766e38b23e1d25f4b1fb6bf"
+    },
+    {
+      "path": "chat_apps/chat_server/src/ssr.rs",
+      "bytes": 437,
+      "sha256": "888a7d3d3aed05170cba7ce6c115399ff8c29753e0d7617d6e8f04495d5df049"
+    },
+    {
+      "path": "chat_apps/chat_server/src/state.rs",
+      "bytes": 917,
+      "sha256": "e6c05be0bc036caedaa55d6c72d9ada3a888ea6cbfdd35e57ece043044c508d3"
+    },
+    {
+      "path": "chat_apps/chat_server/src/ws.rs",
+      "bytes": 10584,
+      "sha256": "da0e577535e00da7ec4bcd090f1acd456721c471f2ce17888d882b3eaf2b8f45"
+    },
+    {
+      "path": "chat_apps/chat_server/tests/day24_signup_complete.rs",
+      "bytes": 5141,
+      "sha256": "9263063d3c022eb664fecf81414c6902f3ba15ef2c8c8278fd4c53a98ee59474"
+    },
+    {
+      "path": "chat_apps/chat_server/tests/day26_logout.rs",
+      "bytes": 3169,
+      "sha256": "d7c66e2e59db2a65edadeb8bd6fad0483e6c8e9361ab4fb448fc9673dd73620e"
+    },
+    {
+      "path": "chat_apps/chat_server/tests/root_hub_contract.rs",
+      "bytes": 1581,
+      "sha256": "e32eddb4f3fd31ddf155cf275f700150538fea26c5ec2ae5e7171cc0240bab97"
+    },
+    {
+      "path": "chat_apps/chat_ui/Cargo.toml",
+      "bytes": 731,
+      "sha256": "83f9b6172b1a8c7c1fb65c938c86f1622d59da37e14f8db18b2a5c2efaba7ff5"
+    },
+    {
+      "path": "chat_apps/chat_ui/src/account.rs",
+      "bytes": 1604,
+      "sha256": "122050363f2835198f20207a7ca56420a7f37c3651fa4314664aaf4b7df90a77"
+    },
+    {
+      "path": "chat_apps/chat_ui/src/chat.css",
+      "bytes": 1253,
+      "sha256": "f33288d7f6c480c894ad3d0dab6396df11371b09c9406346c3aadd3428061b8b"
+    },
+    {
+      "path": "chat_apps/chat_ui/src/chat_socket.rs",
+      "bytes": 4439,
+      "sha256": "5cd0cf7b850eb16a4eaf2decaab9910a7fba67799576a123cfa14e24f05601cb"
+    },
+    {
+      "path": "chat_apps/chat_ui/src/lib.rs",
+      "bytes": 21744,
+      "sha256": "6efaa444131d06b189371333bf2e4868339002bf4b734478b36c6fa38551a4a1"
+    },
+    {
+      "path": "chat_apps/chat_ui/src/room_api.rs",
+      "bytes": 3685,
+      "sha256": "8f47d0c2994b01a2a33f2af2efcc65ec57da8e6d839926cbd4e8fa4a3e12f307"
+    },
+    {
+      "path": "chat_apps/migrations/20260930034455_crate_rooms.sql",
+      "bytes": 358,
+      "sha256": "4dad307f00d6d606be24b479d1f93421346338fdc8812cec24a1345366b6b99c"
+    },
+    {
+      "path": "chat_apps/migrations/20261007084321_create_messages.sql",
+      "bytes": 798,
+      "sha256": "08ce2f933e9c166b58d6c2e38b9eb9d237efc8fddaaa6c271b0a1f4c2ed68a2b"
+    },
+    {
+      "path": "chat_apps/migrations/20261018073931_create_auth_user.sql",
+      "bytes": 4169,
+      "sha256": "2315c7ed8c0bd9c54d82b27b03d0cc1933161a242db66f5d90702e3fa3861cb0"
+    },
+    {
+      "path": "chat_apps/migrations/20261018094242_create_ai_person.sql",
+      "bytes": 2369,
+      "sha256": "745f2efe516ccde16e942fb54a8b9feda6be8eb418bb324338d0c7dbcec48c3a"
+    },
+    {
+      "path": "chat_apps/migrations/20261018114024_creat_protocol.sql",
+      "bytes": 934,
+      "sha256": "45815d564b89938cd68baa124204b9521c008cab6e16dbb100dbb000c49b4c23"
+    },
+    {
+      "path": "chat_apps/migrations/20261018122554_creat_chat_action_log.sql",
+      "bytes": 625,
+      "sha256": "112f2a2995c9f64fba93937e96faac899e5f3622735c82bc09659cb31dca8d04"
+    },
+    {
+      "path": "chat_apps/migrations/20261019221857_member_identity.sql",
+      "bytes": 274,
+      "sha256": "c4a3e316e5089c65e2aa45571be9befdf9765aa1363d072dc0d661257849ad61"
+    },
+    {
+      "path": "chat_apps/migrations/20261020124211_mbr_room.sql",
+      "bytes": 819,
+      "sha256": "d8f9240b2d4acf48b90985639b5908c76af2723f853f649fedcb4030fef5b5bc"
+    },
+    {
+      "path": "chat_apps/migrations/20261020152737_mbr_sessions.sql",
+      "bytes": 376,
+      "sha256": "d69b64a3a421bfb005f0573b48ddfcb0dcc7635b657a2038fbfb2a356ae1f564"
+    },
+    {
+      "path": "chat_apps/rust-toolchain.toml",
+      "bytes": 103,
+      "sha256": "32314ae0f25d85fda9b7ad0c033266f677a9d772b7a39038c62a386cc3085b75"
+    },
+    {
+      "path": "crates/Cargo.lock",
+      "bytes": 13526,
+      "sha256": "64b0747db1de45a075d8cafa7014ae60ee5644cee996685f817ac87a2ebfbf27"
+    },
+    {
+      "path": "crates/Cargo.toml",
+      "bytes": 746,
+      "sha256": "4801f223d1fbaa40d83f8e5d5b69652429c17a4d679dd859bd5ca53555406e0f"
+    },
+    {
+      "path": "crates/ai_core/Cargo.toml",
+      "bytes": 227,
+      "sha256": "8253f7e9d37b44b2d30a7949cdca7a3ad63eeaeb2f543d36f838d29c3b5e82dc"
+    },
+    {
+      "path": "crates/ai_core/src/lib.rs",
+      "bytes": 2217,
+      "sha256": "e6db6a1f3136d99f27896bc8291ca16b677ff4ae92f0c0edcfae90cd23b28e15"
+    },
+    {
+      "path": "crates/rust-toolchain.toml",
+      "bytes": 103,
+      "sha256": "32314ae0f25d85fda9b7ad0c033266f677a9d772b7a39038c62a386cc3085b75"
+    },
+    {
+      "path": "crates/shared/Cargo.toml",
+      "bytes": 245,
+      "sha256": "12ae15dab9c0bd8c1649e9afdfb135a3483910c9e93f39330569976936ab8c3b"
+    },
+    {
+      "path": "crates/shared/src/auth.rs",
+      "bytes": 1075,
+      "sha256": "bbe6174303bea79930e3ba0c99bb033742dc498991db018b2c1f938af317a5c8"
+    },
+    {
+      "path": "crates/shared/src/lib.rs",
+      "bytes": 3413,
+      "sha256": "1c05d0ed018cd5655e7a193ac64916a6f88f2dcf33da7fc07aa014fd4e84d1a1"
+    },
+    {
+      "path": "crates/telemetry/Cargo.toml",
+      "bytes": 95,
+      "sha256": "af9e3f9bb8f18ba50d6cb14cb0dcf5cdb37abe2c16464b464c6be5dcbdf57963"
+    },
+    {
+      "path": "crates/telemetry/src/lib.rs",
+      "bytes": 2,
+      "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+    },
+    {
+      "path": "deploy/nginx/config",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "deploy/otel_collector/config",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "deploy/systemd/config",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "pet_apps/Cargo.lock",
+      "bytes": 138360,
+      "sha256": "20bcc146127363926af68dd934ca8333d4611fd56a5e55779202f6d89cd1a108"
+    },
+    {
+      "path": "pet_apps/Cargo.toml",
+      "bytes": 780,
+      "sha256": "a33b5b189db4bda8018da097d896e6dcf485397dfb368f4b46e8aaafe8f4eaff"
+    },
+    {
+      "path": "pet_apps/migrations/20261018091733_create_pet.sql",
+      "bytes": 3178,
+      "sha256": "5e7d59f4154a53443b14591bd6380241048a23f9f3f92227910a8c8524584eee"
+    },
+    {
+      "path": "pet_apps/migrations/20261018095626_create_pet_owner.sql",
+      "bytes": 428,
+      "sha256": "2b9de1dc9ae66b8bb31512bf42b60df0c5845e84f12d5fc0722bb8a931ebfd83"
+    },
+    {
+      "path": "pet_apps/migrations/20261018114025_creat_protocol.sql",
+      "bytes": 931,
+      "sha256": "54734a764e4f498a06aec1c7febceef6bf4709890b53f5820e52d6afa0fc05af"
+    },
+    {
+      "path": "pet_apps/pet_application/Cargo.toml",
+      "bytes": 193,
+      "sha256": "c33e8f93f92f6079e0e8b81098ff404f58c8ed9b600304c413de30cd1e7837c8"
+    },
+    {
+      "path": "pet_apps/pet_application/src/lib.rs",
+      "bytes": 1126,
+      "sha256": "f9e0126fa51b9655b10ea9bce8fb45b9ade38d46bac8e3332de732b1a7e9af69"
+    },
+    {
+      "path": "pet_apps/pet_domain/Cargo.toml",
+      "bytes": 188,
+      "sha256": "18b159f763532b13c1eec26e65ab4be1e0dda4c351e217b73fd2aa4bdc4a9a32"
+    },
+    {
+      "path": "pet_apps/pet_domain/src/cleanup.rs",
+      "bytes": 2228,
+      "sha256": "280c95603d60b7868f3112eb48bd627cb8a6887c28ea4203b55e853e42c98970"
+    },
+    {
+      "path": "pet_apps/pet_domain/src/cleanup_event.rs",
+      "bytes": 1921,
+      "sha256": "2b069c06f33901419a07db047eb5b9176858e8c8b9f34bad9a860aa71eac6a57"
+    },
+    {
+      "path": "pet_apps/pet_domain/src/error.rs",
+      "bytes": 277,
+      "sha256": "99614b9674668220ca2905d59cc3361230d17094f97070f668f7d5d8781e40d4"
+    },
+    {
+      "path": "pet_apps/pet_domain/src/lib.rs",
+      "bytes": 2499,
+      "sha256": "36aa2be5757633e5703f0f455e2d0ff0cd7639564df51f8f97575b4a03b61736"
+    },
+    {
+      "path": "pet_apps/pet_domain/src/profile.rs",
+      "bytes": 6003,
+      "sha256": "0e37191f3c5d8f33e613dc6855a36e5bfbbc5a303d69295e0607773890201714"
+    },
+    {
+      "path": "pet_apps/pet_domain/tests/cleanup_contract.rs",
+      "bytes": 1769,
+      "sha256": "6f10b065cba9e81f5266d68948ae7a7310818e916925e6e2da2efad9e5ab508e"
+    },
+    {
+      "path": "pet_apps/pet_persistence/Cargo.toml",
+      "bytes": 225,
+      "sha256": "f46583f7e63c1b10293e36db20897c1f9ea1f41a2e9506b46140005daaab3308"
+    },
+    {
+      "path": "pet_apps/pet_persistence/src/lib.rs",
+      "bytes": 2225,
+      "sha256": "6d5c3a1e2079c054380fe03667ff153525a990d8093d74241e1897fea15a67fa"
+    },
+    {
+      "path": "pet_apps/pet_server/Cargo.toml",
+      "bytes": 659,
+      "sha256": "d6207a0382c7b2d07e27bf5b45508fd8347604563731121a71e9a2251ee5927a"
+    },
+    {
+      "path": "pet_apps/pet_server/build.rs",
+      "bytes": 39,
+      "sha256": "487059eaf8a947b80f20a9aacac038a5047b2ad69d2401b827376c67d6fe847f"
+    },
+    {
+      "path": "pet_apps/pet_server/capabilities/default.json",
+      "bytes": 298,
+      "sha256": "4556925e80ea0a23925b6a643fcd8487232ef5f465bc8b899694ae6637dfe21b"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/128x128.png",
+      "bytes": 31933,
+      "sha256": "dbea8a1ad3e897745d137ce43a39a9790aa2265916f12772966ef107b172d983"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/128x128@2x.png",
+      "bytes": 113573,
+      "sha256": "7b54be5d9aed58da54e0eb7c3d892a453b1eb450dc26361d7c317250ef8ba1ac"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/32x32.png",
+      "bytes": 2581,
+      "sha256": "16b4237176236a5088d4bac83cc384317eb288f1856c7935458d77a90f6c17aa"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/Square107x107Logo.png",
+      "bytes": 23101,
+      "sha256": "1c7f1d9661776471c66ab3f9f5f75d6059859c029e1167fe126a4f4c37c55906"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/Square142x142Logo.png",
+      "bytes": 38630,
+      "sha256": "832d64f701839da47b29b837c970fad48122b70d889f2a783fbc9ee29368c405"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/Square150x150Logo.png",
+      "bytes": 42757,
+      "sha256": "f32af4147669c7b9fe21fd70e13d040dd89694f44995294bcb7dc55b96bdc3bb"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/Square284x284Logo.png",
+      "bytes": 137125,
+      "sha256": "2fef81827f842f43a369e32895d2213cd443b70dd04af168dc2940c36b9379bc"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/Square30x30Logo.png",
+      "bytes": 2307,
+      "sha256": "9ee6d8935906a8422544bd57fdb7ce9e9a580ac1ab5756ab7395d351324b781b"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/Square310x310Logo.png",
+      "bytes": 160364,
+      "sha256": "174eb6847208769273f1c1d718db65e96b88583a1b221b32a317e60d150add55"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/Square44x44Logo.png",
+      "bytes": 4556,
+      "sha256": "832904a1ea791da3ea457f95d729b47e118600a2778715cf091b8132039f22e4"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/Square71x71Logo.png",
+      "bytes": 10883,
+      "sha256": "753b260f07f85b50107819ea47ec7791045dadbc728514350fdc2b277ecae4d5"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/Square89x89Logo.png",
+      "bytes": 16409,
+      "sha256": "a306f3318ff107efa2b89c9983977610f314899adfe27a35d2e0a19ba54a3580"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/StoreLogo.png",
+      "bytes": 5755,
+      "sha256": "93e0bce1e4a26f10a4212daf26eff4536b41d2b5a5bb63d823ba6e980917ef52"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/android/mipmap-hdpi/ic_launcher.png",
+      "bytes": 5549,
+      "sha256": "d3fac2d1cea946e10a1b8c8145b3045696cec5807d25ca2e4af04b2aed978e23"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/android/mipmap-hdpi/ic_launcher_foreground.png",
+      "bytes": 49261,
+      "sha256": "9bb9c3cdf35334befa28a358571f11dd0683b8188f5456cd535a7631da88d699"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/android/mipmap-hdpi/ic_launcher_round.png",
+      "bytes": 5549,
+      "sha256": "d3fac2d1cea946e10a1b8c8145b3045696cec5807d25ca2e4af04b2aed978e23"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/android/mipmap-mdpi/ic_launcher.png",
+      "bytes": 5350,
+      "sha256": "af9be69fc78d5d4a72a160d34bfcc5172f73193d9842c3d8f16fb1d0dbb6ab27"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/android/mipmap-mdpi/ic_launcher_foreground.png",
+      "bytes": 23482,
+      "sha256": "6c89470d0bb185f02b7f7ef825f0e42a7f27998fbaa51b6bccae12614024063c"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/android/mipmap-mdpi/ic_launcher_round.png",
+      "bytes": 5350,
+      "sha256": "af9be69fc78d5d4a72a160d34bfcc5172f73193d9842c3d8f16fb1d0dbb6ab27"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/android/mipmap-xhdpi/ic_launcher.png",
+      "bytes": 18938,
+      "sha256": "a0aa4abe094f9f20d1f3786becfedaf22502bcada6230901cfa14a32ed3b73f4"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/android/mipmap-xhdpi/ic_launcher_foreground.png",
+      "bytes": 83314,
+      "sha256": "8b8db343826a1beeda25b2f450209040a32c4e0a5b6fa57d8b883f852a7f00cc"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/android/mipmap-xhdpi/ic_launcher_round.png",
+      "bytes": 18938,
+      "sha256": "a0aa4abe094f9f20d1f3786becfedaf22502bcada6230901cfa14a32ed3b73f4"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/android/mipmap-xxhdpi/ic_launcher.png",
+      "bytes": 39658,
+      "sha256": "f96aa5a8f12e2e3c1d4e3eeb7a524584a52bace077bef995fd00560b95669afd"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/android/mipmap-xxhdpi/ic_launcher_foreground.png",
+      "bytes": 173500,
+      "sha256": "ae9119237ab76dc1ce9308e23959b595ca672df68737ed371fce20745d791f56"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/android/mipmap-xxhdpi/ic_launcher_round.png",
+      "bytes": 39658,
+      "sha256": "f96aa5a8f12e2e3c1d4e3eeb7a524584a52bace077bef995fd00560b95669afd"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/android/mipmap-xxxhdpi/ic_launcher.png",
+      "bytes": 67171,
+      "sha256": "a994b4a23e69a67ef90fb8264fcb17abe10f2ff45dc15e4d3668b4ba188c67a1"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/android/mipmap-xxxhdpi/ic_launcher_foreground.png",
+      "bytes": 288156,
+      "sha256": "139564bdf620f208d5b4dbc15e4d981e0fb4557cf342a7a2c920d9175b0f7978"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/android/mipmap-xxxhdpi/ic_launcher_round.png",
+      "bytes": 67171,
+      "sha256": "a994b4a23e69a67ef90fb8264fcb17abe10f2ff45dc15e4d3668b4ba188c67a1"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/icon.icns",
+      "bytes": 2139136,
+      "sha256": "34799188eca85363aeffe9a6c9cc38ba68d8530a3c89338f06567dad36a862cf"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/icon.ico",
+      "bytes": 134507,
+      "sha256": "a940f5af1b3431847a7e5473a170de8c0f8d7ad48f965528f7a351488a3c0b42"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/icon.png",
+      "bytes": 382867,
+      "sha256": "8baa6ddc784e55e92664077db5215b31f6dcba93dc17e9a01f7d10df251ba9dd"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/ios/AppIcon-20x20@1x.png",
+      "bytes": 1159,
+      "sha256": "1578b55a386994d614f05e3e2ea0ae4dc542152edfbe34eedfe27d7fdc794eb1"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/ios/AppIcon-20x20@2x-1.png",
+      "bytes": 3832,
+      "sha256": "ce625227789f927cc52cf087d1f96505b2bd9b1c2cd938d1314401c13a152aa4"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/ios/AppIcon-20x20@2x.png",
+      "bytes": 3832,
+      "sha256": "ce625227789f927cc52cf087d1f96505b2bd9b1c2cd938d1314401c13a152aa4"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/ios/AppIcon-20x20@3x.png",
+      "bytes": 7985,
+      "sha256": "f95d8820101d83a41119ae40c1418d6897db658fe2a548f77678cd6599f86131"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/ios/AppIcon-29x29@1x.png",
+      "bytes": 2173,
+      "sha256": "f9184bd03c54ac2e734c7b0c9fc4bab3d58ce1839a51cfdadab2800d3567f815"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/ios/AppIcon-29x29@2x-1.png",
+      "bytes": 7551,
+      "sha256": "a89fd7b82c9019cee210b11d20c0d86cc84c39c2c5de11382026c009700ccd76"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/ios/AppIcon-29x29@2x.png",
+      "bytes": 7551,
+      "sha256": "a89fd7b82c9019cee210b11d20c0d86cc84c39c2c5de11382026c009700ccd76"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/ios/AppIcon-29x29@3x.png",
+      "bytes": 15786,
+      "sha256": "ee6d1c91039dad9b6a6945ecc65ec0e38a52e89af5b43b4594bb9aee9668a4f4"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/ios/AppIcon-40x40@1x.png",
+      "bytes": 3832,
+      "sha256": "ce625227789f927cc52cf087d1f96505b2bd9b1c2cd938d1314401c13a152aa4"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/ios/AppIcon-40x40@2x-1.png",
+      "bytes": 13562,
+      "sha256": "571d98584f7e9721ff74a706882182ea53d038caf38b7cbe0ccda0054b1c3fa0"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/ios/AppIcon-40x40@2x.png",
+      "bytes": 13562,
+      "sha256": "571d98584f7e9721ff74a706882182ea53d038caf38b7cbe0ccda0054b1c3fa0"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/ios/AppIcon-40x40@3x.png",
+      "bytes": 28367,
+      "sha256": "192356ed10ef98bf7d5c46beda25f6f917f5000f1c669212a10f5d64e834ffbd"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/ios/AppIcon-512@2x.png",
+      "bytes": 1098099,
+      "sha256": "67372af16c540b63ab74c33a899af8dd0aa42d6342d75a0cbabbcda43bf1052c"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/ios/AppIcon-60x60@2x.png",
+      "bytes": 28367,
+      "sha256": "192356ed10ef98bf7d5c46beda25f6f917f5000f1c669212a10f5d64e834ffbd"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/ios/AppIcon-60x60@3x.png",
+      "bytes": 59678,
+      "sha256": "e6d3a1fcb466ee737df030ba344db626e21d9d27e5cd14f815580de6e3a09c64"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/ios/AppIcon-76x76@1x.png",
+      "bytes": 12322,
+      "sha256": "d8fc6013ada9d39fd2f947503d4b0b7fc01841205c3cb7571c46a822772df426"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/ios/AppIcon-76x76@2x.png",
+      "bytes": 43834,
+      "sha256": "5faafac34477102f930a6f71a8098f948a199223f812214b947be00c578c6fd3"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/ios/AppIcon-83.5x83.5@2x.png",
+      "bytes": 52041,
+      "sha256": "cf9108ff8ea210fa5c79d9419ac062621988e0c38b5f3ce566ecf8bc51a07297"
+    },
+    {
+      "path": "pet_apps/pet_server/icons/tortoise.jpg",
+      "bytes": 180375,
+      "sha256": "ca0e93326319cfd6902abb570bab6cd2b26ebdd59b61d07090c792019b6cbea0"
+    },
+    {
+      "path": "pet_apps/pet_server/src/chat.rs",
+      "bytes": 202,
+      "sha256": "c09321faf1b4fff0895015b203cd51492ed20c138281d726725b4887e3e68dfc"
+    },
+    {
+      "path": "pet_apps/pet_server/src/file_organizer.rs",
+      "bytes": 15558,
+      "sha256": "8953377806bafcb76a8eecd535b1f5003b5a26f48bf7b6e725d2067a3fdfebb3"
+    },
+    {
+      "path": "pet_apps/pet_server/src/lib.rs",
+      "bytes": 12972,
+      "sha256": "f7387e27d1fdeecbed4d8abdceb1b4e1eb124bc000080f052f5c0711020d93d8"
+    },
+    {
+      "path": "pet_apps/pet_server/src/main.rs",
+      "bytes": 390,
+      "sha256": "a3d879bcc777d3f26266953d4e115084660d8b2fbcf5101c8f1303c14c389cfa"
+    },
+    {
+      "path": "pet_apps/pet_server/src/pet_store.rs",
+      "bytes": 9758,
+      "sha256": "a789596aeb2889d4ace7e892c83c253be6cc354bd9626be0942b2a3b512642c9"
+    },
+    {
+      "path": "pet_apps/pet_server/src/pet_windows.rs",
+      "bytes": 5696,
+      "sha256": "d07f2db516b6bc83dbe144a6a2d7acffbf0db24df888818d5de85086e41a746b"
+    },
+    {
+      "path": "pet_apps/pet_server/src/roam.rs",
+      "bytes": 10023,
+      "sha256": "434494adfbd58cb3765c269b6ad16d7ba26d87bd2fca666d02800a61e4b76034"
+    },
+    {
+      "path": "pet_apps/pet_server/tauri.conf.json",
+      "bytes": 753,
+      "sha256": "db71780a402742fd121d9dc5b9c955977aa9e3f54f98de199386a5732606fef2"
+    },
+    {
+      "path": "pet_apps/pet_server/tests/cleanup_event_contract.rs",
+      "bytes": 1648,
+      "sha256": "c345a1f5efa4dc3adf318fa3c31460d5b7a0f73a59406392bde945a79498935e"
+    },
+    {
+      "path": "pet_apps/pet_server/tests/day23_saved_pets.rs",
+      "bytes": 1721,
+      "sha256": "decbaa9e79f1a1f4853cf7463a239a3fcc101652b203bf31928ab97d319d10b7"
+    },
+    {
+      "path": "pet_apps/pet_server/tests/day24_active_pet.rs",
+      "bytes": 1518,
+      "sha256": "4a8d72e0a7e3668fd9d9249e122ac5c188855ccb4addfe58522dbbb83993cb1e"
+    },
+    {
+      "path": "pet_apps/pet_server/tests/day27_create_and_select.rs",
+      "bytes": 1495,
+      "sha256": "5b8dbc006638f2f8edb3d1610c7526aece57c78f8fb66f727553b502ecc6be09"
+    },
+    {
+      "path": "pet_apps/pet_server/tests/day5_codec_tests.rs",
+      "bytes": 1448,
+      "sha256": "bd545efa7d30c873d062686cd014e00c991877271f164a012529801f2d8b9374"
+    },
+    {
+      "path": "pet_apps/pet_server/tests/pet_machine.rs",
+      "bytes": 1174,
+      "sha256": "7fb62d5705a89fed2cacf08ebe57087f85e7846805f4b8d50cba325a3c989bfd"
+    },
+    {
+      "path": "pet_apps/pet_server/tests/profile_contract.rs",
+      "bytes": 1519,
+      "sha256": "7c5ce157b8173a9167fb53b830336bcee7e1f5ac5fb64665997d5a7811b9d789"
+    },
+    {
+      "path": "pet_apps/pet_ui/Cargo.toml",
+      "bytes": 443,
+      "sha256": "6c9b1e2b4c518c28467bc7b41d392d74aaf56bc21823c2dc2fe437f22b93f21d"
+    },
+    {
+      "path": "pet_apps/pet_ui/Trunk.toml",
+      "bytes": 97,
+      "sha256": "afb983c9167e70c116dd8268940668d5ee85748a1e2a88d7170778dba0f075ad"
+    },
+    {
+      "path": "pet_apps/pet_ui/index.html",
+      "bytes": 3656,
+      "sha256": "4a6ebbf2dffb9da2b62b1690da9451b4cbbced911802e857917a905c6df572bc"
+    },
+    {
+      "path": "pet_apps/pet_ui/src/bridge.rs",
+      "bytes": 7208,
+      "sha256": "2d4583cdad3e9e88b4bd9c57c43336f3c56845e1f2089f297aa27493ad2cc690"
+    },
+    {
+      "path": "pet_apps/pet_ui/src/component/activity.rs",
+      "bytes": 6297,
+      "sha256": "769875b2827e2983947e5349e95711a7c2ae1d8271c449b836807cfe37e748f0"
+    },
+    {
+      "path": "pet_apps/pet_ui/src/component/chat.rs",
+      "bytes": 3587,
+      "sha256": "b6d95cbe50ec94856ce9b64bab030356cf9c3a54be645977a226578f5762198c"
+    },
+    {
+      "path": "pet_apps/pet_ui/src/component/control.rs",
+      "bytes": 2367,
+      "sha256": "97b09443c6dfeea159f722ddb89768bd55a59682ff55b0bf05d303f4c42e7962"
+    },
+    {
+      "path": "pet_apps/pet_ui/src/component/mod.rs",
+      "bytes": 556,
+      "sha256": "fca359aac32f8c0b4f524d81517b065a0323f6b1243b5b45f5c5dc714f7a6a4f"
+    },
+    {
+      "path": "pet_apps/pet_ui/src/duplicate_preview.rs",
+      "bytes": 2676,
+      "sha256": "3758377fad9b0ed1a32eeac9359b0b769b4868735798372d5aefade364027dcb"
+    },
+    {
+      "path": "pet_apps/pet_ui/src/file_scan_view.rs",
+      "bytes": 2074,
+      "sha256": "67c422e761fce629b737094d1101ebfb45fe6d8347be8ed6a3a2bff400b352bf"
+    },
+    {
+      "path": "pet_apps/pet_ui/src/main.rs",
+      "bytes": 18539,
+      "sha256": "1261a7a73e5ad3b30ed6c05073d57d6c76f72313372e6364b0c3b8ecaf0806fd"
+    },
+    {
+      "path": "pet_apps/pet_ui/style.css",
+      "bytes": 4150,
+      "sha256": "13cd5bcea6f883021bbb67cdec49bf93e559dea8619606ad94956485b0637f4d"
+    },
+    {
+      "path": "pet_apps/pet_ui/tests/day33-open-controls-selects-origin.test.mjs",
+      "bytes": 1820,
+      "sha256": "34b739b8e068e09197f04d04c1b784190267237b9dded28b972e1b64e6369bda"
+    },
+    {
+      "path": "pet_apps/pet_ui/tests/duplicate-preview-contract.test.mjs",
+      "bytes": 1431,
+      "sha256": "5c2731f44f3bd19abd3cc73a8d55bdb3d6b7af1ba268396326896b136cd422d8"
+    },
+    {
+      "path": "pet_apps/pet_ui/tests/scan-preview-contract.test.mjs",
+      "bytes": 1062,
+      "sha256": "fb80316941c9faffde9551d9b4672caad98113537a370b436c4ace2a79b8deb4"
+    },
+    {
+      "path": "pet_apps/pet_ui/tests/scan-preview-no-path.test.mjs",
+      "bytes": 1070,
+      "sha256": "a46bced9c82ff1710deb49076b975395b5a5f5329d8384b795f336e08242bd81"
+    },
+    {
+      "path": "pet_apps/rust-toolchain.toml",
+      "bytes": 103,
+      "sha256": "32314ae0f25d85fda9b7ad0c033266f677a9d772b7a39038c62a386cc3085b75"
+    }
+  ]
+}

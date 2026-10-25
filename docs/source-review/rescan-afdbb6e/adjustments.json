@@ -1,0 +1,118 @@
+{
+  "source_sha": "afdbb6e81382e8d82095827a90c52cc3309a3e20",
+  "items": [
+    {
+      "id": "Chat-1:D01",
+      "status": "implemented_pending_acceptance",
+      "current": "登入頁合併已套用",
+      "next": "登入／Session／hydration／瀏覽器整鏈驗收",
+      "location": "chat_apps/chat_server/src/signin.rs:35",
+      "source_sha": "afdbb6e81382e8d82095827a90c52cc3309a3e20"
+    },
+    {
+      "id": "Chat-2:unused-room-api",
+      "status": "pending_cleanup",
+      "current": "私有 room_api::create_room 未見 caller",
+      "next": "清函式與獨占 imports／features；保留查詢與正式建房",
+      "location": "chat_apps/chat_ui/src/room_api.rs:6",
+      "source_sha": "afdbb6e81382e8d82095827a90c52cc3309a3e20"
+    },
+    {
+      "id": "Chat-3:D06",
+      "status": "pending_test_migration",
+      "current": "舊 helper 僅被測試使用",
+      "next": "先遷 Day19 斷言到 refresh_result_view，再刪 refreshed_room_list",
+      "location": "chat_apps/chat_ui/src/lib.rs:53",
+      "source_sha": "afdbb6e81382e8d82095827a90c52cc3309a3e20"
+    },
+    {
+      "id": "Chat-4:D05,D07",
+      "status": "partial",
+      "current": "D07 名稱規則已共用；D05 認證重複仍在",
+      "next": "保留 transport 契約與共用認證 FIFO",
+      "location": "chat_apps/chat_application/src/lib.rs:28",
+      "source_sha": "afdbb6e81382e8d82095827a90c52cc3309a3e20"
+    },
+    {
+      "id": "Pet-1:D02",
+      "status": "implemented_pending_acceptance",
+      "current": "舊產物已移除；CI release／native build 成功",
+      "next": "新 dist 契約接入 CI；實際 binary／GUI 驗收",
+      "location": "pet_apps/pet_server/tauri.conf.json",
+      "source_sha": "afdbb6e81382e8d82095827a90c52cc3309a3e20"
+    },
+    {
+      "id": "Pet-2:unused-bridge",
+      "status": "pending_cleanup",
+      "current": "孤立 validate_new_pet_name_js 宣告仍在",
+      "next": "只清未使用 extern；保留 server IPC 與 PetStore 名稱規則",
+      "location": "pet_apps/pet_ui/src/bridge.rs:67",
+      "source_sha": "afdbb6e81382e8d82095827a90c52cc3309a3e20"
+    },
+    {
+      "id": "Pet-3:D03",
+      "status": "pending_compatibility_audit",
+      "current": "legacy IPC／global state／menu 仍存在",
+      "next": "核對外部／相容 caller 後連同註冊與獨占測試清理",
+      "location": "pet_apps/pet_server/src/lib.rs:275",
+      "source_sha": "afdbb6e81382e8d82095827a90c52cc3309a3e20"
+    },
+    {
+      "id": "Pet-4:D08",
+      "status": "pending_cleanup",
+      "current": "掃描 reset／loading setter 重複仍在",
+      "next": "保留 await／generation 早退正確釋放 busy",
+      "location": "pet_apps/pet_ui/src/main.rs:298",
+      "source_sha": "afdbb6e81382e8d82095827a90c52cc3309a3e20"
+    },
+    {
+      "id": "Analytics-1:D09",
+      "status": "pending_cleanup",
+      "current": "三份 add／it_works 範本無業務 caller",
+      "next": "清範本、保留 package；不誤認 persistence 空庫",
+      "location": "analytics_apps/analytics_application/src/lib.rs:1",
+      "source_sha": "afdbb6e81382e8d82095827a90c52cc3309a3e20"
+    },
+    {
+      "id": "Analytics-2:D04",
+      "status": "pending_compatibility_audit",
+      "current": "公開 legacy admin 非 main 登入路徑",
+      "next": "相容 API 核對後清 module／Config／專屬測試",
+      "location": "analytics_apps/analytics_server/src/admin.rs",
+      "source_sha": "afdbb6e81382e8d82095827a90c52cc3309a3e20"
+    },
+    {
+      "id": "Analytics-3:keep-fixture",
+      "status": "keep",
+      "current": "initialize 仍為整合測試 fixture 使用",
+      "next": "保留 initialize；與 startup ensure_default 分別追蹤",
+      "location": "analytics_apps/analytics_server/src/bootstrap.rs:3",
+      "source_sha": "afdbb6e81382e8d82095827a90c52cc3309a3e20"
+    },
+    {
+      "id": "Analytics-4:test-only-handlers",
+      "status": "partial",
+      "current": "精確查詢已正式註冊；編譯修復；Session 需求落差仍在",
+      "next": "保留來源／交易契約；對齊正式人員查詢；補 CI 選取 persistence package",
+      "location": "analytics_apps/analytics_server/src/password_login.rs:440",
+      "source_sha": "afdbb6e81382e8d82095827a90c52cc3309a3e20"
+    },
+    {
+      "id": "Analytics-5:stale-assertions",
+      "status": "resolved",
+      "current": "四個文字斷言已修；三個失敗已消除",
+      "next": "不重教；保留修復來源與測試證據",
+      "location": "analytics_apps/analytics_server/tests/day27_dashboard_source.rs:129",
+      "source_sha": "afdbb6e81382e8d82095827a90c52cc3309a3e20"
+    }
+  ],
+  "counts": {
+    "pending_cleanup_or_migration_or_audit": 7,
+    "partial": 2,
+    "implemented_pending_acceptance": 2,
+    "keep": 1,
+    "resolved": 1
+  },
+  "new_product_changes": false,
+  "new_runtime_tests": false
+}

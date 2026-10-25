@@ -3729,7 +3729,7 @@
       "Analytics-4:test-only-handlers",
       "Analytics-5:stale-assertions"
     ],
-    "status": "compile and stale assertions resolved; local PostgreSQL regression passed; query authorization and full acceptance pending",
+    "status": "13 rechecked: 7 pending, 2 partial, 2 implemented pending acceptance, 1 keep, 1 resolved; 7 CI workflows successful",
     "rules": "docs/COMMON_LEARNING_RULES.md",
     "baseline_document_commit": "51d888bcefe1d85e31f51aaac89c01a25536d07c",
     "evidence": "docs/source-review/followup-adjustments-2026-10-25.json",
@@ -3738,7 +3738,9 @@
     "last_full_comparison_unchanged": true,
     "product_repository_read_only": true,
     "previous_source_sha": "3236b94e95555c20e4709b5db40b0a8688b5762e",
-    "latest_verification": "docs/source-review/2026-10-25-assertions-afdbb6e.md"
+    "latest_verification": "docs/source-review/2026-10-25-assertions-afdbb6e.md",
+    "latest_review": "docs/source-review/2026-10-25-adjustments-rescan-afdbb6e.md",
+    "machine_readable": "docs/source-review/rescan-afdbb6e/adjustments.json"
   },
   "article_status_review": {
     "date": "2026-10-25",
@@ -4065,5 +4067,29 @@
     "next_day_unchanged": true,
     "last_full_comparison_unchanged": true,
     "query_authorization_requirement_mismatch": "unchanged from e753c36 verification"
+  },
+  "latest_adjustment_review": {
+    "date": "2026-10-25",
+    "checked_at": "2026-10-25T00:58:42.268528+00:00",
+    "source_sha": "afdbb6e81382e8d82095827a90c52cc3309a3e20",
+    "document_baseline_sha": "bba8fc5f53b368455eab4482bea52ed237b9a26d",
+    "report": "docs/source-review/2026-10-25-adjustments-rescan-afdbb6e.md",
+    "machine_readable": "docs/source-review/rescan-afdbb6e/adjustments.json",
+    "inventory": "docs/source-review/rescan-afdbb6e/inventory.json",
+    "ci_snapshot": "docs/source-review/rescan-afdbb6e/ci.json",
+    "item_count": 13,
+    "counts": {
+      "pending": 7,
+      "partial": 2,
+      "implemented_pending_acceptance": 2,
+      "keep": 1,
+      "resolved": 1
+    },
+    "ci_workflows_success": 7,
+    "new_runtime_tests": false,
+    "product_modified": false,
+    "next_day_unchanged": true,
+    "makeup_queue_unchanged": true,
+    "last_full_comparison_unchanged": true
   }
 }
