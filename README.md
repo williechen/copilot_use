@@ -1,5 +1,7 @@
 # copilot_use
 
+**正式開發階段：** [P0～P11 Roadmap（P0 非 AI；P1.0 基礎 Logging；P10 完整 Observability）](docs/ROADMAP_P0_P11.md)。本庫只維護規劃／文章；程式實作與驗收以 `rust_ai_ring` 為準。
+
 <!-- comparison-5c713553:start -->
 [最新三專案程式／文章比對](docs/source-review/2026-10-25-full-comparison-5c713553.md)：105個閱讀版本、111份修訂、21項差異；來源 `5c713553`，局部測試與完整驗收分開記錄。
 <!-- comparison-5c713553:end -->
