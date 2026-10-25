@@ -2,11 +2,11 @@
 
 [問題文章與後續更正總表](ARTICLE_CORRECTIONS.md)：已整併最新瀏覽器／Pet 原生證據；下方個別來源的交付／測試摘要保留其當次範圍。
 
-[Day35 r2：事件類型精確統計 SQLx Adapter 與正式路由一併接通](../daily/day-35/analytics-r2.md)
+[Day36：精確事件統計 API 改用人員 Session，不再接受來源 token 查詢](../daily/day-36/analytics.md)
 
-**已套用／驗證結果**：afdbb6e 完整 PostgreSQL 回歸 **44 passed／0 failed／1 ignored**、exit 0。五個 E0425 與三個舊文案失敗均已消除；既有查詢授權需求落差、角色等功能與完整瀏覽器驗收保留。下一篇 **Day36**。[完整結果](https://github.com/williechen/copilot_use/blob/main/docs/source-review/2026-10-25-assertions-afdbb6e.md)。
+**文章已交付／程式未套用／新測試未執行／未驗收**；來源 rust_ai_ring `61ed5930bd9ff38e0d5822eea2983121001d8422`。下一篇 **Day37**；[交付全文讀回](../daily/day-36/analytics-readback.json)。
 
-[Day35 r2 交付與讀回證據](../daily/day-35/analytics-r2-readback.json) · [上一篇 Day34](../daily/day-34/analytics.md)（首次 admin/admin 初始化與強制改密碼）。
+[上一篇 Day35 r2：精確事件統計 SQLx Adapter](../daily/day-35/analytics-r2.md) 已在後續來源套用並通過 PostgreSQL 增量回歸，但原來源 token 查詢授權不符人員 Session 需求；[Day35 原始交付證據](../daily/day-35/analytics-r2-readback.json)。
 
 [首頁](../analytics/README.md) · [目前功能與驗證現況](STATUS.md) · [進度](../../learning-state.json) · [manifest](manifest.json) · [CI 補充與來源證據](../daily/day-34/source-snapshot.json)
 

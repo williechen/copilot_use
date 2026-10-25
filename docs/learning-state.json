@@ -58,7 +58,7 @@
   "next_day": {
     "chat": 37,
     "pet": 37,
-    "analytics": 36
+    "analytics": 37
   },
   "last_full_comparison": "2026-10-16T22:47:14.399027+08:00",
   "next_full_comparison": "2026-10-24T00:00:00+08:00",
@@ -490,9 +490,9 @@
         "article_commit": "f02f1d3c3ecd55f59ba661a458a2e9661e34d011"
       },
       "analytics": {
-        "day": 31,
-        "path": "docs/teaching/daily/day-31/analytics.md",
-        "article_commit": "7b1fe052730d7a6d074a95fcd6f0ce19bed2259e"
+        "day": 36,
+        "path": "docs/teaching/daily/day-36/analytics.md",
+        "article_commit": "6bd111650673758f667e3c929bb85439b846ad9c"
       }
     },
     "legacy_notion_fields_scope": "Preserved historical Notion publication snapshot; current progress is next_day and latest_github_publication."
@@ -4003,7 +4003,7 @@
       "scope": "local PostgreSQL regression; not full product acceptance or CI"
     }
   },
-  "latest_analytics_publication": "docs/teaching/daily/day-35/analytics-r2-readback.json",
+  "latest_analytics_publication": "docs/teaching/daily/day-36/analytics-readback.json",
   "previous_source_validation_before_e753c36": {
     "source_sha": "f3f8255b0b701a1b57cb8c0a1737c3caa4319f2d",
     "full_execution_sha": "f3f8255b0b701a1b57cb8c0a1737c3caa4319f2d",
@@ -4201,6 +4201,36 @@
     "raw_error": null,
     "remaining_gaps": "真原生多窗重啟、失敗補償注入、漫遊動態 label、單幀單圖與 bundle 驗收待做",
     "sync_expected_parent_sha": "f02f1d3c3ecd55f59ba661a458a2e9661e34d011",
+    "sync_status": "pending"
+  },
+  "day36_analytics_delivery": {
+    "repository": "williechen/copilot_use",
+    "branch": "main",
+    "project": "analytics",
+    "day": 36,
+    "revision": "r1",
+    "title": "精確事件統計 API 改用人員 Session，不再接受來源 token 查詢",
+    "path": "docs/teaching/daily/day-36/analytics.md",
+    "parent": "5d9495cc059215cd82e7116114dd4e77e4664ecc",
+    "article_commit": "6bd111650673758f667e3c929bb85439b846ad9c",
+    "blob_sha": "3e6317f171fda71fa8cc0f5aa3dde36caad32d98",
+    "sha256": "ba931015cdca59b3c064efb0278b6c01967cc6750cf9402cff721e7647806253",
+    "full_text_verified": true,
+    "readback_at": "2026-10-25T06:16:23.436Z",
+    "source_repository": "williechen/rust_ai_ring",
+    "source_sha": "61ed5930bd9ff38e0d5822eea2983121001d8422",
+    "rules_sha": "3b5d00291cdd44e1fa039aad4b10d8f82b59982d",
+    "rules_version": "daily-tdd-minimum-v1+github-only-v1",
+    "status": "article_delivered_unapplied_unverified",
+    "main_application": "not applied",
+    "tests": "not run",
+    "functional_acceptance": false,
+    "archived": false,
+    "next_day_before": 36,
+    "next_day_after": 37,
+    "raw_error": null,
+    "remaining_gaps": "角色／來源 ACL、SSE、CSRF、機器配對、完整 PostgreSQL／HTTP／瀏覽器與 CI 待驗",
+    "sync_expected_parent_sha": "6bd111650673758f667e3c929bb85439b846ad9c",
     "sync_status": "pending"
   }
 }
