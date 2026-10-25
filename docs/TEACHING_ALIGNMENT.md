@@ -6,7 +6,7 @@
 
 核心60分鐘只計Red／Green，工程與其他作業另計。當日切片的小整理併Green說明，不以局部整理抵算Refactor。跨功能搬層、測試去重／遷移、共用fixture與CI重整放在同篇獨立專案Refactor段落，按專案相依接續；需要工程相依時明列阻礙，由工程規劃追蹤，不刪測試、不以龐大重構擴充每日教學範圍。
 
-## 每日漸進的全專案獨立工程
+## 同篇獨立的專案Refactor段落
 
 [工程整理入口](teaching/functional-refactoring/README.md)涵蓋三案、共用crates及跨workspace邊界。先讀三案各自進度，按整體架構／測試／CI依賴每天完成一個完整小工作包，接續前日未完成事項，不依當日教學切片重新選題，記錄於[工程進度](teaching/functional-refactoring/PROGRESS.md)。工程交付須含：
 

@@ -1,14 +1,14 @@
 # 文件總入口
 
-每日功能教學與全專案漸進工程分開交付及驗收。核心60分鐘只計Red／Green，專案Refactor與其他交付另計；rust_ai_ring唯讀，使用者自行套用。
+每日文章的功能Red／Green與專案Refactor分設同層段落，分別記錄驗證。核心60分鐘只計Red／Green，專案Refactor與其他交付另計；rust_ai_ring唯讀，使用者自行套用。
 
 [共用規則](COMMON_LEARNING_RULES.md) · [功能與驗證](teaching/current/STATUS.md) · [工程進度](teaching/functional-refactoring/PROGRESS.md) · [學習進度](learning-state.json) · [manifest](teaching/current/manifest.json)
 
 | 專案 | 現行教學 | 下一篇 | 驗證範圍 |
 | --- | --- | --- | --- |
-| Chat | [Day38 r2：搜尋失敗可見狀態與既有房間連結](teaching/daily/day-38/chat-r2.md) | Day39 | 完整patch與精確讀回；套用檢查／語法解析通過；產品未套用、Red／Green／DB／GUI未執行 |
-| Pet | [Day38 r2：逐 UUID 生活窗漫遊任務](teaching/daily/day-38/pet-r2.md) | Day39 | 完整patch與精確讀回；套用檢查／語法解析通過；產品未套用、Red／Green／DB／GUI未執行 |
-| Analytics | [Day38 r2：上報拒絕重複 Authorization](teaching/daily/day-38/analytics-r2.md) | Day39 | 完整patch與精確讀回；套用檢查／語法解析通過；產品未套用、Red／Green／DB／GUI未執行 |
+| Chat | [Day38 r3：搜尋失敗可見狀態與既有房間連結](teaching/daily/day-38/chat-r3.md) | Day39 | 完整patch與精確讀回；套用檢查／語法解析通過；產品未套用、Red／Green／DB／GUI未執行 |
+| Pet | [Day38 r3：逐 UUID 生活窗漫遊任務](teaching/daily/day-38/pet-r3.md) | Day39 | 完整patch與精確讀回；套用檢查／語法解析通過；產品未套用、Red／Green／DB／GUI未執行 |
+| Analytics | [Day38 r3：上報拒絕重複 Authorization](teaching/daily/day-38/analytics-r3.md) | Day39 | 完整patch與精確讀回；套用檢查／語法解析通過；產品未套用、Red／Green／DB／GUI未執行 |
 
 [Chat首頁](teaching/chat/README.md) · [Pet首頁](teaching/pet/README.md) · [Analytics首頁](teaching/analytics/README.md)
 

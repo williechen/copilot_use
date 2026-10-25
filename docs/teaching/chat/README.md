@@ -1,12 +1,12 @@
 # Chat 首頁
 
-每日功能教學與全專案漸進工程分開交付及驗收。核心60分鐘只計Red／Green，專案Refactor與其他交付另計；rust_ai_ring唯讀，使用者自行套用。
+每日文章的功能Red／Green與專案Refactor分設同層段落，分別記錄驗證。核心60分鐘只計Red／Green，專案Refactor與其他交付另計；rust_ai_ring唯讀，使用者自行套用。
 
 [共用規則](../../COMMON_LEARNING_RULES.md) · [功能與驗證](../current/STATUS.md) · [工程進度](../functional-refactoring/PROGRESS.md) · [學習進度](../../learning-state.json) · [manifest](../current/manifest.json)
 
 | 專案 | 現行教學 | 下一篇 | 驗證範圍 |
 | --- | --- | --- | --- |
-| Chat | [Day38 r2：搜尋失敗可見狀態與既有房間連結](../daily/day-38/chat-r2.md) | Day39 | 完整patch與精確讀回；套用檢查／語法解析通過；產品未套用、Red／Green／DB／GUI未執行 |
+| Chat | [Day38 r3：搜尋失敗可見狀態與既有房間連結](../daily/day-38/chat-r3.md) | Day39 | 完整patch與精確讀回；套用檢查／語法解析通過；產品未套用、Red／Green／DB／GUI未執行 |
 
 ## 專案大綱與操作主線
 
