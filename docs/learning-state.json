@@ -57,7 +57,7 @@
   "fixed_tag_sha": "9bcae7c5d139f75ed08b4daffece602a71fdab34",
   "next_day": {
     "chat": 38,
-    "pet": 37,
+    "pet": 38,
     "analytics": 37
   },
   "last_full_comparison": "2026-10-16T22:47:14.399027+08:00",
@@ -504,10 +504,10 @@
         "article_commit": "42f8b89a6406845d397ed81486d8daad582c48af"
       },
       "pet": {
-        "day": 36,
-        "revision": "r3",
-        "path": "docs/teaching/daily/day-36/pet-r3.md",
-        "article_commit": "4218e74ac08ae05ba5e26d74e4630fb7d7c0e075"
+        "day": 37,
+        "revision": "r2",
+        "path": "docs/teaching/daily/day-37/pet-r2.md",
+        "article_commit": "009b04a793a88335736c9a906d6ff5a36a591a08"
       },
       "analytics": {
         "day": 36,
@@ -3930,7 +3930,7 @@
       "scope": "incremental verification only"
     }
   },
-  "latest_pet_publication": "docs/teaching/daily/day-36/pet-r3-readback.json",
+  "latest_pet_publication": "docs/teaching/daily/day-37/pet-r2-readback.json",
   "day35_analytics_r1_delivery": {
     "repository": "williechen/copilot_use",
     "branch": "main",
@@ -4429,6 +4429,48 @@
     "expected_branch_sha": "42f8b89a6406845d397ed81486d8daad582c48af",
     "state_blob_before": "1ad6e282ba7c9a70b782074302e2c1e2f027cc7e",
     "manifest_blob_before": "ea6a301faeb6142245052a62ec50a0ebb975183f",
+    "operations": {
+      "article_publish": {
+        "consecutive_failures": 0
+      },
+      "article_readback": {
+        "consecutive_failures": 0
+      }
+    },
+    "source_observation": "docs/teaching/daily/day-37/source-review-r2.json",
+    "official_versions": "docs/teaching/daily/day-37/versions-r2.json"
+  },
+  "day37_pet_delivery": {
+    "project": "pet",
+    "day": 37,
+    "revision": "r2",
+    "path": "docs/teaching/daily/day-37/pet-r2.md",
+    "parent": "14c8b94b89c30fb7572e6ddec8c235a2ff8a7f6c",
+    "article_commit": "009b04a793a88335736c9a906d6ff5a36a591a08",
+    "blob_sha": "af5152ad21038e93e5f15f8c18c9f6856a83d892",
+    "readback_at": "2026-10-25T13:12:33.502Z",
+    "source_sha": "5c713553daee4055738239f047d6c774fcc7a7a1",
+    "functional_acceptance": false,
+    "archived": false,
+    "main_application": "not applied",
+    "red_executed": false,
+    "green_executed": false,
+    "raw_error": null,
+    "sha256": "851cc18ee76cb052dc96be51214b3eb3ae6ff9bb7166711abf4692dd84a021f3",
+    "full_text_verified": true,
+    "code_blocks_exact": true,
+    "rules_version": "daily-tdd-minimum-v1 / github-only-v1",
+    "rules_commit": "009b04a793a88335736c9a906d6ff5a36a591a08",
+    "rules_blob": "152355cad7306cc902605ebed1eca7ce9572a540",
+    "next_day_before": 37,
+    "next_day_after": 38,
+    "status": "article_delivered_product_not_applied_acceptance_pending",
+    "tests": "not run; source CI does not contain proposed Green",
+    "gate1": "content_and_exact_readback_passed; completes with atomic state/index sync",
+    "gate2": false,
+    "expected_branch_sha": "009b04a793a88335736c9a906d6ff5a36a591a08",
+    "state_blob_before": "879a5c45827ba2c3beb5265a386031522982dc9c",
+    "manifest_blob_before": "5316503ecf1238e7139d634239c8c4c33ee289b9",
     "operations": {
       "article_publish": {
         "consecutive_failures": 0

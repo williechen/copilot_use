@@ -1,5 +1,10 @@
 # Pet 現行教學入口
 
+[Day37 r2：先保存再開窗，失敗回復原標記](../daily/day-37/pet-r2.md)
+
+**教學已交付／程式未套用／新測試未執行／產品未驗收**；下一篇 **Day38**。[精確 commit 全文讀回、blob 與 SHA256](../daily/day-37/pet-r2-readback.json)。程式來源 `5c713553daee4055738239f047d6c774fcc7a7a1`；以下保留前次來源／驗證摘要，不能當成新 Green 成功。
+
+
 <!-- comparison-5c713553:start -->
 [最新三專案程式／文章比對](../../source-review/2026-10-25-full-comparison-5c713553.md)：105個閱讀版本、111份修訂、21項差異；來源 `5c713553`，局部測試與完整驗收分開記錄。
 
@@ -10,7 +15,7 @@
 
 [Day36 r3：重啟恢復全部未回籠寵物，而非只恢復最後選取者](../daily/day-36/pet-r3.md)
 
-**程式已存在／相關實測通過／完整產品未驗收**；實測來源 rust_ai_ring `5c713553daee4055738239f047d6c774fcc7a7a1`，原始教學基準 `61ed5930`。下一篇 **Day37**；[r3 交付全文讀回](../daily/day-36/pet-r3-readback.json)。
+**程式已存在／相關實測通過／完整產品未驗收**；實測來源 rust_ai_ring `5c713553daee4055738239f047d6c774fcc7a7a1`，原始教學基準 `61ed5930`。當時下一篇 **Day37**（現行進度見上方）；[r3 交付全文讀回](../daily/day-36/pet-r3-readback.json)。
 
 Server 54、Day36 adapter／Store 測試與 WASM 通過。Store 重建不是原生程序重啟；Tauri 多窗重啟及建窗失敗注入待驗。 [完整實測報告](../../source-review/2026-10-25-day36-verification-5c713553.md)。原版文章及交付證據均保留。
 

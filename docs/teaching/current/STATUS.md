@@ -1,5 +1,8 @@
 # 目前功能與驗證狀態
 
+<!-- day37-pet -->
+Pet：[Day37 修訂教學已交付](../daily/day-37/pet-r2.md)，來源 `5c713553`；本次僅文件交付，程式未套用、新測試未執行、功能未驗收。[讀回證據](../daily/day-37/pet-r2-readback.json)。
+
 <!-- day37-chat -->
 Chat：[Day37 修訂教學已交付](../daily/day-37/chat-r2.md)，來源 `5c713553`；本次僅文件交付，程式未套用、新測試未執行、功能未驗收。[讀回證據](../daily/day-37/chat-r2-readback.json)。
 
