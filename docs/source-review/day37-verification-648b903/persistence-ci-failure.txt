@@ -1,0 +1,30 @@
+2026-10-25T14:31:09.1452612Z [1m[92m  Downloaded[0m pkg-config v0.3.33
+2026-10-25T14:31:19.5874868Z [1m[92m   Compiling[0m pkg-config v0.3.33
+2026-10-25T14:32:14.4169037Z [1m[92m  Downloaded[0m pkg-config v0.3.34
+2026-10-25T14:32:17.0641824Z [1m[92m   Compiling[0m pkg-config v0.3.34
+2026-10-25T14:32:35.0502245Z [1m[92m  Downloaded[0m gobject-sys v0.18.0
+2026-10-25T14:32:36.6155387Z [1m[92m   Compiling[0m pkg-config v0.3.34
+2026-10-25T14:32:43.6964247Z [1m[92m   Compiling[0m gobject-sys v0.18.0
+2026-10-25T14:32:43.8403819Z   pkg-config exited with status code 1
+2026-10-25T14:32:43.8404224Z   > PKG_CONFIG_ALLOW_SYSTEM_CFLAGS=1 pkg-config --libs --cflags glib-2.0 'glib-2.0 >= 2.70'
+2026-10-25T14:32:43.8404829Z   pkg-config output:
+2026-10-25T14:32:43.8405136Z     Package glib-2.0 was not found in the pkg-config search path.
+2026-10-25T14:32:43.8405549Z     Perhaps you should add the directory containing `glib-2.0.pc'
+2026-10-25T14:32:43.8406205Z     Package 'glib-2.0' not found
+2026-10-25T14:32:43.8406460Z     Package 'glib-2.0' not found
+2026-10-25T14:32:43.8407228Z   The system library `glib-2.0` required by crate `glib-sys` was not found.
+2026-10-25T14:32:43.8407793Z   The file `glib-2.0.pc` needs to be installed and the PKG_CONFIG_PATH environment variable must contain its parent directory.
+2026-10-25T14:32:43.8408877Z   HINT: if you have installed the library, try setting PKG_CONFIG_PATH to the directory containing `glib-2.0.pc`.
+2026-10-25T14:32:43.8416200Z [1m[33mwarning[0m: gobject-sys@0.18.0: 
+2026-10-25T14:32:43.8416660Z [1m[91merror[0m: failed to run custom build command for `gobject-sys v0.18.0`
+2026-10-25T14:32:43.8445797Z   process didn't exit successfully: `/home/runner/work/rust_ai_ring/rust_ai_ring/pet_apps/target/debug/build/gobject-sys-e4f136d488f999f1/build-script-build` (exit status: 1)
+2026-10-25T14:32:43.8561590Z   pkg-config exited with status code 1
+2026-10-25T14:32:43.8562097Z   > PKG_CONFIG_ALLOW_SYSTEM_CFLAGS=1 pkg-config --libs --cflags gobject-2.0 'gobject-2.0 >= 2.70'
+2026-10-25T14:32:43.8562704Z   pkg-config output:
+2026-10-25T14:32:43.8563080Z     Package gobject-2.0 was not found in the pkg-config search path.
+2026-10-25T14:32:43.8563582Z     Perhaps you should add the directory containing `gobject-2.0.pc'
+2026-10-25T14:32:43.8564571Z     Package 'gobject-2.0' not found
+2026-10-25T14:32:43.8565022Z     Package 'gobject-2.0' not found
+2026-10-25T14:32:43.8565566Z   The system library `gobject-2.0` required by crate `gobject-sys` was not found.
+2026-10-25T14:32:43.8566248Z   The file `gobject-2.0.pc` needs to be installed and the PKG_CONFIG_PATH environment variable must contain its parent directory.
+2026-10-25T14:32:43.8567544Z   HINT: if you have installed the library, try setting PKG_CONFIG_PATH to the directory containing `gobject-2.0.pc`.
