@@ -28,6 +28,8 @@ Chat／Analytics 舊 SSR API、兩個被取代修訂及過時斷言分開記錄�
 
 ### Chat Session／作者／房主與 ACL
 
+2026-10-25 使用者操作回報：已登入首頁仍固定顯示「登入」。最新來源 `dbe00814` 的 HomePage 仍固定 href=/signin。完成條件補充：依伺服器有效 Session 顯示「管理」並進個人管理；未登入／失效顯示「登入」，登入返回、刷新、登出與過期均回歸。[截圖與來源核對](source-review/2026-10-25-chat-homepage-feedback.md)。本項未修復／未驗收。
+
 D05 共用認證保留；WS持續重驗已接並有同SHA局部證據，尚缺原子撤銷競態、匿名進房登入回跳、會員作者及房主／逐房授權。
 
 目前：WS重驗已接／其它需求待完成。完成條件：保留有效WS撤銷，補原房間回跳、真實作者／房主、逐房HTTP／WS授權、活動Session與原子競態驗證。
@@ -43,6 +45,8 @@ D05 共用認證保留；WS持續重驗已接並有同SHA局部證據，尚缺�
 <a id="chat-feedback"></a>
 
 ### Chat 房間與訊息回饋
+
+2026-10-25 使用者操作回報：首頁進入時必須按讀取才有房間；房間頁共用列表也顯示未讀取。最新來源 `dbe00814` 未見首次載入，須補「進入首頁即自動讀取」，保留手動刷新、載入／空／錯誤／重試與舊快照；核對 hydration 重複請求及新舊搜尋競態。[證據與完成條件](source-review/2026-10-25-chat-homepage-feedback.md)。本來源已見 Day37 apply_room_search 與 WASM caller；下段 `5c713553` 診斷保留其歷史範圍，不代表自動載入已完成。
 
 最新來源仍有兩段房間status；query_room成功未清除查詢中，不能把刪除成功set_status當合併完成。MessageCreated沒有解除等待狀態；D06僅遷refreshed_room_list舊測試，refresh_result_view仍有真caller。
 
