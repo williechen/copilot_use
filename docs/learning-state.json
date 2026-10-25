@@ -1,11 +1,11 @@
 {
   "schedule_document_policy": {
     "confirmed_at": "2026-10-23",
-    "previous_schedule_article": "Prior article preserved as history; current document refreshed on 2026-10-24.",
+    "previous_schedule_article": "Current concise article and actual cloud prompt consolidated 2026-10-26; original settings preserved.",
     "current_document": "docs/teaching/scheduler-instructions-v1.md",
     "execution_rules": "latest docs/COMMON_LEARNING_RULES.md and direct user confirmations",
     "fixed_historical_lesson_prerequisite": false,
-    "actual_task_configuration": "Existing daily teaching task prompt saved and verified after page reload on 2026-10-24; schedule/model unchanged; see current_daily_schedule. Other schedules not verified.",
+    "actual_task_configuration": "Existing daily web task prompt saved and fresh-page full text verified 2026-10-26; schedule/model unchanged; see current_daily_schedule.",
     "local_matching_automation_files": 0,
     "actual_tasks_modified": true,
     "historical_schedule_fields": "not evidence of current activation, timing, model or prompt",
@@ -28,7 +28,7 @@
       "installation and updates",
       "functional acceptance"
     ],
-    "copilot_use_role": "requirements, rules, teaching documents, progress, indexes and delivery evidence only",
+    "copilot_use_role": "requirements, consolidated rules, functional teaching, complete project engineering proposals/patches and test plans, progress, indexes and evidence; no second product",
     "program_repository": "williechen/rust_ai_ring",
     "historical_program_records": "preserved for traceability only; not active tasks or acceptance gates",
     "documentation_code_examples": "teaching content for rust_ai_ring; not a second product implementation",
@@ -88,8 +88,8 @@
   "learning_policy": {
     "daily_selection": "差異驅動＋最小功能切片；先建立可操作的基本功能項，基本流程與相應驗證通過後推進下一功能，再逐步補充細節、條件與例外；每日 TDD Red→最小 Green→Refactor→驗證。阻擋流程／資料安全／必要相依性在當步處理，其餘深化工作保留原功能項，不每日全量比對",
     "daily_gate": "每日教學只揭露 rust_ai_ring 精確 SHA 的 CI 狀態及待修問題；copilot_use 程式 CI、產品整合與功能驗收工作已廢除，文件交付僅核對文章、規則、JSON、連結及精確 commit 全文讀回。",
-    "weekly_review": "週比對只審查 rust_ai_ring 程式與其精確 SHA 的測試／CI／功能證據，以及 copilot_use 文件與證據一致性；copilot_use 程式驗收工作已廢除。排程本次未更動。",
-    "dry_run": "only document corrections addressing user-reported issues; code tests migrations read-only",
+    "weekly_review": "At least weekly full source/requirements/tests/CI/evidence comparison; product stays read-only; daily engineering separate; last_full_comparison changes only after actual complete success.",
+    "dry_run": "read-only product review; publish complete documentation and engineering patch/test proposals; not product validation",
     "day_status": "教學已發布／程式尚待套用／功能已實作／功能正式驗收通過，依實際證據分別判定",
     "daily_time": "06:00 Asia/Taipei",
     "teaching_sections": [
@@ -98,15 +98,14 @@
       "套件版本",
       "驗證項目：測試、證據、待完成"
     ],
-    "content_preservation": "Day25（含）以前三專案全部既有文章已封存，依使用者確認保留原文與證據；任何更正只在下一Day的新實作／Refactor後補充，不回寫舊文，封存不代表已套用或驗收。以下一般修訂規則僅適用尚未封存的新草稿：未實作 Day 可在既有GitHub 原檔重整，更新修訂版與來源、同步同一索引及鏡像，不另建相同專案／Day。已實作內容即封存，保留原文、程式及證據；修改方案只在下一 Day 的 Refactor 後「舊 Day 更正補充」提出。部分已實作時保留已實作段落，只重整尚未實作部分；實作狀態不明時先標未核實，不當作未實作覆寫。文章修訂不新增 Day，也不推進 next_day。",
-    "weekly_engineering": "separate engineering evidence; never add weekly operations to teaching",
+    "content_preservation": "已發布文章與原始commit/blob/SHA256保留；修訂使用不可變版本檔與獨立讀回，同步同一Day索引，不新增或倒退Day；封存Day正文不回寫。",
     "weekly_ai_validation": "excluded; functional gates only",
     "phase_transition": "到期切換且不延後；功能未完成則原階段學習未完成，原項目跨階段補加，完工後回填原階段證據",
     "functional_progress": "新增可操作功能／接通流程為每日主體；條件補充回原功能，不把單點 API／純測試／欄位及狀態碼當成完整流程。三專案並行追蹤，不預排 Day、不自動推進學習階段。",
     "synchronization_judgment": "核對依「已確認需求／文章 → rust_ai_ring 精確 SHA 實作與實際呼叫者 → 匹配來源的測試／CI／功能驗證」追溯；copilot_use 僅核對文件、進度與交付證據，不要求對應程式實作、程式同步或驗收。缺證標未核實，未接通流程標部分完成，未執行明示。",
-    "day_revision": "Day25（含）以前三專案全部既有文章已封存，依使用者確認保留原文與證據；任何更正只在下一Day的新實作／Refactor後補充，不回寫舊文，封存不代表已套用或驗收。以下一般修訂規則僅適用尚未封存的新草稿：未實作 Day 可在既有GitHub 原檔重整，更新修訂版與來源、同步同一索引及鏡像，不另建相同專案／Day。已實作內容即封存，保留原文、程式及證據；修改方案只在下一 Day 的 Refactor 後「舊 Day 更正補充」提出。部分已實作時保留已實作段落，只重整尚未實作部分；實作狀態不明時先標未核實，不當作未實作覆寫。文章修訂不新增 Day，也不推進 next_day。",
+    "day_revision": "已發布文章與原始commit/blob/SHA256保留；修訂使用不可變版本檔與獨立讀回，同步同一Day索引，不新增或倒退Day；封存Day正文不回寫。",
     "red_green": "Red is the prerequisite test for same-feature Green; preserve applied tests and provide complete Green in the same Day; distinguish expected Red from test/import/environment errors",
-    "rules_version": "daily-tdd-minimum-v1+github-only-v1",
+    "rules_version": "daily-teaching-project-engineering-v2",
     "rules_document": "docs/COMMON_LEARNING_RULES.md",
     "day_advance": "Per project: independent GitHub article commit+push, exact-commit full readback and persisted evidence, then expected-N to N+1 conditional state/manifest/index update and readback; never increment for migration/revision/makeup/rules/CI.",
     "failure_recovery": "Single pending record per project/Day/revision; read and deduplicate before retry; 3 consecutive failures require manual review; evidence persistence and actual verification are separate; detailed historical mechanisms 37-91 deferred",
@@ -132,7 +131,8 @@
       "concurrency": "check active runs and branch/blob SHA; expected_sha lease; no overwrite",
       "frozen_through_day": 25,
       "notion_export_root": "docs/teaching/history/evidence/notion-export/2026-10-22"
-    }
+    },
+    "daily_engineering": "Whole-project incremental work package every day, separate evidence/time, no Day advance; complete patch/test plan, product read-only and user applies."
   },
   "curriculum": {
     "stage_count": 13,
@@ -154,7 +154,7 @@
     "months_per_stage": 2,
     "total_months": 26,
     "daily_total_minutes": 60,
-    "scope": "Chat, Pet and Analytics combined; only section 2 main Red/Green implementation counts toward daily_total_minutes; Refactor, necessary additions and sections 1/3/4 are excluded",
+    "scope": "Chat, Pet and Analytics combined; core60 counts only section2 main Red/Green; local Refactor, project engineering and all other delivery work excluded",
     "start_date": "2026-10-12",
     "current_stage_by_calendar": "P0",
     "learning_completed": null,
@@ -523,7 +523,7 @@
     "notion_page": "https://app.notion.com/p/3f2e51d4509381ddb8a8ce7cb4cd3e60?pvs=204",
     "format_document": "entry only: docs/TEACHING_FORMAT.md",
     "scope": "teaching method, four-section format and three project outlines in one article",
-    "status": "single canonical rule; unimplemented Day may be revised in place; implemented content archived; changes proposed in next Day",
+    "status": "single consolidated canonical rule; published originals preserved; immutable revisions without Day advance",
     "current_status": "docs/teaching/current/STATUS.md",
     "progress_summary_policy": "現行正文只保留一份具來源與驗證範圍的目前進度；歷次SHA／測試摘要移入歷史紀錄，不在各入口重複累積。已確認需求與封存Day原文保持原用途。",
     "delivery": {
@@ -3419,7 +3419,7 @@
     "task_id": "6acd967c15fc8191ade8407954c5b354",
     "task_name": "三專案每日 TDD 教學",
     "task_url": "https://chatgpt.com/scheduled?automationId=6acd967c15fc8191ade8407954c5b354&automationSource=cloud",
-    "observed_date": "2026-10-24",
+    "observed_date": "2026-10-26",
     "status": "active",
     "frequency_display": "每天",
     "time_display": "上午",
@@ -3430,13 +3430,14 @@
     "prompt_full_readback_matches": true,
     "readback_after_server_page_reload": true,
     "prompt_before_sha256": "635aefd9cdac0ab2af53f22776b68fecd575f92a6429540bd9d593aa87be37d3",
-    "prompt_sha256": "2aedae264fb3c146fd13be3715fd89305242d5c28c68c1248f9bc86979c1ba59",
+    "prompt_sha256": "c2ac614f2d8ae2c5c4f08c216f4bb042c8cf9557ee2951b953c39a47ce94856f",
     "readme_updates": true,
-    "documentation_commit": "94c39a13d546bfb41acd4079817578d5ed7efb13",
+    "documentation_commit": "43b0c4f4eb5d6b65d6d3155a473b2a673d944046",
     "prompt_document": "docs/teaching/scheduler-instructions-v1.md",
-    "verification_scope": "Existing cloud task prompt saved, page reloaded, and exact full text compared; no Run now or new lesson publication.",
+    "verification_scope": "Existing web task prompt saved and fresh-page full text matched; schedule/model preserved; no Run now.",
     "readme_scope": "copilot_use seven navigation homepages; rust_ai_ring stays read-only",
-    "documentation_commit_role": "Parent documentation commit before homepage correction; corrected homepages accompany this evidence."
+    "documentation_commit_role": "Parent documentation commit before homepage correction; corrected homepages accompany this evidence.",
+    "verification_evidence": "docs/teaching/current/scheduler-document-refresh-2026-10-26.json"
   },
   "day34_chat_delivery": {
     "repository": "williechen/copilot_use",
@@ -3700,7 +3701,7 @@
     "expected_state_parent_sha": "7a3400259b59cf617d6c3c721bfc10d1014542b0",
     "raw_error": null
   },
-  "latest_chat_publication": "docs/teaching/daily/day-37/chat-r3-readback.json",
+  "latest_chat_publication": "docs/teaching/daily/day-38/chat-r2-readback.json",
   "duplicate_application_review": {
     "date": "2026-10-25",
     "source_repository": "williechen/rust_ai_ring",
@@ -3930,7 +3931,7 @@
       "scope": "incremental verification only"
     }
   },
-  "latest_pet_publication": "docs/teaching/daily/day-37/pet-r3-readback.json",
+  "latest_pet_publication": "docs/teaching/daily/day-38/pet-r2-readback.json",
   "day35_analytics_r1_delivery": {
     "repository": "williechen/copilot_use",
     "branch": "main",
@@ -4024,7 +4025,7 @@
       "scope": "local PostgreSQL regression; not full product acceptance or CI"
     }
   },
-  "latest_analytics_publication": "docs/teaching/daily/day-37/analytics-r3-readback.json",
+  "latest_analytics_publication": "docs/teaching/daily/day-38/analytics-r2-readback.json",
   "previous_source_validation_before_e753c36": {
     "source_sha": "f3f8255b0b701a1b57cb8c0a1737c3caa4319f2d",
     "full_execution_sha": "f3f8255b0b701a1b57cb8c0a1737c3caa4319f2d",
@@ -4723,5 +4724,178 @@
     "homepage_sync_commit": "ba333ede3e2f03e61e97cf54e122bf168a34802d",
     "readback_at": "2026-10-25T22:34:21.950Z",
     "evidence": "docs/teaching/daily/day-38/analytics-readback.json"
+  },
+  "daily_project_engineering": {
+    "cadence": "one small dependency-ordered package per day",
+    "scope": "whole project layering, tests and CI; separate from daily functional lesson",
+    "delivery": "complete source/patch and test plan; user applies",
+    "product_repository_read_only": true,
+    "progress": "docs/teaching/functional-refactoring/PROGRESS.md",
+    "core_minutes_excluded": true,
+    "day_advance": false
+  },
+  "day38_chat_r2_delivery": {
+    "project": "chat",
+    "parent": "43b0c4f4eb5d6b65d6d3155a473b2a673d944046",
+    "commit": "2b06e1070e586209f2d28f1591c7b8a1d4b3124d",
+    "readback_at": "2026-10-25T23:21:07.800Z",
+    "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+    "rules_commit": "43b0c4f4eb5d6b65d6d3155a473b2a673d944046",
+    "files": [
+      {
+        "path": "docs/teaching/daily/day-38/chat-r2.md",
+        "blob_sha": "c68f1cb3f55a039cc2bb8510dda327060012c389",
+        "full_text_verified": true,
+        "sha256": "aad36ac9c1af0bfb721d16e8a74ba2d98d4f382fee59ccff87b01a0516dc80f8"
+      },
+      {
+        "path": "docs/teaching/daily/day-38/chat-r2.patch",
+        "blob_sha": "403f383ba4b03f9a7135026aa39740901cd4a7c3",
+        "full_text_verified": true,
+        "sha256": "fecb9f84591031f0173a598de5ad30857161ce2415b63e9326c38efb95fec745"
+      }
+    ],
+    "day": 38,
+    "revision": "r2",
+    "repository": "williechen/copilot_use",
+    "branch": "main",
+    "article_path": "docs/teaching/daily/day-38/chat-r2.md",
+    "article_commit": "2b06e1070e586209f2d28f1591c7b8a1d4b3124d",
+    "blob_sha": "c68f1cb3f55a039cc2bb8510dda327060012c389",
+    "sha256": "aad36ac9c1af0bfb721d16e8a74ba2d98d4f382fee59ccff87b01a0516dc80f8",
+    "patch": {
+      "path": "docs/teaching/daily/day-38/chat-r2.patch",
+      "blob_sha": "403f383ba4b03f9a7135026aa39740901cd4a7c3",
+      "full_text_verified": true,
+      "sha256": "fecb9f84591031f0173a598de5ad30857161ce2415b63e9326c38efb95fec745"
+    },
+    "full_text_verified": true,
+    "gate1": "complete_document_delivery",
+    "gate2": false,
+    "red_executed": false,
+    "green_executed": false,
+    "cargo_tests_executed": false,
+    "main_application": "not applied",
+    "functional_acceptance": false,
+    "static_checks": "r2-static-checks.json",
+    "official_versions": "r2-versions.json",
+    "next_day_before": 39,
+    "next_day_after": 39,
+    "revision_does_not_advance_day": true,
+    "evidence": "docs/teaching/daily/day-38/chat-r2-readback.json",
+    "original_delivery_preserved": true,
+    "index_sync_expected_parent": "12c7ceddbeff1ae3d528b8a7156f0e869c304a47"
+  },
+  "day38_pet_r2_delivery": {
+    "project": "pet",
+    "parent": "2b06e1070e586209f2d28f1591c7b8a1d4b3124d",
+    "commit": "5a27494c12ebc56efd41028d69e080877052f506",
+    "readback_at": "2026-10-25T23:21:13.881Z",
+    "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+    "rules_commit": "43b0c4f4eb5d6b65d6d3155a473b2a673d944046",
+    "files": [
+      {
+        "path": "docs/teaching/daily/day-38/pet-r2.md",
+        "blob_sha": "b37b8922ae05f58fe6c215898b9e83e3d2d30009",
+        "full_text_verified": true,
+        "sha256": "f45e2d8c7ce65715ea8a22b29f9ff47cf6852d7fdd0bd7c7df2fc09b37463cb3"
+      },
+      {
+        "path": "docs/teaching/daily/day-38/pet-r2.patch",
+        "blob_sha": "64c8d7eca1f2419cabe4543d17127bf45782e4cc",
+        "full_text_verified": true,
+        "sha256": "3272c80e9f32df8edefebee31dff3f5f60c7fa8fadb5dd55183b02fb4ffe56d7"
+      }
+    ],
+    "day": 38,
+    "revision": "r2",
+    "repository": "williechen/copilot_use",
+    "branch": "main",
+    "article_path": "docs/teaching/daily/day-38/pet-r2.md",
+    "article_commit": "5a27494c12ebc56efd41028d69e080877052f506",
+    "blob_sha": "b37b8922ae05f58fe6c215898b9e83e3d2d30009",
+    "sha256": "f45e2d8c7ce65715ea8a22b29f9ff47cf6852d7fdd0bd7c7df2fc09b37463cb3",
+    "patch": {
+      "path": "docs/teaching/daily/day-38/pet-r2.patch",
+      "blob_sha": "64c8d7eca1f2419cabe4543d17127bf45782e4cc",
+      "full_text_verified": true,
+      "sha256": "3272c80e9f32df8edefebee31dff3f5f60c7fa8fadb5dd55183b02fb4ffe56d7"
+    },
+    "full_text_verified": true,
+    "gate1": "complete_document_delivery",
+    "gate2": false,
+    "red_executed": false,
+    "green_executed": false,
+    "cargo_tests_executed": false,
+    "main_application": "not applied",
+    "functional_acceptance": false,
+    "static_checks": "r2-static-checks.json",
+    "official_versions": "r2-versions.json",
+    "next_day_before": 39,
+    "next_day_after": 39,
+    "revision_does_not_advance_day": true,
+    "evidence": "docs/teaching/daily/day-38/pet-r2-readback.json",
+    "original_delivery_preserved": true,
+    "index_sync_expected_parent": "12c7ceddbeff1ae3d528b8a7156f0e869c304a47"
+  },
+  "day38_analytics_r2_delivery": {
+    "project": "analytics",
+    "parent": "5a27494c12ebc56efd41028d69e080877052f506",
+    "commit": "12c7ceddbeff1ae3d528b8a7156f0e869c304a47",
+    "readback_at": "2026-10-25T23:21:19.595Z",
+    "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+    "rules_commit": "43b0c4f4eb5d6b65d6d3155a473b2a673d944046",
+    "files": [
+      {
+        "path": "docs/teaching/daily/day-38/analytics-r2.md",
+        "blob_sha": "810588bb719216c75c57aac495228fb5b10e582b",
+        "full_text_verified": true,
+        "sha256": "7369349057c878b70e63f9ed0b891713de3046d3f9cbc926323422b1875c6eb0"
+      },
+      {
+        "path": "docs/teaching/daily/day-38/analytics-r2.patch",
+        "blob_sha": "a501318d0abda9bc6081fb207dbf13dda59c14fa",
+        "full_text_verified": true,
+        "sha256": "89e2bd9fe90c59c6949ce952aa39787eea51093d759f01ee725e45e7be71969f"
+      }
+    ],
+    "day": 38,
+    "revision": "r2",
+    "repository": "williechen/copilot_use",
+    "branch": "main",
+    "article_path": "docs/teaching/daily/day-38/analytics-r2.md",
+    "article_commit": "12c7ceddbeff1ae3d528b8a7156f0e869c304a47",
+    "blob_sha": "810588bb719216c75c57aac495228fb5b10e582b",
+    "sha256": "7369349057c878b70e63f9ed0b891713de3046d3f9cbc926323422b1875c6eb0",
+    "patch": {
+      "path": "docs/teaching/daily/day-38/analytics-r2.patch",
+      "blob_sha": "a501318d0abda9bc6081fb207dbf13dda59c14fa",
+      "full_text_verified": true,
+      "sha256": "89e2bd9fe90c59c6949ce952aa39787eea51093d759f01ee725e45e7be71969f"
+    },
+    "full_text_verified": true,
+    "gate1": "complete_document_delivery",
+    "gate2": false,
+    "red_executed": false,
+    "green_executed": false,
+    "cargo_tests_executed": false,
+    "main_application": "not applied",
+    "functional_acceptance": false,
+    "static_checks": "r2-static-checks.json",
+    "official_versions": "r2-versions.json",
+    "next_day_before": 39,
+    "next_day_after": 39,
+    "revision_does_not_advance_day": true,
+    "evidence": "docs/teaching/daily/day-38/analytics-r2-readback.json",
+    "original_delivery_preserved": true,
+    "index_sync_expected_parent": "12c7ceddbeff1ae3d528b8a7156f0e869c304a47"
+  },
+  "latest_document_consolidation": {
+    "date": "2026-10-26",
+    "rules_commit": "43b0c4f4eb5d6b65d6d3155a473b2a673d944046",
+    "core_minutes": "Red/Green only",
+    "engineering_progress": "docs/teaching/functional-refactoring/PROGRESS.md",
+    "article_readback": "docs/teaching/daily/day-38/r2-delivery-verification.json",
+    "product_modified": false
   }
 }

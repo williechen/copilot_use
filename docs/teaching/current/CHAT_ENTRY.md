@@ -1,48 +1,13 @@
 # Chat 現行教學入口
 
-每日並行：[功能教學與全專案漸進工程](../functional-refactoring/README.md)分開交付及驗收。核心60分鐘只計教學Red／Green，局部Refactor與工程另計；產品唯讀，由使用者套用工程patch。
+每日功能教學與全專案漸進工程分開交付及驗收。核心60分鐘只計Red／Green，局部Refactor、工程與其他交付另計；rust_ai_ring唯讀，使用者自行套用。
 
-## 最新交付（2026-10-26）
+[共用規則](../../COMMON_LEARNING_RULES.md) · [功能與驗證](STATUS.md) · [工程進度](../functional-refactoring/PROGRESS.md) · [學習進度](../../learning-state.json) · [manifest](manifest.json)
 
-[Chat Day38｜搜尋失敗顯示在真正的 Leptos 房間列表](../daily/day-38/chat.md) — **教學已交付／程式未套用／Red-Green 與瀏覽器未執行／產品未驗收**；程式來源 `9b89656f964b99e0cb89ba421855704a35c5ecb9`；最新 Day38、下一篇 **Day39**。原 Day37 r3 及下列舊摘要保留歷史當時的驗證範圍，不是 Day38 已通過的證據。
+| 專案 | 現行教學 | 下一篇 | 驗證範圍 |
+| --- | --- | --- | --- |
+| Chat | [Day38 r2：搜尋失敗可見狀態與既有房間連結](../daily/day-38/chat-r2.md) | Day39 | 完整patch與精確讀回；套用檢查／語法解析通過；產品未套用、Red／Green／DB／GUI未執行 |
 
-**2026-10-26 現行摘要已核對。** 最新程式來源 `9b89656`（upgrade）；新CI快照為1成功／6執行中，尚未全綠。舊648b903為六成功／Persistence失敗，已配置的Analytics PostgreSQL步驟被略過。當日官方版本、manifest／lock與本機工具差異已補查；未升級產品、未重跑測試、未完成整體驗收。[版本與摘要核對](../../source-review/2026-10-26-versions-and-summary-refresh.md)。
+產品來源 `9b89656f964b99e0cb89ba421855704a35c5ecb9`，修訂commit `2b06e1070e586209f2d28f1591c7b8a1d4b3124d`。[精確讀回、blob與SHA256](../daily/day-38/chat-r2-readback.json)；文件交付與產品驗收分開。
 
-[Day37 r3：驗證更新](../daily/day-37/chat-r3.md)
-
-**程式已見／15項與WASM建置通過／瀏覽器錯誤提示未通過**；來源 `648b90323af7b381d6a79dc2fd08a53b63173a43`，當時下一篇為 **Day38**（現行 Day39）。[精確交付讀回](../daily/day-37/chat-r3-readback.json) · [本次完整驗證／錯誤與恢復](../../source-review/2026-10-25-day37-verification-648b903.md)。下方先前來源、交付及「未套用／未測試」摘要僅保留其當時範圍，不代表目前狀態。
-
-**2026-10-25 首頁操作回報：尚未修復／未驗收。** 使用者已登入仍見「登入」，進入首頁仍須按讀取才有房間；最新來源 `dbe00814` 靜態確認固定登入入口與缺少初次自動載入。[完整證據與完成條件](../../source-review/2026-10-25-chat-homepage-feedback.md)。本來源已見 Day37 搜尋完成函式與 caller；下方舊來源的「未套用」只限原交付時點。本次產品唯讀、未新跑測試、不推進 Day。
-
-[Day37 r2：房間搜尋完成時更新真實畫面狀態](../daily/day-37/chat-r2.md)
-
-**教學已交付／程式未套用／新測試未執行／產品未驗收**；下一篇 **Day38**。[精確 commit 全文讀回、blob 與 SHA256](../daily/day-37/chat-r2-readback.json)。程式來源 `5c713553daee4055738239f047d6c774fcc7a7a1`；以下保留前次來源／驗證摘要，不能當成新 Green 成功。
-
-
-<!-- comparison-5c713553:start -->
-[最新三專案程式／文章比對](../../source-review/2026-10-25-full-comparison-5c713553.md)：105個閱讀版本、111份修訂、21項差異；來源 `5c713553`，局部測試與完整驗收分開記錄。
-
-目前另見查詢成功仍留「查詢中…」及兩段房間status；refresh_result_view有WASM真caller，不能和舊helper一併當unused。
-<!-- comparison-5c713553:end -->
-
-[問題文章與後續更正總表](ARTICLE_CORRECTIONS.md)：已整併最新瀏覽器／Pet 原生證據；下方個別來源的交付／測試摘要保留其當次範圍。
-
-[Day36 r2：既有 WebSocket 會話於登出後撤銷並停止後續收發](../daily/day-36/chat-r2.md)
-
-**程式已存在／相關實測通過／完整產品未驗收**；實測來源 rust_ai_ring `5c713553daee4055738239f047d6c774fcc7a7a1`，原始教學基準 `61ed5930`。當時下一篇 **Day37**（現行進度見上方）；[交付全文讀回](../daily/day-36/chat-r2-readback.json)。
-
-Server 31、UI 14 項測試與 WASM 通過；真 HTTP／WS 五情境通過。每秒重查不等於硬性 ≤1 秒；原子撤銷競態、ACL／歷史及瀏覽器待驗。 [完整實測報告](../../source-review/2026-10-25-day36-verification-5c713553.md)。原版文章及交付證據均保留。
-
-[上一篇 Day35：建房名稱規則共用](../daily/day-35/chat.md) 已在後續來源套用並完成增量測試，但整體功能仍待驗收；[Day35 原始交付證據](../daily/day-35/chat-readback.json)。
-
-[首頁](../chat/README.md) · [功能與驗證現況](STATUS.md) · [進度](../../learning-state.json) · [manifest](manifest.json) · [登入頁合併原交付證據](../daily/day-34/chat-r2-readback.json)
-
-[前次程式重複套用核對](../../source-review/2026-10-25-duplicate-application-review.md)（來源 `3236b94e`；保留原教學與交付證據，進度不變）。
-
-[全部後續調整與清理條件](../../FUTURE_WORK.md)：依本案順序選最小切片，不重做已接通內容；保留現行 Day 與原始證據。
-
-## 舊內容與現存狀態
-
-[全部文章逐篇核對](ARTICLE_STATUS.md) · [機器可讀狀態](article-states.json)
-
-此案現行來源：Day35 共用房名規則已接回兩個 handler，Session／Origin／CSRF 及 JSON 400／HTML 422 保留；目前測試通過。共用認證 FIFO／ACL／歷史仍待完成。 教學正文與原 commit/blob/SHA256 保留；局部測試不代表整產品功能驗收。
+[上一篇](../daily/day-37/chat-r3.md) · [原Day38](../daily/day-38/chat.md) · [全部歷史與更正](ARTICLE_STATUS.md)。舊來源與歷史驗證沿原紀錄追溯，不重複累積到本入口。

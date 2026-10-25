@@ -1,11 +1,11 @@
 {
   "schedule_document_policy": {
     "confirmed_at": "2026-10-23",
-    "previous_schedule_article": "Prior article preserved as history; current document refreshed on 2026-10-24.",
+    "previous_schedule_article": "Current concise article and actual cloud prompt consolidated 2026-10-26; original settings preserved.",
     "current_document": "docs/teaching/scheduler-instructions-v1.md",
     "execution_rules": "latest docs/COMMON_LEARNING_RULES.md and direct user confirmations",
     "fixed_historical_lesson_prerequisite": false,
-    "actual_task_configuration": "Existing daily teaching task prompt saved and verified after page reload on 2026-10-24; schedule/model unchanged; see current_daily_schedule. Other schedules not verified.",
+    "actual_task_configuration": "Existing daily web task prompt saved and fresh-page full text verified 2026-10-26; schedule/model unchanged; see current_daily_schedule.",
     "local_matching_automation_files": 0,
     "actual_tasks_modified": true,
     "historical_schedule_fields": "not evidence of current activation, timing, model or prompt",
@@ -28,7 +28,7 @@
       "installation and updates",
       "functional acceptance"
     ],
-    "copilot_use_role": "requirements, rules, teaching documents, progress, indexes and delivery evidence only",
+    "copilot_use_role": "requirements, consolidated rules, functional teaching, complete project engineering proposals/patches and test plans, progress, indexes and evidence; no second product",
     "program_repository": "williechen/rust_ai_ring",
     "historical_program_records": "preserved for traceability only; not active tasks or acceptance gates",
     "documentation_code_examples": "teaching content for rust_ai_ring; not a second product implementation",
@@ -2205,6 +2205,162 @@
       "state_sync_expected_sha": "0c64832a570f294190817f7bcc07459eb5e8f6f1",
       "state_sync_commit": "ba333ede3e2f03e61e97cf54e122bf168a34802d",
       "evidence": "docs/teaching/daily/day-38/analytics-readback.json"
+    },
+    {
+      "project": "chat",
+      "parent": "43b0c4f4eb5d6b65d6d3155a473b2a673d944046",
+      "commit": "2b06e1070e586209f2d28f1591c7b8a1d4b3124d",
+      "readback_at": "2026-10-25T23:21:07.800Z",
+      "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+      "rules_commit": "43b0c4f4eb5d6b65d6d3155a473b2a673d944046",
+      "files": [
+        {
+          "path": "docs/teaching/daily/day-38/chat-r2.md",
+          "blob_sha": "c68f1cb3f55a039cc2bb8510dda327060012c389",
+          "full_text_verified": true,
+          "sha256": "aad36ac9c1af0bfb721d16e8a74ba2d98d4f382fee59ccff87b01a0516dc80f8"
+        },
+        {
+          "path": "docs/teaching/daily/day-38/chat-r2.patch",
+          "blob_sha": "403f383ba4b03f9a7135026aa39740901cd4a7c3",
+          "full_text_verified": true,
+          "sha256": "fecb9f84591031f0173a598de5ad30857161ce2415b63e9326c38efb95fec745"
+        }
+      ],
+      "day": 38,
+      "revision": "r2",
+      "repository": "williechen/copilot_use",
+      "branch": "main",
+      "article_path": "docs/teaching/daily/day-38/chat-r2.md",
+      "article_commit": "2b06e1070e586209f2d28f1591c7b8a1d4b3124d",
+      "blob_sha": "c68f1cb3f55a039cc2bb8510dda327060012c389",
+      "sha256": "aad36ac9c1af0bfb721d16e8a74ba2d98d4f382fee59ccff87b01a0516dc80f8",
+      "patch": {
+        "path": "docs/teaching/daily/day-38/chat-r2.patch",
+        "blob_sha": "403f383ba4b03f9a7135026aa39740901cd4a7c3",
+        "full_text_verified": true,
+        "sha256": "fecb9f84591031f0173a598de5ad30857161ce2415b63e9326c38efb95fec745"
+      },
+      "full_text_verified": true,
+      "gate1": "complete_document_delivery",
+      "gate2": false,
+      "red_executed": false,
+      "green_executed": false,
+      "cargo_tests_executed": false,
+      "main_application": "not applied",
+      "functional_acceptance": false,
+      "static_checks": "r2-static-checks.json",
+      "official_versions": "r2-versions.json",
+      "next_day_before": 39,
+      "next_day_after": 39,
+      "revision_does_not_advance_day": true,
+      "evidence": "docs/teaching/daily/day-38/chat-r2-readback.json",
+      "original_delivery_preserved": true,
+      "index_sync_expected_parent": "12c7ceddbeff1ae3d528b8a7156f0e869c304a47"
+    },
+    {
+      "project": "pet",
+      "parent": "2b06e1070e586209f2d28f1591c7b8a1d4b3124d",
+      "commit": "5a27494c12ebc56efd41028d69e080877052f506",
+      "readback_at": "2026-10-25T23:21:13.881Z",
+      "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+      "rules_commit": "43b0c4f4eb5d6b65d6d3155a473b2a673d944046",
+      "files": [
+        {
+          "path": "docs/teaching/daily/day-38/pet-r2.md",
+          "blob_sha": "b37b8922ae05f58fe6c215898b9e83e3d2d30009",
+          "full_text_verified": true,
+          "sha256": "f45e2d8c7ce65715ea8a22b29f9ff47cf6852d7fdd0bd7c7df2fc09b37463cb3"
+        },
+        {
+          "path": "docs/teaching/daily/day-38/pet-r2.patch",
+          "blob_sha": "64c8d7eca1f2419cabe4543d17127bf45782e4cc",
+          "full_text_verified": true,
+          "sha256": "3272c80e9f32df8edefebee31dff3f5f60c7fa8fadb5dd55183b02fb4ffe56d7"
+        }
+      ],
+      "day": 38,
+      "revision": "r2",
+      "repository": "williechen/copilot_use",
+      "branch": "main",
+      "article_path": "docs/teaching/daily/day-38/pet-r2.md",
+      "article_commit": "5a27494c12ebc56efd41028d69e080877052f506",
+      "blob_sha": "b37b8922ae05f58fe6c215898b9e83e3d2d30009",
+      "sha256": "f45e2d8c7ce65715ea8a22b29f9ff47cf6852d7fdd0bd7c7df2fc09b37463cb3",
+      "patch": {
+        "path": "docs/teaching/daily/day-38/pet-r2.patch",
+        "blob_sha": "64c8d7eca1f2419cabe4543d17127bf45782e4cc",
+        "full_text_verified": true,
+        "sha256": "3272c80e9f32df8edefebee31dff3f5f60c7fa8fadb5dd55183b02fb4ffe56d7"
+      },
+      "full_text_verified": true,
+      "gate1": "complete_document_delivery",
+      "gate2": false,
+      "red_executed": false,
+      "green_executed": false,
+      "cargo_tests_executed": false,
+      "main_application": "not applied",
+      "functional_acceptance": false,
+      "static_checks": "r2-static-checks.json",
+      "official_versions": "r2-versions.json",
+      "next_day_before": 39,
+      "next_day_after": 39,
+      "revision_does_not_advance_day": true,
+      "evidence": "docs/teaching/daily/day-38/pet-r2-readback.json",
+      "original_delivery_preserved": true,
+      "index_sync_expected_parent": "12c7ceddbeff1ae3d528b8a7156f0e869c304a47"
+    },
+    {
+      "project": "analytics",
+      "parent": "5a27494c12ebc56efd41028d69e080877052f506",
+      "commit": "12c7ceddbeff1ae3d528b8a7156f0e869c304a47",
+      "readback_at": "2026-10-25T23:21:19.595Z",
+      "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+      "rules_commit": "43b0c4f4eb5d6b65d6d3155a473b2a673d944046",
+      "files": [
+        {
+          "path": "docs/teaching/daily/day-38/analytics-r2.md",
+          "blob_sha": "810588bb719216c75c57aac495228fb5b10e582b",
+          "full_text_verified": true,
+          "sha256": "7369349057c878b70e63f9ed0b891713de3046d3f9cbc926323422b1875c6eb0"
+        },
+        {
+          "path": "docs/teaching/daily/day-38/analytics-r2.patch",
+          "blob_sha": "a501318d0abda9bc6081fb207dbf13dda59c14fa",
+          "full_text_verified": true,
+          "sha256": "89e2bd9fe90c59c6949ce952aa39787eea51093d759f01ee725e45e7be71969f"
+        }
+      ],
+      "day": 38,
+      "revision": "r2",
+      "repository": "williechen/copilot_use",
+      "branch": "main",
+      "article_path": "docs/teaching/daily/day-38/analytics-r2.md",
+      "article_commit": "12c7ceddbeff1ae3d528b8a7156f0e869c304a47",
+      "blob_sha": "810588bb719216c75c57aac495228fb5b10e582b",
+      "sha256": "7369349057c878b70e63f9ed0b891713de3046d3f9cbc926323422b1875c6eb0",
+      "patch": {
+        "path": "docs/teaching/daily/day-38/analytics-r2.patch",
+        "blob_sha": "a501318d0abda9bc6081fb207dbf13dda59c14fa",
+        "full_text_verified": true,
+        "sha256": "89e2bd9fe90c59c6949ce952aa39787eea51093d759f01ee725e45e7be71969f"
+      },
+      "full_text_verified": true,
+      "gate1": "complete_document_delivery",
+      "gate2": false,
+      "red_executed": false,
+      "green_executed": false,
+      "cargo_tests_executed": false,
+      "main_application": "not applied",
+      "functional_acceptance": false,
+      "static_checks": "r2-static-checks.json",
+      "official_versions": "r2-versions.json",
+      "next_day_before": 39,
+      "next_day_after": 39,
+      "revision_does_not_advance_day": true,
+      "evidence": "docs/teaching/daily/day-38/analytics-r2-readback.json",
+      "original_delivery_preserved": true,
+      "index_sync_expected_parent": "12c7ceddbeff1ae3d528b8a7156f0e869c304a47"
     }
   ],
   "day15_frozen": true,
@@ -2352,7 +2508,7 @@
     "frozen_body_sha256": "ad6cef4a58f20f6162fb01a4c71ef1a752992856327063d9988112c91a639184",
     "frozen_notion_snapshot": "docs/teaching/archive/day-22/notion/chat.md"
   },
-  "latest_chat_publication": "docs/teaching/daily/day-37/chat-r3-readback.json",
+  "latest_chat_publication": "docs/teaching/daily/day-38/chat-r2-readback.json",
   "previous_day22_pet_article": {
     "project": "pet",
     "day": 22,
@@ -2388,7 +2544,7 @@
     "frozen_body_sha256": "88fa706c5a3f7f3d6255957b8ed317d64cb1a6c57f1cf6638bfb838d5e6b282f",
     "frozen_notion_snapshot": "docs/teaching/archive/day-22/notion/pet.md"
   },
-  "latest_pet_publication": "docs/teaching/daily/day-37/pet-r3-readback.json",
+  "latest_pet_publication": "docs/teaching/daily/day-38/pet-r2-readback.json",
   "previous_day22_analytics_article": {
     "project": "analytics",
     "day": 22,
@@ -2423,7 +2579,7 @@
     "frozen_body_sha256": "ae01b5aee1d29eec4a60a8ae8800e1a07ab8c9e7a838c4fa1ed17bfedc9069d1",
     "frozen_notion_snapshot": "docs/teaching/archive/day-22/notion/analytics.md"
   },
-  "latest_analytics_publication": "docs/teaching/daily/day-37/analytics-r3-readback.json",
+  "latest_analytics_publication": "docs/teaching/daily/day-38/analytics-r2-readback.json",
   "day23_archive": "docs/teaching/archive/day-23/manifest.json",
   "previous_day23_chat_article": {
     "project": "chat",
@@ -2733,7 +2889,7 @@
     "task_id": "6acd967c15fc8191ade8407954c5b354",
     "task_name": "三專案每日 TDD 教學",
     "task_url": "https://chatgpt.com/scheduled?automationId=6acd967c15fc8191ade8407954c5b354&automationSource=cloud",
-    "observed_date": "2026-10-24",
+    "observed_date": "2026-10-26",
     "status": "active",
     "frequency_display": "每天",
     "time_display": "上午",
@@ -2744,13 +2900,14 @@
     "prompt_full_readback_matches": true,
     "readback_after_server_page_reload": true,
     "prompt_before_sha256": "635aefd9cdac0ab2af53f22776b68fecd575f92a6429540bd9d593aa87be37d3",
-    "prompt_sha256": "2aedae264fb3c146fd13be3715fd89305242d5c28c68c1248f9bc86979c1ba59",
+    "prompt_sha256": "c2ac614f2d8ae2c5c4f08c216f4bb042c8cf9557ee2951b953c39a47ce94856f",
     "readme_updates": true,
-    "documentation_commit": "94c39a13d546bfb41acd4079817578d5ed7efb13",
+    "documentation_commit": "43b0c4f4eb5d6b65d6d3155a473b2a673d944046",
     "prompt_document": "docs/teaching/scheduler-instructions-v1.md",
-    "verification_scope": "Existing cloud task prompt saved, page reloaded, and exact full text compared; no Run now or new lesson publication.",
+    "verification_scope": "Existing web task prompt saved and fresh-page full text matched; schedule/model preserved; no Run now.",
     "readme_scope": "copilot_use seven navigation homepages; rust_ai_ring stays read-only",
-    "documentation_commit_role": "Parent documentation commit before homepage correction; corrected homepages accompany this evidence."
+    "documentation_commit_role": "Parent documentation commit before homepage correction; corrected homepages accompany this evidence.",
+    "verification_evidence": "docs/teaching/current/scheduler-document-refresh-2026-10-26.json"
   },
   "duplicate_application_review": {
     "date": "2026-10-25",
@@ -3179,5 +3336,180 @@
       "homepage_sync_commit": "ba333ede3e2f03e61e97cf54e122bf168a34802d",
       "readback_verified": true
     }
+  },
+  "daily_project_engineering": {
+    "cadence": "one small dependency-ordered package per day",
+    "scope": "whole project layering, tests and CI; separate from daily functional lesson",
+    "delivery": "complete source/patch and test plan; user applies",
+    "product_repository_read_only": true,
+    "progress": "docs/teaching/functional-refactoring/PROGRESS.md",
+    "core_minutes_excluded": true,
+    "day_advance": false
+  },
+  "day38_r2_delivery": {
+    "chat": {
+      "project": "chat",
+      "parent": "43b0c4f4eb5d6b65d6d3155a473b2a673d944046",
+      "commit": "2b06e1070e586209f2d28f1591c7b8a1d4b3124d",
+      "readback_at": "2026-10-25T23:21:07.800Z",
+      "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+      "rules_commit": "43b0c4f4eb5d6b65d6d3155a473b2a673d944046",
+      "files": [
+        {
+          "path": "docs/teaching/daily/day-38/chat-r2.md",
+          "blob_sha": "c68f1cb3f55a039cc2bb8510dda327060012c389",
+          "full_text_verified": true,
+          "sha256": "aad36ac9c1af0bfb721d16e8a74ba2d98d4f382fee59ccff87b01a0516dc80f8"
+        },
+        {
+          "path": "docs/teaching/daily/day-38/chat-r2.patch",
+          "blob_sha": "403f383ba4b03f9a7135026aa39740901cd4a7c3",
+          "full_text_verified": true,
+          "sha256": "fecb9f84591031f0173a598de5ad30857161ce2415b63e9326c38efb95fec745"
+        }
+      ],
+      "day": 38,
+      "revision": "r2",
+      "repository": "williechen/copilot_use",
+      "branch": "main",
+      "article_path": "docs/teaching/daily/day-38/chat-r2.md",
+      "article_commit": "2b06e1070e586209f2d28f1591c7b8a1d4b3124d",
+      "blob_sha": "c68f1cb3f55a039cc2bb8510dda327060012c389",
+      "sha256": "aad36ac9c1af0bfb721d16e8a74ba2d98d4f382fee59ccff87b01a0516dc80f8",
+      "patch": {
+        "path": "docs/teaching/daily/day-38/chat-r2.patch",
+        "blob_sha": "403f383ba4b03f9a7135026aa39740901cd4a7c3",
+        "full_text_verified": true,
+        "sha256": "fecb9f84591031f0173a598de5ad30857161ce2415b63e9326c38efb95fec745"
+      },
+      "full_text_verified": true,
+      "gate1": "complete_document_delivery",
+      "gate2": false,
+      "red_executed": false,
+      "green_executed": false,
+      "cargo_tests_executed": false,
+      "main_application": "not applied",
+      "functional_acceptance": false,
+      "static_checks": "r2-static-checks.json",
+      "official_versions": "r2-versions.json",
+      "next_day_before": 39,
+      "next_day_after": 39,
+      "revision_does_not_advance_day": true,
+      "evidence": "docs/teaching/daily/day-38/chat-r2-readback.json",
+      "original_delivery_preserved": true,
+      "index_sync_expected_parent": "12c7ceddbeff1ae3d528b8a7156f0e869c304a47"
+    },
+    "pet": {
+      "project": "pet",
+      "parent": "2b06e1070e586209f2d28f1591c7b8a1d4b3124d",
+      "commit": "5a27494c12ebc56efd41028d69e080877052f506",
+      "readback_at": "2026-10-25T23:21:13.881Z",
+      "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+      "rules_commit": "43b0c4f4eb5d6b65d6d3155a473b2a673d944046",
+      "files": [
+        {
+          "path": "docs/teaching/daily/day-38/pet-r2.md",
+          "blob_sha": "b37b8922ae05f58fe6c215898b9e83e3d2d30009",
+          "full_text_verified": true,
+          "sha256": "f45e2d8c7ce65715ea8a22b29f9ff47cf6852d7fdd0bd7c7df2fc09b37463cb3"
+        },
+        {
+          "path": "docs/teaching/daily/day-38/pet-r2.patch",
+          "blob_sha": "64c8d7eca1f2419cabe4543d17127bf45782e4cc",
+          "full_text_verified": true,
+          "sha256": "3272c80e9f32df8edefebee31dff3f5f60c7fa8fadb5dd55183b02fb4ffe56d7"
+        }
+      ],
+      "day": 38,
+      "revision": "r2",
+      "repository": "williechen/copilot_use",
+      "branch": "main",
+      "article_path": "docs/teaching/daily/day-38/pet-r2.md",
+      "article_commit": "5a27494c12ebc56efd41028d69e080877052f506",
+      "blob_sha": "b37b8922ae05f58fe6c215898b9e83e3d2d30009",
+      "sha256": "f45e2d8c7ce65715ea8a22b29f9ff47cf6852d7fdd0bd7c7df2fc09b37463cb3",
+      "patch": {
+        "path": "docs/teaching/daily/day-38/pet-r2.patch",
+        "blob_sha": "64c8d7eca1f2419cabe4543d17127bf45782e4cc",
+        "full_text_verified": true,
+        "sha256": "3272c80e9f32df8edefebee31dff3f5f60c7fa8fadb5dd55183b02fb4ffe56d7"
+      },
+      "full_text_verified": true,
+      "gate1": "complete_document_delivery",
+      "gate2": false,
+      "red_executed": false,
+      "green_executed": false,
+      "cargo_tests_executed": false,
+      "main_application": "not applied",
+      "functional_acceptance": false,
+      "static_checks": "r2-static-checks.json",
+      "official_versions": "r2-versions.json",
+      "next_day_before": 39,
+      "next_day_after": 39,
+      "revision_does_not_advance_day": true,
+      "evidence": "docs/teaching/daily/day-38/pet-r2-readback.json",
+      "original_delivery_preserved": true,
+      "index_sync_expected_parent": "12c7ceddbeff1ae3d528b8a7156f0e869c304a47"
+    },
+    "analytics": {
+      "project": "analytics",
+      "parent": "5a27494c12ebc56efd41028d69e080877052f506",
+      "commit": "12c7ceddbeff1ae3d528b8a7156f0e869c304a47",
+      "readback_at": "2026-10-25T23:21:19.595Z",
+      "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+      "rules_commit": "43b0c4f4eb5d6b65d6d3155a473b2a673d944046",
+      "files": [
+        {
+          "path": "docs/teaching/daily/day-38/analytics-r2.md",
+          "blob_sha": "810588bb719216c75c57aac495228fb5b10e582b",
+          "full_text_verified": true,
+          "sha256": "7369349057c878b70e63f9ed0b891713de3046d3f9cbc926323422b1875c6eb0"
+        },
+        {
+          "path": "docs/teaching/daily/day-38/analytics-r2.patch",
+          "blob_sha": "a501318d0abda9bc6081fb207dbf13dda59c14fa",
+          "full_text_verified": true,
+          "sha256": "89e2bd9fe90c59c6949ce952aa39787eea51093d759f01ee725e45e7be71969f"
+        }
+      ],
+      "day": 38,
+      "revision": "r2",
+      "repository": "williechen/copilot_use",
+      "branch": "main",
+      "article_path": "docs/teaching/daily/day-38/analytics-r2.md",
+      "article_commit": "12c7ceddbeff1ae3d528b8a7156f0e869c304a47",
+      "blob_sha": "810588bb719216c75c57aac495228fb5b10e582b",
+      "sha256": "7369349057c878b70e63f9ed0b891713de3046d3f9cbc926323422b1875c6eb0",
+      "patch": {
+        "path": "docs/teaching/daily/day-38/analytics-r2.patch",
+        "blob_sha": "a501318d0abda9bc6081fb207dbf13dda59c14fa",
+        "full_text_verified": true,
+        "sha256": "89e2bd9fe90c59c6949ce952aa39787eea51093d759f01ee725e45e7be71969f"
+      },
+      "full_text_verified": true,
+      "gate1": "complete_document_delivery",
+      "gate2": false,
+      "red_executed": false,
+      "green_executed": false,
+      "cargo_tests_executed": false,
+      "main_application": "not applied",
+      "functional_acceptance": false,
+      "static_checks": "r2-static-checks.json",
+      "official_versions": "r2-versions.json",
+      "next_day_before": 39,
+      "next_day_after": 39,
+      "revision_does_not_advance_day": true,
+      "evidence": "docs/teaching/daily/day-38/analytics-r2-readback.json",
+      "original_delivery_preserved": true,
+      "index_sync_expected_parent": "12c7ceddbeff1ae3d528b8a7156f0e869c304a47"
+    }
+  },
+  "latest_document_consolidation": {
+    "date": "2026-10-26",
+    "rules_commit": "43b0c4f4eb5d6b65d6d3155a473b2a673d944046",
+    "core_minutes": "Red/Green only",
+    "engineering_progress": "docs/teaching/functional-refactoring/PROGRESS.md",
+    "article_readback": "docs/teaching/daily/day-38/r2-delivery-verification.json",
+    "product_modified": false
   }
 }

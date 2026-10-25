@@ -1,0 +1,52 @@
+{
+  "project": "pet",
+  "parent": "2b06e1070e586209f2d28f1591c7b8a1d4b3124d",
+  "commit": "5a27494c12ebc56efd41028d69e080877052f506",
+  "readback_at": "2026-10-25T23:21:13.881Z",
+  "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+  "rules_commit": "43b0c4f4eb5d6b65d6d3155a473b2a673d944046",
+  "files": [
+    {
+      "path": "docs/teaching/daily/day-38/pet-r2.md",
+      "blob_sha": "b37b8922ae05f58fe6c215898b9e83e3d2d30009",
+      "full_text_verified": true,
+      "sha256": "f45e2d8c7ce65715ea8a22b29f9ff47cf6852d7fdd0bd7c7df2fc09b37463cb3"
+    },
+    {
+      "path": "docs/teaching/daily/day-38/pet-r2.patch",
+      "blob_sha": "64c8d7eca1f2419cabe4543d17127bf45782e4cc",
+      "full_text_verified": true,
+      "sha256": "3272c80e9f32df8edefebee31dff3f5f60c7fa8fadb5dd55183b02fb4ffe56d7"
+    }
+  ],
+  "day": 38,
+  "revision": "r2",
+  "repository": "williechen/copilot_use",
+  "branch": "main",
+  "article_path": "docs/teaching/daily/day-38/pet-r2.md",
+  "article_commit": "5a27494c12ebc56efd41028d69e080877052f506",
+  "blob_sha": "b37b8922ae05f58fe6c215898b9e83e3d2d30009",
+  "sha256": "f45e2d8c7ce65715ea8a22b29f9ff47cf6852d7fdd0bd7c7df2fc09b37463cb3",
+  "patch": {
+    "path": "docs/teaching/daily/day-38/pet-r2.patch",
+    "blob_sha": "64c8d7eca1f2419cabe4543d17127bf45782e4cc",
+    "full_text_verified": true,
+    "sha256": "3272c80e9f32df8edefebee31dff3f5f60c7fa8fadb5dd55183b02fb4ffe56d7"
+  },
+  "full_text_verified": true,
+  "gate1": "complete_document_delivery",
+  "gate2": false,
+  "red_executed": false,
+  "green_executed": false,
+  "cargo_tests_executed": false,
+  "main_application": "not applied",
+  "functional_acceptance": false,
+  "static_checks": "r2-static-checks.json",
+  "official_versions": "r2-versions.json",
+  "next_day_before": 39,
+  "next_day_after": 39,
+  "revision_does_not_advance_day": true,
+  "evidence": "docs/teaching/daily/day-38/pet-r2-readback.json",
+  "original_delivery_preserved": true,
+  "index_sync_expected_parent": "12c7ceddbeff1ae3d528b8a7156f0e869c304a47"
+}

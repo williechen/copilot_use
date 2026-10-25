@@ -1,48 +1,13 @@
 # Analytics 現行教學入口
 
-每日並行：[功能教學與全專案漸進工程](../functional-refactoring/README.md)分開交付及驗收。核心60分鐘只計教學Red／Green，局部Refactor與工程另計；產品唯讀，由使用者套用工程patch。
+每日功能教學與全專案漸進工程分開交付及驗收。核心60分鐘只計Red／Green，局部Refactor、工程與其他交付另計；rust_ai_ring唯讀，使用者自行套用。
 
-## 最新交付（2026-10-26）
+[共用規則](../../COMMON_LEARNING_RULES.md) · [功能與驗證](STATUS.md) · [工程進度](../functional-refactoring/PROGRESS.md) · [學習進度](../../learning-state.json) · [manifest](manifest.json)
 
-[Analytics Day38｜機器上報拒絕重複 Authorization Header，PostgreSQL CI 獨立](../daily/day-38/analytics.md) — **教學已交付／程式未套用／Red-Green、PostgreSQL、CI 未執行／產品未驗收**；來源 `9b89656f964b99e0cb89ba421855704a35c5ecb9`；最新 Day38、下一篇 **Day39**。下方 Day37 驗證及舊 Day38 預告保留當時範圍，不代表本篇已測。
+| 專案 | 現行教學 | 下一篇 | 驗證範圍 |
+| --- | --- | --- | --- |
+| Analytics | [Day38 r2：上報拒絕重複 Authorization](../daily/day-38/analytics-r2.md) | Day39 | 完整patch與精確讀回；套用檢查／語法解析通過；產品未套用、Red／Green／DB／GUI未執行 |
 
-**2026-10-26 現行摘要已核對。** 最新程式來源 `9b89656`（upgrade）；新CI快照為1成功／6執行中，尚未全綠。舊648b903為六成功／Persistence失敗，已配置的Analytics PostgreSQL步驟被略過。當日官方版本、manifest／lock與本機工具差異已補查；未升級產品、未重跑測試、未完成整體驗收。[版本與摘要核對](../../source-review/2026-10-26-versions-and-summary-refresh.md)。
+產品來源 `9b89656f964b99e0cb89ba421855704a35c5ecb9`，修訂commit `12c7ceddbeff1ae3d528b8a7156f0e869c304a47`。[精確讀回、blob與SHA256](../daily/day-38/analytics-r2-readback.json)；文件交付與產品驗收分開。
 
-[Day37 r3：驗證更新](../daily/day-37/analytics-r3.md)
-
-**程式已見／PG45項加略過另1項通過／CI受阻／完整驗收待完成**；來源 `648b90323af7b381d6a79dc2fd08a53b63173a43`，當時下一篇為 **Day38**（現行 Day39）。[精確交付讀回](../daily/day-37/analytics-r3-readback.json) · [本次完整驗證／錯誤與恢復](../../source-review/2026-10-25-day37-verification-648b903.md)。下方先前來源、交付及「未套用／未測試」摘要僅保留其當時範圍，不代表目前狀態。
-
-[Day37 r2：拒絕歧義 Session Cookie，兩種查詢共用 Guard](../daily/day-37/analytics-r2.md)
-
-**教學已交付／程式未套用／新測試未執行／產品未驗收**；下一篇 **Day38**。[精確 commit 全文讀回、blob 與 SHA256](../daily/day-37/analytics-r2-readback.json)。程式來源 `5c713553daee4055738239f047d6c774fcc7a7a1`；以下保留前次來源／驗證摘要，不能當成新 Green 成功。
-
-
-<!-- comparison-5c713553:start -->
-[最新三專案程式／文章比對](../../source-review/2026-10-25-full-comparison-5c713553.md)：105個閱讀版本、111份修訂、21項差異；來源 `5c713553`，局部測試與完整驗收分開記錄。
-
-精確查詢Session修正已在來源；一般帳號／角色／來源ACL仍缺。本段5c713553的CI摘要已過時；648b903已選analytics-server＋analytics-persistence並加postgres-integration，但前段Pet失敗使該步驟skipped，仍未獲CI通過證據。
-<!-- comparison-5c713553:end -->
-
-[問題文章與後續更正總表](ARTICLE_CORRECTIONS.md)：已整併最新瀏覽器／Pet 原生證據；下方個別來源的交付／測試摘要保留其當次範圍。
-
-[Day36 r2：精確事件統計 API 改用人員 Session，不再接受來源 token 查詢](../daily/day-36/analytics-r2.md)
-
-**程式已存在／相關實測通過／完整產品未驗收**；實測來源 rust_ai_ring `5c713553daee4055738239f047d6c774fcc7a7a1`，原始教學基準 `61ed5930`。當時下一篇 **Day37**（現行進度見上方）；[交付全文讀回](../daily/day-36/analytics-r2-readback.json)。
-
-PostgreSQL 全套 42 項通過、原略過項另跑 1 項通過；真 HTTP Session、首次改密碼、登出、過期／停用／fingerprint 及攝取去重通過。角色／來源 ACL、SSE、瀏覽器待驗。 [完整實測報告](../../source-review/2026-10-25-day36-verification-5c713553.md)。原版文章及交付證據均保留。
-
-[上一篇 Day35 r2：精確事件統計 SQLx Adapter](../daily/day-35/analytics-r2.md) 已在後續來源套用並通過 PostgreSQL 增量回歸，但原來源 token 查詢授權不符人員 Session 需求；[Day35 原始交付證據](../daily/day-35/analytics-r2-readback.json)。
-
-[首頁](../analytics/README.md) · [目前功能與驗證現況](STATUS.md) · [進度](../../learning-state.json) · [manifest](manifest.json) · [CI 補充與來源證據](../daily/day-34/source-snapshot.json)
-
-[文字勘誤：預設密碼字元數](../daily/day-34/analytics-corrections-r1.md) · [完整交付與同步證據](../daily/day-34/delivery-verification.json)
-
-[前次程式重複套用核對](../../source-review/2026-10-25-duplicate-application-review.md)（來源 `3236b94e`；保留原教學與交付證據，進度不變）。
-
-[全部後續調整與清理條件](../../FUTURE_WORK.md)：依本案順序選最小切片，不重做已接通內容；保留現行 Day 與原始證據。
-
-## 舊內容與現存狀態
-
-[全部文章逐篇核對](ARTICLE_STATUS.md) · [機器可讀狀態](article-states.json)
-
-此案現行來源：精確查詢 persistence／Dashboard／路由已接通；bb95a60 修編譯、afdbb6e 修四處文字斷言，PostgreSQL 回歸通過。原pg_store公開路徑相容性、角色／來源ACL與server PG CI實際通過仍追蹤（配置已補，執行被Pet失敗阻擋）；精確查詢人員Session已接；r1／r2 正文及原 commit/blob/SHA256 保留，完整功能未驗收。
+[上一篇](../daily/day-37/analytics-r3.md) · [原Day38](../daily/day-38/analytics.md) · [全部歷史與更正](ARTICLE_STATUS.md)。舊來源與歷史驗證沿原紀錄追溯，不重複累積到本入口。
