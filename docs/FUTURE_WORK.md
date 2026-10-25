@@ -1,5 +1,13 @@
 # 未來前進項目
 
+## 原CI覆蓋項補充：依層與專案拆開驗證（2026-10-26）
+
+使用者確認Pet原生步驟阻擋Analytics暴露CI責任混合；接回原CI覆蓋／必要功能分層項，不新增平行待辦或FIFO。[來源分析與矩陣](source-review/2026-10-26-ci-layer-boundaries.md)。
+
+目前9b89656已加Linux開發依賴，但Persistence仍同一job串Chat SQLite、Pet server＋SQLite、Analytics server＋PG。修正條件：三案DB各自job，Pet原生server獨立，純Domain／Application不需native／DB；保留真Router／IPC與DB測試及正確PG feature。解除無關needs／step順序阻擋，必要結果仍須全部成功，不能用continue-on-error或刪測試處理。
+
+完成證據須同時包含依賴方向、正式caller／測試接線、完整CI設定與精確SHA各job結果；補安裝套件只處理環境，不能結案分層。後續按功能提供最小完整程式與CI調整，不一次搬全庫；本次文件維護不改產品、不新增Day、不結案原功能或全面比對。
+
 **2026-10-26 現行摘要已核對。** 最新程式來源 `9b89656`（upgrade）；新CI快照為1成功／6執行中，尚未全綠。舊648b903為六成功／Persistence失敗，已配置的Analytics PostgreSQL步驟被略過。當日官方版本、manifest／lock與本機工具差異已補查；未升級產品、未重跑測試、未完成整體驗收。[版本與摘要核對](source-review/2026-10-26-versions-and-summary-refresh.md)。
 
 正式階段依 [P0–P12 十三階段詳細規劃](ROADMAP_P0_P12.md)：沿原功能／D01–D09 追蹤，不新增重複 Day／FIFO；原日曆與學習進度保留，規劃不作產品驗收。

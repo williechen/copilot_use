@@ -1,5 +1,16 @@
 # 三專案共用文章｜學習規則與交付方式
 
+## 2026-10-26：CI須反映功能分層與驗證責任
+
+規則補充：ci-layer-boundaries-v1。使用者指出Pet原生建置失敗連帶使Analytics測試略過，反映分層與CI責任未清楚對齊。後續涉及分層的教學須同步提供必要CI調整，不能只搬Rust檔案，也不能只補系統套件就宣稱已完成架構修正。[來源與責任核對](source-review/2026-10-26-ci-layer-boundaries.md)。
+
+- 純Domain／Application、SQLx資料Adapter、HTTP／IPC整合、原生建置／GUI分別標示驗證對象與依賴；job／step名稱須對應實際package、features、工作目錄與測試範圍。Persistence job不可混選pet-server而將Tauri原生建置誤稱純SQLite驗證。
+- Chat SQLite、Pet SQLite、Analytics PostgreSQL測試各自獨立job或workflow，不因無關專案前一步失敗而skipped；不設無實際產物相依的needs，跨專案matrix須避免fail-fast取消其它案。具有真正產物相依者才串接，須說明原因。
+- 內層測試不需要Tauri／WebKit／DB服務；SQLx Adapter測真DB，Pet server／Tauri測試另在具原生開發依賴的job保留並命名。資料Adapter不能為方便CI反向依賴server；純內層不能偷渡driver。
+- 不能刪除server／Router／IPC測試、移除PG feature、使用continue-on-error或吞掉exit code來換全綠。各job失敗仍須反映整體檢核失敗；最終彙總須檢查failure／cancelled／非預期skipped，不以彙總job執行成功代替子job成功。
+- 同篇提供所需程式邊界、Cargo normal／build／dev／target依賴、正式caller與測試，再給CI package／feature／services／native依賴／觸發與彙總接線；不要留第二套未被workflow呼叫的驗證命令。Cargo dependency被編譯不等於該dependency的測試已執行。
+- 文件Gate與產品Gate照舊分開。CI責任混合是可直接觀察的設定問題；是否存在Rust反向依賴仍須查實際依賴圖，不能只憑一次CI失敗推定。這次只更新文件規則，rust_ai_ring保持唯讀、不新增Day／FIFO、不改last_full_comparison。
+
 現行程式來源與目錄：[rust_ai_ring 四個 workspace 對照](SOURCE_LAYOUT.md)（來源 `0b3e5844`，2026-10-24 靜態核對）。
 
 [文件總入口](README.md) · [目前進度](teaching/current/STATUS.md) · [Chat 首頁](teaching/chat/README.md) · [Pet 首頁](teaching/pet/README.md) · [Analytics 首頁](teaching/analytics/README.md)

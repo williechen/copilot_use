@@ -1,5 +1,15 @@
 # 教學與主體程式銜接
 
+## 分層重構的CI交付檢核（2026-10-26）
+
+後續功能切片若變更層責任／測試位置，同篇一併核對CI，不只更新cargo test文字。依[規則](COMMON_LEARNING_RULES.md)與[來源分析](source-review/2026-10-26-ci-layer-boundaries.md)：
+
+1. 明列每個job驗哪個功能／層、選哪些package／features、DB／native前置條件及正式入口；純內層、SQLx、Router／IPC、原生／GUI結果各自記錄。
+2. 三案互不串接，資料Adapter不混選Tauri server。保留正式server整合測試於正確環境；不能因單選persistence成功而漏掉server授權、補償或IPC覆蓋。
+3. 給出必要完整workflow job／services／trigger／needs／matrix fail-fast與彙總條件；無實際相依不設needs。變更獨立job後核對required checks／實際觸發，不能留下舊名稱檢核永久等待。
+4. 核對normal／build／target依賴與測試收集；如果純內層仍拖入driver，先按功能完成必要重構。不要刪有效斷言、略過失敗測試或允許失敗來掩蓋責任混合。
+5. 命令／YAML僅為文件時明記未套用；須以rust_ai_ring精確SHA的實際workflow／job／測試結果驗證。此次規則維護不宣稱產品CI已重構、不推Day或修改產品。
+
 現行程式來源與目錄：[rust_ai_ring 四個 workspace 對照](SOURCE_LAYOUT.md)（來源 `0b3e5844`，2026-10-24 靜態核對）。
 
 `copilot_use` 是規則、教學文章、next_day、manifest、交付讀回與歷史證據的正本；`rust_ai_ring` 是唯一程式、測試、CI 與功能驗收主體。 教學原始碼保持唯讀，由使用者套用；兩庫分別記錄程式來源 SHA 與文件交付 SHA。

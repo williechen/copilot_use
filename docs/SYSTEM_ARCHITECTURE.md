@@ -1,5 +1,20 @@
 # 系統架構與現行程式入口
 
+## CI與程式邊界的對應
+
+2026-10-26補充：job以驗證責任拆分，不能以一個Persistence名稱覆蓋所有server與原生測試。[精確來源與建議矩陣](source-review/2026-10-26-ci-layer-boundaries.md)。
+
+| 驗證邊界 | 所需環境與責任 | 失敗隔離 |
+| --- | --- | --- |
+| Domain／Application | 純規則／用例；不引入SQLx、HTTP、Tauri與WebKit | 不依賴DB或原生建置job |
+| Chat／Pet SQLx Adapter | 各自SQLite與真Adapter契約；只選相應persistence package | 兩案分開，不串接Analytics |
+| Analytics SQLx／正式Router | PostgreSQL；資料Adapter與server授權整合明確分別命名／覆蓋 | 不依賴Pet或WebKit |
+| HTTP／IPC用例接線 | 正式入口、錯誤映射與授權；依真實adapter配置DB／native | 不能因拆資料job而刪除整合測試 |
+| Pet Tauri／原生 | Linux原生開發套件、server建置與原生契約；GUI另標實際範圍 | 獨立job，失敗不妨礙其它案跑完 |
+| 整體檢核 | 彙總所有必要job結果，失敗／取消／非預期略過不可視為成功 | 各案都能產生結果，整體仍保留失敗訊號 |
+
+9b89656的Persistence workflow新增Linux依賴解決的是環境前置條件；同job仍依序選Chat persistence、Pet server＋persistence、Analytics server＋persistence。驗證責任與執行相依尚未拆開，安裝成功不等於CI分層完成。Pet persistence本身未依賴pet-server；反向依賴未由此事件證實。程式混層與CI混合選取要分別追蹤、一起修正。
+
 **2026-10-26 現行摘要已核對。** 最新程式來源 `9b89656`（upgrade）；新CI快照為1成功／6執行中，尚未全綠。舊648b903為六成功／Persistence失敗，已配置的Analytics PostgreSQL步驟被略過。當日官方版本、manifest／lock與本機工具差異已補查；未升級產品、未重跑測試、未完成整體驗收。[版本與摘要核對](source-review/2026-10-26-versions-and-summary-refresh.md)。
 
 `copilot_use` 維護規則、教學、進度與證據；`rust_ai_ring` 為唯一程式、測試、CI 與功能驗收主體。現行目錄及名稱見 [SOURCE_LAYOUT](SOURCE_LAYOUT.md)，政策正本見 [共用規則](COMMON_LEARNING_RULES.md)。
