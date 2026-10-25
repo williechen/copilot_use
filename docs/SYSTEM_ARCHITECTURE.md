@@ -35,4 +35,4 @@ Domain測規則；Application以Port fake測流程／補償；Adapter測真SQL�
 
 CI分開純內層、各案DB、正式整合、Pet原生及UI／產物；三案無實際相依不串接，必要失敗不可吞掉。Persistence job若選入pet-server就含Tauri原生建置，不能當純SQLite證據。[來源分析](source-review/2026-10-26-ci-layer-boundaries.md)保留其當次範圍；補原生套件不等於工程完成。
 
-工程先完成斷言／caller承接，再清舊實作與獨占測試；以精確SHA實測記錄完成，目錄、re-export、metadata或cargo check都不足以取代DB／GUI驗收。當次功能的小整理併Green說明；Refactor依專案累積工程接續，完整跨層變更另以工程工作包交付，不受該日切片範圍限制。
+工程先完成斷言／caller承接，再清舊實作與獨占測試；以精確SHA實測記錄完成，目錄、re-export、metadata或cargo check都不足以取代DB／GUI驗收。當次功能的小整理併Green說明；Refactor依專案累積工程接續，在同篇與Red／Green並列的獨立段落交付完整內容，不接續Green作局部整理，也不受該日切片範圍限制。

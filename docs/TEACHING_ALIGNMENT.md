@@ -2,9 +2,9 @@
 
 ## 每日功能教學
 
-依[共用規則](COMMON_LEARNING_RULES.md)選一個可操作功能缺口，提供Red、完整Green、正式caller與直接相關測試；Refactor接續所屬專案整體工程，正文引用完整工作包與累積狀態。路徑、Cargo／feature、imports與命令依[現行目錄](SOURCE_LAYOUT.md)核對，不以API／helper通過冒稱畫面與整條流程已驗收。
+依[共用規則](COMMON_LEARNING_RULES.md)選一個可操作功能缺口，提供Red、完整Green、正式caller與直接相關測試；同篇另設與Red／Green並列的專案Refactor獨立段落，提供專案累積調整、完整程式／patch與驗證；不放在Green小節內，也不因獨立段落就拆成另一篇。路徑、Cargo／feature、imports與命令依[現行目錄](SOURCE_LAYOUT.md)核對，不以API／helper通過冒稱畫面與整條流程已驗收。
 
-核心60分鐘只計Red／Green，工程與其他作業另計。當日切片的小整理併Green說明，不以局部整理抵算Refactor。跨功能搬層、測試去重／遷移、共用fixture與CI重整不排入當日教材；需要工程相依時明列阻礙，由工程規劃追蹤，不刪測試、不以龐大重構擴充每日教學範圍。
+核心60分鐘只計Red／Green，工程與其他作業另計。當日切片的小整理併Green說明，不以局部整理抵算Refactor。跨功能搬層、測試去重／遷移、共用fixture與CI重整放在同篇獨立專案Refactor段落，按專案相依接續；需要工程相依時明列阻礙，由工程規劃追蹤，不刪測試、不以龐大重構擴充每日教學範圍。
 
 ## 每日漸進的全專案獨立工程
 

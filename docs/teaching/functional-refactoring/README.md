@@ -1,6 +1,6 @@
 # 全專案架構、測試與CI調整
 
-2026-10-26確認：重構是全專案獨立工程，每天逐步調整，不排為當日教學。範圍涵蓋Chat、Pet、Analytics與共用crates／跨workspace依賴；不新增平行產品或固定教學日。
+2026-10-26確認：重構是全專案累積工程，每天逐步調整，放在同篇獨立專案Refactor段落，不作當日功能教學主題。範圍涵蓋Chat、Pet、Analytics與共用crates／跨workspace依賴；不新增平行產品或固定教學日。
 
 目前狀態：**範圍與驗收整理，產品重構尚未執行。** 來源為 `rust_ai_ring@9b89656f964b99e0cb89ba421855704a35c5ecb9`；此次只改文件與每日任務提示詞，未改產品、測試、DB、lock或workflow，教學進度保持原值。
 
@@ -33,6 +33,6 @@
 
 ## 與每日教學分工
 
-每日功能教學提供可操作功能的Red／完整Green與直接相關測試。Refactor接續各專案整體工程：正文只列該專案累積狀態、本次工程包／完整patch連結、驗證與下一步，完整程式與測試遷移維持獨立工作包；切片小整理併Green說明，不能抵算工程。若功能依賴工程變更須明列。工程本身不增加Day、不改last_full_comparison；保留已發布文章與證據。
+每日功能教學提供可操作功能的Red／完整Green與直接相關測試。Refactor接續各專案整體工程：同篇設與Red／Green並列的獨立段落，提供累積狀態、本次完整程式／patch、測試遷移、實際驗證與下一步；共用附件與跨日進度仍集中本入口，不強制另拆文章；切片小整理併Green說明，不能抵算工程。若功能依賴工程變更須明列。工程本身不增加Day、不改last_full_comparison；保留已發布文章與證據。
 
 [共用規則](../../COMMON_LEARNING_RULES.md) · [架構責任](../../SYSTEM_ARCHITECTURE.md#functional-layering) · [教學與工程銜接](../../TEACHING_ALIGNMENT.md) · [既有功能項](../../FUTURE_WORK.md) · [CI分析](../../source-review/2026-10-26-ci-layer-boundaries.md) · [版本紀錄](../../source-review/2026-10-26-versions-and-summary-refresh.md)
