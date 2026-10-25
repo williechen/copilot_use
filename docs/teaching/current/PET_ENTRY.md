@@ -1,8 +1,10 @@
 # Pet 現行教學入口
 
+[問題文章與後續更正總表](ARTICLE_CORRECTIONS.md)：已整併最新瀏覽器／Pet 原生證據；下方個別來源的交付／測試摘要保留其當次範圍。
+
 [Day35：逐寵物回籠狀態搬入 pet-persistence，接回 Tauri 真實呼叫鏈](../daily/day-35/pet.md)
 
-**已套用／驗證結果**：Pet Day35 已在 e753c36 套用；persistence＋server 單元／整合共 55 項通過。三窗 GUI、故障補償注入、重啟及單幀單圖 FIFO 未驗收。下一篇 **Day36**。 [完整結果與勘誤](https://github.com/williechen/copilot_use/blob/main/docs/source-review/2026-10-25-update-e753c36.md)。
+**已套用／驗證結果**：Pet Day35 已在 e753c36 套用；persistence＋server 單元／整合共 55 項通過。後續三窗、隔離互動、回籠與控制台恢復已局部通過；重啟恢復所有未回籠寵物失敗，故障補償注入及單幀單圖 FIFO 仍未驗收。下一篇 **Day36**。 [完整結果與勘誤](https://github.com/williechen/copilot_use/blob/main/docs/source-review/2026-10-25-update-e753c36.md)。
 
 [Day35 交付與讀回證據](../daily/day-35/pet-readback.json) · [上一篇 Day34](../daily/day-34/pet.md)（名稱規則已接 application／Tauri／PetStore）。
 

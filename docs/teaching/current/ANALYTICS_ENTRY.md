@@ -1,5 +1,7 @@
 # Analytics 現行教學入口
 
+[問題文章與後續更正總表](ARTICLE_CORRECTIONS.md)：已整併最新瀏覽器／Pet 原生證據；下方個別來源的交付／測試摘要保留其當次範圍。
+
 [Day35 r2：事件類型精確統計 SQLx Adapter 與正式路由一併接通](../daily/day-35/analytics-r2.md)
 
 **已套用／驗證結果**：afdbb6e 完整 PostgreSQL 回歸 **44 passed／0 failed／1 ignored**、exit 0。五個 E0425 與三個舊文案失敗均已消除；既有查詢授權需求落差、角色等功能與完整瀏覽器驗收保留。下一篇 **Day36**。[完整結果](https://github.com/williechen/copilot_use/blob/main/docs/source-review/2026-10-25-assertions-afdbb6e.md)。

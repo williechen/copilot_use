@@ -2439,5 +2439,20 @@
     "local_runner_fix": "Wait for Trunk readiness before launching development binary",
     "program_modified": false,
     "teaching_progress_changed": false
+  },
+  "latest_article_corrections": {
+    "date": "2026-10-25",
+    "document_base_sha": "2fc0fc420b350727f49c75dfa5bbb6d303d30c41",
+    "source_sha": "5d28e969ceb10f7ae9bb7d15212f6a0dd63c9af1",
+    "index": "docs/teaching/current/ARTICLE_CORRECTIONS.md",
+    "data": "docs/teaching/current/article-corrections.json",
+    "task_canonical": "docs/FUTURE_WORK.md",
+    "canonical_article_count": 102,
+    "version_count": 104,
+    "article_bodies_modified": false,
+    "next_day_changed": false,
+    "makeup_queue_changed": false,
+    "last_full_comparison_changed": false,
+    "full_product_acceptance": false
   }
 }

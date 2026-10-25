@@ -1,8 +1,10 @@
 # Chat 現行教學入口
 
+[問題文章與後續更正總表](ARTICLE_CORRECTIONS.md)：已整併最新瀏覽器／Pet 原生證據；下方個別來源的交付／測試摘要保留其當次範圍。
+
 [Day35：建房名稱規則共用：拒絕控制字元且兩種入口一致](../daily/day-35/chat.md)
 
-**已套用／驗證結果**：Chat Day35 已在 e753c36 套用；application／server／整合 35 項、UI SSR 14 項通過。瀏覽器／hydration 與完整功能未驗收。下一篇 **Day36**。 [完整結果與勘誤](https://github.com/williechen/copilot_use/blob/main/docs/source-review/2026-10-25-update-e753c36.md)。
+**已套用／驗證結果**：Chat Day35 已在 e753c36 套用；application／server／整合 35 項、UI SSR 14 項通過。後續 hydration、登入／建房／搜尋已局部實測，Session／ACL／歷史與完整功能仍未通過驗收。下一篇 **Day36**。 [完整結果與勘誤](https://github.com/williechen/copilot_use/blob/main/docs/source-review/2026-10-25-update-e753c36.md)。
 
 [Day35 交付與讀回證據](../daily/day-35/chat-readback.json) · [上一篇 Day34 r2](../daily/day-34/chat-r2.md)（登入入口去重已見來源，未當次驗收）。
 

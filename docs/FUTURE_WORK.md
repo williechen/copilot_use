@@ -8,6 +8,138 @@
 
 P9 規則已廢除。本清單中僅源自舊規則、尚未依最新需求確認的項目只作候選，不自動作必做功能或驗收門檻。已確認的開發項目在原項目記錄可驗證功能條件、SHA／測試／CI／套用與驗收證據，未核實者保留未完成。跨階段工作留原功能項目追蹤；舊 Day 更正僅於下一個 Day 的 Refactor 後獨立補加，不回填原 Day，不另開重複項目；完成後可退出活動清單，但原識別與證據須可追溯。學習階段不代表產品功能已驗收。
 
+## 所有問題文章的後續修正（2026-10-25）
+
+[102 篇目前閱讀版本／104 份版本的問題與更正索引](teaching/current/ARTICLE_CORRECTIONS.md)已整併原盤點與最新實測。下表是原功能的集中修正條件，沿用原 D01–D09 及既有項目，不另建任務編號或 FIFO。狀態限各證據來源，不將需求未驗收一律稱為文章錯誤。
+
+<a id="article-api"></a>
+
+### 文章 API／修訂與歷史版本
+
+Chat／Analytics 舊 SSR API、兩個被取代修訂及過時斷言分開記錄；依目前 Leptos API、真實路徑提供後續更正，保留原文。
+
+目前：文章勘誤；部分產品錯誤已修復。完成條件：新補充須編譯並保留有效斷言；不恢復舊 stub 或重複登入頁。
+
+<a id="chat-auth"></a>
+
+### Chat Session／作者／房主與 ACL
+
+D05 共用認證保留；補登出撤銷既有 WS、匿名進房登入回跳、會員作者及房主／逐房授權。
+
+目前：實測缺口／待修正。完成條件：登出後舊 WS 不可寫入；原房間回跳；訊息作者與房主為真實 ID；未授權 HTTP／WS 拒絕。
+
+<a id="chat-history"></a>
+
+### Chat 歷史／migration／稽核
+
+歷史載入未接通；舊 DB checksum／稽核缺口保留原來源，不能用 fresh DB 結案。
+
+目前：歷史實測未通過；升級／稽核待再驗。完成條件：重載還原已提交訊息；舊庫保資料前向升級；要求的稽核真實落庫。
+
+<a id="chat-feedback"></a>
+
+### Chat 房間與訊息回饋
+
+首頁雙提示已有本地候選 patch，未推送產品；MessageCreated 沒有解除等待狀態；D06 helper 測試遷移仍待。
+
+目前：本地候選／待套用；其它待修。完成條件：單一房間狀態；成功回應後送出狀態明確；保留搜尋／重試及真正 helper 回歸。
+
+<a id="pet-lifecycle"></a>
+
+### Pet 多寵物／回籠／重啟
+
+三窗、狀態隔離、回籠、控制台恢復及重複開窗已局部通過；重啟仍只恢復最後選取一隻，失敗補償注入待做。
+
+目前：重啟實測未通過；其它局部通過。完成條件：恢復所有未回籠 ID；回籠不恢復；開窗／關窗／DB 失敗不遺失狀態或重複開窗。
+
+<a id="pet-roaming"></a>
+
+### Pet 逐 ID 漫遊／桌面例外
+
+固定 pet label 不符 pet-UUID；接回原漫遊、拖曳、多螢幕及手動找回需求。
+
+目前：日誌與來源確認／待修。完成條件：真實逐窗漫遊；回籠停活動；拖曳與螢幕變動符合現行 UI 條件。
+
+<a id="pet-display"></a>
+
+### Pet 外觀與生活窗可讀性
+
+透明生活窗白字在淺背景不清楚；單幀單圖 FIFO、素材與初始外觀仍依原項目核對。
+
+目前：截圖所見／部分待驗。完成條件：200×200 名稱／狀態／按鈕可讀可操作；一窗一寵物、每幀單一圖像。
+
+<a id="analytics-auth"></a>
+
+### Analytics 正式人員查詢授權
+
+來源 token 無人員 Session 仍可讀精確統計；角色／來源 ACL、停用縮權仍屬原需求。
+
+目前：HTTP 實測需求不符／待修。完成條件：Query／管理／SSE 經人員 Session 與權限；上報機器身分另驗；撤銷立即生效。
+
+<a id="analytics-session"></a>
+
+### Analytics 正式登入／Session 保護
+
+初始化、改密碼、舊 Session 撤銷、重啟保留與 Dashboard 已局部通過；正式登入等待及錯誤回應續期需與 legacy 測試分開。
+
+目前：局部通過／尚缺正式流程驗證。完成條件：真實 password_login 路由驗證等待、活動 Session、閒置、改密碼與權限變更撤銷。
+
+<a id="adapter-cleanup"></a>
+
+### 原 13 項清理／D01–D09
+
+沿用下方原清單：Chat unused API／helper／Cookie，Pet unused extern／global IPC／setter，Analytics 範本／legacy admin／fixture／API 相容；已接 caller 的兩個 persistence 庫不再當空庫。
+
+目前：原項目狀態保留／逐項核對。完成條件：先遷有效測試並盤點框架／外部入口再清；initialize fixture 保留；不新增平行產品。
+
+<a id="ci-coverage"></a>
+
+### CI／產物與測試覆蓋
+
+5d28e96 已直接選取兩個 persistence package；Analytics server PG targets 的獨立 CI 入口、新 dist 契約與實際安裝產物仍需核對。
+
+目前：library 選取已見；完整覆蓋待驗。完成條件：同 SHA 真 PG server＋library、source＋新 dist、native build／安裝更新；不延用舊 SHA 綠燈。
+
+<a id="event-transport"></a>
+
+### 來源事件／Outbox／gRPC／SSE／服務配對
+
+Chat persisted_message_event 與 Pet succeeded_event 尚未證明正式上報 caller；沿原傳輸、短效憑證及投遞項，不因 DTO 存在當完成。
+
+目前：來源接線／需求待完成或待驗。完成條件：真來源事件→可靠投遞→PG commit ACK→人員查詢／SSE，含重試去重、rollback、換證撤銷。
+
+<a id="pet-capabilities"></a>
+
+### Pet 設定／記憶／檔案／AI 與平台能力
+
+模型、唯讀預覽或確認 UI 不等於真 OS 清理／Trash／receipt／restore；五欄設定、素材、記憶與三平台更新保留原條件。
+
+目前：需求／未驗收範圍，非全屬編譯錯誤。完成條件：按原需求逐最小切片提供真 IPC／DB／OS 證據；付費 AI 不在本輪呼叫。
+
+<a id="analytics-capabilities"></a>
+
+### Analytics 報表／Token 費用與跨服務能力
+
+趨勢／明細／備份／同意撤回、Token／額度／費用及 AI 洞察維持原待辦；不由統計 API 的局部成功結案。
+
+目前：需求／未驗收範圍。完成條件：依原功能條件核對真來源與精確驗證；未知額度不可冒稱已取得。
+
+<a id="chat-capabilities"></a>
+
+### Chat 即時／AI／政策與進階 UI
+
+presence／typing／reconnect／queue、streaming／RAG／MCP／Agent／Persona、同意撤回與窄螢幕 UI 等維持既有範圍。
+
+目前：需求／未驗收範圍。完成條件：基本登入授權優先，後續逐切片驗證真 UI／HTTP／WS／DB，不用 helper 冒充完整能力。
+
+<a id="layout-guidance"></a>
+
+### 歷史路徑／庫名／政策與範例判讀
+
+歷史舊庫名、舊路徑、P9 與省略候選只作閱讀提示；後續教學按新目錄給完整必要程式，不恢復廢除搬移計畫。
+
+目前：閱讀注意／套用前核對，非自動認定錯誤。完成條件：四個 workspace／package／lock／features／真 caller 對齊；必要版本在實際新教學交付時核對。
+
 ## 舊內容與現存狀態（2026-10-25）
 
 [99 篇目前閱讀版本與舊修訂逐篇狀態](teaching/current/ARTICLE_STATUS.md) 已核對原文、現存程式與歷史證據。程式已見、已被後續取代、legacy 專用與原文待勘誤分開追蹤；本次不新增完成 checkbox 或改變既有 FIFO。Pet 名稱規則、控制窗 hide/show、Analytics Leptos 帳密與 ensure_default 已見 caller，不再以原文「未套用」重教；最新 3aeab095 已見 Chat r2 去重與測試；歷史／作者／ACL 等缺口保留，當次驗收未重跑。

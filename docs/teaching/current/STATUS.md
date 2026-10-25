@@ -1,6 +1,8 @@
 # 目前功能與驗證狀態
 
-程式來源：`williechen/rust_ai_ring/main@afdbb6e81382e8d82095827a90c52cc3309a3e20`。本頁只記功能與驗證現況；文章版本／交付與歷史證據另由 [逐篇狀態](ARTICLE_STATUS.md)、manifest 與 learning-state 管理。以下舊段落保留 afdbb6e 當次範圍；最新實機驗收見下節。
+[所有問題文章與後續更正](ARTICLE_CORRECTIONS.md)已整併目前閱讀版本、原始修訂及最新實測；功能修正與完成條件集中於 [原待辦](../../FUTURE_WORK.md#article-api)。文章整理不代表產品已修復。
+
+最新局部實測來源：`williechen/rust_ai_ring/main@5d28e969ceb10f7ae9bb7d15212f6a0dd63c9af1`；afdbb6e 的舊盤點段落另保留原範圍。本頁只記功能與驗證現況；文章版本／交付與歷史證據另由 [逐篇狀態](ARTICLE_STATUS.md)、manifest 與 learning-state 管理。以下舊段落保留 afdbb6e 當次範圍；最新實機驗收見下節。
 
 ## Pet 原生驗證補充（2026-10-25）
 
