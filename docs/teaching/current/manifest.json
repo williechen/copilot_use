@@ -51,7 +51,7 @@
     "historical_records_are_not_current_policy": true
   },
   "scope": "Latest published teaching index; Day16 snapshot preserved in archive",
-  "revision": "day38-chat-published-2026-10-26",
+  "revision": "day38-chat-pet-published-2026-10-26",
   "synced_date": "2026-10-26",
   "source_sha": "f3f8255b0b701a1b57cb8c0a1737c3caa4319f2d",
   "articles": [
@@ -2144,12 +2144,35 @@
       "status": "article_delivered_pending_product_validation",
       "rules_version": "daily-tdd-minimum-v1 / github-only-v1",
       "raw_error": null
+    },
+    {
+      "project": "pet",
+      "day": 38,
+      "revision": "r1",
+      "path": "docs/teaching/daily/day-38/pet.md",
+      "article_commit": "64dfc516c151bfc753d707a4ee5ca7b044382ec8",
+      "parent": "864312e1a5df88bca3bc9590c015c5f292df4537",
+      "blob_sha": "842b6a127b3738ed5e1f514801b304356114201e",
+      "sha256": "954a996d5fc8d7be2dd500c42648d26e3e9b5fdd9aff85bc0d3c89e9c6922c48",
+      "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+      "full_text_verified": true,
+      "code_blocks_exact": true,
+      "red_executed": false,
+      "green_executed": false,
+      "main_application": "not applied",
+      "functional_acceptance": false,
+      "archived": false,
+      "next_day_before": 38,
+      "next_day_after": 39,
+      "status": "article_delivered_pending_product_validation",
+      "rules_version": "daily-tdd-minimum-v1 / github-only-v1",
+      "raw_error": null
     }
   ],
   "day15_frozen": true,
   "next_day": {
     "chat": 39,
-    "pet": 38,
+    "pet": 39,
     "analytics": 38
   },
   "day_advanced": true,
@@ -3090,6 +3113,14 @@
       "article_path": "docs/teaching/daily/day-38/chat.md",
       "blob_sha": "85aa8cfa3f633a21d7bd11ac59d4942e6fc7a3ae",
       "sha256": "31fbf53bfc129ace9c04cd9142d0b56f91168b2a863e3633f3f34af732119c93",
+      "next_day": 39,
+      "functional_acceptance": false
+    },
+    "pet": {
+      "article_commit": "64dfc516c151bfc753d707a4ee5ca7b044382ec8",
+      "article_path": "docs/teaching/daily/day-38/pet.md",
+      "blob_sha": "842b6a127b3738ed5e1f514801b304356114201e",
+      "sha256": "954a996d5fc8d7be2dd500c42648d26e3e9b5fdd9aff85bc0d3c89e9c6922c48",
       "next_day": 39,
       "functional_acceptance": false
     }

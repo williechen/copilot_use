@@ -24,7 +24,7 @@
 | 專案 | 最新文章 | 下一篇 | 狀態 |
 | --- | --- | --- | --- |
 | Chat | [Day38：搜尋失敗顯示在真正的 Leptos 房間列表](daily/day-38/chat.md) | Day39 | 教學已交付／產品未套用／Red-Green與瀏覽器未執行／未驗收 |
-| Pet | [Day37 r3：先保存再開窗，失敗回復原標記](daily/day-37/pet-r3.md) | Day38 | 程式已見／62項與WASM通過／GUI局部通過／故障注入待驗 |
+| Pet | [Day38：多隻生活窗各自漫遊、逐 UUID 任務隔離](daily/day-38/pet.md) | Day39 | 教學已交付／產品未套用／原生測試與 GUI 未執行／未驗收 |
 | Analytics | [Day37 r3：拒絕歧義 Session Cookie，兩種查詢共用 Guard](daily/day-37/analytics-r3.md) | Day38 | 程式已見／PG45項加略過另1項通過／CI受阻／完整驗收待完成 |
 
 文案修復與最新 PG 結果見 [afdbb6e 驗證](https://github.com/williechen/copilot_use/blob/main/docs/source-review/2026-10-25-assertions-afdbb6e.md)；前次編譯修復見 [bb95a60 驗證](https://github.com/williechen/copilot_use/blob/main/docs/source-review/2026-10-25-compile-bb95a60.md)；前次套用／測試見 [e753c36 更新驗證](https://github.com/williechen/copilot_use/blob/main/docs/source-review/2026-10-25-update-e753c36.md)；原 Day35 正文與交付證據保留，完整產品驗收尚未完成。
