@@ -64,7 +64,7 @@ D05 共用認證保留；WS持續重驗已接並有同SHA局部證據，尚缺�
 
 ### Pet 逐 ID 漫遊／桌面例外
 
-2026-10-25 使用者再次回報 pet window not found。來源 `744a75fc` 仍以固定 pet 查找動態 pet-UUID 生活窗，找不到即終止漫遊；須按逐 ID 出／入籠生命週期啟停，三窗與重開驗證。另有 WebKit 內部載入錯誤，未定因，不能當成同一錯誤或靠遮蔽日誌結案。[原始訊息、來源與診斷界線](source-review/2026-10-25-pet-roaming-webkit-feedback.md)。兩項均未修復／未驗收。
+2026-10-25 使用者再次回報 pet window not found。來源 `744a75fc` 仍以固定 pet 查找動態 pet-UUID 生活窗，找不到即終止漫遊；須按逐 ID 出／入籠生命週期啟停，三窗與重開驗證。另有 WebKit 內部載入錯誤，未定因，不能當成同一錯誤或靠遮蔽日誌結案。[原始訊息、來源與診斷界線](source-review/2026-10-25-pet-roaming-webkit-feedback.md)。兩項均未修復／未驗收。使用者補充「所有視窗空白、每按下出籠都會重新開啟」；先查共用前端載入，再以同 pet id／label／PID／Destroyed 時序分辨重載或重複建窗，尚未定因。
 
 固定 pet label 不符 pet-UUID；接回原漫遊、拖曳、多螢幕及手動找回需求。
 
