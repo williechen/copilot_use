@@ -17,7 +17,7 @@
 | --- | --- | --- | --- |
 | Chat | [Day37 r2：房間搜尋完成時更新真實畫面狀態](day-37/chat-r2.md) | Day38 | 教學已交付／程式未套用／新測試未執行／產品未驗收 |
 | Pet | [Day37 r2：先保存再開窗，失敗回復原標記](day-37/pet-r2.md) | Day38 | 教學已交付／程式未套用／新測試未執行／產品未驗收 |
-| Analytics | [Day36 r2：精確事件統計 API 改用人員 Session，不再接受來源 token 查詢](day-36/analytics-r2.md) | Day37 | 程式已存在／相關實測通過／完整產品未驗收 |
+| Analytics | [Day37 r2：拒絕歧義 Session Cookie，兩種查詢共用 Guard](day-37/analytics-r2.md) | Day38 | 教學已交付／程式未套用／新測試未執行／產品未驗收 |
 
 文案修復與最新 PG 結果見 [afdbb6e 驗證](https://github.com/williechen/copilot_use/blob/main/docs/source-review/2026-10-25-assertions-afdbb6e.md)；前次編譯修復見 [bb95a60 驗證](https://github.com/williechen/copilot_use/blob/main/docs/source-review/2026-10-25-compile-bb95a60.md)；前次套用／測試見 [e753c36 更新驗證](https://github.com/williechen/copilot_use/blob/main/docs/source-review/2026-10-25-update-e753c36.md)；原 Day35 正文與交付證據保留，完整產品驗收尚未完成。
 <!-- daily-delivery:end -->
