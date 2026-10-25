@@ -1688,11 +1688,41 @@
         "checked_at": "2026-10-25T00:44:51.103908+00:00",
         "scope": "local PostgreSQL regression; not full product acceptance or CI"
       }
+    },
+    {
+      "repository": "williechen/copilot_use",
+      "branch": "main",
+      "project": "chat",
+      "day": 36,
+      "revision": "r1",
+      "title": "既有 WebSocket 會話於登出後撤銷並停止後續收發",
+      "path": "docs/teaching/daily/day-36/chat.md",
+      "parent": "17c52c091bd2b4d2a9be4ec41ffa87dad3c0d1fa",
+      "article_commit": "79c785f2bc42a64e34c986315c7a954d954a4abc",
+      "blob_sha": "d398f42033eb53a80f446f95e58f73a92c4a1810",
+      "sha256": "7f68d39a0a133db6bb336de9b6c9bd140a1baa7bf46370f6da3191b2e43cc9eb",
+      "full_text_verified": true,
+      "readback_at": "2026-10-25T06:13:20.874Z",
+      "source_repository": "williechen/rust_ai_ring",
+      "source_sha": "61ed5930bd9ff38e0d5822eea2983121001d8422",
+      "rules_sha": "3b5d00291cdd44e1fa039aad4b10d8f82b59982d",
+      "rules_version": "daily-tdd-minimum-v1+github-only-v1",
+      "status": "article_delivered_unapplied_unverified",
+      "main_application": "not applied",
+      "tests": "not run",
+      "functional_acceptance": false,
+      "archived": false,
+      "next_day_before": 36,
+      "next_day_after": 37,
+      "raw_error": null,
+      "remaining_gaps": "原子撤銷與訊息寫入競態、選房登入回跳、逐房 ACL、作者／歷史、瀏覽器與 CI 待驗",
+      "sync_expected_parent_sha": "79c785f2bc42a64e34c986315c7a954d954a4abc",
+      "sync_status": "pending"
     }
   ],
   "day15_frozen": true,
   "next_day": {
-    "chat": 36,
+    "chat": 37,
     "pet": 36,
     "analytics": 36
   },
@@ -1835,7 +1865,7 @@
     "frozen_body_sha256": "ad6cef4a58f20f6162fb01a4c71ef1a752992856327063d9988112c91a639184",
     "frozen_notion_snapshot": "docs/teaching/archive/day-22/notion/chat.md"
   },
-  "latest_chat_publication": "docs/teaching/daily/day-35/chat-readback.json",
+  "latest_chat_publication": "docs/teaching/daily/day-36/chat-readback.json",
   "previous_day22_pet_article": {
     "project": "pet",
     "day": 22,

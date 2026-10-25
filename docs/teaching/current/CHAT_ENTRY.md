@@ -2,11 +2,11 @@
 
 [問題文章與後續更正總表](ARTICLE_CORRECTIONS.md)：已整併最新瀏覽器／Pet 原生證據；下方個別來源的交付／測試摘要保留其當次範圍。
 
-[Day35：建房名稱規則共用：拒絕控制字元且兩種入口一致](../daily/day-35/chat.md)
+[Day36：既有 WebSocket 會話於登出後撤銷並停止後續收發](../daily/day-36/chat.md)
 
-**已套用／驗證結果**：Chat Day35 已在 e753c36 套用；application／server／整合 35 項、UI SSR 14 項通過。後續 hydration、登入／建房／搜尋已局部實測，Session／ACL／歷史與完整功能仍未通過驗收。下一篇 **Day36**。 [完整結果與勘誤](https://github.com/williechen/copilot_use/blob/main/docs/source-review/2026-10-25-update-e753c36.md)。
+**文章已交付／程式未套用／新測試未執行／未驗收**；來源 rust_ai_ring `61ed5930bd9ff38e0d5822eea2983121001d8422`。下一篇 **Day37**；[交付全文讀回](../daily/day-36/chat-readback.json)。
 
-[Day35 交付與讀回證據](../daily/day-35/chat-readback.json) · [上一篇 Day34 r2](../daily/day-34/chat-r2.md)（登入入口去重已見來源，未當次驗收）。
+[上一篇 Day35：建房名稱規則共用](../daily/day-35/chat.md) 已在後續來源套用並完成增量測試，但整體功能仍待驗收；[Day35 原始交付證據](../daily/day-35/chat-readback.json)。
 
 [首頁](../chat/README.md) · [功能與驗證現況](STATUS.md) · [進度](../../learning-state.json) · [manifest](manifest.json) · [r2 交付證據](../daily/day-34/chat-r2-readback.json)
 

@@ -56,7 +56,7 @@
   "fixed_tag": "v0.2.1",
   "fixed_tag_sha": "9bcae7c5d139f75ed08b4daffece602a71fdab34",
   "next_day": {
-    "chat": 36,
+    "chat": 37,
     "pet": 36,
     "analytics": 36
   },
@@ -480,9 +480,9 @@
     "last_publication_status": "Day19 r1 published to existing project pages and fully read back; next_day advanced 19 to 20 per project. Source code application and full acceptance remain incomplete.",
     "latest_github_publication": {
       "chat": {
-        "day": 31,
-        "path": "docs/teaching/daily/day-31/chat.md",
-        "article_commit": "66a7d1141ce057c04ee631434d959b1cb22e9ef2"
+        "day": 36,
+        "path": "docs/teaching/daily/day-36/chat.md",
+        "article_commit": "79c785f2bc42a64e34c986315c7a954d954a4abc"
       },
       "pet": {
         "day": 31,
@@ -3679,7 +3679,7 @@
     "expected_state_parent_sha": "7a3400259b59cf617d6c3c721bfc10d1014542b0",
     "raw_error": null
   },
-  "latest_chat_publication": "docs/teaching/daily/day-35/chat-readback.json",
+  "latest_chat_publication": "docs/teaching/daily/day-36/chat-readback.json",
   "duplicate_application_review": {
     "date": "2026-10-25",
     "source_repository": "williechen/rust_ai_ring",
@@ -4142,5 +4142,35 @@
     "makeup_queue_changed": false,
     "last_full_comparison_changed": false,
     "full_product_acceptance": false
+  },
+  "day36_chat_delivery": {
+    "repository": "williechen/copilot_use",
+    "branch": "main",
+    "project": "chat",
+    "day": 36,
+    "revision": "r1",
+    "title": "既有 WebSocket 會話於登出後撤銷並停止後續收發",
+    "path": "docs/teaching/daily/day-36/chat.md",
+    "parent": "17c52c091bd2b4d2a9be4ec41ffa87dad3c0d1fa",
+    "article_commit": "79c785f2bc42a64e34c986315c7a954d954a4abc",
+    "blob_sha": "d398f42033eb53a80f446f95e58f73a92c4a1810",
+    "sha256": "7f68d39a0a133db6bb336de9b6c9bd140a1baa7bf46370f6da3191b2e43cc9eb",
+    "full_text_verified": true,
+    "readback_at": "2026-10-25T06:13:20.874Z",
+    "source_repository": "williechen/rust_ai_ring",
+    "source_sha": "61ed5930bd9ff38e0d5822eea2983121001d8422",
+    "rules_sha": "3b5d00291cdd44e1fa039aad4b10d8f82b59982d",
+    "rules_version": "daily-tdd-minimum-v1+github-only-v1",
+    "status": "article_delivered_unapplied_unverified",
+    "main_application": "not applied",
+    "tests": "not run",
+    "functional_acceptance": false,
+    "archived": false,
+    "next_day_before": 36,
+    "next_day_after": 37,
+    "raw_error": null,
+    "remaining_gaps": "原子撤銷與訊息寫入競態、選房登入回跳、逐房 ACL、作者／歷史、瀏覽器與 CI 待驗",
+    "sync_expected_parent_sha": "79c785f2bc42a64e34c986315c7a954d954a4abc",
+    "sync_status": "pending"
   }
 }
