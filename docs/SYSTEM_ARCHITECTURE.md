@@ -1,92 +1,38 @@
-# 系統架構與現行程式入口
+# 系統架構與責任
 
-## 測試的分層責任（2026-10-26）
-
-測試是各層契約的驗證，需與功能程式一起重構。測試去重／遷移規則只維護於[共用規則](COMMON_LEARNING_RULES.md)的test-refactor-v1，不在各入口複製一份政策。
-
-| 責任 | 主要驗證 | 不能取代 |
-| --- | --- | --- |
-| Domain | 業務不變條件與邊界值 | IO、HTTP或畫面 |
-| Application | 真用例的流程順序、授權決策、補償；以Port fake隔離IO | SQLx／原生實作正確性 |
-| Persistence | 真SQL、資料隔離、交易與錯誤 | 正式caller接線 |
-| Delivery／native | 正式Router／IPC、協定與錯誤映射、原生契約 | 用例所有細節的第二份fake測試 |
-| UI | 狀態、元件與可見互動；必要瀏覽器驗證 | 單測Signal不能冒稱DOM驗收 |
-
-同一情境跨層有不同失敗模式時保留；同層同入口的相同斷言才整併。Fixture按責任共用準備，不能讓純內層依賴server fixture。本次更新規則，沒有搬移產品測試。
-
-## CI與程式邊界的對應
-
-2026-10-26補充：job以驗證責任拆分，不能以一個Persistence名稱覆蓋所有server與原生測試。[精確來源與建議矩陣](source-review/2026-10-26-ci-layer-boundaries.md)。
-
-| 驗證邊界 | 所需環境與責任 | 失敗隔離 |
-| --- | --- | --- |
-| Domain／Application | 純規則／用例；不引入SQLx、HTTP、Tauri與WebKit | 不依賴DB或原生建置job |
-| Chat／Pet SQLx Adapter | 各自SQLite與真Adapter契約；只選相應persistence package | 兩案分開，不串接Analytics |
-| Analytics SQLx／正式Router | PostgreSQL；資料Adapter與server授權整合明確分別命名／覆蓋 | 不依賴Pet或WebKit |
-| HTTP／IPC用例接線 | 正式入口、錯誤映射與授權；依真實adapter配置DB／native | 不能因拆資料job而刪除整合測試 |
-| Pet Tauri／原生 | Linux原生開發套件、server建置與原生契約；GUI另標實際範圍 | 獨立job，失敗不妨礙其它案跑完 |
-| 整體檢核 | 彙總所有必要job結果，失敗／取消／非預期略過不可視為成功 | 各案都能產生結果，整體仍保留失敗訊號 |
-
-9b89656的Persistence workflow新增Linux依賴解決的是環境前置條件；同job仍依序選Chat persistence、Pet server＋persistence、Analytics server＋persistence。驗證責任與執行相依尚未拆開，安裝成功不等於CI分層完成。Pet persistence本身未依賴pet-server；反向依賴未由此事件證實。程式混層與CI混合選取要分別追蹤、一起修正。
-
-**2026-10-26 現行摘要已核對。** 最新程式來源 `9b89656`（upgrade）；新CI快照為1成功／6執行中，尚未全綠。舊648b903為六成功／Persistence失敗，已配置的Analytics PostgreSQL步驟被略過。當日官方版本、manifest／lock與本機工具差異已補查；未升級產品、未重跑測試、未完成整體驗收。[版本與摘要核對](source-review/2026-10-26-versions-and-summary-refresh.md)。
-
-`copilot_use` 維護規則、教學、進度與證據；`rust_ai_ring` 為唯一程式、測試、CI 與功能驗收主體。現行目錄及名稱見 [SOURCE_LAYOUT](SOURCE_LAYOUT.md)，政策正本見 [共用規則](COMMON_LEARNING_RULES.md)。
-
-本次功能分層評估來源為 `648b90323af7b381d6a79dc2fd08a53b63173a43`，見 [分層來源評估](source-review/2026-10-25-functional-layering.md)。下列入口表的歷史來源為 `5c713553daee4055738239f047d6c774fcc7a7a1`；[最新靜態比對與CI範圍](source-review/2026-10-25-full-comparison-5c713553.md)。本輪Node／metadata／schema探測與同SHA既有實測分開記錄，沒有重跑完整DB／HTTP／GUI。
-
-| 邊界 | 精確來源 | 實際位置與責任 |
-| --- | --- | --- |
-| Chat HTTP / WS / Session | [chat_apps/chat_server/src/lib.rs](https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/chat_apps/chat_server/src/lib.rs) | Axum路由、會員Session與HTTP／WS守衛；逐房ACL尚未完整。 |
-| Chat UI | [chat_apps/chat_ui/src/lib.rs](https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/chat_apps/chat_ui/src/lib.rs) | Leptos SSR / hydration、Router 與互動。 |
-| Chat application / domain | [chat_apps/chat_application/src/lib.rs](https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/chat_apps/chat_application/src/lib.rs) | 使用案例與 ports；領域型別位於同 workspace 的 chat_domain。 |
-| Chat persistence | [chat_apps/chat_persistence/src/lib.rs](https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/chat_apps/chat_persistence/src/lib.rs) | SQLx SQLite adapter；migrations 在 chat_apps/migrations。 |
-| Pet UI | [pet_apps/pet_ui/src/main.rs](https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/pet_apps/pet_ui/src/main.rs) | Leptos CSR 與 Tauri IPC 呼叫端。 |
-| Pet native / windows | [pet_apps/pet_server/src/lib.rs](https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/pet_apps/pet_server/src/lib.rs) | Tauri commands、狀態、原生視窗與實際產品呼叫鏈。 |
-| Pet storage | [pet_apps/pet_server/src/pet_store.rs](https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/pet_apps/pet_server/src/pet_store.rs) | 剩餘SQLx SQLite仍多在server；set_caged／list_uncaged已在pet-persistence並有Store／Tauri caller。migrations在pet_apps/migrations。 |
-| Analytics HTTP / UI | [analytics_apps/analytics_server/src/lib.rs](https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/analytics_apps/analytics_server/src/lib.rs) | Axum HTTP、Session、Dashboard 與事件入口。 |
-| Analytics startup | [analytics_apps/analytics_server/src/main.rs](https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/analytics_apps/analytics_server/src/main.rs) | PostgreSQL 與服務啟動；migrations 在 analytics_apps/migrations。 |
+依[共用規則](COMMON_LEARNING_RULES.md)，全專案架構／測試／CI重構每日漸進，與功能教學分開。本文只維護技術責任，工程節奏與狀態集中於[工程入口](teaching/functional-refactoring/README.md)；目錄與package見[SOURCE_LAYOUT](SOURCE_LAYOUT.md)。
 
 <a id="functional-layering"></a>
 
-## 按功能分層的目標與責任
+## 分層與依賴方向
 
-2026-10-25 使用者確認：本次更新規則與後續教學，每次依實際功能提供完整重構，不直接重構產品。本節為責任／依賴的正本，[共用規則](COMMON_LEARNING_RULES.md) 管交付門檻；[本次精確來源評估](source-review/2026-10-25-functional-layering.md) 區分既有邊界與缺口。**目錄已存在不等於分層已完成，部分程式集中server也不等於整庫完全沒有分層。**
-
-| 層／邊界 | 職責 | 不應承擔 |
+| 層／邊界 | 責任 | 禁止反向依賴或替代 |
 | --- | --- | --- |
-| Leptos UI | 元件、表單、畫面狀態、使用者事件；呼叫既有API／IPC，呈現正確錯誤 | 直接查DB、把前台隱藏／route guard當授權 |
-| Delivery：Axum／Tauri | 路由與command、協定驗證、身份上下文、DTO／錯誤轉換；呼叫用例並在伺服器強制授權 | 新增SQL與業務流程塞在handler；把Tauri Window型別傳進Domain |
-| Application | 功能使用案例、流程協調、授權決策、交易／補償意圖；定義Repository／Window／其他所需Port與邊界DTO | SQL語句、SQLx Pool／Row、Axum State／Response、Leptos Signals或Tauri AppHandle |
-| Domain | 業務規則、值物件、狀態機與不變條件；可獨立測試 | 依賴Application／UI／HTTP／DB／OS實作 |
-| Persistence Adapter | 實作儲存Port；SQLx查詢、交易／migration與資料映射；每案DB隔離 | 決定HTTP回應、操作UI／Tauri或讓業務層反向依賴sqlx DTO |
-| 原生／外部 Adapter | 實作視窗、檔案、模型／來源通道等Port；封裝Tauri／OS／外部SDK | 把業務決策藏在driver或重新建一套無caller的流程 |
-| Composition root | server啟動時建立pool、adapter、用例與state，注入router／commands；組裝Leptos render | 將組裝特例擴散成所有handler可直接跨層寫SQL |
+| Leptos UI | 元件／表單／狀態／事件，透過已確認API或IPC互動 | 不查DB；前台隱藏不等於授權 |
+| Delivery：Axum／Tauri | HTTP／WS／IPC協定、輸入輸出、身份上下文、錯誤映射，呼叫用例並強制授權 | 不堆業務SQL，不把Tauri型別傳入Domain |
+| Application | 使用案例、流程／授權決策、交易／補償意圖，定義Port及邊界DTO／錯誤 | 不依賴Axum、Leptos、Tauri、SQLx／Pool／Row |
+| Domain | 規則、值物件、狀態機與不變條件 | 不依賴Application或IO driver |
+| Persistence Adapter | SQLx、查詢／交易／migration／Row映射，實作內層Port | 不決定HTTP／UI結果，不讓內層依賴sqlx::FromRow DTO |
+| 原生／外部 Adapter | 視窗／OS／檔案／模型等實作Port | 不隱藏另一套無caller的業務流程 |
+| Composition root | 建pool與adapter、注入use case／state並組裝啟動 | 不能成為所有handler繞過用例的理由 |
 
-依賴方向：Delivery → Application → Domain；Persistence／原生 Adapter → Application Port（及需要的Domain型別）；UI只透過已確認的API／IPC／server-function邊界。Composition root接合實作，不形成環。測試用fake可替換Port，但必須保留真Adapter與正式caller測試。
+依賴向內：Delivery→Application→Domain；Persistence／原生Adapter實作Application Port。沿各既有crate內按功能組織模組，不先加空crate；公開契約、features、mod／imports、相容入口與真caller須完整銜接。
 
-### 既有crate內按功能組織
+## 來源所見與工程範圍
 
-沿用 chat_apps／pet_apps／analytics_apps 既有 *_ui、*_server、*_application、*_domain、*_persistence，不先新增空crate。對選定功能，在相關層內建立清楚命名的module，例如房間查詢、寵物生命週期、統計查詢授權；具體檔案樹依當次來源與切片決定，不把下例當已存在路徑或全庫搬移命令。
+以下靜態來源為rust_ai_ring `9b89656f964b99e0cb89ba421855704a35c5ecb9`，不是本次新增產品驗收。
 
-同一功能的必要調整須在同篇接通：UI事件 → 正式HTTP／IPC → 用例 → Port → 真Adapter → 回應／畫面。新型別或目錄存在、re-export成功、cargo check成功皆不足以認定功能重構完成。若當日只涉及UI狀態，重用既有用例／Adapter即可，不硬造Domain wrapper。
-
-### 三案後續調整落點
-
-| 功能 | 已存在且保留 | 功能切片內需要補齊的邊界 |
+| 範圍 | 已有邊界 | 尚需工程銜接 |
 | --- | --- | --- |
-| Chat 房間／訊息與人員流程 | chat-application Repository Port與部分用例；chat-persistence SQLx；chat-domain與Leptos UI | 依所選功能將server中剩餘認證／Session SQL與業務流程移到適當用例／Adapter；保留房間ID、名稱、API與WS契約。房間查詢畫面缺口仍須真UI驗證。 |
-| Pet 建立／出入籠／選取 | pet-domain狀態機；application名稱規則；persistence已移出的flag／清單查詢 | 選定生命週期用例後，將Store剩餘SQL與Tauri command內流程分開；Application透過儲存／視窗Port協調，SQLite與Tauri各實作Adapter，涵蓋Runtime、鎖、補償與真IPC呼叫者。 |
-| Analytics 登入授權／統計查詢 | 正式password_login／Leptos畫面、PG查詢與部分persistence聚合 | application/domain/ui目前範本不當完成；依功能接通純用例／授權政策、Session／統計Port、PG Adapter及Leptos元件；server保留路由／middleware與組裝，不再承擔所有層。 |
+| Chat | Application Repository／部分用例、Domain、SQLx Adapter、Leptos UI | 剩餘Session／認證SQL與流程、正式HTTP／WS身份與ACL；每日UI修補可重用既有邊界 |
+| Pet | Domain狀態機、Application名稱規則、Persistence部分flag／清單查詢 | Store SQL、生命週期用例／Port、Tauri／Runtime／鎖／補償接線 |
+| Analytics | 正式Session／Leptos頁面、PG查詢與部分Persistence聚合 | Application／Domain／UI仍有範本，Session／查詢用例、DTO與Adapter邊界 |
+| 共用crates | shared等既有共用契約 | shared依賴chat-domain等跨workspace邊界需按真caller盤點，不能假設已完全解耦 |
 
-這是功能優先的重構方向，非固定Day排程或新增平行待辦。可操作基本流程與已知錯誤優先，在同功能修補時完成必要分層，不以架構整理推遲現有錯誤回饋、資料一致性與授權問題。跨系統共用登入邏輯仍沿原需求設Port／政策，Chat／Analytics各自儲存與Session隔離，不混表或因抽象共用而共享登入。
+## 測試與CI
 
-## 原有分層要求與來源說明
+Domain測規則；Application以Port fake測流程／補償；Adapter測真SQL／交易或native契約；正式Router／IPC測授權、錯誤映射與接線；UI／瀏覽器測可見互動。相同情境跨層有不同責任時保留，同層同契約的重疊才整併，fixture不複製業務實作。
 
-- Leptos 負責頁面與互動；Chat SSR / hydration、Pet CSR + Tauri、Analytics UI 依實際接線核對。
-- Axum 負責 HTTP / WebSocket、routing / middleware、Cookie / Session 與服務端 ACL。
-- Application / Domain 負責使用案例與規則；SQLx adapter 處理資料庫查詢、交易與 migrations。
-- pet-application已共用名稱規則；pet-persistence承接set_caged／list_uncaged，analytics-persistence承接精確事件類型SQLx聚合，均有真caller。Analytics application/domain/ui仍是範本，其餘SQL多仍在server。後續教學依最新來源進行必要的小切片搬移、介面調整與呼叫端／測試接線，不能以目錄存在代替實作完成。
-- 共用 crates 的 shared 目前依賴 chat-domain，仍有跨 workspace 的 package path dependency；不得假設三案已完全解耦。
+CI分開純內層、各案DB、正式整合、Pet原生及UI／產物；三案無實際相依不串接，必要失敗不可吞掉。Persistence job若選入pet-server就含Tauri原生建置，不能當純SQLite證據。[來源分析](source-review/2026-10-26-ci-layer-boundaries.md)保留其當次範圍；補原生套件不等於工程完成。
 
-[使用者流程](requirements/USER_FLOWS.md) · [後續缺口](FUTURE_WORK.md) · [教學銜接](TEACHING_ALIGNMENT.md) · [本地操作](LOCAL_START.md) · [驗證](LOCAL_VALIDATION.md)
+工程先完成斷言／caller承接，再清舊實作與獨占測試；以精確SHA實測記錄完成，目錄、re-export、metadata或cargo check都不足以取代DB／GUI驗收。每日教學只做當次功能的必要局部整理，不承擔全專案搬層。

@@ -1,40 +1,10 @@
-# 未來前進項目
+# 功能待辦與工程銜接
 
-## 原測試整理項補充（2026-10-26）
+本頁保留原功能條件、D01–D09識別及未完成事項；政策不再重複散列。每日功能教學、每日一個全專案工程小工作包、核心60分鐘只計Red／Green，統一依[共用規則](COMMON_LEARNING_RULES.md)。工程交付完整程式／patch與測試方案，產品由使用者套用。
 
-沿原D06、Pet生命週期與Analytics正式Router／fixture項，將測試重構納入功能切片，不建立平行待辦。完整規則見[共用規則test-refactor-v1](COMMON_LEARNING_RULES.md)，[12組對照](teaching/functional-refactoring/test-coverage-map.csv)列具體保留／合併／遷移判斷。
+[工程範圍與進度](teaching/functional-refactoring/README.md) · [12組測試對照](teaching/functional-refactoring/test-coverage-map.csv) · [技術責任](SYSTEM_ARCHITECTURE.md) · [當前功能與證據](teaching/current/STATUS.md)
 
-- Chat：兩份filter測試與舊刷新helper的重疊斷言整併到正式路徑；保留搜尋空白／同名不同ID／失敗快照等條件，Signal與DOM各負責任。
-- Pet：用例抽出時同步遷移純補償流程測試；真SQL、共用鎖接線、原生視窗與正式IPC覆蓋保留，不把它們全當同一組fake測試。
-- Analytics：兩正式查詢路由的Cookie矩陣參數化；首次登入restricted／DB契約保留。Fixture只共用穩定準備，bootstrap::initialize仍有真實測試用途。
-
-完成條件是完整測試與caller／Cargo／CI接線、有效斷言保留及相應實測；現階段只有文章與靜態對照，尚未搬移／刪除／合併任何產品測試，不結案原項目。
-
-## 原CI覆蓋項補充：依層與專案拆開驗證（2026-10-26）
-
-使用者確認Pet原生步驟阻擋Analytics暴露CI責任混合；接回原CI覆蓋／必要功能分層項，不新增平行待辦或FIFO。[來源分析與矩陣](source-review/2026-10-26-ci-layer-boundaries.md)。
-
-目前9b89656已加Linux開發依賴，但Persistence仍同一job串Chat SQLite、Pet server＋SQLite、Analytics server＋PG。修正條件：三案DB各自job，Pet原生server獨立，純Domain／Application不需native／DB；保留真Router／IPC與DB測試及正確PG feature。解除無關needs／step順序阻擋，必要結果仍須全部成功，不能用continue-on-error或刪測試處理。
-
-完成證據須同時包含依賴方向、正式caller／測試接線、完整CI設定與精確SHA各job結果；補安裝套件只處理環境，不能結案分層。後續按功能提供最小完整程式與CI調整，不一次搬全庫；本次文件維護不改產品、不新增Day、不結案原功能或全面比對。
-
-**2026-10-26 現行摘要已核對。** 最新程式來源 `9b89656`（upgrade）；新CI快照為1成功／6執行中，尚未全綠。舊648b903為六成功／Persistence失敗，已配置的Analytics PostgreSQL步驟被略過。當日官方版本、manifest／lock與本機工具差異已補查；未升級產品、未重跑測試、未完成整體驗收。[版本與摘要核對](source-review/2026-10-26-versions-and-summary-refresh.md)。
-
-正式階段依 [P0–P12 十三階段詳細規劃](ROADMAP_P0_P12.md)：沿原功能／D01–D09 追蹤，不新增重複 Day／FIFO；原日曆與學習進度保留，規劃不作產品驗收。
-
-現行程式來源與目錄：[rust_ai_ring 四個 workspace 對照](SOURCE_LAYOUT.md)（最新來源、接線與驗證範圍見下方重掃及目前進度）。
-
-> 實作進度、精確來源與驗證結果統一見[目前進度](teaching/current/STATUS.md)。本文件保留功能需求／完成條件或架構；歷次測試摘要已移入歷史紀錄，不作現行完成聲明。
-
-需求依使用者最新確認內容及[現行使用者流程](requirements/USER_FLOWS.md)、[人員驗證需求](requirements/AUTHENTICATION.md)、[UI 驗收條件](UI_ALIGNMENT_REQUIREMENTS.md)，實作缺口、目錄／內容、測試／CI 與功能驗收只依 rust_ai_ring 最新 main。本庫保存需求與教學，不另追蹤 copilot_use 產品程式；未核實不標完成。每天從確認缺口與當日差異選三專案合計一小時的小切片，不預排 Day；週六工程與功能驗收另記。
-
-P9 規則已廢除。本清單中僅源自舊規則、尚未依最新需求確認的項目只作候選，不自動作必做功能或驗收門檻。已確認的開發項目在原項目記錄可驗證功能條件、SHA／測試／CI／套用與驗收證據，未核實者保留未完成。跨階段工作留原功能項目追蹤；舊 Day 更正僅於下一個 Day 的 Refactor 後獨立補加，不回填原 Day，不另開重複項目；完成後可退出活動清單，但原識別與證據須可追溯。學習階段不代表產品功能已驗收。
-
-## 功能分層調整的共同執行條件
-
-2026-10-25 使用者確認：本次更新架構規則與後續教學，逐功能提供完整重構。沿本文件原有Chat／Pet／Analytics功能與D01–D09追蹤，不新增一份分層待辦或預排Day。各功能必要的用例／Port／Adapter／UI／正式caller／Cargo與測試必須在同篇接通；已存在邊界重用，空crate／搬檔案不算完成。
-
-[架構責任與三案落點](SYSTEM_ARCHITECTURE.md#functional-layering) · [教學完整交付檢核](TEACHING_ALIGNMENT.md) · [目前混層來源評估](source-review/2026-10-25-functional-layering.md)。原有測試遷移、相容性與清理條件仍按功能需要判定；不恢復舊固定搬移計畫，不在本次標產品完成、改Day／FIFO或全面比對時間。
+以下日期／SHA的比對與實測摘要保留原來源，不能當成新SHA的通過／失敗；完成條件沿原功能追蹤，不新增平行FIFO。原文與完整歷史可由Git及相應source-review證據追溯。
 
 ## 所有問題文章的後續修正（2026-10-25）
 
@@ -182,27 +152,13 @@ presence／typing／reconnect／queue、streaming／RAG／MCP／Agent／Persona�
 
 目前：閱讀注意／套用前核對，非自動認定錯誤。完成條件：四個 workspace／package／lock／features／真 caller 對齊；必要版本在實際新教學交付時核對。
 
-## 舊內容與現存狀態（2026-10-25）
-
-[105個目前閱讀版本／111份修訂逐篇狀態](teaching/current/ARTICLE_STATUS.md) 已核對原文、現存程式與歷史證據。程式已見、已被後續取代、legacy 專用與原文待勘誤分開追蹤；本次不新增完成 checkbox 或改變既有 FIFO。Pet 名稱規則、控制窗 hide/show、Analytics Leptos 帳密與 ensure_default 已見 caller，不再以原文「未套用」重教；目前5c713553已見Chat r2登入去重、WS重驗、Pet恢復迴圈與Analytics人員Session查詢；歷史／作者／ACL 等缺口保留，當次驗收未重跑。
-
-## Pet 原生驗證補充（2026-10-25，歷史5d28e96）
-
-[三窗／回籠／控制台／重啟實測](source-review/2026-10-25-pet-native-5d28e96.md) 已補入使用者真實桌面操作、截圖與 DB／日誌證據：三窗具名、逐 ID 睡覺醒來、單隻回籠、控制台關閉／重開、資料保留、手動出籠及重複開窗通過局部驗證。重啟仍只恢復最後選取的一隻、漫遊固定 label 仍失敗；接回原多寵物／重啟／漫遊功能項，整體不結案。透明窗淺色背景文字對比另待調整。Pet 程式未修改；本地 runner 已加前端就緒等待，修正首次 Connection refused 的啟動順序問題。
-
-## 先前實機驗收補充（2026-10-25）
-
-[5d28e96 真瀏覽器／HTTP／資料庫與 Pet 啟動報告](source-review/2026-10-25-acceptance-5d28e96.md) 已接回原功能項，整體未通過：Chat 歷史、會員作者、匿名進房回登入及登出撤銷既有 WS；Analytics 查詢的人員 Session；Pet 多窗與漫遊仍待完成。首頁重複狀態已製作本地候選差異並通過瀏覽器驗證，未提交產品 main。D06 測試遷移仍是原項目。
-
-先前workflow變化保留歷史；648b903的Analytics該步已選server＋persistence並加PG feature，因前段Pet失敗被skipped，尚未有該步實際通過證據。下列 afdbb6e 的 CI 快照與盤點保留其當次來源。
-
 ## 後續調整：重複與未使用程式、測試及產物（2026-10-25）
 
 本節維持原 13 項及 D01–D09 識別，下表原13項逐項快照來源為 `williechen/rust_ai_ring@afdbb6e81382e8d82095827a90c52cc3309a3e20`；目前5c713553的變化見本節最新比對入口；每次動手仍須重新核對最新 main 與 caller。[本次重掃報告與 CI／來源一致性證據](source-review/2026-10-25-adjustments-rescan-afdbb6e.md) 保留為原13項的定點核對，歷史原報告與已發布文章保留。
 
 原 13 項中，7 項待清理／測試遷移／相容性盤點，2 項部分完成，2 項程式或建置已處理但驗收未完，1 項明確保留，1 項已結案。已完成的登入頁合併、房名共用、Pet 回籠 adapter、Analytics 精確查詢 adapter、編譯及文案修復不重教；未完成的權限、GUI 與 FIFO 不因此結案。
 
-本次沒有產品變更，沿用同 SHA 的 Analytics 44 passed／0 failed／1 ignored，以及經 git diff 確認來源相同的 Chat／Pet 原範圍結果；沒有冒稱重新跑整套測試。該afdbb6e快照七個push workflows為success；648b903目前為六success／Persistence失敗，不能沿用為全綠。後續仍依 Chat→Pet→Analytics 的即時 next_day 選最小切片，不預排 Day。
+本次沒有產品變更，沿用同 SHA 的 Analytics 44 passed／0 failed／1 ignored，以及經 git diff 確認來源相同的 Chat／Pet 原範圍結果；沒有冒稱重新跑整套測試。該afdbb6e快照七個push workflows為success；648b903目前為六success／Persistence失敗，不能沿用為全綠。該快照不決定當前教學進度；每日工程依相依性接續，功能教學依即時next_day。
 
 ### 清理順序與保留條件
 
@@ -239,7 +195,7 @@ presence／typing／reconnect／queue、streaming／RAG／MCP／Agent／Persona�
 
 1. 在最新精確 SHA 查清 Rust caller、mod/pub export、Axum route、Tauri generate_handler／menu、WASM/JS bridge、cfg/feature、測試與 CI 入口；跨 workspace 和 tracked dist 也需查看。搜尋不到一般函式呼叫不等於沒有框架或外部入口。
 2. 確認可刪才一併清掉函式、專用 imports/dependencies/features、註冊、已失效的獨占測試或範本。有效回歸測試先遷到真實 caller；每個被移除測試要能說明驗證條件已由何處保留，或其測試目標確實已淘汰。
-3. 完整提供當次最小 Green 的新增／修改／刪除／必要搬移、Cargo/lock、imports、caller 與測試；重用已存在實作。從對應 workspace 驗證 native／WASM、HTTP/IPC、DB/GUI；未執行項目明記。
+3. 工程提供完整變更內容 的新增／修改／刪除／必要搬移、Cargo/lock、imports、caller 與測試；重用已存在實作。從對應 workspace 驗證 native／WASM、HTTP/IPC、DB/GUI；未執行項目明記。
 4. 教學發布與產品套用／驗收分開；未有實測證據不標完成。保留原篇、來源 SHA、commit/blob/SHA256；修訂、清理檢核與本次整理不加 Day、不結案 FIFO、不更新 last_full_comparison。
 
 ### 明確保留與不誤刪範圍
@@ -251,18 +207,9 @@ presence／typing／reconnect／queue、streaming／RAG／MCP／Agent／Persona�
 - cfg(unix)/cfg(not(unix)) 的互斥平台函式、真實 JSON/HTML 操作入口、Query／Ingest 不因函式名稱或資料形狀相似而刪除。
 - 本清單沒有授權直接改寫 rust_ai_ring/main；維持先前分工，產品調整由後續教學與使用者套用。本次只向 copilot_use/main 整理規則、缺口與入口。
 
-## 新目錄銜接的後續教學要求
+## 清單判讀
 
-- [ ] 每次後續教學依 rust_ai_ring 最新目錄提供必要的程式調整；依實際情況同步檔案搬移、Cargo dependency / feature、Rust imports、呼叫端與測試。application / persistence 依本次來源核對接線；未接通的 library 不因目錄存在記為完成，已接通的 Pet 名稱規則不重做。
-- [ ] 發布前核對最新來源與尚未發布草稿，保留已發布文章及歷史證據；不因更名額外新增 Day，也不在 copilot_use 建立平行產品。
-
-## 清單使用方式
-
-2026-10-23 依使用者確認，所有涉及 copilot_use 程式開發、移植、同步適配、重構、套用、建置、測試、CI、產品試驗、發布、安裝更新與功能驗收的工作要求均已廢除，不再列為待辦、選題或驗收門檻。copilot_use 僅維護需求、規則、教學文章、進度、索引與交付證據；文件內的教學程式碼用於說明 rust_ai_ring 的實作，不建立第二套產品。程式功能、測試、CI 與驗收只依 rust_ai_ring 精確 SHA。既有 copilot_use 程式、腳本、workflow、Release 及歷史欄位僅供追溯，不代表仍有維護或執行義務。
-
-下列 checkbox 表示產品或教學仍待核對／完成的條件，不能據此推論所有底層程式都不存在。主體程式狀態見 [目前進度](teaching/current/STATUS.md) 的來源與證據範圍；舊 copilot_use token Dashboard、程式或驗收紀錄不作主體缺口判定。每項完成須附目前檔案、來源 SHA、適用測試與 UI／跨層結果；僅更新文件不勾選完成。
-
-[改寫前完整清單及雜湊](teaching/history/evidence/2026-10-22-current-docs/README.md) 永久保留；以下保留原功能識別與待驗收條件，不重排教學 Day。
+Checkbox代表原功能尚待完成／核實，不表示每個底層都未實作。以最新產品來源與證據去重追蹤；工程、教學與產品驗收分列，規則依[共用正本](COMMON_LEARNING_RULES.md)。
 
 ## 當前最高優先順序：先接通可操作的基本流程
 
@@ -279,10 +226,6 @@ presence／typing／reconnect／queue、streaming／RAG／MCP／Agent／Persona�
 
 - [ ] Pet 漫遊後續需求：多寵物獨立生活窗、出入籠與互動、螢幕移除不立即搬回／手動找回；逐項按 [UI 需求](UI_ALIGNMENT_REQUIREMENTS.md) 核對目前來源、所屬測試及真實桌面結果。
 - [ ] 漫遊與 SHA256 分組的 Windows／macOS 功能驗收，以及相對原 Linux 證據新增程式的回歸；沒有匹配證據前不標完成。
-
-## 歷史雙庫適配項的判讀
-
-舊 Room／WS DTO、Pet FSM／JSON／TOML、事件名稱、gRPC／ACK 與 SSE 的雙庫差異表[原文保留](teaching/history/evidence/2026-10-23-repository-roles/before/docs/FUTURE_WORK.md)。不再要求把 rust_ai_ring 移植到 copilot_use；必要的 ID／契約／傳輸需求留在原功能項，依 rust_ai_ring 的實際呼叫者與測試判定，不默改既有契約或增加無呼叫者骨架。
 
 ## 教學銜接
 

@@ -69,16 +69,11 @@ Leptos `bin-package = "chat-server"`、`lib-package = "chat-ui"` 使用 package 
 
 Chat / Pet SQLite 與 Analytics PostgreSQL 的 migrations 分別位於 chat_apps/migrations、pet_apps/migrations、analytics_apps/migrations。各產品 SQLx 路徑依所屬 package 計算；include_str! 則依來源檔位置計算，兩者不能只套用同一層數。
 
-## 後續教學如何調整程式
+## 教學與工程的目錄用途
 
-2026-10-25 已確認後續須按功能完成真實分層重構，不能只改目錄名稱。各層責任／依賴見 [系統架構正本](SYSTEM_ARCHITECTURE.md#functional-layering)，同篇完整程式／Cargo／caller／測試檢核見 [教學銜接](TEACHING_ALIGNMENT.md)。本頁目錄表是來源對照，不代表所有crate已實作或分層已完成。
+每日教學依當時真實目錄、package、features、imports與正式caller交付當次功能，沿用現行分層；不把跨功能搬層、批次測試遷移或CI重整當每日主題。
 
-
-使用者最新要求：後續教學應依新目錄調整程式。每篇先核對最新來源、上一篇及實際呼叫鏈，再在教學中給出需要調整的檔案、完整程式碼、imports、Cargo dependency / feature、呼叫端與測試位置，最後提供對應 workspace 的驗證命令。
-
-pet-application 已共用名稱規則；pet-persistence 已承接 set_caged／list_uncaged，analytics-persistence 已承接精確事件類型查詢與 EventSummary；均有 caller。其餘 PetStore／pg_store／bootstrap 程式仍多在 server，Analytics application/domain/ui 仍是範本。後續若把使用案例或 DB adapter 移入新層，需在同一最小切片中接回真實呼叫端與測試，不能只把空 crate 加進 members 就宣稱分層完成。每篇僅處理當日必要範圍，不要求每層每天都修改。
-
-copilot_use 保存教學程式碼與交付；產品程式調整以 rust_ai_ring 為主體，由使用者套用。已發 Day 正文、來源 SHA、commit/blob/SHA256 與歷史證據保留；新的改名／搬移修正在後續教學呈現。每案 next_day 由即時狀態讀取，本次不推進進度。
+全專案架構／測試／CI調整依[工程範圍](teaching/functional-refactoring/README.md)安排獨立工作包，涵蓋三案與共用crates。每個工作包完整處理實作、Cargo、組裝、caller、測試映射與CI，不以目錄或空library代替完成。工程與教學交付分別記錄，均保留精確來源及既有文章證據。
 
 ## 文件入口與驗證範圍
 

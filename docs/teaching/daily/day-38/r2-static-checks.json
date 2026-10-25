@@ -1,0 +1,58 @@
+[
+  {
+    "project": "chat",
+    "patch": "work/day38-r2-review/chat-r2.patch",
+    "sha256": "fecb9f84591031f0173a598de5ad30857161ce2415b63e9326c38efb95fec745",
+    "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+    "source_blobs": {
+      "chat_apps/chat_ui/src/lib.rs": "c27a771d456853a2e71e29e5d7228328947c44f9"
+    },
+    "git_apply_check_passed": true,
+    "rustfmt_parse_passed": true,
+    "parsed_files": [
+      "chat_apps/chat_ui/src/lib.rs"
+    ],
+    "cargo_tests_executed": false,
+    "gui_executed": false,
+    "product_modified": false
+  },
+  {
+    "project": "pet",
+    "patch": "work/day38-r2-review/pet-r2.patch",
+    "sha256": "3272c80e9f32df8edefebee31dff3f5f60c7fa8fadb5dd55183b02fb4ffe56d7",
+    "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+    "source_blobs": {
+      "pet_apps/pet_server/src/roam.rs": "0de01ffd6e98a7fbc9388ed31a7ae7855c4c6749",
+      "pet_apps/pet_server/src/pet_windows.rs": "4c4aa4c79cbb761abc144d03f9a5e97f86ee1f6d",
+      "pet_apps/pet_server/src/lib.rs": "2cc3ffb161bed6de20766adf1107cc7f504fc340"
+    },
+    "git_apply_check_passed": true,
+    "rustfmt_parse_passed": true,
+    "parsed_files": [
+      "pet_apps/pet_server/src/roam.rs",
+      "pet_apps/pet_server/src/pet_windows.rs",
+      "pet_apps/pet_server/src/lib.rs"
+    ],
+    "cargo_tests_executed": false,
+    "gui_executed": false,
+    "product_modified": false
+  },
+  {
+    "project": "analytics",
+    "patch": "work/day38-r2-review/analytics-r2.patch",
+    "sha256": "89e2bd9fe90c59c6949ce952aa39787eea51093d759f01ee725e45e7be71969f",
+    "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+    "source_blobs": {
+      "analytics_apps/analytics_server/src/lib.rs": "0f535e1cdcc08fd17b4ad91b271c179ba4228c66"
+    },
+    "git_apply_check_passed": true,
+    "rustfmt_parse_passed": true,
+    "parsed_files": [
+      "analytics_apps/analytics_server/tests/day38_ingest_authorization.rs",
+      "analytics_apps/analytics_server/src/lib.rs"
+    ],
+    "cargo_tests_executed": false,
+    "gui_executed": false,
+    "product_modified": false
+  }
+]

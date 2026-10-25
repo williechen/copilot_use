@@ -1,15 +1,12 @@
 # Analytics 現行教學入口
 
+每日並行：[功能教學與全專案漸進工程](../functional-refactoring/README.md)分開交付及驗收。核心60分鐘只計教學Red／Green，局部Refactor與工程另計；產品唯讀，由使用者套用工程patch。
+
 ## 最新交付（2026-10-26）
 
 [Analytics Day38｜機器上報拒絕重複 Authorization Header，PostgreSQL CI 獨立](../daily/day-38/analytics.md) — **教學已交付／程式未套用／Red-Green、PostgreSQL、CI 未執行／產品未驗收**；來源 `9b89656f964b99e0cb89ba421855704a35c5ecb9`；最新 Day38、下一篇 **Day39**。下方 Day37 驗證及舊 Day38 預告保留當時範圍，不代表本篇已測。
 
-
-**2026-10-26 功能與測試整理已更新。** [三案整理與12組覆蓋對照](../functional-refactoring/README.md)說明同層重複整併、跨層契約保留及CI責任。本次只更新文件，完整新Green與產品測試重構仍待完成，進度不變。
-
 **2026-10-26 現行摘要已核對。** 最新程式來源 `9b89656`（upgrade）；新CI快照為1成功／6執行中，尚未全綠。舊648b903為六成功／Persistence失敗，已配置的Analytics PostgreSQL步驟被略過。當日官方版本、manifest／lock與本機工具差異已補查；未升級產品、未重跑測試、未完成整體驗收。[版本與摘要核對](../../source-review/2026-10-26-versions-and-summary-refresh.md)。
-
-**2026-10-25 後續功能分層要求已確認。** 後續教學按功能提供用例／Port／Adapter／UI／正式caller與測試的完整必要重構，沿原功能項追蹤；本次僅更新規則，未重構產品、未新增Day或驗收。[架構正本](../../SYSTEM_ARCHITECTURE.md#functional-layering) · [來源評估與範圍](../../source-review/2026-10-25-functional-layering.md)。
 
 [Day37 r3：驗證更新](../daily/day-37/analytics-r3.md)
 
