@@ -12,6 +12,12 @@ P9 規則已廢除。本清單中僅源自舊規則、尚未依最新需求確�
 
 [99 篇目前閱讀版本與舊修訂逐篇狀態](teaching/current/ARTICLE_STATUS.md) 已核對原文、現存程式與歷史證據。程式已見、已被後續取代、legacy 專用與原文待勘誤分開追蹤；本次不新增完成 checkbox 或改變既有 FIFO。Pet 名稱規則、控制窗 hide/show、Analytics Leptos 帳密與 ensure_default 已見 caller，不再以原文「未套用」重教；最新 3aeab095 已見 Chat r2 去重與測試；歷史／作者／ACL 等缺口保留，當次驗收未重跑。
 
+## 最新實機驗收補充（2026-10-25）
+
+[5d28e96 真瀏覽器／HTTP／資料庫與 Pet 啟動報告](source-review/2026-10-25-acceptance-5d28e96.md) 已接回原功能項，整體未通過：Chat 歷史、會員作者、匿名進房回登入及登出撤銷既有 WS；Analytics 查詢的人員 Session；Pet 多窗與漫遊仍待完成。首頁重複狀態已製作本地候選差異並通過瀏覽器驗證，未提交產品 main。D06 測試遷移仍是原項目。
+
+最新 workflow 已新增 Pet persistence 測試並將 Analytics 該步改選 analytics-persistence；需另核對 server PG 整合測試入口，不能只把 library 測試加入視為完整覆蓋。下列 afdbb6e 的 CI 快照與盤點保留其當次來源。
+
 ## 後續調整：重複與未使用程式、測試及產物（2026-10-25）
 
 本節維持原 13 項及 D01–D09 識別，最新逐項重掃來源為 `williechen/rust_ai_ring/main@afdbb6e81382e8d82095827a90c52cc3309a3e20`；每次動手仍須重新核對最新 main 與 caller。[本次重掃報告與 CI／來源一致性證據](source-review/2026-10-25-adjustments-rescan-afdbb6e.md) 為調整清單最新核對，歷史原報告與已發布文章保留。

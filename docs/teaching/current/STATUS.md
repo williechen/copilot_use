@@ -1,8 +1,18 @@
 # 目前功能與驗證狀態
 
-程式來源：`williechen/rust_ai_ring/main@afdbb6e81382e8d82095827a90c52cc3309a3e20`。本頁只記功能與驗證現況；文章版本／交付與歷史證據另由 [逐篇狀態](ARTICLE_STATUS.md)、manifest 與 learning-state 管理。copilot_use 為文件庫，產品程式維持唯讀，本次沒有套用產品程式；僅新增下述局部實測，不代表全產品驗收完成。
+程式來源：`williechen/rust_ai_ring/main@afdbb6e81382e8d82095827a90c52cc3309a3e20`。本頁只記功能與驗證現況；文章版本／交付與歷史證據另由 [逐篇狀態](ARTICLE_STATUS.md)、manifest 與 learning-state 管理。以下舊段落保留 afdbb6e 當次範圍；最新實機驗收見下節。
 
-## 現存程式與缺口
+## 最新實機驗收：5d28e96（2026-10-25）
+
+[本輪報告](../../source-review/2026-10-25-acceptance-5d28e96.md)：Chat／Analytics 真瀏覽器、HTTP、隔離 SQLite／PostgreSQL，以及 Pet 原生程序啟動。整體尚未通過功能驗收。
+
+- Chat：登入、個人頁建房、中文搜尋、同房雙頁同步、跨房隔離、失敗保留清單與重試通過；歷史未載入、會員作者仍為 anonymous、登出後既有 WS 仍可寫入、匿名進房回登入未接通。
+- 使用者確認首頁問題是兩段房間提示。已製作本地單一狀態提示候選修正，實際 SSR／WASM build、UI 測試與瀏覽器驗證；差異檔隨報告保存，沒有提交 rust_ai_ring/main，不將候選修正當遠端已套用。
+- Analytics：首次強制改密碼頁、正式登入、Chat／Pet 來源與精確類型篩選、HTTP 改密碼撤銷舊 Session、重啟後資料與新密碼保留通過；改密碼提交由 HTTP 測試，未宣稱瀏覽器完成改密碼。來源 token 無人員 Session 仍可查統計，需求落差保留。
+- Pet：編譯、啟動與開啟漫遊旗標已實做，log 重現 `pet window not found`；本環境原生視窗控制不可用且有 EGL 警告，三窗／關窗／重啟互動尚未驗收。
+- 5d28e96 新增 Pet persistence 測試，Analytics persistence workflow 改選 analytics-persistence；原七個 CI 全綠只屬 afdbb6e，本輪未以舊 CI 追認新 SHA。尚須確認 Analytics server PG 整合測試在 CI 仍有獨立入口。
+
+## afdbb6e 現存程式與缺口
 
 | 專案／功能 | 此精確來源所見 | 驗證與尚缺項目 |
 | --- | --- | --- |

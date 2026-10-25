@@ -4091,5 +4091,19 @@
     "next_day_unchanged": true,
     "makeup_queue_unchanged": true,
     "last_full_comparison_unchanged": true
+  },
+  "latest_functional_acceptance": {
+    "date": "2026-10-25",
+    "source_sha": "5d28e969ceb10f7ae9bb7d15212f6a0dd63c9af1",
+    "report": "docs/source-review/2026-10-25-acceptance-5d28e96.md",
+    "functional_acceptance": false,
+    "scope": "Real browser Chat/Analytics, real HTTP and isolated SQLite/PostgreSQL, Pet native launch/log only; local Chat homepage candidate patch not pushed to program main",
+    "pending": [
+      "Chat existing WebSocket remains writable after logout",
+      "Chat author identity, history and anonymous room login return",
+      "Analytics query person Session authorization",
+      "Pet native multiwindow, restart and roaming"
+    ],
+    "teaching_progress_changed": false
   }
 }
