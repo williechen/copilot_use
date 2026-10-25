@@ -1,0 +1,185 @@
+{
+  "date": "2026-10-26",
+  "sync_commit": "ee0c9f499e0322098b3ced19c62d96e10d664e40",
+  "readback_at": "2026-10-25T23:49:15.721Z",
+  "rule_commit": "92913e7aae67b317fe25dab75f6ec56721042d35",
+  "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+  "article_deliveries": [
+    {
+      "project": "chat",
+      "revision": "r3",
+      "day": 38,
+      "parent": "92913e7aae67b317fe25dab75f6ec56721042d35",
+      "article_commit": "fff76c6334317c3b31d85d4746ed8acca61fa221",
+      "article_path": "docs/teaching/daily/day-38/chat-r3.md",
+      "blob_sha": "8fc39cd271d1ffc1ca4897dddae88cb45c3a5812",
+      "full_text_verified": true,
+      "readback_at": "2026-10-25T23:45:55.510Z",
+      "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+      "rules_commit": "92913e7aae67b317fe25dab75f6ec56721042d35",
+      "rules_blob": "492b50b2e16f1d8997ab55028bfc3c4d072af363",
+      "sha256": "cde6957f3217b3d04022de1aa2357b7ec908f7e404c7dd2f2932865f9e0c7085"
+    },
+    {
+      "project": "pet",
+      "revision": "r3",
+      "day": 38,
+      "parent": "fff76c6334317c3b31d85d4746ed8acca61fa221",
+      "article_commit": "c665e3bcd4f991c7603ee94014b3ff69c1714999",
+      "article_path": "docs/teaching/daily/day-38/pet-r3.md",
+      "blob_sha": "2ff324d701467b4becda6975082a0239a3aa8f05",
+      "full_text_verified": true,
+      "readback_at": "2026-10-25T23:46:03.768Z",
+      "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+      "rules_commit": "92913e7aae67b317fe25dab75f6ec56721042d35",
+      "rules_blob": "492b50b2e16f1d8997ab55028bfc3c4d072af363",
+      "sha256": "6d8c1f6abc398a4b54ce08cf447a8d0608284daa00bb879d986cf6103a87ee5a"
+    },
+    {
+      "project": "analytics",
+      "revision": "r3",
+      "day": 38,
+      "parent": "c665e3bcd4f991c7603ee94014b3ff69c1714999",
+      "article_commit": "9feaff54de5e9654e8f1f76d222c41a1c9fb9b77",
+      "article_path": "docs/teaching/daily/day-38/analytics-r3.md",
+      "blob_sha": "f5dc3c99c9d7b314e58f6379dbc22375e711c565",
+      "full_text_verified": true,
+      "readback_at": "2026-10-25T23:46:16.047Z",
+      "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+      "rules_commit": "92913e7aae67b317fe25dab75f6ec56721042d35",
+      "rules_blob": "492b50b2e16f1d8997ab55028bfc3c4d072af363",
+      "sha256": "4ff4529fc92ac6a1011abb3ee06c4d45c2d00be4261d6045b65807421836c80f"
+    }
+  ],
+  "sync_files": [
+    {
+      "path": "docs/teaching/daily/day-38/chat-r3-readback.json",
+      "blob_sha": "b4c8c2536b889ba6f935513a8601dcde986efa64",
+      "full_text_verified": true,
+      "sha256": "ff4a11b0f7ffc59079439b2c21e5109682a98660d793b49f12bce6583be30ce3"
+    },
+    {
+      "path": "docs/teaching/daily/day-38/pet-r3-readback.json",
+      "blob_sha": "58af8567ba5d4bd731e65a18de00bf30780e7071",
+      "full_text_verified": true,
+      "sha256": "d3cb82d169533fae034a7e9dbb858fc97ad9054bf0eb971c5962306bd68d63c9"
+    },
+    {
+      "path": "docs/teaching/daily/day-38/analytics-r3-readback.json",
+      "blob_sha": "10f843c93ea62981c3b99dc245439c4ec7452347",
+      "full_text_verified": true,
+      "sha256": "5ec494321b28f12206d36e4bf928a03536c0aef66109b4d462e547befc0ef7af"
+    },
+    {
+      "path": "README.md",
+      "blob_sha": "9a8d560143e6e50b90b716496ada3c68f8c725da",
+      "full_text_verified": true,
+      "sha256": "cbfb5b16a23e11ebad3a91f243a938dc7138dd0273927e3a0b43dc1ea3ccc223"
+    },
+    {
+      "path": "docs/README.md",
+      "blob_sha": "44c7e5b7d434afc49f60743b72ed2f40878d8282",
+      "full_text_verified": true,
+      "sha256": "a5a28b5e76b83a25ae2005cdbacf3ab70cf7db6c7c16eafb7b6d880410ac86fc"
+    },
+    {
+      "path": "docs/teaching/README.md",
+      "blob_sha": "7ad0d7c724f3b38cca8613c803dce24ebaef25b3",
+      "full_text_verified": true,
+      "sha256": "218389709ba906425257682a26f7498ed567e8e00f2a77f9827fffa6b4900a3c"
+    },
+    {
+      "path": "docs/teaching/daily/README.md",
+      "blob_sha": "48f6311b27a96aae0e8f290b322cd40b4ec7acd1",
+      "full_text_verified": true,
+      "sha256": "d82e5731648ce24c62cf488177b54cf109064128b988dff26c8ad050f280036e"
+    },
+    {
+      "path": "docs/teaching/chat/README.md",
+      "blob_sha": "96fa6f165fb660104d353fbfd4243126344c62f4",
+      "full_text_verified": true,
+      "sha256": "18d2e6cc6da5f9d2ee40dd7cd90dfc4c9bed18c3b6d1be574213a73e7212ac3e"
+    },
+    {
+      "path": "docs/teaching/pet/README.md",
+      "blob_sha": "7c692988dffd790738d869d6e311c5d4b9cd6200",
+      "full_text_verified": true,
+      "sha256": "9427b19d67e8a82fc5777344b1be4e01acd56778f3d56c6d649af6ddf78ab96c"
+    },
+    {
+      "path": "docs/teaching/analytics/README.md",
+      "blob_sha": "7219fd723ef09357ffe8c990f92238dfebc2e7bf",
+      "full_text_verified": true,
+      "sha256": "b3037d7ed65f412c498bd3f7999f0fd2224015e9c849403bef0513bfb206bbcd"
+    },
+    {
+      "path": "docs/teaching/current/CHAT_ENTRY.md",
+      "blob_sha": "9ef2bccbb0984492931febb16fb300f30d3653d5",
+      "full_text_verified": true,
+      "sha256": "96fddffadd6987bedbd70f49eeb4cdbf00a3f77ffbc0a2950913a47cf254101f"
+    },
+    {
+      "path": "docs/teaching/current/PET_ENTRY.md",
+      "blob_sha": "a36f31bee9b96bd6c9fe5317f4279b7172d9d791",
+      "full_text_verified": true,
+      "sha256": "2941f3aef2dc2f6e5948186460ae814203acef23004902b50d20a5c5c7fb3473"
+    },
+    {
+      "path": "docs/teaching/current/ANALYTICS_ENTRY.md",
+      "blob_sha": "1283ab0c2292a828329786bc68ff192eae90c689",
+      "full_text_verified": true,
+      "sha256": "41b77f7c838b8b99e179b16badebd7d842f45dc4aca3b04b5068e4369e628c47"
+    },
+    {
+      "path": "docs/learning-state.json",
+      "blob_sha": "8befbbf20bddee26624c1917c8dd890e91948c42",
+      "full_text_verified": true,
+      "sha256": "3e2f659091baee3927683cb87aa7126d21d2877e17b93b3c7537e02cb68aaa14"
+    },
+    {
+      "path": "docs/teaching/current/manifest.json",
+      "blob_sha": "0c25850fcfc2cc12a51e2934246d23ecbaa0c66f",
+      "full_text_verified": true,
+      "sha256": "b30a22ed8967ec79c66af460e43463665b3e1417d8af634d247a75474f52dd9b"
+    },
+    {
+      "path": "docs/teaching/daily/day-38/r3-delivery-verification.json",
+      "blob_sha": "38afcdce4cb33bc19702f829c747e9f35b7546ad",
+      "full_text_verified": true,
+      "sha256": "f2c9689ed9cd39b9a2b833f9b2b96376a1657819d2a2cd0f99b379c04a307ed5"
+    },
+    {
+      "path": "docs/TEACHING_ALIGNMENT.md",
+      "blob_sha": "83f4dcc98977c03a3266648cbca052b62c934416",
+      "full_text_verified": true,
+      "sha256": "c4995765ad0c5d8c3564915017e3890f06c7bb8d6a4f55c6f6efa7bd1b44b1b4"
+    },
+    {
+      "path": "docs/teaching/daily/day-38/test-coverage-map.csv",
+      "blob_sha": "e41f7bee96cc3f78e71896ba4076b9f7043ce814",
+      "full_text_verified": true,
+      "sha256": "414fb2173d4745a206aeafaa74da232491d69482f5d7c4530332b7be7d01f1a3"
+    },
+    {
+      "path": "docs/teaching/daily/day-38/r3-supporting-snapshot.json",
+      "blob_sha": "693b67381603f22face45dce9b263ec03207db5c",
+      "full_text_verified": true,
+      "sha256": "47233f0b8be941bd7ef9e4743ae6a13ff33b83aa38f77ab388c3d0384f88b075"
+    }
+  ],
+  "article_schema": "same article: Project Refactor is its own level-2 section after goals, peer to Red/Green, not a Green subsection or continuation",
+  "functional_code_changes": false,
+  "shared_ci_proposal_changes": false,
+  "new_product_tests_executed": false,
+  "product_modified": false,
+  "previous_articles_modified": [],
+  "next_day": {
+    "chat": 39,
+    "pet": 39,
+    "analytics": 39
+  },
+  "last_full_comparison_unchanged": true,
+  "relative_links_verified": true,
+  "schedule_evidence": "docs/teaching/current/day38-r3-schedule.json",
+  "github_write_errors": []
+}
