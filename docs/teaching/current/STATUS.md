@@ -1,5 +1,7 @@
 # 目前功能與驗證狀態
 
+**2026-10-25 後續功能分層要求已確認。** 後續教學按功能提供用例／Port／Adapter／UI／正式caller與測試的完整必要重構，沿原功能項追蹤；本次僅更新規則，未重構產品、未新增Day或驗收。[架構正本](../../SYSTEM_ARCHITECTURE.md#functional-layering) · [來源評估與範圍](../../source-review/2026-10-25-functional-layering.md)。
+
 ## 2026-10-25 最新增量驗證（648b903）
 
 [本次完整報告與證據](../../source-review/2026-10-25-day37-verification-648b903.md)。Chat UI15項、WASM與Leptos建置通過，但真瀏覽器API500時不顯示錯誤／重試；Pet62項及WASM通過、使用者控制窗／生活窗／重複出籠局部通過；Analytics完整PG45項通過、略過項另1項通過。原版未套用摘要限各自當時來源，不覆蓋本段。

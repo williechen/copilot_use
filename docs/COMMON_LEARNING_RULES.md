@@ -27,6 +27,17 @@ P9 規則已廢除且與現況不同，不再作為產品目標、選題、待�
 - 若需要把現有 server 中的使用案例或 SQLx adapter 搬到 application / persistence，採一個最小可驗證切片，完整提供調整後程式、Cargo dependency、呼叫端與相應測試；不能只新增空 crate 或只改路徑就宣稱已完成分層。未涉及的層不必每日修改。
 - 已發布文章及其來源 SHA / commit / blob / SHA256 保留。改名與路徑銜接放在後續教學；發布前來源變動時重新核對尚未發布草稿。每案 next_day 只依即時狀態與正式交付證據推進，此次目錄整理不加 Day。
 
+## 2026-10-25：按功能逐層完成重構（functional-layering-v1）
+
+使用者確認本次範圍為「更新架構規則與後續教學，逐功能提供完整重構」，不是立即修改產品程式。後續教學須以一項實際使用者功能為單位，說明並提供 UI／傳輸入口、Application 使用案例、Domain 規則與 Persistence／原生 Adapter 之間必要的完整調整；現存分層能重用就重用，未涉及的層不為湊齊目錄而修改。
+
+- **按功能組織責任：** 功能在各既有層內有清楚歸屬與模組邊界；不能繼續將新增業務流程、SQL與UI都堆進 server/lib.rs 或一個 command／handler。目標責任、依賴方向與當前差異以 [系統架構](SYSTEM_ARCHITECTURE.md#functional-layering) 為正本。
+- **UI／Delivery／Application／Domain／Adapter 分清：** Leptos 管畫面與互動；Axum／Tauri 管協定、路由／IPC及輸入輸出轉換；Application 管流程、授權決策與協調並定義所需 Port；Domain 管業務不變條件／狀態；SQLx及OS／視窗實作位於 Adapter。HTTP middleware／handler仍須在伺服器強制授權，但透過既有或本功能的用例／Port 執行規則與儲存，不把 SQL 搬成另一個 server helper 就當完成分層。
+- **依賴朝內：** Application 依賴 Domain與抽象Port，不依賴Axum、Tauri、Leptos、SQLx／PgPool／SqlitePool；Domain不依賴UI、Application、DB或OS driver。Persistence實作Application Port，必要DTO／錯誤放在適當內層或邊界，不能讓用例依賴Persistence的sqlx::FromRow型別。server啟動／composition root可依賴多個實作層以組裝與注入，但一般業務handler不可藉此繼續繞過用例。
+- **完整最小 Green：** 同篇提供實際新增／修改／搬移／刪除位置、完整必要函式與Port／DTO／錯誤映射、Cargo dependency／feature／module／import、組裝注入、正式caller／路由／IPC／UI接線、相關測試與命令。相容入口需要保留時提供委派橋接與原因；不留第二套平行業務實作、失效註冊或未引用的新crate。合法舊呼叫與有效測試先遷移／重接後才移除原實作，不能刪斷言讓測試變綠。
+- **驗證功能與邊界：** Red對應同篇重構前缺口，原已通過的測試記為基準／回歸；Green同時檢查用例／Domain、真實SQLx／原生Adapter、正式HTTP／IPC caller與必要UI行為。檢查Cargo normal／build依賴與Rust imports，避免純內層偷渡driver；cargo check或目錄名稱只能提供部分證據，不能代替DB／GUI／端到端結果。未執行或失敗逐項明列，文件Gate1與產品Gate2依原規則分開。
+- **保留原約束：** 繼續以rust_ai_ring精確SHA為程式來源，copilot_use只交付文件與教學程式，不建立第二套產品。本次不改產品、不新增Day／FIFO、不變更last_full_comparison、不回寫舊Day。舊固定搬移11個測試／固定指定crate及兩庫平行程式要求仍已廢除；此次要求是依當前功能需要完成真實重構。共用認證實作、三案獨立DB／Session與現行Leptos框架要求不變。
+
 ### 後續調整的檢核與清理（2026-10-25）
 
 使用者最新要求：統整重複套用、未使用函式與測試、來源與建置產物分歧，供後續調整。完整項目與依賴集中於 [FUTURE_WORK 的後續調整](FUTURE_WORK.md)，不建立另一套平行工作清單、不固定排入歷史 Day。

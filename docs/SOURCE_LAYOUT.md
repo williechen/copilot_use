@@ -69,6 +69,9 @@ Chat / Pet SQLite 與 Analytics PostgreSQL 的 migrations 分別位於 chat_apps
 
 ## 後續教學如何調整程式
 
+2026-10-25 已確認後續須按功能完成真實分層重構，不能只改目錄名稱。各層責任／依賴見 [系統架構正本](SYSTEM_ARCHITECTURE.md#functional-layering)，同篇完整程式／Cargo／caller／測試檢核見 [教學銜接](TEACHING_ALIGNMENT.md)。本頁目錄表是來源對照，不代表所有crate已實作或分層已完成。
+
+
 使用者最新要求：後續教學應依新目錄調整程式。每篇先核對最新來源、上一篇及實際呼叫鏈，再在教學中給出需要調整的檔案、完整程式碼、imports、Cargo dependency / feature、呼叫端與測試位置，最後提供對應 workspace 的驗證命令。
 
 pet-application 已共用名稱規則；pet-persistence 已承接 set_caged／list_uncaged，analytics-persistence 已承接精確事件類型查詢與 EventSummary；均有 caller。其餘 PetStore／pg_store／bootstrap 程式仍多在 server，Analytics application/domain/ui 仍是範本。後續若把使用案例或 DB adapter 移入新層，需在同一最小切片中接回真實呼叫端與測試，不能只把空 crate 加進 members 就宣稱分層完成。每篇僅處理當日必要範圍，不要求每層每天都修改。
