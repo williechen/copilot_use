@@ -1865,6 +1865,31 @@
       "report": "docs/source-review/2026-10-25-day36-verification-5c713553.md",
       "evidence": "docs/source-review/day36-verification-5c713553/evidence.zip",
       "raw_error": null
+    },
+    {
+      "project": "analytics",
+      "day": 36,
+      "revision": "r2",
+      "path": "docs/teaching/daily/day-36/analytics-r2.md",
+      "old_path": "docs/teaching/daily/day-36/analytics.md",
+      "parent": "b20e7ef6cceb66456fbd4de9a5481818240541c2",
+      "article_commit": "c6829e4c63b49d2051a7387434ee8657b2bb3cbd",
+      "blob_sha": "1bf7760449257e4cad36ca37ae36df727c674c5d",
+      "sha256": "a5ebeedeaddb41be457c36ebb4307ea857bde536253c7a1ee2036fd20974ddc0",
+      "full_text_verified": true,
+      "readback_at": "2026-10-25T08:15:53.520Z",
+      "source_sha": "5c713553daee4055738239f047d6c774fcc7a7a1",
+      "teaching_baseline_sha": "61ed5930bd9ff38e0d5822eea2983121001d8422",
+      "main_application": "already present in source main; not applied by verification agent",
+      "tests": "executed; see linked verification report",
+      "functional_acceptance": false,
+      "archived": false,
+      "next_day_before": 37,
+      "next_day_after": 37,
+      "status": "article_delivered_code_present_tests_passed_acceptance_pending",
+      "report": "docs/source-review/2026-10-25-day36-verification-5c713553.md",
+      "evidence": "docs/source-review/day36-verification-5c713553/evidence.zip",
+      "raw_error": null
     }
   ],
   "day15_frozen": true,
@@ -2083,7 +2108,7 @@
     "frozen_body_sha256": "ae01b5aee1d29eec4a60a8ae8800e1a07ab8c9e7a838c4fa1ed17bfedc9069d1",
     "frozen_notion_snapshot": "docs/teaching/archive/day-22/notion/analytics.md"
   },
-  "latest_analytics_publication": "docs/teaching/daily/day-36/analytics-readback.json",
+  "latest_analytics_publication": "docs/teaching/daily/day-36/analytics-r2-readback.json",
   "day23_archive": "docs/teaching/archive/day-23/manifest.json",
   "previous_day23_chat_article": {
     "project": "chat",
@@ -2653,6 +2678,13 @@
         "path": "docs/teaching/daily/day-36/pet-r3.md",
         "article_commit": "4218e74ac08ae05ba5e26d74e4630fb7d7c0e075",
         "summary": "Server 54、Day36 adapter／Store 測試與 WASM 通過。Store 重建不是原生程序重啟；Tauri 多窗重啟及建窗失敗注入待驗。",
+        "functional_acceptance": false
+      },
+      "analytics": {
+        "revision": "r2",
+        "path": "docs/teaching/daily/day-36/analytics-r2.md",
+        "article_commit": "c6829e4c63b49d2051a7387434ee8657b2bb3cbd",
+        "summary": "PostgreSQL 全套 42 項通過、原略過項另跑 1 項通過；真 HTTP Session、首次改密碼、登出、過期／停用／fingerprint 及攝取去重通過。角色／來源 ACL、SSE、瀏覽器待驗。",
         "functional_acceptance": false
       }
     }

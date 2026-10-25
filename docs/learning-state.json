@@ -493,8 +493,9 @@
       },
       "analytics": {
         "day": 36,
-        "path": "docs/teaching/daily/day-36/analytics.md",
-        "article_commit": "6bd111650673758f667e3c929bb85439b846ad9c"
+        "revision": "r2",
+        "path": "docs/teaching/daily/day-36/analytics-r2.md",
+        "article_commit": "c6829e4c63b49d2051a7387434ee8657b2bb3cbd"
       }
     },
     "legacy_notion_fields_scope": "Preserved historical Notion publication snapshot; current progress is next_day and latest_github_publication."
@@ -4005,7 +4006,7 @@
       "scope": "local PostgreSQL regression; not full product acceptance or CI"
     }
   },
-  "latest_analytics_publication": "docs/teaching/daily/day-36/analytics-readback.json",
+  "latest_analytics_publication": "docs/teaching/daily/day-36/analytics-r2-readback.json",
   "previous_source_validation_before_e753c36": {
     "source_sha": "f3f8255b0b701a1b57cb8c0a1737c3caa4319f2d",
     "full_execution_sha": "f3f8255b0b701a1b57cb8c0a1737c3caa4319f2d",
@@ -4196,34 +4197,29 @@
     "raw_error": null
   },
   "day36_analytics_delivery": {
-    "repository": "williechen/copilot_use",
-    "branch": "main",
     "project": "analytics",
     "day": 36,
-    "revision": "r1",
-    "title": "精確事件統計 API 改用人員 Session，不再接受來源 token 查詢",
-    "path": "docs/teaching/daily/day-36/analytics.md",
-    "parent": "5d9495cc059215cd82e7116114dd4e77e4664ecc",
-    "article_commit": "6bd111650673758f667e3c929bb85439b846ad9c",
-    "blob_sha": "3e6317f171fda71fa8cc0f5aa3dde36caad32d98",
-    "sha256": "ba931015cdca59b3c064efb0278b6c01967cc6750cf9402cff721e7647806253",
+    "revision": "r2",
+    "path": "docs/teaching/daily/day-36/analytics-r2.md",
+    "old_path": "docs/teaching/daily/day-36/analytics.md",
+    "parent": "b20e7ef6cceb66456fbd4de9a5481818240541c2",
+    "article_commit": "c6829e4c63b49d2051a7387434ee8657b2bb3cbd",
+    "blob_sha": "1bf7760449257e4cad36ca37ae36df727c674c5d",
+    "sha256": "a5ebeedeaddb41be457c36ebb4307ea857bde536253c7a1ee2036fd20974ddc0",
     "full_text_verified": true,
-    "readback_at": "2026-10-25T06:16:23.436Z",
-    "source_repository": "williechen/rust_ai_ring",
-    "source_sha": "61ed5930bd9ff38e0d5822eea2983121001d8422",
-    "rules_sha": "3b5d00291cdd44e1fa039aad4b10d8f82b59982d",
-    "rules_version": "daily-tdd-minimum-v1+github-only-v1",
-    "status": "article_delivered_unapplied_unverified",
-    "main_application": "not applied",
-    "tests": "not run",
+    "readback_at": "2026-10-25T08:15:53.520Z",
+    "source_sha": "5c713553daee4055738239f047d6c774fcc7a7a1",
+    "teaching_baseline_sha": "61ed5930bd9ff38e0d5822eea2983121001d8422",
+    "main_application": "already present in source main; not applied by verification agent",
+    "tests": "executed; see linked verification report",
     "functional_acceptance": false,
     "archived": false,
-    "next_day_before": 36,
+    "next_day_before": 37,
     "next_day_after": 37,
-    "raw_error": null,
-    "remaining_gaps": "角色／來源 ACL、SSE、CSRF、機器配對、完整 PostgreSQL／HTTP／瀏覽器與 CI 待驗",
-    "sync_expected_parent_sha": "6bd111650673758f667e3c929bb85439b846ad9c",
-    "sync_status": "pending"
+    "status": "article_delivered_code_present_tests_passed_acceptance_pending",
+    "report": "docs/source-review/2026-10-25-day36-verification-5c713553.md",
+    "evidence": "docs/source-review/day36-verification-5c713553/evidence.zip",
+    "raw_error": null
   },
   "day36_pet_r1_delivery": {
     "repository": "williechen/copilot_use",
@@ -4307,6 +4303,13 @@
         "article_commit": "4218e74ac08ae05ba5e26d74e4630fb7d7c0e075",
         "summary": "Server 54、Day36 adapter／Store 測試與 WASM 通過。Store 重建不是原生程序重啟；Tauri 多窗重啟及建窗失敗注入待驗。",
         "functional_acceptance": false
+      },
+      "analytics": {
+        "revision": "r2",
+        "path": "docs/teaching/daily/day-36/analytics-r2.md",
+        "article_commit": "c6829e4c63b49d2051a7387434ee8657b2bb3cbd",
+        "summary": "PostgreSQL 全套 42 項通過、原略過項另跑 1 項通過；真 HTTP Session、首次改密碼、登出、過期／停用／fingerprint 及攝取去重通過。角色／來源 ACL、SSE、瀏覽器待驗。",
+        "functional_acceptance": false
       }
     }
   },
@@ -4346,5 +4349,35 @@
       "sha256": "43299125496c16bb3cdff4dc6ca6bd1a7fd93d282a8ae7cb98a8df75066c229c",
       "reason": "r1 source-review relative link resolved under wrong directory; original immutable"
     }
+  },
+  "day36_analytics_r1_delivery": {
+    "repository": "williechen/copilot_use",
+    "branch": "main",
+    "project": "analytics",
+    "day": 36,
+    "revision": "r1",
+    "title": "精確事件統計 API 改用人員 Session，不再接受來源 token 查詢",
+    "path": "docs/teaching/daily/day-36/analytics.md",
+    "parent": "5d9495cc059215cd82e7116114dd4e77e4664ecc",
+    "article_commit": "6bd111650673758f667e3c929bb85439b846ad9c",
+    "blob_sha": "3e6317f171fda71fa8cc0f5aa3dde36caad32d98",
+    "sha256": "ba931015cdca59b3c064efb0278b6c01967cc6750cf9402cff721e7647806253",
+    "full_text_verified": true,
+    "readback_at": "2026-10-25T06:16:23.436Z",
+    "source_repository": "williechen/rust_ai_ring",
+    "source_sha": "61ed5930bd9ff38e0d5822eea2983121001d8422",
+    "rules_sha": "3b5d00291cdd44e1fa039aad4b10d8f82b59982d",
+    "rules_version": "daily-tdd-minimum-v1+github-only-v1",
+    "status": "article_delivered_unapplied_unverified",
+    "main_application": "not applied",
+    "tests": "not run",
+    "functional_acceptance": false,
+    "archived": false,
+    "next_day_before": 36,
+    "next_day_after": 37,
+    "raw_error": null,
+    "remaining_gaps": "角色／來源 ACL、SSE、CSRF、機器配對、完整 PostgreSQL／HTTP／瀏覽器與 CI 待驗",
+    "sync_expected_parent_sha": "6bd111650673758f667e3c929bb85439b846ad9c",
+    "sync_status": "pending"
   }
 }
