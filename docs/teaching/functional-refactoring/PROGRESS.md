@@ -1,20 +1,11 @@
-# 每日全專案工程進度
+# 各專案Refactor進度
 
-依[共用規則](../../COMMON_LEARNING_RULES.md)，工程按專案整體架構、測試與CI的相依每日接續一個完整小包、與功能教學分開計時，不增加 Day。rust_ai_ring 唯讀，使用者套用。
+本頁只列各案自己的實際變更；[全專案項目](../../engineering/README.md)另列。方案交付、產品套用與驗收分開，產品保持唯讀。
 
-| 工作包 | 方案交付 | 產品套用 | 驗收 |
-| --- | --- | --- | --- |
-| [2026-10-26：CI責任隔離](../../engineering/2026-10-26/ci-isolation.md) | 完整 YAML／patch、斷言去向與驗證方案；套用檢查與 YAML 解析通過 | 未套用 | 未執行 Actions、required checks、DB、native／GUI |
-| [三案分層與測試盤點](README.md) | 現況／依賴與12組測試映射已整理；尚待完整 caller 與斷言基線 | 無新增產品變更 | 不視為重構完成 |
+| 專案 | 本次程式／測試變更 | 實際候選驗證 | 產品套用／驗收 | 下一步 |
+| --- | --- | --- | --- | --- |
+| [Chat](../daily/day-38/chat-r4.md#refactor) | room_list_state模組、正式caller imports、去重並遷移有效斷言 | 精確來源patch／兩種順序通過；完整SSR14項與WASM check通過 | 未套用；真瀏覽器／完整產物與CI未驗收 | 依Chat自身認證／Session、房間與訊息邊界接續 |
+| [Pet](../daily/day-38/pet-r4.md#refactor) | 補償流程／純測試移入Application，正式IPC import接線；真鎖留server | patch／兩種順序通過；Application4項、server／persistence60項通過；配額錯誤恢復留證 | 未套用；真生活窗GUI與CI未驗收 | 依Pet自身回籠、Runtime／鎖與Adapter接續 |
+| [Analytics](../daily/day-38/analytics-r4.md#refactor) | 三組PG測試共用support，保留每情境全部斷言與DB隔離 | patch／兩種順序通過；完整server／PG48項，ignored1項另跑通過 | 未套用；真瀏覽器與CI未驗收 | 依Analytics自身Session／查詢／PG／UI與fixture接續 |
 
-## 三案累積接續
-
-| 專案 | 當前工程基線 | 下一步 | 套用／驗收 |
-| --- | --- | --- | --- |
-| [Chat](chat.md) | 房間查詢局部測試盤點僅為子集；CI跨案包已交付 | 補齊認證／Session、房間／成員、訊息／WS、UI及shared的caller／Port／Adapter與斷言基線 | 無新增套用／驗收 |
-| [Pet](pet.md) | 出籠補償局部盤點僅為子集；CI跨案包已交付 | 補齊生命週期、Runtime／鎖、SQLite、Tauri／視窗／漫遊與產物的責任／斷言基線 | 無新增套用／驗收 |
-| [Analytics](analytics.md) | 查詢Cookie局部盤點僅為子集；CI跨案包已交付 | 補齊帳號／Session、查詢／ACL、攝取／憑證、PG與UI的caller／斷言基線 | 無新增套用／驗收 |
-
-三案共用CI工作包不重複計功。此表是實際盤點接續，尚未交付新的產品重構patch；各篇在同篇獨立Refactor段落呈現本案累積調整及完整內容，與Red／Green並列；不能只寫「本切片」處理、只貼外部連結或把局部整理充作工程完成。
-
-下一個小包：以最新已套用 SHA 完成四 workspace caller／Port／Adapter／fixture／CI 執行入口的完整基線，再依相依順序逐功能提供完整程式與測試遷移。若前包未套用，後包不得假定其已存在。既有功能與 FIFO 均沿原紀錄，無平行清單。
+以上皆為精確來源＋功能Green／Refactor的完整隔離候選測試，不能追認產品main已套用或GUI／CI已驗收。[本地完整證據](../daily/day-38/r4-local-validation.json)分列原始環境錯誤、恢復與Red類型。每案累積接續，不以當日Green決定重構順序；未套用方案不假設已存在。全專案G-01的全庫CI不在三案計功。保留既有原文、斷言與FIFO，不增加Day、不更新last_full_comparison。

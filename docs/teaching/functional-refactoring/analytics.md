@@ -1,6 +1,6 @@
 # Analytics 專案重構
 
-範圍涵蓋整個專案及共用依賴，依[同一工程進度](PROGRESS.md)逐日接續，不以當日教學切片限定範圍。以下是工程責任清單，產品仍唯讀；尚未交付完整patch的項目只算盤點。
+範圍只涵蓋本專案自身的實作、測試及專案CI；跨案／共用依賴調整另列全專案項目，依[同一工程進度](PROGRESS.md)逐日接續，不以當日教學切片限定範圍。以下是工程責任清單，產品仍唯讀；尚未交付完整patch的項目只算盤點。
 
 ## 專案範圍與相依
 
@@ -10,7 +10,7 @@
 | 查詢與權限 | 統計查詢／角色／來源ACL用例、DTO與授權責任，PG Adapter不承擔HTTP決策 |
 | 攝取與事件 | 機器憑證／事件驗證／冪等與持久化邊界，與人員Session分開 |
 | 測試與PG CI | 隔離PG fixture、正式Router／Adapter與用例測試，功能斷言與準備流程分離；獨立PG選取 |
-| 共用依賴／組裝 | 檢視四workspace公開契約、shared、Cargo normal／build／dev／target依賴、features與正式caller；先承接再清舊碼 |
+| 本案對外邊界 | 只核對本案caller使用既有契約的方式；修改共用crate或跨workspace契約另列全專案項目 |
 
 先完成專案caller／Port／Adapter與斷言基線，再依相依選完整包。新功能與未完成需求依FUTURE_WORK另追蹤，不能把表內規劃寫成已存在或已重構。
 
@@ -29,6 +29,6 @@
 
 每次列：前次包與產品已套用SHA→本次按專案依賴選的完整包／patch→有效測試與CI去向→實際／未執行驗證→累積狀態與下一包。未套用的前包不能當已存在基準；無本案工程進展就明列原因，不用切片helper整理補數。
 
-已交付的跨案[CI責任隔離](../../engineering/2026-10-26/ci-isolation.md)共用同一份patch及證據，不能各案各算一包；目前未套用／未驗收。下一步及其餘案狀態見[PROGRESS](PROGRESS.md)。
+全庫CI、跨案契約及共用依賴歸[全專案獨立項目](../../engineering/README.md)，不算本案Refactor進度。本案實際變更與驗證見[各案進度](PROGRESS.md)。
 
 完整包須交付必要用例／Port／DTO／錯誤、Adapter／組裝／正式caller、Cargo／features、測試遷移與CI相容內容；保留不同邊界值、故障模式及隔離斷言。不因測試搬家假造行為Red，也不刪斷言換全綠。規則集中於[共用正本](../../COMMON_LEARNING_RULES.md)，本頁不複製另一套規則。

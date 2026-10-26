@@ -1,0 +1,214 @@
+{
+  "scope": "only agent-created validation artifacts; original product caches untouched",
+  "bytes_moved": 841405239,
+  "files": [
+    {
+      "name": "libgtk-d16ceedffc302ee1.rlib",
+      "bytes": 55716356
+    },
+    {
+      "name": "libtauri_utils-1ee764d6e896d2e3.rlib",
+      "bytes": 44751056
+    },
+    {
+      "name": "libgtk-d16ceedffc302ee1.rmeta",
+      "bytes": 34330442
+    },
+    {
+      "name": "libgio-4c26a83a8b1071d0.rlib",
+      "bytes": 31737370
+    },
+    {
+      "name": "libtauri_utils-79116543044c34eb.rlib",
+      "bytes": 24786396
+    },
+    {
+      "name": "libtachys-2c770302fd796711.rlib",
+      "bytes": 23644954
+    },
+    {
+      "name": "libtachys-acd95c1fa80296db.rlib",
+      "bytes": 23641716
+    },
+    {
+      "name": "libtachys-2c770302fd796711.rmeta",
+      "bytes": 19721532
+    },
+    {
+      "name": "libtachys-acd95c1fa80296db.rmeta",
+      "bytes": 19721532
+    },
+    {
+      "name": "libglib-790153728cffc939.rlib",
+      "bytes": 19423168
+    },
+    {
+      "name": "libgio-4c26a83a8b1071d0.rmeta",
+      "bytes": 19306260
+    },
+    {
+      "name": "libweb_sys-eb3cdcfde891305e.rlib",
+      "bytes": 18873050
+    },
+    {
+      "name": "libweb_sys-afb60ad30aa1e19e.rlib",
+      "bytes": 18872524
+    },
+    {
+      "name": "libtokio-1f1b82a9911cf315.rlib",
+      "bytes": 16946632
+    },
+    {
+      "name": "libtokio-bbaa7475ae6d5ce4.rlib",
+      "bytes": 16905706
+    },
+    {
+      "name": "libsqlx_postgres-4e09838001263a87.rlib",
+      "bytes": 15648104
+    },
+    {
+      "name": "analytics_server-ba5f607911b422e3",
+      "bytes": 15365856
+    },
+    {
+      "name": "libwasm_bindgen_macro_support-0e528a42cd08379e.rlib",
+      "bytes": 15156846
+    },
+    {
+      "name": "libzerocopy-eecdb71d3cdea88a.rlib",
+      "bytes": 14756042
+    },
+    {
+      "name": "libzerocopy-eecdb71d3cdea88a.rmeta",
+      "bytes": 14592678
+    },
+    {
+      "name": "libsqlx_postgres-86fc0809233ace01.rlib",
+      "bytes": 14591132
+    },
+    {
+      "name": "analytics_server-d4295a2e5def80df",
+      "bytes": 13817184
+    },
+    {
+      "name": "day24_password_change-0abfb60ce8a72793",
+      "bytes": 13740632
+    },
+    {
+      "name": "day23_password_login-9360d28b8074dfb4",
+      "bytes": 13549920
+    },
+    {
+      "name": "day25_repeat_password_change-68dd20d8747f064a",
+      "bytes": 13462352
+    },
+    {
+      "name": "day38_ingest_authorization-5d7564567a619a2f",
+      "bytes": 13430952
+    },
+    {
+      "name": "day27_dashboard_source-121f19774c18d706",
+      "bytes": 13400904
+    },
+    {
+      "name": "day37_query_cookie-21de04c6d82303d9",
+      "bytes": 13399960
+    },
+    {
+      "name": "day26_session_contract-1540313295992b62",
+      "bytes": 13393416
+    },
+    {
+      "name": "libsyn-8fb15caef17b7d7c.rlib",
+      "bytes": 13016146
+    },
+    {
+      "name": "libsyn-c20c9ebce91b8888.rlib",
+      "bytes": 12995532
+    },
+    {
+      "name": "libweb_sys-afb60ad30aa1e19e.rmeta",
+      "bytes": 12946206
+    },
+    {
+      "name": "libweb_sys-eb3cdcfde891305e.rmeta",
+      "bytes": 12946206
+    },
+    {
+      "name": "libtokio-13b85533a7b14778.rlib",
+      "bytes": 12867670
+    },
+    {
+      "name": "libsyn-628afa331c7ab4f0.rlib",
+      "bytes": 12593554
+    },
+    {
+      "name": "libsyn-251ceb630f62e9b2.rlib",
+      "bytes": 12521246
+    },
+    {
+      "name": "libsyn-e861751fc8d13922.rlib",
+      "bytes": 12116918
+    },
+    {
+      "name": "libsqlx_macros-56673ebe3db9a639.so",
+      "bytes": 11917656
+    },
+    {
+      "name": "libwebkit2gtk-81b5326a9bbe8ef3.rlib",
+      "bytes": 11666764
+    },
+    {
+      "name": "libglib-790153728cffc939.rmeta",
+      "bytes": 11108576
+    },
+    {
+      "name": "libsqlx_macros-87907af037e9d8ed.so",
+      "bytes": 11000944
+    },
+    {
+      "name": "libdbus-86325845e50b9161.rlib",
+      "bytes": 10524058
+    },
+    {
+      "name": "libjs_sys-5345991a4d9830e0.rlib",
+      "bytes": 10516254
+    },
+    {
+      "name": "libjs_sys-7495bf8f88a91a1c.rlib",
+      "bytes": 10513372
+    },
+    {
+      "name": "postgres_event_store-83fa485674eca5a0",
+      "bytes": 9653960
+    },
+    {
+      "name": "libgdk-cee5cb46b7a6401c.rlib",
+      "bytes": 9495946
+    },
+    {
+      "name": "libtokio-1f1b82a9911cf315.rmeta",
+      "bytes": 9452055
+    },
+    {
+      "name": "libtokio-bbaa7475ae6d5ce4.rmeta",
+      "bytes": 9452044
+    },
+    {
+      "name": "bootstrap_admin-61fc0f4dff3ea6ce",
+      "bytes": 9418920
+    },
+    {
+      "name": "libcargo_toml-dc6749d4ac820cfe.rlib",
+      "bytes": 9386892
+    },
+    {
+      "name": "libwasm_bindgen_macro-5ec70ad5166bb48e.so",
+      "bytes": 9332552
+    },
+    {
+      "name": "libsqlx_sqlite-87a9908bc0de9d99.rlib",
+      "bytes": 9277096
+    }
+  ]
+}

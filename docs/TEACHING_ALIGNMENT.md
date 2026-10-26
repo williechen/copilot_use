@@ -1,23 +1,9 @@
-# 教學與全專案工程銜接
+# 教學、各案Refactor與全專案重構
 
-## 每日功能教學
+功能Red／Green只處理當日可操作功能。各篇在①後設與②並列的獨立「Refactor」段落，只處理該篇Chat、Pet或Analytics自己的架構、測試、fixture與專案CI，按該案累積相依每日接續，不作Green接續的局部整理。
 
-依[共用規則](COMMON_LEARNING_RULES.md)選一個可操作功能缺口，提供Red、完整Green、正式caller與直接相關測試；同篇另設與Red／Green並列的專案Refactor獨立段落，提供專案累積調整、完整程式／patch與驗證；不放在Green小節內，也不因獨立段落就拆成另一篇。路徑、Cargo／feature、imports與命令依[現行目錄](SOURCE_LAYOUT.md)核對，不以API／helper通過冒稱畫面與整條流程已驗收。
+Refactor必須有完整可套用程式／patch、正式caller／module／Cargo／features接線、舊測試與有效斷言去向、實際／未執行驗證、風險／回復與下一步；不能只有說明或目錄。既有行為重構不假造新功能Red，純內層、DB、HTTP／IPC與UI的獨有斷言保留。
 
-核心60分鐘只計Red／Green，工程與其他作業另計。當日切片的小整理併Green說明，不以局部整理抵算Refactor。跨功能搬層、測試去重／遷移、共用fixture與CI重整放在同篇獨立專案Refactor段落，按專案相依接續；需要工程相依時明列阻礙，由工程規劃追蹤，不刪測試、不以龐大重構擴充每日教學範圍。
+[各案入口](teaching/functional-refactoring/README.md)與[各案進度](teaching/functional-refactoring/PROGRESS.md)只追蹤各專案。[全專案重構](engineering/README.md)另列跨案契約、共用crates、跨workspace及全庫CI等獨立項目；其完整變更與證據不複製到各案段落，亦不抵算各案進度。相依時明列，不把未套用項目當主分支已存在。
 
-## 同篇獨立的專案Refactor段落
-
-[工程整理入口](teaching/functional-refactoring/README.md)涵蓋三案、共用crates及跨workspace邊界。先讀三案各自進度，按整體架構／測試／CI依賴每天完成一個完整小工作包，接續前日未完成事項，不依當日教學切片重新選題，記錄於[工程進度](teaching/functional-refactoring/PROGRESS.md)。工程交付須含：
-
-1. 依賴／正式caller／測試與CI現況，目標責任及工作包相依順序。
-2. 必要完整程式、Port／DTO／錯誤、Adapter與組裝、公開介面相容處理；Cargo normal／build／dev／target依賴、features、module／import同步。
-3. 舊測試→保留／合併／參數化／遷移／確認淘汰的映射；有效斷言與不同故障模式保留，fixture不複製業務實作。
-4. CI的純內層、各案DB、正式HTTP／IPC、Pet原生與UI驗證分責任；三案無實際相依不串接，不能吞掉失敗。拆分時同步required checks與觸發條件。
-5. 精確來源SHA、實際測試／CI／DB／GUI結果、未執行、風險與回復方式；工程文件完成不等於產品工程已完成。
-
-## 文件與驗收
-
-copilot_use維護需求、規則、工程文件、教學與證據；rust_ai_ring是產品／測試／CI主體，本次保持唯讀。工程工作與教學進度分開，不因工程規劃、搬移或驗收增加Day，不改FIFO或全面比對時間。新教學仍依獨立文章提交、精確commit全文讀回及條件同步規則。
-
-保留已發布文章與原始commit／blob／SHA256。全專案重構不是固定搬移11個測試的舊計畫，也不是在copilot_use建立第二套產品。
+核心60分鐘只計Red／Green，兩類Refactor及其他作業另計。copilot_use只維護文件、程式／patch方案與證據；rust_ai_ring唯讀，由使用者套用。保留已發布原文、有效斷言與FIFO，修訂不增減Day，不更新last_full_comparison。精確來源、當日版本、逐案獨立提交與全文讀回依[共用規則](COMMON_LEARNING_RULES.md)，路徑依[SOURCE_LAYOUT](SOURCE_LAYOUT.md)。
