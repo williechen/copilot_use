@@ -6,10 +6,10 @@
 
 | 專案 | 現行教學 | 下一篇 | 驗證範圍 |
 | --- | --- | --- | --- |
-| Analytics | [Day39 r1：管理後台依 Session 匯出指定來源統計 CSV](../daily/day-39/analytics-r1.md) | Day40 | 方案已交付；產品未套用／未驗收；Red／Green／CI 未執行 |
+| Analytics | [Day39 r2：管理後台依 Session 匯出指定來源統計 CSV](../daily/day-39/analytics-r2.md) | Day40 | Refactor Server／PG 49項通過、1項ignored；CSV Green／GUI／候選CI未驗 |
 
-產品來源 `8fc4b277b6f6f77d97655130036fca47813de56e`，文章 commit `4d9df0144412cf799854366596f582bf074fd9f2`。[Day39 精確讀回／blob／SHA256](../daily/day-39/delivery-verification.json)；**方案已交付／產品未套用／未驗收**。
+產品來源 `8fc4b277b6f6f77d97655130036fca47813de56e`，文章 commit `6e2f6cb90db2fe5d80dc8f463392e32f7da12a85`。[Day39 精確讀回／blob／SHA256](../daily/day-39/r2-delivery-verification.json)；**方案已交付／產品未套用／未驗收**。
 
 [上一篇 Day38 r4](../daily/day-38/analytics-r4.md) · [Day39 初版](../daily/day-39/analytics.md) · [歷史與更正](ARTICLE_STATUS.md)。原文、來源與舊驗證保留，未將新方案當成產品驗收。
 
-[全專案重構獨立項目](../../../docs/engineering/README.md) · [候選本地驗證](../../../docs/teaching/daily/day-38/r4-local-validation.json)。
+[全專案重構獨立項目](../../../docs/engineering/README.md) · [候選本地驗證](../../../docs/teaching/daily/day-39/r2-refactor-validation.json)。

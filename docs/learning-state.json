@@ -132,7 +132,7 @@
       "frozen_through_day": 25,
       "notion_export_root": "docs/teaching/history/evidence/notion-export/2026-10-22"
     },
-    "project_refactor_section": "同篇獨立二級 Refactor 段落，只處理該篇專案，依自身累積進度提供完整patch、caller／module接線、有效斷言承接與實測；不依附當日Green切片",
+    "project_refactor_section": "同篇獨立Refactor段落，正文詳列修改前後、逐檔完整修改單元、caller／module／依賴接線、完整測試與舊斷言承接；patch為附件，不以連結代替教學；各案與全專案分開。",
     "global_refactoring": "全專案另列docs/engineering/README.md獨立項目，不塞入三案、不重複計功"
   },
   "curriculum": {
@@ -3715,7 +3715,7 @@
     "expected_state_parent_sha": "7a3400259b59cf617d6c3c721bfc10d1014542b0",
     "raw_error": null
   },
-  "latest_chat_publication": "docs/teaching/daily/day-38/chat-r4-readback.json",
+  "latest_chat_publication": "docs/teaching/daily/day-39/chat-r2-readback.json",
   "duplicate_application_review": {
     "date": "2026-10-25",
     "source_repository": "williechen/rust_ai_ring",
@@ -3945,7 +3945,7 @@
       "scope": "incremental verification only"
     }
   },
-  "latest_pet_publication": "docs/teaching/daily/day-38/pet-r4-readback.json",
+  "latest_pet_publication": "docs/teaching/daily/day-39/pet-r2-readback.json",
   "day35_analytics_r1_delivery": {
     "repository": "williechen/copilot_use",
     "branch": "main",
@@ -4039,7 +4039,7 @@
       "scope": "local PostgreSQL regression; not full product acceptance or CI"
     }
   },
-  "latest_analytics_publication": "docs/teaching/daily/day-38/analytics-r4-readback.json",
+  "latest_analytics_publication": "docs/teaching/daily/day-39/analytics-r2-readback.json",
   "previous_source_validation_before_e753c36": {
     "source_sha": "f3f8255b0b701a1b57cb8c0a1737c3caa4319f2d",
     "full_execution_sha": "f3f8255b0b701a1b57cb8c0a1737c3caa4319f2d",
@@ -5028,7 +5028,7 @@
   "per_project_refactor": {
     "scope": "each article's own project only; continue cumulative architecture/tests/fixtures/project CI, independent of daily feature slice",
     "article_section": "same article independent level-two Refactor section, peer to Red/Green",
-    "delivery": "complete actual patch, real caller/module wiring, assertion migration map, executed validation and next step",
+    "delivery": "Detailed inline modified units and full tests, actual callers/module wiring, assertion migration and execution evidence; applyable patch as attachment, not a replacement for inline teaching.",
     "product_repository_read_only": true,
     "progress": "docs/teaching/functional-refactoring/PROGRESS.md",
     "core_minutes_excluded": true,
@@ -5425,5 +5425,324 @@
     "homepage_r1_sync_commit": "e7c215a44c4cdf767e181a5fed1f3ddf9421d0db",
     "pet_entry_r1_sync_commit": "45c612737a12c0c3a092c3c199b65ab8e9bbe3b6"
   },
-  "day39_source_sha": "8fc4b277b6f6f77d97655130036fca47813de56e"
+  "day39_source_sha": "8fc4b277b6f6f77d97655130036fca47813de56e",
+  "day39_chat_r2_delivery": {
+    "project": "chat",
+    "day": 39,
+    "revision": "r2",
+    "article_path": "docs/teaching/daily/day-39/chat-r2.md",
+    "parent": "0ccd1a252b3e8fc28150242944b36929760b3cd3",
+    "article_commit": "fbfdce843111b74a0aaa2f8eaacaf5733d12308c",
+    "blob_sha": "3a7b9832ca88c86c3d3b708bda866d340146f25d",
+    "sha256": "ce71697a6ad87a6152a1ee38e3f89fe7dd979c344e275cdfb6de075621d3e9d7",
+    "files": [
+      {
+        "path": "docs/teaching/daily/day-39/chat-r2.md",
+        "blob_sha": "3a7b9832ca88c86c3d3b708bda866d340146f25d",
+        "sha256": "ce71697a6ad87a6152a1ee38e3f89fe7dd979c344e275cdfb6de075621d3e9d7",
+        "full_text_verified": true
+      },
+      {
+        "path": "docs/teaching/daily/day-39/chat-day39-refactor-r2.patch",
+        "blob_sha": "370a2dba5d35fedb477aee769d72d3bf5e9a7a6d",
+        "sha256": "a4f705ddedfa1e4a22e2a513a396c48c32ff7f44c28c45580863d78e40c2da69",
+        "full_text_verified": true
+      },
+      {
+        "path": "docs/teaching/daily/day-39/chat-day39-green-r2.patch",
+        "blob_sha": "c2d739d04385b6b438f19fce1886eb665666b447",
+        "sha256": "2dde792a066f665719d13f54b51fb45e50b205b4ffe663fce058ba38c4fadc30",
+        "full_text_verified": true
+      }
+    ],
+    "rules_commit": "0ccd1a252b3e8fc28150242944b36929760b3cd3",
+    "rules_blob": "ba9e6cbd6763d245e60800a02c60888ba6215bd5",
+    "source_sha": "8fc4b277b6f6f77d97655130036fca47813de56e",
+    "readback_at": "2026-10-26T07:42:53.486Z",
+    "full_text_verified": true,
+    "repository": "williechen/copilot_use",
+    "branch": "main",
+    "evidence": "docs/teaching/daily/day-39/chat-r2-readback.json",
+    "refactor_patch": "docs/teaching/daily/day-39/chat-day39-refactor-r2.patch",
+    "functional_patch": "docs/teaching/daily/day-39/chat-day39-green-r2.patch",
+    "revision_scope": "inline detailed Refactor teaching, complete modified units, real caller/module wiring, full tests and assertion migration",
+    "candidate_validation": "docs/teaching/daily/day-39/r2-refactor-validation.json",
+    "refactor_tests_executed": true,
+    "functional_red_executed": false,
+    "functional_green_tests_executed": false,
+    "functional_acceptance": false,
+    "product_modified": false,
+    "main_application": "not applied",
+    "gate2": false,
+    "next_day_before": 40,
+    "next_day_after": 40,
+    "revision_does_not_advance_day": true
+  },
+  "day39_pet_r2_delivery": {
+    "project": "pet",
+    "day": 39,
+    "revision": "r2",
+    "article_path": "docs/teaching/daily/day-39/pet-r2.md",
+    "parent": "fbfdce843111b74a0aaa2f8eaacaf5733d12308c",
+    "article_commit": "a7955715ae7ce982a5a2984973b6ca6d6934daf3",
+    "blob_sha": "f02396a913d5eeca4ca1842ef90841efa3fb2037",
+    "sha256": "51e309ef9e45e7a4820426f22bdca5dc2aba95395e402a661de0b9dcd3c66c95",
+    "files": [
+      {
+        "path": "docs/teaching/daily/day-39/pet-r2.md",
+        "blob_sha": "f02396a913d5eeca4ca1842ef90841efa3fb2037",
+        "sha256": "51e309ef9e45e7a4820426f22bdca5dc2aba95395e402a661de0b9dcd3c66c95",
+        "full_text_verified": true
+      },
+      {
+        "path": "docs/teaching/daily/day-39/pet-day39-green-r2.patch",
+        "blob_sha": "bb7dd10b56f97ff25f7310fbd88efcfe8fc7d74f",
+        "sha256": "7b883886c5dfe20960e568a7fd40c3b7025fe5a3473cc3a3319d5d5dbf55680c",
+        "full_text_verified": true
+      },
+      {
+        "path": "docs/teaching/daily/day-39/pet-day39-refactor-r2.patch",
+        "blob_sha": "090ffe177881c5fa411bd62552a497d0cefaa502",
+        "sha256": "422ff5ca3117b3a4928a80c4b1bb8a3e46ebbeeadafff282ce73dcc8124354c8",
+        "full_text_verified": true
+      }
+    ],
+    "rules_commit": "0ccd1a252b3e8fc28150242944b36929760b3cd3",
+    "rules_blob": "ba9e6cbd6763d245e60800a02c60888ba6215bd5",
+    "source_sha": "8fc4b277b6f6f77d97655130036fca47813de56e",
+    "readback_at": "2026-10-26T07:42:58.847Z",
+    "full_text_verified": true,
+    "repository": "williechen/copilot_use",
+    "branch": "main",
+    "evidence": "docs/teaching/daily/day-39/pet-r2-readback.json",
+    "refactor_patch": "docs/teaching/daily/day-39/pet-day39-refactor-r2.patch",
+    "functional_patch": "docs/teaching/daily/day-39/pet-day39-green-r2.patch",
+    "revision_scope": "inline detailed Refactor teaching, complete modified units, real caller/module wiring, full tests and assertion migration",
+    "candidate_validation": "docs/teaching/daily/day-39/r2-refactor-validation.json",
+    "refactor_tests_executed": true,
+    "functional_red_executed": false,
+    "functional_green_tests_executed": false,
+    "functional_acceptance": false,
+    "product_modified": false,
+    "main_application": "not applied",
+    "gate2": false,
+    "next_day_before": 40,
+    "next_day_after": 40,
+    "revision_does_not_advance_day": true
+  },
+  "day39_analytics_r2_delivery": {
+    "project": "analytics",
+    "day": 39,
+    "revision": "r2",
+    "article_path": "docs/teaching/daily/day-39/analytics-r2.md",
+    "parent": "a7955715ae7ce982a5a2984973b6ca6d6934daf3",
+    "article_commit": "6e2f6cb90db2fe5d80dc8f463392e32f7da12a85",
+    "blob_sha": "1d7ab7277d0ad56ceaa0b5a6c5e25e14e4c06f99",
+    "sha256": "9945077937fa8b1f4de9330f446bc011a2188b0b3a5fb785f15a8e662e3b23d1",
+    "files": [
+      {
+        "path": "docs/teaching/daily/day-39/analytics-day39-refactor-r2.patch",
+        "blob_sha": "b846496dc7dc854a90cff44778803a9f38a21021",
+        "sha256": "715ae9a6eca8aa5fa88e1103e8499be72f0fdf5db4a8b6a4903e8d535d7ef94a",
+        "full_text_verified": true
+      },
+      {
+        "path": "docs/teaching/daily/day-39/analytics-r2.md",
+        "blob_sha": "1d7ab7277d0ad56ceaa0b5a6c5e25e14e4c06f99",
+        "sha256": "9945077937fa8b1f4de9330f446bc011a2188b0b3a5fb785f15a8e662e3b23d1",
+        "full_text_verified": true
+      }
+    ],
+    "rules_commit": "0ccd1a252b3e8fc28150242944b36929760b3cd3",
+    "rules_blob": "ba9e6cbd6763d245e60800a02c60888ba6215bd5",
+    "source_sha": "8fc4b277b6f6f77d97655130036fca47813de56e",
+    "readback_at": "2026-10-26T07:43:03.160Z",
+    "full_text_verified": true,
+    "repository": "williechen/copilot_use",
+    "branch": "main",
+    "evidence": "docs/teaching/daily/day-39/analytics-r2-readback.json",
+    "refactor_patch": "docs/teaching/daily/day-39/analytics-day39-refactor-r2.patch",
+    "functional_patch": "docs/teaching/daily/day-39/analytics-day39-green-r1.patch",
+    "revision_scope": "inline detailed Refactor teaching, complete modified units, real caller/module wiring, full tests and assertion migration",
+    "candidate_validation": "docs/teaching/daily/day-39/r2-refactor-validation.json",
+    "refactor_tests_executed": true,
+    "functional_red_executed": false,
+    "functional_green_tests_executed": false,
+    "functional_acceptance": false,
+    "product_modified": false,
+    "main_application": "not applied",
+    "gate2": false,
+    "next_day_before": 40,
+    "next_day_after": 40,
+    "revision_does_not_advance_day": true
+  },
+  "day39_r2_delivery": {
+    "date": "2026-10-26",
+    "projects": [
+      {
+        "project": "chat",
+        "day": 39,
+        "revision": "r2",
+        "article_path": "docs/teaching/daily/day-39/chat-r2.md",
+        "parent": "0ccd1a252b3e8fc28150242944b36929760b3cd3",
+        "article_commit": "fbfdce843111b74a0aaa2f8eaacaf5733d12308c",
+        "blob_sha": "3a7b9832ca88c86c3d3b708bda866d340146f25d",
+        "sha256": "ce71697a6ad87a6152a1ee38e3f89fe7dd979c344e275cdfb6de075621d3e9d7",
+        "files": [
+          {
+            "path": "docs/teaching/daily/day-39/chat-r2.md",
+            "blob_sha": "3a7b9832ca88c86c3d3b708bda866d340146f25d",
+            "sha256": "ce71697a6ad87a6152a1ee38e3f89fe7dd979c344e275cdfb6de075621d3e9d7",
+            "full_text_verified": true
+          },
+          {
+            "path": "docs/teaching/daily/day-39/chat-day39-refactor-r2.patch",
+            "blob_sha": "370a2dba5d35fedb477aee769d72d3bf5e9a7a6d",
+            "sha256": "a4f705ddedfa1e4a22e2a513a396c48c32ff7f44c28c45580863d78e40c2da69",
+            "full_text_verified": true
+          },
+          {
+            "path": "docs/teaching/daily/day-39/chat-day39-green-r2.patch",
+            "blob_sha": "c2d739d04385b6b438f19fce1886eb665666b447",
+            "sha256": "2dde792a066f665719d13f54b51fb45e50b205b4ffe663fce058ba38c4fadc30",
+            "full_text_verified": true
+          }
+        ],
+        "rules_commit": "0ccd1a252b3e8fc28150242944b36929760b3cd3",
+        "rules_blob": "ba9e6cbd6763d245e60800a02c60888ba6215bd5",
+        "source_sha": "8fc4b277b6f6f77d97655130036fca47813de56e",
+        "readback_at": "2026-10-26T07:42:53.486Z",
+        "full_text_verified": true,
+        "repository": "williechen/copilot_use",
+        "branch": "main",
+        "evidence": "docs/teaching/daily/day-39/chat-r2-readback.json",
+        "refactor_patch": "docs/teaching/daily/day-39/chat-day39-refactor-r2.patch",
+        "functional_patch": "docs/teaching/daily/day-39/chat-day39-green-r2.patch",
+        "revision_scope": "inline detailed Refactor teaching, complete modified units, real caller/module wiring, full tests and assertion migration",
+        "candidate_validation": "docs/teaching/daily/day-39/r2-refactor-validation.json",
+        "refactor_tests_executed": true,
+        "functional_red_executed": false,
+        "functional_green_tests_executed": false,
+        "functional_acceptance": false,
+        "product_modified": false,
+        "main_application": "not applied",
+        "gate2": false,
+        "next_day_before": 40,
+        "next_day_after": 40,
+        "revision_does_not_advance_day": true
+      },
+      {
+        "project": "pet",
+        "day": 39,
+        "revision": "r2",
+        "article_path": "docs/teaching/daily/day-39/pet-r2.md",
+        "parent": "fbfdce843111b74a0aaa2f8eaacaf5733d12308c",
+        "article_commit": "a7955715ae7ce982a5a2984973b6ca6d6934daf3",
+        "blob_sha": "f02396a913d5eeca4ca1842ef90841efa3fb2037",
+        "sha256": "51e309ef9e45e7a4820426f22bdca5dc2aba95395e402a661de0b9dcd3c66c95",
+        "files": [
+          {
+            "path": "docs/teaching/daily/day-39/pet-r2.md",
+            "blob_sha": "f02396a913d5eeca4ca1842ef90841efa3fb2037",
+            "sha256": "51e309ef9e45e7a4820426f22bdca5dc2aba95395e402a661de0b9dcd3c66c95",
+            "full_text_verified": true
+          },
+          {
+            "path": "docs/teaching/daily/day-39/pet-day39-green-r2.patch",
+            "blob_sha": "bb7dd10b56f97ff25f7310fbd88efcfe8fc7d74f",
+            "sha256": "7b883886c5dfe20960e568a7fd40c3b7025fe5a3473cc3a3319d5d5dbf55680c",
+            "full_text_verified": true
+          },
+          {
+            "path": "docs/teaching/daily/day-39/pet-day39-refactor-r2.patch",
+            "blob_sha": "090ffe177881c5fa411bd62552a497d0cefaa502",
+            "sha256": "422ff5ca3117b3a4928a80c4b1bb8a3e46ebbeeadafff282ce73dcc8124354c8",
+            "full_text_verified": true
+          }
+        ],
+        "rules_commit": "0ccd1a252b3e8fc28150242944b36929760b3cd3",
+        "rules_blob": "ba9e6cbd6763d245e60800a02c60888ba6215bd5",
+        "source_sha": "8fc4b277b6f6f77d97655130036fca47813de56e",
+        "readback_at": "2026-10-26T07:42:58.847Z",
+        "full_text_verified": true,
+        "repository": "williechen/copilot_use",
+        "branch": "main",
+        "evidence": "docs/teaching/daily/day-39/pet-r2-readback.json",
+        "refactor_patch": "docs/teaching/daily/day-39/pet-day39-refactor-r2.patch",
+        "functional_patch": "docs/teaching/daily/day-39/pet-day39-green-r2.patch",
+        "revision_scope": "inline detailed Refactor teaching, complete modified units, real caller/module wiring, full tests and assertion migration",
+        "candidate_validation": "docs/teaching/daily/day-39/r2-refactor-validation.json",
+        "refactor_tests_executed": true,
+        "functional_red_executed": false,
+        "functional_green_tests_executed": false,
+        "functional_acceptance": false,
+        "product_modified": false,
+        "main_application": "not applied",
+        "gate2": false,
+        "next_day_before": 40,
+        "next_day_after": 40,
+        "revision_does_not_advance_day": true
+      },
+      {
+        "project": "analytics",
+        "day": 39,
+        "revision": "r2",
+        "article_path": "docs/teaching/daily/day-39/analytics-r2.md",
+        "parent": "a7955715ae7ce982a5a2984973b6ca6d6934daf3",
+        "article_commit": "6e2f6cb90db2fe5d80dc8f463392e32f7da12a85",
+        "blob_sha": "1d7ab7277d0ad56ceaa0b5a6c5e25e14e4c06f99",
+        "sha256": "9945077937fa8b1f4de9330f446bc011a2188b0b3a5fb785f15a8e662e3b23d1",
+        "files": [
+          {
+            "path": "docs/teaching/daily/day-39/analytics-day39-refactor-r2.patch",
+            "blob_sha": "b846496dc7dc854a90cff44778803a9f38a21021",
+            "sha256": "715ae9a6eca8aa5fa88e1103e8499be72f0fdf5db4a8b6a4903e8d535d7ef94a",
+            "full_text_verified": true
+          },
+          {
+            "path": "docs/teaching/daily/day-39/analytics-r2.md",
+            "blob_sha": "1d7ab7277d0ad56ceaa0b5a6c5e25e14e4c06f99",
+            "sha256": "9945077937fa8b1f4de9330f446bc011a2188b0b3a5fb785f15a8e662e3b23d1",
+            "full_text_verified": true
+          }
+        ],
+        "rules_commit": "0ccd1a252b3e8fc28150242944b36929760b3cd3",
+        "rules_blob": "ba9e6cbd6763d245e60800a02c60888ba6215bd5",
+        "source_sha": "8fc4b277b6f6f77d97655130036fca47813de56e",
+        "readback_at": "2026-10-26T07:43:03.160Z",
+        "full_text_verified": true,
+        "repository": "williechen/copilot_use",
+        "branch": "main",
+        "evidence": "docs/teaching/daily/day-39/analytics-r2-readback.json",
+        "refactor_patch": "docs/teaching/daily/day-39/analytics-day39-refactor-r2.patch",
+        "functional_patch": "docs/teaching/daily/day-39/analytics-day39-green-r1.patch",
+        "revision_scope": "inline detailed Refactor teaching, complete modified units, real caller/module wiring, full tests and assertion migration",
+        "candidate_validation": "docs/teaching/daily/day-39/r2-refactor-validation.json",
+        "refactor_tests_executed": true,
+        "functional_red_executed": false,
+        "functional_green_tests_executed": false,
+        "functional_acceptance": false,
+        "product_modified": false,
+        "main_application": "not applied",
+        "gate2": false,
+        "next_day_before": 40,
+        "next_day_after": 40,
+        "revision_does_not_advance_day": true
+      }
+    ],
+    "evidence": "docs/teaching/daily/day-39/r2-delivery-verification.json",
+    "next_day_unchanged": true,
+    "product_modified": false
+  },
+  "current_refactor_validation": {
+    "source_sha": "8fc4b277b6f6f77d97655130036fca47813de56e",
+    "scope": "isolated source plus Refactor only; no Day39 Green",
+    "counts": {
+      "chat": "Refactor SSR 14項通過；功能Green／GUI／候選CI未驗",
+      "pet": "Refactor Application 8項＋SQLite 4項通過；Tauri／功能Green／GUI未驗",
+      "analytics": "Refactor Server／PG 49項通過、1項ignored；CSV Green／GUI／候選CI未驗"
+    },
+    "record": "docs/teaching/daily/day-39/r2-refactor-validation.json",
+    "product_acceptance": false
+  }
 }

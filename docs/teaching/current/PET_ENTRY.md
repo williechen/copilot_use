@@ -6,10 +6,10 @@
 
 | 專案 | 現行教學 | 下一篇 | 驗證範圍 |
 | --- | --- | --- | --- |
-| Pet | [Day39 r1：控制窗逐 UUID 找回寵物到主螢幕可用區](../daily/day-39/pet-r1.md) | Day40 | 方案已交付；產品未套用／未驗收；Red／Green／CI 未執行 |
+| Pet | [Day39 r2：控制窗逐 UUID 找回寵物到主螢幕可用區](../daily/day-39/pet-r2.md) | Day40 | Refactor Application 8項＋SQLite 4項通過；Tauri／功能Green／GUI未驗 |
 
-產品來源 `8fc4b277b6f6f77d97655130036fca47813de56e`，文章 commit `6e38e3e40c5ad36de62c1e5deadca56066ec2eca`。[Day39 精確讀回／blob／SHA256](../daily/day-39/delivery-verification.json)；**方案已交付／產品未套用／未驗收**。
+產品來源 `8fc4b277b6f6f77d97655130036fca47813de56e`，文章 commit `a7955715ae7ce982a5a2984973b6ca6d6934daf3`。[Day39 精確讀回／blob／SHA256](../daily/day-39/r2-delivery-verification.json)；**方案已交付／產品未套用／未驗收**。
 
-[上一篇 Day38 r4](../daily/day-38/pet-r4.md) · [Day39 初版](../daily/day-39/pet-r1.md) · [歷史與更正](ARTICLE_STATUS.md)。原文、來源與舊驗證保留，未將新方案當成產品驗收。
+[上一篇 Day38 r4](../daily/day-38/pet-r4.md) · [Day39 初版](../daily/day-39/pet-r2.md) · [歷史與更正](ARTICLE_STATUS.md)。原文、來源與舊驗證保留，未將新方案當成產品驗收。
 
-[全專案重構獨立項目](../../../docs/engineering/README.md) · [候選本地驗證](../../../docs/teaching/daily/day-38/r4-local-validation.json)。
+[全專案重構獨立項目](../../../docs/engineering/README.md) · [候選本地驗證](../../../docs/teaching/daily/day-39/r2-refactor-validation.json)。

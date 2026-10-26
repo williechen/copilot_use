@@ -6,9 +6,9 @@
 
 | 專案 | 現行教學 | 下一篇 | 驗證範圍 |
 | --- | --- | --- | --- |
-| Chat | [Day39 r1：首頁與房間側欄首次進入自動載入公開房間](../daily/day-39/chat-r1.md) | Day40 | 方案已交付；產品未套用／未驗收；本篇 Red／Green／CI 未執行 |
-| Pet | [Day39 r1：控制窗逐 UUID 找回寵物到主螢幕可用區](../daily/day-39/pet-r1.md) | Day40 | 方案已交付；產品未套用／未驗收；本篇 Red／Green／CI 未執行 |
-| Analytics | [Day39 r1：管理後台依 Session 匯出指定來源統計 CSV](../daily/day-39/analytics-r1.md) | Day40 | 方案已交付；產品未套用／未驗收；本篇 Red／Green／CI 未執行 |
+| Chat | [Day39 r2：首頁與房間側欄首次進入自動載入公開房間](../daily/day-39/chat-r2.md) | Day40 | Refactor SSR 14項通過；功能Green／GUI／候選CI未驗 |
+| Pet | [Day39 r2：控制窗逐 UUID 找回寵物到主螢幕可用區](../daily/day-39/pet-r2.md) | Day40 | Refactor Application 8項＋SQLite 4項通過；Tauri／功能Green／GUI未驗 |
+| Analytics | [Day39 r2：管理後台依 Session 匯出指定來源統計 CSV](../daily/day-39/analytics-r2.md) | Day40 | Refactor Server／PG 49項通過、1項ignored；CSV Green／GUI／候選CI未驗 |
 
 ## 專案大綱與操作主線
 
@@ -63,6 +63,6 @@
 
 [現行文章入口](../current/PET_ENTRY.md) · [歷史及修訂總表](../current/ARTICLE_STATUS.md)。實作與驗收僅在現況頁集中維護。
 
-[全專案重構獨立項目](../../../docs/engineering/README.md) · [候選本地驗證](../../../docs/teaching/daily/day-38/r4-local-validation.json)。
+[全專案重構獨立項目](../../../docs/engineering/README.md) · [候選本地驗證](../../../docs/teaching/daily/day-39/r2-refactor-validation.json)。
 
-> Day39 三案 Refactor 只計各案；全庫 G-01／G-02 保留在 [工程首頁](../../engineering/README.md)，未重複計功。本篇僅方案交付，未執行產品測試。
+> Day39 三案 Refactor 只計各案；全庫 G-01／G-02 保留在 [工程首頁](../../engineering/README.md)，未重複計功。正文已補完整重構程式與測試；隔離Refactor驗證通過，產品未套用，功能Green與GUI仍待驗。

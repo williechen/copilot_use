@@ -6,9 +6,9 @@
 
 | 專案 | 現行教學 | 下一篇 | 驗證範圍 |
 | --- | --- | --- | --- |
-| Chat | [Day39 r1：首頁與房間側欄首次進入自動載入公開房間](teaching/daily/day-39/chat-r1.md) | Day40 | 方案已交付；產品未套用／未驗收；本篇 Red／Green／CI 未執行 |
-| Pet | [Day39 r1：控制窗逐 UUID 找回寵物到主螢幕可用區](teaching/daily/day-39/pet-r1.md) | Day40 | 方案已交付；產品未套用／未驗收；本篇 Red／Green／CI 未執行 |
-| Analytics | [Day39 r1：管理後台依 Session 匯出指定來源統計 CSV](teaching/daily/day-39/analytics-r1.md) | Day40 | 方案已交付；產品未套用／未驗收；本篇 Red／Green／CI 未執行 |
+| Chat | [Day39 r2：首頁與房間側欄首次進入自動載入公開房間](teaching/daily/day-39/chat-r2.md) | Day40 | Refactor SSR 14項通過；功能Green／GUI／候選CI未驗 |
+| Pet | [Day39 r2：控制窗逐 UUID 找回寵物到主螢幕可用區](teaching/daily/day-39/pet-r2.md) | Day40 | Refactor Application 8項＋SQLite 4項通過；Tauri／功能Green／GUI未驗 |
+| Analytics | [Day39 r2：管理後台依 Session 匯出指定來源統計 CSV](teaching/daily/day-39/analytics-r2.md) | Day40 | Refactor Server／PG 49項通過、1項ignored；CSV Green／GUI／候選CI未驗 |
 
 [Chat首頁](teaching/chat/README.md) · [Pet首頁](teaching/pet/README.md) · [Analytics首頁](teaching/analytics/README.md)
 
@@ -20,6 +20,6 @@
 
 [使用者流程](requirements/USER_FLOWS.md) · [人員驗證](requirements/AUTHENTICATION.md) · [功能待辦](FUTURE_WORK.md) · [架構](SYSTEM_ARCHITECTURE.md) · [來源目錄](SOURCE_LAYOUT.md) · [階段規劃](ROADMAP_P0_P12.md) · [實際網頁排程](teaching/scheduler-instructions-v1.md)
 
-[原文章與驗證總表](teaching/current/ARTICLE_STATUS.md) · [文章更正對照](teaching/current/ARTICLE_CORRECTIONS.md) · [歷史目錄](teaching/history/README.md) · [驗收封存](teaching/archived/README.md) · [三案本修訂讀回](teaching/daily/day-39/delivery-verification.json)。保留各次來源、原文與證據；歷史測試不追認目前驗收。
+[原文章與驗證總表](teaching/current/ARTICLE_STATUS.md) · [文章更正對照](teaching/current/ARTICLE_CORRECTIONS.md) · [歷史目錄](teaching/history/README.md) · [驗收封存](teaching/archived/README.md) · [三案本修訂讀回](teaching/daily/day-39/r2-delivery-verification.json)。保留各次來源、原文與證據；歷史測試不追認目前驗收。
 
-> Day39 三案 Refactor 只計各案；全庫 G-01／G-02 保留在 [工程首頁](engineering/README.md)，未重複計功。本篇僅方案交付，未執行產品測試。
+> Day39 三案 Refactor 只計各案；全庫 G-01／G-02 保留在 [工程首頁](engineering/README.md)，未重複計功。正文已補完整重構程式與測試；隔離Refactor驗證通過，產品未套用，功能Green與GUI仍待驗。

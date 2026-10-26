@@ -6,10 +6,10 @@
 
 | 專案 | 現行教學 | 下一篇 | 驗證範圍 |
 | --- | --- | --- | --- |
-| Chat | [Day39 r1：首頁與房間側欄首次進入自動載入公開房間](../daily/day-39/chat-r1.md) | Day40 | 方案已交付；產品未套用／未驗收；Red／Green／CI 未執行 |
+| Chat | [Day39 r2：首頁與房間側欄首次進入自動載入公開房間](../daily/day-39/chat-r2.md) | Day40 | Refactor SSR 14項通過；功能Green／GUI／候選CI未驗 |
 
-產品來源 `8fc4b277b6f6f77d97655130036fca47813de56e`，文章 commit `b20650a0c15ad1970ac67cf74aa51e6a4cf7c303`。[Day39 精確讀回／blob／SHA256](../daily/day-39/delivery-verification.json)；**方案已交付／產品未套用／未驗收**。
+產品來源 `8fc4b277b6f6f77d97655130036fca47813de56e`，文章 commit `fbfdce843111b74a0aaa2f8eaacaf5733d12308c`。[Day39 精確讀回／blob／SHA256](../daily/day-39/r2-delivery-verification.json)；**方案已交付／產品未套用／未驗收**。
 
 [上一篇 Day38 r4](../daily/day-38/chat-r4.md) · [Day39 初版](../daily/day-39/chat.md) · [歷史與更正](ARTICLE_STATUS.md)。原文、來源與舊驗證保留，未將新方案當成產品驗收。
 
-[全專案重構獨立項目](../../../docs/engineering/README.md) · [候選本地驗證](../../../docs/teaching/daily/day-38/r4-local-validation.json)。
+[全專案重構獨立項目](../../../docs/engineering/README.md) · [候選本地驗證](../../../docs/teaching/daily/day-39/r2-refactor-validation.json)。
