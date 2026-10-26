@@ -1,0 +1,999 @@
+diff --git a/chat_apps/chat_server/src/room_auth.rs b/chat_apps/chat_server/src/room_auth.rs
+--- a/chat_apps/chat_server/src/room_auth.rs
++++ b/chat_apps/chat_server/src/room_auth.rs
+@@ -3,18 +3,60 @@
+     extract::{Request, State},
+     http::StatusCode,
+     middleware::Next,
+-    response::Response,
+-};
+-use sqlx::SqlitePool;
+-
+-/// Keep the existing #[cfg(test)] mod day25_tests unchanged.
+-pub async fn require_member(
+-    State(pool): State<SqlitePool>,
+-    request: Request,
+-    next: Next,
+-) -> Result<Response, StatusCode> {
+-    active_member(&pool, request.headers()).await?;
+-    Ok(next.run(request).await)
++    response::{IntoResponse, Redirect, Response},
++};
++use sqlx::SqlitePool;
++
++/// Keep the existing #[cfg(test)] mod day25_tests unchanged.
++pub async fn require_member(
++    State(pool): State<SqlitePool>,
++    request: Request,
++    next: Next,
++) -> Result<Response, StatusCode> {
++    active_member(&pool, request.headers()).await?;
++    Ok(next.run(request).await)
++}
++
++/// Only browser room navigation redirects; WS and write APIs retain 401.
++pub async fn require_room_member(
++    State(pool): State<SqlitePool>,
++    request: Request,
++    next: Next,
++) -> Result<Response, StatusCode> {
++    match active_member(&pool, request.headers()).await {
++        Ok(_) => Ok(next.run(request).await),
++        Err(StatusCode::UNAUTHORIZED) => {
++            let id = request.uri().path().strip_prefix("/room/")
++                .and_then(|value| uuid::Uuid::parse_str(value).ok())
++                .ok_or(StatusCode::UNAUTHORIZED)?;
++            Ok(Redirect::to(&format!("/signin?next=/room/{id}")).into_response())
++        }
++        Err(error) => Err(error),
++    }
++}
++
++#[cfg(test)]
++mod day41_room_return_tests {
++    use super::*;
++    use axum::{body::Body, http::Request, routing::get, Router};
++    use tower::ServiceExt;
++
++    #[tokio::test]
++    async fn anonymous_room_link_redirects_but_invalid_room_id_is_rejected() {
++        let pool = sqlx::sqlite::SqlitePoolOptions::new()
++            .connect_lazy("sqlite::memory:").unwrap();
++        let app = Router::new()
++            .route("/room/{room_id}", get(|| async { StatusCode::OK }))
++            .route_layer(axum::middleware::from_fn_with_state(pool, require_room_member));
++        let id = uuid::Uuid::new_v4();
++        let response = app.clone().oneshot(Request::get(format!("/room/{id}"))
++            .body(Body::empty()).unwrap()).await.unwrap();
++        assert_eq!(response.status(), StatusCode::SEE_OTHER);
++        assert_eq!(response.headers()["location"], format!("/signin?next=/room/{id}"));
++        let bad = app.oneshot(Request::get("/room/not-a-uuid")
++            .body(Body::empty()).unwrap()).await.unwrap();
++        assert_eq!(bad.status(), StatusCode::UNAUTHORIZED);
++    }
+ }
+ 
+ #[cfg(test)]
+diff --git a/chat_apps/chat_server/src/lib.rs b/chat_apps/chat_server/src/lib.rs
+--- a/chat_apps/chat_server/src/lib.rs
++++ b/chat_apps/chat_server/src/lib.rs
+@@ -46,7 +46,7 @@
+         .route("/room/{room_id}", get(ssr::app_handler))
+         .route_layer(axum::middleware::from_fn_with_state(
+             db.clone(),
+-            room_auth::require_member,
++            room_auth::require_room_member,
+         ));
+ 
+     let guarded_ws = Router::new()
+diff --git a/chat_apps/chat_server/src/signin.rs b/chat_apps/chat_server/src/signin.rs
+--- a/chat_apps/chat_server/src/signin.rs
++++ b/chat_apps/chat_server/src/signin.rs
+@@ -14,285 +14,311 @@
+ struct Credentials {
+     username: String,
+     password: String,
+-}
+-
+-pub fn routes(pool: SqlitePool) -> Router {
+-    Router::new()
+-        .route("/login", get(login_page).post(login))
+-        .route("/account", get(account))
+-        .route("/api/session", get(session_status))
+-        .route("/account/rooms", axum::routing::post(account_create_room))
+-        .layer(DefaultBodyLimit::max(4096))
+-        .with_state(pool)
+-}
+-
+-/// Valid, active SQLite member Session; never expose the bearer token.
+-async fn session_status(
+-    State(pool): State<SqlitePool>,
+-    headers: HeaderMap,
+-) -> Result<impl IntoResponse, StatusCode> {
+-    crate::auth_session::active_member(&pool, &headers).await?;
+-    Ok((
+-        StatusCode::NO_CONTENT,
+-        [(header::CACHE_CONTROL, "no-store")],
+-    ))
+-}
+-
+-async fn login_page() -> Redirect {
+-    Redirect::to("/signin")
+-}
+-
+-async fn login(
+-    State(pool): State<SqlitePool>,
+-    headers: HeaderMap,
+-    Form(input): Form<Credentials>,
+-) -> Result<Response, StatusCode> {
+-    if headers.get(header::ORIGIN).and_then(|v| v.to_str().ok()) != Some("http://127.0.0.1:3000") {
+-        return Err(StatusCode::FORBIDDEN);
+-    }
+-
+-    let name = input.username.trim();
+-    if name.is_empty() || name.len() > 32 || input.password.is_empty() || input.password.len() > 128
+-    {
+-        return Err(StatusCode::UNAUTHORIZED);
+-    }
+-
+-    let found: Option<(String, String, bool)> = sqlx::query_as(
+-        r#"SELECT id
+-                ,user_pd
+-                ,(user_status='active') 
+-            FROM mbr_user 
+-            WHERE lower(user_acnt)=lower(?1)"#,
+-    )
+-    .bind(name)
+-    .fetch_optional(&pool)
+-    .await
+-    .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
+-
+-    let (user_id, hash, active) = found.ok_or(StatusCode::UNAUTHORIZED)?;
+-    if !active {
+-        return Err(StatusCode::UNAUTHORIZED);
+-    }
+-    let password = input.password;
+-    let verified = tokio::task::spawn_blocking(move || {
+-        let parsed = PasswordHash::new(&hash).map_err(|_| ())?;
+-        Argon2::default()
+-            .verify_password(password.as_bytes(), &parsed)
+-            .map(|_| true)
+-            .map_err(|_| ())
+-    })
+-    .await
+-    .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
+-    if verified.is_err() {
+-        return Err(StatusCode::UNAUTHORIZED);
+-    }
+-
+-    // 兩個獨立 UUIDv4 組成不可預測的 session bearer；不直接入庫。
+-    let token = format!(
+-        "{}{}",
+-        uuid::Uuid::new_v4().simple(),
+-        uuid::Uuid::new_v4().simple()
+-    );
+-    let hashed = token_digest(&token);
+-    let id = uuid::Uuid::new_v4().to_string();
+-    sqlx::query(
+-        "INSERT INTO mbr_session (id,mbr_user_id,token_hash,expires_at) VALUES (?1,?2,?3,unixepoch()+86400)"
+-    ).bind(id).bind(user_id).bind(hashed).execute(&pool).await
+-        .map_err(|_|StatusCode::INTERNAL_SERVER_ERROR)?;
+-    let cookie = format!("chat_session={token}; HttpOnly; SameSite=Lax; Path=/; Max-Age=86400");
+-    Ok((
+-        StatusCode::SEE_OTHER,
+-        [
+-            (header::LOCATION, "/account"),
+-            (header::SET_COOKIE, cookie.as_str()),
+-        ],
+-    )
+-        .into_response())
+-}
+-
+-fn account_html(
+-    headers: &HeaderMap,
+-    message: String,
+-    name: String,
+-    room_id: Option<String>,
+-) -> Result<Html<String>, StatusCode> {
+-    Ok(Html(chat_ui::account::render_account(
+-        crate::auth_session::csrf_for_logout(headers)?,
+-        crate::auth_session::csrf_for_create_room(headers)?,
+-        message,
+-        name,
+-        room_id,
+-    )))
+-}
+-
+-async fn account(
+-    State(pool): State<SqlitePool>,
+-    headers: HeaderMap,
+-) -> Result<Html<String>, StatusCode> {
+-    crate::auth_session::active_member(&pool, &headers).await?;
+-    account_html(&headers, String::new(), String::new(), None)
+-}
+-
+-#[derive(Deserialize)]
+-struct AccountRoomForm {
+-    name: String,
+-    csrf: String,
+-}
+-
+-async fn account_create_room(
+-    State(pool): State<SqlitePool>,
+-    headers: HeaderMap,
+-    Form(form): Form<AccountRoomForm>,
+-) -> Result<Response, StatusCode> {
+-    crate::auth_session::active_member(&pool, &headers).await?;
+-    if headers.get(header::ORIGIN).and_then(|h| h.to_str().ok()) != Some("http://127.0.0.1:3000")
+-        || form.csrf != crate::auth_session::csrf_for_create_room(&headers)?
+-    {
+-        return Err(StatusCode::FORBIDDEN);
+-    }
+-
+-    if let Err(message) = chat_application::validate_room_name(&form.name) {
+-        return Ok((
+-            StatusCode::UNPROCESSABLE_ENTITY,
+-            account_html(&headers, message.into(), form.name, None)?,
+-        )
+-            .into_response());
+-    }
+-    let repo = chat_persistence::SqliteRoomRepository::new(pool);
+-    let created = chat_application::create_room(
+-        &repo,
+-        chat_application::CreateRoom {
+-            id: uuid::Uuid::new_v4().to_string(),
+-            category_room_id: "default-category".into(),
+-            name: form.name.clone(),
+-        },
+-    )
+-    .await;
+-    match created {
+-        Ok(room) => Ok((
+-            StatusCode::CREATED,
+-            account_html(
+-                &headers,
+-                "已建立；可進房或回公開清單".into(),
+-                String::new(),
+-                Some(room.id),
+-            )?,
+-        )
+-            .into_response()),
+-        Err(_) => Ok((
+-            StatusCode::SERVICE_UNAVAILABLE,
+-            account_html(
+-                &headers,
+-                "未確認建立成功；請先查清單再決定是否重送".into(),
+-                form.name,
+-                None,
+-            )?,
+-        )
+-            .into_response()),
+-    }
+-}
+-
+-#[cfg(test)]
+-mod day23_tests {
+-    use super::*;
+-    use argon2::PasswordHasher;
+-    use axum::{
+-        body::Body,
+-        http::{Request, StatusCode},
+-    };
+-    use tower::ServiceExt;
+-
+-    #[tokio::test]
+-    async fn day23_password_login_creates_persisted_session_and_guards_account() {
+-        let pool = sqlx::sqlite::SqlitePoolOptions::new()
+-            .max_connections(1)
+-            .connect("sqlite::memory:")
+-            .await
+-            .unwrap();
+-
+-        sqlx::raw_sql(include_str!(
+-            "../../migrations/20261018073931_create_auth_user.sql"
+-        ))
+-        .execute(&pool)
+-        .await
+-        .unwrap();
+-
+-        sqlx::raw_sql(include_str!(
+-            "../../migrations/20261020152737_mbr_sessions.sql"
+-        ))
+-        .execute(&pool)
+-        .await
+-        .unwrap();
+-
+-        let encoded = argon2::Argon2::default()
+-            .hash_password(b"lesson-only-password")
+-            .unwrap()
+-            .to_string();
+-
+-        sqlx::query(
+-            "INSERT INTO mbr_user (id,user_acnt,user_pd,user_email,user_name,user_status,user_sexy,user_birthday,is_init_pd,created_at,updated_at) VALUES ('member-1','learner',?1,'learner@example.test','Learner','active',NULL,NULL,FALSE,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)"
+-        ).bind(encoded).execute(&pool).await.unwrap();
+-
+-        let app = routes(pool.clone());
+-
+-        let denied = app
+-            .clone()
+-            .oneshot(Request::get("/account").body(Body::empty()).unwrap())
+-            .await
+-            .unwrap();
+-        assert_eq!(denied.status(), StatusCode::UNAUTHORIZED);
+-
+-        let bad = app
+-            .clone()
+-            .oneshot(
+-                Request::post("/login")
+-                    .header("origin", "http://127.0.0.1:3000")
+-                    .header("content-type", "application/x-www-form-urlencoded")
+-                    .body(Body::from("username=learner&password=wrong-password"))
+-                    .unwrap(),
+-            )
+-            .await
+-            .unwrap();
+-        assert_eq!(bad.status(), StatusCode::UNAUTHORIZED);
+-
+-        let ok = app
+-            .clone()
+-            .oneshot(
+-                Request::post("/login")
+-                    .header("origin", "http://127.0.0.1:3000")
+-                    .header("content-type", "application/x-www-form-urlencoded")
+-                    .body(Body::from("username=LEARNER&password=lesson-only-password"))
+-                    .unwrap(),
+-            )
+-            .await
+-            .unwrap();
+-        assert_eq!(ok.status(), StatusCode::SEE_OTHER);
+-        assert_eq!(ok.headers()["location"], "/account");
+-
+-        let cookie = ok.headers()[axum::http::header::SET_COOKIE]
+-            .to_str()
+-            .unwrap()
+-            .split(';')
+-            .next()
+-            .unwrap()
+-            .to_owned();
+-
+-        let allowed = app
+-            .oneshot(
+-                Request::get("/account")
+-                    .header(axum::http::header::COOKIE, cookie)
+-                    .body(Body::empty())
+-                    .unwrap(),
+-            )
+-            .await
+-            .unwrap();
+-        assert_eq!(allowed.status(), StatusCode::OK);
+-
+-        let (count,): (i64,) = sqlx::query_as("SELECT count(*) FROM mbr_session")
+-            .fetch_one(&pool)
+-            .await
+-            .unwrap();
+-        assert_eq!(count, 1);
++    #[serde(default)]
++    next: String,
++}
++
++pub fn routes(pool: SqlitePool) -> Router {
++    Router::new()
++        .route("/login", get(login_page).post(login))
++        .route("/account", get(account))
++        .route("/api/session", get(session_status))
++        .route("/account/rooms", axum::routing::post(account_create_room))
++        .layer(DefaultBodyLimit::max(4096))
++        .with_state(pool)
++}
++
++/// Valid, active SQLite member Session; never expose the bearer token.
++async fn session_status(
++    State(pool): State<SqlitePool>,
++    headers: HeaderMap,
++) -> Result<impl IntoResponse, StatusCode> {
++    crate::auth_session::active_member(&pool, &headers).await?;
++    Ok((
++        StatusCode::NO_CONTENT,
++        [(header::CACHE_CONTROL, "no-store")],
++    ))
++}
++
++/// Reject external URLs, fragments, queries and noncanonical room IDs.
++fn safe_room_return(next: &str) -> Option<&str> {
++    let id = next.strip_prefix("/room/")?;
++    let parsed = uuid::Uuid::parse_str(id).ok()?;
++    (parsed.to_string() == id).then_some(next)
++}
++
++async fn login_page() -> Redirect {
++    Redirect::to("/signin")
++}
++
++async fn login(
++    State(pool): State<SqlitePool>,
++    headers: HeaderMap,
++    Form(input): Form<Credentials>,
++) -> Result<Response, StatusCode> {
++    if headers.get(header::ORIGIN).and_then(|v| v.to_str().ok()) != Some("http://127.0.0.1:3000") {
++        return Err(StatusCode::FORBIDDEN);
++    }
++
++    let name = input.username.trim();
++    if name.is_empty() || name.len() > 32 || input.password.is_empty() || input.password.len() > 128
++    {
++        return Err(StatusCode::UNAUTHORIZED);
++    }
++
++    let found: Option<(String, String, bool)> = sqlx::query_as(
++        r#"SELECT id
++                ,user_pd
++                ,(user_status='active') 
++            FROM mbr_user 
++            WHERE lower(user_acnt)=lower(?1)"#,
++    )
++    .bind(name)
++    .fetch_optional(&pool)
++    .await
++    .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
++
++    let (user_id, hash, active) = found.ok_or(StatusCode::UNAUTHORIZED)?;
++    if !active {
++        return Err(StatusCode::UNAUTHORIZED);
++    }
++    let password = input.password;
++    let verified = tokio::task::spawn_blocking(move || {
++        let parsed = PasswordHash::new(&hash).map_err(|_| ())?;
++        Argon2::default()
++            .verify_password(password.as_bytes(), &parsed)
++            .map(|_| true)
++            .map_err(|_| ())
++    })
++    .await
++    .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
++    if verified.is_err() {
++        return Err(StatusCode::UNAUTHORIZED);
++    }
++
++    // 兩個獨立 UUIDv4 組成不可預測的 session bearer；不直接入庫。
++    let token = format!(
++        "{}{}",
++        uuid::Uuid::new_v4().simple(),
++        uuid::Uuid::new_v4().simple()
++    );
++    let hashed = token_digest(&token);
++    let id = uuid::Uuid::new_v4().to_string();
++    sqlx::query(
++        "INSERT INTO mbr_session (id,mbr_user_id,token_hash,expires_at) VALUES (?1,?2,?3,unixepoch()+86400)"
++    ).bind(id).bind(user_id).bind(hashed).execute(&pool).await
++        .map_err(|_|StatusCode::INTERNAL_SERVER_ERROR)?;
++    let cookie = format!("chat_session={token}; HttpOnly; SameSite=Lax; Path=/; Max-Age=86400");
++    let destination = safe_room_return(&input.next).unwrap_or("/account");
++    Ok((
++        StatusCode::SEE_OTHER,
++        [
++            (header::LOCATION, destination),
++            (header::SET_COOKIE, cookie.as_str()),
++        ],
++    )
++        .into_response())
++}
++
++fn account_html(
++    headers: &HeaderMap,
++    message: String,
++    name: String,
++    room_id: Option<String>,
++) -> Result<Html<String>, StatusCode> {
++    Ok(Html(chat_ui::account::render_account(
++        crate::auth_session::csrf_for_logout(headers)?,
++        crate::auth_session::csrf_for_create_room(headers)?,
++        message,
++        name,
++        room_id,
++    )))
++}
++
++async fn account(
++    State(pool): State<SqlitePool>,
++    headers: HeaderMap,
++) -> Result<Html<String>, StatusCode> {
++    crate::auth_session::active_member(&pool, &headers).await?;
++    account_html(&headers, String::new(), String::new(), None)
++}
++
++#[derive(Deserialize)]
++struct AccountRoomForm {
++    name: String,
++    csrf: String,
++}
++
++async fn account_create_room(
++    State(pool): State<SqlitePool>,
++    headers: HeaderMap,
++    Form(form): Form<AccountRoomForm>,
++) -> Result<Response, StatusCode> {
++    crate::auth_session::active_member(&pool, &headers).await?;
++    if headers.get(header::ORIGIN).and_then(|h| h.to_str().ok()) != Some("http://127.0.0.1:3000")
++        || form.csrf != crate::auth_session::csrf_for_create_room(&headers)?
++    {
++        return Err(StatusCode::FORBIDDEN);
++    }
++
++    if let Err(message) = chat_application::validate_room_name(&form.name) {
++        return Ok((
++            StatusCode::UNPROCESSABLE_ENTITY,
++            account_html(&headers, message.into(), form.name, None)?,
++        )
++            .into_response());
++    }
++    let repo = chat_persistence::SqliteRoomRepository::new(pool);
++    let created = chat_application::create_room(
++        &repo,
++        chat_application::CreateRoom {
++            id: uuid::Uuid::new_v4().to_string(),
++            category_room_id: "default-category".into(),
++            name: form.name.clone(),
++        },
++    )
++    .await;
++    match created {
++        Ok(room) => Ok((
++            StatusCode::CREATED,
++            account_html(
++                &headers,
++                "已建立；可進房或回公開清單".into(),
++                String::new(),
++                Some(room.id),
++            )?,
++        )
++            .into_response()),
++        Err(_) => Ok((
++            StatusCode::SERVICE_UNAVAILABLE,
++            account_html(
++                &headers,
++                "未確認建立成功；請先查清單再決定是否重送".into(),
++                form.name,
++                None,
++            )?,
++        )
++            .into_response()),
++    }
++}
++
++#[cfg(test)]
++mod day23_tests {
++    use super::*;
++    use argon2::PasswordHasher;
++    use axum::{
++        body::Body,
++        http::{Request, StatusCode},
++    };
++    use tower::ServiceExt;
++
++    #[tokio::test]
++    async fn day23_password_login_creates_persisted_session_and_guards_account() {
++        let pool = sqlx::sqlite::SqlitePoolOptions::new()
++            .max_connections(1)
++            .connect("sqlite::memory:")
++            .await
++            .unwrap();
++
++        sqlx::raw_sql(include_str!(
++            "../../migrations/20261018073931_create_auth_user.sql"
++        ))
++        .execute(&pool)
++        .await
++        .unwrap();
++
++        sqlx::raw_sql(include_str!(
++            "../../migrations/20261020152737_mbr_sessions.sql"
++        ))
++        .execute(&pool)
++        .await
++        .unwrap();
++
++        let encoded = argon2::Argon2::default()
++            .hash_password(b"lesson-only-password")
++            .unwrap()
++            .to_string();
++
++        sqlx::query(
++            "INSERT INTO mbr_user (id,user_acnt,user_pd,user_email,user_name,user_status,user_sexy,user_birthday,is_init_pd,created_at,updated_at) VALUES ('member-1','learner',?1,'learner@example.test','Learner','active',NULL,NULL,FALSE,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)"
++        ).bind(encoded).execute(&pool).await.unwrap();
++
++        let app = routes(pool.clone());
++
++        let denied = app
++            .clone()
++            .oneshot(Request::get("/account").body(Body::empty()).unwrap())
++            .await
++            .unwrap();
++        assert_eq!(denied.status(), StatusCode::UNAUTHORIZED);
++
++        let bad = app
++            .clone()
++            .oneshot(
++                Request::post("/login")
++                    .header("origin", "http://127.0.0.1:3000")
++                    .header("content-type", "application/x-www-form-urlencoded")
++                    .body(Body::from("username=learner&password=wrong-password"))
++                    .unwrap(),
++            )
++            .await
++            .unwrap();
++        assert_eq!(bad.status(), StatusCode::UNAUTHORIZED);
++
++        let ok = app
++            .clone()
++            .oneshot(
++                Request::post("/login")
++                    .header("origin", "http://127.0.0.1:3000")
++                    .header("content-type", "application/x-www-form-urlencoded")
++                    .body(Body::from("username=LEARNER&password=lesson-only-password"))
++                    .unwrap(),
++            )
++            .await
++            .unwrap();
++        assert_eq!(ok.status(), StatusCode::SEE_OTHER);
++        assert_eq!(ok.headers()["location"], "/account");
++
++        let cookie = ok.headers()[axum::http::header::SET_COOKIE]
++            .to_str()
++            .unwrap()
++            .split(';')
++            .next()
++            .unwrap()
++            .to_owned();
++
++        let allowed = app.clone()
++            .oneshot(
++                Request::get("/account")
++                    .header(axum::http::header::COOKIE, cookie)
++                    .body(Body::empty())
++                    .unwrap(),
++            )
++            .await
++            .unwrap();
++        assert_eq!(allowed.status(), StatusCode::OK);
++
++        let (count,): (i64,) = sqlx::query_as("SELECT count(*) FROM mbr_session")
++            .fetch_one(&pool)
++            .await
++            .unwrap();
++        assert_eq!(count, 1);
++        // The no-next /account, wrong-password, Cookie and persistence assertions remain.
++        let id = uuid::Uuid::new_v4();
++        let next = format!("%2Froom%2F{id}");
++        let return_login = app.clone().oneshot(Request::post("/login")
++            .header("origin", "http://127.0.0.1:3000")
++            .header("content-type", "application/x-www-form-urlencoded")
++            .body(Body::from(format!("username=LEARNER&password=lesson-only-password&next={next}")))
++            .unwrap()).await.unwrap();
++        assert_eq!(return_login.status(), StatusCode::SEE_OTHER);
++        assert_eq!(return_login.headers()["location"], format!("/room/{id}"));
++        let hostile = app.oneshot(Request::post("/login")
++            .header("origin", "http://127.0.0.1:3000")
++            .header("content-type", "application/x-www-form-urlencoded")
++            .body(Body::from("username=LEARNER&password=lesson-only-password&next=https%3A%2F%2Fevil.invalid"))
++            .unwrap()).await.unwrap();
++        assert_eq!(hostile.headers()["location"], "/account");
+     }
+ }
+ 
+diff --git a/chat_apps/chat_ui/src/lib.rs b/chat_apps/chat_ui/src/lib.rs
+--- a/chat_apps/chat_ui/src/lib.rs
++++ b/chat_apps/chat_ui/src/lib.rs
+@@ -17,158 +17,161 @@
+ use leptos::prelude::*;
+ use leptos_router::{
+     components::{Route, Router, Routes},
+-    hooks::use_params_map,
+-    path,
+-};
+-
+-use room_list_state::{filter_rooms, room_list_feedback};
+-
+-#[cfg(any(target_arch = "wasm32", test))]
+-use room_list_state::refresh_result_view;
+-
+-#[cfg(any(target_arch = "wasm32"))]
+-use room_list_state::should_auto_load;
+-
+-use shared::ClientEvent;
+-
+-#[cfg(target_arch = "wasm32")]
+-use shared::ServerEvent;
+-
+-fn room_status_text(status: &str, loaded: bool, total: usize, visible: usize) -> String {
+-    if matches!(status, "查詢中…" | "載入中…") || status.ends_with("，請重試") {
+-        return status.to_owned();
+-    }
+-    room_list_feedback(loaded, total, visible).to_owned()
+-}
+-
+-fn author_label(author: &MessageAuthor) -> String {
+-    match author {
+-        MessageAuthor::AnonymousUser => "You".to_string(),
+-        MessageAuthor::User { user_id } => format!("User {}", user_id),
+-        MessageAuthor::Ai { persona_id } => format!("AI {}", persona_id),
+-        MessageAuthor::System => "System".to_string(),
+-    }
+-}
+-
+-#[cfg(any(target_arch = "wasm32", test))]
+-fn apply_room_search(
+-    previous: Vec<(String, String)>,
+-    submitted: String,
+-    result: Result<Vec<(String, String)>, String>,
+-    set_rows: WriteSignal<Vec<(String, String)>>,
+-    set_has_snapshot: WriteSignal<bool>,
+-    set_status: WriteSignal<String>,
+-    set_loading: WriteSignal<bool>,
+-) {
+-    let succeeded = result.is_ok();
+-    let (next_rows, _retry_query, next_status) = refresh_result_view(previous, submitted, result);
+-    if succeeded {
+-        set_has_snapshot.set(true);
+-    }
+-    set_rows.set(next_rows);
+-    set_status.set(next_status);
+-    set_loading.set(false);
+-}
+-
+-pub fn shell(options: LeptosOptions) -> impl IntoView {
+-    view! {
+-        <!DOCTYPE html>
+-        <html>
+-            <head>
+-                <meta charset="utf-8"/>
+-                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+-                <title>"Rust AI Chat"</title>
+-                <HydrationScripts options />
+-                <style>{include_str!("chat.css")}</style>
+-            </head>
+-            <body>
+-                <App />
+-            </body>
+-        </html>
+-    }
+-}
+-
+-#[cfg(feature = "hydrate")]
+-#[wasm_bindgen::prelude::wasm_bindgen]
+-pub fn hydrate() {
+-    leptos::mount::hydrate_body(App);
+-}
+-
+-#[component]
+-pub fn App() -> impl IntoView {
+-    view! {
+-        <Router>
+-            <main class="app">
+-                <h1>
+-                    <a href="/" rel="external">"Rust AI Chat"</a>
+-                </h1>
+-                <Routes fallback=|| view!{
+-                    <p>"404 - Page Not Found"</p>
+-                }>
+-                    <Route path=path!("/") view=HomePage />
+-                    <Route path=path!("/room/:room_id") view=RoomPage />
+-                    <Route path=path!("/signin") view=SignInPage />
+-                </Routes>
+-            </main>
+-        </Router>
+-    }
+-}
+-
+-#[derive(Clone, Copy, PartialEq, Eq, Debug)]
+-enum SessionEntry {
+-    Checking,
+-    SignedOut,
+-    SignedIn,
+-    Unavailable,
+-}
+-
+-fn session_entry_display(state: SessionEntry) -> (&'static str, &'static str, &'static str) {
+-    match state {
+-        SessionEntry::Checking => ("/signin", "登入", "確認登入狀態中"),
+-        SessionEntry::SignedOut => ("/signin", "登入", ""),
+-        SessionEntry::SignedIn => ("/account", "管理", ""),
+-        SessionEntry::Unavailable => ("/signin", "登入", "無法確認登入狀態；可使用登入入口"),
+-    }
+-}
+-
+-#[component]
+-fn HomePage() -> impl IntoView {
+-    let (entry, set_entry) = signal(SessionEntry::Checking);
+-
+-    #[cfg(target_arch = "wasm32")]
+-    Effect::new(move |_| {
+-        wasm_bindgen_futures::spawn_local(async move {
+-            let next = match room_api::session_status().await {
+-                Ok(true) => SessionEntry::SignedIn,
+-                Ok(false) => SessionEntry::SignedOut,
+-                Err(_) => SessionEntry::Unavailable,
+-            };
+-            set_entry.set(next);
+-        });
+-    });
+-
+-    #[cfg(not(target_arch = "wasm32"))]
+-    let _ = set_entry;
+-
+-    view! {
+-        <p>"Welcome to Rust AI Chat!"</p>
+-        <p>
+-            <a href=move || session_entry_display(entry.get()).0 rel="external">
+-                {move || session_entry_display(entry.get()).1}
+-            </a>
+-            <span role="status">{move || session_entry_display(entry.get()).2}</span>
+-        </p>
+-        <RoomList />
+-    }
+-}
+-
+-// crates/ui/src/lib.rs：完整取代原 SignInPage 函式。
+-#[component]
+-fn SignInPage() -> impl IntoView {
+-    view! {
+-        <section class="sign-in">
+-            <h2>"使用者登入"</h2>
+-            <form method="post" action="/login">
++    hooks::{use_params_map, use_query_map},
++    path,
++};
++
++use room_list_state::{filter_rooms, room_list_feedback};
++
++#[cfg(any(target_arch = "wasm32", test))]
++use room_list_state::refresh_result_view;
++
++#[cfg(any(target_arch = "wasm32"))]
++use room_list_state::should_auto_load;
++
++use shared::ClientEvent;
++
++#[cfg(target_arch = "wasm32")]
++use shared::ServerEvent;
++
++fn room_status_text(status: &str, loaded: bool, total: usize, visible: usize) -> String {
++    if matches!(status, "查詢中…" | "載入中…") || status.ends_with("，請重試") {
++        return status.to_owned();
++    }
++    room_list_feedback(loaded, total, visible).to_owned()
++}
++
++fn author_label(author: &MessageAuthor) -> String {
++    match author {
++        MessageAuthor::AnonymousUser => "You".to_string(),
++        MessageAuthor::User { user_id } => format!("User {}", user_id),
++        MessageAuthor::Ai { persona_id } => format!("AI {}", persona_id),
++        MessageAuthor::System => "System".to_string(),
++    }
++}
++
++#[cfg(any(target_arch = "wasm32", test))]
++fn apply_room_search(
++    previous: Vec<(String, String)>,
++    submitted: String,
++    result: Result<Vec<(String, String)>, String>,
++    set_rows: WriteSignal<Vec<(String, String)>>,
++    set_has_snapshot: WriteSignal<bool>,
++    set_status: WriteSignal<String>,
++    set_loading: WriteSignal<bool>,
++) {
++    let succeeded = result.is_ok();
++    let (next_rows, _retry_query, next_status) = refresh_result_view(previous, submitted, result);
++    if succeeded {
++        set_has_snapshot.set(true);
++    }
++    set_rows.set(next_rows);
++    set_status.set(next_status);
++    set_loading.set(false);
++}
++
++pub fn shell(options: LeptosOptions) -> impl IntoView {
++    view! {
++        <!DOCTYPE html>
++        <html>
++            <head>
++                <meta charset="utf-8"/>
++                <meta name="viewport" content="width=device-width, initial-scale=1"/>
++                <title>"Rust AI Chat"</title>
++                <HydrationScripts options />
++                <style>{include_str!("chat.css")}</style>
++            </head>
++            <body>
++                <App />
++            </body>
++        </html>
++    }
++}
++
++#[cfg(feature = "hydrate")]
++#[wasm_bindgen::prelude::wasm_bindgen]
++pub fn hydrate() {
++    leptos::mount::hydrate_body(App);
++}
++
++#[component]
++pub fn App() -> impl IntoView {
++    view! {
++        <Router>
++            <main class="app">
++                <h1>
++                    <a href="/" rel="external">"Rust AI Chat"</a>
++                </h1>
++                <Routes fallback=|| view!{
++                    <p>"404 - Page Not Found"</p>
++                }>
++                    <Route path=path!("/") view=HomePage />
++                    <Route path=path!("/room/:room_id") view=RoomPage />
++                    <Route path=path!("/signin") view=SignInPage />
++                </Routes>
++            </main>
++        </Router>
++    }
++}
++
++#[derive(Clone, Copy, PartialEq, Eq, Debug)]
++enum SessionEntry {
++    Checking,
++    SignedOut,
++    SignedIn,
++    Unavailable,
++}
++
++fn session_entry_display(state: SessionEntry) -> (&'static str, &'static str, &'static str) {
++    match state {
++        SessionEntry::Checking => ("/signin", "登入", "確認登入狀態中"),
++        SessionEntry::SignedOut => ("/signin", "登入", ""),
++        SessionEntry::SignedIn => ("/account", "管理", ""),
++        SessionEntry::Unavailable => ("/signin", "登入", "無法確認登入狀態；可使用登入入口"),
++    }
++}
++
++#[component]
++fn HomePage() -> impl IntoView {
++    let (entry, set_entry) = signal(SessionEntry::Checking);
++
++    #[cfg(target_arch = "wasm32")]
++    Effect::new(move |_| {
++        wasm_bindgen_futures::spawn_local(async move {
++            let next = match room_api::session_status().await {
++                Ok(true) => SessionEntry::SignedIn,
++                Ok(false) => SessionEntry::SignedOut,
++                Err(_) => SessionEntry::Unavailable,
++            };
++            set_entry.set(next);
++        });
++    });
++
++    #[cfg(not(target_arch = "wasm32"))]
++    let _ = set_entry;
++
++    view! {
++        <p>"Welcome to Rust AI Chat!"</p>
++        <p>
++            <a href=move || session_entry_display(entry.get()).0 rel="external">
++                {move || session_entry_display(entry.get()).1}
++            </a>
++            <span role="status">{move || session_entry_display(entry.get()).2}</span>
++        </p>
++        <RoomList />
++    }
++}
++
++// crates/ui/src/lib.rs：完整取代原 SignInPage 函式。
++#[component]
++fn SignInPage() -> impl IntoView {
++    let query = use_query_map();
++    let next = move || query.read().get("next").unwrap_or_default();
++    view! {
++        <section class="sign-in">
++            <h2>"使用者登入"</h2>
++            <form method="post" action="/login">
++                <input type="hidden" name="next" value=next />
+                 <div>
+                     <label for="login-username">"帳號"</label>
+                     <input
