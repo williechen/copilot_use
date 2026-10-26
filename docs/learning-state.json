@@ -56,9 +56,9 @@
   "fixed_tag": "v0.2.1",
   "fixed_tag_sha": "9bcae7c5d139f75ed08b4daffece602a71fdab34",
   "next_day": {
-    "chat": 41,
-    "pet": 41,
-    "analytics": 41
+    "chat": 42,
+    "pet": 42,
+    "analytics": 42
   },
   "last_full_comparison": "2026-10-16T22:47:14.399027+08:00",
   "next_full_comparison": "2026-10-24T00:00:00+08:00",
@@ -3946,7 +3946,7 @@
     "expected_state_parent_sha": "7a3400259b59cf617d6c3c721bfc10d1014542b0",
     "raw_error": null
   },
-  "latest_chat_publication": "docs/teaching/daily/day-40/delivery-verification.json",
+  "latest_chat_publication": "docs/teaching/daily/day-41/chat.md",
   "duplicate_application_review": {
     "date": "2026-10-25",
     "source_repository": "williechen/rust_ai_ring",
@@ -4176,7 +4176,7 @@
       "scope": "incremental verification only"
     }
   },
-  "latest_pet_publication": "docs/teaching/daily/day-40/delivery-verification.json",
+  "latest_pet_publication": "docs/teaching/daily/day-41/pet.md",
   "day35_analytics_r1_delivery": {
     "repository": "williechen/copilot_use",
     "branch": "main",
@@ -4270,7 +4270,7 @@
       "scope": "local PostgreSQL regression; not full product acceptance or CI"
     }
   },
-  "latest_analytics_publication": "docs/teaching/daily/day-40/delivery-verification.json",
+  "latest_analytics_publication": "docs/teaching/daily/day-41/analytics.md",
   "previous_source_validation_before_e753c36": {
     "source_sha": "f3f8255b0b701a1b57cb8c0a1737c3caa4319f2d",
     "full_execution_sha": "f3f8255b0b701a1b57cb8c0a1737c3caa4319f2d",
@@ -6288,9 +6288,9 @@
     "source_modified": false
   },
   "current_article_paths": {
-    "chat": "docs/teaching/daily/day-40/chat-r2.md",
-    "pet": "docs/teaching/daily/day-40/pet-r2.md",
-    "analytics": "docs/teaching/daily/day-40/analytics-r1.md"
+    "chat": "docs/teaching/daily/day-41/chat.md",
+    "pet": "docs/teaching/daily/day-41/pet.md",
+    "analytics": "docs/teaching/daily/day-41/analytics.md"
   },
   "previous_source_validation_before_day40_r1": {
     "source_sha": "afdbb6e81382e8d82095827a90c52cc3309a3e20",
@@ -6802,5 +6802,71 @@
     "roaming_tested": false,
     "fault_injection_tested": false,
     "full_gate2": false
+  },
+  "day41_delivery": {
+    "date": "2026-10-27",
+    "repository": "williechen/copilot_use",
+    "branch": "main",
+    "source_repository": "williechen/rust_ai_ring",
+    "source_sha": "9c767978b20bd56e1c2182dac2f37e6ae9b7d988",
+    "evidence": "docs/teaching/daily/day-41/delivery-verification.json",
+    "version_correction": "docs/teaching/daily/day-41/version-correction.md",
+    "next_day_before": {
+      "chat": 41,
+      "pet": 41,
+      "analytics": 41
+    },
+    "next_day_after": {
+      "chat": 42,
+      "pet": 42,
+      "analytics": 42
+    },
+    "projects": [
+      {
+        "project": "chat",
+        "article": "docs/teaching/daily/day-41/chat.md",
+        "commit": "a27c17eadb49e2bd15e70c12e208699979af03f6",
+        "readback": true,
+        "static_hunk_check": "passed",
+        "refactor": "proposal_only",
+        "green": "proposal_only",
+        "product_applied": false,
+        "tests_executed": false,
+        "accepted": false
+      },
+      {
+        "project": "pet",
+        "article": "docs/teaching/daily/day-41/pet.md",
+        "commit": "f1e84763868d1ac51ed56ea4bcb4236dd55eac68",
+        "readback": true,
+        "static_hunk_check": "passed",
+        "refactor": "proposal_only",
+        "green": "proposal_only",
+        "product_applied": false,
+        "tests_executed": false,
+        "accepted": false
+      },
+      {
+        "project": "analytics",
+        "article": "docs/teaching/daily/day-41/analytics.md",
+        "commit": "3da431b6ba7ca4c4b67c5b5725b251eb2104b625",
+        "readback": true,
+        "static_hunk_check": "passed",
+        "refactor": "proposal_only",
+        "green": "proposal_only",
+        "product_applied": false,
+        "tests_executed": false,
+        "accepted": false
+      }
+    ],
+    "core_red_green_budget_minutes": {
+      "chat": 15,
+      "pet": 15,
+      "analytics": 15,
+      "total": 45,
+      "actual_runtime_claimed": 0
+    },
+    "global_refactor": "G-01/G-02 unchanged; no double counting",
+    "status": "article_delivery_only"
   }
 }

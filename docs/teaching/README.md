@@ -6,9 +6,11 @@
 
 | 專案 | 現行教學 | 下一篇 | 驗證範圍 |
 | --- | --- | --- | --- |
-| Chat | [Day40 r2：首頁依有效 Session 顯示登入／管理](daily/day-40/chat-r2.md) | Day41 | 本輪Rust59、fmt/check/WASM通過；登入→管理→登出瀏覽器通過 |
-| Pet | [Day40 r2：生活窗直接關閉等同逐隻回籠](daily/day-40/pet-r2.md) | Day41 | Rust72＋Node6通過；原生多窗／關閉／出籠／重啟由使用者操作確認＋DB核對通過 |
-| Analytics | [Day40 r1：CSV 匯出遵循目前精確事件類型篩選](daily/day-40/analytics-r1.md) | Day41 | 本輪真PG53、fmt/check通過；瀏覽器精確篩選／CSV下載通過 |
+| Chat | [Day41：公開房間選擇後登入並返回原房間](daily/day-41/chat.md) | Day42 | Day41 方案已發布／靜態 hunk 通過；未套用、未編譯、未驗收 |
+| Pet | [Day41：控制台逐隻回籠](daily/day-41/pet.md) | Day42 | Day41 方案已發布／靜態 hunk 通過；未套用、未編譯、未驗收 |
+| Analytics | [Day41：管理後台事件類型明細](daily/day-41/analytics.md) | Day42 | Day41 方案已發布／靜態 hunk 通過；未套用、未編譯、未驗收 |
+
+> **Day41 交付**：三篇文章與各自 Refactor／Green patch 已獨立提交、精確全文讀回；僅靜態 preimage 通過，未 git apply／Cargo／Node／PG／GUI／CI。下方既有 Day40 測試與人工 GUI 證據只屬原功能，**不能追認 Day41**。[Day41 SHA256 證據](daily/day-41/delivery-verification.json) · [Rust stable 勘誤](daily/day-41/version-correction.md) · [跨案工程獨立追蹤](../engineering/README.md)。
 
 [Chat首頁](chat/README.md) · [Pet首頁](pet/README.md) · [Analytics首頁](analytics/README.md)
 
