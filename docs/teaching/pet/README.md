@@ -8,7 +8,7 @@
 | --- | --- | --- | --- |
 | Chat | [Day40：首頁依有效 Session 顯示登入／管理](../daily/day-40/chat.md) | Day41 | Day40 方案已交付；Refactor／功能 Green／GUI／候選 CI 未驗 |
 | Pet | [Day40：生活窗直接關閉等同逐隻回籠](../daily/day-40/pet.md) | Day41 | Day40 方案已交付；Refactor／功能 Green／Tauri／GUI 未驗 |
-| Analytics | [Day39 r2：管理後台依 Session 匯出指定來源統計 CSV](../daily/day-39/analytics-r2.md) | Day40 | Refactor Server／PG 49項通過、1項ignored；CSV Green／GUI／候選CI未驗 |
+| Analytics | [Day40：CSV 匯出遵循目前精確事件類型篩選](../daily/day-40/analytics.md) | Day41 | Day40 方案已交付；Refactor／CSV Green／PG／GUI 未驗 |
 
 ## 專案大綱與操作主線
 
