@@ -6,13 +6,13 @@
 
 | 專案 | 現行教學 | 下一篇 | 驗證範圍 |
 | --- | --- | --- | --- |
-| Chat | [Day38 r4：搜尋失敗可見狀態與既有房間連結](teaching/daily/day-38/chat-r4.md) | Day39 | 候選 SSR 14項通過＋WASM check；產品未套用，GUI／候選CI未驗 |
-| Pet | [Day38 r4：逐 UUID 生活窗漫遊任務](teaching/daily/day-38/pet-r4.md) | Day39 | 候選 Application 4項＋Server／SQLite 60項通過；產品未套用，GUI／候選CI未驗 |
-| Analytics | [Day38 r4：上報拒絕重複 Authorization](teaching/daily/day-38/analytics-r4.md) | Day39 | 候選 Router／PG 48項＋另跑ignored 1項通過；產品未套用，GUI／候選CI未驗 |
+| Chat | [Day39 r1：首頁與房間側欄首次進入自動載入公開房間](teaching/daily/day-39/chat-r1.md) | Day40 | 方案已交付；產品未套用／未驗收；本篇 Red／Green／CI 未執行 |
+| Pet | [Day39：控制窗逐 UUID 找回寵物到主螢幕可用區](teaching/daily/day-39/pet.md) | Day40 | 方案已交付；產品未套用／未驗收；本篇 Red／Green／CI 未執行 |
+| Analytics | [Day39 r1：管理後台依 Session 匯出指定來源統計 CSV](teaching/daily/day-39/analytics-r1.md) | Day40 | 方案已交付；產品未套用／未驗收；本篇 Red／Green／CI 未執行 |
 
 [Chat首頁](teaching/chat/README.md) · [Pet首頁](teaching/pet/README.md) · [Analytics首頁](teaching/analytics/README.md)
 
-目前產品來源 `9b89656`；既有七個workflow全success，[CI快照](teaching/daily/day-38/r2-product-ci-observation.json)。這些既有結果不驗證尚未套用的候選patch。[當日版本與原始證據](teaching/daily/day-38/r2-versions.json)。
+本篇來源 `8fc4b277b6f6f77d97655130036fca47813de56e`；前次來源 `9b89656` 的既有七個workflow全success，[CI快照](teaching/daily/day-38/r2-product-ci-observation.json)。這些既有結果不驗證尚未套用的候選patch。[當日版本與原始證據](teaching/daily/day-38/r2-versions.json)。
 
 [全專案重構獨立項目](../docs/engineering/README.md)：跨案契約、共用crates、跨workspace與全庫CI；不計入各案Refactor完成量。
 
@@ -20,4 +20,6 @@
 
 [使用者流程](requirements/USER_FLOWS.md) · [人員驗證](requirements/AUTHENTICATION.md) · [功能待辦](FUTURE_WORK.md) · [架構](SYSTEM_ARCHITECTURE.md) · [來源目錄](SOURCE_LAYOUT.md) · [階段規劃](ROADMAP_P0_P12.md) · [實際網頁排程](teaching/scheduler-instructions-v1.md)
 
-[原文章與驗證總表](teaching/current/ARTICLE_STATUS.md) · [文章更正對照](teaching/current/ARTICLE_CORRECTIONS.md) · [歷史目錄](teaching/history/README.md) · [驗收封存](teaching/archived/README.md) · [三案本修訂讀回](teaching/daily/day-38/r4-delivery-verification.json)。保留各次來源、原文與證據；歷史測試不追認目前驗收。
+[原文章與驗證總表](teaching/current/ARTICLE_STATUS.md) · [文章更正對照](teaching/current/ARTICLE_CORRECTIONS.md) · [歷史目錄](teaching/history/README.md) · [驗收封存](teaching/archived/README.md) · [三案本修訂讀回](teaching/daily/day-39/delivery-verification.json)。保留各次來源、原文與證據；歷史測試不追認目前驗收。
+
+> Day39 三案 Refactor 只計各案；全庫 G-01／G-02 保留在 [工程首頁](engineering/README.md)，未重複計功。本篇僅方案交付，未執行產品測試。

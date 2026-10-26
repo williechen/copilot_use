@@ -6,7 +6,9 @@
 
 | 專案 | 現行教學 | 下一篇 | 驗證範圍 |
 | --- | --- | --- | --- |
-| Analytics | [Day38 r4：上報拒絕重複 Authorization](../daily/day-38/analytics-r4.md) | Day39 | 候選 Router／PG 48項＋另跑ignored 1項通過；產品未套用，GUI／候選CI未驗 |
+| Chat | [Day39 r1：首頁與房間側欄首次進入自動載入公開房間](../daily/day-39/chat-r1.md) | Day40 | 方案已交付；產品未套用／未驗收；本篇 Red／Green／CI 未執行 |
+| Pet | [Day39：控制窗逐 UUID 找回寵物到主螢幕可用區](../daily/day-39/pet.md) | Day40 | 方案已交付；產品未套用／未驗收；本篇 Red／Green／CI 未執行 |
+| Analytics | [Day39 r1：管理後台依 Session 匯出指定來源統計 CSV](../daily/day-39/analytics-r1.md) | Day40 | 方案已交付；產品未套用／未驗收；本篇 Red／Green／CI 未執行 |
 
 ## 專案大綱與操作主線
 
@@ -70,3 +72,5 @@ Analytics 定位為純管理後台，Leptos 提供後台畫面；除登入及必
 [現行文章入口](../current/ANALYTICS_ENTRY.md) · [歷史及修訂總表](../current/ARTICLE_STATUS.md)。實作與驗收僅在現況頁集中維護。
 
 [全專案重構獨立項目](../../../docs/engineering/README.md) · [候選本地驗證](../../../docs/teaching/daily/day-38/r4-local-validation.json)。
+
+> Day39 三案 Refactor 只計各案；全庫 G-01／G-02 保留在 [工程首頁](../../engineering/README.md)，未重複計功。本篇僅方案交付，未執行產品測試。
