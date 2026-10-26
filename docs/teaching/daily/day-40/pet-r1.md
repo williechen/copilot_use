@@ -1,10 +1,12 @@
 # Pet Day40 r1｜直接關閉生活窗等同逐隻回籠
 
-> 2026-10-26修訂。最新產品SHA `ff14ca6224f7c5a65c799bf4a82a743fa79c880c`；原教學與patch基底 `bb259aaf76542554a3a704d9c4f4a3a219d65cbf`。本r1更正套用問題並保存實際本地命令，原[Day40文章](pet.md)與patch原bytes保留。Day41、FIFO與last_full_comparison不變。
+> 2026-10-26修訂。最新產品SHA `b0e06b73f5ab37b899c00b2ba08fd4da780e0dbf`；原教學與patch基底 `bb259aaf76542554a3a704d9c4f4a3a219d65cbf`。本r1更正套用問題並保存實際本地命令，原[Day40文章](pet.md)與patch原bytes保留。Day41、FIFO與last_full_comparison不變。
+
+> 發布前刷新：最新來源 `b0e06b73f5ab37b899c00b2ba08fd4da780e0dbf`。Pet已在此SHA重新跑原生check及69項Rust測試；Chat／Analytics／crates tree與前輪`ff14ca6`一致，沿用該SHA的實測且不冒稱重跑。[完整補正](local-validation/source-refresh.json)。
 
 ## 最新核對與閱讀方式
 
-**最新程式只有部分套用：原生生活窗 CloseRequested 分支缺失，不能宣稱按X已回籠。** Runtime清理與label helper已見；三個舊測試在最新碼被刪除。
+**最終來源b0e06b7已補上原生CloseRequested，原生編譯與69項測試通過；三個舊測試仍缺，真GUI尚未驗收。** 下文ff14ca6缺接線診斷保留作歷史，不描述為最終來源仍缺。
 
 下面①／Refactor／②保留「從bb259aa重現原始缺口」的完整TDD教學；它們描述教學前狀態，不表示最新來源仍全部未實作。當次Red未重新執行，預期Red不能冒充實際失敗證據。實測結果與當前未完成項集中於④。[Day39後續勘誤](../day-39/pet-r3.md)及[歷史更正總表](historical-corrections.md)保留各SHA範圍。
 
@@ -155,9 +157,9 @@ node --test pet_ui/tests/*.test.mjs
 Native GUI：同時出籠 A/B/C，按 A 的 X → SQLite A=true，B/C=false、B/C 仍活動；重啟 A 不恢復、B/C 恢復；回籠 IPC 與 X 均不可雙重觸發；SQLite 唯讀／鎖定失敗時 A 窗保留且錯誤可追；控制窗 X 只 hide，重開聚焦既有控制窗。多次快速 X 與程式退出的競態需額外驗證。未跑 GUI 不得宣稱此切片驗收。回復順序：先 Green 逆套，再 Refactor 逆套，避免半套 native lifecycle。
 
 
-### 最新程式缺口與可審閱修復附件
+### 初輪ff14ca6缺口與可審閱修復附件（b0e06b7已補native接線）
 
-最新 `ff14ca6` 的 `application` 仍只在生活窗 `Destroyed` 清Runtime，沒有生活窗 `CloseRequested` 的prevent_close／DB先寫入；因此helper測試通過也不能證明按X回籠。原始Pet patch在bb基底確實包含完整native分支且實際可套用；最新碼與候選不是同一份結果。
+初輪 `ff14ca6` 的 `application` 仍只在生活窗 `Destroyed` 清Runtime，沒有生活窗 `CloseRequested` 的prevent_close／DB先寫入；因此helper測試通過也不能證明按X回籠。原始Pet patch在bb基底確實包含完整native分支且實際可套用；最新碼與候選不是同一份結果。
 
 此外，最新碼移除了 `day24_more_than_two_pet_states_are_independent_and_caging_is_local`、`day24_window_labels_are_derived_from_each_uuid_not_a_two_window_limit`、`day39_find_position_respects_primary_work_area_and_negative_origins`，沒有測試遷移證據。不能用降低測試數換全綠，r1保留此缺口。
 
@@ -215,6 +217,26 @@ Rust／Cargo實測1.99.1，WASM target已安裝；PostgreSQL實測18.6，GTK／W
 
 每條命令的精確cwd、時間、環境覆寫與完整原始錯誤見[JSONL](local-validation/commands.jsonl)；[兩組範圍及結果](local-validation/README.md)。Cargo使用--offline --locked，沒有改lock或升級依賴。
 
-最新來源的X持久化缺口、三個舊斷言移除均未在產品修復。補接附件仍需使用者套用；真多窗、SQLite失敗、destroy失敗、重啟與快速X競態尚未執行GUI。
+初輪ff14ca6的X接線缺口已由後續b0e06b7補上；三個舊斷言仍未在產品恢復。補接附件仍需使用者套用；真多窗、SQLite失敗、destroy失敗、重啟與快速X競態尚未執行GUI。
 
 GitHub文件提交與原始程式套用分開；本輪僅更新產品checkout至遠端SHA，驗證皆在隔離worktree，沒有提交／推送產品程式。原始文章與patch保留，靜態hunk檢查不追認為當時編譯成功。
+
+### b0e06b7最終補正與恢復測試附件
+
+原生CloseRequested目前已接上prevent_close→lifecycle mutex→persist_then_close→destroy；故障／真多窗GUI仍未驗。[只恢復三個舊測試的最新基底patch](pet-day40-restore-tests-b0e06b7.patch)已標準check／apply、fmt exit0、server60通過。不要將初輪ff14補接整包重套b0。
+
+- `cargo fmt --all -- --check`；exit 0；[原始log](local-validation/day40-logs/refresh-pet-fmt.log)。
+
+- `cargo check --offline --locked -p pet-server`；exit 0；[原始log](local-validation/day40-logs/refresh-pet-check.log)。
+
+- `cargo test --offline --locked -p pet-server`；exit 0；[原始log](local-validation/day40-logs/refresh-pet-test.log)。
+
+- `cargo test --offline --locked -p pet-application`；exit 0；[原始log](local-validation/day40-logs/refresh-pet-application.log)。
+
+- `cargo test --offline --locked -p pet-persistence`；exit 0；[原始log](local-validation/day40-logs/refresh-pet-sqlite.log)。
+
+- `cargo fmt --all -- --check`；exit 1；[原始log](local-validation/day40-logs/refresh-restored-pet-final-fmt.log)。
+
+- `cargo test --offline --locked -p pet-server`；exit 0；[原始log](local-validation/day40-logs/refresh-restored-pet-final-test.log)。
+
+恢復附件首次fmt仍因多一空白行exit1；已修訂最終patch後在乾淨b0重新check／apply、fmt exit0、server60通過。原失敗與初版patch保留於[格式更正](local-validation/restoration-format.json)，不是把第一次失敗改成成功。
