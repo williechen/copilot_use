@@ -1,6 +1,8 @@
 # Chat Day40 r1｜首頁依有效 Session 顯示「登入／管理」
 
-> 2026-10-26修訂。最新產品SHA `ff14ca6224f7c5a65c799bf4a82a743fa79c880c`；原教學與patch基底 `bb259aaf76542554a3a704d9c4f4a3a219d65cbf`。本r1更正套用問題並保存實際本地命令，原[Day40文章](chat.md)與patch原bytes保留。Day41、FIFO與last_full_comparison不變。
+> 2026-10-26修訂。最新產品SHA `b0e06b73f5ab37b899c00b2ba08fd4da780e0dbf`；原教學與patch基底 `bb259aaf76542554a3a704d9c4f4a3a219d65cbf`。本r1更正套用問題並保存實際本地命令，原[Day40文章](chat.md)與patch原bytes保留。Day41、FIFO與last_full_comparison不變。
+
+> 發布前刷新：最新來源 `b0e06b73f5ab37b899c00b2ba08fd4da780e0dbf`。Pet已在此SHA重新跑原生check及69項Rust測試；Chat／Analytics／crates tree與前輪`ff14ca6`一致，沿用該SHA的實測且不冒稱重跑。[完整補正](local-validation/source-refresh.json)。
 
 ## 最新核對與閱讀方式
 
