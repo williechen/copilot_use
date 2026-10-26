@@ -7,7 +7,7 @@
 | 專案 | 現行教學 | 下一篇 | 驗證範圍 |
 | --- | --- | --- | --- |
 | Chat | [Day40 r1：首頁依有效 Session 顯示登入／管理](../daily/day-40/chat-r1.md) | Day41 | 最新碼/account回歸，測試失敗；修復候選另驗；GUI／CI未驗 |
-| Pet | [Day40 r1：生活窗直接關閉等同逐隻回籠](../daily/day-40/pet-r1.md) | Day41 | 最新碼缺X回籠及3項舊測試；候選／原生／WASM另驗；GUI未驗 |
+| Pet | [Day40 r1：生活窗直接關閉等同逐隻回籠](../daily/day-40/pet-r1.md) | Day41 | 新版已補X接線，69項通過；3舊測試恢復候選另驗，GUI未驗 |
 | Analytics | [Day40 r1：CSV 匯出遵循目前精確事件類型篩選](../daily/day-40/analytics-r1.md) | Day41 | 真PG／Router、check通過；候選fmt失敗，最新fmt通過；GUI／CI未驗 |
 
 ## 專案大綱與操作主線

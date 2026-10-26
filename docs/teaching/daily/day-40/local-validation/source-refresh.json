@@ -1,0 +1,290 @@
+{
+  "previous_sha": "ff14ca6224f7c5a65c799bf4a82a743fa79c880c",
+  "source_sha": "b0e06b73f5ab37b899c00b2ba08fd4da780e0dbf",
+  "delta": [
+    "pet_apps/pet_server/src/lib.rs"
+  ],
+  "scope": "reran Pet fmt/check/server/Application/SQLite on newly updated source; Chat/Analytics file bytes unchanged from previous tested SHA; no new GUI",
+  "unresolved": [
+    "Chat /account route regression",
+    "three removed Pet tests",
+    "GUI and CI not executed"
+  ],
+  "results": {
+    "refresh-source-update": {
+      "exit_code": 0,
+      "test_results": [],
+      "log": "day40-logs/refresh-source-update.log"
+    },
+    "refresh-source-clone": {
+      "exit_code": 0,
+      "test_results": [],
+      "log": "day40-logs/refresh-source-clone.log"
+    },
+    "refresh-pet-fmt": {
+      "exit_code": 0,
+      "test_results": [],
+      "log": "day40-logs/refresh-pet-fmt.log"
+    },
+    "refresh-pet-check": {
+      "exit_code": 0,
+      "test_results": [],
+      "log": "day40-logs/refresh-pet-check.log"
+    },
+    "refresh-pet-test": {
+      "exit_code": 0,
+      "test_results": [
+        {
+          "passed": 36,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 5,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 5,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 4,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 4,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        }
+      ],
+      "log": "day40-logs/refresh-pet-test.log"
+    },
+    "refresh-pet-application": {
+      "exit_code": 0,
+      "test_results": [
+        {
+          "passed": 8,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        }
+      ],
+      "log": "day40-logs/refresh-pet-application.log"
+    },
+    "refresh-pet-sqlite": {
+      "exit_code": 0,
+      "test_results": [
+        {
+          "passed": 4,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        }
+      ],
+      "log": "day40-logs/refresh-pet-sqlite.log"
+    },
+    "refresh-restore-check": {
+      "exit_code": 0,
+      "test_results": [],
+      "log": "day40-logs/refresh-restore-check.log"
+    },
+    "refresh-restore-apply": {
+      "exit_code": 0,
+      "test_results": [],
+      "log": "day40-logs/refresh-restore-apply.log"
+    },
+    "refresh-restored-pet-fmt": {
+      "exit_code": 1,
+      "test_results": [],
+      "log": "day40-logs/refresh-restored-pet-fmt.log"
+    },
+    "refresh-restored-pet-test": {
+      "exit_code": 0,
+      "test_results": [
+        {
+          "passed": 39,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 5,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 5,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 4,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 4,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        }
+      ],
+      "log": "day40-logs/refresh-restored-pet-test.log"
+    },
+    "refresh-restored-pet-format": {
+      "exit_code": 0,
+      "test_results": [],
+      "log": "day40-logs/refresh-restored-pet-format.log"
+    },
+    "refresh-restored-pet-final-fmt": {
+      "exit_code": 0,
+      "test_results": [],
+      "log": "day40-logs/refresh-restored-pet-final-fmt.log"
+    },
+    "refresh-final-check-worktree": {
+      "exit_code": 0,
+      "test_results": [],
+      "log": "day40-logs/refresh-final-check-worktree.log"
+    },
+    "refresh-final-patch-check": {
+      "exit_code": 0,
+      "test_results": [],
+      "log": "day40-logs/refresh-final-patch-check.log"
+    },
+    "refresh-final-patch-apply": {
+      "exit_code": 0,
+      "test_results": [],
+      "log": "day40-logs/refresh-final-patch-apply.log"
+    },
+    "refresh-restored-pet-final-test": {
+      "exit_code": 0,
+      "test_results": [
+        {
+          "passed": 39,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 5,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 5,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 4,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 4,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        }
+      ],
+      "log": "day40-logs/refresh-restored-pet-final-test.log"
+    }
+  },
+  "unchanged_compilation_inputs": {
+    "chat_apps": {
+      "previous_tree": "dea4e06a480655da23b78164a40ed765bd7f20f4",
+      "current_tree": "dea4e06a480655da23b78164a40ed765bd7f20f4"
+    },
+    "analytics_apps": {
+      "previous_tree": "a10bd7faf1da6e0b9e1b0d0487dc2cb67ffc5697",
+      "current_tree": "a10bd7faf1da6e0b9e1b0d0487dc2cb67ffc5697"
+    },
+    "crates": {
+      "previous_tree": "49979ad5d41af34bfb208e09cc2b8f38adb37093",
+      "current_tree": "49979ad5d41af34bfb208e09cc2b8f38adb37093"
+    }
+  },
+  "restoration_format_correction": "restoration-format.json"
+}

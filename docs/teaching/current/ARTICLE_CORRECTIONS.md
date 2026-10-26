@@ -1,6 +1,6 @@
 # 問題文章與後續更正索引
 
-> Day40最新增量更正：Chat/account回歸、Pet缺nativeX及3項舊斷言、原始patch EOF問題已實測記錄。[現行狀態](STATUS.md)與[Day39／40歷史更正](../daily/day-40/historical-corrections.md)為本次入口；下列舊SHA診斷不當成最新全部未套用或已驗收。
+> Day40最新增量更正：Chat/account回歸、Pet初輪缺nativeX已於b0補上，但3項舊斷言仍缺、原始patch EOF問題已實測記錄。[現行狀態](STATUS.md)與[Day39／40歷史更正](../daily/day-40/historical-corrections.md)為本次入口；下列舊SHA診斷不當成最新全部未套用或已驗收。
 
 2026-10-25 更新；程式精確來源 `5c713553daee4055738239f047d6c774fcc7a7a1`，文件比對基準 `532e739f1ef4e5920de300eba0f90adeeaf96187`。涵蓋三案 Day2–36 的 **105個目前閱讀版本、111份版本**。三案 Day1 原文缺失，未補造；全部原文 blob／SHA256 核對無不符。原教學正文與原交付證據保留。
 

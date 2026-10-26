@@ -1031,3 +1031,193 @@ df -h /home /var/tmp /tmp
 ```
 
 exit 0；[原始log](day40-logs/final-disk.log)。
+
+## refresh-source-update
+
+cwd：`/home/willie/Documents/rust_ai_ring`
+
+```bash
+git merge --ff-only origin/main
+```
+
+exit **0**；[log](day40-logs/refresh-source-update.log)。
+
+## refresh-source-clone
+
+cwd：`/home/willie/Documents/Codex/2026-10-26/referenced-chatgpt-conversation-this-is-an`
+
+```bash
+git clone --no-hardlinks /home/willie/Documents/rust_ai_ring /var/tmp/codex-day40-refresh-source
+```
+
+exit **0**；[log](day40-logs/refresh-source-clone.log)。
+
+## refresh-pet-fmt
+
+cwd：`/var/tmp/codex-day40-refresh-source/pet_apps`
+
+```bash
+cargo fmt --all -- --check
+```
+
+exit **0**；[log](day40-logs/refresh-pet-fmt.log)。
+
+## refresh-pet-check
+
+cwd：`/var/tmp/codex-day40-refresh-source/pet_apps`
+
+```bash
+cargo check --offline --locked -p pet-server
+```
+
+exit **0**；[log](day40-logs/refresh-pet-check.log)。
+
+## refresh-pet-test
+
+cwd：`/var/tmp/codex-day40-refresh-source/pet_apps`
+
+```bash
+cargo test --offline --locked -p pet-server
+```
+
+exit **0**；[log](day40-logs/refresh-pet-test.log)。
+
+## refresh-pet-application
+
+cwd：`/var/tmp/codex-day40-refresh-source/pet_apps`
+
+```bash
+cargo test --offline --locked -p pet-application
+```
+
+exit **0**；[log](day40-logs/refresh-pet-application.log)。
+
+## refresh-pet-sqlite
+
+cwd：`/var/tmp/codex-day40-refresh-source/pet_apps`
+
+```bash
+cargo test --offline --locked -p pet-persistence
+```
+
+exit **0**；[log](day40-logs/refresh-pet-sqlite.log)。
+
+## refresh-restore-check
+
+cwd：`/var/tmp/codex-day40-refresh-source`
+
+```bash
+git apply --check /home/willie/Documents/copilot_use/docs/teaching/daily/day-40/pet-day40-restore-tests-b0e06b7.patch
+```
+
+exit **0**；[log](day40-logs/refresh-restore-check.log)。
+
+## refresh-restore-apply
+
+cwd：`/var/tmp/codex-day40-refresh-source`
+
+```bash
+git apply /home/willie/Documents/copilot_use/docs/teaching/daily/day-40/pet-day40-restore-tests-b0e06b7.patch
+```
+
+exit **0**；[log](day40-logs/refresh-restore-apply.log)。
+
+## refresh-restored-pet-fmt
+
+cwd：`/var/tmp/codex-day40-refresh-source/pet_apps`
+
+```bash
+cargo fmt --all -- --check
+```
+
+exit **1**；[log](day40-logs/refresh-restored-pet-fmt.log)。
+
+## refresh-restored-pet-test
+
+cwd：`/var/tmp/codex-day40-refresh-source/pet_apps`
+
+```bash
+cargo test --offline --locked -p pet-server
+```
+
+exit **0**；[log](day40-logs/refresh-restored-pet-test.log)。
+
+## refresh-restored-pet-format
+
+cwd：`/var/tmp/codex-day40-refresh-source/pet_apps`
+
+```bash
+cargo fmt --all
+```
+
+exit **0**；[原始log](day40-logs/refresh-restored-pet-format.log)。
+
+## refresh-restored-pet-final-fmt
+
+cwd：`/var/tmp/codex-day40-refresh-source/pet_apps`
+
+```bash
+cargo fmt --all -- --check
+```
+
+exit **0**；[原始log](day40-logs/refresh-restored-pet-final-fmt.log)。
+
+## refresh-final-check-worktree
+
+cwd：`/var/tmp/codex-day40-refresh-source`
+
+```bash
+git worktree add --detach /var/tmp/codex-day40-final-check HEAD
+```
+
+exit **0**；[原始log](day40-logs/refresh-final-check-worktree.log)。
+
+## refresh-final-patch-check
+
+cwd：`/var/tmp/codex-day40-final-check`
+
+```bash
+git apply --check /home/willie/Documents/copilot_use/docs/teaching/daily/day-40/pet-day40-restore-tests-b0e06b7.patch
+```
+
+exit **0**；[原始log](day40-logs/refresh-final-patch-check.log)。
+
+## refresh-final-patch-apply
+
+cwd：`/var/tmp/codex-day40-final-check`
+
+```bash
+git apply /home/willie/Documents/copilot_use/docs/teaching/daily/day-40/pet-day40-restore-tests-b0e06b7.patch
+```
+
+exit **0**；[原始log](day40-logs/refresh-final-patch-apply.log)。
+
+## refresh-restored-pet-final-test
+
+cwd：`/var/tmp/codex-day40-refresh-source/pet_apps`
+
+```bash
+cargo test --offline --locked -p pet-server
+```
+
+exit **0**；[原始log](day40-logs/refresh-restored-pet-final-test.log)。
+
+## refresh-cleanup
+
+cwd：`/home/willie/Documents/Codex/2026-10-26/referenced-chatgpt-conversation-this-is-an`
+
+```bash
+python3 -c "import shutil; paths=['/var/tmp/codex-day40-refresh-target','/var/tmp/codex-day40-refresh-source','/var/tmp/codex-day40-final-check']; [(shutil.rmtree(p),print('Removed',p)) for p in paths]"
+```
+
+exit 0；[log](day40-logs/refresh-cleanup.log)。
+
+## refresh-final-disk
+
+cwd：`/home/willie/Documents/Codex/2026-10-26/referenced-chatgpt-conversation-this-is-an`
+
+```bash
+df -h /home /var/tmp /tmp
+```
+
+exit 0；[log](day40-logs/refresh-final-disk.log)。

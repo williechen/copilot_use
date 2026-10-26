@@ -1,0 +1,8 @@
+{
+  "initial_patch_sha256": "b93bbba510469adffcc8e114b4af8ee870bf973fdeb6d6558ec7eda9fbf68d28",
+  "final_patch_sha256": "85c0061d5270f1860525c5fd0921dbd60d33a7b53cc1410871ea010bbbd32383",
+  "initial_fmt_exit_code": 1,
+  "final_fmt_exit_code": 0,
+  "scope": "removed one extra blank line before restored tests; final patch checked/applied on clean b0, bytes equal the tested formatted worktree",
+  "preserved_initial_patch": "pet-restore-before-fmt.patch"
+}

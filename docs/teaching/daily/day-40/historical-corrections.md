@@ -12,3 +12,7 @@
 | 測試通過即產品完整驗收 | fmt／check／test／真SQLite／PG、GUI及CI分列，失敗與未跑項不隱藏 | [本次驗證](local-validation/README.md) |
 
 先前本地r3的「未commit／push」及JSON表示其原驗證時點；本次才依使用者要求將歷史更正一併提交GitHub。三案next_day維持41，FIFO及last_full_comparison不變，全專案G-01／G-02不因本次驗證結案。
+
+## 發布前補正：b0e06b7
+
+ff14ca6後又出現b0e06b7，僅補Pet原生CloseRequested；因此初輪「未接」保留歷史，不能當最終狀態。Pet新SHA重跑69項通過，3項舊測試仍缺；恢復候選fmt及server60通過。Chat／Analytics／crates Git tree不變，舊失敗及PG結果仍屬ff14，不冒稱新SHA重跑。[刷新證據](local-validation/source-refresh.json)。

@@ -1,6 +1,6 @@
 {
   "date": "2026-10-26",
-  "source_sha": "ff14ca6224f7c5a65c799bf4a82a743fa79c880c",
+  "source_sha": "b0e06b73f5ab37b899c00b2ba08fd4da780e0dbf",
   "document_base_sha": "715b19794c898b06f72307feefca996c32ca6d0b",
   "articles": [
     {
@@ -8,10 +8,10 @@
       "day": 40,
       "revision": "r1",
       "article_path": "docs/teaching/daily/day-40/chat-r1.md",
-      "source_sha": "ff14ca6224f7c5a65c799bf4a82a743fa79c880c",
+      "source_sha": "b0e06b73f5ab37b899c00b2ba08fd4da780e0dbf",
       "teaching_base_sha": "bb259aaf76542554a3a704d9c4f4a3a219d65cbf",
-      "sha256": "2230a9f5989614c456846347199c8d77e9b042323a65e4c5ecbe46a527094cdc",
-      "article_commit": "5536c269ac9f26c04d999efe7313488992046d65",
+      "sha256": "30ba7447dd758a016e26441fd7868e20531eb474821a0f4d6914881d5060d948",
+      "article_commit": "fcf8a5aa6038ce15842850cbb1dda8a0c4711f78",
       "publication_status": "committed-for-publication",
       "functional_acceptance": false,
       "gate2": false,
@@ -52,18 +52,20 @@
       },
       "next_day_before": 41,
       "next_day_after": 41,
-      "blob_sha": "14f2f3830027e94b3790aee911d36b2d29ca92e9",
-      "local_exact_commit_readback": true
+      "blob_sha": "bdabcfabe8d6074c04a0c13739e3b9c23120bfb8",
+      "local_exact_commit_readback": true,
+      "runtime_validation_source_sha": "ff14ca6224f7c5a65c799bf4a82a743fa79c880c",
+      "source_refresh": "docs/teaching/daily/day-40/local-validation/source-refresh.json"
     },
     {
       "project": "pet",
       "day": 40,
       "revision": "r1",
       "article_path": "docs/teaching/daily/day-40/pet-r1.md",
-      "source_sha": "ff14ca6224f7c5a65c799bf4a82a743fa79c880c",
+      "source_sha": "b0e06b73f5ab37b899c00b2ba08fd4da780e0dbf",
       "teaching_base_sha": "bb259aaf76542554a3a704d9c4f4a3a219d65cbf",
-      "sha256": "ec83badd0657763bbb700ebb12797f583608467f78b88513a5e9f1ecc11e28eb",
-      "article_commit": "221aaeeb9dbb9946b30df4acbba4e7eae7d3a5dd",
+      "sha256": "11629151c7e6aecb9f4684cda14a289457c8ad908c1760c68b4477980c5927bf",
+      "article_commit": "baae8cb134501c2d806bee4221f64ed0827a80b4",
       "publication_status": "committed-for-publication",
       "functional_acceptance": false,
       "gate2": false,
@@ -108,18 +110,20 @@
       },
       "next_day_before": 41,
       "next_day_after": 41,
-      "blob_sha": "b20cdbc93bfef15e9c42bd2f78480a2bac4d4884",
-      "local_exact_commit_readback": true
+      "blob_sha": "52eea115324306d64c5c234525ef1a7984dfbf09",
+      "local_exact_commit_readback": true,
+      "runtime_validation_source_sha": "b0e06b73f5ab37b899c00b2ba08fd4da780e0dbf",
+      "source_refresh": "docs/teaching/daily/day-40/local-validation/source-refresh.json"
     },
     {
       "project": "analytics",
       "day": 40,
       "revision": "r1",
       "article_path": "docs/teaching/daily/day-40/analytics-r1.md",
-      "source_sha": "ff14ca6224f7c5a65c799bf4a82a743fa79c880c",
+      "source_sha": "b0e06b73f5ab37b899c00b2ba08fd4da780e0dbf",
       "teaching_base_sha": "bb259aaf76542554a3a704d9c4f4a3a219d65cbf",
-      "sha256": "4e84d8476c74c1753beb9e4321db7a9ffa33509e5784231b8a152319676416e4",
-      "article_commit": "a0ee02f99819b97191015e2da034ef9f03f67e98",
+      "sha256": "8dcf9af473bf2df85cef52740630645d7627d40d106937f96202ffae5a583ff1",
+      "article_commit": "6872a20a7045dce92dfedfc247e5a41f4ee32226",
       "publication_status": "committed-for-publication",
       "functional_acceptance": false,
       "gate2": false,
@@ -152,8 +156,10 @@
       "followup_result": null,
       "next_day_before": 41,
       "next_day_after": 41,
-      "blob_sha": "ee45d9ef58b41d9daa7df706059f7d43fdb6a052",
-      "local_exact_commit_readback": true
+      "blob_sha": "1c0f9500f61df15d55adf27496ce0e3925260aea",
+      "local_exact_commit_readback": true,
+      "runtime_validation_source_sha": "ff14ca6224f7c5a65c799bf4a82a743fa79c880c",
+      "source_refresh": "docs/teaching/daily/day-40/local-validation/source-refresh.json"
     }
   ],
   "scope": "Day40 local validation and versioned Day39/40 historical corrections; not weekly full comparison",
