@@ -1,0 +1,59 @@
+diff --git a/chat_apps/chat_ui/src/lib.rs b/chat_apps/chat_ui/src/lib.rs
+--- a/chat_apps/chat_ui/src/lib.rs
++++ b/chat_apps/chat_ui/src/lib.rs
+@@ -15,7 +15,9 @@
+     path,
+ };
+ 
++use room_list_state::{filter_rooms, room_list_feedback};
++#[cfg(target_arch = "wasm32")]
++use room_list_state::should_auto_load;
+-use room_list_state::{filter_rooms, room_list_feedback};
+ 
+ #[cfg(any(target_arch = "wasm32", test))]
+ use room_list_state::refresh_result_view;
+@@ -334,6 +334,15 @@
+         }
+     };
+ 
++    // Hydration only: one initial public-room fetch per mounted RoomList.
++    // All signal reads inside the effect are untracked; search/refresh remains manual.
++    #[cfg(target_arch = "wasm32")]
++    Effect::new(move |_| {
++        if should_auto_load(has_snapshot.get_untracked(), loading.get_untracked()) {
++            query_room();
++        }
++    });
++
+     view! {
+         <section>
+             <h2>"房間列表"</h2>
+diff --git a/chat_apps/chat_ui/src/room_list_state.rs b/chat_apps/chat_ui/src/room_list_state.rs
+--- a/chat_apps/chat_ui/src/room_list_state.rs
++++ b/chat_apps/chat_ui/src/room_list_state.rs
+@@ -37,11 +37,25 @@
+     }
+ }
+ 
++/// Only a not-yet-loaded, idle room list may start the first request.
++#[cfg(any(target_arch = "wasm32", test))]
++pub(super) fn should_auto_load(has_snapshot: bool, loading: bool) -> bool {
++    !has_snapshot && !loading
++}
++
+ #[cfg(test)]
+ mod tests {
+     use super::*;
+ 
+     #[test]
++    fn day39_initial_load_is_once_and_does_not_interrupt_pending_request() {
++        assert!(should_auto_load(false, false));
++        assert!(!should_auto_load(false, true));
++        assert!(!should_auto_load(true, false));
++        assert!(!should_auto_load(true, true));
++    }
++
++    #[test]
+     fn filter_preserves_ids_and_handles_all_original_queries() {
+         let rooms = vec![
+             ("room_1".into(), "Rust 技術交流".into()),
