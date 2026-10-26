@@ -2945,7 +2945,7 @@
       "teaching_base_sha": "bb259aaf76542554a3a704d9c4f4a3a219d65cbf",
       "sha256": "30ba7447dd758a016e26441fd7868e20531eb474821a0f4d6914881d5060d948",
       "article_commit": "fcf8a5aa6038ce15842850cbb1dda8a0c4711f78",
-      "publication_status": "committed-for-publication",
+      "publication_status": "published-remote-readback-verified",
       "functional_acceptance": false,
       "gate2": false,
       "red_executed": false,
@@ -2988,7 +2988,9 @@
       "blob_sha": "bdabcfabe8d6074c04a0c13739e3b9c23120bfb8",
       "local_exact_commit_readback": true,
       "runtime_validation_source_sha": "ff14ca6224f7c5a65c799bf4a82a743fa79c880c",
-      "source_refresh": "docs/teaching/daily/day-40/local-validation/source-refresh.json"
+      "source_refresh": "docs/teaching/daily/day-40/local-validation/source-refresh.json",
+      "remote_exact_commit_readback": true,
+      "remote_verification_commit": "c65e5d422d31867f0c8beef5baf8915c39d987a8"
     },
     {
       "project": "pet",
@@ -2999,7 +3001,7 @@
       "teaching_base_sha": "bb259aaf76542554a3a704d9c4f4a3a219d65cbf",
       "sha256": "11629151c7e6aecb9f4684cda14a289457c8ad908c1760c68b4477980c5927bf",
       "article_commit": "baae8cb134501c2d806bee4221f64ed0827a80b4",
-      "publication_status": "committed-for-publication",
+      "publication_status": "published-remote-readback-verified",
       "functional_acceptance": false,
       "gate2": false,
       "red_executed": false,
@@ -3046,7 +3048,9 @@
       "blob_sha": "52eea115324306d64c5c234525ef1a7984dfbf09",
       "local_exact_commit_readback": true,
       "runtime_validation_source_sha": "b0e06b73f5ab37b899c00b2ba08fd4da780e0dbf",
-      "source_refresh": "docs/teaching/daily/day-40/local-validation/source-refresh.json"
+      "source_refresh": "docs/teaching/daily/day-40/local-validation/source-refresh.json",
+      "remote_exact_commit_readback": true,
+      "remote_verification_commit": "c65e5d422d31867f0c8beef5baf8915c39d987a8"
     },
     {
       "project": "analytics",
@@ -3057,7 +3061,7 @@
       "teaching_base_sha": "bb259aaf76542554a3a704d9c4f4a3a219d65cbf",
       "sha256": "8dcf9af473bf2df85cef52740630645d7627d40d106937f96202ffae5a583ff1",
       "article_commit": "6872a20a7045dce92dfedfc247e5a41f4ee32226",
-      "publication_status": "committed-for-publication",
+      "publication_status": "published-remote-readback-verified",
       "functional_acceptance": false,
       "gate2": false,
       "red_executed": false,
@@ -3092,7 +3096,51 @@
       "blob_sha": "1c0f9500f61df15d55adf27496ce0e3925260aea",
       "local_exact_commit_readback": true,
       "runtime_validation_source_sha": "ff14ca6224f7c5a65c799bf4a82a743fa79c880c",
-      "source_refresh": "docs/teaching/daily/day-40/local-validation/source-refresh.json"
+      "source_refresh": "docs/teaching/daily/day-40/local-validation/source-refresh.json",
+      "remote_exact_commit_readback": true,
+      "remote_verification_commit": "c65e5d422d31867f0c8beef5baf8915c39d987a8"
+    },
+    {
+      "project": "chat",
+      "day": 39,
+      "revision": "r3",
+      "article_path": "docs/teaching/daily/day-39/chat-r3.md",
+      "source_sha": "bb259aaf76542554a3a704d9c4f4a3a219d65cbf",
+      "article_commit": "3c75fdb03829e26c07ac1129178cadcc2e9d63a9",
+      "blob_sha": "6f3813e4da676ac603c51262eb4ad3fbc9483a08",
+      "sha256": "d36e2d0135c533ed7ddfe2c89219125ed6c5e60eba283fd4a759785e62f924a1",
+      "publication_status": "published-remote-readback-verified",
+      "remote_verification_commit": "c65e5d422d31867f0c8beef5baf8915c39d987a8",
+      "functional_acceptance": false,
+      "scope": "historical correction; not a new day"
+    },
+    {
+      "project": "pet",
+      "day": 39,
+      "revision": "r3",
+      "article_path": "docs/teaching/daily/day-39/pet-r3.md",
+      "source_sha": "bb259aaf76542554a3a704d9c4f4a3a219d65cbf",
+      "article_commit": "269ae6f2e8f6024b071982bba44f4a1a4326eba0",
+      "blob_sha": "39b0bf8232a33d3f99be390aeb5e48c8c4c73f6b",
+      "sha256": "c15ee69c6c594a3e943710188a6cb1629b5cc0d8a9cf616610f298a0295b88f8",
+      "publication_status": "published-remote-readback-verified",
+      "remote_verification_commit": "c65e5d422d31867f0c8beef5baf8915c39d987a8",
+      "functional_acceptance": false,
+      "scope": "historical correction; not a new day"
+    },
+    {
+      "project": "analytics",
+      "day": 39,
+      "revision": "r3",
+      "article_path": "docs/teaching/daily/day-39/analytics-r3.md",
+      "source_sha": "bb259aaf76542554a3a704d9c4f4a3a219d65cbf",
+      "article_commit": "12cb773df2e1484a5b482a31c730f948d072154e",
+      "blob_sha": "0d9df3cd7da6565ad86f726c53e43873bc43ad34",
+      "sha256": "5547c9cd52a99f965e0f1647ace0590e8750f367dbeb34965c71ad00773132e1",
+      "publication_status": "published-remote-readback-verified",
+      "remote_verification_commit": "c65e5d422d31867f0c8beef5baf8915c39d987a8",
+      "functional_acceptance": false,
+      "scope": "historical correction; not a new day"
     }
   ],
   "day15_frozen": true,
@@ -5179,7 +5227,7 @@
         "teaching_base_sha": "bb259aaf76542554a3a704d9c4f4a3a219d65cbf",
         "sha256": "30ba7447dd758a016e26441fd7868e20531eb474821a0f4d6914881d5060d948",
         "article_commit": "fcf8a5aa6038ce15842850cbb1dda8a0c4711f78",
-        "publication_status": "committed-for-publication",
+        "publication_status": "published-remote-readback-verified",
         "functional_acceptance": false,
         "gate2": false,
         "red_executed": false,
@@ -5222,7 +5270,9 @@
         "blob_sha": "bdabcfabe8d6074c04a0c13739e3b9c23120bfb8",
         "local_exact_commit_readback": true,
         "runtime_validation_source_sha": "ff14ca6224f7c5a65c799bf4a82a743fa79c880c",
-        "source_refresh": "docs/teaching/daily/day-40/local-validation/source-refresh.json"
+        "source_refresh": "docs/teaching/daily/day-40/local-validation/source-refresh.json",
+        "remote_exact_commit_readback": true,
+        "remote_verification_commit": "c65e5d422d31867f0c8beef5baf8915c39d987a8"
       },
       {
         "project": "pet",
@@ -5233,7 +5283,7 @@
         "teaching_base_sha": "bb259aaf76542554a3a704d9c4f4a3a219d65cbf",
         "sha256": "11629151c7e6aecb9f4684cda14a289457c8ad908c1760c68b4477980c5927bf",
         "article_commit": "baae8cb134501c2d806bee4221f64ed0827a80b4",
-        "publication_status": "committed-for-publication",
+        "publication_status": "published-remote-readback-verified",
         "functional_acceptance": false,
         "gate2": false,
         "red_executed": false,
@@ -5280,7 +5330,9 @@
         "blob_sha": "52eea115324306d64c5c234525ef1a7984dfbf09",
         "local_exact_commit_readback": true,
         "runtime_validation_source_sha": "b0e06b73f5ab37b899c00b2ba08fd4da780e0dbf",
-        "source_refresh": "docs/teaching/daily/day-40/local-validation/source-refresh.json"
+        "source_refresh": "docs/teaching/daily/day-40/local-validation/source-refresh.json",
+        "remote_exact_commit_readback": true,
+        "remote_verification_commit": "c65e5d422d31867f0c8beef5baf8915c39d987a8"
       },
       {
         "project": "analytics",
@@ -5291,7 +5343,7 @@
         "teaching_base_sha": "bb259aaf76542554a3a704d9c4f4a3a219d65cbf",
         "sha256": "8dcf9af473bf2df85cef52740630645d7627d40d106937f96202ffae5a583ff1",
         "article_commit": "6872a20a7045dce92dfedfc247e5a41f4ee32226",
-        "publication_status": "committed-for-publication",
+        "publication_status": "published-remote-readback-verified",
         "functional_acceptance": false,
         "gate2": false,
         "red_executed": false,
@@ -5326,7 +5378,9 @@
         "blob_sha": "1c0f9500f61df15d55adf27496ce0e3925260aea",
         "local_exact_commit_readback": true,
         "runtime_validation_source_sha": "ff14ca6224f7c5a65c799bf4a82a743fa79c880c",
-        "source_refresh": "docs/teaching/daily/day-40/local-validation/source-refresh.json"
+        "source_refresh": "docs/teaching/daily/day-40/local-validation/source-refresh.json",
+        "remote_exact_commit_readback": true,
+        "remote_verification_commit": "c65e5d422d31867f0c8beef5baf8915c39d987a8"
       }
     ],
     "scope": "Day40 local validation and versioned Day39/40 historical corrections; not weekly full comparison",
@@ -5565,5 +5619,11 @@
         "current_tree": "49979ad5d41af34bfb208e09cc2b8f38adb37093"
       }
     }
+  },
+  "day40_remote_verification": {
+    "commit": "c65e5d422d31867f0c8beef5baf8915c39d987a8",
+    "record": "docs/teaching/daily/day-40/r1-remote-readback.json",
+    "full_remote_article_readbacks": 6,
+    "full_text_equal": true
   }
 }

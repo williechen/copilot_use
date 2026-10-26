@@ -30,5 +30,7 @@
       "local_exact_commit_readback": true
     }
   ],
-  "functional_acceptance": false
+  "functional_acceptance": false,
+  "remote_exact_commit_readback": true,
+  "remote_verification_commit": "c65e5d422d31867f0c8beef5baf8915c39d987a8"
 }

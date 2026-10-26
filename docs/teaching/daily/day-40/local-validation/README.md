@@ -28,3 +28,5 @@ followup：只在最新SHA額外隔離worktree套Chat補回/account、Pet補nati
 本輪專用測試庫、約3.5GB編譯快取與全部隔離來源副本已清除，命令與exit code列於ledger末尾；[最終磁碟空間](day40-logs/final-disk.log)。原始產品／文件repo及備份保留。
 
 恢復舊斷言附件首次fmt仍失敗，修訂後最終patch重新套用、fmt與60項server測試通過：[原始失敗及最終patch hashes](restoration-format.json)。第二輪快取與來源副本亦已清除，[最終空間](day40-logs/refresh-final-disk.log)。
+
+三篇Day40 r1與三篇Day39 r3已於GitHub精確commit全文讀回並比對bytes／blob／SHA256：[遠端讀回證據](../r1-remote-readback.json)。文件發布成功不改變上述產品失敗與未驗項目。
