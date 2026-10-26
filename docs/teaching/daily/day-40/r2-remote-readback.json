@@ -1,0 +1,34 @@
+{
+  "source_sha": "9c767978b20bd56e1c2182dac2f37e6ae9b7d988",
+  "verified_commit": "378581232f6e14e6458136747a0c7c9fa1932ab5",
+  "repository": "williechen/copilot_use",
+  "method": "GitHub exact-commit full text readback; local byte comparison",
+  "files": [
+    {
+      "project": "chat",
+      "path": "docs/teaching/daily/day-40/chat-r2.md",
+      "commit": "480c40f3f690fcc699e5970c90980f5fbc6953ae",
+      "blob_sha": "a2f7add804b4dc82d6c95c42baefb9e2843548ad",
+      "sha256": "c256b616801af13f2ae1f3241ab5d0c289afe9c06b164ecbf542aee8cac2b171",
+      "remote_commit": "378581232f6e14e6458136747a0c7c9fa1932ab5",
+      "full_bytes_equal": true
+    },
+    {
+      "project": "pet",
+      "path": "docs/teaching/daily/day-40/pet-r2.md",
+      "commit": "93e5364d033040a58ade328ede7be40baa540a4e",
+      "blob_sha": "52034155b652347adf56f43cc74cd02c6373c7ec",
+      "sha256": "e959173410a3b7062cbc1325dfc0394416886125dc321b12dc8fe3ef3c7a34fc",
+      "remote_commit": "378581232f6e14e6458136747a0c7c9fa1932ab5",
+      "full_bytes_equal": true
+    },
+    {
+      "path": "docs/teaching/current/STATUS.md",
+      "blob_sha": "0005e4d354c0b425acf3072b18a023417144db28",
+      "remote_commit": "378581232f6e14e6458136747a0c7c9fa1932ab5",
+      "sha256": "e0343d8d5c8ad90b22cfefd4e9da90e37aff2403b6caba951c00a7acba05693e",
+      "full_bytes_equal": true
+    }
+  ],
+  "new_cargo_tests_executed": false
+}
