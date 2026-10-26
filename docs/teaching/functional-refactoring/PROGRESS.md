@@ -5,7 +5,7 @@
 | 專案 | 詳細正文與實際變更 | 本次隔離Refactor驗證 | 產品套用／驗收 | 下一步 |
 | --- | --- | --- | --- | --- |
 | [Chat](../daily/day-40/chat.md#refactor) | Day39 SSR 契約保留；Day40 登入 token_digest 統一使用 shared::auth，完整 caller 見 Day40 | Day39 SSR 14項屬舊來源證據；Day40 尚未執行 Cargo | 未套用／GUI未驗 | Session 與房間權限 caller 責任 |
-| [Pet](../daily/day-39/pet-r2.md#refactor) | persist_then_close完整用例、真cage caller、四個新增測試；保留Runtime／mutex邊界 | Application 8項、真SQLite 4項通過；Tauri server與真窗未驗 | 未套用／未驗收 | 直接關窗、caged持久化與Runtime |
+| [Pet](../daily/day-40/pet.md#refactor) | Day39 persist_then_close 保留；Day40 Runtime.remove 統一逐 UUID 漫遊停止、真 Destroyed/cage caller | Day39 舊來源 Application 8項／SQLite 4項；Day40 未跑 Cargo／native | 未套用／未驗收 | 直接關窗套用與故障補償驗收、逐 UUID Runtime |
 | [Analytics](../daily/day-39/analytics-r2.md#refactor) | 完整來源SQL移Persistence、正式import、相容re-export、真PG測試 | Server／Persistence 49項通過、1項ignored；原SQL除空白外相同 | 未套用／GUI未驗 | Session／角色／查詢caller與fixture |
 
 來源為精確8fc；本次只套三案Refactor，沒有套Day39功能Green。[命令、原始log與已測檔案hash](../daily/day-39/r2-refactor-validation.json)。三案與各自Green前後兩種順序皆git apply檢查通過；原Chat Refactor與Chat／Pet Green換行不符的失敗及修正紀錄均保留。功能Green、WASM、Pet原生GUI、Analytics CSV與候選GitHub Actions不由上述結果追認通過。

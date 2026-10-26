@@ -7,7 +7,7 @@
 | 專案 | 現行教學 | 下一篇 | 驗證範圍 |
 | --- | --- | --- | --- |
 | Chat | [Day40：首頁依有效 Session 顯示登入／管理](day-40/chat.md) | Day41 | Day40 方案已交付；Refactor／功能 Green／GUI／候選 CI 未驗 |
-| Pet | [Day39 r2：控制窗逐 UUID 找回寵物到主螢幕可用區](day-39/pet-r2.md) | Day40 | Refactor Application 8項＋SQLite 4項通過；Tauri／功能Green／GUI未驗 |
+| Pet | [Day40：生活窗直接關閉等同逐隻回籠](day-40/pet.md) | Day41 | Day40 方案已交付；Refactor／功能 Green／Tauri／GUI 未驗 |
 | Analytics | [Day39 r2：管理後台依 Session 匯出指定來源統計 CSV](day-39/analytics-r2.md) | Day40 | Refactor Server／PG 49項通過、1項ignored；CSV Green／GUI／候選CI未驗 |
 
 [Chat首頁](../chat/README.md) · [Pet首頁](../pet/README.md) · [Analytics首頁](../analytics/README.md)
