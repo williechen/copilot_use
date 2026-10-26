@@ -6,9 +6,9 @@
 
 | 專案 | 現行教學 | 下一篇 | 驗證範圍 |
 | --- | --- | --- | --- |
-| Chat | [Day40：首頁依有效 Session 顯示登入／管理](../daily/day-40/chat.md) | Day41 | Day40 方案已交付；Refactor／功能 Green／GUI／候選 CI 未驗 |
-| Pet | [Day40：生活窗直接關閉等同逐隻回籠](../daily/day-40/pet.md) | Day41 | Day40 方案已交付；Refactor／功能 Green／Tauri／GUI 未驗 |
-| Analytics | [Day40：CSV 匯出遵循目前精確事件類型篩選](../daily/day-40/analytics.md) | Day41 | Day40 方案已交付；Refactor／CSV Green／PG／GUI 未驗 |
+| Chat | [Day40 r1：首頁依有效 Session 顯示登入／管理](../daily/day-40/chat-r1.md) | Day41 | 最新碼/account回歸，測試失敗；修復候選另驗；GUI／CI未驗 |
+| Pet | [Day40 r1：生活窗直接關閉等同逐隻回籠](../daily/day-40/pet-r1.md) | Day41 | 最新碼缺X回籠及3項舊測試；候選／原生／WASM另驗；GUI未驗 |
+| Analytics | [Day40 r1：CSV 匯出遵循目前精確事件類型篩選](../daily/day-40/analytics-r1.md) | Day41 | 真PG／Router、check通過；候選fmt失敗，最新fmt通過；GUI／CI未驗 |
 
 ## 專案大綱與操作主線
 
@@ -61,6 +61,6 @@
 
 [全專案重構獨立項目](../../../docs/engineering/README.md) · [候選本地驗證](../../../docs/teaching/daily/day-39/r2-refactor-validation.json)。
 
-> Day39 三案 Refactor 只計各案；全庫 G-01／G-02 保留在 [工程首頁](../../engineering/README.md)，未重複計功。正文已補完整重構程式與測試；隔離Refactor驗證通過，產品未套用，功能Green與GUI仍待驗。
+> Day39前輪完整本地驗證與歷史勘誤已補入[對照](../daily/day-40/historical-corrections.md)；限其原SHA，不追認Day40。
 
-> Day40 三案文章、各案獨立 Refactor 與 Green patch 已發布並精確讀回；只做來源 hunk 靜態核對，尚未實際套用、編譯、測試或產品驗收。[Day40 交付證據](../daily/day-40/delivery-verification.json)。
+> Day40 r1保存[實際套用、Cargo、SQLite／PG與原始錯誤](../daily/day-40/local-validation/README.md)。產品功能、修復候選、GUI與CI分列；next_day維持41。

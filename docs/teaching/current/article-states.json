@@ -7906,5 +7906,169 @@
     "action": "reconcile 111 immutable article versions; separate static, current Node/CI and prior same-SHA runtime evidence"
   },
   "new_runtime_test_scope": "Node source contracts only; metadata/schema probes; no new Rust/PG/HTTP/GUI run",
-  "comparison_report": "docs/source-review/2026-10-25-full-comparison-5c713553.md"
+  "comparison_report": "docs/source-review/2026-10-25-full-comparison-5c713553.md",
+  "latest_incremental_review": {
+    "date": "2026-10-26",
+    "source_sha": "ff14ca6224f7c5a65c799bf4a82a743fa79c880c",
+    "document_base_sha": "715b19794c898b06f72307feefca996c32ca6d0b",
+    "articles": [
+      {
+        "project": "chat",
+        "day": 40,
+        "revision": "r1",
+        "article_path": "docs/teaching/daily/day-40/chat-r1.md",
+        "source_sha": "ff14ca6224f7c5a65c799bf4a82a743fa79c880c",
+        "teaching_base_sha": "bb259aaf76542554a3a704d9c4f4a3a219d65cbf",
+        "sha256": "2230a9f5989614c456846347199c8d77e9b042323a65e4c5ecbe46a527094cdc",
+        "article_commit": "5536c269ac9f26c04d999efe7313488992046d65",
+        "publication_status": "committed-for-publication",
+        "functional_acceptance": false,
+        "gate2": false,
+        "red_executed": false,
+        "validation": "docs/teaching/daily/day-40/local-validation/README.md",
+        "latest_result": {
+          "passed": 57,
+          "failed": 2,
+          "ignored_in_default_suite": 0,
+          "commands": [
+            "latest-chat-complete"
+          ],
+          "fmt_exit_code": 0,
+          "check_exit_code": 0,
+          "wasm_exit_code": 0
+        },
+        "candidate_result": {
+          "passed": 59,
+          "failed": 0,
+          "ignored_in_default_suite": 0,
+          "commands": [
+            "candidate-chat-test"
+          ],
+          "fmt_exit_code": 1,
+          "check_exit_code": 0,
+          "wasm_exit_code": 0
+        },
+        "followup_result": {
+          "passed": 59,
+          "failed": 0,
+          "ignored_in_default_suite": 0,
+          "commands": [
+            "followup-chat-test"
+          ],
+          "fmt_exit_code": 0,
+          "check_exit_code": 0,
+          "wasm_exit_code": null
+        },
+        "next_day_before": 41,
+        "next_day_after": 41,
+        "blob_sha": "14f2f3830027e94b3790aee911d36b2d29ca92e9",
+        "local_exact_commit_readback": true
+      },
+      {
+        "project": "pet",
+        "day": 40,
+        "revision": "r1",
+        "article_path": "docs/teaching/daily/day-40/pet-r1.md",
+        "source_sha": "ff14ca6224f7c5a65c799bf4a82a743fa79c880c",
+        "teaching_base_sha": "bb259aaf76542554a3a704d9c4f4a3a219d65cbf",
+        "sha256": "ec83badd0657763bbb700ebb12797f583608467f78b88513a5e9f1ecc11e28eb",
+        "article_commit": "221aaeeb9dbb9946b30df4acbba4e7eae7d3a5dd",
+        "publication_status": "committed-for-publication",
+        "functional_acceptance": false,
+        "gate2": false,
+        "red_executed": false,
+        "validation": "docs/teaching/daily/day-40/local-validation/README.md",
+        "latest_result": {
+          "passed": 69,
+          "failed": 0,
+          "ignored_in_default_suite": 0,
+          "commands": [
+            "latest-pet-application",
+            "latest-pet-sqlite",
+            "latest-pet-test"
+          ],
+          "fmt_exit_code": 0,
+          "check_exit_code": 0,
+          "wasm_exit_code": 0
+        },
+        "candidate_result": {
+          "passed": 72,
+          "failed": 0,
+          "ignored_in_default_suite": 0,
+          "commands": [
+            "candidate-pet-application",
+            "candidate-pet-sqlite",
+            "candidate-pet-test"
+          ],
+          "fmt_exit_code": 1,
+          "check_exit_code": 0,
+          "wasm_exit_code": 0
+        },
+        "followup_result": {
+          "passed": 60,
+          "failed": 0,
+          "ignored_in_default_suite": 0,
+          "commands": [
+            "followup-pet-test"
+          ],
+          "fmt_exit_code": 1,
+          "check_exit_code": 0,
+          "wasm_exit_code": null
+        },
+        "next_day_before": 41,
+        "next_day_after": 41,
+        "blob_sha": "b20cdbc93bfef15e9c42bd2f78480a2bac4d4884",
+        "local_exact_commit_readback": true
+      },
+      {
+        "project": "analytics",
+        "day": 40,
+        "revision": "r1",
+        "article_path": "docs/teaching/daily/day-40/analytics-r1.md",
+        "source_sha": "ff14ca6224f7c5a65c799bf4a82a743fa79c880c",
+        "teaching_base_sha": "bb259aaf76542554a3a704d9c4f4a3a219d65cbf",
+        "sha256": "4e84d8476c74c1753beb9e4321db7a9ffa33509e5784231b8a152319676416e4",
+        "article_commit": "a0ee02f99819b97191015e2da034ef9f03f67e98",
+        "publication_status": "committed-for-publication",
+        "functional_acceptance": false,
+        "gate2": false,
+        "red_executed": false,
+        "validation": "docs/teaching/daily/day-40/local-validation/README.md",
+        "latest_result": {
+          "passed": 53,
+          "failed": 0,
+          "ignored_in_default_suite": 1,
+          "commands": [
+            "latest-analytics-pg",
+            "latest-analytics-ignored"
+          ],
+          "fmt_exit_code": 0,
+          "check_exit_code": 0,
+          "wasm_exit_code": null
+        },
+        "candidate_result": {
+          "passed": 53,
+          "failed": 0,
+          "ignored_in_default_suite": 1,
+          "commands": [
+            "candidate-analytics-pg",
+            "candidate-analytics-ignored"
+          ],
+          "fmt_exit_code": 1,
+          "check_exit_code": 0,
+          "wasm_exit_code": null
+        },
+        "followup_result": null,
+        "next_day_before": 41,
+        "next_day_after": 41,
+        "blob_sha": "ee45d9ef58b41d9daa7df706059f7d43fdb6a052",
+        "local_exact_commit_readback": true
+      }
+    ],
+    "scope": "Day40 local validation and versioned Day39/40 historical corrections; not weekly full comparison",
+    "next_day_unchanged": true,
+    "last_full_comparison_unchanged": true,
+    "functional_acceptance": false,
+    "source_modified": false
+  }
 }

@@ -1,5 +1,7 @@
 # 功能待辦與工程銜接
 
+> 2026-10-26增量核對：Day40的Session首頁與CSV已見實作，但Chat/account路由回歸、Pet X回籠未接且刪3舊測試。[最新精確來源與命令](teaching/daily/day-40/local-validation/README.md)及[歷史更正](teaching/daily/day-40/historical-corrections.md)優先於下列歷史「目前」摘要；原完成條件／FIFO不變。
+
 本頁保留原功能條件、D01–D09識別及未完成事項；政策不再重複散列。每日功能教學、每日一個全專案工程小工作包、核心60分鐘只計Red／Green，統一依[共用規則](COMMON_LEARNING_RULES.md)。工程交付完整程式／patch與測試方案，產品由使用者套用。
 
 [工程範圍與進度](teaching/functional-refactoring/README.md) · [12組測試對照](teaching/functional-refactoring/test-coverage-map.csv) · [技術責任](SYSTEM_ARCHITECTURE.md) · [當前功能與證據](teaching/current/STATUS.md)

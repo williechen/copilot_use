@@ -500,33 +500,181 @@
     "latest_github_publication": {
       "chat": {
         "day": 40,
-        "revision": "original",
-        "path": "docs/teaching/daily/day-40/chat.md",
-        "article_commit": "b520ff420026d462820c8245c7b7b674fb5e45ba",
-        "source_sha": "bb259aaf76542554a3a704d9c4f4a3a219d65cbf",
-        "product_applied": false,
+        "revision": "r1",
+        "path": "docs/teaching/daily/day-40/chat-r1.md",
+        "article_commit": "5536c269ac9f26c04d999efe7313488992046d65",
+        "source_sha": "ff14ca6224f7c5a65c799bf4a82a743fa79c880c",
+        "product_applied": "partial-with-regression",
         "accepted": false
       },
       "pet": {
         "day": 40,
-        "revision": "original",
-        "path": "docs/teaching/daily/day-40/pet.md",
-        "article_commit": "112543652ba695e64f31c37555b3533475e55232",
-        "source_sha": "bb259aaf76542554a3a704d9c4f4a3a219d65cbf",
-        "product_applied": false,
+        "revision": "r1",
+        "path": "docs/teaching/daily/day-40/pet-r1.md",
+        "article_commit": "221aaeeb9dbb9946b30df4acbba4e7eae7d3a5dd",
+        "source_sha": "ff14ca6224f7c5a65c799bf4a82a743fa79c880c",
+        "product_applied": "partial-with-regression",
         "accepted": false
       },
       "analytics": {
         "day": 40,
-        "revision": "original",
-        "path": "docs/teaching/daily/day-40/analytics.md",
-        "article_commit": "4b1dc5e2a15348e2d0f6bdbd4ea133cabd5cefad",
-        "source_sha": "bb259aaf76542554a3a704d9c4f4a3a219d65cbf",
-        "product_applied": false,
+        "revision": "r1",
+        "path": "docs/teaching/daily/day-40/analytics-r1.md",
+        "article_commit": "a0ee02f99819b97191015e2da034ef9f03f67e98",
+        "source_sha": "ff14ca6224f7c5a65c799bf4a82a743fa79c880c",
+        "product_applied": "observed",
         "accepted": false
       }
     },
-    "legacy_notion_fields_scope": "Preserved historical Notion publication snapshot; current progress is next_day and latest_github_publication."
+    "legacy_notion_fields_scope": "Preserved historical Notion publication snapshot; current progress is next_day and latest_github_publication.",
+    "latest_verified_article_revision": {
+      "chat": {
+        "project": "chat",
+        "day": 40,
+        "revision": "r1",
+        "article_path": "docs/teaching/daily/day-40/chat-r1.md",
+        "source_sha": "ff14ca6224f7c5a65c799bf4a82a743fa79c880c",
+        "teaching_base_sha": "bb259aaf76542554a3a704d9c4f4a3a219d65cbf",
+        "sha256": "2230a9f5989614c456846347199c8d77e9b042323a65e4c5ecbe46a527094cdc",
+        "article_commit": null,
+        "publication_status": "prepared-for-authorized-publication",
+        "functional_acceptance": false,
+        "gate2": false,
+        "red_executed": false,
+        "validation": "docs/teaching/daily/day-40/local-validation/README.md",
+        "latest_result": {
+          "passed": 57,
+          "failed": 2,
+          "ignored_in_default_suite": 0,
+          "commands": [
+            "latest-chat-complete"
+          ],
+          "fmt_exit_code": 0,
+          "check_exit_code": 0,
+          "wasm_exit_code": 0
+        },
+        "candidate_result": {
+          "passed": 59,
+          "failed": 0,
+          "ignored_in_default_suite": 0,
+          "commands": [
+            "candidate-chat-test"
+          ],
+          "fmt_exit_code": 1,
+          "check_exit_code": 0,
+          "wasm_exit_code": 0
+        },
+        "followup_result": {
+          "passed": 59,
+          "failed": 0,
+          "ignored_in_default_suite": 0,
+          "commands": [
+            "followup-chat-test"
+          ],
+          "fmt_exit_code": 0,
+          "check_exit_code": 0,
+          "wasm_exit_code": null
+        },
+        "next_day_before": 41,
+        "next_day_after": 41
+      },
+      "pet": {
+        "project": "pet",
+        "day": 40,
+        "revision": "r1",
+        "article_path": "docs/teaching/daily/day-40/pet-r1.md",
+        "source_sha": "ff14ca6224f7c5a65c799bf4a82a743fa79c880c",
+        "teaching_base_sha": "bb259aaf76542554a3a704d9c4f4a3a219d65cbf",
+        "sha256": "ec83badd0657763bbb700ebb12797f583608467f78b88513a5e9f1ecc11e28eb",
+        "article_commit": null,
+        "publication_status": "prepared-for-authorized-publication",
+        "functional_acceptance": false,
+        "gate2": false,
+        "red_executed": false,
+        "validation": "docs/teaching/daily/day-40/local-validation/README.md",
+        "latest_result": {
+          "passed": 69,
+          "failed": 0,
+          "ignored_in_default_suite": 0,
+          "commands": [
+            "latest-pet-application",
+            "latest-pet-sqlite",
+            "latest-pet-test"
+          ],
+          "fmt_exit_code": 0,
+          "check_exit_code": 0,
+          "wasm_exit_code": 0
+        },
+        "candidate_result": {
+          "passed": 72,
+          "failed": 0,
+          "ignored_in_default_suite": 0,
+          "commands": [
+            "candidate-pet-application",
+            "candidate-pet-sqlite",
+            "candidate-pet-test"
+          ],
+          "fmt_exit_code": 1,
+          "check_exit_code": 0,
+          "wasm_exit_code": 0
+        },
+        "followup_result": {
+          "passed": 60,
+          "failed": 0,
+          "ignored_in_default_suite": 0,
+          "commands": [
+            "followup-pet-test"
+          ],
+          "fmt_exit_code": 1,
+          "check_exit_code": 0,
+          "wasm_exit_code": null
+        },
+        "next_day_before": 41,
+        "next_day_after": 41
+      },
+      "analytics": {
+        "project": "analytics",
+        "day": 40,
+        "revision": "r1",
+        "article_path": "docs/teaching/daily/day-40/analytics-r1.md",
+        "source_sha": "ff14ca6224f7c5a65c799bf4a82a743fa79c880c",
+        "teaching_base_sha": "bb259aaf76542554a3a704d9c4f4a3a219d65cbf",
+        "sha256": "4e84d8476c74c1753beb9e4321db7a9ffa33509e5784231b8a152319676416e4",
+        "article_commit": null,
+        "publication_status": "prepared-for-authorized-publication",
+        "functional_acceptance": false,
+        "gate2": false,
+        "red_executed": false,
+        "validation": "docs/teaching/daily/day-40/local-validation/README.md",
+        "latest_result": {
+          "passed": 53,
+          "failed": 0,
+          "ignored_in_default_suite": 1,
+          "commands": [
+            "latest-analytics-pg",
+            "latest-analytics-ignored"
+          ],
+          "fmt_exit_code": 0,
+          "check_exit_code": 0,
+          "wasm_exit_code": null
+        },
+        "candidate_result": {
+          "passed": 53,
+          "failed": 0,
+          "ignored_in_default_suite": 1,
+          "commands": [
+            "candidate-analytics-pg",
+            "candidate-analytics-ignored"
+          ],
+          "fmt_exit_code": 1,
+          "check_exit_code": 0,
+          "wasm_exit_code": null
+        },
+        "followup_result": null,
+        "next_day_before": 41,
+        "next_day_after": 41
+      }
+    }
   },
   "teaching_document": {
     "canonical": "docs/COMMON_LEARNING_RULES.md",
@@ -3039,22 +3187,114 @@
     "status": "github_article_readback_verified"
   },
   "latest_source_validation": {
-    "source_sha": "afdbb6e81382e8d82095827a90c52cc3309a3e20",
-    "previous_source_sha": "bb95a6065584ebc00ce339bdd904b3d47bf1ea15",
-    "checked_at": "2026-10-25T00:44:51.103908+00:00",
-    "scope": "local PostgreSQL regression; not full product acceptance or CI",
-    "report": "docs/source-review/2026-10-25-assertions-afdbb6e.md",
-    "summary": "docs/source-review/update-afdbb6e/summary.json",
-    "overall": "local_postgres_regression_passed",
+    "source_sha": "ff14ca6224f7c5a65c799bf4a82a743fa79c880c",
+    "scope": "Day40 local validation and versioned Day39/40 historical corrections; not weekly full comparison",
+    "summary": "docs/teaching/daily/day-40/local-validation/summary.json",
+    "report": "docs/teaching/daily/day-40/local-validation/README.md",
+    "overall": "chat_regression_pet_incomplete_analytics_automated_validation_recorded",
     "functional_acceptance": false,
-    "source_modified_by_agent": false,
-    "exit_code": 0,
-    "passed": 44,
-    "failed": 0,
-    "ignored": 1,
-    "next_day_unchanged": true,
-    "last_full_comparison_unchanged": true,
-    "query_authorization_requirement_mismatch": "unchanged; not closed by assertion repair"
+    "results": {
+      "candidate": {
+        "chat": {
+          "passed": 59,
+          "failed": 0,
+          "ignored_in_default_suite": 0,
+          "commands": [
+            "candidate-chat-test"
+          ],
+          "fmt_exit_code": 1,
+          "check_exit_code": 0,
+          "wasm_exit_code": 0
+        },
+        "pet": {
+          "passed": 72,
+          "failed": 0,
+          "ignored_in_default_suite": 0,
+          "commands": [
+            "candidate-pet-application",
+            "candidate-pet-sqlite",
+            "candidate-pet-test"
+          ],
+          "fmt_exit_code": 1,
+          "check_exit_code": 0,
+          "wasm_exit_code": 0
+        },
+        "analytics": {
+          "passed": 53,
+          "failed": 0,
+          "ignored_in_default_suite": 1,
+          "commands": [
+            "candidate-analytics-pg",
+            "candidate-analytics-ignored"
+          ],
+          "fmt_exit_code": 1,
+          "check_exit_code": 0,
+          "wasm_exit_code": null
+        }
+      },
+      "latest": {
+        "chat": {
+          "passed": 57,
+          "failed": 2,
+          "ignored_in_default_suite": 0,
+          "commands": [
+            "latest-chat-complete"
+          ],
+          "fmt_exit_code": 0,
+          "check_exit_code": 0,
+          "wasm_exit_code": 0
+        },
+        "pet": {
+          "passed": 69,
+          "failed": 0,
+          "ignored_in_default_suite": 0,
+          "commands": [
+            "latest-pet-application",
+            "latest-pet-sqlite",
+            "latest-pet-test"
+          ],
+          "fmt_exit_code": 0,
+          "check_exit_code": 0,
+          "wasm_exit_code": 0
+        },
+        "analytics": {
+          "passed": 53,
+          "failed": 0,
+          "ignored_in_default_suite": 1,
+          "commands": [
+            "latest-analytics-pg",
+            "latest-analytics-ignored"
+          ],
+          "fmt_exit_code": 0,
+          "check_exit_code": 0,
+          "wasm_exit_code": null
+        }
+      },
+      "followup": {
+        "chat": {
+          "passed": 59,
+          "failed": 0,
+          "ignored_in_default_suite": 0,
+          "commands": [
+            "followup-chat-test"
+          ],
+          "fmt_exit_code": 0,
+          "check_exit_code": 0,
+          "wasm_exit_code": null
+        },
+        "pet": {
+          "passed": 60,
+          "failed": 0,
+          "ignored_in_default_suite": 0,
+          "commands": [
+            "followup-pet-test"
+          ],
+          "fmt_exit_code": 1,
+          "check_exit_code": 0,
+          "wasm_exit_code": null
+        }
+      }
+    }
   },
   "completed_article_archive": {
     "policy": "archive after lesson-slice verification with matching source and evidence; full-product acceptance independent",
@@ -5735,14 +5975,13 @@
     "product_modified": false
   },
   "current_refactor_validation": {
-    "source_sha": "8fc4b277b6f6f77d97655130036fca47813de56e",
-    "scope": "isolated source plus Refactor only; no Day39 Green",
+    "source_sha": "ff14ca6224f7c5a65c799bf4a82a743fa79c880c",
     "counts": {
-      "chat": "Refactor SSR 14項通過；功能Green／GUI／候選CI未驗",
-      "pet": "Refactor Application 8項＋SQLite 4項通過；Tauri／功能Green／GUI未驗",
-      "analytics": "Refactor Server／PG 49項通過、1項ignored；CSV Green／GUI／候選CI未驗"
+      "chat": "最新碼/account回歸，測試失敗；修復候選另驗；GUI／CI未驗",
+      "pet": "最新碼缺X回籠及3項舊測試；候選／原生／WASM另驗；GUI未驗",
+      "analytics": "真PG／Router、check通過；候選fmt失敗，最新fmt通過；GUI／CI未驗"
     },
-    "record": "docs/teaching/daily/day-39/r2-refactor-validation.json",
+    "record": "docs/teaching/daily/day-40/local-validation/README.md",
     "product_acceptance": false
   },
   "day40_chat_delivery": {
@@ -5879,5 +6118,192 @@
       "pet": 41,
       "analytics": 41
     }
+  },
+  "day40_r1_revision": {
+    "date": "2026-10-26",
+    "source_sha": "ff14ca6224f7c5a65c799bf4a82a743fa79c880c",
+    "document_base_sha": "715b19794c898b06f72307feefca996c32ca6d0b",
+    "articles": [
+      {
+        "project": "chat",
+        "day": 40,
+        "revision": "r1",
+        "article_path": "docs/teaching/daily/day-40/chat-r1.md",
+        "source_sha": "ff14ca6224f7c5a65c799bf4a82a743fa79c880c",
+        "teaching_base_sha": "bb259aaf76542554a3a704d9c4f4a3a219d65cbf",
+        "sha256": "2230a9f5989614c456846347199c8d77e9b042323a65e4c5ecbe46a527094cdc",
+        "article_commit": "5536c269ac9f26c04d999efe7313488992046d65",
+        "publication_status": "committed-for-publication",
+        "functional_acceptance": false,
+        "gate2": false,
+        "red_executed": false,
+        "validation": "docs/teaching/daily/day-40/local-validation/README.md",
+        "latest_result": {
+          "passed": 57,
+          "failed": 2,
+          "ignored_in_default_suite": 0,
+          "commands": [
+            "latest-chat-complete"
+          ],
+          "fmt_exit_code": 0,
+          "check_exit_code": 0,
+          "wasm_exit_code": 0
+        },
+        "candidate_result": {
+          "passed": 59,
+          "failed": 0,
+          "ignored_in_default_suite": 0,
+          "commands": [
+            "candidate-chat-test"
+          ],
+          "fmt_exit_code": 1,
+          "check_exit_code": 0,
+          "wasm_exit_code": 0
+        },
+        "followup_result": {
+          "passed": 59,
+          "failed": 0,
+          "ignored_in_default_suite": 0,
+          "commands": [
+            "followup-chat-test"
+          ],
+          "fmt_exit_code": 0,
+          "check_exit_code": 0,
+          "wasm_exit_code": null
+        },
+        "next_day_before": 41,
+        "next_day_after": 41,
+        "blob_sha": "14f2f3830027e94b3790aee911d36b2d29ca92e9",
+        "local_exact_commit_readback": true
+      },
+      {
+        "project": "pet",
+        "day": 40,
+        "revision": "r1",
+        "article_path": "docs/teaching/daily/day-40/pet-r1.md",
+        "source_sha": "ff14ca6224f7c5a65c799bf4a82a743fa79c880c",
+        "teaching_base_sha": "bb259aaf76542554a3a704d9c4f4a3a219d65cbf",
+        "sha256": "ec83badd0657763bbb700ebb12797f583608467f78b88513a5e9f1ecc11e28eb",
+        "article_commit": "221aaeeb9dbb9946b30df4acbba4e7eae7d3a5dd",
+        "publication_status": "committed-for-publication",
+        "functional_acceptance": false,
+        "gate2": false,
+        "red_executed": false,
+        "validation": "docs/teaching/daily/day-40/local-validation/README.md",
+        "latest_result": {
+          "passed": 69,
+          "failed": 0,
+          "ignored_in_default_suite": 0,
+          "commands": [
+            "latest-pet-application",
+            "latest-pet-sqlite",
+            "latest-pet-test"
+          ],
+          "fmt_exit_code": 0,
+          "check_exit_code": 0,
+          "wasm_exit_code": 0
+        },
+        "candidate_result": {
+          "passed": 72,
+          "failed": 0,
+          "ignored_in_default_suite": 0,
+          "commands": [
+            "candidate-pet-application",
+            "candidate-pet-sqlite",
+            "candidate-pet-test"
+          ],
+          "fmt_exit_code": 1,
+          "check_exit_code": 0,
+          "wasm_exit_code": 0
+        },
+        "followup_result": {
+          "passed": 60,
+          "failed": 0,
+          "ignored_in_default_suite": 0,
+          "commands": [
+            "followup-pet-test"
+          ],
+          "fmt_exit_code": 1,
+          "check_exit_code": 0,
+          "wasm_exit_code": null
+        },
+        "next_day_before": 41,
+        "next_day_after": 41,
+        "blob_sha": "b20cdbc93bfef15e9c42bd2f78480a2bac4d4884",
+        "local_exact_commit_readback": true
+      },
+      {
+        "project": "analytics",
+        "day": 40,
+        "revision": "r1",
+        "article_path": "docs/teaching/daily/day-40/analytics-r1.md",
+        "source_sha": "ff14ca6224f7c5a65c799bf4a82a743fa79c880c",
+        "teaching_base_sha": "bb259aaf76542554a3a704d9c4f4a3a219d65cbf",
+        "sha256": "4e84d8476c74c1753beb9e4321db7a9ffa33509e5784231b8a152319676416e4",
+        "article_commit": "a0ee02f99819b97191015e2da034ef9f03f67e98",
+        "publication_status": "committed-for-publication",
+        "functional_acceptance": false,
+        "gate2": false,
+        "red_executed": false,
+        "validation": "docs/teaching/daily/day-40/local-validation/README.md",
+        "latest_result": {
+          "passed": 53,
+          "failed": 0,
+          "ignored_in_default_suite": 1,
+          "commands": [
+            "latest-analytics-pg",
+            "latest-analytics-ignored"
+          ],
+          "fmt_exit_code": 0,
+          "check_exit_code": 0,
+          "wasm_exit_code": null
+        },
+        "candidate_result": {
+          "passed": 53,
+          "failed": 0,
+          "ignored_in_default_suite": 1,
+          "commands": [
+            "candidate-analytics-pg",
+            "candidate-analytics-ignored"
+          ],
+          "fmt_exit_code": 1,
+          "check_exit_code": 0,
+          "wasm_exit_code": null
+        },
+        "followup_result": null,
+        "next_day_before": 41,
+        "next_day_after": 41,
+        "blob_sha": "ee45d9ef58b41d9daa7df706059f7d43fdb6a052",
+        "local_exact_commit_readback": true
+      }
+    ],
+    "scope": "Day40 local validation and versioned Day39/40 historical corrections; not weekly full comparison",
+    "next_day_unchanged": true,
+    "last_full_comparison_unchanged": true,
+    "functional_acceptance": false,
+    "source_modified": false
+  },
+  "current_article_paths": {
+    "chat": "docs/teaching/daily/day-40/chat-r1.md",
+    "pet": "docs/teaching/daily/day-40/pet-r1.md",
+    "analytics": "docs/teaching/daily/day-40/analytics-r1.md"
+  },
+  "previous_source_validation_before_day40_r1": {
+    "source_sha": "afdbb6e81382e8d82095827a90c52cc3309a3e20",
+    "previous_source_sha": "bb95a6065584ebc00ce339bdd904b3d47bf1ea15",
+    "checked_at": "2026-10-25T00:44:51.103908+00:00",
+    "scope": "local PostgreSQL regression; not full product acceptance or CI",
+    "report": "docs/source-review/2026-10-25-assertions-afdbb6e.md",
+    "summary": "docs/source-review/update-afdbb6e/summary.json",
+    "overall": "local_postgres_regression_passed",
+    "functional_acceptance": false,
+    "source_modified_by_agent": false,
+    "exit_code": 0,
+    "passed": 44,
+    "failed": 0,
+    "ignored": 1,
+    "next_day_unchanged": true,
+    "last_full_comparison_unchanged": true,
+    "query_authorization_requirement_mismatch": "unchanged; not closed by assertion repair"
   }
 }
