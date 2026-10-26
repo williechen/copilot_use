@@ -1,0 +1,15 @@
+{
+  "scope": "local documentation structure, source excerpt integrity, evidence integrity, history/progress preservation; not new Cargo tests or GitHub readback",
+  "source_sha": "bb259aaf76542554a3a704d9c4f4a3a219d65cbf",
+  "historical_files_unchanged": 40,
+  "source_excerpts_verified": 24,
+  "raw_logs_verified": 104,
+  "relative_links_checked": 1050,
+  "markdown_files_checked": 19,
+  "next_day_unchanged": true,
+  "last_full_comparison_unchanged": true,
+  "product_working_tree_clean": true,
+  "tracked_diff_check_exit_code": 0,
+  "issues": [],
+  "passed": true
+}

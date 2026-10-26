@@ -1,0 +1,7 @@
+/home/willie/Documents/copilot_use/docs/teaching/daily/day-40/chat-day40-green.patch:367: trailing whitespace.
+                ,(user_status='active') 
+/home/willie/Documents/copilot_use/docs/teaching/daily/day-40/chat-day40-green.patch:368: trailing whitespace.
+            FROM mbr_user 
+/home/willie/Documents/copilot_use/docs/teaching/daily/day-40/chat-day40-green.patch:728: new blank line at EOF.
++
+warning: 3 lines add whitespace errors.

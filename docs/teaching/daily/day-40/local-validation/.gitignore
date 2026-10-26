@@ -1,0 +1,3 @@
+# Exact validation evidence, intentionally versioned.
+!day40-logs/
+!day40-logs/*.log

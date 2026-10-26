@@ -1,0 +1,2 @@
+error: patch failed: analytics_apps/analytics_server/src/export.rs:1
+error: analytics_apps/analytics_server/src/export.rs: patch does not apply

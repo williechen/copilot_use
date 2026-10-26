@@ -1,0 +1,31 @@
+Diff in /home/willie/Documents/Codex/2026-10-26/referenced-chatgpt-conversation-this-is-an/work/pet-followup/pet_apps/pet_server/src/lib.rs:185:
+                             if let Err(error) = pet_application::lifecycle::persist_then_close(
+                                 |flag| store.set_caged(&id, flag),
+                                 || window.destroy().map_err(|e| e.to_string()),
+-                            ).await {
++                            )
++                            .await
++                            {
+                                 // DB failure must leave the window alive; never silently claim cage.
+                                 eprintln!("生活窗直接關閉／回籠失敗：{error}");
+                             }
+Diff in /home/willie/Documents/Codex/2026-10-26/referenced-chatgpt-conversation-this-is-an/work/pet-followup/pet_apps/pet_server/src/lib.rs:192:
+                         });
+                     }
+                     tauri::WindowEvent::Destroyed => {
+-                        window.app_handle().state::<pet_windows::Runtime>().remove(&id);
++                        window
++                            .app_handle()
++                            .state::<pet_windows::Runtime>()
++                            .remove(&id);
+                     }
+                     _ => {}
+                 }
+Diff in /home/willie/Documents/Codex/2026-10-26/referenced-chatgpt-conversation-this-is-an/work/pet-followup/pet_apps/pet_server/src/pet_windows.rs:217:
+         assert_eq!(pet_id_from_window_label("pet-../../x"), None);
+     }
+ 
+-
+     #[test]
+     fn day24_more_than_two_pet_states_are_independent_and_caging_is_local() {
+         let runtime = Runtime::default();

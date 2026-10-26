@@ -1,0 +1,4 @@
+error: patch failed: chat_apps/chat_ui/src/lib.rs:15
+error: chat_apps/chat_ui/src/lib.rs: patch does not apply
+error: patch failed: chat_apps/chat_ui/src/room_list_state.rs:37
+error: chat_apps/chat_ui/src/room_list_state.rs: patch does not apply

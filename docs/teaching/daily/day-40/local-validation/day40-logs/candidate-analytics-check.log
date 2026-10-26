@@ -1,0 +1,87 @@
+   Compiling smallvec v1.16.4
+   Compiling getrandom v0.4.3
+    Checking parking_lot_core v0.9.12
+    Checking futures-executor v0.3.34
+    Checking parking_lot v0.12.5
+   Compiling rand_core v0.10.1
+    Checking tokio v1.54.1
+    Checking futures v0.3.34
+    Checking icu_normalizer v2.4.0
+   Compiling sha2 v0.10.9
+   Compiling digest v0.11.3
+    Checking idna_adapter v1.2.2
+   Compiling proc-macro-utils v0.10.0
+    Checking idna v1.1.0
+   Compiling reactive_graph v0.2.16
+   Compiling server_fn_macro v0.8.12
+   Compiling form_urlencoded v1.2.2
+    Checking url v2.5.8
+    Checking hydration_context v0.3.2
+    Checking any_spawner v0.3.0
+   Compiling tinyvec v1.13.3
+   Compiling unicode-normalization v0.1.26
+   Compiling futures-intrusive v0.5.0
+   Compiling chacha20 v0.10.2
+   Compiling quote-use-macros v0.9.0
+   Compiling manyhow-macros v0.14.1
+   Compiling hmac v0.13.0
+   Compiling unicode-properties v0.1.4
+   Compiling unicode-bidi v0.3.18
+   Compiling sqlx-core v0.9.0
+   Compiling stringprep v0.1.5
+   Compiling manyhow v0.14.1
+    Checking reactive_stores v0.4.4
+   Compiling hkdf v0.13.0
+   Compiling quote-use v0.9.0
+   Compiling rand v0.10.3
+   Compiling sha2 v0.11.1
+   Compiling md-5 v0.11.0
+   Compiling server_fn v0.8.13
+   Compiling byteorder v1.5.0
+   Compiling whoami v2.1.3
+    Checking tachys v0.2.19
+   Compiling sqlx-postgres v0.9.0
+   Compiling attribute-derive-macro v0.11.0
+   Compiling server_fn_macro_default v0.8.6
+    Checking tokio-stream v0.1.19
+   Compiling leptos_macro v0.8.19
+    Checking hyper v1.12.0
+   Compiling wasm_split_macros v0.2.2
+    Checking phc v0.6.1
+   Compiling sqlx-macros-core v0.9.0
+   Compiling attribute-derive v0.11.0
+   Compiling uuid v1.29.0
+   Compiling leptos v0.8.22
+    Checking dotenvy v0.15.7
+    Checking hex v0.4.3
+    Checking wasm_split_helpers v0.2.3
+    Checking leptos_server v0.8.8
+   Compiling sqlx-macros v0.9.0
+    Checking leptos_dom v0.8.8
+    Checking password-hash v0.6.1
+    Checking hyper-util v0.1.21
+    Checking tokio-tungstenite v0.29.0
+    Checking tower v0.5.3
+    Checking rtoolbox v0.0.6
+    Checking rpassword v7.5.4
+    Checking argon2 v0.6.0
+    Checking axum v0.8.9
+    Checking sqlx v0.9.0
+    Checking analytics-persistence v0.2.37 (/home/willie/Documents/Codex/2026-10-26/referenced-chatgpt-conversation-this-is-an/work/analytics-corrected/analytics_apps/analytics_persistence)
+    Checking analytics-server v0.2.37 (/home/willie/Documents/Codex/2026-10-26/referenced-chatgpt-conversation-this-is-an/work/analytics-corrected/analytics_apps/analytics_server)
+warning: unused import: `analytics_persistence::summary_for_source`
+ --> analytics_server/src/pg_store.rs:1:5
+  |
+1 | use analytics_persistence::summary_for_source;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `analytics_persistence::summary_for_source`
+ --> analytics_server/src/lib.rs:9:5
+  |
+9 | use analytics_persistence::summary_for_source;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: `analytics-server` (lib) generated 2 warnings (run `cargo fix --lib -p analytics-server` to apply 2 suggestions)
+    Finished `dev` profile [unoptimized] target(s) in 19.56s

@@ -1,0 +1,121 @@
+[
+  {
+    "project": "chat",
+    "path": "chat_apps/chat_ui/src/lib.rs",
+    "latest_exists": true,
+    "bytes_equal": false,
+    "normalized_eol_equal": false
+  },
+  {
+    "project": "chat",
+    "path": "chat_apps/chat_ui/src/room_list_state.rs",
+    "latest_exists": true,
+    "bytes_equal": false,
+    "normalized_eol_equal": false
+  },
+  {
+    "project": "chat",
+    "path": "chat_apps/chat_ui/src/signin_contract.rs",
+    "latest_exists": true,
+    "bytes_equal": false,
+    "normalized_eol_equal": false
+  },
+  {
+    "project": "pet",
+    "path": "pet_apps/pet_application/src/lifecycle.rs",
+    "latest_exists": true,
+    "bytes_equal": false,
+    "normalized_eol_equal": false
+  },
+  {
+    "project": "pet",
+    "path": "pet_apps/pet_server/src/lib.rs",
+    "latest_exists": true,
+    "bytes_equal": false,
+    "normalized_eol_equal": true
+  },
+  {
+    "project": "pet",
+    "path": "pet_apps/pet_server/src/pet_windows.rs",
+    "latest_exists": true,
+    "bytes_equal": false,
+    "normalized_eol_equal": false
+  },
+  {
+    "project": "pet",
+    "path": "pet_apps/pet_server/src/roam.rs",
+    "latest_exists": true,
+    "bytes_equal": true,
+    "normalized_eol_equal": true
+  },
+  {
+    "project": "pet",
+    "path": "pet_apps/pet_ui/index.html",
+    "latest_exists": true,
+    "bytes_equal": true,
+    "normalized_eol_equal": true
+  },
+  {
+    "project": "pet",
+    "path": "pet_apps/pet_ui/src/bridge.rs",
+    "latest_exists": true,
+    "bytes_equal": false,
+    "normalized_eol_equal": false
+  },
+  {
+    "project": "pet",
+    "path": "pet_apps/pet_ui/src/main.rs",
+    "latest_exists": true,
+    "bytes_equal": false,
+    "normalized_eol_equal": false
+  },
+  {
+    "project": "analytics",
+    "path": "analytics_apps/analytics_persistence/src/lib.rs",
+    "latest_exists": true,
+    "bytes_equal": false,
+    "normalized_eol_equal": false
+  },
+  {
+    "project": "analytics",
+    "path": "analytics_apps/analytics_server/src/dashboard_ui.rs",
+    "latest_exists": true,
+    "bytes_equal": true,
+    "normalized_eol_equal": true
+  },
+  {
+    "project": "analytics",
+    "path": "analytics_apps/analytics_server/src/lib.rs",
+    "latest_exists": true,
+    "bytes_equal": false,
+    "normalized_eol_equal": false
+  },
+  {
+    "project": "analytics",
+    "path": "analytics_apps/analytics_server/src/password_login.rs",
+    "latest_exists": true,
+    "bytes_equal": false,
+    "normalized_eol_equal": false
+  },
+  {
+    "project": "analytics",
+    "path": "analytics_apps/analytics_server/src/pg_store.rs",
+    "latest_exists": true,
+    "bytes_equal": false,
+    "normalized_eol_equal": false
+  },
+  {
+    "project": "analytics",
+    "path": "analytics_apps/analytics_server/src/export.rs",
+    "latest_exists": true,
+    "bytes_equal": false,
+    "normalized_eol_equal": false
+  },
+  {
+    "project": "analytics",
+    "path": "analytics_apps/analytics_server/tests/day39_export_csv.rs",
+    "latest_exists": true,
+    "bytes_equal": false,
+    "normalized_eol_equal": false
+  }
+]

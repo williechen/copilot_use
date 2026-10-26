@@ -1,0 +1,16 @@
+{
+  "rust_ai_ring": {
+    "head_unchanged_since_update": true,
+    "status_unchanged_since_update": true,
+    "source_files_unchanged_since_update": true,
+    "diff_unchanged_since_update": true,
+    "worktrees_unchanged_since_update": true
+  },
+  "copilot_use": {
+    "head_unchanged_since_update": true,
+    "status_unchanged_since_update": true,
+    "source_files_unchanged_since_update": true,
+    "diff_unchanged_since_update": true,
+    "worktrees_unchanged_since_update": true
+  }
+}

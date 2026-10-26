@@ -1,0 +1,3 @@
+# Preserve this revision's exact validation evidence despite the repository's *.log rule.
+!logs/
+!logs/*.log

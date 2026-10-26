@@ -1,0 +1,113 @@
+{
+  "date": "2026-10-26",
+  "source_sha": "bb259aaf76542554a3a704d9c4f4a3a219d65cbf",
+  "document_base_sha": "d8d9f4ddf46d923c6abcc83ef0b86e5439eee4c4",
+  "scope": "incremental Day39 latest source alignment and previously executed local validation; not weekly full comparison",
+  "publication_status": "local-uncommitted-unpushed",
+  "articles": [
+    {
+      "project": "chat",
+      "day": 39,
+      "revision": "r3",
+      "article_path": "docs/teaching/daily/day-39/chat-r3.md",
+      "source_sha": "bb259aaf76542554a3a704d9c4f4a3a219d65cbf",
+      "sha256": "c55c0e13b5323a31d97ae77ff72689cff6f2bb015ffed84540cadee0e114dab8",
+      "publication_status": "local-uncommitted-unpushed",
+      "article_commit": null,
+      "remote_readback_verified": false,
+      "main_application": "observed in latest source",
+      "candidate_tests_executed": true,
+      "product_tests_executed": true,
+      "red_executed": false,
+      "functional_acceptance": false,
+      "gate2": false,
+      "validation": "docs/teaching/daily/day-39/r3-local-validation/README.md",
+      "results": {
+        "fmt_exit_code": 0,
+        "rust_passed": 57,
+        "rust_failed": 0,
+        "node_passed": null,
+        "node_exit_code": null,
+        "check_exit_codes": {
+          "latest-chat-check-server": 0,
+          "latest-chat-check-wasm": 0
+        },
+        "note": ""
+      },
+      "previous_revision": "docs/teaching/daily/day-39/chat-r2.md",
+      "next_day_before": 40,
+      "next_day_after": 40
+    },
+    {
+      "project": "pet",
+      "day": 39,
+      "revision": "r3",
+      "article_path": "docs/teaching/daily/day-39/pet-r3.md",
+      "source_sha": "bb259aaf76542554a3a704d9c4f4a3a219d65cbf",
+      "sha256": "f5b5e8f437a8f0d04c5941e5a9c8bce41ec90a60cf39203eace11a073d0de28d",
+      "publication_status": "local-uncommitted-unpushed",
+      "article_commit": null,
+      "remote_readback_verified": false,
+      "main_application": "observed in latest source",
+      "candidate_tests_executed": true,
+      "product_tests_executed": true,
+      "red_executed": false,
+      "functional_acceptance": false,
+      "gate2": false,
+      "validation": "docs/teaching/daily/day-39/r3-local-validation/README.md",
+      "results": {
+        "fmt_exit_code": 0,
+        "rust_passed": 70,
+        "rust_failed": 0,
+        "node_passed": 6,
+        "node_exit_code": 0,
+        "check_exit_codes": {
+          "latest-pet-check-server": 0,
+          "latest-pet-check-wasm": 0
+        },
+        "note": ""
+      },
+      "previous_revision": "docs/teaching/daily/day-39/pet-r2.md",
+      "next_day_before": 40,
+      "next_day_after": 40
+    },
+    {
+      "project": "analytics",
+      "day": 39,
+      "revision": "r3",
+      "article_path": "docs/teaching/daily/day-39/analytics-r3.md",
+      "source_sha": "bb259aaf76542554a3a704d9c4f4a3a219d65cbf",
+      "sha256": "040a8da160f1ff859242a080d10eb393ec6fd5556573278e4fae6ca2f6150edf",
+      "publication_status": "local-uncommitted-unpushed",
+      "article_commit": null,
+      "remote_readback_verified": false,
+      "main_application": "observed in latest source",
+      "candidate_tests_executed": true,
+      "product_tests_executed": true,
+      "red_executed": false,
+      "functional_acceptance": false,
+      "gate2": false,
+      "validation": "docs/teaching/daily/day-39/r3-local-validation/README.md",
+      "results": {
+        "fmt_exit_code": 0,
+        "rust_passed": 52,
+        "rust_failed": 0,
+        "node_passed": null,
+        "node_exit_code": null,
+        "check_exit_codes": {
+          "latest-analytics-check": 0
+        },
+        "note": "Analytics excludes standalone CSV rerun from total; default ignored test was explicitly executed separately"
+      },
+      "previous_revision": "docs/teaching/daily/day-39/analytics-r2.md",
+      "next_day_before": 40,
+      "next_day_after": 40
+    }
+  ],
+  "new_runtime_tests_this_edit": false,
+  "runtime_evidence_imported": true,
+  "source_modified": false,
+  "github_modified": false,
+  "last_full_comparison_unchanged": true,
+  "next_day_unchanged": true
+}
