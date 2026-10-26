@@ -10,6 +10,6 @@
 
 產品來源 `9b89656f964b99e0cb89ba421855704a35c5ecb9`，修訂commit `560fba6f14095e1ecc1df27c658105b4e6069dd5`。[精確讀回、blob與SHA256](../daily/day-38/pet-r4-readback.json)；文件交付與產品驗收分開。
 
-[上一篇](../daily/day-37/pet-r4.md) · [原Day38](../daily/day-38/pet.md) · [全部歷史與更正](ARTICLE_STATUS.md)。舊來源與歷史驗證沿原紀錄追溯，不重複累積到本入口。
+[上一篇](../daily/day-37/pet-r3.md) · [原Day38](../daily/day-38/pet.md) · [全部歷史與更正](ARTICLE_STATUS.md)。舊來源與歷史驗證沿原紀錄追溯，不重複累積到本入口。
 
 [全專案重構獨立項目](../../../docs/engineering/README.md) · [候選本地驗證](../../../docs/teaching/daily/day-38/r4-local-validation.json)。
