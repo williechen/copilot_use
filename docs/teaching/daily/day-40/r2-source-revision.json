@@ -16,10 +16,13 @@
       "cargo_test_executed": false,
       "functional_acceptance": false,
       "gate2": false,
-      "publication_status": "prepared",
+      "publication_status": "committed-for-publication",
       "evidence": "docs/teaching/daily/day-40/source-update-9c76797/verification.json",
       "next_day_before": 41,
-      "next_day_after": 41
+      "next_day_after": 41,
+      "article_commit": "480c40f3f690fcc699e5970c90980f5fbc6953ae",
+      "blob_sha": "a2f7add804b4dc82d6c95c42baefb9e2843548ad",
+      "local_exact_commit_readback": true
     },
     {
       "project": "pet",
@@ -34,10 +37,13 @@
       "cargo_test_executed": false,
       "functional_acceptance": false,
       "gate2": false,
-      "publication_status": "prepared",
+      "publication_status": "committed-for-publication",
       "evidence": "docs/teaching/daily/day-40/source-update-9c76797/verification.json",
       "next_day_before": 41,
-      "next_day_after": 41
+      "next_day_after": 41,
+      "article_commit": "93e5364d033040a58ade328ede7be40baa540a4e",
+      "blob_sha": "52034155b652347adf56f43cc74cd02c6373c7ec",
+      "local_exact_commit_readback": true
     }
   ],
   "next_day_unchanged": true,

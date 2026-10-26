@@ -6,13 +6,13 @@
 
 | 專案 | 現行教學 | 下一篇 | 驗證範圍 |
 | --- | --- | --- | --- |
-| Chat | [Day40 r1：首頁依有效 Session 顯示登入／管理](day-40/chat-r1.md) | Day41 | 最新碼/account回歸，測試失敗；修復候選另驗；GUI／CI未驗 |
-| Pet | [Day40 r1：生活窗直接關閉等同逐隻回籠](day-40/pet-r1.md) | Day41 | 新版已補X接線，69項通過；3舊測試恢復候選另驗，GUI未驗 |
-| Analytics | [Day40 r1：CSV 匯出遵循目前精確事件類型篩選](day-40/analytics-r1.md) | Day41 | 真PG／Router、check通過；候選fmt失敗，最新fmt通過；GUI／CI未驗 |
+| Chat | [Day40 r2：首頁依有效 Session 顯示登入／管理](day-40/chat-r2.md) | Day41 | /account已補回；本輪fmt通過，未重跑Cargo測試／GUI／CI |
+| Pet | [Day40 r2：生活窗直接關閉等同逐隻回籠](day-40/pet-r2.md) | Day41 | 3舊測試已恢復；本輪fmt通過，未重跑Cargo測試／GUI／CI |
+| Analytics | [Day40 r1：CSV 匯出遵循目前精確事件類型篩選](day-40/analytics-r1.md) | Day41 | 程式未變；前輪PG53通過保留原SHA，本輪fmt通過 |
 
 [Chat首頁](../chat/README.md) · [Pet首頁](../pet/README.md) · [Analytics首頁](../analytics/README.md)
 
-最新程式 `b0e06b73f5ab37b899c00b2ba08fd4da780e0dbf`；原教學基底 `bb259aaf76542554a3a704d9c4f4a3a219d65cbf`。[真正本地命令與結果](day-40/local-validation/README.md)：最新Chat測試失敗，Pet舊斷言未恢復；候選成功不抵消產品問題。
+最新程式 `9c767978b20bd56e1c2182dac2f37e6ae9b7d988`；[本輪來源核對](day-40/source-update-9c76797/README.md)。Chat/account已補回、Pet三個舊測試已恢復；本輪只實跑fmt，不宣稱新SHA已跑Cargo測試。
 
 [全專案重構獨立項目](../../../docs/engineering/README.md)：跨案契約、共用crates、跨workspace與全庫CI；不計入各案Refactor完成量。
 

@@ -500,20 +500,20 @@
     "latest_github_publication": {
       "chat": {
         "day": 40,
-        "revision": "r1",
-        "path": "docs/teaching/daily/day-40/chat-r1.md",
-        "article_commit": "fcf8a5aa6038ce15842850cbb1dda8a0c4711f78",
-        "source_sha": "b0e06b73f5ab37b899c00b2ba08fd4da780e0dbf",
-        "product_applied": "partial-with-regression",
+        "revision": "r2",
+        "path": "docs/teaching/daily/day-40/chat-r2.md",
+        "article_commit": "480c40f3f690fcc699e5970c90980f5fbc6953ae",
+        "source_sha": "9c767978b20bd56e1c2182dac2f37e6ae9b7d988",
+        "product_applied": "observed repaired",
         "accepted": false
       },
       "pet": {
         "day": 40,
-        "revision": "r1",
-        "path": "docs/teaching/daily/day-40/pet-r1.md",
-        "article_commit": "baae8cb134501c2d806bee4221f64ed0827a80b4",
-        "source_sha": "b0e06b73f5ab37b899c00b2ba08fd4da780e0dbf",
-        "product_applied": "observed-with-missing-tests",
+        "revision": "r2",
+        "path": "docs/teaching/daily/day-40/pet-r2.md",
+        "article_commit": "93e5364d033040a58ade328ede7be40baa540a4e",
+        "source_sha": "9c767978b20bd56e1c2182dac2f37e6ae9b7d988",
+        "product_applied": "observed repaired",
         "accepted": false
       },
       "analytics": {
@@ -691,6 +691,44 @@
         "source_refresh": "docs/teaching/daily/day-40/local-validation/source-refresh.json",
         "remote_exact_commit_readback": true,
         "remote_verification_commit": "c65e5d422d31867f0c8beef5baf8915c39d987a8"
+      }
+    },
+    "latest_source_article_revision": {
+      "chat": {
+        "project": "chat",
+        "day": 40,
+        "revision": "r2",
+        "article_path": "docs/teaching/daily/day-40/chat-r2.md",
+        "source_sha": "9c767978b20bd56e1c2182dac2f37e6ae9b7d988",
+        "sha256": "c256b616801af13f2ae1f3241ab5d0c289afe9c06b164ecbf542aee8cac2b171",
+        "scope": "post-fix source/document refresh; not new TDD day",
+        "cargo_fmt_executed": true,
+        "cargo_check_executed": false,
+        "cargo_test_executed": false,
+        "functional_acceptance": false,
+        "gate2": false,
+        "publication_status": "prepared",
+        "evidence": "docs/teaching/daily/day-40/source-update-9c76797/verification.json",
+        "next_day_before": 41,
+        "next_day_after": 41
+      },
+      "pet": {
+        "project": "pet",
+        "day": 40,
+        "revision": "r2",
+        "article_path": "docs/teaching/daily/day-40/pet-r2.md",
+        "source_sha": "9c767978b20bd56e1c2182dac2f37e6ae9b7d988",
+        "sha256": "e959173410a3b7062cbc1325dfc0394416886125dc321b12dc8fe3ef3c7a34fc",
+        "scope": "post-fix source/document refresh; not new TDD day",
+        "cargo_fmt_executed": true,
+        "cargo_check_executed": false,
+        "cargo_test_executed": false,
+        "functional_acceptance": false,
+        "gate2": false,
+        "publication_status": "prepared",
+        "evidence": "docs/teaching/daily/day-40/source-update-9c76797/verification.json",
+        "next_day_before": 41,
+        "next_day_after": 41
       }
     }
   },
@@ -3205,115 +3243,13 @@
     "status": "github_article_readback_verified"
   },
   "latest_source_validation": {
-    "source_sha": "b0e06b73f5ab37b899c00b2ba08fd4da780e0dbf",
-    "scope": "Day40 local validation and versioned Day39/40 historical corrections; not weekly full comparison",
-    "summary": "docs/teaching/daily/day-40/local-validation/summary.json",
-    "report": "docs/teaching/daily/day-40/local-validation/README.md",
-    "overall": "chat_account_regression_pet_native_connected_tests_missing_analytics_pg_passed",
-    "functional_acceptance": false,
-    "results": {
-      "candidate": {
-        "chat": {
-          "passed": 59,
-          "failed": 0,
-          "ignored_in_default_suite": 0,
-          "commands": [
-            "candidate-chat-test"
-          ],
-          "fmt_exit_code": 1,
-          "check_exit_code": 0,
-          "wasm_exit_code": 0
-        },
-        "pet": {
-          "passed": 72,
-          "failed": 0,
-          "ignored_in_default_suite": 0,
-          "commands": [
-            "candidate-pet-application",
-            "candidate-pet-sqlite",
-            "candidate-pet-test"
-          ],
-          "fmt_exit_code": 1,
-          "check_exit_code": 0,
-          "wasm_exit_code": 0
-        },
-        "analytics": {
-          "passed": 53,
-          "failed": 0,
-          "ignored_in_default_suite": 1,
-          "commands": [
-            "candidate-analytics-pg",
-            "candidate-analytics-ignored"
-          ],
-          "fmt_exit_code": 1,
-          "check_exit_code": 0,
-          "wasm_exit_code": null
-        }
-      },
-      "latest": {
-        "chat": {
-          "passed": 57,
-          "failed": 2,
-          "ignored_in_default_suite": 0,
-          "commands": [
-            "latest-chat-complete"
-          ],
-          "fmt_exit_code": 0,
-          "check_exit_code": 0,
-          "wasm_exit_code": 0
-        },
-        "pet": {
-          "passed": 69,
-          "failed": 0,
-          "ignored_in_default_suite": 0,
-          "commands": [
-            "latest-pet-application",
-            "latest-pet-sqlite",
-            "latest-pet-test"
-          ],
-          "fmt_exit_code": 0,
-          "check_exit_code": 0,
-          "wasm_exit_code": 0
-        },
-        "analytics": {
-          "passed": 53,
-          "failed": 0,
-          "ignored_in_default_suite": 1,
-          "commands": [
-            "latest-analytics-pg",
-            "latest-analytics-ignored"
-          ],
-          "fmt_exit_code": 0,
-          "check_exit_code": 0,
-          "wasm_exit_code": null
-        }
-      },
-      "followup": {
-        "chat": {
-          "passed": 59,
-          "failed": 0,
-          "ignored_in_default_suite": 0,
-          "commands": [
-            "followup-chat-test"
-          ],
-          "fmt_exit_code": 0,
-          "check_exit_code": 0,
-          "wasm_exit_code": null
-        },
-        "pet": {
-          "passed": 60,
-          "failed": 0,
-          "ignored_in_default_suite": 0,
-          "commands": [
-            "followup-pet-test"
-          ],
-          "fmt_exit_code": 1,
-          "check_exit_code": 0,
-          "wasm_exit_code": null
-        }
-      }
-    },
-    "source_refresh": "docs/teaching/daily/day-40/local-validation/source-refresh.json"
+    "source_sha": "9c767978b20bd56e1c2182dac2f37e6ae9b7d988",
+    "scope": "incremental source and documentation refresh; no Cargo check/test or GUI/CI rerun",
+    "record": "docs/teaching/daily/day-40/source-update-9c76797/verification.json",
+    "cargo_fmt_executed": true,
+    "cargo_check_executed": false,
+    "cargo_test_executed": false,
+    "functional_acceptance": false
   },
   "completed_article_archive": {
     "policy": "archive after lesson-slice verification with matching source and evidence; full-product acceptance independent",
@@ -5994,13 +5930,14 @@
     "product_modified": false
   },
   "current_refactor_validation": {
-    "source_sha": "b0e06b73f5ab37b899c00b2ba08fd4da780e0dbf",
+    "source_sha": "9c767978b20bd56e1c2182dac2f37e6ae9b7d988",
+    "scope": "source and fmt only; no new refactor credit",
     "counts": {
-      "chat": "最新碼/account回歸，測試失敗；修復候選另驗；GUI／CI未驗",
-      "pet": "b0原生接線已補、69項通過；3舊測試恢復候選fmt／server60通過；GUI未驗",
-      "analytics": "真PG／Router、check通過；候選fmt失敗，最新fmt通過；GUI／CI未驗"
+      "chat": "/account已補回；本輪fmt通過，未重跑Cargo測試／GUI／CI",
+      "pet": "3舊測試已恢復；本輪fmt通過，未重跑Cargo測試／GUI／CI",
+      "analytics": "程式未變；前輪PG53通過保留原SHA，本輪fmt通過"
     },
-    "record": "docs/teaching/daily/day-40/local-validation/README.md",
+    "record": "docs/teaching/daily/day-40/source-update-9c76797/README.md",
     "product_acceptance": false
   },
   "day40_chat_delivery": {
@@ -6315,8 +6252,8 @@
     "source_modified": false
   },
   "current_article_paths": {
-    "chat": "docs/teaching/daily/day-40/chat-r1.md",
-    "pet": "docs/teaching/daily/day-40/pet-r1.md",
+    "chat": "docs/teaching/daily/day-40/chat-r2.md",
+    "pet": "docs/teaching/daily/day-40/pet-r2.md",
     "analytics": "docs/teaching/daily/day-40/analytics-r1.md"
   },
   "previous_source_validation_before_day40_r1": {
@@ -6604,5 +6541,178 @@
     "record": "docs/teaching/daily/day-40/r1-remote-readback.json",
     "full_remote_article_readbacks": 6,
     "full_text_equal": true
+  },
+  "day40_r2_source_revision": {
+    "source_sha": "9c767978b20bd56e1c2182dac2f37e6ae9b7d988",
+    "previous_sha": "b0e06b73f5ab37b899c00b2ba08fd4da780e0dbf",
+    "scope": "incremental source and documentation refresh; no Cargo check/test or GUI/CI rerun",
+    "articles": [
+      {
+        "project": "chat",
+        "day": 40,
+        "revision": "r2",
+        "article_path": "docs/teaching/daily/day-40/chat-r2.md",
+        "source_sha": "9c767978b20bd56e1c2182dac2f37e6ae9b7d988",
+        "sha256": "c256b616801af13f2ae1f3241ab5d0c289afe9c06b164ecbf542aee8cac2b171",
+        "scope": "post-fix source/document refresh; not new TDD day",
+        "cargo_fmt_executed": true,
+        "cargo_check_executed": false,
+        "cargo_test_executed": false,
+        "functional_acceptance": false,
+        "gate2": false,
+        "publication_status": "committed-for-publication",
+        "evidence": "docs/teaching/daily/day-40/source-update-9c76797/verification.json",
+        "next_day_before": 41,
+        "next_day_after": 41,
+        "article_commit": "480c40f3f690fcc699e5970c90980f5fbc6953ae",
+        "blob_sha": "a2f7add804b4dc82d6c95c42baefb9e2843548ad",
+        "local_exact_commit_readback": true
+      },
+      {
+        "project": "pet",
+        "day": 40,
+        "revision": "r2",
+        "article_path": "docs/teaching/daily/day-40/pet-r2.md",
+        "source_sha": "9c767978b20bd56e1c2182dac2f37e6ae9b7d988",
+        "sha256": "e959173410a3b7062cbc1325dfc0394416886125dc321b12dc8fe3ef3c7a34fc",
+        "scope": "post-fix source/document refresh; not new TDD day",
+        "cargo_fmt_executed": true,
+        "cargo_check_executed": false,
+        "cargo_test_executed": false,
+        "functional_acceptance": false,
+        "gate2": false,
+        "publication_status": "committed-for-publication",
+        "evidence": "docs/teaching/daily/day-40/source-update-9c76797/verification.json",
+        "next_day_before": 41,
+        "next_day_after": 41,
+        "article_commit": "93e5364d033040a58ade328ede7be40baa540a4e",
+        "blob_sha": "52034155b652347adf56f43cc74cd02c6373c7ec",
+        "local_exact_commit_readback": true
+      }
+    ],
+    "next_day_unchanged": true,
+    "last_full_comparison_unchanged": true,
+    "full_comparison_executed": false
+  },
+  "previous_source_validation_before_9c76797": {
+    "source_sha": "b0e06b73f5ab37b899c00b2ba08fd4da780e0dbf",
+    "scope": "Day40 local validation and versioned Day39/40 historical corrections; not weekly full comparison",
+    "summary": "docs/teaching/daily/day-40/local-validation/summary.json",
+    "report": "docs/teaching/daily/day-40/local-validation/README.md",
+    "overall": "chat_account_regression_pet_native_connected_tests_missing_analytics_pg_passed",
+    "functional_acceptance": false,
+    "results": {
+      "candidate": {
+        "chat": {
+          "passed": 59,
+          "failed": 0,
+          "ignored_in_default_suite": 0,
+          "commands": [
+            "candidate-chat-test"
+          ],
+          "fmt_exit_code": 1,
+          "check_exit_code": 0,
+          "wasm_exit_code": 0
+        },
+        "pet": {
+          "passed": 72,
+          "failed": 0,
+          "ignored_in_default_suite": 0,
+          "commands": [
+            "candidate-pet-application",
+            "candidate-pet-sqlite",
+            "candidate-pet-test"
+          ],
+          "fmt_exit_code": 1,
+          "check_exit_code": 0,
+          "wasm_exit_code": 0
+        },
+        "analytics": {
+          "passed": 53,
+          "failed": 0,
+          "ignored_in_default_suite": 1,
+          "commands": [
+            "candidate-analytics-pg",
+            "candidate-analytics-ignored"
+          ],
+          "fmt_exit_code": 1,
+          "check_exit_code": 0,
+          "wasm_exit_code": null
+        }
+      },
+      "latest": {
+        "chat": {
+          "passed": 57,
+          "failed": 2,
+          "ignored_in_default_suite": 0,
+          "commands": [
+            "latest-chat-complete"
+          ],
+          "fmt_exit_code": 0,
+          "check_exit_code": 0,
+          "wasm_exit_code": 0
+        },
+        "pet": {
+          "passed": 69,
+          "failed": 0,
+          "ignored_in_default_suite": 0,
+          "commands": [
+            "latest-pet-application",
+            "latest-pet-sqlite",
+            "latest-pet-test"
+          ],
+          "fmt_exit_code": 0,
+          "check_exit_code": 0,
+          "wasm_exit_code": 0
+        },
+        "analytics": {
+          "passed": 53,
+          "failed": 0,
+          "ignored_in_default_suite": 1,
+          "commands": [
+            "latest-analytics-pg",
+            "latest-analytics-ignored"
+          ],
+          "fmt_exit_code": 0,
+          "check_exit_code": 0,
+          "wasm_exit_code": null
+        }
+      },
+      "followup": {
+        "chat": {
+          "passed": 59,
+          "failed": 0,
+          "ignored_in_default_suite": 0,
+          "commands": [
+            "followup-chat-test"
+          ],
+          "fmt_exit_code": 0,
+          "check_exit_code": 0,
+          "wasm_exit_code": null
+        },
+        "pet": {
+          "passed": 60,
+          "failed": 0,
+          "ignored_in_default_suite": 0,
+          "commands": [
+            "followup-pet-test"
+          ],
+          "fmt_exit_code": 1,
+          "check_exit_code": 0,
+          "wasm_exit_code": null
+        }
+      }
+    },
+    "source_refresh": "docs/teaching/daily/day-40/local-validation/source-refresh.json"
+  },
+  "previous_refactor_validation_before_9c76797": {
+    "source_sha": "b0e06b73f5ab37b899c00b2ba08fd4da780e0dbf",
+    "counts": {
+      "chat": "最新碼/account回歸，測試失敗；修復候選另驗；GUI／CI未驗",
+      "pet": "b0原生接線已補、69項通過；3舊測試恢復候選fmt／server60通過；GUI未驗",
+      "analytics": "真PG／Router、check通過；候選fmt失敗，最新fmt通過；GUI／CI未驗"
+    },
+    "record": "docs/teaching/daily/day-40/local-validation/README.md",
+    "product_acceptance": false
   }
 }

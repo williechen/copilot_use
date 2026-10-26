@@ -1,7 +1,7 @@
 # Pet 現行教學入口
 
-[Day40 r1](../daily/day-40/pet-r1.md) · [目前狀態](STATUS.md) · [完整實測](../daily/day-40/local-validation/README.md) · [manifest](manifest.json)
+[現行Day40文章](../daily/day-40/pet-r2.md) · [現況](STATUS.md) · [本輪來源核對](../daily/day-40/source-update-9c76797/README.md)
 
-最新程式 `b0e06b73f5ab37b899c00b2ba08fd4da780e0dbf`。b0已補nativeX接線，69項通過；3舊測試仍缺，恢復候選fmt／server60通過，GUI未驗。完整命令、cwd、exit code與錯誤均已保存；下一篇Day41不變。
+來源 `9c767978b20bd56e1c2182dac2f37e6ae9b7d988`。3舊測試已恢復；本輪fmt通過，未重跑Cargo測試／GUI／CI。原始失敗及候選成功只屬各自原SHA；修補已進產品不代表新來源已驗收。
 
-[Day40原版](../daily/day-40/pet.md) · [Day39 r3](../daily/day-39/pet-r3.md) · [歷史更正](../daily/day-40/historical-corrections.md)。原始發表與各次驗證保持各SHA範圍，不把文件交付當產品驗收。
+[歷史r1](../daily/day-40/pet-r1.md) · [歷史更正](../daily/day-40/historical-corrections.md)。Day41與FIFO不變。

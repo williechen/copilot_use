@@ -1,11 +1,11 @@
 # 各專案Refactor進度
 
-最新來源 `b0e06b73f5ab37b899c00b2ba08fd4da780e0dbf`。教學候選、產品已接線部分與驗收分列，不以測試數降低宣稱重構完成。
+最新來源 `9c767978b20bd56e1c2182dac2f37e6ae9b7d988`。本輪來源／fmt核對沒有新增功能或重構計功，歷史Runtime／PG證據保持原SHA。
 
-| 專案 | 已在來源的獨立Refactor | 本次結果／限制 | 下一步 |
-| --- | --- | --- | --- |
-| [Chat](../daily/day-40/chat-r1.md#refactor) | signin統一shared token_digest | 最新/account被刪造成舊登入回歸；完整候選與補route方案另驗 | 保留既有授權caller與回歸 |
-| [Pet](../daily/day-40/pet-r1.md#refactor) | Runtime.remove集中逐label停止漫遊 | b0已補nativeX，原產品仍少3舊斷言；恢復候選fmt／server60通過，真GUI未驗 | 原生生命週期與故障補償 |
-| [Analytics](../daily/day-40/analytics-r1.md#refactor) | csv.rs承接serializer及原測試；export相容re-export | 真PG／Router及完整候選已驗；GUI／試算表未驗 | Session／角色／查詢caller |
+| 專案 | 來源現況 | 本輪／後續 |
+| --- | --- | --- |
+| [Chat](../daily/day-40/chat-r2.md#refactor) | 共用token_digest保留，/account回歸已補回 | fmt通過；新SHA的workspace與瀏覽器尚未重跑 |
+| [Pet](../daily/day-40/pet-r2.md#refactor) | Runtime.remove清理與native分支保留；3個舊斷言恢復 | fmt通過；舊候選server60不當新SHA重跑，真native待驗 |
+| [Analytics](../daily/day-40/analytics-r1.md#refactor) | csv.rs與原聚合邊界不變 | 前輪PG53沿原SHA；本輪fmt通過 |
 
-[原始命令與兩組結果](../daily/day-40/local-validation/README.md) · [歷史勘誤](../daily/day-40/historical-corrections.md)。不新增Day、FIFO、last_full_comparison不變；[G-01／G-02](../../engineering/README.md)不因當案測試計功。
+[增量來源／命令](../daily/day-40/source-update-9c76797/README.md) · [歷史勘誤](../daily/day-40/historical-corrections.md) · [全專案G-01／G-02](../../engineering/README.md)。Day41、FIFO、last_full_comparison不變。

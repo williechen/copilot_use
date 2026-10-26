@@ -16,3 +16,7 @@
 ## 發布前補正：b0e06b7
 
 ff14ca6後又出現b0e06b7，僅補Pet原生CloseRequested；因此初輪「未接」保留歷史，不能當最終狀態。Pet新SHA重跑69項通過，3項舊測試仍缺；恢復候選fmt及server60通過。Chat／Analytics／crates Git tree不變，舊失敗及PG結果仍屬ff14，不冒稱新SHA重跑。[刷新證據](local-validation/source-refresh.json)。
+
+## 來源9c76797：先前兩個缺口已套用修復
+
+最新 `9c767978b20bd56e1c2182dac2f37e6ae9b7d988` 補回/account並恢復三個Pet舊斷言。原ff／b0失敗與缺測描述保留當時SHA；現況不再寫仍未修復。三案fmt實際通過，本輪未跑check/test／GUI／CI。[來源對照](source-update-9c76797/README.md)。前輪候選結果不可改標成新SHA已跑，Day41與FIFO不變。

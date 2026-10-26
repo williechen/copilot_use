@@ -7908,179 +7908,55 @@
   "new_runtime_test_scope": "Node source contracts only; metadata/schema probes; no new Rust/PG/HTTP/GUI run",
   "comparison_report": "docs/source-review/2026-10-25-full-comparison-5c713553.md",
   "latest_incremental_review": {
-    "date": "2026-10-26",
-    "source_sha": "b0e06b73f5ab37b899c00b2ba08fd4da780e0dbf",
-    "document_base_sha": "715b19794c898b06f72307feefca996c32ca6d0b",
+    "source_sha": "9c767978b20bd56e1c2182dac2f37e6ae9b7d988",
+    "previous_sha": "b0e06b73f5ab37b899c00b2ba08fd4da780e0dbf",
+    "scope": "incremental source and documentation refresh; no Cargo check/test or GUI/CI rerun",
     "articles": [
       {
         "project": "chat",
         "day": 40,
-        "revision": "r1",
-        "article_path": "docs/teaching/daily/day-40/chat-r1.md",
-        "source_sha": "b0e06b73f5ab37b899c00b2ba08fd4da780e0dbf",
-        "teaching_base_sha": "bb259aaf76542554a3a704d9c4f4a3a219d65cbf",
-        "sha256": "30ba7447dd758a016e26441fd7868e20531eb474821a0f4d6914881d5060d948",
-        "article_commit": "fcf8a5aa6038ce15842850cbb1dda8a0c4711f78",
-        "publication_status": "published-remote-readback-verified",
+        "revision": "r2",
+        "article_path": "docs/teaching/daily/day-40/chat-r2.md",
+        "source_sha": "9c767978b20bd56e1c2182dac2f37e6ae9b7d988",
+        "sha256": "c256b616801af13f2ae1f3241ab5d0c289afe9c06b164ecbf542aee8cac2b171",
+        "scope": "post-fix source/document refresh; not new TDD day",
+        "cargo_fmt_executed": true,
+        "cargo_check_executed": false,
+        "cargo_test_executed": false,
         "functional_acceptance": false,
         "gate2": false,
-        "red_executed": false,
-        "validation": "docs/teaching/daily/day-40/local-validation/README.md",
-        "latest_result": {
-          "passed": 57,
-          "failed": 2,
-          "ignored_in_default_suite": 0,
-          "commands": [
-            "latest-chat-complete"
-          ],
-          "fmt_exit_code": 0,
-          "check_exit_code": 0,
-          "wasm_exit_code": 0
-        },
-        "candidate_result": {
-          "passed": 59,
-          "failed": 0,
-          "ignored_in_default_suite": 0,
-          "commands": [
-            "candidate-chat-test"
-          ],
-          "fmt_exit_code": 1,
-          "check_exit_code": 0,
-          "wasm_exit_code": 0
-        },
-        "followup_result": {
-          "passed": 59,
-          "failed": 0,
-          "ignored_in_default_suite": 0,
-          "commands": [
-            "followup-chat-test"
-          ],
-          "fmt_exit_code": 0,
-          "check_exit_code": 0,
-          "wasm_exit_code": null
-        },
+        "publication_status": "committed-for-publication",
+        "evidence": "docs/teaching/daily/day-40/source-update-9c76797/verification.json",
         "next_day_before": 41,
         "next_day_after": 41,
-        "blob_sha": "bdabcfabe8d6074c04a0c13739e3b9c23120bfb8",
-        "local_exact_commit_readback": true,
-        "runtime_validation_source_sha": "ff14ca6224f7c5a65c799bf4a82a743fa79c880c",
-        "source_refresh": "docs/teaching/daily/day-40/local-validation/source-refresh.json",
-        "remote_exact_commit_readback": true,
-        "remote_verification_commit": "c65e5d422d31867f0c8beef5baf8915c39d987a8"
+        "article_commit": "480c40f3f690fcc699e5970c90980f5fbc6953ae",
+        "blob_sha": "a2f7add804b4dc82d6c95c42baefb9e2843548ad",
+        "local_exact_commit_readback": true
       },
       {
         "project": "pet",
         "day": 40,
-        "revision": "r1",
-        "article_path": "docs/teaching/daily/day-40/pet-r1.md",
-        "source_sha": "b0e06b73f5ab37b899c00b2ba08fd4da780e0dbf",
-        "teaching_base_sha": "bb259aaf76542554a3a704d9c4f4a3a219d65cbf",
-        "sha256": "11629151c7e6aecb9f4684cda14a289457c8ad908c1760c68b4477980c5927bf",
-        "article_commit": "baae8cb134501c2d806bee4221f64ed0827a80b4",
-        "publication_status": "published-remote-readback-verified",
+        "revision": "r2",
+        "article_path": "docs/teaching/daily/day-40/pet-r2.md",
+        "source_sha": "9c767978b20bd56e1c2182dac2f37e6ae9b7d988",
+        "sha256": "e959173410a3b7062cbc1325dfc0394416886125dc321b12dc8fe3ef3c7a34fc",
+        "scope": "post-fix source/document refresh; not new TDD day",
+        "cargo_fmt_executed": true,
+        "cargo_check_executed": false,
+        "cargo_test_executed": false,
         "functional_acceptance": false,
         "gate2": false,
-        "red_executed": false,
-        "validation": "docs/teaching/daily/day-40/local-validation/README.md",
-        "latest_result": {
-          "passed": 69,
-          "failed": 0,
-          "ignored_in_default_suite": 0,
-          "commands": [
-            "latest-pet-application",
-            "latest-pet-sqlite",
-            "latest-pet-test"
-          ],
-          "fmt_exit_code": 0,
-          "check_exit_code": 0,
-          "wasm_exit_code": 0
-        },
-        "candidate_result": {
-          "passed": 72,
-          "failed": 0,
-          "ignored_in_default_suite": 0,
-          "commands": [
-            "candidate-pet-application",
-            "candidate-pet-sqlite",
-            "candidate-pet-test"
-          ],
-          "fmt_exit_code": 1,
-          "check_exit_code": 0,
-          "wasm_exit_code": 0
-        },
-        "followup_result": {
-          "passed": 60,
-          "failed": 0,
-          "ignored_in_default_suite": 0,
-          "commands": [
-            "followup-pet-test"
-          ],
-          "fmt_exit_code": 1,
-          "check_exit_code": 0,
-          "wasm_exit_code": null
-        },
+        "publication_status": "committed-for-publication",
+        "evidence": "docs/teaching/daily/day-40/source-update-9c76797/verification.json",
         "next_day_before": 41,
         "next_day_after": 41,
-        "blob_sha": "52eea115324306d64c5c234525ef1a7984dfbf09",
-        "local_exact_commit_readback": true,
-        "runtime_validation_source_sha": "b0e06b73f5ab37b899c00b2ba08fd4da780e0dbf",
-        "source_refresh": "docs/teaching/daily/day-40/local-validation/source-refresh.json",
-        "remote_exact_commit_readback": true,
-        "remote_verification_commit": "c65e5d422d31867f0c8beef5baf8915c39d987a8"
-      },
-      {
-        "project": "analytics",
-        "day": 40,
-        "revision": "r1",
-        "article_path": "docs/teaching/daily/day-40/analytics-r1.md",
-        "source_sha": "b0e06b73f5ab37b899c00b2ba08fd4da780e0dbf",
-        "teaching_base_sha": "bb259aaf76542554a3a704d9c4f4a3a219d65cbf",
-        "sha256": "8dcf9af473bf2df85cef52740630645d7627d40d106937f96202ffae5a583ff1",
-        "article_commit": "6872a20a7045dce92dfedfc247e5a41f4ee32226",
-        "publication_status": "published-remote-readback-verified",
-        "functional_acceptance": false,
-        "gate2": false,
-        "red_executed": false,
-        "validation": "docs/teaching/daily/day-40/local-validation/README.md",
-        "latest_result": {
-          "passed": 53,
-          "failed": 0,
-          "ignored_in_default_suite": 1,
-          "commands": [
-            "latest-analytics-pg",
-            "latest-analytics-ignored"
-          ],
-          "fmt_exit_code": 0,
-          "check_exit_code": 0,
-          "wasm_exit_code": null
-        },
-        "candidate_result": {
-          "passed": 53,
-          "failed": 0,
-          "ignored_in_default_suite": 1,
-          "commands": [
-            "candidate-analytics-pg",
-            "candidate-analytics-ignored"
-          ],
-          "fmt_exit_code": 1,
-          "check_exit_code": 0,
-          "wasm_exit_code": null
-        },
-        "followup_result": null,
-        "next_day_before": 41,
-        "next_day_after": 41,
-        "blob_sha": "1c0f9500f61df15d55adf27496ce0e3925260aea",
-        "local_exact_commit_readback": true,
-        "runtime_validation_source_sha": "ff14ca6224f7c5a65c799bf4a82a743fa79c880c",
-        "source_refresh": "docs/teaching/daily/day-40/local-validation/source-refresh.json",
-        "remote_exact_commit_readback": true,
-        "remote_verification_commit": "c65e5d422d31867f0c8beef5baf8915c39d987a8"
+        "article_commit": "93e5364d033040a58ade328ede7be40baa540a4e",
+        "blob_sha": "52034155b652347adf56f43cc74cd02c6373c7ec",
+        "local_exact_commit_readback": true
       }
     ],
-    "scope": "Day40 local validation and versioned Day39/40 historical corrections; not weekly full comparison",
     "next_day_unchanged": true,
     "last_full_comparison_unchanged": true,
-    "functional_acceptance": false,
-    "source_modified": false
+    "full_comparison_executed": false
   }
 }

@@ -1,9 +1,7 @@
 # Analytics 現行教學入口
 
-[Day40 r1](../daily/day-40/analytics-r1.md) · [目前狀態](STATUS.md) · [完整實測](../daily/day-40/local-validation/README.md) · [manifest](manifest.json)
+[現行Day40文章](../daily/day-40/analytics-r1.md) · [現況](STATUS.md) · [本輪來源核對](../daily/day-40/source-update-9c76797/README.md)
 
-最新程式 `b0e06b73f5ab37b899c00b2ba08fd4da780e0dbf`。真PG／Router、check通過；候選fmt失敗，最新fmt通過；GUI／CI未驗。完整命令、cwd、exit code與錯誤均已保存；下一篇Day41不變。
+來源 `9c767978b20bd56e1c2182dac2f37e6ae9b7d988`。程式未變；前輪PG53通過保留原SHA，本輪fmt通過。原始失敗及候選成功只屬各自原SHA；修補已進產品不代表新來源已驗收。
 
-[Day40原版](../daily/day-40/analytics.md) · [Day39 r3](../daily/day-39/analytics-r3.md) · [歷史更正](../daily/day-40/historical-corrections.md)。原始發表與各次驗證保持各SHA範圍，不把文件交付當產品驗收。
-
-Chat／Analytics／共用crates tree與ff14ca6相同，沿用該SHA測試結果；未冒稱在b0重跑。[來源刷新](../daily/day-40/local-validation/source-refresh.json)。
+[歷史r1](../daily/day-40/analytics-r1.md) · [歷史更正](../daily/day-40/historical-corrections.md)。Day41與FIFO不變。

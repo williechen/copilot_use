@@ -1,6 +1,8 @@
 # 功能待辦與工程銜接
 
-> 2026-10-26增量核對：Day40的Session首頁與CSV已見實作，但Chat/account路由回歸、Pet初輪X接線已於b0補上但3舊測試仍缺。[最新精確來源與命令](teaching/daily/day-40/local-validation/README.md)及[歷史更正](teaching/daily/day-40/historical-corrections.md)優先於下列歷史「目前」摘要；原完成條件／FIFO不變。
+> 最新9c76797已補回Chat/account並恢復Pet三個舊測試；本輪fmt通過，沒有重跑Cargo測試。[最新增量證據](teaching/daily/day-40/source-update-9c76797/README.md)優先於下列歷史「目前」摘要，功能／GUI完成條件不自動結案。
+
+> 前輪ff14／b0歷史核對（已由9c76797修復，不是最新狀態）：Day40的Session首頁與CSV已見實作，但Chat/account路由回歸、Pet初輪X接線已於b0補上但3舊測試仍缺。[最新精確來源與命令](teaching/daily/day-40/local-validation/README.md)及[歷史更正](teaching/daily/day-40/historical-corrections.md)優先於下列歷史「目前」摘要；原完成條件／FIFO不變。
 
 本頁保留原功能條件、D01–D09識別及未完成事項；政策不再重複散列。每日功能教學、每日一個全專案工程小工作包、核心60分鐘只計Red／Green，統一依[共用規則](COMMON_LEARNING_RULES.md)。工程交付完整程式／patch與測試方案，產品由使用者套用。
 
