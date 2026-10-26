@@ -4876,5 +4876,43 @@
     "next_day_before": 40,
     "next_day_after": 41,
     "errors": []
+  },
+  "day40_delivery": {
+    "date": "2026-10-26",
+    "evidence": "docs/teaching/daily/day-40/delivery-verification.json",
+    "projects": [
+      {
+        "project": "chat",
+        "article_commit": "b520ff420026d462820c8245c7b7b674fb5e45ba",
+        "blob_sha": "23364ff495b0bd5cb42f3871f855ae5205821e23",
+        "sha256": "d190c86cc5594b24ffe9054e3eb350bf988f88dec1b2db92c973e7230a316bd2",
+        "verified": true,
+        "product_applied": false,
+        "accepted": false
+      },
+      {
+        "project": "pet",
+        "article_commit": "112543652ba695e64f31c37555b3533475e55232",
+        "blob_sha": "b3d606bf42e589717e5ea4263787046d636c0ce6",
+        "sha256": "940cdb871630503069d1a35a66253cb8afea0993aab07090a9b80a4d48416165",
+        "verified": true,
+        "product_applied": false,
+        "accepted": false
+      },
+      {
+        "project": "analytics",
+        "article_commit": "4b1dc5e2a15348e2d0f6bdbd4ea133cabd5cefad",
+        "blob_sha": "ef709f989d90e1d72c91277b9755dcb06d9b4e21",
+        "sha256": "0817a0ba46758697a142b3bebccddbfc914319d06750984c7c5be7c1286d1958",
+        "verified": true,
+        "product_applied": false,
+        "accepted": false
+      }
+    ],
+    "next_day": {
+      "chat": 41,
+      "pet": 41,
+      "analytics": 41
+    }
   }
 }

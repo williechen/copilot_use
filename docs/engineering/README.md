@@ -12,3 +12,5 @@
 [各專案Refactor](../teaching/functional-refactoring/README.md) · [各案進度](../teaching/functional-refactoring/PROGRESS.md) · [架構](../SYSTEM_ARCHITECTURE.md) · [共用規則](../COMMON_LEARNING_RULES.md)。
 
 2026-10-26 Day39：未新增跨案 Refactor 或全庫 workflow；G-01 仍為未套用／未驗收方案，G-02 待盤點。三篇 Day39 的各案 Refactor 不計為 G-01／G-02 進度。
+
+2026-10-26 Day40：三案各自 Refactor（Chat 登入雜湊、Pet Runtime／roam、Analytics CSV serializer）不增加 G-01／G-02 完成量；G-01 仍未套用／未驗收，G-02 尚待完整跨 workspace caller 與依賴比對。本日無跨案 patch 或全庫 CI 實測。

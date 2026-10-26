@@ -12,7 +12,7 @@
 
 [Chat首頁](docs/teaching/chat/README.md) · [Pet首頁](docs/teaching/pet/README.md) · [Analytics首頁](docs/teaching/analytics/README.md)
 
-本篇來源 `8fc4b277b6f6f77d97655130036fca47813de56e`；前次來源 `9b89656` 的既有七個workflow全success，[CI快照](docs/teaching/daily/day-38/r2-product-ci-observation.json)。這些既有結果不驗證尚未套用的候選patch。[當日版本與原始證據](docs/teaching/daily/day-38/r2-versions.json)。
+Day40 三案來源 `bb259aaf76542554a3a704d9c4f4a3a219d65cbf`；Day39 r2 歷史來源 `8fc4b277b6f6f77d97655130036fca47813de56e`；前次來源 `9b89656` 的既有七個workflow全success，[CI快照](docs/teaching/daily/day-38/r2-product-ci-observation.json)。這些既有結果不驗證尚未套用的候選patch。[當日版本與原始證據](docs/teaching/daily/day-38/r2-versions.json)。
 
 [全專案重構獨立項目](docs/engineering/README.md)：跨案契約、共用crates、跨workspace與全庫CI；不計入各案Refactor完成量。
 
@@ -25,3 +25,5 @@
 產品程式、測試與CI以[williechen/rust_ai_ring](https://github.com/williechen/rust_ai_ring)為準，本庫只維護文件、教學／工程方案與證據。[本地啟動](docs/LOCAL_START.md) · [驗收方式](docs/LOCAL_VALIDATION.md)。
 
 > Day39 三案 Refactor 只計各案；全庫 G-01／G-02 保留在 [工程首頁](docs/engineering/README.md)，未重複計功。正文已補完整重構程式與測試；隔離Refactor驗證通過，產品未套用，功能Green與GUI仍待驗。
+
+> Day40 三案文章、各案獨立 Refactor 與 Green patch 已發布並精確讀回；只做來源 hunk 靜態核對，尚未實際套用、編譯、測試或產品驗收。[Day40 交付證據](docs/teaching/daily/day-40/delivery-verification.json)。
