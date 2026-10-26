@@ -7,7 +7,7 @@
 | 專案 | 現行教學 | 下一篇 | 驗證範圍 |
 | --- | --- | --- | --- |
 | Chat | [Day40 r2：首頁依有效 Session 顯示登入／管理](../daily/day-40/chat-r2.md) | Day41 | 本輪Rust59、fmt/check/WASM通過；登入→管理→登出瀏覽器通過 |
-| Pet | [Day40 r2：生活窗直接關閉等同逐隻回籠](../daily/day-40/pet-r2.md) | Day41 | 本輪Rust72＋Node6、fmt/check/WASM通過；原生GUI未執行 |
+| Pet | [Day40 r2：生活窗直接關閉等同逐隻回籠](../daily/day-40/pet-r2.md) | Day41 | Rust72＋Node6通過；原生多窗／關閉／出籠／重啟由使用者操作確認＋DB核對通過 |
 | Analytics | [Day40 r1：CSV 匯出遵循目前精確事件類型篩選](../daily/day-40/analytics-r1.md) | Day41 | 本輪真PG53、fmt/check通過；瀏覽器精確篩選／CSV下載通過 |
 
 ## 專案大綱與操作主線
@@ -68,3 +68,5 @@
 > Day39前輪完整本地驗證與歷史勘誤已補入[對照](../daily/day-40/historical-corrections.md)；限其原SHA，不追認Day40。
 
 > Day40 r1保存[實際套用、Cargo、SQLite／PG與原始錯誤](../daily/day-40/local-validation/README.md)。產品功能、修復候選、GUI與CI分列；next_day維持41。
+
+[Pet原生GUI人工操作與資料庫交叉驗證](../daily/day-40/native-gui-9c76797/README.md)：指定多窗、原生關閉、重新出籠與兩種重啟流程通過，完整Gate2未通過。

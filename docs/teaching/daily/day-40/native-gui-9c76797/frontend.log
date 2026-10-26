@@ -1,0 +1,4 @@
+error: invalid value '1' for '--no-color'
+  [possible values: true, false]
+
+For more information, try '--help'.

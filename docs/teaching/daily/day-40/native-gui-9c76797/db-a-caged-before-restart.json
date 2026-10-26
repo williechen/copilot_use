@@ -1,0 +1,15 @@
+{
+  "utc": "2026-10-26T13:08:37.272023+00:00",
+  "pets": [
+    {
+      "id": "20571e7c-45d2-46e2-a040-53fe47a63ab0",
+      "name": "GUI-A",
+      "is_default_closure": 1
+    },
+    {
+      "id": "adc13897-8594-4fb5-9f63-fb1aafa7d970",
+      "name": "GUI-B",
+      "is_default_closure": 0
+    }
+  ]
+}

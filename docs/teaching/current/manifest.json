@@ -3587,7 +3587,17 @@
     "scope": "actual isolated Cargo rerun plus listed browser GUI; CI rerun denied403",
     "cargo_fmt_executed": true,
     "cargo_check_executed": true,
-    "cargo_test_executed": true
+    "cargo_test_executed": true,
+    "native_gui_followup": {
+      "source_sha": "9c767978b20bd56e1c2182dac2f37e6ae9b7d988",
+      "record": "docs/teaching/daily/day-40/native-gui-9c76797/verification.json",
+      "method": "human-operated native Tauri GUI plus agent DB/process cross-check",
+      "specified_scenarios_passed": true,
+      "agent_native_gui_automation": false,
+      "roaming_tested": false,
+      "fault_injection_tested": false,
+      "full_gate2": false
+    }
   },
   "analytics_day24_correction_closure": {
     "status": "completed",
@@ -5799,5 +5809,15 @@
     "cargo_check_executed": false,
     "cargo_test_executed": false,
     "functional_acceptance": false
+  },
+  "day40_native_gui_validation": {
+    "source_sha": "9c767978b20bd56e1c2182dac2f37e6ae9b7d988",
+    "record": "docs/teaching/daily/day-40/native-gui-9c76797/verification.json",
+    "method": "human-operated native Tauri GUI plus agent DB/process cross-check",
+    "specified_scenarios_passed": true,
+    "agent_native_gui_automation": false,
+    "roaming_tested": false,
+    "fault_injection_tested": false,
+    "full_gate2": false
   }
 }
