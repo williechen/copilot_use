@@ -22,7 +22,7 @@
 
 沿現有Leptos UI、Axum HTTP／WS或Tauri IPC、用例／Domain、SQLx Adapter的真呼叫鏈交付。Chat維持SSR／hydrate／Router，Pet為CSR＋Tauri，Analytics正式頁面採Leptos，不以完整Axum HTML字串頁面作新UI Green。前台隱藏不等於伺服器授權；三案DB與Session隔離。
 
-文章保留①目標／現況／前置條件、②Red→完整Green與補教、③版本、④驗證／證據／未完成，並在①後設同篇獨立二級段落「Refactor」，與②並列。該段只針對文章所屬專案：Chat只寫Chat、Pet只寫Pet、Analytics只寫Analytics；依各案累積進度調整自身架構、測試、fixture及專案CI，不限當日功能切片，也不是Green接續的局部整理。段落必須提供本次完整程式／patch、正式caller與依賴接線、舊斷言承接、實際驗證與下一步；只有說明、規則或待辦不能算重構交付。功能Green仍須有完整程式、Cargo／features、imports、組裝及直接相關測試。跨案共用契約、crates、跨workspace依賴與全庫CI屬全專案獨立項目，不塞進各篇Refactor。
+文章保留①目標／現況／前置條件、②Red→完整Green與補教、③版本、④驗證／證據／未完成，並在①後設同篇獨立二級段落「Refactor」，與②並列。該段只針對文章所屬專案：Chat只寫Chat、Pet只寫Pet、Analytics只寫Analytics；依各案累積進度調整自身架構、測試、fixture及專案CI，不限當日功能切片，也不是Green接續的局部整理。Refactor正文須展開修改前後的問題與理由、逐檔完整修改單元、正式caller／module／依賴接線、完整新增或遷移測試、舊斷言承接、實際驗證與下一步；patch作為可直接套用的附件，不能以摘要或patch連結代替正文教學。只列說明、規則或待辦不算重構交付。功能Green仍須有完整程式、Cargo／features、imports、組裝及直接相關測試。跨案共用契約、crates、跨workspace依賴與全庫CI屬全專案獨立項目，不塞進各篇Refactor。
 
 Red須對應同篇Green；已通過測試只算回歸。預期行為Red、缺新符號編譯Red、環境／匯入錯誤分開。完整Green未準備好只能存草稿；未跑DB／native／GUI不得宣稱功能驗收。
 
