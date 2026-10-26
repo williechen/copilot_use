@@ -7,7 +7,7 @@
 | 專案 | 現行教學 | 下一篇 | 驗證範圍 |
 | --- | --- | --- | --- |
 | Chat | [Day39 r1：首頁與房間側欄首次進入自動載入公開房間](day-39/chat-r1.md) | Day40 | 方案已交付；產品未套用／未驗收；本篇 Red／Green／CI 未執行 |
-| Pet | [Day39：控制窗逐 UUID 找回寵物到主螢幕可用區](day-39/pet.md) | Day40 | 方案已交付；產品未套用／未驗收；本篇 Red／Green／CI 未執行 |
+| Pet | [Day39 r1：控制窗逐 UUID 找回寵物到主螢幕可用區](day-39/pet-r1.md) | Day40 | 方案已交付；產品未套用／未驗收；本篇 Red／Green／CI 未執行 |
 | Analytics | [Day39 r1：管理後台依 Session 匯出指定來源統計 CSV](day-39/analytics-r1.md) | Day40 | 方案已交付；產品未套用／未驗收；本篇 Red／Green／CI 未執行 |
 
 [Chat首頁](../chat/README.md) · [Pet首頁](../pet/README.md) · [Analytics首頁](../analytics/README.md)
