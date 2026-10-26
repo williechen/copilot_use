@@ -1,13 +1,15 @@
 # Chat 現行教學入口
 
-每日文章的功能Red／Green與專案Refactor分設同層段落，分別記錄驗證。核心60分鐘只計Red／Green，專案Refactor與其他交付另計；rust_ai_ring唯讀，使用者自行套用。
+每日文章另設獨立 Refactor 段落，交付該篇專案的實際重構程式、測試承接與驗證；全專案重構另列獨立項目。核心60分鐘只計Red／Green；rust_ai_ring唯讀，使用者自行套用。
 
 [共用規則](../../COMMON_LEARNING_RULES.md) · [功能與驗證](STATUS.md) · [工程進度](../functional-refactoring/PROGRESS.md) · [學習進度](../../learning-state.json) · [manifest](manifest.json)
 
 | 專案 | 現行教學 | 下一篇 | 驗證範圍 |
 | --- | --- | --- | --- |
-| Chat | [Day38 r3：搜尋失敗可見狀態與既有房間連結](../daily/day-38/chat-r3.md) | Day39 | 完整patch與精確讀回；套用檢查／語法解析通過；產品未套用、Red／Green／DB／GUI未執行 |
+| Chat | [Day38 r4：搜尋失敗可見狀態與既有房間連結](../daily/day-38/chat-r4.md) | Day39 | 候選 SSR 14項通過＋WASM check；產品未套用，GUI／候選CI未驗 |
 
-產品來源 `9b89656f964b99e0cb89ba421855704a35c5ecb9`，修訂commit `fff76c6334317c3b31d85d4746ed8acca61fa221`。[精確讀回、blob與SHA256](../daily/day-38/chat-r3-readback.json)；文件交付與產品驗收分開。
+產品來源 `9b89656f964b99e0cb89ba421855704a35c5ecb9`，修訂commit `c4016e6f9aac63d6ffc7f75bebe8132c7de840bf`。[精確讀回、blob與SHA256](../daily/day-38/chat-r4-readback.json)；文件交付與產品驗收分開。
 
-[上一篇](../daily/day-37/chat-r3.md) · [原Day38](../daily/day-38/chat.md) · [全部歷史與更正](ARTICLE_STATUS.md)。舊來源與歷史驗證沿原紀錄追溯，不重複累積到本入口。
+[上一篇](../daily/day-37/chat-r4.md) · [原Day38](../daily/day-38/chat.md) · [全部歷史與更正](ARTICLE_STATUS.md)。舊來源與歷史驗證沿原紀錄追溯，不重複累積到本入口。
+
+[全專案重構獨立項目](../../../docs/engineering/README.md) · [候選本地驗證](../../../docs/teaching/daily/day-38/r4-local-validation.json)。

@@ -1,12 +1,12 @@
 # Chat 首頁
 
-每日文章的功能Red／Green與專案Refactor分設同層段落，分別記錄驗證。核心60分鐘只計Red／Green，專案Refactor與其他交付另計；rust_ai_ring唯讀，使用者自行套用。
+每日文章另設獨立 Refactor 段落，交付該篇專案的實際重構程式、測試承接與驗證；全專案重構另列獨立項目。核心60分鐘只計Red／Green；rust_ai_ring唯讀，使用者自行套用。
 
 [共用規則](../../COMMON_LEARNING_RULES.md) · [功能與驗證](../current/STATUS.md) · [工程進度](../functional-refactoring/PROGRESS.md) · [學習進度](../../learning-state.json) · [manifest](../current/manifest.json)
 
 | 專案 | 現行教學 | 下一篇 | 驗證範圍 |
 | --- | --- | --- | --- |
-| Chat | [Day38 r3：搜尋失敗可見狀態與既有房間連結](../daily/day-38/chat-r3.md) | Day39 | 完整patch與精確讀回；套用檢查／語法解析通過；產品未套用、Red／Green／DB／GUI未執行 |
+| Chat | [Day38 r4：搜尋失敗可見狀態與既有房間連結](../daily/day-38/chat-r4.md) | Day39 | 候選 SSR 14項通過＋WASM check；產品未套用，GUI／候選CI未驗 |
 
 ## 專案大綱與操作主線
 
@@ -50,9 +50,11 @@
 
 `rust_ai_ring/chat_apps/chat_server` 負責 HTTP／WS，`chat_ui` 負責 Leptos 畫面，`chat_domain`／`chat_application` 負責規則與 Port，`chat_persistence` 負責 SQLite Adapter；migration 位於 `chat_apps/migrations`。Cargo package 使用 `chat-server`、`chat-ui`、`chat-persistence` 等實際名稱。
 
-先讀相關功能教學的「學習大綱」確認前置能力，再按第 2 節套用與 Refactor，最後照第 4 節從真實入口驗證。已實作的舊篇用來追溯，不照順序把所有舊程式再貼一次。
+先讀相關功能教學的「學習大綱」確認前置能力；第2節提供Red／Green，獨立Refactor段落提供Chat自身累積重構，分別套用與驗證，再依第4節檢查真實入口。已實作的舊篇用來追溯，不照順序把所有舊程式再貼一次。
 
 [產品操作設定](https://github.com/williechen/copilot_use/blob/main/docs/DEPLOYMENT.md) · [產品未來清單](https://github.com/williechen/copilot_use/blob/main/docs/FUTURE_WORK.md)；兩者是文件庫的需求／操作入口；主體程式、命令與驗收只依 rust_ai_ring 當時 Cargo／README／精確 SHA。
 
 
 [現行文章入口](../current/CHAT_ENTRY.md) · [歷史及修訂總表](../current/ARTICLE_STATUS.md)。實作與驗收僅在現況頁集中維護。
+
+[全專案重構獨立項目](../../../docs/engineering/README.md) · [候選本地驗證](../../../docs/teaching/daily/day-38/r4-local-validation.json)。

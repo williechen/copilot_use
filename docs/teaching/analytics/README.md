@@ -1,12 +1,12 @@
 # Analytics 首頁
 
-每日文章的功能Red／Green與專案Refactor分設同層段落，分別記錄驗證。核心60分鐘只計Red／Green，專案Refactor與其他交付另計；rust_ai_ring唯讀，使用者自行套用。
+每日文章另設獨立 Refactor 段落，交付該篇專案的實際重構程式、測試承接與驗證；全專案重構另列獨立項目。核心60分鐘只計Red／Green；rust_ai_ring唯讀，使用者自行套用。
 
 [共用規則](../../COMMON_LEARNING_RULES.md) · [功能與驗證](../current/STATUS.md) · [工程進度](../functional-refactoring/PROGRESS.md) · [學習進度](../../learning-state.json) · [manifest](../current/manifest.json)
 
 | 專案 | 現行教學 | 下一篇 | 驗證範圍 |
 | --- | --- | --- | --- |
-| Analytics | [Day38 r3：上報拒絕重複 Authorization](../daily/day-38/analytics-r3.md) | Day39 | 完整patch與精確讀回；套用檢查／語法解析通過；產品未套用、Red／Green／DB／GUI未執行 |
+| Analytics | [Day38 r4：上報拒絕重複 Authorization](../daily/day-38/analytics-r4.md) | Day39 | 候選 Router／PG 48項＋另跑ignored 1項通過；產品未套用，GUI／候選CI未驗 |
 
 ## 專案大綱與操作主線
 
@@ -68,3 +68,5 @@ Analytics 定位為純管理後台，Leptos 提供後台畫面；除登入及必
 
 
 [現行文章入口](../current/ANALYTICS_ENTRY.md) · [歷史及修訂總表](../current/ARTICLE_STATUS.md)。實作與驗收僅在現況頁集中維護。
+
+[全專案重構獨立項目](../../../docs/engineering/README.md) · [候選本地驗證](../../../docs/teaching/daily/day-38/r4-local-validation.json)。

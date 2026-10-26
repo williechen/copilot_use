@@ -51,7 +51,7 @@
     "historical_records_are_not_current_policy": true
   },
   "scope": "Latest published teaching index; Day16 snapshot preserved in archive",
-  "revision": "day38-three-projects-published-2026-10-26",
+  "revision": "day38-r4-per-project-code-and-local-validation-2026-10-26",
   "synced_date": "2026-10-26",
   "source_sha": "f3f8255b0b701a1b57cb8c0a1737c3caa4319f2d",
   "articles": [
@@ -2463,6 +2463,177 @@
       "functional_acceptance": false,
       "next_day_before": 39,
       "next_day_after": 39
+    },
+    {
+      "project": "chat",
+      "day": 38,
+      "revision": "r4",
+      "article_path": "docs/teaching/daily/day-38/chat-r4.md",
+      "article_commit": "c4016e6f9aac63d6ffc7f75bebe8132c7de840bf",
+      "parent": "1e6b8dcfa49d08b4a0af13ee4b602ac7664d2a64",
+      "blob_sha": "1861b60f970c103c98786f78be83d1bb077a324c",
+      "files": [
+        {
+          "path": "docs/teaching/daily/day-38/chat-r4.md",
+          "blob_sha": "1861b60f970c103c98786f78be83d1bb077a324c",
+          "full_text_verified": true,
+          "sha256": "732c0cc2db3792f9f2e5235b426368e0713163f948495823d3d3e5333bc48813"
+        },
+        {
+          "path": "docs/teaching/daily/day-38/chat-r4-refactor.patch",
+          "blob_sha": "18873066eed97a7f09dac93838d6161c86975d8d",
+          "full_text_verified": true,
+          "sha256": "f2ea5c0b259045cac9d649b91ba5c298ea87fc3b54bdbece9c92abfff0da852e"
+        },
+        {
+          "path": "docs/teaching/daily/day-38/chat-r4-refactor-evidence.json",
+          "blob_sha": "1707fccd1698f4d3aa49a1016b947ae7a8707520",
+          "full_text_verified": true,
+          "sha256": "61f6000f8965c49969badd353a2b81d7415cc8361a2057a123a61493674eebc9"
+        }
+      ],
+      "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+      "rules_commit": "1e6b8dcfa49d08b4a0af13ee4b602ac7664d2a64",
+      "rules_blob": "34a2847c8628388f5bdb47c64a5f613b80ed3606",
+      "readback_at": "2026-10-26T00:35:17.796Z",
+      "full_text_verified": true,
+      "sha256": "732c0cc2db3792f9f2e5235b426368e0713163f948495823d3d3e5333bc48813",
+      "repository": "williechen/copilot_use",
+      "branch": "main",
+      "evidence": "docs/teaching/daily/day-38/chat-r4-readback.json",
+      "revision_scope": "each article's own project only; continue cumulative architecture/tests/fixtures/project CI, independent of daily feature slice",
+      "functional_patch": "docs/teaching/daily/day-38/chat-r2.patch",
+      "refactor_patch": "docs/teaching/daily/day-38/chat-r4-refactor.patch",
+      "local_validation": "docs/teaching/daily/day-38/r4-local-validation.json",
+      "official_versions": "docs/teaching/daily/day-38/r2-versions.json",
+      "versions_verification_scope": "same Taipei day official metadata retained with original timestamp; no dependency/source change",
+      "gate1": "complete_document_delivery",
+      "gate2": false,
+      "product_modified": false,
+      "main_application": "not applied",
+      "red_executed": true,
+      "red_kind": "expected missing-symbol compilation failure",
+      "green_executed": true,
+      "candidate_tests_executed": true,
+      "candidate_validation_summary": "候選 SSR 14項通過＋WASM check；產品未套用，GUI／候選CI未驗",
+      "functional_acceptance": false,
+      "next_day_before": 39,
+      "next_day_after": 39,
+      "revision_does_not_advance_day": true
+    },
+    {
+      "project": "pet",
+      "day": 38,
+      "revision": "r4",
+      "article_path": "docs/teaching/daily/day-38/pet-r4.md",
+      "article_commit": "560fba6f14095e1ecc1df27c658105b4e6069dd5",
+      "parent": "c4016e6f9aac63d6ffc7f75bebe8132c7de840bf",
+      "blob_sha": "e4e9bdb89665cb6cfdc858172c3c791dd11ecc06",
+      "files": [
+        {
+          "path": "docs/teaching/daily/day-38/pet-r4.md",
+          "blob_sha": "e4e9bdb89665cb6cfdc858172c3c791dd11ecc06",
+          "full_text_verified": true,
+          "sha256": "12011a280bb028a9f11d1ff6fc0723bb443d3efc66937e579a1f0d7f0e6bff35"
+        },
+        {
+          "path": "docs/teaching/daily/day-38/pet-r4-refactor.patch",
+          "blob_sha": "27767b0a3bf8cd0869348371d9510be855bd092d",
+          "full_text_verified": true,
+          "sha256": "e539b8702b9b0171a92be047ab8c4e9f01b4fb99889e9952b3ea6fdc46588dfb"
+        },
+        {
+          "path": "docs/teaching/daily/day-38/pet-r4-refactor-evidence.json",
+          "blob_sha": "d60ac310820e083b0873ebe78601f780587e6017",
+          "full_text_verified": true,
+          "sha256": "2d44c2f675a5c9e4413e5680f16d0f5f2205302ac3604d73da767308efdc35fd"
+        }
+      ],
+      "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+      "rules_commit": "1e6b8dcfa49d08b4a0af13ee4b602ac7664d2a64",
+      "rules_blob": "34a2847c8628388f5bdb47c64a5f613b80ed3606",
+      "readback_at": "2026-10-26T00:35:27.123Z",
+      "full_text_verified": true,
+      "sha256": "12011a280bb028a9f11d1ff6fc0723bb443d3efc66937e579a1f0d7f0e6bff35",
+      "repository": "williechen/copilot_use",
+      "branch": "main",
+      "evidence": "docs/teaching/daily/day-38/pet-r4-readback.json",
+      "revision_scope": "each article's own project only; continue cumulative architecture/tests/fixtures/project CI, independent of daily feature slice",
+      "functional_patch": "docs/teaching/daily/day-38/pet-r2.patch",
+      "refactor_patch": "docs/teaching/daily/day-38/pet-r4-refactor.patch",
+      "local_validation": "docs/teaching/daily/day-38/r4-local-validation.json",
+      "official_versions": "docs/teaching/daily/day-38/r2-versions.json",
+      "versions_verification_scope": "same Taipei day official metadata retained with original timestamp; no dependency/source change",
+      "gate1": "complete_document_delivery",
+      "gate2": false,
+      "product_modified": false,
+      "main_application": "not applied",
+      "red_executed": true,
+      "red_kind": "expected missing-symbol compilation failure",
+      "green_executed": true,
+      "candidate_tests_executed": true,
+      "candidate_validation_summary": "候選 Application 4項＋Server／SQLite 60項通過；產品未套用，GUI／候選CI未驗",
+      "functional_acceptance": false,
+      "next_day_before": 39,
+      "next_day_after": 39,
+      "revision_does_not_advance_day": true
+    },
+    {
+      "project": "analytics",
+      "day": 38,
+      "revision": "r4",
+      "article_path": "docs/teaching/daily/day-38/analytics-r4.md",
+      "article_commit": "d4377fefda99fe7aba146db0a467d9872cb8975e",
+      "parent": "560fba6f14095e1ecc1df27c658105b4e6069dd5",
+      "blob_sha": "dd70003bdec9eab79fc02c330d71164006d0b258",
+      "files": [
+        {
+          "path": "docs/teaching/daily/day-38/analytics-r4.md",
+          "blob_sha": "dd70003bdec9eab79fc02c330d71164006d0b258",
+          "full_text_verified": true,
+          "sha256": "944146c2f15cdd45ac2ac015f0d841c71d63365b62b3d37935ff9f92d6660a56"
+        },
+        {
+          "path": "docs/teaching/daily/day-38/analytics-r4-refactor.patch",
+          "blob_sha": "d28edebced42910bf73a406dc52d41d661019a61",
+          "full_text_verified": true,
+          "sha256": "04dbd2a9cf90a5b0f4d5c875af91a1bd43dc1fd2e400dbcd249487b41b58ee1f"
+        },
+        {
+          "path": "docs/teaching/daily/day-38/analytics-r4-refactor-evidence.json",
+          "blob_sha": "b842d3cb235b95bd6b16e6e2fdadc9106e428249",
+          "full_text_verified": true,
+          "sha256": "1f8d2d4dbdaa262b9b687599b2e44843009dd644231659610bfa6213ec48114d"
+        }
+      ],
+      "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+      "rules_commit": "1e6b8dcfa49d08b4a0af13ee4b602ac7664d2a64",
+      "rules_blob": "34a2847c8628388f5bdb47c64a5f613b80ed3606",
+      "readback_at": "2026-10-26T00:35:35.435Z",
+      "full_text_verified": true,
+      "sha256": "944146c2f15cdd45ac2ac015f0d841c71d63365b62b3d37935ff9f92d6660a56",
+      "repository": "williechen/copilot_use",
+      "branch": "main",
+      "evidence": "docs/teaching/daily/day-38/analytics-r4-readback.json",
+      "revision_scope": "each article's own project only; continue cumulative architecture/tests/fixtures/project CI, independent of daily feature slice",
+      "functional_patch": "docs/teaching/daily/day-38/analytics-r2.patch",
+      "refactor_patch": "docs/teaching/daily/day-38/analytics-r4-refactor.patch",
+      "local_validation": "docs/teaching/daily/day-38/r4-local-validation.json",
+      "official_versions": "docs/teaching/daily/day-38/r2-versions.json",
+      "versions_verification_scope": "same Taipei day official metadata retained with original timestamp; no dependency/source change",
+      "gate1": "complete_document_delivery",
+      "gate2": false,
+      "product_modified": false,
+      "main_application": "not applied",
+      "red_executed": true,
+      "red_kind": "behavior: duplicate Authorization 201 vs expected401",
+      "green_executed": true,
+      "candidate_tests_executed": true,
+      "candidate_validation_summary": "候選 Router／PG 48項＋另跑ignored 1項通過；產品未套用，GUI／候選CI未驗",
+      "functional_acceptance": false,
+      "next_day_before": 39,
+      "next_day_after": 39,
+      "revision_does_not_advance_day": true
     }
   ],
   "day15_frozen": true,
@@ -2610,7 +2781,7 @@
     "frozen_body_sha256": "ad6cef4a58f20f6162fb01a4c71ef1a752992856327063d9988112c91a639184",
     "frozen_notion_snapshot": "docs/teaching/archive/day-22/notion/chat.md"
   },
-  "latest_chat_publication": "docs/teaching/daily/day-38/chat-r3-readback.json",
+  "latest_chat_publication": "docs/teaching/daily/day-38/chat-r4-readback.json",
   "previous_day22_pet_article": {
     "project": "pet",
     "day": 22,
@@ -2646,7 +2817,7 @@
     "frozen_body_sha256": "88fa706c5a3f7f3d6255957b8ed317d64cb1a6c57f1cf6638bfb838d5e6b282f",
     "frozen_notion_snapshot": "docs/teaching/archive/day-22/notion/pet.md"
   },
-  "latest_pet_publication": "docs/teaching/daily/day-38/pet-r3-readback.json",
+  "latest_pet_publication": "docs/teaching/daily/day-38/pet-r4-readback.json",
   "previous_day22_analytics_article": {
     "project": "analytics",
     "day": 22,
@@ -2681,7 +2852,7 @@
     "frozen_body_sha256": "ae01b5aee1d29eec4a60a8ae8800e1a07ab8c9e7a838c4fa1ed17bfedc9069d1",
     "frozen_notion_snapshot": "docs/teaching/archive/day-22/notion/analytics.md"
   },
-  "latest_analytics_publication": "docs/teaching/daily/day-38/analytics-r3-readback.json",
+  "latest_analytics_publication": "docs/teaching/daily/day-38/analytics-r4-readback.json",
   "day23_archive": "docs/teaching/archive/day-23/manifest.json",
   "previous_day23_chat_article": {
     "project": "chat",
@@ -3002,14 +3173,18 @@
     "prompt_full_readback_matches": true,
     "readback_after_server_page_reload": true,
     "prompt_before_sha256": "635aefd9cdac0ab2af53f22776b68fecd575f92a6429540bd9d593aa87be37d3",
-    "prompt_sha256": "8b8684dbc2b3a2de569b20778f5a3b63f2902886ecda05e37538df112ef3bc39",
+    "prompt_sha256": "a11fc38655f1c9025fc89f0f5a955c530c71bd673638feb0caa31e21eed1e04d",
     "readme_updates": true,
     "prompt_document": "docs/teaching/scheduler-instructions-v1.md",
-    "verification_scope": "Existing task prompt saved and exact full text matched after reload; independent peer Refactor section within same article; schedule/model unchanged.",
+    "verification_scope": "existing web task prompt saved; exact full readback after reload; own-project Refactor and global independent items distinguished; schedule/model unchanged",
     "readme_scope": "copilot_use seven navigation homepages; rust_ai_ring stays read-only",
-    "verification_evidence": "docs/teaching/current/day38-r3-schedule.json",
+    "verification_evidence": "docs/teaching/current/day38-r4-schedule.json",
     "previous_documentation_commit": "43b0c4f4eb5d6b65d6d3155a473b2a673d944046",
-    "documentation_commit": "92913e7aae67b317fe25dab75f6ec56721042d35"
+    "documentation_commit": "1e6b8dcfa49d08b4a0af13ee4b602ac7664d2a64",
+    "prompt": "每日依Chat→Pet→Analytics交付TDD文章。先讀copilot_use/main的共用規則、需求、架構、learning-state、manifest、入口與上一篇，核對兩庫精確SHA及當日官方穩定版本，依next_day選功能。\n\n每篇保留目標、完整Red／Green、版本與驗證，另設與Red／Green並列的「Refactor」獨立段落，只處理該篇所屬專案：Chat只寫Chat、Pet只寫Pet、Analytics只寫Analytics。依各案累積進度逐步整理自身架構、測試、fixture與專案CI，不限定當日功能切片，也不作Green後續的小整理。交代完整變更／patch、有效斷言承接、實際驗證與下一步；未完成如實記錄。\n\n全專案重構另列獨立項目，集中於docs/engineering/README.md：跨案契約、共用crates、跨workspace依賴與全庫CI。不得把全庫workflow或其他專案內容塞入各案Refactor，也不得重複計功。\n\n每案獨立提交、精確commit全文讀回並存blob／SHA256後，條件同步進度、manifest、七首頁與入口。只寫copilot_use/main；rust_ai_ring唯讀，完整程式／patch及測試方案由使用者套用。核心60分鐘只計Red／Green，兩類Refactor及其餘另計。重構不增加Day；方案、套用、驗收與未執行分列。保留原文、斷言與FIFO，不建立第二套產品，不更新last_full_comparison；一項受阻仍做其餘可獨立項。",
+    "verified_at": "2026-10-26T00:06:42.859Z",
+    "fresh_page_full_text_matches": true,
+    "run_now": false
   },
   "duplicate_application_review": {
     "date": "2026-10-25",
@@ -3439,19 +3614,6 @@
       "readback_verified": true
     }
   },
-  "daily_project_engineering": {
-    "cadence": "one small dependency-ordered package per day",
-    "scope": "whole project layering, tests and CI; separate from daily functional lesson",
-    "delivery": "complete source/patch and test plan; user applies",
-    "product_repository_read_only": true,
-    "progress": "docs/teaching/functional-refactoring/PROGRESS.md",
-    "core_minutes_excluded": true,
-    "day_advance": false,
-    "selection": "continue each project's cumulative architecture/test/CI dependency plan; independent of today's feature slice",
-    "article_refactor": "same article: independent top-level project Refactor section, peer to Red/Green; complete changes/tests/CI, cumulative status, validation and next step; not a Green continuation; no mandatory separate article",
-    "cross_project_packages": "single shared evidence; do not count once per project",
-    "project_progress": "docs/teaching/functional-refactoring/PROGRESS.md"
-  },
   "day38_r2_delivery": {
     "chat": {
       "project": "chat",
@@ -3612,10 +3774,30 @@
   },
   "latest_document_consolidation": {
     "date": "2026-10-26",
-    "rules_commit": "43b0c4f4eb5d6b65d6d3155a473b2a673d944046",
+    "rules_commit": "1e6b8dcfa49d08b4a0af13ee4b602ac7664d2a64",
     "core_minutes": "Red/Green only",
-    "engineering_progress": "docs/teaching/functional-refactoring/PROGRESS.md",
-    "article_readback": "docs/teaching/daily/day-38/r2-delivery-verification.json",
+    "per_project_refactor": {
+      "scope": "each article's own project only; continue cumulative architecture/tests/fixtures/project CI, independent of daily feature slice",
+      "article_section": "same article independent level-two Refactor section, peer to Red/Green",
+      "delivery": "complete actual patch, real caller/module wiring, assertion migration map, executed validation and next step",
+      "product_repository_read_only": true,
+      "progress": "docs/teaching/functional-refactoring/PROGRESS.md",
+      "core_minutes_excluded": true,
+      "day_advance": false
+    },
+    "global_refactoring": {
+      "scope": "cross-project contracts/shared crates/cross-workspace dependencies/whole-repository CI",
+      "delivery": "independent items, not embedded or counted in each project Refactor",
+      "entry": "docs/engineering/README.md",
+      "items": {
+        "G-01": "CI isolation proposal and complete patch delivered; not applied or accepted",
+        "G-02": "cross-workspace/shared baseline pending"
+      },
+      "product_repository_read_only": true,
+      "day_advance": false
+    },
+    "article_readback": "docs/teaching/daily/day-38/r4-delivery-verification.json",
+    "candidate_validation": "docs/teaching/daily/day-38/r4-local-validation.json",
     "product_modified": false
   },
   "day38_r3_delivery": {
@@ -3721,5 +3903,202 @@
       "next_day_before": 39,
       "next_day_after": 39
     }
+  },
+  "per_project_refactor": {
+    "scope": "each article's own project only; continue cumulative architecture/tests/fixtures/project CI, independent of daily feature slice",
+    "article_section": "same article independent level-two Refactor section, peer to Red/Green",
+    "delivery": "complete actual patch, real caller/module wiring, assertion migration map, executed validation and next step",
+    "product_repository_read_only": true,
+    "progress": "docs/teaching/functional-refactoring/PROGRESS.md",
+    "core_minutes_excluded": true,
+    "day_advance": false
+  },
+  "global_refactoring": {
+    "scope": "cross-project contracts/shared crates/cross-workspace dependencies/whole-repository CI",
+    "delivery": "independent items, not embedded or counted in each project Refactor",
+    "entry": "docs/engineering/README.md",
+    "items": {
+      "G-01": "CI isolation proposal and complete patch delivered; not applied or accepted",
+      "G-02": "cross-workspace/shared baseline pending"
+    },
+    "product_repository_read_only": true,
+    "day_advance": false
+  },
+  "day38_r4_delivery": {
+    "projects": [
+      {
+        "project": "chat",
+        "day": 38,
+        "revision": "r4",
+        "article_path": "docs/teaching/daily/day-38/chat-r4.md",
+        "article_commit": "c4016e6f9aac63d6ffc7f75bebe8132c7de840bf",
+        "parent": "1e6b8dcfa49d08b4a0af13ee4b602ac7664d2a64",
+        "blob_sha": "1861b60f970c103c98786f78be83d1bb077a324c",
+        "files": [
+          {
+            "path": "docs/teaching/daily/day-38/chat-r4.md",
+            "blob_sha": "1861b60f970c103c98786f78be83d1bb077a324c",
+            "full_text_verified": true,
+            "sha256": "732c0cc2db3792f9f2e5235b426368e0713163f948495823d3d3e5333bc48813"
+          },
+          {
+            "path": "docs/teaching/daily/day-38/chat-r4-refactor.patch",
+            "blob_sha": "18873066eed97a7f09dac93838d6161c86975d8d",
+            "full_text_verified": true,
+            "sha256": "f2ea5c0b259045cac9d649b91ba5c298ea87fc3b54bdbece9c92abfff0da852e"
+          },
+          {
+            "path": "docs/teaching/daily/day-38/chat-r4-refactor-evidence.json",
+            "blob_sha": "1707fccd1698f4d3aa49a1016b947ae7a8707520",
+            "full_text_verified": true,
+            "sha256": "61f6000f8965c49969badd353a2b81d7415cc8361a2057a123a61493674eebc9"
+          }
+        ],
+        "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+        "rules_commit": "1e6b8dcfa49d08b4a0af13ee4b602ac7664d2a64",
+        "rules_blob": "34a2847c8628388f5bdb47c64a5f613b80ed3606",
+        "readback_at": "2026-10-26T00:35:17.796Z",
+        "full_text_verified": true,
+        "sha256": "732c0cc2db3792f9f2e5235b426368e0713163f948495823d3d3e5333bc48813",
+        "repository": "williechen/copilot_use",
+        "branch": "main",
+        "evidence": "docs/teaching/daily/day-38/chat-r4-readback.json",
+        "revision_scope": "each article's own project only; continue cumulative architecture/tests/fixtures/project CI, independent of daily feature slice",
+        "functional_patch": "docs/teaching/daily/day-38/chat-r2.patch",
+        "refactor_patch": "docs/teaching/daily/day-38/chat-r4-refactor.patch",
+        "local_validation": "docs/teaching/daily/day-38/r4-local-validation.json",
+        "official_versions": "docs/teaching/daily/day-38/r2-versions.json",
+        "versions_verification_scope": "same Taipei day official metadata retained with original timestamp; no dependency/source change",
+        "gate1": "complete_document_delivery",
+        "gate2": false,
+        "product_modified": false,
+        "main_application": "not applied",
+        "red_executed": true,
+        "red_kind": "expected missing-symbol compilation failure",
+        "green_executed": true,
+        "candidate_tests_executed": true,
+        "candidate_validation_summary": "候選 SSR 14項通過＋WASM check；產品未套用，GUI／候選CI未驗",
+        "functional_acceptance": false,
+        "next_day_before": 39,
+        "next_day_after": 39,
+        "revision_does_not_advance_day": true
+      },
+      {
+        "project": "pet",
+        "day": 38,
+        "revision": "r4",
+        "article_path": "docs/teaching/daily/day-38/pet-r4.md",
+        "article_commit": "560fba6f14095e1ecc1df27c658105b4e6069dd5",
+        "parent": "c4016e6f9aac63d6ffc7f75bebe8132c7de840bf",
+        "blob_sha": "e4e9bdb89665cb6cfdc858172c3c791dd11ecc06",
+        "files": [
+          {
+            "path": "docs/teaching/daily/day-38/pet-r4.md",
+            "blob_sha": "e4e9bdb89665cb6cfdc858172c3c791dd11ecc06",
+            "full_text_verified": true,
+            "sha256": "12011a280bb028a9f11d1ff6fc0723bb443d3efc66937e579a1f0d7f0e6bff35"
+          },
+          {
+            "path": "docs/teaching/daily/day-38/pet-r4-refactor.patch",
+            "blob_sha": "27767b0a3bf8cd0869348371d9510be855bd092d",
+            "full_text_verified": true,
+            "sha256": "e539b8702b9b0171a92be047ab8c4e9f01b4fb99889e9952b3ea6fdc46588dfb"
+          },
+          {
+            "path": "docs/teaching/daily/day-38/pet-r4-refactor-evidence.json",
+            "blob_sha": "d60ac310820e083b0873ebe78601f780587e6017",
+            "full_text_verified": true,
+            "sha256": "2d44c2f675a5c9e4413e5680f16d0f5f2205302ac3604d73da767308efdc35fd"
+          }
+        ],
+        "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+        "rules_commit": "1e6b8dcfa49d08b4a0af13ee4b602ac7664d2a64",
+        "rules_blob": "34a2847c8628388f5bdb47c64a5f613b80ed3606",
+        "readback_at": "2026-10-26T00:35:27.123Z",
+        "full_text_verified": true,
+        "sha256": "12011a280bb028a9f11d1ff6fc0723bb443d3efc66937e579a1f0d7f0e6bff35",
+        "repository": "williechen/copilot_use",
+        "branch": "main",
+        "evidence": "docs/teaching/daily/day-38/pet-r4-readback.json",
+        "revision_scope": "each article's own project only; continue cumulative architecture/tests/fixtures/project CI, independent of daily feature slice",
+        "functional_patch": "docs/teaching/daily/day-38/pet-r2.patch",
+        "refactor_patch": "docs/teaching/daily/day-38/pet-r4-refactor.patch",
+        "local_validation": "docs/teaching/daily/day-38/r4-local-validation.json",
+        "official_versions": "docs/teaching/daily/day-38/r2-versions.json",
+        "versions_verification_scope": "same Taipei day official metadata retained with original timestamp; no dependency/source change",
+        "gate1": "complete_document_delivery",
+        "gate2": false,
+        "product_modified": false,
+        "main_application": "not applied",
+        "red_executed": true,
+        "red_kind": "expected missing-symbol compilation failure",
+        "green_executed": true,
+        "candidate_tests_executed": true,
+        "candidate_validation_summary": "候選 Application 4項＋Server／SQLite 60項通過；產品未套用，GUI／候選CI未驗",
+        "functional_acceptance": false,
+        "next_day_before": 39,
+        "next_day_after": 39,
+        "revision_does_not_advance_day": true
+      },
+      {
+        "project": "analytics",
+        "day": 38,
+        "revision": "r4",
+        "article_path": "docs/teaching/daily/day-38/analytics-r4.md",
+        "article_commit": "d4377fefda99fe7aba146db0a467d9872cb8975e",
+        "parent": "560fba6f14095e1ecc1df27c658105b4e6069dd5",
+        "blob_sha": "dd70003bdec9eab79fc02c330d71164006d0b258",
+        "files": [
+          {
+            "path": "docs/teaching/daily/day-38/analytics-r4.md",
+            "blob_sha": "dd70003bdec9eab79fc02c330d71164006d0b258",
+            "full_text_verified": true,
+            "sha256": "944146c2f15cdd45ac2ac015f0d841c71d63365b62b3d37935ff9f92d6660a56"
+          },
+          {
+            "path": "docs/teaching/daily/day-38/analytics-r4-refactor.patch",
+            "blob_sha": "d28edebced42910bf73a406dc52d41d661019a61",
+            "full_text_verified": true,
+            "sha256": "04dbd2a9cf90a5b0f4d5c875af91a1bd43dc1fd2e400dbcd249487b41b58ee1f"
+          },
+          {
+            "path": "docs/teaching/daily/day-38/analytics-r4-refactor-evidence.json",
+            "blob_sha": "b842d3cb235b95bd6b16e6e2fdadc9106e428249",
+            "full_text_verified": true,
+            "sha256": "1f8d2d4dbdaa262b9b687599b2e44843009dd644231659610bfa6213ec48114d"
+          }
+        ],
+        "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+        "rules_commit": "1e6b8dcfa49d08b4a0af13ee4b602ac7664d2a64",
+        "rules_blob": "34a2847c8628388f5bdb47c64a5f613b80ed3606",
+        "readback_at": "2026-10-26T00:35:35.435Z",
+        "full_text_verified": true,
+        "sha256": "944146c2f15cdd45ac2ac015f0d841c71d63365b62b3d37935ff9f92d6660a56",
+        "repository": "williechen/copilot_use",
+        "branch": "main",
+        "evidence": "docs/teaching/daily/day-38/analytics-r4-readback.json",
+        "revision_scope": "each article's own project only; continue cumulative architecture/tests/fixtures/project CI, independent of daily feature slice",
+        "functional_patch": "docs/teaching/daily/day-38/analytics-r2.patch",
+        "refactor_patch": "docs/teaching/daily/day-38/analytics-r4-refactor.patch",
+        "local_validation": "docs/teaching/daily/day-38/r4-local-validation.json",
+        "official_versions": "docs/teaching/daily/day-38/r2-versions.json",
+        "versions_verification_scope": "same Taipei day official metadata retained with original timestamp; no dependency/source change",
+        "gate1": "complete_document_delivery",
+        "gate2": false,
+        "product_modified": false,
+        "main_application": "not applied",
+        "red_executed": true,
+        "red_kind": "behavior: duplicate Authorization 201 vs expected401",
+        "green_executed": true,
+        "candidate_tests_executed": true,
+        "candidate_validation_summary": "候選 Router／PG 48項＋另跑ignored 1項通過；產品未套用，GUI／候選CI未驗",
+        "functional_acceptance": false,
+        "next_day_before": 39,
+        "next_day_after": 39,
+        "revision_does_not_advance_day": true
+      }
+    ],
+    "next_day_unchanged": true,
+    "evidence": "docs/teaching/daily/day-38/r4-delivery-verification.json"
   }
 }
