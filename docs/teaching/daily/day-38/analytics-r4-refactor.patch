@@ -1,0 +1,326 @@
+--- a/analytics_apps/analytics_server/tests/day23_password_login.rs
++++ b/analytics_apps/analytics_server/tests/day23_password_login.rs
+@@ -1,52 +1,8 @@
+ #![cfg(feature = "postgres-integration")]
+-use analytics_server::{IngestState, IngestTokens, password_login};
+-use axum::{
+-    body::Body,
+-    http::{Request, StatusCode, header},
+-};
+-use std::sync::Arc;
+-use tower::ServiceExt;
+-fn app(pool: sqlx::PgPool) -> axum::Router {
+-    password_login::build(IngestState {
+-        pool,
+-        tokens: Arc::new(IngestTokens {
+-            chat: "fixture-chat".into(),
+-            pet: "fixture-pet".into(),
+-        }),
+-    })
+-}
+-async fn send(
+-    app: axum::Router,
+-    path: &str,
+-    body: Option<&str>,
+-    cookie: Option<&str>,
+-) -> axum::response::Response {
+-    let mut r = if body.is_some() {
+-        Request::post(path)
+-            .header("origin", "http://127.0.0.1:3100")
+-            .header("content-type", "application/x-www-form-urlencoded")
+-    } else {
+-        Request::get(path)
+-    };
+-    if let Some(c) = cookie {
+-        r = r.header(header::COOKIE, c);
+-    }
+-    app.oneshot(
+-        r.body(body.map_or_else(Body::empty, |s| Body::from(s.to_owned())))
+-            .unwrap(),
+-    )
+-    .await
+-    .unwrap()
+-}
+-fn cookie(r: &axum::response::Response) -> String {
+-    r.headers()[header::SET_COOKIE]
+-        .to_str()
+-        .unwrap()
+-        .split(';')
+-        .next()
+-        .unwrap()
+-        .to_owned()
+-}
++mod support;
++use support::http::{send, response_cookie as cookie};
++use axum::http::{StatusCode, header};
++fn app(pool: sqlx::PgPool) -> axum::Router { support::app(pool, "fixture-chat", "fixture-pet") }
+ #[sqlx::test(migrations = "../migrations")]
+ async fn day23_bootstrapped_password_is_restricted_before_first_change(pool: sqlx::PgPool) {
+     analytics_server::bootstrap::initialize(&pool, "lesson-only-password".into())
+--- a/analytics_apps/analytics_server/tests/day27_dashboard_source.rs
++++ b/analytics_apps/analytics_server/tests/day27_dashboard_source.rs
+@@ -1,59 +1,9 @@
+-// apps/analytics_server/tests/day27_dashboard_source.rs
+ #![cfg(feature = "postgres-integration")]
+-use analytics_server::{IngestState, IngestTokens, bootstrap, password_login};
+-use axum::{
+-    body::{Body, to_bytes},
+-    http::{Request, StatusCode, header},
+-};
+-use std::sync::Arc;
+-use tower::ServiceExt;
+-
+-fn app(pool: sqlx::PgPool) -> axum::Router {
+-    password_login::build(IngestState {
+-        pool,
+-        tokens: Arc::new(IngestTokens {
+-            chat: "test-chat".into(),
+-            pet: "test-pet".into(),
+-        }),
+-    })
+-}
+-async fn get(app: axum::Router, path: &str, cookie: Option<&str>) -> axum::response::Response {
+-    let mut request = Request::get(path);
+-    if let Some(cookie) = cookie {
+-        request = request.header(header::COOKIE, cookie);
+-    }
+-    app.oneshot(request.body(Body::empty()).unwrap())
+-        .await
+-        .unwrap()
+-}
+-async fn post(
+-    app: axum::Router,
+-    path: &str,
+-    form: String,
+-    cookie: Option<&str>,
+-) -> axum::response::Response {
+-    let mut req = Request::post(path)
+-        .header(header::ORIGIN, "http://127.0.0.1:3100")
+-        .header(header::CONTENT_TYPE, "application/x-www-form-urlencoded");
+-    if let Some(cookie) = cookie {
+-        req = req.header(header::COOKIE, cookie);
+-    }
+-    app.oneshot(req.body(Body::from(form)).unwrap())
+-        .await
+-        .unwrap()
+-}
+-fn response_cookie(r: &axum::response::Response) -> String {
+-    r.headers()[header::SET_COOKIE]
+-        .to_str()
+-        .unwrap()
+-        .split(';')
+-        .next()
+-        .unwrap()
+-        .to_owned()
+-}
+-async fn body_text(r: axum::response::Response) -> String {
+-    String::from_utf8(to_bytes(r.into_body(), 32768).await.unwrap().to_vec()).unwrap()
+-}
++mod support;
++use support::http::{get, post_form as post, response_cookie, body_text};
++use analytics_server::bootstrap;
++use axum::http::{StatusCode, header};
++fn app(pool: sqlx::PgPool) -> axum::Router { support::app(pool, "test-chat", "test-pet") }
+ #[sqlx::test(migrations = "../migrations")]
+ async fn day27_session_admin_can_switch_real_source_counts(pool: sqlx::PgPool) {
+     bootstrap::initialize(&pool, "first-password-27".into())
+--- a/analytics_apps/analytics_server/tests/day37_query_cookie.rs
++++ b/analytics_apps/analytics_server/tests/day37_query_cookie.rs
+@@ -1,11 +1,11 @@
+ #![cfg(feature = "postgres-integration")]
+-use analytics_server::{IngestState, IngestTokens, bootstrap, password_login};
++mod support;
++use analytics_server::bootstrap;
+ use axum::{
+     Router,
+     body::Body,
+     http::{Request, StatusCode, header},
+ };
+-use std::sync::Arc;
+ use tower::ServiceExt;
+ 
+ async fn query(
+@@ -47,13 +47,7 @@
+     .execute(&pool)
+     .await
+     .unwrap();
+-    let app = password_login::build(IngestState {
+-        pool: pool.clone(),
+-        tokens: Arc::new(IngestTokens {
+-            chat: "fixture-chat".into(),
+-            pet: "fixture-pet".into(),
+-        }),
+-    });
++    let app = support::app(pool.clone(), "fixture-chat", "fixture-pet");
+     let login = app
+         .clone()
+         .oneshot(
+@@ -67,13 +61,7 @@
+         .unwrap();
+     assert_eq!(login.status(), StatusCode::SEE_OTHER);
+     assert_eq!(login.headers()[header::LOCATION], "/dashboard");
+-    let cookie = login.headers()[header::SET_COOKIE]
+-        .to_str()
+-        .unwrap()
+-        .split(';')
+-        .next()
+-        .unwrap()
+-        .to_owned();
++    let cookie = support::http::response_cookie(&login);
+     let invalid = format!("analytics_session={}", "0".repeat(64));
+     let paths = [
+         "/api/v1/events/web_chat/summary",
+--- /dev/null
++++ b/analytics_apps/analytics_server/tests/support/http.rs
+@@ -0,0 +1,53 @@
++// Each integration binary intentionally uses a different subset of shared transport helpers.
++#![allow(dead_code)]
++use axum::{
++    Router,
++    body::{Body, to_bytes},
++    http::{Request, header},
++    response::Response,
++};
++use tower::ServiceExt;
++
++pub async fn send(app: Router, path: &str, form: Option<&str>, cookie: Option<&str>) -> Response {
++    let mut request = if form.is_some() {
++        Request::post(path)
++            .header(header::ORIGIN, "http://127.0.0.1:3100")
++            .header(header::CONTENT_TYPE, "application/x-www-form-urlencoded")
++    } else {
++        Request::get(path)
++    };
++    if let Some(cookie) = cookie {
++        request = request.header(header::COOKIE, cookie);
++    }
++    app.oneshot(
++        request
++            .body(form.map_or_else(Body::empty, |s| Body::from(s.to_owned())))
++            .unwrap(),
++    )
++    .await
++    .unwrap()
++}
++pub async fn get(app: Router, path: &str, cookie: Option<&str>) -> Response {
++    send(app, path, None, cookie).await
++}
++pub async fn post_form(app: Router, path: &str, form: String, cookie: Option<&str>) -> Response {
++    send(app, path, Some(&form), cookie).await
++}
++pub fn response_cookie(response: &Response) -> String {
++    response.headers()[header::SET_COOKIE]
++        .to_str()
++        .unwrap()
++        .split(';')
++        .next()
++        .unwrap()
++        .to_owned()
++}
++pub async fn body_text(response: Response) -> String {
++    String::from_utf8(
++        to_bytes(response.into_body(), 32768)
++            .await
++            .unwrap()
++            .to_vec(),
++    )
++    .unwrap()
++}
+--- /dev/null
++++ b/analytics_apps/analytics_server/tests/support/mod.rs
+@@ -0,0 +1,12 @@
++pub mod http;
++use analytics_server::{IngestState, IngestTokens, password_login};
++use std::sync::Arc;
++pub fn app(pool: sqlx::PgPool, chat: &str, pet: &str) -> axum::Router {
++    password_login::build(IngestState {
++        pool,
++        tokens: Arc::new(IngestTokens {
++            chat: chat.into(),
++            pet: pet.into(),
++        }),
++    })
++}
+--- /dev/null
++++ b/analytics_apps/analytics_server/tests/support_http_contract.rs
+@@ -0,0 +1,80 @@
++#[path = "support/http.rs"]
++mod http;
++use axum::{
++    Router,
++    body::Body,
++    http::{Request, StatusCode, header},
++    routing::any,
++};
++
++async fn echo(request: Request<Body>) -> String {
++    let method = request.method().to_string();
++    let path = request.uri().to_string();
++    let origin = request
++        .headers()
++        .get(header::ORIGIN)
++        .and_then(|v| v.to_str().ok())
++        .unwrap_or("")
++        .to_owned();
++    let content_type = request
++        .headers()
++        .get(header::CONTENT_TYPE)
++        .and_then(|v| v.to_str().ok())
++        .unwrap_or("")
++        .to_owned();
++    let cookie = request
++        .headers()
++        .get(header::COOKIE)
++        .and_then(|v| v.to_str().ok())
++        .unwrap_or("")
++        .to_owned();
++    let body = axum::body::to_bytes(request.into_body(), 4096)
++        .await
++        .unwrap();
++    format!(
++        "{method}|{path}|{origin}|{content_type}|{cookie}|{}",
++        String::from_utf8(body.to_vec()).unwrap()
++    )
++}
++#[tokio::test]
++async fn request_setup_preserves_get_and_form_wire_contracts() {
++    let app = Router::new().route("/echo", any(echo));
++    let get = http::get(app.clone(), "/echo?source=web_chat", None).await;
++    assert_eq!(get.status(), StatusCode::OK);
++    assert_eq!(http::body_text(get).await, "GET|/echo?source=web_chat||||");
++    let form = "username=ADMIN&password=a%26b";
++    let post = http::post_form(
++        app.clone(),
++        "/echo",
++        form.into(),
++        Some("analytics_session=fixture"),
++    )
++    .await;
++    assert_eq!(
++        http::body_text(post).await,
++        "POST|/echo|http://127.0.0.1:3100|application/x-www-form-urlencoded|analytics_session=fixture|username=ADMIN&password=a%26b"
++    );
++    let with_cookie = http::send(
++        app,
++        "/echo",
++        None,
++        Some("theme=dark; analytics_session=fixture"),
++    )
++    .await;
++    assert_eq!(
++        http::body_text(with_cookie).await,
++        "GET|/echo|||theme=dark; analytics_session=fixture|"
++    );
++}
++#[tokio::test]
++async fn response_helpers_keep_cookie_and_body_contracts() {
++    let response = axum::response::Response::builder()
++        .header(
++            header::SET_COOKIE,
++            "analytics_session=abc; HttpOnly; SameSite=Strict",
++        )
++        .body(Body::from("登入完成"))
++        .unwrap();
++    assert_eq!(http::response_cookie(&response), "analytics_session=abc");
++    assert_eq!(http::body_text(response).await, "登入完成");
++}
