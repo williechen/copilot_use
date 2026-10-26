@@ -10,3 +10,5 @@
 每項獨立保存來源SHA、相依、完整變更、舊斷言承接、實測／未執行、風險與回復方式。按全專案相依每日漸進，與三案自己的重構進度分開，不因三篇引用同一項目而算三次。產品唯讀，由使用者套用；不增加Day、不更新last_full_comparison。
 
 [各專案Refactor](../teaching/functional-refactoring/README.md) · [各案進度](../teaching/functional-refactoring/PROGRESS.md) · [架構](../SYSTEM_ARCHITECTURE.md) · [共用規則](../COMMON_LEARNING_RULES.md)。
+
+2026-10-26 Day39：未新增跨案 Refactor 或全庫 workflow；G-01 仍為未套用／未驗收方案，G-02 待盤點。三篇 Day39 的各案 Refactor 不計為 G-01／G-02 進度。

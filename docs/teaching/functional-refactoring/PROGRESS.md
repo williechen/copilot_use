@@ -4,8 +4,8 @@
 
 | 專案 | 本次程式／測試變更 | 實際候選驗證 | 產品套用／驗收 | 下一步 |
 | --- | --- | --- | --- | --- |
-| [Chat](../daily/day-38/chat-r4.md#refactor) | room_list_state模組、正式caller imports、去重並遷移有效斷言 | 精確來源patch／兩種順序通過；完整SSR14項與WASM check通過 | 未套用；真瀏覽器／完整產物與CI未驗收 | 依Chat自身認證／Session、房間與訊息邊界接續 |
-| [Pet](../daily/day-38/pet-r4.md#refactor) | 補償流程／純測試移入Application，正式IPC import接線；真鎖留server | patch／兩種順序通過；Application4項、server／persistence60項通過；配額錯誤恢復留證 | 未套用；真生活窗GUI與CI未驗收 | 依Pet自身回籠、Runtime／鎖與Adapter接續 |
-| [Analytics](../daily/day-38/analytics-r4.md#refactor) | 三組PG測試共用support，保留每情境全部斷言與DB隔離 | patch／兩種順序通過；完整server／PG48項，ignored1項另跑通過 | 未套用；真瀏覽器與CI未驗收 | 依Analytics自身Session／查詢／PG／UI與fixture接續 |
+| [Chat](../daily/day-39/chat-r1.md#refactor) | Day28/34 登入 SSR 契約測試遷至 signin_contract.rs；保留所有原斷言與正式 SignInPage | Day39 patch 已交付；本次 Cargo/SSR/WASM 未執行 | 未套用／未驗收 | Chat Session／登入導向與房間權限 |
+| [Pet](../daily/day-39/pet.md#refactor) | cage_saved_pet 補償移至 pet_application::lifecycle::persist_then_close；server 真 caller 接回並新增純測試 | Day39 patch 已交付；本次 Cargo/native GUI 未執行 | 未套用／未驗收 | 直接關窗持久化與 Runtime／鎖 |
+| [Analytics](../daily/day-39/analytics-r1.md#refactor) | summary_for_source PG 聚合搬至 analytics_persistence；dashboard 真 caller、舊 API re-export 與測試承接 | Day39 patch 已交付；本次 PG／CI 未執行 | 未套用／未驗收 | Session／角色 ACL／查詢 UI 與 fixture |
 
-以上皆為精確來源＋功能Green／Refactor的完整隔離候選測試，不能追認產品main已套用或GUI／CI已驗收。[本地完整證據](../daily/day-38/r4-local-validation.json)分列原始環境錯誤、恢復與Red類型。每案累積接續，不以當日Green決定重構順序；未套用方案不假設已存在。全專案G-01的全庫CI不在三案計功。保留既有原文、斷言與FIFO，不增加Day、不更新last_full_comparison。
+Day39 三案均為完整候選 patch，**未執行本次測試／GUI／CI**，不能追認產品 main 已套用或驗收。Day38 的隔離候選測試屬舊來源，仍按歷史保存，不挪作 Day39 實測。[本地完整證據](../daily/day-38/r4-local-validation.json)分列原始環境錯誤、恢復與Red類型。每案累積接續，不以當日Green決定重構順序；未套用方案不假設已存在。全專案G-01的全庫CI不在三案計功。保留既有原文、斷言與FIFO，不增加Day、不更新last_full_comparison。

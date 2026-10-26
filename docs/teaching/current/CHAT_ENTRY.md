@@ -6,10 +6,10 @@
 
 | 專案 | 現行教學 | 下一篇 | 驗證範圍 |
 | --- | --- | --- | --- |
-| Chat | [Day38 r4：搜尋失敗可見狀態與既有房間連結](../daily/day-38/chat-r4.md) | Day39 | 候選 SSR 14項通過＋WASM check；產品未套用，GUI／候選CI未驗 |
+| Chat | [Day39 r1：首頁與房間側欄首次進入自動載入公開房間](../daily/day-39/chat-r1.md) | Day40 | 方案已交付；產品未套用／未驗收；Red／Green／CI 未執行 |
 
-產品來源 `9b89656f964b99e0cb89ba421855704a35c5ecb9`，修訂commit `c4016e6f9aac63d6ffc7f75bebe8132c7de840bf`。[精確讀回、blob與SHA256](../daily/day-38/chat-r4-readback.json)；文件交付與產品驗收分開。
+產品來源 `8fc4b277b6f6f77d97655130036fca47813de56e`，文章 commit `b20650a0c15ad1970ac67cf74aa51e6a4cf7c303`。[Day39 精確讀回／blob／SHA256](../daily/day-39/delivery-verification.json)；**方案已交付／產品未套用／未驗收**。
 
-[上一篇](../daily/day-37/chat-r3.md) · [原Day38](../daily/day-38/chat.md) · [全部歷史與更正](ARTICLE_STATUS.md)。舊來源與歷史驗證沿原紀錄追溯，不重複累積到本入口。
+[上一篇 Day38 r4](../daily/day-38/chat-r4.md) · [Day39 初版](../daily/day-39/chat.md) · [歷史與更正](ARTICLE_STATUS.md)。原文、來源與舊驗證保留，未將新方案當成產品驗收。
 
 [全專案重構獨立項目](../../../docs/engineering/README.md) · [候選本地驗證](../../../docs/teaching/daily/day-38/r4-local-validation.json)。
