@@ -1,0 +1,860 @@
+{
+  "date": "2026-10-26",
+  "source_sha": "9c767978b20bd56e1c2182dac2f37e6ae9b7d988",
+  "isolated_source": "/var/tmp/codex-day40-rerun-source",
+  "source_changes": false,
+  "commands": [
+    {
+      "name": "clone",
+      "command": [
+        "git",
+        "clone",
+        "--no-hardlinks",
+        "/home/willie/Documents/rust_ai_ring",
+        "/var/tmp/codex-day40-rerun-source"
+      ],
+      "cwd": "/home/willie/Documents/Codex/2026-10-26/referenced-chatgpt-conversation-this-is-an",
+      "exit_code": 0,
+      "seconds": 0.37,
+      "test_results": [],
+      "log": "clone.log",
+      "sha256": "6cbf55ebf47d93e71df4e0cd4f0aa48f05bb9add9d7eb0a9df29dd0441c22b6b",
+      "environment_overrides": {
+        "CARGO_TARGET_DIR": "/var/tmp/codex-day40-rerun-target",
+        "CARGO_INCREMENTAL": "0",
+        "CARGO_BUILD_JOBS": "2",
+        "CARGO_PROFILE_TEST_DEBUG": "0",
+        "CARGO_PROFILE_DEV_DEBUG": "0",
+        "CARGO_TERM_COLOR": "never"
+      }
+    },
+    {
+      "name": "postgres-create",
+      "command": [
+        "createdb",
+        "codex_day40_current_rerun"
+      ],
+      "cwd": "/home/willie/Documents/Codex/2026-10-26/referenced-chatgpt-conversation-this-is-an",
+      "exit_code": 0,
+      "seconds": 0.17,
+      "test_results": [],
+      "log": "postgres-create.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "environment_overrides": {
+        "CARGO_TARGET_DIR": "/var/tmp/codex-day40-rerun-target",
+        "CARGO_INCREMENTAL": "0",
+        "CARGO_BUILD_JOBS": "2",
+        "CARGO_PROFILE_TEST_DEBUG": "0",
+        "CARGO_PROFILE_DEV_DEBUG": "0",
+        "CARGO_TERM_COLOR": "never"
+      }
+    },
+    {
+      "name": "chat-fmt",
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "cwd": "/var/tmp/codex-day40-rerun-source/chat_apps",
+      "exit_code": 0,
+      "seconds": 0.12,
+      "test_results": [],
+      "log": "chat-fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "environment_overrides": {
+        "CARGO_TARGET_DIR": "/var/tmp/codex-day40-rerun-target",
+        "CARGO_INCREMENTAL": "0",
+        "CARGO_BUILD_JOBS": "2",
+        "CARGO_PROFILE_TEST_DEBUG": "0",
+        "CARGO_PROFILE_DEV_DEBUG": "0",
+        "CARGO_TERM_COLOR": "never"
+      }
+    },
+    {
+      "name": "chat-check",
+      "command": [
+        "cargo",
+        "check",
+        "--offline",
+        "--locked",
+        "-p",
+        "chat-server",
+        "--features",
+        "ssr"
+      ],
+      "cwd": "/var/tmp/codex-day40-rerun-source/chat_apps",
+      "exit_code": 0,
+      "seconds": 113.91,
+      "test_results": [],
+      "log": "chat-check.log",
+      "sha256": "d739a01d7a21ee2f4b78e9bbbe460577feafcbf21ff6b1db796e66b0b79f4982",
+      "environment_overrides": {
+        "CARGO_TARGET_DIR": "/var/tmp/codex-day40-rerun-target",
+        "CARGO_INCREMENTAL": "0",
+        "CARGO_BUILD_JOBS": "2",
+        "CARGO_PROFILE_TEST_DEBUG": "0",
+        "CARGO_PROFILE_DEV_DEBUG": "0",
+        "CARGO_TERM_COLOR": "never"
+      }
+    },
+    {
+      "name": "chat-test",
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--workspace",
+        "--features",
+        "ssr",
+        "--no-fail-fast"
+      ],
+      "cwd": "/var/tmp/codex-day40-rerun-source/chat_apps",
+      "exit_code": 0,
+      "seconds": 90.11,
+      "test_results": [
+        {
+          "passed": 6,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 5,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 25,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 4,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 16,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        }
+      ],
+      "log": "chat-test.log",
+      "sha256": "fd8025f3e38b4ab5fd456b95a7a892648db1a52741bef6443f2ce26b5cca8af6",
+      "environment_overrides": {
+        "CARGO_TARGET_DIR": "/var/tmp/codex-day40-rerun-target",
+        "CARGO_INCREMENTAL": "0",
+        "CARGO_BUILD_JOBS": "2",
+        "CARGO_PROFILE_TEST_DEBUG": "0",
+        "CARGO_PROFILE_DEV_DEBUG": "0",
+        "CARGO_TERM_COLOR": "never"
+      }
+    },
+    {
+      "name": "chat-wasm",
+      "command": [
+        "cargo",
+        "check",
+        "--offline",
+        "--locked",
+        "-p",
+        "chat-ui",
+        "--features",
+        "hydrate",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "cwd": "/var/tmp/codex-day40-rerun-source/chat_apps",
+      "exit_code": 0,
+      "seconds": 45.76,
+      "test_results": [],
+      "log": "chat-wasm.log",
+      "sha256": "2d817c0e1cc8b886e334a282a8c23ac449725e71e4043ca8120dc73b7d541574",
+      "environment_overrides": {
+        "CARGO_TARGET_DIR": "/var/tmp/codex-day40-rerun-target",
+        "CARGO_INCREMENTAL": "0",
+        "CARGO_BUILD_JOBS": "2",
+        "CARGO_PROFILE_TEST_DEBUG": "0",
+        "CARGO_PROFILE_DEV_DEBUG": "0",
+        "CARGO_TERM_COLOR": "never"
+      }
+    },
+    {
+      "name": "chat-gui-build",
+      "command": [
+        "cargo",
+        "leptos",
+        "build",
+        "--cargo-offline",
+        "--cargo-locked",
+        "--bin-features",
+        "ssr",
+        "--lib-features",
+        "hydrate"
+      ],
+      "cwd": "/var/tmp/codex-day40-rerun-source/chat_apps",
+      "exit_code": 0,
+      "seconds": 120.15,
+      "test_results": [],
+      "log": "chat-gui-build.log",
+      "sha256": "eb02ccf5b918e3ad42df4bdbbe66063b2282e4cb94af8c17c297f36e43ca9e5c",
+      "environment_overrides": {
+        "CARGO_TARGET_DIR": "/var/tmp/codex-day40-rerun-target",
+        "CARGO_INCREMENTAL": "0",
+        "CARGO_BUILD_JOBS": "2",
+        "CARGO_PROFILE_TEST_DEBUG": "0",
+        "CARGO_PROFILE_DEV_DEBUG": "0",
+        "CARGO_TERM_COLOR": "never"
+      }
+    },
+    {
+      "name": "pet-fmt",
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "cwd": "/var/tmp/codex-day40-rerun-source/pet_apps",
+      "exit_code": 0,
+      "seconds": 0.22,
+      "test_results": [],
+      "log": "pet-fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "environment_overrides": {
+        "CARGO_TARGET_DIR": "/var/tmp/codex-day40-rerun-target",
+        "CARGO_INCREMENTAL": "0",
+        "CARGO_BUILD_JOBS": "2",
+        "CARGO_PROFILE_TEST_DEBUG": "0",
+        "CARGO_PROFILE_DEV_DEBUG": "0",
+        "CARGO_TERM_COLOR": "never",
+        "DATABASE_URL": "sqlite::memory:"
+      }
+    },
+    {
+      "name": "pet-application",
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "-p",
+        "pet-application"
+      ],
+      "cwd": "/var/tmp/codex-day40-rerun-source/pet_apps",
+      "exit_code": 0,
+      "seconds": 4.17,
+      "test_results": [
+        {
+          "passed": 8,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        }
+      ],
+      "log": "pet-application.log",
+      "sha256": "2c958e874725765c9271203e456ac88016996b18dc615ce4cb743be04adb493a",
+      "environment_overrides": {
+        "CARGO_TARGET_DIR": "/var/tmp/codex-day40-rerun-target",
+        "CARGO_INCREMENTAL": "0",
+        "CARGO_BUILD_JOBS": "2",
+        "CARGO_PROFILE_TEST_DEBUG": "0",
+        "CARGO_PROFILE_DEV_DEBUG": "0",
+        "CARGO_TERM_COLOR": "never",
+        "DATABASE_URL": "sqlite::memory:"
+      }
+    },
+    {
+      "name": "pet-sqlite",
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "-p",
+        "pet-persistence"
+      ],
+      "cwd": "/var/tmp/codex-day40-rerun-source/pet_apps",
+      "exit_code": 0,
+      "seconds": 14.26,
+      "test_results": [
+        {
+          "passed": 4,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        }
+      ],
+      "log": "pet-sqlite.log",
+      "sha256": "035af7d7e37ea5ae86a8d3c303f6cc967d011622247c39fb9ba6e153a296f1dd",
+      "environment_overrides": {
+        "CARGO_TARGET_DIR": "/var/tmp/codex-day40-rerun-target",
+        "CARGO_INCREMENTAL": "0",
+        "CARGO_BUILD_JOBS": "2",
+        "CARGO_PROFILE_TEST_DEBUG": "0",
+        "CARGO_PROFILE_DEV_DEBUG": "0",
+        "CARGO_TERM_COLOR": "never",
+        "DATABASE_URL": "sqlite::memory:"
+      }
+    },
+    {
+      "name": "pet-check",
+      "command": [
+        "cargo",
+        "check",
+        "--offline",
+        "--locked",
+        "-p",
+        "pet-server"
+      ],
+      "cwd": "/var/tmp/codex-day40-rerun-source/pet_apps",
+      "exit_code": 0,
+      "seconds": 83.11,
+      "test_results": [],
+      "log": "pet-check.log",
+      "sha256": "8caab9bcb5b6ba4c4d0c3036d9814da8038ea2e30f3658af65c860f6f4202dc4",
+      "environment_overrides": {
+        "CARGO_TARGET_DIR": "/var/tmp/codex-day40-rerun-target",
+        "CARGO_INCREMENTAL": "0",
+        "CARGO_BUILD_JOBS": "2",
+        "CARGO_PROFILE_TEST_DEBUG": "0",
+        "CARGO_PROFILE_DEV_DEBUG": "0",
+        "CARGO_TERM_COLOR": "never",
+        "DATABASE_URL": "sqlite::memory:"
+      }
+    },
+    {
+      "name": "pet-test",
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "-p",
+        "pet-server"
+      ],
+      "cwd": "/var/tmp/codex-day40-rerun-source/pet_apps",
+      "exit_code": 0,
+      "seconds": 78.39,
+      "test_results": [
+        {
+          "passed": 39,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 5,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 5,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 4,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 4,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        }
+      ],
+      "log": "pet-test.log",
+      "sha256": "22cf613135698805950b40466d6682fe9fd7f0ec1cc1c4f1ed79a82ff51839ce",
+      "environment_overrides": {
+        "CARGO_TARGET_DIR": "/var/tmp/codex-day40-rerun-target",
+        "CARGO_INCREMENTAL": "0",
+        "CARGO_BUILD_JOBS": "2",
+        "CARGO_PROFILE_TEST_DEBUG": "0",
+        "CARGO_PROFILE_DEV_DEBUG": "0",
+        "CARGO_TERM_COLOR": "never",
+        "DATABASE_URL": "sqlite::memory:"
+      }
+    },
+    {
+      "name": "pet-wasm",
+      "command": [
+        "cargo",
+        "check",
+        "--offline",
+        "--locked",
+        "-p",
+        "pet-ui",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "cwd": "/var/tmp/codex-day40-rerun-source/pet_apps",
+      "exit_code": 0,
+      "seconds": 15.95,
+      "test_results": [],
+      "log": "pet-wasm.log",
+      "sha256": "8f6d6989cdd15567fceec0a314b60603a483525ab65044e7b4542174431e61d3",
+      "environment_overrides": {
+        "CARGO_TARGET_DIR": "/var/tmp/codex-day40-rerun-target",
+        "CARGO_INCREMENTAL": "0",
+        "CARGO_BUILD_JOBS": "2",
+        "CARGO_PROFILE_TEST_DEBUG": "0",
+        "CARGO_PROFILE_DEV_DEBUG": "0",
+        "CARGO_TERM_COLOR": "never",
+        "DATABASE_URL": "sqlite::memory:"
+      }
+    },
+    {
+      "name": "pet-node",
+      "command": [
+        "node",
+        "--test",
+        "pet_ui/tests/day33-open-controls-selects-origin.test.mjs",
+        "pet_ui/tests/duplicate-preview-contract.test.mjs",
+        "pet_ui/tests/scan-preview-contract.test.mjs",
+        "pet_ui/tests/scan-preview-no-path.test.mjs"
+      ],
+      "cwd": "/var/tmp/codex-day40-rerun-source/pet_apps",
+      "exit_code": 0,
+      "seconds": 0.83,
+      "test_results": [],
+      "log": "pet-node.log",
+      "sha256": "079ee0ea834f2e19b34d5f7afe8ee92f1e110a07ebe665a6fe02fd52858e9c85",
+      "environment_overrides": {
+        "CARGO_TARGET_DIR": "/var/tmp/codex-day40-rerun-target",
+        "CARGO_INCREMENTAL": "0",
+        "CARGO_BUILD_JOBS": "2",
+        "CARGO_PROFILE_TEST_DEBUG": "0",
+        "CARGO_PROFILE_DEV_DEBUG": "0",
+        "CARGO_TERM_COLOR": "never",
+        "DATABASE_URL": "sqlite::memory:"
+      }
+    },
+    {
+      "name": "analytics-fmt",
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "cwd": "/var/tmp/codex-day40-rerun-source/analytics_apps",
+      "exit_code": 0,
+      "seconds": 0.27,
+      "test_results": [],
+      "log": "analytics-fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "environment_overrides": {
+        "CARGO_TARGET_DIR": "/var/tmp/codex-day40-rerun-target",
+        "CARGO_INCREMENTAL": "0",
+        "CARGO_BUILD_JOBS": "2",
+        "CARGO_PROFILE_TEST_DEBUG": "0",
+        "CARGO_PROFILE_DEV_DEBUG": "0",
+        "CARGO_TERM_COLOR": "never",
+        "DATABASE_URL": "postgresql:///codex_day40_current_rerun?host=/var/run/postgresql&user=willie",
+        "ANALYTICS_DATABASE_URL": "postgresql:///codex_day40_current_rerun?host=/var/run/postgresql&user=willie",
+        "ANALYTICS_TEST_DATABASE_URL": "postgresql:///codex_day40_current_rerun?host=/var/run/postgresql&user=willie",
+        "ANALYTICS_CHAT_TOKEN": "fixture-rerun-chat",
+        "ANALYTICS_PET_TOKEN": "fixture-rerun-pet"
+      }
+    },
+    {
+      "name": "analytics-check",
+      "command": [
+        "cargo",
+        "check",
+        "--offline",
+        "--locked",
+        "-p",
+        "analytics-server"
+      ],
+      "cwd": "/var/tmp/codex-day40-rerun-source/analytics_apps",
+      "exit_code": 0,
+      "seconds": 37.45,
+      "test_results": [],
+      "log": "analytics-check.log",
+      "sha256": "060824356af4ba9bfa2e57d8af501a3f775d3e99c5434525ee8910cac320ec86",
+      "environment_overrides": {
+        "CARGO_TARGET_DIR": "/var/tmp/codex-day40-rerun-target",
+        "CARGO_INCREMENTAL": "0",
+        "CARGO_BUILD_JOBS": "2",
+        "CARGO_PROFILE_TEST_DEBUG": "0",
+        "CARGO_PROFILE_DEV_DEBUG": "0",
+        "CARGO_TERM_COLOR": "never",
+        "DATABASE_URL": "postgresql:///codex_day40_current_rerun?host=/var/run/postgresql&user=willie",
+        "ANALYTICS_DATABASE_URL": "postgresql:///codex_day40_current_rerun?host=/var/run/postgresql&user=willie",
+        "ANALYTICS_TEST_DATABASE_URL": "postgresql:///codex_day40_current_rerun?host=/var/run/postgresql&user=willie",
+        "ANALYTICS_CHAT_TOKEN": "fixture-rerun-chat",
+        "ANALYTICS_PET_TOKEN": "fixture-rerun-pet"
+      }
+    },
+    {
+      "name": "analytics-test",
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "-p",
+        "analytics-server",
+        "-p",
+        "analytics-persistence",
+        "--features",
+        "postgres-integration"
+      ],
+      "cwd": "/var/tmp/codex-day40-rerun-source/analytics_apps",
+      "exit_code": 0,
+      "seconds": 65.68,
+      "test_results": [
+        {
+          "passed": 3,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 34,
+          "failed": 0,
+          "ignored": 1
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        }
+      ],
+      "log": "analytics-test.log",
+      "sha256": "2cf8b6d025d15f43a407bfe86e02b113602497118b3e6e888efdda84b06836d8",
+      "environment_overrides": {
+        "CARGO_TARGET_DIR": "/var/tmp/codex-day40-rerun-target",
+        "CARGO_INCREMENTAL": "0",
+        "CARGO_BUILD_JOBS": "2",
+        "CARGO_PROFILE_TEST_DEBUG": "0",
+        "CARGO_PROFILE_DEV_DEBUG": "0",
+        "CARGO_TERM_COLOR": "never",
+        "DATABASE_URL": "postgresql:///codex_day40_current_rerun?host=/var/run/postgresql&user=willie",
+        "ANALYTICS_DATABASE_URL": "postgresql:///codex_day40_current_rerun?host=/var/run/postgresql&user=willie",
+        "ANALYTICS_TEST_DATABASE_URL": "postgresql:///codex_day40_current_rerun?host=/var/run/postgresql&user=willie",
+        "ANALYTICS_CHAT_TOKEN": "fixture-rerun-chat",
+        "ANALYTICS_PET_TOKEN": "fixture-rerun-pet"
+      }
+    },
+    {
+      "name": "analytics-ignored",
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "-p",
+        "analytics-server",
+        "--features",
+        "postgres-integration",
+        "--lib",
+        "admin::tests::login_query_postgres_and_logout_flow",
+        "--",
+        "--ignored",
+        "--exact"
+      ],
+      "cwd": "/var/tmp/codex-day40-rerun-source/analytics_apps",
+      "exit_code": 0,
+      "seconds": 1.43,
+      "test_results": [
+        {
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0
+        }
+      ],
+      "log": "analytics-ignored.log",
+      "sha256": "c923d4e4445327debbaed5c5b1f6b5c34f766c30c47f13d9c80f5e57c5456194",
+      "environment_overrides": {
+        "CARGO_TARGET_DIR": "/var/tmp/codex-day40-rerun-target",
+        "CARGO_INCREMENTAL": "0",
+        "CARGO_BUILD_JOBS": "2",
+        "CARGO_PROFILE_TEST_DEBUG": "0",
+        "CARGO_PROFILE_DEV_DEBUG": "0",
+        "CARGO_TERM_COLOR": "never",
+        "DATABASE_URL": "postgresql:///codex_day40_current_rerun?host=/var/run/postgresql&user=willie",
+        "ANALYTICS_DATABASE_URL": "postgresql:///codex_day40_current_rerun?host=/var/run/postgresql&user=willie",
+        "ANALYTICS_TEST_DATABASE_URL": "postgresql:///codex_day40_current_rerun?host=/var/run/postgresql&user=willie",
+        "ANALYTICS_CHAT_TOKEN": "fixture-rerun-chat",
+        "ANALYTICS_PET_TOKEN": "fixture-rerun-pet"
+      }
+    },
+    {
+      "name": "analytics-gui-build",
+      "command": [
+        "cargo",
+        "build",
+        "--offline",
+        "--locked",
+        "-p",
+        "analytics-server"
+      ],
+      "cwd": "/var/tmp/codex-day40-rerun-source/analytics_apps",
+      "exit_code": 0,
+      "seconds": 3.58,
+      "test_results": [],
+      "log": "analytics-gui-build.log",
+      "sha256": "3082243588643ea1a45c5eccbd9759c8cfdfea76a94c6e911a8ef73db4eab4f0",
+      "environment_overrides": {
+        "CARGO_TARGET_DIR": "/var/tmp/codex-day40-rerun-target",
+        "CARGO_INCREMENTAL": "0",
+        "CARGO_BUILD_JOBS": "2",
+        "CARGO_PROFILE_TEST_DEBUG": "0",
+        "CARGO_PROFILE_DEV_DEBUG": "0",
+        "CARGO_TERM_COLOR": "never",
+        "DATABASE_URL": "postgresql:///codex_day40_current_rerun?host=/var/run/postgresql&user=willie",
+        "ANALYTICS_DATABASE_URL": "postgresql:///codex_day40_current_rerun?host=/var/run/postgresql&user=willie",
+        "ANALYTICS_TEST_DATABASE_URL": "postgresql:///codex_day40_current_rerun?host=/var/run/postgresql&user=willie",
+        "ANALYTICS_CHAT_TOKEN": "fixture-rerun-chat",
+        "ANALYTICS_PET_TOKEN": "fixture-rerun-pet"
+      }
+    }
+  ],
+  "counts": {
+    "chat_rust": 59,
+    "pet_rust": 72,
+    "pet_node": 6,
+    "analytics_postgres_enabled": 52,
+    "analytics_ignored_explicit": 1,
+    "analytics_distinct": 53
+  },
+  "all_recorded_commands_exit_zero": true,
+  "gui": {
+    "chat": "passed listed browser flow",
+    "analytics": "passed listed filter/export browser flow",
+    "pet_native": "not executed: native computer controls unavailable; browser-only surface"
+  },
+  "ci": {
+    "rerun_requested_jobs": [
+      121571300719,
+      121571183929,
+      121571182437
+    ],
+    "rerun_started": false,
+    "error": "GitHub integration 403 Resource not accessible by integration",
+    "existing_runs": [
+      {
+        "name": "Node",
+        "id": 40322637946,
+        "sha": "9c767978b20bd56e1c2182dac2f37e6ae9b7d988",
+        "attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_ring/actions/runs/40322637946"
+      },
+      {
+        "name": "Cargo workspaces",
+        "id": 40322637802,
+        "sha": "9c767978b20bd56e1c2182dac2f37e6ae9b7d988",
+        "attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_ring/actions/runs/40322637802"
+      },
+      {
+        "name": "Rust Desktop Pet",
+        "id": 40322637787,
+        "sha": "9c767978b20bd56e1c2182dac2f37e6ae9b7d988",
+        "attempt": 1,
+        "status": "in_progress",
+        "conclusion": null,
+        "url": "https://github.com/williechen/rust_ai_ring/actions/runs/40322637787"
+      },
+      {
+        "name": "Rust Analytics",
+        "id": 40322637788,
+        "sha": "9c767978b20bd56e1c2182dac2f37e6ae9b7d988",
+        "attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_ring/actions/runs/40322637788"
+      },
+      {
+        "name": "Test All",
+        "id": 40322637908,
+        "sha": "9c767978b20bd56e1c2182dac2f37e6ae9b7d988",
+        "attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_ring/actions/runs/40322637908"
+      },
+      {
+        "name": "Persistence",
+        "id": 40322637846,
+        "sha": "9c767978b20bd56e1c2182dac2f37e6ae9b7d988",
+        "attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_ring/actions/runs/40322637846"
+      },
+      {
+        "name": "Rust AI Chat",
+        "id": 40322637823,
+        "sha": "9c767978b20bd56e1c2182dac2f37e6ae9b7d988",
+        "attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_ring/actions/runs/40322637823"
+      }
+    ]
+  },
+  "gate2": false,
+  "full_comparison": false,
+  "patch_reapplied_this_run": false,
+  "patch_note": "Current product includes Day40 and followup fixes. Ran exact source as-is; prior actual patch apply evidence retained separately.",
+  "next_day_unchanged": 41
+}

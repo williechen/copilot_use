@@ -20,3 +20,8 @@ ff14ca6後又出現b0e06b7，僅補Pet原生CloseRequested；因此初輪「未�
 ## 來源9c76797：先前兩個缺口已套用修復
 
 最新 `9c767978b20bd56e1c2182dac2f37e6ae9b7d988` 補回/account並恢復三個Pet舊斷言。原ff／b0失敗與缺測描述保留當時SHA；現況不再寫仍未修復。三案fmt實際通過，本輪未跑check/test／GUI／CI。[來源對照](source-update-9c76797/README.md)。前輪候選結果不可改標成新SHA已跑，Day41與FIFO不變。
+
+
+## 9c76797 後續真正重跑
+
+本輪Chat Rust59、Pet Rust72＋Node6、Analytics真PG53實際通過；Chat／Analytics指定瀏覽器流程通過。Pet原生GUI未執行；CI重跑請求403，沒有新attempt。[完整命令與證據](rerun-9c76797/README.md)。前段來源／fmt-only描述保留為當時事實，不把新結果追認為前輪已做。

@@ -51,7 +51,7 @@
     "historical_records_are_not_current_policy": true
   },
   "scope": "Latest published teaching index; Day16 snapshot preserved in archive",
-  "revision": "day40-r2-post-fix-source-refresh-9c76797",
+  "revision": "day40-actual-rerun-9c76797",
   "synced_date": "2026-10-26",
   "source_sha": "9c767978b20bd56e1c2182dac2f37e6ae9b7d988",
   "articles": [
@@ -3566,12 +3566,28 @@
   "day25_archive": "docs/teaching/archive/day-25/manifest.json",
   "latest_source_validation": {
     "source_sha": "9c767978b20bd56e1c2182dac2f37e6ae9b7d988",
-    "scope": "incremental source and documentation refresh; no Cargo check/test or GUI/CI rerun",
-    "record": "docs/teaching/daily/day-40/source-update-9c76797/verification.json",
+    "record": "docs/teaching/daily/day-40/rerun-9c76797/verification.json",
+    "counts": {
+      "chat_rust": 59,
+      "pet_rust": 72,
+      "pet_node": 6,
+      "analytics_postgres_distinct": 53
+    },
+    "browser_gui": {
+      "chat": true,
+      "analytics": true,
+      "pet_native": false
+    },
+    "ci_rerun_started": false,
+    "ci_rerun_error": "403 Resource not accessible by integration",
+    "functional_acceptance": false,
+    "gate2": false,
+    "next_day_unchanged": 41,
+    "full_comparison_executed": false,
+    "scope": "actual isolated Cargo rerun plus listed browser GUI; CI rerun denied403",
     "cargo_fmt_executed": true,
-    "cargo_check_executed": false,
-    "cargo_test_executed": false,
-    "functional_acceptance": false
+    "cargo_check_executed": true,
+    "cargo_test_executed": true
   },
   "analytics_day24_correction_closure": {
     "status": "completed",
@@ -4122,7 +4138,7 @@
     "source_followup_checked_at": "2026-10-25T21:38:21.400Z"
   },
   "previous_revision_before_2026_10_26_summary_refresh": "day36-actual-verification",
-  "source_field_interpretation": "Historical source_sha/current_reference_observation/latest_source_validation keep original evidence; current document maintenance source is latest_document_maintenance.source_sha; latest project publications remain Day37 r3.",
+  "source_field_interpretation": "Historical fields retain original evidence. latest_source_validation and day40_current_rerun describe current 9c76797 actual Cargo/browser rerun; current_article_paths retain published Day40 teaching revisions with new validation sidecar.",
   "day38_delivery": {
     "chat": {
       "article_commit": "877ed638a5c9d2c0ec129b980a792b3893e0942c",
@@ -5014,13 +5030,13 @@
   },
   "current_refactor_validation": {
     "source_sha": "9c767978b20bd56e1c2182dac2f37e6ae9b7d988",
-    "scope": "source and fmt only; no new refactor credit",
+    "scope": "actual Cargo and selected browser rerun; no new refactor credit",
     "counts": {
-      "chat": "/account已補回；本輪fmt通過，未重跑Cargo測試／GUI／CI",
-      "pet": "3舊測試已恢復；本輪fmt通過，未重跑Cargo測試／GUI／CI",
-      "analytics": "程式未變；前輪PG53通過保留原SHA，本輪fmt通過"
+      "chat": "本輪Rust59、fmt/check/WASM通過；登入→管理→登出瀏覽器通過",
+      "pet": "本輪Rust72＋Node6、fmt/check/WASM通過；原生GUI未執行",
+      "analytics": "本輪真PG53、fmt/check通過；瀏覽器精確篩選／CSV下載通過"
     },
-    "record": "docs/teaching/daily/day-40/source-update-9c76797/README.md",
+    "record": "docs/teaching/daily/day-40/rerun-9c76797/README.md",
     "product_acceptance": false
   },
   "day40_chat_delivery": {
@@ -5753,5 +5769,35 @@
     "record": "docs/teaching/daily/day-40/r2-remote-readback.json",
     "files_verified": 3,
     "full_bytes_equal": true
+  },
+  "day40_current_rerun": {
+    "source_sha": "9c767978b20bd56e1c2182dac2f37e6ae9b7d988",
+    "record": "docs/teaching/daily/day-40/rerun-9c76797/verification.json",
+    "counts": {
+      "chat_rust": 59,
+      "pet_rust": 72,
+      "pet_node": 6,
+      "analytics_postgres_distinct": 53
+    },
+    "browser_gui": {
+      "chat": true,
+      "analytics": true,
+      "pet_native": false
+    },
+    "ci_rerun_started": false,
+    "ci_rerun_error": "403 Resource not accessible by integration",
+    "functional_acceptance": false,
+    "gate2": false,
+    "next_day_unchanged": 41,
+    "full_comparison_executed": false
+  },
+  "previous_source_validation_before_actual_rerun_9c76797": {
+    "source_sha": "9c767978b20bd56e1c2182dac2f37e6ae9b7d988",
+    "scope": "incremental source and documentation refresh; no Cargo check/test or GUI/CI rerun",
+    "record": "docs/teaching/daily/day-40/source-update-9c76797/verification.json",
+    "cargo_fmt_executed": true,
+    "cargo_check_executed": false,
+    "cargo_test_executed": false,
+    "functional_acceptance": false
   }
 }

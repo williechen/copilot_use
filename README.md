@@ -6,13 +6,13 @@
 
 | 專案 | 現行教學 | 下一篇 | 驗證範圍 |
 | --- | --- | --- | --- |
-| Chat | [Day40 r2：首頁依有效 Session 顯示登入／管理](docs/teaching/daily/day-40/chat-r2.md) | Day41 | /account已補回；本輪fmt通過，未重跑Cargo測試／GUI／CI |
-| Pet | [Day40 r2：生活窗直接關閉等同逐隻回籠](docs/teaching/daily/day-40/pet-r2.md) | Day41 | 3舊測試已恢復；本輪fmt通過，未重跑Cargo測試／GUI／CI |
-| Analytics | [Day40 r1：CSV 匯出遵循目前精確事件類型篩選](docs/teaching/daily/day-40/analytics-r1.md) | Day41 | 程式未變；前輪PG53通過保留原SHA，本輪fmt通過 |
+| Chat | [Day40 r2：首頁依有效 Session 顯示登入／管理](docs/teaching/daily/day-40/chat-r2.md) | Day41 | 本輪Rust59、fmt/check/WASM通過；登入→管理→登出瀏覽器通過 |
+| Pet | [Day40 r2：生活窗直接關閉等同逐隻回籠](docs/teaching/daily/day-40/pet-r2.md) | Day41 | 本輪Rust72＋Node6、fmt/check/WASM通過；原生GUI未執行 |
+| Analytics | [Day40 r1：CSV 匯出遵循目前精確事件類型篩選](docs/teaching/daily/day-40/analytics-r1.md) | Day41 | 本輪真PG53、fmt/check通過；瀏覽器精確篩選／CSV下載通過 |
 
 [Chat首頁](docs/teaching/chat/README.md) · [Pet首頁](docs/teaching/pet/README.md) · [Analytics首頁](docs/teaching/analytics/README.md)
 
-最新程式 `9c767978b20bd56e1c2182dac2f37e6ae9b7d988`；[本輪來源核對](docs/teaching/daily/day-40/source-update-9c76797/README.md)。Chat/account已補回、Pet三個舊測試已恢復；本輪只實跑fmt，不宣稱新SHA已跑Cargo測試。
+最新程式 `9c767978b20bd56e1c2182dac2f37e6ae9b7d988`；[本輪真正測試](docs/teaching/daily/day-40/rerun-9c76797/README.md)。Chat59、Pet72＋Node6、Analytics真PG53通過；Chat／Analytics指定瀏覽器流程通過。Pet原生GUI未執行；CI重跑請求被403拒絕。
 
 [全專案重構獨立項目](docs/engineering/README.md)：跨案契約、共用crates、跨workspace與全庫CI；不計入各案Refactor完成量。
 

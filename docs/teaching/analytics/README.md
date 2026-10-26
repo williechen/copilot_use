@@ -6,9 +6,9 @@
 
 | 專案 | 現行教學 | 下一篇 | 驗證範圍 |
 | --- | --- | --- | --- |
-| Chat | [Day40 r2：首頁依有效 Session 顯示登入／管理](../daily/day-40/chat-r2.md) | Day41 | /account已補回；本輪fmt通過，未重跑Cargo測試／GUI／CI |
-| Pet | [Day40 r2：生活窗直接關閉等同逐隻回籠](../daily/day-40/pet-r2.md) | Day41 | 3舊測試已恢復；本輪fmt通過，未重跑Cargo測試／GUI／CI |
-| Analytics | [Day40 r1：CSV 匯出遵循目前精確事件類型篩選](../daily/day-40/analytics-r1.md) | Day41 | 程式未變；前輪PG53通過保留原SHA，本輪fmt通過 |
+| Chat | [Day40 r2：首頁依有效 Session 顯示登入／管理](../daily/day-40/chat-r2.md) | Day41 | 本輪Rust59、fmt/check/WASM通過；登入→管理→登出瀏覽器通過 |
+| Pet | [Day40 r2：生活窗直接關閉等同逐隻回籠](../daily/day-40/pet-r2.md) | Day41 | 本輪Rust72＋Node6、fmt/check/WASM通過；原生GUI未執行 |
+| Analytics | [Day40 r1：CSV 匯出遵循目前精確事件類型篩選](../daily/day-40/analytics-r1.md) | Day41 | 本輪真PG53、fmt/check通過；瀏覽器精確篩選／CSV下載通過 |
 
 ## 專案大綱與操作主線
 
