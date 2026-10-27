@@ -5885,5 +5885,31 @@
     },
     "global_refactor": "G-01/G-02 unchanged; no double counting",
     "status": "article_delivery_only"
+  },
+  "day42_pending": {
+    "date": "2026-10-28",
+    "source_repo": "williechen/rust_ai_ring",
+    "source_sha": "0b2288e4996b6d80b00e7a77e2cd023835306528",
+    "articles": {
+      "chat": "docs/teaching/daily/day-42/chat.md",
+      "pet": "docs/teaching/daily/day-42/pet.md",
+      "analytics": "docs/teaching/daily/day-42/analytics.md"
+    },
+    "evidence": "docs/teaching/daily/day-42/delivery-verification.json",
+    "versions": "docs/teaching/daily/day-42/versions.md",
+    "exact_article_readback": true,
+    "static_patch_application": "pass",
+    "git_apply_executed": false,
+    "cargo_node_db_gui_ci_executed": false,
+    "msrv_native_compatibility_verified": false,
+    "gate1": "pending",
+    "gate2": "not executed",
+    "next_day_unchanged": {
+      "chat": 42,
+      "pet": 42,
+      "analytics": 42
+    },
+    "last_full_comparison_unchanged": true,
+    "global_refactor_credit": false
   }
 }
