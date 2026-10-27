@@ -16,7 +16,9 @@ CI 只採 [rust_ai_ring Actions](https://github.com/williechen/rust_ai_ring/acti
 
 [共同規則](COMMON_LEARNING_RULES.md) · [目前進度與驗證邊界](teaching/current/STATUS.md) · [既有流程尚未調整](REPOSITORY_ROLE_TRANSITION.md)
 
-## 新目錄的驗證命令
+## 四個 workspace 的驗證命令（方案，非本次執行）
+
+2026-10-27 已按 rust_ai_ring `cf18d6f073b3709352f53f5531f4448a492dd3e3` 核對四份 Cargo manifest 的成員目錄；下列 features、測試目標及資料庫條件仍需依當次實際 Cargo package 與測試來源確認，不能僅憑目錄樹視為通過。
 
 命令以 rust_ai_ring 根目錄為基準；這是後續教學的命令入口，不是本次已執行的結果。
 
