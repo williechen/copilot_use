@@ -10,9 +10,13 @@ Analytics postgres-integration 必須涵蓋所有適用 targets 與專用測試�
 
 CI 只採 [rust_ai_ring Actions](https://github.com/williechen/rust_ai_ring/actions) 的精確來源與覆蓋。本機測試、該庫 CI、UI／GUI、程式套用及完整功能驗收各自記錄；任何單項 success 不代表全部完成。copilot_use 只做文章／規則／JSON／連結與交付讀回一致性核對，不執行其舊程式驗收。
 
+## 本次正式本地驗證（2026-10-27）
+
+[原始快照 912e5e7 的隔離驗證](source-review/local-validation-2026-10-27-912e5e7/README.md)：依使用者指示不套用修正。Chat 59 通過／2 失敗；Pet Rust 86 通過、Node 6 通過／2 失敗；Analytics 專用 PostgreSQL 55 通過（含 ignored）；共用 crates 8 通過。四組 metadata 與兩個 WASM 檢查通過。命令、exit code、stdout／stderr、失敗及未執行原因另存證據；產品驗收與進度狀態保留。
+
 ## 歷史與現行 Gate
 
-舊 copilot_use 512 sockets、gRPC、跨平台安裝／更新與 Release 驗收[完整原文保留](teaching/history/evidence/2026-10-23-repository-roles/before/docs/LOCAL_VALIDATION.md)，只屬原來源，不作 rust_ai_ring 的已完成能力或測試門檻。最新本地正式驗證目標為 `f3f8255b0b701a1b57cb8c0a1737c3caa4319f2d`，結果未全部通過；本輪清理、空庫冷建置、命令與限制見[本輪報告](teaching/history/evidence/2026-10-24-formal-f3f8255/REPORT.md)。
+舊 copilot_use 512 sockets、gRPC、跨平台安裝／更新與 Release 驗收[完整原文保留](teaching/history/evidence/2026-10-23-repository-roles/before/docs/LOCAL_VALIDATION.md)，只屬原來源，不作 rust_ai_ring 的已完成能力或測試門檻。2026-10-24 的歷史正式驗證目標為 `f3f8255b0b701a1b57cb8c0a1737c3caa4319f2d`，當時結果未全部通過；該輪清理、空庫冷建置、命令與限制見[歷史報告](teaching/history/evidence/2026-10-24-formal-f3f8255/REPORT.md)。
 
 [共同規則](COMMON_LEARNING_RULES.md) · [目前進度與驗證邊界](teaching/current/STATUS.md) · [既有流程尚未調整](REPOSITORY_ROLE_TRANSITION.md)
 

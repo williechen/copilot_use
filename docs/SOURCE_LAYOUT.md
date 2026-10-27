@@ -123,6 +123,8 @@ Chat / Pet SQLite 與 Analytics PostgreSQL 的 migrations 分別位於 chat_apps
 
 ## 文件入口與驗證範圍
 
+[2026-10-27 原始快照 912e5e7 正式本地驗證](source-review/local-validation-2026-10-27-912e5e7/README.md)：四組 metadata、WASM 與隔離 PostgreSQL 測試結果已記錄；Chat／Pet Node 四項失敗保留，未套用修正，未更新產品驗收狀態。
+
 [架構](SYSTEM_ARCHITECTURE.md) · [本地啟動](LOCAL_START.md) · [驗證命令](LOCAL_VALIDATION.md) · [後續教學規則](COMMON_LEARNING_RULES.md) · [教學銜接](TEACHING_ALIGNMENT.md) · [目前狀態](teaching/current/STATUS.md) · [機器可讀目錄](source-review/rust-ai-ring-layout.json) · [本次文件核對](source-review/rust-ai-ring-layout-validation.json)
 
-本輪四workspace metadata、Node source6項與Pet記憶體SQLite探測通過；該5c713553快照七個CI成功但server PG feature未完整選取；648b903已配置正式server PG，但被Pet步驟失敗阻擋。Rust／PG／HTTP引用同SHA既有證據，非本輪重跑；GUI／完整驗收未執行。[最新比對](source-review/2026-10-25-full-comparison-5c713553.md)明列範圍，舊目錄核對JSON仍限其原日期。
+歷史快照：當輪四workspace metadata、Node source6項與Pet記憶體SQLite探測通過；該5c713553快照七個CI成功但server PG feature未完整選取；648b903已配置正式server PG，但被Pet步驟失敗阻擋。Rust／PG／HTTP引用同SHA既有證據，非本輪重跑；GUI／完整驗收未執行。[最新比對](source-review/2026-10-25-full-comparison-5c713553.md)明列範圍，舊目錄核對JSON仍限其原日期。

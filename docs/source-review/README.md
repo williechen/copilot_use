@@ -1,5 +1,7 @@
 # 靜態核對證據
 
+[2026-10-27 正式本地驗證（912e5e7）](local-validation-2026-10-27-912e5e7/README.md)：未套用修正；Chat／Pet Node 四項失敗重現，隔離 PostgreSQL 55 項通過。完整命令與原始輸出另存；未更動完整比對或產品驗收狀態。
+
 **現行目錄導覽：** [SOURCE_LAYOUT](../SOURCE_LAYOUT.md)（2026-10-27 本地四 workspace tree／manifest／lock／入口核對，metadata 通過，來源 `912e5e77d8e3d2e24f0e9d804f28d86ae768c1d4`）。本頁其餘比較、測試、CI 與證據連結保留各自歷史 SHA，未重新全面比對，`last_full_comparison` 不變。
 
 
