@@ -34,10 +34,10 @@ cargo check --locked --manifest-path chat_apps/Cargo.toml -p chat-ui --features 
 cargo check --locked --manifest-path pet_apps/Cargo.toml -p pet-ui --target wasm32-unknown-unknown
 ```
 
-Analytics 先準備隔離 PostgreSQL 測試資料庫並設定 ANALYTICS_DATABASE_URL，再使用：
+Analytics 先準備隔離 PostgreSQL 測試資料庫，設定專用 `ANALYTICS_TEST_DATABASE_URL`（不得指向應用資料庫）。server 與 persistence 都須選入，啟用 feature 並不會自動執行依賴套件的 unit tests；ignored 測試亦需要專用資料庫的 CREATE SCHEMA 權限。再使用：
 
 ```bash
-DATABASE_URL="$ANALYTICS_DATABASE_URL" cargo test --locked --manifest-path analytics_apps/Cargo.toml -p analytics-server --features postgres-integration -- --include-ignored
+DATABASE_URL="$ANALYTICS_TEST_DATABASE_URL" cargo test --locked --manifest-path analytics_apps/Cargo.toml -p analytics-server -p analytics-persistence --features analytics-server/postgres-integration,analytics-persistence/postgres-integration -- --include-ignored
 ```
 
 Pet 前端 Node tests 在 pet_apps/pet_ui 執行 `node --test`。CI 只引用 rust_ai_ring 的精確 commit / workflow / job；copilot_use 舊 workflows 不作產品驗收。

@@ -2,13 +2,13 @@
 
 **歷史核對（2026-10-26，非最新 main）：** 最新程式來源 `9b89656`（upgrade）；新CI快照為1成功／6執行中，尚未全綠。舊648b903為六成功／Persistence失敗，已配置的Analytics PostgreSQL步驟被略過。當日官方版本、manifest／lock與本機工具差異已補查；未升級產品、未重跑測試、未完成整體驗收。[版本與摘要核對](source-review/2026-10-26-versions-and-summary-refresh.md)。
 
-**目前目錄基準：** rust_ai_ring `cf18d6f073b3709352f53f5531f4448a492dd3e3`（2026-10-27；僅四份 Cargo workspace manifest 與成員目錄核對）。下方較舊的來源 SHA、CI 與測試結果均是歷史快照，不代表最新產品驗收。
+**目前目錄基準：** rust_ai_ring `912e5e77d8e3d2e24f0e9d804f28d86ae768c1d4`（2026-10-27 本地更新後；四個 workspace 的 tracked tree、Cargo.toml／Cargo.lock、18 個 member 與 entrypoints 核對）。下方較舊的來源 SHA、CI 與測試結果均是歷史快照，不代表最新產品驗收。
 
 2026-10-24：使用者已將 `williechen/rust_ai_chat` 改名為 [`williechen/rust_ai_ring`](https://github.com/williechen/rust_ai_ring)，並調整為四個 Cargo workspace。2026-10-25 更新來源為 `5c713553daee4055738239f047d6c774fcc7a7a1`；文件基準為 copilot_use `532e739f1ef4e5920de300eba0f90adeeaf96187`。後續教學每次仍須重新讀取最新 main，不固定使用本頁 SHA。
 
 ## GitHub 現行 workspace 目錄樹（2026-10-27）
 
-依 [rust_ai_ring/main](https://github.com/williechen/rust_ai_ring/tree/cf18d6f073b3709352f53f5531f4448a492dd3e3) 的四份 workspace `Cargo.toml` 成員宣告核對；來源 commit `cf18d6f073b3709352f53f5531f4448a492dd3e3`。以下是**已確認的 Cargo workspace／member 目錄樹**，不是遞迴列出所有檔案；其他子目錄與檔案仍應以 GitHub 該 SHA 的實際 tree 為準。
+依 [rust_ai_ring 固定來源](https://github.com/williechen/rust_ai_ring/tree/912e5e77d8e3d2e24f0e9d804f28d86ae768c1d4) 的四份 workspace `Cargo.toml` 成員宣告核對；來源 commit `912e5e77d8e3d2e24f0e9d804f28d86ae768c1d4`。以下是**已確認的 Cargo workspace／member 目錄樹**，不是遞迴列出所有檔案；其他子目錄與檔案仍應以 GitHub 該 SHA 的實際 tree 為準。
 
 ```text
 rust_ai_ring/
@@ -46,7 +46,7 @@ rust_ai_ring/
 
 四份 manifest 的 workspace 成員分別為 Chat 5、Pet 5、Analytics 5、共用 crates 3；Chat／Pet／Analytics workspace package version 為 `0.2.37`，共用 crates 為 `0.2.35`。Leptos metadata 的 `bin-package = "chat-server"`、`lib-package = "chat-ui"` 與輸出名稱 `rust_ai_chat` 仍應保留，不能因 repo 改名直接更動外部契約。
 
-**範圍限制：** Cargo.lock 列於既有 workspace 約定，這次未逐一讀回鎖檔 blob；本節未確認所有實際檔案、空 library 是否已接線，也未執行 Cargo 或產品驗收。舊版 SHA 的歷史證據保留於下文，不以本節追認。
+**本地核對範圍：** 四份 Cargo.lock 已解析，18 個 workspace package 的版本與 manifest 一致；tracked tree、各套件入口及測試來源已讀回。四組 `cargo metadata --locked --no-deps --format-version 1` 通過；此命令不驗證完整依賴解析或編譯。目錄與 package 表不代表所有 library 已接入正式 caller，也不代表產品驗收；測試結果須按本次固定 SHA 另列，舊版歷史證據不追認。
 
 ## 兩個目錄的用途
 
@@ -62,10 +62,10 @@ rust_ai_ring/
 
 | Workspace | 成員數 | Manifest |
 | --- | ---: | --- |
-| Chat | 5 | [chat_apps/Cargo.toml](https://github.com/williechen/rust_ai_ring/blob/cf18d6f073b3709352f53f5531f4448a492dd3e3/chat_apps/Cargo.toml) |
-| Pet | 5 | [pet_apps/Cargo.toml](https://github.com/williechen/rust_ai_ring/blob/cf18d6f073b3709352f53f5531f4448a492dd3e3/pet_apps/Cargo.toml) |
-| Analytics | 5 | [analytics_apps/Cargo.toml](https://github.com/williechen/rust_ai_ring/blob/cf18d6f073b3709352f53f5531f4448a492dd3e3/analytics_apps/Cargo.toml) |
-| 共用 crates | 3 | [crates/Cargo.toml](https://github.com/williechen/rust_ai_ring/blob/cf18d6f073b3709352f53f5531f4448a492dd3e3/crates/Cargo.toml) |
+| Chat | 5 | [chat_apps/Cargo.toml](https://github.com/williechen/rust_ai_ring/blob/912e5e77d8e3d2e24f0e9d804f28d86ae768c1d4/chat_apps/Cargo.toml) |
+| Pet | 5 | [pet_apps/Cargo.toml](https://github.com/williechen/rust_ai_ring/blob/912e5e77d8e3d2e24f0e9d804f28d86ae768c1d4/pet_apps/Cargo.toml) |
+| Analytics | 5 | [analytics_apps/Cargo.toml](https://github.com/williechen/rust_ai_ring/blob/912e5e77d8e3d2e24f0e9d804f28d86ae768c1d4/analytics_apps/Cargo.toml) |
+| 共用 crates | 3 | [crates/Cargo.toml](https://github.com/williechen/rust_ai_ring/blob/912e5e77d8e3d2e24f0e9d804f28d86ae768c1d4/crates/Cargo.toml) |
 
 | 程式目錄 | Cargo package／`-p` | Rust crate／import |
 | --- | --- | --- |

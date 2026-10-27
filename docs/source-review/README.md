@@ -1,6 +1,6 @@
 # 靜態核對證據
 
-**現行目錄導覽：** [SOURCE_LAYOUT](../SOURCE_LAYOUT.md)（2026-10-27 四 workspace Cargo manifest 核對，來源 `cf18d6f073b3709352f53f5531f4448a492dd3e3`）。本頁其餘比較、測試、CI 與證據連結保留各自歷史 SHA，未重新全面比對，`last_full_comparison` 不變。
+**現行目錄導覽：** [SOURCE_LAYOUT](../SOURCE_LAYOUT.md)（2026-10-27 本地四 workspace tree／manifest／lock／入口核對，metadata 通過，來源 `912e5e77d8e3d2e24f0e9d804f28d86ae768c1d4`）。本頁其餘比較、測試、CI 與證據連結保留各自歷史 SHA，未重新全面比對，`last_full_comparison` 不變。
 
 
 <!-- comparison-5c713553:start -->

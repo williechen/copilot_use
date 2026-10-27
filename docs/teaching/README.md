@@ -20,7 +20,7 @@
 
 ## 目錄與來源
 
-[現行 rust_ai_ring 四 workspace 目錄樹與新舊路徑](../SOURCE_LAYOUT.md)（2026-10-27 來源 `cf18d6f`；僅 manifest／成員核對）· [本地啟動](../LOCAL_START.md) · [驗證命令](../LOCAL_VALIDATION.md)。歷史來源 SHA 與測試不追認新快照。
+[現行 rust_ai_ring 四 workspace 目錄樹與新舊路徑](../SOURCE_LAYOUT.md)（2026-10-27 本地來源 `912e5e7`；tree／manifest／lock／入口核對，metadata 通過）· [本地啟動](../LOCAL_START.md) · [驗證命令](../LOCAL_VALIDATION.md)。歷史來源 SHA 與測試不追認新快照。
 
 ## 使用與追溯
 
