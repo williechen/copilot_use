@@ -18,6 +18,10 @@
 
 [全專案重構獨立項目](docs/engineering/README.md)：跨案契約、共用crates、跨workspace與全庫CI；不計入各案Refactor完成量。
 
+## 目錄與來源
+
+[現行 rust_ai_ring 四 workspace 目錄樹與新舊路徑](docs/SOURCE_LAYOUT.md)（2026-10-27 來源 `cf18d6f`；僅 manifest／成員核對）· [本地啟動](docs/LOCAL_START.md) · [驗證命令](docs/LOCAL_VALIDATION.md)。歷史來源 SHA 與測試不追認新快照。
+
 ## 使用與追溯
 
 [使用者流程](docs/requirements/USER_FLOWS.md) · [人員驗證](docs/requirements/AUTHENTICATION.md) · [功能待辦](docs/FUTURE_WORK.md) · [架構](docs/SYSTEM_ARCHITECTURE.md) · [來源目錄](docs/SOURCE_LAYOUT.md) · [階段規劃](docs/ROADMAP_P0_P12.md) · [實際網頁排程](docs/teaching/scheduler-instructions-v1.md)
