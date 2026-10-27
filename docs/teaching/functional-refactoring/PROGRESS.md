@@ -10,4 +10,4 @@
 
 [增量來源／命令](../daily/day-40/rerun-9c76797/README.md) · [歷史勘誤](../daily/day-40/historical-corrections.md) · [全專案G-01／G-02](../../engineering/README.md)。Day41、FIFO、last_full_comparison不變。
 
-2026-10-28 Day42 候選（產品來源 `0b2288e4996b6d80b00e7a77e2cd023835306528`）：[Chat 狀態顯示決策搬層](../daily/day-42/chat.md#refactorchat-房間列表顯示狀態的獨立責任)、[Pet 漫遊啟用政策搬層](../daily/day-42/pet.md#refactorpet-自身漫遊啟用政策歸屬)、[Analytics URL encoder 搬層](../daily/day-42/analytics.md#refactoranalytics-自身查詢參數編碼責任) 各有獨立 patch 與舊斷言承接；[靜態套用與 SHA256 證據](../daily/day-42/delivery-verification.json) 通過。**僅方案，未套用／未編譯／未驗收；不計為已完成工程。** 三案 next_day 仍42；不更動舊測試或 FIFO。
+2026-10-28 Day42 候選（產品來源 `0b2288e4996b6d80b00e7a77e2cd023835306528`）：[Chat 狀態顯示決策搬層](../daily/day-42/chat.md)、[Pet 漫遊啟用政策搬層](../daily/day-42/pet.md)、[Analytics URL encoder 搬層](../daily/day-42/analytics.md) 各有獨立 patch 與舊斷言承接；[靜態套用與 SHA256 證據](../daily/day-42/delivery-verification.json) 通過。**僅方案，未套用／未編譯／未驗收；不計為已完成工程。** 三案 next_day 仍42；不更動舊測試或 FIFO。
