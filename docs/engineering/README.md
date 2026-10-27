@@ -14,3 +14,5 @@
 2026-10-26 Day39：未新增跨案 Refactor 或全庫 workflow；G-01 仍為未套用／未驗收方案，G-02 待盤點。三篇 Day39 的各案 Refactor 不計為 G-01／G-02 進度。
 
 2026-10-26 Day40：三案各自 Refactor（Chat 登入雜湊、Pet Runtime／roam、Analytics CSV serializer）不增加 G-01／G-02 完成量；G-01 仍未套用／未驗收，G-02 尚待完整跨 workspace caller 與依賴比對。本日無跨案 patch 或全庫 CI 實測。
+
+2026-10-28 Day42：三篇文章的 Refactor 各自僅涉及 Chat、Pet、Analytics 的專案內部程式，**不構成跨案重構交付**。G-01 仍為待使用者套用及全庫 CI 驗收的獨立方案，G-02 尚待完整 caller／契約盤點。本日沒有新增全專案 patch、沒有全庫 CI 實測、不增加 G-01／G-02 計功。[Day42 各案證據](../teaching/daily/day-42/delivery-verification.json)。
