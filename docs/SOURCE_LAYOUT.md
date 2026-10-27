@@ -4,6 +4,48 @@
 
 2026-10-24：使用者已將 `williechen/rust_ai_chat` 改名為 [`williechen/rust_ai_ring`](https://github.com/williechen/rust_ai_ring)，並調整為四個 Cargo workspace。2026-10-25 更新來源為 `5c713553daee4055738239f047d6c774fcc7a7a1`；文件基準為 copilot_use `532e739f1ef4e5920de300eba0f90adeeaf96187`。後續教學每次仍須重新讀取最新 main，不固定使用本頁 SHA。
 
+## GitHub 現行 workspace 目錄樹（2026-10-27）
+
+依 [rust_ai_ring/main](https://github.com/williechen/rust_ai_ring/tree/cf18d6f073b3709352f53f5531f4448a492dd3e3) 的四份 workspace `Cargo.toml` 成員宣告核對；來源 commit `cf18d6f073b3709352f53f5531f4448a492dd3e3`。以下是**已確認的 Cargo workspace／member 目錄樹**，不是遞迴列出所有檔案；其他子目錄與檔案仍應以 GitHub 該 SHA 的實際 tree 為準。
+
+```text
+rust_ai_ring/
+├── chat_apps/
+│   ├── Cargo.toml
+│   ├── Cargo.lock
+│   ├── chat_server/
+│   ├── chat_application/
+│   ├── chat_domain/
+│   ├── chat_persistence/
+│   └── chat_ui/
+├── pet_apps/
+│   ├── Cargo.toml
+│   ├── Cargo.lock
+│   ├── pet_server/
+│   ├── pet_ui/
+│   ├── pet_domain/
+│   ├── pet_application/
+│   └── pet_persistence/
+├── analytics_apps/
+│   ├── Cargo.toml
+│   ├── Cargo.lock
+│   ├── analytics_server/
+│   ├── analytics_persistence/
+│   ├── analytics_ui/
+│   ├── analytics_domain/
+│   └── analytics_application/
+└── crates/
+    ├── Cargo.toml
+    ├── Cargo.lock
+    ├── ai_core/
+    ├── shared/
+    └── telemetry/
+```
+
+四份 manifest 的 workspace 成員分別為 Chat 5、Pet 5、Analytics 5、共用 crates 3；Chat／Pet／Analytics workspace package version 為 `0.2.37`，共用 crates 為 `0.2.35`。Leptos metadata 的 `bin-package = "chat-server"`、`lib-package = "chat-ui"` 與輸出名稱 `rust_ai_chat` 仍應保留，不能因 repo 改名直接更動外部契約。
+
+**範圍限制：** Cargo.lock 列於既有 workspace 約定，這次未逐一讀回鎖檔 blob；本節未確認所有實際檔案、空 library 是否已接線，也未執行 Cargo 或產品驗收。舊版 SHA 的歷史證據保留於下文，不以本節追認。
+
 ## 兩個目錄的用途
 
 - `/home/willie/Documents/rust_ai_ring`：唯一產品程式、測試、CI 與功能驗收來源。
