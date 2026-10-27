@@ -1,6 +1,8 @@
 # 現行程式來源與目錄對照
 
-**2026-10-26 現行摘要已核對。** 最新程式來源 `9b89656`（upgrade）；新CI快照為1成功／6執行中，尚未全綠。舊648b903為六成功／Persistence失敗，已配置的Analytics PostgreSQL步驟被略過。當日官方版本、manifest／lock與本機工具差異已補查；未升級產品、未重跑測試、未完成整體驗收。[版本與摘要核對](source-review/2026-10-26-versions-and-summary-refresh.md)。
+**歷史核對（2026-10-26，非最新 main）：** 最新程式來源 `9b89656`（upgrade）；新CI快照為1成功／6執行中，尚未全綠。舊648b903為六成功／Persistence失敗，已配置的Analytics PostgreSQL步驟被略過。當日官方版本、manifest／lock與本機工具差異已補查；未升級產品、未重跑測試、未完成整體驗收。[版本與摘要核對](source-review/2026-10-26-versions-and-summary-refresh.md)。
+
+**目前目錄基準：** rust_ai_ring `cf18d6f073b3709352f53f5531f4448a492dd3e3`（2026-10-27；僅四份 Cargo workspace manifest 與成員目錄核對）。下方較舊的來源 SHA、CI 與測試結果均是歷史快照，不代表最新產品驗收。
 
 2026-10-24：使用者已將 `williechen/rust_ai_chat` 改名為 [`williechen/rust_ai_ring`](https://github.com/williechen/rust_ai_ring)，並調整為四個 Cargo workspace。2026-10-25 更新來源為 `5c713553daee4055738239f047d6c774fcc7a7a1`；文件基準為 copilot_use `532e739f1ef4e5920de300eba0f90adeeaf96187`。後續教學每次仍須重新讀取最新 main，不固定使用本頁 SHA。
 
@@ -54,14 +56,16 @@ rust_ai_ring/
 
 ## 四個 workspace
 
+下列 workspace 成員與 package 名稱已按 2026-10-27 的四份 Cargo manifest 重讀；歷史測試仍維持原 SHA。
+
 根目錄沒有 Cargo.toml；指令須在對應目錄執行，或指定 `--manifest-path`。每個 workspace 各自保留 Cargo.toml、Cargo.lock、target。
 
 | Workspace | 成員數 | Manifest |
 | --- | ---: | --- |
-| Chat | 5 | [chat_apps/Cargo.toml](https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/chat_apps/Cargo.toml) |
-| Pet | 5 | [pet_apps/Cargo.toml](https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/pet_apps/Cargo.toml) |
-| Analytics | 5 | [analytics_apps/Cargo.toml](https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/analytics_apps/Cargo.toml) |
-| 共用 crates | 3 | [crates/Cargo.toml](https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/crates/Cargo.toml) |
+| Chat | 5 | [chat_apps/Cargo.toml](https://github.com/williechen/rust_ai_ring/blob/cf18d6f073b3709352f53f5531f4448a492dd3e3/chat_apps/Cargo.toml) |
+| Pet | 5 | [pet_apps/Cargo.toml](https://github.com/williechen/rust_ai_ring/blob/cf18d6f073b3709352f53f5531f4448a492dd3e3/pet_apps/Cargo.toml) |
+| Analytics | 5 | [analytics_apps/Cargo.toml](https://github.com/williechen/rust_ai_ring/blob/cf18d6f073b3709352f53f5531f4448a492dd3e3/analytics_apps/Cargo.toml) |
+| 共用 crates | 3 | [crates/Cargo.toml](https://github.com/williechen/rust_ai_ring/blob/cf18d6f073b3709352f53f5531f4448a492dd3e3/crates/Cargo.toml) |
 
 | 程式目錄 | Cargo package／`-p` | Rust crate／import |
 | --- | --- | --- |
