@@ -16,7 +16,11 @@
 
 最新程式 `9c767978b20bd56e1c2182dac2f37e6ae9b7d988`；[本輪真正測試](daily/day-40/rerun-9c76797/README.md)。Chat59、Pet72＋Node6、Analytics真PG53通過；Chat／Analytics指定瀏覽器流程通過。Pet原生指定流程已由使用者操作確認＋DB核對；CI重跑請求被403拒絕。
 
-[全專案重構獨立項目](../../docs/engineering/README.md)：跨案契約、共用crates、跨workspace與全庫CI；不計入各案Refactor完成量。
+[全專案重構獨立項目](../engineering/README.md)：跨案契約、共用crates、跨workspace與全庫CI；不計入各案Refactor完成量。
+
+## 目錄與來源
+
+[現行 rust_ai_ring 四 workspace 目錄樹與新舊路徑](../SOURCE_LAYOUT.md)（2026-10-27 來源 `cf18d6f`；僅 manifest／成員核對）· [本地啟動](../LOCAL_START.md) · [驗證命令](../LOCAL_VALIDATION.md)。歷史來源 SHA 與測試不追認新快照。
 
 ## 使用與追溯
 
