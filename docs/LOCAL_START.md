@@ -1,6 +1,6 @@
 # rust_ai_ring 本地操作入口
 
-本次命令依 `0b3e58440bf4b36a398e3698e352e69faf53cfa2` 的 manifests 與入口核對；每次操作及後續教學仍須取最新 main。目錄／package／import 對照見 [SOURCE_LAYOUT](SOURCE_LAYOUT.md)。本頁是操作文件，未在此次更新啟動服務。
+本頁操作命令的原始入口核對基準為 `0b3e58440bf4b36a398e3698e352e69faf53cfa2`（歷史來源）；2026-10-27 四份 workspace Cargo manifest 已另以 `cf18d6f073b3709352f53f5531f4448a492dd3e3` 核對成員。**本次未重讀全部啟動入口或實際啟動服務**，故以下命令仍須於使用前對照最新來源。目錄／package／import 對照見 [SOURCE_LAYOUT](SOURCE_LAYOUT.md)。本頁是操作文件，未在此次更新啟動服務。
 
 本機程式目錄為 `/home/willie/Documents/rust_ai_ring`。在程式庫根目錄依 `.env.example` 設定本機 `.env`；Chat / Pet 使用 SQLite，Analytics 使用 PostgreSQL。資料庫 URL、tokens 與私有資料不放入文件或 Git，SQLite 採絕對路徑可避免因 workspace 切換而連到不同資料檔。
 
