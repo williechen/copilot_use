@@ -1,0 +1,163 @@
+{
+  "date": "2026-10-28",
+  "timezone": "Asia/Taipei",
+  "repo": "williechen/copilot_use",
+  "branch": "main",
+  "product_repo": "williechen/rust_ai_ring",
+  "product_read_only_sha": "0b2288e4996b6d80b00e7a77e2cd023835306528",
+  "docs_initial_sha": "ecdd138a444cdd25ca3d959b979624c1bbb5b8fa",
+  "rules_blob_sha": "ba9e6cbd6763d245e60800a02c60888ba6215bd5",
+  "learning_state_blob_sha": "43daf7af5ecde20880836d0546c3978e86b7f633",
+  "manifest_blob_sha": "aca1b03f6fbc963e9745534ed366fe015a6dc2dd",
+  "expected_next_day": {
+    "chat": 42,
+    "pet": 42,
+    "analytics": 42
+  },
+  "files": [
+    {
+      "path": "docs/teaching/daily/day-42/chat.md",
+      "commit": "4b8e451a63eea4a4fe513b4ab77017c26f46c4b7",
+      "blob_sha": "7e7021206929df56c67385bd4321c8ad19963209",
+      "sha256": "e78e19dd05c5bc5ca2d937472cd585f0b2fd56d7ed589ba09451fa71e7fb6cc0",
+      "exact_commit_readback": true
+    },
+    {
+      "path": "docs/teaching/daily/day-42/chat-day42-refactor.patch",
+      "commit": "3a3526f72c704c236df080f22a903eb80bd40e7f",
+      "blob_sha": "85a7ada4511a5d78d08a60b6e563103c5e3b9f67",
+      "sha256": "0e0a1d05a834a7fe88e5bdc7f752253ee168aa77d2371a328c61c25d9d260801",
+      "exact_commit_readback": true
+    },
+    {
+      "path": "docs/teaching/daily/day-42/chat-day42-green.patch",
+      "commit": "fbcb32af9c4bc71d51b7718fb1ded0d587ad3bda",
+      "blob_sha": "a45f2a7ad85dc573081a10dcd40c603946060c61",
+      "sha256": "db78dc3838a9ac0c1c47ed5a73834f6344d4fd05113e474e7a1835150c5fb70f",
+      "exact_commit_readback": true
+    },
+    {
+      "path": "docs/teaching/daily/day-42/pet.md",
+      "commit": "c08004620cbb6e008906c77849616c09071132f7",
+      "blob_sha": "ceddddf824c7cadcfdddc4bc6ec2f41cc810ee05",
+      "sha256": "5ffdb7415d7250ed325bea32cd1585d903d920054bdd005ebb459588e256cdfa",
+      "exact_commit_readback": true
+    },
+    {
+      "path": "docs/teaching/daily/day-42/pet-day42-refactor.patch",
+      "commit": "b73151af0ebe5e02e2c309ee38e293a997da4fad",
+      "blob_sha": "eaec162157de78a790a7c923cea7766b9f3c4757",
+      "sha256": "2b49395abcb8eb0d35e04571ca19fa2f068efb10d71833fb3b8c1cc22b3b648c",
+      "exact_commit_readback": true
+    },
+    {
+      "path": "docs/teaching/daily/day-42/pet-day42-green.patch",
+      "commit": "d2966cbfc9bc97f61af83ee2dedd0ae1812f6a55",
+      "blob_sha": "9cba649ca673a721b413e90daec27ebfb4076918",
+      "sha256": "b3f0c35cd14b9ca04446129083c29b0430b081109081fb30ba7ba38c3965876e",
+      "exact_commit_readback": true
+    },
+    {
+      "path": "docs/teaching/daily/day-42/analytics.md",
+      "commit": "ae759e8d472c302b188ba0c5a2f6890117826c99",
+      "blob_sha": "471dc38043cafc04f4b4fe4afc594b6eb2345f14",
+      "sha256": "0ffc57bdf15dbe99651fe4971fb0bdbdb3c9c6af6fb5a47b80400f123499ba8f",
+      "exact_commit_readback": true
+    },
+    {
+      "path": "docs/teaching/daily/day-42/analytics-day42-refactor.patch",
+      "commit": "916db20f5f8a5aac750f87956368130fac0e8782",
+      "blob_sha": "d9df8b7d1e590381f7fe5e4a03680dfef135d85b",
+      "sha256": "9e6eedd5943e55d819449b2c439428c43e5ef6d1b29722f865a4328bbb8e2117",
+      "exact_commit_readback": true
+    },
+    {
+      "path": "docs/teaching/daily/day-42/analytics-day42-green.patch",
+      "commit": "555f2a30c57ea918a973c018eddd32c32449bf30",
+      "blob_sha": "940e4bc9a754ee48ba55fe3bdff47a1b7ce5da43",
+      "sha256": "38eed7ecfb00686c6c125531e77f67d560b879b43da1d328d7fe7916b08f57db",
+      "exact_commit_readback": true
+    }
+  ],
+  "source_workspace_versions": {
+    "chat": "0.2.41",
+    "pet": "0.2.41",
+    "analytics": "0.2.41",
+    "crates": "0.2.41"
+  },
+  "source_locks": {
+    "chat": {
+      "sha": "916dc5dbc118f7af1f7fe94f32ba699b7a0c5680",
+      "resolved": {
+        "axum": "0.8.9",
+        "leptos": "0.8.22",
+        "leptos_router": "0.8.17",
+        "sqlx": "0.9.0",
+        "tokio": "1.54.1",
+        "uuid": "1.29.0",
+        "argon2": "0.6.0"
+      }
+    },
+    "pet": {
+      "sha": "436666203bfe523433b2d01b5489106f8c5457f2",
+      "resolved": {
+        "tauri": "2.12.5",
+        "tauri_build": "2.7.4",
+        "leptos": "0.8.22",
+        "sqlx": "0.9.0",
+        "tokio": "1.54.1",
+        "uuid": "1.29.0"
+      }
+    },
+    "analytics": {
+      "sha": "050f912fcbe05b1c93ee845fb780bd84246c90da",
+      "resolved": {
+        "axum": "0.8.9",
+        "leptos": "0.8.22",
+        "sqlx": "0.9.0",
+        "tokio": "1.54.1",
+        "uuid": "1.29.0"
+      }
+    },
+    "crates": {
+      "sha": "7360b9c3a7a783fbea531eea30dfe9516166c52a"
+    }
+  },
+  "official_version_sources": {
+    "rust_stable": "1.99.1 (2026-10-15) https://doc.rust-lang.org/releases.html",
+    "tauri": "2.12.5 https://docs.rs/crate/tauri/latest",
+    "leptos": "0.8.22 https://docs.rs/crate/leptos/latest",
+    "axum": "0.8.9 https://docs.rs/crate/axum/latest",
+    "sqlx": "0.9.0 https://docs.rs/crate/sqlx/latest",
+    "tokio": "1.54.1 https://docs.rs/crate/tokio/latest",
+    "uuid": "1.29.0 https://docs.rs/crate/uuid/latest"
+  },
+  "static_patch_application": {
+    "result": "pass",
+    "method": "read exact product source and sequentially apply unified diff hunks in JavaScript with strict original-line and hunk-count matching",
+    "projects": {
+      "chat": "Refactor -> Green pass",
+      "pet": "Refactor -> Green pass",
+      "analytics": "Refactor -> Green pass"
+    },
+    "not_equivalent_to_git_apply_check": true
+  },
+  "unexecuted": [
+    "git apply --check",
+    "cargo metadata --locked",
+    "cargo fmt/check/test",
+    "Node test",
+    "SQLite/PG HTTP tests",
+    "SSR/WASM build",
+    "native Tauri GUI",
+    "browser acceptance",
+    "product CI",
+    "MSRV and installed native toolchain compatibility"
+  ],
+  "gate1": "not yet accepted; toolchain/MSRV/native verification incomplete",
+  "gate2": "not executed",
+  "next_day_advanced": false,
+  "full_comparison_updated": false,
+  "product_modified": false,
+  "global_engineering_credit": false
+}
