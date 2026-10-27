@@ -1,5 +1,10 @@
 # Chat 首頁
 
+
+> **Day42 待驗證交付（2026-10-28）**：三篇文章及各案 Refactor／Green patch 已獨立提交、精確 commit 讀回，靜態 unified diff 套用重建通過；**未執行 git apply、Cargo、DB、GUI／CI，Gate1／Gate2 未完成，next_day 三案維持 42**。本段只補導覽，不追認產品驗收。
+>
+> [Chat Day42](../daily/day-42/chat.md) · [Pet Day42](../daily/day-42/pet.md) · [Analytics Day42](../daily/day-42/analytics.md) · [精確 blob／SHA256 證據](../daily/day-42/delivery-verification.json) · [四份 lock 與官方版本](../daily/day-42/versions.md)
+
 每日文章另設獨立 Refactor 段落，交付該篇專案的實際重構程式、測試承接與驗證；全專案重構另列獨立項目。核心60分鐘只計Red／Green；rust_ai_ring唯讀，使用者自行套用。
 
 [共用規則](../../COMMON_LEARNING_RULES.md) · [功能與驗證](../current/STATUS.md) · [工程進度](../functional-refactoring/PROGRESS.md) · [學習進度](../../learning-state.json) · [manifest](../current/manifest.json)
