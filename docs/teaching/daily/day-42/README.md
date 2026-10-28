@@ -2,13 +2,15 @@
 
 | 專案 | 專案首頁 | 最新文章 | 問題主線 |
 |---|---|---|---|
-| Chat | [專案大綱](../../chat/README.md) | [Day42 r2](chat-r2.md) | [原完成條件](../../../FUTURE_WORK.md#chat-auth) |
-| Pet | [專案大綱](../../pet/README.md) | [Day42 r2](pet-r2.md) | [原完成條件](../../../FUTURE_WORK.md#pet-lifecycle) |
-| Analytics | [專案大綱](../../analytics/README.md) | [Day42 r1](analytics-r1.md) | [原完成條件](../../../FUTURE_WORK.md#analytics-auth) |
+| Chat | [專案大綱](../../chat/README.md) | [Day42 r3](chat-r3.md) | [原完成條件](../../../FUTURE_WORK.md#chat-auth) |
+| Pet | [專案大綱](../../pet/README.md) | [Day42 r3](pet-r3.md) | [原完成條件](../../../FUTURE_WORK.md#pet-lifecycle) |
+| Analytics | [專案大綱](../../analytics/README.md) | [Day42 r2](analytics-r2.md) | [原完成條件](../../../FUTURE_WORK.md#analytics-auth) |
 
 最新產品 `c6708c42f21ac919e57a379848b4977d27a1c3d6`，next_day 三案 42，完整 Gate1／Gate2 尚未完成。
 
-[本輪原始命令與結果](../../../source-review/local-validation-2026-10-28-c6708c4/README.md) · [原始交付 commit／blob／SHA256](delivery-verification.json) · [原始版本核對](versions.md)。
+[本輪原始命令與結果](../../../source-review/local-validation-2026-10-28-c6708c4/README.md) · [原始交付 commit／blob／SHA256](delivery-verification.json) · [原始版本核對](versions.md) · [2026-10-29 三案精確讀回／blob／SHA256](source-readback-2026-10-29.json)。
+
+2026-10-29 修訂只補最新產品主分支正式 caller 與 Refactor 接線讀回，不重跑產品測試，不新增 Day；原 Day42 完整 Red／Green／patch 均保留。
 
 ## 原始附件與重現基準
 
