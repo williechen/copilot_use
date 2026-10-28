@@ -1,14 +1,11 @@
 diff --git a/pet_apps/pet_ui/src/main.rs b/pet_apps/pet_ui/src/main.rs
 --- a/pet_apps/pet_ui/src/main.rs
 +++ b/pet_apps/pet_ui/src/main.rs
-@@ -1,4 +1,5 @@
+@@ -1,9 +1,12 @@
 -mod bridge;
 +mod bridge;
 +mod cage_status;
  mod component;
- mod duplicate_preview;
- mod file_scan_view;
-@@ -3,7 +4,9 @@
  mod duplicate_preview;
  mod file_scan_view;
  
@@ -69,7 +66,7 @@ diff --git a/pet_apps/pet_ui/src/main.rs b/pet_apps/pet_ui/src/main.rs
                                              set_pets_busy.set(false);
                                          });
                                      }>"出籠"</button>
-@@ -263,11 +269,8 @@
+@@ -263,14 +269,12 @@
                                          set_pets_busy.set(true);
                                          let id = status_id.clone();
                                          spawn_local(async move {
@@ -80,11 +77,6 @@ diff --git a/pet_apps/pet_ui/src/main.rs b/pet_apps/pet_ui/src/main.rs
 -                                            }
 +                                            let result = bridge::pet_cage_status_by_id(&id).await;
 +                                            cage_status.update(|statuses| record_cage_status(statuses, &id, result));
-                                             set_pets_busy.set(false);
-                                         });
-                                     }>"查詢回籠狀態"</button>
-@@ -270,7 +273,8 @@
-                                             }
                                              set_pets_busy.set(false);
                                          });
 -                                    }>"查詢回籠狀態"</button>
