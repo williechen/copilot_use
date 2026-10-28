@@ -1,12 +1,7 @@
-# Chat 現行教學入口
+# Chat 現行文章入口
 
-> 2026-10-28 最新固定來源 `c801cb227e4862b8f49b5071faece70ba0b7e9c9`；[最後來源刷新與獨立重跑](../../source-review/local-validation-2026-10-28-c801cb2/README.md)。下列 e8a6409 與其他舊來源結果保留原 SHA；未完成 GUI／CI／完整版本 Gate，next_day 三案維持 42。
+[專案首頁](../chat/README.md) · [目前 Day42](../daily/day-42/chat-r2.md) · [問題與完成條件](../../FUTURE_WORK.md#chat-auth)
 
+新 SHA：server／SQLite／SSR 57 項通過（含 UI 18）。 [本輪原始命令與結果](../../source-review/local-validation-2026-10-28-c6708c4/README.md)。
 
-[現行Day41：公開房間選擇後登入並返回原房間](../daily/day-41/chat.md) · [現況](STATUS.md) · [本輪真正測試](../daily/day-40/rerun-9c76797/README.md)
-
-來源 `9c767978b20bd56e1c2182dac2f37e6ae9b7d988`。本輪Rust59、fmt/check/WASM通過；登入→管理→登出瀏覽器通過。本輪確實在此SHA重跑；歷史失敗仍保留原SHA。CI重跑被403拒絕，完整Gate2未通過。
-
-[歷史r1](../daily/day-40/chat-r1.md) · [歷史更正](../daily/day-40/historical-corrections.md)。下一篇 Day42；原 FIFO 次序不變。
-
-> **Day41 文章已交付／產品未套用、未執行本篇 Red/Green 或 Refactor 驗證、未驗收。** [Refactor patch](../daily/day-41/chat-day41-refactor.patch) · [Green patch](../daily/day-41/chat-day41-green.patch) · [全文讀回與 SHA256](../daily/day-41/delivery-verification.json) · [Rust stable 更正](../daily/day-41/version-correction.md)。上方 Day40 驗證不追認 Day41。
+[歷史與修訂](ARTICLE_STATUS.md)；next_day 維持 42，完整驗收尚未通過。
