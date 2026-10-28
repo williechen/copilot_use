@@ -5914,9 +5914,9 @@
   },
   "day42_local_validation": {
     "date": "2026-10-28",
-    "source_sha": "e8a640978732651cbbca1483b07e771f876a439b",
+    "source_sha": "c801cb227e4862b8f49b5071faece70ba0b7e9c9",
     "candidate_base_sha": "0b2288e4996b6d80b00e7a77e2cd023835306528",
-    "record": "docs/source-review/local-validation-2026-10-28-e8a6409/README.md",
+    "record": "docs/source-review/local-validation-2026-10-28-c801cb2/README.md",
     "gate1": "pending-version-and-acceptance-review",
     "gate2": false,
     "next_day_unchanged": true,
@@ -5925,6 +5925,7 @@
       "chat": "docs/teaching/daily/day-42/chat-r1.md",
       "pet": "docs/teaching/daily/day-42/pet-r1.md",
       "analytics": "docs/teaching/daily/day-42/analytics-r1.md"
-    }
+    },
+    "previous_record": "docs/source-review/local-validation-2026-10-28-e8a6409/README.md"
   }
 }

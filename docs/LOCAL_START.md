@@ -1,6 +1,6 @@
 # rust_ai_ring 本地操作入口
 
-> 2026-10-28 現行驗證修訂：產品 `e8a640978732651cbbca1483b07e771f876a439b` 已含三案 Day42 實作／各案 Refactor；[本地實測矩陣與限制](source-review/local-validation-2026-10-28-e8a6409/README.md) 優先於下列舊來源現況摘要。歷史結果維持原 SHA，不追認本次通過；GUI／CI／完整版本 Gate 未完成，next_day 三案維持 42。
+> 2026-10-28 最新固定來源 `c801cb227e4862b8f49b5071faece70ba0b7e9c9`；[最後來源刷新與獨立重跑](source-review/local-validation-2026-10-28-c801cb2/README.md)。下列 e8a6409 與其他舊來源結果保留原 SHA；未完成 GUI／CI／完整版本 Gate，next_day 三案維持 42。
 
 
 本頁操作命令已於 2026-10-27 按本地更新後 rust_ai_ring `912e5e77d8e3d2e24f0e9d804f28d86ae768c1d4` 的 workspace manifest、server main／路由及 Tauri 設定核對。Chat／Pet／Analytics 的啟動位置、package、位址與 health 路由符合來源；本次未啟動服務、執行管理員初始化或 GUI 驗收。目錄／package／import 對照見 [SOURCE_LAYOUT](SOURCE_LAYOUT.md)。

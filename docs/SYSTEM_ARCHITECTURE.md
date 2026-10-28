@@ -1,6 +1,6 @@
 # 系統架構與責任
 
-> 2026-10-28 現行驗證修訂：產品 `e8a640978732651cbbca1483b07e771f876a439b` 已含三案 Day42 實作／各案 Refactor；[本地實測矩陣與限制](source-review/local-validation-2026-10-28-e8a6409/README.md) 優先於下列舊來源現況摘要。歷史結果維持原 SHA，不追認本次通過；GUI／CI／完整版本 Gate 未完成，next_day 三案維持 42。
+> 2026-10-28 最新固定來源 `c801cb227e4862b8f49b5071faece70ba0b7e9c9`；[最後來源刷新與獨立重跑](source-review/local-validation-2026-10-28-c801cb2/README.md)。下列 e8a6409 與其他舊來源結果保留原 SHA；未完成 GUI／CI／完整版本 Gate，next_day 三案維持 42。
 
 
 依[共用規則](COMMON_LEARNING_RULES.md)，全專案架構／測試／CI重構每日漸進，與功能教學分開。本文只維護技術責任，各專案自己的重構見[各案入口](teaching/functional-refactoring/README.md)，跨案／共用依賴與全庫CI見[全專案獨立項目](engineering/README.md)；目錄與package見[SOURCE_LAYOUT](SOURCE_LAYOUT.md)。

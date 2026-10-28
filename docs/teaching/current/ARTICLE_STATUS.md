@@ -1,6 +1,6 @@
 # 逐篇文章與現存程式狀態
 
-> 2026-10-28 現行驗證修訂：產品 `e8a640978732651cbbca1483b07e771f876a439b` 已含三案 Day42 實作／各案 Refactor；[本地實測矩陣與限制](../../source-review/local-validation-2026-10-28-e8a6409/README.md) 優先於下列舊來源現況摘要。歷史結果維持原 SHA，不追認本次通過；GUI／CI／完整版本 Gate 未完成，next_day 三案維持 42。
+> 2026-10-28 最新固定來源 `c801cb227e4862b8f49b5071faece70ba0b7e9c9`；[最後來源刷新與獨立重跑](../../source-review/local-validation-2026-10-28-c801cb2/README.md)。下列 e8a6409 與其他舊來源結果保留原 SHA；未完成 GUI／CI／完整版本 Gate，next_day 三案維持 42。
 
 
 > 最新9c76797本輪真正重跑：Chat Rust59、Pet Rust72＋Node6、Analytics真PG53通過；Chat／Analytics指定瀏覽器流程通過。Pet原生指定流程已由使用者操作確認＋DB核對通過；CI重跑被403拒絕。[本輪完整證據](../daily/day-40/rerun-9c76797/README.md)優先於下列歷史摘要，完整Gate2未通過。
