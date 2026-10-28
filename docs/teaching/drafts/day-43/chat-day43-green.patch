@@ -1,16 +1,16 @@
 diff --git a/chat_apps/chat_ui/src/lib.rs b/chat_apps/chat_ui/src/lib.rs
 --- a/chat_apps/chat_ui/src/lib.rs
 +++ b/chat_apps/chat_ui/src/lib.rs
-@@ -21,7 +21,7 @@
+@@ -22,7 +22,7 @@
      path,
  };
  
 -use room_list_state::{filter_rooms, room_status_text};
 +use room_list_state::{clear_room_search, filter_rooms, room_status_text};
+ use session_entry::{session_entry_display, SessionEntry};
  
  #[cfg(any(target_arch = "wasm32", test))]
- use room_list_state::refresh_result_view;
-@@ -447,7 +447,17 @@
+@@ -433,7 +433,17 @@
                      { set_loading.set(false); }
  
              }>"讀取／重新整理房間"</button>
