@@ -8,7 +8,7 @@
 
 最新產品 `c6708c42f21ac919e57a379848b4977d27a1c3d6`，next_day 三案 42，完整 Gate1／Gate2 尚未完成。
 
-[本輪原始命令與結果](../../../source-review/local-validation-2026-10-28-c6708c4/README.md) · [原始交付 commit／blob／SHA256](delivery-verification.json) · [原始版本核對](versions.md) · [2026-10-29 三案精確讀回／blob／SHA256](source-readback-2026-10-29.json)。
+[本輪原始命令與結果](../../../source-review/local-validation-2026-10-28-c6708c4/README.md) · [原始交付 commit／blob／SHA256](delivery-verification.json) · [原始版本核對](versions.md) · [2026-10-29 最新 lock／官方版本追加核對](versions-2026-10-29.md) · [2026-10-29 三案精確讀回／blob／SHA256](source-readback-2026-10-29.json)。
 
 2026-10-29 修訂只補最新產品主分支正式 caller 與 Refactor 接線讀回，不重跑產品測試，不新增 Day；原 Day42 完整 Red／Green／patch 均保留。
 
