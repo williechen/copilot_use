@@ -99,7 +99,22 @@
     "node_sqlite_postgresql_http_ssr_wasm_tauri_gui_ci": "not executed",
     "official_versions": "selected direct dependencies verified; recursive MSRV/CLI/native not complete",
     "gate1": "pending",
-    "gate2": "pending"
+    "gate2": "pending",
+    "static_hunk_replay": {
+      "chat": {
+        "result": "pass",
+        "sections": 5
+      },
+      "pet": {
+        "result": "pass",
+        "sections": 4
+      },
+      "analytics": {
+        "result": "pass",
+        "sections": 5
+      },
+      "method": "read original GitHub source at exact product SHA; parse unified hunk headers; verify context, removed lines, counts; apply Refactor then Green in memory; NOT git apply --check"
+    }
   },
   "last_full_comparison_updated": false
 }
