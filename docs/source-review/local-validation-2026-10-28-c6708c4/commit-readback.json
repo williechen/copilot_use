@@ -1,0 +1,242 @@
+[
+  {
+    "commit": "b7814c60bfac67107ced9e0f5edf101eea189abc",
+    "parent": "968146dc230fc773f60ec73d5a0376d353a7e187",
+    "files": [
+      {
+        "path": "docs/teaching/chat/README.md",
+        "blob": "084fc7f9b3a49d10f924503a5a6f3c3a59b715f6",
+        "sha256": "eccd8642d989c3d38479f98d0ca973bb930118d9e7a8c05cb1e7e1dee0e1b1c4",
+        "bytes": 5682
+      },
+      {
+        "path": "docs/teaching/current/CHAT_ENTRY.md",
+        "blob": "75d189884f8dec3f8e86a49405a487c703d0be6c",
+        "sha256": "2faa29f055f1ef3e8c477951a9198a63963a5bd6f11f6481f940570700479cf1",
+        "bytes": 419
+      },
+      {
+        "path": "docs/teaching/daily/day-42/chat-r2.md",
+        "blob": "dda7482cefcfec616923363ddafed74f765c2209",
+        "sha256": "9953b67922c9815de30057d2e83d85ff99d0695b7e1ea96bbc65a44531031d19",
+        "bytes": 1035
+      }
+    ]
+  },
+  {
+    "commit": "eb75cf8c36a5dbb683877d6c40a39ba70dee6791",
+    "parent": "b7814c60bfac67107ced9e0f5edf101eea189abc",
+    "files": [
+      {
+        "path": "docs/teaching/current/PET_ENTRY.md",
+        "blob": "6bb2ea789104555ec8f7ad76cec0fee618d897b0",
+        "sha256": "0643d3bd90a58d3d307eaae959665b6ead98c2a07f6bc3b4f6f91ca20f8c3edf",
+        "bytes": 422
+      },
+      {
+        "path": "docs/teaching/daily/day-42/pet-r2.md",
+        "blob": "0737ef028113f97f7ab02d9a9eda9a113a987810",
+        "sha256": "a40e23ba8a95c7d775868ef80445be1080b0a22aa1d82f79d3227d1cccf2d908",
+        "bytes": 1059
+      },
+      {
+        "path": "docs/teaching/pet/README.md",
+        "blob": "e3851ff2c8f86f878b75b2dffad7f36e12be2138",
+        "sha256": "280093799089697f05c6b457479b1ebc51a0607983e016c8df4faf8843f58b4e",
+        "bytes": 6122
+      }
+    ]
+  },
+  {
+    "commit": "d804d818f5fe612f939837825bd3816d23a3e09f",
+    "parent": "eb75cf8c36a5dbb683877d6c40a39ba70dee6791",
+    "files": [
+      {
+        "path": "docs/teaching/analytics/README.md",
+        "blob": "47ac0a59345214e5456cab2cea153f30a79967bf",
+        "sha256": "a3100281cbdb2e82b4f1f2c21ac990f008666965f29c47bc4b08896d00b298c2",
+        "bytes": 7948
+      },
+      {
+        "path": "docs/teaching/current/ANALYTICS_ENTRY.md",
+        "blob": "410f8c55be4c93bc0c6e2c45d54baafeb2651f24",
+        "sha256": "c6c1c6b59ac0aa76a3fb3650079c226a3a355537ac6828c387697308e272b4d6",
+        "bytes": 487
+      }
+    ]
+  },
+  {
+    "commit": "793fbf83bef6ba986a40a32b7b97c4c1c7ebf2f1",
+    "parent": "d804d818f5fe612f939837825bd3816d23a3e09f",
+    "files": [
+      {
+        "path": "README.md",
+        "blob": "90dc7d1874fa987220b5ec4da75e130a6693a6d3",
+        "sha256": "8f000f83d69f49980085de6e0de42c7bb4fe394a72faee74f1dddd4f81ef034c",
+        "bytes": 2303
+      },
+      {
+        "path": "docs/FUTURE_WORK.md",
+        "blob": "94c8fab910a86aadcb93ec45642d5c008ff1c833",
+        "sha256": "15b6a588470c99022c870eaf83ebb5e6d563830fc51da21eac521418ada0ee58",
+        "bytes": 32891
+      },
+      {
+        "path": "docs/LOCAL_START.md",
+        "blob": "a4e05f030cadd14a4794229ca5ba46f24337fc17",
+        "sha256": "ff613af20d611aacdbc383062ab16ace065535bed911d9dc6119f1c737e24d9c",
+        "bytes": 2159
+      },
+      {
+        "path": "docs/LOCAL_VALIDATION.md",
+        "blob": "f0df29f466fb86be05237d1b9e513fef18387d21",
+        "sha256": "248ee2064c6d33632a9e18d2bdce3a7794f8d56180afdeea9288248f1e89681f",
+        "bytes": 4969
+      },
+      {
+        "path": "docs/README.md",
+        "blob": "6bf3b06135398f2881f06f255bfc5df4c16d4acf",
+        "sha256": "952b17565e6fe47a701546ca1b72ffd7f97a7daccfd9868c33dc3d96d45b8a00",
+        "bytes": 2005
+      },
+      {
+        "path": "docs/SOURCE_LAYOUT.md",
+        "blob": "0737607cce13d072e229e6c264aed60e4132938c",
+        "sha256": "5c36bc9be5b13e19416f12919d4a26b30cea8d0852d4a284a3f5388c5e378c21",
+        "bytes": 9706
+      },
+      {
+        "path": "docs/SYSTEM_ARCHITECTURE.md",
+        "blob": "628758d2b687c720ae541d8c246fd0c80fa00a60",
+        "sha256": "13d297b6ae74a96e9f467517d2c1cc303a5a742cca693eff3c6cfc24ce5b9f84",
+        "bytes": 4026
+      },
+      {
+        "path": "docs/TEACHING_ALIGNMENT.md",
+        "blob": "ff38e6faf2cfd9923edfaefd161256b8740e55ef",
+        "sha256": "5591aa0b4da25efcb110305ef2612a5dc1b366f5aae3deadfae0f49c6713d859",
+        "bytes": 1760
+      },
+      {
+        "path": "docs/engineering/README.md",
+        "blob": "65230f7b2b731ae9ccb061ff4957a43c54f79b6d",
+        "sha256": "0ddeab7959343f2f24f3e2f41be651246c857bc7a1fb8727e4e4c48eb2a72a1d",
+        "bytes": 2738
+      },
+      {
+        "path": "docs/learning-state.json",
+        "blob": "afe9d1790453aa8a3f323e7ea58d4d1a45e04046",
+        "sha256": "5d056fe3d4623167c17b0ffa35d6c8d9702fec3dfed570a74ec813fafc24c086",
+        "bytes": 296506
+      },
+      {
+        "path": "docs/requirements/AUTHENTICATION.md",
+        "blob": "2bcc7820122e8d3c9f59f86cf6bea65b2377782f",
+        "sha256": "9229a07c930cc1607786ed3631a168bd01ac031b0323fa7f235ed2e3cf2e02e9",
+        "bytes": 1610
+      },
+      {
+        "path": "docs/requirements/USER_FLOWS.md",
+        "blob": "f9866fcaeb4922cd712da1256f2da4003ac47470",
+        "sha256": "b5610d8475f81b40a7fe901b067089609ba3d8bd5d6338965648841636448562",
+        "bytes": 4852
+      },
+      {
+        "path": "docs/source-review/README.md",
+        "blob": "be4bf54cb04d605d09a661548a1281f07754f211",
+        "sha256": "b2afc9f519542dd448b1e8aab6f3dafa85b747a32f2daffe4b827e1be4875935",
+        "bytes": 3392
+      },
+      {
+        "path": "docs/source-review/local-validation-2026-10-28-c6708c4/README.md",
+        "blob": "763715dbcfa1b248ff2221f4af8df99c3a94d211",
+        "sha256": "ff787b01c3ca31a973d6c4482c305b9c0858b66c25c077a3dc4d9b59528e0dd6",
+        "bytes": 1662
+      },
+      {
+        "path": "docs/source-review/local-validation-2026-10-28-c6708c4/commands.json",
+        "blob": "454c858ec03a5341220aa9388dac0f37956fca91",
+        "sha256": "795cef5714e31713c19766749d134ad0e3d637a05171bae9cb650246f0a6e7f1",
+        "bytes": 86290
+      },
+      {
+        "path": "docs/source-review/local-validation-2026-10-28-c6708c4/navigation-before.json",
+        "blob": "be0f78e78b6dc6353953ee0926239e4675954f64",
+        "sha256": "273575694da55bfd0279387ee9d6e1c45324a4fd0b8944ae1e74ed989dc99430",
+        "bytes": 4147
+      },
+      {
+        "path": "docs/source-review/local-validation-2026-10-28-c6708c4/workspace-trees.json",
+        "blob": "3ebe7e07b73782d28db6d0911d27ed54b4ac283c",
+        "sha256": "587c092d9344ceb04820ce3fac44fabd15cc2465c8b645e97fd466e9c52488c8",
+        "bytes": 691
+      },
+      {
+        "path": "docs/teaching/README.md",
+        "blob": "5de3093da09fe3e8fe4e9fddb99a580388a9ea19",
+        "sha256": "006f690222a3275cf777e9285440cecf7ecb90b4d7d4ab71a4713085a8fbc71b",
+        "bytes": 1953
+      },
+      {
+        "path": "docs/teaching/current/ARTICLE_CORRECTIONS.md",
+        "blob": "f8e17c2045595b35b7a12cf62fbe240e85c74900",
+        "sha256": "898703567fe49cf5c441368d6ed45d7beb442a3818c4c283cf1e0f4717674eec",
+        "bytes": 42425
+      },
+      {
+        "path": "docs/teaching/current/ARTICLE_STATUS.md",
+        "blob": "49e61864963d913187feafee1d110d4e283dc5dc",
+        "sha256": "d7aff3c4eb7cfeeb81cd237e1104f9125abc9cc2fbe63a0bbf123c691710cff5",
+        "bytes": 42425
+      },
+      {
+        "path": "docs/teaching/current/README.md",
+        "blob": "2f15634f5047e15f129a3f418e4216fbe09b7374",
+        "sha256": "4764d6c4d7efc13b69b70aa2c31084f6154da81edca2aaeba498c01cd9ad0bd6",
+        "bytes": 695
+      },
+      {
+        "path": "docs/teaching/current/STATUS.md",
+        "blob": "247138ac93eb07b8b46ecce670be8efe05d52aa6",
+        "sha256": "e2a823fc69127ae82884b279d32d9a7c139c9e32cbfd00a74334fa84ea947ea3",
+        "bytes": 1349
+      },
+      {
+        "path": "docs/teaching/current/manifest.json",
+        "blob": "a19032bb75c1b496fb8febd3c864517117792c3c",
+        "sha256": "4a8ac3914fec25a92e7ae011b346949eb3d541cc9ec822b660dca78763220f14",
+        "bytes": 268049
+      },
+      {
+        "path": "docs/teaching/daily/README.md",
+        "blob": "1b67ef3fcc9b7ff1f5eed22078e4ce7c9d051b75",
+        "sha256": "bf1c09a79e6dbe5d47dbfa175d09b203c44341887fa6a3738a7d9c1a45eb4a0a",
+        "bytes": 2234
+      },
+      {
+        "path": "docs/teaching/daily/day-42/README.md",
+        "blob": "2569b3e6bb3b6e42ff0d8eda65e5f0c8607a26f6",
+        "sha256": "933225a4057deb26e6284bc39f9e0406d2fe213e7386ece5f2be1423b18f7bac",
+        "bytes": 1808
+      },
+      {
+        "path": "docs/teaching/functional-refactoring/PROGRESS.md",
+        "blob": "8272ddb52f37bcba21b478be7d72abd4d38e4c5c",
+        "sha256": "fd9ed2dd9407f0201a22168a681bc77df8bc8fb8b1f472f3590b54fcb7d4f9b8",
+        "bytes": 1947
+      }
+    ]
+  },
+  {
+    "commit": "6dfaea08e92c3d82fde8c11e304e0d4652e22143",
+    "parent": "793fbf83bef6ba986a40a32b7b97c4c1c7ebf2f1",
+    "files": [
+      {
+        "path": "docs/teaching/daily/README.md",
+        "blob": "dbc4464687a7892214f87b65d81548928c34d196",
+        "sha256": "e713931932669c0d7256117d737e3b373ba72d12e440101be0ac094328a7d6bf",
+        "bytes": 2402
+      }
+    ]
+  }
+]
