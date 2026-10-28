@@ -8,6 +8,10 @@
 | Pet | 控制台逐 UUID 顯示回籠狀態與錯誤 | 原生選單 UUID 解析移至 `menu_scope.rs` | [文章](pet.md) · [Refactor](pet-day43-refactor.patch) · [Green](pet-day43-green.patch) |
 | Analytics | 切換 Chat／Pet 來源時保留精確事件類型 | Dashboard 計數標籤決策移至 `dashboard_summary.rs` | [文章](analytics.md) · [Refactor](analytics-day43-refactor.patch) · [Green](analytics-day43-green.patch) |
 
+## 本次接續核對（2026-10-29）
+
+[Gate1 增量核對、六份 patch 精確 hunk 重播、官方版本／MSRV 補查與環境限制](gate1-followup-2026-10-29.md)：六份 patch 按 Refactor → Green 均與固定產品來源吻合；已更正 Pet Tauri CLI 穩定版為 2.12.4。**目前仍沒有原生 git apply、Cargo／本地相容性實測，因此維持候選狀態，不提前同步 next_day。**
+
 ## 已有證據與待補
 
 - 已讀回兩庫來源 SHA、規則、需求、架構、狀態、manifest、Day42 三案及正式 caller；核對四個 workspace 與既有 lock 版本。
