@@ -51,7 +51,7 @@ cage_status.update(|statuses| record_cage_status(statuses, &id, result));
 
 ## ③ 版本（2026-10-29）
 
-Rust stable [1.99.1](https://blog.rust-lang.org/2026/10/15/Rust-1.99.1/)、Tauri [2.12.5](https://docs.rs/crate/tauri/latest)、Leptos [0.8.22](https://docs.rs/crate/leptos/latest)、SQLx [0.9.0](https://docs.rs/crate/sqlx/latest)、Tokio [1.54.1](https://docs.rs/crate/tokio/latest)、UUID [1.29.0](https://docs.rs/crate/uuid/latest)；Tauri CLI 官方文件目前可見 [2.12.0](https://docs.rs/tauri-cli/latest/tauri_cli/)，本機 CLI 與 native WebKitGTK/OS 套件未核對。產品四 workspace `0.2.42`，Pet lock resolved 依 [Day42 最新版本表](../../daily/day-42/versions-2026-10-29.md)。本輪無完整 MSRV/native/WASM 驗證，不升級產品。
+Rust stable [1.99.1](https://blog.rust-lang.org/2026/10/15/Rust-1.99.1/)、Tauri [2.12.5](https://docs.rs/crate/tauri/latest)、Leptos [0.8.22](https://docs.rs/crate/leptos/latest)、SQLx [0.9.0](https://docs.rs/crate/sqlx/latest)、Tokio [1.54.1](https://docs.rs/crate/tokio/latest)、UUID [1.29.0](https://docs.rs/crate/uuid/latest)；Tauri CLI 當日最新穩定版為 [2.12.4（2026-10-21）](https://docs.rs/crate/tauri-cli/latest)（3.0.0-alpha 為預發行，不採用）；本機 CLI 版本與 native WebKitGTK/OS 套件仍未核對。產品四 workspace `0.2.42`，Pet lock resolved 依 [Day42 最新版本表](../../daily/day-42/versions-2026-10-29.md)。本輪無完整 MSRV/native/WASM 驗證，不升級產品。
 
 ## ④ 驗證、套用、驗收與下一步
 
