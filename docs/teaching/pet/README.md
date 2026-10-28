@@ -4,7 +4,7 @@
 
 | 閱讀目的 | 入口 |
 |---|---|
-| 最新 Day42：控制台逐隻讀取 SQLite 回籠狀態 | [目前修訂](../daily/day-42/pet-r2.md) |
+| 最新 Day42：控制台逐隻讀取 SQLite 回籠狀態 | [目前修訂](../daily/day-42/pet-r3.md) |
 | 功能／Refactor 完整原文與附件 | [原始 Day42](../daily/day-42/pet.md) |
 | 本案問題與原完成條件 | [問題追蹤](../../FUTURE_WORK.md#pet-lifecycle) |
 | 目前測試及驗收限制 | [功能狀態](../current/STATUS.md) · [本輪原始命令與結果](../../source-review/local-validation-2026-10-28-c6708c4/README.md) |
