@@ -31,6 +31,6 @@
 | Day | 文章／附件／證據 |
 |---|---|
 | 42 | [Day42 索引](day-42/README.md) |
-| 41 | [Day41 索引](day-41/README.md) |
-| 40 | [Day40 索引](day-40/README.md) |
-| 39 | [Day39 索引](day-39/README.md) |
+| 41 | [Chat](day-41/chat.md) · [Pet](day-41/pet.md) · [Analytics](day-41/analytics.md) |
+| 40 | [Chat](day-40/chat-r2.md) · [Pet](day-40/pet-r2.md) · [Analytics](day-40/analytics-r1.md) |
+| 39 | [Chat](day-39/chat-r3.md) · [Pet](day-39/pet-r3.md) · [Analytics](day-39/analytics-r3.md) |
