@@ -1,5 +1,8 @@
 # 各專案Refactor進度
 
+> 2026-10-28 現行驗證修訂：產品 `e8a640978732651cbbca1483b07e771f876a439b` 已含三案 Day42 實作／各案 Refactor；[本地實測矩陣與限制](../../source-review/local-validation-2026-10-28-e8a6409/README.md) 優先於下列舊來源現況摘要。歷史結果維持原 SHA，不追認本次通過；GUI／CI／完整版本 Gate 未完成，next_day 三案維持 42。
+
+
 最新來源 `9c767978b20bd56e1c2182dac2f37e6ae9b7d988`。本輪真正重跑測試與可行瀏覽器流程，沒有新增功能或重構計功；歷史證據保持原SHA。
 
 | 專案 | 來源現況 | 本輪／後續 |
@@ -10,4 +13,4 @@
 
 [增量來源／命令](../daily/day-40/rerun-9c76797/README.md) · [歷史勘誤](../daily/day-40/historical-corrections.md) · [全專案G-01／G-02](../../engineering/README.md)。Day41、FIFO、last_full_comparison不變。
 
-2026-10-28 Day42 候選（產品來源 `0b2288e4996b6d80b00e7a77e2cd023835306528`）：[Chat 狀態顯示決策搬層](../daily/day-42/chat.md)、[Pet 漫遊啟用政策搬層](../daily/day-42/pet.md)、[Analytics URL encoder 搬層](../daily/day-42/analytics.md) 各有獨立 patch 與舊斷言承接；[靜態套用與 SHA256 證據](../daily/day-42/delivery-verification.json) 通過。**僅方案，未套用／未編譯／未驗收；不計為已完成工程。** 三案 next_day 仍42；不更動舊測試或 FIFO。
+2026-10-28 Day42 候選（產品來源 `0b2288e4996b6d80b00e7a77e2cd023835306528`）：[Chat 狀態顯示決策搬層](../daily/day-42/chat-r1.md)、[Pet 漫遊啟用政策搬層](../daily/day-42/pet-r1.md)、[Analytics URL encoder 搬層](../daily/day-42/analytics-r1.md) 各有獨立 patch 與舊斷言承接；[靜態套用與 SHA256 證據](../daily/day-42/delivery-verification.json) 通過。**僅方案，未套用／未編譯／未驗收；不計為已完成工程。** 三案 next_day 仍42；不更動舊測試或 FIFO。

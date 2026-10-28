@@ -1,5 +1,8 @@
 # 問題文章與後續更正索引
 
+> 2026-10-28 現行驗證修訂：產品 `e8a640978732651cbbca1483b07e771f876a439b` 已含三案 Day42 實作／各案 Refactor；[本地實測矩陣與限制](../../source-review/local-validation-2026-10-28-e8a6409/README.md) 優先於下列舊來源現況摘要。歷史結果維持原 SHA，不追認本次通過；GUI／CI／完整版本 Gate 未完成，next_day 三案維持 42。
+
+
 > 最新9c76797已補回Chat/account並恢復Pet三個舊測試；本輪fmt通過，沒有重跑Cargo測試。[最新增量證據](../daily/day-40/source-update-9c76797/README.md)優先於下列歷史「目前」摘要，功能／GUI完成條件不自動結案。
 
 > 前輪ff14／b0歷史更正（不是最新來源狀態）：Chat/account回歸、Pet初輪缺nativeX已於b0補上，但3項舊斷言仍缺、原始patch EOF問題已實測記錄。[現行狀態](STATUS.md)與[Day39／40歷史更正](../daily/day-40/historical-corrections.md)為本次入口；下列舊SHA診斷不當成最新全部未套用或已驗收。

@@ -1,5 +1,8 @@
 # 全專案重構：獨立項目
 
+> 2026-10-28 現行驗證修訂：產品 `e8a640978732651cbbca1483b07e771f876a439b` 已含三案 Day42 實作／各案 Refactor；[本地實測矩陣與限制](../source-review/local-validation-2026-10-28-e8a6409/README.md) 優先於下列舊來源現況摘要。歷史結果維持原 SHA，不追認本次通過；GUI／CI／完整版本 Gate 未完成，next_day 三案維持 42。
+
+
 範圍是跨Chat／Pet／Analytics的契約、共用crates、跨workspace依賴、全庫測試與CI；各篇Refactor只處理所屬專案，不在此重複計功。本文是全專案項目正本，不新增教學Day或平行補教FIFO。
 
 | 項目 | 範圍／交付 | 狀態／驗證 | 下一步 |

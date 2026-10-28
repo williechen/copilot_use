@@ -1,0 +1,32 @@
+[
+  {
+    "command": [
+      "cargo",
+      "check",
+      "--offline",
+      "--locked",
+      "--workspace",
+      "--manifest-path",
+      "chat_apps/Cargo.toml"
+    ],
+    "cwd": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest",
+    "exit_code": 0,
+    "output": "    Blocking waiting for file lock on build directory\n    Checking shared v0.2.41 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/crates/shared)\n    Checking chat-ui v0.2.41 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/chat_ui)\nwarning: variants `SignedOut`, `SignedIn`, and `Unavailable` are never constructed\n   --> chat_ui/src/lib.rs:113:5\n    |\n111 | enum SessionEntry {\n    |      ------------ variants in this enum\n112 |     Checking,\n113 |     SignedOut,\n    |     ^^^^^^^^^\n114 |     SignedIn,\n    |     ^^^^^^^^\n115 |     Unavailable,\n    |     ^^^^^^^^^^^\n    |\n    = note: `SessionEntry` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis\n    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default\n\nwarning: function `room_heading` is never used\n   --> chat_ui/src/lib.rs:222:4\n    |\n222 | fn room_heading(id: &str, result: Result<String, String>) -> String {\n    |    ^^^^^^^^^^^^\n\nwarning: `chat-ui` (lib) generated 2 warnings\n    Checking chat-server v0.2.41 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/chat_server)\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.59s\n",
+    "seconds": 2.658504009246826
+  },
+  {
+    "command": [
+      "cargo",
+      "clippy",
+      "--offline",
+      "--locked",
+      "--workspace",
+      "--manifest-path",
+      "chat_apps/Cargo.toml"
+    ],
+    "cwd": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest",
+    "exit_code": 0,
+    "output": "    Blocking waiting for file lock on build directory\n    Checking shared v0.2.41 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/crates/shared)\n    Checking chat-ui v0.2.41 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/chat_ui)\nwarning: unneeded sub `cfg` when there is only one condition\n  --> chat_ui/src/lib.rs:29:7\n   |\n29 | #[cfg(any(target_arch = \"wasm32\"))]\n   |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: try: `target_arch = \"wasm32\"`\n   |\n   = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#non_minimal_cfg\n   = note: `#[warn(clippy::non_minimal_cfg)]` on by default\n\nwarning: variants `SignedOut`, `SignedIn`, and `Unavailable` are never constructed\n   --> chat_ui/src/lib.rs:113:5\n    |\n111 | enum SessionEntry {\n    |      ------------ variants in this enum\n112 |     Checking,\n113 |     SignedOut,\n    |     ^^^^^^^^^\n114 |     SignedIn,\n    |     ^^^^^^^^\n115 |     Unavailable,\n    |     ^^^^^^^^^^^\n    |\n    = note: `SessionEntry` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis\n    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default\n\nwarning: function `room_heading` is never used\n   --> chat_ui/src/lib.rs:222:4\n    |\n222 | fn room_heading(id: &str, result: Result<String, String>) -> String {\n    |    ^^^^^^^^^^^^\n\nwarning: `chat-ui` (lib) generated 3 warnings\n    Checking chat-server v0.2.41 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/chat_server)\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.76s\n",
+    "seconds": 2.824349880218506
+  }
+]

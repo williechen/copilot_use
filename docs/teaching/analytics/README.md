@@ -1,9 +1,12 @@
 # Analytics 首頁
 
+> 2026-10-28 現行驗證修訂：產品 `e8a640978732651cbbca1483b07e771f876a439b` 已含三案 Day42 實作／各案 Refactor；[本地實測矩陣與限制](../../source-review/local-validation-2026-10-28-e8a6409/README.md) 優先於下列舊來源現況摘要。歷史結果維持原 SHA，不追認本次通過；GUI／CI／完整版本 Gate 未完成，next_day 三案維持 42。
+
+
 
 > **Day42 待驗證交付（2026-10-28）**：三篇文章及各案 Refactor／Green patch 已獨立提交、精確 commit 讀回，靜態 unified diff 套用重建通過；**未執行 git apply、Cargo、DB、GUI／CI，Gate1／Gate2 未完成，next_day 三案維持 42**。本段只補導覽，不追認產品驗收。
 >
-> [Chat Day42](../daily/day-42/chat.md) · [Pet Day42](../daily/day-42/pet.md) · [Analytics Day42](../daily/day-42/analytics.md) · [精確 blob／SHA256 證據](../daily/day-42/delivery-verification.json) · [四份 lock 與官方版本](../daily/day-42/versions.md)
+> [Chat Day42](../daily/day-42/chat-r1.md) · [Pet Day42](../daily/day-42/pet-r1.md) · [Analytics Day42](../daily/day-42/analytics-r1.md) · [精確 blob／SHA256 證據](../daily/day-42/delivery-verification.json) · [四份 lock 與官方版本](../daily/day-42/versions.md)
 
 每日文章另設獨立 Refactor 段落，交付該篇專案的實際重構程式、測試承接與驗證；全專案重構另列獨立項目。核心60分鐘只計Red／Green；rust_ai_ring唯讀，使用者自行套用。
 

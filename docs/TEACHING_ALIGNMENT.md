@@ -1,5 +1,8 @@
 # 教學、各案Refactor與全專案重構
 
+> 2026-10-28 現行驗證修訂：產品 `e8a640978732651cbbca1483b07e771f876a439b` 已含三案 Day42 實作／各案 Refactor；[本地實測矩陣與限制](source-review/local-validation-2026-10-28-e8a6409/README.md) 優先於下列舊來源現況摘要。歷史結果維持原 SHA，不追認本次通過；GUI／CI／完整版本 Gate 未完成，next_day 三案維持 42。
+
+
 功能Red／Green只處理當日可操作功能。各篇在①後設與②並列的獨立「Refactor」段落，只處理該篇Chat、Pet或Analytics自己的架構、測試、fixture與專案CI，按該案累積相依每日接續，不作Green接續的局部整理。
 
 Refactor必須有完整可套用程式／patch、正式caller／module／Cargo／features接線、舊測試與有效斷言去向、實際／未執行驗證、風險／回復與下一步；不能只有說明或目錄。既有行為重構不假造新功能Red，純內層、DB、HTTP／IPC與UI的獨有斷言保留。

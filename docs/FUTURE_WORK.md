@@ -1,5 +1,8 @@
 # 功能待辦與工程銜接
 
+> 2026-10-28 現行驗證修訂：產品 `e8a640978732651cbbca1483b07e771f876a439b` 已含三案 Day42 實作／各案 Refactor；[本地實測矩陣與限制](source-review/local-validation-2026-10-28-e8a6409/README.md) 優先於下列舊來源現況摘要。歷史結果維持原 SHA，不追認本次通過；GUI／CI／完整版本 Gate 未完成，next_day 三案維持 42。
+
+
 > 最新9c76797已補回Chat/account並恢復Pet三個舊測試；本輪fmt通過，沒有重跑Cargo測試。[最新增量證據](teaching/daily/day-40/source-update-9c76797/README.md)優先於下列歷史「目前」摘要，功能／GUI完成條件不自動結案。
 
 > 前輪ff14／b0歷史核對（已由9c76797修復，不是最新狀態）：Day40的Session首頁與CSV已見實作，但Chat/account路由回歸、Pet初輪X接線已於b0補上但3舊測試仍缺。[最新精確來源與命令](teaching/daily/day-40/local-validation/README.md)及[歷史更正](teaching/daily/day-40/historical-corrections.md)優先於下列歷史「目前」摘要；原完成條件／FIFO不變。

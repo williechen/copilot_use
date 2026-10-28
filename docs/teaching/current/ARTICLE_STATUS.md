@@ -1,5 +1,8 @@
 # 逐篇文章與現存程式狀態
 
+> 2026-10-28 現行驗證修訂：產品 `e8a640978732651cbbca1483b07e771f876a439b` 已含三案 Day42 實作／各案 Refactor；[本地實測矩陣與限制](../../source-review/local-validation-2026-10-28-e8a6409/README.md) 優先於下列舊來源現況摘要。歷史結果維持原 SHA，不追認本次通過；GUI／CI／完整版本 Gate 未完成，next_day 三案維持 42。
+
+
 > 最新9c76797本輪真正重跑：Chat Rust59、Pet Rust72＋Node6、Analytics真PG53通過；Chat／Analytics指定瀏覽器流程通過。Pet原生指定流程已由使用者操作確認＋DB核對通過；CI重跑被403拒絕。[本輪完整證據](../daily/day-40/rerun-9c76797/README.md)優先於下列歷史摘要，完整Gate2未通過。
 
 > 前輪ff14／b0歷史更正（不是最新來源狀態）：Chat/account回歸、Pet初輪缺nativeX已於b0補上，但3項舊斷言仍缺、原始patch EOF問題已實測記錄。[現行狀態](STATUS.md)與[Day39／40歷史更正](../daily/day-40/historical-corrections.md)為本次入口；下列舊SHA診斷不當成最新全部未套用或已驗收。

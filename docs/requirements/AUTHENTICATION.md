@@ -1,5 +1,8 @@
 # Chat／Analytics 共用人員驗證需求
 
+> 2026-10-28 現行驗證修訂：產品 `e8a640978732651cbbca1483b07e771f876a439b` 已含三案 Day42 實作／各案 Refactor；[本地實測矩陣與限制](../source-review/local-validation-2026-10-28-e8a6409/README.md) 優先於下列舊來源現況摘要。歷史結果維持原 SHA，不追認本次通過；GUI／CI／完整版本 Gate 未完成，next_day 三案維持 42。
+
+
 現行程式來源與目錄：[rust_ai_ring 四個 workspace 對照](../SOURCE_LAYOUT.md)（來源 `0b3e5844`，2026-10-24 靜態核對）。
 
 登入、登出、Cookie 與 Session 採共用實作，各系統透過儲存介面與政策接入；SQLite／PostgreSQL 與登入狀態各自獨立。以下為驗收需求，不是已實作宣告。

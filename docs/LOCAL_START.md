@@ -1,5 +1,8 @@
 # rust_ai_ring 本地操作入口
 
+> 2026-10-28 現行驗證修訂：產品 `e8a640978732651cbbca1483b07e771f876a439b` 已含三案 Day42 實作／各案 Refactor；[本地實測矩陣與限制](source-review/local-validation-2026-10-28-e8a6409/README.md) 優先於下列舊來源現況摘要。歷史結果維持原 SHA，不追認本次通過；GUI／CI／完整版本 Gate 未完成，next_day 三案維持 42。
+
+
 本頁操作命令已於 2026-10-27 按本地更新後 rust_ai_ring `912e5e77d8e3d2e24f0e9d804f28d86ae768c1d4` 的 workspace manifest、server main／路由及 Tauri 設定核對。Chat／Pet／Analytics 的啟動位置、package、位址與 health 路由符合來源；本次未啟動服務、執行管理員初始化或 GUI 驗收。目錄／package／import 對照見 [SOURCE_LAYOUT](SOURCE_LAYOUT.md)。
 
 本機程式目錄為 `/home/willie/Documents/rust_ai_ring`。在程式庫根目錄依 `.env.example` 設定本機 `.env`；Chat / Pet 使用 SQLite，Analytics 使用 PostgreSQL。資料庫 URL、tokens 與私有資料不放入文件或 Git，SQLite 採絕對路徑可避免因 workspace 切換而連到不同資料檔。
