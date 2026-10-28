@@ -6,9 +6,9 @@
 
 | 專案 | 專案首頁 | 最新文章 | 問題主線 |
 |---|---|---|---|
-| Chat | [專案大綱](teaching/chat/README.md) | [Day42 r2](teaching/daily/day-42/chat-r2.md) | [原完成條件](FUTURE_WORK.md#chat-auth) |
-| Pet | [專案大綱](teaching/pet/README.md) | [Day42 r2](teaching/daily/day-42/pet-r2.md) | [原完成條件](FUTURE_WORK.md#pet-lifecycle) |
-| Analytics | [專案大綱](teaching/analytics/README.md) | [Day42 r1](teaching/daily/day-42/analytics-r1.md) | [原完成條件](FUTURE_WORK.md#analytics-auth) |
+| Chat | [專案大綱](teaching/chat/README.md) | [Day42 r3](teaching/daily/day-42/chat-r3.md) | [原完成條件](FUTURE_WORK.md#chat-auth) |
+| Pet | [專案大綱](teaching/pet/README.md) | [Day42 r3](teaching/daily/day-42/pet-r3.md) | [原完成條件](FUTURE_WORK.md#pet-lifecycle) |
+| Analytics | [專案大綱](teaching/analytics/README.md) | [Day42 r2](teaching/daily/day-42/analytics-r2.md) | [原完成條件](FUTURE_WORK.md#analytics-auth) |
 
 ## 目前驗證
 
