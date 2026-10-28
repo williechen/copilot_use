@@ -1,19 +1,22 @@
-# 逐篇文章與現存程式狀態
+# 歷史文章與來源對照
 
-> 2026-10-28 最新固定來源 `c801cb227e4862b8f49b5071faece70ba0b7e9c9`；[最後來源刷新與獨立重跑](../../source-review/local-validation-2026-10-28-c801cb2/README.md)。下列 e8a6409 與其他舊來源結果保留原 SHA；未完成 GUI／CI／完整版本 Gate，next_day 三案維持 42。
+[目前功能／驗證](STATUS.md) · [功能問題與完成條件](../../FUTURE_WORK.md) · [目前文章](README.md)。本頁不另建立 FIFO 或新的功能編號。
 
+## 本輪已修正
 
-> 最新9c76797本輪真正重跑：Chat Rust59、Pet Rust72＋Node6、Analytics真PG53通過；Chat／Analytics指定瀏覽器流程通過。Pet原生指定流程已由使用者操作確認＋DB核對通過；CI重跑被403拒絕。[本輪完整證據](../daily/day-40/rerun-9c76797/README.md)優先於下列歷史摘要，完整Gate2未通過。
+| 問題 | 最新狀態 | 目前閱讀 |
+|---|---|---|
+| Chat 原文 component attribute 錯掛 helper | 最新產品已修正；原 patch 與補修順序保留 | [Chat Day42 r2](../daily/day-42/chat-r2.md) |
+| Chat 登入 SSR fixture 缺 Router | `c6708c42f21ac919e57a379848b4977d27a1c3d6` 原樣 UI 18 項通過 | [Chat Day42 r2](../daily/day-42/chat-r2.md) |
+| Pet Day41／42 VM fixture 缺 location／跨 realm 參數 | 同 SHA Node 10 項通過，既有斷言保留 | [Pet Day42 r2](../daily/day-42/pet-r2.md) |
 
-> 前輪ff14／b0歷史更正（不是最新來源狀態）：Chat/account回歸、Pet初輪缺nativeX已於b0補上，但3項舊斷言仍缺、原始patch EOF問題已實測記錄。[現行狀態](STATUS.md)與[Day39／40歷史更正](../daily/day-40/historical-corrections.md)為本次入口；下列舊SHA診斷不當成最新全部未套用或已驗收。
+[本輪原始命令與結果](../../source-review/local-validation-2026-10-28-c6708c4/README.md)；以上是測試／文章修正，不等於房間 ACL、Pet 預設資格或 Analytics 授權已驗收。原功能缺口維持 [FUTURE_WORK](../../FUTURE_WORK.md) 的原完成條件。
 
-2026-10-25 更新；程式精確來源 `5c713553daee4055738239f047d6c774fcc7a7a1`，文件比對基準 `532e739f1ef4e5920de300eba0f90adeeaf96187`。涵蓋三案 Day2–36 的 **105個目前閱讀版本、111份版本**。三案 Day1 原文缺失，未補造；全部原文 blob／SHA256 核對無不符。原教學正文與原交付證據保留。
+## 歷史逐篇差異（2026-10-25，5c713553）
 
-[完整程式／文章比對](../../source-review/2026-10-25-full-comparison-5c713553.md) · [111份逐篇對照與來源](../../source-review/comparison-5c713553/ARTICLE_MATRIX.md) · [機器可讀逐篇狀態](article-states.json) · [機器可讀勘誤](article-corrections.json) · [功能現況](STATUS.md) · [既有後續項目](../../FUTURE_WORK.md)
+下表保留當時 Day2–36 的 105 個閱讀版本／111 份版本差異；欄位「目前」只指當時，不是最新產品狀態。本輪未重新逐篇套用歷史文章。三案 Day1 原文缺失未補造。
 
-本輪做靜態文章／真實呼叫鏈比對、四個 workspace metadata、6項 Node source 契約、Pet 記憶體 SQLite schema／SQL 探測及同 SHA CI 讀取；Rust／PG／HTTP／WS 引用明示為同 SHA 既有證據，原生 GUI 與完整產品驗收未重跑。沒有重新套用每一篇歷史程式區塊。next_day 仍三案37，FIFO、封存與 last_full_comparison 不變。
-
-舊路徑、庫名、`...`、歷史政策與舊 API 字串需依上下文解讀，不自動判為文章錯誤。原索引可從 [更新前精確版本](https://github.com/williechen/copilot_use/blob/532e739f1ef4e5920de300eba0f90adeeaf96187/docs/teaching/current/ARTICLE_STATUS.md) 追溯；最新判定以下表及完整報告為準。
+[原完整比對](../../source-review/2026-10-25-full-comparison-5c713553.md) · [逐篇矩陣](../../source-review/comparison-5c713553/ARTICLE_MATRIX.md) · [原機器紀錄](article-states.json) · [原勘誤紀錄](article-corrections.json)。原版頁面 commit／blob／SHA256 見本輪 navigation-before.json，原始教學／證據不改寫。
 
 | Day／案／版本 | 目前閱讀 | 原文與現存程式差異 | 原待辦 |
 |---|---|---|---|

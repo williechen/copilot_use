@@ -1,20 +1,16 @@
 # 目前功能與驗證狀態
 
-> 2026-10-28 最新固定來源 `c801cb227e4862b8f49b5071faece70ba0b7e9c9`；[最後來源刷新與獨立重跑](../../source-review/local-validation-2026-10-28-c801cb2/README.md)。下列 e8a6409 與其他舊來源結果保留原 SHA；未完成 GUI／CI／完整版本 Gate，next_day 三案維持 42。
+產品 `c6708c42f21ac919e57a379848b4977d27a1c3d6`；2026-10-28 增量重測。[本輪原始命令與結果](../../source-review/local-validation-2026-10-28-c6708c4/README.md)。
 
+| 專案／層級 | 本輪新 SHA 實際結果 | 未執行與限制 |
+|---|---|---|
+| 四 workspace | metadata --locked --no-deps、fmt --all 四組通過 | 不代表編譯或功能驗收 |
+| Chat | server／SQLite／SSR 57 項通過，含 UI 18 項；Router fixture 修正已在 main | 本輪未重跑 WASM、瀏覽器、完整 ACL／Session 情境 |
+| Pet | Node 10 項通過，VM location／參數 fixture 修正已在 main | 本輪未重跑 Cargo／SQLite／native／GUI |
+| Analytics | metadata／fmt 通過，workspace tree 與 c801cb2 相同 | 本輪未重跑 PG／HTTP；角色／來源 ACL 未驗收 |
 
-最新產品 `9c767978b20bd56e1c2182dac2f37e6ae9b7d988`。本輪在隔離clone真正重跑Cargo與可行瀏覽器流程；產品原始工作樹未修改。
+[前輪 c801cb2 四 workspace、WASM、PG 結果](../../source-review/local-validation-2026-10-28-c801cb2/README.md) 僅屬舊 SHA。[更早 GUI／原生人工證據](../daily/day-40/rerun-9c76797/README.md) 亦保留原版本，不追認本輪。
 
-| 專案 | 本輪實際結果 | 尚缺 |
-| --- | --- | --- |
-| Chat | fmt/check、workspace SSR Rust59、WASM與GUI build通過；瀏覽器登入→/account→首頁管理→登出／重載通過 | 房間ACL、Session到期等完整GUI驗收 |
-| Pet | fmt/check、Rust72（server60＋Application8＋SQLite4）、WASM及Node6通過 | 原生指定多窗／Alt+F4逐隻回籠／重新出籠／兩種重啟：使用者操作確認＋SQLite核對通過；故障注入與漫遊未驗 |
-| Analytics | fmt/check、帶postgres-integration的52＋單獨ignored1＝53通過；瀏覽器登入、精確篩選、CSV實際下載解析、清除、切來源及登出通過 | 首次改密碼GUI、外部試算表及完整角色／來源ACL |
+GUI／CI rerun、舊 DB 升級與完整 MSRV／版本 Gate 未完成；Gate2 未通過。next_day 三案 42，FIFO、last_full_comparison 不變。
 
-CI：已嘗試重跑Chat build、Pet test、Analytics check三個job，連線皆回403 Resource not accessible by integration；沒有啟動新attempt。同SHA既有遠端CI僅列觀察，不當本輪重跑成功。
-
-[真正命令／cwd／exit／logs、畫面與限制](../daily/day-40/rerun-9c76797/README.md) · [機器紀錄](../daily/day-40/rerun-9c76797/verification.json) · [上一輪僅來源與fmt](../daily/day-40/source-update-9c76797/README.md) · [歷史實測](../daily/day-40/local-validation/README.md) · [歷史更正](../daily/day-40/historical-corrections.md)。
-
-舊ff14的Chat57通過／2失敗、b0的Pet69通過／缺3項測試，以及修復候選結果保持原SHA。本輪是9c76797實測結果，不能倒改舊失敗。next_day三案仍41；FIFO、last_full_comparison及重構計功不變；完整Gate2未通過。已停止測試伺服器、移除本輪約5.18GB暫存及專用DB，產品工作樹乾淨。
-
-[後續原生GUI實測](../daily/day-40/native-gui-9c76797/README.md)：代理沒有原生點擊／截圖能力，操作及視窗顯示由使用者直接確認，與代理查核的DB／程序證據分列。
+[功能問題／原完成條件](../../FUTURE_WORK.md) · [文章勘誤](ARTICLE_CORRECTIONS.md) · [三案文章](README.md)。

@@ -1,6 +1,8 @@
 # 靜態核對證據
 
-> 2026-10-28 最新固定來源 `c801cb227e4862b8f49b5071faece70ba0b7e9c9`；[最後來源刷新與獨立重跑](local-validation-2026-10-28-c801cb2/README.md)。下列 e8a6409 與其他舊來源結果保留原 SHA；未完成 GUI／CI／完整版本 Gate，next_day 三案維持 42。
+[最新：c6708c4 fixture 修正後實測](local-validation-2026-10-28-c6708c4/README.md)；舊來源各自保留，不追認新 SHA。
+
+> 2026-10-28 固定產品來源 `c6708c42f21ac919e57a379848b4977d27a1c3d6`；[本輪原始命令與結果](local-validation-2026-10-28-c6708c4/README.md)。本輪只增量重測 fixture、metadata／fmt；其他來源實測維持原 SHA，完整驗收與版本 Gate 尚未完成。
 
 
 [2026-10-27 正式本地驗證（912e5e7）](local-validation-2026-10-27-912e5e7/README.md)：未套用修正；Chat／Pet Node 四項失敗重現，隔離 PostgreSQL 55 項通過。完整命令與原始輸出另存；未更動完整比對或產品驗收狀態。

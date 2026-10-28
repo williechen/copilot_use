@@ -1,39 +1,36 @@
-# 每日新文章
+# 每日教學與歷史文章
 
-> 2026-10-28 最新固定來源 `c801cb227e4862b8f49b5071faece70ba0b7e9c9`；[最後來源刷新與獨立重跑](../../source-review/local-validation-2026-10-28-c801cb2/README.md)。下列 e8a6409 與其他舊來源結果保留原 SHA；未完成 GUI／CI／完整版本 Gate，next_day 三案維持 42。
+目前閱讀 Day42；next_day 三案仍為 42，不因索引整理增加 Day。
 
+## 專案與最新文章
 
+| 專案 | 專案首頁 | 最新文章 | 問題主線 |
+|---|---|---|---|
+| Chat | [專案大綱](../chat/README.md) | [Day42 r2](day-42/chat-r2.md) | [原完成條件](../../FUTURE_WORK.md#chat-auth) |
+| Pet | [專案大綱](../pet/README.md) | [Day42 r2](day-42/pet-r2.md) | [原完成條件](../../FUTURE_WORK.md#pet-lifecycle) |
+| Analytics | [專案大綱](../analytics/README.md) | [Day42 r1](day-42/analytics-r1.md) | [原完成條件](../../FUTURE_WORK.md#analytics-auth) |
 
-> **Day42 待驗證交付（2026-10-28）**：三篇文章及各案 Refactor／Green patch 已獨立提交、精確 commit 讀回，靜態 unified diff 套用重建通過；**未執行 git apply、Cargo、DB、GUI／CI，Gate1／Gate2 未完成，next_day 三案維持 42**。本段只補導覽，不追認產品驗收。
->
-> [Chat Day42](day-42/chat-r1.md) · [Pet Day42](day-42/pet-r1.md) · [Analytics Day42](day-42/analytics-r1.md) · [精確 blob／SHA256 證據](day-42/delivery-verification.json) · [四份 lock 與官方版本](day-42/versions.md)
+## 目前驗證
 
-每日文章另設獨立 Refactor 段落，交付該篇專案的實際重構程式、測試承接與驗證；全專案重構另列獨立項目。核心60分鐘只計Red／Green；rust_ai_ring唯讀，使用者自行套用。
+固定產品來源 `c6708c42f21ac919e57a379848b4977d27a1c3d6`（2026-10-28）。Chat server／SQLite／SSR 57 項、Pet Node 10 項、四 workspace metadata／fmt 通過。GUI／CI／完整版本 Gate 尚未完成。[本輪原始命令與結果](../../source-review/local-validation-2026-10-28-c6708c4/README.md) · [完整功能與限制](../current/STATUS.md)。
 
-[共用規則](../../COMMON_LEARNING_RULES.md) · [功能與驗證](../current/STATUS.md) · [工程進度](../functional-refactoring/PROGRESS.md) · [學習進度](../../learning-state.json) · [manifest](../current/manifest.json)
+## 問題與文章追蹤
 
-| 專案 | 現行教學 | 下一篇 | 驗證範圍 |
-| --- | --- | --- | --- |
-| Chat | [Day41：公開房間選擇後登入並返回原房間](day-41/chat.md) | Day42 | Day41 方案已發布／靜態 hunk 通過；未套用、未編譯、未驗收 |
-| Pet | [Day41：控制台逐隻回籠](day-41/pet.md) | Day42 | Day41 方案已發布／靜態 hunk 通過；未套用、未編譯、未驗收 |
-| Analytics | [Day41：管理後台事件類型明細](day-41/analytics.md) | Day42 | Day41 方案已發布／靜態 hunk 通過；未套用、未編譯、未驗收 |
+[功能問題與完成條件](../../FUTURE_WORK.md) · [文章勘誤／修訂](../current/ARTICLE_CORRECTIONS.md) · [歷史逐篇對照](../current/ARTICLE_STATUS.md)。問題沿既有 FIFO／D01–D09 追蹤；測試修復與功能驗收分開。
 
-> **Day41 交付**：三篇文章與各自 Refactor／Green patch 已獨立提交、精確全文讀回；僅靜態 preimage 通過，未 git apply／Cargo／Node／PG／GUI／CI。下方既有 Day40 測試與人工 GUI 證據只屬原功能，**不能追認 Day41**。[Day41 SHA256 證據](day-41/delivery-verification.json) · [Rust stable 勘誤](day-41/version-correction.md) · [跨案工程獨立追蹤](../../engineering/README.md)。
+## 開發與工程
 
-[Chat首頁](../chat/README.md) · [Pet首頁](../pet/README.md) · [Analytics首頁](../analytics/README.md)
+[來源目錄](../../SOURCE_LAYOUT.md) · [本地啟動](../../LOCAL_START.md) · [驗證命令](../../LOCAL_VALIDATION.md) · [共用教學規則](../../COMMON_LEARNING_RULES.md) · [各案 Refactor](../functional-refactoring/PROGRESS.md) · [跨案工程](../../engineering/README.md)。
 
-最新程式 `9c767978b20bd56e1c2182dac2f37e6ae9b7d988`；[本輪真正測試](day-40/rerun-9c76797/README.md)。Chat59、Pet72＋Node6、Analytics真PG53通過；Chat／Analytics指定瀏覽器流程通過。Pet原生指定流程已由使用者操作確認＋DB核對；CI重跑請求被403拒絕。
+## 需求與歷史
 
-[全專案重構獨立項目](../../../docs/engineering/README.md)：跨案契約、共用crates、跨workspace與全庫CI；不計入各案Refactor完成量。
+[使用者流程](../../requirements/USER_FLOWS.md) · [人員驗證](../../requirements/AUTHENTICATION.md) · [架構](../../SYSTEM_ARCHITECTURE.md) · [學習狀態](../../learning-state.json) · [manifest](../current/manifest.json) · [歷史原文](../history/README.md) · [驗收封存](../archived/README.md)。原文與舊證據保留各自 SHA，未將歷史測試追認新版本。
 
-## 使用與追溯
+## 近期交付
 
-[使用者流程](../../requirements/USER_FLOWS.md) · [人員驗證](../../requirements/AUTHENTICATION.md) · [功能待辦](../../FUTURE_WORK.md) · [架構](../../SYSTEM_ARCHITECTURE.md) · [來源目錄](../../SOURCE_LAYOUT.md) · [階段規劃](../../ROADMAP_P0_P12.md) · [實際網頁排程](../scheduler-instructions-v1.md)
-
-[原文章與驗證總表](../current/ARTICLE_STATUS.md) · [文章更正對照](../current/ARTICLE_CORRECTIONS.md) · [歷史目錄](../history/README.md) · [驗收封存](../archived/README.md) · [三案本修訂讀回](day-39/r2-delivery-verification.json)。保留各次來源、原文與證據；歷史測試不追認目前驗收。
-
-> Day39前輪完整本地驗證與歷史勘誤已補入[對照](day-40/historical-corrections.md)；限其原SHA，不追認Day40。
-
-> Day40 r1保存[實際套用、Cargo、SQLite／PG與原始錯誤](day-40/local-validation/README.md)。產品功能、修復候選、GUI與CI分列；next_day維持41。
-
-[Pet原生GUI人工操作與資料庫交叉驗證](day-40/native-gui-9c76797/README.md)：指定多窗、原生關閉、重新出籠與兩種重啟流程通過，完整Gate2未通過。
+| Day | 文章／附件／證據 |
+|---|---|
+| 42 | [Day42 索引](day-42/README.md) |
+| 41 | [Day41 索引](day-41/README.md) |
+| 40 | [Day40 索引](day-40/README.md) |
+| 39 | [Day39 索引](day-39/README.md) |

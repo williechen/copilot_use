@@ -1,23 +1,21 @@
-# 功能待辦與工程銜接
+# 功能問題與工程追蹤
 
-> 2026-10-28 最新固定來源 `c801cb227e4862b8f49b5071faece70ba0b7e9c9`；[最後來源刷新與獨立重跑](source-review/local-validation-2026-10-28-c801cb2/README.md)。下列 e8a6409 與其他舊來源結果保留原 SHA；未完成 GUI／CI／完整版本 Gate，next_day 三案維持 42。
+本頁是功能問題及完成條件的單一入口；保留既有 FIFO、D01–D09、anchors 與有效斷言，不以文件整理新增或結案功能。
 
+[最新實測與限制](teaching/current/STATUS.md) · [文章問題／修訂](teaching/current/ARTICLE_CORRECTIONS.md) · [各案 Refactor](teaching/functional-refactoring/PROGRESS.md) · [跨案工程](engineering/README.md)。
 
-> 最新9c76797已補回Chat/account並恢復Pet三個舊測試；本輪fmt通過，沒有重跑Cargo測試。[最新增量證據](teaching/daily/day-40/source-update-9c76797/README.md)優先於下列歷史「目前」摘要，功能／GUI完成條件不自動結案。
+## 按專案找問題
 
-> 前輪ff14／b0歷史核對（已由9c76797修復，不是最新狀態）：Day40的Session首頁與CSV已見實作，但Chat/account路由回歸、Pet初輪X接線已於b0補上但3舊測試仍缺。[最新精確來源與命令](teaching/daily/day-40/local-validation/README.md)及[歷史更正](teaching/daily/day-40/historical-corrections.md)優先於下列歷史「目前」摘要；原完成條件／FIFO不變。
+| 範圍 | 原問題與完成條件 | 目前追蹤界線 |
+|---|---|---|
+| Chat | [Session／ACL](#chat-auth) · [歷史／migration](#chat-history) · [房間回饋](#chat-feedback) | SSR fixture 已修，完整使用者流程未驗收 |
+| Pet | [生命週期／回籠／重啟](#pet-lifecycle) · [漫遊](#pet-roaming) · [顯示](#pet-display) | Node fixture 已修；預設資格、回籠及 native 條件仍待驗收 |
+| Analytics | [人員授權](#analytics-auth) · [登入／Session](#analytics-session) · [報表](#analytics-capabilities) | 本輪未重跑 PG；角色／來源 ACL 等條件不結案 |
+| 工程 | [D01–D09／Adapter](#adapter-cleanup) · [CI](#ci-coverage) · [事件傳輸](#event-transport) | 跨案工程獨立追蹤，不混入各案 Refactor |
 
-本頁保留原功能條件、D01–D09識別及未完成事項；政策不再重複散列。每日功能教學、每日一個全專案工程小工作包、核心60分鐘只計Red／Green，統一依[共用規則](COMMON_LEARNING_RULES.md)。工程交付完整程式／patch與測試方案，產品由使用者套用。
+## 原問題與完成條件
 
-[工程範圍與進度](teaching/functional-refactoring/README.md) · [12組測試對照](teaching/functional-refactoring/test-coverage-map.csv) · [技術責任](SYSTEM_ARCHITECTURE.md) · [當前功能與證據](teaching/current/STATUS.md)
-
-以下日期／SHA的比對與實測摘要保留原來源，不能當成新SHA的通過／失敗；完成條件沿原功能追蹤，不新增平行FIFO。原文與完整歷史可由Git及相應source-review證據追溯。
-
-## 所有問題文章的後續修正（2026-10-25）
-
-本節先前比對來源（歷史）`5c713553daee4055738239f047d6c774fcc7a7a1`；[完整比對與21項差異](source-review/2026-10-25-full-comparison-5c713553.md)。本輪只更新原功能的狀態與證據，不增加Day／FIFO。
-
-[105個目前閱讀版本／111份版本的問題與更正索引](teaching/current/ARTICLE_CORRECTIONS.md)已整併原盤點與最新實測。下表是原功能的集中修正條件，沿用原 D01–D09 及既有項目，不另建任務編號或 FIFO。狀態限各證據來源，不將需求未驗收一律稱為文章錯誤。
+以下保留歷次來源診斷、需求與完成條件；每項舊 SHA 的「目前／最新」只屬其原紀錄。實測現況以頂部狀態入口為準，不將歷史成功或失敗追認新 SHA。
 
 <a id="article-api"></a>
 
