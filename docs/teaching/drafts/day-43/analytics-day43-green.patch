@@ -21,17 +21,12 @@ diff --git a/analytics_apps/analytics_server/src/dashboard_ui.rs b/analytics_app
      let clear_url = format!("/dashboard?source={source}");
      let export_url = if event_type.is_empty() {
          format!("/api/v1/events/{source}/export.csv")
-@@ -50,7 +52,7 @@
+@@ -50,10 +52,10 @@
                  <main>
                      <h1>"Analytics 管理後台"</h1>
                      <nav aria-label="事件來源">
 -                        <a href="/dashboard?source=web_chat" aria-current=chat_current>
 +                        <a href=chat_source_url aria-current=chat_current>
-                             "Chat 事件"
-                         </a>
-                         <a href="/dashboard?source=desktop_pet" aria-current=pet_current>
-@@ -53,7 +55,7 @@
-                         <a href="/dashboard?source=web_chat" aria-current=chat_current>
                              "Chat 事件"
                          </a>
 -                        <a href="/dashboard?source=desktop_pet" aria-current=pet_current>
@@ -67,7 +62,7 @@ diff --git a/analytics_apps/analytics_server/src/dashboard_ui.rs b/analytics_app
 diff --git a/analytics_apps/analytics_server/src/dashboard_url.rs b/analytics_apps/analytics_server/src/dashboard_url.rs
 --- a/analytics_apps/analytics_server/src/dashboard_url.rs
 +++ b/analytics_apps/analytics_server/src/dashboard_url.rs
-@@ -10,8 +10,17 @@
+@@ -10,11 +10,27 @@
      result
  }
  
@@ -84,12 +79,6 @@ diff --git a/analytics_apps/analytics_server/src/dashboard_url.rs b/analytics_ap
 +
 +#[cfg(test)]
 +mod tests {
-     use super::encode_query_component;
-     #[test]
-     fn existing_csv_url_contract_keeps_utf8_and_reserved_characters() {
-@@ -13,8 +22,15 @@
- #[cfg(test)]
- mod tests {
      use super::encode_query_component;
 -    #[test]
 -    fn existing_csv_url_contract_keeps_utf8_and_reserved_characters() {
