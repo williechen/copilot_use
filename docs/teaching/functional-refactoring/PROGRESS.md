@@ -1,5 +1,7 @@
 # 各專案Refactor進度
 
+> **2026-10-29 主分支來源勘誤（優先於下方歷史快照）：** 產品唯讀來源 `c6708c42f21ac919e57a379848b4977d27a1c3d6` 已讀回 Day42 三案 Refactor 的正式函式／caller／測試：Chat `chat_ui/src/room_list_state.rs::room_status_text` 與五種狀態測試；Pet `pet_server/src/roam.rs::roam_enabled_value` 與正式 server caller；Analytics `analytics_server/src/dashboard_url.rs::encode_query_component` 與 Dashboard caller。故下方「Day42 僅方案／未套用」**只描述 0b2288e 撰文時的歷史狀態，不能代表最新產品**。現況為**產品 main 已見實作及測試來源／本輪未重新執行／完整 Gate2 未驗收**；不得重複套用原 patch 或把本項計入 G-01/G-02。[精確來源與三篇修訂](../daily/day-42/source-readback-2026-10-29.json) · [Chat r3](../daily/day-42/chat-r3.md) · [Pet r3](../daily/day-42/pet-r3.md) · [Analytics r2](../daily/day-42/analytics-r2.md)。
+
 > 2026-10-28 固定產品來源 `c6708c42f21ac919e57a379848b4977d27a1c3d6`；[本輪原始命令與結果](../../source-review/local-validation-2026-10-28-c6708c4/README.md)。本輪只增量重測 fixture、metadata／fmt；其他來源實測維持原 SHA，完整驗收與版本 Gate 尚未完成。
 
 
