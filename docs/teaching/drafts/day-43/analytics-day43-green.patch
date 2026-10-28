@@ -7,10 +7,10 @@ diff --git a/analytics_apps/analytics_server/src/dashboard_ui.rs b/analytics_app
  
 -use crate::dashboard_url::encode_query_component;
 +use crate::dashboard_url::{encode_query_component, source_switch_url};
+ use crate::dashboard_summary::summary_count_label;
  
- fn summary_count_label(source_label: &str, event_type: &str, total: i64) -> String {
-     if event_type.is_empty() {
-@@ -21,7 +21,9 @@
+ 
+@@ -15,7 +15,9 @@
      rows: Vec<(String, i64)>,
  ) -> impl IntoView {
      let chat_current = (source_label == "Chat").then_some("page");
@@ -21,7 +21,7 @@ diff --git a/analytics_apps/analytics_server/src/dashboard_ui.rs b/analytics_app
      let clear_url = format!("/dashboard?source={source}");
      let export_url = if event_type.is_empty() {
          format!("/api/v1/events/{source}/export.csv")
-@@ -50,10 +52,10 @@
+@@ -44,10 +46,10 @@
                  <main>
                      <h1>"Analytics 管理後台"</h1>
                      <nav aria-label="事件來源">
@@ -34,7 +34,7 @@ diff --git a/analytics_apps/analytics_server/src/dashboard_ui.rs b/analytics_app
                              "Pet 事件"
                          </a>
                      </nav>
-@@ -245,8 +247,22 @@
+@@ -239,8 +241,22 @@
      )
  }
  
