@@ -1,24 +1,16 @@
-# Analytics 首頁
+# Analytics｜教學與問題入口
 
-> 2026-10-28 最新固定來源 `c801cb227e4862b8f49b5071faece70ba0b7e9c9`；[最後來源刷新與獨立重跑](../../source-review/local-validation-2026-10-28-c801cb2/README.md)。下列 e8a6409 與其他舊來源結果保留原 SHA；未完成 GUI／CI／完整版本 Gate，next_day 三案維持 42。
+產品固定來源 `c6708c42f21ac919e57a379848b4977d27a1c3d6`；next_day 42，完整 Gate2 尚未通過。
 
+| 閱讀目的 | 入口 |
+|---|---|
+| 最新 Day42：事件類型明細與精確篩選 | [目前修訂](../daily/day-42/analytics-r1.md) |
+| 功能／Refactor 完整原文與附件 | [原始 Day42](../daily/day-42/analytics.md) |
+| 本案問題與原完成條件 | [問題追蹤](../../FUTURE_WORK.md#analytics-auth) |
+| 目前測試及驗收限制 | [功能狀態](../current/STATUS.md) · [本輪原始命令與結果](../../source-review/local-validation-2026-10-28-c6708c4/README.md) |
+| 文章勘誤與舊文判讀 | [問題文章索引](../current/ARTICLE_CORRECTIONS.md) |
 
-
-> **Day42 待驗證交付（2026-10-28）**：三篇文章及各案 Refactor／Green patch 已獨立提交、精確 commit 讀回，靜態 unified diff 套用重建通過；**未執行 git apply、Cargo、DB、GUI／CI，Gate1／Gate2 未完成，next_day 三案維持 42**。本段只補導覽，不追認產品驗收。
->
-> [Chat Day42](../daily/day-42/chat-r1.md) · [Pet Day42](../daily/day-42/pet-r1.md) · [Analytics Day42](../daily/day-42/analytics-r1.md) · [精確 blob／SHA256 證據](../daily/day-42/delivery-verification.json) · [四份 lock 與官方版本](../daily/day-42/versions.md)
-
-每日文章另設獨立 Refactor 段落，交付該篇專案的實際重構程式、測試承接與驗證；全專案重構另列獨立項目。核心60分鐘只計Red／Green；rust_ai_ring唯讀，使用者自行套用。
-
-[共用規則](../../COMMON_LEARNING_RULES.md) · [功能與驗證](../current/STATUS.md) · [工程進度](../functional-refactoring/PROGRESS.md) · [學習進度](../../learning-state.json) · [manifest](../current/manifest.json)
-
-| 專案 | 現行教學 | 下一篇 | 驗證範圍 |
-| --- | --- | --- | --- |
-| Chat | [Day41：公開房間選擇後登入並返回原房間](../daily/day-41/chat.md) | Day42 | Day41 方案已發布／靜態 hunk 通過；未套用、未編譯、未驗收 |
-| Pet | [Day41：控制台逐隻回籠](../daily/day-41/pet.md) | Day42 | Day41 方案已發布／靜態 hunk 通過；未套用、未編譯、未驗收 |
-| Analytics | [Day41：管理後台事件類型明細](../daily/day-41/analytics.md) | Day42 | Day41 方案已發布／靜態 hunk 通過；未套用、未編譯、未驗收 |
-
-> **Day41 交付**：三篇文章與各自 Refactor／Green patch 已獨立提交、精確全文讀回；僅靜態 preimage 通過，未 git apply／Cargo／Node／PG／GUI／CI。下方既有 Day40 測試與人工 GUI 證據只屬原功能，**不能追認 Day41**。[Day41 SHA256 證據](../daily/day-41/delivery-verification.json) · [Rust stable 勘誤](../daily/day-41/version-correction.md) · [跨案工程獨立追蹤](../../engineering/README.md)。
+本輪四 workspace metadata／fmt 通過；PG／HTTP 仍引用 c801cb2 歷史實測，未於新 SHA 重跑。
 
 ## 專案大綱與操作主線
 
@@ -78,13 +70,8 @@ Analytics 定位為純管理後台，Leptos 提供後台畫面；除登入及必
 
 [產品通訊契約](https://github.com/williechen/copilot_use/blob/main/docs/ANALYTICS_TRANSPORT.md) · [操作設定](https://github.com/williechen/copilot_use/blob/main/docs/DEPLOYMENT.md) · [產品未來清單](https://github.com/williechen/copilot_use/blob/main/docs/FUTURE_WORK.md)
 
+## 歷史與工程
 
-[現行文章入口](../current/ANALYTICS_ENTRY.md) · [歷史及修訂總表](../current/ARTICLE_STATUS.md)。實作與驗收僅在現況頁集中維護。
+[每日文章總目錄](../daily/README.md) · [歷史文章與修訂](../current/ARTICLE_STATUS.md) · [各案 Refactor 進度](../functional-refactoring/PROGRESS.md) · [跨案工程](../../engineering/README.md)
 
-[全專案重構獨立項目](../../../docs/engineering/README.md) · [候選本地驗證](../../../docs/teaching/daily/day-39/r2-refactor-validation.json)。
-
-> Day39前輪完整本地驗證與歷史勘誤已補入[對照](../daily/day-40/historical-corrections.md)；限其原SHA，不追認Day40。
-
-> Day40 r1保存[實際套用、Cargo、SQLite／PG與原始錯誤](../daily/day-40/local-validation/README.md)。產品功能、修復候選、GUI與CI分列；next_day維持41。
-
-[Pet原生GUI人工操作與資料庫交叉驗證](../daily/day-40/native-gui-9c76797/README.md)：指定多窗、原生關閉、重新出籠與兩種重啟流程通過，完整Gate2未通過。
+歷史測試維持原 SHA；跨案工程不混入本案 Refactor。
