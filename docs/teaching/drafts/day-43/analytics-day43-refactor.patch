@@ -14,19 +14,13 @@ diff --git a/analytics_apps/analytics_server/src/lib.rs b/analytics_apps/analyti
 diff --git a/analytics_apps/analytics_server/src/dashboard_ui.rs b/analytics_apps/analytics_server/src/dashboard_ui.rs
 --- a/analytics_apps/analytics_server/src/dashboard_ui.rs
 +++ b/analytics_apps/analytics_server/src/dashboard_ui.rs
-@@ -2,7 +2,8 @@
+@@ -2,15 +2,9 @@
  
  use analytics_persistence::EventSummary;
  
 -use crate::dashboard_url::encode_query_component;
 +use crate::dashboard_url::encode_query_component;
 +use crate::dashboard_summary::summary_count_label;
- 
- fn summary_count_label(source_label: &str, event_type: &str, total: i64) -> String {
-     if event_type.is_empty() {
-@@ -4,13 +5,6 @@
- 
- use crate::dashboard_url::encode_query_component;
  
 -fn summary_count_label(source_label: &str, event_type: &str, total: i64) -> String {
 -    if event_type.is_empty() {
