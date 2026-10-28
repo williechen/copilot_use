@@ -1,0 +1,107 @@
+diff --git a/analytics_apps/analytics_server/src/dashboard_ui.rs b/analytics_apps/analytics_server/src/dashboard_ui.rs
+--- a/analytics_apps/analytics_server/src/dashboard_ui.rs
++++ b/analytics_apps/analytics_server/src/dashboard_ui.rs
+@@ -2,7 +2,7 @@
+ 
+ use analytics_persistence::EventSummary;
+ 
+-use crate::dashboard_url::encode_query_component;
++use crate::dashboard_url::{encode_query_component, source_switch_url};
+ 
+ fn summary_count_label(source_label: &str, event_type: &str, total: i64) -> String {
+     if event_type.is_empty() {
+@@ -21,7 +21,9 @@
+     rows: Vec<(String, i64)>,
+ ) -> impl IntoView {
+     let chat_current = (source_label == "Chat").then_some("page");
+-    let pet_current = (source_label == "Pet").then_some("page");
++    let pet_current = (source_label == "Pet").then_some("page");
++    let chat_source_url = source_switch_url("web_chat", &event_type);
++    let pet_source_url = source_switch_url("desktop_pet", &event_type);
+     let clear_url = format!("/dashboard?source={source}");
+     let export_url = if event_type.is_empty() {
+         format!("/api/v1/events/{source}/export.csv")
+@@ -50,7 +52,7 @@
+                 <main>
+                     <h1>"Analytics 管理後台"</h1>
+                     <nav aria-label="事件來源">
+-                        <a href="/dashboard?source=web_chat" aria-current=chat_current>
++                        <a href=chat_source_url aria-current=chat_current>
+                             "Chat 事件"
+                         </a>
+                         <a href="/dashboard?source=desktop_pet" aria-current=pet_current>
+@@ -53,7 +55,7 @@
+                         <a href="/dashboard?source=web_chat" aria-current=chat_current>
+                             "Chat 事件"
+                         </a>
+-                        <a href="/dashboard?source=desktop_pet" aria-current=pet_current>
++                        <a href=pet_source_url aria-current=pet_current>
+                             "Pet 事件"
+                         </a>
+                     </nav>
+@@ -245,8 +247,22 @@
+     )
+ }
+ 
+-#[cfg(test)]
+-mod day42_kind_navigation_tests {
++#[cfg(test)]
++mod day43_source_switch_tests {
++    use super::*;
++    #[test]
++    fn source_navigation_preserves_exact_utf8_filter_and_escapes_markup() {
++        let html = render_dashboard_filtered("Chat", 1, "web_chat", "chat.中文 &");
++        assert!(html.contains("source=desktop_pet&amp;event_type=chat.%E4%B8%AD%E6%96%87%20%26"));
++        assert!(html.contains("source=web_chat&amp;event_type=chat.%E4%B8%AD%E6%96%87%20%26"));
++        assert!(!html.contains("event_type=chat.中文 &"));
++        let all = render_dashboard_filtered("Chat", 0, "web_chat", "");
++        assert!(all.contains("/dashboard?source=desktop_pet"));
++    }
++}
++
++#[cfg(test)]
++mod day42_kind_navigation_tests {
+     use super::*;
+     #[test]
+     fn kind_carow_links_to_real_exact_filter_and_escapes_html() {
+diff --git a/analytics_apps/analytics_server/src/dashboard_url.rs b/analytics_apps/analytics_server/src/dashboard_url.rs
+--- a/analytics_apps/analytics_server/src/dashboard_url.rs
++++ b/analytics_apps/analytics_server/src/dashboard_url.rs
+@@ -10,8 +10,17 @@
+     result
+ }
+ 
+-#[cfg(test)]
+-mod tests {
++/// Keep the exact event-type filter when switching the authenticated dashboard source.
++pub(crate) fn source_switch_url(source: &str, event_type: &str) -> String {
++    if event_type.is_empty() {
++        format!("/dashboard?source={source}")
++    } else {
++        format!("/dashboard?source={source}&event_type={}", encode_query_component(event_type))
++    }
++}
++
++#[cfg(test)]
++mod tests {
+     use super::encode_query_component;
+     #[test]
+     fn existing_csv_url_contract_keeps_utf8_and_reserved_characters() {
+@@ -13,8 +22,15 @@
+ #[cfg(test)]
+ mod tests {
+     use super::encode_query_component;
+-    #[test]
+-    fn existing_csv_url_contract_keeps_utf8_and_reserved_characters() {
++    #[test]
++    fn source_switch_preserves_encoded_filter_and_empty_semantics() {
++        assert_eq!(super::source_switch_url("desktop_pet", "a &中文"),
++            "/dashboard?source=desktop_pet&event_type=a%20%26%E4%B8%AD%E6%96%87");
++        assert_eq!(super::source_switch_url("web_chat", ""), "/dashboard?source=web_chat");
++    }
++
++    #[test]
++    fn existing_csv_url_contract_keeps_utf8_and_reserved_characters() {
+         assert_eq!(
+             encode_query_component("a &中文"),
+             "a%20%26%E4%B8%AD%E6%96%87"
