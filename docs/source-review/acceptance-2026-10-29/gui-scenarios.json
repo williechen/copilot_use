@@ -25,7 +25,8 @@
   "pet": {
     "frontend_build_exit": 0,
     "native_build_exit": 0,
-    "interactive_native_gui": "pending human report; native UI automation unavailable"
+    "interactive_native_gui": "pending; user confirmed only script fix or startup",
+    "human_clarification": "pet-human-clarification.json"
   },
   "not_accepted": [
     "full room ACL",

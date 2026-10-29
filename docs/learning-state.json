@@ -7042,10 +7042,11 @@
     "ci_attempt": 2,
     "ci_conclusion": "failure",
     "product_read_only_reconfirmed": true,
-    "native_pet_gui": "pending_human",
+    "native_pet_gui": "pending_scenarios; human_confirmed_script_only",
     "actual_old_pg_backup": "user_confirmed_none_available",
     "gate2": false,
     "next_day_unchanged": 44,
-    "chat_current_article": "docs/teaching/daily/day-43/chat-r2.md"
+    "chat_current_article": "docs/teaching/daily/day-43/chat-r2.md",
+    "pet_human_report": "docs/source-review/acceptance-2026-10-29/pet-human-clarification.json"
   }
 }
