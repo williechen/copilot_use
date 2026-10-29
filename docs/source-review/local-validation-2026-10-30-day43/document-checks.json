@@ -1,0 +1,24 @@
+{
+  "new_broken_links": [],
+  "json_files_validated": [
+    "docs/learning-state.json",
+    "docs/source-review/local-validation-2026-10-30-day43/chat-fix/commands.json",
+    "docs/source-review/local-validation-2026-10-30-day43/ci-final.json",
+    "docs/source-review/local-validation-2026-10-30-day43/ci-jobs-40930806704.json",
+    "docs/source-review/local-validation-2026-10-30-day43/ci-public-api.json",
+    "docs/source-review/local-validation-2026-10-30-day43/cleanup-old-tests-plan.json",
+    "docs/source-review/local-validation-2026-10-30-day43/cleanup-old-tests-result.json",
+    "docs/source-review/local-validation-2026-10-30-day43/cleanup.json",
+    "docs/source-review/local-validation-2026-10-30-day43/commands.json",
+    "docs/source-review/local-validation-2026-10-30-day43/db/commands.json",
+    "docs/source-review/local-validation-2026-10-30-day43/followup-commands.json",
+    "docs/source-review/local-validation-2026-10-30-day43/initial-state.json",
+    "docs/source-review/local-validation-2026-10-30-day43/manifest-hashes.json",
+    "docs/source-review/local-validation-2026-10-30-day43/rules-readback-sha256.json",
+    "docs/source-review/local-validation-2026-10-30-day43/source-inventory.json",
+    "docs/source-review/local-validation-2026-10-30-day43/test-counts.json",
+    "docs/teaching/current/manifest.json"
+  ],
+  "state_previous_fields_preserved_except_current_article_paths": true,
+  "six_original_patches_unchanged": true
+}

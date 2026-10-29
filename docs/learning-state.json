@@ -6297,9 +6297,9 @@
     "source_modified": false
   },
   "current_article_paths": {
-    "chat": "docs/teaching/daily/day-43/chat.md",
-    "pet": "docs/teaching/daily/day-43/pet.md",
-    "analytics": "docs/teaching/daily/day-43/analytics.md"
+    "chat": "docs/teaching/daily/day-43/chat-r3.md",
+    "pet": "docs/teaching/daily/day-43/pet-r2.md",
+    "analytics": "docs/teaching/daily/day-43/analytics-r2.md"
   },
   "previous_source_validation_before_day40_r1": {
     "source_sha": "afdbb6e81382e8d82095827a90c52cc3309a3e20",
@@ -7048,5 +7048,24 @@
     "next_day_unchanged": 44,
     "chat_current_article": "docs/teaching/daily/day-43/chat-r2.md",
     "pet_human_report": "docs/source-review/acceptance-2026-10-29/pet-human-clarification.json"
+  },
+  "day43_revalidation_2026_10_30": {
+    "source_sha": "d2612fcd154d2132d850086d83a48578abbb07fa",
+    "evidence": "docs/source-review/local-validation-2026-10-30-day43/README.md",
+    "current_revisions": {
+      "chat": "docs/teaching/daily/day-43/chat-r3.md",
+      "pet": "docs/teaching/daily/day-43/pet-r2.md",
+      "analytics": "docs/teaching/daily/day-43/analytics-r2.md"
+    },
+    "article_commits": {
+      "chat": "2b8ab4f1c05b98fdea58144a8b6e060854e176f6",
+      "pet": "7e0644137737eecc31cda045c7ee87ee0f2ba073",
+      "analytics": "32d80a692005c4c285d5931c97b5f2ea773ff9de"
+    },
+    "status": "partial; original SSR compile failure; isolated import patch passed; full Gate2 pending",
+    "product_modified": false,
+    "next_day_advanced": false,
+    "native_gui_retested": false,
+    "actual_old_pg_backup_available": false
   }
 }

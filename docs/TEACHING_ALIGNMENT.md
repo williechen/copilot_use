@@ -1,5 +1,7 @@
 # 教學、各案Refactor與全專案重構
 
+> **2026-10-30 最新增量：** 產品 `d2612fcd154d2132d850086d83a48578abbb07fa` 已安全快轉並在隔離副本重新驗證。[四 workspace／三案測試、清理與原始證據](source-review/local-validation-2026-10-30-day43/README.md)。一般測試／WASM／Node／隔離 PG 通過；Chat 原樣 SSR 缺 imports，最小補丁後 UI 21 項通過，補丁未寫入產品；新 SHA 遠端 test-ui 仍失敗。Pet 人工 GUI 保留 8b88269 原驗收範圍，本輪未重跑。next_day 三案 44、FIFO、last_full_comparison 不變，完整 Gate2 未結案。下方較早日期與 SHA 為歷史快照。
+
 > 2026-10-28 固定產品來源 `c6708c42f21ac919e57a379848b4977d27a1c3d6`；[本輪原始命令與結果](source-review/local-validation-2026-10-28-c6708c4/README.md)。本輪只增量重測 fixture、metadata／fmt；其他來源實測維持原 SHA，完整驗收與版本 Gate 尚未完成。
 
 
