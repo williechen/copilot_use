@@ -3191,9 +3191,9 @@
   ],
   "day15_frozen": true,
   "next_day": {
-    "chat": 42,
-    "pet": 42,
-    "analytics": 42
+    "chat": 43,
+    "pet": 43,
+    "analytics": 43
   },
   "day_advanced": true,
   "reference_modified": false,
@@ -5942,5 +5942,27 @@
       "workspace_fmt": 4,
       "analytics_pg_rerun": false
     }
+  },
+  "day42_document_gate_closure_2026_10_29": {
+    "date": "2026-10-29",
+    "kind": "document_delivery_reconciliation",
+    "original_articles": "docs/teaching/daily/day-42/README.md",
+    "commits_and_sha256": "docs/teaching/daily/day-42/delivery-verification.json",
+    "versions": "docs/teaching/daily/day-42/versions-2026-10-29.md",
+    "product_validation": "docs/source-review/local-validation-2026-10-28-c6708c4/README.md",
+    "gate1": "historical Day42 document delivered",
+    "gate2": "open, separate",
+    "next_day_before": {
+      "chat": 42,
+      "pet": 42,
+      "analytics": 42
+    },
+    "next_day_after": {
+      "chat": 43,
+      "pet": 43,
+      "analytics": 43
+    },
+    "fifo_unchanged": true,
+    "last_full_comparison_unchanged": true
   }
 }
