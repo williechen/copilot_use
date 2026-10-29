@@ -51,9 +51,9 @@
     "historical_records_are_not_current_policy": true
   },
   "next_day": {
-    "chat": 44,
-    "pet": 44,
-    "analytics": 44
+    "chat": 45,
+    "pet": 45,
+    "analytics": 45
   },
   "last_full_comparison": "2026-10-16T22:47:14.399027+08:00",
   "timezone": "Asia/Taipei",
@@ -414,17 +414,17 @@
   "reference_sha": "7ce39f0166a2120539e5908b33c88322a930c35a",
   "reference_scope": "current source observation; not a claim of full local revalidation",
   "current_article_paths": {
-    "chat": "docs/teaching/daily/day-43/chat-archive.md",
-    "pet": "docs/teaching/daily/day-43/pet-archive.md",
-    "analytics": "docs/teaching/daily/day-43/analytics-archive.md"
+    "chat": "docs/teaching/daily/day-44/chat.md",
+    "pet": "docs/teaching/daily/day-44/pet.md",
+    "analytics": "docs/teaching/daily/day-44/analytics.md"
   },
   "teaching_progress": {
-    "last_published_day": 43,
-    "last_publication_status": "Gate1 published; article bodies archived; full Gate2 incomplete",
+    "last_published_day": 44,
+    "last_publication_status": "Day44 Gate1 published with three independent commits; Gate2 product acceptance not run",
     "next_day": {
-      "chat": 44,
-      "pet": 44,
-      "analytics": 44
+      "chat": 45,
+      "pet": 45,
+      "analytics": 45
     }
   },
   "current_validation": "docs/teaching/current/validation.json",
