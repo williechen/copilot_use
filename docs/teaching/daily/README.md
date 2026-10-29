@@ -6,9 +6,9 @@
 
 | 專案 | 專案首頁 | 最新文章 | 問題主線 |
 |---|---|---|---|
-| Chat | [專案大綱](../chat/README.md) | [Day42 r3](day-42/chat-r3.md) | [原完成條件](../../FUTURE_WORK.md#chat-auth) |
-| Pet | [專案大綱](../pet/README.md) | [Day42 r3](day-42/pet-r3.md) | [原完成條件](../../FUTURE_WORK.md#pet-lifecycle) |
-| Analytics | [專案大綱](../analytics/README.md) | [Day42 r2](day-42/analytics-r2.md) | [原完成條件](../../FUTURE_WORK.md#analytics-auth) |
+| Chat | [專案大綱](../chat/README.md) | [Day43](day-43/chat.md) | [原完成條件](../../FUTURE_WORK.md#chat-auth) |
+| Pet | [專案大綱](../pet/README.md) | [Day43](day-43/pet.md) | [原完成條件](../../FUTURE_WORK.md#pet-lifecycle) |
+| Analytics | [專案大綱](../analytics/README.md) | [Day43](day-43/analytics.md) | [原完成條件](../../FUTURE_WORK.md#analytics-auth) |
 
 ## 目前驗證
 
