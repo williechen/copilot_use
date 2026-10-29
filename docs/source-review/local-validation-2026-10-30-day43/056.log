@@ -1,0 +1,13 @@
+    Checking chat-domain v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-20261030/chat_apps/chat_domain)
+    Checking shared v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-20261030/crates/shared)
+    Checking chat-ui v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-20261030/chat_apps/chat_ui)
+warning: function `create_room` is never used
+ --> chat_ui/src/room_api.rs:6:14
+  |
+6 | pub async fn create_room(name: &str) -> Result<CreateRoomResponse, String> {
+  |              ^^^^^^^^^^^
+  |
+  = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `chat-ui` (lib) generated 1 warning
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.41s

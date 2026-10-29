@@ -1,0 +1,81 @@
+   Compiling libc v0.2.191
+   Compiling cfg-if v1.0.5
+   Compiling typenum v1.20.1
+   Compiling hybrid-array v0.4.15
+   Compiling serde_core v1.0.229
+   Compiling parking_lot_core v0.9.12
+   Compiling getrandom v0.4.3
+   Compiling crypto-common v0.2.2
+   Compiling block-buffer v0.12.1
+   Compiling const-oid v0.10.2
+   Compiling smallvec v1.16.4
+   Compiling scopeguard v1.2.0
+   Compiling lock_api v0.4.14
+   Compiling uuid v1.29.0
+   Compiling serde v1.0.229
+   Compiling digest v0.11.3
+   Compiling zmij v1.0.23
+   Compiling errno v0.3.14
+   Compiling itoa v1.0.18
+   Compiling memchr v2.8.3
+   Compiling cpufeatures v0.3.1
+   Compiling sha2 v0.11.1
+   Compiling serde_json v1.0.154
+   Compiling thiserror v2.0.21
+   Compiling signal-hook-registry v1.4.8
+   Compiling chat-domain v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-20261030/chat_apps/chat_domain)
+   Compiling parking_lot v0.12.5
+   Compiling mio v1.2.4
+   Compiling socket2 v0.6.5
+   Compiling tokio-macros v2.7.2
+   Compiling pin-project-lite v0.2.17
+   Compiling bytes v1.12.1
+   Compiling ai-core v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-20261030/crates/ai_core)
+   Compiling shared v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-20261030/crates/shared)
+   Compiling tokio v1.54.1
+   Compiling telemetry v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-20261030/crates/telemetry)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 17.47s
+     Running unittests src/lib.rs (crates/target/debug/deps/ai_core-11ebd281d1abf72d)
+
+running 3 tests
+test tests::chat_model_can_be_used_as_trait_object ... ok
+test tests::empty_message_is_rejected ... ok
+test tests::mock_chat_returns_response ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (crates/target/debug/deps/shared-00ea31417bfb1fab)
+
+running 5 tests
+test auth::tests::cookie_name_is_exact_and_token_is_validated ... ok
+test tests::client_event_json_roundtrip ... ok
+test tests::create_room_http_contract_roundtrip ... ok
+test tests::typing_changed_roundtrip ... ok
+test tests::ai_message_round_trip ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (crates/target/debug/deps/telemetry-76683f61c0f9697c)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests ai_core
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests shared
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests telemetry
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

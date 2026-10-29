@@ -1,0 +1,3 @@
+0 cargo check --offline --locked --workspace --manifest-path crates/Cargo.toml
+0 cargo clippy --offline --locked --workspace --manifest-path crates/Cargo.toml
+0 cargo test --offline --locked --workspace --manifest-path crates/Cargo.toml

@@ -1,0 +1,63 @@
+Diff in /home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-20261030-original/chat_apps/chat_ui/src/lib.rs:23:
+ };
+ 
+ use room_list_state::{clear_room_search, filter_rooms, room_status_text};
+-use session_entry::{session_entry_display, SessionEntry};
++use session_entry::{SessionEntry, session_entry_display};
+ 
+ #[cfg(any(target_arch = "wasm32", test))]
+ use room_list_state::refresh_result_view;
+Diff in /home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-20261030-original/chat_apps/chat_ui/src/lib.rs:108:
+         </Router>
+     }
+ }
+-
+ 
+ #[component]
+ fn HomePage() -> impl IntoView {
+Diff in /home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-20261030-original/chat_apps/chat_ui/src/room_list_state.rs:53:
+ 
+ /// Reset the local search without discarding the last successful room snapshot.
+ pub(super) fn clear_room_search(loaded: bool, rows: &[(String, String)]) -> (String, String) {
+-    (String::new(), room_list_feedback(loaded, rows.len(), rows.len()).to_owned())
++    (
++        String::new(),
++        room_list_feedback(loaded, rows.len(), rows.len()).to_owned(),
++    )
+ }
+ 
+ #[cfg(test)]
+Diff in /home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-20261030-original/chat_apps/chat_ui/src/session_entry.rs:6:
+     Unavailable,
+ }
+ 
+-pub(super) fn session_entry_display(state: SessionEntry) -> (&'static str, &'static str, &'static str) {
++pub(super) fn session_entry_display(
++    state: SessionEntry,
++) -> (&'static str, &'static str, &'static str) {
+     match state {
+         SessionEntry::Checking => ("/signin", "登入", "確認登入狀態中"),
+         SessionEntry::SignedOut => ("/signin", "登入", ""),
+Diff in /home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-20261030-original/chat_apps/chat_ui/src/session_entry.rs:22:
+     fn session_navigation_is_fail_closed_and_preserves_existing_contract() {
+         assert_eq!(session_entry_display(SessionEntry::Checking).0, "/signin");
+         assert_eq!(session_entry_display(SessionEntry::SignedOut).1, "登入");
+-        assert_eq!(session_entry_display(SessionEntry::Unavailable).0, "/signin");
+-        assert!(session_entry_display(SessionEntry::Unavailable).2.contains("無法確認"));
+-        assert_eq!(session_entry_display(SessionEntry::SignedIn), ("/account", "管理", ""));
++        assert_eq!(
++            session_entry_display(SessionEntry::Unavailable).0,
++            "/signin"
++        );
++        assert!(
++            session_entry_display(SessionEntry::Unavailable)
++                .2
++                .contains("無法確認")
++        );
++        assert_eq!(
++            session_entry_display(SessionEntry::SignedIn),
++            ("/account", "管理", "")
++        );
+     }
+ }
+ 

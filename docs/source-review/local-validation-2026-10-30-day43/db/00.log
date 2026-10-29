@@ -1,0 +1,6 @@
+   Compiling chat-domain v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-20261030/chat_apps/chat_domain)
+   Compiling chat-application v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-20261030/chat_apps/chat_application)
+   Compiling chat-persistence v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-20261030/chat_apps/chat_persistence)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 3.48s
+     Running `chat_apps/target/debug/examples/upgrade_probe chat /home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-db-20261030/chat-old-migrations /home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-20261030/chat_apps/migrations /home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-db-20261030`
+chat: populated prior-schema copy upgrade PASS; data=升級前房間:升級前訊息; idempotent PASS; migrations=9; checksum drift rejected=migration 20260930034455 was previously applied but has been modified
