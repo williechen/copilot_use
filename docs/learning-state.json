@@ -56,9 +56,9 @@
   "fixed_tag": "v0.2.1",
   "fixed_tag_sha": "9bcae7c5d139f75ed08b4daffece602a71fdab34",
   "next_day": {
-    "chat": 42,
-    "pet": 42,
-    "analytics": 42
+    "chat": 43,
+    "pet": 43,
+    "analytics": 43
   },
   "last_full_comparison": "2026-10-16T22:47:14.399027+08:00",
   "next_full_comparison": "2026-10-24T00:00:00+08:00",
@@ -6925,5 +6925,28 @@
       "workspace_fmt": 4,
       "analytics_pg_rerun": false
     }
+  },
+  "day42_document_gate_closure_2026_10_29": {
+    "date": "2026-10-29",
+    "kind": "documentation_gate_reconciliation",
+    "prior_pending_record": "day42_pending",
+    "source_product_sha": "c6708c42f21ac919e57a379848b4977d27a1c3d6",
+    "original_article_evidence": "docs/teaching/daily/day-42/delivery-verification.json",
+    "source_application_and_tests": "docs/source-review/local-validation-2026-10-28-c6708c4/README.md",
+    "version_evidence": "docs/teaching/daily/day-42/versions-2026-10-29.md",
+    "decision": "Day42 published articles, patches, commit readback and version evidence meet document publication scope. Distinguish incomplete product Gate2 and transitive MSRV/native checks; they are not claimed as passed.",
+    "gate1": "document delivery recognized",
+    "gate2": "open; not fully accepted",
+    "next_day_before": {
+      "chat": 42,
+      "pet": 42,
+      "analytics": 42
+    },
+    "next_day_after": {
+      "chat": 43,
+      "pet": 43,
+      "analytics": 43
+    },
+    "historical_records_preserved": true
   }
 }
