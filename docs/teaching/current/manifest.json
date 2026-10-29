@@ -213,10 +213,11 @@
       "walk": "active implies outside and roaming permitted subject to runtime pauses",
       "sit": "active implies outside and roaming prohibited",
       "walk_sit_switch": "mutually exclusive atomic update; do not insert duplicate activity records",
-      "unexpected_both_active": "outside by any-true rule; stop roaming and report conflict",
+      "unexpected_both_active": "sit takes precedence; persist walk=false, retain sit=true; remain outside; roaming prohibited",
       "cage": "stop every activity for the selected pet only",
       "new_columns": false,
-      "product_implementation_verified": false
+      "product_implementation_verified": false,
+      "priority_write_failure": "stop roaming and report persistence failure; do not claim normalization completed"
     }
   }
 }

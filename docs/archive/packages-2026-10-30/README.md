@@ -23,3 +23,7 @@
 ## Pet 基本活動與漫遊定義
 
 [第九包：散步／坐下規則確認前的不同版本](09-pet-walk-sit-contract-superseded-2026-10-30.zip)，來源 `c5180fbe265560e21a7f8abb46b907a68b435906`。只補封存既有 ZIP 尚未收錄的版本；[現行 Pet Day44 修訂](../../teaching/daily/day-44/pet.md) 保留原檔，替代 Green／產品驗收仍未完成。
+
+## 坐下優先規則
+
+[第十包：坐下優先確認前的不同版本](10-pet-sit-priority-superseded-2026-10-30.zip)；只補封存尚未被既有 ZIP 收錄的版本。現行規則：同時 true 時保留坐下，持久化關閉散步；仍出籠但不漫遊。

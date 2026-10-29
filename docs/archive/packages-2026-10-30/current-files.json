@@ -33173,6 +33173,11 @@
       "path": "docs/archive/packages-2026-10-30/09-pet-walk-sit-contract-superseded-2026-10-30.zip",
       "catalog": "docs/archive/packages-2026-10-30/pet-walk-sit-contract.json",
       "scope": "pre-confirmation versions for initial activities and roaming"
+    },
+    {
+      "path": "docs/archive/packages-2026-10-30/10-pet-sit-priority-superseded-2026-10-30.zip",
+      "catalog": "docs/archive/packages-2026-10-30/pet-sit-priority.json",
+      "scope": "superseded stop/report-conflict rule replaced with sit precedence"
     }
   ]
 }

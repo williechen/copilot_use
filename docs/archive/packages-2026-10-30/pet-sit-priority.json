@@ -1,0 +1,91 @@
+{
+  "source_commit": "4c1950f99b7f671da8a67ac380ad1f4b5a81b4ab",
+  "archive": "docs/archive/packages-2026-10-30/10-pet-sit-priority-superseded-2026-10-30.zip",
+  "archive_sha256": "ccdbdecc039b3ce99c946aefea460444e1a4bf3cf0f1de10d377e48a652aed26",
+  "new_versions": 9,
+  "versions": [
+    {
+      "path": "docs/requirements/USER_FLOWS.md",
+      "source_commit": "4c1950f99b7f671da8a67ac380ad1f4b5a81b4ab",
+      "sha256": "ce5bd6938c500b10cdd245fb9a450468e864d68e662815aabc3af6229d0653f1",
+      "archive": {
+        "zip": "docs/archive/packages-2026-10-30/10-pet-sit-priority-superseded-2026-10-30.zip",
+        "entry": "copilot_use/docs/requirements/USER_FLOWS.md"
+      }
+    },
+    {
+      "path": "docs/UI_ALIGNMENT_REQUIREMENTS.md",
+      "source_commit": "4c1950f99b7f671da8a67ac380ad1f4b5a81b4ab",
+      "sha256": "f700e111da35c4d05e4d4c4a88f020b23841fd09811456eefed5b78d2cb60071",
+      "archive": {
+        "zip": "docs/archive/packages-2026-10-30/10-pet-sit-priority-superseded-2026-10-30.zip",
+        "entry": "copilot_use/docs/UI_ALIGNMENT_REQUIREMENTS.md"
+      }
+    },
+    {
+      "path": "docs/FUTURE_WORK.md",
+      "source_commit": "4c1950f99b7f671da8a67ac380ad1f4b5a81b4ab",
+      "sha256": "4818a2b3fd994df0a8e0712098172ba7d30b43d20bf4d0aad276670b985103d6",
+      "archive": {
+        "zip": "docs/archive/packages-2026-10-30/10-pet-sit-priority-superseded-2026-10-30.zip",
+        "entry": "copilot_use/docs/FUTURE_WORK.md"
+      }
+    },
+    {
+      "path": "docs/teaching/daily/day-44/pet.md",
+      "source_commit": "4c1950f99b7f671da8a67ac380ad1f4b5a81b4ab",
+      "sha256": "359ea6cdf83fd735d4ae80dc3080fb28f3ea0f21ff2fed2fec9e7c22ef204f50",
+      "archive": {
+        "zip": "docs/archive/packages-2026-10-30/10-pet-sit-priority-superseded-2026-10-30.zip",
+        "entry": "copilot_use/docs/teaching/daily/day-44/pet.md"
+      }
+    },
+    {
+      "path": "docs/teaching/pet/README.md",
+      "source_commit": "4c1950f99b7f671da8a67ac380ad1f4b5a81b4ab",
+      "sha256": "2e50e322c15b051b04067ecaba982c404da2c29fc0d8d7a01d6ee772a033e9d0",
+      "archive": {
+        "zip": "docs/archive/packages-2026-10-30/10-pet-sit-priority-superseded-2026-10-30.zip",
+        "entry": "copilot_use/docs/teaching/pet/README.md"
+      }
+    },
+    {
+      "path": "docs/teaching/current/STATUS.md",
+      "source_commit": "4c1950f99b7f671da8a67ac380ad1f4b5a81b4ab",
+      "sha256": "be5336cac9c24a80ec5ca7aef18bd628058c7771a76f0dfa8f697296c8ddbe51",
+      "archive": {
+        "zip": "docs/archive/packages-2026-10-30/10-pet-sit-priority-superseded-2026-10-30.zip",
+        "entry": "copilot_use/docs/teaching/current/STATUS.md"
+      }
+    },
+    {
+      "path": "docs/teaching/current/validation.json",
+      "source_commit": "4c1950f99b7f671da8a67ac380ad1f4b5a81b4ab",
+      "sha256": "16cfcbbb97802388bd039afa12b83cc09d73d8401af7498e7bcda10ef1febda0",
+      "archive": {
+        "zip": "docs/archive/packages-2026-10-30/10-pet-sit-priority-superseded-2026-10-30.zip",
+        "entry": "copilot_use/docs/teaching/current/validation.json"
+      }
+    },
+    {
+      "path": "docs/learning-state.json",
+      "source_commit": "4c1950f99b7f671da8a67ac380ad1f4b5a81b4ab",
+      "sha256": "3886bc619521f276946b730f5aff5363501194b6340c58c4bd1815495196b3bd",
+      "archive": {
+        "zip": "docs/archive/packages-2026-10-30/10-pet-sit-priority-superseded-2026-10-30.zip",
+        "entry": "copilot_use/docs/learning-state.json"
+      }
+    },
+    {
+      "path": "docs/teaching/current/manifest.json",
+      "source_commit": "4c1950f99b7f671da8a67ac380ad1f4b5a81b4ab",
+      "sha256": "f081a37dc12208573b6881802ef51707d0749802c8258833ea903f1fc8a85ce0",
+      "archive": {
+        "zip": "docs/archive/packages-2026-10-30/10-pet-sit-priority-superseded-2026-10-30.zip",
+        "entry": "copilot_use/docs/teaching/current/manifest.json"
+      }
+    }
+  ],
+  "rule": "散步與坐下同時為 true 時，以坐下優先：保留坐下 true，將該寵物的散步持久化為 false，停止漫遊；寵物仍出籠，不影響其他活動或其他寵物。這是正常正規化規則，不當成活動衝突。",
+  "product_modified": false
+}
