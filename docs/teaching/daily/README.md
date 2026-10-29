@@ -1,6 +1,6 @@
 # 每日教學與歷史文章
 
-目前閱讀 Day42；next_day 三案仍為 42，不因索引整理增加 Day。
+目前閱讀 Day43；Day42 文件交付掛起狀態已依原證據結案、Day43 已正式文件發布，三案下一待發布篇為 Day44。文件發布不代表產品套用或 Gate2 驗收。
 
 ## 專案與最新文章
 
@@ -30,6 +30,7 @@
 
 | Day | 文章／附件／證據 |
 |---|---|
+| 43 | [Day43 三案正式教學](day-43/README.md) · [交付證據](day-43/delivery-verification.json) |
 | 42 | [Day42 索引](day-42/README.md) |
 | 41 | [Chat](day-41/chat.md) · [Pet](day-41/pet.md) · [Analytics](day-41/analytics.md) |
 | 40 | [Chat](day-40/chat-r2.md) · [Pet](day-40/pet-r2.md) · [Analytics](day-40/analytics-r1.md) |
