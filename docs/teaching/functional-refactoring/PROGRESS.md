@@ -1,5 +1,7 @@
 # 各案 Refactor 現況
 
+Pet 的原生視窗幾何 Refactor 與活動狀態 Green 分開：前者保留原方案及未驗界線；後者的新增欄位方案已撤回，替代 Green 待完成，不以 Refactor 抵算。
+
 2026-10-30 三案 Day44 **文件 Gate1 已發布**；Refactor 均為與 Red／Green 並列的**同案獨立 patch**，沒有套用 `rust_ai_ring`，不算 Gate2 或 G-01/G-02 完成。
 
 | 專案 | Day44 同案 Refactor | 有效斷言承接 | 後續同案工作 |

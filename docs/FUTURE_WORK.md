@@ -30,7 +30,11 @@
 
 ## Pet 多寵物／回籠／重啟
 
-逐 ID Store／IPC、生命週期鎖、開窗補償與重啟恢復已有來源；隔離 A/B 原生局部測試通過。預設出籠資格與目前回籠旗標仍須按需求分離；三隻、直接關窗、併發及真 native／DB 失敗補償待完整驗收。
+使用者已確認：以 `pet_activity` 同主人／同寵物的任一 `is_activity=true` 判出籠，不限定散步；全部為 false／無活動才回籠。出籠可啟用散步活動，回籠須停止該寵物全部活動；不得新增狀態欄位。`is_default_closure` 僅保留預設語意，不作目前狀態。
+
+目前產品 `7ce39f0` 的 set_caged／read_caged／list_uncaged 與 PetStore::active／select 仍直接讀寫 `pet_profile.is_default_closure`，尚未符合新契約。須同步切換控制台查詢、出／入籠、選取、原生關窗與啟動 caller，保留逐 ID 隔離、冪等、DB／開窗失敗補償及有效斷言。預設出籠資格與活動狀態分開，不能把舊旗標的歷史值直接當已驗證的新模型。
+
+Day44 新增 `auto_release_on_start` 欄位的 Green 已撤回封存；[Pet Day44 修訂](teaching/daily/day-44/pet.md) 保留正式資料契約與獨立 Refactor，替代 Green 尚未完成，不冒稱完整 Gate1 或產品驗收。三隻、直接關窗、併發及真 native／DB 失敗補償仍待驗；既有 A/B 測試只證明舊旗標模型，不驗證新活動模型。
 
 <a id="pet-roaming"></a>
 

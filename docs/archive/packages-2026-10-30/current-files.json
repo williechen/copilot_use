@@ -33141,12 +33141,17 @@
     "docs/teaching/daily/day-43/analytics-archive.md",
     "docs/teaching/daily/day-43/chat-archive.md",
     "docs/teaching/daily/day-43/pet-archive.md",
+    "docs/teaching/daily/day-44/ENTRY.md",
+    "docs/teaching/daily/day-44/README.md",
+    "docs/teaching/daily/day-44/analytics.md",
+    "docs/teaching/daily/day-44/chat.md",
+    "docs/teaching/daily/day-44/pet.md",
     "docs/teaching/functional-refactoring/PROGRESS.md",
     "docs/teaching/functional-refactoring/README.md",
     "docs/teaching/pet/README.md",
     "docs/teaching/scheduler-instructions-v1.md"
   ],
-  "current_reading_file_count": 31,
+  "current_reading_file_count": 36,
   "validation_checks": {
     "new_relative_links_valid": true,
     "json_valid": true,
@@ -33157,5 +33162,12 @@
     "full_gate2_not_advanced": true,
     "day44_drafts_found": 0,
     "raw_product_changed": false
-  }
+  },
+  "supplementary_archives": [
+    {
+      "path": "docs/archive/packages-2026-10-30/08-pet-activity-contract-superseded-2026-10-30.zip",
+      "catalog": "docs/archive/packages-2026-10-30/pet-activity-contract.json",
+      "scope": "superseded added-column Pet Day44 proposal and pre-correction navigation versions"
+    }
+  ]
 }

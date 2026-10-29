@@ -1,6 +1,7 @@
 # 教學必要文件
 
-**Day44 Chat／Pet／Analytics Gate1 已發布，next_day 均為 45；產品 Gate2 未執行。** `rust_ai_ring@7ce39f0166a2120539e5908b33c88322a930c35a` 唯讀，沒有更新產品程式、正式 DB 或產品 CI。
+**Pet Day44 修訂更正：** 原新增 `auto_release_on_start` 欄位的 Green 已撤回封存；新規則要求出／回籠依 `pet_activity` 任一 `is_activity=true` 判斷，不限散步、不新增欄位。替代 Green 待完成／待驗，原 Gate1 歷史讀回不代表修訂已完成。next_day 保持三案 45，先補齊 Pet Day44 修訂，不重複加 Day。
+
 
 [Day44 ENTRY](teaching/daily/day-44/ENTRY.md) · [三案正文與 patch](teaching/daily/day-44/README.md) · [讀回與 SHA256](teaching/daily/day-44/delivery-verification.json)
 

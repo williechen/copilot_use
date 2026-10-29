@@ -1,0 +1,209 @@
+{
+  "source_commit": "ceb3719b7543f491fc230a05a55a28ef2b729bf7",
+  "archive": "docs/archive/packages-2026-10-30/08-pet-activity-contract-superseded-2026-10-30.zip",
+  "archive_sha256": "d0f23c79b1400401056a8a2b5f81e90e97e52467addad52ff91ce81019e160dd",
+  "new_versions_count": 18,
+  "reused_identical_versions_count": 0,
+  "versions": [
+    {
+      "path": "README.md",
+      "sha256": "5b8f94e964993ed023387010f422ef222cd0dde065e9fe46c84e742f9e97c52c",
+      "bytes": 789,
+      "source_commit": "ceb3719b7543f491fc230a05a55a28ef2b729bf7",
+      "archive": {
+        "zip": "docs/archive/packages-2026-10-30/08-pet-activity-contract-superseded-2026-10-30.zip",
+        "entry": "copilot_use/README.md"
+      }
+    },
+    {
+      "path": "docs/README.md",
+      "sha256": "db805c07850238f6505b693f7af5d67d4040c96a31e6f41a2cd735612e5bae49",
+      "bytes": 1061,
+      "source_commit": "ceb3719b7543f491fc230a05a55a28ef2b729bf7",
+      "archive": {
+        "zip": "docs/archive/packages-2026-10-30/08-pet-activity-contract-superseded-2026-10-30.zip",
+        "entry": "copilot_use/docs/README.md"
+      }
+    },
+    {
+      "path": "docs/requirements/USER_FLOWS.md",
+      "sha256": "bbfd0829bb95dfe7c3f0fd760deb659eaeba2f34d23598f4ad901b757b590803",
+      "bytes": 4870,
+      "source_commit": "ceb3719b7543f491fc230a05a55a28ef2b729bf7",
+      "archive": {
+        "zip": "docs/archive/packages-2026-10-30/08-pet-activity-contract-superseded-2026-10-30.zip",
+        "entry": "copilot_use/docs/requirements/USER_FLOWS.md"
+      }
+    },
+    {
+      "path": "docs/UI_ALIGNMENT_REQUIREMENTS.md",
+      "sha256": "16686a8814365cd1905177cdcfd5e9a8c2a0eb52cd7c97556021525242029a05",
+      "bytes": 14707,
+      "source_commit": "ceb3719b7543f491fc230a05a55a28ef2b729bf7",
+      "archive": {
+        "zip": "docs/archive/packages-2026-10-30/08-pet-activity-contract-superseded-2026-10-30.zip",
+        "entry": "copilot_use/docs/UI_ALIGNMENT_REQUIREMENTS.md"
+      }
+    },
+    {
+      "path": "docs/FUTURE_WORK.md",
+      "sha256": "9c5b4f19623f63b50032aba2c59ce5d2d263d6df7b69d0a60164deb78ca22761",
+      "bytes": 7270,
+      "source_commit": "ceb3719b7543f491fc230a05a55a28ef2b729bf7",
+      "archive": {
+        "zip": "docs/archive/packages-2026-10-30/08-pet-activity-contract-superseded-2026-10-30.zip",
+        "entry": "copilot_use/docs/FUTURE_WORK.md"
+      }
+    },
+    {
+      "path": "docs/learning-state.json",
+      "sha256": "b463435054edfc320bd2ad1ac94d598d180f797dab8e51d504ce2797c87e2b36",
+      "bytes": 24184,
+      "source_commit": "ceb3719b7543f491fc230a05a55a28ef2b729bf7",
+      "archive": {
+        "zip": "docs/archive/packages-2026-10-30/08-pet-activity-contract-superseded-2026-10-30.zip",
+        "entry": "copilot_use/docs/learning-state.json"
+      }
+    },
+    {
+      "path": "docs/teaching/README.md",
+      "sha256": "30a11d01cb0733230f74afc24e8d0e4d0c3065f1a653e3f102be9e09cf022d00",
+      "bytes": 683,
+      "source_commit": "ceb3719b7543f491fc230a05a55a28ef2b729bf7",
+      "archive": {
+        "zip": "docs/archive/packages-2026-10-30/08-pet-activity-contract-superseded-2026-10-30.zip",
+        "entry": "copilot_use/docs/teaching/README.md"
+      }
+    },
+    {
+      "path": "docs/teaching/pet/README.md",
+      "sha256": "f92b9db3cd9ba3d0610f5945f79c1deeedfcd027547135bba4beb314fb622dab",
+      "bytes": 858,
+      "source_commit": "ceb3719b7543f491fc230a05a55a28ef2b729bf7",
+      "archive": {
+        "zip": "docs/archive/packages-2026-10-30/08-pet-activity-contract-superseded-2026-10-30.zip",
+        "entry": "copilot_use/docs/teaching/pet/README.md"
+      }
+    },
+    {
+      "path": "docs/teaching/current/README.md",
+      "sha256": "bb1cf5abdb73b0f3c67159ec231604f5de1de3a071e408ef2ddfb2d6e8c4c6fc",
+      "bytes": 600,
+      "source_commit": "ceb3719b7543f491fc230a05a55a28ef2b729bf7",
+      "archive": {
+        "zip": "docs/archive/packages-2026-10-30/08-pet-activity-contract-superseded-2026-10-30.zip",
+        "entry": "copilot_use/docs/teaching/current/README.md"
+      }
+    },
+    {
+      "path": "docs/teaching/current/STATUS.md",
+      "sha256": "b91e26aa19d822f1cd9ddf9c796b0f0772390a3ad162d9250cff89acee90afbd",
+      "bytes": 2768,
+      "source_commit": "ceb3719b7543f491fc230a05a55a28ef2b729bf7",
+      "archive": {
+        "zip": "docs/archive/packages-2026-10-30/08-pet-activity-contract-superseded-2026-10-30.zip",
+        "entry": "copilot_use/docs/teaching/current/STATUS.md"
+      }
+    },
+    {
+      "path": "docs/teaching/current/manifest.json",
+      "sha256": "d5055f1584c37a088c7b3116c47725d813a9ddb20dda38643df22e00f7b5e72e",
+      "bytes": 8043,
+      "source_commit": "ceb3719b7543f491fc230a05a55a28ef2b729bf7",
+      "archive": {
+        "zip": "docs/archive/packages-2026-10-30/08-pet-activity-contract-superseded-2026-10-30.zip",
+        "entry": "copilot_use/docs/teaching/current/manifest.json"
+      }
+    },
+    {
+      "path": "docs/teaching/daily/README.md",
+      "sha256": "0ad3e6d6cee2fc3a964e9fb6ca23875c051b10c4247df6db5e2d49e9b3858c52",
+      "bytes": 804,
+      "source_commit": "ceb3719b7543f491fc230a05a55a28ef2b729bf7",
+      "archive": {
+        "zip": "docs/archive/packages-2026-10-30/08-pet-activity-contract-superseded-2026-10-30.zip",
+        "entry": "copilot_use/docs/teaching/daily/README.md"
+      }
+    },
+    {
+      "path": "docs/teaching/daily/day-44/README.md",
+      "sha256": "5a0d828ab182fbb6896df554220ced7fe154926cbe50e7a85b2660bcb1efd41f",
+      "bytes": 1512,
+      "source_commit": "ceb3719b7543f491fc230a05a55a28ef2b729bf7",
+      "archive": {
+        "zip": "docs/archive/packages-2026-10-30/08-pet-activity-contract-superseded-2026-10-30.zip",
+        "entry": "copilot_use/docs/teaching/daily/day-44/README.md"
+      }
+    },
+    {
+      "path": "docs/teaching/daily/day-44/ENTRY.md",
+      "sha256": "993752bc7295e88687ff60a6a1ec80c25c344c38c1fc1d51636595d5aeeba7e3",
+      "bytes": 919,
+      "source_commit": "ceb3719b7543f491fc230a05a55a28ef2b729bf7",
+      "archive": {
+        "zip": "docs/archive/packages-2026-10-30/08-pet-activity-contract-superseded-2026-10-30.zip",
+        "entry": "copilot_use/docs/teaching/daily/day-44/ENTRY.md"
+      }
+    },
+    {
+      "path": "docs/teaching/daily/day-44/pet.md",
+      "sha256": "bf6488f8b983288819d61f8530b01ffc8c186dc7e49aae4dc36e65da3c749038",
+      "bytes": 101757,
+      "source_commit": "ceb3719b7543f491fc230a05a55a28ef2b729bf7",
+      "archive": {
+        "zip": "docs/archive/packages-2026-10-30/08-pet-activity-contract-superseded-2026-10-30.zip",
+        "entry": "copilot_use/docs/teaching/daily/day-44/pet.md"
+      }
+    },
+    {
+      "path": "docs/teaching/daily/day-44/pet-day44-green.patch",
+      "sha256": "14654a4821f1013385d936f20099bf7c0976cfead7aff0b6c376c93030778e97",
+      "bytes": 79710,
+      "source_commit": "ceb3719b7543f491fc230a05a55a28ef2b729bf7",
+      "archive": {
+        "zip": "docs/archive/packages-2026-10-30/08-pet-activity-contract-superseded-2026-10-30.zip",
+        "entry": "copilot_use/docs/teaching/daily/day-44/pet-day44-green.patch"
+      }
+    },
+    {
+      "path": "docs/teaching/functional-refactoring/PROGRESS.md",
+      "sha256": "bea4b39f4b5251d6c3803c6c183fa69ac9b18c9923f0bc68cca5bd8fa60eb2fd",
+      "bytes": 1533,
+      "source_commit": "ceb3719b7543f491fc230a05a55a28ef2b729bf7",
+      "archive": {
+        "zip": "docs/archive/packages-2026-10-30/08-pet-activity-contract-superseded-2026-10-30.zip",
+        "entry": "copilot_use/docs/teaching/functional-refactoring/PROGRESS.md"
+      }
+    },
+    {
+      "path": "docs/teaching/current/validation.json",
+      "sha256": "d3c57582c5ba0283e3341895175f7f9ba56dfb6ae008533b01e1ce1bbd2c5352",
+      "bytes": 3110,
+      "source_commit": "ceb3719b7543f491fc230a05a55a28ef2b729bf7",
+      "archive": {
+        "zip": "docs/archive/packages-2026-10-30/08-pet-activity-contract-superseded-2026-10-30.zip",
+        "entry": "copilot_use/docs/teaching/current/validation.json"
+      }
+    }
+  ],
+  "rule": {
+    "confirmed_by_user": true,
+    "source_product_sha": "7ce39f0166a2120539e5908b33c88322a930c35a",
+    "out_of_cage": "EXISTS pet_activity with matching pet_id/owner_id AND is_activity=true",
+    "caged": "no matching active activity",
+    "activity_type_filter": null,
+    "count_condition": "at least one; not exactly one",
+    "add_columns": false,
+    "current_product_uses_old_profile_flag": true,
+    "replacement_green_complete": false,
+    "gate2_verified": false,
+    "withdrawn_green_archive": "docs/archive/packages-2026-10-30/08-pet-activity-contract-superseded-2026-10-30.zip"
+  },
+  "next_day_unchanged": {
+    "chat": 45,
+    "pet": 45,
+    "analytics": 45
+  },
+  "last_full_comparison_unchanged": "2026-10-16T22:47:14.399027+08:00",
+  "other_day44_articles_unchanged": true
+}

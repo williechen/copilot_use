@@ -1,6 +1,7 @@
 # 三專案教學
 
-**2026-10-30：三案 Day44 Gate1 已發布，next_day 45；Gate2 未執行。** 文章各自有獨立 Refactor 與完整 Red／Green patch；跨案工程只在 `docs/engineering/README.md` 計量。
+**Pet Day44 修訂更正：** 原新增 `auto_release_on_start` 欄位的 Green 已撤回封存；新規則要求出／回籠依 `pet_activity` 任一 `is_activity=true` 判斷，不限散步、不新增欄位。替代 Green 待完成／待驗，原 Gate1 歷史讀回不代表修訂已完成。next_day 保持三案 45，先補齊 Pet Day44 修訂，不重複加 Day。
+
 
 [Day44 ENTRY](daily/day-44/ENTRY.md) · [Day44 正文／patch](daily/day-44/README.md) · [交付證據](daily/day-44/delivery-verification.json)
 

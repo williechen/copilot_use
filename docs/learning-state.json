@@ -420,7 +420,7 @@
   },
   "teaching_progress": {
     "last_published_day": 44,
-    "last_publication_status": "Day44 Gate1 published with three independent commits; Gate2 product acceptance not run",
+    "last_publication_status": "Day44 Chat/Analytics Gate1 published; Pet original Gate1 superseded by confirmed activity contract; replacement Green pending; Gate2 incomplete",
     "next_day": {
       "chat": 45,
       "pet": 45,
@@ -430,5 +430,18 @@
   "current_validation": "docs/teaching/current/validation.json",
   "archive_catalog": "docs/archive/packages-2026-10-30/current-files.json",
   "storage_policy": "Only teaching-essential current documents and not-yet-verified next-day drafts remain raw; superseded documents and evidence are ZIP-only; no duplicate compression",
-  "day44_draft_exists": false
+  "day44_draft_exists": false,
+  "pet_activity_contract": {
+    "confirmed_by_user": true,
+    "source_product_sha": "7ce39f0166a2120539e5908b33c88322a930c35a",
+    "out_of_cage": "EXISTS pet_activity with matching pet_id/owner_id AND is_activity=true",
+    "caged": "no matching active activity",
+    "activity_type_filter": null,
+    "count_condition": "at least one; not exactly one",
+    "add_columns": false,
+    "current_product_uses_old_profile_flag": true,
+    "replacement_green_complete": false,
+    "gate2_verified": false,
+    "withdrawn_green_archive": "docs/archive/packages-2026-10-30/08-pet-activity-contract-superseded-2026-10-30.zip"
+  }
 }

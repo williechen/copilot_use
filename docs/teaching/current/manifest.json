@@ -130,22 +130,37 @@
     {
       "project": "pet",
       "day": 44,
-      "revision": "r1",
+      "revision": "r2-requirements-correction",
       "article_path": "docs/teaching/daily/day-44/pet.md",
       "source_sha": "7ce39f0166a2120539e5908b33c88322a930c35a",
-      "article_commit": "971f0e3e17a6705916a324ac9675f68ebb136fac",
-      "blob_sha": "d7d1cf876eb78abaec1eacbce41637f8a0c48e66",
-      "sha256": "bf6488f8b983288819d61f8530b01ffc8c186dc7e49aae4dc36e65da3c749038",
-      "publication_status": "published_gate1_document",
-      "remote_full_text_equal": true,
-      "exact_commit_readback": true,
-      "refactor_patch": "docs/teaching/daily/day-44/pet-day44-refactor.patch",
-      "green_patch": "docs/teaching/daily/day-44/pet-day44-green.patch",
-      "evidence": "docs/teaching/daily/day-44/delivery-verification.json",
+      "publication_status": "published_correction_replacement_green_pending",
+      "gate1_complete": false,
       "functional_acceptance": false,
       "gate2": false,
       "product_applied": false,
-      "storage": "raw_latest_pending_gate2"
+      "refactor_patch": "docs/teaching/daily/day-44/pet-day44-refactor.patch",
+      "storage": "raw_unverified_revision",
+      "original_publication": {
+        "project": "pet",
+        "day": 44,
+        "revision": "r1",
+        "article_path": "docs/teaching/daily/day-44/pet.md",
+        "source_sha": "7ce39f0166a2120539e5908b33c88322a930c35a",
+        "article_commit": "971f0e3e17a6705916a324ac9675f68ebb136fac",
+        "blob_sha": "d7d1cf876eb78abaec1eacbce41637f8a0c48e66",
+        "sha256": "bf6488f8b983288819d61f8530b01ffc8c186dc7e49aae4dc36e65da3c749038",
+        "publication_status": "published_gate1_document",
+        "remote_full_text_equal": true,
+        "exact_commit_readback": true,
+        "refactor_patch": "docs/teaching/daily/day-44/pet-day44-refactor.patch",
+        "green_patch": "docs/teaching/daily/day-44/pet-day44-green.patch",
+        "evidence": "docs/teaching/daily/day-44/delivery-verification.json",
+        "functional_acceptance": false,
+        "gate2": false,
+        "product_applied": false,
+        "storage": "raw_latest_pending_gate2"
+      },
+      "superseded_archive": "docs/archive/packages-2026-10-30/08-pet-activity-contract-superseded-2026-10-30.zip"
     },
     {
       "project": "analytics",
@@ -176,5 +191,18 @@
   "current_status_document": "docs/teaching/current/STATUS.md",
   "current_validation": "docs/teaching/current/validation.json",
   "archive_catalog": "docs/archive/packages-2026-10-30/current-files.json",
-  "unverified_future_drafts": "retain raw; do not archive/delete based only on package presence"
+  "unverified_future_drafts": "retain raw; do not archive/delete based only on package presence",
+  "pet_activity_contract": {
+    "confirmed_by_user": true,
+    "source_product_sha": "7ce39f0166a2120539e5908b33c88322a930c35a",
+    "out_of_cage": "EXISTS pet_activity with matching pet_id/owner_id AND is_activity=true",
+    "caged": "no matching active activity",
+    "activity_type_filter": null,
+    "count_condition": "at least one; not exactly one",
+    "add_columns": false,
+    "current_product_uses_old_profile_flag": true,
+    "replacement_green_complete": false,
+    "gate2_verified": false,
+    "withdrawn_green_archive": "docs/archive/packages-2026-10-30/08-pet-activity-contract-superseded-2026-10-30.zip"
+  }
 }

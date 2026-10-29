@@ -85,5 +85,23 @@
   ],
   "full_gate2": false,
   "new_product_tests_executed_in_this_document_cleanup": false,
-  "old_raw_evidence_zip": "docs/archive/packages-2026-10-30/05-source-verification-2026-10-30.zip"
+  "old_raw_evidence_zip": "docs/archive/packages-2026-10-30/05-source-verification-2026-10-30.zip",
+  "pet_activity_contract": {
+    "confirmed_by_user": true,
+    "source_product_sha": "7ce39f0166a2120539e5908b33c88322a930c35a",
+    "out_of_cage": "EXISTS pet_activity with matching pet_id/owner_id AND is_activity=true",
+    "caged": "no matching active activity",
+    "activity_type_filter": null,
+    "count_condition": "at least one; not exactly one",
+    "add_columns": false,
+    "current_product_uses_old_profile_flag": true,
+    "replacement_green_complete": false,
+    "gate2_verified": false,
+    "withdrawn_green_archive": "docs/archive/packages-2026-10-30/08-pet-activity-contract-superseded-2026-10-30.zip"
+  },
+  "pet_activity_contract_probe": {
+    "evidence": "docs/teaching/current/pet-activity-contract.json",
+    "passed": 12,
+    "scope": "in-memory SQLite target SQL only; no product changes, Green implementation or GUI acceptance"
+  }
 }
