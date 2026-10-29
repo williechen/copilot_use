@@ -1,0 +1,54 @@
+diff --git a/chat_apps/chat_server/src/lib.rs b/chat_apps/chat_server/src/lib.rs
+--- a/chat_apps/chat_server/src/lib.rs
++++ b/chat_apps/chat_server/src/lib.rs
+@@ -3,6 +3,7 @@
+ pub mod hub;
+ pub mod logout;
+ pub mod room_auth;
++mod room_path;
+ pub mod signin;
+ pub mod signup;
+ pub mod ssr;
+diff --git a/chat_apps/chat_server/src/room_auth.rs b/chat_apps/chat_server/src/room_auth.rs
+--- a/chat_apps/chat_server/src/room_auth.rs
++++ b/chat_apps/chat_server/src/room_auth.rs
+@@ -26,11 +26,7 @@
+     match active_member(&pool, request.headers()).await {
+         Ok(_) => Ok(next.run(request).await),
+         Err(StatusCode::UNAUTHORIZED) => {
+-            let id = request
+-                .uri()
+-                .path()
+-                .strip_prefix("/room/")
+-                .and_then(|value| uuid::Uuid::parse_str(value).ok())
++            let id = crate::room_path::canonical_room_id(request.uri().path())
+                 .ok_or(StatusCode::UNAUTHORIZED)?;
+             Ok(Redirect::to(&format!("/signin?next=/room/{id}")).into_response())
+         }
+diff --git a/chat_apps/chat_server/src/room_path.rs b/chat_apps/chat_server/src/room_path.rs
+new file mode 100644
+--- /dev/null
++++ b/chat_apps/chat_server/src/room_path.rs
+@@ -0,0 +1,22 @@
++/// 僅允許規範化 UUID 房間路徑；不接受 query、片段或多餘 path segment。
++pub(crate) fn canonical_room_id(path: &str) -> Option<String> {
++    let raw = path.strip_prefix("/room/")?;
++    let id = uuid::Uuid::parse_str(raw).ok()?;
++    (id.to_string() == raw).then(|| id.to_string())
++}
++
++#[cfg(test)]
++mod tests {
++    use super::*;
++    #[test]
++    fn canonical_room_path_is_fail_closed() {
++        let id = "00000000-0000-0000-0000-000000000001";
++        assert_eq!(canonical_room_id(&format!("/room/{id}")), Some(id.into()));
++        for invalid in ["/room/", "/room/not-a-uuid",
++            "/room/00000000000000000000000000000001",
++            "/room/00000000-0000-0000-0000-000000000001/extra",
++            "/room/00000000-0000-0000-0000-000000000001?x=1"] {
++            assert_eq!(canonical_room_id(invalid), None, "{invalid}");
++        }
++    }
++}
