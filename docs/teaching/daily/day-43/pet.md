@@ -282,3 +282,7 @@ node --test pet_apps/pet_ui/tests/*.test.mjs
 ## 文件交付與來源證據
 
 原 [Day43 候選](../../drafts/day-43/pet.md) 的歷史 commit、blob 保留；六份 patch 的嚴格上下文／增刪行數檢查見 [候選證據](../../drafts/day-43/candidate-evidence.json)，不等於原生 `git apply --check` 或 Cargo。先 Refactor 後 Green，不修改產品 repo；版本差異與 Gate1/Gate2 邊界見 [版本基線](versions.md)，本文及 patch 的精確讀回記在 [交付證據](delivery-verification.json)。
+
+## 2026-10-29 局部原生驗收增量
+
+在 `8b882696c5548accb9d98a32b27db35e11109c74` 隔離副本完成人工 A/B 初始查詢、A 單獨出籠／回籠及重啟保留狀態，逐步對照相同 UUID 的 SQLite 與程序 FD。這不等於本文完整逐列顯示、錯誤與重載情境通過；原文與 patch 保留。見 [Pet 原生驗收證據與限制](../../../source-review/pet-native-2026-10-29/README.md)。

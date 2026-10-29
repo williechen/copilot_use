@@ -1,5 +1,7 @@
 # 全專案重構：獨立項目
 
+> 2026-10-29 Pet 局部原生驗收：隔離 A/B 查詢、A 單獨出籠／回籠及重啟已由人工操作與 SQLite／程序 FD 核對通過。[證據與未驗項](../source-review/pet-native-2026-10-29/README.md)。不增加跨案工程完成量，Gate2 仍未全部通過。
+
 > 2026-10-29 Day43 本地實測：固定產品 `8b882696c5548accb9d98a32b27db35e11109c74`；[測試矩陣與原始證據](../source-review/local-validation-2026-10-29-day43/README.md) · [今日交付延遲原因](../source-review/local-validation-2026-10-29-day43/diagnosis.md)。下列舊 SHA 結果保留原範圍；next_day 維持 44，完整 GUI／CI／舊 DB 驗收未完成。
 
 > **2026-10-29 Day43 跨案工程狀態：** 新教學僅為三案**專案內部** Refactor；[Day43 原文與 patch](../teaching/daily/day-43/README.md) 不構成全專案 G-01/G-02 交付、不得重複計功。本次未新增跨案契約或共用 crates patch，無全庫 CI 新驗收；G-01／G-02 原相依與狀態不變。產品 `rust_ai_ring` 保持唯讀，不改 FIFO／`last_full_comparison`。
