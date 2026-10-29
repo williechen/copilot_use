@@ -10,6 +10,7 @@
 
 ## 交付證據與界線
 
+- [Day42 Gate1 結案、Day43 發布、七個首頁／三個 ENTRY 與 state／manifest 雙向同步提交證據](sync-verification.json)；三案 `next_day` 均為 44，FIFO／`last_full_comparison` 不變。
 - [三篇各自獨立提交、六份 patch、精確 commit/blob/SHA256 證據](delivery-verification.json)：文章和 patch 原文從特定 commit 全文讀回，六份 patch 保持 Refactor → Green 的來源套用順序。
 - [Rust、Leptos、Tauri CLI、Axum、SQLx、Tokio、UUID 等當日官方穩定版與 lock、MSRV 限制](versions.md)。本日未新增 Cargo 相依或修改 lock；未知的遞迴 MSRV／native 安裝相容狀況明示未實測。
 - [六 patch 嚴格原始行／hunk count 靜態驗證](../../drafts/day-43/gate1-followup-2026-10-29.md)；**不是** `git apply --check` 或新 Day43 Cargo 編譯／Red／Green 測試。
