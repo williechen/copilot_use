@@ -1,5 +1,8 @@
 # 全專案重構：獨立項目
 
+> **2026-10-29 Day43 跨案工程狀態：** 新教學僅為三案**專案內部** Refactor；[Day43 原文與 patch](../teaching/daily/day-43/README.md) 不構成全專案 G-01/G-02 交付、不得重複計功。本次未新增跨案契約或共用 crates patch，無全庫 CI 新驗收；G-01／G-02 原相依與狀態不變。產品 `rust_ai_ring` 保持唯讀，不改 FIFO／`last_full_comparison`。
+
+
 > 2026-10-28 固定產品來源 `c6708c42f21ac919e57a379848b4977d27a1c3d6`；[本輪原始命令與結果](../source-review/local-validation-2026-10-28-c6708c4/README.md)。本輪只增量重測 fixture、metadata／fmt；其他來源實測維持原 SHA，完整驗收與版本 Gate 尚未完成。
 
 
