@@ -1,14 +1,16 @@
 # 文件總入口
 
+**2026-10-29：已正式發布 [Day43 三案教學](teaching/daily/day-43/README.md)（Gate1 文件交付）；產品 Day43 patch 尚未套用，Gate2 未驗收。三案下一待發布篇為 Day44。**
+
 先依閱讀目的選擇入口；各頁只維護自己負責的資訊。
 
 ## 專案與最新文章
 
 | 專案 | 專案首頁 | 最新文章 | 問題主線 |
 |---|---|---|---|
-| Chat | [專案大綱](teaching/chat/README.md) | [Day42 r3](teaching/daily/day-42/chat-r3.md) | [原完成條件](FUTURE_WORK.md#chat-auth) |
-| Pet | [專案大綱](teaching/pet/README.md) | [Day42 r3](teaching/daily/day-42/pet-r3.md) | [原完成條件](FUTURE_WORK.md#pet-lifecycle) |
-| Analytics | [專案大綱](teaching/analytics/README.md) | [Day42 r2](teaching/daily/day-42/analytics-r2.md) | [原完成條件](FUTURE_WORK.md#analytics-auth) |
+| Chat | [專案大綱](teaching/chat/README.md) | [Day43](teaching/daily/day-43/chat.md) | [原完成條件](FUTURE_WORK.md#chat-auth) |
+| Pet | [專案大綱](teaching/pet/README.md) | [Day43](teaching/daily/day-43/pet.md) | [原完成條件](FUTURE_WORK.md#pet-lifecycle) |
+| Analytics | [專案大綱](teaching/analytics/README.md) | [Day43](teaching/daily/day-43/analytics.md) | [原完成條件](FUTURE_WORK.md#analytics-auth) |
 
 ## 目前驗證
 
