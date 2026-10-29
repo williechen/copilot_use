@@ -1,5 +1,8 @@
 # 目前功能與驗證狀態
 
+> **2026-10-29 Day43 文件發布（現行；下方 Day42 內容是前輪歷史快照）：** [三案 Day43 全文及六 patch](../daily/day-43/README.md) 已在 `copilot_use/main` 分別提交並從精確 commit 全文讀回，保存 [blob／SHA256](../daily/day-43/delivery-verification.json)。Day42 原已發表文／patch 的 Gate1 文件結案與 Day43 新交付分開記錄；三案下一待發布篇為 **Day44**。本次沒有更動 `rust_ai_ring`，Day43 Green／Refactor **尚未由使用者套用**，Cargo／Node／DB／WASM／GUI／CI **未執行**，Gate2／角色 ACL、預設資格、房間競態等原產品驗收缺口仍在。下方「next_day 42／Gate1 pending」指此輪前的 Day42 歷史診斷，不代表目前文件交付進度。
+
+
 > **2026-10-29 增量來源讀回：** 最新查得 `rust_ai_ring/main` 仍為 `c6708c42f21ac919e57a379848b4977d27a1c3d6`。三案 Day42 Green／Refactor 的正式 caller／module／相關測試均已在主分支靜態讀回；[精確 blob／SHA256 與修訂](../daily/day-42/source-readback-2026-10-29.json)。**本輪沒有重跑 Cargo／Node／DB／HTTP／GUI／CI，不能將靜態存在視為產品驗收。** 以下 2026-10-28 測試僅屬其精確來源與當次環境。Gate1／Gate2 未完整通過，next_day 仍42。
 
 產品 `c6708c42f21ac919e57a379848b4977d27a1c3d6`；2026-10-28 增量重測。[本輪原始命令與結果](../../source-review/local-validation-2026-10-28-c6708c4/README.md)。
