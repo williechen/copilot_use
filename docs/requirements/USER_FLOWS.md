@@ -1,6 +1,6 @@
 # 三專案已確認使用者流程
 
-> 2026-10-28 固定產品來源 `c6708c42f21ac919e57a379848b4977d27a1c3d6`；[本輪原始命令與結果](../source-review/local-validation-2026-10-28-c6708c4/README.md)。本輪只增量重測 fixture、metadata／fmt；其他來源實測維持原 SHA，完整驗收與版本 Gate 尚未完成。
+> 2026-10-28 固定產品來源 `c6708c42f21ac919e57a379848b4977d27a1c3d6`；[本輪原始命令與結果（封存）](../archive/packages-2026-10-30/05-source-verification-2026-10-30.zip)。本輪只增量重測 fixture、metadata／fmt；其他來源實測維持原 SHA，完整驗收與版本 Gate 尚未完成。
 
 
 現行程式來源與目錄：[rust_ai_ring 四個 workspace 對照](../SOURCE_LAYOUT.md)（來源 `0b3e5844`，2026-10-24 靜態核對）。

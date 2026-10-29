@@ -1,1 +1,0 @@
-PASS: real HTML bridge invokes create_pet(name) and list_pets; mock IPC only, not native GUI

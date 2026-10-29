@@ -1,6 +1,0 @@
-error: patch failed: chat_apps/chat_server/src/signin.rs:20
-error: chat_apps/chat_server/src/signin.rs: patch does not apply
-error: patch failed: chat_apps/chat_ui/src/room_api.rs:93
-error: chat_apps/chat_ui/src/room_api.rs: patch does not apply
-error: patch failed: chat_apps/chat_ui/src/lib.rs:113
-error: chat_apps/chat_ui/src/lib.rs: patch does not apply

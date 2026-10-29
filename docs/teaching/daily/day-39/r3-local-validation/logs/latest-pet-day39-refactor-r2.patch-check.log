@@ -1,4 +1,0 @@
-error: patch failed: pet_apps/pet_application/src/lifecycle.rs:115
-error: pet_apps/pet_application/src/lifecycle.rs: patch does not apply
-error: patch failed: pet_apps/pet_server/src/pet_windows.rs:139
-error: pet_apps/pet_server/src/pet_windows.rs: patch does not apply

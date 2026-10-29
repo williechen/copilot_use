@@ -1,8 +1,0 @@
-{
-  "recorded_at": "2026-10-18T19:22:42.980131+08:00",
-  "tool": "mcp__cua_repl.js",
-  "operation": "await cua.getState()",
-  "observed_native_apps": [],
-  "browser_tabs_available": true,
-  "limitation": "native computer APIs disabled; manual native GUI not verified"
-}

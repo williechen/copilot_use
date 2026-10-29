@@ -1,8 +1,0 @@
-APPLY PASS 20260930034455_crate_rooms.sql
-APPLY PASS 20261007084321_create_messages.sql
-APPLY PASS 20261018073931_create_auth_user.sql
-APPLY PASS 20261018091733_create_pet.sql
-APPLY PASS 20261018094242_create_ai_person.sql
-pet schema [(0, 'id', 'SERIAL', 0, None, 1), (1, 'name', 'VARCHAR(255)', 1, None, 0), (2, 'ai_api_key', 'VARCHAR(255)', 0, None, 0), (3, 'species', 'VARCHAR(255)', 1, None, 0), (4, 'age', 'INT', 0, None, 0), (5, 'is_default_closure', 'BOOLEAN', 0, 'FALSE', 0), (6, 'owner_id', 'INT', 0, None, 0), (7, 'created_at', 'TIMESTAMP', 0, 'CURRENT_TIMESTAMP', 0), (8, 'updated_at', 'TIMESTAMP', 0, 'CURRENT_TIMESTAMP', 0)]
-INSERT FAIL OperationalError('no such table: main.owner')
-foreign key violations []

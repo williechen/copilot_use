@@ -1,7 +1,0 @@
-Applied 20260930034455/migrate crate rooms (47.552373ms)
-Applied 20261007084321/migrate create messages (40.275325ms)
-Applied 20261018073931/migrate create auth user (22.046035ms)
-Applied 20261018091733/migrate create pet (37.345305ms)
-Applied 20261018094242/migrate create ai person (55.867907ms)
-Applied 20261018095626/migrate create pet owner (8.102222ms)
-error: while executing migration 20261018100114: error returned from database: (code: 1) near "MODIFY": syntax error

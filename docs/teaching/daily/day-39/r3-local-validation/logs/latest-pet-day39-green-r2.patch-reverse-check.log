@@ -1,8 +1,0 @@
-error: patch failed: pet_apps/pet_ui/src/main.rs:253
-error: pet_apps/pet_ui/src/main.rs: patch does not apply
-error: patch failed: pet_apps/pet_ui/src/bridge.rs:78
-error: pet_apps/pet_ui/src/bridge.rs: patch does not apply
-error: patch failed: pet_apps/pet_server/src/lib.rs:295
-error: pet_apps/pet_server/src/lib.rs: patch does not apply
-error: patch failed: pet_apps/pet_server/src/pet_windows.rs:158
-error: pet_apps/pet_server/src/pet_windows.rs: patch does not apply

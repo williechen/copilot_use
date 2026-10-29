@@ -1,8 +1,0 @@
-error: patch failed: analytics_apps/analytics_server/src/lib.rs:1
-error: analytics_apps/analytics_server/src/lib.rs: patch does not apply
-error: patch failed: analytics_apps/analytics_server/src/password_login.rs:460
-error: analytics_apps/analytics_server/src/password_login.rs: patch does not apply
-error: patch failed: analytics_apps/analytics_server/src/dashboard_ui.rs:44
-error: analytics_apps/analytics_server/src/dashboard_ui.rs: patch does not apply
-error: analytics_apps/analytics_server/src/export.rs: already exists in working directory
-error: analytics_apps/analytics_server/tests/day39_export_csv.rs: already exists in working directory

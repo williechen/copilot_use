@@ -1,9 +1,0 @@
-{
-  "purpose": "immutable shared 12-group test mapping snapshot referenced from three Day38 r3 articles",
-  "source_path": "docs/teaching/functional-refactoring/test-coverage-map.csv",
-  "source_commit": "1fdf206b83c79d0dd2985e62250d4dc307112a66",
-  "source_blob": "e41f7bee96cc3f78e71896ba4076b9f7043ce814",
-  "snapshot_path": "docs/teaching/daily/day-38/test-coverage-map.csv",
-  "content_unchanged": true,
-  "product_tests_executed": false
-}

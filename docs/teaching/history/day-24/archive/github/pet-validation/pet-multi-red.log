@@ -1,5 +1,0 @@
-Traceback (most recent call last):
-  File "/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-3/work/day24-pet-multi-red.py", line 49, in <module>
-    handles=ses('GET','/window/handles');assert len(handles)==4, 'expected control plus three life windows; actual='+str(len(handles))
-                                                ^^^^^^^^^^^^^^^
-AssertionError: expected control plus three life windows; actual=2

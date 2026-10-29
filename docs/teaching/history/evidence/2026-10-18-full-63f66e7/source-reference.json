@@ -1,8 +1,0 @@
-{
-  "rust_main": "63f66e7742ecd09cd5199a47dbacc9df666af416",
-  "candidate": "3eace139da323fc906133636fae93e4d54159173",
-  "teaching_source_commit": "6794641e728ad2b03af6cd3db7f256ae16bab9ab",
-  "common_rules_blob": "8a36e736b7d056d04462afaf5682499285372342",
-  "rules_version": "daily-tdd-minimum-v1",
-  "v1_body_sha256": "65e6602567330638a702db5fa35e91906a2e748ddbbfb16c16c9e110162c9081"
-}

@@ -1,6 +1,0 @@
-{
-  "Cargo.lock": "e8e3ca7366772c07f5b012c596eba3ab0e11ffcc27cb3f78724e107e1dbb0210",
-  "apps/desktop_pet/Cargo.lock": "bca1b145f8f9fb759696f23d5d8cd2ae48552368f332cd21de8dbf837ccabee3",
-  "apps/desktop_pet/frontend/Cargo.lock": "464ae49cf2d636ab28aab748bcae06a84cce49e5ba9329b34469270e2c993349",
-  "apps/server/frontend/Cargo.lock": "a39fe4de83d13f749d912a815f939d42b0e09db310d13c3e2ee91c0d5e14acec"
-}

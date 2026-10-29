@@ -1,6 +1,0 @@
-error: patch failed: analytics_apps/analytics_server/src/export.rs:1
-error: analytics_apps/analytics_server/src/export.rs: patch does not apply
-error: patch failed: analytics_apps/analytics_server/src/dashboard_ui.rs:8
-error: analytics_apps/analytics_server/src/dashboard_ui.rs: patch does not apply
-error: patch failed: analytics_apps/analytics_server/tests/day39_export_csv.rs:105
-error: analytics_apps/analytics_server/tests/day39_export_csv.rs: patch does not apply

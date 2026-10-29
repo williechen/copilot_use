@@ -1,3 +1,0 @@
-error: patch failed: chat_apps/chat_ui/src/lib.rs:4
-error: chat_apps/chat_ui/src/lib.rs: patch does not apply
-error: chat_apps/chat_ui/src/signin_contract.rs: already exists in working directory

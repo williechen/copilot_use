@@ -1,0 +1,89 @@
+{
+  "product_sha": "7ce39f0166a2120539e5908b33c88322a930c35a",
+  "observed_at_utc": "2026-10-29T19:24:21.585219+00:00",
+  "ci": [
+    {
+      "id": 40934502730,
+      "name": "Rust Desktop Pet",
+      "head_sha": "7ce39f0166a2120539e5908b33c88322a930c35a",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40934502730"
+    },
+    {
+      "id": 40934502629,
+      "name": "Rust Analytics",
+      "head_sha": "7ce39f0166a2120539e5908b33c88322a930c35a",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40934502629"
+    },
+    {
+      "id": 40934502561,
+      "name": "Cargo workspaces",
+      "head_sha": "7ce39f0166a2120539e5908b33c88322a930c35a",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40934502561"
+    },
+    {
+      "id": 40934502621,
+      "name": "Test All",
+      "head_sha": "7ce39f0166a2120539e5908b33c88322a930c35a",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40934502621"
+    },
+    {
+      "id": 40934502498,
+      "name": "Node",
+      "head_sha": "7ce39f0166a2120539e5908b33c88322a930c35a",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40934502498"
+    },
+    {
+      "id": 40934502544,
+      "name": "Persistence",
+      "head_sha": "7ce39f0166a2120539e5908b33c88322a930c35a",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40934502544"
+    },
+    {
+      "id": 40934502289,
+      "name": "Rust AI Chat",
+      "head_sha": "7ce39f0166a2120539e5908b33c88322a930c35a",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40934502289"
+    }
+  ],
+  "local_test_results": [
+    {
+      "source_sha": "7ce39f0166a2120539e5908b33c88322a930c35a",
+      "scope": "Chat UI SSR",
+      "passed": 21,
+      "exit_code": 0
+    },
+    {
+      "source_sha": "7ce39f0166a2120539e5908b33c88322a930c35a",
+      "scope": "Chat server + persistence + UI SSR",
+      "passed": 60,
+      "exit_code": 0
+    },
+    {
+      "source_sha": "d2612fcd154d2132d850086d83a48578abbb07fa",
+      "scope": "four workspace metadata/fmt/check/clippy; crates8 Chat60 Pet99 Analytics41+1ignored; Pet WASM/Node10, Chat hydrate WASM; Analytics PG60 include-ignored",
+      "exit_code": 0
+    },
+    {
+      "source_sha": "8b882696c5548accb9d98a32b27db35e11109c74",
+      "scope": "human Pet isolated A/B visible/query, A uncage, recage, restart plus SQLite/FD cross-check",
+      "status": "passed limited scenario"
+    }
+  ],
+  "full_gate2": false,
+  "new_product_tests_executed_in_this_document_cleanup": false,
+  "old_raw_evidence_zip": "docs/archive/packages-2026-10-30/05-source-verification-2026-10-30.zip"
+}

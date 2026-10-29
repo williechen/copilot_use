@@ -1,6 +1,0 @@
-    Checking sqlx v0.9.0
-    Checking ui v0.2.17 (/home/willie/Documents/Codex/2026-10-18/referenced-chatgpt-conversation-this-is-an-2/work/acceptance63/crates/ui)
-    Checking persistence v0.2.17 (/home/willie/Documents/Codex/2026-10-18/referenced-chatgpt-conversation-this-is-an-2/work/acceptance63/crates/persistence)
-    Checking chat-application v0.2.17 (/home/willie/Documents/Codex/2026-10-18/referenced-chatgpt-conversation-this-is-an-2/work/acceptance63/crates/chat_application)
-    Checking server v0.2.17 (/home/willie/Documents/Codex/2026-10-18/referenced-chatgpt-conversation-this-is-an-2/work/acceptance63/apps/server)
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 3.30s

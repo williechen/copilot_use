@@ -1,7 +1,0 @@
-   Compiling codex-analytics-route-probe v0.1.0 (/home/willie/Documents/Codex/2026-10-25/new-chat-3/work/analytics_probe)
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 3.84s
-     Running `work/rust_ai_ring/analytics_apps/target/debug/codex-analytics-route-probe`
-exact_no_cookie_no_token: HTTP 401; body=
-exact_no_cookie_chat_token: HTTP 200; body=[{"source_app":"web_chat","event_type":"codex.review.synthetic","total":2}]
-exact_no_cookie_pet_token: HTTP 401; body=
-full_summary_no_cookie_chat_token: HTTP 401; body=

@@ -1,18 +1,6 @@
-# Rust AI Ring｜P0–P12 十三階段詳細規劃
+# Rust AI Ring｜P0–P12 十三階段規劃
 
-> 2026-10-25 依使用者更正：**13 個正式階段，P0–P12**。合併最新本地程式 `rust_ai_ring@5c713553daee4055738239f047d6c774fcc7a7a1`、文章 `copilot_use@4a3c43187e1ffd7cf4ba8d44cd4f8529f0d9d6d4` 與本地 `learning-state.json.curriculum`。此文件為需求與工作規劃，沒有將階段標為功能驗收完成。
-
-## 合併來源與規劃決策
-
-|來源|保留內容|本次處理|
-|---|---|---|
-|最新直接指示|13 階段、以本地最新程式與文章合併、只更新 copilot_use 文件|優先於前版「12 階段」文字|
-|本地 curriculum|P0–P12、每階段 2 個月、共 26 個月、原日曆與每日 60 分鐘|完整保留，不把 P12 列成衝突|
-|前版 P0–P11 Roadmap|P0 非 AI、P1.0 基礎 Logging、P10 完整觀測及中段功能順序|P0–P10 名稱順序沿用；原末段拆為 P11 部署就緒、P12 發布生命週期|
-|本地最新程式|現有 routes／IPC／DB adapter／tests／workflow 設定|重新定位 caller 與差距；未重跑 CI／runtime，不追認 Verified|
-|本地既有文章|105 閱讀版本、157 份正文／修訂／鏡像及原始雜湊|保留正文，只增分類／補充／階段關係，不遞增 Day 或重開 FIFO|
-
-P11／P12 的細分是本次為完成十三階段而作的規劃決策。本地既有 curriculum 證明十三階段及日曆，但沒有足夠資料證明歷史上 P12 曾採此名稱，故不假稱恢復原名稱。原十二階段文件原文與 SHA256 保存於 [合併來源](source-review/phase-plan-merge-2026-10-25/previous-roadmap.json)。
+本頁維護完整階段需求、相依與學習日曆；實作與驗證現況統一見 [STATUS](teaching/current/STATUS.md)，Day 依 [learning-state](learning-state.json) 而非日曆推算。
 
 ## 共通原則與狀態
 
@@ -22,7 +10,7 @@ P11／P12 的細分是本次為完成十三階段而作的規劃決策。本地�
 - Domain／Application 與 SQLx／Tauri／模型 SDK／OS Adapter 分開；按真實 caller 與產品需求增量實作，不預建空架構。
 - 每階段記錄文件交付、程式接線、測試、CI、runtime／GUI／E2E、學習完成各自狀態。工程狀態用 Not Started→In Progress→Implemented→Verified；沒有足夠同 SHA 證據時記「未查核／待驗證」，不臆判 Not Started 或 Verified。
 - 學習日曆到期仍按原政策切換，並標「階段已結束、未完成項目留原追蹤」。日期、Day 數與文章發布不等同工程 Exit Gate；未通過的依賴仍需補齊才能開啟依賴它的功能。
-- 不修改原 next_day（各產品 37）、last_full_comparison、原 Day／修訂、既有測試結果或日期。所有後續工作連回 FUTURE_WORK 原功能，不建立重複任務清單。
+- 不因規劃文件整理修改 next_day（目前三案 44）、last_full_comparison、原 Day／修訂、既有測試結果或日期。所有後續工作連回 FUTURE_WORK 原功能，不建立重複任務清單。
 
 ## 十三階段總覽與原日曆
 
@@ -108,7 +96,7 @@ N/A 僅在該產品不需要該能力時可用，須記理由；不將 N/A 算�
 
 ### Status
 
-詳細規劃已記錄；來源所見限 [本輪本地基準](source-review/phase-plan-merge-2026-10-25/SOURCE_BASELINE.md)。測試／CI run／runtime 本輪未重驗，工程 Gate 未由本文件宣告通過。
+本階段為需求與相依規劃；實作、測試及驗收現況以 [STATUS](teaching/current/STATUS.md) 為準，不因日曆或文件發布自動完成。
 
 ## P1 — Security & Identity｜含 P1.0 共用 Logging
 
@@ -154,7 +142,7 @@ P0 基本旅程已完成工程 Gate；P1.0 隨即優先。已知授權漏洞須�
 
 ### Status
 
-詳細規劃已記錄；來源所見限 [本輪本地基準](source-review/phase-plan-merge-2026-10-25/SOURCE_BASELINE.md)。測試／CI run／runtime 本輪未重驗，工程 Gate 未由本文件宣告通過。
+本階段為需求與相依規劃；實作、測試及驗收現況以 [STATUS](teaching/current/STATUS.md) 為準，不因日曆或文件發布自動完成。
 
 ## P2 — Reliability & Persistence｜可靠性與資料恢復
 
@@ -196,7 +184,7 @@ P0 儲存流程與 P1 必要安全、Logging 契約可用；傳輸選型先有�
 
 ### Status
 
-詳細規劃已記錄；來源所見限 [本輪本地基準](source-review/phase-plan-merge-2026-10-25/SOURCE_BASELINE.md)。測試／CI run／runtime 本輪未重驗，工程 Gate 未由本文件宣告通過。
+本階段為需求與相依規劃；實作、測試及驗收現況以 [STATUS](teaching/current/STATUS.md) 為準，不因日曆或文件發布自動完成。
 
 ## P3 — Real-time Communication｜即時連線與同步
 
@@ -237,7 +225,7 @@ P0 歷史基本讀回、P1 撤銷與來源授權、P2 穩定 ID／持久化事�
 
 ### Status
 
-詳細規劃已記錄；來源所見限 [本輪本地基準](source-review/phase-plan-merge-2026-10-25/SOURCE_BASELINE.md)。測試／CI run／runtime 本輪未重驗，工程 Gate 未由本文件宣告通過。
+本階段為需求與相依規劃；實作、測試及驗收現況以 [STATUS](teaching/current/STATUS.md) 為準，不因日曆或文件發布自動完成。
 
 ## P4 — AI Integration｜真實模型整合
 
@@ -279,7 +267,7 @@ P1 安全保管／Logging、P2 請求可靠性、P3 串流與取消邊界；先�
 
 ### Status
 
-詳細規劃已記錄；來源所見限 [本輪本地基準](source-review/phase-plan-merge-2026-10-25/SOURCE_BASELINE.md)。測試／CI run／runtime 本輪未重驗，工程 Gate 未由本文件宣告通過。
+本階段為需求與相依規劃；實作、測試及驗收現況以 [STATUS](teaching/current/STATUS.md) 為準，不因日曆或文件發布自動完成。
 
 ## P5 — AI Persona & Conversation｜角色與對話控制
 
@@ -320,7 +308,7 @@ P4 真模型與 usage／取消可用；P1 權限和 P2 對話狀態保存邊界�
 
 ### Status
 
-詳細規劃已記錄；來源所見限 [本輪本地基準](source-review/phase-plan-merge-2026-10-25/SOURCE_BASELINE.md)。測試／CI run／runtime 本輪未重驗，工程 Gate 未由本文件宣告通過。
+本階段為需求與相依規劃；實作、測試及驗收現況以 [STATUS](teaching/current/STATUS.md) 為準，不因日曆或文件發布自動完成。
 
 ## P6 — Memory & RAG｜授權記憶與檢索
 
@@ -361,7 +349,7 @@ P4／P5 對話與上下文、P1 資源授權、P2 資料保留與刪除／備份
 
 ### Status
 
-詳細規劃已記錄；來源所見限 [本輪本地基準](source-review/phase-plan-merge-2026-10-25/SOURCE_BASELINE.md)。測試／CI run／runtime 本輪未重驗，工程 Gate 未由本文件宣告通過。
+本階段為需求與相依規劃；實作、測試及驗收現況以 [STATUS](teaching/current/STATUS.md) 為準，不因日曆或文件發布自動完成。
 
 ## P7 — MCP & Tool Integration｜工具權限與可追溯執行
 
@@ -403,7 +391,7 @@ P1 工具／資源權限與稽核、P4 function calling 契約、P2 副作用冪
 
 ### Status
 
-詳細規劃已記錄；來源所見限 [本輪本地基準](source-review/phase-plan-merge-2026-10-25/SOURCE_BASELINE.md)。測試／CI run／runtime 本輪未重驗，工程 Gate 未由本文件宣告通過。
+本階段為需求與相依規劃；實作、測試及驗收現況以 [STATUS](teaching/current/STATUS.md) 為準，不因日曆或文件發布自動完成。
 
 ## P8 — Agent Runtime｜有界任務與恢復
 
@@ -444,7 +432,7 @@ P4–P7 所需 provider／記憶／工具已具能力；P1 權限、P2 恢復必
 
 ### Status
 
-詳細規劃已記錄；來源所見限 [本輪本地基準](source-review/phase-plan-merge-2026-10-25/SOURCE_BASELINE.md)。測試／CI run／runtime 本輪未重驗，工程 Gate 未由本文件宣告通過。
+本階段為需求與相依規劃；實作、測試及驗收現況以 [STATUS](teaching/current/STATUS.md) 為準，不因日曆或文件發布自動完成。
 
 ## P9 — Learning & Teaching Agent｜新定義的教學代理
 
@@ -485,7 +473,7 @@ P6 授權記憶、P8 有界執行及 P4–P5 對話；先有可核對的學習�
 
 ### Status
 
-詳細規劃已記錄；來源所見限 [本輪本地基準](source-review/phase-plan-merge-2026-10-25/SOURCE_BASELINE.md)。測試／CI run／runtime 本輪未重驗，工程 Gate 未由本文件宣告通過。
+本階段為需求與相依規劃；實作、測試及驗收現況以 [STATUS](teaching/current/STATUS.md) 為準，不因日曆或文件發布自動完成。
 
 ## P10 — Observability & Operations｜完整觀測
 
@@ -527,7 +515,7 @@ P1.0 Logging 和 P1 安全已可用；選已存在的端到端旅程，其他階
 
 ### Status
 
-詳細規劃已記錄；來源所見限 [本輪本地基準](source-review/phase-plan-merge-2026-10-25/SOURCE_BASELINE.md)。測試／CI run／runtime 本輪未重驗，工程 Gate 未由本文件宣告通過。
+本階段為需求與相依規劃；實作、測試及驗收現況以 [STATUS](teaching/current/STATUS.md) 為準，不因日曆或文件發布自動完成。
 
 ## P11 — Production Readiness & Deployment｜正式部署與營運就緒
 
@@ -569,7 +557,7 @@ P1.0 Logging 和 P1 安全已可用；選已存在的端到端旅程，其他階
 
 ### Status
 
-詳細規劃已記錄；來源所見限 [本輪本地基準](source-review/phase-plan-merge-2026-10-25/SOURCE_BASELINE.md)。測試／CI run／runtime 本輪未重驗，工程 Gate 未由本文件宣告通過。
+本階段為需求與相依規劃；實作、測試及驗收現況以 [STATUS](teaching/current/STATUS.md) 為準，不因日曆或文件發布自動完成。
 
 ## P12 — Release & Lifecycle｜發布、安裝更新與回滾
 
@@ -612,17 +600,16 @@ P11 部署與支援矩陣、P2 migration／restore、P1 更新來源與簽章信
 
 ### Status
 
-詳細規劃已記錄；來源所見限 [本輪本地基準](source-review/phase-plan-merge-2026-10-25/SOURCE_BASELINE.md)。測試／CI run／runtime 本輪未重驗，工程 Gate 未由本文件宣告通過。
+本階段為需求與相依規劃；實作、測試及驗收現況以 [STATUS](teaching/current/STATUS.md) 為準，不因日曆或文件發布自動完成。
 
 ## 當前執行優先序與文章銜接
 
-1. 先完成 P0 真缺口：Chat 房間／作者授權與歷史讀回；Pet 預設資格／回籠／直接關窗／逐 ID 漫遊；Analytics 正式人員／角色來源授權及完整管理旅程。每次先重讀最新 caller，Day36 已接通的 WS 重驗、精確查詢 Session、未回籠恢復查詢不重做。
+1. 先完成 P0 真缺口：Chat 房間／作者授權與歷史讀回；Pet 預設資格／回籠／直接關窗／逐 ID 漫遊；Analytics 正式人員／角色來源授權及完整管理旅程。每次先重讀最新 caller，已接通的 WS 重驗、精確查詢 Session、未回籠恢復查詢不重做。
 2. 為 P0 補整條真實旅程與必要 CI 範圍；保留既有局部測試。程式已見但未驗者先驗，確定缺口才實作。
 3. P0 Gate 通過後先 P1.0，再按本階段安全項及跨階段依賴分解。嚴重安全問題不等待階段切點。
 4. P2 持久可靠性與 P3 即時補訊按真依賴拆分；P4→P5→P6→P7→P8→P9 為功能路線，不要求每產品機械地全部實作。P10 的觀測工作隨功能增量準備，最後做完整端到端驗收。
 5. P11 驗部署／營運就緒；P12 驗版本、installer／updater／升級回滾與支援平台。二者各自有退出條件，不合併成一次「build 成功」。
 
-[逐篇分類與缺口](source-review/p0-p11-local-scan-2026-10-25/README.md) 的資料夾名稱為原交付識別，內容已按十三階段更正；[合併紀錄](source-review/phase-plan-merge-2026-10-25/README.md) 說明本地來源、原日曆與新增設計的界線。
 
 ## 證據記錄模板
 
@@ -637,4 +624,4 @@ P11 部署與支援矩陣、P2 migration／restore、P1 更新來源與簽章信
 
 ## 需求來源
 
-[使用者流程](requirements/USER_FLOWS.md) · [人員驗證](requirements/AUTHENTICATION.md) · [UI 條件](UI_ALIGNMENT_REQUIREMENTS.md) · [服務憑證](SERVICE_CREDENTIAL_REQUIREMENTS.md) · [傳輸目標](ANALYTICS_TRANSPORT.md) · [原功能清單](FUTURE_WORK.md) · [現行狀態](teaching/current/STATUS.md)。
+[使用者流程](requirements/USER_FLOWS.md) · [人員驗證](requirements/AUTHENTICATION.md) · [UI 條件](UI_ALIGNMENT_REQUIREMENTS.md) · [服務憑證](SERVICE_CREDENTIAL_REQUIREMENTS.md) · [傳輸目標（封存）](archive/packages-2026-10-30/06-rules-and-indexes-2026-10-30.zip) · [原功能清單](FUTURE_WORK.md) · [現行狀態](teaching/current/STATUS.md)。

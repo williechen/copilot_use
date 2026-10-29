@@ -1,1 +1,0 @@
-git apply --check candidate.patch against exact main archive: PASS
