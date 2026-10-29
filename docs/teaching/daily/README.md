@@ -1,5 +1,7 @@
 # 每日教學與歷史文章
 
+> 2026-10-29 驗收增量：[網頁排程已儲存、GUI／CI／舊庫實測](../../source-review/acceptance-2026-10-29/README.md)。Chat 真瀏覽器另發現清除搜尋回歸，修補候選已通過；CI attempt #2 仍失敗，Pet 原生人工 GUI／真實舊 PG 備份待驗。Gate2 未結案。
+
 > 2026-10-29 Day43 本地實測：固定產品 `8b882696c5548accb9d98a32b27db35e11109c74`；[測試矩陣與原始證據](../../source-review/local-validation-2026-10-29-day43/README.md) · [今日交付延遲原因](../../source-review/local-validation-2026-10-29-day43/diagnosis.md)。下列舊 SHA 結果保留原範圍；next_day 維持 44，完整 GUI／CI／舊 DB 驗收未完成。
 
 目前閱讀 Day43；Day42 文件交付掛起狀態已依原證據結案、Day43 已正式文件發布，三案下一待發布篇為 Day44。文件發布不代表產品套用或 Gate2 驗收。
@@ -8,7 +10,7 @@
 
 | 專案 | 專案首頁 | 最新文章 | 問題主線 |
 |---|---|---|---|
-| Chat | [專案大綱](../chat/README.md) | [Day43](day-43/chat-r1.md) | [原完成條件](../../FUTURE_WORK.md#chat-auth) |
+| Chat | [專案大綱](../chat/README.md) | [Day43](day-43/chat-r2.md) | [原完成條件](../../FUTURE_WORK.md#chat-auth) |
 | Pet | [專案大綱](../pet/README.md) | [Day43](day-43/pet-r1.md) | [原完成條件](../../FUTURE_WORK.md#pet-lifecycle) |
 | Analytics | [專案大綱](../analytics/README.md) | [Day43](day-43/analytics-r1.md) | [原完成條件](../../FUTURE_WORK.md#analytics-auth) |
 

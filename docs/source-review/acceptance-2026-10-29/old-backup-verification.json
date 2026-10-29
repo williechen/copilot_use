@@ -1,0 +1,10 @@
+{
+  "chat": {
+    "old_migration_count": 2,
+    "old_backup_sha256": "ea300efc1ada69bc0ed6f3363119a85ab1d602a1f5f7565dae37b7ae8007dbef"
+  },
+  "pet": {
+    "old_migration_count": 2,
+    "old_backup_sha256": "8ae53cf37cd7290f18e21bc5e31480d7b6f6d4fcc878f8231a0bd68151ff3d95"
+  }
+}

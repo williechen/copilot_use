@@ -1,5 +1,7 @@
 # 功能問題與工程追蹤
 
+> 2026-10-29 驗收增量：[網頁排程已儲存、GUI／CI／舊庫實測](source-review/acceptance-2026-10-29/README.md)。Chat 真瀏覽器另發現清除搜尋回歸，修補候選已通過；CI attempt #2 仍失敗，Pet 原生人工 GUI／真實舊 PG 備份待驗。Gate2 未結案。
+
 > 2026-10-29 Day43 本地實測：固定產品 `8b882696c5548accb9d98a32b27db35e11109c74`；[測試矩陣與原始證據](source-review/local-validation-2026-10-29-day43/README.md) · [今日交付延遲原因](source-review/local-validation-2026-10-29-day43/diagnosis.md)。下列舊 SHA 結果保留原範圍；next_day 維持 44，完整 GUI／CI／舊 DB 驗收未完成。
 
 本頁是功能問題及完成條件的單一入口；保留既有 FIFO、D01–D09、anchors 與有效斷言，不以文件整理新增或結案功能。

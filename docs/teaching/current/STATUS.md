@@ -1,5 +1,7 @@
 # 目前功能與驗證狀態
 
+> 2026-10-29 驗收增量：[網頁排程已儲存、GUI／CI／舊庫實測](../../source-review/acceptance-2026-10-29/README.md)。Chat 真瀏覽器另發現清除搜尋回歸，修補候選已通過；CI attempt #2 仍失敗，Pet 原生人工 GUI／真實舊 PG 備份待驗。Gate2 未結案。
+
 2026-10-29；固定產品 `8b882696c5548accb9d98a32b27db35e11109c74`。[本輪原始證據](../../source-review/local-validation-2026-10-29-day43/README.md)。
 
 | 範圍 | 原樣實際結果 | 補修／限制 |
