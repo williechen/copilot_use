@@ -1,0 +1,8 @@
+{
+  "actual_legacy_pg_backup": "user_confirmed_no_backup_available",
+  "native_pet_gui": "human_agreed_to_test; no scenario results received",
+  "product_read_only": "user_reconfirmed; no PR/branch/push",
+  "ci_latest_attempt": 2,
+  "ci_conclusion": "failure",
+  "cloud_schedule_full_readback_equal": true
+}

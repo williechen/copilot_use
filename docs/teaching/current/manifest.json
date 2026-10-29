@@ -6093,7 +6093,7 @@
     "ci_conclusion": "failure",
     "product_read_only_reconfirmed": true,
     "native_pet_gui": "pending_human",
-    "actual_old_pg_backup": "not_provided",
+    "actual_old_pg_backup": "user_confirmed_none_available",
     "gate2": false,
     "next_day_unchanged": 44,
     "chat_current_article": "docs/teaching/daily/day-43/chat-r2.md"

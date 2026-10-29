@@ -1,0 +1,16 @@
+{
+  "relative_links_checked": 664,
+  "missing": [],
+  "progression": {
+    "docs/learning-state.json": {
+      "next_day_equal": true,
+      "last_full_comparison_equal": true,
+      "makeup_queue_equal": true
+    },
+    "docs/teaching/current/manifest.json": {
+      "next_day_equal": true,
+      "last_full_comparison_equal": true,
+      "makeup_queue_equal": true
+    }
+  }
+}
