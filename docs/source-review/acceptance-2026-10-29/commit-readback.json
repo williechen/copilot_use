@@ -1,0 +1,512 @@
+[
+  {
+    "commit": "a23cdc3f3d3bba5ee12ce1ef7315be90195ae44e",
+    "parent": "726eaa4fe5118f3bf803831b837e3b399c5062c5",
+    "files": [
+      {
+        "path": "docs/teaching/daily/day-43/chat-r2.md",
+        "blob": "1eda9fa793d1a96fd2ebc89becc55d22658689ac",
+        "sha256": "2d02327295e7d9c9f9e9fe03f39c2a82fe61fdcbb54942c4cc916b9970193c1c",
+        "bytes": 1608
+      }
+    ]
+  },
+  {
+    "commit": "df0ba26ec25f31ad592342b8f8a44f58e08f0398",
+    "parent": "a23cdc3f3d3bba5ee12ce1ef7315be90195ae44e",
+    "files": [
+      {
+        "path": "README.md",
+        "blob": "6b45f0fe842104be0aeb266309569be8930fba31",
+        "sha256": "7c0907e829d246f2c298b8e2534a44647687b3fdbf52c9c2418306cafd8f9c20",
+        "bytes": 3214
+      },
+      {
+        "path": "docs/FUTURE_WORK.md",
+        "blob": "de1ffbef08f2aa0cf4023ee3fc0e98c5042e131b",
+        "sha256": "4b15eddcf38b0a8813b01d42770df6d4797a8469c26d43ed0ef9a6ace932800e",
+        "bytes": 33565
+      },
+      {
+        "path": "docs/README.md",
+        "blob": "4112643600d5b7a775e8cdab26d86fdcd6e34f04",
+        "sha256": "befa538fac3f7ae7af55bcbd96acea4764a1a1c347a3670550caf4314d7f7c13",
+        "bytes": 2901
+      },
+      {
+        "path": "docs/learning-state.json",
+        "blob": "9d4e83555b5f159521bba4152ced2c7eaf5385a4",
+        "sha256": "48f21d4f429115d3b977fedacb8f03165aff7c84ba3cc31b2618181629ba5a8a",
+        "bytes": 301249
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/README.md",
+        "blob": "ee7448d75a62e84969ef3e06755d0a44b4a174fb",
+        "sha256": "9f030f86203e222f37225a6fb8557e4ba43b7cf7b11ad686f8630da12fc232ce",
+        "bytes": 4712
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/actual-local-db-backups.json",
+        "blob": "d1868814a8a2873e817710c2c22cfd0b2dfd3ad4",
+        "sha256": "a210cccdb61835b15688edeb35378e2a8a8cf997f8f72758f843a057e83d6749",
+        "bytes": 3648
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/actual-local-db-verification.json",
+        "blob": "bf02af7cdf6f968d59f5a814861f7bc52cdf4c26",
+        "sha256": "fd52dfafbab740836eee142c712c277dafb6d062a7ef13d030f4d6136eae879f",
+        "bytes": 4003
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/analytics-build-exit.txt",
+        "blob": "573541ac9702dd3969c9bc859d2b91ec1f7e6e56",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+        "bytes": 2
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/analytics-build.txt",
+        "blob": "4158161459eefab4d9c1533aec21a07ced755e3f",
+        "sha256": "3944ad976c46142476f37a1cba3c88e221ad2430989a30c7e3589bf876efc871",
+        "bytes": 887
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/analytics-pet.csv",
+        "blob": "9dcf32fd8242448587866be392f139b1664abb80",
+        "sha256": "2a33e5efba60a6262686941f3f188c2c271351bcf9cb732c321fe74b855c8e05",
+        "bytes": 61
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/analytics-restore-exit.txt",
+        "blob": "573541ac9702dd3969c9bc859d2b91ec1f7e6e56",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+        "bytes": 2
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/analytics-restore.txt",
+        "blob": "027a1c1c0219fb1963967de00761537d6440b1f3",
+        "sha256": "08c161ae22c9ee289dddcd2b216daa7a27e17a93983d612c5cf5b7d1d26931ff",
+        "bytes": 1327
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/analytics-server-restart.txt",
+        "blob": "465030f70512306c3f4bdd62b1e2595b88b8b1d8",
+        "sha256": "bdb3605859043b203ababb1049c2d6fe96bf0f2a4ca52bf7539478b7daa9b94a",
+        "bytes": 46
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/analytics-server.txt",
+        "blob": "465030f70512306c3f4bdd62b1e2595b88b8b1d8",
+        "sha256": "bdb3605859043b203ababb1049c2d6fe96bf0f2a4ca52bf7539478b7daa9b94a",
+        "bytes": 46
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/analytics-upgrade-exit.txt",
+        "blob": "573541ac9702dd3969c9bc859d2b91ec1f7e6e56",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+        "bytes": 2
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/analytics-upgrade.txt",
+        "blob": "71b1eed7c4a4c09637359281bff08d8076fdd653",
+        "sha256": "a907aea6fd5510ba3f0dcf75652d38d07020d58de9cc6c78b0fa7b4cb9da9f10",
+        "bytes": 2077
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/chat-fix-fmt-final.txt",
+        "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/chat-fix-fmt.txt",
+        "blob": "efa66f5325330ea80c00a2082a77607849fe65ed",
+        "sha256": "55693b83ff92fdc6ab002c32eae2df971f9957697e6fe56469613096259f65aa",
+        "bytes": 534
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/chat-fix-test-exit.txt",
+        "blob": "398050c62c882fa5ebc8d8aaa2e730e70790beeb",
+        "sha256": "39b8dc3fc8b44765c8e6f1adee04c5b465e555ab791cc42d0d9e810d5b64297c",
+        "bytes": 4
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/chat-fix-test-final-exit.txt",
+        "blob": "573541ac9702dd3969c9bc859d2b91ec1f7e6e56",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+        "bytes": 2
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/chat-fix-test-final.txt",
+        "blob": "ff3a36d2a54b34af632b0646d03167ace0c0bafb",
+        "sha256": "d5f66b7dbdb8785932398f1c8d8775591a0a3d03a78e16dc85ff99ddaffcf1ac",
+        "bytes": 3934
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/chat-fix-test.txt",
+        "blob": "1dd4fa9dcaa966254594ceb1ba417bdb40a3ba00",
+        "sha256": "ef2df342475e2ba8ac2085293a68badcb5d05ae068c96daa5ad65122673ee613",
+        "bytes": 1082
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/chat-fixed-gui-build-exit.txt",
+        "blob": "d00491fd7e5bb6fa28c517a0bb32b8b506539d4d",
+        "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+        "bytes": 2
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/chat-fixed-gui-build-final-exit.txt",
+        "blob": "573541ac9702dd3969c9bc859d2b91ec1f7e6e56",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+        "bytes": 2
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/chat-fixed-gui-build-final.txt",
+        "blob": "8b2fa1281cf226d6f77bcb003f1d93a6790ed580",
+        "sha256": "89ccefc46eddc9d8f0d76138069291e42360b0817a34323c12c03194568ac73f",
+        "bytes": 3312
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/chat-fixed-gui-build.txt",
+        "blob": "de05e01eeec318168679e4f250105bd2f77af4cb",
+        "sha256": "ca041361b24ee058b15d1a4b79714e5f0ac89e85564694922bffdcce494b1176",
+        "bytes": 1817
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/chat-fixed-retry-server.txt",
+        "blob": "45c535bf4b9e71d8f23ee672d68dc74d4f023eaf",
+        "sha256": "92a299e712ad10e829ce44e6e616b85408ce3c7ce423c1295e0ac15c060b1eb4",
+        "bytes": 40
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/chat-fixed-server.txt",
+        "blob": "45c535bf4b9e71d8f23ee672d68dc74d4f023eaf",
+        "sha256": "92a299e712ad10e829ce44e6e616b85408ce3c7ce423c1295e0ac15c060b1eb4",
+        "bytes": 40
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/chat-gui-build-exit.txt",
+        "blob": "573541ac9702dd3969c9bc859d2b91ec1f7e6e56",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+        "bytes": 2
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/chat-gui-build.txt",
+        "blob": "479eab3166f6d1b109a1e2cb155b916bd34501e5",
+        "sha256": "f95076c9de522d3d3ba34a9b200116d1e291f82bbfc12c7b7293eec03a92d20b",
+        "bytes": 18548
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/chat-gui-ci-fix.patch",
+        "blob": "0255d2eccd015351d045ee4f2af9b00d7c64b2a3",
+        "sha256": "f755753da72b753686da19edc32f8df7fb7d9f24a3e4ecfcdba107e58a72e35f",
+        "bytes": 4676
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/chat-server.txt",
+        "blob": "45c535bf4b9e71d8f23ee672d68dc74d4f023eaf",
+        "sha256": "92a299e712ad10e829ce44e6e616b85408ce3c7ce423c1295e0ac15c060b1eb4",
+        "bytes": 40
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/chat-upgrade-exit.txt",
+        "blob": "573541ac9702dd3969c9bc859d2b91ec1f7e6e56",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+        "bytes": 2
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/chat-upgrade.txt",
+        "blob": "6e1b05aad8bacdfa018dcdf243657d0a5851717e",
+        "sha256": "c0b1ac285b2e14224706eb3f85eb0cca8b2adbc8eb60940ffff255da5fa1fabe",
+        "bytes": 3001
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/ci-attempt2-log.txt",
+        "blob": "5bbc450f8a4e024a623740c1287056040a8e7a36",
+        "sha256": "3db9eeb41af4824eb3777c876b035a2db58b0661819d203a6c2a895cd2ba336e",
+        "bytes": 66446
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/ci-attempt2.json",
+        "blob": "982bbf34585d08a833cff41bba3cbafd07013920",
+        "sha256": "8c5f86345de28816d1e0054def34b5ccc3dd60323788c646020186dea99e8e59",
+        "bytes": 1229
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/ci-jobs.json",
+        "blob": "069183ee002d1e9b91a7959691e8672b50652eba",
+        "sha256": "d55b4f6c9a807f696c41aa14f14e605266ba80107a550d139bfe590503a0b981",
+        "bytes": 33620
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/ci-rerun-result.json",
+        "blob": "2191ec6721e8fdb61c7e2b41fc66474557b23da0",
+        "sha256": "a522e8cf09e204c08074594a0368eae0427fae970a7f0e1307c4ea6ced9ce081",
+        "bytes": 806
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/ci-runs.json",
+        "blob": "58b3bf27ae9f794ce5752557c2f0f605beb14da0",
+        "sha256": "c095afdc0f9d04bcc6067fd29842cfe4d20320c2fa061398fbd19ebf9ca83438",
+        "bytes": 2604
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/ci-ui-log.txt",
+        "blob": "1b7d8dfd45c80c7ce892a4910da74a75ff583045",
+        "sha256": "38a48192ce070cb0300b07e469a0a55d534ce71d7167fc00a2b5bff720eea649",
+        "bytes": 66446
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/clone.txt",
+        "blob": "d49b35ff589f87e7fc4b9aaa829f11f3c9489448",
+        "sha256": "c9237ad2640549774cd61604a598f7228b47a45fcca604b3bf6483b1646b7ce1",
+        "bytes": 48
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/document-commits.txt",
+        "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/existing_db_probe.rs",
+        "blob": "2a0c737900891ffe5bdacbe5aebf97dafe58d23e",
+        "sha256": "15abe6b19d985b891d833496a71e29e0fb7c645cbfd2830dca2858476da43e35",
+        "bytes": 456
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/gui-scenarios.json",
+        "blob": "875299314b2034eb7d1c16ea2122ae5a1cdfd4a5",
+        "sha256": "ac59336b9c5a6ac608e1aa6831472e78713105423f569aad8b008178e9fdc7e8",
+        "bytes": 1276
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/old-backup-verification.json",
+        "blob": "242c63d6b02370c17357ffe72f7b11a02791365f",
+        "sha256": "4ecc5b195a3278a749e0259a24dc6bd4a664354569cf2ce102f0c073e41696c3",
+        "bytes": 279
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/old-schema-prefix.json",
+        "blob": "8ea7a9808e597a990406fb1401c560481dd0abb5",
+        "sha256": "ca476965845f27d0589089d025eb9a6be96c65c7af9c0e754a71186d6ac70288",
+        "bytes": 1075
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/pet-frontend-build-exit.txt",
+        "blob": "0cfbf08886fca9a91cb753ec8734c84fcbe52c9f",
+        "sha256": "53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3",
+        "bytes": 2
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/pet-frontend-build-final-exit.txt",
+        "blob": "573541ac9702dd3969c9bc859d2b91ec1f7e6e56",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+        "bytes": 2
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/pet-frontend-build-final.txt",
+        "blob": "804be738f31395a7991bc2ca935f8beaa763b82f",
+        "sha256": "133ca414380c0dd333df2edbd48ef94c913cf48a096fa4ac1c72d85bcc20d87e",
+        "bytes": 4368
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/pet-frontend-build.txt",
+        "blob": "06dba062bdf2072b26c7fe780caf64a8352b0c4f",
+        "sha256": "db3a86165db664e0eed862a259bb4427bf0f710967421eda6efba57c2dd44ff5",
+        "bytes": 112
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/pet-native-build-exit.txt",
+        "blob": "573541ac9702dd3969c9bc859d2b91ec1f7e6e56",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+        "bytes": 2
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/pet-native-build.txt",
+        "blob": "b343f623892d20672dec7a92565c715f7d118002",
+        "sha256": "8fbf70b3883ea7613ba757efd588a0a3b94dbb1f398a3967eea91251a1d26cd0",
+        "bytes": 5731
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/pet-trunk-runtime.txt",
+        "blob": "74a73059d580e4f63f1dd7f01642e3bd55fed49e",
+        "sha256": "ab78e13e5130d69cd0b5eb32e03541cb552fffb2ee97b26f19e6e1a106a136cc",
+        "bytes": 159
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/pet-upgrade-exit.txt",
+        "blob": "573541ac9702dd3969c9bc859d2b91ec1f7e6e56",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+        "bytes": 2
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/pet-upgrade.txt",
+        "blob": "8d3e8100aabeb8e0159a1603e6e0ed7c33f5b32f",
+        "sha256": "65eba2239ee2d4eeb0c527c466f66c0017e77776b57f2ff5cc1f6da77a1d0101",
+        "bytes": 694
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/pg_restore_probe.rs",
+        "blob": "bbfa9d27d79fed17cf2c92e894abbb701f9a9434",
+        "sha256": "003574eda66153585f659435f3036e3da1a001f152a63af8a21ee8c2a1d107b0",
+        "bytes": 1279
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/pg_upgrade_probe.rs",
+        "blob": "6726147bb6be5d52b4eef5ab035f412ab79015ac",
+        "sha256": "44649e9d5e45ac8065c42c88c8f9347e3f59d69b117e7975d09f841229284ac8",
+        "bytes": 3014
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/postgres-start.txt",
+        "blob": "0fb0b9795fb4884c3f9d88d91ebb6492510e4ee5",
+        "sha256": "66afd0411ccc09366e99fdd99b85f21899c8d2d064f5835126859618802153ad",
+        "bytes": 52
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/postgres.txt",
+        "blob": "d38bebf4dceab8d889ca2d293d94a4daeb50d696",
+        "sha256": "3b405825b1b0a7cfea3749263dc3848b71e40cfe48c44d6a7665ccb6f3549702",
+        "bytes": 1237
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/schedule-prompt.txt",
+        "blob": "e9e6d293d3089eb797fe684fb9506153db1d9aaa",
+        "sha256": "8b989da0df8554cb736d341cf74daf0fc965518fce50bd28538ee522eb443738",
+        "bytes": 2378
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/schedule-readback.json",
+        "blob": "6d118ee8e3821e4ef429c5a02ce31649faeea126",
+        "sha256": "bf6399cd11ea64594d915f3094d671ac0528238940e72edc4640ef0d2cbeaea0",
+        "bytes": 574
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/server-processes.json",
+        "blob": "cb87b5daefb7d3501206aa45f1907bdbf2690a8c",
+        "sha256": "6e8aa1742015cb248522fd3762950f96340df72c647765b1f18f2c85e72945bb",
+        "bytes": 1609
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/upgrade_probe.rs",
+        "blob": "d01ffa25aec236d1f3e325d57d66548d61efd93a",
+        "sha256": "c3f2128187eb6f09b05e9bcb91a9f14901b961fb6f597cf1a395f1452c05fa73",
+        "bytes": 3112
+      },
+      {
+        "path": "docs/teaching/README.md",
+        "blob": "4b5a0b2f95949320c14f532adff2b3465f33f7ff",
+        "sha256": "5985fcc6d90183c62d75e39bcd4561973216fa03594dca54ec51fb29b5738f4f",
+        "bytes": 2858
+      },
+      {
+        "path": "docs/teaching/analytics/README.md",
+        "blob": "5f3ad4c3c7ad403af9e39fd25b866fbd17064141",
+        "sha256": "aed87d4424e236125c2a46ce2fc1828ccf0d8f9972ef724e327c0725f80e8cc0",
+        "bytes": 8830
+      },
+      {
+        "path": "docs/teaching/chat/README.md",
+        "blob": "2f9d608b6220fa1db0f7651dae0a1bab2b9da444",
+        "sha256": "27ac3ce533d109a4e43101a32f59233cfaf903e51d0d66b6bc08bd18c6d20305",
+        "bytes": 6557
+      },
+      {
+        "path": "docs/teaching/current/ARTICLE_CORRECTIONS.md",
+        "blob": "3cf1237efabe24f54f409fb10f162fa4cb1d17c0",
+        "sha256": "82a01dae70a34130f5c66b09bd4c7a4864d28d164c7d01a3aaeca22cd14dff5b",
+        "bytes": 43117
+      },
+      {
+        "path": "docs/teaching/current/CHAT_ENTRY.md",
+        "blob": "a2fec7859cb1705439bd9ed8fe56906137e3fcb6",
+        "sha256": "f57f18e6183d5c784a9ae7993937a6bd96cd36388f48fa08edd307d55d12fcf8",
+        "bytes": 1374
+      },
+      {
+        "path": "docs/teaching/current/README.md",
+        "blob": "ef81a0601400bcc5f7d1c050357ab5d2afe9ab51",
+        "sha256": "cd3d8eb88445a6f6e1d6d4275e3fd1608e41d84b250401eddf02b48428ddb7d7",
+        "bytes": 1687
+      },
+      {
+        "path": "docs/teaching/current/STATUS.md",
+        "blob": "995c96d0ff6f454f49a98718d7f478a61082f0fa",
+        "sha256": "2d9bb0780af693a03c5d38969f847c4b8bb283d5c2add3bd75a22eceefb20a9f",
+        "bytes": 1654
+      },
+      {
+        "path": "docs/teaching/current/manifest.json",
+        "blob": "a6b0452733fa97d32d9898f9611de250e7218cc0",
+        "sha256": "7e8752157f4d8a84659975e8fdb560234d6dc5bb337bc399825fdecb51059c97",
+        "bytes": 274263
+      },
+      {
+        "path": "docs/teaching/daily/README.md",
+        "blob": "dd08acd14914b2bfa79a1c0a5af992e29cc3d89e",
+        "sha256": "9772135c90647b33ebd6e1a3ed4dc3e4021ad42253204816ee29a04729c93a21",
+        "bytes": 3333
+      },
+      {
+        "path": "docs/teaching/daily/day-43/README.md",
+        "blob": "9b84e9b50eaf194155c875dfd6e6bba68f1efe1e",
+        "sha256": "5dba72e89b94210d79db483a9bcb8ba8816dc708b1a86ba0e4a6cad6dc92ef75",
+        "bytes": 4154
+      },
+      {
+        "path": "docs/teaching/pet/README.md",
+        "blob": "d0f7f50a6a05fc79f52870249a85cfda5dd5f460",
+        "sha256": "0040cab8fa5b7e7258413b052d3b3f5aeecfd768fb460ed7dd2f8eca666e9960",
+        "bytes": 6999
+      },
+      {
+        "path": "docs/teaching/scheduler-instructions-v1.md",
+        "blob": "b265cfe874bb0bf4fedcea1615cc32b1cb07d08d",
+        "sha256": "e4beada463b7fc4a7700eb620f3759a7d120e66c4156a2fb50f969fb0e0bc28c",
+        "bytes": 5417
+      }
+    ]
+  },
+  {
+    "commit": "49bd1c976270b9f7d5d1130745f29804e9160de3",
+    "parent": "df0ba26ec25f31ad592342b8f8a44f58e08f0398",
+    "files": [
+      {
+        "path": "docs/learning-state.json",
+        "blob": "7472222d4fce619d2f8051d1a3f7db93e500167f",
+        "sha256": "f92b3ac1f8ec909b5858ad090eaa98521c32fb87b45a449bea4ab46b0bf36eb2",
+        "bytes": 301266
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/README.md",
+        "blob": "3edb3fdce1525d4264353815c03f8d9e4140842f",
+        "sha256": "1e6d8645594289158490b16754d26a21134a37300f81c0af317685eea93eb820",
+        "bytes": 5119
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/links-and-progression.json",
+        "blob": "d869dd5a540fbd2403c10dd7bf957c89dc054355",
+        "sha256": "1ce2a8a436ee80d3078da53fee02a1de19644b5c8b339ab9efe1d61b5eb2078e",
+        "bytes": 378
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/patchcheck-commands.json",
+        "blob": "855586eab99f3cfdf4261f4eabbd212d9f16a803",
+        "sha256": "c3439064a01a6e4e1c98eb6d197593c36f3d05b144d81033e2779b8f5950b102",
+        "bytes": 7104
+      },
+      {
+        "path": "docs/source-review/acceptance-2026-10-29/remaining-acceptance.json",
+        "blob": "d8e27421da2b19f3ba50435a7cc2e91df925d694",
+        "sha256": "d8ddb86d32620c3a98cbe225359db7bd4fa8b2d67ef7830c42af9e6e309541be",
+        "bytes": 307
+      },
+      {
+        "path": "docs/teaching/current/manifest.json",
+        "blob": "a7a78436da698483c9adb7a5bd02ab10ea44ffe1",
+        "sha256": "77f4cc95d1cecd51b683beab3997912a84fe49d7120e881c1e96866837a9c4e4",
+        "bytes": 274280
+      }
+    ]
+  }
+]
