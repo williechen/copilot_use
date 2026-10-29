@@ -1,9 +1,0 @@
-   Compiling stats-server v0.2.22 (/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-3/work/analytics23/apps/stats_server)
-error[E0432]: unresolved import `stats_server::password_login`
- --> apps/stats_server/tests/day23_password_login.rs:4:45
-  |
-4 | use stats_server::{IngestState,IngestTokens,password_login};
-  |                                             ^^^^^^^^^^^^^^ no `password_login` in the root
-
-For more information about this error, try `rustc --explain E0432`.
-error: could not compile `stats-server` (test "day23_password_login") due to 1 previous error

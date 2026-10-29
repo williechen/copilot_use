@@ -1,8 +1,0 @@
-{
-  "old_password_status": 401,
-  "new_password_login_status": 303,
-  "login_location": "/dashboard",
-  "dashboard_status": 200,
-  "subsequent_change_page_status": 303,
-  "subsequent_change_location": "/dashboard"
-}

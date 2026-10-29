@@ -1,9 +1,0 @@
-{
-  "scope": "supersedes original scan validation after phase-plan correction",
-  "original_article_files_unchanged": 157,
-  "local_calendar_and_next_day_unchanged": true,
-  "phase_count": 13,
-  "source_context_only": true,
-  "product_acceptance_changed": false,
-  "details": "../phase-plan-merge-2026-10-25/VALIDATION.json"
-}

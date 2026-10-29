@@ -1,8 +1,0 @@
-2026-10-29 19:31:39.239 CST [19004] LOG:  starting PostgreSQL 18.6 (Ubuntu 18.6-1.pgdg26.04+2) on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0, 64-bit
-2026-10-29 19:31:39.239 CST [19004] LOG:  listening on IPv4 address "127.0.0.1", port 55482
-2026-10-29 19:31:39.291 CST [19016] LOG:  database system was shut down at 2026-10-29 19:19:07 CST
-2026-10-29 19:31:39.362 CST [19004] LOG:  database system is ready to accept connections
-2026-10-29 19:36:39.414 CST [19014] LOG:  checkpoint starting: time
-2026-10-29 19:41:14.180 CST [19014] LOG:  checkpoint complete: wrote 3972 buffers (24.2%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 2 recycled; write=269.548 s, sync=5.123 s, total=274.778 s; sync files=1414, longest=0.272 s, average=0.004 s; distance=18518 kB, estimate=18518 kB; lsn=0/21189020, redo lsn=0/21188F90
-2026-10-29 19:41:39.209 CST [19014] LOG:  checkpoint starting: time
-2026-10-29 19:41:39.504 CST [19014] LOG:  checkpoint complete: wrote 2 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.243 s, sync=0.015 s, total=0.295 s; sync files=3, longest=0.009 s, average=0.005 s; distance=2 kB, estimate=16666 kB; lsn=0/21189810, redo lsn=0/211897B8

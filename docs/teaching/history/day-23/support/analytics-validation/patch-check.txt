@@ -1,2 +1,0 @@
-PASS: git apply --check on f38360cd537daf6dc20e1d3868221bb56390cc7c archive
-SHA256 6b88084652f94a4b5f402e3215f78d74baea9a3699af36873a6f6398c0a0bc66

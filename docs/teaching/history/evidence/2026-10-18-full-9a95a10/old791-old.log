@@ -1,6 +1,0 @@
-Applied 20260930034455/migrate crate rooms (26.556275ms)
-Applied 20261007084321/migrate create messages (24.508541ms)
-Applied 20261018073931/migrate create auth user (24.790402ms)
-Applied 20261018091733/migrate create pet (28.417856ms)
-Applied 20261018094242/migrate create ai person (25.587351ms)
-Applied 20261018095626/migrate create pet owner (29.630114ms)

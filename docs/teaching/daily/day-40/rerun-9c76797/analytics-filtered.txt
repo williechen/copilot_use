@@ -1,3 +1,0 @@
-Browser tab: 3, Title: "Analytics 管理後台", URL: "http://127.0.0.1:3100/dashboard?source=web_chat&event_type=chat.message.persisted".
-There has been no change in the accessibility tree.
-The focused UI element is 1 AXWebArea Analytics 管理後台, URL: 127.0.0.1:3100/dashboard?source=web_chat&event_type=chat.message.persisted

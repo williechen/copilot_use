@@ -1,3 +1,0 @@
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.25s
-     Running `work/acceptance-product/chat_apps/target/debug/examples/upgrade_probe pet /home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/acceptance-old/pet /home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/acceptance-product/pet_apps/migrations /home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/acceptance-db`
-pet: populated prior-schema copy upgrade PASS; data=既有寵物:cat:1; idempotent PASS; migrations=3; checksum drift rejected=migration 20261018091733 was previously applied but has been modified

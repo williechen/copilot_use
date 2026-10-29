@@ -1,1 +1,0 @@
-Observed: cargo run --locked -p stats-server --bin bootstrap_admin, ANALYTICS_DATABASE_URL points only to dedicated day23_smoke DB on127.0.0.1:55439. Entered matching lesson-only fixture password twice through no-echo TTY. Exit0; one administrator created; updated message states initial session cannot enter dashboard. No product credentials used.

@@ -1,9 +1,0 @@
-{
-  "chat": {
-    "account": "rerunlearner",
-    "fixture_creation": "POST /signup via backend before GUI",
-    "status": 200,
-    "sqlite": "/var/tmp/codex-day40-rerun-chat.sqlite"
-  },
-  "purpose": "disposable local browser test only"
-}

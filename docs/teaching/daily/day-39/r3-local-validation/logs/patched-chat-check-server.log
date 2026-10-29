@@ -1,7 +1,0 @@
-    Checking chat-domain v0.2.37 (/home/willie/Documents/Codex/2026-10-26/referenced-chatgpt-conversation-this-is-an/work/chat/chat_apps/chat_domain)
-    Checking chat-application v0.2.37 (/home/willie/Documents/Codex/2026-10-26/referenced-chatgpt-conversation-this-is-an/work/chat/chat_apps/chat_application)
-    Checking shared v0.2.35 (/home/willie/Documents/Codex/2026-10-26/referenced-chatgpt-conversation-this-is-an/work/chat/crates/shared)
-    Checking chat-persistence v0.2.37 (/home/willie/Documents/Codex/2026-10-26/referenced-chatgpt-conversation-this-is-an/work/chat/chat_apps/chat_persistence)
-    Checking chat-ui v0.2.37 (/home/willie/Documents/Codex/2026-10-26/referenced-chatgpt-conversation-this-is-an/work/chat/chat_apps/chat_ui)
-    Checking chat-server v0.2.37 (/home/willie/Documents/Codex/2026-10-26/referenced-chatgpt-conversation-this-is-an/work/chat/chat_apps/chat_server)
-    Finished `dev` profile [unoptimized] target(s) in 1.04s

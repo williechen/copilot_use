@@ -1,7 +1,0 @@
-{
-  "native_startup_list": true,
-  "real_ui_ipc_sqlite_create": true,
-  "control_select_sqlite": true,
-  "life_identity_event_and_tortoise": true,
-  "process_restart_life_identity": true
-}

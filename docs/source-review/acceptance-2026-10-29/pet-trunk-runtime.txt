@@ -1,1 +1,0 @@
-/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/outputs/acceptance-2026-10-29/啟動隔離Pet驗收.sh: 6: trunk: not found

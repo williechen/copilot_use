@@ -1,7 +1,0 @@
-0 git clone --no-hardlinks /home/willie/Documents/rust_ai_ring /home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-20261030-chat-fix
-0 cargo fmt --all --manifest-path chat_apps/Cargo.toml
-0 git apply --reverse /home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/outputs/day43-2026-10-30/chat-fix/chat-ssr-imports-d2612fc.patch
-0 git apply --check /home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/outputs/day43-2026-10-30/chat-fix/chat-ssr-imports-d2612fc.patch
-0 git apply /home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/outputs/day43-2026-10-30/chat-fix/chat-ssr-imports-d2612fc.patch
-0 cargo test --offline --locked --manifest-path chat_apps/Cargo.toml -p chat-ui --features ssr
-0 cargo fmt --all --manifest-path chat_apps/Cargo.toml -- --check

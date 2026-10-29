@@ -1,1 +1,0 @@
-PASS: dedicated PostgreSQL18.6 on127.0.0.1:55439 stopped; stats-server smoke process on3100 interrupted; existing5432 service untouched.

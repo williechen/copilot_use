@@ -1,6 +1,0 @@
-{
-  "source_sha": "8b882696c5548accb9d98a32b27db35e11109c74",
-  "binary_sha256": "d7932987dcbd480898c326af8730162da005790acd5d934d6eb51cd22cbcee62",
-  "evidence_scope": "human native GUI reports corroborated by read-only database snapshots and process FD; not automated native UI control",
-  "old_run_retroactively_passed": false
-}
