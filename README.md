@@ -1,14 +1,16 @@
 # copilot_use｜三專案教學與工程文件
 
+**2026-10-29：已正式發布 [Day43 三案教學](docs/teaching/daily/day-43/README.md)（Gate1 文件交付）；產品 Day43 patch 尚未套用，Gate2 未驗收。三案下一待發布篇為 Day44。**
+
 維護 Chat、Desktop Pet、Analytics 的需求、TDD 教學、重構方案、問題追蹤與驗證證據。產品程式與 CI 位於 [williechen/rust_ai_ring](https://github.com/williechen/rust_ai_ring)。
 
 ## 專案與最新文章
 
 | 專案 | 專案首頁 | 最新文章 | 問題主線 |
 |---|---|---|---|
-| Chat | [專案大綱](docs/teaching/chat/README.md) | [Day42 r3](docs/teaching/daily/day-42/chat-r3.md) | [原完成條件](docs/FUTURE_WORK.md#chat-auth) |
-| Pet | [專案大綱](docs/teaching/pet/README.md) | [Day42 r3](docs/teaching/daily/day-42/pet-r3.md) | [原完成條件](docs/FUTURE_WORK.md#pet-lifecycle) |
-| Analytics | [專案大綱](docs/teaching/analytics/README.md) | [Day42 r2](docs/teaching/daily/day-42/analytics-r2.md) | [原完成條件](docs/FUTURE_WORK.md#analytics-auth) |
+| Chat | [專案大綱](docs/teaching/chat/README.md) | [Day43](docs/teaching/daily/day-43/chat.md) | [原完成條件](docs/FUTURE_WORK.md#chat-auth) |
+| Pet | [專案大綱](docs/teaching/pet/README.md) | [Day43](docs/teaching/daily/day-43/pet.md) | [原完成條件](docs/FUTURE_WORK.md#pet-lifecycle) |
+| Analytics | [專案大綱](docs/teaching/analytics/README.md) | [Day43](docs/teaching/daily/day-43/analytics.md) | [原完成條件](docs/FUTURE_WORK.md#analytics-auth) |
 
 ## 目前驗證
 
