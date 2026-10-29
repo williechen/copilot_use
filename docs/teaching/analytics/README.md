@@ -1,11 +1,11 @@
 # Analytics｜教學與問題入口
 
-產品固定來源 `c6708c42f21ac919e57a379848b4977d27a1c3d6`；next_day 42，完整 Gate2 尚未通過。
+產品固定來源 `c6708c42f21ac919e57a379848b4977d27a1c3d6`；下一待發布篇 Day44；Day43 文件已正式發布，但產品 Day43 patch 未套用、Gate2 尚未通過。
 
 | 閱讀目的 | 入口 |
 |---|---|
-| 最新 Day42：事件類型明細與精確篩選 | [目前修訂](../daily/day-42/analytics-r2.md) |
-| 功能／Refactor 完整原文與附件 | [原始 Day42](../daily/day-42/analytics.md) |
+| **最新 Day43：來源切換保留事件類型／計數標籤搬層** | [正式文章](../daily/day-43/analytics.md) · [完整 Refactor / Green patch](../daily/day-43/README.md) |
+| Day42 原始教學與舊驗證 | [原始 Day42](../daily/day-42/analytics.md) · [修訂索引](../daily/day-42/README.md) |
 | 本案問題與原完成條件 | [問題追蹤](../../FUTURE_WORK.md#analytics-auth) |
 | 目前測試及驗收限制 | [功能狀態](../current/STATUS.md) · [本輪原始命令與結果](../../source-review/local-validation-2026-10-28-c6708c4/README.md) |
 | 文章勘誤與舊文判讀 | [問題文章索引](../current/ARTICLE_CORRECTIONS.md) |
