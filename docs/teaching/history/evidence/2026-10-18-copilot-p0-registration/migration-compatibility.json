@@ -1,0 +1,14 @@
+[
+  {
+    "case": "valid",
+    "passed": true,
+    "exit": 0,
+    "output": "Applied 202610180001/migrate registration identity (50.722535ms)\n"
+  },
+  {
+    "case": "case-collision",
+    "passed": true,
+    "exit": 1,
+    "output": "error: while executing migration 202610180001: error returned from database: (code: 2067) UNIQUE constraint failed: chat_users.username\n"
+  }
+]

@@ -1,0 +1,1230 @@
+{
+  "lessons": [
+    {
+      "day": 2,
+      "project": "analytics",
+      "entry": "docs/teaching/history/day-02/analytics/README.md",
+      "article": "docs/teaching/history/day-02/analytics/notion/3f4e51d4509381bcbddccfba35f4b329.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-02/analytics/3f4e51d4509381bcbddccfba35f4b329.md",
+          "path": "docs/teaching/history/day-02/analytics/notion/3f4e51d4509381bcbddccfba35f4b329.md"
+        }
+      ]
+    },
+    {
+      "day": 2,
+      "project": "chat",
+      "entry": "docs/teaching/history/day-02/chat/README.md",
+      "article": "docs/teaching/history/day-02/chat/notion/3f4e51d450938170954ff09378afc11a.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-02/chat/3f4e51d450938170954ff09378afc11a.md",
+          "path": "docs/teaching/history/day-02/chat/notion/3f4e51d450938170954ff09378afc11a.md"
+        }
+      ]
+    },
+    {
+      "day": 2,
+      "project": "pet",
+      "entry": "docs/teaching/history/day-02/pet/README.md",
+      "article": "docs/teaching/history/day-02/pet/notion/3f4e51d4509381e7ac5cea661af8c67d.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-02/pet/3f4e51d4509381e7ac5cea661af8c67d.md",
+          "path": "docs/teaching/history/day-02/pet/notion/3f4e51d4509381e7ac5cea661af8c67d.md"
+        }
+      ]
+    },
+    {
+      "day": 3,
+      "project": "analytics",
+      "entry": "docs/teaching/history/day-03/analytics/README.md",
+      "article": "docs/teaching/history/day-03/analytics/notion/3f4e51d4509381ebb781cf9b2f2f0db6.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-03/analytics/3f4e51d4509381ebb781cf9b2f2f0db6.md",
+          "path": "docs/teaching/history/day-03/analytics/notion/3f4e51d4509381ebb781cf9b2f2f0db6.md"
+        }
+      ]
+    },
+    {
+      "day": 3,
+      "project": "chat",
+      "entry": "docs/teaching/history/day-03/chat/README.md",
+      "article": "docs/teaching/history/day-03/chat/notion/3f4e51d45093819c975fc886e09fe861.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-03/chat/3f4e51d45093819c975fc886e09fe861.md",
+          "path": "docs/teaching/history/day-03/chat/notion/3f4e51d45093819c975fc886e09fe861.md"
+        }
+      ]
+    },
+    {
+      "day": 3,
+      "project": "pet",
+      "entry": "docs/teaching/history/day-03/pet/README.md",
+      "article": "docs/teaching/history/day-03/pet/notion/3f4e51d4509381c482a3c68721761dee.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-03/pet/3f4e51d4509381c482a3c68721761dee.md",
+          "path": "docs/teaching/history/day-03/pet/notion/3f4e51d4509381c482a3c68721761dee.md"
+        }
+      ]
+    },
+    {
+      "day": 4,
+      "project": "analytics",
+      "entry": "docs/teaching/history/day-04/analytics/README.md",
+      "article": "docs/teaching/history/day-04/analytics/notion/3f5e51d45093811a8ac5dafd3cd3bbcc.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-04/analytics/3f5e51d45093811a8ac5dafd3cd3bbcc.md",
+          "path": "docs/teaching/history/day-04/analytics/notion/3f5e51d45093811a8ac5dafd3cd3bbcc.md"
+        }
+      ]
+    },
+    {
+      "day": 4,
+      "project": "chat",
+      "entry": "docs/teaching/history/day-04/chat/README.md",
+      "article": "docs/teaching/history/day-04/chat/notion/3f5e51d45093811ab62acc4bc8fc83fa.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-04/chat/3f5e51d45093811ab62acc4bc8fc83fa.md",
+          "path": "docs/teaching/history/day-04/chat/notion/3f5e51d45093811ab62acc4bc8fc83fa.md"
+        }
+      ]
+    },
+    {
+      "day": 4,
+      "project": "pet",
+      "entry": "docs/teaching/history/day-04/pet/README.md",
+      "article": "docs/teaching/history/day-04/pet/notion/3f5e51d4509381ebadf2d9adc6210e80.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-04/pet/3f5e51d4509381ebadf2d9adc6210e80.md",
+          "path": "docs/teaching/history/day-04/pet/notion/3f5e51d4509381ebadf2d9adc6210e80.md"
+        }
+      ]
+    },
+    {
+      "day": 5,
+      "project": "analytics",
+      "entry": "docs/teaching/history/day-05/analytics/README.md",
+      "article": "docs/teaching/history/day-05/analytics/notion/3f5e51d45093813cabb7e6a48ee3a0f0.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-05/analytics/3f5e51d45093813cabb7e6a48ee3a0f0.md",
+          "path": "docs/teaching/history/day-05/analytics/notion/3f5e51d45093813cabb7e6a48ee3a0f0.md"
+        }
+      ]
+    },
+    {
+      "day": 5,
+      "project": "chat",
+      "entry": "docs/teaching/history/day-05/chat/README.md",
+      "article": "docs/teaching/history/day-05/chat/notion/3f5e51d45093817e93b6ea7c37c3852e.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-05/chat/3f5e51d45093817e93b6ea7c37c3852e.md",
+          "path": "docs/teaching/history/day-05/chat/notion/3f5e51d45093817e93b6ea7c37c3852e.md"
+        }
+      ]
+    },
+    {
+      "day": 5,
+      "project": "pet",
+      "entry": "docs/teaching/history/day-05/pet/README.md",
+      "article": "docs/teaching/history/day-05/pet/notion/3f5e51d4509381739b61d517b0772094.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-05/pet/3f5e51d4509381739b61d517b0772094.md",
+          "path": "docs/teaching/history/day-05/pet/notion/3f5e51d4509381739b61d517b0772094.md"
+        }
+      ]
+    },
+    {
+      "day": 6,
+      "project": "analytics",
+      "entry": "docs/teaching/history/day-06/analytics/README.md",
+      "article": "docs/teaching/history/day-06/analytics/notion/3f5e51d450938160a376fde5e2fad496.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-06/analytics/3f5e51d450938160a376fde5e2fad496.md",
+          "path": "docs/teaching/history/day-06/analytics/notion/3f5e51d450938160a376fde5e2fad496.md"
+        }
+      ]
+    },
+    {
+      "day": 6,
+      "project": "chat",
+      "entry": "docs/teaching/history/day-06/chat/README.md",
+      "article": "docs/teaching/history/day-06/chat/notion/3f5e51d45093818ab246f8fcdd0b39f6.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-06/chat/3f5e51d45093818ab246f8fcdd0b39f6.md",
+          "path": "docs/teaching/history/day-06/chat/notion/3f5e51d45093818ab246f8fcdd0b39f6.md"
+        }
+      ]
+    },
+    {
+      "day": 6,
+      "project": "pet",
+      "entry": "docs/teaching/history/day-06/pet/README.md",
+      "article": "docs/teaching/history/day-06/pet/notion/3f5e51d4509381f48e6ac9a9d7dd758a.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-06/pet/3f5e51d4509381f48e6ac9a9d7dd758a.md",
+          "path": "docs/teaching/history/day-06/pet/notion/3f5e51d4509381f48e6ac9a9d7dd758a.md"
+        }
+      ]
+    },
+    {
+      "day": 7,
+      "project": "analytics",
+      "entry": "docs/teaching/history/day-07/analytics/README.md",
+      "article": "docs/teaching/history/day-07/analytics/notion/3f5e51d450938138a33ddadedb5a5e98.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-07/analytics/3f5e51d450938138a33ddadedb5a5e98.md",
+          "path": "docs/teaching/history/day-07/analytics/notion/3f5e51d450938138a33ddadedb5a5e98.md"
+        }
+      ]
+    },
+    {
+      "day": 7,
+      "project": "chat",
+      "entry": "docs/teaching/history/day-07/chat/README.md",
+      "article": "docs/teaching/history/day-07/chat/notion/3f5e51d45093815c82c7e32b73b567fa.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-07/chat/3f5e51d45093815c82c7e32b73b567fa.md",
+          "path": "docs/teaching/history/day-07/chat/notion/3f5e51d45093815c82c7e32b73b567fa.md"
+        }
+      ]
+    },
+    {
+      "day": 7,
+      "project": "pet",
+      "entry": "docs/teaching/history/day-07/pet/README.md",
+      "article": "docs/teaching/history/day-07/pet/notion/3f5e51d4509381cd8d7efeb14bfc1b45.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-07/pet/3f5e51d4509381cd8d7efeb14bfc1b45.md",
+          "path": "docs/teaching/history/day-07/pet/notion/3f5e51d4509381cd8d7efeb14bfc1b45.md"
+        }
+      ]
+    },
+    {
+      "day": 8,
+      "project": "analytics",
+      "entry": "docs/teaching/history/day-08/analytics/README.md",
+      "article": "docs/teaching/history/day-08/analytics/notion/3f5e51d4509381f98c33c2df7ab97663.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-08/analytics/3f5e51d4509381f98c33c2df7ab97663.md",
+          "path": "docs/teaching/history/day-08/analytics/notion/3f5e51d4509381f98c33c2df7ab97663.md"
+        }
+      ]
+    },
+    {
+      "day": 8,
+      "project": "chat",
+      "entry": "docs/teaching/history/day-08/chat/README.md",
+      "article": "docs/teaching/history/day-08/chat/notion/3f5e51d45093814cb540cf6772e9b8d2.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-08/chat/3f5e51d45093814cb540cf6772e9b8d2.md",
+          "path": "docs/teaching/history/day-08/chat/notion/3f5e51d45093814cb540cf6772e9b8d2.md"
+        }
+      ]
+    },
+    {
+      "day": 8,
+      "project": "pet",
+      "entry": "docs/teaching/history/day-08/pet/README.md",
+      "article": "docs/teaching/history/day-08/pet/notion/3f5e51d450938123b43be0fe0b543ade.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-08/pet/3f5e51d450938123b43be0fe0b543ade.md",
+          "path": "docs/teaching/history/day-08/pet/notion/3f5e51d450938123b43be0fe0b543ade.md"
+        }
+      ]
+    },
+    {
+      "day": 9,
+      "project": "analytics",
+      "entry": "docs/teaching/history/day-09/analytics/README.md",
+      "article": "docs/teaching/history/day-09/analytics/notion/3f8e51d45093810d830ef3fd40e419f0.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-09/analytics/3f8e51d45093810d830ef3fd40e419f0.md",
+          "path": "docs/teaching/history/day-09/analytics/notion/3f8e51d45093810d830ef3fd40e419f0.md"
+        }
+      ]
+    },
+    {
+      "day": 9,
+      "project": "chat",
+      "entry": "docs/teaching/history/day-09/chat/README.md",
+      "article": "docs/teaching/history/day-09/chat/notion/3f8e51d45093814b992eea570411bd7d.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-09/chat/3f8e51d45093814b992eea570411bd7d.md",
+          "path": "docs/teaching/history/day-09/chat/notion/3f8e51d45093814b992eea570411bd7d.md"
+        }
+      ]
+    },
+    {
+      "day": 9,
+      "project": "pet",
+      "entry": "docs/teaching/history/day-09/pet/README.md",
+      "article": "docs/teaching/history/day-09/pet/notion/3f8e51d4509381c3b989f2365fd0c0af.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-09/pet/3f8e51d4509381c3b989f2365fd0c0af.md",
+          "path": "docs/teaching/history/day-09/pet/notion/3f8e51d4509381c3b989f2365fd0c0af.md"
+        }
+      ]
+    },
+    {
+      "day": 10,
+      "project": "analytics",
+      "entry": "docs/teaching/history/day-10/analytics/README.md",
+      "article": "docs/teaching/history/day-10/analytics/notion/3f9e51d4509381269984c5f49a429b5d.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-10/analytics/3f9e51d4509381269984c5f49a429b5d.md",
+          "path": "docs/teaching/history/day-10/analytics/notion/3f9e51d4509381269984c5f49a429b5d.md"
+        }
+      ]
+    },
+    {
+      "day": 10,
+      "project": "chat",
+      "entry": "docs/teaching/history/day-10/chat/README.md",
+      "article": "docs/teaching/history/day-10/chat/notion/3f9e51d45093818a849dd8b1fbf2c045.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-10/chat/3f9e51d45093818a849dd8b1fbf2c045.md",
+          "path": "docs/teaching/history/day-10/chat/notion/3f9e51d45093818a849dd8b1fbf2c045.md"
+        }
+      ]
+    },
+    {
+      "day": 10,
+      "project": "pet",
+      "entry": "docs/teaching/history/day-10/pet/README.md",
+      "article": "docs/teaching/history/day-10/pet/notion/3f9e51d4509381f7ab32d0dc8b389a86.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-10/pet/3f9e51d4509381f7ab32d0dc8b389a86.md",
+          "path": "docs/teaching/history/day-10/pet/notion/3f9e51d4509381f7ab32d0dc8b389a86.md"
+        }
+      ]
+    },
+    {
+      "day": 11,
+      "project": "analytics",
+      "entry": "docs/teaching/history/day-11/analytics/README.md",
+      "article": "docs/teaching/history/day-11/analytics/notion/3f9e51d45093814a8054d44c4ff9fa55.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-11/analytics/3f9e51d45093814a8054d44c4ff9fa55.md",
+          "path": "docs/teaching/history/day-11/analytics/notion/3f9e51d45093814a8054d44c4ff9fa55.md"
+        }
+      ]
+    },
+    {
+      "day": 11,
+      "project": "chat",
+      "entry": "docs/teaching/history/day-11/chat/README.md",
+      "article": "docs/teaching/history/day-11/chat/notion/3f9e51d4509381508c0dd3ca22cf5df7.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-11/chat/3f9e51d4509381508c0dd3ca22cf5df7.md",
+          "path": "docs/teaching/history/day-11/chat/notion/3f9e51d4509381508c0dd3ca22cf5df7.md"
+        }
+      ]
+    },
+    {
+      "day": 11,
+      "project": "pet",
+      "entry": "docs/teaching/history/day-11/pet/README.md",
+      "article": "docs/teaching/history/day-11/pet/notion/3f9e51d450938152a147c931e3e945be.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-11/pet/3f9e51d450938152a147c931e3e945be.md",
+          "path": "docs/teaching/history/day-11/pet/notion/3f9e51d450938152a147c931e3e945be.md"
+        }
+      ]
+    },
+    {
+      "day": 12,
+      "project": "analytics",
+      "entry": "docs/teaching/history/day-12/analytics/README.md",
+      "article": "docs/teaching/history/day-12/analytics/notion/3fae51d4509381ebb1e9f8482b5bf44e.md",
+      "sources": [
+        {
+          "old": "docs/teaching/archive/day-12/ANALYTICS.md",
+          "path": "docs/teaching/history/day-12/archive/ANALYTICS.md"
+        },
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-12/analytics/3fae51d4509381ebb1e9f8482b5bf44e.md",
+          "path": "docs/teaching/history/day-12/analytics/notion/3fae51d4509381ebb1e9f8482b5bf44e.md"
+        }
+      ]
+    },
+    {
+      "day": 12,
+      "project": "chat",
+      "entry": "docs/teaching/history/day-12/chat/README.md",
+      "article": "docs/teaching/history/day-12/chat/notion/3fae51d45093812bbf88c3e7f51d6522.md",
+      "sources": [
+        {
+          "old": "docs/teaching/archive/day-12/CHAT.md",
+          "path": "docs/teaching/history/day-12/archive/CHAT.md"
+        },
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-12/chat/3fae51d45093812bbf88c3e7f51d6522.md",
+          "path": "docs/teaching/history/day-12/chat/notion/3fae51d45093812bbf88c3e7f51d6522.md"
+        }
+      ]
+    },
+    {
+      "day": 12,
+      "project": "pet",
+      "entry": "docs/teaching/history/day-12/pet/README.md",
+      "article": "docs/teaching/history/day-12/pet/notion/3fae51d4509381d0a80ddbbaf251fb03.md",
+      "sources": [
+        {
+          "old": "docs/teaching/archive/day-12/PET.md",
+          "path": "docs/teaching/history/day-12/archive/PET.md"
+        },
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-12/pet/3fae51d4509381d0a80ddbbaf251fb03.md",
+          "path": "docs/teaching/history/day-12/pet/notion/3fae51d4509381d0a80ddbbaf251fb03.md"
+        }
+      ]
+    },
+    {
+      "day": 13,
+      "project": "analytics",
+      "entry": "docs/teaching/history/day-13/analytics/README.md",
+      "article": "docs/teaching/history/day-13/analytics/notion/3fae51d4509381808a9cd813423d52d1.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-13/analytics/3fae51d4509381808a9cd813423d52d1.md",
+          "path": "docs/teaching/history/day-13/analytics/notion/3fae51d4509381808a9cd813423d52d1.md"
+        }
+      ]
+    },
+    {
+      "day": 13,
+      "project": "chat",
+      "entry": "docs/teaching/history/day-13/chat/README.md",
+      "article": "docs/teaching/history/day-13/chat/notion/3fae51d4509381e499e5e02cfba58336.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-13/chat/3fae51d4509381e499e5e02cfba58336.md",
+          "path": "docs/teaching/history/day-13/chat/notion/3fae51d4509381e499e5e02cfba58336.md"
+        }
+      ]
+    },
+    {
+      "day": 13,
+      "project": "pet",
+      "entry": "docs/teaching/history/day-13/pet/README.md",
+      "article": "docs/teaching/history/day-13/pet/notion/3fae51d45093814dbdabee6deac48554.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-13/pet/3fae51d45093814dbdabee6deac48554.md",
+          "path": "docs/teaching/history/day-13/pet/notion/3fae51d45093814dbdabee6deac48554.md"
+        }
+      ]
+    },
+    {
+      "day": 14,
+      "project": "analytics",
+      "entry": "docs/teaching/history/day-14/analytics/README.md",
+      "article": "docs/teaching/history/day-14/analytics/notion/3fbe51d4509381f2a9a2e4b608706eea.md",
+      "sources": [
+        {
+          "old": "docs/teaching/archive/day-14/ANALYTICS.md",
+          "path": "docs/teaching/history/day-14/archive/ANALYTICS.md"
+        },
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-14/analytics/3fbe51d4509381f2a9a2e4b608706eea.md",
+          "path": "docs/teaching/history/day-14/analytics/notion/3fbe51d4509381f2a9a2e4b608706eea.md"
+        }
+      ]
+    },
+    {
+      "day": 14,
+      "project": "chat",
+      "entry": "docs/teaching/history/day-14/chat/README.md",
+      "article": "docs/teaching/history/day-14/chat/notion/3fbe51d450938149af5dd68abc6109bd.md",
+      "sources": [
+        {
+          "old": "docs/teaching/archive/day-14/CHAT.md",
+          "path": "docs/teaching/history/day-14/archive/CHAT.md"
+        },
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-14/chat/3fbe51d450938149af5dd68abc6109bd.md",
+          "path": "docs/teaching/history/day-14/chat/notion/3fbe51d450938149af5dd68abc6109bd.md"
+        }
+      ]
+    },
+    {
+      "day": 14,
+      "project": "pet",
+      "entry": "docs/teaching/history/day-14/pet/README.md",
+      "article": "docs/teaching/history/day-14/pet/notion/3fbe51d4509381e484f4eb9e1f98fc68.md",
+      "sources": [
+        {
+          "old": "docs/teaching/archive/day-14/PET.md",
+          "path": "docs/teaching/history/day-14/archive/PET.md"
+        },
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-14/pet/3fbe51d4509381e484f4eb9e1f98fc68.md",
+          "path": "docs/teaching/history/day-14/pet/notion/3fbe51d4509381e484f4eb9e1f98fc68.md"
+        }
+      ]
+    },
+    {
+      "day": 15,
+      "project": "analytics",
+      "entry": "docs/teaching/history/day-15/analytics/README.md",
+      "article": "docs/teaching/history/day-15/analytics/notion/3fbe51d4509381319460de180d9e173d.md",
+      "sources": [
+        {
+          "old": "docs/teaching/archive/day-15/ANALYTICS.md",
+          "path": "docs/teaching/history/day-15/archive/ANALYTICS.md"
+        },
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-15/analytics/3fbe51d4509381319460de180d9e173d.md",
+          "path": "docs/teaching/history/day-15/analytics/notion/3fbe51d4509381319460de180d9e173d.md"
+        }
+      ]
+    },
+    {
+      "day": 15,
+      "project": "chat",
+      "entry": "docs/teaching/history/day-15/chat/README.md",
+      "article": "docs/teaching/history/day-15/chat/notion/3fbe51d450938130a3c0c93171105f3a.md",
+      "sources": [
+        {
+          "old": "docs/teaching/archive/day-15/CHAT.md",
+          "path": "docs/teaching/history/day-15/archive/CHAT.md"
+        },
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-15/chat/3fbe51d450938130a3c0c93171105f3a.md",
+          "path": "docs/teaching/history/day-15/chat/notion/3fbe51d450938130a3c0c93171105f3a.md"
+        }
+      ],
+      "latest_slice_validation": {
+        "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3",
+        "verdict": "部分通過",
+        "report": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/REPORT.md",
+        "original_body_unchanged": true
+      }
+    },
+    {
+      "day": 15,
+      "project": "pet",
+      "entry": "docs/teaching/history/day-15/pet/README.md",
+      "article": "docs/teaching/history/day-15/pet/notion/3fbe51d4509381d68666d3031d1c8011.md",
+      "sources": [
+        {
+          "old": "docs/teaching/archive/day-15/PET.md",
+          "path": "docs/teaching/history/day-15/archive/PET.md"
+        },
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-15/pet/3fbe51d4509381d68666d3031d1c8011.md",
+          "path": "docs/teaching/history/day-15/pet/notion/3fbe51d4509381d68666d3031d1c8011.md"
+        }
+      ]
+    },
+    {
+      "day": 16,
+      "project": "analytics",
+      "entry": "docs/teaching/history/day-16/analytics/README.md",
+      "article": "docs/teaching/history/day-16/analytics/notion/3fce51d45093813fa38ae37a47ae4959.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-16/analytics/3fce51d45093813fa38ae37a47ae4959.md",
+          "path": "docs/teaching/history/day-16/analytics/notion/3fce51d45093813fa38ae37a47ae4959.md"
+        }
+      ]
+    },
+    {
+      "day": 16,
+      "project": "chat",
+      "entry": "docs/teaching/history/day-16/chat/README.md",
+      "article": "docs/teaching/history/day-16/chat/notion/3fce51d450938143a0b9cc9a3f93860e.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-16/chat/3fce51d450938143a0b9cc9a3f93860e.md",
+          "path": "docs/teaching/history/day-16/chat/notion/3fce51d450938143a0b9cc9a3f93860e.md"
+        }
+      ]
+    },
+    {
+      "day": 16,
+      "project": "pet",
+      "entry": "docs/teaching/history/day-16/pet/README.md",
+      "article": "docs/teaching/history/day-16/pet/notion/3fce51d4509381e9aa03d633822eee89.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-16/pet/3fce51d4509381e9aa03d633822eee89.md",
+          "path": "docs/teaching/history/day-16/pet/notion/3fce51d4509381e9aa03d633822eee89.md"
+        }
+      ]
+    },
+    {
+      "day": 17,
+      "project": "analytics",
+      "entry": "docs/teaching/history/day-17/analytics/README.md",
+      "article": "docs/teaching/history/day-17/analytics/notion/3fce51d4509381ea871ec9c92da37c1b.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-17/analytics/3fce51d4509381ea871ec9c92da37c1b.md",
+          "path": "docs/teaching/history/day-17/analytics/notion/3fce51d4509381ea871ec9c92da37c1b.md"
+        }
+      ]
+    },
+    {
+      "day": 17,
+      "project": "chat",
+      "entry": "docs/teaching/history/day-17/chat/README.md",
+      "article": "docs/teaching/history/day-17/chat/notion/3fce51d45093818b913bebb8dab5ab65.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-17/chat/3fce51d45093818b913bebb8dab5ab65.md",
+          "path": "docs/teaching/history/day-17/chat/notion/3fce51d45093818b913bebb8dab5ab65.md"
+        }
+      ],
+      "latest_slice_validation": {
+        "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3",
+        "verdict": "本篇切片通過",
+        "report": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/REPORT.md",
+        "original_body_unchanged": true
+      }
+    },
+    {
+      "day": 17,
+      "project": "pet",
+      "entry": "docs/teaching/history/day-17/pet/README.md",
+      "article": "docs/teaching/history/day-17/pet/notion/3fce51d4509381ca83e3e825f0313698.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-17/pet/3fce51d4509381ca83e3e825f0313698.md",
+          "path": "docs/teaching/history/day-17/pet/notion/3fce51d4509381ca83e3e825f0313698.md"
+        }
+      ]
+    },
+    {
+      "day": 18,
+      "project": "analytics",
+      "entry": "docs/teaching/history/day-18/analytics/README.md",
+      "article": "docs/teaching/history/day-18/analytics/notion/3fde51d4509381c2a0d5f60041137619.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-18/analytics/3fde51d4509381c2a0d5f60041137619.md",
+          "path": "docs/teaching/history/day-18/analytics/notion/3fde51d4509381c2a0d5f60041137619.md"
+        }
+      ]
+    },
+    {
+      "day": 18,
+      "project": "chat",
+      "entry": "docs/teaching/history/day-18/chat/README.md",
+      "article": "docs/teaching/history/day-18/chat/notion/3fde51d45093816bb36dd9099190d907.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-18/chat/3fde51d45093816bb36dd9099190d907.md",
+          "path": "docs/teaching/history/day-18/chat/notion/3fde51d45093816bb36dd9099190d907.md"
+        }
+      ],
+      "latest_slice_validation": {
+        "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3",
+        "verdict": "實測失敗",
+        "report": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/REPORT.md",
+        "original_body_unchanged": true
+      }
+    },
+    {
+      "day": 18,
+      "project": "pet",
+      "entry": "docs/teaching/history/day-18/pet/README.md",
+      "article": "docs/teaching/history/day-18/pet/notion/3fde51d4509381bfa106ea4d9b190480.md",
+      "sources": [
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-18/pet/3fde51d4509381bfa106ea4d9b190480.md",
+          "path": "docs/teaching/history/day-18/pet/notion/3fde51d4509381bfa106ea4d9b190480.md"
+        }
+      ]
+    },
+    {
+      "day": 19,
+      "project": "analytics",
+      "entry": "docs/teaching/history/day-19/analytics/README.md",
+      "article": "docs/teaching/history/day-19/analytics/github.md",
+      "sources": [
+        {
+          "old": "docs/teaching/day19/analytics.md",
+          "path": "docs/teaching/history/day-19/analytics/github.md"
+        },
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-19/analytics/3fde51d4509381ed8a2eecf3ba7e4093.md",
+          "path": "docs/teaching/history/day-19/analytics/notion/3fde51d4509381ed8a2eecf3ba7e4093.md"
+        }
+      ]
+    },
+    {
+      "day": 19,
+      "project": "chat",
+      "entry": "docs/teaching/history/day-19/chat/README.md",
+      "article": "docs/teaching/history/day-19/chat/github.md",
+      "sources": [
+        {
+          "old": "docs/teaching/day19/chat.md",
+          "path": "docs/teaching/history/day-19/chat/github.md"
+        },
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-19/chat/3fde51d4509381d2aac7ea4b356c213b.md",
+          "path": "docs/teaching/history/day-19/chat/notion/3fde51d4509381d2aac7ea4b356c213b.md"
+        }
+      ],
+      "latest_slice_validation": {
+        "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3",
+        "verdict": "本篇切片通過",
+        "report": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/REPORT.md",
+        "original_body_unchanged": true
+      }
+    },
+    {
+      "day": 19,
+      "project": "pet",
+      "entry": "docs/teaching/history/day-19/pet/README.md",
+      "article": "docs/teaching/history/day-19/pet/github.md",
+      "sources": [
+        {
+          "old": "docs/teaching/day19/pet.md",
+          "path": "docs/teaching/history/day-19/pet/github.md"
+        },
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-19/pet/3fde51d450938194ae7fdcc55bce44e2.md",
+          "path": "docs/teaching/history/day-19/pet/notion/3fde51d450938194ae7fdcc55bce44e2.md"
+        }
+      ]
+    },
+    {
+      "day": 20,
+      "project": "analytics",
+      "entry": "docs/teaching/history/day-20/analytics/README.md",
+      "article": "docs/teaching/history/day-20/analytics/github.md",
+      "sources": [
+        {
+          "old": "docs/teaching/day20/analytics.md",
+          "path": "docs/teaching/history/day-20/analytics/github.md"
+        },
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-20/analytics/3fee51d4509381618739f23dcd766996.md",
+          "path": "docs/teaching/history/day-20/analytics/notion/3fee51d4509381618739f23dcd766996.md"
+        }
+      ]
+    },
+    {
+      "day": 20,
+      "project": "chat",
+      "entry": "docs/teaching/history/day-20/chat/README.md",
+      "article": "docs/teaching/history/day-20/chat/github.md",
+      "sources": [
+        {
+          "old": "docs/teaching/day20/chat.md",
+          "path": "docs/teaching/history/day-20/chat/github.md"
+        },
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-20/chat/3fee51d4509381d1a1e6eb5e5a1c996e.md",
+          "path": "docs/teaching/history/day-20/chat/notion/3fee51d4509381d1a1e6eb5e5a1c996e.md"
+        }
+      ],
+      "latest_slice_validation": {
+        "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3",
+        "verdict": "本篇切片通過",
+        "report": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/REPORT.md",
+        "original_body_unchanged": true
+      }
+    },
+    {
+      "day": 20,
+      "project": "pet",
+      "entry": "docs/teaching/history/day-20/pet/README.md",
+      "article": "docs/teaching/history/day-20/pet/github.md",
+      "sources": [
+        {
+          "old": "docs/teaching/day20/pet.md",
+          "path": "docs/teaching/history/day-20/pet/github.md"
+        },
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-20/pet/3fee51d45093816897feec3468239e43.md",
+          "path": "docs/teaching/history/day-20/pet/notion/3fee51d45093816897feec3468239e43.md"
+        }
+      ]
+    },
+    {
+      "day": 21,
+      "project": "analytics",
+      "entry": "docs/teaching/history/day-21/analytics/README.md",
+      "article": "docs/teaching/history/day-21/analytics/github.md",
+      "sources": [
+        {
+          "old": "docs/teaching/day21/analytics.md",
+          "path": "docs/teaching/history/day-21/analytics/github.md"
+        },
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-21/analytics/3fee51d450938178bdb6c37fede38fd4.md",
+          "path": "docs/teaching/history/day-21/analytics/notion/3fee51d450938178bdb6c37fede38fd4.md"
+        }
+      ]
+    },
+    {
+      "day": 21,
+      "project": "chat",
+      "entry": "docs/teaching/history/day-21/chat/README.md",
+      "article": "docs/teaching/history/day-21/chat/github.md",
+      "sources": [
+        {
+          "old": "docs/teaching/day21/chat.md",
+          "path": "docs/teaching/history/day-21/chat/github.md"
+        },
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-21/chat/3fee51d450938168aaa0c11d9ad7d827.md",
+          "path": "docs/teaching/history/day-21/chat/notion/3fee51d450938168aaa0c11d9ad7d827.md"
+        }
+      ]
+    },
+    {
+      "day": 21,
+      "project": "pet",
+      "entry": "docs/teaching/history/day-21/pet/README.md",
+      "article": "docs/teaching/history/day-21/pet/github.md",
+      "sources": [
+        {
+          "old": "docs/teaching/day21/pet.md",
+          "path": "docs/teaching/history/day-21/pet/github.md"
+        },
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-21/pet/3fee51d450938163b451e803639e657c.md",
+          "path": "docs/teaching/history/day-21/pet/notion/3fee51d450938163b451e803639e657c.md"
+        }
+      ]
+    },
+    {
+      "day": 22,
+      "project": "analytics",
+      "entry": "docs/teaching/history/day-22/analytics/README.md",
+      "article": "docs/teaching/history/day-22/analytics/github.md",
+      "sources": [
+        {
+          "old": "docs/teaching/archive/day-22/github/analytics.md",
+          "path": "docs/teaching/history/day-22/analytics/github.md"
+        },
+        {
+          "old": "docs/teaching/archive/day-22/notion/analytics.md",
+          "path": "docs/teaching/history/day-22/archive/notion/analytics.md"
+        },
+        {
+          "old": "docs/teaching/day22/analytics.md",
+          "path": "docs/teaching/history/day-22/analytics/github.md"
+        },
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-22/analytics/3fee51d450938103b0eafc50f32822c1.md",
+          "path": "docs/teaching/history/day-22/analytics/notion/3fee51d450938103b0eafc50f32822c1.md"
+        }
+      ]
+    },
+    {
+      "day": 22,
+      "project": "chat",
+      "entry": "docs/teaching/history/day-22/chat/README.md",
+      "article": "docs/teaching/history/day-22/chat/github.md",
+      "sources": [
+        {
+          "old": "docs/teaching/archive/day-22/github/chat.md",
+          "path": "docs/teaching/history/day-22/chat/github.md"
+        },
+        {
+          "old": "docs/teaching/archive/day-22/notion/chat.md",
+          "path": "docs/teaching/history/day-22/archive/notion/chat.md"
+        },
+        {
+          "old": "docs/teaching/day22/chat.md",
+          "path": "docs/teaching/history/day-22/chat/github.md"
+        },
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-22/chat/3fee51d45093814385cdcdc9e693789a.md",
+          "path": "docs/teaching/history/day-22/chat/notion/3fee51d45093814385cdcdc9e693789a.md"
+        }
+      ]
+    },
+    {
+      "day": 22,
+      "project": "pet",
+      "entry": "docs/teaching/history/day-22/pet/README.md",
+      "article": "docs/teaching/history/day-22/pet/github.md",
+      "sources": [
+        {
+          "old": "docs/teaching/archive/day-22/github/pet.md",
+          "path": "docs/teaching/history/day-22/pet/github.md"
+        },
+        {
+          "old": "docs/teaching/archive/day-22/notion/pet.md",
+          "path": "docs/teaching/history/day-22/archive/notion/pet.md"
+        },
+        {
+          "old": "docs/teaching/day22/pet.md",
+          "path": "docs/teaching/history/day-22/pet/github.md"
+        },
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-22/pet/3fee51d45093811c83eed982ef9ab69e.md",
+          "path": "docs/teaching/history/day-22/pet/notion/3fee51d45093811c83eed982ef9ab69e.md"
+        }
+      ]
+    },
+    {
+      "day": 23,
+      "project": "analytics",
+      "entry": "docs/teaching/history/day-23/analytics/README.md",
+      "article": "docs/teaching/history/day-23/analytics/github.md",
+      "sources": [
+        {
+          "old": "docs/teaching/archive/day-23/github/analytics.md",
+          "path": "docs/teaching/history/day-23/analytics/github.md"
+        },
+        {
+          "old": "docs/teaching/archive/day-23/notion/analytics.md",
+          "path": "docs/teaching/history/day-23/archive/notion/analytics.md"
+        },
+        {
+          "old": "docs/teaching/day23/analytics.md",
+          "path": "docs/teaching/history/day-23/analytics/github.md"
+        },
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-23/analytics/3ffe51d4509381f88d1be27bc5ec5f9f.md",
+          "path": "docs/teaching/history/day-23/analytics/notion/3ffe51d4509381f88d1be27bc5ec5f9f.md"
+        }
+      ]
+    },
+    {
+      "day": 23,
+      "project": "chat",
+      "entry": "docs/teaching/history/day-23/chat/README.md",
+      "article": "docs/teaching/history/day-23/chat/github.md",
+      "sources": [
+        {
+          "old": "docs/teaching/archive/day-23/github/chat.md",
+          "path": "docs/teaching/history/day-23/chat/github.md"
+        },
+        {
+          "old": "docs/teaching/archive/day-23/notion/chat.md",
+          "path": "docs/teaching/history/day-23/archive/notion/chat.md"
+        },
+        {
+          "old": "docs/teaching/day23/chat.md",
+          "path": "docs/teaching/history/day-23/chat/github.md"
+        },
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-23/chat/3ffe51d4509381cf8532fb767afc33ab.md",
+          "path": "docs/teaching/history/day-23/chat/notion/3ffe51d4509381cf8532fb767afc33ab.md"
+        }
+      ]
+    },
+    {
+      "day": 23,
+      "project": "pet",
+      "entry": "docs/teaching/history/day-23/pet/README.md",
+      "article": "docs/teaching/history/day-23/pet/github.md",
+      "sources": [
+        {
+          "old": "docs/teaching/archive/day-23/github/pet.md",
+          "path": "docs/teaching/history/day-23/pet/github.md"
+        },
+        {
+          "old": "docs/teaching/archive/day-23/notion/pet.md",
+          "path": "docs/teaching/history/day-23/archive/notion/pet.md"
+        },
+        {
+          "old": "docs/teaching/day23/pet.md",
+          "path": "docs/teaching/history/day-23/pet/github.md"
+        },
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-23/pet/3ffe51d450938198871cddfdb6f7044a.md",
+          "path": "docs/teaching/history/day-23/pet/notion/3ffe51d450938198871cddfdb6f7044a.md"
+        }
+      ]
+    },
+    {
+      "day": 24,
+      "project": "analytics",
+      "entry": "docs/teaching/history/day-24/analytics/README.md",
+      "article": "docs/teaching/history/day-24/analytics/github.md",
+      "sources": [
+        {
+          "old": "docs/teaching/archive/day-24/github/analytics.md",
+          "path": "docs/teaching/history/day-24/analytics/github.md"
+        },
+        {
+          "old": "docs/teaching/archive/day-24/notion/analytics.md",
+          "path": "docs/teaching/history/day-24/archive/notion/analytics.md"
+        },
+        {
+          "old": "docs/teaching/current/ANALYTICS.md",
+          "path": "docs/teaching/history/day-24/analytics/github.md"
+        },
+        {
+          "old": "docs/teaching/day24/analytics.md",
+          "path": "docs/teaching/history/day-24/analytics/github.md"
+        },
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-24/analytics/3ffe51d4509381c88f26f4a90c2958fc.md",
+          "path": "docs/teaching/history/day-24/analytics/notion/3ffe51d4509381c88f26f4a90c2958fc.md"
+        }
+      ]
+    },
+    {
+      "day": 24,
+      "project": "chat",
+      "entry": "docs/teaching/history/day-24/chat/README.md",
+      "article": "docs/teaching/history/day-24/chat/github.md",
+      "sources": [
+        {
+          "old": "docs/teaching/archive/day-24/github/chat.md",
+          "path": "docs/teaching/history/day-24/chat/github.md"
+        },
+        {
+          "old": "docs/teaching/archive/day-24/notion/chat.md",
+          "path": "docs/teaching/history/day-24/archive/notion/chat.md"
+        },
+        {
+          "old": "docs/teaching/current/CHAT.md",
+          "path": "docs/teaching/history/day-24/chat/github.md"
+        },
+        {
+          "old": "docs/teaching/day24/chat.md",
+          "path": "docs/teaching/history/day-24/chat/github.md"
+        },
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-24/chat/3ffe51d4509381ee9326ce6cc7f1c8a1.md",
+          "path": "docs/teaching/history/day-24/chat/notion/3ffe51d4509381ee9326ce6cc7f1c8a1.md"
+        }
+      ]
+    },
+    {
+      "day": 24,
+      "project": "pet",
+      "entry": "docs/teaching/history/day-24/pet/README.md",
+      "article": "docs/teaching/history/day-24/pet/github.md",
+      "sources": [
+        {
+          "old": "docs/teaching/archive/day-24/github/pet.md",
+          "path": "docs/teaching/history/day-24/pet/github.md"
+        },
+        {
+          "old": "docs/teaching/archive/day-24/github/revisions/pet-r1/pet.md",
+          "path": "docs/teaching/history/day-24/archive/github/revisions/pet-r1/pet.md"
+        },
+        {
+          "old": "docs/teaching/archive/day-24/notion/pet.md",
+          "path": "docs/teaching/history/day-24/archive/notion/pet.md"
+        },
+        {
+          "old": "docs/teaching/current/PET.md",
+          "path": "docs/teaching/history/day-24/pet/github.md"
+        },
+        {
+          "old": "docs/teaching/day24/pet.md",
+          "path": "docs/teaching/history/day-24/pet/github.md"
+        },
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-24/pet/3ffe51d450938186b15fd1c014df8edd.md",
+          "path": "docs/teaching/history/day-24/pet/notion/3ffe51d450938186b15fd1c014df8edd.md"
+        }
+      ]
+    },
+    {
+      "day": 25,
+      "project": "analytics",
+      "entry": "docs/teaching/history/day-25/analytics/README.md",
+      "article": "docs/teaching/history/day-25/analytics/notion/400e51d45093810796cbd6074c8d35c3.md",
+      "sources": [
+        {
+          "old": "docs/teaching/archive/day-25/notion/analytics.md",
+          "path": "docs/teaching/history/day-25/analytics/notion/400e51d45093810796cbd6074c8d35c3.md"
+        },
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-25/analytics/400e51d45093810796cbd6074c8d35c3.md",
+          "path": "docs/teaching/history/day-25/analytics/notion/400e51d45093810796cbd6074c8d35c3.md"
+        }
+      ]
+    },
+    {
+      "day": 25,
+      "project": "chat",
+      "entry": "docs/teaching/history/day-25/chat/README.md",
+      "article": "docs/teaching/history/day-25/archive/notion/chat.md",
+      "sources": [
+        {
+          "old": "docs/teaching/archive/day-25/notion/chat.md",
+          "path": "docs/teaching/history/day-25/archive/notion/chat.md"
+        },
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-25/chat/400e51d450938155a6a1c5dee070f1b8.md",
+          "path": "docs/teaching/history/day-25/archive/notion/chat.md"
+        }
+      ]
+    },
+    {
+      "day": 25,
+      "project": "pet",
+      "entry": "docs/teaching/history/day-25/pet/README.md",
+      "article": "docs/teaching/history/day-25/archive/notion/pet.md",
+      "sources": [
+        {
+          "old": "docs/teaching/archive/day-25/notion/pet.md",
+          "path": "docs/teaching/history/day-25/archive/notion/pet.md"
+        },
+        {
+          "old": "docs/teaching/notion-export/2026-10-22/day-25/pet/400e51d4509381d69745c299feea5a8f.md",
+          "path": "docs/teaching/history/day-25/archive/notion/pet.md"
+        }
+      ]
+    },
+    {
+      "day": 26,
+      "project": "analytics",
+      "entry": "docs/teaching/history/day-26/analytics/README.md",
+      "article": "docs/teaching/history/day-26/analytics/github.md",
+      "sources": [
+        {
+          "old": "docs/teaching/daily/day-26/analytics.md",
+          "path": "docs/teaching/history/day-26/analytics/github.md"
+        }
+      ],
+      "archive_validation": "docs/teaching/history/evidence/2026-10-23-all-articles-9c2b7cf/REPORT.md"
+    },
+    {
+      "day": 26,
+      "project": "chat",
+      "entry": "docs/teaching/history/day-26/chat/README.md",
+      "article": "docs/teaching/history/day-26/chat/github.md",
+      "sources": [
+        {
+          "old": "docs/teaching/daily/day-26/chat.md",
+          "path": "docs/teaching/history/day-26/chat/github.md"
+        }
+      ],
+      "archive_validation": "docs/teaching/history/evidence/2026-10-23-all-articles-9c2b7cf/REPORT.md"
+    },
+    {
+      "day": 27,
+      "project": "analytics",
+      "entry": "docs/teaching/history/day-27/analytics/README.md",
+      "article": "docs/teaching/history/day-27/analytics/github.md",
+      "sources": [
+        {
+          "old": "docs/teaching/daily/day-27/analytics.md",
+          "path": "docs/teaching/history/day-27/analytics/github.md"
+        }
+      ],
+      "archive_validation": "docs/teaching/history/evidence/2026-10-23-all-articles-9c2b7cf/REPORT.md"
+    },
+    {
+      "day": 27,
+      "project": "chat",
+      "entry": "docs/teaching/history/day-27/chat/README.md",
+      "article": "docs/teaching/history/day-27/chat/github.md",
+      "sources": [
+        {
+          "old": "docs/teaching/daily/day-27/chat.md",
+          "path": "docs/teaching/history/day-27/chat/github.md"
+        }
+      ],
+      "archive_validation": "docs/teaching/history/evidence/2026-10-23-all-articles-9c2b7cf/REPORT.md"
+    },
+    {
+      "day": 29,
+      "project": "analytics",
+      "entry": "docs/teaching/history/day-29/analytics/README.md",
+      "article": "docs/teaching/history/day-29/analytics/github.md",
+      "sources": [
+        {
+          "old": "docs/teaching/daily/day-29/analytics.md",
+          "path": "docs/teaching/history/day-29/analytics/github.md"
+        }
+      ],
+      "archive_validation": "docs/teaching/history/evidence/2026-10-23-all-articles-9c2b7cf/REPORT.md"
+    },
+    {
+      "day": 29,
+      "project": "chat",
+      "entry": "docs/teaching/history/day-29/chat/README.md",
+      "article": "docs/teaching/history/day-29/chat/github.md",
+      "sources": [
+        {
+          "old": "docs/teaching/daily/day-29/chat.md",
+          "path": "docs/teaching/history/day-29/chat/github.md"
+        }
+      ],
+      "archive_validation": "docs/teaching/history/evidence/2026-10-23-all-articles-9c2b7cf/REPORT.md"
+    }
+  ],
+  "supplements": [
+    {
+      "title": "📦 文件與教學封存（非現行規則）",
+      "path": "docs/teaching/history/evidence/notion-export/2026-10-22/pages/3f7e51d4509381faa894d3660c3252f7.md"
+    },
+    {
+      "title": "🦀 Rust AI 三專案｜共同學習規則與前進目標",
+      "path": "docs/teaching/history/evidence/notion-export/2026-10-22/pages/3f2e51d4509381ddb8a8ce7cb4cd3e60.md"
+    },
+    {
+      "title": "📊 統計儀錶板｜聊天室 × 桌面寵物",
+      "path": "docs/teaching/history/evidence/notion-export/2026-10-22/pages/3f3e51d45093817eafaee0cfc9ea4cc8.md"
+    },
+    {
+      "title": "2026-10-13｜手動補跑｜Analytics｜現有 EventInput 的有效識別碼前置驗證",
+      "path": "docs/teaching/history/evidence/notion-export/2026-10-22/pages/3f8e51d4509381689c98ed86fecc50a2.md"
+    },
+    {
+      "title": "2026-10-13｜正式補跑｜Analytics｜來源與版本驗證測試",
+      "path": "docs/teaching/history/evidence/notion-export/2026-10-22/pages/3f8e51d45093816e96edd35b83543ed3.md"
+    },
+    {
+      "title": "2026-10-13｜手動補跑｜Chat｜既有 MessageRepository 的 SQLite 遷移切片",
+      "path": "docs/teaching/history/evidence/notion-export/2026-10-22/pages/3f8e51d45093816690f8d5b4ff04ff70.md"
+    },
+    {
+      "title": "2026-10-13｜正式補跑｜Chat｜持久化成功後通知的對稱測試",
+      "path": "docs/teaching/history/evidence/notion-export/2026-10-22/pages/3f8e51d450938174a707d200f2e0de52.md"
+    },
+    {
+      "title": "聊天室",
+      "path": "docs/teaching/history/evidence/notion-export/2026-10-22/pages/3f3e51d45093807da638c336e857543a.md"
+    },
+    {
+      "title": "2026-10-13｜手動補跑｜Pet｜既有 CleanupOperation 狀態機的重入防護",
+      "path": "docs/teaching/history/evidence/notion-export/2026-10-22/pages/3f8e51d45093815fbec6ec85bc547bd6.md"
+    },
+    {
+      "title": "2026-10-13｜正式補跑｜Pet｜成功事件契約測試",
+      "path": "docs/teaching/history/evidence/notion-export/2026-10-22/pages/3f8e51d4509381bf9da4c44750ffc726.md"
+    },
+    {
+      "title": "桌面寵物",
+      "path": "docs/teaching/history/evidence/notion-export/2026-10-22/pages/3f3e51d450938067923ae5a424d30950.md"
+    }
+  ]
+}

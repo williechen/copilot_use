@@ -1,0 +1,55 @@
+   Compiling syn v3.0.9
+   Compiling syn v2.0.119
+   Compiling synstructure v0.14.0
+   Compiling zerofrom-derive v0.1.8
+   Compiling zerofrom v0.1.8
+   Compiling yoke-derive v0.8.4
+   Compiling zerovec-derive v0.11.7
+   Compiling yoke v0.8.4
+   Compiling displaydoc v0.2.7
+   Compiling zerotrie v0.2.5
+   Compiling zerovec v0.11.9
+   Compiling serde_derive v1.0.229
+   Compiling tinystr v0.8.5
+   Compiling icu_locale_core v2.4.0
+   Compiling potential_utf v0.1.6
+   Compiling icu_collections v2.4.0
+   Compiling icu_provider v2.4.0
+   Compiling icu_properties v2.4.0
+   Compiling icu_normalizer v2.4.0
+   Compiling thiserror-impl v2.0.21
+   Compiling idna_adapter v1.2.2
+   Compiling idna v1.1.0
+   Compiling serde v1.0.229
+   Compiling tracing-attributes v0.1.31
+   Compiling either v1.19.0
+   Compiling url v2.5.8
+   Compiling tracing v0.1.44
+   Compiling thiserror v2.0.21
+   Compiling crypto-common v0.1.6
+   Compiling digest v0.10.7
+   Compiling sqlx-core v0.9.0
+   Compiling sha2 v0.10.9
+   Compiling sqlx-sqlite v0.9.0
+   Compiling sqlx-macros-core v0.9.0
+   Compiling uuid v1.29.0
+   Compiling sqlx-macros v0.9.0
+   Compiling sqlx v0.9.0
+   Compiling pet-persistence v0.2.37 (/home/willie/Documents/Codex/2026-10-26/referenced-chatgpt-conversation-this-is-an/work/pet/pet_apps/pet_persistence)
+    Finished `test` profile [unoptimized] target(s) in 12.22s
+     Running unittests src/lib.rs (/var/tmp/codex-day40-target/debug/deps/pet_persistence-d4f767846750be7c)
+
+running 4 tests
+test day35_cage_adapter_tests::failed_database_update_is_not_success ... ok
+test day36_restore_adapter_tests::reads_only_uncaged_local_owner ... ok
+test day35_cage_adapter_tests::only_target_pet_changes_and_missing_id_fails ... ok
+test day37_open_state_tests::read_flag_and_fail_closed_for_missing_pet ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.51s
+
+   Doc-tests pet_persistence
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

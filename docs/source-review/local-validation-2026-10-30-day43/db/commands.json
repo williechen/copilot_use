@@ -1,0 +1,119 @@
+[
+  {
+    "command": [
+      "cargo",
+      "run",
+      "--offline",
+      "--locked",
+      "--manifest-path",
+      "chat_apps/Cargo.toml",
+      "-p",
+      "chat-persistence",
+      "--example",
+      "upgrade_probe",
+      "--",
+      "chat",
+      "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-db-20261030/chat-old-migrations",
+      "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-20261030/chat_apps/migrations",
+      "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-db-20261030"
+    ],
+    "cwd": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-20261030",
+    "exit_code": 0,
+    "log": "00.log",
+    "seconds": 3.958726406097412
+  },
+  {
+    "command": [
+      "cargo",
+      "run",
+      "--offline",
+      "--locked",
+      "--manifest-path",
+      "chat_apps/Cargo.toml",
+      "-p",
+      "chat-persistence",
+      "--example",
+      "upgrade_probe",
+      "--",
+      "pet",
+      "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-db-20261030/pet-old-migrations",
+      "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-20261030/pet_apps/migrations",
+      "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-db-20261030"
+    ],
+    "cwd": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-20261030",
+    "exit_code": 0,
+    "log": "01.log",
+    "seconds": 0.5585308074951172
+  },
+  {
+    "command": [
+      "/usr/lib/postgresql/18/bin/pg_ctl",
+      "-D",
+      "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/pg",
+      "-l",
+      "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/outputs/day43-2026-10-30/db/postgres.log",
+      "-o",
+      "-k '' -p 55482 -h 127.0.0.1",
+      "start"
+    ],
+    "cwd": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-20261030",
+    "exit_code": 0,
+    "log": "02.log",
+    "seconds": 0.14519572257995605
+  },
+  {
+    "command": [
+      "cargo",
+      "run",
+      "--offline",
+      "--locked",
+      "--manifest-path",
+      "analytics_apps/Cargo.toml",
+      "-p",
+      "analytics-server",
+      "--example",
+      "pg_upgrade_probe",
+      "--",
+      "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-db-20261030/analytics-old-migrations",
+      "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-20261030/analytics_apps/migrations",
+      "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-db-20261030/synthetic-old.dump"
+    ],
+    "cwd": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-20261030",
+    "exit_code": 0,
+    "log": "03.log",
+    "seconds": 2.141770362854004
+  },
+  {
+    "command": [
+      "cargo",
+      "run",
+      "--offline",
+      "--locked",
+      "--manifest-path",
+      "analytics_apps/Cargo.toml",
+      "-p",
+      "analytics-server",
+      "--example",
+      "pg_restore_probe",
+      "--",
+      "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-db-20261030/synthetic-old.dump",
+      "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-20261030/analytics_apps/migrations"
+    ],
+    "cwd": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-20261030",
+    "exit_code": 0,
+    "log": "04.log",
+    "seconds": 0.9438626766204834
+  },
+  {
+    "command": [
+      "/usr/lib/postgresql/18/bin/pg_ctl",
+      "-D",
+      "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/pg",
+      "stop"
+    ],
+    "cwd": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-20261030",
+    "exit_code": 0,
+    "log": "05.log",
+    "seconds": 4.469086408615112
+  }
+]

@@ -1,0 +1,19 @@
+    Checking chat-domain v0.2.23 (/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-3/work/formal-main/crates/chat_domain)
+    Checking shared v0.2.23 (/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-3/work/formal-main/crates/shared)
+    Checking ui v0.2.23 (/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-3/work/formal-main/crates/ui)
+warning: function `refreshed_room_list` is never used
+  --> crates/ui/src/lib.rs:40:4
+   |
+40 | fn refreshed_room_list(
+   |    ^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `create_room` is never used
+ --> crates/ui/src/room_api.rs:6:14
+  |
+6 | pub async fn create_room(name: &str) -> Result<CreateRoomResponse, String> {
+  |              ^^^^^^^^^^^
+
+warning: `ui` (lib) generated 2 warnings
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.29s

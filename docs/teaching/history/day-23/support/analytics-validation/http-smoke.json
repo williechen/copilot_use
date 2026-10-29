@@ -1,0 +1,14 @@
+{
+  "transport": "real TCP 127.0.0.1:3100; dedicated PostgreSQL 18.6",
+  "checks": {
+    "login_page": 200,
+    "legacy_key_rejected": 422,
+    "wrong_origin": 403,
+    "password_login": 303,
+    "restricted_page": 200,
+    "restricted_query": 403,
+    "logout": 303,
+    "revoked_cookie": 401
+  },
+  "raw_tokens_logged": false
+}

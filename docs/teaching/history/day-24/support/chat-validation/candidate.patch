@@ -1,0 +1,244 @@
+diff --git a/apps/server/src/signup.rs b/apps/server/src/signup.rs
+index 9b6cbd4..76a0b38 100644
+--- a/apps/server/src/signup.rs
++++ b/apps/server/src/signup.rs
+@@ -3,7 +3,7 @@ use axum::{
+     Form, Router,
+     extract::{DefaultBodyLimit, State},
+     http::{HeaderMap, StatusCode},
+-    response::{Html, Redirect},
++    response::{Html, IntoResponse, Redirect, Response},
+     routing::get,
+ };
+ use sqlx::SqlitePool;
+@@ -19,10 +19,20 @@ struct Signup {
+ pub fn routes(pool: SqlitePool) -> Router {
+     Router::new()
+         .route("/signup", get(page).post(signup))
++        .route("/signup/complete", get(complete))
+         .layer(DefaultBodyLimit::max(4096))
+         .with_state(pool)
+ }
+ 
++async fn complete() -> impl IntoResponse {
++    (
++        [("cache-control", "no-store")],
++        Html(
++            r#"<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><title>註冊完成</title></head><body><h1>註冊完成</h1><p>目前保持登出，請回首頁重新選擇聊天室，再登入。</p><a href="/">回首頁</a></body></html>"#,
++        ),
++    )
++}
++
+ async fn page() -> Html<&'static str> {
+     Html(
+         r#"<!doctype html>
+@@ -62,7 +72,7 @@ async fn signup(
+     State(pool): State<SqlitePool>,
+     headers: HeaderMap,
+     Form(form): Form<Signup>,
+-) -> Result<Redirect, StatusCode> {
++) -> Result<Response, StatusCode> {
+     // 檢查請求來源，僅允許來自 http://127.0.0.1:3000 的請求
+     if headers.get("origin").and_then(|v| v.to_str().ok()) != Some("http://127.0.0.1:3000") {
+         return Err(StatusCode::FORBIDDEN);
+@@ -104,6 +114,10 @@ async fn signup(
+     .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?
+     .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
+ 
++    let mut tx = pool
++        .begin()
++        .await
++        .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
+     sqlx::query(
+         r#"INSERT INTO mbr_user (id
+             ,user_acnt
+@@ -121,14 +135,50 @@ async fn signup(
+     .bind(password_hash)
+     .bind(email)
+     .bind(display)
+-    .execute(&pool)
++    .execute(&mut *tx)
+     .await
+     .map_err(|e| match e {
+         sqlx::Error::Database(ref db) if db.is_unique_violation() => StatusCode::CONFLICT,
+         _ => StatusCode::INTERNAL_SERVER_ERROR,
+     })?;
+ 
+-    Ok(Redirect::to("/signin"))
++    // 成功註冊不沿用目前瀏覽器的帳號或選房；資料與撤銷同交易提交。
++    if let Some(token) = headers
++        .get("cookie")
++        .and_then(|h| h.to_str().ok())
++        .and_then(|h| {
++            h.split(';')
++                .filter_map(|v| v.trim().split_once('='))
++                .find(|(k, _)| *k == "chat_session")
++                .map(|(_, v)| v)
++        })
++        .filter(|v| v.len() == 64 && v.bytes().all(|b| b.is_ascii_hexdigit()))
++    {
++        use sha2::{Digest, Sha256};
++        let hashed: String = Sha256::digest(token.as_bytes())
++            .iter()
++            .map(|b| format!("{b:02x}"))
++            .collect();
++        sqlx::query("DELETE FROM mbr_session WHERE token_hash=?1")
++            .bind(hashed)
++            .execute(&mut *tx)
++            .await
++            .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
++    }
++    tx.commit()
++        .await
++        .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
++    Ok((
++        [
++            (
++                "set-cookie",
++                "chat_session=; HttpOnly; SameSite=Lax; Path=/; Max-Age=0",
++            ),
++            ("cache-control", "no-store"),
++        ],
++        Redirect::to("/signup/complete"),
++    )
++        .into_response())
+ }
+ 
+ #[cfg(test)]
+@@ -180,7 +230,7 @@ mod day22_tests {
+                 .unwrap();
+             assert_eq!(response.status(), expected);
+             if expected == StatusCode::SEE_OTHER {
+-                assert_eq!(response.headers()["location"], "/signin");
++                assert_eq!(response.headers()["location"], "/signup/complete");
+             }
+         }
+         let (count,): (i64,) = sqlx::query_as("SELECT count(*) FROM mbr_user")
+diff --git a/apps/server/tests/day24_signup_complete.rs b/apps/server/tests/day24_signup_complete.rs
+new file mode 100644
+index 0000000..f468900
+--- /dev/null
++++ b/apps/server/tests/day24_signup_complete.rs
+@@ -0,0 +1,122 @@
++use axum::{
++    body::{Body, to_bytes},
++    http::{Request, StatusCode},
++};
++use tower::ServiceExt;
++#[tokio::test]
++async fn day24_signup_completes_without_automatic_login_or_navigation() {
++    let pool = sqlx::sqlite::SqlitePoolOptions::new()
++        .max_connections(1)
++        .connect("sqlite::memory:")
++        .await
++        .unwrap();
++    for sql in [include_str!("../../../migrations/20261018073931_create_auth_user.sql"),
++                include_str!("../../../migrations/20261019221857_member_identity.sql"),
++                include_str!("../../../migrations/20261020152737_mbr_sessions.sql")] {
++        sqlx::raw_sql(sql).execute(&pool).await.unwrap();
++    }
++    let app = server::signup::routes(pool.clone());
++    let response=app.clone().oneshot(Request::post("/signup").header("origin","http://127.0.0.1:3000").header("content-type","application/x-www-form-urlencoded").body(Body::from("username=day24&email=day24%40example.test&display_name=Learner&password=lesson-only-password")).unwrap()).await.unwrap();
++    assert_eq!(response.status(), StatusCode::SEE_OTHER);
++    assert_eq!(response.headers()["location"], "/signup/complete");
++    assert!(
++        response.headers()["set-cookie"]
++            .to_str()
++            .unwrap()
++            .contains("Max-Age=0")
++    );
++    let count: i64 = sqlx::query_scalar("SELECT count(*) FROM mbr_session")
++        .fetch_one(&pool)
++        .await
++        .unwrap();
++    assert_eq!(count, 0);
++    let page = app
++        .clone()
++        .oneshot(
++            Request::get("/signup/complete")
++                .body(Body::empty())
++                .unwrap(),
++        )
++        .await
++        .unwrap();
++    assert_eq!(page.status(), StatusCode::OK);
++    assert!(!page.headers().contains_key("location"));
++    let html =
++        String::from_utf8(to_bytes(page.into_body(), 10000).await.unwrap().to_vec()).unwrap();
++    assert!(html.contains("註冊完成"));
++    assert!(html.contains("目前保持登出"));
++    assert!(html.contains(r#"href="/""#));
++    assert!(!html.to_lowercase().contains(r#"http-equiv="refresh""#));
++    assert!(!html.contains("<script"));
++    let duplicate=app.oneshot(Request::post("/signup").header("origin","http://127.0.0.1:3000").header("content-type","application/x-www-form-urlencoded").body(Body::from("username=DAY24&email=other%40example.test&display_name=Learner&password=lesson-only-password")).unwrap()).await.unwrap();
++    assert_eq!(duplicate.status(), StatusCode::CONFLICT);
++}
++
++#[tokio::test]
++async fn day24_existing_browser_session_revocation_is_atomic() {
++    use sha2::{Digest, Sha256};
++    let pool = sqlx::sqlite::SqlitePoolOptions::new()
++        .max_connections(1)
++        .connect("sqlite::memory:")
++        .await
++        .unwrap();
++    for sql in [include_str!("../../../migrations/20261018073931_create_auth_user.sql"),
++                include_str!("../../../migrations/20261019221857_member_identity.sql"),
++                include_str!("../../../migrations/20261020152737_mbr_sessions.sql")] {
++        sqlx::raw_sql(sql).execute(&pool).await.unwrap();
++    }
++    let app = server::signup::routes(pool.clone());
++    let make = |name: &str, cookie: Option<String>| {
++        let mut req = Request::post("/signup")
++            .header("origin", "http://127.0.0.1:3000")
++            .header("content-type", "application/x-www-form-urlencoded");
++        if let Some(c) = cookie {
++            req = req.header("cookie", c);
++        }
++        req.body(Body::from(format!("username={name}&email={name}%40example.test&display_name=Learner&password=lesson-only-password"))).unwrap()
++    };
++    assert_eq!(
++        app.clone()
++            .oneshot(make("older", None))
++            .await
++            .unwrap()
++            .status(),
++        StatusCode::SEE_OTHER
++    );
++    let raw = "a".repeat(64);
++    let hash: String = Sha256::digest(raw.as_bytes())
++        .iter()
++        .map(|b| format!("{b:02x}"))
++        .collect();
++    sqlx::query("INSERT INTO mbr_session(id,mbr_user_id,token_hash,expires_at) SELECT 'old-session',id,?1,unixepoch()+1000 FROM mbr_user WHERE user_acnt='older'").bind(hash).execute(&pool).await.unwrap();
++    sqlx::raw_sql("CREATE TRIGGER test_revoke_failure BEFORE DELETE ON mbr_session BEGIN SELECT RAISE(ABORT,'fixture'); END;").execute(&pool).await.unwrap();
++    assert_eq!(
++        app.clone()
++            .oneshot(make("newer", Some(format!("chat_session={raw}"))))
++            .await
++            .unwrap()
++            .status(),
++        StatusCode::INTERNAL_SERVER_ERROR
++    );
++    let count: i64 = sqlx::query_scalar("SELECT count(*) FROM mbr_user WHERE user_acnt='newer'")
++        .fetch_one(&pool)
++        .await
++        .unwrap();
++    assert_eq!(count, 0);
++    sqlx::query("DROP TRIGGER test_revoke_failure")
++        .execute(&pool)
++        .await
++        .unwrap();
++    assert_eq!(
++        app.oneshot(make("newer", Some(format!("chat_session={raw}"))))
++            .await
++            .unwrap()
++            .status(),
++        StatusCode::SEE_OTHER
++    );
++    let count: i64 = sqlx::query_scalar("SELECT count(*) FROM mbr_session")
++        .fetch_one(&pool)
++        .await
++        .unwrap();
++    assert_eq!(count, 0);
++}

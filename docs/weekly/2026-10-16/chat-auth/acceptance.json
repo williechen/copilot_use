@@ -1,0 +1,29 @@
+{
+  "source_sha": "04c234ed2fcf4d2473358b623638db80eea92d26",
+  "status": "passed local native Linux",
+  "production_url": "http://localhost:3001/login",
+  "production_registered_accounts": 0,
+  "fixture_registered_accounts": 1,
+  "browser_checks": [
+    "short password rejected with explicit message",
+    "registration succeeded",
+    "duplicate username explained",
+    "wrong password rejected with clear 401 message",
+    "correct password with Enter navigated to /app",
+    "reload preserved session",
+    "logout returned to /login",
+    "production URL displays updated first-use guidance"
+  ],
+  "strict_clippy": "passed",
+  "release_build": "passed",
+  "functional_status": "passed",
+  "functional_check_count": 64,
+  "screenshot": "chat-auth-verification.png",
+  "screenshot_scope": "disposable native fixture, synthetic test account",
+  "ai_validation": "excluded",
+  "remote_ci": "not run",
+  "github_release": "not published",
+  "teaching_policy": "basic usable functions first; progressively add details and conditions; blocking/data-safety/dependency issues addressed in current slice",
+  "new_day_published": false,
+  "learning_stage_advanced": false
+}

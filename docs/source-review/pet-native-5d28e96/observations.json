@@ -1,0 +1,178 @@
+{
+  "observed_at": "2026-10-25T09:27:04.891477+08:00",
+  "source_sha": "5d28e969ceb10f7ae9bb7d15212f6a0dd63c9af1",
+  "binary_sha256": "55b4040d31ef0991bfb7dd63998920e635c809945d5f65dfdb61dda31290627d",
+  "native_ui_control_available": false,
+  "user_observations": [
+    {
+      "case": "control_window_visible",
+      "result": "window appeared but frontend initially connection refused; corrected after frontend readiness and native restart"
+    },
+    {
+      "case": "create_and_life_windows",
+      "result": "建立成功但視窗不正確",
+      "scope": "user report; three requested names not present in SQLite"
+    },
+    {
+      "case": "frontend_after_readiness_restart",
+      "result": "control and pet normal",
+      "basis": "user confirmation"
+    },
+    {
+      "case": "three_native_life_windows",
+      "result": "three windows visible, distinct names match SQLite",
+      "basis": "user screenshot 09:29:19"
+    },
+    {
+      "case": "readability",
+      "result": "transparent windows overlap light controller; white text has low contrast",
+      "basis": "user screenshot 09:29:19"
+    },
+    {
+      "case": "cage_one_preserves_other_windows",
+      "result": "pass",
+      "basis": "user confirmed; SQLite caged flags below"
+    },
+    {
+      "case": "controller_close_hides_and_life_button_reopens",
+      "result": "pass",
+      "basis": "user confirmed"
+    },
+    {
+      "case": "extra_closing_quote_in_name",
+      "result": "user confirmed typing; not an application name corruption"
+    },
+    {
+      "case": "native_context_menu_sleep_wake_isolated",
+      "result": "pass",
+      "basis": "user confirmed only 1 changed and wake works"
+    },
+    {
+      "case": "restore_all_uncaged_after_restart",
+      "result": "fail",
+      "actual": "only last selected pet appeared; 1 did not restore",
+      "expected": "two uncaged pets restored; caged pet remains absent",
+      "basis": "user confirmed and SQLite flags unchanged"
+    },
+    {
+      "case": "manual_reopen_and_duplicate_open",
+      "result": "pass",
+      "basis": "user confirmed three windows restored; duplicate open did not create fourth"
+    }
+  ],
+  "profiles": [
+    {
+      "id": "add870e4-edc9-4904-99fd-b19945d4eb4f",
+      "name": "1",
+      "is_default_closure": 0
+    },
+    {
+      "id": "1c9d9955-013b-4dfd-9b2e-d3ab0f7d5e5f",
+      "name": "原生驗收乙",
+      "is_default_closure": 1
+    },
+    {
+      "id": "9851a1ec-497b-4f1d-90b1-ebdf4cf4ad44",
+      "name": "原生驗收丙」",
+      "is_default_closure": 0
+    }
+  ],
+  "selection": [
+    {
+      "slot": 1,
+      "pet_id": "9851a1ec-497b-4f1d-90b1-ebdf4cf4ad44"
+    }
+  ],
+  "roaming_error": "desktop roaming unavailable: pet window not found",
+  "functional_acceptance": false,
+  "frontend_http_status": 200,
+  "readiness_fix_scope": "local acceptance launcher only; no Pet source changes",
+  "after_cage_profiles": [
+    {
+      "id": "add870e4-edc9-4904-99fd-b19945d4eb4f",
+      "name": "1",
+      "is_default_closure": 0
+    },
+    {
+      "id": "1c9d9955-013b-4dfd-9b2e-d3ab0f7d5e5f",
+      "name": "原生驗收乙",
+      "is_default_closure": 1
+    },
+    {
+      "id": "9851a1ec-497b-4f1d-90b1-ebdf4cf4ad44",
+      "name": "原生驗收丙」",
+      "is_default_closure": 0
+    }
+  ],
+  "before_restart": {
+    "profiles": [
+      [
+        "add870e4-edc9-4904-99fd-b19945d4eb4f",
+        "1",
+        0
+      ],
+      [
+        "1c9d9955-013b-4dfd-9b2e-d3ab0f7d5e5f",
+        "原生驗收乙",
+        1
+      ],
+      [
+        "9851a1ec-497b-4f1d-90b1-ebdf4cf4ad44",
+        "原生驗收丙」",
+        0
+      ]
+    ],
+    "selection": [
+      [
+        1,
+        "9851a1ec-497b-4f1d-90b1-ebdf4cf4ad44"
+      ]
+    ]
+  },
+  "after_restart": {
+    "profiles": [
+      [
+        "add870e4-edc9-4904-99fd-b19945d4eb4f",
+        "1",
+        0
+      ],
+      [
+        "1c9d9955-013b-4dfd-9b2e-d3ab0f7d5e5f",
+        "原生驗收乙",
+        1
+      ],
+      [
+        "9851a1ec-497b-4f1d-90b1-ebdf4cf4ad44",
+        "原生驗收丙」",
+        0
+      ]
+    ],
+    "selection": [
+      [
+        1,
+        "9851a1ec-497b-4f1d-90b1-ebdf4cf4ad44"
+      ]
+    ]
+  },
+  "database_unchanged_after_restart": false,
+  "roaming_result": "failed; native log pet window not found; source only looks up fixed label pet",
+  "final_profiles": [
+    [
+      "add870e4-edc9-4904-99fd-b19945d4eb4f",
+      "1",
+      0
+    ],
+    [
+      "1c9d9955-013b-4dfd-9b2e-d3ab0f7d5e5f",
+      "原生驗收乙",
+      0
+    ],
+    [
+      "9851a1ec-497b-4f1d-90b1-ebdf4cf4ad44",
+      "原生驗收丙」",
+      0
+    ]
+  ],
+  "completed_at": "2026-10-25T09:33:10.632187+08:00",
+  "processes_left_running": "isolated native Pet and Trunk for user review"
+}

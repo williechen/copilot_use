@@ -1,0 +1,165 @@
+{
+  "date": "2026-10-26",
+  "repository": "williechen/copilot_use",
+  "branch": "main",
+  "source_repository": "williechen/rust_ai_ring",
+  "source_sha": "bb259aaf76542554a3a704d9c4f4a3a219d65cbf",
+  "source_read_only": true,
+  "expected_final_sync_parent": "51d55c3a1a2f712a69b0dc72d3cdd15ab4745f52",
+  "projects": [
+    {
+      "project": "chat",
+      "day": 40,
+      "source_sha": "bb259aaf76542554a3a704d9c4f4a3a219d65cbf",
+      "expected_parent": "d8d9f4ddf46d923c6abcc83ef0b86e5439eee4c4",
+      "article_commit": "b520ff420026d462820c8245c7b7b674fb5e45ba",
+      "sync_commit": "183f3268dd751536fa61856f5c52d15b1bba60e6",
+      "article": {
+        "path": "docs/teaching/daily/day-40/chat.md",
+        "blob_sha": "23364ff495b0bd5cb42f3871f855ae5205821e23",
+        "sha256": "d190c86cc5594b24ffe9054e3eb350bf988f88dec1b2db92c973e7230a316bd2"
+      },
+      "refactor": {
+        "path": "docs/teaching/daily/day-40/chat-day40-refactor.patch",
+        "blob_sha": "f82b1129ee3bd628c14fc34c04bd12742dba8034",
+        "sha256": "ce92bd5c0dd31c01a5b61a13384b20195ce897441f886ab75ea68c99c3e7219e"
+      },
+      "green": {
+        "path": "docs/teaching/daily/day-40/chat-day40-green.patch",
+        "blob_sha": "e8d6a12612dded893c9261b6082d29b0166baed7",
+        "sha256": "a00fb63e3a622e86f7f4703e47f75d88cc166440b2c590b0f59b87d116dbe81a"
+      },
+      "full_text_readback": true,
+      "static_patch_hunks": true,
+      "git_apply": false,
+      "cargo": false,
+      "postgres": false,
+      "gui": false,
+      "ci": false,
+      "product_applied": false,
+      "accepted": false,
+      "next_day_before": 40,
+      "next_day_after": 41
+    },
+    {
+      "project": "pet",
+      "day": 40,
+      "source_sha": "bb259aaf76542554a3a704d9c4f4a3a219d65cbf",
+      "expected_parent": "183f3268dd751536fa61856f5c52d15b1bba60e6",
+      "article_commit": "112543652ba695e64f31c37555b3533475e55232",
+      "sync_commit": "98baacfe7783dd0dc641b8043fd09560d3fdc441",
+      "article": {
+        "path": "docs/teaching/daily/day-40/pet.md",
+        "blob_sha": "b3d606bf42e589717e5ea4263787046d636c0ce6",
+        "sha256": "940cdb871630503069d1a35a66253cb8afea0993aab07090a9b80a4d48416165"
+      },
+      "refactor": {
+        "path": "docs/teaching/daily/day-40/pet-day40-refactor.patch",
+        "blob_sha": "38a0827cce2afdb8a7afecfe43a916f94089bc93",
+        "sha256": "ede0e61d1e8f6b541d567bd464dc5a22d319c46dd3a316b5c88d28223d3fb7fa"
+      },
+      "green": {
+        "path": "docs/teaching/daily/day-40/pet-day40-green.patch",
+        "blob_sha": "761a1eda37bb60c4325dd7e1ce50f3a1800f9ae6",
+        "sha256": "ac1b18a79a8780f6d50795d248ce2dd94ee3114c2d864aca7477d421db41e24c"
+      },
+      "full_text_readback": true,
+      "static_patch_hunks": true,
+      "git_apply": false,
+      "cargo": false,
+      "postgres": false,
+      "gui": false,
+      "ci": false,
+      "product_applied": false,
+      "accepted": false,
+      "next_day_before": 40,
+      "next_day_after": 41
+    },
+    {
+      "project": "analytics",
+      "day": 40,
+      "source_sha": "bb259aaf76542554a3a704d9c4f4a3a219d65cbf",
+      "expected_parent": "98baacfe7783dd0dc641b8043fd09560d3fdc441",
+      "article_commit": "4b1dc5e2a15348e2d0f6bdbd4ea133cabd5cefad",
+      "sync_commit": "51d55c3a1a2f712a69b0dc72d3cdd15ab4745f52",
+      "article": {
+        "path": "docs/teaching/daily/day-40/analytics.md",
+        "blob_sha": "ef709f989d90e1d72c91277b9755dcb06d9b4e21",
+        "sha256": "0817a0ba46758697a142b3bebccddbfc914319d06750984c7c5be7c1286d1958"
+      },
+      "refactor": {
+        "path": "docs/teaching/daily/day-40/analytics-day40-refactor.patch",
+        "blob_sha": "71e76435c9ef4616363b426a7c455ed02731cb02",
+        "sha256": "ca7a69a2a02d32cd05d3364b10d8d9e3bf99b219c9eb878da426271191997ab5"
+      },
+      "green": {
+        "path": "docs/teaching/daily/day-40/analytics-day40-green.patch",
+        "blob_sha": "2b314c0f3184dd38c48bfabb4d8e47ad68dbac91",
+        "sha256": "52fa886a03b17bf340fdafb63df8b58f9580f094c9cb8747414f451aa42551a6"
+      },
+      "full_text_readback": true,
+      "static_patch_hunks": true,
+      "git_apply": false,
+      "cargo": false,
+      "postgres": false,
+      "gui": false,
+      "ci": false,
+      "product_applied": false,
+      "accepted": false,
+      "next_day_before": 40,
+      "next_day_after": 41
+    }
+  ],
+  "workspace_manifest_and_lock_sha": {
+    "chat_apps": [
+      "c730268a71e893bc675364e2516fa34c073cec3e",
+      "7629c7d06fe92ce55c33c939b189f279dd970506"
+    ],
+    "pet_apps": [
+      "392ac8805faaff291383364168a07d6d926fe333",
+      "d607731dc9af032fe7a6998b806d95b325a4f589"
+    ],
+    "analytics_apps": [
+      "dd8face88eae1ecedaa441c8b228472f5bd4eda3",
+      "d1bdb79c505f085872a2fa7f95bd3fcd0b67b23b"
+    ],
+    "crates": [
+      "31fcd8fd27cdafc351a424a3e54f37e825b6ab4a",
+      "251c70dd6b75883611329b835855bf62b5950253"
+    ]
+  },
+  "seven_homepages": [
+    "README.md",
+    "docs/README.md",
+    "docs/teaching/README.md",
+    "docs/teaching/daily/README.md",
+    "docs/teaching/chat/README.md",
+    "docs/teaching/pet/README.md",
+    "docs/teaching/analytics/README.md"
+  ],
+  "entries": [
+    "docs/teaching/current/CHAT_ENTRY.md",
+    "docs/teaching/current/PET_ENTRY.md",
+    "docs/teaching/current/ANALYTICS_ENTRY.md"
+  ],
+  "homepage_entry_readback": true,
+  "article_links_exist": true,
+  "learning_state_manifest_consistent": true,
+  "next_day": {
+    "chat": 41,
+    "pet": 41,
+    "analytics": 41
+  },
+  "validation": "Exact commit full-text readback and in-memory patch preimage/hunk-count application against rust_ai_ring SHA only; no git apply or Cargo executed.",
+  "last_full_comparison_unchanged": true,
+  "STATUS_unchanged": true,
+  "global_refactor": "G-01/G-02 unchanged; no new cross-workspace work or duplicate credit",
+  "errors": [
+    {
+      "stage": "first Chat homepage sync attempt",
+      "raw": "Code Mode exceeded the maximum number of tool calls.",
+      "branch_write": false,
+      "recovered_commit": "183f3268dd751536fa61856f5c52d15b1bba60e6"
+    }
+  ]
+}

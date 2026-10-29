@@ -1,0 +1,7 @@
+{"time": "2026-10-18T23:12:26.859694", "method": "GET", "path": "/", "status": 200, "injected": false}
+{"time": "2026-10-18T23:12:26.973021", "method": "GET", "path": "/pkg/rust_ai_chat.js", "status": 200, "injected": false}
+{"time": "2026-10-18T23:12:26.997158", "method": "GET", "path": "/pkg/rust_ai_chat.wasm", "status": 200, "injected": false}
+{"time": "2026-10-18T23:12:36.235659", "method": "GET", "path": "/api/rooms?q=Rust+%E6%8A%80%E8%A1%93%E4%BA%A4%E6%B5%81", "status": 200, "injected": false}
+{"time": "2026-10-18T23:14:33.304768", "method": "GET", "path": "/api/rooms?q=Rust+%E6%8A%80%E8%A1%93%E4%BA%A4%E6%B5%81", "status": 503, "injected": true}
+{"time": "2026-10-18T23:15:53.177926", "method": "GET", "path": "/api/rooms?q=Rust+%E6%8A%80%E8%A1%93%E4%BA%A4%E6%B5%81", "status": 200, "injected": false}
+{"time": "2026-10-18T23:15:54.484191", "method": "GET", "path": "/api/rooms?q=%E4%B8%8D%E5%AD%98%E5%9C%A8", "status": 200, "injected": false}

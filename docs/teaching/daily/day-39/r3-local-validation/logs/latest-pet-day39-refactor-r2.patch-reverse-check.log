@@ -1,0 +1,2 @@
+error: patch failed: pet_apps/pet_application/src/lifecycle.rs:14
+error: pet_apps/pet_application/src/lifecycle.rs: patch does not apply

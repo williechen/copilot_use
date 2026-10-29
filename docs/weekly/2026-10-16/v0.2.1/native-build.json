@@ -1,0 +1,16 @@
+{
+  "source_sha": "9bcae7c5d139f75ed08b4daffece602a71fdab34",
+  "files": {
+    "bin/day9-analytics": "f7ae9632d15c00be7a2fff857d92bde98a978cfe0dd6d4c0cf665531c4712f65",
+    "bin/day9-chat": "f90b49ac00e4562c4f0a108d5d3725f390aea1629c0ea47b9a3f67bd5efac7cc",
+    "site/pkg/chat.css": "ba0006968bd154077e71bdf435f3937b42a8814012ba2633af294068202469ab",
+    "site/pkg/chat_ui.js": "f778d473d6a4d501b77a39089e1f42e3063c1eea3631f42cb18a331dba182c2f",
+    "site/pkg/chat_ui_bg.wasm": "56cfd9a7bd53049cb400c5a6e29fa4a222e6ae25c486a684b36ee2479a2feeab",
+    "systemd/copilot-analytics.service": "087823f189af78b1373396e2b6942c8d9309d6ad3d0c372bb02d68ede977b4ec",
+    "systemd/copilot-chat.service": "77f9a3e89d466114f27eef6e4255b706d481ce0972ea1859f08fa168c9e86fcc",
+    "systemd/copilot-pet-update.service": "eb509ff7e299cccee65f09e24fa2b4a3935f78fbd220d8094ca7cc119f9b452f",
+    "systemd/copilot-weekly.service": "44ee8e94067f5e98e3e38b00d8bc91c52b2f5994582786c85e11692c698d2d64",
+    "systemd/copilot-weekly.timer": "dde142de4383ee02bff26cc430e1551eef7d2ce404b84be3bbed6604addb0339"
+  },
+  "deployment": "not deployed"
+}

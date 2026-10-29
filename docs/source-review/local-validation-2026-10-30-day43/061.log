@@ -1,0 +1,181 @@
+   Compiling analytics-persistence v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-20261030/analytics_apps/analytics_persistence)
+   Compiling analytics-server v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-20261030/analytics_apps/analytics_server)
+warning: unused import: `analytics_persistence::summary_for_source`
+ --> analytics_server/src/pg_store.rs:1:5
+  |
+1 | use analytics_persistence::summary_for_source;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `analytics_persistence::summary_for_source`
+  --> analytics_server/src/lib.rs:12:5
+   |
+12 | use analytics_persistence::summary_for_source;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: `analytics-server` (lib) generated 2 warnings (run `cargo fix --lib -p analytics-server` to apply 2 suggestions)
+warning: `analytics-server` (lib test) generated 1 warning (1 duplicate)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 20.08s
+     Running unittests src/lib.rs (analytics_apps/target/debug/deps/analytics_persistence-2d2614fe12627214)
+
+running 3 tests
+test day35_exact_kind_adapter_tests::rolled_back_event_is_not_counted ... ok
+test day35_exact_kind_adapter_tests::all_kinds_are_sorted_and_scoped_to_one_source ... ok
+test day35_exact_kind_adapter_tests::exact_kind_counts_committed_rows_only_for_requested_source ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 4.22s
+
+     Running unittests src/lib.rs (analytics_apps/target/debug/deps/analytics_server-80b35e325cb6abdd)
+
+running 42 tests
+test admin::tests::day18_activity_extends_valid_session_only ... ok
+test admin::tests::day19_success_does_not_reset_previous_failures ... ok
+test admin::tests::day20_login_rate_limit_provides_retry_after ... ok
+test admin::tests::day19_successful_logins_do_not_consume_failure_budget ... ok
+test admin::tests::day21_admin_account_is_explicit ... ok
+test admin::tests::origin_and_expired_sessions_fail_closed ... ok
+test admin::tests::login_query_postgres_and_logout_flow ... ok
+test admin::tests::admin_login_guard_and_session_are_separate_from_source_token ... ok
+test bootstrap::day34_default_tests::day34_parallel_start_preserves_one_salted_admin ... ok
+test csv::tests::csv_escapes_quotes_and_spreadsheet_formulas ... ok
+test dashboard_summary::tests::committed_count_caption_preserves_source_kind_and_zero ... ok
+test dashboard_ui::day29_tests::active_source_is_marked_for_accessibility ... ok
+test dashboard_ui::day30_tests::login_page_is_server_rendered_with_accessible_fields ... ok
+test dashboard_ui::day31_tests::change_form_keeps_wire_names_and_escapes_attribute_values ... ok
+test dashboard_ui::day32_filter_tests::dashboard_has_accessible_exact_kind_filter_and_escaped_value ... ok
+test dashboard_ui::day33_summary_caption_tests::count_label_distinguishes_full_and_exact_kind ... ok
+test dashboard_ui::day33_summary_caption_tests::real_leptos_ssr_escapes_filtered_type_in_count_label ... ok
+test dashboard_ui::day40_csv_filter_ui_tests::dashboard_csv_link_encodes_exact_kind_and_escapes_markup ... ok
+test dashboard_ui::day41_event_table_tests::committed_kind_rows_are_rendered_in_a_real_leptos_table_and_escaped ... ok
+test dashboard_ui::day42_kind_navigation_tests::kind_carow_links_to_real_exact_filter_and_escapes_html ... ok
+test dashboard_ui::day43_source_switch_tests::source_navigation_preserves_exact_utf8_filter_and_escapes_markup ... ok
+test dashboard_url::tests::existing_csv_url_contract_keeps_utf8_and_reserved_characters ... ok
+test dashboard_url::tests::source_switch_preserves_encoded_filter_and_empty_semantics ... ok
+test day16_total_tests::day28_dashboard_leptos_tests::day28_leptos_dashboard_renders_source_and_links ... ok
+test day16_total_tests::total_uses_actual_committed_summary_counts ... ok
+test bootstrap::day22_tests::day22_bootstrap_serializes_and_preserves_hash ... ok
+test session_cookie::tests::parser_preserves_exact_name_and_rejects_duplicate_or_malformed_cookie ... ok
+test source_kind_summary_tests::day36_source_token_alone_cannot_read_even_before_database_access ... ok
+test bootstrap::day34_default_tests::day34_real_login_change_and_restart_never_reset_password ... ok
+test source_summary_tests::empty_and_rolled_back_events_are_not_counted ... ok
+test source_kind_summary_tests::filters_committed_deduplicated_rows_by_source_and_kind ... ok
+test source_summary_tests::summary_rejects_cross_source_before_database_access ... ok
+test tests::event_type_rejects_noncanonical_boundaries ... ok
+test tests::existing_event_validation_rejects_whitespace ... ok
+test tests::invalid_event_does_not_reserve_dedup_key ... ok
+test tests::nil_event_id_is_not_accepted ... ok
+test tests::persist_outcomes_have_distinct_http_codes ... ok
+test tests::rejects_bad_source_version_and_event_type ... ok
+test tests::token_must_match_the_claimed_source ... ok
+test tests::valid_event_is_accepted_once_per_source_and_id ... ok
+test day36_live_router_requires_person_session_not_source_token ... ok
+test source_summary_tests::summary_counts_committed_rows_per_source_and_kind ... ok
+
+test result: ok. 42 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 6.53s
+
+     Running unittests src/main.rs (analytics_apps/target/debug/deps/analytics_server-a923751b73d7477e)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/bin/bootstrap_admin.rs (analytics_apps/target/debug/deps/bootstrap_admin-3ef8fb527f099a15)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/day23_password_login.rs (analytics_apps/target/debug/deps/day23_password_login-f5ba1fe9e43644db)
+
+running 2 tests
+test day23_ready_account_session_survives_new_pool_and_is_revocable ... ok
+test day23_bootstrapped_password_is_restricted_before_first_change ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.06s
+
+     Running tests/day24_password_change.rs (analytics_apps/target/debug/deps/day24_password_change-8fdec811240ae39a)
+
+running 2 tests
+test day24_duplicate_migration_stops_and_revocation_failure_rolls_back ... ok
+test day24_password_change_is_atomic_revokes_all_sessions_and_requires_relogin ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 6.28s
+
+     Running tests/day25_repeat_password_change.rs (analytics_apps/target/debug/deps/day25_repeat_password_change-c0e1e6ddf1f7cdd0)
+
+running 1 test
+test day25_admin_can_change_password_again_after_initialization ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 5.38s
+
+     Running tests/day26_session_contract.rs (analytics_apps/target/debug/deps/day26_session_contract-64ee2446becda9ed)
+
+running 1 test
+test first_admin_login_has_persistent_restricted_session ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.31s
+
+     Running tests/day27_dashboard_source.rs (analytics_apps/target/debug/deps/day27_dashboard_source-dd5ab8a4db7d6846)
+
+running 1 test
+test day27_session_admin_can_switch_real_source_counts ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.41s
+
+     Running tests/day37_query_cookie.rs (analytics_apps/target/debug/deps/day37_query_cookie-70f3cd5f70f639bf)
+
+running 1 test
+test day37_real_query_routes_reject_ambiguous_session_cookies ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.16s
+
+     Running tests/day38_ingest_authorization.rs (analytics_apps/target/debug/deps/day38_ingest_authorization-2745f841e3a50a71)
+
+running 1 test
+test ambiguous_machine_authorization_is_rejected_before_db_write ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.20s
+
+     Running tests/day39_export_csv.rs (analytics_apps/target/debug/deps/day39_export_csv-c1b27053cceb64a7)
+
+running 1 test
+test day39_authenticated_admin_exports_only_selected_source_csv ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.47s
+
+     Running tests/idempotency_contract.rs (analytics_apps/target/debug/deps/idempotency_contract-93da51645d9f7d55)
+
+running 2 tests
+test event_identity_deduplicates_per_source ... ok
+test duplicate_is_counted_once_across_retries ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/postgres_event_store.rs (analytics_apps/target/debug/deps/postgres_event_store-ab04a581d6370e88)
+
+running 1 test
+test postgres_event_idempotency ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.34s
+
+     Running tests/support_http_contract.rs (analytics_apps/target/debug/deps/support_http_contract-2416a9f24387b9b1)
+
+running 2 tests
+test response_helpers_keep_cookie_and_body_contracts ... ok
+test request_setup_preserves_get_and_form_wire_contracts ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests analytics_persistence
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests analytics_server
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

@@ -1,0 +1,8 @@
+It looks like you're trying to compile Leptos without the LEPTOS_OUTPUT_NAME environment variable being set. There are two options
+ 1. cargo-leptos is not being used, but get_configuration() is being passed None. This needs to be changed to Some("Cargo.toml")
+ 2. You are compiling Leptos without LEPTOS_OUTPUT_NAME being set with cargo-leptos. This shouldn't be possible!
+Server running on http://127.0.0.1:3000
+It looks like you're trying to compile Leptos without the LEPTOS_OUTPUT_NAME environment variable being set. There are two options
+ 1. cargo-leptos is not being used, but get_configuration() is being passed None. This needs to be changed to Some("Cargo.toml")
+ 2. You are compiling Leptos without LEPTOS_OUTPUT_NAME being set with cargo-leptos. This shouldn't be possible!
+Server running on http://127.0.0.1:3000

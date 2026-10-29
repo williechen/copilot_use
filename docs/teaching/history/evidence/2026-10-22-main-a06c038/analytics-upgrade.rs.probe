@@ -1,0 +1,20 @@
+use sqlx::migrate::Migrator;
+#[tokio::test]
+async fn observes_two_historical_databases_without_erasing_admin() {
+    let url=std::env::var("VALIDATION_PG_URL").unwrap();
+    let base=std::env::var("VALIDATION_BASELINES").unwrap();
+    let admin=sqlx::PgPool::connect(&format!("{url}/postgres")).await.unwrap();
+    for label in ["pre24", "day24"] {
+        let name=format!("validation_upgrade_{label}");
+        sqlx::query(if label=="pre24" {"CREATE DATABASE validation_upgrade_pre24"} else {"CREATE DATABASE validation_upgrade_day24"}).execute(&admin).await.unwrap();
+        let db=sqlx::PgPool::connect(&format!("{url}/{name}")).await.unwrap();
+        Migrator::new(std::path::Path::new(&format!("{base}/{label}/stats_server"))).await.unwrap().run(&db).await.unwrap();
+        stats_server::bootstrap::initialize(&db,"validation-password".into()).await.unwrap();
+        let result=sqlx::migrate!("./migrations").run(&db).await;
+        let count:i64=sqlx::query_scalar("SELECT count(*) FROM uac_user").fetch_one(&db).await.unwrap();
+        println!("UPGRADE {label}: {result:?}; admin_rows={count}");
+        assert_eq!(count,1);
+        db.close().await;
+        sqlx::query(if label=="pre24" {"DROP DATABASE validation_upgrade_pre24"} else {"DROP DATABASE validation_upgrade_day24"}).execute(&admin).await.unwrap();
+    }
+}

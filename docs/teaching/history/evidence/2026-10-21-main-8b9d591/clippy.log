@@ -1,0 +1,91 @@
+    Checking tokio v1.54.0
+   Compiling sqlx-core v0.9.0
+    Checking chat-domain v0.2.23 (/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-3/work/formal-main/crates/chat_domain)
+   Compiling plist v1.10.2
+   Compiling tauri-utils v2.10.2
+   Compiling sqlx-sqlite v0.9.0
+    Checking tokio-stream v0.1.19
+   Compiling sqlx-postgres v0.9.0
+   Compiling sqlx-macros-core v0.9.0
+    Checking any_spawner v0.3.0
+    Checking reactive_graph v0.2.16
+   Compiling sqlx-macros v0.9.0
+    Checking hyper v1.12.0
+    Checking sqlx v0.9.0
+    Checking reactive_stores v0.4.4
+    Checking hyper-util v0.1.21
+    Checking tower v0.5.3
+    Checking tokio-tungstenite v0.29.0
+    Checking tachys v0.2.19
+    Checking axum v0.8.9
+   Compiling embed-resource v3.0.12
+   Compiling tauri-winres v0.3.7
+   Compiling tauri-build v2.7.3
+    Checking shared v0.2.23 (/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-3/work/formal-main/crates/shared)
+    Checking server_fn v0.8.13
+   Compiling tauri v2.12.4
+   Compiling tauri-codegen v2.7.3
+   Compiling tauri-macros v2.7.3
+    Checking tauri-runtime v2.12.2
+   Compiling desktop-pet v0.2.23 (/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-3/work/formal-main/apps/desktop_pet)
+    Checking tauri-runtime-wry v2.12.2
+    Checking pet-domain v0.2.23 (/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-3/work/formal-main/crates/pet_domain)
+    Checking ai-core v0.2.23 (/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-3/work/formal-main/crates/ai_core)
+    Checking tokio-util v0.7.20
+    Checking chat-application v0.2.23 (/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-3/work/formal-main/crates/chat_application)
+    Checking tower-http v0.6.11
+    Checking persistence v0.2.23 (/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-3/work/formal-main/crates/persistence)
+    Checking leptos_server v0.8.8
+    Checking leptos_dom v0.8.8
+    Checking telemetry v0.2.23 (/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-3/work/formal-main/crates/telemetry)
+    Checking leptos v0.8.22
+    Checking leptos_router v0.8.17
+    Checking leptos_meta v0.8.7
+    Checking stats-server v0.2.23 (/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-3/work/formal-main/apps/stats_server)
+error: this `if` statement can be collapsed
+   --> apps/stats_server/src/admin.rs:321:5
+    |
+321 | /     if let Some(key) = cookie_key(&headers) {
+322 | |         if let Ok(mut sessions) = state.sessions.lock() {
+323 | |             sessions.remove(&key);
+324 | |         }
+325 | |     }
+    | |_____^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#collapsible_if
+    = note: `-D clippy::collapsible-if` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(clippy::collapsible_if)]`
+help: collapse nested if block
+    |
+321 ~     if let Some(key) = cookie_key(&headers)
+322 ~         && let Ok(mut sessions) = state.sessions.lock() {
+323 |             sessions.remove(&key);
+324 ~         }
+    |
+
+error: could not compile `stats-server` (lib) due to 1 previous error
+warning: build failed, waiting for other jobs to finish...
+error: this `if` statement can be collapsed
+   --> apps/desktop_pet/src/lib.rs:134:13
+    |
+134 | /             if window.label() == "main" {
+135 | |                 if let tauri::WindowEvent::CloseRequested { api, .. } = event {
+136 | |                     api.prevent_close();
+137 | |                     let _ = window.hide();
+138 | |                 }
+139 | |             }
+    | |_____________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#collapsible_if
+    = note: `-D clippy::collapsible-if` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(clippy::collapsible_if)]`
+help: collapse nested if block
+    |
+134 ~             if window.label() == "main"
+135 ~                 && let tauri::WindowEvent::CloseRequested { api, .. } = event {
+136 |                     api.prevent_close();
+137 |                     let _ = window.hide();
+138 ~                 }
+    |
+
+error: could not compile `desktop-pet` (lib) due to 1 previous error

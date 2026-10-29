@@ -1,0 +1,173 @@
+{
+  "total_count": 2,
+  "jobs": [
+    {
+      "id": 120213214881,
+      "run_id": 39891849841,
+      "workflow_name": "Rust Dashboard",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/williechen/rust_ai_chat/actions/runs/39891849841",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOUlFt_c8AAAAb_UQWoQ",
+      "head_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3",
+      "url": "https://api.github.com/repos/williechen/rust_ai_chat/actions/jobs/120213214881",
+      "html_url": "https://github.com/williechen/rust_ai_chat/actions/runs/39891849841/job/120213214881",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-23T02:51:29Z",
+      "started_at": "2026-10-23T02:51:31Z",
+      "completed_at": "2026-10-23T02:52:43Z",
+      "name": "check-dashboard",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-23T02:51:32Z",
+          "completed_at": "2026-10-23T02:51:33Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-23T02:51:33Z",
+          "completed_at": "2026-10-23T02:51:34Z"
+        },
+        {
+          "name": "Install Rust",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-23T02:51:34Z",
+          "completed_at": "2026-10-23T02:51:44Z"
+        },
+        {
+          "name": "Install Linux dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-23T02:51:44Z",
+          "completed_at": "2026-10-23T02:51:55Z"
+        },
+        {
+          "name": "Check stats server",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-23T02:51:55Z",
+          "completed_at": "2026-10-23T02:52:41Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10,
+          "started_at": "2026-10-23T02:52:41Z",
+          "completed_at": "2026-10-23T02:52:41Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-10-23T02:52:41Z",
+          "completed_at": "2026-10-23T02:52:41Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/williechen/rust_ai_chat/check-runs/120213214881",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000009334,
+      "runner_name": "GitHub Actions 1000009334",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 120213215062,
+      "run_id": 39891849841,
+      "workflow_name": "Rust Dashboard",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/williechen/rust_ai_chat/actions/runs/39891849841",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOUlFt_c8AAAAb_UQXVg",
+      "head_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3",
+      "url": "https://api.github.com/repos/williechen/rust_ai_chat/actions/jobs/120213215062",
+      "html_url": "https://github.com/williechen/rust_ai_chat/actions/runs/39891849841/job/120213215062",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-23T02:51:29Z",
+      "started_at": "2026-10-23T02:51:31Z",
+      "completed_at": "2026-10-23T02:54:48Z",
+      "name": "build-dashboard",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-23T02:51:32Z",
+          "completed_at": "2026-10-23T02:51:33Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-23T02:51:33Z",
+          "completed_at": "2026-10-23T02:51:34Z"
+        },
+        {
+          "name": "Install Rust",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-23T02:51:34Z",
+          "completed_at": "2026-10-23T02:51:48Z"
+        },
+        {
+          "name": "Install Linux dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-23T02:51:48Z",
+          "completed_at": "2026-10-23T02:52:03Z"
+        },
+        {
+          "name": "Build stats server",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-23T02:52:03Z",
+          "completed_at": "2026-10-23T02:54:45Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10,
+          "started_at": "2026-10-23T02:54:45Z",
+          "completed_at": "2026-10-23T02:54:45Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-10-23T02:54:45Z",
+          "completed_at": "2026-10-23T02:54:45Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/williechen/rust_ai_chat/check-runs/120213215062",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000009335,
+      "runner_name": "GitHub Actions 1000009335",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on build directory
+   Compiling reactive_graph v0.2.16
+   Compiling leptos_macro v0.8.19
+   Compiling leptos v0.8.22
+   Compiling reactive_stores v0.4.4
+   Compiling tachys v0.2.19
+   Compiling leptos_server v0.8.8
+   Compiling leptos_dom v0.8.8
+   Compiling leptos_router v0.8.17
+   Compiling leptos_meta v0.8.7
+   Compiling stats-server v0.2.17 (/home/willie/Documents/Codex/2026-10-18/referenced-chatgpt-conversation-this-is-an-2/work/latest-main/apps/stats_server)
+   Compiling leptos_integration_utils v0.8.9
+   Compiling leptos_axum v0.8.10
+   Compiling ui v0.2.17 (/home/willie/Documents/Codex/2026-10-18/referenced-chatgpt-conversation-this-is-an-2/work/latest-main/crates/ui)
+   Compiling server v0.2.17 (/home/willie/Documents/Codex/2026-10-18/referenced-chatgpt-conversation-this-is-an-2/work/latest-main/apps/server)
+   Compiling workspace-tests v0.2.17 (/home/willie/Documents/Codex/2026-10-18/referenced-chatgpt-conversation-this-is-an-2/work/latest-main/tests)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 56.09s
+     Running unittests src/lib.rs (../rust_ai_chat/target/debug/deps/persistence-f894b7b8859ca565)
+
+running 5 tests
+test tests::test_message_repository_rejects_missing_room ... ok
+test tests::test_message_schema_rejects_invalid_author_and_length ... ok
+test tests::test_message_repository_all_author_kinds ... ok
+test tests::test_room_repository_create_then_find ... ok
+test tests::test_room_repository_find_by_id ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.10s
+
+     Running unittests src/lib.rs (../rust_ai_chat/target/debug/deps/server-6aaf269e3d1b43c2)
+
+running 13 tests
+test http::room_details_tests::invalid_input_and_database_failure_are_distinct ... ok
+test http::room_details_tests::returns_exact_saved_room_without_writing ... ok
+test http::room_details_tests::list_rooms_returns_persisted_room ... ok
+test http::room_http_tests::invalid_room_names_never_write ... ok
+test ws::test::accepts_nonblank_content ... ok
+test ws::test::blank_room ... ok
+test ws::test::different_room ... ok
+test ws::test::matching_room ... ok
+test http::room_http_tests::database_failure_is_not_created ... ok
+test ws::test::rejects_blank_content ... ok
+test ws::test::typing_is_only_forwarded_to_connection_room ... ok
+test http::room_http_tests::valid_room_returns_201_and_saved_id ... ok
+test ws::test::ws_message_requires_room_at_write_time ... ok
+
+test result: ok. 13 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.34s
+
+     Running unittests src/main.rs (../rust_ai_chat/target/debug/deps/server-6fbcac545ee509f3)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/root_hub_contract.rs (../rust_ai_chat/target/debug/deps/root_hub_contract-1093993e7874f9f3)
+
+running 4 tests
+test count_tracks_receiver_lifecycle ... ok
+test message_stays_inside_room ... ok
+test last_receiver_cleanup_allows_new_subscription ... ok
+test subscribers_share_events ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running analytics/event_kind_tests.rs (../rust_ai_chat/target/debug/deps/analytics_event_kind_tests-10f7b297445e1271)
+
+running 5 tests
+test accepts_normal_kind ... ok
+test rejects_blank_or_long_kind ... ok
+test validates_event_inputs ... ok
+test valid_event_remains_unimplemented ... FAILED
+test invalid_event_is_rejected ... FAILED
+
+failures:
+
+---- valid_event_remains_unimplemented stdout ----
+
+thread 'valid_event_remains_unimplemented' (86650) panicked at tests/analytics/event_kind_tests.rs:47:64:
+called `Result::unwrap()` on an `Err` value: NotPresent
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+---- invalid_event_is_rejected stdout ----
+
+thread 'invalid_event_is_rejected' (86648) panicked at tests/analytics/event_kind_tests.rs:68:64:
+called `Result::unwrap()` on an `Err` value: NotPresent
+
+
+failures:
+    invalid_event_is_rejected
+    valid_event_remains_unimplemented
+
+test result: FAILED. 3 passed; 2 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `-p workspace-tests --test analytics_event_kind_tests`

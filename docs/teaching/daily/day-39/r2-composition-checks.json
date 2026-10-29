@@ -1,0 +1,122 @@
+[
+  {
+    "project": "chat",
+    "order": [
+      "chat-day39-refactor-r2.patch",
+      "chat-day39-green-r2.patch"
+    ],
+    "checks": [
+      {
+        "patch": "chat-day39-refactor-r2.patch",
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "patch": "chat-day39-green-r2.patch",
+        "exit_code": 0,
+        "stderr": ""
+      }
+    ],
+    "passed": true
+  },
+  {
+    "project": "chat",
+    "order": [
+      "chat-day39-green-r2.patch",
+      "chat-day39-refactor-r2.patch"
+    ],
+    "checks": [
+      {
+        "patch": "chat-day39-green-r2.patch",
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "patch": "chat-day39-refactor-r2.patch",
+        "exit_code": 0,
+        "stderr": ""
+      }
+    ],
+    "passed": true
+  },
+  {
+    "project": "pet",
+    "order": [
+      "pet-day39-refactor-r2.patch",
+      "pet-day39-green-r2.patch"
+    ],
+    "checks": [
+      {
+        "patch": "pet-day39-refactor-r2.patch",
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "patch": "pet-day39-green-r2.patch",
+        "exit_code": 0,
+        "stderr": ""
+      }
+    ],
+    "passed": true
+  },
+  {
+    "project": "pet",
+    "order": [
+      "pet-day39-green-r2.patch",
+      "pet-day39-refactor-r2.patch"
+    ],
+    "checks": [
+      {
+        "patch": "pet-day39-green-r2.patch",
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "patch": "pet-day39-refactor-r2.patch",
+        "exit_code": 0,
+        "stderr": ""
+      }
+    ],
+    "passed": true
+  },
+  {
+    "project": "analytics",
+    "order": [
+      "analytics-day39-refactor-r2.patch",
+      "analytics-day39-green-r1.patch"
+    ],
+    "checks": [
+      {
+        "patch": "analytics-day39-refactor-r2.patch",
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "patch": "analytics-day39-green-r1.patch",
+        "exit_code": 0,
+        "stderr": ""
+      }
+    ],
+    "passed": true
+  },
+  {
+    "project": "analytics",
+    "order": [
+      "analytics-day39-green-r1.patch",
+      "analytics-day39-refactor-r2.patch"
+    ],
+    "checks": [
+      {
+        "patch": "analytics-day39-green-r1.patch",
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "patch": "analytics-day39-refactor-r2.patch",
+        "exit_code": 0,
+        "stderr": ""
+      }
+    ],
+    "passed": true
+  }
+]

@@ -1,0 +1,22 @@
+    Blocking waiting for file lock on build directory
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 39.77s
+     Running unittests src/lib.rs (/var/cache/rust-ai-chat/target/debug/deps/stats_server-8e996b169ce97444)
+
+running 14 tests
+test admin::tests::login_query_postgres_and_logout_flow ... ignored, requires dedicated ANALYTICS_TEST_DATABASE_URL with CREATE SCHEMA permission
+test day16_total_tests::total_uses_actual_committed_summary_counts ... ok
+test source_kind_summary_tests::authorization_and_filter_validation_precede_database_access ... ok
+test admin::tests::origin_and_expired_sessions_fail_closed ... ok
+test tests::event_type_rejects_noncanonical_boundaries ... ok
+test tests::existing_event_validation_rejects_whitespace ... ok
+test source_summary_tests::summary_rejects_cross_source_before_database_access ... ok
+test tests::invalid_event_does_not_reserve_dedup_key ... ok
+test tests::persist_outcomes_have_distinct_http_codes ... ok
+test tests::nil_event_id_is_not_accepted ... ok
+test tests::rejects_bad_source_version_and_event_type ... ok
+test tests::token_must_match_the_claimed_source ... ok
+test tests::valid_event_is_accepted_once_per_source_and_id ... ok
+test admin::tests::admin_login_guard_and_session_are_separate_from_source_token ... ok
+
+test result: ok. 13 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.10s
+

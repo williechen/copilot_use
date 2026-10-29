@@ -1,0 +1,42 @@
+[
+  {
+    "case": "analytics_browser_default_login_forces_change",
+    "passed": true
+  },
+  {
+    "case": "analytics_browser_source_switch_and_exact_filter",
+    "passed": true
+  },
+  {
+    "case": "chat_browser_hydrated_load_and_chinese_search",
+    "passed": true
+  },
+  {
+    "case": "chat_browser_room_creation_and_connect",
+    "passed": true
+  },
+  {
+    "case": "chat_browser_peer_receives_and_other_room_isolated",
+    "passed": true
+  },
+  {
+    "case": "chat_history_restored_after_reload",
+    "passed": false,
+    "actual": "重新整理後顯示尚無本次連線訊息；歷史載入尚未接通"
+  },
+  {
+    "case": "chat_logout_revokes_existing_websocket",
+    "passed": false,
+    "actual": "登出後原頁仍可送出，第二頁收到新訊息"
+  },
+  {
+    "case": "chat_refresh_failure_retains_list_and_retry_recovers",
+    "pass": true,
+    "actual": "failure retained Chinese query and 2 rows; restart retry loaded 3 rooms"
+  },
+  {
+    "case": "chat_home_single_status_local_patch",
+    "pass": true,
+    "actual": "initial, loaded, empty filter, failed refresh, retry each show one status"
+  }
+]

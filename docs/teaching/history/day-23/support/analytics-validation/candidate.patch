@@ -1,0 +1,805 @@
+diff --git a/apps/stats_server/src/password_login.rs b/apps/stats_server/src/password_login.rs
+new file mode 100644
+index 0000000..20143bd
+--- /dev/null
++++ b/apps/stats_server/src/password_login.rs
+@@ -0,0 +1,226 @@
++use crate::{IngestState, pg_store};
++use argon2::{Argon2, PasswordHash, PasswordVerifier};
++use axum::{
++    Form, Json, Router,
++    extract::{DefaultBodyLimit, Path, State},
++    http::{HeaderMap, StatusCode, header},
++    response::{Html, IntoResponse, Redirect, Response},
++    routing::{get, post},
++};
++use serde::Deserialize;
++use sha2::{Digest, Sha256};
++const ORIGIN: &str = "http://127.0.0.1:3100";
++fn digest(value: &str) -> String {
++    Sha256::digest(value.as_bytes())
++        .iter()
++        .map(|b| format!("{b:02x}"))
++        .collect()
++}
++fn cookie(raw: &str) -> String {
++    format!("analytics_session={raw}; HttpOnly; SameSite=Strict; Path=/; Max-Age=1800")
++}
++fn raw_cookie(headers: &HeaderMap) -> Option<String> {
++    let raw = headers
++        .get(header::COOKIE)?
++        .to_str()
++        .ok()?
++        .split(';')
++        .filter_map(|v| v.trim().split_once('='))
++        .find(|(k, _)| *k == "analytics_session")?
++        .1;
++    (raw.len() == 64 && raw.bytes().all(|c| c.is_ascii_hexdigit())).then(|| raw.to_owned())
++}
++fn renewed(response: impl IntoResponse, raw: &str) -> Response {
++    let mut response = response.into_response();
++    response.headers_mut().insert(
++        header::SET_COOKIE,
++        cookie(raw).parse().expect("validated hex token"),
++    );
++    response
++}
++#[derive(Deserialize)]
++struct Login {
++    username: String,
++    password: String,
++}
++async fn login_page() -> Html<&'static str> {
++    Html(
++        r#"<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><h1>Analytics 帳密登入</h1><form method="post" action="/login"><label>帳號<input name="username" autocomplete="username" required></label><label>密碼<input type="password" name="password" autocomplete="current-password" required></label><button>登入</button></form></html>"#,
++    )
++}
++async fn login(
++    State(state): State<IngestState>,
++    headers: HeaderMap,
++    Form(form): Form<Login>,
++) -> Result<Response, StatusCode> {
++    if headers.get(header::ORIGIN).and_then(|h| h.to_str().ok()) != Some(ORIGIN) {
++        return Err(StatusCode::FORBIDDEN);
++    }
++    if !form.username.trim().eq_ignore_ascii_case("admin")
++        || !(8..=128).contains(&form.password.len())
++    {
++        return Err(StatusCode::UNAUTHORIZED);
++    }
++    // Existing bootstrap only provisions admin. Reject duplicate case-folded identities rather than guessing one.
++    let found: Vec<(String,String,bool,String)> = sqlx::query_as("SELECT id,user_pd,is_init_pd,user_status FROM uac_user WHERE lower(user_acnt)='admin' LIMIT 2")
++        .fetch_all(&state.pool).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
++    if found.len() != 1 {
++        return Err(StatusCode::UNAUTHORIZED);
++    }
++    let (id, encoded, restricted, status) = found.into_iter().next().unwrap();
++    if status != "active" {
++        return Err(StatusCode::UNAUTHORIZED);
++    }
++    let fingerprint = digest(&encoded);
++    let verified = tokio::task::spawn_blocking(move || {
++        let parsed = PasswordHash::new(&encoded).map_err(|_| ())?;
++        Argon2::default()
++            .verify_password(form.password.as_bytes(), &parsed)
++            .map_err(|_| ())
++    })
++    .await
++    .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
++    verified.map_err(|_| StatusCode::UNAUTHORIZED)?;
++    let raw = format!(
++        "{}{}",
++        uuid::Uuid::new_v4().simple(),
++        uuid::Uuid::new_v4().simple()
++    );
++    let mut tx = state
++        .pool
++        .begin()
++        .await
++        .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
++    sqlx::query("DELETE FROM uac_login_session WHERE expires_at <= floor(extract(epoch from now()))::bigint").execute(&mut *tx).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
++    sqlx::query("INSERT INTO uac_login_session(token_hash,user_id,credential_fingerprint,restricted,expires_at) VALUES ($1,$2,$3,$4,floor(extract(epoch from now()))::bigint+1800)")
++        .bind(digest(&raw)).bind(id).bind(fingerprint).bind(restricted).execute(&mut *tx).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
++    tx.commit()
++        .await
++        .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
++    Ok(renewed(
++        Redirect::to(if restricted {
++            "/change-password"
++        } else {
++            "/dashboard"
++        }),
++        &raw,
++    ))
++}
++// Recheck account status, mandatory-change state and password fingerprint on each protected request.
++async fn session(state: &IngestState, headers: &HeaderMap) -> Result<(bool, String), StatusCode> {
++    let raw = raw_cookie(headers).ok_or(StatusCode::UNAUTHORIZED)?;
++    let found:Option<(bool,bool,String,String,String)> = sqlx::query_as("SELECT s.restricted,u.is_init_pd,u.user_pd,s.credential_fingerprint,u.id FROM uac_login_session s JOIN uac_user u ON u.id=s.user_id WHERE s.token_hash=$1 AND s.expires_at>floor(extract(epoch from now()))::bigint AND u.user_status='active' AND lower(u.user_acnt)='admin'")
++        .bind(digest(&raw)).fetch_optional(&state.pool).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
++    let (restricted, must_change, current, fingerprint, id) =
++        found.ok_or(StatusCode::UNAUTHORIZED)?;
++    if digest(&current) != fingerprint {
++        return Err(StatusCode::UNAUTHORIZED);
++    }
++    let refreshed=sqlx::query("UPDATE uac_login_session SET expires_at=floor(extract(epoch from now()))::bigint+1800 WHERE token_hash=$1 AND expires_at>floor(extract(epoch from now()))::bigint AND EXISTS (SELECT 1 FROM uac_user WHERE id=$2 AND user_pd=$3 AND user_status='active')")
++        .bind(digest(&raw)).bind(id).bind(current).execute(&state.pool).await.map_err(|_|StatusCode::SERVICE_UNAVAILABLE)?;
++    if refreshed.rows_affected() != 1 {
++        return Err(StatusCode::UNAUTHORIZED);
++    }
++    Ok((restricted || must_change, raw))
++}
++async fn change_page(
++    State(state): State<IngestState>,
++    headers: HeaderMap,
++) -> Result<Response, StatusCode> {
++    let (restricted, raw) = session(&state, &headers).await?;
++    if !restricted {
++        return Ok(renewed(Redirect::to("/dashboard"), &raw));
++    }
++    Ok(renewed(
++        Html(
++            "<!doctype html><html lang=\"zh-Hant\"><meta charset=\"utf-8\"><h1>首次登入須更換密碼與Email</h1><p>帳密已驗證，後台查詢仍被拒絕。本切片尚未提供改密碼提交，請勿清除資料庫標記繞過限制。</p><form method=\"post\" action=\"/logout\"><button>登出</button></form></html>",
++        ),
++        &raw,
++    ))
++}
++async fn dashboard(State(state): State<IngestState>, headers: HeaderMap) -> Response {
++    let (restricted, raw) = match session(&state, &headers).await {
++        Ok(v) => v,
++        Err(StatusCode::UNAUTHORIZED) => return Redirect::to("/login").into_response(),
++        Err(e) => return e.into_response(),
++    };
++    if restricted {
++        return renewed(Redirect::to("/change-password"), &raw);
++    }
++    let rows = match pg_store::summary_for_source(&state.pool, "web_chat").await {
++        Ok(v) => v,
++        Err(_) => return StatusCode::SERVICE_UNAVAILABLE.into_response(),
++    };
++    let Some(total) = crate::summary_total(&rows) else {
++        return StatusCode::SERVICE_UNAVAILABLE.into_response();
++    };
++    renewed(
++        Html(format!(
++            "<!doctype html><html lang=\"zh-Hant\"><meta charset=\"utf-8\"><h1>Analytics 管理後台</h1><p>已完成密碼初始化的管理員：Chat 已提交事件總數 {total}</p><p>詳細查詢畫面與管理操作將於後續切片接回。</p><form method=\"post\" action=\"/logout\"><button>登出</button></form></html>"
++        )),
++        &raw,
++    )
++}
++async fn summary(
++    State(state): State<IngestState>,
++    Path(source): Path<String>,
++    headers: HeaderMap,
++) -> Result<Response, StatusCode> {
++    let (restricted, raw) = session(&state, &headers).await?;
++    if restricted {
++        return Err(StatusCode::FORBIDDEN);
++    }
++    if !matches!(source.as_str(), "web_chat" | "desktop_pet") {
++        return Err(StatusCode::BAD_REQUEST);
++    }
++    let rows = pg_store::summary_for_source(&state.pool, &source)
++        .await
++        .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
++    Ok(renewed(Json(rows), &raw))
++}
++async fn logout(
++    State(state): State<IngestState>,
++    headers: HeaderMap,
++) -> Result<Response, StatusCode> {
++    if headers.get(header::ORIGIN).and_then(|h| h.to_str().ok()) != Some(ORIGIN) {
++        return Err(StatusCode::FORBIDDEN);
++    }
++    let raw = raw_cookie(&headers).ok_or(StatusCode::UNAUTHORIZED)?;
++    sqlx::query("DELETE FROM uac_login_session WHERE token_hash=$1")
++        .bind(digest(&raw))
++        .execute(&state.pool)
++        .await
++        .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
++    Ok((
++        StatusCode::SEE_OTHER,
++        [
++            (header::LOCATION, "/login"),
++            (
++                header::SET_COOKIE,
++                "analytics_session=; HttpOnly; SameSite=Strict; Path=/; Max-Age=0",
++            ),
++        ],
++    )
++        .into_response())
++}
++
++pub fn build(state: IngestState) -> Router {
++    Router::new()
++        .route("/login", get(login_page).post(login))
++        .route("/logout", post(logout))
++        .route("/change-password", get(change_page))
++        .route("/", get(dashboard))
++        .route("/dashboard", get(dashboard))
++        .route("/api/v1/events/{source}/summary", get(summary))
++        .route("/healthz", get(crate::health))
++        .route("/api/v1/events", post(crate::ingest))
++        .layer(DefaultBodyLimit::max(4096))
++        .layer(axum::middleware::map_response(
++            |mut r: Response| async move {
++                r.headers_mut()
++                    .insert(header::CACHE_CONTROL, "no-store".parse().unwrap());
++                r
++            },
++        ))
++        .with_state(state)
++}
+diff --git a/apps/stats_server/src/lib.rs b/apps/stats_server/src/lib.rs
+index 7601006..e723078 100644
+--- a/apps/stats_server/src/lib.rs
++++ b/apps/stats_server/src/lib.rs
+@@ -1,4 +1,5 @@
+ pub mod admin;
++pub mod password_login;
+ pub mod bootstrap;
+ pub mod pg_store;
+ 
+@@ -153,7 +154,7 @@ fn summary_total(rows: &[pg_store::EventSummary]) -> Option<i64> {
+ }
+ 
+ pub fn build_app(state: IngestState) -> Router {
+-    admin::build(state, None)
++    password_login::build(state)
+ }
+ 
+ #[cfg(test)]
+diff --git a/apps/stats_server/src/main.rs b/apps/stats_server/src/main.rs
+index fbebf48..018df59 100644
+--- a/apps/stats_server/src/main.rs
++++ b/apps/stats_server/src/main.rs
+@@ -1,4 +1,4 @@
+-use stats_server::{IngestState, IngestTokens, admin};
++use stats_server::{IngestState, IngestTokens, password_login};
+ use std::sync::Arc;
+ 
+ #[tokio::main]
+@@ -17,19 +17,14 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
+         return Err("來源憑證設定不合法".into());
+     }
+ 
+-    // Migration 由既有 DB 管理流程預先套用；不可修改已套用 migration。
+-    let config = admin::Config::from_env()?;
+-    let app = admin::build(
+-        IngestState {
+-            pool,
+-            tokens: Arc::new(IngestTokens { chat, pet }),
+-        },
+-        Some(config),
+-    );
++    let app = password_login::build(IngestState {
++        pool,
++        tokens: Arc::new(IngestTokens { chat, pet }),
++    });
+ 
+     println!("Stats server running on http://127.0.0.1:3100");
+ 
+-    // 尚無 auth 和儲存，不可綁定公開地址。
++    // 本地教學切片；首次改密碼提交與完整管理尚未接通。
+     let listener = tokio::net::TcpListener::bind("127.0.0.1:3100").await?;
+     axum::serve(listener, app).await?;
+ 
+diff --git a/apps/stats_server/src/bin/bootstrap_admin.rs b/apps/stats_server/src/bin/bootstrap_admin.rs
+index acaa3c8..ea47c1c 100644
+--- a/apps/stats_server/src/bin/bootstrap_admin.rs
++++ b/apps/stats_server/src/bin/bootstrap_admin.rs
+@@ -14,6 +14,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
+     let id = stats_server::bootstrap::initialize(&pool, password)
+         .await
+         .map_err(std::io::Error::other)?;
+-    println!("管理員已建立：{id}；帳密登入與首次改密碼仍待接通");
++    println!("管理員已建立：{id}；首次改密碼提交仍待接通；初始Session不開放後台");
+     Ok(())
+ }
+diff --git a/apps/stats_server/migrations/20261020230000_password_login_session.sql b/apps/stats_server/migrations/20261020230000_password_login_session.sql
+new file mode 100644
+index 0000000..fcddd16
+--- /dev/null
++++ b/apps/stats_server/migrations/20261020230000_password_login_session.sql
+@@ -0,0 +1,9 @@
++-- Additive migration: do not rewrite existing auth migrations or checksums.
++CREATE TABLE uac_login_session (
++    token_hash TEXT PRIMARY KEY,
++    user_id VARCHAR(40) NOT NULL REFERENCES uac_user(id) ON DELETE CASCADE,
++    credential_fingerprint TEXT NOT NULL,
++    restricted BOOLEAN NOT NULL,
++    expires_at BIGINT NOT NULL
++);
++CREATE INDEX idx_uac_login_session_expiry ON uac_login_session(expires_at);
+diff --git a/apps/stats_server/tests/day23_password_login.rs b/apps/stats_server/tests/day23_password_login.rs
+new file mode 100644
+index 0000000..7520e70
+--- /dev/null
++++ b/apps/stats_server/tests/day23_password_login.rs
+@@ -0,0 +1,320 @@
++#![cfg(feature = "postgres-integration")]
++use axum::{
++    body::Body,
++    http::{Request, StatusCode, header},
++};
++use stats_server::{IngestState, IngestTokens, password_login};
++use std::sync::Arc;
++use tower::ServiceExt;
++fn app(pool: sqlx::PgPool) -> axum::Router {
++    password_login::build(IngestState {
++        pool,
++        tokens: Arc::new(IngestTokens {
++            chat: "fixture-chat".into(),
++            pet: "fixture-pet".into(),
++        }),
++    })
++}
++async fn send(
++    app: axum::Router,
++    path: &str,
++    body: Option<&str>,
++    cookie: Option<&str>,
++) -> axum::response::Response {
++    let mut r = if body.is_some() {
++        Request::post(path)
++            .header("origin", "http://127.0.0.1:3100")
++            .header("content-type", "application/x-www-form-urlencoded")
++    } else {
++        Request::get(path)
++    };
++    if let Some(c) = cookie {
++        r = r.header(header::COOKIE, c);
++    }
++    app.oneshot(
++        r.body(body.map_or_else(Body::empty, |s| Body::from(s.to_owned())))
++            .unwrap(),
++    )
++    .await
++    .unwrap()
++}
++fn cookie(r: &axum::response::Response) -> String {
++    r.headers()[header::SET_COOKIE]
++        .to_str()
++        .unwrap()
++        .split(';')
++        .next()
++        .unwrap()
++        .to_owned()
++}
++#[sqlx::test(migrations = "./migrations")]
++async fn day23_bootstrapped_password_is_restricted_before_first_change(pool: sqlx::PgPool) {
++    stats_server::bootstrap::initialize(&pool, "lesson-only-password".into())
++        .await
++        .unwrap();
++    assert_eq!(
++        send(
++            app(pool.clone()),
++            "/login",
++            Some("username=admin&password=wrong"),
++            None
++        )
++        .await
++        .status(),
++        StatusCode::UNAUTHORIZED
++    );
++    let count: i64 = sqlx::query_scalar("SELECT count(*) FROM uac_login_session")
++        .fetch_one(&pool)
++        .await
++        .unwrap();
++    assert_eq!(count, 0);
++    let ok = send(
++        app(pool.clone()),
++        "/login",
++        Some("username=ADMIN&password=lesson-only-password"),
++        None,
++    )
++    .await;
++    assert_eq!(ok.status(), StatusCode::SEE_OTHER);
++    assert_eq!(ok.headers()[header::LOCATION], "/change-password");
++    let c = cookie(&ok);
++    assert_eq!(
++        send(app(pool.clone()), "/dashboard", None, Some(&c))
++            .await
++            .headers()[header::LOCATION],
++        "/change-password"
++    );
++    assert_eq!(
++        send(
++            app(pool.clone()),
++            "/api/v1/events/web_chat/summary",
++            None,
++            Some(&c)
++        )
++        .await
++        .status(),
++        StatusCode::FORBIDDEN
++    );
++    let pending = send(app(pool.clone()), "/change-password", None, Some(&c)).await;
++    assert_eq!(pending.status(), StatusCode::OK);
++    let body = axum::body::to_bytes(pending.into_body(), 100000)
++        .await
++        .unwrap();
++    assert!(String::from_utf8_lossy(&body).contains("尚未提供改密碼提交"));
++    assert!(
++        stats_server::bootstrap::initialize(&pool, "different-password".into())
++            .await
++            .is_err()
++    );
++    let flag: bool = sqlx::query_scalar("SELECT is_init_pd FROM uac_user")
++        .fetch_one(&pool)
++        .await
++        .unwrap();
++    assert!(flag);
++}
++#[sqlx::test(migrations = "./migrations")]
++async fn day23_ready_account_session_survives_new_pool_and_is_revocable(pool: sqlx::PgPool) {
++    stats_server::bootstrap::initialize(&pool, "lesson-only-password".into())
++        .await
++        .unwrap();
++    // 已完成首次密碼更換的既有帳號fixture；此SQL不是提供給使用者繞過首次改密碼的操作。
++    sqlx::query("UPDATE uac_user SET is_init_pd=FALSE")
++        .execute(&pool)
++        .await
++        .unwrap();
++    let ok = send(
++        app(pool.clone()),
++        "/login",
++        Some("username=admin&password=lesson-only-password"),
++        None,
++    )
++    .await;
++    assert_eq!(ok.status(), StatusCode::SEE_OTHER);
++    assert_eq!(ok.headers()[header::LOCATION], "/dashboard");
++    let set = ok.headers()[header::SET_COOKIE].to_str().unwrap();
++    for attr in ["HttpOnly", "SameSite=Strict", "Max-Age=1800"] {
++        assert!(set.contains(attr));
++    }
++    let c = cookie(&ok);
++    let raw = c.split_once('=').unwrap().1;
++    let stored: String = sqlx::query_scalar("SELECT token_hash FROM uac_login_session")
++        .fetch_one(&pool)
++        .await
++        .unwrap();
++    assert_ne!(stored, raw);
++    assert_eq!(stored.len(), 64);
++    let options = pool.connect_options();
++    pool.close().await;
++    let reopened = sqlx::postgres::PgPoolOptions::new()
++        .max_connections(2)
++        .connect_with((*options).clone())
++        .await
++        .unwrap();
++    let ok = send(app(reopened.clone()), "/dashboard", None, Some(&c)).await;
++    assert_eq!(ok.status(), StatusCode::OK);
++    assert!(ok.headers().contains_key(header::SET_COOKIE));
++    assert_eq!(
++        send(
++            app(reopened.clone()),
++            "/api/v1/events/web_chat/summary",
++            None,
++            Some(&c)
++        )
++        .await
++        .status(),
++        StatusCode::OK
++    );
++    assert_eq!(
++        send(
++            app(reopened.clone()),
++            "/api/v1/events/web_chat/summary",
++            None,
++            None
++        )
++        .await
++        .status(),
++        StatusCode::UNAUTHORIZED
++    );
++    sqlx::query("UPDATE uac_user SET user_status='disabled'")
++        .execute(&reopened)
++        .await
++        .unwrap();
++    assert_eq!(
++        send(
++            app(reopened.clone()),
++            "/api/v1/events/web_chat/summary",
++            None,
++            Some(&c)
++        )
++        .await
++        .status(),
++        StatusCode::UNAUTHORIZED
++    );
++    sqlx::query("UPDATE uac_user SET user_status='active'")
++        .execute(&reopened)
++        .await
++        .unwrap();
++    sqlx::query("UPDATE uac_login_session SET expires_at=0")
++        .execute(&reopened)
++        .await
++        .unwrap();
++    assert_eq!(
++        send(
++            app(reopened),
++            "/api/v1/events/web_chat/summary",
++            None,
++            Some(&c)
++        )
++        .await
++        .status(),
++        StatusCode::UNAUTHORIZED
++    );
++}
++
++#[sqlx::test(migrations = "./migrations")]
++async fn day23_origin_legacy_key_logout_and_credential_revocation(pool: sqlx::PgPool) {
++    stats_server::bootstrap::initialize(&pool, "lesson-only-password".into())
++        .await
++        .unwrap();
++    let bad_origin = Request::post("/login")
++        .header("origin", "http://evil.invalid")
++        .header("content-type", "application/x-www-form-urlencoded")
++        .body(Body::from("username=admin&password=lesson-only-password"))
++        .unwrap();
++    assert_eq!(
++        app(pool.clone())
++            .oneshot(bad_origin)
++            .await
++            .unwrap()
++            .status(),
++        StatusCode::FORBIDDEN
++    );
++    assert_eq!(send(app(pool.clone()),"/login",Some("username=admin&key=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"),None).await.status(),StatusCode::UNPROCESSABLE_ENTITY);
++    let bearer = Request::get("/api/v1/events/web_chat/summary")
++        .header(header::AUTHORIZATION, "Bearer fixture-chat")
++        .body(Body::empty())
++        .unwrap();
++    assert_eq!(
++        app(pool.clone()).oneshot(bearer).await.unwrap().status(),
++        StatusCode::UNAUTHORIZED
++    );
++    let ok = send(
++        app(pool.clone()),
++        "/login",
++        Some("username=admin&password=lesson-only-password"),
++        None,
++    )
++    .await;
++    let c = cookie(&ok);
++    let bad_logout = Request::post("/logout")
++        .header("origin", "http://evil.invalid")
++        .header(header::COOKIE, &c)
++        .body(Body::empty())
++        .unwrap();
++    assert_eq!(
++        app(pool.clone())
++            .oneshot(bad_logout)
++            .await
++            .unwrap()
++            .status(),
++        StatusCode::FORBIDDEN
++    );
++    let out = send(app(pool.clone()), "/logout", Some(""), Some(&c)).await;
++    assert_eq!(out.status(), StatusCode::SEE_OTHER);
++    assert!(
++        out.headers()[header::SET_COOKIE]
++            .to_str()
++            .unwrap()
++            .contains("Max-Age=0")
++    );
++    assert_eq!(
++        send(app(pool.clone()), "/change-password", None, Some(&c))
++            .await
++            .status(),
++        StatusCode::UNAUTHORIZED
++    );
++    let ok = send(
++        app(pool.clone()),
++        "/login",
++        Some("username=admin&password=lesson-only-password"),
++        None,
++    )
++    .await;
++    let c = cookie(&ok);
++    sqlx::query("UPDATE uac_user SET user_pd='invalidated-for-test'")
++        .execute(&pool)
++        .await
++        .unwrap();
++    assert_eq!(
++        send(app(pool), "/change-password", None, Some(&c))
++            .await
++            .status(),
++        StatusCode::UNAUTHORIZED
++    );
++}
++
++#[sqlx::test(migrations = "./tests/fixtures/prior-auth")]
++async fn day23_additive_session_migration_preserves_admin(pool: sqlx::PgPool) {
++    let id = stats_server::bootstrap::initialize(&pool, "lesson-only-password".into())
++        .await
++        .unwrap();
++    let before: (String, bool) =
++        sqlx::query_as("SELECT user_pd,is_init_pd FROM uac_user WHERE id=$1")
++            .bind(&id)
++            .fetch_one(&pool)
++            .await
++            .unwrap();
++    sqlx::migrate!("./migrations").run(&pool).await.unwrap();
++    let after: (String, bool) =
++        sqlx::query_as("SELECT user_pd,is_init_pd FROM uac_user WHERE id=$1")
++            .bind(id)
++            .fetch_one(&pool)
++            .await
++            .unwrap();
++    assert_eq!(before, after);
++    let count: i64 = sqlx::query_scalar("SELECT count(*) FROM uac_login_session")
++        .fetch_one(&pool)
++        .await
++        .unwrap();
++    assert_eq!(count, 0);
++}
+diff --git a/apps/stats_server/tests/fixtures/prior-auth/20261014223748_create_product_events.sql b/apps/stats_server/tests/fixtures/prior-auth/20261014223748_create_product_events.sql
+new file mode 100644
+index 0000000..2aecd5e
+--- /dev/null
++++ b/apps/stats_server/tests/fixtures/prior-auth/20261014223748_create_product_events.sql
+@@ -0,0 +1,12 @@
++-- Add migration script here
++CREATE TABLE product_events (
++    source_app VARCHAR(32) NOT NULL
++        CHECK (source_app IN ('web_chat', 'desktop_pet')),
++    event_id VARCHAR(40) NOT NULL
++        CHECK (char_length(event_id) = 36),
++    schema_version SMALLINT NOT NULL CHECK (schema_version = 1),
++    event_type VARCHAR(128) NOT NULL
++        CHECK (event_type <> '' AND event_type = btrim(event_type)),
++    received_at TIMESTAMPTZ NOT NULL DEFAULT now(),
++    PRIMARY KEY (source_app, event_id)
++);
+\ No newline at end of file
+diff --git a/apps/stats_server/tests/fixtures/prior-auth/20261018114026_creat_protocol.sql b/apps/stats_server/tests/fixtures/prior-auth/20261018114026_creat_protocol.sql
+new file mode 100644
+index 0000000..32adb02
+--- /dev/null
++++ b/apps/stats_server/tests/fixtures/prior-auth/20261018114026_creat_protocol.sql
+@@ -0,0 +1,26 @@
++-- Add migration script here
++CREATE TABLE analytic_token_log(
++    id TEXT NOT NULL PRIMARY KEY,
++    token_src TEXT NOT NULL, -- 憑證來源(chat)
++    token_type TEXT NOT NULL,  -- 憑證類型(jwt, sha256, md5)
++    token_context TEXT NOT NULL,  -- 憑證內容
++    
++    ref_token_src TEXT,  -- 參考的憑證來源(analytic)
++    ref_token_type TEXT,  -- 參考的憑證類型(jwt, sha256, md5)
++    ref_token_context TEXT,  -- 參考的憑證內容
++
++    expired_at TIMESTAMP,  -- 憑證過期時間
++    token_status TEXT,  -- 憑證狀態
++    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
++);
++
++CREATE TABLE analytic_log(
++    id TEXT NOT NULL PRIMARY KEY,
++    local_token TEXT NOT NULL,  -- 本地的憑證
++    remote_token TEXT,  -- 遠端的憑證
++    json_data TEXT NOT NULL,  -- 接收的JSON數據
++    get_status TEXT,  -- 接收狀態
++    get_at TIMESTAMP,  -- 接收時間
++    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
++);
++
+diff --git a/apps/stats_server/tests/fixtures/prior-auth/20261018073932_create_auth_user.sql b/apps/stats_server/tests/fixtures/prior-auth/20261018073932_create_auth_user.sql
+new file mode 100644
+index 0000000..cfb963b
+--- /dev/null
++++ b/apps/stats_server/tests/fixtures/prior-auth/20261018073932_create_auth_user.sql
+@@ -0,0 +1,108 @@
++-- Add migration script here
++CREATE TABLE uac_user (
++    id varchar(40) PRIMARY KEY, -- 使用者Pkno
++    user_acnt TEXT NOT NULL, -- 使用者名稱
++    user_pd TEXT NOT NULL, -- 密碼雜湊
++    user_email TEXT NOT NULL, -- 電子郵件
++    user_name TEXT NOT NULL, -- 使用者名稱
++    user_status TEXT NOT NULL, -- 使用者狀態
++    is_init_pd BOOLEAN NOT NULL, -- 是否初始化密碼
++    expired_pd_at TIMESTAMP, -- 密碼過期時間
++    last_login_at TIMESTAMP, -- 最後登入時間
++    created_at TIMESTAMP NOT NULL, -- 創建時間
++    updated_at TIMESTAMP NOT NULL -- 更新時間
++);
++
++CREATE TABLE uac_role (
++    id varchar(40) PRIMARY KEY, -- 角色Pkno
++    role_name TEXT NOT NULL, -- 角色名稱
++    role_status TEXT NOT NULL, -- 角色狀態
++    created_at TIMESTAMP NOT NULL, -- 創建時間
++    updated_at TIMESTAMP NOT NULL -- 更新時間
++);
++
++CREATE TABLE uac_user_role (
++    user_id varchar(40) NOT NULL, -- 使用者Pkno
++    role_id varchar(40) NOT NULL, -- 角色Pkno
++    created_at TIMESTAMP NOT NULL, -- 創建時間
++    CONSTRAINT pk_uac_user_role PRIMARY KEY (user_id, role_id)
++);
++
++CREATE TABLE uac_acl (
++    id varchar(40) PRIMARY KEY, -- 頁面Pkno
++    acl_name TEXT NOT NULL, -- 頁面名稱
++    acl_path TEXT NOT NULL, -- 頁面路徑
++    acl_category TEXT NOT NULL, -- 頁面分類(項目: category，頁面: page，功能:action)
++    acl_parent_id varchar(40), -- 父頁面Pkno
++    acl_status TEXT NOT NULL, -- 頁面狀態
++    created_at TIMESTAMP NOT NULL, -- 創建時間
++    updated_at TIMESTAMP NOT NULL -- 更新時間
++);
++
++CREATE TABLE uac_role_acl (
++    role_id varchar(40) NOT NULL, -- 角色Pkno
++    acl_id varchar(40) NOT NULL, -- 頁面Pkno
++    created_at TIMESTAMP NOT NULL, -- 創建時間
++    CONSTRAINT pk_uac_role_acl PRIMARY KEY (role_id, acl_id)
++);
++
++CREATE TABLE uac_user_acl (
++    user_id varchar(40) NOT NULL, -- 使用者Pkno
++    acl_id varchar(40) NOT NULL, -- 頁面Pkno
++    acl_filter TEXT NOT NULL, -- 頁面加減
++    created_at TIMESTAMP NOT NULL, -- 創建時間
++    CONSTRAINT pk_uac_user_acl PRIMARY KEY (user_id, acl_id)
++);
++
++
++CREATE TABLE mbr_user (
++    id varchar(40) PRIMARY KEY, -- 使用者Pkno
++    user_acnt TEXT NOT NULL, -- 使用者名稱
++    user_pd TEXT NOT NULL, -- 密碼雜湊
++    user_email TEXT NOT NULL, -- 電子郵件
++    user_name TEXT NOT NULL, -- 使用者名稱
++    user_status TEXT NOT NULL, -- 使用者狀態
++    is_init_pd BOOLEAN NOT NULL, -- 是否初始化密碼
++    expired_pd_at TIMESTAMP, -- 密碼過期時間
++    last_login_at TIMESTAMP, -- 最後登入時間
++    created_at TIMESTAMP NOT NULL, -- 創建時間
++    updated_at TIMESTAMP NOT NULL -- 更新時間
++);
++
++CREATE TABLE mbr_role (
++    id varchar(40) PRIMARY KEY, -- 角色Pkno
++    role_name TEXT NOT NULL, -- 角色名稱
++    role_status TEXT NOT NULL, -- 角色狀態
++    created_at TIMESTAMP NOT NULL, -- 創建時間
++    updated_at TIMESTAMP NOT NULL -- 更新時間
++);
++
++CREATE TABLE mbr_user_role (
++    user_id varchar(40) NOT NULL, -- 使用者Pkno
++    role_id varchar(40) NOT NULL, -- 角色Pkno
++    created_at TIMESTAMP NOT NULL, -- 創建時間
++    CONSTRAINT pk_mbr_user_role PRIMARY KEY (user_id, role_id)
++);
++
++CREATE TABLE mbr_perm (
++    id varchar(40) PRIMARY KEY, -- 權限Pkno
++    perm_name TEXT NOT NULL, -- 權限名稱
++    perm_status TEXT NOT NULL, -- 權限狀態
++    created_at TIMESTAMP NOT NULL, -- 創建時間
++    updated_at TIMESTAMP NOT NULL -- 更新時間
++);
++
++CREATE TABLE mbr_role_perm (
++    role_id varchar(40) NOT NULL, -- 角色Pkno
++    perm_id varchar(40) NOT NULL, -- 權限Pkno
++    created_at TIMESTAMP NOT NULL, -- 創建時間
++    CONSTRAINT pk_mbr_role_perm PRIMARY KEY (role_id, perm_id)
++);
++
++CREATE TABLE mbr_user_perm (
++    user_id varchar(40) NOT NULL, -- 使用者Pkno
++    perm_id varchar(40) NOT NULL, -- 權限Pkno
++    perm_filter TEXT NOT NULL, -- 權限加減
++    created_at TIMESTAMP NOT NULL, -- 創建時間
++    CONSTRAINT pk_mbr_user_perm PRIMARY KEY (user_id, perm_id)
++);
+\ No newline at end of file

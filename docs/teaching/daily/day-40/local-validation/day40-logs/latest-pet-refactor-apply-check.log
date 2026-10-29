@@ -1,0 +1,4 @@
+error: patch failed: pet_apps/pet_server/src/pet_windows.rs:32
+error: pet_apps/pet_server/src/pet_windows.rs: patch does not apply
+error: patch failed: pet_apps/pet_server/src/roam.rs:223
+error: pet_apps/pet_server/src/roam.rs: patch does not apply

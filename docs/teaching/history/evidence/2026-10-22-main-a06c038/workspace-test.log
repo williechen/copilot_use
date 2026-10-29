@@ -1,0 +1,716 @@
+   Compiling js-sys v0.3.106
+   Compiling sqlx-core v0.9.0
+   Compiling libsqlite3-sys v0.37.0
+   Compiling hmac v0.13.0
+   Compiling convert_case v0.11.0
+   Compiling futures-channel v0.3.34
+   Compiling gio-sys v0.18.1
+   Compiling or_poisoned v0.1.0
+   Compiling zerocopy v0.8.63
+   Compiling dotenvy v0.15.7
+   Compiling httparse v1.10.1
+   Compiling hex v0.4.3
+   Compiling whoami v2.1.3
+   Compiling hkdf v0.13.0
+   Compiling wasm-bindgen-futures v0.4.79
+   Compiling hashlink v0.11.1
+   Compiling rand v0.10.3
+   Compiling futures-executor v0.3.34
+   Compiling sha2 v0.11.1
+   Compiling md-5 v0.11.0
+   Compiling flume v0.12.0
+   Compiling sha2 v0.10.9
+   Compiling tokio-stream v0.1.19
+   Compiling futures-intrusive v0.5.0
+   Compiling sqlx-sqlite v0.9.0
+   Compiling sqlx-postgres v0.9.0
+   Compiling http-body v1.1.0
+   Compiling futures v0.3.34
+   Compiling proc-macro2-diagnostics v0.11.0
+   Compiling paste v1.0.15
+   Compiling ppv-lite86 v0.2.21
+   Compiling sqlx-macros-core v0.9.0
+   Compiling web-sys v0.3.106
+   Compiling rand_core v0.9.5
+   Compiling throw_error v0.3.1
+   Compiling slotmap v1.1.1
+   Compiling proc-macro-utils v0.10.0
+   Compiling unicode-xid v0.2.6
+   Compiling byteorder v1.5.0
+   Compiling tower-service v0.3.3
+   Compiling konst_macro_rules v0.2.19
+   Compiling konst v0.2.20
+   Compiling const_format_proc_macros v0.2.34
+   Compiling rand_chacha v0.9.0
+   Compiling sqlx-macros v0.9.0
+   Compiling encoding_rs v0.8.42
+   Compiling event-listener-strategy v0.5.4
+   Compiling server_fn_macro v0.8.12
+   Compiling reactive_graph v0.2.16
+   Compiling send_wrapper v0.6.0
+   Compiling proc-macro-error-attr v1.0.4
+   Compiling syn v1.0.109
+   Compiling httpdate v1.0.3
+   Compiling rstml v0.13.1
+   Compiling tower-layer v0.3.3
+   Compiling async-lock v3.4.2
+   Compiling sqlx v0.9.0
+   Compiling rand v0.9.5
+   Compiling const_format v0.2.36
+   Compiling hydration_context v0.3.2
+   Compiling any_spawner v0.3.0
+   Compiling http-body-util v0.1.5
+   Compiling itertools v0.14.0
+   Compiling sha1 v0.10.7
+   Compiling proc-macro-error v1.0.4
+   Compiling multer v3.1.0
+   Compiling derive-where v1.7.0
+   Compiling sync_wrapper v1.0.2
+   Compiling core_detect v1.0.0
+   Compiling multiversion_no_op v1.0.0
+   Compiling xxhash-rust v0.8.19
+   Compiling guardian v1.3.0
+   Compiling simdutf8 v0.1.5
+   Compiling data-encoding v2.11.1
+   Compiling atomic-waker v1.1.2
+   Compiling hyper v1.12.0
+   Compiling tungstenite v0.29.0
+   Compiling manyhow-macros v0.14.1
+   Compiling quote-use-macros v0.9.0
+   Compiling reactive_stores_macro v0.4.4
+   Compiling gdk-sys v0.18.2
+   Compiling tachys v0.2.19
+   Compiling pin-project-internal v1.1.13
+   Compiling html-escape v0.2.15
+   Compiling prettyplease v0.3.0
+   Compiling ryu v1.0.23
+   Compiling pin-project v1.1.13
+   Compiling serde_urlencoded v0.7.1
+   Compiling reactive_stores v0.4.4
+   Compiling quote-use v0.9.0
+   Compiling manyhow v0.14.1
+   Compiling tokio-tungstenite v0.29.0
+   Compiling hyper-util v0.1.21
+   Compiling axum-core v0.5.6
+   Compiling tower v0.5.3
+   Compiling either_of v0.1.9
+   Compiling gloo-utils v0.2.0
+   Compiling phf_macros v0.13.1
+   Compiling server_fn v0.8.13
+   Compiling oco_ref v0.2.1
+   Compiling serde_path_to_error v0.1.20
+   Compiling syn v3.0.9
+   Compiling const_str_slice_concat v0.1.0
+   Compiling collection_literals v1.0.3
+   Compiling camino v1.2.6
+   Compiling interpolator v0.5.0
+   Compiling matchit v0.8.4
+   Compiling drain_filter_polyfill v0.1.3
+   Compiling next_tuple v0.1.0
+   Compiling erased v0.1.2
+   Compiling axum v0.8.9
+   Compiling attribute-derive-macro v0.11.0
+   Compiling gloo-net v0.6.0
+   Compiling server_fn_macro_default v0.8.6
+   Compiling wasm-streams v0.5.0
+   Compiling convert_case v0.6.0
+   Compiling proc-macro-crate v2.0.2
+   Compiling serde_qs v0.15.0
+   Compiling leptos_macro v0.8.19
+   Compiling typed-builder-macro v0.23.2
+   Compiling pathdiff v0.2.3
+   Compiling heck v0.4.1
+   Compiling time-core v0.1.9
+   Compiling inventory v0.3.25
+   Compiling base16 v0.2.1
+   Compiling dotenv v0.15.0
+   Compiling num-conv v0.2.2
+   Compiling const-str v1.1.0
+   Compiling typed-builder v0.23.2
+   Compiling wasm_split_macros v0.2.2
+   Compiling glib-macros v0.18.5
+   Compiling config v0.15.27
+   Compiling leptos_hot_reload v0.8.7
+   Compiling attribute-derive v0.11.0
+   Compiling convert_case_extras v0.2.0
+   Compiling phf_codegen v0.13.1
+   Compiling chat-domain v0.2.25 (/home/willie/Documents/Codex/2026-10-22/github/work/validation/rust_ai_chat/crates/chat_domain)
+   Compiling codee v0.3.5
+   Compiling cairo-sys-rs v0.18.2
+   Compiling gdk-pixbuf-sys v0.18.0
+   Compiling pango-sys v0.18.0
+   Compiling leptos v0.8.22
+   Compiling deranged v0.5.9
+   Compiling powerfmt v0.2.1
+   Compiling async-once-cell v0.5.4
+   Compiling wasm_split_helpers v0.2.3
+   Compiling leptos_server v0.8.8
+   Compiling glib v0.18.5
+   Compiling leptos_config v0.8.10
+   Compiling leptos_dom v0.8.8
+   Compiling atk-sys v0.18.2
+   Compiling strsim v0.11.1
+   Compiling ident_case v1.0.1
+   Compiling darling_core v0.24.1
+   Compiling typeid v1.0.3
+   Compiling fnv v1.0.7
+   Compiling web-time v1.1.0
+   Compiling new_debug_unreachable v1.0.6
+   Compiling darling_macro v0.24.1
+   Compiling phf v0.13.1
+   Compiling string_cache_codegen v0.6.1
+   Compiling gio v0.18.4
+   Compiling precomputed-hash v0.1.1
+   Compiling alloc-no-stdlib v3.0.0
+   Compiling erased-serde v0.4.10
+   Compiling alloc-stdlib v0.3.0
+   Compiling web_atoms v0.2.6
+   Compiling darling v0.24.1
+   Compiling gtk-sys v0.18.2
+   Compiling quick-xml v0.42.0
+   Compiling winnow v1.0.4
+   Compiling base64 v0.23.1
+   Compiling toml_parser v1.1.5+spec-1.1.0
+   Compiling serde_with_macros v3.24.0
+   Compiling brotli-decompressor v6.0.1
+   Compiling string_cache v0.9.0
+   Compiling dtoa v1.0.11
+   Compiling dunce v1.0.5
+   Compiling dtoa-short v0.3.5
+   Compiling brotli v9.0.0
+   Compiling serde_with v3.24.0
+   Compiling serde-untagged v0.1.9
+   Compiling toml v1.1.8+spec-1.1.0
+   Compiling tendril v0.5.1
+   Compiling selectors v0.38.0
+   Compiling indexmap v1.9.3
+   Compiling derive_more-impl v2.1.1
+   Compiling cssparser-macros v0.7.1
+   Compiling glob v0.3.4
+   Compiling ctor v1.0.13
+   Compiling cssparser v0.37.0
+   Compiling derive_more v2.1.1
+   Compiling markup5ever v0.39.0
+   Compiling servo_arc v0.4.3
+   Compiling memoffset v0.9.1
+   Compiling serde_derive_internals v0.29.1
+   Compiling base64ct v1.8.3
+   Compiling hashbrown v0.12.3
+   Compiling schemars v0.8.22
+   Compiling bit-vec v0.8.0
+   Compiling bitflags v1.3.2
+   Compiling bit-set v0.8.0
+   Compiling phc v0.6.1
+   Compiling schemars_derive v0.8.22
+   Compiling html5ever v0.39.0
+   Compiling gdk-pixbuf v0.18.5
+   Compiling pango v0.18.3
+   Compiling cfb v0.14.0
+   Compiling cairo-rs v0.18.5
+   Compiling time v0.3.55
+   Compiling jsonptr v0.7.1
+   Compiling toml_edit v0.19.15
+   Compiling field-offset v0.3.6
+   Compiling cargo-platform v0.1.9
+   Compiling tauri-utils v2.10.2
+   Compiling simd-adler32 v0.3.10
+   Compiling option-ext v0.2.0
+   Compiling dyn-clone v1.0.20
+   Compiling dirs-sys v0.5.0
+   Compiling proc-macro-crate v1.3.1
+   Compiling cargo_metadata v0.19.2
+   Compiling plist v1.10.2
+   Compiling json-patch v4.2.0
+   Compiling gdk v0.18.2
+   Compiling infer v0.22.0
+   Compiling dom_query v0.28.0
+   Compiling password-hash v0.6.1
+   Compiling shared v0.2.25 (/home/willie/Documents/Codex/2026-10-22/github/work/validation/rust_ai_chat/crates/shared)
+   Compiling blake2 v0.11.0
+   Compiling urlpattern v0.6.0
+   Compiling soup3-sys v0.5.0
+   Compiling javascriptcore-rs-sys v1.1.1
+   Compiling gtk v0.18.2
+   Compiling adler2 v2.0.1
+   Compiling crc32fast v1.5.2
+   Compiling argon2 v0.6.0
+   Compiling gtk3-macros v0.18.2
+   Compiling dirs v7.0.0
+   Compiling atk v0.18.2
+   Compiling time-macros v0.2.32
+   Compiling webkit2gtk-sys v2.0.2
+   Compiling x11 v2.21.0
+   Compiling miniz_oxide v0.9.1
+   Compiling embed-resource v3.0.12
+   Compiling gdkx11-sys v0.18.2
+   Compiling tauri-winres v0.3.7
+   Compiling flate2 v1.1.10
+   Compiling miniz_oxide v0.8.9
+   Compiling fdeflate v0.3.7
+   Compiling cargo_toml v1.0.1
+   Compiling libdbus-sys v0.2.7
+   Compiling x11-dl v2.21.0
+   Compiling cookie v0.18.2
+   Compiling dpi v0.1.2
+   Compiling static_vcruntime v3.0.0
+   Compiling tauri-build v2.7.3
+   Compiling javascriptcore-rs v1.1.2
+   Compiling soup3 v0.5.0
+   Compiling phf_shared v0.13.1
+   Compiling raw-window-handle v0.6.2
+   Compiling webkit2gtk v2.0.2
+   Compiling png v0.17.16
+   Compiling crossbeam-channel v0.5.17
+   Compiling dlopen2_derive v0.4.3
+   Compiling wry v0.57.0
+   Compiling semver v1.0.28
+   Compiling tauri-runtime v2.12.2
+   Compiling dlopen2 v0.8.2
+   Compiling ico v0.5.0
+   Compiling dbus v0.9.12
+   Compiling gdkx11 v0.18.2
+   Compiling tauri v2.12.4
+   Compiling png v0.18.1
+   Compiling gdkwayland-sys v0.18.2
+   Compiling pet-domain v0.2.25 (/home/willie/Documents/Codex/2026-10-22/github/work/validation/rust_ai_chat/crates/pet_domain)
+   Compiling leptos_router v0.8.17
+   Compiling tauri-runtime-wry v2.12.2
+   Compiling muda v0.20.0
+   Compiling tao v0.37.1
+   Compiling tauri-codegen v2.7.3
+   Compiling keyboard-types v0.8.3
+   Compiling serialize-to-javascript-impl v0.1.2
+   Compiling leptos_router_macro v0.8.7
+   Compiling rtoolbox v0.0.6
+   Compiling rpassword v7.5.4
+   Compiling serialize-to-javascript v0.1.2
+   Compiling tauri-macros v2.7.3
+   Compiling desktop-pet v0.2.25 (/home/willie/Documents/Codex/2026-10-22/github/work/validation/rust_ai_chat/apps/desktop_pet)
+   Compiling ai-core v0.2.25 (/home/willie/Documents/Codex/2026-10-22/github/work/validation/rust_ai_chat/crates/ai_core)
+   Compiling serde_repr v0.1.21
+   Compiling unicase v2.10.0
+   Compiling mime_guess v2.0.5
+   Compiling chat-application v0.2.25 (/home/willie/Documents/Codex/2026-10-22/github/work/validation/rust_ai_chat/crates/chat_application)
+   Compiling stats-server v0.2.25 (/home/willie/Documents/Codex/2026-10-22/github/work/validation/rust_ai_chat/apps/stats_server)
+   Compiling leptos_meta v0.8.7
+   Compiling tokio-util v0.7.20
+   Compiling http-range-header v0.4.2
+   Compiling tower-http v0.6.11
+   Compiling leptos_integration_utils v0.8.9
+   Compiling persistence v0.2.25 (/home/willie/Documents/Codex/2026-10-22/github/work/validation/rust_ai_chat/crates/persistence)
+   Compiling ui v0.2.25 (/home/willie/Documents/Codex/2026-10-22/github/work/validation/rust_ai_chat/crates/ui)
+warning: unused variable: `set_rows`
+   --> crates/ui/src/lib.rs:275:16
+    |
+275 |     let (rows, set_rows) = signal(Vec::<(String, String)>::new());
+    |                ^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_set_rows`
+    |
+    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `refreshed_room_list` is never used
+  --> crates/ui/src/lib.rs:40:4
+   |
+40 | fn refreshed_room_list(
+   |    ^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `refresh_result_view` is never used
+  --> crates/ui/src/lib.rs:57:4
+   |
+57 | fn refresh_result_view(
+   |    ^^^^^^^^^^^^^^^^^^^
+
+warning: `ui` (lib) generated 3 warnings (run `cargo fix --lib -p ui` to apply 1 suggestion)
+   Compiling leptos_axum v0.8.10
+   Compiling server v0.2.25 (/home/willie/Documents/Codex/2026-10-22/github/work/validation/rust_ai_chat/apps/server)
+   Compiling gloo-timers v0.4.0
+   Compiling serde-wasm-bindgen v0.6.5
+   Compiling telemetry v0.2.25 (/home/willie/Documents/Codex/2026-10-22/github/work/validation/rust_ai_chat/crates/telemetry)
+   Compiling desktop-pet-frontend v0.2.25 (/home/willie/Documents/Codex/2026-10-22/github/work/validation/rust_ai_chat/apps/desktop_pet/frontend)
+warning: `ui` (lib test) generated 1 warning (1 duplicate)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3m 18s
+     Running unittests src/lib.rs (/var/tmp/codex-rust-validation-20261022/target/debug/deps/ai_core-200d61eb2e3c1970)
+
+running 3 tests
+test tests::mock_chat_returns_response ... ok
+test tests::empty_message_is_rejected ... ok
+test tests::chat_model_can_be_used_as_trait_object ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (/var/tmp/codex-rust-validation-20261022/target/debug/deps/chat_application-2e0f13f9a4c7a213)
+
+running 5 tests
+test tests::failed_write_never_publishes ... ok
+test tests::existing_room_allows_persist_and_publish ... ok
+test tests::mismatched_room_id_must_not_persist_or_publish ... ok
+test tests::successful_write_publishes_exactly_once ... ok
+test tests::missing_room_blocks_message_and_publish ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (/var/tmp/codex-rust-validation-20261022/target/debug/deps/chat_domain-27e009ea9b16d39b)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (/var/tmp/codex-rust-validation-20261022/target/debug/deps/desktop_pet-078dcd23d706ee0c)
+
+running 27 tests
+test day21_pet_creation_tests::day21_rejects_blank_and_long_names ... ok
+test day25_capability_tests::dynamic_pet_windows_can_listen_without_global_window_wildcard ... ok
+test file_organizer::tests::duplicate_preview_warns_when_file_size_changes_after_scan ... ok
+test file_organizer::tests::duplicate_preview_warns_when_file_is_replaced_by_symlink ... ok
+test file_organizer::tests::ids_are_opaque_not_absolute_paths ... ok
+test file_organizer::tests::rejects_root_euid ... ok
+test file_organizer::tests::same_content_is_grouped_as_duplicate ... ok
+test day21_pet_creation_tests::day21_accepts_trimmed_chinese_name ... ok
+test file_organizer::tests::rejects_file_as_authorized_root ... ok
+test file_organizer::tests::same_size_different_content_is_not_duplicate ... ok
+test file_organizer::tests::scans_regular_files_and_builds_size_candidates ... ok
+test file_organizer::tests::skips_symlink_instead_of_following_it ... ok
+test file_organizer::tests::unique_size_file_is_not_hashed_into_duplicate_group ... ok
+test pet_windows::tests::day24_more_than_two_pet_states_are_independent_and_caging_is_local ... ok
+test roam::tests::bounces_at_right_and_bottom_edges ... ok
+test pet_windows::tests::day24_window_labels_are_derived_from_each_uuid_not_a_two_window_limit ... ok
+test roam::tests::day18_roaming_selects_pet_life_window ... ok
+test roam::tests::day19_displacement_threshold_axes_and_extremes ... ok
+test roam::tests::day19_large_external_reposition_stops_roam ... ok
+test roam::tests::day20_single_axis_can_still_roam ... ok
+test roam::tests::day20_stops_only_when_both_axes_are_blocked ... ok
+test roam::tests::moves_inside_work_area ... ok
+test roam::tests::oversized_window_is_pinned_without_panicking ... ok
+test roam::tests::day20_oversized_window_is_pinned_and_stops ... ok
+test roam::tests::supports_negative_monitor_origin ... ok
+test roam_setting_tests::roam_requires_explicit_opt_in ... ok
+test pet_store::day22_tests::day22_create_pet_persists ... ok
+
+test result: ok. 27 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.15s
+
+     Running unittests src/main.rs (/var/tmp/codex-rust-validation-20261022/target/debug/deps/desktop_pet-5669f1688fe0bd24)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/cleanup_event_contract.rs (/var/tmp/codex-rust-validation-20261022/target/debug/deps/cleanup_event_contract-9c567ff67b66e302)
+
+running 5 tests
+test failed_operation_is_not_counted ... ok
+test invalid_operation_id_never_falls_back_to_new_random_id ... ok
+test confirmation_without_filesystem_completion_is_not_success ... ok
+test preview_is_not_a_success_event ... ok
+test succeeded_operation_produces_stable_minimal_event ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/day23_saved_pets.rs (/var/tmp/codex-rust-validation-20261022/target/debug/deps/day23_saved_pets-4fa0d37b2a8092bc)
+
+running 1 test
+test day23_control_list_survives_pool_reopen ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/day24_active_pet.rs (/var/tmp/codex-rust-validation-20261022/target/debug/deps/day24_active_pet-2876b752fea0fa14)
+
+running 1 test
+test day24_explicit_selection_survives_reopen_and_rejects_unknown_id ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/day5_codec_tests.rs (/var/tmp/codex-rust-validation-20261022/target/debug/deps/day5_codec_tests-9fe08b2ebfff59f1)
+
+running 5 tests
+test invalid_profile_cannot_be_encoded ... ok
+test optional_appearance_is_preserved ... ok
+test rejects_blank_name_on_decode ... ok
+test rejects_invalid_json ... ok
+test valid_five_fields_round_trip ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/pet_machine.rs (/var/tmp/codex-rust-validation-20261022/target/debug/deps/pet_machine-e329c0a064ae8f1e)
+
+running 4 tests
+test interact_moves_idle_to_interacting ... ok
+test wake_moves_sleeping_pet_back_to_idle ... ok
+test sleeping_pet_cannot_interact ... ok
+test pet_starts_idle ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/profile_contract.rs (/var/tmp/codex-rust-validation-20261022/target/debug/deps/profile_contract-f69dd7852e8ddc58)
+
+running 4 tests
+test missing_or_blank_fields_fail ... ok
+test only_five_fields_are_enough ... ok
+test optional_override_keeps_other_fields_auto ... ok
+test species_is_extensible ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (/var/tmp/codex-rust-validation-20261022/target/debug/deps/desktop_pet_frontend-53ca0f16412f0c63)
+
+running 8 tests
+test component::activity::tests::idle_blink_has_priority ... ok
+test component::activity::tests::sleeping_uses_animation_phase ... ok
+test component::activity::tests::interacting_uses_animation_phase ... ok
+test day16_scan_generation_tests::canceled_or_superseded_scan_cannot_restore_preview ... ok
+test duplicate_preview::tests::empty_preview_is_explicit_and_missing_contract_is_rejected ... ok
+test file_scan_view::tests::counts_are_visible_but_private_values_are_discarded ... ok
+test duplicate_preview::tests::summary_shows_group_sizes_without_private_paths ... ok
+test file_scan_view::tests::empty_is_explicit_and_incomplete_contract_is_rejected ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (/var/tmp/codex-rust-validation-20261022/target/debug/deps/persistence-344ab05968537cad)
+
+running 5 tests
+test tests::test_message_repository_rejects_missing_room ... ok
+test tests::test_message_schema_rejects_invalid_author_and_length ... ok
+test tests::test_message_repository_all_author_kinds ... ok
+test tests::test_room_repository_create_then_find ... ok
+test tests::test_room_repository_find_by_id ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.34s
+
+     Running unittests src/lib.rs (/var/tmp/codex-rust-validation-20261022/target/debug/deps/pet_domain-943faff5185dc5f5)
+
+running 10 tests
+test cleanup::tests::completion_is_one_time ... ok
+test cleanup_event::tests::unsuccessful_operation_emits_nothing ... ok
+test cleanup::tests::failure_never_emits_success ... ok
+test cleanup_event::tests::successful_operation_has_minimal_event ... ok
+test profile::appearance_resolution_tests::absent_override_keeps_defaults ... ok
+test profile::validated_appearance_tests::invalid_override_never_returns_resolved_appearance ... ok
+test profile::appearance_resolution_tests::no_defaults_stays_empty ... ok
+test profile::appearance_resolution_tests::user_color_wins_and_style_falls_back ... ok
+test profile::validated_appearance_tests::valid_override_inherits_unspecified_fields ... ok
+test profile::validated_appearance_tests::no_override_uses_defaults ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/cleanup_contract.rs (/var/tmp/codex-rust-validation-20261022/target/debug/deps/cleanup_contract-5d420ca1bbe41a9f)
+
+running 4 tests
+test four_legacy_operation_states_preserve_counting_rule ... ok
+test confirmed_success_counts_only_after_completion ... ok
+test failed_operation_never_counts ... ok
+test preview_cannot_be_counted_or_completed ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (/var/tmp/codex-rust-validation-20261022/target/debug/deps/server-d6ec47fe3f5ae3dd)
+
+running 17 tests
+test http::room_details_tests::invalid_input_and_database_failure_are_distinct ... ok
+test http::room_details_tests::list_rooms_returns_persisted_room ... ok
+test http::room_details_tests::returns_exact_saved_room_without_writing ... ok
+test http::room_http_tests::database_failure_is_not_created ... ok
+test room_auth::day25_tests::room_page_requires_active_sqlite_session ... ok
+test http::room_http_tests::valid_room_returns_201_and_saved_id ... ok
+test http::room_http_tests::invalid_room_names_never_write ... ok
+test signup::day23_correction_tests::day23_invalid_signup_is_rejected_before_db_write ... ok
+test ws::test::accepts_nonblank_content ... ok
+test ws::test::blank_room ... ok
+test ws::test::different_room ... ok
+test ws::test::matching_room ... ok
+test ws::test::rejects_blank_content ... ok
+test ws::test::typing_is_only_forwarded_to_connection_room ... ok
+test ws::test::ws_message_requires_room_at_write_time ... ok
+test signin::day23_tests::day23_password_login_creates_persisted_session_and_guards_account ... ok
+test signup::day22_tests::day22_signup_persists_and_rejects_duplicate ... ok
+
+test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.13s
+
+     Running unittests src/main.rs (/var/tmp/codex-rust-validation-20261022/target/debug/deps/server-4895c08d8bede299)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/day24_signup_complete.rs (/var/tmp/codex-rust-validation-20261022/target/debug/deps/day24_signup_complete-9ea7b2c9216b7835)
+
+running 2 tests
+test day24_signup_completes_without_automatic_login_or_navigation ... ok
+test day24_existing_browser_session_revocation_is_atomic ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.40s
+
+     Running tests/root_hub_contract.rs (/var/tmp/codex-rust-validation-20261022/target/debug/deps/root_hub_contract-3a0d03c5d0738fe6)
+
+running 4 tests
+test message_stays_inside_room ... ok
+test count_tracks_receiver_lifecycle ... ok
+test last_receiver_cleanup_allows_new_subscription ... ok
+test subscribers_share_events ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (/var/tmp/codex-rust-validation-20261022/target/debug/deps/shared-5747445c166d4e09)
+
+running 4 tests
+test tests::ai_message_round_trip ... ok
+test tests::create_room_http_contract_roundtrip ... ok
+test tests::client_event_json_roundtrip ... ok
+test tests::typing_changed_roundtrip ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (/var/tmp/codex-rust-validation-20261022/target/debug/deps/stats_server-e2fefd6d05eb6845)
+
+running 19 tests
+test admin::tests::day18_activity_extends_valid_session_only ... ok
+test admin::tests::day19_success_does_not_reset_previous_failures ... ok
+test admin::tests::day20_login_rate_limit_provides_retry_after ... ok
+test admin::tests::day19_successful_logins_do_not_consume_failure_budget ... ok
+test admin::tests::login_query_postgres_and_logout_flow ... ignored, requires dedicated ANALYTICS_TEST_DATABASE_URL with CREATE SCHEMA permission
+test admin::tests::origin_and_expired_sessions_fail_closed ... ok
+test day16_total_tests::total_uses_actual_committed_summary_counts ... ok
+test source_kind_summary_tests::authorization_and_filter_validation_precede_database_access ... ok
+test source_summary_tests::summary_rejects_cross_source_before_database_access ... ok
+test tests::event_type_rejects_noncanonical_boundaries ... ok
+test tests::existing_event_validation_rejects_whitespace ... ok
+test tests::invalid_event_does_not_reserve_dedup_key ... ok
+test admin::tests::day21_admin_account_is_explicit ... ok
+test tests::nil_event_id_is_not_accepted ... ok
+test tests::persist_outcomes_have_distinct_http_codes ... ok
+test tests::rejects_bad_source_version_and_event_type ... ok
+test tests::token_must_match_the_claimed_source ... ok
+test tests::valid_event_is_accepted_once_per_source_and_id ... ok
+test admin::tests::admin_login_guard_and_session_are_separate_from_source_token ... ok
+
+test result: ok. 18 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.10s
+
+     Running unittests src/bin/bootstrap_admin.rs (/var/tmp/codex-rust-validation-20261022/target/debug/deps/bootstrap_admin-450c51d8e911c7e2)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (/var/tmp/codex-rust-validation-20261022/target/debug/deps/stats_server-23458bc62e0ecb32)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/day23_password_login.rs (/var/tmp/codex-rust-validation-20261022/target/debug/deps/day23_password_login-82a237f6c675e44e)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/day24_password_change.rs (/var/tmp/codex-rust-validation-20261022/target/debug/deps/day24_password_change-8c6adb283ca38f20)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/day25_repeat_password_change.rs (/var/tmp/codex-rust-validation-20261022/target/debug/deps/day25_repeat_password_change-1d6197d76e5a20b3)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/idempotency_contract.rs (/var/tmp/codex-rust-validation-20261022/target/debug/deps/idempotency_contract-0ff9d34d8a2cd21d)
+
+running 2 tests
+test event_identity_deduplicates_per_source ... ok
+test duplicate_is_counted_once_across_retries ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/postgres_event_store.rs (/var/tmp/codex-rust-validation-20261022/target/debug/deps/postgres_event_store-7cb11becc67201ce)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (/var/tmp/codex-rust-validation-20261022/target/debug/deps/telemetry-c96bf88b43f3e55d)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (/var/tmp/codex-rust-validation-20261022/target/debug/deps/ui-cd603dcb97ea7702)
+
+running 8 tests
+test day16_room_search_tests::day18_query_filter_preserves_room_ids ... ok
+test chat_socket::tests::decodes_pong_event ... ok
+test day16_room_search_tests::day19_empty_success_replaces_previous_rows ... ok
+test day16_room_search_tests::day19_failure_preserves_complete_rows_and_message ... ok
+test day16_room_search_tests::day20_refresh_failure_keeps_query_and_rows ... ok
+test day16_room_search_tests::search_matches_chinese_names_and_preserves_ids ... ok
+test day16_room_search_tests::day19_refresh_failure_keeps_previous_room_links ... ok
+test day16_room_search_tests::day20_refresh_success_reveals_full_snapshot ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests ai_core
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests chat_application
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests chat_domain
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests desktop_pet
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests persistence
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests pet_domain
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests server
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests shared
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests stats_server
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests telemetry
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests ui
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

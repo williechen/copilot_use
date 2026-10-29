@@ -1,0 +1,572 @@
+[
+  {
+    "path": "README.md",
+    "headings": [
+      "# copilot_use",
+      "## 目錄與來源",
+      "## 使用與追溯"
+    ],
+    "source_claims": [
+      "[原文章與驗證總表](docs/teaching/current/ARTICLE_STATUS.md) · [文章更正對照](docs/teaching/current/ARTICLE_CORRECTIONS.md) · [歷史目錄](docs/teaching/history/README.md) · [驗收封存](docs/teaching/archived/README.md) · [三案本修訂讀回](docs/teaching/daily/day-39/r2-delivery-verification.json)。保留各次來源、原文與證據；歷史測試不追認目前驗收。"
+    ]
+  },
+  {
+    "path": "docs/README.md",
+    "headings": [
+      "# 文件總入口",
+      "## 目錄與來源",
+      "## 使用與追溯"
+    ],
+    "source_claims": [
+      "[原文章與驗證總表](teaching/current/ARTICLE_STATUS.md) · [文章更正對照](teaching/current/ARTICLE_CORRECTIONS.md) · [歷史目錄](teaching/history/README.md) · [驗收封存](teaching/archived/README.md) · [三案本修訂讀回](teaching/daily/day-39/r2-delivery-verification.json)。保留各次來源、原文與證據；歷史測試不追認目前驗收。"
+    ]
+  },
+  {
+    "path": "docs/USER_JOURNEYS.md",
+    "headings": [
+      "# 使用者流程與增量界線",
+      "## Chat",
+      "## Desktop Pet",
+      "## Analytics",
+      "## 選題檢查"
+    ],
+    "source_claims": []
+  },
+  {
+    "path": "docs/COMMON_LEARNING_RULES.md",
+    "headings": [
+      "# 三專案共用規則",
+      "## 1. 儲存庫、來源與進度",
+      "## 2. 每日功能教學",
+      "## 3. 各專案Refactor與全專案獨立項目",
+      "## 4. 版本與驗證證據",
+      "## 5. GitHub交付、修訂與同步",
+      "## 6. 補教、計時與全面比對"
+    ],
+    "source_claims": [
+      "- 教學及patch以當時真實程式為基準，不能假設尚未套用的重構已存在。發布前重查來源、規則與branch／blob；變動則重核尚未發布內容。必要來源失敗只暫停受影響項，不以快取冒充最新。",
+      "兩類工作均不增加Day、不占核心60分鐘。產品保持唯讀，使用者套用；方案、套用與驗收分開。工作包須有來源SHA、範圍／相依、完整程式與Port／DTO／錯誤、Adapter／組裝／正式caller、Cargo及必要相容處理；同步測試／fixture與CI，列實際／未執行驗證、風險、回復方式和下一步。以最新已套用程式作下一包基準；相依patch標清順序，不能拿未套用方案冒充主分支狀態。",
+      "每篇涉及的套件、Rust、框架、DB及CLI／native工具均核對交付當日官方最新穩定版，排除預發行／yanked；列官方來源、日期、manifest宣告、lock resolved或已安裝版、差異、MSRV／native／WASM／DB相容性及建議採用理由。最新穩定版優先，不相容須明列阻礙與遷移驗證；未查完整不得通過文件Gate。不能由版本metadata推定build／DB／GUI通過，也不能假稱已升級；不自動改lock、安裝或跑產品migration。"
+    ]
+  },
+  {
+    "path": "docs/ANALYTICS_TRANSPORT.md",
+    "headings": [
+      "# Analytics 傳輸目標與主體核對"
+    ],
+    "source_claims": []
+  },
+  {
+    "path": "docs/DEPLOYMENT.md",
+    "headings": [
+      "# 主體程式操作與驗收索引"
+    ],
+    "source_claims": []
+  },
+  {
+    "path": "docs/SOURCE_LAYOUT.md",
+    "headings": [
+      "# 現行程式來源與目錄對照",
+      "## GitHub 現行 workspace 目錄樹（2026-10-27）",
+      "## 兩個目錄的用途",
+      "## 四個 workspace",
+      "## 舊路徑對照",
+      "## 教學與工程的目錄用途",
+      "## 文件入口與驗證範圍"
+    ],
+    "source_claims": [
+      "**歷史核對（2026-10-26，非最新 main）：** 最新程式來源 `9b89656`（upgrade）；新CI快照為1成功／6執行中，尚未全綠。舊648b903為六成功／Persistence失敗，已配置的Analytics PostgreSQL步驟被略過。當日官方版本、manifest／lock與本機工具差異已補查；未升級產品、未重跑測試、未完成整體驗收。[版本與摘要核對](source-review/2026-10-26-versions-and-summary-refresh.md)。",
+      "**目前目錄基準：** rust_ai_ring `912e5e77d8e3d2e24f0e9d804f28d86ae768c1d4`（2026-10-27 本地更新後；四個 workspace 的 tracked tree、Cargo.toml／Cargo.lock、18 個 member 與 entrypoints 核對）。下方較舊的來源 SHA、CI 與測試結果均是歷史快照，不代表最新產品驗收。",
+      "2026-10-24：使用者已將 `williechen/rust_ai_chat` 改名為 [`williechen/rust_ai_ring`](https://github.com/williechen/rust_ai_ring)，並調整為四個 Cargo workspace。2026-10-25 更新來源為 `5c713553daee4055738239f047d6c774fcc7a7a1`；文件基準為 copilot_use `532e739f1ef4e5920de300eba0f90adeeaf96187`。後續教學每次仍須重新讀取最新 main，不固定使用本頁 SHA。",
+      "歷史快照：當輪四workspace metadata、Node source6項與Pet記憶體SQLite探測通過；該5c713553快照七個CI成功但server PG feature未完整選取；648b903已配置正式server PG，但被Pet步驟失敗阻擋。Rust／PG／HTTP引用同SHA既有證據，非本輪重跑；GUI／完整驗收未執行。[最新比對](source-review/2026-10-25-full-comparison-5c713553.md)明列範圍，舊目錄核對JSON仍限其原日期。"
+    ]
+  },
+  {
+    "path": "docs/P9_TARGET.md",
+    "headings": [
+      "# 已廢除的 P9 規則"
+    ],
+    "source_claims": [
+      "目前需求依使用者最新確認內容及[現行使用者流程](requirements/USER_FLOWS.md)、[人員驗證需求](requirements/AUTHENTICATION.md)、[UI 驗收條件](UI_ALIGNMENT_REQUIREMENTS.md)核對；實際程式與測試依 rust_ai_chat 精確 SHA，已取得的功能與驗證結果見[目前現況](teaching/current/STATUS.md)。文件與最新確認內容不同時，先修正文義與來源，不套用舊規則。"
+    ]
+  },
+  {
+    "path": "docs/FULL_SOURCE_REVIEW.md",
+    "headings": [
+      "# 兩庫逐模組、介面與資料流程完整核對",
+      "## 覆蓋率與可追溯證據",
+      "## 必須保留的差異與尚未對應項目",
+      "## 逐組核對",
+      "### C01 Chat Domain",
+      "### C02 Chat Application",
+      "### C03 Chat 事件",
+      "### C04 Chat SQLite",
+      "### C05 Chat 入口/HTTP/SSR",
+      "### C06 Chat WS/Fanout",
+      "### C07 Chat UI",
+      "### C08 Chat 認證",
+      "### C09 Chat RAG/MCP/Agent",
+      "### C10 Chat AI SSE",
+      "### C11 Chat personas/policy",
+      "### C12 Chat 同意撤回",
+      "### C13 Chat persist/publish 回歸",
+      "### P01 Pet FSM",
+      "### P02 Pet Profile",
+      "### P03 Pet cleanup Domain",
+      "### P04 Pet Tauri 入口",
+      "### P05 Pet Frontend",
+      "### P06 Pet 真視窗漫遊",
+      "### P07 Pet preview/duplicates",
+      "### P08 Pet 真 OS quarantine/restore",
+      "### P09 Pet Store/Profile 投影",
+      "### P10 Pet 學習/備份",
+      "### P11 Pet Chat/Agent/生圖",
+      "### P12 Pet Outbox/policy",
+      "### P13 Pet 更新/平台回歸",
+      "### A01 Analytics reference契約",
+      "### A02 Analytics HTTP/入口",
+      "### A03 Analytics PostgreSQL",
+      "### A04 Analytics gRPC",
+      "### A05 Analytics Dashboard/SSE",
+      "### A06 Analytics governance/topics",
+      "### A07 Analytics Insights",
+      "### X01 Shared wire/type",
+      "### X02 AI Provider",
+      "### X03 MCP",
+      "### X04 Analytics transport",
+      "### X05 Telemetry",
+      "## 驗證與限制"
+    ],
+    "source_claims": [
+      "核對日期：2026-10-14。**逐模組、介面與資料流程的完整靜態核對已完成；兩庫不具全部程式語意等同。** 核對完成不代表差異已修正，也不是目前 SHA 的完整部署或跨平台執行驗收。下列為原完整靜態核對的固定來源快照，非最新 main 的全量重測；其後的局部來源／本地測試／CI 核對見 [參考庫驗證證據](source-review/rust-ai-chat-validation.json)。"
+    ]
+  },
+  {
+    "path": "docs/TEACHING_ALIGNMENT.md",
+    "headings": [
+      "# 教學、各案Refactor與全專案重構"
+    ],
+    "source_claims": []
+  },
+  {
+    "path": "docs/SEMANTIC_ARCHITECTURE_REVIEW.md",
+    "headings": [
+      "# 主體程式呼叫鏈核對"
+    ],
+    "source_claims": [
+      "[系統架構](SYSTEM_ARCHITECTURE.md) 提供定點來源入口；執行時重讀最新 source。Leptos、Axum、Application／Domain、SQLx 與 Tauri 邊界要求依 [共用規則](COMMON_LEARNING_RULES.md)。本次文件同步未執行上述流程的新增測試。"
+    ]
+  },
+  {
+    "path": "docs/SATURDAY_OPERATIONS.md",
+    "headings": [
+      "# 歷史週六操作與現行核對範圍",
+      "## 正確核對範圍",
+      "## 執行設定限制"
+    ],
+    "source_claims": [
+      "1. 取 rust_ai_ring 最新 main 精確 SHA，核對 tracked source、目錄、型別、介面、呼叫鏈、契約、DB／migration、UI、設定、測試與該庫 CI。"
+    ]
+  },
+  {
+    "path": "docs/SQLITE_TRANSITION.md",
+    "headings": [
+      "# 主體資料庫與 Adapter 邊界"
+    ],
+    "source_claims": [
+      "每次依 rust_ai_ring 最新來源核對 migration 位置、schema、ID／事件契約、使用者確認、備份／還原與重啟結果。舊庫 runtime、匯入、RAG 限額或備份命令不能推定主體已存在。執行中的 SQLite 不直接複製單一主檔，實際一致性與安全操作依主體程式及測試確認。"
+    ]
+  },
+  {
+    "path": "docs/FUTURE_WORK.md",
+    "headings": [
+      "# 功能待辦與工程銜接",
+      "## 所有問題文章的後續修正（2026-10-25）",
+      "### 文章 API／修訂與歷史版本",
+      "### Chat Session／作者／房主與 ACL",
+      "### Chat 歷史／migration／稽核",
+      "### Chat 房間與訊息回饋",
+      "### Pet 多寵物／回籠／重啟",
+      "### Pet 逐 ID 漫遊／桌面例外",
+      "### Pet 外觀與生活窗可讀性",
+      "### Analytics 正式人員查詢授權",
+      "### Analytics 正式登入／Session 保護",
+      "### 原 13 項清理／D01–D09",
+      "### CI／產物與測試覆蓋",
+      "### 來源事件／Outbox／gRPC／SSE／服務配對",
+      "### Pet 設定／記憶／檔案／AI 與平台能力",
+      "### Analytics 報表／Token 費用與跨服務能力",
+      "### Chat 即時／AI／政策與進階 UI",
+      "### 歷史路徑／庫名／政策與範例判讀",
+      "## 後續調整：重複與未使用程式、測試及產物（2026-10-25）",
+      "### 清理順序與保留條件",
+      "### 目前來源補充：接回既有功能與測試項",
+      "### 每項調整的最小交付",
+      "### 明確保留與不誤刪範圍",
+      "## 清單判讀",
+      "## 當前最高優先順序：先接通可操作的基本流程",
+      "## 既有實作的驗收邊界",
+      "## 教學銜接",
+      "### 共同主線",
+      "### Chat",
+      "### Desktop Pet",
+      "### Product Analytics",
+      "## 完成條件",
+      "### Chat瀏覽器與SQLite最新實證"
+    ],
+    "source_claims": [
+      "> 前輪ff14／b0歷史核對（已由9c76797修復，不是最新狀態）：Day40的Session首頁與CSV已見實作，但Chat/account路由回歸、Pet初輪X接線已於b0補上但3舊測試仍缺。[最新精確來源與命令](teaching/daily/day-40/local-validation/README.md)及[歷史更正](teaching/daily/day-40/historical-corrections.md)優先於下列歷史「目前」摘要；原完成條件／FIFO不變。",
+      "[105個目前閱讀版本／111份版本的問題與更正索引](teaching/current/ARTICLE_CORRECTIONS.md)已整併原盤點與最新實測。下表是原功能的集中修正條件，沿用原 D01–D09 及既有項目，不另建任務編號或 FIFO。狀態限各證據來源，不將需求未驗收一律稱為文章錯誤。",
+      "2026-10-25 使用者操作回報：已登入首頁仍固定顯示「登入」。最新來源 `dbe00814` 的 HomePage 仍固定 href=/signin。完成條件補充：依伺服器有效 Session 顯示「管理」並進個人管理；未登入／失效顯示「登入」，登入返回、刷新、登出與過期均回歸。[截圖與來源核對](source-review/2026-10-25-chat-homepage-feedback.md)。本項未修復／未驗收。",
+      "最新648b903增量實測：apply_room_search與真WASM caller已見、UI15項與建置通過；但API500時status未綁DOM，舊清單保留卻無錯誤／重試提示，待修且未驗收。[本次證據](source-review/2026-10-25-day37-verification-648b903.md)。下方5c713553與其他來源診斷保留其歷史範圍。",
+      "2026-10-25 使用者操作回報：首頁進入時必須按讀取才有房間；房間頁共用列表也顯示未讀取。最新來源 `dbe00814` 未見首次載入，須補「進入首頁即自動讀取」，保留手動刷新、載入／空／錯誤／重試與舊快照；核對 hydration 重複請求及新舊搜尋競態。[證據與完成條件](source-review/2026-10-25-chat-homepage-feedback.md)。本來源已見 Day37 apply_room_search 與 WASM caller；下段 `5c713553` 診斷保留其歷史範圍，不代表自動載入已完成。",
+      "最新648b903：出籠先保存／失敗補償及協調鎖已見，62項測試通過；使用者確認控制窗／生活窗／同ID重複出籠局部正常。native故障注入、併行、直接關窗與重啟仍未驗收，不能沿舊來源再說補償完全未套用。[範圍與證據](source-review/2026-10-25-day37-verification-648b903.md)。",
+      "目前：日誌與來源確認／待修。完成條件：真實逐窗漫遊；回籠停活動；拖曳與螢幕變動符合現行 UI 條件。",
+      "目前：精確查詢Session已修正並局部驗證／角色ACL與SSE待完成。完成條件：Query／管理／SSE經人員Session與角色來源權限；上報機器身分另驗；撤銷立即生效。",
+      "目前：library 選取已見；完整覆蓋待驗。完成條件：同 SHA 真 PG server＋library、source＋新 dist、native build／安裝更新；不延用舊 SHA 綠燈。",
+      "目前：來源接線／需求待完成或待驗。完成條件：真來源事件→可靠投遞→PG commit ACK→人員查詢／SSE，含重試去重、rollback、換證撤銷。",
+      "目前：需求／未驗收範圍。完成條件：依原功能條件核對真來源與精確驗證；未知額度不可冒稱已取得。",
+      "本節維持原 13 項及 D01–D09 識別，下表原13項逐項快照來源為 `williechen/rust_ai_ring@afdbb6e81382e8d82095827a90c52cc3309a3e20`；目前5c713553的變化見本節最新比對入口；每次動手仍須重新核對最新 main 與 caller。[本次重掃報告與 CI／來源一致性證據](source-review/2026-10-25-adjustments-rescan-afdbb6e.md) 保留為原13項的定點核對，歷史原報告與已發布文章保留。",
+      "本次沒有產品變更，沿用同 SHA 的 Analytics 44 passed／0 failed／1 ignored，以及經 git diff 確認來源相同的 Chat／Pet 原範圍結果；沒有冒稱重新跑整套測試。該afdbb6e快照七個push workflows為success；648b903目前為六success／Persistence失敗，不能沿用為全綠。該快照不決定當前教學進度；每日工程依相依性接續，功能教學依即時next_day。",
+      "| Analytics 2／D04 | 盤點並淘汰舊 admin.rs 登入碼／memory Session 後台與其專屬測試、Config／模組出口 | main/build_app 目前採 password_login::build；確認無相容 caller 再移除舊公開 API，不刪除正式帳密／Session／PostgreSQL 測試 | 正式登入／首次改密碼／後台／登出與 Session 撤銷；角色／來源 ACL 原缺口保留，待核對／清理 |",
+      "### 目前來源補充：接回既有功能與測試項",
+      "1. 在最新精確 SHA 查清 Rust caller、mod/pub export、Axum route、Tauri generate_handler／menu、WASM/JS bridge、cfg/feature、測試與 CI 入口；跨 workspace 和 tracked dist 也需查看。搜尋不到一般函式呼叫不等於沒有框架或外部入口。",
+      "Checkbox代表原功能尚待完成／核實，不表示每個底層都未實作。以最新產品來源與證據去重追蹤；工程、教學與產品驗收分列，規則依[共用正本](COMMON_LEARNING_RULES.md)。",
+      "舊文章與目前程式的核對以 [最新逐篇狀態](teaching/current/ARTICLE_STATUS.md) 為準；舊84篇矩陣、固定來源 cold-build／瀏覽器／GUI 證據保留各自來源，不直接當成最新通過或失敗。已見程式的切片不重建，原文版本／路徑及 SSR 勘誤、實際功能與未驗收缺口分開調整。",
+      "這是目前已確認功能的實作順序與驗收條件；實際缺口及最新來源見[目前進度](teaching/current/STATUS.md)。每次依真實入口、資料庫與測試調整最小切片，不預排Day，也不以其他分支的舊試作當成已合併／驗收。",
+      "- [ ] **Analytics：管理員初始化→持久化帳密登入→首次改密碼→Session／Dashboard授權。** 沿 rust_ai_ring bootstrap／password_login／Session 的最新來源，核對真正登入／改密碼／授權鏈及未完成部分；固定key登入或429回應不等於完成帳密身分流程。",
+      "[2026-10-16 舊庫 Linux 證據](weekly/2026-10-16/acceptance.json) 保留原來源，不作 rust_ai_ring 的完成證據。原功能是否已實作、是否有新增需求與跨平台缺口，須在主體最新 SHA 核對；不因來源角色調整重教已完成內容。",
+      "- [ ] Pet 漫遊後續需求：多寵物獨立生活窗、出入籠與互動、螢幕移除不立即搬回／手動找回；逐項按 [UI 需求](UI_ALIGNMENT_REQUIREMENTS.md) 核對目前來源、所屬測試及真實桌面結果。",
+      "學習來源現況與驗證範圍見[目前進度](teaching/current/STATUS.md)。Chat／Pet 各自依 FIFO 補教尚未完成的部分；Analytics Day24 已結案。下一 Day 即時值只引用 [learning-state](learning-state.json)，不在此複製固定 Day。主體程式套用與功能驗收分開追蹤。",
+      "來源、進度與驗證結果統一見[目前進度](teaching/current/STATUS.md)。Day25（含）以前文章封存；以下沿用原功能項追蹤，不代表產品已整合或驗收。",
+      "以下保留原有學習範圍，checkbox 表示學習／適配未完成，不表示對應成品功能全部未實作。每次依最新 source、所屬測試與 CI 排除已套用項目，再選最小切片。歷史驗證保留原來源，新一輪只更新統一進度與對應原項目，不重建待辦。"
+    ]
+  },
+  {
+    "path": "docs/LOCAL_START.md",
+    "headings": [
+      "# rust_ai_ring 本地操作入口",
+      "## Chat",
+      "## Pet",
+      "## Analytics"
+    ],
+    "source_claims": [
+      "package 為 chat-server / chat-ui；Leptos 輸出名稱仍為 rust_ai_chat。服務位址依目前來源為 http://127.0.0.1:3000，health endpoint 為 /health。"
+    ]
+  },
+  {
+    "path": "docs/UI_ALIGNMENT_REQUIREMENTS.md",
+    "headings": [
+      "# Chat 聊天前台、Pet 雙視窗與 Analytics 畫面銜接",
+      "## 目前來源與封存界線",
+      "## 已確認的使用者流程",
+      "## 2026-10-19：先完成可操作的基本流程",
+      "## Chat 聊天前台",
+      "## Desktop Pet",
+      "## Product Analytics",
+      "## 驗證與交付界線",
+      "## Chat 聊天室清單：UTMall 截圖參考（2026-10-17 確認）",
+      "### 已確認的互動方向（Day16 封存後由下一 Day 推進）",
+      "### Day 與來源界線",
+      "## Chat 房間內部：x5.f1.com.tw 截圖參考（2026-10-17 使用者提供）",
+      "### 後續 Chat UI 實作方向（未套用）"
+    ],
+    "source_claims": [
+      "> 實作進度、精確來源與驗證結果統一見[目前進度](teaching/current/STATUS.md)。本文件保留功能需求／完成條件或架構；歷次測試摘要已移入歷史紀錄，不作現行完成聲明。",
+      "## 目前來源與封存界線",
+      "現行實作、來源SHA與驗證限制見[目前進度](teaching/current/STATUS.md)，原始報告見其證據連結；本頁只保留驗收條件。每次執行重新讀取規則與來源，後端binary與前端JS／WASM須各自核對建置來源；文件整理不代表重新建置或驗收。",
+      "開發順序優先：Chat 註冊／登入／Session／經授權進房；Pet 新增寵物／Tauri IPC／SQLite 儲存與重啟載入；Analytics 管理員初始化／持久化帳密／首次改密碼／受保護後台。每次依最新來源找出第一個尚未接通的步驟，逐日完成最小 Green；不得把單點測試或 Day 遞增當整體功能驗收。**保留未登入者可查看公開房間清單，點房間時才做登入與 ACL 核對**。本段不修改既有 UI 需求和角色/安全約束。",
+      "驗收從真實房間列表進房，測同房收發／跨房隔離、切房與草稿、長訊息、空／錯誤狀態、斷線、中文多行輸入及窄螢幕；無訊息確認或重試冪等能力時不能宣稱傳送狀態已完整實作。各項是否已通過以[目前進度](teaching/current/STATUS.md)的來源與證據為準，歷史瀏覽器結果不自動沿用。",
+      "- **房間列**：顯示真實房間名稱、可用時顯示真實分類，整列可點擊進入現有 `/room/{id}`；鍵盤焦點、目前選取狀態與行動版點擊區需清楚。沒有來源的描述、熱門數、在線數不顯示假值。"
+    ]
+  },
+  {
+    "path": "docs/SYSTEM_ARCHITECTURE.md",
+    "headings": [
+      "# 系統架構與責任",
+      "## 分層與依賴方向",
+      "## 來源所見與工程範圍",
+      "## 測試與CI"
+    ],
+    "source_claims": []
+  },
+  {
+    "path": "docs/REPOSITORY_ROLE_TRANSITION.md",
+    "headings": [
+      "# 儲存庫分工同步範圍",
+      "## 本次完成",
+      "## 已廢除的程式工作與殘留執行設定"
+    ],
+    "source_claims": []
+  },
+  {
+    "path": "docs/LOCAL_VALIDATION.md",
+    "headings": [
+      "# 主體程式測試與功能驗收",
+      "## 驗證方式",
+      "## 本次正式本地驗證（2026-10-27）",
+      "## 歷史與現行 Gate",
+      "## 四個 workspace 的驗證命令（方案，非本次執行）"
+    ],
+    "source_claims": []
+  },
+  {
+    "path": "docs/ROADMAP_P0_P11.md",
+    "headings": [
+      "# 階段規劃入口更正：P0–P12 共十三階段"
+    ],
+    "source_claims": [
+      "P1.0 仍是 P1 的首個 Logging 工作包，不另算階段。新規劃合併本地十三階段日曆及最新程式／文章；P11 部署與營運就緒、P12 發布生命週期的細分決策詳見新文件。原先十二階段原文與精確來源保留於 [來源保存](source-review/phase-plan-merge-2026-10-25/previous-roadmap.json)，以及 Git 歷史；既有文章不重寫。"
+    ]
+  },
+  {
+    "path": "docs/GITHUB_PET_UPDATES.md",
+    "headings": [
+      "# 舊庫 Pet 發行與更新的適用範圍"
+    ],
+    "source_claims": []
+  },
+  {
+    "path": "docs/ROADMAP_P0_P12.md",
+    "headings": [
+      "# Rust AI Ring｜P0–P12 十三階段詳細規劃",
+      "## 合併來源與規劃決策",
+      "## 共通原則與狀態",
+      "## 十三階段總覽與原日曆",
+      "## 三產品適用範圍",
+      "## P0 — Foundation & MVP｜非 AI 基礎產品",
+      "### Scope",
+      "### Non-goals",
+      "### Prerequisites",
+      "### Deliverables",
+      "### Acceptance Criteria / Exit Gate",
+      "### Tests",
+      "### Evidence",
+      "### Status",
+      "## P1 — Security & Identity｜含 P1.0 共用 Logging",
+      "### Scope",
+      "### Non-goals",
+      "### Prerequisites",
+      "### Deliverables",
+      "### Acceptance Criteria / Exit Gate",
+      "### Tests",
+      "### Evidence",
+      "### Status",
+      "## P2 — Reliability & Persistence｜可靠性與資料恢復",
+      "### Scope",
+      "### Non-goals",
+      "### Prerequisites",
+      "### Deliverables",
+      "### Acceptance Criteria / Exit Gate",
+      "### Tests",
+      "### Evidence",
+      "### Status",
+      "## P3 — Real-time Communication｜即時連線與同步",
+      "### Scope",
+      "### Non-goals",
+      "### Prerequisites",
+      "### Deliverables",
+      "### Acceptance Criteria / Exit Gate",
+      "### Tests",
+      "### Evidence",
+      "### Status",
+      "## P4 — AI Integration｜真實模型整合",
+      "### Scope",
+      "### Non-goals",
+      "### Prerequisites",
+      "### Deliverables",
+      "### Acceptance Criteria / Exit Gate",
+      "### Tests",
+      "### Evidence",
+      "### Status",
+      "## P5 — AI Persona & Conversation｜角色與對話控制",
+      "### Scope",
+      "### Non-goals",
+      "### Prerequisites",
+      "### Deliverables",
+      "### Acceptance Criteria / Exit Gate",
+      "### Tests",
+      "### Evidence",
+      "### Status",
+      "## P6 — Memory & RAG｜授權記憶與檢索",
+      "### Scope",
+      "### Non-goals",
+      "### Prerequisites",
+      "### Deliverables",
+      "### Acceptance Criteria / Exit Gate",
+      "### Tests",
+      "### Evidence",
+      "### Status",
+      "## P7 — MCP & Tool Integration｜工具權限與可追溯執行",
+      "### Scope",
+      "### Non-goals",
+      "### Prerequisites",
+      "### Deliverables",
+      "### Acceptance Criteria / Exit Gate",
+      "### Tests",
+      "### Evidence",
+      "### Status",
+      "## P8 — Agent Runtime｜有界任務與恢復",
+      "### Scope",
+      "### Non-goals",
+      "### Prerequisites",
+      "### Deliverables",
+      "### Acceptance Criteria / Exit Gate",
+      "### Tests",
+      "### Evidence",
+      "### Status",
+      "## P9 — Learning & Teaching Agent｜新定義的教學代理",
+      "### Scope",
+      "### Non-goals",
+      "### Prerequisites",
+      "### Deliverables",
+      "### Acceptance Criteria / Exit Gate",
+      "### Tests",
+      "### Evidence",
+      "### Status",
+      "## P10 — Observability & Operations｜完整觀測",
+      "### Scope",
+      "### Non-goals",
+      "### Prerequisites",
+      "### Deliverables",
+      "### Acceptance Criteria / Exit Gate",
+      "### Tests",
+      "### Evidence",
+      "### Status",
+      "## P11 — Production Readiness & Deployment｜正式部署與營運就緒",
+      "### Scope",
+      "### Non-goals",
+      "### Prerequisites",
+      "### Deliverables",
+      "### Acceptance Criteria / Exit Gate",
+      "### Tests",
+      "### Evidence",
+      "### Status",
+      "## P12 — Release & Lifecycle｜發布、安裝更新與回滾",
+      "### Scope",
+      "### Non-goals",
+      "### Prerequisites",
+      "### Deliverables",
+      "### Acceptance Criteria / Exit Gate",
+      "### Tests",
+      "### Evidence",
+      "### Status",
+      "## 當前執行優先序與文章銜接",
+      "## 證據記錄模板",
+      "## 需求來源"
+    ],
+    "source_claims": [
+      "使用最新需求及精確 rust_ai_ring SHA，具隔離 SQLite／PostgreSQL、瀏覽器及 Tauri 原生環境。",
+      "- 新 P9 不恢復已廢除 P9_TARGET；目前 learning-state.json 與排程文件只是規劃來源，不等於產品代理已實作。",
+      "1. 先完成 P0 真缺口：Chat 房間／作者授權與歷史讀回；Pet 預設資格／回籠／直接關窗／逐 ID 漫遊；Analytics 正式人員／角色來源授權及完整管理旅程。每次先重讀最新 caller，Day36 已接通的 WS 重驗、精確查詢 Session、未回籠恢復查詢不重做。"
+    ]
+  },
+  {
+    "path": "docs/TEACHING_FORMAT.md",
+    "headings": [
+      "# 教學入口"
+    ],
+    "source_claims": []
+  },
+  {
+    "path": "docs/SERVICE_CREDENTIAL_REQUIREMENTS.md",
+    "headings": [
+      "# Chat／Pet 與 Analytics 交互憑證需求",
+      "## 後台人員與服務身分的界線",
+      "## 與現有程式及 Day 的關係"
+    ],
+    "source_claims": []
+  },
+  {
+    "path": "docs/teaching/current/README.md",
+    "headings": [
+      "# 目前進度入口"
+    ],
+    "source_claims": [
+      "[問題文章與後續更正總表](ARTICLE_CORRECTIONS.md)：已整併最新瀏覽器／Pet 原生證據；下方個別來源的交付／測試摘要保留其當次範圍。"
+    ]
+  },
+  {
+    "path": "docs/teaching/current/STATUS.md",
+    "headings": [
+      "# 目前功能與驗證狀態"
+    ],
+    "source_claims": []
+  },
+  {
+    "path": "docs/teaching/current/ANALYTICS_ENTRY.md",
+    "headings": [
+      "# Analytics 現行教學入口"
+    ],
+    "source_claims": []
+  },
+  {
+    "path": "docs/teaching/current/ARTICLE_CORRECTIONS.md",
+    "headings": [
+      "# 問題文章與後續更正索引",
+      "## 本次需要直接留意的更正"
+    ],
+    "source_claims": [
+      "> 前輪ff14／b0歷史更正（不是最新來源狀態）：Chat/account回歸、Pet初輪缺nativeX已於b0補上，但3項舊斷言仍缺、原始patch EOF問題已實測記錄。[現行狀態](STATUS.md)與[Day39／40歷史更正](../daily/day-40/historical-corrections.md)為本次入口；下列舊SHA診斷不當成最新全部未套用或已驗收。",
+      "2026-10-25 更新；程式精確來源 `5c713553daee4055738239f047d6c774fcc7a7a1`，文件比對基準 `532e739f1ef4e5920de300eba0f90adeeaf96187`。涵蓋三案 Day2–36 的 **105個目前閱讀版本、111份版本**。三案 Day1 原文缺失，未補造；全部原文 blob／SHA256 核對無不符。原教學正文與原交付證據保留。",
+      "| [36／chat／r2](../daily/day-36/chat-r2.md) | 目前版本 | WS tick／incoming／broadcast 皆重驗 active_member；同 SHA 實測已驗撤銷，無原子競態／硬性一秒上界保證，作者與 ACL 未隨此完成。 | [chat-auth](../../FUTURE_WORK.md#chat-auth) |",
+      "| [16／pet／historical](../history/day-16/pet/notion/3fce51d4509381e9aa03d633822eee89.md) | 目前版本 | 控制窗 CloseRequested hide、open_control_window show/focus 已接；歷史原生局部通過限其原 SHA，本輪沒有重跑原生 GUI。 | [layout-guidance](../../FUTURE_WORK.md#layout-guidance)、[pet-lifecycle](../../FUTURE_WORK.md#pet-lifecycle) |",
+      "| [23／pet／historical](../history/day-23/pet/github.md) | 目前版本 | 控制窗 CloseRequested hide、open_control_window show/focus 已接；歷史原生局部通過限其原 SHA，本輪沒有重跑原生 GUI。 | [layout-guidance](../../FUTURE_WORK.md#layout-guidance)、[pet-lifecycle](../../FUTURE_WORK.md#pet-lifecycle) |",
+      "| [31／pet／r1](../daily/day-31/pet.md) | 目前版本 | 控制窗 CloseRequested hide、open_control_window show/focus 已接；歷史原生局部通過限其原 SHA，本輪沒有重跑原生 GUI。 | [layout-guidance](../../FUTURE_WORK.md#layout-guidance)、[pet-lifecycle](../../FUTURE_WORK.md#pet-lifecycle) |",
+      "| [2／analytics／historical](../history/day-02/analytics/notion/3f4e51d4509381bcbddccfba35f4b329.md) | 目前版本 | 早期合法事件 501 stub 已由來源 token 驗證與 PostgreSQL commit／去重 ACK 取代，不應為舊斷言退回 stub。 | [layout-guidance](../../FUTURE_WORK.md#layout-guidance)、[article-api](../../FUTURE_WORK.md#article-api) |",
+      "| [3／analytics／historical](../history/day-03/analytics/notion/3f4e51d4509381ebb781cf9b2f2f0db6.md) | 目前版本 | 事件驗證、來源隔離、記憶體／PG 去重及攝取對應程式存在；記憶體 helper 與真正 PG／HTTP 證據須分開，gRPC／SSE 尚未完成。 | [layout-guidance](../../FUTURE_WORK.md#layout-guidance) |",
+      "| [4／analytics／historical](../history/day-04/analytics/notion/3f5e51d45093811a8ac5dafd3cd3bbcc.md) | 目前版本 | 早期合法事件 501 stub 已由來源 token 驗證與 PostgreSQL commit／去重 ACK 取代，不應為舊斷言退回 stub。 | [layout-guidance](../../FUTURE_WORK.md#layout-guidance)、[article-api](../../FUTURE_WORK.md#article-api) |",
+      "| [5／analytics／historical](../history/day-05/analytics/notion/3f5e51d45093813cabb7e6a48ee3a0f0.md) | 目前版本 | 事件驗證、來源隔離、記憶體／PG 去重及攝取對應程式存在；記憶體 helper 與真正 PG／HTTP 證據須分開，gRPC／SSE 尚未完成。 | [layout-guidance](../../FUTURE_WORK.md#layout-guidance) |",
+      "| [6／analytics／historical](../history/day-06/analytics/notion/3f5e51d450938160a376fde5e2fad496.md) | 目前版本 | 事件驗證、來源隔離、記憶體／PG 去重及攝取對應程式存在；記憶體 helper 與真正 PG／HTTP 證據須分開，gRPC／SSE 尚未完成。 | [layout-guidance](../../FUTURE_WORK.md#layout-guidance) |",
+      "| [7／analytics／historical](../history/day-07/analytics/notion/3f5e51d450938138a33ddadedb5a5e98.md) | 目前版本 | 事件驗證、來源隔離、記憶體／PG 去重及攝取對應程式存在；記憶體 helper 與真正 PG／HTTP 證據須分開，gRPC／SSE 尚未完成。 | [layout-guidance](../../FUTURE_WORK.md#layout-guidance) |",
+      "| [8／analytics／historical](../history/day-08/analytics/notion/3f5e51d4509381f98c33c2df7ab97663.md) | 目前版本 | 早期合法事件 501 stub 已由來源 token 驗證與 PostgreSQL commit／去重 ACK 取代，不應為舊斷言退回 stub。 | [layout-guidance](../../FUTURE_WORK.md#layout-guidance)、[article-api](../../FUTURE_WORK.md#article-api) |",
+      "| [9／analytics／historical](../history/day-09/analytics/notion/3f8e51d45093810d830ef3fd40e419f0.md) | 目前版本 | 事件驗證、來源隔離、記憶體／PG 去重及攝取對應程式存在；記憶體 helper 與真正 PG／HTTP 證據須分開，gRPC／SSE 尚未完成。 |  |",
+      "| [10／analytics／historical](../history/day-10/analytics/notion/3f9e51d4509381269984c5f49a429b5d.md) | 目前版本 | 事件驗證、來源隔離、記憶體／PG 去重及攝取對應程式存在；記憶體 helper 與真正 PG／HTTP 證據須分開，gRPC／SSE 尚未完成。 | [layout-guidance](../../FUTURE_WORK.md#layout-guidance) |",
+      "| [11／analytics／historical](../history/day-11/analytics/notion/3f9e51d45093814a8054d44c4ff9fa55.md) | 目前版本 | 事件驗證、來源隔離、記憶體／PG 去重及攝取對應程式存在；記憶體 helper 與真正 PG／HTTP 證據須分開，gRPC／SSE 尚未完成。 | [layout-guidance](../../FUTURE_WORK.md#layout-guidance) |",
+      "| [12／analytics／historical](../history/day-12/analytics/notion/3fae51d4509381ebb1e9f8482b5bf44e.md) | 目前版本 | 事件驗證、來源隔離、記憶體／PG 去重及攝取對應程式存在；記憶體 helper 與真正 PG／HTTP 證據須分開，gRPC／SSE 尚未完成。 | [layout-guidance](../../FUTURE_WORK.md#layout-guidance) |",
+      "| [35／analytics／r2](../daily/day-35/analytics-r2.md) | 目前版本 | analytics-persistence 精確 SQLx 聚合與正式 route 已接；r1 遺漏接線由 r2 補足；原來源 token 查詢已再由 Day36 人員 Session 取代。 | [article-api](../../FUTURE_WORK.md#article-api)、[analytics-auth](../../FUTURE_WORK.md#analytics-auth)、[adapter-cleanup](../../FUTURE_WORK.m",
+      "| [36／analytics／r2](../daily/day-36/analytics-r2.md) | 目前版本 | require_query_session 已接正式 exact-kind route，機器 token 仍只作攝取；同 SHA PG／HTTP 證據支持局部修正，僅 admin、角色／來源 ACL／SSE 未完成。 | [analytics-auth](../../FUTURE_WORK.md#analytics-auth) |"
+    ]
+  },
+  {
+    "path": "docs/teaching/current/PET_ENTRY.md",
+    "headings": [
+      "# Pet 現行教學入口"
+    ],
+    "source_claims": []
+  },
+  {
+    "path": "docs/teaching/current/CHAT_ENTRY.md",
+    "headings": [
+      "# Chat 現行教學入口"
+    ],
+    "source_claims": []
+  },
+  {
+    "path": "docs/teaching/current/ARTICLE_STATUS.md",
+    "headings": [
+      "# 逐篇文章與現存程式狀態"
+    ],
+    "source_claims": [
+      "> 前輪ff14／b0歷史更正（不是最新來源狀態）：Chat/account回歸、Pet初輪缺nativeX已於b0補上，但3項舊斷言仍缺、原始patch EOF問題已實測記錄。[現行狀態](STATUS.md)與[Day39／40歷史更正](../daily/day-40/historical-corrections.md)為本次入口；下列舊SHA診斷不當成最新全部未套用或已驗收。",
+      "2026-10-25 更新；程式精確來源 `5c713553daee4055738239f047d6c774fcc7a7a1`，文件比對基準 `532e739f1ef4e5920de300eba0f90adeeaf96187`。涵蓋三案 Day2–36 的 **105個目前閱讀版本、111份版本**。三案 Day1 原文缺失，未補造；全部原文 blob／SHA256 核對無不符。原教學正文與原交付證據保留。",
+      "| [36／chat／r2](../daily/day-36/chat-r2.md) | 目前版本 | WS tick／incoming／broadcast 皆重驗 active_member；同 SHA 實測已驗撤銷，無原子競態／硬性一秒上界保證，作者與 ACL 未隨此完成。 | [chat-auth](../../FUTURE_WORK.md#chat-auth) |",
+      "| [16／pet／historical](../history/day-16/pet/notion/3fce51d4509381e9aa03d633822eee89.md) | 目前版本 | 控制窗 CloseRequested hide、open_control_window show/focus 已接；歷史原生局部通過限其原 SHA，本輪沒有重跑原生 GUI。 | [layout-guidance](../../FUTURE_WORK.md#layout-guidance)、[pet-lifecycle](../../FUTURE_WORK.md#pet-lifecycle) |",
+      "| [23／pet／historical](../history/day-23/pet/github.md) | 目前版本 | 控制窗 CloseRequested hide、open_control_window show/focus 已接；歷史原生局部通過限其原 SHA，本輪沒有重跑原生 GUI。 | [layout-guidance](../../FUTURE_WORK.md#layout-guidance)、[pet-lifecycle](../../FUTURE_WORK.md#pet-lifecycle) |",
+      "| [31／pet／r1](../daily/day-31/pet.md) | 目前版本 | 控制窗 CloseRequested hide、open_control_window show/focus 已接；歷史原生局部通過限其原 SHA，本輪沒有重跑原生 GUI。 | [layout-guidance](../../FUTURE_WORK.md#layout-guidance)、[pet-lifecycle](../../FUTURE_WORK.md#pet-lifecycle) |",
+      "| [2／analytics／historical](../history/day-02/analytics/notion/3f4e51d4509381bcbddccfba35f4b329.md) | 目前版本 | 早期合法事件 501 stub 已由來源 token 驗證與 PostgreSQL commit／去重 ACK 取代，不應為舊斷言退回 stub。 | [layout-guidance](../../FUTURE_WORK.md#layout-guidance)、[article-api](../../FUTURE_WORK.md#article-api) |",
+      "| [3／analytics／historical](../history/day-03/analytics/notion/3f4e51d4509381ebb781cf9b2f2f0db6.md) | 目前版本 | 事件驗證、來源隔離、記憶體／PG 去重及攝取對應程式存在；記憶體 helper 與真正 PG／HTTP 證據須分開，gRPC／SSE 尚未完成。 | [layout-guidance](../../FUTURE_WORK.md#layout-guidance) |",
+      "| [4／analytics／historical](../history/day-04/analytics/notion/3f5e51d45093811a8ac5dafd3cd3bbcc.md) | 目前版本 | 早期合法事件 501 stub 已由來源 token 驗證與 PostgreSQL commit／去重 ACK 取代，不應為舊斷言退回 stub。 | [layout-guidance](../../FUTURE_WORK.md#layout-guidance)、[article-api](../../FUTURE_WORK.md#article-api) |",
+      "| [5／analytics／historical](../history/day-05/analytics/notion/3f5e51d45093813cabb7e6a48ee3a0f0.md) | 目前版本 | 事件驗證、來源隔離、記憶體／PG 去重及攝取對應程式存在；記憶體 helper 與真正 PG／HTTP 證據須分開，gRPC／SSE 尚未完成。 | [layout-guidance](../../FUTURE_WORK.md#layout-guidance) |",
+      "| [6／analytics／historical](../history/day-06/analytics/notion/3f5e51d450938160a376fde5e2fad496.md) | 目前版本 | 事件驗證、來源隔離、記憶體／PG 去重及攝取對應程式存在；記憶體 helper 與真正 PG／HTTP 證據須分開，gRPC／SSE 尚未完成。 | [layout-guidance](../../FUTURE_WORK.md#layout-guidance) |",
+      "| [7／analytics／historical](../history/day-07/analytics/notion/3f5e51d450938138a33ddadedb5a5e98.md) | 目前版本 | 事件驗證、來源隔離、記憶體／PG 去重及攝取對應程式存在；記憶體 helper 與真正 PG／HTTP 證據須分開，gRPC／SSE 尚未完成。 | [layout-guidance](../../FUTURE_WORK.md#layout-guidance) |",
+      "| [8／analytics／historical](../history/day-08/analytics/notion/3f5e51d4509381f98c33c2df7ab97663.md) | 目前版本 | 早期合法事件 501 stub 已由來源 token 驗證與 PostgreSQL commit／去重 ACK 取代，不應為舊斷言退回 stub。 | [layout-guidance](../../FUTURE_WORK.md#layout-guidance)、[article-api](../../FUTURE_WORK.md#article-api) |",
+      "| [9／analytics／historical](../history/day-09/analytics/notion/3f8e51d45093810d830ef3fd40e419f0.md) | 目前版本 | 事件驗證、來源隔離、記憶體／PG 去重及攝取對應程式存在；記憶體 helper 與真正 PG／HTTP 證據須分開，gRPC／SSE 尚未完成。 |  |",
+      "| [10／analytics／historical](../history/day-10/analytics/notion/3f9e51d4509381269984c5f49a429b5d.md) | 目前版本 | 事件驗證、來源隔離、記憶體／PG 去重及攝取對應程式存在；記憶體 helper 與真正 PG／HTTP 證據須分開，gRPC／SSE 尚未完成。 | [layout-guidance](../../FUTURE_WORK.md#layout-guidance) |",
+      "| [11／analytics／historical](../history/day-11/analytics/notion/3f9e51d45093814a8054d44c4ff9fa55.md) | 目前版本 | 事件驗證、來源隔離、記憶體／PG 去重及攝取對應程式存在；記憶體 helper 與真正 PG／HTTP 證據須分開，gRPC／SSE 尚未完成。 | [layout-guidance](../../FUTURE_WORK.md#layout-guidance) |",
+      "| [12／analytics／historical](../history/day-12/analytics/notion/3fae51d4509381ebb1e9f8482b5bf44e.md) | 目前版本 | 事件驗證、來源隔離、記憶體／PG 去重及攝取對應程式存在；記憶體 helper 與真正 PG／HTTP 證據須分開，gRPC／SSE 尚未完成。 | [layout-guidance](../../FUTURE_WORK.md#layout-guidance) |",
+      "| [35／analytics／r2](../daily/day-35/analytics-r2.md) | 目前版本 | analytics-persistence 精確 SQLx 聚合與正式 route 已接；r1 遺漏接線由 r2 補足；原來源 token 查詢已再由 Day36 人員 Session 取代。 | [article-api](../../FUTURE_WORK.md#article-api)、[analytics-auth](../../FUTURE_WORK.md#analytics-auth)、[adapter-cleanup](../../FUTURE_WORK.m",
+      "| [36／analytics／r2](../daily/day-36/analytics-r2.md) | 目前版本 | require_query_session 已接正式 exact-kind route，機器 token 仍只作攝取；同 SHA PG／HTTP 證據支持局部修正，僅 admin、角色／來源 ACL／SSE 未完成。 | [analytics-auth](../../FUTURE_WORK.md#analytics-auth) |"
+    ]
+  }
+]

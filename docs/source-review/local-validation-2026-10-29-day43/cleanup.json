@@ -1,0 +1,22 @@
+[
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/crates/target/debug/incremental",
+    "allocated_bytes": 75649024,
+    "type": "Cargo incremental build cache"
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/incremental",
+    "allocated_bytes": 2963628032,
+    "type": "Cargo incremental build cache"
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/incremental",
+    "allocated_bytes": 1672392704,
+    "type": "Cargo incremental build cache"
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/incremental",
+    "allocated_bytes": 2219884544,
+    "type": "Cargo incremental build cache"
+  }
+]

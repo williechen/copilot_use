@@ -1,0 +1,1 @@
+Error: Migrate(ExecuteMigration(Database(SqliteError { code: 1, message: "near \"MODIFY\": syntax error" }), 20261018100114))

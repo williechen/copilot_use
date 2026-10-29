@@ -1,0 +1,11 @@
+{
+  "ARTICLE_STATUS.md_historical_matrix_unchanged": true,
+  "ARTICLE_CORRECTIONS.md_historical_matrix_unchanged": true,
+  "task_anchors_unchanged": true,
+  "task_conditions_preserved": true,
+  "docs/learning-state.json_next_day_unchanged": true,
+  "docs/learning-state.json_comparison_unchanged": true,
+  "docs/teaching/current/manifest.json_next_day_unchanged": true,
+  "docs/teaching/current/manifest.json_comparison_unchanged": true,
+  "no_historical_or_patch_changes": true
+}

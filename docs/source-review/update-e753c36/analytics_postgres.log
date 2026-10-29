@@ -1,0 +1,119 @@
+   Compiling analytics-persistence v0.2.34 (/home/willie/Documents/Codex/2026-10-25/new-chat-3/work/rust_ai_ring/analytics_apps/analytics_persistence)
+   Compiling analytics-server v0.2.34 (/home/willie/Documents/Codex/2026-10-25/new-chat-3/work/rust_ai_ring/analytics_apps/analytics_server)
+error[E0425]: cannot find function `summary_for_source_and_type` in module `pg_store`
+   --> analytics_server/src/lib.rs:591:23
+    |
+591 |               pg_store::summary_for_source_and_type(&pool, "web_chat", "' OR TRUE --")
+    |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+   ::: analytics_server/src/pg_store.rs:72:1
+    |
+ 72 | / pub async fn summary_for_source(
+ 73 | |     pool: &PgPool,
+ 74 | |     source: &str,
+ 75 | | ) -> Result<Vec<EventSummary>, sqlx::Error> {
+...   |
+ 86 | |     .await
+ 87 | | }
+    | |_- similarly named function `summary_for_source` defined here
+    |
+help: a function with a similar name exists
+    |
+591 -             pg_store::summary_for_source_and_type(&pool, "web_chat", "' OR TRUE --")
+591 +             pg_store::summary_for_source(&pool, "web_chat", "' OR TRUE --")
+    |
+
+error[E0425]: cannot find function `summary_for_source_and_type` in module `pg_store`
+   --> analytics_server/src/lib.rs:597:23
+    |
+597 |               pg_store::summary_for_source_and_type(&pool, "web_chat", "not.recorded")
+    |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+   ::: analytics_server/src/pg_store.rs:72:1
+    |
+ 72 | / pub async fn summary_for_source(
+ 73 | |     pool: &PgPool,
+ 74 | |     source: &str,
+ 75 | | ) -> Result<Vec<EventSummary>, sqlx::Error> {
+...   |
+ 86 | |     .await
+ 87 | | }
+    | |_- similarly named function `summary_for_source` defined here
+    |
+help: a function with a similar name exists
+    |
+597 -             pg_store::summary_for_source_and_type(&pool, "web_chat", "not.recorded")
+597 +             pg_store::summary_for_source(&pool, "web_chat", "not.recorded")
+    |
+
+error[E0425]: cannot find function `summary_for_source_and_type` in module `pg_store`
+   --> analytics_server/src/lib.rs:622:23
+    |
+622 |               pg_store::summary_for_source_and_type(&pool, "web_chat", "chat.message.persisted")
+    |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+   ::: analytics_server/src/pg_store.rs:72:1
+    |
+ 72 | / pub async fn summary_for_source(
+ 73 | |     pool: &PgPool,
+ 74 | |     source: &str,
+ 75 | | ) -> Result<Vec<EventSummary>, sqlx::Error> {
+...   |
+ 86 | |     .await
+ 87 | | }
+    | |_- similarly named function `summary_for_source` defined here
+    |
+help: a function with a similar name exists
+    |
+622 -             pg_store::summary_for_source_and_type(&pool, "web_chat", "chat.message.persisted")
+622 +             pg_store::summary_for_source(&pool, "web_chat", "chat.message.persisted")
+    |
+
+error[E0425]: cannot find function `summary_for_source_and_type` in module `pg_store`
+   --> analytics_server/src/lib.rs:636:23
+    |
+636 |               pg_store::summary_for_source_and_type(&pool, "web_chat", "chat.message.persisted")
+    |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+   ::: analytics_server/src/pg_store.rs:72:1
+    |
+ 72 | / pub async fn summary_for_source(
+ 73 | |     pool: &PgPool,
+ 74 | |     source: &str,
+ 75 | | ) -> Result<Vec<EventSummary>, sqlx::Error> {
+...   |
+ 86 | |     .await
+ 87 | | }
+    | |_- similarly named function `summary_for_source` defined here
+    |
+help: a function with a similar name exists
+    |
+636 -             pg_store::summary_for_source_and_type(&pool, "web_chat", "chat.message.persisted")
+636 +             pg_store::summary_for_source(&pool, "web_chat", "chat.message.persisted")
+    |
+
+error[E0425]: cannot find function `state` in this scope
+   --> analytics_server/src/lib.rs:700:32
+    |
+700 |     let app = crate::build_app(state(pool));
+    |                                ^^^^^
+    |
+   ::: /home/willie/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/axum-0.8.9/src/extract/state.rs:301:1
+    |
+301 | pub struct State<S>(pub S);
+    | ------------------- similarly named tuple struct `State` defined here
+    |
+note: function `crate::source_kind_summary_tests::state` exists but is inaccessible
+   --> analytics_server/src/lib.rs:478:5
+    |
+478 |     fn state(pool: PgPool) -> IngestState {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ not accessible
+help: a tuple struct with a similar name exists (notice the capitalization)
+    |
+700 -     let app = crate::build_app(state(pool));
+700 +     let app = crate::build_app(State(pool));
+    |
+
+For more information about this error, try `rustc --explain E0425`.
+error: could not compile `analytics-server` (lib test) due to 5 previous errors
+warning: build failed, waiting for other jobs to finish...

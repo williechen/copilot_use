@@ -1,0 +1,34 @@
+{
+  "source_sha": "9c767978b20bd56e1c2182dac2f37e6ae9b7d988",
+  "tool": "cua_repl in-app browser",
+  "base_url": "http://127.0.0.1:3000",
+  "steps": [
+    {
+      "action": "Open public home as visitor",
+      "observed": "登入 link; 尚無房間"
+    },
+    {
+      "action": "Click 登入; fill synthetic account and submit",
+      "observed": "/account 個人管理; no 404"
+    },
+    {
+      "action": "Click 回公開房間清單",
+      "observed": "管理 link /account"
+    },
+    {
+      "action": "Click 管理 then 登出",
+      "observed": "home shows 登入"
+    },
+    {
+      "action": "Reload",
+      "observed": "home still shows 登入"
+    }
+  ],
+  "console_warn_error": [],
+  "passed": true,
+  "not_executed": [
+    "room ACL browser scenarios",
+    "session expiry browser scenario",
+    "full responsive/accessibility acceptance"
+  ]
+}

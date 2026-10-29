@@ -1,0 +1,7 @@
+PASS create fixture room: HTTP 201
+PASS create fixture room: HTTP 201
+PASS create fixture room: HTTP 201
+PASS list rooms: HTTP 200
+PASS fixture names and IDs: [{"id": "f20e984c-ed44-4833-8ab2-6429d54a14b4", "category_room_id": "default-category", "name": "RUST 中文長房名RUST 中文長房名RUST 中文長房名RUST 中文長房名"}, {"id": "9934f5c7-c4e5-42b5-af87-45562ec3be15", "category_room_id": "default-category", "name": "Rust 技術交流"}, {"id": "24401ebc-74c4-4099-9396-0e70c84b73ee", "category_room_id": "default-category", "name": "生活閒聊"}]
+PASS SSR homepage: HTTP 200
+PASS SSR room route: HTTP 200

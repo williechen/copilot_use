@@ -1,0 +1,190 @@
+{
+  "date": "2026-10-25",
+  "repository": "williechen/copilot_use",
+  "branch": "main",
+  "source_repository": "williechen/rust_ai_ring",
+  "source_branch": "main",
+  "source_sha": "61ed5930bd9ff38e0d5822eea2983121001d8422",
+  "source_read_only": true,
+  "product_applied": false,
+  "new_tests_executed": false,
+  "product_accepted": false,
+  "operations": [
+    {
+      "kind": "article",
+      "project": "chat",
+      "path": "docs/teaching/daily/day-36/chat.md",
+      "expected_parent": "17c52c091bd2b4d2a9be4ec41ffa87dad3c0d1fa",
+      "actual_commit": "79c785f2bc42a64e34c986315c7a954d954a4abc",
+      "blob_sha": "d398f42033eb53a80f446f95e58f73a92c4a1810",
+      "sha256": "7f68d39a0a133db6bb336de9b6c9bd140a1baa7bf46370f6da3191b2e43cc9eb",
+      "readback": "verified",
+      "raw_error": null
+    },
+    {
+      "kind": "sync",
+      "project": "chat",
+      "paths": [
+        "README.md",
+        "docs/README.md",
+        "docs/teaching/README.md",
+        "docs/teaching/daily/README.md",
+        "docs/teaching/chat/README.md",
+        "docs/teaching/pet/README.md",
+        "docs/teaching/analytics/README.md",
+        "docs/teaching/current/CHAT_ENTRY.md",
+        "docs/learning-state.json",
+        "docs/teaching/current/manifest.json",
+        "docs/teaching/daily/day-36/chat-readback.json"
+      ],
+      "expected_parent": "79c785f2bc42a64e34c986315c7a954d954a4abc",
+      "actual_commit": "5782d5acd5b4dc2a9e0100ec1b9c483554731fa0",
+      "readback": "verified_in_batches",
+      "raw_error": null,
+      "transient_readback_error": "Code Mode exceeded the maximum number of tool calls; recovered by separate readback calls"
+    },
+    {
+      "kind": "article",
+      "project": "pet",
+      "revision": "r1",
+      "path": "docs/teaching/daily/day-36/pet.md",
+      "expected_parent": "5782d5acd5b4dc2a9e0100ec1b9c483554731fa0",
+      "actual_commit": "f02f1d3c3ecd55f59ba661a458a2e9661e34d011",
+      "blob_sha": "76d3933ae4a501b0da130b78473580f569b85a92",
+      "sha256": "43299125496c16bb3cdff4dc6ca6bd1a7fd93d282a8ae7cb98a8df75066c229c",
+      "readback": "verified",
+      "raw_error": null
+    },
+    {
+      "kind": "sync",
+      "project": "pet",
+      "revision": "r1",
+      "paths": [
+        "README.md",
+        "docs/README.md",
+        "docs/teaching/README.md",
+        "docs/teaching/daily/README.md",
+        "docs/teaching/chat/README.md",
+        "docs/teaching/pet/README.md",
+        "docs/teaching/analytics/README.md",
+        "docs/teaching/current/PET_ENTRY.md",
+        "docs/learning-state.json",
+        "docs/teaching/current/manifest.json",
+        "docs/teaching/daily/day-36/pet-readback.json"
+      ],
+      "expected_parent": "f02f1d3c3ecd55f59ba661a458a2e9661e34d011",
+      "actual_commit": "5d9495cc059215cd82e7116114dd4e77e4664ecc",
+      "readback": "verified",
+      "raw_error": null
+    },
+    {
+      "kind": "article",
+      "project": "analytics",
+      "path": "docs/teaching/daily/day-36/analytics.md",
+      "expected_parent": "5d9495cc059215cd82e7116114dd4e77e4664ecc",
+      "actual_commit": "6bd111650673758f667e3c929bb85439b846ad9c",
+      "blob_sha": "3e6317f171fda71fa8cc0f5aa3dde36caad32d98",
+      "sha256": "ba931015cdca59b3c064efb0278b6c01967cc6750cf9402cff721e7647806253",
+      "readback": "verified",
+      "raw_error": null
+    },
+    {
+      "kind": "sync",
+      "project": "analytics",
+      "paths": [
+        "README.md",
+        "docs/README.md",
+        "docs/teaching/README.md",
+        "docs/teaching/daily/README.md",
+        "docs/teaching/chat/README.md",
+        "docs/teaching/pet/README.md",
+        "docs/teaching/analytics/README.md",
+        "docs/teaching/current/ANALYTICS_ENTRY.md",
+        "docs/learning-state.json",
+        "docs/teaching/current/manifest.json",
+        "docs/teaching/daily/day-36/analytics-readback.json"
+      ],
+      "expected_parent": "6bd111650673758f667e3c929bb85439b846ad9c",
+      "actual_commit": "5fa26f6a3900509a7891feb1032ce37c2fde8ea0",
+      "readback": "verified",
+      "raw_error": null
+    },
+    {
+      "kind": "article",
+      "project": "pet",
+      "revision": "r2",
+      "path": "docs/teaching/daily/day-36/pet-r2.md",
+      "expected_parent": "5fa26f6a3900509a7891feb1032ce37c2fde8ea0",
+      "actual_commit": "f3c25d9ae6b9e61963a238940ef387301cde1f9c",
+      "blob_sha": "b59f394ca6727ec3261347f60da58d736a1bbf68",
+      "sha256": "d14b2cf73ddc5873712498c6378559e344772f767abd6cf549e743f4886e8872",
+      "readback": "verified",
+      "raw_error": null,
+      "reason": "fix relative source-review link; preserve r1 original and SHA256"
+    },
+    {
+      "kind": "sync",
+      "project": "pet",
+      "revision": "r2",
+      "paths": [
+        "README.md",
+        "docs/README.md",
+        "docs/teaching/README.md",
+        "docs/teaching/daily/README.md",
+        "docs/teaching/chat/README.md",
+        "docs/teaching/pet/README.md",
+        "docs/teaching/analytics/README.md",
+        "docs/teaching/current/PET_ENTRY.md",
+        "docs/learning-state.json",
+        "docs/teaching/current/manifest.json",
+        "docs/teaching/daily/day-36/pet-r2-readback.json"
+      ],
+      "expected_parent": "f3c25d9ae6b9e61963a238940ef387301cde1f9c",
+      "actual_commit": "05685d081b425485ca46cab4deda23eb155f97ab",
+      "readback": "verified",
+      "raw_error": null,
+      "next_day_unchanged": 37
+    }
+  ],
+  "final_homepages": {
+    "paths": [
+      "README.md",
+      "docs/README.md",
+      "docs/teaching/README.md",
+      "docs/teaching/daily/README.md",
+      "docs/teaching/chat/README.md",
+      "docs/teaching/pet/README.md",
+      "docs/teaching/analytics/README.md"
+    ],
+    "verified": true,
+    "three_project_day_rows": "Day36 each / next Day37 each",
+    "relative_links_exist": true
+  },
+  "final_entries": {
+    "paths": [
+      "docs/teaching/current/CHAT_ENTRY.md",
+      "docs/teaching/current/PET_ENTRY.md",
+      "docs/teaching/current/ANALYTICS_ENTRY.md"
+    ],
+    "verified": true,
+    "relative_links_exist": true
+  },
+  "state_manifest": {
+    "next_day": {
+      "chat": 37,
+      "pet": 37,
+      "analytics": 37
+    },
+    "consistent": true,
+    "last_full_comparison_unchanged": true
+  },
+  "day35_originals_unchanged": true,
+  "pet_day36_r1_preserved": true,
+  "original_commit_blobs_sha256_preserved": true,
+  "unverified_gaps": [
+    "Chat WS real browser, atomic Session/INSERT race, room ACL, author/history",
+    "Pet native multi-window restart, per-window failure injection, animation frames",
+    "Analytics human session end-to-end, source/role ACL, SSE, ingestion regression"
+  ],
+  "raw_error": null
+}

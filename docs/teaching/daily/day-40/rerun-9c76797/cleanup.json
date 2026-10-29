@@ -1,0 +1,44 @@
+{
+  "removed_bytes": 5176064787,
+  "operations": [
+    {
+      "command": [
+        "dropdb",
+        "codex_day40_current_rerun"
+      ],
+      "cwd": "/home/willie/Documents/Codex/2026-10-26/referenced-chatgpt-conversation-this-is-an",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "dropdb",
+        "codex_day40_gui_rerun"
+      ],
+      "cwd": "/home/willie/Documents/Codex/2026-10-26/referenced-chatgpt-conversation-this-is-an",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "removed": "/var/tmp/codex-day40-rerun-target",
+      "exists_after": false
+    },
+    {
+      "removed": "/var/tmp/codex-day40-rerun-source",
+      "exists_after": false
+    },
+    {
+      "removed": "/var/tmp/codex-day40-rerun-chat.sqlite",
+      "exists_after": false
+    },
+    {
+      "removed": "/home/willie/\u4e0b\u8f09/analytics-web_chat-summary.csv",
+      "reason": "our disposable download; copied to evidence"
+    }
+  ],
+  "original_product_sha": "9c767978b20bd56e1c2182dac2f37e6ae9b7d988",
+  "original_product_status": "",
+  "product_unchanged": true
+}

@@ -1,0 +1,79 @@
+[
+  {
+    "path": "README.md",
+    "commit": "968146dc230fc773f60ec73d5a0376d353a7e187",
+    "blob": "2442fa38c0e566bc762cf753ec7b740c13f517dd",
+    "sha256": "05f7ffa37a6f1653c209866eb89d655c82125d93806126713b2950a39b2190d6",
+    "url": "https://github.com/williechen/copilot_use/blob/968146dc230fc773f60ec73d5a0376d353a7e187/README.md"
+  },
+  {
+    "path": "docs/README.md",
+    "commit": "968146dc230fc773f60ec73d5a0376d353a7e187",
+    "blob": "e5b8031d4b921449ea4f0df78005bc4abcd57ce4",
+    "sha256": "d8ec9ae31ad06e40af982ed714fdf5d8d11eeea61dbc464fe24439c53982b16e",
+    "url": "https://github.com/williechen/copilot_use/blob/968146dc230fc773f60ec73d5a0376d353a7e187/docs/README.md"
+  },
+  {
+    "path": "docs/teaching/README.md",
+    "commit": "968146dc230fc773f60ec73d5a0376d353a7e187",
+    "blob": "31f3bd510e02fd7b6b2a23db66dcd2e615ae711a",
+    "sha256": "db09e2a0380ab31dd2b638f52ebf73000eaf0d4ffadfd2bd86ee15247b6f6040",
+    "url": "https://github.com/williechen/copilot_use/blob/968146dc230fc773f60ec73d5a0376d353a7e187/docs/teaching/README.md"
+  },
+  {
+    "path": "docs/teaching/daily/README.md",
+    "commit": "968146dc230fc773f60ec73d5a0376d353a7e187",
+    "blob": "4e7b486c591284ddfcf1950ccf91f78e64a4ddaa",
+    "sha256": "74cf8d677db0093fd6e7acefe981627366f3abc87dab0820f1a8276a219258eb",
+    "url": "https://github.com/williechen/copilot_use/blob/968146dc230fc773f60ec73d5a0376d353a7e187/docs/teaching/daily/README.md"
+  },
+  {
+    "path": "docs/teaching/chat/README.md",
+    "commit": "968146dc230fc773f60ec73d5a0376d353a7e187",
+    "blob": "f0517290023766408a6ca0fa7289d4f129e32f29",
+    "sha256": "41096983121a8b57223abbeead2b2798da0c2728cd30cf2217ce54e7d9b7d296",
+    "url": "https://github.com/williechen/copilot_use/blob/968146dc230fc773f60ec73d5a0376d353a7e187/docs/teaching/chat/README.md"
+  },
+  {
+    "path": "docs/teaching/pet/README.md",
+    "commit": "968146dc230fc773f60ec73d5a0376d353a7e187",
+    "blob": "74d47e908b5bc887a5746a86957d56251f08c14f",
+    "sha256": "71213e93262e554d60797fd1997c9cce7fa3a8e0b62abd787944a3caba139d54",
+    "url": "https://github.com/williechen/copilot_use/blob/968146dc230fc773f60ec73d5a0376d353a7e187/docs/teaching/pet/README.md"
+  },
+  {
+    "path": "docs/teaching/analytics/README.md",
+    "commit": "968146dc230fc773f60ec73d5a0376d353a7e187",
+    "blob": "2723c19dcec3377d1c0fed7f54368fd83a33d5c7",
+    "sha256": "5f883fe67a57b1d8d1b23622004d9f900995ca0088f584f2b36b833dba5e38f1",
+    "url": "https://github.com/williechen/copilot_use/blob/968146dc230fc773f60ec73d5a0376d353a7e187/docs/teaching/analytics/README.md"
+  },
+  {
+    "path": "docs/teaching/current/STATUS.md",
+    "commit": "968146dc230fc773f60ec73d5a0376d353a7e187",
+    "blob": "ee511767ef1b8589890ef72b86e3d41d01f24a35",
+    "sha256": "a4264288d9da2b661bfc7dae96106595cc698737cb768b8d17effb96e40021d4",
+    "url": "https://github.com/williechen/copilot_use/blob/968146dc230fc773f60ec73d5a0376d353a7e187/docs/teaching/current/STATUS.md"
+  },
+  {
+    "path": "docs/teaching/current/ARTICLE_STATUS.md",
+    "commit": "968146dc230fc773f60ec73d5a0376d353a7e187",
+    "blob": "80ba02082a115db10107938747fb5781a5ff7add",
+    "sha256": "7c2cb487e64d201b3361f47637eaf2e4413948a7d5c38af78b2cb5f9dcb7b50d",
+    "url": "https://github.com/williechen/copilot_use/blob/968146dc230fc773f60ec73d5a0376d353a7e187/docs/teaching/current/ARTICLE_STATUS.md"
+  },
+  {
+    "path": "docs/teaching/current/ARTICLE_CORRECTIONS.md",
+    "commit": "968146dc230fc773f60ec73d5a0376d353a7e187",
+    "blob": "2296570d52719ad8d6c5fd89075b87f20bcd026b",
+    "sha256": "6cdf59b821130527929883360708af06298573da2eee3847a04feee001c9a745",
+    "url": "https://github.com/williechen/copilot_use/blob/968146dc230fc773f60ec73d5a0376d353a7e187/docs/teaching/current/ARTICLE_CORRECTIONS.md"
+  },
+  {
+    "path": "docs/FUTURE_WORK.md",
+    "commit": "968146dc230fc773f60ec73d5a0376d353a7e187",
+    "blob": "01c581e9f7f3b6d50a469e8380a702e9d93470f4",
+    "sha256": "2862e9d0b5ba416d1435b8ffc963fb8070857b95353b423efdcf35fc2e269dbd",
+    "url": "https://github.com/williechen/copilot_use/blob/968146dc230fc773f60ec73d5a0376d353a7e187/docs/FUTURE_WORK.md"
+  }
+]

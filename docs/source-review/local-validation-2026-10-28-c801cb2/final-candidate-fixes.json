@@ -1,0 +1,81 @@
+[
+  {
+    "command": [
+      "git",
+      "apply",
+      "--check",
+      "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/outputs/chat-signin-fixture-fix.patch"
+    ],
+    "cwd": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/final",
+    "exit_code": 0,
+    "output": "",
+    "seconds": 0.005202293395996094
+  },
+  {
+    "command": [
+      "git",
+      "apply",
+      "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/outputs/chat-signin-fixture-fix.patch"
+    ],
+    "cwd": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/final",
+    "exit_code": 0,
+    "output": "",
+    "seconds": 0.001668691635131836
+  },
+  {
+    "command": [
+      "git",
+      "apply",
+      "--check",
+      "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/outputs/pet-final-fixture.patch"
+    ],
+    "cwd": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/final",
+    "exit_code": 0,
+    "output": "",
+    "seconds": 0.0022363662719726562
+  },
+  {
+    "command": [
+      "git",
+      "apply",
+      "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/outputs/pet-final-fixture.patch"
+    ],
+    "cwd": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/final",
+    "exit_code": 0,
+    "output": "",
+    "seconds": 0.0015325546264648438
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--locked",
+      "--manifest-path",
+      "chat_apps/Cargo.toml",
+      "-p",
+      "chat-ui",
+      "--features",
+      "ssr"
+    ],
+    "cwd": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/final",
+    "exit_code": 0,
+    "output": "   Compiling chat-domain v0.2.42 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/final/chat_apps/chat_domain)\n   Compiling shared v0.2.42 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/final/crates/shared)\n   Compiling chat-ui v0.2.42 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/final/chat_apps/chat_ui)\nwarning: variants `SignedOut`, `SignedIn`, and `Unavailable` are never constructed\n   --> chat_ui/src/lib.rs:113:5\n    |\n111 | enum SessionEntry {\n    |      ------------ variants in this enum\n112 |     Checking,\n113 |     SignedOut,\n    |     ^^^^^^^^^\n114 |     SignedIn,\n    |     ^^^^^^^^\n115 |     Unavailable,\n    |     ^^^^^^^^^^^\n    |\n    = note: `SessionEntry` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis\n    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default\n\nwarning: function `room_heading` is never used\n   --> chat_ui/src/lib.rs:222:4\n    |\n222 | fn room_heading(id: &str, result: Result<String, String>) -> String {\n    |    ^^^^^^^^^^^^\n\nwarning: `chat-ui` (lib) generated 2 warnings\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.22s\n     Running unittests src/lib.rs (chat_apps/target/debug/deps/chat_ui-fe27b391000c5f0c)\n\nrunning 18 tests\ntest day31_account_tests::account_has_operable_creation_form_and_escaped_feedback ... ok\ntest chat_socket::tests::decodes_pong_event ... ok\ntest day16_layout_tests::room_page_has_real_room_identity_and_multiline_composer ... ok\ntest day38_room_status_tests::request_progress_and_failure_override_stale_room_feedback ... ok\ntest day38_room_status_tests::success_and_local_filter_show_one_consistent_status ... ok\ntest day37_search_tests::real_search_completion_updates_the_signals_used_by_the_view ... ok\ntest day32_history_disclosure_tests::room_explicitly_discloses_missing_history_and_empty_live_messages ... ok\ntest room_list_state::day42_status_refactor_tests::loading_error_empty_and_found_contract_survives_move ... ok\ntest room_list_state::tests::day39_initial_load_is_once_and_does_not_interrupt_pending_request ... ok\ntest day40_home_entry_tests::entry_does_not_claim_manage_without_confirmed_session ... ok\ntest day42_room_heading_tests::real_name_and_failed_detail_have_distinct_visible_states ... ok\ntest room_list_state::tests::distinguish_not_loaded_empty_filtered_and_found ... ok\ntest room_list_state::tests::filter_preserves_ids_and_handles_all_original_queries ... ok\ntest room_list_state::tests::empty_success_replaces_rows_and_clears_query ... ok\ntest room_list_state::tests::failures_preserve_complete_snapshot_query_and_retry_message ... ok\ntest room_list_state::tests::success_replaces_links_and_returns_full_snapshot ... ok\ntest signin_contract::existing_signin_is_the_single_login_form ... ok\ntest signin_contract::day28_leptos_signin_posts_to_existing_login_handler ... ok\n\ntest result: ok. 18 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n   Doc-tests chat_ui\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n",
+    "seconds": 3.391860246658325
+  },
+  {
+    "command": [
+      "node",
+      "--test",
+      "pet_apps/pet_ui/tests/day33-open-controls-selects-origin.test.mjs",
+      "pet_apps/pet_ui/tests/duplicate-preview-contract.test.mjs",
+      "pet_apps/pet_ui/tests/scan-preview-contract.test.mjs",
+      "pet_apps/pet_ui/tests/day41-cage-by-id.test.mjs",
+      "pet_apps/pet_ui/tests/scan-preview-no-path.test.mjs",
+      "pet_apps/pet_ui/tests/day42-cage-status.test.mjs"
+    ],
+    "cwd": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/final",
+    "exit_code": 0,
+    "output": "TAP version 13\n# Subtest: pet window button selects its own pet before opening main\nok 1 - pet window button selects its own pet before opening main\n  ---\n  duration_ms: 2.168531\n  type: 'test'\n  ...\n# Subtest: control window only focuses itself, never changes selection\nok 2 - control window only focuses itself, never changes selection\n  ---\n  duration_ms: 1.428538\n  type: 'test'\n  ...\n# Subtest: selection failure does not report successful opening\nok 3 - selection failure does not report successful opening\n  ---\n  duration_ms: 0.954486\n  type: 'test'\n  ...\n# Subtest: control can cage one explicit UUID without changing selection\nok 4 - control can cage one explicit UUID without changing selection\n  ---\n  duration_ms: 3.302997\n  type: 'test'\n  ...\n# Subtest: native cage error reaches control caller\nok 5 - native cage error reaches control caller\n  ---\n  duration_ms: 0.954703\n  type: 'test'\n  ...\n# Subtest: each status query reaches the correct saved UUID and native result\nok 6 - each status query reaches the correct saved UUID and native result\n  ---\n  duration_ms: 4.660549\n  type: 'test'\n  ...\n# Subtest: native database failure is not reported as a successful cage state\nok 7 - native database failure is not reported as a successful cage state\n  ---\n  duration_ms: 1.209709\n  type: 'test'\n  ...\n# Subtest: 重複檔案 IPC 只接受後端授權 root，不傳入任意路徑\nok 8 - 重複檔案 IPC 只接受後端授權 root，不傳入任意路徑\n  ---\n  duration_ms: 2.10453\n  type: 'test'\n  ...\n# Subtest: scanFilePreview uses read-only command without path\nok 9 - scanFilePreview uses read-only command without path\n  ---\n  duration_ms: 4.327335\n  type: 'test'\n  ...\n# Subtest: 掃描預覽不得接受使用者指定路徑\nok 10 - 掃描預覽不得接受使用者指定路徑\n  ---\n  duration_ms: 2.110044\n  type: 'test'\n  ...\n1..10\n# tests 10\n# suites 0\n# pass 10\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 428.353511\n",
+    "seconds": 0.5548305511474609
+  }
+]

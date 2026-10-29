@@ -1,0 +1,135 @@
+{
+  "commit": "2b10fdba144a1372c062cfdef2706a07859ba90a",
+  "parent": "12c7ceddbeff1ae3d528b8a7156f0e869c304a47",
+  "readback_at": "2026-10-25T23:24:23.678Z",
+  "files": [
+    {
+      "path": "README.md",
+      "blob_sha": "302c049488d0bd31f83674c474f4a32c55218dab",
+      "full_text_verified": true,
+      "sha256": "46690885862ba7b44e1effeaf392f3313ed89216ea83dd6c5822f043a4deea76"
+    },
+    {
+      "path": "docs/README.md",
+      "blob_sha": "99d65e7f7963e49eaef91e90c5570d9ce0e33514",
+      "full_text_verified": true,
+      "sha256": "e3e1294aeea5e2dfba1b5e597caec6fb385fb231251f425097f026111c82abad"
+    },
+    {
+      "path": "docs/teaching/README.md",
+      "blob_sha": "60ebbd411ea60ca4757f0136cc896aef2c9e6b1b",
+      "full_text_verified": true,
+      "sha256": "3affea94a876c58b4355ee998e45dacafaaabe2b027c9c408952e6e5311e6486"
+    },
+    {
+      "path": "docs/teaching/daily/README.md",
+      "blob_sha": "606bcb91ce54ca3ef25bce89e6629723f82e7d66",
+      "full_text_verified": true,
+      "sha256": "7b375b542cdad8591eaba5292bca7fad46b3621c230efebd1c03d9e57da94253"
+    },
+    {
+      "path": "docs/teaching/chat/README.md",
+      "blob_sha": "fbaadc14f4dde05cb0ca52062965e4b94d95efd3",
+      "full_text_verified": true,
+      "sha256": "d3af48fad51c8c6d2af1d381d0f4b8f9e1221aa081c2e6034ee03272e2f6bbfd"
+    },
+    {
+      "path": "docs/teaching/current/CHAT_ENTRY.md",
+      "blob_sha": "3d5f6ace211fb2f9cf0966c0d2fd2679766502ae",
+      "full_text_verified": true,
+      "sha256": "66881c5f2555b8fc3b80101913bb2c697013a2fa480fa1786fd9b53ae694c1fe"
+    },
+    {
+      "path": "docs/teaching/pet/README.md",
+      "blob_sha": "41aabead4dfe6e26afb0df953430b55c450118df",
+      "full_text_verified": true,
+      "sha256": "8ac25a7d4f6b1ef6fdcc7af664ffaaebe204e0e4533540f99a295297862a3ce4"
+    },
+    {
+      "path": "docs/teaching/current/PET_ENTRY.md",
+      "blob_sha": "a0df82acb771f11d26105a8299b3c3a60837d674",
+      "full_text_verified": true,
+      "sha256": "cb2a6bb9d6cd4780dfd6924a5637888f21157ed1ba3e8c47a317081b537e7b02"
+    },
+    {
+      "path": "docs/teaching/analytics/README.md",
+      "blob_sha": "307ceb35e28c68f71b2e965e67355e67440a7243",
+      "full_text_verified": true,
+      "sha256": "922992238825c923336c4bd5ef4f756a35dbca8d5acf6cbb524629069a86439f"
+    },
+    {
+      "path": "docs/teaching/current/ANALYTICS_ENTRY.md",
+      "blob_sha": "82181e1b0ab0560ccae59ce8ce320ec48c381308",
+      "full_text_verified": true,
+      "sha256": "d74853747acef2ba077205b9673b248a026a0f72a17352289c5707f4459824b1"
+    },
+    {
+      "path": "docs/teaching/current/STATUS.md",
+      "blob_sha": "3fe32d46848b0d6429015801212f5b33cc661905",
+      "full_text_verified": true,
+      "sha256": "f7b5f471ed88ed4aa2ada34d8f04449845a72118dbf4ff2b4600717b040dbc61"
+    },
+    {
+      "path": "docs/teaching/daily/day-38/chat-r2-readback.json",
+      "blob_sha": "0880d016e6bf9613ac2b88767dc6aa56856f6e40",
+      "full_text_verified": true,
+      "sha256": "6135cd3f1552e332c5c74730653fb0b644aadd867b9e3d3f5b3e4bb8b980b2eb"
+    },
+    {
+      "path": "docs/teaching/daily/day-38/pet-r2-readback.json",
+      "blob_sha": "2f406dcd7e9f7cf63907b26671a6f8888a18158a",
+      "full_text_verified": true,
+      "sha256": "068ce4ddfc14bb40d7df3734b35cff0582b77648f45ef2d3854d3e15ffdfd9ca"
+    },
+    {
+      "path": "docs/teaching/daily/day-38/analytics-r2-readback.json",
+      "blob_sha": "447ec46f7b0250f063cc4d7908d900eb52ac4765",
+      "full_text_verified": true,
+      "sha256": "26e0d9d4aae3480a306ddfdb66195639b276df19a351c2637a5c750fb6aba926"
+    },
+    {
+      "path": "docs/teaching/daily/day-38/r2-delivery-verification.json",
+      "blob_sha": "fd37f1f63079cbd9227f00d11128ac20341821be",
+      "full_text_verified": true,
+      "sha256": "f3b59ea0f2ff8ce9b294779b2005f81c1c53c8ad58d0d6ea27b5d5f12e6fd404"
+    },
+    {
+      "path": "docs/teaching/daily/day-38/r2-rule-consolidation-readback.json",
+      "blob_sha": "728dc1cc09758a64aef1018381eeb94ef7ce5d8f",
+      "full_text_verified": true,
+      "sha256": "3ff62d5a66f1822c7b62f3d5e464928f4a58857b20f1d443a09801fb86432473"
+    },
+    {
+      "path": "docs/teaching/daily/day-38/r2-product-ci-observation.json",
+      "blob_sha": "5f0d7859094b46f009e3d8391dfc2e2031b3291c",
+      "full_text_verified": true,
+      "sha256": "41927583bb8df5b5e83b9120e0b5150bb10333bc829e6edc5101b5d73c0466f0"
+    },
+    {
+      "path": "docs/learning-state.json",
+      "blob_sha": "3665738466969413cb00919b14fdd7ab32240532",
+      "full_text_verified": true,
+      "sha256": "69d7e6441c1e5aced17607c63c06556ed39c7d3d3fb6871c2eec0b105364fe73"
+    },
+    {
+      "path": "docs/teaching/current/manifest.json",
+      "blob_sha": "e98482025c68b5fb672779a2dfcd2ab28b82e24c",
+      "full_text_verified": true,
+      "sha256": "b0ed04d021191c481a35789b947c0ede04d1f433897a4e06fb74608b2c94ebc6"
+    }
+  ],
+  "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+  "next_day": {
+    "chat": 39,
+    "pet": 39,
+    "analytics": 39
+  },
+  "original_articles": {
+    "checked": 51,
+    "changed": []
+  },
+  "last_full_comparison_unchanged": true,
+  "github_write_errors": [],
+  "product_modified": false,
+  "validation_limits": "No Cargo, Red, Green, DB, native GUI or Actions executed by this delivery. Existing source CI observation separate."
+}

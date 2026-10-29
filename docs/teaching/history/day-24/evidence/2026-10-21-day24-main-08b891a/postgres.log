@@ -1,0 +1,22 @@
+   Compiling stats-server v0.2.23 (/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-3/work/day24-validation-main/apps/stats_server)
+   Compiling shared v0.2.23 (/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-3/work/day24-validation-main/crates/shared)
+error: couldn't read `apps/stats_server/tests/../migrations/20261021071000_unique_account_email.sql`: No such file or directory (os error 2)
+   --> apps/stats_server/tests/day24_password_change.rs:244:23
+    |
+244 |           sqlx::raw_sql(include_str!(
+    |  _______________________^
+245 | |             "../migrations/20261021071000_unique_account_email.sql"
+246 | |         ))
+    | |_________^
+
+error: couldn't read `apps/stats_server/tests/../migrations/20261021071000_unique_account_email.sql`: No such file or directory (os error 2)
+   --> apps/stats_server/tests/day24_password_change.rs:260:19
+    |
+260 |       sqlx::raw_sql(include_str!(
+    |  ___________________^
+261 | |         "../migrations/20261021071000_unique_account_email.sql"
+262 | |     ))
+    | |_____^
+
+error: could not compile `stats-server` (test "day24_password_change") due to 2 previous errors
+warning: build failed, waiting for other jobs to finish...

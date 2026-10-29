@@ -1,0 +1,147 @@
+[
+  {
+    "name": "Rust AI Chat",
+    "head_sha": "c965681eeb2b4791dba8d157624424b7f274b2fd",
+    "status": "completed",
+    "conclusion": "success",
+    "updated_at": "2026-10-20T17:38:52Z",
+    "html_url": "https://github.com/williechen/rust_ai_chat/actions/runs/39465675559",
+    "jobs": [
+      {
+        "name": "build-chat",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39465675559/job/118776302131"
+      },
+      {
+        "name": "check-chat",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39465675559/job/118776302480"
+      }
+    ]
+  },
+  {
+    "name": "Rust Desktop Pet",
+    "head_sha": "c965681eeb2b4791dba8d157624424b7f274b2fd",
+    "status": "completed",
+    "conclusion": "success",
+    "updated_at": "2026-10-20T17:34:10Z",
+    "html_url": "https://github.com/williechen/rust_ai_chat/actions/runs/39465675538",
+    "jobs": [
+      {
+        "name": "check-pet",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39465675538/job/118776302189"
+      },
+      {
+        "name": "build-pet",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39465675538/job/118776302946"
+      }
+    ]
+  },
+  {
+    "name": "Persistence",
+    "head_sha": "c965681eeb2b4791dba8d157624424b7f274b2fd",
+    "status": "completed",
+    "conclusion": "failure",
+    "updated_at": "2026-10-20T17:25:52Z",
+    "html_url": "https://github.com/williechen/rust_ai_chat/actions/runs/39465675580",
+    "jobs": [
+      {
+        "name": "test-persistence",
+        "conclusion": "failure",
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39465675580/job/118776302026"
+      }
+    ]
+  },
+  {
+    "name": "Node",
+    "head_sha": "c965681eeb2b4791dba8d157624424b7f274b2fd",
+    "status": "completed",
+    "conclusion": "success",
+    "updated_at": "2026-10-20T17:23:44Z",
+    "html_url": "https://github.com/williechen/rust_ai_chat/actions/runs/39465675860",
+    "jobs": [
+      {
+        "name": "test-node",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39465675860/job/118776303333"
+      }
+    ]
+  },
+  {
+    "name": "Test All",
+    "head_sha": "c965681eeb2b4791dba8d157624424b7f274b2fd",
+    "status": "completed",
+    "conclusion": "failure",
+    "updated_at": "2026-10-20T17:26:17Z",
+    "html_url": "https://github.com/williechen/rust_ai_chat/actions/runs/39465675661",
+    "jobs": [
+      {
+        "name": "test-ai-core",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39465675661/job/118776302612"
+      },
+      {
+        "name": "test-chat-domain",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39465675661/job/118776302922"
+      },
+      {
+        "name": "test-server",
+        "conclusion": "failure",
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39465675661/job/118776303042"
+      },
+      {
+        "name": "test-chat-application",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39465675661/job/118776303086"
+      },
+      {
+        "name": "test-desktop-pet",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39465675661/job/118776303115"
+      },
+      {
+        "name": "test-pet-domain",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39465675661/job/118776303121"
+      },
+      {
+        "name": "test-shared",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39465675661/job/118776303143"
+      },
+      {
+        "name": "test-ui",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39465675661/job/118776303155"
+      },
+      {
+        "name": "test-stats-server",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39465675661/job/118776303524"
+      }
+    ]
+  },
+  {
+    "name": "Rust Dashboard",
+    "head_sha": "c965681eeb2b4791dba8d157624424b7f274b2fd",
+    "status": "completed",
+    "conclusion": "success",
+    "updated_at": "2026-10-20T17:26:41Z",
+    "html_url": "https://github.com/williechen/rust_ai_chat/actions/runs/39465675519",
+    "jobs": [
+      {
+        "name": "check-dashboard",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39465675519/job/118776301766"
+      },
+      {
+        "name": "build-dashboard",
+        "conclusion": "success",
+        "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39465675519/job/118776302197"
+      }
+    ]
+  }
+]

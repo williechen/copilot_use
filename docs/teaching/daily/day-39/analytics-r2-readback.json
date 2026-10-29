@@ -1,0 +1,46 @@
+{
+  "project": "analytics",
+  "day": 39,
+  "revision": "r2",
+  "article_path": "docs/teaching/daily/day-39/analytics-r2.md",
+  "parent": "a7955715ae7ce982a5a2984973b6ca6d6934daf3",
+  "article_commit": "6e2f6cb90db2fe5d80dc8f463392e32f7da12a85",
+  "blob_sha": "1d7ab7277d0ad56ceaa0b5a6c5e25e14e4c06f99",
+  "sha256": "9945077937fa8b1f4de9330f446bc011a2188b0b3a5fb785f15a8e662e3b23d1",
+  "files": [
+    {
+      "path": "docs/teaching/daily/day-39/analytics-day39-refactor-r2.patch",
+      "blob_sha": "b846496dc7dc854a90cff44778803a9f38a21021",
+      "sha256": "715ae9a6eca8aa5fa88e1103e8499be72f0fdf5db4a8b6a4903e8d535d7ef94a",
+      "full_text_verified": true
+    },
+    {
+      "path": "docs/teaching/daily/day-39/analytics-r2.md",
+      "blob_sha": "1d7ab7277d0ad56ceaa0b5a6c5e25e14e4c06f99",
+      "sha256": "9945077937fa8b1f4de9330f446bc011a2188b0b3a5fb785f15a8e662e3b23d1",
+      "full_text_verified": true
+    }
+  ],
+  "rules_commit": "0ccd1a252b3e8fc28150242944b36929760b3cd3",
+  "rules_blob": "ba9e6cbd6763d245e60800a02c60888ba6215bd5",
+  "source_sha": "8fc4b277b6f6f77d97655130036fca47813de56e",
+  "readback_at": "2026-10-26T07:43:03.160Z",
+  "full_text_verified": true,
+  "repository": "williechen/copilot_use",
+  "branch": "main",
+  "evidence": "docs/teaching/daily/day-39/analytics-r2-readback.json",
+  "refactor_patch": "docs/teaching/daily/day-39/analytics-day39-refactor-r2.patch",
+  "functional_patch": "docs/teaching/daily/day-39/analytics-day39-green-r1.patch",
+  "revision_scope": "inline detailed Refactor teaching, complete modified units, real caller/module wiring, full tests and assertion migration",
+  "candidate_validation": "docs/teaching/daily/day-39/r2-refactor-validation.json",
+  "refactor_tests_executed": true,
+  "functional_red_executed": false,
+  "functional_green_tests_executed": false,
+  "functional_acceptance": false,
+  "product_modified": false,
+  "main_application": "not applied",
+  "gate2": false,
+  "next_day_before": 40,
+  "next_day_after": 40,
+  "revision_does_not_advance_day": true
+}

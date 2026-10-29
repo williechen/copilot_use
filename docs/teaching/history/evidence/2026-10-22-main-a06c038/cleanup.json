@@ -1,0 +1,7 @@
+{
+  "postgres_port": 55449,
+  "dedicated_cluster_stopped_and_removed": true,
+  "isolated_chat_sqlite_removed": true,
+  "existing_5432_untouched": true,
+  "user_databases_untouched": true
+}

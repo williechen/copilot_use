@@ -1,0 +1,51 @@
+   Compiling smallvec v1.16.4
+   Compiling futures-executor v0.3.34
+   Compiling parking_lot_core v0.9.12
+   Compiling parking_lot v0.12.5
+   Compiling futures v0.3.34
+   Compiling icu_normalizer v2.4.0
+   Compiling tokio v1.54.1
+   Compiling idna_adapter v1.2.2
+   Compiling idna v1.1.0
+   Compiling url v2.5.8
+   Compiling hydration_context v0.3.2
+   Compiling any_spawner v0.3.0
+   Compiling reactive_graph v0.2.16
+   Compiling reactive_stores v0.4.4
+   Compiling tachys v0.2.19
+   Compiling tokio-stream v0.1.19
+   Compiling futures-intrusive v0.5.0
+   Compiling hmac v0.13.0
+   Compiling server_fn v0.8.13
+   Compiling hyper v1.12.0
+   Compiling phc v0.6.1
+   Compiling sqlx-core v0.9.0
+   Compiling hkdf v0.13.0
+   Compiling md-5 v0.11.0
+   Compiling uuid v1.29.0
+   Compiling wasm_split_helpers v0.2.3
+   Compiling sqlx-postgres v0.9.0
+   Compiling leptos_server v0.8.8
+   Compiling leptos_dom v0.8.8
+   Compiling password-hash v0.6.1
+   Compiling hyper-util v0.1.21
+   Compiling tokio-tungstenite v0.29.0
+   Compiling tower v0.5.3
+   Compiling rtoolbox v0.0.6
+   Compiling rpassword v7.5.4
+   Compiling axum v0.8.9
+   Compiling argon2 v0.6.0
+   Compiling sqlx v0.9.0
+   Compiling leptos v0.8.22
+   Compiling chat-domain v0.2.37 (/home/willie/Documents/Codex/2026-10-26/referenced-chatgpt-conversation-this-is-an/work/analytics/chat_apps/chat_domain)
+   Compiling shared v0.2.35 (/home/willie/Documents/Codex/2026-10-26/referenced-chatgpt-conversation-this-is-an/work/analytics/crates/shared)
+   Compiling analytics-persistence v0.2.37 (/home/willie/Documents/Codex/2026-10-26/referenced-chatgpt-conversation-this-is-an/work/analytics/analytics_apps/analytics_persistence)
+   Compiling analytics-server v0.2.37 (/home/willie/Documents/Codex/2026-10-26/referenced-chatgpt-conversation-this-is-an/work/analytics/analytics_apps/analytics_server)
+    Finished `test` profile [unoptimized] target(s) in 16.25s
+     Running unittests src/lib.rs (/tmp/codex-day39-actual-target/debug/deps/analytics_server-18cb4c64a3a7e77a)
+
+running 1 test
+test export::tests::csv_escapes_quotes_and_spreadsheet_formulas ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 26 filtered out; finished in 0.00s
+

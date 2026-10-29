@@ -1,0 +1,161 @@
+diff --git a/chat_apps/chat_server/src/signin.rs b/chat_apps/chat_server/src/signin.rs
+index 4b631be..834cfa6 100644
+--- a/chat_apps/chat_server/src/signin.rs
++++ b/chat_apps/chat_server/src/signin.rs
+@@ -20,11 +20,21 @@ pub fn routes(pool: SqlitePool) -> Router {
+     Router::new()
+         .route("/login", get(login_page).post(login))
+         .route("/account", get(account))
++        .route("/api/session", get(session_status))
+         .route("/account/rooms", axum::routing::post(account_create_room))
+         .layer(DefaultBodyLimit::max(4096))
+         .with_state(pool)
+ }
+ 
++/// Valid, active SQLite member Session; never expose the bearer token.
++async fn session_status(
++    State(pool): State<SqlitePool>,
++    headers: HeaderMap,
++) -> Result<impl IntoResponse, StatusCode> {
++    crate::auth_session::active_member(&pool, &headers).await?;
++    Ok((StatusCode::NO_CONTENT, [(header::CACHE_CONTROL, "no-store")]))
++}
++
+ async fn login_page() -> Redirect {
+     Redirect::to("/signin")
+ }
+@@ -344,3 +354,49 @@ mod day35_account_room_tests {
+         pool.close().await;
+     }
+ }
++
++#[cfg(test)]
++mod day40_session_entry_tests {
++    use super::*;
++    use axum::{body::Body, http::Request};
++    use tower::ServiceExt;
++
++    #[tokio::test]
++    async fn session_endpoint_checks_active_revoked_and_expired_sqlite_session() {
++        let pool = sqlx::sqlite::SqlitePoolOptions::new()
++            .max_connections(1).connect("sqlite::memory:").await.unwrap();
++        chat_persistence::migrate(&pool).await.unwrap();
++        sqlx::query("INSERT INTO mbr_user(id,user_acnt,user_pd,user_email,user_name,user_status,is_init_pd,created_at,updated_at)
++            VALUES('day40-member','day40','hash','day40@example.invalid','Day40','active',FALSE,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)")
++            .execute(&pool).await.unwrap();
++        let raw = "a".repeat(64);
++        sqlx::query("INSERT INTO mbr_session(id,mbr_user_id,token_hash,expires_at)
++            VALUES('day40-session','day40-member',?1,unixepoch()+60)")
++            .bind(shared::auth::token_digest(&raw))
++            .execute(&pool).await.unwrap();
++        let app = routes(pool.clone());
++        let anonymous = app.clone().oneshot(Request::get("/api/session")
++            .body(Body::empty()).unwrap()).await.unwrap();
++        assert_eq!(anonymous.status(), StatusCode::UNAUTHORIZED);
++        let live = app.clone().oneshot(Request::get("/api/session")
++            .header("cookie", format!("chat_session={raw}"))
++            .body(Body::empty()).unwrap()).await.unwrap();
++        assert_eq!(live.status(), StatusCode::NO_CONTENT);
++        assert_eq!(live.headers()[header::CACHE_CONTROL], "no-store");
++        sqlx::query("UPDATE mbr_user SET user_status='disabled' WHERE id='day40-member'")
++            .execute(&pool).await.unwrap();
++        let disabled = app.clone().oneshot(Request::get("/api/session")
++            .header("cookie", format!("chat_session={raw}"))
++            .body(Body::empty()).unwrap()).await.unwrap();
++        assert_eq!(disabled.status(), StatusCode::UNAUTHORIZED);
++        sqlx::query("UPDATE mbr_user SET user_status='active' WHERE id='day40-member'")
++            .execute(&pool).await.unwrap();
++        sqlx::query("UPDATE mbr_session SET expires_at=unixepoch()-1 WHERE id='day40-session'")
++            .execute(&pool).await.unwrap();
++        let expired = app.oneshot(Request::get("/api/session")
++            .header("cookie", format!("chat_session={raw}"))
++            .body(Body::empty()).unwrap()).await.unwrap();
++        assert_eq!(expired.status(), StatusCode::UNAUTHORIZED);
++    }
++}
++
+diff --git a/chat_apps/chat_ui/src/lib.rs b/chat_apps/chat_ui/src/lib.rs
+index 7de6dbe..e90fa37 100644
+--- a/chat_apps/chat_ui/src/lib.rs
++++ b/chat_apps/chat_ui/src/lib.rs
+@@ -113,12 +113,41 @@ pub fn App() -> impl IntoView {
+     }
+ }
+ 
++#[derive(Clone, Copy, PartialEq, Eq, Debug)]
++enum SessionEntry { Checking, SignedOut, SignedIn, Unavailable }
++
++fn session_entry_display(state: SessionEntry) -> (&'static str, &'static str, &'static str) {
++    match state {
++        SessionEntry::Checking => ("/signin", "登入", "確認登入狀態中"),
++        SessionEntry::SignedOut => ("/signin", "登入", ""),
++        SessionEntry::SignedIn => ("/account", "管理", ""),
++        SessionEntry::Unavailable => ("/signin", "登入", "無法確認登入狀態；可使用登入入口"),
++    }
++}
++
+ #[component]
+ fn HomePage() -> impl IntoView {
++    let (entry, set_entry) = signal(SessionEntry::Checking);
++    #[cfg(target_arch = "wasm32")]
++    Effect::new(move |_| {
++        wasm_bindgen_futures::spawn_local(async move {
++            let next = match room_api::session_status().await {
++                Ok(true) => SessionEntry::SignedIn,
++                Ok(false) => SessionEntry::SignedOut,
++                Err(_) => SessionEntry::Unavailable,
++            };
++            set_entry.set(next);
++        });
++    });
++    #[cfg(not(target_arch = "wasm32"))]
++    let _ = set_entry;
+     view! {
+         <p>"Welcome to Rust AI Chat!"</p>
+         <p>
+-            <a href="/signin" rel="external">"登入"</a>
++            <a href=move || session_entry_display(entry.get()).0 rel="external">
++                {move || session_entry_display(entry.get()).1}
++            </a>
++            <span role="status">{move || session_entry_display(entry.get()).2}</span>
+         </p>
+         <RoomList />
+     }
+@@ -574,3 +603,16 @@ mod day38_room_status_tests {
+         assert_eq!(room_status_text("請選擇房間", true, 2, 1), "請選擇房間");
+     }
+ }
++
++#[cfg(test)]
++mod day40_home_entry_tests {
++    use super::*;
++    #[test]
++    fn entry_does_not_claim_manage_without_confirmed_session() {
++        assert_eq!(session_entry_display(SessionEntry::Checking).1, "登入");
++        assert_eq!(session_entry_display(SessionEntry::SignedOut).0, "/signin");
++        assert_eq!(session_entry_display(SessionEntry::Unavailable).0, "/signin");
++        assert_eq!(session_entry_display(SessionEntry::SignedIn), ("/account", "管理", ""));
++    }
++}
++
+diff --git a/chat_apps/chat_ui/src/room_api.rs b/chat_apps/chat_ui/src/room_api.rs
+index 2debb38..705c7b9 100644
+--- a/chat_apps/chat_ui/src/room_api.rs
++++ b/chat_apps/chat_ui/src/room_api.rs
+@@ -92,3 +92,16 @@ pub async fn search_rooms(query: &str) -> Result<Vec<(String, String)>, String>
+         })
+         .collect()
+ }
++
++pub async fn session_status() -> Result<bool, String> {
++    let window = web_sys::window().ok_or("無法取得瀏覽器")?;
++    let value = JsFuture::from(window.fetch_with_str("/api/session"))
++        .await.map_err(|_| "無法確認登入狀態")?;
++    let response: web_sys::Response = value.dyn_into().map_err(|_| "無效 Session 回應")?;
++    match response.status() {
++        204 => Ok(true),
++        401 => Ok(false),
++        code => Err(format!("Session 查詢失敗：HTTP {code}")),
++    }
++}
++

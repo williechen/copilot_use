@@ -1,0 +1,16 @@
+   Compiling desktop-pet-frontend v0.2.15 (/var/cache/rust-ai-chat/day16-review/apps/desktop_pet/frontend)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.65s
+     Running unittests src/main.rs (/var/cache/rust-ai-chat/target/debug/deps/desktop_pet_frontend-5993172c926afbfb)
+
+running 8 tests
+test component::activity::tests::idle_blink_has_priority ... ok
+test component::activity::tests::sleeping_uses_animation_phase ... ok
+test component::activity::tests::interacting_uses_animation_phase ... ok
+test day16_scan_generation_tests::canceled_or_superseded_scan_cannot_restore_preview ... ok
+test duplicate_preview::tests::empty_preview_is_explicit_and_missing_contract_is_rejected ... ok
+test duplicate_preview::tests::summary_shows_group_sizes_without_private_paths ... ok
+test file_scan_view::tests::counts_are_visible_but_private_values_are_discarded ... ok
+test file_scan_view::tests::empty_is_explicit_and_incomplete_contract_is_rejected ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

@@ -1,0 +1,32 @@
+[
+  {
+    "name": "chat",
+    "pid": 28506,
+    "executable": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/chat-server",
+    "source_sha": "8b882696c5548accb9d98a32b27db35e11109c74",
+    "cwd": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/acceptance-product/chat_apps",
+    "env": {
+      "CHAT_DATABASE_URL": "sqlite:///home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/acceptance-db/chat-upgraded.sqlite",
+      "LEPTOS_OUTPUT_NAME": "rust_ai_chat",
+      "LEPTOS_SITE_ROOT": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/site",
+      "LEPTOS_SITE_PKG_DIR": "pkg",
+      "LEPTOS_SITE_ADDR": "127.0.0.1:3000",
+      "LEPTOS_ENV": "DEV"
+    },
+    "previous_pid": 23281,
+    "variant": "isolated clear-search and matched-Route repair"
+  },
+  {
+    "name": "analytics",
+    "pid": 23046,
+    "executable": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/analytics-server",
+    "source_sha": "8b882696c5548accb9d98a32b27db35e11109c74",
+    "cwd": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/acceptance-product/analytics_apps",
+    "env": {
+      "ANALYTICS_DATABASE_URL": "postgres://willie@127.0.0.1:55482/acceptance_upgraded",
+      "ANALYTICS_CHAT_TOKEN": "isolated-test-chat",
+      "ANALYTICS_PET_TOKEN": "isolated-test-pet"
+    },
+    "previous_pid": 21843
+  }
+]

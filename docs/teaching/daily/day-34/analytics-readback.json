@@ -1,0 +1,76 @@
+{
+  "repository": "williechen/copilot_use",
+  "branch": "main",
+  "project": "analytics",
+  "day": 34,
+  "revision": "r1",
+  "title": "首次 admin/admin 初始化及強制改密碼銜接",
+  "path": "docs/teaching/daily/day-34/analytics.md",
+  "parent": "488f28307a02a6bb6441a50a3851f4b4545d5a3c",
+  "article_commit": "b1deae8691736faa4b948bd51c338e3009ce4296",
+  "verified": true,
+  "blob_sha": "6f907e5879ba167c35838913f8376573d2b8e38f",
+  "sha256": "26ad367a50e2acef773e30cb8afcf8e1d3dbf9abf6e93ded071b4776e8243c57",
+  "readback_at": "2026-10-24T19:44:19.753Z",
+  "full_text_verified": true,
+  "source_sha": "54f5d80a5678e68e164d56e6d9f11c57cdff1f36",
+  "rules_sha": "b5ca6059f1d14f5d358542a690e2efab1ad94d04",
+  "rules_commit": "b1deae8691736faa4b948bd51c338e3009ce4296",
+  "rules_version": "daily-tdd-minimum-v1+github-only-v1",
+  "main_application": "not applied",
+  "tests": "not run",
+  "functional_acceptance": false,
+  "archived": false,
+  "next_day_before": 34,
+  "next_day_after": 35,
+  "remaining_gaps": "來源 PostgreSQL CI 失敗；本篇全新 DB／HTTP／瀏覽器與並行初始化待實跑；角色來源 ACL、SSE 與明細未完成",
+  "expected_state_parent_sha": "b1deae8691736faa4b948bd51c338e3009ce4296",
+  "raw_error": null,
+  "sync_inputs": [
+    {
+      "path": "docs/learning-state.json",
+      "blob_sha": "aee10db2cf9d0870041d3300fb3b9e6d8a2531a4"
+    },
+    {
+      "path": "docs/teaching/current/manifest.json",
+      "blob_sha": "ec5e652a2def451a3db74c29b03d3e83f7e1b49d"
+    },
+    {
+      "path": "README.md",
+      "blob_sha": "955d0dcfabce1c7efe54ff566044f12c5992e606"
+    },
+    {
+      "path": "docs/README.md",
+      "blob_sha": "4a622e8e91fe24025f7ee3b01fa4570f92f780e4"
+    },
+    {
+      "path": "docs/teaching/README.md",
+      "blob_sha": "8537701207eefdaab64b596f41055fd2d665c9e1"
+    },
+    {
+      "path": "docs/teaching/daily/README.md",
+      "blob_sha": "fe9d8adfd3dbc9b3c92eb9b828b105d5fb5599ce"
+    },
+    {
+      "path": "docs/teaching/chat/README.md",
+      "blob_sha": "d24acde635adec9f6a4a81c8a1264ce0e06b90fc"
+    },
+    {
+      "path": "docs/teaching/pet/README.md",
+      "blob_sha": "9aebdbddc97ffaedfbe05f34dd45c9de20a5a401"
+    },
+    {
+      "path": "docs/teaching/analytics/README.md",
+      "blob_sha": "7102f0976eda128f1906394c60d824085c553da0"
+    },
+    {
+      "path": "docs/teaching/current/ANALYTICS_ENTRY.md",
+      "blob_sha": "a72e5a89f4542b59915c4976516b4d82f0ac6237"
+    },
+    {
+      "path": "docs/COMMON_LEARNING_RULES.md",
+      "blob_sha": "b5ca6059f1d14f5d358542a690e2efab1ad94d04"
+    }
+  ],
+  "ci_supplement": "docs/teaching/daily/day-34/source-snapshot.json"
+}

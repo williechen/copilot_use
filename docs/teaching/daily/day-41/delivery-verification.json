@@ -1,0 +1,124 @@
+{
+  "date": "2026-10-27",
+  "repository": "williechen/copilot_use",
+  "branch": "main",
+  "product_repository": "williechen/rust_ai_ring",
+  "product_sha": "9c767978b20bd56e1c2182dac2f37e6ae9b7d988",
+  "commits": {
+    "chat": "a27c17eadb49e2bd15e70c12e208699979af03f6",
+    "pet": "f1e84763868d1ac51ed56ea4bcb4236dd55eac68",
+    "analytics": "3da431b6ba7ca4c4b67c5b5725b251eb2104b625"
+  },
+  "paths": {
+    "docs/teaching/daily/day-41/chat.md": {
+      "project": "chat",
+      "commit": "a27c17eadb49e2bd15e70c12e208699979af03f6",
+      "expected_parent": "d5fa50b6a5978977bc7306098969845ce855bf9e",
+      "blob_sha": "a8843e943d1dda8fb1c0778a1a84342b44a67db3",
+      "sha256": "455d384df26bac3fe18286f83849ee756ba8f03c471571d042f92a43bb5d3051",
+      "utf8_bytes": 7361,
+      "readback": "success"
+    },
+    "docs/teaching/daily/day-41/chat-day41-refactor.patch": {
+      "project": "chat",
+      "commit": "a27c17eadb49e2bd15e70c12e208699979af03f6",
+      "expected_parent": "d5fa50b6a5978977bc7306098969845ce855bf9e",
+      "blob_sha": "f4d76a576c772bef42f096232ace7fb1efcf00f3",
+      "sha256": "f056ddf0f63006bfbdf8ea1059a9c7a7f91ef170a781e95e85259ee00338163f",
+      "utf8_bytes": 4257,
+      "readback": "success"
+    },
+    "docs/teaching/daily/day-41/chat-day41-green.patch": {
+      "project": "chat",
+      "commit": "a27c17eadb49e2bd15e70c12e208699979af03f6",
+      "expected_parent": "d5fa50b6a5978977bc7306098969845ce855bf9e",
+      "blob_sha": "89c967d46356dbc26f35b27249f2a5b70580e238",
+      "sha256": "ab6b1006bff1d526cbb24c9a473a2d491730a2ff0dbb657e8b2e9eab8b21a0bc",
+      "utf8_bytes": 33159,
+      "readback": "success"
+    },
+    "docs/teaching/daily/day-41/pet.md": {
+      "project": "pet",
+      "commit": "f1e84763868d1ac51ed56ea4bcb4236dd55eac68",
+      "expected_parent": "a27c17eadb49e2bd15e70c12e208699979af03f6",
+      "blob_sha": "48f6bd773a05cf95ac043ba2a376d473ca443706",
+      "sha256": "0fc63a5fdee04bac3d0e38014fd64162a422b1d7a0749f3a92d5c82c99d2ddac",
+      "utf8_bytes": 7547,
+      "readback": "success"
+    },
+    "docs/teaching/daily/day-41/pet-day41-refactor.patch": {
+      "project": "pet",
+      "commit": "f1e84763868d1ac51ed56ea4bcb4236dd55eac68",
+      "expected_parent": "a27c17eadb49e2bd15e70c12e208699979af03f6",
+      "blob_sha": "99995293a2e4cf4cb3b308b7f5ffec89ea9d87b3",
+      "sha256": "8d69b938bd2e9fd60785186cfcc78f917a3b8c99e64533469f207992204a1cd5",
+      "utf8_bytes": 2018,
+      "readback": "success"
+    },
+    "docs/teaching/daily/day-41/pet-day41-green.patch": {
+      "project": "pet",
+      "commit": "f1e84763868d1ac51ed56ea4bcb4236dd55eac68",
+      "expected_parent": "a27c17eadb49e2bd15e70c12e208699979af03f6",
+      "blob_sha": "c1b453e9c41818e50db256094bcfa1481211d3af",
+      "sha256": "8003c8bcbb4d5ff77caba4c8b530ff35a3fa731d96fb7c5da264bb6588943a98",
+      "utf8_bytes": 19186,
+      "readback": "success"
+    },
+    "docs/teaching/daily/day-41/analytics.md": {
+      "project": "analytics",
+      "commit": "3da431b6ba7ca4c4b67c5b5725b251eb2104b625",
+      "expected_parent": "f1e84763868d1ac51ed56ea4bcb4236dd55eac68",
+      "blob_sha": "4099b7c5252c017eb78c2b9ea9bf932a96f60779",
+      "sha256": "661df4a73cf33251dd45e85dc81f0b809a938b32e174bbc7f248bf58f6cfe9e7",
+      "utf8_bytes": 8553,
+      "readback": "success"
+    },
+    "docs/teaching/daily/day-41/analytics-day41-refactor.patch": {
+      "project": "analytics",
+      "commit": "3da431b6ba7ca4c4b67c5b5725b251eb2104b625",
+      "expected_parent": "f1e84763868d1ac51ed56ea4bcb4236dd55eac68",
+      "blob_sha": "c873e5694ea630f18bcaf536ef159613164775d8",
+      "sha256": "2634a48df8594ce1ecac1040c635ae2a56a1ee4e02e1a580119e1f5388f73f97",
+      "utf8_bytes": 5336,
+      "readback": "success"
+    },
+    "docs/teaching/daily/day-41/analytics-day41-green.patch": {
+      "project": "analytics",
+      "commit": "3da431b6ba7ca4c4b67c5b5725b251eb2104b625",
+      "expected_parent": "f1e84763868d1ac51ed56ea4bcb4236dd55eac68",
+      "blob_sha": "0bc7d079bd49efac9c7fe6c983e382aa0b6b637a",
+      "sha256": "4ccbe7cdc9256528f6a030a74c8085b36a1805768743f85c979e0b049e5a1813",
+      "utf8_bytes": 34328,
+      "readback": "success"
+    }
+  },
+  "static_patch_preimage": {
+    "chat": "passed: Refactor 1 file, Green 4 files",
+    "pet": "passed: Refactor 2 files, Green 4 files",
+    "analytics": "passed: Refactor 3 files, Green 3 files"
+  },
+  "runtime": {
+    "git_apply": "not_executed",
+    "cargo_fmt": "not_executed",
+    "cargo_check": "not_executed",
+    "cargo_test": "not_executed",
+    "node": "not_executed",
+    "postgres": "not_executed",
+    "gui": "not_executed",
+    "ci": "not_executed",
+    "product_acceptance": "not_accepted"
+  },
+  "notes": [
+    "Nine files read back from exact article commits; SHA256 calculated over UTF-8 bytes.",
+    "Static unified patch hunk matching was checked against product source SHA in Refactor then Green order; not a git apply or build.",
+    "Product repository and its README were not written.",
+    "Core Red/Green planned 15 minutes each project, 45 minutes total; no actual runtime minutes claimed.",
+    "last_full_comparison unchanged; cross-project engineering tasks not double-counted."
+  ],
+  "writes": [
+    {
+      "path": "docs/teaching/daily/day-41/delivery-verification.json",
+      "expected_parent": "3da431b6ba7ca4c4b67c5b5725b251eb2104b625"
+    }
+  ]
+}

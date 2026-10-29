@@ -1,0 +1,69 @@
+{
+  "source_commit": "06113718d79e26307dd06ad3a7c45be7fb4f50ad",
+  "scope": "Documentation / static source / CLI and syntax only",
+  "checks": [
+    {
+      "command": "python3 scripts/local-services.py --help",
+      "exit_code": 0,
+      "stdout": "usage: local-services.py [-h] {start,stop,status}\n\n本機原生 Chat／Analytics；資料與憑證只存於忽略的 .local/runtime。\n\npositional arguments:\n  {start,stop,status}\n\noptions:\n  -h, --help           show this help message and exit\n",
+      "stderr": "",
+      "result": "passed"
+    },
+    {
+      "command": "bash -n scripts/build-production.sh scripts/build-chat-ui.sh scripts/native-env.sh",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "result": "passed"
+    },
+    {
+      "command": "node --check scripts/build-pet-ui.mjs",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "result": "passed"
+    },
+    {
+      "command": "python3 scripts/architecture-boundaries.py --offline",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "error: no matching package named `prost` found\nlocation searched: crates.io index\nrequired by package `analytics-transport v0.2.1 (/home/willie/Documents/Codex/2026-10-22/referenced-chatgpt-conversation-this-is-an/work/current-docs/crates/analytics_transport)`\nnote: offline mode (via `--offline`) can sometimes cause surprising resolution failures\nhelp: if this error is too confusing you may wish to retry without `--offline`\nTraceback (most recent call last):\n  File \"/home/willie/Documents/Codex/2026-10-22/referenced-chatgpt-conversation-this-is-an/work/current-docs/scripts/architecture-boundaries.py\", line 52, in <module>\n    main()\n    ~~~~^^\n  File \"/home/willie/Documents/Codex/2026-10-22/referenced-chatgpt-conversation-this-is-an/work/current-docs/scripts/architecture-boundaries.py\", line 16, in main\n    metadata = json.loads(subprocess.check_output(\n                          ~~~~~~~~~~~~~~~~~~~~~~~^\n        [\"cargo\", \"metadata\", \"--locked\", \"--format-version\", \"1\"]\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        + ([\"--offline\"] if \"--offline\" in sys.argv else []), cwd=ROOT\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ))\n    ^\n  File \"/usr/lib/python3.14/subprocess.py\", line 473, in check_output\n    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,\n           ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n               **kwargs).stdout\n               ^^^^^^^^^\n  File \"/usr/lib/python3.14/subprocess.py\", line 578, in run\n    raise CalledProcessError(retcode, process.args,\n                             output=stdout, stderr=stderr)\nsubprocess.CalledProcessError: Command '['cargo', 'metadata', '--locked', '--format-version', '1', '--offline']' returned non-zero exit status 101.\n",
+      "result": "blocked_missing_local_prost_cache"
+    },
+    {
+      "check": "Python AST syntax",
+      "files": [
+        "scripts/local-services.py",
+        "scripts/install-pet-local.py",
+        "scripts/versioning.py"
+      ],
+      "result": "passed"
+    },
+    {
+      "check": "Current changed document relative links",
+      "count": 131,
+      "missing": [],
+      "result": "passed"
+    },
+    {
+      "check": "Exact original snapshots SHA256",
+      "count": 10,
+      "result": "passed"
+    }
+  ],
+  "not_run": [
+    "service startup",
+    "database",
+    "GUI",
+    "product build",
+    "paid AI",
+    "full two-repository comparison"
+  ],
+  "unchanged": [
+    "program source",
+    "docs/learning-state.json",
+    "docs/teaching/current/manifest.json",
+    "frozen Day articles",
+    "existing historical evidence"
+  ]
+}

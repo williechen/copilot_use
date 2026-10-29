@@ -1,0 +1,6 @@
+{
+  "restricted_before_change": true,
+  "real_http_change": true,
+  "old_cookie_rejected": true,
+  "restart_new_password_and_dashboard": true
+}

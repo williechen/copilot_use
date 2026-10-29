@@ -1,0 +1,8 @@
+0 git clone --no-hardlinks /home/willie/Documents/rust_ai_ring /home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day43-7ce39f0
+0 git diff d2612fc..HEAD
+0 git apply --reverse --check /home/willie/Documents/copilot_use/docs/teaching/daily/day-43/chat-ssr-imports-d2612fc.patch
+0 cargo metadata --locked --no-deps --format-version 1 --manifest-path chat_apps/Cargo.toml
+0 cargo fmt --all --manifest-path chat_apps/Cargo.toml -- --check
+0 cargo test --offline --locked --manifest-path chat_apps/Cargo.toml -p chat-ui --features ssr
+0 cargo test --offline --locked --manifest-path chat_apps/Cargo.toml -p chat-server -p chat-persistence -p chat-ui --features ssr
+[('Persistence', 'in_progress', None), ('Rust AI Chat', 'in_progress', None), ('Node', 'completed', 'success'), ('Rust Desktop Pet', 'in_progress', None), ('Rust Analytics', 'in_progress', None), ('Test All', 'in_progress', None), ('Cargo workspaces', 'completed', 'success')]

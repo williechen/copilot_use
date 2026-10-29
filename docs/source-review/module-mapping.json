@@ -1,0 +1,515 @@
+[
+  {
+    "id": "C01",
+    "title": "Chat Domain",
+    "reference": [
+      "crates/chat_domain/src/lib.rs"
+    ],
+    "product": [
+      "crates/chat_domain/src/lib.rs"
+    ],
+    "contract": "ChatMessage/MessageAuthor/Room → MessageInput/Committed/MessageError；String ID → UUID；category_room_id 無對應",
+    "data_flow": "HTTP author/room/content → validate → repository；Domain 不匯入 Driver",
+    "decision": "概念可映射、公開型別與序列化不等同；category 不能當 topic"
+  },
+  {
+    "id": "C02",
+    "title": "Chat Application",
+    "reference": [
+      "crates/chat_application/src/lib.rs",
+      "crates/chat_application/src/repository.rs"
+    ],
+    "product": [
+      "crates/chat_application/src/lib.rs",
+      "crates/chat_application/src/tests.rs"
+    ],
+    "contract": "create_room/RoomRepository、MessageRepository::create、persist_then_publish → MessageRepository::commit/CommitFuture/persist",
+    "data_flow": "參考 create→callback；成品 validate→commit→Committed(inserted)",
+    "decision": "儲存後才通知的不變量對應；無 RoomRepository 等同實作；保留 durable Adapter"
+  },
+  {
+    "id": "C03",
+    "title": "Chat 事件",
+    "reference": [
+      "crates/chat_application/src/product_event.rs",
+      "tests/chat/product_event_contract.rs"
+    ],
+    "product": [
+      "crates/shared/src/lib.rs"
+    ],
+    "contract": "PersistedMessageEvent → ProductEvent；四欄 message.persisted 一致；參考 String message ID 必須可轉 UUID",
+    "data_flow": "參考事件 factory 尚非 Outbox；成品 stage 同交易→gRPC",
+    "decision": "四欄事件子集可適配，不能宣稱所有事件／發送方式相同"
+  },
+  {
+    "id": "C04",
+    "title": "Chat SQLite",
+    "reference": [
+      "crates/persistence/src/lib.rs"
+    ],
+    "product": [
+      "crates/persistence/src/lib.rs",
+      "crates/persistence/src/tests.rs",
+      "crates/persistence/src/database.rs",
+      "crates/persistence/src/database/tests.rs"
+    ],
+    "contract": "SqliteRoom/MessageRepository → ChatWriter；rooms/messages → chat_rooms/chat_messages；UUID BLOB/ACL/Outbox/realtime",
+    "data_flow": "BEGIN IMMEDIATE→message+outbox+topic+realtime→commit；失敗 rollback；SQLite backup/import",
+    "decision": "同為 SQLite，schema/交易邊界不相同；參考 41 字元測試斷言與文字相反"
+  },
+  {
+    "id": "C05",
+    "title": "Chat 入口/HTTP/SSR",
+    "reference": [
+      "apps/server/src/http.rs",
+      "apps/server/src/lib.rs",
+      "apps/server/src/main.rs",
+      "apps/server/src/ssr.rs",
+      "apps/server/src/state.rs",
+      "tests/server/day5_tests.rs"
+    ],
+    "product": [
+      "apps/server/src/main.rs",
+      "apps/server/src/lib.rs",
+      "apps/server/src/web.rs",
+      "apps/server/frontend/src/main.rs"
+    ],
+    "contract": "/api/rooms {name} 200 {id} → /api/v1/rooms {id,name} 201；/health → /healthz；3000 → 3001",
+    "data_flow": "Leptos SSR→browser HTTP→auth/ACL→SQLite；入口狀態從 repositories 變為 StateData",
+    "decision": "API 不相容；產品入口保留，教學需明示 adapter/URL/DTO"
+  },
+  {
+    "id": "C06",
+    "title": "Chat WS/Fanout",
+    "reference": [
+      "apps/server/src/ws.rs",
+      "apps/server/src/hub.rs"
+    ],
+    "product": [
+      "apps/server/src/realtime.rs",
+      "apps/server/src/fanout.rs"
+    ],
+    "contract": "ClientEvent/ServerEvent tagged DTO → flat notifications/HTTP send；broadcast128 → durable realtime polling",
+    "data_flow": "參考 WS persist_then_publish→room hub；成品 HTTPcommit→canonical DB fanout→WS，lag→resync_required",
+    "decision": "保留跨程序 durability/ACL；不能把參考 socket 當成品 client"
+  },
+  {
+    "id": "C07",
+    "title": "Chat UI",
+    "reference": [
+      "crates/ui/src/lib.rs",
+      "crates/ui/src/chat_socket.rs",
+      "crates/ui/src/room_api.rs"
+    ],
+    "product": [
+      "crates/ui/src/lib.rs",
+      "crates/ui/src/browser.rs"
+    ],
+    "contract": "參考 typed WS/room API → auth UI、HTTP messages、notification WS、SSE/retryqueue",
+    "data_flow": "Hydrate→session→room ACL→HTTP；斷線 reconnect + resync，不以樂觀UI當 durable",
+    "decision": "映射頁面／生命週期，非逐檔移植；參考 hardcoded localhost WS 不適用部署"
+  },
+  {
+    "id": "C08",
+    "title": "Chat 認證",
+    "reference": [],
+    "product": [
+      "apps/server/src/auth.rs"
+    ],
+    "contract": "Argon2/users/sessions/CSRF/owner/member/invite/throttle；參考無對應",
+    "data_flow": "登入→hash sessiontoken→SQLite；write→CSRF+ACL；auth事件與狀態同交易",
+    "decision": "產品安全擴充，不刪除以追求 reference 相同"
+  },
+  {
+    "id": "C09",
+    "title": "Chat RAG/MCP/Agent",
+    "reference": [],
+    "product": [
+      "apps/server/src/knowledge.rs",
+      "apps/server/src/knowledge/tests.rs",
+      "apps/server/src/mcp.rs",
+      "apps/server/src/agent.rs"
+    ],
+    "contract": "owner-scoped document/1536 embedding；MCP readonly tools；bounded citations",
+    "data_flow": "auth→owner retrieve/MCP→provider→citation查證→重新 principal/ACL→persist",
+    "decision": "產品擴充；Agent 外部呼叫後有授權複核，不可概括到所有 AI 入口"
+  },
+  {
+    "id": "C10",
+    "title": "Chat AI SSE",
+    "reference": [],
+    "product": [
+      "apps/server/src/openai.rs"
+    ],
+    "contract": "ReplyRequest{room_id,rag}；delta/done/error；completed 才 persist",
+    "data_flow": "先 auth/ACL→provider stream→Decoder/output buffer→ChatWriter.persist_as→done",
+    "decision": "靜態缺口：produce 未攜 actor/headers，完成前未複核 session/ACL；尚未修正或實測撤權 race"
+  },
+  {
+    "id": "C11",
+    "title": "Chat personas/policy",
+    "reference": [],
+    "product": [
+      "apps/server/src/personas.rs",
+      "apps/server/src/suggestions.rs"
+    ],
+    "contract": "persona revision/lease/run budgets；approved proposal/context policy/CAS receipts",
+    "data_flow": "owner→bounded run→durable turn revision/lease CAS；proposal→apply→rollback compare revision",
+    "decision": "產品擴充，不能用一般 ChatMessage factory 取代"
+  },
+  {
+    "id": "C12",
+    "title": "Chat 同意撤回",
+    "reference": [],
+    "product": [
+      "apps/server/src/topic_http.rs",
+      "crates/persistence/src/topics.rs"
+    ],
+    "contract": "consent flag/topic outbox/withdrawal batch；本文與 owner 不進事件",
+    "data_flow": "同意→訊息 txn stage topics；withdraw→local disable+outbox→Analytics tombstone→ack",
+    "decision": "產品隱私擴充；category 與 topic 語意分離"
+  },
+  {
+    "id": "C13",
+    "title": "Chat persist/publish 回歸",
+    "reference": [
+      "tests/chat/persist_publish.rs"
+    ],
+    "product": [],
+    "contract": "FakeRepo 成功一次/失敗不publish；成品 C02/C04 tests",
+    "data_flow": "參考 callback ordering；成品 DB atomic+fanout 重讀",
+    "decision": "測試目的映射，保留 owning crate tests，不建立根 tests workspace"
+  },
+  {
+    "id": "P01",
+    "title": "Pet FSM",
+    "reference": [
+      "crates/pet_domain/src/lib.rs",
+      "crates/pet_domain/src/error.rs",
+      "tests/pet/pet_machine.rs"
+    ],
+    "product": [
+      "crates/pet_domain/src/lib.rs",
+      "crates/pet_runtime/src/interaction.rs"
+    ],
+    "contract": "Idle/Interacting/Sleeping、Interact/FinishInteraction/Sleep/Wake、revision → Action/Speed/proactive",
+    "data_flow": "參考 dispatch→snapshot→event→UI revision；成品 settings→animation/reminder",
+    "decision": "狀態與命令不相容；Sleep/Wake/revision 目前無等同流程，不能空造同名型別"
+  },
+  {
+    "id": "P02",
+    "title": "Pet Profile",
+    "reference": [
+      "crates/pet_domain/src/profile.rs",
+      "tests/pet/profile_contract.rs",
+      "tests/pet/day5_codec_tests.rs"
+    ],
+    "product": [
+      "crates/pet_domain/src/profile.rs",
+      "crates/pet_domain/src/application.rs",
+      "crates/pet_domain/src/application/tests.rs"
+    ],
+    "contract": "五欄/optional appearance-animation；JSON codec → TOML codec/limits/AssetManifest/ProfileRepository",
+    "data_flow": "Tauri→save_profile validation→PetStore.save→SQLite→private TOML projection",
+    "decision": "概念對應，格式/驗證/錯誤不等同；ProjectionPending 必須保留"
+  },
+  {
+    "id": "P03",
+    "title": "Pet cleanup Domain",
+    "reference": [
+      "crates/pet_domain/src/cleanup.rs",
+      "crates/pet_domain/src/cleanup_event.rs",
+      "tests/pet/cleanup_contract.rs",
+      "tests/pet/cleanup_event_contract.rs"
+    ],
+    "product": [],
+    "contract": "Previewed→Confirmed→Succeeded/Failed；pet.cleanup.succeeded → file.cleanup.succeeded",
+    "data_flow": "參考純狀態，並非真 OS receipt；成品真隔離成功 receipt→SQLite/Outbox",
+    "decision": "事件名稱不相容；對照成品 P08，不以狀態成功代替真操作成功"
+  },
+  {
+    "id": "P04",
+    "title": "Pet Tauri 入口",
+    "reference": [
+      "apps/desktop_pet/src/lib.rs",
+      "apps/desktop_pet/src/main.rs",
+      "apps/desktop_pet/build.rs"
+    ],
+    "product": [
+      "apps/desktop_pet/src/main.rs",
+      "apps/desktop_pet/build.rs"
+    ],
+    "contract": "參考四 IPC/get_pet_state/send_pet_command/chat_with_pet/scan_file_preview → 44 IPC",
+    "data_flow": "GUI→invoke→runtimeStore/confirmedRoot→serialized result；preview opaqueID cache",
+    "decision": "40 frontend command names 對應44 backend；非參考 bridge/DTO 等同；詳列呼叫端與簽章"
+  },
+  {
+    "id": "P05",
+    "title": "Pet Frontend",
+    "reference": [
+      "apps/desktop_pet/frontend/src/bridge.rs",
+      "apps/desktop_pet/frontend/src/component/activity.rs",
+      "apps/desktop_pet/frontend/src/component/chat.rs",
+      "apps/desktop_pet/frontend/src/component/control.rs",
+      "apps/desktop_pet/frontend/src/component/mod.rs",
+      "apps/desktop_pet/frontend/src/main.rs"
+    ],
+    "product": [
+      "apps/desktop_pet/frontend/src/main.rs"
+    ],
+    "contract": "window.getPetState/... wrappers + snapshot revision → __TAURI__.core.invoke + settings/asset UI",
+    "data_flow": "參考 listener→apply_snapshot；成品 IPC result→reactive UI；drag權限由Tauri capability",
+    "decision": "前端 schema/狀態不同；保留既有功能，不能直接替换參考 component"
+  },
+  {
+    "id": "P06",
+    "title": "Pet 真視窗漫遊",
+    "reference": [
+      "apps/desktop_pet/src/roam.rs"
+    ],
+    "product": [],
+    "contract": "monitor work_area/current_position/set_position bounded movement",
+    "data_flow": "參考 window moves→verify progress→bounce/stop；成品僅window內角色動畫",
+    "decision": "參考功能尚未對應成品；缺失為 native window roaming，不把sprite移动宣稱等同"
+  },
+  {
+    "id": "P07",
+    "title": "Pet preview/duplicates",
+    "reference": [
+      "apps/desktop_pet/src/file_organizer.rs"
+    ],
+    "product": [],
+    "contract": "AuthorizedRoot/ScanPreview/duplicate_preview SHA256 → runtime AuthorizedRoot/FilePreview",
+    "data_flow": "參考 recursivescan→sizegroups→revalidate+hash；成品 root.scan→opaqueUUID/name/size",
+    "decision": "對照P08：安全preview存在，重複檔案雜湊分組尚未對應"
+  },
+  {
+    "id": "P08",
+    "title": "Pet 真 OS quarantine/restore",
+    "reference": [],
+    "product": [
+      "crates/pet_runtime/src/lib.rs",
+      "crates/pet_runtime/src/unix_fs.rs",
+      "crates/pet_runtime/src/windows_fs.rs"
+    ],
+    "contract": "pinnedroot/preview/confirm/Trash/CleanupReceipt/RestoreReceipt/journal",
+    "data_flow": "確認→revalidate pinned OS entry→隔離/還原→journal receipt；failedDB→recovery→Outbox",
+    "decision": "產品安全擴充；FS與DB非單一交易，明確部分成功與恢復，不假稱零窗口"
+  },
+  {
+    "id": "P09",
+    "title": "Pet Store/Profile 投影",
+    "reference": [],
+    "product": [
+      "crates/pet_runtime/src/state.rs",
+      "crates/pet_runtime/src/files.rs",
+      "crates/pet_runtime/src/registry.rs"
+    ],
+    "contract": "PetStore/memory/cards/conversation/assets/archive/projection",
+    "data_flow": "SQLite canonical→serialized private fileprojection；reconcile；archive active setting+event txn",
+    "decision": "產品擴充；對照Profile與五欄概念；資料隔離／filepath不進publicevent"
+  },
+  {
+    "id": "P10",
+    "title": "Pet 學習/備份",
+    "reference": [],
+    "product": [
+      "crates/pet_domain/src/learning.rs",
+      "crates/pet_runtime/src/backup.rs"
+    ],
+    "contract": "Schedule::review/time injected；SQLite snapshots/checksums/restore safety snapshot",
+    "data_flow": "quality→pure Schedule→Card+Outbox txn；VACUUM→hash→private restore migration/merge",
+    "decision": "產品擴充；不在Domain匯SQLx，backup與reference preview不是對應功能"
+  },
+  {
+    "id": "P11",
+    "title": "Pet Chat/Agent/生圖",
+    "reference": [
+      "apps/desktop_pet/src/chat.rs"
+    ],
+    "product": [
+      "crates/pet_runtime/src/ai.rs",
+      "crates/pet_runtime/src/agent.rs",
+      "crates/pet_runtime/src/main.rs"
+    ],
+    "contract": "MockChatModel → actualOpenAI/profile+memories+boundedstdio MCP；generated asset profilehash",
+    "data_flow": "userprompt→profile/memory/history→provider→conversations/eventtxn；assets staleversioncheck",
+    "decision": "參考 mock 不等同成品AI；真實AI本輪未執行，readonlytool限制保留"
+  },
+  {
+    "id": "P12",
+    "title": "Pet Outbox/policy",
+    "reference": [],
+    "product": [
+      "crates/pet_runtime/src/outbox.rs",
+      "crates/pet_runtime/src/suggestions.rs"
+    ],
+    "contract": "lease_token/lease_until/CASACK/backoff/blocked/requeue；approved policy receipt",
+    "data_flow": "claim→gRPC→matching ACK→CAS delivered；fail重試/blocked；policy rollback revision",
+    "decision": "產品可靠投遞擴充；At-least-once delivery+durable dedup，非無限 exactly-once保證"
+  },
+  {
+    "id": "P13",
+    "title": "Pet 更新/平台回歸",
+    "reference": [],
+    "product": [
+      "apps/desktop_pet/src/updater.rs",
+      "apps/desktop_pet/tests/glib_variant_safety.rs"
+    ],
+    "contract": "check→verify→confirmed install；optimized Linux GLib str iterator regression",
+    "data_flow": "configured signedupdate→downloadverify→install/restart；test platformcfgLinux",
+    "decision": "無參考 counterpart；Windows/macOS runtime 本輪未重跑；vendor列獨立清單"
+  },
+  {
+    "id": "A01",
+    "title": "Analytics reference契約",
+    "reference": [
+      "apps/stats_server/src/lib.rs",
+      "apps/stats_server/src/main.rs",
+      "tests/analytics/event_kind_tests.rs",
+      "tests/analytics/http_contract_tests.rs",
+      "tests/analytics/idempotency_contract.rs",
+      "tests/analytics/postgres_ingest.rs",
+      "tests/common/mod.rs"
+    ],
+    "product": [
+      "apps/stats_server/src/application.rs"
+    ],
+    "contract": "EventInput/InMemoryDeduplicator/501 → EventRepository/Analytics/RepositoryError",
+    "data_flow": "參考 validinput→501，FakeStore並非PG；成品 receive→durable repository",
+    "decision": "參考未實作不是成品應退回501；strict event whitelist不等同任意非空kind"
+  },
+  {
+    "id": "A02",
+    "title": "Analytics HTTP/入口",
+    "reference": [],
+    "product": [
+      "apps/stats_server/src/lib.rs",
+      "apps/stats_server/src/main.rs"
+    ],
+    "contract": "source token ingest/query/admin tokens；HTTP 202/409/400/503；PGhealth",
+    "data_flow": "sourceauth→receive→PG commit→HTTPack；separatequeryauth",
+    "decision": "產品擴充；四欄shape對應，驗證/status/security不相容"
+  },
+  {
+    "id": "A03",
+    "title": "Analytics PostgreSQL",
+    "reference": [],
+    "product": [
+      "apps/stats_server/src/persistence.rs"
+    ],
+    "contract": "PgPool/EventStore；source+eventID durable dedup/typehash conflict",
+    "data_flow": "BEGIN→dedupkey+event insert→commit/revision trigger；duplicate不重計；query排除archive/withdraw",
+    "decision": "產品 durable實作；参考HashSet不能替換；PGmigration非SQLite"
+  },
+  {
+    "id": "A04",
+    "title": "Analytics gRPC",
+    "reference": [],
+    "product": [
+      "apps/stats_server/src/grpc.rs",
+      "apps/stats_server/src/grpc/tests.rs"
+    ],
+    "contract": "EventIngestion.IngestEvents；1..64/64KiB/4fields/outcomes",
+    "data_flow": "wholebatch auth beforewrite→per-event transaction→ACK；Unavailable後可重送已commit事件",
+    "decision": "批次非全有全無；來源不可冒用；共享application非旁路SQL"
+  },
+  {
+    "id": "A05",
+    "title": "Analytics Dashboard/SSE",
+    "reference": [],
+    "product": [
+      "apps/stats_server/src/dashboard.rs",
+      "apps/stats_server/src/live.rs"
+    ],
+    "contract": "HTTP queries + SSE revision/polling/max16 streams；fetchBearer",
+    "data_flow": "commit→DBrevision→SSEnotification→dashboardquery；disconnectDBfailurecloses",
+    "decision": "SSE非event replay或gRPC替代；aggregate自動更新、recent/trend手動"
+  },
+  {
+    "id": "A06",
+    "title": "Analytics governance/topics",
+    "reference": [],
+    "product": [
+      "apps/stats_server/src/governance.rs",
+      "apps/stats_server/src/topics.rs"
+    ],
+    "contract": "Taipei timeline/archive/restore；topic tombstones/withdraw",
+    "data_flow": "authorizedtransaction→archiveflags/revision；latearrivalprivacy excludes via tombstone",
+    "decision": "產品擴充；archive後重送不復活，withdraw不等archive"
+  },
+  {
+    "id": "A07",
+    "title": "Analytics Insights",
+    "reference": [],
+    "product": [
+      "apps/stats_server/src/insights.rs"
+    ],
+    "contract": "aggregate→proposal pending/approved/rejected/applied/rolled_back；receipts/evaluate",
+    "data_flow": "grounded stats→AI suggestion→humanreview→targetapply→receipt→descriptiveevaluation",
+    "decision": "產品擴充；不把描述性變化當因果/uniqueusers；本輪不執行AI"
+  },
+  {
+    "id": "X01",
+    "title": "Shared wire/type",
+    "reference": [
+      "crates/shared/src/lib.rs"
+    ],
+    "product": [
+      "crates/shared/src/topics.rs"
+    ],
+    "contract": "參考 WS DTO → 產品 ProductEvent(C03)/fixedtopiclabels",
+    "data_flow": "typed WSconsumer(C06/C07) 對照 product通知；事件→transport",
+    "decision": "同名crate不同職責；禁止把 WS Message本文加入low-sensitivity analytics schema"
+  },
+  {
+    "id": "X02",
+    "title": "AI Provider",
+    "reference": [
+      "crates/ai_core/src/lib.rs"
+    ],
+    "product": [
+      "crates/ai_core/src/lib.rs",
+      "crates/ai_core/src/agent.rs"
+    ],
+    "contract": "ChatModel/ChatRequest/Response/Mock → Provider/Decoder/embedding/sprite/agent tools",
+    "data_flow": "bounded HTTP Responses/Image/embedding→callercheckedstorage；decoder splitschunkframes",
+    "decision": "具體Adapter非純Domain；參考trait抽象沒有直接實作等同保證"
+  },
+  {
+    "id": "X03",
+    "title": "MCP",
+    "reference": [],
+    "product": [
+      "crates/mcp_bridge/src/lib.rs"
+    ],
+    "contract": "HttpClient/JSONRPC/toolmetadata/header validation；stdio另P11",
+    "data_flow": "host-scopedtools→protocol→boundedexecute；不可tools自行擴scope",
+    "decision": "產品 Driver，不進 Domain/Application；實際server另server::mcp/runtime"
+  },
+  {
+    "id": "X04",
+    "title": "Analytics transport",
+    "reference": [],
+    "product": [
+      "crates/analytics_transport/build.rs",
+      "crates/analytics_transport/src/lib.rs"
+    ],
+    "contract": "Tonic/Prost build from shared/proto/analytics.proto；u16↔uint32、UUID↔string",
+    "data_flow": "Outbox→3s connect/10s request→sourceBearer→matchingid/source/Stored或AlreadyExists→ACK",
+    "decision": "產品driver，timeout<30s lease；permanentstatusesblocked；proto不存在參考"
+  },
+  {
+    "id": "X05",
+    "title": "Telemetry",
+    "reference": [
+      "crates/telemetry/src/lib.rs"
+    ],
+    "product": [
+      "crates/telemetry/src/lib.rs"
+    ],
+    "contract": "參考空crate → OTelinit/exporter/header sanitize/span HTTP metrics",
+    "data_flow": "route/method/status+traceparent→collector；禁止繼承敏感OTelheaders",
+    "decision": "產品擴充；沒有空模組功能等同；不以AST說明取代部署collector驗證"
+  }
+]

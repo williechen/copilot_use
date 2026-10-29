@@ -1,0 +1,50 @@
+   Compiling persistence v0.2.17 (/home/willie/Documents/Codex/2026-10-18/referenced-chatgpt-conversation-this-is-an-2/work/latest-main/crates/persistence)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 4.11s
+     Running unittests src/lib.rs (../rust_ai_chat/target/debug/deps/persistence-9b725712d4033bcb)
+
+running 5 tests
+test tests::test_message_schema_rejects_invalid_author_and_length ... FAILED
+test tests::test_message_repository_all_author_kinds ... FAILED
+test tests::test_message_repository_rejects_missing_room ... FAILED
+test tests::test_room_repository_find_by_id ... FAILED
+test tests::test_room_repository_create_then_find ... FAILED
+
+failures:
+
+---- tests::test_message_schema_rejects_invalid_author_and_length stdout ----
+
+thread 'tests::test_message_schema_rejects_invalid_author_and_length' (101784) panicked at /home/willie/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sqlx-core-0.9.0/src/testing/mod.rs:262:14:
+failed to apply migrations: ExecuteMigration(Database(SqliteError { code: 1, message: "near \"MODIFY\": syntax error" }), 20261018100114)
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+---- tests::test_message_repository_all_author_kinds stdout ----
+
+thread 'tests::test_message_repository_all_author_kinds' (101782) panicked at /home/willie/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sqlx-core-0.9.0/src/testing/mod.rs:262:14:
+failed to apply migrations: ExecuteMigration(Database(SqliteError { code: 1, message: "near \"MODIFY\": syntax error" }), 20261018100114)
+
+---- tests::test_message_repository_rejects_missing_room stdout ----
+
+thread 'tests::test_message_repository_rejects_missing_room' (101783) panicked at /home/willie/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sqlx-core-0.9.0/src/testing/mod.rs:262:14:
+failed to apply migrations: ExecuteMigration(Database(SqliteError { code: 1, message: "near \"MODIFY\": syntax error" }), 20261018100114)
+
+---- tests::test_room_repository_find_by_id stdout ----
+
+thread 'tests::test_room_repository_find_by_id' (101796) panicked at /home/willie/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sqlx-core-0.9.0/src/testing/mod.rs:262:14:
+failed to apply migrations: ExecuteMigration(Database(SqliteError { code: 1, message: "near \"MODIFY\": syntax error" }), 20261018100114)
+
+---- tests::test_room_repository_create_then_find stdout ----
+
+thread 'tests::test_room_repository_create_then_find' (101793) panicked at /home/willie/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sqlx-core-0.9.0/src/testing/mod.rs:262:14:
+failed to apply migrations: ExecuteMigration(Database(SqliteError { code: 1, message: "near \"MODIFY\": syntax error" }), 20261018100114)
+
+
+failures:
+    tests::test_message_repository_all_author_kinds
+    tests::test_message_repository_rejects_missing_room
+    tests::test_message_schema_rejects_invalid_author_and_length
+    tests::test_room_repository_create_then_find
+    tests::test_room_repository_find_by_id
+
+test result: FAILED. 0 passed; 5 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.36s
+
+error: test failed, to rerun pass `-p persistence --lib`

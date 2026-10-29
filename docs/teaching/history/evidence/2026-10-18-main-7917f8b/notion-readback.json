@@ -1,0 +1,92 @@
+[
+  {
+    "id": "3f2e51d4509381ddb8a8ce7cb4cd3e60",
+    "title": "🦀 Rust AI 三專案｜共同學習規則與前進目標",
+    "url": "https://app.notion.com/p/3f2e51d4509381ddb8a8ce7cb4cd3e60?pvs=204",
+    "last_edited": "2026-10-18T10:26:19.801Z",
+    "main_sha": "7917f8b2e05ed74703ff9a83b62732ce04461da7",
+    "children_preserved": true,
+    "body_sha256": "2ac4bdccd79c298ac97bfc3d4ec8409c17a346966abdad0f831a886c46df657e"
+  },
+  {
+    "id": "3f3e51d45093807da638c336e857543a",
+    "title": "聊天室",
+    "url": "https://app.notion.com/p/3f3e51d45093807da638c336e857543a?pvs=204",
+    "last_edited": "2026-10-18T10:26:20.559Z",
+    "main_sha": "7917f8b2e05ed74703ff9a83b62732ce04461da7",
+    "children_preserved": true,
+    "body_sha256": "7126d52b8d6262ee5058d27170189c08f08d96233db17f1260602a025c3909f0"
+  },
+  {
+    "id": "3f3e51d450938067923ae5a424d30950",
+    "title": "桌面寵物",
+    "url": "https://app.notion.com/p/3f3e51d450938067923ae5a424d30950?pvs=204",
+    "last_edited": "2026-10-18T10:26:22.284Z",
+    "main_sha": "7917f8b2e05ed74703ff9a83b62732ce04461da7",
+    "children_preserved": true,
+    "body_sha256": "75a23b6a605be0e409b2e35b683b6ddc6fb8b47a7dc272bfbb1be49dd9bb8a24"
+  },
+  {
+    "id": "3f3e51d45093817eafaee0cfc9ea4cc8",
+    "title": "📊 統計儀錶板｜聊天室 × 桌面寵物",
+    "url": "https://app.notion.com/p/3f3e51d45093817eafaee0cfc9ea4cc8?pvs=204",
+    "last_edited": "2026-10-18T10:26:23.510Z",
+    "main_sha": "7917f8b2e05ed74703ff9a83b62732ce04461da7",
+    "children_preserved": true,
+    "body_sha256": "ef40dfd1de51460a944bf85f62dce95a06c06e87970c3c26c79df169ec0b99ba"
+  },
+  {
+    "id": "3fde51d45093816bb36dd9099190d907",
+    "title": "2026-10-18｜P0 Chat Day 18｜查詢房間完成 HTTP 接線與錯誤恢復",
+    "url": "https://app.notion.com/p/3fde51d45093816bb36dd9099190d907?pvs=204",
+    "last_edited": "2026-10-18T10:26:24.375Z",
+    "main_sha": "7917f8b2e05ed74703ff9a83b62732ce04461da7",
+    "children_preserved": true,
+    "body_sha256": "16bc57e96a7749355549e102849f875d84888043f66274d79e5f096efc770a8b"
+  },
+  {
+    "id": "3fde51d4509381bfa106ea4d9b190480",
+    "title": "2026-10-18｜P0 Pet Day 18｜漫遊只移動生活窗並核對真實標籤",
+    "url": "https://app.notion.com/p/3fde51d4509381bfa106ea4d9b190480?pvs=204",
+    "last_edited": "2026-10-18T10:26:25.784Z",
+    "main_sha": "7917f8b2e05ed74703ff9a83b62732ce04461da7",
+    "children_preserved": true,
+    "body_sha256": "1d4c9074d5709179fe56d1224cbe8db1f1400fd9625a5a1273b7625aa4ab2b6d"
+  },
+  {
+    "id": "3fde51d4509381c2a0d5f60041137619",
+    "title": "2026-10-18｜P0 Analytics Day 18｜有效活動延長伺服器 Session 並拒絕過期",
+    "url": "https://app.notion.com/p/3fde51d4509381c2a0d5f60041137619?pvs=204",
+    "last_edited": "2026-10-18T10:26:26.668Z",
+    "main_sha": "7917f8b2e05ed74703ff9a83b62732ce04461da7",
+    "children_preserved": true,
+    "body_sha256": "4a404ec14835ddd60c8e73934bd66855ba29b784cd7d2c957cbeb096d20b0177"
+  },
+  {
+    "id": "3fce51d45093818b913bebb8dab5ab65",
+    "title": "2026-10-18｜P0 Chat Day 17｜查詢房間接通 HTTP",
+    "url": "https://app.notion.com/p/3fce51d45093818b913bebb8dab5ab65?pvs=204",
+    "last_edited": "2026-10-18T10:26:27.758Z",
+    "main_sha": "7917f8b2e05ed74703ff9a83b62732ce04461da7",
+    "children_preserved": true,
+    "body_sha256": "08493d8533651ece230326bd3581f549e6059fd00f679bac374edb529bee04f5"
+  },
+  {
+    "id": "3fce51d4509381ca83e3e825f0313698",
+    "title": "2026-10-18｜P0 Pet Day 17｜漫遊指向寵物生活窗",
+    "url": "https://app.notion.com/p/3fce51d4509381ca83e3e825f0313698?pvs=204",
+    "last_edited": "2026-10-18T10:26:28.600Z",
+    "main_sha": "7917f8b2e05ed74703ff9a83b62732ce04461da7",
+    "children_preserved": true,
+    "body_sha256": "37a06a3caed10b75dee32586e3d90bb7f1e61bffcc78165fe235606c82115333"
+  },
+  {
+    "id": "3fce51d4509381ea871ec9c92da37c1b",
+    "title": "2026-10-18｜P0 Analytics Day 17｜活動延長管理員 Session",
+    "url": "https://app.notion.com/p/3fce51d4509381ea871ec9c92da37c1b?pvs=204",
+    "last_edited": "2026-10-18T10:26:29.285Z",
+    "main_sha": "7917f8b2e05ed74703ff9a83b62732ce04461da7",
+    "children_preserved": true,
+    "body_sha256": "73cc5d0803264bfd4ed6dd60b872aeada4a932ede5201677eec7bfd7839cbd56"
+  }
+]

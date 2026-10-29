@@ -1,0 +1,133 @@
+{
+  "date": "2026-10-29",
+  "timezone": "Asia/Taipei",
+  "repository": "williechen/copilot_use",
+  "branch": "main",
+  "git_head_before_this_evidence": "31f2a2e205ef91b77c70ecc93330c083271f3158",
+  "read_only_product_head": "c6708c42f21ac919e57a379848b4977d27a1c3d6",
+  "document_delivery": "docs/teaching/daily/day-43/delivery-verification.json",
+  "day42_gate1_closure": {
+    "state_commit": "1c9e6c7515733657c7183fb5ae34f1eb27a7991a",
+    "manifest_commit": "e20595137420485d274bfad4065f82dbd9319436",
+    "next_day_from": 42,
+    "next_day_to": 43,
+    "existing_day42_article_evidence": "docs/teaching/daily/day-42/delivery-verification.json",
+    "old_validation_preserved": true
+  },
+  "day43_gate1_publication": {
+    "state_commit": "ac5c182e00e582b97f9b17ae61c05261e0ef9976",
+    "manifest_commit": "5ba04ffe42ecd839e572a9572f2bcba4b9fd9774",
+    "state_blob": "f0126506d0c94412c90eabc78492d8956ff0f08e",
+    "manifest_blob": "71576e6b22f1be56689326754b3c5e641b7b47af",
+    "next_day_from": 43,
+    "next_day_to": 44,
+    "readback_success": true,
+    "article_paths_match": true,
+    "manifest_day43_records": 3,
+    "three_articles_and_six_patches_published": true
+  },
+  "homepage_and_entry_updates": [
+    {
+      "path": "README.md",
+      "commit": "2c7b2f80ebbe05a205c246402cdfbae1cb0f7d8f",
+      "blob_sha": "bf051192017d135718bfcb81ffed38b3929e556d",
+      "verified_at_exact_commit": true
+    },
+    {
+      "path": "docs/README.md",
+      "commit": "1221c5f71695107ec150c68454d173bb3c5f15a2",
+      "blob_sha": "9e87b61a8eccdaf167c0f895a0187c1a0ad9fe52",
+      "verified_at_exact_commit": true
+    },
+    {
+      "path": "docs/teaching/README.md",
+      "commit": "5f4801bc2b5a0fa36b4e0e51e4cb2fe6a553ead7",
+      "blob_sha": "b7ca628f7a6716d6a010341facd6f097bc5abd2d",
+      "verified_at_exact_commit": true
+    },
+    {
+      "path": "docs/teaching/daily/README.md",
+      "commit": "31f2a2e205ef91b77c70ecc93330c083271f3158",
+      "blob_sha": "e9eebf4bfa1ece23465d2f8c7a7c9924f583ab29",
+      "verified_at_exact_commit": true
+    },
+    {
+      "path": "docs/teaching/chat/README.md",
+      "commit": "dd6d09c12c1ab503a33b788fc1979bb63a5cc855",
+      "blob_sha": "d99c65c4c1b33ef1e8b82583187b178f363a46cc",
+      "verified_at_exact_commit": true
+    },
+    {
+      "path": "docs/teaching/pet/README.md",
+      "commit": "b94a3dd772c5379b4a647a9f6c54a8e8cfdeae83",
+      "blob_sha": "baf1d2bcadd7dd0b07ba91be5b8bcbdbfa8d7074",
+      "verified_at_exact_commit": true
+    },
+    {
+      "path": "docs/teaching/analytics/README.md",
+      "commit": "3bddb118c9dd183693eba036b98b08e2b6769857",
+      "blob_sha": "d86e56a25592d25f756576286842fa9d9d00357e",
+      "verified_at_exact_commit": true
+    },
+    {
+      "path": "docs/teaching/current/README.md",
+      "commit": "60a776ab8ea9f3ee2194bc38167ef81b74ddb01a",
+      "blob_sha": "9186891899d33f26038b2fa8010849003814f367",
+      "verified_at_exact_commit": true
+    },
+    {
+      "path": "docs/teaching/current/CHAT_ENTRY.md",
+      "commit": "29952ab57ac8d9eb15d24ea5c28db352957dcdad",
+      "blob_sha": "257818d3a32ab38cd095bb3063c788a82bb89e58",
+      "verified_at_exact_commit": true
+    },
+    {
+      "path": "docs/teaching/current/PET_ENTRY.md",
+      "commit": "c7107f53d391332a7690861dd4bf9787bd8b9fbd",
+      "blob_sha": "dcbfae61cf4a4c790fc1831cc0aa91e680cbbdbd",
+      "verified_at_exact_commit": true
+    },
+    {
+      "path": "docs/teaching/current/ANALYTICS_ENTRY.md",
+      "commit": "a5c99f76c8a5ddc2751dfc3b40a53c900de1eefe",
+      "blob_sha": "37471e1d27e0b0a70aa68fce01520e346945610e",
+      "verified_at_exact_commit": true
+    },
+    {
+      "path": "docs/teaching/current/STATUS.md",
+      "commit": "781ccf02bfa4059458e4bdecc379150cefd9210f",
+      "blob_sha": "38603960b8e6f45fa36898ce2a3141ce40aade7d",
+      "verified_at_exact_commit": true
+    },
+    {
+      "path": "docs/teaching/functional-refactoring/PROGRESS.md",
+      "commit": "5790e991c4b2771d3d7f820a9a880b825e86e012",
+      "blob_sha": "8b9d8a5e1384227dd70d3bcb977ee90cee16d8e3",
+      "verified_at_exact_commit": true
+    },
+    {
+      "path": "docs/engineering/README.md",
+      "commit": "3db5464b99373f8eea73384b2e32a47ab0800f8a",
+      "blob_sha": "ab8667903045b504fb8bb6242d893c3cb518abf4",
+      "verified_at_exact_commit": true
+    }
+  ],
+  "checks": {
+    "seven_homepages": true,
+    "three_entry_files": true,
+    "current_reading_index": true,
+    "status_progress_and_global_engineering_separate": true,
+    "source_product_unchanged": true,
+    "validation_evidence_preserved": true,
+    "last_full_comparison_unchanged": true,
+    "fifo_unchanged": true
+  },
+  "gate1": "document delivered",
+  "gate2": "not executed; no product patch application or fresh Cargo/Node/DB/GUI/CI tests",
+  "next_day_after": {
+    "chat": 44,
+    "pet": 44,
+    "analytics": 44
+  },
+  "historical_evidence_retained": true
+}

@@ -1,0 +1,14 @@
+{
+  "automation_id": "6acd967c15fc8191ade8407954c5b354",
+  "title": "三專案每日 TDD 教學",
+  "source": "cloud",
+  "url": "https://chatgpt.com/scheduled?automationId=6acd967c15fc8191ade8407954c5b354&automationSource=cloud",
+  "updated": "prompt only",
+  "enabled_after": true,
+  "frequency_after": "daily",
+  "time_settings_changed": false,
+  "full_prompt_equal_after_save_and_reload": true,
+  "prompt_sha256": "8b989da0df8554cb736d341cf74daf0fc965518fce50bd28538ee522eb443738",
+  "new_task_created": false,
+  "source_sha": "8b882696c5548accb9d98a32b27db35e11109c74"
+}

@@ -1,0 +1,274 @@
+diff --git a/migrations/20261018100114_update_pet.sql b/migrations/20261018100114_update_pet.sql
+index 49b126d..5133a91 100644
+--- a/migrations/20261018100114_update_pet.sql
++++ b/migrations/20261018100114_update_pet.sql
+@@ -1,44 +1,142 @@
+--- Add migration script here
+-ALTER TABLE pet_owner
+-    MODIFY COLUMN pet_owner_id TEXT not null;
+-
+-ALTER TABLE pet_profile
+-    DROP COLUMN owner_id;
+-    ADD COLUMN pet_owner_id TEXT not null;
+-    
+-ALTER TABLE pet_extra
+-    DROP COLUMN owner_id;
+-    ADD COLUMN pet_owner_id TEXT not null;
+-
+-ALTER TABLE pet_activity
+-    DROP COLUMN owner_id;
+-    ADD COLUMN pet_owner_id TEXT not null;
+-
+-ALTER TABLE pet_study
+-    DROP COLUMN owner_id;
+-    ADD COLUMN pet_owner_id TEXT not null;
+-
+-ALTER TABLE pet_life_log
+-    DROP COLUMN owner_id;
+-    ADD COLUMN pet_owner_id TEXT not null;
+-
+-ALTER TABLE pet_profile
+-    DROP CONSTRAINT pet_profile_owner_id_fkey,
+-    ADD CONSTRAINT pet_profile_owner_id_fkey FOREIGN KEY (pet_owner_id) REFERENCES pet_owner(id);
+-
+-ALTER TABLE pet_extra
+-    DROP CONSTRAINT pet_extra_owner_id_fkey,
+-    ADD CONSTRAINT pet_extra_owner_id_fkey FOREIGN KEY (pet_owner_id) REFERENCES pet_owner(id);
+-
+-ALTER TABLE pet_activity
+-    DROP CONSTRAINT pet_activity_owner_id_fkey,
+-    ADD CONSTRAINT pet_activity_owner_id_fkey FOREIGN KEY (pet_owner_id) REFERENCES pet_owner(id);
+-
+-ALTER TABLE pet_study
+-    DROP CONSTRAINT pet_study_owner_id_fkey,
+-    ADD CONSTRAINT pet_study_owner_id_fkey FOREIGN KEY (pet_owner_id) REFERENCES pet_owner(id);
+-
+-ALTER TABLE pet_life_log
+-    DROP CONSTRAINT pet_life_log_owner_id_fkey,
+-    ADD CONSTRAINT pet_life_log_owner_id_fkey FOREIGN KEY (pet_owner_id) REFERENCES pet_owner(id);
++-- SQLite migration. SQLx wraps this file in a transaction.
++-- Existing owner IDs must be explicit and valid. Never guess ownership.
++-- pet_owner.id is TEXT; pet/child integer IDs retain their original values.
++CREATE TABLE pet_migration_requires_valid_owner_ids (
++    valid INTEGER NOT NULL CHECK(valid = 1)
++);
++INSERT INTO pet_migration_requires_valid_owner_ids
++SELECT CASE WHEN EXISTS (
++    SELECT 1 FROM pet_owner WHERE id IS NULL OR trim(CAST(id AS TEXT)) = ''
++) THEN 0 ELSE 1 END;
+ 
++INSERT INTO pet_migration_requires_valid_owner_ids
++SELECT CASE WHEN EXISTS (
++    SELECT 1 FROM pet_profile AS item
++    LEFT JOIN pet_owner AS owner ON CAST(item.owner_id AS TEXT) = CAST(owner.id AS TEXT)
++    WHERE item.owner_id IS NULL OR owner.id IS NULL
++) THEN 0 ELSE 1 END;
++
++INSERT INTO pet_migration_requires_valid_owner_ids
++SELECT CASE WHEN EXISTS (
++    SELECT 1 FROM pet_extra AS item
++    LEFT JOIN pet_owner AS owner ON CAST(item.owner_id AS TEXT) = CAST(owner.id AS TEXT)
++    WHERE item.owner_id IS NULL OR owner.id IS NULL
++) THEN 0 ELSE 1 END;
++
++INSERT INTO pet_migration_requires_valid_owner_ids
++SELECT CASE WHEN EXISTS (
++    SELECT 1 FROM pet_activity AS item
++    LEFT JOIN pet_owner AS owner ON CAST(item.owner_id AS TEXT) = CAST(owner.id AS TEXT)
++    WHERE item.owner_id IS NULL OR owner.id IS NULL
++) THEN 0 ELSE 1 END;
++
++INSERT INTO pet_migration_requires_valid_owner_ids
++SELECT CASE WHEN EXISTS (
++    SELECT 1 FROM pet_study AS item
++    LEFT JOIN pet_owner AS owner ON CAST(item.owner_id AS TEXT) = CAST(owner.id AS TEXT)
++    WHERE item.owner_id IS NULL OR owner.id IS NULL
++) THEN 0 ELSE 1 END;
++
++INSERT INTO pet_migration_requires_valid_owner_ids
++SELECT CASE WHEN EXISTS (
++    SELECT 1 FROM pet_life_log AS item
++    LEFT JOIN pet_owner AS owner ON CAST(item.owner_id AS TEXT) = CAST(owner.id AS TEXT)
++    WHERE item.owner_id IS NULL OR owner.id IS NULL
++) THEN 0 ELSE 1 END;
++
++CREATE TABLE pet_owner_new (
++    id TEXT NOT NULL PRIMARY KEY CHECK(length(trim(id)) > 0),
++    name VARCHAR(255) NOT NULL,
++    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
++    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
++);
++INSERT INTO pet_owner_new(id,name,created_at,updated_at)
++SELECT CAST(id AS TEXT),name,created_at,updated_at FROM pet_owner;
++
++CREATE TABLE pet_profile_new (
++    id INTEGER PRIMARY KEY, -- PKNO
++    name VARCHAR(255) NOT NULL, -- 寵物名稱
++    ai_api_key VARCHAR(255), -- AI API 金鑰
++    species VARCHAR(255) NOT NULL, -- 物種
++    age INT, -- 年齡
++    is_default_closure BOOLEAN DEFAULT FALSE, -- 是否預設關籠
++    pet_owner_id TEXT NOT NULL REFERENCES pet_owner_new(id), -- 主人ID
++    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 建立時間
++    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- 更新時間
++);
++INSERT INTO pet_profile_new(id,name,ai_api_key,species,age,is_default_closure,pet_owner_id,created_at,updated_at)
++SELECT id,name,ai_api_key,species,age,is_default_closure,CAST(owner_id AS TEXT),created_at,updated_at FROM pet_profile ORDER BY id IS NULL,id;
++
++CREATE TABLE pet_extra_new (
++    id INTEGER PRIMARY KEY, -- PKNO
++    pet_id INT REFERENCES pet_profile_new(id), -- 寵物ID
++    pet_owner_id TEXT NOT NULL REFERENCES pet_owner_new(id), -- 主人ID
++    category VARCHAR(255), -- 類別(例如: 興趣、個性、喜好、其他)
++    content VARCHAR(255), -- 內容
++    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 建立時間
++    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- 更新時間
++);
++INSERT INTO pet_extra_new(id,pet_id,pet_owner_id,category,content,created_at,updated_at)
++SELECT id,pet_id,CAST(owner_id AS TEXT),category,content,created_at,updated_at FROM pet_extra ORDER BY id IS NULL,id;
++
++CREATE TABLE pet_activity_new (
++    id INTEGER PRIMARY KEY, -- PKNO
++    pet_id INT REFERENCES pet_profile_new(id), -- 寵物ID
++    pet_owner_id TEXT NOT NULL REFERENCES pet_owner_new(id), -- 主人ID
++    activity_type VARCHAR(255), -- 活動類型(例如: 散步、玩耍、訓練)
++    is_activity BOOLEAN DEFAULT FALSE, -- 是否進行中
++    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 建立時間
++    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- 更新時間
++);
++INSERT INTO pet_activity_new(id,pet_id,pet_owner_id,activity_type,is_activity,created_at,updated_at)
++SELECT id,pet_id,CAST(owner_id AS TEXT),activity_type,is_activity,created_at,updated_at FROM pet_activity ORDER BY id IS NULL,id;
++
++CREATE TABLE pet_study_new(
++    id INTEGER PRIMARY KEY, -- PKNO
++    pet_id INT REFERENCES pet_profile_new(id), -- 寵物ID
++    pet_owner_id TEXT NOT NULL REFERENCES pet_owner_new(id), -- 主人ID
++    study_item VARCHAR(255), -- 學習項目(例如: 尋找、刪除、整理)
++    is_study BOOLEAN DEFAULT FALSE, -- 是否進行中
++    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 建立時間
++    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- 更新時間
++);
++INSERT INTO pet_study_new(id,pet_id,pet_owner_id,study_item,is_study,created_at,updated_at)
++SELECT id,pet_id,CAST(owner_id AS TEXT),study_item,is_study,created_at,updated_at FROM pet_study ORDER BY id IS NULL,id;
++
++CREATE TABLE pet_life_log_new (
++    id INTEGER PRIMARY KEY, -- PKNO
++    pet_id INT REFERENCES pet_profile_new(id), -- 寵物ID
++    pet_owner_id TEXT NOT NULL REFERENCES pet_owner_new(id), -- 主人ID
++    do_item VARCHAR(255), -- 執行項目(例如: 散步、玩耍、訓練)
++    do_title TEXT, -- 標題(例如: 今天有散步，找到球)
++    content TEXT, -- 內容(例如: 今天的散步情況．找到球的過程)
++    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 建立時間
++    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- 更新時間
++);
++INSERT INTO pet_life_log_new(id,pet_id,pet_owner_id,do_item,do_title,content,created_at,updated_at)
++SELECT id,pet_id,CAST(owner_id AS TEXT),do_item,do_title,content,created_at,updated_at FROM pet_life_log ORDER BY id IS NULL,id;
++
++DROP TABLE pet_life_log;
++
++DROP TABLE pet_study;
++
++DROP TABLE pet_activity;
++
++DROP TABLE pet_extra;
++
++DROP TABLE pet_profile;
++
++DROP TABLE pet_owner;
++ALTER TABLE pet_owner_new RENAME TO pet_owner;
++
++ALTER TABLE pet_profile_new RENAME TO pet_profile;
++
++ALTER TABLE pet_extra_new RENAME TO pet_extra;
++
++ALTER TABLE pet_activity_new RENAME TO pet_activity;
++
++ALTER TABLE pet_study_new RENAME TO pet_study;
++
++ALTER TABLE pet_life_log_new RENAME TO pet_life_log;
++
++DROP TABLE pet_migration_requires_valid_owner_ids;
+diff --git a/scripts/acceptance/pet_migration.py b/scripts/acceptance/pet_migration.py
+new file mode 100644
+index 0000000..d93afbe
+--- /dev/null
++++ b/scripts/acceptance/pet_migration.py
+@@ -0,0 +1,78 @@
++"""Disposable SQLite/SQLx migration checks; never reads an existing database."""
++import os
++from pathlib import Path
++import sqlite3
++import subprocess
++import tempfile
++
++ROOT = Path(__file__).resolve().parents[2]
++VERSION = "20261018100114"
++CHILDREN = ["pet_extra", "pet_activity", "pet_study", "pet_life_log"]
++
++
++def migrate(db, source, expected=0):
++    cmd = ["cargo", "sqlx", "migrate", "run", "--source", str(source)]
++    result = subprocess.run(cmd, env={**os.environ, "DATABASE_URL": f"sqlite://{db}?mode=rwc"},
++                            capture_output=True, text=True)
++    print("COMMAND", " ".join(cmd), "EXIT", result.returncode)
++    print(result.stdout + result.stderr, end="")
++    assert (result.returncode == 0) == (expected == 0)
++    return result
++
++
++with tempfile.TemporaryDirectory(prefix="pet-migration-") as directory:
++    base = Path(directory)
++    old = base / "old"
++    old.mkdir()
++    for path in (ROOT / "migrations").glob("*.sql"):
++        if not path.name.startswith(VERSION):
++            (old / path.name).write_bytes(path.read_bytes())
++    for scenario in ["fresh", "upgrade", "null_owner_id", "orphan_owner"]:
++        print("CASE", scenario)
++        db = base / (scenario + ".sqlite")
++        if scenario != "fresh":
++            migrate(db, old)
++            with sqlite3.connect(db) as connection:
++                connection.execute("INSERT INTO pet_owner(id,name) VALUES(?, 'fixture-owner')",
++                                   (None if scenario == "null_owner_id" else 7,))
++                connection.execute("INSERT INTO pet_profile(id,name,species,owner_id) VALUES(10,'fixture-pet','cat',?)",
++                                   (8 if scenario == "orphan_owner" else 7,))
++                for table in CHILDREN:
++                    connection.execute(f"INSERT INTO {table}(id,pet_id,owner_id) VALUES(20,10,7)")
++        invalid = scenario in ["null_owner_id", "orphan_owner"]
++        result = migrate(db, ROOT / "migrations", expected=1 if invalid else 0)
++        with sqlite3.connect(db) as connection:
++            connection.execute("PRAGMA foreign_keys=ON")
++            if invalid:
++                assert "CHECK constraint failed" in result.stdout + result.stderr
++                assert connection.execute("SELECT count(*) FROM _sqlx_migrations WHERE version=?", (int(VERSION),)).fetchone()[0] == 0
++                assert connection.execute("SELECT count(*) FROM pet_profile").fetchone()[0] == 1
++                assert "owner_id" in [row[1] for row in connection.execute("PRAGMA table_info(pet_profile)")]
++                assert not connection.execute("SELECT name FROM sqlite_master WHERE name LIKE '%_new'").fetchall()
++                print("PASS invalid ownership rejected; original data/schema and migration history preserved")
++                continue
++            assert not connection.execute("PRAGMA foreign_key_check").fetchall()
++            if scenario == "upgrade":
++                assert connection.execute("SELECT id,name FROM pet_owner").fetchall() == [("7", "fixture-owner")]
++                assert connection.execute("SELECT id,pet_owner_id,name FROM pet_profile").fetchall() == [(10, "7", "fixture-pet")]
++                for table in CHILDREN:
++                    assert connection.execute(f"SELECT id,pet_id,pet_owner_id FROM {table}").fetchall() == [(20, 10, "7")]
++            connection.execute("INSERT INTO pet_owner(id,name) VALUES('fixture-new','new owner')")
++            connection.execute("INSERT INTO pet_profile(name,species,pet_owner_id) VALUES('new pet','cat','fixture-new')")
++            pet_id = connection.execute("SELECT id FROM pet_profile WHERE name='new pet'").fetchone()[0]
++            assert isinstance(pet_id, int)
++            for table in CHILDREN:
++                connection.execute(f"INSERT INTO {table}(pet_id,pet_owner_id) VALUES(?, 'fixture-new')", (pet_id,))
++                assert isinstance(connection.execute(f"SELECT id FROM {table} WHERE pet_id=?", (pet_id,)).fetchone()[0], int)
++            for sql in ["INSERT INTO pet_owner(name) VALUES('missing id')",
++                        "INSERT INTO pet_profile(name,species,pet_owner_id) VALUES('invalid','cat','missing')",
++                        "DELETE FROM pet_owner WHERE id='fixture-new'"]:
++                try:
++                    connection.execute(sql)
++                except sqlite3.IntegrityError:
++                    pass
++                else:
++                    raise AssertionError("missing ID/FK was accepted: " + sql)
++            assert not connection.execute("PRAGMA foreign_key_check").fetchall()
++            print("PASS migrated; preserved data; generated integer IDs; enforced owner IDs and foreign keys")
++print("PASS 4 scenarios; SQLite", sqlite3.sqlite_version)

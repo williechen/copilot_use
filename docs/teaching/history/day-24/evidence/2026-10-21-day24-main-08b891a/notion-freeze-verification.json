@@ -1,0 +1,17 @@
+{
+  "chat": {
+    "body_sha256": "844f8e10d0d49628fda00af2a4015bfa2451a7e88142a7092a5af64f966348e7",
+    "body_exact": true,
+    "title_archived": true
+  },
+  "pet": {
+    "body_sha256": "f257b4513052a8d69e8a871acc8b0aff2038aedb6e370a5f02f19f109e73d426",
+    "body_exact": true,
+    "title_archived": true
+  },
+  "analytics": {
+    "body_sha256": "1f8d8a271a9a8ccd42b56057973a7c48d1f696da6d2628fd7599b9d29c0ad91d",
+    "body_exact": true,
+    "title_archived": true
+  }
+}

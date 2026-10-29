@@ -1,0 +1,9 @@
+{
+  "actual_legacy_pg_backup": "user_confirmed_no_backup_available",
+  "native_pet_gui": "user clarified only script fix or startup; A/B native scenarios not yet verified",
+  "product_read_only": "user_reconfirmed; no PR/branch/push",
+  "ci_latest_attempt": 2,
+  "ci_conclusion": "failure",
+  "cloud_schedule_full_readback_equal": true,
+  "native_pet_human_report": "pet-human-clarification.json"
+}

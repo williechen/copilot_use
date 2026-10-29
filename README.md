@@ -1,16 +1,37 @@
-# copilot_use 文件分包
+# copilot_use｜三專案教學與工程文件
 
-依使用者選擇，已將來源 commit `59e30c9dabfcfa1eff036de3a81143521bfac41a` 的文件保存為六個獨立 ZIP，並刪除其 2,755 份原始文件；現行文章、規則、入口及學習狀態也僅保留在壓縮檔內。本頁為新的下載入口，不是原教學首頁。
+> 文件保存規則：已驗證的 Day43 教學正文依指定 [只留既有 ZIP](docs/teaching/daily/day-43/README.md)；未驗證原稿、規則、入口、狀態及證據保留原檔。Day44 尚無原稿，未補造；其後未驗證原稿不刪除。
 
-| 分包下載 | 原檔數 | ZIP 大小 |
-| --- | ---: | ---: |
-| [Chat 教學版本](docs/archive/packages-2026-10-30/01-chat-2026-10-30.zip) | 247 | 0.79 MiB |
-| [Pet 教學版本](docs/archive/packages-2026-10-30/02-pet-2026-10-30.zip) | 264 | 0.84 MiB |
-| [Analytics 教學版本](docs/archive/packages-2026-10-30/03-analytics-2026-10-30.zip) | 234 | 0.83 MiB |
-| [共用教學歷史與跨案證據](docs/archive/packages-2026-10-30/04-shared-teaching-2026-10-30.zip) | 1512 | 4.39 MiB |
-| [來源檢查與驗證紀錄](docs/archive/packages-2026-10-30/05-source-verification-2026-10-30.zip) | 438 | 3.01 MiB |
-| [規則、需求與索引對照](docs/archive/packages-2026-10-30/06-rules-and-indexes-2026-10-30.zip) | 60 | 0.38 MiB |
+> **2026-10-30 SSR 修補追驗：** 產品已更新至 `7ce39f0166a2120539e5908b33c88322a930c35a`，正式 main 已套用 Router imports。隔離原樣測試 UI SSR 21 項、server／SQLite／UI SSR 組合 60 項及 metadata／fmt 通過。[新 SHA 命令與 CI 快照](docs/source-review/day43-7ce39f0-2026-10-30/README.md)；遠端 CI 仍執行中，未稱全綠。其他 workspace 與 GUI／WASM／DB 保留各自原 SHA 的證據；next_day 三案 44、FIFO、last_full_comparison 不變，完整 Gate2 未結案。下方較早日期與 SHA 為歷史快照。
 
-[完整分包清單與還原方式](docs/archive/packages-2026-10-30/README.md) · [ZIP SHA256](docs/archive/packages-2026-10-30/SHA256SUMS) · [逐檔來源清單](docs/archive/packages-2026-10-30/manifest.json) · [刪除校驗紀錄](docs/archive/packages-2026-10-30/deletion-audit.json)。
+> 2026-10-29 驗收增量：[網頁排程已儲存、GUI／CI／舊庫實測](docs/source-review/acceptance-2026-10-29/README.md)。Chat 真瀏覽器另發現清除搜尋回歸，修補候選已通過；CI attempt #2 仍失敗，Pet 隔離 A/B 原生回籠生命週期已由人工操作及 SQLite 核對通過，其他原生情境／真實舊 PG 備份待驗。Gate2 未結案。
 
-沿用已完成的 ZIP，未再次壓縮；刪除前逐檔驗證內容與 SHA256。需要閱讀原文或讓既有教學工具讀取規則／狀態時，請先還原相應分包。此為文件封裝與原檔刪除，不代表新增 Day 或產品驗收；產品庫未改動。
+> 2026-10-29 Day43 本地實測：固定產品 `8b882696c5548accb9d98a32b27db35e11109c74`；[測試矩陣與原始證據](docs/source-review/local-validation-2026-10-29-day43/README.md) · [今日交付延遲原因](docs/source-review/local-validation-2026-10-29-day43/diagnosis.md)。下列舊 SHA 結果保留原範圍；next_day 維持 44，完整 GUI／CI／舊 DB 驗收未完成。
+
+**2026-10-29：已正式發布 [Day43 三案教學](docs/teaching/daily/day-43/README.md)（Gate1 文件交付）；最新產品已含 Day43 實作；完整 Gate2 未驗收。三案下一待發布篇為 Day44。**
+
+維護 Chat、Desktop Pet、Analytics 的需求、TDD 教學、重構方案、問題追蹤與驗證證據。產品程式與 CI 位於 [williechen/rust_ai_ring](https://github.com/williechen/rust_ai_ring)。
+
+## 專案與最新文章
+
+| 專案 | 專案首頁 | 最新文章 | 問題主線 |
+|---|---|---|---|
+| Chat | [專案大綱](docs/teaching/chat/README.md) | [Day43](docs/teaching/daily/day-43/chat-archive.md) | [原完成條件](docs/FUTURE_WORK.md#chat-auth) |
+| Pet | [專案大綱](docs/teaching/pet/README.md) | [Day43](docs/teaching/daily/day-43/pet-archive.md) | [原完成條件](docs/FUTURE_WORK.md#pet-lifecycle) |
+| Analytics | [專案大綱](docs/teaching/analytics/README.md) | [Day43](docs/teaching/daily/day-43/analytics-archive.md) | [原完成條件](docs/FUTURE_WORK.md#analytics-auth) |
+
+## 目前驗證
+
+固定產品 `8b882696c5548accb9d98a32b27db35e11109c74`（2026-10-29）。四 workspace metadata／check／clippy 通過；Chat SSR 原樣 1 項 fixture 失敗，補修候選 UI 21 項通過；Pet fmt 原樣失敗、workspace 清理後重試通過；兩案 WASM／Node／Analytics 隔離 PG 測試已執行。[詳細矩陣](docs/source-review/local-validation-2026-10-29-day43/README.md)。
+
+## 問題與文章追蹤
+
+[功能問題與完成條件](docs/FUTURE_WORK.md) · [文章勘誤／修訂](docs/teaching/current/ARTICLE_CORRECTIONS.md) · [歷史逐篇對照](docs/teaching/current/ARTICLE_STATUS.md)。問題沿既有 FIFO／D01–D09 追蹤；測試修復與功能驗收分開。
+
+## 開發與工程
+
+[來源目錄](docs/SOURCE_LAYOUT.md) · [本地啟動](docs/LOCAL_START.md) · [驗證命令](docs/LOCAL_VALIDATION.md) · [共用教學規則](docs/COMMON_LEARNING_RULES.md) · [各案 Refactor](docs/teaching/functional-refactoring/PROGRESS.md) · [跨案工程](docs/engineering/README.md)。
+
+## 需求與歷史
+
+[使用者流程](docs/requirements/USER_FLOWS.md) · [人員驗證](docs/requirements/AUTHENTICATION.md) · [架構](docs/SYSTEM_ARCHITECTURE.md) · [學習狀態](docs/learning-state.json) · [manifest](docs/teaching/current/manifest.json) · [歷史原文](docs/teaching/history/README.md) · [驗收封存](docs/teaching/archived/README.md)。原文與舊證據保留各自 SHA，未將歷史測試追認新版本。

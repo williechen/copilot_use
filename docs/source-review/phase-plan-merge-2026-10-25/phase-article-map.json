@@ -1,0 +1,720 @@
+[
+  {
+    "phase": "P0",
+    "primary_articles": [
+      "docs/teaching/history/day-02/analytics/notion/3f4e51d4509381bcbddccfba35f4b329.md",
+      "docs/teaching/history/day-02/chat/notion/3f4e51d450938170954ff09378afc11a.md",
+      "docs/teaching/history/day-03/analytics/notion/3f4e51d4509381ebb781cf9b2f2f0db6.md",
+      "docs/teaching/history/day-03/chat/notion/3f4e51d45093819c975fc886e09fe861.md",
+      "docs/teaching/history/day-04/analytics/notion/3f5e51d45093811a8ac5dafd3cd3bbcc.md",
+      "docs/teaching/history/day-04/pet/notion/3f5e51d4509381ebadf2d9adc6210e80.md",
+      "docs/teaching/history/day-05/pet/notion/3f5e51d4509381739b61d517b0772094.md",
+      "docs/teaching/history/day-06/analytics/notion/3f5e51d450938160a376fde5e2fad496.md",
+      "docs/teaching/history/day-08/analytics/notion/3f5e51d4509381f98c33c2df7ab97663.md",
+      "docs/teaching/history/day-09/analytics/notion/3f8e51d45093810d830ef3fd40e419f0.md",
+      "docs/teaching/history/day-09/chat/notion/3f8e51d45093814b992eea570411bd7d.md",
+      "docs/teaching/history/day-09/pet/notion/3f8e51d4509381c3b989f2365fd0c0af.md",
+      "docs/teaching/history/day-10/chat/notion/3f9e51d45093818a849dd8b1fbf2c045.md",
+      "docs/teaching/history/day-10/pet/notion/3f9e51d4509381f7ab32d0dc8b389a86.md",
+      "docs/teaching/history/day-11/chat/notion/3f9e51d4509381508c0dd3ca22cf5df7.md",
+      "docs/teaching/history/day-12/analytics/notion/3fae51d4509381ebb1e9f8482b5bf44e.md",
+      "docs/teaching/history/day-12/pet/notion/3fae51d4509381d0a80ddbbaf251fb03.md",
+      "docs/teaching/history/day-13/analytics/notion/3fae51d4509381808a9cd813423d52d1.md",
+      "docs/teaching/history/day-13/chat/notion/3fae51d4509381e499e5e02cfba58336.md",
+      "docs/teaching/history/day-14/analytics/notion/3fbe51d4509381f2a9a2e4b608706eea.md",
+      "docs/teaching/history/day-14/chat/notion/3fbe51d450938149af5dd68abc6109bd.md",
+      "docs/teaching/history/day-15/analytics/notion/3fbe51d4509381319460de180d9e173d.md",
+      "docs/teaching/history/day-15/chat/notion/3fbe51d450938130a3c0c93171105f3a.md",
+      "docs/teaching/history/day-16/analytics/notion/3fce51d45093813fa38ae37a47ae4959.md",
+      "docs/teaching/history/day-16/chat/notion/3fce51d450938143a0b9cc9a3f93860e.md",
+      "docs/teaching/history/day-16/pet/notion/3fce51d4509381e9aa03d633822eee89.md",
+      "docs/teaching/history/day-17/analytics/notion/3fce51d4509381ea871ec9c92da37c1b.md",
+      "docs/teaching/history/day-17/chat/notion/3fce51d45093818b913bebb8dab5ab65.md",
+      "docs/teaching/history/day-17/pet/notion/3fce51d4509381ca83e3e825f0313698.md",
+      "docs/teaching/history/day-18/analytics/notion/3fde51d4509381c2a0d5f60041137619.md",
+      "docs/teaching/history/day-18/chat/notion/3fde51d45093816bb36dd9099190d907.md",
+      "docs/teaching/history/day-18/pet/notion/3fde51d4509381bfa106ea4d9b190480.md",
+      "docs/teaching/history/day-19/analytics/github.md",
+      "docs/teaching/history/day-19/chat/github.md",
+      "docs/teaching/history/day-19/pet/github.md",
+      "docs/teaching/history/day-20/analytics/github.md",
+      "docs/teaching/history/day-20/chat/github.md",
+      "docs/teaching/history/day-20/pet/github.md",
+      "docs/teaching/history/day-21/analytics/github.md",
+      "docs/teaching/history/day-21/chat/github.md",
+      "docs/teaching/history/day-21/pet/github.md",
+      "docs/teaching/history/day-22/analytics/github.md",
+      "docs/teaching/history/day-22/chat/github.md",
+      "docs/teaching/history/day-22/pet/github.md",
+      "docs/teaching/history/day-23/analytics/github.md",
+      "docs/teaching/history/day-23/chat/github.md",
+      "docs/teaching/history/day-23/pet/github.md",
+      "docs/teaching/history/day-24/analytics/github.md",
+      "docs/teaching/history/day-24/chat/github.md",
+      "docs/teaching/history/day-24/pet/github.md",
+      "docs/teaching/history/day-25/analytics/notion/400e51d45093810796cbd6074c8d35c3.md",
+      "docs/teaching/history/day-25/archive/notion/chat.md",
+      "docs/teaching/history/day-25/archive/notion/pet.md",
+      "docs/teaching/history/day-26/analytics/github.md",
+      "docs/teaching/history/day-26/chat/github.md",
+      "docs/teaching/daily/day-26/pet.md",
+      "docs/teaching/history/day-27/analytics/github.md",
+      "docs/teaching/history/day-27/chat/github.md",
+      "docs/teaching/daily/day-27/pet.md",
+      "docs/teaching/daily/day-28/analytics.md",
+      "docs/teaching/daily/day-28/chat.md",
+      "docs/teaching/daily/day-28/pet.md",
+      "docs/teaching/history/day-29/analytics/github.md",
+      "docs/teaching/history/day-29/chat/github.md",
+      "docs/teaching/daily/day-29/pet.md",
+      "docs/teaching/daily/day-30/analytics.md",
+      "docs/teaching/daily/day-30/chat.md",
+      "docs/teaching/daily/day-30/pet.md",
+      "docs/teaching/daily/day-31/analytics.md",
+      "docs/teaching/daily/day-31/chat.md",
+      "docs/teaching/daily/day-31/pet.md",
+      "docs/teaching/daily/day-32/analytics.md",
+      "docs/teaching/daily/day-32/chat.md",
+      "docs/teaching/daily/day-32/pet.md",
+      "docs/teaching/daily/day-33/analytics.md",
+      "docs/teaching/daily/day-33/chat.md",
+      "docs/teaching/daily/day-33/pet.md",
+      "docs/teaching/daily/day-34/analytics.md",
+      "docs/teaching/daily/day-34/chat-r2.md",
+      "docs/teaching/daily/day-34/pet.md",
+      "docs/teaching/daily/day-35/analytics-r2.md",
+      "docs/teaching/daily/day-35/chat.md",
+      "docs/teaching/daily/day-35/pet.md",
+      "docs/teaching/daily/day-36/analytics-r2.md",
+      "docs/teaching/daily/day-36/chat-r2.md",
+      "docs/teaching/daily/day-36/pet-r3.md"
+    ],
+    "related_articles": [
+      "docs/teaching/history/day-04/chat/notion/3f5e51d45093811ab62acc4bc8fc83fa.md",
+      "docs/teaching/history/day-05/analytics/notion/3f5e51d45093813cabb7e6a48ee3a0f0.md",
+      "docs/teaching/history/day-05/chat/notion/3f5e51d45093817e93b6ea7c37c3852e.md",
+      "docs/teaching/history/day-06/chat/notion/3f5e51d45093818ab246f8fcdd0b39f6.md",
+      "docs/teaching/history/day-07/analytics/notion/3f5e51d450938138a33ddadedb5a5e98.md",
+      "docs/teaching/history/day-07/chat/notion/3f5e51d45093815c82c7e32b73b567fa.md",
+      "docs/teaching/history/day-08/chat/notion/3f5e51d45093814cb540cf6772e9b8d2.md",
+      "docs/teaching/history/day-10/analytics/notion/3f9e51d4509381269984c5f49a429b5d.md",
+      "docs/teaching/history/day-11/analytics/notion/3f9e51d45093814a8054d44c4ff9fa55.md"
+    ],
+    "source_findings": [
+      {
+        "label": "Chat Session route",
+        "path": "chat_apps/chat_server/src/lib.rs",
+        "line": 53,
+        "context": [
+          "    let guarded_ws = Router::new()",
+          "        .route(\"/ws/{room_id}\", any(ws::ws_handler))",
+          "        // 此 pool 僅給已存在的 WS handler 重驗 Session；不改其他路由的 State。",
+          "        .layer(axum::Extension(db.clone()))",
+          "        .route_layer(axum::middleware::from_fn_with_state(",
+          "            db.clone(),"
+        ],
+        "sha256": "86086f9306561151b3bf53f6aab7658a33f39be0f6522a8966b4e1f3e42d745f",
+        "phase": "P0/P1",
+        "finding": "正式 WS router 掛 Session middleware；有入口不等於逐房 ACL 完成。",
+        "url": "https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/chat_apps/chat_server/src/lib.rs#L53"
+      },
+      {
+        "label": "Chat revocation",
+        "path": "chat_apps/chat_server/src/ws.rs",
+        "line": 90,
+        "context": [
+          "    let (room_sender, mut room_events) = state.room_hub.subscribe(room_id.clone());",
+          "    let mut recheck = tokio::time::interval(Duration::from_secs(1));",
+          "    recheck.set_missed_tick_behavior(MissedTickBehavior::Delay);",
+          "",
+          "    loop {",
+          "        tokio::select! {"
+        ],
+        "sha256": "c366dac99b3f72ce5bdd7f940603788318d1727de767344ce5b028c1bc05d3eb",
+        "phase": "P0/P1",
+        "finding": "既有 WS 定期與收／發前重驗 Session；本輪不重跑競態測試。",
+        "url": "https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/chat_apps/chat_server/src/ws.rs#L90"
+      },
+      {
+        "label": "Chat ACL boundary",
+        "path": "chat_apps/chat_server/src/room_auth.rs",
+        "line": 16,
+        "context": [
+          ") -> Result<Response, StatusCode> {",
+          "    active_member(&pool, request.headers()).await?;",
+          "    Ok(next.run(request).await)",
+          "}",
+          "",
+          "#[cfg(test)]"
+        ],
+        "sha256": "8633e4df177a01f5a10ddf0d9cf515ac8d48c9508ada71f06947f6c93c1a7288",
+        "phase": "P0/P1",
+        "finding": "守門函式只見 active_member 後放行；此函式未核對 room_id 的管理／成員授權。",
+        "url": "https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/chat_apps/chat_server/src/room_auth.rs#L16"
+      },
+      {
+        "label": "Chat history UI",
+        "path": "chat_apps/chat_ui/src/lib.rs",
+        "line": 280,
+        "context": [
+          "            <p class=\"history-disclosure\" role=\"note\">",
+          "                \"歷史載入尚未接通：目前只顯示本次連線收到的訊息；重新整理不會載入已儲存訊息。\"",
+          "            </p>",
+          "            <div class=\"message-history\" aria-live=\"polite\">",
+          "                {move || {",
+          "                    if messages.get().is_empty() {"
+        ],
+        "sha256": "8a2462228ade8d6ad3b24873e1258e9bea3a48deffae33340e89d53c1b86f0d7",
+        "phase": "P0/P3",
+        "finding": "UI 仍明示歷史未接通；不能把「提示已做好」當歷史讀回完成。",
+        "url": "https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/chat_apps/chat_ui/src/lib.rs#L280"
+      },
+      {
+        "label": "Chat history Port",
+        "path": "chat_apps/chat_application/src/repository.rs",
+        "line": 25,
+        "context": [
+          "#[async_trait]",
+          "pub trait MessageRepository: Send + Sync {",
+          "    async fn create(&self, message: &ChatMessage) -> Result<(), RepositoryError>;",
+          "}"
+        ],
+        "sha256": "b3ff22194258c7ef8a6cd3cdaf5efc8c913807483dd2d350b33500cda31ae0db",
+        "phase": "P0/P3",
+        "finding": "MessageRepository 只定義 create；現有此 Port 沒有訊息歷史讀取方法。",
+        "url": "https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/chat_apps/chat_application/src/repository.rs#L25"
+      },
+      {
+        "label": "Pet restore caller",
+        "path": "pet_apps/pet_server/src/lib.rs",
+        "line": 192,
+        "context": [
+          "            tauri::async_runtime::spawn(async move {",
+          "                match store.uncaged().await {",
+          "                    Ok(pets) => {",
+          "                        for pet in pets {",
+          "                            // 每個 UUID 由既有 open() 建立獨立原生視窗與 Runtime。",
+          "                            // 單隻失敗不應讓其他未回籠寵物無法恢復。"
+        ],
+        "sha256": "3780d1f629bc0caa5e27503a85b5baec959c3fc76c06ee9c7bdb4416ee626dce",
+        "phase": "P0/P2",
+        "finding": "setup 已接未回籠清單迴圈；舊「僅恢復最後選擇」不是此 SHA 現況。",
+        "url": "https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/pet_apps/pet_server/src/lib.rs#L192"
+      },
+      {
+        "label": "Pet restore policy",
+        "path": "pet_apps/pet_persistence/src/lib.rs",
+        "line": 35,
+        "context": [
+          "        WHERE owner_id='local-owner'",
+          "            AND COALESCE(is_default_closure, 0)=0",
+          "        ORDER BY name",
+          "            , id\"#,",
+          "    )",
+          "    .fetch_all(pool)"
+        ],
+        "sha256": "5dd32d8ce7067ef6a8dc0ed387268c414fff46ca059d68bd143a322df19f47d9",
+        "phase": "P0/P2",
+        "finding": "此查詢按未回籠旗標過濾；不等於需求中獨立預設資格已完成。",
+        "url": "https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/pet_apps/pet_persistence/src/lib.rs#L35"
+      },
+      {
+        "label": "Pet direct close",
+        "path": "pet_apps/pet_server/src/lib.rs",
+        "line": 170,
+        "context": [
+          "",
+          "            // 保留生活窗原有 Destroyed 清理；本日不改回籠持久化政策。",
+          "            if window.label().starts_with(\"pet-\")",
+          "                && let tauri::WindowEvent::Destroyed = event",
+          "                && let Some(id) = window",
+          "                    .label()"
+        ],
+        "sha256": "3780d1f629bc0caa5e27503a85b5baec959c3fc76c06ee9c7bdb4416ee626dce",
+        "phase": "P0/P2",
+        "finding": "生活窗 Destroyed 路徑只清 Runtime；對照「直接關閉等同持久回籠」需求有差距。",
+        "url": "https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/pet_apps/pet_server/src/lib.rs#L170"
+      },
+      {
+        "label": "Pet dynamic label",
+        "path": "pet_apps/pet_server/src/pet_windows.rs",
+        "line": 33,
+        "context": [
+          "    let id = uuid::Uuid::parse_str(id).map_err(|_| \"寵物ID格式錯誤\")?;",
+          "    Ok(format!(\"pet-{}\", id.simple()))",
+          "}",
+          "pub fn open(app: &tauri::AppHandle, pet: &SavedPet) -> Result<(), String> {",
+          "    let name = label(&pet.id)?;",
+          "    let runtime = app.state::<Runtime>();"
+        ],
+        "sha256": "d07f2db516b6bc83dbe144a6a2d7acffbf0db24df888818d5de85086e41a746b",
+        "phase": "P0",
+        "finding": "生活窗實際採 pet-UUID label。",
+        "url": "https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/pet_apps/pet_server/src/pet_windows.rs#L33"
+      },
+      {
+        "label": "Pet roaming label",
+        "path": "pet_apps/pet_server/src/roam.rs",
+        "line": 12,
+        "context": [
+          "// 與 tauri.conf.json 的生活窗 label 一致，main 僅供控制台。",
+          "const PET_WINDOW_LABEL: &str = \"pet\";",
+          "fn roaming_window_label() -> &'static str {",
+          "    PET_WINDOW_LABEL",
+          "}",
+          ""
+        ],
+        "sha256": "434494adfbd58cb3765c269b6ad16d7ba26d87bd2fca666d02800a61e4b76034",
+        "phase": "P0",
+        "finding": "漫遊仍用固定 pet label；與動態生活窗 label 不同。",
+        "url": "https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/pet_apps/pet_server/src/roam.rs#L12"
+      },
+      {
+        "label": "Analytics live build",
+        "path": "analytics_apps/analytics_server/src/main.rs",
+        "line": 24,
+        "context": [
+          "",
+          "    let app = password_login::build(IngestState {",
+          "        pool,",
+          "        tokens: Arc::new(IngestTokens { chat, pet }),",
+          "    });",
+          ""
+        ],
+        "sha256": "95ba5cb074eb3d70e09547b3e00be57a8b7512781c63307ca37f7f57f56c9027",
+        "phase": "P0/P1",
+        "finding": "真正進程使用 password_login::build；不把 lib 裡未掛載的舊 helper 當正式入口。",
+        "url": "https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/analytics_apps/analytics_server/src/main.rs#L24"
+      },
+      {
+        "label": "Analytics query auth",
+        "path": "analytics_apps/analytics_server/src/lib.rs",
+        "line": 191,
+        "context": [
+          "    // 先驗人員 Session，再驗來源／事件類型，最後才碰統計資料。",
+          "    let raw = password_login::require_query_session(&state, &headers).await?;",
+          "    if !matches!(source.as_str(), \"web_chat\" | \"desktop_pet\") {",
+          "        return Err(StatusCode::BAD_REQUEST);",
+          "    }",
+          "    if !valid_event_type(&event_type) || event_type.contains('\\0') {"
+        ],
+        "sha256": "f80f1fc0f9b69434a18c1b55a57893b759577ec73629756087aa61f414e4eae8",
+        "phase": "P0/P1",
+        "finding": "精確類型查詢已改用人員 Session；來源 token 仍用在 ingest，不重做 Day36。",
+        "url": "https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/analytics_apps/analytics_server/src/lib.rs#L191"
+      },
+      {
+        "label": "Analytics route wiring",
+        "path": "analytics_apps/analytics_server/src/password_login.rs",
+        "line": 455,
+        "context": [
+          "            \"/api/v1/events/{source}/summary/{event_type}\",",
+          "            get(crate::source_kind_summary),",
+          "        )",
+          "        .route(\"/healthz\", get(crate::health))",
+          "        .route(\"/api/v1/events\", post(crate::ingest))",
+          "        .layer(DefaultBodyLimit::max(4096))"
+        ],
+        "sha256": "d675dc7188e76fb43740aa0073d954db0a76697ecebe653292c4b10e451173af",
+        "phase": "P0/P1",
+        "finding": "上述精確查詢 handler 確實掛在真正 build 的路由內。",
+        "url": "https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/analytics_apps/analytics_server/src/password_login.rs#L455"
+      },
+      {
+        "label": "Persistence CI scope",
+        "path": ".github/workflows/persistence.yml",
+        "line": 68,
+        "context": [
+          "      - name: Test analytics server with PostgreSQL",
+          "        run: DATABASE_URL=\"$ANALYTICS_DATABASE_URL\" cargo test --locked -p analytics-persistence --features postgres-integration",
+          "        working-directory: analytics_apps"
+        ],
+        "sha256": "2267d65f7a5961d0226f9693d88da925d309a7ea90690b4200cf2c4b3b6a85b0",
+        "phase": "P0/P11/P12",
+        "finding": "名為 analytics server 的步驟實際只選 analytics-persistence；不能據此追認 server PG targets。",
+        "url": "https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/.github/workflows/persistence.yml#L68"
+      }
+    ],
+    "coverage_status": "articles are teaching slices, not Gate verification"
+  },
+  {
+    "phase": "P1",
+    "primary_articles": [],
+    "related_articles": [
+      "docs/teaching/history/day-02/pet/notion/3f4e51d4509381e7ac5cea661af8c67d.md",
+      "docs/teaching/history/day-03/pet/notion/3f4e51d4509381c482a3c68721761dee.md",
+      "docs/teaching/history/day-06/analytics/notion/3f5e51d450938160a376fde5e2fad496.md",
+      "docs/teaching/history/day-11/pet/notion/3f9e51d450938152a147c931e3e945be.md",
+      "docs/teaching/history/day-12/analytics/notion/3fae51d4509381ebb1e9f8482b5bf44e.md",
+      "docs/teaching/history/day-13/analytics/notion/3fae51d4509381808a9cd813423d52d1.md",
+      "docs/teaching/history/day-13/pet/notion/3fae51d45093814dbdabee6deac48554.md",
+      "docs/teaching/history/day-14/analytics/notion/3fbe51d4509381f2a9a2e4b608706eea.md",
+      "docs/teaching/history/day-14/pet/notion/3fbe51d4509381e484f4eb9e1f98fc68.md",
+      "docs/teaching/history/day-15/pet/notion/3fbe51d4509381d68666d3031d1c8011.md",
+      "docs/teaching/history/day-16/analytics/notion/3fce51d45093813fa38ae37a47ae4959.md",
+      "docs/teaching/history/day-17/analytics/notion/3fce51d4509381ea871ec9c92da37c1b.md",
+      "docs/teaching/history/day-18/analytics/notion/3fde51d4509381c2a0d5f60041137619.md",
+      "docs/teaching/history/day-19/analytics/github.md",
+      "docs/teaching/history/day-20/analytics/github.md",
+      "docs/teaching/history/day-21/analytics/github.md",
+      "docs/teaching/history/day-22/analytics/github.md",
+      "docs/teaching/history/day-22/chat/github.md",
+      "docs/teaching/history/day-23/analytics/github.md",
+      "docs/teaching/history/day-23/chat/github.md",
+      "docs/teaching/history/day-24/analytics/github.md",
+      "docs/teaching/history/day-24/chat/github.md",
+      "docs/teaching/history/day-25/analytics/notion/400e51d45093810796cbd6074c8d35c3.md",
+      "docs/teaching/history/day-25/archive/notion/chat.md",
+      "docs/teaching/history/day-25/archive/notion/pet.md",
+      "docs/teaching/history/day-26/analytics/github.md",
+      "docs/teaching/history/day-26/chat/github.md",
+      "docs/teaching/history/day-27/chat/github.md",
+      "docs/teaching/daily/day-28/chat.md",
+      "docs/teaching/history/day-29/chat/github.md",
+      "docs/teaching/daily/day-30/chat.md",
+      "docs/teaching/daily/day-31/chat.md",
+      "docs/teaching/daily/day-34/analytics.md",
+      "docs/teaching/daily/day-34/chat-r2.md",
+      "docs/teaching/daily/day-36/analytics-r2.md",
+      "docs/teaching/daily/day-36/chat-r2.md"
+    ],
+    "source_findings": [
+      {
+        "label": "Chat Session route",
+        "path": "chat_apps/chat_server/src/lib.rs",
+        "line": 53,
+        "context": [
+          "    let guarded_ws = Router::new()",
+          "        .route(\"/ws/{room_id}\", any(ws::ws_handler))",
+          "        // 此 pool 僅給已存在的 WS handler 重驗 Session；不改其他路由的 State。",
+          "        .layer(axum::Extension(db.clone()))",
+          "        .route_layer(axum::middleware::from_fn_with_state(",
+          "            db.clone(),"
+        ],
+        "sha256": "86086f9306561151b3bf53f6aab7658a33f39be0f6522a8966b4e1f3e42d745f",
+        "phase": "P0/P1",
+        "finding": "正式 WS router 掛 Session middleware；有入口不等於逐房 ACL 完成。",
+        "url": "https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/chat_apps/chat_server/src/lib.rs#L53"
+      },
+      {
+        "label": "Chat revocation",
+        "path": "chat_apps/chat_server/src/ws.rs",
+        "line": 90,
+        "context": [
+          "    let (room_sender, mut room_events) = state.room_hub.subscribe(room_id.clone());",
+          "    let mut recheck = tokio::time::interval(Duration::from_secs(1));",
+          "    recheck.set_missed_tick_behavior(MissedTickBehavior::Delay);",
+          "",
+          "    loop {",
+          "        tokio::select! {"
+        ],
+        "sha256": "c366dac99b3f72ce5bdd7f940603788318d1727de767344ce5b028c1bc05d3eb",
+        "phase": "P0/P1",
+        "finding": "既有 WS 定期與收／發前重驗 Session；本輪不重跑競態測試。",
+        "url": "https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/chat_apps/chat_server/src/ws.rs#L90"
+      },
+      {
+        "label": "Chat ACL boundary",
+        "path": "chat_apps/chat_server/src/room_auth.rs",
+        "line": 16,
+        "context": [
+          ") -> Result<Response, StatusCode> {",
+          "    active_member(&pool, request.headers()).await?;",
+          "    Ok(next.run(request).await)",
+          "}",
+          "",
+          "#[cfg(test)]"
+        ],
+        "sha256": "8633e4df177a01f5a10ddf0d9cf515ac8d48c9508ada71f06947f6c93c1a7288",
+        "phase": "P0/P1",
+        "finding": "守門函式只見 active_member 後放行；此函式未核對 room_id 的管理／成員授權。",
+        "url": "https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/chat_apps/chat_server/src/room_auth.rs#L16"
+      },
+      {
+        "label": "Analytics live build",
+        "path": "analytics_apps/analytics_server/src/main.rs",
+        "line": 24,
+        "context": [
+          "",
+          "    let app = password_login::build(IngestState {",
+          "        pool,",
+          "        tokens: Arc::new(IngestTokens { chat, pet }),",
+          "    });",
+          ""
+        ],
+        "sha256": "95ba5cb074eb3d70e09547b3e00be57a8b7512781c63307ca37f7f57f56c9027",
+        "phase": "P0/P1",
+        "finding": "真正進程使用 password_login::build；不把 lib 裡未掛載的舊 helper 當正式入口。",
+        "url": "https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/analytics_apps/analytics_server/src/main.rs#L24"
+      },
+      {
+        "label": "Analytics query auth",
+        "path": "analytics_apps/analytics_server/src/lib.rs",
+        "line": 191,
+        "context": [
+          "    // 先驗人員 Session，再驗來源／事件類型，最後才碰統計資料。",
+          "    let raw = password_login::require_query_session(&state, &headers).await?;",
+          "    if !matches!(source.as_str(), \"web_chat\" | \"desktop_pet\") {",
+          "        return Err(StatusCode::BAD_REQUEST);",
+          "    }",
+          "    if !valid_event_type(&event_type) || event_type.contains('\\0') {"
+        ],
+        "sha256": "f80f1fc0f9b69434a18c1b55a57893b759577ec73629756087aa61f414e4eae8",
+        "phase": "P0/P1",
+        "finding": "精確類型查詢已改用人員 Session；來源 token 仍用在 ingest，不重做 Day36。",
+        "url": "https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/analytics_apps/analytics_server/src/lib.rs#L191"
+      },
+      {
+        "label": "Analytics route wiring",
+        "path": "analytics_apps/analytics_server/src/password_login.rs",
+        "line": 455,
+        "context": [
+          "            \"/api/v1/events/{source}/summary/{event_type}\",",
+          "            get(crate::source_kind_summary),",
+          "        )",
+          "        .route(\"/healthz\", get(crate::health))",
+          "        .route(\"/api/v1/events\", post(crate::ingest))",
+          "        .layer(DefaultBodyLimit::max(4096))"
+        ],
+        "sha256": "d675dc7188e76fb43740aa0073d954db0a76697ecebe653292c4b10e451173af",
+        "phase": "P0/P1",
+        "finding": "上述精確查詢 handler 確實掛在真正 build 的路由內。",
+        "url": "https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/analytics_apps/analytics_server/src/password_login.rs#L455"
+      }
+    ],
+    "coverage_status": "articles are teaching slices, not Gate verification"
+  },
+  {
+    "phase": "P2",
+    "primary_articles": [
+      "docs/teaching/history/day-04/chat/notion/3f5e51d45093811ab62acc4bc8fc83fa.md",
+      "docs/teaching/history/day-05/analytics/notion/3f5e51d45093813cabb7e6a48ee3a0f0.md",
+      "docs/teaching/history/day-06/chat/notion/3f5e51d45093818ab246f8fcdd0b39f6.md",
+      "docs/teaching/history/day-07/analytics/notion/3f5e51d450938138a33ddadedb5a5e98.md",
+      "docs/teaching/history/day-07/chat/notion/3f5e51d45093815c82c7e32b73b567fa.md",
+      "docs/teaching/history/day-08/chat/notion/3f5e51d45093814cb540cf6772e9b8d2.md",
+      "docs/teaching/history/day-10/analytics/notion/3f9e51d4509381269984c5f49a429b5d.md",
+      "docs/teaching/history/day-11/analytics/notion/3f9e51d45093814a8054d44c4ff9fa55.md"
+    ],
+    "related_articles": [
+      "docs/teaching/history/day-06/pet/notion/3f5e51d4509381f48e6ac9a9d7dd758a.md",
+      "docs/teaching/history/day-07/pet/notion/3f5e51d4509381cd8d7efeb14bfc1b45.md",
+      "docs/teaching/history/day-08/pet/notion/3f5e51d450938123b43be0fe0b543ade.md",
+      "docs/teaching/history/day-18/chat/notion/3fde51d45093816bb36dd9099190d907.md",
+      "docs/teaching/history/day-26/analytics/github.md",
+      "docs/teaching/daily/day-28/pet.md",
+      "docs/teaching/daily/day-29/pet.md",
+      "docs/teaching/daily/day-30/pet.md",
+      "docs/teaching/daily/day-35/pet.md",
+      "docs/teaching/daily/day-36/pet-r3.md"
+    ],
+    "source_findings": [
+      {
+        "label": "Pet restore caller",
+        "path": "pet_apps/pet_server/src/lib.rs",
+        "line": 192,
+        "context": [
+          "            tauri::async_runtime::spawn(async move {",
+          "                match store.uncaged().await {",
+          "                    Ok(pets) => {",
+          "                        for pet in pets {",
+          "                            // 每個 UUID 由既有 open() 建立獨立原生視窗與 Runtime。",
+          "                            // 單隻失敗不應讓其他未回籠寵物無法恢復。"
+        ],
+        "sha256": "3780d1f629bc0caa5e27503a85b5baec959c3fc76c06ee9c7bdb4416ee626dce",
+        "phase": "P0/P2",
+        "finding": "setup 已接未回籠清單迴圈；舊「僅恢復最後選擇」不是此 SHA 現況。",
+        "url": "https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/pet_apps/pet_server/src/lib.rs#L192"
+      },
+      {
+        "label": "Pet restore policy",
+        "path": "pet_apps/pet_persistence/src/lib.rs",
+        "line": 35,
+        "context": [
+          "        WHERE owner_id='local-owner'",
+          "            AND COALESCE(is_default_closure, 0)=0",
+          "        ORDER BY name",
+          "            , id\"#,",
+          "    )",
+          "    .fetch_all(pool)"
+        ],
+        "sha256": "5dd32d8ce7067ef6a8dc0ed387268c414fff46ca059d68bd143a322df19f47d9",
+        "phase": "P0/P2",
+        "finding": "此查詢按未回籠旗標過濾；不等於需求中獨立預設資格已完成。",
+        "url": "https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/pet_apps/pet_persistence/src/lib.rs#L35"
+      },
+      {
+        "label": "Pet direct close",
+        "path": "pet_apps/pet_server/src/lib.rs",
+        "line": 170,
+        "context": [
+          "",
+          "            // 保留生活窗原有 Destroyed 清理；本日不改回籠持久化政策。",
+          "            if window.label().starts_with(\"pet-\")",
+          "                && let tauri::WindowEvent::Destroyed = event",
+          "                && let Some(id) = window",
+          "                    .label()"
+        ],
+        "sha256": "3780d1f629bc0caa5e27503a85b5baec959c3fc76c06ee9c7bdb4416ee626dce",
+        "phase": "P0/P2",
+        "finding": "生活窗 Destroyed 路徑只清 Runtime；對照「直接關閉等同持久回籠」需求有差距。",
+        "url": "https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/pet_apps/pet_server/src/lib.rs#L170"
+      }
+    ],
+    "coverage_status": "articles are teaching slices, not Gate verification"
+  },
+  {
+    "phase": "P3",
+    "primary_articles": [
+      "docs/teaching/history/day-05/chat/notion/3f5e51d45093817e93b6ea7c37c3852e.md",
+      "docs/teaching/history/day-12/chat/notion/3fae51d45093812bbf88c3e7f51d6522.md"
+    ],
+    "related_articles": [],
+    "source_findings": [
+      {
+        "label": "Chat history UI",
+        "path": "chat_apps/chat_ui/src/lib.rs",
+        "line": 280,
+        "context": [
+          "            <p class=\"history-disclosure\" role=\"note\">",
+          "                \"歷史載入尚未接通：目前只顯示本次連線收到的訊息；重新整理不會載入已儲存訊息。\"",
+          "            </p>",
+          "            <div class=\"message-history\" aria-live=\"polite\">",
+          "                {move || {",
+          "                    if messages.get().is_empty() {"
+        ],
+        "sha256": "8a2462228ade8d6ad3b24873e1258e9bea3a48deffae33340e89d53c1b86f0d7",
+        "phase": "P0/P3",
+        "finding": "UI 仍明示歷史未接通；不能把「提示已做好」當歷史讀回完成。",
+        "url": "https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/chat_apps/chat_ui/src/lib.rs#L280"
+      },
+      {
+        "label": "Chat history Port",
+        "path": "chat_apps/chat_application/src/repository.rs",
+        "line": 25,
+        "context": [
+          "#[async_trait]",
+          "pub trait MessageRepository: Send + Sync {",
+          "    async fn create(&self, message: &ChatMessage) -> Result<(), RepositoryError>;",
+          "}"
+        ],
+        "sha256": "b3ff22194258c7ef8a6cd3cdaf5efc8c913807483dd2d350b33500cda31ae0db",
+        "phase": "P0/P3",
+        "finding": "MessageRepository 只定義 create；現有此 Port 沒有訊息歷史讀取方法。",
+        "url": "https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/chat_apps/chat_application/src/repository.rs#L25"
+      }
+    ],
+    "coverage_status": "articles are teaching slices, not Gate verification"
+  },
+  {
+    "phase": "P4",
+    "primary_articles": [],
+    "related_articles": [],
+    "source_findings": [
+      {
+        "label": "AI",
+        "path": "crates/ai_core/src/lib.rs",
+        "line": 37,
+        "context": [
+          "#[derive(Debug, Default)]",
+          "pub struct MockChatModel;",
+          "",
+          "#[async_trait]",
+          "impl ChatModel for MockChatModel {",
+          "    async fn chat(&self, request: ChatRequest) -> Result<ChatResponse, AiError> {"
+        ],
+        "sha256": "e6db6a1f3136d99f27896bc8291ca16b677ff4ae92f0c0edcfae90cd23b28e15",
+        "phase": "P4",
+        "finding": "目前此共用模型檔有 MockChatModel；不能作真 Provider 接線證據。",
+        "url": "https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/crates/ai_core/src/lib.rs#L37"
+      }
+    ],
+    "coverage_status": "articles are teaching slices, not Gate verification"
+  },
+  {
+    "phase": "P5",
+    "primary_articles": [],
+    "related_articles": [],
+    "source_findings": [],
+    "coverage_status": "articles are teaching slices, not Gate verification"
+  },
+  {
+    "phase": "P6",
+    "primary_articles": [],
+    "related_articles": [],
+    "source_findings": [],
+    "coverage_status": "articles are teaching slices, not Gate verification"
+  },
+  {
+    "phase": "P7",
+    "primary_articles": [],
+    "related_articles": [],
+    "source_findings": [],
+    "coverage_status": "articles are teaching slices, not Gate verification"
+  },
+  {
+    "phase": "P8",
+    "primary_articles": [],
+    "related_articles": [],
+    "source_findings": [],
+    "coverage_status": "articles are teaching slices, not Gate verification"
+  },
+  {
+    "phase": "P9",
+    "primary_articles": [],
+    "related_articles": [],
+    "source_findings": [],
+    "coverage_status": "articles are teaching slices, not Gate verification"
+  },
+  {
+    "phase": "P10",
+    "primary_articles": [],
+    "related_articles": [],
+    "source_findings": [],
+    "coverage_status": "articles are teaching slices, not Gate verification"
+  },
+  {
+    "phase": "P11",
+    "primary_articles": [],
+    "related_articles": [],
+    "source_findings": [
+      {
+        "label": "Persistence CI scope",
+        "path": ".github/workflows/persistence.yml",
+        "line": 68,
+        "context": [
+          "      - name: Test analytics server with PostgreSQL",
+          "        run: DATABASE_URL=\"$ANALYTICS_DATABASE_URL\" cargo test --locked -p analytics-persistence --features postgres-integration",
+          "        working-directory: analytics_apps"
+        ],
+        "sha256": "2267d65f7a5961d0226f9693d88da925d309a7ea90690b4200cf2c4b3b6a85b0",
+        "phase": "P0/P11/P12",
+        "finding": "名為 analytics server 的步驟實際只選 analytics-persistence；不能據此追認 server PG targets。",
+        "url": "https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/.github/workflows/persistence.yml#L68"
+      }
+    ],
+    "coverage_status": "articles are teaching slices, not Gate verification"
+  },
+  {
+    "phase": "P12",
+    "primary_articles": [],
+    "related_articles": [],
+    "source_findings": [
+      {
+        "label": "Persistence CI scope",
+        "path": ".github/workflows/persistence.yml",
+        "line": 68,
+        "context": [
+          "      - name: Test analytics server with PostgreSQL",
+          "        run: DATABASE_URL=\"$ANALYTICS_DATABASE_URL\" cargo test --locked -p analytics-persistence --features postgres-integration",
+          "        working-directory: analytics_apps"
+        ],
+        "sha256": "2267d65f7a5961d0226f9693d88da925d309a7ea90690b4200cf2c4b3b6a85b0",
+        "phase": "P0/P11/P12",
+        "finding": "名為 analytics server 的步驟實際只選 analytics-persistence；不能據此追認 server PG targets。",
+        "url": "https://github.com/williechen/rust_ai_ring/blob/5c713553daee4055738239f047d6c774fcc7a7a1/.github/workflows/persistence.yml#L68"
+      }
+    ],
+    "coverage_status": "articles are teaching slices, not Gate verification"
+  }
+]

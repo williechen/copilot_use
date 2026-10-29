@@ -1,0 +1,16 @@
+[
+  {
+    "command": [
+      "node",
+      "--test",
+      "pet_apps/pet_ui/tests/day33-open-controls-selects-origin.test.mjs",
+      "pet_apps/pet_ui/tests/duplicate-preview-contract.test.mjs",
+      "pet_apps/pet_ui/tests/scan-preview-contract.test.mjs",
+      "pet_apps/pet_ui/tests/day41-cage-by-id.test.mjs",
+      "pet_apps/pet_ui/tests/scan-preview-no-path.test.mjs",
+      "pet_apps/pet_ui/tests/day42-cage-status.test.mjs"
+    ],
+    "exit_code": 0,
+    "output": "TAP version 13\n# Subtest: pet window button selects its own pet before opening main\nok 1 - pet window button selects its own pet before opening main\n  ---\n  duration_ms: 2.974156\n  type: 'test'\n  ...\n# Subtest: control window only focuses itself, never changes selection\nok 2 - control window only focuses itself, never changes selection\n  ---\n  duration_ms: 1.928799\n  type: 'test'\n  ...\n# Subtest: selection failure does not report successful opening\nok 3 - selection failure does not report successful opening\n  ---\n  duration_ms: 29.761599\n  type: 'test'\n  ...\n# Subtest: control can cage one explicit UUID without changing selection\nok 4 - control can cage one explicit UUID without changing selection\n  ---\n  duration_ms: 3.71421\n  type: 'test'\n  ...\n# Subtest: native cage error reaches control caller\nok 5 - native cage error reaches control caller\n  ---\n  duration_ms: 1.13263\n  type: 'test'\n  ...\n# Subtest: each status query reaches the correct saved UUID and native result\nok 6 - each status query reaches the correct saved UUID and native result\n  ---\n  duration_ms: 3.612359\n  type: 'test'\n  ...\n# Subtest: native database failure is not reported as a successful cage state\nok 7 - native database failure is not reported as a successful cage state\n  ---\n  duration_ms: 1.132782\n  type: 'test'\n  ...\n# Subtest: \u91cd\u8907\u6a94\u6848 IPC \u53ea\u63a5\u53d7\u5f8c\u7aef\u6388\u6b0a root\uff0c\u4e0d\u50b3\u5165\u4efb\u610f\u8def\u5f91\nok 8 - \u91cd\u8907\u6a94\u6848 IPC \u53ea\u63a5\u53d7\u5f8c\u7aef\u6388\u6b0a root\uff0c\u4e0d\u50b3\u5165\u4efb\u610f\u8def\u5f91\n  ---\n  duration_ms: 3.336549\n  type: 'test'\n  ...\n# Subtest: scanFilePreview uses read-only command without path\nok 9 - scanFilePreview uses read-only command without path\n  ---\n  duration_ms: 5.320056\n  type: 'test'\n  ...\n# Subtest: \u6383\u63cf\u9810\u89bd\u4e0d\u5f97\u63a5\u53d7\u4f7f\u7528\u8005\u6307\u5b9a\u8def\u5f91\nok 10 - \u6383\u63cf\u9810\u89bd\u4e0d\u5f97\u63a5\u53d7\u4f7f\u7528\u8005\u6307\u5b9a\u8def\u5f91\n  ---\n  duration_ms: 5.318877\n  type: 'test'\n  ...\n1..10\n# tests 10\n# suites 0\n# pass 10\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 1547.297996\n"
+  }
+]

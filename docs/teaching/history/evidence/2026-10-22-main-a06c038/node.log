@@ -1,0 +1,73 @@
+TAP version 13
+# Subtest: 重複檔案 IPC 只接受後端授權 root，不傳入任意路徑
+not ok 1 - 重複檔案 IPC 只接受後端授權 root，不傳入任意路徑
+  ---
+  duration_ms: 4.718535
+  type: 'test'
+  location: '/home/willie/Documents/Codex/2026-10-22/github/work/validation/rust_ai_chat/apps/desktop_pet/frontend/tests/duplicate-preview-contract.test.mjs:11:1'
+  failureType: 'testCodeFailure'
+  error: 'URLSearchParams is not defined'
+  code: 'ERR_TEST_FAILURE'
+  name: 'ReferenceError'
+  stack: |-
+    evalmachine.<anonymous>:5:25
+    Script.runInContext (node:vm:149:12)
+    Script.runInNewContext (node:vm:154:17)
+    Object.runInNewContext (node:vm:310:38)
+    TestContext.<anonymous> (file:///home/willie/Documents/Codex/2026-10-22/github/work/validation/rust_ai_chat/apps/desktop_pet/frontend/tests/duplicate-preview-contract.test.mjs:31:6)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+# Subtest: scanFilePreview uses read-only command without path
+not ok 2 - scanFilePreview uses read-only command without path
+  ---
+  duration_ms: 2.970401
+  type: 'test'
+  location: '/home/willie/Documents/Codex/2026-10-22/github/work/validation/rust_ai_chat/apps/desktop_pet/frontend/tests/scan-preview-contract.test.mjs:8:1'
+  failureType: 'testCodeFailure'
+  error: 'URLSearchParams is not defined'
+  code: 'ERR_TEST_FAILURE'
+  name: 'ReferenceError'
+  stack: |-
+    evalmachine.<anonymous>:5:25
+    Script.runInContext (node:vm:149:12)
+    Script.runInNewContext (node:vm:154:17)
+    Object.runInNewContext (node:vm:310:38)
+    TestContext.<anonymous> (file:///home/willie/Documents/Codex/2026-10-22/github/work/validation/rust_ai_chat/apps/desktop_pet/frontend/tests/scan-preview-contract.test.mjs:17:6)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+# Subtest: 掃描預覽不得接受使用者指定路徑
+not ok 3 - 掃描預覽不得接受使用者指定路徑
+  ---
+  duration_ms: 11.205872
+  type: 'test'
+  location: '/home/willie/Documents/Codex/2026-10-22/github/work/validation/rust_ai_chat/apps/desktop_pet/frontend/tests/scan-preview-no-path.test.mjs:10:1'
+  failureType: 'testCodeFailure'
+  error: 'URLSearchParams is not defined'
+  code: 'ERR_TEST_FAILURE'
+  name: 'ReferenceError'
+  stack: |-
+    evalmachine.<anonymous>:5:25
+    Script.runInContext (node:vm:149:12)
+    Script.runInNewContext (node:vm:154:17)
+    Object.runInNewContext (node:vm:310:38)
+    TestContext.<anonymous> (file:///home/willie/Documents/Codex/2026-10-22/github/work/validation/rust_ai_chat/apps/desktop_pet/frontend/tests/scan-preview-no-path.test.mjs:21:6)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+1..3
+# tests 3
+# suites 0
+# pass 0
+# fail 3
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 807.002844

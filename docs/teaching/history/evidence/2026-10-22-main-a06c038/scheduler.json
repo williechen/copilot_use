@@ -1,0 +1,21 @@
+{
+  "task_id": "6acd967c15fc8191ade8407954c5b354",
+  "task_name": "三專案每日 TDD 教學",
+  "requested_model": "gpt-6.1-sol",
+  "requested_reasoning_effort": "medium",
+  "prompt_updated": true,
+  "prompt_full_readback_matches": true,
+  "effective_model_change_verified": false,
+  "observed_model_options": [
+    "GPT-6",
+    "GPT-5.6 Sol"
+  ],
+  "observed_reasoning": "中",
+  "status_before": "active",
+  "status_after": "active",
+  "schedule": "daily 06:00 Asia/Taipei",
+  "schedule_changed": false,
+  "duplicate_created": false,
+  "run_now_triggered": false,
+  "limitation": "Exact requested model is not selectable in existing ChatGPT cloud task conversation."
+}

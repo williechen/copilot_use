@@ -1,0 +1,262 @@
+    Blocking waiting for file lock on build directory
+   Compiling serde_core v1.0.229
+   Compiling syn v2.0.119
+   Compiling serde v1.0.229
+   Compiling smallvec v1.16.3
+   Compiling semver v1.0.28
+   Compiling toml_datetime v0.6.3
+   Compiling rustc_version v0.4.1
+   Compiling serde_spanned v0.6.9
+   Compiling toml_edit v0.20.2
+   Compiling cfg-expr v0.15.8
+   Compiling toml v0.8.2
+   Compiling system-deps v6.2.2
+    Checking parking_lot_core v0.9.12
+    Checking parking_lot v0.12.5
+    Checking serde_json v1.0.154
+    Checking tokio v1.54.0
+    Checking getrandom v0.4.3
+   Compiling yoke v0.8.3
+   Compiling thiserror-impl v1.0.69
+    Checking thiserror v1.0.69
+   Compiling zerovec v0.11.8
+   Compiling tracing-attributes v0.1.31
+    Checking icu_normalizer v2.3.0
+    Checking icu_properties v2.3.0
+   Compiling tinystr v0.8.4
+   Compiling icu_locale_core v2.3.0
+    Checking idna_adapter v1.2.2
+   Compiling potential_utf v0.1.6
+   Compiling zerotrie v0.2.5
+    Checking bitflags v2.13.2
+   Compiling icu_collections v2.3.0
+   Compiling icu_provider v2.3.1
+    Checking idna v1.1.0
+    Checking url v2.5.8
+   Compiling uuid v1.28.0
+   Compiling camino v1.2.6
+    Checking tracing v0.1.44
+   Compiling either v1.19.0
+   Compiling glib-sys v0.18.1
+    Checking serde_spanned v1.1.2
+    Checking toml_datetime v1.1.2+spec-1.1.0
+    Checking toml_writer v1.1.3+spec-1.1.0
+    Checking toml v1.1.8+spec-1.1.0
+   Compiling gobject-sys v0.18.0
+   Compiling siphasher v1.0.4
+   Compiling phf_shared v0.13.1
+   Compiling phf_generator v0.13.1
+   Compiling gio-sys v0.18.1
+   Compiling hashbrown v0.16.1
+   Compiling hashlink v0.11.1
+   Compiling futures-intrusive v0.5.0
+   Compiling rand v0.10.3
+   Compiling sqlx-core v0.9.0
+    Checking tokio-stream v0.1.19
+   Compiling proc-macro-utils v0.10.0
+   Compiling sqlx-postgres v0.9.0
+   Compiling sqlx-sqlite v0.9.0
+   Compiling server_fn_macro v0.8.12
+   Compiling reactive_graph v0.2.16
+   Compiling sqlx-macros-core v0.9.0
+   Compiling proc-macro-error-attr v1.0.4
+   Compiling syn v1.0.109
+    Checking any_spawner v0.3.0
+   Compiling gdk-sys v0.18.2
+   Compiling proc-macro-error v1.0.4
+    Checking hyper v1.12.0
+   Compiling sqlx-macros v0.9.0
+   Compiling quote-use-macros v0.9.0
+   Compiling manyhow-macros v0.14.1
+   Compiling reactive_stores_macro v0.4.4
+   Compiling phf_macros v0.13.1
+   Compiling pin-project-internal v1.1.13
+   Compiling tachys v0.2.19
+    Checking reactive_stores v0.4.4
+    Checking pin-project v1.1.13
+   Compiling manyhow v0.14.1
+    Checking sqlx v0.9.0
+   Compiling quote-use v0.9.0
+    Checking tokio-tungstenite v0.29.0
+    Checking hyper-util v0.1.21
+    Checking tower v0.5.3
+    Checking axum-core v0.5.6
+    Checking gloo-utils v0.2.0
+   Compiling proc-macro-crate v2.0.2
+   Compiling server_fn v0.8.13
+   Compiling time-core v0.1.9
+   Compiling num-conv v0.2.2
+    Checking axum v0.8.9
+   Compiling attribute-derive-macro v0.11.0
+   Compiling glib-macros v0.18.5
+    Checking gloo-net v0.6.0
+   Compiling server_fn_macro_default v0.8.6
+   Compiling phf_codegen v0.13.1
+   Compiling pango-sys v0.18.0
+   Compiling cairo-sys-rs v0.18.2
+   Compiling gdk-pixbuf-sys v0.18.0
+   Compiling typed-builder-macro v0.23.2
+   Compiling leptos_macro v0.8.19
+   Compiling darling_core v0.24.1
+   Compiling wasm_split_macros v0.2.2
+    Checking config v0.15.27
+   Compiling leptos_hot_reload v0.8.7
+    Checking typed-builder v0.23.2
+    Checking glib v0.18.5
+   Compiling attribute-derive v0.11.0
+   Compiling itertools v0.14.0
+    Checking codee v0.3.5
+   Compiling atk-sys v0.18.2
+   Compiling leptos v0.8.22
+    Checking wasm_split_helpers v0.2.3
+    Checking leptos_server v0.8.8
+    Checking leptos_config v0.8.10
+   Compiling darling_macro v0.24.1
+    Checking leptos_dom v0.8.8
+   Compiling darling v0.24.1
+   Compiling phf v0.13.1
+   Compiling string_cache_codegen v0.6.1
+   Compiling web_atoms v0.2.6
+   Compiling serde_with_macros v3.24.0
+   Compiling gtk-sys v0.18.2
+   Compiling toml_parser v1.1.5+spec-1.1.0
+    Checking gio v0.18.4
+   Compiling string_cache v0.9.0
+   Compiling selectors v0.38.0
+    Checking chat-domain v0.2.25 (/home/willie/Documents/Codex/2026-10-22/github/work/validation/rust_ai_chat/crates/chat_domain)
+   Compiling aho-corasick v1.1.5
+   Compiling derive_more-impl v2.1.1
+   Compiling cssparser-macros v0.7.1
+   Compiling regex-syntax v0.8.11
+   Compiling alloc-no-stdlib v3.0.0
+   Compiling alloc-stdlib v0.3.0
+   Compiling regex-automata v0.4.18
+   Compiling cssparser v0.37.0
+   Compiling derive_more v2.1.1
+   Compiling markup5ever v0.39.0
+   Compiling typeid v1.0.3
+   Compiling serde_derive_internals v0.29.1
+   Compiling deranged v0.5.9
+   Compiling rustc-hash v2.1.3
+   Compiling fnv v1.0.7
+   Compiling web-time v1.1.0
+   Compiling powerfmt v0.2.1
+   Compiling cfb v0.14.0
+   Compiling time v0.3.55
+   Compiling indexmap v1.9.3
+   Compiling schemars_derive v0.8.22
+   Compiling erased-serde v0.4.10
+   Compiling html5ever v0.39.0
+   Compiling regex v1.13.1
+    Checking pango v0.18.3
+    Checking gdk-pixbuf v0.18.5
+   Compiling brotli-decompressor v6.0.1
+    Checking cairo-rs v0.18.5
+   Compiling jsonptr v0.7.1
+   Compiling quick-xml v0.42.0
+   Compiling field-offset v0.3.6
+   Compiling toml_edit v0.19.15
+   Compiling cargo-platform v0.1.9
+   Compiling dunce v1.0.5
+   Compiling base64 v0.23.1
+    Checking phc v0.6.1
+   Compiling plist v1.10.2
+   Compiling proc-macro-crate v1.3.1
+   Compiling schemars v0.8.22
+   Compiling cargo_metadata v0.19.2
+   Compiling json-patch v4.2.0
+    Checking gdk v0.18.2
+   Compiling brotli v9.0.0
+   Compiling urlpattern v0.6.0
+   Compiling dom_query v0.28.0
+   Compiling serde-untagged v0.1.9
+    Checking memoffset v0.9.1
+   Compiling infer v0.22.0
+   Compiling serde_with v3.24.0
+   Compiling http v1.5.0
+   Compiling soup3-sys v0.5.0
+   Compiling javascriptcore-rs-sys v1.1.1
+   Compiling ctor v1.0.13
+   Compiling glob v0.3.4
+   Compiling gtk v0.18.2
+   Compiling tauri-utils v2.10.2
+   Compiling gtk3-macros v0.18.2
+    Checking password-hash v0.6.1
+    Checking atk v0.18.2
+   Compiling time-macros v0.2.32
+   Compiling webkit2gtk-sys v2.0.2
+   Compiling option-ext v0.2.0
+   Compiling dirs-sys v0.5.0
+    Checking argon2 v0.6.0
+   Compiling crc32fast v1.5.2
+   Compiling embed-resource v3.0.12
+   Compiling gdkx11-sys v0.18.2
+    Checking bitflags v1.3.2
+   Compiling tauri-winres v0.3.7
+   Compiling flate2 v1.1.10
+    Checking x11 v2.21.0
+   Compiling dirs v7.0.0
+    Checking shared v0.2.25 (/home/willie/Documents/Codex/2026-10-22/github/work/validation/rust_ai_chat/crates/shared)
+   Compiling cargo_toml v1.0.1
+    Checking dpi v0.1.2
+   Compiling tauri-build v2.7.3
+    Checking javascriptcore-rs v1.1.2
+    Checking soup3 v0.5.0
+    Checking raw-window-handle v0.6.2
+    Checking webkit2gtk v2.0.2
+   Compiling png v0.17.16
+    Checking libdbus-sys v0.2.7
+    Checking x11-dl v2.21.0
+    Checking cookie v0.18.2
+    Checking crossbeam-channel v0.5.17
+   Compiling dlopen2_derive v0.4.3
+    Checking dlopen2 v0.8.2
+   Compiling wry v0.57.0
+    Checking dbus v0.9.12
+   Compiling ico v0.5.0
+    Checking gdkx11 v0.18.2
+   Compiling tauri v2.12.4
+   Compiling png v0.18.1
+    Checking gdkwayland-sys v0.18.2
+    Checking pet-domain v0.2.25 (/home/willie/Documents/Codex/2026-10-22/github/work/validation/rust_ai_chat/crates/pet_domain)
+   Compiling tauri-codegen v2.7.3
+    Checking tao v0.37.1
+    Checking tauri-runtime v2.12.2
+    Checking keyboard-types v0.8.3
+   Compiling serialize-to-javascript-impl v0.1.2
+   Compiling leptos_router v0.8.17
+    Checking rtoolbox v0.0.6
+    Checking muda v0.20.0
+    Checking rpassword v7.5.4
+    Checking serialize-to-javascript v0.1.2
+    Checking tauri-runtime-wry v2.12.2
+   Compiling tauri-macros v2.7.3
+   Compiling desktop-pet v0.2.25 (/home/willie/Documents/Codex/2026-10-22/github/work/validation/rust_ai_chat/apps/desktop_pet)
+   Compiling leptos_router_macro v0.8.7
+   Compiling serde_repr v0.1.21
+    Checking heck v0.5.0
+    Checking ai-core v0.2.25 (/home/willie/Documents/Codex/2026-10-22/github/work/validation/rust_ai_chat/crates/ai_core)
+    Checking stats-server v0.2.25 (/home/willie/Documents/Codex/2026-10-22/github/work/validation/rust_ai_chat/apps/stats_server)
+error: this `if` statement can be collapsed
+   --> apps/stats_server/src/admin.rs:321:5
+    |
+321 | /     if let Some(key) = cookie_key(&headers) {
+322 | |         if let Ok(mut sessions) = state.sessions.lock() {
+323 | |             sessions.remove(&key);
+324 | |         }
+325 | |     }
+    | |_____^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#collapsible_if
+    = note: `-D clippy::collapsible-if` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(clippy::collapsible_if)]`
+help: collapse nested if block
+    |
+321 ~     if let Some(key) = cookie_key(&headers)
+322 ~         && let Ok(mut sessions) = state.sessions.lock() {
+323 |             sessions.remove(&key);
+324 ~         }
+    |
+
+error: could not compile `stats-server` (lib) due to 1 previous error
+warning: build failed, waiting for other jobs to finish...

@@ -1,0 +1,220 @@
+{
+  "publication_commit": "b79f92eafa08674901148f3ff4d363393169b39e",
+  "readback_at": "2026-10-23T12:46:40.574119+08:00",
+  "changed_paths": 30,
+  "full_changed_files_match": true,
+  "all10_completed_article_bodies_blob_and_sha256_preserved": true,
+  "next_day_and_prior_learning_state_unchanged_except_latest_validation_and_archive": true,
+  "files": [
+    {
+      "path": "docs/FUTURE_WORK.md",
+      "bytes": 13259,
+      "blob_sha": "e057173bdd74f8fe6bc6fcdec6a075ed0c5aeeaf",
+      "sha256": "21922a63639e5be82439725640a6ace70f7e4a5942cd5630410517ce7b416ebb",
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/learning-state.json",
+      "bytes": 126212,
+      "blob_sha": "811d8c4f081aacf15e60c44b1afdfbe0299abdc9",
+      "sha256": "8d661f3ffe7ba1f8d685c60f8d4850049e3667447e503de6a13bd45e2c8cbf06",
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/chat/README.md",
+      "bytes": 7609,
+      "blob_sha": "7cd64911e317735d263eed0694df2cdfb34b9d66",
+      "sha256": "8be2e2a847f19f5b907dbcc9e8b16776e418e85070df52b62d3a2d4e27121a9c",
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/current/STATUS.md",
+      "bytes": 5183,
+      "blob_sha": "a6c99c32162899e42ca76588b9da9e496ad01863",
+      "sha256": "88fc5ee91a14f650a9723812d9d047bdc51028eb26135831d4aeeee5c79a8ce7",
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/current/manifest.json",
+      "bytes": 43494,
+      "blob_sha": "8dfccf6e442a9089c99c5ba8a15abfd12de0feab",
+      "sha256": "424bab6fd4539e1de0cfd888e80cad880b4a37f894fe4ab2639dc5893b6d0150",
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/history/ARTICLES.json",
+      "bytes": 47390,
+      "blob_sha": "53ca97a88c1b4198a5ae9188e1cc15a2e15f1cfd",
+      "sha256": "40ef66cb5269af4ef88a958a4660a1dd67f4383f56be240e84962152272724f0",
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/history/day-15/chat/README.md",
+      "bytes": 1154,
+      "blob_sha": "f79740b00c7469a00c67611165151038b5268b74",
+      "sha256": "515314d88e43b6f69db615be11b8284118ce83250b7d9b738781397973fd095b",
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/history/day-17/chat/README.md",
+      "bytes": 1103,
+      "blob_sha": "6d6f9a1e4bfc5883db4d695977ba376bcd4170db",
+      "sha256": "1652324da9b3d078153b84a8edbc686390ce4caaedb3a72766cd31551c8fc217",
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/history/day-19/chat/README.md",
+      "bytes": 1126,
+      "blob_sha": "be01601787f04406e7a722fcf804b69a7babde22",
+      "sha256": "888c8578933c90daddb74fea1091522d4444b1becceeefdc7d283a91b6cfa529",
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/history/day-20/chat/README.md",
+      "bytes": 1088,
+      "blob_sha": "7071e605e4945354320416095db91c085237265f",
+      "sha256": "48721478710e606bf91b31b0700bc0e7997be4c4a137fe955c558bec4ab87a1b",
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/history/evidence/2026-10-23-all-articles-9c2b7cf/ALL_ARTICLES.md",
+      "bytes": 27373,
+      "blob_sha": "4b9b3f5e02b3b30aefef0f5a368ac6fdf92469e0",
+      "sha256": "c2cbae6862ddd44891f59956e3910449390b44c00d36853c9793ad1795d7bb53",
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/ALL_ARTICLES.md",
+      "bytes": 27151,
+      "blob_sha": "3cd44f75b3c62dafc137da13546cf3d2bd014a37",
+      "sha256": "f4a27c13edb5770ecdd6b40c08c20fd47cb4e6bdad1fe3ba0d28ce93ae40b560",
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/REPORT.md",
+      "bytes": 7382,
+      "blob_sha": "5a1c32840174640e615e1643b54108a5cc7b03fa",
+      "sha256": "926f6c541ae9a92f5e4cd099638016672ec9b37886859e4d80dac4ad02f77e0a",
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/all-articles-validation.json.gz",
+      "bytes": 182936,
+      "blob_sha": "0e02fa09835c7cc3c2af4a3bac27102d9186a1c1",
+      "sha256": "221bcb0c830d36dd9cd5552b83f26b0c4b692c33d73e5e72cace7c667a89ba3e",
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/archive-manifest.json",
+      "bytes": 9998,
+      "blob_sha": "aea65b820f6af5d2b1ddd1e511bfd4d3c25b9d1f",
+      "sha256": "de99f692c4ad61d2f1ee4a0f2560eae66d71b20ff8ff6f57312b6df4bd538358",
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/local-verification.json",
+      "bytes": 1266,
+      "blob_sha": "bfdf1c2fa36ec40a705aacb30d9027ea3d9f89c7",
+      "sha256": "8e0ff7993b2405f1e4342cbc675141bb147013d5f6d204aeeb32258f65ce4f08",
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/logs/after-browser-db.json",
+      "bytes": 183,
+      "blob_sha": "a687b914db3bba6b691b9023387d16d7833f61b1",
+      "sha256": "9ee77ee36b4d3a286e82b4cb7a4de35608785e3fab1af4351d6987a34529296c",
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/logs/browser-setup.json",
+      "bytes": 882,
+      "blob_sha": "1c70f9441d4a3cba9cb93050d0fda8d99b1a522b",
+      "sha256": "f7bf65491db237b2e84300491eddf008f3e8925fc8414be2b5c00250955546dd",
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/logs/browser-ui-results.json",
+      "bytes": 23296,
+      "blob_sha": "f037b5ee8b511c97efa5e1f860f752f9196492e3",
+      "sha256": "870d8d085817757e21e8ddb9ffcb06b28d2eec4b2e7a6ee67ca34a21f4b85b0b",
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/logs/build-artifacts.json",
+      "bytes": 767,
+      "blob_sha": "c4a2addb33c7ab368151ae7b6f14d66a29b2e3c4",
+      "sha256": "aefc73991b55ef4071472f32eb0a7dc0ea852a9241e5cfcc38dcc499b2074cc5",
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/logs/historical-fa-raw.json",
+      "bytes": 569,
+      "blob_sha": "35a811b709b1dfe67c3d9df8d560f7b0657a9ae0",
+      "sha256": "0f5fc7ebc831cf01591022dab7cc4567caedcd4a68fc2b10841184443b005161",
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/logs/sqlite-audit-results.json",
+      "bytes": 2237,
+      "blob_sha": "c491c8fbf89689d882e785adca163da82618ee66",
+      "sha256": "8af03e41ae59a29a1d5835735519e906d0faaaa91da93ee5f3029df58a5bf70c",
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/runtime.py",
+      "bytes": 2501,
+      "blob_sha": "1ce9cb92c6814590e09f8111f5c92e31795e2267",
+      "sha256": "c55d1baf036b5f6af288ad1da2cee37a6ca43f0cf88da5ada5d76e8731fed1a9",
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/screenshots/01-chinese-search.png",
+      "bytes": 21868,
+      "blob_sha": "bbf1b8722a4ba545981cee33f8109a635e58b848",
+      "sha256": "8902ed5db8bc317fb68d4c6ce7f51a10fb13e36bb3b3b2d30d547dc0f20b3311",
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/screenshots/02-refresh-error-retains-rooms.png",
+      "bytes": 21034,
+      "blob_sha": "92cc1b20b8ae41875d36a03ed91358ad6078f5bc",
+      "sha256": "0059987451af90eed42e3fe8a4102aad57ea778422dcaa665a5bf2238af041de",
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/screenshots/03-recovered-all-rooms.png",
+      "bytes": 24414,
+      "blob_sha": "282bcd96704cda07192e4e6224be57e38c7d5b7e",
+      "sha256": "747449257d316b1c48d2ab99ea7e67c0cf2035de8756a1ebb0a299d68fbaa7a4",
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/screenshots/04-selected-duplicate-room.png",
+      "bytes": 19977,
+      "blob_sha": "aec1310125142428f8689f58bc2d7f0ba84c011f",
+      "sha256": "72096f336cd4b8f9573b4b3894b967e361a5e140c426cbae35ade5a1cd855df3",
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/screenshots/05-browser-message.png",
+      "bytes": 19664,
+      "blob_sha": "94cd8c25a2d2256c96d627366f204b9580749bf6",
+      "sha256": "500a9f7ea57046118cd5a875edc08e3d7d709196bef3d5f33f00c8cfdc853937",
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/sqlite_audit.py",
+      "bytes": 6511,
+      "blob_sha": "a2e872441bc47059015c1bfb8f43012db74efbeb",
+      "sha256": "8002ed796114288a500f2c408b96bd90fa8cdc27c3b95f5a8f13bc33953b6e3e",
+      "full_bytes_match": true
+    },
+    {
+      "path": "docs/teaching/history/evidence/2026-10-23-browser-sqlite-9c2b7cf/summary.json",
+      "bytes": 748,
+      "blob_sha": "ecd039f339c18e96671699abe0cef676eeb265b1",
+      "sha256": "ea21b8f66f9c00de5fe9df34c8b2d18adef31cf73f531fe9db447e909a4127f4",
+      "full_bytes_match": true
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+[
+  {
+    "case": "chat_anonymous_account",
+    "actual": 401,
+    "expected": 401,
+    "passed": true
+  },
+  {
+    "case": "chat_legacy_login_redirect",
+    "actual": [
+      303,
+      "/signin"
+    ],
+    "expected": [
+      303,
+      "/signin"
+    ],
+    "passed": true
+  },
+  {
+    "case": "chat_signup_complete",
+    "actual": 303,
+    "expected": 303,
+    "passed": true
+  },
+  {
+    "case": "chat_signup_keeps_signed_out",
+    "actual": 401,
+    "expected": 401,
+    "passed": true
+  },
+  {
+    "case": "chat_login",
+    "actual": [
+      303,
+      "/account"
+    ],
+    "expected": [
+      303,
+      "/account"
+    ],
+    "passed": true
+  },
+  {
+    "case": "chat_account_create_room",
+    "actual": 201,
+    "expected": 201,
+    "passed": true
+  },
+  {
+    "case": "chat_invalid_form_room",
+    "actual": 422,
+    "expected": 422,
+    "passed": true
+  },
+  {
+    "case": "chat_invalid_form_no_insert",
+    "actual": 1,
+    "expected": 1,
+    "passed": true
+  },
+  {
+    "case": "chat_invalid_json_room",
+    "actual": 400,
+    "expected": 400,
+    "passed": true
+  },
+  {
+    "case": "chat_json_create_room",
+    "actual": 201,
+    "expected": 201,
+    "passed": true
+  },
+  {
+    "case": "chat_real_search",
+    "actual": true,
+    "expected": true,
+    "passed": true
+  }
+]

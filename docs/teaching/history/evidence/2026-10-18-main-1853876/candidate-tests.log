@@ -1,0 +1,269 @@
+    Blocking waiting for file lock on build directory
+   Compiling desktop-pet v0.2.17 (/home/willie/Documents/Codex/2026-10-18/referenced-chatgpt-conversation-this-is-an-2/work/rust_ai_chat/apps/desktop_pet)
+   Compiling ui v0.2.17 (/home/willie/Documents/Codex/2026-10-18/referenced-chatgpt-conversation-this-is-an-2/work/rust_ai_chat/crates/ui)
+   Compiling stats-server v0.2.17 (/home/willie/Documents/Codex/2026-10-18/referenced-chatgpt-conversation-this-is-an-2/work/rust_ai_chat/apps/stats_server)
+   Compiling server v0.2.17 (/home/willie/Documents/Codex/2026-10-18/referenced-chatgpt-conversation-this-is-an-2/work/rust_ai_chat/apps/server)
+   Compiling workspace-tests v0.2.17 (/home/willie/Documents/Codex/2026-10-18/referenced-chatgpt-conversation-this-is-an-2/work/rust_ai_chat/tests)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 54.44s
+     Running unittests src/lib.rs (target/debug/deps/desktop_pet-fd69bd5715128214)
+
+running 16 tests
+test file_organizer::tests::duplicate_preview_warns_when_file_is_replaced_by_symlink ... ok
+test file_organizer::tests::duplicate_preview_warns_when_file_size_changes_after_scan ... ok
+test file_organizer::tests::rejects_root_euid ... ok
+test file_organizer::tests::ids_are_opaque_not_absolute_paths ... ok
+test file_organizer::tests::rejects_file_as_authorized_root ... ok
+test file_organizer::tests::same_content_is_grouped_as_duplicate ... ok
+test file_organizer::tests::scans_regular_files_and_builds_size_candidates ... ok
+test file_organizer::tests::same_size_different_content_is_not_duplicate ... ok
+test file_organizer::tests::skips_symlink_instead_of_following_it ... ok
+test roam::tests::bounces_at_right_and_bottom_edges ... ok
+test roam::tests::day18_roaming_selects_pet_life_window ... ok
+test roam::tests::moves_inside_work_area ... ok
+test file_organizer::tests::unique_size_file_is_not_hashed_into_duplicate_group ... ok
+test roam::tests::oversized_window_is_pinned_without_panicking ... ok
+test roam::tests::supports_negative_monitor_origin ... ok
+test roam_setting_tests::roam_requires_explicit_opt_in ... ok
+
+test result: ok. 16 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (target/debug/deps/desktop_pet-ba50cd0c11052dcd)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/cleanup_event_contract.rs (target/debug/deps/cleanup_event_contract-c28c90a10109cedd)
+
+running 5 tests
+test failed_operation_is_not_counted ... ok
+test invalid_operation_id_never_falls_back_to_new_random_id ... ok
+test confirmation_without_filesystem_completion_is_not_success ... ok
+test preview_is_not_a_success_event ... ok
+test succeeded_operation_produces_stable_minimal_event ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/day5_codec_tests.rs (target/debug/deps/day5_codec_tests-346478b66264ed0e)
+
+running 5 tests
+test invalid_profile_cannot_be_encoded ... ok
+test optional_appearance_is_preserved ... ok
+test rejects_blank_name_on_decode ... ok
+test valid_five_fields_round_trip ... ok
+test rejects_invalid_json ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/pet_machine.rs (target/debug/deps/pet_machine-687f1381d6c5be87)
+
+running 4 tests
+test pet_starts_idle ... ok
+test interact_moves_idle_to_interacting ... ok
+test sleeping_pet_cannot_interact ... ok
+test wake_moves_sleeping_pet_back_to_idle ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/profile_contract.rs (target/debug/deps/profile_contract-57a40550b64ad4fb)
+
+running 4 tests
+test optional_override_keeps_other_fields_auto ... ok
+test missing_or_blank_fields_fail ... ok
+test only_five_fields_are_enough ... ok
+test species_is_extensible ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (target/debug/deps/desktop_pet_frontend-ddc3f7bb6314e588)
+
+running 8 tests
+test component::activity::tests::interacting_uses_animation_phase ... ok
+test component::activity::tests::sleeping_uses_animation_phase ... ok
+test component::activity::tests::idle_blink_has_priority ... ok
+test day16_scan_generation_tests::canceled_or_superseded_scan_cannot_restore_preview ... ok
+test duplicate_preview::tests::empty_preview_is_explicit_and_missing_contract_is_rejected ... ok
+test duplicate_preview::tests::summary_shows_group_sizes_without_private_paths ... ok
+test file_scan_view::tests::counts_are_visible_but_private_values_are_discarded ... ok
+test file_scan_view::tests::empty_is_explicit_and_incomplete_contract_is_rejected ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/persistence-9d3c7bbc52b5bc70)
+
+running 5 tests
+test tests::test_message_repository_rejects_missing_room ... ok
+test tests::test_message_schema_rejects_invalid_author_and_length ... ok
+test tests::test_message_repository_all_author_kinds ... ok
+test tests::test_room_repository_create_then_find ... ok
+test tests::test_room_repository_find_by_id ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.30s
+
+     Running unittests src/lib.rs (target/debug/deps/server-902630015518d2b0)
+
+running 13 tests
+test http::room_details_tests::invalid_input_and_database_failure_are_distinct ... ok
+test http::room_details_tests::list_rooms_returns_persisted_room ... ok
+test http::room_http_tests::database_failure_is_not_created ... ok
+test http::room_details_tests::returns_exact_saved_room_without_writing ... ok
+test ws::test::accepts_nonblank_content ... ok
+test ws::test::blank_room ... ok
+test ws::test::different_room ... ok
+test ws::test::matching_room ... ok
+test ws::test::rejects_blank_content ... ok
+test ws::test::typing_is_only_forwarded_to_connection_room ... ok
+test http::room_http_tests::invalid_room_names_never_write ... ok
+test http::room_http_tests::valid_room_returns_201_and_saved_id ... ok
+test ws::test::ws_message_requires_room_at_write_time ... ok
+
+test result: ok. 13 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.48s
+
+     Running unittests src/main.rs (target/debug/deps/server-cec9288f192a46c8)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/root_hub_contract.rs (target/debug/deps/root_hub_contract-25653c5eb044e153)
+
+running 4 tests
+test count_tracks_receiver_lifecycle ... ok
+test message_stays_inside_room ... ok
+test last_receiver_cleanup_allows_new_subscription ... ok
+test subscribers_share_events ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/stats_server-c653ab66b28243bf)
+
+running 16 tests
+test admin::tests::day18_activity_extends_valid_session_only ... ok
+test admin::tests::login_query_postgres_and_logout_flow ... ignored, requires dedicated ANALYTICS_TEST_DATABASE_URL with CREATE SCHEMA permission
+test admin::tests::origin_and_expired_sessions_fail_closed ... ok
+test day16_total_tests::total_uses_actual_committed_summary_counts ... ok
+test source_kind_summary_tests::authorization_and_filter_validation_precede_database_access ... ok
+test source_summary_tests::summary_rejects_cross_source_before_database_access ... ok
+test tests::event_type_rejects_noncanonical_boundaries ... ok
+test tests::existing_event_validation_rejects_whitespace ... ok
+test tests::invalid_event_does_not_reserve_dedup_key ... ok
+test tests::nil_event_id_is_not_accepted ... ok
+test tests::persist_outcomes_have_distinct_http_codes ... ok
+test tests::rejects_bad_source_version_and_event_type ... ok
+test tests::token_must_match_the_claimed_source ... ok
+test tests::valid_event_is_accepted_once_per_source_and_id ... ok
+test admin::tests::admin_login_guard_and_session_are_separate_from_source_token ... ok
+test admin::tests::day18_tcp_cookie_and_idle_expiry_move_together ... ok
+
+test result: ok. 15 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 2.18s
+
+     Running unittests src/main.rs (target/debug/deps/stats_server-a7a055181e145c53)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/idempotency_contract.rs (target/debug/deps/idempotency_contract-51641e91b72189bf)
+
+running 2 tests
+test duplicate_is_counted_once_across_retries ... ok
+test event_identity_deduplicates_per_source ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/postgres_event_store.rs (target/debug/deps/postgres_event_store-a36d70d0fa9ecd4b)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/ui-a62f0dfcdad0dd06)
+
+running 4 tests
+test chat_socket::tests::decodes_pong_event ... ok
+test day16_layout_tests::room_page_has_real_room_identity_and_multiline_composer ... ok
+test day16_room_search_tests::search_matches_chinese_names_and_preserves_ids ... ok
+test day16_room_search_tests::day18_query_filter_preserves_room_ids ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running analytics/event_kind_tests.rs (target/debug/deps/analytics_event_kind_tests-81df5d9389906b79)
+
+running 5 tests
+test rejects_blank_or_long_kind ... ok
+test accepts_normal_kind ... ok
+test validates_event_inputs ... ok
+test invalid_event_is_rejected ... ok
+test valid_event_remains_unimplemented ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+
+     Running analytics/http_contract_tests.rs (target/debug/deps/analytics_http_contract_tests-5cd11511d21d91bf)
+
+running 8 tests
+test invalid_source_is_400 ... ok
+test malformed_json_is_400 ... ok
+test health_is_200 ... ok
+test missing_schema_version_returns_422 ... ok
+test payload_over_4k_is_413 ... ok
+test unknown_field_is_422 ... ok
+test unsupported_schema_version_returns_400 ... ok
+test valid_event_still_returns_501 ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running analytics/postgres_ingest.rs (target/debug/deps/analytics_postgres_ingest-b32e7eff13f07c21)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running chat/persist_publish.rs (target/debug/deps/chat_persist_publish-51a32d3c7392d014)
+
+running 3 tests
+test send_message_creates_user_message ... ok
+test success_persists_before_publish_once ... ok
+test failed_persistence_never_publishes ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running chat/product_event_contract.rs (target/debug/deps/chat_product_event_contract-b5212bead1a9fc76)
+
+running 4 tests
+test invalid_message_id_is_rejected_not_replaced ... ok
+test same_saved_message_keeps_same_event_id_and_does_not_leak_content ... ok
+test database_failure_never_generates_event ... ok
+test success_generates_stable_minimal_event_only_after_persist ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests desktop_pet
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests persistence
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests server
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests stats_server
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests ui
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

@@ -1,0 +1,33 @@
+[
+  {
+    "name": "analytics_unit",
+    "cwd": "analytics_apps",
+    "command": [
+      "cargo",
+      "test",
+      "--locked",
+      "-p",
+      "analytics-server",
+      "--lib"
+    ],
+    "exit_code": 101,
+    "seconds": 15.6
+  },
+  {
+    "name": "analytics_postgres",
+    "cwd": "analytics_apps",
+    "command": [
+      "cargo",
+      "test",
+      "--locked",
+      "-p",
+      "analytics-server",
+      "-p",
+      "analytics-persistence",
+      "--features",
+      "postgres-integration"
+    ],
+    "exit_code": 101,
+    "seconds": 18.48
+  }
+]

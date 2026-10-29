@@ -1,0 +1,48 @@
+ Downloading crates ...
+  Downloaded rustls v0.23.46
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on build directory
+   Compiling rustls v0.23.46
+   Compiling getrandom v0.3.4
+   Compiling tempfile v3.27.0
+   Compiling prost-build v0.14.4
+   Compiling tonic-prost-build v0.14.6
+   Compiling analytics-transport v0.2.1 (/home/willie/Documents/copilot_use/crates/analytics_transport)
+   Compiling tokio-rustls v0.26.6
+   Compiling hyper-rustls v0.27.10
+   Compiling rustls-platform-verifier v0.7.1
+   Compiling reqwest v0.13.5
+   Compiling reqwest v0.12.28
+   Compiling opentelemetry-http v0.33.1
+   Compiling tonic v0.14.6
+   Compiling opentelemetry-otlp v0.33.1
+   Compiling copilot-telemetry v0.2.1 (/home/willie/Documents/copilot_use/crates/telemetry)
+   Compiling openai-adapter v0.2.1 (/home/willie/Documents/copilot_use/crates/ai_core)
+   Compiling tonic-prost v0.14.6
+   Compiling mcp-bridge v0.2.1 (/home/willie/Documents/copilot_use/crates/mcp_bridge)
+   Compiling day9-pet v0.2.1 (/home/willie/Documents/copilot_use/crates/pet_runtime)
+   Compiling persistence v0.2.1 (/home/willie/Documents/copilot_use/crates/persistence)
+   Compiling day9-analytics v0.2.1 (/home/willie/Documents/copilot_use/apps/stats_server)
+    Finished `test` profile [unoptimized] target(s) in 28.58s
+     Running unittests src/lib.rs (target/debug/deps/day9_analytics-6f7b3f29ec6b9a78)
+
+running 16 tests
+test application::tests::malformed_event_never_reaches_repository_and_storage_failure_is_not_success ... ok
+test grpc::tests::database_failure_is_unavailable_without_success_ack_or_sse ... ok
+test grpc::tests::real_grpc_batch_auth_conflict_concurrency_and_http_query ... ok
+test insights::tests::generated_numbers_and_claims_come_only_from_verified_snapshot_facts ... ok
+test insights::tests::proposal_is_bounded_and_cannot_change_target ... ok
+test persistence::tests::uuid_domain_event_roundtrips_through_native_and_varchar_storage ... ok
+test tests::archived_event_is_not_resurrected_by_retry_and_can_be_restored ... ok
+test tests::concurrent_delivery_of_same_event_is_idempotent ... ok
+test tests::conflicting_retry_is_rejected ... ok
+test tests::missing_auth_rejected ... ok
+test tests::same_source_event_counts_once_even_after_new_store ... ok
+test tests::summary_counts_per_source_and_event_type ... ok
+test tests::two_sources_same_event_id_count_separately ... ok
+test topics::tests::withdrawal_before_delivery_and_retry_stays_excluded_after_admin_restore ... ok
+test grpc::tests::real_sqlite_outboxes_retry_and_ack_only_committed_grpc_events ... ok
+test grpc::tests::sse_observes_commit_not_rollback_dedup_and_reconnect_snapshot ... ok
+
+test result: ok. 16 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.28s
+

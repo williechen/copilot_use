@@ -1,0 +1,16 @@
+{
+  "id": "3f8e51d45093816e96edd35b83543ed3",
+  "title": "2026-10-13｜正式補跑｜Analytics｜來源與版本驗證測試",
+  "text": "Here is the result of \"fetch\" for the Page with URL https://app.notion.com/p/3f8e51d45093816e96edd35b83543ed3 as of 2026-10-13T12:45:50.573Z:\n<page url=\"https://app.notion.com/p/3f8e51d45093816e96edd35b83543ed3\">\n<ancestor-path>\n<parent-page url=\"https://app.notion.com/p/bf5d685db7fc46b58d0069347f5525db\" title=\"封存教學索引\"/>\n<ancestor-2-page url=\"https://app.notion.com/p/3f3e51d45093817eafaee0cfc9ea4cc8\" title=\"統計儀錶板｜聊天室 × 桌面寵物\"/>\n<ancestor-3-page url=\"https://app.notion.com/p/3f2e51d4509381ddb8a8ce7cb4cd3e60\" title=\"Rust AI 三專案｜共同學習規則與前進目標\"/>\n</ancestor-path>\n<properties>\n{\"title\":\"2026-10-13｜正式補跑｜Analytics｜來源與版本驗證測試\"}\n</properties>\n<iconMetadata>null</iconMetadata>\n<content>\n2026-10-13 手動執行每日教學；P0。rust\\_ai\\_chat main SHA 9f01668900e6b560a43f06a066d70546b0118c79；copilot\\_use 教學分支 SHA 315a0d8fa6105e63e8af7d4d8e439d9263677b5b。當次 CI 6/6 Workflow 成功、18/18 Check Runs 成功。教學預估20分鐘，三專案合計60分鐘。原頁與舊 Day 完全保留。\n\n## 1. 學習大綱\n\n最新 main 的 nil UUID 已通過驗證，舊內容不得重教。今天沿用 apps/stats\\_server/src/[lib.rs](http://lib.rs) 的 EventInput 和 valid\\_event，補上來源、版本及空白事件類型的負向測試。產品目標固定 PostgreSQL 與 gRPC/Protobuf 事件上報；Dashboard HTTP JSON/SSE。\n\n## 2. 實作內容\n\n在現有 stats\\_server 的 tests 模組直接加這個完整測試函式，沿用原有 use super::\\*，不新增型別或 Port。\n\n```rs\n#[test]\nfn rejects_bad_source_version_and_event_type() {\n    let mut input = EventInput {\n        schema_version: 1,\n        event_id: Uuid::new_v4(),\n        source_app: \"web_chat\".into(),\n        event_type: \"chat.message.persisted\".into(),\n    };\n    assert!(valid_event(&input));\n    input.source_app = \"invalid_source\".into();\n    assert!(!valid_event(&input));\n    input.source_app = \"desktop_pet\".into();\n    input.schema_version = 2;\n    assert!(!valid_event(&input));\n    input.schema_version = 1;\n    input.event_type = \"   \".into();\n    assert!(!valid_event(&input));\n}\n```\n\n目前原始碼的 ingest 對合法事件依然回 NOT\\_IMPLEMENTED 501；不能假裝具備 gRPC、認證或持久化 ACK。來源字串輸入驗證不等於可信憑證驗證。下一步在原開發項內補加 tonic/prost gRPC Adapter、PostgreSQL 唯一與衝突處理、持久提交後 ACK、SSE committed event 通知；避免新建重複開發項。\n\n### 必要實作補充\n\nN/A。當前純輸入驗證已足夠容納測試；持久資料與憑證應於既有 stats\\_server 對應 adapter 實作，保留 domain/application 邊界。不可把 InMemoryDeduplicator 視為 durable store。\n\n## 3. 套件版本\n\napps/stats\\_server/Cargo.toml 現有 axum、serde、tokio、uuid workspace，未加 tonic/prost；本測試不增依賴。官方最新 stable、MSRV、安全公告及 protobuf/toolchain 相容尚未核對，記錄為未確認，不冒稱已完成版本核對。\n\n## 4. 驗證項目\n\n原 main CI 6/6 Workflow Success、18/18 Checks Success；新增測試未提交、未執行。建議 cargo test -p stats-server rejects\\_bad\\_source\\_version\\_and\\_event\\_type；預期四種檢查結果與測試斷言一致。未來需確認身份不可信來源拒絕、batch 大小、PostgreSQL transaction/rollback、並發去重及重啟、identity conflict、DB 失敗不得成功 ACK、HTTP/SSE 真正提交後更新；正式驗收獨立判定。\n</content>\n</page>",
+  "url": "https://app.notion.com/p/3f8e51d45093816e96edd35b83543ed3?pvs=204",
+  "metadata": {
+    "type": "page"
+  },
+  "cover": null,
+  "icon": null,
+  "path": "Rust AI 三專案｜共同學習規則與前進目標 / 統計儀錶板｜聊天室 × 桌面寵物",
+  "verification": {
+    "state": "unverified"
+  },
+  "page_last_edited_at": "2026-10-13T12:45:50.573Z"
+}

@@ -1,0 +1,174 @@
+{
+  "date": "2026-10-17",
+  "scope": "synchronize live teaching rules, entries, indexes, source observations and local documents; preserve frozen lessons and executable code",
+  "reference_sha": "98f30d8b3593d80103b1a4bdbb9f0cb8cb08069e",
+  "github_base_commit": "681766278f4435bce91b251335f45b7399277124",
+  "notion_readback": [
+    {
+      "id": "3f2e51d4-5093-81dd-b8a8-ce7cb4cd3e60",
+      "childrenUnchanged": true,
+      "oldHomeClaim": false,
+      "hasRemoval": true,
+      "newSHA": true
+    },
+    {
+      "id": "3f3e51d4-5093-807d-a638-c336e857543a",
+      "childrenUnchanged": true,
+      "oldHomeClaim": false,
+      "hasRemoval": true,
+      "newSHA": true
+    },
+    {
+      "id": "3f3e51d4-5093-8067-923a-e5a424d30950",
+      "childrenUnchanged": true,
+      "oldHomeClaim": false,
+      "hasRemoval": true,
+      "newSHA": true
+    },
+    {
+      "id": "3f3e51d4-5093-817e-afae-e0cfc9ea4cc8",
+      "childrenUnchanged": true,
+      "oldHomeClaim": false,
+      "hasRemoval": true,
+      "newSHA": true
+    }
+  ],
+  "frozen_day15_day16": [
+    {
+      "id": "3fce51d4-5093-8143-a0b9-cc9a3f93860e",
+      "bodyUnchanged": true
+    },
+    {
+      "id": "3fce51d4-5093-81e9-aa03-d633822eee89",
+      "bodyUnchanged": true
+    },
+    {
+      "id": "3fce51d4-5093-813f-a38a-e37a47ae4959",
+      "bodyUnchanged": true
+    },
+    {
+      "id": "3fbe51d4-5093-8130-a3c0-c93171105f3a",
+      "bodyUnchanged": true
+    },
+    {
+      "id": "3fbe51d4-5093-81d6-8666-d3031d1c8011",
+      "bodyUnchanged": true
+    },
+    {
+      "id": "3fbe51d4-5093-8131-9460-de180d9e173d",
+      "bodyUnchanged": true
+    }
+  ],
+  "next_day": {
+    "chat": 17,
+    "pet": 17,
+    "analytics": 17
+  },
+  "source_ci_observation": [
+    {
+      "name": "test-pet-domain",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39024711866/job/117373314531"
+    },
+    {
+      "name": "test-persistence",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39024711917/job/117373314481"
+    },
+    {
+      "name": "test-stats-server",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39024711866/job/117373314466"
+    },
+    {
+      "name": "test-desktop-pet",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39024711866/job/117373314461"
+    },
+    {
+      "name": "test-chat-application",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39024711866/job/117373314458"
+    },
+    {
+      "name": "test-ui",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39024711866/job/117373314455"
+    },
+    {
+      "name": "test-server",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39024711866/job/117373314426"
+    },
+    {
+      "name": "test-shared",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39024711866/job/117373314392"
+    },
+    {
+      "name": "test-ai-core",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39024711866/job/117373314384"
+    },
+    {
+      "name": "check-dashboard",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39024711895/job/117373314372"
+    },
+    {
+      "name": "test-chat-domain",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39024711866/job/117373314242"
+    },
+    {
+      "name": "build-dashboard",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39024711895/job/117373314238"
+    },
+    {
+      "name": "check-chat",
+      "status": "in_progress",
+      "conclusion": null,
+      "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39024711896/job/117373314213"
+    },
+    {
+      "name": "check-pet",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39024711862/job/117373314124"
+    },
+    {
+      "name": "build-pet",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39024711862/job/117373314105"
+    },
+    {
+      "name": "build-chat",
+      "status": "in_progress",
+      "conclusion": null,
+      "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39024711896/job/117373314057"
+    },
+    {
+      "name": "test-node",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/williechen/rust_ai_chat/actions/runs/39024711860/job/117373313912"
+    }
+  ],
+  "runtime_restarted": false,
+  "product_code_revalidated": false,
+  "local_document_sync": "restore tracked README.md and docs from published documentation commit; preserve local main code and existing branch history"
+}

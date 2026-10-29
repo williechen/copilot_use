@@ -1,0 +1,25 @@
+Browser tab: 2, Title: "Rust AI Chat", URL: "http://127.0.0.1:3002/".
+1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3002/
+	2 container
+		3 heading Rust AI Chat, Value: 1
+			4 link Description: Rust AI Chat, Value: 127.0.0.1:3002/
+		5 text Welcome to Rust AI Chat!
+		6 link Description: 登入, Value: 127.0.0.1:3002/signin
+		7 heading 房間列表, Value: 2
+			8 text 房間列表
+		9 search text field (settable) Description: 搜尋房間, Value: Rust 技術交流
+		10 button 查詢房間
+		11 button 讀取／重新整理房間
+		12 text 查詢完成，請選擇房間
+		13 content list
+			14 container
+				15 AXListMarker • 
+				16 link Description: Rust 技術交流, Value: 127.0.0.1:3002/room/d48ee74e-b097-4d96-b7ac-35298bf46189
+			17 container
+				18 AXListMarker • 
+				19 link Description: Rust 技術交流, Value: 127.0.0.1:3002/room/eec8dc8a-8533-412a-99fa-59d1c55500dd
+			20 container
+				21 AXListMarker • 
+				22 link Description: Rust 技術交流延伸, Value: 127.0.0.1:3002/room/6fcf6ac0-ee94-44f9-b068-27bfba901728
+
+The focused UI element is 1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3002/

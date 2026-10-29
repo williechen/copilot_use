@@ -1,0 +1,30 @@
+   Compiling server_fn_macro v0.8.12
+   Compiling reactive_graph v0.2.16
+   Compiling server_fn v0.8.13
+   Compiling leptos_macro v0.8.19
+   Compiling leptos v0.8.22
+   Compiling axum v0.8.9
+   Compiling server_fn_macro_default v0.8.6
+   Compiling reactive_stores v0.4.4
+   Compiling tachys v0.2.19
+   Compiling desktop-pet v0.2.23 (/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-3/work/day24-validation-main/apps/desktop_pet)
+   Compiling leptos_dom v0.8.8
+   Compiling leptos_server v0.8.8
+   Compiling stats-server v0.2.23 (/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-3/work/day24-validation-main/apps/stats_server)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 16.65s
+     Running tests/validation_upgrade_probe.rs (/home/willie/Documents/rust_ai_chat/target/debug/deps/validation_upgrade_probe-8d68355e284e7c91)
+
+running 1 test
+observed expected upgrade defect: migration 20261018095626 was previously applied but has been modified
+test observes_pet_old_database_checksum_block_without_deleting_profile ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+     Running tests/validation_upgrade_probe.rs (/home/willie/Documents/rust_ai_chat/target/debug/deps/validation_upgrade_probe-495ef50e9ce2269a)
+
+running 1 test
+observed expected upgrade defect: migration 20261018073932 was previously applied but has been modified
+test observes_analytics_old_database_checksum_block_without_deleting_admin ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.65s
+

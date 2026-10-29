@@ -1,0 +1,8 @@
+Day22 publication resumed on 2026-10-20 Asia/Taipei.
+Historical: previous run reported safety blocks; no repeat observed in this run.
+All existing Notion pages fully replaced/read back; all next_day values conditionally synchronized to 23.
+New tests: Chat 1, Pet 1, Analytics 1 passed. Red not executed.
+Candidate-only; reference main read-only; product integration and functional acceptance incomplete.
+Initial OsRng build and temporary PG socket/connection failures resolved; original logs preserved.
+Existing daily automation was not inspected, resumed or duplicated in this run.
+See completion.json for exact SHA, CI coverage, readback and remaining gaps.

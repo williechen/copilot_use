@@ -1,0 +1,34 @@
+[
+  {
+    "name": "chat_tests",
+    "cwd": "chat_apps",
+    "command": [
+      "cargo",
+      "test",
+      "--locked",
+      "-p",
+      "chat-application",
+      "-p",
+      "chat-server",
+      "--features",
+      "ssr"
+    ],
+    "exit_code": 0,
+    "seconds": 50.65
+  },
+  {
+    "name": "chat_ui",
+    "cwd": "chat_apps",
+    "command": [
+      "cargo",
+      "test",
+      "--locked",
+      "-p",
+      "chat-ui",
+      "--features",
+      "ssr"
+    ],
+    "exit_code": 0,
+    "seconds": 3.96
+  }
+]

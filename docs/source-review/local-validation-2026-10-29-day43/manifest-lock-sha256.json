@@ -1,0 +1,38 @@
+{
+  "day43-candidate": {
+    "crates": {
+      "Cargo.toml": "4256e39cc503b699ae241e148b5441b131563447fb79120dcef0b3ffeacbd5e4",
+      "Cargo.lock": "b5df8b248788425a31568782845eaedbcbe14c8e2bf1065ff6cb49d9d18f7b38"
+    },
+    "chat_apps": {
+      "Cargo.toml": "a992aa9e171ffaa5f47edd5371ddff49316590f2f31d0b5b4aebdfeca4e56b3e",
+      "Cargo.lock": "5a10cf5fd726e18ce04ad83ee4b55255bb06877874c738f9266df88e68bd07df"
+    },
+    "pet_apps": {
+      "Cargo.toml": "21fe24b475be050ee48c133d79c94ec43046a7798b51043f37bca787819fedf6",
+      "Cargo.lock": "65b2b07fe2dfaa66168bc61ab87426dd480066512ac2aa018e1eb9a9c52538ee"
+    },
+    "analytics_apps": {
+      "Cargo.toml": "4f4652e4e9a94a21e07b06eaa869b530b647d2e3cb1525672b86cbc28aa1518a",
+      "Cargo.lock": "6ead872da86ed0d42663240ee7579ba5e48eb4a4c20df70be19721a564cd2aee"
+    }
+  },
+  "day43-latest": {
+    "crates": {
+      "Cargo.toml": "c67188f414ec24f051db6530cfcb2bb2241ff066406975adf720d24d13f1f581",
+      "Cargo.lock": "0736735c91176e189d3725476b4d985401838ba53d840ea381b809edb6aa3bf5"
+    },
+    "chat_apps": {
+      "Cargo.toml": "d1007a83bb24e4276642c107a231b585e1aa4615bd585cabfb41835184d63954",
+      "Cargo.lock": "f7659dac7c519b266da05ec142872a3288a57e3cf8c90a3f2d799315ae39a881"
+    },
+    "pet_apps": {
+      "Cargo.toml": "5153d79ef5489fdb9814ab628b405fc2a0c338472cbed0b0968d1e7e166948fe",
+      "Cargo.lock": "d2688bb6129e66c75cc0b891de29b60f2ea012b6a3a143513285fc5c21aa7a54"
+    },
+    "analytics_apps": {
+      "Cargo.toml": "8aff0077033630b9064535b1fbcec7d5c1836341737bf5c9763e760433338de9",
+      "Cargo.lock": "3f3479a016faa629aaa77fd6320861fc8616333698b154bb2536238dd2dc161f"
+    }
+  }
+}

@@ -1,0 +1,61 @@
+--- a/chat_apps/chat_ui/src/lib.rs
++++ b/chat_apps/chat_ui/src/lib.rs
+@@ -427,8 +427,11 @@
+             {move || {
+                 let all = rows.get();
+                 let visible = filter_rooms(&all, &query.get());
+-                let feedback = room_list_feedback(
+-                    has_snapshot.get(), all.len(), visible.len()
++                let feedback = room_status_text(
++                    &status.get(),
++                    has_snapshot.get(),
++                    all.len(),
++                    visible.len(),
+                 );
+                 view! {
+                     <p class="room-result-feedback" role="status">{feedback}</p>
+@@ -705,3 +708,44 @@
+         });
+     }
+ }
++
++fn room_status_text(
++    status: &str,
++    loaded: bool,
++    total: usize,
++    visible: usize,
++) -> String {
++    if matches!(status, "查詢中…" | "載入中…")
++        || status.ends_with("，請重試")
++    {
++        return status.to_owned();
++    }
++    room_list_feedback(loaded, total, visible).to_owned()
++}
++
++#[cfg(test)]
++mod day38_room_status_tests {
++    use super::room_status_text;
++
++    #[test]
++    fn request_progress_and_failure_override_stale_room_feedback() {
++        assert_eq!(room_status_text("查詢中…", true, 2, 1), "查詢中…");
++        assert_eq!(room_status_text("載入中…", true, 2, 1), "載入中…");
++        assert_eq!(room_status_text("伺服器：500，請重試", true, 2, 1),
++                   "伺服器：500，請重試");
++        assert_eq!(room_status_text("離線，請重試", false, 0, 0),
++                   "離線，請重試");
++    }
++
++    #[test]
++    fn success_and_local_filter_show_one_consistent_status() {
++        assert_eq!(room_status_text("請選擇房間", false, 0, 0),
++                   "請先讀取房間列表");
++        assert_eq!(room_status_text("請選擇房間", true, 0, 0),
++                   "尚無房間");
++        assert_eq!(room_status_text("請選擇房間", true, 2, 0),
++                   "沒有符合條件的房間");
++        assert_eq!(room_status_text("請選擇房間", true, 2, 1),
++                   "請選擇房間");
++    }
++}

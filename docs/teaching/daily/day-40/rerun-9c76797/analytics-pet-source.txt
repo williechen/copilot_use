@@ -1,0 +1,18 @@
+Browser tab: 3, Title: "Analytics 管理後台", URL: "http://127.0.0.1:3100/dashboard?source=desktop_pet".
+1 AXWebArea Analytics 管理後台, URL: 127.0.0.1:3100/dashboard?source=desktop_pet
+	2 container
+		3 heading Analytics 管理後台, Value: 1
+			4 text Analytics 管理後台
+		5 container 事件來源
+			6 link Description: Chat 事件, Value: 127.0.0.1:3100/dashboard?source=web_chat
+			7 link Description: Pet 事件, Value: 127.0.0.1:3100/dashboard?source=desktop_pet
+		8 link Description: 修改密碼與 Email, Value: 127.0.0.1:3100/change-password
+		9 link Description: 匯出目前篩選 CSV, Value: 127.0.0.1:3100/api/v1/events/desktop_pet/export.csv
+		10 text 事件類型（精確比對）
+		11 text field (settable) 事件類型（精確比對）, ID: event-type
+		12 button 篩選
+		13 link Description: 清除篩選, Value: 127.0.0.1:3100/dashboard?source=desktop_pet
+		14 text 全部事件類型 Pet 全部事件類型：1 筆已提交事件 查詢完成 目前僅支援管理員；角色與來源 ACL 尚待接通。
+		15 button 登出
+
+The focused UI element is 1 AXWebArea Analytics 管理後台, URL: 127.0.0.1:3100/dashboard?source=desktop_pet

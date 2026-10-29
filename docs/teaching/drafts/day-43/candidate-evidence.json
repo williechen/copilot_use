@@ -1,0 +1,120 @@
+{
+  "date": "2026-10-29",
+  "timezone": "Asia/Taipei",
+  "repository": "williechen/copilot_use",
+  "branch": "main",
+  "product_repo": "williechen/rust_ai_ring",
+  "product_read_only_sha": "c6708c42f21ac919e57a379848b4977d27a1c3d6",
+  "docs_start_sha": "d6a701eb8de9eaeb04d4145e436ce75485bb967e",
+  "rules_blob_sha": "ba9e6cbd6763d245e60800a02c60888ba6215bd5",
+  "status": "candidate_draft_not_gate1_published",
+  "next_day_before": {
+    "chat": 42,
+    "pet": 42,
+    "analytics": 42
+  },
+  "next_day_advanced": false,
+  "product_modified": false,
+  "files": [
+    {
+      "path": "docs/teaching/drafts/day-43/chat-day43-refactor.patch",
+      "commit": "fe348d382739553c9e5288de34edc4df16fa9a69",
+      "blob_sha": "8bd283b2141c25bf38072081981d24765871bb9b",
+      "sha256": "99a90f24209ea7a5141cde6a43b7f1100cff2c7d1f66ae251aa882c9ce1d3d8c",
+      "exact_commit_readback": true,
+      "bytes": 2531
+    },
+    {
+      "path": "docs/teaching/drafts/day-43/chat-day43-green.patch",
+      "commit": "630ed7347b190ba8b4b7449518130d083ad0a72c",
+      "blob_sha": "9f6b7899bbe02176d02a095cee13ef52839b68a1",
+      "sha256": "2c24f0e87f8fa351a2bf37e3683837ddf60eef32dd078013f60ff023ed728b11",
+      "exact_commit_readback": true,
+      "bytes": 3486
+    },
+    {
+      "path": "docs/teaching/drafts/day-43/chat.md",
+      "commit": "87a0c2268284b92b500346daa493a62b5ee34d7b",
+      "blob_sha": "03fe863eafc8e0e24ffe9578c386ccbc55026309",
+      "sha256": "48a844b5e1bb7e9a676440f9dff1901d1ab39d148a46058382969479ad2d6859",
+      "exact_commit_readback": true,
+      "bytes": 4515
+    },
+    {
+      "path": "docs/teaching/drafts/day-43/pet-day43-refactor.patch",
+      "commit": "f9d5059a628fb4cfeed4b30c369c674c7fb76d59",
+      "blob_sha": "a7939f85af8fdb8373fa1cbbe7ddec2c25083c79",
+      "sha256": "b4a86b6dc2f6b406ad7e8eeb670546e9fce60ec83e1823eef007fcc40e3ff58c",
+      "exact_commit_readback": true,
+      "bytes": 1911
+    },
+    {
+      "path": "docs/teaching/drafts/day-43/pet-day43-green.patch",
+      "commit": "1ba053b8bef53a725c365c07a97ce4656c0cf9ff",
+      "blob_sha": "c3cd70ed78b2bd72036dd1fad8310582fee37eb6",
+      "sha256": "73e285edfa0f399bb41eecda1cc747cb6c00b17371d8c3cbed583e9a23918395",
+      "exact_commit_readback": true,
+      "bytes": 7583
+    },
+    {
+      "path": "docs/teaching/drafts/day-43/pet.md",
+      "commit": "0a21c86862b0c07a235741c5cd36c134adb7adbd",
+      "blob_sha": "4a9c495f9f94ad1aaafa6f40b7d679f6623bf064",
+      "sha256": "6e6cd03aa8d415d022ecaaf7b40c6bcf98fb8d96a6776f1463274788b65ef133",
+      "exact_commit_readback": true,
+      "bytes": 4315
+    },
+    {
+      "path": "docs/teaching/drafts/day-43/analytics-day43-refactor.patch",
+      "commit": "cb88d91dcb5620aa6774cb3e68df28b1c60e9d40",
+      "blob_sha": "878012256fb89d31dedb8fdb5d00c08a7c1571ea",
+      "sha256": "67c3d20248f43f4c9d9311d54ccb51a19a25d48465784d6b7bb1ba5cf6473e22",
+      "exact_commit_readback": true,
+      "bytes": 1983
+    },
+    {
+      "path": "docs/teaching/drafts/day-43/analytics-day43-green.patch",
+      "commit": "b76318495e2102e67b0776d2ac784b3cda844fcb",
+      "blob_sha": "a5ba68716f7321b630398d39c8904c78a0e27dbe",
+      "sha256": "3a6246fe2381e67dc42135c367ca9e8861dfe1c56e2afbdde7b818a675a4c97f",
+      "exact_commit_readback": true,
+      "bytes": 3918
+    },
+    {
+      "path": "docs/teaching/drafts/day-43/analytics.md",
+      "commit": "5143c894a4dd9534020823a9bc121750b15be0b0",
+      "blob_sha": "a85a963e37765930b9f6bef3e8587cb2348a2c11",
+      "sha256": "f430fd1060da3cb9f86157d3477e89cebb6868aa283044b50e6330feaecaec7c",
+      "exact_commit_readback": true,
+      "bytes": 4124
+    }
+  ],
+  "verification": {
+    "source_segments_unique": "pass",
+    "sequential_refactor_green_hunks": "statically reconstructed against exact source; not git apply",
+    "new_module_paths_absent_at_source_sha": true,
+    "git_apply_check": "not executed",
+    "red": "not executed",
+    "cargo_fmt_check_test": "not executed; no cargo/rustc in execution container",
+    "node_sqlite_postgresql_http_ssr_wasm_tauri_gui_ci": "not executed",
+    "official_versions": "selected direct dependencies verified; recursive MSRV/CLI/native not complete",
+    "gate1": "pending",
+    "gate2": "pending",
+    "static_hunk_replay": {
+      "chat": {
+        "result": "pass",
+        "sections": 5
+      },
+      "pet": {
+        "result": "pass",
+        "sections": 4
+      },
+      "analytics": {
+        "result": "pass",
+        "sections": 5
+      },
+      "method": "read original GitHub source at exact product SHA; parse unified hunk headers; verify context, removed lines, counts; apply Refactor then Green in memory; NOT git apply --check"
+    }
+  },
+  "last_full_comparison_updated": false
+}

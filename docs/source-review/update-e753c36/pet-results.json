@@ -1,0 +1,17 @@
+[
+  {
+    "name": "pet_tests",
+    "cwd": "pet_apps",
+    "command": [
+      "cargo",
+      "test",
+      "--locked",
+      "-p",
+      "pet-persistence",
+      "-p",
+      "pet-server"
+    ],
+    "exit_code": 0,
+    "seconds": 159.12
+  }
+]

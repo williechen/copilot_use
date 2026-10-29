@@ -1,0 +1,9 @@
+error[internal]: left behind trailing whitespace
+   --> /home/willie/Documents/Codex/2026-10-22/github/work/validation/rust_ai_chat/apps/desktop_pet/frontend/src/main.rs:135:135:1
+    |
+135 | ...
+^^^^^^
+    |
+
+warning: rustfmt has failed to format. See previous 1 errors.
+

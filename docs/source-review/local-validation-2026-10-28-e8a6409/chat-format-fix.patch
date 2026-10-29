@@ -1,0 +1,213 @@
+diff --git a/chat_apps/chat_server/src/auth_session.rs b/chat_apps/chat_server/src/auth_session.rs
+index a2f0b6d..b2ff414 100644
+--- a/chat_apps/chat_server/src/auth_session.rs
++++ b/chat_apps/chat_server/src/auth_session.rs
+@@ -51,10 +51,19 @@ mod tests {
+         headers.insert(header::COOKIE, "chat_session=bad".parse().unwrap());
+         assert_eq!(session_cookie(&headers), Err(StatusCode::UNAUTHORIZED));
+         let raw = "b".repeat(64);
+-        headers.insert(header::COOKIE, format!("x=1; chat_session={raw}").parse().unwrap());
++        headers.insert(
++            header::COOKIE,
++            format!("x=1; chat_session={raw}").parse().unwrap(),
++        );
+         assert_eq!(session_cookie(&headers).unwrap(), raw);
+-        assert_eq!(csrf_for_logout(&headers).unwrap(), token_digest(&format!("logout:{raw}")));
+-        assert_eq!(csrf_for_create_room(&headers).unwrap(), token_digest(&format!("create-room:{raw}")));
++        assert_eq!(
++            csrf_for_logout(&headers).unwrap(),
++            token_digest(&format!("logout:{raw}"))
++        );
++        assert_eq!(
++            csrf_for_create_room(&headers).unwrap(),
++            token_digest(&format!("create-room:{raw}"))
++        );
+     }
+ 
+     #[tokio::test]
+diff --git a/chat_apps/chat_server/src/room_auth.rs b/chat_apps/chat_server/src/room_auth.rs
+index 51ba553..b1e09ff 100644
+--- a/chat_apps/chat_server/src/room_auth.rs
++++ b/chat_apps/chat_server/src/room_auth.rs
+@@ -26,7 +26,10 @@ pub async fn require_room_member(
+     match active_member(&pool, request.headers()).await {
+         Ok(_) => Ok(next.run(request).await),
+         Err(StatusCode::UNAUTHORIZED) => {
+-            let id = request.uri().path().strip_prefix("/room/")
++            let id = request
++                .uri()
++                .path()
++                .strip_prefix("/room/")
+                 .and_then(|value| uuid::Uuid::parse_str(value).ok())
+                 .ok_or(StatusCode::UNAUTHORIZED)?;
+             Ok(Redirect::to(&format!("/signin?next=/room/{id}")).into_response())
+@@ -38,23 +41,43 @@ pub async fn require_room_member(
+ #[cfg(test)]
+ mod day41_room_return_tests {
+     use super::*;
+-    use axum::{body::Body, http::Request, routing::get, Router};
++    use axum::{Router, body::Body, http::Request, routing::get};
+     use tower::ServiceExt;
+ 
+     #[tokio::test]
+     async fn anonymous_room_link_redirects_but_invalid_room_id_is_rejected() {
+         let pool = sqlx::sqlite::SqlitePoolOptions::new()
+-            .connect_lazy("sqlite::memory:").unwrap();
++            .connect_lazy("sqlite::memory:")
++            .unwrap();
+         let app = Router::new()
+             .route("/room/{room_id}", get(|| async { StatusCode::OK }))
+-            .route_layer(axum::middleware::from_fn_with_state(pool, require_room_member));
++            .route_layer(axum::middleware::from_fn_with_state(
++                pool,
++                require_room_member,
++            ));
+         let id = uuid::Uuid::new_v4();
+-        let response = app.clone().oneshot(Request::get(format!("/room/{id}"))
+-            .body(Body::empty()).unwrap()).await.unwrap();
++        let response = app
++            .clone()
++            .oneshot(
++                Request::get(format!("/room/{id}"))
++                    .body(Body::empty())
++                    .unwrap(),
++            )
++            .await
++            .unwrap();
+         assert_eq!(response.status(), StatusCode::SEE_OTHER);
+-        assert_eq!(response.headers()["location"], format!("/signin?next=/room/{id}"));
+-        let bad = app.oneshot(Request::get("/room/not-a-uuid")
+-            .body(Body::empty()).unwrap()).await.unwrap();
++        assert_eq!(
++            response.headers()["location"],
++            format!("/signin?next=/room/{id}")
++        );
++        let bad = app
++            .oneshot(
++                Request::get("/room/not-a-uuid")
++                    .body(Body::empty())
++                    .unwrap(),
++            )
++            .await
++            .unwrap();
+         assert_eq!(bad.status(), StatusCode::UNAUTHORIZED);
+     }
+ }
+diff --git a/chat_apps/chat_server/src/signin.rs b/chat_apps/chat_server/src/signin.rs
+index 6dd97f2..cee7ea9 100644
+--- a/chat_apps/chat_server/src/signin.rs
++++ b/chat_apps/chat_server/src/signin.rs
+@@ -287,7 +287,8 @@ mod day23_tests {
+             .unwrap()
+             .to_owned();
+ 
+-        let allowed = app.clone()
++        let allowed = app
++            .clone()
+             .oneshot(
+                 Request::get("/account")
+                     .header(axum::http::header::COOKIE, cookie)
+@@ -306,11 +307,19 @@ mod day23_tests {
+         // The no-next /account, wrong-password, Cookie and persistence assertions remain.
+         let id = uuid::Uuid::new_v4();
+         let next = format!("%2Froom%2F{id}");
+-        let return_login = app.clone().oneshot(Request::post("/login")
+-            .header("origin", "http://127.0.0.1:3000")
+-            .header("content-type", "application/x-www-form-urlencoded")
+-            .body(Body::from(format!("username=LEARNER&password=lesson-only-password&next={next}")))
+-            .unwrap()).await.unwrap();
++        let return_login = app
++            .clone()
++            .oneshot(
++                Request::post("/login")
++                    .header("origin", "http://127.0.0.1:3000")
++                    .header("content-type", "application/x-www-form-urlencoded")
++                    .body(Body::from(format!(
++                        "username=LEARNER&password=lesson-only-password&next={next}"
++                    )))
++                    .unwrap(),
++            )
++            .await
++            .unwrap();
+         assert_eq!(return_login.status(), StatusCode::SEE_OTHER);
+         assert_eq!(return_login.headers()["location"], format!("/room/{id}"));
+         let hostile = app.oneshot(Request::post("/login")
+diff --git a/chat_apps/chat_ui/src/room_api.rs b/chat_apps/chat_ui/src/room_api.rs
+index 652c6ab..4c93d90 100644
+--- a/chat_apps/chat_ui/src/room_api.rs
++++ b/chat_apps/chat_ui/src/room_api.rs
+@@ -108,18 +108,32 @@ pub async fn session_status() -> Result<bool, String> {
+ 
+ /// Uses the existing public room-detail endpoint; no new server or database API.
+ pub async fn room_name(id: &str) -> Result<String, String> {
+-    if id.is_empty() || !id.bytes().all(|b| b.is_ascii_alphanumeric() || b == b'-' || b == b'_') {
++    if id.is_empty()
++        || !id
++            .bytes()
++            .all(|b| b.is_ascii_alphanumeric() || b == b'-' || b == b'_')
++    {
+         return Err("無效房間 ID".into());
+     }
+     let window = web_sys::window().ok_or("無法取得瀏覽器")?;
+     let value = JsFuture::from(window.fetch_with_str(&format!("/api/rooms/{id}")))
+-        .await.map_err(|_| "房間資料讀取失敗")?;
++        .await
++        .map_err(|_| "房間資料讀取失敗")?;
+     let response: web_sys::Response = value.dyn_into().map_err(|_| "無效房間回應")?;
+-    if !response.ok() { return Err(format!("房間資料 HTTP {}", response.status())); }
++    if !response.ok() {
++        return Err(format!("房間資料 HTTP {}", response.status()));
++    }
+     let text = JsFuture::from(response.text().map_err(|_| "無法讀取房間資料")?)
+-        .await.map_err(|_| "無法讀取房間資料")?
+-        .as_string().ok_or("房間資料不是文字")?;
++        .await
++        .map_err(|_| "無法讀取房間資料")?
++        .as_string()
++        .ok_or("房間資料不是文字")?;
+     let row: serde_json::Value = serde_json::from_str(&text).map_err(|_| "房間資料格式錯誤")?;
+-    if row["id"].as_str() != Some(id) { return Err("房間資料 ID 不一致".into()); }
+-    row["name"].as_str().map(str::to_owned).ok_or_else(|| "房間名稱缺失".into())
+-}
+\ No newline at end of file
++    if row["id"].as_str() != Some(id) {
++        return Err("房間資料 ID 不一致".into());
++    }
++    row["name"]
++        .as_str()
++        .map(str::to_owned)
++        .ok_or_else(|| "房間名稱缺失".into())
++}
+diff --git a/chat_apps/chat_ui/src/signin_contract.rs b/chat_apps/chat_ui/src/signin_contract.rs
+index 0ee27a6..d7cced0 100644
+--- a/chat_apps/chat_ui/src/signin_contract.rs
++++ b/chat_apps/chat_ui/src/signin_contract.rs
+@@ -1,9 +1,18 @@
+ use crate::SignInPage;
+ use leptos::prelude::*;
++use leptos_router::{components::Router, location::RequestUrl};
++
++fn render_signin() -> String {
++    let owner = Owner::new();
++    owner.with(|| {
++        provide_context(RequestUrl::new("http://localhost/signin"));
++        view! { <Router><SignInPage /></Router> }.to_html()
++    })
++}
+ 
+ #[test]
+ fn day28_leptos_signin_posts_to_existing_login_handler() {
+-    let html = view! { <SignInPage /> }.to_html();
++    let html = render_signin();
+     assert!(html.contains("<form"));
+     assert!(html.contains("method=\"post\""));
+     assert!(html.contains("action=\"/login\""));
+@@ -16,7 +25,7 @@ fn day28_leptos_signin_posts_to_existing_login_handler() {
+ 
+ #[test]
+ fn existing_signin_is_the_single_login_form() {
+-    let html = view! { <SignInPage/> }.to_html();
++    let html = render_signin();
+     assert_eq!(html.matches("<form").count(), 1);
+     for marker in [
+         "method=\"post\"",

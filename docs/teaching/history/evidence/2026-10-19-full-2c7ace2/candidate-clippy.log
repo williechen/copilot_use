@@ -1,0 +1,7 @@
+   Compiling desktop-pet v0.2.17 (/home/willie/Documents/Codex/2026-10-18/referenced-chatgpt-conversation-this-is-an-2/work/acceptance-f948/apps/desktop_pet)
+    Checking persistence v0.2.17 (/home/willie/Documents/Codex/2026-10-18/referenced-chatgpt-conversation-this-is-an-2/work/acceptance-f948/crates/persistence)
+    Checking ui v0.2.17 (/home/willie/Documents/Codex/2026-10-18/referenced-chatgpt-conversation-this-is-an-2/work/acceptance-f948/crates/ui)
+    Checking stats-server v0.2.17 (/home/willie/Documents/Codex/2026-10-18/referenced-chatgpt-conversation-this-is-an-2/work/acceptance-f948/apps/stats_server)
+    Checking server v0.2.17 (/home/willie/Documents/Codex/2026-10-18/referenced-chatgpt-conversation-this-is-an-2/work/acceptance-f948/apps/server)
+    Checking workspace-tests v0.2.17 (/home/willie/Documents/Codex/2026-10-18/referenced-chatgpt-conversation-this-is-an-2/work/acceptance-f948/tests)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 6.06s

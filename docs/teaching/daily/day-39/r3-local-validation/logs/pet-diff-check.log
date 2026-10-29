@@ -1,0 +1,2 @@
+pet_apps/pet_server/src/lib.rs:298: trailing whitespace.
++            pet_windows::find_saved_pet,

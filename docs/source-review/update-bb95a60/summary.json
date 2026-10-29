@@ -1,0 +1,16 @@
+{
+  "source_sha": "bb95a6065584ebc00ce339bdd904b3d47bf1ea15",
+  "previous_source_sha": "e753c36294ed6a7781830e26c5c71f2bdc233eca",
+  "checked_at": "2026-10-25T00:31:15.100545+00:00",
+  "compile_exit": 0,
+  "test_exit": 101,
+  "passed": 41,
+  "failed": 3,
+  "ignored": 1,
+  "compile_errors_resolved": 5,
+  "remaining": "Three stale Dashboard text assertions; prior query Session requirement mismatch remains unchanged",
+  "product_modified_by_agent": false,
+  "functional_acceptance": false,
+  "next_day_unchanged": true,
+  "report": "docs/source-review/2026-10-25-compile-bb95a60.md"
+}

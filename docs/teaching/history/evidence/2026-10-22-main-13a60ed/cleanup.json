@@ -1,0 +1,6 @@
+{
+  "dedicated_postgres_stopped_and_removed": true,
+  "dedicated_build_cache_removed": true,
+  "existing_5432_untouched": true,
+  "source_working_directories_untouched": true
+}

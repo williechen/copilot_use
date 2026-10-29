@@ -1,0 +1,12 @@
+{
+  "removed_bytes": 2143120912,
+  "removed_paths": [
+    "/var/tmp/codex-native-pet-source",
+    "/var/tmp/codex-native-pet-target",
+    "/var/tmp/codex-native-pet-profile",
+    "/var/tmp/codex-native-pet.sqlite"
+  ],
+  "product_sha": "9c767978b20bd56e1c2182dac2f37e6ae9b7d988",
+  "product_clean": true,
+  "test_processes_stopped": true
+}

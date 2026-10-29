@@ -1,0 +1,17 @@
+[
+  {
+    "from": "fa0888e",
+    "exit": 1,
+    "output": "Error: Migrate(VersionMismatch(20261018122554))\n"
+  },
+  {
+    "from": "old419",
+    "exit": 1,
+    "output": "Error: Migrate(VersionMissing(20261018091733))\n"
+  },
+  {
+    "from": "old791",
+    "exit": 1,
+    "output": "Error: Migrate(VersionMissing(20261018091733))\n"
+  }
+]

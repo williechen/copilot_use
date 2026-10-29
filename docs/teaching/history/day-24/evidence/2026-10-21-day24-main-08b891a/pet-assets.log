@@ -1,0 +1,17 @@
+127.0.0.1 - - [21/Oct/2026 20:20:33] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [21/Oct/2026 20:20:33] "GET /style-f705be438a37bef7.css HTTP/1.1" 200 -
+127.0.0.1 - - [21/Oct/2026 20:20:33] "GET /desktop-pet-frontend-1f0d4d8483f5b1fb.js HTTP/1.1" 200 -
+127.0.0.1 - - [21/Oct/2026 20:20:33] "GET /desktop-pet-frontend-1f0d4d8483f5b1fb_bg.wasm HTTP/1.1" 200 -
+127.0.0.1 - - [21/Oct/2026 20:20:36] "GET /index.html?view=pet&pet_id=63f1a8de-98e9-4351-97a7-0b8995d102d0 HTTP/1.1" 200 -
+127.0.0.1 - - [21/Oct/2026 20:20:37] "GET /index.html?view=pet&pet_id=d2777618-7e14-4e13-b72f-408455b1ca6b HTTP/1.1" 200 -
+127.0.0.1 - - [21/Oct/2026 20:20:37] "GET /index.html?view=pet&pet_id=eb0980e4-719d-4695-8508-e167773b41a0 HTTP/1.1" 200 -
+127.0.0.1 - - [21/Oct/2026 20:20:39] "GET /style-f705be438a37bef7.css HTTP/1.1" 304 -
+127.0.0.1 - - [21/Oct/2026 20:20:39] "GET /desktop-pet-frontend-1f0d4d8483f5b1fb.js HTTP/1.1" 304 -
+127.0.0.1 - - [21/Oct/2026 20:20:39] "GET /desktop-pet-frontend-1f0d4d8483f5b1fb_bg.wasm HTTP/1.1" 304 -
+127.0.0.1 - - [21/Oct/2026 20:20:42] "GET /index.html?view=pet&pet_id=63f1a8de-98e9-4351-97a7-0b8995d102d0 HTTP/1.1" 304 -
+127.0.0.1 - - [21/Oct/2026 20:20:42] "GET / HTTP/1.1" 304 -
+127.0.0.1 - - [21/Oct/2026 20:20:42] "GET /style-f705be438a37bef7.css HTTP/1.1" 304 -
+127.0.0.1 - - [21/Oct/2026 20:20:42] "GET /desktop-pet-frontend-1f0d4d8483f5b1fb.js HTTP/1.1" 304 -
+127.0.0.1 - - [21/Oct/2026 20:20:42] "GET /desktop-pet-frontend-1f0d4d8483f5b1fb_bg.wasm HTTP/1.1" 304 -
+127.0.0.1 - - [21/Oct/2026 20:20:42] "GET /desktop-pet-frontend-1f0d4d8483f5b1fb.js HTTP/1.1" 304 -
+127.0.0.1 - - [21/Oct/2026 20:20:42] "GET /desktop-pet-frontend-1f0d4d8483f5b1fb_bg.wasm HTTP/1.1" 304 -

@@ -1,0 +1,214 @@
+{
+  "sqlite_version": "3.46.1",
+  "cases": [
+    {
+      "name": "owner explicit id",
+      "sql": "insert into pet_owner(id,name) values('owner','fixture')",
+      "expected": "accepted",
+      "actual": "accepted"
+    },
+    {
+      "name": "pet explicit id and owner",
+      "sql": "insert into pet_profile(id,name,species,owner_id) values('pet','fixture','cat','owner')",
+      "expected": "accepted",
+      "actual": "accepted"
+    },
+    {
+      "name": "AI explicit id",
+      "sql": "insert into ai_person(id,name) values('ai','fixture')",
+      "expected": "accepted",
+      "actual": "accepted"
+    },
+    {
+      "name": "pet requires owner",
+      "sql": "insert into pet_profile(id,name,species) values('missing-owner','fixture','cat')",
+      "expected": "rejected",
+      "actual": "rejected",
+      "error": "NOT NULL constraint failed: pet_profile.owner_id"
+    },
+    {
+      "name": "pet_extra valid references",
+      "sql": "insert into pet_extra(id,pet_id,owner_id) values('valid','pet','owner')",
+      "expected": "accepted",
+      "actual": "accepted"
+    },
+    {
+      "name": "pet_extra requires pet",
+      "sql": "insert into pet_extra(id,owner_id) values('null-pet','owner')",
+      "expected": "rejected",
+      "actual": "rejected",
+      "error": "NOT NULL constraint failed: pet_extra.pet_id"
+    },
+    {
+      "name": "pet_extra requires owner",
+      "sql": "insert into pet_extra(id,pet_id) values('null-owner','pet')",
+      "expected": "rejected",
+      "actual": "rejected",
+      "error": "NOT NULL constraint failed: pet_extra.owner_id"
+    },
+    {
+      "name": "pet_extra rejects missing pet",
+      "sql": "insert into pet_extra(id,pet_id,owner_id) values('bad-pet','missing','owner')",
+      "expected": "rejected",
+      "actual": "rejected",
+      "error": "FOREIGN KEY constraint failed"
+    },
+    {
+      "name": "pet_activity valid references",
+      "sql": "insert into pet_activity(id,pet_id,owner_id) values('valid','pet','owner')",
+      "expected": "accepted",
+      "actual": "accepted"
+    },
+    {
+      "name": "pet_activity requires pet",
+      "sql": "insert into pet_activity(id,owner_id) values('null-pet','owner')",
+      "expected": "rejected",
+      "actual": "rejected",
+      "error": "NOT NULL constraint failed: pet_activity.pet_id"
+    },
+    {
+      "name": "pet_activity requires owner",
+      "sql": "insert into pet_activity(id,pet_id) values('null-owner','pet')",
+      "expected": "rejected",
+      "actual": "rejected",
+      "error": "NOT NULL constraint failed: pet_activity.owner_id"
+    },
+    {
+      "name": "pet_activity rejects missing pet",
+      "sql": "insert into pet_activity(id,pet_id,owner_id) values('bad-pet','missing','owner')",
+      "expected": "rejected",
+      "actual": "rejected",
+      "error": "FOREIGN KEY constraint failed"
+    },
+    {
+      "name": "pet_study valid references",
+      "sql": "insert into pet_study(id,pet_id,owner_id) values('valid','pet','owner')",
+      "expected": "accepted",
+      "actual": "accepted"
+    },
+    {
+      "name": "pet_study requires pet",
+      "sql": "insert into pet_study(id,owner_id) values('null-pet','owner')",
+      "expected": "rejected",
+      "actual": "rejected",
+      "error": "NOT NULL constraint failed: pet_study.pet_id"
+    },
+    {
+      "name": "pet_study requires owner",
+      "sql": "insert into pet_study(id,pet_id) values('null-owner','pet')",
+      "expected": "rejected",
+      "actual": "rejected",
+      "error": "NOT NULL constraint failed: pet_study.owner_id"
+    },
+    {
+      "name": "pet_study rejects missing pet",
+      "sql": "insert into pet_study(id,pet_id,owner_id) values('bad-pet','missing','owner')",
+      "expected": "rejected",
+      "actual": "rejected",
+      "error": "FOREIGN KEY constraint failed"
+    },
+    {
+      "name": "pet_life_log valid references",
+      "sql": "insert into pet_life_log(id,pet_id,owner_id) values('valid','pet','owner')",
+      "expected": "accepted",
+      "actual": "accepted"
+    },
+    {
+      "name": "pet_life_log requires pet",
+      "sql": "insert into pet_life_log(id,owner_id) values('null-pet','owner')",
+      "expected": "rejected",
+      "actual": "rejected",
+      "error": "NOT NULL constraint failed: pet_life_log.pet_id"
+    },
+    {
+      "name": "pet_life_log requires owner",
+      "sql": "insert into pet_life_log(id,pet_id) values('null-owner','pet')",
+      "expected": "rejected",
+      "actual": "rejected",
+      "error": "NOT NULL constraint failed: pet_life_log.owner_id"
+    },
+    {
+      "name": "pet_life_log rejects missing pet",
+      "sql": "insert into pet_life_log(id,pet_id,owner_id) values('bad-pet','missing','owner')",
+      "expected": "rejected",
+      "actual": "rejected",
+      "error": "FOREIGN KEY constraint failed"
+    },
+    {
+      "name": "AI extra requires person",
+      "sql": "insert into ai_person_extra(id) values('null-person')",
+      "expected": "rejected",
+      "actual": "rejected",
+      "error": "NOT NULL constraint failed: ai_person_extra.ai_person_id"
+    },
+    {
+      "name": "AI log requires person",
+      "sql": "insert into ai_person_life_log(id,room_id) values('null-person',1)",
+      "expected": "rejected",
+      "actual": "rejected",
+      "error": "NOT NULL constraint failed: ai_person_life_log.ai_person_id"
+    },
+    {
+      "name": "AI log requires room",
+      "sql": "insert into ai_person_life_log(id,ai_person_id) values('null-room','ai')",
+      "expected": "rejected",
+      "actual": "rejected",
+      "error": "NOT NULL constraint failed: ai_person_life_log.room_id"
+    },
+    {
+      "name": "AI log valid required fields",
+      "sql": "insert into ai_person_life_log(id,ai_person_id,room_id) values('valid','ai',1)",
+      "expected": "accepted",
+      "actual": "accepted"
+    },
+    {
+      "name": "owner PK still nullable",
+      "sql": "insert into pet_owner(name) values('missing id')",
+      "expected": "accepted",
+      "actual": "accepted"
+    },
+    {
+      "name": "pet PK still nullable",
+      "sql": "insert into pet_profile(name,species,owner_id) values('missing id','cat','owner')",
+      "expected": "accepted",
+      "actual": "accepted"
+    },
+    {
+      "name": "AI PK still nullable",
+      "sql": "insert into ai_person(name) values('missing id')",
+      "expected": "accepted",
+      "actual": "accepted"
+    }
+  ],
+  "owner_ids": [
+    [
+      "owner",
+      "fixture"
+    ],
+    [
+      null,
+      "missing id"
+    ]
+  ],
+  "pet_ids": [
+    [
+      "pet",
+      "fixture"
+    ],
+    [
+      null,
+      "missing id"
+    ]
+  ],
+  "ai_ids": [
+    [
+      "ai",
+      "fixture"
+    ],
+    [
+      null,
+      "missing id"
+    ]
+  ],
+  "foreign_key_check": []
+}

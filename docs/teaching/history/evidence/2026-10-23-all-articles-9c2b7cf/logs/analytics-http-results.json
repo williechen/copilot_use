@@ -1,0 +1,103 @@
+{
+  "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3",
+  "checks": [
+    {
+      "name": "anonymous dashboard redirects to login",
+      "actual": [
+        303,
+        "/login"
+      ],
+      "expected": [
+        303,
+        "/login"
+      ],
+      "passed": true
+    },
+    {
+      "name": "initial login",
+      "actual": 303,
+      "expected": 303,
+      "passed": true
+    },
+    {
+      "name": "first login forced change",
+      "actual": "/change-password",
+      "expected": "/change-password",
+      "passed": true
+    },
+    {
+      "name": "password change",
+      "actual": 303,
+      "expected": 303,
+      "passed": true
+    },
+    {
+      "name": "old session revoked",
+      "actual": [
+        303,
+        "/login"
+      ],
+      "expected": [
+        303,
+        "/login"
+      ],
+      "passed": true
+    },
+    {
+      "name": "login with changed credential",
+      "actual": 303,
+      "expected": 303,
+      "passed": true
+    },
+    {
+      "name": "web_chat dashboard",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "web_chat only active link",
+      "actual": [
+        "/dashboard?source=web_chat"
+      ],
+      "expected": [
+        "/dashboard?source=web_chat"
+      ],
+      "passed": true
+    },
+    {
+      "name": "web_chat filtered total",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "desktop_pet dashboard",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "desktop_pet only active link",
+      "actual": [
+        "/dashboard?source=desktop_pet"
+      ],
+      "expected": [
+        "/dashboard?source=desktop_pet"
+      ],
+      "passed": true
+    },
+    {
+      "name": "desktop_pet filtered total",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "unknown source rejected",
+      "actual": 400,
+      "expected": 400,
+      "passed": true
+    }
+  ]
+}

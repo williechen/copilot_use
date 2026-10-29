@@ -1,0 +1,213 @@
+{
+  "Repository": "williechen/copilot_use",
+  "branch": "main",
+  "date": "2026-10-23T12:40:44.169Z",
+  "scope": "daily document delivery; not full source comparison",
+  "initial_document_sha": "259a1e6f08a6522ef596fe1448af4ac2bed56167",
+  "document_sha_before_audit": "6b2b224c99943c8a00d6c8e59317a5952a75b1e5",
+  "program_source_sha": "1d1866dbbb30255fafa4c7f74b1868919662913c",
+  "program_repository_read_only": true,
+  "articles": [
+    {
+      "parent": "259a1e6f08a6522ef596fe1448af4ac2bed56167",
+      "tree": "b43dac3b747ae4e0626bfd4bab88b4a41044be2d",
+      "rules_sha": "419e357989595184ce31a5ad062dfd78b35f19e7",
+      "source_sha": "1d1866dbbb30255fafa4c7f74b1868919662913c",
+      "read_at": "2026-10-23T12:32:20.324Z",
+      "project": "chat",
+      "day": 31,
+      "revision": "r1",
+      "article_commit": "66a7d1141ce057c04ee631434d959b1cb22e9ef2",
+      "blob_sha": "13a492c16273b60241d7d38ed8942ffc57334491",
+      "sha256": "5b1197262ad8ed903796eb9a3746c87e3f400e510d53ff0b85b7d90fa04a0fb2",
+      "bytes": 14082,
+      "full_text_verified": true,
+      "readback_at": "2026-10-23T12:32:40.763Z",
+      "raw_error": null,
+      "path": "docs/teaching/daily/day-31/chat.md",
+      "rules_commit_sha": "259a1e6f08a6522ef596fe1448af4ac2bed56167",
+      "publication_error": null,
+      "state_sync": {
+        "Repository": "williechen/copilot_use",
+        "branch": "main",
+        "operation": "state_sync",
+        "expected_parent_sha": "66a7d1141ce057c04ee631434d959b1cb22e9ef2",
+        "actual_commit": "791a31ad1292559a6eb7a6cdca8b72ecc2f08389",
+        "readbacks": [
+          {
+            "path": "docs/learning-state.json",
+            "blob_sha": "0518723cf507e7dbb083f6ceb654f4bb6c2201e2",
+            "full_text_verified": true
+          },
+          {
+            "path": "docs/teaching/current/manifest.json",
+            "blob_sha": "f3c15e1324179d90793493ee20334e06c3bd9285",
+            "full_text_verified": true
+          },
+          {
+            "path": "docs/teaching/daily/README.md",
+            "blob_sha": "8292f5a5cac17b9c9e4c5773796407cfa2b5f89e",
+            "full_text_verified": true
+          },
+          {
+            "path": "docs/teaching/chat/README.md",
+            "blob_sha": "0e834aa13a24455e7f3efb7e9501f7e08245ccab",
+            "full_text_verified": true
+          },
+          {
+            "path": "docs/teaching/daily/day-31/chat-readback.json",
+            "blob_sha": "c1baeca849af7ebaaa866ef9c58fe2fa94d93dc5",
+            "full_text_verified": true
+          }
+        ],
+        "readback_at": "2026-10-23T12:33:34.062Z",
+        "original_error": null
+      }
+    },
+    {
+      "parent": "791a31ad1292559a6eb7a6cdca8b72ecc2f08389",
+      "tree": "c3d0c5db7b82cc57ec078434337b14303839904b",
+      "rules_sha": "419e357989595184ce31a5ad062dfd78b35f19e7",
+      "source_sha": "1d1866dbbb30255fafa4c7f74b1868919662913c",
+      "read_at": "2026-10-23T12:36:38.760Z",
+      "project": "pet",
+      "day": 31,
+      "revision": "r1",
+      "article_commit": "e1f2dee87de9e161ab1001377ad1916f1aefcf87",
+      "blob_sha": "fdb034e5612668d06d8019e5a29a1234e2719de0",
+      "sha256": "1cfe08490a593e37b680b2936e05f69d7b7a237a1b81bfb175b60dc3e7f593b3",
+      "bytes": 13964,
+      "full_text_verified": true,
+      "readback_at": "2026-10-23T12:36:41.938Z",
+      "raw_error": null,
+      "path": "docs/teaching/daily/day-31/pet.md",
+      "rules_commit_sha": "791a31ad1292559a6eb7a6cdca8b72ecc2f08389",
+      "publication_error": null,
+      "state_sync": {
+        "Repository": "williechen/copilot_use",
+        "branch": "main",
+        "operation": "state_sync",
+        "expected_parent_sha": "e1f2dee87de9e161ab1001377ad1916f1aefcf87",
+        "actual_commit": "eeb27bb667904ddc343483701afda8272ef9c87a",
+        "readbacks": [
+          {
+            "path": "docs/learning-state.json",
+            "blob_sha": "587f917ff2d9b2a4ec4203d8c225f3c86ad40c0a",
+            "full_text_verified": true
+          },
+          {
+            "path": "docs/teaching/current/manifest.json",
+            "blob_sha": "5f24e0d142b789a084066177d28603fc9c52fcba",
+            "full_text_verified": true
+          },
+          {
+            "path": "docs/teaching/daily/README.md",
+            "blob_sha": "3f4e5bcc1c7b24b8924e85e166199c358c5ec4fd",
+            "full_text_verified": true
+          },
+          {
+            "path": "docs/teaching/pet/README.md",
+            "blob_sha": "cc94d4812e5224e35c9698b8a42c51a1956d71ed",
+            "full_text_verified": true
+          },
+          {
+            "path": "docs/teaching/daily/day-31/pet-readback.json",
+            "blob_sha": "289d2281d5bea30ea8943091789cc6034836064c",
+            "full_text_verified": true
+          }
+        ],
+        "readback_at": "2026-10-23T12:36:51.203Z",
+        "original_error": null
+      }
+    },
+    {
+      "parent": "eeb27bb667904ddc343483701afda8272ef9c87a",
+      "tree": "9244c0b4944f31c22dd3101382151089601fd2ec",
+      "rules_sha": "419e357989595184ce31a5ad062dfd78b35f19e7",
+      "source_sha": "1d1866dbbb30255fafa4c7f74b1868919662913c",
+      "read_at": "2026-10-23T12:39:43.708Z",
+      "project": "analytics",
+      "day": 31,
+      "revision": "r1",
+      "article_commit": "7b1fe052730d7a6d074a95fcd6f0ce19bed2259e",
+      "blob_sha": "65a3e0e6235acecca375ee5a5f88832ca7207745",
+      "sha256": "28616f4dadbd04f80fc94490d1b7cd29fc05d5892cdf7ee33bc3317195a0063b",
+      "bytes": 15352,
+      "full_text_verified": true,
+      "readback_at": "2026-10-23T12:39:47.349Z",
+      "raw_error": null,
+      "path": "docs/teaching/daily/day-31/analytics.md",
+      "rules_commit_sha": "eeb27bb667904ddc343483701afda8272ef9c87a",
+      "publication_error": null,
+      "state_sync": {
+        "Repository": "williechen/copilot_use",
+        "branch": "main",
+        "operation": "state_sync",
+        "expected_parent_sha": "7b1fe052730d7a6d074a95fcd6f0ce19bed2259e",
+        "actual_commit": "6b2b224c99943c8a00d6c8e59317a5952a75b1e5",
+        "readbacks": [
+          {
+            "path": "docs/learning-state.json",
+            "blob_sha": "06d7e5d230d3c6f0d00cb9513ef9d77c59ccb5c6",
+            "full_text_verified": true
+          },
+          {
+            "path": "docs/teaching/current/manifest.json",
+            "blob_sha": "7f4b3bd37bf9a24ee6d77ffbb74ec32a7cb61080",
+            "full_text_verified": true
+          },
+          {
+            "path": "docs/teaching/daily/README.md",
+            "blob_sha": "1eef25798e709683f6d9148fef8be343cee2718e",
+            "full_text_verified": true
+          },
+          {
+            "path": "docs/teaching/analytics/README.md",
+            "blob_sha": "59932232205be0c28a3ccbeafb3e07b9aeddff80",
+            "full_text_verified": true
+          },
+          {
+            "path": "docs/teaching/daily/day-31/analytics-readback.json",
+            "blob_sha": "4fe6fde5b4f9971f4fa106efdfe067fa41b33692",
+            "full_text_verified": true
+          }
+        ],
+        "readback_at": "2026-10-23T12:39:55.933Z",
+        "original_error": null
+      }
+    }
+  ],
+  "next_day": {
+    "chat": 32,
+    "pet": 32,
+    "analytics": 32
+  },
+  "makeup_queue_unchanged": true,
+  "last_full_comparison": "2026-10-16T22:47:14.399027+08:00",
+  "last_full_comparison_unchanged": true,
+  "functional_acceptance": false,
+  "implementation": "not applied",
+  "tests": "not run",
+  "runtime_probe": {
+    "command": "rustc --version",
+    "exit_code": 127,
+    "original_error": "/bin/bash: line 1: rustc: command not found"
+  },
+  "github_mutation_errors": [],
+  "readback_method": "fetch_file with exact article or state commit SHA; compare entire returned UTF-8 content byte-for-byte to submitted content; SHA256 computed over UTF-8 bytes",
+  "final_current_article_bodies_match": true,
+  "history_retained": true,
+  "official_version_check_date": "2026-10-23",
+  "version_source_retry_errors": [
+    "URL https://docs.rs/crate/leptos/0.8.22/source/Cargo.toml is not accessible via this tool.",
+    "URL https://docs.rs/crate/tauri/2.12.5/source/Cargo.toml is not accessible via this tool.",
+    "URL https://docs.rs/crate/sqlx/0.9.0/source/Cargo.toml is not accessible via this tool."
+  ],
+  "version_source_recovery": "Maintainer-published latest/source/Cargo.toml URLs successfully read; Leptos 1.88, Tauri 1.90, SQLx 1.94.0 MSRV confirmed.",
+  "audit_publication": {
+    "path": "docs/teaching/daily/day-31/delivery-audit.json",
+    "expected_parent_sha": "6b2b224c99943c8a00d6c8e59317a5952a75b1e5",
+    "actual_commit": "recorded by Git commit containing this file; resolve via immutable final response link",
+    "original_error": null
+  }
+}

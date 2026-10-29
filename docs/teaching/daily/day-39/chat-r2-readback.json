@@ -1,0 +1,52 @@
+{
+  "project": "chat",
+  "day": 39,
+  "revision": "r2",
+  "article_path": "docs/teaching/daily/day-39/chat-r2.md",
+  "parent": "0ccd1a252b3e8fc28150242944b36929760b3cd3",
+  "article_commit": "fbfdce843111b74a0aaa2f8eaacaf5733d12308c",
+  "blob_sha": "3a7b9832ca88c86c3d3b708bda866d340146f25d",
+  "sha256": "ce71697a6ad87a6152a1ee38e3f89fe7dd979c344e275cdfb6de075621d3e9d7",
+  "files": [
+    {
+      "path": "docs/teaching/daily/day-39/chat-r2.md",
+      "blob_sha": "3a7b9832ca88c86c3d3b708bda866d340146f25d",
+      "sha256": "ce71697a6ad87a6152a1ee38e3f89fe7dd979c344e275cdfb6de075621d3e9d7",
+      "full_text_verified": true
+    },
+    {
+      "path": "docs/teaching/daily/day-39/chat-day39-refactor-r2.patch",
+      "blob_sha": "370a2dba5d35fedb477aee769d72d3bf5e9a7a6d",
+      "sha256": "a4f705ddedfa1e4a22e2a513a396c48c32ff7f44c28c45580863d78e40c2da69",
+      "full_text_verified": true
+    },
+    {
+      "path": "docs/teaching/daily/day-39/chat-day39-green-r2.patch",
+      "blob_sha": "c2d739d04385b6b438f19fce1886eb665666b447",
+      "sha256": "2dde792a066f665719d13f54b51fb45e50b205b4ffe663fce058ba38c4fadc30",
+      "full_text_verified": true
+    }
+  ],
+  "rules_commit": "0ccd1a252b3e8fc28150242944b36929760b3cd3",
+  "rules_blob": "ba9e6cbd6763d245e60800a02c60888ba6215bd5",
+  "source_sha": "8fc4b277b6f6f77d97655130036fca47813de56e",
+  "readback_at": "2026-10-26T07:42:53.486Z",
+  "full_text_verified": true,
+  "repository": "williechen/copilot_use",
+  "branch": "main",
+  "evidence": "docs/teaching/daily/day-39/chat-r2-readback.json",
+  "refactor_patch": "docs/teaching/daily/day-39/chat-day39-refactor-r2.patch",
+  "functional_patch": "docs/teaching/daily/day-39/chat-day39-green-r2.patch",
+  "revision_scope": "inline detailed Refactor teaching, complete modified units, real caller/module wiring, full tests and assertion migration",
+  "candidate_validation": "docs/teaching/daily/day-39/r2-refactor-validation.json",
+  "refactor_tests_executed": true,
+  "functional_red_executed": false,
+  "functional_green_tests_executed": false,
+  "functional_acceptance": false,
+  "product_modified": false,
+  "main_application": "not applied",
+  "gate2": false,
+  "next_day_before": 40,
+  "next_day_after": 40,
+  "revision_does_not_advance_day": true
+}

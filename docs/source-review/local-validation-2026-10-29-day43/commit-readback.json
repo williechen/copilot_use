@@ -1,0 +1,248 @@
+[
+  {
+    "commit": "2a932f2bc9205ff5f97b1ac8273e3a31d582c355",
+    "parent": "1d48f0fd7efa4d9488dfe296994ef30300ff2eab",
+    "files": [
+      {
+        "path": "docs/teaching/daily/day-43/chat-day43-candidate-fix-r1.patch",
+        "blob": "79b48a392447f12dce766f17dcbe6200f4681731",
+        "sha256": "d38da61b3e7d00da03cfd9fedffea6dc0da08d237ad31055087cb427c125752f",
+        "bytes": 827
+      },
+      {
+        "path": "docs/teaching/daily/day-43/chat-day43-latest-fix-r1.patch",
+        "blob": "720bb086b7237ce37c5dd245e093f1f2356e4a67",
+        "sha256": "e289c84fda83da67d65c038aa4e6714a87b476f06ee71ed5c0fa49e56fcb5121",
+        "bytes": 1022
+      },
+      {
+        "path": "docs/teaching/daily/day-43/chat-r1.md",
+        "blob": "63f05e5d05f53aecf7c90fd5a790f33c339a0e52",
+        "sha256": "929c31baaad7cb729f55781f1eb7894501448629a9232f6d0f0b3d2ef64fa68b",
+        "bytes": 2885
+      }
+    ]
+  },
+  {
+    "commit": "f8b8d0e821839306f763e7cc2b43b4a47ba6800c",
+    "parent": "2a932f2bc9205ff5f97b1ac8273e3a31d582c355",
+    "files": [
+      {
+        "path": "docs/teaching/daily/day-43/pet-day43-format-fix-r1.patch",
+        "blob": "596dbee0ff35149a55768f68a9132c3534dafcf8",
+        "sha256": "dc79b5f752ca4ba13d0e500ca9a123b91f5430513ebdff5b6060506ba4b881d1",
+        "bytes": 3095
+      },
+      {
+        "path": "docs/teaching/daily/day-43/pet-r1.md",
+        "blob": "de14748bb70abd3cec40e9df344b234cd5dbef8d",
+        "sha256": "1b1e412e1e6ffff92db48446909bd48364d01c7327404a364ab3022481805cc7",
+        "bytes": 3206
+      }
+    ]
+  },
+  {
+    "commit": "070438a9fa0adc66b96fa44ea4b73e762bb50c36",
+    "parent": "f8b8d0e821839306f763e7cc2b43b4a47ba6800c",
+    "files": [
+      {
+        "path": "docs/teaching/daily/day-43/analytics-r1.md",
+        "blob": "4ea272df2bdebb84711ea4b7387ba29fcd75bb6e",
+        "sha256": "85c41c84b634c4ce7a30e93de7181dfe8b137887146a5f1d0a7952ba9c60d42c",
+        "bytes": 2293
+      }
+    ]
+  },
+  {
+    "commit": "479da534444f3ac1a2452b4d82615d14b3034aa5",
+    "parent": "070438a9fa0adc66b96fa44ea4b73e762bb50c36",
+    "files": [
+      {
+        "path": "README.md",
+        "blob": "62927c8fc3f1cc169c7ef2457b9a445c4900c1d6",
+        "sha256": "f84181c3c2068decd931c7fcefacce8a320107aad0c25455e70ac3f9f6bc2090",
+        "bytes": 2914
+      },
+      {
+        "path": "docs/FUTURE_WORK.md",
+        "blob": "8ddccd6bf7b7a12ccc3dd2abbe3adc5b72fec2e0",
+        "sha256": "f77606e9b08f02fe36aefddd82696cce7af7902aa54d030c32f6ac53478b44be",
+        "bytes": 33270
+      },
+      {
+        "path": "docs/README.md",
+        "blob": "dc95bb84430f9f09ecc697a7148eb71f00194627",
+        "sha256": "92dcb07ba04507f7a26abf90ffe3142deeccee2587478c02a578494c4d9b93bc",
+        "bytes": 2606
+      },
+      {
+        "path": "docs/engineering/README.md",
+        "blob": "b8db74aafdd6ce6c9f6657c9fbbcb546d80a8636",
+        "sha256": "8d5b45e841ef7e92d63b2dbe13348f767b592cf5a62dcf6e862aea7360d8f00c",
+        "bytes": 3531
+      },
+      {
+        "path": "docs/learning-state.json",
+        "blob": "79413ae2f5a7cf3c307fc36c64f3370f1c2637b9",
+        "sha256": "1c5652509f099ecea2a671069d28e52283f0381ff97c0c725e0167a9a7cf6c7b",
+        "bytes": 300661
+      },
+      {
+        "path": "docs/source-review/local-validation-2026-10-29-day43/README.md",
+        "blob": "f69993773312ee8efb5db9d1eb35b81994e9b03b",
+        "sha256": "8ca1738e8bc143868af92ef76a709dd547c92908df853d7baab16461e572c028",
+        "bytes": 13632
+      },
+      {
+        "path": "docs/source-review/local-validation-2026-10-29-day43/candidate-fix-commands.json",
+        "blob": "742de5092f1f2f5e7123e0dd1c91a537fce1b536",
+        "sha256": "f54d1099056eb8e4671040f5134b8ae05ff7056dcb38ca4fca7a80f6fe34c9d7",
+        "bytes": 4750
+      },
+      {
+        "path": "docs/source-review/local-validation-2026-10-29-day43/cleanup.json",
+        "blob": "d89eb2535585464ea00a69b1cb7497800b810d72",
+        "sha256": "509f1eac01fc03d3a7f7b158a7bbfa8139173b65ba9aa2cf53dfd35d46227a4a",
+        "bytes": 933
+      },
+      {
+        "path": "docs/source-review/local-validation-2026-10-29-day43/commands.json",
+        "blob": "6db8c336c6aac48693aa9eb953f41d13ebc51ac5",
+        "sha256": "f4f0d44d1cb12e11481b46110374d1dcb4bdeba5553dd5523a08ac631cd0264a",
+        "bytes": 690967
+      },
+      {
+        "path": "docs/source-review/local-validation-2026-10-29-day43/diagnosis.md",
+        "blob": "c581db137ecde3f2cbb8c9e6972d231df2faa7f2",
+        "sha256": "d8b649a74df01190f3b826fdfe986de61d4e6c202fe5865bc1628441094d79ec",
+        "bytes": 2704
+      },
+      {
+        "path": "docs/source-review/local-validation-2026-10-29-day43/fix-commands.json",
+        "blob": "ea25804ad0afb38d4656e9abb634c372fb1ebfff",
+        "sha256": "dbbc2990b0b1d33c1841025d625667d641578381279db9129946c267503e2613",
+        "bytes": 14208
+      },
+      {
+        "path": "docs/source-review/local-validation-2026-10-29-day43/latest-manifests-locks.json",
+        "blob": "22e1f7bf239bb048724e83a973568267e7078d9e",
+        "sha256": "829c9e7174f83566f105efa0623bf2dd89b55505e9bb77acabeec7b0c804411b",
+        "bytes": 460916
+      },
+      {
+        "path": "docs/source-review/local-validation-2026-10-29-day43/old-test-binaries-cleanup.json",
+        "blob": "b6af296bb48f5f5dd71204c4c39bcaf92a0c02be",
+        "sha256": "4626fde38404fccbbc4a92690b866ac077241bbb9d6f4149fe4a3d5df9c82946",
+        "bytes": 40652
+      },
+      {
+        "path": "docs/source-review/local-validation-2026-10-29-day43/old-test-binaries-inventory.json",
+        "blob": "b6af296bb48f5f5dd71204c4c39bcaf92a0c02be",
+        "sha256": "4626fde38404fccbbc4a92690b866ac077241bbb9d6f4149fe4a3d5df9c82946",
+        "bytes": 40652
+      },
+      {
+        "path": "docs/source-review/local-validation-2026-10-29-day43/retry-commands.json",
+        "blob": "55cec2a41a2eaa1cef470c52ee5bca517be97e19",
+        "sha256": "5e1725ed5c429579e6ae7694bba893241aa950539c4a34102ecd09c0e11be413",
+        "bytes": 15964
+      },
+      {
+        "path": "docs/source-review/local-validation-2026-10-29-day43/source-update.json",
+        "blob": "d5f0e0748242f58d00ed01bb21d4420260d83b96",
+        "sha256": "c179fe0d73ff6673ecf9576ebf7fdaf5668189f369f58688e5c72e2b3506a784",
+        "bytes": 415
+      },
+      {
+        "path": "docs/teaching/README.md",
+        "blob": "67a8342fac947ff53feccbf8478fb8a6a8716a30",
+        "sha256": "896e702d97c2230ae9f90e64027391f2bb2fd71016e370847ce0f3e1f54473e7",
+        "bytes": 2560
+      },
+      {
+        "path": "docs/teaching/analytics/README.md",
+        "blob": "a7aa3738b2b754f2186619c2bce947d1878c717c",
+        "sha256": "73b20f054002734cdc5308e9238125a20a70db1674e621be583d0c3051f44689",
+        "bytes": 8529
+      },
+      {
+        "path": "docs/teaching/chat/README.md",
+        "blob": "0d4229e44c9c9d337eab49e0fb2b7fd4c0e4ca42",
+        "sha256": "bcad18be813b4c6e7ad9a28891066b7f0bf7cf98ad54e970ec0a99d39a86f591",
+        "bytes": 6256
+      },
+      {
+        "path": "docs/teaching/current/ANALYTICS_ENTRY.md",
+        "blob": "900cf1311c5950e91a1a9364bf8faf37185d888b",
+        "sha256": "1811c9edb64ffef972efe3ebe72a8d447445694790b0449ea69b029424e42a4d",
+        "bytes": 1141
+      },
+      {
+        "path": "docs/teaching/current/ARTICLE_CORRECTIONS.md",
+        "blob": "76b16115f9f123388ece823b2320283300fb466e",
+        "sha256": "f43082075eb599f0bb1cfe5024a571cfd6879a27c6e9e9349b967cc7559d46a7",
+        "bytes": 42816
+      },
+      {
+        "path": "docs/teaching/current/CHAT_ENTRY.md",
+        "blob": "48d23fc981973771ea7c1885cda86b94cc89a927",
+        "sha256": "6955803f5427c1aea5f959e76f70497c45b6032384e4aa6a4601f73d16e9085a",
+        "bytes": 1073
+      },
+      {
+        "path": "docs/teaching/current/PET_ENTRY.md",
+        "blob": "64fe6205ec0636cd2f84018956f072b4c911a9c3",
+        "sha256": "d51183152078e0bf8c18dbb20924fd81180f02b237dd4e9f5a643d26cfd2d3ff",
+        "bytes": 1076
+      },
+      {
+        "path": "docs/teaching/current/README.md",
+        "blob": "42e163bf4636c8256d86ab45a23d85183dddcd92",
+        "sha256": "402cdcbbc347f47dd64960844f6fb679b952d3f595c68f0802215848363cb348",
+        "bytes": 1386
+      },
+      {
+        "path": "docs/teaching/current/STATUS.md",
+        "blob": "686edc97ce7d75d7a2babe0b0cd6e11b3803f863",
+        "sha256": "0bf3cf5eff25b0abe35b7819b615c27c5dea8915a34c09b3dac006d7706cff1d",
+        "bytes": 1353
+      },
+      {
+        "path": "docs/teaching/current/manifest.json",
+        "blob": "195b913b1bed43fafcc44ea34ceebb6feb2db98e",
+        "sha256": "4b14d29750fec97f11920bef9a86c83d566c5e59ce2b930f69e532794b0bc545",
+        "bytes": 273675
+      },
+      {
+        "path": "docs/teaching/daily/README.md",
+        "blob": "1359acda5ee4e4b4b660980bccf51dff6e0e59b8",
+        "sha256": "b1a7e49a63bd5e221436fadaf5742f97929f35756d0f9aa92c814ec022922544",
+        "bytes": 3032
+      },
+      {
+        "path": "docs/teaching/daily/day-43/README.md",
+        "blob": "3c555ef6e8e0fa8e374ddba215e15ec470c53436",
+        "sha256": "3ba4da36d8b7662948860eea0b5bf30741635f261416d6e22d16753a486e8469",
+        "bytes": 3850
+      },
+      {
+        "path": "docs/teaching/functional-refactoring/PROGRESS.md",
+        "blob": "2f47ecd86eaf646ab9508d4557edcf8a5a34fda6",
+        "sha256": "e1e878d1bcc1ce865d677e358dd5b2d1fa0f4061acdd32888d749452ec0e28bd",
+        "bytes": 4103
+      },
+      {
+        "path": "docs/teaching/pet/README.md",
+        "blob": "ba90637259e64069f7d5bf84f0199a37aa39b166",
+        "sha256": "d2192cb1768e31161517ed9c8d0ec9b56f48439ac0ec03953f432b2ecf484d7d",
+        "bytes": 6698
+      },
+      {
+        "path": "docs/teaching/scheduler-instructions-v1.md",
+        "blob": "65446f2909275743b36da7f8fbe236b6f7efb004",
+        "sha256": "872b32c8b16a47238fb7f071868f23f26e9f0eae4128d41dae2f76663a55d6e1",
+        "bytes": 2705
+      }
+    ]
+  }
+]

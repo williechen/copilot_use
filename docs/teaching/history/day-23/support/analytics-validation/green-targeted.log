@@ -1,0 +1,10 @@
+   Compiling stats-server v0.2.22 (/home/willie/Documents/Codex/2026-10-20/referenced-chatgpt-conversation-this-is-an-3/work/analytics23/apps/stats_server)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 4.48s
+     Running tests/day23_password_login.rs (/home/willie/Documents/rust_ai_chat/target/debug/deps/day23_password_login-df41face4c4b2db9)
+
+running 2 tests
+test day23_ready_account_session_survives_new_pool_and_is_revocable ... ok
+test day23_bootstrapped_password_is_restricted_before_first_change ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.23s
+

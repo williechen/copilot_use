@@ -1,0 +1,84 @@
+Diff in /home/willie/Documents/Codex/2026-10-26/referenced-chatgpt-conversation-this-is-an/work/pet/pet_apps/pet_server/src/pet_windows.rs:152:
+ }
+ 
+ /// Place one existing pet window inside the primary monitor's work area.
+-fn centered_position(area: &PhysicalRect<i32, u32>, size: PhysicalSize<u32>) -> PhysicalPosition<i32> {
++fn centered_position(
++    area: &PhysicalRect<i32, u32>,
++    size: PhysicalSize<u32>,
++) -> PhysicalPosition<i32> {
+     let x = i64::from(area.position.x) + i64::from(area.size.width.saturating_sub(size.width) / 2);
+-    let y = i64::from(area.position.y) + i64::from(area.size.height.saturating_sub(size.height) / 2);
++    let y =
++        i64::from(area.position.y) + i64::from(area.size.height.saturating_sub(size.height) / 2);
+     PhysicalPosition {
+         x: x.clamp(i64::from(i32::MIN), i64::from(i32::MAX)) as i32,
+         y: y.clamp(i64::from(i32::MIN), i64::from(i32::MAX)) as i32,
+Diff in /home/willie/Documents/Codex/2026-10-26/referenced-chatgpt-conversation-this-is-an/work/pet/pet_apps/pet_server/src/pet_windows.rs:171:
+     store.profile(&id).await?;
+     let name = label(&id)?;
+     let window = app.get_webview_window(&name).ok_or("寵物尚未出籠")?;
+-    let monitor = app.primary_monitor().map_err(|e| e.to_string())?
++    let monitor = app
++        .primary_monitor()
++        .map_err(|e| e.to_string())?
+         .ok_or("找不到主螢幕")?;
+     let size = window.outer_size().map_err(|e| e.to_string())?;
+     let position = centered_position(monitor.work_area(), size);
+Diff in /home/willie/Documents/Codex/2026-10-26/referenced-chatgpt-conversation-this-is-an/work/pet/pet_apps/pet_server/src/pet_windows.rs:178:
+     // Cancel only this UUID's roaming task; preserve the configured roaming policy.
+     crate::roam::stop_for_pet(&name);
+-    let result = window.set_position(position)
++    let result = window
++        .set_position(position)
+         .and_then(|_| window.show())
+         .and_then(|_| window.set_focus());
+     crate::roam::spawn_for_pet(app.clone(), name);
+Diff in /home/willie/Documents/Codex/2026-10-26/referenced-chatgpt-conversation-this-is-an/work/pet/pet_apps/pet_server/src/pet_windows.rs:191:
+     fn day39_find_position_respects_primary_work_area_and_negative_origins() {
+         let area = PhysicalRect {
+             position: PhysicalPosition { x: -1920, y: -100 },
+-            size: PhysicalSize { width: 1920, height: 1080 },
++            size: PhysicalSize {
++                width: 1920,
++                height: 1080,
++            },
+         };
+-        assert_eq!(centered_position(&area, PhysicalSize { width: 200, height: 200 }),
+-            PhysicalPosition { x: -1060, y: 340 });
+-        assert_eq!(centered_position(&area, PhysicalSize { width: 2500, height: 1200 }),
+-            PhysicalPosition { x: -1920, y: -100 });
++        assert_eq!(
++            centered_position(
++                &area,
++                PhysicalSize {
++                    width: 200,
++                    height: 200
++                }
++            ),
++            PhysicalPosition { x: -1060, y: 340 }
++        );
++        assert_eq!(
++            centered_position(
++                &area,
++                PhysicalSize {
++                    width: 2500,
++                    height: 1200
++                }
++            ),
++            PhysicalPosition { x: -1920, y: -100 }
++        );
+     }
+ 
+     #[test]
+Diff in /home/willie/Documents/Codex/2026-10-26/referenced-chatgpt-conversation-this-is-an/work/pet/pet_apps/pet_ui/src/bridge.rs:237:
+ }
+ 
+ pub async fn find_saved_pet(id: &str) -> Result<(), String> {
+-    JsFuture::from(find_saved_pet_js(id)).await.map_err(js_error)?;
++    JsFuture::from(find_saved_pet_js(id))
++        .await
++        .map_err(js_error)?;
+     Ok(())
+ }
+ 

@@ -1,0 +1,8 @@
+Diff in /var/tmp/codex-day40-refresh-source/pet_apps/pet_server/src/pet_windows.rs:217:
+         assert_eq!(pet_id_from_window_label("pet-../../x"), None);
+     }
+ 
+-
+     #[test]
+     fn day24_more_than_two_pet_states_are_independent_and_caging_is_local() {
+         let runtime = Runtime::default();

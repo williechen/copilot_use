@@ -1,0 +1,17 @@
+{
+  "task_id": "6acd967c15fc8191ade8407954c5b354",
+  "name": "三專案每日 TDD 教學",
+  "operation": "update existing cloud task prompt in owner web UI",
+  "new_task_created": false,
+  "run_now_triggered": false,
+  "status": "ACTIVE",
+  "schedule": "daily 06:00 Asia/Taipei",
+  "schedule_changed": false,
+  "actual_model_settings_changed": false,
+  "prompt_chars": 1663,
+  "prompt_sha256": "ca1f00d812dbc7c4a814f1d2eba2d2e23b9c86809a2e615a30536ca67c3c41d4",
+  "prompt_full_readback_matches": true,
+  "verification": "Saved, reloaded page from server, reopened same task and compared full textarea value exactly. UI in-memory cache showed stale prior prompt before reload.",
+  "tool_limitation": "Desktop automation_update requires local heartbeat target fields; cloud-task prompt-only edit completed in existing task owner UI.",
+  "prompt_path": "docs/teaching/scheduler-instructions-v1.md"
+}

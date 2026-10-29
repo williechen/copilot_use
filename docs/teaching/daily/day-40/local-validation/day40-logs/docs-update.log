@@ -1,0 +1,37 @@
+Updating d8d9f4d..715b197
+Fast-forward
+ README.md                                          |   10 +-
+ docs/README.md                                     |   10 +-
+ docs/engineering/README.md                         |    2 +
+ docs/learning-state.json                           |  177 +-
+ docs/teaching/README.md                            |   10 +-
+ docs/teaching/analytics/README.md                  |    8 +-
+ docs/teaching/chat/README.md                       |    8 +-
+ docs/teaching/current/ANALYTICS_ENTRY.md           |   10 +-
+ docs/teaching/current/CHAT_ENTRY.md                |   10 +-
+ docs/teaching/current/PET_ENTRY.md                 |   10 +-
+ docs/teaching/current/manifest.json                |  192 ++-
+ docs/teaching/daily/README.md                      |   10 +-
+ .../daily/day-40/analytics-day40-green.patch       |  718 +++++++++
+ .../daily/day-40/analytics-day40-refactor.patch    |  192 +++
+ docs/teaching/daily/day-40/analytics.md            |  180 +++
+ docs/teaching/daily/day-40/chat-day40-green.patch  | 1697 ++++++++++++++++++++
+ .../daily/day-40/chat-day40-refactor.patch         |   21 +
+ docs/teaching/daily/day-40/chat.md                 |  204 +++
+ .../daily/day-40/delivery-verification.json        |  165 ++
+ docs/teaching/daily/day-40/pet-day40-green.patch   |  380 +++++
+ .../teaching/daily/day-40/pet-day40-refactor.patch |   42 +
+ docs/teaching/daily/day-40/pet.md                  |  166 ++
+ docs/teaching/functional-refactoring/PROGRESS.md   |    6 +-
+ docs/teaching/pet/README.md                        |    8 +-
+ 24 files changed, 4172 insertions(+), 64 deletions(-)
+ create mode 100644 docs/teaching/daily/day-40/analytics-day40-green.patch
+ create mode 100644 docs/teaching/daily/day-40/analytics-day40-refactor.patch
+ create mode 100644 docs/teaching/daily/day-40/analytics.md
+ create mode 100644 docs/teaching/daily/day-40/chat-day40-green.patch
+ create mode 100644 docs/teaching/daily/day-40/chat-day40-refactor.patch
+ create mode 100644 docs/teaching/daily/day-40/chat.md
+ create mode 100644 docs/teaching/daily/day-40/delivery-verification.json
+ create mode 100644 docs/teaching/daily/day-40/pet-day40-green.patch
+ create mode 100644 docs/teaching/daily/day-40/pet-day40-refactor.patch
+ create mode 100644 docs/teaching/daily/day-40/pet.md

@@ -1,0 +1,122 @@
+   Compiling pet-server v0.2.37 (/var/tmp/codex-day40-refresh-source/pet_apps/pet_server)
+    Finished `test` profile [unoptimized] target(s) in 5.70s
+     Running unittests src/lib.rs (/var/tmp/codex-day40-refresh-target/debug/deps/pet_server-3d802095b09dfd0b)
+
+running 39 tests
+test day21_pet_creation_tests::day21_accepts_trimmed_chinese_name ... ok
+test day25_capability_tests::dynamic_pet_windows_can_listen_without_global_window_wildcard ... ok
+test day21_pet_creation_tests::day21_rejects_blank_and_long_names ... ok
+test day32_control_selection_tests::open_control_menu_is_scoped_to_one_valid_pet ... ok
+test file_organizer::tests::ids_are_opaque_not_absolute_paths ... ok
+test file_organizer::tests::duplicate_preview_warns_when_file_size_changes_after_scan ... ok
+test file_organizer::tests::duplicate_preview_warns_when_file_is_replaced_by_symlink ... ok
+test file_organizer::tests::rejects_file_as_authorized_root ... ok
+test file_organizer::tests::rejects_root_euid ... ok
+test file_organizer::tests::scans_regular_files_and_builds_size_candidates ... ok
+test file_organizer::tests::same_content_is_grouped_as_duplicate ... ok
+test file_organizer::tests::same_size_different_content_is_not_duplicate ... ok
+test file_organizer::tests::skips_symlink_instead_of_following_it ... ok
+test file_organizer::tests::unique_size_file_is_not_hashed_into_duplicate_group ... ok
+test pet_store::day22_tests::day22_create_pet_persists ... ok
+test pet_store::day22_tests::day28_caged_pet_is_not_active ... ok
+test pet_store::day22_tests::day32_selecting_other_pet_changes_only_active_slot ... ok
+test pet_store::day34_create_name_tests::day34_bad_name_never_writes_owner_or_profile ... ok
+test pet_windows::lifecycle_lock_tests::lifecycle_lock_excludes_a_second_operation ... ok
+test pet_windows::tests::day24_more_than_two_pet_states_are_independent_and_caging_is_local ... ok
+test pet_windows::tests::day24_window_labels_are_derived_from_each_uuid_not_a_two_window_limit ... ok
+test pet_windows::tests::day39_find_position_respects_primary_work_area_and_negative_origins ... ok
+test pet_windows::tests::day40_close_event_accepts_only_uuid_pet_windows ... ok
+test roam::tests::bounces_at_right_and_bottom_edges ... ok
+test roam::tests::day19_displacement_threshold_axes_and_extremes ... ok
+test roam::tests::day19_large_external_reposition_stops_roam ... ok
+test roam::tests::day20_oversized_window_is_pinned_and_stops ... ok
+test roam::tests::day20_single_axis_can_still_roam ... ok
+test roam::tests::day20_stops_only_when_both_axes_are_blocked ... ok
+test roam::tests::day38_reopen_cancels_only_previous_task_for_same_label ... ok
+test roam::tests::day38_window_label_is_per_pet_not_control_or_fixed_pet ... ok
+test roam::tests::day39_find_cancels_only_target_pet_roaming ... ok
+test roam::tests::day40_runtime_cleanup_cancels_only_the_removed_pet ... ok
+test roam::tests::moves_inside_work_area ... ok
+test roam::tests::oversized_window_is_pinned_without_panicking ... ok
+test roam::tests::supports_negative_monitor_origin ... ok
+test roam_setting_tests::roam_requires_explicit_opt_in ... ok
+test pet_store::day22_tests::day36_restart_restores_all_uncaged_not_just_selected ... ok
+test pet_store::day35_cage_caller_tests::live_store_cages_only_one_saved_pet ... ok
+
+test result: ok. 39 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.66s
+
+     Running unittests src/main.rs (/var/tmp/codex-day40-refresh-target/debug/deps/pet_server-968569baef9f5454)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/cleanup_event_contract.rs (/var/tmp/codex-day40-refresh-target/debug/deps/cleanup_event_contract-63cf94b76b294735)
+
+running 5 tests
+test confirmation_without_filesystem_completion_is_not_success ... ok
+test failed_operation_is_not_counted ... ok
+test succeeded_operation_produces_stable_minimal_event ... ok
+test preview_is_not_a_success_event ... ok
+test invalid_operation_id_never_falls_back_to_new_random_id ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/day23_saved_pets.rs (/var/tmp/codex-day40-refresh-target/debug/deps/day23_saved_pets-cd3ea02849204f61)
+
+running 1 test
+test day23_control_list_survives_pool_reopen ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/day24_active_pet.rs (/var/tmp/codex-day40-refresh-target/debug/deps/day24_active_pet-78c1189778d9b8d0)
+
+running 1 test
+test day24_explicit_selection_survives_reopen_and_rejects_unknown_id ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/day27_create_and_select.rs (/var/tmp/codex-day40-refresh-target/debug/deps/day27_create_and_select-b85c08312da37af6)
+
+running 1 test
+test day27_new_pet_has_stable_identity_and_restart_selection ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/day5_codec_tests.rs (/var/tmp/codex-day40-refresh-target/debug/deps/day5_codec_tests-74ec92ca94aeac35)
+
+running 5 tests
+test rejects_blank_name_on_decode ... ok
+test invalid_profile_cannot_be_encoded ... ok
+test rejects_invalid_json ... ok
+test optional_appearance_is_preserved ... ok
+test valid_five_fields_round_trip ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/pet_machine.rs (/var/tmp/codex-day40-refresh-target/debug/deps/pet_machine-20b6d66d7a590ea4)
+
+running 4 tests
+test sleeping_pet_cannot_interact ... ok
+test wake_moves_sleeping_pet_back_to_idle ... ok
+test interact_moves_idle_to_interacting ... ok
+test pet_starts_idle ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/profile_contract.rs (/var/tmp/codex-day40-refresh-target/debug/deps/profile_contract-2cbd17346dcb8fe1)
+
+running 4 tests
+test optional_override_keeps_other_fields_auto ... ok
+test missing_or_blank_fields_fail ... ok
+test species_is_extensible ... ok
+test only_five_fields_are_enough ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests pet_server
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

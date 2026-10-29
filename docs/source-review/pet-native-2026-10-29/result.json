@@ -1,0 +1,33 @@
+{
+  "time": "2026-10-29T12:27:31.439401+00:00",
+  "step": "restart_persistence",
+  "human_report": "重啟後 A／B 都已回籠，沒有 A 生活窗",
+  "database": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/acceptance-db/pet-gui-restart-v2.sqlite",
+  "rows": [
+    [
+      "00000000-0000-0000-0000-0000000000a1",
+      "重新驗收A-a1",
+      "local-owner",
+      1
+    ],
+    [
+      "00000000-0000-0000-0000-0000000000b2",
+      "重新驗收B-b2",
+      "local-owner",
+      1
+    ]
+  ],
+  "processes": [
+    {
+      "pid": 41347,
+      "database_fds": [
+        "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/acceptance-db/pet-gui-restart-v2.sqlite",
+        "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/acceptance-db/pet-gui-restart-v2.sqlite"
+      ]
+    }
+  ],
+  "database_fd_matches": true,
+  "previous_pid": 40828,
+  "full_gui_acceptance": true,
+  "scope": "human observed native GUI plus read-only SQLite and process FD verification; corrected isolated fixture only"
+}

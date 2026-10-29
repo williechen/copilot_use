@@ -1,0 +1,516 @@
+{
+  "article_commit": "3e199e6c4e2b95dcfe84d3263e0a873a5351c6b6",
+  "tree_sha": "93506a5cd9179bedd55430438f2f158ea2176d2a",
+  "new_and_edited_files_full_readback": {
+    "docs/P9_TARGET.md": {
+      "sha": "903eacb861551c33375b7487bd1135d6a35b6948",
+      "exact": true
+    },
+    "README.md": {
+      "sha": "f74f1ad7e52eca4f8c714d33ef72130817e29842",
+      "exact": true
+    },
+    "docs/COMMON_LEARNING_RULES.md": {
+      "sha": "eac90229038a9a13c86c9792631c562ceb9022a6",
+      "exact": true
+    },
+    "docs/teaching/chat/README.md": {
+      "sha": "319866872da01a15184d967179a88a57d37f5178",
+      "exact": true
+    },
+    "docs/teaching/current/CHAT_ENTRY.md": {
+      "sha": "b6cf4cf3eecac5d50aa141cf3ccccbfcc1293d99",
+      "exact": true
+    },
+    "docs/teaching/README.md": {
+      "sha": "2f93d0a6f229b4d1dbf287972eaf87cdbd492b02",
+      "exact": true
+    },
+    "docs/TEACHING_FORMAT.md": {
+      "sha": "d92c06cee8a9af90d8426c99ddaf0970ad2499a4",
+      "exact": true
+    },
+    "docs/requirements/AUTHENTICATION.md": {
+      "sha": "995fc31626cb36c8a39197c34605a856249b1869",
+      "exact": true
+    },
+    "docs/teaching/current/ANALYTICS_ENTRY.md": {
+      "sha": "15441939bd995a97a4a9dc39bc005f00a0a41297",
+      "exact": true
+    },
+    "docs/catalog/CONSOLIDATION.json": {
+      "sha": "2d67122654f2beec07fce3c9f0a68039deabbf68",
+      "exact": true
+    },
+    "docs/teaching/analytics/README.md": {
+      "sha": "bbc121021deb7fbb8e8f3b8cae8dfee23a86aa77",
+      "exact": true
+    },
+    "docs/LOCAL_VALIDATION.md": {
+      "sha": "e6026c4bbaa69b3f7f3fc86ba52265c4e346326f",
+      "exact": true
+    },
+    "docs/UI_ALIGNMENT_REQUIREMENTS.md": {
+      "sha": "c8f4934bc379036fc7405991fdf6657b29e65100",
+      "exact": true
+    },
+    "docs/catalog/CONSOLIDATION.md": {
+      "sha": "251815f88c900fa14f65c61fdd0ea97d2abe7f5d",
+      "exact": true
+    },
+    "docs/teaching/current/STATUS.md": {
+      "sha": "c79442e3aad45f78796f4f1b04ad30c1ecba5af1",
+      "exact": true
+    },
+    "docs/teaching/current/README.md": {
+      "sha": "185e0badc10510dd089d6497fc31e9cc6adaa745",
+      "exact": true
+    },
+    "docs/teaching/history/day-26/README.md": {
+      "sha": "f8c67eb698f10ea7a89d0972e0fc89713418e4ff",
+      "exact": true
+    },
+    "docs/teaching/history/day-24/chat/README.md": {
+      "sha": "3ceb61212b40e1ff38aa10b9aa553a7f53789ea9",
+      "exact": true
+    },
+    "docs/teaching/history/day-23/analytics/README.md": {
+      "sha": "353b770b1f3cd435a1fc36ed2127e048c45a79e3",
+      "exact": true
+    },
+    "docs/teaching/history/day-24/README.md": {
+      "sha": "e1c7f827bae49c1a34d94e0c1a78ee8a20519187",
+      "exact": true
+    },
+    "docs/requirements/USER_FLOWS.md": {
+      "sha": "bee45a748e3385af125b440ae19698c1cf97c4e6",
+      "exact": true
+    },
+    "docs/teaching/history/day-25/analytics/README.md": {
+      "sha": "8fe1f9d07173454b34aba6f6b50ca0a8a6d0a1ae",
+      "exact": true
+    },
+    "docs/teaching/history/day-25/pet/README.md": {
+      "sha": "21831cefaf59305648a1690cbd467ca427d3b6e5",
+      "exact": true
+    },
+    "docs/README.md": {
+      "sha": "15ed3522c4a4cc1199f7568105ad624fd60680e4",
+      "exact": true
+    },
+    "docs/teaching/history/day-25/README.md": {
+      "sha": "c2cec75e664fcfddc70dfc60f228f728611f0924",
+      "exact": true
+    },
+    "docs/teaching/current/PET_ENTRY.md": {
+      "sha": "2eed69f60b0e032d59ba07fa119c2ad1f211cf7c",
+      "exact": true
+    },
+    "docs/teaching/history/day-24/pet/README.md": {
+      "sha": "0b39c6792543efb50e64d2211169e657f755a762",
+      "exact": true
+    },
+    "docs/teaching/pet/README.md": {
+      "sha": "af57695bbcc6837457341726b1a08b36d021648a",
+      "exact": true
+    },
+    "docs/teaching/history/day-24/analytics/README.md": {
+      "sha": "a16a5efb9e44d2fe782c6264d7bae7cd5342a248",
+      "exact": true
+    },
+    "docs/teaching/current/manifest.json": {
+      "sha": "d6bf62de9381da4eae6b620f4739fb96ae4a483c",
+      "exact": true
+    },
+    "docs/teaching/daily/README.md": {
+      "sha": "a340b55925886564fffec20eb9d8d45de4b1c258",
+      "exact": true
+    },
+    "docs/teaching/history/day-25/chat/README.md": {
+      "sha": "53a6b0e3ee38b3cc3d52c24d0cceac9c22145530",
+      "exact": true
+    },
+    "docs/teaching/history/day-02/pet/README.md": {
+      "sha": "1d2cc95436b773919a053b1924e920ad9e25d42d",
+      "exact": true
+    },
+    "docs/teaching/history/README.md": {
+      "sha": "869219940b3f131dff28d3612bf3c9f205bfb785",
+      "exact": true
+    },
+    "docs/teaching/history/day-02/README.md": {
+      "sha": "aabbe2c911138db50940ac902bae91ff77eb6576",
+      "exact": true
+    },
+    "docs/teaching/history/day-23/chat/README.md": {
+      "sha": "5bde0c4bb37d2a6d5a48c403705ca4d64dd372ea",
+      "exact": true
+    },
+    "docs/teaching/history/day-04/README.md": {
+      "sha": "4399636c11b8271c6a9c44700004cbdb994cba77",
+      "exact": true
+    },
+    "docs/teaching/history/day-03/pet/README.md": {
+      "sha": "bed6d6f15a461b8b084682425c74890eaefa6175",
+      "exact": true
+    },
+    "docs/teaching/history/day-03/README.md": {
+      "sha": "c1772e527c4ddeec2e4dce391e499a7e4a80e837",
+      "exact": true
+    },
+    "docs/teaching/history/day-23/pet/README.md": {
+      "sha": "7db13151f97c00d3df5b84c4222a0fc0193d5a2c",
+      "exact": true
+    },
+    "docs/teaching/history/day-02/analytics/README.md": {
+      "sha": "586ce61ad7a95c3e812f32a848de9af919a88601",
+      "exact": true
+    },
+    "docs/teaching/history/day-04/analytics/README.md": {
+      "sha": "bcea49148af493a2b955916cf960b437f909c8de",
+      "exact": true
+    },
+    "docs/teaching/history/day-03/analytics/README.md": {
+      "sha": "75a5798b0cf79cb028d6ea45d3a0c22a9a125189",
+      "exact": true
+    },
+    "docs/teaching/history/day-05/README.md": {
+      "sha": "74628c7ef0bd145072501feffe1dbe9bbc0d07dc",
+      "exact": true
+    },
+    "docs/teaching/history/day-06/pet/README.md": {
+      "sha": "864a6c966958362072c6f410792fd3a1f286fd2f",
+      "exact": true
+    },
+    "docs/teaching/history/day-03/chat/README.md": {
+      "sha": "fa5ee2b7806d48d986b8aaa598df93f97ed128e2",
+      "exact": true
+    },
+    "docs/teaching/history/day-05/analytics/README.md": {
+      "sha": "e1c393c1673f7caa3a835e2977204154348818cb",
+      "exact": true
+    },
+    "docs/teaching/history/day-07/README.md": {
+      "sha": "fe72d0c642b8ce4df6d27ad6e264ec30c187a414",
+      "exact": true
+    },
+    "docs/teaching/history/day-06/analytics/README.md": {
+      "sha": "707f37a6e2b48ba49572b8cbcd6cc50a49451881",
+      "exact": true
+    },
+    "docs/teaching/history/day-05/chat/README.md": {
+      "sha": "919eb810b52bfccc9f79df1a6b4d879e6d736f55",
+      "exact": true
+    },
+    "docs/teaching/history/day-07/chat/README.md": {
+      "sha": "22b5b01d12ec7af93afcd0898c0974e0aff68cf9",
+      "exact": true
+    },
+    "docs/teaching/history/day-07/pet/README.md": {
+      "sha": "1fed3345ccba56c98aec5668783c66b4139ddb66",
+      "exact": true
+    },
+    "docs/teaching/history/day-06/README.md": {
+      "sha": "ec2267575ab5f479da2632a4039e8b5205107f90",
+      "exact": true
+    },
+    "docs/teaching/history/day-06/chat/README.md": {
+      "sha": "590bbcbf4b75c96ad0cf410768e1f9bef7dfc510",
+      "exact": true
+    },
+    "docs/teaching/history/day-02/chat/README.md": {
+      "sha": "4051582233b84405ae725fefbef1171398698142",
+      "exact": true
+    },
+    "docs/teaching/history/day-08/pet/README.md": {
+      "sha": "b6916035721820e396a077c64e23a582ddcbce9b",
+      "exact": true
+    },
+    "docs/teaching/history/day-08/chat/README.md": {
+      "sha": "4e4637878fdd368f472486e938d132baaa592b32",
+      "exact": true
+    },
+    "docs/teaching/history/day-07/analytics/README.md": {
+      "sha": "efb24bf4ce853715153eb36a13556101ea44b727",
+      "exact": true
+    },
+    "docs/teaching/history/day-04/pet/README.md": {
+      "sha": "2d889e858b439aac3788b21743cae60c1ca2b6ce",
+      "exact": true
+    },
+    "docs/teaching/history/day-08/analytics/README.md": {
+      "sha": "b37fa883c3dbfca843f6e2438970f637cf340200",
+      "exact": true
+    },
+    "docs/teaching/history/day-05/pet/README.md": {
+      "sha": "49cd80889d7a196c8ae042b03566df2d34f3bf5d",
+      "exact": true
+    },
+    "docs/teaching/history/day-04/chat/README.md": {
+      "sha": "38603b171f4fcdd08bb7bb54d131ab4719d83e56",
+      "exact": true
+    },
+    "docs/teaching/history/day-08/README.md": {
+      "sha": "f053b4c380d5638ba8a707089dc08abef5b86d2e",
+      "exact": true
+    },
+    "docs/teaching/history/day-09/analytics/README.md": {
+      "sha": "e1a152ab70a2600e4e1ccdeb60959d4e30c3b7aa",
+      "exact": true
+    },
+    "docs/teaching/history/day-09/README.md": {
+      "sha": "1642acb2a88bb925b95349dac2ba42a6a70ba21e",
+      "exact": true
+    },
+    "docs/teaching/history/day-10/pet/README.md": {
+      "sha": "a0fd42229eb0a5a0e7cd66634d92f2aed32e7231",
+      "exact": true
+    },
+    "docs/teaching/history/day-13/chat/README.md": {
+      "sha": "e597ebae8f273232123dc658fbac9ade82125831",
+      "exact": true
+    },
+    "docs/teaching/history/day-10/chat/README.md": {
+      "sha": "79283d4a0a6197fb910039252c9ec7a66541f698",
+      "exact": true
+    },
+    "docs/teaching/history/day-13/analytics/README.md": {
+      "sha": "9c2b670085aba9d332a9dce58b1423137edef0cd",
+      "exact": true
+    },
+    "docs/teaching/history/day-09/pet/README.md": {
+      "sha": "5c32fb869c835fddbd87f3cfebd8c098f1fb21e5",
+      "exact": true
+    },
+    "docs/teaching/history/day-10/README.md": {
+      "sha": "2840ca1ec6f4c99fc66f7a9c7fc011ea79b575e7",
+      "exact": true
+    },
+    "docs/teaching/history/day-12/pet/README.md": {
+      "sha": "1a5177f154a477fc1805bd130a32e5b7d8951839",
+      "exact": true
+    },
+    "docs/teaching/history/day-11/README.md": {
+      "sha": "ba4af96d867184926efc31be9353a9ad95fed46c",
+      "exact": true
+    },
+    "docs/teaching/history/day-12/README.md": {
+      "sha": "c97a5be4c20f9f480bdb4f10a2a32672eee51176",
+      "exact": true
+    },
+    "docs/teaching/history/day-11/pet/README.md": {
+      "sha": "1043511e81b346c26a10e8a295b80721ebdb86eb",
+      "exact": true
+    },
+    "docs/teaching/history/day-11/analytics/README.md": {
+      "sha": "571afcd8d74a92b6ec6c6bffbaef8473612c0c0e",
+      "exact": true
+    },
+    "docs/teaching/history/day-11/chat/README.md": {
+      "sha": "75498889ecd4b434d43169213c9dbc3ad104d72b",
+      "exact": true
+    },
+    "docs/teaching/history/day-10/analytics/README.md": {
+      "sha": "f12689accff28908045d6ab2afd4521cf4064305",
+      "exact": true
+    },
+    "docs/teaching/history/day-12/chat/README.md": {
+      "sha": "825e12037d9db4fe3df000747771b465990e2286",
+      "exact": true
+    },
+    "docs/teaching/history/day-09/chat/README.md": {
+      "sha": "e4b1ace6aa3f85ec0ef3b70a7ac72aa1a883c176",
+      "exact": true
+    },
+    "docs/teaching/history/day-12/analytics/README.md": {
+      "sha": "59149927f0fd8c8947f08d3ec49e4b0d5416d055",
+      "exact": true
+    },
+    "docs/teaching/history/day-17/analytics/README.md": {
+      "sha": "cf1dbdda9bacee81a4df2b44e7da98e964da2fe7",
+      "exact": true
+    },
+    "docs/teaching/history/day-15/chat/README.md": {
+      "sha": "970ac2440c7fa61cce8d38970dd529c1d8fd79c9",
+      "exact": true
+    },
+    "docs/teaching/history/day-13/README.md": {
+      "sha": "b5f238e045551379c03165ce5a336ed19db52f68",
+      "exact": true
+    },
+    "docs/teaching/history/day-16/pet/README.md": {
+      "sha": "a06cd1222db1e9dcab8565a56a1ba26cadba0141",
+      "exact": true
+    },
+    "docs/teaching/history/day-15/analytics/README.md": {
+      "sha": "af7f1bc7659632899f201bb1fb1f12389333d2eb",
+      "exact": true
+    },
+    "docs/teaching/history/day-16/analytics/README.md": {
+      "sha": "d356e5835d364c6ad814f221bd7395df7494b184",
+      "exact": true
+    },
+    "docs/teaching/history/day-15/README.md": {
+      "sha": "0e38e27fb34b1748ff5fb3ab87bd9450be080173",
+      "exact": true
+    },
+    "docs/teaching/history/day-13/pet/README.md": {
+      "sha": "5e728c73b3941f020960e7c5060f0419ec50f519",
+      "exact": true
+    },
+    "docs/teaching/history/day-14/README.md": {
+      "sha": "4d52cdb288d08c345af2d95324c34d9527b91378",
+      "exact": true
+    },
+    "docs/teaching/history/day-22/analytics/README.md": {
+      "sha": "103e7f2ad4a6927e70479e5d4ad3086812468098",
+      "exact": true
+    },
+    "docs/teaching/history/day-14/pet/README.md": {
+      "sha": "b7e095f41389c587554bd43f98e51be480820417",
+      "exact": true
+    },
+    "docs/teaching/history/day-14/analytics/README.md": {
+      "sha": "0338c84838f123aea2fed70b85c2a2c271792e81",
+      "exact": true
+    },
+    "docs/teaching/history/day-17/README.md": {
+      "sha": "a30d8343d5d889f7775730fc8cf7418f32d999cd",
+      "exact": true
+    },
+    "docs/teaching/history/day-16/README.md": {
+      "sha": "77472d089df481937b7792214e778a8aab41ca8a",
+      "exact": true
+    },
+    "docs/teaching/history/day-15/pet/README.md": {
+      "sha": "05bde04340a4fac57e82f1e683b142e10979059e",
+      "exact": true
+    },
+    "docs/teaching/history/day-14/chat/README.md": {
+      "sha": "8b8fa5d0f48a755d9116a2a284ce8cb1408cdaa4",
+      "exact": true
+    },
+    "docs/teaching/history/day-18/analytics/README.md": {
+      "sha": "bdc4718af915087119b58e985b4e99a856e689a9",
+      "exact": true
+    },
+    "docs/teaching/history/day-17/chat/README.md": {
+      "sha": "c2d522f4a38567e86c5aa1de9dbeea09710ce945",
+      "exact": true
+    },
+    "docs/teaching/history/day-18/pet/README.md": {
+      "sha": "0d71404e89248dee7e9e5b867eab315eb828f378",
+      "exact": true
+    },
+    "docs/teaching/history/day-19/pet/README.md": {
+      "sha": "98c7012e8d0980ac934224ae10e488525f931499",
+      "exact": true
+    },
+    "docs/teaching/history/day-18/README.md": {
+      "sha": "19776caf16ce7a83732eb0588e517d50cc930e70",
+      "exact": true
+    },
+    "docs/teaching/history/day-19/chat/README.md": {
+      "sha": "294b522d07daa473f6740505cf0fe34449f1c57b",
+      "exact": true
+    },
+    "docs/teaching/history/day-22/README.md": {
+      "sha": "698e3312d3a302b79588814e906657da80e3eb33",
+      "exact": true
+    },
+    "docs/teaching/history/day-20/README.md": {
+      "sha": "5ae29ab81879b7d1ca673de831c92e56a7d3fbbc",
+      "exact": true
+    },
+    "docs/teaching/history/day-16/chat/README.md": {
+      "sha": "ddf37fd6f57c65ff23d3e2f84fe9955ec47a6d4d",
+      "exact": true
+    },
+    "docs/teaching/history/day-17/pet/README.md": {
+      "sha": "c765c1bb0b0ed1236bfe25f6232ebda5dacab697",
+      "exact": true
+    },
+    "docs/teaching/history/day-19/analytics/README.md": {
+      "sha": "6a5b38f157da4c06a349aef9c920d4208beb8bfa",
+      "exact": true
+    },
+    "docs/teaching/history/day-22/chat/README.md": {
+      "sha": "96b4f719cd772d613b73ae719c9568348477a372",
+      "exact": true
+    },
+    "docs/teaching/history/day-20/analytics/README.md": {
+      "sha": "d4086d2df174002a7bba884193ba6455fd8386ab",
+      "exact": true
+    },
+    "docs/teaching/history/day-18/chat/README.md": {
+      "sha": "ee6e815c7f65fcb8aa8c974355ec857b502ee39f",
+      "exact": true
+    },
+    "docs/teaching/history/day-22/pet/README.md": {
+      "sha": "92b390c69c6c2a24e8ff9da92523014bb07cf431",
+      "exact": true
+    },
+    "docs/teaching/history/day-21/chat/README.md": {
+      "sha": "ccd9d047a90c86abba714c99bf02377c9aefe91d",
+      "exact": true
+    },
+    "docs/teaching/history/day-20/pet/README.md": {
+      "sha": "b4013483a8e9fa91533dd24e83a1925c8da70d71",
+      "exact": true
+    },
+    "docs/teaching/history/day-19/README.md": {
+      "sha": "cf7f8735f9c88c4370c415c7566cfa9546d2249c",
+      "exact": true
+    },
+    "docs/teaching/history/day-21/analytics/README.md": {
+      "sha": "e1dd07ef85484b61145c983ae6970e346979e4ad",
+      "exact": true
+    },
+    "docs/teaching/history/day-21/README.md": {
+      "sha": "d8747af072007c893e1b6fd59e35804517485b20",
+      "exact": true
+    },
+    "docs/teaching/history/day-23/README.md": {
+      "sha": "eb12b51d235a469fd57b579614d3bac8122953a2",
+      "exact": true
+    },
+    "docs/teaching/history/day-21/pet/README.md": {
+      "sha": "391d5fcd24b20bf8557049329b2b1ea96b3d2b79",
+      "exact": true
+    },
+    "docs/teaching/history/day-20/chat/README.md": {
+      "sha": "86ed8d154fa749e535e6afb8eb03ad9570cff51c",
+      "exact": true
+    },
+    "docs/teaching/history/ARTICLES.json": {
+      "sha": "6e3c2aa83e91250883e1627f06beabd4c77faa86",
+      "exact": true
+    },
+    "docs/catalog/ALL_ARTICLES.md": {
+      "sha": "cd2b385459721afa8d032362270d16ab5278c224",
+      "exact": true
+    },
+    "docs/learning-state.json": {
+      "sha": "4e4e47b170b810db729eb219d095141ae5eb3fa1",
+      "exact": true
+    },
+    "docs/teaching/history/PATH_MAP.json": {
+      "sha": "0e223312fb8c14376015f1feb374529f63d62fee",
+      "exact": true
+    }
+  },
+  "all_124_new_or_edited_files_exact": true,
+  "all_1395_original_contents_sha256_verified_from_remote_git_objects": true,
+  "remote_tree_matches_verified_local_tree": true,
+  "relative_links_checked": 1185,
+  "broken_current_or_index_links": 0,
+  "next_day": {
+    "chat": 27,
+    "pet": 27,
+    "analytics": 27
+  },
+  "makeup_queue_unchanged": true,
+  "last_full_comparison_unchanged": true,
+  "product_code_changed": false,
+  "new_day_published": false
+}

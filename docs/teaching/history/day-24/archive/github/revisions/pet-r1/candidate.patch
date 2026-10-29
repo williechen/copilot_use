@@ -1,0 +1,280 @@
+diff --git a/apps/desktop_pet/frontend/index.html b/apps/desktop_pet/frontend/index.html
+index 7242117..05072ca 100644
+--- a/apps/desktop_pet/frontend/index.html
++++ b/apps/desktop_pet/frontend/index.html
+@@ -104,6 +104,11 @@
+       return invoke("scan_duplicate_preview");
+     };
+ 
++    window.activePet = () => invoke("active_pet");
++    window.selectPet = (id) => invoke("select_pet", { id });
++    window.listenPetProfile = (callback) => window.__TAURI__.event.listen(
++      "pet-profile-changed", (event) => callback(event.payload));
++
+     window.listPets = () => {
+       return invoke("list_pets");
+     };
+diff --git a/apps/desktop_pet/frontend/src/bridge.rs b/apps/desktop_pet/frontend/src/bridge.rs
+index 0a6e104..9693a66 100644
+--- a/apps/desktop_pet/frontend/src/bridge.rs
++++ b/apps/desktop_pet/frontend/src/bridge.rs
+@@ -5,6 +5,12 @@ use wasm_bindgen_futures::JsFuture;
+ 
+ #[wasm_bindgen]
+ extern "C" {
++    #[wasm_bindgen(js_namespace=window, js_name=activePet)]
++    fn active_pet_js() -> Promise;
++    #[wasm_bindgen(js_namespace=window, js_name=selectPet)]
++    fn select_pet_js(id: &str) -> Promise;
++    #[wasm_bindgen(js_namespace=window, js_name=listenPetProfile)]
++    fn listen_pet_profile_js(callback: &Function) -> Promise;
+ 
+     #[wasm_bindgen(
+         js_namespace=window,
+@@ -184,3 +190,26 @@ pub async fn list_pets() -> Result<Vec<SavedPet>, String> {
+     let value = JsFuture::from(list_pets_js()).await.map_err(js_error)?;
+     serde_wasm_bindgen::from_value(value).map_err(|_| "寵物清單格式錯誤".into())
+ }
++
++pub async fn active_pet() -> Result<Option<SavedPet>, String> {
++    let value = JsFuture::from(active_pet_js()).await.map_err(js_error)?;
++    serde_wasm_bindgen::from_value(value).map_err(|_| "生活窗資料格式錯誤".into())
++}
++pub async fn select_pet(id: &str) -> Result<SavedPet, String> {
++    let value = JsFuture::from(select_pet_js(id)).await.map_err(js_error)?;
++    serde_wasm_bindgen::from_value(value).map_err(|_| "選取資料格式錯誤".into())
++}
++pub async fn listen_pet_profile(
++    mut callback: impl FnMut(SavedPet) + 'static,
++) -> Result<(), String> {
++    let closure = Closure::<dyn FnMut(JsValue)>::new(move |v| {
++        if let Ok(pet) = serde_wasm_bindgen::from_value(v) {
++            callback(pet);
++        }
++    });
++    JsFuture::from(listen_pet_profile_js(closure.as_ref().unchecked_ref()))
++        .await
++        .map_err(js_error)?;
++    closure.forget(); // 與此單一 App 視窗同壽命。
++    Ok(())
++}
+diff --git a/apps/desktop_pet/frontend/src/component/activity.rs b/apps/desktop_pet/frontend/src/component/activity.rs
+index c09a246..6ed0383 100644
+--- a/apps/desktop_pet/frontend/src/component/activity.rs
++++ b/apps/desktop_pet/frontend/src/component/activity.rs
+@@ -118,12 +118,12 @@ pub fn PetStatus(
+     };
+ 
+     let face = Signal::derive(move || match pose() {
+-        Some(PetPose::Idle) => "😺",
+-        Some(PetPose::Blink) => "😻",
+-        Some(PetPose::InteractA) => "😸",
+-        Some(PetPose::InteractB) => "😹",
+-        Some(PetPose::SleepA) => "😴",
+-        Some(PetPose::SleepB) => "😪",
++        Some(PetPose::Idle) => "🐢",
++        Some(PetPose::Blink) => "🐢·",
++        Some(PetPose::InteractA) => "🐢♪",
++        Some(PetPose::InteractB) => "🐢♫",
++        Some(PetPose::SleepA) => "🐢💤",
++        Some(PetPose::SleepB) => "🐢z",
+         None => "🐾",
+     });
+ 
+diff --git a/apps/desktop_pet/frontend/src/main.rs b/apps/desktop_pet/frontend/src/main.rs
+index 080f06b..63c1070 100644
+--- a/apps/desktop_pet/frontend/src/main.rs
++++ b/apps/desktop_pet/frontend/src/main.rs
+@@ -54,6 +54,25 @@ fn App() -> impl IntoView {
+     let (saved_pets, set_saved_pets) = signal(Vec::<bridge::SavedPet>::new());
+     let (pets_busy, set_pets_busy) = signal(false);
+ 
++    let (active_pet, set_active_pet) = signal::<Option<bridge::SavedPet>>(None);
++    let profile_events = RwSignal::new(0_u64);
++    spawn_local(async move {
++        if let Err(message) = bridge::listen_pet_profile(move |pet| {
++            profile_events.update(|n| *n += 1);
++            set_active_pet.set(Some(pet));
++        })
++        .await
++        {
++            set_error.set(Some(message));
++        }
++        let generation = profile_events.get_untracked();
++        match bridge::active_pet().await {
++            Ok(pet) if profile_events.get_untracked() == generation => set_active_pet.set(pet),
++            Ok(_) => (), // 載入期間已收到較新的選取事件，不覆寫。
++            Err(message) => set_error.set(Some(message)),
++        }
++    });
++
+     if !bridge::is_pet_window() {
+         set_pets_busy.set(true);
+         spawn_local(async move {
+@@ -106,7 +125,13 @@ fn App() -> impl IntoView {
+                     set_blinking
+                 />
+                 <AnimationClock set_animation_phase />
+-                <PetStatus snapshot blinking animation_phase />
++                <p title=move || active_pet.get().map(|p|p.id).unwrap_or_default()>
++                    {move || active_pet.get().map(|p|p.name).unwrap_or_else(|| "請在控制台選擇生活窗寵物".into())}
++                </p>
++                <Show when=move || active_pet.get().is_some() fallback=|| ()>
++                    <PetStatus snapshot blinking animation_phase />
++                </Show>
++                <p role="alert">{move || error.get().unwrap_or_default()}</p>
+                 <button
+                     type="button"
+                     on:click=move |_| spawn_local(async move{
+@@ -173,7 +198,23 @@ fn App() -> impl IntoView {
+                 <Show when=move || pets_busy.get() fallback=|| ()><p>"處理中…"</p></Show>
+                 <ul>
+                     <For each=move || saved_pets.get() key=|pet| pet.id.clone()
+-                        children=|pet| view! { <li>{format!("{}／{}（{}）", pet.name, pet.species, pet.id)}</li> } />
++                        children=move |pet| {
++                            let id=pet.id.clone();
++                            view! { <li>{format!("{}／{}（{}）", pet.name, pet.species, pet.id)}
++                                <button type="button" disabled=move || pets_busy.get()
++                                    on:click=move |_| {
++                                        if pets_busy.get_untracked() { return; }
++                                        set_pets_busy.set(true); let id=id.clone();
++                                        spawn_local(async move {
++                                            match bridge::select_pet(&id).await {
++                                                Ok(pet) => { set_active_pet.set(Some(pet)); set_new_pet_feedback.set("生活窗選取已儲存".into()); },
++                                                Err(message) => set_new_pet_feedback.set(message),
++                                            }
++                                            set_pets_busy.set(false);
++                                        });
++                                    }>"選為生活窗寵物"</button>
++                            </li> }
++                        } />
+                 </ul>
+             </section>
+ 
+diff --git a/apps/desktop_pet/migrations/20261021070000_active_pet.sql b/apps/desktop_pet/migrations/20261021070000_active_pet.sql
+new file mode 100644
+index 0000000..3eb9a01
+--- /dev/null
++++ b/apps/desktop_pet/migrations/20261021070000_active_pet.sql
+@@ -0,0 +1,5 @@
++-- Additive selection for the existing single life window. No arbitrary default.
++CREATE TABLE local_pet_selection (
++ slot INTEGER PRIMARY KEY CHECK(slot=1),
++ pet_id TEXT NOT NULL REFERENCES pet_profile(id) ON DELETE CASCADE
++);
+diff --git a/apps/desktop_pet/src/lib.rs b/apps/desktop_pet/src/lib.rs
+index ad65ded..6feafdb 100644
+--- a/apps/desktop_pet/src/lib.rs
++++ b/apps/desktop_pet/src/lib.rs
+@@ -128,6 +128,17 @@ async fn list_pets(
+     store.list().await
+ }
+ 
++#[tauri::command]
++async fn active_pet(store: State<'_, pet_store::PetStore>) -> Result<Option<pet_store::SavedPet>, String> {
++    store.active().await
++}
++#[tauri::command]
++async fn select_pet(id: String, app: tauri::AppHandle, store: State<'_, pet_store::PetStore>) -> Result<pet_store::SavedPet, String> {
++    let saved=store.select(&id).await?;
++    app.emit("pet-profile-changed", &saved).map_err(|_| "選取已儲存，通知失敗，請重新載入生活窗".to_owned())?;
++    Ok(saved)
++}
++
+ pub fn application(db: sqlx::SqlitePool) {
+     tauri::Builder::default()
+         .on_window_event(|window, event| {
+@@ -191,6 +202,8 @@ pub fn application(db: sqlx::SqlitePool) {
+             validate_new_pet_name,
+             create_pet,
+             list_pets,
++            active_pet,
++            select_pet,
+         ])
+         .run(tauri::generate_context!())
+         .expect("failed to run Rust AI Desktop Pet");
+diff --git a/apps/desktop_pet/src/pet_store.rs b/apps/desktop_pet/src/pet_store.rs
+index 7f66eae..c9955eb 100644
+--- a/apps/desktop_pet/src/pet_store.rs
++++ b/apps/desktop_pet/src/pet_store.rs
+@@ -11,6 +11,36 @@ pub struct PetStore {
+ }
+ 
+ impl PetStore {
++    pub async fn active(&self) -> Result<Option<SavedPet>, String> {
++        let row: Option<(String,String,String)> = sqlx::query_as(
++            "SELECT p.id,p.name,p.species FROM local_pet_selection s JOIN pet_profile p ON p.id=s.pet_id WHERE s.slot=1 AND p.owner_id='local-owner'")
++            .fetch_optional(&self.pool).await.map_err(|_| "無法讀取生活窗寵物".to_owned())?;
++        Ok(row.map(|(id, name, species)| SavedPet { id, name, species }))
++    }
++    pub async fn select(&self, id: &str) -> Result<SavedPet, String> {
++        let mut tx = self
++            .pool
++            .begin()
++            .await
++            .map_err(|_| "無法開始選取".to_owned())?;
++        let row: (String, String, String) = sqlx::query_as(
++            "SELECT id,name,species FROM pet_profile WHERE id=?1 AND owner_id='local-owner'",
++        )
++        .bind(id)
++        .fetch_optional(&mut *tx)
++        .await
++        .map_err(|_| "無法查詢寵物".to_owned())?
++        .ok_or_else(|| "找不到可選的寵物".to_owned())?;
++        sqlx::query("INSERT INTO local_pet_selection(slot,pet_id) VALUES(1,?1) ON CONFLICT(slot) DO UPDATE SET pet_id=excluded.pet_id")
++            .bind(id).execute(&mut *tx).await.map_err(|_| "無法儲存選取".to_owned())?;
++        tx.commit().await.map_err(|_| "選取提交失敗".to_owned())?;
++        Ok(SavedPet {
++            id: row.0,
++            name: row.1,
++            species: row.2,
++        })
++    }
++
+     pub async fn list(&self) -> Result<Vec<SavedPet>, String> {
+         let rows: Vec<(String, String, String)> = sqlx::query_as(
+             "SELECT id,name,species FROM pet_profile WHERE owner_id='local-owner' ORDER BY name,id",
+diff --git a/apps/desktop_pet/tests/day24_active_pet.rs b/apps/desktop_pet/tests/day24_active_pet.rs
+new file mode 100644
+index 0000000..ce723b4
+--- /dev/null
++++ b/apps/desktop_pet/tests/day24_active_pet.rs
+@@ -0,0 +1,38 @@
++use desktop_pet::pet_store::PetStore;
++use sqlx::sqlite::{SqliteConnectOptions, SqlitePoolOptions};
++#[tokio::test]
++async fn day24_explicit_selection_survives_reopen_and_rejects_unknown_id() {
++    let path = std::env::temp_dir().join(format!("day24-pet-{}.sqlite", uuid::Uuid::new_v4()));
++    let options = SqliteConnectOptions::new()
++        .filename(&path)
++        .create_if_missing(true)
++        .foreign_keys(true);
++    let pool = SqlitePoolOptions::new()
++        .max_connections(1)
++        .connect_with(options.clone())
++        .await
++        .unwrap();
++    sqlx::migrate!("./migrations").run(&pool).await.unwrap();
++    let store = PetStore { pool: pool.clone() };
++    assert!(store.active().await.unwrap().is_none());
++    store.create("小橘").await.unwrap();
++    store.create("小綠").await.unwrap();
++    assert!(store.active().await.unwrap().is_none());
++    let chosen = store.list().await.unwrap().remove(1);
++    assert_eq!(store.select(&chosen.id).await.unwrap(), chosen);
++    assert!(store.select("missing-id").await.is_err());
++    assert_eq!(store.active().await.unwrap(), Some(chosen.clone()));
++    pool.close().await;
++    let pool = SqlitePoolOptions::new()
++        .max_connections(1)
++        .connect_with(options)
++        .await
++        .unwrap();
++    sqlx::migrate!("./migrations").run(&pool).await.unwrap();
++    assert_eq!(
++        (PetStore { pool: pool.clone() }).active().await.unwrap(),
++        Some(chosen)
++    );
++    pool.close().await;
++    std::fs::remove_file(path).unwrap();
++}

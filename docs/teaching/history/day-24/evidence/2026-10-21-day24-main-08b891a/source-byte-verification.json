@@ -1,0 +1,9 @@
+{
+  "source_sha": "08b891a22c1934a2bf0b1edbb103c9b16bcf12de",
+  "tracked_files_verified": 167,
+  "mismatches": [],
+  "external_test_only_files": [
+    "apps/desktop_pet/tests/validation_upgrade_probe.rs",
+    "apps/stats_server/tests/validation_upgrade_probe.rs"
+  ]
+}

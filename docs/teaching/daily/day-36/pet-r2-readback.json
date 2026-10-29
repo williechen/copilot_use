@@ -1,0 +1,49 @@
+{
+  "repository": "williechen/copilot_use",
+  "branch": "main",
+  "path": "docs/teaching/daily/day-36/pet-r2.md",
+  "expected_article_parent": "5fa26f6a3900509a7891feb1032ce37c2fde8ea0",
+  "article_commit": "f3c25d9ae6b9e61963a238940ef387301cde1f9c",
+  "blob_sha": "b59f394ca6727ec3261347f60da58d736a1bbf68",
+  "sha256": "d14b2cf73ddc5873712498c6378559e344772f767abd6cf549e743f4886e8872",
+  "readback_at": "2026-10-25T06:17:33.222Z",
+  "full_text_verified": true,
+  "source_sha": "61ed5930bd9ff38e0d5822eea2983121001d8422",
+  "expected_sync_parent": "f3c25d9ae6b9e61963a238940ef387301cde1f9c",
+  "read_before_write": {
+    "README.md": "23f1620566c0c98f71707f208665961bee8a4d05",
+    "docs/README.md": "4cbb5af74f3f23e51cb29803789335e86d343d30",
+    "docs/teaching/README.md": "1fef03020083728f4eca029da4b2dd587e0d7a9b",
+    "docs/teaching/daily/README.md": "71bb7d5bf7fa9b2cfc29684896587a1c45679ce7",
+    "docs/teaching/chat/README.md": "4a2d99755615163de7f77fb74fb19a5957aa76f6",
+    "docs/teaching/pet/README.md": "e5e5637a9e3bded47baba1bec3d6c6e5e8786d5c",
+    "docs/teaching/analytics/README.md": "bee7c116ac723a8c944b61a41b5e6bb62b61ef93",
+    "docs/teaching/current/PET_ENTRY.md": "a6ef222c9520b9de7f2e30d9a2c92a6274eca07f",
+    "docs/learning-state.json": "9e86af406babc695dace4e633631cbe1d1887a13",
+    "docs/teaching/current/manifest.json": "78c2947cbb1d1077b4475baaa6166ba4d2f10c8a"
+  },
+  "sync_paths": [
+    "README.md",
+    "docs/README.md",
+    "docs/teaching/README.md",
+    "docs/teaching/daily/README.md",
+    "docs/teaching/chat/README.md",
+    "docs/teaching/pet/README.md",
+    "docs/teaching/analytics/README.md",
+    "docs/teaching/current/PET_ENTRY.md",
+    "docs/learning-state.json",
+    "docs/teaching/current/manifest.json"
+  ],
+  "raw_error": null,
+  "tests": "not run",
+  "main_application": "not applied",
+  "functional_acceptance": false,
+  "supersedes": {
+    "path": "docs/teaching/daily/day-36/pet.md",
+    "article_commit": "f02f1d3c3ecd55f59ba661a458a2e9661e34d011",
+    "blob_sha": "76d3933ae4a501b0da130b78473580f569b85a92",
+    "sha256": "43299125496c16bb3cdff4dc6ca6bd1a7fd93d282a8ae7cb98a8df75066c229c",
+    "reason": "r1 source-review relative link resolved under wrong directory; original immutable"
+  },
+  "next_day_unchanged": 37
+}

@@ -1,0 +1,11 @@
+Diff in /home/willie/Documents/Codex/2026-10-26/referenced-chatgpt-conversation-this-is-an/work/chat/chat_apps/chat_ui/src/lib.rs:17:
+     path,
+ };
+ 
+-use room_list_state::{filter_rooms, room_list_feedback};
+ #[cfg(target_arch = "wasm32")]
+ use room_list_state::should_auto_load;
++use room_list_state::{filter_rooms, room_list_feedback};
+ 
+ #[cfg(any(target_arch = "wasm32", test))]
+ use room_list_state::refresh_result_view;

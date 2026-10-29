@@ -1,0 +1,79 @@
+[
+  {
+    "id": 40837663957,
+    "name": "Node",
+    "status": "completed",
+    "conclusion": "success",
+    "head_sha": "8b882696c5548accb9d98a32b27db35e11109c74",
+    "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40837663957",
+    "run_attempt": 1,
+    "updated_at": "2026-10-29T07:47:20Z",
+    "path": ".github/workflows/node.yml"
+  },
+  {
+    "id": 40837663884,
+    "name": "Cargo workspaces",
+    "status": "completed",
+    "conclusion": "success",
+    "head_sha": "8b882696c5548accb9d98a32b27db35e11109c74",
+    "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40837663884",
+    "run_attempt": 1,
+    "updated_at": "2026-10-29T07:47:29Z",
+    "path": ".github/workflows/workspaces.yml"
+  },
+  {
+    "id": 40837663978,
+    "name": "Test All",
+    "status": "completed",
+    "conclusion": "failure",
+    "head_sha": "8b882696c5548accb9d98a32b27db35e11109c74",
+    "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40837663978",
+    "run_attempt": 1,
+    "updated_at": "2026-10-29T07:50:46Z",
+    "path": ".github/workflows/test.yml"
+  },
+  {
+    "id": 40837663963,
+    "name": "Rust Analytics",
+    "status": "completed",
+    "conclusion": "success",
+    "head_sha": "8b882696c5548accb9d98a32b27db35e11109c74",
+    "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40837663963",
+    "run_attempt": 1,
+    "updated_at": "2026-10-29T07:50:57Z",
+    "path": ".github/workflows/analytics.yml"
+  },
+  {
+    "id": 40837663886,
+    "name": "Persistence",
+    "status": "completed",
+    "conclusion": "success",
+    "head_sha": "8b882696c5548accb9d98a32b27db35e11109c74",
+    "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40837663886",
+    "run_attempt": 1,
+    "updated_at": "2026-10-29T07:51:05Z",
+    "path": ".github/workflows/persistence.yml"
+  },
+  {
+    "id": 40837663882,
+    "name": "Rust Desktop Pet",
+    "status": "completed",
+    "conclusion": "success",
+    "head_sha": "8b882696c5548accb9d98a32b27db35e11109c74",
+    "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40837663882",
+    "run_attempt": 1,
+    "updated_at": "2026-10-29T08:01:01Z",
+    "path": ".github/workflows/desktop_pet.yml"
+  },
+  {
+    "id": 40837663988,
+    "name": "Rust AI Chat",
+    "status": "completed",
+    "conclusion": "success",
+    "head_sha": "8b882696c5548accb9d98a32b27db35e11109c74",
+    "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40837663988",
+    "run_attempt": 1,
+    "updated_at": "2026-10-29T08:00:49Z",
+    "path": ".github/workflows/ai_chat.yml"
+  }
+]

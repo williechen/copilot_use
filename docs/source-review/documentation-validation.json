@@ -1,0 +1,12 @@
+{
+  "documentation_links_checked": 59,
+  "policy_consistency": "passed",
+  "evidence_zip_crc": "passed",
+  "evidence_manifest_hashes": "passed",
+  "source_config_files_unchanged": 253,
+  "reference_clean": true,
+  "fixed_tag_preserved": true,
+  "weekly_acceptance_not_advanced": true,
+  "next_day_not_advanced": true,
+  "runtime_tests": "not rerun for documentation-only change"
+}

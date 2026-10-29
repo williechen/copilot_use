@@ -1,0 +1,12 @@
+{
+  "corrected.patch": {
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "red-tests.patch": {
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "chat": {
+    "command": "CHAT_DATABASE_URL='sqlite:///var/tmp/codex-day40-rerun-chat.sqlite?mode=rwc' LEPTOS_OUTPUT_NAME=rust_ai_chat LEPTOS_SITE_ROOT=target/site LEPTOS_SITE_PKG_DIR=pkg /var/tmp/codex-day40-rerun-target/debug/chat-server",
+    "cwd": "/var/tmp/codex-day40-rerun-source/chat_apps",
+    "startup": "Server running on http://127.0.0.1:3000",
+    "termination_exit_code": 130,
+    "termination_reason": "intentional Ctrl-C after browser tests",
+    "fixture": "POST /signup, Origin http://127.0.0.1:3000; synthetic username rerunlearner, email rerun@example.test, display_name Rerun Learner; HTTP200 /signup/complete"
+  },
+  "analytics": {
+    "command": "ANALYTICS_DATABASE_URL='postgresql:///codex_day40_gui_rerun?host=/var/run/postgresql&user=willie' ANALYTICS_CHAT_TOKEN=fixture-rerun-chat ANALYTICS_PET_TOKEN=fixture-rerun-pet /var/tmp/codex-day40-rerun-target/debug/analytics-server",
+    "cwd": "/var/tmp/codex-day40-rerun-source/analytics_apps",
+    "startup": "Stats server running on http://127.0.0.1:3100",
+    "termination_exit_code": 130,
+    "termination_reason": "intentional Ctrl-C after browser tests",
+    "fixture_commands": [
+      {
+        "command": [
+          "createdb",
+          "codex_day40_gui_rerun"
+        ],
+        "exit_code": 0
+      },
+      {
+        "command": "psql -d codex_day40_gui_rerun -v ON_ERROR_STOP=1 -c \"UPDATE uac_user SET is_init_pd=false WHERE user_acnt='admin'; INSERT INTO product_events(source_app,event_id,schema_version,event_type) VALUES ('web_chat','11111111-1111-4111-8111-111111111111',1,'chat.message.persisted'),('web_chat','22222222-2222-4222-8222-222222222222',1,'chat.room.created'),('desktop_pet','33333333-3333-4333-8333-333333333333',1,'chat.message.persisted');\"",
+        "exit_code": 0
+      }
+    ]
+  }
+}

@@ -1,0 +1,177 @@
+{
+  "date": "2026-10-26",
+  "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+  "rules_commit": "43b0c4f4eb5d6b65d6d3155a473b2a673d944046",
+  "projects": {
+    "chat": {
+      "project": "chat",
+      "parent": "43b0c4f4eb5d6b65d6d3155a473b2a673d944046",
+      "commit": "2b06e1070e586209f2d28f1591c7b8a1d4b3124d",
+      "readback_at": "2026-10-25T23:21:07.800Z",
+      "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+      "rules_commit": "43b0c4f4eb5d6b65d6d3155a473b2a673d944046",
+      "files": [
+        {
+          "path": "docs/teaching/daily/day-38/chat-r2.md",
+          "blob_sha": "c68f1cb3f55a039cc2bb8510dda327060012c389",
+          "full_text_verified": true,
+          "sha256": "aad36ac9c1af0bfb721d16e8a74ba2d98d4f382fee59ccff87b01a0516dc80f8"
+        },
+        {
+          "path": "docs/teaching/daily/day-38/chat-r2.patch",
+          "blob_sha": "403f383ba4b03f9a7135026aa39740901cd4a7c3",
+          "full_text_verified": true,
+          "sha256": "fecb9f84591031f0173a598de5ad30857161ce2415b63e9326c38efb95fec745"
+        }
+      ],
+      "day": 38,
+      "revision": "r2",
+      "repository": "williechen/copilot_use",
+      "branch": "main",
+      "article_path": "docs/teaching/daily/day-38/chat-r2.md",
+      "article_commit": "2b06e1070e586209f2d28f1591c7b8a1d4b3124d",
+      "blob_sha": "c68f1cb3f55a039cc2bb8510dda327060012c389",
+      "sha256": "aad36ac9c1af0bfb721d16e8a74ba2d98d4f382fee59ccff87b01a0516dc80f8",
+      "patch": {
+        "path": "docs/teaching/daily/day-38/chat-r2.patch",
+        "blob_sha": "403f383ba4b03f9a7135026aa39740901cd4a7c3",
+        "full_text_verified": true,
+        "sha256": "fecb9f84591031f0173a598de5ad30857161ce2415b63e9326c38efb95fec745"
+      },
+      "full_text_verified": true,
+      "gate1": "complete_document_delivery",
+      "gate2": false,
+      "red_executed": false,
+      "green_executed": false,
+      "cargo_tests_executed": false,
+      "main_application": "not applied",
+      "functional_acceptance": false,
+      "static_checks": "r2-static-checks.json",
+      "official_versions": "r2-versions.json",
+      "next_day_before": 39,
+      "next_day_after": 39,
+      "revision_does_not_advance_day": true,
+      "evidence": "docs/teaching/daily/day-38/chat-r2-readback.json",
+      "original_delivery_preserved": true,
+      "index_sync_expected_parent": "12c7ceddbeff1ae3d528b8a7156f0e869c304a47"
+    },
+    "pet": {
+      "project": "pet",
+      "parent": "2b06e1070e586209f2d28f1591c7b8a1d4b3124d",
+      "commit": "5a27494c12ebc56efd41028d69e080877052f506",
+      "readback_at": "2026-10-25T23:21:13.881Z",
+      "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+      "rules_commit": "43b0c4f4eb5d6b65d6d3155a473b2a673d944046",
+      "files": [
+        {
+          "path": "docs/teaching/daily/day-38/pet-r2.md",
+          "blob_sha": "b37b8922ae05f58fe6c215898b9e83e3d2d30009",
+          "full_text_verified": true,
+          "sha256": "f45e2d8c7ce65715ea8a22b29f9ff47cf6852d7fdd0bd7c7df2fc09b37463cb3"
+        },
+        {
+          "path": "docs/teaching/daily/day-38/pet-r2.patch",
+          "blob_sha": "64c8d7eca1f2419cabe4543d17127bf45782e4cc",
+          "full_text_verified": true,
+          "sha256": "3272c80e9f32df8edefebee31dff3f5f60c7fa8fadb5dd55183b02fb4ffe56d7"
+        }
+      ],
+      "day": 38,
+      "revision": "r2",
+      "repository": "williechen/copilot_use",
+      "branch": "main",
+      "article_path": "docs/teaching/daily/day-38/pet-r2.md",
+      "article_commit": "5a27494c12ebc56efd41028d69e080877052f506",
+      "blob_sha": "b37b8922ae05f58fe6c215898b9e83e3d2d30009",
+      "sha256": "f45e2d8c7ce65715ea8a22b29f9ff47cf6852d7fdd0bd7c7df2fc09b37463cb3",
+      "patch": {
+        "path": "docs/teaching/daily/day-38/pet-r2.patch",
+        "blob_sha": "64c8d7eca1f2419cabe4543d17127bf45782e4cc",
+        "full_text_verified": true,
+        "sha256": "3272c80e9f32df8edefebee31dff3f5f60c7fa8fadb5dd55183b02fb4ffe56d7"
+      },
+      "full_text_verified": true,
+      "gate1": "complete_document_delivery",
+      "gate2": false,
+      "red_executed": false,
+      "green_executed": false,
+      "cargo_tests_executed": false,
+      "main_application": "not applied",
+      "functional_acceptance": false,
+      "static_checks": "r2-static-checks.json",
+      "official_versions": "r2-versions.json",
+      "next_day_before": 39,
+      "next_day_after": 39,
+      "revision_does_not_advance_day": true,
+      "evidence": "docs/teaching/daily/day-38/pet-r2-readback.json",
+      "original_delivery_preserved": true,
+      "index_sync_expected_parent": "12c7ceddbeff1ae3d528b8a7156f0e869c304a47"
+    },
+    "analytics": {
+      "project": "analytics",
+      "parent": "5a27494c12ebc56efd41028d69e080877052f506",
+      "commit": "12c7ceddbeff1ae3d528b8a7156f0e869c304a47",
+      "readback_at": "2026-10-25T23:21:19.595Z",
+      "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+      "rules_commit": "43b0c4f4eb5d6b65d6d3155a473b2a673d944046",
+      "files": [
+        {
+          "path": "docs/teaching/daily/day-38/analytics-r2.md",
+          "blob_sha": "810588bb719216c75c57aac495228fb5b10e582b",
+          "full_text_verified": true,
+          "sha256": "7369349057c878b70e63f9ed0b891713de3046d3f9cbc926323422b1875c6eb0"
+        },
+        {
+          "path": "docs/teaching/daily/day-38/analytics-r2.patch",
+          "blob_sha": "a501318d0abda9bc6081fb207dbf13dda59c14fa",
+          "full_text_verified": true,
+          "sha256": "89e2bd9fe90c59c6949ce952aa39787eea51093d759f01ee725e45e7be71969f"
+        }
+      ],
+      "day": 38,
+      "revision": "r2",
+      "repository": "williechen/copilot_use",
+      "branch": "main",
+      "article_path": "docs/teaching/daily/day-38/analytics-r2.md",
+      "article_commit": "12c7ceddbeff1ae3d528b8a7156f0e869c304a47",
+      "blob_sha": "810588bb719216c75c57aac495228fb5b10e582b",
+      "sha256": "7369349057c878b70e63f9ed0b891713de3046d3f9cbc926323422b1875c6eb0",
+      "patch": {
+        "path": "docs/teaching/daily/day-38/analytics-r2.patch",
+        "blob_sha": "a501318d0abda9bc6081fb207dbf13dda59c14fa",
+        "full_text_verified": true,
+        "sha256": "89e2bd9fe90c59c6949ce952aa39787eea51093d759f01ee725e45e7be71969f"
+      },
+      "full_text_verified": true,
+      "gate1": "complete_document_delivery",
+      "gate2": false,
+      "red_executed": false,
+      "green_executed": false,
+      "cargo_tests_executed": false,
+      "main_application": "not applied",
+      "functional_acceptance": false,
+      "static_checks": "r2-static-checks.json",
+      "official_versions": "r2-versions.json",
+      "next_day_before": 39,
+      "next_day_after": 39,
+      "revision_does_not_advance_day": true,
+      "evidence": "docs/teaching/daily/day-38/analytics-r2-readback.json",
+      "original_delivery_preserved": true,
+      "index_sync_expected_parent": "12c7ceddbeff1ae3d528b8a7156f0e869c304a47"
+    }
+  },
+  "core_minutes_scope": "main Red/Green only; local Refactor and engineering excluded",
+  "next_day_before": {
+    "chat": 39,
+    "pet": 39,
+    "analytics": 39
+  },
+  "next_day_after": {
+    "chat": 39,
+    "pet": 39,
+    "analytics": 39
+  },
+  "original_delivery_record_unchanged": "delivery-verification.json",
+  "consolidation_readback": "r2-rule-consolidation-readback.json",
+  "original_errors": []
+}

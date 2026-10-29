@@ -1,0 +1,420 @@
+{
+  "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+  "source_files": [
+    {
+      "path": "chat_apps/chat_ui/src/lib.rs",
+      "blob_sha": "c27a771d456853a2e71e29e5d7228328947c44f9"
+    },
+    {
+      "path": "pet_apps/pet_application/src/lib.rs",
+      "blob_sha": "e9d5a14fb2c40060d47534df8576c085d2887915"
+    },
+    {
+      "path": "pet_apps/pet_server/src/pet_windows.rs",
+      "blob_sha": "4c4aa4c79cbb761abc144d03f9a5e97f86ee1f6d"
+    },
+    {
+      "path": "pet_apps/pet_server/Cargo.toml",
+      "blob_sha": "e477d4f8c518586c9720abf1e073df00326e86c3"
+    },
+    {
+      "path": "analytics_apps/analytics_server/tests/day23_password_login.rs",
+      "blob_sha": "58a49f1cbf083368851951edd6337557ff39bb0b"
+    },
+    {
+      "path": "analytics_apps/analytics_server/tests/day27_dashboard_source.rs",
+      "blob_sha": "fccb4e87b54fbae2ff4713cbec7011607359dd12"
+    },
+    {
+      "path": "analytics_apps/analytics_server/tests/day37_query_cookie.rs",
+      "blob_sha": "a7b47ca97115cb872b16aaddfb269aa3901297d2"
+    },
+    {
+      "path": "analytics_apps/analytics_server/Cargo.toml",
+      "blob_sha": "d43f3c41eae7d40d0b75e2040751e6cb7de35316"
+    }
+  ],
+  "checked_at": "2026-10-26T00:09:19.227500+00:00",
+  "patch_checks": [
+    "git apply --check exact base",
+    "rustfmt parse all changed Rust files",
+    "functional Green and refactor apply successfully in both orders"
+  ],
+  "product_tests_not_run": [
+    "true browser/combined cargo-leptos product build",
+    "Pet actual native-window GUI",
+    "candidate GitHub Actions"
+  ],
+  "product_applied": false,
+  "product_repository_modified": false,
+  "tools": {
+    "rustc": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+    "cargo": "cargo 1.99.1 (5f94df478 2026-08-27)"
+  },
+  "test_outputs": {
+    "chat": "\nrunning 5 tests\ntest room_list_state::tests::distinguish_not_loaded_empty_filtered_and_found ... ok\ntest room_list_state::tests::filter_preserves_ids_and_handles_all_original_queries ... ok\ntest room_list_state::tests::success_replaces_links_and_returns_full_snapshot ... ok\ntest room_list_state::tests::failures_preserve_complete_snapshot_query_and_retry_message ... ok\ntest room_list_state::tests::empty_success_replaces_rows_and_clears_query ... ok\n\ntest result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n",
+    "pet": "\nrunning 4 tests\ntest day34_name_tests::normalized_name_preserves_unicode_and_rejects_controls ... ok\ntest lifecycle::tests::persist_failure_never_opens_or_closes_a_window ... ok\ntest lifecycle::tests::success_writes_once_and_rollback_error_is_visible ... ok\ntest lifecycle::tests::open_failure_restores_the_actual_old_flag ... ok\n\ntest result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n",
+    "analytics": "   Compiling day38-analytics-http-contract v0.0.0 (<task-workspace>/work/day38-r4-validation/analytics-http)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.85s\n     Running <task-workspace>/work/day38-r4-refactors/analytics/candidate/analytics_apps/analytics_server/tests/support_http_contract.rs (work/day38-r4-validation/analytics-http/target/debug/deps/support_http_contract-bc546646541739fa)\n\nrunning 2 tests\ntest response_helpers_keep_cookie_and_body_contracts ... ok\ntest request_setup_preserves_get_and_form_wire_contracts ... ok\n\ntest result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n"
+  },
+  "initial_unit_checks": {
+    "chat": {
+      "passed": 5,
+      "command": "rustc --edition2024 --test chat_state_tests.rs; execute harness using actual room_list_state.rs",
+      "scope": "candidate pure list-state module; no Leptos/hydrate/SSR build"
+    },
+    "pet": {
+      "passed": 4,
+      "command": "rustc --edition2024 --test candidate/pet_application/src/lib.rs; execute binary",
+      "scope": "actual full Application lib.rs plus lifecycle module; no Tauri/IPC/native/DB build"
+    },
+    "analytics": {
+      "exit_code": 0,
+      "tests_passed": 2,
+      "scope": "actual candidate support/http.rs and support_http_contract.rs compiled in isolated Cargo project; pinned axum0.8.9 tower0.5.3 tokio1.54.1; no PG/server build"
+    }
+  },
+  "full_workspace_results": {
+    "pet-application": {
+      "job": "pet-application",
+      "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+      "candidate": "exact source plus three Refactor and three Day38 Green patches",
+      "workspace": "pet_apps",
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "-p",
+        "pet-application"
+      ],
+      "exit_code": 0,
+      "seconds": 6.04,
+      "log": "r4-validation/day38-r4-full-pet-application.log",
+      "target_profile": "debug=0 incremental=false jobs=2; isolated /tmp target",
+      "product_checkout_modified": false,
+      "passed": 4,
+      "failed": 0,
+      "ignored": 0,
+      "warning_count": 0,
+      "log_sha256": "88992e8fd09ee8935518349bff1600a6987dc19be253c025b8150e31140db867",
+      "local_log": "outputs/day38-r4-full-pet-application.log"
+    },
+    "chat-ssr": {
+      "job": "chat-ssr",
+      "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+      "candidate": "exact source plus three Refactor and three Day38 Green patches",
+      "workspace": "chat_apps",
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "-p",
+        "chat-ui",
+        "--features",
+        "ssr"
+      ],
+      "exit_code": 0,
+      "seconds": 1.51,
+      "log": "r4-validation/day38-r4-full-chat-ssr.log",
+      "target_profile": "debug=0 incremental=false jobs=2; isolated /tmp target",
+      "product_checkout_modified": false,
+      "passed": 14,
+      "failed": 0,
+      "ignored": 0,
+      "warning_count": 0,
+      "log_sha256": "41fc0da67033f15a5cdc099002769399227ce8fb0b9f6146fd23149d15619b5c",
+      "local_log": "outputs/day38-r4-full-chat-ssr.log"
+    },
+    "chat-hydrate": {
+      "job": "chat-hydrate",
+      "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+      "candidate": "exact source plus three Refactor and three Day38 Green patches",
+      "workspace": "chat_apps",
+      "command": [
+        "cargo",
+        "check",
+        "--offline",
+        "--locked",
+        "-p",
+        "chat-ui",
+        "--features",
+        "hydrate",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "exit_code": 0,
+      "seconds": 32.9,
+      "log": "r4-validation/day38-r4-full-chat-hydrate.log",
+      "target_profile": "debug=0 incremental=false jobs=2; isolated /tmp target",
+      "product_checkout_modified": false,
+      "passed": 0,
+      "failed": 0,
+      "ignored": 0,
+      "warning_count": 1,
+      "log_sha256": "da23645b0656f90e50c47647169cbadaae4309ddef54e2b29e300de04659b37a",
+      "warning_scope": "existing room_api::create_room dead_code warning; not introduced by Refactor",
+      "local_log": "outputs/day38-r4-full-chat-hydrate.log"
+    },
+    "pet-native-sqlite-bfd": {
+      "job": "pet-native-sqlite-bfd",
+      "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+      "candidate": "exact source plus three Refactor and three Day38 Green patches",
+      "workspace": "pet_apps",
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "-p",
+        "pet-server",
+        "-p",
+        "pet-persistence"
+      ],
+      "exit_code": 0,
+      "seconds": 11.77,
+      "log": "r4-validation/day38-r4-full-pet-native-sqlite-bfd.log",
+      "target_profile": "debug=0 incremental=false jobs=2; isolated /tmp target",
+      "product_checkout_modified": false,
+      "passed": 60,
+      "failed": 0,
+      "ignored": 0,
+      "warning_count": 0,
+      "log_sha256": "53e6daf2d8aad5066f3a2cc7f89799b05ab8a306192ce6e13add74d84c882f43",
+      "linker_adjustment": "task-only wrapper selects bfd for tauri_macros only; moved own validation artifacts out of tmpfs quota; product configuration unchanged",
+      "local_log": "outputs/day38-r4-full-pet-native-sqlite-bfd.log"
+    },
+    "analytics-postgres": {
+      "job": "analytics-postgres",
+      "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+      "candidate": "exact source plus three Refactor and three Day38 Green patches",
+      "workspace": "analytics_apps",
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "-p",
+        "analytics-server",
+        "-p",
+        "analytics-persistence",
+        "--features",
+        "postgres-integration"
+      ],
+      "exit_code": 0,
+      "seconds": 19.48,
+      "log": "r4-validation/day38-r4-full-analytics-postgres.log",
+      "target_profile": "debug=0 incremental=false jobs=2; isolated /tmp target",
+      "product_checkout_modified": false,
+      "passed": 48,
+      "failed": 0,
+      "ignored": 1,
+      "warning_count": 0,
+      "log_sha256": "8efef48145331a09fcc0481e1caa5da25e2cce01f4cfad96ab11bf9ebc3154b6",
+      "local_log": "outputs/day38-r4-full-analytics-postgres.log"
+    },
+    "analytics-ignored": {
+      "job": "analytics-ignored",
+      "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+      "candidate": "exact source plus three Refactor and three Day38 Green patches",
+      "workspace": "analytics_apps",
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "-p",
+        "analytics-server",
+        "--features",
+        "postgres-integration",
+        "--lib",
+        "admin::tests::login_query_postgres_and_logout_flow",
+        "--",
+        "--ignored"
+      ],
+      "exit_code": 0,
+      "seconds": 0.22,
+      "log": "r4-validation/day38-r4-full-analytics-ignored.log",
+      "target_profile": "debug=0 incremental=false jobs=2; isolated /tmp target",
+      "product_checkout_modified": false,
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "warning_count": 0,
+      "log_sha256": "fa092681b8ffd8c0ec0d1172cd59e842a64576f0c5474f54123102459d5db71d",
+      "local_log": "outputs/day38-r4-full-analytics-ignored.log"
+    }
+  },
+  "reds": [
+    {
+      "job": "chat-red",
+      "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+      "candidate": "exact source plus Day38 Red test additions only",
+      "workspace": "chat_apps",
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "-p",
+        "chat-ui",
+        "--features",
+        "ssr",
+        "day38_room_status_tests"
+      ],
+      "exit_code": 101,
+      "seconds": 0.89,
+      "log": "r4-validation/day38-r4-full-chat-red.log",
+      "target_profile": "debug=0 incremental=false jobs=2; isolated /tmp target",
+      "product_checkout_modified": false,
+      "expected_red_observed": true,
+      "red_kind": "missing-symbol compilation",
+      "local_log": "outputs/day38-r4-full-chat-red.log",
+      "log_sha256": "23ae3f0cd5667510b9f01284fa41afa47fdf21ab0b5cc9382fdce3202074c3a3"
+    },
+    {
+      "job": "pet-red",
+      "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+      "candidate": "exact source plus Day38 Red test additions only",
+      "workspace": "pet_apps",
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "-p",
+        "pet-server",
+        "roam::tests"
+      ],
+      "exit_code": 101,
+      "seconds": 3.39,
+      "log": "r4-validation/day38-r4-full-pet-red.log",
+      "target_profile": "debug=0 incremental=false jobs=2; isolated /tmp target",
+      "product_checkout_modified": false,
+      "expected_red_observed": true,
+      "red_kind": "missing-symbol compilation",
+      "local_log": "outputs/day38-r4-full-pet-red.log",
+      "log_sha256": "36fec1882cd9da3d5c43bc9566b1f894e3a417a495efcf28fb7ad3d14e219bd6"
+    },
+    {
+      "job": "analytics-red",
+      "source_sha": "9b89656f964b99e0cb89ba421855704a35c5ecb9",
+      "candidate": "exact source plus Day38 Red test additions only",
+      "workspace": "analytics_apps",
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "-p",
+        "analytics-server",
+        "--features",
+        "postgres-integration",
+        "--test",
+        "day38_ingest_authorization"
+      ],
+      "exit_code": 101,
+      "seconds": 3.08,
+      "log": "r4-validation/day38-r4-full-analytics-red.log",
+      "target_profile": "debug=0 incremental=false jobs=2; isolated /tmp target",
+      "product_checkout_modified": false,
+      "expected_red_observed": true,
+      "red_kind": "behavior",
+      "local_log": "outputs/day38-r4-full-analytics-red.log",
+      "log_sha256": "612e63361df90785a14c93985a017d30fa823b2586c8a63fd38b5ede8e273a2e"
+    }
+  ],
+  "tested_file_hashes": [
+    {
+      "path": "chat_apps/chat_ui/src/room_list_state.rs",
+      "sha256": "be553f34cba93ef78001d38c9ad8c07d780790e4922e11059b4631641ed14b7a"
+    },
+    {
+      "path": "chat_apps/chat_ui/src/lib.rs",
+      "sha256": "934bcd8fe8a2d2bca0a3986b6df05fc028d95356109ccbc637656a7222247da0"
+    },
+    {
+      "path": "pet_apps/pet_server/src/pet_windows.rs",
+      "sha256": "4f7fa930f1991c2cc95a48d944a6ae4475b27b773988c305c814058c176381c8"
+    },
+    {
+      "path": "pet_apps/pet_server/src/roam.rs",
+      "sha256": "8b555fd1128c913f27e339f78786cb2466b83643c3972afd61a1ae77ea553b3c"
+    },
+    {
+      "path": "pet_apps/pet_server/src/lib.rs",
+      "sha256": "70cdc1b75a8075e27cec2bbeaa1db509ff7cfb50ecdd7dc89cf6db3c9b487199"
+    },
+    {
+      "path": "pet_apps/pet_application/src/lifecycle.rs",
+      "sha256": "0af899d2e206f82b483df66d74f1ff205206fe406d575dc3a7d1f374c651ee45"
+    },
+    {
+      "path": "pet_apps/pet_application/src/lib.rs",
+      "sha256": "56b7e862c6dfd33441ae2a1801c4a6397b6579c622a4bb4aa49ef8ffccf403a8"
+    },
+    {
+      "path": "analytics_apps/analytics_server/tests/support_http_contract.rs",
+      "sha256": "8f685d7ef093ecab15811e7fee672fffcaae79ba586c5845ea91192088212aca"
+    },
+    {
+      "path": "analytics_apps/analytics_server/tests/day38_ingest_authorization.rs",
+      "sha256": "f93ae2ca9bd366a4efde1e8d8651e4060308a6e457599d95109589f61a37032f"
+    },
+    {
+      "path": "analytics_apps/analytics_server/tests/day37_query_cookie.rs",
+      "sha256": "dfb8aefe050fbe2942f1c1bef085b95c607d38b4e72af893802ffbbb2c7536e1"
+    },
+    {
+      "path": "analytics_apps/analytics_server/tests/day27_dashboard_source.rs",
+      "sha256": "d1bbc9b79f271de46afa28e82894bf7ba8d0db4ab70908d40b6a085d06fd9968"
+    },
+    {
+      "path": "analytics_apps/analytics_server/tests/day23_password_login.rs",
+      "sha256": "177448ce2b5ac9807b4357123deccf52cec331f0b2bd8158bcf57daf0a04939e"
+    },
+    {
+      "path": "analytics_apps/analytics_server/src/lib.rs",
+      "sha256": "26879154ab4b37542a12298fec5b8ee498249637a7a0ed9d09cc90236427584e"
+    },
+    {
+      "path": "analytics_apps/analytics_server/tests/support/mod.rs",
+      "sha256": "70fb7303ee06d68b4b2f04a1f3ef744a659f1cf2feee6693657f058397be8c27"
+    },
+    {
+      "path": "analytics_apps/analytics_server/tests/support/http.rs",
+      "sha256": "f83811b5545c581479336e1830862397bc2d7d2a6b62d902ce039b7ecb23c17c"
+    }
+  ],
+  "environment_recovery": [
+    {
+      "job": "chat-ssr",
+      "observation": "moved refresh_result_view lacked original cfg; restored cfg(any(wasm32,test)), final SSR14 passes without new warning",
+      "previous_log": "r4-validation/day38-r4-full-chat-ssr-before-cfg.log"
+    },
+    {
+      "job": "analytics-postgres",
+      "observation": "shared helper subset per integration binary produced dead_code warnings; test-only support module documents allow(dead_code); final48 pass, no warning",
+      "previous_log": "r4-validation/day38-r4-full-analytics-postgres-before-helper-lint.log"
+    },
+    {
+      "job": "pet-native-sqlite",
+      "exit_code": 101,
+      "observation": "tauri-macros lld Bus error before tests",
+      "previous_log": "r4-validation/day38-r4-full-pet-native-sqlite.log"
+    },
+    {
+      "job": "pet-native-sqlite-bfd retry1",
+      "exit_code": 101,
+      "seconds": 2.35,
+      "observation": "system bfd exposed Disk quota exceeded (os error122) when writing full.rmeta and linking tauri-macros; observed raw tool output, retry1 file later replaced by successful retry",
+      "recovery": "moved 802.4 MiB of agent-created artifacts to own workspace via symlinks; original caches untouched"
+    },
+    {
+      "job": "pet-native-sqlite-bfd retry2",
+      "exit_code": 0,
+      "passed": 60,
+      "log": "r4-validation/day38-r4-full-pet-native-sqlite-bfd.log"
+    }
+  ]
+}

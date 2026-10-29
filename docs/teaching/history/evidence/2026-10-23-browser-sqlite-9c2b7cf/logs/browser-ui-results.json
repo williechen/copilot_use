@@ -1,0 +1,123 @@
+{
+  "source_sha": "9c2b7cf5a4c60a08254445911916c4ed9b02d7b3",
+  "method": "CUA real browser UI actions with original hydrated JS/WASM; no browser mocks",
+  "checks": [
+    {
+      "case": "Chinese search returns duplicate names and partial-name extension",
+      "state": "Browser tab: 2, Title: \"Rust AI Chat\", URL: \"http://127.0.0.1:3000/\".\n1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3000/\n\t2 container\n\t\t3 heading Rust AI Chat, Value: 1\n\t\t\t4 link Description: Rust AI Chat, Value: 127.0.0.1:3000/\n\t\t5 text Welcome to Rust AI Chat!\n\t\t6 link Description: 登入, Value: 127.0.0.1:3000/signin\n\t\t7 heading 房間列表, Value: 2\n\t\t\t8 text 房間列表\n\t\t9 search text field (settable) Description: 搜尋房間, Value: Rust 技術交流\n\t\t10 button 查詢房間\n\t\t11 button 讀取／重新整理房間\n\t\t12 text 查詢完成，請選擇房間\n\t\t13 content list\n\t\t\t14 container\n\t\t\t\t15 AXListMarker • \n\t\t\t\t16 link Description: Rust 技術交流, Value: 127.0.0.1:3000/room/browser-room-1\n\t\t\t17 container\n\t\t\t\t18 AXListMarker • \n\t\t\t\t19 link Description: Rust 技術交流, Value: 127.0.0.1:3000/room/browser-room-2\n\t\t\t20 container\n\t\t\t\t21 AXListMarker • \n\t\t\t\t22 link Description: Rust 技術交流延伸, Value: 127.0.0.1:3000/room/browser-room-3\n\nThe focused UI element is 1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3000/"
+    },
+    {
+      "case": "No matching room shows explicit empty state",
+      "state": "Browser tab: 2, Title: \"Rust AI Chat\", URL: \"http://127.0.0.1:3000/\".\n1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3000/\n\t2 container\n\t\t3 heading Rust AI Chat, Value: 1\n\t\t\t4 link Description: Rust AI Chat, Value: 127.0.0.1:3000/\n\t\t5 text Welcome to Rust AI Chat!\n\t\t6 link Description: 登入, Value: 127.0.0.1:3000/signin\n\t\t7 heading 房間列表, Value: 2\n\t\t\t8 text 房間列表\n\t\t9 search text field (settable) Description: 搜尋房間, Value: 不存在的房間\n\t\t10 button 查詢房間\n\t\t11 button 讀取／重新整理房間\n\t\t12 text 沒有符合條件的房間\n\nThe focused UI element is 1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3000/"
+    },
+    {
+      "case": "search 技術",
+      "expectedRoomLinks": 3,
+      "actualRoomLinks": 3,
+      "passed": true,
+      "state": "Browser tab: 2, Title: \"Rust AI Chat\", URL: \"http://127.0.0.1:3000/\".\n1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3000/\n\t2 container\n\t\t3 heading Rust AI Chat, Value: 1\n\t\t\t4 link Description: Rust AI Chat, Value: 127.0.0.1:3000/\n\t\t5 text Welcome to Rust AI Chat!\n\t\t6 link Description: 登入, Value: 127.0.0.1:3000/signin\n\t\t7 heading 房間列表, Value: 2\n\t\t\t8 text 房間列表\n\t\t9 search text field (settable) Description: 搜尋房間, Value: 技術\n\t\t10 button 查詢房間\n\t\t11 button 讀取／重新整理房間\n\t\t12 text 查詢完成，請選擇房間\n\t\t13 content list\n\t\t\t14 container\n\t\t\t\t15 AXListMarker • \n\t\t\t\t16 link Description: Rust 技術交流, Value: 127.0.0.1:3000/room/browser-room-1\n\t\t\t17 container\n\t\t\t\t18 AXListMarker • \n\t\t\t\t19 link Description: Rust 技術交流, Value: 127.0.0.1:3000/room/browser-room-2\n\t\t\t20 container\n\t\t\t\t21 AXListMarker • \n\t\t\t\t22 link Description: Rust 技術交流延伸, Value: 127.0.0.1:3000/room/browser-room-3\n\nThe focused UI element is 1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3000/"
+    },
+    {
+      "case": "search rust",
+      "expectedRoomLinks": 3,
+      "actualRoomLinks": 3,
+      "passed": true,
+      "state": "Browser tab: 2, Title: \"Rust AI Chat\", URL: \"http://127.0.0.1:3000/\".\n1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3000/\n\t2 container\n\t\t3 heading Rust AI Chat, Value: 1\n\t\t\t4 link Description: Rust AI Chat, Value: 127.0.0.1:3000/\n\t\t5 text Welcome to Rust AI Chat!\n\t\t6 link Description: 登入, Value: 127.0.0.1:3000/signin\n\t\t7 heading 房間列表, Value: 2\n\t\t\t8 text 房間列表\n\t\t9 search text field (settable) Description: 搜尋房間, Value: rust\n\t\t10 button 查詢房間\n\t\t11 button 讀取／重新整理房間\n\t\t12 text 查詢完成，請選擇房間\n\t\t13 content list\n\t\t\t14 container\n\t\t\t\t15 AXListMarker • \n\t\t\t\t16 link Description: Rust 技術交流, Value: 127.0.0.1:3000/room/browser-room-1\n\t\t\t17 container\n\t\t\t\t18 AXListMarker • \n\t\t\t\t19 link Description: Rust 技術交流, Value: 127.0.0.1:3000/room/browser-room-2\n\t\t\t20 container\n\t\t\t\t21 AXListMarker • \n\t\t\t\t22 link Description: Rust 技術交流延伸, Value: 127.0.0.1:3000/room/browser-room-3\n\nThe focused UI element is 1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3000/"
+    },
+    {
+      "case": "search %",
+      "expectedRoomLinks": 1,
+      "actualRoomLinks": 1,
+      "passed": true,
+      "state": "Browser tab: 2, Title: \"Rust AI Chat\", URL: \"http://127.0.0.1:3000/\".\n1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3000/\n\t2 container\n\t\t3 heading Rust AI Chat, Value: 1\n\t\t\t4 link Description: Rust AI Chat, Value: 127.0.0.1:3000/\n\t\t5 text Welcome to Rust AI Chat!\n\t\t6 link Description: 登入, Value: 127.0.0.1:3000/signin\n\t\t7 heading 房間列表, Value: 2\n\t\t\t8 text 房間列表\n\t\t9 search text field (settable) Description: 搜尋房間, Value: %\n\t\t10 button 查詢房間\n\t\t11 button 讀取／重新整理房間\n\t\t12 text 查詢完成，請選擇房間\n\t\t13 content list\n\t\t\t14 container\n\t\t\t\t15 AXListMarker • \n\t\t\t\t16 link Description: 百分%房間, Value: 127.0.0.1:3000/room/browser-room-pct\n\nThe focused UI element is 1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3000/"
+    },
+    {
+      "case": "search _",
+      "expectedRoomLinks": 1,
+      "actualRoomLinks": 1,
+      "passed": true,
+      "state": "Browser tab: 2, Title: \"Rust AI Chat\", URL: \"http://127.0.0.1:3000/\".\n1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3000/\n\t2 container\n\t\t3 heading Rust AI Chat, Value: 1\n\t\t\t4 link Description: Rust AI Chat, Value: 127.0.0.1:3000/\n\t\t5 text Welcome to Rust AI Chat!\n\t\t6 link Description: 登入, Value: 127.0.0.1:3000/signin\n\t\t7 heading 房間列表, Value: 2\n\t\t\t8 text 房間列表\n\t\t9 search text field (settable) Description: 搜尋房間, Value: _\n\t\t10 button 查詢房間\n\t\t11 button 讀取／重新整理房間\n\t\t12 text 查詢完成，請選擇房間\n\t\t13 content list\n\t\t\t14 container\n\t\t\t\t15 AXListMarker • \n\t\t\t\t16 link Description: 底線_房間, Value: 127.0.0.1:3000/room/browser-room-under\n\nThe focused UI element is 1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3000/"
+    },
+    {
+      "case": "search \\",
+      "expectedRoomLinks": 1,
+      "actualRoomLinks": 1,
+      "passed": true,
+      "state": "Browser tab: 2, Title: \"Rust AI Chat\", URL: \"http://127.0.0.1:3000/\".\n1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3000/\n\t2 container\n\t\t3 heading Rust AI Chat, Value: 1\n\t\t\t4 link Description: Rust AI Chat, Value: 127.0.0.1:3000/\n\t\t5 text Welcome to Rust AI Chat!\n\t\t6 link Description: 登入, Value: 127.0.0.1:3000/signin\n\t\t7 heading 房間列表, Value: 2\n\t\t\t8 text 房間列表\n\t\t9 search text field (settable) Description: 搜尋房間, Value: \\\n\t\t10 button 查詢房間\n\t\t11 button 讀取／重新整理房間\n\t\t12 text 查詢完成，請選擇房間\n\t\t13 content list\n\t\t\t14 container\n\t\t\t\t15 AXListMarker • \n\t\t\t\t16 link Description: 反斜線\\房間, Value: 127.0.0.1:3000/room/browser-room-back\n\nThe focused UI element is 1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3000/"
+    },
+    {
+      "case": "search ' OR 1=1 --",
+      "expectedRoomLinks": 0,
+      "actualRoomLinks": 0,
+      "passed": true,
+      "state": "Browser tab: 2, Title: \"Rust AI Chat\", URL: \"http://127.0.0.1:3000/\".\n1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3000/\n\t2 container\n\t\t3 heading Rust AI Chat, Value: 1\n\t\t\t4 link Description: Rust AI Chat, Value: 127.0.0.1:3000/\n\t\t5 text Welcome to Rust AI Chat!\n\t\t6 link Description: 登入, Value: 127.0.0.1:3000/signin\n\t\t7 heading 房間列表, Value: 2\n\t\t\t8 text 房間列表\n\t\t9 search text field (settable) Description: 搜尋房間, Value: ' OR 1=1 --\n\t\t10 button 查詢房間\n\t\t11 button 讀取／重新整理房間\n\t\t12 text 沒有符合條件的房間\n\nThe focused UI element is 1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3000/"
+    },
+    {
+      "case": "search   Rust 技術  ",
+      "expectedRoomLinks": 3,
+      "actualRoomLinks": 3,
+      "passed": true,
+      "state": "Browser tab: 2, Title: \"Rust AI Chat\", URL: \"http://127.0.0.1:3000/\".\n1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3000/\n\t2 container\n\t\t3 heading Rust AI Chat, Value: 1\n\t\t\t4 link Description: Rust AI Chat, Value: 127.0.0.1:3000/\n\t\t5 text Welcome to Rust AI Chat!\n\t\t6 link Description: 登入, Value: 127.0.0.1:3000/signin\n\t\t7 heading 房間列表, Value: 2\n\t\t\t8 text 房間列表\n\t\t9 search text field (settable) Description: 搜尋房間, Value:   Rust 技術  \n\t\t10 button 查詢房間\n\t\t11 button 讀取／重新整理房間\n\t\t12 text 查詢完成，請選擇房間\n\t\t13 content list\n\t\t\t14 container\n\t\t\t\t15 AXListMarker • \n\t\t\t\t16 link Description: Rust 技術交流, Value: 127.0.0.1:3000/room/browser-room-1\n\t\t\t17 container\n\t\t\t\t18 AXListMarker • \n\t\t\t\t19 link Description: Rust 技術交流, Value: 127.0.0.1:3000/room/browser-room-2\n\t\t\t20 container\n\t\t\t\t21 AXListMarker • \n\t\t\t\t22 link Description: Rust 技術交流延伸, Value: 127.0.0.1:3000/room/browser-room-3\n\nThe focused UI element is 1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3000/"
+    },
+    {
+      "case": "Day20 successful refresh clears stale query and shows all seven rooms",
+      "passed": true,
+      "state": "Browser tab: 2, Title: \"Rust AI Chat\", URL: \"http://127.0.0.1:3000/\".\n1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3000/\n\t2 container\n\t\t3 heading Rust AI Chat, Value: 1\n\t\t\t4 link Description: Rust AI Chat, Value: 127.0.0.1:3000/\n\t\t5 text Welcome to Rust AI Chat!\n\t\t6 link Description: 登入, Value: 127.0.0.1:3000/signin\n\t\t7 heading 房間列表, Value: 2\n\t\t\t8 text 房間列表\n\t\t9 search text field (settable) 搜尋房間\n\t\t10 button 查詢房間\n\t\t11 button 讀取／重新整理房間\n\t\t12 text 請選擇房間\n\t\t13 content list\n\t\t\t14 container\n\t\t\t\t15 AXListMarker • \n\t\t\t\t16 link Description: Rust 技術交流, Value: 127.0.0.1:3000/room/browser-room-1\n\t\t\t17 container\n\t\t\t\t18 AXListMarker • \n\t\t\t\t19 link Description: Rust 技術交流, Value: 127.0.0.1:3000/room/browser-room-2\n\t\t\t20 container\n\t\t\t\t21 AXListMarker • \n\t\t\t\t22 link Description: Rust 技術交流延伸, Value: 127.0.0.1:3000/room/browser-room-3\n\t\t\t23 container\n\t\t\t\t24 AXListMarker • \n\t\t\t\t25 link Description: 一般閒聊, Value: 127.0.0.1:3000/room/browser-room-4\n\t\t\t26 container\n\t\t\t\t27 AXListMarker • \n\t\t\t\t28 link Description: 反斜線\\房間, Value: 127.0.0.1:3000/room/browser-room-back\n\t\t\t29 container\n\t\t\t\t30 AXListMarker • \n\t\t\t\t31 link Description: 底線_房間, Value: 127.0.0.1:3000/room/browser-room-under\n\t\t\t32 container\n\t\t\t\t33 AXListMarker • \n\t\t\t\t34 link Description: 百分%房間, Value: 127.0.0.1:3000/room/browser-room-pct\n\nThe focused UI element is 1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3000/"
+    },
+    {
+      "case": "Local filter before injected database failure",
+      "state": "Browser tab: 2, Title: \"Rust AI Chat\", URL: \"http://127.0.0.1:3000/\".\n1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3000/\n\t2 container\n\t\t3 heading Rust AI Chat, Value: 1\n\t\t\t4 link Description: Rust AI Chat, Value: 127.0.0.1:3000/\n\t\t5 text Welcome to Rust AI Chat!\n\t\t6 link Description: 登入, Value: 127.0.0.1:3000/signin\n\t\t7 heading 房間列表, Value: 2\n\t\t\t8 text 房間列表\n\t\t9 search text field (settable) Description: 搜尋房間, Value: Rust\n\t\t10 button 查詢房間\n\t\t11 button 讀取／重新整理房間\n\t\t12 text 請選擇房間\n\t\t13 content list\n\t\t\t14 container\n\t\t\t\t15 AXListMarker • \n\t\t\t\t16 link Description: Rust 技術交流, Value: 127.0.0.1:3000/room/browser-room-1\n\t\t\t17 container\n\t\t\t\t18 AXListMarker • \n\t\t\t\t19 link Description: Rust 技術交流, Value: 127.0.0.1:3000/room/browser-room-2\n\t\t\t20 container\n\t\t\t\t21 AXListMarker • \n\t\t\t\t22 link Description: Rust 技術交流延伸, Value: 127.0.0.1:3000/room/browser-room-3\n\nThe focused UI element is 9 search text field (settable) Description: 搜尋房間, Value: Rust"
+    },
+    {
+      "case": "Day19/20 refresh HTTP500 preserves query and visible rows",
+      "passed": true,
+      "state": "Browser tab: 2, Title: \"Rust AI Chat\", URL: \"http://127.0.0.1:3000/\".\n1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3000/\n\t2 container\n\t\t3 heading Rust AI Chat, Value: 1\n\t\t\t4 link Description: Rust AI Chat, Value: 127.0.0.1:3000/\n\t\t5 text Welcome to Rust AI Chat!\n\t\t6 link Description: 登入, Value: 127.0.0.1:3000/signin\n\t\t7 heading 房間列表, Value: 2\n\t\t\t8 text 房間列表\n\t\t9 search text field (settable) Description: 搜尋房間, Value: Rust\n\t\t10 button 查詢房間\n\t\t11 button 讀取／重新整理房間\n\t\t12 text 讀取失敗：500，請重試\n\t\t13 content list\n\t\t\t14 container\n\t\t\t\t15 AXListMarker • \n\t\t\t\t16 link Description: Rust 技術交流, Value: 127.0.0.1:3000/room/browser-room-1\n\t\t\t17 container\n\t\t\t\t18 AXListMarker • \n\t\t\t\t19 link Description: Rust 技術交流, Value: 127.0.0.1:3000/room/browser-room-2\n\t\t\t20 container\n\t\t\t\t21 AXListMarker • \n\t\t\t\t22 link Description: Rust 技術交流延伸, Value: 127.0.0.1:3000/room/browser-room-3\n\nThe focused UI element is 1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3000/"
+    },
+    {
+      "case": "After failed refresh clearing only the filter reveals all seven retained rows",
+      "passed": true,
+      "state": "Browser tab: 2, Title: \"Rust AI Chat\", URL: \"http://127.0.0.1:3000/\".\n1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3000/\n\t2 container\n\t\t3 heading Rust AI Chat, Value: 1\n\t\t\t4 link Description: Rust AI Chat, Value: 127.0.0.1:3000/\n\t\t5 text Welcome to Rust AI Chat!\n\t\t6 link Description: 登入, Value: 127.0.0.1:3000/signin\n\t\t7 heading 房間列表, Value: 2\n\t\t\t8 text 房間列表\n\t\t9 search text field (settable) 搜尋房間\n\t\t10 button 查詢房間\n\t\t11 button 讀取／重新整理房間\n\t\t12 text 讀取失敗：500，請重試\n\t\t13 content list\n\t\t\t14 container\n\t\t\t\t15 AXListMarker • \n\t\t\t\t16 link Description: Rust 技術交流, Value: 127.0.0.1:3000/room/browser-room-1\n\t\t\t17 container\n\t\t\t\t18 AXListMarker • \n\t\t\t\t19 link Description: Rust 技術交流, Value: 127.0.0.1:3000/room/browser-room-2\n\t\t\t20 container\n\t\t\t\t21 AXListMarker • \n\t\t\t\t22 link Description: Rust 技術交流延伸, Value: 127.0.0.1:3000/room/browser-room-3\n\t\t\t23 container\n\t\t\t\t24 AXListMarker • \n\t\t\t\t25 link Description: 一般閒聊, Value: 127.0.0.1:3000/room/browser-room-4\n\t\t\t26 container\n\t\t\t\t27 AXListMarker • \n\t\t\t\t28 link Description: 反斜線\\房間, Value: 127.0.0.1:3000/room/browser-room-back\n\t\t\t29 container\n\t\t\t\t30 AXListMarker • \n\t\t\t\t31 link Description: 底線_房間, Value: 127.0.0.1:3000/room/browser-room-under\n\t\t\t32 container\n\t\t\t\t33 AXListMarker • \n\t\t\t\t34 link Description: 百分%房間, Value: 127.0.0.1:3000/room/browser-room-pct\n\nThe focused UI element is 9 search text field (settable) 搜尋房間"
+    },
+    {
+      "case": "Search HTTP500 preserves previously loaded rooms and typed query",
+      "passed": true,
+      "state": "Browser tab: 2, Title: \"Rust AI Chat\", URL: \"http://127.0.0.1:3000/\".\n1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3000/\n\t2 container\n\t\t3 heading Rust AI Chat, Value: 1\n\t\t\t4 link Description: Rust AI Chat, Value: 127.0.0.1:3000/\n\t\t5 text Welcome to Rust AI Chat!\n\t\t6 link Description: 登入, Value: 127.0.0.1:3000/signin\n\t\t7 heading 房間列表, Value: 2\n\t\t\t8 text 房間列表\n\t\t9 search text field (settable) Description: 搜尋房間, Value: Rust\n\t\t10 button 查詢房間\n\t\t11 button 讀取／重新整理房間\n\t\t12 text 查詢失敗：讀取失敗：500，請重試\n\t\t13 content list\n\t\t\t14 container\n\t\t\t\t15 AXListMarker • \n\t\t\t\t16 link Description: Rust 技術交流, Value: 127.0.0.1:3000/room/browser-room-1\n\t\t\t17 container\n\t\t\t\t18 AXListMarker • \n\t\t\t\t19 link Description: Rust 技術交流, Value: 127.0.0.1:3000/room/browser-room-2\n\t\t\t20 container\n\t\t\t\t21 AXListMarker • \n\t\t\t\t22 link Description: Rust 技術交流延伸, Value: 127.0.0.1:3000/room/browser-room-3\n\nThe focused UI element is 1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3000/"
+    },
+    {
+      "case": "Search retry after DB recovery succeeds without reloading page",
+      "passed": true,
+      "state": "Browser tab: 2, Title: \"Rust AI Chat\", URL: \"http://127.0.0.1:3000/\".\n1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3000/\n\t2 container\n\t\t3 heading Rust AI Chat, Value: 1\n\t\t\t4 link Description: Rust AI Chat, Value: 127.0.0.1:3000/\n\t\t5 text Welcome to Rust AI Chat!\n\t\t6 link Description: 登入, Value: 127.0.0.1:3000/signin\n\t\t7 heading 房間列表, Value: 2\n\t\t\t8 text 房間列表\n\t\t9 search text field (settable) Description: 搜尋房間, Value: Rust\n\t\t10 button 查詢房間\n\t\t11 button 讀取／重新整理房間\n\t\t12 text 查詢完成，請選擇房間\n\t\t13 content list\n\t\t\t14 container\n\t\t\t\t15 AXListMarker • \n\t\t\t\t16 link Description: Rust 技術交流, Value: 127.0.0.1:3000/room/browser-room-1\n\t\t\t17 container\n\t\t\t\t18 AXListMarker • \n\t\t\t\t19 link Description: Rust 技術交流, Value: 127.0.0.1:3000/room/browser-room-2\n\t\t\t20 container\n\t\t\t\t21 AXListMarker • \n\t\t\t\t22 link Description: Rust 技術交流延伸, Value: 127.0.0.1:3000/room/browser-room-3\n\nThe focused UI element is 1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3000/"
+    },
+    {
+      "case": "Refresh retry succeeds and clears filter without losing rooms",
+      "passed": true,
+      "state": "Browser tab: 2, Title: \"Rust AI Chat\", URL: \"http://127.0.0.1:3000/\".\n1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3000/\n\t2 container\n\t\t3 heading Rust AI Chat, Value: 1\n\t\t\t4 link Description: Rust AI Chat, Value: 127.0.0.1:3000/\n\t\t5 text Welcome to Rust AI Chat!\n\t\t6 link Description: 登入, Value: 127.0.0.1:3000/signin\n\t\t7 heading 房間列表, Value: 2\n\t\t\t8 text 房間列表\n\t\t9 search text field (settable) 搜尋房間\n\t\t10 button 查詢房間\n\t\t11 button 讀取／重新整理房間\n\t\t12 text 請選擇房間\n\t\t13 content list\n\t\t\t14 container\n\t\t\t\t15 AXListMarker • \n\t\t\t\t16 link Description: Rust 技術交流, Value: 127.0.0.1:3000/room/browser-room-1\n\t\t\t17 container\n\t\t\t\t18 AXListMarker • \n\t\t\t\t19 link Description: Rust 技術交流, Value: 127.0.0.1:3000/room/browser-room-2\n\t\t\t20 container\n\t\t\t\t21 AXListMarker • \n\t\t\t\t22 link Description: Rust 技術交流延伸, Value: 127.0.0.1:3000/room/browser-room-3\n\t\t\t23 container\n\t\t\t\t24 AXListMarker • \n\t\t\t\t25 link Description: 一般閒聊, Value: 127.0.0.1:3000/room/browser-room-4\n\t\t\t26 container\n\t\t\t\t27 AXListMarker • \n\t\t\t\t28 link Description: 反斜線\\房間, Value: 127.0.0.1:3000/room/browser-room-back\n\t\t\t29 container\n\t\t\t\t30 AXListMarker • \n\t\t\t\t31 link Description: 底線_房間, Value: 127.0.0.1:3000/room/browser-room-under\n\t\t\t32 container\n\t\t\t\t33 AXListMarker • \n\t\t\t\t34 link Description: 百分%房間, Value: 127.0.0.1:3000/room/browser-room-pct\n\nThe focused UI element is 1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3000/"
+    },
+    {
+      "case": "Real navigation to Leptos signin page",
+      "state": "Browser tab: 2, Title: \"Rust AI Chat\", URL: \"http://127.0.0.1:3000/signin\".\n1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3000/signin\n\t2 container\n\t\t3 heading Rust AI Chat, Value: 1\n\t\t\t4 link Description: Rust AI Chat, Value: 127.0.0.1:3000/\n\t\t5 heading 使用者登入, Value: 2\n\t\t\t6 text 使用者登入\n\t\t7 container\n\t\t\t8 text 帳號\n\t\t\t9 text field (settable) 帳號\n\t\t\t10 text 密碼\n\t\t\t11 text field (settable) 密碼\n\t\t\t12 button 登入\n\t\t13 link Description: 建立會員, Value: 127.0.0.1:3000/signup\n\t\t14 link Description: 回房間清單, Value: 127.0.0.1:3000/\n\nThe focused UI element is 1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3000/signin"
+    },
+    {
+      "case": "Browser native form POST login reaches persisted account",
+      "passed": true,
+      "state": "Browser tab: 2, Title: \"已登入\", URL: \"http://127.0.0.1:3000/account\".\n1 AXWebArea 已登入, URL: 127.0.0.1:3000/account\n\t2 heading 已登入, Value: 1\n\t\t3 text 已登入\n\t4 button 登出\n\t5 link Description: 回首頁, Value: 127.0.0.1:3000/\n\nThe focused UI element is 1 AXWebArea 已登入, URL: 127.0.0.1:3000/account"
+    },
+    {
+      "case": "Select second duplicate-name room navigates to its own ID",
+      "passed": true,
+      "state": "Browser tab: 2, Title: \"Rust AI Chat\", URL: \"http://127.0.0.1:3000/room/browser-room-2\".\n1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3000/room/browser-room-2\n\t2 container\n\t\t3 heading Rust AI Chat, Value: 1\n\t\t\t4 link Description: Rust AI Chat, Value: 127.0.0.1:3000/\n\t\t5 heading 房間列表, Value: 2\n\t\t\t6 text 房間列表\n\t\t7 search text field (settable) 搜尋房間\n\t\t8 button 查詢房間\n\t\t9 button 讀取／重新整理房間\n\t\t10 text 請讀取房間列表\n\t\t11 container\n\t\t\t12 heading 房間 browser-room-2, Value: 2\n\t\t\t\t13 text 房間 browser-room-2\n\t\t\t14 text 已連線\n\t\t15 container\n\t\t\t16 text entry area (settable) 聊天訊息\n\t\t\t17 button (disabled) Send\n\nThe focused UI element is 1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3000/room/browser-room-2"
+    },
+    {
+      "case": "Browser WS send receives rendered message",
+      "passed": true,
+      "state": "Browser tab: 2, Title: \"Rust AI Chat\", URL: \"http://127.0.0.1:3000/room/browser-room-2\".\n1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3000/room/browser-room-2\n\t2 container\n\t\t3 heading Rust AI Chat, Value: 1\n\t\t\t4 link Description: Rust AI Chat, Value: 127.0.0.1:3000/\n\t\t5 heading 房間列表, Value: 2\n\t\t\t6 text 房間列表\n\t\t7 search text field (settable) 搜尋房間\n\t\t8 button 查詢房間\n\t\t9 button 讀取／重新整理房間\n\t\t10 text 請讀取房間列表\n\t\t11 container\n\t\t\t12 heading 房間 browser-room-2, Value: 2\n\t\t\t\t13 text 房間 browser-room-2\n\t\t\t14 text 已發送，等待回應...\n\t\t18 content list\n\t\t\t19 container\n\t\t\t\t20 text You :  瀏覽器驗收：SQLite 搜尋與刷新測試\n\t\t15 container\n\t\t\t16 text entry area (settable) 聊天訊息\n\t\t\t17 button (disabled) Send\n\nThe focused UI element is 1 AXWebArea Rust AI Chat, URL: 127.0.0.1:3000/room/browser-room-2"
+    }
+  ],
+  "contract_findings": [
+    {
+      "article": "Chat Day15",
+      "status": "partial",
+      "reason": "real list/select passed; HomePage and account have no retained create-room UI; POST API alone insufficient"
+    }
+  ]
+}
