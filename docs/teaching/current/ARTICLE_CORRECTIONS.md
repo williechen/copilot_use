@@ -1,5 +1,7 @@
 # 問題文章與修訂追蹤
 
+> 2026-10-29 Day43 本地實測：固定產品 `8b882696c5548accb9d98a32b27db35e11109c74`；[測試矩陣與原始證據](../../source-review/local-validation-2026-10-29-day43/README.md) · [今日交付延遲原因](../../source-review/local-validation-2026-10-29-day43/diagnosis.md)。下列舊 SHA 結果保留原範圍；next_day 維持 44，完整 GUI／CI／舊 DB 驗收未完成。
+
 [目前功能／驗證](STATUS.md) · [功能問題與完成條件](../../FUTURE_WORK.md) · [目前文章](README.md)。本頁不另建立 FIFO 或新的功能編號。
 
 ## 本輪已修正

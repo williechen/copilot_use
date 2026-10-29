@@ -6066,5 +6066,21 @@
     "product_modified": false,
     "last_full_comparison_unchanged": true,
     "fifo_unchanged": true
+  },
+  "day43_local_validation": {
+    "date": "2026-10-29",
+    "source_sha": "8b882696c5548accb9d98a32b27db35e11109c74",
+    "candidate_base_sha": "c6708c42f21ac919e57a379848b4977d27a1c3d6",
+    "record": "docs/source-review/local-validation-2026-10-29-day43/README.md",
+    "diagnosis": "docs/source-review/local-validation-2026-10-29-day43/diagnosis.md",
+    "current_revisions": {
+      "chat": "docs/teaching/daily/day-43/chat-r1.md",
+      "pet": "docs/teaching/daily/day-43/pet-r1.md",
+      "analytics": "docs/teaching/daily/day-43/analytics-r1.md"
+    },
+    "git_apply_check_and_apply": true,
+    "gate2": false,
+    "next_day_unchanged": 44,
+    "last_full_comparison_unchanged": true
   }
 }

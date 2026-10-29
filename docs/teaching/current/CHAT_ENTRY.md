@@ -1,6 +1,8 @@
 # Chat 現行文章入口
 
-[專案首頁](../chat/README.md) · [目前 Day43](../daily/day-43/chat.md) · [問題與完成條件](../../FUTURE_WORK.md#chat-auth)
+> 2026-10-29 Day43 本地實測：固定產品 `8b882696c5548accb9d98a32b27db35e11109c74`；[測試矩陣與原始證據](../../source-review/local-validation-2026-10-29-day43/README.md) · [今日交付延遲原因](../../source-review/local-validation-2026-10-29-day43/diagnosis.md)。下列舊 SHA 結果保留原範圍；next_day 維持 44，完整 GUI／CI／舊 DB 驗收未完成。
+
+[專案首頁](../chat/README.md) · [目前 Day43](../daily/day-43/chat-r1.md) · [問題與完成條件](../../FUTURE_WORK.md#chat-auth)
 
 新 SHA：server／SQLite／SSR 57 項通過（含 UI 18）。 [本輪原始命令與結果](../../source-review/local-validation-2026-10-28-c6708c4/README.md)。
 

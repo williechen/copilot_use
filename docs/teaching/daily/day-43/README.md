@@ -1,12 +1,14 @@
 # Day43｜2026-10-29 三案正式 TDD 教學
 
-> **Gate1 文件已提交並精確讀回；產品 Green／Refactor 尚未由使用者套用或執行 Gate2 正式驗收。** 只寫入 `williechen/copilot_use/main`；`williechen/rust_ai_ring` 來源固定為 `c6708c42f21ac919e57a379848b4977d27a1c3d6`，保持唯讀。本文不把文件發布當作程式實作或產品驗收。
+> 2026-10-29 Day43 本地實測：固定產品 `8b882696c5548accb9d98a32b27db35e11109c74`；[測試矩陣與原始證據](../../../source-review/local-validation-2026-10-29-day43/README.md) · [今日交付延遲原因](../../../source-review/local-validation-2026-10-29-day43/diagnosis.md)。下列舊 SHA 結果保留原範圍；next_day 維持 44，完整 GUI／CI／舊 DB 驗收未完成。
+
+> **Gate1 文件已提交並精確讀回；最新產品已含 Day43 Green／Refactor；本輪已實測，完整 Gate2 未驗收。** 只寫入 `williechen/copilot_use/main`；`williechen/rust_ai_ring` 來源固定為 `c6708c42f21ac919e57a379848b4977d27a1c3d6`，保持唯讀。本文不把文件發布當作程式實作或產品驗收。
 
 | 順序 | 正式文章（完整 Red／Green＋獨立 Refactor） | 獨立 Refactor patch | Green patch |
 | --- | --- | --- | --- |
-| 1. Chat | [房間搜尋一鍵清除／Session 入口決策搬層](chat.md) | [Chat Refactor](chat-day43-refactor.patch) | [Chat Green](chat-day43-green.patch) |
-| 2. Pet | [逐 UUID 回籠狀態／原生選單 UUID 解析搬層](pet.md) | [Pet Refactor](pet-day43-refactor.patch) | [Pet Green](pet-day43-green.patch) |
-| 3. Analytics | [來源切換保留事件類型／計數標籤搬層](analytics.md) | [Analytics Refactor](analytics-day43-refactor.patch) | [Analytics Green](analytics-day43-green.patch) |
+| 1. Chat | [房間搜尋一鍵清除／Session 入口決策搬層](chat-r1.md) | [Chat Refactor](chat-day43-refactor.patch) | [Chat Green](chat-day43-green.patch) |
+| 2. Pet | [逐 UUID 回籠狀態／原生選單 UUID 解析搬層](pet-r1.md) | [Pet Refactor](pet-day43-refactor.patch) | [Pet Green](pet-day43-green.patch) |
+| 3. Analytics | [來源切換保留事件類型／計數標籤搬層](analytics-r1.md) | [Analytics Refactor](analytics-day43-refactor.patch) | [Analytics Green](analytics-day43-green.patch) |
 
 ## 交付證據與界線
 
@@ -15,7 +17,7 @@
 - [Rust、Leptos、Tauri CLI、Axum、SQLx、Tokio、UUID 等當日官方穩定版與 lock、MSRV 限制](versions.md)。本日未新增 Cargo 相依或修改 lock；未知的遞迴 MSRV／native 安裝相容狀況明示未實測。
 - [六 patch 嚴格原始行／hunk count 靜態驗證](../../drafts/day-43/gate1-followup-2026-10-29.md)；**不是** `git apply --check` 或新 Day43 Cargo 編譯／Red／Green 測試。
 - 2026-10-28 的 [Day42 本地結果](../../../source-review/local-validation-2026-10-28-c6708c4/README.md) 各自屬於當時產品 SHA，未追認 Day43。
-- 文本「已發布」僅指 GitHub 文件 Gate1。**未套用、未執行與未驗收：** 產品 Day43 patch、Cargo／SSR／WASM、Node／IPC／SQLite、隔離 PostgreSQL／HTTP、GUI、CI、舊 DB 升級。由使用者於隔離產品環境按三案文章指定步驟驗收。完整 Gate2 不阻擋已合格文件。
+- 文本「已發布」僅指 GitHub 文件 Gate1。**原發布當時未執行紀錄（本輪已另補實測）：** 產品 Day43 patch、Cargo／SSR／WASM、Node／IPC／SQLite、隔離 PostgreSQL／HTTP、GUI、CI、舊 DB 升級。由使用者於隔離產品環境按三案文章指定步驟驗收。完整 Gate2 不阻擋已合格文件。
 
 ## 編號及工程進度
 

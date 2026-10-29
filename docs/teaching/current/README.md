@@ -1,10 +1,12 @@
 # 目前閱讀入口
 
+> 2026-10-29 Day43 本地實測：固定產品 `8b882696c5548accb9d98a32b27db35e11109c74`；[測試矩陣與原始證據](../../source-review/local-validation-2026-10-29-day43/README.md) · [今日交付延遲原因](../../source-review/local-validation-2026-10-29-day43/diagnosis.md)。下列舊 SHA 結果保留原範圍；next_day 維持 44，完整 GUI／CI／舊 DB 驗收未完成。
+
 | 專案 | 專案首頁 | 最新文章 | 問題主線 |
 |---|---|---|---|
-| Chat | [專案大綱](../chat/README.md) | [Day43](../daily/day-43/chat.md) | [原完成條件](../../FUTURE_WORK.md#chat-auth) |
-| Pet | [專案大綱](../pet/README.md) | [Day43](../daily/day-43/pet.md) | [原完成條件](../../FUTURE_WORK.md#pet-lifecycle) |
-| Analytics | [專案大綱](../analytics/README.md) | [Day43](../daily/day-43/analytics.md) | [原完成條件](../../FUTURE_WORK.md#analytics-auth) |
+| Chat | [專案大綱](../chat/README.md) | [Day43](../daily/day-43/chat-r1.md) | [原完成條件](../../FUTURE_WORK.md#chat-auth) |
+| Pet | [專案大綱](../pet/README.md) | [Day43](../daily/day-43/pet-r1.md) | [原完成條件](../../FUTURE_WORK.md#pet-lifecycle) |
+| Analytics | [專案大綱](../analytics/README.md) | [Day43](../daily/day-43/analytics-r1.md) | [原完成條件](../../FUTURE_WORK.md#analytics-auth) |
 
 [功能與測試狀態](STATUS.md) · [問題追蹤](../../FUTURE_WORK.md) · [文章勘誤](ARTICLE_CORRECTIONS.md) · [歷史逐篇對照](ARTICLE_STATUS.md)。
 

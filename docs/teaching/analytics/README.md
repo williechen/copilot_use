@@ -1,10 +1,12 @@
 # Analytics｜教學與問題入口
 
+> 2026-10-29 Day43 本地實測：固定產品 `8b882696c5548accb9d98a32b27db35e11109c74`；[測試矩陣與原始證據](../../source-review/local-validation-2026-10-29-day43/README.md) · [今日交付延遲原因](../../source-review/local-validation-2026-10-29-day43/diagnosis.md)。下列舊 SHA 結果保留原範圍；next_day 維持 44，完整 GUI／CI／舊 DB 驗收未完成。
+
 產品固定來源 `c6708c42f21ac919e57a379848b4977d27a1c3d6`；下一待發布篇 Day44；Day43 文件已正式發布，但產品 Day43 patch 未套用、Gate2 尚未通過。
 
 | 閱讀目的 | 入口 |
 |---|---|
-| **最新 Day43：來源切換保留事件類型／計數標籤搬層** | [正式文章](../daily/day-43/analytics.md) · [完整 Refactor / Green patch](../daily/day-43/README.md) |
+| **最新 Day43：來源切換保留事件類型／計數標籤搬層** | [正式文章](../daily/day-43/analytics-r1.md) · [完整 Refactor / Green patch](../daily/day-43/README.md) |
 | Day42 原始教學與舊驗證 | [原始 Day42](../daily/day-42/analytics.md) · [修訂索引](../daily/day-42/README.md) |
 | 本案問題與原完成條件 | [問題追蹤](../../FUTURE_WORK.md#analytics-auth) |
 | 目前測試及驗收限制 | [功能狀態](../current/STATUS.md) · [本輪原始命令與結果](../../source-review/local-validation-2026-10-28-c6708c4/README.md) |

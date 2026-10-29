@@ -1,6 +1,8 @@
 # 文件總入口
 
-**2026-10-29：已正式發布 [Day43 三案教學](teaching/daily/day-43/README.md)（Gate1 文件交付）；產品 Day43 patch 尚未套用，Gate2 未驗收。三案下一待發布篇為 Day44。**
+> 2026-10-29 Day43 本地實測：固定產品 `8b882696c5548accb9d98a32b27db35e11109c74`；[測試矩陣與原始證據](source-review/local-validation-2026-10-29-day43/README.md) · [今日交付延遲原因](source-review/local-validation-2026-10-29-day43/diagnosis.md)。下列舊 SHA 結果保留原範圍；next_day 維持 44，完整 GUI／CI／舊 DB 驗收未完成。
+
+**2026-10-29：已正式發布 [Day43 三案教學](teaching/daily/day-43/README.md)（Gate1 文件交付）；最新產品已含 Day43 實作；完整 Gate2 未驗收。三案下一待發布篇為 Day44。**
 
 先依閱讀目的選擇入口；各頁只維護自己負責的資訊。
 
@@ -8,13 +10,13 @@
 
 | 專案 | 專案首頁 | 最新文章 | 問題主線 |
 |---|---|---|---|
-| Chat | [專案大綱](teaching/chat/README.md) | [Day43](teaching/daily/day-43/chat.md) | [原完成條件](FUTURE_WORK.md#chat-auth) |
-| Pet | [專案大綱](teaching/pet/README.md) | [Day43](teaching/daily/day-43/pet.md) | [原完成條件](FUTURE_WORK.md#pet-lifecycle) |
-| Analytics | [專案大綱](teaching/analytics/README.md) | [Day43](teaching/daily/day-43/analytics.md) | [原完成條件](FUTURE_WORK.md#analytics-auth) |
+| Chat | [專案大綱](teaching/chat/README.md) | [Day43](teaching/daily/day-43/chat-r1.md) | [原完成條件](FUTURE_WORK.md#chat-auth) |
+| Pet | [專案大綱](teaching/pet/README.md) | [Day43](teaching/daily/day-43/pet-r1.md) | [原完成條件](FUTURE_WORK.md#pet-lifecycle) |
+| Analytics | [專案大綱](teaching/analytics/README.md) | [Day43](teaching/daily/day-43/analytics-r1.md) | [原完成條件](FUTURE_WORK.md#analytics-auth) |
 
 ## 目前驗證
 
-固定產品來源 `c6708c42f21ac919e57a379848b4977d27a1c3d6`（2026-10-28）。Chat server／SQLite／SSR 57 項、Pet Node 10 項、四 workspace metadata／fmt 通過。GUI／CI／完整版本 Gate 尚未完成。[本輪原始命令與結果](source-review/local-validation-2026-10-28-c6708c4/README.md) · [完整功能與限制](teaching/current/STATUS.md)。
+固定產品 `8b882696c5548accb9d98a32b27db35e11109c74`（2026-10-29）。四 workspace metadata／check／clippy 通過；Chat SSR 原樣 1 項 fixture 失敗，補修候選 UI 21 項通過；Pet fmt 原樣失敗、workspace 清理後重試通過；兩案 WASM／Node／Analytics 隔離 PG 測試已執行。[詳細矩陣](source-review/local-validation-2026-10-29-day43/README.md)。
 
 ## 問題與文章追蹤
 

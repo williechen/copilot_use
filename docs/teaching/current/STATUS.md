@@ -1,21 +1,16 @@
 # 目前功能與驗證狀態
 
-> **2026-10-29 Day43 文件發布（現行；下方 Day42 內容是前輪歷史快照）：** [三案 Day43 全文及六 patch](../daily/day-43/README.md) 已在 `copilot_use/main` 分別提交並從精確 commit 全文讀回，保存 [blob／SHA256](../daily/day-43/delivery-verification.json)。Day42 原已發表文／patch 的 Gate1 文件結案與 Day43 新交付分開記錄；三案下一待發布篇為 **Day44**。本次沒有更動 `rust_ai_ring`，Day43 Green／Refactor **尚未由使用者套用**，Cargo／Node／DB／WASM／GUI／CI **未執行**，Gate2／角色 ACL、預設資格、房間競態等原產品驗收缺口仍在。下方「next_day 42／Gate1 pending」指此輪前的 Day42 歷史診斷，不代表目前文件交付進度。
+2026-10-29；固定產品 `8b882696c5548accb9d98a32b27db35e11109c74`。[本輪原始證據](../../source-review/local-validation-2026-10-29-day43/README.md)。
 
-
-> **2026-10-29 增量來源讀回：** 最新查得 `rust_ai_ring/main` 仍為 `c6708c42f21ac919e57a379848b4977d27a1c3d6`。三案 Day42 Green／Refactor 的正式 caller／module／相關測試均已在主分支靜態讀回；[精確 blob／SHA256 與修訂](../daily/day-42/source-readback-2026-10-29.json)。**本輪沒有重跑 Cargo／Node／DB／HTTP／GUI／CI，不能將靜態存在視為產品驗收。** 以下 2026-10-28 測試僅屬其精確來源與當次環境。Gate1／Gate2 未完整通過，next_day 仍42。
-
-產品 `c6708c42f21ac919e57a379848b4977d27a1c3d6`；2026-10-28 增量重測。[本輪原始命令與結果](../../source-review/local-validation-2026-10-28-c6708c4/README.md)。
-
-| 專案／層級 | 本輪新 SHA 實際結果 | 未執行與限制 |
+| 範圍 | 原樣實際結果 | 補修／限制 |
 |---|---|---|
-| 四 workspace | metadata --locked --no-deps、fmt --all 四組通過 | 不代表編譯或功能驗收 |
-| Chat | server／SQLite／SSR 57 項通過，含 UI 18 項；Router fixture 修正已在 main | 本輪未重跑 WASM、瀏覽器、完整 ACL／Session 情境 |
-| Pet | Node 10 項通過，VM location／參數 fixture 修正已在 main | 本輪未重跑 Cargo／SQLite／native／GUI |
-| Analytics | metadata／fmt 通過，workspace tree 與 c801cb2 相同 | 本輪未重跑 PG／HTTP；角色／來源 ACL 未驗收 |
+| 四 workspace | metadata／check／clippy 通過；預設 test 各自列證據 | 原文候選 fmt 失敗；最新只有 Pet fmt 失敗 |
+| Chat | server／SQLite 通過；SSR UI 20 通過／1 fixture 失敗；hydrate WASM 通過 | matched Route fixture 補修後 UI 21 通過；原樣失敗保留 |
+| Pet | WASM／Node 通過；workspace 首輪 ENOSPC | 清理後 workspace 重試通過；格式補修候選通過，未驗 GUI |
+| Analytics | workspace 與隔離 PostgreSQL／正式 Router 通過 | 非舊 DB 升級／角色 ACL 完整驗收 |
 
-[前輪 c801cb2 四 workspace、WASM、PG 結果](../../source-review/local-validation-2026-10-28-c801cb2/README.md) 僅屬舊 SHA。[更早 GUI／原生人工證據](../daily/day-40/rerun-9c76797/README.md) 亦保留原版本，不追認本輪。
+兩個主工作樹保持乾淨；產品未提交／推送。候選補修只交付文件附件，不追認原樣 main 全綠。
 
-GUI／CI rerun、舊 DB 升級與完整 MSRV／版本 Gate 未完成；Gate2 未通過。next_day 三案 42，FIFO、last_full_comparison 不變。
+Gate1 文件已交付，next_day 三案 44；FIFO、last_full_comparison 不變。Red 獨立步驟、瀏覽器端到端、原生 GUI、遠端 CI rerun、舊 DB 升級與完整 MSRV／版本 Gate 未執行；Gate2 未完整通過。
 
-[功能問題／原完成條件](../../FUTURE_WORK.md) · [文章勘誤](ARTICLE_CORRECTIONS.md) · [三案文章](README.md)。
+[今日教學延遲原因](../../source-review/local-validation-2026-10-29-day43/diagnosis.md) · [功能缺口](../../FUTURE_WORK.md) · [Day43 三案修訂](../daily/day-43/README.md)。

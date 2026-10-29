@@ -13,3 +13,11 @@
 ```
 
 [全文讀回](current/day38-r4-schedule.json) · [各案Refactor](functional-refactoring/README.md) · [全專案獨立項目](../engineering/README.md) · [共用規則](../COMMON_LEARNING_RULES.md)
+
+## 2026-10-29 執行判定補充
+
+先核對當次工具能力，再分列 Gate1 文件缺口與 Gate2 產品未執行項。雲端沒有本地 checkout／Cargo 不能單獨作為停止教學或要求使用者提供本地資訊的理由；仍須完成可用 GitHub 來源、版本、完整 Red／Green／Refactor、逐案提交及精確讀回。真程式／patch／文件缺陷須版本化修訂，不以靜態比對假稱編譯通過。單案受阻繼續其他獨立案。
+
+Gate1 條件齊備後依 expected next_day 與既有證據條件同步；Gate2 未跑如實列未執行，不重複加 Day 或誤阻文件發布。每次回報實際 commit、目前閱讀版本、next_day 和具體缺口。
+
+本節是執行文件修訂，未宣稱網頁排程設定已修改；時間／模型／實際任務狀態須另讀即時設定。[本次原因與歷程](../source-review/local-validation-2026-10-29-day43/diagnosis.md)。

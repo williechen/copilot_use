@@ -1,6 +1,8 @@
 # Analytics 現行文章入口
 
-[專案首頁](../analytics/README.md) · [目前 Day43](../daily/day-43/analytics.md) · [問題與完成條件](../../FUTURE_WORK.md#analytics-auth)
+> 2026-10-29 Day43 本地實測：固定產品 `8b882696c5548accb9d98a32b27db35e11109c74`；[測試矩陣與原始證據](../../source-review/local-validation-2026-10-29-day43/README.md) · [今日交付延遲原因](../../source-review/local-validation-2026-10-29-day43/diagnosis.md)。下列舊 SHA 結果保留原範圍；next_day 維持 44，完整 GUI／CI／舊 DB 驗收未完成。
+
+[專案首頁](../analytics/README.md) · [目前 Day43](../daily/day-43/analytics-r1.md) · [問題與完成條件](../../FUTURE_WORK.md#analytics-auth)
 
 本輪四 workspace metadata／fmt 通過；PG／HTTP 仍引用 c801cb2 歷史實測，未於新 SHA 重跑。 [本輪原始命令與結果](../../source-review/local-validation-2026-10-28-c6708c4/README.md)。
 
