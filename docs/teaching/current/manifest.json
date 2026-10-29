@@ -51,8 +51,8 @@
     "historical_records_are_not_current_policy": true
   },
   "scope": "Latest published teaching index; Day16 snapshot preserved in archive",
-  "revision": "day40-actual-rerun-9c76797",
-  "synced_date": "2026-10-26",
+  "revision": "day43-verified-gate1-2026-10-29",
+  "synced_date": "2026-10-29",
   "source_sha": "9c767978b20bd56e1c2182dac2f37e6ae9b7d988",
   "articles": [
     {
@@ -3187,13 +3187,79 @@
       "local_exact_commit_readback": true,
       "remote_verification_commit": "378581232f6e14e6458136747a0c7c9fa1932ab5",
       "remote_full_text_equal": true
+    },
+    {
+      "project": "chat",
+      "day": 43,
+      "revision": "r1",
+      "article_path": "docs/teaching/daily/day-43/chat.md",
+      "source_sha": "c6708c42f21ac919e57a379848b4977d27a1c3d6",
+      "article_commit": "7df9f28a10d038979de66eefed027e7231f4641d",
+      "blob_sha": "2cdb5bce30dce34d5ea899b3dd598ee96106cfe8",
+      "sha256": "f6f23bd677a740caead4acca890143593fbbca692d7e5aec3215a7bfc5be11ea",
+      "publication_status": "published_gate1_document",
+      "remote_full_text_equal": true,
+      "exact_commit_readback": true,
+      "refactor_patch": "docs/teaching/daily/day-43/chat-day43-refactor.patch",
+      "green_patch": "docs/teaching/daily/day-43/chat-day43-green.patch",
+      "evidence": "docs/teaching/daily/day-43/delivery-verification.json",
+      "version_evidence": "docs/teaching/daily/day-43/versions.md",
+      "functional_acceptance": false,
+      "gate2": false,
+      "product_applied": false,
+      "next_day_before": 43,
+      "next_day_after": 44
+    },
+    {
+      "project": "pet",
+      "day": 43,
+      "revision": "r1",
+      "article_path": "docs/teaching/daily/day-43/pet.md",
+      "source_sha": "c6708c42f21ac919e57a379848b4977d27a1c3d6",
+      "article_commit": "3e5e7c23b5746d23afa4e07928d4b401640e3d6a",
+      "blob_sha": "1f5c3e29f06a65609cf9654ca09d3ecfbe9b8d1b",
+      "sha256": "eff2379f868fa7eb52997a50e03e76c77df2a82121016aee1ba80d04c7d7a78b",
+      "publication_status": "published_gate1_document",
+      "remote_full_text_equal": true,
+      "exact_commit_readback": true,
+      "refactor_patch": "docs/teaching/daily/day-43/pet-day43-refactor.patch",
+      "green_patch": "docs/teaching/daily/day-43/pet-day43-green.patch",
+      "evidence": "docs/teaching/daily/day-43/delivery-verification.json",
+      "version_evidence": "docs/teaching/daily/day-43/versions.md",
+      "functional_acceptance": false,
+      "gate2": false,
+      "product_applied": false,
+      "next_day_before": 43,
+      "next_day_after": 44
+    },
+    {
+      "project": "analytics",
+      "day": 43,
+      "revision": "r1",
+      "article_path": "docs/teaching/daily/day-43/analytics.md",
+      "source_sha": "c6708c42f21ac919e57a379848b4977d27a1c3d6",
+      "article_commit": "d21832ab92943bf45f49bf5b49102ddf5256ef47",
+      "blob_sha": "5ca53039825c660f180654ab844246c2be174702",
+      "sha256": "958c8e76e6cd60e985beaea69555f161590d0938751668fb7d6d8593f657c496",
+      "publication_status": "published_gate1_document",
+      "remote_full_text_equal": true,
+      "exact_commit_readback": true,
+      "refactor_patch": "docs/teaching/daily/day-43/analytics-day43-refactor.patch",
+      "green_patch": "docs/teaching/daily/day-43/analytics-day43-green.patch",
+      "evidence": "docs/teaching/daily/day-43/delivery-verification.json",
+      "version_evidence": "docs/teaching/daily/day-43/versions.md",
+      "functional_acceptance": false,
+      "gate2": false,
+      "product_applied": false,
+      "next_day_before": 43,
+      "next_day_after": 44
     }
   ],
   "day15_frozen": true,
   "next_day": {
-    "chat": 43,
-    "pet": 43,
-    "analytics": 43
+    "chat": 44,
+    "pet": 44,
+    "analytics": 44
   },
   "day_advanced": true,
   "reference_modified": false,
@@ -3334,7 +3400,7 @@
     "frozen_body_sha256": "ad6cef4a58f20f6162fb01a4c71ef1a752992856327063d9988112c91a639184",
     "frozen_notion_snapshot": "docs/teaching/archive/day-22/notion/chat.md"
   },
-  "latest_chat_publication": "docs/teaching/daily/day-41/chat.md",
+  "latest_chat_publication": "docs/teaching/daily/day-43/chat.md",
   "previous_day22_pet_article": {
     "project": "pet",
     "day": 22,
@@ -3370,7 +3436,7 @@
     "frozen_body_sha256": "88fa706c5a3f7f3d6255957b8ed317d64cb1a6c57f1cf6638bfb838d5e6b282f",
     "frozen_notion_snapshot": "docs/teaching/archive/day-22/notion/pet.md"
   },
-  "latest_pet_publication": "docs/teaching/daily/day-41/pet.md",
+  "latest_pet_publication": "docs/teaching/daily/day-43/pet.md",
   "previous_day22_analytics_article": {
     "project": "analytics",
     "day": 22,
@@ -3405,7 +3471,7 @@
     "frozen_body_sha256": "ae01b5aee1d29eec4a60a8ae8800e1a07ab8c9e7a838c4fa1ed17bfedc9069d1",
     "frozen_notion_snapshot": "docs/teaching/archive/day-22/notion/analytics.md"
   },
-  "latest_analytics_publication": "docs/teaching/daily/day-41/analytics.md",
+  "latest_analytics_publication": "docs/teaching/daily/day-43/analytics.md",
   "day23_archive": "docs/teaching/archive/day-23/manifest.json",
   "previous_day23_chat_article": {
     "project": "chat",
@@ -5361,9 +5427,9 @@
     "source_modified": false
   },
   "current_article_paths": {
-    "chat": "docs/teaching/daily/day-41/chat.md",
-    "pet": "docs/teaching/daily/day-41/pet.md",
-    "analytics": "docs/teaching/daily/day-41/analytics.md"
+    "chat": "docs/teaching/daily/day-43/chat.md",
+    "pet": "docs/teaching/daily/day-43/pet.md",
+    "analytics": "docs/teaching/daily/day-43/analytics.md"
   },
   "previous_source_validation_before_day40_r1": {
     "source_sha": "afdbb6e81382e8d82095827a90c52cc3309a3e20",
@@ -5964,5 +6030,41 @@
     },
     "fifo_unchanged": true,
     "last_full_comparison_unchanged": true
+  },
+  "day43_delivery": {
+    "date": "2026-10-29",
+    "project_order": [
+      "chat",
+      "pet",
+      "analytics"
+    ],
+    "source_repository": "williechen/rust_ai_ring",
+    "source_sha": "c6708c42f21ac919e57a379848b4977d27a1c3d6",
+    "articles": {
+      "chat": "docs/teaching/daily/day-43/chat.md",
+      "pet": "docs/teaching/daily/day-43/pet.md",
+      "analytics": "docs/teaching/daily/day-43/analytics.md"
+    },
+    "evidence": "docs/teaching/daily/day-43/delivery-verification.json",
+    "official_versions": "docs/teaching/daily/day-43/versions.md",
+    "publication": "GitHub main, exact commit full readback",
+    "gate1": "documentation complete",
+    "gate2": "not executed; user product patch application and acceptance pending",
+    "native_git_apply": false,
+    "cargo_or_node_executed": false,
+    "static_patch_check": "pass; strict hunk context only",
+    "next_day_before": {
+      "chat": 43,
+      "pet": 43,
+      "analytics": 43
+    },
+    "next_day_after": {
+      "chat": 44,
+      "pet": 44,
+      "analytics": 44
+    },
+    "product_modified": false,
+    "last_full_comparison_unchanged": true,
+    "fifo_unchanged": true
   }
 }
