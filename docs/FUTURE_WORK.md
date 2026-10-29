@@ -30,7 +30,7 @@
 
 ## Pet 多寵物／回籠／重啟
 
-使用者已確認：以 `pet_activity` 同主人／同寵物的任一 `is_activity=true` 判出籠，不限定散步；全部為 false／無活動才回籠。出籠可啟用散步活動，回籠須停止該寵物全部活動；不得新增狀態欄位。`is_default_closure` 僅保留預設語意，不作目前狀態。
+使用者已確認：以 `pet_activity` 同主人／同寵物的任一 `is_activity=true` 判出籠，不限定散步；全部為 false／無活動才回籠。建立寵物須同交易建立散步與坐下兩筆活動；散步 true 允許漫遊、坐下 true 仍出籠但不漫遊。兩動作切換互斥更新，出籠不重複插入同名活動，回籠停止全部活動；不新增狀態或漫遊欄位。`is_default_closure` 僅保留預設語意，不作目前狀態。
 
 目前產品 `7ce39f0` 的 set_caged／read_caged／list_uncaged 與 PetStore::active／select 仍直接讀寫 `pet_profile.is_default_closure`，尚未符合新契約。須同步切換控制台查詢、出／入籠、選取、原生關窗與啟動 caller，保留逐 ID 隔離、冪等、DB／開窗失敗補償及有效斷言。預設出籠資格與活動狀態分開，不能把舊旗標的歷史值直接當已驗證的新模型。
 

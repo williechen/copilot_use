@@ -33168,6 +33168,11 @@
       "path": "docs/archive/packages-2026-10-30/08-pet-activity-contract-superseded-2026-10-30.zip",
       "catalog": "docs/archive/packages-2026-10-30/pet-activity-contract.json",
       "scope": "superseded added-column Pet Day44 proposal and pre-correction navigation versions"
+    },
+    {
+      "path": "docs/archive/packages-2026-10-30/09-pet-walk-sit-contract-superseded-2026-10-30.zip",
+      "catalog": "docs/archive/packages-2026-10-30/pet-walk-sit-contract.json",
+      "scope": "pre-confirmation versions for initial activities and roaming"
     }
   ]
 }

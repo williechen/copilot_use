@@ -19,3 +19,7 @@
 ## Pet 活動狀態契約更正
 
 [第八包：被取代的 Pet Day44 新增欄位方案及必要導覽版本](08-pet-activity-contract-superseded-2026-10-30.zip)，來源 `ceb3719b7543f491fc230a05a55a28ef2b729bf7`。只封存尚未被既有 ZIP 收錄的不同版本；現行規則以 [Pet Day44 修訂](../../teaching/daily/day-44/pet.md) 為準。原文與新契約未混同為已驗收。
+
+## Pet 基本活動與漫遊定義
+
+[第九包：散步／坐下規則確認前的不同版本](09-pet-walk-sit-contract-superseded-2026-10-30.zip)，來源 `c5180fbe265560e21a7f8abb46b907a68b435906`。只補封存既有 ZIP 尚未收錄的版本；[現行 Pet Day44 修訂](../../teaching/daily/day-44/pet.md) 保留原檔，替代 Green／產品驗收仍未完成。

@@ -203,6 +203,20 @@
     "current_product_uses_old_profile_flag": true,
     "replacement_green_complete": false,
     "gate2_verified": false,
-    "withdrawn_green_archive": "docs/archive/packages-2026-10-30/08-pet-activity-contract-superseded-2026-10-30.zip"
+    "withdrawn_green_archive": "docs/archive/packages-2026-10-30/08-pet-activity-contract-superseded-2026-10-30.zip",
+    "initial_activities_and_roaming": {
+      "initial_activity_records": [
+        "散步",
+        "坐下"
+      ],
+      "creation_transaction": "profile and both initial activities commit or roll back together",
+      "walk": "active implies outside and roaming permitted subject to runtime pauses",
+      "sit": "active implies outside and roaming prohibited",
+      "walk_sit_switch": "mutually exclusive atomic update; do not insert duplicate activity records",
+      "unexpected_both_active": "outside by any-true rule; stop roaming and report conflict",
+      "cage": "stop every activity for the selected pet only",
+      "new_columns": false,
+      "product_implementation_verified": false
+    }
   }
 }

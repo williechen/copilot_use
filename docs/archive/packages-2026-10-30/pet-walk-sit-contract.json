@@ -1,0 +1,113 @@
+{
+  "source_commit": "c5180fbe265560e21a7f8abb46b907a68b435906",
+  "archive": "docs/archive/packages-2026-10-30/09-pet-walk-sit-contract-superseded-2026-10-30.zip",
+  "archive_sha256": "4de75e6fabc865c3bb7f8c95edb3c6110719b19fd2b13bd9c88eb7c12862cbc1",
+  "new_versions": 9,
+  "versions": [
+    {
+      "path": "docs/requirements/USER_FLOWS.md",
+      "sha256": "a13a01377a52efc2d9cf123f2b13ee46053f4cee0376048611c486b848e54dde",
+      "source_commit": "c5180fbe265560e21a7f8abb46b907a68b435906",
+      "archive": {
+        "zip": "docs/archive/packages-2026-10-30/09-pet-walk-sit-contract-superseded-2026-10-30.zip",
+        "entry": "copilot_use/docs/requirements/USER_FLOWS.md"
+      }
+    },
+    {
+      "path": "docs/UI_ALIGNMENT_REQUIREMENTS.md",
+      "sha256": "207414d066495c9cf4768796f49506e42de1c1899c2a8fa0673f8ce0dc8926fc",
+      "source_commit": "c5180fbe265560e21a7f8abb46b907a68b435906",
+      "archive": {
+        "zip": "docs/archive/packages-2026-10-30/09-pet-walk-sit-contract-superseded-2026-10-30.zip",
+        "entry": "copilot_use/docs/UI_ALIGNMENT_REQUIREMENTS.md"
+      }
+    },
+    {
+      "path": "docs/FUTURE_WORK.md",
+      "sha256": "0db67b134d41e2309d56162f50327956a5ebf5a7b9af884e9fbb31b009ca32b7",
+      "source_commit": "c5180fbe265560e21a7f8abb46b907a68b435906",
+      "archive": {
+        "zip": "docs/archive/packages-2026-10-30/09-pet-walk-sit-contract-superseded-2026-10-30.zip",
+        "entry": "copilot_use/docs/FUTURE_WORK.md"
+      }
+    },
+    {
+      "path": "docs/teaching/daily/day-44/pet.md",
+      "sha256": "3307148cbc61f171ac90c62a06fac0717ad0cedef047ac14b0d8b28469971c19",
+      "source_commit": "c5180fbe265560e21a7f8abb46b907a68b435906",
+      "archive": {
+        "zip": "docs/archive/packages-2026-10-30/09-pet-walk-sit-contract-superseded-2026-10-30.zip",
+        "entry": "copilot_use/docs/teaching/daily/day-44/pet.md"
+      }
+    },
+    {
+      "path": "docs/teaching/pet/README.md",
+      "sha256": "16c1b3c5b0ae13241befe97b44c33207f982a64793fecaa6f546e70b5d511a7e",
+      "source_commit": "c5180fbe265560e21a7f8abb46b907a68b435906",
+      "archive": {
+        "zip": "docs/archive/packages-2026-10-30/09-pet-walk-sit-contract-superseded-2026-10-30.zip",
+        "entry": "copilot_use/docs/teaching/pet/README.md"
+      }
+    },
+    {
+      "path": "docs/teaching/current/STATUS.md",
+      "sha256": "cdc96165bc4a22bd149c6af3c17435ce7bbd989354b8c9a589f3aaae6a5ade3d",
+      "source_commit": "c5180fbe265560e21a7f8abb46b907a68b435906",
+      "archive": {
+        "zip": "docs/archive/packages-2026-10-30/09-pet-walk-sit-contract-superseded-2026-10-30.zip",
+        "entry": "copilot_use/docs/teaching/current/STATUS.md"
+      }
+    },
+    {
+      "path": "docs/teaching/current/validation.json",
+      "sha256": "feec0cd03f98422eb9c4e66d2d90702068ba10ea65d87fc7161d266bce465566",
+      "source_commit": "c5180fbe265560e21a7f8abb46b907a68b435906",
+      "archive": {
+        "zip": "docs/archive/packages-2026-10-30/09-pet-walk-sit-contract-superseded-2026-10-30.zip",
+        "entry": "copilot_use/docs/teaching/current/validation.json"
+      }
+    },
+    {
+      "path": "docs/learning-state.json",
+      "sha256": "b9622769b14031dddce1a2837e30ae738c25c4ce0b7b079b8888009db1a5a631",
+      "source_commit": "c5180fbe265560e21a7f8abb46b907a68b435906",
+      "archive": {
+        "zip": "docs/archive/packages-2026-10-30/09-pet-walk-sit-contract-superseded-2026-10-30.zip",
+        "entry": "copilot_use/docs/learning-state.json"
+      }
+    },
+    {
+      "path": "docs/teaching/current/manifest.json",
+      "sha256": "70490a18a6cea6b6eb96d73d5c5de11e8f9fa6e184edb1596bab81970e9c1aea",
+      "source_commit": "c5180fbe265560e21a7f8abb46b907a68b435906",
+      "archive": {
+        "zip": "docs/archive/packages-2026-10-30/09-pet-walk-sit-contract-superseded-2026-10-30.zip",
+        "entry": "copilot_use/docs/teaching/current/manifest.json"
+      }
+    }
+  ],
+  "rule": {
+    "initial_activity_records": [
+      "散步",
+      "坐下"
+    ],
+    "creation_transaction": "profile and both initial activities commit or roll back together",
+    "walk": "active implies outside and roaming permitted subject to runtime pauses",
+    "sit": "active implies outside and roaming prohibited",
+    "walk_sit_switch": "mutually exclusive atomic update; do not insert duplicate activity records",
+    "unexpected_both_active": "outside by any-true rule; stop roaming and report conflict",
+    "cage": "stop every activity for the selected pet only",
+    "new_columns": false,
+    "product_implementation_verified": false
+  },
+  "existing_zip_hashes_unchanged": {
+    "03-analytics-2026-10-30.zip": "1d65f353640a951b8b1856532de487b1f217dd8dc263d6f08fa44426bdcff9d0",
+    "04-shared-teaching-2026-10-30.zip": "4fe83423d3645fecf30bd2f7511a80200893e35aaae6a6264b30821046c91524",
+    "02-pet-2026-10-30.zip": "6069e0d0e19ee55c5d97fdf6206b4c5bd3114bccd1c0b3fe50f41f90e7cf165d",
+    "05-source-verification-2026-10-30.zip": "ee61c93920a7deee91270db8d2d901754c7c002c921dd3184bd7af342e8d5828",
+    "01-chat-2026-10-30.zip": "d2e2afced313b9c77adc459b16d5f2abb8210a7a3e9b1e820b6f8cfd4851783f",
+    "08-pet-activity-contract-superseded-2026-10-30.zip": "d0f23c79b1400401056a8a2b5f81e90e97e52467addad52ff91ce81019e160dd",
+    "06-rules-and-indexes-2026-10-30.zip": "6b3f0e977d93d11384f02c680e6a88c851fdc96c9a7beec17d60ac1282e021a2",
+    "07-superseded-document-versions-2026-10-30.zip": "ca6e16df10b09b87b356fe821d35110e11c747d29df70a3128742440d1c7816f"
+  }
+}
