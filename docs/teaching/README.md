@@ -1,14 +1,16 @@
 # 三專案教學
 
+**2026-10-29：已正式發布 [Day43 三案教學](daily/day-43/README.md)（Gate1 文件交付）；產品 Day43 patch 尚未套用，Gate2 未驗收。三案下一待發布篇為 Day44。**
+
 最新功能教學與各案獨立 Refactor 分別驗收。核心 60 分鐘只計 Red／Green。
 
 ## 專案與最新文章
 
 | 專案 | 專案首頁 | 最新文章 | 問題主線 |
 |---|---|---|---|
-| Chat | [專案大綱](chat/README.md) | [Day42 r3](daily/day-42/chat-r3.md) | [原完成條件](../FUTURE_WORK.md#chat-auth) |
-| Pet | [專案大綱](pet/README.md) | [Day42 r3](daily/day-42/pet-r3.md) | [原完成條件](../FUTURE_WORK.md#pet-lifecycle) |
-| Analytics | [專案大綱](analytics/README.md) | [Day42 r2](daily/day-42/analytics-r2.md) | [原完成條件](../FUTURE_WORK.md#analytics-auth) |
+| Chat | [專案大綱](chat/README.md) | [Day43](daily/day-43/chat.md) | [原完成條件](../FUTURE_WORK.md#chat-auth) |
+| Pet | [專案大綱](pet/README.md) | [Day43](daily/day-43/pet.md) | [原完成條件](../FUTURE_WORK.md#pet-lifecycle) |
+| Analytics | [專案大綱](analytics/README.md) | [Day43](daily/day-43/analytics.md) | [原完成條件](../FUTURE_WORK.md#analytics-auth) |
 
 ## 目前驗證
 
