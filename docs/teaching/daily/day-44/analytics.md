@@ -1,10 +1,10 @@
 # Analytics Day44｜後台登出表單加入 Session 專屬 CSRF，拒絕跨站登出
 
-> 2026-10-30 本地驗證修訂 r3。最新產品唯讀 `4b1008b95bc3e170381fcd1db84695e421f036bd`；下列原 Refactor／Green 程式保留 `7ce39f0166a2120539e5908b33c88322a930c35a` 重現基準。最新 main 已有對應功能，不重複套用。next_day 已是45，不再加 Day。原發布版本與讀回保留於封存。
+> 2026-10-31 Gate2補驗。當次產品唯讀`2c7ff8b861d32ab6d879bf80c9f2dce50de38097`；原Refactor／Green保留7ce重現基準。原4b1008b單元／PG結果維持原SHA，這次新增2c7ff8b瀏覽器／HTTP證據，不新增Day。
 
-## 本次本地結果
+## 本次Gate2結果
 
-最新4b1008b已實作logout CSRF並採用兩個舊fixture修正；本次在該主分支精確SHA重跑PG63項通過。 [四workspace、真套用、原始命令及阻塞](../../../source-review/local-validation-2026-10-30-day44-r2/README.md)。原發布全文以ZIP保存，原交付讀回不能冒認本次修訂；完整Gate2未完成。
+2c7ff8b真瀏覽器／HTTP11項檢查通過，七個CI workflow成功；[本輪完整證據](../../../source-review/gate2-2026-10-31/README.md)。Day44 logout CSRF兩頁面皆驗證；完整角色／來源ACL尚未接通，實際舊PG沒有備份可驗。
 
 ## ① 目標、缺口、正式使用者流程
 
@@ -150,7 +150,7 @@ diff --git a/analytics_apps/analytics_server/src/dashboard_url.rs b/analytics_ap
  }
 ```
 
-Refactor 後續：將 Analytics `password_login` 的 Session SQL、錯誤與時間政策逐步搬至同案 Application/Adapter 並保留 PG、HTTP、CSRF 斷言；不重複全專案 G-01/G-02。驗證 `cargo test --manifest-path analytics_apps/Cargo.toml -p analytics-server export_url_refactor_tests` **已在最新 main 的一般／PG suite 執行，URL 與 SSR 斷言保留**。
+Refactor的4b1008b一般／PG suite原始斷言保留；本輪2c7ff8b補真HTTP／瀏覽器／PG Session旅程，不重跑或追認原63項單元／整合結果。後續仍沿同案Session／Adapter及角色來源ACL工作。
 
 ## ② Red → 完整 Green（核心預估15分鐘；原 Red 未重跑，Green 真PG已跑）
 
@@ -1517,22 +1517,11 @@ new file mode 100644
 
 Rust 2024 edition、SQLx 0.9 MSRV 1.94 在 stable 1.99.1 範圍內；正式 PG、PostgreSQL server 版本／migration、HTTP／SSR、Session Cookie 與 CSRF 需真環境驗證。此日沒有從 metadata 推定建置成功，也未操作正式 DB 或付費 AI。
 
-## ④ 驗證、交付與剩餘缺口
+## ④ Gate2實測與阻擋（2026-10-31）
 
-**文件與真套用**：原 Refactor→Green 已真 check／apply；追加 fmt 修補及下節兩個 fixture 修補，保留既有有效斷言。精確 commit／blob／SHA256 於提交後另記；完整官方套件／MSRV Gate 尚未全量重核。
+2c7ff8b真Leptos頁面／HTTP／隔離PG共11步：初始admin強制改密碼、首次改密碼頁與Dashboard兩種wrong logout token403保留Session、真表單登出與PG撤銷、改密碼撤銷、來源切換保留精確kind、受保護CSV、舊Cookie重放拒絕、伺服器與PG重啟後新密碼仍有效。既有4b1008b的43＋1ignored／PG63保留原來源，不追認新SHA。
 
-**本地已執行、完整 Gate2 未完成**：最新主分支一般43＋1ignored，真PG完整63通過／0ignored；兩個fixture修正已在4b1008b，最新來源的結果與先前失敗分開記錄。新SHA的真瀏覽器、實際舊PG還原與完整授權旅程未執行。以下重現只能用專用隔離DB：
-```bash
-git apply --check analytics-day44-refactor.patch
-git apply analytics-day44-refactor.patch
-git apply --check analytics-day44-green.patch
-git apply analytics-day44-green.patch
-cargo fmt --manifest-path analytics_apps/Cargo.toml --all -- --check
-cargo test --manifest-path analytics_apps/Cargo.toml -p analytics-server
-cargo test --manifest-path analytics_apps/Cargo.toml -p analytics-server --features postgres-integration --test day44_logout_csrf -- --include-ignored
-cargo check --manifest-path analytics_apps/Cargo.toml --workspace
-```
-驗證首次改密碼與一般 Dashboard 的登出 token、Origin、重放、閒置 Session、密碼變更撤銷、真 PG commit/rollback、不同來源 token 不得登入。原 Day24/25/26 與完整來源 ACL、帳號角色／稽核、使用者實際舊 PG 備份仍待 Gate2；下一日優先補管理員對檢視者／來源的授權流程。Analytics 目前無 pending FIFO，`last_full_comparison` 不變。核心60分鐘只計 Red/Green 預估15分鐘，Refactor 與交付另計。
+目前畫面明示僅支援管理員，角色／來源ACL尚待接通；該完整需求未實作／未完整驗收。使用者沒有提供實際舊PG備份，本輪fresh PG與重啟不能抵算舊庫還原。[原始命令、截圖與矩陣](../../../source-review/gate2-2026-10-31/README.md)。測試沒有正式DB或付費AI操作、沒有來源提交／推送，完整Gate2=false，Day與FIFO不變。
 
 ## PG fixture 修訂 r3：保留原斷言，補足真實登出前置
 
