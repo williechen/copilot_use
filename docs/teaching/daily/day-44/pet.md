@@ -2,11 +2,11 @@
 
 ## ① 現況、來源與caller
 
-產品唯讀`2c7ff8b861d32ab6d879bf80c9f2dce50de38097`已採用forward第5版、升級example與兩項回歸測試。本輪以主分支原檔重驗112項通過；原候選附件已封存，**不要重複套用**。Day不增加，next_day維持45。
+產品唯讀`64eff527283fd05657841297879aefeaadd31f64`已採用forward第5版、升級example與兩項回歸測試。本輪64eff52只調整SQL排版；隔離副本重驗112項、Node12、WASM通過；原候選附件已封存，**不要重複套用**。Day不增加，next_day維持45。
 
 同pet_id／owner_id任一`pet_activity.is_activity=true`就是出籠，不限walk／不限一筆true；全false／無活動才回籠。新建profile與walk／sit兩筆inactive同交易，既有UI隨後明確select／出籠。walk允許漫遊，sit仍出籠但禁止漫遊；同時true時sit優先，持久化walk=false。回籠／Native X停該隻全部活動，不動其他寵物；既有is_default_closure只作啟動預設，沒有新籠態或漫遊欄位。
 
-正式鏈仍為ActivityControls→bridge／index.html invoke→Tauri逐UUID命令→PetStore→activity交易；Native錯誤還原精確活動與選取snapshot。startup只恢復預設可出籠者。漫遊逐步鎖內核對DB／generation，受既有PET_ENABLE_ROAM opt-in、睡覺及拖曳暫停限制。這些主分支程式與舊GUI人工驗收分開，新模型native旅程仍未驗。
+正式鏈仍為ActivityControls→bridge／index.html invoke→Tauri逐UUID命令→PetStore→activity交易；Native錯誤還原精確活動與選取snapshot。startup只恢復預設可出籠者。漫遊逐步鎖內核對DB／generation，受既有PET_ENABLE_ROAM opt-in、睡覺及拖曳暫停限制。這些主分支程式與舊GUI人工驗收分開，新模型native25步已於2c7ff8b隔離Xvfb通過，實體桌面仍待驗。
 
 ## Refactor｜已採用的找回視窗幾何搬層
 
@@ -293,3 +293,9 @@ async fn dictionary_id_collision_rolls_back_every_activity_change() {
 [本輪完整證據與截圖](../../../source-review/gate2-2026-10-31/README.md) · [25步原始紀錄](../../../source-review/gate2-2026-10-31/pet-gui-checks.json) · [免重編實機腳本](../../../source-review/gate2-2026-10-31/manual-pet.sh)
 
 實際桌面右鍵／拖曳／縮放／多螢幕及真OS開窗失敗仍待驗；已準備獨立手動DB與凍結原生產物，預檢不等於人工通過。整體Gate2另受Chat排除名單與Analytics授權缺口／實際舊PG缺備份阻擋，不能用此25步當完整驗收。next_day45、FIFO、last_full_comparison不變。
+
+## 64eff52 SQL更新後重驗
+
+四workspace locked metadata、Pet fmt／check／clippy、Rust112、Node12及WASM均exit0。43個SQL查詢呼叫token序列一致，Pet migrations／UI未改；不是以靜態比對代替測試。前輪2c7ff8b native25步保留原來源，本輪未重跑GUI、實際舊庫升級或三平台發行。完整Gate2仍未完成，不增Day。
+
+[完整命令／工具／清理／CI](../../../source-review/gate2-sql-2026-10-31/README.md) · [獨立文章交付讀回](pet-sql-delivery-2026-10-31.json)
