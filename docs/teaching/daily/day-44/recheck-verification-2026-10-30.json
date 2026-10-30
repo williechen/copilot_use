@@ -4419,5 +4419,6 @@
     }
   ],
   "archive_map": "docs/archive/packages-2026-10-30/day44-recheck-archive.json",
-  "remote_readback": "pending push then exact-ref GitHub full-content comparison"
+  "remote_readback": "docs/teaching/daily/day-44/recheck-remote-verification-2026-10-30.json",
+  "remote_full_text_equal": true
 }

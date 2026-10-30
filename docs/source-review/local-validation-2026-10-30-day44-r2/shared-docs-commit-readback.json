@@ -1,0 +1,271 @@
+{
+  "repo": "williechen/copilot_use",
+  "branch": "main",
+  "expected_parent": "85f4f7f207bac615be2794c302a3d9ae9044fb2a",
+  "commit": "51ebb080f189936c9f0ea697b43de570dd35c96b",
+  "message": "docs: synchronize Day44 current homes state and issue tracking",
+  "readback_at_utc": "2026-10-30T14:03:06.055450+00:00",
+  "files": [
+    {
+      "path": "README.md",
+      "operation": "write",
+      "readback_ref": "51ebb080f189936c9f0ea697b43de570dd35c96b",
+      "blob_sha": "a6e3e31a645299065be46f2ba66a27f8868a0438",
+      "sha256": "03bfecd5430282c73ce692f195e2f353f8bfe09d4bd50dddd11906320c980d52",
+      "bytes": 657,
+      "full_bytes_verified": true
+    },
+    {
+      "path": "docs/FUTURE_WORK.md",
+      "operation": "write",
+      "readback_ref": "51ebb080f189936c9f0ea697b43de570dd35c96b",
+      "blob_sha": "925e2bb7c5e59ce81584520e33a19eb86dfc5e1c",
+      "sha256": "ad15ac910a3665f95e5d00b37d01b942fc929c46cd36b4369dcf66dbf2ed2ca2",
+      "bytes": 8130,
+      "full_bytes_verified": true
+    },
+    {
+      "path": "docs/LOCAL_START.md",
+      "operation": "write",
+      "readback_ref": "51ebb080f189936c9f0ea697b43de570dd35c96b",
+      "blob_sha": "faa3bb6c6ef28a67a5a5dc56d72d4c9ede4e35d3",
+      "sha256": "b24cc0eea39a36dc4d5973a3d7fd27d1461af41fb8b0e434264b3c7bae907b0e",
+      "bytes": 1785,
+      "full_bytes_verified": true
+    },
+    {
+      "path": "docs/LOCAL_VALIDATION.md",
+      "operation": "write",
+      "readback_ref": "51ebb080f189936c9f0ea697b43de570dd35c96b",
+      "blob_sha": "8eef693e762948cbfbabc1ba0f900240ddb0d605",
+      "sha256": "454af85311d86a64710c44914286259e59de8b9ec7bc685a253bed6df100aff4",
+      "bytes": 1898,
+      "full_bytes_verified": true
+    },
+    {
+      "path": "docs/README.md",
+      "operation": "write",
+      "readback_ref": "51ebb080f189936c9f0ea697b43de570dd35c96b",
+      "blob_sha": "81ab5a8a69635cdd19c67eec4cf714de992bea6f",
+      "sha256": "bba9c5a6b6c78cf9b95468d8500d032e33476877bd7bf3c0a8a6fd194be662d3",
+      "bytes": 1127,
+      "full_bytes_verified": true
+    },
+    {
+      "path": "docs/SOURCE_LAYOUT.md",
+      "operation": "write",
+      "readback_ref": "51ebb080f189936c9f0ea697b43de570dd35c96b",
+      "blob_sha": "9324c8c7719690e62ee2a8802278f89e01a15e07",
+      "sha256": "7298b01130751a400cdc4f35a977cdb979f4053a69025deb6254e7bd7bf9991b",
+      "bytes": 1842,
+      "full_bytes_verified": true
+    },
+    {
+      "path": "docs/SYSTEM_ARCHITECTURE.md",
+      "operation": "write",
+      "readback_ref": "51ebb080f189936c9f0ea697b43de570dd35c96b",
+      "blob_sha": "4860b6e4769359a1a0512237ba65c8ed72a2c237",
+      "sha256": "c5b07ce8741934c1ec4e4a4e996364e3e683d1fb89f5ae28367332b9de62dd2d",
+      "bytes": 1935,
+      "full_bytes_verified": true
+    },
+    {
+      "path": "docs/archive/packages-2026-10-30/README.md",
+      "operation": "write",
+      "readback_ref": "51ebb080f189936c9f0ea697b43de570dd35c96b",
+      "blob_sha": "7aabc2745f6d60e68cbd174210daf561801a8aeb",
+      "sha256": "ee92bfcdf907403b2fec5afc5b2c85e3f195380b47561f0e7a8ff5f00c299f2f",
+      "bytes": 3748,
+      "full_bytes_verified": true
+    },
+    {
+      "path": "docs/archive/packages-2026-10-30/current-files.json",
+      "operation": "write",
+      "readback_ref": "51ebb080f189936c9f0ea697b43de570dd35c96b",
+      "blob_sha": "46ad9a60072143981d3cfdf2007fcfea04b1dfbd",
+      "sha256": "fd52ebf3044082736fb36fd3e0822f62e10d9dc431b381272b33221813e5b3f7",
+      "bytes": 1639225,
+      "full_bytes_verified": true
+    },
+    {
+      "path": "docs/engineering/README.md",
+      "operation": "write",
+      "readback_ref": "51ebb080f189936c9f0ea697b43de570dd35c96b",
+      "blob_sha": "183e1e5ef3cc40cb785816528714bbdb52f3aea5",
+      "sha256": "59e465f85845a82ea1d7517ed8b4ce844c656e09f5c0b73ef1675f4cb3abd4d3",
+      "bytes": 1155,
+      "full_bytes_verified": true
+    },
+    {
+      "path": "docs/learning-state.json",
+      "operation": "write",
+      "readback_ref": "51ebb080f189936c9f0ea697b43de570dd35c96b",
+      "blob_sha": "21c08e98013921d5e70d6ba11cfcc005b80d3b71",
+      "sha256": "1d6e740005115644cfd54f410ccac57d3e91538f6de3898bbb3b8c3094a822bf",
+      "bytes": 26355,
+      "full_bytes_verified": true
+    },
+    {
+      "path": "docs/teaching/README.md",
+      "operation": "write",
+      "readback_ref": "51ebb080f189936c9f0ea697b43de570dd35c96b",
+      "blob_sha": "656e88187e6660ebaa75a4572005d06c6e482925",
+      "sha256": "3753a3a24b412e682ef58b04e09b4ff8d053309cd1dc6e7d47d0dfdec09ded21",
+      "bytes": 585,
+      "full_bytes_verified": true
+    },
+    {
+      "path": "docs/teaching/analytics/README.md",
+      "operation": "write",
+      "readback_ref": "51ebb080f189936c9f0ea697b43de570dd35c96b",
+      "blob_sha": "0c74f37919f835f0a18584773bd2c58008eddfd8",
+      "sha256": "4c49cfc6d1d186dfe30ec1f70806151195a7d624691a1a06d05c214af7d91302",
+      "bytes": 616,
+      "full_bytes_verified": true
+    },
+    {
+      "path": "docs/teaching/chat/README.md",
+      "operation": "write",
+      "readback_ref": "51ebb080f189936c9f0ea697b43de570dd35c96b",
+      "blob_sha": "eb52e01807bffd74637d9502dbb3f870709dce26",
+      "sha256": "b543e97d1424447f7342e7045a3ca4db7cb00357c6bb2cebaf498d463d05e676",
+      "bytes": 611,
+      "full_bytes_verified": true
+    },
+    {
+      "path": "docs/teaching/current/README.md",
+      "operation": "write",
+      "readback_ref": "51ebb080f189936c9f0ea697b43de570dd35c96b",
+      "blob_sha": "d4ebb0e18ac3a67526df892a14fae9a2ef14826d",
+      "sha256": "c2d00f6030fa0d97627711b325585eafe7789c4033d74493b0f2031593befba7",
+      "bytes": 601,
+      "full_bytes_verified": true
+    },
+    {
+      "path": "docs/teaching/current/STATUS.md",
+      "operation": "write",
+      "readback_ref": "51ebb080f189936c9f0ea697b43de570dd35c96b",
+      "blob_sha": "0d8c4f1933577567a102fc45e8d59ce07cbe38dd",
+      "sha256": "327ba2efaa2fc07e53d8679c87fac118ff087563506be91223e0fa77b0cec47d",
+      "bytes": 1924,
+      "full_bytes_verified": true
+    },
+    {
+      "path": "docs/teaching/current/ci.json",
+      "operation": "write",
+      "readback_ref": "51ebb080f189936c9f0ea697b43de570dd35c96b",
+      "blob_sha": "83b3edeaf45e71356cf68441e067c52e2f30eb5a",
+      "sha256": "1deb79b2b78a2d702e8d7305fea0c96f24ab116cf492ab70d754524962806473",
+      "bytes": 102442,
+      "full_bytes_verified": true
+    },
+    {
+      "path": "docs/teaching/current/manifest.json",
+      "operation": "write",
+      "readback_ref": "51ebb080f189936c9f0ea697b43de570dd35c96b",
+      "blob_sha": "96ee14a91c109be2397fac5cf74c449d46c28f19",
+      "sha256": "79ea5ed340da1a5c15829b93f300e6802ea886f5a1dc83aa3cf28ecd54822e52",
+      "bytes": 15076,
+      "full_bytes_verified": true
+    },
+    {
+      "path": "docs/teaching/current/pet-activity-contract.json",
+      "operation": "delete_archived",
+      "readback_ref": "85f4f7f207bac615be2794c302a3d9ae9044fb2a",
+      "blob_sha": "e40361a1029b1dab4842926cbfbaa97059f63e96",
+      "sha256": "8868f05ad756611a2cab4ca7ec1427cc3e2d24117c64f010c3c054b34b588c8e",
+      "bytes": 2588,
+      "full_bytes_verified": true
+    },
+    {
+      "path": "docs/teaching/current/validation.json",
+      "operation": "write",
+      "readback_ref": "51ebb080f189936c9f0ea697b43de570dd35c96b",
+      "blob_sha": "04df530bba1768e6e3841bfbec0fb6cf46d2031f",
+      "sha256": "5ab27562e6ca65a683bf1c8fa0269248dcfcecdb4679a838e4b301dd505b11b5",
+      "bytes": 3574,
+      "full_bytes_verified": true
+    },
+    {
+      "path": "docs/teaching/daily/README.md",
+      "operation": "write",
+      "readback_ref": "51ebb080f189936c9f0ea697b43de570dd35c96b",
+      "blob_sha": "c1a61c15829ee797716af4509d76e6993c858e3e",
+      "sha256": "b64f2a51b9b43c59f33e5734240566207cf6760429d14dd28fe5851a67edc972",
+      "bytes": 733,
+      "full_bytes_verified": true
+    },
+    {
+      "path": "docs/teaching/daily/day-44/ENTRY.md",
+      "operation": "write",
+      "readback_ref": "51ebb080f189936c9f0ea697b43de570dd35c96b",
+      "blob_sha": "fe0f2255629d3b782618a9fe3a594decedda416e",
+      "sha256": "ad9e4d3d26e5e6584a8426ffd7e81a66523d189d85760050ad276e9308071bf8",
+      "bytes": 779,
+      "full_bytes_verified": true
+    },
+    {
+      "path": "docs/teaching/daily/day-44/README.md",
+      "operation": "write",
+      "readback_ref": "51ebb080f189936c9f0ea697b43de570dd35c96b",
+      "blob_sha": "d90bd42a7d01dafbe4f546b0fced46105a10fd2b",
+      "sha256": "d29089d7ad0685f55b8eee176877795b384937ad11acbca323085913a5bb3541",
+      "bytes": 1474,
+      "full_bytes_verified": true
+    },
+    {
+      "path": "docs/teaching/daily/day-44/delivery-verification.json",
+      "operation": "delete_archived",
+      "readback_ref": "85f4f7f207bac615be2794c302a3d9ae9044fb2a",
+      "blob_sha": "8b4bfd5bab30361b3599a4f8def2cad5e6f83f1d",
+      "sha256": "65d777df393d78144725f66314a6ac4f60c16fe05826ba27f596ba11679f7754",
+      "bytes": 3277,
+      "full_bytes_verified": true
+    },
+    {
+      "path": "docs/teaching/daily/day-44/recheck-verification-2026-10-30.json",
+      "operation": "write",
+      "readback_ref": "51ebb080f189936c9f0ea697b43de570dd35c96b",
+      "blob_sha": "6a345b8643ef6635d342066f3ac9888a001ea94e",
+      "sha256": "f7474ca0ebbb01c55be79f2e5719664529061259f6a30cd60f9f405f0593d0f6",
+      "bytes": 214547,
+      "full_bytes_verified": true
+    },
+    {
+      "path": "docs/teaching/daily/day-44/remote-revision-verification-2026-10-30.json",
+      "operation": "delete_archived",
+      "readback_ref": "85f4f7f207bac615be2794c302a3d9ae9044fb2a",
+      "blob_sha": "693442c9cf6feafd8b7309a5dbaeeb076deb1d50",
+      "sha256": "19c7202323b5cd38280952da9e66ab805aebaeb57769018dfdc14ae19a9888f5",
+      "bytes": 1585,
+      "full_bytes_verified": true
+    },
+    {
+      "path": "docs/teaching/daily/day-44/revision-verification-2026-10-30.json",
+      "operation": "delete_archived",
+      "readback_ref": "85f4f7f207bac615be2794c302a3d9ae9044fb2a",
+      "blob_sha": "013585361413adc965e664ae50fbf4fd1db22889",
+      "sha256": "49cb85f3d6473f11ef12af71d37150ed76a9ac2f1fc15040b82ac64d5ec4d559",
+      "bytes": 74397,
+      "full_bytes_verified": true
+    },
+    {
+      "path": "docs/teaching/functional-refactoring/PROGRESS.md",
+      "operation": "write",
+      "readback_ref": "51ebb080f189936c9f0ea697b43de570dd35c96b",
+      "blob_sha": "0adba4eacc287d129ab73b17b30b3509f91711ab",
+      "sha256": "84b531c4995bf342f3a7441eac46fc69f34a429ea269aef23e17cfaa16b6bdf0",
+      "bytes": 1228,
+      "full_bytes_verified": true
+    },
+    {
+      "path": "docs/teaching/pet/README.md",
+      "operation": "write",
+      "readback_ref": "51ebb080f189936c9f0ea697b43de570dd35c96b",
+      "blob_sha": "d943b15c2f4fc04c06fa64ca58fa2d687e166da7",
+      "sha256": "4cbae0213bfce9957a5ec8c323591843536f93ed8123987174f3c3efdb942198",
+      "bytes": 604,
+      "full_bytes_verified": true
+    }
+  ]
+}

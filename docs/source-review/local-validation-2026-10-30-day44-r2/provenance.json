@@ -1,0 +1,16 @@
+{
+  "final_product_sha": "4b1008b95bc3e170381fcd1db84695e421f036bd",
+  "current_recipe": "docs/teaching/daily/day-44/pet-day44-legacy-code-upgrade-r4.patch",
+  "directories": {
+    "root commands.json": "intermediate e98 main; failures preserved at that source",
+    "fixed": "intermediate e98 prototype, superseded; do not apply its migration-edit patch to a deployed database",
+    "latest, latest-retry": "intermediate c726 main, including ENOSPC failures and corrected retries",
+    "latest-fix": "intermediate c726 forward candidate",
+    "final-main": "unmodified final4b1008b full verification; authoritative main results",
+    "final-fix": "final4b1008b plus delivered forward-only Pet patch; actual Red then Green; authoritative candidate results"
+  },
+  "formal_database_writes": false,
+  "new_columns": false,
+  "four_existing_migration_files_unchanged": true,
+  "binaries_or_private_db_published": false
+}
