@@ -1,0 +1,3 @@
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.53s
+     Running `pet_apps/target/debug/examples/day44_upgrade /home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-adopted-db/actual-readonly-copy.sqlite /home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-adopted-db/old-migrations /home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/pet_apps/migrations actual`
+upgrade/idempotence passed; profiles=1; profile defaults unchanged; schema/columns unchanged; two basic activities present; sit priority preserved

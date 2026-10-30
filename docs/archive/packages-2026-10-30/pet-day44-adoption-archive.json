@@ -1,0 +1,206 @@
+{
+  "source_docs_sha": "3c42a10781c00f7cf84d4ead8c062f635ddf16e7",
+  "package": "14-pet-day44-before-adoption-2026-10-30.zip",
+  "sha256": "c1300824a5e32b339b93041e881bccb9c7bbf3a21bbbb622d3e449b06c40c9db",
+  "files": [
+    {
+      "path": "README.md",
+      "member": "copilot_use/README.md",
+      "sha256": "03bfecd5430282c73ce692f195e2f353f8bfe09d4bd50dddd11906320c980d52",
+      "bytes": 657,
+      "already_archived": false,
+      "blob_sha": "a6e3e31a645299065be46f2ba66a27f8868a0438"
+    },
+    {
+      "path": "docs/README.md",
+      "member": "copilot_use/docs/README.md",
+      "sha256": "bba9c5a6b6c78cf9b95468d8500d032e33476877bd7bf3c0a8a6fd194be662d3",
+      "bytes": 1127,
+      "already_archived": false,
+      "blob_sha": "81ab5a8a69635cdd19c67eec4cf714de992bea6f"
+    },
+    {
+      "path": "docs/teaching/README.md",
+      "member": "copilot_use/docs/teaching/README.md",
+      "sha256": "3753a3a24b412e682ef58b04e09b4ff8d053309cd1dc6e7d47d0dfdec09ded21",
+      "bytes": 585,
+      "already_archived": false,
+      "blob_sha": "656e88187e6660ebaa75a4572005d06c6e482925"
+    },
+    {
+      "path": "docs/teaching/daily/README.md",
+      "member": "copilot_use/docs/teaching/daily/README.md",
+      "sha256": "b64f2a51b9b43c59f33e5734240566207cf6760429d14dd28fe5851a67edc972",
+      "bytes": 733,
+      "already_archived": false,
+      "blob_sha": "c1a61c15829ee797716af4509d76e6993c858e3e"
+    },
+    {
+      "path": "docs/teaching/chat/README.md",
+      "member": "copilot_use/docs/teaching/chat/README.md",
+      "sha256": "b543e97d1424447f7342e7045a3ca4db7cb00357c6bb2cebaf498d463d05e676",
+      "bytes": 611,
+      "already_archived": false,
+      "blob_sha": "eb52e01807bffd74637d9502dbb3f870709dce26"
+    },
+    {
+      "path": "docs/teaching/pet/README.md",
+      "member": "copilot_use/docs/teaching/pet/README.md",
+      "sha256": "4cbae0213bfce9957a5ec8c323591843536f93ed8123987174f3c3efdb942198",
+      "bytes": 604,
+      "already_archived": false,
+      "blob_sha": "d943b15c2f4fc04c06fa64ca58fa2d687e166da7"
+    },
+    {
+      "path": "docs/teaching/analytics/README.md",
+      "member": "copilot_use/docs/teaching/analytics/README.md",
+      "sha256": "4c49cfc6d1d186dfe30ec1f70806151195a7d624691a1a06d05c214af7d91302",
+      "bytes": 616,
+      "already_archived": false,
+      "blob_sha": "0c74f37919f835f0a18584773bd2c58008eddfd8"
+    },
+    {
+      "path": "docs/teaching/current/README.md",
+      "member": "copilot_use/docs/teaching/current/README.md",
+      "sha256": "c2d00f6030fa0d97627711b325585eafe7789c4033d74493b0f2031593befba7",
+      "bytes": 601,
+      "already_archived": false,
+      "blob_sha": "d4ebb0e18ac3a67526df892a14fae9a2ef14826d"
+    },
+    {
+      "path": "docs/teaching/daily/day-44/pet.md",
+      "member": "copilot_use/docs/teaching/daily/day-44/pet.md",
+      "sha256": "d4589aa6271a89d741ed9b0ba2fdf872fc1e37f7ac949e58ad77dd2a59192a2e",
+      "bytes": 27110,
+      "already_archived": false,
+      "blob_sha": "4cde5508eb716fdedbe1ac0bd7949ee30f085d96"
+    },
+    {
+      "path": "docs/teaching/daily/day-44/pet-day44-legacy-code-upgrade-r4.patch",
+      "member": "copilot_use/docs/teaching/daily/day-44/pet-day44-legacy-code-upgrade-r4.patch",
+      "sha256": "b2372a1ca2c1ea50a900c8cd949373ab875d763fbfb79b832cd63d179772b1ce",
+      "bytes": 7183,
+      "already_archived": false,
+      "blob_sha": "30a7603cfbc74c266f38b851bacb2b01c07d73a0"
+    },
+    {
+      "path": "docs/teaching/daily/day-44/README.md",
+      "member": "copilot_use/docs/teaching/daily/day-44/README.md",
+      "sha256": "d29089d7ad0685f55b8eee176877795b384937ad11acbca323085913a5bb3541",
+      "bytes": 1474,
+      "already_archived": false,
+      "blob_sha": "d90bd42a7d01dafbe4f546b0fced46105a10fd2b"
+    },
+    {
+      "path": "docs/teaching/daily/day-44/ENTRY.md",
+      "member": "copilot_use/docs/teaching/daily/day-44/ENTRY.md",
+      "sha256": "ad9e4d3d26e5e6584a8426ffd7e81a66523d189d85760050ad276e9308071bf8",
+      "bytes": 779,
+      "already_archived": false,
+      "blob_sha": "fe0f2255629d3b782618a9fe3a594decedda416e"
+    },
+    {
+      "path": "docs/teaching/current/STATUS.md",
+      "member": "copilot_use/docs/teaching/current/STATUS.md",
+      "sha256": "327ba2efaa2fc07e53d8679c87fac118ff087563506be91223e0fa77b0cec47d",
+      "bytes": 1924,
+      "already_archived": false,
+      "blob_sha": "0d8c4f1933577567a102fc45e8d59ce07cbe38dd"
+    },
+    {
+      "path": "docs/teaching/current/manifest.json",
+      "member": "copilot_use/docs/teaching/current/manifest.json",
+      "sha256": "2899c9fc1af345ef1424b8733d5272e2244457988e37476347e53f1ec00f54f1",
+      "bytes": 15514,
+      "already_archived": false,
+      "blob_sha": "ca7eee59166177398d4c91cbfb5455d99995d389"
+    },
+    {
+      "path": "docs/teaching/current/validation.json",
+      "member": "copilot_use/docs/teaching/current/validation.json",
+      "sha256": "5ab27562e6ca65a683bf1c8fa0269248dcfcecdb4679a838e4b301dd505b11b5",
+      "bytes": 3574,
+      "already_archived": false,
+      "blob_sha": "04df530bba1768e6e3841bfbec0fb6cf46d2031f"
+    },
+    {
+      "path": "docs/teaching/current/ci.json",
+      "member": "copilot_use/docs/teaching/current/ci.json",
+      "sha256": "1deb79b2b78a2d702e8d7305fea0c96f24ab116cf492ab70d754524962806473",
+      "bytes": 102442,
+      "already_archived": false,
+      "blob_sha": "83b3edeaf45e71356cf68441e067c52e2f30eb5a"
+    },
+    {
+      "path": "docs/learning-state.json",
+      "member": "copilot_use/docs/learning-state.json",
+      "sha256": "1d6e740005115644cfd54f410ccac57d3e91538f6de3898bbb3b8c3094a822bf",
+      "bytes": 26355,
+      "already_archived": false,
+      "blob_sha": "21c08e98013921d5e70d6ba11cfcc005b80d3b71"
+    },
+    {
+      "path": "docs/SOURCE_LAYOUT.md",
+      "member": "copilot_use/docs/SOURCE_LAYOUT.md",
+      "sha256": "7298b01130751a400cdc4f35a977cdb979f4053a69025deb6254e7bd7bf9991b",
+      "bytes": 1842,
+      "already_archived": false,
+      "blob_sha": "9324c8c7719690e62ee2a8802278f89e01a15e07"
+    },
+    {
+      "path": "docs/SYSTEM_ARCHITECTURE.md",
+      "member": "copilot_use/docs/SYSTEM_ARCHITECTURE.md",
+      "sha256": "c5b07ce8741934c1ec4e4a4e996364e3e683d1fb89f5ae28367332b9de62dd2d",
+      "bytes": 1935,
+      "already_archived": false,
+      "blob_sha": "4860b6e4769359a1a0512237ba65c8ed72a2c237"
+    },
+    {
+      "path": "docs/LOCAL_START.md",
+      "member": "copilot_use/docs/LOCAL_START.md",
+      "sha256": "b24cc0eea39a36dc4d5973a3d7fd27d1461af41fb8b0e434264b3c7bae907b0e",
+      "bytes": 1785,
+      "already_archived": false,
+      "blob_sha": "faa3bb6c6ef28a67a5a5dc56d72d4c9ede4e35d3"
+    },
+    {
+      "path": "docs/LOCAL_VALIDATION.md",
+      "member": "copilot_use/docs/LOCAL_VALIDATION.md",
+      "sha256": "454af85311d86a64710c44914286259e59de8b9ec7bc685a253bed6df100aff4",
+      "bytes": 1898,
+      "already_archived": false,
+      "blob_sha": "8eef693e762948cbfbabc1ba0f900240ddb0d605"
+    },
+    {
+      "path": "docs/FUTURE_WORK.md",
+      "member": "copilot_use/docs/FUTURE_WORK.md",
+      "sha256": "ad15ac910a3665f95e5d00b37d01b942fc929c46cd36b4369dcf66dbf2ed2ca2",
+      "bytes": 8130,
+      "already_archived": false,
+      "blob_sha": "925e2bb7c5e59ce81584520e33a19eb86dfc5e1c"
+    },
+    {
+      "path": "docs/teaching/functional-refactoring/PROGRESS.md",
+      "member": "copilot_use/docs/teaching/functional-refactoring/PROGRESS.md",
+      "sha256": "84b531c4995bf342f3a7441eac46fc69f34a429ea269aef23e17cfaa16b6bdf0",
+      "bytes": 1228,
+      "already_archived": false,
+      "blob_sha": "0adba4eacc287d129ab73b17b30b3509f91711ab"
+    }
+  ],
+  "previous_thirteen_zip_hashes_unchanged": {
+    "01-chat-2026-10-30.zip": "d2e2afced313b9c77adc459b16d5f2abb8210a7a3e9b1e820b6f8cfd4851783f",
+    "02-pet-2026-10-30.zip": "6069e0d0e19ee55c5d97fdf6206b4c5bd3114bccd1c0b3fe50f41f90e7cf165d",
+    "03-analytics-2026-10-30.zip": "1d65f353640a951b8b1856532de487b1f217dd8dc263d6f08fa44426bdcff9d0",
+    "04-shared-teaching-2026-10-30.zip": "4fe83423d3645fecf30bd2f7511a80200893e35aaae6a6264b30821046c91524",
+    "05-source-verification-2026-10-30.zip": "ee61c93920a7deee91270db8d2d901754c7c002c921dd3184bd7af342e8d5828",
+    "06-rules-and-indexes-2026-10-30.zip": "6b3f0e977d93d11384f02c680e6a88c851fdc96c9a7beec17d60ac1282e021a2",
+    "07-superseded-document-versions-2026-10-30.zip": "ca6e16df10b09b87b356fe821d35110e11c747d29df70a3128742440d1c7816f",
+    "08-pet-activity-contract-superseded-2026-10-30.zip": "d0f23c79b1400401056a8a2b5f81e90e97e52467addad52ff91ce81019e160dd",
+    "09-pet-walk-sit-contract-superseded-2026-10-30.zip": "4de75e6fabc865c3bb7f8c95edb3c6110719b19fd2b13bd9c88eb7c12862cbc1",
+    "10-pet-sit-priority-superseded-2026-10-30.zip": "ccdbdecc039b3ce99c946aefea460444e1a4bf3cf0f1de10d377e48a652aed26",
+    "11-day44-validation-superseded-2026-10-30.zip": "5bcd98cf79ec9def70de3a73d816d446bfc9c05796a3fea0acbbcf70e3da4991",
+    "12-previous-day44-validation-2026-10-30.zip": "a0ce46cb07835cb86bbaf25b7378549c4142861e07920d821f78dc67c834a6b2",
+    "13-day44-recheck-superseded-documents-2026-10-30.zip": "b0648d36405b23452cc3216ec35e987e9285ed56dfab3e7cad199623e4d3a8fb"
+  }
+}

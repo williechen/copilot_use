@@ -1,0 +1,8 @@
+   Compiling pet-server v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/pet_apps/pet_server)
+   Compiling ai-core v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/crates/ai_core)
+   Compiling pet-persistence v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/pet_apps/pet_persistence)
+   Compiling pet-domain v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/pet_apps/pet_domain)
+   Compiling pet-application v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/pet_apps/pet_application)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 11.52s
+     Running `pet_apps/target/debug/examples/day44_upgrade /home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-adopted-db/synthetic.sqlite /home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-adopted-db/old-migrations /home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/pet_apps/migrations seed`
+upgrade/idempotence passed; profiles=3; profile defaults unchanged; schema/columns unchanged; two basic activities present; sit priority preserved

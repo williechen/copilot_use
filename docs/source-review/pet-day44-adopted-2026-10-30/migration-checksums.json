@@ -1,0 +1,27 @@
+[
+  {
+    "path": "pet_apps/migrations/20261018091733_create_pet.sql",
+    "sha256": "5e7d59f4154a53443b14591bd6380241048a23f9f3f92227910a8c8524584eee",
+    "sqlx_sha384": "01fda2942a88312ac8b66fd7d1aef1cca50357c1f7255931c2d566b086071e1f5acf0bccdc763b4faaa87a1642a924ad"
+  },
+  {
+    "path": "pet_apps/migrations/20261018095626_create_pet_owner.sql",
+    "sha256": "2b9de1dc9ae66b8bb31512bf42b60df0c5845e84f12d5fc0722bb8a931ebfd83",
+    "sqlx_sha384": "93962d5894e17966481ecd25a1faccc31642054e14e1c753dbe3ae58a864b83479e8d7da3e64a41b4ce561609e5139f8"
+  },
+  {
+    "path": "pet_apps/migrations/20261018114025_creat_protocol.sql",
+    "sha256": "54734a764e4f498a06aec1c7febceef6bf4709890b53f5820e52d6afa0fc05af",
+    "sqlx_sha384": "059dfd081c28f9107ab00bb7a95d5892e18bfac3d0b9e4c9a7d2472ea5b77ce23994d71ba4aa425968138d3a12cc237d"
+  },
+  {
+    "path": "pet_apps/migrations/20261030060000_activity_lifecycle.sql",
+    "sha256": "2c3172ace014f178622db3ecf55e0c9fe1887f9bbad09a6cb18a04b1e101881c",
+    "sqlx_sha384": "f51d462e7c39f558a67773dc22fcc212c9f9c306363225dfcd554a5f6f8d67d8cc498388bdfee4b1d315c05f4ede86b7"
+  },
+  {
+    "path": "pet_apps/migrations/20261030140000_normalize_activity_codes.sql",
+    "sha256": "eaf6006ef8d9a7704e8a8f8d3d195c018b6a6445d22e942fd27e3d8792a0d891",
+    "sqlx_sha384": "0503c56f234d104148e34dc8101689876533531dfc16f5161e0d0b010e01e54ff391410d843e8b1ecd65aff8d3a83535"
+  }
+]

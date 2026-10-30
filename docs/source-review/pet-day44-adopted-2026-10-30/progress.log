@@ -1,0 +1,19 @@
+000.log 0 fetch exact adopted source
+001.log 0 checkout source in isolated clone
+002.log 0 tool version
+003.log 0 tool version
+004.log 0 tool version
+005.log 0 locked metadata crates
+006.log 0 locked metadata chat_apps
+007.log 0 locked metadata pet_apps
+008.log 0 locked metadata analytics_apps
+009.log 0 Pet adopted main
+010.log 0 Pet adopted main
+011.log 0 Pet adopted main
+012.log 0 Pet adopted main
+013.log 0 Pet WASM
+014.log 0 Pet Node
+015.log 0 upgrade seed
+016.log 0 upgrade actual
+017.log 0 upgrade tamper
+ADOPTION VERIFICATION DONE

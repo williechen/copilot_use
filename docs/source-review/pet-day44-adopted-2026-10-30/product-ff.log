@@ -1,0 +1,8 @@
+Updating 4b1008b..2c7ff8b
+Fast-forward
+ .../20261030140000_normalize_activity_codes.sql    |  6 ++
+ pet_apps/pet_server/examples/day44_upgrade.rs      |  4 +-
+ .../pet_server/tests/day44_activity_migration.rs   | 96 ++++++++++++++++++++++
+ 3 files changed, 104 insertions(+), 2 deletions(-)
+ create mode 100644 pet_apps/migrations/20261030140000_normalize_activity_codes.sql
+ create mode 100644 pet_apps/pet_server/tests/day44_activity_migration.rs

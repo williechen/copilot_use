@@ -1,0 +1,21 @@
+{
+  "source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
+  "changed_files": [
+    {
+      "path": "pet_apps/migrations/20261030140000_normalize_activity_codes.sql",
+      "blob_sha": "65c2dd42f43f5ec6aa297c4e84f777a09d4bed16",
+      "sha256": "eaf6006ef8d9a7704e8a8f8d3d195c018b6a6445d22e942fd27e3d8792a0d891"
+    },
+    {
+      "path": "pet_apps/pet_server/examples/day44_upgrade.rs",
+      "blob_sha": "3fa25aac920d9a0d42d3a50b005fc7b552b68688",
+      "sha256": "59dd666aee58e96fe5608b8ad461f54ede6921c0f8d53fdac71373765e5e87b4"
+    },
+    {
+      "path": "pet_apps/pet_server/tests/day44_activity_migration.rs",
+      "blob_sha": "bbb2ea83afdb31effafe0682b8639d64facc99ca",
+      "sha256": "77c59d945a46910d832766ca99920f670905ada3b611648cb46879c27b04979c"
+    }
+  ],
+  "unaffected_projects": "Chat/Analytics/crates have no tree changes vs4b1008b; results retained under4b1008b only"
+}
