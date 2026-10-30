@@ -33179,5 +33179,51 @@
       "catalog": "docs/archive/packages-2026-10-30/pet-sit-priority.json",
       "scope": "superseded stop/report-conflict rule replaced with sit precedence"
     }
-  ]
+  ],
+  "latest_revision": {
+    "source_docs_commit": "dbde2846fdcad3ce2168ec6852f64dcdd3de9bf6",
+    "new_archive": "11-day44-validation-superseded-2026-10-30.zip",
+    "mapping": "docs/archive/packages-2026-10-30/day44-validation-superseded.json",
+    "current_reading_files": [
+      "README.md",
+      "docs/README.md",
+      "docs/COMMON_LEARNING_RULES.md",
+      "docs/SOURCE_LAYOUT.md",
+      "docs/TEACHING_ALIGNMENT.md",
+      "docs/FUTURE_WORK.md",
+      "docs/LOCAL_START.md",
+      "docs/UI_ALIGNMENT_REQUIREMENTS.md",
+      "docs/SYSTEM_ARCHITECTURE.md",
+      "docs/LOCAL_VALIDATION.md",
+      "docs/ROADMAP_P0_P12.md",
+      "docs/SERVICE_CREDENTIAL_REQUIREMENTS.md",
+      "docs/archive/README.md",
+      "docs/teaching/README.md",
+      "docs/teaching/scheduler-instructions-v1.md",
+      "docs/engineering/README.md",
+      "docs/requirements/USER_FLOWS.md",
+      "docs/requirements/AUTHENTICATION.md",
+      "docs/source-review/local-validation-2026-10-30-day44/README.md",
+      "docs/teaching/chat/README.md",
+      "docs/teaching/daily/README.md",
+      "docs/teaching/analytics/README.md",
+      "docs/teaching/current/README.md",
+      "docs/teaching/current/STATUS.md",
+      "docs/teaching/functional-refactoring/README.md",
+      "docs/teaching/functional-refactoring/PROGRESS.md",
+      "docs/teaching/pet/README.md",
+      "docs/teaching/daily/day-43/README.md",
+      "docs/teaching/daily/day-43/chat-archive.md",
+      "docs/teaching/daily/day-43/analytics-archive.md",
+      "docs/teaching/daily/day-43/pet-archive.md",
+      "docs/teaching/daily/day-44/README.md",
+      "docs/teaching/daily/day-44/ENTRY.md",
+      "docs/teaching/daily/day-44/analytics.md",
+      "docs/teaching/daily/day-44/pet.md",
+      "docs/teaching/daily/day-44/chat.md",
+      "docs/archive/packages-2026-10-30/README.md"
+    ],
+    "history_mappings_preserved": true,
+    "Day44_current_raw_reason": "full product Gate2 incomplete; current candidate and evidence required for next teaching"
+  }
 }

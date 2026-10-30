@@ -1,11 +1,9 @@
 # Day44 ENTRY｜Chat → Pet → Analytics
 
-**Pet Day44 修訂更正：** 原新增 `auto_release_on_start` 欄位的 Green 已撤回封存；新規則要求出／回籠依 `pet_activity` 任一 `is_activity=true` 判斷，不限散步、不新增欄位。替代 Green 待完成／待驗，原 Gate1 歷史讀回不代表修訂已完成。next_day 保持三案 45，先補齊 Pet Day44 修訂，不重複加 Day。
+1. [Chat r2](chat.md)：最新main已實作房間存在門檻，SSR／hydrate實測；原附件只供7ce基準重現。
+2. [Pet r3](pet.md)：任意活動true出籠、同交易建立散步／坐下、坐下優先、不加欄位；完整候選patch＋實際Red→Green＋110項與舊SQLite副本升級。
+3. [Analytics r2](analytics.md)：logout CSRF實作已在main；兩個舊fixture補正後PG63通過，遠端CI仍失敗。
 
+[套用順序／附件](README.md) · [本次驗證與未執行](../../../source-review/local-validation-2026-10-30-day44/README.md) · [精確讀回](revision-verification-2026-10-30.json) · [共用規則](../../../COMMON_LEARNING_RULES.md) · [上一篇](../day-43/README.md)
 
-依序閱讀：
-1. [Chat Day44：登入後已存在房間門檻](chat.md)；[Refactor](chat-day44-refactor.patch) → [Green](chat-day44-green.patch)。
-2. [Pet Day44：任一活動 true 判出籠，不新增欄位](pet.md)；獨立 [Refactor](pet-day44-refactor.patch) 保留，替代 Green 待完成。
-3. [Analytics Day44：登出 Session CSRF](analytics.md)；[Refactor](analytics-day44-refactor.patch) → [Green](analytics-day44-green.patch)。
-
-[交付讀回證據](delivery-verification.json) · [上一篇](../day-43/README.md) · [下一待發布入口](../README.md) · [共用規則](../../../COMMON_LEARNING_RULES.md)
+產品唯讀；候選通過不當產品已套用。next_day三案45、FIFO及last_full_comparison不變；完整Gate2未完成。

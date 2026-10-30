@@ -1,7 +1,9 @@
 # Chat 教學現況
 
-**Day44 Gate1 已發布，next_day=45；Gate2 未執行。** [Day44 正文](../daily/day-44/chat.md) 處理已登入訪問不存在房間回 404、匿名登入回跳；同篇獨立 Refactor 抽出房間 canonical path。完整 [Refactor patch](../daily/day-44/chat-day44-refactor.patch) → [Green patch](../daily/day-44/chat-day44-green.patch)，皆未套用 `rust_ai_ring`。
+最新6b34已實作房間存在門檻與路徑重構；本地一般62、SSR62及hydrate WASM通過。原7ce附件只供重現，最新main不要重複套用。
 
-下一功能優先：會員／房主／逐房 ACL 與 WS 重驗；Chat Day25 FIFO 尚 pending，不以本篇結案。
+[Day44現行全文與完整修補](../daily/day-44/chat.md) · [本次矩陣／命令／失敗與未執行](../../source-review/local-validation-2026-10-30-day44/README.md) · [STATUS](../current/STATUS.md)
 
-[目前驗證](../current/STATUS.md) · [原完成條件](../../FUTURE_WORK.md) · [Day43 上一篇](../daily/day-43/chat-archive.md) · [規則](../../COMMON_LEARNING_RULES.md) · [各案 Refactor](../functional-refactoring/PROGRESS.md)
+接續：會員／房主／逐房ACL與WS重驗；Chat Day25 FIFO保留。 next_day維持45，完整Gate2未完成。
+
+[需求與待辦](../../FUTURE_WORK.md) · [Day43封存](../daily/day-43/chat-archive.md) · [規則](../../COMMON_LEARNING_RULES.md) · [各案Refactor](../functional-refactoring/PROGRESS.md)

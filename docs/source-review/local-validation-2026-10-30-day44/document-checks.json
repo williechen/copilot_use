@@ -1,0 +1,18 @@
+{
+  "current_markdown_count": 37,
+  "json_count": 41,
+  "broken_relative_links": [],
+  "all_archive_crc_and_sha256_valid": true,
+  "prior_ten_zip_hashes_unchanged": true,
+  "new_archive_not_duplicate": true,
+  "original_versions_recoverable": true,
+  "exact_commit_readbacks_verified_files": 210,
+  "inline_pet_and_analytics_patches_byte_equal": true,
+  "patch_numstat_syntax_valid": true,
+  "real_patch_apply_evidence": "final-apply-r3/commands.json",
+  "FIFO_next_day_last_full_comparison_unchanged": true,
+  "four_manifest_lock_unchanged": true,
+  "product_worktree_clean": true,
+  "prose_whitespace_existing": [],
+  "diff_check_note": "Exact inline diff fences retain required blank-context spaces and original source whitespace; ordinary prose checked separately."
+}

@@ -22,8 +22,12 @@
 
 ## Pet 基本活動與漫遊定義
 
-[第九包：散步／坐下規則確認前的不同版本](09-pet-walk-sit-contract-superseded-2026-10-30.zip)，來源 `c5180fbe265560e21a7f8abb46b907a68b435906`。只補封存既有 ZIP 尚未收錄的版本；[現行 Pet Day44 修訂](../../teaching/daily/day-44/pet.md) 保留原檔，替代 Green／產品驗收仍未完成。
+[第九包：散步／坐下規則確認前的不同版本](09-pet-walk-sit-contract-superseded-2026-10-30.zip)，來源 `c5180fbe265560e21a7f8abb46b907a68b435906`。只補封存既有 ZIP 尚未收錄的版本；[現行 Pet Day44 修訂](../../teaching/daily/day-44/pet.md) 保留原檔，該封存版本當時替代Green未完成；現行完整r3與驗收界線見Pet正文。
 
 ## 坐下優先規則
 
 [第十包：坐下優先確認前的不同版本](10-pet-sit-priority-superseded-2026-10-30.zip)；只補封存尚未被既有 ZIP 收錄的版本。現行規則：同時 true 時保留坐下，持久化關閉散步；仍出籠但不漫遊。
+
+## Day44本地驗證修訂前原文
+
+[第十一包](11-day44-validation-superseded-2026-10-30.zip)只存本次被取代、尚未在前十包收錄的27個不同版本；[逐檔blob／SHA256與重複排除](day44-validation-superseded.json)。來源dbde2846fdcad3ce2168ec6852f64dcdd3de9bf6，既有十包hash均未改。Day44現行修訂與完整證據仍保留原檔，因產品完整Gate2未完成。[本次實測](../../source-review/local-validation-2026-10-30-day44/README.md)。

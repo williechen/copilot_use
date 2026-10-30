@@ -411,8 +411,8 @@
     "product_repository_read_only": true,
     "day_advance": false
   },
-  "reference_sha": "7ce39f0166a2120539e5908b33c88322a930c35a",
-  "reference_scope": "current source observation; not a claim of full local revalidation",
+  "reference_sha": "6b34c42f74fc1585b1b864fb7dd6969318270e0f",
+  "reference_scope": "Day44 exact-source local four-workspace validation; Pet candidate and Analytics fixture correction separately identified; full Gate2 incomplete",
   "current_article_paths": {
     "chat": "docs/teaching/daily/day-44/chat.md",
     "pet": "docs/teaching/daily/day-44/pet.md",
@@ -420,7 +420,7 @@
   },
   "teaching_progress": {
     "last_published_day": 44,
-    "last_publication_status": "Day44 Chat/Analytics Gate1 published; Pet original Gate1 superseded by confirmed activity contract; replacement Green pending; Gate2 incomplete",
+    "last_publication_status": "Day44 Chat/Analytics r2 local validation and Pet activity complete Green r3; exact readback recorded separately; full version/MSRV Gate and product Gate2 incomplete",
     "next_day": {
       "chat": 45,
       "pet": 45,
@@ -433,14 +433,14 @@
   "day44_draft_exists": false,
   "pet_activity_contract": {
     "confirmed_by_user": true,
-    "source_product_sha": "7ce39f0166a2120539e5908b33c88322a930c35a",
+    "source_product_sha": "6b34c42f74fc1585b1b864fb7dd6969318270e0f",
     "out_of_cage": "EXISTS pet_activity with matching pet_id/owner_id AND is_activity=true",
     "caged": "no matching active activity",
     "activity_type_filter": null,
     "count_condition": "at least one; not exactly one",
     "add_columns": false,
     "current_product_uses_old_profile_flag": true,
-    "replacement_green_complete": false,
+    "replacement_green_complete": true,
     "gate2_verified": false,
     "withdrawn_green_archive": "docs/archive/packages-2026-10-30/08-pet-activity-contract-superseded-2026-10-30.zip",
     "initial_activities_and_roaming": {
@@ -456,7 +456,14 @@
       "cage": "stop every activity for the selected pet only",
       "new_columns": false,
       "product_implementation_verified": false,
-      "priority_write_failure": "stop roaming and report persistence failure; do not claim normalization completed"
-    }
+      "priority_write_failure": "stop roaming and report persistence failure; do not claim normalization completed",
+      "candidate_implementation_verified": true
+    },
+    "candidate_base_sha": "6b34c42f74fc1585b1b864fb7dd6969318270e0f",
+    "candidate_patch": "docs/teaching/daily/day-44/pet-day44-activity-green-r3.patch",
+    "candidate_workspace_passed": 110,
+    "candidate_node_passed": 12,
+    "candidate_upgrade_verified": "synthetic old schema and actual local SQLite read-only backup copy; original DB untouched",
+    "product_applied": false
   }
 }

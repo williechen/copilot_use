@@ -1,6 +1,6 @@
 # 本地啟動
 
-產品來源 `7ce39f0166a2120539e5908b33c88322a930c35a`。依產品 .env.example 在本機設定環境；不把秘密放入文件。Chat／Pet 使用各自 SQLite，Analytics 使用 PostgreSQL；SQLite URL 採明確絕對路徑，避免從不同 workspace 啟動連到另一份 DB。以下啟動會依程式執行 migration，驗收請用獨立資料副本。
+產品來源 `6b34c42f74fc1585b1b864fb7dd6969318270e0f`。依產品 .env.example 在本機設定環境；不把秘密放入文件。Chat／Pet 使用各自 SQLite，Analytics 使用 PostgreSQL；SQLite URL 採明確絕對路徑，避免從不同 workspace 啟動連到另一份 DB。以下啟動會依程式執行 migration，驗收請用獨立資料副本。
 
 | 專案 | 工作目錄 | 命令 | 入口 |
 | --- | --- | --- | --- |
@@ -11,3 +11,5 @@
 Chat 使用 CHAT_DATABASE_URL，Pet 使用 PET_DATABASE_URL，Analytics 使用 ANALYTICS_DATABASE_URL。Pet 的 Tauri beforeDevCommand 在 ../pet_ui 執行 trunk serve；需 Rust、WASM target、Trunk 及對應 native 依賴。Analytics 管理員初始化工具是 `cargo run --locked -p analytics-server --bin bootstrap_admin`，請先閱讀該程式要求，不在既有正式庫盲目初始化。
 
 啟動成功不代表完整驗收。[驗證與限制](LOCAL_VALIDATION.md) · [現況](teaching/current/STATUS.md)
+
+Day44活動候選只在隔離clone使用，先確認補丁基準與SQLite副本；不要在原產品或正式DB套migration。散步許可仍受既有PET_ENABLE_ROAM opt-in限制；Trunk需匹配lock的wasm-bindgen0.2.129，本次offline缺工具後下載匹配工具才建置成功。[真實命令／限制](source-review/local-validation-2026-10-30-day44/README.md)。

@@ -1,13 +1,11 @@
-# Day44｜三案 TDD 正式文件入口（2026-10-30）
+# Day44｜三案教學與本地驗證
 
-**Pet Day44 修訂更正：** 原新增 `auto_release_on_start` 欄位的 Green 已撤回封存；新規則要求出／回籠依 `pet_activity` 任一 `is_activity=true` 判斷，不限散步、不新增欄位。替代 Green 待完成／待驗，原 Gate1 歷史讀回不代表修訂已完成。next_day 保持三案 45，先補齊 Pet Day44 修訂，不重複加 Day。
+產品唯讀 `6b34c42f74fc1585b1b864fb7dd6969318270e0f`。Chat／Analytics功能及三案Refactor已在main；Pet活動Green r3只在隔離副本，未套用產品。完整Gate2未完成，文章保留原檔，next_day三案45不變。
 
-Chat／Analytics Day44 保留原 Gate1 交付與未驗界線；Pet Day44 原新增欄位 Green 已撤回，現在是資料契約修訂，替代 Green 待完成。產品保持唯讀；原始讀回證據只屬原發布版本，三案 next_day 維持 Day45。
+| 專案 | 現行文章 | 可重現附件與本次結果 |
+| --- | --- | --- |
+| Chat | [r2](chat.md) | 原7ce基準[Refactor](chat-day44-refactor.patch)→[Green](chat-day44-green.patch)→[fmt](chat-day44-format-r1.patch)；最新main62、SSR62、WASM通過 |
+| Pet | [活動Green r3](pet.md) | 最新6b34用[Green r3](pet-day44-activity-green-r3.patch)；原7ce用[Refactor](pet-day44-refactor.patch)→[專用Green](pet-day44-activity-green-r3-after-refactor.patch)，兩Green擇一；候選110、Node12、WASM／Trunk／舊SQLite副本升級通過 |
+| Analytics | [r2](analytics.md) | 最新6b34用[fixture修補](analytics-logout-fixture-fix.patch)；原7ce用[Refactor](analytics-day44-refactor.patch)→[Green](analytics-day44-green.patch)→fixture→[fmt](analytics-day44-format-r1.patch)；候選PG63通過，主分支CI未修 |
 
-| 專案 | Day44 正文 | Refactor patch | Green patch | 精確文章 commit |
-| --- | --- | --- | --- | --- |
-| Chat | [Chat](chat.md) | [Refactor](chat-day44-refactor.patch) | [Green](chat-day44-green.patch) | [`26705cb8a185`](https://github.com/williechen/copilot_use/commit/26705cb8a185be4a13ff7e777d0860edb6b0db4a) |
-| Pet | [Pet](pet.md) | [Refactor](pet-day44-refactor.patch) | 已撤回，見 [修訂](pet.md) | [`971f0e3e17a6`](https://github.com/williechen/copilot_use/commit/971f0e3e17a6705916a324ac9675f68ebb136fac) |
-| Analytics | [Analytics](analytics.md) | [Refactor](analytics-day44-refactor.patch) | [Green](analytics-day44-green.patch) | [`585384c39d3a`](https://github.com/williechen/copilot_use/commit/585384c39d3aeac9c535992e110ebd5c9d1f2854) |
-
-[逐 commit blob／SHA256／Gate 紀錄](delivery-verification.json) · [ENTRY](ENTRY.md) · [上一篇 Day43](../day-43/README.md) · [目前進度](../../current/STATUS.md) · [各案 Refactor](../../functional-refactoring/PROGRESS.md) · [跨案工程](../../../engineering/README.md)
+[本次完整證據](../../../source-review/local-validation-2026-10-30-day44/README.md) · [本次精確commit讀回](revision-verification-2026-10-30.json) · [原發布讀回（只屬原版本）](delivery-verification.json) · [ENTRY](ENTRY.md) · [上一篇Day43封存](../day-43/README.md) · [現況](../../current/STATUS.md) · [各案重構](../../functional-refactoring/PROGRESS.md) · [跨案工程](../../../engineering/README.md)

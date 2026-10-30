@@ -1,9 +1,8 @@
 # Chat／Analytics 共用人員驗證需求
 
-> 2026-10-28 固定產品來源 `c6708c42f21ac919e57a379848b4977d27a1c3d6`；[本輪原始命令與結果（封存）](../archive/packages-2026-10-30/05-source-verification-2026-10-30.zip)。本輪只增量重測 fixture、metadata／fmt；其他來源實測維持原 SHA，完整驗收與版本 Gate 尚未完成。
 
 
-現行程式來源與目錄：[rust_ai_ring 四個 workspace 對照](../SOURCE_LAYOUT.md)（來源 `0b3e5844`，2026-10-24 靜態核對）。
+現行程式與精確來源見[SOURCE_LAYOUT](../SOURCE_LAYOUT.md)；以下是已確認需求，實作／驗收一律見[STATUS](../teaching/current/STATUS.md)。
 
 登入、登出、Cookie 與 Session 採共用實作，各系統透過儲存介面與政策接入；SQLite／PostgreSQL 與登入狀態各自獨立。以下為驗收需求，不是已實作宣告。
 

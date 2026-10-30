@@ -1,7 +1,9 @@
 # Pet 教學現況
 
-目前 Day44 修訂中：以既有 `pet_activity` 判斷目前出／回籠，同主人／寵物任一活動 `is_activity=true` 即出籠，全部為 false／無紀錄才回籠，不限散步，不新增欄位。建立寵物須同交易建立散步／坐下活動；散步 true 可漫遊，坐下 true 仍出籠但不可漫遊。切換互斥更新；同時 true 時坐下優先，關閉散步但仍出籠；回籠停止全部活動，不重複新增活動或欄位；預設設定與當前活動分開。
+完整活動Green r3已交付，隔離workspace110、Node12、WASM／Trunk與舊SQLite副本升級通過。任一活動true出籠、同交易建立散步／坐下、坐下優先；不新增欄位。產品6b34仍用舊旗標，候選未套用。
 
-原新增 auto_release_on_start 的 Green 已撤回封存，替代 Green 尚未完成；獨立 Refactor 保留。產品仍是舊旗標模型，未驗證新契約。next_day 維持已發布後的 45，先完成 Day44 修訂，再接續新 Day，不重開 FIFO。
+[Day44現行全文與完整修補](../daily/day-44/pet.md) · [本次矩陣／命令／失敗與未執行](../../source-review/local-validation-2026-10-30-day44/README.md) · [STATUS](../current/STATUS.md)
 
-[Day44 規則與修訂](../daily/day-44/pet.md) · [目前驗證](../current/STATUS.md) · [完成條件](../../FUTURE_WORK.md#pet-lifecycle) · [共用規則](../../COMMON_LEARNING_RULES.md)
+接續：使用者套用後以新SHA驗nativeGUI、三隻與真OS故障補償；Pet Day25 FIFO保留。 next_day維持45，完整Gate2未完成。
+
+[需求與待辦](../../FUTURE_WORK.md) · [Day43封存](../daily/day-43/pet-archive.md) · [規則](../../COMMON_LEARNING_RULES.md) · [各案Refactor](../functional-refactoring/PROGRESS.md)

@@ -1,101 +1,62 @@
 {
-  "product_sha": "7ce39f0166a2120539e5908b33c88322a930c35a",
-  "observed_at_utc": "2026-10-29T19:24:21.585219+00:00",
-  "ci": [
-    {
-      "id": 40934502730,
-      "name": "Rust Desktop Pet",
-      "head_sha": "7ce39f0166a2120539e5908b33c88322a930c35a",
-      "status": "completed",
-      "conclusion": "success",
-      "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40934502730"
-    },
-    {
-      "id": 40934502629,
-      "name": "Rust Analytics",
-      "head_sha": "7ce39f0166a2120539e5908b33c88322a930c35a",
-      "status": "completed",
-      "conclusion": "success",
-      "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40934502629"
-    },
-    {
-      "id": 40934502561,
-      "name": "Cargo workspaces",
-      "head_sha": "7ce39f0166a2120539e5908b33c88322a930c35a",
-      "status": "completed",
-      "conclusion": "success",
-      "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40934502561"
-    },
-    {
-      "id": 40934502621,
-      "name": "Test All",
-      "head_sha": "7ce39f0166a2120539e5908b33c88322a930c35a",
-      "status": "completed",
-      "conclusion": "success",
-      "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40934502621"
-    },
-    {
-      "id": 40934502498,
-      "name": "Node",
-      "head_sha": "7ce39f0166a2120539e5908b33c88322a930c35a",
-      "status": "completed",
-      "conclusion": "success",
-      "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40934502498"
-    },
-    {
-      "id": 40934502544,
-      "name": "Persistence",
-      "head_sha": "7ce39f0166a2120539e5908b33c88322a930c35a",
-      "status": "completed",
-      "conclusion": "success",
-      "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40934502544"
-    },
-    {
-      "id": 40934502289,
-      "name": "Rust AI Chat",
-      "head_sha": "7ce39f0166a2120539e5908b33c88322a930c35a",
-      "status": "completed",
-      "conclusion": "success",
-      "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/40934502289"
-    }
-  ],
-  "local_test_results": [
-    {
-      "source_sha": "7ce39f0166a2120539e5908b33c88322a930c35a",
-      "scope": "Chat UI SSR",
-      "passed": 21,
-      "exit_code": 0
-    },
-    {
-      "source_sha": "7ce39f0166a2120539e5908b33c88322a930c35a",
-      "scope": "Chat server + persistence + UI SSR",
-      "passed": 60,
-      "exit_code": 0
-    },
-    {
-      "source_sha": "d2612fcd154d2132d850086d83a48578abbb07fa",
-      "scope": "four workspace metadata/fmt/check/clippy; crates8 Chat60 Pet99 Analytics41+1ignored; Pet WASM/Node10, Chat hydrate WASM; Analytics PG60 include-ignored",
-      "exit_code": 0
-    },
-    {
-      "source_sha": "8b882696c5548accb9d98a32b27db35e11109c74",
-      "scope": "human Pet isolated A/B visible/query, A uncage, recage, restart plus SQLite/FD cross-check",
-      "status": "passed limited scenario"
-    }
-  ],
+  "product_sha": "6b34c42f74fc1585b1b864fb7dd6969318270e0f",
+  "evidence": "docs/source-review/local-validation-2026-10-30-day44/README.md",
+  "observed_at_utc": "2026-10-30T11:14:39.041538+00:00",
   "full_gate2": false,
-  "new_product_tests_executed_in_this_document_cleanup": false,
-  "old_raw_evidence_zip": "docs/archive/packages-2026-10-30/05-source-verification-2026-10-30.zip",
+  "four_workspace_metadata_fmt_check_clippy": true,
+  "main_tests": {
+    "crates": 8,
+    "chat": 62,
+    "pet": 100,
+    "analytics": 43,
+    "analytics_ignored": 1,
+    "chat_ssr": 62,
+    "pet_node": 10
+  },
+  "wasm": {
+    "chat_hydrate": true,
+    "pet_ui": true
+  },
+  "analytics_pg": {
+    "main_day44_test_passed": 1,
+    "main_full_suite": "failed: day37 415 and day39 422 vs303",
+    "fixture_patch": "docs/teaching/daily/day-44/analytics-logout-fixture-fix.patch",
+    "patched_full_suite_passed": 63,
+    "patched_ignored": 0,
+    "product_applied": false
+  },
+  "pet_candidate": {
+    "patch": "docs/teaching/daily/day-44/pet-day44-activity-green-r3.patch",
+    "base_sha": "6b34c42f74fc1585b1b864fb7dd6969318270e0f",
+    "workspace_passed": 110,
+    "node_passed": 12,
+    "wasm_check": true,
+    "trunk_release_build": true,
+    "real_red_then_green": true,
+    "synthetic_upgrade": true,
+    "actual_readonly_sqlite_backup_copy_upgrade": true,
+    "checksum_drift_rejection": true,
+    "native_gui": "not executed",
+    "product_applied": false
+  },
+  "ci_summary": {
+    "success": 6,
+    "failure": 1,
+    "failed_workflow": "Persistence",
+    "failed_job": "analytics-postgres",
+    "candidate_fix_rerun_remote": false
+  },
+  "cleanup_allocated_bytes": 14172524544,
   "pet_activity_contract": {
     "confirmed_by_user": true,
-    "source_product_sha": "7ce39f0166a2120539e5908b33c88322a930c35a",
+    "source_product_sha": "6b34c42f74fc1585b1b864fb7dd6969318270e0f",
     "out_of_cage": "EXISTS pet_activity with matching pet_id/owner_id AND is_activity=true",
     "caged": "no matching active activity",
     "activity_type_filter": null,
     "count_condition": "at least one; not exactly one",
     "add_columns": false,
     "current_product_uses_old_profile_flag": true,
-    "replacement_green_complete": false,
+    "replacement_green_complete": true,
     "gate2_verified": false,
     "withdrawn_green_archive": "docs/archive/packages-2026-10-30/08-pet-activity-contract-superseded-2026-10-30.zip",
     "initial_activities_and_roaming": {
@@ -111,12 +72,22 @@
       "cage": "stop every activity for the selected pet only",
       "new_columns": false,
       "product_implementation_verified": false,
-      "priority_write_failure": "stop roaming and report persistence failure; do not claim normalization completed"
-    }
+      "priority_write_failure": "stop roaming and report persistence failure; do not claim normalization completed",
+      "candidate_implementation_verified": true
+    },
+    "candidate_base_sha": "6b34c42f74fc1585b1b864fb7dd6969318270e0f",
+    "candidate_patch": "docs/teaching/daily/day-44/pet-day44-activity-green-r3.patch",
+    "candidate_workspace_passed": 110,
+    "candidate_node_passed": 12,
+    "candidate_upgrade_verified": "synthetic old schema and actual local SQLite read-only backup copy; original DB untouched",
+    "product_applied": false
   },
-  "pet_activity_contract_probe": {
-    "evidence": "docs/teaching/current/pet-activity-contract.json",
-    "passed": 12,
-    "scope": "in-memory SQLite target SQL only; no product changes, Green implementation or GUI acceptance"
-  }
+  "unexecuted": [
+    "new-source browser and full external HTTP/WS journeys",
+    "Pet candidate native GUI and actual OS fault handling",
+    "three-platform native binaries/installers",
+    "actual old PostgreSQL backup restore: no backup",
+    "new-source Chat actual old SQLite complete upgrade",
+    "all dependencies official stable and complete MSRV compatibility gate"
+  ]
 }

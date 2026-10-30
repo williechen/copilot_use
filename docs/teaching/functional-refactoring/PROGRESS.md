@@ -1,13 +1,11 @@
-# 各案 Refactor 現況
+# 各案Refactor目前進度
 
-Pet 的原生視窗幾何 Refactor 與活動狀態 Green 分開：前者保留原方案及未驗界線；後者的新增欄位方案已撤回，替代 Green 待完成，不以 Refactor 抵算。
+產品`6b34c42f74fc1585b1b864fb7dd6969318270e0f`已含Day44三案重構；原7ce附件已真check／apply。功能Green、同案重構與跨案工作分列，不增加Day。
 
-2026-10-30 三案 Day44 **文件 Gate1 已發布**；Refactor 均為與 Red／Green 並列的**同案獨立 patch**，沒有套用 `rust_ai_ring`，不算 Gate2 或 G-01/G-02 完成。
+| 專案 | 目前caller／舊斷言 | 本次驗證／後續 |
+| --- | --- | --- |
+| Chat | room_auth→room_patch；原附件名room_path；匿名回跳、Session、SSR／WS斷言保留 | main62、SSR62；原重現加fmt後server lib29＋UI21。後續Session SQL／Repository錯誤與fixture |
+| Pet | pet_windows→window_position；負座標、工作區、UUID／A/B斷言保留 | main100、活動候選110；活動Green不是幾何重構。後續真native故障fixture／逐IDGUI |
+| Analytics | Dashboard→dashboard_url；CSV、kind／source URL斷言保留 | main43＋1ignored；PG舊fixture失敗、修補後63。後續Session SQL／legacy caller分層 |
 
-| 專案 | Day44 同案 Refactor | 有效斷言承接 | 後續同案工作 |
-| --- | --- | --- | --- |
-| Chat | [房間路徑 canonical parser](../daily/day-44/chat.md#refactorchat-專案房間路徑正規化與測試責任)；`chat_server::room_path` | Day41 匿名回跳、Day25 Session、SSR/WS 舊測試不刪；新 parser unit | Session／Repository 錯誤分層、Chat 專案 fixture |
-| Pet | [Native 找回寵物幾何搬層](../daily/day-44/pet.md#refactorpet-原生找回寵物位置計算搬層)；`pet_server::window_position` | Day39 負座標與工作區、Day24 A/B、Day40 window label 舊測試不刪；新幾何 unit | Native lifecycle failure fixture、Pet 專案 CI |
-| Analytics | [CSV URL 從 Leptos 搬至純模組](../daily/day-44/analytics.md#refactoranalytics-csv-url-決策從-ssr-元件搬到同案純模組)；`dashboard_url` | Day40 CSV SSR、Day42 kind、Day43 source URL 舊測試不刪；新 URL unit | 同案 Session SQL、legacy admin 路由與 PG fixture |
-
-本次來源 `rust_ai_ring@7ce39f0166a2120539e5908b33c88322a930c35a`。原 D01–D09／13 項清理識別與 FIFO 見 [FUTURE_WORK](../../FUTURE_WORK.md)。跨案契約、共用 crates、跨 workspace 相依與全庫 CI **只在 [engineering](../../engineering/README.md)** 管理，不混入上述 Refactor 或重複計功。
+[三案全文與附件](../daily/day-44/README.md) · [原始命令與證據](../../source-review/local-validation-2026-10-30-day44/README.md) · [D01–D09原項目](../../FUTURE_WORK.md#adapter-cleanup)。跨案契約、shared相依及全庫CI只在[engineering](../../engineering/README.md)，不以本案進度抵算G-01／G-02。
