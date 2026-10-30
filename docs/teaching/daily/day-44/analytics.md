@@ -1,10 +1,14 @@
 # Analytics Day44｜後台登出表單加入 Session 專屬 CSRF，拒絕跨站登出
 
-> 2026-10-30（Asia/Taipei）｜產品唯讀 `williechen/rust_ai_ring@7ce39f0166a2120539e5908b33c88322a930c35a`；文件起點 `copilot_use@6bd009acfefb07293e7f3bbe777ea60450a52635`；expected `next_day.analytics=44`。**文件 Gate1 與產品 Gate2 分開**；沒有修改 `rust_ai_ring`。
+> 2026-10-30 本地驗證修訂 r2。最新產品唯讀 `6b34c42f74fc1585b1b864fb7dd6969318270e0f`；下列原 Refactor／Green 程式保留 `7ce39f0166a2120539e5908b33c88322a930c35a` 重現基準。最新 main 已有對應功能，不重複套用。next_day 已是45，不再加 Day。原發布版本與讀回保留於封存。
+
+## 本次本地結果
+
+最新主分支已實作logout CSRF；完整PG揭露兩個舊fixture未隨契約更新。本篇交付補丁在隔離副本取得63項PG通過，但主分支Persistence CI仍失敗。 [四workspace、真套用、原始命令及阻塞](../../../source-review/local-validation-2026-10-30-day44/README.md)。原發布全文以ZIP保存，原交付讀回不能冒認本次修訂；完整Gate2未完成。
 
 ## ① 目標、缺口、正式使用者流程
 
-Day43 已接通 Leptos Dashboard 來源切換保留精確事件類型。Analytics 後台目前已支援管理員持久化、首次改密碼、Session 與登出；但 `password_login::logout` 只檢查 Origin＋Cookie，`DashboardView` 與 `ChangePasswordView` 的 POST `/logout` 沒有 Session 綁定的 CSRF hidden field。Origin 比對是防護之一，不應取代明確表單 token。本日使登入後的 Dashboard 和首次／一般修改密碼頁都渲染**同一 Session 專屬 logout token**，POST `/logout` 必須提交該 token 才刪除 PostgreSQL Session；錯誤 token → 403，既有 Session 保留；正確 token → 303 回登入頁並撤銷 Session。
+Day43 已接通 Leptos Dashboard 來源切換保留精確事件類型。原文基準的 Analytics 後台已支援管理員持久化、首次改密碼、Session 與登出；但 `password_login::logout` 只檢查 Origin＋Cookie，`DashboardView` 與 `ChangePasswordView` 的 POST `/logout` 沒有 Session 綁定的 CSRF hidden field。Origin 比對是防護之一，不應取代明確表單 token。本日 Green（最新 main 已實作）使登入後的 Dashboard 和首次／一般修改密碼頁都渲染**同一 Session 專屬 logout token**，POST `/logout` 必須提交該 token 才刪除 PostgreSQL Session；錯誤 token → 403，既有 Session 保留；正確 token → 303 回登入頁並撤銷 Session。
 
 正式鏈：`analytics_apps/analytics_server/src/password_login.rs::dashboard/change_page`（PG 驗證 Session、判斷首次改密碼）→ `dashboard_ui` 的真 Leptos SSR 表單（兩頁）→ POST `/logout` → `raw_cookie`（Analytics 獨立 Cookie）→ `digest("logout:"+raw)` → `DELETE FROM uac_login_session` → 303。使用者來源 token、`admin.rs` 舊路由、Chat/Pet Session 與其他後台 API 均不混用；本日不冒稱角色／來源 ACL 已完成。
 
@@ -146,11 +150,11 @@ diff --git a/analytics_apps/analytics_server/src/dashboard_url.rs b/analytics_ap
  }
 ```
 
-Refactor 後續：將 Analytics `password_login` 的 Session SQL、錯誤與時間政策逐步搬至同案 Application/Adapter 並保留 PG、HTTP、CSRF 斷言；不重複全專案 G-01/G-02。驗證 `cargo test --manifest-path analytics_apps/Cargo.toml -p analytics-server export_url_refactor_tests` **未執行**。
+Refactor 後續：將 Analytics `password_login` 的 Session SQL、錯誤與時間政策逐步搬至同案 Application/Adapter 並保留 PG、HTTP、CSRF 斷言；不重複全專案 G-01/G-02。驗證 `cargo test --manifest-path analytics_apps/Cargo.toml -p analytics-server export_url_refactor_tests` **已在最新 main 的一般／PG suite 執行，URL 與 SSR 斷言保留**。
 
-## ② Red → 完整 Green（核心預估 15 分鐘；未實跑）
+## ② Red → 完整 Green（核心預估15分鐘；原 Red 未重跑，Green 真PG已跑）
 
-**Red**：新增 `tests/day44_logout_csrf.rs`（`postgres-integration` feature、`#[sqlx::test]` 真 PG migration）從管理員初始化、POST 帳密登入、GET 首次改密碼頁，擷取真正 `/logout` 表單的 CSRF；錯 token 必須 403 且 Session 數仍 1，異來源 403，正確 token 303 且 Session 數歸零、原 Cookie 401。原版本未驗 token，對 `csrf=wrong` 會錯誤登出（預期行為 Red）；新的 SSR 渲染器在原版不存在亦會編譯 Red。兩者都**未實際執行**，不能把 SQL／環境錯誤當 Red。保留 Day24/25/26 的密碼修改、Session／PG 斷言與 Day29–43 Leptos SSR／來源查詢。
+**Red**：新增 `tests/day44_logout_csrf.rs`（`postgres-integration` feature、`#[sqlx::test]` 真 PG migration）從管理員初始化、POST 帳密登入、GET 首次改密碼頁，擷取真正 `/logout` 表單的 CSRF；錯 token 必須 403 且 Session 數仍 1，異來源 403，正確 token 303 且 Session 數歸零、原 Cookie 401。原版本未驗 token，對 `csrf=wrong` 會錯誤登出（預期行為 Red）；新的 SSR 渲染器在原版不存在亦會編譯 Red。原 Red **未實際重跑**；最新 main 新測試1項已通過，不能把 SQL／環境錯誤當 Red。保留 Day24/25/26 的密碼修改、Session／PG 斷言與 Day29–43 Leptos SSR／來源查詢。
 
 **Green**：`DashboardView` 與 `ChangePasswordView` 都加入 `logout_csrf` 並在 POST 表單輸出 hidden field；原 `render_dashboard_with_rows`、`render_change_password` 保留供既有 SSR 呼叫／測試，正式已授權 caller 改用 `*_csrf`／`*_with_logout` 傳入 `digest("logout:"+raw)`。後端新增 `LogoutForm`、驗證 Session token 派生 CSRF，只有驗過才 DELETE。使用現有 `serde::Deserialize`、`axum::Form`、`sha2`、`sqlx`，不新增 crate／Cargo feature／migration；密碼變更原有 CSRF 值仍用 `digest("change-password:"+raw)`，不能互用。
 
@@ -1496,11 +1500,11 @@ new file mode 100644
 
 ## ③ 2026-10-30 官方穩定版、manifest、lock 與相容
 
-官方 Rust stable **1.99.1（2026-10-15）**，本次無本地 rustc。已核對 `analytics_apps/Cargo.toml`、`analytics_server/Cargo.toml` 與 `analytics_apps/Cargo.lock@831373fcf0824cf5b50e785bf4abe75d3aadc2f8`。以下版本皆由當日官方 Rust release/docs.rs stable 頁確認，預發行排除；無 lock 升級：
+官方 Rust stable **1.99.1（2026-10-15）**，本機 rustc1.99.1；工具與 lock 詳見本次證據。已核對 `analytics_apps/Cargo.toml`、`analytics_server/Cargo.toml` 與 `analytics_apps/Cargo.lock@831373fcf0824cf5b50e785bf4abe75d3aadc2f8`。以下版本皆由當日官方 Rust release/docs.rs stable 頁確認，預發行排除；無 lock 升級：
 
 | 套件 | manifest → resolved → 最新 stable | 官方來源 |
 | --- | --- | --- |
-| Rust | stable → 未安裝 → 1.99.1 | https://blog.rust-lang.org/releases/ |
+| Rust | stable → 本機1.99.1 → 1.99.1 | https://blog.rust-lang.org/releases/ |
 | Axum | ^0.8 → 0.8.9 → 0.8.9 | https://docs.rs/crate/axum/latest |
 | Leptos SSR | ^0.8 → 0.8.22 → 0.8.22（0.9 RC 不採用） | https://docs.rs/crate/leptos/latest |
 | SQLx PostgreSQL | ^0.9 → 0.9.0 → 0.9.0（MSRV 1.94） | https://docs.rs/crate/sqlx/latest |
@@ -1515,9 +1519,9 @@ Rust 2024 edition、SQLx 0.9 MSRV 1.94 在 stable 1.99.1 範圍內；正式 PG�
 
 ## ④ 驗證、交付與剩餘缺口
 
-**Gate1**：GitHub 真來源全文、正式 Router／Leptos caller、完整兩段 patch、PG Red 與 Green、舊斷言承接、版本與風險已列；提交後另記精確 commit、blob、SHA256、全文讀回。生成 patch 時有原文匹配，不等於 `git apply --check`。
+**文件與真套用**：原 Refactor→Green 已真 check／apply；追加 fmt 修補及下節兩個 fixture 修補，保留既有有效斷言。精確 commit／blob／SHA256 於提交後另記；完整官方套件／MSRV Gate 尚未全量重核。
 
-**Gate2 未執行**：無本地 checkout、rustc/cargo、隔離 PG、HTTP/SSR 真執行、瀏覽器或 CI 寫入；`rust_ai_ring` 未變更。使用者在隔離副本依 Refactor→Green 套用後：
+**本地已執行、完整 Gate2 未完成**：最新主分支一般測試43＋1ignored；新 Day44 PG測試1通過，但完整PG在舊day37／day39 fixture失敗。追加fixture修補後隔離PG63通過（0ignored），產品與遠端CI仍未修。新SHA的真瀏覽器、實際舊PG還原與完整授權旅程未執行。以下重現只能用專用隔離DB：
 ```bash
 git apply --check analytics-day44-refactor.patch
 git apply analytics-day44-refactor.patch
@@ -1529,3 +1533,84 @@ cargo test --manifest-path analytics_apps/Cargo.toml -p analytics-server --featu
 cargo check --manifest-path analytics_apps/Cargo.toml --workspace
 ```
 驗證首次改密碼與一般 Dashboard 的登出 token、Origin、重放、閒置 Session、密碼變更撤銷、真 PG commit/rollback、不同來源 token 不得登入。原 Day24/25/26 與完整來源 ACL、帳號角色／稽核、使用者實際舊 PG 備份仍待 Gate2；下一日優先補管理員對檢視者／來源的授權流程。Analytics 目前無 pending FIFO，`last_full_comparison` 不變。核心60分鐘只計 Red/Green 預估15分鐘，Refactor 與交付另計。
+
+## PG fixture 修訂 r2：保留原斷言，補足真實登出前置
+
+`day37_query_cookie` 原空body回415；`day39_export_csv` 原缺CSRF回422。兩測試改成GET真正Dashboard、擷取該Session登出token，再提交form。原重複Cookie拒絕、Session撤銷及CSV斷言不刪。這是同案測試fixture承接，不改伺服器防護、不改產品CI workflow。最新6b34直接套用下列修補；7ce重現順序為Refactor→Green→fixture修補→[格式修補](analytics-day44-format-r1.patch)。
+
+[完整附件](analytics-logout-fixture-fix.patch)（本節全文）：
+
+```diff
+diff --git a/analytics_apps/analytics_server/tests/day37_query_cookie.rs b/analytics_apps/analytics_server/tests/day37_query_cookie.rs
+index 8ced0b6..9823ee0 100644
+--- a/analytics_apps/analytics_server/tests/day37_query_cookie.rs
++++ b/analytics_apps/analytics_server/tests/day37_query_cookie.rs
+@@ -114,13 +114,27 @@ async fn day37_real_query_routes_reject_ambiguous_session_cookies(pool: sqlx::Pg
+         .execute(&pool)
+         .await
+         .unwrap();
++    let dashboard = query(&app, "/dashboard", &[cookie.clone()], false).await;
++    assert_eq!(dashboard.status(), StatusCode::OK);
++    let html = support::http::body_text(dashboard).await;
++    let csrf = html
++        .split("action=\"/logout\"")
++        .nth(1)
++        .unwrap()
++        .split("name=\"csrf\" value=\"")
++        .nth(1)
++        .unwrap()
++        .split('"')
++        .next()
++        .unwrap();
+     let logout = app
+         .clone()
+         .oneshot(
+             Request::post("/logout")
+                 .header(header::ORIGIN, "http://127.0.0.1:3100")
+                 .header(header::COOKIE, &cookie)
+-                .body(Body::empty())
++                .header(header::CONTENT_TYPE, "application/x-www-form-urlencoded")
++                .body(Body::from(format!("csrf={csrf}")))
+                 .unwrap(),
+         )
+         .await
+diff --git a/analytics_apps/analytics_server/tests/day39_export_csv.rs b/analytics_apps/analytics_server/tests/day39_export_csv.rs
+index 1317796..b7a74a0 100644
+--- a/analytics_apps/analytics_server/tests/day39_export_csv.rs
++++ b/analytics_apps/analytics_server/tests/day39_export_csv.rs
+@@ -138,13 +138,26 @@ async fn day39_authenticated_admin_exports_only_selected_source_csv(pool: sqlx::
+     )
+     .await;
+     assert_eq!(page.status(), StatusCode::OK);
+-    assert!(
+-        body_text(page)
+-            .await
+-            .contains("/api/v1/events/web_chat/export.csv?event_type=chat.message.persisted")
+-    );
++    let html = body_text(page).await;
++    assert!(html.contains("/api/v1/events/web_chat/export.csv?event_type=chat.message.persisted"));
++    let csrf = html
++        .split("action=\"/logout\"")
++        .nth(1)
++        .unwrap()
++        .split("name=\"csrf\" value=\"")
++        .nth(1)
++        .unwrap()
++        .split('"')
++        .next()
++        .unwrap();
+ 
+-    let logout = post_form(app.clone(), "/logout", String::new(), Some(&cookie)).await;
++    let logout = post_form(
++        app.clone(),
++        "/logout",
++        format!("csrf={csrf}"),
++        Some(&cookie),
++    )
++    .await;
+     assert_eq!(logout.status(), StatusCode::SEE_OTHER);
+     assert_eq!(
+         get(app, url, Some(&cookie)).await.status(),
+```
+
+真PG全套 `--no-fail-fast -- --include-ignored` 修補後63通過。首次link bus error及jobs1成功重試均保存。遠端產品不推送修補，Persistence失敗保留為待使用者套用／重跑。

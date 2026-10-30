@@ -1,0 +1,70 @@
+diff --git a/analytics_apps/analytics_server/tests/day37_query_cookie.rs b/analytics_apps/analytics_server/tests/day37_query_cookie.rs
+index 8ced0b6..9823ee0 100644
+--- a/analytics_apps/analytics_server/tests/day37_query_cookie.rs
++++ b/analytics_apps/analytics_server/tests/day37_query_cookie.rs
+@@ -114,13 +114,27 @@ async fn day37_real_query_routes_reject_ambiguous_session_cookies(pool: sqlx::Pg
+         .execute(&pool)
+         .await
+         .unwrap();
++    let dashboard = query(&app, "/dashboard", &[cookie.clone()], false).await;
++    assert_eq!(dashboard.status(), StatusCode::OK);
++    let html = support::http::body_text(dashboard).await;
++    let csrf = html
++        .split("action=\"/logout\"")
++        .nth(1)
++        .unwrap()
++        .split("name=\"csrf\" value=\"")
++        .nth(1)
++        .unwrap()
++        .split('"')
++        .next()
++        .unwrap();
+     let logout = app
+         .clone()
+         .oneshot(
+             Request::post("/logout")
+                 .header(header::ORIGIN, "http://127.0.0.1:3100")
+                 .header(header::COOKIE, &cookie)
+-                .body(Body::empty())
++                .header(header::CONTENT_TYPE, "application/x-www-form-urlencoded")
++                .body(Body::from(format!("csrf={csrf}")))
+                 .unwrap(),
+         )
+         .await
+diff --git a/analytics_apps/analytics_server/tests/day39_export_csv.rs b/analytics_apps/analytics_server/tests/day39_export_csv.rs
+index 1317796..b7a74a0 100644
+--- a/analytics_apps/analytics_server/tests/day39_export_csv.rs
++++ b/analytics_apps/analytics_server/tests/day39_export_csv.rs
+@@ -138,13 +138,26 @@ async fn day39_authenticated_admin_exports_only_selected_source_csv(pool: sqlx::
+     )
+     .await;
+     assert_eq!(page.status(), StatusCode::OK);
+-    assert!(
+-        body_text(page)
+-            .await
+-            .contains("/api/v1/events/web_chat/export.csv?event_type=chat.message.persisted")
+-    );
++    let html = body_text(page).await;
++    assert!(html.contains("/api/v1/events/web_chat/export.csv?event_type=chat.message.persisted"));
++    let csrf = html
++        .split("action=\"/logout\"")
++        .nth(1)
++        .unwrap()
++        .split("name=\"csrf\" value=\"")
++        .nth(1)
++        .unwrap()
++        .split('"')
++        .next()
++        .unwrap();
+ 
+-    let logout = post_form(app.clone(), "/logout", String::new(), Some(&cookie)).await;
++    let logout = post_form(
++        app.clone(),
++        "/logout",
++        format!("csrf={csrf}"),
++        Some(&cookie),
++    )
++    .await;
+     assert_eq!(logout.status(), StatusCode::SEE_OTHER);
+     assert_eq!(
+         get(app, url, Some(&cookie)).await.status(),
