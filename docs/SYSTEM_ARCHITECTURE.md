@@ -24,3 +24,7 @@ Pet活動模型已在main：目前籠態由pet_activity導出，預設沿用既�
 [2026-10-31 Gate2原生／HTTP實測與已確認阻擋](source-review/gate2-2026-10-31/README.md)；目前完整Gate2=false，不以CI全綠替代逐房／角色授權或缺失的舊庫／實機證據。
 
 [64eff52 SQL更新後最新回歸](source-review/gate2-sql-2026-10-31/README.md)：Pet112／Node12／WASM及四workspace metadata通過；舊native／browser證據仍屬2c7ff8b，完整Gate2未通過。
+
+## Analytics ACL 階層契約
+
+`uac_role`／`uac_user_role` 負責角色分類與指派，`uac_acl` 以既有 `acl_parent_id` 構成 category→page→action。三個category為會員管理、資訊分析、認證管理；action判斷CRUD。`uac_role_acl`為角色預設，`uac_user_acl`提供個人獨立加減；page可見性與CRUD操作分別檢查。[完整需求](requirements/ANALYTICS_ACL.md)。目前僅交付候選patch，不能宣稱產品main已具此分層或權限管理UI。

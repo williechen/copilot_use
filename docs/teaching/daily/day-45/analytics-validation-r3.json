@@ -1,0 +1,88 @@
+{
+  "revision": "r3",
+  "day": 45,
+  "expected_next_day": {
+    "chat": 46,
+    "pet": 46,
+    "analytics": 46
+  },
+  "day_advance": false,
+  "source_sha": "64eff527283fd05657841297879aefeaadd31f64",
+  "document_parent": "96f76aebc3be396cbd791e25f2f15f2254e404e0",
+  "apply_order": [
+    "source64eff527",
+    "analytics-day45-refactor.patch",
+    "analytics-day45-green-r3.patch"
+  ],
+  "replaces_not_appends": [
+    "analytics-day45-green.patch",
+    "analytics-day45-green-r2.patch"
+  ],
+  "category_names": [
+    "會員管理",
+    "資訊分析",
+    "認證管理"
+  ],
+  "hierarchy": [
+    "category",
+    "page",
+    "action"
+  ],
+  "crud": [
+    "create",
+    "read",
+    "update",
+    "delete"
+  ],
+  "commands": [
+    {
+      "command": "DATABASE_URL=postgres://willie@127.0.0.1:55485/lesson_day45 CARGO_PROFILE_TEST_DEBUG=0 CARGO_PROFILE_DEV_DEBUG=0 CARGO_INCREMENTAL=0 cargo test --manifest-path analytics_apps/Cargo.toml -p analytics-server --features postgres-integration --test day45_viewer --locked",
+      "exit": 101,
+      "log": "analytics-hierarchy-red.log",
+      "result": "actual303 expected403: page-only permission could create"
+    },
+    {
+      "command": "same targeted command after complete r3 Green",
+      "exit": 0,
+      "log": "analytics-hierarchy-green.log",
+      "passed": 1
+    },
+    {
+      "command": "DATABASE_URL=<same isolated PG> CARGO_PROFILE_TEST_DEBUG=0 CARGO_PROFILE_DEV_DEBUG=0 CARGO_INCREMENTAL=0 cargo test --manifest-path analytics_apps/Cargo.toml -p analytics-server --features postgres-integration --locked --no-fail-fast",
+      "exit": 0,
+      "log": "analytics-hierarchy-regression.log",
+      "passed": 62,
+      "ignored": 1
+    },
+    {
+      "command": "git apply --check analytics-day45-green-r3.patch on exact source + original Refactor",
+      "exit": 0
+    },
+    {
+      "command": "same full regression after explicit Delete classification and actual Router DELETE405 assertion",
+      "exit": 0,
+      "log": "analytics-hierarchy-final.log",
+      "passed": 62,
+      "ignored": 1
+    }
+  ],
+  "gate2": false,
+  "not_run": [
+    "browser",
+    "actual old PG backup upgrade",
+    "ACL/category/page/action editing UI",
+    "member update/delete routes",
+    "all other writes transaction ACL review",
+    "legacy ignored test"
+  ],
+  "sha256": {
+    "analytics-r3.md": "1eabe96c9ea93bd88d210c1d1e83d87903a9865d4d68160e68f2f756e1c7bc91",
+    "analytics-hierarchy-red.log": "47f0d2f98254deadf8a04a6c5a5b4e5d3c8f9e8a3ff3b8b540f79e7e81be1e83",
+    "analytics-hierarchy-green.log": "bdbda3b4b4d1e8476d7d559c1ec2d4d6cc611db5f08cf98859d4e57386369773",
+    "analytics-hierarchy-red-r3.patch": "96514b91e7d34a54a90c5cf4e7673363537d3772e927e34987c3cafaa5554688",
+    "analytics-hierarchy-regression.log": "9ae71bde6864292999f137bec6e1cd371d5d7620c5667d908a659e44350e0786",
+    "analytics-versions-r3.json": "6514b1082da0bb333c95881fdac90cc6ba4cc42ea0f473a988a34e47009e029c",
+    "analytics-day45-green-r3.patch": "6b2422a9140d114b42a8154373eeddcea478668dac0867d4574f0a2a062f82bc",
+    "analytics-hierarchy-final.log": "43ee9564791d94566a616868c6927f244778b92e3875ec642c8e7715ced81ef1"
+  }
+}

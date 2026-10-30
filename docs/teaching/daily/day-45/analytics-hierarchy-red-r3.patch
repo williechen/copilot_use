@@ -1,0 +1,16 @@
+diff --git a/analytics_apps/analytics_server/tests/day45_viewer.rs b/analytics_apps/analytics_server/tests/day45_viewer.rs
+--- a/analytics_apps/analytics_server/tests/day45_viewer.rs
++++ b/analytics_apps/analytics_server/tests/day45_viewer.rs
+@@ -207,6 +207,12 @@
+     let delegated = send(app.clone(), "/accounts/new", None, Some(&reader)).await;
+     assert_eq!(delegated.status(), StatusCode::OK);
+     let csrf = token(&body_text(delegated).await, "/accounts");
++    // A page allow does not imply its Create action.
++    let denied=send(app.clone(),"/accounts",Some(&format!("username=pageonly&password=pageonly-password&email=pageonly%40example.test&pet=on&csrf={csrf}")),Some(&reader)).await;
++    assert_eq!(denied.status(),StatusCode::FORBIDDEN);
++    let count:i64=sqlx::query_scalar("SELECT count(*) FROM uac_user WHERE user_acnt='pageonly'").fetch_one(&pool).await.unwrap();
++    assert_eq!(count,0);
++    sqlx::query("INSERT INTO uac_user_acl(user_id,acl_id,acl_filter,created_at) SELECT id,'analytics-accounts-create','allow',now() FROM uac_user WHERE user_acnt='reader'").execute(&pool).await.unwrap();
+     let created=send(app.clone(),"/accounts",Some(&format!("username=delegated&password=delegated-password&email=delegated%40example.test&pet=on&csrf={csrf}")),Some(&reader)).await;
+     assert_eq!(created.status(), StatusCode::SEE_OTHER);
+     sqlx::query("UPDATE uac_user_acl SET acl_filter='deny' WHERE acl_id='analytics-accounts' AND user_id=(SELECT id FROM uac_user WHERE user_acnt='reader')").execute(&pool).await.unwrap();

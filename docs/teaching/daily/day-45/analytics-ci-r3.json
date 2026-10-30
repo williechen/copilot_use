@@ -1,0 +1,65 @@
+[
+  {
+    "name": "Persistence",
+    "head_sha": "64eff527283fd05657841297879aefeaadd31f64",
+    "id": 41136694195,
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/williechen/rust_ai_ring/actions/runs/41136694195",
+    "updated_at": "2026-10-30T22:16:06Z"
+  },
+  {
+    "name": "Test All",
+    "head_sha": "64eff527283fd05657841297879aefeaadd31f64",
+    "id": 41136694243,
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/williechen/rust_ai_ring/actions/runs/41136694243",
+    "updated_at": "2026-10-30T22:16:28Z"
+  },
+  {
+    "name": "Rust Analytics",
+    "head_sha": "64eff527283fd05657841297879aefeaadd31f64",
+    "id": 41136694157,
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/williechen/rust_ai_ring/actions/runs/41136694157",
+    "updated_at": "2026-10-30T22:15:27Z"
+  },
+  {
+    "name": "Node",
+    "head_sha": "64eff527283fd05657841297879aefeaadd31f64",
+    "id": 41136694295,
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/williechen/rust_ai_ring/actions/runs/41136694295",
+    "updated_at": "2026-10-30T22:13:49Z"
+  },
+  {
+    "name": "Cargo workspaces",
+    "head_sha": "64eff527283fd05657841297879aefeaadd31f64",
+    "id": 41136694203,
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/williechen/rust_ai_ring/actions/runs/41136694203",
+    "updated_at": "2026-10-30T22:14:00Z"
+  },
+  {
+    "name": "Rust Desktop Pet",
+    "head_sha": "64eff527283fd05657841297879aefeaadd31f64",
+    "id": 41136694314,
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/williechen/rust_ai_ring/actions/runs/41136694314",
+    "updated_at": "2026-10-30T22:24:10Z"
+  },
+  {
+    "name": "Rust AI Chat",
+    "head_sha": "64eff527283fd05657841297879aefeaadd31f64",
+    "id": 41136694179,
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/williechen/rust_ai_ring/actions/runs/41136694179",
+    "updated_at": "2026-10-30T22:28:00Z"
+  }
+]
