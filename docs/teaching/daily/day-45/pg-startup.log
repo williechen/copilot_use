@@ -1,0 +1,8 @@
+2026-10-31 06:59:12.495 CST [71490] LOG:  starting PostgreSQL 18.6 (Ubuntu 18.6-1.pgdg26.04+2) on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0, 64-bit
+2026-10-31 06:59:12.495 CST [71490] LOG:  listening on IPv4 address "127.0.0.1", port 55485
+2026-10-31 06:59:12.502 CST [71490] LOG:  Unix-domain socket path "/home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/pgsocket/.s.PGSQL.55485" is too long (maximum 107 bytes)
+2026-10-31 06:59:12.502 CST [71490] WARNING:  could not create Unix-domain socket in directory "/home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/pgsocket"
+2026-10-31 06:59:12.502 CST [71490] FATAL:  could not create any Unix-domain sockets
+2026-10-31 06:59:12.504 CST [71490] LOG:  database system is shut down
+2026-10-31 06:59:48.410 CST [71541] LOG:  starting PostgreSQL 18.6 (Ubuntu 18.6-1.pgdg26.04+2) on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0, 64-bit
+2026-10-31 06:59:48.410 CST [71541] LOG:  listening on IPv4 address "127.0.0.1", port 55485

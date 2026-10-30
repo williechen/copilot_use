@@ -1,0 +1,197 @@
+diff --git a/analytics_apps/analytics_server/tests/day45_viewer.rs b/analytics_apps/analytics_server/tests/day45_viewer.rs
+new file mode 100644
+index 0000000..a3d9eb5
+--- /dev/null
++++ b/analytics_apps/analytics_server/tests/day45_viewer.rs
+@@ -0,0 +1,191 @@
++#![cfg(feature = "postgres-integration")]
++mod support;
++use analytics_server::{IngestState, IngestTokens, bootstrap, password_login};
++use axum::http::{StatusCode, header};
++use std::sync::Arc;
++use support::http::{body_text, response_cookie, send};
++
++fn token(html: &str, action: &str) -> String {
++    html.split(&format!("action=\"{action}\""))
++        .nth(1)
++        .unwrap()
++        .split("name=\"csrf\" value=\"")
++        .nth(1)
++        .unwrap()
++        .split('"')
++        .next()
++        .unwrap()
++        .into()
++}
++#[sqlx::test(migrations = "../migrations")]
++async fn admin_creates_viewer_first_change_and_source_revoke_affects_same_session(
++    pool: sqlx::PgPool,
++) {
++    let admin = bootstrap::initialize(&pool, "lesson-password".into())
++        .await
++        .unwrap();
++    sqlx::query("UPDATE uac_user SET is_init_pd=FALSE WHERE id=$1")
++        .bind(&admin)
++        .execute(&pool)
++        .await
++        .unwrap();
++    let app = password_login::build(IngestState {
++        pool: pool.clone(),
++        tokens: Arc::new(IngestTokens {
++            chat: "chat-fixture".into(),
++            pet: "pet-fixture".into(),
++        }),
++    });
++    let login = send(
++        app.clone(),
++        "/login",
++        Some("username=admin&password=lesson-password"),
++        None,
++    )
++    .await;
++    assert_eq!(login.status(), StatusCode::SEE_OTHER);
++    let cookie = response_cookie(&login);
++    let page = send(app.clone(), "/accounts/new", None, Some(&cookie)).await;
++    assert_eq!(page.status(), StatusCode::OK);
++    let csrf = token(&body_text(page).await, "/accounts");
++    let form = format!(
++        "username=reader&password=reader-password&email=reader%40example.test&chat=on&csrf={csrf}"
++    );
++    assert_eq!(
++        send(
++            app.clone(),
++            "/accounts",
++            Some(&form.replace(&csrf, "wrong")),
++            Some(&cookie)
++        )
++        .await
++        .status(),
++        StatusCode::FORBIDDEN
++    );
++    let created = send(app.clone(), "/accounts", Some(&form), Some(&cookie)).await;
++    assert_eq!(created.status(), StatusCode::SEE_OTHER);
++    assert_eq!(
++        created.headers()[header::LOCATION],
++        "/accounts/new?created=1"
++    );
++    let encoded: String =
++        sqlx::query_scalar("SELECT user_pd FROM uac_user WHERE user_acnt='reader'")
++            .fetch_one(&pool)
++            .await
++            .unwrap();
++    assert!(encoded.starts_with("$argon2"));
++    assert!(!encoded.contains("reader-password"));
++    assert_eq!(
++        send(app.clone(), "/accounts", Some(&form), Some(&cookie))
++            .await
++            .status(),
++        StatusCode::CONFLICT
++    );
++    let login = send(
++        app.clone(),
++        "/login",
++        Some("username=reader&password=reader-password"),
++        None,
++    )
++    .await;
++    assert_eq!(login.status(), StatusCode::SEE_OTHER);
++    assert_eq!(login.headers()[header::LOCATION], "/change-password");
++    let reader = response_cookie(&login);
++    assert_eq!(
++        send(
++            app.clone(),
++            "/api/v1/events/web_chat/summary",
++            None,
++            Some(&reader)
++        )
++        .await
++        .status(),
++        StatusCode::FORBIDDEN
++    );
++    let page = body_text(send(app.clone(), "/change-password", None, Some(&reader)).await).await;
++    let csrf = token(&page, "/change-password");
++    let changed=send(app.clone(),"/change-password",Some(&format!("current_password=reader-password&new_password=changed-password&confirm_password=changed-password&email=reader%40example.test&csrf={csrf}")),Some(&reader)).await;
++    assert_eq!(changed.status(), StatusCode::SEE_OTHER);
++    assert_eq!(
++        send(app.clone(), "/dashboard", None, Some(&reader))
++            .await
++            .status(),
++        StatusCode::SEE_OTHER
++    );
++    let reader = response_cookie(
++        &send(
++            app.clone(),
++            "/login",
++            Some("username=reader&password=changed-password"),
++            None,
++        )
++        .await,
++    );
++    for path in [
++        "/dashboard?source=web_chat",
++        "/api/v1/events/web_chat/summary",
++        "/api/v1/events/web_chat/summary/chat.message.persisted",
++        "/api/v1/events/web_chat/export.csv",
++    ] {
++        assert_eq!(
++            send(app.clone(), path, None, Some(&reader)).await.status(),
++            StatusCode::OK,
++            "{path}"
++        );
++    }
++    for path in [
++        "/dashboard?source=desktop_pet",
++        "/api/v1/events/desktop_pet/summary",
++        "/api/v1/events/desktop_pet/summary/pet.sleep",
++        "/api/v1/events/desktop_pet/export.csv",
++        "/accounts/new",
++    ] {
++        assert_eq!(
++            send(app.clone(), path, None, Some(&reader)).await.status(),
++            StatusCode::FORBIDDEN,
++            "{path}"
++        );
++    }
++    let csrf = token(
++        &body_text(send(app.clone(), "/change-password", None, Some(&reader)).await).await,
++        "/logout",
++    );
++    assert_eq!(
++        send(
++            app.clone(),
++            "/accounts",
++            Some(&format!(
++                "username=evil&password=evil-password&email=evil%40example.test&chat=on&csrf={csrf}"
++            )),
++            Some(&reader)
++        )
++        .await
++        .status(),
++        StatusCode::FORBIDDEN
++    );
++    sqlx::query(
++        "DELETE FROM uac_user_acl WHERE user_id=(SELECT id FROM uac_user WHERE user_acnt='reader')",
++    )
++    .execute(&pool)
++    .await
++    .unwrap();
++    assert_eq!(
++        send(
++            app.clone(),
++            "/api/v1/events/web_chat/export.csv",
++            None,
++            Some(&reader)
++        )
++        .await
++        .status(),
++        StatusCode::FORBIDDEN
++    );
++    let audit: i64 = sqlx::query_scalar(
++        "SELECT count(*) FROM analytics_account_audit WHERE actor_id=$1 AND action='create_viewer'",
++    )
++    .bind(admin)
++    .fetch_one(&pool)
++    .await
++    .unwrap();
++    assert_eq!(audit, 1);
++}

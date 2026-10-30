@@ -1,0 +1,245 @@
+{
+  "source_sha": "64eff527283fd05657841297879aefeaadd31f64",
+  "files": {
+    "chat_apps/Cargo.toml": {
+      "blob": "435baaf6a110e5afc0e0d864570755933573c5c5",
+      "sha256": "d1007a83bb24e4276642c107a231b585e1aa4615bd585cabfb41835184d63954"
+    },
+    "chat_apps/Cargo.lock": {
+      "blob": "bd4da0101ec6282d67965674159aa965bd1ae35e",
+      "sha256": "f7659dac7c519b266da05ec142872a3288a57e3cf8c90a3f2d799315ae39a881"
+    },
+    "chat_apps/chat_ui/Cargo.toml": {
+      "blob": "9ba328350ed12160d469171c4f975b618816c9cf",
+      "sha256": "83f9b6172b1a8c7c1fb65c938c86f1622d59da37e14f8db18b2a5c2efaba7ff5"
+    },
+    "chat_apps/chat_domain/Cargo.toml": {
+      "blob": "af579a44cffb90a0c0f7d11b2527f4b8a308e862",
+      "sha256": "845e2c6d21feb9eccdbf60548669c7baa455a559b4d2b9853b199f2f6ea4a136"
+    },
+    "chat_apps/chat_server/Cargo.toml": {
+      "blob": "e463272eb947dbf58ffd31ec4976cfebb9d990f0",
+      "sha256": "4c6c74c8431696d17cc42f6e6aa2df802091ba1dd8129dd2f0f9ac13293c97e4"
+    },
+    "chat_apps/chat_application/Cargo.toml": {
+      "blob": "0f02d259d3870bccd29ec6879520418ba1be4d97",
+      "sha256": "f3f7bf509bc01d5f1900686336def961c712b60db976c9627fddccae5a85adfb"
+    },
+    "chat_apps/chat_persistence/Cargo.toml": {
+      "blob": "05963c9374b40036531d66015a32ac6ca2f0062b",
+      "sha256": "49e09c28737e97f64ee6d0a78496f7610cec797d34ac355819b51f37adbdf529"
+    },
+    "pet_apps/Cargo.toml": {
+      "blob": "1033d8194dd711d9c7704400e4c294fb06449c8f",
+      "sha256": "5153d79ef5489fdb9814ab628b405fc2a0c338472cbed0b0968d1e7e166948fe"
+    },
+    "pet_apps/Cargo.lock": {
+      "blob": "b9805c0aefb65df8972bd6d3d17547ec2781f6f5",
+      "sha256": "d2688bb6129e66c75cc0b891de29b60f2ea012b6a3a143513285fc5c21aa7a54"
+    },
+    "pet_apps/pet_persistence/Cargo.toml": {
+      "blob": "3e0608f53454842dcfa49d8ba31f7ba67c021f50",
+      "sha256": "f46583f7e63c1b10293e36db20897c1f9ea1f41a2e9506b46140005daaab3308"
+    },
+    "pet_apps/pet_ui/Cargo.toml": {
+      "blob": "0734cd9857791d5e582b23be3d6045e87cd5950f",
+      "sha256": "6c9b1e2b4c518c28467bc7b41d392d74aaf56bc21823c2dc2fe437f22b93f21d"
+    },
+    "pet_apps/pet_application/Cargo.toml": {
+      "blob": "1fd1740e1ce1d5cbfed7a8317475d16bd8c7c99b",
+      "sha256": "c33e8f93f92f6079e0e8b81098ff404f58c8ed9b600304c413de30cd1e7837c8"
+    },
+    "pet_apps/pet_domain/Cargo.toml": {
+      "blob": "1e0a38a5ca0b31f6ee5bb0acc31e3c816d03351d",
+      "sha256": "18b159f763532b13c1eec26e65ab4be1e0dda4c351e217b73fd2aa4bdc4a9a32"
+    },
+    "pet_apps/pet_server/Cargo.toml": {
+      "blob": "e477d4f8c518586c9720abf1e073df00326e86c3",
+      "sha256": "d6207a0382c7b2d07e27bf5b45508fd8347604563731121a71e9a2251ee5927a"
+    },
+    "analytics_apps/Cargo.toml": {
+      "blob": "22f05d05f89a4e58fa2d4a336a0727207606ec07",
+      "sha256": "8aff0077033630b9064535b1fbcec7d5c1836341737bf5c9763e760433338de9"
+    },
+    "analytics_apps/Cargo.lock": {
+      "blob": "831373fcf0824cf5b50e785bf4abe75d3aadc2f8",
+      "sha256": "3f3479a016faa629aaa77fd6320861fc8616333698b154bb2536238dd2dc161f"
+    },
+    "analytics_apps/analytics_application/Cargo.toml": {
+      "blob": "d74e5356ae10ed5f98758196357af6f4c9e17fc5",
+      "sha256": "f3821e0d9ecd9693ee28ea8ef1bbdaf9e6bb040ae1aa8ac530a212efc69595fd"
+    },
+    "analytics_apps/analytics_persistence/Cargo.toml": {
+      "blob": "7f3af2d352d219a550ed9805ea0991464c793639",
+      "sha256": "b93c92d8a6e539c07afeb1382bd8ce4083c129553883ee3cdc4ea88770c7c005"
+    },
+    "analytics_apps/analytics_server/Cargo.toml": {
+      "blob": "d43f3c41eae7d40d0b75e2040751e6cb7de35316",
+      "sha256": "b3aeb39f77064d1b451fef2922de1a4af1c86031ea2b602ca15cf7090a30307f"
+    },
+    "analytics_apps/analytics_ui/Cargo.toml": {
+      "blob": "3ce854b53a06b1c57bb9fc86fd5b088c6620cfbe",
+      "sha256": "0422bbf75b0fcebdca6a0c25428ec92f6dfcb1a5af59ce444660a336b6176940"
+    },
+    "analytics_apps/analytics_domain/Cargo.toml": {
+      "blob": "3f7a6a00e49dfe9e17cff801b44583ab8b1b9de2",
+      "sha256": "b3b5b44a25b313c7f52a9bb411c62a3dcb05ca8343ef2d6bf1b939e5e4babd30"
+    },
+    "crates/Cargo.toml": {
+      "blob": "739ed0cd7d5df70571ca176b51cde4a9db063d47",
+      "sha256": "c67188f414ec24f051db6530cfcb2bb2241ff066406975adf720d24d13f1f581"
+    },
+    "crates/Cargo.lock": {
+      "blob": "28ebff98f0e31e92551b12d540361ccd74eed7f2",
+      "sha256": "0736735c91176e189d3725476b4d985401838ba53d840ea381b809edb6aa3bf5"
+    },
+    "crates/ai_core/Cargo.toml": {
+      "blob": "681bd9bf03aadac40359fa1dc46c7ea326cd84e6",
+      "sha256": "8253f7e9d37b44b2d30a7949cdca7a3ad63eeaeb2f543d36f838d29c3b5e82dc"
+    },
+    "crates/shared/Cargo.toml": {
+      "blob": "488a348a3ce65a942804ed671e0cd25227e51922",
+      "sha256": "12ae15dab9c0bd8c1649e9afdfb135a3483910c9e93f39330569976936ab8c3b"
+    },
+    "crates/telemetry/Cargo.toml": {
+      "blob": "b12a8918948c4448652a65ec32fd520bad490a44",
+      "sha256": "af9e3f9bb8f18ba50d6cb14cb0dcf5cdb37abe2c16464b464c6be5dcbdf57963"
+    }
+  },
+  "workspace_metadata": {
+    "chat_apps": {
+      "command": "cargo metadata --manifest-path /home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/rust_ai_ring/chat_apps/Cargo.toml --locked --no-deps --format-version 1",
+      "exit": 0,
+      "packages": [
+        {
+          "name": "chat-server",
+          "version": "0.2.43",
+          "features": {
+            "default": [],
+            "ssr": [
+              "chat-ui/ssr"
+            ]
+          }
+        },
+        {
+          "name": "chat-application",
+          "version": "0.2.43",
+          "features": {}
+        },
+        {
+          "name": "chat-domain",
+          "version": "0.2.43",
+          "features": {}
+        },
+        {
+          "name": "chat-persistence",
+          "version": "0.2.43",
+          "features": {}
+        },
+        {
+          "name": "chat-ui",
+          "version": "0.2.43",
+          "features": {
+            "default": [],
+            "hydrate": [
+              "leptos/hydrate"
+            ],
+            "ssr": [
+              "leptos/ssr",
+              "leptos_router/ssr"
+            ]
+          }
+        }
+      ]
+    },
+    "pet_apps": {
+      "command": "cargo metadata --manifest-path /home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/rust_ai_ring/pet_apps/Cargo.toml --locked --no-deps --format-version 1",
+      "exit": 0,
+      "packages": [
+        {
+          "name": "pet-server",
+          "version": "0.2.43",
+          "features": {}
+        },
+        {
+          "name": "pet-application",
+          "version": "0.2.43",
+          "features": {}
+        },
+        {
+          "name": "pet-domain",
+          "version": "0.2.43",
+          "features": {}
+        },
+        {
+          "name": "pet-persistence",
+          "version": "0.2.43",
+          "features": {}
+        },
+        {
+          "name": "pet-ui",
+          "version": "0.2.43",
+          "features": {}
+        }
+      ]
+    },
+    "analytics_apps": {
+      "command": "cargo metadata --manifest-path /home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/rust_ai_ring/analytics_apps/Cargo.toml --locked --no-deps --format-version 1",
+      "exit": 0,
+      "packages": [
+        {
+          "name": "analytics-server",
+          "version": "0.2.43",
+          "features": {
+            "postgres-integration": [
+              "analytics-persistence/postgres-integration"
+            ]
+          }
+        },
+        {
+          "name": "analytics-persistence",
+          "version": "0.2.43",
+          "features": {
+            "postgres-integration": []
+          }
+        },
+        {
+          "name": "analytics-ui",
+          "version": "0.2.43",
+          "features": {}
+        },
+        {
+          "name": "analytics-domain",
+          "version": "0.2.43",
+          "features": {}
+        },
+        {
+          "name": "analytics-application",
+          "version": "0.2.43",
+          "features": {}
+        }
+      ]
+    },
+    "crates": {
+      "command": "cargo metadata --manifest-path /home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/rust_ai_ring/crates/Cargo.toml --locked --no-deps --format-version 1",
+      "exit": 0,
+      "packages": [
+        {
+          "name": "ai-core",
+          "version": "0.2.43",
+          "features": {}
+        },
+        {
+          "name": "shared",
+          "version": "0.2.43",
+          "features": {}
+        },
+        {
+          "name": "telemetry",
+          "version": "0.2.43",
+          "features": {}
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,317 @@
+   Compiling unicode-ident v1.0.27
+   Compiling proc-macro2 v1.0.107
+   Compiling quote v1.0.47
+   Compiling serde v1.0.229
+   Compiling cfg-if v1.0.5
+   Compiling libc v0.2.191
+   Compiling serde_core v1.0.229
+   Compiling syn v3.0.9
+   Compiling pin-project-lite v0.2.17
+   Compiling futures-core v0.3.34
+   Compiling version_check v0.9.5
+   Compiling memchr v2.8.3
+   Compiling typenum v1.20.1
+   Compiling syn v2.0.119
+   Compiling slab v0.4.12
+   Compiling futures-io v0.3.34
+   Compiling thiserror v2.0.21
+   Compiling futures-task v0.3.34
+   Compiling once_cell v1.21.4
+   Compiling serde_derive v1.0.229
+   Compiling synstructure v0.14.0
+   Compiling zerofrom-derive v0.1.8
+   Compiling thiserror-impl v2.0.21
+   Compiling zerofrom v0.1.8
+   Compiling yoke-derive v0.8.4
+   Compiling stable_deref_trait v1.2.1
+   Compiling itoa v1.0.18
+   Compiling zerovec-derive v0.11.7
+   Compiling yoke v0.8.4
+   Compiling futures-sink v0.3.34
+   Compiling bytes v1.12.1
+   Compiling zerovec v0.11.9
+   Compiling futures-channel v0.3.34
+   Compiling futures-macro v0.3.34
+   Compiling displaydoc v0.2.7
+   Compiling semver v1.0.28
+   Compiling futures-util v0.3.34
+   Compiling rustc_version v0.4.1
+   Compiling tinystr v0.8.5
+   Compiling smallvec v1.16.4
+   Compiling generic-array v0.14.9
+   Compiling parking_lot_core v0.9.12
+   Compiling writeable v0.6.4
+   Compiling wasm-bindgen-shared v0.2.129
+   Compiling cmov v0.5.4
+   Compiling litemap v0.8.3
+   Compiling ctutils v0.4.5
+   Compiling icu_locale_core v2.4.0
+   Compiling zerotrie v0.2.5
+   Compiling potential_utf v0.1.6
+   Compiling hybrid-array v0.4.15
+   Compiling icu_normalizer_data v2.4.0
+   Compiling utf8_iter v1.0.4
+   Compiling rustversion v1.0.23
+   Compiling icu_collections v2.4.0
+   Compiling icu_provider v2.4.0
+   Compiling icu_properties_data v2.4.0
+   Compiling zmij v1.0.23
+   Compiling scopeguard v1.2.0
+   Compiling equivalent v1.0.3
+   Compiling lock_api v0.4.14
+   Compiling crypto-common v0.2.2
+   Compiling block-buffer v0.12.1
+   Compiling serde_json v1.0.154
+   Compiling bumpalo v3.20.3
+   Compiling wasm-bindgen v0.2.129
+   Compiling wasm-bindgen-macro-support v0.2.129
+   Compiling block-buffer v0.10.4
+   Compiling crypto-common v0.1.6
+   Compiling rand_core v0.10.1
+   Compiling getrandom v0.4.3
+   Compiling percent-encoding v2.3.2
+   Compiling hashbrown v0.17.1
+   Compiling icu_properties v2.4.0
+   Compiling indexmap v2.14.2
+   Compiling digest v0.10.7
+   Compiling mio v1.2.4
+   Compiling socket2 v0.6.5
+   Compiling parking v2.2.1
+   Compiling cpufeatures v0.2.17
+   Compiling event-listener v5.4.2
+   Compiling unicode-segmentation v1.13.3
+   Compiling log v0.4.34
+   Compiling http v1.5.0
+   Compiling convert_case v0.11.0
+   Compiling parking_lot v0.12.5
+   Compiling tracing-attributes v0.1.31
+   Compiling tracing-core v0.1.36
+   Compiling wasm-bindgen-macro v0.2.129
+   Compiling errno v0.3.14
+   Compiling or_poisoned v0.1.0
+   Compiling cpufeatures v0.3.1
+   Compiling tracing v0.1.44
+   Compiling signal-hook-registry v1.4.8
+   Compiling futures-executor v0.3.34
+   Compiling tokio-macros v2.7.2
+   Compiling crossbeam-utils v0.8.23
+   Compiling const-oid v0.10.2
+   Compiling tokio v1.54.1
+   Compiling digest v0.11.3
+   Compiling js-sys v0.3.106
+   Compiling futures v0.3.34
+   Compiling form_urlencoded v1.2.2
+   Compiling icu_normalizer v2.4.0
+   Compiling either v1.19.0
+   Compiling proc-macro2-diagnostics v0.11.0
+   Compiling autocfg v1.5.1
+   Compiling foldhash v0.2.0
+   Compiling paste v1.0.15
+   Compiling allocator-api2 v0.2.21
+   Compiling hashbrown v0.16.1
+   Compiling num-traits v0.2.19
+   Compiling idna_adapter v1.2.2
+   Compiling sha2 v0.10.9
+   Compiling proc-macro-utils v0.10.0
+   Compiling slotmap v1.1.1
+   Compiling throw_error v0.3.1
+   Compiling crc-catalog v2.5.0
+   Compiling konst_macro_rules v0.2.19
+   Compiling zerocopy v0.8.63
+   Compiling unicode-xid v0.2.6
+   Compiling getrandom v0.3.4
+   Compiling const_format_proc_macros v0.2.37
+   Compiling konst v0.2.20
+   Compiling crc v3.4.0
+   Compiling wasm-bindgen-futures v0.4.79
+   Compiling web-sys v0.3.106
+   Compiling crossbeam-queue v0.3.14
+   Compiling idna v1.1.0
+   Compiling hashlink v0.11.1
+   Compiling event-listener-strategy v0.5.4
+   Compiling server_fn_macro v0.8.12
+   Compiling reactive_graph v0.2.16
+   Compiling send_wrapper v0.6.0
+   Compiling rstml v0.13.1
+   Compiling tinyvec v1.13.3
+   Compiling base64 v0.22.1
+   Compiling httparse v1.10.1
+   Compiling unicode-normalization v0.1.26
+   Compiling async-lock v3.4.2
+   Compiling url v2.5.8
+   Compiling any_spawner v0.3.0
+   Compiling const_format v0.2.37
+   Compiling hydration_context v0.3.2
+   Compiling chacha20 v0.10.2
+   Compiling derive-where v1.7.0
+   Compiling thiserror v1.0.69
+   Compiling xxhash-rust v0.8.19
+   Compiling unicode-properties v0.1.4
+   Compiling camino v1.2.6
+   Compiling rustc-hash v2.1.3
+   Compiling anyhow v1.0.104
+   Compiling guardian v1.3.0
+   Compiling unicode-bidi v0.3.18
+   Compiling stringprep v0.1.5
+   Compiling tokio-stream v0.1.19
+   Compiling ppv-lite86 v0.2.21
+   Compiling rand v0.10.3
+   Compiling rand_core v0.9.5
+   Compiling atoi v2.0.0
+   Compiling futures-intrusive v0.5.0
+   Compiling quote-use-macros v0.9.0
+   Compiling manyhow-macros v0.14.1
+   Compiling hmac v0.13.0
+   Compiling itertools v0.14.0
+   Compiling http-body v1.1.0
+   Compiling reactive_stores_macro v0.4.4
+   Compiling tachys v0.2.19
+   Compiling thiserror-impl v1.0.69
+   Compiling pin-project-internal v1.1.13
+   Compiling bitflags v2.13.2
+   Compiling html-escape v0.2.15
+   Compiling hex v0.4.3
+   Compiling same-file v1.0.6
+   Compiling byteorder v1.5.0
+   Compiling whoami v2.1.3
+   Compiling dotenvy v0.15.7
+   Compiling winnow v1.0.4
+   Compiling prettyplease v0.3.0
+   Compiling pin-project v1.1.13
+   Compiling walkdir v2.5.0
+   Compiling sqlx-core v0.9.0
+   Compiling reactive_stores v0.4.4
+   Compiling toml_parser v1.1.5+spec-1.1.0
+   Compiling hkdf v0.13.0
+   Compiling manyhow v0.14.1
+   Compiling quote-use v0.9.0
+   Compiling gloo-utils v0.2.0
+   Compiling rand_chacha v0.9.0
+   Compiling either_of v0.1.9
+   Compiling md-5 v0.11.0
+   Compiling sha2 v0.11.1
+   Compiling server_fn v0.8.13
+   Compiling oco_ref v0.2.1
+   Compiling async-trait v0.1.92
+   Compiling aho-corasick v1.1.5
+   Compiling next_tuple v0.1.0
+   Compiling tower-service v0.3.3
+   Compiling const_str_slice_concat v0.1.0
+   Compiling collection_literals v1.0.3
+   Compiling serde_spanned v1.1.2
+   Compiling regex-syntax v0.8.11
+   Compiling drain_filter_polyfill v0.1.3
+   Compiling interpolator v0.5.0
+   Compiling toml_datetime v1.1.2+spec-1.1.0
+   Compiling erased v0.1.2
+   Compiling regex-automata v0.4.18
+   Compiling toml v1.1.8+spec-1.1.0
+   Compiling attribute-derive-macro v0.11.0
+   Compiling sqlx-postgres v0.9.0
+   Compiling rand v0.9.5
+   Compiling gloo-net v0.6.0
+   Compiling wasm-streams v0.5.0
+   Compiling server_fn_macro_default v0.8.6
+   Compiling convert_case v0.6.0
+   Compiling sha1 v0.10.7
+   Compiling serde_qs v0.15.0
+   Compiling leptos_macro v0.8.19
+   Compiling typed-builder-macro v0.23.2
+   Compiling const-str v1.1.0
+   Compiling inventory v0.3.25
+   Compiling httpdate v1.0.3
+   Compiling heck v0.5.0
+   Compiling atomic-waker v1.1.2
+   Compiling base64ct v1.8.3
+   Compiling tower-layer v0.3.3
+   Compiling base16 v0.2.1
+   Compiling data-encoding v2.11.1
+   Compiling sync_wrapper v1.0.2
+   Compiling pathdiff v0.2.3
+   Compiling config v0.15.27
+   Compiling tungstenite v0.29.0
+   Compiling wasm_split_macros v0.2.2
+   Compiling phc v0.6.1
+   Compiling typed-builder v0.23.2
+   Compiling hyper v1.12.0
+   Compiling sqlx-macros-core v0.9.0
+   Compiling leptos_hot_reload v0.8.7
+   Compiling attribute-derive v0.11.0
+   Compiling regex v1.13.1
+   Compiling http-body-util v0.1.5
+   Compiling codee v0.3.5
+   Compiling convert_case_extras v0.2.0
+   Compiling uuid v1.29.0
+   Compiling leptos v0.8.22
+   Compiling async-once-cell v0.5.4
+   Compiling mime v0.3.17
+   Compiling ryu v1.0.23
+   Compiling serde_urlencoded v0.7.1
+   Compiling axum-core v0.5.6
+   Compiling wasm_split_helpers v0.2.3
+   Compiling leptos_server v0.8.8
+   Compiling leptos_config v0.8.10
+   Compiling sqlx-macros v0.9.0
+   Compiling hyper-util v0.1.21
+   Compiling password-hash v0.6.1
+   Compiling tokio-tungstenite v0.29.0
+   Compiling leptos_dom v0.8.8
+   Compiling tower v0.5.3
+   Compiling blake2 v0.11.0
+   Compiling serde_path_to_error v0.1.20
+   Compiling rtoolbox v0.0.6
+   Compiling matchit v0.8.4
+   Compiling rpassword v7.5.4
+   Compiling axum v0.8.9
+   Compiling sqlx v0.9.0
+   Compiling argon2 v0.6.0
+   Compiling dotenv v0.15.0
+   Compiling chat-domain v0.2.43 (/home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/candidate/chat_apps/chat_domain)
+   Compiling shared v0.2.43 (/home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/candidate/crates/shared)
+   Compiling analytics-persistence v0.2.43 (/home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/candidate/analytics_apps/analytics_persistence)
+   Compiling analytics-server v0.2.43 (/home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/candidate/analytics_apps/analytics_server)
+warning: unused import: `analytics_persistence::summary_for_source`
+ --> analytics_server/src/pg_store.rs:1:5
+  |
+1 | use analytics_persistence::summary_for_source;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `analytics_persistence::summary_for_source`
+  --> analytics_server/src/lib.rs:12:5
+   |
+12 | use analytics_persistence::summary_for_source;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: `analytics-server` (lib) generated 2 warnings (run `cargo fix --lib -p analytics-server` to apply 2 suggestions)
+warning: function `app` is never used
+ --> analytics_server/tests/support/mod.rs:6:8
+  |
+6 | pub fn app(pool: sqlx::PgPool, chat: &str, pet: &str) -> axum::Router {
+  |        ^^^
+  |
+  = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `analytics-server` (test "day45_viewer") generated 1 warning
+    Finished `test` profile [unoptimized] target(s) in 51.35s
+     Running tests/day45_viewer.rs (work/candidate/analytics_apps/target/debug/deps/day45_viewer-597988ffd6f7c4bd)
+
+running 1 test
+test admin_creates_viewer_first_change_and_source_revoke_affects_same_session ... FAILED
+
+failures:
+
+---- admin_creates_viewer_first_change_and_source_revoke_affects_same_session stdout ----
+
+thread 'admin_creates_viewer_first_change_and_source_revoke_affects_same_session' (75232) panicked at /home/willie/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sqlx-postgres-0.9.0/src/testing/mod.rs:93:44:
+DATABASE_URL must be set: EnvVar(NotPresent)
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    admin_creates_viewer_first_change_and_source_revoke_affects_same_session
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `-p analytics-server --test day45_viewer`

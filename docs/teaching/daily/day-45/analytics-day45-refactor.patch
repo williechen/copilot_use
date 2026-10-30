@@ -1,0 +1,71 @@
+diff --git a/analytics_apps/analytics_persistence/src/lib.rs b/analytics_apps/analytics_persistence/src/lib.rs
+index 0239d2b..56fefdc 100644
+--- a/analytics_apps/analytics_persistence/src/lib.rs
++++ b/analytics_apps/analytics_persistence/src/lib.rs
+@@ -1,3 +1,4 @@
++pub mod login_session;
+ /// PostgreSQL 聚合查詢結果，供 JSON API 與 Leptos SSR 共用。
+ #[derive(Debug, serde::Serialize, sqlx::FromRow, PartialEq, Eq)]
+ pub struct EventSummary {
+diff --git a/analytics_apps/analytics_persistence/src/login_session.rs b/analytics_apps/analytics_persistence/src/login_session.rs
+new file mode 100644
+index 0000000..880d467
+--- /dev/null
++++ b/analytics_apps/analytics_persistence/src/login_session.rs
+@@ -0,0 +1,24 @@
++use sqlx::PgPool;
++
++pub type SessionRow = (bool, bool, String, String, String);
++
++/// The caller hashes the token; this adapter owns only the PostgreSQL lookup.
++pub async fn lookup(pool: &PgPool, token_hash: &str) -> Result<Option<SessionRow>, sqlx::Error> {
++    sqlx::query_as(
++        r#"SELECT s.restricted
++            ,u.is_init_pd
++            ,u.user_pd
++            ,s.credential_fingerprint
++            ,u.id 
++        FROM uac_login_session s 
++        JOIN uac_user u 
++            ON u.id=s.user_id 
++        WHERE s.token_hash=$1 
++            AND s.expires_at>floor(extract(epoch from now()))::bigint 
++            AND u.user_status='active' 
++            AND lower(u.user_acnt)='admin'"#,
++    )
++    .bind(token_hash)
++    .fetch_optional(pool)
++    .await
++}
+diff --git a/analytics_apps/analytics_server/src/password_login.rs b/analytics_apps/analytics_server/src/password_login.rs
+index 0a51803..3a6d662 100644
+--- a/analytics_apps/analytics_server/src/password_login.rs
++++ b/analytics_apps/analytics_server/src/password_login.rs
+@@ -142,24 +142,9 @@ async fn login(
+ // Recheck account status, mandatory-change state and password fingerprint on each protected request.
+ async fn session(state: &IngestState, headers: &HeaderMap) -> Result<(bool, String), StatusCode> {
+     let raw = raw_cookie(headers).ok_or(StatusCode::UNAUTHORIZED)?;
+-    let found: Option<(bool, bool, String, String, String)> = sqlx::query_as(
+-        r#"SELECT s.restricted
+-            ,u.is_init_pd
+-            ,u.user_pd
+-            ,s.credential_fingerprint
+-            ,u.id 
+-        FROM uac_login_session s 
+-        JOIN uac_user u 
+-            ON u.id=s.user_id 
+-        WHERE s.token_hash=$1 
+-            AND s.expires_at>floor(extract(epoch from now()))::bigint 
+-            AND u.user_status='active' 
+-            AND lower(u.user_acnt)='admin'"#,
+-    )
+-    .bind(digest(&raw))
+-    .fetch_optional(&state.pool)
+-    .await
+-    .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
++    let found = analytics_persistence::login_session::lookup(&state.pool, &digest(&raw))
++        .await
++        .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
+     let (restricted, must_change, current, fingerprint, id) =
+         found.ok_or(StatusCode::UNAUTHORIZED)?;
+     if digest(&current) != fingerprint {
