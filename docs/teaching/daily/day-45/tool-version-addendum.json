@@ -1,0 +1,12 @@
+{
+  "date": "2026-10-31 Asia/Taipei",
+  "node": {
+    "url": "https://nodejs.org/dist/index.json",
+    "latest_stable": "v26.13.0",
+    "lts": "Lithium",
+    "previous_test": "v22.22.1",
+    "isolated_binary": "work/tools/node-v26.13.0-linux-x64/bin/node"
+  },
+  "playwright": "1.64.1",
+  "pnpm": "12.16.1"
+}
