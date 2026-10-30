@@ -1,0 +1,46 @@
+{
+  "revision": "r2",
+  "same_day": 45,
+  "source_sha": "64eff527283fd05657841297879aefeaadd31f64",
+  "original_article_commit": "d7f44708e02ea805a61d6623c666f15b04fed362",
+  "supersedes_green": "analytics-day45-green.patch",
+  "current_green": "analytics-day45-green-r2.patch",
+  "apply_order": [
+    "source64eff527",
+    "analytics-day45-refactor.patch",
+    "analytics-day45-green-r2.patch"
+  ],
+  "never_apply_both_green_versions": true,
+  "role_table": "uac_role",
+  "page_table": "uac_acl",
+  "role_defaults": "uac_role_acl",
+  "independent_user_add_remove": "uac_user_acl: allow adds outside role defaults; deny overrides all roles including admin",
+  "commands": [
+    {
+      "command": "DATABASE_URL=<dedicated PG18.6 port55485> cargo test --manifest-path analytics_apps/Cargo.toml -p analytics-server --features postgres-integration --test day45_viewer --locked",
+      "exit": 101,
+      "log": "analytics-acl-red.log",
+      "result": "role Dashboard ACL removed but actual200 expected403"
+    },
+    {
+      "command": "DATABASE_URL=<dedicated PG18.6 port55485> CARGO_PROFILE_TEST_DEBUG=0 CARGO_PROFILE_DEV_DEBUG=0 CARGO_INCREMENTAL=0 cargo test --manifest-path analytics_apps/Cargo.toml -p analytics-server --features postgres-integration --locked --no-fail-fast",
+      "exit": 0,
+      "log": "analytics-effective-acl-final.log",
+      "passed": 60,
+      "ignored": 1
+    },
+    {
+      "command": "git apply --check analytics-day45-green-r2.patch on source+refactor",
+      "exit": 0
+    }
+  ],
+  "gate2": false,
+  "requirements_confirmation": "2026-10-31 current direct user messages: role differentiates; ACL pages; uac_user_acl independently adds/removes pages/functions",
+  "not_run": [
+    "real browser",
+    "role/user ACL management UI",
+    "actual old PG backup",
+    "realtime revoke",
+    "legacy ignored test"
+  ]
+}

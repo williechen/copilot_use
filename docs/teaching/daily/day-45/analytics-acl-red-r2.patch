@@ -1,0 +1,17 @@
+diff --git a/analytics_apps/analytics_server/tests/day45_viewer.rs b/analytics_apps/analytics_server/tests/day45_viewer.rs
+--- a/analytics_apps/analytics_server/tests/day45_viewer.rs
++++ b/analytics_apps/analytics_server/tests/day45_viewer.rs
+@@ -202,6 +202,13 @@
+     let page = send(app.clone(), "/dashboard", None, Some(&reader)).await;
+     assert_eq!(page.status(), StatusCode::OK);
+     assert!(body_text(page).await.contains("Pet 事件"));
++    // Page permissions are role->ACL, independent from source grants.
++    sqlx::query("DELETE FROM uac_role_acl WHERE role_id='analytics-viewer' AND acl_id='analytics-dashboard'").execute(&pool).await.unwrap();
++    assert_eq!(send(app.clone(),"/dashboard",None,Some(&reader)).await.status(),StatusCode::FORBIDDEN);
++    assert_eq!(send(app.clone(),"/api/v1/events/desktop_pet/summary",None,Some(&reader)).await.status(),StatusCode::OK);
++    sqlx::query("INSERT INTO uac_role_acl(role_id,acl_id,created_at) VALUES('analytics-viewer','analytics-dashboard',now())").execute(&pool).await.unwrap();
++    sqlx::query("INSERT INTO uac_user_acl(user_id,acl_id,acl_filter,created_at) SELECT id,'analytics-dashboard','deny',now() FROM uac_user WHERE user_acnt='reader'").execute(&pool).await.unwrap();
++    assert_eq!(send(app.clone(),"/dashboard",None,Some(&reader)).await.status(),StatusCode::FORBIDDEN);
+     sqlx::query("UPDATE uac_user SET user_status='disabled' WHERE user_acnt='reader'")
+         .execute(&pool)
+         .await
