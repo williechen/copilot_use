@@ -1,0 +1,75 @@
+{
+  "project": "analytics",
+  "day": 45,
+  "article_commit": "d7f44708e02ea805a61d6623c666f15b04fed362",
+  "source_sha": "64eff527283fd05657841297879aefeaadd31f64",
+  "readback": [
+    {
+      "path": "docs/teaching/daily/day-45/source-inventory.json",
+      "blob_sha": "52ca5116c5280bd0b5e522e9445ad7fd56706af9",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/teaching/daily/day-45/analytics-regression.log",
+      "blob_sha": "3771d7fff61c1ab6c2bcbd0e82d3979b56595229",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/teaching/daily/day-45/analytics-final.log",
+      "blob_sha": "f046dda909235c05f977ee25f26fcc66f87979fd",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/teaching/daily/day-45/analytics-validation.json",
+      "blob_sha": "37aebd0d6f5280b9d5337f04913330edc22540ba",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/teaching/daily/day-45/analytics.md",
+      "blob_sha": "80f13ea411a55ecd587e5f73df05d282d9579184",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/teaching/daily/day-45/analytics-final-journey.log",
+      "blob_sha": "38c37b8c522e3204b55ee08b2b8301a2dff9d447",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/teaching/daily/day-45/analytics-red-r2.log",
+      "blob_sha": "6aad0c30a03a00ef30a622e0ae500aab75667c5b",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/teaching/daily/day-45/analytics-day45-red.patch",
+      "blob_sha": "49563056ea083127569cca5ca168f3dadad1540c",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/teaching/daily/day-45/analytics-green.log",
+      "blob_sha": "bc351933b5918bde3d74f4197defd0e40b8342a6",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/teaching/daily/day-45/analytics-day45-refactor.patch",
+      "blob_sha": "186dcc173d9e000c4eb5776d58794c6f71f29c80",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/teaching/daily/day-45/analytics-day45-green.patch",
+      "blob_sha": "84b5faeb22ddb199179f2ed1c02f0c9822da8132",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/teaching/daily/day-45/analytics-red.log",
+      "blob_sha": "ad11f6796343b341c053ff3def4a3af17d2bf0c9",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/teaching/daily/day-45/pg-startup.log",
+      "blob_sha": "5be18cd10703cb1aed63e16baf7c622259c91fc7",
+      "full_text_equal": true
+    }
+  ],
+  "gate2": false,
+  "status": "r1 preserved; page ACL revision r2 in progress after direct user clarification; expected_next_day remains45"
+}
