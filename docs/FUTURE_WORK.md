@@ -127,3 +127,8 @@ presence、typing、reconnect／queue、streaming、RAG、MCP、Agent、Persona�
 [本輪Gate2實測、截圖與失敗重現](source-review/gate2-2026-10-31/README.md)。以上回填原功能，不新增Day／FIFO或以部分通過結案。
 
 [64eff52 SQL更新後最新回歸](source-review/gate2-sql-2026-10-31/README.md)：Pet112／Node12／WASM及四workspace metadata通過；舊native／browser證據仍屬2c7ff8b，完整Gate2未通過。
+
+<a id="scheduler-delivery"></a>
+## 教學排程：啟動成功但未交付
+
+2026-10-31既有雲端任務兩次手動執行均未建立Day45文章或commit；回合completed／error=null不等於交付成功。提示詞已保存、重新載入全文讀回且第二次收到相同內容，仍因來源／fixture核對未完成而提早結束，未提供具體工具錯誤。**未結案**：需真正完成逐案Gate1交付，或取得可處理的明確執行阻擋；不能把Gate2缺口推定為排程根因，不調整Day／FIFO。[診斷與原始結果](source-review/scheduler-2026-10-31/README.md)。

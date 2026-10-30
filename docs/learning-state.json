@@ -1,11 +1,11 @@
 {
   "schedule_document_policy": {
     "confirmed_at": "2026-10-23",
-    "previous_schedule_article": "Current concise article and actual cloud prompt consolidated 2026-10-26; original settings preserved.",
+    "previous_schedule_article": "Prior prompt preserved in deduplicated archive; original schedule/model/enabled fields unchanged",
     "current_document": "docs/teaching/scheduler-instructions-v1.md",
     "execution_rules": "latest docs/COMMON_LEARNING_RULES.md and direct user confirmations",
     "fixed_historical_lesson_prerequisite": false,
-    "actual_task_configuration": "Existing daily web task prompt saved and fresh-page full text verified 2026-10-26; schedule/model unchanged; see current_daily_schedule.",
+    "actual_task_configuration": "2026-10-31 existing cloud task prompt revised and full value verified after reload; retry received identical prompt but no Day45 delivery; see current_daily_schedule",
     "local_matching_automation_files": 0,
     "actual_tasks_modified": true,
     "historical_schedule_fields": "not evidence of current activation, timing, model or prompt",
@@ -486,5 +486,32 @@
     "actual_old_pg_backup_available": false,
     "manual_desktop_acceptance": false
   },
-  "latest_product_sha": "64eff527283fd05657841297879aefeaadd31f64"
+  "latest_product_sha": "64eff527283fd05657841297879aefeaadd31f64",
+  "current_daily_schedule": {
+    "date": "2026-10-31 Asia/Taipei",
+    "automation_id": "6acd967c15fc8191ade8407954c5b354",
+    "conversation_id": "6ae3c8aa-17f0-83ec-b9f1-70baeb1c74d9",
+    "name": "三專案每日 TDD 教學",
+    "enabled_verified": true,
+    "frequency": "daily",
+    "timezone": "Asia/Taipei",
+    "execution_environment": "cloud",
+    "schedule_time_model_enabled_unchanged_by_agent": true,
+    "saved_prompt_full_value_equal_after_reload": true,
+    "saved_prompt_sha256": "ef424f0d661c731e0673d0e54fd6ce67afc76ba7d48d52f26225e813507ed58f",
+    "saved_prompt_characters": 1579,
+    "initial_run_id": "2d0c8cf4-60ec-4e72-afcb-4d54c5b6389f",
+    "revised_run_id": "bdb51da4-ad08-41a2-9a37-5e024e41e234",
+    "revised_run_status": "completed",
+    "revised_run_error": null,
+    "revised_run_received_exact_saved_prompt": true,
+    "agent_result": "no Day45 articles or commits; missing source/fixture review cited without concrete tool error",
+    "delivery_recovered": false,
+    "infrastructure_root_cause_confirmed": false,
+    "next_day": {
+      "chat": 45,
+      "pet": 45,
+      "analytics": 45
+    }
+  }
 }

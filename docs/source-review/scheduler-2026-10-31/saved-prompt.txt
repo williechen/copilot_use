@@ -1,0 +1,17 @@
+這是需要立即完成並寫入GitHub的每日教學交付，不是現況檢查或摘要。每次執行先讀取最新learning-state與manifest取得各案next_day、待續紀錄及FIFO，再核對當次產品main；讀取足夠來源後，必須在同一回合接續撰寫、檢查、逐案提交及精確commit全文讀回。已發布的前一Day只作前置，不要再次停在前一Day檢查報告，也不要以「待續工作／尚待完成Day」取代本次實際交付。
+
+執行檢查點：Chat完成一篇合格完整文章與Refactor後，立即獨立提交、讀回、保存證據，再做Pet與Analytics；已交付部分要持久化，重試先去重。產品整體Gate2未通過不是文件Gate1的自動阻擋，應以最早缺失的必要功能為教學切片，仍須滿足既有Gate1規則。遇到真正讀寫權限、來源不足、工具錯誤或內容缺陷，先嘗試當次可用的等效工具；無法解決才記錄該工具、目標、原始錯誤、嘗試及已保存內容，繼續其他獨立案。不得用泛稱環境限制、沒有本地Rust或未完成整體Gate2作為提早結束理由；不得偽造提交或驗證。
+
+每日依Chat→Pet→Analytics交付TDD文章。先讀copilot_use/main的共用規則、需求、架構、learning-state、manifest、入口與上一篇，核對兩庫精確SHA及當日官方穩定版本，依目前next_day選功能，不固定Day或重複發布。
+
+每篇保留目標、完整Red／Green、版本與驗證，另設與Red／Green並列的「Refactor」獨立段落，只處理該篇所屬專案：Chat只寫Chat、Pet只寫Pet、Analytics只寫Analytics。依各案累積進度逐步整理自身架構、測試、fixture與專案CI，不限定當日功能切片，也不作Green後續的小整理。交代逐檔完整變更／patch、有效斷言承接、實際驗證與下一步；未完成如實記錄。
+
+全專案重構獨立集中於docs/engineering/README.md：跨案契約、共用crates、跨workspace依賴與全庫CI。不得混入各案Refactor或重複計功。
+
+開工先確認當次可用GitHub／網頁與執行工具。Gate1文件交付與Gate2產品驗收分開：沒有本地checkout、Rust/Cargo、DB、GUI或CI權限時，繼續用可用工具完成GitHub來源、官方穩定版本與相容限制、完整Red／Green／Refactor、patch接線及讀回，不要求使用者提供本地資訊，不單憑Gate2未跑阻止合格文件發布。真正程式／patch／文件缺陷仍須版本化修訂；無法驗證項明列未執行，不能把靜態hunk或舊SHA結果當實測。
+
+每案獨立commit到copilot_use/main，從精確commit全文讀回並保存blob／SHA256；重查parent與目前state，Gate1條件齊備後才依expected next_day條件同步學習狀態、manifest、七首頁及ENTRY。已同步不再加一；單案受阻繼續其他獨立案，衝突不得強制覆寫。修訂保留原文／歷史證據與FIFO，不增加Day，不更新last_full_comparison。
+
+只寫copilot_use/main；rust_ai_ring唯讀，完整產品變更由使用者套用。有執行工具才在隔離副本與測試DB驗證，保留真命令、exit、SHA與限制；不碰正式DB／秘密／付費AI。核心60分鐘只計Red／Green，Refactor與版本／驗證／交付另計。
+
+每次完成回報三案實際文章連結、commit、讀回／同步狀態、目前next_day、Gate1／Gate2與具體剩餘缺口。不要只交計畫或因環境不足停在籠統候選；中斷時保留已提交成果與單一待續記錄，避免重複提交。

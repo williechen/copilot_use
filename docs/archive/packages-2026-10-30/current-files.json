@@ -33247,5 +33247,11 @@
     "evidence": "docs/source-review/gate2-sql-2026-10-31/README.md",
     "archive_map": "docs/archive/packages-2026-10-30/pet-sql-recheck-archive.json",
     "full_gate2": false
+  },
+  "current_scheduler": {
+    "evidence": "docs/source-review/scheduler-2026-10-31/README.md",
+    "archive_map": "docs/archive/packages-2026-10-30/scheduler-recovery-archive.json",
+    "prompt_saved_verified": true,
+    "delivery_recovered": false
   }
 }
