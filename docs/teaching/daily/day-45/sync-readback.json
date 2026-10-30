@@ -1,0 +1,120 @@
+{
+  "sync_commit": "0c2c3864a13ae6c62c1f70809c090ecf02de25ed",
+  "exact_commit_full_readback": true,
+  "next_day": {
+    "chat": 46,
+    "pet": 46,
+    "analytics": 46
+  },
+  "gate1": true,
+  "gate2": false,
+  "files": [
+    {
+      "path": "docs/teaching/daily/day-45/delivery-verification.json",
+      "blob_sha": "5e5e239b3b1de1de434c64d0c9bf29213d51e496",
+      "full_text_equal": true,
+      "sha256": "c156f8ad250e26a9df741c9b0c73e88319975ef3e4694324bb53a367808f60b1"
+    },
+    {
+      "path": "docs/learning-state.json",
+      "blob_sha": "617d3ca8ccf49b92b4f2e6b9240ea6f05eb180c3",
+      "full_text_equal": true,
+      "sha256": "e58cbb5d6bd63162afb389f98d8132a8a55e834499acfb0174bc3d620d1af541"
+    },
+    {
+      "path": "docs/teaching/current/manifest.json",
+      "blob_sha": "a6b6f45d07fe3d67f9dd327602a353698e918f04",
+      "full_text_equal": true,
+      "sha256": "5ff51c9cac84bc81ec96e213dd78679284e1717bb7ca25e0fc823b99186da11a"
+    },
+    {
+      "path": "README.md",
+      "blob_sha": "32b3728e4e6b9c2b1249339fd0bad2cc6af26b14",
+      "full_text_equal": true,
+      "sha256": "4de168f22b60d4d90c15a9f226693fb039ef3e0cbf90dd1c0edcf0b2588d078a"
+    },
+    {
+      "path": "docs/README.md",
+      "blob_sha": "ab272d2e2de50e6679d42240b8723db047b852f8",
+      "full_text_equal": true,
+      "sha256": "85a755f799bd51d213476ffd6724a3d8453f472294a0c2c8f1eef217fa9b57bf"
+    },
+    {
+      "path": "docs/teaching/README.md",
+      "blob_sha": "6a30eccc63495abf09b239cdf722a8a94690a2c0",
+      "full_text_equal": true,
+      "sha256": "90a196b2e9cf58ab19b0b0ca409576d633a2ce8f32c0644a7d417658bacee4ce"
+    },
+    {
+      "path": "docs/teaching/daily/README.md",
+      "blob_sha": "2ab5e93b2c366d56c46f8240b5390c232ad0a06e",
+      "full_text_equal": true,
+      "sha256": "260a70f142845df3b84c10d0121821da5c459c4e093bb12a9100373f1a12bb1d"
+    },
+    {
+      "path": "docs/teaching/chat/README.md",
+      "blob_sha": "f4ff1c9f0a15e6a2a8fb0148a0d3139f1c095a12",
+      "full_text_equal": true,
+      "sha256": "35ac7c82bd5a020475f4ddb56d751ffefd0c89d707d6fdd0ac32521bfb372732"
+    },
+    {
+      "path": "docs/teaching/pet/README.md",
+      "blob_sha": "427a13c6af5bcb7def5a12d8dfa1cb5f62f622b6",
+      "full_text_equal": true,
+      "sha256": "2881306585f651d2ce1cf2019bca312904ec7ec1d4a04489713dc485b3b63c08"
+    },
+    {
+      "path": "docs/teaching/analytics/README.md",
+      "blob_sha": "67220c693ee9b998891c5efd119f478a6eb1632f",
+      "full_text_equal": true,
+      "sha256": "46247b84fd6f06405eecb9353e1a74db8f1848c0da84463afa1380a7520cd249"
+    },
+    {
+      "path": "docs/teaching/current/README.md",
+      "blob_sha": "45fc1d0786bcbd15fe3f2cf4f6819e3dbdb2582f",
+      "full_text_equal": true,
+      "sha256": "92f44b371b00921e0ef8b7c319e4d7a4e7f5912d71e6ddf0223e7c42fd3dfb00"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/ENTRY.md",
+      "blob_sha": "bdd3698a112b83601013210b52690b61e7c641e3",
+      "full_text_equal": true,
+      "sha256": "78b3f1b1f9dd024efc146278080036fdf46a3d5b7b0aae7f145ab9c7c24b5794"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/README.md",
+      "blob_sha": "2c0b9b01ed3dee8277c8bc2b3fb43708d1026b3b",
+      "full_text_equal": true,
+      "sha256": "b9ba3901643f4426dc49e8b6c88f55da8c713de44f1e7f5b8a80038ba9e13b96"
+    },
+    {
+      "path": "docs/teaching/current/STATUS.md",
+      "blob_sha": "d16cb91a1879b8be89517c2202a9b53778383925",
+      "full_text_equal": true,
+      "sha256": "e8c7c5b3262cda5a67157e01e57ef03003f09077972a6808c8a465ef9da499bf"
+    },
+    {
+      "path": "docs/teaching/functional-refactoring/PROGRESS.md",
+      "blob_sha": "b44169d3ea9c8a0e137369db2006b353ae3bb588",
+      "full_text_equal": true,
+      "sha256": "0afd484072e92c3999da3612f6ba5d61fc1dfbdf3c9b44ce80f924392b81c9b6"
+    },
+    {
+      "path": "docs/requirements/USER_FLOWS.md",
+      "blob_sha": "4ee4af206fc71080e9a2f40ee16c70fd2e64c379",
+      "full_text_equal": true,
+      "sha256": "22a4fe1b95afdfc656fb0e4e43eb23180e1e6c931dc96f9da44e31936ac048d3"
+    }
+  ],
+  "articles": {
+    "chat": "f9fbd13847106bff5f93f2439f5db63d5ef85fae",
+    "pet": "f4b4fb7fe050bbb491979cb64ff0b6d9abcedc32",
+    "analytics_r1": "d7f44708e02ea805a61d6623c666f15b04fed362",
+    "analytics_current_r2": "e974d5e18799f0dd2ceef159f4ac0133aaa31070"
+  },
+  "fifo_unchanged": true,
+  "last_full_comparison_unchanged": true,
+  "product_main": "64eff527283fd05657841297879aefeaadd31f64",
+  "publication_status": "complete; no pending document delivery",
+  "product_adoption": "not applied; user applies patches; remaining Gate2 gaps in articles and STATUS"
+}
