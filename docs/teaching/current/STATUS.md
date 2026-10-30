@@ -23,6 +23,8 @@ next_day三案45、FIFO及last_full_comparison=`2026-10-16T22:47:14.399027+08:00
 | --- | --- | --- |
 | Chat | 排除名單與WS重查、Session Adapter；server lib30通過 | 真WS／瀏覽器撤銷、私人房管理及授權交易競態 |
 | Pet | 200×200生活畫布、pose模組；UI11／六pose DOM通過 | 正式Tauri三窗逐ID、實機／縮放、正式WASM重建 |
-| Analytics | viewer旅程、role預設／ACL／人員獨立加減、PG Session Adapter；真PG60通過、1legacy ignored | 瀏覽器、角色／個人ACL管理UI、實際舊PG／即時縮權 |
+| Analytics | viewer旅程、category→page→action CRUD、role預設／人員獨立加減、PG Session Adapter；真PG62通過、1legacy ignored | 瀏覽器、角色／個人ACL管理UI、實際舊PG／即時縮權 |
 
 這些是64eff527加候選patch的隔離結果，並非產品main新commit或完整Gate2。詳見[文章與證據](../daily/day-45/ENTRY.md)。
+
+Analytics階層修訂候選另驗page-only禁止create、獨立CRUD授權、父節點停用／deny與損壞階層拒絕；刪除API尚未實作，真Router仍405。[本次精確讀回](../daily/day-45/publication-r3.json)。

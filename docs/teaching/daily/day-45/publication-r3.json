@@ -1,0 +1,126 @@
+{
+  "revision": "analytics-day45-r3",
+  "article_commit": "44402c7aa1e891970fce4c2480115be1562d5cb4",
+  "source_sha": "64eff527283fd05657841297879aefeaadd31f64",
+  "readback_verified_at": "2026-10-31T07:54:45.229614+08:00",
+  "exact_commit_full_readback": true,
+  "files": [
+    {
+      "path": "docs/teaching/daily/day-45/analytics-r3.md",
+      "blob_sha": "3b0e9c0e8aed47717b3875509b2873706b08d3e8",
+      "full_text_equal": true,
+      "sha256": "1eabe96c9ea93bd88d210c1d1e83d87903a9865d4d68160e68f2f756e1c7bc91"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/analytics-hierarchy-red.log",
+      "blob_sha": "6c062d7e8227bc99098c1090a40f6513d360485e",
+      "full_text_equal": true,
+      "sha256": "47f0d2f98254deadf8a04a6c5a5b4e5d3c8f9e8a3ff3b8b540f79e7e81be1e83"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/analytics-hierarchy-green.log",
+      "blob_sha": "4e5812eaa851ece8c13005ae6c15f2ca2f2f5489",
+      "full_text_equal": true,
+      "sha256": "bdbda3b4b4d1e8476d7d559c1ec2d4d6cc611db5f08cf98859d4e57386369773"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/analytics-hierarchy-red-r3.patch",
+      "blob_sha": "23ac547b4e6c3083716708b4976b0aa8e34d9b92",
+      "full_text_equal": true,
+      "sha256": "96514b91e7d34a54a90c5cf4e7673363537d3772e927e34987c3cafaa5554688"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/analytics-validation-r3.json",
+      "blob_sha": "d8bdec072daccc4ad04467b473c7a41c9a6b3e6a",
+      "full_text_equal": true,
+      "sha256": "4f9c4b627a6dfd20474a2e821f1a9d0b729b745afa887119c0f2a4b1b3e8d2a0"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/analytics-hierarchy-final.log",
+      "blob_sha": "8a41d55d2442bb260dfdd84b64f2fa7b30f2b607",
+      "full_text_equal": true,
+      "sha256": "43ee9564791d94566a616868c6927f244778b92e3875ec642c8e7715ced81ef1"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/analytics-hierarchy-regression.log",
+      "blob_sha": "9d762047cdb90f664d8f8bd53c7db9599322c41c",
+      "full_text_equal": true,
+      "sha256": "9ae71bde6864292999f137bec6e1cd371d5d7620c5667d908a659e44350e0786"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/analytics-versions-r3.json",
+      "blob_sha": "dfafb8b73880810709a1e57a7fbf8eabb6d58a9e",
+      "full_text_equal": true,
+      "sha256": "6514b1082da0bb333c95881fdac90cc6ba4cc42ea0f473a988a34e47009e029c"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/analytics-ci-r3.json",
+      "blob_sha": "d540b4af02b5f892eb8accade52bffa3f09c35c1",
+      "full_text_equal": true,
+      "sha256": "4e20d3a39a24bf81fafaa4f7f12b175b28bd3d96287adc96ce2e2864d4628131"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/analytics-day45-green-r3.patch",
+      "blob_sha": "d5de624214f296ed919bea94a99dcfcfe45cf8f7",
+      "full_text_equal": true,
+      "sha256": "6b2422a9140d114b42a8154373eeddcea478668dac0867d4574f0a2a062f82bc"
+    },
+    {
+      "path": "docs/requirements/ANALYTICS_ACL.md",
+      "blob_sha": "6d798455f506d97ecffe5c75821dc9f451c684a4",
+      "full_text_equal": true,
+      "sha256": "56b95f7db504e06cb9e8a8432bf0181a356be0b9a2ab163faf2b141a88f14b6b"
+    },
+    {
+      "path": "docs/requirements/USER_FLOWS.md",
+      "blob_sha": "c6e56e9df88ac5115882aa84db61629424d7f139",
+      "full_text_equal": true,
+      "sha256": "c5233086b591c3e8c9e67fc44fcb6249c07c601e1070dadd323188857e041dfd"
+    },
+    {
+      "path": "docs/SYSTEM_ARCHITECTURE.md",
+      "blob_sha": "d693575d32cf4fd6993587fbfd8b247f901e55e6",
+      "full_text_equal": true,
+      "sha256": "28ea274c516354541add3dbe08292e0145c0173d5c8bf656267ed5204fa62a7f"
+    }
+  ],
+  "gate1": true,
+  "gate2": false,
+  "product_applied": false,
+  "expected_next_day": {
+    "chat": 46,
+    "pet": 46,
+    "analytics": 46
+  },
+  "resulting_next_day": {
+    "chat": 46,
+    "pet": 46,
+    "analytics": 46
+  },
+  "day_advance": false,
+  "fifo_changed": false,
+  "last_full_comparison_changed": false,
+  "previous_article": "analytics-r2.md",
+  "previous_article_commit": "e974d5e18799f0dd2ceef159f4ac0133aaa31070",
+  "category": [
+    "會員管理",
+    "資訊分析",
+    "認證管理"
+  ],
+  "hierarchy": [
+    "category",
+    "page",
+    "action"
+  ],
+  "action_semantics": [
+    "create",
+    "read",
+    "update",
+    "delete"
+  ],
+  "expected_sync_parent": "44402c7aa1e891970fce4c2480115be1562d5cb4",
+  "expected_state_blobs": {
+    "docs/learning-state.json": "617d3ca8ccf49b92b4f2e6b9240ea6f05eb180c3",
+    "docs/teaching/current/manifest.json": "a6b6f45d07fe3d67f9dd327602a353698e918f04"
+  }
+}

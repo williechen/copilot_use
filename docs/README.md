@@ -6,6 +6,6 @@
 
 目前教學：Day45三案獨立發布與全文讀回完成，next_day三案46。
 
-[Day45 ENTRY](teaching/daily/day-45/ENTRY.md) · [Chat](teaching/daily/day-45/chat.md) · [Pet](teaching/daily/day-45/pet.md) · [Analytics r2](teaching/daily/day-45/analytics-r2.md) · [讀回證據](teaching/daily/day-45/delivery-verification.json)
+[Day45 ENTRY](teaching/daily/day-45/ENTRY.md) · [Chat](teaching/daily/day-45/chat.md) · [Pet](teaching/daily/day-45/pet.md) · [Analytics r3](teaching/daily/day-45/analytics-r3.md) · [讀回證據](teaching/daily/day-45/delivery-verification.json)
 
 [manifest](teaching/current/manifest.json) · [learning-state](learning-state.json) · [各案Refactor](teaching/functional-refactoring/PROGRESS.md) · [跨案工程](engineering/README.md) · [歷史分包](archive/README.md)

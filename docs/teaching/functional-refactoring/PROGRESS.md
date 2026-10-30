@@ -20,6 +20,8 @@
 
 - Chat：Session lookup移到同案persistence；既有Cookie／CSRF／停用／撤銷斷言保留，候選server lib30通過。
 - Pet：pose投影與四組原斷言移出activity元件；候選UI11通過。
-- Analytics：Session PG lookup移到同案persistence；原密碼／Session／CSV／Logout斷言保留，候選PG全套60通過、1legacy ignored。
+- Analytics：Session PG lookup移到同案persistence；原密碼／Session／CSV／Logout斷言保留，候選PG全套62通過、1legacy ignored。
 
 各案完整逐檔內容見[現行文章](../daily/day-45/ENTRY.md)，不抵算G-01／G-02，不更新last_full_comparison。角色頁面ACL及個人加減屬Analytics功能Green，沒有重複算作Refactor。
+
+Analytics r3的category→page→action及CRUD為功能Green修訂；獨立Session Adapter重構沿用，不增加Refactor完成數。

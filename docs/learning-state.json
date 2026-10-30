@@ -416,11 +416,11 @@
   "current_article_paths": {
     "chat": "docs/teaching/daily/day-45/chat.md",
     "pet": "docs/teaching/daily/day-45/pet.md",
-    "analytics": "docs/teaching/daily/day-45/analytics-r2.md"
+    "analytics": "docs/teaching/daily/day-45/analytics-r3.md"
   },
   "teaching_progress": {
     "last_published_day": 45,
-    "last_publication_status": "Day45 independent publications and exact readback complete; program patches not applied",
+    "last_publication_status": "Day45 Analytics r3: category-page-action and CRUD authority revision published/read back; no Day increment; candidate not applied",
     "next_day": {
       "chat": 46,
       "pet": 46,
@@ -520,7 +520,7 @@
       "articles": {
         "chat": "docs/teaching/daily/day-45/chat.md",
         "pet": "docs/teaching/daily/day-45/pet.md",
-        "analytics": "docs/teaching/daily/day-45/analytics-r2.md"
+        "analytics": "docs/teaching/daily/day-45/analytics-r3.md"
       }
     }
   },
@@ -592,13 +592,13 @@
       {
         "project": "analytics",
         "day": 45,
-        "revision": "r2",
-        "article_path": "docs/teaching/daily/day-45/analytics-r2.md",
-        "article_commit": "e974d5e18799f0dd2ceef159f4ac0133aaa31070",
-        "blob_sha": "82ff49033620fc0da14a178ebadca183d81e9484",
-        "sha256": "67412dc6a6fa3791a84a782a366df73144964964cda41c54886d41fe7879a88d",
+        "revision": "r3",
+        "article_path": "docs/teaching/daily/day-45/analytics-r3.md",
+        "article_commit": "44402c7aa1e891970fce4c2480115be1562d5cb4",
+        "blob_sha": "3b0e9c0e8aed47717b3875509b2873706b08d3e8",
+        "sha256": "1eabe96c9ea93bd88d210c1d1e83d87903a9865d4d68160e68f2f756e1c7bc91",
         "source_sha": "64eff527283fd05657841297879aefeaadd31f64",
-        "publication_status": "published_gate1_document",
+        "publication_status": "published_revision_gate1_document",
         "gate1_complete": true,
         "gate2": false,
         "functional_acceptance": false,
@@ -606,10 +606,10 @@
         "exact_commit_readback": true,
         "remote_full_text_equal": true,
         "refactor_patch": "docs/teaching/daily/day-45/analytics-day45-refactor.patch",
-        "green_patch": "docs/teaching/daily/day-45/analytics-day45-green-r2.patch",
-        "red_patch": "docs/teaching/daily/day-45/analytics-day45-red.patch",
-        "evidence": "docs/teaching/daily/day-45/delivery-verification.json",
-        "expected_next_day": 45,
+        "green_patch": "docs/teaching/daily/day-45/analytics-day45-green-r3.patch",
+        "red_patch": "docs/teaching/daily/day-45/analytics-hierarchy-red-r3.patch",
+        "evidence": "docs/teaching/daily/day-45/publication-r3.json",
+        "expected_next_day": 46,
         "storage": "raw_latest_pending_product_application",
         "version_msrv_gate_complete": true,
         "original_publication": {
@@ -695,10 +695,47 @@
             }
           ]
         },
-        "user_acl_semantics": "role defaults plus independent per-user allow; explicit user deny wins, including administrator"
+        "user_acl_semantics": "role defaults plus independent per-user allow; explicit user deny wins, including administrator",
+        "red_baseline": "source + original Refactor + r2 Green candidate",
+        "validation": "docs/teaching/daily/day-45/analytics-validation-r3.json",
+        "day_advance": false,
+        "acl_hierarchy": [
+          "category",
+          "page",
+          "action"
+        ],
+        "acl_categories": [
+          "會員管理",
+          "資訊分析",
+          "認證管理"
+        ],
+        "actions": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ],
+        "previous_revision": {
+          "revision": "r2",
+          "article_path": "docs/teaching/daily/day-45/analytics-r2.md",
+          "article_commit": "e974d5e18799f0dd2ceef159f4ac0133aaa31070",
+          "blob_sha": "82ff49033620fc0da14a178ebadca183d81e9484",
+          "sha256": "67412dc6a6fa3791a84a782a366df73144964964cda41c54886d41fe7879a88d"
+        }
       }
     ],
-    "pending_publication": null
+    "pending_publication": null,
+    "revisions": [
+      {
+        "project": "analytics",
+        "day": 45,
+        "revision": "r3",
+        "article_commit": "44402c7aa1e891970fce4c2480115be1562d5cb4",
+        "evidence": "docs/teaching/daily/day-45/publication-r3.json",
+        "day_advance": false
+      }
+    ]
   },
-  "candidate_validation": "docs/teaching/daily/day-45/delivery-verification.json"
+  "candidate_validation": "docs/teaching/daily/day-45/delivery-verification.json",
+  "latest_revision_evidence": "docs/teaching/daily/day-45/publication-r3.json"
 }

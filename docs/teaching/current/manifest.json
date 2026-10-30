@@ -61,13 +61,13 @@
     {
       "project": "analytics",
       "day": 45,
-      "revision": "r2",
-      "article_path": "docs/teaching/daily/day-45/analytics-r2.md",
-      "article_commit": "e974d5e18799f0dd2ceef159f4ac0133aaa31070",
-      "blob_sha": "82ff49033620fc0da14a178ebadca183d81e9484",
-      "sha256": "67412dc6a6fa3791a84a782a366df73144964964cda41c54886d41fe7879a88d",
+      "revision": "r3",
+      "article_path": "docs/teaching/daily/day-45/analytics-r3.md",
+      "article_commit": "44402c7aa1e891970fce4c2480115be1562d5cb4",
+      "blob_sha": "3b0e9c0e8aed47717b3875509b2873706b08d3e8",
+      "sha256": "1eabe96c9ea93bd88d210c1d1e83d87903a9865d4d68160e68f2f756e1c7bc91",
       "source_sha": "64eff527283fd05657841297879aefeaadd31f64",
-      "publication_status": "published_gate1_document",
+      "publication_status": "published_revision_gate1_document",
       "gate1_complete": true,
       "gate2": false,
       "functional_acceptance": false,
@@ -75,10 +75,10 @@
       "exact_commit_readback": true,
       "remote_full_text_equal": true,
       "refactor_patch": "docs/teaching/daily/day-45/analytics-day45-refactor.patch",
-      "green_patch": "docs/teaching/daily/day-45/analytics-day45-green-r2.patch",
-      "red_patch": "docs/teaching/daily/day-45/analytics-day45-red.patch",
-      "evidence": "docs/teaching/daily/day-45/delivery-verification.json",
-      "expected_next_day": 45,
+      "green_patch": "docs/teaching/daily/day-45/analytics-day45-green-r3.patch",
+      "red_patch": "docs/teaching/daily/day-45/analytics-hierarchy-red-r3.patch",
+      "evidence": "docs/teaching/daily/day-45/publication-r3.json",
+      "expected_next_day": 46,
       "storage": "raw_latest_pending_product_application",
       "version_msrv_gate_complete": true,
       "original_publication": {
@@ -164,13 +164,39 @@
           }
         ]
       },
-      "user_acl_semantics": "role defaults plus independent per-user allow; explicit user deny wins, including administrator"
+      "user_acl_semantics": "role defaults plus independent per-user allow; explicit user deny wins, including administrator",
+      "red_baseline": "source + original Refactor + r2 Green candidate",
+      "validation": "docs/teaching/daily/day-45/analytics-validation-r3.json",
+      "day_advance": false,
+      "acl_hierarchy": [
+        "category",
+        "page",
+        "action"
+      ],
+      "acl_categories": [
+        "會員管理",
+        "資訊分析",
+        "認證管理"
+      ],
+      "actions": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "previous_revision": {
+        "revision": "r2",
+        "article_path": "docs/teaching/daily/day-45/analytics-r2.md",
+        "article_commit": "e974d5e18799f0dd2ceef159f4ac0133aaa31070",
+        "blob_sha": "82ff49033620fc0da14a178ebadca183d81e9484",
+        "sha256": "67412dc6a6fa3791a84a782a366df73144964964cda41c54886d41fe7879a88d"
+      }
     }
   ],
   "current_article_paths": {
     "chat": "docs/teaching/daily/day-45/chat.md",
     "pet": "docs/teaching/daily/day-45/pet.md",
-    "analytics": "docs/teaching/daily/day-45/analytics-r2.md"
+    "analytics": "docs/teaching/daily/day-45/analytics-r3.md"
   },
   "current_status_document": "docs/teaching/current/STATUS.md",
   "current_validation": "docs/teaching/current/validation.json",
@@ -484,7 +510,116 @@
       "article_commit": "453ce46b6ada65f750eef194efa7a970b69bc122",
       "patch_base_sha": "7ce39f0166a2120539e5908b33c88322a930c35a",
       "patch_application": "historical reproduction; already adopted in current product; do not reapply"
+    },
+    {
+      "project": "analytics",
+      "day": 45,
+      "revision": "r2",
+      "article_path": "docs/teaching/daily/day-45/analytics-r2.md",
+      "article_commit": "e974d5e18799f0dd2ceef159f4ac0133aaa31070",
+      "blob_sha": "82ff49033620fc0da14a178ebadca183d81e9484",
+      "sha256": "67412dc6a6fa3791a84a782a366df73144964964cda41c54886d41fe7879a88d",
+      "source_sha": "64eff527283fd05657841297879aefeaadd31f64",
+      "publication_status": "published_gate1_document",
+      "gate1_complete": true,
+      "gate2": false,
+      "functional_acceptance": false,
+      "product_applied": false,
+      "exact_commit_readback": true,
+      "remote_full_text_equal": true,
+      "refactor_patch": "docs/teaching/daily/day-45/analytics-day45-refactor.patch",
+      "green_patch": "docs/teaching/daily/day-45/analytics-day45-green-r2.patch",
+      "red_patch": "docs/teaching/daily/day-45/analytics-day45-red.patch",
+      "evidence": "docs/teaching/daily/day-45/delivery-verification.json",
+      "expected_next_day": 45,
+      "storage": "raw_latest_pending_product_application",
+      "version_msrv_gate_complete": true,
+      "original_publication": {
+        "commit": "d7f44708e02ea805a61d6623c666f15b04fed362",
+        "readback": [
+          {
+            "path": "docs/teaching/daily/day-45/source-inventory.json",
+            "blob_sha": "52ca5116c5280bd0b5e522e9445ad7fd56706af9",
+            "full_text_equal": true,
+            "sha256": "932493f2f31459abde7a530114874a0e5949135a9e8606dd1a74eac9dd95b2d5"
+          },
+          {
+            "path": "docs/teaching/daily/day-45/analytics-regression.log",
+            "blob_sha": "3771d7fff61c1ab6c2bcbd0e82d3979b56595229",
+            "full_text_equal": true,
+            "sha256": "3b9eec3b174b3eacfff82eb668d217b901256ae732cf70fc3a4d0b69d3c9348d"
+          },
+          {
+            "path": "docs/teaching/daily/day-45/analytics-final.log",
+            "blob_sha": "f046dda909235c05f977ee25f26fcc66f87979fd",
+            "full_text_equal": true,
+            "sha256": "cd209a3700d2621f1dfa3df6782cd61b2bec1583929f935b71e1c8d00b9b23d9"
+          },
+          {
+            "path": "docs/teaching/daily/day-45/analytics-validation.json",
+            "blob_sha": "37aebd0d6f5280b9d5337f04913330edc22540ba",
+            "full_text_equal": true,
+            "sha256": "d008eeab20d09c9cb408e8237dcef40a2a64788a93b0b827fe7e05e799422be7"
+          },
+          {
+            "path": "docs/teaching/daily/day-45/analytics.md",
+            "blob_sha": "80f13ea411a55ecd587e5f73df05d282d9579184",
+            "full_text_equal": true,
+            "sha256": "6b66c85b4a46a3221c7c9594a10394cb94a33cbd6dc306a2372a203538ba90e9"
+          },
+          {
+            "path": "docs/teaching/daily/day-45/analytics-final-journey.log",
+            "blob_sha": "38c37b8c522e3204b55ee08b2b8301a2dff9d447",
+            "full_text_equal": true,
+            "sha256": "f77870932c5e288063b5a42440a5ff64f673c964608cc6ad80f06345ba9deda6"
+          },
+          {
+            "path": "docs/teaching/daily/day-45/analytics-red-r2.log",
+            "blob_sha": "6aad0c30a03a00ef30a622e0ae500aab75667c5b",
+            "full_text_equal": true,
+            "sha256": "e15581da7c849e6132bca680b766fbbcbb8aa7d12782d742b69199037dcd7c31"
+          },
+          {
+            "path": "docs/teaching/daily/day-45/analytics-day45-red.patch",
+            "blob_sha": "49563056ea083127569cca5ca168f3dadad1540c",
+            "full_text_equal": true,
+            "sha256": "afc7caff0ea39f6ecf6a5e89799bff4801b336ab6dd8b5d8674f19fe160d60be"
+          },
+          {
+            "path": "docs/teaching/daily/day-45/analytics-green.log",
+            "blob_sha": "bc351933b5918bde3d74f4197defd0e40b8342a6",
+            "full_text_equal": true,
+            "sha256": "ffeb2e0f2c7b64b679b00b00ff8bc9c0ffc83fe3e9ea260fb1b6421d2852f424"
+          },
+          {
+            "path": "docs/teaching/daily/day-45/analytics-day45-refactor.patch",
+            "blob_sha": "186dcc173d9e000c4eb5776d58794c6f71f29c80",
+            "full_text_equal": true,
+            "sha256": "ee96fc5f3af31fb42ccac54ec8b0c1e55f2ab4a212ab52cea52a6ded9baf8f4e"
+          },
+          {
+            "path": "docs/teaching/daily/day-45/analytics-day45-green.patch",
+            "blob_sha": "84b5faeb22ddb199179f2ed1c02f0c9822da8132",
+            "full_text_equal": true,
+            "sha256": "bb42fb22113310e2380eb3b70e9e258fc2682c296bb78735ece12bc2e40d85b8"
+          },
+          {
+            "path": "docs/teaching/daily/day-45/analytics-red.log",
+            "blob_sha": "ad11f6796343b341c053ff3def4a3af17d2bf0c9",
+            "full_text_equal": true,
+            "sha256": "e7fa66165c93fe750fd44d6f2125d2a383eb51e45bb2a9f6e5963bae391664eb"
+          },
+          {
+            "path": "docs/teaching/daily/day-45/pg-startup.log",
+            "blob_sha": "5be18cd10703cb1aed63e16baf7c622259c91fc7",
+            "full_text_equal": true,
+            "sha256": "db54101f24277918b7a0bdc60db98e4412c014681fa1de3f754449a2f5f9d0d9"
+          }
+        ]
+      },
+      "user_acl_semantics": "role defaults plus independent per-user allow; explicit user deny wins, including administrator"
     }
   ],
-  "candidate_validation": "docs/teaching/daily/day-45/delivery-verification.json"
+  "candidate_validation": "docs/teaching/daily/day-45/delivery-verification.json",
+  "latest_revision_evidence": "docs/teaching/daily/day-45/publication-r3.json"
 }
