@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-31",
+  "published_main": "3b13a5c1d3df3d2c4e91d942117c839f9919e353",
+  "source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
+  "full_gate2": false,
+  "articles": [
+    {
+      "project": "chat",
+      "commit": "4326d96e5731ab4e923c9b0d6d1b297bd669925e",
+      "blob_sha": "2ecbe050072393f779e5247e3e12c1b29f7f91ad",
+      "sha256": "a9582de15c9d0a0c5964af6b4baddd1fcb1282655e274670e0bb52b64d07b0e5",
+      "post_publication_full_text_equal": true
+    },
+    {
+      "project": "pet",
+      "commit": "1fac8f349823b672301c31cbf71f6af46f4c585b",
+      "blob_sha": "d51fabe93b30ed8a830e07684ee79a47d33042bc",
+      "sha256": "8b932f34cf1ee118ed528e868247c09b1484dbb5b297cad1675457856b106fe8",
+      "post_publication_full_text_equal": true
+    },
+    {
+      "project": "analytics",
+      "commit": "453ce46b6ada65f750eef194efa7a970b69bc122",
+      "blob_sha": "62a5b69cc900aec73ecc7f4b74b00773692b9b0f",
+      "sha256": "f6008a0691b808acaf68c57fdf82622f04d139eb947d18b77c93835d335b2166",
+      "post_publication_full_text_equal": true
+    }
+  ],
+  "method": "GitHub exact-commit complete file readback after main fast-forward; content equality and blob checked; SHA256 recorded from identical local bytes"
+}
