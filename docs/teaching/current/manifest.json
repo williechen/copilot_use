@@ -1,5 +1,5 @@
 {
-  "scope": "Gate2 2026-10-31 at2c7ff8b: native25, Chat browser11, Analytics browser11; prior Rust tests retain original SHA; full Gate2 incomplete",
+  "scope": "64eff52 Pet SQL followup: Rust112/Node12/WASM and four locked metadata passed; GUI/browser remain2c7ff8b; full Gate2 false",
   "publication_branch": "main",
   "source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
   "next_day": {
@@ -163,9 +163,9 @@
     {
       "project": "pet",
       "day": 44,
-      "revision": "gate2-functional-verification-2026-10-31",
+      "revision": "pet-sql-followup-2026-10-31",
       "article_path": "docs/teaching/daily/day-44/pet.md",
-      "source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
+      "source_sha": "64eff527283fd05657841297879aefeaadd31f64",
       "publication_status": "published_revision_full_gate2_incomplete",
       "gate1_complete": false,
       "functional_acceptance": false,
@@ -195,22 +195,23 @@
       },
       "superseded_archive": "docs/archive/packages-2026-10-30/08-pet-activity-contract-superseded-2026-10-30.zip",
       "version_msrv_gate_complete": false,
-      "revision_evidence": "docs/teaching/daily/day-44/gate2-delivery-2026-10-31.json",
+      "revision_evidence": "docs/teaching/daily/day-44/pet-sql-delivery-2026-10-31.json",
       "local_revision_content_complete": true,
       "previous_revision": {
-        "article_commit": "f98bcaf6eebe0acd9a1bfb3064be1abd55c0e4ab",
-        "blob_sha": "e573ae357d907a5b31f236b72e2c3d60ef98eba7",
-        "sha256": "b6dae1966d45dd9268860f40b3c582805115bbfae5fb8ccd4cc61a69156226ec",
-        "archive": "docs/archive/packages-2026-10-30/15-before-gate2-functional-acceptance-2026-10-31.zip"
+        "article_commit": "1fac8f349823b672301c31cbf71f6af46f4c585b",
+        "blob_sha": "d51fabe93b30ed8a830e07684ee79a47d33042bc",
+        "sha256": "8b932f34cf1ee118ed528e868247c09b1484dbb5b297cad1675457856b106fe8",
+        "archive": "docs/archive/packages-2026-10-30/16-before-pet-sql-recheck-2026-10-31.zip"
       },
-      "evidence": "docs/teaching/daily/day-44/gate2-delivery-2026-10-31.json",
+      "evidence": "docs/teaching/daily/day-44/pet-sql-delivery-2026-10-31.json",
       "base_activity_model_applied": true,
       "gate2_scope_status": "25 automated native functional checks passed; real desktop and OS-failure scopes incomplete",
-      "blob_sha": "d51fabe93b30ed8a830e07684ee79a47d33042bc",
-      "sha256": "8b932f34cf1ee118ed528e868247c09b1484dbb5b297cad1675457856b106fe8",
-      "remote_full_text_equal": true,
+      "native_automation_source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
+      "article_commit": "230c5f3208088047ec2b38d94c5497b02c9e408d",
+      "blob_sha": "e3a9abc073ecc64f63d2dfa74c354fdb118ce734",
+      "sha256": "5b8086e406dadf8ee95daaa11e761ede34c0b63164b50734699d18f085b92b7a",
       "exact_commit_readback": true,
-      "article_commit": "1fac8f349823b672301c31cbf71f6af46f4c585b"
+      "remote_full_text_equal": true
     },
     {
       "project": "analytics",
@@ -278,7 +279,7 @@
   "unverified_future_drafts": "retain raw; do not archive/delete based only on package presence",
   "pet_activity_contract": {
     "confirmed_by_user": true,
-    "source_product_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
+    "source_product_sha": "64eff527283fd05657841297879aefeaadd31f64",
     "out_of_cage": "EXISTS pet_activity with matching pet_id/owner_id AND is_activity=true",
     "caged": "no matching active activity",
     "activity_type_filter": null,
@@ -311,14 +312,18 @@
     "local_main_workspace_passed": 112,
     "local_main_node_passed": 12,
     "local_main_upgrade_verified": true,
-    "main_validation": "docs/source-review/pet-day44-adopted-2026-10-30/README.md",
+    "main_validation": "docs/source-review/gate2-sql-2026-10-31/README.md",
     "candidate_patch_archive": "docs/archive/packages-2026-10-30/14-pet-day44-before-adoption-2026-10-30.zip",
     "native_automation_functional_verified": true,
-    "native_automation_scope": "private Xvfb, real app/IPC, 25 checks; physical desktop not accepted"
+    "native_automation_scope": "private Xvfb, real app/IPC, 25 checks; physical desktop not accepted",
+    "native_automation_source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
+    "local_main_upgrade_source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097"
   },
   "current_gate2": {
-    "source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
+    "source_sha": "64eff527283fd05657841297879aefeaadd31f64",
     "complete": false,
-    "evidence": "docs/source-review/gate2-2026-10-31/README.md"
-  }
+    "evidence": "docs/source-review/gate2-sql-2026-10-31/README.md",
+    "native_browser_source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097"
+  },
+  "latest_product_sha": "64eff527283fd05657841297879aefeaadd31f64"
 }

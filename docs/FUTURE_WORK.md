@@ -125,3 +125,5 @@ presence、typing、reconnect／queue、streaming、RAG、MCP、Agent、Persona�
 [Pet 2c7ff8b採用後最新驗證](source-review/pet-day44-adopted-2026-10-30/README.md)；其他案測試保留原4b1008b來源，不追認新SHA。
 
 [本輪Gate2實測、截圖與失敗重現](source-review/gate2-2026-10-31/README.md)。以上回填原功能，不新增Day／FIFO或以部分通過結案。
+
+[64eff52 SQL更新後最新回歸](source-review/gate2-sql-2026-10-31/README.md)：Pet112／Node12／WASM及四workspace metadata通過；舊native／browser證據仍屬2c7ff8b，完整Gate2未通過。

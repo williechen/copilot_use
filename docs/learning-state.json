@@ -412,7 +412,7 @@
     "day_advance": false
   },
   "reference_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
-  "reference_scope": "Gate2 2026-10-31 at2c7ff8b: native25, Chat browser11, Analytics browser11; prior Rust tests retain original SHA; full Gate2 incomplete",
+  "reference_scope": "64eff52 Pet SQL followup: Rust112/Node12/WASM and four locked metadata passed; GUI/browser remain2c7ff8b; full Gate2 false",
   "current_article_paths": {
     "chat": "docs/teaching/daily/day-44/chat.md",
     "pet": "docs/teaching/daily/day-44/pet.md",
@@ -420,7 +420,7 @@
   },
   "teaching_progress": {
     "last_published_day": 44,
-    "last_publication_status": "Day44 Gate2 functional revision; Chat room exclusion failed, Analytics ACL unimplemented, physical desktop and actual old PG pending; no Day increment",
+    "last_publication_status": "Day44 Pet SQL regression revision; no Day increment; full Gate2 remains incomplete",
     "next_day": {
       "chat": 45,
       "pet": 45,
@@ -433,7 +433,7 @@
   "day44_draft_exists": false,
   "pet_activity_contract": {
     "confirmed_by_user": true,
-    "source_product_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
+    "source_product_sha": "64eff527283fd05657841297879aefeaadd31f64",
     "out_of_cage": "EXISTS pet_activity with matching pet_id/owner_id AND is_activity=true",
     "caged": "no matching active activity",
     "activity_type_filter": null,
@@ -466,10 +466,12 @@
     "local_main_workspace_passed": 112,
     "local_main_node_passed": 12,
     "local_main_upgrade_verified": true,
-    "main_validation": "docs/source-review/pet-day44-adopted-2026-10-30/README.md",
+    "main_validation": "docs/source-review/gate2-sql-2026-10-31/README.md",
     "candidate_patch_archive": "docs/archive/packages-2026-10-30/14-pet-day44-before-adoption-2026-10-30.zip",
     "native_automation_functional_verified": true,
-    "native_automation_scope": "private Xvfb, real app/IPC, 25 checks; physical desktop not accepted"
+    "native_automation_scope": "private Xvfb, real app/IPC, 25 checks; physical desktop not accepted",
+    "native_automation_source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
+    "local_main_upgrade_source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097"
   },
   "current_gate2": {
     "source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
@@ -483,5 +485,6 @@
     "analytics_roles_source_acl_implemented": false,
     "actual_old_pg_backup_available": false,
     "manual_desktop_acceptance": false
-  }
+  },
+  "latest_product_sha": "64eff527283fd05657841297879aefeaadd31f64"
 }

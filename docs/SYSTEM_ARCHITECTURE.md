@@ -1,6 +1,6 @@
 # 系統架構與責任
 
-唯一產品為 rust_ai_ring，文件與教學為 copilot_use。現行來源 `2c7ff8b861d32ab6d879bf80c9f2dce50de38097`；目錄與相依見 [SOURCE_LAYOUT](SOURCE_LAYOUT.md)。以下分層是教學／工程約束，不代表現有所有 handler 已完成搬層。
+唯一產品為 rust_ai_ring，文件與教學為 copilot_use。現行來源 `64eff527283fd05657841297879aefeaadd31f64`；目錄與相依見 [SOURCE_LAYOUT](SOURCE_LAYOUT.md)。以下分層是教學／工程約束，不代表現有所有 handler 已完成搬層。
 
 <a id="functional-layering"></a>
 
@@ -17,8 +17,10 @@ Delivery→Application→Domain；Adapter 實作內層 Port。Chat 已有 Reposi
 
 測試分純規則／用例、真 DB Adapter、正式 Router／IPC、UI、瀏覽器及 native；不同邊界的有效斷言保留。metadata／check 不替代 DB／GUI；CI 綠燈也不替代產品旅程驗收。待辦見 [FUTURE_WORK](FUTURE_WORK.md)，跨案工作只列 [engineering](engineering/README.md)。
 
-Pet活動模型已在main：目前籠態由pet_activity導出，預設沿用既有profile欄位；Application精確snapshot補償，Native與UI逐ID接線。資料舊標籤forward升級已在2c7ff8b並以主分支重驗112項，不新增欄位。native視覺旅程仍待驗；見[STATUS](teaching/current/STATUS.md)。
+Pet活動模型已在main：目前籠態由pet_activity導出，預設沿用既有profile欄位；Application精確snapshot補償，Native與UI逐ID接線。資料舊標籤forward升級已在2c7ff8b並以主分支重驗112項，不新增欄位。隔離native25步已在2c7ff8b通過，實體桌面仍待驗；見[STATUS](teaching/current/STATUS.md)。
 
 [Pet 2c7ff8b採用後最新驗證](source-review/pet-day44-adopted-2026-10-30/README.md)；既有Rust單元結果保留4b1008b來源；本輪2c7ff8b原生／瀏覽器新證據另列，不追認舊測試。
 
 [2026-10-31 Gate2原生／HTTP實測與已確認阻擋](source-review/gate2-2026-10-31/README.md)；目前完整Gate2=false，不以CI全綠替代逐房／角色授權或缺失的舊庫／實機證據。
+
+[64eff52 SQL更新後最新回歸](source-review/gate2-sql-2026-10-31/README.md)：Pet112／Node12／WASM及四workspace metadata通過；舊native／browser證據仍屬2c7ff8b，完整Gate2未通過。

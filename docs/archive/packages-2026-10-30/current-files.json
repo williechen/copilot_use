@@ -33243,9 +33243,9 @@
     "evidence": "docs/source-review/pet-day44-adopted-2026-10-30/README.md"
   },
   "current_gate2": {
-    "source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
-    "evidence": "docs/source-review/gate2-2026-10-31/README.md",
-    "archive_map": "docs/archive/packages-2026-10-30/gate2-2026-10-31-archive.json",
+    "source_sha": "64eff527283fd05657841297879aefeaadd31f64",
+    "evidence": "docs/source-review/gate2-sql-2026-10-31/README.md",
+    "archive_map": "docs/archive/packages-2026-10-30/pet-sql-recheck-archive.json",
     "full_gate2": false
   }
 }

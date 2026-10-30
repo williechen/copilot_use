@@ -1,0 +1,19 @@
+{
+  "date": "2026-10-31",
+  "source_sha": "64eff527283fd05657841297879aefeaadd31f64",
+  "evidence_commit": "0077efcda3a4fd20ef83be7b5117caa1b873eedb",
+  "article_commit": "230c5f3208088047ec2b38d94c5497b02c9e408d",
+  "article_path": "docs/teaching/daily/day-44/pet.md",
+  "blob_sha": "e3a9abc073ecc64f63d2dfa74c354fdb118ce734",
+  "sha256": "5b8086e406dadf8ee95daaa11e761ede34c0b63164b50734699d18f085b92b7a",
+  "exact_commit_readback": true,
+  "remote_full_text_equal": true,
+  "readback_phase": "complete immutable commit before main fast-forward",
+  "full_gate2": false,
+  "native_browser_source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
+  "next_day": {
+    "chat": 45,
+    "pet": 45,
+    "analytics": 45
+  }
+}

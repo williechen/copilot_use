@@ -9,3 +9,5 @@
 產品唯讀；Pet forward已採用，完整Gate2=false，next_day45／FIFO／last_full_comparison不變。
 
 [2026-10-31 Gate2實測：原生／瀏覽器已補，逐房ACL驗收失敗](../../../source-review/gate2-2026-10-31/README.md) · [本次三案獨立commit讀回](gate2-delivery-2026-10-31.json)
+
+[64eff52 SQL更新後最新回歸](../../../source-review/gate2-sql-2026-10-31/README.md)：Pet112／Node12／WASM及四workspace metadata通過；舊native／browser證據仍屬2c7ff8b，完整Gate2未通過。

@@ -1,6 +1,6 @@
 # 現行來源與目錄
 
-產品 `rust_ai_ring@2c7ff8b861d32ab6d879bf80c9f2dce50de38097`；本地 `/home/willie/Documents/rust_ai_ring`。根目錄沒有 Cargo.toml，必須使用各 workspace manifest。
+產品 `rust_ai_ring@64eff527283fd05657841297879aefeaadd31f64`；本地 `/home/willie/Documents/rust_ai_ring`。根目錄沒有 Cargo.toml，必須使用各 workspace manifest。
 
 | Workspace | package 版本 | 成員／package |
 | --- | --- | --- |
@@ -23,3 +23,5 @@ Analytics：analytics_server/src/main.rs／lib.rs；Leptos Dashboard、Axum HTTP
 [Pet 2c7ff8b採用後最新驗證](source-review/pet-day44-adopted-2026-10-30/README.md)；既有Rust單元結果保留4b1008b來源；本輪2c7ff8b原生／瀏覽器新證據另列，不追認舊測試。
 
 [2026-10-31 Gate2原生／HTTP實測與已確認阻擋](source-review/gate2-2026-10-31/README.md)；目前完整Gate2=false，不以CI全綠替代逐房／角色授權或缺失的舊庫／實機證據。
+
+[64eff52 SQL更新後最新回歸](source-review/gate2-sql-2026-10-31/README.md)：Pet112／Node12／WASM及四workspace metadata通過；舊native／browser證據仍屬2c7ff8b，完整Gate2未通過。

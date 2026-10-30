@@ -1,6 +1,6 @@
 # Day44｜目前教學與本地驗證
 
-產品唯讀`2c7ff8b861d32ab6d879bf80c9f2dce50de38097`；Pet forward已採用，主分支112項。Chat／Analytics結果維持4b1008b，不追認新SHA。完整Gate2未完成，保留現行文章原檔；next_day三案45不變。
+產品唯讀`64eff527283fd05657841297879aefeaadd31f64`；Pet forward已採用，主分支112項。Chat／Analytics Rust結果維持4b1008b，瀏覽器結果維持2c7ff8b，不追認新SHA。完整Gate2未完成，保留現行文章原檔；next_day三案45不變。
 
 | 專案 | 目前正文／附件 | 最後來源實測 |
 | --- | --- | --- |
@@ -13,3 +13,5 @@
 [Pet本輪採用驗證](../../../source-review/pet-day44-adopted-2026-10-30/README.md) · [Pet本輪讀回](pet-adoption-verification-2026-10-30.json)
 
 [2026-10-31 Gate2實測：原生／瀏覽器已補，逐房ACL驗收失敗](../../../source-review/gate2-2026-10-31/README.md) · [本次三案獨立commit讀回](gate2-delivery-2026-10-31.json)
+
+[64eff52 SQL更新後最新回歸](../../../source-review/gate2-sql-2026-10-31/README.md)：Pet112／Node12／WASM及四workspace metadata通過；舊native／browser證據仍屬2c7ff8b，完整Gate2未通過。

@@ -43,3 +43,5 @@
 ## Gate2實測更新前版本
 
 [第十五包](15-before-gate2-functional-acceptance-2026-10-31.zip)僅收錄被2026-10-31本輪替代且尚未封存的不同版本；[逐檔blob／SHA256／去重](gate2-2026-10-31-archive.json)。前十四包不變，歷史原文不回寫。[最新Gate2結果](../../source-review/gate2-2026-10-31/README.md)有成功、失敗及未執行，不當完整通過。
+
+[第16包：Pet SQL更新前現行版本](16-before-pet-sql-recheck-2026-10-31.zip)，只存尚未壓縮的相同路徑／內容版本；[映射](pet-sql-recheck-archive.json)。前15包不變。

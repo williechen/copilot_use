@@ -1,6 +1,6 @@
 # 本地啟動
 
-產品來源 `2c7ff8b861d32ab6d879bf80c9f2dce50de38097`。依產品 .env.example 在本機設定環境；不把秘密放入文件。Chat／Pet 使用各自 SQLite，Analytics 使用 PostgreSQL；SQLite URL 採明確絕對路徑，避免從不同 workspace 啟動連到另一份 DB。以下啟動會依程式執行 migration，驗收請用獨立資料副本。
+產品來源 `64eff527283fd05657841297879aefeaadd31f64`。依產品 .env.example 在本機設定環境；不把秘密放入文件。Chat／Pet 使用各自 SQLite，Analytics 使用 PostgreSQL；SQLite URL 採明確絕對路徑，避免從不同 workspace 啟動連到另一份 DB。以下啟動會依程式執行 migration，驗收請用獨立資料副本。
 
 | 專案 | 工作目錄 | 命令 | 入口 |
 | --- | --- | --- | --- |
@@ -17,3 +17,5 @@ Day44活動已在main。舊中文活動值的forward已在main；驗收migration
 [Pet 2c7ff8b採用後最新驗證](source-review/pet-day44-adopted-2026-10-30/README.md)；既有Rust單元結果保留4b1008b來源；本輪2c7ff8b原生／瀏覽器新證據另列，不追認舊測試。
 
 [2026-10-31 Gate2原生／HTTP實測與已確認阻擋](source-review/gate2-2026-10-31/README.md)；目前完整Gate2=false，不以CI全綠替代逐房／角色授權或缺失的舊庫／實機證據。
+
+[64eff52 SQL更新後最新回歸](source-review/gate2-sql-2026-10-31/README.md)：Pet112／Node12／WASM及四workspace metadata通過；舊native／browser證據仍屬2c7ff8b，完整Gate2未通過。
