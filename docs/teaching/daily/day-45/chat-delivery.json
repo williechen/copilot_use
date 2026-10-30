@@ -1,0 +1,80 @@
+{
+  "project": "chat",
+  "day": 45,
+  "article_commit": "f9fbd13847106bff5f93f2439f5db63d5ef85fae",
+  "expected_parent": "738aeab0e689ebcc9699d0555a598480c8cede46",
+  "source_sha": "64eff527283fd05657841297879aefeaadd31f64",
+  "readback": [
+    {
+      "path": "docs/teaching/daily/day-45/chat-behavior-red.log",
+      "blob_sha": "32a8c2ee82c775fa7550ec3109cdf2aaf1b2799e",
+      "full_text_equal": true,
+      "sha256": "2789d3e3e568d328b076ebea1efa0b710eb2fcd439b4c5df9b1f78aa8367bab7"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/chat-day45-refactor.patch",
+      "blob_sha": "392964cebb983ebf584e2dd1e11604cfb2d5bf2a",
+      "full_text_equal": true,
+      "sha256": "08a151e1f54a1eb49e42ee00216c6bea60d007b30a90ff90a1c0af791ce6eb78"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/chat-red.log",
+      "blob_sha": "8c4369efb9b43b25caa1ca770215f5230f3a57a8",
+      "full_text_equal": true,
+      "sha256": "45d13985daa8f9c06edf46b1c626959276e221dae4339a66d33e9c2f4d0605cc"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/chat-red-r2.log",
+      "blob_sha": "7ceb457b644fb0f8d1cf2e008616e54685b6c8cc",
+      "full_text_equal": true,
+      "sha256": "388f84f178a5ab372188704efa64e97f4b8851357f4d244b9c3fc7d56942014d"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/chat-day45-red.patch",
+      "blob_sha": "aeebc596c581af08d4e2eda6a436c66bf56305f5",
+      "full_text_equal": true,
+      "sha256": "b15ae06718e320feb02c2d8b1ece36bacd142b4c9ff76e98f966ee3f95f8fe96"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/chat-green-r2.log",
+      "blob_sha": "eb76d6b8b06af00ab637db64a8fbc7fe2f8522a3",
+      "full_text_equal": true,
+      "sha256": "b493212ca4ffdb9a1a0528fe94d5f49604af67227171345be4ece03d1aff38dd"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/chat-validation.json",
+      "blob_sha": "316b3b9ce04b3d7ee20146c6947363922407a68c",
+      "full_text_equal": true,
+      "sha256": "2316145c5bf65e0f5bb115c0245117f0ce45679ae28a1bfd923535104866f5a3"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/versions.json",
+      "blob_sha": "dfafb8b73880810709a1e57a7fbf8eabb6d58a9e",
+      "full_text_equal": true,
+      "sha256": "6514b1082da0bb333c95881fdac90cc6ba4cc42ea0f473a988a34e47009e029c"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/chat.md",
+      "blob_sha": "20156fb0aa34932adfebab2b554049d7be819cb4",
+      "full_text_equal": true,
+      "sha256": "50e9d98961f363c31943188a65df5feb489ce165fd033e6b573833336300eb31"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/chat-day45-green.patch",
+      "blob_sha": "d3de50b2bc95d116367c321779281fc064db51be",
+      "full_text_equal": true,
+      "sha256": "aac1dd2babfe03c019b1fdd2f33c9ee72f33aab006aab8735c7f64247e515771"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/product-ci.json",
+      "blob_sha": "135194c39214a1414aa48e268512ee3826a68418",
+      "full_text_equal": true,
+      "sha256": null
+    }
+  ],
+  "gate1_content_readback": true,
+  "gate2": false,
+  "expected_next_day": 45,
+  "state_sync": "pending final conditional synchronization",
+  "resume": "Chat already published; do not republish. Continue Pet then Analytics."
+}
