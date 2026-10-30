@@ -1,0 +1,110 @@
+{
+  "revision": "analytics-day45-r3",
+  "article_commit": "44402c7aa1e891970fce4c2480115be1562d5cb4",
+  "sync_commit": "40788c65d33a31d3eb8e1177bb9d2c05dbde4278",
+  "exact_commit_full_readback": true,
+  "gate1": true,
+  "gate2": false,
+  "product_applied": false,
+  "next_day": {
+    "chat": 46,
+    "pet": 46,
+    "analytics": 46
+  },
+  "day_advance": false,
+  "fifo_changed": false,
+  "last_full_comparison_changed": false,
+  "source_sha": "64eff527283fd05657841297879aefeaadd31f64",
+  "files": [
+    {
+      "path": "docs/teaching/daily/day-45/publication-r3.json",
+      "blob_sha": "94cece906e354af6e6ae2b348690c2d89e04bf9e",
+      "full_text_equal": true,
+      "sha256": "bc94170c70f8f15f57d61aa17f58a54d957384eed49d7c8aba2afeb1f602906f"
+    },
+    {
+      "path": "docs/learning-state.json",
+      "blob_sha": "f8d8bdedc10bc5e456c4011f4ffc199b9d91b447",
+      "full_text_equal": true,
+      "sha256": "3e9fe1ce385486c7c601cc3a291157152a5b64933d64e9849f57a3318bbfd15a"
+    },
+    {
+      "path": "docs/teaching/current/manifest.json",
+      "blob_sha": "270a2e1fbf86a832ccfcf36525c0fdef45abc7df",
+      "full_text_equal": true,
+      "sha256": "3bf809d496f70a62634022ff5d6201998cf8502e121fdb55755e2031440b2a6b"
+    },
+    {
+      "path": "README.md",
+      "blob_sha": "cb75119d8693373c7eac8dd2c10c7a02306e222a",
+      "full_text_equal": true,
+      "sha256": "acaceaf845f699af740d09bc5b8b0cc563166665c537335f535f49fd27a973d5"
+    },
+    {
+      "path": "docs/README.md",
+      "blob_sha": "efd6a68049e2a4335f77bb1f8660058f61aa2e15",
+      "full_text_equal": true,
+      "sha256": "0f9cd8e07ade19ff65c0d3d38713d8a1875d4a2a85694055c265d77232c05663"
+    },
+    {
+      "path": "docs/teaching/README.md",
+      "blob_sha": "63d732e3c923ab7f531860eb9f742db97b20e019",
+      "full_text_equal": true,
+      "sha256": "c1b45024370f2c450cf19d971e2fc02453892691bdb6d76160d18afc219afa2c"
+    },
+    {
+      "path": "docs/teaching/daily/README.md",
+      "blob_sha": "94352060496b11a383c7c1f08bde3f6a9a0d063a",
+      "full_text_equal": true,
+      "sha256": "0dabedc459a64323036817619f1c4184723756be22f3403cd2edcdf814354ee1"
+    },
+    {
+      "path": "docs/teaching/chat/README.md",
+      "blob_sha": "15ad2aebb20da21ebc0f88044f54b8b27fde9be5",
+      "full_text_equal": true,
+      "sha256": "a213ff5c93202cc7983270930c675d3a91b3faf79064a0334d505987b9783f74"
+    },
+    {
+      "path": "docs/teaching/pet/README.md",
+      "blob_sha": "42273d84a3eb776e6ad02ce4981f47814e35396b",
+      "full_text_equal": true,
+      "sha256": "7ea9e455a5d02fa5b2c860a72fa8847bc36699efb104d470aaeb39f4b1186a5e"
+    },
+    {
+      "path": "docs/teaching/analytics/README.md",
+      "blob_sha": "379afff65e33d0ef69b412ee5aa279abb6ab6ed8",
+      "full_text_equal": true,
+      "sha256": "3ec75261dcdb16f6e364cda6ce7cacfddabef62d56212fddc288ff41323f3a77"
+    },
+    {
+      "path": "docs/teaching/current/README.md",
+      "blob_sha": "6d0e5d7ba2c104b1ec52ce1a3372a8d471370179",
+      "full_text_equal": true,
+      "sha256": "97e2db3ed0e59e815e72220d8e0457afa3617e90a88cfae24bb2a4b49ff3bcfc"
+    },
+    {
+      "path": "docs/teaching/current/STATUS.md",
+      "blob_sha": "c6f85b6bcc91b8cc1761a12b0923f7bf16f11727",
+      "full_text_equal": true,
+      "sha256": "32dc2d882c99c1389ea58a934115451ec089524f472b99dfd02c06e38947e844"
+    },
+    {
+      "path": "docs/teaching/functional-refactoring/PROGRESS.md",
+      "blob_sha": "0b5f16f959f7d662312280f45613ac54038543b6",
+      "full_text_equal": true,
+      "sha256": "6c9e841d024b4caaa121294dfcec37f2ec7cfee64fe6f4e6b17895ec8cb9c1f8"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/ENTRY.md",
+      "blob_sha": "580a80c3b340e60ca321c4f0815a738921bfcf42",
+      "full_text_equal": true,
+      "sha256": "1f6848c8fa6d6084752b6cc0557886f032a95cc9e25e8480a0469a9c5693f9ae"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/README.md",
+      "blob_sha": "abb8708555f3eb6e59a256dfc2880888a697ced4",
+      "full_text_equal": true,
+      "sha256": "06333cced0a587026186cef74351d390a0ca656cd5e52250d308e47c875b8710"
+    }
+  ]
+}
