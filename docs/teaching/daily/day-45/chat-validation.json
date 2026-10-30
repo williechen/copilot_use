@@ -1,0 +1,51 @@
+{
+  "source_sha": "64eff527283fd05657841297879aefeaadd31f64",
+  "scope": "isolated candidate: source + refactor + green; not product main acceptance",
+  "commands": [
+    {
+      "command": "cargo fmt --manifest-path chat_apps/Cargo.toml",
+      "exit": 1,
+      "result": "virtual workspace requires --all; retried successfully with --all"
+    },
+    {
+      "command": "cargo test --manifest-path chat_apps/Cargo.toml -p chat-server --lib day45_tests --locked",
+      "exit": 101,
+      "log": "chat-red.log",
+      "result": "initial editing/compile errors, not behavior Red; fixed before publication"
+    },
+    {
+      "command": "cargo test --manifest-path chat_apps/Cargo.toml -p chat-server --lib day45_tests --locked",
+      "exit": 101,
+      "log": "chat-behavior-red.log",
+      "result": "fixture missing rooms.created_at; fixed, not behavior Red"
+    },
+    {
+      "command": "cargo test --manifest-path chat_apps/Cargo.toml -p chat-server --lib day45_tests --locked",
+      "exit": 101,
+      "log": "chat-red-r2.log",
+      "result": "genuine behavior Red: actual200 expected403"
+    },
+    {
+      "command": "cargo test --manifest-path chat_apps/Cargo.toml -p chat-server --lib --locked",
+      "exit": 0,
+      "log": "chat-green-r2.log",
+      "result": "30 passed"
+    },
+    {
+      "command": "git apply --check chat-day45-refactor.patch; git apply chat-day45-refactor.patch; git apply --check chat-day45-green.patch",
+      "exit": 0
+    }
+  ],
+  "gate2": false,
+  "not_run": [
+    "SSR/hydrate build",
+    "real WebSocket revoke/reconnect",
+    "browser journey",
+    "atomic authorization plus message persistence"
+  ],
+  "artifacts": {
+    "chat-day45-refactor.patch": "08a151e1f54a1eb49e42ee00216c6bea60d007b30a90ff90a1c0af791ce6eb78",
+    "chat-day45-red.patch": "b15ae06718e320feb02c2d8b1ece36bacd142b4c9ff76e98f966ee3f95f8fe96",
+    "chat-day45-green.patch": "aac1dd2babfe03c019b1fdd2f33c9ee72f33aab006aab8735c7f64247e515771"
+  }
+}

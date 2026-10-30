@@ -1,0 +1,186 @@
+{
+  "axum": {
+    "stable": "0.8.9",
+    "rust_version": "1.80",
+    "yanked": false,
+    "url": "https://crates.io/api/v1/crates/axum",
+    "checked_at": "2026-10-31 Asia/Taipei"
+  },
+  "leptos": {
+    "stable": "0.8.22",
+    "rust_version": "1.88",
+    "yanked": false,
+    "url": "https://crates.io/api/v1/crates/leptos",
+    "checked_at": "2026-10-31 Asia/Taipei"
+  },
+  "leptos_axum": {
+    "stable": "0.8.10",
+    "rust_version": "1.88",
+    "yanked": false,
+    "url": "https://crates.io/api/v1/crates/leptos_axum",
+    "checked_at": "2026-10-31 Asia/Taipei"
+  },
+  "leptos_config": {
+    "stable": "0.8.10",
+    "rust_version": "1.88",
+    "yanked": false,
+    "url": "https://crates.io/api/v1/crates/leptos_config",
+    "checked_at": "2026-10-31 Asia/Taipei"
+  },
+  "leptos_router": {
+    "stable": "0.8.17",
+    "rust_version": "1.88",
+    "yanked": false,
+    "url": "https://crates.io/api/v1/crates/leptos_router",
+    "checked_at": "2026-10-31 Asia/Taipei"
+  },
+  "sqlx": {
+    "stable": "0.9.0",
+    "rust_version": "1.94.0",
+    "yanked": false,
+    "url": "https://crates.io/api/v1/crates/sqlx",
+    "checked_at": "2026-10-31 Asia/Taipei"
+  },
+  "tokio": {
+    "stable": "1.54.1",
+    "rust_version": "1.85",
+    "yanked": false,
+    "url": "https://crates.io/api/v1/crates/tokio",
+    "checked_at": "2026-10-31 Asia/Taipei"
+  },
+  "uuid": {
+    "stable": "1.29.0",
+    "rust_version": "1.89.0",
+    "yanked": false,
+    "url": "https://crates.io/api/v1/crates/uuid",
+    "checked_at": "2026-10-31 Asia/Taipei"
+  },
+  "serde": {
+    "stable": "1.0.229",
+    "rust_version": "1.56",
+    "yanked": false,
+    "url": "https://crates.io/api/v1/crates/serde",
+    "checked_at": "2026-10-31 Asia/Taipei"
+  },
+  "serde_json": {
+    "stable": "1.0.154",
+    "rust_version": "1.71",
+    "yanked": false,
+    "url": "https://crates.io/api/v1/crates/serde_json",
+    "checked_at": "2026-10-31 Asia/Taipei"
+  },
+  "sha2": {
+    "stable": "0.11.1",
+    "rust_version": "1.88",
+    "yanked": false,
+    "url": "https://crates.io/api/v1/crates/sha2",
+    "checked_at": "2026-10-31 Asia/Taipei"
+  },
+  "argon2": {
+    "stable": "0.6.0",
+    "rust_version": "1.85",
+    "yanked": false,
+    "url": "https://crates.io/api/v1/crates/argon2",
+    "checked_at": "2026-10-31 Asia/Taipei"
+  },
+  "tower": {
+    "stable": "0.5.3",
+    "rust_version": "1.64.0",
+    "yanked": false,
+    "url": "https://crates.io/api/v1/crates/tower",
+    "checked_at": "2026-10-31 Asia/Taipei"
+  },
+  "tauri": {
+    "stable": "2.12.5",
+    "rust_version": "1.90",
+    "yanked": false,
+    "url": "https://crates.io/api/v1/crates/tauri",
+    "checked_at": "2026-10-31 Asia/Taipei"
+  },
+  "tauri-build": {
+    "stable": "2.7.4",
+    "rust_version": "1.90",
+    "yanked": false,
+    "url": "https://crates.io/api/v1/crates/tauri-build",
+    "checked_at": "2026-10-31 Asia/Taipei"
+  },
+  "async-trait": {
+    "stable": "0.1.92",
+    "rust_version": "1.71",
+    "yanked": false,
+    "url": "https://crates.io/api/v1/crates/async-trait",
+    "checked_at": "2026-10-31 Asia/Taipei"
+  },
+  "thiserror": {
+    "stable": "2.0.21",
+    "rust_version": "1.77",
+    "yanked": false,
+    "url": "https://crates.io/api/v1/crates/thiserror",
+    "checked_at": "2026-10-31 Asia/Taipei"
+  },
+  "libsqlite3-sys": {
+    "stable": "0.39.1",
+    "rust_version": "1.88.0",
+    "yanked": false,
+    "url": "https://crates.io/api/v1/crates/libsqlite3-sys",
+    "checked_at": "2026-10-31 Asia/Taipei"
+  },
+  "rpassword": {
+    "stable": "7.5.4",
+    "rust_version": "1.85",
+    "yanked": false,
+    "url": "https://crates.io/api/v1/crates/rpassword",
+    "checked_at": "2026-10-31 Asia/Taipei"
+  },
+  "chat_lock": {
+    "argon2": "0.6.0",
+    "async-trait": "0.1.92",
+    "axum": "0.8.9",
+    "leptos": "0.8.22",
+    "leptos_axum": "0.8.10",
+    "leptos_config": "0.8.10",
+    "leptos_router": "0.8.17",
+    "libsqlite3-sys": "0.37.0",
+    "serde": "1.0.229",
+    "serde_json": "1.0.154",
+    "sha2": "0.11.1",
+    "sqlx": "0.9.0",
+    "thiserror": "2.0.21",
+    "tokio": "1.54.1",
+    "tower": "0.5.3",
+    "uuid": "1.29.0"
+  },
+  "pet_lock": {
+    "async-trait": "0.1.92",
+    "leptos": "0.8.22",
+    "leptos_config": "0.8.10",
+    "libsqlite3-sys": "0.37.0",
+    "serde": "1.0.229",
+    "serde_json": "1.0.154",
+    "sha2": "0.11.1",
+    "sqlx": "0.9.0",
+    "tauri": "2.12.5",
+    "tauri-build": "2.7.4",
+    "thiserror": "2.0.21",
+    "tokio": "1.54.1",
+    "tower": "0.5.3",
+    "uuid": "1.29.0"
+  },
+  "analytics_lock": {
+    "argon2": "0.6.0",
+    "async-trait": "0.1.92",
+    "axum": "0.8.9",
+    "leptos": "0.8.22",
+    "leptos_config": "0.8.10",
+    "libsqlite3-sys": "0.37.0",
+    "rpassword": "7.5.4",
+    "serde": "1.0.229",
+    "serde_json": "1.0.154",
+    "sha2": "0.11.1",
+    "sqlx": "0.9.0",
+    "thiserror": "2.0.21",
+    "tokio": "1.54.1",
+    "tower": "0.5.3",
+    "uuid": "1.29.0"
+  }
+}

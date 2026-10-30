@@ -1,0 +1,57 @@
+diff --git a/chat_apps/chat_persistence/src/lib.rs b/chat_apps/chat_persistence/src/lib.rs
+index cc44d6d..e3a3c4e 100644
+--- a/chat_apps/chat_persistence/src/lib.rs
++++ b/chat_apps/chat_persistence/src/lib.rs
+@@ -1,3 +1,4 @@
++pub mod member_session;
+ use async_trait::async_trait;
+ use chat_application::repository::{MessageRepository, RepositoryError, RoomRepository};
+ use chat_domain::Room;
+diff --git a/chat_apps/chat_persistence/src/member_session.rs b/chat_apps/chat_persistence/src/member_session.rs
+new file mode 100644
+index 0000000..6725386
+--- /dev/null
++++ b/chat_apps/chat_persistence/src/member_session.rs
+@@ -0,0 +1,15 @@
++use sqlx::SqlitePool;
++
++/// SQLite adapter accepts a digest, never a raw bearer token or HTTP headers.
++pub async fn active_member_id(
++    pool: &SqlitePool,
++    digest: &str,
++) -> Result<Option<String>, sqlx::Error> {
++    sqlx::query_scalar(
++        "SELECT u.id FROM mbr_session s JOIN mbr_user u ON u.id=s.mbr_user_id
++         WHERE s.token_hash=?1 AND s.expires_at>unixepoch() AND u.user_status='active'",
++    )
++    .bind(digest)
++    .fetch_optional(pool)
++    .await
++}
+diff --git a/chat_apps/chat_server/src/auth_session.rs b/chat_apps/chat_server/src/auth_session.rs
+index b2ff414..80e0629 100644
+--- a/chat_apps/chat_server/src/auth_session.rs
++++ b/chat_apps/chat_server/src/auth_session.rs
+@@ -14,19 +14,9 @@ fn session_cookie(headers: &HeaderMap) -> Result<String, StatusCode> {
+ /// No plaintext bearer token is ever stored in SQLite.
+ pub async fn active_member(pool: &SqlitePool, headers: &HeaderMap) -> Result<String, StatusCode> {
+     let raw = session_cookie(headers)?;
+-    let member: Option<String> = sqlx::query_scalar(
+-        r#"SELECT u.id 
+-        FROM mbr_session s
+-        JOIN mbr_user u 
+-            ON u.id=s.mbr_user_id
+-        WHERE s.token_hash=?1 
+-          AND s.expires_at>unixepoch()
+-          AND u.user_status='active'"#,
+-    )
+-    .bind(token_digest(&raw))
+-    .fetch_optional(pool)
+-    .await
+-    .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
++    let member = chat_persistence::member_session::active_member_id(pool, &token_digest(&raw))
++        .await
++        .map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
+     member.ok_or(StatusCode::UNAUTHORIZED)
+ }
+ 

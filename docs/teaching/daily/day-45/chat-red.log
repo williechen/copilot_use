@@ -1,0 +1,354 @@
+    Blocking waiting for file lock on build directory
+warning: unused import: `crate::room_list_state::clear_room_search`
+  --> chat_ui/src/lib.rs:39:5
+   |
+39 | use crate::room_list_state::clear_room_search;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `room_heading` is never used
+   --> chat_ui/src/lib.rs:209:4
+    |
+209 | fn room_heading(id: &str, result: Result<String, String>) -> String {
+    |    ^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `clear_room_search` is never used
+  --> chat_ui/src/room_list_state.rs:55:15
+   |
+55 | pub(super) fn clear_room_search(loaded: bool, rows: &[(String, String)]) -> (String, String) {
+   |               ^^^^^^^^^^^^^^^^^
+
+warning: variants `SignedOut`, `SignedIn`, and `Unavailable` are never constructed
+ --> chat_ui/src/session_entry.rs:4:5
+  |
+2 | pub(super) enum SessionEntry {
+  |                 ------------ variants in this enum
+3 |     Checking,
+4 |     SignedOut,
+  |     ^^^^^^^^^
+5 |     SignedIn,
+  |     ^^^^^^^^
+6 |     Unavailable,
+  |     ^^^^^^^^^^^
+  |
+  = note: `SessionEntry` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis
+
+warning: `chat-ui` (lib) generated 4 warnings (run `cargo fix --lib -p chat-ui` to apply 1 suggestion)
+   Compiling chat-server v0.2.43 (/home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/candidate/chat_apps/chat_server)
+error[E0432]: unresolved import `super::socket_session_active`
+   --> chat_server/src/ws.rs:373:13
+    |
+373 |         use super::socket_session_active;
+    |             ^^^^^^^---------------------
+    |                    |
+    |                    no `socket_session_active` in `ws`
+
+error[E0432]: unresolved import `super::socket_session_active`
+   --> chat_server/src/ws.rs:405:13
+    |
+405 |         use super::socket_session_active;
+    |             ^^^^^^^---------------------
+    |                    |
+    |                    no `socket_session_active` in `ws`
+
+error[E0425]: cannot find function `authorize_socket` in this scope
+   --> chat_server/src/ws.rs:400:17
+    |
+400 |         assert!(authorize_socket(&pool, &headers, &room_id).await.is_err());
+    |                 ^^^^^^^^^^^^^^^^ not found in this scope
+    |
+help: consider importing this function
+    |
+261 +     use crate::ws::authorize_socket;
+    |
+
+error[E0425]: cannot find value `room_id` in this scope
+   --> chat_server/src/ws.rs:400:52
+    |
+400 |         assert!(authorize_socket(&pool, &headers, &room_id).await.is_err());
+    |                                                    ^^^^^^^ not found in this scope
+
+error[E0425]: cannot find function `authorize_socket` in this scope
+   --> chat_server/src/ws.rs:413:17
+    |
+413 |         assert!(authorize_socket(&pool, &headers, &room_id).await.is_err());
+    |                 ^^^^^^^^^^^^^^^^ not found in this scope
+    |
+help: consider importing this function
+    |
+261 +     use crate::ws::authorize_socket;
+    |
+
+error[E0425]: cannot find value `room_id` in this scope
+   --> chat_server/src/ws.rs:413:52
+    |
+413 |         assert!(authorize_socket(&pool, &headers, &room_id).await.is_err());
+    |                                                    ^^^^^^^ not found in this scope
+
+Some errors have detailed explanations: E0425, E0432.
+For more information about an error, try `rustc --explain E0425`.
+error: could not compile `chat-server` (lib test) due to 6 previous errors
+
+   Compiling unicode-xid v0.2.6
+   Compiling shlex v2.0.1
+   Compiling mime v0.3.17
+   Compiling konst_macro_rules v0.2.19
+   Compiling tower-service v0.3.3
+   Compiling find-msvc-tools v0.1.15
+   Compiling konst v0.2.20
+   Compiling cc v1.10.0
+   Compiling rand_chacha v0.9.0
+   Compiling const_format_proc_macros v0.2.37
+   Compiling url v2.5.8
+   Compiling event-listener-strategy v0.5.4
+   Compiling encoding_rs v0.8.42
+   Compiling reactive_graph v0.2.16
+   Compiling server_fn_macro v0.8.12
+   Compiling send_wrapper v0.6.0
+   Compiling httpdate v1.0.3
+   Compiling rstml v0.13.1
+   Compiling tower-layer v0.3.3
+   Compiling pkg-config v0.3.34
+   Compiling vcpkg v0.2.15
+   Compiling async-lock v3.4.2
+   Compiling const_format v0.2.37
+   Compiling rand v0.9.5
+   Compiling hydration_context v0.3.2
+   Compiling any_spawner v0.3.0
+   Compiling http-body-util v0.1.5
+   Compiling sha1 v0.10.7
+   Compiling derive-where v1.7.0
+   Compiling async-trait v0.1.92
+   Compiling multer v3.1.0
+   Compiling rustc-hash v2.1.3
+   Compiling camino v1.2.6
+   Compiling multiversion_no_op v1.0.0
+   Compiling atomic-waker v1.1.2
+   Compiling anyhow v1.0.104
+   Compiling guardian v1.3.0
+   Compiling crossbeam-utils v0.8.23
+   Compiling core_detect v1.0.0
+   Compiling sync_wrapper v1.0.2
+   Compiling simdutf8 v0.1.5
+   Compiling thiserror v1.0.69
+   Compiling xxhash-rust v0.8.19
+   Compiling data-encoding v2.11.1
+   Compiling tungstenite v0.29.0
+   Compiling hyper v1.12.0
+   Compiling quote-use-macros v0.9.0
+   Compiling manyhow-macros v0.14.1
+   Compiling itertools v0.14.0
+   Compiling reactive_stores_macro v0.4.4
+   Compiling tachys v0.2.19
+   Compiling thiserror-impl v1.0.69
+   Compiling pin-project-internal v1.1.13
+   Compiling ryu v1.0.23
+   Compiling foldhash v0.2.0
+   Compiling html-escape v0.2.15
+   Compiling autocfg v1.5.1
+   Compiling same-file v1.0.6
+   Compiling prettyplease v0.3.0
+   Compiling winnow v1.0.4
+   Compiling allocator-api2 v0.2.21
+   Compiling walkdir v2.5.0
+   Compiling hashbrown v0.16.1
+   Compiling pin-project v1.1.13
+   Compiling num-traits v0.2.19
+   Compiling serde_urlencoded v0.7.1
+   Compiling reactive_stores v0.4.4
+   Compiling manyhow v0.14.1
+   Compiling toml_parser v1.1.5+spec-1.1.0
+   Compiling quote-use v0.9.0
+   Compiling gloo-utils v0.2.0
+   Compiling hyper-util v0.1.21
+   Compiling tokio-tungstenite v0.29.0
+   Compiling axum-core v0.5.6
+   Compiling tower v0.5.3
+   Compiling either_of v0.1.9
+   Compiling server_fn v0.8.13
+   Compiling oco_ref v0.2.1
+   Compiling serde_path_to_error v0.1.20
+   Compiling aho-corasick v1.1.5
+   Compiling const_str_slice_concat v0.1.0
+   Compiling serde_spanned v1.1.2
+   Compiling matchit v0.8.4
+   Compiling collection_literals v1.0.3
+   Compiling regex-syntax v0.8.11
+   Compiling drain_filter_polyfill v0.1.3
+   Compiling next_tuple v0.1.0
+   Compiling interpolator v0.5.0
+   Compiling crc-catalog v2.5.0
+   Compiling toml_datetime v1.1.2+spec-1.1.0
+   Compiling erased v0.1.2
+   Compiling cmov v0.5.4
+   Compiling ctutils v0.4.6
+   Compiling toml v1.1.8+spec-1.1.0
+   Compiling crc v3.4.0
+   Compiling attribute-derive-macro v0.11.0
+   Compiling regex-automata v0.4.18
+   Compiling axum v0.8.9
+   Compiling crossbeam-queue v0.3.14
+   Compiling gloo-net v0.6.0
+   Compiling hashlink v0.11.1
+   Compiling wasm-streams v0.5.0
+   Compiling server_fn_macro_default v0.8.6
+   Compiling convert_case v0.6.0
+   Compiling serde_qs v0.15.0
+   Compiling hybrid-array v0.4.15
+   Compiling leptos_macro v0.8.19
+   Compiling typed-builder-macro v0.23.2
+   Compiling const-str v1.1.0
+   Compiling base16 v0.2.1
+   Compiling inventory v0.3.25
+   Compiling pathdiff v0.2.3
+   Compiling config v0.15.27
+   Compiling typed-builder v0.23.2
+   Compiling wasm_split_macros v0.2.2
+   Compiling leptos_hot_reload v0.8.7
+   Compiling regex v1.13.1
+   Compiling attribute-derive v0.11.0
+   Compiling libsqlite3-sys v0.37.0
+   Compiling convert_case_extras v0.2.0
+   Compiling uuid v1.29.0
+   Compiling codee v0.3.5
+   Compiling leptos v0.8.22
+   Compiling async-once-cell v0.5.4
+   Compiling wasm_split_helpers v0.2.3
+   Compiling leptos_server v0.8.8
+   Compiling tokio-stream v0.1.19
+   Compiling leptos_config v0.8.10
+   Compiling leptos_dom v0.8.8
+   Compiling atoi v2.0.0
+   Compiling futures-intrusive v0.5.0
+   Compiling crypto-common v0.2.2
+   Compiling block-buffer v0.12.1
+   Compiling const-oid v0.10.2
+   Compiling digest v0.11.3
+   Compiling sqlx-core v0.9.0
+   Compiling flume v0.12.0
+   Compiling leptos_router v0.8.17
+   Compiling unicase v2.10.0
+   Compiling sqlx-sqlite v0.9.0
+   Compiling mime_guess v2.0.5
+   Compiling chat-domain v0.2.43 (/home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/candidate/chat_apps/chat_domain)
+   Compiling leptos_router_macro v0.8.7
+   Compiling heck v0.5.0
+   Compiling dotenvy v0.15.7
+   Compiling hex v0.4.3
+   Compiling cpufeatures v0.3.1
+   Compiling sqlx-macros-core v0.9.0
+   Compiling base64ct v1.8.3
+   Compiling phc v0.6.1
+   Compiling sqlx-macros v0.9.0
+   Compiling sha2 v0.11.1
+   Compiling leptos_meta v0.8.7
+   Compiling tokio-util v0.7.20
+   Compiling http-range-header v0.4.2
+   Compiling bitflags v2.13.2
+   Compiling tower-http v0.6.11
+   Compiling sqlx v0.9.0
+   Compiling leptos_integration_utils v0.8.9
+   Compiling shared v0.2.43 (/home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/candidate/crates/shared)
+   Compiling password-hash v0.6.1
+   Compiling chat-application v0.2.43 (/home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/candidate/chat_apps/chat_application)
+   Compiling blake2 v0.11.0
+   Compiling chat-ui v0.2.43 (/home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/candidate/chat_apps/chat_ui)
+warning: unused import: `crate::room_list_state::clear_room_search`
+  --> chat_ui/src/lib.rs:39:5
+   |
+39 | use crate::room_list_state::clear_room_search;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+   Compiling argon2 v0.6.0
+warning: function `room_heading` is never used
+   --> chat_ui/src/lib.rs:209:4
+    |
+209 | fn room_heading(id: &str, result: Result<String, String>) -> String {
+    |    ^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `clear_room_search` is never used
+  --> chat_ui/src/room_list_state.rs:55:15
+   |
+55 | pub(super) fn clear_room_search(loaded: bool, rows: &[(String, String)]) -> (String, String) {
+   |               ^^^^^^^^^^^^^^^^^
+
+warning: variants `SignedOut`, `SignedIn`, and `Unavailable` are never constructed
+ --> chat_ui/src/session_entry.rs:4:5
+  |
+2 | pub(super) enum SessionEntry {
+  |                 ------------ variants in this enum
+3 |     Checking,
+4 |     SignedOut,
+  |     ^^^^^^^^^
+5 |     SignedIn,
+  |     ^^^^^^^^
+6 |     Unavailable,
+  |     ^^^^^^^^^^^
+  |
+  = note: `SessionEntry` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis
+
+   Compiling chat-persistence v0.2.43 (/home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/candidate/chat_apps/chat_persistence)
+   Compiling leptos_axum v0.8.10
+   Compiling dotenv v0.15.0
+warning: `chat-ui` (lib) generated 4 warnings (run `cargo fix --lib -p chat-ui` to apply 1 suggestion)
+   Compiling chat-server v0.2.43 (/home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/candidate/chat_apps/chat_server)
+error[E0432]: unresolved import `super::socket_session_active`
+   --> chat_server/src/ws.rs:373:13
+    |
+373 |         use super::socket_session_active;
+    |             ^^^^^^^---------------------
+    |                    |
+    |                    no `socket_session_active` in `ws`
+
+error[E0432]: unresolved import `super::socket_session_active`
+   --> chat_server/src/ws.rs:405:13
+    |
+405 |         use super::socket_session_active;
+    |             ^^^^^^^---------------------
+    |                    |
+    |                    no `socket_session_active` in `ws`
+
+error[E0425]: cannot find function `authorize_socket` in this scope
+   --> chat_server/src/ws.rs:400:17
+    |
+400 |         assert!(authorize_socket(&pool, &headers, &room_id).await.is_err());
+    |                 ^^^^^^^^^^^^^^^^ not found in this scope
+    |
+help: consider importing this function
+    |
+261 +     use crate::ws::authorize_socket;
+    |
+
+error[E0425]: cannot find value `room_id` in this scope
+   --> chat_server/src/ws.rs:400:52
+    |
+400 |         assert!(authorize_socket(&pool, &headers, &room_id).await.is_err());
+    |                                                    ^^^^^^^ not found in this scope
+
+error[E0425]: cannot find function `authorize_socket` in this scope
+   --> chat_server/src/ws.rs:413:17
+    |
+413 |         assert!(authorize_socket(&pool, &headers, &room_id).await.is_err());
+    |                 ^^^^^^^^^^^^^^^^ not found in this scope
+    |
+help: consider importing this function
+    |
+261 +     use crate::ws::authorize_socket;
+    |
+
+error[E0425]: cannot find value `room_id` in this scope
+   --> chat_server/src/ws.rs:413:52
+    |
+413 |         assert!(authorize_socket(&pool, &headers, &room_id).await.is_err());
+    |                                                    ^^^^^^^ not found in this scope
+
+Some errors have detailed explanations: E0425, E0432.
+For more information about an error, try `rustc --explain E0425`.
+error: could not compile `chat-server` (lib test) due to 6 previous errors

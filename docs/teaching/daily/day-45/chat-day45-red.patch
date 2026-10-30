@@ -1,0 +1,84 @@
+diff --git a/chat_apps/chat_persistence/src/room_access.rs b/chat_apps/chat_persistence/src/room_access.rs
+deleted file mode 100644
+index e69de29..0000000
+diff --git a/chat_apps/chat_server/src/room_auth.rs b/chat_apps/chat_server/src/room_auth.rs
+index 88ca6ad..bce3d24 100644
+--- a/chat_apps/chat_server/src/room_auth.rs
++++ b/chat_apps/chat_server/src/room_auth.rs
+@@ -298,3 +298,76 @@ mod day44_existing_room_gate_tests {
+         db.close().await;
+     }
+ }
++
++#[cfg(test)]
++mod day45_tests {
++    use super::*;
++    use axum::{Router, body::Body, http::Request, routing::get};
++    use tower::ServiceExt;
++    #[tokio::test]
++    async fn excluded_member_cannot_enter_but_public_listing_stays_public() {
++        let db = sqlx::sqlite::SqlitePoolOptions::new()
++            .max_connections(1)
++            .connect("sqlite::memory:")
++            .await
++            .unwrap();
++        chat_persistence::migrate(&db).await.unwrap();
++        let id = uuid::Uuid::new_v4().to_string();
++        sqlx::query("INSERT INTO rooms(id,category_room_id,name,desc,created_at,updated_at) VALUES(?,'default-category','ACL','',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)")
++            .bind(&id).execute(&db).await.unwrap();
++        sqlx::query("INSERT INTO mbr_user(id,user_acnt,user_pd,user_email,user_name,user_status,is_init_pd,created_at,updated_at) VALUES('u45','u45','hash','u45@example.test','Member','active',FALSE,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)")
++            .execute(&db).await.unwrap();
++        let token = "d".repeat(64);
++        sqlx::query("INSERT INTO mbr_session(id,mbr_user_id,token_hash,expires_at) VALUES('s45','u45',?,unixepoch()+60)")
++            .bind(shared::auth::token_digest(&token)).execute(&db).await.unwrap();
++        let app = Router::new()
++            .route("/room/{room_id}", get(|| async { "ROOM" }))
++            .route_layer(axum::middleware::from_fn_with_state(
++                db.clone(),
++                require_room_member,
++            ))
++            .route("/api/rooms", get(|| async { "PUBLIC" }));
++        for excluded in [false, true, false] {
++            sqlx::query("DELETE FROM mbr_exclude WHERE mbr_user_id='u45'")
++                .execute(&db)
++                .await
++                .unwrap();
++            if excluded {
++                sqlx::query(
++                    "INSERT INTO mbr_exclude(id,mbr_user_id,room_id) VALUES('e45','u45',?)",
++                )
++                .bind(&id)
++                .execute(&db)
++                .await
++                .unwrap();
++            }
++            let response = app
++                .clone()
++                .oneshot(
++                    Request::get(format!("/room/{id}"))
++                        .header("cookie", format!("chat_session={token}"))
++                        .body(Body::empty())
++                        .unwrap(),
++                )
++                .await
++                .unwrap();
++            assert_eq!(
++                response.status(),
++                if excluded {
++                    StatusCode::FORBIDDEN
++                } else {
++                    StatusCode::OK
++                }
++            );
++            assert_eq!(
++                app.clone()
++                    .oneshot(Request::get("/api/rooms").body(Body::empty()).unwrap())
++                    .await
++                    .unwrap()
++                    .status(),
++                StatusCode::OK
++            );
++        }
++        db.close().await;
++    }
++}
