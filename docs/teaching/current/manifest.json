@@ -148,7 +148,9 @@
       "blob_sha": "5f270b93fa134f7f82b948c414b5d2df04d5630b",
       "sha256": "a8fcc2ee4d9bd84922813a872b8be47af4dd2f52057d3f03b552241a0dccaac2",
       "exact_commit_readback": true,
-      "local_revision_content_complete": true
+      "local_revision_content_complete": true,
+      "remote_full_text_equal": true,
+      "remote_revision_evidence": "docs/teaching/daily/day-44/remote-revision-verification-2026-10-30.json"
     },
     {
       "project": "pet",
@@ -191,7 +193,9 @@
       "blob_sha": "591b847ae17ffd2e41e419e21dcea6397f3c5503",
       "sha256": "c7f84b1fd304109fbf1dc696897f5f334b37078d449890a96195cd830013c90c",
       "exact_commit_readback": true,
-      "local_revision_content_complete": true
+      "local_revision_content_complete": true,
+      "remote_full_text_equal": true,
+      "remote_revision_evidence": "docs/teaching/daily/day-44/remote-revision-verification-2026-10-30.json"
     },
     {
       "project": "analytics",
@@ -234,7 +238,9 @@
       "blob_sha": "e05e1bc3d442d291954f37cd5ef1a5065dd2ce93",
       "sha256": "ce213a4175ed54d5e6b3b79e489f2a30526d4d4b673bdb4f4f19706081fea2a3",
       "exact_commit_readback": true,
-      "local_revision_content_complete": true
+      "local_revision_content_complete": true,
+      "remote_full_text_equal": true,
+      "remote_revision_evidence": "docs/teaching/daily/day-44/remote-revision-verification-2026-10-30.json"
     }
   ],
   "current_article_paths": {

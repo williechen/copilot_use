@@ -1525,5 +1525,7 @@
       "readback_at_utc": "2026-10-30T11:42:40.923663+00:00",
       "readback_method": "local git show exact commit, full byte equality; remote same-SHA readback verified after push"
     }
-  ]
+  ],
+  "remote_verification": "docs/teaching/daily/day-44/remote-revision-verification-2026-10-30.json",
+  "remote_full_article_readbacks_equal": true
 }

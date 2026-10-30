@@ -1,0 +1,13 @@
+{
+  "attempts": [
+    {
+      "tool": "github_fetch_file",
+      "phase": "read-only remote exact-commit readback",
+      "exit": "INVALID_ARGUMENT",
+      "error": "repository_full_name [required]: Missing required property",
+      "cause": "initial argument used repo_full_name instead of repository_full_name",
+      "recovery": "corrected argument; all three exact-commit article contents fetched and SHA256 equal",
+      "remote_mutation": false
+    }
+  ]
+}
