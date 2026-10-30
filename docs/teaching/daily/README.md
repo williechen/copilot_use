@@ -1,13 +1,11 @@
 # 每日教學接續
 
-目前產品`64eff52`（Pet SQL排版更新）；本輪Pet112／Node12／WASM及四workspace metadata通過。CI快照5成功、2待完成；舊2c7ff8b的原生25步與兩案瀏覽器各11步保留原SHA。完整Gate2仍未通過：Chat逐房授權失敗、Analytics ACL未接通及實機／舊PG等待驗。next_day三案45不變。
+產品來源 `64eff527283fd05657841297879aefeaadd31f64`；七個來源CI目前均成功，完整產品Gate2仍未通過。三案候選patch尚待使用者套用；原生／瀏覽器／舊PG資料等驗收缺口見STATUS。
 
-[Day44 ENTRY](day-44/ENTRY.md) · [三案正文／附件](day-44/README.md) · [STATUS](../current/STATUS.md) · [4b1008b前輪完整矩陣](../../source-review/local-validation-2026-10-30-day44-r2/README.md) · [規則](../../COMMON_LEARNING_RULES.md) · [需求／待辦](../../FUTURE_WORK.md) · [來源／啟動](../../SOURCE_LAYOUT.md) · [歷史分包](../../archive/README.md)
+[目前狀態](../current/STATUS.md) · [需求](../../requirements/USER_FLOWS.md) · [規則](../../COMMON_LEARNING_RULES.md) · [來源](../../SOURCE_LAYOUT.md) · [架構](../../SYSTEM_ARCHITECTURE.md)
 
-[上一篇Day43封存](day-43/README.md) · [目前Day44](day-44/README.md)。下一篇索引為45；修訂與驗收不重複增加Day。
+目前教學：Day45三案獨立發布與全文讀回完成，next_day三案46。
 
-[Pet採用後最新驗證](../../source-review/pet-day44-adopted-2026-10-30/README.md)
+[Day45 ENTRY](day-45/ENTRY.md) · [Chat](day-45/chat.md) · [Pet](day-45/pet.md) · [Analytics r2](day-45/analytics-r2.md) · [讀回證據](day-45/delivery-verification.json)
 
-[Gate2最新實測與阻擋](../../source-review/gate2-2026-10-31/README.md)
-
-[最新SQL更新後精確SHA回歸](../../source-review/gate2-sql-2026-10-31/README.md)
+[manifest](../current/manifest.json) · [learning-state](../../learning-state.json) · [各案Refactor](../functional-refactoring/PROGRESS.md) · [跨案工程](../../engineering/README.md) · [歷史分包](../../archive/README.md)

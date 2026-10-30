@@ -1,13 +1,11 @@
 # 教學必要文件
 
-目前產品`64eff52`（Pet SQL排版更新）；本輪Pet112／Node12／WASM及四workspace metadata通過。CI快照5成功、2待完成；舊2c7ff8b的原生25步與兩案瀏覽器各11步保留原SHA。完整Gate2仍未通過：Chat逐房授權失敗、Analytics ACL未接通及實機／舊PG等待驗。next_day三案45不變。
+產品來源 `64eff527283fd05657841297879aefeaadd31f64`；七個來源CI目前均成功，完整產品Gate2仍未通過。三案候選patch尚待使用者套用；原生／瀏覽器／舊PG資料等驗收缺口見STATUS。
 
-[Day44 ENTRY](teaching/daily/day-44/ENTRY.md) · [三案正文／附件](teaching/daily/day-44/README.md) · [STATUS](teaching/current/STATUS.md) · [4b1008b前輪完整矩陣](source-review/local-validation-2026-10-30-day44-r2/README.md) · [規則](COMMON_LEARNING_RULES.md) · [需求／待辦](FUTURE_WORK.md) · [來源／啟動](SOURCE_LAYOUT.md) · [歷史分包](archive/README.md)
+[目前狀態](teaching/current/STATUS.md) · [需求](requirements/USER_FLOWS.md) · [規則](COMMON_LEARNING_RULES.md) · [來源](SOURCE_LAYOUT.md) · [架構](SYSTEM_ARCHITECTURE.md)
 
-[使用者流程](requirements/USER_FLOWS.md) · [人員驗證](requirements/AUTHENTICATION.md) · [UI條件](UI_ALIGNMENT_REQUIREMENTS.md) · [服務憑證](SERVICE_CREDENTIAL_REQUIREMENTS.md) · [架構](SYSTEM_ARCHITECTURE.md) · [啟動](LOCAL_START.md) · [驗證](LOCAL_VALIDATION.md) · [學習狀態](learning-state.json) · [P0–P12](ROADMAP_P0_P12.md) · [各案Refactor](teaching/functional-refactoring/PROGRESS.md) · [跨案工程](engineering/README.md) · [排程規則](teaching/scheduler-instructions-v1.md)
+目前教學：Day45三案獨立發布與全文讀回完成，next_day三案46。
 
-[Pet採用後最新驗證](source-review/pet-day44-adopted-2026-10-30/README.md)
+[Day45 ENTRY](teaching/daily/day-45/ENTRY.md) · [Chat](teaching/daily/day-45/chat.md) · [Pet](teaching/daily/day-45/pet.md) · [Analytics r2](teaching/daily/day-45/analytics-r2.md) · [讀回證據](teaching/daily/day-45/delivery-verification.json)
 
-[Gate2最新實測與阻擋](source-review/gate2-2026-10-31/README.md)
-
-[最新SQL更新後精確SHA回歸](source-review/gate2-sql-2026-10-31/README.md)
+[manifest](teaching/current/manifest.json) · [learning-state](learning-state.json) · [各案Refactor](teaching/functional-refactoring/PROGRESS.md) · [跨案工程](engineering/README.md) · [歷史分包](archive/README.md)

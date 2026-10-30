@@ -15,3 +15,11 @@
 [2026-10-31 Gate2原生／HTTP實測與已確認阻擋](../../source-review/gate2-2026-10-31/README.md)；目前完整Gate2=false，不以CI全綠替代逐房／角色授權或缺失的舊庫／實機證據。
 
 [64eff52 SQL更新後最新回歸](../../source-review/gate2-sql-2026-10-31/README.md)：Pet112／Node12／WASM及四workspace metadata通過；舊native／browser證據仍屬2c7ff8b，完整Gate2未通過。
+
+## 目前新增方案（尚未採用）
+
+- Chat：Session lookup移到同案persistence；既有Cookie／CSRF／停用／撤銷斷言保留，候選server lib30通過。
+- Pet：pose投影與四組原斷言移出activity元件；候選UI11通過。
+- Analytics：Session PG lookup移到同案persistence；原密碼／Session／CSV／Logout斷言保留，候選PG全套60通過、1legacy ignored。
+
+各案完整逐檔內容見[現行文章](../daily/day-45/ENTRY.md)，不抵算G-01／G-02，不更新last_full_comparison。角色頁面ACL及個人加減屬Analytics功能Green，沒有重複算作Refactor。
