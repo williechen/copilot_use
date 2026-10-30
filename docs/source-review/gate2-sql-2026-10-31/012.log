@@ -1,0 +1,82 @@
+TAP version 13
+# Subtest: pet window button selects its own pet before opening main
+ok 1 - pet window button selects its own pet before opening main
+  ---
+  duration_ms: 2.736766
+  type: 'test'
+  ...
+# Subtest: control window only focuses itself, never changes selection
+ok 2 - control window only focuses itself, never changes selection
+  ---
+  duration_ms: 1.80231
+  type: 'test'
+  ...
+# Subtest: selection failure does not report successful opening
+ok 3 - selection failure does not report successful opening
+  ---
+  duration_ms: 1.130413
+  type: 'test'
+  ...
+# Subtest: control can cage one explicit UUID without changing selection
+ok 4 - control can cage one explicit UUID without changing selection
+  ---
+  duration_ms: 3.775468
+  type: 'test'
+  ...
+# Subtest: native cage error reaches control caller
+ok 5 - native cage error reaches control caller
+  ---
+  duration_ms: 0.998912
+  type: 'test'
+  ...
+# Subtest: each status query reaches the correct saved UUID and native result
+ok 6 - each status query reaches the correct saved UUID and native result
+  ---
+  duration_ms: 3.665911
+  type: 'test'
+  ...
+# Subtest: native database failure is not reported as a successful cage state
+ok 7 - native database failure is not reported as a successful cage state
+  ---
+  duration_ms: 1.068412
+  type: 'test'
+  ...
+# Subtest: walk/sit and defaults reach scoped native commands with booleans
+ok 8 - walk/sit and defaults reach scoped native commands with booleans
+  ---
+  duration_ms: 3.332768
+  type: 'test'
+  ...
+# Subtest: failed activity and default writes remain rejected promises
+ok 9 - failed activity and default writes remain rejected promises
+  ---
+  duration_ms: 1.118307
+  type: 'test'
+  ...
+# Subtest: 重複檔案 IPC 只接受後端授權 root，不傳入任意路徑
+ok 10 - 重複檔案 IPC 只接受後端授權 root，不傳入任意路徑
+  ---
+  duration_ms: 2.452616
+  type: 'test'
+  ...
+# Subtest: scanFilePreview uses read-only command without path
+ok 11 - scanFilePreview uses read-only command without path
+  ---
+  duration_ms: 3.122303
+  type: 'test'
+  ...
+# Subtest: 掃描預覽不得接受使用者指定路徑
+ok 12 - 掃描預覽不得接受使用者指定路徑
+  ---
+  duration_ms: 3.462208
+  type: 'test'
+  ...
+1..12
+# tests 12
+# suites 0
+# pass 12
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 691.42919

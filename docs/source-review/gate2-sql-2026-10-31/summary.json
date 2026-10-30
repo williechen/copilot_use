@@ -1,0 +1,80 @@
+{
+  "source_sha": "64eff527283fd05657841297879aefeaadd31f64",
+  "previous_source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
+  "docs_base_commit": "06de2f24bbc1747103caef4402a0bab7a8107045",
+  "full_gate2": false,
+  "metadata_workspaces": 4,
+  "pet_rust_passed": 112,
+  "pet_node_passed": 12,
+  "fmt_check_clippy_wasm": "passed",
+  "native_gui_rerun": false,
+  "browser_rerun": false,
+  "previous_native_browser_source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
+  "ci": [
+    {
+      "name": "Test All",
+      "head_sha": "64eff527283fd05657841297879aefeaadd31f64",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/williechen/rust_ai_ring/actions/runs/41136694243"
+    },
+    {
+      "name": "Cargo workspaces",
+      "head_sha": "64eff527283fd05657841297879aefeaadd31f64",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/williechen/rust_ai_ring/actions/runs/41136694203"
+    },
+    {
+      "name": "Rust AI Chat",
+      "head_sha": "64eff527283fd05657841297879aefeaadd31f64",
+      "status": "in_progress",
+      "conclusion": null,
+      "url": "https://github.com/williechen/rust_ai_ring/actions/runs/41136694179"
+    },
+    {
+      "name": "Rust Desktop Pet",
+      "head_sha": "64eff527283fd05657841297879aefeaadd31f64",
+      "status": "in_progress",
+      "conclusion": null,
+      "url": "https://github.com/williechen/rust_ai_ring/actions/runs/41136694314"
+    },
+    {
+      "name": "Node",
+      "head_sha": "64eff527283fd05657841297879aefeaadd31f64",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/williechen/rust_ai_ring/actions/runs/41136694295"
+    },
+    {
+      "name": "Rust Analytics",
+      "head_sha": "64eff527283fd05657841297879aefeaadd31f64",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/williechen/rust_ai_ring/actions/runs/41136694157"
+    },
+    {
+      "name": "Persistence",
+      "head_sha": "64eff527283fd05657841297879aefeaadd31f64",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/williechen/rust_ai_ring/actions/runs/41136694195"
+    }
+  ],
+  "cleanup_allocated_bytes": 1198743552,
+  "formal_databases_written": false,
+  "product_commits_pushes": false,
+  "next_day": {
+    "chat": 45,
+    "pet": 45,
+    "analytics": 45
+  },
+  "last_full_comparison": "2026-10-16T22:47:14.399027+08:00",
+  "blockers": [
+    "Chat HTTP/WS exclusion failure at prior exact SHA; unchanged Chat tree",
+    "Analytics role/source ACL unimplemented; unchanged Analytics tree",
+    "physical desktop/native release/installation not executed",
+    "no actual old PostgreSQL backup supplied",
+    "full dependency/MSRV acceptance incomplete"
+  ]
+}

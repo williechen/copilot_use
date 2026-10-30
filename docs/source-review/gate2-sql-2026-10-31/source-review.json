@@ -1,0 +1,39 @@
+{
+  "source_sha": "64eff527283fd05657841297879aefeaadd31f64",
+  "previous_source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
+  "changed_files": [
+    {
+      "path": "pet_apps/pet_persistence/src/activity.rs",
+      "blob_sha": "1e7f9d64cf71965d996b2acb9ec30fa5c1c2851a",
+      "sha256": "aaf7f5ef85729b289997440e936b59cbb95c554f7ea1b3b30ce71488bc25c96f",
+      "sql_query_calls_before": 18,
+      "sql_query_calls_after": 18,
+      "sql_token_sequences_equal": true
+    },
+    {
+      "path": "pet_apps/pet_persistence/src/lib.rs",
+      "blob_sha": "4004898bc227a7dd755cf1f120325aad981b407d",
+      "sha256": "668fbf9473704a573248d445fc83294bb02633a64544f620b8bff77fd2ba49c5",
+      "sql_query_calls_before": 9,
+      "sql_query_calls_after": 9,
+      "sql_token_sequences_equal": true
+    },
+    {
+      "path": "pet_apps/pet_server/src/pet_store.rs",
+      "blob_sha": "c6e8d2fe16fcfb50c16c1b8931a010b87dfa05c8",
+      "sha256": "bc13e883a76d9506e00eda0730d1b7afc0f5219788d9858a234828009faf7963",
+      "sql_query_calls_before": 16,
+      "sql_query_calls_after": 16,
+      "sql_token_sequences_equal": true
+    }
+  ],
+  "unchanged_trees": {
+    "chat_apps": true,
+    "analytics_apps": true,
+    "crates": true,
+    ".github": true,
+    "pet_apps/migrations": true,
+    "pet_apps/pet_ui": true
+  },
+  "sql_static_comparison_is_not_runtime_pass": true
+}

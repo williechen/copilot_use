@@ -1,0 +1,65 @@
+[
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_persistence-d52a3d816d36a296",
+    "inode": 175207,
+    "bytes": 52314544,
+    "allocated_bytes": 52248576,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_server-62aaa3bb8f346d0d",
+    "inode": 175206,
+    "bytes": 186268680,
+    "allocated_bytes": 186191872,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_server-5b59201e71ebad1d",
+    "inode": 175184,
+    "bytes": 53315296,
+    "allocated_bytes": 53321728,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/day23_saved_pets-31c78847d6fc3d4d",
+    "inode": 175189,
+    "bytes": 196702032,
+    "allocated_bytes": 196624384,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/day24_active_pet-64466ad5324dc625",
+    "inode": 175191,
+    "bytes": 196325704,
+    "allocated_bytes": 196255744,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/day27_create_and_select-24ffe39b506eb32d",
+    "inode": 175192,
+    "bytes": 196239592,
+    "allocated_bytes": 196169728,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/day44_activity_lifecycle-bf1afb06b29dad2a",
+    "inode": 175199,
+    "bytes": 201341168,
+    "allocated_bytes": 201269248,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/day44_activity_migration-8573e992d2180bce",
+    "inode": 175193,
+    "bytes": 50418416,
+    "allocated_bytes": 50352128,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_ui-026e501471d0a2b5",
+    "inode": 175157,
+    "bytes": 66307552,
+    "allocated_bytes": 66310144,
+    "removed": true
+  }
+]

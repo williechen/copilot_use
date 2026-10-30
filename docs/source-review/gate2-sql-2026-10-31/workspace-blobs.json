@@ -1,0 +1,18 @@
+{
+  "crates": {
+    "Cargo.toml": "739ed0cd7d5df70571ca176b51cde4a9db063d47",
+    "Cargo.lock": "28ebff98f0e31e92551b12d540361ccd74eed7f2"
+  },
+  "chat_apps": {
+    "Cargo.toml": "435baaf6a110e5afc0e0d864570755933573c5c5",
+    "Cargo.lock": "bd4da0101ec6282d67965674159aa965bd1ae35e"
+  },
+  "pet_apps": {
+    "Cargo.toml": "1033d8194dd711d9c7704400e4c294fb06449c8f",
+    "Cargo.lock": "b9805c0aefb65df8972bd6d3d17547ec2781f6f5"
+  },
+  "analytics_apps": {
+    "Cargo.toml": "22f05d05f89a4e58fa2d4a336a0727207606ec07",
+    "Cargo.lock": "831373fcf0824cf5b50e785bf4abe75d3aadc2f8"
+  }
+}
