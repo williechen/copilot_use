@@ -1,10 +1,10 @@
 # Analytics Day44｜後台登出表單加入 Session 專屬 CSRF，拒絕跨站登出
 
-> 2026-10-30 本地驗證修訂 r2。最新產品唯讀 `6b34c42f74fc1585b1b864fb7dd6969318270e0f`；下列原 Refactor／Green 程式保留 `7ce39f0166a2120539e5908b33c88322a930c35a` 重現基準。最新 main 已有對應功能，不重複套用。next_day 已是45，不再加 Day。原發布版本與讀回保留於封存。
+> 2026-10-30 本地驗證修訂 r3。最新產品唯讀 `4b1008b95bc3e170381fcd1db84695e421f036bd`；下列原 Refactor／Green 程式保留 `7ce39f0166a2120539e5908b33c88322a930c35a` 重現基準。最新 main 已有對應功能，不重複套用。next_day 已是45，不再加 Day。原發布版本與讀回保留於封存。
 
 ## 本次本地結果
 
-最新主分支已實作logout CSRF；完整PG揭露兩個舊fixture未隨契約更新。本篇交付補丁在隔離副本取得63項PG通過，但主分支Persistence CI仍失敗。 [四workspace、真套用、原始命令及阻塞](../../../source-review/local-validation-2026-10-30-day44/README.md)。原發布全文以ZIP保存，原交付讀回不能冒認本次修訂；完整Gate2未完成。
+最新4b1008b已實作logout CSRF並採用兩個舊fixture修正；本次在該主分支精確SHA重跑PG63項通過。 [四workspace、真套用、原始命令及阻塞](../../../source-review/local-validation-2026-10-30-day44-r2/README.md)。原發布全文以ZIP保存，原交付讀回不能冒認本次修訂；完整Gate2未完成。
 
 ## ① 目標、缺口、正式使用者流程
 
@@ -1521,7 +1521,7 @@ Rust 2024 edition、SQLx 0.9 MSRV 1.94 在 stable 1.99.1 範圍內；正式 PG�
 
 **文件與真套用**：原 Refactor→Green 已真 check／apply；追加 fmt 修補及下節兩個 fixture 修補，保留既有有效斷言。精確 commit／blob／SHA256 於提交後另記；完整官方套件／MSRV Gate 尚未全量重核。
 
-**本地已執行、完整 Gate2 未完成**：最新主分支一般測試43＋1ignored；新 Day44 PG測試1通過，但完整PG在舊day37／day39 fixture失敗。追加fixture修補後隔離PG63通過（0ignored），產品與遠端CI仍未修。新SHA的真瀏覽器、實際舊PG還原與完整授權旅程未執行。以下重現只能用專用隔離DB：
+**本地已執行、完整 Gate2 未完成**：最新主分支一般43＋1ignored，真PG完整63通過／0ignored；兩個fixture修正已在4b1008b，最新來源的結果與先前失敗分開記錄。新SHA的真瀏覽器、實際舊PG還原與完整授權旅程未執行。以下重現只能用專用隔離DB：
 ```bash
 git apply --check analytics-day44-refactor.patch
 git apply analytics-day44-refactor.patch
@@ -1534,9 +1534,9 @@ cargo check --manifest-path analytics_apps/Cargo.toml --workspace
 ```
 驗證首次改密碼與一般 Dashboard 的登出 token、Origin、重放、閒置 Session、密碼變更撤銷、真 PG commit/rollback、不同來源 token 不得登入。原 Day24/25/26 與完整來源 ACL、帳號角色／稽核、使用者實際舊 PG 備份仍待 Gate2；下一日優先補管理員對檢視者／來源的授權流程。Analytics 目前無 pending FIFO，`last_full_comparison` 不變。核心60分鐘只計 Red/Green 預估15分鐘，Refactor 與交付另計。
 
-## PG fixture 修訂 r2：保留原斷言，補足真實登出前置
+## PG fixture 修訂 r3：保留原斷言，補足真實登出前置
 
-`day37_query_cookie` 原空body回415；`day39_export_csv` 原缺CSRF回422。兩測試改成GET真正Dashboard、擷取該Session登出token，再提交form。原重複Cookie拒絕、Session撤銷及CSV斷言不刪。這是同案測試fixture承接，不改伺服器防護、不改產品CI workflow。最新6b34直接套用下列修補；7ce重現順序為Refactor→Green→fixture修補→[格式修補](analytics-day44-format-r1.patch)。
+`day37_query_cookie` 原空body回415；`day39_export_csv` 原缺CSRF回422。兩測試改成GET真正Dashboard、擷取該Session登出token，再提交form。原重複Cookie拒絕、Session撤銷及CSV斷言不刪。這是同案測試fixture承接，不改伺服器防護、不改產品CI workflow。最新4b1008b已採用下列修正，不要重複套用；7ce重現順序為Refactor→Green→fixture修補→[格式修補](analytics-day44-format-r1.patch)。
 
 [完整附件](analytics-logout-fixture-fix.patch)（本節全文）：
 
@@ -1613,4 +1613,4 @@ index 1317796..b7a74a0 100644
          get(app, url, Some(&cookie)).await.status(),
 ```
 
-真PG全套 `--no-fail-fast -- --include-ignored` 修補後63通過。首次link bus error及jobs1成功重試均保存。遠端產品不推送修補，Persistence失敗保留為待使用者套用／重跑。
+真PG全套 `--no-fail-fast -- --include-ignored` 修補後63通過。首次link bus error及jobs1成功重試均保存。遠端4b1008b已採用修補，本次只讀快轉並重新驗證PG63通過；當時失敗仍保留在原SHA證據。
