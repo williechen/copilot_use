@@ -1,10 +1,10 @@
 # Chat Day44｜登入後只允許進入真正存在的聊天室
 
-> 2026-10-30 本地驗證修訂 r3。最新產品唯讀 `4b1008b95bc3e170381fcd1db84695e421f036bd`；下列原 Refactor／Green 程式保留 `7ce39f0166a2120539e5908b33c88322a930c35a` 重現基準。最新 main 已有對應功能，不重複套用。next_day 已是45，不再加 Day。原發布版本與讀回保留於封存。
+> 2026-10-31 Gate2補驗。當次產品唯讀`2c7ff8b861d32ab6d879bf80c9f2dce50de38097`；原Refactor／Green保留7ce重現基準。原4b1008b單元／PG結果維持原SHA，這次新增2c7ff8b瀏覽器／HTTP證據，不新增Day。
 
-## 本次本地結果
+## 本次Gate2結果
 
-最新主分支已實作存在房間門檻；一般／SSR各62項通過、WASM通過。最新正式caller已改名為`room_path`，與原教學命名一致。 [四workspace、真套用、原始命令及阻塞](../../../source-review/local-validation-2026-10-30-day44-r2/README.md)。原發布全文以ZIP保存，原交付讀回不能冒認本次修訂；完整Gate2未完成。
+2c7ff8b真瀏覽器／HTTP11項檢查通過，七個CI workflow成功；[本輪完整證據](../../../source-review/gate2-2026-10-31/README.md)。逐房排除名單實際未被HTTP／WS強制執行，整體授權驗收不通過。
 
 ## ① 目標、缺口與正式呼叫鏈
 
@@ -75,7 +75,7 @@ new file mode 100644
 +}
 ```
 
-Refactor 已在原文基準真套用；合成後加 [fmt 修補](chat-day44-format-r1.patch)，SSR server lib29、UI21通過；最新main的`room_path`＋`room_auth` 已納入62項 SSR 回歸。最新main已採用`room_path`；原附件仍只用於7ce重現。下一步為本案 Session SQL／Repository 錯誤與 fixture 分層，維持401／403／503差異。
+Refactor的原順序套用與4b1008b Rust回歸證據保留；本輪2c7ff8b補真瀏覽器／HTTP，不重跑或追認62項Rust／SSR。room_path正式caller不變；完整逐房ACL仍沿原待辦。
 
 ## ② Red → 完整 Green（核心預估 15 分鐘；實際未計時）
 
@@ -534,16 +534,10 @@ diff --git a/chat_apps/chat_server/src/room_auth.rs b/chat_apps/chat_server/src/
 
 SQLx 0.9 的 MSRV 1.94，Rust 2024 edition 及現行 stable 1.99.1 足夠；Leptos SSR／WASM hydrate 仍須分開實測。這些是版本 metadata，不能代替 build。
 
-## ④ 驗證、Gate 與未完成
+## ④ Gate2實測與阻擋（2026-10-31）
 
-**文件與真套用**：原 Refactor→Green 已實際 check／apply；格式修補後編譯／測試通過，精確命令與退出碼見本次證據。原始程式／附件不覆寫為另一個來源版本；最新 main 的 caller 依 source-inventory 核對。完整官方套件／MSRV Gate 尚未全量重核，不冒稱完整文件版本 Gate。
+真2c7ff8b server／SSR＋hydrate與WebKit瀏覽器跑通註冊保持登出、清除舊回跳目標、登入管理、正式表單建房、公開清單自動載入、匿名回跳／登入進房、缺房404、DB故障503恢復、房間與SQLite Session重啟保留，共11步。既有4b1008b的62／SSR62與WASM結果保留原來源，不追認。
 
-**本地已執行、完整 Gate2 未完成**：最新 main 的四 workspace 檢查、Chat62／SSR62與hydrate WASM通過；未在此 SHA 重跑獨立瀏覽器／完整HTTP與WS旅程。原 Chat 行為 Red 沒有重跑，不將基準測試成功當 Red。產品沒有候選提交／推送；以下為需依來源重現的命令：
-```bash
-cargo test --manifest-path chat_apps/Cargo.toml -p chat-server room_path
-cargo test --manifest-path chat_apps/Cargo.toml -p chat-server room_auth
-cargo test --manifest-path chat_apps/Cargo.toml -p chat-server --features ssr
-cargo test --manifest-path chat_apps/Cargo.toml -p chat-ui --features ssr
-cargo check --manifest-path chat_apps/Cargo.toml --workspace
-```
-並用真 SQLite 登入／登出、存在／不存在房間、Cookie 撤銷、WS 401、公開列表與房間 ACL 旅程驗證。下一個功能優先：會員身份與房主／逐房 ACL（含 WS 重驗）；此功能已在最新 main 實作並有回歸測試，但不代表完整逐房 ACL 已驗收。FIFO `chat-day25-shared-auth-20261022` 仍 pending；未經完整補教不結案。核心 60 分鐘只分配本篇 Red／Green 預估 15 分鐘，Refactor、版本、驗證與交付另計。
+完整逐房授權**未通過**：隔離測試庫對第二帳號加入mbr_exclude後，真HTTP仍200、WebSocket仍opened=true。[失敗重現與來源](../../../source-review/gate2-2026-10-31/chat-room-acl-acceptance.json)。這不否定Day44存在檢查切片，不能把它當成房主／成員／逐房ACL已完成。沿既有[FUTURE_WORK授權](../../../FUTURE_WORK.md#chat-auth)修補後，須以新SHA重新驗收。
+
+[完整命令／截圖／限制](../../../source-review/gate2-2026-10-31/README.md)。既有Chat SQLite的唯讀備份副本啟動migration／保資料通過；原庫與副本觀測同為9版，未宣稱套用了新的舊版migration。正式DB未寫、產品未提交／推送；完整Gate2=false，FIFO與next_day不變。
