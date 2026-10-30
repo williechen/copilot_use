@@ -1,0 +1,85 @@
+{
+  "project": "pet",
+  "day": 45,
+  "article_commit": "f4b4fb7fe050bbb491979cb64ff0b6d9abcedc32",
+  "source_sha": "64eff527283fd05657841297879aefeaadd31f64",
+  "readback": [
+    {
+      "path": "docs/teaching/daily/day-45/pet-extra-versions.json",
+      "blob_sha": "235b00b517c236b30cbc302498286c290afd481d",
+      "full_text_equal": true,
+      "sha256": "31359a26621cae0a81dff03a965588325ff2a26fdc2042009d13fdd84fded46a"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/pet-day45-green.patch",
+      "blob_sha": "6201215178774eb8b0f4f85d1a108c71219f2d35",
+      "full_text_equal": true,
+      "sha256": "24afe5c06606825c2a42b637f6c1e11b7bbb0ccc9803b9ea30d5cfd74b6ff089"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/pet-day45-red.patch",
+      "blob_sha": "ae593b1fedbfb30350b577504fdd755967296dd5",
+      "full_text_equal": true,
+      "sha256": "0a57363ef741bf18af485b2abda9e3deeb23e8b5675040de4411ee6adbd8ecb1"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/pet-red.log",
+      "blob_sha": "f943d263e55920497952e0d6a59b02c61f30dc14",
+      "full_text_equal": true,
+      "sha256": "8f6b64a304ebd88a570cad8e26fa3b701d9f2b3e4301ada0914128ba703d42d0"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/pet-green.log",
+      "blob_sha": "cf1166b8f79b3ccdb0ebb55785ff69448a57a272",
+      "full_text_equal": true,
+      "sha256": "3dcc99506d5a64130a6c8242306199a5b6e8217ad5cb25e534e00693c62f840a"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/playwright-install.log",
+      "blob_sha": "b479b17529142610216e6552be764e6678b8d0ca",
+      "full_text_equal": true,
+      "sha256": "813d02c8214ca9263b0c0397141fdd9dafa7ef04027ed642e05d4e861f85263d"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/pet-refactor.log",
+      "blob_sha": "af9bea8358f896430594bf08777d6a8cacd663ce",
+      "full_text_equal": true,
+      "sha256": "2d9b648cabfccf83e93c57de54a31e2969cb965c11f85482f537f8b3fcdd2975"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/pet-validation.json",
+      "blob_sha": "1d029923faf629b78be23cd960a7c668863f8e06",
+      "full_text_equal": true,
+      "sha256": "7eee39a7d1c2b5dd8ba23f6e3ff099f7630aee66504f557baf34c974b372770b"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/pet-day45-refactor.patch",
+      "blob_sha": "87ff6a8035df8cce44901a5c641fda7238e228ac",
+      "full_text_equal": true,
+      "sha256": "585caf18a6a418ad49254459fa38587d31bcbe7566e6e578e3cd22e9b814b5e9"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/pet.md",
+      "blob_sha": "af4c170cc5ce0d2a1f610ea8511bde701b918b86",
+      "full_text_equal": true,
+      "sha256": "adc585bb6593c7a16f85ee5a41b9747a378b717ff173e586d38431a0ecc8ad5f"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/playwright-browser-r2.log",
+      "blob_sha": "3d20c75f13be58ffa347c4433bc90b3954ac2931",
+      "full_text_equal": true,
+      "sha256": "cc7061b682acaedcbad78b047d07bdbdd58347737f9afa545d0607c5884e7726"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/playwright-install-r2.log",
+      "blob_sha": "1e7cc25fcd80f5b6efac6e50f66e9b4a4987b013",
+      "full_text_equal": true,
+      "sha256": "203e18c7070798bf802ac18530b42dbc0179473b8e0e2dc1f1a70608ab3a4b97"
+    }
+  ],
+  "gate1_content_readback": true,
+  "gate2": false,
+  "expected_next_day": 45,
+  "state_sync": "pending final conditional synchronization",
+  "resume": "Chat and Pet published; do not republish. Continue Analytics."
+}
