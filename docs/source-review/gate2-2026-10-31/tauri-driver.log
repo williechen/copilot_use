@@ -1,0 +1,7 @@
+Error serving connection: hyper::Error(User(Service), client error (Connect)
+
+Caused by:
+    0: tcp connect error
+    1: Connection refused (os error 111))
+Error serving connection: hyper::Error(IncompleteMessage)
+生活窗直接關閉／回籠失敗：無法停止寵物活動

@@ -1,0 +1,9 @@
+{
+  "source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
+  "binary": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/gate2-20261031/binaries/pet-server-2c7ff8b",
+  "sha256": "8f826a6709c45c6d84e913a31cc67b640976c2b5e2952c1e50bf20a454aae5c6",
+  "manual_script": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/gate2-20261031/\u555f\u52d5Pet\u5be6\u6a5f\u9a57\u6536.sh",
+  "manual_database": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/gate2-20261031/pet-manual.sqlite",
+  "already_verified_gui_database_copied_on_first_manual_run_only": true,
+  "formal_database_used": false
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "phase": "initial native geometry lookup",
+    "error": "KeyError Pet 控制台",
+    "cause": "harness forced C locale; xwininfo could not convert Chinese title to ASCII",
+    "fix": "use C.UTF-8 for native window enumeration; product unchanged"
+  },
+  {
+    "phase": "negative native IPC assertion",
+    "cause": "harness mistook expected JS {ok:false,error:...} return for a WebDriver protocol error despite HTTP200",
+    "fix": "protocol failures are identified by HTTP status; product correctly rejected missing UUID"
+  },
+  {
+    "phase": "Analytics first-login session evidence",
+    "error": "test harness queried nonexistent uac_session",
+    "fix": "verified source and use uac_login_session; read query only, product unchanged"
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "stop_test_chat_pid": 48753,
+  "owner_stops_test_analytics_and_pg": true,
+  "groups": [
+    {
+      "name": "browser-driver",
+      "pid": 47830,
+      "signal": "SIGTERM test-owned process group"
+    },
+    {
+      "name": "tauri-driver",
+      "pid": 43609,
+      "signal": "SIGTERM test-owned process group"
+    }
+  ]
+}

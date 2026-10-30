@@ -1,0 +1,21 @@
+{
+  "value": {
+    "sessionId": "26aab04f-9cab-4ef5-bd73-6e5033908c64",
+    "capabilities": {
+      "browserName": "MiniBrowser",
+      "browserVersion": "2.52.6",
+      "platformName": "linux",
+      "acceptInsecureCerts": false,
+      "strictFileInteractability": false,
+      "setWindowRect": true,
+      "unhandledPromptBehavior": "dismiss and notify",
+      "pageLoadStrategy": "normal",
+      "proxy": {},
+      "timeouts": {
+        "script": 30000,
+        "pageLoad": 300000,
+        "implicit": 0
+      }
+    }
+  }
+}

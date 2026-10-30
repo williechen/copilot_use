@@ -1,0 +1,249 @@
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+   Compiling proc-macro2 v1.0.107
+   Compiling quote v1.0.47
+   Compiling unicode-ident v1.0.27
+   Compiling chat-domain v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/chat_domain)
+   Compiling shared v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/crates/shared)
+   Compiling chat-application v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/chat_application)
+   Compiling chat-persistence v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/chat_persistence)
+   Compiling syn v3.0.9
+   Compiling chat-ui v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/chat_ui)
+warning: unused import: `crate::room_list_state::clear_room_search`
+  --> chat_ui/src/lib.rs:39:5
+   |
+39 | use crate::room_list_state::clear_room_search;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `room_heading` is never used
+   --> chat_ui/src/lib.rs:209:4
+    |
+209 | fn room_heading(id: &str, result: Result<String, String>) -> String {
+    |    ^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `clear_room_search` is never used
+  --> chat_ui/src/room_list_state.rs:55:15
+   |
+55 | pub(super) fn clear_room_search(loaded: bool, rows: &[(String, String)]) -> (String, String) {
+   |               ^^^^^^^^^^^^^^^^^
+
+warning: variants `SignedOut`, `SignedIn`, and `Unavailable` are never constructed
+ --> chat_ui/src/session_entry.rs:4:5
+  |
+2 | pub(super) enum SessionEntry {
+  |                 ------------ variants in this enum
+3 |     Checking,
+4 |     SignedOut,
+  |     ^^^^^^^^^
+5 |     SignedIn,
+  |     ^^^^^^^^
+6 |     Unavailable,
+  |     ^^^^^^^^^^^
+  |
+  = note: `SessionEntry` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis
+
+   Compiling version_check v0.9.5
+   Compiling wasm-bindgen-shared v0.2.129
+   Compiling semver v1.0.28
+   Compiling memchr v2.8.3
+   Compiling rustc_version v0.4.1
+   Compiling serde_core v1.0.229
+warning: `chat-ui` (lib) generated 4 warnings (run `cargo fix --lib -p chat-ui` to apply 1 suggestion)
+   Compiling chat-server v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/chat_server)
+   Compiling rustversion v1.0.23
+   Compiling pin-project-lite v0.2.17
+   Compiling serde_derive v1.0.229
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 11.64s
+[38;5;77m       Cargo[0m finished [38;5;241mcargo build --package=chat-server --bin=chat-server --no-default-features --features=ssr --locked[0m
+   Compiling bumpalo v3.20.3
+   Compiling thiserror v2.0.21
+   Compiling wasm-bindgen-macro-support v0.2.129
+   Compiling wasm-bindgen v0.2.129
+   Compiling cfg-if v1.0.5
+   Compiling futures-core v0.3.34
+   Compiling wasm-bindgen-macro v0.2.129
+   Compiling thiserror-impl v2.0.21
+   Compiling synstructure v0.14.0
+   Compiling once_cell v1.21.4
+   Compiling futures-sink v0.3.34
+   Compiling serde v1.0.229
+   Compiling futures-channel v0.3.34
+   Compiling futures-macro v0.3.34
+   Compiling syn v2.0.119
+   Compiling futures-io v0.3.34
+   Compiling slab v0.4.12
+   Compiling futures-task v0.3.34
+   Compiling futures-util v0.3.34
+   Compiling zerofrom-derive v0.1.8
+   Compiling zerofrom v0.1.8
+   Compiling yoke-derive v0.8.4
+   Compiling stable_deref_trait v1.2.1
+   Compiling yoke v0.8.4
+   Compiling js-sys v0.3.106
+   Compiling zerovec-derive v0.11.7
+   Compiling zerovec v0.11.9
+   Compiling displaydoc v0.2.7
+   Compiling unicode-segmentation v1.13.3
+   Compiling convert_case v0.11.0
+   Compiling tinystr v0.8.5
+   Compiling wasm-bindgen-futures v0.4.79
+   Compiling web-sys v0.3.106
+   Compiling futures-executor v0.3.34
+   Compiling proc-macro2-diagnostics v0.11.0
+   Compiling writeable v0.6.4
+   Compiling zmij v1.0.23
+   Compiling litemap v0.8.3
+   Compiling icu_locale_core v2.4.0
+   Compiling futures v0.3.34
+   Compiling zerotrie v0.2.5
+   Compiling potential_utf v0.1.6
+   Compiling generic-array v0.14.9
+   Compiling utf8_iter v1.0.4
+   Compiling icu_properties_data v2.4.0
+   Compiling icu_normalizer_data v2.4.0
+   Compiling smallvec v1.16.4
+   Compiling paste v1.0.15
+   Compiling or_poisoned v0.1.0
+   Compiling itoa v1.0.18
+   Compiling serde_json v1.0.154
+   Compiling unicode-xid v0.2.6
+   Compiling const_format_proc_macros v0.2.37
+   Compiling proc-macro-utils v0.10.0
+   Compiling icu_collections v2.4.0
+   Compiling icu_provider v2.4.0
+   Compiling throw_error v0.3.1
+   Compiling event-listener v5.4.2
+   Compiling slotmap v1.1.1
+   Compiling anyhow v1.0.104
+   Compiling typenum v1.20.1
+   Compiling equivalent v1.0.3
+   Compiling camino v1.2.6
+   Compiling konst_macro_rules v0.2.19
+   Compiling rstml v0.13.1
+   Compiling hashbrown v0.17.1
+   Compiling indexmap v2.14.2
+   Compiling konst v0.2.20
+   Compiling event-listener-strategy v0.5.4
+   Compiling send_wrapper v0.6.0
+   Compiling server_fn_macro v0.8.12
+   Compiling reactive_graph v0.2.16
+   Compiling icu_normalizer v2.4.0
+   Compiling icu_properties v2.4.0
+   Compiling async-lock v3.4.2
+   Compiling const_format v0.2.37
+   Compiling hydration_context v0.3.2
+   Compiling any_spawner v0.3.0
+   Compiling derive-where v1.7.0
+   Compiling thiserror v1.0.69
+   Compiling xxhash-rust v0.8.19
+   Compiling either v1.19.0
+   Compiling rustc-hash v2.1.3
+   Compiling libc v0.2.191
+   Compiling guardian v1.3.0
+   Compiling percent-encoding v2.3.2
+   Compiling itertools v0.14.0
+   Compiling idna_adapter v1.2.2
+   Compiling block-buffer v0.10.4
+   Compiling crypto-common v0.1.6
+   Compiling quote-use-macros v0.9.0
+   Compiling manyhow-macros v0.14.1
+   Compiling reactive_stores_macro v0.4.4
+   Compiling thiserror-impl v1.0.69
+   Compiling pin-project-internal v1.1.13
+   Compiling tachys v0.2.19
+   Compiling getrandom v0.4.3
+   Compiling bytes v1.12.1
+   Compiling prettyplease v0.3.0
+   Compiling winnow v1.0.4
+   Compiling toml_parser v1.1.5+spec-1.1.0
+   Compiling hybrid-array v0.4.15
+   Compiling http v1.5.0
+   Compiling pin-project v1.1.13
+   Compiling reactive_stores v0.4.4
+   Compiling manyhow v0.14.1
+   Compiling quote-use v0.9.0
+   Compiling digest v0.10.7
+   Compiling idna v1.1.0
+   Compiling form_urlencoded v1.2.2
+   Compiling either_of v0.1.9
+   Compiling gloo-utils v0.2.0
+   Compiling oco_ref v0.2.1
+   Compiling server_fn v0.8.13
+   Compiling aho-corasick v1.1.5
+   Compiling async-trait v0.1.92
+   Compiling toml_datetime v1.1.2+spec-1.1.0
+   Compiling collection_literals v1.0.3
+   Compiling next_tuple v0.1.0
+   Compiling const_str_slice_concat v0.1.0
+   Compiling same-file v1.0.6
+   Compiling cpufeatures v0.2.17
+   Compiling serde_spanned v1.1.2
+   Compiling html-escape v0.2.15
+   Compiling drain_filter_polyfill v0.1.3
+   Compiling regex-syntax v0.8.11
+   Compiling erased v0.1.2
+   Compiling interpolator v0.5.0
+   Compiling attribute-derive-macro v0.11.0
+   Compiling regex-automata v0.4.18
+   Compiling toml v1.1.8+spec-1.1.0
+   Compiling convert_case v0.6.0
+   Compiling sha2 v0.10.9
+   Compiling walkdir v2.5.0
+   Compiling gloo-net v0.6.0
+   Compiling url v2.5.8
+   Compiling server_fn_macro_default v0.8.6
+   Compiling serde_qs v0.15.0
+   Compiling wasm-streams v0.5.0
+   Compiling typed-builder-macro v0.23.2
+   Compiling leptos_macro v0.8.19
+   Compiling base16 v0.2.1
+   Compiling const-str v1.1.0
+   Compiling pathdiff v0.2.3
+   Compiling base64 v0.22.1
+   Compiling leptos_hot_reload v0.8.7
+   Compiling config v0.15.27
+   Compiling wasm_split_macros v0.2.2
+   Compiling typed-builder v0.23.2
+   Compiling uuid v1.29.0
+   Compiling regex v1.13.1
+   Compiling attribute-derive v0.11.0
+   Compiling crypto-common v0.2.2
+   Compiling block-buffer v0.12.1
+   Compiling codee v0.3.5
+   Compiling convert_case_extras v0.2.0
+   Compiling leptos v0.8.22
+   Compiling const-oid v0.10.2
+   Compiling async-once-cell v0.5.4
+   Compiling wasm_split_helpers v0.2.3
+   Compiling digest v0.11.3
+   Compiling leptos_server v0.8.8
+   Compiling leptos_config v0.8.10
+   Compiling leptos_dom v0.8.8
+   Compiling leptos_router v0.8.17
+   Compiling chat-domain v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/chat_domain)
+   Compiling sha2 v0.11.1
+   Compiling leptos_router_macro v0.8.7
+   Compiling shared v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/crates/shared)
+   Compiling chat-ui v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/chat_ui)
+warning: function `create_room` is never used
+ --> chat_ui/src/room_api.rs:6:14
+  |
+6 | pub async fn create_room(name: &str) -> Result<CreateRoomResponse, String> {
+  |              ^^^^^^^^^^^
+  |
+  = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `chat-ui` (lib) generated 1 warning
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1m 58s
+[38;5;77m       Cargo[0m finished [38;5;241mcargo build --package=chat-ui --lib --target-dir=/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/target/front --target=wasm32-unknown-unknown --no-default-features --features=hydrate --locked[0m
+[38;5;77m       Front[0m generating JS/WASM with wasm-bindgen
+[38;5;77m       Using[0m wasm-bindgen version 0.2.129 detected in project
+[38;5;77m    Finished[0m generating JS/WASM for front in 1.162343683s

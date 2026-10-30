@@ -1,0 +1,147 @@
+<html lang="zh-Hant"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Rust AI Desktop Pet</title>
+
+  <link rel="stylesheet" href="/style-efdbc821b0786fd8.css" integrity="sha384-EShZESlqa7A6QhWq6W/ABHLOQCy5siWBkSWIDwmXe+2DFsQTrguF6jnG63tLaZA7">
+<link rel="modulepreload" href="/pet-ui-4418b2ca190b779a.js" crossorigin="anonymous" integrity="sha384-tzsrW/F+7kNEggWI5d3iRCLXhhYf83PvLoUI3BBNJpDZ01DyggwGAFhsFHraAxTI"><link rel="preload" href="/pet-ui-4418b2ca190b779a_bg.wasm" crossorigin="anonymous" integrity="sha384-xPouIehIQyTxXUFcQFIqDIGHqybQg6xkHx3eZ+tK1++yvoYF5TDorEbKN2l9GQIt" as="fetch" type="application/wasm"></head>
+
+<body>
+  <script>
+    const { invoke } = window.__TAURI__.core;
+    const { listen } = window.__TAURI__.event;
+
+    const windowPetId = new URLSearchParams(location.search).get("pet_id");
+
+    const currentPetId = async () => {
+      const id = windowPetId || (await invoke("active_pet"))?.id;
+      if (!id) throw "請先選擇並出籠寵物";
+      return id;
+     };
+
+    window.getPetState = async () => invoke("get_saved_pet_state", { id: await currentPetId() });
+    
+    window.sendPetCommand = async (command) => invoke("send_saved_pet_command", { id: await currentPetId(), command });
+    
+    window.listenPetState = (callback) => listen("saved-pet-state", async (event) => {
+      try { if (event.payload.id === await currentPetId()) callback(event.payload.snapshot); } catch (_) {}
+    });
+    
+    window.openSavedPet = (id) => invoke("open_saved_pet", { id });
+    
+    window.cageSavedPet = async () => invoke("cage_saved_pet", { id: await currentPetId() });
+
+    window.cageSavedPetById = (id) => invoke("cage_saved_pet", { id });
+
+    window.petCageStatusById = (id) => invoke("pet_cage_status_by_id", { id });
+
+    window.petActivityStatus = (id) => invoke("pet_activity_status", { id });
+    
+    window.setPetWalk = (id, walking) => invoke("set_pet_walk", { id, walking });
+    
+    window.setPetDefaultCaged = (id, caged) => invoke("set_pet_default_caged", { id, caged });
+
+    window.findSavedPet = (id) => invoke("find_saved_pet", { id });
+
+    window.chatWithPet = (message) => {
+      return invoke("chat_with_pet", { message });
+    };
+
+    window.isPetWindow = () => {
+      return new URLSearchParams(window.location.search).get("view") === "pet";
+    };
+
+    window.openPetControls = async () => {
+        // 生活窗按鈕必須與 Day32 的原生右鍵選單一致：先選自己。
+        if (window.isPetWindow()) {
+            const id = await currentPetId();
+            await invoke("select_pet", { id });
+        }
+        // 選取失敗會 reject，絕不誤報「控制台已開啟」。
+        return invoke("open_control_window");
+    };
+
+    window.quitPet = () => {
+      return invoke("quit_pet");
+    };
+
+    let petContextMenu = null;
+
+    async function getPetContextMenu() {
+      if (petContextMenu) return petContextMenu;
+      const { Menu } = window.__TAURI__.menu;
+      const id = await currentPetId();
+      petContextMenu = await Menu.new({
+        items: [
+          { id: `pet:${id}:open_control`, text: "開啟控制窗" },
+          { id: `pet:${id}:interact`, text: "互動" },
+          { id: `pet:${id}:walk`, text: "散步（允許漫遊）" },
+          { id: `pet:${id}:sit`, text: "坐下（停止漫遊）" },
+          { id: `pet:${id}:cage`, text: "回籠子" },
+          { id: `pet:${id}:sleep`, text: "睡覺" },
+          { id: `pet:${id}:wake`, text: "醒來" },
+        ],
+      });
+      return petContextMenu;
+    }
+    
+    window.showPetContextMenu = async (x, y) => {
+      const menu = await getPetContextMenu();
+
+      const {
+        getCurrentWindow,
+      } = window.__TAURI__.window;
+
+      const {
+        LogicalPosition,
+      } = window.__TAURI__.dpi;
+
+      const appWindow = getCurrentWindow();
+
+      await menu.popup(
+        new LogicalPosition(x, y),
+        appWindow,
+      );
+    };
+
+    window.scanFilePreview = async () => {
+      return invoke("scan_file_preview");
+    };
+
+    window.scanDuplicatePreview = () => {
+      return invoke("scan_duplicate_preview");
+    };
+
+    window.activePet = () => windowPetId ? invoke("saved_pet_profile", { id: windowPetId }) : invoke("active_pet");
+
+    window.selectPet = (id) => invoke("select_pet", { id });
+    
+    window.listenPetProfile = (callback) => window.__TAURI__.event.listen(
+      "pet-profile-changed", (event) => { if (!windowPetId || event.payload.id === windowPetId) callback(event.payload); });
+
+
+    window.listPets = () => {
+      return invoke("list_pets");
+    };
+
+    window.createPet = (name) => {
+      return invoke("create_pet", { name });
+    };
+
+  </script>
+
+  
+<script type="module">
+import init, * as bindings from '/pet-ui-4418b2ca190b779a.js';
+const wasm = await init({ module_or_path: '/pet-ui-4418b2ca190b779a_bg.wasm' });
+
+
+window.wasmBindings = bindings;
+
+
+dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
+
+</script>
+
+<main class="control-shell"><h1>寵物控制台</h1><p>控制台關閉後寵物仍運作；檔案功能目前只提供唯讀預覽</p><section><h2>新增寵物</h2><label>寵物名稱<input></label><button type="button">建立寵物</button><p role="status">已載入儲存清單</p><h3>已儲存寵物</h3><button type="button">重新載入清單</button><!----><!----><ul><!----></ul></section><h2>互動與聊天</h2><p>讀取中…</p><section class="pet-controls"><button>互動</button><button>結束</button><button>睡覺</button><button>醒來</button></section><button class="chat-trigger" type="button">聊天</button><!----><!----><h2>檔案管理</h2><button type="button">預覽授權目錄</button><!----><!----><!----><!----><button type="button">檢查重複檔案</button><!----><!----><!----><!----><button type="button" disabled="">確認本次預覽</button><button type="button">取消／清除本次預覽</button><!----><!----><p class="error">請先選擇並出籠寵物</p><button type="button">寵物回寵了</button></main></body></html>

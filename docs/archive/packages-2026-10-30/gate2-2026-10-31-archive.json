@@ -1,0 +1,215 @@
+{
+  "source_docs_sha": "030bf394fde493ef66e63e057109244fa9ca32cf",
+  "package": "15-before-gate2-functional-acceptance-2026-10-31.zip",
+  "sha256": "453c1465af823c48598001f3e48f8d34cff3f475cb2e4660402a4667e967de1c",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "49ed326a76a69e046d14bf11c9c97afc4e9a5aae9b9367606d55463f646bc047",
+      "bytes": 782,
+      "blob_sha": "8057791c9ff83895480b1c4215f276d2f6d8a576",
+      "member": "copilot_use/README.md",
+      "already_archived": false
+    },
+    {
+      "path": "docs/README.md",
+      "sha256": "ef0ff42fa7eb660d9a24fe18d603118e981ddb4ec2fbe5f999c0e0415ae57b77",
+      "bytes": 1247,
+      "blob_sha": "7f21b413f3e7779ae76f0234967940513b153fee",
+      "member": "copilot_use/docs/README.md",
+      "already_archived": false
+    },
+    {
+      "path": "docs/teaching/README.md",
+      "sha256": "00527f4eea61099b37b8c2227d0acd96f193788ff8fed7a5c342d2f11bd357c5",
+      "bytes": 708,
+      "blob_sha": "a8888a01f7dd20e24f58b9b7ed0b2d91cd6bd6ec",
+      "member": "copilot_use/docs/teaching/README.md",
+      "already_archived": false
+    },
+    {
+      "path": "docs/teaching/daily/README.md",
+      "sha256": "bde1cec3d8a5a1b836c74a14cc13bb18c4be8c7e720edb7adbeee8588ccc805b",
+      "bytes": 859,
+      "blob_sha": "71fa14f132b6ec3627766cd4c4ccbca4e9ecdb08",
+      "member": "copilot_use/docs/teaching/daily/README.md",
+      "already_archived": false
+    },
+    {
+      "path": "docs/teaching/chat/README.md",
+      "sha256": "575c80e2d00364598b7246bb9462d0571fa6d1cad889f787994136668867f6a0",
+      "bytes": 737,
+      "blob_sha": "67cff8dd39168d31fde6d9a0d078eebee159361b",
+      "member": "copilot_use/docs/teaching/chat/README.md",
+      "already_archived": false
+    },
+    {
+      "path": "docs/teaching/pet/README.md",
+      "sha256": "c2bfde41f852e2a5b9a977c9b100d32f568178b20ec559c194873bd2f3f764e2",
+      "bytes": 736,
+      "blob_sha": "1a80593993a7daae7aa7ee1d13d53094e41a0f8f",
+      "member": "copilot_use/docs/teaching/pet/README.md",
+      "already_archived": false
+    },
+    {
+      "path": "docs/teaching/analytics/README.md",
+      "sha256": "a17f2f9469a2da7cd6c1a872e4211a9754ed931a39a7132836022e69f134b4de",
+      "bytes": 742,
+      "blob_sha": "7c0869d8ad98a7e28fdf74e6e931021124c20e7f",
+      "member": "copilot_use/docs/teaching/analytics/README.md",
+      "already_archived": false
+    },
+    {
+      "path": "docs/teaching/current/README.md",
+      "sha256": "c4885f047c476afaf09aad07dc7bd72cc40b8d1c35ae835f0f4660fba58b16f3",
+      "bytes": 727,
+      "blob_sha": "a5ee73d625f88e630cd25538d5409e71485c9b2e",
+      "member": "copilot_use/docs/teaching/current/README.md",
+      "already_archived": false
+    },
+    {
+      "path": "docs/teaching/current/STATUS.md",
+      "sha256": "f585a02a4a6112b3a0e25746e2cfb64dec954e4560e9c61b7dde6134e11f9919",
+      "bytes": 1756,
+      "blob_sha": "6f16ff4c0a606403c293719e77c28f74e44aa4a2",
+      "member": "copilot_use/docs/teaching/current/STATUS.md",
+      "already_archived": false
+    },
+    {
+      "path": "docs/teaching/current/manifest.json",
+      "sha256": "662342719c9cea20233b8dfe2feada4dfeb64f0b58fa60095b663fcadf9ba78d",
+      "bytes": 15364,
+      "blob_sha": "e3b4509b914ea45abfea8b75b9d48b55c2a9874b",
+      "member": "copilot_use/docs/teaching/current/manifest.json",
+      "already_archived": false
+    },
+    {
+      "path": "docs/teaching/current/validation.json",
+      "sha256": "9ba51e7ba0cc96771774c1368e1053b6fbc03d623f180c64e4f536f2d44f5ee4",
+      "bytes": 879,
+      "blob_sha": "6854debdfa320e7213437bf4e401a4fb3bb38237",
+      "member": "copilot_use/docs/teaching/current/validation.json",
+      "already_archived": false
+    },
+    {
+      "path": "docs/teaching/current/ci.json",
+      "sha256": "831c80045650031252facfe3cefc3e080c4924e7cff418c13914d43a957779a9",
+      "bytes": 102442,
+      "blob_sha": "bb7c475c52749da13ae28a73892ef47b23a4ed38",
+      "member": "copilot_use/docs/teaching/current/ci.json",
+      "already_archived": false
+    },
+    {
+      "path": "docs/learning-state.json",
+      "sha256": "0a269cff9d663ad49d71e94bcd2c095262751f54c90317359079aa7c03512bd8",
+      "bytes": 26230,
+      "blob_sha": "a384530da10a17e2396ed3c019f58f1dbb2adc3e",
+      "member": "copilot_use/docs/learning-state.json",
+      "already_archived": false
+    },
+    {
+      "path": "docs/SOURCE_LAYOUT.md",
+      "sha256": "dfc141737a2c26a5cda6a27522e578b839b8bdfded8111b7b8547507c824b584",
+      "bytes": 2016,
+      "blob_sha": "5405757752bbb6819e25fd9b57b78963e3ca5192",
+      "member": "copilot_use/docs/SOURCE_LAYOUT.md",
+      "already_archived": false
+    },
+    {
+      "path": "docs/LOCAL_START.md",
+      "sha256": "1177fadde3b3e3611358b33d5f63fd69d833bc29d70878f0113eaa0381754e18",
+      "bytes": 1950,
+      "blob_sha": "1a7f787f7658d79e2ef087e30de08f17df369d10",
+      "member": "copilot_use/docs/LOCAL_START.md",
+      "already_archived": false
+    },
+    {
+      "path": "docs/LOCAL_VALIDATION.md",
+      "sha256": "910a683ac420366d91be4db2269d5f954077ae7f8c7a2aa13e3991ec923813ae",
+      "bytes": 2049,
+      "blob_sha": "2b7b87166c8d1df36e24915602f0e3bdd6de7841",
+      "member": "copilot_use/docs/LOCAL_VALIDATION.md",
+      "already_archived": false
+    },
+    {
+      "path": "docs/SYSTEM_ARCHITECTURE.md",
+      "sha256": "999487ce20aa0fc6df1c10657870ddbc2ec36572017256d29cd85ab85bf64ca5",
+      "bytes": 2106,
+      "blob_sha": "97989806b0fc75269079c9fbf84afa1fd3f8a2b0",
+      "member": "copilot_use/docs/SYSTEM_ARCHITECTURE.md",
+      "already_archived": false
+    },
+    {
+      "path": "docs/FUTURE_WORK.md",
+      "sha256": "7f478ca0d75891c34728d6a09302e9655d06520d70971c66cd4adb2f1c5e622c",
+      "bytes": 8312,
+      "blob_sha": "2948bd6a5152225c0d4100cbdd00b22a8977b020",
+      "member": "copilot_use/docs/FUTURE_WORK.md",
+      "already_archived": false
+    },
+    {
+      "path": "docs/teaching/functional-refactoring/PROGRESS.md",
+      "sha256": "e597fb521cd97ec4aad47a74dbc8afcc07c33215a3606f44333212677e039105",
+      "bytes": 1477,
+      "blob_sha": "7c611d9d24784e221369adb4478c2011cb83e32e",
+      "member": "copilot_use/docs/teaching/functional-refactoring/PROGRESS.md",
+      "already_archived": false
+    },
+    {
+      "path": "docs/teaching/daily/day-44/README.md",
+      "sha256": "8cecb10723ce150e1f81b1eba493ec5ce3c57b1da403df9938c6470a584e95b6",
+      "bytes": 1548,
+      "blob_sha": "a22976216ea7b0cd70ab24a58f2273ed526bd438",
+      "member": "copilot_use/docs/teaching/daily/day-44/README.md",
+      "already_archived": false
+    },
+    {
+      "path": "docs/teaching/daily/day-44/ENTRY.md",
+      "sha256": "d69d4df8122e7da25326d98da4e22f1bd48dbb23f520d9f0e630edd14863b383",
+      "bytes": 743,
+      "blob_sha": "ea00658e4bd275c0d8aba335e435ee22d685293a",
+      "member": "copilot_use/docs/teaching/daily/day-44/ENTRY.md",
+      "already_archived": false
+    },
+    {
+      "path": "docs/teaching/daily/day-44/chat.md",
+      "sha256": "6acdbc68a97ece1da8182c272b1c914debe2ec9aaaaac84077112091919ea6cd",
+      "bytes": 26687,
+      "blob_sha": "14fae748675efb6ba222805f5337c19a0bbea26b",
+      "member": "copilot_use/docs/teaching/daily/day-44/chat.md",
+      "already_archived": false
+    },
+    {
+      "path": "docs/teaching/daily/day-44/pet.md",
+      "sha256": "b6dae1966d45dd9268860f40b3c582805115bbfae5fb8ccd4cc61a69156226ec",
+      "bytes": 14786,
+      "blob_sha": "e573ae357d907a5b31f236b72e2c3d60ef98eba7",
+      "member": "copilot_use/docs/teaching/daily/day-44/pet.md",
+      "already_archived": false
+    },
+    {
+      "path": "docs/teaching/daily/day-44/analytics.md",
+      "sha256": "4467c28dd1b10896352ecd2326adcb8fdf369625b4a8c011993ce1b4d0a65c34",
+      "bytes": 67516,
+      "blob_sha": "1cb58e8ea7925a5e5c7b14bd5fe7d4610ccd84e6",
+      "member": "copilot_use/docs/teaching/daily/day-44/analytics.md",
+      "already_archived": false
+    }
+  ],
+  "previous_fourteen_zip_hashes_unchanged": {
+    "01-chat-2026-10-30.zip": "d2e2afced313b9c77adc459b16d5f2abb8210a7a3e9b1e820b6f8cfd4851783f",
+    "02-pet-2026-10-30.zip": "6069e0d0e19ee55c5d97fdf6206b4c5bd3114bccd1c0b3fe50f41f90e7cf165d",
+    "03-analytics-2026-10-30.zip": "1d65f353640a951b8b1856532de487b1f217dd8dc263d6f08fa44426bdcff9d0",
+    "04-shared-teaching-2026-10-30.zip": "4fe83423d3645fecf30bd2f7511a80200893e35aaae6a6264b30821046c91524",
+    "05-source-verification-2026-10-30.zip": "ee61c93920a7deee91270db8d2d901754c7c002c921dd3184bd7af342e8d5828",
+    "06-rules-and-indexes-2026-10-30.zip": "6b3f0e977d93d11384f02c680e6a88c851fdc96c9a7beec17d60ac1282e021a2",
+    "07-superseded-document-versions-2026-10-30.zip": "ca6e16df10b09b87b356fe821d35110e11c747d29df70a3128742440d1c7816f",
+    "08-pet-activity-contract-superseded-2026-10-30.zip": "d0f23c79b1400401056a8a2b5f81e90e97e52467addad52ff91ce81019e160dd",
+    "09-pet-walk-sit-contract-superseded-2026-10-30.zip": "4de75e6fabc865c3bb7f8c95edb3c6110719b19fd2b13bd9c88eb7c12862cbc1",
+    "10-pet-sit-priority-superseded-2026-10-30.zip": "ccdbdecc039b3ce99c946aefea460444e1a4bf3cf0f1de10d377e48a652aed26",
+    "11-day44-validation-superseded-2026-10-30.zip": "5bcd98cf79ec9def70de3a73d816d446bfc9c05796a3fea0acbbcf70e3da4991",
+    "12-previous-day44-validation-2026-10-30.zip": "a0ce46cb07835cb86bbaf25b7378549c4142861e07920d821f78dc67c834a6b2",
+    "13-day44-recheck-superseded-documents-2026-10-30.zip": "b0648d36405b23452cc3216ec35e987e9285ed56dfab3e7cad199623e4d3a8fb",
+    "14-pet-day44-before-adoption-2026-10-30.zip": "c1300824a5e32b339b93041e881bccb9c7bbf3a21bbbb622d3e449b06c40c9db"
+  }
+}

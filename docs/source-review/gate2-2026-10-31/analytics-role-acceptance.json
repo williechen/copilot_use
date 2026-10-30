@@ -1,0 +1,7 @@
+{
+  "source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
+  "status": "not implemented / not fully accepted",
+  "evidence": "actual Leptos dashboard says 目前僅支援管理員；角色與來源 ACL 尚待接通。",
+  "requirement": "confirmed administrator/viewer roles, per-source ACL and immediate permission revocation",
+  "full_role_source_acceptance": false
+}

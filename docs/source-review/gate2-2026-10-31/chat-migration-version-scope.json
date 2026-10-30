@@ -1,0 +1,84 @@
+{
+  "observed_utc": "2026-10-30T17:39:16.943692+00:00",
+  "source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
+  "versions": {
+    "original_observed_readonly_now": [
+      [
+        20260930034455,
+        1
+      ],
+      [
+        20261007084321,
+        1
+      ],
+      [
+        20261018073931,
+        1
+      ],
+      [
+        20261018094242,
+        1
+      ],
+      [
+        20261018114024,
+        1
+      ],
+      [
+        20261018122554,
+        1
+      ],
+      [
+        20261019221857,
+        1
+      ],
+      [
+        20261020124211,
+        1
+      ],
+      [
+        20261020152737,
+        1
+      ]
+    ],
+    "acceptance_backup_after_startup": [
+      [
+        20260930034455,
+        1
+      ],
+      [
+        20261007084321,
+        1
+      ],
+      [
+        20261018073931,
+        1
+      ],
+      [
+        20261018094242,
+        1
+      ],
+      [
+        20261018114024,
+        1
+      ],
+      [
+        20261018122554,
+        1
+      ],
+      [
+        20261019221857,
+        1
+      ],
+      [
+        20261020124211,
+        1
+      ],
+      [
+        20261020152737,
+        1
+      ]
+    ]
+  },
+  "same_versions_at_observation": true,
+  "scope": "Original version list observed after copy acceptance; not a fabricated before-execution snapshot. Data-preservation snapshot was captured before and after startup separately. Successful migration startup does not imply new migrations were necessarily applied."
+}

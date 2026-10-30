@@ -1,0 +1,20 @@
+[
+  {
+    "pid": 43624,
+    "cwd": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/gate2-20261031/native-run",
+    "database_fds": [
+      {
+        "fd": "9",
+        "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/gate2-20261031/pet-gui.sqlite"
+      },
+      {
+        "fd": "54",
+        "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/gate2-20261031/pet-gui.sqlite"
+      },
+      {
+        "fd": "69",
+        "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/gate2-20261031/pet-gui.sqlite"
+      }
+    ]
+  }
+]

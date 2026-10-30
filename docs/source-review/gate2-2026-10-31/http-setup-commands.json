@@ -1,0 +1,47 @@
+[
+  {
+    "command": [
+      "/usr/lib/postgresql/18/bin/pg_ctl",
+      "-D",
+      "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/pg",
+      "-l",
+      "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/outputs/gate2-2026-10-31/gate2-postgres.log",
+      "-o",
+      "-k '' -p 55482 -h 127.0.0.1",
+      "start"
+    ],
+    "cwd": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an",
+    "exit_code": 0,
+    "started_utc": "2026-10-30T17:07:49.414850+00:00",
+    "seconds": 0.1175088882446289,
+    "log": "http-setup-00.log"
+  },
+  {
+    "command": [
+      "/usr/lib/postgresql/18/bin/createdb",
+      "-h",
+      "127.0.0.1",
+      "-p",
+      "55482",
+      "gate2_browser_20261031"
+    ],
+    "cwd": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an",
+    "exit_code": 0,
+    "started_utc": "2026-10-30T17:07:49.532446+00:00",
+    "seconds": 0.16376543045043945,
+    "log": "http-setup-01.log"
+  },
+  {
+    "command": [
+      "/usr/lib/postgresql/18/bin/pg_ctl",
+      "-D",
+      "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/pg",
+      "stop"
+    ],
+    "cwd": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an",
+    "exit_code": 0,
+    "started_utc": "2026-10-30T17:20:32.433241+00:00",
+    "seconds": 0.10831379890441895,
+    "log": "http-setup-02.log"
+  }
+]

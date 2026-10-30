@@ -1,0 +1,33 @@
+{
+  "source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
+  "native_profile": "debug with dependency feature tauri/custom-protocol (embedded assets)",
+  "frontend_profile": "release",
+  "files": [
+    {
+      "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/pet_apps/target/debug/pet-server",
+      "bytes": 215946664,
+      "sha256": "8f826a6709c45c6d84e913a31cc67b640976c2b5e2952c1e50bf20a454aae5c6"
+    },
+    {
+      "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/pet_apps/pet_ui/dist/index.html",
+      "bytes": 5069,
+      "sha256": "417e0a6ea86603e78faa9f5bd93c5e4e8f1b1ec1ed2bc5266c12a58de8cf7eaa"
+    },
+    {
+      "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/pet_apps/pet_ui/dist/pet-ui-4418b2ca190b779a_bg.wasm",
+      "bytes": 453452,
+      "sha256": "2eb633880a1d7ae32fe6fa4f2bf12878ba90d19c71c1e5e84432ec1849572267"
+    },
+    {
+      "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/pet_apps/pet_ui/dist/style-efdbc821b0786fd8.css",
+      "bytes": 4150,
+      "sha256": "13cd5bcea6f883021bbb67cdec49bf93e559dea8619606ad94956485b0637f4d"
+    },
+    {
+      "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/pet_apps/pet_ui/dist/pet-ui-4418b2ca190b779a.js",
+      "bytes": 41434,
+      "sha256": "5b0887c0a59c94e905d95d74f9147d9f10c1e0d38e7b52ea503eaa73b7d17205"
+    }
+  ],
+  "source_worktree_unchanged": true
+}

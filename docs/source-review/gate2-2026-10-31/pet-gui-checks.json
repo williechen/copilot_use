@@ -1,0 +1,773 @@
+{
+  "source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
+  "method": "actual Tauri app, embedded release frontend, WebKitWebDriver and private Xvfb; no IPC mock",
+  "passed": [
+    {
+      "case": "native controller rendered",
+      "utc": "2026-10-30T16:57:45.985736+00:00",
+      "evidence": {
+        "main_handle": "page-9B8DBF53-7CA9-4CB2-A101-9BC797294B6C",
+        "main_geometry": {
+          "id": "0x200004",
+          "x": 0,
+          "y": 0,
+          "width": 800,
+          "height": 680,
+          "viewable": true
+        }
+      }
+    },
+    {
+      "case": "create Gate2-A",
+      "utc": "2026-10-30T16:57:46.743555+00:00",
+      "evidence": {
+        "profiles": [
+          [
+            "3a23eb60-33de-4d2f-9a2c-419b034d3818",
+            "Gate2-A",
+            1
+          ]
+        ],
+        "activities": [
+          [
+            "sit",
+            0
+          ],
+          [
+            "walk",
+            1
+          ]
+        ],
+        "native_window": {
+          "id": "0x20021b",
+          "x": 82,
+          "y": 81,
+          "width": 200,
+          "height": 200,
+          "viewable": true
+        }
+      }
+    },
+    {
+      "case": "create Gate2-B",
+      "utc": "2026-10-30T16:57:47.524297+00:00",
+      "evidence": {
+        "profiles": [
+          [
+            "3a23eb60-33de-4d2f-9a2c-419b034d3818",
+            "Gate2-A",
+            1
+          ],
+          [
+            "47521752-e6eb-41bf-a293-4e4231f569b7",
+            "Gate2-B",
+            1
+          ]
+        ],
+        "activities": [
+          [
+            "sit",
+            0
+          ],
+          [
+            "walk",
+            1
+          ]
+        ],
+        "native_window": {
+          "id": "0x200265",
+          "x": 302,
+          "y": 81,
+          "width": 200,
+          "height": 200,
+          "viewable": true
+        }
+      }
+    },
+    {
+      "case": "create Gate2-C",
+      "utc": "2026-10-30T16:57:48.082164+00:00",
+      "evidence": {
+        "profiles": [
+          [
+            "3a23eb60-33de-4d2f-9a2c-419b034d3818",
+            "Gate2-A",
+            1
+          ],
+          [
+            "47521752-e6eb-41bf-a293-4e4231f569b7",
+            "Gate2-B",
+            1
+          ],
+          [
+            "70f66044-b2fb-4ad2-b226-d6bb80dc64d3",
+            "Gate2-C",
+            1
+          ]
+        ],
+        "activities": [
+          [
+            "sit",
+            0
+          ],
+          [
+            "walk",
+            1
+          ]
+        ],
+        "native_window": {
+          "id": "0x2002a0",
+          "x": 520,
+          "y": 80,
+          "width": 200,
+          "height": 200,
+          "viewable": true
+        }
+      }
+    },
+    {
+      "case": "three independent UI statuses and native windows",
+      "utc": "2026-10-30T16:58:29.193820+00:00",
+      "evidence": {
+        "profiles": [
+          [
+            "3a23eb60-33de-4d2f-9a2c-419b034d3818",
+            "Gate2-A",
+            1
+          ],
+          [
+            "47521752-e6eb-41bf-a293-4e4231f569b7",
+            "Gate2-B",
+            1
+          ],
+          [
+            "70f66044-b2fb-4ad2-b226-d6bb80dc64d3",
+            "Gate2-C",
+            1
+          ]
+        ],
+        "windows": {
+          "Gate2-C": 2097824,
+          "Gate2-B": 2097765,
+          "Gate2-A": 2097691,
+          "Pet 控制台": 2097156,
+          "pet-server": 2097153
+        },
+        "contexts": [
+          "page-021DD932-B8E2-42F2-9F06-8C7607B424B6",
+          "page-244B4394-43B4-4A1C-96BD-9930C24F36D1",
+          "page-F78FB3E7-88E5-4D78-8493-0CB7F30E0B15",
+          "page-9B8DBF53-7CA9-4CB2-A101-9BC797294B6C"
+        ]
+      }
+    },
+    {
+      "case": "walk permits actual native movement",
+      "utc": "2026-10-30T16:58:29.710555+00:00",
+      "evidence": {
+        "before": {
+          "id": "0x20021b",
+          "x": 218,
+          "y": 149,
+          "width": 200,
+          "height": 200,
+          "viewable": true
+        },
+        "after": {
+          "id": "0x20021b",
+          "x": 220,
+          "y": 150,
+          "width": 200,
+          "height": 200,
+          "viewable": true
+        },
+        "moved": true
+      }
+    },
+    {
+      "case": "sit remains outside and stops only A movement",
+      "utc": "2026-10-30T16:58:30.928184+00:00",
+      "evidence": {
+        "A_flags": [
+          [
+            "sit",
+            1
+          ],
+          [
+            "walk",
+            0
+          ]
+        ],
+        "A_before": {
+          "id": "0x20021b",
+          "x": 222,
+          "y": 151,
+          "width": 200,
+          "height": 200,
+          "viewable": true
+        },
+        "A_after": {
+          "id": "0x20021b",
+          "x": 222,
+          "y": 151,
+          "width": 200,
+          "height": 200,
+          "viewable": true
+        },
+        "B_flags": [
+          [
+            "sit",
+            0
+          ],
+          [
+            "walk",
+            1
+          ]
+        ],
+        "C_flags": [
+          [
+            "sit",
+            0
+          ],
+          [
+            "walk",
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "case": "UI cage DB failure preserves exact sitting and window",
+      "utc": "2026-10-30T16:58:58.053732+00:00",
+      "evidence": {
+        "flags": [
+          [
+            "sit",
+            1
+          ],
+          [
+            "walk",
+            0
+          ]
+        ],
+        "native": {
+          "id": "0x20021b",
+          "x": 222,
+          "y": 151,
+          "width": 200,
+          "height": 200,
+          "viewable": true
+        },
+        "ui_error": true
+      }
+    },
+    {
+      "case": "native close DB failure keeps window and activities",
+      "utc": "2026-10-30T16:58:58.872420+00:00",
+      "evidence": {
+        "flags": [
+          [
+            "sit",
+            1
+          ],
+          [
+            "walk",
+            0
+          ]
+        ],
+        "native": {
+          "id": "0x20021b",
+          "x": 222,
+          "y": 151,
+          "width": 200,
+          "height": 200,
+          "viewable": true
+        },
+        "event": "WM_DELETE_WINDOW"
+      }
+    },
+    {
+      "case": "native close cages only A after DB recovers",
+      "utc": "2026-10-30T16:58:59.375757+00:00",
+      "evidence": {
+        "A": [
+          [
+            "sit",
+            0
+          ],
+          [
+            "walk",
+            0
+          ]
+        ],
+        "B": [
+          [
+            "sit",
+            0
+          ],
+          [
+            "walk",
+            1
+          ]
+        ],
+        "C": [
+          [
+            "sit",
+            0
+          ],
+          [
+            "walk",
+            1
+          ]
+        ],
+        "windows": {
+          "Gate2-C": 2097824,
+          "Gate2-B": 2097765,
+          "Pet 控制台": 2097156,
+          "pet-server": 2097153
+        }
+      }
+    },
+    {
+      "case": "repeated uncage reuses window and basic activity rows",
+      "utc": "2026-10-30T16:59:01.632829+00:00",
+      "evidence": {
+        "contexts": [
+          "page-F8018FCD-AC47-4BA5-A083-9940B60B5430",
+          "page-021DD932-B8E2-42F2-9F06-8C7607B424B6",
+          "page-244B4394-43B4-4A1C-96BD-9930C24F36D1",
+          "page-9B8DBF53-7CA9-4CB2-A101-9BC797294B6C"
+        ],
+        "activities": 6
+      }
+    },
+    {
+      "case": "both true normalized to sitting through real UI/backend",
+      "utc": "2026-10-30T17:00:33.029472+00:00",
+      "evidence": {
+        "A": [
+          [
+            "sit",
+            1
+          ],
+          [
+            "walk",
+            0
+          ]
+        ],
+        "B": [
+          [
+            "sit",
+            0
+          ],
+          [
+            "walk",
+            1
+          ]
+        ],
+        "C": [
+          [
+            "sit",
+            0
+          ],
+          [
+            "walk",
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "case": "native control close hides controller and keeps three pets",
+      "utc": "2026-10-30T17:00:33.610639+00:00",
+      "evidence": {
+        "controller": {
+          "id": "0x200004",
+          "x": 0,
+          "y": 0,
+          "width": 800,
+          "height": 680,
+          "viewable": false
+        },
+        "windows": {
+          "Gate2-A": 2100223,
+          "Gate2-C": 2097824,
+          "Gate2-B": 2097765,
+          "Pet 控制台": 2097156,
+          "pet-server": 2097153
+        }
+      }
+    },
+    {
+      "case": "native process uses exact isolated SQLite",
+      "utc": "2026-10-30T17:01:48.001496+00:00",
+      "evidence": [
+        {
+          "pid": 43624,
+          "cwd": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/gate2-20261031/native-run",
+          "database_fds": [
+            {
+              "fd": "9",
+              "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/gate2-20261031/pet-gui.sqlite"
+            },
+            {
+              "fd": "54",
+              "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/gate2-20261031/pet-gui.sqlite"
+            },
+            {
+              "fd": "69",
+              "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/gate2-20261031/pet-gui.sqlite"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case": "A native life identity screenshot and DOM agree",
+      "utc": "2026-10-30T17:04:24.512069+00:00",
+      "evidence": {
+        "name": "Gate2-A",
+        "native_geometry": {
+          "id": "0x200bff",
+          "x": 816,
+          "y": 228,
+          "width": 200,
+          "height": 200,
+          "viewable": true
+        },
+        "webdriver_displayed": false,
+        "limitation": "driver visibility false conflicts with visible native screenshot and nonzero DOM bounds; not used as pass evidence"
+      }
+    },
+    {
+      "case": "A controller button restores main and selects A",
+      "utc": "2026-10-30T17:04:25.009562+00:00",
+      "evidence": {
+        "selection": "3a23eb60-33de-4d2f-9a2c-419b034d3818",
+        "controller": {
+          "id": "0x200004",
+          "x": 0,
+          "y": 0,
+          "width": 800,
+          "height": 680,
+          "viewable": true
+        }
+      }
+    },
+    {
+      "case": "narrow controller reaches C controls",
+      "utc": "2026-10-30T17:04:25.410628+00:00",
+      "evidence": {
+        "native": {
+          "id": "0x200004",
+          "x": 0,
+          "y": 0,
+          "width": 400,
+          "height": 500,
+          "viewable": true
+        },
+        "C_status": "Gate2-C／tortoise（70f66044-b2fb-4ad2-b226-d6bb80dc64d3）選為生活窗寵物出籠查詢回籠狀態已出籠；散步，可漫遊；啟動預設留在籠內回籠這隻找回寵物查詢活動與預設散步（可漫遊）坐下（停止漫遊）啟動時預設出籠啟動時預設留籠"
+      }
+    },
+    {
+      "case": "restart prerequisites saved",
+      "utc": "2026-10-30T17:04:27.157899+00:00",
+      "evidence": {
+        "profiles": [
+          [
+            "3a23eb60-33de-4d2f-9a2c-419b034d3818",
+            "Gate2-A",
+            0
+          ],
+          [
+            "47521752-e6eb-41bf-a293-4e4231f569b7",
+            "Gate2-B",
+            1
+          ],
+          [
+            "70f66044-b2fb-4ad2-b226-d6bb80dc64d3",
+            "Gate2-C",
+            1
+          ]
+        ],
+        "A": [
+          [
+            "sit",
+            1
+          ],
+          [
+            "walk",
+            0
+          ]
+        ],
+        "B": [
+          [
+            "sit",
+            0
+          ],
+          [
+            "walk",
+            1
+          ]
+        ],
+        "C": [
+          [
+            "sit",
+            0
+          ],
+          [
+            "walk",
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "case": "restart restores only default A and preserves sitting",
+      "utc": "2026-10-30T17:05:10.796612+00:00",
+      "evidence": {
+        "profiles": [
+          [
+            "3a23eb60-33de-4d2f-9a2c-419b034d3818",
+            "Gate2-A",
+            0
+          ],
+          [
+            "47521752-e6eb-41bf-a293-4e4231f569b7",
+            "Gate2-B",
+            1
+          ],
+          [
+            "70f66044-b2fb-4ad2-b226-d6bb80dc64d3",
+            "Gate2-C",
+            1
+          ]
+        ],
+        "A": [
+          [
+            "sit",
+            1
+          ],
+          [
+            "walk",
+            0
+          ]
+        ],
+        "B": [
+          [
+            "sit",
+            0
+          ],
+          [
+            "walk",
+            0
+          ]
+        ],
+        "C": [
+          [
+            "sit",
+            0
+          ],
+          [
+            "walk",
+            0
+          ]
+        ],
+        "contexts": [
+          "page-33DF0FD9-F50A-4214-BE86-F6C00F9FFFAD",
+          "page-1A9914B7-FF59-418A-BB31-9A92AF5EAC0F"
+        ],
+        "windows": {
+          "Gate2-A": 2097179,
+          "Pet 控制台": 2097155,
+          "pet-server": 2097153
+        }
+      }
+    },
+    {
+      "case": "recage preserves default-out preference",
+      "utc": "2026-10-30T17:05:11.053805+00:00",
+      "evidence": {
+        "profile": [
+          "3a23eb60-33de-4d2f-9a2c-419b034d3818",
+          "Gate2-A",
+          0
+        ],
+        "flags": [
+          [
+            "sit",
+            0
+          ],
+          [
+            "walk",
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "case": "real native cage-status IPC rejects missing UUID",
+      "utc": "2026-10-30T17:05:34.187625+00:00",
+      "evidence": {
+        "error": "找不到寵物",
+        "ok": false
+      }
+    },
+    {
+      "case": "all three persist independently without duplicate activities",
+      "utc": "2026-10-30T17:05:34.189408+00:00",
+      "evidence": {
+        "profiles": [
+          [
+            "3a23eb60-33de-4d2f-9a2c-419b034d3818",
+            "Gate2-A",
+            0
+          ],
+          [
+            "47521752-e6eb-41bf-a293-4e4231f569b7",
+            "Gate2-B",
+            1
+          ],
+          [
+            "70f66044-b2fb-4ad2-b226-d6bb80dc64d3",
+            "Gate2-C",
+            1
+          ]
+        ],
+        "activity_rows": 6
+      }
+    },
+    {
+      "case": "sleep pauses movement without caging activity",
+      "utc": "2026-10-30T17:06:13.585013+00:00",
+      "evidence": {
+        "runtime": {
+          "revision": 1,
+          "state": "sleeping"
+        },
+        "flags": [
+          [
+            "sit",
+            0
+          ],
+          [
+            "walk",
+            1
+          ]
+        ],
+        "before": {
+          "id": "0x2004fb",
+          "x": 84,
+          "y": 82,
+          "width": 200,
+          "height": 200,
+          "viewable": true
+        },
+        "after": {
+          "id": "0x2004fb",
+          "x": 84,
+          "y": 82,
+          "width": 200,
+          "height": 200,
+          "viewable": true
+        }
+      }
+    },
+    {
+      "case": "wake resumes movement with same activity",
+      "utc": "2026-10-30T17:06:13.953348+00:00",
+      "evidence": {
+        "before": {
+          "id": "0x2004fb",
+          "x": 86,
+          "y": 83,
+          "width": 200,
+          "height": 200,
+          "viewable": true
+        },
+        "after": {
+          "id": "0x2004fb",
+          "x": 88,
+          "y": 84,
+          "width": 200,
+          "height": 200,
+          "viewable": true
+        },
+        "flags": [
+          [
+            "sit",
+            0
+          ],
+          [
+            "walk",
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "case": "recaged default A reopens walking on next process restart",
+      "utc": "2026-10-30T17:07:48.913663+00:00",
+      "evidence": {
+        "profiles": [
+          [
+            "3a23eb60-33de-4d2f-9a2c-419b034d3818",
+            "Gate2-A",
+            0
+          ],
+          [
+            "47521752-e6eb-41bf-a293-4e4231f569b7",
+            "Gate2-B",
+            1
+          ],
+          [
+            "70f66044-b2fb-4ad2-b226-d6bb80dc64d3",
+            "Gate2-C",
+            1
+          ]
+        ],
+        "A": [
+          [
+            "sit",
+            0
+          ],
+          [
+            "walk",
+            1
+          ]
+        ],
+        "B": [
+          [
+            "sit",
+            0
+          ],
+          [
+            "walk",
+            0
+          ]
+        ],
+        "C": [
+          [
+            "sit",
+            0
+          ],
+          [
+            "walk",
+            0
+          ]
+        ],
+        "contexts": [
+          "page-4C75D5E7-BA84-4FA0-AFC8-C1317FED847E",
+          "page-26FB4ABE-AE88-4059-B998-E4D8034BCE49"
+        ]
+      }
+    }
+  ],
+  "automated_native_functional_suite": "completed",
+  "limitations": [
+    "private Xvfb software rendering, not user physical desktop",
+    "manual multi-monitor/HiDPI/real OS window-creation failure not executed",
+    "WebKit name visibility atom false despite screenshot/DOM/native geometry; recorded explicitly"
+  ],
+  "manual_desktop_acceptance": false
+}

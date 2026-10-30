@@ -1,0 +1,20 @@
+{
+  "base_url": "http://127.0.0.1:34191",
+  "display": ":1",
+  "driver_pid": 43609,
+  "xvfb_pid": 43606,
+  "application": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/pet_apps/target/debug/pet-server",
+  "database": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/gate2-20261031/pet-gui.sqlite",
+  "cwd": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/gate2-20261031/native-run",
+  "source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
+  "environment_overrides": {
+    "DISPLAY": ":1",
+    "GDK_BACKEND": "x11",
+    "LIBGL_ALWAYS_SOFTWARE": "1",
+    "WEBKIT_DISABLE_DMABUF_RENDERER": "1",
+    "WEBKIT_DISABLE_COMPOSITING_MODE": "1",
+    "TAURI_WEBVIEW_AUTOMATION": "true",
+    "PET_ENABLE_ROAM": "true",
+    "PET_DATABASE_URL": "sqlite:///home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/gate2-20261031/pet-gui.sqlite?mode=rwc"
+  }
+}

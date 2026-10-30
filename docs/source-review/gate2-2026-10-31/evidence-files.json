@@ -1,0 +1,540 @@
+{
+  "source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
+  "files": [
+    {
+      "path": "docs/source-review/gate2-2026-10-31/README.md",
+      "bytes": 7984,
+      "sha256": "2b70cd611214656ea30c964e124fe8b975c751aa2a0cd4892a6cfb6bbe894c44",
+      "blob_sha": "f01d04f45b30ee68f7328bf2b2ac2b13c45f86c9"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/analytics-browser-checks.json",
+      "bytes": 3229,
+      "sha256": "42eac063b15aabd2770f7681566f71859b67441d0df3edf2fb19f01805af2811",
+      "blob_sha": "bf473bacd5d7febf70a41b29fc0b676cdd4ef8cd"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/analytics-browser-restart.log",
+      "bytes": 46,
+      "sha256": "bdb3605859043b203ababb1049c2d6fe96bf0f2a4ca52bf7539478b7daa9b94a",
+      "blob_sha": "465030f70512306c3f4bdd62b1e2595b88b8b1d8"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/analytics-browser.log",
+      "bytes": 46,
+      "sha256": "bdb3605859043b203ababb1049c2d6fe96bf0f2a4ca52bf7539478b7daa9b94a",
+      "blob_sha": "465030f70512306c3f4bdd62b1e2595b88b8b1d8"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/analytics-dashboard.png",
+      "bytes": 54998,
+      "sha256": "32c2e39d5f375edc786f0cdd1cbff24de05d4f1b06b8c5f77ef3ff70416052ce",
+      "blob_sha": "86f1fd3fbcdc83b74fb0f9056b38e9b2554618a0"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/analytics-first-password-change.png",
+      "bytes": 36499,
+      "sha256": "054e3f95811a2a71bc8440cab1ccfa46352c6cb6f034f695f9ef58618ac89662",
+      "blob_sha": "6a2a85cb1785a26c3e55c5d598c1b7a69941ad3a"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/analytics-role-acceptance.json",
+      "bytes": 373,
+      "sha256": "1445618e0aef163b7251c76ca518f688bfe32d9a0a9050a8cacab814b9596d45",
+      "blob_sha": "1129eb13453086b78ebb37219261ce358da8ada3"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/browser-commands.jsonl",
+      "bytes": 65954,
+      "sha256": "43d70fbeff711d144a1038f846a26ff1088e1fc7650fe6c2653fe9f968604c11",
+      "blob_sha": "13ec7126cc5248c6f9da18335eefe48f5dce9bcd"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/browser-connection.json",
+      "bytes": 152,
+      "sha256": "8f8a84ce5dd6b0b8e2dc43a63d191305068f6ea81b2da33b554b20966619869a",
+      "blob_sha": "d5b9e95d89d75a61443b138247303eaaf10a9d41"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/browser-driver.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/browser-progress.log",
+      "bytes": 37,
+      "sha256": "897ea1b12276d708f5e764a2001ce69e336f35fa493f05c75c09519fa4a35364",
+      "blob_sha": "6c47a3cec3bcb804d3381ac32dfc0584a11f5abb"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/browser-session.json",
+      "bytes": 527,
+      "sha256": "788ead959810321fcd512c580140f8db410d4043ff86a195e9be1b19620c2187",
+      "blob_sha": "44e7c991942d321806d68cceae108912ac318c83"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/build-00.log",
+      "bytes": 6131,
+      "sha256": "136c7efeb9355bb7c813fabacab2683a77f1e3918b8328512fbc5572c23747c3",
+      "blob_sha": "d98fbe4b70d756127a385ab5298c5c387dc97428"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/build-01.log",
+      "bytes": 296,
+      "sha256": "7124f4f43b7730aede68a5785f22c15d7452386d36133b27ad9b25c3707f2c7f",
+      "blob_sha": "1a3ebb5510724227e11855c8737b039e9eb66e96"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/build-commands.json",
+      "bytes": 1108,
+      "sha256": "b99d0c1d583257cb599d7887c2c4265e24b5bc7debb80fb7fff4fb83da9d271e",
+      "blob_sha": "3c1e375b66ec3a6c19fc7701386688541f354569"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/build-progress.log",
+      "bytes": 45,
+      "sha256": "1f7320a00c3c74d3453ee0b47792dc9ee0a4c267a57421eea8244b5b80ad6882",
+      "blob_sha": "8d5a05c923a25358c98a48e274449deb4211f6f8"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/built-artifacts.json",
+      "bytes": 1680,
+      "sha256": "60a4bd95a864d670e8c14b124d2cd17d3fc93ed29556ea4b649f7b6f08ec10b6",
+      "blob_sha": "ca73a3f33263e776cc903254950fc08b2321e945"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/chat-account-created-room.png",
+      "bytes": 22390,
+      "sha256": "2a577f6ea37363082ee2557feca18e877506115a062212f8ebbf9e2a7e41710e",
+      "blob_sha": "3ae951bb486fc7fd1d1985891e3f8f8474ac666b"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/chat-actual-old-copy-preservation.json",
+      "bytes": 7539,
+      "sha256": "e2a2e537bc3473bd573343cfc2b65acd80a36850b07479807adc131a9c4f209d",
+      "blob_sha": "052a5aeb7d239475d8506df4b0993bdc09bea34e"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/chat-browser-checks.json",
+      "bytes": 3633,
+      "sha256": "15afe2047f9ebd46380a141a6408967cff37e81a14ac5748c55df1127f86499a",
+      "blob_sha": "e3b8ab1a70ef9406265962de86c8cb0072305ab8"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/chat-browser-restart.log",
+      "bytes": 40,
+      "sha256": "92a299e712ad10e829ce44e6e616b85408ce3c7ce423c1295e0ac15c060b1eb4",
+      "blob_sha": "45c535bf4b9e71d8f23ee672d68dc74d4f023eaf"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/chat-browser.log",
+      "bytes": 40,
+      "sha256": "92a299e712ad10e829ce44e6e616b85408ce3c7ce423c1295e0ac15c060b1eb4",
+      "blob_sha": "45c535bf4b9e71d8f23ee672d68dc74d4f023eaf"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/chat-existing-room.png",
+      "bytes": 53164,
+      "sha256": "f61ce086cff192516a2d04d4da01d01213da67dc1abf0c3f1bcf26bedff0a527",
+      "blob_sha": "f981718c7180bc79f22f71dde382a11a8649e966"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/chat-migration-version-scope.json",
+      "bytes": 1462,
+      "sha256": "10ac04fdcd022d3c2d1ed23af6f13aa13cf2833f815887372e5713ef542da283",
+      "blob_sha": "76dc24d8c91a1abea351c5c3e35b287849718e3a"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/chat-old-copy.log",
+      "bytes": 40,
+      "sha256": "92a299e712ad10e829ce44e6e616b85408ce3c7ce423c1295e0ac15c060b1eb4",
+      "blob_sha": "45c535bf4b9e71d8f23ee672d68dc74d4f023eaf"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/chat-public-home.png",
+      "bytes": 24644,
+      "sha256": "d9ab5a3c9ac2525a3799c7ddea3ef0071e6e440d34208131e7600514ffcd6609",
+      "blob_sha": "958a28626fb719f4554ff5faa625247e16d3d282"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/chat-room-acl-acceptance.json",
+      "bytes": 604,
+      "sha256": "c97c836f79d2ed0cb4f266eef28d8567a130bf95acf9c81d72fe2eebb715fa2b",
+      "blob_sha": "b90e30fa828aae9ffcebe336faa47ed7bcf05bb5"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/chat-signup-complete.png",
+      "bytes": 15818,
+      "sha256": "3ad6473d2a4d8f62986dcfa8f9345a82e27a08d78eb2b0fa12f3aac9816706e2",
+      "blob_sha": "232d2ab4536b3d10ca4c45499e4e92aba2e5a085"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/ci.json",
+      "bytes": 102300,
+      "sha256": "68c390710b32a5990ae1d56b33d419d1ba3840e524e2b3bed8494580f330acb1",
+      "blob_sha": "a634210c1e23179078c9862134c126571590e23f"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/cleanup-plan.json",
+      "bytes": 6491,
+      "sha256": "5283a303a132e597bed44d2fbd49dc603e4aa4d7a5d1a892af17cf394c0f3067",
+      "blob_sha": "3aa347c5cbe408b316cbbaf84b03b9bc7bc7de02"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/cleanup-result.json",
+      "bytes": 7016,
+      "sha256": "fabdd02b93f1a2c000c51b24ef66f3abbc957d05406e00959c172761136053d3",
+      "blob_sha": "9df1ba6cff722e60b77eb11300930688314b73cb"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/document-checks.json",
+      "bytes": 476,
+      "sha256": "836fea634772ae48b7176b12158ded188e89dd18ef4e9b9f2d52bf8ff75445bf",
+      "blob_sha": "7a6edba9a9da1c2beadce4e63595f32a8d7f462a"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/driver-connection.json",
+      "bytes": 1024,
+      "sha256": "c581abb46be76b710f42142b969434c453bd7de14fa72c432fbf62144bb2668e",
+      "blob_sha": "085d22463c9e96ff80b91e07e496ec4258f5f41a"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/driver-progress.log",
+      "bytes": 61,
+      "sha256": "bb0e32c4f202c356196d508e87174c5902b453580f85c759d6a67f9a1b69974a",
+      "blob_sha": "d993d4b0c7ac4ba6f2d6cecfaef7ca3350b3b9bf"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/frozen-native.json",
+      "bytes": 708,
+      "sha256": "3ed2981e7f0ff1f646f4db904a73af43ba318bc1b87e78b3c1fe4b7ac3ad8204",
+      "blob_sha": "2c56ce1fda4ae0f1a7b23626f8577d2b936e5621"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/gate2-postgres-restart.log",
+      "bytes": 1251,
+      "sha256": "aa41e646b16fd5ae551e881034de2f9d377588097d6a659201ba69f2bcc48460",
+      "blob_sha": "a9c2e1ce95de341d49bc6579dac04cbf29ac46f3"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/gate2-postgres.log",
+      "bytes": 2212,
+      "sha256": "c09002ddbf4bf1fc3264bd89b390a33952f45a84ae091d2d00e4adc5cf0d7758",
+      "blob_sha": "d23e70994625edb11e8d309a944b0f0003581e55"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/git-source-final.json",
+      "bytes": 878,
+      "sha256": "6cbddf963a8027f206e4c69c90c4b39f64177ec5b74c9bd9b3077985e52a5097",
+      "blob_sha": "9502fea16e2c0619fb6fc389630486bedfe3ec8c"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/harness-setup-errors.json",
+      "bytes": 755,
+      "sha256": "5ca34e62e537f367eea31d32652039296a8d17c7356b88ab460956347d0b9f7a",
+      "blob_sha": "f8a96e72009d6dfdf1c1a2e5bf88b9f9f8266dfa"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/http-build-00.log",
+      "bytes": 10252,
+      "sha256": "232d9a693f78d0fd482a353684c29653727fc764d47da368f9109f9c1eee4766",
+      "blob_sha": "6cb555b31acca499b7f197344c6c6cb60a953645"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/http-build-01.log",
+      "bytes": 708,
+      "sha256": "d4383250760f2f939addbc373ed0f415bc35255feb65f2b748c5d85a0ef306bd",
+      "blob_sha": "c563a87dbe3289b64605898ac76c1e513497daa3"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/http-build-commands.json",
+      "bytes": 1005,
+      "sha256": "f83ca864cda860f0045b92a4051050743ebd6537d1141ae8e3a20129332a79d6",
+      "blob_sha": "0dd52f847ad7f58b6922da6b2db353a0cd31ac57"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/http-build-progress.log",
+      "bytes": 56,
+      "sha256": "b0e4d8e128d2f089d757071777b4c770301531ba55e7c591b84e29b3363ab16e",
+      "blob_sha": "6af6029895062ea36cceea951b033b4f62c9d7c0"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/http-built-artifacts.json",
+      "bytes": 1950,
+      "sha256": "7b958791e890a82b6c6da86372a2e0df2b4123edf0c7e31fb29a7b69dabc5b17",
+      "blob_sha": "7c21a833561e2a6523416954c9b3b31877d71b43"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/http-restart-progress.log",
+      "bytes": 45,
+      "sha256": "17401bd0f438128cf42b532794afa27a3b366d33f1291ee754b616d9cde574a4",
+      "blob_sha": "793dc78e6fb19aba967722346e019f03047be1b1"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/http-server-before-restart.json",
+      "bytes": 470,
+      "sha256": "5b58abb0a7d5fa19c9cd1a969d1dc2fe36914f9709edbf8c5d565cf58c0f7715",
+      "blob_sha": "f64932352e352298b3670c0d71635bce7d771528"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/http-server-connection.json",
+      "bytes": 528,
+      "sha256": "433504f6fa7e72fdee20f492e88bec786fffd74805a1654607b9a57db6d9e35e",
+      "blob_sha": "09611d13afe5881699a727ce8cdc319be91b1868"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/http-server-progress.log",
+      "bytes": 40,
+      "sha256": "200f033f1cd1ed51cc9098ee1007036043c02b1ad66912a9c5736b074e7af4c8",
+      "blob_sha": "8c7387006cf1b84cf1afd5ad7cea7601cae356c7"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/http-setup-00.log",
+      "bytes": 52,
+      "sha256": "66afd0411ccc09366e99fdd99b85f21899c8d2d064f5835126859618802153ad",
+      "blob_sha": "0fb0b9795fb4884c3f9d88d91ebb6492510e4ee5"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/http-setup-01.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/http-setup-02.log",
+      "bytes": 56,
+      "sha256": "ca19178a35ab4153b75b494963b66ce8243e1b94c173107c87b44d09db23652d",
+      "blob_sha": "bdc448af42aa24144e661f647c52557f2e0d9b3c"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/http-setup-commands.json",
+      "bytes": 1486,
+      "sha256": "eb39be37101baa40d5a7324afcc590c13dbaedce2e9d7c5b7b2a314b0ac81896",
+      "blob_sha": "dc5062d574c8e2676e8d939622168da19b70e435"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/manual-pet.sh",
+      "bytes": 2185,
+      "sha256": "da819c012e4b173b477c48bd497e88924433ae0db2a3f9a0a5dca5694a2d4e32",
+      "blob_sha": "7cbbdf9714dc65b3563b8dcff426806accaff590"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/manual-preflight.json",
+      "bytes": 278,
+      "sha256": "b8c63c8c217da7760ea3f78bbd0d42146004230ef2a7e0ec0a80402dbd877679",
+      "blob_sha": "dae0271da78d4441eaf4546fa3f916d4b76c3229"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/native-events.jsonl",
+      "bytes": 438,
+      "sha256": "8cc758f735d346f8310771934c2357efb83e7206cea748a83462d96cf085ebdb",
+      "blob_sha": "3e771439bb346348378b6360538bf6228038c5d7"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/native-process-db-proof.json",
+      "bytes": 703,
+      "sha256": "1b54397d0812a225df22cf88333c55b7f1354619cf54bb609d1c609dd9227d11",
+      "blob_sha": "c307c0b63a03fc786c903ee8934066af96dfc010"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/native-profile-debug.json",
+      "bytes": 134,
+      "sha256": "2f855e391429d19444c489128c015a418b863b712c42567ee590475ca6dd86a0",
+      "blob_sha": "9c6d95119c8f0ce8d237a16162f5abb175e3aa15"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/pet-after-restart.png",
+      "bytes": 66188,
+      "sha256": "efb12a646a13030212584168a7cba43de365d220e0d3e9035bd40bc2f6974d73",
+      "blob_sha": "07dfa0e5f042b576b400444aeda49e0ae40df510"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/pet-controller-narrow.png",
+      "bytes": 43230,
+      "sha256": "1f041dea8cb001fbd6791f93a7c5ed34ca2a8579acb119b7009529be4bfbdb2e",
+      "blob_sha": "5555c7f845c6a2da5d386c354c83f2ae584656c8"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/pet-final-restart.png",
+      "bytes": 56458,
+      "sha256": "76ba8de73e21d705f980fd4f10120ee7b5883a8aa77a02fd92f969a202ec4cca",
+      "blob_sha": "1649cbaa97afb28cc39bdd88dd95ab79b03a78d9"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/pet-gui-checks.json",
+      "bytes": 17161,
+      "sha256": "6f38d7b03610e42046bbab2a2a5f9f83f02c45853d653ec8da92300821314a47",
+      "blob_sha": "afc4eddee3bfb328b45e6e1e3b9ba4badb6dcae6"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/pet-initial.html",
+      "bytes": 6089,
+      "sha256": "6b5d039c08cbc418fbaa5eacc3de4d47b981eab613a83d4859d71c66c208195f",
+      "blob_sha": "0f3a7b6328d08aab062dc98f12cb12c09c582c34"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/pet-initial.png",
+      "bytes": 44872,
+      "sha256": "cf6d3c15460bc11924d9ce927f47f171672d342f04e85cba4171bfa64dc994ea",
+      "blob_sha": "fab33cec84d4ef9fa0923dcd94c3479321600e62"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/pet-life-A-debug.html",
+      "bytes": 5966,
+      "sha256": "1b294f089ae0f8bcb56c1fa609ea30d4cf656e134d43c3ce56c90485e84875e9",
+      "blob_sha": "808c50e220e5ef0cb6fa7459fd44eb7c3d3b8e3a"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/pet-life-A-debug.png",
+      "bytes": 5692,
+      "sha256": "ba7f6e9f30726276b07ac2c0a210c4b5cc839ed1d1da90a07645ad9b9975b450",
+      "blob_sha": "dfcd9d6c7d6698d383f987c266498f4dc54fbb23"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/pet-life-A.png",
+      "bytes": 5692,
+      "sha256": "ba7f6e9f30726276b07ac2c0a210c4b5cc839ed1d1da90a07645ad9b9975b450",
+      "blob_sha": "dfcd9d6c7d6698d383f987c266498f4dc54fbb23"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/pet-three-created.png",
+      "bytes": 61525,
+      "sha256": "f1c1aafe80f7325c2bed9ac744d46ef753935f446783faace7c6ed1004dfd095",
+      "blob_sha": "4fa6eb10a64d95182f6d55ba49e6f072cd7bac73"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/pg-final-stop.log",
+      "bytes": 56,
+      "sha256": "ca19178a35ab4153b75b494963b66ce8243e1b94c173107c87b44d09db23652d",
+      "blob_sha": "bdc448af42aa24144e661f647c52557f2e0d9b3c"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/pg-restart-start.log",
+      "bytes": 52,
+      "sha256": "66afd0411ccc09366e99fdd99b85f21899c8d2d064f5835126859618802153ad",
+      "blob_sha": "0fb0b9795fb4884c3f9d88d91ebb6492510e4ee5"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/preserved-native.json",
+      "bytes": 423,
+      "sha256": "25ee734adbb172b8a76d85050d94dd3cc439c2aba28e7a08694357d31f5bed81",
+      "blob_sha": "1d835029caa23c2faff176438ff6f822571ee332"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/process-cleanup.json",
+      "bytes": 327,
+      "sha256": "53b50aa3328e5dfa5c1012abb19c72f733f36607083626e9685253b4190232e5",
+      "blob_sha": "1911826ce3d309029ab58eb7490b267ffdfa0779"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/restart-1.json",
+      "bytes": 953,
+      "sha256": "c32ce36db5f4f316ef17e53856081eca25ad369ba9074f5923e9d4cf132431f3",
+      "blob_sha": "4b38088c401cf6944b0f484e212a87d106ec9c38"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/restart-2.json",
+      "bytes": 238,
+      "sha256": "c15f2c1ba26020cff401c5d33c158672cdd3b714e31fa9ee41e9ac27bbaf92e0",
+      "blob_sha": "ba12bff2de59216e01134f76937be535ade063d9"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/scripts/gate2_browser_api.py",
+      "bytes": 3221,
+      "sha256": "a4d59a1bc8015b0f03c19f8e8ad01dfd55c3ba250995b70f72e74e7b3a3c29db",
+      "blob_sha": "c2f0e0522c0a5a08ec9db0006d3b30dcd14856d2"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/scripts/gate2_browser_driver.py",
+      "bytes": 1595,
+      "sha256": "08b6565d13d5f91276761616bfcb56a7f749c2579c231ccf7df73dab9a12d779",
+      "blob_sha": "0e14aa79f4cda4853521bcb43893249a3c010add"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/scripts/gate2_build_http.py",
+      "bytes": 1851,
+      "sha256": "ec30b1357ef1bef1bcd1bb718ff2d612a2bb610dc59b915883fc03693302d06d",
+      "blob_sha": "cfb28c6c52fb3c5d01121e37e1b3e0d819e63483"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/scripts/gate2_build_pet.py",
+      "bytes": 2505,
+      "sha256": "cff8da0a658ddd16c91f0423639d71c86dbcf2ad21e664c68111bd4fc2ab4a56",
+      "blob_sha": "143e1cd925cb09b2c92d21b2607526a6f89c3d02"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/scripts/gate2_http_restart.py",
+      "bytes": 2647,
+      "sha256": "c7c931024ab04f7dfdc9b0b95aca53d55d2ce1391024ca3cce7ac2e55c2fdbcd",
+      "blob_sha": "07ad79c5375928685008f93a8456c454b53e29e2"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/scripts/gate2_http_servers.py",
+      "bytes": 5172,
+      "sha256": "d7508704589d5eec8a08acc8f57069de5fa06c7acca7bc81c4cb2f3b6a2575ef",
+      "blob_sha": "3c0abfa955d39211af8a88be905aa6c265b10168"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/scripts/gate2_pet_api.py",
+      "bytes": 5886,
+      "sha256": "caef453661f4ca88914f71f71b48b2cee1021601a9764f6f9f443e2b222dbe4d",
+      "blob_sha": "9b56d322b59238302f3dafc4fd8d88d4b78a9b6a"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/scripts/gate2_pet_driver.py",
+      "bytes": 2566,
+      "sha256": "1560d8125ff7c48f65bed9136731a1abd966eefc2ca3f6e5d5ce55e64e0d2b29",
+      "blob_sha": "a70b31561dea8be4147da4f65cb2f1f71c467b0e"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/scripts/gate2_validate_and_payload.py",
+      "bytes": 4924,
+      "sha256": "7f17b0a56281d5253e401a715bf2892e8cfaae71a0370e24bc149517329674df",
+      "blob_sha": "7a576e4ee7dd4bd9aa1db7202fd06bc3817fa421"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/session-before-restart-2.json",
+      "bytes": 519,
+      "sha256": "d923e3618d7d247bedb70440e8ee49885d46ba6fe083da46d02ad2c8e5298547",
+      "blob_sha": "3b6477281b3046e43ef9abb0b034ded221d05282"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/session-before-restart.json",
+      "bytes": 519,
+      "sha256": "4fe69580296f4308a9171f1df043f3c9c41e1363e17550549766bf2ff0db53b5",
+      "blob_sha": "8c0a05e183b5f6e93d3c04b7f1f2ff795dd235aa"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/session.json",
+      "bytes": 519,
+      "sha256": "df97b81e0bbc421b55f258145b536fe93c061d75af01b55b0f0d76e047a0e438",
+      "blob_sha": "010fc9177d517ec9cce61ccb7617721dd3b99897"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/summary.json",
+      "bytes": 1237,
+      "sha256": "cb582476c033df439efd82e391190de2a57db044661e808f328d971814a199da",
+      "blob_sha": "7f897398e64c812587dfa59982b0f55399c45762"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/tauri-driver.log",
+      "bytes": 278,
+      "sha256": "f15d42525770f103205ed00c30ffd3b821c4dfe45d06d96cb5f2ac120451cfcf",
+      "blob_sha": "ef6e3bd8f6e69fc2f8724591823c17412f5862cd"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/webdriver-commands.jsonl",
+      "bytes": 148661,
+      "sha256": "00c1bc4f9b49b7941c2d161f0cb85badda0fd57fd789bde6ea9cf0587bb93013",
+      "blob_sha": "16de8a2305ccbec6351b52fd3160cd13ee0ed679"
+    },
+    {
+      "path": "docs/source-review/gate2-2026-10-31/xvfb.log",
+      "bytes": 204,
+      "sha256": "b45affdb886a021622d1d8931e55e910a40f2580a57a2df071368145e90f3ad3",
+      "blob_sha": "769e7108efa335e10e7bf5ac71858000424bb274"
+    }
+  ],
+  "self_hash_excluded": true
+}

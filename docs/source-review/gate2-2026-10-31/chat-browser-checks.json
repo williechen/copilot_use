@@ -1,0 +1,107 @@
+{
+  "source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
+  "method": "real WebKitGTK browser, actual HTTP servers and isolated real DBs; no route/IPC mocks",
+  "passed": [
+    {
+      "case": "anonymous public home renders and hydrates",
+      "utc": "2026-10-30T17:12:01.646026+00:00",
+      "evidence": {
+        "url": "http://127.0.0.1:3000/",
+        "text": "Rust AI ChatWelcome to Rust AI Chat!登入房間列表查詢房間讀取／重新整理房間清除搜尋尚無房間"
+      }
+    },
+    {
+      "case": "real signup completes signed-out on dedicated page",
+      "utc": "2026-10-30T17:12:02.449277+00:00",
+      "evidence": {
+        "url": "http://127.0.0.1:3000/signup/complete",
+        "sessions": 0
+      }
+    },
+    {
+      "case": "real login enters personal management",
+      "utc": "2026-10-30T17:12:03.096399+00:00",
+      "evidence": {
+        "url": "http://127.0.0.1:3000/account",
+        "text": "個人管理 聊天室名稱建立聊天室登出回公開房間清單"
+      }
+    },
+    {
+      "case": "personal form creates persistent real room",
+      "utc": "2026-10-30T17:12:03.258185+00:00",
+      "evidence": {
+        "rooms": [
+          [
+            "ec325cef-884c-43f6-aa1c-12712207628b",
+            "Gate2 Room"
+          ]
+        ],
+        "url": "http://127.0.0.1:3000/account/rooms"
+      }
+    },
+    {
+      "case": "public home automatically loads persisted room after hydration",
+      "utc": "2026-10-30T17:14:45.929115+00:00",
+      "evidence": {
+        "room": [
+          "ec325cef-884c-43f6-aa1c-12712207628b",
+          "Gate2 Room"
+        ],
+        "url": "http://127.0.0.1:3000/"
+      }
+    },
+    {
+      "case": "anonymous room click preserves canonical sign-in target",
+      "utc": "2026-10-30T17:14:45.989360+00:00",
+      "evidence": {
+        "url": "http://127.0.0.1:3000/signin?next=/room/ec325cef-884c-43f6-aa1c-12712207628b"
+      }
+    },
+    {
+      "case": "signup discards earlier room target and requires fresh login",
+      "utc": "2026-10-30T17:14:47.776824+00:00",
+      "evidence": {
+        "after_login": "http://127.0.0.1:3000/account"
+      }
+    },
+    {
+      "case": "login returns to existing room in real browser",
+      "utc": "2026-10-30T17:14:48.712961+00:00",
+      "evidence": {
+        "url": "http://127.0.0.1:3000/room/ec325cef-884c-43f6-aa1c-12712207628b",
+        "body": "Rust AI Chat房間列表查詢房間讀取／重新整理房間清除搜尋請先讀取房間列表房間 ec325cef-884c-43f6-aa1c-12712207628b尚未連線歷史載入尚未接通：目前只顯示本次連線收到的訊息；重新整理不會載入已儲存訊息。目前尚無本次連線收到的訊息Send"
+      }
+    },
+    {
+      "case": "authenticated missing canonical room returns404",
+      "utc": "2026-10-30T17:14:48.810782+00:00",
+      "evidence": {
+        "status": 404,
+        "url": "http://127.0.0.1:3000/room/00000000-0000-0000-0000-00000000dead"
+      }
+    },
+    {
+      "case": "real isolated SQLite failure returns503 then recovers",
+      "utc": "2026-10-30T17:14:48.865287+00:00",
+      "evidence": {
+        "status": 503,
+        "url": "http://127.0.0.1:3000/room/ec325cef-884c-43f6-aa1c-12712207628b"
+      }
+    },
+    {
+      "case": "room and existing SQLite session survive real server restart",
+      "utc": "2026-10-30T17:22:09.926221+00:00",
+      "evidence": {
+        "before_pid": 47730,
+        "after_pid": 48753,
+        "api_session_status": 204,
+        "rooms": [
+          [
+            "ec325cef-884c-43f6-aa1c-12712207628b",
+            "Gate2 Room"
+          ]
+        ]
+      }
+    }
+  ]
+}

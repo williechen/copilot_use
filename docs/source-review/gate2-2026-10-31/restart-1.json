@@ -1,0 +1,57 @@
+{
+  "method": "WebDriver teardown then SIGTERM of test-owned app only if needed; new real app process launched",
+  "before": {
+    "profiles": [
+      [
+        "3a23eb60-33de-4d2f-9a2c-419b034d3818",
+        "Gate2-A",
+        0
+      ],
+      [
+        "47521752-e6eb-41bf-a293-4e4231f569b7",
+        "Gate2-B",
+        1
+      ],
+      [
+        "70f66044-b2fb-4ad2-b226-d6bb80dc64d3",
+        "Gate2-C",
+        1
+      ]
+    ],
+    "flags": {
+      "Gate2-A": [
+        [
+          "sit",
+          1
+        ],
+        [
+          "walk",
+          0
+        ]
+      ],
+      "Gate2-B": [
+        [
+          "sit",
+          0
+        ],
+        [
+          "walk",
+          1
+        ]
+      ],
+      "Gate2-C": [
+        [
+          "sit",
+          0
+        ],
+        [
+          "walk",
+          0
+        ]
+      ]
+    },
+    "native_pid": 43624
+  },
+  "old_process_gone": true,
+  "new_session": "63d3f2e1-8b4e-4abe-9536-b9784bea3a2c"
+}

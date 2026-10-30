@@ -1,0 +1,12 @@
+{
+  "source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
+  "chat_pid": 47730,
+  "analytics_pid": 47750,
+  "chat_url": "http://127.0.0.1:3000",
+  "analytics_url": "http://127.0.0.1:3100",
+  "chat_database": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/gate2-20261031/chat-browser.sqlite",
+  "pg_database": "gate2_browser_20261031",
+  "pg_port": 55482,
+  "paid_ai_keys_removed": true,
+  "formal_databases_written": false
+}

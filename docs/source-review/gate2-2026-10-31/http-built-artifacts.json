@@ -1,0 +1,37 @@
+[
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/target/debug/chat-server",
+    "bytes": 172848320,
+    "sha256": "84de4d2d23aa9666167251c5a74d2770ca76f94475e07bf49529aa46f584c5a2"
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/analytics_apps/target/debug/analytics-server",
+    "bytes": 122721432,
+    "sha256": "c8c16f64e7a15b6c7bf733d4da759d211b082dad63e001d435ecae9e068d52e5"
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/target/site/pkg/rust_ai_chat.d.ts",
+    "bytes": 5113,
+    "sha256": "d88285dfba574a5fb174fbf7732e4a7ea93b6f3312e38b375cd56610a9d0eff1"
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/target/site/pkg/rust_ai_chat.css",
+    "bytes": 1,
+    "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/target/site/pkg/rust_ai_chat.js",
+    "bytes": 53052,
+    "sha256": "89561eda117489613199755fe56d8b9d091c6435cdbcb61cc36047941c67dada"
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/target/site/pkg/rust_ai_chat.wasm",
+    "bytes": 7164078,
+    "sha256": "60247551d43da6ce1452590d168b5f40426494eaeaecce7c0afba5de40a5ad2f"
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/target/site/pkg/rust_ai_chat_bg.wasm.d.ts",
+    "bytes": 3153,
+    "sha256": "07bc5b1dbc6a21e1863c4078e33f9c190b6b99558a157b86b5bd5864f0921c9c"
+  }
+]

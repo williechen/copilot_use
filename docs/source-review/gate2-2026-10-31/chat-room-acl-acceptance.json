@@ -1,0 +1,16 @@
+{
+  "source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
+  "case": "explicitly excluded member must not enter room",
+  "fixture": "isolated test DB mbr_exclude row for second test member and real created room",
+  "expected_status": 403,
+  "actual": {
+    "status": 200,
+    "url": "http://127.0.0.1:3000/room/ec325cef-884c-43f6-aa1c-12712207628b"
+  },
+  "acceptance_passed": false,
+  "scope": "confirmed full room ACL requirement; outside Day44 existence-only implementation, blocks full acceptance",
+  "websocket_exclusion_probe": {
+    "opened": true
+  },
+  "websocket_acceptance_passed": false
+}

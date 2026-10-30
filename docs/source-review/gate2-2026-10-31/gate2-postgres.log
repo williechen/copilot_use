@@ -1,0 +1,17 @@
+2026-10-31 01:07:49.462 CST [47738] LOG:  starting PostgreSQL 18.6 (Ubuntu 18.6-1.pgdg26.04+2) on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0, 64-bit
+2026-10-31 01:07:49.462 CST [47738] LOG:  listening on IPv4 address "127.0.0.1", port 55482
+2026-10-31 01:07:49.487 CST [47744] LOG:  database system was shut down at 2026-10-30 21:56:42 CST
+2026-10-31 01:07:49.502 CST [47738] LOG:  database system is ready to accept connections
+2026-10-31 01:12:49.527 CST [47742] LOG:  checkpoint starting: time
+2026-10-31 01:14:32.360 CST [47742] LOG:  checkpoint complete: wrote 1000 buffers (6.1%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 1 recycled; write=101.794 s, sync=0.976 s, total=102.835 s; sync files=371, longest=0.006 s, average=0.003 s; distance=4842 kB, estimate=4842 kB; lsn=0/5D0626C0, redo lsn=0/5D062630
+2026-10-31 01:16:20.007 CST [48502] ERROR:  relation "uac_session" does not exist at character 22
+2026-10-31 01:16:20.007 CST [48502] STATEMENT:  SELECT count(*) FROM uac_session
+2026-10-31 01:17:49.440 CST [47742] LOG:  checkpoint starting: time
+2026-10-31 01:17:50.864 CST [47742] LOG:  checkpoint complete: wrote 13 buffers (0.1%), wrote 2 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=1.339 s, sync=0.045 s, total=1.425 s; sync files=11, longest=0.010 s, average=0.005 s; distance=15 kB, estimate=4360 kB; lsn=0/5D066498, redo lsn=0/5D066408
+2026-10-31 01:20:32.440 CST [47738] LOG:  received fast shutdown request
+2026-10-31 01:20:32.446 CST [47738] LOG:  aborting any active transactions
+2026-10-31 01:20:32.448 CST [47738] LOG:  background worker "logical replication launcher" (PID 47747) exited with exit code 1
+2026-10-31 01:20:32.448 CST [47742] LOG:  shutting down
+2026-10-31 01:20:32.454 CST [47742] LOG:  checkpoint starting: shutdown immediate
+2026-10-31 01:20:32.499 CST [47742] LOG:  checkpoint complete: wrote 4 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.006 s, sync=0.014 s, total=0.051 s; sync files=5, longest=0.005 s, average=0.003 s; distance=3 kB, estimate=3924 kB; lsn=0/5D0670A0, redo lsn=0/5D0670A0
+2026-10-31 01:20:32.523 CST [47738] LOG:  database system is shut down

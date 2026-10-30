@@ -1,0 +1,42 @@
+[
+  {
+    "command": [
+      "trunk",
+      "build",
+      "--release",
+      "--skip-version-check",
+      "--locked",
+      "true",
+      "--offline",
+      "false"
+    ],
+    "cwd": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/pet_apps/pet_ui",
+    "source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
+    "exit_code": 0,
+    "started_utc": "2026-10-30T16:49:12.865473+00:00",
+    "seconds": 147.76446557044983,
+    "log": "build-00.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "build",
+      "--offline",
+      "--locked",
+      "--manifest-path",
+      "pet_apps/Cargo.toml",
+      "-p",
+      "pet-server",
+      "--bin",
+      "pet-server",
+      "--features",
+      "tauri/custom-protocol"
+    ],
+    "cwd": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest",
+    "source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
+    "exit_code": 0,
+    "started_utc": "2026-10-30T16:51:40.630064+00:00",
+    "seconds": 17.46570348739624,
+    "log": "build-01.log"
+  }
+]

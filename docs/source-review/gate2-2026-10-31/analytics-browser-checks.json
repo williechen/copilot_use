@@ -1,0 +1,97 @@
+{
+  "source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
+  "method": "real WebKitGTK browser, actual HTTP servers and isolated real DBs; no route/IPC mocks",
+  "passed": [
+    {
+      "case": "anonymous dashboard requires login",
+      "utc": "2026-10-30T17:16:19.566438+00:00",
+      "evidence": {
+        "url": "http://127.0.0.1:3100/login",
+        "text": "Analytics 帳密登入帳號密碼登入"
+      }
+    },
+    {
+      "case": "first real login forces password and email change",
+      "utc": "2026-10-30T17:16:47.074877+00:00",
+      "evidence": {
+        "url": "http://127.0.0.1:3100/change-password",
+        "session_count": 1
+      }
+    },
+    {
+      "case": "first-change page wrong logout CSRF403 retains PG session",
+      "utc": "2026-10-30T17:16:47.120891+00:00",
+      "evidence": {
+        "status": 403
+      }
+    },
+    {
+      "case": "first-change real logout revokes PG session",
+      "utc": "2026-10-30T17:16:47.245457+00:00",
+      "evidence": {
+        "url": "http://127.0.0.1:3100/login",
+        "session_count": 0
+      }
+    },
+    {
+      "case": "real password change persists and revokes sessions",
+      "utc": "2026-10-30T17:16:48.683765+00:00",
+      "evidence": {
+        "url": "http://127.0.0.1:3100/login",
+        "session_count": 0,
+        "user_count": "1"
+      }
+    },
+    {
+      "case": "new password enters real Leptos dashboard",
+      "utc": "2026-10-30T17:16:49.151230+00:00",
+      "evidence": {
+        "url": "http://127.0.0.1:3100/dashboard",
+        "text": "Analytics 管理後台Chat 事件Pet 事件修改密碼與 Email匯出目前篩選 CSV事件類型（精確比對）篩選清除篩選全部事件類型Chat 全部事件類型：0 筆已提交事件已提交事件類型明細事件類型已提交筆數沒有符合條件的已提交事件目前僅支援管理員；角色與來源 ACL 尚待接通。登出"
+      }
+    },
+    {
+      "case": "real source switch preserves exact event filter",
+      "utc": "2026-10-30T17:19:01.416126+00:00",
+      "evidence": {
+        "url": "http://127.0.0.1:3100/dashboard?source=desktop_pet&event_type=gate2.exact_kind"
+      }
+    },
+    {
+      "case": "authenticated real CSV route returns selected-source CSV",
+      "utc": "2026-10-30T17:19:01.437240+00:00",
+      "evidence": {
+        "status": 200,
+        "type": "text/csv; charset=utf-8",
+        "body": "source_app,event_type,total\r\n"
+      }
+    },
+    {
+      "case": "dashboard wrong logout CSRF403 retains persisted session",
+      "utc": "2026-10-30T17:19:01.454762+00:00",
+      "evidence": {
+        "status": 403
+      }
+    },
+    {
+      "case": "dashboard logout revokes PG session and rejects old-cookie replay",
+      "utc": "2026-10-30T17:19:01.634316+00:00",
+      "evidence": {
+        "replay_status": 303,
+        "location": "/login",
+        "session_count": 0,
+        "raw_cookie_published": false
+      }
+    },
+    {
+      "case": "password and upgraded PG survive real server and PG restart",
+      "utc": "2026-10-30T17:22:09.593660+00:00",
+      "evidence": {
+        "before_pid": 47750,
+        "after_pid": 48758,
+        "url": "http://127.0.0.1:3100/dashboard",
+        "admin_count": "1"
+      }
+    }
+  ]
+}

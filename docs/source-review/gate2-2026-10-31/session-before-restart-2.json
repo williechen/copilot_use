@@ -1,0 +1,21 @@
+{
+  "value": {
+    "sessionId": "63d3f2e1-8b4e-4abe-9536-b9784bea3a2c",
+    "capabilities": {
+      "browserName": "wry",
+      "browserVersion": "0.57.1",
+      "platformName": "linux",
+      "acceptInsecureCerts": false,
+      "strictFileInteractability": false,
+      "setWindowRect": true,
+      "unhandledPromptBehavior": "dismiss and notify",
+      "pageLoadStrategy": "normal",
+      "proxy": {},
+      "timeouts": {
+        "script": 30000,
+        "pageLoad": 300000,
+        "implicit": 0
+      }
+    }
+  }
+}

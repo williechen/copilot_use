@@ -1,0 +1,14 @@
+{
+  "script": "work/gate2-20261031/啟動Pet實機驗收.sh",
+  "checks": [
+    {
+      "command": "bash -n <script>",
+      "exit_code": 0
+    },
+    {
+      "command": "bash <script> --check",
+      "exit_code": 0
+    }
+  ],
+  "native_gui_launched_by_this_preflight": false
+}

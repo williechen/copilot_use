@@ -1,0 +1,12 @@
+{
+  "current_links_valid_except_pending_delivery_proof": true,
+  "current_json_valid": true,
+  "fifteen_zip_crc_sha256_valid": true,
+  "prior_fourteen_zip_hashes_unchanged": true,
+  "new_archive_no_duplicate_path_content": true,
+  "prior_versions_recoverable": true,
+  "FIFO_next_day_last_full_comparison_unchanged": true,
+  "product_and_isolated_source_clean": true,
+  "full_gate2": false,
+  "observed_failure": "explicitly excluded test member HTTP200 and WS opened=true"
+}
