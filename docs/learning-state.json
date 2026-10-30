@@ -411,8 +411,8 @@
     "product_repository_read_only": true,
     "day_advance": false
   },
-  "reference_sha": "4b1008b95bc3e170381fcd1db84695e421f036bd",
-  "reference_scope": "final exact-source four workspace, SSR/WASM/Node, PG63; Pet forward112 candidate separately identified; full Gate2 incomplete",
+  "reference_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
+  "reference_scope": "Pet adoption followup: current main112/Node12/WASM/SQLite copy upgrades; other projects tests retained at4b1008b",
   "current_article_paths": {
     "chat": "docs/teaching/daily/day-44/chat.md",
     "pet": "docs/teaching/daily/day-44/pet.md",
@@ -420,7 +420,7 @@
   },
   "teaching_progress": {
     "last_published_day": 44,
-    "last_publication_status": "Day44 current Chat/Analytics r3 and Pet forward r4, exact-source local verification; no Day increment; full Gate2 incomplete",
+    "last_publication_status": "Day44 Pet forward adopted and main112 verified; full Gate2 incomplete; no Day increment",
     "next_day": {
       "chat": 45,
       "pet": 45,
@@ -433,7 +433,7 @@
   "day44_draft_exists": false,
   "pet_activity_contract": {
     "confirmed_by_user": true,
-    "source_product_sha": "4b1008b95bc3e170381fcd1db84695e421f036bd",
+    "source_product_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
     "out_of_cage": "EXISTS pet_activity with matching pet_id/owner_id AND is_activity=true",
     "caged": "no matching active activity",
     "activity_type_filter": null,
@@ -460,13 +460,13 @@
       "candidate_implementation_verified": true,
       "local_main_sqlite_tests_verified": true
     },
-    "candidate_base_sha": "4b1008b95bc3e170381fcd1db84695e421f036bd",
-    "candidate_patch": "docs/teaching/daily/day-44/pet-day44-legacy-code-upgrade-r4.patch",
-    "candidate_workspace_passed": 112,
-    "candidate_node_passed": 12,
-    "candidate_upgrade_verified": "final4b1008b plus new forward5; synthetic and actual read-only online backup copy; existing migrations unchanged",
     "product_applied": true,
     "activity_model_in_main": true,
-    "forward_candidate_applied": false
+    "forward_candidate_applied": true,
+    "local_main_workspace_passed": 112,
+    "local_main_node_passed": 12,
+    "local_main_upgrade_verified": true,
+    "main_validation": "docs/source-review/pet-day44-adopted-2026-10-30/README.md",
+    "candidate_patch_archive": "docs/archive/packages-2026-10-30/14-pet-day44-before-adoption-2026-10-30.zip"
   }
 }

@@ -1,0 +1,312 @@
+{
+  "source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
+  "pet_article_commit": "f98bcaf6eebe0acd9a1bfb3064be1abd55c0e4ab",
+  "article_path": "docs/teaching/daily/day-44/pet.md",
+  "blob_sha": "e573ae357d907a5b31f236b72e2c3d60ef98eba7",
+  "sha256": "b6dae1966d45dd9268860f40b3c582805115bbfae5fb8ccd4cc61a69156226ec",
+  "local_exact_commit_readback": true,
+  "full_gate2": false,
+  "remote_readback": "pending push and exact-ref GitHub full-content readback",
+  "commits": [
+    {
+      "repo": "williechen/copilot_use",
+      "branch": "main",
+      "expected_parent": "3c42a10781c00f7cf84d4ead8c062f635ddf16e7",
+      "commit": "42cc10953ff831e6fd4d9955c842591bb98ab458",
+      "message": "docs: record Pet Day44 adoption tests and archive superseded proposal",
+      "readback_utc": "2026-10-30T14:23:57.948297+00:00",
+      "files": [
+        {
+          "path": "docs/archive/packages-2026-10-30/14-pet-day44-before-adoption-2026-10-30.zip",
+          "operation": "write",
+          "blob_sha": "f58c8bf2a38d5c1ef95930f3e5a80b79ec185458",
+          "sha256": "c1300824a5e32b339b93041e881bccb9c7bbf3a21bbbb622d3e449b06c40c9db",
+          "readback_ref": "42cc10953ff831e6fd4d9955c842591bb98ab458",
+          "full_bytes_equal": true
+        },
+        {
+          "path": "docs/archive/packages-2026-10-30/SHA256SUMS",
+          "operation": "write",
+          "blob_sha": "78c02484f9e50e26a01dea061770186c958fa772",
+          "sha256": "48c47e86d602728186aa55756db4c471557a1eba61d66a95be297846bad3b3f0",
+          "readback_ref": "42cc10953ff831e6fd4d9955c842591bb98ab458",
+          "full_bytes_equal": true
+        },
+        {
+          "path": "docs/archive/packages-2026-10-30/pet-day44-adoption-archive.json",
+          "operation": "write",
+          "blob_sha": "529cf43b659295cf17b66f8833b370fccf8369ca",
+          "sha256": "ac6be06a5ec910da288196f58f65284d5cd290be8af5ef2175b680bc97446cf2",
+          "readback_ref": "42cc10953ff831e6fd4d9955c842591bb98ab458",
+          "full_bytes_equal": true
+        },
+        {
+          "path": "docs/source-review/pet-day44-adopted-2026-10-30/000.log",
+          "operation": "write",
+          "blob_sha": "a18ec0a13195ac6ba9235e3e4649889facc507a7",
+          "sha256": "72ff7e42cc2aefbcc8420dbb853105e5ce26e940ef159f0247bf53c9e1a01673",
+          "readback_ref": "42cc10953ff831e6fd4d9955c842591bb98ab458",
+          "full_bytes_equal": true
+        },
+        {
+          "path": "docs/source-review/pet-day44-adopted-2026-10-30/001.log",
+          "operation": "write",
+          "blob_sha": "295365fc471604bd60aadb0c286892c3127eeaad",
+          "sha256": "311c00c90364ba2f52b74c7ac029e64052aacb17ee8afcecb9cf22c8f35bc25b",
+          "readback_ref": "42cc10953ff831e6fd4d9955c842591bb98ab458",
+          "full_bytes_equal": true
+        },
+        {
+          "path": "docs/source-review/pet-day44-adopted-2026-10-30/002.log",
+          "operation": "write",
+          "blob_sha": "da664472fa8cac5d6d72cee033a828b823affed4",
+          "sha256": "f22d5e4e9ced367e774ce5bc140d9e6b1235c1882fec80d011044851f3ae6369",
+          "readback_ref": "42cc10953ff831e6fd4d9955c842591bb98ab458",
+          "full_bytes_equal": true
+        },
+        {
+          "path": "docs/source-review/pet-day44-adopted-2026-10-30/003.log",
+          "operation": "write",
+          "blob_sha": "3ff4de68044faea55854caa49c60dfdec3495216",
+          "sha256": "c35608815f43d0b8788a9b826fad2bb17384f49fb328dc4fe64da9db5f5ef4d6",
+          "readback_ref": "42cc10953ff831e6fd4d9955c842591bb98ab458",
+          "full_bytes_equal": true
+        },
+        {
+          "path": "docs/source-review/pet-day44-adopted-2026-10-30/004.log",
+          "operation": "write",
+          "blob_sha": "5ecee254442cb4466eba9a09148f525a741668c6",
+          "sha256": "d757d43c53951704e32c04b9b1e6b4cc65713b659e72fcdbb02f5200675c7fd8",
+          "readback_ref": "42cc10953ff831e6fd4d9955c842591bb98ab458",
+          "full_bytes_equal": true
+        },
+        {
+          "path": "docs/source-review/pet-day44-adopted-2026-10-30/005.log",
+          "operation": "write",
+          "blob_sha": "63caf1a9f1953bca9a130eceef467ccbeb1569f2",
+          "sha256": "8f350d310f6473d206350116f5d4db543073ed531234ea59e5939fc6f8a6654d",
+          "readback_ref": "42cc10953ff831e6fd4d9955c842591bb98ab458",
+          "full_bytes_equal": true
+        },
+        {
+          "path": "docs/source-review/pet-day44-adopted-2026-10-30/006.log",
+          "operation": "write",
+          "blob_sha": "6d185d38c4e8dfaa1a501d7183b7d014eea2b019",
+          "sha256": "c6533bd0db06286618db476a7386973b96c334a8b4271552a207bb2fb341b88c",
+          "readback_ref": "42cc10953ff831e6fd4d9955c842591bb98ab458",
+          "full_bytes_equal": true
+        },
+        {
+          "path": "docs/source-review/pet-day44-adopted-2026-10-30/007.log",
+          "operation": "write",
+          "blob_sha": "790fd3bc425493cc9f5473da3729fab44b0d3756",
+          "sha256": "21a893d09a1c2b6397595d15a4d7cdc77d8248171993dcd5fb0a8c1248769fe2",
+          "readback_ref": "42cc10953ff831e6fd4d9955c842591bb98ab458",
+          "full_bytes_equal": true
+        },
+        {
+          "path": "docs/source-review/pet-day44-adopted-2026-10-30/008.log",
+          "operation": "write",
+          "blob_sha": "6acb75c31b043719686211f75c8bba42ab75db9e",
+          "sha256": "1cb14d1d8f902851412e591348555f8035f7e0fa01c58977318607019451c6da",
+          "readback_ref": "42cc10953ff831e6fd4d9955c842591bb98ab458",
+          "full_bytes_equal": true
+        },
+        {
+          "path": "docs/source-review/pet-day44-adopted-2026-10-30/009.log",
+          "operation": "write",
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "readback_ref": "42cc10953ff831e6fd4d9955c842591bb98ab458",
+          "full_bytes_equal": true
+        },
+        {
+          "path": "docs/source-review/pet-day44-adopted-2026-10-30/010.log",
+          "operation": "write",
+          "blob_sha": "1de1c3cb1ae011006ac9a82da15183297d84bee2",
+          "sha256": "6e0333aa0005cb54bae266f2a8cc498782572b7b3493633c77844b180885e2df",
+          "readback_ref": "42cc10953ff831e6fd4d9955c842591bb98ab458",
+          "full_bytes_equal": true
+        },
+        {
+          "path": "docs/source-review/pet-day44-adopted-2026-10-30/011.log",
+          "operation": "write",
+          "blob_sha": "25c0cffc36c785f33c91fe7c98231d430206f66d",
+          "sha256": "0a66a3e074d4f344b3a4002353e2cff80c0a01e3aad5d43cf270415cc12d6099",
+          "readback_ref": "42cc10953ff831e6fd4d9955c842591bb98ab458",
+          "full_bytes_equal": true
+        },
+        {
+          "path": "docs/source-review/pet-day44-adopted-2026-10-30/012.log",
+          "operation": "write",
+          "blob_sha": "4f71fec167566d26768cfdb5b0cf6f2b658119da",
+          "sha256": "22927e45a12cafbe7d2be0a1aa5b29d33a47d434ef24874d526c6eed2176260d",
+          "readback_ref": "42cc10953ff831e6fd4d9955c842591bb98ab458",
+          "full_bytes_equal": true
+        },
+        {
+          "path": "docs/source-review/pet-day44-adopted-2026-10-30/013.log",
+          "operation": "write",
+          "blob_sha": "f1e43868b255ffc6fc9d73e15e26199043f4caea",
+          "sha256": "3fc48a0079bf149935df149ed4363a3f7e0b7ebb1fa4700adcc7bce1be578e7e",
+          "readback_ref": "42cc10953ff831e6fd4d9955c842591bb98ab458",
+          "full_bytes_equal": true
+        },
+        {
+          "path": "docs/source-review/pet-day44-adopted-2026-10-30/014.log",
+          "operation": "write",
+          "blob_sha": "580ecebf85e8cc35ca66fd07f4f2f99a1740572c",
+          "sha256": "30f8c7fa0acb9b00e1d9f6889c8eb7255925b7b36103a80868dbe5cd46cc844e",
+          "readback_ref": "42cc10953ff831e6fd4d9955c842591bb98ab458",
+          "full_bytes_equal": true
+        },
+        {
+          "path": "docs/source-review/pet-day44-adopted-2026-10-30/015.log",
+          "operation": "write",
+          "blob_sha": "a573ccddbf7fee97cf89ad95857ad04df6093ac6",
+          "sha256": "df5c99e8341ece2ed8ae6bb3a318572bc2e42eaa5517c95ef4f01dc1827c2f2a",
+          "readback_ref": "42cc10953ff831e6fd4d9955c842591bb98ab458",
+          "full_bytes_equal": true
+        },
+        {
+          "path": "docs/source-review/pet-day44-adopted-2026-10-30/016.log",
+          "operation": "write",
+          "blob_sha": "2386823d464234af401ac1f888814c1ae361fcd9",
+          "sha256": "906cb0fc9ae06c893e859082ba2021d549620a0f99c9148ba8eed80f1218c93d",
+          "readback_ref": "42cc10953ff831e6fd4d9955c842591bb98ab458",
+          "full_bytes_equal": true
+        },
+        {
+          "path": "docs/source-review/pet-day44-adopted-2026-10-30/017.log",
+          "operation": "write",
+          "blob_sha": "a0068e32a800c5be78be509c22786fb4089f933c",
+          "sha256": "5e6f6af0adf130544a06f1a8e7bceaac91b0bca26c4476a74fdf39ec88f055f7",
+          "readback_ref": "42cc10953ff831e6fd4d9955c842591bb98ab458",
+          "full_bytes_equal": true
+        },
+        {
+          "path": "docs/source-review/pet-day44-adopted-2026-10-30/README.md",
+          "operation": "write",
+          "blob_sha": "07408755e8f9f735fd303a0eef3e0cf4dce977f7",
+          "sha256": "747ac90d1a88090e13436d126c8ad521e67c36ee74ec31c7a84e0bd22937d090",
+          "readback_ref": "42cc10953ff831e6fd4d9955c842591bb98ab458",
+          "full_bytes_equal": true
+        },
+        {
+          "path": "docs/source-review/pet-day44-adopted-2026-10-30/actual-copy-preservation.json",
+          "operation": "write",
+          "blob_sha": "c448f3d405590f7d51ecae4cbf05f7a0a9a8f890",
+          "sha256": "6bc5295001b695efa92f5ab5668b9fc529cb6a4c111455249a96f42d7eef1b54",
+          "readback_ref": "42cc10953ff831e6fd4d9955c842591bb98ab458",
+          "full_bytes_equal": true
+        },
+        {
+          "path": "docs/source-review/pet-day44-adopted-2026-10-30/adopted-patch-comparison.json",
+          "operation": "write",
+          "blob_sha": "a2452eb927697e5e8146c6d9151dabb72965044e",
+          "sha256": "4261a00e26380e3c9e8662012091175086b6af610ad26c832f8b72e65aa03bcc",
+          "readback_ref": "42cc10953ff831e6fd4d9955c842591bb98ab458",
+          "full_bytes_equal": true
+        },
+        {
+          "path": "docs/source-review/pet-day44-adopted-2026-10-30/ci.json",
+          "operation": "write",
+          "blob_sha": "bb7c475c52749da13ae28a73892ef47b23a4ed38",
+          "sha256": "831c80045650031252facfe3cefc3e080c4924e7cff418c13914d43a957779a9",
+          "readback_ref": "42cc10953ff831e6fd4d9955c842591bb98ab458",
+          "full_bytes_equal": true
+        },
+        {
+          "path": "docs/source-review/pet-day44-adopted-2026-10-30/commands.json",
+          "operation": "write",
+          "blob_sha": "fdaadd46ba0c33cb307cfad57724b1a3fd913da5",
+          "sha256": "370031cf534b267d2006c0240831f4dce2285b10152962bce40e5bf90668ecfa",
+          "readback_ref": "42cc10953ff831e6fd4d9955c842591bb98ab458",
+          "full_bytes_equal": true
+        },
+        {
+          "path": "docs/source-review/pet-day44-adopted-2026-10-30/document-checks.json",
+          "operation": "write",
+          "blob_sha": "e831f4eb3334819dd72e0ee731774f842089fd43",
+          "sha256": "cdebf143e3dac70e63d634396a61a7ceb20e5c1d3bf0144e155338de98ce7243",
+          "readback_ref": "42cc10953ff831e6fd4d9955c842591bb98ab458",
+          "full_bytes_equal": true
+        },
+        {
+          "path": "docs/source-review/pet-day44-adopted-2026-10-30/initial-git.json",
+          "operation": "write",
+          "blob_sha": "a7aa4d5ffe8f9d4ca53db3c14c8d82d1aa2a60e9",
+          "sha256": "93afaf8d52eb80fc90d8a4d71f17f0af09a8d404785749c5690812e7b940993a",
+          "readback_ref": "42cc10953ff831e6fd4d9955c842591bb98ab458",
+          "full_bytes_equal": true
+        },
+        {
+          "path": "docs/source-review/pet-day44-adopted-2026-10-30/migration-checksums.json",
+          "operation": "write",
+          "blob_sha": "bb93af7fa2e54cdc75daecd07da66b922ea454ee",
+          "sha256": "4ddfd0f764221d75fceac23a8ec08db5c8b7d2fcd440d06eec9ce59f383c8e4d",
+          "readback_ref": "42cc10953ff831e6fd4d9955c842591bb98ab458",
+          "full_bytes_equal": true
+        },
+        {
+          "path": "docs/source-review/pet-day44-adopted-2026-10-30/product-ff.log",
+          "operation": "write",
+          "blob_sha": "fb152013983e2ffeaefa4d076c34d6e2d7080265",
+          "sha256": "06a6a161830da323f4b4f58d09b3f018e62e6c19b4040ee86b7478c53e76aa41",
+          "readback_ref": "42cc10953ff831e6fd4d9955c842591bb98ab458",
+          "full_bytes_equal": true
+        },
+        {
+          "path": "docs/source-review/pet-day44-adopted-2026-10-30/progress.log",
+          "operation": "write",
+          "blob_sha": "c495b0570dbef472dfc677ab0621be053baf4102",
+          "sha256": "daa84ea479decbf32ec2ce2805ba0ce42770eafceda1f4fc1ee93977107dd544",
+          "readback_ref": "42cc10953ff831e6fd4d9955c842591bb98ab458",
+          "full_bytes_equal": true
+        },
+        {
+          "path": "docs/source-review/pet-day44-adopted-2026-10-30/source-inventory.json",
+          "operation": "write",
+          "blob_sha": "7cc50994dde1f7db5ff72be9473a827bd1706011",
+          "sha256": "18a43e0f39a84e34532675c1d7c30d96a644202d4eaab4e44aa1de871871587b",
+          "readback_ref": "42cc10953ff831e6fd4d9955c842591bb98ab458",
+          "full_bytes_equal": true
+        },
+        {
+          "path": "docs/source-review/pet-day44-adopted-2026-10-30/verification.py",
+          "operation": "write",
+          "blob_sha": "6dafaf2276b8fb946624a8b3c66edcf9d6b03d7b",
+          "sha256": "7a3612e11bd73b2476888c28567944ce1ef85516d1e5b7605124bddb7d99d9c1",
+          "readback_ref": "42cc10953ff831e6fd4d9955c842591bb98ab458",
+          "full_bytes_equal": true
+        }
+      ]
+    },
+    {
+      "repo": "williechen/copilot_use",
+      "branch": "main",
+      "expected_parent": "42cc10953ff831e6fd4d9955c842591bb98ab458",
+      "commit": "f98bcaf6eebe0acd9a1bfb3064be1abd55c0e4ab",
+      "message": "docs(pet): confirm Day44 forward upgrade adopted in main2c7ff8b",
+      "readback_utc": "2026-10-30T14:23:57.975473+00:00",
+      "files": [
+        {
+          "path": "docs/teaching/daily/day-44/pet-day44-legacy-code-upgrade-r4.patch",
+          "operation": "archived_delete",
+          "blob_sha": "30a7603cfbc74c266f38b851bacb2b01c07d73a0",
+          "sha256": "b2372a1ca2c1ea50a900c8cd949373ab875d763fbfb79b832cd63d179772b1ce",
+          "readback_ref": "42cc10953ff831e6fd4d9955c842591bb98ab458",
+          "full_bytes_equal": true
+        },
+        {
+          "path": "docs/teaching/daily/day-44/pet.md",
+          "operation": "write",
+          "blob_sha": "e573ae357d907a5b31f236b72e2c3d60ef98eba7",
+          "sha256": "b6dae1966d45dd9268860f40b3c582805115bbfae5fb8ccd4cc61a69156226ec",
+          "readback_ref": "f98bcaf6eebe0acd9a1bfb3064be1abd55c0e4ab",
+          "full_bytes_equal": true
+        }
+      ]
+    }
+  ]
+}

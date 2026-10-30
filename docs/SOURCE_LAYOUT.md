@@ -1,6 +1,6 @@
 # 現行來源與目錄
 
-產品 `rust_ai_ring@4b1008b95bc3e170381fcd1db84695e421f036bd`；本地 `/home/willie/Documents/rust_ai_ring`。根目錄沒有 Cargo.toml，必須使用各 workspace manifest。
+產品 `rust_ai_ring@2c7ff8b861d32ab6d879bf80c9f2dce50de38097`；本地 `/home/willie/Documents/rust_ai_ring`。根目錄沒有 Cargo.toml，必須使用各 workspace manifest。
 
 | Workspace | package 版本 | 成員／package |
 | --- | --- | --- |
@@ -18,4 +18,6 @@ Analytics：analytics_server/src/main.rs／lib.rs；Leptos Dashboard、Axum HTTP
 
 [啟動](LOCAL_START.md) · [驗證](LOCAL_VALIDATION.md) · [架構](SYSTEM_ARCHITECTURE.md)
 
-最新main的Day44 caller：Chat room_auth→room_path；Pet pet_windows→window_position，PetStore／Native／UI已接activity模型（walk／sit）；Analytics Dashboard→dashboard_url且logout CSRF／兩個fixture已接通。Pet新forward5只在候選。精確blob見[來源清單](source-review/local-validation-2026-10-30-day44-r2/final-main/source-inventory.json)。
+最新main的Day44 caller：Chat room_auth→room_path；Pet pet_windows→window_position，PetStore／Native／UI已接activity模型（walk／sit）；Analytics Dashboard→dashboard_url且logout CSRF／兩個fixture已接通。Pet forward5已在2c7ff8b，主分支112項通過。精確blob見[來源清單](source-review/local-validation-2026-10-30-day44-r2/final-main/source-inventory.json)。
+
+[Pet 2c7ff8b採用後最新驗證](source-review/pet-day44-adopted-2026-10-30/README.md)；其他案測試保留原4b1008b來源，不追認新SHA。

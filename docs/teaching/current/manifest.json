@@ -1,7 +1,7 @@
 {
   "scope": "current Day44 rechecked against final4b1008b; previous validation and revision evidence ZIP-only",
   "publication_branch": "main",
-  "source_sha": "4b1008b95bc3e170381fcd1db84695e421f036bd",
+  "source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
   "next_day": {
     "chat": 45,
     "pet": 45,
@@ -161,14 +161,14 @@
     {
       "project": "pet",
       "day": 44,
-      "revision": "r4-forward-upgrade",
+      "revision": "r4-adopted-main-verification",
       "article_path": "docs/teaching/daily/day-44/pet.md",
-      "source_sha": "4b1008b95bc3e170381fcd1db84695e421f036bd",
+      "source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
       "publication_status": "revised_local_validation_full_gate2_incomplete",
       "gate1_complete": false,
       "functional_acceptance": false,
       "gate2": false,
-      "product_applied": false,
+      "product_applied": true,
       "refactor_patch": "docs/teaching/daily/day-44/pet-day44-refactor.patch",
       "storage": "raw_current_pending_full_gate2",
       "original_publication": {
@@ -193,23 +193,20 @@
       },
       "superseded_archive": "docs/archive/packages-2026-10-30/08-pet-activity-contract-superseded-2026-10-30.zip",
       "version_msrv_gate_complete": false,
-      "revision_evidence": "docs/teaching/daily/day-44/recheck-verification-2026-10-30.json",
-      "green_patch": "docs/teaching/daily/day-44/pet-day44-legacy-code-upgrade-r4.patch",
+      "revision_evidence": "docs/teaching/daily/day-44/pet-adoption-verification-2026-10-30.json",
       "local_revision_content_complete": true,
       "previous_revision": {
-        "article_commit": "6bf25dff91203db27597d23590cd2087fb146928",
-        "blob_sha": "591b847ae17ffd2e41e419e21dcea6397f3c5503",
-        "sha256": "c7f84b1fd304109fbf1dc696897f5f334b37078d449890a96195cd830013c90c",
-        "archive": "docs/archive/packages-2026-10-30/13-day44-recheck-superseded-documents-2026-10-30.zip"
+        "article_commit": "51727532560551120d7b617f135bc81d6546f188",
+        "blob_sha": "4cde5508eb716fdedbe1ac0bd7949ee30f085d96",
+        "sha256": "d4589aa6271a89d741ed9b0ba2fdf872fc1e37f7ac949e58ad77dd2a59192a2e",
+        "archive": "docs/archive/packages-2026-10-30/14-pet-day44-before-adoption-2026-10-30.zip"
       },
-      "evidence": "docs/teaching/daily/day-44/recheck-verification-2026-10-30.json",
+      "evidence": "docs/teaching/daily/day-44/pet-adoption-verification-2026-10-30.json",
       "base_activity_model_applied": true,
-      "article_commit": "51727532560551120d7b617f135bc81d6546f188",
-      "blob_sha": "4cde5508eb716fdedbe1ac0bd7949ee30f085d96",
-      "sha256": "d4589aa6271a89d741ed9b0ba2fdf872fc1e37f7ac949e58ad77dd2a59192a2e",
-      "exact_commit_readback": true,
-      "remote_full_text_equal": true,
-      "remote_revision_evidence": "docs/teaching/daily/day-44/recheck-remote-verification-2026-10-30.json"
+      "article_commit": "f98bcaf6eebe0acd9a1bfb3064be1abd55c0e4ab",
+      "blob_sha": "e573ae357d907a5b31f236b72e2c3d60ef98eba7",
+      "sha256": "b6dae1966d45dd9268860f40b3c582805115bbfae5fb8ccd4cc61a69156226ec",
+      "exact_commit_readback": true
     },
     {
       "project": "analytics",
@@ -275,7 +272,7 @@
   "unverified_future_drafts": "retain raw; do not archive/delete based only on package presence",
   "pet_activity_contract": {
     "confirmed_by_user": true,
-    "source_product_sha": "4b1008b95bc3e170381fcd1db84695e421f036bd",
+    "source_product_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
     "out_of_cage": "EXISTS pet_activity with matching pet_id/owner_id AND is_activity=true",
     "caged": "no matching active activity",
     "activity_type_filter": null,
@@ -302,13 +299,13 @@
       "candidate_implementation_verified": true,
       "local_main_sqlite_tests_verified": true
     },
-    "candidate_base_sha": "4b1008b95bc3e170381fcd1db84695e421f036bd",
-    "candidate_patch": "docs/teaching/daily/day-44/pet-day44-legacy-code-upgrade-r4.patch",
-    "candidate_workspace_passed": 112,
-    "candidate_node_passed": 12,
-    "candidate_upgrade_verified": "final4b1008b plus new forward5; synthetic and actual read-only online backup copy; existing migrations unchanged",
     "product_applied": true,
     "activity_model_in_main": true,
-    "forward_candidate_applied": false
+    "forward_candidate_applied": true,
+    "local_main_workspace_passed": 112,
+    "local_main_node_passed": 12,
+    "local_main_upgrade_verified": true,
+    "main_validation": "docs/source-review/pet-day44-adopted-2026-10-30/README.md",
+    "candidate_patch_archive": "docs/archive/packages-2026-10-30/14-pet-day44-before-adoption-2026-10-30.zip"
   }
 }

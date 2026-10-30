@@ -1,6 +1,6 @@
 # 本地啟動
 
-產品來源 `4b1008b95bc3e170381fcd1db84695e421f036bd`。依產品 .env.example 在本機設定環境；不把秘密放入文件。Chat／Pet 使用各自 SQLite，Analytics 使用 PostgreSQL；SQLite URL 採明確絕對路徑，避免從不同 workspace 啟動連到另一份 DB。以下啟動會依程式執行 migration，驗收請用獨立資料副本。
+產品來源 `2c7ff8b861d32ab6d879bf80c9f2dce50de38097`。依產品 .env.example 在本機設定環境；不把秘密放入文件。Chat／Pet 使用各自 SQLite，Analytics 使用 PostgreSQL；SQLite URL 採明確絕對路徑，避免從不同 workspace 啟動連到另一份 DB。以下啟動會依程式執行 migration，驗收請用獨立資料副本。
 
 | 專案 | 工作目錄 | 命令 | 入口 |
 | --- | --- | --- | --- |
@@ -12,4 +12,6 @@ Chat 使用 CHAT_DATABASE_URL，Pet 使用 PET_DATABASE_URL，Analytics 使用 A
 
 啟動成功不代表完整驗收。[驗證與限制](LOCAL_VALIDATION.md) · [現況](teaching/current/STATUS.md)
 
-Day44活動已在main。舊中文活動值的forward修訂只在隔離clone／SQLite副本上套用，不修改已部署migration checksum；散步仍受既有PET_ENABLE_ROAM opt-in及runtime暫停條件限制。Trunk建置須匹配lock的wasm-bindgen；本輪dev build成功，不等於native binary／GUI／release。見[真實命令](source-review/local-validation-2026-10-30-day44-r2/README.md)。
+Day44活動已在main。舊中文活動值的forward已在main；驗收migration仍只在SQLite備份副本執行，不修改已部署migration checksum；散步仍受既有PET_ENABLE_ROAM opt-in及runtime暫停條件限制。Trunk建置須匹配lock的wasm-bindgen；本輪dev build成功，不等於native binary／GUI／release。見[真實命令](source-review/local-validation-2026-10-30-day44-r2/README.md)。
+
+[Pet 2c7ff8b採用後最新驗證](source-review/pet-day44-adopted-2026-10-30/README.md)；其他案測試保留原4b1008b來源，不追認新SHA。

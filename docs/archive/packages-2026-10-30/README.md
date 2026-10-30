@@ -35,3 +35,7 @@
 ## Day44本地重核分包
 
 [第十二包：前輪6b34完整驗證原始證據](12-previous-day44-validation-2026-10-30.zip)與[第十三包：被本輪取代的現行文章／入口／狀態／patch](13-day44-recheck-superseded-documents-2026-10-30.zip)分開保存；[逐檔原blob／SHA256與去重](day44-recheck-archive.json)。前十一包hash不變；原檔經ZIP內容與SHA256核對後才移除，不重複打包已存在的相同路徑／內容。[最新現況與證據](../../source-review/local-validation-2026-10-30-day44-r2/README.md)。
+
+## Pet forward採用後
+
+[第十四包](14-pet-day44-before-adoption-2026-10-30.zip)封存採用前的候選正文／附件及被取代入口狀態；[逐檔blob／SHA256與去重](pet-day44-adoption-archive.json)。舊候選附件已移除，避免在已採用的main重複套用。前十三包hash未變。[最新採用後證據](../../source-review/pet-day44-adopted-2026-10-30/README.md)。

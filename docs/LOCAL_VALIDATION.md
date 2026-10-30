@@ -11,3 +11,5 @@ Chat 必須額外執行 `cargo test --locked -p chat-server -p chat-persistence 
 [教學規則](COMMON_LEARNING_RULES.md) · [啟動](LOCAL_START.md) · [原始證據分包](archive/packages-2026-10-30/README.md)
 
 Analytics務必`--no-fail-fast -- --include-ignored`揭露所有PG目標；最後4b1008b已採用day37／39登出fixture修正，主分支PG63通過。若多clone共用target，切回不同local crate來源需強制重建並核對編譯來源；本次已保存錯用舊依賴的編譯失敗及修正重試，不將其當功能Red。
+
+[Pet 2c7ff8b採用後最新驗證](source-review/pet-day44-adopted-2026-10-30/README.md)；其他案測試保留原4b1008b來源，不追認新SHA。

@@ -1,95 +1,28 @@
 {
-  "product_sha": "4b1008b95bc3e170381fcd1db84695e421f036bd",
-  "docs_initial_sha": "8e291229d7b5e980839c530c328c0224561fd860",
-  "main_tests": {
-    "crates": 8,
-    "chat": 62,
-    "pet": 110,
-    "analytics": 43,
-    "analytics_ignored": 1,
-    "chat_ssr": 62,
-    "pet_node": 12,
-    "analytics_postgres": 63,
-    "postgres_ignored": 0
-  },
-  "four_workspace_metadata_fmt_check_clippy": true,
-  "chat_hydrate_wasm": true,
-  "pet_wasm": true,
-  "pet_forward_candidate": {
-    "base_sha": "4b1008b95bc3e170381fcd1db84695e421f036bd",
-    "workspace_tests": 112,
-    "node_tests": 12,
-    "trunk_profile": "dev",
-    "upgrade_synthetic": true,
+  "latest_product_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
+  "latest_followup": "docs/source-review/pet-day44-adopted-2026-10-30/README.md",
+  "pet": {
+    "source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
+    "workspace_passed": 112,
+    "node_passed": 12,
+    "wasm": true,
+    "metadata_fmt_check_clippy": true,
     "upgrade_actual_readonly_backup_copy": true,
-    "checksum_rejection": true,
-    "product_applied": false,
-    "native_gui": false
+    "checksum_rejected": true,
+    "native_gui": false,
+    "trunk_rebuilt_this_followup": false
   },
-  "cleanup_batches": [
-    {
-      "file": "cleanup-result.json",
-      "count": 204,
-      "bytes": 12176609280
-    },
-    {
-      "file": "emergency-cleanup.json",
-      "count": 3,
-      "bytes": 654200832
-    },
-    {
-      "file": "rebuild-cleanup-result.json",
-      "count": 125,
-      "bytes": 11279323136
-    }
-  ],
-  "cleanup_total_allocated_bytes": 24110133248,
+  "metadata_four_workspaces": true,
+  "other_test_results": {
+    "source_sha": "4b1008b95bc3e170381fcd1db84695e421f036bd",
+    "evidence": "docs/source-review/local-validation-2026-10-30-day44-r2/README.md",
+    "tree_unchanged_vs_latest": true,
+    "reexecuted_this_followup": false
+  },
   "ci": {
-    "success": 5,
-    "in_progress": 2
+    "in_progress": 2,
+    "success": 5
   },
   "full_gate2": false,
-  "last_full_comparison_changed": false,
-  "evidence": "docs/source-review/local-validation-2026-10-30-day44-r2/README.md",
-  "pet_activity_contract": {
-    "confirmed_by_user": true,
-    "source_product_sha": "4b1008b95bc3e170381fcd1db84695e421f036bd",
-    "out_of_cage": "EXISTS pet_activity with matching pet_id/owner_id AND is_activity=true",
-    "caged": "no matching active activity",
-    "activity_type_filter": null,
-    "count_condition": "at least one; not exactly one",
-    "add_columns": false,
-    "current_product_uses_old_profile_flag": false,
-    "replacement_green_complete": true,
-    "gate2_verified": false,
-    "withdrawn_green_archive": "docs/archive/packages-2026-10-30/08-pet-activity-contract-superseded-2026-10-30.zip",
-    "initial_activities_and_roaming": {
-      "initial_activity_records": [
-        "散步",
-        "坐下"
-      ],
-      "creation_transaction": "profile and both initial activities commit or roll back together",
-      "walk": "active implies outside and roaming permitted subject to runtime pauses",
-      "sit": "active implies outside and roaming prohibited",
-      "walk_sit_switch": "mutually exclusive atomic update; do not insert duplicate activity records",
-      "unexpected_both_active": "sit takes precedence; persist walk=false, retain sit=true; remain outside; roaming prohibited",
-      "cage": "stop every activity for the selected pet only",
-      "new_columns": false,
-      "product_implementation_verified": false,
-      "priority_write_failure": "stop roaming and report persistence failure; do not claim normalization completed",
-      "candidate_implementation_verified": true,
-      "local_main_sqlite_tests_verified": true
-    },
-    "candidate_base_sha": "4b1008b95bc3e170381fcd1db84695e421f036bd",
-    "candidate_patch": "docs/teaching/daily/day-44/pet-day44-legacy-code-upgrade-r4.patch",
-    "candidate_workspace_passed": 112,
-    "candidate_node_passed": 12,
-    "candidate_upgrade_verified": "final4b1008b plus new forward5; synthetic and actual read-only online backup copy; existing migrations unchanged",
-    "product_applied": true,
-    "activity_model_in_main": true,
-    "forward_candidate_applied": false
-  },
-  "main_source_sha": "4b1008b95bc3e170381fcd1db84695e421f036bd",
-  "actual_old_pg_backup_available": false,
-  "native_gui_executed": false
+  "new_cleanup_bytes": 0
 }
