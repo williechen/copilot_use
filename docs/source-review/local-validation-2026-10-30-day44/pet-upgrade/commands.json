@@ -1,0 +1,74 @@
+[
+  {
+    "command": [
+      "cargo",
+      "run",
+      "--offline",
+      "--locked",
+      "--manifest-path",
+      "pet_apps/Cargo.toml",
+      "-p",
+      "pet-server",
+      "--example",
+      "day44_upgrade",
+      "--",
+      "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-db/synthetic.sqlite",
+      "/home/willie/Documents/rust_ai_ring/pet_apps/migrations",
+      "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-pet-r3/pet_apps/migrations",
+      "seed"
+    ],
+    "cwd": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-pet-r3",
+    "exit_code": 0,
+    "seconds": 9.255734205245972,
+    "log": "0.log",
+    "scope": "isolated Pet candidate; no original database writes"
+  },
+  {
+    "command": [
+      "cargo",
+      "run",
+      "--offline",
+      "--locked",
+      "--manifest-path",
+      "pet_apps/Cargo.toml",
+      "-p",
+      "pet-server",
+      "--example",
+      "day44_upgrade",
+      "--",
+      "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-db/actual-user-backup.sqlite",
+      "/home/willie/Documents/rust_ai_ring/pet_apps/migrations",
+      "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-pet-r3/pet_apps/migrations",
+      "actual"
+    ],
+    "cwd": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-pet-r3",
+    "exit_code": 0,
+    "seconds": 0.44520998001098633,
+    "log": "1.log",
+    "scope": "isolated Pet candidate; no original database writes"
+  },
+  {
+    "command": [
+      "cargo",
+      "run",
+      "--offline",
+      "--locked",
+      "--manifest-path",
+      "pet_apps/Cargo.toml",
+      "-p",
+      "pet-server",
+      "--example",
+      "day44_upgrade",
+      "--",
+      "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-db/checksum-copy.sqlite",
+      "/home/willie/Documents/rust_ai_ring/pet_apps/migrations",
+      "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-pet-r3/pet_apps/migrations",
+      "tamper"
+    ],
+    "cwd": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-pet-r3",
+    "exit_code": 0,
+    "seconds": 0.2009584903717041,
+    "log": "2.log",
+    "scope": "isolated Pet candidate; no original database writes"
+  }
+]

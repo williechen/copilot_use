@@ -1,0 +1,15 @@
+[
+  {
+    "command": [
+      "git",
+      "apply",
+      "--check",
+      "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/outputs/day44-2026-10-30/pet-day44-activity-green-r3.patch"
+    ],
+    "cwd": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-candidate",
+    "exit_code": 1,
+    "log": "00.log",
+    "seconds": 0.00859522819519043,
+    "source": "7ce39f0 + original Day44 Refactors/Chat+Analytics Greens + revised Pet Green and Analytics fixture correction"
+  }
+]

@@ -1,0 +1,73 @@
+[
+  {
+    "command": [
+      "/usr/lib/postgresql/18/bin/pg_ctl",
+      "-D",
+      "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/pg",
+      "-l",
+      "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/outputs/day44-2026-10-30/pg-fixture-fix/postgres.log",
+      "-o",
+      "-k '' -p 55482 -h 127.0.0.1",
+      "start"
+    ],
+    "exit_code": 0,
+    "seconds": 0.13590693473815918,
+    "log": "0.log",
+    "source_sha": "6b34c42f74fc1585b1b864fb7dd6969318270e0f"
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--manifest-path",
+      "analytics_apps/Cargo.toml",
+      "-p",
+      "analytics-server",
+      "--features",
+      "postgres-integration",
+      "--test",
+      "day44_logout_csrf"
+    ],
+    "exit_code": 0,
+    "seconds": 6.069627046585083,
+    "log": "1.log",
+    "source_sha": "6b34c42f74fc1585b1b864fb7dd6969318270e0f"
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--no-fail-fast",
+      "--manifest-path",
+      "analytics_apps/Cargo.toml",
+      "-p",
+      "analytics-server",
+      "-p",
+      "analytics-persistence",
+      "--features",
+      "postgres-integration",
+      "--",
+      "--include-ignored"
+    ],
+    "exit_code": 101,
+    "seconds": 9.320765256881714,
+    "log": "2.log",
+    "source_sha": "6b34c42f74fc1585b1b864fb7dd6969318270e0f"
+  },
+  {
+    "command": [
+      "/usr/lib/postgresql/18/bin/pg_ctl",
+      "-D",
+      "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/pg",
+      "stop"
+    ],
+    "exit_code": 0,
+    "seconds": 0.30948305130004883,
+    "log": "3.log",
+    "source_sha": "6b34c42f74fc1585b1b864fb7dd6969318270e0f"
+  }
+]

@@ -1,0 +1,3 @@
+0 cargo test --offline --locked --manifest-path pet_apps/Cargo.toml -p pet-server --test day44_creation_red
+0 cargo test --offline --locked --workspace --manifest-path pet_apps/Cargo.toml
+0 cargo check --offline --locked --manifest-path pet_apps/Cargo.toml -p pet-ui --target wasm32-unknown-unknown

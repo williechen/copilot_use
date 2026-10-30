@@ -1,0 +1,290 @@
+[
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/chat_server-089185de43c7b399",
+    "bytes": 218462128,
+    "allocated_bytes": 218079232,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/chat_server-bad3f1f9c8e08da3",
+    "bytes": 218407032,
+    "allocated_bytes": 218025984,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/chat_server-6ab2b7f721b6a4f1",
+    "bytes": 218409424,
+    "allocated_bytes": 218025984,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/chat_server-cce9c1775008fa7f",
+    "bytes": 218363296,
+    "allocated_bytes": 217993216,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/chat_server-7d7649cb80a7650e",
+    "bytes": 218354560,
+    "allocated_bytes": 217972736,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_server-02ccd6e27de54c05",
+    "bytes": 214892928,
+    "allocated_bytes": 214573056,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_server-3bd4ced25ae63835",
+    "bytes": 214853784,
+    "allocated_bytes": 214528000,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_server-19e84e917afc66db",
+    "bytes": 214152096,
+    "allocated_bytes": 213827584,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/chat_server-c37ab583a89a5073",
+    "bytes": 207417272,
+    "allocated_bytes": 207237120,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/chat_server-544212f4c055fc05",
+    "bytes": 207361576,
+    "allocated_bytes": 207183872,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/chat_server-591469ad97e64bf5",
+    "bytes": 207304896,
+    "allocated_bytes": 207179776,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/chat_server-240254d85c1b00f1",
+    "bytes": 207324744,
+    "allocated_bytes": 207147008,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/chat_server-8e2207f875cf58e4",
+    "bytes": 207301440,
+    "allocated_bytes": 207122432,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/chat_server-987cd3d22b2c066a",
+    "bytes": 207296544,
+    "allocated_bytes": 207118336,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/day26_logout-07fb07b147e5f821",
+    "bytes": 196045632,
+    "allocated_bytes": 195940352,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/day26_logout-9d87871d3dc1deed",
+    "bytes": 195955120,
+    "allocated_bytes": 195850240,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/day24_signup_complete-118868e1b9fe3a25",
+    "bytes": 195768696,
+    "allocated_bytes": 195670016,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/day24_signup_complete-34b5755bacf0103b",
+    "bytes": 195677888,
+    "allocated_bytes": 195575808,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/day23_saved_pets-b90e2c84e0bc8b0f",
+    "bytes": 195536840,
+    "allocated_bytes": 195461120,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/day23_saved_pets-c496c9f2ff975532",
+    "bytes": 195491744,
+    "allocated_bytes": 195416064,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/day23_saved_pets-723b72b2b55748f1",
+    "bytes": 195471128,
+    "allocated_bytes": 195395584,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/day24_active_pet-286772d73c82ddbe",
+    "bytes": 195147032,
+    "allocated_bytes": 195080192,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/day24_active_pet-f4383cce7fb7e6c3",
+    "bytes": 195102240,
+    "allocated_bytes": 195035136,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/day24_active_pet-6810e3f99ed6edd0",
+    "bytes": 195078424,
+    "allocated_bytes": 195010560,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/day27_create_and_select-e1b4df0c4467071c",
+    "bytes": 195060072,
+    "allocated_bytes": 194994176,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/day27_create_and_select-fa57cded3d15ae13",
+    "bytes": 195014528,
+    "allocated_bytes": 194945024,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/day27_create_and_select-9019812f3f8cf646",
+    "bytes": 194989280,
+    "allocated_bytes": 194920448,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/root_hub_contract-518bb6922ae5a3e9",
+    "bytes": 185366888,
+    "allocated_bytes": 185368576,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/root_hub_contract-7cf4e8e9604e9e72",
+    "bytes": 185307688,
+    "allocated_bytes": 185311232,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/root_hub_contract-6aca7d4b184ecd5b",
+    "bytes": 185310168,
+    "allocated_bytes": 185311232,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/root_hub_contract-730322f8b8539c25",
+    "bytes": 185276440,
+    "allocated_bytes": 185278464,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/root_hub_contract-f37b27a82fea7f57",
+    "bytes": 185263944,
+    "allocated_bytes": 185262080,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/root_hub_contract-3aee7a8def5fc7c1",
+    "bytes": 185255272,
+    "allocated_bytes": 185257984,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_server-0ef84e7b451cb341",
+    "bytes": 185319416,
+    "allocated_bytes": 185237504,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_server-f3d22db60cc8cabe",
+    "bytes": 185283816,
+    "allocated_bytes": 185204736,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_server-363026cd0a500ba0",
+    "bytes": 185286152,
+    "allocated_bytes": 185204736,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/chat_server-b380b21eae3e0b9f",
+    "bytes": 172911976,
+    "allocated_bytes": 172515328,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/analytics_server-80b35e325cb6abdd",
+    "bytes": 126596752,
+    "allocated_bytes": 126480384,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/analytics_server-d409bf000b5ea9e1",
+    "bytes": 126552456,
+    "allocated_bytes": 126435328,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/analytics_server-d7b5a3f295d24915",
+    "bytes": 126541016,
+    "allocated_bytes": 126423040,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day24_password_change-a57e9230390075ea",
+    "bytes": 123786640,
+    "allocated_bytes": 123654144,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day24_password_change-8fdec811240ae39a",
+    "bytes": 123785912,
+    "allocated_bytes": 123654144,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day24_password_change-61025dfb3988067c",
+    "bytes": 123768432,
+    "allocated_bytes": 123633664,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day23_password_login-f5ba1fe9e43644db",
+    "bytes": 123319112,
+    "allocated_bytes": 123187200,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day23_password_login-f25acce66474cd0c",
+    "bytes": 123318816,
+    "allocated_bytes": 123183104,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day23_password_login-b04da50f76d07535",
+    "bytes": 123306640,
+    "allocated_bytes": 123174912,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day25_repeat_password_change-c0e1e6ddf1f7cdd0",
+    "bytes": 122885208,
+    "allocated_bytes": 122753024,
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day25_repeat_password_change-3df56609b08e4dea",
+    "bytes": 122886632,
+    "allocated_bytes": 122753024,
+    "removed": true
+  }
+]

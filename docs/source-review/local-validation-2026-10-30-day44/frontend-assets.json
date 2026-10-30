@@ -1,0 +1,22 @@
+[
+  {
+    "path": "pet-frontend/pet-ui-57b5ef0b25714099.js",
+    "sha256": "41fb1a2b1a41bc52150d7a05881046c034d07ef4a06b12919c3e3e38ab479d56",
+    "bytes": 44616
+  },
+  {
+    "path": "pet-frontend/index.html",
+    "sha256": "0787936253028f696e57a215fc643c0f682f70393588deb7ae1f27034e822966",
+    "bytes": 5059
+  },
+  {
+    "path": "pet-frontend/pet-ui-57b5ef0b25714099_bg.wasm",
+    "sha256": "82c15941fdac62a57ab9b2d5567e7a40894495cf2284090c2a7b1f4ce9500a19",
+    "bytes": 10884086
+  },
+  {
+    "path": "pet-frontend/style-efdbc821b0786fd8.css",
+    "sha256": "13cd5bcea6f883021bbb67cdec49bf93e559dea8619606ad94956485b0637f4d",
+    "bytes": 4150
+  }
+]

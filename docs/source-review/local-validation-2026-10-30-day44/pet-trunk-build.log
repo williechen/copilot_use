@@ -1,0 +1,12 @@
+   Compiling pet-domain v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-pet-r3/pet_apps/pet_domain)
+   Compiling pet-ui v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-pet-r3/pet_apps/pet_ui)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 3.52s
+2026-10-30T11:11:57.112672Z ERROR ❌ error
+error from build pipeline
+
+Caused by:
+    0: HTML build pipeline failed (1 errors), showing first
+    1: error from asset pipeline
+    2: running wasm-bindgen
+    3: couldn't find application wasm-bindgen (version: 0.2.129), unable to download in offline mode
+2026-10-30T11:11:57.112867Z ERROR error from build pipeline

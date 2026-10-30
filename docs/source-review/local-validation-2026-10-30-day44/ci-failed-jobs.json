@@ -1,0 +1,333 @@
+{
+  "total_count": 4,
+  "jobs": [
+    {
+      "id": 123922293329,
+      "run_id": 41012815121,
+      "workflow_name": "Persistence",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/williechen/rust_ai_ring/actions/runs/41012815121",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOUlFt_c8AAAAc2lgiUQ",
+      "head_sha": "6b34c42f74fc1585b1b864fb7dd6969318270e0f",
+      "url": "https://api.github.com/repos/williechen/rust_ai_ring/actions/jobs/123922293329",
+      "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/41012815121/job/123922293329",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-30T06:13:24Z",
+      "started_at": "2026-10-30T06:13:26Z",
+      "completed_at": "2026-10-30T06:14:15Z",
+      "name": "chat-sqlite",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-30T06:13:27Z",
+          "completed_at": "2026-10-30T06:13:27Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-30T06:13:27Z",
+          "completed_at": "2026-10-30T06:13:29Z"
+        },
+        {
+          "name": "Run dtolnay/rust-toolchain@stable",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-30T06:13:29Z",
+          "completed_at": "2026-10-30T06:13:29Z"
+        },
+        {
+          "name": "Chat SQLite adapter tests",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-30T06:13:29Z",
+          "completed_at": "2026-10-30T06:14:12Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8,
+          "started_at": "2026-10-30T06:14:12Z",
+          "completed_at": "2026-10-30T06:14:13Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-10-30T06:14:13Z",
+          "completed_at": "2026-10-30T06:14:13Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/williechen/rust_ai_ring/check-runs/123922293329",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000012696,
+      "runner_name": "GitHub Actions 1000012696",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 123922293484,
+      "run_id": 41012815121,
+      "workflow_name": "Persistence",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/williechen/rust_ai_ring/actions/runs/41012815121",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOUlFt_c8AAAAc2lgi7A",
+      "head_sha": "6b34c42f74fc1585b1b864fb7dd6969318270e0f",
+      "url": "https://api.github.com/repos/williechen/rust_ai_ring/actions/jobs/123922293484",
+      "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/41012815121/job/123922293484",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-10-30T06:13:24Z",
+      "started_at": "2026-10-30T06:13:26Z",
+      "completed_at": "2026-10-30T06:15:30Z",
+      "name": "analytics-postgres",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-30T06:13:27Z",
+          "completed_at": "2026-10-30T06:13:27Z"
+        },
+        {
+          "name": "Initialize containers",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-30T06:13:27Z",
+          "completed_at": "2026-10-30T06:13:50Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-30T06:13:50Z",
+          "completed_at": "2026-10-30T06:13:52Z"
+        },
+        {
+          "name": "Run dtolnay/rust-toolchain@stable",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-30T06:13:52Z",
+          "completed_at": "2026-10-30T06:13:52Z"
+        },
+        {
+          "name": "Analytics SQLx adapter + real Router integration",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 5,
+          "started_at": "2026-10-30T06:13:52Z",
+          "completed_at": "2026-10-30T06:15:27Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-10-30T06:15:27Z",
+          "completed_at": "2026-10-30T06:15:27Z"
+        },
+        {
+          "name": "Stop containers",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10,
+          "started_at": "2026-10-30T06:15:27Z",
+          "completed_at": "2026-10-30T06:15:28Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-10-30T06:15:28Z",
+          "completed_at": "2026-10-30T06:15:28Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/williechen/rust_ai_ring/check-runs/123922293484",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000012708,
+      "runner_name": "GitHub Actions 1000012708",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 123922293539,
+      "run_id": 41012815121,
+      "workflow_name": "Persistence",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/williechen/rust_ai_ring/actions/runs/41012815121",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOUlFt_c8AAAAc2lgjIw",
+      "head_sha": "6b34c42f74fc1585b1b864fb7dd6969318270e0f",
+      "url": "https://api.github.com/repos/williechen/rust_ai_ring/actions/jobs/123922293539",
+      "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/41012815121/job/123922293539",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-30T06:13:24Z",
+      "started_at": "2026-10-30T06:13:26Z",
+      "completed_at": "2026-10-30T06:14:06Z",
+      "name": "pet-sqlite",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-30T06:13:27Z",
+          "completed_at": "2026-10-30T06:13:28Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-30T06:13:28Z",
+          "completed_at": "2026-10-30T06:13:29Z"
+        },
+        {
+          "name": "Run dtolnay/rust-toolchain@stable",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-30T06:13:29Z",
+          "completed_at": "2026-10-30T06:13:30Z"
+        },
+        {
+          "name": "Pet SQLite adapter tests (no Tauri)",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-30T06:13:30Z",
+          "completed_at": "2026-10-30T06:14:03Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8,
+          "started_at": "2026-10-30T06:14:03Z",
+          "completed_at": "2026-10-30T06:14:03Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-10-30T06:14:03Z",
+          "completed_at": "2026-10-30T06:14:03Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/williechen/rust_ai_ring/check-runs/123922293539",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000012707,
+      "runner_name": "GitHub Actions 1000012707",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 123922293562,
+      "run_id": 41012815121,
+      "workflow_name": "Persistence",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/williechen/rust_ai_ring/actions/runs/41012815121",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOUlFt_c8AAAAc2lgjOg",
+      "head_sha": "6b34c42f74fc1585b1b864fb7dd6969318270e0f",
+      "url": "https://api.github.com/repos/williechen/rust_ai_ring/actions/jobs/123922293562",
+      "html_url": "https://github.com/williechen/rust_ai_ring/actions/runs/41012815121/job/123922293562",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-30T06:13:24Z",
+      "started_at": "2026-10-30T06:13:26Z",
+      "completed_at": "2026-10-30T06:15:50Z",
+      "name": "pet-native",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-30T06:13:27Z",
+          "completed_at": "2026-10-30T06:13:28Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-30T06:13:28Z",
+          "completed_at": "2026-10-30T06:13:29Z"
+        },
+        {
+          "name": "Install Tauri native dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-30T06:13:29Z",
+          "completed_at": "2026-10-30T06:13:54Z"
+        },
+        {
+          "name": "Run dtolnay/rust-toolchain@stable",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-30T06:13:54Z",
+          "completed_at": "2026-10-30T06:13:55Z"
+        },
+        {
+          "name": "Pet native/server tests (not GUI acceptance)",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-30T06:13:55Z",
+          "completed_at": "2026-10-30T06:15:47Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10,
+          "started_at": "2026-10-30T06:15:47Z",
+          "completed_at": "2026-10-30T06:15:48Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-10-30T06:15:48Z",
+          "completed_at": "2026-10-30T06:15:48Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/williechen/rust_ai_ring/check-runs/123922293562",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000012709,
+      "runner_name": "GitHub Actions 1000012709",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    }
+  ]
+}

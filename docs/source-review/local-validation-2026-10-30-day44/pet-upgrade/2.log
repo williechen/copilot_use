@@ -1,0 +1,3 @@
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.15s
+     Running `pet_apps/target/debug/examples/day44_upgrade /home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-db/checksum-copy.sqlite /home/willie/Documents/rust_ai_ring/pet_apps/migrations /home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-pet-r3/pet_apps/migrations tamper`
+checksum drift rejected and profile preferences preserved

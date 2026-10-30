@@ -1,0 +1,12 @@
+/home/willie/Documents/copilot_use/docs/teaching/daily/day-44/analytics-day44-green.patch:1122: trailing whitespace.
+            ,s.credential_fingerprint 
+/home/willie/Documents/copilot_use/docs/teaching/daily/day-44/analytics-day44-green.patch:1123: trailing whitespace.
+        FROM uac_user u 
+/home/willie/Documents/copilot_use/docs/teaching/daily/day-44/analytics-day44-green.patch:1124: trailing whitespace.
+        JOIN uac_login_session s 
+/home/willie/Documents/copilot_use/docs/teaching/daily/day-44/analytics-day44-green.patch:1125: trailing whitespace.
+            ON s.user_id=u.id 
+/home/willie/Documents/copilot_use/docs/teaching/daily/day-44/analytics-day44-green.patch:1126: trailing whitespace.
+        WHERE s.token_hash=$1 
+warning: squelched 5 whitespace errors
+warning: 10 lines add whitespace errors.

@@ -1,0 +1,8 @@
+0 cargo fmt --all --manifest-path pet_apps/Cargo.toml
+0 cargo metadata --locked --no-deps --format-version 1 --manifest-path pet_apps/Cargo.toml
+0 cargo fmt --all --manifest-path pet_apps/Cargo.toml -- --check
+0 cargo check --offline --locked --workspace --manifest-path pet_apps/Cargo.toml
+0 cargo clippy --offline --locked --workspace --manifest-path pet_apps/Cargo.toml
+0 cargo test --offline --locked --workspace --manifest-path pet_apps/Cargo.toml
+0 cargo check --offline --locked --manifest-path pet_apps/Cargo.toml -p pet-ui --target wasm32-unknown-unknown
+0 node --test pet_apps/pet_ui/tests/day33-open-controls-selects-origin.test.mjs pet_apps/pet_ui/tests/day41-cage-by-id.test.mjs pet_apps/pet_ui/tests/day42-cage-status.test.mjs pet_apps/pet_ui/tests/day44-activity.test.mjs pet_apps/pet_ui/tests/duplicate-preview-contract.test.mjs pet_apps/pet_ui/tests/scan-preview-contract.test.mjs pet_apps/pet_ui/tests/scan-preview-no-path.test.mjs

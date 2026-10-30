@@ -1,0 +1,4 @@
+0 ['/usr/lib/postgresql/18/bin/pg_ctl', '-D', '/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/pg', '-l', '/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/outputs/day44-2026-10-30/pg-followup/postgres.log', '-o', "-k '' -p 55482 -h 127.0.0.1", 'start']
+0 ['cargo', 'test', '--offline', '--locked', '--manifest-path', 'analytics_apps/Cargo.toml', '-p', 'analytics-server', '--features', 'postgres-integration', '--test', 'day44_logout_csrf']
+101 ['cargo', 'test', '--offline', '--locked', '--no-fail-fast', '--manifest-path', 'analytics_apps/Cargo.toml', '-p', 'analytics-server', '-p', 'analytics-persistence', '--features', 'postgres-integration', '--', '--include-ignored']
+0 ['/usr/lib/postgresql/18/bin/pg_ctl', '-D', '/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/pg', 'stop']

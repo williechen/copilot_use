@@ -1,0 +1,12 @@
+0 cargo fmt --all --manifest-path chat_apps/Cargo.toml
+0 git apply --reverse /home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/outputs/day44-2026-10-30/chat-day44-format-r1.patch
+0 git apply --check /home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/outputs/day44-2026-10-30/chat-day44-format-r1.patch
+0 git apply /home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/outputs/day44-2026-10-30/chat-day44-format-r1.patch
+0 cargo fmt --all --manifest-path chat_apps/Cargo.toml -- --check
+0 cargo fmt --all --manifest-path analytics_apps/Cargo.toml
+0 git apply --reverse /home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/outputs/day44-2026-10-30/analytics-day44-format-r1.patch
+0 git apply --check /home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/outputs/day44-2026-10-30/analytics-day44-format-r1.patch
+0 git apply /home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/outputs/day44-2026-10-30/analytics-day44-format-r1.patch
+0 cargo fmt --all --manifest-path analytics_apps/Cargo.toml -- --check
+0 cargo test --offline --locked --manifest-path chat_apps/Cargo.toml -p chat-server --lib --features ssr
+0 cargo test --offline --locked --manifest-path chat_apps/Cargo.toml -p chat-ui --features ssr

@@ -1,0 +1,58 @@
+[
+  {
+    "path": "pet_apps/migrations/20261030060000_activity_lifecycle.sql",
+    "sha256": "f8bfb86ba722cc98bdf654b58dad79fe6574a34eb2202e8da2fd211772d75440"
+  },
+  {
+    "path": "pet_apps/pet_application/src/lifecycle.rs",
+    "sha256": "0785ddfe3e48b01e1b0d0d4b7293d0883fa06828668ab81db9bbb942bc9f9ef2"
+  },
+  {
+    "path": "pet_apps/pet_persistence/src/activity.rs",
+    "sha256": "d9494b7360a1dbee823c7da6722237ef681eff25bd0c50eb139026ce732fd570"
+  },
+  {
+    "path": "pet_apps/pet_persistence/src/lib.rs",
+    "sha256": "b1c89527a35d3fe1ea450ddf1397c31a054e8f034760af6ff570d97c811fa8b3"
+  },
+  {
+    "path": "pet_apps/pet_server/examples/day44_upgrade.rs",
+    "sha256": "b1232208d17fad1d6230cbe4797f5e2b73115100e9d97061c18308ecdd7433e0"
+  },
+  {
+    "path": "pet_apps/pet_server/src/lib.rs",
+    "sha256": "9de59fe2b7c3f65a9671acb83bdd734f61560ea2f55faa95d2a545d116afd560"
+  },
+  {
+    "path": "pet_apps/pet_server/src/pet_store.rs",
+    "sha256": "971ed1bb6679f45dda2a39c822d26ce319415c15a165bb417e4b91bd13badc53"
+  },
+  {
+    "path": "pet_apps/pet_server/src/pet_windows.rs",
+    "sha256": "344ebe11e4dbfec0ee524bbafda4b984caeb0ef2d80bbddaee502d2ff0e59858"
+  },
+  {
+    "path": "pet_apps/pet_server/src/roam.rs",
+    "sha256": "dd18d3e34f2c30a71d1819473791cfcea4bdf2f781110fa13bef3ddb4a3d42b1"
+  },
+  {
+    "path": "pet_apps/pet_server/tests/day44_activity_lifecycle.rs",
+    "sha256": "acc9b1c178c57680baac248d9b1b648e5334c5fff531bf90e4d5d0a1b908bb2b"
+  },
+  {
+    "path": "pet_apps/pet_ui/index.html",
+    "sha256": "0c8586f4fe95ed61b66e1abc718ecac1d76cc9f774ad0875d20f9ea6c35dceda"
+  },
+  {
+    "path": "pet_apps/pet_ui/src/bridge.rs",
+    "sha256": "63ba0c1cffa8aa8fd0c9e6f5c9d9aab11846131408abfe5cac0f1e868f66962e"
+  },
+  {
+    "path": "pet_apps/pet_ui/src/main.rs",
+    "sha256": "77bb729051f5013ab3ebaa3b65c426cba637818ca707df6253c86a92bf9357e8"
+  },
+  {
+    "path": "pet_apps/pet_ui/tests/day44-activity.test.mjs",
+    "sha256": "aa4a4c8bfb0d4dacbaca4fe67d4f06311cbf13a2a91d13344513d09ff5b5c3bc"
+  }
+]
