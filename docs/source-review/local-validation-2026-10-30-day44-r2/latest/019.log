@@ -1,0 +1,192 @@
+   Compiling chat-domain v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/chat_domain)
+   Compiling chat-application v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/chat_application)
+   Compiling shared v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/crates/shared)
+   Compiling chat-persistence v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/chat_persistence)
+   Compiling chat-ui v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/chat_ui)
+warning: unused import: `crate::room_list_state::clear_room_search`
+  --> chat_ui/src/lib.rs:39:5
+   |
+39 | use crate::room_list_state::clear_room_search;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `room_heading` is never used
+   --> chat_ui/src/lib.rs:209:4
+    |
+209 | fn room_heading(id: &str, result: Result<String, String>) -> String {
+    |    ^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `clear_room_search` is never used
+  --> chat_ui/src/room_list_state.rs:55:15
+   |
+55 | pub(super) fn clear_room_search(loaded: bool, rows: &[(String, String)]) -> (String, String) {
+   |               ^^^^^^^^^^^^^^^^^
+
+warning: variants `SignedOut`, `SignedIn`, and `Unavailable` are never constructed
+ --> chat_ui/src/session_entry.rs:4:5
+  |
+2 | pub(super) enum SessionEntry {
+  |                 ------------ variants in this enum
+3 |     Checking,
+4 |     SignedOut,
+  |     ^^^^^^^^^
+5 |     SignedIn,
+  |     ^^^^^^^^
+6 |     Unavailable,
+  |     ^^^^^^^^^^^
+  |
+  = note: `SessionEntry` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis
+
+warning: `chat-ui` (lib) generated 4 warnings (run `cargo fix --lib -p chat-ui` to apply 1 suggestion)
+   Compiling chat-server v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/chat_server)
+warning: `chat-ui` (lib test) generated 1 warning (1 duplicate)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 14.56s
+     Running unittests src/lib.rs (chat_apps/target/debug/deps/chat_application-9ed945b80344f1c4)
+
+running 6 tests
+test day35_room_name_tests::room_name_policy_is_utf8_bytes_and_control_safe ... ok
+test tests::existing_room_allows_persist_and_publish ... ok
+test tests::failed_write_never_publishes ... ok
+test tests::missing_room_blocks_message_and_publish ... ok
+test tests::successful_write_publishes_exactly_once ... ok
+test tests::mismatched_room_id_must_not_persist_or_publish ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (chat_apps/target/debug/deps/chat_domain-9920b052499bed7a)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (chat_apps/target/debug/deps/chat_persistence-de288034a987db15)
+
+running 5 tests
+test tests::test_message_repository_rejects_missing_room ... ok
+test tests::test_message_schema_rejects_invalid_author_and_length ... ok
+test tests::test_message_repository_all_author_kinds ... ok
+test tests::test_room_repository_create_then_find ... ok
+test tests::test_room_repository_find_by_id ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.26s
+
+     Running unittests src/lib.rs (chat_apps/target/debug/deps/chat_server-bcd12be4a90e2fd1)
+
+running 29 tests
+test auth_session::tests::cookie_parser_and_both_csrf_callers_keep_the_same_contract ... ok
+test auth_session::tests::session_adapter_obeys_revocation_and_account_state ... ok
+test http::room_details_tests::list_rooms_returns_persisted_room ... ok
+test http::room_details_tests::invalid_input_and_database_failure_are_distinct ... ok
+test http::room_details_tests::returns_exact_saved_room_without_writing ... ok
+test http::room_http_tests::day35_json_create_rejects_control_names_before_sqlite ... ok
+test http::room_http_tests::database_failure_is_not_created ... ok
+test http::room_http_tests::invalid_room_names_never_write ... ok
+test http::room_http_tests::valid_room_returns_201_and_saved_id ... ok
+test room_auth::day25_tests::anonymous_create_is_rejected_while_public_list_is_available ... ok
+test room_auth::day41_room_return_tests::anonymous_room_link_redirects_but_invalid_room_id_is_rejected ... ok
+test room_path::tests::canonical_room_path_is_fail_closed ... ok
+test room_auth::day25_tests::room_page_requires_active_sqlite_session ... ok
+test signin::day34_login_redirect_tests::legacy_login_get_redirects_without_rendering_another_form ... ok
+test room_auth::day44_existing_room_gate_tests::signed_in_room_navigation_rejects_missing_and_allows_saved_room ... ok
+test signin::day35_account_room_tests::logged_in_account_rejects_newline_without_room_write ... ok
+test signin::day40_session_entry_tests::session_endpoint_checks_active_revoked_and_expired_sqlite_session ... ok
+test signup::day23_correction_tests::day23_invalid_signup_is_rejected_before_db_write ... ok
+test ws::test::accepts_nonblank_content ... ok
+test ws::test::blank_room ... ok
+test ws::test::day36_database_error_fails_closed ... ok
+test ws::test::day36_revoked_session_is_not_active ... ok
+test ws::test::different_room ... ok
+test ws::test::matching_room ... ok
+test ws::test::rejects_blank_content ... ok
+test ws::test::typing_is_only_forwarded_to_connection_room ... ok
+test signup::day22_tests::day22_signup_persists_and_rejects_duplicate ... ok
+test ws::test::ws_message_requires_room_at_write_time ... ok
+test signin::day23_tests::day23_password_login_creates_persisted_session_and_guards_account ... ok
+
+test result: ok. 29 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.09s
+
+     Running unittests src/main.rs (chat_apps/target/debug/deps/chat_server-50cca5f4d545be68)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/day24_signup_complete.rs (chat_apps/target/debug/deps/day24_signup_complete-39d3a7c175653d56)
+
+running 2 tests
+test day24_signup_completes_without_automatic_login_or_navigation ... ok
+test day24_existing_browser_session_revocation_is_atomic ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.18s
+
+     Running tests/day26_logout.rs (chat_apps/target/debug/deps/day26_logout-6a9449cd56ead13b)
+
+running 1 test
+test day26_logout_revokes_only_one_session ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/root_hub_contract.rs (chat_apps/target/debug/deps/root_hub_contract-6c554b3fb4edf49d)
+
+running 4 tests
+test count_tracks_receiver_lifecycle ... ok
+test last_receiver_cleanup_allows_new_subscription ... ok
+test message_stays_inside_room ... ok
+test subscribers_share_events ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (chat_apps/target/debug/deps/chat_ui-c289229930e1ea57)
+
+running 15 tests
+test chat_socket::tests::decodes_pong_event ... ok
+test day37_search_tests::real_search_completion_updates_the_signals_used_by_the_view ... ok
+test day38_room_status_tests::success_and_local_filter_show_one_consistent_status ... ok
+test day40_home_entry_tests::entry_does_not_claim_manage_without_confirmed_session ... ok
+test room_list_state::day42_status_refactor_tests::loading_error_empty_and_found_contract_survives_move ... ok
+test room_list_state::day43_clear_room_search_tests::clear_restores_all_visible_rooms_without_discarding_snapshot ... ok
+test day42_room_heading_tests::real_name_and_failed_detail_have_distinct_visible_states ... ok
+test day38_room_status_tests::request_progress_and_failure_override_stale_room_feedback ... ok
+test room_list_state::tests::day39_initial_load_is_once_and_does_not_interrupt_pending_request ... ok
+test room_list_state::tests::distinguish_not_loaded_empty_filtered_and_found ... ok
+test room_list_state::tests::failures_preserve_complete_snapshot_query_and_retry_message ... ok
+test room_list_state::tests::empty_success_replaces_rows_and_clears_query ... ok
+test room_list_state::tests::filter_preserves_ids_and_handles_all_original_queries ... ok
+test room_list_state::tests::success_replaces_links_and_returns_full_snapshot ... ok
+test session_entry::tests::session_navigation_is_fail_closed_and_preserves_existing_contract ... ok
+
+test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests chat_application
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests chat_domain
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests chat_persistence
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests chat_server
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests chat_ui
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

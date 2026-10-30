@@ -1,0 +1,19 @@
+{
+  "source_sha": "4b1008b95bc3e170381fcd1db84695e421f036bd",
+  "current_markdown_count": 38,
+  "broken_relative_links": [],
+  "all_current_json_parse": true,
+  "thirteen_zip_crc_sha256_valid": true,
+  "prior_eleven_zip_hashes_unchanged": true,
+  "new_archives_no_duplicate_path_content": true,
+  "prior_files_recoverable": 234,
+  "inline_patch_equal_to_attachment_and_tested_candidate": true,
+  "real_apply_evidence": "final-fix/commands.json",
+  "same_red_green_assertion_source": true,
+  "red_green_byte_equal": true,
+  "four_manifest_and_locks_unchanged": true,
+  "all_four_deployed_migrations_byte_unchanged": true,
+  "product_clean_and_no_product_commits": true,
+  "FIFO_next_day_last_full_comparison_unchanged": true,
+  "complete_product_gate2": false
+}

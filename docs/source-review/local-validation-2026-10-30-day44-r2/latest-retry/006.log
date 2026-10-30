@@ -1,0 +1,29 @@
+   Compiling pet-server v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-c726-fixed/pet_apps/pet_server)
+   Compiling ai-core v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-c726-fixed/crates/ai_core)
+   Compiling pet-persistence v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-c726-fixed/pet_apps/pet_persistence)
+   Compiling pet-application v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-c726-fixed/pet_apps/pet_application)
+   Compiling pet-domain v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-c726-fixed/pet_apps/pet_domain)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 12.75s
+     Running tests/day44_activity_migration.rs (pet_apps/target/debug/deps/day44_activity_migration-a17cd6fba1ad3642)
+
+running 2 tests
+test old_display_names_migrate_to_codes_with_sit_priority_and_preserve_dictionary ... FAILED
+test dictionary_id_collision_rolls_back_every_activity_change ... ok
+
+failures:
+
+---- old_display_names_migrate_to_codes_with_sit_priority_and_preserve_dictionary stdout ----
+
+thread 'old_display_names_migrate_to_codes_with_sit_priority_and_preserve_dictionary' (26049) panicked at pet_server/tests/day44_activity_migration.rs:39:5:
+assertion `left == right` failed
+  left: [("initial-sit:a", "sit", 0), ("initial-walk:a", "walk", 0), ("p", "play", 1), ("s", "坐下", 1), ("w", "散步", 1)]
+ right: [("p", "play", 1), ("s", "sit", 1), ("w", "walk", 0)]
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    old_display_names_migrate_to_codes_with_sit_priority_and_preserve_dictionary
+
+test result: FAILED. 1 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+error: test failed, to rerun pass `-p pet-server --test day44_activity_migration`

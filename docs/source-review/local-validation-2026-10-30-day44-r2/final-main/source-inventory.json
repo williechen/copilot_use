@@ -1,0 +1,509 @@
+{
+  "source_sha": "4b1008b95bc3e170381fcd1db84695e421f036bd",
+  "files": [
+    {
+      "path": ".github/workflows/ai_chat.yml",
+      "git_blob": "d2a75441f67a7a162b5e8b05fb44e48a814a6c97",
+      "sha256": "347c0da55f33d565ac9540878500aa729acf6ec1efff8d9aa101c5f6c607e2f3",
+      "bytes": 1984
+    },
+    {
+      "path": ".github/workflows/analytics.yml",
+      "git_blob": "12b57bca0fecc593c0bb1ebb43b7b75c8a71efd6",
+      "sha256": "d71f32cf1e7555a2df910d85000e5742dc0dea3e25afa33115bbcdf5a5d0ef17",
+      "bytes": 1607
+    },
+    {
+      "path": ".github/workflows/desktop_pet.yml",
+      "git_blob": "333f68e690fc5a7758c13e24d77b378f48aee95a",
+      "sha256": "7a43e3b402f7c97c8bf8a364ce1e53119bc98e60d25fe6f8594155d53abb2f71",
+      "bytes": 2765
+    },
+    {
+      "path": ".github/workflows/node.yml",
+      "git_blob": "c7af02e21d3c69b46c7eb06107d4fc925b2eac5d",
+      "sha256": "96608f3f1f314f90e2bad4216d1fb1b76028c4aac1f20cf4b530ca7e80b44b2a",
+      "bytes": 552
+    },
+    {
+      "path": ".github/workflows/persistence.yml",
+      "git_blob": "2ccc29ef3885f9bdfd20a8a406b784b06058233f",
+      "sha256": "c11d17e6e21bec3ab67b8843fa1e941876ffe994c5eff5efec98804aeac62be3",
+      "bytes": 2515
+    },
+    {
+      "path": ".github/workflows/test.yml",
+      "git_blob": "f5bffa5a1db2501beef137d08f86e9a18039fa06",
+      "sha256": "f0635ba0e81d488a605d643fcee2231cb5b3fbab1d94bc9450d3ecccb265e827",
+      "bytes": 5261
+    },
+    {
+      "path": ".github/workflows/workspaces.yml",
+      "git_blob": "43df175d69f9582d30f25d31021da6e6f56c2e98",
+      "sha256": "5c89760b8de33c0c8f2ce1bb9101e89c55cd315e0515058d858fc83f564af19b",
+      "bytes": 688
+    },
+    {
+      "path": "analytics_apps/Cargo.lock",
+      "git_blob": "831373fcf0824cf5b50e785bf4abe75d3aadc2f8",
+      "sha256": "3f3479a016faa629aaa77fd6320861fc8616333698b154bb2536238dd2dc161f",
+      "bytes": 73319
+    },
+    {
+      "path": "analytics_apps/Cargo.toml",
+      "git_blob": "22f05d05f89a4e58fa2d4a336a0727207606ec07",
+      "sha256": "8aff0077033630b9064535b1fbcec7d5c1836341737bf5c9763e760433338de9",
+      "bytes": 812
+    },
+    {
+      "path": "analytics_apps/analytics_application/Cargo.toml",
+      "git_blob": "d74e5356ae10ed5f98758196357af6f4c9e17fc5",
+      "sha256": "f3821e0d9ecd9693ee28ea8ef1bbdaf9e6bb040ae1aa8ac530a212efc69595fd",
+      "bytes": 107
+    },
+    {
+      "path": "analytics_apps/analytics_application/src/lib.rs",
+      "git_blob": "b93cf3ffd9cc9c59f584a92d7bd1459d5521ef4e",
+      "sha256": "c04c976b49d9540ebad87db788a0887ce2806ffef3f1ea64736bb845e6c7568b",
+      "bytes": 210
+    },
+    {
+      "path": "analytics_apps/analytics_domain/Cargo.toml",
+      "git_blob": "3f7a6a00e49dfe9e17cff801b44583ab8b1b9de2",
+      "sha256": "b3b5b44a25b313c7f52a9bb411c62a3dcb05ca8343ef2d6bf1b939e5e4babd30",
+      "bytes": 102
+    },
+    {
+      "path": "analytics_apps/analytics_domain/src/lib.rs",
+      "git_blob": "b93cf3ffd9cc9c59f584a92d7bd1459d5521ef4e",
+      "sha256": "c04c976b49d9540ebad87db788a0887ce2806ffef3f1ea64736bb845e6c7568b",
+      "bytes": 210
+    },
+    {
+      "path": "analytics_apps/analytics_persistence/Cargo.toml",
+      "git_blob": "7f3af2d352d219a550ed9805ea0991464c793639",
+      "sha256": "b93c92d8a6e539c07afeb1382bd8ce4083c129553883ee3cdc4ea88770c7c005",
+      "bytes": 540
+    },
+    {
+      "path": "analytics_apps/analytics_persistence/src/lib.rs",
+      "git_blob": "0239d2b34ac10691c216a6c67ff840dee6834687",
+      "sha256": "27e3bcb607c0848dea91ce17589fb517dd34ac7c42f89a5fdb7617fd2875ec30",
+      "bytes": 4987
+    },
+    {
+      "path": "analytics_apps/analytics_server/Cargo.toml",
+      "git_blob": "d43f3c41eae7d40d0b75e2040751e6cb7de35316",
+      "sha256": "b3aeb39f77064d1b451fef2922de1a4af1c86031ea2b602ca15cf7090a30307f",
+      "bytes": 745
+    },
+    {
+      "path": "analytics_apps/analytics_server/src/dashboard_url.rs",
+      "git_blob": "ad1b4252742dbb9710a5f9e94bf78a6fb7bf6eed",
+      "sha256": "2e732bc03a369d61b824358737673c9b4d3a29ca40e02b3395a1c52e6e94364c",
+      "bytes": 2401
+    },
+    {
+      "path": "analytics_apps/analytics_server/src/lib.rs",
+      "git_blob": "5d12b20c68c487290c61f17ffff1f9ef8a6f0f83",
+      "sha256": "7f1d50a6f5dffd4c5dbd62e362966b3506082fbcc9d60c3fafccb6b62c757089",
+      "bytes": 25043
+    },
+    {
+      "path": "analytics_apps/analytics_server/src/main.rs",
+      "git_blob": "b4c138f003d9df7cfdaaf9c3c90154d917d6505d",
+      "sha256": "95ba5cb074eb3d70e09547b3e00be57a8b7512781c63307ca37f7f57f56c9027",
+      "bytes": 1235
+    },
+    {
+      "path": "analytics_apps/analytics_server/src/password_login.rs",
+      "git_blob": "0a5180366c577424af6831fce39b026cf6f98f41",
+      "sha256": "22080ffe253f847945a442e0f219edd325578c6b333ad7d1508a1aa5bf6beffc",
+      "bytes": 14891
+    },
+    {
+      "path": "analytics_apps/analytics_server/tests/day23_password_login.rs",
+      "git_blob": "27079129f719adf87ec0081a8217d924f5968ac0",
+      "sha256": "1ea4776f4f771e1679c0b526fed8b023fd38fa860b0588eedfd083f96daa8fe7",
+      "bytes": 5141
+    },
+    {
+      "path": "analytics_apps/analytics_ui/Cargo.toml",
+      "git_blob": "3ce854b53a06b1c57bb9fc86fd5b088c6620cfbe",
+      "sha256": "0422bbf75b0fcebdca6a0c25428ec92f6dfcb1a5af59ce444660a336b6176940",
+      "bytes": 98
+    },
+    {
+      "path": "analytics_apps/analytics_ui/src/lib.rs",
+      "git_blob": "b93cf3ffd9cc9c59f584a92d7bd1459d5521ef4e",
+      "sha256": "c04c976b49d9540ebad87db788a0887ce2806ffef3f1ea64736bb845e6c7568b",
+      "bytes": 210
+    },
+    {
+      "path": "analytics_apps/migrations/20261014223748_create_product_events.sql",
+      "git_blob": "2aecd5ebd13edbb6b6144a221d2d892f7063faa2",
+      "sha256": "44663555d34f077e8fcf40784b91a943227fd17630c8657f9574f787fca06eaf",
+      "bytes": 496
+    },
+    {
+      "path": "analytics_apps/migrations/20261018073932_create_auth_user.sql",
+      "git_blob": "e4ed869fb0c6acab496c78a2e1e55482733de7a0",
+      "sha256": "63fe5fd0d14121ad20855105b89877ff8a33bcd701ebcafa986a7ae0850c11a9",
+      "bytes": 4109
+    },
+    {
+      "path": "analytics_apps/migrations/20261018114026_creat_protocol.sql",
+      "git_blob": "32adb02e00b17fb063ea168c970a7fba8d388a58",
+      "sha256": "660feafdacf9ba7ccd850ff63eb81679e2fd2f99e282d1da57870ec89e8b2e83",
+      "bytes": 935
+    },
+    {
+      "path": "analytics_apps/migrations/20261020154237_password_login_session.sql",
+      "git_blob": "1717893f67bf3841053b84c3b3f4adb685432295",
+      "sha256": "e1cefd4d54c4c010bebd65bc813858eeca4c811e9bb31712846c5d6702199485",
+      "bytes": 279
+    },
+    {
+      "path": "analytics_apps/migrations/20261021071000_unique_account_email.sql",
+      "git_blob": "450926d1e78bdabbd612f3e990844af4c1671f0f",
+      "sha256": "0d21b80fd4b71229cf67ad2c76ee7b972f1737121a5902e61de08ef497188da0",
+      "bytes": 75
+    },
+    {
+      "path": "analytics_apps/migrations/20261022070000_session_contract.sql",
+      "git_blob": "ffa066d6e7210a2fd819d3e32a1c659499078e5a",
+      "sha256": "58ddc5b3bfa1edf67ae867055b188db26cff3c38a4953c761ceca1114f6cf68a",
+      "bytes": 604
+    },
+    {
+      "path": "chat_apps/Cargo.lock",
+      "git_blob": "bd4da0101ec6282d67965674159aa965bd1ae35e",
+      "sha256": "f7659dac7c519b266da05ec142872a3288a57e3cf8c90a3f2d799315ae39a881",
+      "bytes": 78227
+    },
+    {
+      "path": "chat_apps/Cargo.toml",
+      "git_blob": "435baaf6a110e5afc0e0d864570755933573c5c5",
+      "sha256": "d1007a83bb24e4276642c107a231b585e1aa4615bd585cabfb41835184d63954",
+      "bytes": 1018
+    },
+    {
+      "path": "chat_apps/chat_application/Cargo.toml",
+      "git_blob": "0f02d259d3870bccd29ec6879520418ba1be4d97",
+      "sha256": "f3f7bf509bc01d5f1900686336def961c712b60db976c9627fddccae5a85adfb",
+      "bytes": 303
+    },
+    {
+      "path": "chat_apps/chat_application/src/lib.rs",
+      "git_blob": "5ed73fc80a2fb25e72506ea59d9f64824ec3c423",
+      "sha256": "8d567bc40ef244a92041c19644b8c267408fac4a31834450989674356680b143",
+      "bytes": 8531
+    },
+    {
+      "path": "chat_apps/chat_domain/Cargo.toml",
+      "git_blob": "af579a44cffb90a0c0f7d11b2527f4b8a308e862",
+      "sha256": "845e2c6d21feb9eccdbf60548669c7baa455a559b4d2b9853b199f2f6ea4a136",
+      "bytes": 142
+    },
+    {
+      "path": "chat_apps/chat_domain/src/lib.rs",
+      "git_blob": "72e75fcb0d0fee2374cbeacac745d3de34d55945",
+      "sha256": "903f2cddd90d280a7cefc7b5984b2b114556dd3f3b08f3b4e4b37855c4e31360",
+      "bytes": 598
+    },
+    {
+      "path": "chat_apps/chat_persistence/Cargo.toml",
+      "git_blob": "05963c9374b40036531d66015a32ac6ca2f0062b",
+      "sha256": "49e09c28737e97f64ee6d0a78496f7610cec797d34ac355819b51f37adbdf529",
+      "bytes": 274
+    },
+    {
+      "path": "chat_apps/chat_persistence/src/lib.rs",
+      "git_blob": "cc44d6d3730100828a899318e7d71336a7281c0b",
+      "sha256": "396b47775e9d9021d07b8a348402bedb3a4b5f5d1ca9f6b6e0cf473b22c62ae3",
+      "bytes": 11239
+    },
+    {
+      "path": "chat_apps/chat_server/Cargo.toml",
+      "git_blob": "e463272eb947dbf58ffd31ec4976cfebb9d990f0",
+      "sha256": "4c6c74c8431696d17cc42f6e6aa2df802091ba1dd8129dd2f0f9ac13293c97e4",
+      "bytes": 725
+    },
+    {
+      "path": "chat_apps/chat_server/src/lib.rs",
+      "git_blob": "96f85b530ecc54567fc9a1d7d554ec3c588ffaaa",
+      "sha256": "23485dd01d899931480f10340287318be84f41746adea671569c3e3518eba45d",
+      "bytes": 2947
+    },
+    {
+      "path": "chat_apps/chat_server/src/main.rs",
+      "git_blob": "3dcc8691023cff5a8f8ea49c3bb0ded8c39704e4",
+      "sha256": "b0df000b64f7e56623b22f62c54f65e084b73f8eaa80fbb1baca3c1d601519c7",
+      "bytes": 141
+    },
+    {
+      "path": "chat_apps/chat_server/src/room_auth.rs",
+      "git_blob": "88ca6ad31b73c5778293cad53004a45a5127810d",
+      "sha256": "ef62450bab2340f8d69db90c97f30e119423c9187c1b7bfd3c1c3fcca5c6862c",
+      "bytes": 10824
+    },
+    {
+      "path": "chat_apps/chat_server/src/room_path.rs",
+      "git_blob": "741ad77a6fe32a98bcf6762cd0755c90962e7c5d",
+      "sha256": "f3e09163f7ae5472ca7b9536631fb6a6ca25a50647082432fde4e52535a07b48",
+      "bytes": 901
+    },
+    {
+      "path": "chat_apps/chat_ui/Cargo.toml",
+      "git_blob": "9ba328350ed12160d469171c4f975b618816c9cf",
+      "sha256": "83f9b6172b1a8c7c1fb65c938c86f1622d59da37e14f8db18b2a5c2efaba7ff5",
+      "bytes": 731
+    },
+    {
+      "path": "chat_apps/chat_ui/src/lib.rs",
+      "git_blob": "d4e1435da3493974fbe5f95515da9cf64bd94c5d",
+      "sha256": "674b61a6570b972c4367969ceb89d6d07d6b990bd2ff6f5a4e4ca18138a34153",
+      "bytes": 22061
+    },
+    {
+      "path": "chat_apps/migrations/20260930034455_crate_rooms.sql",
+      "git_blob": "0cc7010abbe7c8291dfe36037650a7bb6a7c6400",
+      "sha256": "4dad307f00d6d606be24b479d1f93421346338fdc8812cec24a1345366b6b99c",
+      "bytes": 358
+    },
+    {
+      "path": "chat_apps/migrations/20261007084321_create_messages.sql",
+      "git_blob": "52bee0d5e2edf827f7329785abfc945c84016f14",
+      "sha256": "08ce2f933e9c166b58d6c2e38b9eb9d237efc8fddaaa6c271b0a1f4c2ed68a2b",
+      "bytes": 798
+    },
+    {
+      "path": "chat_apps/migrations/20261018073931_create_auth_user.sql",
+      "git_blob": "7496c525272e85f4f8ea719ae860f849b32b5848",
+      "sha256": "2315c7ed8c0bd9c54d82b27b03d0cc1933161a242db66f5d90702e3fa3861cb0",
+      "bytes": 4169
+    },
+    {
+      "path": "chat_apps/migrations/20261018094242_create_ai_person.sql",
+      "git_blob": "bdbe04fa6f0a89f39eea902ea12f61d1414320a3",
+      "sha256": "745f2efe516ccde16e942fb54a8b9feda6be8eb418bb324338d0c7dbcec48c3a",
+      "bytes": 2369
+    },
+    {
+      "path": "chat_apps/migrations/20261018114024_creat_protocol.sql",
+      "git_blob": "8922fdbd0e1a8f30f2593272c53030d5d3a2012a",
+      "sha256": "45815d564b89938cd68baa124204b9521c008cab6e16dbb100dbb000c49b4c23",
+      "bytes": 934
+    },
+    {
+      "path": "chat_apps/migrations/20261018122554_creat_chat_action_log.sql",
+      "git_blob": "37d0b86377342098a4438224ce2b4c5298f6a84f",
+      "sha256": "112f2a2995c9f64fba93937e96faac899e5f3622735c82bc09659cb31dca8d04",
+      "bytes": 625
+    },
+    {
+      "path": "chat_apps/migrations/20261019221857_member_identity.sql",
+      "git_blob": "387cabe73cb84d45c7209b86a8fe0670e85944eb",
+      "sha256": "c4a3e316e5089c65e2aa45571be9befdf9765aa1363d072dc0d661257849ad61",
+      "bytes": 274
+    },
+    {
+      "path": "chat_apps/migrations/20261020124211_mbr_room.sql",
+      "git_blob": "30f161b2542326502417159dc39068787e14d9dd",
+      "sha256": "d8f9240b2d4acf48b90985639b5908c76af2723f853f649fedcb4030fef5b5bc",
+      "bytes": 819
+    },
+    {
+      "path": "chat_apps/migrations/20261020152737_mbr_sessions.sql",
+      "git_blob": "69a5a166578e4e3fda40cb6626b589de8f74b6d5",
+      "sha256": "d69b64a3a421bfb005f0573b48ddfcb0dcc7635b657a2038fbfb2a356ae1f564",
+      "bytes": 376
+    },
+    {
+      "path": "crates/Cargo.lock",
+      "git_blob": "28ebff98f0e31e92551b12d540361ccd74eed7f2",
+      "sha256": "0736735c91176e189d3725476b4d985401838ba53d840ea381b809edb6aa3bf5",
+      "bytes": 13526
+    },
+    {
+      "path": "crates/Cargo.toml",
+      "git_blob": "739ed0cd7d5df70571ca176b51cde4a9db063d47",
+      "sha256": "c67188f414ec24f051db6530cfcb2bb2241ff066406975adf720d24d13f1f581",
+      "bytes": 746
+    },
+    {
+      "path": "crates/ai_core/Cargo.toml",
+      "git_blob": "681bd9bf03aadac40359fa1dc46c7ea326cd84e6",
+      "sha256": "8253f7e9d37b44b2d30a7949cdca7a3ad63eeaeb2f543d36f838d29c3b5e82dc",
+      "bytes": 227
+    },
+    {
+      "path": "crates/ai_core/src/lib.rs",
+      "git_blob": "47922fd3798bb33ebc88d87e666d2ada81dbaa04",
+      "sha256": "2e6876a0e441ea01ce0a11ab4d757d67576d5fc4e53a7873b91e4eab31a64e39",
+      "bytes": 2122
+    },
+    {
+      "path": "crates/shared/Cargo.toml",
+      "git_blob": "488a348a3ce65a942804ed671e0cd25227e51922",
+      "sha256": "12ae15dab9c0bd8c1649e9afdfb135a3483910c9e93f39330569976936ab8c3b",
+      "bytes": 245
+    },
+    {
+      "path": "crates/shared/src/lib.rs",
+      "git_blob": "9ac5b9e88abc3bf5a8ee3b6d1fa49ea8cfdc52da",
+      "sha256": "df40e8b7a12fe594efad29a30b5bfa9fdb0d0e36fafbdf4291e3bcbf6a71ec99",
+      "bytes": 3298
+    },
+    {
+      "path": "crates/telemetry/Cargo.toml",
+      "git_blob": "b12a8918948c4448652a65ec32fd520bad490a44",
+      "sha256": "af9e3f9bb8f18ba50d6cb14cb0dcf5cdb37abe2c16464b464c6be5dcbdf57963",
+      "bytes": 95
+    },
+    {
+      "path": "crates/telemetry/src/lib.rs",
+      "git_blob": "8b137891791fe96927ad78e64b0aad7bded08bdc",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "bytes": 1
+    },
+    {
+      "path": "pet_apps/Cargo.lock",
+      "git_blob": "b9805c0aefb65df8972bd6d3d17547ec2781f6f5",
+      "sha256": "d2688bb6129e66c75cc0b891de29b60f2ea012b6a3a143513285fc5c21aa7a54",
+      "bytes": 138360
+    },
+    {
+      "path": "pet_apps/Cargo.toml",
+      "git_blob": "1033d8194dd711d9c7704400e4c294fb06449c8f",
+      "sha256": "5153d79ef5489fdb9814ab628b405fc2a0c338472cbed0b0968d1e7e166948fe",
+      "bytes": 780
+    },
+    {
+      "path": "pet_apps/migrations/20261018091733_create_pet.sql",
+      "git_blob": "acfd4d737ffe2ba0fa2ea95c0abf7a7c1d84145c",
+      "sha256": "5e7d59f4154a53443b14591bd6380241048a23f9f3f92227910a8c8524584eee",
+      "bytes": 3178
+    },
+    {
+      "path": "pet_apps/migrations/20261018095626_create_pet_owner.sql",
+      "git_blob": "655e1a962f4aa41195a00706f20b16d7a66d373b",
+      "sha256": "2b9de1dc9ae66b8bb31512bf42b60df0c5845e84f12d5fc0722bb8a931ebfd83",
+      "bytes": 428
+    },
+    {
+      "path": "pet_apps/migrations/20261018114025_creat_protocol.sql",
+      "git_blob": "6ebb517abaf3b70a98aa9f1af4d9687e695b47a6",
+      "sha256": "54734a764e4f498a06aec1c7febceef6bf4709890b53f5820e52d6afa0fc05af",
+      "bytes": 931
+    },
+    {
+      "path": "pet_apps/migrations/20261030060000_activity_lifecycle.sql",
+      "git_blob": "e2787d91a3a5c440b4d0725310983a0801c9ee9e",
+      "sha256": "2c3172ace014f178622db3ecf55e0c9fe1887f9bbad09a6cb18a04b1e101881c",
+      "bytes": 1525
+    },
+    {
+      "path": "pet_apps/pet_application/Cargo.toml",
+      "git_blob": "1fd1740e1ce1d5cbfed7a8317475d16bd8c7c99b",
+      "sha256": "c33e8f93f92f6079e0e8b81098ff404f58c8ed9b600304c413de30cd1e7837c8",
+      "bytes": 193
+    },
+    {
+      "path": "pet_apps/pet_application/src/lib.rs",
+      "git_blob": "7c52e4c21360917906a260a67f82aead23affee4",
+      "sha256": "55fca1a38aaa57a8f6d6af13eafff3efc7e66ed1e41dd324463a7af9f236b27c",
+      "bytes": 1146
+    },
+    {
+      "path": "pet_apps/pet_domain/Cargo.toml",
+      "git_blob": "1e0a38a5ca0b31f6ee5bb0acc31e3c816d03351d",
+      "sha256": "18b159f763532b13c1eec26e65ab4be1e0dda4c351e217b73fd2aa4bdc4a9a32",
+      "bytes": 188
+    },
+    {
+      "path": "pet_apps/pet_domain/src/lib.rs",
+      "git_blob": "e9ca0b0f40cc636de233e5d024953095bcd6a841",
+      "sha256": "36aa2be5757633e5703f0f455e2d0ff0cd7639564df51f8f97575b4a03b61736",
+      "bytes": 2499
+    },
+    {
+      "path": "pet_apps/pet_persistence/Cargo.toml",
+      "git_blob": "3e0608f53454842dcfa49d8ba31f7ba67c021f50",
+      "sha256": "f46583f7e63c1b10293e36db20897c1f9ea1f41a2e9506b46140005daaab3308",
+      "bytes": 225
+    },
+    {
+      "path": "pet_apps/pet_persistence/src/activity.rs",
+      "git_blob": "015bde71a9850f2b00cafe39bea849d1c6a85321",
+      "sha256": "7f0d0b925869695f74c88c11e2cd9e8d9f0f0ee49ef5fcc911a1ffc2334e1d54",
+      "bytes": 9704
+    },
+    {
+      "path": "pet_apps/pet_persistence/src/lib.rs",
+      "git_blob": "55429cab16a027feaba55fe27f14e19a4d9f15f8",
+      "sha256": "7a01a87e103ca123fbb450e5ffa5817df2d5191cadd5814b641a13a33f52b6ec",
+      "bytes": 4848
+    },
+    {
+      "path": "pet_apps/pet_server/Cargo.toml",
+      "git_blob": "e477d4f8c518586c9720abf1e073df00326e86c3",
+      "sha256": "d6207a0382c7b2d07e27bf5b45508fd8347604563731121a71e9a2251ee5927a",
+      "bytes": 659
+    },
+    {
+      "path": "pet_apps/pet_server/src/lib.rs",
+      "git_blob": "438b79abedafa1d17f85c8cba385089480d81190",
+      "sha256": "9de59fe2b7c3f65a9671acb83bdd734f61560ea2f55faa95d2a545d116afd560",
+      "bytes": 16306
+    },
+    {
+      "path": "pet_apps/pet_server/src/main.rs",
+      "git_blob": "1b2ebc70ca38c556fb7071a962d375a2d02917fd",
+      "sha256": "a3d879bcc777d3f26266953d4e115084660d8b2fbcf5101c8f1303c14c389cfa",
+      "bytes": 390
+    },
+    {
+      "path": "pet_apps/pet_server/src/pet_store.rs",
+      "git_blob": "ae70306868fc265a2202c2c139f5b6d2cb349cc4",
+      "sha256": "15605fc66f11470bf5b0920892e55e64e84a5877dca41957444acf96b97bb87d",
+      "bytes": 13699
+    },
+    {
+      "path": "pet_apps/pet_server/src/pet_windows.rs",
+      "git_blob": "d3d2ab19d73f447742599fecb3608a4b73f0826f",
+      "sha256": "344ebe11e4dbfec0ee524bbafda4b984caeb0ef2d80bbddaee502d2ff0e59858",
+      "bytes": 10623
+    },
+    {
+      "path": "pet_apps/pet_server/src/roam.rs",
+      "git_blob": "df8af1079e544b3902def33e01957a45340e939e",
+      "sha256": "ac8cca732790a744a8e2b7cb8bbe95afab82f660a99b29e78aee50550a446234",
+      "bytes": 15169
+    },
+    {
+      "path": "pet_apps/pet_server/tauri.conf.json",
+      "git_blob": "113581b20eed6d1e13e3768f19b884dfa1759909",
+      "sha256": "db71780a402742fd121d9dc5b9c955977aa9e3f54f98de199386a5732606fef2",
+      "bytes": 753
+    },
+    {
+      "path": "pet_apps/pet_ui/Cargo.toml",
+      "git_blob": "0734cd9857791d5e582b23be3d6045e87cd5950f",
+      "sha256": "6c9b1e2b4c518c28467bc7b41d392d74aaf56bc21823c2dc2fe437f22b93f21d",
+      "bytes": 443
+    },
+    {
+      "path": "pet_apps/pet_ui/src/component/activity.rs",
+      "git_blob": "83c6f1862acf7e11f9d6819376b66ac9debfa53b",
+      "sha256": "769875b2827e2983947e5349e95711a7c2ae1d8271c449b836807cfe37e748f0",
+      "bytes": 6297
+    },
+    {
+      "path": "pet_apps/pet_ui/src/main.rs",
+      "git_blob": "6570230253566b8731df2d303d07a151ee553315",
+      "sha256": "6e49c6a765e6a7b34e22d8503fb1790b120dbdceed2ced6523885bc5b4aea50c",
+      "bytes": 25420
+    }
+  ]
+}

@@ -1,0 +1,190 @@
+diff --git a/pet_apps/migrations/20261030060000_activity_lifecycle.sql b/pet_apps/migrations/20261030060000_activity_lifecycle.sql
+index d257f0c..581664b 100644
+--- a/pet_apps/migrations/20261030060000_activity_lifecycle.sql
++++ b/pet_apps/migrations/20261030060000_activity_lifecycle.sql
+@@ -1,4 +1,7 @@
+ -- Data-only forward migration: no columns, no deletion, no edits to deployed checksums.
++-- Normalize legacy display labels without deleting IDs or unrelated activities.
++UPDATE pet_activity SET activity_type=CASE activity_type WHEN '散步' THEN 'walk' WHEN '坐下' THEN 'sit' END
++WHERE activity_type IN ('散步','坐下');
+ -- For legacy profiles with no activities, preserve the old outside state once as walking.
+ INSERT INTO pet_activity(id,pet_id,owner_id,activity_type,is_activity,is_use_ai)
+ SELECT 'initial-walk:' || p.id,p.id,p.owner_id,'walk',
+@@ -16,7 +19,10 @@ UPDATE pet_activity AS w SET is_activity=0
+ WHERE w.activity_type='walk' AND w.is_activity=1
+ AND EXISTS(SELECT 1 FROM pet_activity s WHERE s.pet_id=w.pet_id AND s.owner_id=w.owner_id AND s.activity_type='sit' AND s.is_activity=1);
+ 
++-- Keep existing dictionary entries; an unrelated primary-key collision fails safely.
+ INSERT INTO codemap(id,category,code,value,description,created_at,updated_at)
+-VALUES ('initial-walk','activity','walk','散步','Initial walk activity',NOW(),NOW()),
+-('initial-sit','activity','sit','坐下','Initial walk activity',NOW(),NOW());
+-
++SELECT 'initial-walk','activity','walk','散步','Initial walk activity',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP
++WHERE NOT EXISTS(SELECT 1 FROM codemap WHERE category='activity' AND code='walk');
++INSERT INTO codemap(id,category,code,value,description,created_at,updated_at)
++SELECT 'initial-sit','activity','sit','坐下','Initial sit activity',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP
++WHERE NOT EXISTS(SELECT 1 FROM codemap WHERE category='activity' AND code='sit');
+diff --git a/pet_apps/pet_server/examples/day44_upgrade.rs b/pet_apps/pet_server/examples/day44_upgrade.rs
+index 9d12c4d..3fa25aa 100644
+--- a/pet_apps/pet_server/examples/day44_upgrade.rs
++++ b/pet_apps/pet_server/examples/day44_upgrade.rs
+@@ -63,9 +63,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
+         .fetch_all(&pool)
+         .await?
+     );
+-    let missing:i64=sqlx::query_scalar("SELECT count(*) FROM pet_profile p WHERE NOT EXISTS(SELECT 1 FROM pet_activity a WHERE a.pet_id=p.id AND a.owner_id=p.owner_id AND a.activity_type='散步') OR NOT EXISTS(SELECT 1 FROM pet_activity a WHERE a.pet_id=p.id AND a.owner_id=p.owner_id AND a.activity_type='坐下')").fetch_one(&pool).await?;
++    let missing:i64=sqlx::query_scalar("SELECT count(*) FROM pet_profile p WHERE NOT EXISTS(SELECT 1 FROM pet_activity a WHERE a.pet_id=p.id AND a.owner_id=p.owner_id AND a.activity_type='walk') OR NOT EXISTS(SELECT 1 FROM pet_activity a WHERE a.pet_id=p.id AND a.owner_id=p.owner_id AND a.activity_type='sit')").fetch_one(&pool).await?;
+     assert_eq!(missing, 0);
+-    let conflicts:i64=sqlx::query_scalar("SELECT count(*) FROM pet_activity w WHERE w.activity_type='散步' AND w.is_activity=1 AND EXISTS(SELECT 1 FROM pet_activity s WHERE s.pet_id=w.pet_id AND s.owner_id=w.owner_id AND s.activity_type='坐下' AND s.is_activity=1)").fetch_one(&pool).await?;
++    let conflicts:i64=sqlx::query_scalar("SELECT count(*) FROM pet_activity w WHERE w.activity_type='walk' AND w.is_activity=1 AND EXISTS(SELECT 1 FROM pet_activity s WHERE s.pet_id=w.pet_id AND s.owner_id=w.owner_id AND s.activity_type='sit' AND s.is_activity=1)").fetch_one(&pool).await?;
+     assert_eq!(conflicts, 0);
+     if args.get(4).is_some_and(|s| s == "seed") {
+         let out = pet_persistence::activity::status(&pool, "old-out").await?;
+diff --git a/pet_apps/pet_server/tests/day44_activity_lifecycle.rs b/pet_apps/pet_server/tests/day44_activity_lifecycle.rs
+index 83cb6ec..90727b9 100644
+--- a/pet_apps/pet_server/tests/day44_activity_lifecycle.rs
++++ b/pet_apps/pet_server/tests/day44_activity_lifecycle.rs
+@@ -38,7 +38,7 @@ async fn creation_has_two_inactive_activities_and_no_new_columns(pool: sqlx::Sql
+ async fn failure_creating_second_activity_rolls_back_owner_profile_and_first_activity(
+     pool: sqlx::SqlitePool,
+ ) {
+-    sqlx::query("CREATE TRIGGER reject_sit BEFORE INSERT ON pet_activity WHEN NEW.activity_type='坐下' BEGIN SELECT RAISE(ABORT,'injected failure'); END")
++    sqlx::query("CREATE TRIGGER reject_sit BEFORE INSERT ON pet_activity WHEN NEW.activity_type='sit' BEGIN SELECT RAISE(ABORT,'injected failure'); END")
+         .execute(&pool).await.unwrap();
+     let store = PetStore { pool: pool.clone() };
+     assert!(store.create("A").await.is_err());
+@@ -57,7 +57,7 @@ async fn any_active_type_means_outside_and_sit_wins_and_persists(pool: sqlx::Sql
+     assert!(!store.read_caged(&p.id).await.unwrap());
+     store.switch_activity(&p.id, true).await.unwrap();
+     assert!(store.activity_status(&p.id).await.unwrap().roaming);
+-    sqlx::query("UPDATE pet_activity SET is_activity=1 WHERE pet_id=?1 AND activity_type='坐下'")
++    sqlx::query("UPDATE pet_activity SET is_activity=1 WHERE pet_id=?1 AND activity_type='sit'")
+         .bind(&p.id)
+         .execute(&pool)
+         .await
+@@ -65,7 +65,7 @@ async fn any_active_type_means_outside_and_sit_wins_and_persists(pool: sqlx::Sql
+     let s = store.activity_status(&p.id).await.unwrap();
+     assert!(s.outside);
+     assert!(!s.roaming);
+-    let walking:i64=sqlx::query_scalar("SELECT count(*) FROM pet_activity WHERE pet_id=?1 AND activity_type='散步' AND is_activity=1").bind(&p.id).fetch_one(&pool).await.unwrap();
++    let walking:i64=sqlx::query_scalar("SELECT count(*) FROM pet_activity WHERE pet_id=?1 AND activity_type='walk' AND is_activity=1").bind(&p.id).fetch_one(&pool).await.unwrap();
+     assert_eq!(walking, 0);
+     assert!(store.activity_status(&p.id).await.unwrap().default_caged);
+ }
+@@ -105,7 +105,7 @@ async fn missing_and_foreign_pet_fail_closed_and_owner_mismatch_does_not_leak(
+         .await
+         .unwrap();
+     sqlx::query("INSERT INTO pet_profile(id,name,species,owner_id) VALUES('foreign','X','tortoise','other-owner')").execute(&pool).await.unwrap();
+-    sqlx::query("INSERT INTO pet_activity(id,pet_id,owner_id,activity_type,is_activity) VALUES('mismatch',?1,'other-owner','散步',1)").bind(&a.id).execute(&pool).await.unwrap();
++    sqlx::query("INSERT INTO pet_activity(id,pet_id,owner_id,activity_type,is_activity) VALUES('mismatch',?1,'other-owner','walk',1)").bind(&a.id).execute(&pool).await.unwrap();
+     assert!(store.read_caged(&a.id).await.unwrap());
+     for id in ["foreign", "missing"] {
+         assert!(store.read_caged(id).await.is_err());
+@@ -182,7 +182,7 @@ async fn default_change_and_normalization_are_one_transaction(pool: sqlx::Sqlite
+         .execute(&pool)
+         .await
+         .unwrap();
+-    sqlx::query("CREATE TRIGGER reject_walk_update BEFORE UPDATE ON pet_activity WHEN OLD.activity_type='散步' BEGIN SELECT RAISE(ABORT,'normalization fails'); END").execute(&pool).await.unwrap();
++    sqlx::query("CREATE TRIGGER reject_walk_update BEFORE UPDATE ON pet_activity WHEN OLD.activity_type='walk' BEGIN SELECT RAISE(ABORT,'normalization fails'); END").execute(&pool).await.unwrap();
+     assert!(store.set_default_caged(&a.id, false).await.is_err());
+     let default: i64 = sqlx::query_scalar("SELECT is_default_closure FROM pet_profile WHERE id=?1")
+         .bind(&a.id)
+diff --git a/pet_apps/pet_server/tests/day44_activity_migration.rs b/pet_apps/pet_server/tests/day44_activity_migration.rs
+new file mode 100644
+index 0000000..03f0de9
+--- /dev/null
++++ b/pet_apps/pet_server/tests/day44_activity_migration.rs
+@@ -0,0 +1,93 @@
++use sqlx::{SqlitePool, migrate::Migrator, sqlite::SqlitePoolOptions};
++
++async fn old_database() -> (SqlitePool, Migrator) {
++    let pool = SqlitePoolOptions::new()
++        .max_connections(1)
++        .connect("sqlite::memory:")
++        .await
++        .unwrap();
++    let all = sqlx::migrate!("../migrations");
++    let old = Migrator::with_migrations(
++        all.iter()
++            .filter(|m| m.version < 20261030060000)
++            .cloned()
++            .collect(),
++    );
++    old.run(&pool).await.unwrap();
++    sqlx::query("INSERT INTO pet_owner(id,name) VALUES('local-owner','Owner')")
++        .execute(&pool)
++        .await
++        .unwrap();
++    sqlx::query("INSERT INTO pet_profile(id,name,species,owner_id,is_default_closure) VALUES('a','A','tortoise','local-owner',0)").execute(&pool).await.unwrap();
++    (pool, all)
++}
++
++#[tokio::test]
++async fn old_display_names_migrate_to_codes_with_sit_priority_and_preserve_dictionary() {
++    let (pool, all) = old_database().await;
++    sqlx::query("INSERT INTO pet_activity(id,pet_id,owner_id,activity_type,is_activity) VALUES('w','a','local-owner','散步',1),('s','a','local-owner','坐下',1),('p','a','local-owner','play',1)").execute(&pool).await.unwrap();
++    sqlx::query("INSERT INTO codemap(id,category,code,value) VALUES('custom-walk','activity','walk','自訂散步')").execute(&pool).await.unwrap();
++    all.run(&pool)
++        .await
++        .expect("new migration must run on SQLite");
++    all.run(&pool).await.unwrap();
++    let activities: Vec<(String, String, i64)> =
++        sqlx::query_as("SELECT id,activity_type,is_activity FROM pet_activity ORDER BY id")
++            .fetch_all(&pool)
++            .await
++            .unwrap();
++    assert_eq!(
++        activities,
++        vec![
++            ("p".into(), "play".into(), 1),
++            ("s".into(), "sit".into(), 1),
++            ("w".into(), "walk".into(), 0)
++        ]
++    );
++    let dictionary: Vec<(String, String)> =
++        sqlx::query_as("SELECT code,value FROM codemap WHERE category='activity' ORDER BY code")
++            .fetch_all(&pool)
++            .await
++            .unwrap();
++    assert_eq!(
++        dictionary,
++        vec![
++            ("sit".into(), "坐下".into()),
++            ("walk".into(), "自訂散步".into())
++        ]
++    );
++    let timestamp: Option<String> =
++        sqlx::query_scalar("SELECT created_at FROM codemap WHERE code='sit'")
++            .fetch_one(&pool)
++            .await
++            .unwrap();
++    assert!(timestamp.is_some_and(|s| !s.is_empty()));
++    let status = pet_persistence::activity::status(&pool, "a").await.unwrap();
++    assert!(status.outside && !status.roaming && !status.default_caged);
++    pool.close().await;
++}
++
++#[tokio::test]
++async fn dictionary_id_collision_rolls_back_every_activity_change() {
++    let (pool, all) = old_database().await;
++    sqlx::query("INSERT INTO pet_activity(id,pet_id,owner_id,activity_type,is_activity) VALUES('w','a','local-owner','散步',1)").execute(&pool).await.unwrap();
++    sqlx::query("INSERT INTO codemap(id,category,code,value) VALUES('initial-sit','other','keep','untouched')").execute(&pool).await.unwrap();
++    assert!(all.run(&pool).await.is_err());
++    let activities: Vec<(String, String, i64)> =
++        sqlx::query_as("SELECT id,activity_type,is_activity FROM pet_activity")
++            .fetch_all(&pool)
++            .await
++            .unwrap();
++    assert_eq!(activities, vec![("w".into(), "散步".into(), 1)]);
++    let dictionary: Vec<(String, String)> = sqlx::query_as("SELECT code,value FROM codemap")
++        .fetch_all(&pool)
++        .await
++        .unwrap();
++    assert_eq!(dictionary, vec![("keep".into(), "untouched".into())]);
++    let versions: i64 = sqlx::query_scalar("SELECT count(*) FROM _sqlx_migrations WHERE success=1")
++        .fetch_one(&pool)
++        .await
++        .unwrap();
++    assert_eq!(versions, 3);
++    pool.close().await;
++}

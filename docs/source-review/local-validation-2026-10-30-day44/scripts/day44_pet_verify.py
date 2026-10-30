@@ -1,9 +1,0 @@
-from pathlib import Path
-import subprocess,os,time,json,datetime
-r=Path.cwd();d=r/'work/day44-pet-r3';out=r/'outputs/day44-2026-10-30/pet-r3';out.mkdir(exist_ok=True);rows=[];env=os.environ.copy();env.update(CARGO_INCREMENTAL='0',CARGO_BUILD_JOBS='1',DATABASE_URL='sqlite::memory:')
-def run(a):
- t=time.time();start=datetime.datetime.now(datetime.timezone.utc).isoformat()
- try:p=subprocess.run(a,cwd=d,env=env,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,timeout=300);code=p.returncode;s=p.stdout
- except subprocess.TimeoutExpired as e:code=124;s=e.stdout.decode(errors='replace') if isinstance(e.stdout,bytes) else e.stdout or ''
- log=f'{len(rows):02d}.log';(out/log).write_text(s);rows.append({'command':a,'cwd':str(d),'base_source_sha':'6b34c42f74fc1585b1b864fb7dd6969318270e0f','scope':'isolated Pet r3 candidate, not product main','exit_code':code,'seconds':time.time()-t,'started_utc':start,'log':log});(out/'commands.json').write_text(json.dumps(rows,indent=2));print(code,' '.join(a),flush=True)
-for a in [['cargo','fmt','--all','--manifest-path','pet_apps/Cargo.toml'],['cargo','metadata','--locked','--no-deps','--format-version','1','--manifest-path','pet_apps/Cargo.toml'],['cargo','fmt','--all','--manifest-path','pet_apps/Cargo.toml','--','--check'],['cargo','check','--offline','--locked','--workspace','--manifest-path','pet_apps/Cargo.toml'],['cargo','clippy','--offline','--locked','--workspace','--manifest-path','pet_apps/Cargo.toml'],['cargo','test','--offline','--locked','--workspace','--manifest-path','pet_apps/Cargo.toml'],['cargo','check','--offline','--locked','--manifest-path','pet_apps/Cargo.toml','-p','pet-ui','--target','wasm32-unknown-unknown'],['node','--test',*[str(p.relative_to(d)) for p in sorted((d/'pet_apps/pet_ui/tests').glob('*.mjs'))]]]:run(a)

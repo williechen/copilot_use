@@ -1,0 +1,27 @@
+   Compiling pet-server v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-fixed/pet_apps/pet_server)
+   Compiling ai-core v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-fixed/crates/ai_core)
+   Compiling pet-persistence v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-fixed/pet_apps/pet_persistence)
+   Compiling pet-application v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-fixed/pet_apps/pet_application)
+   Compiling pet-domain v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-fixed/pet_apps/pet_domain)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 9.30s
+     Running tests/day44_activity_migration.rs (pet_apps/target/debug/deps/day44_activity_migration-24275fa752fddb4a)
+
+running 2 tests
+test old_display_names_migrate_to_codes_with_sit_priority_and_preserve_dictionary ... FAILED
+test dictionary_id_collision_rolls_back_every_activity_change ... ok
+
+failures:
+
+---- old_display_names_migrate_to_codes_with_sit_priority_and_preserve_dictionary stdout ----
+
+thread 'old_display_names_migrate_to_codes_with_sit_priority_and_preserve_dictionary' (19026) panicked at pet_server/tests/day44_activity_migration.rs:18:26:
+new migration must run on SQLite: ExecuteMigration(Database(SqliteError { code: 1, message: "no such function: NOW" }), 20261030060000)
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    old_display_names_migrate_to_codes_with_sit_priority_and_preserve_dictionary
+
+test result: FAILED. 1 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+error: test failed, to rerun pass `-p pet-server --test day44_activity_migration`

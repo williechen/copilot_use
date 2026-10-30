@@ -1,0 +1,20 @@
+{
+  "command": [
+    "cargo",
+    "test",
+    "--offline",
+    "--locked",
+    "--manifest-path",
+    "pet_apps/Cargo.toml",
+    "-p",
+    "pet-server",
+    "--test",
+    "day44_activity_migration"
+  ],
+  "cwd": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-c726-fixed",
+  "source_sha": "c726de161d5a43c5f7edd109e46673483832b820",
+  "scope": "exact final regression test with main code and no forward fix",
+  "exit_code": 101,
+  "seconds": 1.6030457019805908,
+  "log": "forward-regression-red.log"
+}

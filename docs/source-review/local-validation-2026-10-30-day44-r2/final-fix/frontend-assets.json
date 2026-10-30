@@ -1,0 +1,22 @@
+[
+  {
+    "file": "index.html",
+    "sha256": "3783b587bebd43bf1bebcbc417d0f79c98f5183cae22fafa9b9f1a1746769c10",
+    "bytes": 5069
+  },
+  {
+    "file": "pet-ui-9ecbdf42e13edb8a.js",
+    "sha256": "41fb1a2b1a41bc52150d7a05881046c034d07ef4a06b12919c3e3e38ab479d56",
+    "bytes": 44616
+  },
+  {
+    "file": "pet-ui-9ecbdf42e13edb8a_bg.wasm",
+    "sha256": "e72adb16ef808cd781a98ea9a4470c63f846498e150e6bac611d93e0cb0dbb7e",
+    "bytes": 10884086
+  },
+  {
+    "file": "style-efdbc821b0786fd8.css",
+    "sha256": "13cd5bcea6f883021bbb67cdec49bf93e559dea8619606ad94956485b0637f4d",
+    "bytes": 4150
+  }
+]

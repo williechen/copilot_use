@@ -1,0 +1,4 @@
+HEAD is now at 4b1008b fix test
+A	pet_apps/migrations/20261030140000_normalize_activity_codes.sql
+M	pet_apps/pet_server/examples/day44_upgrade.rs
+A	pet_apps/pet_server/tests/day44_activity_migration.rs

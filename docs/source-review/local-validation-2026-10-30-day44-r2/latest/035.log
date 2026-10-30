@@ -1,0 +1,2 @@
+createdb: error: database creation failed: ERROR:  could not extend file "base/66798/3380": No space left on device
+HINT:  Check free disk space.

@@ -1,0 +1,4 @@
+    Checking shared v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-main/crates/shared)
+    Checking ai-core v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-main/crates/ai_core)
+    Checking telemetry v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-main/crates/telemetry)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.18s

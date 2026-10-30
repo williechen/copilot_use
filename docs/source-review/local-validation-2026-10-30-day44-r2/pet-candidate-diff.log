@@ -1,0 +1,14 @@
+diff --git a/work/day44-pet-r3/pet_apps/pet_persistence/src/activity.rs b/home/willie/Documents/rust_ai_ring/pet_apps/pet_persistence/src/activity.rs
+index 2f84902..015bde7 100644
+--- a/work/day44-pet-r3/pet_apps/pet_persistence/src/activity.rs
++++ b/home/willie/Documents/rust_ai_ring/pet_apps/pet_persistence/src/activity.rs
+@@ -1,7 +1,7 @@
+ use sqlx::{SqliteConnection, SqlitePool};
+ 
+-pub const WALK: &str = "散步";
+-pub const SIT: &str = "坐下";
++pub const WALK: &str = "walk"; //散步
++pub const SIT: &str = "sit"; //坐下
+ 
+ #[derive(Debug, Clone, serde::Serialize)]
+ pub struct ActivityStatus {

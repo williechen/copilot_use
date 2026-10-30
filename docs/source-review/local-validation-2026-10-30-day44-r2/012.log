@@ -1,0 +1,5 @@
+    Checking chat-domain v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-main/chat_apps/chat_domain)
+    Checking ai-core v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-main/crates/ai_core)
+    Checking telemetry v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-main/crates/telemetry)
+    Checking shared v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-main/crates/shared)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.26s

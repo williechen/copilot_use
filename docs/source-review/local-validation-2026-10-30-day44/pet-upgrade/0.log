@@ -1,5 +1,0 @@
-   Compiling pet-persistence v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-pet-r3/pet_apps/pet_persistence)
-   Compiling pet-server v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-pet-r3/pet_apps/pet_server)
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 8.97s
-     Running `pet_apps/target/debug/examples/day44_upgrade /home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-db/synthetic.sqlite /home/willie/Documents/rust_ai_ring/pet_apps/migrations /home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-pet-r3/pet_apps/migrations seed`
-upgrade/idempotence passed; profiles=3; profile defaults unchanged; schema/columns unchanged; two basic activities present; sit priority preserved

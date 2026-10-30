@@ -1,0 +1,21 @@
+{
+  "command": [
+    "cargo",
+    "test",
+    "--offline",
+    "--locked",
+    "--manifest-path",
+    "pet_apps/Cargo.toml",
+    "-p",
+    "pet-server",
+    "--test",
+    "day44_activity_migration"
+  ],
+  "cwd": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-c726-fixed",
+  "base_sha": "c726de161d5a43c5f7edd109e46673483832b820",
+  "source_change": "new regression test only",
+  "exit_code": 101,
+  "started_utc": "2026-10-30T13:41:34.413958+00:00",
+  "seconds": 3.732264995574951,
+  "log": "red.log"
+}

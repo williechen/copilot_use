@@ -1,0 +1,22 @@
+{
+  "base_sha": "4b1008b95bc3e170381fcd1db84695e421f036bd",
+  "source_open_mode": "SQLite mode=ro online backup",
+  "original_db_written": false,
+  "exit_code": 0,
+  "other_tables_sha256_before": "0dec1a389ea76d9bf9068beb5098a9456ce80add37b302cc2c144149964145ad",
+  "other_tables_sha256_after": "0dec1a389ea76d9bf9068beb5098a9456ce80add37b302cc2c144149964145ad",
+  "other_tables_unchanged": true,
+  "existing_codemap_rows_preserved": true,
+  "dictionary_rows_added": 2,
+  "table_counts": {
+    "local_pet_selection": 1,
+    "pet_extra": 0,
+    "pet_life_log": 0,
+    "pet_owner": 1,
+    "pet_profile": 1,
+    "pet_send_log": 0,
+    "pet_study": 0,
+    "pet_token_log": 0
+  },
+  "private_rows_published": false
+}

@@ -1,0 +1,27 @@
+Updating 6b34c42..e98fbbf
+Fast-forward
+ .../analytics_server/src/password_login.rs         |   1 +
+ chat_apps/chat_server/src/lib.rs                   |   2 +-
+ chat_apps/chat_server/src/room_auth.rs             |   2 +-
+ .../src/{room_patch.rs => room_path.rs}            |   0
+ .../20261030060000_activity_lifecycle.sql          |  22 +++
+ pet_apps/pet_application/src/lifecycle.rs          |  24 +++
+ pet_apps/pet_persistence/src/activity.rs           | 211 +++++++++++++++++++++
+ pet_apps/pet_persistence/src/lib.rs                |  60 ++----
+ pet_apps/pet_server/examples/day44_upgrade.rs      |  88 +++++++++
+ pet_apps/pet_server/src/lib.rs                     |  59 +++++-
+ pet_apps/pet_server/src/pet_store.rs               |  92 +++++++--
+ pet_apps/pet_server/src/pet_windows.rs             |  84 ++++++--
+ pet_apps/pet_server/src/roam.rs                    |  27 +++
+ .../pet_server/tests/day44_activity_lifecycle.rs   | 208 ++++++++++++++++++++
+ pet_apps/pet_ui/index.html                         |   9 +
+ pet_apps/pet_ui/src/bridge.rs                      |  28 +++
+ pet_apps/pet_ui/src/main.rs                        |  50 +++++
+ pet_apps/pet_ui/tests/day44-activity.test.mjs      |  17 ++
+ 18 files changed, 899 insertions(+), 85 deletions(-)
+ rename chat_apps/chat_server/src/{room_patch.rs => room_path.rs} (100%)
+ create mode 100644 pet_apps/migrations/20261030060000_activity_lifecycle.sql
+ create mode 100644 pet_apps/pet_persistence/src/activity.rs
+ create mode 100644 pet_apps/pet_server/examples/day44_upgrade.rs
+ create mode 100644 pet_apps/pet_server/tests/day44_activity_lifecycle.rs
+ create mode 100644 pet_apps/pet_ui/tests/day44-activity.test.mjs

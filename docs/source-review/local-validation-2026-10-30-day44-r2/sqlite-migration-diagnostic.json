@@ -1,0 +1,7 @@
+{
+  "source_sha": "e98fbbfc76e582977b966490f9427b5a1dbc89b7",
+  "engine": "3.46.1",
+  "migration": "20261030060000_activity_lifecycle.sql",
+  "error": "no such function: NOW",
+  "scope": "in-memory direct SQL probe only; real SQLx migrator verified separately"
+}

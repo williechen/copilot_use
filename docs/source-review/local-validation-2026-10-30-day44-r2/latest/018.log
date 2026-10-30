@@ -1,0 +1,45 @@
+    Checking chat-domain v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/chat_domain)
+    Checking shared v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/crates/shared)
+    Checking chat-application v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/chat_application)
+    Checking chat-persistence v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/chat_persistence)
+    Checking chat-ui v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/chat_ui)
+warning: unused import: `crate::room_list_state::clear_room_search`
+  --> chat_ui/src/lib.rs:39:5
+   |
+39 | use crate::room_list_state::clear_room_search;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `room_heading` is never used
+   --> chat_ui/src/lib.rs:209:4
+    |
+209 | fn room_heading(id: &str, result: Result<String, String>) -> String {
+    |    ^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `clear_room_search` is never used
+  --> chat_ui/src/room_list_state.rs:55:15
+   |
+55 | pub(super) fn clear_room_search(loaded: bool, rows: &[(String, String)]) -> (String, String) {
+   |               ^^^^^^^^^^^^^^^^^
+
+warning: variants `SignedOut`, `SignedIn`, and `Unavailable` are never constructed
+ --> chat_ui/src/session_entry.rs:4:5
+  |
+2 | pub(super) enum SessionEntry {
+  |                 ------------ variants in this enum
+3 |     Checking,
+4 |     SignedOut,
+  |     ^^^^^^^^^
+5 |     SignedIn,
+  |     ^^^^^^^^
+6 |     Unavailable,
+  |     ^^^^^^^^^^^
+  |
+  = note: `SessionEntry` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis
+
+warning: `chat-ui` (lib) generated 4 warnings (run `cargo clippy --fix --lib -p chat-ui -- ` to apply 1 suggestion)
+    Checking chat-server v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/chat_server)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.22s

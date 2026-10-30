@@ -1,0 +1,1634 @@
+[
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/crates/target/debug/deps/telemetry-76683f61c0f9697c",
+    "bytes": 7204072,
+    "allocated_bytes": 7204864,
+    "inode": 281963,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/crates/target/debug/deps/shared-3e7c3a5d0450cad5",
+    "bytes": 12799824,
+    "allocated_bytes": 12795904,
+    "inode": 291923,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/crates/target/debug/deps/shared-00ea31417bfb1fab",
+    "bytes": 12800728,
+    "allocated_bytes": 12800000,
+    "inode": 281962,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/crates/target/debug/deps/ai_core-11ebd281d1abf72d",
+    "bytes": 17525944,
+    "allocated_bytes": 17506304,
+    "inode": 281997,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/chat_server-194d932d0f2286e9",
+    "bytes": 10058368,
+    "allocated_bytes": 10055680,
+    "inode": 168489,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/chat_application-9bc21474e87bc4e9",
+    "bytes": 18291328,
+    "allocated_bytes": 18272256,
+    "inode": 153253,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/chat_server-a5e24b952ded5c8c",
+    "bytes": 10058368,
+    "allocated_bytes": 10055680,
+    "inode": 139915,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/chat_server-c889afe78b7ac374",
+    "bytes": 10058344,
+    "allocated_bytes": 10055680,
+    "inode": 139693,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/chat_server-173f71b6a6a9bc00",
+    "bytes": 10058368,
+    "allocated_bytes": 10055680,
+    "inode": 153009,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/chat_server-84b1ec7754edc72a",
+    "bytes": 207608800,
+    "allocated_bytes": 207433728,
+    "inode": 165932,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/chat_domain-b5951c1ff1b1134c",
+    "bytes": 7204144,
+    "allocated_bytes": 7204864,
+    "inode": 153189,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/chat_server-803be56342c5db28",
+    "bytes": 10058368,
+    "allocated_bytes": 10055680,
+    "inode": 153257,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/chat_ui-809c3d8e0627e9c7",
+    "bytes": 95533768,
+    "allocated_bytes": 95494144,
+    "inode": 165935,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/chat_server-0f4653a80ad1874e",
+    "bytes": 10058368,
+    "allocated_bytes": 10055680,
+    "inode": 139403,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/chat_application-9ed945b80344f1c4",
+    "bytes": 18291320,
+    "allocated_bytes": 18272256,
+    "inode": 140028,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/chat_domain-9920b052499bed7a",
+    "bytes": 7204120,
+    "allocated_bytes": 7204864,
+    "inode": 139388,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/chat_server-fa47152b9720ed3a",
+    "bytes": 10058368,
+    "allocated_bytes": 10055680,
+    "inode": 153978,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/chat_server-11ab948fa3c4de5c",
+    "bytes": 10058368,
+    "allocated_bytes": 10055680,
+    "inode": 166167,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_server-675a95bfac01c09d",
+    "bytes": 185386416,
+    "allocated_bytes": 185311232,
+    "inode": 165870,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_application-953b8cbe34b71315",
+    "bytes": 7758576,
+    "allocated_bytes": 7761920,
+    "inode": 153533,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/profile_contract-cd856fa99c9ee54e",
+    "bytes": 9922800,
+    "allocated_bytes": 9920512,
+    "inode": 153563,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/profile_contract-42c448849230598c",
+    "bytes": 9922792,
+    "allocated_bytes": 9920512,
+    "inode": 171950,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_persistence-d52a3d816d36a296",
+    "bytes": 52310936,
+    "allocated_bytes": 52248576,
+    "inode": 165940,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/profile_contract-1ee5ef70277e46d8",
+    "bytes": 9922688,
+    "allocated_bytes": 9920512,
+    "inode": 152979,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/cleanup_event_contract-02bb8e2c1ed2143a",
+    "bytes": 9641912,
+    "allocated_bytes": 9641984,
+    "inode": 166624,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_server-46ea5e66109c34a6",
+    "bytes": 53315296,
+    "allocated_bytes": 53317632,
+    "inode": 153610,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/cleanup_event_contract-50a191d534028067",
+    "bytes": 9641912,
+    "allocated_bytes": 9641984,
+    "inode": 153542,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_machine-9d28ef77a3b158bb",
+    "bytes": 9505504,
+    "allocated_bytes": 9506816,
+    "inode": 139474,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/day44_activity_lifecycle-efe3088234adb9cb",
+    "bytes": 201386512,
+    "allocated_bytes": 201310208,
+    "inode": 165933,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_server-02c77b237dd3612f",
+    "bytes": 53315288,
+    "allocated_bytes": 53321728,
+    "inode": 152974,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_machine-c1b705feb4502cca",
+    "bytes": 9505504,
+    "allocated_bytes": 9506816,
+    "inode": 152976,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/day27_create_and_select-29837d213f0ca795",
+    "bytes": 195448360,
+    "allocated_bytes": 195379200,
+    "inode": 165872,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/day27_create_and_select-268c4206d084207e",
+    "bytes": 196288480,
+    "allocated_bytes": 196218880,
+    "inode": 165921,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/day44_activity_lifecycle-8f978ec47770293a",
+    "bytes": 200645888,
+    "allocated_bytes": 200572928,
+    "inode": 165931,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/day44_creation_red-5729d3e5b2ef4474",
+    "bytes": 196514456,
+    "allocated_bytes": 196444160,
+    "inode": 165925,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_domain-2250514abad17a9e",
+    "bytes": 9482976,
+    "allocated_bytes": 9486336,
+    "inode": 153540,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_persistence-4d8120eaada9e8ce",
+    "bytes": 50981152,
+    "allocated_bytes": 50909184,
+    "inode": 153537,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/day5_codec_tests-f20651e7202f0c3a",
+    "bytes": 9999936,
+    "allocated_bytes": 9998336,
+    "inode": 165884,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/day24_active_pet-a1d4937500f4ef51",
+    "bytes": 195537656,
+    "allocated_bytes": 195465216,
+    "inode": 153283,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_server-d69f4a33d806e921",
+    "bytes": 53315288,
+    "allocated_bytes": 53317632,
+    "inode": 139467,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/day5_codec_tests-3df8b64b26b043b7",
+    "bytes": 9999936,
+    "allocated_bytes": 9998336,
+    "inode": 153594,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/day23_saved_pets-469510bb5a2ca532",
+    "bytes": 195896616,
+    "allocated_bytes": 195825664,
+    "inode": 165869,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_server-6979f8120caa0a98",
+    "bytes": 53315288,
+    "allocated_bytes": 53317632,
+    "inode": 165882,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_server-3ef0af5feabb2f32",
+    "bytes": 214823128,
+    "allocated_bytes": 214503424,
+    "inode": 139462,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_machine-8fc53bf8b1a326e8",
+    "bytes": 9505504,
+    "allocated_bytes": 9506816,
+    "inode": 165887,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_machine-cbe25c0a4a9e5d3d",
+    "bytes": 9505512,
+    "allocated_bytes": 9506816,
+    "inode": 153597,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/day23_saved_pets-7e74437d66cf9a6b",
+    "bytes": 195445192,
+    "allocated_bytes": 195371008,
+    "inode": 152972,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_server-2b6cfd064da5db20",
+    "bytes": 214806176,
+    "allocated_bytes": 214482944,
+    "inode": 152980,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_server-fee4478346eab0ed",
+    "bytes": 214129824,
+    "allocated_bytes": 213803008,
+    "inode": 153991,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_server-e48388e139c48dee",
+    "bytes": 215755280,
+    "allocated_bytes": 215425024,
+    "inode": 165919,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/day5_codec_tests-9166a97b8dfaabd9",
+    "bytes": 10001064,
+    "allocated_bytes": 9994240,
+    "inode": 153988,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_persistence-4af199a69bb8da06",
+    "bytes": 51637304,
+    "allocated_bytes": 51568640,
+    "inode": 165857,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_server-33c7987e499330c4",
+    "bytes": 53315288,
+    "allocated_bytes": 53317632,
+    "inode": 171921,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/cleanup_event_contract-f8888646f0a068ce",
+    "bytes": 9641912,
+    "allocated_bytes": 9641984,
+    "inode": 165891,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_application-b0776c009b12bc54",
+    "bytes": 7755784,
+    "allocated_bytes": 7757824,
+    "inode": 165903,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/day5_codec_tests-2a211402d6e1b388",
+    "bytes": 9999936,
+    "allocated_bytes": 9998336,
+    "inode": 168773,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/cleanup_event_contract-732f58021873d44c",
+    "bytes": 9641912,
+    "allocated_bytes": 9641984,
+    "inode": 152957,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/day24_active_pet-5a8c7e08d80290c4",
+    "bytes": 196373008,
+    "allocated_bytes": 196300800,
+    "inode": 165926,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/cleanup_event_contract-038cae074d7160cf",
+    "bytes": 9641528,
+    "allocated_bytes": 9641984,
+    "inode": 165859,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_server-4751fa83003e6779",
+    "bytes": 185331576,
+    "allocated_bytes": 185253888,
+    "inode": 152952,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/day44_creation_red-17b16c9f33013abb",
+    "bytes": 195108664,
+    "allocated_bytes": 195035136,
+    "inode": 165886,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/day5_codec_tests-95b5b1c6e976c570",
+    "bytes": 9999936,
+    "allocated_bytes": 9998336,
+    "inode": 152964,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/cleanup_contract-9afb815fbf3f034a",
+    "bytes": 9504568,
+    "allocated_bytes": 9502720,
+    "inode": 165895,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_server-3d818509de4ed1a8",
+    "bytes": 53217720,
+    "allocated_bytes": 53223424,
+    "inode": 161476,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_machine-c5e6c1104e892c96",
+    "bytes": 9505504,
+    "allocated_bytes": 9506816,
+    "inode": 171900,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_ui-026e501471d0a2b5",
+    "bytes": 66307544,
+    "allocated_bytes": 66310144,
+    "inode": 165920,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_domain-972f5d9262f1de26",
+    "bytes": 9482968,
+    "allocated_bytes": 9486336,
+    "inode": 165899,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/day24_active_pet-37b88dca1fcf144d",
+    "bytes": 195062328,
+    "allocated_bytes": 194994176,
+    "inode": 152973,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/profile_contract-e0f1fba98146ee57",
+    "bytes": 9922400,
+    "allocated_bytes": 9920512,
+    "inode": 165856,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/day44_activity_lifecycle-2c515c5dc3b9d5e8",
+    "bytes": 199401112,
+    "allocated_bytes": 199323648,
+    "inode": 165865,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_server-940a3fc6467209b4",
+    "bytes": 186222728,
+    "allocated_bytes": 186146816,
+    "inode": 165941,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/cleanup_event_contract-efb864b656e19a4c",
+    "bytes": 9641912,
+    "allocated_bytes": 9641984,
+    "inode": 139455,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/day5_codec_tests-efd3f195602d909e",
+    "bytes": 9999936,
+    "allocated_bytes": 9998336,
+    "inode": 139459,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/profile_contract-6ac00f05073597ed",
+    "bytes": 9922800,
+    "allocated_bytes": 9920512,
+    "inode": 139465,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/day27_create_and_select-fcf531b843d1b72e",
+    "bytes": 194974168,
+    "allocated_bytes": 194908160,
+    "inode": 152975,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/day23_saved_pets-d66af5320c967df1",
+    "bytes": 196747480,
+    "allocated_bytes": 196677632,
+    "inode": 165915,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_machine-a0f2a99fd4eb64a4",
+    "bytes": 9505128,
+    "allocated_bytes": 9506816,
+    "inode": 165852,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/profile_contract-6fb6f84d75c61c1a",
+    "bytes": 9922792,
+    "allocated_bytes": 9920512,
+    "inode": 165890,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_ui-c2c41eaecfa0c901",
+    "bytes": 66284240,
+    "allocated_bytes": 66285568,
+    "inode": 153538,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/pet_server-aca4718c250ed8c0",
+    "bytes": 215855232,
+    "allocated_bytes": 215527424,
+    "inode": 165918,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/pet_apps/target/debug/deps/cleanup_contract-78cfc80bbd7f93a0",
+    "bytes": 9504576,
+    "allocated_bytes": 9502720,
+    "inode": 153500,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/idempotency_contract-1d818763c2d1cca0",
+    "bytes": 108528032,
+    "allocated_bytes": 108531712,
+    "inode": 168233,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/analytics_persistence-d5066746679561d3",
+    "bytes": 54015144,
+    "allocated_bytes": 53927936,
+    "inode": 161413,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/idempotency_contract-bdad111b2d18d2f4",
+    "bytes": 108535984,
+    "allocated_bytes": 108539904,
+    "inode": 153903,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/bootstrap_admin-982e4fc4ac2f4226",
+    "bytes": 10058480,
+    "allocated_bytes": 10055680,
+    "inode": 168216,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day39_export_csv-bc09fbc40c2146a1",
+    "bytes": 7204304,
+    "allocated_bytes": 7204864,
+    "inode": 153862,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/analytics_persistence-7b6bf752e906690c",
+    "bytes": 43045688,
+    "allocated_bytes": 43048960,
+    "inode": 168127,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/analytics_server-9908dc7ade41c73f",
+    "bytes": 118764208,
+    "allocated_bytes": 118661120,
+    "inode": 168232,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day38_ingest_authorization-a224fcb6897a8818",
+    "bytes": 122756584,
+    "allocated_bytes": 122646528,
+    "inode": 168717,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/analytics_server-a923751b73d7477e",
+    "bytes": 10058496,
+    "allocated_bytes": 10055680,
+    "inode": 139529,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/analytics_persistence-9f4b32c9c9582238",
+    "bytes": 54015264,
+    "allocated_bytes": 53932032,
+    "inode": 153032,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/idempotency_contract-50713eed72f19899",
+    "bytes": 108526088,
+    "allocated_bytes": 108531712,
+    "inode": 168750,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/analytics_persistence-45811a6aab57bed0",
+    "bytes": 54013608,
+    "allocated_bytes": 53927936,
+    "inode": 165885,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/analytics_domain-e4dfdaa4e283cf9a",
+    "bytes": 7234768,
+    "allocated_bytes": 7237632,
+    "inode": 153809,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day27_dashboard_source-7ed7a7c398b969d1",
+    "bytes": 7204448,
+    "allocated_bytes": 7204864,
+    "inode": 168203,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/support_http_contract-7b41d712ceecb070",
+    "bytes": 30298496,
+    "allocated_bytes": 30269440,
+    "inode": 161434,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/analytics_persistence-2d2614fe12627214",
+    "bytes": 54015120,
+    "allocated_bytes": 53932032,
+    "inode": 139532,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/analytics_server-1d75e6c29c507adc",
+    "bytes": 10058496,
+    "allocated_bytes": 10055680,
+    "inode": 153284,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/idempotency_contract-ce0cf27725260d25",
+    "bytes": 108533544,
+    "allocated_bytes": 108535808,
+    "inode": 161488,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day24_password_change-c7353a1f0c23a242",
+    "bytes": 7204424,
+    "allocated_bytes": 7204864,
+    "inode": 168251,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/support_http_contract-66ae32dd1e3e03b1",
+    "bytes": 30297232,
+    "allocated_bytes": 30265344,
+    "inode": 153035,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day23_password_login-009de3352bd487ca",
+    "bytes": 7204400,
+    "allocated_bytes": 7204864,
+    "inode": 153000,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/postgres_event_store-636a57c862654b98",
+    "bytes": 7204400,
+    "allocated_bytes": 7204864,
+    "inode": 139501,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day37_query_cookie-d49efb7c2a9f20fd",
+    "bytes": 7204344,
+    "allocated_bytes": 7204864,
+    "inode": 168240,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/analytics_ui-9b60d195281882d4",
+    "bytes": 7234344,
+    "allocated_bytes": 7237632,
+    "inode": 139506,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day25_repeat_password_change-bad0b6cdf185b53f",
+    "bytes": 7204592,
+    "allocated_bytes": 7204864,
+    "inode": 139513,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day26_session_contract-a7614717a66a3037",
+    "bytes": 7204448,
+    "allocated_bytes": 7204864,
+    "inode": 168297,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/support_http_contract-01e430d3672c70b6",
+    "bytes": 30283488,
+    "allocated_bytes": 30253056,
+    "inode": 153001,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/analytics_domain-6904604b9e154e69",
+    "bytes": 7234760,
+    "allocated_bytes": 7237632,
+    "inode": 153003,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day37_query_cookie-3abe924de93357c8",
+    "bytes": 122666544,
+    "allocated_bytes": 122535936,
+    "inode": 168767,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day27_dashboard_source-99bf8b6446cf29b7",
+    "bytes": 122841400,
+    "allocated_bytes": 122707968,
+    "inode": 165905,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day27_dashboard_source-dd5ab8a4db7d6846",
+    "bytes": 122643256,
+    "allocated_bytes": 122511360,
+    "inode": 139543,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/support_http_contract-228403cbe9798eb1",
+    "bytes": 30300184,
+    "allocated_bytes": 30269440,
+    "inode": 153043,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/analytics_server-11623d0741dd026f",
+    "bytes": 118785680,
+    "allocated_bytes": 118681600,
+    "inode": 153877,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day38_ingest_authorization-b854a37ea400158c",
+    "bytes": 122773248,
+    "allocated_bytes": 122638336,
+    "inode": 161520,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/idempotency_contract-2eadbce4d7d70182",
+    "bytes": 108679088,
+    "allocated_bytes": 108679168,
+    "inode": 153027,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day37_query_cookie-03d9a925227202c9",
+    "bytes": 122681248,
+    "allocated_bytes": 122544128,
+    "inode": 161510,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/support_http_contract-2416a9f24387b9b1",
+    "bytes": 30296912,
+    "allocated_bytes": 30261248,
+    "inode": 139538,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day27_dashboard_source-a80b0e1a3a614f2a",
+    "bytes": 7204448,
+    "allocated_bytes": 7204864,
+    "inode": 153005,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/analytics_ui-d92abe05042019bc",
+    "bytes": 7234360,
+    "allocated_bytes": 7237632,
+    "inode": 153818,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/support_http_contract-1188e8c46d3c420d",
+    "bytes": 30298520,
+    "allocated_bytes": 30269440,
+    "inode": 153937,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/analytics_persistence-dab5510ab89c3a7b",
+    "bytes": 43045688,
+    "allocated_bytes": 43053056,
+    "inode": 139482,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day44_logout_csrf-77bc3737a74d5f37",
+    "bytes": 7204328,
+    "allocated_bytes": 7204864,
+    "inode": 153017,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/postgres_event_store-5ee9ceb272e41e7c",
+    "bytes": 7204400,
+    "allocated_bytes": 7204864,
+    "inode": 152990,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/postgres_event_store-a322327be4e3f3aa",
+    "bytes": 118017216,
+    "allocated_bytes": 117927936,
+    "inode": 161494,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day27_dashboard_source-721cf66dd02823ce",
+    "bytes": 7204448,
+    "allocated_bytes": 7204864,
+    "inode": 139503,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/analytics_server-3caf85faa42be128",
+    "bytes": 118787480,
+    "allocated_bytes": 118681600,
+    "inode": 139516,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/analytics_application-85de8eac6aa79643",
+    "bytes": 7235264,
+    "allocated_bytes": 7237632,
+    "inode": 139512,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/postgres_event_store-aefa301d02193507",
+    "bytes": 7204400,
+    "allocated_bytes": 7204864,
+    "inode": 168261,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day23_password_login-e7f8706ae255a30e",
+    "bytes": 7204400,
+    "allocated_bytes": 7204864,
+    "inode": 168192,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day39_export_csv-ecf9516b49527b4a",
+    "bytes": 122672704,
+    "allocated_bytes": 122548224,
+    "inode": 168733,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/analytics_server-1f040868e68e32b2",
+    "bytes": 10058512,
+    "allocated_bytes": 10055680,
+    "inode": 140017,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day26_session_contract-64ee2446becda9ed",
+    "bytes": 122375712,
+    "allocated_bytes": 122236928,
+    "inode": 139557,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/analytics_server-33f9c71648fafeac",
+    "bytes": 10058480,
+    "allocated_bytes": 10055680,
+    "inode": 153912,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day37_query_cookie-e90f1834a6a75f3b",
+    "bytes": 122870648,
+    "allocated_bytes": 122736640,
+    "inode": 153590,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day37_query_cookie-ee3487e84cd4f2e3",
+    "bytes": 7204352,
+    "allocated_bytes": 7204864,
+    "inode": 139495,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day24_password_change-61d4f3c9c3ffa9da",
+    "bytes": 7204424,
+    "allocated_bytes": 7204864,
+    "inode": 152982,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/analytics_server-4fcc95ee79087dc9",
+    "bytes": 10058496,
+    "allocated_bytes": 10055680,
+    "inode": 161440,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day27_dashboard_source-fe0f9948ef41c218",
+    "bytes": 122642848,
+    "allocated_bytes": 122511360,
+    "inode": 168705,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day24_password_change-b1cc83c80a408849",
+    "bytes": 7204424,
+    "allocated_bytes": 7204864,
+    "inode": 153913,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day26_session_contract-45980140bd1e80e0",
+    "bytes": 122575032,
+    "allocated_bytes": 122441728,
+    "inode": 165893,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day25_repeat_password_change-2a3aed2caa69be81",
+    "bytes": 7204592,
+    "allocated_bytes": 7204864,
+    "inode": 152988,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/idempotency_contract-f0d118b9801d45ba",
+    "bytes": 108528040,
+    "allocated_bytes": 108535808,
+    "inode": 139520,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/analytics_persistence-fcc89f515d433def",
+    "bytes": 43045688,
+    "allocated_bytes": 43048960,
+    "inode": 153835,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/bootstrap_admin-bf92d083ffd882e2",
+    "bytes": 10058504,
+    "allocated_bytes": 10055680,
+    "inode": 153010,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day37_query_cookie-c807a1ea2456afb4",
+    "bytes": 7204344,
+    "allocated_bytes": 7204864,
+    "inode": 152989,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/analytics_application-9f582b4fdda85854",
+    "bytes": 7235280,
+    "allocated_bytes": 7237632,
+    "inode": 153799,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/postgres_event_store-9be036b661c82563",
+    "bytes": 118009160,
+    "allocated_bytes": 117915648,
+    "inode": 168737,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day26_session_contract-bd96af777071a283",
+    "bytes": 122382176,
+    "allocated_bytes": 122245120,
+    "inode": 161534,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/support_http_contract-79ca15dae95d9ec4",
+    "bytes": 30298840,
+    "allocated_bytes": 30265344,
+    "inode": 168759,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day26_session_contract-2162fd3e18a0581c",
+    "bytes": 122574240,
+    "allocated_bytes": 122441728,
+    "inode": 153558,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day25_repeat_password_change-f2b57280ba4e844e",
+    "bytes": 7204592,
+    "allocated_bytes": 7204864,
+    "inode": 168287,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day38_ingest_authorization-2745f841e3a50a71",
+    "bytes": 122764280,
+    "allocated_bytes": 122630144,
+    "inode": 139536,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day24_password_change-cb6f93e0e42c5c83",
+    "bytes": 7204424,
+    "allocated_bytes": 7204864,
+    "inode": 139491,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/analytics_server-9eed70da0e46aed0",
+    "bytes": 122508976,
+    "allocated_bytes": 122368000,
+    "inode": 161409,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/bootstrap_admin-07de85df419dac16",
+    "bytes": 115958680,
+    "allocated_bytes": 115871744,
+    "inode": 161447,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day26_session_contract-8c620a291584d2f8",
+    "bytes": 7204448,
+    "allocated_bytes": 7204864,
+    "inode": 139494,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day23_password_login-1813f848b3bd914e",
+    "bytes": 7204408,
+    "allocated_bytes": 7204864,
+    "inode": 153900,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/idempotency_contract-2ffc7201a72ac2ff",
+    "bytes": 108694072,
+    "allocated_bytes": 108699648,
+    "inode": 152997,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/bootstrap_admin-39af58b3541ab951",
+    "bytes": 10058504,
+    "allocated_bytes": 10055680,
+    "inode": 161489,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day37_query_cookie-70f3cd5f70f639bf",
+    "bytes": 122673704,
+    "allocated_bytes": 122535936,
+    "inode": 139549,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/support_http_contract-8983d0c11679db0d",
+    "bytes": 30297992,
+    "allocated_bytes": 30265344,
+    "inode": 168229,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/analytics_server-1073919f7a3e482a",
+    "bytes": 10058496,
+    "allocated_bytes": 10055680,
+    "inode": 168725,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/bootstrap_admin-f941a73eecf69601",
+    "bytes": 10058504,
+    "allocated_bytes": 10055680,
+    "inode": 153036,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/postgres_event_store-ac556c24f3d8733e",
+    "bytes": 118163040,
+    "allocated_bytes": 118075392,
+    "inode": 153030,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day26_session_contract-64756b066f814700",
+    "bytes": 7204448,
+    "allocated_bytes": 7204864,
+    "inode": 152992,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day27_dashboard_source-dd34faf4a35624ee",
+    "bytes": 122841400,
+    "allocated_bytes": 122707968,
+    "inode": 153592,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day26_session_contract-7fd5e7717325d100",
+    "bytes": 7204448,
+    "allocated_bytes": 7204864,
+    "inode": 153861,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day38_ingest_authorization-c109a0bb202e9efa",
+    "bytes": 7204536,
+    "allocated_bytes": 7204864,
+    "inode": 152987,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/bootstrap_admin-373be8ed8e3c29a7",
+    "bytes": 10058504,
+    "allocated_bytes": 10055680,
+    "inode": 153902,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/idempotency_contract-93da51645d9f7d55",
+    "bytes": 108526088,
+    "allocated_bytes": 108527616,
+    "inode": 139526,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day25_repeat_password_change-470adac42d8723d9",
+    "bytes": 7204600,
+    "allocated_bytes": 7204864,
+    "inode": 153930,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day38_ingest_authorization-7600fd4ffba7d377",
+    "bytes": 7204544,
+    "allocated_bytes": 7204864,
+    "inode": 139505,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/bootstrap_admin-d8daf332c8655689",
+    "bytes": 116118288,
+    "allocated_bytes": 116031488,
+    "inode": 152996,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day27_dashboard_source-e070ee71ad8c8e37",
+    "bytes": 122547424,
+    "allocated_bytes": 122413056,
+    "inode": 161554,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day39_export_csv-3b32708634cdd703",
+    "bytes": 7204304,
+    "allocated_bytes": 7204864,
+    "inode": 139496,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/analytics_server-2138de3aad7c9802",
+    "bytes": 10058496,
+    "allocated_bytes": 10055680,
+    "inode": 139487,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/analytics_server-0dffd832a8632c5e",
+    "bytes": 10058496,
+    "allocated_bytes": 10055680,
+    "inode": 168217,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/postgres_event_store-3512d9bf817c1568",
+    "bytes": 7204408,
+    "allocated_bytes": 7204864,
+    "inode": 153922,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/analytics_server-4e482c91556f9f9e",
+    "bytes": 10058496,
+    "allocated_bytes": 10055680,
+    "inode": 153014,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day39_export_csv-7567414037856541",
+    "bytes": 122676312,
+    "allocated_bytes": 122540032,
+    "inode": 161512,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/analytics_persistence-97467fbe50031916",
+    "bytes": 43045688,
+    "allocated_bytes": 43048960,
+    "inode": 152993,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day39_export_csv-c1b27053cceb64a7",
+    "bytes": 122668880,
+    "allocated_bytes": 122531840,
+    "inode": 139553,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/analytics_server-f535ee30b0c64a53",
+    "bytes": 122721424,
+    "allocated_bytes": 122580992,
+    "inode": 153015,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day27_dashboard_source-bdd27930b593913c",
+    "bytes": 7204448,
+    "allocated_bytes": 7204864,
+    "inode": 153906,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/bootstrap_admin-3ef8fb527f099a15",
+    "bytes": 10058504,
+    "allocated_bytes": 10055680,
+    "inode": 139539,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/bootstrap_admin-5cb6f0018aa4e622",
+    "bytes": 10058520,
+    "allocated_bytes": 10055680,
+    "inode": 165871,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/postgres_event_store-a5ad91ba53989777",
+    "bytes": 118163384,
+    "allocated_bytes": 118075392,
+    "inode": 139551,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/postgres_event_store-ab04a581d6370e88",
+    "bytes": 118009040,
+    "allocated_bytes": 117919744,
+    "inode": 139528,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day37_query_cookie-ef9602e396c2597c",
+    "bytes": 7204352,
+    "allocated_bytes": 7204864,
+    "inode": 153897,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/bootstrap_admin-ffc02d290a118338",
+    "bytes": 10058504,
+    "allocated_bytes": 10055680,
+    "inode": 139500,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/support_http_contract-878459f0b2835399",
+    "bytes": 30295688,
+    "allocated_bytes": 30265344,
+    "inode": 139515,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/bootstrap_admin-ece799e5c917e3c9",
+    "bytes": 10058504,
+    "allocated_bytes": 10055680,
+    "inode": 168736,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/idempotency_contract-c2f84b4f6cf2783f",
+    "bytes": 108679104,
+    "allocated_bytes": 108683264,
+    "inode": 165874,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day23_password_login-b17fcd5268507dc8",
+    "bytes": 7204400,
+    "allocated_bytes": 7204864,
+    "inode": 139498,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day39_export_csv-0761ce593179feaf",
+    "bytes": 7204304,
+    "allocated_bytes": 7204864,
+    "inode": 152994,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day26_session_contract-fbd827c542a4c2b5",
+    "bytes": 122374224,
+    "allocated_bytes": 122236928,
+    "inode": 168683,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/bootstrap_admin-e246a7fd453b3826",
+    "bytes": 115962240,
+    "allocated_bytes": 115875840,
+    "inode": 153891,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day38_ingest_authorization-fc8229d24531788a",
+    "bytes": 7204536,
+    "allocated_bytes": 7204864,
+    "inode": 168276,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/analytics_server-3654a7ae9fb98a02",
+    "bytes": 122504496,
+    "allocated_bytes": 122380288,
+    "inode": 153885,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day38_ingest_authorization-f1a20d097c9d7433",
+    "bytes": 7204544,
+    "allocated_bytes": 7204864,
+    "inode": 153884,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/analytics_persistence-2d5d34b2e5d3563d",
+    "bytes": 54016152,
+    "allocated_bytes": 53927936,
+    "inode": 168637,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/analytics_server-203be7b426a4d357",
+    "bytes": 118867040,
+    "allocated_bytes": 118763520,
+    "inode": 152995,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/analytics_apps/target/debug/deps/day39_export_csv-a9abc466ead48d34",
+    "bytes": 7204304,
+    "allocated_bytes": 7204864,
+    "inode": 168308,
+    "reason": "rebuildable unmapped unique-link Cargo target/deps ELF executable",
+    "removed": true
+  }
+]

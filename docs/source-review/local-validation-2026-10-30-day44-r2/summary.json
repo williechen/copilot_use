@@ -1,0 +1,53 @@
+{
+  "product_sha": "4b1008b95bc3e170381fcd1db84695e421f036bd",
+  "docs_initial_sha": "8e291229d7b5e980839c530c328c0224561fd860",
+  "main_tests": {
+    "crates": 8,
+    "chat": 62,
+    "pet": 110,
+    "analytics": 43,
+    "analytics_ignored": 1,
+    "chat_ssr": 62,
+    "pet_node": 12,
+    "analytics_postgres": 63,
+    "postgres_ignored": 0
+  },
+  "four_workspace_metadata_fmt_check_clippy": true,
+  "chat_hydrate_wasm": true,
+  "pet_wasm": true,
+  "pet_forward_candidate": {
+    "base_sha": "4b1008b95bc3e170381fcd1db84695e421f036bd",
+    "workspace_tests": 112,
+    "node_tests": 12,
+    "trunk_profile": "dev",
+    "upgrade_synthetic": true,
+    "upgrade_actual_readonly_backup_copy": true,
+    "checksum_rejection": true,
+    "product_applied": false,
+    "native_gui": false
+  },
+  "cleanup_batches": [
+    {
+      "file": "cleanup-result.json",
+      "count": 204,
+      "bytes": 12176609280
+    },
+    {
+      "file": "emergency-cleanup.json",
+      "count": 3,
+      "bytes": 654200832
+    },
+    {
+      "file": "rebuild-cleanup-result.json",
+      "count": 125,
+      "bytes": 11279323136
+    }
+  ],
+  "cleanup_total_allocated_bytes": 24110133248,
+  "ci": {
+    "success": 5,
+    "in_progress": 2
+  },
+  "full_gate2": false,
+  "last_full_comparison_changed": false
+}

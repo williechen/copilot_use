@@ -1,0 +1,43 @@
+   Compiling pet-server v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-fixed/pet_apps/pet_server)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.40s
+     Running tests/day44_activity_lifecycle.rs (pet_apps/target/debug/deps/day44_activity_lifecycle-8f7af3599925d1c9)
+
+running 10 tests
+test creation_has_two_inactive_activities_and_no_new_columns ... ok
+test any_active_type_means_outside_and_sit_wins_and_persists ... FAILED
+test default_change_and_normalization_are_one_transaction ... FAILED
+test failed_mode_validation_rolls_back_both_activity_changes ... ok
+test failure_creating_second_activity_rolls_back_owner_profile_and_first_activity ... FAILED
+test missing_and_foreign_pet_fail_closed_and_owner_mismatch_does_not_leak ... ok
+test read_and_normalization_failure_never_reports_success ... ok
+test native_failure_restores_exact_sitting_and_other_activity_snapshot ... ok
+test repeats_do_not_duplicate_and_cage_stops_only_target_without_changing_defaults ... ok
+test startup_uses_existing_defaults_and_cages_non_default_activities ... ok
+
+failures:
+
+---- any_active_type_means_outside_and_sit_wins_and_persists stdout ----
+
+thread 'any_active_type_means_outside_and_sit_wins_and_persists' (19113) panicked at pet_server/tests/day44_activity_lifecycle.rs:67:5:
+assertion failed: !s.roaming
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+---- default_change_and_normalization_are_one_transaction stdout ----
+
+thread 'default_change_and_normalization_are_one_transaction' (19115) panicked at pet_server/tests/day44_activity_lifecycle.rs:186:5:
+assertion failed: store.set_default_caged(&a.id, false).await.is_err()
+
+---- failure_creating_second_activity_rolls_back_owner_profile_and_first_activity stdout ----
+
+thread 'failure_creating_second_activity_rolls_back_owner_profile_and_first_activity' (19132) panicked at pet_server/tests/day44_activity_lifecycle.rs:44:5:
+assertion failed: store.create("A").await.is_err()
+
+
+failures:
+    any_active_type_means_outside_and_sit_wins_and_persists
+    default_change_and_normalization_are_one_transaction
+    failure_creating_second_activity_rolls_back_owner_profile_and_first_activity
+
+test result: FAILED. 7 passed; 3 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.69s
+
+error: test failed, to rerun pass `-p pet-server --test day44_activity_lifecycle`

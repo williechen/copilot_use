@@ -1,0 +1,1905 @@
+{
+  "source_docs_sha": "8e291229d7b5e980839c530c328c0224561fd860",
+  "packages": [
+    {
+      "file": "12-previous-day44-validation-2026-10-30.zip",
+      "sha256": "a0ce46cb07835cb86bbaf25b7378549c4142861e07920d821f78dc67c834a6b2",
+      "new_files": 202,
+      "files": [
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/008.log",
+          "sha256": "f22d5e4e9ced367e774ce5bc140d9e6b1235c1882fec80d011044851f3ae6369",
+          "bytes": 196,
+          "blob_sha": "da664472fa8cac5d6d72cee033a828b823affed4",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/008.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/README.md",
+          "sha256": "f48694690e0db4e1240c8ec7911a4c5cb306f6183ae9d3282f8dc02e494ad148",
+          "bytes": 8263,
+          "blob_sha": "08c2fdc99ef6e1da2c142601f9113b108bcb2cf5",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/README.md",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pet-trunk-retry.log",
+          "sha256": "32d47f791eadf1ea833d9f8c84fbfea5cab1f438e113e93be05bd5b908e1c2ac",
+          "bytes": 72,
+          "blob_sha": "fade9f636910c510f6bba67e0be4f2cb5dbf9061",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pet-trunk-retry.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/009.log",
+          "sha256": "c35608815f43d0b8788a9b826fad2bb17384f49fb328dc4fe64da9db5f5ef4d6",
+          "bytes": 36,
+          "blob_sha": "3ff4de68044faea55854caa49c60dfdec3495216",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/009.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/025.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/025.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/053.log",
+          "sha256": "66afd0411ccc09366e99fdd99b85f21899c8d2d064f5835126859618802153ad",
+          "bytes": 52,
+          "blob_sha": "0fb0b9795fb4884c3f9d88d91ebb6492510e4ee5",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/053.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pet-day44-activity-green-r3.patch",
+          "sha256": "5a511547fab56c2ea0ac975eb6ed3739551192dfab4764141488f144f7f45cbd",
+          "bytes": 56497,
+          "blob_sha": "2c14c4206c1f1cb4d9f529010467c33dec078508",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pet-day44-activity-green-r3.patch",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/cleanup-plan.json",
+          "sha256": "f997b3c401777557ef54bf3ba8b5f1ff6c266c2c6a4439af2837380552276389",
+          "bytes": 11450,
+          "blob_sha": "a543e0bf9ba5eade7513cbdcf84fd7db7dab1f1f",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/cleanup-plan.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/023.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/023.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/document-checks.json",
+          "sha256": "c6971f68f535c0cebe14f9de65804381186acbf510f17e227ad08bfe240f3196",
+          "bytes": 772,
+          "blob_sha": "965a6eae0cf4a971dd5c74ce346eb4ff6fef381b",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/document-checks.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/cleanup-chat-result.json",
+          "sha256": "f25f77bfe12c29f6a69f415771f2140a68b2e0e00095bf13a40f1b56fa03d1bf",
+          "bytes": 5958,
+          "blob_sha": "538ca6513ba1c072f4a51c609d2c675d7e379fc1",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/cleanup-chat-result.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/ci-analytics-postgres.log",
+          "sha256": "d20a4fef6641b6b9ca56715eadc8b233de92cbd3b9299d42e94f450c98e7156e",
+          "bytes": 102564,
+          "blob_sha": "87bf8c1e127a342836140c7eaf3bc852db787e50",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/ci-analytics-postgres.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/018.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/018.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/source-inventory.json",
+          "sha256": "f1f86116af585d7dc6a60383ebcff99d822accd88b5f31c66b2a2c83601ae35f",
+          "bytes": 15402,
+          "blob_sha": "8b2030e4abc871982e50c1f91d4e406ff0862bcf",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/source-inventory.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/analytics-logout-fixture-fix.patch",
+          "sha256": "d53b1a84cd72dfa82c9d48b432c1c7304e638e046b4b4488f328d3b52d36b7b3",
+          "bytes": 2693,
+          "blob_sha": "d1b8a7e7d449b9d7b9f749c3b801940036bc9fa2",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/analytics-logout-fixture-fix.patch",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/030.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/030.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/047.log",
+          "sha256": "667efc1e395c5cc5eb78808882af7d2f1248b2f5b92b448c467bc30002f301dc",
+          "bytes": 1598,
+          "blob_sha": "fed477c018571cdb9a625be72248a3e53f1e4b0b",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/047.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/red-green-progress.log",
+          "sha256": "c8bf1a4af629e2f0f2b45179036275955b038d60415bce85c4c30dbd4e1d5a0c",
+          "bytes": 314,
+          "blob_sha": "54985b3c86e854795970862de8867c8a48b7e9b7",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/red-green-progress.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pet-r3-progress.log",
+          "sha256": "c53c9a3436f7467031c3d3248c19deb599f8fc6b4e40d309001f023e273135f4",
+          "bytes": 950,
+          "blob_sha": "2fb68166e253bbb2277714cffa46fe47c2d08d83",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pet-r3-progress.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/046.log",
+          "sha256": "427e0e4d18e4e9e5af350e791e1e01f529c7fd7cee76fc62181636c2fac27123",
+          "bytes": 1585,
+          "blob_sha": "bf5f894991ebd7695e88200c998fd342606c5580",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/046.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/010.log",
+          "sha256": "d757d43c53951704e32c04b9b1e6b4cc65713b659e72fcdbb02f5200675c7fd8",
+          "bytes": 9,
+          "blob_sha": "5ecee254442cb4466eba9a09148f525a741668c6",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/010.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/shared-commit-readback.json",
+          "sha256": "cb05bca983d4f3f583642a95685d7289915d9919c545539440d31bbf238210e9",
+          "bytes": 7182,
+          "blob_sha": "ae9c4efa5feeae874875716ece96ce36050ce12d",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/shared-commit-readback.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/016.log",
+          "sha256": "dcb331f9b23b13125cdf3eaa976763513282ed2cbfe028a07c747257735a8bfe",
+          "bytes": 32,
+          "blob_sha": "456f68c5b18bd98690ffca0c18ea4bf0b51a47e6",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/016.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/027.log",
+          "sha256": "293c0411c2951b46178ebbcca13459e2fef3c8f0d2631a7f44f8c01a83ec7bb6",
+          "bytes": 125,
+          "blob_sha": "fea6fdecbd0c663bb129baf2fcf62958b6d7aef1",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/027.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/007.log",
+          "sha256": "e5bdf5ef8f4b0f3fec88501f4733dcb491b69ad06235ea826a175658e6489a24",
+          "bytes": 33808,
+          "blob_sha": "a2623bd734c76c70b1ec3d604f6f345411820917",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/007.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/prepublication-05.log",
+          "sha256": "0ab13ccde05b9ff28fcb749756ff44a239bd0fcd7fdf12286916f303df28cec2",
+          "bytes": 219,
+          "blob_sha": "92e279718ef90f61a3e9bbd7701a7ce3f78a180c",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/prepublication-05.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/048.log",
+          "sha256": "ba67027c9ba838a40a878ca2a197a59d0b5c257910567f5ce1cc1c3ada260584",
+          "bytes": 10524,
+          "blob_sha": "98ab358b4ce2c429b2b36546234c7e5189ef223c",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/048.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/final-apply-progress.log",
+          "sha256": "fce69493389446a4ec176e48d01d4684e06d399598a9ec3cb6f779be29a0dc98",
+          "bytes": 628,
+          "blob_sha": "a4bb04b0942b535edbf75d0e18bcf45fbae5bbd6",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/final-apply-progress.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/052.log",
+          "sha256": "86024b9970d8ebaa560436ee8a6fbaa5f75ddeee4102602a42b598309a8248bb",
+          "bytes": 1960,
+          "blob_sha": "8537755dd9e141621e431269bdc5ae93076f5078",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/052.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/prepublication-00.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/prepublication-00.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/022.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/022.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/042.log",
+          "sha256": "c36148f8828269240ee01594f9542a674633a85a755b4d32eaec3e71dbb92e10",
+          "bytes": 1354,
+          "blob_sha": "7fb57605e3b03a90e3e18db19f54aa3164a957ef",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/042.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/prepublication-07.log",
+          "sha256": "54d888bf52fbd0838b2faf487506fbf3538cd591bece158f1ff4a29b9d929926",
+          "bytes": 15,
+          "blob_sha": "ac6264cd47878283f4444f45696c135561375fd5",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/prepublication-07.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/chat-day44-format-r1.patch",
+          "sha256": "dc4aa9c2299b399d554a56e555fd7e68f9ae3a93ee7e49c3e0bfc8b58f856c37",
+          "bytes": 5885,
+          "blob_sha": "f7dfabe8bfa614aef3ead609b4330aeb26e1c523",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/chat-day44-format-r1.patch",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/045.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/045.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pet-day44-activity-green-r3-after-refactor.patch",
+          "sha256": "8c966426b0691ee882d62127d3ea0146c54113f08dd93d1bd6e4d346246cd2c2",
+          "bytes": 56555,
+          "blob_sha": "eb60f8140a1a8e5d46569cdb32aab454873d2dde",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pet-day44-activity-green-r3-after-refactor.patch",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pet-clone.log",
+          "sha256": "a633b44240cdfd53dc127cd79fb0931645809bd895da62fe8230bbf3f4771a65",
+          "bytes": 42,
+          "blob_sha": "f4ce7362a21f85532f258507c3f54ee0264d2a4a",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pet-clone.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/056.log",
+          "sha256": "e7b24f63c690806243625ca8cb53f81f1a71a030c6c34a3820e76021c6810564",
+          "bytes": 57,
+          "blob_sha": "487f919ef40387d119a08211c8a97d66318fea80",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/056.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/commands.json",
+          "sha256": "e7b5452e548b44deaa8ca9860371278787be483720f7f041eb6a04bb7bea51ba",
+          "bytes": 32531,
+          "blob_sha": "b6aac3e0d2baee8be4ad0770a5783dd4951f032f",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/commands.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/039.log",
+          "sha256": "31d9c2ab4e6e3047a5c2256735527e6359dba48d10930cec45bca0527e705f67",
+          "bytes": 18311,
+          "blob_sha": "1a1b2a420183313a5515b46f3fc09c8e2eccbc23",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/039.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/017.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/017.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/020.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/020.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/037.log",
+          "sha256": "360539a523558233d026cc0cfc4ac47e66843e8a4f2c71bb92ca47fa6aaae8bc",
+          "bytes": 2421,
+          "blob_sha": "862b6449300f358c275f289a4f7b9c225e4e52d7",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/037.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/analytics-day44-format-r1.patch",
+          "sha256": "8d39de6752bcf1bc38ee2bd3bc800155c95f636a203fbf2478c3a5154f22ef8d",
+          "bytes": 7128,
+          "blob_sha": "afe6daa1549fe911a8a7254feb30b544be8e6eb1",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/analytics-day44-format-r1.patch",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/cleanup-analytics-result.json",
+          "sha256": "dc75029b8c241bff2e3d82bdc9ff80a8fd789079c1120cd465e20ea15d18f29a",
+          "bytes": 3920,
+          "blob_sha": "2300426f365fbcf9640adaf99d3cbaaa04ee543c",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/cleanup-analytics-result.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/cleanup-result.json",
+          "sha256": "72888292319de23f8fd0987c2b74f4d10e9d3be327c4e0b115ff79ad97fd58fb",
+          "bytes": 12458,
+          "blob_sha": "fc109e07a1533b454b6a623b98c43743944ac145",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/cleanup-result.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/038.log",
+          "sha256": "2e0d0325f1ed90d3135b83dbe364325ebc2a7ac863b79ec60731d457378ab714",
+          "bytes": 9693,
+          "blob_sha": "2ddf19352f49c706c789de667f3f849564db0771",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/038.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/analytics-fix-clone.log",
+          "sha256": "40385c976650f3099327772cdfd6cb7971180712c6ee4a9ba49cd71d2909f8a1",
+          "bytes": 57,
+          "blob_sha": "8c163f64fbfdece182f7b0b8d4ec7fe723f86824",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/analytics-fix-clone.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/green-rebuild-progress.log",
+          "sha256": "4607d4cc3a8b80a4410777684270d952cd727bdeeb513ca01c0045fee6be7ce1",
+          "bytes": 299,
+          "blob_sha": "9738623fbbdc5157638fa68241d702c12027a2f6",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/green-rebuild-progress.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/051.log",
+          "sha256": "6ceacd59ae320d5a0fd472c68c4c42ee85380125c0369132ff288d14eb865394",
+          "bytes": 374,
+          "blob_sha": "a2ea2f0b7700716cb21c21cf9273ab28cc7adc96",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/051.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/005.log",
+          "sha256": "58304b4862d682ea8b8e0a300aee955d2a0e23cd908810f178440e3ccf1585d3",
+          "bytes": 82,
+          "blob_sha": "0d8f2d20e80203e99182f38236d129ea1ab1c8fc",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/005.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/candidate-format-progress.log",
+          "sha256": "4ba19f2d064717a5249bd3d3fa4a3228f18b6e2f44b513b432504ec6fa26ee7e",
+          "bytes": 1385,
+          "blob_sha": "1b9a4e6e39cca47fd589b450c1d39a0ebe756a79",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/candidate-format-progress.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/012.log",
+          "sha256": "dfefef0a475862622c9cc10adb82ac6004b6b8cd61c2296712a384a16eb6d624",
+          "bytes": 48,
+          "blob_sha": "058108c7c79a98b12fb7058e651b40350c539d3d",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/012.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/cleanup-analytics-plan.json",
+          "sha256": "b7c8f63c0995e37c899949bd531ce0f325da9c7d64545381c78e18b351c3b7b4",
+          "bytes": 3584,
+          "blob_sha": "741ca08015d42b5b064922dfc261a9dc57090f7b",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/cleanup-analytics-plan.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/035.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/035.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/028.log",
+          "sha256": "f67d2abc6a051e31742d4b62901d55e50dda44a114fb1959f86c4bfc7624e524",
+          "bytes": 36,
+          "blob_sha": "8863b765250503de511114e09fc62865d2e1717d",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/028.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/043.log",
+          "sha256": "de42354e4c0ef18704e53265d9aaa73c2784f64c47f8af86f1302e3947bbd16c",
+          "bytes": 12164,
+          "blob_sha": "65ffb5ebe2a8ae0603fac3fe8cc07797c539df1a",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/043.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/final-apply-r3-progress.log",
+          "sha256": "cf3c959e9e7a8befe7c3ae6cc654b28b3725a5385d315c56fe5b963c5db32ca5",
+          "bytes": 2415,
+          "blob_sha": "bdfcf688637526ac255184755514750163aa313b",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/final-apply-r3-progress.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/003.log",
+          "sha256": "048fed911447245fa462947f9c5f3792bf391a8b192d5fa6d1c168323ddbf270",
+          "bytes": 22018,
+          "blob_sha": "e3c16a9da36f0c7b7575ebede8938eab96dd4e80",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/003.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/000.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/000.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/manual-commands.json",
+          "sha256": "9ad9e720298ea56e019cc3e1c354da886c74068b64a5b303627472dff4407fd5",
+          "bytes": 1845,
+          "blob_sha": "588578ac6b6910eb268ce1f7edcce839486db37f",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/manual-commands.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/resolved-versions.json",
+          "sha256": "ed1eb2300a4694f42aa7946a5ad3285de6e81360dac1db8ae481b96d4aa4d743",
+          "bytes": 637,
+          "blob_sha": "c5a5f282809084ea0bdb46440f1e5dee135cb48d",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/resolved-versions.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pg-progress.log",
+          "sha256": "75da15766541a69bd5357775d64ee33bb2aa0ea8e9a8c5fce7727a2bb1f2d816",
+          "bytes": 899,
+          "blob_sha": "07921f672bc48cb6283043b8d9a654f1e44dfcf5",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pg-progress.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/011.log",
+          "sha256": "5b626b8a58f75483de0352301b867afe46e5794238f2b0862bfb4520a11b6866",
+          "bytes": 51,
+          "blob_sha": "b1e25b0aa5903938668a7d80021fff9673a298af",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/011.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/032.log",
+          "sha256": "85e32dcd1b0e000f2908fd15c2512651f9013c9e41caa6381e72aed9bdb3f247",
+          "bytes": 515,
+          "blob_sha": "ba116ca008fe6757a8a0300a8bb577f45c66c76f",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/032.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/prepublication-commands.json",
+          "sha256": "8c82d796a4ad47468f9435dca46bb82392d33ee9fa835f412df7dd2902c2dbc9",
+          "bytes": 2169,
+          "blob_sha": "fdf800658316fa70e48fa84955fd7fa569e77413",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/prepublication-commands.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/021.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/021.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/026.log",
+          "sha256": "f075ca03b20906261d384a8cc71c2f293fc6598367b79a8b477ed5679150cfaa",
+          "bytes": 825,
+          "blob_sha": "a8452302d9aee3ef807c708366b6dd1d33e3f37b",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/026.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/progress.log",
+          "sha256": "5ff1016f34fb40b9090752eb3740ae3a744c991b5a0de0f1bbdbf0ce181a995a",
+          "bytes": 5446,
+          "blob_sha": "b3981891e2a6d30d5c4a1f512984eaefb7db38c3",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/progress.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/033.log",
+          "sha256": "65c8b699d3509afa9486a512cb32a6263f94a056ad29981a83e06f3f31769096",
+          "bytes": 2080,
+          "blob_sha": "6b0bcbe8ea3f146a06d55591f569db6a68a8efdb",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/033.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/019.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/019.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/002.log",
+          "sha256": "1b365bb339391ad974e80773cd65c58d7e3ccf701bcfa3d38623e065876c18d7",
+          "bytes": 115,
+          "blob_sha": "d00fd068c47350523e26183bbe9eb397d978ceb9",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/002.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/prepublication-04.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/prepublication-04.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/034.log",
+          "sha256": "2bed506023e5c2e8996d80eabc02c2fcc337b7d22bd25eea225366aafb6c64f4",
+          "bytes": 17555,
+          "blob_sha": "4a36ce1301a84cf6e55b79883f4afd532d3f39d7",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/034.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/014.log",
+          "sha256": "a848afe6e50407b759e7446d51ce635b6b8ab37e043b73e9aa2db31ddd6f7f0e",
+          "bytes": 14,
+          "blob_sha": "e2674b747f8101b7cafa91ce1b9258af0a4a2ebc",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/014.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pet-first-tests.log",
+          "sha256": "d10a78ec32fbd059aeec8e044dccded627087c4fdae028704ea8b7766e31990e",
+          "bytes": 8836,
+          "blob_sha": "e527b8d8a55a642a2e77c35a0d5db17c3895ab71",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pet-first-tests.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pet-upgrade-progress.log",
+          "sha256": "9ab59e9fa5168e5496e4e246f5bde08361774630737e56b3f7474c674274111c",
+          "bytes": 25,
+          "blob_sha": "d739ea2ea684f2b4e6f2c05f63ec3eeb25e3feae",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pet-upgrade-progress.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/004.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/004.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/054.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/054.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/provenance.json",
+          "sha256": "c1142f3ee45ee604e08f71d6cd7c0f1ca404c9ed071c12e33926350c7f5e9ded",
+          "bytes": 1528,
+          "blob_sha": "b809279444c97b1714856d399a7105ff3ac12dd0",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/provenance.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/040.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/040.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/prepublication-01.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/prepublication-01.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/ci-failed-jobs.json",
+          "sha256": "dae57f22bd81ed7230a0d8d0f620e911886cf3490d2afa749ea0b942c24e2ca5",
+          "bytes": 11413,
+          "blob_sha": "68b1d51f233a1587691fca1bcc8bb9e1a122e404",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/ci-failed-jobs.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/055.log",
+          "sha256": "28e56f97b6a087b52669bfd19dace276da7b864a1c14f7a6abaa7b036a70fc66",
+          "bytes": 8868,
+          "blob_sha": "b1df681abc1e6765c0e987d7b5b872602864b13f",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/055.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/cleanup-chat-plan.json",
+          "sha256": "e34afc2e78bcbf2f2e7deda688228af0aed10483aef52110c9a6cea695eb9362",
+          "bytes": 5412,
+          "blob_sha": "ce93752ee266186249d551d1e497128537e4208b",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/cleanup-chat-plan.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pg-fix-progress.log",
+          "sha256": "0d0385668342e4bd0444d95cf145cd572a741502d6014732c0480364fc150315",
+          "bytes": 902,
+          "blob_sha": "f5a55b13a24dcce5ab5b40cd7de7c85c57888fd4",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pg-fix-progress.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/prepublication-06.log",
+          "sha256": "0fa907c6cbe9a0634eb33cde2cc2fb407f23163c398a67bd5adae51da6fcebce",
+          "bytes": 17,
+          "blob_sha": "30e1fa7af399780764b4115bef403f0775d6f650",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/prepublication-06.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/ci.json",
+          "sha256": "c426a774a622330ac02bd266e5fafec356536ca1cca48203ab9bf0a7cabde133",
+          "bytes": 102355,
+          "blob_sha": "b2aa90ca605b45300b706bc19746b55cb2611918",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/ci.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/006.log",
+          "sha256": "66cf8f81af8d1f54ff8fb8e88f8b878e29d8731e077916d31f7069d0af0cfbd8",
+          "bytes": 113,
+          "blob_sha": "1a8fad16aaef6af01ca6e6b3e11c3341f8dcef3b",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/006.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/031.log",
+          "sha256": "58d30577e31cf7ef93ad8d0a88960e641c8255900904bc415ef0e1ac5825c45d",
+          "bytes": 673,
+          "blob_sha": "818b2c851728e7c5f189f6d4ecac0fee7de5e404",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/031.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/044.log",
+          "sha256": "56f9a6fb3e54d4b20d38cf5d5c61572dcf2866e1e2104a1882102fa697b7b1bc",
+          "bytes": 17708,
+          "blob_sha": "659d9b536234bf0f1aea504cf9dd8d83b431f6fc",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/044.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/036.log",
+          "sha256": "ae61c99a8236b9cb786722992c5340b4c280aa42ca097df308af9713de3bdcdb",
+          "bytes": 2408,
+          "blob_sha": "0ad5d17e17288f14663377ed83714ad722ff074c",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/036.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/041.log",
+          "sha256": "5dbfe8fed6aec17122123cb6aa37c875428b7ea8eee85cdbdb2e9cc887d753fb",
+          "bytes": 1488,
+          "blob_sha": "6b7b1b7efa6e4adbea6ee2dc51d635e8f7c1b899",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/041.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/postgres.log",
+          "sha256": "19e51e0a01e4786de6be3edcf31a5965adff3ec03d4687584ebe936735fa0cd2",
+          "bytes": 8294,
+          "blob_sha": "1522763d9480e868cc33ef9d723bf24f60de7928",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/postgres.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/024.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/024.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pg-retry-progress.log",
+          "sha256": "cca043be76d98fa1e5d325fb8f353307412e607b5ab0df0a9a7ec214780bb586",
+          "bytes": 902,
+          "blob_sha": "ed27c48d736cc10127fd1c378a58906cea8e2113",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pg-retry-progress.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/049.log",
+          "sha256": "e31848e02002565432203c62729c09ec425f2a7daebb023214aeda060d7b075c",
+          "bytes": 8489,
+          "blob_sha": "3994a4c2d8a9284fdccb6ca60215b4bddd27c9a0",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/049.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/day44_creation_red.rs",
+          "sha256": "297ed025351015aa291dc742f449eb5042eadf6544ce98d5afbb88d03c41b9cc",
+          "bytes": 553,
+          "blob_sha": "66d570e25d586678f18c10a13fa5cfecb8daf0e9",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/day44_creation_red.rs",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/029.log",
+          "sha256": "f67687738767122ec07fc0ea79eeb82c76ace1b49733e78736fee4024c5ef2dc",
+          "bytes": 5893,
+          "blob_sha": "ee23b76dd7ec37467ca5620ae64b80ac53b97225",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/029.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/frontend-assets.json",
+          "sha256": "4c30164dbb9e63c2fdcd77aef18c41751c8cb513d4e77968854bf450cfcc5020",
+          "bytes": 652,
+          "blob_sha": "54a5dbd9ebb40ad1a64070a25511e4d0d0c51b7d",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/frontend-assets.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/prepublication-02.log",
+          "sha256": "6403203dd5a0867eb14d104ee8a73730bd72dd9ad92e78d996a6dba0a5dcfc01",
+          "bytes": 5,
+          "blob_sha": "ba2906d0666cf726c7eaadd2cd3db615dedfdf3a",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/prepublication-02.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/013.log",
+          "sha256": "febf45152557591cc18d5eeda0301561a9a9e9d2b32d7082250c6c35bb5aac1f",
+          "bytes": 20,
+          "blob_sha": "2fc7afd165132007122bdc7b3849faca1706206d",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/013.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pet-first-check.log",
+          "sha256": "bbddfa4ad73be7e9f238a30c7302a7ca4627e652ec1a3dfa0f82e9774b79084d",
+          "bytes": 1488,
+          "blob_sha": "6d26ea76c22f2a8ec6d58ae4059449fe893e6425",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pet-first-check.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/057.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/057.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/015.log",
+          "sha256": "02e2553e269ecd631e497380f674e0c726d88baf30159cab0e47baad169d220a",
+          "bytes": 128,
+          "blob_sha": "f0ba4854ba6b79ee783a63cc1eee845c7f6c8bdc",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/015.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pet-trunk-build.log",
+          "sha256": "71aec5a53fbbe36a8d5e7a33754d13a8f5d7002008108090a3fc0b8ae9459e45",
+          "bytes": 738,
+          "blob_sha": "1bc9cb90dd0b9a2435129c44d500ee0bc8edd708",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pet-trunk-build.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/publication-connector-errors.json",
+          "sha256": "53fd40ffc11f12385060f8f1b33f4adf35b796caa4707d204d92f6c87d80dbca",
+          "bytes": 463,
+          "blob_sha": "d25b0aa599f245e01d20bf997c47fc11532c7a5e",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/publication-connector-errors.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/prepublication-03.log",
+          "sha256": "87113da1604d4e5d9f091743171408cee151271e46d0040198e2baa31da62dae",
+          "bytes": 82,
+          "blob_sha": "f40e7264e0a7fe1b14b436235d778497894c0a97",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/prepublication-03.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/001.log",
+          "sha256": "87113da1604d4e5d9f091743171408cee151271e46d0040198e2baa31da62dae",
+          "bytes": 82,
+          "blob_sha": "f40e7264e0a7fe1b14b436235d778497894c0a97",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/001.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/050.log",
+          "sha256": "2941bebf3e1b837e2f67fe1d722f18933fe2537258bc1213d803537c2c2d0709",
+          "bytes": 842,
+          "blob_sha": "5b3c8712b65c895a1a0dea08cb5bcf024ecc90d6",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/050.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pg-fixture-retry/1.log",
+          "sha256": "2b80081604a41e7ff0902de1ceb10f2670db34b51e8475c71139656416ee4f5a",
+          "bytes": 1325,
+          "blob_sha": "065819b7808bdcc775d71560ab0a8c1efa9fda3e",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pg-fixture-retry/1.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pg-fixture-retry/0.log",
+          "sha256": "66afd0411ccc09366e99fdd99b85f21899c8d2d064f5835126859618802153ad",
+          "bytes": 52,
+          "blob_sha": "0fb0b9795fb4884c3f9d88d91ebb6492510e4ee5",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pg-fixture-retry/0.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pg-fixture-retry/commands.json",
+          "sha256": "0b5725bcd76558ea67f82b531079afd9b4858146703f12375eb012d1ec751cf8",
+          "bytes": 1799,
+          "blob_sha": "7787a99d895b1943a5461aa78a7cbfd3159caf12",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pg-fixture-retry/commands.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pg-fixture-retry/2.log",
+          "sha256": "455e9bc5b921b1cba73aa828514de76a5869b87161e6f299302b9b6d676e5925",
+          "bytes": 10309,
+          "blob_sha": "3ffa428ee4a06d74f8bf0cf16df8c82ff46f9192",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pg-fixture-retry/2.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pg-fixture-retry/postgres.log",
+          "sha256": "00a4594e1ef557fc874ec54be3b04f49c966f351cef547bccbff67c07bd8ebdf",
+          "bytes": 11470,
+          "blob_sha": "8c6f418ff3778e276874fc10a6164392b20469b4",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pg-fixture-retry/postgres.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pg-fixture-retry/3.log",
+          "sha256": "ca19178a35ab4153b75b494963b66ce8243e1b94c173107c87b44d09db23652d",
+          "bytes": 56,
+          "blob_sha": "bdc448af42aa24144e661f647c52557f2e0d9b3c",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pg-fixture-retry/3.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/final-apply/commands.json",
+          "sha256": "a8e7882cf336656dafc751206d84d0b0d174f58dec9613c4461d10260fe2c9b8",
+          "bytes": 551,
+          "blob_sha": "43938f3551ac792002dd2d20197bc316aa068e6e",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/final-apply/commands.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/final-apply/00.log",
+          "sha256": "525397d6c8660ff5a9f8b720270b992ebd65c1f60a59d6eb6bea16d510702012",
+          "bytes": 132,
+          "blob_sha": "ffbac328ed497e550931603f3ceb11dbebf8f3d0",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/final-apply/00.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/green-rebuild/01.log",
+          "sha256": "546d454e4c349a48f2e1abcfb28fe70e8597923e61e79a709137421f5f93bc74",
+          "bytes": 12663,
+          "blob_sha": "2557e2353b67ec101b1ee958334a1a90cf2a9b81",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/green-rebuild/01.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/green-rebuild/commands.json",
+          "sha256": "0e969927ea214a478c4091fec07d2a7e478593a71d49962847e4aec20b27bf53",
+          "bytes": 1439,
+          "blob_sha": "9d386eb4531653da3657594332de47e11a0f22a8",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/green-rebuild/commands.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/green-rebuild/00.log",
+          "sha256": "7692360c742a17cc77478edfd5e6dd610d79e6448830d51d50d4b876fe6351c2",
+          "bytes": 1132,
+          "blob_sha": "b2d8641a7cfa034d43c2e052e33858610d880f8b",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/green-rebuild/00.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/green-rebuild/02.log",
+          "sha256": "3782e467451b75e85db46455d4057a2ca7b926b10aaf5dbc2c6b92b0e9c3188a",
+          "bytes": 374,
+          "blob_sha": "6a28dc00aded854626e3816fd9a6f639d2646cf1",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/green-rebuild/02.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/green-rebuild/local-rebuild-paths.json",
+          "sha256": "66788f0f36f0aff8418ecb67ef5ba704a3e1c1c3b23a2f879ef7c2e54751fd8b",
+          "bytes": 2093,
+          "blob_sha": "ebb09c00970d11a111c431db188f8e32f660e249",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/green-rebuild/local-rebuild-paths.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/candidate-format/01.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/candidate-format/01.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/candidate-format/07.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/candidate-format/07.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/candidate-format/08.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/candidate-format/08.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/candidate-format/11.log",
+          "sha256": "517dd2f78807dcba8b81a39c8f3d134fecc24bfb866cbf1bbfc605e45c23ec43",
+          "bytes": 4216,
+          "blob_sha": "97b02a6624a8b83a06071e847684d2354edfcba6",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/candidate-format/11.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/candidate-format/commands.json",
+          "sha256": "98f383e36f41de05abddf1db1a601428c646d4b0bbaafac31d3321b9241014f2",
+          "bytes": 4685,
+          "blob_sha": "ffccc756629ee2dc6c8837cdd8b487d33dee57c6",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/candidate-format/commands.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/candidate-format/00.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/candidate-format/00.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/candidate-format/10.log",
+          "sha256": "f48436f5db86fd9922108089205c1e2e2d9a5ee8126ef0ad8453b20aac13a97c",
+          "bytes": 4331,
+          "blob_sha": "494f03d639c382472776812dbd2ff98b38b4bb0c",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/candidate-format/10.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/candidate-format/06.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/candidate-format/06.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/candidate-format/09.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/candidate-format/09.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/candidate-format/03.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/candidate-format/03.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/candidate-format/04.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/candidate-format/04.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/candidate-format/02.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/candidate-format/02.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/candidate-format/05.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/candidate-format/05.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pet-r3/01.log",
+          "sha256": "f9249f6ca628298cfedf0b3ea1aedd3e121dd31de2b78dc68996690da84ddfda",
+          "bytes": 18610,
+          "blob_sha": "17bf1f5653ac45c2acc3c19eff694a36b140f806",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pet-r3/01.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pet-r3/07.log",
+          "sha256": "26cbe287149322e28b0d6e8c54ee50af08e8cf62328f948c6b97012cf3df36ea",
+          "bytes": 2351,
+          "blob_sha": "a64b54245609e5f2fda84417fa92be0aab72a789",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pet-r3/07.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pet-r3/commands.json",
+          "sha256": "24379693e5d71a40d3ffd1a0adb2865d0614225488e165c063e7442b5f46a882",
+          "bytes": 4708,
+          "blob_sha": "3011daddb8931865cbe30c87a7f129d76d6f0516",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pet-r3/commands.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pet-r3/00.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pet-r3/00.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pet-r3/06.log",
+          "sha256": "f5ee0eb5b2d9c73f4760edcd5f5963c698804d413104c9e595c59fc9c9de9542",
+          "bytes": 374,
+          "blob_sha": "f34d4e69976fafa5e64bd417b87af0c11626a296",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pet-r3/06.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pet-r3/03.log",
+          "sha256": "9a61ae56758635cf154d81bb6b83175d346c1efe73b45e350ec4d298b9b3314e",
+          "bytes": 539,
+          "blob_sha": "71f5e027ae065c581f8570d23d9144f6de4a7e1a",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pet-r3/03.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pet-r3/04.log",
+          "sha256": "40367ff6e056e60ccba65e2cd9b0346d457a4e00f47d7c14886c88fd9b86e4b8",
+          "bytes": 859,
+          "blob_sha": "bc4ffa594a39ad476c23b1ffd2b6b229a2c66f34",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pet-r3/04.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pet-r3/02.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pet-r3/02.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pet-r3/05.log",
+          "sha256": "d59b61a4e20ea1a9b19193ecc20b29b7ddb64a75ea6db4257902e0bfa9167897",
+          "bytes": 12663,
+          "blob_sha": "c1c199e2f2392c4094391ba2627575d5b9e8eddc",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pet-r3/05.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pg-fixture-fix/1.log",
+          "sha256": "d02b8ad400e690673c2c4b554106622b52fabe542f3984ec931006f94e8e66c1",
+          "bytes": 2044,
+          "blob_sha": "d60c79833138cac912bc8c9b23d17116c4a47d6e",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pg-fixture-fix/1.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pg-fixture-fix/0.log",
+          "sha256": "66afd0411ccc09366e99fdd99b85f21899c8d2d064f5835126859618802153ad",
+          "bytes": 52,
+          "blob_sha": "0fb0b9795fb4884c3f9d88d91ebb6492510e4ee5",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pg-fixture-fix/0.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pg-fixture-fix/commands.json",
+          "sha256": "bd2989b75fe3fe2673f009cdfd245583ada0e6dba637e0037006ac837a4326cc",
+          "bytes": 1798,
+          "blob_sha": "3ffca1cdd92add6f0108742c1694af62cc08f676",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pg-fixture-fix/commands.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pg-fixture-fix/2.log",
+          "sha256": "3b20527b3abba1e942e3c3937bc525c42e23d44cff17e1ec1be98230a1a0db0a",
+          "bytes": 14627,
+          "blob_sha": "cff9574f9e0a7cf43a945281ba328c6b26de3e41",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pg-fixture-fix/2.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pg-fixture-fix/postgres.log",
+          "sha256": "eae86c073c957f8f512f048335f212997204f633f595b291d0406c996d88af5b",
+          "bytes": 1643,
+          "blob_sha": "874b2d32bc381d570df8a607d707be10aff9d5d4",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pg-fixture-fix/postgres.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pg-fixture-fix/3.log",
+          "sha256": "ca19178a35ab4153b75b494963b66ce8243e1b94c173107c87b44d09db23652d",
+          "bytes": 56,
+          "blob_sha": "bdc448af42aa24144e661f647c52557f2e0d9b3c",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pg-fixture-fix/3.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pg-followup/1.log",
+          "sha256": "1a5f065c5ff06e95f90a92d797efabfc4ce110e08e6c73f720aafbe1f4eb7a45",
+          "bytes": 1325,
+          "blob_sha": "1aa988d762f8cbceb8b84d1c6374c53264cc1330",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pg-followup/1.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pg-followup/0.log",
+          "sha256": "66afd0411ccc09366e99fdd99b85f21899c8d2d064f5835126859618802153ad",
+          "bytes": 52,
+          "blob_sha": "0fb0b9795fb4884c3f9d88d91ebb6492510e4ee5",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pg-followup/0.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pg-followup/commands.json",
+          "sha256": "3a62ace1be622fcd97760690cb8126da29fdf95efc2cae17872cbb3cb2f50d2d",
+          "bytes": 1793,
+          "blob_sha": "575dc20a5a63e72fcef90dca28408ad6f4f4526f",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pg-followup/commands.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pg-followup/2.log",
+          "sha256": "c1898d08bc23a6575290517900cf595606ebe5117b9bf15ee463906b79a2a582",
+          "bytes": 11294,
+          "blob_sha": "ff57f1f9a29339d64850f3b06160c5e160a097d7",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pg-followup/2.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pg-followup/postgres.log",
+          "sha256": "acdc81903c6fd3881d49210f7c8a1f5d3acc6f4d87e7bfcc833554e9be79b8c0",
+          "bytes": 10291,
+          "blob_sha": "f72b4b5ecf8c388fd9ab8ac6b405c526140f9fd4",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pg-followup/postgres.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pg-followup/3.log",
+          "sha256": "ca19178a35ab4153b75b494963b66ce8243e1b94c173107c87b44d09db23652d",
+          "bytes": 56,
+          "blob_sha": "bdc448af42aa24144e661f647c52557f2e0d9b3c",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pg-followup/3.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/01.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/01.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/20.log",
+          "sha256": "a2c7c0eebaba330e944ae8f4f312b4123cd3f71ea4a917aa9ab4ec694c9c1094",
+          "bytes": 135,
+          "blob_sha": "5cac1aa31fbbcc93ff436564000b4d4bd9a828a7",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/20.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/07.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/07.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/08.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/08.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/19.log",
+          "sha256": "ee2e3028103a72f7e58f1ab7ce01dc5895f52b817031d9354820793b0f5ead13",
+          "bytes": 1699,
+          "blob_sha": "7f18c8ede6252828a1e9669c736ebabf6568fefd",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/19.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/11.log",
+          "sha256": "36bae32a0b66f761b36decb7f5d1b0fe1b2819e1d58f7f83f77bd532e437e72f",
+          "bytes": 5950,
+          "blob_sha": "f89d49788aa2614bea98207354f6cd8bf9d78b44",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/11.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/commands.json",
+          "sha256": "f8fc2254ec4331ac9f4c253c8e2295018d32a406a02200c4863a3cb59204d54f",
+          "bytes": 8681,
+          "blob_sha": "81458b5dd651266da9f63119f917a8f57888977b",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/commands.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/13.log",
+          "sha256": "fe2c0261ee9097e04e5e01ffe5eba4d3de477a7b0fdcdfab2d758a4a89bb8563",
+          "bytes": 17678,
+          "blob_sha": "2f62578bfc000306aa2f3f11c11a26c7f37da85b",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/13.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/17.log",
+          "sha256": "aace5b4069df54514760f99e68c4857a160502cb445eba00cbb2871e531c848d",
+          "bytes": 17843,
+          "blob_sha": "5c6982bf1f9ffe7b2ad0b64c0f6ba3354d3821c7",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/17.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/21.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/21.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/00.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/00.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/10.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/10.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/06.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/06.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/09.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/09.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/applied-source-equality.json",
+          "sha256": "b6b5c3e9be55a8ffcbd1f94f31c59adf75aa2b07599670227b587860e0f54ff8",
+          "bytes": 2019,
+          "blob_sha": "c314d46f64fb11e6768a4a654881c5ec5ea3abfb",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/applied-source-equality.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/03.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/03.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/12.log",
+          "sha256": "cdcbb498b46c7646d15cb4ad0b939dd5cff158467b20d596c24144a29c8434f1",
+          "bytes": 6390,
+          "blob_sha": "7adb0fc7abd89aa7b96de7b3923ffa44bc5c1cd0",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/12.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/04.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/04.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/02.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/02.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/16.log",
+          "sha256": "8a04f36c64cd0184e681b162d892d2af950750b8b254e944a62c5fa82a8b99e6",
+          "bytes": 7720,
+          "blob_sha": "c8c108bca75ed0a5d127a1db4fae3d6fd33287e0",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/16.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/18.log",
+          "sha256": "77df2db5c66ac0fe8a5fa43aedff8c3f9c5f7ff06e36a8ffb073cb5ae302dca8",
+          "bytes": 13821,
+          "blob_sha": "3d4884b3f046f18cd0fefb2662f2cf7a462dd291",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/18.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/14.log",
+          "sha256": "cdcbb498b46c7646d15cb4ad0b939dd5cff158467b20d596c24144a29c8434f1",
+          "bytes": 6390,
+          "blob_sha": "7adb0fc7abd89aa7b96de7b3923ffa44bc5c1cd0",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/14.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/15.log",
+          "sha256": "a2503341cb04186f0eb2f7aa9966852393b179a94822d2e4751087dee7df20ac",
+          "bytes": 19029,
+          "blob_sha": "7e1ecba03e5249b8f51dafbc9228b8265ec5f340",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/15.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/22.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/22.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/05.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/final-apply-r3/05.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pet-upgrade/1.log",
+          "sha256": "ed9deee54281c8de5d0cdb8c6ba7cbcac00d28a5c7c8aca7457bb8680c458e35",
+          "bytes": 586,
+          "blob_sha": "5300acb0465570e222bf162487110a5b5af12646",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pet-upgrade/1.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pet-upgrade/0.log",
+          "sha256": "e8d21d70144e49eee0f57d278becf8929877d5ef8c5c1ad82c68803eee6a9e38",
+          "bytes": 895,
+          "blob_sha": "dcd35f518878b6017f3c08401c6430918697fd8e",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pet-upgrade/0.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pet-upgrade/commands.json",
+          "sha256": "b60167a8042450020c934f543a425b8cc5c3f18b372074cf3c3e5761246db2dc",
+          "bytes": 2497,
+          "blob_sha": "b16dc935a53ca0354fe795de4f3e19f29554d0d2",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pet-upgrade/commands.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pet-upgrade/2.log",
+          "sha256": "0ce82efad7fc44a0ddcefa9d1ae9b7e8bd7b4463b5c22b9b15a082f946fa42d9",
+          "bytes": 492,
+          "blob_sha": "d08f7826e659ac7de56d51983fbc4c69737cbfc1",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pet-upgrade/2.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/pet-upgrade/actual-copy-result.json",
+          "sha256": "69384aded854489529ad32882f19aa0f1ef586c468aa02f8f7f0924bc52f28a1",
+          "bytes": 758,
+          "blob_sha": "e56d77145d8a91298888bd9fa810abed875a1b7d",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/pet-upgrade/actual-copy-result.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/red-green/commands.json",
+          "sha256": "155b97a7a44decede43c8a16d976955c1df51193271c1c50335bfac5e9568e88",
+          "bytes": 966,
+          "blob_sha": "94844cfa6c87ebe2cc5c632b6df392b06f45dea0",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/red-green/commands.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/red-green/green.log",
+          "sha256": "dba6fcc33bacf3d8984d81005e158718385549d1b7124095ccbcffe42d9b9c14",
+          "bytes": 5011,
+          "blob_sha": "8245ed4d33890999b3852fc0cebd9faf10b69f62",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/red-green/green.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/red-green/red.log",
+          "sha256": "a2759e78c3fe118c5493d9c2e4759c71d92a7d569537cae30cc0c562ffb80547",
+          "bytes": 1780,
+          "blob_sha": "d7652c3113b0cc44c848081392df80649540eed6",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/red-green/red.log",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/scripts/day44_pet_upgrade_verify.py",
+          "sha256": "1ff1bbb9b8e8ff2340210d4df7e0b87c755a7666c13bed2ea5de503565982426",
+          "bytes": 2477,
+          "blob_sha": "516a446820d658dc2161de1a19965a57c060e912",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/scripts/day44_pet_upgrade_verify.py",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/scripts/day44_green_rebuild.py",
+          "sha256": "a0490bc3b1b4d9263d3dd6e4b4ec222a4888a03636d26bba58776b690afe038f",
+          "bytes": 1724,
+          "blob_sha": "7abbbacb89d1d829689bbba0f4b24b1ee6baa071",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/scripts/day44_green_rebuild.py",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/scripts/day44_apply_r3.py",
+          "sha256": "0ff1e01c886a6f5b445171f18b338024e7a2abaf98bc4f4728d04a933aa93acd",
+          "bytes": 2865,
+          "blob_sha": "b29be9576a055d1fe627865fb904fc02930a6d7f",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/scripts/day44_apply_r3.py",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/scripts/day44_verify.py",
+          "sha256": "7cbcb070c98cfe400ee2dccf18aa2d38bd65834a395e011de397cbd6c38b2c0e",
+          "bytes": 4155,
+          "blob_sha": "5a5ee7398db414a7d2a97e8933dbd6bc0167e680",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/scripts/day44_verify.py",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/scripts/day44_validate_docs.py",
+          "sha256": "691f7cde8ac8221b1f0b30b297934c220b24c5aa777e9178fea3b2fc3567374f",
+          "bytes": 4300,
+          "blob_sha": "2528f268378d1a8e59fbf449e7656d51df14cdb3",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/scripts/day44_validate_docs.py",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/scripts/day44_pg_fixture_retry.py",
+          "sha256": "c4baf05126c1ee7b85871d9617c08409eaf61487b29ca66ed464960a40b28640",
+          "bytes": 1465,
+          "blob_sha": "756669f25bc0df94476c9371ebcf95a39c7d1690",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/scripts/day44_pg_fixture_retry.py",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/scripts/day44_pg_followup.py",
+          "sha256": "c6fac9463188f535535d9efe95e62955b68256b372bf578c2498a1f51b0b551d",
+          "bytes": 1445,
+          "blob_sha": "cd892712cf30ae0ca9277b33cc3f3b1b14c86561",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/scripts/day44_pg_followup.py",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/scripts/day44_final_apply.py",
+          "sha256": "34d613d33a94af217724198e92c865de5664da803a639b0f6d61bb8a2c8b3217",
+          "bytes": 1595,
+          "blob_sha": "35a9b4c20ff6f140322ada44f83b798b7842b63d",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/scripts/day44_final_apply.py",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/scripts/day44_pg_fixture_fix.py",
+          "sha256": "d10c88d6b276fc3f6d9a8d531b282b8027eb9a98723cd57068c846b418789551",
+          "bytes": 1463,
+          "blob_sha": "c43909c95b52a308cbd2f5bebb5504a8de19f079",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/scripts/day44_pg_fixture_fix.py",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/scripts/day44_pet_verify.py",
+          "sha256": "c8ae409d62ea94c5bf11d28100c9c60aac512d9db179ccd6085f9b04620d1dc4",
+          "bytes": 1804,
+          "blob_sha": "8e489462adf698cd83397958557f39aa9e9dce64",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/scripts/day44_pet_verify.py",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/scripts/day44_red_green.py",
+          "sha256": "a1e50b96a81f1311b5a9c517ec1335955df2ee843eb160b4551cca83d4bcdb65",
+          "bytes": 1178,
+          "blob_sha": "11a1ae4db84053d0129ef64b52a156cbc93b3827",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/scripts/day44_red_green.py",
+          "already_archived": false
+        },
+        {
+          "path": "docs/source-review/local-validation-2026-10-30-day44/scripts/day44_candidate_format.py",
+          "sha256": "f20c67ef0c91c249296ed206ef164ea86ba719c6c1c32e4ea91db8b0f8c7c101",
+          "bytes": 1740,
+          "blob_sha": "3948e6967260fdd50658cfc776e0a2e171c18902",
+          "member": "copilot_use/docs/source-review/local-validation-2026-10-30-day44/scripts/day44_candidate_format.py",
+          "already_archived": false
+        }
+      ]
+    },
+    {
+      "file": "13-day44-recheck-superseded-documents-2026-10-30.zip",
+      "sha256": "b0648d36405b23452cc3216ec35e987e9285ed56dfab3e7cad199623e4d3a8fb",
+      "new_files": 32,
+      "files": [
+        {
+          "path": "README.md",
+          "sha256": "05661d215163cfb0dfbc63df2708546a35618428b428ab0473ca149418d3a6c9",
+          "bytes": 836,
+          "blob_sha": "1f3f6e63446ba4287f0a16b49d7f3f89dd676e17",
+          "member": "copilot_use/README.md",
+          "already_archived": false
+        },
+        {
+          "path": "docs/README.md",
+          "sha256": "e55704942639628a916c48b092612a3b7ec1d2e41067b3dd55040f80ab6b4e96",
+          "bytes": 1211,
+          "blob_sha": "e4db0674ecd39102ff7a7e6253994bfcf970db99",
+          "member": "copilot_use/docs/README.md",
+          "already_archived": false
+        },
+        {
+          "path": "docs/SOURCE_LAYOUT.md",
+          "sha256": "8028f21eba94aeda09e487f69119322d13a6dd7c591098f8bf46add1bc80b526",
+          "bytes": 1911,
+          "blob_sha": "6bc979187476b2f80bc325b5a4734926b763e74b",
+          "member": "copilot_use/docs/SOURCE_LAYOUT.md",
+          "already_archived": false
+        },
+        {
+          "path": "docs/SYSTEM_ARCHITECTURE.md",
+          "sha256": "ed970ab61bcaa31c6698fd1ad8ce1e156c8ed858c6694139ef3711e973f7c679",
+          "bytes": 1928,
+          "blob_sha": "0c084e7839cdc8350cdd570b2edf37768e7a39a6",
+          "member": "copilot_use/docs/SYSTEM_ARCHITECTURE.md",
+          "already_archived": false
+        },
+        {
+          "path": "docs/LOCAL_START.md",
+          "sha256": "820643db6e8a2ced99ef76bfdaaa37a4c3326357138fdfa06eccb0813be5fb34",
+          "bytes": 1754,
+          "blob_sha": "457eb58ed206f8e6b3ac6500bb662a12fb156a79",
+          "member": "copilot_use/docs/LOCAL_START.md",
+          "already_archived": false
+        },
+        {
+          "path": "docs/LOCAL_VALIDATION.md",
+          "sha256": "e86c54ed73ad1a4d1f256ca20fa510e2847d43e317cb426a46cb4c6d0c6f55b6",
+          "bytes": 1893,
+          "blob_sha": "cccb4d0b442f942e772c9d5e327dfed8be494e22",
+          "member": "copilot_use/docs/LOCAL_VALIDATION.md",
+          "already_archived": false
+        },
+        {
+          "path": "docs/FUTURE_WORK.md",
+          "sha256": "a0fa106b394a786fc5e0b11d5f817c068d34bc6fa48909f9eb345e75bfffe7a9",
+          "bytes": 8757,
+          "blob_sha": "a6231aa7c39d392bb7335d2f491ca166db7235ca",
+          "member": "copilot_use/docs/FUTURE_WORK.md",
+          "already_archived": false
+        },
+        {
+          "path": "docs/engineering/README.md",
+          "sha256": "36ce0281f7e3e7dda88efda5d241bf9512c949b0af5c5ace2981fc0fb9eaae88",
+          "bytes": 1111,
+          "blob_sha": "28b020e62d575c7164c6d12fd759c3899f383ac1",
+          "member": "copilot_use/docs/engineering/README.md",
+          "already_archived": false
+        },
+        {
+          "path": "docs/learning-state.json",
+          "sha256": "988ec3e43200646e7b6f19c9797db7a1910c2666563a421817bc90b7aa6ebe1a",
+          "bytes": 26261,
+          "blob_sha": "36370bc6935366dad98616952202ba19ea86d8af",
+          "member": "copilot_use/docs/learning-state.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/teaching/README.md",
+          "sha256": "e997246396f39c456e9a34d04d7cc2c03b786c6b18686a7994a3d38888280a74",
+          "bytes": 852,
+          "blob_sha": "ff530c8a838c664ca5cc4e5072a9406c6cf5aaeb",
+          "member": "copilot_use/docs/teaching/README.md",
+          "already_archived": false
+        },
+        {
+          "path": "docs/teaching/daily/README.md",
+          "sha256": "7907e9881bee0d6d589f3d9e45a0a4aaa43c41b1317d25af9f706e4296142cfd",
+          "bytes": 795,
+          "blob_sha": "196c394e76743d86e31af6d5ab31d239493efb09",
+          "member": "copilot_use/docs/teaching/daily/README.md",
+          "already_archived": false
+        },
+        {
+          "path": "docs/teaching/functional-refactoring/PROGRESS.md",
+          "sha256": "c290ebfc1477a284fcc525e453081e671419fe03acbe7b67425c47f0f5c0ad63",
+          "bytes": 1203,
+          "blob_sha": "1431350411becf3d29cc794d293c797e7db4b01d",
+          "member": "copilot_use/docs/teaching/functional-refactoring/PROGRESS.md",
+          "already_archived": false
+        },
+        {
+          "path": "docs/teaching/chat/README.md",
+          "sha256": "18c096f73f83cc0aa89a5aeac745a24c7b0f18aeb45938a435c213f0c06254dd",
+          "bytes": 702,
+          "blob_sha": "d90140c2e545f875a5bdd127ba3a5bcef58ee1d8",
+          "member": "copilot_use/docs/teaching/chat/README.md",
+          "already_archived": false
+        },
+        {
+          "path": "docs/teaching/pet/README.md",
+          "sha256": "34037d80931be884008b8c6df2bf6eafa7e30acc29a6f78c110cc3b7abaf087e",
+          "bytes": 813,
+          "blob_sha": "5a10fbb0aa9a3681c6cfb8ea64934c087236a001",
+          "member": "copilot_use/docs/teaching/pet/README.md",
+          "already_archived": false
+        },
+        {
+          "path": "docs/teaching/analytics/README.md",
+          "sha256": "ed41c3b24df812ef23d1b75506c69af40d8da1c542a851d651e691198051c230",
+          "bytes": 792,
+          "blob_sha": "7d4cee328d7cd7086be82d7362b2dad752837ea2",
+          "member": "copilot_use/docs/teaching/analytics/README.md",
+          "already_archived": false
+        },
+        {
+          "path": "docs/teaching/current/README.md",
+          "sha256": "47a54f187bdb1dc2adfa066aa400fd5d6dce15fcac600b6fd7a596dd3d869325",
+          "bytes": 496,
+          "blob_sha": "cc392042a74724a0e0fd4c21cc225b6da5fbeda6",
+          "member": "copilot_use/docs/teaching/current/README.md",
+          "already_archived": false
+        },
+        {
+          "path": "docs/teaching/current/STATUS.md",
+          "sha256": "c8c16459c598680570bcf77f6c16b4be634aae4443c2d508da24ff93b9333b70",
+          "bytes": 2605,
+          "blob_sha": "aa89d708a7d7d595c970b7e9f04bd0cf145f52d8",
+          "member": "copilot_use/docs/teaching/current/STATUS.md",
+          "already_archived": false
+        },
+        {
+          "path": "docs/teaching/current/manifest.json",
+          "sha256": "8e6366a97ba5a9933ef715fbc14be0b32b56a65b176745717010e53c96402947",
+          "bytes": 14083,
+          "blob_sha": "e9531ecc02ea454990389bad5d82ccdc32e1f0ab",
+          "member": "copilot_use/docs/teaching/current/manifest.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/teaching/current/validation.json",
+          "sha256": "4ba07b7816a642be62c960c38cc64f49bae9255e712b6121c31c50305f2cbd44",
+          "bytes": 3815,
+          "blob_sha": "871c5e95faf9dabbefa611cb945e6149cec81aa8",
+          "member": "copilot_use/docs/teaching/current/validation.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/teaching/current/ci.json",
+          "sha256": "8c089603ef6bb34bfb7645cb0b33f206d626ae6a84c21e0167d6579160159fe8",
+          "bytes": 102356,
+          "blob_sha": "155a972edade45052e94d935bebe6760ed0af3d3",
+          "member": "copilot_use/docs/teaching/current/ci.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/teaching/current/pet-activity-contract.json",
+          "sha256": "8868f05ad756611a2cab4ca7ec1427cc3e2d24117c64f010c3c054b34b588c8e",
+          "bytes": 2588,
+          "blob_sha": "e40361a1029b1dab4842926cbfbaa97059f63e96",
+          "member": "copilot_use/docs/teaching/current/pet-activity-contract.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/teaching/daily/day-44/README.md",
+          "sha256": "ad067d4cacf5761a91afed79daddf57016f47edfb1b0aeb9686ec014d717954d",
+          "bytes": 1560,
+          "blob_sha": "f39bba83ebf469f05a7da780b8caa7b8574209f4",
+          "member": "copilot_use/docs/teaching/daily/day-44/README.md",
+          "already_archived": false
+        },
+        {
+          "path": "docs/teaching/daily/day-44/ENTRY.md",
+          "sha256": "892f624b328a20eef43c47ea7e60d4c4bb7ba997ef672e81de91080539f95254",
+          "bytes": 882,
+          "blob_sha": "48110644ba31507feb5ea515916759d5439d07e4",
+          "member": "copilot_use/docs/teaching/daily/day-44/ENTRY.md",
+          "already_archived": false
+        },
+        {
+          "path": "docs/teaching/daily/day-44/chat.md",
+          "sha256": "a8fcc2ee4d9bd84922813a872b8be47af4dd2f52057d3f03b552241a0dccaac2",
+          "bytes": 26692,
+          "blob_sha": "5f270b93fa134f7f82b948c414b5d2df04d5630b",
+          "member": "copilot_use/docs/teaching/daily/day-44/chat.md",
+          "already_archived": false
+        },
+        {
+          "path": "docs/teaching/daily/day-44/pet.md",
+          "sha256": "c7f84b1fd304109fbf1dc696897f5f334b37078d449890a96195cd830013c90c",
+          "bytes": 78730,
+          "blob_sha": "591b847ae17ffd2e41e419e21dcea6397f3c5503",
+          "member": "copilot_use/docs/teaching/daily/day-44/pet.md",
+          "already_archived": false
+        },
+        {
+          "path": "docs/teaching/daily/day-44/analytics.md",
+          "sha256": "ce213a4175ed54d5e6b3b79e489f2a30526d4d4b673bdb4f4f19706081fea2a3",
+          "bytes": 67571,
+          "blob_sha": "e05e1bc3d442d291954f37cd5ef1a5065dd2ce93",
+          "member": "copilot_use/docs/teaching/daily/day-44/analytics.md",
+          "already_archived": false
+        },
+        {
+          "path": "docs/teaching/daily/day-44/delivery-verification.json",
+          "sha256": "65d777df393d78144725f66314a6ac4f60c16fe05826ba27f596ba11679f7754",
+          "bytes": 3277,
+          "blob_sha": "8b4bfd5bab30361b3599a4f8def2cad5e6f83f1d",
+          "member": "copilot_use/docs/teaching/daily/day-44/delivery-verification.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/teaching/daily/day-44/revision-verification-2026-10-30.json",
+          "sha256": "49cb85f3d6473f11ef12af71d37150ed76a9ac2f1fc15040b82ac64d5ec4d559",
+          "bytes": 74397,
+          "blob_sha": "013585361413adc965e664ae50fbf4fd1db22889",
+          "member": "copilot_use/docs/teaching/daily/day-44/revision-verification-2026-10-30.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/teaching/daily/day-44/remote-revision-verification-2026-10-30.json",
+          "sha256": "19c7202323b5cd38280952da9e66ab805aebaeb57769018dfdc14ae19a9888f5",
+          "bytes": 1585,
+          "blob_sha": "693442c9cf6feafd8b7309a5dbaeeb076deb1d50",
+          "member": "copilot_use/docs/teaching/daily/day-44/remote-revision-verification-2026-10-30.json",
+          "already_archived": false
+        },
+        {
+          "path": "docs/teaching/daily/day-44/pet-day44-activity-green-r3.patch",
+          "sha256": "5a511547fab56c2ea0ac975eb6ed3739551192dfab4764141488f144f7f45cbd",
+          "bytes": 56497,
+          "blob_sha": "2c14c4206c1f1cb4d9f529010467c33dec078508",
+          "member": "copilot_use/docs/teaching/daily/day-44/pet-day44-activity-green-r3.patch",
+          "already_archived": false
+        },
+        {
+          "path": "docs/teaching/daily/day-44/pet-day44-activity-green-r3-after-refactor.patch",
+          "sha256": "8c966426b0691ee882d62127d3ea0146c54113f08dd93d1bd6e4d346246cd2c2",
+          "bytes": 56555,
+          "blob_sha": "eb60f8140a1a8e5d46569cdb32aab454873d2dde",
+          "member": "copilot_use/docs/teaching/daily/day-44/pet-day44-activity-green-r3-after-refactor.patch",
+          "already_archived": false
+        },
+        {
+          "path": "docs/teaching/daily/day-44/pet-day44-creation-red.rs",
+          "sha256": "297ed025351015aa291dc742f449eb5042eadf6544ce98d5afbb88d03c41b9cc",
+          "bytes": 553,
+          "blob_sha": "66d570e25d586678f18c10a13fa5cfecb8daf0e9",
+          "member": "copilot_use/docs/teaching/daily/day-44/pet-day44-creation-red.rs",
+          "already_archived": false
+        }
+      ]
+    }
+  ],
+  "prior_zip_hashes_unchanged": {
+    "01-chat-2026-10-30.zip": "d2e2afced313b9c77adc459b16d5f2abb8210a7a3e9b1e820b6f8cfd4851783f",
+    "02-pet-2026-10-30.zip": "6069e0d0e19ee55c5d97fdf6206b4c5bd3114bccd1c0b3fe50f41f90e7cf165d",
+    "03-analytics-2026-10-30.zip": "1d65f353640a951b8b1856532de487b1f217dd8dc263d6f08fa44426bdcff9d0",
+    "04-shared-teaching-2026-10-30.zip": "4fe83423d3645fecf30bd2f7511a80200893e35aaae6a6264b30821046c91524",
+    "05-source-verification-2026-10-30.zip": "ee61c93920a7deee91270db8d2d901754c7c002c921dd3184bd7af342e8d5828",
+    "06-rules-and-indexes-2026-10-30.zip": "6b3f0e977d93d11384f02c680e6a88c851fdc96c9a7beec17d60ac1282e021a2",
+    "07-superseded-document-versions-2026-10-30.zip": "ca6e16df10b09b87b356fe821d35110e11c747d29df70a3128742440d1c7816f",
+    "08-pet-activity-contract-superseded-2026-10-30.zip": "d0f23c79b1400401056a8a2b5f81e90e97e52467addad52ff91ce81019e160dd",
+    "09-pet-walk-sit-contract-superseded-2026-10-30.zip": "4de75e6fabc865c3bb7f8c95edb3c6110719b19fd2b13bd9c88eb7c12862cbc1",
+    "10-pet-sit-priority-superseded-2026-10-30.zip": "ccdbdecc039b3ce99c946aefea460444e1a4bf3cf0f1de10d377e48a652aed26",
+    "11-day44-validation-superseded-2026-10-30.zip": "5bcd98cf79ec9def70de3a73d816d446bfc9c05796a3fea0acbbcf70e3da4991"
+  },
+  "reason": "latest source c726de1 supersedes previous6b34 validation status; current educational revisions retained raw until full Gate2"
+}

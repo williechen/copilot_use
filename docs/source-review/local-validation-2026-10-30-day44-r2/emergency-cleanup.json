@@ -1,0 +1,26 @@
+[
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/chat_server-c7cb6037d8283391",
+    "bytes": 218486248,
+    "allocated_bytes": 218116096,
+    "inode": 168711,
+    "plan_recorded_before_delete": "preceding tool output; disk full prevented initial plan file",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/chat_server-9b80f08afcf399df",
+    "bytes": 218436568,
+    "allocated_bytes": 218054656,
+    "inode": 153020,
+    "plan_recorded_before_delete": "preceding tool output; disk full prevented initial plan file",
+    "removed": true
+  },
+  {
+    "path": "/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/latest/chat_apps/target/debug/deps/chat_server-bfb09f4f75890b8c",
+    "bytes": 218414904,
+    "allocated_bytes": 218030080,
+    "inode": 165920,
+    "plan_recorded_before_delete": "preceding tool output; disk full prevented initial plan file",
+    "removed": true
+  }
+]

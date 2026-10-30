@@ -1,0 +1,51 @@
+   Compiling chat-ui v0.2.43 (/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/chat_ui)
+warning: unused import: `crate::room_list_state::clear_room_search`
+  --> chat_ui/src/lib.rs:39:5
+   |
+39 | use crate::room_list_state::clear_room_search;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `room_heading` is never used
+   --> chat_ui/src/lib.rs:209:4
+    |
+209 | fn room_heading(id: &str, result: Result<String, String>) -> String {
+    |    ^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `clear_room_search` is never used
+  --> chat_ui/src/room_list_state.rs:55:15
+   |
+55 | pub(super) fn clear_room_search(loaded: bool, rows: &[(String, String)]) -> (String, String) {
+   |               ^^^^^^^^^^^^^^^^^
+
+warning: variants `SignedOut`, `SignedIn`, and `Unavailable` are never constructed
+ --> chat_ui/src/session_entry.rs:4:5
+  |
+2 | pub(super) enum SessionEntry {
+  |                 ------------ variants in this enum
+3 |     Checking,
+4 |     SignedOut,
+  |     ^^^^^^^^^
+5 |     SignedIn,
+  |     ^^^^^^^^
+6 |     Unavailable,
+  |     ^^^^^^^^^^^
+  |
+  = note: `SessionEntry` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis
+
+rustc-LLVM ERROR: IO failure on output stream: No space left on device
+warning: `chat-ui` (lib) generated 4 warnings (run `cargo fix --lib -p chat-ui` to apply 1 suggestion)
+error: could not compile `chat-ui` (lib); 4 warnings emitted
+
+Caused by:
+  process didn't exit successfully: `/home/willie/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustc --crate-name chat_ui --edition=2024 chat_ui/src/lib.rs --error-format=json --json=diagnostic-rendered-ansi,artifacts,future-incompat --crate-type cdylib --crate-type rlib --emit=dep-info,link -C embed-bitcode=no -C debuginfo=2 --cfg 'feature="default"' --cfg 'feature="ssr"' --check-cfg 'cfg(docsrs,test)' --check-cfg 'cfg(feature, values("default", "hydrate", "ssr"))' -C metadata=9ffb69655d42531f --out-dir /home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/target/debug/deps -L dependency=/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/target/debug/deps --extern chat_domain=/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/target/debug/deps/libchat_domain-94723b37e864f3e8.rlib --extern leptos=/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/target/debug/deps/libleptos-6e056cedbc893622.rlib --extern leptos_router=/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/target/debug/deps/libleptos_router-82a2057d66e4437a.rlib --extern serde_json=/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/target/debug/deps/libserde_json-b2cbb6aa9ac0dba9.rlib --extern shared=/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/target/debug/deps/libshared-330d26d2d708f95b.rlib` (exit status: 101)
+warning: build failed, waiting for other jobs to finish...
+rustc-LLVM ERROR: IO failure on output stream: No space left on device
+warning: `chat-ui` (lib test) generated 1 warning (1 duplicate)
+error: could not compile `chat-ui` (lib test); 1 warning emitted
+
+Caused by:
+  process didn't exit successfully: `/home/willie/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustc --crate-name chat_ui --edition=2024 chat_ui/src/lib.rs --error-format=json --json=diagnostic-rendered-ansi,artifacts,future-incompat --emit=dep-info,link -C embed-bitcode=no -C debuginfo=2 --test --cfg 'feature="default"' --cfg 'feature="ssr"' --check-cfg 'cfg(docsrs,test)' --check-cfg 'cfg(feature, values("default", "hydrate", "ssr"))' -C metadata=c6e18abee94aaf02 -C extra-filename=-f0e725b1f9b4d74c --out-dir /home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/target/debug/deps -L dependency=/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/target/debug/deps --extern chat_domain=/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/target/debug/deps/libchat_domain-94723b37e864f3e8.rlib --extern leptos=/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/target/debug/deps/libleptos-6e056cedbc893622.rlib --extern leptos_router=/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/target/debug/deps/libleptos_router-82a2057d66e4437a.rlib --extern serde_json=/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/target/debug/deps/libserde_json-b2cbb6aa9ac0dba9.rlib --extern shared=/home/willie/Documents/Codex/2026-10-28/referenced-chatgpt-conversation-this-is-an/work/day44-recheck-latest/chat_apps/target/debug/deps/libshared-330d26d2d708f95b.rlib` (exit status: 101)

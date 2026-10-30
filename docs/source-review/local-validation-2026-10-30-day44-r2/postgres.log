@@ -1,0 +1,59 @@
+2026-10-30 21:32:59.446 CST [18203] LOG:  starting PostgreSQL 18.6 (Ubuntu 18.6-1.pgdg26.04+2) on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0, 64-bit
+2026-10-30 21:32:59.446 CST [18203] LOG:  listening on IPv4 address "127.0.0.1", port 55482
+2026-10-30 21:32:59.471 CST [18209] LOG:  database system was shut down at 2026-10-30 19:06:30 CST
+2026-10-30 21:32:59.486 CST [18203] LOG:  database system is ready to accept connections
+2026-10-30 21:33:18.388 CST [18207] LOG:  checkpoint starting: immediate force wait
+2026-10-30 21:33:19.847 CST [18207] LOG:  checkpoint complete: wrote 974 buffers (5.9%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 1 recycled; write=0.130 s, sync=1.251 s, total=1.461 s; sync files=314, longest=0.017 s, average=0.004 s; distance=18601 kB, estimate=18601 kB; lsn=0/3CF36488, redo lsn=0/3CF341F0
+2026-10-30 21:33:19.848 CST [18207] LOG:  checkpoint starting: immediate force wait
+2026-10-30 21:33:20.061 CST [18207] LOG:  checkpoint complete: wrote 2 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.017 s, sync=0.054 s, total=0.213 s; sync files=3, longest=0.026 s, average=0.018 s; distance=8 kB, estimate=16742 kB; lsn=0/3CF369E8, redo lsn=0/3CF36500
+2026-10-30 21:33:21.562 CST [18207] LOG:  checkpoint starting: immediate force wait
+2026-10-30 21:33:23.601 CST [18207] LOG:  checkpoint complete: wrote 1036 buffers (6.3%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 1 recycled; write=1.015 s, sync=0.658 s, total=2.040 s; sync files=245, longest=0.008 s, average=0.003 s; distance=14351 kB, estimate=16503 kB; lsn=0/3DD3CBB8, redo lsn=0/3DD3A2E0
+2026-10-30 21:33:23.602 CST [18207] LOG:  checkpoint starting: immediate force wait
+2026-10-30 21:33:23.648 CST [18207] LOG:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.006 s, sync=0.014 s, total=0.046 s; sync files=2, longest=0.009 s, average=0.007 s; distance=10 kB, estimate=14854 kB; lsn=0/3DD3F290, redo lsn=0/3DD3CC30
+2026-10-30 21:33:23.915 CST [18207] LOG:  checkpoint starting: immediate force wait
+2026-10-30 21:33:24.335 CST [18207] LOG:  checkpoint complete: wrote 985 buffers (6.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 1 recycled; write=0.022 s, sync=0.358 s, total=0.421 s; sync files=127, longest=0.010 s, average=0.003 s; distance=14154 kB, estimate=14784 kB; lsn=0/3EB85FA0, redo lsn=0/3EB0F828
+2026-10-30 21:33:24.337 CST [18207] LOG:  checkpoint starting: immediate force wait
+2026-10-30 21:33:24.391 CST [18207] LOG:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.008 s, sync=0.010 s, total=0.055 s; sync files=2, longest=0.007 s, average=0.005 s; distance=474 kB, estimate=13353 kB; lsn=0/3EB86120, redo lsn=0/3EB86030
+2026-10-30 21:33:24.587 CST [18207] LOG:  checkpoint starting: immediate force wait
+2026-10-30 21:33:24.648 CST [18207] LOG:  checkpoint complete: wrote 6 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 1 recycled; write=0.008 s, sync=0.021 s, total=0.062 s; sync files=7, longest=0.006 s, average=0.003 s; distance=4739 kB, estimate=12491 kB; lsn=0/3F026FA0, redo lsn=0/3F026F48
+2026-10-30 21:33:25.638 CST [18207] LOG:  checkpoint starting: immediate force wait
+2026-10-30 21:33:25.958 CST [18207] LOG:  checkpoint complete: wrote 996 buffers (6.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.028 s, sync=0.270 s, total=0.321 s; sync files=101, longest=0.012 s, average=0.003 s; distance=9435 kB, estimate=12186 kB; lsn=0/3F95EBE0, redo lsn=0/3F95DEB0
+2026-10-30 21:33:25.958 CST [18207] LOG:  checkpoint starting: immediate force wait
+2026-10-30 21:33:25.991 CST [18207] LOG:  checkpoint complete: wrote 1 buffers (0.0%), wrote 0 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.005 s, total=0.034 s; sync files=1, longest=0.005 s, average=0.005 s; distance=3 kB, estimate=10967 kB; lsn=0/3F95ECB8, redo lsn=0/3F95EC58
+2026-10-30 21:33:26.590 CST [18748] ERROR:  could not create unique index "uq_uac_user_email"
+2026-10-30 21:33:26.590 CST [18748] DETAIL:  Key (lower(TRIM(BOTH FROM user_email)))=(admin@localhost.invalid) is duplicated.
+2026-10-30 21:33:26.590 CST [18748] STATEMENT:  CREATE UNIQUE INDEX uq_uac_user_email ON uac_user(lower(trim(user_email)));
+2026-10-30 21:33:27.685 CST [18744] ERROR:  fixture
+2026-10-30 21:33:27.685 CST [18744] CONTEXT:  PL/pgSQL function fixture_fail_revoke() line 1 at RAISE
+2026-10-30 21:33:27.685 CST [18744] STATEMENT:  DELETE FROM uac_login_session WHERE user_id=$1
+2026-10-30 21:33:27.706 CST [18207] LOG:  checkpoint starting: immediate force wait
+2026-10-30 21:33:28.098 CST [18751] ERROR:  duplicate key value violates unique constraint "uq_uac_user_email"
+2026-10-30 21:33:28.098 CST [18751] DETAIL:  Key (lower(TRIM(BOTH FROM user_email)))=(learner@example.test) already exists.
+2026-10-30 21:33:28.098 CST [18751] STATEMENT:  UPDATE uac_user 
+	            SET user_pd=$1
+	                ,user_email=$2
+	                ,is_init_pd=FALSE
+	                ,updated_at=now() 
+	        WHERE id=$3
+2026-10-30 21:33:28.664 CST [18207] LOG:  checkpoint complete: wrote 996 buffers (6.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 1 recycled; write=0.027 s, sync=0.882 s, total=0.959 s; sync files=366, longest=0.012 s, average=0.003 s; distance=9446 kB, estimate=10815 kB; lsn=0/402C4C28, redo lsn=0/40298568
+2026-10-30 21:33:29.834 CST [18207] LOG:  checkpoint starting: immediate force wait
+2026-10-30 21:33:29.873 CST [18207] LOG:  checkpoint complete: wrote 2 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.008 s, sync=0.009 s, total=0.040 s; sync files=3, longest=0.005 s, average=0.003 s; distance=191 kB, estimate=9753 kB; lsn=0/402C83D8, redo lsn=0/402C8380
+2026-10-30 21:33:33.214 CST [18207] LOG:  checkpoint starting: immediate force wait
+2026-10-30 21:33:33.269 CST [18207] LOG:  checkpoint complete: wrote 6 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.008 s, sync=0.021 s, total=0.056 s; sync files=7, longest=0.006 s, average=0.003 s; distance=4752 kB, estimate=9253 kB; lsn=0/4076C420, redo lsn=0/4076C3C8
+2026-10-30 21:33:34.145 CST [18207] LOG:  checkpoint starting: immediate force wait
+2026-10-30 21:33:34.213 CST [18207] LOG:  checkpoint complete: wrote 6 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.010 s, sync=0.026 s, total=0.068 s; sync files=7, longest=0.008 s, average=0.004 s; distance=4725 kB, estimate=8800 kB; lsn=0/40C09A60, redo lsn=0/40C09A08
+2026-10-30 21:33:36.152 CST [18207] LOG:  checkpoint starting: immediate force wait
+2026-10-30 21:33:36.239 CST [18207] LOG:  checkpoint complete: wrote 6 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 1 recycled; write=0.013 s, sync=0.026 s, total=0.087 s; sync files=7, longest=0.011 s, average=0.004 s; distance=4728 kB, estimate=8393 kB; lsn=0/410A7CF8, redo lsn=0/410A7CA0
+2026-10-30 21:33:37.236 CST [18207] LOG:  checkpoint starting: immediate force wait
+2026-10-30 21:33:38.388 CST [18207] LOG:  checkpoint complete: wrote 999 buffers (6.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.022 s, sync=1.103 s, total=1.153 s; sync files=366, longest=0.009 s, average=0.004 s; distance=9463 kB, estimate=9463 kB; lsn=0/419E5958, redo lsn=0/419E5900
+2026-10-30 21:33:41.096 CST [18207] LOG:  checkpoint starting: immediate force wait
+2026-10-30 21:33:42.318 CST [18207] LOG:  checkpoint complete: wrote 999 buffers (6.1%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 1 recycled; write=0.032 s, sync=1.141 s, total=1.222 s; sync files=366, longest=0.009 s, average=0.004 s; distance=9442 kB, estimate=9461 kB; lsn=0/42347E48, redo lsn=0/4231E378
+2026-10-30 21:33:42.478 CST [18207] LOG:  checkpoint starting: immediate force wait
+2026-10-30 21:33:42.559 CST [18207] LOG:  checkpoint complete: wrote 28 buffers (0.2%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.010 s, sync=0.040 s, total=0.082 s; sync files=14, longest=0.006 s, average=0.003 s; distance=4889 kB, estimate=9003 kB; lsn=0/427E4B60, redo lsn=0/427E4B08
+2026-10-30 21:33:42.745 CST [18203] LOG:  received fast shutdown request
+2026-10-30 21:33:42.751 CST [18203] LOG:  aborting any active transactions
+2026-10-30 21:33:42.755 CST [18203] LOG:  background worker "logical replication launcher" (PID 18212) exited with exit code 1
+2026-10-30 21:33:42.757 CST [18207] LOG:  shutting down
+2026-10-30 21:33:42.762 CST [18207] LOG:  checkpoint starting: shutdown immediate
+2026-10-30 21:33:42.802 CST [18207] LOG:  checkpoint complete: wrote 1 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.006 s, sync=0.009 s, total=0.045 s; sync files=2, longest=0.006 s, average=0.005 s; distance=4 kB, estimate=8103 kB; lsn=0/427E5D78, redo lsn=0/427E5D78
+2026-10-30 21:33:42.832 CST [18203] LOG:  database system is shut down

@@ -1,0 +1,58 @@
+[
+  {
+    "path": "pet_apps/migrations/20261030060000_activity_lifecycle.sql",
+    "previous_candidate_equal": false
+  },
+  {
+    "path": "pet_apps/pet_application/src/lifecycle.rs",
+    "previous_candidate_equal": false
+  },
+  {
+    "path": "pet_apps/pet_persistence/src/activity.rs",
+    "previous_candidate_equal": false
+  },
+  {
+    "path": "pet_apps/pet_persistence/src/lib.rs",
+    "previous_candidate_equal": false
+  },
+  {
+    "path": "pet_apps/pet_server/examples/day44_upgrade.rs",
+    "previous_candidate_equal": true
+  },
+  {
+    "path": "pet_apps/pet_server/src/lib.rs",
+    "previous_candidate_equal": true
+  },
+  {
+    "path": "pet_apps/pet_server/src/pet_store.rs",
+    "previous_candidate_equal": false
+  },
+  {
+    "path": "pet_apps/pet_server/src/pet_windows.rs",
+    "previous_candidate_equal": true
+  },
+  {
+    "path": "pet_apps/pet_server/src/roam.rs",
+    "previous_candidate_equal": false
+  },
+  {
+    "path": "pet_apps/pet_server/tests/day44_activity_lifecycle.rs",
+    "previous_candidate_equal": true
+  },
+  {
+    "path": "pet_apps/pet_ui/index.html",
+    "previous_candidate_equal": false
+  },
+  {
+    "path": "pet_apps/pet_ui/src/bridge.rs",
+    "previous_candidate_equal": false
+  },
+  {
+    "path": "pet_apps/pet_ui/src/main.rs",
+    "previous_candidate_equal": false
+  },
+  {
+    "path": "pet_apps/pet_ui/tests/day44-activity.test.mjs",
+    "previous_candidate_equal": false
+  }
+]

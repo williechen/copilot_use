@@ -1,0 +1,11 @@
+2026-10-30 21:41:27.218 CST [24083] LOG:  database system is ready to accept connections
+2026-10-30 21:41:27.332 CST [24094] ERROR:  could not extend file "base/66798/3380": No space left on device
+2026-10-30 21:41:27.332 CST [24094] HINT:  Check free disk space.
+2026-10-30 21:41:27.332 CST [24094] STATEMENT:  CREATE DATABASE day44_latest_20261030;
+2026-10-30 21:41:28.229 CST [24083] LOG:  received fast shutdown request
+2026-10-30 21:41:28.233 CST [24083] LOG:  aborting any active transactions
+2026-10-30 21:41:28.235 CST [24083] LOG:  background worker "logical replication launcher" (PID 24092) exited with exit code 1
+2026-10-30 21:41:28.236 CST [24087] LOG:  shutting down
+2026-10-30 21:41:28.241 CST [24087] LOG:  checkpoint starting: shutdown immediate
+2026-10-30 21:41:28.297 CST [24087] LOG:  checkpoint complete: wrote 3 buffers (0.0%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 1 recycled; write=0.010 s, sync=0.015 s, total=0.061 s; sync files=5, longest=0.005 s, average=0.003 s; distance=1536 kB, estimate=1536 kB; lsn=0/49059380, redo lsn=0/49059380
+2026-10-30 21:41:28.317 CST [24083] LOG:  database system is shut down
