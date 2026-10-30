@@ -1,0 +1,51 @@
+{
+  "gloo-timers": {
+    "stable": "0.4.0",
+    "msrv": "1.82",
+    "lock": "0.4.0",
+    "url": "https://crates.io/api/v1/crates/gloo-timers",
+    "date": "2026-10-31"
+  },
+  "wasm-bindgen": {
+    "stable": "0.2.130",
+    "msrv": "1.81",
+    "lock": "0.2.129",
+    "url": "https://crates.io/api/v1/crates/wasm-bindgen",
+    "date": "2026-10-31"
+  },
+  "wasm-bindgen-futures": {
+    "stable": "0.4.80",
+    "msrv": "1.81",
+    "lock": "0.4.79",
+    "url": "https://crates.io/api/v1/crates/wasm-bindgen-futures",
+    "date": "2026-10-31"
+  },
+  "js-sys": {
+    "stable": "0.3.107",
+    "msrv": "1.81",
+    "lock": "0.3.106",
+    "url": "https://crates.io/api/v1/crates/js-sys",
+    "date": "2026-10-31"
+  },
+  "web-sys": {
+    "stable": "0.3.107",
+    "msrv": "1.81",
+    "lock": "0.3.106",
+    "url": "https://crates.io/api/v1/crates/web-sys",
+    "date": "2026-10-31"
+  },
+  "serde-wasm-bindgen": {
+    "stable": "0.6.5",
+    "msrv": null,
+    "lock": "0.6.5",
+    "url": "https://crates.io/api/v1/crates/serde-wasm-bindgen",
+    "date": "2026-10-31"
+  },
+  "trunk": {
+    "stable": "0.22.1",
+    "msrv": "1.96.1",
+    "lock": null,
+    "url": "https://crates.io/api/v1/crates/trunk",
+    "date": "2026-10-31"
+  }
+}

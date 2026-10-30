@@ -1,0 +1,84 @@
+   Compiling serde_core v1.0.229
+   Compiling futures-io v0.3.34
+   Compiling serde v1.0.229
+   Compiling futures-util v0.3.34
+   Compiling once_cell v1.21.4
+   Compiling wasm-bindgen v0.2.129
+   Compiling smallvec v1.16.4
+   Compiling serde_json v1.0.154
+   Compiling event-listener v5.4.2
+   Compiling generic-array v0.14.9
+   Compiling proc-macro-utils v0.10.0
+   Compiling libc v0.2.191
+   Compiling js-sys v0.3.106
+   Compiling futures-executor v0.3.34
+   Compiling futures v0.3.34
+   Compiling event-listener-strategy v0.5.4
+   Compiling reactive_graph v0.2.16
+   Compiling server_fn_macro v0.8.12
+   Compiling either v1.19.0
+   Compiling itertools v0.14.0
+   Compiling async-lock v3.4.2
+   Compiling icu_normalizer v2.4.0
+   Compiling hydration_context v0.3.2
+   Compiling idna_adapter v1.2.2
+   Compiling crypto-common v0.1.6
+   Compiling block-buffer v0.10.4
+   Compiling manyhow-macros v0.14.1
+   Compiling getrandom v0.4.3
+   Compiling quote-use-macros v0.9.0
+   Compiling tachys v0.2.19
+   Compiling quote-use v0.9.0
+   Compiling manyhow v0.14.1
+   Compiling digest v0.10.7
+   Compiling idna v1.1.0
+   Compiling form_urlencoded v1.2.2
+   Compiling oco_ref v0.2.1
+   Compiling server_fn v0.8.13
+   Compiling cpufeatures v0.2.17
+   Compiling attribute-derive-macro v0.11.0
+   Compiling wasm-bindgen-futures v0.4.79
+   Compiling web-sys v0.3.106
+   Compiling any_spawner v0.3.0
+   Compiling sha2 v0.10.9
+   Compiling url v2.5.8
+   Compiling server_fn_macro_default v0.8.6
+   Compiling serde_qs v0.15.0
+   Compiling reactive_stores v0.4.4
+   Compiling leptos_macro v0.8.19
+   Compiling wasm_split_macros v0.2.2
+   Compiling config v0.15.27
+   Compiling leptos_hot_reload v0.8.7
+   Compiling attribute-derive v0.11.0
+   Compiling uuid v1.29.0
+   Compiling codee v0.3.5
+   Compiling leptos v0.8.22
+   Compiling wasm_split_helpers v0.2.3
+   Compiling leptos_config v0.8.10
+   Compiling pet-domain v0.2.43 (/home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/candidate/pet_apps/pet_domain)
+   Compiling serde-wasm-bindgen v0.6.5
+   Compiling gloo-timers v0.4.0
+   Compiling gloo-utils v0.2.0
+   Compiling gloo-net v0.6.0
+   Compiling wasm-streams v0.5.0
+   Compiling leptos_server v0.8.8
+   Compiling leptos_dom v0.8.8
+   Compiling pet-ui v0.2.43 (/home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/candidate/pet_apps/pet_ui)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 25.57s
+     Running unittests src/main.rs (work/candidate/chat_apps/target/debug/deps/pet_ui-ec9dab7900d95c82)
+
+running 11 tests
+test component::pose::tests::idle_blink_has_priority ... ok
+test component::pose::tests::day26_each_pose_selects_single_image_class ... ok
+test cage_status::tests::two_pets_keep_independent_status_and_failure_is_not_false ... ok
+test component::pose::tests::interacting_uses_animation_phase ... ok
+test component::pose::tests::sleeping_uses_animation_phase ... ok
+test component::snapshot::tests::snapshot_order_preserves_existing_ipc_and_event_assertions ... ok
+test day16_scan_generation_tests::canceled_or_superseded_scan_cannot_restore_preview ... ok
+test file_scan_view::tests::counts_are_visible_but_private_values_are_discarded ... ok
+test duplicate_preview::tests::summary_shows_group_sizes_without_private_paths ... ok
+test file_scan_view::tests::empty_is_explicit_and_incomplete_contract_is_rejected ... ok
+test duplicate_preview::tests::empty_preview_is_explicit_and_missing_contract_is_rejected ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

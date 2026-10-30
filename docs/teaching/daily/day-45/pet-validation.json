@@ -1,0 +1,43 @@
+{
+  "source_sha": "64eff527283fd05657841297879aefeaadd31f64",
+  "scope": "isolated candidate; DOM fixture is not Leptos/Tauri runtime",
+  "commands": [
+    {
+      "command": "npm install --prefix work/browser playwright",
+      "exit": 127,
+      "log": "playwright-install.log"
+    },
+    {
+      "command": "pnpm --dir work/browser add playwright; node work/browser/node_modules/playwright/cli.js install chromium",
+      "exit": 0,
+      "logs": [
+        "playwright-install-r2.log",
+        "playwright-browser-r2.log"
+      ]
+    },
+    {
+      "command": "CARGO_TARGET_DIR=<shared-isolated-target> cargo test --manifest-path pet_apps/Cargo.toml -p pet-ui --bin pet-ui --locked",
+      "exit": 0,
+      "passed": 11,
+      "log": "pet-refactor.log"
+    },
+    {
+      "command": "NODE_PATH=<isolated-playwright> node pet_apps/pet_ui/tests/browser/canvas.cjs <candidate-root>",
+      "exit": 1,
+      "log": "pet-red.log",
+      "result": "expected200x200 actual192x56"
+    },
+    {
+      "command": "NODE_PATH=<isolated-playwright> node pet_apps/pet_ui/tests/browser/canvas.cjs <candidate-root>",
+      "exit": 0,
+      "log": "pet-green.log",
+      "result": "six poses single image; canvas200x200; transformed bounds contained"
+    },
+    {
+      "command": "git apply --check pet-day45-refactor.patch; git apply pet-day45-refactor.patch; git apply --check pet-day45-green.patch",
+      "exit": 0
+    }
+  ],
+  "gate2": false,
+  "fifo_closed": false
+}
