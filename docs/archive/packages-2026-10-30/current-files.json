@@ -33131,6 +33131,8 @@
     "docs/engineering/README.md",
     "docs/requirements/AUTHENTICATION.md",
     "docs/requirements/USER_FLOWS.md",
+    "docs/source-review/local-validation-2026-10-30-day44-r2/README.md",
+    "docs/source-review/local-validation-2026-10-30-day44/README.md",
     "docs/teaching/README.md",
     "docs/teaching/analytics/README.md",
     "docs/teaching/chat/README.md",
@@ -33151,7 +33153,7 @@
     "docs/teaching/pet/README.md",
     "docs/teaching/scheduler-instructions-v1.md"
   ],
-  "current_reading_file_count": 36,
+  "current_reading_file_count": 38,
   "validation_checks": {
     "new_relative_links_valid": true,
     "json_valid": true,
@@ -33225,5 +33227,12 @@
     ],
     "history_mappings_preserved": true,
     "Day44_current_raw_reason": "full product Gate2 incomplete; current candidate and evidence required for next teaching"
+  },
+  "latest_recheck": {
+    "source_sha": "4b1008b95bc3e170381fcd1db84695e421f036bd",
+    "source_docs_sha": "8e291229d7b5e980839c530c328c0224561fd860",
+    "archive_map": "docs/archive/packages-2026-10-30/day44-recheck-archive.json",
+    "current_evidence": "docs/source-review/local-validation-2026-10-30-day44-r2/README.md",
+    "prior_validation_zip_only": true
   }
 }

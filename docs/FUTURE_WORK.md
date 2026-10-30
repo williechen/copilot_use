@@ -32,9 +32,7 @@
 
 使用者已確認：以 `pet_activity` 同主人／同寵物的任一 `is_activity=true` 判出籠，不限定散步；全部為 false／無活動才回籠。建立寵物須同交易建立散步與坐下兩筆活動；散步 true 允許漫遊、坐下 true 仍出籠但不漫遊。兩動作切換互斥更新；同時 true 時坐下優先並寫回散步 false，出籠不重複插入同名活動，回籠停止全部活動；不新增狀態或漫遊欄位。`is_default_closure` 僅保留預設語意，不作目前狀態。
 
-目前產品 `6b34c42` 的 set_caged／read_caged／list_uncaged 與 PetStore::active／select 仍直接讀寫 `pet_profile.is_default_closure`，尚未符合新契約。隔離r3已切換控制台查詢、出／入籠、選取、原生關窗與啟動caller，仍待使用者套用並驗收，保留逐 ID 隔離、冪等、DB／開窗失敗補償及有效斷言。預設出籠資格與活動狀態分開，不能把舊旗標的歷史值直接當已驗證的新模型。
-
-Day44 新增 `auto_release_on_start` 欄位的 Green 已撤回封存；[Pet Day44 修訂](teaching/daily/day-44/pet.md) 保留正式資料契約與獨立 Refactor，完整替代Green r3已交付，隔離workspace110／Node12／WASM／Trunk及合成與實際SQLite副本升級通過；完整版本Gate與產品驗收未完成。三隻、直接關窗、併發及真 native／DB 失敗補償仍待驗；既有 A/B 測試只證明舊旗標模型，不驗證新活動模型。
+目前4b1008b已將控制台、Store、Native、關窗及啟動caller切換活動模型，本地Pet110通過。舊中文活動值與升級example另有[forward r4完整修訂](teaching/daily/day-44/pet.md)，候選112、Node12、WASM／Trunk及實際SQLite唯讀備份副本升級通過；保留既有migration checksum。三隻、真Native X、併發、漫遊及故障補償GUI仍待驗；舊A/B不追認新模型。
 
 <a id="pet-roaming"></a>
 
@@ -58,7 +56,7 @@ Day44 新增 `auto_release_on_start` 欄位的 Green 已撤回封存；[Pet Day4
 
 ## Analytics 登入／Session
 
-目前已有管理員持久化、密碼流程與 DB Session。Day44 logout CSRF已在main，新測試真PG通過；舊測試fixture修補仍待套用。正式登入等待／鎖定、活動／閒置 Session、改密碼與權限變更撤銷、首次改密碼旅程須以正式路由驗收。
+目前已有管理員持久化、密碼流程與 DB Session。Day44 logout CSRF已在main，新測試真PG通過；舊測試fixture修補已在4b1008b且真PG63通過。正式登入等待／鎖定、活動／閒置 Session、改密碼與權限變更撤銷、首次改密碼旅程須以正式路由驗收。
 
 <a id="adapter-cleanup"></a>
 
@@ -70,7 +68,7 @@ Day44 新增 `auto_release_on_start` 欄位的 Green 已撤回封存；[Pet Day4
 
 ## CI／產物／安裝
 
-最新6b34七workflow六成功、一失敗：Persistence analytics-postgres的舊day37登出fixture缺表單／CSRF；同案day39也須更新。隔離fixture修補後PG63通過，未推送產品／未重跑遠端。其餘綠燈不等於完整三平台安裝、同契約新dist、runtime或GUI驗收。測試責任與跨案工程仍獨立追蹤。
+最後來源4b1008b已採用Analytics兩個fixture修正，真PG63通過；CI依[STATUS](teaching/current/STATUS.md)的精確SHA與時間分列success／pending／cancelled。綠燈不代表完整三平台安裝或native GUI。
 
 <a id="event-transport"></a>
 

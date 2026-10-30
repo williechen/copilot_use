@@ -1,6 +1,6 @@
 # 系統架構與責任
 
-唯一產品為 rust_ai_ring，文件與教學為 copilot_use。現行來源 `6b34c42f74fc1585b1b864fb7dd6969318270e0f`；目錄與相依見 [SOURCE_LAYOUT](SOURCE_LAYOUT.md)。以下分層是教學／工程約束，不代表現有所有 handler 已完成搬層。
+唯一產品為 rust_ai_ring，文件與教學為 copilot_use。現行來源 `4b1008b95bc3e170381fcd1db84695e421f036bd`；目錄與相依見 [SOURCE_LAYOUT](SOURCE_LAYOUT.md)。以下分層是教學／工程約束，不代表現有所有 handler 已完成搬層。
 
 <a id="functional-layering"></a>
 
@@ -17,4 +17,4 @@ Delivery→Application→Domain；Adapter 實作內層 Port。Chat 已有 Reposi
 
 測試分純規則／用例、真 DB Adapter、正式 Router／IPC、UI、瀏覽器及 native；不同邊界的有效斷言保留。metadata／check 不替代 DB／GUI；CI 綠燈也不替代產品旅程驗收。待辦見 [FUTURE_WORK](FUTURE_WORK.md)，跨案工作只列 [engineering](engineering/README.md)。
 
-Pet活動r3在隔離候選將現在籠態移到既有pet_activity；Application保留純snapshot補償，Adapter提供精確活動／選取還原，Native與UI逐ID接線。這是已實測文件方案，不能當main已完成搬層；[目前矩陣](teaching/current/STATUS.md)區分兩者。
+Pet活動模型已在main：目前籠態由pet_activity導出，預設沿用既有profile欄位；Application精確snapshot補償，Native與UI逐ID接線。資料舊標籤forward升級r4只在隔離候選，不新增欄位。native視覺旅程仍待驗；見[STATUS](teaching/current/STATUS.md)。

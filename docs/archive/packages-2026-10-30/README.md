@@ -31,3 +31,7 @@
 ## Day44本地驗證修訂前原文
 
 [第十一包](11-day44-validation-superseded-2026-10-30.zip)只存本次被取代、尚未在前十包收錄的27個不同版本；[逐檔blob／SHA256與重複排除](day44-validation-superseded.json)。來源dbde2846fdcad3ce2168ec6852f64dcdd3de9bf6，既有十包hash均未改。Day44現行修訂與完整證據仍保留原檔，因產品完整Gate2未完成。[本次實測](../../source-review/local-validation-2026-10-30-day44/README.md)。
+
+## Day44本地重核分包
+
+[第十二包：前輪6b34完整驗證原始證據](12-previous-day44-validation-2026-10-30.zip)與[第十三包：被本輪取代的現行文章／入口／狀態／patch](13-day44-recheck-superseded-documents-2026-10-30.zip)分開保存；[逐檔原blob／SHA256與去重](day44-recheck-archive.json)。前十一包hash不變；原檔經ZIP內容與SHA256核對後才移除，不重複打包已存在的相同路徑／內容。[最新現況與證據](../../source-review/local-validation-2026-10-30-day44-r2/README.md)。

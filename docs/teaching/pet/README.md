@@ -1,9 +1,5 @@
 # Pet 教學現況
 
-完整活動Green r3已交付，隔離workspace110、Node12、WASM／Trunk與舊SQLite副本升級通過。任一活動true出籠、同交易建立散步／坐下、坐下優先；不新增欄位。產品6b34仍用舊旗標，候選未套用。
+來源`4b1008b`。Pet活動模型已在main；舊中文活動值的forward候選112項與備份副本升級通過。 完整Gate2未完成；next_day三案45，FIFO不變。
 
-[Day44現行全文與完整修補](../daily/day-44/pet.md) · [本次矩陣／命令／失敗與未執行](../../source-review/local-validation-2026-10-30-day44/README.md) · [STATUS](../current/STATUS.md)
-
-接續：使用者套用後以新SHA驗nativeGUI、三隻與真OS故障補償；Pet Day25 FIFO保留。 next_day維持45，完整Gate2未完成。
-
-[需求與待辦](../../FUTURE_WORK.md) · [Day43封存](../daily/day-43/pet-archive.md) · [規則](../../COMMON_LEARNING_RULES.md) · [各案Refactor](../functional-refactoring/PROGRESS.md)
+[Day44 ENTRY](../daily/day-44/ENTRY.md) · [三案正文／附件](../daily/day-44/README.md) · [STATUS](../current/STATUS.md) · [本輪矩陣／命令／未執行](../../source-review/local-validation-2026-10-30-day44-r2/README.md) · [規則](../../COMMON_LEARNING_RULES.md) · [需求／待辦](../../FUTURE_WORK.md) · [來源／啟動](../../SOURCE_LAYOUT.md) · [歷史分包](../../archive/README.md)

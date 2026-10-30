@@ -1,9 +1,9 @@
 # Day44 ENTRY｜Chat → Pet → Analytics
 
-1. [Chat r2](chat.md)：最新main已實作房間存在門檻，SSR／hydrate實測；原附件只供7ce基準重現。
-2. [Pet r3](pet.md)：任意活動true出籠、同交易建立散步／坐下、坐下優先、不加欄位；完整候選patch＋實際Red→Green＋110項與舊SQLite副本升級。
-3. [Analytics r2](analytics.md)：logout CSRF實作已在main；兩個舊fixture補正後PG63通過，遠端CI仍失敗。
+1. [Chat](chat.md)：已存在房間門檻／room_path正式caller，main62、SSR62與hydrate WASM。
+2. [Pet](pet.md)：活動出籠與walk／sit已在main；新增forward舊代碼升級，保留已部署migration checksum，完整112項與備份副本證據。
+3. [Analytics](analytics.md)：logout CSRF與fixture修補已在main，真PG63項通過。
 
-[套用順序／附件](README.md) · [本次驗證與未執行](../../../source-review/local-validation-2026-10-30-day44/README.md) · [精確讀回](revision-verification-2026-10-30.json) · [共用規則](../../../COMMON_LEARNING_RULES.md) · [上一篇](../day-43/README.md)
+[附件與套用前置](README.md) · [原始命令／失敗／重試／未執行](../../../source-review/local-validation-2026-10-30-day44-r2/README.md) · [修訂讀回](recheck-verification-2026-10-30.json) · [共用規則](../../../COMMON_LEARNING_RULES.md)
 
-產品唯讀；候選通過不當產品已套用。next_day三案45、FIFO及last_full_comparison不變；完整Gate2未完成。
+產品唯讀；候選forward未套用產品，完整Gate2=false，next_day45／FIFO／last_full_comparison不變。

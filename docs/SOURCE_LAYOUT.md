@@ -1,6 +1,6 @@
 # 現行來源與目錄
 
-產品 `rust_ai_ring@6b34c42f74fc1585b1b864fb7dd6969318270e0f`；本地 `/home/willie/Documents/rust_ai_ring`。根目錄沒有 Cargo.toml，必須使用各 workspace manifest。
+產品 `rust_ai_ring@4b1008b95bc3e170381fcd1db84695e421f036bd`；本地 `/home/willie/Documents/rust_ai_ring`。根目錄沒有 Cargo.toml，必須使用各 workspace manifest。
 
 | Workspace | package 版本 | 成員／package |
 | --- | --- | --- |
@@ -18,4 +18,4 @@ Analytics：analytics_server/src/main.rs／lib.rs；Leptos Dashboard、Axum HTTP
 
 [啟動](LOCAL_START.md) · [驗證](LOCAL_VALIDATION.md) · [架構](SYSTEM_ARCHITECTURE.md)
 
-最新main的Day44 caller：Chat `chat_server/src/room_auth.rs`呼叫`room_patch.rs`（教學原附件名room_path）；Pet `window_position.rs`供pet_windows找回視窗；Analytics `dashboard_url.rs`供Leptos Dashboard，password_login驗logout CSRF。Pet活動Green r3未在main，新增activity模組／資料migration僅見隔離候選。精確blob見[來源清單](source-review/local-validation-2026-10-30-day44/source-inventory.json)。
+最新main的Day44 caller：Chat room_auth→room_path；Pet pet_windows→window_position，PetStore／Native／UI已接activity模型（walk／sit）；Analytics Dashboard→dashboard_url且logout CSRF／兩個fixture已接通。Pet新forward5只在候選。精確blob見[來源清單](source-review/local-validation-2026-10-30-day44-r2/final-main/source-inventory.json)。

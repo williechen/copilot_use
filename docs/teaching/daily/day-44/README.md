@@ -1,11 +1,11 @@
-# Day44｜三案教學與本地驗證
+# Day44｜目前教學與本地驗證
 
-產品唯讀 `6b34c42f74fc1585b1b864fb7dd6969318270e0f`。Chat／Analytics功能及三案Refactor已在main；Pet活動Green r3只在隔離副本，未套用產品。完整Gate2未完成，文章保留原檔，next_day三案45不變。
+產品唯讀`4b1008b95bc3e170381fcd1db84695e421f036bd`；三案功能與Refactor均已有main實作，Pet另有待套用的forward相容修訂。完整Gate2未完成，保留現行文章原檔；next_day三案45不變。
 
-| 專案 | 現行文章 | 可重現附件與本次結果 |
+| 專案 | 目前正文／附件 | 最後來源實測 |
 | --- | --- | --- |
-| Chat | [r2](chat.md) | 原7ce基準[Refactor](chat-day44-refactor.patch)→[Green](chat-day44-green.patch)→[fmt](chat-day44-format-r1.patch)；最新main62、SSR62、WASM通過 |
-| Pet | [活動Green r3](pet.md) | 最新6b34用[Green r3](pet-day44-activity-green-r3.patch)；原7ce用[Refactor](pet-day44-refactor.patch)→[專用Green](pet-day44-activity-green-r3-after-refactor.patch)，兩Green擇一；候選110、Node12、WASM／Trunk／舊SQLite副本升級通過 |
-| Analytics | [r2](analytics.md) | 最新6b34用[fixture修補](analytics-logout-fixture-fix.patch)；原7ce用[Refactor](analytics-day44-refactor.patch)→[Green](analytics-day44-green.patch)→fixture→[fmt](analytics-day44-format-r1.patch)；候選PG63通過，主分支CI未修 |
+| Chat | [r3](chat.md)；原7ce [Refactor](chat-day44-refactor.patch)→[Green](chat-day44-green.patch)→[fmt](chat-day44-format-r1.patch)僅供原文重現 | main62、SSR62、hydrate WASM |
+| Pet | [r4](pet.md)；最新main只套[forward Green](pet-day44-legacy-code-upgrade-r4.patch)，原[幾何Refactor](pet-day44-refactor.patch)已在main | main110；forward112／Node12／WASM／Trunk／舊SQLite副本升級 |
+| Analytics | [r3](analytics.md)；原7ce [Refactor](analytics-day44-refactor.patch)→[Green](analytics-day44-green.patch)→[fixture](analytics-logout-fixture-fix.patch)→[fmt](analytics-day44-format-r1.patch)僅供原文重現 | main43＋1ignored，真PG63／0ignored；fixture已在4b1008b |
 
-[本次完整證據](../../../source-review/local-validation-2026-10-30-day44/README.md) · [本次精確commit讀回](revision-verification-2026-10-30.json) · [原發布讀回（只屬原版本）](delivery-verification.json) · [ENTRY](ENTRY.md) · [上一篇Day43封存](../day-43/README.md) · [現況](../../current/STATUS.md) · [各案重構](../../functional-refactoring/PROGRESS.md) · [跨案工程](../../../engineering/README.md)
+不要在最新main重複套用已採用的舊Green／Refactor／fixture。[ENTRY](ENTRY.md) · [本輪完整證據](../../../source-review/local-validation-2026-10-30-day44-r2/README.md) · [本次精確commit讀回](recheck-verification-2026-10-30.json) · [前版原文／讀回封存](../../../archive/packages-2026-10-30/13-day44-recheck-superseded-documents-2026-10-30.zip) · [上一篇Day43](../day-43/README.md)
