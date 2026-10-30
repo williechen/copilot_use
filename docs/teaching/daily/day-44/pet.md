@@ -286,10 +286,10 @@ async fn dictionary_id_collision_rolls_back_every_activity_change() {
 
 四workspace manifest／lock未變；本輪rustc／cargo／Node實際版本見[原始命令](../../../source-review/pet-day44-adopted-2026-10-30/commands.json)。沒有升級依賴，未宣稱完整官方最新版本或跨平台MSRV Gate完成。
 
-## ④ 本輪結果與界線
+## ④ Gate2實測更新（2026-10-31）
 
-四workspace metadata、Pet fmt／check／clippy、workspace112、Node12、WASM、合成舊庫與實際SQLite唯讀備份副本升級／冪等、checksum拒絕均通過。既有有效斷言保留；原庫與秘密未寫入或發布。[全部命令、exit、SHA與資料保留證據](../../../source-review/pet-day44-adopted-2026-10-30/README.md)。
+本輪2c7ff8b已完成前端release與原生debug內嵌資產建置，真Tauri／WebKit／私有Xvfb功能25項通過：三隻、位移／坐下、DB失敗保留、Native X、控制台隱藏重開、窄窗、睡覺／醒來及兩次真程序重啟與預設資格。沒有mock IPC或修改產品。既有同SHA112項、Node12／WASM與備份副本證據仍沿原次執行，不重複計功。
 
-新模型native GUI（三隻、真Native X／關控制台、真OS補償、漫遊／多螢幕／併發）仍待驗；本輪沒有重建Trunk、native binary或release。舊A/B人工結果不可追認新模型。完整Gate2=false，FIFO及last_full_comparison不變。
+[本輪完整證據與截圖](../../../source-review/gate2-2026-10-31/README.md) · [25步原始紀錄](../../../source-review/gate2-2026-10-31/pet-gui-checks.json) · [免重編實機腳本](../../../source-review/gate2-2026-10-31/manual-pet.sh)
 
-[需求](../../../requirements/USER_FLOWS.md) · [待辦](../../../FUTURE_WORK.md#pet-lifecycle) · [STATUS](../../current/STATUS.md)
+實際桌面右鍵／拖曳／縮放／多螢幕及真OS開窗失敗仍待驗；已準備獨立手動DB與凍結原生產物，預檢不等於人工通過。整體Gate2另受Chat排除名單與Analytics授權缺口／實際舊PG缺備份阻擋，不能用此25步當完整驗收。next_day45、FIFO、last_full_comparison不變。
