@@ -11,3 +11,5 @@
 不要在最新main重複套用已採用的舊Green／Refactor／fixture。[ENTRY](ENTRY.md) · [本輪完整證據](../../../source-review/local-validation-2026-10-30-day44-r2/README.md) · [本次精確commit讀回](recheck-verification-2026-10-30.json) · [前版原文／讀回封存](../../../archive/packages-2026-10-30/13-day44-recheck-superseded-documents-2026-10-30.zip) · [上一篇Day43](../day-43/README.md)
 
 [Pet本輪採用驗證](../../../source-review/pet-day44-adopted-2026-10-30/README.md) · [Pet本輪讀回](pet-adoption-verification-2026-10-30.json)
+
+[2026-10-31 Gate2實測：原生／瀏覽器已補，逐房ACL驗收失敗](../../../source-review/gate2-2026-10-31/README.md) · [本次三案獨立commit讀回](gate2-delivery-2026-10-31.json)

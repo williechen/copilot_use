@@ -10,4 +10,6 @@
 
 [三案全文與附件](../daily/day-44/README.md) · [原始命令與證據](../../source-review/local-validation-2026-10-30-day44-r2/README.md) · [D01–D09原項目](../../FUTURE_WORK.md#adapter-cleanup)。跨案契約、shared相依及全庫CI只在[engineering](../../engineering/README.md)，不以本案進度抵算G-01／G-02。
 
-[Pet 2c7ff8b採用後最新驗證](../../source-review/pet-day44-adopted-2026-10-30/README.md)；其他案測試保留原4b1008b來源，不追認新SHA。
+[Pet 2c7ff8b採用後最新驗證](../../source-review/pet-day44-adopted-2026-10-30/README.md)；既有Rust單元結果保留4b1008b來源；本輪2c7ff8b原生／瀏覽器新證據另列，不追認舊測試。
+
+[2026-10-31 Gate2原生／HTTP實測與已確認阻擋](../../source-review/gate2-2026-10-31/README.md)；目前完整Gate2=false，不以CI全綠替代逐房／角色授權或缺失的舊庫／實機證據。

@@ -19,4 +19,6 @@ Delivery→Application→Domain；Adapter 實作內層 Port。Chat 已有 Reposi
 
 Pet活動模型已在main：目前籠態由pet_activity導出，預設沿用既有profile欄位；Application精確snapshot補償，Native與UI逐ID接線。資料舊標籤forward升級已在2c7ff8b並以主分支重驗112項，不新增欄位。native視覺旅程仍待驗；見[STATUS](teaching/current/STATUS.md)。
 
-[Pet 2c7ff8b採用後最新驗證](source-review/pet-day44-adopted-2026-10-30/README.md)；其他案測試保留原4b1008b來源，不追認新SHA。
+[Pet 2c7ff8b採用後最新驗證](source-review/pet-day44-adopted-2026-10-30/README.md)；既有Rust單元結果保留4b1008b來源；本輪2c7ff8b原生／瀏覽器新證據另列，不追認舊測試。
+
+[2026-10-31 Gate2原生／HTTP實測與已確認阻擋](source-review/gate2-2026-10-31/README.md)；目前完整Gate2=false，不以CI全綠替代逐房／角色授權或缺失的舊庫／實機證據。

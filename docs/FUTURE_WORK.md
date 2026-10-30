@@ -12,7 +12,7 @@
 
 ## Chat Session／作者／房主與 ACL
 
-首頁 Session 入口決策已存在；WS 持續重驗有既有接線。仍須完成／驗收原房間登入回跳、會員作者、房主、逐房 HTTP／WS ACL、活動 Session 與原子撤銷競態。
+首頁Session入口已存在；2026-10-31在2c7ff8b隔離實測：mbr_exclude排除會員仍HTTP200／WS opened=true，完整逐房授權不通過。WS持續Session重驗不能抵算逐房ACL。仍須完成／驗收原房間登入回跳、會員作者、房主、逐房 HTTP／WS ACL、活動 Session 與原子撤銷競態。
 
 <a id="chat-history"></a>
 
@@ -32,7 +32,7 @@
 
 使用者已確認：以 `pet_activity` 同主人／同寵物的任一 `is_activity=true` 判出籠，不限定散步；全部為 false／無活動才回籠。建立寵物須同交易建立散步與坐下兩筆活動；散步 true 允許漫遊、坐下 true 仍出籠但不漫遊。兩動作切換互斥更新；同時 true 時坐下優先並寫回散步 false，出籠不重複插入同名活動，回籠停止全部活動；不新增狀態或漫遊欄位。`is_default_closure` 僅保留預設語意，不作目前狀態。
 
-目前2c7ff8b已將控制台、Store、Native、關窗及啟動caller切換活動模型，本地Pet112通過。舊中文活動值forward與升級example已在main；[Pet採用後正文](teaching/daily/day-44/pet.md)記錄主分支112、Node12、WASM與實際SQLite唯讀備份副本升級通過，Trunk本輪未重建；保留既有migration checksum。三隻、真Native X、併發、漫遊及故障補償GUI仍待驗；舊A/B不追認新模型。
+目前2c7ff8b已將控制台、Store、Native、關窗及啟動caller切換活動模型，本地Pet112通過。舊中文活動值forward與升級example已在main；[Pet採用後正文](teaching/daily/day-44/pet.md)記錄主分支112、Node12、WASM與實際SQLite唯讀備份副本升級通過，Trunk本輪未重建；保留既有migration checksum。本輪同SHA以私有Xvfb真native跑通三隻、Native X、DB寫入失敗保留、實際位移／坐下、睡覺／醒來與兩次重啟等25步；實機多螢幕／右鍵／縮放及真OS開窗故障仍待驗。舊A/B不追認新模型。
 
 <a id="pet-roaming"></a>
 
@@ -50,7 +50,7 @@
 
 ## Analytics 人員與來源授權
 
-正式查詢採人員 Session，POST 攝取另驗服務身分。角色、Chat／Pet 來源 ACL、停用／縮權立即生效與 SSE 授權仍按需求逐項驗收。
+正式查詢採人員Session，POST攝取另驗服務身分。2026-10-31實際Dashboard仍明示角色／來源ACL尚未接通，完整授權不能列為已驗收。角色、Chat／Pet 來源 ACL、停用／縮權立即生效與 SSE 授權仍按需求逐項驗收。
 
 <a id="analytics-session"></a>
 
@@ -123,3 +123,5 @@ presence、typing、reconnect／queue、streaming、RAG、MCP、Agent、Persona�
 補教依 learning-state.makeup_queue 的既有 FIFO；主體 Red／Green 及同案 Refactor 按既有相依前進，跨案工程只在 [engineering](engineering/README.md)。保留來源測試有效斷言；任何舊原文若有疑義，從分包讀回比對。
 
 [Pet 2c7ff8b採用後最新驗證](source-review/pet-day44-adopted-2026-10-30/README.md)；其他案測試保留原4b1008b來源，不追認新SHA。
+
+[本輪Gate2實測、截圖與失敗重現](source-review/gate2-2026-10-31/README.md)。以上回填原功能，不新增Day／FIFO或以部分通過結案。

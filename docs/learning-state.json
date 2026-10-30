@@ -412,7 +412,7 @@
     "day_advance": false
   },
   "reference_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
-  "reference_scope": "Pet adoption followup: current main112/Node12/WASM/SQLite copy upgrades; other projects tests retained at4b1008b",
+  "reference_scope": "Gate2 2026-10-31 at2c7ff8b: native25, Chat browser11, Analytics browser11; prior Rust tests retain original SHA; full Gate2 incomplete",
   "current_article_paths": {
     "chat": "docs/teaching/daily/day-44/chat.md",
     "pet": "docs/teaching/daily/day-44/pet.md",
@@ -420,7 +420,7 @@
   },
   "teaching_progress": {
     "last_published_day": 44,
-    "last_publication_status": "Day44 Pet forward adopted and main112 verified; full Gate2 incomplete; no Day increment",
+    "last_publication_status": "Day44 Gate2 functional revision; Chat room exclusion failed, Analytics ACL unimplemented, physical desktop and actual old PG pending; no Day increment",
     "next_day": {
       "chat": 45,
       "pet": 45,
@@ -467,6 +467,21 @@
     "local_main_node_passed": 12,
     "local_main_upgrade_verified": true,
     "main_validation": "docs/source-review/pet-day44-adopted-2026-10-30/README.md",
-    "candidate_patch_archive": "docs/archive/packages-2026-10-30/14-pet-day44-before-adoption-2026-10-30.zip"
+    "candidate_patch_archive": "docs/archive/packages-2026-10-30/14-pet-day44-before-adoption-2026-10-30.zip",
+    "native_automation_functional_verified": true,
+    "native_automation_scope": "private Xvfb, real app/IPC, 25 checks; physical desktop not accepted"
+  },
+  "current_gate2": {
+    "source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
+    "evidence": "docs/source-review/gate2-2026-10-31/README.md",
+    "full_gate2": false,
+    "ci_all_seven_success": true,
+    "pet_native_automated_functional_steps": 25,
+    "chat_browser_steps": 11,
+    "analytics_browser_steps": 11,
+    "chat_explicit_room_exclusion_enforced": false,
+    "analytics_roles_source_acl_implemented": false,
+    "actual_old_pg_backup_available": false,
+    "manual_desktop_acceptance": false
   }
 }

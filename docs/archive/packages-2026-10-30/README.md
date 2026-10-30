@@ -39,3 +39,7 @@
 ## Pet forward採用後
 
 [第十四包](14-pet-day44-before-adoption-2026-10-30.zip)封存採用前的候選正文／附件及被取代入口狀態；[逐檔blob／SHA256與去重](pet-day44-adoption-archive.json)。舊候選附件已移除，避免在已採用的main重複套用。前十三包hash未變。[最新採用後證據](../../source-review/pet-day44-adopted-2026-10-30/README.md)。
+
+## Gate2實測更新前版本
+
+[第十五包](15-before-gate2-functional-acceptance-2026-10-31.zip)僅收錄被2026-10-31本輪替代且尚未封存的不同版本；[逐檔blob／SHA256／去重](gate2-2026-10-31-archive.json)。前十四包不變，歷史原文不回寫。[最新Gate2結果](../../source-review/gate2-2026-10-31/README.md)有成功、失敗及未執行，不當完整通過。

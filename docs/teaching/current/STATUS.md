@@ -1,18 +1,19 @@
-# 目前教學與驗證狀態
+# 目前教學與驗收狀態
 
-最新產品`2c7ff8b861d32ab6d879bf80c9f2dce50de38097`已採用Pet forward。只認各自受測SHA，不將未變動專案的舊測試追認新SHA。
+產品`2c7ff8b861d32ab6d879bf80c9f2dce50de38097`。2026-10-31已補真原生／HTTP／瀏覽器與DB重啟驗證；**完整Gate2尚未通過，包含一個已實測失敗的房間授權條件**。
 
-| 範圍 | 結果與來源 | 界線 |
+| 範圍 | 真實結果 | 界線 |
 | --- | --- | --- |
-| 四workspace metadata | 2c7ff8b locked／no-deps通過 | 不代替完整測試 |
-| Pet | **2c7ff8b main112**、fmt／check／clippy、Node12、WASM通過 | 新模型native GUI未驗 |
-| Pet升級 | 2c7ff8b合成及實際SQLite唯讀backup副本、冪等／checksum拒絕通過 | 原DB未寫，原四版migration不改 |
-| Chat／crates | 4b1008b Chat62／SSR62／hydrate WASM；crates8 | tree與2c7ff8b相同，但未重跑這些測試 |
-| Analytics | 4b1008b一般43＋1ignored、真PG63 | tree未變，未重跑；實際舊PG無備份 |
-| 最新CI snapshot | {"in_progress": 2, "success": 5}，來源2c7ff8b | [時間／workflow](ci.json)，in_progress不當通過 |
+| CI | 本SHA七workflow全部success | 未重跑CI，不抵算GUI |
+| Pet | 本輪前端release＋原生debug內嵌資產，25個真native／IPC功能步驟通過 | 私有Xvfb軟體繪圖；實際桌面／多螢幕等未驗 |
+| Chat切片 | 本SHA真browser／HTTP11步，包括404／503、註冊回跳與重啟 | 存在檢查通過，不代表逐房ACL |
+| Chat逐房ACL | **失敗：排除會員仍HTTP200且WS可連** | [重現](../../source-review/gate2-2026-10-31/chat-room-acl-acceptance.json)，需產品修正後以新SHA驗收 |
+| Analytics切片 | 本SHA真browser／PG11步，兩頁CSRF、撤銷／重放與重啟通過 | 角色／來源ACL尚未接通 |
+| SQLite／舊PG | Chat既有庫唯讀備份副本啟動相容及保資料通過；Pet既有同SHA副本證據保留 | Chat觀測仍9版，不宣稱新增migration；實際舊PG備份未提供 |
+| 原Rust測試來源 | Pet112屬2c7ff8b前次實測；Chat62／SSR62、Analytics43＋1ignored／PG63、crates8屬4b1008b | 本輪不重跑／追認／重複加總 |
 
-[Pet最新命令／SHA／checksum／資料保留](../../source-review/pet-day44-adopted-2026-10-30/README.md) · [4b1008b完整矩陣](../../source-review/local-validation-2026-10-30-day44-r2/README.md) · [Day44正文](../daily/day-44/README.md) · [Pet精確讀回](../daily/day-44/pet-adoption-verification-2026-10-30.json)
+[本輪完整證據／截圖／精確方法](../../source-review/gate2-2026-10-31/README.md) · [機器狀態](validation.json) · [三案現行文章](../daily/day-44/README.md) · [本次讀回](../daily/day-44/gate2-delivery-2026-10-31.json)
 
-舊候選檔尾換行與main不同，SQLx checksum也不同；以main原檔驗證，不改已部署migration。新模型native GUI／三隻／Native X／真OS補償／漫遊、完整瀏覽器旅程、native binary／release／三平台安裝、實際舊PG還原、完整官方版本／MSRV Gate仍待驗。本輪沒有重建Trunk，舊dev建置結果只屬原SHA。
+待完成條件：修補Chat逐房HTTP／WS授權、完成Analytics角色／來源授權；提供實際舊PG備份／來源版本；驗實際桌面右鍵、拖曳、縮放／背景、多螢幕、真OS開窗故障及native release／三平台安裝。完整版本／MSRV Gate仍未全量核對。[實機免重編腳本](../../source-review/gate2-2026-10-31/manual-pet.sh)已預檢，未算人工通過。
 
-完整Gate2=false；next_day三案45、FIFO、last_full_comparison=`2026-10-16T22:47:14.399027+08:00`不變。[FUTURE_WORK](../../FUTURE_WORK.md)。
+next_day三案45、FIFO、last_full_comparison=`2026-10-16T22:47:14.399027+08:00`不變。這是當前功能的增量驗收，非已完成的全面比對。[既有FUTURE_WORK](../../FUTURE_WORK.md)。

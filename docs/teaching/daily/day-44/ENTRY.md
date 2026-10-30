@@ -7,3 +7,5 @@
 [附件與套用前置](README.md) · [原始命令／失敗／重試／未執行](../../../source-review/local-validation-2026-10-30-day44-r2/README.md) · [修訂讀回](recheck-verification-2026-10-30.json) · [共用規則](../../../COMMON_LEARNING_RULES.md)
 
 產品唯讀；Pet forward已採用，完整Gate2=false，next_day45／FIFO／last_full_comparison不變。
+
+[2026-10-31 Gate2實測：原生／瀏覽器已補，逐房ACL驗收失敗](../../../source-review/gate2-2026-10-31/README.md) · [本次三案獨立commit讀回](gate2-delivery-2026-10-31.json)

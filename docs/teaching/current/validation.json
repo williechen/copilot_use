@@ -1,28 +1,52 @@
 {
   "latest_product_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
-  "latest_followup": "docs/source-review/pet-day44-adopted-2026-10-30/README.md",
-  "pet": {
-    "source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
-    "workspace_passed": 112,
-    "node_passed": 12,
-    "wasm": true,
-    "metadata_fmt_check_clippy": true,
-    "upgrade_actual_readonly_backup_copy": true,
-    "checksum_rejected": true,
-    "native_gui": false,
-    "trunk_rebuilt_this_followup": false
-  },
-  "metadata_four_workspaces": true,
-  "other_test_results": {
-    "source_sha": "4b1008b95bc3e170381fcd1db84695e421f036bd",
-    "evidence": "docs/source-review/local-validation-2026-10-30-day44-r2/README.md",
-    "tree_unchanged_vs_latest": true,
-    "reexecuted_this_followup": false
-  },
-  "ci": {
-    "in_progress": 2,
-    "success": 5
+  "current_gate2": {
+    "product_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
+    "client_date": "2026-10-31",
+    "timezone": "Asia/Taipei",
+    "full_gate2": false,
+    "day44_feature_slices": "local functional evidence added; not full product acceptance",
+    "ci": {
+      "source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
+      "success": 7,
+      "in_progress": 0,
+      "rerun_by_agent": false
+    },
+    "pet": {
+      "native_functional_checks": 25,
+      "headless_xvfb": true,
+      "mock_ipc": false,
+      "frontend_release_built": true,
+      "native_debug_custom_protocol_built": true,
+      "physical_desktop_acceptance": false
+    },
+    "chat": {
+      "browser_checks": 11,
+      "existing_sqlite_backup_startup_compatible": true,
+      "new_migration_application_proven": false,
+      "explicit_exclusion_http_actual": 200,
+      "explicit_exclusion_ws_opened": true,
+      "room_acl_acceptance": false
+    },
+    "analytics": {
+      "browser_checks": 11,
+      "real_isolated_pg": true,
+      "roles_source_acl_implemented": false,
+      "actual_old_pg_backup_provided": false
+    },
+    "new_cleanup_allocated_bytes": 4672729088,
+    "formal_databases_written": false,
+    "source_commits_or_pushes": false,
+    "next_day_unchanged": {
+      "chat": 45,
+      "pet": 45,
+      "analytics": 45
+    }
   },
   "full_gate2": false,
-  "new_cleanup_bytes": 0
+  "evidence": "docs/source-review/gate2-2026-10-31/README.md",
+  "legacy_unit_test_sources": {
+    "pet": "2c7ff8b prior112; not rerun this GUI/HTTP session",
+    "chat_analytics_crates": "4b1008b; not reassigned"
+  }
 }

@@ -12,6 +12,8 @@ Chat 使用 CHAT_DATABASE_URL，Pet 使用 PET_DATABASE_URL，Analytics 使用 A
 
 啟動成功不代表完整驗收。[驗證與限制](LOCAL_VALIDATION.md) · [現況](teaching/current/STATUS.md)
 
-Day44活動已在main。舊中文活動值的forward已在main；驗收migration仍只在SQLite備份副本執行，不修改已部署migration checksum；散步仍受既有PET_ENABLE_ROAM opt-in及runtime暫停條件限制。Trunk建置須匹配lock的wasm-bindgen；本輪dev build成功，不等於native binary／GUI／release。見[真實命令](source-review/local-validation-2026-10-30-day44-r2/README.md)。
+Day44活動已在main。舊中文活動值的forward已在main；驗收migration仍只在SQLite備份副本執行，不修改已部署migration checksum；散步仍受既有PET_ENABLE_ROAM opt-in及runtime暫停條件限制。Trunk建置須匹配lock的wasm-bindgen；2026-10-31已建置前端release與原生debug，25項隔離原生功能檢查通過；實體桌面與原生release／安裝包仍未驗。見[真實命令](source-review/local-validation-2026-10-30-day44-r2/README.md)。
 
-[Pet 2c7ff8b採用後最新驗證](source-review/pet-day44-adopted-2026-10-30/README.md)；其他案測試保留原4b1008b來源，不追認新SHA。
+[Pet 2c7ff8b採用後最新驗證](source-review/pet-day44-adopted-2026-10-30/README.md)；既有Rust單元結果保留4b1008b來源；本輪2c7ff8b原生／瀏覽器新證據另列，不追認舊測試。
+
+[2026-10-31 Gate2原生／HTTP實測與已確認阻擋](source-review/gate2-2026-10-31/README.md)；目前完整Gate2=false，不以CI全綠替代逐房／角色授權或缺失的舊庫／實機證據。

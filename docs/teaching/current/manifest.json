@@ -1,5 +1,5 @@
 {
-  "scope": "current Day44 rechecked against final4b1008b; previous validation and revision evidence ZIP-only",
+  "scope": "Gate2 2026-10-31 at2c7ff8b: native25, Chat browser11, Analytics browser11; prior Rust tests retain original SHA; full Gate2 incomplete",
   "publication_branch": "main",
   "source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
   "next_day": {
@@ -110,13 +110,13 @@
     {
       "project": "chat",
       "day": 44,
-      "revision": "r3-final-source-validation",
+      "revision": "gate2-functional-verification-2026-10-31",
       "article_path": "docs/teaching/daily/day-44/chat.md",
-      "source_sha": "4b1008b95bc3e170381fcd1db84695e421f036bd",
-      "publication_status": "revised_local_validation_full_gate2_incomplete",
+      "source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
+      "publication_status": "published_revision_full_gate2_incomplete",
       "refactor_patch": "docs/teaching/daily/day-44/chat-day44-refactor.patch",
       "green_patch": "docs/teaching/daily/day-44/chat-day44-green.patch",
-      "evidence": "docs/teaching/daily/day-44/recheck-verification-2026-10-30.json",
+      "evidence": "docs/teaching/daily/day-44/gate2-delivery-2026-10-31.json",
       "functional_acceptance": false,
       "gate2": false,
       "product_applied": true,
@@ -143,28 +143,30 @@
       },
       "gate1_complete": false,
       "version_msrv_gate_complete": false,
-      "revision_evidence": "docs/teaching/daily/day-44/recheck-verification-2026-10-30.json",
+      "revision_evidence": "docs/teaching/daily/day-44/gate2-delivery-2026-10-31.json",
       "local_revision_content_complete": true,
       "previous_revision": {
-        "article_commit": "957bbe4d22b6c4341dea87271e00cf4b40e6bb7f",
-        "blob_sha": "5f270b93fa134f7f82b948c414b5d2df04d5630b",
-        "sha256": "a8fcc2ee4d9bd84922813a872b8be47af4dd2f52057d3f03b552241a0dccaac2",
-        "archive": "docs/archive/packages-2026-10-30/13-day44-recheck-superseded-documents-2026-10-30.zip"
+        "article_commit": "c8c1e2072c61146f0397e57acc7a3793c893a392",
+        "blob_sha": "14fae748675efb6ba222805f5337c19a0bbea26b",
+        "sha256": "6acdbc68a97ece1da8182c272b1c914debe2ec9aaaaac84077112091919ea6cd",
+        "archive": "docs/archive/packages-2026-10-30/15-before-gate2-functional-acceptance-2026-10-31.zip"
       },
-      "article_commit": "c8c1e2072c61146f0397e57acc7a3793c893a392",
-      "blob_sha": "14fae748675efb6ba222805f5337c19a0bbea26b",
-      "sha256": "6acdbc68a97ece1da8182c272b1c914debe2ec9aaaaac84077112091919ea6cd",
-      "exact_commit_readback": true,
+      "gate2_scope_status": "Day44 existence/browser slice passed; full room exclusion HTTP/WS failed",
+      "blob_sha": "2ecbe050072393f779e5247e3e12c1b29f7f91ad",
+      "sha256": "a9582de15c9d0a0c5964af6b4baddd1fcb1282655e274670e0bb52b64d07b0e5",
       "remote_full_text_equal": true,
-      "remote_revision_evidence": "docs/teaching/daily/day-44/recheck-remote-verification-2026-10-30.json"
+      "exact_commit_readback": true,
+      "article_commit": "4326d96e5731ab4e923c9b0d6d1b297bd669925e",
+      "patch_base_sha": "7ce39f0166a2120539e5908b33c88322a930c35a",
+      "patch_application": "historical reproduction; already adopted in current product; do not reapply"
     },
     {
       "project": "pet",
       "day": 44,
-      "revision": "r4-adopted-main-verification",
+      "revision": "gate2-functional-verification-2026-10-31",
       "article_path": "docs/teaching/daily/day-44/pet.md",
       "source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
-      "publication_status": "revised_local_validation_full_gate2_incomplete",
+      "publication_status": "published_revision_full_gate2_incomplete",
       "gate1_complete": false,
       "functional_acceptance": false,
       "gate2": false,
@@ -193,33 +195,33 @@
       },
       "superseded_archive": "docs/archive/packages-2026-10-30/08-pet-activity-contract-superseded-2026-10-30.zip",
       "version_msrv_gate_complete": false,
-      "revision_evidence": "docs/teaching/daily/day-44/pet-adoption-verification-2026-10-30.json",
+      "revision_evidence": "docs/teaching/daily/day-44/gate2-delivery-2026-10-31.json",
       "local_revision_content_complete": true,
       "previous_revision": {
-        "article_commit": "51727532560551120d7b617f135bc81d6546f188",
-        "blob_sha": "4cde5508eb716fdedbe1ac0bd7949ee30f085d96",
-        "sha256": "d4589aa6271a89d741ed9b0ba2fdf872fc1e37f7ac949e58ad77dd2a59192a2e",
-        "archive": "docs/archive/packages-2026-10-30/14-pet-day44-before-adoption-2026-10-30.zip"
+        "article_commit": "f98bcaf6eebe0acd9a1bfb3064be1abd55c0e4ab",
+        "blob_sha": "e573ae357d907a5b31f236b72e2c3d60ef98eba7",
+        "sha256": "b6dae1966d45dd9268860f40b3c582805115bbfae5fb8ccd4cc61a69156226ec",
+        "archive": "docs/archive/packages-2026-10-30/15-before-gate2-functional-acceptance-2026-10-31.zip"
       },
-      "evidence": "docs/teaching/daily/day-44/pet-adoption-verification-2026-10-30.json",
+      "evidence": "docs/teaching/daily/day-44/gate2-delivery-2026-10-31.json",
       "base_activity_model_applied": true,
-      "article_commit": "f98bcaf6eebe0acd9a1bfb3064be1abd55c0e4ab",
-      "blob_sha": "e573ae357d907a5b31f236b72e2c3d60ef98eba7",
-      "sha256": "b6dae1966d45dd9268860f40b3c582805115bbfae5fb8ccd4cc61a69156226ec",
-      "exact_commit_readback": true,
+      "gate2_scope_status": "25 automated native functional checks passed; real desktop and OS-failure scopes incomplete",
+      "blob_sha": "d51fabe93b30ed8a830e07684ee79a47d33042bc",
+      "sha256": "8b932f34cf1ee118ed528e868247c09b1484dbb5b297cad1675457856b106fe8",
       "remote_full_text_equal": true,
-      "remote_revision_evidence": "docs/teaching/daily/day-44/pet-adoption-remote-verification-2026-10-30.json"
+      "exact_commit_readback": true,
+      "article_commit": "1fac8f349823b672301c31cbf71f6af46f4c585b"
     },
     {
       "project": "analytics",
       "day": 44,
-      "revision": "r3-final-source-validation",
+      "revision": "gate2-functional-verification-2026-10-31",
       "article_path": "docs/teaching/daily/day-44/analytics.md",
-      "source_sha": "4b1008b95bc3e170381fcd1db84695e421f036bd",
-      "publication_status": "revised_local_validation_full_gate2_incomplete",
+      "source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
+      "publication_status": "published_revision_full_gate2_incomplete",
       "refactor_patch": "docs/teaching/daily/day-44/analytics-day44-refactor.patch",
       "green_patch": "docs/teaching/daily/day-44/analytics-day44-green.patch",
-      "evidence": "docs/teaching/daily/day-44/recheck-verification-2026-10-30.json",
+      "evidence": "docs/teaching/daily/day-44/gate2-delivery-2026-10-31.json",
       "functional_acceptance": false,
       "gate2": false,
       "product_applied": true,
@@ -246,21 +248,23 @@
       },
       "gate1_complete": false,
       "version_msrv_gate_complete": false,
-      "revision_evidence": "docs/teaching/daily/day-44/recheck-verification-2026-10-30.json",
+      "revision_evidence": "docs/teaching/daily/day-44/gate2-delivery-2026-10-31.json",
       "local_revision_content_complete": true,
       "previous_revision": {
-        "article_commit": "82a0550e9d20d9c7b86e6fa3471b94ae4a14ca4b",
-        "blob_sha": "e05e1bc3d442d291954f37cd5ef1a5065dd2ce93",
-        "sha256": "ce213a4175ed54d5e6b3b79e489f2a30526d4d4b673bdb4f4f19706081fea2a3",
-        "archive": "docs/archive/packages-2026-10-30/13-day44-recheck-superseded-documents-2026-10-30.zip"
+        "article_commit": "85f4f7f207bac615be2794c302a3d9ae9044fb2a",
+        "blob_sha": "1cb58e8ea7925a5e5c7b14bd5fe7d4610ccd84e6",
+        "sha256": "4467c28dd1b10896352ecd2326adcb8fdf369625b4a8c011993ce1b4d0a65c34",
+        "archive": "docs/archive/packages-2026-10-30/15-before-gate2-functional-acceptance-2026-10-31.zip"
       },
       "fixture_correction_applied": true,
-      "article_commit": "85f4f7f207bac615be2794c302a3d9ae9044fb2a",
-      "blob_sha": "1cb58e8ea7925a5e5c7b14bd5fe7d4610ccd84e6",
-      "sha256": "4467c28dd1b10896352ecd2326adcb8fdf369625b4a8c011993ce1b4d0a65c34",
-      "exact_commit_readback": true,
+      "gate2_scope_status": "Day44 browser/logout slice passed; role/source ACL not connected; no actual old PG backup",
+      "blob_sha": "62a5b69cc900aec73ecc7f4b74b00773692b9b0f",
+      "sha256": "f6008a0691b808acaf68c57fdf82622f04d139eb947d18b77c93835d335b2166",
       "remote_full_text_equal": true,
-      "remote_revision_evidence": "docs/teaching/daily/day-44/recheck-remote-verification-2026-10-30.json"
+      "exact_commit_readback": true,
+      "article_commit": "453ce46b6ada65f750eef194efa7a970b69bc122",
+      "patch_base_sha": "7ce39f0166a2120539e5908b33c88322a930c35a",
+      "patch_application": "historical reproduction; already adopted in current product; do not reapply"
     }
   ],
   "current_article_paths": {
@@ -308,6 +312,13 @@
     "local_main_node_passed": 12,
     "local_main_upgrade_verified": true,
     "main_validation": "docs/source-review/pet-day44-adopted-2026-10-30/README.md",
-    "candidate_patch_archive": "docs/archive/packages-2026-10-30/14-pet-day44-before-adoption-2026-10-30.zip"
+    "candidate_patch_archive": "docs/archive/packages-2026-10-30/14-pet-day44-before-adoption-2026-10-30.zip",
+    "native_automation_functional_verified": true,
+    "native_automation_scope": "private Xvfb, real app/IPC, 25 checks; physical desktop not accepted"
+  },
+  "current_gate2": {
+    "source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
+    "complete": false,
+    "evidence": "docs/source-review/gate2-2026-10-31/README.md"
   }
 }

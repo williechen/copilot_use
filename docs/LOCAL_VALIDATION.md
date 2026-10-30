@@ -1,6 +1,6 @@
 # 本地驗證
 
-[目前結果與精確 SHA](teaching/current/STATUS.md) 是唯一狀態入口。本頁保留重現方式，執行前重新核對來源、lock、工具與環境；Day44本次已按精確SHA實跑，結果與未執行項見[本次證據](source-review/local-validation-2026-10-30-day44-r2/README.md)。
+[目前結果與精確 SHA](teaching/current/STATUS.md) 是唯一狀態入口。本頁保留重現方式，執行前重新核對來源、lock、工具與環境；最新Gate2功能步驟與阻擋見[2026-10-31證據](source-review/gate2-2026-10-31/README.md)；以下命令是重現方式，不表示本輪全部重跑。
 
 每個 workspace 分別執行 `cargo metadata --locked --no-deps --format-version 1`、`cargo fmt --all -- --check`、`cargo check --locked --workspace`、`cargo clippy --locked --workspace`、`cargo test --locked --workspace`；或以 `--manifest-path <workspace>/Cargo.toml` 指定。Clippy exit 0 不代表零警告；0 tests 不當功能通過。
 
@@ -12,4 +12,6 @@ Chat 必須額外執行 `cargo test --locked -p chat-server -p chat-persistence 
 
 Analytics務必`--no-fail-fast -- --include-ignored`揭露所有PG目標；最後4b1008b已採用day37／39登出fixture修正，主分支PG63通過。若多clone共用target，切回不同local crate來源需強制重建並核對編譯來源；本次已保存錯用舊依賴的編譯失敗及修正重試，不將其當功能Red。
 
-[Pet 2c7ff8b採用後最新驗證](source-review/pet-day44-adopted-2026-10-30/README.md)；其他案測試保留原4b1008b來源，不追認新SHA。
+[Pet 2c7ff8b採用後最新驗證](source-review/pet-day44-adopted-2026-10-30/README.md)；既有Rust單元結果保留4b1008b來源；本輪2c7ff8b原生／瀏覽器新證據另列，不追認舊測試。
+
+[2026-10-31 Gate2原生／HTTP實測與已確認阻擋](source-review/gate2-2026-10-31/README.md)；目前完整Gate2=false，不以CI全綠替代逐房／角色授權或缺失的舊庫／實機證據。
