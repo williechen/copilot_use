@@ -1,10 +1,10 @@
 # Chat Day44｜登入後只允許進入真正存在的聊天室
 
-> 2026-10-30 本地驗證修訂 r2。最新產品唯讀 `6b34c42f74fc1585b1b864fb7dd6969318270e0f`；下列原 Refactor／Green 程式保留 `7ce39f0166a2120539e5908b33c88322a930c35a` 重現基準。最新 main 已有對應功能，不重複套用。next_day 已是45，不再加 Day。原發布版本與讀回保留於封存。
+> 2026-10-30 本地驗證修訂 r3。最新產品唯讀 `4b1008b95bc3e170381fcd1db84695e421f036bd`；下列原 Refactor／Green 程式保留 `7ce39f0166a2120539e5908b33c88322a930c35a` 重現基準。最新 main 已有對應功能，不重複套用。next_day 已是45，不再加 Day。原發布版本與讀回保留於封存。
 
 ## 本次本地結果
 
-最新主分支已實作存在房間門檻；一般／SSR各62項通過、WASM通過。原文重現與最新 caller 的 `room_path`／`room_patch` 命名不同。 [四workspace、真套用、原始命令及阻塞](../../../source-review/local-validation-2026-10-30-day44/README.md)。原發布全文以ZIP保存，原交付讀回不能冒認本次修訂；完整Gate2未完成。
+最新主分支已實作存在房間門檻；一般／SSR各62項通過、WASM通過。最新正式caller已改名為`room_path`，與原教學命名一致。 [四workspace、真套用、原始命令及阻塞](../../../source-review/local-validation-2026-10-30-day44-r2/README.md)。原發布全文以ZIP保存，原交付讀回不能冒認本次修訂；完整Gate2未完成。
 
 ## ① 目標、缺口與正式呼叫鏈
 
@@ -75,7 +75,7 @@ new file mode 100644
 +}
 ```
 
-Refactor 已在原文基準真套用；合成後加 [fmt 修補](chat-day44-format-r1.patch)，SSR server lib29、UI21通過；最新 main 的 `room_patch`＋`room_auth` 已納入62項 SSR 回歸。`room_path` 是原附件的模組名，不是最新 main 路徑。下一步為本案 Session SQL／Repository 錯誤與 fixture 分層，維持401／403／503差異。
+Refactor 已在原文基準真套用；合成後加 [fmt 修補](chat-day44-format-r1.patch)，SSR server lib29、UI21通過；最新main的`room_path`＋`room_auth` 已納入62項 SSR 回歸。最新main已採用`room_path`；原附件仍只用於7ce重現。下一步為本案 Session SQL／Repository 錯誤與 fixture 分層，維持401／403／503差異。
 
 ## ② Red → 完整 Green（核心預估 15 分鐘；實際未計時）
 
