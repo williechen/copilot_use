@@ -1,0 +1,14 @@
+{
+  "git_transport_failures": [
+    "SSH Permission denied (publickey)",
+    "HTTPS terminal prompts disabled: username unavailable",
+    "remote fatal error in commit_refs"
+  ],
+  "connected_github_permissions_push": true,
+  "commit_objects_received_by_remote": true,
+  "first_ref_update_error": "GitHub GraphQL server error 47D0:15797E:22984:36475:6AE4A928",
+  "retry_after_rereading_remote_head": true,
+  "expected_parent": "3c42a10781c00f7cf84d4ead8c062f635ddf16e7",
+  "successful_normal_fast_forward": "a079baa8629e7c2aefbbf6359d3bd9318beec64f",
+  "force": false
+}

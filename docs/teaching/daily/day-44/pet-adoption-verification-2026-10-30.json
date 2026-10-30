@@ -6,7 +6,7 @@
   "sha256": "b6dae1966d45dd9268860f40b3c582805115bbfae5fb8ccd4cc61a69156226ec",
   "local_exact_commit_readback": true,
   "full_gate2": false,
-  "remote_readback": "pending push and exact-ref GitHub full-content readback",
+  "remote_readback": "docs/teaching/daily/day-44/pet-adoption-remote-verification-2026-10-30.json",
   "commits": [
     {
       "repo": "williechen/copilot_use",
@@ -308,5 +308,6 @@
         }
       ]
     }
-  ]
+  ],
+  "remote_full_text_equal": true
 }

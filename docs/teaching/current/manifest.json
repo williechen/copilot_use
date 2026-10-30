@@ -206,7 +206,9 @@
       "article_commit": "f98bcaf6eebe0acd9a1bfb3064be1abd55c0e4ab",
       "blob_sha": "e573ae357d907a5b31f236b72e2c3d60ef98eba7",
       "sha256": "b6dae1966d45dd9268860f40b3c582805115bbfae5fb8ccd4cc61a69156226ec",
-      "exact_commit_readback": true
+      "exact_commit_readback": true,
+      "remote_full_text_equal": true,
+      "remote_revision_evidence": "docs/teaching/daily/day-44/pet-adoption-remote-verification-2026-10-30.json"
     },
     {
       "project": "analytics",

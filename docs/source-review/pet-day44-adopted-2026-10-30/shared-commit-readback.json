@@ -1,0 +1,202 @@
+{
+  "repo": "williechen/copilot_use",
+  "branch": "main",
+  "expected_parent": "f98bcaf6eebe0acd9a1bfb3064be1abd55c0e4ab",
+  "commit": "a079baa8629e7c2aefbbf6359d3bd9318beec64f",
+  "message": "docs: synchronize adopted Pet status and preserve other source scopes",
+  "readback_utc": "2026-10-30T14:23:58.118047+00:00",
+  "files": [
+    {
+      "path": "README.md",
+      "operation": "write",
+      "blob_sha": "8057791c9ff83895480b1c4215f276d2f6d8a576",
+      "sha256": "49ed326a76a69e046d14bf11c9c97afc4e9a5aae9b9367606d55463f646bc047",
+      "readback_ref": "a079baa8629e7c2aefbbf6359d3bd9318beec64f",
+      "full_bytes_equal": true
+    },
+    {
+      "path": "docs/FUTURE_WORK.md",
+      "operation": "write",
+      "blob_sha": "2948bd6a5152225c0d4100cbdd00b22a8977b020",
+      "sha256": "7f478ca0d75891c34728d6a09302e9655d06520d70971c66cd4adb2f1c5e622c",
+      "readback_ref": "a079baa8629e7c2aefbbf6359d3bd9318beec64f",
+      "full_bytes_equal": true
+    },
+    {
+      "path": "docs/LOCAL_START.md",
+      "operation": "write",
+      "blob_sha": "1a7f787f7658d79e2ef087e30de08f17df369d10",
+      "sha256": "1177fadde3b3e3611358b33d5f63fd69d833bc29d70878f0113eaa0381754e18",
+      "readback_ref": "a079baa8629e7c2aefbbf6359d3bd9318beec64f",
+      "full_bytes_equal": true
+    },
+    {
+      "path": "docs/LOCAL_VALIDATION.md",
+      "operation": "write",
+      "blob_sha": "2b7b87166c8d1df36e24915602f0e3bdd6de7841",
+      "sha256": "910a683ac420366d91be4db2269d5f954077ae7f8c7a2aa13e3991ec923813ae",
+      "readback_ref": "a079baa8629e7c2aefbbf6359d3bd9318beec64f",
+      "full_bytes_equal": true
+    },
+    {
+      "path": "docs/README.md",
+      "operation": "write",
+      "blob_sha": "7f21b413f3e7779ae76f0234967940513b153fee",
+      "sha256": "ef0ff42fa7eb660d9a24fe18d603118e981ddb4ec2fbe5f999c0e0415ae57b77",
+      "readback_ref": "a079baa8629e7c2aefbbf6359d3bd9318beec64f",
+      "full_bytes_equal": true
+    },
+    {
+      "path": "docs/SOURCE_LAYOUT.md",
+      "operation": "write",
+      "blob_sha": "5405757752bbb6819e25fd9b57b78963e3ca5192",
+      "sha256": "dfc141737a2c26a5cda6a27522e578b839b8bdfded8111b7b8547507c824b584",
+      "readback_ref": "a079baa8629e7c2aefbbf6359d3bd9318beec64f",
+      "full_bytes_equal": true
+    },
+    {
+      "path": "docs/SYSTEM_ARCHITECTURE.md",
+      "operation": "write",
+      "blob_sha": "97989806b0fc75269079c9fbf84afa1fd3f8a2b0",
+      "sha256": "999487ce20aa0fc6df1c10657870ddbc2ec36572017256d29cd85ab85bf64ca5",
+      "readback_ref": "a079baa8629e7c2aefbbf6359d3bd9318beec64f",
+      "full_bytes_equal": true
+    },
+    {
+      "path": "docs/archive/packages-2026-10-30/README.md",
+      "operation": "write",
+      "blob_sha": "4552a0a329d428fe29cc606928a495c88d7869da",
+      "sha256": "c80b0ed0c3d0c467ac6e851d2b7bfc9f0be7fcf1507d5848b1336130b4fbff81",
+      "readback_ref": "a079baa8629e7c2aefbbf6359d3bd9318beec64f",
+      "full_bytes_equal": true
+    },
+    {
+      "path": "docs/archive/packages-2026-10-30/current-files.json",
+      "operation": "write",
+      "blob_sha": "59c29ea1b5bf37d8adb5d131948c01b54d839cb5",
+      "sha256": "257f562c3c5e4c0ed105cbbc069b77d411954492b0a410f38ef233470ed408ca",
+      "readback_ref": "a079baa8629e7c2aefbbf6359d3bd9318beec64f",
+      "full_bytes_equal": true
+    },
+    {
+      "path": "docs/learning-state.json",
+      "operation": "write",
+      "blob_sha": "a384530da10a17e2396ed3c019f58f1dbb2adc3e",
+      "sha256": "0a269cff9d663ad49d71e94bcd2c095262751f54c90317359079aa7c03512bd8",
+      "readback_ref": "a079baa8629e7c2aefbbf6359d3bd9318beec64f",
+      "full_bytes_equal": true
+    },
+    {
+      "path": "docs/teaching/README.md",
+      "operation": "write",
+      "blob_sha": "a8888a01f7dd20e24f58b9b7ed0b2d91cd6bd6ec",
+      "sha256": "00527f4eea61099b37b8c2227d0acd96f193788ff8fed7a5c342d2f11bd357c5",
+      "readback_ref": "a079baa8629e7c2aefbbf6359d3bd9318beec64f",
+      "full_bytes_equal": true
+    },
+    {
+      "path": "docs/teaching/analytics/README.md",
+      "operation": "write",
+      "blob_sha": "7c0869d8ad98a7e28fdf74e6e931021124c20e7f",
+      "sha256": "a17f2f9469a2da7cd6c1a872e4211a9754ed931a39a7132836022e69f134b4de",
+      "readback_ref": "a079baa8629e7c2aefbbf6359d3bd9318beec64f",
+      "full_bytes_equal": true
+    },
+    {
+      "path": "docs/teaching/chat/README.md",
+      "operation": "write",
+      "blob_sha": "67cff8dd39168d31fde6d9a0d078eebee159361b",
+      "sha256": "575c80e2d00364598b7246bb9462d0571fa6d1cad889f787994136668867f6a0",
+      "readback_ref": "a079baa8629e7c2aefbbf6359d3bd9318beec64f",
+      "full_bytes_equal": true
+    },
+    {
+      "path": "docs/teaching/current/README.md",
+      "operation": "write",
+      "blob_sha": "a5ee73d625f88e630cd25538d5409e71485c9b2e",
+      "sha256": "c4885f047c476afaf09aad07dc7bd72cc40b8d1c35ae835f0f4660fba58b16f3",
+      "readback_ref": "a079baa8629e7c2aefbbf6359d3bd9318beec64f",
+      "full_bytes_equal": true
+    },
+    {
+      "path": "docs/teaching/current/STATUS.md",
+      "operation": "write",
+      "blob_sha": "6f16ff4c0a606403c293719e77c28f74e44aa4a2",
+      "sha256": "f585a02a4a6112b3a0e25746e2cfb64dec954e4560e9c61b7dde6134e11f9919",
+      "readback_ref": "a079baa8629e7c2aefbbf6359d3bd9318beec64f",
+      "full_bytes_equal": true
+    },
+    {
+      "path": "docs/teaching/current/ci.json",
+      "operation": "write",
+      "blob_sha": "bb7c475c52749da13ae28a73892ef47b23a4ed38",
+      "sha256": "831c80045650031252facfe3cefc3e080c4924e7cff418c13914d43a957779a9",
+      "readback_ref": "a079baa8629e7c2aefbbf6359d3bd9318beec64f",
+      "full_bytes_equal": true
+    },
+    {
+      "path": "docs/teaching/current/manifest.json",
+      "operation": "write",
+      "blob_sha": "211fd761b497cfa670cda9c59b107886f65956b6",
+      "sha256": "992d3427f85c8ef18912ac89f00c72edd1f7feaec1acc11c2d8c6f09508d3c8a",
+      "readback_ref": "a079baa8629e7c2aefbbf6359d3bd9318beec64f",
+      "full_bytes_equal": true
+    },
+    {
+      "path": "docs/teaching/current/validation.json",
+      "operation": "write",
+      "blob_sha": "6854debdfa320e7213437bf4e401a4fb3bb38237",
+      "sha256": "9ba51e7ba0cc96771774c1368e1053b6fbc03d623f180c64e4f536f2d44f5ee4",
+      "readback_ref": "a079baa8629e7c2aefbbf6359d3bd9318beec64f",
+      "full_bytes_equal": true
+    },
+    {
+      "path": "docs/teaching/daily/README.md",
+      "operation": "write",
+      "blob_sha": "71fa14f132b6ec3627766cd4c4ccbca4e9ecdb08",
+      "sha256": "bde1cec3d8a5a1b836c74a14cc13bb18c4be8c7e720edb7adbeee8588ccc805b",
+      "readback_ref": "a079baa8629e7c2aefbbf6359d3bd9318beec64f",
+      "full_bytes_equal": true
+    },
+    {
+      "path": "docs/teaching/daily/day-44/ENTRY.md",
+      "operation": "write",
+      "blob_sha": "ea00658e4bd275c0d8aba335e435ee22d685293a",
+      "sha256": "d69d4df8122e7da25326d98da4e22f1bd48dbb23f520d9f0e630edd14863b383",
+      "readback_ref": "a079baa8629e7c2aefbbf6359d3bd9318beec64f",
+      "full_bytes_equal": true
+    },
+    {
+      "path": "docs/teaching/daily/day-44/README.md",
+      "operation": "write",
+      "blob_sha": "a22976216ea7b0cd70ab24a58f2273ed526bd438",
+      "sha256": "8cecb10723ce150e1f81b1eba493ec5ce3c57b1da403df9938c6470a584e95b6",
+      "readback_ref": "a079baa8629e7c2aefbbf6359d3bd9318beec64f",
+      "full_bytes_equal": true
+    },
+    {
+      "path": "docs/teaching/daily/day-44/pet-adoption-verification-2026-10-30.json",
+      "operation": "write",
+      "blob_sha": "7e1343e7fc843dbebb7ea7289fe8a293c618873b",
+      "sha256": "3b9fb7fd7d5bc65192064d2305441348df847167d7abcdd54bd8eebfe3254869",
+      "readback_ref": "a079baa8629e7c2aefbbf6359d3bd9318beec64f",
+      "full_bytes_equal": true
+    },
+    {
+      "path": "docs/teaching/functional-refactoring/PROGRESS.md",
+      "operation": "write",
+      "blob_sha": "7c611d9d24784e221369adb4478c2011cb83e32e",
+      "sha256": "e597fb521cd97ec4aad47a74dbc8afcc07c33215a3606f44333212677e039105",
+      "readback_ref": "a079baa8629e7c2aefbbf6359d3bd9318beec64f",
+      "full_bytes_equal": true
+    },
+    {
+      "path": "docs/teaching/pet/README.md",
+      "operation": "write",
+      "blob_sha": "1a80593993a7daae7aa7ee1d13d53094e41a0f8f",
+      "sha256": "c2bfde41f852e2a5b9a977c9b100d32f568178b20ec559c194873bd2f3f764e2",
+      "readback_ref": "a079baa8629e7c2aefbbf6359d3bd9318beec64f",
+      "full_bytes_equal": true
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
+  "article_commit": "f98bcaf6eebe0acd9a1bfb3064be1abd55c0e4ab",
+  "article_path": "docs/teaching/daily/day-44/pet.md",
+  "blob_sha": "e573ae357d907a5b31f236b72e2c3d60ef98eba7",
+  "sha256": "b6dae1966d45dd9268860f40b3c582805115bbfae5fb8ccd4cc61a69156226ec",
+  "remote_full_text_equal": true,
+  "remote_readback_method": "GitHub connector fetch_file at exact commit",
+  "observed_at_utc": "2026-10-30T14:30:06.171627+00:00"
+}
