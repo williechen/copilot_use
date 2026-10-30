@@ -1,6 +1,10 @@
 # Chat Day44｜登入後只允許進入真正存在的聊天室
 
-> 2026-10-30（Asia/Taipei）｜唯一產品唯讀 `williechen/rust_ai_ring@7ce39f0166a2120539e5908b33c88322a930c35a`；文件基準 `williechen/copilot_use@6bd009acfefb07293e7f3bbe777ea60450a52635`；expected `next_day.chat=44`。此為**待套用的完整文件 Gate1**，不是產品 Gate2 驗收。
+> 2026-10-30 本地驗證修訂 r2。最新產品唯讀 `6b34c42f74fc1585b1b864fb7dd6969318270e0f`；下列原 Refactor／Green 程式保留 `7ce39f0166a2120539e5908b33c88322a930c35a` 重現基準。最新 main 已有對應功能，不重複套用。next_day 已是45，不再加 Day。原發布版本與讀回保留於封存。
+
+## 本次本地結果
+
+最新主分支已實作存在房間門檻；一般／SSR各62項通過、WASM通過。原文重現與最新 caller 的 `room_path`／`room_patch` 命名不同。 [四workspace、真套用、原始命令及阻塞](../../../source-review/local-validation-2026-10-30-day44/README.md)。原發布全文以ZIP保存，原交付讀回不能冒認本次修訂；完整Gate2未完成。
 
 ## ① 目標、缺口與正式呼叫鏈
 
@@ -71,7 +75,7 @@ new file mode 100644
 +}
 ```
 
-Refactor 驗證入口：`cargo test --manifest-path chat_apps/Cargo.toml -p chat-server room_path` 與 `-p chat-server room_auth`；**未執行**。下一次 Chat 專案重構：在完整 ACL 導入前清理 Session SQL／Repository 的錯誤映射與 fixture，保持 401／403／503 的差異；不在本次重構中混入新 Green 功能。
+Refactor 已在原文基準真套用；合成後加 [fmt 修補](chat-day44-format-r1.patch)，SSR server lib29、UI21通過；最新 main 的 `room_patch`＋`room_auth` 已納入62項 SSR 回歸。`room_path` 是原附件的模組名，不是最新 main 路徑。下一步為本案 Session SQL／Repository 錯誤與 fixture 分層，維持401／403／503差異。
 
 ## ② Red → 完整 Green（核心預估 15 分鐘；實際未計時）
 
@@ -515,7 +519,7 @@ diff --git a/chat_apps/chat_server/src/room_auth.rs b/chat_apps/chat_server/src/
 
 ## ③ 當日官方穩定版、lock 與相容性
 
-2026-10-30 查官方 Rust releases 與 docs.rs 的 crate stable 頁，排除 RC／alpha；`chat_apps/Cargo.toml` 宣告及 `chat_apps/Cargo.lock@bd4da0101ec6282d67965674159aa965bd1ae35e` 解析如下。**沒有安裝 rustc／cargo 可讀，沒有升級 lock**。
+2026-10-30 查官方 Rust releases 與 docs.rs 的 crate stable 頁，排除 RC／alpha；`chat_apps/Cargo.toml` 宣告及 `chat_apps/Cargo.lock@bd4da0101ec6282d67965674159aa965bd1ae35e` 解析如下。**本機 rustc／cargo 1.99.1，lock 未升級**。
 
 | 項目 | manifest → resolved | 最新 stable／限制 | 官方來源 |
 | --- | --- | --- | --- |
@@ -532,9 +536,9 @@ SQLx 0.9 的 MSRV 1.94，Rust 2024 edition 及現行 stable 1.99.1 足夠；Lept
 
 ## ④ 驗證、Gate 與未完成
 
-**Gate1 可核對項**：GitHub 精確來源全文與 Cargo/lock 已讀；兩個順序 patch 均以該 SHA 原文作單次字串替換，逐檔 diff 已產生；正式 Router/Repository caller、測試、回復順序（先逆 Green，再逆 Refactor）已列。提交後另保存精確 commit、blob、SHA256 與讀回結果；靜態變更不當 `git apply --check`。
+**文件與真套用**：原 Refactor→Green 已實際 check／apply；格式修補後編譯／測試通過，精確命令與退出碼見本次證據。原始程式／附件不覆寫為另一個來源版本；最新 main 的 caller 依 source-inventory 核對。完整官方套件／MSRV Gate 尚未全量重核，不冒稱完整文件版本 Gate。
 
-**Gate2 未執行**：無本地產品 checkout、rustc/cargo、SQLite 實跑、Leptos SSR／hydrate、HTTP smoke、CI 寫入權限或真瀏覽器。本篇**未套用 rust_ai_ring**，不可引用前一 SHA 的 60 tests 當新 patch 成功。使用者套用後以新的產品 SHA 執行：
+**本地已執行、完整 Gate2 未完成**：最新 main 的四 workspace 檢查、Chat62／SSR62與hydrate WASM通過；未在此 SHA 重跑獨立瀏覽器／完整HTTP與WS旅程。原 Chat 行為 Red 沒有重跑，不將基準測試成功當 Red。產品沒有候選提交／推送；以下為需依來源重現的命令：
 ```bash
 cargo test --manifest-path chat_apps/Cargo.toml -p chat-server room_path
 cargo test --manifest-path chat_apps/Cargo.toml -p chat-server room_auth
@@ -542,4 +546,4 @@ cargo test --manifest-path chat_apps/Cargo.toml -p chat-server --features ssr
 cargo test --manifest-path chat_apps/Cargo.toml -p chat-ui --features ssr
 cargo check --manifest-path chat_apps/Cargo.toml --workspace
 ```
-並用真 SQLite 登入／登出、存在／不存在房間、Cookie 撤銷、WS 401、公開列表與房間 ACL 旅程驗證。下一個功能優先：會員身份與房主／逐房 ACL（含 WS 重驗）；此日只完成存在檢查文件，不完成 ACL。FIFO `chat-day25-shared-auth-20261022` 仍 pending；未經完整補教不結案。核心 60 分鐘只分配本篇 Red／Green 預估 15 分鐘，Refactor、版本、驗證與交付另計。
+並用真 SQLite 登入／登出、存在／不存在房間、Cookie 撤銷、WS 401、公開列表與房間 ACL 旅程驗證。下一個功能優先：會員身份與房主／逐房 ACL（含 WS 重驗）；此功能已在最新 main 實作並有回歸測試，但不代表完整逐房 ACL 已驗收。FIFO `chat-day25-shared-auth-20261022` 仍 pending；未經完整補教不結案。核心 60 分鐘只分配本篇 Red／Green 預估 15 分鐘，Refactor、版本、驗證與交付另計。
