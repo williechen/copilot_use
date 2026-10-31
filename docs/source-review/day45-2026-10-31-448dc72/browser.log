@@ -1,0 +1,9 @@
+chat anonymous public homepage hydrates {"wasmErrors":[]}
+chat browser registration persists without automatic login {}
+chat member login and actual create-room form persists a room {"room":"2b562c11-8fb0-4f2d-a513-bf57bc7dc4a4"}
+chat hydrated room establishes real WebSocket and sends persisted message {"pageErrors":[]}
+chat live exclusion blocks existing socket and subsequent room SSR {"socketStatus":"已斷線，請重新進房","roomStatus":403}
+chat self-profile UI changes only current Session subject {}
+chat member action deny removes create-room UI without removing self actions {}
+chat self-password UI revokes old Session; new password re-login succeeds {}
+chat anonymous room navigation preserves canonical login-return target {}

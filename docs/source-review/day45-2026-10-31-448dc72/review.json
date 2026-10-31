@@ -1,0 +1,74 @@
+{
+  "source_sha": "448dc72f9f7c7bfe7e0f92f235faba65825c1c8b",
+  "docs_baseline_sha": "348799729eef0a90fd8b2dcd521b4b969354ac80",
+  "product_written": false,
+  "browser_actual_product": {
+    "steps": 9,
+    "errors": 0,
+    "exit": 0,
+    "evidence": "browser-results.json"
+  },
+  "raw_regression": {
+    "passed": 44,
+    "failed": 1,
+    "ignored": 0,
+    "exit": 101,
+    "log": "chat-regression.log"
+  },
+  "test_only_candidate": {
+    "passed": 45,
+    "failed": 0,
+    "exit": 0,
+    "log": "chat-test-fixed.log",
+    "runtime_changed": false
+  },
+  "remaining_error": "CSRF purpose in one mandatory-password-change test was changed from member-password to permission ID member-password-update",
+  "build_command": "cargo leptos build --cargo-locked",
+  "test_command": "cargo test --manifest-path <isolated>/chat_apps/Cargo.toml -p chat-server --features ssr --locked --no-fail-fast",
+  "raw_manifest": "/tmp/day45-follow-src/chat_apps/Cargo.toml",
+  "candidate_manifest": "/tmp/day45-follow-fixed/chat_apps/Cargo.toml",
+  "environment": {
+    "CARGO_TARGET_DIR": "/home/willie/Documents/Codex/2026-10-27/referenced-chatgpt-conversation-this-is-an/work/cargo-target",
+    "CARGO_PROFILE_TEST_DEBUG": "0",
+    "CARGO_PROFILE_DEV_DEBUG": "0",
+    "CARGO_INCREMENTAL": "0",
+    "CARGO_BUILD_JOBS": "2",
+    "CHAT_DATABASE_URL": "sqlite:///tmp/day45-follow-chat.sqlite",
+    "LEPTOS_SITE_ROOT": "/tmp/day45-follow-src/chat_apps/target/site",
+    "LEPTOS_OUTPUT_NAME": "rust_ai_chat"
+  },
+  "browser_command": "GUI_OUT=<evidence>/browser NODE_PATH=/tmp/day45-follow-browser/node_modules node browser.cjs",
+  "runtime_permission_fix_adopted": true,
+  "no_old_patch_reapply": true,
+  "chat_browser_scope_passed": true,
+  "gate1": true,
+  "gate2": false,
+  "next_day": {
+    "chat": 46,
+    "pet": 46,
+    "analytics": 46
+  },
+  "fifo_changed": false,
+  "last_full_comparison_changed": false,
+  "unchanged_projects": "Analytics/Pet trees identical to a7; retain explicitly original-SHA-labelled evidence",
+  "not_run": [
+    "real user prior DB backup reconciliation",
+    "physical/packaged/cross-OS desktop acceptance",
+    "transparency composition/autonomous roam",
+    "Analytics legacy ignored and remaining management UI/API scopes"
+  ],
+  "sha256": {
+    "patch-validation.json": "a6a06fa7ae8066223160e492442ea361dbd78ea7400af6f406a63a4777d9b0df",
+    "browser-results.json": "4657afae4ac0ce9fdad347f511381780f77237d47edbdedbd4d2458355e49255",
+    "browser.cjs": "e7bb0938867439a62c0a3027f44b17303d6a7f79ef1a37e6f90defece0de2f46",
+    "chat-regression.log": "b1e83f41fe256fa4535e6a51bede52aa80461ce1857a7de02297749c360820cc",
+    "chat-test-fixed.log": "d58752097408dc7bd1d138b0a89740bb6431cc36c854ce8efcea7bdabf3674c3",
+    "browser.log": "f24374eccd388a4079477c3ee660bf8d9f1f75ed0d2f7ef77bc30ee81407a59a",
+    "browser-install.log": "aef4036507419595917d6b3ca2ea662ccb62185f626f2fc08a4d1970c60841d3",
+    "source.json": "59f56af85d3d25787fb0f192c40badd7584947e0a7d7a164cd96773e84ec5e7b",
+    "chat-room.png": "8b4f53ccb641fe38aeb4b5e1738bf9fc674273d87b0a2132dc72a55b50e10e51",
+    "csrf-test-label-fix.patch": "ef6b5035bea2bbbde9ee60ad7264278423601afe4790fd87e27fc62bcb1cea89",
+    "chat-build.log": "8599eaaed3f23f7a5aea8fbf5126cc26a9cceafb913f9d192ae05fba684dfad6",
+    "cleanup.json": "b4ce42175b4a207155e76b15296292eee3e6a9328dc8eb6976f4d3a45eda9c1b"
+  }
+}

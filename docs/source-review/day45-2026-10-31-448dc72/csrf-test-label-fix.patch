@@ -1,0 +1,13 @@
+diff --git a/chat_apps/chat_server/tests/day45_member_self.rs b/chat_apps/chat_server/tests/day45_member_self.rs
+index 97b608c..93910c5 100644
+--- a/chat_apps/chat_server/tests/day45_member_self.rs
++++ b/chat_apps/chat_server/tests/day45_member_self.rs
+@@ -293,7 +293,7 @@ async fn mandatory_change_cannot_be_bypassed_and_next_login_opens_account() {
+     sqlx::query("UPDATE mbr_user_perm SET perm_filter='allow' WHERE user_id='self-member' AND perm_id='member-password-update'").execute(&pool).await.unwrap();
+     let form = format!(
+         "current_password=member-password&new_password=changed-password&confirm_password=changed-password&csrf={}",
+-        csrf(&cookie, "member-password-update")
++        csrf(&cookie, "member-password")
+     );
+     assert_eq!(
+         send(app.clone(), "/account/password", Some(form), &cookie)

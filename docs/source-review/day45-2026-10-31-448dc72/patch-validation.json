@@ -1,0 +1,8 @@
+{
+  "source_sha": "448dc72f9f7c7bfe7e0f92f235faba65825c1c8b",
+  "apply_check_exit": 0,
+  "apply_exit": 0,
+  "candidate_equals_clean_patch": true,
+  "candidate_test_file_sha256": "bb96cbb4748f8184e795a99db2e5e4dc6f9fc83d24b2b30c90d1152748a8ab1f",
+  "patch_sha256": "ef6b5035bea2bbbde9ee60ad7264278423601afe4790fd87e27fc62bcb1cea89"
+}

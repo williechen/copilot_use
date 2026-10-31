@@ -1,3 +1,31 @@
+# Day45 最新採用／瀏覽器追驗｜Chat 448dc72f
+
+產品`448dc72f9f7c7bfe7e0f92f235faba65825c1c8b`已採用前次授權ID接線與真註冊回歸。原樣產品9段真Chromium旅程通過，自身資料／密碼403缺陷已修復；勿重套舊runtime補正。
+
+本次完整回歸原樣44通過／1失敗：僅強制改密碼測試把CSRF purpose誤改成perm_id。**授權ID與CSRF目的標籤用途不同**。單檔一行測試補正後45通過、exit0，不改runtime或migration。[真實命令／log／截圖／限制](../../../source-review/day45-2026-10-31-448dc72/README.md)。本段取代下方較早「原樣自身資料403」狀態，歷史保留。
+
+## 本次完整測試補正（不新增Refactor計功）
+
+```diff
+diff --git a/chat_apps/chat_server/tests/day45_member_self.rs b/chat_apps/chat_server/tests/day45_member_self.rs
+index 97b608c..93910c5 100644
+--- a/chat_apps/chat_server/tests/day45_member_self.rs
++++ b/chat_apps/chat_server/tests/day45_member_self.rs
+@@ -293,7 +293,7 @@ async fn mandatory_change_cannot_be_bypassed_and_next_login_opens_account() {
+     sqlx::query("UPDATE mbr_user_perm SET perm_filter='allow' WHERE user_id='self-member' AND perm_id='member-password-update'").execute(&pool).await.unwrap();
+     let form = format!(
+         "current_password=member-password&new_password=changed-password&confirm_password=changed-password&csrf={}",
+-        csrf(&cookie, "member-password-update")
++        csrf(&cookie, "member-password")
+     );
+     assert_eq!(
+         send(app.clone(), "/account/password", Some(form), &cookie)
+```
+
+三案next_day仍46，FIFO與last_full_comparison不變；產品庫未寫入，完整Gate2仍未完成。
+
+---
+
 # Day45 真實GUI驗收補記｜Chat
 
 產品精確SHA `a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4`。產品原樣真註冊會員開本人資料頁403：migration／角色用member-profile-update與member-password-update，後端卻查另一組帶self的ID。原fixture自行補了另一組ID而掩蓋預設角色接線。新增真signup→login、無任何個人fixture加權的Red回歸，修常數／fixture後候選45項通過，9段真Chromium旅程通過。產品main仍須使用者套補正。

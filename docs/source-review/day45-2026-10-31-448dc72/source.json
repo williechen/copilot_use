@@ -1,0 +1,43 @@
+{
+  "source_sha": "448dc72f9f7c7bfe7e0f92f235faba65825c1c8b",
+  "previous_sha": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
+  "trees": {
+    "chat_apps": {
+      "old": "a92503a725ecd41aeca3a71d2d33fccc2a498d6e",
+      "new": "7e446b8c383ed14118359507d1a2cdd42a4fcb20",
+      "identical": false
+    },
+    "analytics_apps": {
+      "old": "976c1f744b80fcdc2c397db6f1df2dfbb2cc887b",
+      "new": "976c1f744b80fcdc2c397db6f1df2dfbb2cc887b",
+      "identical": true
+    },
+    "pet_apps": {
+      "old": "ae8bbcd373252c9c8dd9715e6267bd8ee3059a73",
+      "new": "ae8bbcd373252c9c8dd9715e6267bd8ee3059a73",
+      "identical": true
+    }
+  },
+  "changed_files": [
+    "chat_apps/chat_server/src/member_self.rs",
+    "chat_apps/chat_server/tests/day45_member_self.rs",
+    "chat_apps/chat_server/tests/day45_signup_self_service.rs"
+  ],
+  "source_hashes": [
+    {
+      "path": "chat_apps/chat_server/src/member_self.rs",
+      "blob_sha": "1719e44657d7404678c3be49e3c429cf18461b44",
+      "sha256": "dead72aad81f0c0c34ac9bb90da94515b60d3d7a676cd8765fc7f7bddd7dddae"
+    },
+    {
+      "path": "chat_apps/chat_server/tests/day45_member_self.rs",
+      "blob_sha": "97b608c92ea838c2960739e2ed4b5184761eba52",
+      "sha256": "9e566856d8c76dcc90042cc6b9bbab6a81588f6be53cddb2389dd5d77b23f9bd"
+    },
+    {
+      "path": "chat_apps/chat_server/tests/day45_signup_self_service.rs",
+      "blob_sha": "96e4ac10ec70f9c3b746118bcdbe01d8bd2abfdb",
+      "sha256": "59ad86aea809581c89f6f8b15461508714507b766ed8cd66b84a26ba855fe44e"
+    }
+  ]
+}

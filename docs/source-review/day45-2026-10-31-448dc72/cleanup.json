@@ -1,0 +1,23 @@
+{
+  "isolated_server_stopped": true,
+  "removed": [
+    {
+      "path": "/tmp/day45-follow-fixed",
+      "bytes": 19403720
+    },
+    {
+      "path": "/tmp/day45-follow-chat.sqlite",
+      "bytes": 258048
+    },
+    {
+      "path": "/tmp/day45-follow-browser",
+      "bytes": 18704126
+    },
+    {
+      "path": "/tmp/day45-follow-src",
+      "bytes": 13497310
+    }
+  ],
+  "total_removed_bytes": 51863204,
+  "preserved": "source checkout, dirty docs checkout, patch, screenshots and real logs"
+}
