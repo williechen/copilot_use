@@ -105,3 +105,11 @@ UI 不持有 SQLx／PgPool，不另建平行 total API 或資料來源；正式�
 ## 共用修改密碼呈現（2026-10-31）
 
 本人修改及首次強制修改共用驗證流程／元件，整合既有登入／本人設定入口，不新增Analytics獨立修改密碼頁，也不建立獨立ACL page。首次登入須清楚呈現必填、錯誤及完成後重新登入，不允許藉關閉元件略過強制修改。帳號管理他人密碼操作與本人流程分開。現行實作尚待整合。
+
+## Analytics ACL顯示：page→category、page→action（2026-10-31）
+
+顯示由有效page權限出發：至少有一個可用子page才顯示其category，類別去重；沒有可用page即隱藏。每個可用page再依自身CRUD action權限顯示操作，沒有page權限則不顯示其action。category顯示與CRUD操作核權分開，不能由category出現推定所有操作皆可用。
+
+角色預設及uac_user_acl個人加減權共同決定有效權限，deny優先。驗收須包含無page、單一／多個page、不同category、個人加權／減權、只具action但無page、單一action被拒絕，以及移除最後page後空category隱藏。權限更新後重新計算顯示；後端授權不得省略。
+
+資料儲存的category→page→action階層不因顯示方向改變。[單一ACL契約](requirements/ANALYTICS_ACL.md)。目前僅確認需求，不宣稱畫面已實作。

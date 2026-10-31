@@ -42,3 +42,29 @@ category：認證管理
 ## 最新確認：移除獨立自身密碼page的設計
 
 使用者確認「共用修改密碼，不單獨一頁」。因此analytics-password與其CRUD不是目標ACL節點；本人／首次修改走共用驗證流程，不需viewer取得帳號管理update。管理他人帳密仍按管理page/action授權。目前f6a0401 SQL尚有此舊節點，後續需作版本化相容處理，不能把需求確認冒稱已從產品移除。[安全規則](AUTHENTICATION.md)。
+
+## 顯示關係：以page為起點（2026-10-31 使用者確認）
+
+資料儲存維持category → page → action與既有acl_parent_id；畫面顯示的判斷方向為：
+
+```text
+page ─→ category：至少有一個具有效page權限的子頁，才顯示該category
+     └→ action：依該page下各action的有效權限，分別顯示CRUD操作
+```
+
+- 先取得目前人員具有效權限且啟用的page。有效page權限合併角色預設與uac_user_acl個人加減權，deny優先，並遵守父節點啟用／拒絕規則。
+- 以這些page的category關係產生類別；同一category有多個可用page時只顯示一次，沒有任何可用page就隱藏，不保留空分類。
+- action顯示必須以其所屬page為範圍；page不可用時不顯示其action，可用page下的create/read/update/delete各自核權，不因page或category顯示而全部放行。
+- category顯示的條件是page權限，不以「只擁有category節點」或「只擁有某個action」代替，也不額外要求先取得某個CRUD action才顯示category。
+- 角色或個人權限更新後，重新取得有效權限並重算page→category與page→action。減去最後一個可用page後，其category須隱藏。
+- 顯示只是UI投影；後端page與CRUD action授權仍必須執行，不能用選單／按鈕隱藏取代伺服器檢查。
+
+| 有效權限情況 | category顯示 | action顯示 |
+| --- | --- | --- |
+| 沒有任何子page權限 | 隱藏 | 不顯示該分類下的page操作 |
+| 至少一個子page有權限 | 顯示一次 | 僅顯示該page獲授權的action |
+| 只有category或action權限，沒有page權限 | 隱藏 | 隱藏 |
+| page有權限，但某個CRUD action被deny | 顯示 | 隱藏被deny的action，其餘逐項判斷 |
+| 最後一個可用page被減權 | 重新計算後隱藏 | 隱藏該page的action |
+
+這是已確認的顯示需求，尚未宣稱產品UI或runtime已實作；不新增Day、不改next_day、FIFO或last_full_comparison。
