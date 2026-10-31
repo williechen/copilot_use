@@ -1,0 +1,24 @@
+{
+  "commit": "4674a1a660b26ad17ac02c2b728180412b5fee7b",
+  "requirement": "uac_acl defines nodes only; uac_role_acl and uac_user_acl hold role grants and individual overrides; definition existence is not authorization",
+  "readback": [
+    {
+      "path": "docs/requirements/ANALYTICS_ACL.md",
+      "blob_sha": "762ed2104b3d128108205cc79661dfd6618869e4",
+      "full_text_equal": true,
+      "sha256": "c4c79e06e3e7b248ca1f7619a795cc4cce294398923b66b6cdab652ce8d2b241"
+    },
+    {
+      "path": "docs/requirements/USER_FLOWS.md",
+      "blob_sha": "edd21dd4b824c1aec912e6a569393f445c30350f",
+      "full_text_equal": true,
+      "sha256": "29271cd4ba63e6251fec1bdb349d5fe13d611c35527bdcbb3efdf0a855f581c0"
+    }
+  ],
+  "scope": "requirements only",
+  "product_written": false,
+  "product_tests_run": false,
+  "next_day_changed": false,
+  "fifo_changed": false,
+  "last_full_comparison_changed": false
+}
