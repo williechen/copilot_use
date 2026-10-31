@@ -1,0 +1,78 @@
+{
+  "article_commit": "24c9128df35d7707550f7e4c0eb5dc49490054d7",
+  "source_sha": "9ae3c6cf42b231004e81be0097f50840b0a15eb5",
+  "readback": [
+    {
+      "path": "docs/source-review/day45-2026-10-31-9ae3c6c/README.md",
+      "blob_sha": "d70579ed49fa506087d97faae4c9ec723f75cac6",
+      "sha256": "871e0df66d05e96bf0711ef05b9785c79a9eb1b67fd4491a1e8ff85b8980e316",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-9ae3c6c/patch-validation.json",
+      "blob_sha": "2cf3495e6a968f10013e4604fec8b573bccf57cd",
+      "sha256": "599d0446a76ca3ca51b562826e38c9545e6ae18d360fde61931c8e3ad45bf293",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-9ae3c6c/analytics-fixture-fixed.log",
+      "blob_sha": "8548a9fab99514437071bb9359e840e067f77814",
+      "sha256": "01cee5df44fe203aedc64c5959d5ae9a45b8dc8226d408e3f20bcb9560370a10",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-9ae3c6c/fixture-exact-bytes.patch",
+      "blob_sha": "7bd8b0d3b4992ad9059f30b27ac4e85da0ae3094",
+      "sha256": "ad090d8f3f7f11db24bde312c85b44ead5aaf1e4e9139035b45fb957c277c925",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-9ae3c6c/review.json",
+      "blob_sha": "0c43ef8549aefc2e0862992f9843e02e8e5099bc",
+      "sha256": "5e644ad3982e90c85a30dc861ff779f8bb945fae8be1ae6ad61082cf478fea56",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-9ae3c6c/source.json",
+      "blob_sha": "13d83d44358471752276b757623c4143baed6472",
+      "sha256": "89eb0bbe427ac7ec08c117d5c468c72aeb6c9273a25bdc1bc8eac6af2d30e9ac",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-9ae3c6c/analytics.log",
+      "blob_sha": "189ceb6e3c0ad78d4144fc295573739aa86ba4a4",
+      "sha256": "6add38526a59ef87c4d844fb19be69b19ff4a03af93aab00fb6ec9825ed3adfe",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-9ae3c6c/ci.json",
+      "blob_sha": "25e15b55d3c1787e3e9612a593a88f81eae0a6b3",
+      "sha256": "09e6fece2e2ba0026a786b70bda23497c525f9a739e5f127d5a8d12d20c513fc",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-9ae3c6c/cleanup.json",
+      "blob_sha": "b4e6e9633afcc5f4f778928f17409b548f7210f8",
+      "sha256": "1de825da8249a2baef4969b4b4f9f758e8bb9e6b7ad05a6620dabefa58a5dd86",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/teaching/daily/day-45/analytics-r4.md",
+      "blob_sha": "e367c09e327634a87e9c610225ed808fc51bba25",
+      "sha256": "0e7e244f6266cfac1a564abb08ed756a6d04303fd989f5eb78c7d0d1ebd2ae4c",
+      "full_text_equal": true
+    }
+  ],
+  "expected_sync_parent": "24c9128df35d7707550f7e4c0eb5dc49490054d7",
+  "expected_next_day": {
+    "chat": 46,
+    "pet": 46,
+    "analytics": 46
+  },
+  "day_advance": false,
+  "fifo_changed": false,
+  "last_full_comparison_changed": false,
+  "product_written": false,
+  "gate1": true,
+  "gate2": false
+}

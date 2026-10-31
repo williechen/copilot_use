@@ -1,3 +1,5 @@
+> 最新9ae3c6cf採用核對：前次Analytics SQL／匯入／migration已修；原樣67通過／1失敗／1 ignored，只剩歷史fixture檔尾LF。單檔測試補正候選68通過／1 ignored，[來源／完整patch／證據](https://github.com/williechen/copilot_use/blob/main/docs/source-review/day45-2026-10-31-9ae3c6c/README.md)。Chat／Pet子樹未改，沿用明確標成d784的證據。舊修正包勿重套；next_day仍46、未加Day、完整Gate2=false。本段取代下方先前採用狀態，歷史證據保留。
+
 # Day45 ENTRY｜最新產品採用驗證
 
 1. [Chat](chat-r2.md)：d784產品SSR44項通過；28同子樹WASM check通過。原Session／排除／本人action接線已採用。
