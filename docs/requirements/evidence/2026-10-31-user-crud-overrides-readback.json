@@ -1,0 +1,24 @@
+{
+  "commit": "4a1bc1ca88438c2b9d4353d50968461ab9714396",
+  "requirement": "uac_user_acl persists individual page and each page-specific CRUD action override via user_id,acl_id,acl_filter",
+  "readback": [
+    {
+      "path": "docs/requirements/ANALYTICS_ACL.md",
+      "blob_sha": "c861d1a382c59eff6d144f17be951cf797bb72f3",
+      "full_text_equal": true,
+      "sha256": "a35aaac0fbd51e6bd5777cb146a31fa0e7a1d8a08da929b7f1ff9f1b94d777fe"
+    },
+    {
+      "path": "docs/requirements/USER_FLOWS.md",
+      "blob_sha": "04925305a2f204694522c9ba17984eb5ac2880a4",
+      "full_text_equal": true,
+      "sha256": "b0cb67bd62c8ae77a277ed3c908695ad9b09bd294adb7b96417bf55c11ed0d01"
+    }
+  ],
+  "scope": "requirements only",
+  "product_written": false,
+  "product_tests_run": false,
+  "next_day_changed": false,
+  "fifo_changed": false,
+  "last_full_comparison_changed": false
+}
