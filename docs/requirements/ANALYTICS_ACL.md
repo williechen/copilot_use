@@ -112,3 +112,17 @@ page ─→ category：至少有一個具有效page權限的子頁，才顯示�
 - 同名CRUD在不同page下是不同action，不可跨page共用授權；修改個人例外不覆寫角色預設或其他人的權限。
 
 因此，角色與個人的page／action都保存對應acl_id：角色使用uac_role_acl，個人加減權使用uac_user_acl。功能樹仍依page→category、page→action推導，後端同樣核對有效權限。本次是需求補明，不宣稱權限編輯UI或runtime已完成，不變更學習進度。
+
+## 定義與權限實作分工（2026-10-31 使用者確認）
+
+**uac_acl只是定義；權限實作／授權資料由uac_role_acl與uac_user_acl承擔。**
+
+| 表 | 責任 | 不可推論 |
+| --- | --- | --- |
+| uac_acl | 定義category／page／action、名稱、路徑、父子關係及節點狀態 | 有定義或節點啟用，不代表任何角色／人員已獲權限 |
+| uac_role_acl | 保存角色對已定義page與各CRUD action的授權關係 | 有page關係，不代表同時取得全部CRUD action |
+| uac_user_acl | 保存個人對已定義page與各CRUD action的allow／deny加減權 | 個人加減權不覆寫ACL定義或其他角色／人員資料 |
+
+伺服器以uac_user_role取得人員角色，從uac_role_acl合併角色授權，再套用uac_user_acl個人加減權，依既定deny優先規則判定有效權限。不存在有效授權時預設拒絕；不能只查uac_acl存在、節點啟用或其category來放行。有效授權仍須對應有效且結構正確的ACL定義；節點停用不會因既有授權關係而變成可用。
+
+功能樹與操作檢查使用相同的有效權限：由獲授權page推導category，並依該page各action的授權顯示／執行CRUD。資料定義、選單顯示與後端授權不能混為同一件事。本次僅補明契約，不宣稱產品授權接線已完成，不更改Day或學習進度。

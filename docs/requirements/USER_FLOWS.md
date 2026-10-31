@@ -46,3 +46,5 @@
 - 2026-10-31 CRUD授權補充：角色對page及其各create/read/update/delete action的授權，都必須各自保存至`uac_role_acl(role_id, acl_id)`；action的acl_id指向該page下對應的uac_acl節點。`uac_user_acl`保留個人獨立加減權，不代替角色CRUD的持久化關係。詳見[Analytics ACL](ANALYTICS_ACL.md)。
 
 - 2026-10-31 個人CRUD授權補充：`uac_user_acl(user_id, acl_id, acl_filter)`也必須各自保存個人對page及其create/read/update/delete action的加減權；action的acl_id指向該page下的uac_acl節點。移除個人例外回到角色預設，明確減權則保存deny。角色預設仍存於uac_role_acl，不能以任一表取代另一表。詳見[Analytics ACL](ANALYTICS_ACL.md)。
+
+- 2026-10-31 ACL分工確認：`uac_acl`只是category／page／action的定義；角色與個人權限實作分別依`uac_role_acl`與`uac_user_acl`保存的page／CRUD action授權及加減權判斷。ACL節點存在或啟用不代表已授權；沒有有效授權預設拒絕。詳見[Analytics ACL](ANALYTICS_ACL.md)。
