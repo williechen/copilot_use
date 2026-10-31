@@ -1,0 +1,69 @@
+{
+  "article_commit": "8ed4e0a4a489866e70f381f415232d3214e69fdd",
+  "source_sha": "f6a04015188da2155af6c264d0e6326e6a922dca",
+  "files": [
+    {
+      "path": "docs/teaching/daily/day-45/analytics-r4.md",
+      "blob_sha": "d220774bca40b5caf4d6bfe609c589f6451b73d0",
+      "full_text_equal": true,
+      "sha256": "ec8a39c77e5cf90f8def6a5ccec77e9ab91b7be2c70a4a91f4c2e183a0d713d8"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/analytics-day45-final-r4.patch",
+      "blob_sha": "19adf278f928065150c3ac908dd3413528f159e5",
+      "full_text_equal": true,
+      "sha256": "f31d1c53768ce6befed215578a7e38360b9c9f061488c802c2fd7a21862d43e3"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/analytics-day45-final-red-r4.patch",
+      "blob_sha": "d5ccac687cb28c045a236a5935a4660625ab500a",
+      "full_text_equal": true,
+      "sha256": "bafb7a075c453b09c8fb02b50f2af3ade87d79769f5e99d76ceb7d83485a6e06"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/analytics-day45-final-r4.log",
+      "blob_sha": "9e66ac6d1339a5a60e82551a33a26aa28d01d957",
+      "full_text_equal": true,
+      "sha256": "ddfd1fb896c90a48578e5ad5227270b91ce32c2884273d7f00fb01a7d55ea29b"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/analytics-day45-final-red-r4.log",
+      "blob_sha": "d7e9a2917346b1730ee3533b2a539d56287015d7",
+      "full_text_equal": true,
+      "sha256": "930d57fdb3d2d3bae98173d1932110ae820cabc596a92a5d9db1bf91d37b3679"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/analytics-day45-validation-r4.json",
+      "blob_sha": "76683f2736874bfce3c03e467a36abdd6e1aebd8",
+      "full_text_equal": true,
+      "sha256": "3ab5db6197f0092e6eb7c81cbd7a45ae0bcd7e36af1e2ce0dc038cc1eef505e9"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/final-rewire-attempts.json",
+      "blob_sha": "3fcf8e58d8edfb31ef109890df81405e71ca3359",
+      "full_text_equal": true,
+      "sha256": "847c6adb89533fcbd38d1039b714eb68c056528e8dbabe20a4b1b9ef2427fb86"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/final-rewire-versions.json",
+      "blob_sha": "65e051a20e31ffcf443738109460f2dfc56518f9",
+      "full_text_equal": true,
+      "sha256": "920f45f2a737c041cb56f3205ab46846d184a5bba453bfa946c4c590640bcce6"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/final-rewire-clean-apply.json",
+      "blob_sha": "0a6feaa3f4f780a3299a7b285d01c5605d1bbe3f",
+      "full_text_equal": true,
+      "sha256": "77b6337b3bb74a2eae25bc571a1b9db6effe16ec115aac0cffbec0d0ad3deda6"
+    }
+  ],
+  "gate1": true,
+  "gate2": false,
+  "product_written": false,
+  "candidate_passed": 67,
+  "candidate_ignored": 1,
+  "sqlx_upgrade_checksum_test": true,
+  "next_day_changed": false,
+  "fifo_changed": false,
+  "last_full_comparison_changed": false
+}
