@@ -411,8 +411,8 @@
     "product_repository_read_only": true,
     "day_advance": false
   },
-  "reference_sha": "9ae3c6cf42b231004e81be0097f50840b0a15eb5",
-  "reference_scope": "9ae3 adopted-source verification: Analytics67/1failed/1ignored, fixture-only candidate68/1ignored; Chat/Pet unchanged since d784; not full comparison",
+  "reference_sha": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
+  "reference_scope": "a7 actual unmodified Analytics68/0failed/1ignored; Chat/Pet unchanged trees; not full weekly comparison",
   "current_article_paths": {
     "chat": "docs/teaching/daily/day-45/chat-r2.md",
     "pet": "docs/teaching/daily/day-45/pet.md",
@@ -420,7 +420,7 @@
   },
   "teaching_progress": {
     "last_published_day": 45,
-    "last_publication_status": "Day45 Analytics9ae3 prior fixes adopted; only exact fixture byte handling remains; article and patch published/read back; no Day/FIFO advance",
+    "last_publication_status": "Day45 a7 fixture correction adopted; actual product Analytics68 passed/1ignored; no new patch, Day or FIFO advance",
     "next_day": {
       "chat": 46,
       "pet": 46,
@@ -474,28 +474,27 @@
     "local_main_upgrade_source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097"
   },
   "current_gate2": {
-    "source_sha": "9ae3c6cf42b231004e81be0097f50840b0a15eb5",
-    "evidence": "docs/source-review/day45-2026-10-31-9ae3c6c/review.json",
+    "source_sha": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
+    "evidence": "docs/source-review/day45-2026-10-31-a7a8267/review.json",
     "full_gate2": false,
     "complete": false,
     "chat_automated_passed": 44,
     "pet_ui_passed": 11,
     "pet_dom_fixture_poses": 6,
     "analytics_raw_feature_build_exit": 0,
-    "analytics_corrected_candidate_passed": 68,
-    "analytics_candidate_ignored": 1,
-    "candidate_base_sha": "9ae3c6cf42b231004e81be0097f50840b0a15eb5",
     "ci_all_seven_success": false,
     "actual_old_pg_backup_available": false,
     "manual_desktop_acceptance": false,
-    "analytics_raw_feature_test_exit": 101,
-    "analytics_raw_passed": 67,
-    "analytics_raw_failed": 1,
+    "analytics_raw_feature_test_exit": 0,
+    "analytics_raw_passed": 68,
+    "analytics_raw_failed": 0,
     "analytics_raw_ignored": 1,
     "chat_pet_latest_actual_test_source": "d784f32c6bff86249dd84fd4294d055a4c774a49",
-    "chat_pet_current_trees_identical": true
+    "chat_pet_current_trees_identical": true,
+    "analytics_product_unmodified": true,
+    "ci_snapshot_had_pending_workflows": true
   },
-  "latest_product_sha": "9ae3c6cf42b231004e81be0097f50840b0a15eb5",
+  "latest_product_sha": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
   "current_daily_schedule": {
     "date": "2026-10-31 Asia/Taipei",
     "automation_id": "6acd967c15fc8191ade8407954c5b354",
@@ -654,9 +653,9 @@
         "day": 45,
         "revision": "r4",
         "article_path": "docs/teaching/daily/day-45/analytics-r4.md",
-        "article_commit": "24c9128df35d7707550f7e4c0eb5dc49490054d7",
-        "blob_sha": "e367c09e327634a87e9c610225ed808fc51bba25",
-        "sha256": "0e7e244f6266cfac1a564abb08ed756a6d04303fd989f5eb78c7d0d1ebd2ae4c",
+        "article_commit": "7040c1a350986f1efa05ab3c3c41317d8c421290",
+        "blob_sha": "1db172cb0d592bcea1321f9e24f4ef7e1d04c88b",
+        "sha256": "578ae55424361ee11c19d9f1eb4f98cf951954d41b7857aab1c232e3a0d7c090",
         "source_sha": "f6a04015188da2155af6c264d0e6326e6a922dca",
         "publication_status": "published_same_day_verification_revision",
         "gate1_complete": true,
@@ -668,7 +667,7 @@
         "refactor_patch": "docs/teaching/daily/day-45/analytics-day45-refactor.patch",
         "green_patch": "docs/teaching/daily/day-45/analytics-day45-final-r4.patch",
         "red_patch": "docs/teaching/daily/day-45/analytics-day45-final-red-r4.patch",
-        "evidence": "docs/source-review/day45-2026-10-31-9ae3c6c/publication.json",
+        "evidence": "docs/source-review/day45-2026-10-31-a7a8267/publication.json",
         "expected_next_day": 46,
         "storage": "raw_latest_pending_product_application",
         "version_msrv_gate_complete": true,
@@ -757,7 +756,7 @@
         },
         "user_acl_semantics": "role defaults plus independent per-user allow; explicit user deny wins, including administrator",
         "red_baseline": "exact f6 source plus this revision's Red tests only; use separate clean copy for complete patch",
-        "validation": "docs/source-review/day45-2026-10-31-9ae3c6c/review.json",
+        "validation": "docs/source-review/day45-2026-10-31-a7a8267/review.json",
         "day_advance": false,
         "acl_hierarchy": [
           "category",
@@ -786,33 +785,31 @@
         "application_at_latest_source": "new exact-f6 complete candidate patch verified by clean apply and tests; product main not written or applied",
         "latest_password_requirement_correction": "docs/requirements/revisions/2026-10-31-self-password-page-correction.md",
         "refactor_included_in_complete_patch": true,
-        "patch_application": "prior runtime/migration corrections adopted; only historical fixture byte-loading correction remains; do not reapply earlier patches",
+        "patch_application": "all prior Day45 corrections adopted; preserve old patches as history and do not reapply",
         "candidate_validation": {
           "source_sha": "f6a04015188da2155af6c264d0e6326e6a922dca",
           "passed": 67,
           "ignored": 1,
           "full_gate2": false
         },
-        "verification_revision": "adopted-source-9ae3c6c",
+        "verification_revision": "product-a7a8267-regression-passed",
         "latest_verification": {
-          "source_sha": "9ae3c6cf42b231004e81be0097f50840b0a15eb5",
-          "raw_passed": 67,
-          "raw_failed": 1,
+          "source_sha": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
+          "product_unmodified": true,
+          "raw_passed": 68,
+          "raw_failed": 0,
           "raw_ignored": 1,
-          "raw_exit": 101,
-          "build_passed": true,
-          "fixture_only_candidate_passed": 68,
-          "candidate_ignored": 1,
-          "candidate_base_sha": "9ae3c6cf42b231004e81be0097f50840b0a15eb5",
-          "evidence": "docs/source-review/day45-2026-10-31-9ae3c6c/review.json"
+          "raw_exit": 0,
+          "evidence": "docs/source-review/day45-2026-10-31-a7a8267/review.json"
         },
-        "correction_patch": "docs/source-review/day45-2026-10-31-9ae3c6c/fixture-exact-bytes.patch",
+        "correction_patch": null,
         "previous_document_revision": {
-          "article_commit": "d13e51b1a2261973a15bc021c5789a493476a3a4",
-          "blob_sha": "d9f8d4fa9b73890df2e2588a71f8a81898e0e91e",
-          "sha256": "acbd2a882f64ceb70ccc3c1ad7233e5a0550a53f4f9767c3b2936f32f19c501a",
-          "evidence": "docs/source-review/day45-2026-10-31-d784f32/publication.json"
-        }
+          "article_commit": "24c9128df35d7707550f7e4c0eb5dc49490054d7",
+          "blob_sha": "e367c09e327634a87e9c610225ed808fc51bba25",
+          "sha256": "0e7e244f6266cfac1a564abb08ed756a6d04303fd989f5eb78c7d0d1ebd2ae4c",
+          "evidence": "docs/source-review/day45-2026-10-31-9ae3c6c/publication.json"
+        },
+        "correction_status": "all prior corrections adopted; no new patch required"
       }
     ],
     "pending_publication": null,
@@ -874,13 +871,40 @@
         "article_commit": "24c9128df35d7707550f7e4c0eb5dc49490054d7",
         "evidence": "docs/source-review/day45-2026-10-31-9ae3c6c/publication.json",
         "day_advance": false
+      },
+      {
+        "project": "analytics",
+        "day": 45,
+        "verification_revision": "product-a7a8267-regression-passed",
+        "article_commit": "7040c1a350986f1efa05ab3c3c41317d8c421290",
+        "evidence": "docs/source-review/day45-2026-10-31-a7a8267/publication.json",
+        "day_advance": false
       }
     ]
   },
   "candidate_validation": "docs/teaching/daily/day-45/delivery-verification.json",
-  "latest_revision_evidence": "docs/source-review/day45-2026-10-31-9ae3c6c/publication.json",
+  "latest_revision_evidence": "docs/source-review/day45-2026-10-31-a7a8267/publication.json",
   "product_adoption": {
     "analytics": {
+      "source_sha": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
+      "schema_definition": true,
+      "runtime_acl": true,
+      "review": "docs/source-review/day45-2026-10-31-a7a8267/README.md",
+      "full_gate2": false,
+      "security_page_default_grant_fixed": true,
+      "shared_password_no_separate_page_confirmed": false,
+      "shared_password_flow_implemented": true,
+      "previous_review": "docs/source-review/analytics-adoption-2026-10-31-63b1f93/README.md",
+      "own_password_acl_page_retained": true,
+      "password_requirement_correction": "docs/requirements/revisions/2026-10-31-self-password-page-correction.md",
+      "password_validation_status": "actual product login/password/ACL regression passed; full Gate2 gaps remain",
+      "runtime_acl_code_present": true,
+      "runtime_status": "actual unmodified a7 product full Analytics postgres-integration68 passed / 1 legacy ignored",
+      "f6_migration_bytes_restored": true,
+      "product_validation": "docs/source-review/day45-2026-10-31-a7a8267/review.json",
+      "fixture_fix_adopted": true
+    },
+    "previous_analytics_snapshot": {
       "source_sha": "9ae3c6cf42b231004e81be0097f50840b0a15eb5",
       "schema_definition": true,
       "runtime_acl": true,
@@ -899,24 +923,6 @@
       "candidate_base_sha": "9ae3c6cf42b231004e81be0097f50840b0a15eb5",
       "f6_migration_bytes_restored": true,
       "frozen_fixture_requires_exact_byte_loader": true
-    },
-    "previous_analytics_snapshot": {
-      "source_sha": "d784f32c6bff86249dd84fd4294d055a4c774a49",
-      "schema_definition": true,
-      "runtime_acl": false,
-      "review": "docs/source-review/day45-2026-10-31-d784f32/README.md",
-      "full_gate2": false,
-      "security_page_default_grant_fixed": true,
-      "shared_password_no_separate_page_confirmed": false,
-      "shared_password_flow_implemented": null,
-      "previous_review": "docs/source-review/analytics-adoption-2026-10-31-63b1f93/README.md",
-      "own_password_acl_page_retained": true,
-      "password_requirement_correction": "docs/requirements/revisions/2026-10-31-self-password-page-correction.md",
-      "password_validation_status": "adopted code present; raw latest build fails; corrected candidate tested separately",
-      "candidate_validation": "docs/source-review/day45-2026-10-31-d784f32/review.json",
-      "runtime_acl_code_present": true,
-      "runtime_status": "adopted but failing postgres-integration compile and login SQL; correction patches published",
-      "candidate_base_sha": "28b71b67907062f804b2358c41fde349c9b18ca9"
     },
     "chat": {
       "source_sha": "d784f32c6bff86249dd84fd4294d055a4c774a49",
@@ -944,7 +950,7 @@
       "reuse_same_password_page": true,
       "no_duplicate_first_login_password_page": true,
       "preserve_first_login_password_change": true,
-      "implementation_status": "adopted functional scope passed on9ae3; one historical fixture test failure and full Gate2 gaps remain",
+      "implementation_status": "adopted and actual product automated scope passed on a7; full Gate2 not complete",
       "requirements_document": "docs/requirements/AUTHENTICATION.md",
       "correction_record": "docs/requirements/revisions/2026-10-31-self-password-page-correction.md",
       "withdrawn_assistant_interpretation": {
@@ -952,7 +958,8 @@
         "interpretation": "no separate ACL page",
         "status": "incorrect; withdrawn after user correction"
       },
-      "candidate_validation": "docs/source-review/day45-2026-10-31-9ae3c6c/review.json"
+      "candidate_validation": "docs/source-review/day45-2026-10-31-9ae3c6c/review.json",
+      "product_validation": "docs/source-review/day45-2026-10-31-a7a8267/review.json"
     }
   },
   "candidate_rewire_validation": {
@@ -963,27 +970,35 @@
     "full_gate2": false
   },
   "previous_gate2_snapshot": {
-    "source_sha": "d784f32c6bff86249dd84fd4294d055a4c774a49",
-    "evidence": "docs/source-review/day45-2026-10-31-d784f32/review.json",
+    "source_sha": "9ae3c6cf42b231004e81be0097f50840b0a15eb5",
+    "evidence": "docs/source-review/day45-2026-10-31-9ae3c6c/review.json",
     "full_gate2": false,
     "complete": false,
     "chat_automated_passed": 44,
     "pet_ui_passed": 11,
     "pet_dom_fixture_poses": 6,
-    "analytics_raw_feature_build_exit": 101,
+    "analytics_raw_feature_build_exit": 0,
     "analytics_corrected_candidate_passed": 68,
     "analytics_candidate_ignored": 1,
-    "candidate_base_sha": "28b71b67907062f804b2358c41fde349c9b18ca9",
+    "candidate_base_sha": "9ae3c6cf42b231004e81be0097f50840b0a15eb5",
     "ci_all_seven_success": false,
     "actual_old_pg_backup_available": false,
-    "manual_desktop_acceptance": false
+    "manual_desktop_acceptance": false,
+    "analytics_raw_feature_test_exit": 101,
+    "analytics_raw_passed": 67,
+    "analytics_raw_failed": 1,
+    "analytics_raw_ignored": 1,
+    "chat_pet_latest_actual_test_source": "d784f32c6bff86249dd84fd4294d055a4c774a49",
+    "chat_pet_current_trees_identical": true
   },
   "latest_day45_verification": {
-    "source_sha": "9ae3c6cf42b231004e81be0097f50840b0a15eb5",
-    "evidence": "docs/source-review/day45-2026-10-31-9ae3c6c/review.json",
+    "source_sha": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
+    "evidence": "docs/source-review/day45-2026-10-31-a7a8267/review.json",
     "gate1": true,
     "gate2": false,
     "product_written": false,
-    "unchanged_projects": "Chat/Pet trees equal d784; retain explicitly d784-labelled test evidence"
+    "analytics_product_passed": 68,
+    "analytics_ignored": 1,
+    "unchanged_projects": "Chat/Pet trees unchanged; retain explicitly d784-labelled evidence"
   }
 }

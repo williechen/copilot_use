@@ -1,7 +1,7 @@
 {
-  "scope": "Day45 9ae3 adoption verified; Analytics raw67/1failed/1ignored, fixture-only candidate68/1ignored; next_day46 unchanged",
+  "scope": "Day45 actual a7 Analytics68/0failed/1ignored verified; prior corrections adopted, next_day46 unchanged",
   "publication_branch": "main",
-  "source_sha": "9ae3c6cf42b231004e81be0097f50840b0a15eb5",
+  "source_sha": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
   "next_day": {
     "chat": 46,
     "pet": 46,
@@ -114,9 +114,9 @@
       "day": 45,
       "revision": "r4",
       "article_path": "docs/teaching/daily/day-45/analytics-r4.md",
-      "article_commit": "24c9128df35d7707550f7e4c0eb5dc49490054d7",
-      "blob_sha": "e367c09e327634a87e9c610225ed808fc51bba25",
-      "sha256": "0e7e244f6266cfac1a564abb08ed756a6d04303fd989f5eb78c7d0d1ebd2ae4c",
+      "article_commit": "7040c1a350986f1efa05ab3c3c41317d8c421290",
+      "blob_sha": "1db172cb0d592bcea1321f9e24f4ef7e1d04c88b",
+      "sha256": "578ae55424361ee11c19d9f1eb4f98cf951954d41b7857aab1c232e3a0d7c090",
       "source_sha": "f6a04015188da2155af6c264d0e6326e6a922dca",
       "publication_status": "published_same_day_verification_revision",
       "gate1_complete": true,
@@ -128,7 +128,7 @@
       "refactor_patch": "docs/teaching/daily/day-45/analytics-day45-refactor.patch",
       "green_patch": "docs/teaching/daily/day-45/analytics-day45-final-r4.patch",
       "red_patch": "docs/teaching/daily/day-45/analytics-day45-final-red-r4.patch",
-      "evidence": "docs/source-review/day45-2026-10-31-9ae3c6c/publication.json",
+      "evidence": "docs/source-review/day45-2026-10-31-a7a8267/publication.json",
       "expected_next_day": 46,
       "storage": "raw_latest_pending_product_application",
       "version_msrv_gate_complete": true,
@@ -217,7 +217,7 @@
       },
       "user_acl_semantics": "role defaults plus independent per-user allow; explicit user deny wins, including administrator",
       "red_baseline": "exact f6 source plus this revision's Red tests only; use separate clean copy for complete patch",
-      "validation": "docs/source-review/day45-2026-10-31-9ae3c6c/review.json",
+      "validation": "docs/source-review/day45-2026-10-31-a7a8267/review.json",
       "day_advance": false,
       "acl_hierarchy": [
         "category",
@@ -246,33 +246,31 @@
       "application_at_latest_source": "new exact-f6 complete candidate patch verified by clean apply and tests; product main not written or applied",
       "latest_password_requirement_correction": "docs/requirements/revisions/2026-10-31-self-password-page-correction.md",
       "refactor_included_in_complete_patch": true,
-      "patch_application": "prior runtime/migration corrections adopted; only historical fixture byte-loading correction remains; do not reapply earlier patches",
+      "patch_application": "all prior Day45 corrections adopted; preserve old patches as history and do not reapply",
       "candidate_validation": {
         "source_sha": "f6a04015188da2155af6c264d0e6326e6a922dca",
         "passed": 67,
         "ignored": 1,
         "full_gate2": false
       },
-      "verification_revision": "adopted-source-9ae3c6c",
+      "verification_revision": "product-a7a8267-regression-passed",
       "latest_verification": {
-        "source_sha": "9ae3c6cf42b231004e81be0097f50840b0a15eb5",
-        "raw_passed": 67,
-        "raw_failed": 1,
+        "source_sha": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
+        "product_unmodified": true,
+        "raw_passed": 68,
+        "raw_failed": 0,
         "raw_ignored": 1,
-        "raw_exit": 101,
-        "build_passed": true,
-        "fixture_only_candidate_passed": 68,
-        "candidate_ignored": 1,
-        "candidate_base_sha": "9ae3c6cf42b231004e81be0097f50840b0a15eb5",
-        "evidence": "docs/source-review/day45-2026-10-31-9ae3c6c/review.json"
+        "raw_exit": 0,
+        "evidence": "docs/source-review/day45-2026-10-31-a7a8267/review.json"
       },
-      "correction_patch": "docs/source-review/day45-2026-10-31-9ae3c6c/fixture-exact-bytes.patch",
+      "correction_patch": null,
       "previous_document_revision": {
-        "article_commit": "d13e51b1a2261973a15bc021c5789a493476a3a4",
-        "blob_sha": "d9f8d4fa9b73890df2e2588a71f8a81898e0e91e",
-        "sha256": "acbd2a882f64ceb70ccc3c1ad7233e5a0550a53f4f9767c3b2936f32f19c501a",
-        "evidence": "docs/source-review/day45-2026-10-31-d784f32/publication.json"
-      }
+        "article_commit": "24c9128df35d7707550f7e4c0eb5dc49490054d7",
+        "blob_sha": "e367c09e327634a87e9c610225ed808fc51bba25",
+        "sha256": "0e7e244f6266cfac1a564abb08ed756a6d04303fd989f5eb78c7d0d1ebd2ae4c",
+        "evidence": "docs/source-review/day45-2026-10-31-9ae3c6c/publication.json"
+      },
+      "correction_status": "all prior corrections adopted; no new patch required"
     }
   ],
   "current_article_paths": {
@@ -327,28 +325,27 @@
     "local_main_upgrade_source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097"
   },
   "current_gate2": {
-    "source_sha": "9ae3c6cf42b231004e81be0097f50840b0a15eb5",
-    "evidence": "docs/source-review/day45-2026-10-31-9ae3c6c/review.json",
+    "source_sha": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
+    "evidence": "docs/source-review/day45-2026-10-31-a7a8267/review.json",
     "full_gate2": false,
     "complete": false,
     "chat_automated_passed": 44,
     "pet_ui_passed": 11,
     "pet_dom_fixture_poses": 6,
     "analytics_raw_feature_build_exit": 0,
-    "analytics_corrected_candidate_passed": 68,
-    "analytics_candidate_ignored": 1,
-    "candidate_base_sha": "9ae3c6cf42b231004e81be0097f50840b0a15eb5",
     "ci_all_seven_success": false,
     "actual_old_pg_backup_available": false,
     "manual_desktop_acceptance": false,
-    "analytics_raw_feature_test_exit": 101,
-    "analytics_raw_passed": 67,
-    "analytics_raw_failed": 1,
+    "analytics_raw_feature_test_exit": 0,
+    "analytics_raw_passed": 68,
+    "analytics_raw_failed": 0,
     "analytics_raw_ignored": 1,
     "chat_pet_latest_actual_test_source": "d784f32c6bff86249dd84fd4294d055a4c774a49",
-    "chat_pet_current_trees_identical": true
+    "chat_pet_current_trees_identical": true,
+    "analytics_product_unmodified": true,
+    "ci_snapshot_had_pending_workflows": true
   },
-  "latest_product_sha": "9ae3c6cf42b231004e81be0097f50840b0a15eb5",
+  "latest_product_sha": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
   "previous_articles": [
     {
       "project": "chat",
@@ -1254,12 +1251,196 @@
         "sha256": "ec8a39c77e5cf90f8def6a5ccec77e9ab91b7be2c70a4a91f4c2e183a0d713d8",
         "evidence": "docs/teaching/daily/day-45/publication-analytics-r4.json"
       }
+    },
+    {
+      "project": "analytics",
+      "day": 45,
+      "revision": "r4",
+      "article_path": "docs/teaching/daily/day-45/analytics-r4.md",
+      "article_commit": "24c9128df35d7707550f7e4c0eb5dc49490054d7",
+      "blob_sha": "e367c09e327634a87e9c610225ed808fc51bba25",
+      "sha256": "0e7e244f6266cfac1a564abb08ed756a6d04303fd989f5eb78c7d0d1ebd2ae4c",
+      "source_sha": "f6a04015188da2155af6c264d0e6326e6a922dca",
+      "publication_status": "published_same_day_verification_revision",
+      "gate1_complete": true,
+      "gate2": false,
+      "functional_acceptance": false,
+      "product_applied": true,
+      "exact_commit_readback": true,
+      "remote_full_text_equal": true,
+      "refactor_patch": "docs/teaching/daily/day-45/analytics-day45-refactor.patch",
+      "green_patch": "docs/teaching/daily/day-45/analytics-day45-final-r4.patch",
+      "red_patch": "docs/teaching/daily/day-45/analytics-day45-final-red-r4.patch",
+      "evidence": "docs/source-review/day45-2026-10-31-9ae3c6c/publication.json",
+      "expected_next_day": 46,
+      "storage": "raw_latest_pending_product_application",
+      "version_msrv_gate_complete": true,
+      "original_publication": {
+        "commit": "d7f44708e02ea805a61d6623c666f15b04fed362",
+        "readback": [
+          {
+            "path": "docs/teaching/daily/day-45/source-inventory.json",
+            "blob_sha": "52ca5116c5280bd0b5e522e9445ad7fd56706af9",
+            "full_text_equal": true,
+            "sha256": "932493f2f31459abde7a530114874a0e5949135a9e8606dd1a74eac9dd95b2d5"
+          },
+          {
+            "path": "docs/teaching/daily/day-45/analytics-regression.log",
+            "blob_sha": "3771d7fff61c1ab6c2bcbd0e82d3979b56595229",
+            "full_text_equal": true,
+            "sha256": "3b9eec3b174b3eacfff82eb668d217b901256ae732cf70fc3a4d0b69d3c9348d"
+          },
+          {
+            "path": "docs/teaching/daily/day-45/analytics-final.log",
+            "blob_sha": "f046dda909235c05f977ee25f26fcc66f87979fd",
+            "full_text_equal": true,
+            "sha256": "cd209a3700d2621f1dfa3df6782cd61b2bec1583929f935b71e1c8d00b9b23d9"
+          },
+          {
+            "path": "docs/teaching/daily/day-45/analytics-validation.json",
+            "blob_sha": "37aebd0d6f5280b9d5337f04913330edc22540ba",
+            "full_text_equal": true,
+            "sha256": "d008eeab20d09c9cb408e8237dcef40a2a64788a93b0b827fe7e05e799422be7"
+          },
+          {
+            "path": "docs/teaching/daily/day-45/analytics.md",
+            "blob_sha": "80f13ea411a55ecd587e5f73df05d282d9579184",
+            "full_text_equal": true,
+            "sha256": "6b66c85b4a46a3221c7c9594a10394cb94a33cbd6dc306a2372a203538ba90e9"
+          },
+          {
+            "path": "docs/teaching/daily/day-45/analytics-final-journey.log",
+            "blob_sha": "38c37b8c522e3204b55ee08b2b8301a2dff9d447",
+            "full_text_equal": true,
+            "sha256": "f77870932c5e288063b5a42440a5ff64f673c964608cc6ad80f06345ba9deda6"
+          },
+          {
+            "path": "docs/teaching/daily/day-45/analytics-red-r2.log",
+            "blob_sha": "6aad0c30a03a00ef30a622e0ae500aab75667c5b",
+            "full_text_equal": true,
+            "sha256": "e15581da7c849e6132bca680b766fbbcbb8aa7d12782d742b69199037dcd7c31"
+          },
+          {
+            "path": "docs/teaching/daily/day-45/analytics-day45-red.patch",
+            "blob_sha": "49563056ea083127569cca5ca168f3dadad1540c",
+            "full_text_equal": true,
+            "sha256": "afc7caff0ea39f6ecf6a5e89799bff4801b336ab6dd8b5d8674f19fe160d60be"
+          },
+          {
+            "path": "docs/teaching/daily/day-45/analytics-green.log",
+            "blob_sha": "bc351933b5918bde3d74f4197defd0e40b8342a6",
+            "full_text_equal": true,
+            "sha256": "ffeb2e0f2c7b64b679b00b00ff8bc9c0ffc83fe3e9ea260fb1b6421d2852f424"
+          },
+          {
+            "path": "docs/teaching/daily/day-45/analytics-day45-refactor.patch",
+            "blob_sha": "186dcc173d9e000c4eb5776d58794c6f71f29c80",
+            "full_text_equal": true,
+            "sha256": "ee96fc5f3af31fb42ccac54ec8b0c1e55f2ab4a212ab52cea52a6ded9baf8f4e"
+          },
+          {
+            "path": "docs/teaching/daily/day-45/analytics-day45-green.patch",
+            "blob_sha": "84b5faeb22ddb199179f2ed1c02f0c9822da8132",
+            "full_text_equal": true,
+            "sha256": "bb42fb22113310e2380eb3b70e9e258fc2682c296bb78735ece12bc2e40d85b8"
+          },
+          {
+            "path": "docs/teaching/daily/day-45/analytics-red.log",
+            "blob_sha": "ad11f6796343b341c053ff3def4a3af17d2bf0c9",
+            "full_text_equal": true,
+            "sha256": "e7fa66165c93fe750fd44d6f2125d2a383eb51e45bb2a9f6e5963bae391664eb"
+          },
+          {
+            "path": "docs/teaching/daily/day-45/pg-startup.log",
+            "blob_sha": "5be18cd10703cb1aed63e16baf7c622259c91fc7",
+            "full_text_equal": true,
+            "sha256": "db54101f24277918b7a0bdc60db98e4412c014681fa1de3f754449a2f5f9d0d9"
+          }
+        ]
+      },
+      "user_acl_semantics": "role defaults plus independent per-user allow; explicit user deny wins, including administrator",
+      "red_baseline": "exact f6 source plus this revision's Red tests only; use separate clean copy for complete patch",
+      "validation": "docs/source-review/day45-2026-10-31-9ae3c6c/review.json",
+      "day_advance": false,
+      "acl_hierarchy": [
+        "category",
+        "page",
+        "action"
+      ],
+      "acl_categories": [
+        "會員管理",
+        "資訊分析",
+        "認證管理"
+      ],
+      "actions": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "previous_revision": {
+        "revision": "r3",
+        "article_path": "docs/teaching/daily/day-45/analytics-r3.md",
+        "article_commit": "44402c7aa1e891970fce4c2480115be1562d5cb4",
+        "blob_sha": "3b0e9c0e8aed47717b3875509b2873706b08d3e8",
+        "sha256": "1eabe96c9ea93bd88d210c1d1e83d87903a9865d4d68160e68f2f756e1c7bc91"
+      },
+      "latest_product_review": "docs/source-review/analytics-adoption-2026-10-31-f6a0401/README.md",
+      "application_at_latest_source": "new exact-f6 complete candidate patch verified by clean apply and tests; product main not written or applied",
+      "latest_password_requirement_correction": "docs/requirements/revisions/2026-10-31-self-password-page-correction.md",
+      "refactor_included_in_complete_patch": true,
+      "patch_application": "prior runtime/migration corrections adopted; only historical fixture byte-loading correction remains; do not reapply earlier patches",
+      "candidate_validation": {
+        "source_sha": "f6a04015188da2155af6c264d0e6326e6a922dca",
+        "passed": 67,
+        "ignored": 1,
+        "full_gate2": false
+      },
+      "verification_revision": "adopted-source-9ae3c6c",
+      "latest_verification": {
+        "source_sha": "9ae3c6cf42b231004e81be0097f50840b0a15eb5",
+        "raw_passed": 67,
+        "raw_failed": 1,
+        "raw_ignored": 1,
+        "raw_exit": 101,
+        "build_passed": true,
+        "fixture_only_candidate_passed": 68,
+        "candidate_ignored": 1,
+        "candidate_base_sha": "9ae3c6cf42b231004e81be0097f50840b0a15eb5",
+        "evidence": "docs/source-review/day45-2026-10-31-9ae3c6c/review.json"
+      },
+      "correction_patch": "docs/source-review/day45-2026-10-31-9ae3c6c/fixture-exact-bytes.patch",
+      "previous_document_revision": {
+        "article_commit": "d13e51b1a2261973a15bc021c5789a493476a3a4",
+        "blob_sha": "d9f8d4fa9b73890df2e2588a71f8a81898e0e91e",
+        "sha256": "acbd2a882f64ceb70ccc3c1ad7233e5a0550a53f4f9767c3b2936f32f19c501a",
+        "evidence": "docs/source-review/day45-2026-10-31-d784f32/publication.json"
+      }
     }
   ],
   "candidate_validation": "docs/teaching/daily/day-45/delivery-verification.json",
-  "latest_revision_evidence": "docs/source-review/day45-2026-10-31-9ae3c6c/publication.json",
+  "latest_revision_evidence": "docs/source-review/day45-2026-10-31-a7a8267/publication.json",
   "product_adoption": {
     "analytics": {
+      "source_sha": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
+      "schema_definition": true,
+      "runtime_acl": true,
+      "review": "docs/source-review/day45-2026-10-31-a7a8267/README.md",
+      "full_gate2": false,
+      "security_page_default_grant_fixed": true,
+      "shared_password_no_separate_page_confirmed": false,
+      "shared_password_flow_implemented": true,
+      "previous_review": "docs/source-review/analytics-adoption-2026-10-31-63b1f93/README.md",
+      "own_password_acl_page_retained": true,
+      "password_requirement_correction": "docs/requirements/revisions/2026-10-31-self-password-page-correction.md",
+      "password_validation_status": "actual product login/password/ACL regression passed; full Gate2 gaps remain",
+      "runtime_acl_code_present": true,
+      "runtime_status": "actual unmodified a7 product full Analytics postgres-integration68 passed / 1 legacy ignored",
+      "f6_migration_bytes_restored": true,
+      "product_validation": "docs/source-review/day45-2026-10-31-a7a8267/review.json",
+      "fixture_fix_adopted": true
+    },
+    "previous_analytics_snapshot": {
       "source_sha": "9ae3c6cf42b231004e81be0097f50840b0a15eb5",
       "schema_definition": true,
       "runtime_acl": true,
@@ -1278,24 +1459,6 @@
       "candidate_base_sha": "9ae3c6cf42b231004e81be0097f50840b0a15eb5",
       "f6_migration_bytes_restored": true,
       "frozen_fixture_requires_exact_byte_loader": true
-    },
-    "previous_analytics_snapshot": {
-      "source_sha": "d784f32c6bff86249dd84fd4294d055a4c774a49",
-      "schema_definition": true,
-      "runtime_acl": false,
-      "review": "docs/source-review/day45-2026-10-31-d784f32/README.md",
-      "full_gate2": false,
-      "security_page_default_grant_fixed": true,
-      "shared_password_no_separate_page_confirmed": false,
-      "shared_password_flow_implemented": null,
-      "previous_review": "docs/source-review/analytics-adoption-2026-10-31-63b1f93/README.md",
-      "own_password_acl_page_retained": true,
-      "password_requirement_correction": "docs/requirements/revisions/2026-10-31-self-password-page-correction.md",
-      "password_validation_status": "adopted code present; raw latest build fails; corrected candidate tested separately",
-      "candidate_validation": "docs/source-review/day45-2026-10-31-d784f32/review.json",
-      "runtime_acl_code_present": true,
-      "runtime_status": "adopted but failing postgres-integration compile and login SQL; correction patches published",
-      "candidate_base_sha": "28b71b67907062f804b2358c41fde349c9b18ca9"
     },
     "chat": {
       "source_sha": "d784f32c6bff86249dd84fd4294d055a4c774a49",
@@ -1324,27 +1487,35 @@
   },
   "source_scope": "latest adopted-source verification; original article teaching baselines remain historical",
   "previous_gate2_snapshot": {
-    "source_sha": "d784f32c6bff86249dd84fd4294d055a4c774a49",
-    "evidence": "docs/source-review/day45-2026-10-31-d784f32/review.json",
+    "source_sha": "9ae3c6cf42b231004e81be0097f50840b0a15eb5",
+    "evidence": "docs/source-review/day45-2026-10-31-9ae3c6c/review.json",
     "full_gate2": false,
     "complete": false,
     "chat_automated_passed": 44,
     "pet_ui_passed": 11,
     "pet_dom_fixture_poses": 6,
-    "analytics_raw_feature_build_exit": 101,
+    "analytics_raw_feature_build_exit": 0,
     "analytics_corrected_candidate_passed": 68,
     "analytics_candidate_ignored": 1,
-    "candidate_base_sha": "28b71b67907062f804b2358c41fde349c9b18ca9",
+    "candidate_base_sha": "9ae3c6cf42b231004e81be0097f50840b0a15eb5",
     "ci_all_seven_success": false,
     "actual_old_pg_backup_available": false,
-    "manual_desktop_acceptance": false
+    "manual_desktop_acceptance": false,
+    "analytics_raw_feature_test_exit": 101,
+    "analytics_raw_passed": 67,
+    "analytics_raw_failed": 1,
+    "analytics_raw_ignored": 1,
+    "chat_pet_latest_actual_test_source": "d784f32c6bff86249dd84fd4294d055a4c774a49",
+    "chat_pet_current_trees_identical": true
   },
   "latest_day45_verification": {
-    "source_sha": "9ae3c6cf42b231004e81be0097f50840b0a15eb5",
-    "evidence": "docs/source-review/day45-2026-10-31-9ae3c6c/review.json",
+    "source_sha": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
+    "evidence": "docs/source-review/day45-2026-10-31-a7a8267/review.json",
     "gate1": true,
     "gate2": false,
     "product_written": false,
-    "unchanged_projects": "Chat/Pet trees equal d784; retain explicitly d784-labelled test evidence"
+    "analytics_product_passed": 68,
+    "analytics_ignored": 1,
+    "unchanged_projects": "Chat/Pet trees unchanged; retain explicitly d784-labelled evidence"
   }
 }

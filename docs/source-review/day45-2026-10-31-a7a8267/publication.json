@@ -1,0 +1,64 @@
+{
+  "source_sha": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
+  "article_commit": "7040c1a350986f1efa05ab3c3c41317d8c421290",
+  "readback": [
+    {
+      "path": "docs/source-review/day45-2026-10-31-a7a8267/README.md",
+      "blob_sha": "3fee989a5ff360c20a4274cd216a7b795320ee18",
+      "sha256": "5dd81fa3e08fd99be4adc7925cd0b11860715892a16a410c8b35abe920195d56",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-a7a8267/review.json",
+      "blob_sha": "97f9fa0a95cb492465fa193148a9d7c76f8d0caa",
+      "sha256": "7ca920a372817ae319fa13ad7539c5c97dc5d75ef315c4558ac5be2a09f47a56",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-a7a8267/source.json",
+      "blob_sha": "fa55a12c22ccf0218e6d449fdd08f812c4f16089",
+      "sha256": "63debaa60fb52daa65778379a2db8966b7c66350f6fede46056192f84748cc3a",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-a7a8267/analytics.log",
+      "blob_sha": "195778c1083a44bbef97f6d239e7a6b9f39bac43",
+      "sha256": "58fd5265d9ef33e64d3f12caf087a6763b2e6d504e84e04ca3159d4a02381459",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-a7a8267/ci.json",
+      "blob_sha": "9fc9d5e284434eabb70b646bc6751e4dcabd38cc",
+      "sha256": "e6a386253be0b37796a20078f30ef3cd4b0c233735750601bcea428ee930b8a1",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-a7a8267/cleanup.json",
+      "blob_sha": "b3f80b683689009da0c5fff8da9b34bc38421c57",
+      "sha256": "165398c81ae69fb8330798313a42f9ceaa7f00963a4e38485ee3f32f49f63423",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/teaching/daily/day-45/analytics-r4.md",
+      "blob_sha": "1db172cb0d592bcea1321f9e24f4ef7e1d04c88b",
+      "sha256": "578ae55424361ee11c19d9f1eb4f98cf951954d41b7857aab1c232e3a0d7c090",
+      "full_text_equal": true
+    }
+  ],
+  "expected_sync_parent": "7040c1a350986f1efa05ab3c3c41317d8c421290",
+  "expected_next_day": {
+    "chat": 46,
+    "pet": 46,
+    "analytics": 46
+  },
+  "day_advance": false,
+  "fifo_changed": false,
+  "last_full_comparison_changed": false,
+  "product_written": false,
+  "product_raw_passed": 68,
+  "product_raw_ignored": 1,
+  "product_raw_exit": 0,
+  "new_patch_required": false,
+  "gate1": true,
+  "gate2": false
+}

@@ -1,3 +1,5 @@
+> 最新a7a8267f已採用最後fixture補正：產品原樣Analytics完整postgres-integration **68通過／0失敗／1既有ignored，exit0**，不再是候選結果，亦無需新patch。[實際SHA／命令／log／限制](https://github.com/williechen/copilot_use/blob/main/docs/source-review/day45-2026-10-31-a7a8267/README.md)。Chat／Pet子樹未改，保留d784實測標記；三案next_day仍46，FIFO及last_full_comparison不變，完整Gate2仍false。本段取代下方較早「仍1失敗」狀態，歷史證據保留。
+
 > 最新9ae3c6cf採用核對：前次Analytics SQL／匯入／migration已修；原樣67通過／1失敗／1 ignored，只剩歷史fixture檔尾LF。單檔測試補正候選68通過／1 ignored，[來源／完整patch／證據](https://github.com/williechen/copilot_use/blob/main/docs/source-review/day45-2026-10-31-9ae3c6c/README.md)。Chat／Pet子樹未改，沿用明確標成d784的證據。舊修正包勿重套；next_day仍46、未加Day、完整Gate2=false。本段取代下方先前採用狀態，歷史證據保留。
 
 > Day45 最新採用核對（d784f32c）：Chat 44通過；Pet UI11／DOM六pose通過，使用者已修正browser錯字；Analytics postgres-integration仍編譯失敗，修正候選68通過／1 ignored。產品與候選分列，[錯誤／完整patch／DB適用條件／清暫存](https://github.com/williechen/copilot_use/blob/main/docs/source-review/day45-2026-10-31-d784f32/README.md)。已清約5.15GB可重建暫存。三案next_day仍46、未加Day，完整Gate2=false。本段取代下方較早f6候選狀態，歷史證據保留。
