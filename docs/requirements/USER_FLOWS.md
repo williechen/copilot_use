@@ -57,3 +57,7 @@ Chat與Analytics管理採相同邏輯：uac_acl只是定義，uac_role_acl／uac
 ### 會員權限層級（2026-10-31）
 
 會員權限只會有action等級：mbr_perm定義action，mbr_role_perm保存會員角色的action授權，mbr_user_perm保存個人action加減。管理端的category／page ACL與先page再action條件不套用到會員端；定義不等於授權、多角色聯集及個人deny優先仍相同。受保護會員操作仍須檢查資源範圍與既有逐房規則；公開清單需求不變。[共用契約](COMMON_AUTHORIZATION.md)。
+
+### 必要會員功能的action管理（2026-10-31）
+
+修改本人會員資料與修改本人會員密碼都必須提供，並分別作為mbr_perm的會員action，由mbr_role_perm授予角色、mbr_user_perm做個人加減。兩者不能互相代替，不因已登入就自動放行；更新前須查有效action及本人資源範圍，拒絕不得寫入。會員端只管理自身，不提供管理其他會員資料／密碼的功能；角色或個人加權也不能擴大此範圍。管理端操作須使用獨立管理身分與授權。[共同契約](COMMON_AUTHORIZATION.md)。
