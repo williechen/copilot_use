@@ -81,3 +81,20 @@ page ─→ category：至少有一個具有效page權限的子頁，才顯示�
 | 最後一個可用page被減權 | 重新計算後隱藏 | 隱藏該page的action |
 
 這是已確認的顯示需求，尚未宣稱產品UI或runtime已實作；不新增Day、不改next_day、FIFO或last_full_comparison。
+
+## CRUD action也寫入uac_role_acl（2026-10-31 使用者確認）
+
+`uac_role_acl`不只記錄角色可用的page；角色獲授權的create/read/update/delete **action也必須各自寫入此表**。每筆以`role_id + acl_id`對應，其中`acl_id`指向所屬page下該操作的`uac_acl` action節點，不能只在UI保存勾選或以程式硬編角色權限。
+
+| 資料 | 存放位置 |
+| --- | --- |
+| page與其CRUD action定義、父子關係 | uac_acl |
+| 角色對page的授權 | uac_role_acl，acl_id指向page |
+| 角色對各CRUD action的授權 | uac_role_acl，acl_id分別指向該page的action |
+| 個人對page／action的獨立加減權 | uac_user_acl |
+
+例如某角色獲准使用自身密碼page及update操作，需分別存在「該角色→analytics-password」與「該角色→analytics-password-update」兩筆關係。這只是結構示例，不表示自動對任何角色加權，也不表示有page即授予全部CRUD。
+
+角色權限編輯時，勾選某CRUD即新增對應的uac_role_acl關係，取消則移除該角色對該action的關係；不刪除uac_acl定義，不影響其他角色與既有個人例外。相同操作名稱在不同page下是不同action，不可跨page套用。
+
+有效權限仍合併角色預設與uac_user_acl個人加減，deny優先。功能樹維持page→category、page→action；UI與後端必須讀取保存後的權限重新判斷。本次僅補明需求，不宣稱產品接線或權限編輯UI已完成，不增加Day或變更學習進度。
