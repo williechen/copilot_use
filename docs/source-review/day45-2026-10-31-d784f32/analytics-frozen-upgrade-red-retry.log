@@ -1,0 +1,48 @@
+   Compiling chat-domain v0.2.45 (/tmp/day45-upgrade-red/chat_apps/chat_domain)
+warning: unused import: `analytics_persistence::summary_for_source`
+ --> analytics_server/src/pg_store.rs:1:5
+  |
+1 | use analytics_persistence::summary_for_source;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `analytics_persistence::summary_for_source`
+  --> analytics_server/src/lib.rs:14:5
+   |
+14 | use analytics_persistence::summary_for_source;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: `analytics-server` (lib) generated 2 warnings (run `cargo fix --lib -p analytics-server` to apply 2 suggestions)
+   Compiling analytics-server v0.2.45 (/tmp/day45-upgrade-red/analytics_apps/analytics_server)
+   Compiling shared v0.2.45 (/tmp/day45-upgrade-red/crates/shared)
+warning: function `app` is never used
+ --> analytics_server/tests/support/mod.rs:6:8
+  |
+6 | pub fn app(pool: sqlx::PgPool, chat: &str, pet: &str) -> axum::Router {
+  |        ^^^
+  |
+  = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `analytics-server` (test "day45_final") generated 1 warning
+    Finished `test` profile [unoptimized] target(s) in 1.59s
+     Running tests/day45_final.rs (/tmp/day45-analytics-review-target/debug/deps/day45_final-21d183526aa6912a)
+
+running 1 test
+test upgrade_from_exact_f6_migrations_preserves_checksums_and_deny ... FAILED
+
+failures:
+
+---- upgrade_from_exact_f6_migrations_preserves_checksums_and_deny stdout ----
+
+thread 'upgrade_from_exact_f6_migrations_preserves_checksums_and_deny' (34028) panicked at analytics_server/tests/day45_final.rs:166:26:
+called `Result::unwrap()` on an `Err` value: VersionMismatch(20261031074500)
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    upgrade_from_exact_f6_migrations_preserves_checksums_and_deny
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 4 filtered out; finished in 0.30s
+
+error: test failed, to rerun pass `-p analytics-server --test day45_final`

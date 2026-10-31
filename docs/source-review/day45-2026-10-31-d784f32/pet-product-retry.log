@@ -1,0 +1,28 @@
+   Compiling web-sys v0.3.107
+   Compiling gloo-utils v0.2.0
+   Compiling gloo-net v0.6.0
+   Compiling tachys v0.2.19
+   Compiling wasm-streams v0.5.0
+   Compiling server_fn v0.8.13
+   Compiling leptos_server v0.8.8
+   Compiling leptos_dom v0.8.8
+   Compiling leptos v0.8.22
+   Compiling pet-ui v0.2.45 (/tmp/day45-adopted/pet_apps/pet_ui)
+    Finished `test` profile [unoptimized] target(s) in 16.61s
+     Running unittests src/main.rs (/home/willie/Documents/Codex/2026-10-27/referenced-chatgpt-conversation-this-is-an/work/cargo-target/debug/deps/pet_ui-d2df84f22e6ffcf0)
+
+running 11 tests
+test component::pose::tests::day26_each_pose_selects_single_image_class ... ok
+test cage_status::tests::two_pets_keep_independent_status_and_failure_is_not_false ... ok
+test component::pose::tests::idle_blink_has_priority ... ok
+test component::pose::tests::sleeping_uses_animation_phase ... ok
+test component::snapshot::tests::snapshot_order_preserves_existing_ipc_and_event_assertions ... ok
+test day16_scan_generation_tests::canceled_or_superseded_scan_cannot_restore_preview ... ok
+test duplicate_preview::tests::empty_preview_is_explicit_and_missing_contract_is_rejected ... ok
+test component::pose::tests::interacting_uses_animation_phase ... ok
+test duplicate_preview::tests::summary_shows_group_sizes_without_private_paths ... ok
+test file_scan_view::tests::counts_are_visible_but_private_values_are_discarded ... ok
+test file_scan_view::tests::empty_is_explicit_and_incomplete_contract_is_rejected ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

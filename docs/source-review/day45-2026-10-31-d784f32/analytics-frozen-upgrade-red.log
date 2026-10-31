@@ -1,0 +1,4 @@
+error: no matching package named `chat-domain` found
+location searched: /tmp/day45-upgrade-red/chat_apps/chat_domain
+required by package `shared v0.2.45 (/tmp/day45-upgrade-red/crates/shared)`
+    ... which satisfies path dependency `shared` (locked to 0.2.45) of package `analytics-server v0.2.45 (/tmp/day45-upgrade-red/analytics_apps/analytics_server)`

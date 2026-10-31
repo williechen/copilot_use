@@ -1,0 +1,144 @@
+{
+  "removed_before_validation": [
+    {
+      "path": "work/candidate",
+      "bytes": 232022586,
+      "file_count": 305,
+      "reason": "task-owned isolated candidate or rebuildable downloaded archive; published patches/logs retained in copilot_use Git history"
+    },
+    {
+      "path": "work/final-candidate",
+      "bytes": 12623565,
+      "file_count": 555,
+      "reason": "task-owned isolated candidate or rebuildable downloaded archive; published patches/logs retained in copilot_use Git history"
+    },
+    {
+      "path": "work/tools/node-v26.13.0-linux-x64.tar.xz",
+      "bytes": 34083252,
+      "file_count": 1,
+      "reason": "task-owned isolated candidate or rebuildable downloaded archive; published patches/logs retained in copilot_use Git history"
+    },
+    {
+      "path": "work/__pycache__",
+      "bytes": 8099,
+      "file_count": 1,
+      "reason": "task-owned isolated candidate or rebuildable downloaded archive; published patches/logs retained in copilot_use Git history"
+    }
+  ],
+  "kept": [
+    "read-only product source checkout",
+    "dirty documentation checkout",
+    "published/source-review articles, patches, logs and readback evidence",
+    "shared dependency/build caches except rebuildable incremental cache"
+  ],
+  "rebuildable_incremental_cache_removed": {
+    "path": "/home/willie/Documents/Codex/2026-10-27/referenced-chatgpt-conversation-this-is-an/work/cargo-target/debug/incremental",
+    "reason": "rebuildable Cargo incremental compiler cache; no source, DB, article or evidence files",
+    "bytes": 3042515116
+  },
+  "removed_after_validation": [
+    {
+      "path": "/tmp/day45-apply-check",
+      "bytes": 6766586,
+      "file_count": 254,
+      "reason": "task-owned isolated source/test DB/compiler target/browser dependencies/downloaded runtime; evidence retained in work/day45-review"
+    },
+    {
+      "path": "/tmp/day45-runtime-only",
+      "bytes": 6755518,
+      "file_count": 251,
+      "reason": "task-owned isolated source/test DB/compiler target/browser dependencies/downloaded runtime; evidence retained in work/day45-review"
+    },
+    {
+      "path": "/tmp/day45-reference",
+      "bytes": 6715053,
+      "file_count": 243,
+      "reason": "task-owned isolated source/test DB/compiler target/browser dependencies/downloaded runtime; evidence retained in work/day45-review"
+    },
+    {
+      "path": "/tmp/day45-overflow-control",
+      "bytes": 9155,
+      "file_count": 2,
+      "reason": "task-owned isolated source/test DB/compiler target/browser dependencies/downloaded runtime; evidence retained in work/day45-review"
+    },
+    {
+      "path": "/tmp/day45-pet-node26.png",
+      "bytes": 7668,
+      "file_count": 1,
+      "reason": "task-owned isolated source/test DB/compiler target/browser dependencies/downloaded runtime; evidence retained in work/day45-review"
+    },
+    {
+      "path": "/tmp/day45-upgrade-cae4ef17-7782-49e8-be54-5b06002833e0",
+      "bytes": 10246,
+      "file_count": 7,
+      "reason": "task-owned isolated source/test DB/compiler target/browser dependencies/downloaded runtime; evidence retained in work/day45-review"
+    },
+    {
+      "path": "/tmp/day45-upgrade-red",
+      "bytes": 615559,
+      "file_count": 116,
+      "reason": "task-owned isolated source/test DB/compiler target/browser dependencies/downloaded runtime; evidence retained in work/day45-review"
+    },
+    {
+      "path": "/tmp/day45-pet-corrected.png",
+      "bytes": 7668,
+      "file_count": 1,
+      "reason": "task-owned isolated source/test DB/compiler target/browser dependencies/downloaded runtime; evidence retained in work/day45-review"
+    },
+    {
+      "path": "/tmp/day45-corrected",
+      "bytes": 12667898,
+      "file_count": 575,
+      "reason": "task-owned isolated source/test DB/compiler target/browser dependencies/downloaded runtime; evidence retained in work/day45-review"
+    },
+    {
+      "path": "/tmp/day45-analytics-review-target",
+      "bytes": 1388390989,
+      "file_count": 2926,
+      "reason": "task-owned isolated source/test DB/compiler target/browser dependencies/downloaded runtime; evidence retained in work/day45-review"
+    },
+    {
+      "path": "/tmp/day45-adopted",
+      "bytes": 6755519,
+      "file_count": 251,
+      "reason": "task-owned isolated source/test DB/compiler target/browser dependencies/downloaded runtime; evidence retained in work/day45-review"
+    },
+    {
+      "path": "work/pgdata",
+      "bytes": 131867034,
+      "file_count": 2626,
+      "reason": "task-owned isolated source/test DB/compiler target/browser dependencies/downloaded runtime; evidence retained in work/day45-review"
+    },
+    {
+      "path": "work/browser/node_modules",
+      "bytes": 18705837,
+      "file_count": 184,
+      "reason": "task-owned isolated source/test DB/compiler target/browser dependencies/downloaded runtime; evidence retained in work/day45-review"
+    },
+    {
+      "path": "work/tools/node-v26.13.0-linux-x64",
+      "bytes": 224437237,
+      "file_count": 4743,
+      "reason": "task-owned isolated source/test DB/compiler target/browser dependencies/downloaded runtime; evidence retained in work/day45-review"
+    }
+  ],
+  "total_removed_bytes": 5150431899,
+  "isolated_postgres_stopped": true,
+  "latest_source_recheck_cleanup": [
+    {
+      "path": "/tmp/day45-latest",
+      "bytes": 6755520,
+      "reason": "temporary latest-source verification copy and reinstalled browser test dependencies"
+    },
+    {
+      "path": "/tmp/day45-latest-browser",
+      "bytes": 18704126,
+      "reason": "temporary latest-source verification copy and reinstalled browser test dependencies"
+    },
+    {
+      "path": "/tmp/day45-latest-pet.png",
+      "bytes": 7668,
+      "reason": "temporary latest-source verification copy and reinstalled browser test dependencies"
+    }
+  ]
+}

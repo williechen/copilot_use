@@ -1,0 +1,58 @@
+{
+  "previous_sha": "28b71b67907062f804b2358c41fde349c9b18ca9",
+  "latest_sha": "d784f32c6bff86249dd84fd4294d055a4c774a49",
+  "diff_files": [
+    "pet_apps/pet_ui/tests/browser/canvas.cjs"
+  ],
+  "trees": {
+    "chat_apps": {
+      "before_tree": "a92503a725ecd41aeca3a71d2d33fccc2a498d6e",
+      "after_tree": "a92503a725ecd41aeca3a71d2d33fccc2a498d6e",
+      "identical": true
+    },
+    "analytics_apps": {
+      "before_tree": "599ba8f672740b734b20c77fc294d2ec48b9a912",
+      "after_tree": "599ba8f672740b734b20c77fc294d2ec48b9a912",
+      "identical": true
+    },
+    "pet_apps": {
+      "before_tree": "a18d6576fd0afc2a68ab284e0de5cd601dfc78c8",
+      "after_tree": "ae8bbcd373252c9c8dd9715e6267bd8ee3059a73",
+      "identical": false
+    }
+  },
+  "chat_actual_latest_test": {
+    "log": "chat-d784.log",
+    "passed": 44,
+    "exit": 0
+  },
+  "pet_actual_latest_tests": {
+    "ui_log": "pet-d784-ui.log",
+    "ui_passed": 11,
+    "browser_log": "pet-d784-browser-retry.log",
+    "browser_poses": 6,
+    "exit": 0
+  },
+  "analytics_actual_latest_build": {
+    "log": "analytics-d784-build.log",
+    "exit": 101
+  },
+  "analytics_corrected_candidate_tests": "68 passed / 1 ignored on corrected28; Analytics tree identical at latest, no retagging those tests as raw latest tests",
+  "latest_patch_checks": [
+    {
+      "patch": "analytics-runtime-fix.patch",
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "patch": "analytics-f6-upgrade-fix.patch",
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "patch": "analytics-complete-correction.patch",
+      "exit": 0,
+      "stderr": ""
+    }
+  ]
+}

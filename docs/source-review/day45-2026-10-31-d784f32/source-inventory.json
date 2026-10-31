@@ -1,0 +1,206 @@
+{
+  "source_sha": "28b71b67907062f804b2358c41fde349c9b18ca9",
+  "files": [
+    {
+      "path": "analytics_apps/Cargo.lock",
+      "blob_sha": "edecda45bcdcf5b1625e36480b1bf6702fe0ab7b",
+      "sha256": "17a7ed50f20a42efecce237ff5f663ecae7769f1e08c738b7e1f8208a938c0a5"
+    },
+    {
+      "path": "analytics_apps/Cargo.toml",
+      "blob_sha": "e856a9ebc314e36dcc8d6e3ebaa270cdcfbcadda",
+      "sha256": "063ebc4ea1d532875ea0321bca58a7637da63d087e9075ef3a15c46589ed0be9"
+    },
+    {
+      "path": "analytics_apps/analytics_persistence/src/lib.rs",
+      "blob_sha": "65d08907bb6059cdac4fa6168d08da8b8f9a435e",
+      "sha256": "650ac5b5acaf75fbfe1e77b5d16e843e7b78ed4aada05bab84724d08b641ea03"
+    },
+    {
+      "path": "analytics_apps/analytics_persistence/src/login_session.rs",
+      "blob_sha": "36c8e28dca66af5592415ebe2e1cf69d9a8b66df",
+      "sha256": "833c945e0d7cce382e91f709303090d7f1bfdec7dda27344aa42be087fc20883"
+    },
+    {
+      "path": "analytics_apps/analytics_server/src/accounts.rs",
+      "blob_sha": "4e28676deb0d9fbdbc8dcb978e489fdbe8f8ff41",
+      "sha256": "9feed6e337835312934803ef2316beb56b8856456260daa4f397d96d8d22081c"
+    },
+    {
+      "path": "analytics_apps/analytics_server/src/bootstrap.rs",
+      "blob_sha": "724ca821f0fcb60c23c6c257dd2d5648be4244a1",
+      "sha256": "fe32f6b9e9b1b1cb870bd648ece345b7fb83859e55f30d024c94f0de3d7207ce"
+    },
+    {
+      "path": "analytics_apps/analytics_server/src/dashboard_ui.rs",
+      "blob_sha": "c5621d0b3671a156a5a1d78dda2aa0ec8cdb68af",
+      "sha256": "b6084f64c16a4cb8c160f90d3c1f9a428aa3a3b938bea18ffb901e04cf361182"
+    },
+    {
+      "path": "analytics_apps/analytics_server/src/export.rs",
+      "blob_sha": "f6046008fe61ce753d6b515cbfbc9c4e08f4a0c2",
+      "sha256": "ac950579e15384eb4a08ba11f570fa339595ea3cb33000712f35246a2c149294"
+    },
+    {
+      "path": "analytics_apps/analytics_server/src/lib.rs",
+      "blob_sha": "576fe3e67755ec5976596d1ddb663b7c89747628",
+      "sha256": "2564f8f5e6cc926c452a037cc802af4173ac507ae0d0152b39803ea7203f6d98"
+    },
+    {
+      "path": "analytics_apps/analytics_server/src/page_acl.rs",
+      "blob_sha": "da8cd131d431fc3517459c4dec1fbaea9a4f8944",
+      "sha256": "dddeebafe75e69adf4a4dc3d7855f8f295fa557085696706408aa42eb3880da7"
+    },
+    {
+      "path": "analytics_apps/analytics_server/src/password_login.rs",
+      "blob_sha": "5f6c67457403dc52dd7353f8d294695d4203c5ef",
+      "sha256": "1bfaba53cb2ab79be6de3ac57993521d05dc828ef2acb606696a621d87761740"
+    },
+    {
+      "path": "analytics_apps/analytics_server/tests/day45_final.rs",
+      "blob_sha": "a797260610cce4fd147e4af08cd6ac73f40f5def",
+      "sha256": "a52b9881131a0d9c1b072e81066b9f8b17cbf7142b939adbf200f08d774df848"
+    },
+    {
+      "path": "analytics_apps/analytics_server/tests/day45_viewer.rs",
+      "blob_sha": "e8019c71be674ee72861abb6e17e4a6dea422f0e",
+      "sha256": "e427a7a20e30b9367856c4f0983fa7f8cfd3877e63f877027d154e87fc44fb46"
+    },
+    {
+      "path": "analytics_apps/migrations/20261031074500_viewer_access.sql",
+      "blob_sha": "6ace2d0f261bf437a9a389a44a8763d4cf3dbe9d",
+      "sha256": "6a97c57e0123fd9aa90c45a92ab43906958e5cf18bcd4dcae1fe064c19469857"
+    },
+    {
+      "path": "analytics_apps/migrations/20261031120000_initial_password_personal_grant.sql",
+      "blob_sha": "d95cc30de01b7e33820fde6b8e87eb3bb3bef8f7",
+      "sha256": "cbf3d9f8a7f1b0fed96159a4f53aad7c2229c93aa56a1be31a5940ed6595e216"
+    },
+    {
+      "path": "chat_apps/Cargo.lock",
+      "blob_sha": "e349c3452a7b96845a2ba55db815f21e9244a9b0",
+      "sha256": "eb9a9f0933097e3e8015c436c49cfcb08ced038665579e1609bc0f399d6a6617"
+    },
+    {
+      "path": "chat_apps/Cargo.toml",
+      "blob_sha": "f4ab68e697057fbd88fd7761ca393b3f03d21bf4",
+      "sha256": "3716246ee1a870690788e04304121815896beed9f6745a466e34a52dc1064f18"
+    },
+    {
+      "path": "chat_apps/chat_persistence/src/lib.rs",
+      "blob_sha": "20b820b9125a7a22ef436dcfcbc3a00d6ea67d29",
+      "sha256": "999efd66e3642bb5b11afdcc31842e048793f4db83039415e6dfb77822bdad55"
+    },
+    {
+      "path": "chat_apps/chat_persistence/src/member_session.rs",
+      "blob_sha": "6725386cfee6b171f8b86c77e254d5b39b880254",
+      "sha256": "6a27476fa51b2f9e89e8dac7db8f6c195b7963bf9463aa59a45cc1553c1050fa"
+    },
+    {
+      "path": "chat_apps/chat_persistence/src/room_access.rs",
+      "blob_sha": "934db68468eaa83170b80664b28e30fe647682b6",
+      "sha256": "da132376d13ba755773aa174e6aa61119b89bbbd15af0478f1912f04f3b489c8"
+    },
+    {
+      "path": "chat_apps/chat_server/src/auth_session.rs",
+      "blob_sha": "80e06299a822e18219093053243eacf2380bb19e",
+      "sha256": "c50ea8c2e6cef958af88d912b608fc6942ba17f9033d881d5132203edc04020e"
+    },
+    {
+      "path": "chat_apps/chat_server/src/lib.rs",
+      "blob_sha": "1d054a4f611b7eca45d533b8239a68523759ebcf",
+      "sha256": "301f6e71572c6b45378cd27d3a8f558496df6c176a3b59b71ea2c9db3c367478"
+    },
+    {
+      "path": "chat_apps/chat_server/src/member_self.rs",
+      "blob_sha": "6e72ae627497374f9557a4be104e96c0a9fb5712",
+      "sha256": "d1547f52195a236dcd9f434372ab10091f8a93fd81471a21f49ba1d7abfbf756"
+    },
+    {
+      "path": "chat_apps/chat_server/src/room_auth.rs",
+      "blob_sha": "90efc51bc3226ee4b6c8733c5e0b99055a7e4012",
+      "sha256": "638ef614e51c70a72a187d51d8791619f21e27dfd652c9a32de56c803fcbb85c"
+    },
+    {
+      "path": "chat_apps/chat_server/src/signin.rs",
+      "blob_sha": "aabc0140ff3d98ee61dd39ec1fdaf7da962d95cc",
+      "sha256": "74b4e64045bf19607c73ce7fc7b1fbe90e299477eb79fd3b69e9157a77b7a85f"
+    },
+    {
+      "path": "chat_apps/chat_server/src/signup.rs",
+      "blob_sha": "a0d4eee84c97516a92ded505002793b76e81fafa",
+      "sha256": "1acd86d24d496d04052c2785689b4240047fa14f235c94d112bb2f1b6b524209"
+    },
+    {
+      "path": "chat_apps/chat_server/src/ws.rs",
+      "blob_sha": "5d1aa1cd8d839bd4d83d31ec59cc9c930bdf5c2e",
+      "sha256": "680a51f6198056b1ef4ee931cff4bda7e3c1a6063cb6872a12725222588b4dc1"
+    },
+    {
+      "path": "chat_apps/chat_server/tests/day45_member_self.rs",
+      "blob_sha": "1a4d09b89f4e5301116d9a4222432b8309aba3ab",
+      "sha256": "2d39a1c59cddbc187251d6a36fb11eab2114eccdad632ca9afd1982e4b5069cf"
+    },
+    {
+      "path": "chat_apps/chat_ui/src/room_api.rs",
+      "blob_sha": "5978a51a4177be33d74641242b02b7aa239daa43",
+      "sha256": "75427c3b05fcadd15b04298d3fd233e29cd4ded9488213bfaf1af6c361030be0"
+    },
+    {
+      "path": "chat_apps/migrations/20261031123000_member_actions.sql",
+      "blob_sha": "22e35eee3ba98d830a92515dae8484e2d8e57360",
+      "sha256": "10f820032637d6b6f679fc1b375eb656ef2b966aa7d4afa532186676e5c49ff0"
+    },
+    {
+      "path": "crates/Cargo.lock",
+      "blob_sha": "5db7b2bb91db2b28ca3441603db0632e862210e5",
+      "sha256": "000656750eef372c559fed6092db03c270d3fe985f381e5484eb6fb29698b15d"
+    },
+    {
+      "path": "crates/Cargo.toml",
+      "blob_sha": "5708e6e38aee4ef64c5163114579925d4c18c206",
+      "sha256": "29801560f773a9dc099db020cc47ef46d1150dc246dc8220388204fc892e6384"
+    },
+    {
+      "path": "pet_apps/Cargo.lock",
+      "blob_sha": "3cfdbbb80177caabb21643563449027dedb43f00",
+      "sha256": "767cc835b069d9aaebd93b651f5721080d3c7c343690c257330290fa4a1f6100"
+    },
+    {
+      "path": "pet_apps/Cargo.toml",
+      "blob_sha": "dd86d0003232ce8458908a214be3be8eaa1079ee",
+      "sha256": "b3a869599798ee309c6f23b956b03d4c7450ec13f29ea155eaa06c40f7e60fad"
+    },
+    {
+      "path": "pet_apps/pet_ui/src/component/activity.rs",
+      "blob_sha": "e6345213e042d7c515a8a624535f3037f611df21",
+      "sha256": "48841d1f62eb1ee4998e4d84cb9749be4db82011b9ead019e3345d1f6b4a29e8"
+    },
+    {
+      "path": "pet_apps/pet_ui/src/component/mod.rs",
+      "blob_sha": "455692214dc62351709452bcce81fcf850257269",
+      "sha256": "9bd912b23821108b84b3b496b1f2ff15e1f14a3b4fd0c936b5d7d86028b1424b"
+    },
+    {
+      "path": "pet_apps/pet_ui/src/component/pose.rs",
+      "blob_sha": "e40851667a3556b6c055d5eee2e5f38b8cd08f43",
+      "sha256": "2b4ab85ef44d5d3a8c5dd3f35a82a9b3f25f0eb4c974261c43e322c9581bbbb6"
+    },
+    {
+      "path": "pet_apps/pet_ui/style.css",
+      "blob_sha": "38be78860f511e34524184c6d0824ffe324e8a06",
+      "sha256": "6f5eb9b733fcf836316164936f74249558201bf21808b750ac80a3dbf2160464"
+    },
+    {
+      "path": "pet_apps/pet_ui/tests/browser/canvas.cjs",
+      "blob_sha": "30071a362996bd69946781239036e3c8c82c97ba",
+      "sha256": "a31ade5c566192ffcf2b45732f6f78a170f13714eb2972dc217b49550a560a82"
+    },
+    {
+      "path": "pet_apps/pet_ui/tests/browser/package.json",
+      "blob_sha": "8a12e71b15d87afd1d552df1afbc333a96e2f847",
+      "sha256": "4954e674e1cfa276e9b71ad4e80748d9e5dbf5913449d7a91e1eb104f99f672d"
+    }
+  ],
+  "product_written": false
+}

@@ -1,0 +1,6 @@
+idle {"frame":{"width":200,"height":200},"image":{"x":16,"y":16,"width":168,"height":168},"count":1,"scroll":200}
+blink {"frame":{"width":200,"height":200},"image":{"x":16,"y":32.12799835205078,"width":168,"height":147.83999633789062},"count":1,"scroll":200}
+interact-a {"frame":{"width":200,"height":200},"image":{"x":4.605914115905762,"y":6.19035005569458,"width":182.0028839111328,"height":182.00286865234375},"count":1,"scroll":200}
+interact-b {"frame":{"width":200,"height":200},"image":{"x":13.39121150970459,"y":2.19035005569458,"width":182.0028839111328,"height":182.00286865234375},"count":1,"scroll":200}
+sleep-a {"frame":{"width":200,"height":200},"image":{"x":16,"y":40.409996032714844,"width":168,"height":142.79998779296875},"count":1,"scroll":200}
+sleep-b {"frame":{"width":200,"height":200},"image":{"x":16,"y":44.29200744628906,"width":168,"height":137.75999450683594},"count":1,"scroll":200}

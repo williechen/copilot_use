@@ -1,0 +1,46 @@
+   Compiling chat-domain v0.2.45 (/tmp/day45-runtime-only/chat_apps/chat_domain)
+   Compiling analytics-server v0.2.45 (/tmp/day45-runtime-only/analytics_apps/analytics_server)
+warning: unused import: `analytics_persistence::summary_for_source`
+ --> analytics_server/src/pg_store.rs:1:5
+  |
+1 | use analytics_persistence::summary_for_source;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `analytics_persistence::summary_for_source`
+  --> analytics_server/src/lib.rs:14:5
+   |
+14 | use analytics_persistence::summary_for_source;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+   Compiling shared v0.2.45 (/tmp/day45-runtime-only/crates/shared)
+warning: `analytics-server` (lib) generated 2 warnings (run `cargo fix --lib -p analytics-server` to apply 2 suggestions)
+warning: function `app` is never used
+ --> analytics_server/tests/support/mod.rs:6:8
+  |
+6 | pub fn app(pool: sqlx::PgPool, chat: &str, pet: &str) -> axum::Router {
+  |        ^^^
+  |
+  = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `analytics-server` (test "day45_final") generated 1 warning
+warning: `analytics-server` (test "day45_viewer") generated 1 warning (1 duplicate)
+    Finished `test` profile [unoptimized] target(s) in 3.75s
+     Running tests/day45_final.rs (/tmp/day45-analytics-review-target/debug/deps/day45_final-db3db71141d5f94a)
+
+running 4 tests
+test page_drives_category_and_actions_do_not_grant_pages ... ok
+test active_role_union_personal_override_and_definition_state ... ok
+test deny_beats_roles_and_removing_override_restores_default ... ok
+test restart_does_not_restore_revoked_role_and_tree_escapes_labels ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out; finished in 3.56s
+
+     Running tests/day45_viewer.rs (/tmp/day45-analytics-review-target/debug/deps/day45_viewer-78bee6583454e602)
+
+running 1 test
+test admin_creates_viewer_first_change_and_source_revoke_affects_same_session ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.99s
+

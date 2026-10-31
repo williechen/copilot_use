@@ -1,0 +1,69 @@
+    Updating crates.io index
+ Downloading crates ...
+  Downloaded utf8_iter v1.1.0
+  Downloaded wasm-bindgen-macro v0.2.130
+  Downloaded wasm-bindgen-futures v0.4.80
+  Downloaded wasm-bindgen-shared v0.2.130
+  Downloaded utf_types v1.0.0
+  Downloaded wasm-bindgen v0.2.130
+  Downloaded wasm-bindgen-macro-support v0.2.130
+  Downloaded js-sys v0.3.107
+  Downloaded web-sys v0.3.107
+   Compiling wasm-bindgen-shared v0.2.130
+   Compiling serde_core v1.0.229
+   Compiling futures-io v0.3.34
+   Compiling futures-util v0.3.34
+   Compiling serde v1.0.229
+   Compiling wasm-bindgen-macro-support v0.2.130
+   Compiling wasm-bindgen v0.2.130
+   Compiling futures-executor v0.3.34
+   Compiling utf_types v1.0.0
+   Compiling utf8_iter v1.1.0
+   Compiling futures v0.3.34
+   Compiling serde_json v1.0.154
+   Compiling event-listener v5.4.2
+   Compiling icu_collections v2.4.0
+   Compiling event-listener-strategy v0.5.4
+   Compiling reactive_graph v0.2.16
+   Compiling async-lock v3.4.2
+   Compiling icu_properties v2.4.0
+   Compiling icu_normalizer v2.4.0
+   Compiling hydration_context v0.3.2
+   Compiling wasm-bindgen-macro v0.2.130
+   Compiling tachys v0.2.19
+   Compiling form_urlencoded v1.2.2
+   Compiling idna_adapter v1.2.2
+   Compiling idna v1.1.0
+   Compiling oco_ref v0.2.1
+   Compiling server_fn v0.8.13
+   Compiling serde_qs v0.15.0
+   Compiling url v2.5.8
+   Compiling leptos_macro v0.8.19
+   Compiling config v0.15.27
+   Compiling js-sys v0.3.107
+   Compiling codee v0.3.5
+   Compiling leptos v0.8.22
+   Compiling leptos_config v0.8.10
+   Compiling leptos_hot_reload v0.8.7
+   Compiling uuid v1.29.0
+   Compiling pet-domain v0.2.45 (/tmp/day45-adopted/pet_apps/pet_domain)
+   Compiling wasm-bindgen-futures v0.4.80
+   Compiling web-sys v0.3.107
+   Compiling any_spawner v0.3.0
+   Compiling gloo-timers v0.4.0
+   Compiling serde-wasm-bindgen v0.6.5
+   Compiling reactive_stores v0.4.4
+   Compiling gloo-utils v0.2.0
+   Compiling gloo-net v0.6.0
+rustc-LLVM ERROR: IO failure on output stream: No space left on device
+error: couldn't create a temp dir: No space left on device (os error 28) at path "/home/willie/Documents/Codex/2026-10-27/referenced-chatgpt-conversation-this-is-an/work/cargo-target/debug/deps/rmetaYY30UK"
+
+error: could not compile `gloo-net` (lib) due to 1 previous error
+warning: build failed, waiting for other jobs to finish...
+error: could not compile `web-sys` (lib)
+
+Caused by:
+  No space left on device (os error 28)
+
+Caused by:
+  failed to parse process output: `/home/willie/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustc --crate-name web_sys --edition=2021 /home/willie/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/web-sys-0.3.107/src/lib.rs --error-format=json --json=diagnostic-rendered-ansi,artifacts,future-incompat --crate-type lib --emit=dep-info,metadata,link -C embed-bitcode=no --cfg 'feature="AbortController"' --cfg 'feature="AbortSignal"' --cfg 'feature="AddEventListenerOptions"' --cfg 'feature="AnimationEvent"' --cfg 'feature="BeforeUnloadEvent"' --cfg 'feature="BinaryType"' --cfg 'feature="Blob"' --cfg 'feature="CharacterData"' --cfg 'feature="ClipboardEvent"' --cfg 'feature="CloseEvent"' --cfg 'feature="CloseEventInit"' --cfg 'feature="Comment"' --cfg 'feature="CompositionEvent"' --cfg 'feature="CssStyleDeclaration"' --cfg 'feature="CustomEvent"' --cfg 'feature="DeviceMotionEvent"' --cfg 'feature="DeviceOrientationEvent"' --cfg 'feature="Document"' --cfg 'feature="DocumentFragment"' --cfg 'feature="DomStringMap"' --cfg 'feature="DomTokenList"' --cfg 'feature="DragEvent"' --cfg 'feature="Element"' --cfg 'feature="ErrorEvent"' --cfg 'feature="Event"' --cfg 'feature="EventSource"' --cfg 'feature="EventTarget"' --cfg 'feature="FileReader"' --cfg 'feature="FocusEvent"' --cfg 'feature="FormData"' --cfg 'feature="GamepadEvent"' --cfg 'feature="HashChangeEvent"' --cfg 'feature="Headers"' --cfg 'feature="History"' --cfg 'feature="HtmlAnchorElement"' --cfg 'feature="HtmlAreaElement"' --cfg 'feature="HtmlAudioElement"' --cfg 'feature="HtmlBaseElement"' --cfg 'feature="HtmlBodyElement"' --cfg 'feature="HtmlBrElement

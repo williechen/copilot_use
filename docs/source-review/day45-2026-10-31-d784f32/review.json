@@ -1,0 +1,276 @@
+{
+  "product_sha": "28b71b67907062f804b2358c41fde349c9b18ca9",
+  "docs_baseline_sha": "e06efc9cc38945aca01fe8af621eb8d3430df07b",
+  "product_written": false,
+  "day": 45,
+  "next_day": {
+    "chat": 46,
+    "pet": 46,
+    "analytics": 46
+  },
+  "day_advance": false,
+  "fifo_changed": false,
+  "last_full_comparison_changed": false,
+  "gate2": false,
+  "commands": [
+    {
+      "scope": "Chat product SSR",
+      "command": "cargo test --manifest-path /tmp/day45-adopted/chat_apps/Cargo.toml -p chat-server --features ssr --locked --no-fail-fast",
+      "exit": 0,
+      "log": "chat-product.log"
+    },
+    {
+      "scope": "Chat product WASM",
+      "command": "cargo check --manifest-path /tmp/day45-adopted/chat_apps/Cargo.toml -p chat-ui --features hydrate --target wasm32-unknown-unknown --locked",
+      "exit": 0,
+      "log": "chat-product-wasm.log"
+    },
+    {
+      "scope": "Pet UI product",
+      "command": "cargo test --manifest-path /tmp/day45-adopted/pet_apps/Cargo.toml -p pet-ui --bin pet-ui --locked",
+      "exit": 0,
+      "log": "pet-product-retry.log"
+    },
+    {
+      "scope": "Pet browser product",
+      "command": "NODE_PATH=<workspace>/work/browser/node_modules node /tmp/day45-adopted/pet_apps/pet_ui/tests/browser/canvas.cjs /tmp/day45-adopted",
+      "exit": 1,
+      "log": "pet-browser-product.log"
+    },
+    {
+      "scope": "Pet corrected Node26",
+      "command": "NODE_PATH=<workspace>/work/browser/node_modules PET_SCREENSHOT=/tmp/day45-pet-node26.png work/tools/node-v26.13.0-linux-x64/bin/node /tmp/day45-corrected/pet_apps/pet_ui/tests/browser/canvas.cjs /tmp/day45-corrected",
+      "exit": 0,
+      "log": "pet-browser-node26.log"
+    },
+    {
+      "scope": "Pet overflow oracle",
+      "command": "NODE_PATH=<workspace>/work/browser/node_modules node /tmp/day45-corrected/pet_apps/pet_ui/tests/browser/canvas.cjs /tmp/day45-overflow-control",
+      "exit": 1,
+      "log": "pet-overflow-negative.log"
+    },
+    {
+      "scope": "Analytics product full build",
+      "command": "cargo test --manifest-path /tmp/day45-adopted/analytics_apps/Cargo.toml -p analytics-server --features postgres-integration --locked --no-fail-fast",
+      "exit": 101,
+      "log": "analytics-product.log"
+    },
+    {
+      "scope": "Analytics product targeted",
+      "command": "cargo test --manifest-path /tmp/day45-adopted/analytics_apps/Cargo.toml -p analytics-server --features postgres-integration --test day45_final --locked",
+      "exit": 101,
+      "log": "analytics-product-targeted.log"
+    },
+    {
+      "scope": "Analytics frozen f6 upgrade Red",
+      "command": "cargo test --manifest-path /tmp/day45-upgrade-red/analytics_apps/Cargo.toml -p analytics-server --features postgres-integration --test day45_final upgrade_from_exact_f6 --locked",
+      "exit": 101,
+      "log": "analytics-frozen-upgrade-red-retry.log"
+    },
+    {
+      "scope": "Analytics runtime-only candidate",
+      "command": "cargo test --manifest-path /tmp/day45-runtime-only/analytics_apps/Cargo.toml -p analytics-server --features postgres-integration --test day45_final --test day45_viewer --locked -- --skip upgrade_from_exact_f6",
+      "exit": 0,
+      "log": "analytics-runtime-only.log"
+    },
+    {
+      "scope": "Analytics complete clean-applied candidate",
+      "command": "cargo test --manifest-path /tmp/day45-apply-check/analytics_apps/Cargo.toml -p analytics-server --features postgres-integration --locked --no-fail-fast",
+      "exit": 0,
+      "log": "analytics-clean-applied-final.log"
+    },
+    {
+      "scope": "Chat actual d784",
+      "command": "cargo test --manifest-path /tmp/day45-latest/chat_apps/Cargo.toml -p chat-server --features ssr --locked --no-fail-fast",
+      "exit": 0,
+      "log": "chat-d784.log"
+    },
+    {
+      "scope": "Pet UI actual d784",
+      "command": "cargo test --manifest-path /tmp/day45-latest/pet_apps/Cargo.toml -p pet-ui --bin pet-ui --locked",
+      "exit": 0,
+      "log": "pet-d784-ui.log"
+    },
+    {
+      "scope": "Pet browser actual d784",
+      "command": "NODE_PATH=/tmp/day45-latest-browser/node_modules PET_SCREENSHOT=/tmp/day45-latest-pet.png node /tmp/day45-latest/pet_apps/pet_ui/tests/browser/canvas.cjs /tmp/day45-latest",
+      "exit": 0,
+      "log": "pet-d784-browser-retry.log"
+    },
+    {
+      "scope": "Analytics actual d784 build",
+      "command": "cargo test --manifest-path /tmp/day45-latest/analytics_apps/Cargo.toml -p analytics-server --features postgres-integration --locked --no-run",
+      "exit": 101,
+      "log": "analytics-d784-build.log"
+    }
+  ],
+  "environment": {
+    "CARGO_PROFILE_TEST_DEBUG": "0",
+    "CARGO_PROFILE_DEV_DEBUG": "0",
+    "CARGO_INCREMENTAL": "0",
+    "CARGO_BUILD_JOBS": "2 for retry/corrected runs",
+    "DATABASE_URL": "postgres://willie@127.0.0.1:55485/review_day45_28b71b6 (isolated test DB only)",
+    "target_dirs": [
+      "prior shared compiler cache for Chat/Pet",
+      "/tmp/day45-analytics-review-target for Analytics"
+    ]
+  },
+  "results": {
+    "chat_product": {
+      "passed": 44,
+      "wasm_check_exit": 0
+    },
+    "pet_product": {
+      "ui_passed": 11,
+      "browser_exit": 1
+    },
+    "pet_corrected_candidate": {
+      "poses": 6,
+      "exit": 0,
+      "overflow_negative_exit": 1
+    },
+    "analytics_product": {
+      "full_compile_exit": 101,
+      "targeted_passed": 1,
+      "targeted_failed": 4
+    },
+    "analytics_runtime_only_candidate": {
+      "passed": 5,
+      "filtered": 1,
+      "note": "legacy upgrade test skipped because it reuses current migration bytes"
+    },
+    "analytics_complete_candidate": {
+      "passed": 68,
+      "ignored": 1,
+      "frozen_f6_upgrade_test": true,
+      "edited28_ledger_rejected_without_rewrite": true
+    },
+    "chat_latest_product": {
+      "passed": 44,
+      "exit": 0,
+      "sha": "d784f32c6bff86249dd84fd4294d055a4c774a49"
+    },
+    "pet_latest_product": {
+      "ui_passed": 11,
+      "browser_poses": 6,
+      "exit": 0,
+      "sha": "d784f32c6bff86249dd84fd4294d055a4c774a49"
+    },
+    "analytics_latest_product": {
+      "postgres_feature_compile_exit": 101,
+      "sha": "d784f32c6bff86249dd84fd4294d055a4c774a49"
+    }
+  },
+  "migration_patch_condition": "Complete/migration correction applies to fresh DB or f6-ledger DB. Already-migrated edited28 ledger needs explicit reconciliation; do not rewrite _sqlx_migrations automatically. Runtime-only correction changes no migration.",
+  "not_run": [
+    "real prior user DB backup migration",
+    "real browser Chat/Analytics journey",
+    "real Tauri/native desktop acceptance",
+    "full-product Gate2",
+    "member/admin ACL editing UIs and missing management routes"
+  ],
+  "earlier_failures_retained": [
+    "pet-product.log: no space left, retried after incremental cache cleanup",
+    "analytics-frozen-upgrade-red.log: incomplete isolated copy lacked chat-domain, retried with all dependencies",
+    "analytics-corrected.log: first fix missed literal plus signs in SQL, corrected in r2 and final",
+    "patch packaging retry used a fresh isolated directory to avoid leftover new migration files"
+  ],
+  "artifact_sha256": {
+    "chat-d784.log": "be8b468f51932a85e9807b794d678dd246172fb443df80a2eb9313db38fd6d3f",
+    "README.md": "581ea2ec863e9479064881359054afbcd5e4e4ef46b967c99feecd066fcc06c2",
+    "analytics-runtime-fix.patch": "e6729dd2fb70a664558c5cff88a8e010ab91b712df3123d49aec16d8de21f995",
+    "patch-validation.json": "62748a634f0eb320ae4f257213c23b4fcfc534bc42e5c45c722875c192d62df6",
+    "pet-product.log": "3dc6d3f0886ea49240131e834b9497d66393cc4bff4d9eb0a03f43ea68a8e555",
+    "source-inventory.json": "77ebff13f7ccfbddbdb881b3d74a9a2fb4fa3da06b9e714e2734b5c174802369",
+    "pet-overflow-negative.log": "f519ba0cb2a7407f979b3c660350f52704f81cfa581243b98168b59983225463",
+    "pet-browser-node26.log": "3dcc99506d5a64130a6c8242306199a5b6e8217ad5cb25e534e00693c62f840a",
+    "analytics-f6-upgrade-fix.patch": "5586a3c58851abae3ac492a208f1e723613bb813647dba987a59c5330857f033",
+    "locked-versions.json": "1c36821780d6f675d747d1d899123b01b39e10053bf76e9dd41192d8b8ea0e12",
+    "product-ci.json": "b90c98593617b1b225f53f3a5ae35c2ed6831d809ec97d02cc7f390f0e9ee793",
+    "analytics-corrected-final.log": "c34a3128fa1f066ec3e1a217d82c8e78e1dc3b47f950ad03f242013a7329c339",
+    "browser-restore-online.log": "d815cbefc0d4fe568948b7d1fdaab2bc33dd33748c15e42cc16e31aab7c3d661",
+    "pet-d784-ui.log": "b993bb73552dfed066e648f0540870eea1da7d09106de4d1cbc49ed1caed4484",
+    "analytics-d784-build.log": "d7860df6b259d1a0326361194724f47ed859420092cf6bdecea746638d1774eb",
+    "pet-browser-product.log": "3151bf5abeff76068b82daec2e48a7f991b9ecb8acd2b0a5c3d26455742e7a16",
+    "pet-browser-corrected.log": "3dcc99506d5a64130a6c8242306199a5b6e8217ad5cb25e534e00693c62f840a",
+    "analytics-frozen-upgrade-red.log": "4167d1dc16df875923c9d486542f33ce495bac75d4f13bf910d0427cea521f97",
+    "analytics-frozen-upgrade-red-retry.log": "1dc86de8fb03af382fc6f2905e79b02dafd0d2522bf166c107a3003041c473ea",
+    "pet-product-retry.log": "ffe07356e49bd7cb70e5c93015262e59bd010f34698e55e1300069f73dd80c72",
+    "versions.json": "079f47a430eb9f6e52c9b13a2a718b93a18464086aafc33b3ed9ff80c092ca96",
+    "analytics-corrected.log": "b172fc0e91d1eaea98ef61bd43de095bba2f729651100f3c6d9654a3838e8867",
+    "latest-source.json": "013087afae6c622287e01cb2739b88a706d9445a246ac70f999f4e8ed2f24dab",
+    "browser-restore.log": "ee6b48850b8d8d446db5b2e916df90fb56fb87b51e6fd84f07944ddf37abd595",
+    "analytics-runtime-only.log": "3b7a18a6fc764eaf3e156bb5e23d99ac73cb30b8fe9b43656a00431b11e70416",
+    "analytics-clean-applied-final.log": "08a3306569f563e5621bd74c2335b0fdf594266c1a4a806defd317cfaf69a983",
+    "pet-d784-browser-retry.log": "3dcc99506d5a64130a6c8242306199a5b6e8217ad5cb25e534e00693c62f840a",
+    "chat-product.log": "0076857b1e4c5788b4cda9e6ee67dda486b4614d3884703c47cc1af4eb2c36db",
+    "pet-browser-fix.patch": "8206b950258b50847810ccc91765e2490aa0903580a53abbaf45856326155ae4",
+    "analytics-product.log": "24a9d9ca203ef090818815e0bd76c95f730613e179cd5e83a9c2f163eecba32d",
+    "pet-d784-browser.log": "76335dd49fe25b5cb01fb3e3f88da2a7a62d1b898188b78937c90bc4f11183fc",
+    "analytics-product-targeted.log": "0e5aa42fa0e0863db1a337864f285e99efb451699b34ddee59eb1ab6d281ae7c",
+    "analytics-corrected-r2.log": "116c7e144a3894908b8595ccdd235400aa5c121639c5a799e0fef5faa5c9c32c",
+    "cleanup.json": "3e92973bbe94273791603d7da9aa961d8a0834a9c3777d19baf40eaf1f8280aa",
+    "counts.json": "ac8227313c539c3efa4dab24d2cee72ef529c95396ce4cc39ca0b6795e2f9c4a",
+    "chat-product-wasm.log": "1e4baa9bb2045ee01910a0d7b020966549cb8b475eaf89b4d6b7d746c0fbe1c0",
+    "analytics-complete-correction.patch": "ed240a479902627fa662a13478fb6fc398aa1ff1ae794bba9fae669d4303c2e7"
+  },
+  "latest_observed_product_sha": "d784f32c6bff86249dd84fd4294d055a4c774a49",
+  "latest_source_verification": {
+    "previous_sha": "28b71b67907062f804b2358c41fde349c9b18ca9",
+    "latest_sha": "d784f32c6bff86249dd84fd4294d055a4c774a49",
+    "diff_files": [
+      "pet_apps/pet_ui/tests/browser/canvas.cjs"
+    ],
+    "trees": {
+      "chat_apps": {
+        "before_tree": "a92503a725ecd41aeca3a71d2d33fccc2a498d6e",
+        "after_tree": "a92503a725ecd41aeca3a71d2d33fccc2a498d6e",
+        "identical": true
+      },
+      "analytics_apps": {
+        "before_tree": "599ba8f672740b734b20c77fc294d2ec48b9a912",
+        "after_tree": "599ba8f672740b734b20c77fc294d2ec48b9a912",
+        "identical": true
+      },
+      "pet_apps": {
+        "before_tree": "a18d6576fd0afc2a68ab284e0de5cd601dfc78c8",
+        "after_tree": "ae8bbcd373252c9c8dd9715e6267bd8ee3059a73",
+        "identical": false
+      }
+    },
+    "chat_actual_latest_test": {
+      "log": "chat-d784.log",
+      "passed": 44,
+      "exit": 0
+    },
+    "pet_actual_latest_tests": {
+      "ui_log": "pet-d784-ui.log",
+      "ui_passed": 11,
+      "browser_log": "pet-d784-browser-retry.log",
+      "browser_poses": 6,
+      "exit": 0
+    },
+    "analytics_actual_latest_build": {
+      "log": "analytics-d784-build.log",
+      "exit": 101
+    },
+    "analytics_corrected_candidate_tests": "68 passed / 1 ignored on corrected28; Analytics tree identical at latest, no retagging those tests as raw latest tests",
+    "latest_patch_checks": [
+      {
+        "patch": "analytics-runtime-fix.patch",
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "patch": "analytics-f6-upgrade-fix.patch",
+        "exit": 0,
+        "stderr": ""
+      },
+      {
+        "patch": "analytics-complete-correction.patch",
+        "exit": 0,
+        "stderr": ""
+      }
+    ]
+  }
+}

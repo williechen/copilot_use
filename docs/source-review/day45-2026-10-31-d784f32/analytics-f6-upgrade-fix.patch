@@ -1,0 +1,239 @@
+diff --git a/analytics_apps/analytics_server/tests/day45_final.rs b/analytics_apps/analytics_server/tests/day45_final.rs
+index a797260..c92a64d 100644
+--- a/analytics_apps/analytics_server/tests/day45_final.rs
++++ b/analytics_apps/analytics_server/tests/day45_final.rs
+@@ -141,15 +141,15 @@ async fn upgrade_from_exact_f6_migrations_preserves_checksums_and_deny(pool: sql
+     std::fs::create_dir(&dir).unwrap();
+     for entry in std::fs::read_dir(&root).unwrap() {
+         let path = entry.unwrap().path();
+-        if path.extension().is_some_and(|x| x == "sql")
+-            && !path
+-                .file_name()
+-                .unwrap()
+-                .to_str()
+-                .unwrap()
+-                .starts_with("20261031120000")
+-        {
+-            std::fs::copy(&path, dir.join(path.file_name().unwrap())).unwrap();
++        let name = path.file_name().unwrap().to_str().unwrap();
++        if path.extension().is_some_and(|x| x == "sql") && name < "20261031120000" {
++            let target = dir.join(path.file_name().unwrap());
++            if name == "20261031074500_viewer_access.sql" {
++                // Frozen exact-f6 bytes, never reconstructed from the current migration.
++                std::fs::write(target, include_str!("fixtures/f6_viewer_access.sql")).unwrap();
++            } else {
++                std::fs::copy(&path, target).unwrap();
++            }
+         }
+     }
+     let old = sqlx::migrate::Migrator::new(dir.as_path()).await.unwrap();
+@@ -186,6 +186,10 @@ async fn upgrade_from_exact_f6_migrations_preserves_checksums_and_deny(pool: sql
+     );
+     let viewer_update:i64=sqlx::query_scalar("SELECT count(*) FROM uac_role_acl WHERE role_id='analytics-viewer' AND acl_id='analytics-password-update'").fetch_one(&pool).await.unwrap();
+     assert_eq!(viewer_update, 0);
++    let definitions:(i64,i64)=sqlx::query_as("SELECT count(*) FILTER(WHERE acl_category='page'),count(*) FILTER(WHERE acl_category='action') FROM uac_acl").fetch_one(&pool).await.unwrap();
++    assert_eq!(definitions, (11, 44));
++    let grants:i64=sqlx::query_scalar("SELECT count(*) FROM uac_role_acl WHERE role_id='analytics-admin' AND (acl_id IN('analytics-roles','analytics-acls') OR acl_id IN(SELECT id FROM uac_acl WHERE acl_parent_id IN('analytics-roles','analytics-acls')))").fetch_one(&pool).await.unwrap();
++    assert_eq!(grants, 10);
+     std::fs::remove_dir_all(dir).unwrap();
+ }
+ 
+@@ -262,3 +266,50 @@ async fn restart_does_not_restore_revoked_role_and_tree_escapes_labels(pool: sql
+     assert!(!html.contains("<script>"));
+     assert!(html.contains("&lt;script&gt;"));
+ }
++
++#[sqlx::test(migrations = false)]
++async fn database_with_edited_28_checksum_is_not_silently_rewritten(pool: sqlx::PgPool) {
++    let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../migrations");
++    let dir = std::env::temp_dir().join(format!("day45-edited-ledger-{}", uuid::Uuid::new_v4()));
++    std::fs::create_dir(&dir).unwrap();
++    for entry in std::fs::read_dir(&root).unwrap() {
++        let path = entry.unwrap().path();
++        let name = path.file_name().unwrap().to_str().unwrap();
++        if path.extension().is_some_and(|e| e == "sql") && name < "20261031180000" {
++            let target = dir.join(path.file_name().unwrap());
++            if name == "20261031074500_viewer_access.sql" {
++                std::fs::write(target, include_str!("fixtures/28b71b6_viewer_access.sql")).unwrap();
++            } else {
++                std::fs::copy(&path, target).unwrap();
++            }
++        }
++    }
++    sqlx::migrate::Migrator::new(dir.as_path())
++        .await
++        .unwrap()
++        .run(&pool)
++        .await
++        .unwrap();
++    let before: Vec<u8> =
++        sqlx::query_scalar("SELECT checksum FROM _sqlx_migrations WHERE version=20261031074500")
++            .fetch_one(&pool)
++            .await
++            .unwrap();
++    let error = sqlx::migrate::Migrator::new(root.as_path())
++        .await
++        .unwrap()
++        .run(&pool)
++        .await
++        .unwrap_err();
++    assert!(matches!(
++        error,
++        sqlx::migrate::MigrateError::VersionMismatch(20261031074500)
++    ));
++    let after: Vec<u8> =
++        sqlx::query_scalar("SELECT checksum FROM _sqlx_migrations WHERE version=20261031074500")
++            .fetch_one(&pool)
++            .await
++            .unwrap();
++    assert_eq!(before, after);
++    std::fs::remove_dir_all(dir).unwrap();
++}
+diff --git a/analytics_apps/analytics_server/tests/fixtures/28b71b6_viewer_access.sql b/analytics_apps/analytics_server/tests/fixtures/28b71b6_viewer_access.sql
+new file mode 100644
+index 0000000..6ace2d0
+--- /dev/null
++++ b/analytics_apps/analytics_server/tests/fixtures/28b71b6_viewer_access.sql
+@@ -0,0 +1,42 @@
++-- Additive access policy using the existing UAC role/ACL tables.
++CREATE UNIQUE INDEX uq_uac_account_day45 ON uac_user(lower(trim(user_acnt)));
++INSERT INTO uac_role(id,role_name,role_status,created_at,updated_at) VALUES
++('analytics-admin','system_admin','active',now(),now()),
++('analytics-viewer','viewer','active',now(),now());
++-- Exactly three levels. Existing acl_category and acl_parent_id are reused.
++INSERT INTO uac_acl(id,acl_name,acl_path,acl_category,acl_parent_id,acl_status,created_at,updated_at) VALUES
++('analytics-members','會員管理','','category',NULL,'active',now(),now()),
++('analytics-info','資訊分析','','category',NULL,'active',now(),now()),
++('analytics-token','認證管理','','category',NULL,'active',now(),now());
++INSERT INTO uac_acl(id,acl_name,acl_path,acl_category,acl_parent_id,acl_status,created_at,updated_at) VALUES
++('analytics-accounts','帳號管理','/accounts/new','page','analytics-members','active',now(),now()),
++('analytics-roles','角色管理','/roles/index','page','analytics-members','active',now(),now()),
++('analytics-acls','頁面管理','/acls/index','page','analytics-members','active',now(),now()),
++('analytics-dashboard','分析後台','/dashboard','page','analytics-info','active',now(),now()),
++('analytics-chat','Chat來源','/api/v1/events/web_chat','page','analytics-info','active',now(),now()),
++('analytics-pet','Pet來源','/api/v1/events/desktop_pet','page','analytics-info','active',now(),now()),
++('analytics-summary','彙總查詢','/api/v1/events/{source}/summary','page','analytics-info','active',now(),now()),
++('analytics-kind','類型查詢','/api/v1/events/{source}/summary/{event_type}','page','analytics-info','active',now(),now()),
++('analytics-export','CSV匯出','/api/v1/events/{source}/export.csv','page','analytics-info','active',now(),now()),
++('analytics-password','自身密碼','/change-password','page','analytics-members','active',now(),now()),
++('analytics-security','管理憑證','/security','page','analytics-token','active',now(),now());
++INSERT INTO uac_acl(id,acl_name,acl_path,acl_category,acl_parent_id,acl_status,created_at,updated_at)
++SELECT p.id || '-' || operation, operation, operation, 'action', p.id, 'active', now(),now()
++FROM uac_acl p CROSS JOIN (VALUES('create'),('read'),('update'),('delete')) AS crud(operation)
++WHERE p.id IN ('analytics-accounts','analytics-dashboard','analytics-chat','analytics-pet','analytics-summary','analytics-kind','analytics-export','analytics-password','analytics-security', 'analytics-roles', 'analytics-acls');
++INSERT INTO uac_user_role(user_id,role_id,created_at)
++SELECT id,'analytics-admin',now() FROM uac_user WHERE lower(user_acnt)='admin';
++CREATE TABLE analytics_account_audit (
++ id TEXT PRIMARY KEY, actor_id TEXT NOT NULL, target_id TEXT NOT NULL,
++ action TEXT NOT NULL, result TEXT NOT NULL, created_at TIMESTAMPTZ NOT NULL DEFAULT now()
++);
++-- Admin default: all seeded pages and their CRUD actions (no implicit category grant).
++INSERT INTO uac_role_acl(role_id,acl_id,created_at)
++SELECT 'analytics-admin',a.id,now() FROM uac_acl a
++WHERE a.id IN ('analytics-accounts','analytics-dashboard','analytics-chat','analytics-pet','analytics-summary','analytics-kind','analytics-export','analytics-password','analytics-security', 'analytics-roles', 'analytics-acls')
++ OR a.acl_parent_id IN ('analytics-accounts','analytics-dashboard','analytics-chat','analytics-pet','analytics-summary','analytics-kind','analytics-export','analytics-password','analytics-security', 'analytics-roles', 'analytics-acls');
++-- Viewer default: read operations; source page visibility is independently granted per user.
++INSERT INTO uac_role_acl(role_id,acl_id,created_at)
++SELECT 'analytics-viewer',a.id,now() FROM uac_acl a
++WHERE a.id IN ('analytics-dashboard','analytics-password','analytics-summary','analytics-kind','analytics-export')
++ OR (a.acl_category='action' AND a.acl_path='read' AND a.acl_parent_id IN ('analytics-dashboard','analytics-chat','analytics-pet','analytics-summary','analytics-kind','analytics-export','analytics-password'));
+\ No newline at end of file
+diff --git a/analytics_apps/analytics_server/tests/fixtures/f6_viewer_access.sql b/analytics_apps/analytics_server/tests/fixtures/f6_viewer_access.sql
+new file mode 100644
+index 0000000..e483117
+--- /dev/null
++++ b/analytics_apps/analytics_server/tests/fixtures/f6_viewer_access.sql
+@@ -0,0 +1,40 @@
++-- Additive access policy using the existing UAC role/ACL tables.
++CREATE UNIQUE INDEX uq_uac_account_day45 ON uac_user(lower(trim(user_acnt)));
++INSERT INTO uac_role(id,role_name,role_status,created_at,updated_at) VALUES
++('analytics-admin','system_admin','active',now(),now()),
++('analytics-viewer','viewer','active',now(),now());
++-- Exactly three levels. Existing acl_category and acl_parent_id are reused.
++INSERT INTO uac_acl(id,acl_name,acl_path,acl_category,acl_parent_id,acl_status,created_at,updated_at) VALUES
++('analytics-members','會員管理','','category',NULL,'active',now(),now()),
++('analytics-info','資訊分析','','category',NULL,'active',now(),now()),
++('analytics-token','認證管理','','category',NULL,'active',now(),now());
++INSERT INTO uac_acl(id,acl_name,acl_path,acl_category,acl_parent_id,acl_status,created_at,updated_at) VALUES
++('analytics-accounts','帳號管理','/accounts/new','page','analytics-members','active',now(),now()),
++('analytics-dashboard','分析後台','/dashboard','page','analytics-info','active',now(),now()),
++('analytics-chat','Chat來源','/api/v1/events/web_chat','page','analytics-info','active',now(),now()),
++('analytics-pet','Pet來源','/api/v1/events/desktop_pet','page','analytics-info','active',now(),now()),
++('analytics-summary','彙總查詢','/api/v1/events/{source}/summary','page','analytics-info','active',now(),now()),
++('analytics-kind','類型查詢','/api/v1/events/{source}/summary/{event_type}','page','analytics-info','active',now(),now()),
++('analytics-export','CSV匯出','/api/v1/events/{source}/export.csv','page','analytics-info','active',now(),now()),
++('analytics-password','自身密碼','/change-password','page','analytics-members','active',now(),now()),
++('analytics-security','管理憑證','/security','page','analytics-token','active',now(),now());
++INSERT INTO uac_acl(id,acl_name,acl_path,acl_category,acl_parent_id,acl_status,created_at,updated_at)
++SELECT p.id || '-' || operation, operation, operation, 'action', p.id, 'active', now(),now()
++FROM uac_acl p CROSS JOIN (VALUES('create'),('read'),('update'),('delete')) AS crud(operation)
++WHERE p.id IN ('analytics-accounts','analytics-dashboard','analytics-chat','analytics-pet','analytics-summary','analytics-kind','analytics-export','analytics-password','analytics-security');
++INSERT INTO uac_user_role(user_id,role_id,created_at)
++SELECT id,'analytics-admin',now() FROM uac_user WHERE lower(user_acnt)='admin';
++CREATE TABLE analytics_account_audit (
++ id TEXT PRIMARY KEY, actor_id TEXT NOT NULL, target_id TEXT NOT NULL,
++ action TEXT NOT NULL, result TEXT NOT NULL, created_at TIMESTAMPTZ NOT NULL DEFAULT now()
++);
++-- Admin default: all seeded pages and their CRUD actions (no implicit category grant).
++INSERT INTO uac_role_acl(role_id,acl_id,created_at)
++SELECT 'analytics-admin',a.id,now() FROM uac_acl a
++WHERE a.id IN ('analytics-accounts','analytics-dashboard','analytics-chat','analytics-pet','analytics-summary','analytics-kind','analytics-export','analytics-password','analytics-security')
++ OR a.acl_parent_id IN ('analytics-accounts','analytics-dashboard','analytics-chat','analytics-pet','analytics-summary','analytics-kind','analytics-export','analytics-password','analytics-security');
++-- Viewer default: read operations; source page visibility is independently granted per user.
++INSERT INTO uac_role_acl(role_id,acl_id,created_at)
++SELECT 'analytics-viewer',a.id,now() FROM uac_acl a
++WHERE a.id IN ('analytics-dashboard','analytics-password','analytics-summary','analytics-kind','analytics-export')
++ OR (a.acl_category='action' AND a.acl_path='read' AND a.acl_parent_id IN ('analytics-dashboard','analytics-chat','analytics-pet','analytics-summary','analytics-kind','analytics-export','analytics-password'));
+\ No newline at end of file
+diff --git a/analytics_apps/migrations/20261031074500_viewer_access.sql b/analytics_apps/migrations/20261031074500_viewer_access.sql
+index 6ace2d0..e483117 100644
+--- a/analytics_apps/migrations/20261031074500_viewer_access.sql
++++ b/analytics_apps/migrations/20261031074500_viewer_access.sql
+@@ -10,8 +10,6 @@ INSERT INTO uac_acl(id,acl_name,acl_path,acl_category,acl_parent_id,acl_status,c
+ ('analytics-token','認證管理','','category',NULL,'active',now(),now());
+ INSERT INTO uac_acl(id,acl_name,acl_path,acl_category,acl_parent_id,acl_status,created_at,updated_at) VALUES
+ ('analytics-accounts','帳號管理','/accounts/new','page','analytics-members','active',now(),now()),
+-('analytics-roles','角色管理','/roles/index','page','analytics-members','active',now(),now()),
+-('analytics-acls','頁面管理','/acls/index','page','analytics-members','active',now(),now()),
+ ('analytics-dashboard','分析後台','/dashboard','page','analytics-info','active',now(),now()),
+ ('analytics-chat','Chat來源','/api/v1/events/web_chat','page','analytics-info','active',now(),now()),
+ ('analytics-pet','Pet來源','/api/v1/events/desktop_pet','page','analytics-info','active',now(),now()),
+@@ -23,7 +21,7 @@ INSERT INTO uac_acl(id,acl_name,acl_path,acl_category,acl_parent_id,acl_status,c
+ INSERT INTO uac_acl(id,acl_name,acl_path,acl_category,acl_parent_id,acl_status,created_at,updated_at)
+ SELECT p.id || '-' || operation, operation, operation, 'action', p.id, 'active', now(),now()
+ FROM uac_acl p CROSS JOIN (VALUES('create'),('read'),('update'),('delete')) AS crud(operation)
+-WHERE p.id IN ('analytics-accounts','analytics-dashboard','analytics-chat','analytics-pet','analytics-summary','analytics-kind','analytics-export','analytics-password','analytics-security', 'analytics-roles', 'analytics-acls');
++WHERE p.id IN ('analytics-accounts','analytics-dashboard','analytics-chat','analytics-pet','analytics-summary','analytics-kind','analytics-export','analytics-password','analytics-security');
+ INSERT INTO uac_user_role(user_id,role_id,created_at)
+ SELECT id,'analytics-admin',now() FROM uac_user WHERE lower(user_acnt)='admin';
+ CREATE TABLE analytics_account_audit (
+@@ -33,8 +31,8 @@ CREATE TABLE analytics_account_audit (
+ -- Admin default: all seeded pages and their CRUD actions (no implicit category grant).
+ INSERT INTO uac_role_acl(role_id,acl_id,created_at)
+ SELECT 'analytics-admin',a.id,now() FROM uac_acl a
+-WHERE a.id IN ('analytics-accounts','analytics-dashboard','analytics-chat','analytics-pet','analytics-summary','analytics-kind','analytics-export','analytics-password','analytics-security', 'analytics-roles', 'analytics-acls')
+- OR a.acl_parent_id IN ('analytics-accounts','analytics-dashboard','analytics-chat','analytics-pet','analytics-summary','analytics-kind','analytics-export','analytics-password','analytics-security', 'analytics-roles', 'analytics-acls');
++WHERE a.id IN ('analytics-accounts','analytics-dashboard','analytics-chat','analytics-pet','analytics-summary','analytics-kind','analytics-export','analytics-password','analytics-security')
++ OR a.acl_parent_id IN ('analytics-accounts','analytics-dashboard','analytics-chat','analytics-pet','analytics-summary','analytics-kind','analytics-export','analytics-password','analytics-security');
+ -- Viewer default: read operations; source page visibility is independently granted per user.
+ INSERT INTO uac_role_acl(role_id,acl_id,created_at)
+ SELECT 'analytics-viewer',a.id,now() FROM uac_acl a
+diff --git a/analytics_apps/migrations/20261031180000_role_acl_pages.sql b/analytics_apps/migrations/20261031180000_role_acl_pages.sql
+new file mode 100644
+index 0000000..0da4703
+--- /dev/null
++++ b/analytics_apps/migrations/20261031180000_role_acl_pages.sql
+@@ -0,0 +1,13 @@
++-- Add definitions and explicit admin page/CRUD grants without changing the f6 migration checksum.
++INSERT INTO uac_acl(id,acl_name,acl_path,acl_category,acl_parent_id,acl_status,created_at,updated_at) VALUES
++('analytics-roles','角色管理','/roles/index','page','analytics-members','active',now(),now()),
++('analytics-acls','頁面管理','/acls/index','page','analytics-members','active',now(),now())
++ON CONFLICT (id) DO NOTHING;
++INSERT INTO uac_acl(id,acl_name,acl_path,acl_category,acl_parent_id,acl_status,created_at,updated_at)
++SELECT p.id||'-'||op,op,op,'action',p.id,'active',now(),now()
++FROM uac_acl p CROSS JOIN (VALUES('create'),('read'),('update'),('delete')) AS crud(op)
++WHERE p.id IN('analytics-roles','analytics-acls') ON CONFLICT(id) DO NOTHING;
++INSERT INTO uac_role_acl(role_id,acl_id,created_at)
++SELECT 'analytics-admin',a.id,now() FROM uac_acl a
++WHERE a.id IN('analytics-roles','analytics-acls') OR a.acl_parent_id IN('analytics-roles','analytics-acls')
++ON CONFLICT(role_id,acl_id) DO NOTHING;

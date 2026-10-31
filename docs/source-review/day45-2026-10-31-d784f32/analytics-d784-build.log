@@ -1,0 +1,111 @@
+   Compiling smallvec v1.16.4
+   Compiling ctutils v0.4.5
+   Compiling rand_core v0.10.1
+   Compiling getrandom v0.4.3
+   Compiling parking_lot_core v0.9.12
+   Compiling parking_lot v0.12.5
+   Compiling futures-executor v0.3.34
+   Compiling digest v0.11.3
+   Compiling tokio v1.54.1
+   Compiling futures v0.3.34
+   Compiling icu_normalizer v2.4.0
+   Compiling idna_adapter v1.2.2
+   Compiling sha2 v0.10.9
+   Compiling proc-macro-utils v0.10.0
+   Compiling idna v1.1.0
+   Compiling server_fn_macro v0.8.12
+   Compiling reactive_graph v0.2.16
+   Compiling tinyvec v1.13.3
+   Compiling unicode-normalization v0.1.26
+   Compiling url v2.5.8
+   Compiling hydration_context v0.3.2
+   Compiling any_spawner v0.3.0
+   Compiling chacha20 v0.10.2
+   Compiling unicode-bidi v0.3.18
+   Compiling unicode-properties v0.1.4
+   Compiling stringprep v0.1.5
+   Compiling rand v0.10.3
+   Compiling futures-intrusive v0.5.0
+   Compiling manyhow-macros v0.14.1
+   Compiling quote-use-macros v0.9.0
+   Compiling hmac v0.13.0
+   Compiling byteorder v1.5.0
+   Compiling whoami v2.1.3
+   Compiling hkdf v0.13.0
+   Compiling sqlx-core v0.9.0
+   Compiling reactive_stores v0.4.4
+   Compiling quote-use v0.9.0
+   Compiling manyhow v0.14.1
+   Compiling sha2 v0.11.1
+   Compiling md-5 v0.11.0
+   Compiling server_fn v0.8.13
+   Compiling attribute-derive-macro v0.11.0
+   Compiling sqlx-postgres v0.9.0
+   Compiling tachys v0.2.19
+   Compiling server_fn_macro_default v0.8.6
+   Compiling tokio-stream v0.1.19
+   Compiling leptos_macro v0.8.19
+   Compiling hyper v1.12.0
+   Compiling wasm_split_macros v0.2.2
+   Compiling sqlx-macros-core v0.9.0
+   Compiling phc v0.6.1
+   Compiling attribute-derive v0.11.0
+   Compiling uuid v1.29.0
+   Compiling leptos v0.8.22
+   Compiling wasm_split_helpers v0.2.3
+   Compiling leptos_server v0.8.8
+   Compiling leptos_dom v0.8.8
+   Compiling password-hash v0.6.1
+   Compiling sqlx-macros v0.9.0
+   Compiling tokio-tungstenite v0.29.0
+   Compiling hyper-util v0.1.21
+   Compiling tower v0.5.3
+   Compiling blake2 v0.11.0
+   Compiling rtoolbox v0.0.6
+   Compiling axum v0.8.9
+   Compiling rpassword v7.5.4
+   Compiling argon2 v0.6.0
+   Compiling sqlx v0.9.0
+   Compiling chat-domain v0.2.45 (/tmp/day45-latest/chat_apps/chat_domain)
+   Compiling shared v0.2.45 (/tmp/day45-latest/crates/shared)
+   Compiling analytics-persistence v0.2.45 (/tmp/day45-latest/analytics_apps/analytics_persistence)
+   Compiling analytics-server v0.2.45 (/tmp/day45-latest/analytics_apps/analytics_server)
+warning: unused import: `analytics_persistence::summary_for_source`
+ --> analytics_server/src/pg_store.rs:1:5
+  |
+1 | use analytics_persistence::summary_for_source;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `analytics_persistence::summary_for_source`
+  --> analytics_server/src/lib.rs:14:5
+   |
+14 | use analytics_persistence::summary_for_source;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: `analytics-server` (lib) generated 2 warnings (run `cargo fix --lib -p analytics-server` to apply 2 suggestions)
+warning: `analytics-server` (lib test) generated 1 warning (1 duplicate)
+error[E0432]: unresolved import `analytics_server::ootstrap`
+ --> analytics_server/tests/day45_viewer.rs:3:51
+  |
+3 | use analytics_server::{IngestState, IngestTokens, ootstrap, password_login};
+  |                                                   ^^^^^^^^ no `ootstrap` in the root
+  |
+help: a similar name exists in the module
+  |
+3 | use analytics_server::{IngestState, IngestTokens, bootstrap, password_login};
+  |                                                   +
+
+error[E0433]: cannot find module or crate `bootstrap` in this scope
+  --> analytics_server/tests/day45_viewer.rs:25:17
+   |
+25 |     let admin = bootstrap::initialize(&pool, "lesson-password".into())
+   |                 ^^^^^^^^^ use of unresolved module or unlinked crate `bootstrap`
+   |
+   = help: if you wanted to use a crate named `bootstrap`, use `cargo add bootstrap` to add it to your `Cargo.toml`
+
+Some errors have detailed explanations: E0432, E0433.
+For more information about an error, try `rustc --explain E0432`.
+error: could not compile `analytics-server` (test "day45_viewer") due to 2 previous errors
+warning: build failed, waiting for other jobs to finish...

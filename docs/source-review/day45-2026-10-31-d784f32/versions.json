@@ -1,0 +1,74 @@
+{
+  "checked_at": "2026-10-31T17:54:38.520915+08:00",
+  "source_sha": "28b71b67907062f804b2358c41fde349c9b18ca9",
+  "official_registry": [
+    {
+      "crate": "argon2",
+      "url": "https://crates.io/api/v1/crates/argon2",
+      "stable": "0.6.0"
+    },
+    {
+      "crate": "axum",
+      "url": "https://crates.io/api/v1/crates/axum",
+      "stable": "0.8.9"
+    },
+    {
+      "crate": "leptos",
+      "url": "https://crates.io/api/v1/crates/leptos",
+      "stable": "0.8.22"
+    },
+    {
+      "crate": "sqlx",
+      "url": "https://crates.io/api/v1/crates/sqlx",
+      "stable": "0.9.0"
+    },
+    {
+      "crate": "tokio",
+      "url": "https://crates.io/api/v1/crates/tokio",
+      "stable": "1.54.1"
+    },
+    {
+      "crate": "wasm-bindgen",
+      "url": "https://crates.io/api/v1/crates/wasm-bindgen",
+      "stable": "0.2.130"
+    },
+    {
+      "crate": "web-sys",
+      "url": "https://crates.io/api/v1/crates/web-sys",
+      "stable": "0.3.107"
+    }
+  ],
+  "locked": {
+    "chat": {
+      "argon2": "0.6.0",
+      "axum": "0.8.9",
+      "leptos": "0.8.22",
+      "sqlx": "0.9.0",
+      "tokio": "1.54.1",
+      "wasm-bindgen": "0.2.129",
+      "web-sys": "0.3.106"
+    },
+    "pet": {
+      "leptos": "0.8.22",
+      "sqlx": "0.9.0",
+      "tokio": "1.54.1",
+      "wasm-bindgen": "0.2.130",
+      "web-sys": "0.3.107"
+    },
+    "analytics": {
+      "argon2": "0.6.0",
+      "axum": "0.8.9",
+      "leptos": "0.8.22",
+      "sqlx": "0.9.0",
+      "tokio": "1.54.1",
+      "wasm-bindgen": "0.2.129",
+      "web-sys": "0.3.106"
+    }
+  },
+  "rustc": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+  "cargo": "cargo 1.99.1 (5f94df478 2026-08-27)",
+  "node_system": "v22.22.1",
+  "node_final_browser": "v26.13.0",
+  "postgres": "psql (PostgreSQL) 18.6 (Ubuntu 18.6-1.pgdg26.04+2)",
+  "dependencies_changed_by_agent": false
+}

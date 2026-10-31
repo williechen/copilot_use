@@ -1,0 +1,122 @@
+{
+  "source_sha": "28b71b67907062f804b2358c41fde349c9b18ca9",
+  "commands": [
+    {
+      "command": [
+        "git",
+        "-C",
+        "/tmp/day45-apply-check",
+        "apply",
+        "--check",
+        "/home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/day45-review/analytics-runtime-fix.patch"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "-C",
+        "/tmp/day45-apply-check",
+        "apply",
+        "/home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/day45-review/analytics-runtime-fix.patch"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "-C",
+        "/tmp/day45-apply-check",
+        "apply",
+        "--check",
+        "/home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/day45-review/analytics-f6-upgrade-fix.patch"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "-C",
+        "/tmp/day45-apply-check",
+        "apply",
+        "/home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/day45-review/analytics-f6-upgrade-fix.patch"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "-C",
+        "/tmp/day45-apply-check",
+        "apply",
+        "--check",
+        "/home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/day45-review/pet-browser-fix.patch"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "-C",
+        "/tmp/day45-apply-check",
+        "apply",
+        "/home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/day45-review/pet-browser-fix.patch"
+      ],
+      "exit": 0,
+      "stderr": ""
+    }
+  ],
+  "files": [
+    {
+      "path": "analytics_apps/analytics_server/src/page_acl.rs",
+      "sha256": "8115cf2d070121ed3b2788c80058f61dd9e7b67733eafd1db163a14c05c845bb",
+      "exact_bytes_equal": true
+    },
+    {
+      "path": "analytics_apps/analytics_server/src/password_login.rs",
+      "sha256": "b2ac59f25d7de0ff6252f6d5a86acd10c0ceaa4d4ac9eb8ffe0245106458e1b6",
+      "exact_bytes_equal": true
+    },
+    {
+      "path": "analytics_apps/analytics_server/tests/day45_final.rs",
+      "sha256": "cbc030e738c891e7730a77d490b8559213289cf7e7281a2196e0b43cb853e8e3",
+      "exact_bytes_equal": true
+    },
+    {
+      "path": "analytics_apps/analytics_server/tests/day45_viewer.rs",
+      "sha256": "6501203314b19597ce210adcad31b4bd2a647d1a8d9a9bdaac23ff5fcd7002ff",
+      "exact_bytes_equal": true
+    },
+    {
+      "path": "analytics_apps/analytics_server/tests/fixtures/28b71b6_viewer_access.sql",
+      "sha256": "6a97c57e0123fd9aa90c45a92ab43906958e5cf18bcd4dcae1fe064c19469857",
+      "exact_bytes_equal": true
+    },
+    {
+      "path": "analytics_apps/analytics_server/tests/fixtures/f6_viewer_access.sql",
+      "sha256": "fe81c4fd7b32a96e6b91f7a2532abf406ec88ff3a893350d57b0a2ee31ce5995",
+      "exact_bytes_equal": true
+    },
+    {
+      "path": "analytics_apps/migrations/20261031074500_viewer_access.sql",
+      "sha256": "fe81c4fd7b32a96e6b91f7a2532abf406ec88ff3a893350d57b0a2ee31ce5995",
+      "exact_bytes_equal": true
+    },
+    {
+      "path": "analytics_apps/migrations/20261031180000_role_acl_pages.sql",
+      "sha256": "79c13a38e445f99cad659dea0b4df93da87a9531b36a223c552e9682fb37892b",
+      "exact_bytes_equal": true
+    },
+    {
+      "path": "pet_apps/pet_ui/tests/browser/canvas.cjs",
+      "sha256": "01d4843991b6d083ccc2e6fc2b5c7fb1e46401b90f402d6bce4083f88d1d5fd8",
+      "exact_bytes_equal": true
+    }
+  ],
+  "migration_repair_condition": "fresh DB or exact-f6 checksum DB only; edited28-checksum DB requires explicit reconciliation, never rewrite ledger"
+}
