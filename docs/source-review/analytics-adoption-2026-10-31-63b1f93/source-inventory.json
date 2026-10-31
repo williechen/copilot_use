@@ -1,0 +1,63 @@
+{
+  "source_sha": "63b1f936b32f131f0f801bb4f36b3163f88c91fa",
+  "previous_sha": "64eff527283fd05657841297879aefeaadd31f64",
+  "files": {
+    "analytics_apps/migrations/20261014223748_create_product_events.sql": {
+      "blob_sha": "2aecd5ebd13edbb6b6144a221d2d892f7063faa2",
+      "sha256": "44663555d34f077e8fcf40784b91a943227fd17630c8657f9574f787fca06eaf"
+    },
+    "analytics_apps/migrations/20261018073932_create_auth_user.sql": {
+      "blob_sha": "e4ed869fb0c6acab496c78a2e1e55482733de7a0",
+      "sha256": "63fe5fd0d14121ad20855105b89877ff8a33bcd701ebcafa986a7ae0850c11a9"
+    },
+    "analytics_apps/migrations/20261018114026_creat_protocol.sql": {
+      "blob_sha": "32adb02e00b17fb063ea168c970a7fba8d388a58",
+      "sha256": "660feafdacf9ba7ccd850ff63eb81679e2fd2f99e282d1da57870ec89e8b2e83"
+    },
+    "analytics_apps/migrations/20261020154237_password_login_session.sql": {
+      "blob_sha": "1717893f67bf3841053b84c3b3f4adb685432295",
+      "sha256": "e1cefd4d54c4c010bebd65bc813858eeca4c811e9bb31712846c5d6702199485"
+    },
+    "analytics_apps/migrations/20261021071000_unique_account_email.sql": {
+      "blob_sha": "450926d1e78bdabbd612f3e990844af4c1671f0f",
+      "sha256": "0d21b80fd4b71229cf67ad2c76ee7b972f1737121a5902e61de08ef497188da0"
+    },
+    "analytics_apps/migrations/20261022070000_session_contract.sql": {
+      "blob_sha": "ffa066d6e7210a2fd819d3e32a1c659499078e5a",
+      "sha256": "58ddc5b3bfa1edf67ae867055b188db26cff3c38a4953c761ceca1114f6cf68a"
+    },
+    "analytics_apps/migrations/20261031074500_viewer_access.sql": {
+      "blob_sha": "7ff141a95a0ad3d65ae91cafd9fff92db7383f87",
+      "sha256": "14b96ae2e98ca2b59f706848a59c38c18b8eb4c592aa5e735497ef4a7b2d2f0a"
+    }
+  },
+  "changed_paths": [
+    "A\tanalytics_apps/migrations/20261031074500_viewer_access.sql"
+  ],
+  "runtime_review": {
+    "analytics_apps/analytics_server/src/lib.rs": {
+      "exists": true,
+      "blob_sha": "5d12b20c68c487290c61f17ffff1f9ef8a6f0f83"
+    },
+    "analytics_apps/analytics_server/src/password_login.rs": {
+      "exists": true,
+      "blob_sha": "0a5180366c577424af6831fce39b026cf6f98f41"
+    },
+    "analytics_apps/analytics_server/src/bootstrap.rs": {
+      "exists": true,
+      "blob_sha": "365f8402cd927662a709a5da31e8023bdebc172d"
+    },
+    "analytics_apps/analytics_server/src/accounts.rs": {
+      "exists": false,
+      "blob_sha": null
+    },
+    "analytics_apps/analytics_server/src/page_acl.rs": {
+      "exists": false,
+      "blob_sha": null
+    },
+    "analytics_apps/analytics_persistence/src/login_session.rs": {
+      "exists": false,
+      "blob_sha": null
+    }
+  }
+}

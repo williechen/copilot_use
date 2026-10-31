@@ -19,3 +19,5 @@ Analytics r3 Green完整替代r1／r2，不能將多份Green相接；若已在�
 [階層ACL與CRUD需求](../../../requirements/ANALYTICS_ACL.md) · [r3精確讀回／SHA256](publication-r3.json)。原[r2](analytics-r2.md)及[r1](analytics.md)保留；本修訂不增加Day。
 
 r3專用[階層Red](analytics-hierarchy-red-r3.patch)的重現基準是r2候選；不能直接接在只有原Refactor的副本。詳細順序見[現行r3正文](analytics-r3.md)。
+
+**最新來源注意：** 產品已到63b1f93，只採用並調整了schema。上述r3完整patch仍是64eff527歷史重現，不能直接套到最新來源；下一份完整方案需重新接線並保留使用者配置。[採用核對／向前補正](../../../source-review/analytics-adoption-2026-10-31-63b1f93/README.md)。

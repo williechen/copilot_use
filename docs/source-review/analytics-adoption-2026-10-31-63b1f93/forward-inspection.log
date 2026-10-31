@@ -1,0 +1,16 @@
+            id             | acl_category | admin_grants 
+---------------------------+--------------+--------------
+ analytics-security        | page         |            1
+ analytics-security-create | action       |            1
+ analytics-security-delete | action       |            1
+ analytics-security-read   | action       |            1
+ analytics-security-update | action       |            1
+(5 rows)
+
+ acl_category | count 
+--------------+-------
+ action       |    36
+ category     |     3
+ page         |     9
+(3 rows)
+

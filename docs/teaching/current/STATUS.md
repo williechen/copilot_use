@@ -1,5 +1,9 @@
 # 目前教學與驗收狀態
 
+產品最新來源 `63b1f936b32f131f0f801bb4f36b3163f88c91fa`，本次只新增Analytics ACL schema；runtime尚未接線，完整Gate2=false。[新來源採用核對與命令](../../source-review/analytics-adoption-2026-10-31-63b1f93/README.md)。
+
+## 先前來源驗證快照（不追認63b1f93）
+
 產品`64eff527283fd05657841297879aefeaadd31f64`，本次僅Pet SQL排版更新。**完整Gate2尚未通過。** [最新命令／來源／矩陣](../../source-review/gate2-sql-2026-10-31/README.md)。
 
 | 範圍 | 精確來源與結果 |
@@ -28,3 +32,7 @@ next_day三案45、FIFO及last_full_comparison=`2026-10-16T22:47:14.399027+08:00
 這些是64eff527加候選patch的隔離結果，並非產品main新commit或完整Gate2。詳見[文章與證據](../daily/day-45/ENTRY.md)。
 
 Analytics階層修訂候選另驗page-only禁止create、獨立CRUD授權、父節點停用／deny與損壞階層拒絕；刪除API尚未實作，真Router仍405。[本次精確讀回](../daily/day-45/publication-r3.json)。
+
+## Analytics最新schema採用（63b1f93）
+
+本次僅採用SQL，runtime尚未接線；隔離raw SQL七份通過，3／9／36節點，管理憑證page漏admin預設grant。原候選62項仍屬64eff527加r3 patch，不是本SHA測試。[命令、限制與向前補正](../../source-review/analytics-adoption-2026-10-31-63b1f93/README.md)。Gate2=false。

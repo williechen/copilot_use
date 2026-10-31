@@ -1,0 +1,30 @@
+[
+  {
+    "file": "20261014223748_create_product_events.sql",
+    "exit": 0
+  },
+  {
+    "file": "20261018073932_create_auth_user.sql",
+    "exit": 0
+  },
+  {
+    "file": "20261018114026_creat_protocol.sql",
+    "exit": 0
+  },
+  {
+    "file": "20261020154237_password_login_session.sql",
+    "exit": 0
+  },
+  {
+    "file": "20261021071000_unique_account_email.sql",
+    "exit": 0
+  },
+  {
+    "file": "20261022070000_session_contract.sql",
+    "exit": 0
+  },
+  {
+    "file": "20261031074500_viewer_access.sql",
+    "exit": 0
+  }
+]

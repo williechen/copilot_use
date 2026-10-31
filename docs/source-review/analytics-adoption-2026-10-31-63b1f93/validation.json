@@ -1,0 +1,49 @@
+{
+  "source_sha": "63b1f936b32f131f0f801bb4f36b3163f88c91fa",
+  "schema_definition_adopted": true,
+  "full_candidate_adopted": false,
+  "runtime_acl_adopted": false,
+  "gate2": false,
+  "isolation": "PG18.6 localhost55485/adoption_63b1f93",
+  "executed": [
+    {
+      "command": "psql -X -h127.0.0.1 -p55485 -d adoption_63b1f93 -v ON_ERROR_STOP=1 -f each of 7 exact SHA SQL migrations",
+      "exits": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "log": "migration.log",
+      "counts": {
+        "category": 3,
+        "page": 9,
+        "action": 36
+      }
+    },
+    {
+      "command": "psql same isolated DB -1 -f 20261031094500_grant_security_page.sql",
+      "exit": 0,
+      "repetitions": 2,
+      "log": "forward-fix.log",
+      "page_admin_grants_after": 1
+    },
+    {
+      "command": "git apply --check analytics-security-page-forward.patch in isolated exact source migrations tree",
+      "exit": 0,
+      "log": "patch-check.log"
+    }
+  ],
+  "not_run": [
+    "SQLx migration runner/checksum",
+    "actual old DB upgrade",
+    "local Rust test suite at63",
+    "browser",
+    "new ACL runtime: not in main"
+  ],
+  "forward_fix_applied_to_product": false,
+  "historical_r3_62_tests_not_retagged": true
+}

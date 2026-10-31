@@ -1,6 +1,6 @@
 # 每日教學接續
 
-產品來源 `64eff527283fd05657841297879aefeaadd31f64`；七個來源CI目前均成功，完整產品Gate2仍未通過。三案候選patch尚待使用者套用；原生／瀏覽器／舊PG資料等驗收缺口見STATUS。
+產品來源 `63b1f936b32f131f0f801bb4f36b3163f88c91fa`；本次只新增Analytics階層ACL migration，正式runtime尚未接線。隔離raw SQL確認3 category／9 page／36 action；完整Gate2未通過。來源CI以最新採用紀錄快照為準。
 
 [目前狀態](../current/STATUS.md) · [需求](../../requirements/USER_FLOWS.md) · [規則](../../COMMON_LEARNING_RULES.md) · [來源](../../SOURCE_LAYOUT.md) · [架構](../../SYSTEM_ARCHITECTURE.md)
 
@@ -9,3 +9,5 @@
 [Day45 ENTRY](day-45/ENTRY.md) · [Chat](day-45/chat.md) · [Pet](day-45/pet.md) · [Analytics r3](day-45/analytics-r3.md) · [讀回證據](day-45/delivery-verification.json)
 
 [manifest](../current/manifest.json) · [learning-state](../../learning-state.json) · [各案Refactor](../functional-refactoring/PROGRESS.md) · [跨案工程](../../engineering/README.md) · [歷史分包](../../archive/README.md)
+
+[Analytics新來源採用核對與向前補正](../../source-review/analytics-adoption-2026-10-31-63b1f93/README.md)。Day45原r3附件只適用舊64eff527，不可直接套用新63b1f93。

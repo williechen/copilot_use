@@ -7,3 +7,5 @@
 [完整附件／套用](README.md) · [精確commit全文讀回／blob／SHA256](delivery-verification.json) · [來源CI](product-ci.json) · [四workspace來源](source-inventory.json)
 
 三案文件Gate1完成，expected next_day45→46僅一次。產品仍64eff527，候選未套用，完整Gate2=false。Analytics原r1／r2及commit保留；本r3為同Day修訂，不再加一。FIFO與last_full_comparison原值保留。
+
+**最新來源注意：** 產品已到63b1f93，只採用並調整了schema。上述r3完整patch仍是64eff527歷史重現，不能直接套到最新來源；下一份完整方案需重新接線並保留使用者配置。[採用核對／向前補正](../../../source-review/analytics-adoption-2026-10-31-63b1f93/README.md)。

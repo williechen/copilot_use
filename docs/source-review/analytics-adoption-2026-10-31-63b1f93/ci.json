@@ -1,0 +1,161 @@
+{
+  "observed_at": "2026-10-31T08:13:11.321524+08:00",
+  "runs": [
+    {
+      "name": "Rust Desktop Pet",
+      "id": 41148525430,
+      "status": "in_progress",
+      "conclusion": null,
+      "url": "https://github.com/williechen/rust_ai_ring/actions/runs/41148525430",
+      "head_sha": "63b1f936b32f131f0f801bb4f36b3163f88c91fa"
+    },
+    {
+      "name": "Test All",
+      "id": 41148525428,
+      "status": "in_progress",
+      "conclusion": null,
+      "url": "https://github.com/williechen/rust_ai_ring/actions/runs/41148525428",
+      "head_sha": "63b1f936b32f131f0f801bb4f36b3163f88c91fa"
+    },
+    {
+      "name": "Node",
+      "id": 41148525446,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/williechen/rust_ai_ring/actions/runs/41148525446",
+      "head_sha": "63b1f936b32f131f0f801bb4f36b3163f88c91fa"
+    },
+    {
+      "name": "Rust AI Chat",
+      "id": 41148525451,
+      "status": "in_progress",
+      "conclusion": null,
+      "url": "https://github.com/williechen/rust_ai_ring/actions/runs/41148525451",
+      "head_sha": "63b1f936b32f131f0f801bb4f36b3163f88c91fa"
+    },
+    {
+      "name": "Cargo workspaces",
+      "id": 41148525654,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/williechen/rust_ai_ring/actions/runs/41148525654",
+      "head_sha": "63b1f936b32f131f0f801bb4f36b3163f88c91fa"
+    },
+    {
+      "name": "Persistence",
+      "id": 41148525671,
+      "status": "in_progress",
+      "conclusion": null,
+      "url": "https://github.com/williechen/rust_ai_ring/actions/runs/41148525671",
+      "head_sha": "63b1f936b32f131f0f801bb4f36b3163f88c91fa"
+    },
+    {
+      "name": "Rust Analytics",
+      "id": 41148525364,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/williechen/rust_ai_ring/actions/runs/41148525364",
+      "head_sha": "63b1f936b32f131f0f801bb4f36b3163f88c91fa"
+    }
+  ],
+  "analytics_jobs": [
+    {
+      "id": 124379221521,
+      "name": "build-analytics",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-31T00:08:41Z",
+      "completed_at": "2026-10-31T00:11:34Z",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install Rust",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install Linux dependencies",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build analytics server",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Upload build artifacts",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "url": "https://github.com/williechen/rust_ai_ring/actions/runs/41148525364/job/124379221521"
+    },
+    {
+      "id": 124379221880,
+      "name": "check-analytics",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-31T00:08:40Z",
+      "completed_at": "2026-10-31T00:09:55Z",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install Rust",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install Linux dependencies",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check analytics server",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "url": "https://github.com/williechen/rust_ai_ring/actions/runs/41148525364/job/124379221880"
+    }
+  ],
+  "note": "Analytics workflow has build/check only; not evidence that the new ACL behavior is implemented/tested"
+}

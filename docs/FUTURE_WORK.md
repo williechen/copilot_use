@@ -132,3 +132,5 @@ presence、typing、reconnect／queue、streaming、RAG、MCP、Agent、Persona�
 ## 教學排程：啟動成功但未交付
 
 2026-10-31既有雲端任務兩次手動執行均未建立Day45文章或commit；回合completed／error=null不等於交付成功。提示詞已保存、重新載入全文讀回且第二次收到相同內容，仍因來源／fixture核對未完成而提早結束，未提供具體工具錯誤。**未結案**：需真正完成逐案Gate1交付，或取得可處理的明確執行阻擋；不能把Gate2缺口推定為排程根因，不調整Day／FIFO。[診斷與原始結果](source-review/scheduler-2026-10-31/README.md)。
+
+Analytics ACL原項目最新採用：[63b1f93 schema-only／runtime待接線／security page grant向前補正](source-review/analytics-adoption-2026-10-31-63b1f93/README.md)。不是新增重複功能項，next_day與週比對日期不變。

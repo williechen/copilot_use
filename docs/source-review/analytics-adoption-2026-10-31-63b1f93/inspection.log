@@ -1,0 +1,21 @@
+ acl_category | count 
+--------------+-------
+ action       |    36
+ category     |     3
+ page         |     9
+(3 rows)
+
+            id             | acl_category | admin_grant 
+---------------------------+--------------+-------------
+ analytics-security        | page         | f
+ analytics-security-create | action       | t
+ analytics-security-delete | action       | t
+ analytics-security-read   | action       | t
+ analytics-security-update | action       | t
+(5 rows)
+
+ admin_role_links_before_bootstrap 
+-----------------------------------
+                                 0
+(1 row)
+

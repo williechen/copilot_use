@@ -10,15 +10,12 @@
 
 ```text
 category：會員管理
-└─ page：帳號管理
-   ├─ action：create
-   ├─ action：read
-   ├─ action：update
-   └─ action：delete
+├─ page：帳號管理 → action：create/read/update/delete
+└─ page：自身密碼 → action：create/read/update/delete
 category：資訊分析
 └─ page：分析後台、Chat來源、Pet來源、彙總查詢、類型查詢、CSV匯出（各自有CRUD action）
 category：認證管理
-└─ page：自身密碼（下設CRUD action）
+└─ page：管理憑證 /security → action：create/read/update/delete（目前只有schema）
 ```
 
 這是目前候選的頁面配置，並未宣稱所有管理頁面或CRUD API均已實作；角色、ACL與個人加減權的編輯介面仍須接續。
@@ -37,3 +34,7 @@ category：認證管理
 ## 方案、套用與驗收
 
 [Day45 r3全文與完整patch](../teaching/daily/day-45/analytics-r3.md) 以 rust_ai_ring 精確來源為基準；產品保持唯讀，由使用者套用。舊r1／r2文章、patch與證據保留。此需求修訂不增加Day，不變更FIFO或last_full_comparison。
+
+## 使用者已採用schema的頁面配置
+
+63b1f93使用analytics-token作認證管理ID；自身密碼page移至會員管理，管理憑證security page歸認證管理。採此來源配置接續方案，不用舊候選的analytics-auth／密碼歸屬覆寫。[採用核對](../source-review/analytics-adoption-2026-10-31-63b1f93/README.md)。schema入庫與runtime實作／DB執行分別判定。

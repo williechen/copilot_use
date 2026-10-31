@@ -1,6 +1,6 @@
 # 系統架構與責任
 
-唯一產品為 rust_ai_ring，文件與教學為 copilot_use。現行來源 `64eff527283fd05657841297879aefeaadd31f64`；目錄與相依見 [SOURCE_LAYOUT](SOURCE_LAYOUT.md)。以下分層是教學／工程約束，不代表現有所有 handler 已完成搬層。
+唯一產品為 rust_ai_ring，文件與教學為 copilot_use。現行來源 `63b1f936b32f131f0f801bb4f36b3163f88c91fa`；目錄與相依見 [SOURCE_LAYOUT](SOURCE_LAYOUT.md)。以下分層是教學／工程約束，不代表現有所有 handler 已完成搬層。
 
 <a id="functional-layering"></a>
 
@@ -28,3 +28,5 @@ Pet活動模型已在main：目前籠態由pet_activity導出，預設沿用既�
 ## Analytics ACL 階層契約
 
 `uac_role`／`uac_user_role` 負責角色分類與指派，`uac_acl` 以既有 `acl_parent_id` 構成 category→page→action。三個category為會員管理、資訊分析、認證管理；action判斷CRUD。`uac_role_acl`為角色預設，`uac_user_acl`提供個人獨立加減；page可見性與CRUD操作分別檢查。[完整需求](requirements/ANALYTICS_ACL.md)。目前僅交付候選patch，不能宣稱產品main已具此分層或權限管理UI。
+
+目前63b1f93只新增Analytics ACL schema：analytics-token認證管理、密碼page歸會員管理、security管理憑證page；其餘runtime仍沿原來源，page／CRUD Adapter尚未採用。[採用證據與限制](source-review/analytics-adoption-2026-10-31-63b1f93/README.md)。舊測試保留原SHA，不追認新來源。
