@@ -1,0 +1,122 @@
+{
+  "sync_commit": "a8c8c2c047a618ca1fcccce5280602154f1ef7a5",
+  "files": [
+    {
+      "path": "docs/learning-state.json",
+      "blob_sha": "4706ba44cef854c38eb92d2b8e7a0db3f0bd8e42",
+      "full_text_equal": true,
+      "sha256": "6794d5e141829f914cf4db091374dcd8417232ff59b57ec5c878906380f68fcb"
+    },
+    {
+      "path": "docs/teaching/current/manifest.json",
+      "blob_sha": "2bbe8a742bdb3db9b8d33b5ab1dd020a6d23a1a6",
+      "full_text_equal": true,
+      "sha256": "4b64788c48c757e0cd933619ff0ba0ab969139eff4ff502ef6d28d2fec041a0f"
+    },
+    {
+      "path": "README.md",
+      "blob_sha": "48da51eed685e6da84cfff213b5777e764b16936",
+      "full_text_equal": true,
+      "sha256": "72bdd796ddfa06d12a1fc7bad5a82162293d60ec7f1ab53f5eef880183d032f0"
+    },
+    {
+      "path": "docs/README.md",
+      "blob_sha": "61c4e8a838971d2deead942fb84508a8059cae75",
+      "full_text_equal": true,
+      "sha256": "e9ecb1506c2fd7d2c34352f150c9e0ee5165f756592535847aea63717bf33a1d"
+    },
+    {
+      "path": "docs/teaching/README.md",
+      "blob_sha": "5ac884acf69868422277562267096081f47f54f3",
+      "full_text_equal": true,
+      "sha256": "b4f7d217ea294c56487f7ccf7f51a4e3c1f677d67b43c8151466af72685e4e78"
+    },
+    {
+      "path": "docs/teaching/daily/README.md",
+      "blob_sha": "1a61fa6d5cfb983a11db3df8b8bed6a72a8535f6",
+      "full_text_equal": true,
+      "sha256": "62ee5146360490858132816575c32fe997b6c6683ce225d9e1c3fd27b299549f"
+    },
+    {
+      "path": "docs/teaching/chat/README.md",
+      "blob_sha": "5d04857862fb33c3b0b302a60da69058d88a8a5d",
+      "full_text_equal": true,
+      "sha256": "863ae2e405d9298d3ba4b99b079cd77ba796f43bd37c48883bf558b0b5ac7aab"
+    },
+    {
+      "path": "docs/teaching/pet/README.md",
+      "blob_sha": "6651db2292abe73145830178247fdda74f8c31c2",
+      "full_text_equal": true,
+      "sha256": "f5834499ef7238a4379b422b6a63b4816710cb133d214195cf2f1d4bad9d4565"
+    },
+    {
+      "path": "docs/teaching/analytics/README.md",
+      "blob_sha": "eb0606ee4ca860dfd09374aabb2e13c687cf1424",
+      "full_text_equal": true,
+      "sha256": "8bd72ce2397084f6421654f3216b76c8f5c50a6b1d0ada047deb281e027ef5b2"
+    },
+    {
+      "path": "docs/teaching/current/README.md",
+      "blob_sha": "8b2b8c7ec9f191149c724f64400f7292efb86608",
+      "full_text_equal": true,
+      "sha256": "6ade414ef7ded78e5a6fff8e258aca220f0cb1c5ecdf95c0345f12d81054f9db"
+    },
+    {
+      "path": "docs/teaching/current/STATUS.md",
+      "blob_sha": "f98ae220eb674099141a6721dd5202d64fa2c3db",
+      "full_text_equal": true,
+      "sha256": "fcb29ca182dbcba7427dfbf0328efa033d37762bcd270b7db66805aaff7ed5b3"
+    },
+    {
+      "path": "docs/teaching/functional-refactoring/PROGRESS.md",
+      "blob_sha": "e34e8f895ff4a11b22bd0869e99e677c8c69ccc7",
+      "full_text_equal": true,
+      "sha256": "02ed43b5c9fc5b7d44f9275b20f82d0c3582e6d222af0f34a35309494e4e353f"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/ENTRY.md",
+      "blob_sha": "7141c23387bdda72e55558e7bf770da4f6980fe9",
+      "full_text_equal": true,
+      "sha256": "01ef925f1af6353f4c27d74bfe168ad06b681f681fa6338a57d7760225e84ae4"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/README.md",
+      "blob_sha": "cf138fd442b39dba2b802e2f87572ec1e6da7c43",
+      "full_text_equal": true,
+      "sha256": "df26a6377582fe91f3f2a4ef2474dd7fce5e98bc6c12f1c900d87236db09a8f6"
+    },
+    {
+      "path": "docs/source-review/analytics-adoption-2026-10-31-f6a0401/README.md",
+      "blob_sha": "c02f8c4c9f358451e1512b0c1061dc61410d19fb",
+      "full_text_equal": true,
+      "sha256": "35ab29611ae2b5a92bcac118120fd0dcfe212fe39525cdab992aed63c1050b18"
+    },
+    {
+      "path": "docs/teaching/current/validation.json",
+      "blob_sha": "9db37e5b465fcf70993e5b10ab7be8a963c8b8e9",
+      "full_text_equal": true,
+      "sha256": "39342080af7b39870651aa2cf5d199e6c738ee0140155df7ecd10ea835bd11bc"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/publication-final-rewire.json",
+      "blob_sha": "84a27f310f0c5e18f15026fab0933c54f32a832c",
+      "full_text_equal": true,
+      "sha256": "e0fe5fbad786244d1e386d3bb11f6b664ee7141b14ed9fb7a79826b2746c4676"
+    }
+  ],
+  "next_day": {
+    "chat": 46,
+    "pet": 46,
+    "analytics": 46
+  },
+  "fifo_changed": false,
+  "last_full_comparison_changed": false,
+  "article_commits": {
+    "chat": "05299579857f4ca46e7119fddffd6fa535a30917",
+    "analytics": "8ed4e0a4a489866e70f381f415232d3214e69fdd"
+  },
+  "gate1": true,
+  "gate2": false,
+  "product_written": false,
+  "notes": "All 17 synchronized files read in full at exact commit via GitHub; blob IDs cross-checked with fetched Git objects and SHA256 saved"
+}
