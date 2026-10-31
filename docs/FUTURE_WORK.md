@@ -135,4 +135,4 @@ presence、typing、reconnect／queue、streaming、RAG、MCP、Agent、Persona�
 
 Analytics ACL原項目最新採用：[63b1f93 schema-only／runtime待接線／security page grant向前補正](source-review/analytics-adoption-2026-10-31-63b1f93/README.md)。不是新增重複功能項，next_day與週比對日期不變。
 
-Analytics原ACL／登入項目續記：f6a0401已補security page預設grant；viewer角色縮權按新SQL；修改密碼改共用流程、不獨立頁，尚待接線與驗證。[採用與新需求](source-review/analytics-adoption-2026-10-31-f6a0401/README.md)。不另增Day或重複功能清單。
+Analytics原ACL／登入項目續記：f6a0401已補security page預設grant；viewer角色縮權按新SQL；自身密碼保留ACL page；首次先開該頁，完成後後續登入開首頁；實作待對齊與驗證。[採用與新需求](source-review/analytics-adoption-2026-10-31-f6a0401/README.md)。不另增Day或重複功能清單。

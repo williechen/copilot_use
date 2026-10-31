@@ -1,6 +1,6 @@
 # 目前教學與驗收狀態
 
-產品最新來源 `f6a04015188da2155af6c264d0e6326e6a922dca`，本次只調整Analytics SQL角色預設；runtime尚未接線，共用修改密碼、不另設一頁的新需求尚未實作，完整Gate2=false。[最新採用核對](../../source-review/analytics-adoption-2026-10-31-f6a0401/README.md)。
+產品最新來源 `f6a04015188da2155af6c264d0e6326e6a922dca`，本次只調整Analytics SQL角色預設；runtime尚未接線，自身密碼ACL page與首次／後續登入顯示規則已更正，未重新驗收實作，完整Gate2=false。[最新採用核對](../../source-review/analytics-adoption-2026-10-31-f6a0401/README.md)。
 
 ## 先前來源驗證快照（不追認63b1f93）
 
@@ -39,4 +39,4 @@ Analytics階層修訂候選另驗page-only禁止create、獨立CRUD授權、父�
 
 ## f6a0401最新採用與新需求
 
-管理員security page預設grant已修正；viewer不再有accounts-read／password-update。隔離raw SQL七份通過，3／9／36節點。runtime仍未接線；共用修改密碼不單獨一頁的需求已確認、未實作。[證據](../../source-review/analytics-adoption-2026-10-31-f6a0401/README.md)。既有63／64快照及候選結果仍屬原來源，不追認新SHA。
+管理員security page預設grant已修正；viewer不再有accounts-read／password-update。隔離raw SQL七份通過，3／9／36節點。runtime仍未接線；自身密碼保留ACL page、首次修改後後續登入首頁的規則已更正，未重新驗收實作。[證據](../../source-review/analytics-adoption-2026-10-31-f6a0401/README.md)。既有63／64快照及候選結果仍屬原來源，不追認新SHA。

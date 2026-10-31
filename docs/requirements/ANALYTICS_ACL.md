@@ -11,7 +11,7 @@
 ```text
 category：會員管理
 ├─ page：帳號管理 → action：create/read/update/delete
-└─ 本人修改密碼：共用驗證流程，不另列page／CRUD ACL
+└─ page：自身密碼 → action：依該page的有效CRUD權限顯示
 category：資訊分析
 └─ page：分析後台、Chat來源、Pet來源、彙總查詢、類型查詢、CSV匯出（各自有CRUD action）
 category：認證管理
@@ -39,9 +39,22 @@ category：認證管理
 
 63b1f93使用analytics-token作認證管理ID；自身密碼page移至會員管理，管理憑證security page歸認證管理。採此來源配置接續方案，不用舊候選的analytics-auth／密碼歸屬覆寫。[採用核對](../source-review/analytics-adoption-2026-10-31-63b1f93/README.md)。schema入庫與runtime實作／DB執行分別判定。
 
-## 最新確認：移除獨立自身密碼page的設計
+## 最新更正：自身密碼保留ACL page
 
-使用者確認「共用修改密碼，不單獨一頁」。因此analytics-password與其CRUD不是目標ACL節點；本人／首次修改走共用驗證流程，不需viewer取得帳號管理update。管理他人帳密仍按管理page/action授權。目前f6a0401 SQL尚有此舊節點，後續需作版本化相容處理，不能把需求確認冒稱已從產品移除。[安全規則](AUTHENTICATION.md)。
+自身密碼保留為 ACL page。首次登入需強制修改時先顯示自身密碼頁，完成修改後，後續登入才預設顯示首頁；未完成者重登仍須先完成，不以單純登入次數繞過。
+
+首次與日後本人修改使用同一個自身密碼 ACL page及共用元件／後端流程，不再另建第二個首次修改頁。保留目前密碼驗證、新密碼確認、CSRF、成功後清除失敗等待及撤銷所有 Session 再登入；身分取自 Session，不可藉此修改其他帳號。
+
+```text
+會員管理                 ← category，至少一個可用page才顯示
+└─ 自身密碼              ← 保留的ACL page
+   └─ 修改密碼           ← update action，有權限才顯示
+```
+
+
+若只有自身密碼page權限，不連帶顯示帳號管理等其他page；category由page權限推導，action依所屬page與自己的CRUD權限顯示。首次／後續登入只決定預設開啟內容，功能樹仍按ACL顯示。需要首次強制修改的人員必須能完成此page必要操作，不能被唯讀設定擋住，也不因此取得管理其他帳密的權限。
+
+先前移除analytics-password page／CRUD的文字是助理誤讀，已撤回。[安全規則](AUTHENTICATION.md) · [更正紀錄](revisions/2026-10-31-self-password-page-correction.md)。
 
 ## 顯示關係：以page為起點（2026-10-31 使用者確認）
 

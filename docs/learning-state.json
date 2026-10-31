@@ -726,7 +726,8 @@
           "sha256": "67412dc6a6fa3791a84a782a366df73144964964cda41c54886d41fe7879a88d"
         },
         "latest_product_review": "docs/source-review/analytics-adoption-2026-10-31-f6a0401/README.md",
-        "application_at_latest_source": "historical64 full patch not applicable to f6; separate password page superseded by common flow requirement"
+        "application_at_latest_source": "historical64 full patch requires rebase for f6; own-password ACL page retained; first-change then subsequent home routing clarified",
+        "latest_password_requirement_correction": "docs/requirements/revisions/2026-10-31-self-password-page-correction.md"
       }
     ],
     "pending_publication": null,
@@ -751,19 +752,30 @@
       "review": "docs/source-review/analytics-adoption-2026-10-31-f6a0401/README.md",
       "full_gate2": false,
       "security_page_default_grant_fixed": true,
-      "shared_password_no_separate_page_confirmed": true,
-      "shared_password_flow_implemented": false,
-      "previous_review": "docs/source-review/analytics-adoption-2026-10-31-63b1f93/README.md"
+      "shared_password_no_separate_page_confirmed": false,
+      "shared_password_flow_implemented": null,
+      "previous_review": "docs/source-review/analytics-adoption-2026-10-31-63b1f93/README.md",
+      "own_password_acl_page_retained": true,
+      "password_requirement_correction": "docs/requirements/revisions/2026-10-31-self-password-page-correction.md",
+      "password_validation_status": "not re-verified for corrected requirement; existing password ACL page retained"
     }
   },
   "requirements_confirmations": {
     "shared_change_password_2026_10_31": {
-      "user_confirmation": "共用修改密碼 不單獨一頁",
-      "dedicated_page": false,
-      "dedicated_acl_page": false,
+      "latest_user_confirmation": "自身密碼還是ACL page；首次登入先顯示自身密碼，完成強制修改後後續登入顯示首頁；功能樹範例已獲使用者確認",
+      "dedicated_page": true,
+      "dedicated_acl_page": true,
+      "reuse_same_password_page": true,
+      "no_duplicate_first_login_password_page": true,
       "preserve_first_login_password_change": true,
-      "implemented": false,
-      "requirements_document": "docs/requirements/AUTHENTICATION.md"
+      "implementation_status": "not re-verified",
+      "requirements_document": "docs/requirements/AUTHENTICATION.md",
+      "correction_record": "docs/requirements/revisions/2026-10-31-self-password-page-correction.md",
+      "withdrawn_assistant_interpretation": {
+        "user_quote": "共用修改密碼 不單獨一頁",
+        "interpretation": "no separate ACL page",
+        "status": "incorrect; withdrawn after user correction"
+      }
     }
   }
 }

@@ -1,6 +1,6 @@
 # Analytics 教學現況
 
-產品來源 `f6a04015188da2155af6c264d0e6326e6a922dca`；本次調整Analytics SQL角色預設，runtime尚未接線。隔離raw SQL七份通過（3 category／9 page／36 action）。修改密碼已確認採共用流程、不獨立一頁，尚待實作；完整Gate2未通過。
+產品來源 `f6a04015188da2155af6c264d0e6326e6a922dca`；本次調整Analytics SQL角色預設，runtime尚未接線。隔離raw SQL七份通過（3 category／9 page／36 action）。自身密碼保留ACL page；首次強制修改先開此頁，完成後後續登入開首頁；共用同一修改實作；完整Gate2未通過。
 
 [目前狀態](../current/STATUS.md) · [需求](../../requirements/USER_FLOWS.md) · [規則](../../COMMON_LEARNING_RULES.md) · [來源](../../SOURCE_LAYOUT.md) · [架構](../../SYSTEM_ARCHITECTURE.md)
 

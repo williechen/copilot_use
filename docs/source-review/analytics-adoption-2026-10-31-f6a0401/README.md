@@ -1,3 +1,5 @@
+> **需求解讀更正（2026-10-31）：** 下文「共用修改密碼、不保留獨立頁／ACL page」是助理誤讀，已撤回。正確規則是保留自身密碼ACL page，首次強制修改先顯示該頁，完成後後續登入首頁；功能樹為「會員管理→自身密碼→修改密碼（update有權才顯示）」。以[更正紀錄](../../requirements/revisions/2026-10-31-self-password-page-correction.md)為準。以下原始SQL採用與驗證紀錄仍保留原SHA；錯誤需求解讀僅作歷史追溯。
+
 # Analytics f6a0401 採用核對與共用修改密碼確認
 
 最新產品 `f6a04015188da2155af6c264d0e6326e6a922dca`（modify sql）。相較63b1f93只修改既有`20261031074500_viewer_access.sql`三行，沒有新增runtime接線。原Day45文章與舊來源／測試完整保留；本次不增加Day。

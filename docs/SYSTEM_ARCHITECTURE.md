@@ -31,4 +31,4 @@ Pet活動模型已在main：目前籠態由pet_activity導出，預設沿用既�
 
 目前63b1f93只新增Analytics ACL schema：analytics-token認證管理、密碼page歸會員管理、security管理憑證page；其餘runtime仍沿原來源，page／CRUD Adapter尚未採用。[採用證據與限制](source-review/analytics-adoption-2026-10-31-63b1f93/README.md)。舊測試保留原SHA，不追認新來源。
 
-最新f6a0401只調整schema角色預設，管理憑證page grant已補；共用修改密碼、不獨立一頁的新需求尚未接到runtime。[採用核對](source-review/analytics-adoption-2026-10-31-f6a0401/README.md)。歷史測試保留原SHA。
+最新f6a0401只調整schema角色預設，管理憑證page grant已補；自身密碼ACL page保留，首次／後續登入預設頁與共用實作須依更正契約核對。[採用核對](source-review/analytics-adoption-2026-10-31-f6a0401/README.md)。歷史測試保留原SHA。
