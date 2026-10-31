@@ -1,3 +1,38 @@
+# Day45 最後來源追驗｜Pet
+
+產品`d784f32c6bff86249dd84fd4294d055a4c774a49`。使用者已在d784修正browser斷言，最新來源重新實跑UI11項與browser六pose，皆通過。28版TypeError及修正patch保留為歷史，d784不需再套該patch。DOM fixture仍不等於真Tauri視窗驗收。
+
+[本回合完整證據](../../../source-review/day45-2026-10-31-d784f32/README.md) · [精確SHA／實測區分](../../../source-review/day45-2026-10-31-d784f32/latest-source.json)。本段優先於以下28初次驗證及更早歷史原文。
+
+---
+
+# Day45 最新驗證補記｜Pet｜2026-10-31
+
+產品精確SHA `28b71b67907062f804b2358c41fde349c9b18ca9`；本補記優先於下方歷史候選敘述。產品已採用200×200與pose Refactor，UI11項通過；但產品browser腳本的xresult.image.width錯字令測試TypeError中斷，不能稱原樣六pose通過。[完整修正patch](../../../source-review/day45-2026-10-31-d784f32/pet-browser-fix.patch)修為x + width，修正候選六pose成功且越界負向控制會正確失敗。此為DOM fixture，仍非真Tauri視窗驗收。首次編譯磁碟空間不足的log保留，清快取後重跑11通過；不得把環境錯誤當成功。
+
+[三案驗證／修正條件](../../../source-review/day45-2026-10-31-d784f32/README.md) · [命令／exit與限制](../../../source-review/day45-2026-10-31-d784f32/review.json) · [清暫存紀錄](../../../source-review/day45-2026-10-31-d784f32/cleanup.json)。本次不新增Day；next_day仍46，FIFO與last_full_comparison未變；原Red／Green／獨立Refactor與歷史證據保留。
+
+---
+
+## 本回合完整逐檔修正patch
+
+```diff
+diff --git a/pet_apps/pet_ui/tests/browser/canvas.cjs b/pet_apps/pet_ui/tests/browser/canvas.cjs
+index 30071a3..c9019f9 100644
+--- a/pet_apps/pet_ui/tests/browser/canvas.cjs
++++ b/pet_apps/pet_ui/tests/browser/canvas.cjs
+@@ -13,7 +13,7 @@ const root=process.argv[2] || path.resolve(__dirname,'../../../..');
+   const result=await page.evaluate(()=>{const f=document.querySelector('.pet-face').getBoundingClientRect();const i=document.querySelector('img').getBoundingClientRect();return {frame:{width:f.width,height:f.height},image:{x:i.x,y:i.y,width:i.width,height:i.height},count:document.querySelectorAll('.pet-face img').length,scroll:document.documentElement.scrollHeight}});
+   console.log(pose,JSON.stringify(result));
+   if(result.frame.width!==200||result.frame.height!==200||result.count!==1)throw Error('200x200 single-image canvas missing');
+-  if(result.image.x<0||result.image.y<0||result.image.xresult.image.width>200.5||result.image.y+result.image.height>200.5)throw Error('pose clipped');
++  if(result.image.x<0||result.image.y<0||result.image.x+result.image.width>200.5||result.image.y+result.image.height>200.5)throw Error('pose clipped');
+  }
+  await page.screenshot({path:process.env.PET_SCREENSHOT || 'pet-day45-canvas.png'});} finally { await b.close(); }
+ })().catch(e=>{console.error(e);process.exitCode=1});
+\ No newline at end of file
+```
+
 # Pet Day45｜200×200 生活畫布與不裁切的單圖動畫
 
 ## ① 目標、現況與正式流程
