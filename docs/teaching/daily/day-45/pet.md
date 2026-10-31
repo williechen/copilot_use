@@ -1,3 +1,11 @@
+# Day45 真實GUI驗收補記｜Pet
+
+產品精確SHA `a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4`。已實際啟動產品debug Tauri/Wry原生程式，在Xvfb／xfwm4用WebKitWebDriver及X11事件驗200×200單圖、六姿態、回籠、原生關閉、雙寵物狀態隔離、原生菜單、拖曳、找回及同DB重啟恢復。不是DOM fixture；但實體／跨OS包、透明合成、自動漫遊仍不接受／未驗。
+
+[完整範圍／限制／截圖](../../../source-review/day45-gui-2026-10-31-a7a8267/README.md) · [實際操作資料](../../../source-review/day45-gui-2026-10-31-a7a8267/gui-review.json)。此補記優先於下方較早的「尚未跑瀏覽器／桌面」描述；本次未加Day，next_day仍46，FIFO及last_full_comparison不變。
+
+---
+
 # Day45 最後來源追驗｜Pet
 
 產品`d784f32c6bff86249dd84fd4294d055a4c774a49`。使用者已在d784修正browser斷言，最新來源重新實跑UI11項與browser六pose，皆通過。28版TypeError及修正patch保留為歷史，d784不需再套該patch。DOM fixture仍不等於真Tauri視窗驗收。
