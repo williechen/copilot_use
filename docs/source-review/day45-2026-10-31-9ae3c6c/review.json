@@ -1,0 +1,61 @@
+{
+  "source_sha": "9ae3c6cf42b231004e81be0097f50840b0a15eb5",
+  "docs_baseline_sha": "220472ead81adeba05edbdf3d7ad24bb3d541f6e",
+  "product_written": false,
+  "raw_product": {
+    "passed": 67,
+    "failed": 1,
+    "ignored": 1,
+    "exit": 101,
+    "log": "analytics.log",
+    "remaining_failure": "f6 fixture appended LF; SQLx VersionMismatch(20261031074500)"
+  },
+  "fixture_only_candidate": {
+    "passed": 68,
+    "failed": 0,
+    "ignored": 1,
+    "exit": 0,
+    "log": "analytics-fixture-fixed.log",
+    "runtime_changes": false,
+    "dependencies_changed": false
+  },
+  "command": "cargo test --manifest-path <isolated>/analytics_apps/Cargo.toml -p analytics-server --features postgres-integration --locked --no-fail-fast",
+  "raw_manifest": "/tmp/day45-u9-src/analytics_apps/Cargo.toml",
+  "candidate_manifest": "/tmp/day45-u9-fixed/analytics_apps/Cargo.toml",
+  "environment": {
+    "CARGO_TARGET_DIR": "/home/willie/Documents/Codex/2026-10-27/referenced-chatgpt-conversation-this-is-an/work/cargo-target",
+    "DATABASE_URL": "postgres://willie@127.0.0.1:55485/day45_u9",
+    "CARGO_BUILD_JOBS": "2",
+    "CARGO_PROFILE_TEST_DEBUG": "0",
+    "CARGO_PROFILE_DEV_DEBUG": "0",
+    "CARGO_INCREMENTAL": "0"
+  },
+  "compiler": "rustc/Cargo1.99.1",
+  "chat_pet": "subtrees identical to d784; reuse only the explicitly d784-labelled evidence, no retagging as new test run",
+  "gate1": true,
+  "gate2": false,
+  "next_day": {
+    "chat": 46,
+    "pet": 46,
+    "analytics": 46
+  },
+  "fifo_changed": false,
+  "last_full_comparison_changed": false,
+  "not_run": [
+    "real prior user DB backup reconciliation",
+    "real Chat/Analytics browser journey",
+    "real Tauri/native desktop acceptance",
+    "full product Gate2"
+  ],
+  "artifact_sha256": {
+    "README.md": "871e0df66d05e96bf0711ef05b9785c79a9eb1b67fd4491a1e8ff85b8980e316",
+    "patch-validation.json": "599d0446a76ca3ca51b562826e38c9545e6ae18d360fde61931c8e3ad45bf293",
+    "analytics-fixture-fixed.log": "01cee5df44fe203aedc64c5959d5ae9a45b8dc8226d408e3f20bcb9560370a10",
+    "fixture-exact-bytes.patch": "ad090d8f3f7f11db24bde312c85b44ead5aaf1e4e9139035b45fb957c277c925",
+    "review.json": "98c265ea7f82e8295e6094dd35ae1dbe8403d69a1de089a79e4d48d18c01c0b2",
+    "source.json": "89eb0bbe427ac7ec08c117d5c468c72aeb6c9273a25bdc1bc8eac6af2d30e9ac",
+    "analytics.log": "6add38526a59ef87c4d844fb19be69b19ff4a03af93aab00fb6ec9825ed3adfe",
+    "ci.json": "09e6fece2e2ba0026a786b70bda23497c525f9a739e5f127d5a8d12d20c513fc",
+    "cleanup.json": "1de825da8249a2baef4969b4b4f9f758e8bb9e6b7ad05a6620dabefa58a5dd86"
+  }
+}

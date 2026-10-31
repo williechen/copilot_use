@@ -1,0 +1,31 @@
+{
+  "isolated_postgres_stopped": true,
+  "removed": [
+    {
+      "path": "/tmp/day45-u9-fixed",
+      "bytes": 12672651
+    },
+    {
+      "path": "/tmp/day45-u9-28-original.sql",
+      "bytes": 4055
+    },
+    {
+      "path": "/tmp/day45-u9-f6-original.sql",
+      "bytes": 3748
+    },
+    {
+      "path": "/tmp/day45-u9-pg",
+      "bytes": 65365114
+    },
+    {
+      "path": "/tmp/day45-u9-socket",
+      "bytes": 0
+    },
+    {
+      "path": "/tmp/day45-u9-src",
+      "bytes": 6767638
+    }
+  ],
+  "total_removed_bytes": 84813206,
+  "kept": "source checkout, dirty docs checkout, patch and real test evidence"
+}

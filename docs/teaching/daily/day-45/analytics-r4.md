@@ -1,3 +1,71 @@
+# Day45 最新採用核對｜Analytics 9ae3c6cf
+
+產品`9ae3c6cf42b231004e81be0097f50840b0a15eb5`已採用前次SQL／匯入／向前migration修正；勿重套舊runtime／完整補正包。本回合原樣postgres-integration **67通過／1失敗／1 ignored**，僅f6歷史fixture檔尾多LF造成checksum不同。來源migration已與真正f6逐位元相同；錯誤來自fixture，不能混稱為來源migration仍錯。
+
+只修測試讀入、固定SHA256防其他差異的候選：**68通過／1 ignored，exit0**。本段優先於下方9ae3以前的歷史狀態。[完整來源／命令／限制](../../../source-review/day45-2026-10-31-9ae3c6c/README.md) · [原樣log](../../../source-review/day45-2026-10-31-9ae3c6c/analytics.log) · [補正log](../../../source-review/day45-2026-10-31-9ae3c6c/analytics-fixture-fixed.log)。仍只寫copilot_use、未寫產品庫；next_day46、FIFO及last_full_comparison未變。
+
+## 本回合完整單檔patch
+
+以下只修測試fixture讀入，不改runtime、migration或角色配置；既有Red／Green與獨立Refactor均保留且不重複計功。
+
+```diff
+diff --git a/analytics_apps/analytics_server/tests/day45_final.rs b/analytics_apps/analytics_server/tests/day45_final.rs
+index c92a64d..987fb78 100644
+--- a/analytics_apps/analytics_server/tests/day45_final.rs
++++ b/analytics_apps/analytics_server/tests/day45_final.rs
+@@ -146,7 +146,14 @@ async fn upgrade_from_exact_f6_migrations_preserves_checksums_and_deny(pool: sql
+             let target = dir.join(path.file_name().unwrap());
+             if name == "20261031074500_viewer_access.sql" {
+                 // Frozen exact-f6 bytes, never reconstructed from the current migration.
+-                std::fs::write(target, include_str!("fixtures/f6_viewer_access.sql")).unwrap();
++                std::fs::write(
++                    target,
++                    exact_historical_fixture(
++                        include_bytes!("fixtures/f6_viewer_access.sql"),
++                        "fe81c4fd7b32a96e6b91f7a2532abf406ec88ff3a893350d57b0a2ee31ce5995",
++                    ),
++                )
++                .unwrap();
+             } else {
+                 std::fs::copy(&path, target).unwrap();
+             }
+@@ -278,7 +285,14 @@ async fn database_with_edited_28_checksum_is_not_silently_rewritten(pool: sqlx::
+         if path.extension().is_some_and(|e| e == "sql") && name < "20261031180000" {
+             let target = dir.join(path.file_name().unwrap());
+             if name == "20261031074500_viewer_access.sql" {
+-                std::fs::write(target, include_str!("fixtures/28b71b6_viewer_access.sql")).unwrap();
++                std::fs::write(
++                    target,
++                    exact_historical_fixture(
++                        include_bytes!("fixtures/28b71b6_viewer_access.sql"),
++                        "6a97c57e0123fd9aa90c45a92ab43906958e5cf18bcd4dcae1fe064c19469857",
++                    ),
++                )
++                .unwrap();
+             } else {
+                 std::fs::copy(&path, target).unwrap();
+             }
+@@ -313,3 +327,16 @@ async fn database_with_edited_28_checksum_is_not_silently_rewritten(pool: sqlx::
+     assert_eq!(before, after);
+     std::fs::remove_dir_all(dir).unwrap();
+ }
++
++// The two historical SQL files ended without LF. Editors may append one to the fixture.
++// Accept only that known transport change, then pin the exact historical bytes by SHA256.
++fn exact_historical_fixture(input: &[u8], expected: &str) -> Vec<u8> {
++    use sha2::{Digest, Sha256};
++    let bytes = input.strip_suffix(b"\n").unwrap_or(input);
++    let hash: String = Sha256::digest(bytes)
++        .iter()
++        .map(|b| format!("{b:02x}"))
++        .collect();
++    assert_eq!(hash, expected, "historical migration fixture bytes changed");
++    bytes.to_vec()
++}
+```
+
+---
+
 # Day45 最後來源追驗｜Analytics
 
 產品`d784f32c6bff86249dd84fd4294d055a4c774a49`。最新d784的Analytics子樹與28完全相同；本回合在d784重新執行postgres-integration --no-run，仍因ootstrap匯入失敗。SQL別名、字面+與舊migration checksum問題未變；完整修正候選68通過／1 ignored是28基準的候選結果，不能標成產品通過。

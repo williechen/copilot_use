@@ -1,0 +1,36 @@
+{
+  "source_sha": "9ae3c6cf42b231004e81be0097f50840b0a15eb5",
+  "previous_sha": "d784f32c6bff86249dd84fd4294d055a4c774a49",
+  "trees": {
+    "chat_apps": {
+      "before": "a92503a725ecd41aeca3a71d2d33fccc2a498d6e",
+      "now": "a92503a725ecd41aeca3a71d2d33fccc2a498d6e",
+      "identical": true
+    },
+    "pet_apps": {
+      "before": "ae8bbcd373252c9c8dd9715e6267bd8ee3059a73",
+      "now": "ae8bbcd373252c9c8dd9715e6267bd8ee3059a73",
+      "identical": true
+    },
+    "analytics_apps": {
+      "before": "599ba8f672740b734b20c77fc294d2ec48b9a912",
+      "now": "b38352a8331edae70ab38fdada1281a4b99edccf",
+      "identical": false
+    }
+  },
+  "migration_exact_f6_bytes": true,
+  "fixture_exact_f6_bytes": false,
+  "f6_sha256": "fe81c4fd7b32a96e6b91f7a2532abf406ec88ff3a893350d57b0a2ee31ce5995",
+  "current_migration_sha256": "fe81c4fd7b32a96e6b91f7a2532abf406ec88ff3a893350d57b0a2ee31ce5995",
+  "fixture_sha256": "d382493100f50b85ce7578c81ab200089b769a4218942e706ef35598d2f5cc3d",
+  "changed_files": [
+    "analytics_apps/analytics_server/src/page_acl.rs",
+    "analytics_apps/analytics_server/src/password_login.rs",
+    "analytics_apps/analytics_server/tests/day45_final.rs",
+    "analytics_apps/analytics_server/tests/day45_viewer.rs",
+    "analytics_apps/analytics_server/tests/fixtures/28b71b6_viewer_access.sql",
+    "analytics_apps/analytics_server/tests/fixtures/f6_viewer_access.sql",
+    "analytics_apps/migrations/20261031074500_viewer_access.sql",
+    "analytics_apps/migrations/20261031180000_role_acl_pages.sql"
+  ]
+}
