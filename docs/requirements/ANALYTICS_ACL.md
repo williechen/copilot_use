@@ -130,3 +130,5 @@ page ─→ category：至少有一個具有效page權限的子頁，才顯示�
 ## Chat／Analytics管理與會員權限的共用邏輯
 
 本文件的管理授權規則同時適用Chat與Analytics；Analytics特有page／來源配置與採用紀錄仍各自保留。會員端mbr_perm定義權限，mbr_role_perm保存角色授權，mbr_user_perm保存個人加減權，分工與管理端一致；不能從定義存在推論已授權，也不假設mbr_perm已具有uac_acl的階層欄位。[共同契約](COMMON_AUTHORIZATION.md)。
+
+會員層級補充：上述category／page／action及page→category／action顯示規則只適用管理端。會員mbr_perm只有action，mbr_role_perm與mbr_user_perm也只保存action授權／加減；不要求會員具備管理page權限。[共同契約](COMMON_AUTHORIZATION.md)。

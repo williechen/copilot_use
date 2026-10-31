@@ -76,3 +76,5 @@ Day43 已發布正文依使用者指定只留 ZIP；下一篇 Day44 或更後面
 ## 8. Chat／Analytics管理及會員權限共同契約
 
 兩案管理採同一套權限定義／角色授權／個人加減與功能樹判斷。uac_acl只定義管理節點，page／CRUD授權分別保存於uac_role_acl、uac_user_acl；會員端mbr_perm定義與mbr_role_perm角色授權採相同分工，既有mbr_user_perm保存個人加減。定義存在不代表授權，無有效授權拒絕，個人deny優先。各系統及管理／會員身分、DB與Session隔離；共同邏輯不代表schema欄位或產品實作已同步。[完整共同契約](requirements/COMMON_AUTHORIZATION.md)。需求確認不增加Day、不更動FIFO或last_full_comparison，不抵算各案／全案重構。
+
+會員端的mbr_perm／mbr_role_perm／mbr_user_perm只處理action等級；不得因管理端採category→page→action，就將管理page授權前置條件套到會員操作。共同的是定義／授權分工、多角色合併與個人加減權規則，不是層級或身分資料共用。[共同契約](requirements/COMMON_AUTHORIZATION.md)。

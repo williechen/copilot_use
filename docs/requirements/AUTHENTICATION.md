@@ -26,3 +26,7 @@
 ## 管理與會員授權邏輯共用
 
 Chat與Analytics管理使用相同的定義／授權／個人加減權判斷；會員端mbr_perm／mbr_role_perm亦採相同分工，現有mbr_user_perm保存會員個人加減。共用驗證流程不代表跨系統或跨管理／會員身分自動共用Session；驗證身分後，仍須查該上下文的角色及個人權限。[共用授權契約](COMMON_AUTHORIZATION.md)。
+
+### 管理／會員權限層級的區分
+
+自身密碼保留ACL page的功能樹規則適用管理端；會員權限只有action。會員若使用共用修改密碼UI／驗證流程，其受保護操作仍按對應會員action核權，不額外要求管理端page／category授權。管理與會員身分、Session及資源邊界不混用。[完整契約](COMMON_AUTHORIZATION.md)。

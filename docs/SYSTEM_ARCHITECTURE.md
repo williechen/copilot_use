@@ -36,3 +36,5 @@ Pet活動模型已在main：目前籠態由pet_activity導出，預設沿用既�
 ## Chat／Analytics管理與會員權限共用規則
 
 管理端uac_acl與會員端mbr_perm負責定義；uac_role_acl／mbr_role_perm負責角色授權；uac_user_acl／mbr_user_perm負責個人加減權。有效權限判斷一致，各案及管理／會員的身分、DB、Session與Adapter仍獨立。mbr_perm現有schema不具uac_acl的階層欄位，不能將共同邏輯冒稱為欄位或runtime已同步。[共同需求](requirements/COMMON_AUTHORIZATION.md)。本次只有契約確認，未新增共用程式或抵算跨案重構完成。
+
+會員權限層級已明確限定為action：mbr_perm定義action，mbr_role_perm與mbr_user_perm保存角色授權／個人加減。category→page→action只屬管理ACL，不替會員建立page／category層，兩者只共用有效權限合併邏輯。[共同契約](requirements/COMMON_AUTHORIZATION.md)。本次沒有產品schema或runtime變更。
