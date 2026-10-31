@@ -1,0 +1,19 @@
+{
+  "isolated_postgres_stopped": true,
+  "removed": [
+    {
+      "path": "/tmp/day45-ua-pg",
+      "bytes": 65509674
+    },
+    {
+      "path": "/tmp/day45-ua-socket",
+      "bytes": 0
+    },
+    {
+      "path": "/tmp/day45-ua-src",
+      "bytes": 6767548
+    }
+  ],
+  "total_removed_bytes": 72277222,
+  "preserved": "read-only source checkout, dirty docs checkout and verification evidence"
+}

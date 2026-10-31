@@ -1,0 +1,52 @@
+{
+  "source_sha": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
+  "docs_baseline_sha": "facd132c63ec38c197192f196bb706fd97faf642",
+  "scope": "unmodified product export; no patch applied",
+  "product_written": false,
+  "product_patch_required": false,
+  "analytics_raw_product": {
+    "passed": 68,
+    "failed": 0,
+    "ignored": 1,
+    "exit": 0,
+    "log": "analytics.log"
+  },
+  "command": "cargo test --manifest-path /tmp/day45-ua-src/analytics_apps/Cargo.toml -p analytics-server --features postgres-integration --locked --no-fail-fast",
+  "environment": {
+    "CARGO_TARGET_DIR": "/home/willie/Documents/Codex/2026-10-27/referenced-chatgpt-conversation-this-is-an/work/cargo-target",
+    "DATABASE_URL": "postgres://willie@127.0.0.1:55485/day45_ua",
+    "CARGO_BUILD_JOBS": "2",
+    "CARGO_PROFILE_TEST_DEBUG": "0",
+    "CARGO_PROFILE_DEV_DEBUG": "0",
+    "CARGO_INCREMENTAL": "0"
+  },
+  "fixture_fix_adopted": true,
+  "fixture_upgrade_validation": "frozen historical SHA256 check; f6 seven-to-nine SQLx migration checksum preservation and edited28 ledger rejection without rewrite passed",
+  "chat_pet": "same trees as 9ae3 and d784; retain actual d784-labelled prior tests, no retagging",
+  "gate1": true,
+  "gate2": false,
+  "next_day": {
+    "chat": 46,
+    "pet": 46,
+    "analytics": 46
+  },
+  "day_advance": false,
+  "fifo_changed": false,
+  "last_full_comparison_changed": false,
+  "not_run": [
+    "real prior-user DB backup reconciliation",
+    "real Chat/Analytics browser journeys",
+    "real Tauri/native desktop acceptance",
+    "full product Gate2"
+  ],
+  "remaining": [
+    "one legacy ignored test",
+    "CI snapshot had in-progress workflows; not all-seven acceptance"
+  ],
+  "artifact_sha256": {
+    "source.json": "63debaa60fb52daa65778379a2db8966b7c66350f6fede46056192f84748cc3a",
+    "analytics.log": "58fd5265d9ef33e64d3f12caf087a6763b2e6d504e84e04ca3159d4a02381459",
+    "ci.json": "e6a386253be0b37796a20078f30ef3cd4b0c233735750601bcea428ee930b8a1",
+    "cleanup.json": "165398c81ae69fb8330798313a42f9ceaa7f00963a4e38485ee3f32f49f63423"
+  }
+}

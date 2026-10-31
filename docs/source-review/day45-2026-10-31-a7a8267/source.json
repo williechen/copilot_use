@@ -1,0 +1,35 @@
+{
+  "source_sha": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
+  "previous_sha": "9ae3c6cf42b231004e81be0097f50840b0a15eb5",
+  "project_trees": {
+    "chat_apps": {
+      "old": "a92503a725ecd41aeca3a71d2d33fccc2a498d6e",
+      "new": "a92503a725ecd41aeca3a71d2d33fccc2a498d6e",
+      "identical": true
+    },
+    "pet_apps": {
+      "old": "ae8bbcd373252c9c8dd9715e6267bd8ee3059a73",
+      "new": "ae8bbcd373252c9c8dd9715e6267bd8ee3059a73",
+      "identical": true
+    },
+    "analytics_apps": {
+      "old": "b38352a8331edae70ab38fdada1281a4b99edccf",
+      "new": "976c1f744b80fcdc2c397db6f1df2dfbb2cc887b",
+      "identical": false
+    }
+  },
+  "changed_files": [
+    "analytics_apps/analytics_server/tests/day45_final.rs"
+  ],
+  "file_hashes": [
+    {
+      "path": "analytics_apps/analytics_server/tests/day45_final.rs",
+      "blob_sha": "56c3e82bf1e37fd5f4b69a14545fb370636b7a56",
+      "sha256": "11d1d1998efcf46cfb210714094bc6389b36cab505f40be71855a3632ae7ab56"
+    }
+  ],
+  "prior_patch_reverse_check_exit": 1,
+  "prior_patch_reverse_check_stderr": "error: patch failed: analytics_apps/analytics_server/tests/day45_final.rs:146\nerror: analytics_apps/analytics_server/tests/day45_final.rs: patch does not apply\n",
+  "chat_pet_test_scope": "unchanged trees: retain explicitly d784-labelled tests, not rerun or retagged",
+  "prior_patch_reverse_check_note": "Exact old hunk context differs (comment/formatting); not an adoption failure. Source helper and both call sites plus actual complete regression verify functional adoption. Do not reapply the old patch."
+}

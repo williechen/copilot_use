@@ -1,3 +1,13 @@
+# Day45 最新產品驗證通過｜Analytics a7a8267f
+
+產品`a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4`已採用最後的fixture讀入補正。本回合未套patch，直接對該SHA隔離匯出跑完整postgres-integration：**68通過／0失敗／1既有legacy ignored，exit0**。這次是產品原樣實跑，取代下方9ae3「原樣仍1失敗」的歷史狀態。
+
+[完整採用核對／命令／限制](../../../source-review/day45-2026-10-31-a7a8267/README.md) · [實際log](../../../source-review/day45-2026-10-31-a7a8267/analytics.log)。前次runtime、migration與fixture修正已採用，勿重套舊patch；本回合不需新patch，也不重複計功能／Refactor。原Red／Green及歷史證據保留。
+
+next_day三案46，FIFO與last_full_comparison未變；只寫copilot_use。文件Gate1完成，完整產品Gate2仍待legacy ignored、真DB備份與瀏覽器／桌面等驗收。
+
+---
+
 # Day45 最新採用核對｜Analytics 9ae3c6cf
 
 產品`9ae3c6cf42b231004e81be0097f50840b0a15eb5`已採用前次SQL／匯入／向前migration修正；勿重套舊runtime／完整補正包。本回合原樣postgres-integration **67通過／1失敗／1 ignored**，僅f6歷史fixture檔尾多LF造成checksum不同。來源migration已與真正f6逐位元相同；錯誤來自fixture，不能混稱為來源migration仍錯。
