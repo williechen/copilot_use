@@ -1,0 +1,58 @@
+{
+  "source_sha": "f6a04015188da2155af6c264d0e6326e6a922dca",
+  "revision": "r4",
+  "day": 45,
+  "expected_next_day": {
+    "chat": 46,
+    "pet": 46,
+    "analytics": 46
+  },
+  "day_advance": false,
+  "product_written": false,
+  "product_applied": false,
+  "gate2": false,
+  "candidate_full_suite": {
+    "passed": 67,
+    "ignored": 1,
+    "exit": 0,
+    "log": "analytics-day45-final-r4.log"
+  },
+  "red": {
+    "exit": 101,
+    "failed": 2,
+    "log": "analytics-day45-final-red-r4.log",
+    "patch": "analytics-day45-final-red-r4.patch",
+    "source_plus_tests_only": true
+  },
+  "test_command": "cargo test --manifest-path analytics_apps/Cargo.toml -p analytics-server --features postgres-integration --locked --no-fail-fast",
+  "execution_context": "exact f6 export, apply complete patch, isolated candidate and test DB only; test commands use absolute /tmp/day45-clean-verify paths",
+  "environment": {
+    "CARGO_PROFILE_TEST_DEBUG": "0",
+    "CARGO_PROFILE_DEV_DEBUG": "0",
+    "CARGO_INCREMENTAL": "0",
+    "DATABASE_URL": "postgres://willie@127.0.0.1:55485/final_day45"
+  },
+  "not_run": [
+    "瀏覽器互動與實際部署",
+    "使用者既有PostgreSQL備份升級；本次只驗隔離f6七份SQLx migrations→八份",
+    "ACL／role／個人權限編輯UI、帳號update/delete API與/security頁的完整實作",
+    "原legacy ignored測試1項",
+    "完整Gate2及全庫CI"
+  ],
+  "versions": "final-rewire-versions.json",
+  "clean_apply": "final-rewire-clean-apply.json",
+  "previous_revision_preserved": true,
+  "upgrade_test": "SQLx applies original seven f6 migrations, saves checksums, provisions initial allow/deny fixtures, applies new eighth migration twice, verifies all seven unchanged and explicit deny preserved",
+  "earlier_regression_failures": [
+    "legacy form token fixture expected a hidden create form; replaced with forged request CSRF and asserted hidden UI",
+    "source test asserted removed legacy Pet link; now asserts actual Pet data label and permitted tree page, denied Chat absent"
+  ],
+  "sha256": {
+    "analytics-day45-final-r4.patch": "f31d1c53768ce6befed215578a7e38360b9c9f061488c802c2fd7a21862d43e3",
+    "analytics-day45-final-red-r4.patch": "bafb7a075c453b09c8fb02b50f2af3ade87d79769f5e99d76ceb7d83485a6e06",
+    "analytics-day45-final-r4.log": "ddfd1fb896c90a48578e5ad5227270b91ce32c2884273d7f00fb01a7d55ea29b",
+    "analytics-day45-final-red-r4.log": "930d57fdb3d2d3bae98173d1932110ae820cabc596a92a5d9db1bf91d37b3679"
+  },
+  "requirements_baseline_sha": "c89ad285f757f35cb8dbf215b697ff8e5ded38c4",
+  "publication_parent_sha": "9720bcc6317b46710443a8353267efd1a7b62d0d"
+}

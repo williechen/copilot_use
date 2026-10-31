@@ -1,0 +1,63 @@
+diff --git a/analytics_apps/analytics_server/tests/day45_final.rs b/analytics_apps/analytics_server/tests/day45_final.rs
+new file mode 100644
+index 0000000..5cf975b
+--- /dev/null
++++ b/analytics_apps/analytics_server/tests/day45_final.rs
+@@ -0,0 +1,57 @@
++#![cfg(feature = "postgres-integration")]
++mod support;
++use analytics_server::{IngestState, IngestTokens, bootstrap, password_login};
++use axum::http::{StatusCode, header};
++use std::sync::Arc;
++use support::http::{body_text, response_cookie, send};
++async fn fixture(pool: &sqlx::PgPool) -> (axum::Router, String, String) {
++    let id=bootstrap::initialize(pool,"final-password".into()).await.unwrap();
++    sqlx::query("INSERT INTO uac_user_role(user_id,role_id,created_at) VALUES($1,'analytics-admin',now()) ON CONFLICT DO NOTHING").bind(&id).execute(pool).await.unwrap();
++    let app=password_login::build(IngestState{pool:pool.clone(),tokens:Arc::new(IngestTokens{chat:"chat-fixture".into(),pet:"pet-fixture".into()})});
++    let response=send(app.clone(),"/login",Some("username=admin&password=final-password"),None).await;
++    assert_eq!(response.status(),StatusCode::SEE_OTHER);
++    assert_eq!(response.headers()[header::LOCATION],"/change-password");
++    (app,response_cookie(&response),id)
++}
++#[sqlx::test(migrations = "../migrations")]
++async fn page_drives_category_and_actions_do_not_grant_pages(pool:sqlx::PgPool){
++    let (app,cookie,id)=fixture(&pool).await;
++    sqlx::query("DELETE FROM uac_user_role WHERE user_id=$1").bind(&id).execute(&pool).await.unwrap();
++    sqlx::query("INSERT INTO uac_user_acl(user_id,acl_id,acl_filter,created_at) VALUES($1,'analytics-password','allow',now())").bind(&id).execute(&pool).await.unwrap();
++    let response=send(app.clone(),"/change-password",None,Some(&cookie)).await;
++    assert_eq!(response.status(),StatusCode::OK);
++    let html=body_text(response).await;
++    assert!(html.contains("data-acl-category=\"analytics-members\""),"page-only must display category");
++    assert!(html.contains("data-acl-page=\"analytics-password\""));
++    assert!(!html.contains("data-acl-action=\"analytics-password-update\""));
++    assert!(!html.contains("action=\"/change-password\""),"no update => no form");
++    assert!(!html.contains("data-acl-category=\"analytics-info\""));
++    sqlx::query("INSERT INTO uac_user_acl(user_id,acl_id,acl_filter,created_at) VALUES($1,'analytics-password-update','allow',now())").bind(&id).execute(&pool).await.unwrap();
++    let html=body_text(send(app.clone(),"/change-password",None,Some(&cookie)).await).await;
++    assert!(html.contains("data-acl-action=\"analytics-password-update\""));
++    assert!(html.contains("action=\"/change-password\""));
++    sqlx::query("UPDATE uac_user_acl SET acl_filter='deny' WHERE user_id=$1 AND acl_id='analytics-password'").bind(&id).execute(&pool).await.unwrap();
++    assert_eq!(send(app.clone(),"/change-password",None,Some(&cookie)).await.status(),StatusCode::FORBIDDEN);
++    let nav=body_text(send(app.clone(),"/navigation",None,Some(&cookie)).await).await;
++    assert!(!nav.contains("data-acl-page=\"analytics-password\""));
++    assert!(!nav.contains("data-acl-category=\"analytics-members\""));
++    assert!(!nav.contains("data-acl-action=\"analytics-password-update\""));
++    assert_eq!(send(app,"/dashboard",None,Some(&cookie)).await.status(),StatusCode::SEE_OTHER,"mandatory change cannot be bypassed by missing grants");
++}
++#[sqlx::test(migrations = "../migrations")]
++async fn deny_beats_roles_and_removing_override_restores_default(pool:sqlx::PgPool){
++    let (app,cookie,id)=fixture(&pool).await;
++    sqlx::query("INSERT INTO uac_user_acl(user_id,acl_id,acl_filter,created_at) VALUES($1,'analytics-password-update','deny',now())").bind(&id).execute(&pool).await.unwrap();
++    let before:(String,bool)=sqlx::query_as("SELECT user_pd,is_init_pd FROM uac_user WHERE id=$1").bind(&id).fetch_one(&pool).await.unwrap();
++    let raw=cookie.strip_prefix("analytics_session=").unwrap();
++    use sha2::{Digest,Sha256};
++    let csrf:String=Sha256::digest(format!("change-password:{raw}").as_bytes()).iter().map(|b|format!("{b:02x}")).collect();
++    let form=format!("current_password=final-password&new_password=changed-password&confirm_password=changed-password&email=admin%40example.test&csrf={csrf}");
++    assert_eq!(send(app.clone(),"/change-password",Some(&form),Some(&cookie)).await.status(),StatusCode::FORBIDDEN);
++    let after:(String,bool)=sqlx::query_as("SELECT user_pd,is_init_pd FROM uac_user WHERE id=$1").bind(&id).fetch_one(&pool).await.unwrap();assert_eq!(before,after);
++    sqlx::query("DELETE FROM uac_user_acl WHERE user_id=$1 AND acl_id='analytics-password-update'").bind(&id).execute(&pool).await.unwrap();
++    assert_eq!(send(app.clone(),"/change-password",Some(&form),Some(&cookie)).await.status(),StatusCode::SEE_OTHER);
++    let login=send(app.clone(),"/login",Some("username=admin&password=changed-password"),None).await;
++    assert_eq!(login.headers()[header::LOCATION],"/dashboard");
++    assert_eq!(send(app,"/change-password",None,Some(&cookie)).await.status(),StatusCode::UNAUTHORIZED,"all old sessions revoked");
++}
