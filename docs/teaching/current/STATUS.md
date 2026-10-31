@@ -1,3 +1,5 @@
+> 2026-10-31 最新同Day修訂：[Chat r2](https://github.com/williechen/copilot_use/blob/main/docs/teaching/daily/day-45/chat-r2.md) 44項通過；[Analytics r4](https://github.com/williechen/copilot_use/blob/main/docs/teaching/daily/day-45/analytics-r4.md) 67項通過／1 ignored。兩案完整patch直接基於產品f6a0401，已含Refactor，勿與舊patch疊套。Pet沿用原交付；三案next_day=46、未加Day。僅候選驗證，產品未套用、完整Gate2=false。[精確讀回](https://github.com/williechen/copilot_use/blob/main/docs/teaching/daily/day-45/publication-final-rewire.json)。
+
 # 目前教學與驗收狀態
 
 產品最新來源 `f6a04015188da2155af6c264d0e6326e6a922dca`，本次只調整Analytics SQL角色預設；runtime尚未接線，自身密碼ACL page與首次／後續登入顯示規則已更正，未重新驗收實作，完整Gate2=false。[最新採用核對](../../source-review/analytics-adoption-2026-10-31-f6a0401/README.md)。

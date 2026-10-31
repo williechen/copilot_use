@@ -1,3 +1,5 @@
+> 2026-10-31 最新同Day修訂：[Chat r2](https://github.com/williechen/copilot_use/blob/main/docs/teaching/daily/day-45/chat-r2.md) 44項通過；[Analytics r4](https://github.com/williechen/copilot_use/blob/main/docs/teaching/daily/day-45/analytics-r4.md) 67項通過／1 ignored。兩案完整patch直接基於產品f6a0401，已含Refactor，勿與舊patch疊套。Pet沿用原交付；三案next_day=46、未加Day。僅候選驗證，產品未套用、完整Gate2=false。[精確讀回](https://github.com/williechen/copilot_use/blob/main/docs/teaching/daily/day-45/publication-final-rewire.json)。
+
 # 目前閱讀入口
 
 產品來源 `f6a04015188da2155af6c264d0e6326e6a922dca`；本次調整Analytics SQL角色預設，runtime尚未接線。隔離raw SQL七份通過（3 category／9 page／36 action）。自身密碼保留ACL page；首次強制修改先開此頁，完成後後續登入開首頁；共用同一修改實作；完整Gate2未通過。
@@ -6,7 +8,7 @@
 
 目前教學：Day45三案獨立發布與全文讀回完成，next_day三案46。
 
-[Day45 ENTRY](../daily/day-45/ENTRY.md) · [Chat](../daily/day-45/chat.md) · [Pet](../daily/day-45/pet.md) · [Analytics r3](../daily/day-45/analytics-r3.md) · [讀回證據](../daily/day-45/delivery-verification.json)
+[Day45 ENTRY](../daily/day-45/ENTRY.md) · [Chat](../daily/day-45/chat-r2.md) · [Pet](../daily/day-45/pet.md) · [Analytics r3](../daily/day-45/analytics-r4.md) · [讀回證據](../daily/day-45/delivery-verification.json)
 
 [manifest](manifest.json) · [learning-state](../../learning-state.json) · [各案Refactor](../functional-refactoring/PROGRESS.md) · [跨案工程](../../engineering/README.md) · [歷史分包](../../archive/README.md)
 

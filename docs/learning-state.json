@@ -414,13 +414,13 @@
   "reference_sha": "f6a04015188da2155af6c264d0e6326e6a922dca",
   "reference_scope": "f6a0401 SQL role-default revision; seven raw SQL migrations verified; runtime/shared password refactor not adopted",
   "current_article_paths": {
-    "chat": "docs/teaching/daily/day-45/chat.md",
+    "chat": "docs/teaching/daily/day-45/chat-r2.md",
     "pet": "docs/teaching/daily/day-45/pet.md",
-    "analytics": "docs/teaching/daily/day-45/analytics-r3.md"
+    "analytics": "docs/teaching/daily/day-45/analytics-r4.md"
   },
   "teaching_progress": {
     "last_published_day": 45,
-    "last_publication_status": "Day45 Analytics r3: category-page-action and CRUD authority revision published/read back; no Day increment; candidate not applied",
+    "last_publication_status": "Day45 Chat r2 / Analytics r4 published and exact-readback verified; f6-based isolated candidates pass; no Day advance; Pet unchanged; product Gate2 false",
     "next_day": {
       "chat": 46,
       "pet": 46,
@@ -521,9 +521,9 @@
       "recovered": true,
       "evidence": "docs/teaching/daily/day-45/delivery-verification.json",
       "articles": {
-        "chat": "docs/teaching/daily/day-45/chat.md",
+        "chat": "docs/teaching/daily/day-45/chat-r2.md",
         "pet": "docs/teaching/daily/day-45/pet.md",
-        "analytics": "docs/teaching/daily/day-45/analytics-r3.md"
+        "analytics": "docs/teaching/daily/day-45/analytics-r4.md"
       }
     }
   },
@@ -545,13 +545,13 @@
       {
         "project": "chat",
         "day": 45,
-        "revision": "r1",
-        "article_path": "docs/teaching/daily/day-45/chat.md",
-        "article_commit": "f9fbd13847106bff5f93f2439f5db63d5ef85fae",
-        "blob_sha": "20156fb0aa34932adfebab2b554049d7be819cb4",
-        "sha256": "50e9d98961f363c31943188a65df5feb489ce165fd033e6b573833336300eb31",
-        "source_sha": "64eff527283fd05657841297879aefeaadd31f64",
-        "publication_status": "published_gate1_document",
+        "revision": "r2",
+        "article_path": "docs/teaching/daily/day-45/chat-r2.md",
+        "article_commit": "05299579857f4ca46e7119fddffd6fa535a30917",
+        "blob_sha": "8c5d33a1f3f9892bf0eaf4146d8bc5ed6f00db0d",
+        "sha256": "ef3fcfe2d614ecf8ebec75ff38f6a106c393c1ca4f26abecdccb8813b12762a5",
+        "source_sha": "f6a04015188da2155af6c264d0e6326e6a922dca",
+        "publication_status": "published_revision_gate1_document",
         "gate1_complete": true,
         "gate2": false,
         "functional_acceptance": false,
@@ -559,12 +559,31 @@
         "exact_commit_readback": true,
         "remote_full_text_equal": true,
         "refactor_patch": "docs/teaching/daily/day-45/chat-day45-refactor.patch",
-        "green_patch": "docs/teaching/daily/day-45/chat-day45-green.patch",
-        "red_patch": "docs/teaching/daily/day-45/chat-day45-red.patch",
-        "evidence": "docs/teaching/daily/day-45/delivery-verification.json",
-        "expected_next_day": 45,
+        "green_patch": "docs/teaching/daily/day-45/chat-day45-final-r2.patch",
+        "red_patch": "docs/teaching/daily/day-45/chat-day45-final-red-r2.patch",
+        "evidence": "docs/teaching/daily/day-45/publication-chat-r2.json",
+        "expected_next_day": 46,
         "storage": "raw_latest_pending_product_application",
-        "version_msrv_gate_complete": true
+        "version_msrv_gate_complete": true,
+        "red_baseline": "exact f6 source plus this revision's Red tests only; use separate clean copy for complete patch",
+        "refactor_included_in_complete_patch": true,
+        "patch_application": "complete patch applies directly to exact f6; do not stack old Refactor/Green or Red",
+        "validation": "docs/teaching/daily/day-45/chat-day45-validation-r2.json",
+        "day_advance": false,
+        "candidate_validation": {
+          "source_sha": "f6a04015188da2155af6c264d0e6326e6a922dca",
+          "passed": 44,
+          "ignored": 0,
+          "full_gate2": false
+        },
+        "previous_revision": {
+          "revision": "r1",
+          "article_path": "docs/teaching/daily/day-45/chat.md",
+          "article_commit": "f9fbd13847106bff5f93f2439f5db63d5ef85fae",
+          "blob_sha": "20156fb0aa34932adfebab2b554049d7be819cb4",
+          "sha256": "50e9d98961f363c31943188a65df5feb489ce165fd033e6b573833336300eb31"
+        },
+        "application_at_latest_source": "new exact-f6 complete candidate patch verified by clean apply and tests; product main not written or applied"
       },
       {
         "project": "pet",
@@ -595,12 +614,12 @@
       {
         "project": "analytics",
         "day": 45,
-        "revision": "r3",
-        "article_path": "docs/teaching/daily/day-45/analytics-r3.md",
-        "article_commit": "44402c7aa1e891970fce4c2480115be1562d5cb4",
-        "blob_sha": "3b0e9c0e8aed47717b3875509b2873706b08d3e8",
-        "sha256": "1eabe96c9ea93bd88d210c1d1e83d87903a9865d4d68160e68f2f756e1c7bc91",
-        "source_sha": "64eff527283fd05657841297879aefeaadd31f64",
+        "revision": "r4",
+        "article_path": "docs/teaching/daily/day-45/analytics-r4.md",
+        "article_commit": "8ed4e0a4a489866e70f381f415232d3214e69fdd",
+        "blob_sha": "d220774bca40b5caf4d6bfe609c589f6451b73d0",
+        "sha256": "ec8a39c77e5cf90f8def6a5ccec77e9ab91b7be2c70a4a91f4c2e183a0d713d8",
+        "source_sha": "f6a04015188da2155af6c264d0e6326e6a922dca",
         "publication_status": "published_revision_gate1_document",
         "gate1_complete": true,
         "gate2": false,
@@ -609,9 +628,9 @@
         "exact_commit_readback": true,
         "remote_full_text_equal": true,
         "refactor_patch": "docs/teaching/daily/day-45/analytics-day45-refactor.patch",
-        "green_patch": "docs/teaching/daily/day-45/analytics-day45-green-r3.patch",
-        "red_patch": "docs/teaching/daily/day-45/analytics-hierarchy-red-r3.patch",
-        "evidence": "docs/teaching/daily/day-45/publication-r3.json",
+        "green_patch": "docs/teaching/daily/day-45/analytics-day45-final-r4.patch",
+        "red_patch": "docs/teaching/daily/day-45/analytics-day45-final-red-r4.patch",
+        "evidence": "docs/teaching/daily/day-45/publication-analytics-r4.json",
         "expected_next_day": 46,
         "storage": "raw_latest_pending_product_application",
         "version_msrv_gate_complete": true,
@@ -699,8 +718,8 @@
           ]
         },
         "user_acl_semantics": "role defaults plus independent per-user allow; explicit user deny wins, including administrator",
-        "red_baseline": "source + original Refactor + r2 Green candidate",
-        "validation": "docs/teaching/daily/day-45/analytics-validation-r3.json",
+        "red_baseline": "exact f6 source plus this revision's Red tests only; use separate clean copy for complete patch",
+        "validation": "docs/teaching/daily/day-45/analytics-day45-validation-r4.json",
         "day_advance": false,
         "acl_hierarchy": [
           "category",
@@ -719,15 +738,23 @@
           "delete"
         ],
         "previous_revision": {
-          "revision": "r2",
-          "article_path": "docs/teaching/daily/day-45/analytics-r2.md",
-          "article_commit": "e974d5e18799f0dd2ceef159f4ac0133aaa31070",
-          "blob_sha": "82ff49033620fc0da14a178ebadca183d81e9484",
-          "sha256": "67412dc6a6fa3791a84a782a366df73144964964cda41c54886d41fe7879a88d"
+          "revision": "r3",
+          "article_path": "docs/teaching/daily/day-45/analytics-r3.md",
+          "article_commit": "44402c7aa1e891970fce4c2480115be1562d5cb4",
+          "blob_sha": "3b0e9c0e8aed47717b3875509b2873706b08d3e8",
+          "sha256": "1eabe96c9ea93bd88d210c1d1e83d87903a9865d4d68160e68f2f756e1c7bc91"
         },
         "latest_product_review": "docs/source-review/analytics-adoption-2026-10-31-f6a0401/README.md",
-        "application_at_latest_source": "historical64 full patch requires rebase for f6; own-password ACL page retained; first-change then subsequent home routing clarified",
-        "latest_password_requirement_correction": "docs/requirements/revisions/2026-10-31-self-password-page-correction.md"
+        "application_at_latest_source": "new exact-f6 complete candidate patch verified by clean apply and tests; product main not written or applied",
+        "latest_password_requirement_correction": "docs/requirements/revisions/2026-10-31-self-password-page-correction.md",
+        "refactor_included_in_complete_patch": true,
+        "patch_application": "complete patch applies directly to exact f6; do not stack old Refactor/Green or Red",
+        "candidate_validation": {
+          "source_sha": "f6a04015188da2155af6c264d0e6326e6a922dca",
+          "passed": 67,
+          "ignored": 1,
+          "full_gate2": false
+        }
       }
     ],
     "pending_publication": null,
@@ -739,11 +766,29 @@
         "article_commit": "44402c7aa1e891970fce4c2480115be1562d5cb4",
         "evidence": "docs/teaching/daily/day-45/publication-r3.json",
         "day_advance": false
+      },
+      {
+        "project": "chat",
+        "day": 45,
+        "revision": "r2",
+        "article_commit": "05299579857f4ca46e7119fddffd6fa535a30917",
+        "evidence": "docs/teaching/daily/day-45/publication-chat-r2.json",
+        "source_sha": "f6a04015188da2155af6c264d0e6326e6a922dca",
+        "day_advance": false
+      },
+      {
+        "project": "analytics",
+        "day": 45,
+        "revision": "r4",
+        "article_commit": "8ed4e0a4a489866e70f381f415232d3214e69fdd",
+        "evidence": "docs/teaching/daily/day-45/publication-analytics-r4.json",
+        "source_sha": "f6a04015188da2155af6c264d0e6326e6a922dca",
+        "day_advance": false
       }
     ]
   },
   "candidate_validation": "docs/teaching/daily/day-45/delivery-verification.json",
-  "latest_revision_evidence": "docs/teaching/daily/day-45/publication-r3.json",
+  "latest_revision_evidence": "docs/teaching/daily/day-45/publication-final-rewire.json",
   "product_adoption": {
     "analytics": {
       "source_sha": "f6a04015188da2155af6c264d0e6326e6a922dca",
@@ -757,7 +802,8 @@
       "previous_review": "docs/source-review/analytics-adoption-2026-10-31-63b1f93/README.md",
       "own_password_acl_page_retained": true,
       "password_requirement_correction": "docs/requirements/revisions/2026-10-31-self-password-page-correction.md",
-      "password_validation_status": "not re-verified for corrected requirement; existing password ACL page retained"
+      "password_validation_status": "corrected requirement verified on exact-f6 isolated candidate; product main runtime still not adopted",
+      "candidate_validation": "docs/teaching/daily/day-45/analytics-day45-validation-r4.json"
     }
   },
   "requirements_confirmations": {
@@ -768,14 +814,22 @@
       "reuse_same_password_page": true,
       "no_duplicate_first_login_password_page": true,
       "preserve_first_login_password_change": true,
-      "implementation_status": "not re-verified",
+      "implementation_status": "candidate verified; product not applied",
       "requirements_document": "docs/requirements/AUTHENTICATION.md",
       "correction_record": "docs/requirements/revisions/2026-10-31-self-password-page-correction.md",
       "withdrawn_assistant_interpretation": {
         "user_quote": "共用修改密碼 不單獨一頁",
         "interpretation": "no separate ACL page",
         "status": "incorrect; withdrawn after user correction"
-      }
+      },
+      "candidate_validation": "docs/teaching/daily/day-45/analytics-day45-validation-r4.json"
     }
+  },
+  "candidate_rewire_validation": {
+    "source_sha": "f6a04015188da2155af6c264d0e6326e6a922dca",
+    "chat": "docs/teaching/daily/day-45/chat-day45-validation-r2.json",
+    "analytics": "docs/teaching/daily/day-45/analytics-day45-validation-r4.json",
+    "product_applied": false,
+    "full_gate2": false
   }
 }

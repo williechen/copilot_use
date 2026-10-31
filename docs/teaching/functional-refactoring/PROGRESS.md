@@ -1,3 +1,5 @@
+> 2026-10-31 最新同Day修訂：[Chat r2](https://github.com/williechen/copilot_use/blob/main/docs/teaching/daily/day-45/chat-r2.md) 44項通過；[Analytics r4](https://github.com/williechen/copilot_use/blob/main/docs/teaching/daily/day-45/analytics-r4.md) 67項通過／1 ignored。兩案完整patch直接基於產品f6a0401，已含Refactor，勿與舊patch疊套。Pet沿用原交付；三案next_day=46、未加Day。僅候選驗證，產品未套用、完整Gate2=false。[精確讀回](https://github.com/williechen/copilot_use/blob/main/docs/teaching/daily/day-45/publication-final-rewire.json)。
+
 # 各案Refactor目前進度
 
 產品`64eff527283fd05657841297879aefeaadd31f64`已含Day44三案重構；本輪只重驗Pet，其餘重構測試仍維持4b1008b來源；原7ce附件已真check／apply。功能Green、同案重構與跨案工作分列，不增加Day。
@@ -25,3 +27,5 @@
 各案完整逐檔內容見[現行文章](../daily/day-45/ENTRY.md)，不抵算G-01／G-02，不更新last_full_comparison。角色頁面ACL及個人加減屬Analytics功能Green，沒有重複算作Refactor。
 
 Analytics r3的category→page→action及CRUD為功能Green修訂；獨立Session Adapter重構沿用，不增加Refactor完成數。
+
+本回合兩案沿用原Day45獨立Session Adapter Refactor，不新增或重複增加Refactor完成數；會員action與管理ACL重接線屬功能修訂。未做跨案共用crate／全庫CI重構。

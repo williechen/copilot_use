@@ -128,5 +128,15 @@
       "no actual old PostgreSQL backup supplied",
       "full dependency/MSRV acceptance incomplete"
     ]
+  },
+  "candidate_rewire": {
+    "source_sha": "f6a04015188da2155af6c264d0e6326e6a922dca",
+    "chat_passed": 44,
+    "analytics_passed": 67,
+    "analytics_ignored": 1,
+    "chat_wasm_check_exit": 0,
+    "evidence": "docs/teaching/daily/day-45/publication-final-rewire.json",
+    "product_applied": false,
+    "full_gate2": false
   }
 }

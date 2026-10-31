@@ -1,3 +1,23 @@
+# Day45 最新文章、附件與套用
+
+[ENTRY](ENTRY.md) · [Chat r2](chat-r2.md) · [Pet](pet.md) · [Analytics r4](analytics-r4.md) · [精確讀回](publication-final-rewire.json)
+
+| 專案 | 目前來源 | Red（獨立副本） | 完整組合patch | 驗證 |
+| --- | --- | --- | --- | --- |
+| Chat r2 | f6a0401 | [patch](chat-day45-final-red-r2.patch) | [直接套f6](chat-day45-final-r2.patch) | [44通過／WASM](chat-day45-validation-r2.json) |
+| Pet | 64eff527 | [patch](pet-day45-red.patch) | [原Refactor](pet-day45-refactor.patch)再[原Green](pet-day45-green.patch) | [UI11／DOM六pose](pet-validation.json) |
+| Analytics r4 | f6a0401 | [patch](analytics-day45-final-red-r4.patch) | [直接套f6](analytics-day45-final-r4.patch) | [67通過／1 ignored](analytics-day45-validation-r4.json) |
+
+Chat／Analytics完整組合patch已包含原Day45功能、獨立Refactor及新修訂；直接在精確f6乾淨副本git apply --check後套用。不要先套舊Refactor、Green或本次Red再疊完整patch。Red在另一份精確f6副本獨立重現。兩案patch路徑互相獨立；[乾淨套用／逐檔SHA256](final-rewire-clean-apply.json)。f6已採用的SQL逐位元保留，Analytics以新migration升級；實驗驗證七→八份SQLx ledger，不冒充使用者真實舊DB備份升級。
+
+Analytics測試需先設定自己的隔離測試DB；本回合真實命令使用 DATABASE_URL=postgres://willie@127.0.0.1:55485/final_day45、Rust/Cargo 1.99.1 與 CARGO_PROFILE_TEST_DEBUG=0／CARGO_PROFILE_DEV_DEBUG=0／CARGO_INCREMENTAL=0，詳細命令與環境在各validation JSON。不得指向正式DB。
+
+[官方版本查核](final-rewire-versions.json)、[真實失敗嘗試與修正](final-rewire-attempts.json)。會員只有action且只管理自身；管理端page→category、page→action顯示規則詳[契約](../../../requirements/COMMON_AUTHORIZATION.md)。
+
+本次修訂不加Day，不改FIFO與last_full_comparison；Gate1文件交付完成，產品main未寫入，完整Gate2仍false。Chat管理端完整UI、Analytics ACL編輯UI／帳號update/delete／security頁、真實瀏覽器與舊DB備份驗收仍未完成，不以本次候選測試冒充。
+
+## 歷史交付原文（截至r3；保留追溯，不作目前套用規則）
+
 # Day45 文章、附件與套用
 
 [ENTRY](ENTRY.md) · [Chat](chat.md) · [Pet](pet.md) · [Analytics現行r3](analytics-r3.md) · [讀回證據](delivery-verification.json)

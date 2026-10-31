@@ -1,0 +1,147 @@
+{
+  "source_sha": "f6a04015188da2155af6c264d0e6326e6a922dca",
+  "expected_sync_parent": "da67578aa04773d9b94bf6b8b147e091c71fcee4",
+  "expected_next_day": {
+    "chat": 46,
+    "pet": 46,
+    "analytics": 46
+  },
+  "resulting_next_day": {
+    "chat": 46,
+    "pet": 46,
+    "analytics": 46
+  },
+  "day_advance": false,
+  "fifo_changed": false,
+  "last_full_comparison_changed": false,
+  "product_written": false,
+  "product_applied": false,
+  "gate1": true,
+  "gate2": false,
+  "chat": {
+    "article_commit": "05299579857f4ca46e7119fddffd6fa535a30917",
+    "readback": [
+      {
+        "path": "docs/teaching/daily/day-45/chat-r2.md",
+        "blob_sha": "8c5d33a1f3f9892bf0eaf4146d8bc5ed6f00db0d",
+        "full_text_equal": true,
+        "sha256": "ef3fcfe2d614ecf8ebec75ff38f6a106c393c1ca4f26abecdccb8813b12762a5"
+      },
+      {
+        "path": "docs/teaching/daily/day-45/chat-day45-final-r2.patch",
+        "blob_sha": "9afbd4c1bdbcb06ffc5e1ac713e1396d64966cd9",
+        "full_text_equal": true,
+        "sha256": "966a90a45d51ba2e92244dfd0133326c8e1e2df595f62bd7f378ce47f7b06d2b"
+      },
+      {
+        "path": "docs/teaching/daily/day-45/chat-day45-final-red-r2.patch",
+        "blob_sha": "28307f5f27936d3386fbfdd14d3b967a363443c2",
+        "full_text_equal": true,
+        "sha256": "bdb2f7ab2bf8987fa5318ee3e46e42176d9416782a4e35a6ce24328830156a03"
+      },
+      {
+        "path": "docs/teaching/daily/day-45/chat-day45-final-r2.log",
+        "blob_sha": "aec85eab1218a887a06d9e53c2a7e2eb084455d1",
+        "full_text_equal": true,
+        "sha256": "47701efacc925fa48db890b60402284b1ea257bf915a2f9785e2167b2f0aa51e"
+      },
+      {
+        "path": "docs/teaching/daily/day-45/chat-day45-final-red-r2.log",
+        "blob_sha": "640feb865d0d2670bfdbf92bf7e4cc50cb06b221",
+        "full_text_equal": true,
+        "sha256": "f9cbd4e1c35c41e0441a0fdf782f5e76dfc8f825d0fab437f86a0d09e7deec8f"
+      },
+      {
+        "path": "docs/teaching/daily/day-45/chat-day45-wasm-r2.log",
+        "blob_sha": "0f4023e47032b871c49342b194d62cd3227efad0",
+        "full_text_equal": true,
+        "sha256": "45c8c87824aaabef2fcb8637104303c76c9ec77568678f93117f6b30390b97bc"
+      },
+      {
+        "path": "docs/teaching/daily/day-45/chat-day45-validation-r2.json",
+        "blob_sha": "786ccc7167673e26d1ab2d43e24fff2bebf9857f",
+        "full_text_equal": true,
+        "sha256": "56679cbeab659a521d6dc690a548bb42f51ccc541ac5b73206dae9d9b7a6ec29"
+      },
+      {
+        "path": "docs/teaching/daily/day-45/final-rewire-versions.json",
+        "blob_sha": "65e051a20e31ffcf443738109460f2dfc56518f9",
+        "full_text_equal": true,
+        "sha256": "920f45f2a737c041cb56f3205ab46846d184a5bba453bfa946c4c590640bcce6"
+      },
+      {
+        "path": "docs/teaching/daily/day-45/final-rewire-clean-apply.json",
+        "blob_sha": "0a6feaa3f4f780a3299a7b285d01c5605d1bbe3f",
+        "full_text_equal": true,
+        "sha256": "77b6337b3bb74a2eae25bc571a1b9db6effe16ec115aac0cffbec0d0ad3deda6"
+      }
+    ]
+  },
+  "analytics": {
+    "article_commit": "8ed4e0a4a489866e70f381f415232d3214e69fdd",
+    "readback": [
+      {
+        "path": "docs/teaching/daily/day-45/analytics-r4.md",
+        "blob_sha": "d220774bca40b5caf4d6bfe609c589f6451b73d0",
+        "full_text_equal": true,
+        "sha256": "ec8a39c77e5cf90f8def6a5ccec77e9ab91b7be2c70a4a91f4c2e183a0d713d8"
+      },
+      {
+        "path": "docs/teaching/daily/day-45/analytics-day45-final-r4.patch",
+        "blob_sha": "19adf278f928065150c3ac908dd3413528f159e5",
+        "full_text_equal": true,
+        "sha256": "f31d1c53768ce6befed215578a7e38360b9c9f061488c802c2fd7a21862d43e3"
+      },
+      {
+        "path": "docs/teaching/daily/day-45/analytics-day45-final-red-r4.patch",
+        "blob_sha": "d5ccac687cb28c045a236a5935a4660625ab500a",
+        "full_text_equal": true,
+        "sha256": "bafb7a075c453b09c8fb02b50f2af3ade87d79769f5e99d76ceb7d83485a6e06"
+      },
+      {
+        "path": "docs/teaching/daily/day-45/analytics-day45-final-r4.log",
+        "blob_sha": "9e66ac6d1339a5a60e82551a33a26aa28d01d957",
+        "full_text_equal": true,
+        "sha256": "ddfd1fb896c90a48578e5ad5227270b91ce32c2884273d7f00fb01a7d55ea29b"
+      },
+      {
+        "path": "docs/teaching/daily/day-45/analytics-day45-final-red-r4.log",
+        "blob_sha": "d7e9a2917346b1730ee3533b2a539d56287015d7",
+        "full_text_equal": true,
+        "sha256": "930d57fdb3d2d3bae98173d1932110ae820cabc596a92a5d9db1bf91d37b3679"
+      },
+      {
+        "path": "docs/teaching/daily/day-45/analytics-day45-validation-r4.json",
+        "blob_sha": "76683f2736874bfce3c03e467a36abdd6e1aebd8",
+        "full_text_equal": true,
+        "sha256": "3ab5db6197f0092e6eb7c81cbd7a45ae0bcd7e36af1e2ce0dc038cc1eef505e9"
+      },
+      {
+        "path": "docs/teaching/daily/day-45/final-rewire-attempts.json",
+        "blob_sha": "3fcf8e58d8edfb31ef109890df81405e71ca3359",
+        "full_text_equal": true,
+        "sha256": "847c6adb89533fcbd38d1039b714eb68c056528e8dbabe20a4b1b9ef2427fb86"
+      },
+      {
+        "path": "docs/teaching/daily/day-45/final-rewire-versions.json",
+        "blob_sha": "65e051a20e31ffcf443738109460f2dfc56518f9",
+        "full_text_equal": true,
+        "sha256": "920f45f2a737c041cb56f3205ab46846d184a5bba453bfa946c4c590640bcce6"
+      },
+      {
+        "path": "docs/teaching/daily/day-45/final-rewire-clean-apply.json",
+        "blob_sha": "0a6feaa3f4f780a3299a7b285d01c5605d1bbe3f",
+        "full_text_equal": true,
+        "sha256": "77b6337b3bb74a2eae25bc571a1b9db6effe16ec115aac0cffbec0d0ad3deda6"
+      }
+    ]
+  },
+  "pet": {
+    "unchanged": true,
+    "article": "docs/teaching/daily/day-45/pet.md"
+  },
+  "expected_state_blobs": {
+    "docs/learning-state.json": "c4c6af6c7b9f44eb4b076f7a5d390f137c9dcc63",
+    "docs/teaching/current/manifest.json": "489d0b431fdefca26f3f51ab586c33cbc2d8101f"
+  }
+}
