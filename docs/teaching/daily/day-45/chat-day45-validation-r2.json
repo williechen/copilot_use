@@ -1,0 +1,56 @@
+{
+  "source_sha": "f6a04015188da2155af6c264d0e6326e6a922dca",
+  "document_parent": "c89ad285f757f35cb8dbf215b697ff8e5ded38c4",
+  "revision": "r2",
+  "day": 45,
+  "expected_next_day": {
+    "chat": 46,
+    "pet": 46,
+    "analytics": 46
+  },
+  "day_advance": false,
+  "product_written": false,
+  "product_applied": false,
+  "gate2": false,
+  "candidate_full_suite": {
+    "passed": 44,
+    "ignored": 0,
+    "exit": 0,
+    "log": "chat-day45-final-r2.log"
+  },
+  "red": {
+    "exit": 101,
+    "failed": 3,
+    "log": "chat-day45-final-red-r2.log",
+    "patch": "chat-day45-final-red-r2.patch",
+    "source_plus_tests_only": true
+  },
+  "test_command": "cargo test --manifest-path chat_apps/Cargo.toml -p chat-server --features ssr --locked --no-fail-fast",
+  "execution_context": "exact f6 export, apply complete patch, isolated candidate and test DB only; test commands use absolute /tmp/day45-clean-verify paths",
+  "environment": {
+    "CARGO_PROFILE_TEST_DEBUG": "0",
+    "CARGO_PROFILE_DEV_DEBUG": "0",
+    "CARGO_INCREMENTAL": "0"
+  },
+  "not_run": [
+    "瀏覽器互動與實際hydration旅程",
+    "Chat管理端完整category/page/action管理UI及管理身分路由；本次會員實作不冒充管理端驗收",
+    "正式／既有使用者SQLite備份升級",
+    "全產品Gate2與全庫CI"
+  ],
+  "versions": "final-rewire-versions.json",
+  "clean_apply": "final-rewire-clean-apply.json",
+  "previous_revision_preserved": true,
+  "wasm_check": {
+    "command": "cargo check --manifest-path chat_apps/Cargo.toml -p chat-ui --features hydrate --target wasm32-unknown-unknown --locked",
+    "exit": 0,
+    "log": "chat-day45-wasm-r2.log"
+  },
+  "sha256": {
+    "chat-day45-final-r2.patch": "966a90a45d51ba2e92244dfd0133326c8e1e2df595f62bd7f378ce47f7b06d2b",
+    "chat-day45-final-red-r2.patch": "bdb2f7ab2bf8987fa5318ee3e46e42176d9416782a4e35a6ce24328830156a03",
+    "chat-day45-final-r2.log": "47701efacc925fa48db890b60402284b1ea257bf915a2f9785e2167b2f0aa51e",
+    "chat-day45-final-red-r2.log": "f9cbd4e1c35c41e0441a0fdf782f5e76dfc8f825d0fab437f86a0d09e7deec8f",
+    "chat-day45-wasm-r2.log": "45c8c87824aaabef2fcb8637104303c76c9ec77568678f93117f6b30390b97bc"
+  }
+}

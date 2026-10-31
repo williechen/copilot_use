@@ -1,0 +1,83 @@
+   Compiling shared v0.2.43 (/tmp/day45-red-verify/crates/shared)
+   Compiling chat-persistence v0.2.43 (/tmp/day45-red-verify/chat_apps/chat_persistence)
+   Compiling chat-ui v0.2.43 (/tmp/day45-red-verify/chat_apps/chat_ui)
+warning: unused import: `crate::room_list_state::clear_room_search`
+  --> chat_ui/src/lib.rs:39:5
+   |
+39 | use crate::room_list_state::clear_room_search;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `room_heading` is never used
+   --> chat_ui/src/lib.rs:209:4
+    |
+209 | fn room_heading(id: &str, result: Result<String, String>) -> String {
+    |    ^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `clear_room_search` is never used
+  --> chat_ui/src/room_list_state.rs:55:15
+   |
+55 | pub(super) fn clear_room_search(loaded: bool, rows: &[(String, String)]) -> (String, String) {
+   |               ^^^^^^^^^^^^^^^^^
+
+warning: variants `SignedOut`, `SignedIn`, and `Unavailable` are never constructed
+ --> chat_ui/src/session_entry.rs:4:5
+  |
+2 | pub(super) enum SessionEntry {
+  |                 ------------ variants in this enum
+3 |     Checking,
+4 |     SignedOut,
+  |     ^^^^^^^^^
+5 |     SignedIn,
+  |     ^^^^^^^^
+6 |     Unavailable,
+  |     ^^^^^^^^^^^
+  |
+  = note: `SessionEntry` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis
+
+warning: `chat-ui` (lib) generated 4 warnings (run `cargo fix --lib -p chat-ui` to apply 1 suggestion)
+   Compiling chat-server v0.2.43 (/tmp/day45-red-verify/chat_apps/chat_server)
+    Finished `test` profile [unoptimized] target(s) in 3.78s
+     Running tests/day45_member_self.rs (/home/willie/Documents/Codex/2026-10-27/referenced-chatgpt-conversation-this-is-an/work/cargo-target/debug/deps/day45_member_self-d6217cf74429705f)
+
+running 3 tests
+test room_creation_requires_action_and_deny_leaves_no_room ... FAILED
+test password_change_is_self_only_csrf_checked_salted_and_revokes_sessions ... FAILED
+test self_profile_is_separate_and_cannot_target_another_member ... FAILED
+
+failures:
+
+---- room_creation_requires_action_and_deny_leaves_no_room stdout ----
+
+thread 'room_creation_requires_action_and_deny_leaves_no_room' (13052) panicked at chat_server/tests/day45_member_self.rs:135:5:
+assertion `left == right` failed
+  left: 201
+ right: 403
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+---- password_change_is_self_only_csrf_checked_salted_and_revokes_sessions stdout ----
+
+thread 'password_change_is_self_only_csrf_checked_salted_and_revokes_sessions' (13051) panicked at chat_server/tests/day45_member_self.rs:166:5:
+assertion `left == right` failed
+  left: 404
+ right: 422
+
+---- self_profile_is_separate_and_cannot_target_another_member stdout ----
+
+thread 'self_profile_is_separate_and_cannot_target_another_member' (13053) panicked at chat_server/tests/day45_member_self.rs:63:5:
+assertion `left == right` failed
+  left: 404
+ right: 200
+
+
+failures:
+    password_change_is_self_only_csrf_checked_salted_and_revokes_sessions
+    room_creation_requires_action_and_deny_leaves_no_room
+    self_profile_is_separate_and_cannot_target_another_member
+
+test result: FAILED. 0 passed; 3 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.37s
+
+error: test failed, to rerun pass `-p chat-server --test day45_member_self`

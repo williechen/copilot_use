@@ -1,0 +1,234 @@
+{
+  "source_sha": "f6a04015188da2155af6c264d0e6326e6a922dca",
+  "commands": [
+    {
+      "command": [
+        "git",
+        "-C",
+        "work/final-candidate",
+        "diff",
+        "HEAD",
+        "--check"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "-C",
+        "/tmp/day45-clean-verify",
+        "reset",
+        "--hard",
+        "HEAD"
+      ],
+      "exit": 0,
+      "stdout": "HEAD is now at 9aec9b9 exact f6 isolated apply check\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "-C",
+        "/tmp/day45-clean-verify",
+        "clean",
+        "-fd"
+      ],
+      "exit": 0,
+      "stdout": "Removing analytics_apps/analytics_persistence/src/login_session.rs\nRemoving analytics_apps/analytics_server/src/accounts.rs\nRemoving analytics_apps/analytics_server/src/page_acl.rs\nRemoving analytics_apps/analytics_server/tests/day45_final.rs\nRemoving analytics_apps/analytics_server/tests/day45_viewer.rs\nRemoving analytics_apps/migrations/20261031120000_initial_password_personal_grant.sql\nRemoving chat_apps/chat_persistence/src/member_session.rs\nRemoving chat_apps/chat_persistence/src/room_access.rs\nRemoving chat_apps/chat_server/src/member_self.rs\nRemoving chat_apps/chat_server/tests/day45_member_self.rs\nRemoving chat_apps/migrations/20261031123000_member_actions.sql\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "-C",
+        "/tmp/day45-clean-verify",
+        "apply",
+        "--check",
+        "/home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/final-delivery/chat-final-r2.patch"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "-C",
+        "/tmp/day45-clean-verify",
+        "apply",
+        "/home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/final-delivery/chat-final-r2.patch"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "-C",
+        "/tmp/day45-clean-verify",
+        "apply",
+        "--check",
+        "/home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/final-delivery/analytics-final-r4.patch"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "-C",
+        "/tmp/day45-clean-verify",
+        "apply",
+        "/home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/final-delivery/analytics-final-r4.patch"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "-C",
+        "/tmp/day45-clean-verify",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "all_changed_files_equal": true,
+  "files": [
+    {
+      "path": "analytics_apps/analytics_persistence/src/lib.rs",
+      "sha256": "b5aabe87609854fd348b46fa65ec7b44945d21e42c644cdbf157e3c17abc14f1",
+      "clean_apply_bytes_equal": true
+    },
+    {
+      "path": "analytics_apps/analytics_persistence/src/login_session.rs",
+      "sha256": "833c945e0d7cce382e91f709303090d7f1bfdec7dda27344aa42be087fc20883",
+      "clean_apply_bytes_equal": true
+    },
+    {
+      "path": "analytics_apps/analytics_server/src/accounts.rs",
+      "sha256": "58c31b1610f5bbf05e9ae26a5ec5653dccf4d31e404a970bd5808a607dd9ee65",
+      "clean_apply_bytes_equal": true
+    },
+    {
+      "path": "analytics_apps/analytics_server/src/bootstrap.rs",
+      "sha256": "d62f53d5c7c8421bd5c35c8abf25fcee250cccf24251c003a728bbd6f088abdb",
+      "clean_apply_bytes_equal": true
+    },
+    {
+      "path": "analytics_apps/analytics_server/src/dashboard_ui.rs",
+      "sha256": "b6084f64c16a4cb8c160f90d3c1f9a428aa3a3b938bea18ffb901e04cf361182",
+      "clean_apply_bytes_equal": true
+    },
+    {
+      "path": "analytics_apps/analytics_server/src/export.rs",
+      "sha256": "d5205dab425251afc63c36fbcf9ba5ab27a8b9a88bd0e8d647c652d7d662c21f",
+      "clean_apply_bytes_equal": true
+    },
+    {
+      "path": "analytics_apps/analytics_server/src/lib.rs",
+      "sha256": "38c4af18e8b6b542065015774e2e820dafe97f2ae8ed643fdfad90bc64e0968b",
+      "clean_apply_bytes_equal": true
+    },
+    {
+      "path": "analytics_apps/analytics_server/src/page_acl.rs",
+      "sha256": "ad60df273dc1ba13681b7997256e5639cf427626136a489dfd7a4c5c274fa8c6",
+      "clean_apply_bytes_equal": true
+    },
+    {
+      "path": "analytics_apps/analytics_server/src/password_login.rs",
+      "sha256": "0054cb847a9b6ac1694fe19b9b6222bbbde61b4e5829aafa9275f179b4b5a421",
+      "clean_apply_bytes_equal": true
+    },
+    {
+      "path": "analytics_apps/analytics_server/tests/day45_final.rs",
+      "sha256": "2bf3edd1674f0e7c961e3dec8610b5524e52f392dd165842a7037aa285e759a1",
+      "clean_apply_bytes_equal": true
+    },
+    {
+      "path": "analytics_apps/analytics_server/tests/day45_viewer.rs",
+      "sha256": "86e2808da57ad29c309160aedbb853b6f9b708feccbc5dfdd861b80b727bf324",
+      "clean_apply_bytes_equal": true
+    },
+    {
+      "path": "analytics_apps/migrations/20261031120000_initial_password_personal_grant.sql",
+      "sha256": "82fdcfc388281f2a239395dc6598899396e249cf3ad41b062e81647be9833ea3",
+      "clean_apply_bytes_equal": true
+    },
+    {
+      "path": "chat_apps/chat_persistence/src/lib.rs",
+      "sha256": "c75d7da8c2d687c8184e1f68f2ed65c0acb30737322e5e10bd37e1a6dcd3e6d6",
+      "clean_apply_bytes_equal": true
+    },
+    {
+      "path": "chat_apps/chat_persistence/src/member_session.rs",
+      "sha256": "6a27476fa51b2f9e89e8dac7db8f6c195b7963bf9463aa59a45cc1553c1050fa",
+      "clean_apply_bytes_equal": true
+    },
+    {
+      "path": "chat_apps/chat_persistence/src/room_access.rs",
+      "sha256": "da132376d13ba755773aa174e6aa61119b89bbbd15af0478f1912f04f3b489c8",
+      "clean_apply_bytes_equal": true
+    },
+    {
+      "path": "chat_apps/chat_server/src/auth_session.rs",
+      "sha256": "c50ea8c2e6cef958af88d912b608fc6942ba17f9033d881d5132203edc04020e",
+      "clean_apply_bytes_equal": true
+    },
+    {
+      "path": "chat_apps/chat_server/src/lib.rs",
+      "sha256": "301f6e71572c6b45378cd27d3a8f558496df6c176a3b59b71ea2c9db3c367478",
+      "clean_apply_bytes_equal": true
+    },
+    {
+      "path": "chat_apps/chat_server/src/member_self.rs",
+      "sha256": "d0f549165de78d1ebfd6f81a784bc76ce9b1b95a8aba87fd01f4435e3901ee62",
+      "clean_apply_bytes_equal": true
+    },
+    {
+      "path": "chat_apps/chat_server/src/room_auth.rs",
+      "sha256": "1ad8fe8390b43f92e33625392d1af237ebb20cfd493d0635d1d49a0bf18ebdf7",
+      "clean_apply_bytes_equal": true
+    },
+    {
+      "path": "chat_apps/chat_server/src/signin.rs",
+      "sha256": "bbd89e0c74ee3f2ab59ea3831d598d3de07fb4243523c1f76b64a1daaa02e640",
+      "clean_apply_bytes_equal": true
+    },
+    {
+      "path": "chat_apps/chat_server/src/signup.rs",
+      "sha256": "1acd86d24d496d04052c2785689b4240047fa14f235c94d112bb2f1b6b524209",
+      "clean_apply_bytes_equal": true
+    },
+    {
+      "path": "chat_apps/chat_server/src/ws.rs",
+      "sha256": "680a51f6198056b1ef4ee931cff4bda7e3c1a6063cb6872a12725222588b4dc1",
+      "clean_apply_bytes_equal": true
+    },
+    {
+      "path": "chat_apps/chat_server/tests/day45_member_self.rs",
+      "sha256": "d91f06ed1159fe6b67c279861d46936db135e51bc8488c777ccc02a7a7ba9626",
+      "clean_apply_bytes_equal": true
+    },
+    {
+      "path": "chat_apps/chat_ui/src/room_api.rs",
+      "sha256": "fa7b0f225c709d3828ca304767e9eca715424d49e9660b0addec0908e7daf36a",
+      "clean_apply_bytes_equal": true
+    },
+    {
+      "path": "chat_apps/migrations/20261031123000_member_actions.sql",
+      "sha256": "31e11369988cc289b671a82985a00d3c17fd89574d6dd949942a44259bbe3930",
+      "clean_apply_bytes_equal": true
+    }
+  ],
+  "adopted_f6_migration_bytes_unchanged": true
+}
