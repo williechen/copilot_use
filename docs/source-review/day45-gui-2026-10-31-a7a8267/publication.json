@@ -1,0 +1,395 @@
+{
+  "source_sha": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
+  "artifact_commit": "29d3b13d9fae8f6d73c1c328acd68be00659aa23",
+  "artifact_readback": [
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/chat-raw-room.png",
+      "blob_sha": "ddcfc77595a3f42dd4aa8e2963a105862d6545bd",
+      "sha256": "8c6ee70061db54dbd997a3beac65e0ebeb5a3976deea1e99328cdedf3ff5ff8d",
+      "complete_remote_readback": true,
+      "binary": true
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/pet-native-menu.png",
+      "blob_sha": "6c2dc76d1050543130135b98aa9f77c27a597cec",
+      "sha256": "32546b1f8f3dd131dba01ed382d5a4e3d848d4e183999cdc309c437ba1cc4800",
+      "complete_remote_readback": true,
+      "binary": true
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/analytics-admin.png",
+      "blob_sha": "203294169116c5fdd7e875b95d1bacbcaf49797d",
+      "sha256": "d36825fd5ed0e72b28b2c7459acba04bd8529eee1e41213eac0480c994dbbe83",
+      "complete_remote_readback": true,
+      "binary": true
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/pet-native-life.png",
+      "blob_sha": "27887bd16194a54e2ad3d7761939e0be89bebcd8",
+      "sha256": "881691701097130210864457ae8ca997d48839ab9a57a3603ab434e993f6577b",
+      "complete_remote_readback": true,
+      "binary": true
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/chat-candidate-room.png",
+      "blob_sha": "76cda355800c983b687cb94522f03aeb5eb60409",
+      "sha256": "b52871a66a5f36c334de010549fe3752dc545631ea9f7e3418e645589193cfb6",
+      "complete_remote_readback": true,
+      "binary": true
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/pet-native-restarted.png",
+      "blob_sha": "e1ad59f1a2fc436feed33b63f277d0229d775cf2",
+      "sha256": "7e24a41640b720cad0f165ed0966d2c373c671d1cac4ec73ebd5e5164df1355b",
+      "complete_remote_readback": true,
+      "binary": true
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/chat-raw-profile403.png",
+      "blob_sha": "3ddab50b98da0d74381bd9f7089dc0c99ac14baf",
+      "sha256": "3878570f4a62a0d65f57cf1754e0269e56ec797f4e36e26b44c172eb6e800401",
+      "complete_remote_readback": true,
+      "binary": true
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/analytics-viewer-tree.png",
+      "blob_sha": "7d7f718dc07b9bf9f04cf21a468f5121c5ac768a",
+      "sha256": "04ab44dd76dad3b1d643419512e3293e95733a06f65f3f1e0c82e2bb7c9a59f5",
+      "complete_remote_readback": true,
+      "binary": true
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/README.md",
+      "blob_sha": "3f56115a1f3802397ae3a235556c47ddca87707f",
+      "sha256": "ca7369cdf55cf40a374c4fa994d800095797a83606b00c70f718d4116d457d0f",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/gui-review.json",
+      "blob_sha": "7b8c4ed5d406ecd40261d6d68fd716574f453785",
+      "sha256": "c8ceae54c2e95b425b36252c46abcb3dd50f6c35524b4994bb2f9e74cc7fabbd",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/native-close.json",
+      "blob_sha": "6b856bb4045f8e17d6cd939225bf9a1528945ae4",
+      "sha256": "3187df95443d7cbc8e59e4b89bd4c980a7c9f33b0b341e6471e47d73a69d9690",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/native-final.log",
+      "blob_sha": "7481d7b4d0b992d02d4e706c6ee376061646415c",
+      "sha256": "298934b3be7213d148c69935cf4d861cd3580e8cc2a1330d0e60706bd9b6f4dd",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/chat-permission-id-fix.patch",
+      "blob_sha": "61b148221b231ff92f5cae5c7fd284d7971dcc1c",
+      "sha256": "576c0171a9f068c01690524adb1419894b9c593de4fefbbac7fde372e7561924",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/browser-results.json",
+      "blob_sha": "86a2d320628d0a7e3ebbc5fd2034a1ef9cb2a1b6",
+      "sha256": "aeaac2ff49646ecc8ea3a00b4bee4df2f1a79c53c50d1fb644f076d49f9229ff",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/browser-run.log",
+      "blob_sha": "594200269e5ff051907a68e9d573533f3363a1a8",
+      "sha256": "d5c2459cad74c96703534864d48388464638c5bd8bc47b703c42910f71fbdfc4",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/browser-chat-final.cjs",
+      "blob_sha": "6a8fa095a2268e656df9610f8e092404bac15390",
+      "sha256": "ca502ac76a01dcbecd256153f6b3c46e7db93f5d4947900e8393a90b8a4215a0",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/menu-check.py",
+      "blob_sha": "dccb7a35514195d19b8d94437ddb91abb102d160",
+      "sha256": "7902ac37a88fa78d49204ce6a94d10cfef77f83ab9f51e9f4d950453422850bf",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/cache-cleanup.json",
+      "blob_sha": "ee58f20ffda14e56eae0270696a978fef73774e0",
+      "sha256": "113059ce484f7a979b4483063285b7f071c026b54945b948ab865f7e2cacb1c7",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/browser.cjs",
+      "blob_sha": "a39b52c0f142a9ec5dbadb5b27f206f12eac7296",
+      "sha256": "dc6f5ebe631f13a7c6efa371950eaba4c11f9912ebf986d9b027e6cbea082b28",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/pet-frontend-build-retry.log",
+      "blob_sha": "fbd1afbc2036407b81161788d16e157f078154be",
+      "sha256": "ec261e1875520cc2199423783140186f64d8f1fa2f2c0423f5eeac62ad9332e5",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/native-real-drag.py",
+      "blob_sha": "d2589fbdc816f27c2eebefc3950dfa2b3b6a34eb",
+      "sha256": "bd5c51b31918351d80501be8252f9f2b9d88db0cc2f6493ab00c718741a158d5",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/native-drag.json",
+      "blob_sha": "713f17da5d961bd49a7265e865697f625b79ecbc",
+      "sha256": "fae49885482d017127dd2f9b601610fd3ffc7da1003aab779cfed2991acc33ed",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/native-menu.json",
+      "blob_sha": "a883e5ac25d02f6b81f4f1b57097fd64afd7af31",
+      "sha256": "25d379b9e0209c2e9a4cf2440c44feae245cb3ea34a82c62c5e996702bf59513",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/native-real-drag.log",
+      "blob_sha": "2847ce7de76f96ffd4a1778f66c9b7fec0abc42c",
+      "sha256": "db50c6b32ce948732b96d1f5f55f354e84712ccbffc1e597eafe3d940134da01",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/stopped-processes.json",
+      "blob_sha": "b29348260d0a151257baf59beba812358d287905",
+      "sha256": "8a1156feb0cbb740adf14f0a506245f034eb09937bab3b31222f02536205d018",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/chat-patch-validation.json",
+      "blob_sha": "80d7f752b99d6ef4de3d81d358c041a8a8235cdb",
+      "sha256": "66fc94c54b817fa2f501fdc0515b73fbf54cbd19e30f731e0d19f46de579d747",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/native-retry.log",
+      "blob_sha": "fa1fee298cb5df6f0217505d5ac6272427dd0cbf",
+      "sha256": "3bcd74dfb19a0831b66b33479c78fcd8cf39d57e0fac7e4c6dda05ec33a696c4",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/menu-check.log",
+      "blob_sha": "e5b59543a93dc52184a344704dfa2f09f6ec6047",
+      "sha256": "e014243feac14a3cb9fea4d69a26baab6e6df711b940affa1dc368e4128a39e7",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/native-close.py",
+      "blob_sha": "5d5a11dedb3931e9fcbc3cfd115cadbbb40aec35",
+      "sha256": "76af1544b95bcd22d4e6d3062566afb592ce0f14956e469046318fe5842361f2",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/pet-native-build.log",
+      "blob_sha": "07936cfb4fa158baaf94a96dbb0770c95d642d4d",
+      "sha256": "94f1e893e6ae644f0b283bf59feebdb589637d2c0c8d63a2b26f26c0ff8b7296",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/native-extra-retry.log",
+      "blob_sha": "6d7eab9045dbed3166a96c088cc9f65dcba3cb2f",
+      "sha256": "412322997c132957583e19358870dcac5decc1f09ad12b82281f6749c794965d",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/analytics-build.log",
+      "blob_sha": "bc8d747c08211d8fd453acf949b0d3fede447f6f",
+      "sha256": "342af32144dff6da605d3653a1155c45f7328d8a34b365752a73e7f25318467f",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/accepted-scopes.json",
+      "blob_sha": "ca960c5b01ccbd37bc1835be883722f58745db2a",
+      "sha256": "07e3210046bffe903a37a13249aa59149fc2ac69d762f65fe85152fd6c436322",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/chat-signup-red.log",
+      "blob_sha": "42223448530baec67f62f7d3420b42de27cbf042",
+      "sha256": "96dab2017eb0913d686bc3021c1b926f21aea3998ece76c9e4a7b8b93b8a3bde",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/native-restart-accepted.log",
+      "blob_sha": "e2fce3c8b753dd22b426606865f63b252149e682",
+      "sha256": "938b6e6a40b8cdb56a1dce29b57256206ec61303ff8b210abb5d74141c22c948",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/chat-fixed-regression.log",
+      "blob_sha": "9dc23c3b18b8041eaf90dfe64f5ffbc04a5e4587",
+      "sha256": "ff8682c7598ef8c9a25b891db9656c2021d9043ae84bb938bb9f4fbac271a799",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/chat-fixed-leptos-build.log",
+      "blob_sha": "9309169076caad0df778459f0627cfb26ac18c52",
+      "sha256": "11b56f3f4eaa3278c49fd9a35dd977b283787cf6dbe30f93c8a7b8750a272c21",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/native-run.log",
+      "blob_sha": "7ae2a1eddd9d43bf70928b9639f00a53ea359cd9",
+      "sha256": "868e4515272c12960c3bf398269fca56a15b98697a0e8208680b14017eb1f7c0",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/pet-frontend-build.log",
+      "blob_sha": "06dba062bdf2072b26c7fe780caf64a8352b0c4f",
+      "sha256": "db3a86165db664e0eed862a259bb4427bf0f710967421eda6efba57c2dd44ff5",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/browser-chat-final.log",
+      "blob_sha": "7bd50ebc962c864c216daeaa3dc5d885ad935eb9",
+      "sha256": "39214172e69d79fe65e3144c3162901cbca8b826526a7ccdef86a7a1070c1287",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/native-restart-results.json",
+      "blob_sha": "c8db4eaa28373d8b3829a4d47c740944eac22630",
+      "sha256": "a9436d2edd30f47f8f9efc64c239a8d57974b0c108c111849fdbeffae9d48619",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/native-extra.log",
+      "blob_sha": "7ba35f44a4d2b0118144c808a7d9edba05a5d409",
+      "sha256": "46c081973b8177fe7fc3a3185fb336badfbe4e32720b8fef839f3b7667913f1d",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/browser-pnpm-lock.yaml",
+      "blob_sha": "dce2bcd6c7b9d28099ea18be87c19650be0b7299",
+      "sha256": "b8bb6c2f562b2387bdbb9eab0dc940745237adb2e6d7a8b6ff6cd54508cac123",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/native-restart.py",
+      "blob_sha": "d5fbe744f3e7ebc4e01efe44f7c74f221d0e5da5",
+      "sha256": "5ce2e76d9f6e3f4ce7a2fd659ef3ae0388145fb1ddf9045866d4dd47476cee78",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/native-results.json",
+      "blob_sha": "6962f93ad909a3e3ed9fb5e93d4d19885ce8a814",
+      "sha256": "e4206320b64864bb7bc5f063efe745263233643517d97b01fee72a1107a645e1",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/chat-candidate-browser-results.json",
+      "blob_sha": "cbc4d583458ac3b8db03fa9a8a4c882c3f1b3549",
+      "sha256": "0f2bf2119a2d2a8ddbb8956e18b3bf2d0235141199c95f8c91b2754f5c360e81",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/native.py",
+      "blob_sha": "636ec0a5b7ae6f2a8ba10be57ecd079f49467a82",
+      "sha256": "2f10edc1ce647ae122ae3bb990d5aee6a9b66a64d5812a4bb1a40e738a959a8e",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/browser-package.json",
+      "blob_sha": "0c30ce3c827f535c50c578355a3a11fcbd39b3ca",
+      "sha256": "0eb7dd81762b3dba1dd02ca8ab466292ea4e156b8985b0b8c7e50727f754fb32",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/chat-build.log",
+      "blob_sha": "4b74a7d25464eb7a2f82a07c7ba7fd5dcdad37c6",
+      "sha256": "7a4e73f97edf007b434bc454ca3442a45f3792d993112556cb1ddf44ae82995a",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/cleanup.json",
+      "blob_sha": "683a16e686b1ce6b1f3f67bc9daeb60d3abc446c",
+      "sha256": "404d5dca4f0e4da8b7a35ccb37f6b79e8cbea73efcfcf084847704d957d708b7",
+      "complete_remote_readback": true,
+      "binary": false
+    }
+  ],
+  "article_readback": [
+    {
+      "project": "chat",
+      "path": "docs/teaching/daily/day-45/chat-r2.md",
+      "commit": "708de113e0e893be26c302d7f47a51f401a105d1",
+      "blob_sha": "6fb4f94d5299c9a4b57da52414e3caa9ef433378",
+      "sha256": "34c291a87d4d8c4626e11dbc9552fc4ff29fadd8bbb1764c9efddcc35b556166",
+      "full_text_equal": true
+    },
+    {
+      "project": "pet",
+      "path": "docs/teaching/daily/day-45/pet.md",
+      "commit": "9768349fdd9c59ad96a2d63d03449248a49982d7",
+      "blob_sha": "c8719a8ee57b29ff678ec34fd0b1a74bd3fbf5bb",
+      "sha256": "c0041fb17fa0333dd4fb9547217bf9d436c40f077c3f251f74c8725a5e3cbca8",
+      "full_text_equal": true
+    },
+    {
+      "project": "analytics",
+      "path": "docs/teaching/daily/day-45/analytics-r4.md",
+      "commit": "32495c7bc9f47dcab52524c669a2aec7d1da51c5",
+      "blob_sha": "326cceae370bdacadace0db69e7a502315887152",
+      "sha256": "5280b07bbf75ea58ba709fa3e4a4c7056565c228f1de8cc5f9ac127ad4cc95df",
+      "full_text_equal": true
+    }
+  ],
+  "expected_sync_parent": "32495c7bc9f47dcab52524c669a2aec7d1da51c5",
+  "expected_next_day": {
+    "chat": 46,
+    "pet": 46,
+    "analytics": 46
+  },
+  "day_advance": false,
+  "fifo_changed": false,
+  "last_full_comparison_changed": false,
+  "product_written": false,
+  "gate1": true,
+  "gate2": false,
+  "note": "Eight original screenshot PNGs were read back in full base64 and compared byte-equivalent to local originals; text files compared in full; blob and SHA256 preserved"
+}
