@@ -1,0 +1,24 @@
+second pet created through native UI {"ids": {"Native Day45 A": "25fa53b1-8d12-4947-9142-76461f5f1de0", "Native Day45 B": "8d6661bd-8fcd-460f-b38f-3bbfca718891"}}
+two independent native life windows plus controller {"count": 3}
+native UI state/event isolation for two pets {}
+Traceback (most recent call last):
+  File "/home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/day45-gui/native-extra-body.py", line 29, in <module>
+    menu=asyncjs('const done=arguments[arguments.length-1];window.showPetContextMenu(80,80).then(()=>done({ok:true})).catch(e=>done({error:String(e)}));')
+  File "<string>", line 10, in asyncjs
+  File "<string>", line 6, in req
+  File "/usr/lib/python3.14/urllib/request.py", line 187, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/urllib/request.py", line 493, in open
+    response = meth(req, response)
+  File "/usr/lib/python3.14/urllib/request.py", line 602, in http_response
+    response = self.parent.error(
+        'http', request, response, code, msg, hdrs)
+  File "/usr/lib/python3.14/urllib/request.py", line 531, in error
+    return self._call_chain(*args)
+           ~~~~~~~~~~~~~~~~^^^^^^^
+  File "/usr/lib/python3.14/urllib/request.py", line 464, in _call_chain
+    result = func(*args)
+  File "/usr/lib/python3.14/urllib/request.py", line 611, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 500: Internal Server Error

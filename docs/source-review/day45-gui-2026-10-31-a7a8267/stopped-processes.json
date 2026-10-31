@@ -1,0 +1,26 @@
+[
+  {
+    "pid": 56007,
+    "command": "python3"
+  },
+  {
+    "pid": 56010,
+    "command": "Xvfb"
+  },
+  {
+    "pid": 56017,
+    "command": "tauri-driver"
+  },
+  {
+    "pid": 57767,
+    "command": "chat-server"
+  },
+  {
+    "pid": 58036,
+    "command": "xfwm4"
+  },
+  {
+    "pid": 51736,
+    "command": "analytics-server"
+  }
+]

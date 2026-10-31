@@ -1,0 +1,44 @@
+{
+  "isolated_postgres_stopped": true,
+  "virtual_native_sessions_and_local_servers_stopped": true,
+  "removed": [
+    {
+      "path": "/tmp/day45-gui-pet.sqlite",
+      "bytes": 98304
+    },
+    {
+      "path": "/tmp/day45-gui-chat.sqlite",
+      "bytes": 258048
+    },
+    {
+      "path": "/tmp/day45-gui-pg",
+      "bytes": 66476094
+    },
+    {
+      "path": "/tmp/day45-gui-socket",
+      "bytes": 0
+    },
+    {
+      "path": "/tmp/day45-gui-browser",
+      "bytes": 18704021
+    },
+    {
+      "path": "/tmp/day45-gui-src",
+      "bytes": 24469246
+    },
+    {
+      "path": "/tmp/day45-chat-fixed",
+      "bytes": 30373697
+    },
+    {
+      "path": "/tmp/day45-chat-patch-base",
+      "bytes": 12674475
+    },
+    {
+      "path": "/tmp/day45-chat-clean-apply",
+      "bytes": 6769131
+    }
+  ],
+  "total_removed_bytes": 159823016,
+  "preserved": "product checkout, dirty docs checkout, screenshots/test logs/patches/source scripts and shared dependency build cache"
+}

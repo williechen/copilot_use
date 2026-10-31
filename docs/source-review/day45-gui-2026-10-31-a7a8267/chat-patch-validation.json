@@ -1,0 +1,23 @@
+{
+  "source_sha": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
+  "apply_check_exit": 0,
+  "apply_exit": 0,
+  "patch_sha256": "576c0171a9f068c01690524adb1419894b9c593de4fefbbac7fde372e7561924",
+  "files": [
+    {
+      "path": "chat_apps/chat_server/src/member_self.rs",
+      "candidate_equals_clean_patch": true,
+      "sha256": "dead72aad81f0c0c34ac9bb90da94515b60d3d7a676cd8765fc7f7bddd7dddae"
+    },
+    {
+      "path": "chat_apps/chat_server/tests/day45_member_self.rs",
+      "candidate_equals_clean_patch": true,
+      "sha256": "bb96cbb4748f8184e795a99db2e5e4dc6f9fc83d24b2b30c90d1152748a8ab1f"
+    },
+    {
+      "path": "chat_apps/chat_server/tests/day45_signup_self_service.rs",
+      "candidate_equals_clean_patch": true,
+      "sha256": "a396a9d58223c00b992101e0f6e77dfd3c4b263d2b5d6680e0020480f9efde65"
+    }
+  ]
+}

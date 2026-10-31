@@ -1,0 +1,82 @@
+{
+  "source_sha": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
+  "kind": "real Chromium against actual running product servers; no request mocks",
+  "steps": [
+    {
+      "project": "analytics",
+      "name": "default admin first login opens own-password ACL page"
+    },
+    {
+      "project": "analytics",
+      "name": "first change submits real form and revokes session"
+    },
+    {
+      "project": "analytics",
+      "name": "subsequent login opens dashboard and grant-derived tree"
+    },
+    {
+      "project": "analytics",
+      "name": "admin creates viewer via UI with Chat source only"
+    },
+    {
+      "project": "analytics",
+      "name": "viewer first-change restriction cannot navigate around mandatory change"
+    },
+    {
+      "project": "analytics",
+      "name": "viewer second login opens homepage and hides unauthorized page/category actions"
+    },
+    {
+      "project": "analytics",
+      "name": "real browser cookies enforce source read and account management denies"
+    },
+    {
+      "project": "analytics",
+      "name": "same browser Session sees action deny and restoration immediately",
+      "fixture": "isolated DB grant mutation, not permission editor UI"
+    },
+    {
+      "project": "analytics",
+      "name": "page-only shows category/page; action deny hides form and forged POST cannot mutate"
+    },
+    {
+      "project": "analytics",
+      "name": "last authorized child page removed => category disappears"
+    },
+    {
+      "project": "analytics",
+      "name": "logout form invalidates actual browser Session"
+    },
+    {
+      "project": "chat",
+      "name": "anonymous public homepage hydrates",
+      "wasmErrors": []
+    },
+    {
+      "project": "chat",
+      "name": "browser registration persists without automatic login"
+    },
+    {
+      "project": "chat",
+      "name": "member login and actual create-room form persists a room",
+      "room": "5ad95b6c-0815-4988-984b-922d03b92479"
+    },
+    {
+      "project": "chat",
+      "name": "hydrated room establishes real WebSocket and sends persisted message",
+      "pageErrors": []
+    },
+    {
+      "project": "chat",
+      "name": "live exclusion blocks existing socket and subsequent room SSR",
+      "socketStatus": "已斷線，請重新進房",
+      "roomStatus": 403
+    }
+  ],
+  "errors": [
+    {
+      "project": "chat",
+      "error": "locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('form[action=\"/account/profile\"] [name=\"display_name\"]')\u001b[22m\n\n    at fill (/home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/day45-gui/browser.cjs:8:121)\n    at chat (/home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/day45-gui/browser.cjs:33:65)\n    at async /home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/day45-gui/browser.cjs:39:132"
+    }
+  ]
+}

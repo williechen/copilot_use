@@ -1,0 +1,366 @@
+{
+  "source_sha": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
+  "analytics_browser": {
+    "steps": [
+      {
+        "project": "analytics",
+        "name": "default admin first login opens own-password ACL page"
+      },
+      {
+        "project": "analytics",
+        "name": "first change submits real form and revokes session"
+      },
+      {
+        "project": "analytics",
+        "name": "subsequent login opens dashboard and grant-derived tree"
+      },
+      {
+        "project": "analytics",
+        "name": "admin creates viewer via UI with Chat source only"
+      },
+      {
+        "project": "analytics",
+        "name": "viewer first-change restriction cannot navigate around mandatory change"
+      },
+      {
+        "project": "analytics",
+        "name": "viewer second login opens homepage and hides unauthorized page/category actions"
+      },
+      {
+        "project": "analytics",
+        "name": "real browser cookies enforce source read and account management denies"
+      },
+      {
+        "project": "analytics",
+        "name": "same browser Session sees action deny and restoration immediately",
+        "fixture": "isolated DB grant mutation, not permission editor UI"
+      },
+      {
+        "project": "analytics",
+        "name": "page-only shows category/page; action deny hides form and forged POST cannot mutate"
+      },
+      {
+        "project": "analytics",
+        "name": "last authorized child page removed => category disappears"
+      },
+      {
+        "project": "analytics",
+        "name": "logout form invalidates actual browser Session"
+      }
+    ],
+    "errors": [],
+    "actual_product": true
+  },
+  "chat_original": {
+    "steps": [
+      {
+        "project": "chat",
+        "name": "anonymous public homepage hydrates",
+        "wasmErrors": []
+      },
+      {
+        "project": "chat",
+        "name": "browser registration persists without automatic login"
+      },
+      {
+        "project": "chat",
+        "name": "member login and actual create-room form persists a room",
+        "room": "5ad95b6c-0815-4988-984b-922d03b92479"
+      },
+      {
+        "project": "chat",
+        "name": "hydrated room establishes real WebSocket and sends persisted message",
+        "pageErrors": []
+      },
+      {
+        "project": "chat",
+        "name": "live exclusion blocks existing socket and subsequent room SSR",
+        "socketStatus": "已斷線，請重新進房",
+        "roomStatus": 403
+      }
+    ],
+    "failure": "actual signed-up default-role member profile GET403; IDs differ from migrated definitions",
+    "errors": [
+      {
+        "project": "chat",
+        "error": "locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('form[action=\"/account/profile\"] [name=\"display_name\"]')\u001b[22m\n\n    at fill (/home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/day45-gui/browser.cjs:8:121)\n    at chat (/home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/day45-gui/browser.cjs:33:65)\n    at async /home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/day45-gui/browser.cjs:39:132"
+      }
+    ]
+  },
+  "chat_corrected_candidate": {
+    "source_sha": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
+    "kind": "real Chromium against corrected isolated Chat candidate on a7; no request mocks",
+    "steps": [
+      {
+        "project": "chat",
+        "name": "anonymous public homepage hydrates",
+        "wasmErrors": []
+      },
+      {
+        "project": "chat",
+        "name": "browser registration persists without automatic login"
+      },
+      {
+        "project": "chat",
+        "name": "member login and actual create-room form persists a room",
+        "room": "2a24f5fc-1dd2-4c5b-ab86-d54c1d4abcad"
+      },
+      {
+        "project": "chat",
+        "name": "hydrated room establishes real WebSocket and sends persisted message",
+        "pageErrors": []
+      },
+      {
+        "project": "chat",
+        "name": "live exclusion blocks existing socket and subsequent room SSR",
+        "socketStatus": "已斷線，請重新進房",
+        "roomStatus": 403
+      },
+      {
+        "project": "chat",
+        "name": "self-profile UI changes only current Session subject"
+      },
+      {
+        "project": "chat",
+        "name": "member action deny removes create-room UI without removing self actions"
+      },
+      {
+        "project": "chat",
+        "name": "self-password UI revokes old Session; new password re-login succeeds"
+      },
+      {
+        "project": "chat",
+        "name": "anonymous room navigation preserves canonical login-return target"
+      }
+    ],
+    "errors": []
+  },
+  "pet_native": {
+    "passed_slices": [
+      {
+        "name": "native controller real Leptos WASM loaded",
+        "handle": "page-770E3F8E-2563-4EB7-98E3-C958ECBB9AC9",
+        "title": "Rust AI Desktop Pet"
+      },
+      {
+        "name": "create through UI persists pet and opens separate native life window",
+        "pet_id": "25fa53b1-8d12-4947-9142-76461f5f1de0",
+        "native_window_count": 2
+      },
+      {
+        "name": "real native200x200 and single-image life canvas",
+        "window_rect": {
+          "x": 80,
+          "y": 80,
+          "width": 200,
+          "height": 200
+        },
+        "DOM": {
+          "client": [
+            200,
+            200
+          ],
+          "imageCount": 1,
+          "body": "...\nNative Day45 A\n待機revision 0\n回籠子控制台",
+          "image": [
+            16,
+            16,
+            168,
+            168
+          ],
+          "canvas": [
+            200,
+            200
+          ]
+        }
+      },
+      {
+        "name": "actual animation clock runs in native WebView",
+        "classes": [
+          "pose-blink",
+          "pose-idle"
+        ]
+      },
+      {
+        "name": "real native UI action 互動",
+        "observed_poses": [
+          "pose-interact-a",
+          "pose-interact-b"
+        ]
+      },
+      {
+        "name": "real native UI action 結束",
+        "observed_poses": [
+          "pose-idle"
+        ]
+      },
+      {
+        "name": "real native UI action 睡覺",
+        "observed_poses": [
+          "pose-sleep-a",
+          "pose-sleep-b"
+        ]
+      },
+      {
+        "name": "real native UI action 醒來",
+        "observed_poses": [
+          "pose-idle"
+        ]
+      },
+      {
+        "name": "life-window control button restores same main native window"
+      },
+      {
+        "name": "repeat uncage focuses existing native life window, no duplicate"
+      },
+      {
+        "name": "life cage button closes native window after persistence",
+        "db": [
+          [
+            "9b9cb88c-47ba-4680-8477-1f20730dea07",
+            "25fa53b1-8d12-4947-9142-76461f5f1de0",
+            "local-owner",
+            "walk",
+            0,
+            0,
+            "2026-10-31 10:52:40",
+            "2026-10-31 10:54:52"
+          ],
+          [
+            "899af50c-ed6e-47ad-b826-85a11cce5028",
+            "25fa53b1-8d12-4947-9142-76461f5f1de0",
+            "local-owner",
+            "sit",
+            0,
+            0,
+            "2026-10-31 10:52:40",
+            "2026-10-31 10:52:40"
+          ]
+        ]
+      }
+    ],
+    "native_close": {
+      "method": "X11 WM_DELETE_WINDOW actual native protocol, not unauthorized Tauri close IPC",
+      "before_handles": [
+        "page-5E9083C8-685E-40A9-974E-8871B153AD8B",
+        "page-770E3F8E-2563-4EB7-98E3-C958ECBB9AC9"
+      ],
+      "after_handles": [
+        "page-770E3F8E-2563-4EB7-98E3-C958ECBB9AC9"
+      ],
+      "active_rows_after_close": 0,
+      "passed": true
+    },
+    "native_menu": {
+      "method": "native right-click + GTK menu keyboard selection; no IPC mocks",
+      "snapshot_after_sleep": {
+        "revision": 4,
+        "state": "sleeping"
+      },
+      "passed": true
+    },
+    "native_drag": {
+      "method": "XTest actual OS pointer events on real product DragHandle under xfwm4",
+      "before": {
+        "x": 80,
+        "y": 80,
+        "width": 200,
+        "height": 200
+      },
+      "after": {
+        "x": -176,
+        "y": -176,
+        "width": 200,
+        "height": 200
+      },
+      "passed": true
+    },
+    "restart": {
+      "source_sha": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
+      "kind": "real Linux Tauri wry WebKitWebDriver on isolated Xvfb :97; real product IPC and SQLite",
+      "steps": [
+        {
+          "name": "native OS context menu routed Sleep to B",
+          "snapshot": {
+            "revision": 4,
+            "state": "sleeping"
+          }
+        },
+        {
+          "name": "native menu action preserves other pet state"
+        },
+        {
+          "name": "native drag separately verified",
+          "method": "XTest actual OS pointer events on real product DragHandle under xfwm4",
+          "before": {
+            "x": 80,
+            "y": 80,
+            "width": 200,
+            "height": 200
+          },
+          "after": {
+            "x": -176,
+            "y": -176,
+            "width": 200,
+            "height": 200
+          },
+          "passed": true
+        },
+        {
+          "name": "native find-pet UI recovers offscreen dragged window",
+          "rect": {
+            "x": 540,
+            "y": 412,
+            "width": 200,
+            "height": 200
+          }
+        },
+        {
+          "name": "native UI persists independent startup defaults",
+          "defaults": [
+            [
+              "Native Day45 A",
+              1
+            ],
+            [
+              "Native Day45 B",
+              0
+            ]
+          ]
+        },
+        {
+          "name": "real process restart restores B and leaves A caged",
+          "restored": [
+            "8d6661bd-8fcd-460f-b38f-3bbfca718891"
+          ],
+          "db": [
+            [
+              "25fa53b1-8d12-4947-9142-76461f5f1de0",
+              0
+            ],
+            [
+              "25fa53b1-8d12-4947-9142-76461f5f1de0",
+              0
+            ],
+            [
+              "8d6661bd-8fcd-460f-b38f-3bbfca718891",
+              1
+            ],
+            [
+              "8d6661bd-8fcd-460f-b38f-3bbfca718891",
+              0
+            ]
+          ]
+        }
+      ],
+      "errors": []
+    },
+    "scope": "actual debug Tauri/Wry native windows under isolated Xvfb97 + xfwm4/WebKitWebDriver; no IPC mocks",
+    "limits": [
+      "virtual Linux X11 desktop, not physical desktop/Windows/macOS packaged acceptance",
+      "software renderer warned unsupported GL; transparency composition not accepted",
+      "autonomous roam disabled; drag moved offscreen then actual find-pet UI recovered it"
+    ],
+    "initial_harness_failures": "wrong table name, enum case, direct-child XPath, W3C pointer drag and unauthorized close IPC are retained in attempt logs; successful slices verified independently"
+  }
+}

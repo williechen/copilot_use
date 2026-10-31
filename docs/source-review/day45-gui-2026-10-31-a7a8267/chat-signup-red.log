@@ -1,0 +1,67 @@
+   Compiling chat-domain v0.2.45 (/tmp/day45-gui-src/chat_apps/chat_domain)
+   Compiling chat-application v0.2.45 (/tmp/day45-gui-src/chat_apps/chat_application)
+   Compiling shared v0.2.45 (/tmp/day45-gui-src/crates/shared)
+   Compiling chat-persistence v0.2.45 (/tmp/day45-gui-src/chat_apps/chat_persistence)
+   Compiling chat-ui v0.2.45 (/tmp/day45-gui-src/chat_apps/chat_ui)
+warning: unused import: `crate::room_list_state::clear_room_search`
+  --> chat_ui/src/lib.rs:39:5
+   |
+39 | use crate::room_list_state::clear_room_search;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `room_heading` is never used
+   --> chat_ui/src/lib.rs:209:4
+    |
+209 | fn room_heading(id: &str, result: Result<String, String>) -> String {
+    |    ^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `clear_room_search` is never used
+  --> chat_ui/src/room_list_state.rs:55:15
+   |
+55 | pub(super) fn clear_room_search(loaded: bool, rows: &[(String, String)]) -> (String, String) {
+   |               ^^^^^^^^^^^^^^^^^
+
+warning: variants `SignedOut`, `SignedIn`, and `Unavailable` are never constructed
+ --> chat_ui/src/session_entry.rs:4:5
+  |
+2 | pub(super) enum SessionEntry {
+  |                 ------------ variants in this enum
+3 |     Checking,
+4 |     SignedOut,
+  |     ^^^^^^^^^
+5 |     SignedIn,
+  |     ^^^^^^^^
+6 |     Unavailable,
+  |     ^^^^^^^^^^^
+  |
+  = note: `SessionEntry` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis
+
+warning: `chat-ui` (lib) generated 4 warnings (run `cargo fix --lib -p chat-ui` to apply 1 suggestion)
+   Compiling chat-server v0.2.45 (/tmp/day45-gui-src/chat_apps/chat_server)
+    Finished `test` profile [unoptimized] target(s) in 7.36s
+     Running tests/day45_signup_self_service.rs (/home/willie/Documents/Codex/2026-10-27/referenced-chatgpt-conversation-this-is-an/work/cargo-target/debug/deps/day45_signup_self_service-401042d571335dfe)
+
+running 1 test
+test actual_signup_default_role_reaches_self_service_without_fixture_grants ... FAILED
+
+failures:
+
+---- actual_signup_default_role_reaches_self_service_without_fixture_grants stdout ----
+
+thread 'actual_signup_default_role_reaches_self_service_without_fixture_grants' (56501) panicked at chat_server/tests/day45_signup_self_service.rs:11:176:
+assertion `left == right` failed: actual registered user's default-role self action: /account/profile
+  left: 403
+ right: 200
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    actual_signup_default_role_reaches_self_service_without_fixture_grants
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.70s
+
+error: test failed, to rerun pass `-p chat-server --test day45_signup_self_service`

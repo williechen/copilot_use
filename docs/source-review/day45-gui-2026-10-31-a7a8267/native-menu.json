@@ -1,0 +1,8 @@
+{
+  "method": "native right-click + GTK menu keyboard selection; no IPC mocks",
+  "snapshot_after_sleep": {
+    "revision": 4,
+    "state": "sleeping"
+  },
+  "passed": true
+}

@@ -1,0 +1,80 @@
+{
+  "source_sha": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
+  "kind": "real Linux Tauri wry WebKitWebDriver on isolated Xvfb :97; real product IPC and SQLite",
+  "steps": [
+    {
+      "name": "native OS context menu routed Sleep to B",
+      "snapshot": {
+        "revision": 4,
+        "state": "sleeping"
+      }
+    },
+    {
+      "name": "native menu action preserves other pet state"
+    },
+    {
+      "name": "native drag separately verified",
+      "method": "XTest actual OS pointer events on real product DragHandle under xfwm4",
+      "before": {
+        "x": 80,
+        "y": 80,
+        "width": 200,
+        "height": 200
+      },
+      "after": {
+        "x": -176,
+        "y": -176,
+        "width": 200,
+        "height": 200
+      },
+      "passed": true
+    },
+    {
+      "name": "native find-pet UI recovers offscreen dragged window",
+      "rect": {
+        "x": 540,
+        "y": 412,
+        "width": 200,
+        "height": 200
+      }
+    },
+    {
+      "name": "native UI persists independent startup defaults",
+      "defaults": [
+        [
+          "Native Day45 A",
+          1
+        ],
+        [
+          "Native Day45 B",
+          0
+        ]
+      ]
+    },
+    {
+      "name": "real process restart restores B and leaves A caged",
+      "restored": [
+        "8d6661bd-8fcd-460f-b38f-3bbfca718891"
+      ],
+      "db": [
+        [
+          "25fa53b1-8d12-4947-9142-76461f5f1de0",
+          0
+        ],
+        [
+          "25fa53b1-8d12-4947-9142-76461f5f1de0",
+          0
+        ],
+        [
+          "8d6661bd-8fcd-460f-b38f-3bbfca718891",
+          1
+        ],
+        [
+          "8d6661bd-8fcd-460f-b38f-3bbfca718891",
+          0
+        ]
+      ]
+    }
+  ],
+  "errors": []
+}

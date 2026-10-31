@@ -1,0 +1,338 @@
+{
+  "scope": "rebuildable prior day integration-test executables only; source and logs kept",
+  "removed": [
+    {
+      "name": "day24_password_change-5513f71826ad758b",
+      "bytes": 14535184
+    },
+    {
+      "name": "day45_final-ac2d9f7846e90d34",
+      "bytes": 15129056
+    },
+    {
+      "name": "day45_viewer-c21532411bbf4532",
+      "bytes": 14359400
+    },
+    {
+      "name": "day45_viewer-8f6e634316a3adc9",
+      "bytes": 14359192
+    },
+    {
+      "name": "day27_create_and_select-4eb2cf14f8776ba7",
+      "bytes": 220500448
+    },
+    {
+      "name": "day27_create_and_select-c16e084c35a43076",
+      "bytes": 220698360
+    },
+    {
+      "name": "day27_dashboard_source-0a2e329843d7399a",
+      "bytes": 7206016
+    },
+    {
+      "name": "day45_member_self-d6217cf74429705f",
+      "bytes": 13338424
+    },
+    {
+      "name": "day45_viewer-1429b0a394ff5002",
+      "bytes": 14359400
+    },
+    {
+      "name": "day37_query_cookie-0a0dec690cedcf58",
+      "bytes": 14251696
+    },
+    {
+      "name": "day26_logout-1fc8f133f33ee56f",
+      "bytes": 202375776
+    },
+    {
+      "name": "day24_password_change-275f14a327edebe6",
+      "bytes": 14535040
+    },
+    {
+      "name": "day24_password_change-df85e18415d4fd7f",
+      "bytes": 7205992
+    },
+    {
+      "name": "day24_signup_complete-ca333cb325a3b90a",
+      "bytes": 12199064
+    },
+    {
+      "name": "day39_export_csv-8634156e67de042c",
+      "bytes": 14242216
+    },
+    {
+      "name": "day27_dashboard_source-76057a5c057a4c84",
+      "bytes": 127687488
+    },
+    {
+      "name": "day27_dashboard_source-da6d0df79907c1ad",
+      "bytes": 14230480
+    },
+    {
+      "name": "day45_member_self-79a28bd0ffa534df",
+      "bytes": 14279104
+    },
+    {
+      "name": "day39_export_csv-32f7322a3914dec9",
+      "bytes": 7205776
+    },
+    {
+      "name": "day26_session_contract-fc6883969b45bc29",
+      "bytes": 7206032
+    },
+    {
+      "name": "day45_final-fede18a68d5fa928",
+      "bytes": 15129320
+    },
+    {
+      "name": "day38_ingest_authorization-b2cbb57cca74a906",
+      "bytes": 127698160
+    },
+    {
+      "name": "day37_query_cookie-fbc960b73c7d8e6f",
+      "bytes": 7205912
+    },
+    {
+      "name": "day26_session_contract-c237501a60c500fb",
+      "bytes": 127811912
+    },
+    {
+      "name": "day45_member_self-f0a12c5f8f766fc9",
+      "bytes": 14279008
+    },
+    {
+      "name": "day24_password_change-140681fe6b75159d",
+      "bytes": 7205904
+    },
+    {
+      "name": "day24_signup_complete-091538a58224cf8d",
+      "bytes": 12198904
+    },
+    {
+      "name": "day25_repeat_password_change-fd4dc06eae884a4e",
+      "bytes": 7206184
+    },
+    {
+      "name": "day23_password_login-f6f5a273576305ec",
+      "bytes": 14348168
+    },
+    {
+      "name": "day23_password_login-3c1c749ef95497f1",
+      "bytes": 7205880
+    },
+    {
+      "name": "day38_ingest_authorization-8d12bff07b8e1438",
+      "bytes": 7206032
+    },
+    {
+      "name": "day26_logout-1229b211f9296bf2",
+      "bytes": 13323008
+    },
+    {
+      "name": "day37_query_cookie-46109fb7702abb99",
+      "bytes": 7205840
+    },
+    {
+      "name": "day24_password_change-03f7f979d55a98f9",
+      "bytes": 14535224
+    },
+    {
+      "name": "day39_export_csv-76e3a9503e2ad371",
+      "bytes": 7205856
+    },
+    {
+      "name": "day39_export_csv-98443c195ff5534b",
+      "bytes": 127782896
+    },
+    {
+      "name": "day24_signup_complete-3aa197bbed2645a8",
+      "bytes": 12197088
+    },
+    {
+      "name": "day38_ingest_authorization-4c613c241f67e890",
+      "bytes": 14291672
+    },
+    {
+      "name": "day24_signup_complete-e37be2241b64f619",
+      "bytes": 202289976
+    },
+    {
+      "name": "day27_dashboard_source-1dcfe48f6d0bef69",
+      "bytes": 7205944
+    },
+    {
+      "name": "day23_password_login-a8ea2e1c6533a4a4",
+      "bytes": 14347240
+    },
+    {
+      "name": "day45_member_self-330a8a56a020b6f0",
+      "bytes": 14278840
+    },
+    {
+      "name": "day5_codec_tests-7dd20a284fb313d2",
+      "bytes": 10114016
+    },
+    {
+      "name": "day26_logout-c2dd01800b993868",
+      "bytes": 13322680
+    },
+    {
+      "name": "day26_logout-97cf7356d5f9e9a2",
+      "bytes": 13247424
+    },
+    {
+      "name": "day23_password_login-e8b82182c481d003",
+      "bytes": 14348152
+    },
+    {
+      "name": "day26_session_contract-be352e5671b382cb",
+      "bytes": 7205928
+    },
+    {
+      "name": "day26_logout-14914ed57b9e9f0c",
+      "bytes": 13322912
+    },
+    {
+      "name": "day24_password_change-6cbed596f5b15db2",
+      "bytes": 129317872
+    },
+    {
+      "name": "day27_dashboard_source-0aa6d6dba4148f15",
+      "bytes": 14230448
+    },
+    {
+      "name": "day38_ingest_authorization-d976941cc3c76e6c",
+      "bytes": 7206120
+    },
+    {
+      "name": "day44_logout_csrf-b41d6135453dd67d",
+      "bytes": 14248784
+    },
+    {
+      "name": "day24_active_pet-d3148cea12fae7b8",
+      "bytes": 220784216
+    },
+    {
+      "name": "day27_dashboard_source-724251d5ad5cf274",
+      "bytes": 14230672
+    },
+    {
+      "name": "day5_codec_tests-e2da16e11f16119f",
+      "bytes": 10113848
+    },
+    {
+      "name": "day26_session_contract-488c3ef5c0a00be3",
+      "bytes": 14223744
+    },
+    {
+      "name": "day24_active_pet-058f8f1f1c443cac",
+      "bytes": 220586240
+    },
+    {
+      "name": "day23_password_login-79f3e15ff7cedfcf",
+      "bytes": 14348280
+    },
+    {
+      "name": "day25_repeat_password_change-557873e9734c55df",
+      "bytes": 14289016
+    },
+    {
+      "name": "day45_final-47431fe82fee4f7b",
+      "bytes": 15121944
+    },
+    {
+      "name": "day26_session_contract-8da47f11380092b0",
+      "bytes": 14223344
+    },
+    {
+      "name": "day23_password_login-8f32e5915738ce71",
+      "bytes": 128592744
+    },
+    {
+      "name": "day39_export_csv-5dae2a634ee37359",
+      "bytes": 14242136
+    },
+    {
+      "name": "day38_ingest_authorization-7e14a9bc28d242d3",
+      "bytes": 14291544
+    },
+    {
+      "name": "day39_export_csv-310515bd95eebd1c",
+      "bytes": 14242072
+    },
+    {
+      "name": "day44_logout_csrf-12d9630a14ec663f",
+      "bytes": 14248864
+    },
+    {
+      "name": "day37_query_cookie-138e98067ab911b7",
+      "bytes": 14251872
+    },
+    {
+      "name": "day45_member_self-fab437cdcd626d58",
+      "bytes": 14278800
+    },
+    {
+      "name": "day25_repeat_password_change-c43d68395e6e588d",
+      "bytes": 14288904
+    },
+    {
+      "name": "day26_logout-bf7d9150571ea721",
+      "bytes": 202394352
+    },
+    {
+      "name": "day37_query_cookie-b8f62c1dec84c546",
+      "bytes": 14251680
+    },
+    {
+      "name": "day23_saved_pets-4a4d9881a996d831",
+      "bytes": 221176232
+    },
+    {
+      "name": "day26_session_contract-9f74fa3da3dfdef9",
+      "bytes": 14223768
+    },
+    {
+      "name": "day23_password_login-63c41e256d4953a1",
+      "bytes": 7205976
+    },
+    {
+      "name": "day44_logout_csrf-380776a99490760d",
+      "bytes": 14248848
+    },
+    {
+      "name": "day37_query_cookie-190f322ea68d9275",
+      "bytes": 127697200
+    },
+    {
+      "name": "day24_signup_complete-75af8ce652e9f351",
+      "bytes": 12199144
+    },
+    {
+      "name": "day25_repeat_password_change-4febdf50a5999519",
+      "bytes": 128095168
+    },
+    {
+      "name": "day25_repeat_password_change-74b75819df8deb16",
+      "bytes": 7206088
+    },
+    {
+      "name": "day24_signup_complete-e4ebc49bb92a0a62",
+      "bytes": 202283920
+    },
+    {
+      "name": "day23_saved_pets-7d761d8ce7ac4333",
+      "bytes": 220978288
+    },
+    {
+      "name": "day25_repeat_password_change-43e499a23c275666",
+      "bytes": 14287856
+    },
+    {
+      "name": "day38_ingest_authorization-d23cb53df687d923",
+      "bytes": 14291488
+    }
+  ],
+  "bytes": 3955525696
+}

@@ -1,0 +1,19 @@
+    Blocking waiting for file lock on build directory
+   Compiling analytics-persistence v0.2.45 (/tmp/day45-gui-src/analytics_apps/analytics_persistence)
+   Compiling analytics-server v0.2.45 (/tmp/day45-gui-src/analytics_apps/analytics_server)
+warning: unused import: `analytics_persistence::summary_for_source`
+ --> analytics_server/src/pg_store.rs:1:5
+  |
+1 | use analytics_persistence::summary_for_source;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `analytics_persistence::summary_for_source`
+  --> analytics_server/src/lib.rs:14:5
+   |
+14 | use analytics_persistence::summary_for_source;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: `analytics-server` (lib) generated 2 warnings (run `cargo fix --lib -p analytics-server` to apply 2 suggestions)
+    Finished `dev` profile [unoptimized] target(s) in 1m 54s

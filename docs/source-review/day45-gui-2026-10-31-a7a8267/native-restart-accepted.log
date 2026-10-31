@@ -1,0 +1,6 @@
+native OS context menu routed Sleep to B {"snapshot": {"revision": 4, "state": "sleeping"}}
+native menu action preserves other pet state {}
+native drag separately verified {"method": "XTest actual OS pointer events on real product DragHandle under xfwm4", "before": {"x": 80, "y": 80, "width": 200, "height": 200}, "after": {"x": -176, "y": -176, "width": 200, "height": 200}, "passed": true}
+native find-pet UI recovers offscreen dragged window {"rect": {"x": 540, "y": 412, "width": 200, "height": 200}}
+native UI persists independent startup defaults {"defaults": [["Native Day45 A", 1], ["Native Day45 B", 0]]}
+real process restart restores B and leaves A caged {"restored": ["8d6661bd-8fcd-460f-b38f-3bbfca718891"], "db": [["25fa53b1-8d12-4947-9142-76461f5f1de0", 0], ["25fa53b1-8d12-4947-9142-76461f5f1de0", 0], ["8d6661bd-8fcd-460f-b38f-3bbfca718891", 1], ["8d6661bd-8fcd-460f-b38f-3bbfca718891", 0]]}

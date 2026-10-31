@@ -1,0 +1,472 @@
+{
+  "source_sha": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
+  "product_written": false,
+  "chat_candidate_patch": "chat-permission-id-fix.patch",
+  "binary_sha256": {
+    "chat-server": "bc5e08d821438cb26c965a8a36641c4e721102828de7acf75eab8f011a9a7c47",
+    "analytics-server": "7adfde84789d8653e090937cde3a2cd78aba24bd2c85defb4d89d76c327df5dc",
+    "pet-server": "7d691c5c8d0ca86db2ca06bfb231db68693d73bbcddcb3fdfafff12a3d23338e"
+  },
+  "binary_scope": {
+    "chat-server": "corrected candidate built with cargo-leptos; original browser failure captured earlier",
+    "analytics-server": "actual unmodified a7 product",
+    "pet-server": "actual unmodified a7 debug product via real native WebDriver"
+  },
+  "native_environment": {
+    "display": ":97",
+    "window_manager": "xfwm4",
+    "driver": "tauri-driver + WebKitWebDriver",
+    "asset_server": "actual trunk build via 127.0.0.1:1420",
+    "autonomous_roam": false,
+    "ai_calls": "none; product has mock default, chat button not exercised"
+  },
+  "build_commands": [
+    "cargo leptos build --cargo-locked (actual source, then corrected candidate)",
+    "env -u NO_COLOR trunk build --locked",
+    "cargo build --manifest-path analytics_apps/Cargo.toml -p analytics-server --locked",
+    "cargo build --manifest-path pet_apps/Cargo.toml -p pet-server --locked"
+  ],
+  "test_commands": [
+    "GUI_OUT=<evidence> NODE_PATH=<isolated>/node_modules node browser.cjs",
+    "GUI_OUT=<evidence>/chat-final-browser NODE_PATH=<isolated>/node_modules node browser-chat-final.cjs",
+    "python3 native.py (accepted slices combined with independent native-close/menu/drag/restart scripts; earlier harness failures retained)",
+    "cargo test --manifest-path chat_apps/Cargo.toml -p chat-server --features ssr --test day45_signup_self_service --locked (raw Red exit101)",
+    "cargo test --manifest-path chat_apps/Cargo.toml -p chat-server --features ssr --locked --no-fail-fast (corrected candidate exit0,45 passed)"
+  ],
+  "scopes": {
+    "source_sha": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
+    "analytics_browser": {
+      "steps": [
+        {
+          "project": "analytics",
+          "name": "default admin first login opens own-password ACL page"
+        },
+        {
+          "project": "analytics",
+          "name": "first change submits real form and revokes session"
+        },
+        {
+          "project": "analytics",
+          "name": "subsequent login opens dashboard and grant-derived tree"
+        },
+        {
+          "project": "analytics",
+          "name": "admin creates viewer via UI with Chat source only"
+        },
+        {
+          "project": "analytics",
+          "name": "viewer first-change restriction cannot navigate around mandatory change"
+        },
+        {
+          "project": "analytics",
+          "name": "viewer second login opens homepage and hides unauthorized page/category actions"
+        },
+        {
+          "project": "analytics",
+          "name": "real browser cookies enforce source read and account management denies"
+        },
+        {
+          "project": "analytics",
+          "name": "same browser Session sees action deny and restoration immediately",
+          "fixture": "isolated DB grant mutation, not permission editor UI"
+        },
+        {
+          "project": "analytics",
+          "name": "page-only shows category/page; action deny hides form and forged POST cannot mutate"
+        },
+        {
+          "project": "analytics",
+          "name": "last authorized child page removed => category disappears"
+        },
+        {
+          "project": "analytics",
+          "name": "logout form invalidates actual browser Session"
+        }
+      ],
+      "errors": [],
+      "actual_product": true
+    },
+    "chat_original": {
+      "steps": [
+        {
+          "project": "chat",
+          "name": "anonymous public homepage hydrates",
+          "wasmErrors": []
+        },
+        {
+          "project": "chat",
+          "name": "browser registration persists without automatic login"
+        },
+        {
+          "project": "chat",
+          "name": "member login and actual create-room form persists a room",
+          "room": "5ad95b6c-0815-4988-984b-922d03b92479"
+        },
+        {
+          "project": "chat",
+          "name": "hydrated room establishes real WebSocket and sends persisted message",
+          "pageErrors": []
+        },
+        {
+          "project": "chat",
+          "name": "live exclusion blocks existing socket and subsequent room SSR",
+          "socketStatus": "已斷線，請重新進房",
+          "roomStatus": 403
+        }
+      ],
+      "failure": "actual signed-up default-role member profile GET403; IDs differ from migrated definitions",
+      "errors": [
+        {
+          "project": "chat",
+          "error": "locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('form[action=\"/account/profile\"] [name=\"display_name\"]')\u001b[22m\n\n    at fill (/home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/day45-gui/browser.cjs:8:121)\n    at chat (/home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/day45-gui/browser.cjs:33:65)\n    at async /home/willie/Documents/Codex/2026-10-31/referenced-chatgpt-conversation-this-is-an/work/day45-gui/browser.cjs:39:132"
+        }
+      ]
+    },
+    "chat_corrected_candidate": {
+      "source_sha": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
+      "kind": "real Chromium against corrected isolated Chat candidate on a7; no request mocks",
+      "steps": [
+        {
+          "project": "chat",
+          "name": "anonymous public homepage hydrates",
+          "wasmErrors": []
+        },
+        {
+          "project": "chat",
+          "name": "browser registration persists without automatic login"
+        },
+        {
+          "project": "chat",
+          "name": "member login and actual create-room form persists a room",
+          "room": "2a24f5fc-1dd2-4c5b-ab86-d54c1d4abcad"
+        },
+        {
+          "project": "chat",
+          "name": "hydrated room establishes real WebSocket and sends persisted message",
+          "pageErrors": []
+        },
+        {
+          "project": "chat",
+          "name": "live exclusion blocks existing socket and subsequent room SSR",
+          "socketStatus": "已斷線，請重新進房",
+          "roomStatus": 403
+        },
+        {
+          "project": "chat",
+          "name": "self-profile UI changes only current Session subject"
+        },
+        {
+          "project": "chat",
+          "name": "member action deny removes create-room UI without removing self actions"
+        },
+        {
+          "project": "chat",
+          "name": "self-password UI revokes old Session; new password re-login succeeds"
+        },
+        {
+          "project": "chat",
+          "name": "anonymous room navigation preserves canonical login-return target"
+        }
+      ],
+      "errors": []
+    },
+    "pet_native": {
+      "passed_slices": [
+        {
+          "name": "native controller real Leptos WASM loaded",
+          "handle": "page-770E3F8E-2563-4EB7-98E3-C958ECBB9AC9",
+          "title": "Rust AI Desktop Pet"
+        },
+        {
+          "name": "create through UI persists pet and opens separate native life window",
+          "pet_id": "25fa53b1-8d12-4947-9142-76461f5f1de0",
+          "native_window_count": 2
+        },
+        {
+          "name": "real native200x200 and single-image life canvas",
+          "window_rect": {
+            "x": 80,
+            "y": 80,
+            "width": 200,
+            "height": 200
+          },
+          "DOM": {
+            "client": [
+              200,
+              200
+            ],
+            "imageCount": 1,
+            "body": "...\nNative Day45 A\n待機revision 0\n回籠子控制台",
+            "image": [
+              16,
+              16,
+              168,
+              168
+            ],
+            "canvas": [
+              200,
+              200
+            ]
+          }
+        },
+        {
+          "name": "actual animation clock runs in native WebView",
+          "classes": [
+            "pose-blink",
+            "pose-idle"
+          ]
+        },
+        {
+          "name": "real native UI action 互動",
+          "observed_poses": [
+            "pose-interact-a",
+            "pose-interact-b"
+          ]
+        },
+        {
+          "name": "real native UI action 結束",
+          "observed_poses": [
+            "pose-idle"
+          ]
+        },
+        {
+          "name": "real native UI action 睡覺",
+          "observed_poses": [
+            "pose-sleep-a",
+            "pose-sleep-b"
+          ]
+        },
+        {
+          "name": "real native UI action 醒來",
+          "observed_poses": [
+            "pose-idle"
+          ]
+        },
+        {
+          "name": "life-window control button restores same main native window"
+        },
+        {
+          "name": "repeat uncage focuses existing native life window, no duplicate"
+        },
+        {
+          "name": "life cage button closes native window after persistence",
+          "db": [
+            [
+              "9b9cb88c-47ba-4680-8477-1f20730dea07",
+              "25fa53b1-8d12-4947-9142-76461f5f1de0",
+              "local-owner",
+              "walk",
+              0,
+              0,
+              "2026-10-31 10:52:40",
+              "2026-10-31 10:54:52"
+            ],
+            [
+              "899af50c-ed6e-47ad-b826-85a11cce5028",
+              "25fa53b1-8d12-4947-9142-76461f5f1de0",
+              "local-owner",
+              "sit",
+              0,
+              0,
+              "2026-10-31 10:52:40",
+              "2026-10-31 10:52:40"
+            ]
+          ]
+        }
+      ],
+      "native_close": {
+        "method": "X11 WM_DELETE_WINDOW actual native protocol, not unauthorized Tauri close IPC",
+        "before_handles": [
+          "page-5E9083C8-685E-40A9-974E-8871B153AD8B",
+          "page-770E3F8E-2563-4EB7-98E3-C958ECBB9AC9"
+        ],
+        "after_handles": [
+          "page-770E3F8E-2563-4EB7-98E3-C958ECBB9AC9"
+        ],
+        "active_rows_after_close": 0,
+        "passed": true
+      },
+      "native_menu": {
+        "method": "native right-click + GTK menu keyboard selection; no IPC mocks",
+        "snapshot_after_sleep": {
+          "revision": 4,
+          "state": "sleeping"
+        },
+        "passed": true
+      },
+      "native_drag": {
+        "method": "XTest actual OS pointer events on real product DragHandle under xfwm4",
+        "before": {
+          "x": 80,
+          "y": 80,
+          "width": 200,
+          "height": 200
+        },
+        "after": {
+          "x": -176,
+          "y": -176,
+          "width": 200,
+          "height": 200
+        },
+        "passed": true
+      },
+      "restart": {
+        "source_sha": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
+        "kind": "real Linux Tauri wry WebKitWebDriver on isolated Xvfb :97; real product IPC and SQLite",
+        "steps": [
+          {
+            "name": "native OS context menu routed Sleep to B",
+            "snapshot": {
+              "revision": 4,
+              "state": "sleeping"
+            }
+          },
+          {
+            "name": "native menu action preserves other pet state"
+          },
+          {
+            "name": "native drag separately verified",
+            "method": "XTest actual OS pointer events on real product DragHandle under xfwm4",
+            "before": {
+              "x": 80,
+              "y": 80,
+              "width": 200,
+              "height": 200
+            },
+            "after": {
+              "x": -176,
+              "y": -176,
+              "width": 200,
+              "height": 200
+            },
+            "passed": true
+          },
+          {
+            "name": "native find-pet UI recovers offscreen dragged window",
+            "rect": {
+              "x": 540,
+              "y": 412,
+              "width": 200,
+              "height": 200
+            }
+          },
+          {
+            "name": "native UI persists independent startup defaults",
+            "defaults": [
+              [
+                "Native Day45 A",
+                1
+              ],
+              [
+                "Native Day45 B",
+                0
+              ]
+            ]
+          },
+          {
+            "name": "real process restart restores B and leaves A caged",
+            "restored": [
+              "8d6661bd-8fcd-460f-b38f-3bbfca718891"
+            ],
+            "db": [
+              [
+                "25fa53b1-8d12-4947-9142-76461f5f1de0",
+                0
+              ],
+              [
+                "25fa53b1-8d12-4947-9142-76461f5f1de0",
+                0
+              ],
+              [
+                "8d6661bd-8fcd-460f-b38f-3bbfca718891",
+                1
+              ],
+              [
+                "8d6661bd-8fcd-460f-b38f-3bbfca718891",
+                0
+              ]
+            ]
+          }
+        ],
+        "errors": []
+      },
+      "scope": "actual debug Tauri/Wry native windows under isolated Xvfb97 + xfwm4/WebKitWebDriver; no IPC mocks",
+      "limits": [
+        "virtual Linux X11 desktop, not physical desktop/Windows/macOS packaged acceptance",
+        "software renderer warned unsupported GL; transparency composition not accepted",
+        "autonomous roam disabled; drag moved offscreen then actual find-pet UI recovered it"
+      ],
+      "initial_harness_failures": "wrong table name, enum case, direct-child XPath, W3C pointer drag and unauthorized close IPC are retained in attempt logs; successful slices verified independently"
+    }
+  },
+  "not_accepted": [
+    "Chat original real-signup self-service (403 defect remains until user applies patch)",
+    "physical desktop/native packaged release acceptance across OS",
+    "software-rendered Xvfb transparency composition",
+    "autonomous roaming (disabled)",
+    "real prior-user DB backup upgrade/reconciliation",
+    "legacy ignored Analytics test and unimplemented management UI/API scopes"
+  ],
+  "evidence_sha256": {
+    "native-close.json": "3187df95443d7cbc8e59e4b89bd4c980a7c9f33b0b341e6471e47d73a69d9690",
+    "native-final.log": "298934b3be7213d148c69935cf4d861cd3580e8cc2a1330d0e60706bd9b6f4dd",
+    "chat-permission-id-fix.patch": "576c0171a9f068c01690524adb1419894b9c593de4fefbbac7fde372e7561924",
+    "browser-results.json": "aeaac2ff49646ecc8ea3a00b4bee4df2f1a79c53c50d1fb644f076d49f9229ff",
+    "browser-run.log": "d5c2459cad74c96703534864d48388464638c5bd8bc47b703c42910f71fbdfc4",
+    "browser-chat-final.cjs": "ca502ac76a01dcbecd256153f6b3c46e7db93f5d4947900e8393a90b8a4215a0",
+    "menu-check.py": "7902ac37a88fa78d49204ce6a94d10cfef77f83ab9f51e9f4d950453422850bf",
+    "chat-raw-room.png": "8c6ee70061db54dbd997a3beac65e0ebeb5a3976deea1e99328cdedf3ff5ff8d",
+    "cache-cleanup.json": "113059ce484f7a979b4483063285b7f071c026b54945b948ab865f7e2cacb1c7",
+    "browser.cjs": "dc6f5ebe631f13a7c6efa371950eaba4c11f9912ebf986d9b027e6cbea082b28",
+    "pet-frontend-build-retry.log": "ec261e1875520cc2199423783140186f64d8f1fa2f2c0423f5eeac62ad9332e5",
+    "native-real-drag.py": "bd5c51b31918351d80501be8252f9f2b9d88db0cc2f6493ab00c718741a158d5",
+    "native-drag.json": "fae49885482d017127dd2f9b601610fd3ffc7da1003aab779cfed2991acc33ed",
+    "native-menu.json": "25d379b9e0209c2e9a4cf2440c44feae245cb3ea34a82c62c5e996702bf59513",
+    "native-real-drag.log": "db50c6b32ce948732b96d1f5f55f354e84712ccbffc1e597eafe3d940134da01",
+    "pet-native-menu.png": "32546b1f8f3dd131dba01ed382d5a4e3d848d4e183999cdc309c437ba1cc4800",
+    "stopped-processes.json": "8a1156feb0cbb740adf14f0a506245f034eb09937bab3b31222f02536205d018",
+    "chat-patch-validation.json": "66fc94c54b817fa2f501fdc0515b73fbf54cbd19e30f731e0d19f46de579d747",
+    "native-retry.log": "3bcd74dfb19a0831b66b33479c78fcd8cf39d57e0fac7e4c6dda05ec33a696c4",
+    "menu-check.log": "e014243feac14a3cb9fea4d69a26baab6e6df711b940affa1dc368e4128a39e7",
+    "analytics-admin.png": "d36825fd5ed0e72b28b2c7459acba04bd8529eee1e41213eac0480c994dbbe83",
+    "native-close.py": "76af1544b95bcd22d4e6d3062566afb592ce0f14956e469046318fe5842361f2",
+    "pet-native-build.log": "94f1e893e6ae644f0b283bf59feebdb589637d2c0c8d63a2b26f26c0ff8b7296",
+    "native-extra-retry.log": "412322997c132957583e19358870dcac5decc1f09ad12b82281f6749c794965d",
+    "analytics-build.log": "342af32144dff6da605d3653a1155c45f7328d8a34b365752a73e7f25318467f",
+    "pet-native-life.png": "881691701097130210864457ae8ca997d48839ab9a57a3603ab434e993f6577b",
+    "accepted-scopes.json": "07e3210046bffe903a37a13249aa59149fc2ac69d762f65fe85152fd6c436322",
+    "chat-signup-red.log": "96dab2017eb0913d686bc3021c1b926f21aea3998ece76c9e4a7b8b93b8a3bde",
+    "native-restart-accepted.log": "938b6e6a40b8cdb56a1dce29b57256206ec61303ff8b210abb5d74141c22c948",
+    "chat-candidate-room.png": "b52871a66a5f36c334de010549fe3752dc545631ea9f7e3418e645589193cfb6",
+    "chat-fixed-regression.log": "ff8682c7598ef8c9a25b891db9656c2021d9043ae84bb938bb9f4fbac271a799",
+    "pet-native-restarted.png": "7e24a41640b720cad0f165ed0966d2c373c671d1cac4ec73ebd5e5164df1355b",
+    "chat-fixed-leptos-build.log": "11b56f3f4eaa3278c49fd9a35dd977b283787cf6dbe30f93c8a7b8750a272c21",
+    "chat-raw-profile403.png": "3878570f4a62a0d65f57cf1754e0269e56ec797f4e36e26b44c172eb6e800401",
+    "native-run.log": "868e4515272c12960c3bf398269fca56a15b98697a0e8208680b14017eb1f7c0",
+    "pet-frontend-build.log": "db3a86165db664e0eed862a259bb4427bf0f710967421eda6efba57c2dd44ff5",
+    "browser-chat-final.log": "39214172e69d79fe65e3144c3162901cbca8b826526a7ccdef86a7a1070c1287",
+    "native-restart-results.json": "a9436d2edd30f47f8f9efc64c239a8d57974b0c108c111849fdbeffae9d48619",
+    "native-extra.log": "46c081973b8177fe7fc3a3185fb336badfbe4e32720b8fef839f3b7667913f1d",
+    "browser-pnpm-lock.yaml": "b8bb6c2f562b2387bdbb9eab0dc940745237adb2e6d7a8b6ff6cd54508cac123",
+    "native-restart.py": "5ce2e76d9f6e3f4ce7a2fd659ef3ae0388145fb1ddf9045866d4dd47476cee78",
+    "native-results.json": "e4206320b64864bb7bc5f063efe745263233643517d97b01fee72a1107a645e1",
+    "chat-candidate-browser-results.json": "0f2bf2119a2d2a8ddbb8956e18b3bf2d0235141199c95f8c91b2754f5c360e81",
+    "native.py": "2f10edc1ce647ae122ae3bb990d5aee6a9b66a64d5812a4bb1a40e738a959a8e",
+    "browser-package.json": "0eb7dd81762b3dba1dd02ca8ab466292ea4e156b8985b0b8c7e50727f754fb32",
+    "chat-build.log": "7a4e73f97edf007b434bc454ca3442a45f3792d993112556cb1ddf44ae82995a",
+    "analytics-viewer-tree.png": "04ab44dd76dad3b1d643419512e3293e95733a06f65f3f1e0c82e2bb7c9a59f5",
+    "cleanup.json": "404d5dca4f0e4da8b7a35ccb37f6b79e8cbea73efcfcf084847704d957d708b7"
+  },
+  "gate1": true,
+  "gate2": false,
+  "next_day": {
+    "chat": 46,
+    "pet": 46,
+    "analytics": 46
+  },
+  "fifo_changed": false,
+  "last_full_comparison_changed": false,
+  "references": [
+    "https://v2.tauri.app/develop/tests/webdriver/"
+  ]
+}

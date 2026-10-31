@@ -1,0 +1,12 @@
+{
+  "method": "X11 WM_DELETE_WINDOW actual native protocol, not unauthorized Tauri close IPC",
+  "before_handles": [
+    "page-5E9083C8-685E-40A9-974E-8871B153AD8B",
+    "page-770E3F8E-2563-4EB7-98E3-C958ECBB9AC9"
+  ],
+  "after_handles": [
+    "page-770E3F8E-2563-4EB7-98E3-C958ECBB9AC9"
+  ],
+  "active_rows_after_close": 0,
+  "passed": true
+}

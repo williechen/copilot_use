@@ -1,0 +1,48 @@
+{
+  "source_sha": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
+  "kind": "real Chromium against corrected isolated Chat candidate on a7; no request mocks",
+  "steps": [
+    {
+      "project": "chat",
+      "name": "anonymous public homepage hydrates",
+      "wasmErrors": []
+    },
+    {
+      "project": "chat",
+      "name": "browser registration persists without automatic login"
+    },
+    {
+      "project": "chat",
+      "name": "member login and actual create-room form persists a room",
+      "room": "2a24f5fc-1dd2-4c5b-ab86-d54c1d4abcad"
+    },
+    {
+      "project": "chat",
+      "name": "hydrated room establishes real WebSocket and sends persisted message",
+      "pageErrors": []
+    },
+    {
+      "project": "chat",
+      "name": "live exclusion blocks existing socket and subsequent room SSR",
+      "socketStatus": "已斷線，請重新進房",
+      "roomStatus": 403
+    },
+    {
+      "project": "chat",
+      "name": "self-profile UI changes only current Session subject"
+    },
+    {
+      "project": "chat",
+      "name": "member action deny removes create-room UI without removing self actions"
+    },
+    {
+      "project": "chat",
+      "name": "self-password UI revokes old Session; new password re-login succeeds"
+    },
+    {
+      "project": "chat",
+      "name": "anonymous room navigation preserves canonical login-return target"
+    }
+  ],
+  "errors": []
+}
