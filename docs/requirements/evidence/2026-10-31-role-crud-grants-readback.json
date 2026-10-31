@@ -1,0 +1,24 @@
+{
+  "commit": "daf0dc219d72e2603fbba8b23f637ae20e3e7631",
+  "requirement": "role CRUD actions must each be persisted in uac_role_acl using role_id and corresponding uac_acl action acl_id",
+  "readback": [
+    {
+      "path": "docs/requirements/ANALYTICS_ACL.md",
+      "blob_sha": "f05822efe046b51dc5199503f73c524c6714fda4",
+      "full_text_equal": true,
+      "sha256": "ae8308d898262fbca345dc8e2628a094cb56597dc49ba563c473e162c5639277"
+    },
+    {
+      "path": "docs/requirements/USER_FLOWS.md",
+      "blob_sha": "b702f8ae0f2e79d3c588607621663cde621cb1ee",
+      "full_text_equal": true,
+      "sha256": "e036940e228156ef94a4d0b71c48d51de27778589594088dd2863edcd6b718dc"
+    }
+  ],
+  "scope": "requirements only",
+  "product_written": false,
+  "product_tests_run": false,
+  "next_day_changed": false,
+  "fifo_changed": false,
+  "last_full_comparison_changed": false
+}
