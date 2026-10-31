@@ -1,3 +1,19 @@
+# Day45 最後來源追驗｜Chat
+
+產品`d784f32c6bff86249dd84fd4294d055a4c774a49`。最新d784產品Chat原樣重新執行44項測試通過；其Chat子樹與28相同。WASM check在28通過，未將該次WASM結果改標成新SHA實跑。原f6完整patch已採用，不能重套。
+
+[本回合完整證據](../../../source-review/day45-2026-10-31-d784f32/README.md) · [精確SHA／實測區分](../../../source-review/day45-2026-10-31-d784f32/latest-source.json)。本段優先於以下28初次驗證及更早歷史原文。
+
+---
+
+# Day45 最新驗證補記｜Chat｜2026-10-31
+
+產品精確SHA `28b71b67907062f804b2358c41fde349c9b18ca9`；本補記優先於下方歷史候選敘述。產品已採用Day45內容；本回合對28原樣跑Chat SSR回歸44通過、WASM hydrate check exit0。會員只限本人、三項action及既有排除／Session斷言承接。原文的f6完整patch現在僅供歷史重現，勿對28重套。沒有新增功能patch／Refactor計功；瀏覽器互動與完整Gate2仍未驗收。[實測log](../../../source-review/day45-2026-10-31-d784f32/chat-product.log)、[WASM](../../../source-review/day45-2026-10-31-d784f32/chat-product-wasm.log)。
+
+[三案驗證／修正條件](../../../source-review/day45-2026-10-31-d784f32/README.md) · [命令／exit與限制](../../../source-review/day45-2026-10-31-d784f32/review.json) · [清暫存紀錄](../../../source-review/day45-2026-10-31-d784f32/cleanup.json)。本次不新增Day；next_day仍46，FIFO與last_full_comparison未變；原Red／Green／獨立Refactor與歷史證據保留。
+
+---
+
 # Chat Day45 r2｜會員 action 與只限本人的資料／密碼管理
 
 ## 目標、精確來源與最後需求
