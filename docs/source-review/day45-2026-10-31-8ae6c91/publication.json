@@ -1,0 +1,108 @@
+{
+  "source_sha": "8ae6c91e07b557e85c5a0424d8146030fdce8061",
+  "article_commit": "4d23e7baa4323101be01b876b9101ce3dd592aff",
+  "readback": [
+    {
+      "path": "docs/source-review/day45-2026-10-31-8ae6c91/README.md",
+      "blob_sha": "28b9aa28ca3d4ccf705bebaba20a6f2fae695568",
+      "sha256": "94646e680e21814333b8373ec3e96ddc392f7b6f19469d1ad35a80092e3d2cf8",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-8ae6c91/browser-results.json",
+      "blob_sha": "bb80ac52b73a328adfa0df6e2a657a2851158ff8",
+      "sha256": "96c0481379dd7a355e90cac1f1dd60a9c17efec74713bdead6e8f553240ed39e",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-8ae6c91/browser.cjs",
+      "blob_sha": "d6744d4a1c5de85f7930a917e65702affb40db44",
+      "sha256": "9720b6f7e170ef40fbf377ad31502be2f14fc144e9c4e23e746661c2192bafa8",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-8ae6c91/chat-regression.log",
+      "blob_sha": "a6201d5876e4489f4b55a667a77139e73d62fd85",
+      "sha256": "e83ab6102709db2935291e3a2b54abce2a29f5d95110d024a50ba2628d7196b9",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-8ae6c91/browser.log",
+      "blob_sha": "8cb22771f307acc9e467b79316bab9ac7018ec71",
+      "sha256": "5be19bc0406a51af78e513b18f11b79c88d4cf4464592850d2c7ee7f349e85a4",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-8ae6c91/review.json",
+      "blob_sha": "2cb6db60abbf0aa5c1c588a5eb7bc8ef10de63c7",
+      "sha256": "736b94a91974ec8f9efb9d75586a8019a7804033e9b8b50aed783f4b98ac20d7",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-8ae6c91/browser-install.log",
+      "blob_sha": "3e95f9795837dde42acb19b690da040928b99f5c",
+      "sha256": "e17b94085fd654903878795e36852a52679df8d71022b53972cd4d206ef707db",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-8ae6c91/source.json",
+      "blob_sha": "f1317c5e85e2cb9dbf8e815a87e978947228d832",
+      "sha256": "ae865e2b7f6b1864b01ce286c7bbf4904c1b2f0051f185b6e7a3eb44440bc356",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-8ae6c91/chat-room.png",
+      "blob_sha": "21464fbdb7f5c76310292c50e8f348c2f0d8ddbb",
+      "sha256": "8b4f53ccb641fe38aeb4b5e1738bf9fc674273d87b0a2132dc72a55b50e10e51",
+      "complete_remote_readback": true,
+      "binary": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-8ae6c91/chat-build.log",
+      "blob_sha": "e81b1cc11354e4b76ec70799c87bf5c05d4da9ec",
+      "sha256": "00a41c1d4ffc3e5a2de0ce97eadcf5d623fe3ad7913028a58745edefa77cf7d5",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-8ae6c91/cleanup.json",
+      "blob_sha": "0266467f8765bf08dc4c341bb853e5ff1fb86e96",
+      "sha256": "13765262852a2ad5ed0ed2291416061e6bfcf51ff8f7788c0cc8cec713785402",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/teaching/daily/day-45/chat-r2.md",
+      "blob_sha": "884c95319a822540aba1ff6f0f7bf374974b3695",
+      "sha256": "ee061505a517375fcc81e72bcc2e9729d69ed4148ae5637015ab27ac3076f169",
+      "complete_remote_readback": true,
+      "binary": false
+    }
+  ],
+  "expected_sync_parent": "4d23e7baa4323101be01b876b9101ce3dd592aff",
+  "expected_next_day": {
+    "chat": 46,
+    "pet": 46,
+    "analytics": 46
+  },
+  "day_advance": false,
+  "fifo_changed": false,
+  "last_full_comparison_changed": false,
+  "product_written": false,
+  "product_unmodified": true,
+  "product_tests_passed": 45,
+  "product_tests_failed": 0,
+  "product_browser_steps": 9,
+  "product_browser_exit": 0,
+  "new_patch_required": false,
+  "gate1": true,
+  "gate2": false
+}

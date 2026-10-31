@@ -1,3 +1,5 @@
+> 最新8ae6c91e：**Chat產品原樣45項回歸／9段真實瀏覽器旅程均通過，exit0**；前次授權ID與CSRF測試補正均已採用，無需新patch。[精確來源／命令／log／截圖](https://github.com/williechen/copilot_use/blob/main/docs/source-review/day45-2026-10-31-8ae6c91/README.md)。Analytics／Pet子樹未改，保留原a7驗收證據。三案next_day仍46，不加Day、不改FIFO與last_full_comparison；完整Gate2尚待實際舊DB備份、實體／打包桌面及其他已列範圍。本段取代較早「Chat仍1失敗」狀態，歷史保留。
+
 > 最新448dc72f：Chat授權ID修正已採用，**產品原樣9段真實瀏覽器旅程通過**；只剩強制改密碼測試把CSRF標籤誤改成perm_id，原樣44通過／1失敗，單檔一行測試補正後45通過。勿重套舊runtime patch。[精確來源／完整補正／log／截圖](https://github.com/williechen/copilot_use/blob/main/docs/source-review/day45-2026-10-31-448dc72/README.md)。Analytics／Pet子樹未變，保留a7原SHA驗收證據；next_day仍46，FIFO與last_full_comparison不變，完整Gate2=false。本段取代較早「Chat本人資料頁403」狀態，歷史保留。
 
 > 真GUI驗收補記（精確a7a8267f）：Analytics 11段真Chromium旅程通過；Pet 真Tauri／WebKit原生虛擬桌面的200×200、六姿態、多窗、原生菜單、關閉、拖曳／找回與重啟已驗。Chat真註冊預設角色本人資料頁403，授權ID與migration不符；補正候選45項測試／9段瀏覽器通過，產品仍待使用者套patch。[完整證據／截圖／patch與限制](https://github.com/williechen/copilot_use/blob/main/docs/source-review/day45-gui-2026-10-31-a7a8267/README.md)。next_day仍46，不加Day；完整Gate2=false。本段取代下方「瀏覽器／桌面尚未跑」及較早廣泛通過描述，保留歷史。
