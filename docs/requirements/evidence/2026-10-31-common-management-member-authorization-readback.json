@@ -1,0 +1,57 @@
+{
+  "commit": "feff9fc5ad7fe186d0cbb238534e0ea11f41ca44",
+  "scope": "shared management and member authorization requirements only",
+  "confirmed": [
+    "Chat and Analytics management use the same authorization logic",
+    "mbr_perm defines permissions; mbr_role_perm stores role grants",
+    "existing mbr_user_perm stores member-specific overrides"
+  ],
+  "source_schema": {
+    "commit": "f6a04015188da2155af6c264d0e6326e6a922dca",
+    "path": "chat_apps/migrations/20261018073931_create_auth_user.sql",
+    "blob_sha": "7496c525272e85f4f8ea719ae860f849b32b5848"
+  },
+  "readback": [
+    {
+      "path": "docs/requirements/ANALYTICS_ACL.md",
+      "blob_sha": "92bd2b24a3dbc9b1da91107cc49c3afe2fc95106",
+      "full_text_equal": true,
+      "sha256": "a1aedc0b81964c6a1788c9dddbfe478a850a547a4f246e39ab5eeea106ff03c8"
+    },
+    {
+      "path": "docs/requirements/USER_FLOWS.md",
+      "blob_sha": "c7ac4c824aad12bad849c3f0013842647bafe9df",
+      "full_text_equal": true,
+      "sha256": "0209140ec356dffc80beb75f1cd741ea979b635fdceccbaaec04acf043b1d269"
+    },
+    {
+      "path": "docs/requirements/AUTHENTICATION.md",
+      "blob_sha": "9e24435c7411ac2a140fb22589c216547ffb6290",
+      "full_text_equal": true,
+      "sha256": "f31f3ec66d7b8b6549fb67cd97559dd21933487cf945c6e5ce583a2a57d8c48a"
+    },
+    {
+      "path": "docs/SYSTEM_ARCHITECTURE.md",
+      "blob_sha": "b683fe4512a939d349a826afc1bc4a752d1b6b1f",
+      "full_text_equal": true,
+      "sha256": "536641dbb0c6206cfcaf53cc48b2787a8094a8d515eb091c1edcd73630a14786"
+    },
+    {
+      "path": "docs/COMMON_LEARNING_RULES.md",
+      "blob_sha": "ebb4a19d1aa93fa37dc80c77c90eae1eb9348c2a",
+      "full_text_equal": true,
+      "sha256": "17ef208e71fc040a613ea475c40a5b8c18217d8be6927d2c9d3041cf0e35d89e"
+    },
+    {
+      "path": "docs/requirements/COMMON_AUTHORIZATION.md",
+      "blob_sha": "d9d4d3761f902c922d1935d29c5b0926e276c4f9",
+      "full_text_equal": true,
+      "sha256": "072f5a5c0398cec57a0794cad3c8301df9fa52d85d5a041fd85292623c6a9358"
+    }
+  ],
+  "product_written": false,
+  "product_tests_run": false,
+  "next_day_changed": false,
+  "fifo_changed": false,
+  "last_full_comparison_changed": false
+}
