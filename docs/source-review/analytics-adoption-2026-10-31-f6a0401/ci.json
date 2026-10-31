@@ -1,0 +1,62 @@
+{
+  "observed_at": "2026-10-31T08:21:40.032557+08:00",
+  "runs": [
+    {
+      "name": "Test All",
+      "id": 41149316872,
+      "status": "in_progress",
+      "conclusion": null,
+      "url": "https://github.com/williechen/rust_ai_ring/actions/runs/41149316872",
+      "head_sha": "f6a04015188da2155af6c264d0e6326e6a922dca"
+    },
+    {
+      "name": "Rust Desktop Pet",
+      "id": 41149316840,
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/williechen/rust_ai_ring/actions/runs/41149316840",
+      "head_sha": "f6a04015188da2155af6c264d0e6326e6a922dca"
+    },
+    {
+      "name": "Node",
+      "id": 41149316858,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/williechen/rust_ai_ring/actions/runs/41149316858",
+      "head_sha": "f6a04015188da2155af6c264d0e6326e6a922dca"
+    },
+    {
+      "name": "Persistence",
+      "id": 41149316874,
+      "status": "in_progress",
+      "conclusion": null,
+      "url": "https://github.com/williechen/rust_ai_ring/actions/runs/41149316874",
+      "head_sha": "f6a04015188da2155af6c264d0e6326e6a922dca"
+    },
+    {
+      "name": "Rust AI Chat",
+      "id": 41149316825,
+      "status": "in_progress",
+      "conclusion": null,
+      "url": "https://github.com/williechen/rust_ai_ring/actions/runs/41149316825",
+      "head_sha": "f6a04015188da2155af6c264d0e6326e6a922dca"
+    },
+    {
+      "name": "Rust Analytics",
+      "id": 41149316871,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/williechen/rust_ai_ring/actions/runs/41149316871",
+      "head_sha": "f6a04015188da2155af6c264d0e6326e6a922dca"
+    },
+    {
+      "name": "Cargo workspaces",
+      "id": 41149316860,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/williechen/rust_ai_ring/actions/runs/41149316860",
+      "head_sha": "f6a04015188da2155af6c264d0e6326e6a922dca"
+    }
+  ],
+  "note": "Snapshot only; no claim all CI passed; source runtime unchanged"
+}

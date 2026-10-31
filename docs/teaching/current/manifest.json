@@ -191,8 +191,8 @@
         "blob_sha": "82ff49033620fc0da14a178ebadca183d81e9484",
         "sha256": "67412dc6a6fa3791a84a782a366df73144964964cda41c54886d41fe7879a88d"
       },
-      "latest_product_review": "docs/source-review/analytics-adoption-2026-10-31-63b1f93/README.md",
-      "application_at_latest_source": "historical64 patch must be rebased; schema only adopted at63; do not apply full r3 on63"
+      "latest_product_review": "docs/source-review/analytics-adoption-2026-10-31-f6a0401/README.md",
+      "application_at_latest_source": "historical64 full patch not applicable to f6; separate password page superseded by common flow requirement"
     }
   ],
   "current_article_paths": {
@@ -251,10 +251,10 @@
     "complete": false,
     "evidence": "docs/source-review/gate2-sql-2026-10-31/README.md",
     "native_browser_source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
-    "latest_observed_source_sha": "63b1f936b32f131f0f801bb4f36b3163f88c91fa",
-    "latest_source_review": "docs/source-review/analytics-adoption-2026-10-31-63b1f93/README.md"
+    "latest_observed_source_sha": "f6a04015188da2155af6c264d0e6326e6a922dca",
+    "latest_source_review": "docs/source-review/analytics-adoption-2026-10-31-f6a0401/README.md"
   },
-  "latest_product_sha": "63b1f936b32f131f0f801bb4f36b3163f88c91fa",
+  "latest_product_sha": "f6a04015188da2155af6c264d0e6326e6a922dca",
   "previous_articles": [
     {
       "project": "chat",
@@ -628,11 +628,15 @@
   "latest_revision_evidence": "docs/teaching/daily/day-45/publication-r3.json",
   "product_adoption": {
     "analytics": {
-      "source_sha": "63b1f936b32f131f0f801bb4f36b3163f88c91fa",
+      "source_sha": "f6a04015188da2155af6c264d0e6326e6a922dca",
       "schema_definition": true,
       "runtime_acl": false,
-      "review": "docs/source-review/analytics-adoption-2026-10-31-63b1f93/README.md",
-      "full_gate2": false
+      "review": "docs/source-review/analytics-adoption-2026-10-31-f6a0401/README.md",
+      "full_gate2": false,
+      "security_page_default_grant_fixed": true,
+      "shared_password_no_separate_page_confirmed": true,
+      "shared_password_flow_implemented": false,
+      "previous_review": "docs/source-review/analytics-adoption-2026-10-31-63b1f93/README.md"
     }
   }
 }

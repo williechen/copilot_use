@@ -1,6 +1,6 @@
 # 目前教學與驗收狀態
 
-產品最新來源 `63b1f936b32f131f0f801bb4f36b3163f88c91fa`，本次只新增Analytics ACL schema；runtime尚未接線，完整Gate2=false。[新來源採用核對與命令](../../source-review/analytics-adoption-2026-10-31-63b1f93/README.md)。
+產品最新來源 `f6a04015188da2155af6c264d0e6326e6a922dca`，本次只調整Analytics SQL角色預設；runtime尚未接線，共用修改密碼、不另設一頁的新需求尚未實作，完整Gate2=false。[最新採用核對](../../source-review/analytics-adoption-2026-10-31-f6a0401/README.md)。
 
 ## 先前來源驗證快照（不追認63b1f93）
 
@@ -36,3 +36,7 @@ Analytics階層修訂候選另驗page-only禁止create、獨立CRUD授權、父�
 ## Analytics最新schema採用（63b1f93）
 
 本次僅採用SQL，runtime尚未接線；隔離raw SQL七份通過，3／9／36節點，管理憑證page漏admin預設grant。原候選62項仍屬64eff527加r3 patch，不是本SHA測試。[命令、限制與向前補正](../../source-review/analytics-adoption-2026-10-31-63b1f93/README.md)。Gate2=false。
+
+## f6a0401最新採用與新需求
+
+管理員security page預設grant已修正；viewer不再有accounts-read／password-update。隔離raw SQL七份通過，3／9／36節點。runtime仍未接線；共用修改密碼不單獨一頁的需求已確認、未實作。[證據](../../source-review/analytics-adoption-2026-10-31-f6a0401/README.md)。既有63／64快照及候選結果仍屬原來源，不追認新SHA。

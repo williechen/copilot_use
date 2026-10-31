@@ -9,3 +9,5 @@
 三案文件Gate1完成，expected next_day45→46僅一次。產品仍64eff527，候選未套用，完整Gate2=false。Analytics原r1／r2及commit保留；本r3為同Day修訂，不再加一。FIFO與last_full_comparison原值保留。
 
 **最新來源注意：** 產品已到63b1f93，只採用並調整了schema。上述r3完整patch仍是64eff527歷史重現，不能直接套到最新來源；下一份完整方案需重新接線並保留使用者配置。[採用核對／向前補正](../../../source-review/analytics-adoption-2026-10-31-63b1f93/README.md)。
+
+**最新接續：** f6a0401已修正管理憑證page預設grant並縮減viewer角色；「共用修改密碼、不單獨一頁」已取代r3獨立密碼頁候選。原r3只供64eff527重現，不能直接套到f6a0401。[最新採用／需求](../../../source-review/analytics-adoption-2026-10-31-f6a0401/README.md)。

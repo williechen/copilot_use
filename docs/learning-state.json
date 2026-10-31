@@ -411,8 +411,8 @@
     "product_repository_read_only": true,
     "day_advance": false
   },
-  "reference_sha": "63b1f936b32f131f0f801bb4f36b3163f88c91fa",
-  "reference_scope": "63b1f93 Analytics schema-only adoption; fresh raw SQL verified; runtime ACL not adopted; historical candidate results retain original source",
+  "reference_sha": "f6a04015188da2155af6c264d0e6326e6a922dca",
+  "reference_scope": "f6a0401 SQL role-default revision; seven raw SQL migrations verified; runtime/shared password refactor not adopted",
   "current_article_paths": {
     "chat": "docs/teaching/daily/day-45/chat.md",
     "pet": "docs/teaching/daily/day-45/pet.md",
@@ -485,11 +485,11 @@
     "analytics_roles_source_acl_implemented": false,
     "actual_old_pg_backup_available": false,
     "manual_desktop_acceptance": false,
-    "latest_observed_source_sha": "63b1f936b32f131f0f801bb4f36b3163f88c91fa",
-    "latest_source_review": "docs/source-review/analytics-adoption-2026-10-31-63b1f93/README.md",
+    "latest_observed_source_sha": "f6a04015188da2155af6c264d0e6326e6a922dca",
+    "latest_source_review": "docs/source-review/analytics-adoption-2026-10-31-f6a0401/README.md",
     "complete": false
   },
-  "latest_product_sha": "63b1f936b32f131f0f801bb4f36b3163f88c91fa",
+  "latest_product_sha": "f6a04015188da2155af6c264d0e6326e6a922dca",
   "current_daily_schedule": {
     "date": "2026-10-31 Asia/Taipei",
     "automation_id": "6acd967c15fc8191ade8407954c5b354",
@@ -725,8 +725,8 @@
           "blob_sha": "82ff49033620fc0da14a178ebadca183d81e9484",
           "sha256": "67412dc6a6fa3791a84a782a366df73144964964cda41c54886d41fe7879a88d"
         },
-        "latest_product_review": "docs/source-review/analytics-adoption-2026-10-31-63b1f93/README.md",
-        "application_at_latest_source": "historical64 patch must be rebased; schema only adopted at63; do not apply full r3 on63"
+        "latest_product_review": "docs/source-review/analytics-adoption-2026-10-31-f6a0401/README.md",
+        "application_at_latest_source": "historical64 full patch not applicable to f6; separate password page superseded by common flow requirement"
       }
     ],
     "pending_publication": null,
@@ -745,11 +745,25 @@
   "latest_revision_evidence": "docs/teaching/daily/day-45/publication-r3.json",
   "product_adoption": {
     "analytics": {
-      "source_sha": "63b1f936b32f131f0f801bb4f36b3163f88c91fa",
+      "source_sha": "f6a04015188da2155af6c264d0e6326e6a922dca",
       "schema_definition": true,
       "runtime_acl": false,
-      "review": "docs/source-review/analytics-adoption-2026-10-31-63b1f93/README.md",
-      "full_gate2": false
+      "review": "docs/source-review/analytics-adoption-2026-10-31-f6a0401/README.md",
+      "full_gate2": false,
+      "security_page_default_grant_fixed": true,
+      "shared_password_no_separate_page_confirmed": true,
+      "shared_password_flow_implemented": false,
+      "previous_review": "docs/source-review/analytics-adoption-2026-10-31-63b1f93/README.md"
+    }
+  },
+  "requirements_confirmations": {
+    "shared_change_password_2026_10_31": {
+      "user_confirmation": "共用修改密碼 不單獨一頁",
+      "dedicated_page": false,
+      "dedicated_acl_page": false,
+      "preserve_first_login_password_change": true,
+      "implemented": false,
+      "requirements_document": "docs/requirements/AUTHENTICATION.md"
     }
   }
 }

@@ -1,0 +1,36 @@
+{
+  "source_sha": "f6a04015188da2155af6c264d0e6326e6a922dca",
+  "raw_fresh_sql_migrations": 7,
+  "exit_codes": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "category": 3,
+  "page": 9,
+  "action": 36,
+  "observed_grants": {
+    "admin_security_page": true,
+    "viewer_accounts_read": false,
+    "viewer_password_update": false,
+    "viewer_password_read": true
+  },
+  "runtime_adopted": false,
+  "gate2": false,
+  "not_run": [
+    "SQLx migration runner/checksum",
+    "old DB upgrade",
+    "local Rust full tests",
+    "browser/new ACL CRUD runtime"
+  ],
+  "password_requirement_confirmed": "shared change-password flow; no separate page or ACL page",
+  "next_day": {
+    "chat": 46,
+    "pet": 46,
+    "analytics": 46
+  }
+}

@@ -11,7 +11,7 @@
 ```text
 category：會員管理
 ├─ page：帳號管理 → action：create/read/update/delete
-└─ page：自身密碼 → action：create/read/update/delete
+└─ 本人修改密碼：共用驗證流程，不另列page／CRUD ACL
 category：資訊分析
 └─ page：分析後台、Chat來源、Pet來源、彙總查詢、類型查詢、CSV匯出（各自有CRUD action）
 category：認證管理
@@ -38,3 +38,7 @@ category：認證管理
 ## 使用者已採用schema的頁面配置
 
 63b1f93使用analytics-token作認證管理ID；自身密碼page移至會員管理，管理憑證security page歸認證管理。採此來源配置接續方案，不用舊候選的analytics-auth／密碼歸屬覆寫。[採用核對](../source-review/analytics-adoption-2026-10-31-63b1f93/README.md)。schema入庫與runtime實作／DB執行分別判定。
+
+## 最新確認：移除獨立自身密碼page的設計
+
+使用者確認「共用修改密碼，不單獨一頁」。因此analytics-password與其CRUD不是目標ACL節點；本人／首次修改走共用驗證流程，不需viewer取得帳號管理update。管理他人帳密仍按管理page/action授權。目前f6a0401 SQL尚有此舊節點，後續需作版本化相容處理，不能把需求確認冒稱已從產品移除。[安全規則](AUTHENTICATION.md)。

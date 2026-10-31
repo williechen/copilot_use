@@ -38,3 +38,7 @@
 - Chat／Pet 各用獨立服務身分與權限，採管理者核准配對 → 短效憑證 → 自動續期／輪替 → 可撤銷。服務憑證不能代替人員後台登入。
 
 [目前狀態](../teaching/current/STATUS.md) · [UI 詳細驗收](../UI_ALIGNMENT_REQUIREMENTS.md) · [服務憑證](../SERVICE_CREDENTIAL_REQUIREMENTS.md)
+
+### 2026-10-31 修改密碼補充
+
+修改密碼採共用流程，不另作獨立頁或ACL page。本人／首次強制修改與管理員操作他人帳密分開授權，具體安全與Session規則見[共用人員驗證](AUTHENTICATION.md)。此確認取代先前Analytics獨立自身密碼page的候選配置，尚未實作。

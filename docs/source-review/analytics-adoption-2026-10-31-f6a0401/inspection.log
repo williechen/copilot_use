@@ -1,0 +1,15 @@
+ acl_category | count 
+--------------+-------
+ action       |    36
+ category     |     3
+ page         |     9
+(3 rows)
+
+     role_id      |          acl_id           | granted 
+------------------+---------------------------+---------
+ analytics-admin  | analytics-security        | t
+ analytics-viewer | analytics-accounts-read   | f
+ analytics-viewer | analytics-password-update | f
+ analytics-viewer | analytics-password-read   | t
+(4 rows)
+

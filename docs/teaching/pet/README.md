@@ -1,6 +1,6 @@
 # Pet 教學現況
 
-產品來源 `63b1f936b32f131f0f801bb4f36b3163f88c91fa`；本次只新增Analytics階層ACL migration，正式runtime尚未接線。隔離raw SQL確認3 category／9 page／36 action；完整Gate2未通過。來源CI以最新採用紀錄快照為準。
+產品來源 `f6a04015188da2155af6c264d0e6326e6a922dca`；本次調整Analytics SQL角色預設，runtime尚未接線。隔離raw SQL七份通過（3 category／9 page／36 action）。修改密碼已確認採共用流程、不獨立一頁，尚待實作；完整Gate2未通過。
 
 [目前狀態](../current/STATUS.md) · [需求](../../requirements/USER_FLOWS.md) · [規則](../../COMMON_LEARNING_RULES.md) · [來源](../../SOURCE_LAYOUT.md) · [架構](../../SYSTEM_ARCHITECTURE.md)
 
@@ -11,3 +11,5 @@
 [manifest](../current/manifest.json) · [learning-state](../../learning-state.json) · [各案Refactor](../functional-refactoring/PROGRESS.md) · [跨案工程](../../engineering/README.md) · [歷史分包](../../archive/README.md)
 
 [Analytics新來源採用核對與向前補正](../../source-review/analytics-adoption-2026-10-31-63b1f93/README.md)。Day45原r3附件只適用舊64eff527，不可直接套用新63b1f93。
+
+[最新角色預設與共用修改密碼確認](../../source-review/analytics-adoption-2026-10-31-f6a0401/README.md)。next_day三案46不變。

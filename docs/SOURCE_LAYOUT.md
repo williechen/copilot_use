@@ -1,6 +1,6 @@
 # 現行來源與目錄
 
-產品 `rust_ai_ring@63b1f936b32f131f0f801bb4f36b3163f88c91fa`；本地 `/home/willie/Documents/rust_ai_ring`。根目錄沒有 Cargo.toml，必須使用各 workspace manifest。
+產品 `rust_ai_ring@f6a04015188da2155af6c264d0e6326e6a922dca`；本地 `/home/willie/Documents/rust_ai_ring`。根目錄沒有 Cargo.toml，必須使用各 workspace manifest。
 
 | Workspace | package 版本 | 成員／package |
 | --- | --- | --- |
@@ -27,3 +27,5 @@ Analytics：analytics_server/src/main.rs／lib.rs；Leptos Dashboard、Axum HTTP
 [64eff52 SQL更新後最新回歸](source-review/gate2-sql-2026-10-31/README.md)：Pet112／Node12／WASM及四workspace metadata通過；舊native／browser證據仍屬2c7ff8b，完整Gate2未通過。
 
 目前63b1f93只新增Analytics ACL schema：analytics-token認證管理、密碼page歸會員管理、security管理憑證page；其餘runtime仍沿原來源，page／CRUD Adapter尚未採用。[採用證據與限制](source-review/analytics-adoption-2026-10-31-63b1f93/README.md)。舊測試保留原SHA，不追認新來源。
+
+最新f6a0401只調整schema角色預設，管理憑證page grant已補；共用修改密碼、不獨立一頁的新需求尚未接到runtime。[採用核對](source-review/analytics-adoption-2026-10-31-f6a0401/README.md)。歷史測試保留原SHA。
