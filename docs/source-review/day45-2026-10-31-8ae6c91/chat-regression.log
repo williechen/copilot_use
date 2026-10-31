@@ -1,0 +1,138 @@
+   Compiling chat-domain v0.2.45 (/tmp/day45-pass-src/chat_apps/chat_domain)
+   Compiling shared v0.2.45 (/tmp/day45-pass-src/crates/shared)
+   Compiling chat-application v0.2.45 (/tmp/day45-pass-src/chat_apps/chat_application)
+   Compiling chat-persistence v0.2.45 (/tmp/day45-pass-src/chat_apps/chat_persistence)
+   Compiling chat-ui v0.2.45 (/tmp/day45-pass-src/chat_apps/chat_ui)
+warning: unused import: `crate::room_list_state::clear_room_search`
+  --> chat_ui/src/lib.rs:39:5
+   |
+39 | use crate::room_list_state::clear_room_search;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `room_heading` is never used
+   --> chat_ui/src/lib.rs:209:4
+    |
+209 | fn room_heading(id: &str, result: Result<String, String>) -> String {
+    |    ^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `clear_room_search` is never used
+  --> chat_ui/src/room_list_state.rs:55:15
+   |
+55 | pub(super) fn clear_room_search(loaded: bool, rows: &[(String, String)]) -> (String, String) {
+   |               ^^^^^^^^^^^^^^^^^
+
+warning: variants `SignedOut`, `SignedIn`, and `Unavailable` are never constructed
+ --> chat_ui/src/session_entry.rs:4:5
+  |
+2 | pub(super) enum SessionEntry {
+  |                 ------------ variants in this enum
+3 |     Checking,
+4 |     SignedOut,
+  |     ^^^^^^^^^
+5 |     SignedIn,
+  |     ^^^^^^^^
+6 |     Unavailable,
+  |     ^^^^^^^^^^^
+  |
+  = note: `SessionEntry` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis
+
+warning: `chat-ui` (lib) generated 4 warnings (run `cargo fix --lib -p chat-ui` to apply 1 suggestion)
+   Compiling chat-server v0.2.45 (/tmp/day45-pass-src/chat_apps/chat_server)
+    Finished `test` profile [unoptimized] target(s) in 8.57s
+     Running unittests src/lib.rs (/home/willie/Documents/Codex/2026-10-27/referenced-chatgpt-conversation-this-is-an/work/cargo-target/debug/deps/chat_server-874fa1473adb3938)
+
+running 30 tests
+test auth_session::tests::cookie_parser_and_both_csrf_callers_keep_the_same_contract ... ok
+test auth_session::tests::session_adapter_obeys_revocation_and_account_state ... ok
+test http::room_details_tests::invalid_input_and_database_failure_are_distinct ... ok
+test http::room_details_tests::list_rooms_returns_persisted_room ... ok
+test http::room_details_tests::returns_exact_saved_room_without_writing ... ok
+test http::room_http_tests::day35_json_create_rejects_control_names_before_sqlite ... ok
+test http::room_http_tests::database_failure_is_not_created ... ok
+test http::room_http_tests::invalid_room_names_never_write ... ok
+test room_auth::day25_tests::room_page_requires_active_sqlite_session ... ok
+test room_auth::day41_room_return_tests::anonymous_room_link_redirects_but_invalid_room_id_is_rejected ... ok
+test http::room_http_tests::valid_room_returns_201_and_saved_id ... ok
+test room_auth::day25_tests::anonymous_create_is_rejected_while_public_list_is_available ... ok
+test room_path::tests::canonical_room_path_is_fail_closed ... ok
+test room_auth::day44_existing_room_gate_tests::signed_in_room_navigation_rejects_missing_and_allows_saved_room ... ok
+test signin::day34_login_redirect_tests::legacy_login_get_redirects_without_rendering_another_form ... ok
+test room_auth::day45_tests::excluded_member_cannot_enter_but_public_listing_stays_public ... ok
+test signin::day40_session_entry_tests::session_endpoint_checks_active_revoked_and_expired_sqlite_session ... ok
+test signin::day35_account_room_tests::logged_in_account_rejects_newline_without_room_write ... ok
+test signup::day23_correction_tests::day23_invalid_signup_is_rejected_before_db_write ... ok
+test ws::test::accepts_nonblank_content ... ok
+test ws::test::blank_room ... ok
+test ws::test::day36_database_error_fails_closed ... ok
+test ws::test::day36_revoked_session_is_not_active ... ok
+test ws::test::different_room ... ok
+test ws::test::matching_room ... ok
+test ws::test::rejects_blank_content ... ok
+test ws::test::typing_is_only_forwarded_to_connection_room ... ok
+test ws::test::ws_message_requires_room_at_write_time ... ok
+test signup::day22_tests::day22_signup_persists_and_rejects_duplicate ... ok
+test signin::day23_tests::day23_password_login_creates_persisted_session_and_guards_account ... ok
+
+test result: ok. 30 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.93s
+
+     Running unittests src/main.rs (/home/willie/Documents/Codex/2026-10-27/referenced-chatgpt-conversation-this-is-an/work/cargo-target/debug/deps/chat_server-414834a1ac402077)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/day24_signup_complete.rs (/home/willie/Documents/Codex/2026-10-27/referenced-chatgpt-conversation-this-is-an/work/cargo-target/debug/deps/day24_signup_complete-ba974e9e87cda1b9)
+
+running 2 tests
+test day24_signup_completes_without_automatic_login_or_navigation ... ok
+test day24_existing_browser_session_revocation_is_atomic ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.12s
+
+     Running tests/day26_logout.rs (/home/willie/Documents/Codex/2026-10-27/referenced-chatgpt-conversation-this-is-an/work/cargo-target/debug/deps/day26_logout-137ec4387aa63870)
+
+running 1 test
+test day26_logout_revokes_only_one_session ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/day45_member_self.rs (/home/willie/Documents/Codex/2026-10-27/referenced-chatgpt-conversation-this-is-an/work/cargo-target/debug/deps/day45_member_self-2d053a69e81d4f1e)
+
+running 7 tests
+test json_room_route_uses_same_action_and_csrf ... ok
+test member_roles_union_overrides_and_disabled_definitions ... ok
+test failed_session_revocation_rolls_password_back ... ok
+test room_creation_requires_action_and_deny_leaves_no_room ... ok
+test mandatory_change_cannot_be_bypassed_and_next_login_opens_account ... ok
+test self_profile_is_separate_and_cannot_target_another_member ... ok
+test password_change_is_self_only_csrf_checked_salted_and_revokes_sessions ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.67s
+
+     Running tests/day45_signup_self_service.rs (/home/willie/Documents/Codex/2026-10-27/referenced-chatgpt-conversation-this-is-an/work/cargo-target/debug/deps/day45_signup_self_service-83024e281250283b)
+
+running 1 test
+test actual_signup_default_role_reaches_self_service_without_fixture_grants ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.70s
+
+     Running tests/root_hub_contract.rs (/home/willie/Documents/Codex/2026-10-27/referenced-chatgpt-conversation-this-is-an/work/cargo-target/debug/deps/root_hub_contract-8c4d7e32f81ab248)
+
+running 4 tests
+test last_receiver_cleanup_allows_new_subscription ... ok
+test message_stays_inside_room ... ok
+test count_tracks_receiver_lifecycle ... ok
+test subscribers_share_events ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests chat_server
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

@@ -1,0 +1,19 @@
+{
+  "isolated_server_stopped": true,
+  "removed": [
+    {
+      "path": "/tmp/day45-pass-chat.sqlite",
+      "bytes": 258048
+    },
+    {
+      "path": "/tmp/day45-pass-browser",
+      "bytes": 18704056
+    },
+    {
+      "path": "/tmp/day45-pass-src",
+      "bytes": 13497681
+    }
+  ],
+  "total_removed_bytes": 32459785,
+  "preserved": "read-only product checkout, dirty docs checkout, real logs and screenshot"
+}

@@ -1,0 +1,58 @@
+{
+  "source_sha": "8ae6c91e07b557e85c5a0424d8146030fdce8061",
+  "docs_baseline_sha": "da3713bf037b05437c0c2a5afb91c89c9bb74a1d",
+  "product_written": false,
+  "patch_applied_in_test": false,
+  "new_patch_required": false,
+  "chat_actual_product": {
+    "automated_passed": 45,
+    "automated_failed": 0,
+    "automated_ignored": 0,
+    "automated_exit": 0,
+    "browser_steps": 9,
+    "browser_pageerrors": 0,
+    "browser_exit": 0
+  },
+  "test_command": "cargo test --manifest-path /tmp/day45-pass-src/chat_apps/Cargo.toml -p chat-server --features ssr --locked --no-fail-fast",
+  "build_command": "cargo leptos build --cargo-locked",
+  "browser_command": "GUI_OUT=<evidence>/browser NODE_PATH=/tmp/day45-pass-browser/node_modules node browser.cjs",
+  "environment": {
+    "CARGO_TARGET_DIR": "/home/willie/Documents/Codex/2026-10-27/referenced-chatgpt-conversation-this-is-an/work/cargo-target",
+    "CARGO_PROFILE_TEST_DEBUG": "0",
+    "CARGO_PROFILE_DEV_DEBUG": "0",
+    "CARGO_INCREMENTAL": "0",
+    "CARGO_BUILD_JOBS": "2",
+    "CHAT_DATABASE_URL": "sqlite:///tmp/day45-pass-chat.sqlite",
+    "LEPTOS_SITE_ROOT": "/tmp/day45-pass-src/chat_apps/target/site",
+    "LEPTOS_OUTPUT_NAME": "rust_ai_chat"
+  },
+  "prior_csrf_purpose_fix_adopted": true,
+  "next_day": {
+    "chat": 46,
+    "pet": 46,
+    "analytics": 46
+  },
+  "day_advance": false,
+  "fifo_changed": false,
+  "last_full_comparison_changed": false,
+  "gate1": true,
+  "gate2": false,
+  "unchanged_projects": "Analytics/Pet trees unchanged; retain explicitly a7-labelled evidence without rerun/retagging",
+  "remaining": [
+    "real prior DB backup reconciliation",
+    "physical/packaged/cross-OS desktop acceptance",
+    "transparency composition and autonomous roam",
+    "Analytics legacy ignored and unimplemented management UI/API scopes"
+  ],
+  "sha256": {
+    "browser-results.json": "96c0481379dd7a355e90cac1f1dd60a9c17efec74713bdead6e8f553240ed39e",
+    "browser.cjs": "9720b6f7e170ef40fbf377ad31502be2f14fc144e9c4e23e746661c2192bafa8",
+    "chat-regression.log": "e83ab6102709db2935291e3a2b54abce2a29f5d95110d024a50ba2628d7196b9",
+    "browser.log": "5be19bc0406a51af78e513b18f11b79c88d4cf4464592850d2c7ee7f349e85a4",
+    "browser-install.log": "e17b94085fd654903878795e36852a52679df8d71022b53972cd4d206ef707db",
+    "source.json": "ae865e2b7f6b1864b01ce286c7bbf4904c1b2f0051f185b6e7a3eb44440bc356",
+    "chat-room.png": "8b4f53ccb641fe38aeb4b5e1738bf9fc674273d87b0a2132dc72a55b50e10e51",
+    "chat-build.log": "00a41c1d4ffc3e5a2de0ce97eadcf5d623fe3ad7913028a58745edefa77cf7d5",
+    "cleanup.json": "13765262852a2ad5ed0ed2291416061e6bfcf51ff8f7788c0cc8cec713785402"
+  }
+}

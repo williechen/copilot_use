@@ -1,0 +1,31 @@
+{
+  "source_sha": "8ae6c91e07b557e85c5a0424d8146030fdce8061",
+  "previous_sha": "448dc72f9f7c7bfe7e0f92f235faba65825c1c8b",
+  "project_trees": {
+    "chat_apps": {
+      "before": "7e446b8c383ed14118359507d1a2cdd42a4fcb20",
+      "now": "b2c74dde13adc204e7502ac969b4db97a88cfe93",
+      "identical": false
+    },
+    "analytics_apps": {
+      "before": "976c1f744b80fcdc2c397db6f1df2dfbb2cc887b",
+      "now": "976c1f744b80fcdc2c397db6f1df2dfbb2cc887b",
+      "identical": true
+    },
+    "pet_apps": {
+      "before": "ae8bbcd373252c9c8dd9715e6267bd8ee3059a73",
+      "now": "ae8bbcd373252c9c8dd9715e6267bd8ee3059a73",
+      "identical": true
+    }
+  },
+  "changed_files": [
+    "chat_apps/chat_server/tests/day45_member_self.rs"
+  ],
+  "hashes": [
+    {
+      "path": "chat_apps/chat_server/tests/day45_member_self.rs",
+      "blob_sha": "93910c55d6e7f100592a2104e3329ac9f785a57a",
+      "sha256": "bb96cbb4748f8184e795a99db2e5e4dc6f9fc83d24b2b30c90d1152748a8ab1f"
+    }
+  ]
+}
