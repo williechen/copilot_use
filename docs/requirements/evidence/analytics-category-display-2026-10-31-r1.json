@@ -1,0 +1,30 @@
+{
+  "commit": "b5e91fe62a7cc353bc5d66dc0fa93e947056c3ba",
+  "scope": "requirements only; no product implementation claimed",
+  "rule": "page -> category; page -> action",
+  "category_visible": "at least one effectively authorized page",
+  "action_visible": "authorized page plus its specific effective CRUD action permission",
+  "storage_hierarchy_unchanged": [
+    "category",
+    "page",
+    "action"
+  ],
+  "readback": [
+    {
+      "path": "docs/requirements/ANALYTICS_ACL.md",
+      "blob_sha": "90ffa46d78117bac51c8599d759ac7d367d14b80",
+      "full_text_equal": true,
+      "sha256": "1e95a9c6734b41a95603ec945a7f00b2192b888a8698aab1eafdc504f257e6e2"
+    },
+    {
+      "path": "docs/UI_ALIGNMENT_REQUIREMENTS.md",
+      "blob_sha": "26cd9f72720ffdce6b0ebd780cada2fba001a795",
+      "full_text_equal": true,
+      "sha256": "8c65f0ee1d872e7ba73206a0c6f2b80461eba6fb4f5f13902452ab1b4ee53742"
+    }
+  ],
+  "next_day_changed": false,
+  "fifo_changed": false,
+  "last_full_comparison_changed": false,
+  "product_written": false
+}
