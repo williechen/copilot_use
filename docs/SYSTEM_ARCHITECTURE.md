@@ -32,3 +32,7 @@ Pet活動模型已在main：目前籠態由pet_activity導出，預設沿用既�
 目前63b1f93只新增Analytics ACL schema：analytics-token認證管理、密碼page歸會員管理、security管理憑證page；其餘runtime仍沿原來源，page／CRUD Adapter尚未採用。[採用證據與限制](source-review/analytics-adoption-2026-10-31-63b1f93/README.md)。舊測試保留原SHA，不追認新來源。
 
 最新f6a0401只調整schema角色預設，管理憑證page grant已補；自身密碼ACL page保留，首次／後續登入預設頁與共用實作須依更正契約核對。[採用核對](source-review/analytics-adoption-2026-10-31-f6a0401/README.md)。歷史測試保留原SHA。
+
+## Chat／Analytics管理與會員權限共用規則
+
+管理端uac_acl與會員端mbr_perm負責定義；uac_role_acl／mbr_role_perm負責角色授權；uac_user_acl／mbr_user_perm負責個人加減權。有效權限判斷一致，各案及管理／會員的身分、DB、Session與Adapter仍獨立。mbr_perm現有schema不具uac_acl的階層欄位，不能將共同邏輯冒稱為欄位或runtime已同步。[共同需求](requirements/COMMON_AUTHORIZATION.md)。本次只有契約確認，未新增共用程式或抵算跨案重構完成。

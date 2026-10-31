@@ -22,3 +22,7 @@
 若只有自身密碼page權限，不連帶顯示帳號管理等其他page；category由page權限推導，action依所屬page與自己的CRUD權限顯示。首次／後續登入只決定預設開啟內容，功能樹仍按ACL顯示。需要首次強制修改的人員必須能完成此page必要操作，不能被唯讀設定擋住，也不因此取得管理其他帳密的權限。
 
 「共用」不是取消自身密碼ACL page；先前移除page的解讀是助理誤讀，已撤回。以[更正紀錄](revisions/2026-10-31-self-password-page-correction.md)為準。本次只更正需求，未重新驗收產品實作。
+
+## 管理與會員授權邏輯共用
+
+Chat與Analytics管理使用相同的定義／授權／個人加減權判斷；會員端mbr_perm／mbr_role_perm亦採相同分工，現有mbr_user_perm保存會員個人加減。共用驗證流程不代表跨系統或跨管理／會員身分自動共用Session；驗證身分後，仍須查該上下文的角色及個人權限。[共用授權契約](COMMON_AUTHORIZATION.md)。

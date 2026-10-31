@@ -126,3 +126,7 @@ page ─→ category：至少有一個具有效page權限的子頁，才顯示�
 伺服器以uac_user_role取得人員角色，從uac_role_acl合併角色授權，再套用uac_user_acl個人加減權，依既定deny優先規則判定有效權限。不存在有效授權時預設拒絕；不能只查uac_acl存在、節點啟用或其category來放行。有效授權仍須對應有效且結構正確的ACL定義；節點停用不會因既有授權關係而變成可用。
 
 功能樹與操作檢查使用相同的有效權限：由獲授權page推導category，並依該page各action的授權顯示／執行CRUD。資料定義、選單顯示與後端授權不能混為同一件事。本次僅補明契約，不宣稱產品授權接線已完成，不更改Day或學習進度。
+
+## Chat／Analytics管理與會員權限的共用邏輯
+
+本文件的管理授權規則同時適用Chat與Analytics；Analytics特有page／來源配置與採用紀錄仍各自保留。會員端mbr_perm定義權限，mbr_role_perm保存角色授權，mbr_user_perm保存個人加減權，分工與管理端一致；不能從定義存在推論已授權，也不假設mbr_perm已具有uac_acl的階層欄位。[共同契約](COMMON_AUTHORIZATION.md)。

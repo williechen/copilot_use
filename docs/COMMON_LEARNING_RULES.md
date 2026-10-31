@@ -72,3 +72,7 @@ Red須對應同篇Green；已通過測試只算回歸。預期行為Red、缺新
 現行目錄只保留教學必要的最新規則、需求、架構、操作、待辦與進度；過時或被取代的文章、比較／狀態快照與證據只留在可還原分包。已被 ZIP 收錄且 SHA256 相同的原檔直接移除，不重複壓縮；尚未收錄的不同版本先存差異包並校驗，才移除。
 
 Day43 已發布正文依使用者指定只留 ZIP；下一篇 Day44 或更後面的未驗證新稿保留原檔，不因壓縮快照存在而刪除。儲存封存不是完整產品 Gate2 驗收。每案 next_day 與既有 FIFO 不因此變動；last_full_comparison 只依原完整比對規則更新。現況與證據範圍只維護於 [STATUS](teaching/current/STATUS.md)，不得在各首頁堆疊歷史更新。
+
+## 8. Chat／Analytics管理及會員權限共同契約
+
+兩案管理採同一套權限定義／角色授權／個人加減與功能樹判斷。uac_acl只定義管理節點，page／CRUD授權分別保存於uac_role_acl、uac_user_acl；會員端mbr_perm定義與mbr_role_perm角色授權採相同分工，既有mbr_user_perm保存個人加減。定義存在不代表授權，無有效授權拒絕，個人deny優先。各系統及管理／會員身分、DB與Session隔離；共同邏輯不代表schema欄位或產品實作已同步。[完整共同契約](requirements/COMMON_AUTHORIZATION.md)。需求確認不增加Day、不更動FIFO或last_full_comparison，不抵算各案／全案重構。
