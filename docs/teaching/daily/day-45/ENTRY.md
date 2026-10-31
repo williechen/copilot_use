@@ -1,11 +1,9 @@
-# Day45 ENTRY｜Chat → Pet → Analytics
+# Day45 ENTRY｜最新產品採用驗證
 
-1. [Chat r2](chat-r2.md)：會員action、建立聊天室與本人資料／密碼；承接排除檢查與Session SQLite Refactor。44項通過，WASM check通過。
-2. [Pet](pet.md)：原200×200單圖六相交付保留；本次授權修訂不改Pet。
-3. [Analytics r4](analytics-r4.md)：page導出category／action功能樹、CRUD有效授權、首次自身密碼流程；保留f6 SQL並新增向前migration。67項通過、1 legacy ignored。
+1. [Chat](chat-r2.md)：d784產品SSR44項通過；28同子樹WASM check通過。原Session／排除／本人action接線已採用。
+2. [Pet](pet.md)：d784產品UI11及六pose DOM通過；使用者已修測試錯字，舊Pet補正patch不必重套。真Tauri驗收未完成。
+3. [Analytics](analytics-r4.md)：d784 postgres-integration編譯失敗；完整補正候選68通過、1 legacy ignored，與產品原樣結果分開。
 
-Chat／Analytics目前完整patch直接適用產品 `f6a04015188da2155af6c264d0e6326e6a922dca`，已包含Refactor，勿疊套舊Green或Refactor。Pet仍用原64來源與原順序。詳見[套用規則](README.md)、[精確讀回／blob／SHA256](publication-final-rewire.json)。
+[來源／失敗與修正／清暫存](../../../source-review/day45-2026-10-31-d784f32/README.md) · [逐檔精確讀回](../../../source-review/day45-2026-10-31-d784f32/publication.json) · [套用界線](README.md)。
 
-三案next_day均46；本次是同Day修訂，不重複加Day。FIFO與last_full_comparison未更動。產品庫未寫入、候選尚未由使用者套用，完整Gate2=false。
-
-歷史原文及證據保留：[Chat r1](chat.md)、[Analytics r3](analytics-r3.md)、[r3讀回](publication-r3.json)、[f6採用核對](../../../source-review/analytics-adoption-2026-10-31-f6a0401/README.md)。舊64 patch僅供歷史重現。
+產品原Day45內容已採用，不要對目前產品重套64／f6完整patch。Analytics runtime-only修正不動migration；完整修正只適用空DB或f6 ledger，已跑28改寫版者不能自動回復checksum。next_day三案46，FIFO與last_full_comparison未更動，完整Gate2=false。

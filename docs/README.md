@@ -1,3 +1,5 @@
+> Day45 最新採用核對（d784f32c）：Chat 44通過；Pet UI11／DOM六pose通過，使用者已修正browser錯字；Analytics postgres-integration仍編譯失敗，修正候選68通過／1 ignored。產品與候選分列，[錯誤／完整patch／DB適用條件／清暫存](https://github.com/williechen/copilot_use/blob/main/docs/source-review/day45-2026-10-31-d784f32/README.md)。已清約5.15GB可重建暫存。三案next_day仍46、未加Day，完整Gate2=false。本段取代下方較早f6候選狀態，歷史證據保留。
+
 > 2026-10-31 最新同Day修訂：[Chat r2](https://github.com/williechen/copilot_use/blob/main/docs/teaching/daily/day-45/chat-r2.md) 44項通過；[Analytics r4](https://github.com/williechen/copilot_use/blob/main/docs/teaching/daily/day-45/analytics-r4.md) 67項通過／1 ignored。兩案完整patch直接基於產品f6a0401，已含Refactor，勿與舊patch疊套。Pet沿用原交付；三案next_day=46、未加Day。僅候選驗證，產品未套用、完整Gate2=false。[精確讀回](https://github.com/williechen/copilot_use/blob/main/docs/teaching/daily/day-45/publication-final-rewire.json)。
 
 # 教學必要文件

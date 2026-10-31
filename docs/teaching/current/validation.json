@@ -1,5 +1,5 @@
 {
-  "latest_product_sha": "64eff527283fd05657841297879aefeaadd31f64",
+  "latest_product_sha": "d784f32c6bff86249dd84fd4294d055a4c774a49",
   "full_gate2": false,
   "evidence": "docs/source-review/gate2-sql-2026-10-31/README.md",
   "legacy_unit_test_sources": {
@@ -50,6 +50,32 @@
     }
   },
   "current_gate2": {
+    "source_sha": "d784f32c6bff86249dd84fd4294d055a4c774a49",
+    "evidence": "docs/source-review/day45-2026-10-31-d784f32/review.json",
+    "full_gate2": false,
+    "complete": false,
+    "chat_automated_passed": 44,
+    "pet_ui_passed": 11,
+    "pet_dom_fixture_poses": 6,
+    "analytics_raw_feature_build_exit": 101,
+    "analytics_corrected_candidate_passed": 68,
+    "analytics_candidate_ignored": 1,
+    "candidate_base_sha": "28b71b67907062f804b2358c41fde349c9b18ca9",
+    "ci_all_seven_success": false,
+    "actual_old_pg_backup_available": false,
+    "manual_desktop_acceptance": false
+  },
+  "candidate_rewire": {
+    "source_sha": "f6a04015188da2155af6c264d0e6326e6a922dca",
+    "chat_passed": 44,
+    "analytics_passed": 67,
+    "analytics_ignored": 1,
+    "chat_wasm_check_exit": 0,
+    "evidence": "docs/teaching/daily/day-45/publication-final-rewire.json",
+    "product_applied": false,
+    "full_gate2": false
+  },
+  "previous_current_gate2": {
     "source_sha": "64eff527283fd05657841297879aefeaadd31f64",
     "previous_source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097",
     "docs_base_commit": "06de2f24bbc1747103caef4402a0bab7a8107045",
@@ -129,14 +155,5 @@
       "full dependency/MSRV acceptance incomplete"
     ]
   },
-  "candidate_rewire": {
-    "source_sha": "f6a04015188da2155af6c264d0e6326e6a922dca",
-    "chat_passed": 44,
-    "analytics_passed": 67,
-    "analytics_ignored": 1,
-    "chat_wasm_check_exit": 0,
-    "evidence": "docs/teaching/daily/day-45/publication-final-rewire.json",
-    "product_applied": false,
-    "full_gate2": false
-  }
+  "latest_day45_review": "docs/source-review/day45-2026-10-31-d784f32/review.json"
 }

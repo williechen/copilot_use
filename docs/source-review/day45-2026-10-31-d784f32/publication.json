@@ -1,0 +1,275 @@
+{
+  "source_sha": "d784f32c6bff86249dd84fd4294d055a4c774a49",
+  "earlier_verified_source": "28b71b67907062f804b2358c41fde349c9b18ca9",
+  "artifact_commit": "0af29738b45a647422a1d702ad087e7639cdc16f",
+  "artifact_readback": [
+    {
+      "path": "docs/source-review/day45-2026-10-31-d784f32/chat-d784.log",
+      "blob_sha": "2d64b9167aa98fd04fc896557adfcfdee1ebec3c",
+      "sha256": "be8b468f51932a85e9807b794d678dd246172fb443df80a2eb9313db38fd6d3f",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-d784f32/README.md",
+      "blob_sha": "8437f244a17f94a1038eab1acbe6c78e8a5c0ab4",
+      "sha256": "453ea27ec8cc7355666fd506ab80666214b9de6db3b1660c35be4bcbe601a1ae",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-d784f32/analytics-runtime-fix.patch",
+      "blob_sha": "20bef59aab03a81f6c3edf9cf93d5deb2075e0d4",
+      "sha256": "e6729dd2fb70a664558c5cff88a8e010ab91b712df3123d49aec16d8de21f995",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-d784f32/patch-validation.json",
+      "blob_sha": "5605574eca9e0b59c7c2ccd69340e871ef92e517",
+      "sha256": "62748a634f0eb320ae4f257213c23b4fcfc534bc42e5c45c722875c192d62df6",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-d784f32/pet-product.log",
+      "blob_sha": "dbb5923a6ce0adf220c4faa04f8b618d459291d7",
+      "sha256": "3dc6d3f0886ea49240131e834b9497d66393cc4bff4d9eb0a03f43ea68a8e555",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-d784f32/source-inventory.json",
+      "blob_sha": "83ad2a42f1293d130b15b60bc90d8746b3bc5e92",
+      "sha256": "77ebff13f7ccfbddbdb881b3d74a9a2fb4fa3da06b9e714e2734b5c174802369",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-d784f32/pet-overflow-negative.log",
+      "blob_sha": "28054342b6363be60b38f1b871ea652983ad7846",
+      "sha256": "f519ba0cb2a7407f979b3c660350f52704f81cfa581243b98168b59983225463",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-d784f32/pet-browser-node26.log",
+      "blob_sha": "cf1166b8f79b3ccdb0ebb55785ff69448a57a272",
+      "sha256": "3dcc99506d5a64130a6c8242306199a5b6e8217ad5cb25e534e00693c62f840a",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-d784f32/analytics-f6-upgrade-fix.patch",
+      "blob_sha": "9190cea9717978f229bd5e498b8b0aa348572ea6",
+      "sha256": "5586a3c58851abae3ac492a208f1e723613bb813647dba987a59c5330857f033",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-d784f32/locked-versions.json",
+      "blob_sha": "0ea04000c95c0074d697786094d35580207017e8",
+      "sha256": "1c36821780d6f675d747d1d899123b01b39e10053bf76e9dd41192d8b8ea0e12",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-d784f32/product-ci.json",
+      "blob_sha": "5c709ed217e4613f8119d025c94e6fb5aecd8361",
+      "sha256": "b90c98593617b1b225f53f3a5ae35c2ed6831d809ec97d02cc7f390f0e9ee793",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-d784f32/analytics-corrected-final.log",
+      "blob_sha": "b9f37f472c422f6828f01d875b1215d6818bb260",
+      "sha256": "c34a3128fa1f066ec3e1a217d82c8e78e1dc3b47f950ad03f242013a7329c339",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-d784f32/browser-restore-online.log",
+      "blob_sha": "72b56e1c31acdb4e7fc6acef9e1367169ad0837e",
+      "sha256": "d815cbefc0d4fe568948b7d1fdaab2bc33dd33748c15e42cc16e31aab7c3d661",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-d784f32/pet-d784-ui.log",
+      "blob_sha": "6301c75cc79093bc945416f8d01081a865245b43",
+      "sha256": "b993bb73552dfed066e648f0540870eea1da7d09106de4d1cbc49ed1caed4484",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-d784f32/analytics-d784-build.log",
+      "blob_sha": "3fd5bbae04f26238024de4c35e624ebb06095477",
+      "sha256": "d7860df6b259d1a0326361194724f47ed859420092cf6bdecea746638d1774eb",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-d784f32/pet-browser-product.log",
+      "blob_sha": "e83e162ee8e562814ff2e1bc3e3985fe1f41c6b1",
+      "sha256": "3151bf5abeff76068b82daec2e48a7f991b9ecb8acd2b0a5c3d26455742e7a16",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-d784f32/pet-browser-corrected.log",
+      "blob_sha": "cf1166b8f79b3ccdb0ebb55785ff69448a57a272",
+      "sha256": "3dcc99506d5a64130a6c8242306199a5b6e8217ad5cb25e534e00693c62f840a",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-d784f32/review.json",
+      "blob_sha": "2ed032277d73e714752ad66d3a6ca00dd6c92a17",
+      "sha256": "9a0160fe5323befaa3b58581e1e588f5d8e6e8c3387942b8180ebf63f2f94753",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-d784f32/analytics-frozen-upgrade-red.log",
+      "blob_sha": "ccf859502cc76ee3f4728440c869618c12635906",
+      "sha256": "4167d1dc16df875923c9d486542f33ce495bac75d4f13bf910d0427cea521f97",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-d784f32/analytics-frozen-upgrade-red-retry.log",
+      "blob_sha": "bb9db7b89fa6d92445d805753b62cebfb779fb6f",
+      "sha256": "1dc86de8fb03af382fc6f2905e79b02dafd0d2522bf166c107a3003041c473ea",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-d784f32/pet-product-retry.log",
+      "blob_sha": "96026d1557b980a02cd9a5494f401a8390ae04bf",
+      "sha256": "ffe07356e49bd7cb70e5c93015262e59bd010f34698e55e1300069f73dd80c72",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-d784f32/versions.json",
+      "blob_sha": "ff6c41744ac7ad1f2df11fe81dfb703587e5d2ff",
+      "sha256": "079f47a430eb9f6e52c9b13a2a718b93a18464086aafc33b3ed9ff80c092ca96",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-d784f32/analytics-corrected.log",
+      "blob_sha": "2f4b1e35497d4b677647b7dc1dcc7d2d126a6ac3",
+      "sha256": "b172fc0e91d1eaea98ef61bd43de095bba2f729651100f3c6d9654a3838e8867",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-d784f32/latest-source.json",
+      "blob_sha": "9196daa83a826f8047c4990b7f3ce11078b52792",
+      "sha256": "013087afae6c622287e01cb2739b88a706d9445a246ac70f999f4e8ed2f24dab",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-d784f32/browser-restore.log",
+      "blob_sha": "6d05950c60c94d72262bf708847cc7c78c2c5d9c",
+      "sha256": "ee6b48850b8d8d446db5b2e916df90fb56fb87b51e6fd84f07944ddf37abd595",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-d784f32/analytics-runtime-only.log",
+      "blob_sha": "543513fa105ffe50169e34e0729f175d75243545",
+      "sha256": "3b7a18a6fc764eaf3e156bb5e23d99ac73cb30b8fe9b43656a00431b11e70416",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-d784f32/analytics-clean-applied-final.log",
+      "blob_sha": "1f2f625674f6774df5a13b92a3be704dffb2324b",
+      "sha256": "08a3306569f563e5621bd74c2335b0fdf594266c1a4a806defd317cfaf69a983",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-d784f32/pet-d784-browser-retry.log",
+      "blob_sha": "cf1166b8f79b3ccdb0ebb55785ff69448a57a272",
+      "sha256": "3dcc99506d5a64130a6c8242306199a5b6e8217ad5cb25e534e00693c62f840a",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-d784f32/chat-product.log",
+      "blob_sha": "3b64cf315b8623d8795da04ca757657222c1ecbe",
+      "sha256": "0076857b1e4c5788b4cda9e6ee67dda486b4614d3884703c47cc1af4eb2c36db",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-d784f32/pet-browser-fix.patch",
+      "blob_sha": "b09530ac517a35bab9500b81d7ef1acc7ec41521",
+      "sha256": "8206b950258b50847810ccc91765e2490aa0903580a53abbaf45856326155ae4",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-d784f32/analytics-product.log",
+      "blob_sha": "5b4cab2a20c309597f7ca6e05d82def1249eb9c9",
+      "sha256": "24a9d9ca203ef090818815e0bd76c95f730613e179cd5e83a9c2f163eecba32d",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-d784f32/pet-d784-browser.log",
+      "blob_sha": "a046c0690ef5c6fcb19c61aa8748a610e0976cfc",
+      "sha256": "76335dd49fe25b5cb01fb3e3f88da2a7a62d1b898188b78937c90bc4f11183fc",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-d784f32/analytics-product-targeted.log",
+      "blob_sha": "259369736ac3b1cfd8ebc25d1500666c8ec043b0",
+      "sha256": "0e5aa42fa0e0863db1a337864f285e99efb451699b34ddee59eb1ab6d281ae7c",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-d784f32/analytics-corrected-r2.log",
+      "blob_sha": "48892df4f3ac68b96068304cf37b2ae78978a6d6",
+      "sha256": "116c7e144a3894908b8595ccdd235400aa5c121639c5a799e0fef5faa5c9c32c",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-d784f32/cleanup.json",
+      "blob_sha": "e66bb8917af76020ce0e7f3d560273746a8f30e1",
+      "sha256": "3e92973bbe94273791603d7da9aa961d8a0834a9c3777d19baf40eaf1f8280aa",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-d784f32/counts.json",
+      "blob_sha": "a1d4200e85035982b27a1b5f7e577f7e42ce68e8",
+      "sha256": "ac8227313c539c3efa4dab24d2cee72ef529c95396ce4cc39ca0b6795e2f9c4a",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-d784f32/chat-product-wasm.log",
+      "blob_sha": "9cf9e442543868156d3086509b917c0e714aa34e",
+      "sha256": "1e4baa9bb2045ee01910a0d7b020966549cb8b475eaf89b4d6b7d746c0fbe1c0",
+      "full_text_equal": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-d784f32/analytics-complete-correction.patch",
+      "blob_sha": "8021981c391d5febdb8f0389d8e14b818575e91d",
+      "sha256": "ed240a479902627fa662a13478fb6fc398aa1ff1ae794bba9fae669d4303c2e7",
+      "full_text_equal": true
+    }
+  ],
+  "article_readback": [
+    {
+      "project": "chat",
+      "path": "docs/teaching/daily/day-45/chat-r2.md",
+      "commit": "328a3598145de7d486792666241ef85e7fbcea4a",
+      "blob_sha": "305419b16cbc67763a383ef517e49b625e8da0cd",
+      "sha256": "35606a7ae1877d657799ca6c389a62c2bb13d22f36136627da3625e0c7c27122",
+      "full_text_equal": true
+    },
+    {
+      "project": "pet",
+      "path": "docs/teaching/daily/day-45/pet.md",
+      "commit": "7e051a6a4913a361d6460ad59758e762dfdd6ad9",
+      "blob_sha": "1d56ab92af15908e5bcccbf4a3bd25886cb16af6",
+      "sha256": "4a8af49b51bd54e4235ababf9451da0aa573c1d40e115786a7bd282970cd0e8d",
+      "full_text_equal": true
+    },
+    {
+      "project": "analytics",
+      "path": "docs/teaching/daily/day-45/analytics-r4.md",
+      "commit": "d13e51b1a2261973a15bc021c5789a493476a3a4",
+      "blob_sha": "d9f8d4fa9b73890df2e2588a71f8a81898e0e91e",
+      "sha256": "acbd2a882f64ceb70ccc3c1ad7233e5a0550a53f4f9767c3b2936f32f19c501a",
+      "full_text_equal": true
+    }
+  ],
+  "expected_sync_parent": "d13e51b1a2261973a15bc021c5789a493476a3a4",
+  "expected_next_day": {
+    "chat": 46,
+    "pet": 46,
+    "analytics": 46
+  },
+  "day_advance": false,
+  "fifo_changed": false,
+  "last_full_comparison_changed": false,
+  "gate1": true,
+  "gate2": false,
+  "product_written": false,
+  "cleanup_bytes": 5150431899,
+  "readback_method": "complete content compared at exact commits; blob SHA and SHA256 preserved"
+}
