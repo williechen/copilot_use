@@ -1,3 +1,11 @@
+# Day45 真實GUI驗收補記｜Analytics
+
+產品精確SHA `a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4`。已對實際執行中的產品，以Chromium操作11段真表單／cookie旅程：首次改密碼與後續首頁、建立viewer、來源隔離、即時撤權、page→category與page→action、偽造POST拒絕及登出。撤權使用隔離DB fixture，不宣稱已實作管理授權UI。
+
+[完整範圍／限制／截圖](../../../source-review/day45-gui-2026-10-31-a7a8267/README.md) · [實際操作資料](../../../source-review/day45-gui-2026-10-31-a7a8267/gui-review.json)。此補記優先於下方較早的「尚未跑瀏覽器／桌面」描述；本次未加Day，next_day仍46，FIFO及last_full_comparison不變。
+
+---
+
 # Day45 最新產品驗證通過｜Analytics a7a8267f
 
 產品`a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4`已採用最後的fixture讀入補正。本回合未套patch，直接對該SHA隔離匯出跑完整postgres-integration：**68通過／0失敗／1既有legacy ignored，exit0**。這次是產品原樣實跑，取代下方9ae3「原樣仍1失敗」的歷史狀態。
