@@ -1,3 +1,110 @@
+# Day45 真實GUI驗收補記｜Chat
+
+產品精確SHA `a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4`。產品原樣真註冊會員開本人資料頁403：migration／角色用member-profile-update與member-password-update，後端卻查另一組帶self的ID。原fixture自行補了另一組ID而掩蓋預設角色接線。新增真signup→login、無任何個人fixture加權的Red回歸，修常數／fixture後候選45項通過，9段真Chromium旅程通過。產品main仍須使用者套補正。
+
+[完整範圍／限制／截圖](../../../source-review/day45-gui-2026-10-31-a7a8267/README.md) · [實際操作資料](../../../source-review/day45-gui-2026-10-31-a7a8267/gui-review.json)。此補記優先於下方較早的「尚未跑瀏覽器／桌面」描述；本次未加Day，next_day仍46，FIFO及last_full_comparison不變。
+
+## 本次Red／Green修訂（非新增Refactor計功）
+
+[真註冊Red](../../../source-review/day45-gui-2026-10-31-a7a8267/chat-signup-red.log)為403≠200；候選[45項回歸](../../../source-review/day45-gui-2026-10-31-a7a8267/chat-fixed-regression.log)及[9段瀏覽器](../../../source-review/day45-gui-2026-10-31-a7a8267/chat-candidate-browser-results.json)通過。以下完整三檔patch對精確a7套用，保留來源migration與授權ID。既有Session獨立Refactor承接，僅修功能接線與測試覆蓋，不重複計功。
+
+```diff
+diff --git a/chat_apps/chat_server/src/member_self.rs b/chat_apps/chat_server/src/member_self.rs
+index 6e72ae6..1719e44 100644
+--- a/chat_apps/chat_server/src/member_self.rs
++++ b/chat_apps/chat_server/src/member_self.rs
+@@ -10,8 +10,8 @@ use axum::{
+ use shared::auth::{cookie_token, token_digest};
+ use sqlx::SqlitePool;
+ pub const ROOM: &str = "member-room-create";
+-pub const PROFILE: &str = "member-self-profile-update";
+-pub const PASSWORD: &str = "member-self-password-update";
++pub const PROFILE: &str = "member-profile-update";
++pub const PASSWORD: &str = "member-password-update";
+ 
+ const PERMISSION: &str = r#"SELECT EXISTS(
+     SELECT 1 
+diff --git a/chat_apps/chat_server/tests/day45_member_self.rs b/chat_apps/chat_server/tests/day45_member_self.rs
+index 1a4d09b..93910c5 100644
+--- a/chat_apps/chat_server/tests/day45_member_self.rs
++++ b/chat_apps/chat_server/tests/day45_member_self.rs
+@@ -42,8 +42,8 @@ async fn fixture() -> (sqlx::SqlitePool, Router, String) {
+     }
+     for (id, name) in [
+         ("member-room-create", "建立聊天室"),
+-        ("member-self-profile-update", "修改本人資料"),
+-        ("member-self-password-update", "修改本人密碼"),
++        ("member-profile-update", "修改本人資料"),
++        ("member-password-update", "修改本人密碼"),
+     ] {
+         sqlx::query("INSERT INTO mbr_perm(id,perm_name,perm_status,created_at,updated_at) VALUES(?1,?2,'active',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP) ON CONFLICT DO NOTHING").bind(id).bind(name).execute(&pool).await.unwrap();
+         sqlx::query("INSERT INTO mbr_user_perm(user_id,perm_id,perm_filter,created_at) VALUES('self-member',?1,'allow',CURRENT_TIMESTAMP)").bind(id).execute(&pool).await.unwrap();
+@@ -118,7 +118,7 @@ async fn self_profile_is_separate_and_cannot_target_another_member() {
+         .await
+         .unwrap();
+     assert_eq!(name, "Changed");
+-    sqlx::query("UPDATE mbr_user_perm SET perm_filter='deny' WHERE user_id='self-member' AND perm_id='member-self-profile-update'").execute(&pool).await.unwrap();
++    sqlx::query("UPDATE mbr_user_perm SET perm_filter='deny' WHERE user_id='self-member' AND perm_id='member-profile-update'").execute(&pool).await.unwrap();
+     assert_eq!(
+         send(app.clone(), "/account/profile", Some(payload), &cookie)
+             .await
+@@ -227,7 +227,7 @@ async fn member_roles_union_overrides_and_disabled_definitions() {
+         .unwrap();
+     for (role, perm) in [
+         ("role-a", "member-room-create"),
+-        ("role-b", "member-self-profile-update"),
++        ("role-b", "member-profile-update"),
+     ] {
+         sqlx::query("INSERT INTO mbr_role(id,role_name,role_status,created_at,updated_at) VALUES(?1,?1,'active',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)").bind(role).execute(&pool).await.unwrap();
+         sqlx::query("INSERT INTO mbr_user_role(user_id,role_id,created_at) VALUES('self-member',?1,CURRENT_TIMESTAMP)").bind(role).execute(&pool).await.unwrap();
+@@ -256,7 +256,7 @@ async fn member_roles_union_overrides_and_disabled_definitions() {
+         .await
+         .unwrap();
+     assert!(!allowed(&pool, "self-member", ROOM).await.unwrap());
+-    sqlx::query("UPDATE mbr_perm SET perm_status='inactive' WHERE id='member-self-profile-update'")
++    sqlx::query("UPDATE mbr_perm SET perm_status='inactive' WHERE id='member-profile-update'")
+         .execute(&pool)
+         .await
+         .unwrap();
+@@ -283,14 +283,14 @@ async fn mandatory_change_cannot_be_bypassed_and_next_login_opens_account() {
+         send(app.clone(), "/account", None, &cookie).await.status(),
+         StatusCode::FORBIDDEN
+     );
+-    sqlx::query("UPDATE mbr_user_perm SET perm_filter='deny' WHERE user_id='self-member' AND perm_id='member-self-password-update'").execute(&pool).await.unwrap();
++    sqlx::query("UPDATE mbr_user_perm SET perm_filter='deny' WHERE user_id='self-member' AND perm_id='member-password-update'").execute(&pool).await.unwrap();
+     assert_eq!(
+         send(app.clone(), "/account/password", None, &cookie)
+             .await
+             .status(),
+         StatusCode::FORBIDDEN
+     );
+-    sqlx::query("UPDATE mbr_user_perm SET perm_filter='allow' WHERE user_id='self-member' AND perm_id='member-self-password-update'").execute(&pool).await.unwrap();
++    sqlx::query("UPDATE mbr_user_perm SET perm_filter='allow' WHERE user_id='self-member' AND perm_id='member-password-update'").execute(&pool).await.unwrap();
+     let form = format!(
+         "current_password=member-password&new_password=changed-password&confirm_password=changed-password&csrf={}",
+         csrf(&cookie, "member-password")
+diff --git a/chat_apps/chat_server/tests/day45_signup_self_service.rs b/chat_apps/chat_server/tests/day45_signup_self_service.rs
+new file mode 100644
+index 0000000..2ce270b
+--- /dev/null
++++ b/chat_apps/chat_server/tests/day45_signup_self_service.rs
+@@ -0,0 +1,12 @@
++use axum::{body::Body,http::{Request,StatusCode}};
++use tower::ServiceExt;
++#[tokio::test]
++async fn actual_signup_default_role_reaches_self_service_without_fixture_grants(){
++ let pool=sqlx::sqlite::SqlitePoolOptions::new().max_connections(1).connect("sqlite::memory:").await.unwrap();chat_persistence::migrate(&pool).await.unwrap();
++ let app=chat_server::signup::routes(pool.clone()).merge(chat_server::signin::routes(pool.clone()));
++ let signup=app.clone().oneshot(Request::post("/signup").header("origin","http://127.0.0.1:3000").header("content-type","application/x-www-form-urlencoded").body(Body::from("username=real_signup&email=real%40example.test&display_name=Real&password=signup-password")).unwrap()).await.unwrap();assert_eq!(signup.status(),StatusCode::SEE_OTHER);
++ let exceptions:i64=sqlx::query_scalar("SELECT count(*) FROM mbr_user_perm").fetch_one(&pool).await.unwrap();assert_eq!(exceptions,0,"no personal fixture grants may mask role wiring");
++ let login=app.clone().oneshot(Request::post("/login").header("origin","http://127.0.0.1:3000").header("content-type","application/x-www-form-urlencoded").body(Body::from("username=real_signup&password=signup-password")).unwrap()).await.unwrap();assert_eq!(login.status(),StatusCode::SEE_OTHER);
++ let cookie=login.headers()["set-cookie"].to_str().unwrap().split(';').next().unwrap();
++ for path in ["/account/profile","/account/password"]{let response=app.clone().oneshot(Request::get(path).header("cookie",cookie).body(Body::empty()).unwrap()).await.unwrap();assert_eq!(response.status(),StatusCode::OK,"actual registered user's default-role self action: {path}");}
++}
+```
+
+---
+
 # Day45 最後來源追驗｜Chat
 
 產品`d784f32c6bff86249dd84fd4294d055a4c774a49`。最新d784產品Chat原樣重新執行44項測試通過；其Chat子樹與28相同。WASM check在28通過，未將該次WASM結果改標成新SHA實跑。原f6完整patch已採用，不能重套。
