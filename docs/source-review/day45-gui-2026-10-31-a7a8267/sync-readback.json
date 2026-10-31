@@ -1,0 +1,106 @@
+{
+  "sync_commit": "a9caa504ca4aede35883936aa998afddd145d68c",
+  "readback": [
+    {
+      "path": "docs/learning-state.json",
+      "blob_sha": "f7e06d263a9d1203c358d9bb7da63879a1084c19",
+      "full_text_equal": true,
+      "sha256": "bc13bd55ed0206eeb84f08fd36aebc3e5fb4d3ac95a835d2fa142c9063d094f4"
+    },
+    {
+      "path": "docs/teaching/current/manifest.json",
+      "blob_sha": "02c30a31d1393aa4d480fc5400342deaf7de79a3",
+      "full_text_equal": true,
+      "sha256": "77176a5bb02b8f5ac29fa1942b36bb07aaaba4188095c88b97091e383ff8d690"
+    },
+    {
+      "path": "README.md",
+      "blob_sha": "e240928e0059fd75341c617079b22d1e1e9cd02f",
+      "full_text_equal": true,
+      "sha256": "d54089e0ed3722ccd749b0d2419fc91ddcf5a3c86dd20c2155acd9803f2480f1"
+    },
+    {
+      "path": "docs/README.md",
+      "blob_sha": "025f5262b866b7305049cb7e7def923bab40b72f",
+      "full_text_equal": true,
+      "sha256": "76a5733cab3f86bd4203ad24bcd5bc863af6f74e0ad5b821f52f52734aa4d6b7"
+    },
+    {
+      "path": "docs/teaching/README.md",
+      "blob_sha": "c9396aca27e199a9e8b9dd998da8edea118fc439",
+      "full_text_equal": true,
+      "sha256": "e3991ae3d676f71a35933be404a8b8b94e8046f87f591dbec95bc30a6988af1a"
+    },
+    {
+      "path": "docs/teaching/daily/README.md",
+      "blob_sha": "f268899073628103460e4963f9410d5ceb7cd7db",
+      "full_text_equal": true,
+      "sha256": "5161ddcc6236513491dfd007e2a22eb2121e6f09d3cc07d91d342ab6e24eadf7"
+    },
+    {
+      "path": "docs/teaching/chat/README.md",
+      "blob_sha": "0dcd593ce53a5b80b678adc4930b136560431d2b",
+      "full_text_equal": true,
+      "sha256": "aea73030059bdbcd90869a27a048027f7c438ceeb0e0aa7bde08b09321e66b56"
+    },
+    {
+      "path": "docs/teaching/pet/README.md",
+      "blob_sha": "36bdcfef3ddb9dfd2a02d39a5d5ea8db994f3484",
+      "full_text_equal": true,
+      "sha256": "1a98374fb71e1caf64b612f07174fbf5c687fb8c1b8816820ac4ca43c439ff90"
+    },
+    {
+      "path": "docs/teaching/analytics/README.md",
+      "blob_sha": "770ca48723677e132f2f151d51ef78c0249065c8",
+      "full_text_equal": true,
+      "sha256": "d796dfe2fa30faee1921d3503c0a04bef9bf76882dc133ee377ee87821989f4c"
+    },
+    {
+      "path": "docs/teaching/current/README.md",
+      "blob_sha": "41d2e60b87a9c8dda486314dd534254d4f8a6f4b",
+      "full_text_equal": true,
+      "sha256": "9c936ecac371109eeb0ca70f8f2057bbd22f3c2701fdc4b35811e1d7559817f6"
+    },
+    {
+      "path": "docs/teaching/current/STATUS.md",
+      "blob_sha": "6dddafcb488ef9fb2f31a88e65ae0e6f131cdf77",
+      "full_text_equal": true,
+      "sha256": "3860cfcd13926d031cb1359d3d64f5d05db06ace436df74729a6b94da3f01ea6"
+    },
+    {
+      "path": "docs/teaching/current/validation.json",
+      "blob_sha": "06e4469452233ff0d31a65529474a324aa2a09f3",
+      "full_text_equal": true,
+      "sha256": "2056ccce43f0a38c9862bd90a49c91f015d58848609559cf0397b075151872e3"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/README.md",
+      "blob_sha": "ca6fd3453b9bafa0f6e05dc1af6188fda115d630",
+      "full_text_equal": true,
+      "sha256": "e0e34c9b428f3d485a9cff874c69db470f8c77718d0ec4560efb05be29842db1"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/ENTRY.md",
+      "blob_sha": "01ad471314b9d4e3357945380225ac84f4d67334",
+      "full_text_equal": true,
+      "sha256": "8241620576b5dad841c3ecf9b8de8519509181059cce81a503f31d58ef40f6f2"
+    },
+    {
+      "path": "docs/source-review/day45-gui-2026-10-31-a7a8267/publication.json",
+      "blob_sha": "181052e5a18d5f2b550ad8b02bc1e746fbaa119a",
+      "full_text_equal": true,
+      "sha256": "87a3c647ae588019a6f7e80ace2d2b48245dc6551092bdcb6b8ea406cb35eb3f"
+    }
+  ],
+  "next_day": {
+    "chat": 46,
+    "pet": 46,
+    "analytics": 46
+  },
+  "day_advance": false,
+  "fifo_changed": false,
+  "last_full_comparison_changed": false,
+  "product_written": false,
+  "gate1": true,
+  "gate2": false
+}
