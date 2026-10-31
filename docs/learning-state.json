@@ -411,8 +411,8 @@
     "product_repository_read_only": true,
     "day_advance": false
   },
-  "reference_sha": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
-  "reference_scope": "actual Day45 browser/native acceptance: Analytics11 browser segments; Pet native virtual-desktop scopes pass; Chat raw default-role self-service403, corrected candidate45tests/9browser segments; not full comparison",
+  "reference_sha": "448dc72f9f7c7bfe7e0f92f235faba65825c1c8b",
+  "reference_scope": "448 actual Chat browser9 passes and runtime wiring adopted; one CSRF-purpose test typo remains; unchanged Analytics/Pet retain a7 evidence; not full comparison",
   "current_article_paths": {
     "chat": "docs/teaching/daily/day-45/chat-r2.md",
     "pet": "docs/teaching/daily/day-45/pet.md",
@@ -420,7 +420,7 @@
   },
   "teaching_progress": {
     "last_published_day": 45,
-    "last_publication_status": "Day45 real GUI acceptance evidence published: Analytics browser and Pet native virtual desktop verified; Chat canonical permission ID defect found and corrected candidate published; no Day/FIFO advance",
+    "last_publication_status": "Day45 Chat448 runtime fix adopted; actual browser9 pass, raw44/1failed and test-only candidate45 pass; no Day/FIFO advance",
     "next_day": {
       "chat": 46,
       "pet": 46,
@@ -474,8 +474,8 @@
     "local_main_upgrade_source_sha": "2c7ff8b861d32ab6d879bf80c9f2dce50de38097"
   },
   "current_gate2": {
-    "source_sha": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
-    "evidence": "docs/source-review/day45-gui-2026-10-31-a7a8267/gui-review.json",
+    "source_sha": "448dc72f9f7c7bfe7e0f92f235faba65825c1c8b",
+    "evidence": "docs/source-review/day45-2026-10-31-448dc72/review.json",
     "full_gate2": false,
     "complete": false,
     "chat_automated_passed": 44,
@@ -493,13 +493,11 @@
     "chat_pet_current_trees_identical": true,
     "analytics_product_unmodified": true,
     "ci_snapshot_had_pending_workflows": true,
-    "chat_browser_product_passed": false,
-    "chat_browser_product_steps_before_defect": 5,
-    "chat_real_signup_profile_status": 403,
-    "chat_new_signup_regression_exit": 101,
+    "chat_browser_product_passed": true,
+    "chat_real_signup_profile_status": 200,
+    "chat_new_signup_regression_exit": 0,
     "chat_candidate_automated_passed": 45,
     "chat_candidate_browser_steps": 9,
-    "chat_candidate_applied_to_product": false,
     "analytics_browser_steps": 11,
     "analytics_browser_actual_product": true,
     "native_virtual_desktop_acceptance": true,
@@ -514,9 +512,20 @@
     "pet_native_drag_and_find_recovery": true,
     "pet_physical_desktop_or_packaged_acceptance": false,
     "pet_transparency_accepted": false,
-    "pet_autonomous_roam_tested": false
+    "pet_autonomous_roam_tested": false,
+    "chat_browser_actual_source": "448dc72f9f7c7bfe7e0f92f235faba65825c1c8b",
+    "chat_browser_product_steps": 9,
+    "chat_raw_regression_passed": 44,
+    "chat_raw_regression_failed": 1,
+    "chat_raw_regression_exit": 101,
+    "chat_test_only_candidate_passed": 45,
+    "chat_runtime_permission_fix_adopted": true,
+    "chat_test_label_patch_applied": false,
+    "analytics_browser_actual_source": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
+    "pet_native_actual_source": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
+    "analytics_pet_subtrees_unchanged": true
   },
-  "latest_product_sha": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
+  "latest_product_sha": "448dc72f9f7c7bfe7e0f92f235faba65825c1c8b",
   "current_daily_schedule": {
     "date": "2026-10-31 Asia/Taipei",
     "automation_id": "6acd967c15fc8191ade8407954c5b354",
@@ -574,9 +583,9 @@
         "day": 45,
         "revision": "r2",
         "article_path": "docs/teaching/daily/day-45/chat-r2.md",
-        "article_commit": "708de113e0e893be26c302d7f47a51f401a105d1",
-        "blob_sha": "6fb4f94d5299c9a4b57da52414e3caa9ef433378",
-        "sha256": "34c291a87d4d8c4626e11dbc9552fc4ff29fadd8bbb1764c9efddcc35b556166",
+        "article_commit": "5bf2a7b94ee7381d4cf47744d8f00fa3d1e18076",
+        "blob_sha": "bb77cf2d0d6ed1ae1e9ee60ac83eed71e798d36f",
+        "sha256": "14257d9225b22d1178048c6fccf7bb78f6eeaa36c8df4a9db0937cc4ee1ecdd0",
         "source_sha": "f6a04015188da2155af6c264d0e6326e6a922dca",
         "publication_status": "published_same_day_verification_revision",
         "gate1_complete": true,
@@ -588,14 +597,14 @@
         "refactor_patch": "docs/teaching/daily/day-45/chat-day45-refactor.patch",
         "green_patch": "docs/teaching/daily/day-45/chat-day45-final-r2.patch",
         "red_patch": "docs/teaching/daily/day-45/chat-day45-final-red-r2.patch",
-        "evidence": "docs/source-review/day45-gui-2026-10-31-a7a8267/publication.json",
+        "evidence": "docs/source-review/day45-2026-10-31-448dc72/publication.json",
         "expected_next_day": 46,
         "storage": "raw_latest_pending_product_application",
         "version_msrv_gate_complete": true,
         "red_baseline": "exact f6 source plus this revision's Red tests only; use separate clean copy for complete patch",
         "refactor_included_in_complete_patch": true,
-        "patch_application": "prior patches adopted; new canonical member permission ID correction remains for user to apply to exact a7",
-        "validation": "docs/source-review/day45-gui-2026-10-31-a7a8267/gui-review.json",
+        "patch_application": "do not reapply prior runtime permission fix; only new test-only patch remains",
+        "validation": "docs/source-review/day45-2026-10-31-448dc72/review.json",
         "day_advance": false,
         "candidate_validation": {
           "source_sha": "f6a04015188da2155af6c264d0e6326e6a922dca",
@@ -611,25 +620,29 @@
           "sha256": "50e9d98961f363c31943188a65df5feb489ce165fd033e6b573833336300eb31"
         },
         "application_at_latest_source": "new exact-f6 complete candidate patch verified by clean apply and tests; product main not written or applied",
-        "verification_revision": "real-browser-native-a7a8267",
+        "verification_revision": "product-browser-448dc72",
         "latest_verification": {
-          "source_sha": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
-          "evidence": "docs/source-review/day45-gui-2026-10-31-a7a8267/gui-review.json",
-          "product_browser": "failed at real-signup self profile403; canonical permission IDs mismatch",
-          "original_browser_steps_completed": 5,
-          "new_signup_red_exit": 101,
-          "corrected_candidate_tests": 45,
-          "corrected_candidate_browser_steps": 9,
-          "correction_applied_to_product": false
+          "source_sha": "448dc72f9f7c7bfe7e0f92f235faba65825c1c8b",
+          "product_browser_passed": true,
+          "product_browser_steps": 9,
+          "product_browser_errors": 0,
+          "product_browser_exit": 0,
+          "runtime_permission_fix_adopted": true,
+          "raw_regression_passed": 44,
+          "raw_regression_failed": 1,
+          "raw_regression_exit": 101,
+          "test_only_candidate_passed": 45,
+          "test_only_candidate_exit": 0,
+          "evidence": "docs/source-review/day45-2026-10-31-448dc72/review.json"
         },
-        "correction_patch": "docs/source-review/day45-gui-2026-10-31-a7a8267/chat-permission-id-fix.patch",
+        "correction_patch": "docs/source-review/day45-2026-10-31-448dc72/csrf-test-label-fix.patch",
         "previous_document_revision": {
-          "article_commit": "328a3598145de7d486792666241ef85e7fbcea4a",
-          "blob_sha": "305419b16cbc67763a383ef517e49b625e8da0cd",
-          "sha256": "35606a7ae1877d657799ca6c389a62c2bb13d22f36136627da3625e0c7c27122",
-          "evidence": "docs/source-review/day45-2026-10-31-d784f32/publication.json"
+          "article_commit": "708de113e0e893be26c302d7f47a51f401a105d1",
+          "blob_sha": "6fb4f94d5299c9a4b57da52414e3caa9ef433378",
+          "sha256": "34c291a87d4d8c4626e11dbc9552fc4ff29fadd8bbb1764c9efddcc35b556166",
+          "evidence": "docs/source-review/day45-gui-2026-10-31-a7a8267/publication.json"
         },
-        "correction_status": "new real-signup browser defect; corrected isolated candidate passes"
+        "correction_status": "runtime fix adopted and actual browser passes; remaining correction is one CSRF-purpose test string only"
       },
       {
         "project": "pet",
@@ -941,11 +954,19 @@
         "article_commit": "32495c7bc9f47dcab52524c669a2aec7d1da51c5",
         "evidence": "docs/source-review/day45-gui-2026-10-31-a7a8267/publication.json",
         "day_advance": false
+      },
+      {
+        "project": "chat",
+        "day": 45,
+        "verification_revision": "product-browser-448dc72",
+        "article_commit": "5bf2a7b94ee7381d4cf47744d8f00fa3d1e18076",
+        "evidence": "docs/source-review/day45-2026-10-31-448dc72/publication.json",
+        "day_advance": false
       }
     ]
   },
   "candidate_validation": "docs/teaching/daily/day-45/delivery-verification.json",
-  "latest_revision_evidence": "docs/source-review/day45-gui-2026-10-31-a7a8267/publication.json",
+  "latest_revision_evidence": "docs/source-review/day45-2026-10-31-448dc72/publication.json",
   "product_adoption": {
     "analytics": {
       "source_sha": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
@@ -990,17 +1011,21 @@
       "frozen_fixture_requires_exact_byte_loader": true
     },
     "chat": {
-      "source_sha": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
+      "source_sha": "448dc72f9f7c7bfe7e0f92f235faba65825c1c8b",
       "day45_code_adopted": true,
       "automated_passed": 44,
       "full_gate2": false,
-      "review": "docs/source-review/day45-gui-2026-10-31-a7a8267/README.md",
+      "review": "docs/source-review/day45-2026-10-31-448dc72/README.md",
       "actual_browser_verified": true,
-      "actual_browser_passed": false,
-      "default_role_self_action_wiring_defect": true,
-      "correction_patch": "docs/source-review/day45-gui-2026-10-31-a7a8267/chat-permission-id-fix.patch",
+      "actual_browser_passed": true,
+      "default_role_self_action_wiring_defect": false,
+      "correction_patch": "docs/source-review/day45-2026-10-31-448dc72/csrf-test-label-fix.patch",
       "candidate_automated_passed": 45,
-      "candidate_browser_steps": 9
+      "runtime_permission_fix_adopted": true,
+      "actual_product_browser_steps": 9,
+      "raw_regression_passed": 44,
+      "raw_regression_failed": 1,
+      "test_only_candidate_passed": 45
     },
     "pet": {
       "source_sha": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
@@ -1019,6 +1044,19 @@
       "physical_desktop_acceptance": false,
       "packaged_acceptance": false,
       "transparency_accepted": false
+    },
+    "previous_chat_snapshot": {
+      "source_sha": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
+      "day45_code_adopted": true,
+      "automated_passed": 44,
+      "full_gate2": false,
+      "review": "docs/source-review/day45-gui-2026-10-31-a7a8267/README.md",
+      "actual_browser_verified": true,
+      "actual_browser_passed": false,
+      "default_role_self_action_wiring_defect": true,
+      "correction_patch": "docs/source-review/day45-gui-2026-10-31-a7a8267/chat-permission-id-fix.patch",
+      "candidate_automated_passed": 45,
+      "candidate_browser_steps": 9
     }
   },
   "requirements_confirmations": {
@@ -1050,7 +1088,7 @@
   },
   "previous_gate2_snapshot": {
     "source_sha": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
-    "evidence": "docs/source-review/day45-2026-10-31-a7a8267/review.json",
+    "evidence": "docs/source-review/day45-gui-2026-10-31-a7a8267/gui-review.json",
     "full_gate2": false,
     "complete": false,
     "chat_automated_passed": 44,
@@ -1067,14 +1105,36 @@
     "chat_pet_latest_actual_test_source": "d784f32c6bff86249dd84fd4294d055a4c774a49",
     "chat_pet_current_trees_identical": true,
     "analytics_product_unmodified": true,
-    "ci_snapshot_had_pending_workflows": true
+    "ci_snapshot_had_pending_workflows": true,
+    "chat_browser_product_passed": false,
+    "chat_browser_product_steps_before_defect": 5,
+    "chat_real_signup_profile_status": 403,
+    "chat_new_signup_regression_exit": 101,
+    "chat_candidate_automated_passed": 45,
+    "chat_candidate_browser_steps": 9,
+    "chat_candidate_applied_to_product": false,
+    "analytics_browser_steps": 11,
+    "analytics_browser_actual_product": true,
+    "native_virtual_desktop_acceptance": true,
+    "pet_native_actual_product": true,
+    "pet_native_display": "Xvfb97 + xfwm4, debug Tauri/Wry",
+    "pet_native_200x200": true,
+    "pet_native_six_poses": true,
+    "pet_native_multi_pet_isolation": true,
+    "pet_native_close_and_cage": true,
+    "pet_native_menu": true,
+    "pet_native_restart": true,
+    "pet_native_drag_and_find_recovery": true,
+    "pet_physical_desktop_or_packaged_acceptance": false,
+    "pet_transparency_accepted": false,
+    "pet_autonomous_roam_tested": false
   },
   "latest_day45_verification": {
-    "source_sha": "a7a8267f8c2f9003dd0d91d9a8cd25daba2517e4",
-    "evidence": "docs/source-review/day45-gui-2026-10-31-a7a8267/gui-review.json",
+    "source_sha": "448dc72f9f7c7bfe7e0f92f235faba65825c1c8b",
+    "evidence": "docs/source-review/day45-2026-10-31-448dc72/review.json",
     "gate1": true,
     "gate2": false,
     "product_written": false,
-    "scope": "actual browser + native Linux virtual desktop; product and corrected Chat candidate separated"
+    "scope": "actual Chat browser9 passes; raw regression44/1failed; one-line test-only candidate45 passes; Analytics/Pet unchanged, prior original-SHA evidence retained"
   }
 }

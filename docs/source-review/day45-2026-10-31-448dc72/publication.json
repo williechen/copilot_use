@@ -1,0 +1,128 @@
+{
+  "source_sha": "448dc72f9f7c7bfe7e0f92f235faba65825c1c8b",
+  "article_commit": "5bf2a7b94ee7381d4cf47744d8f00fa3d1e18076",
+  "readback": [
+    {
+      "path": "docs/source-review/day45-2026-10-31-448dc72/README.md",
+      "blob_sha": "8db4b143259d9bd4de6cd13cb4aac20dc6a138e4",
+      "sha256": "91ebe51cbdea21fd988023e72f0c6a07ae592ea4e34b9a494d38f8f653962516",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-448dc72/patch-validation.json",
+      "blob_sha": "0c1fca543e165dfb98939dfb1bc03d99d13ca764",
+      "sha256": "a6a06fa7ae8066223160e492442ea361dbd78ea7400af6f406a63a4777d9b0df",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-448dc72/browser-results.json",
+      "blob_sha": "37c45ecb2a4125ac96f43ce20a44f6593843363a",
+      "sha256": "4657afae4ac0ce9fdad347f511381780f77237d47edbdedbd4d2458355e49255",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-448dc72/browser.cjs",
+      "blob_sha": "71d2896548add89a2cc60318df98930cfb11177b",
+      "sha256": "e7bb0938867439a62c0a3027f44b17303d6a7f79ef1a37e6f90defece0de2f46",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-448dc72/chat-regression.log",
+      "blob_sha": "c7fbdd96627bab6077152c80488d82d3af2f5b5d",
+      "sha256": "b1e83f41fe256fa4535e6a51bede52aa80461ce1857a7de02297749c360820cc",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-448dc72/chat-test-fixed.log",
+      "blob_sha": "bb1ee6c874e0085fbb92d8b0f0bc4e37fd139c9a",
+      "sha256": "d58752097408dc7bd1d138b0a89740bb6431cc36c854ce8efcea7bdabf3674c3",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-448dc72/browser.log",
+      "blob_sha": "3d5887d735439e35be6ca2e6a7df65ce13ba0157",
+      "sha256": "f24374eccd388a4079477c3ee660bf8d9f1f75ed0d2f7ef77bc30ee81407a59a",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-448dc72/review.json",
+      "blob_sha": "d5c9d4ed797ce5ca322fef783fc88b7e2f9996ce",
+      "sha256": "4bc218552e6abbdd89eb6181c6a5e192762f9ae14eaff95065ea81b1542718fa",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-448dc72/browser-install.log",
+      "blob_sha": "c11452608ebc847ae90c3bf3f4f430bdde659d06",
+      "sha256": "aef4036507419595917d6b3ca2ea662ccb62185f626f2fc08a4d1970c60841d3",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-448dc72/source.json",
+      "blob_sha": "4d90ec981fdc28938db96076eb3df5ffee5435c8",
+      "sha256": "59f56af85d3d25787fb0f192c40badd7584947e0a7d7a164cd96773e84ec5e7b",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-448dc72/chat-room.png",
+      "blob_sha": "21464fbdb7f5c76310292c50e8f348c2f0d8ddbb",
+      "sha256": "8b4f53ccb641fe38aeb4b5e1738bf9fc674273d87b0a2132dc72a55b50e10e51",
+      "complete_remote_readback": true,
+      "binary": true
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-448dc72/csrf-test-label-fix.patch",
+      "blob_sha": "dae9701298aa12fbd8993db179ad2e820a62fb76",
+      "sha256": "ef6b5035bea2bbbde9ee60ad7264278423601afe4790fd87e27fc62bcb1cea89",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-448dc72/chat-build.log",
+      "blob_sha": "07860b456ce292048fe0d81007633c66f11f7351",
+      "sha256": "8599eaaed3f23f7a5aea8fbf5126cc26a9cceafb913f9d192ae05fba684dfad6",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/source-review/day45-2026-10-31-448dc72/cleanup.json",
+      "blob_sha": "712ea76c6620e675db6a019bca550c4235d3b7c9",
+      "sha256": "b4ce42175b4a207155e76b15296292eee3e6a9328dc8eb6976f4d3a45eda9c1b",
+      "complete_remote_readback": true,
+      "binary": false
+    },
+    {
+      "path": "docs/teaching/daily/day-45/chat-r2.md",
+      "blob_sha": "bb77cf2d0d6ed1ae1e9ee60ac83eed71e798d36f",
+      "sha256": "14257d9225b22d1178048c6fccf7bb78f6eeaa36c8df4a9db0937cc4ee1ecdd0",
+      "complete_remote_readback": true,
+      "binary": false
+    }
+  ],
+  "expected_sync_parent": "5bf2a7b94ee7381d4cf47744d8f00fa3d1e18076",
+  "expected_next_day": {
+    "chat": 46,
+    "pet": 46,
+    "analytics": 46
+  },
+  "day_advance": false,
+  "fifo_changed": false,
+  "last_full_comparison_changed": false,
+  "product_written": false,
+  "product_browser_steps": 9,
+  "product_browser_exit": 0,
+  "raw_tests_passed": 44,
+  "raw_tests_failed": 1,
+  "test_only_candidate_passed": 45,
+  "gate1": true,
+  "gate2": false
+}

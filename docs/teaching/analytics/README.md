@@ -1,3 +1,5 @@
+> 最新448dc72f：Chat授權ID修正已採用，**產品原樣9段真實瀏覽器旅程通過**；只剩強制改密碼測試把CSRF標籤誤改成perm_id，原樣44通過／1失敗，單檔一行測試補正後45通過。勿重套舊runtime patch。[精確來源／完整補正／log／截圖](https://github.com/williechen/copilot_use/blob/main/docs/source-review/day45-2026-10-31-448dc72/README.md)。Analytics／Pet子樹未變，保留a7原SHA驗收證據；next_day仍46，FIFO與last_full_comparison不變，完整Gate2=false。本段取代較早「Chat本人資料頁403」狀態，歷史保留。
+
 > 真GUI驗收補記（精確a7a8267f）：Analytics 11段真Chromium旅程通過；Pet 真Tauri／WebKit原生虛擬桌面的200×200、六姿態、多窗、原生菜單、關閉、拖曳／找回與重啟已驗。Chat真註冊預設角色本人資料頁403，授權ID與migration不符；補正候選45項測試／9段瀏覽器通過，產品仍待使用者套patch。[完整證據／截圖／patch與限制](https://github.com/williechen/copilot_use/blob/main/docs/source-review/day45-gui-2026-10-31-a7a8267/README.md)。next_day仍46，不加Day；完整Gate2=false。本段取代下方「瀏覽器／桌面尚未跑」及較早廣泛通過描述，保留歷史。
 
 > 最新a7a8267f已採用最後fixture補正：產品原樣Analytics完整postgres-integration **68通過／0失敗／1既有ignored，exit0**，不再是候選結果，亦無需新patch。[實際SHA／命令／log／限制](https://github.com/williechen/copilot_use/blob/main/docs/source-review/day45-2026-10-31-a7a8267/README.md)。Chat／Pet子樹未改，保留d784實測標記；三案next_day仍46，FIFO及last_full_comparison不變，完整Gate2仍false。本段取代下方較早「仍1失敗」狀態，歷史證據保留。
