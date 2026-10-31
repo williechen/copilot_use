@@ -1,0 +1,182 @@
+{
+  "document_commit": "f6bad0e9fc78d7990e38562ba508e9fe492bba39",
+  "source_sha": "f6a04015188da2155af6c264d0e6326e6a922dca",
+  "scope": "SQL role-default adoption review and direct confirmation of common change-password flow, not runtime implementation",
+  "exact_commit_full_readback": true,
+  "files": [
+    {
+      "path": "docs/source-review/analytics-adoption-2026-10-31-f6a0401/source-inventory.json",
+      "blob_sha": "bd299363eb4c80b23d299f5be29989a5b1ef1976",
+      "full_text_equal": true,
+      "sha256": "71b56eedf563a6e33676100dec329f4ec20a45c5fa1b6ff31cdd4fc731a76610"
+    },
+    {
+      "path": "docs/source-review/analytics-adoption-2026-10-31-f6a0401/migration.log",
+      "blob_sha": "766cd940f6a79d7f5ce3288d405c0a2ee4bb7c55",
+      "full_text_equal": true,
+      "sha256": "825a2eba3575a6c3f7459c922359d0ee48c58fdbe503579b0ef22356b0064181"
+    },
+    {
+      "path": "docs/source-review/analytics-adoption-2026-10-31-f6a0401/migration-exits.json",
+      "blob_sha": "5d0820f38c3203a07d4a487ff8ef1481d9a7eed5",
+      "full_text_equal": true,
+      "sha256": "0d34f1f23c7879058a794287ae503e723808716304d4b206b65efb249cf6d8f9"
+    },
+    {
+      "path": "docs/source-review/analytics-adoption-2026-10-31-f6a0401/inspection.log",
+      "blob_sha": "1d357e3dadcc11ce8c33e3b83de28cb537bfe02b",
+      "full_text_equal": true,
+      "sha256": "c84ed4434e9244bbf7f309201ea11f50b6ab8d7bf42bcab243b3726c15197984"
+    },
+    {
+      "path": "docs/source-review/analytics-adoption-2026-10-31-f6a0401/ci.json",
+      "blob_sha": "879e607ab2b0cca4872a399d0c0c20f136ce1dc7",
+      "full_text_equal": true,
+      "sha256": "1d514c4dfad39a685c252c1e6ca4d31cf8e56465d8442c96bfc302d146ee6df3"
+    },
+    {
+      "path": "docs/source-review/analytics-adoption-2026-10-31-f6a0401/validation.json",
+      "blob_sha": "51153f1a1a5b3d6d5bdb25aa786fa3c9efca2c4a",
+      "full_text_equal": true,
+      "sha256": "cd550fa7b10bf081ef56678a44eb1362df78c767515c42780cc45ec202c5e9c6"
+    },
+    {
+      "path": "docs/source-review/analytics-adoption-2026-10-31-f6a0401/README.md",
+      "blob_sha": "a575855ccc694776c7e57e85047e395cd192aa96",
+      "full_text_equal": true,
+      "sha256": "32e9210d66bbaf24f8ec95aa441e80c4a713e74956c9a4f74e4e07cc59aec6bc"
+    },
+    {
+      "path": "docs/learning-state.json",
+      "blob_sha": "e850ebe41c21762cbba9491d458b4089c28eeaf0",
+      "full_text_equal": true,
+      "sha256": "03a3fcf556396d87cdb59c4d1c3e89426bb9edc08b2647763447fbeba1283408"
+    },
+    {
+      "path": "docs/teaching/current/manifest.json",
+      "blob_sha": "d3b3c7c19714257dc2fc3ff5d379a494c5bfc513",
+      "full_text_equal": true,
+      "sha256": "bd8b42c9b83fc3f543a2d844866f812cc393607f34d6a0b4409b14aea06fd727"
+    },
+    {
+      "path": "docs/teaching/current/STATUS.md",
+      "blob_sha": "8fc6c577bb75f18f9e1c220ee48db7285c9ce61c",
+      "full_text_equal": true,
+      "sha256": "ba445bd08d3b46f5facd0a0e2d73d94de4e0cd797d9b5dfffdf6872b06a0c1ba"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/README.md",
+      "blob_sha": "4a0cbdb794c2d0dd0819960cdcf5c50595827e7b",
+      "full_text_equal": true,
+      "sha256": "5847f7cc5abaeebeeafcd811b61fa82eb2fe4e1e334d1814cb95735d78a4adef"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/ENTRY.md",
+      "blob_sha": "08ada9e0a7cccc0d30e78e6ae77a28ca71db01d4",
+      "full_text_equal": true,
+      "sha256": "dc7d8aad23bbc63bdc629379a96755bbfc08a86a6ac9f833da8b0dd9561b3753"
+    },
+    {
+      "path": "docs/requirements/ANALYTICS_ACL.md",
+      "blob_sha": "a268103bcd568e5c9a9891cf967ecb2e88da8064",
+      "full_text_equal": true,
+      "sha256": "2447ecd6f6ec900c7d0b954dc3412864b509d9cfa4b98ab0674b0fc0a7abf0ba"
+    },
+    {
+      "path": "docs/requirements/AUTHENTICATION.md",
+      "blob_sha": "a127833473e56ee7ea31c41d1df2296272e3d7c5",
+      "full_text_equal": true,
+      "sha256": "7e23bba05a3f2ebff7a93450498c396f20ab2fa2f2750495f80c060df74ad34b"
+    },
+    {
+      "path": "docs/requirements/USER_FLOWS.md",
+      "blob_sha": "82f7f87b3e81fb162e22aca2738254a6d47ad6fa",
+      "full_text_equal": true,
+      "sha256": "9bb9ec566654faf78bcb01d2b1e748993b5a6ac08b783be5ca2b23b28fea125c"
+    },
+    {
+      "path": "docs/UI_ALIGNMENT_REQUIREMENTS.md",
+      "blob_sha": "920d04fef84d3a8116a0f35a3dbdd45eb11f62a8",
+      "full_text_equal": true,
+      "sha256": "20ae41999000835c19c3ad93debd5c14166f31d279549cc484f940400a1d8cc1"
+    },
+    {
+      "path": "docs/SOURCE_LAYOUT.md",
+      "blob_sha": "e689430a014e4dcbbfad50f3a67747a6f3451aca",
+      "full_text_equal": true,
+      "sha256": "2954c4bd9527059f964c8d20385653ce599d5a4ba54ebf60886e37997b21024b"
+    },
+    {
+      "path": "docs/SYSTEM_ARCHITECTURE.md",
+      "blob_sha": "6be1b56bf4259db7d86c27427eac88b59ed3f34f",
+      "full_text_equal": true,
+      "sha256": "5c850fdb177011823eca9f9c285705e41cc80ae7d991b03abda955530ff506a6"
+    },
+    {
+      "path": "docs/FUTURE_WORK.md",
+      "blob_sha": "7e42171398336c21955bc5440495a73563c2d5dd",
+      "full_text_equal": true,
+      "sha256": "092a5c12a14c3473ba9767cf3a4dbb35552b30e87c83457f5b9680b02311e4f7"
+    },
+    {
+      "path": "README.md",
+      "blob_sha": "3389f9320ab3569995b40c2f978e2060936892d6",
+      "full_text_equal": true,
+      "sha256": "bf58aad40fa41100c2f2a0257d2c7d784c39776041228cc58c38996366942351"
+    },
+    {
+      "path": "docs/README.md",
+      "blob_sha": "d5ce1f30531dfa1d30af0b20f9d82b0f828bf17b",
+      "full_text_equal": true,
+      "sha256": "4de89a590db528f826d351bf873fe0dbb30f7c17cdf9b4731c3d2cb2ad584517"
+    },
+    {
+      "path": "docs/teaching/README.md",
+      "blob_sha": "e996ed2ae3feb1a79d8155d1835bbeff05616784",
+      "full_text_equal": true,
+      "sha256": "32e9e9a50bbd777c8d41ebc98a10b9374e494c344a1f2b00528433694fe918ef"
+    },
+    {
+      "path": "docs/teaching/daily/README.md",
+      "blob_sha": "ac86762f13c5b989706b41ccfa61c2d445ecd82c",
+      "full_text_equal": true,
+      "sha256": "39f9bd69a13ae943e1140ea3519ee5376db4b0fd496215ad33fe3e966751161c"
+    },
+    {
+      "path": "docs/teaching/chat/README.md",
+      "blob_sha": "4255f4bb8d7f255f36d0081bb14a51219a6377be",
+      "full_text_equal": true,
+      "sha256": "7de33e170e33fa7728033dfad6fd3a2a578d5f71aa9f77ee78a19e2df976d344"
+    },
+    {
+      "path": "docs/teaching/pet/README.md",
+      "blob_sha": "7469cdd31f45d6108e6217176b70c6ddb8902cdd",
+      "full_text_equal": true,
+      "sha256": "357fa1f05946e0840dd743f6d60b96730c725532e819b928c9a2ead3889844fb"
+    },
+    {
+      "path": "docs/teaching/analytics/README.md",
+      "blob_sha": "7855685072b14812d901cab83fbcc2b2f13338ab",
+      "full_text_equal": true,
+      "sha256": "83b508838cb36c851963b83b65aeee09b4543119967e5f5c323d3c044734ab2f"
+    },
+    {
+      "path": "docs/teaching/current/README.md",
+      "blob_sha": "445cbc2909638f5452e1e97ff29efe67e76207c3",
+      "full_text_equal": true,
+      "sha256": "6bd862d864ffda458d2d680b674bfa67dfc721369f0dd385b8b931acd8cd9242"
+    }
+  ],
+  "fresh_raw_sql_migrations_passed": 7,
+  "shared_password_without_separate_page_confirmed": true,
+  "shared_password_runtime_implemented": false,
+  "gate2": false,
+  "next_day": {
+    "chat": 46,
+    "pet": 46,
+    "analytics": 46
+  },
+  "fifo_changed": false,
+  "last_full_comparison_changed": false,
+  "product_repository_written": false
+}
