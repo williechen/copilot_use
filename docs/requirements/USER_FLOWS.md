@@ -44,3 +44,5 @@
 自身密碼保留為 ACL page。首次登入需強制修改時先顯示自身密碼頁，完成修改後，後續登入才預設顯示首頁；未完成者重登仍須先完成，不以單純登入次數繞過。 共用是同一自身密碼ACL page及實作重用，不是移除page；本人修改與管理他人帳密分別授權。先前移除page的說法已撤回，見[共用人員驗證](AUTHENTICATION.md)。
 
 - 2026-10-31 CRUD授權補充：角色對page及其各create/read/update/delete action的授權，都必須各自保存至`uac_role_acl(role_id, acl_id)`；action的acl_id指向該page下對應的uac_acl節點。`uac_user_acl`保留個人獨立加減權，不代替角色CRUD的持久化關係。詳見[Analytics ACL](ANALYTICS_ACL.md)。
+
+- 2026-10-31 個人CRUD授權補充：`uac_user_acl(user_id, acl_id, acl_filter)`也必須各自保存個人對page及其create/read/update/delete action的加減權；action的acl_id指向該page下的uac_acl節點。移除個人例外回到角色預設，明確減權則保存deny。角色預設仍存於uac_role_acl，不能以任一表取代另一表。詳見[Analytics ACL](ANALYTICS_ACL.md)。

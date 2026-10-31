@@ -98,3 +98,17 @@ page ─→ category：至少有一個具有效page權限的子頁，才顯示�
 角色權限編輯時，勾選某CRUD即新增對應的uac_role_acl關係，取消則移除該角色對該action的關係；不刪除uac_acl定義，不影響其他角色與既有個人例外。相同操作名稱在不同page下是不同action，不可跨page套用。
 
 有效權限仍合併角色預設與uac_user_acl個人加減，deny優先。功能樹維持page→category、page→action；UI與後端必須讀取保存後的權限重新判斷。本次僅補明需求，不宣稱產品接線或權限編輯UI已完成，不增加Day或變更學習進度。
+
+## 個人CRUD action也寫入uac_user_acl（2026-10-31 使用者確認）
+
+`uac_user_acl`不只保存個人對page的加減權；個人對該page下各create/read/update/delete **action的加減權，也必須各自保存於此表**。每筆以`user_id + acl_id`指定人員及目標ACL節點，`acl_filter`保存allow／deny；action的acl_id指向其所屬page下的uac_acl節點。
+
+例如某人對自身密碼page的個人權限與update操作的個人權限，是「user_id→analytics-password」及「user_id→analytics-password-update」兩筆獨立關係。這只是資料結構示例，不自動替任何實際人員加權。
+
+- 個人取得page不表示自動取得全部CRUD；個人取得某action也不表示自動取得其page。
+- 新增個人allow可補上角色未授予的指定page／action；個人deny可減去角色已有的指定page／action，deny優先。
+- 移除個人例外關係表示回到角色預設，不等同新增deny。若要明確拒絕角色已授權的action，須保存該action的個人deny。
+- 個人CRUD設定不能只存在UI勾選、暫存狀態或角色表；保存後須讀回uac_user_acl，與uac_role_acl合併判斷。
+- 同名CRUD在不同page下是不同action，不可跨page共用授權；修改個人例外不覆寫角色預設或其他人的權限。
+
+因此，角色與個人的page／action都保存對應acl_id：角色使用uac_role_acl，個人加減權使用uac_user_acl。功能樹仍依page→category、page→action推導，後端同樣核對有效權限。本次是需求補明，不宣稱權限編輯UI或runtime已完成，不變更學習進度。
