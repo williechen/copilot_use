@@ -1,0 +1,195 @@
+{
+  "scope": "63b1f93 schema adoption review and tested forward SQL proposal; not full runtime adoption",
+  "document_commit": "ab4c7bcfbc27c2f9ef418548c6e66a8841ade456",
+  "source_sha": "63b1f936b32f131f0f801bb4f36b3163f88c91fa",
+  "exact_commit_full_readback": true,
+  "files": [
+    {
+      "path": "docs/source-review/analytics-adoption-2026-10-31-63b1f93/source-inventory.json",
+      "blob_sha": "065d4b7b8da22fd48a86f71b19dbb66206fe31f3",
+      "full_text_equal": true,
+      "sha256": "6dca7e335c4bcbb67c2d20dfa67061e46a2b53e34bf8df7074bb51941bc15caa"
+    },
+    {
+      "path": "docs/source-review/analytics-adoption-2026-10-31-63b1f93/ci.json",
+      "blob_sha": "8d2d822f6824f79a31cef2bc32940883d3eaf37c",
+      "full_text_equal": true,
+      "sha256": "8b95dcc2c65500c481f0343c310761a687cf051916e5b3b2a9f66b4b565d0445"
+    },
+    {
+      "path": "docs/source-review/analytics-adoption-2026-10-31-63b1f93/migration.log",
+      "blob_sha": "19cfc0ccdc5137b3d165cfdd24563f49684e6e08",
+      "full_text_equal": true,
+      "sha256": "393be8ec4138ce23566cc5dd96c170c1ce9cd591cdec9a422d31b1135f239562"
+    },
+    {
+      "path": "docs/source-review/analytics-adoption-2026-10-31-63b1f93/migration-exits.json",
+      "blob_sha": "5d0820f38c3203a07d4a487ff8ef1481d9a7eed5",
+      "full_text_equal": true,
+      "sha256": "0d34f1f23c7879058a794287ae503e723808716304d4b206b65efb249cf6d8f9"
+    },
+    {
+      "path": "docs/source-review/analytics-adoption-2026-10-31-63b1f93/inspection.log",
+      "blob_sha": "6b66f0ca4a1e290a15fc8e12bafe0b536f437411",
+      "full_text_equal": true,
+      "sha256": "fcfb130df0e56cb8d48554e4c4e89ef0d12f1902053e8239859b7073c17fa2d2"
+    },
+    {
+      "path": "docs/source-review/analytics-adoption-2026-10-31-63b1f93/forward-fix.log",
+      "blob_sha": "df4c9ef28e1120d79f6203379a71d19bca211855",
+      "full_text_equal": true,
+      "sha256": "6418f23025dea787e9af72d09210c19c9bed1df7215dd0f075e6698f272f50f3"
+    },
+    {
+      "path": "docs/source-review/analytics-adoption-2026-10-31-63b1f93/forward-inspection.log",
+      "blob_sha": "a8b00862dc5cf52c1e9942d1081efedcf2eb72a5",
+      "full_text_equal": true,
+      "sha256": "e906ded437c2e1f4b511e54640b7aca7ed7c9e67a22975c47c0eaaf1fa36db5c"
+    },
+    {
+      "path": "docs/source-review/analytics-adoption-2026-10-31-63b1f93/patch-check.log",
+      "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "full_text_equal": true,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/source-review/analytics-adoption-2026-10-31-63b1f93/analytics-security-page-forward.patch",
+      "blob_sha": "fb2a7e689cf6bb183c1d70974f1ffedd442492ac",
+      "full_text_equal": true,
+      "sha256": "e273d760bed5ad8c7466fc8799e238db550570f59fe9d877d69f666eec8a19b2"
+    },
+    {
+      "path": "docs/source-review/analytics-adoption-2026-10-31-63b1f93/20261031094500_grant_security_page.sql",
+      "blob_sha": "44690c7f9dacfea0997af19b5abd0059db841672",
+      "full_text_equal": true,
+      "sha256": "99d94629a3ea11f59699526fb3624a93c6b266ca56522df76e67811f2f15c34e"
+    },
+    {
+      "path": "docs/source-review/analytics-adoption-2026-10-31-63b1f93/README.md",
+      "blob_sha": "e7fbc4ef2d75dcb85239b97ea4ec6cab6973fc74",
+      "full_text_equal": true,
+      "sha256": "ba97af1c715215d200a76a520c88308b950017515ce4299e686b5849d4b8987a"
+    },
+    {
+      "path": "docs/source-review/analytics-adoption-2026-10-31-63b1f93/validation.json",
+      "blob_sha": "298e6872754bbb6b72a99320d4db4483882be3ce",
+      "full_text_equal": true,
+      "sha256": "2299c1a4cc7a10d603b2ba43029b04debb0dabb3036d5ff2779dcd736107ab4c"
+    },
+    {
+      "path": "docs/learning-state.json",
+      "blob_sha": "2df1a52c203652f9d67431fe1d14995a2a460b28",
+      "full_text_equal": true,
+      "sha256": "ec0a2b775e69a4069f4315548b1b90ea03ffa1414ea4975f0ada1185b707ab82"
+    },
+    {
+      "path": "docs/teaching/current/manifest.json",
+      "blob_sha": "9e860a71842e52b38d5c7f38a3d097c1d7e658b0",
+      "full_text_equal": true,
+      "sha256": "42aacc005c5e2762ba816f8afa5752ebdb4102cddf2c06531942f2ea8671a96b"
+    },
+    {
+      "path": "docs/teaching/current/STATUS.md",
+      "blob_sha": "7faaca901fe185d903c705a9d20d0a44558e0d76",
+      "full_text_equal": true,
+      "sha256": "5a2d85467b1e2737701127f40992eeb7c65a0a51e0dac75ae50f371a56898925"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/README.md",
+      "blob_sha": "d725c383afd50ef6cbc11a2b1eb7f3066c0df6b6",
+      "full_text_equal": true,
+      "sha256": "903cb551d9e75f6194531a0ef5144c87c28d6a42a04349e125649f61cf17b738"
+    },
+    {
+      "path": "docs/teaching/daily/day-45/ENTRY.md",
+      "blob_sha": "d9a5c542be0ededd3f1472fbbea2955dcfda76b6",
+      "full_text_equal": true,
+      "sha256": "befbc0e5aaa671f0895d25fe9b5fc0586480db2366639f5d6dc154c81ff43846"
+    },
+    {
+      "path": "docs/requirements/ANALYTICS_ACL.md",
+      "blob_sha": "dfafd9c93774aa50aa0a5b5349a564692413912b",
+      "full_text_equal": true,
+      "sha256": "8a475fe7cc43a18f6e9346064ae82fc4551c3b3bde499e07c6e5589c06390b8f"
+    },
+    {
+      "path": "docs/SOURCE_LAYOUT.md",
+      "blob_sha": "55adc02f678d5db6959ab1b29fb06dedd95e7e15",
+      "full_text_equal": true,
+      "sha256": "17540b485ce60e2bfcdcdeb02373e997191d7bfd004b92d1466239a60a20a27b"
+    },
+    {
+      "path": "docs/SYSTEM_ARCHITECTURE.md",
+      "blob_sha": "755f0f0013843e5872565c28ea4b26f2bdeae0b7",
+      "full_text_equal": true,
+      "sha256": "a7c43fb252fd1cd04f4c2ebe4c93ace1c5bf4397e9ad2f7cbf58a260194af2ca"
+    },
+    {
+      "path": "docs/FUTURE_WORK.md",
+      "blob_sha": "7b0e0594c2c38c5e335da2b8ac2460ae34e8644b",
+      "full_text_equal": true,
+      "sha256": "a28bc38ac90bbe1232ae9c534d33e6d762881110143dbc6a4142914a1546c538"
+    },
+    {
+      "path": "README.md",
+      "blob_sha": "baf8b6f182c8c3ebcec04d85c080887168bc31b3",
+      "full_text_equal": true,
+      "sha256": "9104cab889e3aec81d78cd60997e0c8e9a3df16acdbe9f3f35cf8167f1cd083b"
+    },
+    {
+      "path": "docs/README.md",
+      "blob_sha": "94157c951705f39657e279987cf878acb9607f49",
+      "full_text_equal": true,
+      "sha256": "6b64fbed7432563d3fad51f9fb48533ec33eb2262b449154ecc11487d39ef38e"
+    },
+    {
+      "path": "docs/teaching/README.md",
+      "blob_sha": "2b82fb0793fd5858d4af437d8ba64b86098c3c11",
+      "full_text_equal": true,
+      "sha256": "9012275fc4ce8e39d4b931c2e5718443287ebc0ebc6c5246453c65c88873f095"
+    },
+    {
+      "path": "docs/teaching/daily/README.md",
+      "blob_sha": "e669e3f083dfa78026c476466d363bcaac6126c7",
+      "full_text_equal": true,
+      "sha256": "9948a1a5326b21d25b199832fb9c8ebaffe55160ec32d16c6a371f99cee44bff"
+    },
+    {
+      "path": "docs/teaching/chat/README.md",
+      "blob_sha": "fb25ffc27cca492edc8d26f43700754a221c09a8",
+      "full_text_equal": true,
+      "sha256": "94122bd09b44c9b8f68c449dd2894844c289b11e46e544be92714e34c680c3fe"
+    },
+    {
+      "path": "docs/teaching/pet/README.md",
+      "blob_sha": "31a5fd43cec472b3ed650e4d7c693fea28e940bf",
+      "full_text_equal": true,
+      "sha256": "db75bb82b37fb6f4799ca31da3c3df31040c7838ec21da428bdc5c3ced1fef7d"
+    },
+    {
+      "path": "docs/teaching/analytics/README.md",
+      "blob_sha": "6e2017d8666513ee2a22050c2f50fc27ac03510b",
+      "full_text_equal": true,
+      "sha256": "996284677170022389561e426438dbd64217cdb91d999181882067208611a088"
+    },
+    {
+      "path": "docs/teaching/current/README.md",
+      "blob_sha": "f6d36f589a806a763e437700d753b5d5fdac37aa",
+      "full_text_equal": true,
+      "sha256": "b54b88d6ba043a0ec229295ad09908af97933ad498b500c14297bbef9cdf8af5"
+    }
+  ],
+  "fresh_raw_sql_migrations_passed": 7,
+  "forward_sql_passed_twice": true,
+  "full_runtime_adopted": false,
+  "gate2": false,
+  "next_day": {
+    "chat": 46,
+    "pet": 46,
+    "analytics": 46
+  },
+  "day_advance": false,
+  "fifo_changed": false,
+  "last_full_comparison_changed": false,
+  "product_written_by_agent": false
+}
