@@ -1,0 +1,52 @@
+{
+  "commit": "a8a99e0712311c76c33aeaa662b3c384f2bae3e2",
+  "requirements": [
+    "Member permissions are action-only; no category/page authorization prerequisite",
+    "Create chat room is a member action defined by mbr_perm, granted by mbr_role_perm, overridden by mbr_user_perm",
+    "Backend must authorize before creating and write nothing when rejected"
+  ],
+  "readback": [
+    {
+      "path": "docs/requirements/COMMON_AUTHORIZATION.md",
+      "blob_sha": "f3219f010465b4ab09e1c83570751950c40fcf20",
+      "full_text_equal": true,
+      "sha256": "1547eff10abbe4a1547573ef2546220b9f9ddad0031c74af4109bfbd451f77df"
+    },
+    {
+      "path": "docs/requirements/ANALYTICS_ACL.md",
+      "blob_sha": "c968d9543c7eadc39f579a90786d002361bfb063",
+      "full_text_equal": true,
+      "sha256": "39b347e6b28114e0403e506f5ac1bafde39b5abc3e474652f3136218a5ef2812"
+    },
+    {
+      "path": "docs/requirements/USER_FLOWS.md",
+      "blob_sha": "e30d5f29d4598eaf0aafaf2e8e432e9facd860fa",
+      "full_text_equal": true,
+      "sha256": "ec71edfe4bd733cc805cb6f991139526f5f15838b53313f11eded1bd01ef1c84"
+    },
+    {
+      "path": "docs/requirements/AUTHENTICATION.md",
+      "blob_sha": "70a53b6dd7c3004dee548ffd968b225e427949aa",
+      "full_text_equal": true,
+      "sha256": "bd0c17dc3b95e20d72a494eae7b7bc768a23a30cc873bd4901f8f749339c3858"
+    },
+    {
+      "path": "docs/SYSTEM_ARCHITECTURE.md",
+      "blob_sha": "3871129abd047c89a453a2a2abb157baaacb2f2d",
+      "full_text_equal": true,
+      "sha256": "9ac8f446ed1f8da8b79e19bd985554da6cbf09cdfededeeedeb4911413ced664"
+    },
+    {
+      "path": "docs/COMMON_LEARNING_RULES.md",
+      "blob_sha": "53f3a12149555b3fd317e32a68d1453c84c83b7a",
+      "full_text_equal": true,
+      "sha256": "033880e3751f3d2b60cfb7a6985be0a99eb5ac4c84176ae87612fad55c20fb07"
+    }
+  ],
+  "scope": "requirements only; no runtime adoption claimed",
+  "product_written": false,
+  "product_tests_run": false,
+  "next_day_changed": false,
+  "fifo_changed": false,
+  "last_full_comparison_changed": false
+}
